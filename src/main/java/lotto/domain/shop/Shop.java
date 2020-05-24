@@ -2,6 +2,7 @@ package lotto.domain.shop;
 
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoTickets;
+import lotto.domain.shop.exceptions.ExceedTotalLottoTicketsCountInMoney;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,6 +16,13 @@ public class Shop {
     }
 
     public static int countAutoLottoTickets(LottoTickets manualLottoTickets, Money money) {
+        countAutoLottoTicketValidation(manualLottoTickets, money);
         return money.howManyLottoTickets() - manualLottoTickets.size();
+    }
+
+    private static void countAutoLottoTicketValidation(LottoTickets manualLottoTickets, Money money) {
+        if (manualLottoTickets.size() > money.howManyLottoTickets()) {
+            throw new ExceedTotalLottoTicketsCountInMoney("You can't by LottoTickets over you money");
+        }
     }
 }

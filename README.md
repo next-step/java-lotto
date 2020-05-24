@@ -157,7 +157,7 @@
 - Shop
     - [ ] 수동 입력한 LottoTickets, 돈을 받아서 자동계산된 LottoTicket과 수동 LottoTicket이 합해진 LottoTickets 반환
     - [X] 수동 입력한 LottoTickets의 갯수와 돈을 계산해서 자동 구매할 LottoTickets 수를 계산할 수 있다.
-        - [ ] 수동 입력한 LottoTickets의 수는 Money로 구매 가능한 총 LottoTicets의 수를 넘을 수 없다.
+        - [X] 수동 입력한 LottoTickets의 수는 Money로 구매 가능한 총 LottoTicets의 수를 넘을 수 없다.
         
 - LottoTickets
     - [X] LottoTickets에 다른 LottoTickets를 받아서 둘을 합할 수 있다.
