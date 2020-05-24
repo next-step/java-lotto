@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static step2.domain.LottoShop.buyLotto;
 
-public class LottosTest {
+public class LottoShopTest {
 
   @DisplayName("구매 금액이 1000이하일 경우 LottoGamePriceException 발생")
   @ParameterizedTest
