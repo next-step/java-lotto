@@ -20,6 +20,10 @@ public class WinningLotto {
     }
 
 
+    public boolean contains(Integer number){
+        return winningLottoNumbers.contains(number);
+    }
+
     private List<Integer> convertToList(int[] winningLottoNumbers) {
         List<Integer> winningList = Arrays.stream(winningLottoNumbers).boxed()
                 .collect(Collectors.toList());
@@ -36,7 +40,7 @@ public class WinningLotto {
     private void validateList(List<Integer> winningLottoNumbers) {
         for (int i = 0; i < winningLottoNumbers.size(); i++) {
             int number = winningLottoNumbers.get(i);
-            if (number < LottoNumber.LOTTO_NUMBER_MIN && number > LottoNumber.LOTTO_NUMBER_MAX) {
+            if (number < LottoNumber.LOTTO_NUMBER_MIN || number > LottoNumber.LOTTO_NUMBER_MAX) {
                 throw new IllegalArgumentException();
             }
         }

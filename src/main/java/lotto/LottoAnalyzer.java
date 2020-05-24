@@ -15,15 +15,15 @@ public class LottoAnalyzer {
 
     public int matchingCount(int round, LottoTicket lottoTicket) {
 
-        List<Integer> winningNumbers = lottoGame.get(round);
+        WinningLotto winningLotto = lottoGame.get(round);
 
-        if(Objects.isNull(winningNumbers)) {
+        if(Objects.isNull(winningLotto)) {
             throw new IllegalArgumentException("존재하지 않는 회차입니다.");
         }
 
         return (int)lottoTicket.getLottoNumbers()
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 

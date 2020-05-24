@@ -18,7 +18,7 @@ public class LottoGameTest {
     @BeforeEach
     void setUp() {
         winningNumbers = new int[]{1, 2, 3, 4, 5, 6};
-        lottoGame.add(round, winningNumbers);
+        lottoGame.add(round, WinningLotto.of(winningNumbers));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("로또 게임을 추가하고, 결과 값을 검증한다.")
     void 로또_게임_라운드_get_테스트() {
-        List<Integer> getNumbers = lottoGame.get(round);
-        assertThat(getNumbers).hasSize(winningNumbers.length);
+        WinningLotto winningLotto = lottoGame.get(round);
+        assertThat(winningLotto).isNotNull();
     }
 }
