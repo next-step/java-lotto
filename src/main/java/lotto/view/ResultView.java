@@ -37,8 +37,6 @@ public class ResultView {
                 .collect(Collectors.groupingBy(LottoRank::getMatchCount, Collectors.counting()));
 
         Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
-                .sorted(Comparator.reverseOrder())
                 .forEach(lottoRank -> printLottoRank(lottoRankMap, lottoRank));
     }
 

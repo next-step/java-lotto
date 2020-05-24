@@ -32,6 +32,7 @@ public class LottoAnalyzer {
                 .map(lottoTicket -> matchingCount(round, lottoTicket))
                 .map(LottoRank::valueOf)
                 .filter(Objects::nonNull)
+                .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
                 .collect(Collectors.toList());
     }
 
