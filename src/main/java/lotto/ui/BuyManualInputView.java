@@ -33,6 +33,10 @@ public class BuyManualInputView {
                 .forEach(num -> inputValues.add(scanner.nextLine()));
     }
 
+    public int getManualLottoCount() {
+        return manualLottoCount;
+    }
+
     public LottoTickets convertToManualLottoTickets() {
         inputValuesSizeValidation();
         return LottoTickets.create(

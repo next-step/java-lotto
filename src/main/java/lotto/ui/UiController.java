@@ -24,7 +24,8 @@ public class UiController {
         LottoService lottoService = new LottoService();
         LottoTickets lottoTickets = lottoService.buyLottoTicketsCombine(manualLottoTickets, boughtMoney);
 
-        BuyOutputView buyOutputView = new BuyOutputView(lottoTickets);
+        BuyOutputView buyOutputView = new BuyOutputView(lottoTickets,
+                buyManualInputView.getManualLottoCount(), boughtMoney);
         buyOutputView.printResult();
 
         Scanner rankInputScanner = new Scanner(System.in);
