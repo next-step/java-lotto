@@ -154,3 +154,8 @@
     - [X] 정적 팩토리 메서드로 쉼표로 구분된 문자열을 입력받아서 LottoTicket을 생성하는 기능 구현
         - 여러 곳에서 사용되는 기능이라 공통으로 사용되도록 구현
         - [X] BuyManualInputView, RankInputView에서 사용하도록 적용
+- Shop
+    - [ ] 수동 입력한 LottoTickets, 돈을 받아서 자동계산된 LottoTicket과 수동 LottoTicket이 합해진 LottoTickets 반환
+
+- LottoTickets
+    - [X] LottoTickets에 다른 LottoTickets를 받아서 둘을 합할 수 있다.

@@ -44,4 +44,28 @@ class LottoTicketsTests {
         assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket, LottoNumber.create(30))))
                 .isInstanceOf(Ranks.class);
     }
+
+    @DisplayName("LottoTickets끼리 합할 수 있다.")
+    @Test
+    void combineLottoTickets() {
+        LottoTickets autoLottoTickets = LottoTickets.create(
+                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+        LottoTickets manualLottoTickets = LottoTickets.create(
+                Collections.singletonList(LottoGenerator.createFromString("1,2,3,4,5,6")));
+
+        LottoTickets combinedLottoTicket = autoLottoTickets.combine(manualLottoTickets);
+
+        assertThat(combinedLottoTicket.size()).isEqualTo(3);
+    }
+
+    @DisplayName("빈 LottoTicket이 섞여 있어도 합할 수 있다.")
+    @Test
+    void combineEmpty() {
+        LottoTickets emptyLottoTickets = LottoTickets.create(new ArrayList<>());
+        LottoTickets autoLottoTickets = LottoTickets.create(
+                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+
+        assertThat(emptyLottoTickets.combine(autoLottoTickets).size()).isEqualTo(2);
+        assertThat(autoLottoTickets.combine(emptyLottoTickets).size()).isEqualTo(2);
+    }
 }
