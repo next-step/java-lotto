@@ -39,6 +39,11 @@ public class LottoGame {
     }
 
     public double revenueRate(int round, List<LottoTicket> lottoTickets) {
-        return 0;
+        long sum = lottoRanks(round, lottoTickets)
+                .stream()
+                .mapToLong(LottoRank::getPrice)
+                .sum();
+
+        return sum / (lottoTickets.size() * 1000);
     }
 }

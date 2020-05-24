@@ -66,7 +66,7 @@ public class LottoGameTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generate_lotto_tickets")
+    @MethodSource("generate_lotto_tickets_with_revenue_rate")
     @DisplayName("내 로또 티켓의 수익률을 계산한다.")
     void 수익률_계산_테스트(List<LottoTicket> lottoTickets, double expected) {
         double revenueRate = lottoGame.revenueRate(round, lottoTickets);
@@ -92,12 +92,12 @@ public class LottoGameTest {
         return Stream.of(
                 Arguments.of(
                         Arrays.asList(
-                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 7, 8, 9)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15))
-                        ), 10.0)
+                        ), 1.0)
         );
     }
 
