@@ -32,6 +32,22 @@ public class OperandExtractor {
         return operands;
     }
 
+    public static int[] valueOf(String[] operands) {
+        int[] values = new int[operands.length];
+        for (int i = 0 ; i < operands.length ; i++) {
+            values[i] = getPositiveOperand(operands[i]);
+        }
+        return values;
+    }
+
+    private static int getPositiveOperand(String number) throws RuntimeException {
+        int returnValue = Integer.parseInt(number);
+        if(returnValue < 0) {
+            throw new RuntimeException(number + "is negative!!");
+        }
+        return returnValue;
+    }
+
     public static void validateNullEmpty(String text, String errMessage) throws IllegalArgumentException{
         if(text == null || text.isEmpty()) {
             throw new IllegalArgumentException(errMessage);

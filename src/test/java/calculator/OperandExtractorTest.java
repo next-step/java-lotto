@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class OperandExtractorTest {
 
@@ -47,5 +48,26 @@ public class OperandExtractorTest {
         String[] operand = OperandExtractor.getOperand(testFormula);
 
         assertThat(operand).containsOnly("1");
+    }
+
+    @DisplayName("음수이면 RuntimeException이 발생한다.")
+    @Test
+    public void valueOfInvalidateTest() {
+        String testFormula = "-1,2:3";
+        String[] operands = OperandExtractor.getOperand(testFormula);
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            OperandExtractor.valueOf(operands);
+        });
+    }
+
+    @DisplayName("String[] 을 int[] 으로 변환한다.")
+    @Test
+    public void valueOfTest() {
+        String testFormula = "1,2:3";
+        String[] operands = OperandExtractor.getOperand(testFormula);
+
+        int[] IntOperands = OperandExtractor.valueOf(operands);
+
+        assertThat(IntOperands).containsExactly(1,2,3);
     }
 }
