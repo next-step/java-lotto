@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Objects;
-
 public class Lotto {
     private int number;
 
@@ -35,6 +33,16 @@ public class Lotto {
         }
 
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lotto.getNumber(), this.number);
+        return lotto.getNumber() == this.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.number;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d", number);
     }
 }
