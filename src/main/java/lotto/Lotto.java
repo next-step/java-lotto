@@ -14,4 +14,8 @@ public class Lotto {
     public List<Integer> getLottoNumbers(){
         return lottoNumbers;
     }
+
+    public void sort(){
+        lottoNumbers.sort(Integer::compareTo);
+    }
 }
