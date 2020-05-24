@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 
 public class IntegerUtil {
 
-    private IntegerUtil() {
-    }
+    private IntegerUtil() {}
 
     public static List<Integer> parseInt(String[] strings) {
         return Arrays.stream(strings)

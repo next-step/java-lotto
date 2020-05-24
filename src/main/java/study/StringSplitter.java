@@ -8,8 +8,7 @@ public class StringSplitter {
     private static final String SPLIT_DELIMITER_REGEX = "[,:]";
     private static final Pattern CUSTOM_SPLIT_DELIMITER_REGEX = Pattern.compile("//(.)\\n(.*)");
 
-    private StringSplitter() {
-    }
+    private StringSplitter() {}
 
     public static String[] split(String text) {
         Matcher matcher = CUSTOM_SPLIT_DELIMITER_REGEX.matcher(text);

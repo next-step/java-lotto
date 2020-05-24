@@ -2,8 +2,7 @@ package study;
 
 public class StringUtil {
 
-    private StringUtil() {
-    }
+    private StringUtil() {}
 
     public static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
