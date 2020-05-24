@@ -31,7 +31,7 @@ public enum Rank {
     return Stream.of(FIRST, SECOND, THIRD, FORTH, FIFTH);
   }
 
-  public static Rank valueOf (int same, boolean matchBonus) {
+  public static Rank valueOf (long same, boolean matchBonus) {
     return stream().filter(rank -> rank.getSame() == same)
                    .filter(rank -> !rank.equals(SECOND) || matchBonus)
                    .findAny().orElse(MISS);

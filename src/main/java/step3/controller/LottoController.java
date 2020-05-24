@@ -39,7 +39,7 @@ public class LottoController {
   }
 
   public LottoController viewPayoff () {
-    resultView.printPayoffRatio(lottoGame.getPayoff());
+    resultView.printPayoffRatio(lottoGame.getPayoffRatio());
     return this;
   }
 

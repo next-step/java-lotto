@@ -12,6 +12,7 @@ public class ResultView {
   private static ResultView instance;
   private static final String HEAD_FORMAT = "\n당첨 통계\n---------\n%s\n";
   private static final String BODY_FORMAT = "%d개 일치 (%d원)- %d개";
+  private static final String BODY_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
 
   private ResultView () { }
 
@@ -27,7 +28,7 @@ public class ResultView {
 
   public void printStat (LottoGame lottoGame) {
     final Function<Rank, String>
-          mapper = rank -> String.format(BODY_FORMAT,
+          mapper = rank -> String.format(rank.equals(Rank.SECOND) ? BODY_BONUS_FORMAT : BODY_FORMAT,
                                          rank.getSame(),
                                          rank.getPrice(),
                                          lottoGame.getRankCountOf(rank));

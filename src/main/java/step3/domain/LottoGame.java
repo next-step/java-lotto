@@ -4,6 +4,7 @@ import step3.execption.LottoGamePriceException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,9 +35,8 @@ public class LottoGame {
   }
 
   public double getPayoffRatio () {
-    long payoff = Rank.stream()
-                      .map(rank -> rank.getPrice() * getRankCountOf(rank))
-                      .reduce(0L, Math::addExact);
+    final Function<Rank, Long> mapper = rank -> rank.getPrice() * getRankCountOf(rank);
+    final long payoff = Rank.stream().map(mapper).reduce(0L, Math::addExact);
     return payoff / (double) (stream().count() * 1000);
   }
 
