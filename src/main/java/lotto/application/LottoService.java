@@ -17,4 +17,8 @@ public class LottoService {
         RankCalculator rankCalculator = new RankCalculator(winTicket, winBonusNumber);
         return lottoTickets.calculateRanks(rankCalculator);
     }
+
+    public LottoTickets buyLottoTicketsCombine(LottoTickets manualLottoTickets, Money money) {
+        return Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, money);
+    }
 }

@@ -1,9 +1,6 @@
 package lotto.application;
 
-import lotto.domain.lotto.LottoGenerator;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.*;
 import lotto.domain.rank.Ranks;
 import lotto.domain.shop.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,5 +35,19 @@ class LottoServiceTests {
                 Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
 
         assertThat(lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets)).isInstanceOf(Ranks.class);
+    }
+
+    @DisplayName("수동 구매 LottoTickets와 구매 총 금액을 전달해서 LottoTickets를 받을 수 있다.")
+    @Test
+    void buyCombineTest() {
+        LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
+                LottoGenerator.createFromString("1,2,3,4,5,6"),
+                LottoGenerator.createFromString("2,3,4,5,6,7"))
+        );
+
+        LottoTickets lottoTickets = lottoService.buyLottoTicketsCombine(manualLottoTickets, new Money(4000));
+
+        assertThat(lottoTickets.countType(CreationType.AUTO)).isEqualTo(2);
+        assertThat(lottoTickets.countType(CreationType.MANUAL)).isEqualTo(2);
     }
 }
