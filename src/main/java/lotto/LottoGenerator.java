@@ -31,6 +31,8 @@ public class LottoGenerator {
     }
 
     private void add(List<Integer> lottoNumbers, int number) {
-        lottoNumbers.add(number);
+        if (!lottoNumbers.contains(number)) {
+            lottoNumbers.add(number);
+        }
     }
 }
