@@ -21,7 +21,7 @@
 ### # M (Model)
 #### Price
 : 금액과 관련된 클래스
-- [ ] 구매 가능한 개수인지 확인할 수 있다. 
+- [x] 구매 가능한 개수인지 확인할 수 있다. 
 
 #### LottoNumber
 : 로또 숫자 범위 내의 숫자 
@@ -35,7 +35,7 @@
 #### LottoTickets
 : LottoTicket 에 대한 일급 컬렉션
 - [x] LottoTicket 의 개수는 반환할 수 있다.
-- [ ] 인자로 입력받은 LottoTickets를 이어 붙인 LottoTickets를 반환할 수 있다.
+- [x] 인자로 입력받은 LottoTickets를 이어 붙인 LottoTickets를 반환할 수 있다.
 
 #### WinningLottoTicket
 : 로또 당첨 번호 
@@ -49,7 +49,7 @@
 #### LottoSeller
 : LottoTickets 를 금액만큼 구매하는 책임 
 - [x] 수동으로 입력한 로또 티켓이 구매할 수 있는 티켓의 수보다 많으면 예외 반환
-- [ ] 수동으로 입력한 로또 티켓 수를 구매하고 남은 돈으로 자동으로 로또 티켓을 생성한다.
+- [x] 수동으로 입력한 로또 티켓 수를 구매하고 남은 돈으로 자동으로 로또 티켓을 생성한다.
 
 #### LottoNumberGenerator
 : 로또 숫자를 랜덤으로 자동 생성하는 책임 
