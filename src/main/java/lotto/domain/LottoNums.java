@@ -6,19 +6,18 @@ import java.util.stream.Collectors;
 public class LottoNums {
 
     private static final int LOTTO_COUNT = 6;
+    private List<LottoNum> lottoNums;
+
+    public LottoNums(List<LottoNum> lottoNums) {
+        validate(lottoNums);
+        this.lottoNums = lottoNums;
+    }
 
     public static LottoNums of(List<Integer> nums) {
         List<LottoNum> lottoNums = nums.stream()
             .map(num -> new LottoNum(num)).collect(Collectors.toList());
 
         return new LottoNums(lottoNums);
-    }
-
-    private List<LottoNum> lottoNums;
-
-    public LottoNums(List<LottoNum> lottoNums) {
-        validate(lottoNums);
-        this.lottoNums = lottoNums;
     }
 
     public int getCountOfMatch(LottoNums targetNums) {

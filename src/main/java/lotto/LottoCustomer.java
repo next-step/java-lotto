@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoNums;
 import lotto.domain.LottoPaper;
@@ -12,18 +11,20 @@ import lotto.view.OutputView;
 public class LottoCustomer {
 
     public static void main(String[] args) {
-        int price = InputView.requestPrice();
-        List<LottoNums> lottoNumsList = InputView.requestManualNumsList().stream().map(LottoNums::of).collect(Collectors.toList());
+        InputView inputView = new InputView();
+
+        int price = inputView.requestPrice();
+        List<LottoNums> manualLottoNumsList = inputView.requestManualNumsList();
 
         LottoSeller lottoSeller = new LottoSeller();
-        LottoPaper lottoPaper = lottoSeller.sell(price, lottoNumsList);
+        LottoPaper lottoPaper = lottoSeller.sell(price, manualLottoNumsList);
 
-        OutputView.printLottos(lottoPaper.getLottoLines());
+        OutputView outputView = new OutputView();
+        outputView.printLottoPaper(lottoPaper);
 
-        LottoNums lottoNums = LottoNums.of(InputView.requestWinNums());
-
-        OutputView.printLottoResult(
-            lottoPaper.getResult(lottoNums, new LottoNum(InputView.requestBonusNum()), price));
+        LottoNums winNums = inputView.requestWinNums();
+        outputView.printLottoResult(
+            lottoPaper.getResult(winNums, new LottoNum(inputView.requestBonusNum()), price));
     }
 
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,14 +11,10 @@ public class LottoSeller {
 
     private final LottoNumsGenerator lottoNumsGenerator = new LottoNumsGenerator();
 
-    public LottoPaper sell(long price) {
-       return this.sell(price, Collections.emptyList());
-    }
-
     public LottoPaper sell(long price, List<LottoNums> manualLottoNums) {
         int autoCount = getTotalCount(price) - manualLottoNums.size();
 
-        if(autoCount < 0){
+        if (autoCount < 0) {
             throw new IllegalArgumentException("price is not enough");
         }
 

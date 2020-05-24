@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,7 @@ class LottoSellerTest {
         "3000,3"
     })
     void buy_many_lotto(long price, int count) {
-        LottoPaper lottoPaper = lottoSeller.sell(price);
+        LottoPaper lottoPaper = lottoSeller.sell(price, Collections.emptyList());
 
         assertThat(lottoPaper.getLottoLines().size()).isEqualTo(count);
     }

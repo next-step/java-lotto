@@ -3,18 +3,24 @@ package lotto.view;
 import java.util.List;
 import lotto.domain.LottoLine;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPaper;
 import lotto.domain.Rank;
 
 public class OutputView {
 
-    public static void printLottos(List<LottoLine> lottoLines) {
-        long autoLottoLineCount = lottoLines.stream().filter(lottoLine -> lottoLine.isAuto()).count();
-        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.",lottoLines.size() - autoLottoLineCount, autoLottoLineCount ));
-        lottoLines.forEach(lottoLine -> printLotto(lottoLine));
+    public void printLottoPaper(LottoPaper lottoPaper) {
+        long autoLottoLineCount = lottoPaper.getLottoLines().stream()
+            .filter(lottoLine -> lottoLine.isAuto())
+            .count();
+
+        System.out.println(String
+            .format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoPaper.getLottoLines().size() - autoLottoLineCount,
+                autoLottoLineCount));
+        lottoPaper.getLottoLines().forEach(lottoLine -> printLotto(lottoLine));
         System.out.println();
     }
 
-    public static void printLottoResult(LottoMatchResult result) {
+    public void printLottoResult(LottoMatchResult result) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
@@ -30,7 +36,7 @@ public class OutputView {
             rate >= 1.0f ? "이익" : "손해"));
     }
 
-    private static void printLotto(LottoLine lottoLine) {
+    private void printLotto(LottoLine lottoLine) {
         List<Integer> nums = lottoLine.getNums();
         System.out.println(nums);
     }
