@@ -31,18 +31,18 @@ public class InputParserTest {
     @DisplayName("커스텀 구분자로 이루어진 String을 InputParser가 정상적으로 파싱")
     @ParameterizedTest
     @MethodSource("mockCustomDelimiterStringBuilder")
-    public void parseCustomUserInput(String userInput, String delimiter) {
+    public void parseCustomUserInput(String userInput, String delimiter, String testString) {
         List<String> parsedNumbers = inputParser.parseInput(userInput);
-        List<String> originNumbers = Arrays.asList(userInput.split(delimiter));
+        List<String> originNumbers = Arrays.asList(testString.split(delimiter));
 
         assertThat(parsedNumbers).isEqualTo(originNumbers);
     }
 
     private static Stream<Arguments> mockCustomDelimiterStringBuilder() {
         return Stream.of(
-                Arguments.of("//;\n1;2;3", ";"),
-                Arguments.of("//!\n1!2!49", "!"),
-                Arguments.of("//?\n10?19?33", "?")
+                Arguments.of("//;\n1;2;3", ";", "1;2;3"),
+                Arguments.of("//!\n1!2!49", "!", "1!2!49"),
+                Arguments.of("//p\n10?19?33", "p", "10?19?33")
         );
     }
 }
