@@ -32,11 +32,19 @@ public class LottoTicket {
     public int matchWinningNumbers(String winningNumber) {
         int matchResult = 0;
         String[] splitNumbers = winningNumber.split(",");
+        validateNumber(splitNumbers);
+
         for (String splitNumber : splitNumbers) {
             int number = getNumber(splitNumber);
             matchResult += isMatchNumber(number);
         }
         return matchResult;
+    }
+
+    private void validateNumber(String[] splitNumbers) {
+        if (splitNumbers.length != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("6개의 당첨번호를 입력해야 합니다. ,(콤마) 구분");
+        }
     }
 
     private int isMatchNumber(int number) {
