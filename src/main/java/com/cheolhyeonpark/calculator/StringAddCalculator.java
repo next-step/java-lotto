@@ -8,8 +8,8 @@ public class StringAddCalculator {
         if (input == null || input.length() < 1) {
             return 0;
         }
-        if (input.contains(",")) {
-            String[] numbers = input.split(",");
+        if (input.contains(",") || input.contains(":")) {
+            String[] numbers = input.split("[,|:]");
             return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
         }
         return Integer.parseInt(input);
