@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.util.CommonUtil;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public class OperandExtractor {
 
     public static String[] getOperand(String formula) {
         try {
-            validateNullEmpty(formula, "argument is null");
+            CommonUtil.validateNullEmpty(formula, "argument is null");
             String[] operands = getOperandByCustomSeparator(formula);
             if(operands == null) {
                 operands = formula.split(DEFAULT_SEPARATOR);
@@ -48,9 +50,4 @@ public class OperandExtractor {
         return returnValue;
     }
 
-    public static void validateNullEmpty(String text, String errMessage) throws IllegalArgumentException{
-        if(text == null || text.isEmpty()) {
-            throw new IllegalArgumentException(errMessage);
-        }
-    }
 }
