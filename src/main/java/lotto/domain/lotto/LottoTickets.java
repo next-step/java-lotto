@@ -26,6 +26,12 @@ public class LottoTickets {
         return this.values.size();
     }
 
+    public long countType(CreationType creationType) {
+        return this.values.stream()
+                .filter(value -> value.getCreationType().equals(creationType))
+                .count();
+    }
+
     public Ranks calculateRanks(RankCalculator rankCalculator) {
         List<Rank> rankList = values.stream()
                 .map(rankCalculator::getRank)

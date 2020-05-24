@@ -25,6 +25,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public CreationType getCreationType() {
+        return creationType;
+    }
+
     protected int size() {
         return this.values.size();
     }

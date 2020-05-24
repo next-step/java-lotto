@@ -161,7 +161,7 @@
         
 - LottoTickets
     - [X] LottoTickets에 다른 LottoTickets를 받아서 둘을 합할 수 있다.
-    - [ ] 내부 LottoTicket에서 수동이 몇 개인지, 자동이 몇 개인지 구분할 수 있다.
+    - [X] 내부 LottoTicket에서 수동이 몇 개인지, 자동이 몇 개인지 구분할 수 있다.
     
 - LottoTicket
     - [X] 생성 방식이 수동인지 자동인지 구분하는 속성을 추가한다.
