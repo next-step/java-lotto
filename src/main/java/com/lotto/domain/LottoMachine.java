@@ -24,7 +24,7 @@ public class LottoMachine {
     public List<Lotto> buyLotto(Integer countOfLotto) {
         List<Lotto> extractedLotto = new ArrayList<>();
         IntStream.range(0, countOfLotto).forEach(i -> {
-            List<Integer> extractedLottoNumbers = lottoExtractor.extractLottoNumbers(LottoMachine.availableLottoNumbers);
+            List<Integer> extractedLottoNumbers = this.lottoExtractor.extractLottoNumbers(LottoMachine.availableLottoNumbers);
             extractedLotto.add(new Lotto(extractedLottoNumbers, 0));
         });
 

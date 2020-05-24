@@ -40,6 +40,6 @@ public class LottoWinningStatistic {
     }
 
     public void viewWinningStatistic() {
-        lottoStatisticView.viewLottoStatistic(this.lottoWinningList);
+        this.lottoStatisticView.viewLottoStatistic(this.lottoWinningList);
     }
 }

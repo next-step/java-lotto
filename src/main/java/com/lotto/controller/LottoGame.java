@@ -22,11 +22,11 @@ public class LottoGame {
     }
 
     public void playLottoGame() {
-        Integer countOfLotto = lottoView.inputPurchaseAmountOfLotto();
-        List<Lotto> extractedLotto = lottoMachine.buyLotto(countOfLotto);
-        lottoView.outputExtractedLotto(extractedLotto);
+        Integer countOfLotto = this.lottoView.inputPurchaseAmountOfLotto();
+        List<Lotto> extractedLotto = this.lottoMachine.buyLotto(countOfLotto);
+        this.lottoView.outputExtractedLotto(extractedLotto);
 
-        String winningLottoNumbers = lottoView.inputWinningLottoNumbers();
+        String winningLottoNumbers = this.lottoView.inputWinningLottoNumbers();
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.manipulateInputWinningLottoNumbers(winningLottoNumbers);
 
         for (Lotto lotto : extractedLotto) {
