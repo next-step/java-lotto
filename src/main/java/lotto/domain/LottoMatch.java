@@ -31,7 +31,7 @@ public enum LottoMatch {
     }
 
     public String getBonusContext() {
-        return name().endsWith("_BONUS") ? ", 보너스 볼 일치" : " ";
+        return this == FIVE_BONUS ? ", 보너스 볼 일치" : " ";
     }
 
     public static int getMinMatchCount() {
@@ -39,7 +39,7 @@ public enum LottoMatch {
     }
 
     public static LottoMatch findByCount(int count, boolean isMatchBonus) {
-        if (count == 5 && isMatchBonus) {
+        if (count == FIVE_BONUS.count && isMatchBonus) {
             return FIVE_BONUS;
         }
 
