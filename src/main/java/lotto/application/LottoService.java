@@ -9,7 +9,7 @@ import lotto.domain.shop.Money;
 import lotto.domain.shop.Shop;
 
 public class LottoService {
-    public LottoTickets buyLottoTickets(Money money) {
+    public LottoTickets buyLottoTicketsAllAuto(Money money) {
         return Shop.sellLottoTicketsAuto(money);
     }
 

@@ -22,7 +22,7 @@ class LottoServiceTests {
     @DisplayName("돈을 입력받아서 자동으로 로또를 구매한 뒤 LottoTickets를 반환")
     @Test
     void buyLottoTest() {
-        LottoTickets lottoTickets = lottoService.buyLottoTickets(new Money(10000));
+        LottoTickets lottoTickets = lottoService.buyLottoTicketsAllAuto(new Money(10000));
         assertThat(lottoTickets.size()).isEqualTo(10);
     }
 
