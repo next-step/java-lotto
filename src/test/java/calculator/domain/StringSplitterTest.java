@@ -38,7 +38,7 @@ class StringSplitterTest {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", ";", "1;2;3"),
                 Arguments.of("//!\n1!2!49", "!", "1!2!49"),
-                Arguments.of("//p\n10?19?33", "p", "10?19?33")
+                Arguments.of("//p\n10p19p33", "p", "10p19p33")
         );
     }
 

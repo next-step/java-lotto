@@ -45,11 +45,11 @@ public class StringParserTest {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", ";", "1;2;3"),
                 Arguments.of("//!\n1!2!49", "!", "1!2!49"),
-                Arguments.of("//p\n10?19?33", "p", "10?19?33")
+                Arguments.of("//p\n10p19p33", "p", "10p19p33")
         );
     }
 
-    @DisplayName("음수값 혹은 숫자가 아닌 문자가 포함된 경우 RuntimeException 발생")
+    @DisplayName("음수값이 포함된 경우 RuntimeException 발생")
     @ParameterizedTest
     @MethodSource("mockInvalidStringBuilder")
     public void throwRuntimeExceptionOnInvalidArguments(String userInput) {
@@ -62,8 +62,8 @@ public class StringParserTest {
     private static Stream<Arguments> mockInvalidStringBuilder() {
         return Stream.of(
                 Arguments.of("1:2:3:-1:4:5"),
-                Arguments.of("//!\n1!2!3!a!abc!6"),
-                Arguments.of("1:3:k:!:3a")
+                Arguments.of("//!\n1!2!3!-1!-99!6"),
+                Arguments.of("1:3:-22:-35:3")
         );
     }
 }
