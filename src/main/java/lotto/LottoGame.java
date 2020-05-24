@@ -11,11 +11,15 @@ public class LottoGame {
 
     private Map<Integer, Lotto> result = new HashMap<>();
 
-    public Lotto add(int round, int[] winningNumber) {
+    public void add(int round, int[] winningNumber) {
 
         List<Integer> convertedList = Arrays.stream(winningNumber).boxed()
                 .collect(Collectors.toList());
 
-        return result.put(round, new Lotto(convertedList));
+        result.put(round, new Lotto(convertedList));
+    }
+
+    public Lotto get(int round) {
+        return result.get(round);
     }
 }

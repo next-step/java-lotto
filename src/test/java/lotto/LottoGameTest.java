@@ -18,11 +18,12 @@ public class LottoGameTest {
     @Test
     @DisplayName("로또 게임을 추가하고, 결과 값을 검증한다.")
     void 로또_게임_추가_테스트(){
+        int round = 1;
         int[] winningNumber = new int[]{1,2,3,4,5,6};
         LottoGame lottoGame = new LottoGame();
 
-        Lotto lotto = lottoGame.add(1, winningNumber);
-
+        lottoGame.add(round, winningNumber);
+        Lotto lotto = lottoGame.get(round);
         assertThat(lotto.getLottoNumbers()).hasSize(winningNumber.length);
     }
 }
