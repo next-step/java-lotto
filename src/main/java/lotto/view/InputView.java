@@ -2,11 +2,10 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.exception.InputValueException;
+import lotto.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public final class InputView {
 
@@ -25,7 +24,7 @@ public final class InputView {
 
         validateBlank(purchaseAmount);
 
-        int amount = convertStringToInt(purchaseAmount);
+        int amount = StringUtils.toInt(purchaseAmount);
         validatePurchaseAmount(amount);
 
         return amount;
@@ -34,14 +33,6 @@ public final class InputView {
     private static void validateBlank(String value) {
         if (value == null || value.trim().isEmpty()) {
             throw new InputValueException("데이터를 입력하세요.");
-        }
-    }
-
-    private static int convertStringToInt(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new InputValueException("숫자로 변환할 수 없습니다. " + value);
         }
     }
 
@@ -57,9 +48,7 @@ public final class InputView {
 
         validateBlank(lottoNumbers);
 
-        return Arrays.stream(lottoNumbers.split(DELIMITER_PATTERN))
-                .map(InputView::convertStringToInt)
-                .collect(Collectors.toList());
+        return LottoNumbers.createNonDuplicateNumbers(lottoNumbers);
     }
 
     public static int getBonusNumber(LottoNumbers lastWinLottoNumbers) {
@@ -68,7 +57,7 @@ public final class InputView {
 
         validateBlank(bonusNumber);
 
-        int number = convertStringToInt(bonusNumber);
+        int number = StringUtils.toInt(bonusNumber);
 
         validateBonusNumber(number, lastWinLottoNumbers);
 
