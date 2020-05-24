@@ -15,9 +15,19 @@ public class LottoMachine {
         return availableLottoNumbers;
     }
 
-    public List<Integer> extractLottoNumbers() {
+    public List<Lotto> buyLotto(Integer countOfLotto) {
+        List<Lotto> extractedLotto = new ArrayList<>();
+        IntStream.range(0, countOfLotto).forEach(i -> {
+            List<Integer> extractedLottoNumbers = extractLottoNumbers();
+            extractedLotto.add(new Lotto(extractedLottoNumbers));
+        });
+
+        return extractedLotto;
+    }
+
+    private List<Integer> extractLottoNumbers() {
         List<Integer> shuffledLottoNumbers = shuffleLottoNumbers();
-        List<Integer> splitShuffledLottoNumbers = shuffledLottoNumbers.subList(0, 5);
+        List<Integer> splitShuffledLottoNumbers = shuffledLottoNumbers.subList(0, 6);
         Collections.sort(splitShuffledLottoNumbers);
         return splitShuffledLottoNumbers;
     }

@@ -1,6 +1,6 @@
 package com.lotto;
 
-import com.lotto.domain.LottoGame;
+import com.lotto.controller.LottoGame;
 
 public class LottoMain {
 

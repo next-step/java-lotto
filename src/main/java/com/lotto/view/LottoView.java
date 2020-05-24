@@ -1,13 +1,12 @@
 package com.lotto.view;
 
 import com.lotto.domain.Lotto;
+import com.lotto.helper.LottoViewHelper;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class LottoView {
-
-    private static final Integer PRIZE_OF_LOTTO = 1000;
 
     private static final String PURCHASE_AMOUNT_FOR_LOTTO_MESSAGE = "구매 금액을 입력해 주세요.";
     private static final String LOTTO_COUNT_PER_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
@@ -22,13 +21,9 @@ public class LottoView {
     public Integer inputPurchaseAmountOfLotto() {
         System.out.println(PURCHASE_AMOUNT_FOR_LOTTO_MESSAGE);
         Integer depositMoney = this.scanner.nextInt();
-        Integer countOfLotto = getCountOfLotto(depositMoney);
+        Integer countOfLotto = LottoViewHelper.getCountOfLotto(depositMoney);
         System.out.println(countOfLotto + LOTTO_COUNT_PER_PURCHASE_AMOUNT_MESSAGE);
         return countOfLotto;
-    }
-
-    private Integer getCountOfLotto(Integer depositMoney) {
-        return depositMoney / PRIZE_OF_LOTTO;
     }
 
     public void outputExtractedLotto(List<Lotto> lotto) {
@@ -36,5 +31,9 @@ public class LottoView {
             System.out.println(extracted.toString());
         }
     }
-    
+
+    public String inputWinningLottoNumbers() {
+        System.out.println(WINNING_LOTTO_NUMBER_MESSAGE);
+        return this.scanner.nextLine();
+    }
 }
