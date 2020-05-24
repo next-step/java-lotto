@@ -55,7 +55,7 @@ public class LottoAnalyzerTest {
     @MethodSource("generate_lotto_tickets_with_revenue_rate")
     @DisplayName("내 로또 티켓의 수익률을 계산한다.")
     void 수익률_계산_테스트(List<LottoTicket> lottoTickets, double expected) {
-        double revenueRate = lottoAnalyzer.revenueRate(round, lottoTickets);
+        double revenueRate = lottoAnalyzer.calculateRevenueRate(round, lottoTickets);
         assertThat(revenueRate).isEqualTo(expected);
     }
 

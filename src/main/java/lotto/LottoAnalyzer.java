@@ -35,7 +35,7 @@ public class LottoAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    public double revenueRate(int round, List<LottoTicket> lottoTickets) {
+    public double calculateRevenueRate(int round, List<LottoTicket> lottoTickets) {
         long sum = gradeTicket(round, lottoTickets)
                 .stream()
                 .map(LottoRank::getPrice)

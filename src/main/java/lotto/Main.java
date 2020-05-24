@@ -18,11 +18,12 @@ public class Main {
         ResultView.printBuyingTickets(lottoTickets);
 
         int round = 1;
-        int[] winningNumbers = InputView.inputWinningNumbers();
-        lottoGame.add(round, winningNumbers);
+        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumbers());
+        lottoGame.add(round, winningLotto);
 
-        ResultView.printLottoRanks(lottoGame.lottoRanks(round, lottoTickets));
-        ResultView.printRevenueRate(lottoGame.revenueRate(round, lottoTickets));
+        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);
+        ResultView.printLottoRanks(lottoAnalyzer.gradeTicket(round, lottoTickets));
+        ResultView.printRevenueRate(lottoAnalyzer.calculateRevenueRate(round, lottoTickets));
 
     }
 }
