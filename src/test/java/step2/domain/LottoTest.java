@@ -65,4 +65,26 @@ public class LottoTest {
       )
     );
   }
+
+  @DisplayName("두 개의 로또가 겹치는 번호의 수")
+  @ParameterizedTest
+  @MethodSource("provideTwoLottoAndSames")
+  void 로또_번호_비교_테스트 (Lotto lotto1, Lotto lotto2, int expected) {
+    assertEquals(expected, lotto1.sameCount(lotto2));
+  }
+
+  private static Stream<Arguments> provideTwoLottoAndSames () {
+    return Stream.of(
+      Arguments.of(
+        LottoGenerator.generateLotto("1,2,3,4,5,6"),
+        LottoGenerator.generateLotto("1,2,3,7,8,9"),
+        3
+      ),
+      Arguments.of(
+        LottoGenerator.generateLotto("1,2,3,4,5,6"),
+        LottoGenerator.generateLotto("1,2,3,4,5,6"),
+        6
+      )
+    );
+  }
 }
