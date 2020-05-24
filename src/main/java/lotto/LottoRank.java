@@ -1,5 +1,11 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum LottoRank {
 
     FIRST(6, 2000000000),
@@ -10,12 +16,25 @@ public enum LottoRank {
     private int matchCount;
     private int price;
 
+    private static final Map<Integer, LottoRank> RANK;
+
+    static {
+        RANK = Collections.unmodifiableMap(
+                Stream.of(LottoRank.values())
+                        .collect(Collectors.toMap(LottoRank::getMatchCount, lottoRank -> lottoRank))
+        );
+    }
+
     LottoRank(int matchCount, int price) {
         this.matchCount = matchCount;
         this.price = price;
     }
 
-    public static LottoRank valueOf(int count) {
-        return LottoRank.SECOND;
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
