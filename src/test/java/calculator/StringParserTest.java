@@ -55,7 +55,7 @@ public class StringParserTest {
     public void throwRuntimeExceptionOnInvalidArguments(String userInput) {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    List<Integer> numbers = StringParser.parseString(userInput);
+                    StringParser.parseString(userInput);
                 });
     }
 
