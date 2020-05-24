@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.lotto.CreationType;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 
@@ -13,7 +14,13 @@ public class BuyOutputView {
     }
 
     public void printResult() {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+        System.out.println(System.lineSeparator() +
+                "수동으로 " +
+                lottoTickets.countType(CreationType.MANUAL) +
+                "장, " +
+                "자동으로 " +
+                lottoTickets.countType(CreationType.AUTO) +
+                "개를 구매했습니다.");
 
         List<LottoTicket> values = lottoTickets.getValues();
         String result = values.stream()
