@@ -2,7 +2,7 @@ package step3.view;
 
 import step3.domain.Lotto;
 import step3.domain.LottoGame;
-import step3.domain.WinningPrice;
+import step3.domain.Rank;
 
 import java.util.stream.Collectors;
 
@@ -27,13 +27,13 @@ public class ResultView {
     String bodyFormat = "%d개 일치 (%d원)- %d개";
     System.out.printf(
       headFormat,
-      WinningPrice.stream()
-                  .map(winningPrice -> String.format(
-                      bodyFormat,
-                      winningPrice.getSame(),
-                      winningPrice.getPrice(),
-                      lottoGame.getWinningCount(winningPrice.getSame())))
-                  .collect(Collectors.joining("\n"))
+      Rank.stream()
+          .map(winningPrice -> String.format(
+              bodyFormat,
+              winningPrice.getSame(),
+              winningPrice.getPrice(),
+              lottoGame.getWinningCount(winningPrice.getSame())))
+          .collect(Collectors.joining("\n"))
     );
   }
 

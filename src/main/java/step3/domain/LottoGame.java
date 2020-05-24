@@ -29,7 +29,7 @@ public class LottoGame {
   }
 
   public double getPayoff () {
-    long payoff = WinningPrice.stream()
+    long payoff = Rank.stream()
                               .map(v -> v.getPrice() * getWinningCount(v.getSame()))
                               .reduce(0L, Math::addExact);
     return payoff / (double) (stream().count() * 1000);
