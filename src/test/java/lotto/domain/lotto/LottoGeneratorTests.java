@@ -46,4 +46,11 @@ class LottoGeneratorTests {
         assertThatThrownBy(() -> LottoGenerator.createFromString(invalidInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("비어있는(size가 0인) 배열로 LottoTicket을 생성 할 수 있다.")
+    @Test
+    void createEmptyLottoTicket() {
+        LottoTicket emptyTicket = LottoGenerator.createEmptyLottoTicket();
+        assertThat(emptyTicket.size()).isEqualTo(0);
+    }
 }

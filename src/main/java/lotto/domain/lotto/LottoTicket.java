@@ -5,12 +5,17 @@ import lotto.domain.lotto.exceptions.LottoTicketSizeException;
 import java.util.*;
 
 public class LottoTicket {
-    private static final int SIZE=6;
+    private static final int EMPTY_SIZE = 0;
+    private static final int SIZE = 6;
     private final List<LottoNumber> values;
 
     public static LottoTicket create(List<LottoNumber> values) {
         Collections.sort(values);
         return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
+    }
+
+    public static LottoTicket createEmpty() {
+        return new LottoTicket(new ArrayList<>());
     }
 
     public boolean isInThisTicket(LottoNumber lottoNumber) {
@@ -33,7 +38,7 @@ public class LottoTicket {
     }
 
     private void validation(List<LottoNumber> values) {
-        if (values.size() != SIZE) {
+        if (values.size() != EMPTY_SIZE && values.size() != SIZE) {
             throw new LottoTicketSizeException("Lotto ticket can have only six lotto numbers");
         }
     }
