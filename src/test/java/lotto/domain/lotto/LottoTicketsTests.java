@@ -39,7 +39,7 @@ class LottoTicketsTests {
         lottoTicketList.add(LottoGenerator.createByAuto());
         LottoTickets lottoTickets = LottoTickets.create(lottoTicketList);
 
-        LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket, LottoNumber.create(30))))
                 .isInstanceOf(Ranks.class);
@@ -51,7 +51,7 @@ class LottoTicketsTests {
         LottoTickets autoLottoTickets = LottoTickets.create(
                 Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
         LottoTickets manualLottoTickets = LottoTickets.create(
-                Collections.singletonList(LottoGenerator.createFromString("1,2,3,4,5,6")));
+                Collections.singletonList(LottoGenerator.createByManual("1,2,3,4,5,6")));
 
         LottoTickets combinedLottoTicket = autoLottoTickets.combine(manualLottoTickets);
 
@@ -75,7 +75,7 @@ class LottoTicketsTests {
         LottoTickets autoLottoTickets = LottoTickets.create(
                 Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
         LottoTickets manualLottoTickets = LottoTickets.create(
-                Collections.singletonList(LottoGenerator.createFromString("1,2,3,4,5,6")));
+                Collections.singletonList(LottoGenerator.createByManual("1,2,3,4,5,6")));
 
         LottoTickets combinedLottoTicket = autoLottoTickets.combine(manualLottoTickets);
 

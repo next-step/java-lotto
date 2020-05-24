@@ -28,7 +28,7 @@ public class BuyManualInputView {
         convertValidation();
         return LottoTickets.create(
                 inputValues.stream()
-                        .map(LottoGenerator::createFromString)
+                        .map(LottoGenerator::createByManual)
                         .collect(Collectors.toList())
         );
     }

@@ -28,14 +28,14 @@ class LottoGeneratorTests {
     @DisplayName("숫자 여섯개를 입력 받아서 로또 티켓을 발급 할 수 있어야 한다.")
     @Test
     void manualTicketTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket.size()).isEqualTo(6);
     }
 
     @DisplayName("쉼표로 구분된 문자열을 입력받아서 LottoTicket을 생성할 수 있다.")
     @Test
     void createLottoTicketFromStringTest() {
-        assertThat(LottoGenerator.createFromString("1,2,3,4,5,6")).isInstanceOf(LottoTicket.class);
+        assertThat(LottoGenerator.createByManual("1,2,3,4,5,6")).isInstanceOf(LottoTicket.class);
     }
 
     @DisplayName("문자열로 생성 시 null이나 빈 문자열로 생성할 수 없다.")
@@ -43,7 +43,7 @@ class LottoGeneratorTests {
     @NullSource
     @ValueSource(strings = {"  ", ""})
     void createLottoTicketFromStringValidationTest(String invalidInput) {
-        assertThatThrownBy(() -> LottoGenerator.createFromString(invalidInput))
+        assertThatThrownBy(() -> LottoGenerator.createByManual(invalidInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -33,6 +33,6 @@ class RankInputViewTest {
     void convertToIntCollectionTest() {
         RankInputView rankInputView = new RankInputView("1, 2, 3, 4, 5, 6", 7);
         assertThat(rankInputView.convertToWinTicket())
-                .isEqualTo(LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                .isEqualTo(LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

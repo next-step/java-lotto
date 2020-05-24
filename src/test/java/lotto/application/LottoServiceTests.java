@@ -29,7 +29,7 @@ class LottoServiceTests {
     @DisplayName("당첨 티켓 번호와 구매한 LottoTickets를 받아서 당첨 결과를 반환할 수 있다.")
     @Test
     void rankCalculateTest() {
-        LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber winBonusNumber = LottoNumber.create(10);
         LottoTickets lottoTickets = LottoTickets.create(
                 Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
@@ -41,8 +41,8 @@ class LottoServiceTests {
     @Test
     void buyCombineTest() {
         LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
-                LottoGenerator.createFromString("1,2,3,4,5,6"),
-                LottoGenerator.createFromString("2,3,4,5,6,7"))
+                LottoGenerator.createByManual("1,2,3,4,5,6"),
+                LottoGenerator.createByManual("2,3,4,5,6,7"))
         );
 
         LottoTickets lottoTickets = lottoService.buyLottoTicketsCombine(manualLottoTickets, new Money(4000));

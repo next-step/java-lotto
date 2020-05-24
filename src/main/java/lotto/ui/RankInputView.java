@@ -35,7 +35,7 @@ public class RankInputView {
     }
 
     public LottoTicket convertToWinTicket() {
-        return LottoGenerator.createFromString(this.winTicketValue);
+        return LottoGenerator.createByManual(this.winTicketValue);
     }
 
     public LottoNumber getWinBonusNumber() {

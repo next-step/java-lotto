@@ -24,8 +24,8 @@ class ShopTests {
     @Test
     void countAutoLottoTicketsTest() {
         LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
-                LottoGenerator.createFromString("1,2,3,4,5,6"),
-                LottoGenerator.createFromString("7,8,9,10,11,12")
+                LottoGenerator.createByManual("1,2,3,4,5,6"),
+                LottoGenerator.createByManual("7,8,9,10,11,12")
         ));
 
         int autoLottoTicketNumber = Shop.countAutoLottoTickets(manualLottoTickets, new Money(3000));
@@ -36,8 +36,8 @@ class ShopTests {
     @Test
     void countAutoLottoTicketsValidationTest() {
         LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
-                LottoGenerator.createFromString("1,2,3,4,5,6"),
-                LottoGenerator.createFromString("7,8,9,10,11,12")
+                LottoGenerator.createByManual("1,2,3,4,5,6"),
+                LottoGenerator.createByManual("7,8,9,10,11,12")
         ));
 
         assertThatThrownBy(() -> Shop.countAutoLottoTickets(manualLottoTickets, new Money(1000)))
@@ -48,8 +48,8 @@ class ShopTests {
     @Test
     void sellLottoAutoAndManual() {
         LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
-                LottoGenerator.createFromString("1,2,3,4,5,6"),
-                LottoGenerator.createFromString("7,8,9,10,11,12")
+                LottoGenerator.createByManual("1,2,3,4,5,6"),
+                LottoGenerator.createByManual("7,8,9,10,11,12")
         ));
 
         LottoTickets boughtLottoTickets = Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, new Money(4000));
@@ -71,8 +71,8 @@ class ShopTests {
     @Test
     void sellLottoAllManualTest() {
         LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
-                LottoGenerator.createFromString("1,2,3,4,5,6"),
-                LottoGenerator.createFromString("7,8,9,10,11,12")
+                LottoGenerator.createByManual("1,2,3,4,5,6"),
+                LottoGenerator.createByManual("7,8,9,10,11,12")
         ));
 
         LottoTickets boughtLottoTickets = Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, new Money(2000));

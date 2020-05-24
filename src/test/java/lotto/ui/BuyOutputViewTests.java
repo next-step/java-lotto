@@ -16,8 +16,8 @@ class BuyOutputViewTests {
 
     @BeforeEach
     public void setup() {
-        LottoTicket fakeLottoTicket1 = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket fakeLottoTicket2 = LottoGenerator.createManualByIntList(Arrays.asList(7, 8, 9, 10, 11, 12));
+        LottoTicket fakeLottoTicket1 = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket fakeLottoTicket2 = LottoGenerator.createByManual(Arrays.asList(7, 8, 9, 10, 11, 12));
         fakeLottoTickets = LottoTickets.create(Arrays.asList(fakeLottoTicket1, fakeLottoTicket2));
     }
 

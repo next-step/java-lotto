@@ -70,14 +70,14 @@ class LottoTicketTests {
     @DisplayName("생성된 LottoTicket은 내부의 값이 오름차순으로 정렬되어 있다.")
     @Test
     void sortTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(5, 6, 4, 3, 2, 1));
+        LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(5, 6, 4, 3, 2, 1));
         assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @DisplayName("제시받은 LottoNumber가 현재 티켓 안에 있는 번호인지 확인할 수 있어야 한다.")
     @Test
     void isInThisTicketTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket.isInThisTicket(LottoNumber.create(3))).isTrue();
         assertThat(lottoTicket.isInThisTicket(LottoNumber.create(15))).isFalse();
     }
@@ -85,8 +85,8 @@ class LottoTicketTests {
     @DisplayName("전달받은 LottoTicket과 비교해서 LottoNumber가 몇개나 일치하는지 알려줄 수 있다.")
     @Test
     void howManyMatchTest() {
-        LottoTicket lottoTicket1 = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket2 = LottoGenerator.createManualByIntList(Arrays.asList(4, 5, 6, 7, 8, 9));
+        LottoTicket lottoTicket1 = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = LottoGenerator.createByManual(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         assertThat(lottoTicket1.howManyMatch(lottoTicket2)).isEqualTo(3);
     }
