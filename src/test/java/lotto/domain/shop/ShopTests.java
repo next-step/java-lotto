@@ -6,6 +6,7 @@ import lotto.domain.shop.exceptions.ExceedTotalLottoTicketsCountInMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,5 +55,28 @@ class ShopTests {
         LottoTickets boughtLottoTickets = Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, new Money(4000));
 
         assertThat(boughtLottoTickets.size()).isEqualTo(4);
+    }
+
+    @DisplayName("전량 자동으로 구매할 수 있다.")
+    @Test
+    void sellLottoAllAutoTest() {
+        LottoTickets emptyLottoTickets = LottoTickets.create(new ArrayList<>());
+
+        LottoTickets boughtLottoTickets = Shop.sellLottoTicketsAutoAndManual(emptyLottoTickets, new Money(4000));
+
+        assertThat(boughtLottoTickets.size()).isEqualTo(4);
+    }
+
+    @DisplayName("전량 수동으로 구매할 수 있다.")
+    @Test
+    void sellLottoAllManualTest() {
+        LottoTickets manualLottoTickets = LottoTickets.create(Arrays.asList(
+                LottoGenerator.createFromString("1,2,3,4,5,6"),
+                LottoGenerator.createFromString("7,8,9,10,11,12")
+        ));
+
+        LottoTickets boughtLottoTickets = Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, new Money(2000));
+
+        assertThat(boughtLottoTickets.size()).isEqualTo(2);
     }
 }
