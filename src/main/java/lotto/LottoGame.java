@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -19,7 +16,7 @@ public class LottoGame {
         return result.get(round);
     }
 
-    public long matchingCount(int round, LottoTicket lottoTicket) {
+    public int matchingCount(int round, LottoTicket lottoTicket) {
 
         List<Integer> winningNumbers = get(round);
 
@@ -27,9 +24,17 @@ public class LottoGame {
             throw new IllegalArgumentException("존재하지 않는 회차입니다.");
         }
 
-        return lottoTicket.getLottoNumbers()
+        return (int)lottoTicket.getLottoNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public List<LottoRank> lottoRanks(int round, List<LottoTicket> lottoTickets){
+        return lottoTickets.stream()
+                .map(lottoTicket -> matchingCount(round, lottoTicket))
+                .map(LottoRank::valueOf)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

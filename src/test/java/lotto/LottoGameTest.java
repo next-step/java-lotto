@@ -41,7 +41,7 @@ public class LottoGameTest {
     }
 
 
-    @MethodSource("generate_lotto_tickets")
+    @MethodSource("generate_lotto_tickets_with_expected_count")
     @ParameterizedTest
     @DisplayName("로또 게임 1회차의 당첨 개수를 검증한다.")
     void 로또_게임_당첨_갯수_테스트(LottoTicket lotto, int expected) {
@@ -57,11 +57,34 @@ public class LottoGameTest {
                 .isThrownBy(() -> lottoGame.matchingCount(round, LottoTicket.of(Arrays.asList(1,2,3,4,5,6,7))));
     }
 
+    @ParameterizedTest
+    @MethodSource("generate_lotto_tickets")
+    @DisplayName("로또 티켓의 순위 결과를 반환한다.")
+    void 로또_랭크_변환_테스트(List<LottoTicket> lottoTickets){
+        List<LottoRank> lottoRanks = lottoGame.lottoRanks(round, lottoTickets);
+        assertThat(lottoRanks).hasSize(lottoTickets.size());
+    }
+
+
     private static Stream<Arguments> generate_lotto_tickets() {
         return Stream.of(
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), 6),
-                Arguments.of(LottoTicket.of(Arrays.asList(23, 45, 32, 14, 2, 3, 7)), 2),
-                Arguments.of(LottoTicket.of(Arrays.asList(6, 1, 32, 14, 2, 3, 7)), 4)
+                Arguments.of(
+                        Arrays.asList(
+                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 2, 6)),
+                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 6, 6)),
+                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 3, 4))
+                        )
+                )
+        );
+    }
+
+    private static Stream<Arguments> generate_lotto_tickets_with_expected_count() {
+        return Stream.of(
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(LottoTicket.of(Arrays.asList(23, 45, 32, 14, 2, 3)), 2),
+                Arguments.of(LottoTicket.of(Arrays.asList(6, 1, 32, 14, 2, 3)), 4)
         );
     }
 }
