@@ -15,8 +15,8 @@ public class NumbersTest {
 
     @DisplayName("Numbers 컬렉션 정상 생성 테스트")
     @ParameterizedTest
-    @CsvSource({"1:2:3:4:5, 5", "//!\n1!3!4", "3"})
-    public void makeNumbersObject(String input, int size) {
+    @ValueSource(strings = {"1:2:3:4:5", "//!\n1!3!9"})
+    public void makeNumbersObject(String input) {
         List<Integer> parsedNumbers = StringParser.parseString(input);
         assertThatCode(() -> {
             Numbers numbers = new Numbers(parsedNumbers);
