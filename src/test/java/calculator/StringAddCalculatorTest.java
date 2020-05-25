@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringAddCalculatorTest {
 
@@ -63,5 +64,18 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("숫자 이외의 값 혹은 음수 입력 시 예외가 발생한다")
+    @ParameterizedTest
+    @CsvSource(value = {"가나다", "-1", "ㅇㅇ", "", " "})
+    public void splitAndSum_숫자이외_또는_음수_예외(String input){
+        // given
+        StringAddCalculator calculator = new StringAddCalculator();
+
+        // then
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> calculator.plus(input)
+        );
     }
 }
