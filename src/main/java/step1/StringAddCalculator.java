@@ -2,6 +2,7 @@ package step1;
 
 import static step1.Constants.COMMA_OR_COLON_REX;
 import static step1.Constants.SPECIAL_DELIMITER_REX;
+import static step1.ErrorMessages.SHOULD_BE_NUMBER;
 import static step1.ErrorMessages.SHOULD_NOT_NEGATIVE_NUMBER;
 
 import java.util.regex.Matcher;
@@ -39,7 +40,8 @@ public class StringAddCalculator {
             parseNumbersWithNormalDelimiterString(numberString);
     }
 
-    private static String[] parseNumbersWithSpecialDelimiterMatcher(Matcher specialDelimiterMatcher) {
+    private static String[] parseNumbersWithSpecialDelimiterMatcher(
+        Matcher specialDelimiterMatcher) {
         String customDelimiter = specialDelimiterMatcher.group(1);
         return specialDelimiterMatcher.group(2).split(customDelimiter);
     }
@@ -57,7 +59,13 @@ public class StringAddCalculator {
     }
 
     private static int convertStringToInt(String number) {
-        int value = Integer.parseInt(number);
+        int value;
+        try {
+            value = Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            throw new RuntimeException(SHOULD_BE_NUMBER);
+        }
+
         if (value < 0) {
             throw new RuntimeException(SHOULD_NOT_NEGATIVE_NUMBER);
         }
