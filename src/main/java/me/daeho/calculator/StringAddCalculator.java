@@ -9,6 +9,9 @@ public class StringAddCalculator {
         if (StringUtils.isEmpty(input))
             return 0;
 
+        if (StringUtils.isOnlyNumber(input))
+            return Integer.parseInt(input);
+
         return 0;
     }
 }
