@@ -7,9 +7,11 @@ public class StringAddCalculator {
         if (isNullOrEmpty(input)) {
             return 0;
         }
+        return getSum(getSplitString(input));
+    }
 
-        String[] numbers = input.split(",");
-        return getSum(numbers);
+    private String[] getSplitString(String input) {
+        return input.split("[,:]");
     }
 
     private boolean isNullOrEmpty(String input) {
