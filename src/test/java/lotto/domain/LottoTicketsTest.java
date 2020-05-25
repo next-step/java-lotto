@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.WinningNumbers;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +23,8 @@ class LottoTicketsTest {
         LottoResult lottoResult = lottoTickets.getLottoResult(winningNumbers);
 
         assertAll(
-                () -> assertThat(lottoResult.getNumberOfHitTickets(6)).isEqualTo(1),
-                () -> assertThat(lottoResult.getNumberOfHitTickets(3)).isEqualTo(2)
+                () -> assertThat(lottoResult.getLottoStatistics().get(6)).isEqualTo(1),
+                () -> assertThat(lottoResult.getLottoStatistics().get(3)).isEqualTo(2)
         );
     }
 

@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.ticket;
+
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.WinningNumbers;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,5 +28,14 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    public int count() {
+        return lottoTickets.size();
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoTickets);
     }
 }

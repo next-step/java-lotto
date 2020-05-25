@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
+
+import lotto.domain.result.WinningNumbers;
 
 import java.util.List;
 
@@ -23,5 +25,10 @@ public class LottoTicket {
         return Math.toIntExact(lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count());
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumbers);
     }
 }

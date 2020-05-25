@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.result.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-class LottoTicketTest {
+class WinningNumbersTest {
 
     static Stream<Arguments> lottoNumbers() {
         return Stream.of(
@@ -21,13 +21,12 @@ class LottoTicketTest {
         );
     }
 
-    @DisplayName("6개가 아닌 숫자로 로또티켓생성을 시도하면 익셉션을 던진다")
+    @DisplayName("6개가 아닌 숫자로 WinningNumbers생성을 시도하면 익셉션을 던진다")
     @MethodSource("lottoNumbers")
     @ParameterizedTest
     void generate(List<Integer> numbers) {
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        assertThatThrownBy(() -> new WinningNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또번호는 반드시 6개여야 합니다");
+                .hasMessage("당첨번호는 반드시 6개여야 합니다");
     }
-
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class LottoStoreTest {
 
         LottoTickets lottoTickets = lottoStore.buy(14000);
 
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
+        assertThat(lottoTickets.count()).isEqualTo(14);
     }
 
 }
