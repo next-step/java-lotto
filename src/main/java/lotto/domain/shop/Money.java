@@ -15,6 +15,10 @@ public class Money {
         this.value = value;
     }
 
+    public long getValue() {
+        return value;
+    }
+
     private void validation(long value) {
         if (value <= MIN_VALUE || value > MAX_VALUE) {
             throw new OutOfBoundMoneyCreationException("Input value is too big or small");
@@ -22,10 +26,6 @@ public class Money {
         if (value % 1000 != 0) {
             throw new OnlyTenThousandsException("Only ten thousands");
         };
-    }
-
-    public long getValue() {
-        return value;
     }
 
     @Override
@@ -39,5 +39,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public int howManyLottoTickets() {
+        return (int) (this.value / 1000);
     }
 }

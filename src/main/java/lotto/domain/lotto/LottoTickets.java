@@ -5,15 +5,21 @@ import lotto.domain.rank.RankCalculator;
 import lotto.domain.rank.Ranks;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> values;
 
     private LottoTickets(List<LottoTicket> values) {
         this.values = values;
+    }
+
+    public List<LottoTicket> getValues() {
+        return Collections.unmodifiableList(new ArrayList<>(values));
     }
 
     public static LottoTickets create(List<LottoTicket> values) {
@@ -31,7 +37,11 @@ public class LottoTickets {
         return Ranks.create(rankList);
     }
 
-    public List<LottoTicket> getValues() {
-        return Collections.unmodifiableList(new ArrayList<>(values));
+    public LottoTickets combine(LottoTickets inputLottoTickets) {
+        return new LottoTickets(
+                Stream.of(new ArrayList<>(this.values), new ArrayList<>(inputLottoTickets.values))
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList())
+        );
     }
 }

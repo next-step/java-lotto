@@ -1,8 +1,6 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,16 +9,36 @@ public class LottoGenerator {
             .mapToObj(LottoNumber::create)
             .collect(Collectors.toList());
 
-    public static LottoTicket create() {
+    public static LottoTicket createByAuto() {
         Collections.shuffle(lottoSeed, new Random());
         return LottoTicket.create(lottoSeed.subList(0, 6));
     }
 
-    public static LottoTicket createManualByIntList(List<Integer> intList) {
+    public static LottoTicket createByManual(List<Integer> intList) {
         return LottoTicket.create(
                 intList.stream()
                         .map(LottoNumber::create)
                         .collect(Collectors.toList())
         );
+    }
+
+    public static LottoTicket createByManual(String inputString) {
+        stringValidation(inputString);
+        return LottoGenerator.createByManual(
+                Arrays.asList(inputString.split(","))
+                        .stream()
+                        .map(inputValue -> Integer.parseInt(inputValue.trim()))
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private static void stringValidation(String inputValue) {
+        if (inputValue == null) {
+            throw new IllegalArgumentException("Input value must not null");
+        }
+
+        if (inputValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input value must not empty");
+        }
     }
 }

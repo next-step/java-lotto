@@ -5,7 +5,8 @@ import lotto.domain.lotto.exceptions.LottoTicketSizeException;
 import java.util.*;
 
 public class LottoTicket {
-    private static final int SIZE=6;
+    private static final int EMPTY_SIZE = 0;
+    private static final int SIZE = 6;
     private final List<LottoNumber> values;
 
     private LottoTicket(List<LottoNumber> values) {
@@ -13,22 +14,29 @@ public class LottoTicket {
         this.values = values;
     }
 
-    private void validation(List<LottoNumber> values) {
-        if (values.size() != SIZE) {
-            throw new LottoTicketSizeException("Lotto ticket can have only six lotto numbers");
-        }
+    public static LottoTicket create(List<LottoNumber> values) {
+        Collections.sort(values);
+        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
     }
 
-    public static LottoTicket create(List<LottoNumber> values) {
-        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
+    public boolean hasThisNumber(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
+    }
+
+    public int howManyMatch(LottoTicket lottoTicket) {
+        return (int) this.values.stream()
+                .filter(lottoTicket::hasThisNumber)
+                .count();
     }
 
     protected int size() {
         return this.values.size();
     }
 
-    public List<LottoNumber> getValues() {
-        return Collections.unmodifiableList(new ArrayList<>(this.values));
+    private void validation(List<LottoNumber> values) {
+        if (values.size() != EMPTY_SIZE && values.size() != SIZE) {
+            throw new LottoTicketSizeException("Lotto ticket can have only six lotto numbers");
+        }
     }
 
     @Override
@@ -46,7 +54,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        this.sort();
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (LottoNumber value: values) {
@@ -54,22 +61,5 @@ public class LottoTicket {
         }
         String result = builder.toString().substring(0, builder.toString().length() - 2);
         return result + "]";
-    }
-
-    public LottoTicket sort() {
-        Comparator<LottoNumber> lottoNumberComparator = Comparator.comparing(LottoNumber::getValue);
-        List<LottoNumber> sortTarget = new ArrayList<>(this.values);
-        sortTarget.sort(lottoNumberComparator);
-        return new LottoTicket(sortTarget);
-    }
-
-    public boolean isInThisTicket(LottoNumber lottoNumber) {
-        return this.values.contains(lottoNumber);
-    }
-
-    public int howManyMatch(LottoTicket lottoTicket) {
-        return (int) this.values.stream()
-                .filter(lottoTicket::isInThisTicket)
-                .count();
     }
 }

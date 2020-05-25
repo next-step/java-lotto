@@ -25,12 +25,12 @@ public enum Rank {
         return inputRank.getPrice() > 0L;
     }
 
-    public int getMatchNumber() {
-        return matchNumber;
-    }
-
     public long getPrice() {
         return price;
+    }
+
+    public int getMatchNumber() {
+        return matchNumber;
     }
 
     public static Rank create(int matchNumber, boolean bonusMatch) {
@@ -45,16 +45,7 @@ public enum Rank {
         return candidateRank.orElseThrow(IllegalArgumentException::new);
     }
 
-
-    @Override
-    public String toString() {
-        return matchNumber + "개 일치" + secondAppender() + "(" + price + "원)";
-    }
-
-    private String secondAppender() {
-        if (price == 30_000_000L) {
-            return ", 보너스 볼 일치";
-        }
-        return " ";
+    public boolean isSecond() {
+        return this.equals(SECOND);
     }
 }

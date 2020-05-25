@@ -128,3 +128,51 @@
 - [X] 인자가 많은 메서드에 대한 코드 컨벤션 수정
 - [X] 로또 자동 생성 시 시드값 제거
 - [X] Rank Calculator에서 getter 사용하는 부분을 객체 간 메시지 전달로 개선하기
+
+### 2차 리뷰 반영
+- [X] LottoTicket 코드 컨벤션에 맞게 수정하기
+- [X] RankCalculator에 아직 존재하는 getter 메시지 전달로 개선
+    - 구현 시 최대한 getter를 자제하고 일단 해당 객체에 전달할 수 있는 메시지가 있는지 확인하는 습관을 들이자
+- [X] 구매 가능한 로또의 수를 일급 객체로 만든 Money에서 계산하도록 개선
+- [X] LottoTicket 생성 시 아예 정렬된 상태로 생성되도록 변경
+    - 관련된 LottoNumber 일급 객체의 compareTo를 오버라이드해서 구현하자
+- [X] 사용하지 않는 메서드 제거
+- [X] Rank와 View의 의존성 제거
+    - Rank는 비즈니스 로직만, View에서 보여주는 로직만 처리하도록 개선
+
+## Step4. 로또(수동)
+- 구매 금액 중 일부만 수동 방식 로또로 구매할 수 있다.
+- 결과 출력 시 수동 구매한 로또 개수와 자동 구매한 로또 개수가 구분되서 표현되야 한다.
+- 구매 번호 표기 시 수동 구매 -> 자동 구매 순으로 표기되야 한다.
+
+### Todo List
+- BuyManualInputView
+    - [X] 수동으로 구매할 로또 티켓의 갯수를 입력받을 수 있다.
+    - [X] 수동으로 구매할 로또 티켓 갯수 만큼 로또 번호를 입력받고 LottoTickets를 만든다.
+        - 수동으로 구매할 로또 티켓 갯수가 0인 경우 빈 배열을 갖고 있는 LottoTicekts를 생성한다.
+- LottoGenerator
+    - [X] 정적 팩토리 메서드로 쉼표로 구분된 문자열을 입력받아서 LottoTicket을 생성하는 기능 구현
+        - 여러 곳에서 사용되는 기능이라 공통으로 사용되도록 구현
+        - [X] BuyManualInputView, RankInputView에서 사용하도록 적용
+- Shop
+    - [X] 수동 입력한 LottoTickets, 돈을 받아서 자동계산된 LottoTicket과 수동 LottoTicket이 합진 LottoTickets 반환
+    - [X] 수동 입력한 LottoTickets의 갯수와 돈을 계산해서 자동 구매할 LottoTickets 수를 계산할 수 있다.
+        - [X] 수동 입력한 LottoTickets의 수는 Money로 구매 가능한 총 LottoTicets의 수를 넘을 수 없다.
+        
+- LottoTickets
+    - [X] LottoTickets에 다른 LottoTickets를 받아서 둘을 합할 수 있다.
+    - [X] 내부 LottoTicket에서 수동이 몇 개인지, 자동이 몇 개인지 구분할 수 있다.
+    
+- LottoTicket
+    - [X] 생성 방식이 수동인지 자동인지 구분하는 속성을 추가한다.
+    
+- LottoService
+    - [X] Shop에서 복합 계산을 받을 수 있도록 메서드 추가
+    
+### 1차 피드백 반영
+- [X] 네이밍에 들어간 자료형 제거하기
+- [X] 클래스 메서드 정렬 순서 정리하기(생성자 -> 접근제어자 -> 컨벤션에 맞게 그 외 -> 공용 메서드
+- [X] 의미 없는 변수명 바꾸기
+- [X] 좀 더 동작에 어울리는 메서드명으로 바꾸기
+- [X] 일급컬렉션 LottoTicket에서 creationType이 반드시 필요한지 고려하고 리팩토링 하기
+- [X] 책임이 불분명한 서비스 레이어 제거 및 리팩토링

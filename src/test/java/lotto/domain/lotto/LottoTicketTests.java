@@ -39,7 +39,7 @@ class LottoTicketTests {
                 .isInstanceOf(LottoTicketSizeException.class);
     }
 
-    @DisplayName("사이드 이펙트가 없어야 한다")
+    @DisplayName("객체 생성시 전달 된 컬렉션 레퍼런스에 변경이 발생해도 일급 콜렉션 내부의 상태값이 변하지 않는다.")
     @Test
     void isSideEffectFreeTest() {
         LottoTicket lottoTicket = LottoTicket.create(values);
@@ -66,28 +66,26 @@ class LottoTicketTests {
         assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
-    @DisplayName("내부의 LottoNumber를 정렬할 수 있어야한다.")
+    @DisplayName("생성된 LottoTicket은 내부의 값이 오름차순으로 정렬되어 있다.")
     @Test
     void sortTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(6, 5, 4, 3, 2, 1));
-        assertThat(lottoTicket.toString()).isEqualTo("[6, 5, 4, 3, 2, 1]");
-        LottoTicket sorted = lottoTicket.sort();
-        assertThat(sorted.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(5, 6, 4, 3, 2, 1));
+        assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @DisplayName("제시받은 LottoNumber가 현재 티켓 안에 있는 번호인지 확인할 수 있어야 한다.")
     @Test
     void isInThisTicketTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(3))).isTrue();
-        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(15))).isFalse();
+        LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicket.hasThisNumber(LottoNumber.create(3))).isTrue();
+        assertThat(lottoTicket.hasThisNumber(LottoNumber.create(15))).isFalse();
     }
 
     @DisplayName("전달받은 LottoTicket과 비교해서 LottoNumber가 몇개나 일치하는지 알려줄 수 있다.")
     @Test
     void howManyMatchTest() {
-        LottoTicket lottoTicket1 = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket2 = LottoGenerator.createManualByIntList(Arrays.asList(4, 5, 6, 7, 8, 9));
+        LottoTicket lottoTicket1 = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = LottoGenerator.createByManual(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         assertThat(lottoTicket1.howManyMatch(lottoTicket2)).isEqualTo(3);
     }

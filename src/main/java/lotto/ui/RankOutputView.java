@@ -15,13 +15,6 @@ public class RankOutputView {
         this.ranks = ranks;
     }
 
-    protected String getIndividualStatistics(Rank rank) {
-        return rank.toString() +
-                "- " +
-                ranks.getCount(rank) +
-                "개";
-    }
-
     public String getTotalStatistics() {
         return Arrays.stream(Rank.values())
                 .filter(Rank::canGetPrize)
@@ -43,5 +36,21 @@ public class RankOutputView {
         System.out.println("---------");
         System.out.println(this.getTotalStatistics());
         System.out.println(this.getTotalRateOfReturn(boughtMoneyValue));
+    }
+
+    protected String getIndividualStatistics(Rank rank) {
+        return rank.getMatchNumber() +
+                "개 일치" +
+                secondAppender(rank) +
+                "(" +
+                rank.getPrice() +
+                "원)" +
+                "- " +
+                ranks.getCount(rank) +
+                "개";
+    }
+
+    private String secondAppender(Rank rank) {
+        return rank.isSecond() ? ", 보너스 볼 일치" : " ";
     }
 }

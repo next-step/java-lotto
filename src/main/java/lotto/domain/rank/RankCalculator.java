@@ -14,15 +14,15 @@ public class RankCalculator {
         this.winBonusNumber = winBonusNumber;
     }
 
-    private void bonusNumberValidation(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.getValues().contains(bonusNumber)) {
-            throw new BonusNumberDuplicatedWithLottoTicket("Bonus number cannot duplicated with win ticket numbers");
-        }
-    }
-
     public Rank getRank(LottoTicket lottoTicket) {
         int matchNumber = winTicket.howManyMatch(lottoTicket);
-        boolean isMatchBonusNumber = lottoTicket.isInThisTicket(winBonusNumber);
+        boolean isMatchBonusNumber = lottoTicket.hasThisNumber(winBonusNumber);
         return Rank.create(matchNumber, isMatchBonusNumber);
+    }
+
+    private void bonusNumberValidation(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.hasThisNumber(bonusNumber)) {
+            throw new BonusNumberDuplicatedWithLottoTicket("Bonus number cannot duplicated with win ticket numbers");
+        }
     }
 }

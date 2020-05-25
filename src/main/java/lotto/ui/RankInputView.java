@@ -4,9 +4,7 @@ import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class RankInputView {
     private String winTicketValue;
@@ -18,14 +16,8 @@ public class RankInputView {
         this.winBonusNumber = winBonusNumber;
     }
 
-    private void validation(String inputValue) {
-        if (inputValue == null) {
-            throw new IllegalArgumentException("Input value must not null");
-        }
-
-        if (inputValue.trim().isEmpty()) {
-            throw new IllegalArgumentException("Input value must not empty");
-        }
+    public LottoNumber getWinBonusNumber() {
+        return LottoNumber.create(this.winBonusNumber);
     }
 
     public static RankInputView getThisWeekWinningInfo(Scanner scanner) {
@@ -37,15 +29,16 @@ public class RankInputView {
     }
 
     public LottoTicket convertToWinTicket() {
-        return LottoGenerator.createManualByIntList(
-                Arrays.asList(this.winTicketValue.split(","))
-                        .stream()
-                        .map(inputValue -> Integer.parseInt(inputValue.trim()))
-                        .collect(Collectors.toList())
-        );
+        return LottoGenerator.createByManual(this.winTicketValue);
     }
 
-    public LottoNumber getWinBonusNumber() {
-        return LottoNumber.create(this.winBonusNumber);
+    private void validation(String inputValue) {
+        if (inputValue == null) {
+            throw new IllegalArgumentException("Input value must not null");
+        }
+
+        if (inputValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input value must not empty");
+        }
     }
 }

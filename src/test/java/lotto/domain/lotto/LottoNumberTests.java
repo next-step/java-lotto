@@ -30,4 +30,13 @@ class LottoNumberTests {
     void equalTest() {
         assertThat(LottoNumber.create(1)).isEqualTo(LottoNumber.create(1));
     }
+
+    @DisplayName("객체 내부의 값으로 대소 비교가 가능하다.")
+    @Test
+    void compareTest() {
+        LottoNumber lottoNumberOne = LottoNumber.create(1);
+        LottoNumber lottoNumberTwo = LottoNumber.create(2);
+        assertThat(lottoNumberOne.compareTo(lottoNumberTwo) < 0).isTrue();
+        assertThat(lottoNumberOne.compareTo(lottoNumberTwo) > 0).isFalse();
+    }
 }

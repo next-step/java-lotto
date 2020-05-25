@@ -24,11 +24,10 @@ class RankTests {
         assertThat(Rank.create(4, false)).isEqualTo(FOURTH);
     }
 
-    @DisplayName("toString으로 상수의 상태를 표현할 수 있다.")
+    @DisplayName("당첨 등수가 2등인지를 알려줄 수 있다.")
     @Test
-    void rankToStringTest() {
-        assertThat(FIRST.toString()).isEqualTo("6개 일치 (2000000000원)");
-        assertThat(SECOND.toString()).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)");
-        assertThat(THIRD.toString()).isEqualTo("5개 일치 (1500000원)");
+    void isSecondTest() {
+        assertThat(SECOND.isSecond()).isTrue();
+        assertThat(THIRD.isSecond()).isFalse();
     }
 }
