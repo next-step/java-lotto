@@ -1,7 +1,8 @@
 package lotto.domain.ticket;
 
 import lotto.domain.prize.Prize;
-import lotto.util.Generator;
+import lotto.util.LottoTicketGenerator;
+import lotto.util.WinningLottoTicketGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,11 +24,11 @@ public class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         tickets = new ArrayList<>();
-        tickets.add(Generator.lottoTicket(1, 2, 3, 4, 5, 6));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 4, 5, 7));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
-        tickets.add(Generator.lottoTicket(7, 8, 9, 10, 11, 12));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 7));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(7, 8, 9, 10, 11, 12));
     }
 
     @DisplayName("List<LottoTicket> 를 인자로 받아 LottoTickets 생성")
@@ -49,7 +50,7 @@ public class LottoTicketsTest {
     @ParameterizedTest
     void matchPrizes(final Prize prize, final Long expected) {
         final WinningLottoTicket winningLottoTicket =
-                WinningLottoTicket.valueOf(Generator.lottoNumberList(1, 2, 3, 4, 5, 6), 7);
+                WinningLottoTicketGenerator.valueOf(7, 1, 2, 3, 4, 5, 6);
         LottoTickets lottoTickets = LottoTickets.of(tickets);
 
         Map<Prize, Long> prizes = lottoTickets.matchPrizes(winningLottoTicket);

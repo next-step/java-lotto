@@ -4,7 +4,8 @@ import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
-import lotto.util.Generator;
+import lotto.util.LottoTicketGenerator;
+import lotto.util.WinningLottoTicketGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,14 +29,14 @@ public class LottoPrizeResultTest {
     @BeforeEach
     void setUp() {
         tickets = new ArrayList<>();
-        tickets.add(Generator.lottoTicket(1, 2, 3, 4, 5, 6));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 4, 5, 7));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
-        tickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
-        tickets.add(Generator.lottoTicket(7, 8, 9, 10, 11, 12));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 7));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(7, 8, 9, 10, 11, 12));
 
         final WinningLottoTicket winningLottoTicket =
-                WinningLottoTicket.valueOf(Generator.lottoNumberList(1, 2, 3, 4, 5, 6), 7);
+                WinningLottoTicketGenerator.valueOf(7, 1, 2, 3, 4, 5, 6);
 
         matchedPrizes = LottoTickets.of(tickets).matchPrizes(winningLottoTicket);
     }

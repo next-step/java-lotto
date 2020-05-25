@@ -1,6 +1,6 @@
 package lotto.domain.number;
 
-import lotto.util.Generator;
+import lotto.util.LottoNumbersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,13 +22,13 @@ public class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoNumbers = Generator.lottoNumbers(1, 2, 3, 4, 5, 6);
+        this.lottoNumbers = LottoNumbersGenerator.valueOf(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("LottoNumbers 생성")
     @Test
     void create() {
-        assertThatCode(() -> LottoNumbers.manualCreate(Generator.lottoNumberList(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> LottoNumbers.manualCreate(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6)))
                 .doesNotThrowAnyException();
         assertThatCode(LottoNumbers::autoCreate)
                 .doesNotThrowAnyException();
@@ -43,8 +43,8 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5)),
-                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5)),
+                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7))
         );
     }
 
@@ -52,14 +52,14 @@ public class LottoNumbersTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Generator.lottoNumbers(-1, 0, 3, 4, 5, 6));
+                .isThrownBy(() -> LottoNumbersGenerator.valueOf(-1, 0, 3, 4, 5, 6));
     }
 
     @DisplayName("LottoNumbers 생성 실패: 중복된 숫자가 포함된 경우 예외 발생")
     @Test
     void duplicatedNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Generator.lottoNumbers(1, 1, 3, 4, 5, 6));
+                .isThrownBy(() -> LottoNumbersGenerator.valueOf(1, 1, 3, 4, 5, 6));
     }
 
     @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
@@ -72,11 +72,11 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> purchasedTicketCase() {
         return Stream.of(
-                Arguments.of(Generator.lottoNumbers(7, 8, 9, 10, 11, 12), 0),
-                Arguments.of(Generator.lottoNumbers(1, 2, 3, 7, 8, 9), 3),
-                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 7, 8), 4),
-                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 5, 7), 5),
-                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 5, 6), 6)
+                Arguments.of(LottoNumbersGenerator.valueOf(7, 8, 9, 10, 11, 12), 0),
+                Arguments.of(LottoNumbersGenerator.valueOf(1, 2, 3, 7, 8, 9), 3),
+                Arguments.of(LottoNumbersGenerator.valueOf(1, 2, 3, 4, 7, 8), 4),
+                Arguments.of(LottoNumbersGenerator.valueOf(1, 2, 3, 4, 5, 7), 5),
+                Arguments.of(LottoNumbersGenerator.valueOf(1, 2, 3, 4, 5, 6), 6)
         );
     }
 

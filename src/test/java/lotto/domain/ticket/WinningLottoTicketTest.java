@@ -2,7 +2,8 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.util.Generator;
+import lotto.util.LottoNumbersGenerator;
+import lotto.util.WinningLottoTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ public class WinningLottoTicketTest {
     @DisplayName("WinningLottoTicket 생성")
     @Test
     void create() {
-        final List<LottoNumber> numbers = Generator.lottoNumberList(1, 2, 3, 4, 5, 6);
+        final List<LottoNumber> numbers = LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6);
         assertThatCode(() -> WinningLottoTicket.valueOf(numbers, 7))
                 .doesNotThrowAnyException();
     }
@@ -36,8 +37,8 @@ public class WinningLottoTicketTest {
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5)),
-                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5)),
+                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7))
         );
     }
 
@@ -45,7 +46,7 @@ public class WinningLottoTicketTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Generator.lottoNumbers(-1, 0, 3, 4, 5, 6));
+                .isThrownBy(() -> LottoNumbersGenerator.valueOf(-1, 0, 3, 4, 5, 6));
     }
 
     @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")
@@ -53,7 +54,7 @@ public class WinningLottoTicketTest {
     @CsvSource({ "1,true", "7,false" })
     void contains(final int number, final boolean expected) {
         final WinningLottoTicket winningLottoTicket =
-                WinningLottoTicket.valueOf(Generator.lottoNumberList(1, 2, 3, 4, 5, 6), 7);
+                WinningLottoTicketGenerator.valueOf(7, 1, 2, 3, 4, 5, 6);
 
         assertThat(winningLottoTicket.lottoNumbers.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
@@ -63,7 +64,7 @@ public class WinningLottoTicketTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2 })
     void duplicatedBonusNumber(final int bonusNumber) {
-        final List<LottoNumber> numbers = Generator.lottoNumberList(1, 2, 3, 4, 5, 6);
+        final List<LottoNumber> numbers = LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6);
 
         assertThatIllegalArgumentException().isThrownBy(() ->
                 WinningLottoTicket.valueOf(numbers, bonusNumber));
