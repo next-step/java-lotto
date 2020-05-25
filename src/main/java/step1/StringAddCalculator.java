@@ -12,7 +12,7 @@ public class StringAddCalculator {
         }
 
         return FormulaSplitter.split(formula).stream()
-                .map(Operand::toInt)
+                .map(Operand::toPositiveInt)
                 .reduce(0, Integer::sum);
     }
 }

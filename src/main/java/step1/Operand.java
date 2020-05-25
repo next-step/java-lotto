@@ -13,10 +13,20 @@ public class Operand {
     }
 
     public static Operand valueOf(String operand) {
+        if (!StringUtils.isNumeric(operand)) {
+            throw new IllegalArgumentException("숫자만 입력이 가능합니다.");
+        }
+
         return new Operand(operand);
     }
 
-    public int toInt() {
+    public int toPositiveInt() {
+        int convertInt = Integer.parseInt(this.operand);
+
+        if (convertInt < Operand.ZERO_VALUE) {
+            throw new IllegalStateException("음수는 사용할 수 없습니다.");
+        }
+
         return Integer.parseInt(this.operand);
     }
 
