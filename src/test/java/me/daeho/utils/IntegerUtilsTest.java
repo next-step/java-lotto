@@ -6,33 +6,33 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("문자열 유틸 테스트")
-class StringUtilsTest {
+class IntegerUtilsTest {
     @Test
     void isEmpty_null() {
-        assertTrue(StringUtils.isEmpty(null));
+        assertTrue(IntegerUtils.isEmpty(null));
     }
 
     @Test
     void isEmpty_emptyString() {
-        assertTrue(StringUtils.isEmpty(""));
-        assertTrue(StringUtils.isEmpty(" "));
+        assertTrue(IntegerUtils.isEmpty(""));
+        assertTrue(IntegerUtils.isEmpty(" "));
     }
 
 
     @Test
     void isOnlyNumber_textAndNumber() {
-        assertFalse(StringUtils.isOnlyNumber("a123"));
+        assertFalse(IntegerUtils.isOnlyNumber("a123"));
     }
 
     @Test
     void isOnlyNumber_text() {
-        assertFalse(StringUtils.isOnlyNumber("foo"));
+        assertFalse(IntegerUtils.isOnlyNumber("foo"));
     }
 
 
     @Test
     void isOnlyNumber_number() {
-        assertTrue(StringUtils.isOnlyNumber("123"));
+        assertTrue(IntegerUtils.isOnlyNumber("123"));
     }
 }
 
