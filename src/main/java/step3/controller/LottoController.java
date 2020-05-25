@@ -15,7 +15,7 @@ public class LottoController {
     resultView.printLottoList(lottos);
 
     Lotto winning = LottoGenerator.generateLotto(inputView.inputWinning());
-    int bonusNumber = inputView.inputBonus();
+    LottoNumber bonusNumber = inputView.inputBonus();
     LottoGame lottoGame = LottoGame.of(lottos, winning, bonusNumber);
 
     resultView.printStat(lottoGame);
