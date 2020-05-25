@@ -1,9 +1,6 @@
 package step3.view;
 
-import step3.domain.Lotto;
-import step3.domain.LottoGame;
-import step3.domain.Lottos;
-import step3.domain.Rank;
+import step3.domain.*;
 
 import static java.util.stream.Collectors.joining;
 
@@ -13,6 +10,8 @@ public class ResultView {
   private static final String BODY_FORMAT = "%d개 일치 (%d원)- %d개";
   private static final String BUYING_FORMAT = "%d개를 구매했습니다.\n%s\n\n";
   private static final String PAY_OFF_FORMAT = "총 수익률은 %.2f입니다. 결과적으로 %s입니다\n";
+  private static final String NEW_LINE = "\n";
+  private static final String DELIMITER = ", ";
 
   private static ResultView instance;
 
@@ -22,7 +21,7 @@ public class ResultView {
     final long lottoCount = lottos.stream().count();
     final String lottoList = lottos.stream()
                                    .map(ResultView::lottoToString)
-                                   .collect(joining("\n"));
+                                   .collect(joining(NEW_LINE));
 
     System.out.printf(BUYING_FORMAT, lottoCount, lottoList);
   }
@@ -30,11 +29,11 @@ public class ResultView {
   public void printStat (LottoGame lottoGame) {
     System.out.printf(HEAD_FORMAT,
       Rank.stream()
-        .map(rank -> String.format(BODY_FORMAT,
-          rank.getSame(),
-          rank.getPrice(),
-          lottoGame.getWinningCount(rank)))
-        .collect(joining("\n"))
+          .map(rank -> String.format(BODY_FORMAT,
+                                     rank.getSame(),
+                                     rank.getPrice(),
+                                     lottoGame.getWinningCount(rank)))
+          .collect(joining(NEW_LINE))
     );
   }
 
@@ -60,8 +59,9 @@ public class ResultView {
 
   public static String lottoToString (Lotto lotto) {
     String str = lotto.stream()
-      .map(String::valueOf)
-      .collect(joining(", "));
+                      .map(LottoNumber::getNumber)
+                      .map(String::valueOf)
+                      .collect(joining(DELIMITER));
     return "[" + str + "]";
   }
 
