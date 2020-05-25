@@ -1,8 +1,6 @@
 package step2.controller;
 
-import step2.domain.Lotto;
-import step2.domain.LottoGame;
-import step2.domain.LottoShop;
+import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -13,11 +11,11 @@ public class LottoController {
   public static void main(String[] args) {
 
     long price = inputView.inputPrice();
-    LottoShop lottoShop = LottoShop.of(price);
-    resultView.printLottoList(lottoShop);
+    Lottos lottos = LottoShop.buyLotto(price);
+    resultView.printLottoList(lottos);
 
-    Lotto winning = Lotto.of(inputView.inputWinning());
-    LottoGame lottoGame = LottoGame.of(lottoShop, winning);
+    Lotto winning = LottoGenerator.generateLotto(inputView.inputWinning());
+    LottoGame lottoGame = LottoGame.of(lottos, winning);
 
     resultView.printStat(lottoGame);
     resultView.printPayoffRatio(lottoGame.getPayoffRatio());
