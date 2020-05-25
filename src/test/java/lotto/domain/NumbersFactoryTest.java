@@ -20,4 +20,16 @@ class NumbersFactoryTest {
         Set<Integer> set = new HashSet<>(nonDuplicateNumbers);
         assertThat(nonDuplicateNumbers.size()).isEqualTo(set.size());
     }
+
+    @DisplayName("수동 문자열 숫자를 숫자 리스트로 생성할 수 있다.")
+    @Test
+    void canCreateManualNumbers() {
+        String numbers = "1, 2, 3, 4, 5, 6";
+        List<Integer> manualNumbers = NumbersFactory.createManualNumbers(numbers);
+
+        assertThat(manualNumbers).isNotNull();
+
+        int manualNumberSize = numbers.split(", ").length;
+        assertThat(manualNumbers.size()).isEqualTo(manualNumberSize);
+    }
 }
