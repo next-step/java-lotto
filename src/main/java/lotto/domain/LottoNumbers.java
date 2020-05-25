@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.util.StringUtils;
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,9 +41,7 @@ public class LottoNumbers {
     }
 
     public static List<Integer> createNonDuplicateNumbers(String manualNumbers) {
-        List<Integer> lottoNumbers = Arrays.stream(manualNumbers.split(DELIMITER_PATTERN))
-                .map(StringUtils::toInt)
-                .collect(Collectors.toList());
+        List<Integer> lottoNumbers = NumbersFactory.createManualNumbers(manualNumbers);
 
         validateLottoNumbers(lottoNumbers);
 
