@@ -13,9 +13,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        int addParsedNumberString = addParsedNumberString(parseNumberString(numberString));
-
-        return addParsedNumberString;
+        return addParsedNumberString(parseNumberString(numberString));
     }
 
     private static Boolean validateText(String numberString) {
@@ -36,16 +34,16 @@ public class StringAddCalculator {
             .matcher(numberString);
 
         return specialDelimiterMatcher.find() ?
-            parseNumbersWithSpecialDelimiter(specialDelimiterMatcher) :
-            parseNumbersWithNormalDelimiter(numberString);
+            parseNumbersWithSpecialDelimiterMatcher(specialDelimiterMatcher) :
+            parseNumbersWithNormalDelimiterString(numberString);
     }
 
-    private static String[] parseNumbersWithSpecialDelimiter(Matcher specialDelimiterMatcher) {
+    private static String[] parseNumbersWithSpecialDelimiterMatcher(Matcher specialDelimiterMatcher) {
         String customDelimiter = specialDelimiterMatcher.group(1);
         return specialDelimiterMatcher.group(2).split(customDelimiter);
     }
 
-    private static String[] parseNumbersWithNormalDelimiter(String numberString) {
+    private static String[] parseNumbersWithNormalDelimiterString(String numberString) {
         return numberString.split(COMMA_OR_COLON_REX);
     }
 
