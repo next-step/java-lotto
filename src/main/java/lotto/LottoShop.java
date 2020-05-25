@@ -10,8 +10,7 @@ public class LottoShop {
 
     public List<LottoTicket> buy(int amount) {
         return IntStream.range(0, amount)
-                .boxed()
-                .map(integer -> LOTTO_GENERATOR.autoGenerate())
+                .mapToObj(integer -> LOTTO_GENERATOR.autoGenerate())
                 .collect(Collectors.toList());
     }
 }

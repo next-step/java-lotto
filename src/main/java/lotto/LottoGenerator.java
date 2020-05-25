@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class LottoGenerator {
         List<Integer> defaultLottoNumbers = LOTTO_NUMBER.getDefaultLottoNumbers();
 
         Collections.shuffle(defaultLottoNumbers);
-        LottoTicket lottoTicket = LottoTicket.of(defaultLottoNumbers.subList(0, LOTTO_GENERATE_COUNT));
+        LottoTicket lottoTicket = LottoTicket.of(new ArrayList<>(defaultLottoNumbers.subList(0, LOTTO_GENERATE_COUNT)));
         lottoTicket.sort();
         return lottoTicket;
     }
