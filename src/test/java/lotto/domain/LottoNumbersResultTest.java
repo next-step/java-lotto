@@ -17,18 +17,19 @@ class LottoNumbersResultTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumberAndWinnerNumbers")
     @DisplayName("로또 번호 당첨 결과 테스트")
-    void calculateLottoMatchNumber(List<Lotto> lotto, List<Lotto> winners, int matchCount) {
+    void calculateLottoMatchNumber(List<Lotto> lotto, List<Lotto> winners, int matchCount, int bonusNumber, boolean matchBonusBall) {
         LottoNumberResult lottoNumberResult = this.createLottoNumbers(lotto);
-        LottoMatcher lottoMatcher = lottoNumberResult.findLottoMatchResult(winners);
+        LottoMatcher lottoMatcher = lottoNumberResult.findLottoMatchResult(createLottoWinnerNumbers(winners, bonusNumber));
         assertThat(lottoMatcher.getMatchingCount()).isEqualTo(matchCount);
+        assertThat(lottoMatcher.isMatchBonusBall()).isEqualTo(matchBonusBall);
     }
 
     private static Stream<Arguments> provideLottoNumberAndWinnerNumbers() {
         return Stream.of(
-                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(4, 5, 6, 7, 8, 9)), 3),
-                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(3, 4, 5, 6, 7, 8)), 4),
-                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(2, 3, 4, 5, 6, 7)), 5),
-                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
+                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(4, 5, 6, 7, 8, 9)), 3, 10, false),
+                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(3, 4, 5, 6, 7, 8)), 4, 10, false),
+                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(2, 3, 4, 5, 6, 7)), 5, 1, true),
+                Arguments.of(createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), createLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), 6, 7, false)
         );
     }
 
@@ -40,5 +41,9 @@ class LottoNumbersResultTest {
         return numbers.stream()
                 .map(number -> new Lotto(number))
                 .collect(Collectors.toList());
+    }
+
+    private LottoWinnerNumber createLottoWinnerNumbers(List<Lotto> winnerNumbers, int bonusBall) {
+        return new LottoWinnerNumber(winnerNumbers, new Lotto(bonusBall));
     }
 }

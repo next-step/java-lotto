@@ -29,4 +29,9 @@ public class InputView {
                 .map(number -> new Lotto(Integer.parseInt(number)))
                 .collect(Collectors.toList());
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너슬 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
 }

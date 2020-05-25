@@ -17,18 +17,25 @@ public class LottoNumberResult {
                 .count();
     }
 
-    public LottoMatcher findLottoMatchResult(List<Lotto> winnerNumbers) {
-        this.validateWinnerNumbers(winnerNumbers);
-        int matchCount = this.calculateMatchCount(winnerNumbers);
-        return LottoMatcher.findRanking(matchCount);
+    private boolean isAdjustBonusBall(Lotto bonusBall) {
+        return lotto.stream()
+                .filter(lottoNumber -> lottoNumber.equals(bonusBall))
+                .findFirst().isPresent();
     }
 
-    private void validateWinnerNumbers(List<Lotto> winnerNumbers) {
-        if (Objects.isNull(winnerNumbers)) {
+    public LottoMatcher findLottoMatchResult(LottoWinnerNumber lottoWinnerNumber) {
+        this.validateWinnerNumbers(lottoWinnerNumber);
+        int matchCount = this.calculateMatchCount(lottoWinnerNumber.getWinnerNumbers());
+        boolean adjustBonusBall = this.isAdjustBonusBall(lottoWinnerNumber.getBonusBall());
+        return LottoMatcher.findRanking(matchCount, adjustBonusBall);
+    }
+
+    private void validateWinnerNumbers(LottoWinnerNumber lottoWinnerNumber) {
+        if (Objects.isNull(lottoWinnerNumber)) {
             throw new IllegalArgumentException();
         }
 
-        if (winnerNumbers.size() != LottoNumbers.LOTTO_SIZE) {
+        if (lottoWinnerNumber.getWinnerNumbers().size() != LottoNumbers.LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
     }
