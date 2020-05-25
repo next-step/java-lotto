@@ -18,8 +18,8 @@ public class StringAdditionalCalculator {
     if (StringUtils.isBlank(text)) return 0;
     String[] numbers = getNumbers(text);
     return Arrays.stream(numbers)
-                 .map(StringAdditionalCalculator::parseNumber)
-                 .reduce(0, (sum, a) -> sum + a);
+                 .mapToInt(StringAdditionalCalculator::parseNumber)
+                 .sum();
   }
 
   static String[] getNumbers (String text) {
