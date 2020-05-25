@@ -4,9 +4,6 @@ import com.cheolhyeonpark.calculator.domain.ExpressionGenerator;
 
 public class StringAddCalculator {
 
-    public static final String DEFAULT_DELIMITER = "[,|:]";
-    public static final String CUSTOM_DELIMITER_MATCHER = "//(.)\n(.*)";
-
     public static int splitAndSum(String input) {
 
         if (isEmpty(input)) {
