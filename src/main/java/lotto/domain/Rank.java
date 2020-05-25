@@ -24,14 +24,6 @@ public enum Rank {
         this.matchBonus = matchBonus;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Stream.of(Rank.values())
             .filter(
@@ -46,5 +38,13 @@ public enum Rank {
         return Arrays.asList(Rank.values()).stream()
             .filter(lottoMatch -> lottoMatch != Rank.MISS)
             .collect(Collectors.toList());
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
