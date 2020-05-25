@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.service.LottoService;
 import lotto.domain.LottoTicket;
+import lotto.service.LottoService;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -17,7 +17,7 @@ public class LottoMain {
         resultView.printLottoTicketList(lottoTicketList);
 
         String winningNumbers = InputView.inputWinningNumbers();
-        LottoTicket lottoTicket = lottoService.matchLottoTicket(lottoTicketList, winningNumbers);
-        resultView.printMatchResult(lottoTicket);
+        List<Integer> lottoRankList = lottoService.matchLottoTicket(lottoTicketList, winningNumbers);
+        resultView.printMatchResult(lottoRankList);
     }
 }

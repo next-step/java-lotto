@@ -20,6 +20,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Integer.compare(value, lottoNumber.value);
     }
 
+    public Boolean isMatch(LottoNumber lottoNumber) {
+        return this.value == lottoNumber.value;
+    }
+
     public int getValue() {
         return value;
     }

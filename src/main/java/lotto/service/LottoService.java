@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoTicket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
@@ -12,9 +13,14 @@ public class LottoService {
         return lottoShop.publishLottoTickets(money);
     }
 
-    public LottoTicket matchLottoTicket(List<LottoTicket> lottoTicketList, String winningNumbers) {
+    public List<Integer> matchLottoTicket(List<LottoTicket> lottoTicketList, String winningNumbers) {
         LottoTicket winLottoTicket = new LottoTicket(winningNumbers);
+        List<Integer> lottoRankList= new ArrayList<>();
 
-        return null;
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            int rank = lottoTicket.matchLottoTicketRank(winLottoTicket);
+            lottoRankList.add(rank);
+        }
+        return lottoRankList;
     }
 }
