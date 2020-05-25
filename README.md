@@ -3,13 +3,27 @@
 - 한장당 가격은 1000원
 
 2. 구매한 로또티켓 장수를 반환한다.
-3. 로또티켓 숫자를 반환한다.
+3. 로또티켓 숫자를 반환한다. - o
 
 
 4. 지난주 당첨번호에 따른 당첨 통계를 반환한다.
 - 3,4,5,6개 일치하는 총 장수
 - 총 수익률
 
+
+**로또 진행과정 중 질문사항**
+1. 객체지향적 관점.. ?  
+객체의 상태는 private으로 캡슐화하는 것을 권장. 하지만 LOTTO_TICKET의 price는 상수. 
+private으로하면 getPRICE와 같은 뭔가 이상한 ,,? 메서드가 호출됨.
+그렇다고 LottoStore가 LottoTicket의 가격을 가지고 있는 것은 객체지향적 관점에서 맞지 않은 것 같음.
+그래서 일단 public ... 이지만 찝찝.
+```java
+public static final int PRICE = 1000;
+```
+LottoStore에서 아래처럼 쓰려다보니 ,, 
+```java
+private static final int LOTTO_TICKET_PRICE = LottoTicket.PRICE;
+```
 
 
 
