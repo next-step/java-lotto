@@ -10,13 +10,13 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SplitterTest {
+public class FormulaSplitterTest {
 
     @DisplayName("콤마(,)또는 콜론(:) 구분자로 문자열을 분할하여 숫자 배열을 반환한다")
     @MethodSource("provideStringsForDelimiter")
     @ParameterizedTest
     void split_NumberWithDelimiter_Tokens(String formula, Operand expectedFirst, Operand expectedSecond) {
-        List<Operand> operands = Splitter.split(Formula.valueOf(formula));
+        List<Operand> operands = FormulaSplitter.split(Formula.valueOf(formula));
 
         assertThat(operands).hasSize(2);
         assertThat(operands.get(0)).isEqualTo(expectedFirst);
@@ -37,7 +37,7 @@ public class SplitterTest {
     @MethodSource("provideStringsForCustomDelimiter")
     @ParameterizedTest
     void split_NumberWithCustomDelimiter_Tokens(String formula, Operand expectedFirst, Operand expectedSecond) {
-        List<Operand> operands = Splitter.split(Formula.valueOf(formula));
+        List<Operand> operands = FormulaSplitter.split(Formula.valueOf(formula));
 
         assertThat(operands).hasSize(2);
         assertThat(operands.get(0)).isEqualTo(expectedFirst);

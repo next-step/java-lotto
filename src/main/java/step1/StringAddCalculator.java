@@ -1,7 +1,5 @@
 package step1;
 
-import java.util.List;
-
 public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
@@ -13,9 +11,7 @@ public class StringAddCalculator {
             return Operand.ZERO_VALUE;
         }
 
-        List<Operand> operands = Splitter.split(formula);
-
-        return operands.stream()
+        return FormulaSplitter.split(formula).stream()
                 .map(Operand::toInt)
                 .reduce(0, Integer::sum);
     }
