@@ -10,16 +10,14 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        int inputMoney = InputView.inputMoney();
-
         LottoService lottoService = new LottoService();
-        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(inputMoney);
+        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(InputView.inputMoney());
 
         ResultView resultView = new ResultView();
         resultView.printLottoTicketList(lottoTicketList);
 
         String winningNumbers = InputView.inputWinningNumbers();
-        LottoTicket lottoTicket = new LottoTicket(winningNumbers);
+        LottoTicket lottoTicket = lottoService.matchLottoTicket(lottoTicketList, winningNumbers);
         resultView.printMatchResult(lottoTicket);
     }
 }

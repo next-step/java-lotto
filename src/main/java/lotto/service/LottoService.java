@@ -11,4 +11,10 @@ public class LottoService {
         LottoShop lottoShop = new LottoShop();
         return lottoShop.publishLottoTickets(money);
     }
+
+    public LottoTicket matchLottoTicket(List<LottoTicket> lottoTicketList, String winningNumbers) {
+        LottoTicket winLottoTicket = new LottoTicket(winningNumbers);
+
+        return null;
+    }
 }

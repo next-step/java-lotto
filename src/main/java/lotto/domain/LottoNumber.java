@@ -15,12 +15,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(value);
     }
 
-    private void validate(int value) {
-        if (value <= ZERO_NUMBER) {
-            throw new RuntimeException("0 이하의 값을 입력했습니다.");
-        }
-    }
-
     @Override
     public int compareTo(LottoNumber lottoNumber) {
         return Integer.compare(value, lottoNumber.value);
@@ -30,4 +24,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return value;
     }
 
+    private void validate(int value) {
+        if (value <= ZERO_NUMBER) {
+            throw new RuntimeException("0 이하의 값을 입력했습니다.");
+        }
+    }
 }

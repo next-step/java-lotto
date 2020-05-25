@@ -17,7 +17,9 @@ public class LottoTicket {
             .mapToObj(LottoNumber::create)
             .collect(Collectors.toList());
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    private int lottoTicketRank;
 
     public LottoTicket() {
         makeLottoTicket();
@@ -26,17 +28,18 @@ public class LottoTicket {
     public LottoTicket(String inputValue) {
         String[] splitNumbers = inputValue.split(",");
         validateNumber(splitNumbers);
-
         for (String number : splitNumbers) {
             LottoNumber lottoNumber = LottoNumber.create(Integer.parseInt(number.trim()));
             lottoNumbers.add(lottoNumber);
         }
     }
 
-    public int matchWinningNumbers(LottoTicket lottoTicket) {
-        int matchResult = 0;
+    public void matchLottoTicketRank(LottoTicket lottoTicket) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber: lottoNumbers) {
 
-        return matchResult;
+        }
+        this.lottoTicketRank = matchCount;
     }
 
     public int size() {
@@ -45,6 +48,10 @@ public class LottoTicket {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getLottoTicketRank() {
+        return lottoTicketRank;
     }
 
     private void makeLottoTicket() {
@@ -57,14 +64,6 @@ public class LottoTicket {
 
         Collections.sort(newLottoNumbers);
         this.lottoNumbers =  newLottoNumbers;
-    }
-
-    private int isMatchNumber(LottoNumber lottoNumber) {
-//        List<Integer> collect = this.lottoNumbers.stream()
-//                .map(lottoNumber::getValue)
-//                .collect(Collectors.toList());
-//        return collect.contains(number) ? LOTTO_MATCH : LOTTO_NOT_MATCH;
-        return 0;
     }
 
     private void validateNumber(String[] splitNumbers) {
