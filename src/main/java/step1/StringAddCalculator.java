@@ -10,6 +10,7 @@ public class StringAddCalculator {
         if (!validateText(numberString)) {
             return 0;
         }
+        int result = Integer.parseInt(numberString);
 
         return addParsedNumberString(parseNumberString(numberString));
     }
