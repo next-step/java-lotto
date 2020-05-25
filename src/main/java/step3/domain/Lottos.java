@@ -23,7 +23,4 @@ public class Lottos {
     return lottos.stream();
   }
 
-  public long getLottoCount () {
-    return stream().count();
-  }
 }
