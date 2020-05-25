@@ -22,6 +22,15 @@ class StringAddCalculatorTest {
     }
 
     @Test
+    public void splitAndSum_문자하나_또는_음수하나() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("foo"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     public void splitAndSum_쉼표구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);

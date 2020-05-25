@@ -16,7 +16,7 @@ public class StringAddCalculator {
             return 0;
 
         if (StringUtils.isOnlyNumber(input))
-            return Integer.parseInt(input);
+            return textToNumber(input);
 
         return calculate(input);
     }
@@ -37,7 +37,11 @@ public class StringAddCalculator {
 
     private static int sum(String[] parsedData) {
         return Arrays.stream(parsedData)
-                .map(Integer::parseUnsignedInt)
+                .map(StringAddCalculator::textToNumber)
                 .reduce(0, Integer::sum);
+    }
+
+    private static int textToNumber(String text) {
+        return Integer.parseUnsignedInt(text);
     }
 }
