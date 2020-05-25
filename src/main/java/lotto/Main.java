@@ -18,7 +18,7 @@ public class Main {
         ResultView.printBuyingTickets(lottoTickets);
 
         int round = 1;
-        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumbers());
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(InputView.inputWinningNumbers()));
         lottoGame.add(round, winningLotto);
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);

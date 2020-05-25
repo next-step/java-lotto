@@ -22,7 +22,7 @@ public class LottoAnalyzerTest {
     @BeforeEach
     void setUp(){
         LottoGame lottoGame = new LottoGame();
-        lottoGame.add(round, WinningLotto.of(new int[]{1, 2, 3, 4, 5, 6}));
+        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         lottoAnalyzer = new LottoAnalyzer(lottoGame);
     }
@@ -64,10 +64,10 @@ public class LottoAnalyzerTest {
                 Arguments.of(
                         Arrays.asList(
                                 LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 2, 6)),
                                 LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 6, 6)),
-                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 3, 4))
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 6, 8)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 7, 8))
                         )
                 )
         );

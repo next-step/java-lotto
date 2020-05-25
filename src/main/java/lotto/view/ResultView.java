@@ -17,6 +17,7 @@ public class ResultView {
     private static final String PREFIX_REVENUE_MESSAGE = "총 수익율은 ";
     private static final String SUFFIX_REVENUE_MESSAGE = " 입니다.";
 
+
     private ResultView() {
         throw new AssertionError();
     }
@@ -38,7 +39,7 @@ public class ResultView {
     }
 
     private static void printLottoRankMap(Map<LottoRank, Long> lottoRankMap, LottoRank lottoRank) {
-        Long count = lottoRankMap.getOrDefault(lottoRank, 0l);
+        Long count = lottoRankMap.getOrDefault(lottoRank, LottoRank.BOOM.getPrice().longValue());
         String message = String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
         System.out.println(message);
     }

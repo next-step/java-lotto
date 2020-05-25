@@ -9,10 +9,10 @@ public class LottoNumber {
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
 
-    private final List<Integer> defaultLottoNumbers = generateLottoNumbers();
+    private static final List<Integer> defaultLottoNumbers;
 
-    private List<Integer> generateLottoNumbers() {
-        return IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX + 1)
+    static {
+        defaultLottoNumbers = IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX + 1)
                 .boxed()
                 .collect(Collectors.toList());
     }

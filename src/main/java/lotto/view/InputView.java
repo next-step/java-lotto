@@ -1,7 +1,11 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
@@ -25,14 +29,14 @@ public class InputView {
         return price / PRICE_UNIT;
     }
 
-    public static int[] inputWinningNumbers(){
+    public static List<Integer> inputWinningNumbers(){
         System.out.println(WINNING_NUMBER_MESSAGE);
 
         String winningNumbers = SCANNER.next();
 
         return Arrays.stream(winningNumbers.split(SEPARATOR))
                 .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 }

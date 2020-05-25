@@ -30,13 +30,6 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public static List<LottoRank> valuesWithOutBoom() {
-        return Arrays.stream(values())
-                .filter(lottoRank -> !lottoRank.equals(BOOM))
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-    }
-
     public int getMatchCount() {
         return matchCount;
     }
@@ -50,6 +43,13 @@ public enum LottoRank {
             return LottoRank.BOOM;
         }
         return RANK.get(matchCount);
+    }
+
+    public static List<LottoRank> valuesWithOutBoom() {
+        return Arrays.stream(values())
+                .filter(lottoRank -> !lottoRank.equals(BOOM))
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
     }
 
     public static Map<LottoRank, Long> convertLottoRankWithCount(List<LottoRank> lottoRanks) {
