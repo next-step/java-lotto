@@ -47,7 +47,7 @@ public class ResultView {
 
     private static void printPrizeResult(final LottoPrizeResult result, final Prize prize) {
         String format = PRIZE_RESULT_INFO_FORMAT;
-        if (prize.equals(Prize.SECOND)) {
+        if (Prize.SECOND.equals(prize)) {
             format = SECOND_PRIZE_RESULT_INFO_FORMAT;
         }
 
