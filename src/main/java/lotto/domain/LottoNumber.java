@@ -6,9 +6,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int value;
 
-    protected LottoNumber(int value) {
+    private LottoNumber(int value) {
         validate(value);
         this.value = value;
+    }
+
+    public static LottoNumber create(int value) {
+        return new LottoNumber(value);
     }
 
     private void validate(int value) {
@@ -19,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return this.value < lottoNumber.value ? -1 : 1;
+        return Integer.compare(value, lottoNumber.value);
     }
 
     public int getValue() {

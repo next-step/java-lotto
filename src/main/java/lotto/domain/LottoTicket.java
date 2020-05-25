@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
 
@@ -12,73 +13,63 @@ public class LottoTicket {
     private final static int LOTTO_MATCH  = 1;
     private final static int LOTTO_NOT_MATCH  = 0;
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final static List<LottoNumber> lottoAllNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::create)
+            .collect(Collectors.toList());
 
-    private LottoTicket() {
-        initLottoNumbers();
-        shuffleLottoTicket();
+    private List<LottoNumber> lottoNumbers;
+
+    public LottoTicket() {
+        makeLottoTicket();
     }
 
-    private void initLottoNumbers() {
-        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-    }
-
-    protected static LottoTicket create() {
-        return new LottoTicket();
-    }
-
-    public int matchWinningNumbers(String winningNumber) {
-        int matchResult = 0;
-        String[] splitNumbers = winningNumber.split(",");
+    public LottoTicket(String inputValue) {
+        String[] splitNumbers = inputValue.split(",");
         validateNumber(splitNumbers);
 
-        for (String splitNumber : splitNumbers) {
-            int number = getNumber(splitNumber);
-            matchResult += isMatchNumber(number);
+        for (String number : splitNumbers) {
+            LottoNumber lottoNumber = LottoNumber.create(Integer.parseInt(number.trim()));
+            lottoNumbers.add(lottoNumber);
         }
+    }
+
+    public int matchWinningNumbers(LottoTicket lottoTicket) {
+        int matchResult = 0;
+
         return matchResult;
-    }
-
-    private void validateNumber(String[] splitNumbers) {
-        if (splitNumbers.length != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException("6개의 당첨번호를 입력해야 합니다. ,(콤마) 구분");
-        }
-    }
-
-    private int isMatchNumber(int number) {
-        List<Integer> collect = this.lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList());
-        return collect.contains(number) ? LOTTO_MATCH : LOTTO_NOT_MATCH;
-    }
-
-    private static int getNumber(String splitNumber) {
-        return Integer.parseInt(splitNumber.trim());
-    }
-
-    private void shuffleLottoTicket() {
-        Collections.shuffle(this.lottoNumbers);
-
-        List<LottoNumber> newLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {
-               newLottoNumbers.add(this.lottoNumbers.get(i));
-        }
-
-        Collections.sort(newLottoNumbers);
-        this.lottoNumbers =  newLottoNumbers;
     }
 
     public int size() {
         return this.lottoNumbers.size();
     }
 
-    public void printLottoNumbers() {
-        List<Integer> collect = this.lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList());
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 
-        System.out.println(collect.toString());
+    private void makeLottoTicket() {
+        Collections.shuffle(lottoAllNumbers);
+
+        List<LottoNumber> newLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {
+            newLottoNumbers.add(lottoAllNumbers.get(i));
+        }
+
+        Collections.sort(newLottoNumbers);
+        this.lottoNumbers =  newLottoNumbers;
+    }
+
+    private int isMatchNumber(LottoNumber lottoNumber) {
+//        List<Integer> collect = this.lottoNumbers.stream()
+//                .map(lottoNumber::getValue)
+//                .collect(Collectors.toList());
+//        return collect.contains(number) ? LOTTO_MATCH : LOTTO_NOT_MATCH;
+        return 0;
+    }
+
+    private void validateNumber(String[] splitNumbers) {
+        if (splitNumbers.length != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("6개의 당첨번호를 입력해야 합니다. ,(콤마) 구분");
+        }
     }
 }
