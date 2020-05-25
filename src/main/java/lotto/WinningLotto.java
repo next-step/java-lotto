@@ -15,4 +15,11 @@ public class WinningLotto {
     public boolean contains(Integer number) {
         return lottoTicket.contains(number);
     }
+
+    public long containsNumberCount(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoNumbers()
+                .stream()
+                .filter(this::contains)
+                .count();
+    }
 }

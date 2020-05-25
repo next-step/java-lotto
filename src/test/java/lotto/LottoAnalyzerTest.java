@@ -31,16 +31,16 @@ public class LottoAnalyzerTest {
     @ParameterizedTest
     @DisplayName("로또 게임 1회차의 당첨 개수를 검증한다.")
     void 로또_게임_당첨_갯수_테스트(LottoTicket lotto, int expected) {
-        long count = lottoAnalyzer.matchingCount(round, lotto);
+        long count = lottoAnalyzer.countOfMatchingNumber(round, lotto);
         assertThat(count).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {2, 3, 4, 5, 6})
     @DisplayName("로또 게임에 존재하지 않는 라운드는 예외가 발생한다.")
-    void 로또_게임_matching_count_예외_테스트(int round) {
+    void 로또_게임_matching_number_count_예외_테스트(int round) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoAnalyzer.matchingCount(round, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))));
+                .isThrownBy(() -> lottoAnalyzer.countOfMatchingNumber(round, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))));
     }
 
     @ParameterizedTest
