@@ -1,7 +1,6 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -34,18 +33,15 @@ public class LottoAnalyzer {
                 .map(LottoRank::valueOf)
                 .filter(Objects::nonNull)
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
-                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
     public double calculateRevenueRate(int round, List<LottoTicket> lottoTickets) {
-        long sum = gradeTicket(round, lottoTickets)
+        BigDecimal sum = gradeTicket(round, lottoTickets)
                 .stream()
                 .map(LottoRank::getPrice)
-                .map(BigDecimal::longValue)
-                .reduce(Long::sum)
-                .get();
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return sum / (lottoTickets.size() * 1000.0);
+        return sum.divide(BigDecimal.valueOf(lottoTickets.size() * 1000.0)).doubleValue();
     }
 }

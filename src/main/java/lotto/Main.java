@@ -22,7 +22,9 @@ public class Main {
         lottoGame.add(round, winningLotto);
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);
-        ResultView.printLottoRanks(lottoAnalyzer.gradeTicket(round, lottoTickets));
+        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round, lottoTickets);
+
+        ResultView.printLottoRanks(LottoRank.convertLottoRankWithCount(lottoRanks));
         ResultView.printRevenueRate(lottoAnalyzer.calculateRevenueRate(round, lottoTickets));
 
     }

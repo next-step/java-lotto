@@ -1,10 +1,7 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,6 +33,7 @@ public enum LottoRank {
     public static List<LottoRank> valuesWithOutBoom() {
         return Arrays.stream(values())
                 .filter(lottoRank -> !lottoRank.equals(BOOM))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 

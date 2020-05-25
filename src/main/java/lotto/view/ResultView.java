@@ -30,20 +30,17 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public static void printLottoRanks(List<LottoRank> lottoRanks) {
+    public static void printLottoRanks(Map<LottoRank, Long> lottoRankMap) {
         System.out.println(STATISTICS_BANNER_MESSAGE);
 
-        Map<Integer, Long> lottoRankMap = lottoRanks.stream()
-                .collect(Collectors.groupingBy(LottoRank::getMatchCount, Collectors.counting()));
-
-        Arrays.stream(LottoRank.values())
-                .forEach(lottoRank -> printLottoRank(lottoRankMap, lottoRank));
+        LottoRank.valuesWithOutBoom()
+                .forEach(lottoRank -> printLottoRankMap(lottoRankMap, lottoRank));
     }
 
-    private static void printLottoRank(Map<Integer, Long> lottoRankMap, LottoRank lottoRank) {
-        Long matchCount = lottoRankMap.getOrDefault(lottoRank.getMatchCount(), 0l);
-        String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), matchCount);
-
+    private static void printLottoRankMap(Map<LottoRank, Long> lottoRankMap, LottoRank lottoRank) {
+        Long count = lottoRankMap.getOrDefault(lottoRank, 0l);
+        String message = String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
+        System.out.println(message);
     }
 
     public static void printRevenueRate(double revenueRate) {
