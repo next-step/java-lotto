@@ -50,4 +50,18 @@ public class StringAddCalculatorTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("구분자를 (,) 이외 (:)을 사용할 수 있다")
+    @ParameterizedTest
+    @CsvSource(value = {"1,1:2;4", "2,2:4;8", "3,3:6;12", "4,4:8;16"}, delimiterString = ";")
+    public void splitAndSum_쉼표_또는_콜론_구분자(String input, int expected){
+        // given
+        StringAddCalculator calculator = new StringAddCalculator();
+
+        // when`
+        int result = calculator.plus(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
