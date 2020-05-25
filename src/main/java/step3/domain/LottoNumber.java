@@ -1,10 +1,11 @@
 package step3.domain;
 import step3.execption.InvalidRangeNumberException;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
   public static final int MIN_VALUE = 1;
   public static final int MAX_VALUE = 45;
+
   private final int number;
 
   private LottoNumber (int number) {
@@ -20,14 +21,30 @@ public class LottoNumber {
     return new LottoNumber(number);
   }
 
-  public boolean equals(LottoNumber lottoNumber) {
-    return lottoNumber.number == number;
+  public int getNumber () {
+    return number;
+  }
+
+  @Override
+  public boolean equals(Object lottoNumber) {
+    if (this == lottoNumber) {
+      return true;
+    }
+    if (!(lottoNumber instanceof LottoNumber)) {
+      return false;
+    }
+    return number == ((LottoNumber)lottoNumber).number;
   }
 
   private static void validateNumbers (int number) throws RuntimeException {
     if (number < MIN_VALUE || number > MAX_VALUE) {
       throw new InvalidRangeNumberException();
     }
+  }
+
+  @Override
+  public int compareTo(LottoNumber lottoNumber) {
+    return number - lottoNumber.number;
   }
 
 }
