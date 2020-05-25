@@ -2,19 +2,20 @@ package step1;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(String text) {
-        if (!validateText(text)) {
+    public static int splitAndSum(String numberString) {
+        if (!validateText(numberString)) {
             return 0;
         }
+        int result = Integer.parseInt(numberString);
 
-        return -1;
+        return result;
     }
 
-    private static Boolean validateText(String text) {
-        if (text == null) {
+    private static Boolean validateText(String numberString) {
+        if (numberString == null) {
             return false;
         }
-        if (text.isEmpty()) {
+        if (numberString.isEmpty()) {
             return false;
         }
 
