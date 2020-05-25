@@ -1,28 +1,22 @@
 package com.cheolhyeonpark.calculator;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.cheolhyeonpark.calculator.domain.ExpressionGenerator;
 
 public class StringAddCalculator {
 
+    public static final String DEFAULT_DELIMITER = "[,|:]";
+    public static final String CUSTOM_DELIMITER_MATCHER = "//(.)\n(.*)";
+
     public static int splitAndSum(String input) {
-        if (input == null || input.length() < 1) {
+
+        if (isEmpty(input)) {
             return 0;
         }
-        if (input.contains("-")) {
-            throw new RuntimeException("There is negative number in your input.");
-        }
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            String[] numbers = matcher.group(2).split(customDelimiter);
-            return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
-        }
-        if (input.contains(",") || input.contains(":")) {
-            String[] numbers = input.split("[,|:]");
-            return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
-        }
-        return Integer.parseInt(input);
+
+        return new ExpressionGenerator().generate(input).getSum();
+    }
+
+    private static boolean isEmpty(String input) {
+        return input == null || input.length() < 1;
     }
 }
