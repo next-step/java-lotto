@@ -2,9 +2,9 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,5 +51,21 @@ class StringAddCalculatorTest {
         String formula = "//;\n" + lOperand + ";" + rOperand;
         int result = StringAddCalculator.splitAndSum(formula);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("Formula를 입력하면 입력한 숫자의 합을 반환한다")
+    @MethodSource("provideFormulaForSplitAndSum")
+    @ParameterizedTest
+    void splitAndSum_Formula_Sum(Formula formula, int expected) {
+        int result = StringAddCalculator.splitAndSum(formula);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideFormulaForSplitAndSum() {
+        return Stream.of(
+                Arguments.of(Formula.valueOf("1,2,3,4,5"), 15),
+                Arguments.of(Formula.valueOf("1:2:3:4:5"), 15),
+                Arguments.of(Formula.valueOf("//;\n1;2;3;4;5"), 15)
+        );
     }
 }
