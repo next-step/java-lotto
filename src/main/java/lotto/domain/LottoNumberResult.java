@@ -35,7 +35,7 @@ public class LottoNumberResult {
             throw new IllegalArgumentException();
         }
 
-        if (lottoWinnerNumber.getWinnerNumbers().size() != LottoNumbers.LOTTO_SIZE) {
+        if (lottoWinnerNumber.isValidWinnerNumber(LottoNumbers.LOTTO_SIZE)) {
             throw new IllegalArgumentException();
         }
     }
