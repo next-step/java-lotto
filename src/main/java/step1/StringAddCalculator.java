@@ -1,6 +1,6 @@
 package step1;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class StringAddCalculator {
 
@@ -13,9 +13,10 @@ public class StringAddCalculator {
             return Operand.ZERO_VALUE;
         }
 
-        Integer[] tokens = Splitter.split(formula);
+        List<Operand> operands = Splitter.split(formula);
 
-        return Arrays.stream(tokens)
+        return operands.stream()
+                .map(Operand::toInt)
                 .reduce(0, Integer::sum);
     }
 }

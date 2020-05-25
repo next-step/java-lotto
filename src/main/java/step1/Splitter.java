@@ -1,14 +1,16 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Splitter {
 
     private final static String SEPARATE_PATTERN = "[,:]";
 
-    public static Integer[] split(Formula formula) {
+    public static List<Operand> split(Formula formula) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(formula.get());
 
         String[] tokens;
@@ -20,7 +22,7 @@ public class Splitter {
         }
 
         return Arrays.stream(tokens)
-                .map(Integer::parseInt)
-                .toArray(Integer[]::new);
+                .map(Operand::valueOf)
+                .collect(Collectors.toList());
     }
 }
