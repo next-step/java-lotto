@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -19,7 +20,7 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator = new StringAddCalculator();
 
         // when
-        int result = calculator.plus(input);
+        int result = calculator.splitAndSum(input);
 
         // then
         assertThat(result).isEqualTo(0);
@@ -33,7 +34,7 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator = new StringAddCalculator();
 
         // when
-        int result = calculator.plus(input);
+        int result = calculator.splitAndSum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -47,7 +48,7 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator = new StringAddCalculator();
 
         // when
-        int result = calculator.plus(input);
+        int result = calculator.splitAndSum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -61,7 +62,7 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator = new StringAddCalculator();
 
         // when`
-        int result = calculator.plus(input);
+        int result = calculator.splitAndSum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -76,7 +77,20 @@ public class StringAddCalculatorTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> calculator.plus(input)
+                () -> calculator.splitAndSum(input)
         );
+    }
+
+    @DisplayName("(\\) (\n) 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    @Test
+    public void splitAndSum_custom_구분자(){
+        // given
+        StringAddCalculator calculator = new StringAddCalculator();
+
+        // when`
+        int result = calculator.splitAndSum("//;\n1;2;3");
+
+        // then
+        assertThat(result).isEqualTo(6);
     }
 }
