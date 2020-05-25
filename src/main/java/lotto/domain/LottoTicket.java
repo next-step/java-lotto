@@ -18,4 +18,10 @@ public class LottoTicket {
             throw new IllegalArgumentException(String.format("로또번호는 반드시 %d개여야 합니다", COUNT_OF_LOTTO_NUMBER));
         }
     }
+
+    public int getMatchCount(WinningNumbers winningNumbers) {
+        return Math.toIntExact(lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count());
+    }
 }
