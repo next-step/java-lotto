@@ -10,7 +10,14 @@ public class StringAddCalculator {
         return getSum(getSplitString(input));
     }
 
+    private void negativeOrNotNumberCheck(String input) {
+        if (input.matches("-[0-9]*|[\\D]*")) {
+            throw new IllegalArgumentException("음수를 제외한 숫자 외 다른 문자를 입력할 수 없습니다.");
+        }
+    }
+
     private String[] getSplitString(String input) {
+        negativeOrNotNumberCheck(input);
         return input.split("[,:]");
     }
 
