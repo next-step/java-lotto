@@ -1,7 +1,6 @@
 package calculator;
 
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,14 +21,10 @@ public class StringAddCalculator {
 
     private String[] getSplitString(String input) {
         negativeOrNotNumberCheck(input);
+
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        System.out.println(input);
-//        System.out.println(m.find());
         if (m.find()) {
             String customDelimiter = m.group(1);
-            System.out.println("customDelimiter : " + customDelimiter);
-            System.out.println("input : " + m.group(2));
-            System.out.println("split : " + Arrays.toString(m.group(2).split(customDelimiter)));
             return m.group(2).split(customDelimiter);
         }
         return input.split("[,:]");
