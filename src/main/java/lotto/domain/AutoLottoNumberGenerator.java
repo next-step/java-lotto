@@ -15,6 +15,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
         return ThreadLocalRandom.current().ints(LOTTO_NUMBER_BEGIN_BOUND, LOTTO_NUMBER_END_BOUND)
                 .distinct()
                 .limit(COUNT_OF_GENERATE_NUMBER)
+                .sorted()
                 .boxed()
                 .collect(toList());
     }
