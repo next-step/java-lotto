@@ -43,4 +43,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(formula);
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("//와 \n 문자 사이에 커스텀 구분자를 사용할 수 있다")
+    @CsvSource({"1,2,3", "2,3,5", "3,4,7"})
+    @ParameterizedTest
+    void splitAndSum_TwoNumberWithCustomDelimiter_Sum(String lOperand, String rOperand, int expected) {
+        String formula = "//;\n" + lOperand + ";" + rOperand;
+        int result = StringAddCalculator.splitAndSum(formula);
+        assertThat(result).isEqualTo(expected);
+    }
 }

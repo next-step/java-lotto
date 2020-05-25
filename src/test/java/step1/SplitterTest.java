@@ -12,23 +12,42 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SplitterTest {
 
     @DisplayName("콤마(,)또는 콜론(:) 구분자로 문자열을 분할하여 숫자 배열을 반환한다")
-    @MethodSource("provideStringsForSplitter")
+    @MethodSource("provideStringsForDelimiter")
     @ParameterizedTest
-    void split_TwoNumberWithComma_Tokens(String formula, Integer expected1, Integer expected2) {
+    void split_NumberWithDelimiter_Tokens(String formula, Integer expectedFirst, Integer expectedSecond) {
         Integer[] tokens = Splitter.split(Formula.valueOf(formula));
 
         assertThat(tokens).hasSize(2);
-        assertThat(tokens[0]).isEqualTo(expected1);
-        assertThat(tokens[1]).isEqualTo(expected2);
+        assertThat(tokens[0]).isEqualTo(expectedFirst);
+        assertThat(tokens[1]).isEqualTo(expectedSecond);
     }
 
-    private static Stream<Arguments> provideStringsForSplitter() {
+    private static Stream<Arguments> provideStringsForDelimiter() {
         return Stream.of(
                 Arguments.of("1,2", 1, 2),
                 Arguments.of("4,5", 4, 5),
                 Arguments.of("3,1", 3, 1),
                 Arguments.of("5:5", 5, 5),
                 Arguments.of("2:9", 2, 9)
+        );
+    }
+
+    @DisplayName("// 과 \n 사이에 있는 커스텀 구분자로 문자열을 분할하여 숫자 배열을 반환한다")
+    @MethodSource("provideStringsForCustomDelimiter")
+    @ParameterizedTest
+    void split_NumberWithCustomDelimiter_Tokens(String formula, Integer expectedFirst, Integer expectedSecond) {
+        Integer[] tokens = Splitter.split(Formula.valueOf(formula));
+
+        assertThat(tokens).hasSize(2);
+        assertThat(tokens[0]).isEqualTo(expectedFirst);
+        assertThat(tokens[1]).isEqualTo(expectedSecond);
+    }
+
+    private static Stream<Arguments> provideStringsForCustomDelimiter() {
+        return Stream.of(
+                Arguments.of("//*\n1*2", 1, 2),
+                Arguments.of("//;\n4;5", 4, 5),
+                Arguments.of("//+\n3+1", 3, 1)
         );
     }
 }
