@@ -19,4 +19,4 @@
 - [ ] Rank
   - [X] Rank valueOf Method Test 개발
 - [ ] Lotto
-- [ ] LottoGame
+- [ ] LottoGameLottoController

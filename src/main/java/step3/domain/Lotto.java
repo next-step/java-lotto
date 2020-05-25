@@ -1,24 +1,25 @@
 package step3.domain;
 
-import step3.execption.LottoCountException;
-import step3.execption.LottoReduplicateException;
+import step2.exception.InvalidRangeNumberException;
+import step2.exception.LottoCountException;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 public class Lotto {
 
-  private static final List<Integer> numbers = new ArrayList<>();
-  static {
-    for (int i = 1; i < 51; i++) numbers.add(i);
-  }
+  public static final long SIZE = 6L;
+  public static final int MIN_VALUE = 1;
+  public static final int MAX_VALUE = 45;
+  public static final long PRICE = 1000L;
 
-  private final List<Integer> lottoNumbers;
+  private final SortedSet<Integer> lottoNumbers;
 
-  private Lotto (List<Integer> lottoNumbers) throws RuntimeException {
+  private Lotto (SortedSet<Integer> lottoNumbers) {
     validateCount(lottoNumbers);
-    validateReduplicate(lottoNumbers);
+    validateNumbers(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
@@ -26,37 +27,30 @@ public class Lotto {
     return lottoNumbers.stream();
   }
 
-  public boolean hasBonus (int bonusNumber) {
-    return stream().filter(v -> v == bonusNumber).count() == 1;
+  public boolean has (int number) {
+    return lottoNumbers.contains(number);
   }
 
-  public static Lotto of (String lottoNumbers) {
-    return Lotto.of(
-      Arrays.stream(lottoNumbers.split(","))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList())
-    );
-  }
-
-  public static Lotto of () {
-    Collections.shuffle(Lotto.numbers);
-    return of(Lotto.numbers.stream().limit(6L).collect(Collectors.toList()));
+  public long sameCount (Lotto lotto) {
+    return stream().filter(lotto::has).count();
   }
 
   public static Lotto of (List<Integer> lottoNumber) {
-    lottoNumber.sort(Comparator.comparingInt(a -> a));
-    return new Lotto(lottoNumber);
+    return new Lotto(new TreeSet<>(lottoNumber));
   }
 
-  private static void validateCount (List<Integer> lottoNumbers) throws RuntimeException {
-    if (lottoNumbers.size() != 6) {
+  private static void validateCount (SortedSet<Integer> lottoNumbers) throws RuntimeException {
+    if (lottoNumbers.size() != SIZE) {
       throw new LottoCountException();
     }
   }
 
-  private static void validateReduplicate (List<Integer> lottoNumbers) throws RuntimeException {
-    if (new HashSet<Integer>(lottoNumbers).size() != lottoNumbers.size()) {
-      throw new LottoReduplicateException();
-    }
+  private static void validateNumbers (SortedSet<Integer> lottoNumbers) throws RuntimeException {
+    lottoNumbers
+      .forEach(number -> {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
+          throw new InvalidRangeNumberException();
+        }
+      });
   }
 }
