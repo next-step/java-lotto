@@ -4,11 +4,10 @@ package calculator;
 public class StringAddCalculator {
 
     public static int sum(String text) {
-        String[] operands = OperandExtractor.getOperand(text);
-        int[] intOperands = OperandExtractor.valueOf(operands);
+        PositiveNumber[] operands = OperandExtractor.getOperand(text);
         int sum = 0;
-        for(int operand : intOperands) {
-            sum += operand;
+        for(PositiveNumber operand : operands) {
+            sum += operand.getNumber();
         }
         return sum;
     }

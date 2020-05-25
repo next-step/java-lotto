@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.util.CommonUtil;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,18 +11,23 @@ public class OperandExtractor {
     private final static String DEFAULT_SEPARATOR = ",|:";
     private final static String CUSTOM_SEPARATOR_PATTERN = "//(.)\n(.*)";
 
-    public static String[] getOperand(String formula) {
+    public static PositiveNumber[] getOperand(String formula) {
         try {
             CommonUtil.validateNullEmpty(formula, "argument is null");
             String[] operands = getOperandByCustomSeparator(formula);
             if(operands == null) {
                 operands = formula.split(DEFAULT_SEPARATOR);
             }
-            return operands;
+            return valuesOf(operands);
         }
         catch (IllegalArgumentException e) {
-            return new String[] {"0"};
+            return new PositiveNumber[] {PositiveNumber.of(formula)};
         }
+    }
+
+    private static PositiveNumber[] valuesOf(String[] operandStrings) {
+        return Arrays.stream(operandStrings)
+                .map(PositiveNumber::of).toArray(PositiveNumber[]::new);
     }
 
     private static String[] getOperandByCustomSeparator(String text) {
@@ -33,21 +39,4 @@ public class OperandExtractor {
         }
         return operands;
     }
-
-    public static int[] valueOf(String[] operands) {
-        int[] values = new int[operands.length];
-        for (int i = 0 ; i < operands.length ; i++) {
-            values[i] = getPositiveOperand(operands[i]);
-        }
-        return values;
-    }
-
-    private static int getPositiveOperand(String number) throws RuntimeException {
-        int returnValue = Integer.parseInt(number);
-        if(returnValue < 0) {
-            throw new RuntimeException(number + "is negative!!");
-        }
-        return returnValue;
-    }
-
 }
