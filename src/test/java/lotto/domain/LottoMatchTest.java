@@ -15,23 +15,24 @@ class LottoMatchTest {
     @DisplayName("일치 개수로 로또 일치 열거를 찾을 수 있다.")
     @ParameterizedTest
     @MethodSource("provideStringsForLottoMatch")
-    void canFindLottoMatchByCount(int count, LottoMatch lottoMatch) {
-        assertThat(LottoMatch.findByCount(count)).isEqualTo(lottoMatch);
+    void canFindLottoMatchByCount(int count, boolean isMatchBonus, LottoMatch lottoMatch) {
+        assertThat(LottoMatch.findByCount(count, isMatchBonus)).isEqualTo(lottoMatch);
     }
 
     private static Stream<Arguments> provideStringsForLottoMatch() {
         return Stream.of(
-                Arguments.of("3", LottoMatch.THREE),
-                Arguments.of("4", LottoMatch.FOUR),
-                Arguments.of("5", LottoMatch.FIVE),
-                Arguments.of("6", LottoMatch.SIX)
+                Arguments.of("3", false, LottoMatch.THREE),
+                Arguments.of("4", false, LottoMatch.FOUR),
+                Arguments.of("5", false, LottoMatch.FIVE),
+                Arguments.of("5", true, LottoMatch.FIVE_BONUS),
+                Arguments.of("6", false, LottoMatch.SIX)
         );
     }
 
     @DisplayName("유효하지 않은 개수로 로또 일치 열거를 찾을 수 없다.")
     @Test
     void canNotFindLottoMatchByInvalidCount() {
-        assertThat(LottoMatch.findByCount(1)).isNull();
+        assertThat(LottoMatch.findByCount(1, false)).isNull();
     }
 
     @DisplayName("로또 일치 열거는 일치 개수를 얻을 수 있다.")
@@ -65,5 +66,22 @@ class LottoMatchTest {
     @Test
     void canGetMinMatchCount() {
         assertThat(LottoMatch.getMinMatchCount()).isEqualTo(3);
+    }
+
+    @DisplayName("보너스 문장을 얻을 수 있다.")
+    @ParameterizedTest
+    @MethodSource("provideLottoMatch")
+    void canGetBonusContext(LottoMatch lottoMatch, String result) {
+        assertThat(lottoMatch.getBonusContext()).isEqualTo(result);
+    }
+
+    private static Stream<Arguments> provideLottoMatch() {
+        return Stream.of(
+                Arguments.of(LottoMatch.THREE, " "),
+                Arguments.of(LottoMatch.FOUR, " "),
+                Arguments.of(LottoMatch.FIVE, " "),
+                Arguments.of(LottoMatch.FIVE_BONUS, ", 보너스 볼 일치"),
+                Arguments.of(LottoMatch.SIX, " ")
+        );
     }
 }

@@ -16,12 +16,13 @@ public class Main {
 
         ResultView.printPurchaseCount(lottoGame.getPurchaseCount());
 
-        List<LottoNumbers> lottoNumbersGroup = lottoGame.createLottoNumbers();
+        List<LottoNumbers> lottoNumbersGroup = lottoGame.createAutoLottoNumbers();
         ResultView.printLottoNumbers(lottoNumbersGroup);
 
         LottoNumbers lastWinLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
+        int bonusNumber = InputView.getBonusNumber(lastWinLottoNumbers);
 
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumbers);
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumbers, bonusNumber);
         ResultView.printMatchResult(lottoMatchResult);
 
         double profitRate = lottoMatchResult.calculateProfitRate(purchaseAmount);

@@ -45,8 +45,9 @@ public final class ResultView {
     }
 
     private static String getMatchInfoMessage(LottoMatch lottoMatch, int matchCount) {
-        return String.format("%d개 일치 (%d원)- %d개",
+        return String.format("%d개 일치%s(%d원)- %d개",
                 lottoMatch.getCount(),
+                lottoMatch.getBonusContext(),
                 lottoMatch.getAmount(),
                 matchCount);
     }

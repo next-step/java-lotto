@@ -7,6 +7,7 @@ public enum LottoMatch {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
+    FIVE_BONUS(5, 30_000_000),
     SIX(6, 2_000_000_000);
 
     private int count;
@@ -29,11 +30,19 @@ public enum LottoMatch {
         return this.amount * matchCount;
     }
 
+    public String getBonusContext() {
+        return this == FIVE_BONUS ? ", 보너스 볼 일치" : " ";
+    }
+
     public static int getMinMatchCount() {
         return THREE.count;
     }
 
-    public static LottoMatch findByCount(int count) {
+    public static LottoMatch findByCount(int count, boolean isMatchBonus) {
+        if (count == FIVE_BONUS.count && isMatchBonus) {
+            return FIVE_BONUS;
+        }
+
         return Arrays.stream(values())
                 .filter(lottoMatch -> lottoMatch.count == count)
                 .findFirst()

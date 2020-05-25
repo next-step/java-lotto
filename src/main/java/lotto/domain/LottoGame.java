@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,7 +10,11 @@ public class LottoGame {
     private static final int LOTTO_SALE_PRICE = 1000;
 
     private final int purchaseCount;
-    private List<LottoNumbers> lottoNumbersGroup;
+    private List<LottoNumbers> lottoNumbersGroup = new ArrayList<>();
+
+    public LottoGame() {
+        this.purchaseCount = 0;
+    }
 
     public LottoGame(int purchaseAmount) {
         validateLottoGame(purchaseAmount);
@@ -27,18 +32,36 @@ public class LottoGame {
         return this.purchaseCount;
     }
 
-    public List<LottoNumbers> createLottoNumbers() {
-        this.lottoNumbersGroup = Stream.generate(LottoNumbersFactory::createLottoNumbers)
+    public List<LottoNumbers> createAutoLottoNumbers() {
+        List<LottoNumbers> autoLottoNumbers = Stream.generate(LottoNumbersFactory::createAutoLottoNumbers)
                 .limit(this.purchaseCount)
                 .collect(Collectors.toList());
-        return this.lottoNumbersGroup;
+        this.lottoNumbersGroup.addAll(autoLottoNumbers);
+
+        return copyLottoNumbers(autoLottoNumbers);
     }
 
-    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers) {
+    private List<LottoNumbers> copyLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumbers::clone)
+                .collect(Collectors.toList());
+    }
+
+    public List<LottoNumbers> createManualLottoNumbers(List<String> manualNumbers) {
+        List<LottoNumbers> manualLottoNumbers = manualNumbers.stream()
+                .map(LottoNumbersFactory::createManualLottoNumbers)
+                .collect(Collectors.toList());
+        this.lottoNumbersGroup.addAll(manualLottoNumbers);
+
+        return copyLottoNumbers(manualLottoNumbers);
+    }
+
+    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers, int bonusNumber) {
         LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance();
 
         this.lottoNumbersGroup.forEach(lottoNumbers -> {
-            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers));
+            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers),
+                    lottoNumbers.isMatchNumber(bonusNumber));
             lottoMatchResult.increaseMatchCount(lottoMatch);
         });
 
