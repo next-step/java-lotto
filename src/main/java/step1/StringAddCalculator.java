@@ -1,6 +1,7 @@
 package step1;
 
 import static step1.Constants.COMMA;
+import static step1.Constants.COLON;
 
 public class StringAddCalculator {
 
@@ -27,7 +28,8 @@ public class StringAddCalculator {
     }
 
     private static String[] parseNumberString(String numberString) {
-        String[] numbers = numberString.split(COMMA);
+        String tokenPattern = COMMA + "|" + COLON;
+        String[] numbers = numberString.split(tokenPattern);
         return numbers;
     }
 
