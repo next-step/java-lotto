@@ -7,7 +7,17 @@ public class StringAddParser {
     private static final String DEFAULT_REGEX = ",|:";
     private static final String CUSTOM_REGEX =  "//(.)\n(.*)";
 
-    public static String[] parsing(String text) {
+    private final String text;
+
+    private StringAddParser(String text) {
+        this.text = text;
+    }
+
+    public static StringAddParser create(String text) {
+        return new StringAddParser(text);
+    }
+
+    public String[] parsing() {
         Matcher m = Pattern.compile(CUSTOM_REGEX).matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -17,7 +27,7 @@ public class StringAddParser {
         return parsingDefault(text);
     }
 
-    private static String[] parsingDefault(String data) {
+    private String[] parsingDefault(String data) {
         return data.split(DEFAULT_REGEX);
     }
 }

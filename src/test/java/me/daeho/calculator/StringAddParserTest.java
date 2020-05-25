@@ -10,7 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class StringAddParserTest {
     @Test
     public void parsing_쉼표() {
-        String[] result = StringAddParser.parsing("1,2");
+        String[] result = StringAddParser
+                .create("1,2")
+                .parsing();
 
         assertThat(result.length).isEqualTo(2);
         assertAll(() -> {
@@ -21,7 +23,9 @@ class StringAddParserTest {
 
     @Test
     public void parsing_콤마_또는_쉼표() {
-        String[] result = StringAddParser.parsing("1,2:3");
+        String[] result = StringAddParser
+                .create("1,2:3")
+                .parsing();
 
         assertThat(result.length).isEqualTo(3);
         assertAll(() -> {
@@ -33,7 +37,9 @@ class StringAddParserTest {
 
     @Test
     public void parsing_custom_구분자() {
-        String[] result = StringAddParser.parsing("//;\n1;2;3");
+        String[] result = StringAddParser
+                .create("//;\n1;2;3")
+                .parsing();
 
         assertThat(result.length).isEqualTo(3);
         assertAll(() -> {
@@ -45,7 +51,9 @@ class StringAddParserTest {
 
     @Test
     public void parsing_문자하나() {
-        String[] result = StringAddParser.parsing("a");
+        String[] result = StringAddParser
+                .create("a")
+                .parsing();
 
         assertThat(result.length).isEqualTo(1);
         assertThat(result[0]).isEqualTo("a");
@@ -53,7 +61,9 @@ class StringAddParserTest {
 
     @Test
     public void parsing_음수() {
-        String[] result = StringAddParser.parsing("-1,2:-30");
+        String[] result = StringAddParser
+                .create("-1,2:-30")
+                .parsing();
 
         assertThat(result.length).isEqualTo(3);
         assertAll(() -> {

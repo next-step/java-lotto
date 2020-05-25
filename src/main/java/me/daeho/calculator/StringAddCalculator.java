@@ -1,16 +1,16 @@
 package me.daeho.calculator;
 
-import me.daeho.utils.IntegerUtils;
+import me.daeho.utils.StringUtils;
 
 import java.util.Arrays;
 
 
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        if (IntegerUtils.isEmpty(input))
+        if (StringUtils.isEmpty(input))
             return 0;
 
-        return sum(StringAddParser.parsing(input));
+        return sum(StringAddParser.create(input).parsing());
     }
 
     private static int sum(String[] parsedData) {
