@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.matcher.LottoMatcher;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,14 +13,14 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumbersResultTest {
+class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumberAndWinnerNumbers")
     @DisplayName("로또 번호 당첨 결과 테스트")
     void calculateLottoMatchNumber(List<Lotto> lotto, List<Lotto> winners, int matchCount, int bonusNumber, boolean matchBonusBall) {
-        LottoNumberResult lottoNumberResult = this.createLottoNumbers(lotto);
-        LottoMatcher lottoMatcher = lottoNumberResult.findLottoMatchResult(createLottoWinnerNumbers(winners, bonusNumber));
+        LottoTicket lottoTicket = this.createLottoNumbers(lotto);
+        LottoMatcher lottoMatcher = lottoTicket.findLottoMatchResult(createLottoWinnerNumbers(winners, bonusNumber));
         assertThat(lottoMatcher.getMatchingCount()).isEqualTo(matchCount);
         assertThat(lottoMatcher.isMatchBonusBall()).isEqualTo(matchBonusBall);
     }
@@ -33,8 +34,8 @@ class LottoNumbersResultTest {
         );
     }
 
-    private LottoNumberResult createLottoNumbers(List<Lotto> lottos) {
-        return new LottoNumberResult(lottos);
+    private LottoTicket createLottoNumbers(List<Lotto> lottos) {
+        return new LottoTicket(lottos);
     }
 
     private static List<Lotto> createLottoNumber(List<Integer> numbers) {

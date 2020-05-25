@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.matcher;
+
+import lotto.domain.LottoNumbers;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

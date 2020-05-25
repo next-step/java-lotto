@@ -1,13 +1,15 @@
 package lotto.domain;
 
+import lotto.matcher.LottoMatcher;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumberResult {
+public class LottoTicket {
     private final List<Lotto> lotto;
 
-    public LottoNumberResult(List<Lotto> lotto) {
+    public LottoTicket(List<Lotto> lotto) {
         this.lotto = Collections.unmodifiableList(lotto);
     }
 
