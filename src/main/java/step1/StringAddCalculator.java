@@ -12,7 +12,9 @@ public class StringAddCalculator {
         }
         int result = Integer.parseInt(numberString);
 
-        return addParsedNumberString(parseNumberString(numberString));
+        int addParsedNumberString = addParsedNumberString(parseNumberString(numberString));
+
+        return addParsedNumberString;
     }
 
     private static Boolean validateText(String numberString) {
