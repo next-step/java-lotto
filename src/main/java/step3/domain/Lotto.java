@@ -28,11 +28,13 @@ public class Lotto {
   }
 
   public long sameCount (Lotto lotto) {
-    return stream().filter(lotto::has).count();
+    SortedSet<LottoNumber> temp = new TreeSet<>(lottoNumbers);
+    temp.retainAll(lotto.lottoNumbers);
+    return temp.size();
   }
 
-  public static Lotto of (List<LottoNumber> lottoNumber) {
-    return new Lotto(new TreeSet<>(lottoNumber));
+  public static Lotto of (List<LottoNumber> lottoNumbers) {
+    return new Lotto(new TreeSet<>(lottoNumbers));
   }
 
   private static void validateCount (SortedSet<LottoNumber> lottoNumbers) throws RuntimeException {
