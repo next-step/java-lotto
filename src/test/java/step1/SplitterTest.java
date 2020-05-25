@@ -15,7 +15,7 @@ public class SplitterTest {
     @MethodSource("provideStringsForSplitter")
     @ParameterizedTest
     void split_TwoNumberWithComma_Tokens(String formula, Integer expected1, Integer expected2) {
-        Integer[] tokens = Splitter.split(formula);
+        Integer[] tokens = Splitter.split(Formula.valueOf(formula));
 
         assertThat(tokens).hasSize(2);
         assertThat(tokens[0]).isEqualTo(expected1);
