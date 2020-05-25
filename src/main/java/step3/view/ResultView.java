@@ -19,7 +19,7 @@ public class ResultView {
   private ResultView () { }
 
   public void printLottoList(Lottos lottos) {
-    final long lottoCount = lottos.getLottoCount();
+    final long lottoCount = lottos.stream().count();
     final String lottoList = lottos.stream()
                                    .map(ResultView::lottoToString)
                                    .collect(joining("\n"));

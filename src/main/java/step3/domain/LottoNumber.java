@@ -3,6 +3,8 @@ import step3.execption.InvalidRangeNumberException;
 
 public class LottoNumber {
 
+  public static final int MIN_VALUE = 1;
+  public static final int MAX_VALUE = 45;
   private final int number;
 
   private LottoNumber (int number) {
@@ -23,7 +25,7 @@ public class LottoNumber {
   }
 
   private static void validateNumbers (int number) throws RuntimeException {
-    if (number < Lotto.MIN_VALUE || number > Lotto.MAX_VALUE) {
+    if (number < MIN_VALUE || number > MAX_VALUE) {
       throw new InvalidRangeNumberException();
     }
   }

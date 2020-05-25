@@ -12,9 +12,11 @@ public class LottoGenerator {
 
   private LottoGenerator() {}
 
-  private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(Lotto.MIN_VALUE, Lotto.MAX_VALUE)
-                                                              .boxed()
-                                                              .collect(toList());
+  private static final List<LottoNumber>
+          LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
+                                   .boxed()
+                                   .map(LottoNumber::of)
+                                   .collect(toList());
 
   public static Lotto generateLotto () {
     shuffle(LOTTO_NUMBERS);
@@ -25,7 +27,7 @@ public class LottoGenerator {
 
   public static Lotto generateLotto (String lottoNumbers) {
     return Arrays.stream(lottoNumbers.split(","))
-                 .map(Integer::parseInt)
+                 .map(LottoNumber::of)
                  .collect(collectingAndThen(toList(), Lotto::of));
   }
 

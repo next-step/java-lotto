@@ -1,6 +1,5 @@
 package step3.domain;
 
-import step2.exception.InvalidRangeNumberException;
 import step2.exception.LottoCountException;
 
 import java.util.List;
@@ -11,23 +10,20 @@ import java.util.stream.Stream;
 public class Lotto {
 
   public static final long SIZE = 6L;
-  public static final int MIN_VALUE = 1;
-  public static final int MAX_VALUE = 45;
   public static final long PRICE = 1000L;
 
-  private final SortedSet<Integer> lottoNumbers;
+  private final SortedSet<LottoNumber> lottoNumbers;
 
-  private Lotto (SortedSet<Integer> lottoNumbers) {
+  private Lotto (SortedSet<LottoNumber> lottoNumbers) {
     validateCount(lottoNumbers);
-    validateNumbers(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
-  public Stream<Integer> stream () {
+  public Stream<LottoNumber> stream () {
     return lottoNumbers.stream();
   }
 
-  public boolean has (int number) {
+  public boolean has (LottoNumber number) {
     return lottoNumbers.contains(number);
   }
 
@@ -35,22 +31,13 @@ public class Lotto {
     return stream().filter(lotto::has).count();
   }
 
-  public static Lotto of (List<Integer> lottoNumber) {
+  public static Lotto of (List<LottoNumber> lottoNumber) {
     return new Lotto(new TreeSet<>(lottoNumber));
   }
 
-  private static void validateCount (SortedSet<Integer> lottoNumbers) throws RuntimeException {
+  private static void validateCount (SortedSet<LottoNumber> lottoNumbers) throws RuntimeException {
     if (lottoNumbers.size() != SIZE) {
       throw new LottoCountException();
     }
-  }
-
-  private static void validateNumbers (SortedSet<Integer> lottoNumbers) throws RuntimeException {
-    lottoNumbers
-      .forEach(number -> {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
-          throw new InvalidRangeNumberException();
-        }
-      });
   }
 }

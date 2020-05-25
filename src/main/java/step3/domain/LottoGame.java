@@ -4,15 +4,15 @@ public class LottoGame {
 
   private final Lotto winningLotto;
   private final Lottos lottos;
-  private final int bonusNumber;
+  private final LottoNumber bonusNumber;
 
-  public LottoGame(Lottos lottos, Lotto winningLotto, int bonusNumber) {
+  public LottoGame(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
     this.lottos = lottos;
     this.winningLotto = winningLotto;
     this.bonusNumber = bonusNumber;
   }
 
-  public static LottoGame of (Lottos lottos, Lotto winningLotto, int bonusNumber) {
+  public static LottoGame of (Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
     return new LottoGame(lottos, winningLotto, bonusNumber);
   }
 

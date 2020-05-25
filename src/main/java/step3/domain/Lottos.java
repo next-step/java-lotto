@@ -5,25 +5,25 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-  private final List<Lotto> lottoList;
+  private final List<Lotto> lottos;
 
-  private Lottos(List<Lotto> lottoList) {
-    this.lottoList = lottoList;
+  private Lottos(List<Lotto> lottos) {
+    this.lottos = lottos;
   }
 
-  public static Lottos of (List<Lotto> lottoList) {
-    return new Lottos(lottoList);
+  public static Lottos of (List<Lotto> lottos) {
+    return new Lottos(lottos);
   }
 
   public long getPrice() {
-    return lottoList.size() * Lotto.PRICE;
+    return lottos.size() * Lotto.PRICE;
   }
 
-  private Stream<Lotto> stream () {
-    return lottoList.stream();
+  public Stream<Lotto> stream () {
+    return lottos.stream();
   }
 
-  private long getLottoCount () {
-    return lottoList.stream().count();
+  public long getLottoCount () {
+    return stream().count();
   }
 }
