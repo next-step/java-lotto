@@ -17,4 +17,25 @@ class StringUtilsTest {
         assertTrue(StringUtils.isEmpty(""));
         assertTrue(StringUtils.isEmpty(" "));
     }
+
+
+    @Test
+    void isOnlyNumber_textAndNumber() {
+        assertFalse(StringUtils.isOnlyNumber("a123"));
+    }
+
+    @Test
+    void isOnlyNumber_text() {
+        assertFalse(StringUtils.isOnlyNumber("foo"));
+    }
+
+
+    @Test
+    void isOnlyNumber_number() {
+        assertTrue(StringUtils.isOnlyNumber("123"));
+    }
 }
+
+
+
+
