@@ -1,7 +1,9 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,6 +33,12 @@ public enum LottoRank {
         this.price = price;
     }
 
+    public static List<LottoRank> valuesWithOutBoom() {
+        return Arrays.stream(values())
+                .filter(lottoRank -> !lottoRank.equals(BOOM))
+                .collect(Collectors.toList());
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
@@ -40,9 +48,15 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchCount) {
-        if(matchCount < FOURTH.matchCount) {
+        if (matchCount < FOURTH.matchCount) {
             return LottoRank.BOOM;
         }
         return RANK.get(matchCount);
+    }
+
+    public static Map<LottoRank, Long> convertLottoRankWithCount(List<LottoRank> lottoRanks) {
+        return lottoRanks.stream()
+                .filter(lottoRank -> !lottoRank.equals(BOOM))
+                .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
     }
 }
