@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.util.StringUtils;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +12,7 @@ public final class NumbersFactory {
 
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 46;
+    private static final String DELIMITER_PATTERN = ", ";
     private static final List<Integer> NUMBERS_REPOSITORY = initializeNumbersRepository();
 
     private NumbersFactory() {
@@ -25,6 +29,12 @@ public final class NumbersFactory {
 
     private static void shuffleNumbers() {
         Collections.shuffle(NUMBERS_REPOSITORY);
+    }
+
+    public static List<Integer> createManualNumbers(String manualNumbers) {
+        return Arrays.stream(manualNumbers.split(DELIMITER_PATTERN))
+                .map(StringUtils::toInt)
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> initializeNumbersRepository() {
