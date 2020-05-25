@@ -37,7 +37,7 @@ public class StringAddCalculator {
 
     private static int sum(String[] parsedData) {
         return Arrays.stream(parsedData)
-                .map(Integer::parseInt)
+                .map(Integer::parseUnsignedInt)
                 .reduce(0, Integer::sum);
     }
 }
