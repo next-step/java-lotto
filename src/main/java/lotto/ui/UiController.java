@@ -1,11 +1,12 @@
 package lotto.ui;
 
-import lotto.application.LottoService;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
+import lotto.domain.rank.RankCalculator;
 import lotto.domain.rank.Ranks;
 import lotto.domain.shop.Money;
+import lotto.domain.shop.Shop;
 
 import java.util.Scanner;
 
@@ -21,8 +22,7 @@ public class UiController {
         buyManualInputView.getInputValues(manualValuesScanner);
         LottoTickets manualLottoTickets = buyManualInputView.convertToManualLottoTickets();
 
-        LottoService lottoService = new LottoService();
-        LottoTickets lottoTickets = lottoService.buyLottoTicketsCombine(manualLottoTickets, boughtMoney);
+        LottoTickets lottoTickets = Shop.sellLottoTicketsAutoAndManual(manualLottoTickets, boughtMoney);
 
         BuyOutputView buyOutputView = new BuyOutputView(lottoTickets,
                 buyManualInputView.getManualLottoCount(), boughtMoney);
@@ -32,8 +32,8 @@ public class UiController {
         RankInputView rankInputView = RankInputView.getThisWeekWinningInfo(rankInputScanner);
         LottoTicket winTicket = rankInputView.convertToWinTicket();
         LottoNumber winBonusNumber = rankInputView.getWinBonusNumber();
-        
-        Ranks ranks = lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets);
+
+        Ranks ranks = lottoTickets.calculateRanks(new RankCalculator(winTicket, winBonusNumber));
         RankOutputView rankOutputView = new RankOutputView(ranks);
         rankOutputView.printRankStatistics(boughtMoney);
     }
