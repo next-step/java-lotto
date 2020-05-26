@@ -17,5 +17,6 @@ public class Main {
         LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
         StatisticsBoard statisticsBoard = new StatisticsBoard(lotteryMachine
                 .findWinnerTicketsMap(lotteryTicketsGroup, lastWinnerTicket));
+        ResultView.printLotteryStatistics(statisticsBoard);
     }
 }

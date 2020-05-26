@@ -14,11 +14,11 @@ public class InputView {
 
     public static long getPurchasePrice() {
         System.out.println(ViewMessages.INSTRUCTION_PURCHASE_PRICE);
-        return scanner.nextLong();
+        return Long.parseLong(scanner.nextLine());
     }
 
     public static LotteryTicket getLastWinnerTicket() {
         System.out.println(ViewMessages.INSTRUCTION_LOTTERY_WINNER_NUMBERS);
-        return new LotteryTicket(StringParser.parseString(scanner.next()));
+        return new LotteryTicket(StringParser.parseString(scanner.nextLine()));
     }
 }

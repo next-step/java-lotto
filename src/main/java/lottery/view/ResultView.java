@@ -1,7 +1,9 @@
 package lottery.view;
 
 import lottery.domain.LotteryMachine;
+import lottery.domain.LotteryRanks;
 import lottery.domain.LotteryTicketsGroup;
+import lottery.domain.StatisticsBoard;
 
 import java.util.List;
 
@@ -19,6 +21,14 @@ public class ResultView {
     public static void printLotteryTicketsNumbers(LotteryTicketsGroup lotteryTicketsGroup) {
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
+    }
+
+    public static void printLotteryStatistics(StatisticsBoard statisticsBoard) {
+        LotteryRanks[] lotteryRanks = LotteryRanks.values();
+        for (LotteryRanks lotteryRank : lotteryRanks) {
+            System.out.println(lotteryRank.getRequiredNumberCounts() + "개 일치 (" + lotteryRank.getPrizeMoney() + "원) - "
+            + statisticsBoard.findTicketCountsByLotteryRank(lotteryRank) + "개");
+        }
     }
 
     private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
