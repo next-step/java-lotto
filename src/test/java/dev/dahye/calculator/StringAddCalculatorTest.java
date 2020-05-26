@@ -1,5 +1,6 @@
 package dev.dahye.calculator;
 
+import dev.dahye.calculator.service.StringAddCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -50,4 +51,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
         assertEquals(expected, result);
     }
+
+    @ParameterizedTest(name = "input = {0}")
+    @CsvSource({"'//;\n1;2;3', 6"})
+    @DisplayName("“//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    void separator_custom(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertEquals(expected, result);
+    }
+    
 }
