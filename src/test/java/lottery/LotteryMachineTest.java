@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,10 +66,10 @@ public class LotteryMachineTest {
                 .collect(Collectors.toList()));
 
         LotteryTicketsGroup lotteryTicketsGroup = new LotteryTicketsGroup(Arrays.asList(winner, loser));
-        LotteryTicketsGroup winnerTicketsGroup = lotteryMachine
+        Map<Integer, Integer> winnerTicketsGroup = lotteryMachine
                 .findWinnerTicketsGroup(lotteryTicketsGroup, winnerTicket);
 
-        assertThat(winnerTicketsGroup.getLotteryTicketsNumbers().size()).isEqualTo(winnerCounts);
+        assertThat(winnerTicketsGroup.keySet().size()).isEqualTo(winnerCounts);
     }
 
     private static Stream<Arguments> mockLotteryTicketBuilder() {

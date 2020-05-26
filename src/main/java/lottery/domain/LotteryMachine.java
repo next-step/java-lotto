@@ -3,6 +3,7 @@ package lottery.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -29,9 +30,9 @@ public class LotteryMachine {
         );
     }
 
-    public LotteryTicketsGroup findWinnerTicketsGroup(LotteryTicketsGroup lotteryTicketsGroup,
-                                                      LotteryTicket lastWinnerTicket) {
-        return new LotteryTicketsGroup(lotteryTicketsGroup.findWinnerTicketsGroup(lastWinnerTicket));
+    public Map<Integer, Integer> findWinnerTicketsGroup(LotteryTicketsGroup lotteryTicketsGroup,
+                                                        LotteryTicket lastWinnerTicket) {
+        return lotteryTicketsGroup.findWinnerTicketsGroup(lastWinnerTicket);
     }
 
     private LotteryTicket makeLotteryTicket() {

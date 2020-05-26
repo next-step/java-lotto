@@ -21,3 +21,5 @@
 * LotteryMachine에서 당첨 티켓 목록 반환
 
 * Lottery의 랭킹 관련 상수 정의한 Enum 기능
+
+* WinnerTicket 목록을 검사하여 각 등수별 당첨 티켓 개수 Map 정의

@@ -1,7 +1,9 @@
 package lottery.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -25,19 +27,22 @@ public class LotteryTicketsGroup {
         int lotteryTicketCounts = lotteryTickets.size();
         for (int i = 0; i < lotteryTicketCounts; i++) {
             LotteryTicket targetLotteryTicket = lotteryTickets.get(i);
-            if (isWinner(targetLotteryTicket, lastWinnerTicket)) {
-                winnerTicketsGroup.add(targetLotteryTicket);
-            }
+            int winnerNumberCounts = getWinnerNumberCounts(targetLotteryTicket, lastWinnerTicket);
+            updateWinnerTicketsGroup(winnerTicketsGroup, targetLotteryTicket, winnerNumberCounts);
         }
         return winnerTicketsGroup;
     }
 
-    private boolean isWinner(LotteryTicket candidate, LotteryTicket lastWinnerTicket) {
-        long winnerNumberCounts = candidate.getLotteryNumbers().stream()
+    private int getWinnerNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
+        return (int)targetLotteryTicket.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
+    }
+
+    private void updateWinnerTicketsGroup(List<LotteryTicket> winnerTicketsGroup,
+                                          LotteryTicket targetLotteryTicket,
+                                          int winnerNumberCounts) {
         if (winnerNumberCounts >= MINIMUM_WINNER_NUMBER_COUNTS)
-            return true;
-        return false;
+            winnerTicketsGroup.add(targetLotteryTicket);
     }
 }

@@ -1,20 +1,24 @@
 package lottery.domain;
 
 public enum LotteryRanks {
-    FIRST_PRIZE("first", 2_000_000_000),
-    SECOND_PRIZE("second", 1_500_000),
-    THIRD_PRIZE("third", 50_000),
-    FOURTH_PRIZE("fourth",5_000);
+    FIRST_PRIZE(6, 2_000_000_000),
+    SECOND_PRIZE(5, 1_500_000),
+    THIRD_PRIZE(4, 50_000),
+    FOURTH_PRIZE(3,5_000);
 
-    private final String key;
+    private final int requiredNumberCounts;
     private final long prizeMoney;
 
-    private LotteryRanks(String key, long prizeMoney) {
-        this.key = key;
+    private LotteryRanks(int requiredNumberCounts, long prizeMoney) {
+        this.requiredNumberCounts = requiredNumberCounts;
         this.prizeMoney = prizeMoney;
     }
 
     public long getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public int getRequiredNumberCounts() {
+        return requiredNumberCounts;
     }
 }
