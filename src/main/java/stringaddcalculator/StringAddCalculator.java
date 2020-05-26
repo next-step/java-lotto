@@ -21,20 +21,15 @@ public class StringAddCalculator {
 
     private static boolean isNullOrEmpty(String input) {
         if (input == null) return true;
-        if (input.isEmpty()) return true;
-        return false;
+        return input.isEmpty();
     }
 
     private static boolean isOneNumber(String input) {
-        if (input.length() == 1)
-            return true;
-        return false;
+        return input.length() == 1;
     }
 
     private static boolean isCustomSeparator(String input) {
-        if (input.startsWith("//"))
-            return true;
-        return false;
+        return input.startsWith("//");
     }
 
     private static int findSeparatorAndSum(String input) {
