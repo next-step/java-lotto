@@ -8,6 +8,8 @@ public class ExpressionGenerator {
     public static final String DEFAULT_DELIMITER = "[,|:]";
     public static final String CUSTOM_DELIMITER_MATCHER = "//(.)\n(.*)";
 
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_MATCHER);
+
     public Expression generate(String input) {
         Matcher matcher = getMatcher(input);
         if (hasCustom(matcher)) {
@@ -17,7 +19,7 @@ public class ExpressionGenerator {
     }
 
     private Matcher getMatcher(String input) {
-        return Pattern.compile(CUSTOM_DELIMITER_MATCHER).matcher(input);
+        return pattern.matcher(input);
     }
 
     private boolean hasCustom(Matcher matcher) {
