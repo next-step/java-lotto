@@ -15,7 +15,7 @@ public class LotteryMachine {
             throw new IllegalArgumentException(ErrorMessages.PURCHASE_PRICE_NOT_ENOUGH);
     }
 
-    public long getLotteryTicketCounts() {
+    public int getLotteryTicketCounts() {
         return lotteryTicketCounts;
     }
 }
