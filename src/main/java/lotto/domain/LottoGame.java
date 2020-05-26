@@ -1,70 +1,69 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoGame {
 
-    private static final int LOTTO_SALE_PRICE = 1000;
+    private final ManualNumbers manualNumbers;
+    private final PurchaseAmount purchaseAmount;
+    private LottoNumbers lottoNumbers = LottoNumbers.newInstance();
 
-    private final int purchaseCount;
-    private List<LottoNumbers> lottoNumbersGroup = new ArrayList<>();
+    public LottoGame(PurchaseAmount purchaseAmount, ManualNumbers manualNumbers) {
+        validatePurchaseAmount(purchaseAmount);
+        validateManualNumbers(manualNumbers, purchaseAmount);
 
-    public LottoGame() {
-        this.purchaseCount = 0;
+        this.purchaseAmount = purchaseAmount;
+        this.manualNumbers = manualNumbers;
     }
 
-    public LottoGame(int purchaseAmount) {
-        validateLottoGame(purchaseAmount);
-
-        this.purchaseCount = purchaseAmount / LOTTO_SALE_PRICE;
-    }
-
-    private void validateLottoGame(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_SALE_PRICE) {
-            throw new IllegalArgumentException("구입금액이 1000원 이상 이어야 합니다.");
+    private void validatePurchaseAmount(PurchaseAmount purchaseAmount) {
+        if (purchaseAmount == null) {
+            throw new IllegalArgumentException("구입금액이 존재하지 않습니다.");
         }
     }
 
-    public int getPurchaseCount() {
-        return this.purchaseCount;
+    private void validateManualNumbers(ManualNumbers manualNumbers, PurchaseAmount purchaseAmount) {
+        if (manualNumbers == null) {
+            throw new IllegalArgumentException("수동 로또 번호가 존재하지 않습니다.");
+        }
+
+        if (manualNumbers.getCount() > purchaseAmount.calculatePurchaseCount()) {
+            throw new IllegalArgumentException("수동 로또 수가 총 로또 구매 수보다 많습니다.");
+        }
     }
 
-    public List<LottoNumbers> createAutoLottoNumbers() {
-        List<LottoNumbers> autoLottoNumbers = Stream.generate(LottoNumbersFactory::createAutoLottoNumbers)
-                .limit(this.purchaseCount)
+    public LottoNumbers createLottoNumbers() {
+        createManualLottoNumbers();
+        createAutoLottoNumbers();
+
+        return this.lottoNumbers.clone();
+    }
+
+    private void createManualLottoNumbers() {
+        List<LottoNumber> manualLottoNumbers = this.manualNumbers.stream()
+                .map(LottoNumberFactory::createManualLottoNumbers)
                 .collect(Collectors.toList());
-        this.lottoNumbersGroup.addAll(autoLottoNumbers);
 
-        return copyLottoNumbers(autoLottoNumbers);
+        this.lottoNumbers.addAll(manualLottoNumbers);
     }
 
-    private List<LottoNumbers> copyLottoNumbers(List<LottoNumbers> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumbers::clone)
+    private void createAutoLottoNumbers() {
+        int autoLottoCount = getAutoLottoCount();
+
+        List<LottoNumber> autoLottoNumbers = Stream.generate(LottoNumberFactory::createAutoLottoNumbers)
+                .limit(autoLottoCount)
                 .collect(Collectors.toList());
+
+        this.lottoNumbers.addAll(autoLottoNumbers);
     }
 
-    public List<LottoNumbers> createManualLottoNumbers(List<String> manualNumbers) {
-        List<LottoNumbers> manualLottoNumbers = manualNumbers.stream()
-                .map(LottoNumbersFactory::createManualLottoNumbers)
-                .collect(Collectors.toList());
-        this.lottoNumbersGroup.addAll(manualLottoNumbers);
-
-        return copyLottoNumbers(manualLottoNumbers);
+    private int getAutoLottoCount() {
+        return this.purchaseAmount.calculatePurchaseCount() - this.manualNumbers.getCount();
     }
 
-    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers, int bonusNumber) {
-        LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance();
-
-        this.lottoNumbersGroup.forEach(lottoNumbers -> {
-            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers),
-                    lottoNumbers.isMatchNumber(bonusNumber));
-            lottoMatchResult.increaseMatchCount(lottoMatch);
-        });
-
-        return lottoMatchResult;
+    public LottoMatchResult calculateMatchCount(LottoNumber lastWinLottoNumber, BonusNumber bonusNumber) {
+        return this.lottoNumbers.calculateMatchCount(lastWinLottoNumber, bonusNumber);
     }
 }
