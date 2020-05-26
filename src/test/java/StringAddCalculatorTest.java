@@ -1,10 +1,13 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import stringaddcalculator.PositiveNumber;
+import stringaddcalculator.PositiveNumberExtractor;
 import stringaddcalculator.StringAddCalculator;
 
 public class StringAddCalculatorTest {
@@ -13,15 +16,17 @@ public class StringAddCalculatorTest {
   @NullAndEmptySource
   @ParameterizedTest
   void 빈_문자열_입력에_0이_반환된다(String emptyText) {
-    String result = Optional.of(StringAddCalculator.splitAndSum(emptyText))
+    List<PositiveNumber> positiveNumbers = Optional.of(PositiveNumberExtractor.create(emptyText))
         .orElseThrow(RuntimeException::new);
-    assertThat(result).isEqualTo("0");
+    int result = StringAddCalculator.sum(positiveNumbers);
+    assertThat(result).isEqualTo(0);
   }
 
   @DisplayName("하나의 숫자가 입력되면 해당 입력된 숫자를 반환한다")
   @Test
   void 하나의_숫자에_입력한_결과가_반환된다() {
-    String result = StringAddCalculator.splitAndSum("1");
-    assertThat(result).isEqualTo("1");
+    List<PositiveNumber> positiveNumbers = PositiveNumberExtractor.create("1");
+    int result = StringAddCalculator.sum(positiveNumbers);
+    assertThat(result).isEqualTo(1);
   }
 }
