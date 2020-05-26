@@ -16,4 +16,12 @@ public class Prize {
   public long getTotalPrize () {
     return rank.getPrice() * count;
   }
+
+  public Rank getRank () {
+    return rank;
+  }
+
+  public long getCount () {
+    return count;
+  }
 }

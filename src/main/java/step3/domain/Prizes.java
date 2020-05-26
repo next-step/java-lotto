@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,9 +23,11 @@ public class Prizes {
                  .count();
   }
 
+  public Stream<Prize> stream() {
+    return this.stream();
+  }
+
   public long getPayoff () {
-    return this.prizes.stream()
-                      .mapToLong(Prize::getTotalPrize)
-                      .sum();
+    return stream().mapToLong(Prize::getTotalPrize).sum();
   }
 }
