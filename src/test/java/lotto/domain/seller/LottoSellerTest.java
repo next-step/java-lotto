@@ -4,7 +4,8 @@ import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.exception.AvailableCountExceedException;
-import lotto.util.Generator;
+import lotto.util.LottoTicketGenerator;
+import lotto.util.LottoTicketsGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,9 @@ public class LottoSellerTest {
     @Test
     void buyTicketFailureByLackMoney() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoSeller.buyTicket(Price.of(Price.ONE_TICKET_PRICE - 1), Generator.lottoTickets()));
+                .isThrownBy(() -> lottoSeller.buyTicket(
+                        Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
+                );
     }
 
     @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")
@@ -45,8 +48,8 @@ public class LottoSellerTest {
 
     private static Stream<Arguments> buyTickets() {
         return Stream.of(
-                Arguments.of(1000, Generator.lottoTickets(), 1),
-                Arguments.of(14000, Generator.lottoTickets(Generator.lottoTicket(1, 2, 3, 4, 5, 6)), 14)
+                Arguments.of(1000, LottoTicketsGenerator.newInstance(), 1),
+                Arguments.of(14000, LottoTicketsGenerator.valueOf(1, 2, 3, 4, 5, 6), 14)
         );
     }
 
@@ -56,8 +59,8 @@ public class LottoSellerTest {
         Price price = Price.of(Price.ONE_TICKET_PRICE);
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(Generator.lottoTicket(1, 2, 3, 4, 5, 6));
-        lottoTickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
+        lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
+        lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
         LottoTickets manualTickets = LottoTickets.of(lottoTickets);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
