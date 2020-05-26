@@ -2,21 +2,23 @@ package step3.domain;
 
 public class LottoGame {
 
-  private final Lottos lottos;
-  private final Prizes prizes;
+  private final double payoffRatio;
 
-  public LottoGame(Lottos lottos, Prizes prizes) {
-    this.lottos = lottos;
-    this.prizes = prizes;
+  public LottoGame(double payoffRatio) {
+    this.payoffRatio = payoffRatio;
   }
 
-  public static LottoGame of (Lottos lottos, Prizes prizes) {
-    return new LottoGame(lottos, prizes);
+  public static LottoGame of (long purchaseAmount, Prizes prizes) {
+
+    long payoff = prizes.getPayoff();
+    double payoffRatio = (double)payoff / purchaseAmount;
+
+    return new LottoGame(payoffRatio);
+
   }
 
   public double getPayoffRatio () {
-    long payoff = prizes.getPayoff();
-    return (double)payoff / lottos.getPrice();
+    return payoffRatio;
   }
 
 }

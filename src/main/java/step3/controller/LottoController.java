@@ -20,7 +20,7 @@ public class LottoController {
     ));
     resultView.printStat(prizes);
 
-    LottoGame lottoGame = LottoGame.of(lottos, prizes);
+    LottoGame lottoGame = LottoGame.of(lottos.getPrice(), prizes);
     resultView.printPayoffRatio(lottoGame.getPayoffRatio());
 
   }
