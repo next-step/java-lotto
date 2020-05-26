@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ResultView {
 
+    private static final int COMMA_BOUNDARY_LENGTH = 1;
+
     private ResultView() {
     }
 
@@ -20,16 +22,19 @@ public class ResultView {
     }
 
     private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
-        System.out.println("[");
         StringBuilder stringBuilder = new StringBuilder();
-        int size = lotteryNumbers.size();
-
-        for (int i = 0; i < size; i++) {
-            if (stringBuilder.length() > 0)
-                stringBuilder.append(", ");
+        int lotteryNumbersSize = lotteryNumbers.size();
+        stringBuilder.append(ViewMessages.LEFT_BRACKET);
+        for (int i = 0; i < lotteryNumbersSize; i++) {
+            appendComma(stringBuilder);
             stringBuilder.append(lotteryNumbers.get(i));
         }
+        stringBuilder.append(ViewMessages.RIGHT_BRACKET);
         System.out.println(stringBuilder.toString());
-        System.out.println("]");
+    }
+
+    private static void appendComma(StringBuilder stringBuilder) {
+        if (stringBuilder.length() > COMMA_BOUNDARY_LENGTH)
+            stringBuilder.append(ViewMessages.COMMA);
     }
 }
