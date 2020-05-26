@@ -42,7 +42,7 @@ public class LotteryTicketsGroup {
         if (winnerNumberCounts < MINIMUM_WINNER_NUMBER_COUNTS) {
             return;
         }
-        int lotteryRankCounts = winnerTicketsMap.getOrDefault(winnerNumberCounts, 0) + 1;
-        winnerTicketsMap.put(winnerNumberCounts, lotteryRankCounts);
+        int winnerTicketCounts = winnerTicketsMap.getOrDefault(winnerNumberCounts, 0) + 1;
+        winnerTicketsMap.put(winnerNumberCounts, winnerTicketCounts);
     }
 }
