@@ -2,6 +2,7 @@ package dev.dahye.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,5 +25,13 @@ class StringAddCalculatorTest {
     void onlyNumber(String input) {
         int result = StringAddCalculator.splitAndSum(input);
         assertEquals(Integer.parseInt(input), result);
+    }
+
+    @ParameterizedTest(name = "input = {0}")
+    @CsvSource({"'1,2', 3", "'2,4', 6", "'10,1000', 1010"})
+    @DisplayName("구분자가 쉼표인 경우 덧셈 계산")
+    void separator_쉼표(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertEquals(expected, result);
     }
 }
