@@ -12,9 +12,9 @@ public class LottoResult {
         this.lottoStatistics = lottoPrizes;
     }
 
-    public int getNumberOfHitTickets(final int hitCount) {
+    public int getNumberOfHitTickets(final LottoPrize lottoPrize) {
         return Math.toIntExact(lottoStatistics.stream()
-                .filter(lottoPrize -> lottoPrize.getHitCount() == hitCount)
+                .filter(lottoStatistic -> lottoStatistic.equals(lottoPrize))
                 .count());
     }
 

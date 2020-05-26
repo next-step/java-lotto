@@ -4,6 +4,9 @@ import lotto.domain.LottoNumberSetting;
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.WinningTicket;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -45,7 +48,8 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumbers);
+        List<Integer> sortedLottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(sortedLottoNumbers);
+        return String.valueOf(sortedLottoNumbers);
     }
-
 }
