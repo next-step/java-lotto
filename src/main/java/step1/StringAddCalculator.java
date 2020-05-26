@@ -8,6 +8,10 @@ public class StringAddCalculator {
             return 0;
         }
 
+        if (formula.length() == 1){
+            return Integer.parseInt(formula);
+        }
+
         return 1;
     }
 
