@@ -1,5 +1,6 @@
 package dev.dahye.calculator.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,6 +18,14 @@ public class Calculator {
     }
 
     public static Calculator setting(String input) {
+        if (input == null || input.isEmpty()) {
+            return new Calculator(new ArrayList<>());
+        }
+
+        return new Calculator(split(input));
+    }
+
+    private static List<String> split(String input) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(input);
         String delimiter = DEFAULT_DELIMITER;
 
@@ -25,7 +34,7 @@ public class Calculator {
             input = m.group(GROUP_BY_INPUT);
         }
 
-        return new Calculator(Arrays.asList(input.split(delimiter)));
+        return Arrays.asList(input.split(delimiter));
     }
 
     public int sum() {
