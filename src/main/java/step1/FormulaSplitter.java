@@ -22,7 +22,7 @@ public class FormulaSplitter {
 
     private static String[] getTokens(Formula formula) {
         Matcher matcher = CUSTOM_DELIMITER_SEARCH_PATTERN.matcher(formula.get());
-        if (matcher.find()) {
+        if (matcher.matches()) {
             return matcher.group(2).split(Pattern.quote(matcher.group(1)));
         }
 
