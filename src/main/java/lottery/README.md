@@ -8,5 +8,9 @@
     * 산출된 로또 티켓 개수 및 각 티켓의 번호들 출력 (System.out)
     * LotteryMachine 객체를 PurchasePrice를 받아 생성
         * 로또 티켓 가격보다 낮은 경우 예외 처리
-    * 객체 내부에서 로또 티켓 개수 산출, 해당 개수만큼 로또 생성
-    * 요청에 따라 View에서 요구하는 데이터를 getter
+        
+* 산출된 개수만큼 로또 생성
+    * LottoTicket은 중복없는 1~45 랜덤 숫자 6개로 이루어짐
+    * 해당 숫자들도 LottoNumber로 wrapping
+    
+* 요청에 따라 View에서 요구하는 데이터를 getter
