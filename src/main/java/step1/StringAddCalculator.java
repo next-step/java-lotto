@@ -12,7 +12,20 @@ public class StringAddCalculator {
             return Integer.parseInt(formula);
         }
 
+        if (formula.contains(",")) {
+            return arraySum(formula.split(","));
+        }
+
         return 1;
+    }
+
+    private static int arraySum(String[] array) {
+        int sum = 0;
+        for (String s : array) {
+            sum += Integer.parseInt(s);
+        }
+
+        return sum;
     }
 
 }
