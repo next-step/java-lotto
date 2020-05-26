@@ -20,18 +20,23 @@ class LottoMatchResultTest {
 
     @BeforeEach
     void setUp() {
-        LottoGame lottoGame = new LottoGame();
-        List<String> manual = Arrays.asList(
+        PurchaseAmount purchaseAmount = PurchaseAmount.newInstance(5000);
+
+        List<String> numbers = Arrays.asList(
                 "1, 2, 3, 13, 14, 15",
                 "1, 2, 3, 4, 14, 15",
                 "1, 2, 3, 4, 5, 15",
                 "1, 2, 3, 4, 5, 7",
                 "1, 2, 3, 4, 5, 6"
         );
-        lottoGame.createManualLottoNumbers(manual);
+        ManualNumbers manualNumbers = ManualNumbers.newInstance(numbers);
 
-        LottoNumbers winLottoNumbers = LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
-        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualNumbers);
+        lottoGame.createLottoNumbers();
+
+        LottoNumber winLottoNumber = LottoNumber.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = BonusNumber.newInstance(7, winLottoNumber);
+        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumber, bonusNumber);
     }
 
     @DisplayName("당첨 개수를 1씩 증가할 수 있다.")
@@ -99,6 +104,7 @@ class LottoMatchResultTest {
     @DisplayName("총 수익률을 계산할 수 있다.")
     @Test
     void canCalculateProfitRate() {
-        assertThat(this.lottoMatchResult.calculateProfitRate(5)).isEqualTo(406_311_000);
+        PurchaseAmount purchaseAmount = PurchaseAmount.newInstance(1000);
+        assertThat(this.lottoMatchResult.calculateProfitRate(purchaseAmount)).isEqualTo(2_031_555);
     }
 }

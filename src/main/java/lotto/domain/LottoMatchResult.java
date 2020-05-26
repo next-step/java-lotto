@@ -31,8 +31,8 @@ public class LottoMatchResult {
         return lottoMatch.calculateWinAmount(getMatchCount(lottoMatch));
     }
 
-    public double calculateProfitRate(int purchaseAmount) {
-        return getTotalWinAmount() * 1.0 / purchaseAmount;
+    public double calculateProfitRate(PurchaseAmount purchaseAmount) {
+        return getTotalWinAmount() * 1.0 / purchaseAmount.getPurchaseAmount();
     }
 
     private long getTotalWinAmount() {
