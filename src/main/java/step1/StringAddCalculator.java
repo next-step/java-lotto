@@ -12,11 +12,15 @@ public class StringAddCalculator {
             return Integer.parseInt(formula);
         }
 
-        if (formula.contains(",")) {
-            return arraySum(formula.split(","));
+        return arraySum(getFormulaArrayBySeparator(formula, Separator.DEFAULT_SEPARATOR));
+    }
+
+    private static String[] getFormulaArrayBySeparator(String formula, String separator) {
+        if (formula.contains(",") || formula.contains(":")) {
+            return formula.split(separator);
         }
 
-        return 1;
+        return null;
     }
 
     private static int arraySum(String[] array) {
