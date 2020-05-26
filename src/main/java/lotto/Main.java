@@ -1,31 +1,27 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoMatchResult;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
+        PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
+        ManualLottoCount manualLottoCount = InputView.getManualLottoCount(purchaseAmount);
+        ManualNumbers manualNumbers = InputView.getManualNumbers(manualLottoCount);
 
-        ResultView.printPurchaseCount(lottoGame.getPurchaseCount());
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualNumbers);
+        LottoNumbers lottoNumbers = lottoGame.createLottoNumbers();
 
-        List<LottoNumbers> lottoNumbersGroup = lottoGame.createAutoLottoNumbers();
-        ResultView.printLottoNumbers(lottoNumbersGroup);
+        ResultView.printPurchaseCount(lottoNumbers);
+        ResultView.printLottoNumbers(lottoNumbers.toList());
 
-        LottoNumbers lastWinLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
-        int bonusNumber = InputView.getBonusNumber(lastWinLottoNumbers);
+        LottoNumber lastWinLottoNumber = LottoNumber.newInstance(InputView.getLastWeekLottoNumbers());
+        BonusNumber bonusNumber = InputView.getBonusNumber(lastWinLottoNumber);
 
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumbers, bonusNumber);
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumber, bonusNumber);
         ResultView.printMatchResult(lottoMatchResult);
-
-        double profitRate = lottoMatchResult.calculateProfitRate(purchaseAmount);
-        ResultView.printProfitRate(profitRate, lottoMatchResult.getProfitOrLoss(profitRate));
+        ResultView.printProfitRate(lottoMatchResult, purchaseAmount);
     }
 }
