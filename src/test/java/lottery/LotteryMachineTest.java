@@ -1,8 +1,10 @@
 package lottery;
 
 import lottery.domain.LotteryMachine;
+import lottery.domain.LotteryTicketsGroup;
 import lottery.domain.PurchasePrice;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,5 +35,18 @@ public class LotteryMachineTest {
                 .isThrownBy(() -> {
                     LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
                 });
+    }
+
+    @DisplayName("LotteryMachine에서 주어진 금액만큼 LotteryTicket 생성해 LotteryTicketGroups를 get")
+    @Test
+    @ParameterizedTest
+    @ValueSource(longs = {1000, 2000, 3000, 4000})
+    public void getLotteryTicketGroups(long userInput) {
+        PurchasePrice purchasePrice = new PurchasePrice(userInput);
+        LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
+
+        //LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTickets();
+        //assertThat(lotteryTicketsGroup.getClass())
+         //       .isEqualTo(Lottery)
     }
 }
