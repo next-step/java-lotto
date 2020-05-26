@@ -23,11 +23,29 @@ public class Operand {
     public int toPositiveInt() {
         int convertInt = Integer.parseInt(this.operand);
 
-        if (convertInt < Operand.ZERO_VALUE) {
+        if (lessThanZero(convertInt)) {
             throw new IllegalStateException("음수는 사용할 수 없습니다.");
         }
 
-        return Integer.parseInt(this.operand);
+        return convertInt;
+    }
+
+    private boolean lessThanZero(int input) {
+        return input < Operand.ZERO_VALUE;
+    }
+
+    public int toNegativeInt() {
+        int convertInt = Integer.parseInt(this.operand);
+
+        if (greaterThanZero(convertInt)) {
+            throw new IllegalStateException("양수는 사용할 수 없습니다.");
+        }
+
+        return convertInt;
+    }
+
+    private boolean greaterThanZero(int input) {
+        return input > Operand.ZERO_VALUE;
     }
 
     @Override
