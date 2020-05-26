@@ -5,9 +5,10 @@ import java.util.List;
 
 public enum LottoPrize {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private final int hitCount;
@@ -24,11 +25,21 @@ public enum LottoPrize {
                 .reduce(0L, Long::sum);
     }
 
-    public static LottoPrize findByMathCount(int matchCount) {
+    public static LottoPrize findByMathCount(int matchCount, boolean matchBonus) {
+        if (matchCount == THIRD.hitCount) {
+            return findByBonus(matchBonus);
+        }
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.hitCount == matchCount)
                 .findAny()
                 .orElse(MISS);
+    }
+
+    private static LottoPrize findByBonus(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public long getReward() {

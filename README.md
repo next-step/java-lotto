@@ -1,5 +1,9 @@
 ## 로또(2등)
 
+- 보너스번호, 2등 추가 - LottoPrize
+- 보너스번호를 입력받는다.
+
+
 리팩토링
 - 상수의 중복해결 --> LottoNumberSetting enum 생성.... 흠
 
