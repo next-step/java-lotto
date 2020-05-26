@@ -33,6 +33,6 @@ public class LottoTicket {
     }
 
     public List<Integer> getLottoNumbersAsInt() {
-        return lottoNumbers.getNumbersAsInt();
+        return lottoNumbers.getNumbers();
     }
 }

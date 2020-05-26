@@ -62,7 +62,7 @@ public class LottoNumbers {
         return this.numbers.contains(lottoNumber);
     }
 
-    public List<Integer> getNumbersAsInt() {
+    public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());

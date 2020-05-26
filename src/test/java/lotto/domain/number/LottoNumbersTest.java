@@ -95,7 +95,7 @@ public class LottoNumbersTest {
     @DisplayName("Set<LottoNumber>의 값을 List<Integer> 로 반환")
     @Test
     void getNumbersAsInt() {
-        List<Integer> target = lottoNumbers.getNumbersAsInt();
+        List<Integer> target = lottoNumbers.getNumbers();
         List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(target).isEqualTo(expected);
