@@ -6,12 +6,13 @@ import lotto.exception.ErrorMessage;
 
 import java.util.List;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
 
-    private LottoNumber bonusNumber;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    private WinningLottoTicket(final LottoNumbers numbers, final LottoNumber bonusNumber) {
-        super(numbers);
+    private WinningLottoTicket(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
@@ -27,6 +28,10 @@ public class WinningLottoTicket extends LottoTicket {
         if (lottoNumbers.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
         }
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public LottoNumber getBonusNumber() {

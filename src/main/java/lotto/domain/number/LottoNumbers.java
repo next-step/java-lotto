@@ -1,5 +1,6 @@
 package lotto.domain.number;
 
+import lotto.domain.ticket.WinningLottoTicket;
 import lotto.exception.ErrorMessage;
 
 import java.util.HashSet;
@@ -51,9 +52,9 @@ public class LottoNumbers {
         }
     }
 
-    public int matchCount(final LottoNumbers winningLottoNumbers) {
+    public int matchCount(final WinningLottoTicket winningLottoTicket) {
         return Math.toIntExact(numbers.stream()
-                .filter(winningLottoNumbers::contains)
+                .filter(winningLottoTicket::contains)
                 .count());
     }
 

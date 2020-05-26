@@ -8,9 +8,9 @@ import java.util.List;
 
 public class LottoTicket {
 
-    protected final LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    LottoTicket(final LottoNumbers lottoNumbers) {
+    private LottoTicket(final LottoNumbers lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -26,7 +26,7 @@ public class LottoTicket {
     }
 
     public Prize matchPrize(final WinningLottoTicket winningLottoTicket) {
-        int matchCount = lottoNumbers.matchCount(winningLottoTicket.lottoNumbers);
+        int matchCount = lottoNumbers.matchCount(winningLottoTicket);
         boolean hasBonusNumber =  lottoNumbers.contains(winningLottoTicket.getBonusNumber());
 
         return Prize.of(matchCount, hasBonusNumber);
