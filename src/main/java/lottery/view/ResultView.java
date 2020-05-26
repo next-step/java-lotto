@@ -16,5 +16,20 @@ public class ResultView {
 
     public static void printLotteryTicketsNumbers(LotteryTicketsGroup lotteryTicketsGroup) {
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
+        lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
+    }
+
+    private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
+        System.out.println("[");
+        StringBuilder stringBuilder = new StringBuilder();
+        int size = lotteryNumbers.size();
+
+        for (int i = 0; i < size; i++) {
+            if (stringBuilder.length() > 0)
+                stringBuilder.append(", ");
+            stringBuilder.append(lotteryNumbers.get(i));
+        }
+        System.out.println(stringBuilder.toString());
+        System.out.println("]");
     }
 }
