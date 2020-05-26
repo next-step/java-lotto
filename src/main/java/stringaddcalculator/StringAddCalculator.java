@@ -22,8 +22,12 @@ public class StringAddCalculator {
 
         String[] splitData = input.split(separator);
         int result = 0;
-        for(String data:splitData)
-            result += Integer.parseInt(data);
+        for(String data:splitData) {
+            int number = Integer.parseInt(data);
+            if(number < 0)
+                throw new RuntimeException("음수 값이 입력 되었습니다.");
+            result += number;
+        }
 
         return result;
     }
