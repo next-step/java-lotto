@@ -5,11 +5,14 @@ public class StringAddCalculator {
         if (input == null) return 0;
         if (input.isEmpty()) return 0;
 
-        if (1 == input.length())
+        if (input.length() == 1)
             return Integer.parseInt(input);
 
+        String[] splitData = input.split(",");
+        int result = 0;
+        for(String data:splitData)
+            result += Integer.parseInt(data);
 
-
-            return -1;
+        return result;
     }
 }
