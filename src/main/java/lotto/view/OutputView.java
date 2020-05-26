@@ -20,15 +20,7 @@ public class OutputView {
 
     public static void printLottoTickets(List<LottoTicket> lottoTickets) {
         lottoTickets.stream()
-                .forEach(OutputView::printOneLottoTicket);
-    }
-
-    private static void printOneLottoTicket(LottoTicket lottoTicket) {
-        String lottoNumbers = lottoTicket.getLottoNumbers().stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
-
-        System.out.println(lottoNumbers);
+                .forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers()));
     }
 
     public static void printWinningStatistics(LottoResult lottoResult) {
