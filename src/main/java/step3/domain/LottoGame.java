@@ -2,29 +2,21 @@ package step3.domain;
 
 public class LottoGame {
 
-  private final WinningLotto winningLotto;
   private final Lottos lottos;
+  private final Prizes prizes;
 
-  public LottoGame(Lottos lottos, WinningLotto winningLotto) {
+  public LottoGame(Lottos lottos, Prizes prizes) {
     this.lottos = lottos;
-    this.winningLotto = winningLotto;
+    this.prizes = prizes;
   }
 
-  public static LottoGame of (Lottos lottos, WinningLotto winningLotto) {
-    return new LottoGame(lottos, winningLotto);
-  }
-
-  public long getWinningCount (Rank rank) {
-    return lottos.stream()
-                 .map(winningLotto::getRankOfLotto)
-                 .filter(rank::equals)
-                 .count();
+  public static LottoGame of (Lottos lottos, Prizes prizes) {
+    return new LottoGame(lottos, prizes);
   }
 
   public double getPayoffRatio () {
-    long payoff = Rank.stream()
-                      .map(rank -> rank.getPrice() * getWinningCount(rank))
-                      .reduce(0L, Math::addExact);
+    long payoff = prizes.getPayoff();
     return (double)payoff / lottos.getPrice();
   }
+
 }
