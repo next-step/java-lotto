@@ -41,17 +41,15 @@ public class LottoGameTest {
       Arguments.of(
         LottoGame.of(
           lottos,
-          Prizes.of(
-            lottos,
-            WinningLotto.of(generateLotto("1,2,3,4,5,6"), BONUS_NUMBER))),
+          WinningLotto.of(generateLotto("1,2,3,4,5,6"), BONUS_NUMBER)
+        ),
         payoffRatio1
       ),
       Arguments.of(
         LottoGame.of(
           lottos,
-          Prizes.of(
-            lottos,
-            WinningLotto.of(generateLotto("11,12,13,14,15,16"), BONUS_NUMBER))),
+          WinningLotto.of(generateLotto("11,12,13,14,15,16"), BONUS_NUMBER)
+        ),
         payoffRatio2
       )
     );
