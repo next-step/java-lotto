@@ -1,10 +1,8 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,60 +12,72 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGameTest {
 
-    @DisplayName("구입금액이 1000원 미만이면 LottoGame을 생성할 수 없다.")
-    @ParameterizedTest
-    @ValueSource(ints = { 100, 200, 500, 900, 999 })
-    void canNotCreateLottoGameIfPurchaseAmountGreaterThan1000(int purchaseAmount) {
-        assertThatThrownBy(() -> new LottoGame(purchaseAmount))
+    private LottoGame lottoGame;
+
+    @BeforeEach
+    void setUp() {
+        PurchaseAmount purchaseAmount = PurchaseAmount.newInstance(5000);
+
+        List<String> numbers = Arrays.asList(
+                "1, 2, 3, 13, 14, 15",
+                "1, 2, 3, 4, 14, 15",
+                "1, 2, 3, 4, 5, 15",
+                "1, 2, 3, 4, 5, 7",
+                "1, 2, 3, 4, 5, 6"
+        );
+        ManualNumbers manualNumbers = ManualNumbers.newInstance(numbers);
+
+        this.lottoGame = new LottoGame(purchaseAmount, manualNumbers);
+    }
+
+    @DisplayName("구입금액이 존재하지 않으면 생성할 수 없다.")
+    @Test
+    void canNotCreateLottoGameIfPurchaseAmountIsNull() {
+        assertThatThrownBy(() -> new LottoGame(null, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("구입금액이 1000원 이상이면 LottoGame을 생성할 수 있다.")
-    @ParameterizedTest
-    @ValueSource(ints = { 1000, 2000, 5000, 9000 })
-    void canCreateLottoGameIfPurchaseAmount1000OrMore(int purchaseAmount) {
-        assertThat(new LottoGame(purchaseAmount)).isNotNull();
-    }
-
-    @DisplayName("구입금액에 대한 구입수량을 구할 수 있다.")
-    @ParameterizedTest
-    @CsvSource(value = { "14000,14", "5600,5" })
-    void canGetPurchaseCountByLottoGame(int amount, int result) {
-        LottoGame lottoGame = new LottoGame(amount);
-        assertThat(lottoGame.getPurchaseCount()).isEqualTo(result);
-    }
-
-    @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
+    @DisplayName("수동 번호가 존재하지 않으면 생성할 수 없다.")
     @Test
-    void canCreateAutoLottoNumbers() {
-        LottoGame lottoGame = new LottoGame(14000);
-        List<LottoNumbers> lottoNumbers = lottoGame.createAutoLottoNumbers();
-
-        assertThat(lottoNumbers).isNotNull();
-        assertThat(lottoNumbers).hasSize(14);
+    void canNotCreateLottoGameIfManualNumbersIsNull() {
+        assertThatThrownBy(() -> new LottoGame(PurchaseAmount.newInstance(1000), null))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
+    @DisplayName("수동 번호 수가 구매 개수보다 많으면 생성할 수 없다.")
     @Test
-    void canCreateManualLottoNumbers() {
-        LottoGame lottoGame = new LottoGame();
-        List<String> manulLottoNumbers = Arrays.asList("1, 2, 3, 4, 5, 6");
+    void canNotCreateLottoGameIfManualNumbersCountGreaterThanPurchaseCount() {
+        assertThatThrownBy(() -> {
+            List<String> manual = Arrays.asList("1, 2, 3, 13, 14, 15",
+                    "1, 2, 3, 4, 14, 15");
+            ManualNumbers manualNumbers = ManualNumbers.newInstance(manual);
 
-        List<LottoNumbers> lottoNumbers = lottoGame.createManualLottoNumbers(manulLottoNumbers);
+            new LottoGame(PurchaseAmount.newInstance(1000), manualNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThat(lottoNumbers).isNotNull();
-        assertThat(lottoNumbers).hasSize(1);
+    @DisplayName("LottoGame을 생성할 수 있다.")
+    @Test
+    void canCreateLottoGame() {
+        assertThat(this.lottoGame).isInstanceOf(LottoGame.class);
+    }
+
+    @DisplayName("로또 번호를 생성할 수 있다.")
+    @Test
+    void canCreateLottoNumbers() {
+        LottoNumbers lottoNumbers = this.lottoGame.createLottoNumbers();
+
+        assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
+        assertThat(lottoNumbers.getCountByCreationType(CreationType.MANUAL)).isEqualTo(5);
     }
 
     @DisplayName("로또 당첨 결과를 얻을 수 있다.")
     @Test
     void canCreateLottoMatchResult() {
-        LottoGame lottoGame = new LottoGame(14000);
-        lottoGame.createAutoLottoNumbers();
+        LottoNumber winLottoNumber = LottoNumber.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = BonusNumber.newInstance(7, winLottoNumber);
+        LottoMatchResult lottoMatchResult = this.lottoGame.calculateMatchCount(winLottoNumber, bonusNumber);
 
-        LottoNumbers winLottoNumbers = LottoNumbersFactory.createAutoLottoNumbers();
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
-
-        assertThat(lottoMatchResult).isNotNull();
+        assertThat(lottoMatchResult).isInstanceOf(LottoMatchResult.class);
     }
 }
