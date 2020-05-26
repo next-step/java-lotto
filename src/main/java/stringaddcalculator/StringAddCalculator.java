@@ -1,12 +1,12 @@
 package stringaddcalculator;
 
+import java.util.List;
+
 public class StringAddCalculator {
 
-  public static String splitAndSum(String number) {
-    //검증하는 로직은 별도에 추가
-    if (number.isEmpty()) {
-      return "0";
-    }
-    return number;
+  public static Integer sum(List<PositiveNumber> positiveNumbers) {
+    return positiveNumbers.stream()
+        .mapToInt(PositiveNumber::getNumber)
+        .sum();
   }
 }
