@@ -38,8 +38,19 @@ public class StringAddCalculator {
         int sum = 0;
 
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            sum += toInteger(number);
         }
         return sum;
+    }
+
+    private int toInteger(String input) {
+        int number = 0;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("숫자로 변환할 수 없는 문자열입니다. -> " + input);
+            e.printStackTrace();
+        }
+        return number;
     }
 }
