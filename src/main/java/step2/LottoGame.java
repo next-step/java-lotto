@@ -2,7 +2,6 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -10,14 +9,18 @@ import java.util.Random;
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ONE = 1;
 
     private int PURCHASE_COUNT;
     private List<Lotto> lottos = new ArrayList<>();
-    private HashMap<Integer, Integer> correctMap = new HashMap<>();
+    private HashMap<Integer, Integer> correctNumberMap = new HashMap<>();
+    private ResultView resultView;
 
-    public void create(int purchaseAmount) {
+    public void create(int purchaseAmount, ResultView resultView) {
+        this.resultView = resultView;
+
         printPurchaseAmount(purchaseAmount);
-
         for (int i = 0; i < PURCHASE_COUNT; i++) {
             Lotto lotto = Lotto.create(new Random());
             lottos.add(lotto);
@@ -26,24 +29,44 @@ public class LottoGame {
 
     private void printPurchaseAmount(int purchaseAmount) {
         PURCHASE_COUNT = purchaseAmount / LOTTO_PRICE;
-        if (PURCHASE_COUNT < 1) {
+        if (PURCHASE_COUNT < ONE) {
             throw new IllegalArgumentException("로또 한 장의 값은 " + LOTTO_PRICE + "원입니다.");
         }
 
         System.out.println(PURCHASE_COUNT + "개를 구매했습니다.");
     }
 
-    public void printLottos(ResultView resultView) {
+    public void printLottos() {
         resultView.print(lottos);
     }
 
-    public void print(int [] lastLottoNumbers) {
+    public void countCorrectNumbers(int [] lastLottoNumbers) {
         for (Lotto lotto : lottos) {
-            long count = Arrays.stream(lastLottoNumbers)
+            int count = Arrays.stream(lastLottoNumbers)
                 .filter(lotto::containNumber)
-                .count();
+                .map(i -> ONE)
+                .sum();
 
-            System.out.println("count = " + count);
+            putCorrectNumberMap(count);
         }
     }
+
+    private void putCorrectNumberMap(int count) {
+        correctNumberMap.put(count, correctNumberMap.getOrDefault(count, DEFAULT_VALUE) + ONE);
+    }
+
+    public void printStatistics() {
+        resultView.printCollectMap(correctNumberMap);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoGame{" +
+            "PURCHASE_COUNT=" + PURCHASE_COUNT +
+            ", lottos=" + lottos +
+            ", correctNumberMap=" + correctNumberMap +
+            '}';
+    }
+
+
 }

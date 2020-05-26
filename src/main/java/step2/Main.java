@@ -8,16 +8,17 @@ public class Main {
         int purchaseAmount = inputView.getPurchaseAmount();
 
         LottoGame lottoGame = new LottoGame();
-        lottoGame.create(purchaseAmount);
+        lottoGame.create(purchaseAmount, new ResultView());
 
-        lottoGame.printLottos(new ResultView());
+        lottoGame.printLottos();
 
         String lastLottoNumber = inputView.getLastLottoNumber();
-        String[] lastLottoNumbers = lastLottoNumber.trim().split(", ");
-        int[] ints = Arrays.stream(lastLottoNumbers)
+        int[] lastLottoNumbers = Arrays.stream(lastLottoNumber.trim().split(", "))
                             .mapToInt(Integer::parseInt)
                             .toArray();
 
-        lottoGame.print(ints);
+        lottoGame.countCorrectNumbers(lastLottoNumbers);
+        lottoGame.printStatistics();
+
     }
 }
