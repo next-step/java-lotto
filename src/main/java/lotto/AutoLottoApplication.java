@@ -7,20 +7,21 @@ import lotto.domain.result.WinningNumbers;
 import lotto.domain.ticket.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.vo.Money;
 
 public class AutoLottoApplication {
 
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
-        int totalPrice = InputView.askTotalPrice();
-        LottoTickets lottoTickets = lottoStore.buy(totalPrice);
+        Money totalMoney = new Money(InputView.askTotalMoney());
+        LottoTickets lottoTickets = lottoStore.buy(totalMoney);
 
         OutputView.printLottoTicketNumbers(lottoTickets);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askLastWeekWinningNumbers());
         LottoResult lottoResult = lottoTickets.getLottoResult(winningNumbers);
 
-        OutputView.printResult(lottoResult, totalPrice);
+        OutputView.printResult(lottoResult, totalMoney);
     }
 }

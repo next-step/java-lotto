@@ -12,9 +12,9 @@ public class InputView {
     private InputView() {
     }
 
-    public static Integer askTotalPrice() {
+    public static Long askTotalMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.valueOf(SCANNER.nextLine());
+        return Long.valueOf(SCANNER.nextLine());
     }
 
     public static List<Integer> askLastWeekWinningNumbers() {
