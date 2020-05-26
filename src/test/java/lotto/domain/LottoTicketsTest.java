@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -29,9 +30,9 @@ class LottoTicketsTest {
     }
 
     private LottoTickets createLottoTickets() {
-        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(7, 8, 9, 4, 5, 6));
-        LottoTicket lottoTicket3 = new LottoTicket(Arrays.asList(1, 21, 3, 43, 12, 6));
+        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(Arrays.asList(7, 8, 9, 4, 5, 6)));
+        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(Arrays.asList(1, 21, 3, 43, 12, 6)));
 
         return new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));
     }

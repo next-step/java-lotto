@@ -1,22 +1,29 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Set;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerator {
-    public static final int LOTTO_NUMBER_BEGIN_BOUND = 1;
-    public static final int LOTTO_NUMBER_END_BOUND = 46;
-    public static final int COUNT_OF_GENERATE_NUMBER = 6;
+    private final List<Integer> lottoBalls;
 
-    @Override
-    public List<Integer> generate() {
-        return ThreadLocalRandom.current().ints(LOTTO_NUMBER_BEGIN_BOUND, LOTTO_NUMBER_END_BOUND)
-                .distinct()
-                .limit(COUNT_OF_GENERATE_NUMBER)
-                .sorted()
+    public AutoLottoNumberGenerator() {
+        this.lottoBalls = IntStream.rangeClosed(LottoNumberSetting.BEGIN_BOUND.getValue(), LottoNumberSetting.END_BOUND.getValue())
                 .boxed()
                 .collect(toList());
+    }
+
+    @Override
+    public Set<Integer> generate() {
+        Collections.shuffle(lottoBalls);
+        return Collections.unmodifiableSet(new HashSet<>(pickLottoBalls()));
+    }
+
+    private List<Integer> pickLottoBalls() {
+        return lottoBalls.subList(0, LottoNumberSetting.COUNT_OF_BALL.getValue());
     }
 }
