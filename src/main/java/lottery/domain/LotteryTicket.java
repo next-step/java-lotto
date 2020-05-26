@@ -13,9 +13,9 @@ public class LotteryTicket {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public List<String> getLotteryNumbers() {
+    public List<Integer> getLotteryNumbers() {
         return lotteryNumbers.stream()
-                .map(lotteryNumber -> String.valueOf(lotteryNumber.getLotteryNumber()))
+                .map(LotteryNumber::getLotteryNumber)
                 .collect(Collectors.toList());
     }
 

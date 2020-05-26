@@ -21,7 +21,7 @@ public class LotteryMachine {
         this.lotteryTicketCounts = (int)(purchasePrice.getPurchasePrice() / LOTTERY_TICKET_PRICE);
     }
 
-    public LotteryTicketsGroup getLotteryTicketsGroup() {
+    public LotteryTicketsGroup makeLotteryTicketsGroup() {
         return new LotteryTicketsGroup(
                 Stream.generate(this::makeLotteryTicket)
                 .limit(lotteryTicketCounts)
@@ -33,7 +33,8 @@ public class LotteryMachine {
         Collections.shuffle(LOTTERY_NUMBERS_LIST);
         List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
         Collections.sort(pickedLotteryNumbers);
-        return new LotteryTicket(pickedLotteryNumbers.stream()
+        return new LotteryTicket(
+                pickedLotteryNumbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList())
         );

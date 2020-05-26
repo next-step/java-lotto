@@ -32,7 +32,7 @@ public class LotteryTicketTest {
     public void makeLotteryTicket() {
         LotteryTicket lotteryTicket = new LotteryTicket(lotteryNumberList);
         assertThat(lotteryTicket.getLotteryNumbers())
-                .isEqualTo(Arrays.asList("1", "2", "3", "4", "5", "6"));
+                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("LotteryTicket 객체 생성 실패(개수 예외)")

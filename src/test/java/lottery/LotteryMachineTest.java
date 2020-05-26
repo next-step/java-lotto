@@ -4,7 +4,6 @@ import lottery.domain.LotteryMachine;
 import lottery.domain.LotteryTicketsGroup;
 import lottery.domain.PurchasePrice;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -44,7 +43,7 @@ public class LotteryMachineTest {
         LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
 
         assertThatCode(() -> {
-            LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.getLotteryTicketsGroup();
+            LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTicketsGroup();
         }).doesNotThrowAnyException();
     }
 }
