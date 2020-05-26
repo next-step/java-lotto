@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 public class Numbers {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    private static final int GROUP_BY_DELIMITER = 1;
+    private static final int GROUP_BY_INPUT = 2;
     private final List<String> numbers;
 
     public Numbers(String input) {
@@ -15,8 +17,8 @@ public class Numbers {
         String delimiter = DEFAULT_DELIMITER;
 
         if (m.find()) {
-            delimiter = m.group(1);
-            input = m.group(2);
+            delimiter = m.group(GROUP_BY_DELIMITER);
+            input = m.group(GROUP_BY_INPUT);
         }
 
         this.numbers = Arrays.asList(input.split(delimiter));
