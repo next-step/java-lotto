@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoMatch;
-import lotto.domain.LottoMatchResult;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -13,11 +11,14 @@ public final class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseCount(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+    public static void printPurchaseCount(LottoNumbers lottoNumbers) {
+        System.out.println(String.format("%s수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                NEW_LINE,
+                lottoNumbers.getCountByCreationType(CreationType.MANUAL),
+                lottoNumbers.getCountByCreationType(CreationType.AUTO)));
     }
 
-    public static void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
+    public static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
         StringBuilder builder = new StringBuilder();
         lottoNumbers.forEach(lotto -> builder.append(lotto).append(NEW_LINE));
 
@@ -52,9 +53,10 @@ public final class ResultView {
                 matchCount);
     }
 
-    public static void printProfitRate(double profitRate, String result) {
+    public static void printProfitRate(LottoMatchResult lottoMatchResult, PurchaseAmount purchaseAmount) {
+        double profitRate = lottoMatchResult.calculateProfitRate(purchaseAmount);
         System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
                 profitRate,
-                result));
+                lottoMatchResult.getProfitOrLoss(profitRate)));
     }
 }
