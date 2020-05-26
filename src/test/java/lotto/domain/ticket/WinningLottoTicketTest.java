@@ -56,7 +56,7 @@ public class WinningLottoTicketTest {
         final WinningLottoTicket winningLottoTicket =
                 WinningLottoTicketGenerator.valueOf(7, 1, 2, 3, 4, 5, 6);
 
-        assertThat(winningLottoTicket.lottoNumbers.contains(LottoNumber.of(number)))
+        assertThat(winningLottoTicket.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
     }
 
