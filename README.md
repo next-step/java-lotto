@@ -32,3 +32,5 @@
 - 로또 당첨표 정보를 가지고 있는 Enum WinningSheet
 - 로또 금액과 로또 구매 개수 가지고 있는 LottoMoney
 - 추첨기를 통해 얻은 결과를 가지고 당첨 통계를 계산하는 LottoResult 
+- LottoTicket을 감싸는 일급 컬렉션 LottoBill
+- 당첨번호와 보너스 번호를 가지는 LottoWinningNumber
