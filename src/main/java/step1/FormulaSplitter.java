@@ -14,6 +14,9 @@ public class FormulaSplitter {
     private final static String CUSTOM_DELIMITER_SEARCH_REGEX = "//(.)\n(.*)";
     private final static Pattern CUSTOM_DELIMITER_SEARCH_PATTERN = Pattern.compile(CUSTOM_DELIMITER_SEARCH_REGEX);
 
+    private final static int CUSTOM_DELIMITER_MATCHER_GROUP = 1;
+    private final static int CUSTOM_DELIMITER_TOKEN_MATCHER_GROUP = 2;
+
     public static List<Operand> split(Formula formula) {
         return Arrays.stream(getTokens(formula))
                 .map(Operand::valueOf)
@@ -23,7 +26,8 @@ public class FormulaSplitter {
     private static String[] getTokens(Formula formula) {
         Matcher matcher = CUSTOM_DELIMITER_SEARCH_PATTERN.matcher(formula.get());
         if (matcher.matches()) {
-            return matcher.group(2).split(Pattern.quote(matcher.group(1)));
+            return matcher.group(CUSTOM_DELIMITER_TOKEN_MATCHER_GROUP)
+                    .split(Pattern.quote(matcher.group(CUSTOM_DELIMITER_MATCHER_GROUP)));
         }
 
         return DEFAULT_DELIMITER_PATTERN.split(formula.get());
