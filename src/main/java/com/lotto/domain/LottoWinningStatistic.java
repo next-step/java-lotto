@@ -3,8 +3,8 @@ package com.lotto.domain;
 import com.lotto.view.LottoStatisticView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoWinningStatistic {
 
@@ -12,7 +12,7 @@ public class LottoWinningStatistic {
     private LottoStatisticView lottoStatisticView;
 
     public LottoWinningStatistic() {
-        this.lottoWinningList = new TreeMap<>();
+        this.lottoWinningList = new HashMap<>();
         Arrays.stream(LottoWinningType.values()).forEach(type -> {
             if (!type.equals(LottoWinningType.NOTHING_CLASS)) {
                 this.lottoWinningList.put(type, 0);
