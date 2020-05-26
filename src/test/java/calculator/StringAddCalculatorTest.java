@@ -17,10 +17,10 @@ public class StringAddCalculatorTest {
     @NullAndEmptySource
     public void splitAndSum_null_또는_빈문자(String input){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // when
-        int result = calculator.splitAndSum(input);
+        int result = calculator.sum(input);
 
         // then
         assertThat(result).isEqualTo(0);
@@ -31,10 +31,10 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"1,1", "2,2", "3,3", "4,4"})
     public void splitAndSum_숫자하나(String input, int expected){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // when
-        int result = calculator.splitAndSum(input);
+        int result = calculator.sum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -45,10 +45,10 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"1,1:2", "2,2:4", "3,3:6", "4,4:8"}, delimiterString = ":")
     public void splitAndSum_쉼표구분자(String input, int expected){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // when
-        int result = calculator.splitAndSum(input);
+        int result = calculator.sum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -59,10 +59,10 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"1,1:2;4", "2,2:4;8", "3,3:6;12", "4,4:8;16"}, delimiterString = ";")
     public void splitAndSum_쉼표_또는_콜론_구분자(String input, int expected){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // when`
-        int result = calculator.splitAndSum(input);
+        int result = calculator.sum(input);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -73,11 +73,11 @@ public class StringAddCalculatorTest {
     @ValueSource(strings = {"가나다", "-1", "ㅇㅇ", "aaa", "!@#"})
     public void splitAndSum_숫자이외_또는_음수_예외(String input){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> calculator.splitAndSum(input)
+                () -> calculator.sum(input)
         );
     }
 
@@ -85,10 +85,10 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_custom_구분자(){
         // given
-        StringAddCalculator calculator = new StringAddCalculator();
+        Calculator calculator = new Calculator();
 
         // when`
-        int result = calculator.splitAndSum("//;\n1;2;3");
+        int result = calculator.sum("//;\n1;2;3");
 
         // then
         assertThat(result).isEqualTo(6);

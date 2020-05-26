@@ -1,28 +1,25 @@
 package calculator;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAddCalculator {
+public class StringParser {
 
     private static final String NUMBER_CHECK_REGEX = "-[0-9]*|[\\D]*";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
-    public int splitAndSum(String input) {
-        if (isNullOrEmpty(input)) {
-            return 0;
+    public List<Integer> getNumbers(String input) {
+        List<Integer> numbers = new ArrayList<>();
+        String[] splits = getSplitsString(input);
+        for (String split : splits) {
+            numbers.add(toInteger(split));
         }
-        return getSum(getSplitString(input));
+        return numbers;
     }
 
-    private void negativeOrNotNumberCheck(String input) {
-        if (input.matches(NUMBER_CHECK_REGEX)) {
-            throw new IllegalArgumentException("음수를 제외한 숫자 외 다른 문자를 입력할 수 없습니다.");
-        }
-    }
-
-    private String[] getSplitString(String input) {
+    private String[] getSplitsString(String input) {
         negativeOrNotNumberCheck(input);
 
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(input);
@@ -33,17 +30,10 @@ public class StringAddCalculator {
         return input.split("[,:]");
     }
 
-    private boolean isNullOrEmpty(String input) {
-        return input == null || input.replaceAll(" ", "").isEmpty();
-    }
-
-    private int getSum(String[] numbers) {
-        int sum = 0;
-
-        for (String number : numbers) {
-            sum += toInteger(number);
+    private void negativeOrNotNumberCheck(String input) {
+        if (input.matches(NUMBER_CHECK_REGEX)) {
+            throw new IllegalArgumentException("음수를 제외한 숫자 외 다른 문자를 입력할 수 없습니다.");
         }
-        return sum;
     }
 
     private int toInteger(String input) {
