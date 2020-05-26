@@ -14,11 +14,13 @@ public class LottoController {
     Lottos lottos = LottoShop.buyLotto(price);
     resultView.printLottoList(lottos);
 
-    Lotto winning = LottoGenerator.generateLotto(inputView.inputWinning());
-    LottoNumber bonusNumber = inputView.inputBonus();
-    LottoGame lottoGame = LottoGame.of(lottos, winning, bonusNumber);
+    Prizes prizes = Prizes.of(lottos, WinningLotto.of(
+      LottoGenerator.generateLotto(inputView.inputWinning()),
+      inputView.inputBonus()
+    ));
+    resultView.printStat(prizes);
 
-    resultView.printStat(lottoGame);
+    LottoGame lottoGame = LottoGame.of(lottos, prizes);
     resultView.printPayoffRatio(lottoGame.getPayoffRatio());
 
   }
