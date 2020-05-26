@@ -14,3 +14,6 @@
     * 해당 숫자들도 LottoNumber로 wrapping
     
 * 요청에 따라 View에서 요구하는 데이터를 getter
+    * LotteryTicketsGroup에 포함된 티켓들의 번호 리스트
+    
+* 지난 주 당첨 번호 입력 String을 Parsing하여 LotteryTicket으로 변환

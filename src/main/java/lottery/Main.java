@@ -1,6 +1,7 @@
 package lottery;
 
 import lottery.domain.LotteryMachine;
+import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryTicketsGroup;
 import lottery.domain.PurchasePrice;
 import lottery.view.InputView;
@@ -15,5 +16,7 @@ public class Main {
 
         LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTicketsGroup();
         ResultView.printLotteryTicketsNumbers(lotteryTicketsGroup);
+
+        LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
     }
 }
