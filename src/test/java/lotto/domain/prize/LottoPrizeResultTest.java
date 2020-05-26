@@ -1,10 +1,11 @@
 package lotto.domain.prize;
 
 import lotto.domain.price.Price;
-import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
+import lotto.util.LottoTicketGenerator;
+import lotto.util.WinningLottoTicketGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,13 +29,15 @@ public class LottoPrizeResultTest {
     @BeforeEach
     void setUp() {
         tickets = new ArrayList<>();
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 7));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+        tickets.add(LottoTicketGenerator.valueOf(7, 8, 9, 10, 11, 12));
 
-        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        final WinningLottoTicket winningLottoTicket =
+                WinningLottoTicketGenerator.valueOf(7, 1, 2, 3, 4, 5, 6);
+
         matchedPrizes = LottoTickets.of(tickets).matchPrizes(winningLottoTicket);
     }
 
@@ -60,7 +63,8 @@ public class LottoPrizeResultTest {
                 Arguments.of(Prize.MISS, 1),
                 Arguments.of(Prize.FIFTH, 2),
                 Arguments.of(Prize.FOURTH, 0),
-                Arguments.of(Prize.THIRD, 1),
+                Arguments.of(Prize.THIRD, 0),
+                Arguments.of(Prize.SECOND, 1),
                 Arguments.of(Prize.FIRST, 1)
         );
     }
@@ -72,7 +76,7 @@ public class LottoPrizeResultTest {
         LottoPrizeResult lottoPrizeResult = LottoPrizeResult.init(Price.of(purchasedPrice), matchedPrizes);
 
         int expectedTotalPrizeMoney =
-                Prize.FIRST.getPrizeMoney() + Prize.THIRD.getPrizeMoney() + Prize.FIFTH.getPrizeMoney() * 2;
+                Prize.FIRST.getPrizeMoney() + Prize.SECOND.getPrizeMoney() + Prize.FIFTH.getPrizeMoney() * 2;
         float expected = (float) expectedTotalPrizeMoney / purchasedPrice;
 
         assertThat(lottoPrizeResult.calculateProfitRate()).isEqualTo(expected);

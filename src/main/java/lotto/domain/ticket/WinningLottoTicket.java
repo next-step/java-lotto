@@ -1,14 +1,40 @@
 package lotto.domain.ticket;
 
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
+import lotto.exception.ErrorMessage;
 
-public class WinningLottoTicket extends LottoTicket {
+import java.util.List;
 
-    private WinningLottoTicket(final LottoNumbers numbers) {
-        super(numbers);
+public class WinningLottoTicket {
+
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusNumber;
+
+    private WinningLottoTicket(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoTicket of(final String winningNumbers) {
-        return new WinningLottoTicket(LottoNumbers.of(winningNumbers));
+    public static WinningLottoTicket valueOf(final List<LottoNumber> winningNumbers, final int bonusNumber) {
+        LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
+        validateDuplication(lottoNumbers, bonusLottoNumber);
+
+        return new WinningLottoTicket(lottoNumbers, bonusLottoNumber);
+    }
+
+    private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusLottoNumber) {
+        if (lottoNumbers.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
+        }
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

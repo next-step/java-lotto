@@ -1,8 +1,8 @@
 package lotto.domain.dto;
 
-import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
+import lotto.util.LottoTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class LottoTicketDtoTest {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")));
+        tickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = LottoTickets.of(tickets);
 
         List<LottoTicketDto> ticketDTOS = LottoTicketDto.from(lottoTickets);

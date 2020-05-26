@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.dto.LottoTicketDto;
 import lotto.domain.prize.LottoPrizeResult;
+import lotto.domain.prize.Prize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +13,7 @@ public class ResultView {
     private final static String RESULT = "\n당첨 통계\n--------";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PRIZE_RESULT_INFO_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String NEW_LINE = "\n";
+    private static final String SECOND_PRIZE_RESULT_INFO_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
 
     public static void printPurchaseInfo(final List<LottoTicketDto> tickets) {
         printPurchasedTicketCount(tickets.size());
@@ -37,20 +38,23 @@ public class ResultView {
     }
 
     private static void printStatisticsResult(final LottoPrizeResult result) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(RESULT).append(NEW_LINE);
+        System.out.println(RESULT);
 
         result.getMatchedPrizes()
                 .keySet()
-                .forEach(prize ->
-                        stringBuilder.append(
-                                String.format(PRIZE_RESULT_INFO_FORMAT,
-                                        prize.getMatchedNumbersCount(),
-                                        prize.getPrizeMoney(),
-                                        result.getMatchedTicketCount(prize)))
-                        .append(NEW_LINE)
-                );
-        System.out.println(stringBuilder);
+                .forEach(prize -> printPrizeResult(result, prize));
+    }
+
+    private static void printPrizeResult(final LottoPrizeResult result, final Prize prize) {
+        String format = PRIZE_RESULT_INFO_FORMAT;
+        if (Prize.SECOND.equals(prize)) {
+            format = SECOND_PRIZE_RESULT_INFO_FORMAT;
+        }
+
+        System.out.println(String.format(format,
+                prize.getMatchedNumbersCount(),
+                prize.getPrizeMoney(),
+                result.getMatchedTicketCount(prize)));
     }
 
     private static void printProfitRate(final float profitRate) {

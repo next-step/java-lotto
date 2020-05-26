@@ -2,7 +2,6 @@ package lotto.domain.number;
 
 import lotto.exception.ErrorMessage;
 
-import java.security.InvalidParameterException;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -23,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void verifyRange(final int number) {
         if (MAX_VALUE < number || MIN_VALUE > number) {
-            throw new InvalidParameterException(String.format(ErrorMessage.RANGE_OF_LOTTO_NUMBER, MIN_VALUE, MAX_VALUE));
+            throw new IllegalArgumentException(String.format(ErrorMessage.RANGE_OF_LOTTO_NUMBER, MIN_VALUE, MAX_VALUE));
         }
     }
 

@@ -12,6 +12,7 @@ public class Price {
 
     private Price(final int price) {
         validateNegative(price);
+        validateAvailablePrice(price);
         this.price = price;
     }
 
@@ -25,7 +26,7 @@ public class Price {
         }
     }
 
-    public void validateAvailablePrice() {
+    private void validateAvailablePrice(final int price) {
         if (price < ONE_TICKET_PRICE) {
             throw new IllegalArgumentException(String.format(ErrorMessage.REQUIRED_MIN_PRICE, MIN_PRICE));
         }
@@ -37,9 +38,5 @@ public class Price {
 
     public int ticketCount() {
         return price / ONE_TICKET_PRICE;
-    }
-
-    public int getPrice() {
-        return price;
     }
 }

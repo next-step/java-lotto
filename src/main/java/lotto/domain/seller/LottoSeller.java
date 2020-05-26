@@ -19,16 +19,10 @@ public class LottoSeller {
     }
 
     public LottoTickets buyTicket(final Price price) {
-        validatePrice(price);
-
-        List<LottoTicket> tickets = Stream.generate(LottoNumbers::auto)
+        List<LottoTicket> tickets = Stream.generate(LottoNumbers::autoCreate)
                 .limit(price.ticketCount())
                 .map(LottoTicket::of)
                 .collect(Collectors.toList());
         return LottoTickets.of(tickets);
-    }
-
-    private void validatePrice(final Price price) {
-        price.validateAvailablePrice();
     }
 }
