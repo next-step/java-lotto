@@ -20,5 +20,7 @@ public class Main {
         lottoGame.countCorrectNumbers(lastLottoNumbers);
         lottoGame.printStatistics();
 
+        double rateOfProfit = lottoGame.calculateRateOfProfit();
+        lottoGame.printRateOfProfit(rateOfProfit);
     }
 }

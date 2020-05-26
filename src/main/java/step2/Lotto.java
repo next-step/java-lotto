@@ -27,6 +27,7 @@ public class Lotto {
 
     private void makeNumbers() {
         numbers = Stream.generate(this::generateNumber)
+            .distinct()
             .limit(NUMBER_COUNT)
             .collect(Collectors.toList());
     }
