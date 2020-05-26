@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import stringaddcalculator.PositiveNumber;
 import stringaddcalculator.PositiveNumberExtractor;
-import stringaddcalculator.StringAddCalculator;
 
 public class PositiveNumberExtractorTest {
 
@@ -44,21 +43,5 @@ public class PositiveNumberExtractorTest {
     String testNumber = "5";
     List<PositiveNumber> positiveNumber = PositiveNumberExtractor.create(testNumber);
     assertThat(positiveNumber.get(0).getNumber()).isEqualTo(Integer.parseInt(testNumber));
-  }
-
-  @DisplayName("구분자가 컴마로 구성된 문자열이 입력될 경우 이를 합한 숫자가 반환된다.")
-  @CsvSource(value = {"3,4! 7", "5,6! 11", "5,6,7! 18"}, delimiter = '!')
-  @ParameterizedTest
-  void 컴마로_구성된_문자열의_합이_리턴된다(String value, Integer result) {
-    List<PositiveNumber> positiveNumbers = PositiveNumberExtractor.create(value);
-    assertThat(StringAddCalculator.sum(positiveNumbers)).isEqualTo(result);
-  }
-
-  @DisplayName("구분자가 콜론으로 구성된 문자열이 입력될 경우 이를 합한 숫자가 반환된다.")
-  @CsvSource(value = {"3:4! 7", "5:6! 11", "5:6:7! 18"}, delimiter = '!')
-  @ParameterizedTest
-  void 콜론으로_구성된_문자열의_합이_리턴된다(String value, Integer result) {
-    List<PositiveNumber> positiveNumbers = PositiveNumberExtractor.create(value);
-    assertThat(StringAddCalculator.sum(positiveNumbers)).isEqualTo(result);
   }
 }
