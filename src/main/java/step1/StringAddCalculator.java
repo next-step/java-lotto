@@ -1,7 +1,5 @@
 package step1;
 
-import static step1.Constants.COMMA_OR_COLON_REX;
-import static step1.Constants.SPECIAL_DELIMITER_REX;
 import static step1.ErrorMessages.SHOULD_BE_NUMBER;
 import static step1.ErrorMessages.SHOULD_NOT_NEGATIVE_NUMBER;
 
@@ -9,6 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
+    public static final String COMMA_OR_COLON_REX = ",|:";
+    public static final String SPECIAL_DELIMITER_REX = "//(.)\n(.*)";
 
     public static int splitAndSum(String numberString) {
         if (!validateText(numberString)) {
