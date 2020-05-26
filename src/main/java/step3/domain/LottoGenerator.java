@@ -31,6 +31,7 @@ public class LottoGenerator {
 
   public static Lotto generateLotto (String lottoNumbers) {
     return Arrays.stream(lottoNumbers.split(DELIMITER))
+                 .map(String::trim)
                  .map(LottoNumber::of)
                  .collect(collectingAndThen(toList(), Lotto::of));
   }
