@@ -1,11 +1,9 @@
 package stringaddcalculator;
 
-import java.util.List;
-
 public class StringAddCalculator {
 
-  public static Integer sum(List<PositiveNumber> positiveNumbers) {
-    return positiveNumbers.stream()
+  public static Integer sum(String value) {
+    return PositiveNumberExtractor.create(value).stream()
         .mapToInt(PositiveNumber::getNumber)
         .sum();
   }
