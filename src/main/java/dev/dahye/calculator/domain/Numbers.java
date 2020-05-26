@@ -26,9 +26,26 @@ public class Numbers {
         int result = 0;
 
         for (String number : numbers) {
-            result += Integer.parseInt(number);
+            result += getValidNumber(number);
         }
 
         return result;
+    }
+
+    private int getValidNumber(String stringNumber) {
+        try {
+            int number = Integer.parseInt(stringNumber);
+            validateMinus(number);
+
+            return number;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 이외의 값은 계산할 수 없습니다.", e);
+        }
+    }
+
+    private void validateMinus(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수를 계산할 수 없습니다.");
+        }
     }
 }

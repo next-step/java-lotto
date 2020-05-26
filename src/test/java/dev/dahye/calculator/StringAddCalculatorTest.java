@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("문자열 덧셈 계산기")
 class StringAddCalculatorTest {
@@ -59,5 +60,20 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
         assertEquals(expected, result);
     }
-    
+
+    @ParameterizedTest(name = "input = {0}")
+    @ValueSource(strings = {"-1,2,3"})
+    @DisplayName("음수를 전달하는 경우 RuntimeException 예외 발생")
+    void exception_음수(String input) {
+        assertThrows(RuntimeException.class,
+                () -> StringAddCalculator.splitAndSum(input), "음수를 계산할 수 없습니다.");
+    }
+
+    @ParameterizedTest(name = "input = {0}")
+    @ValueSource(strings = {"1, 2,3", "1,?2,3", "1,,3", ",2,3"})
+    @DisplayName("숫자 이외의 값을 전달하는 경우 RuntimeException 예외 발생")
+    void exception_숫자_이외의_값(String input) {
+        assertThrows(RuntimeException.class,
+                () -> StringAddCalculator.splitAndSum(input), "숫자 이외의 값은 계산할 수 없습니다.");
+    }
 }
