@@ -16,6 +16,10 @@ public class Prizes {
                       .collect(toList());
   }
 
+  public static Prizes of (Lottos lottos, WinningLotto winningLotto) {
+    return new Prizes(lottos, winningLotto);
+  }
+
   private long getWinningCount (Lottos lottos, Rank rank) {
     return lottos.stream()
                  .map(winningLotto::getRankOfLotto)
@@ -24,7 +28,7 @@ public class Prizes {
   }
 
   public Stream<Prize> stream() {
-    return this.stream();
+    return prizes.stream();
   }
 
   public long getPayoff () {
