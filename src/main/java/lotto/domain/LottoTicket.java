@@ -45,4 +45,8 @@ public class LottoTicket {
     public String toString() {
         return lotto.toString();
     }
+
+    public List<Lotto> getLotto() {
+        return this.lotto;
+    }
 }
