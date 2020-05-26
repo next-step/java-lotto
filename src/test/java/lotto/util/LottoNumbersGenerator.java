@@ -13,10 +13,10 @@ public class LottoNumbersGenerator {
     }
 
     public static LottoNumbers valueOf(final int... numbers) {
-        return LottoNumbers.manualCreate(convertToLottoNumbers(numbers));
+        return LottoNumbers.manualCreate(toLottoNumberList(numbers));
     }
 
-    public static List<LottoNumber> convertToLottoNumbers(final int... numbers) {
+    public static List<LottoNumber> toLottoNumberList(final int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
