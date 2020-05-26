@@ -64,12 +64,6 @@ public class LottoBuyer {
         return lottoTickets;
     }
 
-    private void validateAvailablePurchaseCount(int manualCount) {
-        if (manualCount > this.availablePurchaseCount) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers) {
         return this.lottoShop.calculateEarningsRate(lottoMatchers, this.price);
     }

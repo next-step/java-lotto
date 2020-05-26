@@ -1,6 +1,5 @@
-package lotto.domain.fake;
+package lotto.generator;
 
-import lotto.domain.AutoLottoNumberGenerator;
 import lotto.domain.Lotto;
 
 import java.util.List;

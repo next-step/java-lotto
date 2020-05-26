@@ -1,7 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.fake.FakeAutoLottoNumberGenerator;
+import lotto.generator.ManualLottoNumberGenerator;
+import lotto.matcher.LottoMatcher;
+import lotto.generator.FakeAutoLottoNumberGenerator;
+import lotto.generator.AutoLottoNumberGenerator;
+import lotto.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,19 +22,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoShopTest {
 
-    private LottoShop createLottoSeller(int price) {
-        return new LottoShop(price);
+    private LottoShop createLottoSeller() {
+        return new LottoShop();
     }
 
     private LottoNumberGenerator createAutoLottoNumberGenerator() {
         return new AutoLottoNumberGenerator();
     }
 
+    private LottoNumberGenerator createManualLottoNumberGenerator() {
+        return new ManualLottoNumberGenerator();
+    }
+
     @ParameterizedTest
     @MethodSource("provideNotValidPrice")
     @DisplayName("로또 구입 가격이 1000원 보다 낮은 경우 Exception")
     void validatePrice(int price) {
-        assertThatThrownBy(() -> this.createLottoSeller(price))
+        LottoShop lottoShop = this.createLottoSeller();
+        assertThatThrownBy(() -> lottoShop.availablePurchase(price))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,20 +51,31 @@ class LottoShopTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("providePurchaseAmountAndLottoCount")
-    @DisplayName("로또 발급 테스트")
-    void buyLottoTest(int price, int lottoCount) {
-        LottoShop lottoShop = this.createLottoSeller(price);
-        List<LottoNumberResult> lottoNumberResults = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
-        assertThat(lottoNumberResults).hasSize(lottoCount);
+    @Test
+    @DisplayName("자동 로또 발급 테스트")
+    void buyLottoTest() {
+        LottoShop lottoShop = this.createLottoSeller();
+        LottoTicket lottoTickets = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        assertThat(lottoTickets.getLotto()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
-    private static Stream<Arguments> providePurchaseAmountAndLottoCount() {
+    @ParameterizedTest
+    @MethodSource("provideManualLotto")
+    @DisplayName("수동 로또 구입 테스트")
+    void buyManualLotto(List<Integer> lottoNumbers) {
+        LottoShop lottoShop = this.createLottoSeller();
+        List<Lotto> allLotto = lottoNumbers.stream()
+                .map(lottoNumber -> new Lotto(lottoNumber))
+                .collect(Collectors.toList());
+        LottoTicket lottoTickets = lottoShop.buyLotto(this.createManualLottoNumberGenerator(), allLotto, LottoNumbers.LOTTO_SIZE);
+        assertThat(lottoTickets.getLotto()).containsAll(allLotto);
+    }
+
+    private static Stream<Arguments> provideManualLotto() {
         return Stream.of(
-                Arguments.of(1000, 1),
-                Arguments.of(4600, 4),
-                Arguments.of(7800, 7)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Arguments.of(Arrays.asList(5, 6, 7, 4, 3, 1)),
+                Arguments.of(Arrays.asList(45, 3, 22, 5, 7, 11))
         );
     }
 
@@ -62,8 +83,8 @@ class LottoShopTest {
     @MethodSource("providePriceAndLottoMatchers")
     @DisplayName("수익률 테스트")
     void calculateEarningsRateTest(int price, List<LottoMatcher> lottoMatchers, double earningRate) {
-        LottoShop lottoShop = this.createLottoSeller(price);
-        BigDecimal result = lottoShop.calculateEarningsRate(lottoMatchers);
+        LottoShop lottoShop = this.createLottoSeller();
+        BigDecimal result = lottoShop.calculateEarningsRate(lottoMatchers, price);
         assertThat(result.doubleValue()).isEqualTo(earningRate);
     }
 
@@ -82,9 +103,9 @@ class LottoShopTest {
     @MethodSource("provideLottoNumbers")
     @DisplayName("생성된 로또 번호 테스트")
     void verifyLottoNumbers(List<Lotto> lottoNumber) {
-        LottoShop lottoShop = this.createLottoSeller(1000);
-        List<LottoNumberResult> result = lottoShop.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
-        assertThat(result.get(0).toString()).isEqualTo(lottoNumber.toString());
+        LottoShop lottoShop = this.createLottoSeller();
+        LottoTicket result = lottoShop.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        assertThat(result.toString()).isEqualTo(lottoNumber.toString());
     }
 
     private static Stream<Arguments> provideLottoNumbers() {

@@ -47,4 +47,5 @@ class LottoTicketTest {
     private LottoWinnerNumber createLottoWinnerNumbers(List<Lotto> winnerNumbers, int bonusBall) {
         return new LottoWinnerNumber(winnerNumbers, new Lotto(bonusBall));
     }
+
 }
