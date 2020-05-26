@@ -12,6 +12,8 @@ public class LotteryMachine {
     private static final long LOTTERY_TICKET_PRICE = 1000;
     private static final List<Integer> LOTTERY_NUMBERS_LIST = IntStream.rangeClosed(1, 45).boxed()
             .collect(Collectors.toList());
+    private static final int FIRST_INDEX = 0;
+    private static final int LAST_INDEX = 6;
     private final int lotteryTicketCounts;
 
     public LotteryMachine(PurchasePrice purchasePrice) {
@@ -23,24 +25,15 @@ public class LotteryMachine {
         return new LotteryTicketsGroup(
                 Stream.generate(this::makeLotteryTicket)
                 .limit(lotteryTicketCounts)
-                .collect(Collectors.toList()) //Ticket n장 list를 LotteryTicketGroup으로 바인딩
+                .collect(Collectors.toList())
         );
     }
 
     private LotteryTicket makeLotteryTicket() {
-        List<Integer> lotteryNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            Collections.shuffle(LOTTERY_NUMBERS_LIST);
-            int pickedLotteryNumber = LOTTERY_NUMBERS_LIST.get(0);
-
-            if (lotteryNumbers.contains(pickedLotteryNumber)) {
-                i--;
-            }
-            else {
-                lotteryNumbers.add(pickedLotteryNumber);
-            }
-        }
-        return new LotteryTicket(lotteryNumbers.stream()
+        Collections.shuffle(LOTTERY_NUMBERS_LIST);
+        List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
+        Collections.sort(pickedLotteryNumbers);
+        return new LotteryTicket(pickedLotteryNumbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList())
         );
