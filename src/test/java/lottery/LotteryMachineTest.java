@@ -1,11 +1,16 @@
 package lottery;
 
-import lottery.domain.LotteryMachine;
-import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.PurchasePrice;
+import lottery.domain.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -45,5 +50,31 @@ public class LotteryMachineTest {
         assertThatCode(() -> {
             LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTicketsGroup();
         }).doesNotThrowAnyException();
+    }
+
+    @DisplayName("LotteryMachine에서 당첨 번호를 비교해 당첨된 로또 티켓들만 반환")
+    @ParameterizedTest
+    @MethodSource("mockLotteryTicketBuilder")
+    public void findLotteryWinnerTicketsGroup(LotteryTicket winnerTicket, int winnerCounts) {
+        LotteryMachine lotteryMachine = new LotteryMachine(new PurchasePrice(1000));
+        LotteryTicket loser = new LotteryTicket(Arrays.stream("1,2,3,4,5,6".split(","))
+                .map(number -> new LotteryNumber(Integer.parseInt(number)))
+                .collect(Collectors.toList()));
+        LotteryTicket winner = new LotteryTicket(Arrays.stream("11,22,33,44,1,2".split(","))
+                .map(number -> new LotteryNumber(Integer.parseInt(number)))
+                .collect(Collectors.toList()));
+
+        LotteryTicketsGroup lotteryTicketsGroup = new LotteryTicketsGroup(Arrays.asList(winner, loser));
+        LotteryTicketsGroup winnerTicketsGroup = lotteryMachine
+                .findWinnerTicketsGroup(lotteryTicketsGroup, winnerTicket);
+
+        assertThat(winnerTicketsGroup.getLotteryTicketsNumbers().size()).isEqualTo(winnerCounts);
+    }
+
+    private static Stream<Arguments> mockLotteryTicketBuilder() {
+        return Stream.of(
+                Arguments.of(new LotteryTicket(StringParser.parseString("11, 22, 33, 44, 1, 2")), 1),
+                Arguments.of(new LotteryTicket(StringParser.parseString("1, 2, 3, 44, 9, 8")), 2)
+        );
     }
 }

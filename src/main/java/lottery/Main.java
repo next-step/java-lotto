@@ -18,5 +18,7 @@ public class Main {
         ResultView.printLotteryTicketsNumbers(lotteryTicketsGroup);
 
         LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
+        LotteryTicketsGroup winnerTicketsGroup = lotteryMachine
+                .findWinnerTicketsGroup(lotteryTicketsGroup, lastWinnerTicket);
     }
 }

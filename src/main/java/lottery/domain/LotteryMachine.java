@@ -29,6 +29,11 @@ public class LotteryMachine {
         );
     }
 
+    public LotteryTicketsGroup findWinnerTicketsGroup(LotteryTicketsGroup lotteryTicketsGroup,
+                                                      LotteryTicket lastWinnerTicket) {
+        return new LotteryTicketsGroup(lotteryTicketsGroup.findWinnerTicketsGroup(lastWinnerTicket));
+    }
+
     private LotteryTicket makeLotteryTicket() {
         Collections.shuffle(LOTTERY_NUMBERS_LIST);
         List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
