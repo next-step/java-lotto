@@ -50,7 +50,7 @@ public class LotteryTicketTest {
     @Test
     public void throwDuplicatedExceptionOnMakingLotteryTicket() {
         lotteryNumberList.remove(0);
-        lotteryNumberList.add(new LotteryNumber(1));
+        lotteryNumberList.add(new LotteryNumber(2));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
