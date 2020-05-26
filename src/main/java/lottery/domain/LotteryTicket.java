@@ -23,6 +23,19 @@ public class LotteryTicket {
         if (lotteryNumbers.size() != LOTTERY_NUMBER_COUNTS) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_COUNTS);
         }
+        if (isDuplicatedLotteryNumbers(lotteryNumbers)) {
+            throw new IllegalArgumentException(ErrorMessages.DUPLICATED_NUMBER);
+        }
     }
 
+    private boolean isDuplicatedLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+        long filteredLotteryNumberCounts = lotteryNumbers.stream()
+                .map(LotteryNumber::getLotteryNumber)
+                .distinct()
+                .count();
+        if (lotteryNumbers.size() != filteredLotteryNumberCounts) {
+            return true;
+        }
+        return false;
+    }
 }

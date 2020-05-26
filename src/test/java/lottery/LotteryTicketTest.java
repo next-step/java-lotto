@@ -45,4 +45,16 @@ public class LotteryTicketTest {
                    new LotteryTicket(lotteryNumberList);
                 });
     }
+
+    @DisplayName("LotteryTicket 객체 생성 실패(중복된 번호)")
+    @Test
+    public void throwDuplicatedExceptionOnMakingLotteryTicket() {
+        lotteryNumberList.remove(0);
+        lotteryNumberList.add(new LotteryNumber(1));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new LotteryTicket(lotteryNumberList);
+                });
+    }
 }
