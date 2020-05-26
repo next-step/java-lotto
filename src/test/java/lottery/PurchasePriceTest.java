@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class PurchasePriceTest {
 
@@ -17,5 +18,15 @@ public class PurchasePriceTest {
 
         assertThat(purchasePrice.getPurchasePrice())
                 .isEqualTo(userInput);
+    }
+
+    @DisplayName("PurchasePrice 객체 생성 실패 (0 이하)")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -30, -999})
+    public void throwExceptionOnMakingPurchasePriceObject(int userInput) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                   new PurchasePrice(userInput);
+                });
     }
 }
