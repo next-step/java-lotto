@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import stringaddcalculator.PositiveNumber;
 import stringaddcalculator.PositiveNumberExtractor;
 
 public class PositiveNumberExtractorTest {
@@ -16,7 +15,7 @@ public class PositiveNumberExtractorTest {
   void 음수인_경우_생성되지_않는다() {
     assertThatExceptionOfType(RuntimeException.class)
         .isThrownBy(() -> {
-          PositiveNumberExtractor.create("-10");
+          PositiveNumberExtractor.sum("-10");
         });
   }
 
@@ -24,23 +23,37 @@ public class PositiveNumberExtractorTest {
   @NullAndEmptySource
   @ParameterizedTest
   void NULL_빈_문자열이_입력된_경우_0을_뱉는다(String value) {
-    PositiveNumber positiveNumber = PositiveNumberExtractor.create(value);
-    assertThat(positiveNumber.getNumber()).isEqualTo(0);
+    int positiveNumber = PositiveNumberExtractor.sum(value);
+    assertThat(positiveNumber).isEqualTo(0);
   }
 
   @DisplayName("입력받은 값이 변환 불가능한 경우 RuntimeException을 뱉는다.")
-  @CsvSource({"*3", "&6", "#132"})
+  @CsvSource({"*3", "&6", "$32"})
   @ParameterizedTest
   void 정수로_변경_불가하면_생성되지_않는다(String value) {
     assertThatExceptionOfType(NumberFormatException.class)
-        .isThrownBy(() -> PositiveNumberExtractor.create(value));
+        .isThrownBy(() -> PositiveNumberExtractor.sum(value));
   }
 
   @DisplayName("하나만 입력된 자기 자신의 양수의 경우 정상적으로 출력된다.")
   @Test
   void 양수인_경우_생성된다() {
-    int testNumber = 5;
-    PositiveNumber positiveNumber = PositiveNumberExtractor.create(testNumber);
-    assertThat(positiveNumber.getNumber()).isEqualTo(testNumber);
+    String testNumber = "5";
+    int positiveNumber = PositiveNumberExtractor.sum(testNumber);
+    assertThat(positiveNumber).isEqualTo(Integer.parseInt(testNumber));
+  }
+
+  @DisplayName("구분자가 컴마로 구성된 문자열이 입력될 경우 이를 합한 숫자가 반환된다.")
+  @CsvSource(value = {"3,4! 7", "5,6! 11", "5,6,7! 18"}, delimiter = '!')
+  @ParameterizedTest
+  void 컴마로_구성된_문자열의_합이_리턴된다(String value, Integer result) {
+    assertThat(PositiveNumberExtractor.sum(value)).isEqualTo(result);
+  }
+
+  @DisplayName("구분자가 콜론으로 구성된 문자열이 입력될 경우 이를 합한 숫자가 반환된다.")
+  @CsvSource(value = {"3:4! 7", "5:6! 11", "5:6:7! 18"}, delimiter = '!')
+  @ParameterizedTest
+  void 콜론으로_구성된_문자열의_합이_리턴된다(String value, Integer result) {
+    assertThat(PositiveNumberExtractor.sum(value)).isEqualTo(result);
   }
 }
