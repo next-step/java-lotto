@@ -19,11 +19,7 @@ public class StringAddCalculator {
     }
 
     private static Boolean validateText(String numberString) {
-        if (numberString == null) {
-            return false;
-        }
-
-        if (numberString.isEmpty()) {
+        if (numberString == null || numberString.isEmpty()) {
             return false;
         }
 
