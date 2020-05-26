@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static final String NUMBER_CHECK_REGEX = "-[0-9]*|[\\D]*";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+
     public int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return 0;
@@ -14,7 +17,7 @@ public class StringAddCalculator {
     }
 
     private void negativeOrNotNumberCheck(String input) {
-        if (input.matches("-[0-9]*|[\\D]*")) {
+        if (input.matches(NUMBER_CHECK_REGEX)) {
             throw new IllegalArgumentException("음수를 제외한 숫자 외 다른 문자를 입력할 수 없습니다.");
         }
     }
@@ -22,7 +25,7 @@ public class StringAddCalculator {
     private String[] getSplitString(String input) {
         negativeOrNotNumberCheck(input);
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
