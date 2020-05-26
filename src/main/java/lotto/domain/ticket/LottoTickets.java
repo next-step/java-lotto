@@ -1,15 +1,13 @@
 package lotto.domain.ticket;
 
+import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningNumbers;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.reducing;
+import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -19,11 +17,10 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResult(WinningNumbers winningNumbers) {
-        Map<Integer, Integer> lottoStatistics = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.getMatchCount(winningNumbers))
-                .collect(groupingBy(Function.identity(), reducing(0, e -> 1, Integer::sum)));
-
-        return new LottoResult(lottoStatistics);
+        List<LottoPrize> lottoPrizes = lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.calculateLottoPrize(winningNumbers))
+                .collect(toList());
+        return new LottoResult(lottoPrizes);
     }
 
     public List<LottoTicket> getLottoTickets() {

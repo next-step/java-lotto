@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.LottoNumberSetting;
+import lotto.domain.result.LottoPrize;
 import lotto.domain.result.WinningNumbers;
 
 import java.util.Set;
@@ -14,11 +15,6 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static boolean isValidNumber(Integer number) {
-        return number >= LottoNumberSetting.BEGIN_BOUND.getValue()
-                && number >= LottoNumberSetting.END_BOUND.getValue();
-    }
-
     private void validate(Set<Integer> lottoNumbers) {
         Set<Integer> validLottoNumbers = lottoNumbers.stream()
                 .filter(LottoTicket::isValidNumber)
@@ -28,11 +24,18 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(lottoNumbers.stream()
+    private static boolean isValidNumber(Integer number) {
+        return number >= LottoNumberSetting.BEGIN_BOUND.getValue()
+                && number <= LottoNumberSetting.END_BOUND.getValue();
+    }
+
+    public LottoPrize calculateLottoPrize(WinningNumbers winningNumbers) {
+        int matchCount = Math.toIntExact(lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count());
+        return LottoPrize.findByMathCount(matchCount);
     }
+
 
     @Override
     public String toString() {

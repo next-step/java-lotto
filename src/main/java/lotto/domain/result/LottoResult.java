@@ -1,19 +1,19 @@
 package lotto.domain.result;
 
 import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
 public class LottoResult {
-    private final Map<Integer, Integer> lottoStatistics;
+    private final List<LottoPrize> lottoStatistics;
 
-    public LottoResult(Map<Integer, Integer> lottoStatistics) {
-        this.lottoStatistics = lottoStatistics;
+    public LottoResult(List<LottoPrize> lottoPrizes) {
+        this.lottoStatistics = lottoPrizes;
     }
 
     public int getNumberOfHitTickets(final int hitCount) {
-        Integer numberOfHitTickets = lottoStatistics.get(hitCount);
-        return Objects.isNull(numberOfHitTickets) ? 0 : numberOfHitTickets;
+        return Math.toIntExact(lottoStatistics.stream()
+                .filter(lottoPrize -> lottoPrize.getHitCount() == hitCount)
+                .count());
     }
 
     public double getRateOfProfit(final int spentMoney) {
@@ -21,7 +21,7 @@ public class LottoResult {
         return (double) totalProfit / spentMoney;
     }
 
-    public Map<Integer, Integer> getLottoStatistics() {
-        return Collections.unmodifiableMap(lottoStatistics);
+    public List<LottoPrize> getLottoStatistics() {
+        return Collections.unmodifiableList(lottoStatistics);
     }
 }
