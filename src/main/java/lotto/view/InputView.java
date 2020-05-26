@@ -1,76 +1,77 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 import lotto.exception.InputValueException;
 import lotto.util.StringUtils;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String DELIMITER_PATTERN = ", ";
-    private static final int MIN_PURCHASE_AMOUNT = 1000;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final String NEW_LINE = System.lineSeparator();
 
     private InputView() {
     }
 
-    public static int getPurchaseAmount() {
+    public static PurchaseAmount getPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        String purchaseAmount = SCANNER.nextLine();
+        String inputValue = SCANNER.nextLine();
 
-        validateBlank(purchaseAmount);
+        validateBlank(inputValue);
 
-        int amount = StringUtils.toInt(purchaseAmount);
-        validatePurchaseAmount(amount);
-
-        return amount;
+        return PurchaseAmount.newInstance(StringUtils.toInt(inputValue));
     }
 
     private static void validateBlank(String value) {
-        if (value == null || value.trim().isEmpty()) {
+        if (StringUtils.isBlank(value)) {
             throw new InputValueException("데이터를 입력하세요.");
         }
     }
 
-    private static void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
-            throw new InputValueException("구입금액을 1000원보다 작게 입력할 수 없습니다.");
-        }
+    public static ManualLottoCount getManualLottoCount(PurchaseAmount purchaseAmount) {
+        System.out.println(NEW_LINE + "수동으로 구매할 로또 수를 입력해 주세요.");
+        String inputValue = SCANNER.nextLine();
+
+        int manualLottoCount = StringUtils.toInt(inputValue);
+        return ManualLottoCount.newInstance(manualLottoCount, purchaseAmount);
+    }
+
+    public static ManualNumbers getManualNumbers(ManualLottoCount manualLottoCount) {
+        System.out.println(NEW_LINE + "수동으로 구매할 번호를 입력해 주세요.");
+
+        return ManualNumbers.newInstance(inputManualNumbers(manualLottoCount));
+    }
+
+    private static List<String> inputManualNumbers(ManualLottoCount manualLottoCount) {
+        return Stream.generate(() -> {
+                    String inputValue = SCANNER.nextLine();
+                    validateBlank(inputValue);
+                    return inputValue;
+                })
+                .limit(manualLottoCount.getManualLottoCount())
+                .collect(Collectors.toList());
     }
 
     public static List<Integer> getLastWeekLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String lottoNumbers = SCANNER.nextLine();
+        String inputValue = SCANNER.nextLine();
 
-        validateBlank(lottoNumbers);
+        validateBlank(inputValue);
 
-        return LottoNumbers.createNonDuplicateNumbers(lottoNumbers);
+        return LottoNumber.createNonDuplicateNumbers(inputValue);
     }
 
-    public static int getBonusNumber(LottoNumbers lastWinLottoNumbers) {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusNumber = SCANNER.nextLine();
+    public static BonusNumber getBonusNumber(LottoNumber lastWinLottoNumber) {
+        System.out.println(NEW_LINE + "보너스 볼을 입력해 주세요.");
+        String inputValue = SCANNER.nextLine();
 
-        validateBlank(bonusNumber);
+        validateBlank(inputValue);
 
-        int number = StringUtils.toInt(bonusNumber);
-
-        validateBonusNumber(number, lastWinLottoNumbers);
-
-        return number;
-    }
-
-    public static void validateBonusNumber(int bonusNumber, LottoNumbers lastWinLottoNumbers) {
-        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-            throw new InputValueException("보너스 번호는 1 ~ 45 까지 입력 가능합니다.");
-        }
-
-        if (lastWinLottoNumbers.isMatchNumber(bonusNumber)) {
-            throw new InputValueException("당첨 번호에 포함된 번호를 입력할 수 없습니다.");
-        }
+        int bonusNumber = StringUtils.toInt(inputValue);
+        return BonusNumber.newInstance(bonusNumber, lastWinLottoNumber);
     }
 }
