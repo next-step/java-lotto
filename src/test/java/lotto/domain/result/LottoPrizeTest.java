@@ -13,20 +13,20 @@ class LottoPrizeTest {
 
     static Stream<Arguments> lottoPrizes() {
         return Stream.of(
-                Arguments.of(3, LottoPrize.FOURTH),
-                Arguments.of(4, LottoPrize.THIRD),
-                Arguments.of(5, LottoPrize.SECOND),
-                Arguments.of(6, LottoPrize.FIRST),
-                Arguments.of(2, LottoPrize.MISS)
+                Arguments.of(3, false, LottoPrize.FIFTH),
+                Arguments.of(5, false, LottoPrize.THIRD),
+                Arguments.of(5, true, LottoPrize.SECOND),
+                Arguments.of(6, false, LottoPrize.FIRST),
+                Arguments.of(2, false, LottoPrize.MISS)
         );
     }
 
     @DisplayName("번호일치 갯수에 따른 LottoPrize를 반환한다")
     @MethodSource("lottoPrizes")
     @ParameterizedTest
-    void findLottoPrize(int matchCount, LottoPrize expectedLottoPrize) {
+    void findLottoPrize(int matchCount, boolean matchBonus, LottoPrize expectedLottoPrize) {
         //when
-        LottoPrize byMathCount = LottoPrize.findByMathCount(matchCount);
+        LottoPrize byMathCount = LottoPrize.findByMathCount(matchCount, matchBonus);
 
         //then
         assertThat(byMathCount).isEqualTo(expectedLottoPrize);

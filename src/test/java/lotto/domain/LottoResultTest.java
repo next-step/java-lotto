@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
+import lotto.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +21,13 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(statistics);
 
         assertAll(
-                () -> assertThat(lottoResult.getRateOfProfit(60000)).isEqualTo(1),
-                () -> assertThat(lottoResult.getRateOfProfit(120000)).isEqualTo(0.5)
+                () -> assertThat(lottoResult.getRateOfProfit(new Money(60000))).isEqualTo(1),
+                () -> assertThat(lottoResult.getRateOfProfit(new Money(120000))).isEqualTo(0.5)
         );
     }
 
     private List<LottoPrize> createStatistics() {
-        return Arrays.asList(LottoPrize.FOURTH, LottoPrize.FOURTH, LottoPrize.THIRD);
+        return Arrays.asList(LottoPrize.FIFTH, LottoPrize.FIFTH, LottoPrize.FOURTH);
     }
 
 }

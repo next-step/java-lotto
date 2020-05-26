@@ -1,8 +1,8 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -17,13 +17,17 @@ public class InputView {
         return Long.valueOf(SCANNER.nextLine());
     }
 
-    public static List<Integer> askLastWeekWinningNumbers() {
+    public static Set<Integer> askLastWeekWinningNumbers() {
         System.out.println("지난주 당첨번호를 입력해주세요.");
         String winningNumbers = SCANNER.nextLine();
         return Arrays.stream(winningNumbers.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
-                .map(Integer::new)
-                .collect(Collectors.toList());
+                .map(Integer::valueOf)
+                .collect(Collectors.toSet());
     }
 
+    public static int askBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
 }

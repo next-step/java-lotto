@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.result.LottoResult;
 import lotto.domain.ticket.LottoTickets;
+import lotto.vo.Money;
 
 public class OutputView {
 
@@ -14,7 +15,7 @@ public class OutputView {
         lottoTickets.getLottoTickets().forEach(System.out::println);
     }
 
-    public static void printResult(LottoResult lottoResult, int spentMoney) {
+    public static void printResult(LottoResult lottoResult, Money spentMoney) {
         System.out.println("당첨통계");
         System.out.println("--------");
         System.out.printf("3개 일치(5000원) - %d개%n", lottoResult.getNumberOfHitTickets(3));

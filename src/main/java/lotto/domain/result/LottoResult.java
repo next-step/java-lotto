@@ -1,5 +1,7 @@
 package lotto.domain.result;
 
+import lotto.vo.Money;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class LottoResult {
                 .count());
     }
 
-    public double getRateOfProfit(final int spentMoney) {
-        long totalProfit = LottoPrize.calculateTotalReword(lottoStatistics);
-        return (double) totalProfit / spentMoney;
+    public double getRateOfProfit(final Money spentMoney) {
+        Money totalProfit = LottoPrize.calculateTotalReword(lottoStatistics);
+        return (double) totalProfit.getValue() / spentMoney.getValue();
     }
 
     public List<LottoPrize> getLottoStatistics() {

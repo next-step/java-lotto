@@ -2,7 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.LottoNumberSetting;
 import lotto.domain.result.LottoPrize;
-import lotto.domain.result.WinningNumbers;
+import lotto.domain.result.WinningTicket;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,16 +29,23 @@ public class LottoTicket {
                 && number <= LottoNumberSetting.END_BOUND.getValue();
     }
 
-    public LottoPrize calculateLottoPrize(WinningNumbers winningNumbers) {
+    public LottoPrize calculateLottoPrize(WinningTicket winningTicket) {
         int matchCount = Math.toIntExact(lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningTicket::contains)
                 .count());
-        return LottoPrize.findByMathCount(matchCount);
+        boolean matchBonus = lottoNumbers.stream()
+                .anyMatch(winningTicket::matchBonus);
+
+        return LottoPrize.findByMathCount(matchCount, matchBonus);
     }
 
+    public boolean contains(int number) {
+        return lottoNumbers.contains(number);
+    }
 
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
     }
+
 }

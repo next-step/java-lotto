@@ -14,4 +14,8 @@ public class Money {
     public boolean isEnoughToBuy(Money lottoTicketPrice) {
         return this.value >= lottoTicketPrice.value;
     }
+
+    public long getValue() {
+        return value;
+    }
 }

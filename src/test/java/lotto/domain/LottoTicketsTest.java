@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.result.BonusNumber;
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.WinningNumbers;
+import lotto.domain.result.WinningTicket;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
@@ -21,11 +22,12 @@ class LottoTicketsTest {
     void resultTest() {
         //given
         LottoTickets lottoTickets = createLottoTickets();
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<LottoPrize> expectedLottoPrizes = Arrays.asList(LottoPrize.FIRST, LottoPrize.FOURTH, LottoPrize.FOURTH);
+        LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new BonusNumber(7));
+        List<LottoPrize> expectedLottoPrizes = Arrays.asList(LottoPrize.FIRST, LottoPrize.SECOND, LottoPrize.FIFTH);
 
         //when
-        LottoResult lottoResult = lottoTickets.getLottoResult(winningNumbers);
+        LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
 
         //then
         assertThat(lottoResult.getLottoStatistics()).isEqualTo(expectedLottoPrizes);
@@ -33,7 +35,7 @@ class LottoTicketsTest {
 
     private LottoTickets createLottoTickets() {
         LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))); // 6
-        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(Arrays.asList(7, 8, 9, 4, 5, 6))); // 3
+        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(Arrays.asList(7, 1, 2, 4, 5, 6))); // 5, bonus
         LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(Arrays.asList(1, 21, 3, 43, 12, 6))); // 3
 
         return new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));

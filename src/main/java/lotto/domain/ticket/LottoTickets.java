@@ -2,7 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.WinningNumbers;
+import lotto.domain.result.WinningTicket;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,9 +16,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoResult getLottoResult(WinningNumbers winningNumbers) {
+    public LottoResult getLottoResult(WinningTicket winningTicket) {
         List<LottoPrize> lottoPrizes = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.calculateLottoPrize(winningNumbers))
+                .map(lottoTicket -> lottoTicket.calculateLottoPrize(winningTicket))
                 .collect(toList());
         return new LottoResult(lottoPrizes);
     }

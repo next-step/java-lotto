@@ -21,7 +21,7 @@ public class LottoStore {
 
         while (isEnoughChange(currentChange)) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.generate()));
-            currentChange.spend(LOTTO_TICKET_PRICE);
+            currentChange = currentChange.spend(LOTTO_TICKET_PRICE);
         }
 
         return new LottoTickets(lottoTickets);
