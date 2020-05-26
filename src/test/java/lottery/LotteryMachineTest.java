@@ -2,7 +2,6 @@ package lottery;
 
 import lottery.domain.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -56,7 +55,8 @@ public class LotteryMachineTest {
     @DisplayName("LotteryMachine에서 당첨 번호를 비교해 당첨된 로또 티켓들만 반환")
     @ParameterizedTest
     @MethodSource("mockLotteryTicketBuilder")
-    public void findLotteryWinnerTicketsGroup(LotteryTicket winnerTicket, int winnerCounts) {
+    public void findLotteryWinnerTicketsGroup(LotteryTicket winnerTicket, LotteryRanks lotteryRank,
+                                              int winnerCounts) {
         LotteryMachine lotteryMachine = new LotteryMachine(new PurchasePrice(1000));
         LotteryTicket loser = new LotteryTicket(Arrays.stream("1,2,3,4,5,6".split(","))
                 .map(number -> new LotteryNumber(Integer.parseInt(number)))
@@ -67,15 +67,17 @@ public class LotteryMachineTest {
 
         LotteryTicketsGroup lotteryTicketsGroup = new LotteryTicketsGroup(Arrays.asList(winner, loser));
         Map<Integer, Integer> winnerTicketsGroup = lotteryMachine
-                .findWinnerTicketsGroup(lotteryTicketsGroup, winnerTicket);
+                .findWinnerTicketsMap(lotteryTicketsGroup, winnerTicket);
 
-        assertThat(winnerTicketsGroup.keySet().size()).isEqualTo(winnerCounts);
+        assertThat(winnerTicketsGroup.get(lotteryRank.getRequiredNumberCounts())).isEqualTo(winnerCounts);
     }
 
     private static Stream<Arguments> mockLotteryTicketBuilder() {
         return Stream.of(
-                Arguments.of(new LotteryTicket(StringParser.parseString("11, 22, 33, 44, 1, 2")), 1),
-                Arguments.of(new LotteryTicket(StringParser.parseString("1, 2, 3, 44, 9, 8")), 2)
+                Arguments.of(new LotteryTicket(StringParser.parseString("11, 22, 33, 44, 1, 2")),
+                        LotteryRanks.FIRST_PRIZE, 1),
+                Arguments.of(new LotteryTicket(StringParser.parseString("1, 2, 3, 44, 9, 8")),
+                        LotteryRanks.FOURTH_PRIZE, 2)
         );
     }
 }

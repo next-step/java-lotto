@@ -30,9 +30,9 @@ public class LotteryMachine {
         );
     }
 
-    public Map<Integer, Integer> findWinnerTicketsGroup(LotteryTicketsGroup lotteryTicketsGroup,
-                                                        LotteryTicket lastWinnerTicket) {
-        return lotteryTicketsGroup.findWinnerTicketsGroup(lastWinnerTicket);
+    public Map<Integer, Integer> findWinnerTicketsMap(LotteryTicketsGroup lotteryTicketsGroup,
+                                                      LotteryTicket lastWinnerTicket) {
+        return lotteryTicketsGroup.findWinnerTicketsMap(lastWinnerTicket);
     }
 
     private LotteryTicket makeLotteryTicket() {

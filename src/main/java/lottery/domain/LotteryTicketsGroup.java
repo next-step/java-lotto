@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,15 +21,15 @@ public class LotteryTicketsGroup {
                 .collect(Collectors.toList());
     }
 
-    public List<LotteryTicket> findWinnerTicketsGroup(LotteryTicket lastWinnerTicket) {
-        List<LotteryTicket> winnerTicketsGroup = new ArrayList<>();
+    public Map<Integer, Integer> findWinnerTicketsMap(LotteryTicket lastWinnerTicket) {
+        Map<Integer, Integer> winnerTicketsMap = new HashMap<>();
         int lotteryTicketCounts = lotteryTickets.size();
         for (int i = 0; i < lotteryTicketCounts; i++) {
             LotteryTicket targetLotteryTicket = lotteryTickets.get(i);
             int winnerNumberCounts = getWinnerNumberCounts(targetLotteryTicket, lastWinnerTicket);
-            updateWinnerTicketsGroup(winnerTicketsGroup, targetLotteryTicket, winnerNumberCounts);
+            updateWinnerTicketsMap(winnerTicketsMap, winnerNumberCounts);
         }
-        return winnerTicketsGroup;
+        return winnerTicketsMap;
     }
 
     private int getWinnerNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
@@ -39,10 +38,11 @@ public class LotteryTicketsGroup {
                 .count();
     }
 
-    private void updateWinnerTicketsGroup(List<LotteryTicket> winnerTicketsGroup,
-                                          LotteryTicket targetLotteryTicket,
-                                          int winnerNumberCounts) {
-        if (winnerNumberCounts >= MINIMUM_WINNER_NUMBER_COUNTS)
-            winnerTicketsGroup.add(targetLotteryTicket);
+    private void updateWinnerTicketsMap(Map<Integer, Integer> winnerTicketsMap, int winnerNumberCounts) {
+        if (winnerNumberCounts < MINIMUM_WINNER_NUMBER_COUNTS) {
+            return;
+        }
+        int lotteryRankCounts = winnerTicketsMap.getOrDefault(winnerNumberCounts, 0) + 1;
+        winnerTicketsMap.put(winnerNumberCounts, lotteryRankCounts);
     }
 }
