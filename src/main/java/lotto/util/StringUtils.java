@@ -14,4 +14,8 @@ public final class StringUtils {
             throw new InputValueException("숫자로 변환할 수 없습니다. " + value);
         }
     }
+
+    public static boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 }
