@@ -2,7 +2,7 @@
 package dev.dahye.calculator;
 
 public class StringAddCalculator {
-    private static final String DEFAULT_SEPARATOR = ",";
+    private static final String DEFAULT_SEPARATOR = "[,:]";
 
     public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
