@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class LotteryMachineTest {
 
@@ -38,15 +37,14 @@ public class LotteryMachineTest {
     }
 
     @DisplayName("LotteryMachine에서 주어진 금액만큼 LotteryTicket 생성해 LotteryTicketGroups를 get")
-    @Test
     @ParameterizedTest
     @ValueSource(longs = {1000, 2000, 3000, 4000})
     public void getLotteryTicketGroups(long userInput) {
         PurchasePrice purchasePrice = new PurchasePrice(userInput);
         LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
 
-        //LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTickets();
-        //assertThat(lotteryTicketsGroup.getClass())
-         //       .isEqualTo(Lottery)
+        assertThatCode(() -> {
+            LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.getLotteryTicketsGroup();
+        }).doesNotThrowAnyException();
     }
 }

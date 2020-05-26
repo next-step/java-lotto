@@ -9,8 +9,4 @@ public class LotteryTicketsGroup {
     public LotteryTicketsGroup(List<LotteryTicket> lotteryTickets) {
         this.lotteryTickets = lotteryTickets;
     }
-
-    public boolean isSameCounts(int lotteryTicketCounts) {
-        return lotteryTickets.size() == lotteryTicketCounts;
-    }
 }

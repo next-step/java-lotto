@@ -45,21 +45,4 @@ public class LotteryTicketsGroupTest {
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);
     }
-
-    @DisplayName("LotteryTicketGroups 사이즈 비교 메소드 테스트")
-    @ParameterizedTest
-    @MethodSource("mockLotteryTicketGroupBuilder")
-    public void returnBooleanOnWhetherSizeEqualsLotteryTicketCounts(int lotteryTicketCounts, boolean result) {
-        LotteryTicketsGroup lotteryTicketsGroup = new LotteryTicketsGroup(lotteryTicketList);
-
-        assertThat(lotteryTicketsGroup.isSameCounts(lotteryTicketCounts))
-                .isEqualTo(result);
-    }
-
-    private static Stream<Arguments> mockLotteryTicketGroupBuilder() {
-        return Stream.of(
-                Arguments.of(2, true),
-                Arguments.of(1, false)
-        );
-    }
 }
