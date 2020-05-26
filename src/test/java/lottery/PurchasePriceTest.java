@@ -12,8 +12,8 @@ public class PurchasePriceTest {
 
     @DisplayName("PurchasePrice 객체 정상 생성 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {500, 1000, 1500})
-    public void makePurchasePriceObject(int userInput) {
+    @ValueSource(longs = {500, 1000, 1500})
+    public void makePurchasePriceObject(long userInput) {
         PurchasePrice purchasePrice = new PurchasePrice(userInput);
 
         assertThat(purchasePrice.getPurchasePrice())
@@ -22,8 +22,8 @@ public class PurchasePriceTest {
 
     @DisplayName("PurchasePrice 객체 생성 실패 (0 이하)")
     @ParameterizedTest
-    @ValueSource(ints = {0, -30, -999})
-    public void throwExceptionOnMakingPurchasePriceObject(int userInput) {
+    @ValueSource(longs = {0, -30, -999})
+    public void throwExceptionOnMakingPurchasePriceObject(long userInput) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                    new PurchasePrice(userInput);

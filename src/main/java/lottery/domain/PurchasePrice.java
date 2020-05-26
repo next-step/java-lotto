@@ -2,8 +2,8 @@ package lottery.domain;
 
 public class PurchasePrice {
 
-    private final long purchasePrice;
     private static final int MINIMUM_PRICE = 1;
+    private final long purchasePrice;
 
     public PurchasePrice(long purchasePrice) {
         this.purchasePrice = purchasePrice;
