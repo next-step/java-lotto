@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoNumber {
 
     private static final int LOTTO_NUMBERS_COUNT = 6;
     private static final String PREFIX = "[";
@@ -12,14 +12,22 @@ public class LottoNumbers {
     private static final String DELIMITER_PATTERN = ", ";
 
     private final List<Integer> lottoNumbers;
+    private final CreationType creationType;
 
-    private LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoNumber(List<Integer> lottoNumbers, CreationType creationType) {
         validateLottoNumbers(lottoNumbers);
+        validateCreationType(creationType);
+
         this.lottoNumbers = lottoNumbers;
+        this.creationType = creationType;
     }
 
-    public static LottoNumbers newInstance(List<Integer> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
+    public static LottoNumber newInstance(List<Integer> lottoNumbers) {
+        return new LottoNumber(lottoNumbers, CreationType.NONE);
+    }
+
+    public static LottoNumber newInstance(List<Integer> lottoNumbers, CreationType creationType) {
+        return new LottoNumber(lottoNumbers, creationType);
     }
 
     private static void validateLottoNumbers(List<Integer> lottoNumbers) {
@@ -36,6 +44,12 @@ public class LottoNumbers {
         }
     }
 
+    private void validateCreationType(CreationType creationType) {
+        if (creationType == null) {
+            throw new IllegalArgumentException("생성 유형이 존재하지 않습니다.");
+        }
+    }
+
     public static List<Integer> createNonDuplicateNumbers() {
         return NumbersFactory.createNonDuplicateNumbers(LOTTO_NUMBERS_COUNT);
     }
@@ -48,14 +62,18 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public LottoNumbers clone() {
-        return new LottoNumbers(this.lottoNumbers);
+    public LottoNumber clone() {
+        return new LottoNumber(this.lottoNumbers, this.creationType);
     }
 
-    public int getMatchCount(LottoNumbers lotto) {
+    public int getMatchCount(LottoNumber lotto) {
         return (int) this.lottoNumbers.stream()
                 .filter(lotto::isMatchNumber)
                 .count();
+    }
+
+    public CreationType getCreationType() {
+        return this.creationType;
     }
 
     public boolean isMatchNumber(int number) {
