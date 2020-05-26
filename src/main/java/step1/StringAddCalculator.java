@@ -18,6 +18,18 @@ public class StringAddCalculator {
         return arraySum(formula);
     }
 
+    private static int arraySum(String formula) {
+        String[] array = getFormulaSplitArrayBySeparator(formula);
+
+        int sum = 0;
+        for (String number : array) {
+            sum += Integer.parseInt(checkNegative(number));
+        }
+
+        return sum;
+    }
+
+
     private static String[] getFormulaSplitArrayBySeparator(String formula) {
         if (formula.contains(",") || formula.contains(":")) {
             return formula.split(Separator.DEFAULT_SEPARATOR);
@@ -31,28 +43,17 @@ public class StringAddCalculator {
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
-
         }
 
         return null;
     }
 
-    private static int arraySum(String formula) {
-        String[] array = getFormulaSplitArrayBySeparator(formula);
-
-        int sum = 0;
-        for (String number : array) {
-            checkNegative(number);
-            sum += Integer.parseInt(number);
-        }
-
-        return sum;
-    }
-
-    private static void checkNegative(String number) {
+    private static String checkNegative(String number) {
         if (number.contains("-")) {
             throw new RuntimeException();
         }
+
+        return number;
     }
 
 }
