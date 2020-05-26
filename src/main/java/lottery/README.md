@@ -17,3 +17,7 @@
     * LotteryTicketsGroup에 포함된 티켓들의 번호 리스트
     
 * 지난 주 당첨 번호 입력 String을 Parsing하여 LotteryTicket으로 변환
+
+* LotteryMachine에서 당첨 티켓 목록 반환
+
+* Lottery의 랭킹 관련 상수 정의한 Enum 기능
