@@ -13,7 +13,7 @@ public class Prize {
     return new Prize(rank, count);
   }
 
-  private long getTotalPrize () {
+  public long getTotalPrize () {
     return rank.getPrice() * count;
   }
 }
