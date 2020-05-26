@@ -11,29 +11,25 @@ public class Expression {
     }
 
     public int getSum() {
-        validate();
-        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(numbers).mapToInt(this::getNumber).sum();
     }
 
-    private void validate() {
-        Arrays.stream(numbers).forEach(this::checkNumber);
-    }
-
-    private void checkNumber(String number) {
-        if (isNegativeNumber(number)) {
+    private int getNumber(String input) {
+        int number = Integer.parseInt(input);
+        if (number < 0) {
             throw new RuntimeException("There is negative number in your input.");
         }
+        return number;
     }
 
-    private boolean isNegativeNumber(String number) {
-        return getIntegerNumber(number) < 0;
+    /*
+    public int getSumUsingOneMethod() {
+        return Arrays.stream(numbers).mapToInt(Integer::parseInt).reduce(0, (sum, number) -> {
+            if (number < 0) {
+                throw new RuntimeException("There is negative number in your input.");
+            }
+            return sum + number;
+        });
     }
-
-    private int getIntegerNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Non numeric input error.");
-        }
-    }
+    */
 }
