@@ -10,7 +10,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputPurchaseAmount() {
+    public static int inputBuyAmount() {
         System.out.println(TEXT.INPUT_AMOUNT_FOR_BUY_LOTTO);
         return scanner.nextInt();
     }
