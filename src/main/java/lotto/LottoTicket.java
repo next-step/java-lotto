@@ -37,7 +37,7 @@ public class LottoTicket {
 
     private void validateSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() < DEFAULT_SIZE) {
-            throw new IllegalArgumentException("당첨 번호의 개수가 알맞지 않습니다.");
+            throw new IllegalArgumentException("로또 번호의 개수가 알맞지 않습니다.");
         }
     }
 
@@ -49,7 +49,7 @@ public class LottoTicket {
 
     private void checkNumber(int number){
         if (number < LottoNumber.LOTTO_NUMBER_MIN || number > LottoNumber.LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException("당첨 번호의 범위가 알맞지 않습니다.");
+            throw new IllegalArgumentException("로또 번호의 범위가 알맞지 않습니다.");
         }
     }
 
