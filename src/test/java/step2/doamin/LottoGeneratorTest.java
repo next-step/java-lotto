@@ -1,4 +1,4 @@
-package step2;
+package step2.doamin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoGenerator;
 
 class LottoGeneratorTest {
 

@@ -1,14 +1,15 @@
-package step2;
+package step2.doamin;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.LottoGenerator.LOTTO_FIRST_NUMBER;
-import static step2.LottoGenerator.LOTTO_LAST_NUMBER;
-import static step2.LottoGenerator.LOTTO_SELECTION_COUNT;
+import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
+import static step2.domain.LottoGenerator.LOTTO_LAST_NUMBER;
+import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+import step2.domain.RandomGenerableStrategy;
 
 class RandomGenerableStrategyTest {
 

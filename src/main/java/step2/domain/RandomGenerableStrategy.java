@@ -1,12 +1,13 @@
-package step2;
+package step2.domain;
 
-import static step2.LottoGenerator.LOTTO_FIRST_NUMBER;
-import static step2.LottoGenerator.LOTTO_LAST_NUMBER;
+import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
+import static step2.domain.LottoGenerator.LOTTO_LAST_NUMBER;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import step2.domain.GenerableStrategy;
 
 public class RandomGenerableStrategy implements GenerableStrategy {
 
