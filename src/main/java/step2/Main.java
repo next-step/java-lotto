@@ -1,6 +1,6 @@
 package step2;
 
-import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +9,8 @@ public class Main {
 
         int purchasedPrice = inputView.getPurchasedPrice();
 
-        LottoGame lottoGame = LottoGame.create(purchasedPrice);
+        LottoGame lottoGame = LottoGame.create(purchasedPrice, new Random());
+        resultView.printPurchaseCount(lottoGame);
         resultView.printNumber(lottoGame);
 
         String lastWinningNumber = inputView.getLastLottoNumber();

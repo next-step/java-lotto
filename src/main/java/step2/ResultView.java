@@ -11,6 +11,10 @@ public class ResultView {
         return new ResultView();
     }
 
+    public void printPurchaseCount(LottoGame lottoGame) {
+        System.out.println(lottoGame.getPurchaseCount() + "개를 구매했습니다.");
+    }
+
     public void printNumber(LottoGame lottoGame) {
         List<Lotto> lottos = lottoGame.getLottos();
         System.out.println();
@@ -30,4 +34,6 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + matchedNumberMap.getOrDefault(5,0));
         System.out.println("6개 일치 (2000000000원)- " + matchedNumberMap.getOrDefault(6,0));
     }
+
+
 }

@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-    private static final int ORIGIN = 1;
-    private static final int BOUND = 46;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 46;
     private static final int NUMBER_COUNT = 6;
 
     private List<Integer> numbers;
@@ -33,7 +33,9 @@ public class Lotto {
     }
 
     private int generateNumber() {
-        return randomNumberGenerator.ints(ORIGIN, BOUND).iterator().nextInt();
+        return randomNumberGenerator.ints(MIN_VALUE, MAX_VALUE)
+            .iterator()
+            .nextInt();
     }
 
     public boolean containNumber(int number) {
