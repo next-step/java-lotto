@@ -5,27 +5,23 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-  private final List<Lotto> lottos;
+  private final List<Lotto> autoLottos, directLottos;
 
-  private Lottos(List<Lotto> lottos) {
-    this.lottos = lottos;
+  private Lottos(List<Lotto> directLottos, List<Lotto> autoLottos) {
+    this.directLottos = directLottos;
+    this.autoLottos = autoLottos;
   }
 
-  public static Lottos of (List<Lotto> lottos) {
-    return new Lottos(lottos);
+  public static Lottos of (List<Lotto> directLottos, List<Lotto> autoLottos) {
+    return new Lottos(directLottos, autoLottos);
   }
 
   public long getPrice() {
-    return lottos.size() * Lotto.PRICE;
-  }
-
-  public static Lottos concat (Lottos lottos1, Lottos lottos2) {
-    lottos1.lottos.addAll(lottos2.lottos);
-    return lottos1;
+    return stream().count() * Lotto.PRICE;
   }
 
   public Stream<Lotto> stream () {
-    return lottos.stream();
+    return Stream.concat(directLottos.stream(), autoLottos.stream());
   }
 
 }

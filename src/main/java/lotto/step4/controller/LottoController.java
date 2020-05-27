@@ -21,6 +21,7 @@ public class LottoController {
       LottoGenerator.generateLotto(inputView.inputWinning()),
       inputView.inputBonus()
     ));
+
     resultView.printStat(lottoResult);
     resultView.printPayoffRatio(lottoResult.resultLottoGamePayOffRatio());
 

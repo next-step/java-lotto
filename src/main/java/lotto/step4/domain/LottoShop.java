@@ -6,25 +6,20 @@ import lotto.step4.execption.LottoMinimumPriceException;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
 
   private LottoShop() {}
 
-  public static Lottos buyLotto (long price) {
+  public static Lottos buyLotto (long price, List<Lotto> directLottos) {
     validateMinimumPrice(price);
-    return Stream.generate(LottoGenerator::generateLotto)
-                 .limit(price / Lotto.PRICE)
-                 .collect(collectingAndThen(toList(), Lottos::of));
-  }
-
-  public static Lottos buyLotto (long price, List<Lotto> lottosByDirectInput) {
-    Lottos lottos = Lottos.of(lottosByDirectInput);
-    long lesserPrice = price - lottos.getPrice();
-    validateLesserPrice(price);
-    return Lottos.concat(lottos, buyLotto(lesserPrice));
+    final long lesserPrice = price - directLottos.size() * Lotto.PRICE;
+    validateLesserPrice(lesserPrice);
+    List<Lotto> autoLottos = Stream.generate(LottoGenerator::generateLotto)
+                                   .limit(lesserPrice / Lotto.PRICE)
+                                   .collect(toList());
+    return Lottos.of(autoLottos, directLottos);
   }
 
   public static void validateMinimumPrice (long price) throws RuntimeException {
