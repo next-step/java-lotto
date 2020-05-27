@@ -14,7 +14,7 @@ class AutoLottoNumberGeneratorTest {
     void pickLottoBalls() {
         AutoLottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
-        Set<Integer> pickedLottoBalls = lottoNumberGenerator.generate();
+        Set<LottoNumber> pickedLottoBalls = lottoNumberGenerator.generate();
 
         assertThat(pickedLottoBalls.size()).isEqualTo(6);
     }

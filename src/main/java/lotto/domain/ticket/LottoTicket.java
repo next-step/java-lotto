@@ -1,34 +1,26 @@
 package lotto.domain.ticket;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.WinningTicket;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static lotto.domain.LottoGameProperty.*;
+import static lotto.domain.LottoGameProperty.COUNT_OF_LOTTO_NUMBER;
 
 public class LottoTicket {
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(Set<Integer> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static boolean isValidNumber(Integer number) {
-        return number >= LOTTO_NUMBER_BEGIN_BOUND
-                && number <= LOTTO_NUMBER_END_BOUND;
-    }
-
-    private void validate(Set<Integer> lottoNumbers) {
-        Set<Integer> validLottoNumbers = lottoNumbers.stream()
-                .filter(LottoTicket::isValidNumber)
-                .collect(Collectors.toSet());
-        if (validLottoNumbers.size() != COUNT_OF_LOTTO_NUMBER) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != COUNT_OF_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또번호는 중복이 없는 6개의 1과 45사이의 숫자여야 합니다");
         }
     }
@@ -43,14 +35,14 @@ public class LottoTicket {
         return LottoPrize.findByMathCount(matchCount, matchBonus);
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.contains(number);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
     public String toString() {
-        List<Integer> sortedLottoNumbers = new ArrayList<>(lottoNumbers);
-        Collections.sort(sortedLottoNumbers);
+        List<LottoNumber> sortedLottoNumbers = new ArrayList<>(lottoNumbers);
+        sortedLottoNumbers.sort(Comparator.comparingInt(LottoNumber::getValue));
         return String.valueOf(sortedLottoNumbers);
     }
 }

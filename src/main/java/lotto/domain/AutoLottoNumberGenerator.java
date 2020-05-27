@@ -10,21 +10,21 @@ import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoGameProperty.*;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerator {
-    private final List<Integer> lottoBalls;
+    private final List<LottoNumber> lottoBalls;
 
     public AutoLottoNumberGenerator() {
         this.lottoBalls = IntStream.rangeClosed(LOTTO_NUMBER_BEGIN_BOUND, LOTTO_NUMBER_END_BOUND)
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(toList());
     }
 
     @Override
-    public Set<Integer> generate() {
+    public Set<LottoNumber> generate() {
         Collections.shuffle(lottoBalls);
         return Collections.unmodifiableSet(new HashSet<>(pickLottoBalls()));
     }
 
-    private List<Integer> pickLottoBalls() {
+    private List<LottoNumber> pickLottoBalls() {
         return lottoBalls.subList(0, COUNT_OF_LOTTO_NUMBER);
     }
 }

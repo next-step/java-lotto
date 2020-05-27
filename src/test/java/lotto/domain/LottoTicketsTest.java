@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.result.BonusNumber;
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningTicket;
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -22,8 +23,11 @@ class LottoTicketsTest {
     void resultTest() {
         //given
         LottoTickets lottoTickets = createLottoTickets();
-        LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new BonusNumber(7));
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
+        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new LottoNumber(7));
         List<LottoPrize> expectedLottoPrizes = Arrays.asList(LottoPrize.FIRST, LottoPrize.SECOND, LottoPrize.FIFTH);
 
         //when
@@ -34,11 +38,17 @@ class LottoTicketsTest {
     }
 
     private LottoTickets createLottoTickets() {
-        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))); // 6
-        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(Arrays.asList(7, 1, 2, 4, 5, 6))); // 5, bonus
-        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(Arrays.asList(1, 21, 3, 43, 12, 6))); // 3
+        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(of(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
+        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(of(Arrays.asList(7, 1, 2, 4, 5, 6)))); // 5, bonus
+        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(of(Arrays.asList(1, 21, 3, 43, 12, 6)))); // 3
 
         return new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));
+    }
+
+    private List<LottoNumber> of(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
 }
