@@ -97,4 +97,26 @@ public class LottoWinningStatisticTest {
         return expected;
     }
 
+    @DisplayName("로또 당첨 수익률 구하는 테스트")
+    @ParameterizedTest
+    @MethodSource("provideExtractedAndWinningLottoNumbersForRateOfReturn")
+    void getLottoRateOfReturnTest(final List<Lotto> extractedLotto, final LottoWinningNumbers lottoWinningNumbers, final Long expected) {
+        LottoWinningStatistic lottoWinningStatistic = new LottoWinningStatistic();
+        for (Lotto lotto : extractedLotto) {
+            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers);
+        }
+
+        Long result = lottoWinningStatistic.getLottoRateOfReturn(extractedLotto.size());
+        assertEquals(result, expected);
+    }
+
+    private static Stream<Arguments> provideExtractedAndWinningLottoNumbersForRateOfReturn() {
+        return Stream.of(
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 5, 6"), 666668L),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 4, 6, 8, 10, 19"), 501L),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 11, 13"), 18L),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 6, 8, 11, 13, 18"), 1L)
+        );
+    }
+
 }
