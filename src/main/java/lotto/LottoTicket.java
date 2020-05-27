@@ -48,7 +48,7 @@ public class LottoTicket {
     }
 
     private void checkNumber(int number){
-        if (number < LottoNumber.LOTTO_NUMBER_MIN || number > LottoNumber.LOTTO_NUMBER_MAX) {
+        if (!LottoNumber.isValidNumber(number)) {
             throw new IllegalArgumentException("로또 번호의 범위가 알맞지 않습니다.");
         }
     }

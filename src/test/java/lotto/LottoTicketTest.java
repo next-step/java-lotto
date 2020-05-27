@@ -33,14 +33,14 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("당첨 로또를 생성하는데 크기가 6보다 작으면 예외가 발생한다.")
+    @DisplayName("로또 티켓을 생성하는데 크기가 6보다 작으면 예외가 발생한다.")
     void 로또_번호_예외_테스트() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5)));
     }
 
     @Test
-    @DisplayName("당첨 로또를 생성하는데 번호가 중복되면 예외가 발생한다.")
+    @DisplayName("로또 티켓을 생성하는데 번호가 중복되면 예외가 발생한다.")
     void 로또_번호_중복_예외_테스트() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 1, 2, 3, 4, 5)));
@@ -48,10 +48,10 @@ public class LottoTicketTest {
 
     @MethodSource("generate_invalid_range_lotto_numbers")
     @ParameterizedTest
-    @DisplayName("당첨 로또를 생성하는데 크기가 숫자가 1보다 작거나 45보다 크면 예외가 발생한다.")
+    @DisplayName("로또 티켓을 생성하는데 크기가 숫자가 1보다 작거나 45보다 크면 예외가 발생한다.")
     void 로또_번호_범위_예외_테스트(List<Integer> lottoNumbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> WinningLotto.of(LottoTicket.of(lottoNumbers)));
+                .isThrownBy(() -> LottoTicket.of(lottoNumbers));
     }
 
     private static Stream<Arguments> generate_lotto_numbers() {
