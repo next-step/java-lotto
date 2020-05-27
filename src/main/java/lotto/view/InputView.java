@@ -56,7 +56,6 @@ public class InputView {
 
         return LottoTickets.of(
                 lottoNumbers.stream()
-                        .limit(manualTicketsCount)
                         .map(LottoTicket::of)
                         .collect(Collectors.toList()));
     }
