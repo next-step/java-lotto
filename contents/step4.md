@@ -54,11 +54,18 @@
 #### LottoNumberGenerator
 : 로또 숫자를 랜덤으로 자동 생성하는 책임 
 
-#### LottoGame (테스트 코드 어떻게?)
+#### LottoGame 
 : 구매한 티켓과 로또 당첨 번호로 로또 결과 수행 
 
 #### LottoTicketDTO
 : 화면 출력에 필요한 정보에 대한 DTO
+
+#### PurchaseInfo
+: 사용자가 입력한 금액과 수동 로또 번호를 관리하는 클래스
+- [ ] Price 가 null 이면 예외가 발생한다.
+- [ ] 구입 금액보다 수동으로 구매한 티켓 수가 더 많으면 예외가 발생한다.
+- [ ] 남은 금액으로 구매할 수 있는 autoTickets 개수를 반환한다.
+- [ ] 수동 로또 번호 (LottoTickets)를 반환한다.
 
 ### # V (View)
 #### InputView
