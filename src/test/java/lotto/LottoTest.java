@@ -54,12 +54,6 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static Stream<Arguments> lottoNumbersOutOfRange() {
-        return Stream.of(
-                Arguments.of(List.of(1,2,3,4,5,0),
-                        List.of(1,2,50,5,40,4),
-                        List.of(46,47,48,49,50,51)));
-    }
 
     @DisplayName("로또 생성 시 중복된 숫자가 들어갈 경우 IllegalArgument 오류가 발생한다. ")
     @Test
@@ -70,6 +64,18 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("")
+    @Test
+    public void getContainCountTest() {
+
+    }
+
+    private static Stream<Arguments> lottoNumbersOutOfRange() {
+        return Stream.of(
+                Arguments.of(List.of(1,2,3,4,5,0),
+                        List.of(1,2,50,5,40,4),
+                        List.of(46,47,48,49,50,51)));
+    }
 
     private List<Integer> createLottoNumber(final int startInclusive, final int endInclusive, final int count) {
         List<Integer> lottoNumbers = IntStream.rangeClosed(startInclusive, endInclusive).boxed().collect(Collectors.toList());

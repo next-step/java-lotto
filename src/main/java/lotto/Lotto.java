@@ -22,6 +22,18 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public int getContainsCount(Integer number) {
+        return lottoNumbers.contains(number) ? 1 : 0;
+    }
+
+    public int getContainCount(List<Integer> numbers) {
+        int count = 0;
+        for(Integer number : numbers) {
+            count += getContainsCount(number);
+        }
+        return count;
+    }
+
     private void validateLottoNumberDuplicate(final List<Integer> lottoNumbers) {
         int setSize = new HashSet<>(lottoNumbers).size();
         if(lottoNumbers.size() != setSize) {
