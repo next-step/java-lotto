@@ -13,23 +13,24 @@ public class LottoAnalyzer {
         this.lottoGame = lottoGame;
     }
 
-    public int countOfMatchingNumber(int round, LottoTicket lottoTicket) {
+    public List<LottoRank> gradeTicket(int round, List<LottoTicket> lottoTickets) {
 
-        WinningLotto winningLotto = lottoGame.get(round);
+        WinningLotto winningLotto = getWinningLotto(round);
 
-        if(Objects.isNull(winningLotto)) {
-            throw new IllegalArgumentException("존재하지 않는 회차입니다.");
-        }
-        return (int)winningLotto.containsNumberCount(lottoTicket);
-    }
-
-    public List<LottoRank> gradeTicket(int round, List<LottoTicket> lottoTickets){
         return lottoTickets.stream()
-                .map(lottoTicket -> countOfMatchingNumber(round, lottoTicket))
-                .map(LottoRank::valueOf)
+                .map(lottoTicket -> LottoRank.valueOf(winningLotto.getContainNumberCount(lottoTicket), winningLotto.isBonusMatch(lottoTicket)))
                 .filter(Objects::nonNull)
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
                 .collect(Collectors.toList());
+    }
+
+    private WinningLotto getWinningLotto(int round) {
+        WinningLotto winningLotto = lottoGame.get(round);
+
+        if (Objects.isNull(winningLotto)) {
+            throw new IllegalArgumentException("존재하지 않는 회차입니다.");
+        }
+        return winningLotto;
     }
 
     public double calculateRevenueRate(int round, List<LottoTicket> lottoTickets) {
