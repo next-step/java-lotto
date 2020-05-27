@@ -3,6 +3,7 @@ package lotto;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_START_NUMBER = 1;
@@ -57,5 +58,11 @@ public class Lotto {
         if(number < LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이만 올 수 있습니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        List<String> lottoNumberText = lottoNumbers.stream().map(String::valueOf).collect(Collectors.toList());
+        return "[" + String.join(", ", lottoNumberText) + "]";
     }
 }
