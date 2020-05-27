@@ -1,7 +1,6 @@
 package step2;
 
 import java.util.List;
-import step0.GenerableStrategy;
 
 public class Generating {
 

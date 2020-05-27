@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import step0.GenerableStrategy;
 
 public class RandomGenerableStrategy implements GenerableStrategy {
 
