@@ -1,3 +1,26 @@
+## 구조
+
+* Domain
+    * LotteryMachine
+    * LotteryNumber
+    * LotteryTicket
+    * LotteryTicketsGroup
+    * LotteryRank (enum)
+    * PurchasePrice
+    * StringParser
+    * StatisticsBoard
+    * RateOfReturn
+    * ErrorMessages
+
+* View
+    * InputView
+    * OutputView
+    * ViewMessages
+
+* Main
+
+<br>
+
 ## 로또 기능 구현 목록
 
 * 로또 구매 금액 입력 (System.in)
@@ -24,6 +47,6 @@
 
 * WinnerTicket 목록을 검사하여 각 등수별 당첨 티켓 개수 Map 정의
 
-* 해당 Map을 래핑하는 Statistics 일급 컬렉션 출력
+* 해당 Map을 래핑하는 StatisticsBoard 일급 컬렉션 출력
 
-* 수익률을 관장하는 객체 생성
+* 수익률을 관장하는 RateOfReturn 객체 생성
