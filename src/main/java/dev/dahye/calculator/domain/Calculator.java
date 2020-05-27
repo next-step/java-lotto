@@ -1,18 +1,10 @@
 package dev.dahye.calculator.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Calculator {
-    private static final String DEFAULT_DELIMITER = "[,:]";
-    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
-    private static final int GROUP_BY_DELIMITER = 1;
-    private static final int GROUP_BY_INPUT = 2;
     private static final Calculator EMPTY_CALCULATOR = new Calculator(Collections.emptyList());
-    private static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private final List<String> numbers;
 
     private Calculator(List<String> numbers) {
@@ -24,19 +16,8 @@ public class Calculator {
             return EMPTY_CALCULATOR;
         }
 
-        return new Calculator(split(input));
-    }
-
-    private static List<String> split(String input) {
-        Matcher m = PATTERN.matcher(input);
-        String delimiter = DEFAULT_DELIMITER;
-
-        if (m.matches()) {
-            delimiter = m.group(GROUP_BY_DELIMITER);
-            input = m.group(GROUP_BY_INPUT);
-        }
-
-        return Arrays.asList(input.split(delimiter));
+        Splitter splitter = Splitter.init(input);
+        return new Calculator(splitter.split());
     }
 
     public int sum() {
