@@ -8,9 +8,10 @@ import java.util.stream.Stream;
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     BOOM(0, 0);
 
     private int matchCount;
@@ -21,6 +22,7 @@ public enum LottoRank {
     static {
         RANK = Collections.unmodifiableMap(
                 Stream.of(LottoRank.values())
+                        .filter(lottoRank -> !lottoRank.equals(LottoRank.SECOND))
                         .collect(Collectors.toMap(LottoRank::getMatchCount, lottoRank -> lottoRank))
         );
     }
@@ -38,9 +40,12 @@ public enum LottoRank {
         return BigDecimal.valueOf(price);
     }
 
-    public static LottoRank valueOf(int matchCount) {
+    public static LottoRank valueOf(int matchCount, boolean isBonusNumberMatch) {
         if (matchCount < FOURTH.matchCount) {
-            return LottoRank.BOOM;
+            return BOOM;
+        }
+        if (matchCount == SECOND.matchCount && isBonusNumberMatch) {
+            return SECOND;
         }
         return RANK.get(matchCount);
     }
