@@ -18,7 +18,7 @@ public class LottoRankTest {
     @Test
     @DisplayName("로또 매칭 결과 개수를 통해 LottoRank를 가져온다.")
     void 로또_매칭_랭크_테스트() {
-        int count = 6;
+        long count = 6;
         LottoRank lottoRank = LottoRank.valueOf(count, false);
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
@@ -26,7 +26,7 @@ public class LottoRankTest {
     @Test
     @DisplayName("보너스 매칭 여부를 통해 2등 rank를 가져온다.")
     void 로또_2등_조회_테스트() {
-        int count = 5;
+        long count = 5;
         LottoRank lottoRank = LottoRank.valueOf(count, true);
         assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
     }

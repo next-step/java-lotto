@@ -40,7 +40,7 @@ public enum LottoRank {
         return BigDecimal.valueOf(price);
     }
 
-    public static LottoRank valueOf(int matchCount, boolean isBonusNumberMatch) {
+    public static LottoRank valueOf(Long matchCount, boolean isBonusNumberMatch) {
         if (matchCount < FIFTH.matchCount) {
             return BOOM;
         }
