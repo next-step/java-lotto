@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class StatisticsBoard {
 
-    private final Map<Integer, Integer> winnerTicketsMap;
+    private final Map<LotteryRank, Integer> winnerTicketCountsByRankMap;
 
-    public StatisticsBoard(Map<Integer, Integer> winnerTicketsMap) {
-        this.winnerTicketsMap = winnerTicketsMap;
+    public StatisticsBoard(Map<LotteryRank, Integer> winnerTicketCountsByRankMap) {
+        this.winnerTicketCountsByRankMap = winnerTicketCountsByRankMap;
     }
-/*
+
     public int findTicketCountsByLotteryRank(LotteryRank lotteryRank) {
-        Integer winnerTicketCounts = winnerTicketsMap.get(lotteryRank.getRequiredNumberCounts());
+        Integer winnerTicketCounts = winnerTicketCountsByRankMap.get(lotteryRank);
         if (winnerTicketCounts == null)
             return 0;
         return winnerTicketCounts;
@@ -24,6 +24,4 @@ public class StatisticsBoard {
                 .sum();
         return revenueTotal / purchasePrice.getPurchasePrice();
     }
-
- */
 }
