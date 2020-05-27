@@ -103,7 +103,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest(name = "input = {0}")
-    @ValueSource(strings = {"1, 2,3", "1,?2,3", "1,,3", ",2,3", "//;\n//;\n1;2;3"})
+    @ValueSource(strings = {"1, 2,3", "1,?2,3", "1,,3", ",2,3", "//;\n//;\n1;2;3", "  "})
     @DisplayName("숫자 이외의 값을 전달하는 경우 RuntimeException 예외 발생")
     void exception_숫자_이외의_값(String input) {
         assertThrows(RuntimeException.class,
