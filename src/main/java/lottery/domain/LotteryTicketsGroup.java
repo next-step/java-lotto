@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class LotteryTicketsGroup {
 
     private static final int MINIMUM_MATCH_NUMBER_COUNTS = 3;
+    private static final int DEFAULT_WINNER_TICKET_COUNTS = 0;
+    private static final int COUNT_ONE = 1;
     private final List<LotteryTicket> lotteryTickets;
 
     public LotteryTicketsGroup(List<LotteryTicket> lotteryTickets) {
@@ -44,7 +46,8 @@ public class LotteryTicketsGroup {
             return;
         }
         LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts);
-        int winnerTicketCounts = winnerTicketCountsByRankMap.getOrDefault(lotteryRank, 0) + 1;
+        int winnerTicketCounts = winnerTicketCountsByRankMap.getOrDefault(lotteryRank, DEFAULT_WINNER_TICKET_COUNTS)
+                + COUNT_ONE;
         winnerTicketCountsByRankMap.put(lotteryRank, winnerTicketCounts);
     }
 }
