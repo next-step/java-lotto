@@ -1,5 +1,6 @@
 package com.lotto.domain;
 
+import com.lotto.helper.LottoViewHelper;
 import com.lotto.view.LottoStatisticView;
 
 import java.util.Arrays;
@@ -41,5 +42,23 @@ public class LottoWinningStatistic {
 
     public void viewWinningStatistic() {
         this.lottoStatisticView.viewLottoStatistic(this.lottoWinningList);
+    }
+
+    public Double getLottoRateOfReturn(Integer purchaseCount) {
+        Integer inputAmount = LottoViewHelper.getPurchaseAmountOfLotto(purchaseCount);
+        Double winningAmount = 0.0;
+        for (Map.Entry<LottoWinningType, Integer> entry : lottoWinningList.entrySet()) {
+            LottoWinningType lottoWinningType = entry.getKey();
+            Integer lottoWinningCount = entry.getValue();
+
+            winningAmount += lottoWinningType.getWinningAmount() * lottoWinningCount;
+
+        }
+
+        return (Double) winningAmount / inputAmount;
+    }
+
+    public void viewLottoRateOfReturn(Long rate) {
+        this.lottoStatisticView.viewRateOfReturn(rate);
     }
 }
