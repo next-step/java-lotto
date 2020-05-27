@@ -19,7 +19,7 @@ public enum LottoRank {
 
     private static final Map<Integer, LottoRank> lottoRanks =
             Collections.unmodifiableMap(
-                    Arrays.stream(values()).collect(Collectors.toMap(LottoRank::getContainCount, Function.identity())));
+                    Arrays.stream(values()).collect(Collectors.toMap(LottoRank::getContainCountsSameWinningNumber, Function.identity())));
 
     LottoRank(int containCount, BigDecimal amount)
     {
@@ -35,7 +35,7 @@ public enum LottoRank {
         return lottoRank;
     }
 
-    public int getContainCount() {
+    public int getContainCountsSameWinningNumber() {
         return containCount;
     }
 
