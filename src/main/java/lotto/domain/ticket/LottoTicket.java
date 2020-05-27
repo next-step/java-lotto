@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.result.LottoPrize;
 import lotto.domain.result.WinningTicket;
@@ -14,18 +15,18 @@ import static lotto.domain.LottoGameProperty.COUNT_OF_LOTTO_NUMBER;
 public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validate(Set<LottoNumber> lottoNumbers) {
+    private void validate(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또번호는 중복이 없는 6개의 1과 45사이의 숫자여야 합니다");
+            throw new IllegalArgumentException("로또티켓은 6개의 로또숫자로 이루어져야합니다.");
         }
     }
 
-    public LottoPrize calculateLottoPrize(WinningTicket winningTicket) {
+    public LottoPrize compareWith(final WinningTicket winningTicket) {
         int matchCount = Math.toIntExact(lottoNumbers.stream()
                 .filter(winningTicket::contains)
                 .count());
@@ -37,6 +38,11 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.getValue() == bonusNumber.getValue());
     }
 
     @Override

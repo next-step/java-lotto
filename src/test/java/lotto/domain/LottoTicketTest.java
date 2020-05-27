@@ -36,7 +36,7 @@ class LottoTicketTest {
     void generate(Set<LottoNumber> numbers) {
         assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또번호는 중복이 없는 6개의 1과 45사이의 숫자여야 합니다");
+                .hasMessage("로또티켓은 6개의 로또숫자로 이루어져야합니다.");
     }
 
 }

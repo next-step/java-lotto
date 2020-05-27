@@ -1,7 +1,13 @@
 ## 로또(2등)
 
 - 리팩토링하다가 ..
--> BonusNumber가 LottoNumber와 다를게 없어서 제거했다.
+-> BonusNumber가 LottoNumber와 다를게 없어서 제거했다.. 하지만 로또넘버인지, 보너ㅡㅅ넘버인지를 변수이름에 의존해야한다는게 찝찝
+
+
+- https://github.com/next-step/java-lotto/pull/538#discussion_r430240107 감이안잡힌다 ㅠㅠ 
+WinningTicket에 메시지를 던지면 의존순환이되는게 아ㅣㄹ낚?,,
+
+
 
 - 보너스번호, 2등 추가 - LottoPrize
 - 보너스번호를 입력받는다.

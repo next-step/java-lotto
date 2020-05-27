@@ -12,13 +12,13 @@ import static java.util.stream.Collectors.toList;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoResult getLottoResult(WinningTicket winningTicket) {
+    public LottoResult getLottoResult(final WinningTicket winningTicket) {
         List<LottoPrize> lottoPrizes = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.calculateLottoPrize(winningTicket))
+                .map(lottoTicket -> lottoTicket.compareWith(winningTicket))
                 .collect(toList());
         return new LottoResult(lottoPrizes);
     }
