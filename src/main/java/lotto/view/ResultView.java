@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String SUFFIX_BUY_MESSAGE = "를 구매했습니다.";
 
-    private static final String STATISTICS_BANNER_MESSAGE = "당첨 통계\n---------";
+    private static final String STATISTICS_BANNER_MESSAGE = "당첨 통계\n\n---------";
 
     private static final String PREFIX_REVENUE_MESSAGE = "총 수익율은 ";
     private static final String SUFFIX_REVENUE_MESSAGE = " 입니다.";
