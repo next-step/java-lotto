@@ -1,5 +1,7 @@
 package stringAddCalculate;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 
     public static int splitAndSum(String expression) {
@@ -10,11 +12,7 @@ public class StringAddCalculator {
         StringExpression stringExpression = new StringExpression(expression);
         String[] numbers = stringExpression.getNumbers();
 
-        int result = 0;
-        for (int idx = 0; idx < numbers.length; idx++) {
-                result += Integer.parseInt(numbers[idx]);
-        }
-        return result;
+        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
     }
 
     private static boolean isNullOrEmpty(String expression) {
