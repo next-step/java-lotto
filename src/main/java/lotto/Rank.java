@@ -19,6 +19,14 @@ public enum Rank {
 		this.prizeMoney = prizeMoney;
 	}
 
+	public long getMatchedCount() {
+		return matchedCount;
+	}
+
+	public long getPrizeMoney() {
+		return prizeMoney;
+	}
+
 	public static Rank findByMatchedCount(long count) {
 		return Arrays.stream(Rank.values())
 				.filter(r -> count >= r.matchedCount)

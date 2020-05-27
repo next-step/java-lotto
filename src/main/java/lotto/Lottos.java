@@ -1,6 +1,9 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -20,5 +23,13 @@ public class Lottos {
 
     public Lotto get(int index) {
         return lottos.get(index);
+    }
+
+    public LottoResults checkResults(WinningNumbers winningNumbers) {
+        Map<Rank, Long> results = lottos.stream()
+                .map(l -> l.checkResult(winningNumbers))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        return new LottoResults(results);
     }
 }
