@@ -7,8 +7,9 @@ import lotto.vo.Money;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoGameProperty.LOTTO_TICKET_PRICE;
+
 public class LottoStore {
-    private static final Money LOTTO_TICKET_PRICE = new Money(1000);
     private final LottoNumberGenerator lottoNumberGenerator;
 
     public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
@@ -16,12 +17,12 @@ public class LottoStore {
     }
 
     public LottoTickets buy(final Money totalMoney) {
-        Money currentChange = totalMoney;
+        Money currentMoney = totalMoney;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        while (isEnoughChange(currentChange)) {
+        while (currentMoney.isEnoughToBuy(LOTTO_TICKET_PRICE)) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.generate()));
-            currentChange = currentChange.spend(LOTTO_TICKET_PRICE);
+            currentMoney = currentMoney.spend(LOTTO_TICKET_PRICE);
         }
 
         return new LottoTickets(lottoTickets);
