@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -10,7 +11,7 @@ public class Lotto {
     private List<Integer> numbers;
 
     public Lotto(LottoNumberSelectRule numberSelectRule) {
-        this.numbers = numberSelectRule.select();
+        this.numbers = Collections.unmodifiableList(numberSelectRule.select());
         validateCount(this.numbers.size());
     }
 

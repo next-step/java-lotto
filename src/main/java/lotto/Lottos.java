@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -10,7 +11,7 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public int getPriceTotal() {
