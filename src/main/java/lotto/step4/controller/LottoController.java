@@ -4,6 +4,8 @@ import lotto.step4.domain.*;
 import lotto.step4.view.InputView;
 import lotto.step4.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
   private final static InputView inputView = InputView.getInstance();
   private final static ResultView resultView = ResultView.getInstance();
@@ -11,7 +13,8 @@ public class LottoController {
   public static void main(String[] args) {
 
     long price = inputView.inputPrice();
-    Lottos lottos = LottoShop.buyLotto(price);
+    List<Lotto> lottosByDirectInput = inputView.inputLottoYourOwn();
+    Lottos lottos = LottoShop.buyLotto(price, lottosByDirectInput);
     resultView.printLottoList(lottos);
 
     LottoResult lottoResult = LottoResult.of(lottos, WinningLotto.of(
