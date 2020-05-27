@@ -6,8 +6,8 @@ public class PurchasePrice {
     private final long purchasePrice;
 
     public PurchasePrice(long purchasePrice) {
-        this.purchasePrice = purchasePrice;
         validatePurchasePrice(purchasePrice);
+        this.purchasePrice = purchasePrice;
     }
 
     private void validatePurchasePrice(long purchasePrice) {

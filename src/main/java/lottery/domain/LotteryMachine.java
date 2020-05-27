@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,8 @@ import java.util.stream.Stream;
 public class LotteryMachine {
 
     private static final long LOTTERY_TICKET_PRICE = 1000;
-    private static final List<Integer> LOTTERY_NUMBERS_LIST = IntStream.rangeClosed(1, 45).boxed()
+    private static final List<Integer> LOTTERY_NUMBERS_LIST = IntStream.rangeClosed(1, 45)
+            .boxed()
             .collect(Collectors.toList());
     private static final int FIRST_INDEX = 0;
     private static final int LAST_INDEX = 6;
@@ -30,9 +30,9 @@ public class LotteryMachine {
         );
     }
 
-    public Map<Integer, Integer> findWinnerTicketsMap(LotteryTicketsGroup lotteryTicketsGroup,
-                                                      LotteryTicket lastWinnerTicket) {
-        return lotteryTicketsGroup.findWinnerTicketsMap(lastWinnerTicket);
+    public Map<LotteryRank, Integer> findWinnerTicketCountsByRankMap(LotteryTicketsGroup lotteryTicketsGroup,
+                                                                 LotteryTicket lastWinnerTicket) {
+        return lotteryTicketsGroup.findWinnerTicketCountsByRankMap(lastWinnerTicket);
     }
 
     private LotteryTicket makeLotteryTicket() {

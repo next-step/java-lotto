@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LotteryTicketsGroup {
 
-    private static final int MINIMUM_WINNER_NUMBER_COUNTS = 3;
+    private static final int MINIMUM_MATCH_NUMBER_COUNTS = 3;
     private final List<LotteryTicket> lotteryTickets;
 
     public LotteryTicketsGroup(List<LotteryTicket> lotteryTickets) {
@@ -21,28 +21,30 @@ public class LotteryTicketsGroup {
                 .collect(Collectors.toList());
     }
 
-    public Map<Integer, Integer> findWinnerTicketsMap(LotteryTicket lastWinnerTicket) {
-        Map<Integer, Integer> winnerTicketsMap = new HashMap<>();
+    public Map<LotteryRank, Integer> findWinnerTicketCountsByRankMap(LotteryTicket lastWinnerTicket) {
+        Map<LotteryRank, Integer> winnerTicketCountsByRankMap = new HashMap<>();
         int lotteryTicketCounts = lotteryTickets.size();
         for (int i = 0; i < lotteryTicketCounts; i++) {
             LotteryTicket targetLotteryTicket = lotteryTickets.get(i);
-            int winnerNumberCounts = getWinnerNumberCounts(targetLotteryTicket, lastWinnerTicket);
-            updateWinnerTicketsMap(winnerTicketsMap, winnerNumberCounts);
+            int matchNumberCounts = getMatchNumberCounts(targetLotteryTicket, lastWinnerTicket);
+            updateWinnerTicketsCountsByRankMap(winnerTicketCountsByRankMap, matchNumberCounts);
         }
-        return winnerTicketsMap;
+        return winnerTicketCountsByRankMap;
     }
 
-    private int getWinnerNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
+    private int getMatchNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
         return (int)targetLotteryTicket.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
     }
 
-    private void updateWinnerTicketsMap(Map<Integer, Integer> winnerTicketsMap, int winnerNumberCounts) {
-        if (winnerNumberCounts < MINIMUM_WINNER_NUMBER_COUNTS) {
+    private void updateWinnerTicketsCountsByRankMap(Map<LotteryRank, Integer> winnerTicketCountsByRankMap,
+                                                    int matchNumberCounts) {
+        if (matchNumberCounts < MINIMUM_MATCH_NUMBER_COUNTS) {
             return;
         }
-        int winnerTicketCounts = winnerTicketsMap.getOrDefault(winnerNumberCounts, 0) + 1;
-        winnerTicketsMap.put(winnerNumberCounts, winnerTicketCounts);
+        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts);
+        int winnerTicketCounts = winnerTicketCountsByRankMap.getOrDefault(lotteryRank, 0) + 1;
+        winnerTicketCountsByRankMap.put(lotteryRank, winnerTicketCounts);
     }
 }

@@ -15,8 +15,12 @@ public class Main {
         ResultView.printLotteryTicketsNumbers(lotteryTicketsGroup);
 
         LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
+        /*
         StatisticsBoard statisticsBoard = new StatisticsBoard(lotteryMachine
-                .findWinnerTicketsMap(lotteryTicketsGroup, lastWinnerTicket));
+                .findWinnerTicketCountsByRankMap(lotteryTicketsGroup, lastWinnerTicket));
+        RateOfReturn rateOfReturn = new RateOfReturn(statisticsBoard.calculateRateOfReturn(purchasePrice));
         ResultView.printLotteryStatistics(statisticsBoard);
+        ResultView.printRateOfReturn(rateOfReturn);
+         */
     }
 }

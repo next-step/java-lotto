@@ -1,9 +1,6 @@
 package lottery.view;
 
-import lottery.domain.LotteryMachine;
-import lottery.domain.LotteryRanks;
-import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.StatisticsBoard;
+import lottery.domain.*;
 
 import java.util.List;
 
@@ -22,13 +19,24 @@ public class ResultView {
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
     }
-
+    /*
     public static void printLotteryStatistics(StatisticsBoard statisticsBoard) {
-        LotteryRanks[] lotteryRanks = LotteryRanks.values();
-        for (LotteryRanks lotteryRank : lotteryRanks) {
+        LotteryRank[] lotteryRanks = LotteryRank.values();
+        for (LotteryRank lotteryRank : lotteryRanks) {
             System.out.println(lotteryRank.getRequiredNumberCounts() + "개 일치 (" + lotteryRank.getPrizeMoney() + "원) - "
             + statisticsBoard.findTicketCountsByLotteryRank(lotteryRank) + "개");
         }
+    }
+
+
+     */
+    public static void printRateOfReturn(RateOfReturn rateOfReturn) {
+        System.out.println("총 수익률은 " + rateOfReturn.getRateOfReturn() + "입니다.");
+        if (rateOfReturn.isSurplus()) {
+            System.out.println("기준이 1이기 때문에 결과적으로 이득입니다.");
+            return;
+        }
+        System.out.println("기준이 1이기 때문에 결과적으로 손해입니다.");
     }
 
     private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
