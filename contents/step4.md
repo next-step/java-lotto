@@ -48,6 +48,7 @@
 
 #### LottoSeller
 : LottoTickets 를 금액만큼 구매하는 책임 
+- [x] PurchaseInfo 가 null 이면 예외를 반환한다.
 - [x] 수동으로 입력한 로또 티켓이 구매할 수 있는 티켓의 수보다 많으면 예외 반환
 - [x] 수동으로 입력한 로또 티켓 수를 구매하고 남은 돈으로 자동으로 로또 티켓을 생성한다.
 
@@ -66,6 +67,7 @@
 - [x] Price 가 null 이면 예외가 발생한다.
 - [x] 구입 금액보다 수동으로 구매한 티켓 수가 더 많으면 예외가 발생한다.
 - [x] 남은 금액으로 구매할 수 있는 autoTickets 개수를 반환한다.
+- [x] 수동으로 구매한 manualTickets 개수를 반환한다.
 - [x] 수동 로또 번호 (LottoTickets)를 반환한다.
 
 ### # V (View)
@@ -75,6 +77,7 @@
 
 #### ResultView
 - [x] 수동, 자동으로 구매한 개수를 출력한다. 
+- [x] PurchaseInfo 로 부터 정보를 가져와 출력한다.
 
 ### # C (Controller)
 #### LottoApplication
