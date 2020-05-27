@@ -8,8 +8,8 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    public Lotto(LottoNumberSelectRule numberGenerateRule) {
-        this.numbers = numberGenerateRule.select();
+    public Lotto(LottoNumberSelectRule numberSelectRule) {
+        this.numbers = numberSelectRule.select();
     }
 
     public List<Integer> getNumbers() {
