@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGame;
-import lotto.domain.dto.LottoTicketDto;
+import lotto.domain.dto.PurchaseInfo;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.price.Price;
 import lotto.domain.prize.LottoPrizeResult;
@@ -20,9 +20,10 @@ public class LottoApplication {
         int manualTicketsCount = InputView.inputManualTicketsCount();
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketsCount);
 
-        LottoTickets tickets = LottoSeller.buyTicket(price, manualTickets);
+        PurchaseInfo purchaseInfo = PurchaseInfo.valueOf(price, manualTickets);
+        LottoTickets tickets = LottoSeller.buyTicket(purchaseInfo);
 
-        ResultView.printPurchaseInfo(manualTicketsCount, LottoTicketDto.from(tickets));
+        ResultView.printPurchaseInfo(purchaseInfo, tickets);
 
         List<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();

@@ -19,7 +19,7 @@ public class LottoSeller {
 
         LottoTickets autoTickets = LottoTickets.of(
                 Stream.generate(LottoNumbers::autoCreate)
-                    .limit(purchaseInfo.getNumOfAutoTickets())
+                    .limit(purchaseInfo.getAutoTicketsCount())
                     .map(LottoTicket::of)
                     .collect(Collectors.toList())
         );
