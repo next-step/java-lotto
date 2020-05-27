@@ -17,6 +17,8 @@ public class ResultView {
     private static final String PREFIX_REVENUE_MESSAGE = "총 수익율은 ";
     private static final String SUFFIX_REVENUE_MESSAGE = " 입니다.";
 
+    private static final String NEW_LINE = "\n";
+
 
     private ResultView() {
         throw new AssertionError();
@@ -46,5 +48,9 @@ public class ResultView {
 
     public static void printRevenueRate(double revenueRate) {
         System.out.println(PREFIX_REVENUE_MESSAGE + revenueRate + SUFFIX_REVENUE_MESSAGE);
+    }
+
+    public static void printNewLine() {
+        System.out.println(NEW_LINE);
     }
 }
