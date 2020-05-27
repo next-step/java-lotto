@@ -19,8 +19,15 @@ public class LottoResult {
     }
 
     public double getRateOfProfit(final Money spentMoney) {
-        Money totalProfit = LottoPrize.calculateTotalReword(lottoStatistics);
+        Money totalProfit = calculateTotalReword();
         return (double) totalProfit.getValue() / spentMoney.getValue();
+    }
+
+    private Money calculateTotalReword() {
+        Long totalMoney = lottoStatistics.stream()
+                .map(LottoPrize::getReward)
+                .reduce(0L, Long::sum);
+        return new Money(totalMoney);
     }
 
     public List<LottoPrize> getLottoStatistics() {

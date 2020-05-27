@@ -1,9 +1,6 @@
 package lotto.domain.result;
 
-import lotto.vo.Money;
-
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoPrize {
     FIRST(6, 2_000_000_000),
@@ -19,13 +16,6 @@ public enum LottoPrize {
     LottoPrize(int hitCount, long reward) {
         this.hitCount = hitCount;
         this.reward = reward;
-    }
-
-    public static Money calculateTotalReword(List<LottoPrize> statistics) {
-        Long totalMoney = statistics.stream()
-                .map(LottoPrize::getReward)
-                .reduce(0L, Long::sum);
-        return new Money(totalMoney);
     }
 
     public static LottoPrize findByMathCount(int matchCount, boolean matchBonus) {
