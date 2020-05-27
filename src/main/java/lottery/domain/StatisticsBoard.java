@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class StatisticsBoard {
 
+    private static final int ZERO = 0;
     private final Map<LotteryRank, Integer> winnerTicketCountsByRankMap;
 
     public StatisticsBoard(Map<LotteryRank, Integer> winnerTicketCountsByRankMap) {
@@ -14,13 +15,13 @@ public class StatisticsBoard {
     public int findTicketCountsByLotteryRank(LotteryRank lotteryRank) {
         Integer winnerTicketCounts = winnerTicketCountsByRankMap.get(lotteryRank);
         if (winnerTicketCounts == null)
-            return 0;
+            return ZERO;
         return winnerTicketCounts;
     }
 
     public double calculateRateOfReturn(PurchasePrice purchasePrice) {
         double revenueTotal = Arrays.stream(LotteryRank.values())
-                .mapToDouble(rank -> rank.getPrizeMoney() * findTicketCountsByLotteryRank(rank))
+                .mapToDouble(lotteryRank -> lotteryRank.getPrizeMoney() * findTicketCountsByLotteryRank(lotteryRank))
                 .sum();
         return revenueTotal / purchasePrice.getPurchasePrice();
     }

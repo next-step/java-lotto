@@ -2,6 +2,7 @@ package lottery.view;
 
 import lottery.domain.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -19,24 +20,25 @@ public class ResultView {
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
     }
-    /*
+
     public static void printLotteryStatistics(StatisticsBoard statisticsBoard) {
-        LotteryRank[] lotteryRanks = LotteryRank.values();
-        for (LotteryRank lotteryRank : lotteryRanks) {
-            System.out.println(lotteryRank.getRequiredNumberCounts() + "개 일치 (" + lotteryRank.getPrizeMoney() + "원) - "
-            + statisticsBoard.findTicketCountsByLotteryRank(lotteryRank) + "개");
-        }
+        Arrays.stream(LotteryRank.values())
+                .forEach(lotteryRank -> printEachRankResult(lotteryRank, statisticsBoard));
     }
 
-
-     */
     public static void printRateOfReturn(RateOfReturn rateOfReturn) {
-        System.out.println("총 수익률은 " + rateOfReturn.getRateOfReturn() + "입니다.");
-        if (rateOfReturn.isSurplus()) {
-            System.out.println("기준이 1이기 때문에 결과적으로 이득입니다.");
+        System.out.print(ViewMessages.RESULT_REVENUE_TOTAL);
+        System.out.print(rateOfReturn.getRateOfReturn());
+        System.out.print(ViewMessages.RESULT_SENTENCE_SUFFIX);
+        if (rateOfReturn.isSurplus() == null) {
+            System.out.println(ViewMessages.RESULT_EQUALITY);
             return;
         }
-        System.out.println("기준이 1이기 때문에 결과적으로 손해입니다.");
+        if (rateOfReturn.isSurplus()) {
+            System.out.println(ViewMessages.RESULT_SURPLUS);
+            return;
+        }
+        System.out.println(ViewMessages.RESULT_LOSS);
     }
 
     private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
@@ -54,5 +56,14 @@ public class ResultView {
     private static void appendComma(StringBuilder stringBuilder) {
         if (stringBuilder.length() > COMMA_BOUNDARY_LENGTH)
             stringBuilder.append(ViewMessages.COMMA);
+    }
+
+    private static void printEachRankResult(LotteryRank lotteryRank, StatisticsBoard statisticsBoard) {
+        System.out.print(lotteryRank.getMatchNumberCounts());
+        System.out.print(ViewMessages.RESULT_MATCH);
+        System.out.print(lotteryRank.getPrizeMoney());
+        System.out.print(ViewMessages.RESULT_MONETARY_UNIT);
+        System.out.print(statisticsBoard.findTicketCountsByLotteryRank(lotteryRank));
+        System.out.println(ViewMessages.RESULT_COUNT);
     }
 }

@@ -39,13 +39,14 @@ public class StatisticsBoardTest {
 
     @DisplayName("수익률 계산")
     @Test
-    public void getRetrunOfRate() {
+    public void getReturnOfRate() {
         PurchasePrice purchasePrice = new PurchasePrice(LotteryRank.FIRST_PRIZE.getPrizeMoney());
         StatisticsBoard statisticsBoard = new StatisticsBoard(
                 lotteryMachine.findWinnerTicketCountsByRankMap(winnerTicketsGroup, lastWinnerTicket));
 
         double returnOfRate = statisticsBoard.calculateRateOfReturn(purchasePrice);
         double totalRevenue = LotteryRank.FIRST_PRIZE.getPrizeMoney() + LotteryRank.FOURTH_PRIZE.getPrizeMoney();
+
         assertThat(returnOfRate).isEqualTo(totalRevenue / purchasePrice.getPurchasePrice());
     }
 }
