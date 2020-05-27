@@ -19,6 +19,11 @@ public class Lottos {
     return lottos.size() * Lotto.PRICE;
   }
 
+  public static Lottos concat (Lottos lottos1, Lottos lottos2) {
+    lottos1.lottos.addAll(lottos2.lottos);
+    return lottos1;
+  }
+
   public Stream<Lotto> stream () {
     return lottos.stream();
   }
