@@ -21,6 +21,13 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoSellerTest {
 
+    @DisplayName("PurchaseInfo 가 null 이면 예외를 반환")
+    @Test
+    void buyTicketFailureByNullArgument() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoSeller.buyTicket(null));
+    }
+
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
     @Test
     void buyTicketFailureByLackMoney() {
