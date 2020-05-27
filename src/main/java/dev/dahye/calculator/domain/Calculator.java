@@ -31,7 +31,7 @@ public class Calculator {
         Matcher m = PATTERN.matcher(input);
         String delimiter = DEFAULT_DELIMITER;
 
-        if (m.find()) {
+        if (m.matches()) {
             delimiter = m.group(GROUP_BY_DELIMITER);
             input = m.group(GROUP_BY_INPUT);
         }
