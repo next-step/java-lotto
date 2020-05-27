@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.LottoRank.*;
+import static lotto.domain.LottoRank.*;
 
 public class LottoCheck {
     private static final String SPLIT_REGX = ",";
