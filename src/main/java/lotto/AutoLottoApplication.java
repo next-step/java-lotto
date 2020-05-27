@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.AutoLottoNumberGenerator;
-import lotto.domain.LottoNumber;
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoStore;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningTicket;
@@ -22,7 +22,7 @@ public class AutoLottoApplication {
         OutputView.printLottoTicketNumbers(lottoTickets);
 
         LottoTicket winningLottoTicket = new LottoTicket(InputView.askLastWeekWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.askBonusNumber());
+        BonusNumber bonusNumber = new BonusNumber(InputView.askBonusNumber());
         WinningTicket winningTicket = new WinningTicket(winningLottoTicket, bonusNumber);
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
 

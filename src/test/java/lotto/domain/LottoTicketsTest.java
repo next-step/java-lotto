@@ -27,7 +27,7 @@ class LottoTicketsTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
-        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new LottoNumber(7));
+        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new BonusNumber(7));
         List<LottoPrize> expectedLottoPrizes = Arrays.asList(LottoPrize.FIRST, LottoPrize.SECOND, LottoPrize.FIFTH);
 
         //when
