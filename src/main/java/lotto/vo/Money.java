@@ -1,6 +1,7 @@
 package lotto.vo;
 
 public class Money {
+    private static final Money INITIAL_MONEY = new Money(0);
     private final long value;
 
     public Money(final long value) {
@@ -8,6 +9,9 @@ public class Money {
     }
 
     public static Money of(final long value) {
+        if (value == 0) {
+            return INITIAL_MONEY;
+        }
         return new Money(value);
     }
 
@@ -28,9 +32,5 @@ public class Money {
 
     public boolean isEnoughToBuy(final Money price) {
         return this.value >= price.value;
-    }
-
-    public long getValue() {
-        return value;
     }
 }

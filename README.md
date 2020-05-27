@@ -8,6 +8,10 @@
 WinningTicket에 메시지를 던지면 의존순환이되는게 아ㅣㄹ낚?,,
 
 
+- LottoTickets - LottoTicket - BonusNumber  이렇게 의존성이 순환되는 것 같은데, WinningTickets 가 그냥 LottoNumber를 가지고 있는게 나을까?
+일급컬렉션에 대한 집착 착 , ,,
+
+
 
 - 보너스번호, 2등 추가 - LottoPrize
 - 보너스번호를 입력받는다.

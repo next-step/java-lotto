@@ -17,9 +17,13 @@ class LottoResultTest {
     @DisplayName("구매금액에 따른 이익률을 반환한다")
     @Test
     void profit() {
+        //given
         List<LottoPrize> statistics = createStatistics();
+
+        //when
         LottoResult lottoResult = new LottoResult(statistics);
 
+        //then
         assertAll(
                 () -> assertThat(lottoResult.getRateOfProfit(new Money(60000))).isEqualTo(1),
                 () -> assertThat(lottoResult.getRateOfProfit(new Money(120000))).isEqualTo(0.5)
