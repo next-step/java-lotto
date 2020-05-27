@@ -1,7 +1,9 @@
 package lotto.step4.domain;
 
-import lotto.step4.execption.LottoGamePriceException;
+import lotto.step4.execption.LottoLesserPriceException;
+import lotto.step4.execption.LottoMinimumPriceException;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -12,15 +14,28 @@ public class LottoShop {
   private LottoShop() {}
 
   public static Lottos buyLotto (long price) {
-    validatePrice(price);
+    validateMinimumPrice(price);
     return Stream.generate(LottoGenerator::generateLotto)
                  .limit(price / Lotto.PRICE)
                  .collect(collectingAndThen(toList(), Lottos::of));
   }
 
-  public static void validatePrice (long price) throws RuntimeException {
+  public static Lottos buyLotto (long price, List<Lotto> lottosByDirectInput) {
+    Lottos lottos = Lottos.of(lottosByDirectInput);
+    long lesserPrice = price - lottos.getPrice();
+    validateLesserPrice(price);
+    return Lottos.concat(lottos, buyLotto(lesserPrice));
+  }
+
+  public static void validateMinimumPrice (long price) throws RuntimeException {
     if (price < Lotto.PRICE) {
-      throw new LottoGamePriceException();
+      throw new LottoMinimumPriceException();
+    }
+  }
+
+  public static void validateLesserPrice (long price) throws RuntimeException {
+    if (price < 0) {
+      throw new LottoLesserPriceException();
     }
   }
 
