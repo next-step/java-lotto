@@ -13,4 +13,12 @@ public class Lottos {
     public int getPriceTotal() {
         return Lotto.PRICE * lottos.size();
     }
+
+    public int size() {
+        return lottos.size();
+    }
+
+    public Lotto get(int index) {
+        return lottos.get(index);
+    }
 }

@@ -11,4 +11,8 @@ public class Lotto {
     public Lotto(LottoNumberSelectRule numberGenerateRule) {
         this.numbers = numberGenerateRule.select();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
