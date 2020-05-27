@@ -5,11 +5,11 @@ import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -49,11 +49,10 @@ public class InputView {
         System.out.println();
         System.out.println(MANUAL_TICKET_NUMBERS_MESSAGE);
 
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualTicketsCount; i++) {
-            List<LottoNumber> inputLottoNumbers = convertToLottoNumbers(SCANNER.nextLine());
-            lottoNumbers.add(LottoNumbers.manualCreate(inputLottoNumbers));
-        }
+        List<LottoNumbers> lottoNumbers = Stream.generate(() -> convertToLottoNumbers(SCANNER.nextLine()))
+                        .limit(manualTicketsCount)
+                        .map(LottoNumbers::manualCreate)
+                        .collect(Collectors.toList());
 
         return LottoTickets.of(
                 lottoNumbers.stream()
