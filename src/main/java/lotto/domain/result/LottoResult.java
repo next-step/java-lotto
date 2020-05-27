@@ -18,15 +18,15 @@ public class LottoResult {
                 .count());
     }
 
-    public double getRateOfProfit(final Money spentMoney) {
+    public double getRateOfProfit(final Money expenditure) {
         Money totalProfit = calculateTotalReword();
-        return (double) totalProfit.getValue() / spentMoney.getValue();
+        return totalProfit.calculateYield(expenditure);
     }
 
     private Money calculateTotalReword() {
         return lottoStatistics.stream()
                 .map(LottoPrize::getReward)
-                .reduce(new Money(0), Money::sum);
+                .reduce(new Money(0), Money::add);
     }
 
     public List<LottoPrize> getLottoStatistics() {

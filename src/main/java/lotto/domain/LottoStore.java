@@ -28,7 +28,4 @@ public class LottoStore {
         return new LottoTickets(lottoTickets);
     }
 
-    private boolean isEnoughChange(Money currentChange) {
-        return currentChange.isEnoughToBuy(LOTTO_TICKET_PRICE);
-    }
 }

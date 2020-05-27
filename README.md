@@ -1,5 +1,8 @@
 ## 로또(2등)
 
+- 리팩토링하다가 ..
+-> BonusNumber가 LottoNumber와 다를게 없어서 제거했다.
+
 - 보너스번호, 2등 추가 - LottoPrize
 - 보너스번호를 입력받는다.
 

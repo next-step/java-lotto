@@ -16,8 +16,8 @@ public class AutoLottoApplication {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
-        Money totalMoney = new Money(InputView.askTotalMoney());
-        LottoTickets lottoTickets = lottoStore.buy(totalMoney);
+        Money budget = Money.of(InputView.askTotalMoney());
+        LottoTickets lottoTickets = lottoStore.buy(budget);
 
         OutputView.printLottoTicketNumbers(lottoTickets);
 
@@ -26,6 +26,6 @@ public class AutoLottoApplication {
         WinningTicket winningTicket = new WinningTicket(winningLottoTicket, bonusNumber);
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
 
-        OutputView.printResult(lottoResult, totalMoney);
+        OutputView.printResult(lottoResult, budget);
     }
 }
