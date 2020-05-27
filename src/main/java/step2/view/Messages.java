@@ -9,8 +9,6 @@ public class Messages {
         + "4개 일치 (50000원)- %d개\n"
         + "5개 일치 (1500000원)- %d개\n"
         + "6개 일치 (2000000000원)- %d개\n"
-        + "총 수익률은 %0.2d입니다.";
+        + "총 수익률은 %0.2f입니다.";
     public static final String WINNING_STATISTIC_RESULT_LOSS_CASE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    public static final String WINNING_STATISTIC_RESULT_PROFIT_CASE = "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
-
 }
