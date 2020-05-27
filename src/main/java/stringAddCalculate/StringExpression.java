@@ -4,29 +4,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringExpression {
-    private String[] numbers;
+    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private final String[] numbers;
 
     public StringExpression(final String expression) {
         this.numbers = spliter(expression);
     }
 
-    private String[] spliter(String expression) {
+    private String[] spliter(final String expression) {
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
 
-        if (expression.contains(":")) {
-            return expression.split("[,:]");
-        }
-
-        if (expression.contains(",")) {
-            return expression.split(",");
-        }
-
-        return null;
+        return expression.split(DEFAULT_DELIMITER);
     }
 
     public String[] getNumbers() {

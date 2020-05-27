@@ -7,10 +7,6 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (expression.length() == 1) {
-            return Integer.parseInt(expression);
-        }
-
         StringExpression stringExpression = new StringExpression(expression);
         String[] numbers = stringExpression.getNumbers();
 
