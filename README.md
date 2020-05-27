@@ -43,15 +43,17 @@
 
 ### 기능 요구사항 분리
 - Money
-  [x] 보유한 돈으로 물품을 구입할 수 있는지 확인할 수 있어야 한다.
-  [x] 보유한 돈을 차감할 수 있어야 한다.
-  [x] 보유 금액보다 큰 금액을 차감하면 RuntimeException이 발생한다
+  - [x] 보유한 돈으로 물품을 구입할 수 있는지 확인할 수 있어야 한다.
+  - [x] 보유한 돈을 차감할 수 있어야 한다.
+  - [x] 보유 금액보다 큰 금액을 차감하면 RuntimeException이 발생한다
 - LottoMachine
-  - 입력한 금액으로 1,000원당 1장의 로또 티켓을 반환한다.
+  - [ ] 입력한 금액으로 1,000원당 1장의 로또 티켓을 반환한다.
 - LottoTicketGenerator
-- LottoNumber
-  [x] 로또 번호는 1 ~ 45까지만 입력이 가능하다
-  [x] 로또 번호 범위를 벗어나면 RuntimeException이 발생한다.
-- LottoNumbers
 - LottoTicket
 - LottoTickets
+- LottoNumberGenerator
+- LottoNumber
+  - [x] 로또 번호는 1 ~ 45까지만 입력이 가능하다
+  - [x] 로또 번호 범위를 벗어나면 RuntimeException이 발생한다.
+- LottoNumbers
+  - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다
