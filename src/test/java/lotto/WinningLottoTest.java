@@ -28,6 +28,14 @@ public class WinningLottoTest {
     @DisplayName("당첨 개수 검증를 검증한다.")
     void 로또_당첨_번호_검증_테스트() {
         WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 6, 7, 8)), 9);
-        assertThat(winningLotto.containsNumberCount(lottoTicket)).isEqualTo(4);
+        assertThat(winningLotto.getContainNumberCount(lottoTicket)).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 매칭 여부를 검증한다.")
+    void 보너스_번호_매칭_여부_테스트() {
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 6, 7, 8)), 9);
+        assertThat(winningLotto.isBonusMatch(lottoTicket)).isFalse();
+        assertThat(winningLotto.isBonusMatch(LottoTicket.of(Arrays.asList(1, 9, 6, 5, 4, 2)))).isTrue();
     }
 }

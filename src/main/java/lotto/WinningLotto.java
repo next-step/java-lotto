@@ -19,11 +19,15 @@ public class WinningLotto {
         return lottoTicket.contains(number);
     }
 
-    public long containsNumberCount(LottoTicket lottoTicket) {
+    public long getContainNumberCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoNumbers()
                 .stream()
                 .filter(this::contains)
                 .count();
+    }
+
+    public boolean isBonusMatch(LottoTicket lottoTicket) {
+        return lottoTicket.contains(bonusNumber);
     }
 
     private void validate(LottoTicket lottoTicket, Integer bonusNumber) {
