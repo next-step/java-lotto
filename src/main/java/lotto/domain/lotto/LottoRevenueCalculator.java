@@ -1,6 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-public class LottoCalculator {
+public class LottoRevenueCalculator {
+
+    private LottoRevenueCalculator() {
+
+    }
 
     public static String revenueCalculate(int inputMoney, int totalMatchMoney) {
         double revenueRate = Double.valueOf(totalMatchMoney) / Double.valueOf(inputMoney);

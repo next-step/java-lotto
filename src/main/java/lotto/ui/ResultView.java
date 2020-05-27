@@ -1,9 +1,9 @@
 package lotto.ui;
 
-import lotto.domain.LottoCalculator;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoRevenueCalculator;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ResultView {
             System.out.println(rank + "개 일치 (" + LottoRank.valueOf(rank).get().getWinningMoney() + "원)- " + count + "개");
         });
 
-        String rate = LottoCalculator.revenueCalculate(lottoRankList.size() * 1000, winningMoney);
+        String rate = LottoRevenueCalculator.revenueCalculate(lottoRankList.size() * 1000, winningMoney);
         System.out.println("총 수익률은 " + rate + "입니다.");
     }
 
