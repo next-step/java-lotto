@@ -3,7 +3,7 @@ package step2;
 import java.util.Scanner;
 
 public class InputView {
-    private final static Scanner scanner = new Scanner(System.in);
+    private final static Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {}
 
@@ -11,14 +11,14 @@ public class InputView {
         return new InputView();
     }
 
-    public int getPurchaseAmount() {
+    public int getPurchasedPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public String getLastLottoNumber() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 }

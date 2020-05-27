@@ -5,20 +5,17 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         InputView inputView = InputView.create();
-        int purchaseAmount = inputView.getPurchaseAmount();
+        ResultView resultView = ResultView.create();
 
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.create(purchaseAmount, new ResultView());
+        int purchasedPrice = inputView.getPurchasedPrice();
 
-        lottoGame.printLottos();
+        LottoGame lottoGame = LottoGame.create(purchasedPrice);
+        resultView.printNumber(lottoGame);
 
-        String lastLottoNumber = inputView.getLastLottoNumber();
-        int[] lastLottoNumbers = Arrays.stream(lastLottoNumber.trim().split(", "))
-                            .mapToInt(Integer::parseInt)
-                            .toArray();
+        String lastWinningNumber = inputView.getLastLottoNumber();
 
-        lottoGame.countCorrectNumbers(lastLottoNumbers);
-        lottoGame.printStatistics();
+        lottoGame.countMatchedNumbers(lastWinningNumber);
+        resultView.printStatistics(lottoGame);
 
         double rateOfProfit = lottoGame.calculateRateOfProfit();
         lottoGame.printRateOfProfit(rateOfProfit);
