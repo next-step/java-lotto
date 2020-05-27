@@ -22,7 +22,7 @@ public class LottoAnalyzerTest {
     @BeforeEach
     void setUp(){
         LottoGame lottoGame = new LottoGame();
-        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 8));
 
         lottoAnalyzer = new LottoAnalyzer(lottoGame);
     }
