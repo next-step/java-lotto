@@ -24,10 +24,9 @@ public class LottoResult {
     }
 
     private Money calculateTotalReword() {
-        Long totalMoney = lottoStatistics.stream()
+        return lottoStatistics.stream()
                 .map(LottoPrize::getReward)
-                .reduce(0L, Long::sum);
-        return new Money(totalMoney);
+                .reduce(new Money(0), Money::sum);
     }
 
     public List<LottoPrize> getLottoStatistics() {

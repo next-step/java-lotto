@@ -11,8 +11,15 @@ public class Money {
         return new Money(this.value - money.value);
     }
 
-    public boolean isEnoughToBuy(Money lottoTicketPrice) {
-        return this.value >= lottoTicketPrice.value;
+    public boolean isEnoughToBuy(Money price) {
+        return this.value >= price.value;
+    }
+
+    public Money sum(Money money) {
+        if (money.value == 0) {
+            return this;
+        }
+        return new Money(this.value + money.value);
     }
 
     public long getValue() {
