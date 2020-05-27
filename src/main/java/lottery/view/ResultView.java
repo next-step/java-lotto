@@ -43,19 +43,16 @@ public class ResultView {
 
     private static void printLotteryNumbers(List<Integer> lotteryNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
-        int lotteryNumbersSize = lotteryNumbers.size();
         stringBuilder.append(ViewMessages.LEFT_BRACKET);
-        for (int i = 0; i < lotteryNumbersSize; i++) {
-            appendComma(stringBuilder);
-            stringBuilder.append(lotteryNumbers.get(i));
-        }
+        lotteryNumbers.forEach(lotteryNumber -> appendLotteryNumber(lotteryNumber, stringBuilder));
         stringBuilder.append(ViewMessages.RIGHT_BRACKET);
         System.out.println(stringBuilder.toString());
     }
 
-    private static void appendComma(StringBuilder stringBuilder) {
+    private static void appendLotteryNumber(Integer lotteryNumber, StringBuilder stringBuilder) {
         if (stringBuilder.length() > COMMA_BOUNDARY_LENGTH)
             stringBuilder.append(ViewMessages.COMMA);
+        stringBuilder.append(lotteryNumber);
     }
 
     private static void printEachRankResult(LotteryRank lotteryRank, StatisticsBoard statisticsBoard) {

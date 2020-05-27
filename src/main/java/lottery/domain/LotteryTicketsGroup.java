@@ -25,13 +25,16 @@ public class LotteryTicketsGroup {
 
     public Map<LotteryRank, Integer> findWinnerTicketCountsByRankMap(LotteryTicket lastWinnerTicket) {
         Map<LotteryRank, Integer> winnerTicketCountsByRankMap = new HashMap<>();
-        int lotteryTicketCounts = lotteryTickets.size();
-        for (int i = 0; i < lotteryTicketCounts; i++) {
-            LotteryTicket targetLotteryTicket = lotteryTickets.get(i);
-            int matchNumberCounts = getMatchNumberCounts(targetLotteryTicket, lastWinnerTicket);
-            updateWinnerTicketCountsByRankMap(winnerTicketCountsByRankMap, matchNumberCounts);
-        }
+        lotteryTickets.forEach(targetLotteryTicket ->
+                calculateLotteryRank(targetLotteryTicket, lastWinnerTicket, winnerTicketCountsByRankMap));
         return winnerTicketCountsByRankMap;
+    }
+
+    private void calculateLotteryRank(LotteryTicket targetLotteryTicket,
+                                      LotteryTicket lastWinnerTicket,
+                                      Map<LotteryRank, Integer> winnerTicketCountsByRankMap) {
+        int matchNumberCounts = getMatchNumberCounts(targetLotteryTicket, lastWinnerTicket);
+        updateWinnerTicketCountsByRankMap(winnerTicketCountsByRankMap, matchNumberCounts);
     }
 
     private int getMatchNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
