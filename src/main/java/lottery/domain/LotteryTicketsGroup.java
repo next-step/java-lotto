@@ -27,7 +27,7 @@ public class LotteryTicketsGroup {
         for (int i = 0; i < lotteryTicketCounts; i++) {
             LotteryTicket targetLotteryTicket = lotteryTickets.get(i);
             int matchNumberCounts = getMatchNumberCounts(targetLotteryTicket, lastWinnerTicket);
-            updateWinnerTicketsCountsByRankMap(winnerTicketCountsByRankMap, matchNumberCounts);
+            updateWinnerTicketCountsByRankMap(winnerTicketCountsByRankMap, matchNumberCounts);
         }
         return winnerTicketCountsByRankMap;
     }
@@ -38,7 +38,7 @@ public class LotteryTicketsGroup {
                 .count();
     }
 
-    private void updateWinnerTicketsCountsByRankMap(Map<LotteryRank, Integer> winnerTicketCountsByRankMap,
+    private void updateWinnerTicketCountsByRankMap(Map<LotteryRank, Integer> winnerTicketCountsByRankMap,
                                                     int matchNumberCounts) {
         if (matchNumberCounts < MINIMUM_MATCH_NUMBER_COUNTS) {
             return;
