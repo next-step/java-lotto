@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain.rank;
 
 public class LottoRevenueCalculator {
 
@@ -6,8 +6,9 @@ public class LottoRevenueCalculator {
 
     }
 
-    public static String revenueCalculate(int inputMoney, int totalMatchMoney) {
+    private static String revenueCalculate(int inputMoney, int totalMatchMoney) {
         double revenueRate = Double.valueOf(totalMatchMoney) / Double.valueOf(inputMoney);
         return String.format("%.2f", revenueRate);
     }
+
 }

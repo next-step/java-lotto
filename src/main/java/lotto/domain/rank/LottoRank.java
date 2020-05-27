@@ -28,9 +28,15 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-        return Arrays.stream(values())
+        LottoRank rank = Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
+
+        if (countOfMatch == SECOND.countOfMatch && matchBonus) {
+            return SECOND;
+        }
+
+        return rank;
     }
 }

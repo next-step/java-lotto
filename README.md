@@ -99,9 +99,13 @@
 - [x] 로또 티켓은 6개의 로또 번호가 존재하게 구현
 - [x] 로또 매치 구현
 - [x] 로또 당첨 결과 프린트 구현
-- [ ] 로또 2등 구현 
+- [x] 로또 2등 구현
+- [ ] 로또 2등 출력 구현 
 
 
 
 - 원시값 정리
 > https://velog.io/@amobmocmo/Level-1-%EC%A0%95%EB%A6%AC-%EA%B8%B0%EC%88%A0-
+
+- Optional 
+> http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/

@@ -32,12 +32,16 @@ public class LottoTicket {
         }
     }
 
-    public int matchLottoTicketRank(LottoTicket lottoTicket) {
+    public int matchLottoTicketCount(LottoTicket lottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber: lottoNumbers) {
             matchCount += lottoTicket.executeMatchLottoNumber(lottoNumber);
         }
         return matchCount;
+    }
+
+    public Boolean hasBonusNumber(LottoNumber lottoBonusNumber) {
+        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.isMatch(lottoBonusNumber)).findFirst().isEmpty();
     }
 
     public int size() {

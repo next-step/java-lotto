@@ -1,5 +1,7 @@
 package lotto.service;
 
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.LottoRankCalculator;
 import lotto.domain.shop.LottoPurchaseMoney;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.lotto.LottoTicket;
@@ -14,12 +16,12 @@ public class LottoService {
         return lottoShop.publishLottoTickets(lottoPurchaseMoney);
     }
 
-    public List<Integer> matchLottoTicket(List<LottoTicket> lottoTicketList, LottoTicket winLottoTicket) {
-        List<Integer> lottoRankList= new ArrayList<>();
+    public List<LottoRank> matchLottoTicket(List<LottoTicket> lottoTicketList, LottoRankCalculator lottoRankCalculator) {
+        List<LottoRank> lottoRankList = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTicketList) {
-            int rank = lottoTicket.matchLottoTicketRank(winLottoTicket);
-            lottoRankList.add(rank);
+            LottoRank resultRank = lottoRankCalculator.calculate(lottoTicket);
+            lottoRankList.add(resultRank);
         }
         return lottoRankList;
     }

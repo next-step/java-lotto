@@ -1,5 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain.rank;
 
+import lotto.domain.rank.LottoRevenueCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
