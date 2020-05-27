@@ -42,19 +42,18 @@ public class Calculator {
     public int sum() {
         int result = 0;
 
-        for (String number : numbers) {
-            result += getValidNumber(number);
+        for (String stringNumber : numbers) {
+            int number = getNumber(stringNumber);
+            validateMinus(number);
+            result += number;
         }
 
         return result;
     }
 
-    private int getValidNumber(String stringNumber) {
+    private int getNumber(String stringNumber) {
         try {
-            int number = Integer.parseInt(stringNumber);
-            validateMinus(number);
-
-            return number;
+            return Integer.parseInt(stringNumber);
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자 이외의 값은 계산할 수 없습니다.", e);
         }
