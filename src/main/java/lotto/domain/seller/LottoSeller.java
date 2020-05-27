@@ -14,11 +14,7 @@ public class LottoSeller {
     private LottoSeller() {
     }
 
-    public static LottoSeller newInstance() {
-        return new LottoSeller();
-    }
-
-    public LottoTickets buyTicket(final Price price, final LottoTickets manualTickets) {
+    public static LottoTickets buyTicket(final Price price, final LottoTickets manualTickets) {
         verifyAvailableCount(price, manualTickets.count());
 
         LottoTickets autoTickets = LottoTickets.of(

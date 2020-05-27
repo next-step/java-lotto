@@ -20,8 +20,7 @@ public class LottoApplication {
         int manualTicketsCount = InputView.inputManualTicketsCount();
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketsCount);
 
-        LottoSeller seller = LottoSeller.newInstance();
-        LottoTickets tickets = seller.buyTicket(price, manualTickets);
+        LottoTickets tickets = LottoSeller.buyTicket(price, manualTickets);
 
         ResultView.printPurchaseInfo(manualTicketsCount, LottoTicketDto.from(tickets));
 
