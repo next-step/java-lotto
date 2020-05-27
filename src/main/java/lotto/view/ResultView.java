@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.dto.LottoTicketDto;
-import lotto.domain.dto.PurchaseInfo;
+import lotto.domain.price.PurchaseInfo;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.prize.Prize;
 import lotto.domain.ticket.LottoTickets;

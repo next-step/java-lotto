@@ -1,6 +1,6 @@
 package lotto.domain.seller;
 
-import lotto.domain.dto.PurchaseInfo;
+import lotto.domain.price.PurchaseInfo;
 import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;

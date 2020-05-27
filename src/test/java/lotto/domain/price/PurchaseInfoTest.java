@@ -1,6 +1,5 @@
-package lotto.domain.dto;
+package lotto.domain.price;
 
-import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.exception.AvailableCountExceedException;
