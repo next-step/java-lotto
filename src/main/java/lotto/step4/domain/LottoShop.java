@@ -3,6 +3,7 @@ package lotto.step4.domain;
 import lotto.step4.execption.LottoLesserPriceException;
 import lotto.step4.execption.LottoMinimumPriceException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -11,6 +12,14 @@ import static java.util.stream.Collectors.toList;
 public class LottoShop {
 
   private LottoShop() {}
+
+  public static Lottos buyLotto (long price) {
+    validateMinimumPrice(price);
+    return Lottos.of(Stream.generate(LottoGenerator::generateLotto)
+                           .limit(price / Lotto.PRICE)
+                           .collect(toList()),
+                     new ArrayList<>());
+  }
 
   public static Lottos buyLotto (long price, List<Lotto> directLottos) {
     validateMinimumPrice(price);
