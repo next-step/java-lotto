@@ -6,7 +6,6 @@ import lotto.domain.ticket.LottoTickets;
 import lotto.exception.AvailableCountExceedException;
 import lotto.util.LottoTicketGenerator;
 import lotto.util.LottoTicketsGenerator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,18 +20,11 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoSellerTest {
 
-    private LottoSeller lottoSeller;
-
-    @BeforeEach
-    void setUp() {
-        lottoSeller = LottoSeller.newInstance();
-    }
-
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
     @Test
     void buyTicketFailureByLackMoney() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoSeller.buyTicket(
+                .isThrownBy(() -> LottoSeller.buyTicket(
                         Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
                 );
     }
@@ -42,7 +34,7 @@ public class LottoSellerTest {
     @MethodSource
     void buyTickets(final int money, final LottoTickets manualTickets, final int expected) {
         Price price = Price.of(money);
-        assertThat(lottoSeller.buyTicket(price, manualTickets).getLottoTickets().size())
+        assertThat(LottoSeller.buyTicket(price, manualTickets).getLottoTickets().size())
                 .isEqualTo(expected);
     }
 
@@ -64,6 +56,6 @@ public class LottoSellerTest {
         LottoTickets manualTickets = LottoTickets.of(lottoTickets);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
-                .isThrownBy(() -> lottoSeller.buyTicket(price, manualTickets));
+                .isThrownBy(() -> LottoSeller.buyTicket(price, manualTickets));
     }
 }
