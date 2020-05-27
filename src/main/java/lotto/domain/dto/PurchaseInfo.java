@@ -33,4 +33,8 @@ public class PurchaseInfo {
             throw new AvailableCountExceedException();
         }
     }
+
+    public int getNumOfAutoTickets() {
+        return price.ticketCount() - manualTickets.count();
+    }
 }
