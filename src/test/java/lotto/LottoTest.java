@@ -64,10 +64,16 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("")
+    @DisplayName("로또에 전달된 숫자들 중 몇개가 포함되어 있는 지 리턴한다.")
     @Test
     public void getContainCountTest() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
 
+        int count = lotto.getContainsCount(1);
+        int counts = lotto.getContainCount(List.of(1,2,3));
+
+        assertThat(count).isEqualTo(1);
+        assertThat(counts).isEqualTo(3);
     }
 
     private static Stream<Arguments> lottoNumbersOutOfRange() {
