@@ -41,7 +41,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchCount, boolean isBonusNumberMatch) {
-        if (matchCount < FOURTH.matchCount) {
+        if (matchCount < FIFTH.matchCount) {
             return BOOM;
         }
         if (matchCount == SECOND.matchCount && isBonusNumberMatch) {
