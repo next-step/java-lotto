@@ -47,7 +47,7 @@ public enum LottoRank {
         if (matchCount == SECOND.matchCount && isBonusNumberMatch) {
             return SECOND;
         }
-        return RANK.get(matchCount);
+        return RANK.get(matchCount.intValue());
     }
 
     public static List<LottoRank> valuesWithOutBoom() {
