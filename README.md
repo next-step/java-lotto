@@ -34,3 +34,22 @@
    - [x] 빈 문자열 또는 null 여부를 확인할 수 있어야 한다.
 4. Operand
    - [x] 객체 생성시 숫자 이외의 경우 RuntimeException 예외가 발생해야 한다.
+
+## 2단계
+
+### 기능 요구사항
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+- 로또 1장의 가격은 1000원이다.
+
+### 기능 요구사항 분리
+- Money
+  [x] 보유한 돈으로 물품을 구입할 수 있는지 확인할 수 있어야 한다.
+  [x] 보유한 돈을 차감할 수 있어야 한다.
+  [x] 보유 금액보다 큰 금액을 차감하면 RuntimeException이 발생한다
+- LottoMachine
+  - 입력한 금액으로 1,000원당 1장의 로또 티켓을 반환한다.
+- LottoTicketGenerator
+- LottoNumber
+- LottoNumbers
+- LottoTicket
+- LottoTickets
