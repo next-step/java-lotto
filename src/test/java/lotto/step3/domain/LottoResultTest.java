@@ -12,9 +12,9 @@ import static java.util.stream.Collectors.toList;
 import static lotto.step3.domain.LottoGenerator.generateLotto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PrizesTest {
+public class LottoResultTest {
 
-  private static final Prizes prizes = Prizes.of(
+  private static final LottoResult LOTTO_RESULT = LottoResult.of(
     Lottos.of(Stream.of(
       generateLotto("1,2,3,4,5,7"),
       generateLotto("1,2,3,4,5,8"),
@@ -30,9 +30,9 @@ public class PrizesTest {
   @DisplayName("로또 당첨 수를 구하는 메소드 검증")
   @ParameterizedTest
   @MethodSource("provideWinningLottoCount")
-  void 로또_당첨수_테스트 (Prizes prizes, Rank rank, long expected) {
+  void 로또_당첨수_테스트 (LottoResult lottoResult, Rank rank, long expected) {
     assertEquals(
-      prizes.stream()
+      lottoResult.stream()
         .filter(prize -> prize.getRank().equals(rank))
         .map(Prize::getCount).findFirst().orElse(0L),
       expected
@@ -41,9 +41,9 @@ public class PrizesTest {
 
   private static Stream<Arguments> provideWinningLottoCount () {
     return Stream.of(
-      Arguments.of(prizes, Rank.SECOND, 1),
-      Arguments.of(prizes, Rank.THIRD, 1),
-      Arguments.of(prizes, Rank.FIFTH, 2)
+      Arguments.of(LOTTO_RESULT, Rank.SECOND, 1),
+      Arguments.of(LOTTO_RESULT, Rank.THIRD, 1),
+      Arguments.of(LOTTO_RESULT, Rank.FIFTH, 2)
     );
   }
 
@@ -52,7 +52,7 @@ public class PrizesTest {
   void 로또_당첨_금액_테스트 () {
     long expected = Rank.SECOND.getPrice() + Rank.THIRD.getPrice() + (Rank.FIFTH.getPrice() * 2);
     assertEquals(
-      prizes.getPayoff(),
+      LOTTO_RESULT.getPayoff(),
       expected
     );
   }
@@ -71,8 +71,8 @@ public class PrizesTest {
   @DisplayName("로또 당첨 금액의 수익률 검증 테스트")
   @ParameterizedTest
   @MethodSource("provideLottoGameAndWinningPrice")
-  void 로또_당첨_수익률_테스트 (Prizes prizes, String expected) {
-    String payoffRatio = String.format(RATIO_FORMAT, prizes.resultLottoGamePayOffRatio());
+  void 로또_당첨_수익률_테스트 (LottoResult lottoResult, String expected) {
+    String payoffRatio = String.format(RATIO_FORMAT, lottoResult.resultLottoGamePayOffRatio());
     assertEquals(expected, payoffRatio);
   }
 
@@ -82,14 +82,14 @@ public class PrizesTest {
     final String payoffRatio2 = "0.00";
     return Stream.of(
       Arguments.of(
-        Prizes.of(
+        LottoResult.of(
           lottos,
           WinningLotto.of(generateLotto("1,2,3,4,5,6"), BONUS_NUMBER)
         ),
         payoffRatio1
       ),
       Arguments.of(
-        Prizes.of(
+        LottoResult.of(
           lottos,
           WinningLotto.of(generateLotto("11,12,13,14,15,16"), BONUS_NUMBER)
         ),

@@ -2,8 +2,8 @@ package lotto.step3.view;
 
 import lotto.step3.domain.Lotto;
 import lotto.step3.domain.LottoNumber;
+import lotto.step3.domain.LottoResult;
 import lotto.step3.domain.Lottos;
-import lotto.step3.domain.Prizes;
 
 import static java.util.stream.Collectors.joining;
 
@@ -29,9 +29,9 @@ public class ResultView {
     System.out.printf(BUYING_FORMAT, lottoCount, lottoList);
   }
 
-  public void printStat (Prizes prizes) {
+  public void printStat (LottoResult lottoResult) {
     System.out.printf(HEAD_FORMAT,
-      prizes.stream()
+      lottoResult.stream()
             .map(prize -> String.format(BODY_FORMAT,
                                         prize.getRank().getSame(),
                                         prize.getRank().getPrice(),

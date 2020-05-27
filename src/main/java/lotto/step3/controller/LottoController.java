@@ -14,12 +14,12 @@ public class LottoController {
     Lottos lottos = LottoShop.buyLotto(price);
     resultView.printLottoList(lottos);
 
-    Prizes prizes = Prizes.of(lottos, WinningLotto.of(
+    LottoResult lottoResult = LottoResult.of(lottos, WinningLotto.of(
       LottoGenerator.generateLotto(inputView.inputWinning()),
       inputView.inputBonus()
     ));
-    resultView.printStat(prizes);
-    resultView.printPayoffRatio(prizes.resultLottoGamePayOffRatio());
+    resultView.printStat(lottoResult);
+    resultView.printPayoffRatio(lottoResult.resultLottoGamePayOffRatio());
 
   }
 

@@ -5,12 +5,12 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class Prizes {
+public class LottoResult {
   private final List<Prize> prizes;
   private final WinningLotto winningLotto;
   private final Lottos lottos;
 
-  private Prizes (Lottos lottos, WinningLotto winningLotto) {
+  private LottoResult(Lottos lottos, WinningLotto winningLotto) {
     this.winningLotto = winningLotto;
     this.lottos = lottos;
     this.prizes = Rank.stream()
@@ -18,8 +18,8 @@ public class Prizes {
                       .collect(toList());
   }
 
-  public static Prizes of (Lottos lottos, WinningLotto winningLotto) {
-    return new Prizes(lottos, winningLotto);
+  public static LottoResult of (Lottos lottos, WinningLotto winningLotto) {
+    return new LottoResult(lottos, winningLotto);
   }
 
   private long getWinningCount (Rank rank) {
