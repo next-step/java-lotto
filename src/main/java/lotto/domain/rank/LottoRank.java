@@ -27,9 +27,10 @@ public enum LottoRank {
         return winningMoney;
     }
 
-    public static Optional<LottoRank> valueOf(int countOfMatch) {
+    public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.countOfMatch == countOfMatch)
-                .findFirst();
+                .findFirst()
+                .orElse(MISS);
     }
 }

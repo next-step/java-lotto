@@ -21,7 +21,7 @@ public class ResultView {
         int winningMoney = getWinningMoneyAndCounting(lottoRankList);
 
         lottoRankCount.forEach((rank, count) -> {
-            System.out.println(rank + "개 일치 (" + LottoRank.valueOf(rank).get().getWinningMoney() + "원)- " + count + "개");
+            System.out.println(rank + "개 일치 (" + LottoRank.valueOf(rank).getWinningMoney() + "원)- " + count + "개");
         });
 
         String rate = LottoRevenueCalculator.revenueCalculate(lottoRankList.size() * 1000, winningMoney);
@@ -32,12 +32,9 @@ public class ResultView {
         int winningMoney = 0;
         initLottoRankCount();
         for (int lottoRankNumber : lottoRankList) {
-            if (lottoRankNumber < 3) continue;
-            Optional<LottoRank> lottoRank = LottoRank.valueOf(lottoRankNumber);
-            LottoRank rank = lottoRank.get();
-
-            saveRankCount(rank);
-            winningMoney += rank.getWinningMoney();
+            LottoRank lottoRank = LottoRank.valueOf(lottoRankNumber);
+            saveRankCount(lottoRank);
+            winningMoney += lottoRank.getWinningMoney();
         }
         return winningMoney;
     }

@@ -35,7 +35,7 @@ public class LottoTicket {
     public int matchLottoTicketRank(LottoTicket lottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber: lottoNumbers) {
-            matchCount += lottoTicket.isMatchNumber(lottoNumber);
+            matchCount += lottoTicket.executeMatchLottoNumber(lottoNumber);
         }
         return matchCount;
     }
@@ -48,15 +48,13 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    private int isMatchNumber(LottoNumber number) {
-        boolean isMatch = lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.isMatch(number));
+    private int executeMatchLottoNumber(LottoNumber number) {
+        return isMatchNumber(number) ? LOTTO_MATCH : LOTTO_NOT_MATCH;
+    }
 
-        if (isMatch) {
-            return LOTTO_MATCH;
-        }
-
-        return LOTTO_NOT_MATCH;
+    private boolean isMatchNumber(LottoNumber number) {
+        return lottoNumbers.stream()
+                    .anyMatch(lottoNumber -> lottoNumber.isMatch(number));
     }
 
     private void makeLottoTicket() {
