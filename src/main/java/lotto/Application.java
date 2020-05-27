@@ -7,5 +7,7 @@ public class Application {
         LottoMachine machine = new LottoMachine();
         Lottos lottos = machine.issue(paidMoney);
         ResultView.printLottos(lottos);
+
+        WinningNumbers winningNumbers = InputView.askWinningNumbers();
     }
 }
