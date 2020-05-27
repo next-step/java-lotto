@@ -37,5 +37,7 @@ public class ResultView {
 			String msg = String.format("%d개 일치 (%d원)- %d개", r.getMatchedCount(), r.getPrizeMoney(), results.getCounts(r));
 			System.out.println(msg);
 		});
+
+		System.out.println(String.format("총 수익률은 %.2f입니다.", results.getProfitRate()));
     }
 }

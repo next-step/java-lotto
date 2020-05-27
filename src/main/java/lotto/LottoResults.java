@@ -13,4 +13,20 @@ public class LottoResults {
 	public long getCounts(Rank rank) {
 		return results.getOrDefault(rank, 0L);
 	}
+
+	public float getProfitRate() {
+		return  (float) getPrizeMoneySum() / getSpentMoneySum();
+	}
+
+	private long getSpentMoneySum() {
+		return results.values().stream()
+				.mapToLong(l -> l * Lotto.PRICE)
+				.sum();
+	}
+
+	private long getPrizeMoneySum() {
+		return results.entrySet().stream()
+				.mapToLong(r -> r.getKey().getPrizeMoney() * r.getValue())
+				.sum();
+	}
 }

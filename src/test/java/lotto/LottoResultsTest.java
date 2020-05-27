@@ -31,4 +31,16 @@ class LottoResultsTest {
 		long counts = results.getCounts(Rank.Second);
 		assertThat(counts).isEqualTo(0);
 	}
+
+	@DisplayName("수익률을 계산한다")
+	@Test
+	void getProfitRate() {
+		Map<Rank, Long> map = new HashMap<>();
+		map.put(Rank.Fourth, 1L);
+		map.put(Rank.Losing, 9L);
+		LottoResults results = new LottoResults(map);
+
+		float profitRate = results.getProfitRate();
+		assertThat(profitRate).isEqualTo(0.5f);
+	}
 }
