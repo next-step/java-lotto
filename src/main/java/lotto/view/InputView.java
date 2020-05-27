@@ -16,6 +16,7 @@ public class InputView {
 
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입 금액을 입력하세요";
     private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력하세요.";
+    private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
 
     private InputView(){
@@ -38,5 +39,10 @@ public class InputView {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(toList());
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println(BONUS_BALL_MESSAGE);
+        return SCANNER.nextInt();
     }
 }
