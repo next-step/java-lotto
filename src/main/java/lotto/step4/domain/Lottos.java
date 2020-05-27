@@ -20,6 +20,14 @@ public class Lottos {
     return stream().count() * Lotto.PRICE;
   }
 
+  public long getAutoLottosSize() {
+    return autoLottos.size();
+  }
+
+  public long getDirectLottosSize() {
+    return directLottos.size();
+  }
+
   public Stream<Lotto> stream () {
     return Stream.concat(directLottos.stream(), autoLottos.stream());
   }

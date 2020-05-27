@@ -23,7 +23,7 @@ public class InputView {
   }
 
   public List<Lotto> inputLottoYourOwn () {
-    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
     int length = Integer.parseInt(scanner.nextLine());
 
     System.out.println("\n로또 번호를 입력해 주세요.");
@@ -37,7 +37,7 @@ public class InputView {
   }
 
   public String inputWinning () {
-    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     return scanner.nextLine();
   }
 
