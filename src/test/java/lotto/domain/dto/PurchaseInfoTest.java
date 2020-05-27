@@ -59,7 +59,8 @@ public class PurchaseInfoTest {
     @ParameterizedTest
     @MethodSource
     void getNumOfAutoTickets(final Price price, final LottoTickets manualTickets, final int expected) {
-        assertThat(PurchaseInfo.valueOf(price, manualTickets).getNumOfAutoTickets()).isEqualTo(expected);
+        assertThat(PurchaseInfo.valueOf(price, manualTickets).getNumOfAutoTickets())
+                .isEqualTo(expected);
     }
 
     private static Stream<Arguments> getNumOfAutoTickets() {
@@ -73,5 +74,14 @@ public class PurchaseInfoTest {
                 Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 4), LottoTickets.of(lottoTickets), 2),
                 Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 10), LottoTickets.of(lottoTickets), 8)
         );
+    }
+
+    @DisplayName("수동 로또 번호 (LottoTickets)를 반환")
+    @Test
+    void getManualTickets() {
+        Price price = Price.of(Price.ONE_TICKET_PRICE * 3);
+
+        assertThat(PurchaseInfo.valueOf(price, manualTickets).getManualTickets())
+                .isEqualTo(manualTickets);
     }
 }
