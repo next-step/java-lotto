@@ -38,7 +38,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public LottoTickets merge(final LottoTickets tickets) {
+    public LottoTickets merged(final LottoTickets tickets) {
         List<LottoTicket> mergeTickets = new ArrayList<>(lottoTickets);
         mergeTickets.addAll(tickets.lottoTickets);
 

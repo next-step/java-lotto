@@ -27,7 +27,7 @@ public class LottoSeller {
                     .map(LottoTicket::of)
                     .collect(Collectors.toList())
         );
-        return manualTickets.merge(autoTickets);
+        return manualTickets.merged(autoTickets);
     }
 
     private static void verifyAvailableCount(final Price price, final int manualTicketCount) {

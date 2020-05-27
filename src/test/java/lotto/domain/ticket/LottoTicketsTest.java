@@ -79,7 +79,7 @@ public class LottoTicketsTest {
     void merge() {
         LottoTickets originTickets = LottoTicketsGenerator.valueOf(1, 2, 3, 4, 5, 6);
 
-        assertThat(originTickets.merge(LottoTickets.of(tickets)).count())
+        assertThat(originTickets.merged(LottoTickets.of(tickets)).count())
                 .isEqualTo(6);
     }
 }
