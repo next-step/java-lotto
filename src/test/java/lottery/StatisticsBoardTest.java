@@ -31,9 +31,9 @@ public class StatisticsBoardTest {
         StatisticsBoard statisticsBoard = new StatisticsBoard(
                 lotteryMachine.findWinnerTicketCountsByRankMap(winnerTicketsGroup, lastWinnerTicket));
 
-        assertThat(statisticsBoard.findTicketCountsByLotteryRank(LotteryRank.FIRST_PRIZE))
+        assertThat(statisticsBoard.findWinnerTicketCountsByLotteryRank(LotteryRank.FIRST_PRIZE))
                 .isEqualTo(1);
-        assertThat(statisticsBoard.findTicketCountsByLotteryRank(LotteryRank.THIRD_PRIZE))
+        assertThat(statisticsBoard.findWinnerTicketCountsByLotteryRank(LotteryRank.THIRD_PRIZE))
                 .isEqualTo(1);
     }
 

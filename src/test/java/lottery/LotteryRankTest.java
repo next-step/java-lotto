@@ -21,12 +21,21 @@ public class LotteryRankTest {
         assertThat(lotteryRank).isEqualTo(expectedRank);
     }
 
+    @DisplayName("LotteryRanks Enum 상금 합계 기능 테스트")
+    @ParameterizedTest
+    @MethodSource("mockLotteryRanksBuilder")
+    public void calculatePrizeMoneySum(LotteryRank expectedRank, int winnerTicketCounts, double expectedSum) {
+       double prizeMoneySum = expectedRank.calculatePrizeMoneySum(winnerTicketCounts);
+
+       assertThat(prizeMoneySum).isEqualTo(expectedSum);
+    }
+
     private static Stream<Arguments> mockLotteryRanksBuilder() {
         return Stream.of(
-                Arguments.of(LotteryRank.FIRST_PRIZE, 0),
-                Arguments.of(LotteryRank.SECOND_PRIZE, 1),
-                Arguments.of(LotteryRank.THIRD_PRIZE, 2),
-                Arguments.of(LotteryRank.FOURTH_PRIZE, 3)
+                Arguments.of(LotteryRank.FIRST_PRIZE, 0, 0),
+                Arguments.of(LotteryRank.SECOND_PRIZE, 1, 1500000),
+                Arguments.of(LotteryRank.THIRD_PRIZE, 2, 100000),
+                Arguments.of(LotteryRank.FOURTH_PRIZE, 3, 15000)
         );
     };
 

@@ -12,7 +12,7 @@ public class StatisticsBoard {
         this.winnerTicketCountsByRankMap = winnerTicketCountsByRankMap;
     }
 
-    public int findTicketCountsByLotteryRank(LotteryRank lotteryRank) {
+    public int findWinnerTicketCountsByLotteryRank(LotteryRank lotteryRank) {
         Integer winnerTicketCounts = winnerTicketCountsByRankMap.get(lotteryRank);
         if (winnerTicketCounts == null)
             return ZERO;
@@ -21,7 +21,8 @@ public class StatisticsBoard {
 
     public double calculateRateOfReturn(PurchasePrice purchasePrice) {
         double revenueTotal = Arrays.stream(LotteryRank.values())
-                .mapToDouble(lotteryRank -> lotteryRank.getPrizeMoney() * findTicketCountsByLotteryRank(lotteryRank))
+                .mapToDouble(lotteryRank -> lotteryRank
+                        .calculatePrizeMoneySum(findWinnerTicketCountsByLotteryRank(lotteryRank)))
                 .sum();
         return revenueTotal / purchasePrice.getPurchasePrice();
     }

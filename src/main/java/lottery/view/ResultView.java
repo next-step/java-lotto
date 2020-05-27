@@ -63,7 +63,7 @@ public class ResultView {
         System.out.print(ViewMessages.RESULT_MATCH);
         System.out.print(lotteryRank.getPrizeMoney());
         System.out.print(ViewMessages.RESULT_MONETARY_UNIT);
-        System.out.print(statisticsBoard.findTicketCountsByLotteryRank(lotteryRank));
+        System.out.print(statisticsBoard.findWinnerTicketCountsByLotteryRank(lotteryRank));
         System.out.println(ViewMessages.RESULT_COUNT);
     }
 }

@@ -23,9 +23,11 @@ public enum LotteryRank {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS));
     }
 
-    public long getPrizeMoney() {
-        return prizeMoney;
+    public double calculatePrizeMoneySum(int winnerTicketCounts) {
+        return (double)prizeMoney * winnerTicketCounts;
     }
+
+    public long getPrizeMoney() { return prizeMoney; }
 
     public int getMatchNumberCounts() {
         return matchNumberCounts;
