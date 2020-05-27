@@ -12,13 +12,10 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String SUFFIX_BUY_MESSAGE = "를 구매했습니다.";
 
-    private static final String STATISTICS_BANNER_MESSAGE = "당첨 통계\n\n---------";
+    private static final String STATISTICS_BANNER_MESSAGE = "당첨 통계\n---------";
 
     private static final String PREFIX_REVENUE_MESSAGE = "총 수익율은 ";
     private static final String SUFFIX_REVENUE_MESSAGE = " 입니다.";
-
-    private static final String NEW_LINE = "\n";
-
 
     private ResultView() {
         throw new AssertionError();
@@ -43,6 +40,11 @@ public class ResultView {
     private static void printLottoRankMap(Map<LottoRank, Long> lottoRankMap, LottoRank lottoRank) {
         Long count = lottoRankMap.getOrDefault(lottoRank, LottoRank.BOOM.getPrice().longValue());
         String message = String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
+
+        if(lottoRank.equals(LottoRank.SECOND)) {
+            message = String.format("%s개 일치, 보너스볼 일치(%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
+        }
+
         System.out.println(message);
     }
 
@@ -51,6 +53,6 @@ public class ResultView {
     }
 
     public static void printNewLine() {
-        System.out.println(NEW_LINE);
+        System.out.println();
     }
 }
