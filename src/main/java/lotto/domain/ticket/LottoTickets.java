@@ -40,7 +40,7 @@ public class LottoTickets {
 
     public LottoTickets merge(final LottoTickets tickets) {
         List<LottoTicket> mergeTickets = new ArrayList<>(lottoTickets);
-        mergeTickets.addAll(tickets.getLottoTickets());
+        mergeTickets.addAll(tickets.lottoTickets);
 
         return LottoTickets.of(mergeTickets);
     }
