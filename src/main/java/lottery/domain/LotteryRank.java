@@ -20,7 +20,7 @@ public enum LotteryRank {
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.getMatchNumberCounts() == matchNumberCounts)
                 .findAny()
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS));
     }
 
     public long getPrizeMoney() {
