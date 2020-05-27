@@ -1,5 +1,6 @@
 package lotto.domain.seller;
 
+import lotto.domain.dto.PurchaseInfo;
 import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -24,17 +25,20 @@ public class LottoSellerTest {
     @Test
     void buyTicketFailureByLackMoney() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoSeller.buyTicket(
-                        Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
-                );
+                .isThrownBy(() ->
+                        LottoSeller.buyTicket(
+                            PurchaseInfo.valueOf(
+                                Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
+                        ));
     }
 
     @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")
     @ParameterizedTest
     @MethodSource
     void buyTickets(final int money, final LottoTickets manualTickets, final int expected) {
-        Price price = Price.of(money);
-        assertThat(LottoSeller.buyTicket(price, manualTickets).getLottoTickets().size())
+        PurchaseInfo purchaseInfo = PurchaseInfo.valueOf(Price.of(money), manualTickets);
+
+        assertThat(LottoSeller.buyTicket(purchaseInfo).getLottoTickets().size())
                 .isEqualTo(expected);
     }
 
@@ -56,6 +60,6 @@ public class LottoSellerTest {
         LottoTickets manualTickets = LottoTickets.of(lottoTickets);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
-                .isThrownBy(() -> LottoSeller.buyTicket(price, manualTickets));
+                .isThrownBy(() -> LottoSeller.buyTicket(PurchaseInfo.valueOf(price, manualTickets)));
     }
 }
