@@ -41,7 +41,7 @@ public class MoneyTest {
         );
     }
 
-    @DisplayName("useAmount()는 입력한 금액이 보유 금액보다 클 경우 Ru")
+    @DisplayName("useAmount()는 입력한 금액이 보유 금액보다 클 경우 예외가 발생한다")
     @Test
     void useAmount_NotAllowedAmount_ExceptionThrown() {
         Money money = Money.valueOf(1000);
