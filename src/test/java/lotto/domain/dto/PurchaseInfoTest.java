@@ -58,12 +58,12 @@ public class PurchaseInfoTest {
     @DisplayName("남은 금액으로 구매할 수 있는 autoTickets 개수를 반환")
     @ParameterizedTest
     @MethodSource
-    void getNumOfAutoTickets(final Price price, final LottoTickets manualTickets, final int expected) {
-        assertThat(PurchaseInfo.valueOf(price, manualTickets).getNumOfAutoTickets())
+    void getAutoTicketsCount(final Price price, final LottoTickets manualTickets, final int expected) {
+        assertThat(PurchaseInfo.valueOf(price, manualTickets).getAutoTicketsCount())
                 .isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getNumOfAutoTickets() {
+    private static Stream<Arguments> getAutoTicketsCount() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
         lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
@@ -73,6 +73,26 @@ public class PurchaseInfoTest {
                 Arguments.of(Price.of(Price.ONE_TICKET_PRICE), LottoTicketsGenerator.newInstance(), 1),
                 Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 4), LottoTickets.of(lottoTickets), 2),
                 Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 10), LottoTickets.of(lottoTickets), 8)
+        );
+    }
+
+    @DisplayName("구매한 manualTickets 개수를 반환")
+    @ParameterizedTest
+    @MethodSource
+    void getManualTicketsCount(final Price price, final LottoTickets manualTickets, final int expected) {
+        assertThat(PurchaseInfo.valueOf(price, manualTickets).getManualTicketsCount())
+                .isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> getManualTicketsCount() {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 4, 5, 6));
+        lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
+
+        return Stream.of(
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), LottoTicketsGenerator.newInstance(), 0),
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), LottoTicketsGenerator.valueOf(1, 2, 3, 4, 5, 6), 1),
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 4), LottoTickets.of(lottoTickets), 2)
         );
     }
 
