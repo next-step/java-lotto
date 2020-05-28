@@ -31,14 +31,14 @@ public class LottoSellerTest {
 
     @DisplayName("PayInfo 가 null 이면 예외를 반환")
     @Test
-    void buyTicketFailureByNullArgument2() {
+    void buyTicketFailureByNullArgument() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoSeller.buyTicket(null));
     }
 
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
     @Test
-    void buyTicketFailureByLackMoney2() {
+    void buyTicketFailureByLackMoney() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() ->
                         LottoSeller.buyTicket(
@@ -50,14 +50,14 @@ public class LottoSellerTest {
     @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")
     @ParameterizedTest
     @MethodSource
-    void buyTickets2(final int money, final List<List<LottoNumber>> manualTicketNumbers, final int expected) {
+    void buyTickets(final int money, final List<List<LottoNumber>> manualTicketNumbers, final int expected) {
         PayInfo payInfo = PayInfo.valueOf(Price.of(money), manualTicketNumbers);
 
         assertThat(LottoSeller.buyTicket(payInfo).getAllTickets().count())
                 .isEqualTo(expected);
     }
 
-    private static Stream<Arguments> buyTickets2() {
+    private static Stream<Arguments> buyTickets() {
         List<List<LottoNumber>> manualTicketNumbers = new ArrayList<>();
         manualTicketNumbers.add(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6));
         manualTicketNumbers.add(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 7, 8, 9));
@@ -70,12 +70,8 @@ public class LottoSellerTest {
 
     @DisplayName("수동으로 입력한 로또 티켓이 구매할 수 있는 티켓의 수보다 많으면 예외 반환")
     @Test
-    void buyTicketsFailure2() {
+    void buyTicketsFailure() {
         Price price = Price.of(Price.ONE_TICKET_PRICE);
-
-        List<List<LottoNumber>> manualTicketNumbers = new ArrayList<>();
-        manualTicketNumbers.add(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6));
-        manualTicketNumbers.add(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 7, 8, 9));
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
                 .isThrownBy(() -> LottoSeller.buyTicket(PayInfo.valueOf(price, manualTicketNumbers)));

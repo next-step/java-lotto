@@ -29,21 +29,21 @@ public class PayInfoTest {
 
     @DisplayName("Price 가 null 이면 예외 발생")
     @Test
-    void createFailure2() {
+    void createFailure() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PayInfo.valueOf(null, new ArrayList<>()));
     }
 
     @DisplayName("Price 와 수동 로또 번호를 인자로 입력받아 객체를 생성")
     @Test
-    void create2() {
+    void create() {
         assertThatCode(() -> PayInfo.valueOf(Price.of(Price.ONE_TICKET_PRICE), new ArrayList<>()))
                 .doesNotThrowAnyException();
     }
 
     @DisplayName("수동으로 입력한 로또 티켓이 구매할 수 있는 티켓의 수보다 많으면 예외 반환")
     @Test
-    void exceedOfAvailableCount2() {
+    void exceedOfAvailableCount() {
         Price price = Price.of(Price.ONE_TICKET_PRICE);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
