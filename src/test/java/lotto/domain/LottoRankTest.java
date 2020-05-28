@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoRankTest {
 
@@ -36,7 +35,7 @@ class LottoRankTest {
     @DisplayName("당첨된 LottoRank 만 리턴한다")
     @Test
     void getWinningLottoTest() {
-        LottoRank[] lottoRanks = LottoRank.getWinningLotto();
+        List<LottoRank> lottoRanks = LottoRank.getWinningLotto();
 
         assertThat(lottoRanks).containsOnly(LottoRank.RANK1, LottoRank.RANK2, LottoRank.RANK3, LottoRank.RANK4);
     }

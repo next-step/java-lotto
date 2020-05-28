@@ -3,6 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,8 +36,8 @@ public enum LottoRank {
         return lottoRank;
     }
 
-    public static LottoRank[] getWinningLotto() {
-        return new LottoRank[] {RANK1, RANK2, RANK3, RANK4};
+    public static List<LottoRank> getWinningLotto() {
+        return List.of(RANK1, RANK2, RANK3, RANK4);
     }
 
     public int getContainCountsSameWinningNumber() {
