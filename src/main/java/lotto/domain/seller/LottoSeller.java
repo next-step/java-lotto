@@ -17,26 +17,8 @@ public class LottoSeller {
     private LottoSeller() {
     }
 
-    public static LottoTickets buyTicket(final PayInfo payInfo) {
-        validatePayInfo(payInfo);
-
-        LottoTickets autoTickets = LottoTickets.of(
-                Stream.generate(LottoNumbers::autoCreate)
-                    .limit(payInfo.getAutoTicketsCount())
-                    .map(LottoTicket::of)
-                    .collect(Collectors.toList())
-        );
-        return payInfo.getManualTickets().merged(autoTickets);
-    }
-
-    private static void validatePayInfo(final PayInfo payInfo) {
-        if (payInfo == null) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
-        }
-    }
-
     public static PurchaseInfo buyTicket2(final PayInfo payInfo) {
-        validatePurchaseInfo(payInfo);
+        validatePayInfo(payInfo);
 
         return PurchaseInfo.valueOf(
                 buyManualTickets(payInfo.getManualTicketNumbers()),
@@ -44,7 +26,7 @@ public class LottoSeller {
         );
     }
 
-    private static void validatePurchaseInfo(final PayInfo payInfo) {
+    private static void validatePayInfo(final PayInfo payInfo) {
         if (payInfo == null) {
             throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
         }
