@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-@DisplayName("로또 티켓")
-class LottoTicketTest {
+@DisplayName("로또 발급")
+class LottoServiceTest {
     @ParameterizedTest(name = "{0}원일 때, {1}개")
     @MethodSource("moneyForTicket")
     @DisplayName("로또 구입 금액을 입력하면 구입 금액 만큼 로또를 발급한다.")

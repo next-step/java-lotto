@@ -14,13 +14,13 @@ public class LottoService {
         validateMoney(money);
         int lottoCount = money / LOTTO_PRICE;
         this.lottoTickets = new ArrayList<>();
-        for(int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.create());
         }
     }
 
     private void validateMoney(int money) {
-        if(isNoRemainder(money)) {
+        if (isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
     }
