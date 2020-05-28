@@ -1,9 +1,11 @@
 package lotto.domain.number;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 @DisplayName("LottoNumber 클래스 테스트")
@@ -15,5 +17,12 @@ public class LottoNumberTest {
     void createLottoNumber(int number) {
         assertThatCode(() -> new LottoNumber(number))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("equals 메소드 테스트")
+    @Test
+    void equals() {
+        assertThat(new LottoNumber(1).equals(new LottoNumber(1))).isTrue();
+        assertThat(new LottoNumber(1).equals(new LottoNumber(2))).isFalse();
     }
 }
