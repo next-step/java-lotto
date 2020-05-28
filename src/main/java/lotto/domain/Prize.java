@@ -37,4 +37,8 @@ public enum Prize {
     private static long counting(List<LottoNumber> winLottoNumberList, List<LottoNumber> lottoNumberList) {
         return lottoNumberList.stream().filter(winLottoNumberList::contains).count();
     }
+
+    public static Prize[] generateInRank() {
+        return Arrays.stream(values()).skip(1L).toArray(Prize[]::new);
+    }
 }
