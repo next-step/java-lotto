@@ -17,8 +17,8 @@ public class LottoTicketGeneratorTest {
     @ValueSource(ints = {1, 20, 100})
     @ParameterizedTest
     void generate_TicketCount_LottoTickets(int ticketCount) {
-        List<LottoTicket> lottoTickets = LottoTicketGenerator.generate(ticketCount);
-        assertThat(lottoTickets).hasSize(ticketCount);
+        LottoTickets lottoTickets = LottoTicketGenerator.generate(ticketCount);
+        assertThat(lottoTickets.getCount()).isEqualTo(ticketCount);
     }
 
     @DisplayName("입력한 티켓 장수가 1장보다 작으면 예외가 발생한다")

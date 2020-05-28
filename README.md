@@ -54,6 +54,7 @@
 - LottoTicket
   - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다
 - LottoTickets
+  - [x] 로또 티켓 장수를 조회 할 수 있어야 한다.
 - LottoNumberGenerator
   - [x] 로또 번호 6개를 생성한다- LottoNumber
   - [x] 로또 번호는 1 ~ 45까지만 입력이 가능하다

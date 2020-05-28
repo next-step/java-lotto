@@ -4,16 +4,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoTicketGenerator {
 
     private static final int TICKET_COUNT_MIN_VALUE = 1;
 
-    public static List<LottoTicket> generate(int ticketCount) {
+    public static LottoTickets generate(int ticketCount) {
         checkTicketCount(ticketCount);
 
         return IntStream.rangeClosed(TICKET_COUNT_MIN_VALUE, ticketCount)
                 .mapToObj(i -> LottoTicket.create(LottoNumberGenerator.generate()))
-                .collect(Collectors.toList());
+                .collect(collectingAndThen(toList(), LottoTickets::newInstance));
     }
 
     private static void checkTicketCount(int ticketCount) {
