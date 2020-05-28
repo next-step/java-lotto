@@ -16,9 +16,7 @@ public class LottoGenerator {
                     .collect(Collectors.toList());
 
 
-    private LottoGenerator() {
-
-    }
+    private LottoGenerator() {}
 
     public static LottoGenerator newInstance() {
         return new LottoGenerator();
