@@ -5,7 +5,6 @@ import lotto.domain.price.PayInfo;
 import lotto.domain.price.Price;
 import lotto.exception.AvailableCountExceedException;
 import lotto.util.LottoNumbersGenerator;
-import lotto.util.LottoTicketsGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,7 @@ public class LottoSellerTest {
                 .isThrownBy(() ->
                         LottoSeller.buyTicket2(
                                 PayInfo.valueOf(
-                                        Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
+                                        Price.of(Price.ONE_TICKET_PRICE - 1), new ArrayList<>())
                         ));
     }
 
