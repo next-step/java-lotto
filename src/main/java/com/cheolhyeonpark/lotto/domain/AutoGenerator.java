@@ -13,7 +13,7 @@ public class AutoGenerator {
 
     public List<Integer> generate() {
         Collections.shuffle(numbers);
-        List<Integer> pickedNumbers = numbers.subList(0, 5);
+        List<Integer> pickedNumbers = numbers.subList(0, 6);
         Collections.sort(pickedNumbers);
         return pickedNumbers;
     }
