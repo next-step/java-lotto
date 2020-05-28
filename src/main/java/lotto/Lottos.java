@@ -22,7 +22,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lotto get(int index) {
+    public Lotto getLotto(int index) {
         return lottos.get(index);
     }
 

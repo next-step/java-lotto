@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println(String.format("%d개를 구입했습니다.", lottos.size()));
 
         for (int i = 0; i < lottos.size(); i++) {
-            printLotto(lottos.get(i));
+            printLotto(lottos.getLotto(i));
         }
     }
 
