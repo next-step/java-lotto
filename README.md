@@ -34,3 +34,4 @@
 - 추첨기를 통해 얻은 결과를 가지고 당첨 통계를 계산하는 LottoResult 
 - LottoTicket을 감싸는 일급 컬렉션 LottoBill
 - 당첨번호와 보너스 번호를 가지는 LottoWinningNumber
+- LottoTicket을 추첨하고 일치하는 개수와 보너스 일치 여부를 가지고있는 VO LottoDrawResult
