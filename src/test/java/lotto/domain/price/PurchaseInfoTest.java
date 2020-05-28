@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class PurchaseInfoTest {
@@ -36,6 +37,13 @@ public class PurchaseInfoTest {
                 .isThrownBy(() -> PurchaseInfo.valueOf(null, autoTickets));
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PurchaseInfo.valueOf(manualTickets, null));
+    }
+
+    @DisplayName("사용자가 구매한 수동, 자동 티켓의 정보를 가진 PurchaseInfo 객체 생성")
+    @Test
+    void create() {
+        assertThatCode(() -> PurchaseInfo.valueOf(manualTickets, autoTickets))
+                .doesNotThrowAnyException();
     }
 
     @DisplayName("구매한 manualTickets 개수 반환")
