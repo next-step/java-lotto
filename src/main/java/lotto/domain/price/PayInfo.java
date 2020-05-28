@@ -59,7 +59,15 @@ public class PayInfo {
         return price.getTicketCount() - getManualTicketsCount();
     }
 
+    public int getAutoTicketsCount2() {
+        return price.getTicketCount() - manualTicketNumbers.size();
+    }
+
     public LottoTickets getManualTickets() {
         return manualTickets;
+    }
+
+    public List<List<LottoNumber>> getManualTicketNumbers() {
+        return manualTicketNumbers;
     }
 }

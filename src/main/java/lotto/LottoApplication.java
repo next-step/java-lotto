@@ -4,6 +4,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.price.PayInfo;
 import lotto.domain.price.Price;
+import lotto.domain.price.PurchaseInfo;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.ticket.LottoTickets;
@@ -24,6 +25,7 @@ public class LottoApplication {
         PayInfo payInfo = PayInfo.valueOf(price, manualTickets);
         PayInfo payInfo2 = PayInfo.valueOf(price, manualTicketNumbers);
         LottoTickets tickets = LottoSeller.buyTicket(payInfo);
+        PurchaseInfo purchaseInfo = LottoSeller.buyTicket2(payInfo2);
 
         ResultView.printPurchaseInfo(payInfo, tickets);
 
