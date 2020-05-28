@@ -11,7 +11,7 @@ public class LottoNumberTest {
 
     @DisplayName("1~45 사이의 값 들어오면 Number 객체를 생성한다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, 30, 45})
+    @ValueSource(ints = {LottoNumber.MIN_VALUE, 30, LottoNumber.MAX_VALUE})
     void createLottoNumber(int number) {
         assertThatCode(() -> new LottoNumber(number))
                 .doesNotThrowAnyException();
