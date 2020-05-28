@@ -16,7 +16,7 @@ public abstract class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    protected List<LottoNumber> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
