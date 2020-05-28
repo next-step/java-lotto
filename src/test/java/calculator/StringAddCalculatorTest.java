@@ -26,4 +26,17 @@ public class StringAddCalculatorTest {
                 Arguments.of("1,2,3", 6),
                 Arguments.of("1,2:3", 6));
     }
+
+    @DisplayName("커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("source_parse_customDelimiter_shouldSucceed")
+    public void parse_customDelimiter_shouldSucceed(String input, int expected) {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThat(calculator.sum(input)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> source_parse_customDelimiter_shouldSucceed() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", 6));
+    }
 }
