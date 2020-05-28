@@ -13,13 +13,17 @@ public class LottoCheck {
     private final List<Integer> winningNumber;
     private List<Integer> containWinningNumberCounts;
 
-    public LottoCheck(String winningNumber, List<Lotto> lottos) {
+    private LottoCheck(List<Lotto> lottos, String winningNumber) {
         String[] winningNumberText = winningNumber.split(SPLIT_REGX);
         this.lottos = lottos;
         this.winningNumber = Arrays.stream(winningNumberText)
                 .map(s -> Integer.parseInt(s.trim()))
                 .collect(Collectors.toList());
         this.containWinningNumberCounts = getContainCountsSame(this.winningNumber);
+    }
+
+    public static LottoCheck newInstance(List<Lotto> lottos, String winningNumber) {
+        return new LottoCheck(lottos, winningNumber);
     }
 
     private List<Integer> getContainCountsSame(final List<Integer> winningNumbers) {
