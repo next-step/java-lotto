@@ -35,6 +35,10 @@ public enum LottoRank {
         return lottoRank;
     }
 
+    public static LottoRank[] getWinningLotto() {
+        return new LottoRank[] {RANK1, RANK2, RANK3, RANK4};
+    }
+
     public int getContainCountsSameWinningNumber() {
         return containCount;
     }

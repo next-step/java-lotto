@@ -32,4 +32,12 @@ class LottoRankTest {
         assertThat(LottoRank.RANK4.getWinningAmount()).isEqualTo(BigDecimal.valueOf(5000));
         assertThat(LottoRank.BOOM.getWinningAmount()).isEqualTo(BigDecimal.ZERO);
     }
+
+    @DisplayName("당첨된 LottoRank 만 리턴한다")
+    @Test
+    void getWinningLottoTest() {
+        LottoRank[] lottoRanks = LottoRank.getWinningLotto();
+
+        assertThat(lottoRanks).containsOnly(LottoRank.RANK1, LottoRank.RANK2, LottoRank.RANK3, LottoRank.RANK4);
+    }
 }
