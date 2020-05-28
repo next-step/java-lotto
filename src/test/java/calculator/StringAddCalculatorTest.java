@@ -21,8 +21,8 @@ public class StringAddCalculatorTest {
 
     private static Stream<Arguments> source_parse_validParameters_shouldSucceed() {
         return Stream.of(
-//                Arguments.of("0", 0),
-//                Arguments.of("1,2", 3),
+                Arguments.of("0", 0),
+                Arguments.of("1,2", 3),
                 Arguments.of("1,2,3", 6),
                 Arguments.of("1,2:3", 6));
     }
