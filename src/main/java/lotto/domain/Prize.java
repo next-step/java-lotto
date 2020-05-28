@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Prize {
     UNRANKED(0, 0),
     COINCIDE_THREE(3, 5000),
@@ -24,6 +27,14 @@ public enum Prize {
     }
 
     public static Prize award(Lotto winLotto, Lotto lotto) {
-        return UNRANKED;
+        int count = (int) counting(winLotto.getLottoNumberList(), lotto.getLottoNumberList());
+        return Arrays.stream(values())
+                .filter(prize -> prize.number == count)
+                .findFirst()
+                .orElse(UNRANKED);
+    }
+
+    private static long counting(List<LottoNumber> winLottoNumberList, List<LottoNumber> lottoNumberList) {
+        return lottoNumberList.stream().filter(winLottoNumberList::contains).count();
     }
 }
