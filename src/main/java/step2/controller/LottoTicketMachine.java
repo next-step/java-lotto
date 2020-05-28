@@ -20,8 +20,8 @@ public class LottoTicketMachine {
     public LottoTickets buy(Money money) {
         int buyTicketCount = 0;
 
-        while (money.isAvailableAmount(ticketPrice.getPrice())) {
-            money.useAmount(ticketPrice.getPrice());
+        while (money.isAvailableAmount(ticketPrice)) {
+            money.useAmount(ticketPrice);
             buyTicketCount++;
         }
 

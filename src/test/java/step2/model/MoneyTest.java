@@ -26,28 +26,27 @@ public class MoneyTest {
     @DisplayName("useAmount()는 입력한 금액을 보유한 금액에서 차감한다")
     @MethodSource("provideMoneyForUseAmount")
     @ParameterizedTest
-    void useAmount_UsedAmount_SubtractAmount(int totalAmount, int usedAmount) {
+    void useAmount_UsedAmount_SubtractAmount(int totalAmount) {
         Money money = Money.valueOf(totalAmount);
-        money.useAmount(usedAmount);
-        assertThat(money).isEqualTo(Money.valueOf(totalAmount - usedAmount));
+        money.useAmount(LottoTicketPrice.PRICE_1000);
+        assertThat(money).isEqualTo(Money.valueOf(totalAmount - LottoTicketPrice.PRICE_1000.getPrice()));
     }
 
     private static Stream<Arguments> provideMoneyForUseAmount() {
         return Stream.of(
-                Arguments.of(10000, 10000),
-                Arguments.of(10000, 1000),
-                Arguments.of(10000, 100),
-                Arguments.of(10000, 10),
-                Arguments.of(10000, 1)
+                Arguments.of(10000),
+                Arguments.of(8000),
+                Arguments.of(5000),
+                Arguments.of(1000)
         );
     }
 
     @DisplayName("useAmount()는 입력한 금액이 보유 금액보다 클 경우 예외가 발생한다")
     @Test
     void useAmount_NotAllowedAmount_ExceptionThrown() {
-        Money money = Money.valueOf(1000);
+        Money money = Money.valueOf(0);
 
-        assertThatThrownBy(() -> money.useAmount(10000))
+        assertThatThrownBy(() -> money.useAmount(LottoTicketPrice.PRICE_1000))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("보유중인 금액이 부족합니다.");
     }
@@ -57,8 +56,7 @@ public class MoneyTest {
     void isAvailableAmount_UsedAmount_Boolean() {
         Money money = Money.valueOf(1000);
 
-        assertThat(money.isAvailableAmount(1001)).isFalse();
-        assertThat(money.isAvailableAmount(1000)).isTrue();
-        assertThat(money.isAvailableAmount(999)).isTrue();
+        assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_1000)).isTrue();
+        assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_2000)).isFalse();
     }
 }

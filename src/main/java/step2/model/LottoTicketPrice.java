@@ -1,7 +1,9 @@
 package step2.model;
 
-public enum LottoTicketPrice {
-    PRICE_1000(1_000);
+public enum LottoTicketPrice implements Priceable {
+
+    PRICE_1000(1_000),
+    PRICE_2000(2_000);
 
     private final int ticketPrice;
 
@@ -13,6 +15,7 @@ public enum LottoTicketPrice {
         return LottoTicketPrice.PRICE_1000;
     }
 
+    @Override
     public int getPrice() {
         return this.ticketPrice;
     }

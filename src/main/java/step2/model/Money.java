@@ -14,16 +14,16 @@ public class Money {
         return new Money(amount);
     }
 
-    public void useAmount(int usedAmount) {
-        if (!this.isAvailableAmount(usedAmount)) {
+    public void useAmount(Priceable priceable) {
+        if (!this.isAvailableAmount(priceable)) {
             throw new IllegalStateException("보유중인 금액이 부족합니다.");
         }
 
-        this.amount -= usedAmount;
+        this.amount -= priceable.getPrice();
     }
 
-    public boolean isAvailableAmount(int usedAmount) {
-        return usedAmount <= this.amount;
+    public boolean isAvailableAmount(Priceable priceable) {
+        return priceable.getPrice() <= this.amount;
     }
 
     @Override
