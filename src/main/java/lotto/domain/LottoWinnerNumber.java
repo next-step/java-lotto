@@ -45,6 +45,6 @@ public class LottoWinnerNumber {
     }
 
     public boolean isValidWinnerNumber(int size) {
-        return this.winnerNumbers == null || this.winnerNumbers.size() != size ? true : false;
+        return this.winnerNumbers == null || this.winnerNumbers.size() != size;
     }
 }
