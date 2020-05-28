@@ -18,8 +18,9 @@ public class LottoGame {
     public void playLottoGame() {
         List<Lotto> extractedLotto = this.lottoMachine.buyLotto();
         LottoWinningNumbers lottoWinningNumbers = this.lottoMachine.inputWinningLottoNumbers();
+        LottoBonusBall lottoBonusBall = this.lottoMachine.inputLottoBonusBall();
         for (Lotto lotto : extractedLotto) {
-            this.lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers);
+            this.lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers, lottoBonusBall);
         }
         this.lottoWinningStatistic.viewWinningStatistic();
         Double rateOfReturn = this.lottoWinningStatistic.getLottoRateOfReturn(extractedLotto.size());

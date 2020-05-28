@@ -13,6 +13,7 @@ public class LottoMachine {
 
     private LottoExtractor lottoExtractor;
     private LottoView lottoView;
+    private LottoBonusBall lottoBonusBall;
 
     public LottoMachine(LottoExtractor lottoExtractor, LottoView lottoView) {
         this.lottoExtractor = lottoExtractor;
@@ -38,6 +39,11 @@ public class LottoMachine {
     public LottoWinningNumbers inputWinningLottoNumbers() {
         String winningLottoNumbers = this.lottoView.inputWinningLottoNumbers();
         return LottoWinningNumbers.manipulateInputWinningLottoNumbers(winningLottoNumbers);
+    }
+
+    public LottoBonusBall inputLottoBonusBall() {
+        Integer bonusBall = this.lottoView.inputBonusBall();
+        return new LottoBonusBall(bonusBall);
     }
 
     private static List<Integer> makeAvailableLottoNumbers() {

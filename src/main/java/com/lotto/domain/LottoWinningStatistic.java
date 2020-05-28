@@ -4,8 +4,8 @@ import com.lotto.helper.LottoViewHelper;
 import com.lotto.view.LottoStatisticView;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoWinningStatistic {
 
@@ -13,7 +13,7 @@ public class LottoWinningStatistic {
     private LottoStatisticView lottoStatisticView;
 
     public LottoWinningStatistic() {
-        this.lottoWinningList = new HashMap<>();
+        this.lottoWinningList = new TreeMap<>();
         Arrays.stream(LottoWinningType.values()).forEach(type -> {
             if (!type.equals(LottoWinningType.NOTHING_CLASS)) {
                 this.lottoWinningList.put(type, 0);
@@ -26,9 +26,10 @@ public class LottoWinningStatistic {
         return lottoWinningList;
     }
 
-    public void calculateLottoWinningStatics(Lotto lotto, LottoWinningNumbers lottoWinningNumbers) {
+    public void calculateLottoWinningStatics(Lotto lotto, LottoWinningNumbers lottoWinningNumbers, LottoBonusBall lottoBonusBall) {
         Integer numberOfMatchingWithWinningNumber = lotto.getNumberOfMatchingWithWinningNumber(lottoWinningNumbers.getNumbers());
-        LottoWinningType lottoWinningType = LottoWinningType.getLottoWinningType(numberOfMatchingWithWinningNumber);
+        Integer numberOfMatchingWithBonusNumber = lottoBonusBall.getNumberOfMatchingWithBonusNumber(lotto.getExtractedLottoNumbers());
+        LottoWinningType lottoWinningType = LottoWinningType.getLottoWinningType(numberOfMatchingWithWinningNumber, numberOfMatchingWithBonusNumber);
 
         if (lottoWinningType.equals(LottoWinningType.NOTHING_CLASS)) {
             return;

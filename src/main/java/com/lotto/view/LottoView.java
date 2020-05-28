@@ -11,6 +11,7 @@ public class LottoView {
     private static final String PURCHASE_AMOUNT_FOR_LOTTO_MESSAGE = "구매 금액을 입력해 주세요.";
     private static final String LOTTO_COUNT_PER_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ENTER_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public Integer inputPurchaseAmountOfLotto() {
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +20,12 @@ public class LottoView {
         Integer countOfLotto = LottoViewHelper.getCountOfLotto(depositMoney);
         System.out.println(countOfLotto + LOTTO_COUNT_PER_PURCHASE_AMOUNT_MESSAGE);
         return countOfLotto;
+    }
+
+    public Integer inputBonusBall() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(ENTER_BONUS_BALL_MESSAGE);
+        return scanner.nextInt();
     }
 
     public void outputExtractedLotto(List<Lotto> lotto) {

@@ -26,6 +26,10 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getExtractedLottoNumbers() {
+        return this.extractedLottoNumbers;
+    }
+
     @Override
     public String toString() {
         return this.extractedLottoNumbers.toString();
