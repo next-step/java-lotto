@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class OutputView {
@@ -11,8 +12,8 @@ public class OutputView {
         public static String BOUGHT_LOTTO_COUNT = "%d개를 구매했습니다.%n";
         public static String TITLE_WINNING_LOTTO_RESULT = "당첨 통계";
         public static String DASH_BAR = "---------------";
-        public static String WINNING_LOTTO_RESULT = "%d개 일치(%d 원) - %d개%n";
-        public static String TOTAL_RETURN_VALUE = "총 수익률은 %.2f 입니다.%n";
+        public static String WINNING_LOTTO_RESULT = "%d개 일치(%s 원) - %d개%n";
+        public static String TOTAL_RETURN_VALUE = "총 수익률은 %s 입니다.%n";
     }
 
     public static void printWinningLottoTitle() {
@@ -29,10 +30,14 @@ public class OutputView {
         }
     }
 
+    public static void printNewLine() {
+        System.out.println();
+    }
+
     public static void printSameCountWinningNumber(LottoRank lottoRank, int sameCount) {
         System.out.printf(TEXT.WINNING_LOTTO_RESULT,
                 lottoRank.getContainCountsSameWinningNumber(),
-                lottoRank.getWinningAmount(),
+                lottoRank.getWinningAmount().toString(),
                 sameCount);
     }
 
@@ -41,7 +46,7 @@ public class OutputView {
     }
 
     public static void printReturnValue(BigDecimal winningAmount, BigDecimal buyAmount) {
-        System.out.printf(TEXT.TOTAL_RETURN_VALUE, winningAmount.divide(buyAmount));
+        System.out.printf(TEXT.TOTAL_RETURN_VALUE, winningAmount.divide(buyAmount, 2, RoundingMode.HALF_UP).toString());
     }
 
 }
