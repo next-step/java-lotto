@@ -15,7 +15,7 @@ public class ResultView {
                 .forEach(t -> System.out.println(t.toString()));
     }
 
-    public static void printWinningStatistics(LottoTickets lottoTickets,  List<Integer> winningNumbers) {
+    public static void printWinningStatistics(LottoTickets lottoTickets, List<Integer> winningNumbers) {
 
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.exception.NotEnoughMoneyException;
 import step2.model.Money;
 
 import java.util.stream.Stream;
@@ -47,8 +48,7 @@ public class MoneyTest {
         Money money = Money.valueOf(0);
 
         assertThatThrownBy(() -> money.useAmount(LottoTicketPrice.PRICE_1000))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessageContaining("보유중인 금액이 부족합니다.");
+                .isInstanceOf(NotEnoughMoneyException.class);
     }
 
     @DisplayName("isAvailableAmount()는 보유중인 금액과 비교해서 TRUE 또는 FALSE를 반환한다")

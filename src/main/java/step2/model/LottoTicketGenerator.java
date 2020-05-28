@@ -21,7 +21,7 @@ public class LottoTicketGenerator {
     }
 
     private static void validateTicketCount(int ticketCount) {
-        if (ticketCount < TICKET_COUNT_MIN_VALUE ) {
+        if (ticketCount < TICKET_COUNT_MIN_VALUE) {
             throw new IllegalArgumentException("티켓은 최소 1장부터 생성 할 수 있습니다.");
         }
     }

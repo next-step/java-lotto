@@ -14,15 +14,15 @@ public class LottoTicket {
     }
 
     public static LottoTicket create(List<LottoNumber> lottoNumbers) {
-        if (!isValidLottoNumbers(lottoNumbers)) {
-            throw new IllegalArgumentException("로또 번호 개수가 일치하지 않습니다");
-        }
+        validateLottoNumbers(lottoNumbers);
 
         return new LottoTicket(lottoNumbers);
     }
 
-    private static boolean isValidLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers != null && lottoNumbers.size() == ALLOWED_LOTTO_NUMBER_COUNT;
+    private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.size() != ALLOWED_LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호 개수가 일치하지 않습니다");
+        }
     }
 
     public List<Integer> getNumbers() {

@@ -1,5 +1,7 @@
 package step2.model;
 
+import step2.exception.NotEnoughMoneyException;
+
 import java.util.Objects;
 
 public class Money {
@@ -21,7 +23,7 @@ public class Money {
 
     private void validateUseAmount(Priceable priceable) {
         if (!this.isAvailableAmount(priceable)) {
-            throw new IllegalStateException("보유중인 금액이 부족합니다.");
+            throw new NotEnoughMoneyException();
         }
     }
 

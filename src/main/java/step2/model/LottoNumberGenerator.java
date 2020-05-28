@@ -7,14 +7,15 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    private static final List<Integer> LOTTO_NUMBER_GROUP = IntStream.rangeClosed(1, 45)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final List<Integer> LOTTO_NUMBER_GROUP =
+            IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
+                    .boxed()
+                    .collect(Collectors.toList());
+
+    private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
     private LottoNumberGenerator() {
     }
-
-    private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
     public static List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBER_GROUP);

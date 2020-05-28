@@ -6,25 +6,27 @@ import step2.model.LottoTicketPrice;
 import step2.model.LottoTickets;
 import step2.model.Money;
 
-public class LottoTicketMachine {
+public class LottoMachine {
 
     private static final int TICKET_INITIAL_COUNT = 0;
 
     private final LottoTicketPrice ticketPrice;
 
-    private LottoTicketMachine(LottoTicketPrice ticketPrice) {
+    private LottoMachine(LottoTicketPrice ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
-    public static LottoTicketMachine newInstance() {
-        return new LottoTicketMachine(LottoTicketPrice.getDefault());
+    public static LottoMachine newInstance() {
+        return new LottoMachine(LottoTicketPrice.getDefault());
     }
 
-    public static LottoTicketMachine newInstance(LottoTicketPrice ticketPrice) {
-        return new LottoTicketMachine(ticketPrice);
+    public static LottoMachine newInstance(LottoTicketPrice ticketPrice) {
+        return new LottoMachine(ticketPrice);
     }
 
-    public LottoTickets buy(Money money) {
+    public LottoTickets buyTicket(Money money) {
+        validateMoney(money);
+
         int buyTicketCount = TICKET_INITIAL_COUNT;
 
         while (money.isAvailableAmount(ticketPrice)) {
@@ -32,10 +34,12 @@ public class LottoTicketMachine {
             buyTicketCount++;
         }
 
-        if (buyTicketCount == TICKET_INITIAL_COUNT) {
+        return LottoTicketGenerator.generate(buyTicketCount);
+    }
+
+    private void validateMoney(Money money) {
+        if (!money.isAvailableAmount(ticketPrice)) {
             throw new NotEnoughMoneyException();
         }
-
-        return LottoTicketGenerator.generate(buyTicketCount);
     }
 }
