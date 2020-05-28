@@ -16,7 +16,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
 
     public AutoLottoNumberGenerator() {
         this.lottoBalls = IntStream.rangeClosed(LOTTO_NUMBER_BEGIN_BOUND, LOTTO_NUMBER_END_BOUND)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList());
     }
 

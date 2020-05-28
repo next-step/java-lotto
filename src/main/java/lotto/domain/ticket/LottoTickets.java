@@ -1,12 +1,12 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.LottoPrize;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningTicket;
 
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
@@ -17,10 +17,9 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResult(final WinningTicket winningTicket) {
-        List<LottoPrize> lottoPrizes = lottoTickets.stream()
+        return lottoTickets.stream()
                 .map(winningTicket::checkLottoNumbers)
-                .collect(toList());
-        return new LottoResult(lottoPrizes);
+                .collect(collectingAndThen(toList(), LottoResult::new));
     }
 
     public List<LottoTicket> getLottoTickets() {

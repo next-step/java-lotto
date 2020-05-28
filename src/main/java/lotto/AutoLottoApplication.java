@@ -29,7 +29,7 @@ public class AutoLottoApplication {
 
     private static WinningTicket makeWinningTicket() {
         LottoTicket winningLottoTicket = new LottoTicket(InputView.askLastWeekWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.askBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
         return new WinningTicket(winningLottoTicket, bonusNumber);
     }
 }

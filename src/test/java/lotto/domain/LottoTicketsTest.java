@@ -39,7 +39,7 @@ class LottoTicketsTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
-        return new WinningTicket(winningLottoTicket, new LottoNumber(7));
+        return new WinningTicket(winningLottoTicket, LottoNumber.of(7));
     }
 
     private LottoTickets createLottoTickets() {

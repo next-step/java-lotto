@@ -1,7 +1,10 @@
 package lotto.vo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Money {
-    private static final Money INITIAL_MONEY = new Money(0);
+    private static final Map<Long, Money> CACHE = new HashMap<>();
     private final long value;
 
     public Money(final long value) {
@@ -9,28 +12,25 @@ public class Money {
     }
 
     public static Money of(final long value) {
-        if (value == 0) {
-            return INITIAL_MONEY;
-        }
-        return new Money(value);
+        return CACHE.computeIfAbsent(value, Money::new);
     }
 
     public Money spend(final Money money) {
         if (money.value == 0) {
             return this;
         }
-        return new Money(this.value - money.value);
+        return Money.of(this.value - money.value);
     }
 
     public Money add(final Money money) {
         if (money.value == 0) {
             return this;
         }
-        return new Money(this.value + money.value);
+        return Money.of(this.value + money.value);
     }
 
     public Money multiply(final int count) {
-        return new Money(value * count);
+        return Money.of(value * count);
     }
 
     public double calculateYield(Money expenditure) {

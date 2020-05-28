@@ -16,7 +16,7 @@ class LottoStoreTest {
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
         //when
-        LottoTickets lottoTickets = lottoStore.buy(new Money(14000));
+        LottoTickets lottoTickets = lottoStore.buy(Money.of(14000));
 
         //then
         assertThat(lottoTickets.count()).isEqualTo(14);

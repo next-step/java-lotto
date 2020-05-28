@@ -2,9 +2,6 @@ package lotto.domain.ticket;
 
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 import static lotto.domain.LottoGameProperty.COUNT_OF_LOTTO_NUMBER;
@@ -31,13 +28,5 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-
-    @Override
-    public String toString() {
-        List<LottoNumber> sortedLottoNumbers = new ArrayList<>(lottoNumbers);
-        sortedLottoNumbers.sort(Comparator.comparingInt(LottoNumber::getValue));
-        return String.valueOf(sortedLottoNumbers);
     }
 }

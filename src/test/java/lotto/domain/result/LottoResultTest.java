@@ -23,8 +23,8 @@ class LottoResultTest {
 
         //then
         assertAll(
-                () -> assertThat(lottoResult.getRateOfProfit(new Money(60000))).isEqualTo(1),
-                () -> assertThat(lottoResult.getRateOfProfit(new Money(120000))).isEqualTo(0.5)
+                () -> assertThat(lottoResult.getRateOfProfit(Money.of(60000))).isEqualTo(1),
+                () -> assertThat(lottoResult.getRateOfProfit(Money.of(120000))).isEqualTo(0.5)
         );
     }
 

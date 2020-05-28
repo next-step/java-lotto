@@ -25,7 +25,7 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
                 .map(Integer::valueOf)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
