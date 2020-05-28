@@ -38,7 +38,8 @@
      * 로또 1장의 가격은 1000원으로, 입력받은 금액/1000 = 로또 개수가 된다.
      * 거스름돈이 생기면 예외가 발생한다.
      * public List<Lotto> purchase(Price)
-     * private boolean isPurchasable(Price)
+     * private int getLottoCount(Price)
+     * private void validatePurchasable(Price)
 * 구입 금액을 입력 받을 수 있다.
   * InputView class
      * public Price insertPrice()

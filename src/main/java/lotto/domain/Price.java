@@ -26,8 +26,8 @@ public class Price {
         return new Price(new BigDecimal(number));
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public int getPrice() {
+        return this.price.intValue();
     }
 
     @Override
