@@ -22,7 +22,7 @@ public class LottoSeller {
 
         return PurchaseInfo.valueOf(
                 buyManualTickets(payInfo.getManualTicketNumbers()),
-                buyAutoTickets(payInfo.getAutoTicketsCount2())
+                buyAutoTickets(payInfo.getAvailableAutoTicketsCount())
         );
     }
 
