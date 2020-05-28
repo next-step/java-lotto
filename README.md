@@ -7,3 +7,12 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+### Step2 - 로또 (수동)
+#### 구현 기능 목록
+* 입력뷰
+* 출력뷰
+* 금액별구매
+* 로또통
+* 번호비교
+* 통계
