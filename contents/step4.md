@@ -61,7 +61,7 @@
 #### LottoTicketDTO
 : 화면 출력에 필요한 정보에 대한 DTO
 
-#### PurchaseInfo
+#### PayInfo
 : 사용자가 입력한 금액과 수동 로또 번호를 관리하는 클래스
 - [x] Price 와 수동 로또 번호를 인자로 입력받아 객체를 생성한다. 
 - [x] Price 가 null 이면 예외가 발생한다.
@@ -69,6 +69,13 @@
 - [x] 남은 금액으로 구매할 수 있는 autoTickets 개수를 반환한다.
 - [x] 수동으로 구매한 manualTickets 개수를 반환한다.
 - [x] 수동 로또 번호 (LottoTickets)를 반환한다.
+
+#### PurchaseInfo
+: 사용자가 구매한 수동, 자동 티켓을 관리하는 클래스 
+- [ ] 사용자가 구매한 수동, 자동 티켓이 null 이면 예외가 발생한다.
+- [ ] 구매한 manualTickets 개수를 반환한다.
+- [ ] 구매한 autoTickets 개수를 반환한다.
+- [ ] 구매한 모든 로또 티켓을 반환한다. 
 
 ### # V (View)
 #### InputView
