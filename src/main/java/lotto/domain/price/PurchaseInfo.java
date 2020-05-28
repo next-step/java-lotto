@@ -24,4 +24,12 @@ public class PurchaseInfo {
             throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
         }
     }
+
+    public int getManualTicketsCount() {
+        return manualTickets.count();
+    }
+
+    public int getAutoTicketsCount() {
+        return autoTickets.count();
+    }
 }
