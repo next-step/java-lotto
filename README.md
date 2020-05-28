@@ -1,3 +1,25 @@
+## 로또(2등)
+
+- 리팩토링하다가 ..
+-> BonusNumber가 LottoNumber와 다를게 없어서 제거했다.. 하지만 로또넘버인지, 보너ㅡㅅ넘버인지를 변수이름에 의존해야한다는게 찝찝
+
+
+- https://github.com/next-step/java-lotto/pull/538#discussion_r430240107 감이안잡힌다 ㅠㅠ 
+WinningTicket에 메시지를 던지면 의존순환이되는게 아ㅣㄹ낚?,,
+
+
+- LottoTickets - LottoTicket - BonusNumber  이렇게 의존성이 순환되는 것 같은데, WinningTickets 가 그냥 LottoNumber를 가지고 있는게 나을까?
+일급컬렉션에 대한 집착 착 , ,,
+
+
+
+- 보너스번호, 2등 추가 - LottoPrize
+- 보너스번호를 입력받는다.
+
+
+리팩토링
+- 상수의 중복해결 --> LottoNumberSetting enum 생성.... 흠
+
 ## 로또(자동)
 1. 로또 구입 금액을 입력하면 로또를 발급한다 - o
 - 한장당 가격은 1000원

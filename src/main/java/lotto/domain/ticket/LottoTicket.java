@@ -1,34 +1,32 @@
 package lotto.domain.ticket;
 
-import lotto.domain.result.WinningNumbers;
+import lotto.domain.LottoNumber;
 
-import java.util.List;
+import java.util.Set;
+
+import static lotto.domain.LottoGameProperty.COUNT_OF_LOTTO_NUMBER;
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
-    private static final int COUNT_OF_LOTTO_NUMBER = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private final List<Integer> lottoNumbers;
-
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validate(List<Integer> lottoNumbers) {
+    private void validate(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(String.format("로또번호는 반드시 %d개여야 합니다", COUNT_OF_LOTTO_NUMBER));
+            throw new IllegalArgumentException("로또티켓은 6개의 로또숫자로 이루어져야합니다.");
         }
     }
 
-    public int getMatchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return Math.toIntExact(lottoTicket.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
                 .count());
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(lottoNumbers);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

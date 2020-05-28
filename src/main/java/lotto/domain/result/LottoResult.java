@@ -1,27 +1,34 @@
 package lotto.domain.result;
 
+import lotto.vo.Money;
+
 import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
 public class LottoResult {
-    private final Map<Integer, Integer> lottoStatistics;
+    private final List<LottoPrize> lottoStatistics;
 
-    public LottoResult(Map<Integer, Integer> lottoStatistics) {
-        this.lottoStatistics = lottoStatistics;
+    public LottoResult(final List<LottoPrize> lottoPrizes) {
+        this.lottoStatistics = lottoPrizes;
     }
 
-    public int getNumberOfHitTickets(final int hitCount) {
-        Integer numberOfHitTickets = lottoStatistics.get(hitCount);
-        return Objects.isNull(numberOfHitTickets) ? 0 : numberOfHitTickets;
+    public int countTicketsBy(final LottoPrize lottoPrize) {
+        return Math.toIntExact(lottoStatistics.stream()
+                .filter(lottoPrize::equals)
+                .count());
     }
 
-    public double getRateOfProfit(final int spentMoney) {
-        long totalProfit = LottoPrize.calculateTotalReword(lottoStatistics);
-        return (double) totalProfit / spentMoney;
+    public double getRateOfProfit(final Money expenditure) {
+        return calculateTotalReword().calculateYield(expenditure);
     }
 
-    public Map<Integer, Integer> getLottoStatistics() {
-        return Collections.unmodifiableMap(lottoStatistics);
+    private Money calculateTotalReword() {
+        return lottoStatistics.stream()
+                .map(LottoPrize::getReward)
+                .reduce(Money.of(0), Money::add);
+    }
+
+    public List<LottoPrize> getLottoStatistics() {
+        return Collections.unmodifiableList(lottoStatistics);
     }
 }
