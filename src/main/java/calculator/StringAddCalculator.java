@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private static final int ZERO = 0;
     private final Parser parser;
 
     public StringAddCalculator() {
@@ -11,8 +12,8 @@ public class StringAddCalculator {
     }
 
     public int sum(String input) {
-        int[] numbers = parser.parseToIntArray(input);
+        PositiveNumber[] numbers = parser.parseToPositiveNumber(input);
 
-        return Arrays.stream(numbers).reduce(Integer::sum).getAsInt();
+        return Arrays.stream(numbers).mapToInt(PositiveNumber::getValue).reduce(ZERO, Integer::sum);
     }
 }
