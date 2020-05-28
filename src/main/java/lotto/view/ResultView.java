@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.dto.LottoTicketDto;
 import lotto.domain.price.PayInfo;
+import lotto.domain.price.PurchaseInfo;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.prize.Prize;
 import lotto.domain.ticket.LottoTickets;
@@ -22,10 +23,21 @@ public class ResultView {
         printTickets(LottoTicketDto.from(tickets));
     }
 
+    public static void printPurchaseInfo2(final PurchaseInfo purchaseInfo) {
+        printPurchasedTicketCount2(purchaseInfo);
+        printTickets(LottoTicketDto.from(purchaseInfo.getAllTickets()));
+    }
+
     private static void printPurchasedTicketCount(final PayInfo payInfo) {
         System.out.println();
         System.out.println(String.format(TICKET_PURCHASE_CONFIRM_MESSAGE,
                 payInfo.getManualTicketsCount(), payInfo.getAutoTicketsCount()));
+    }
+
+    private static void printPurchasedTicketCount2(final PurchaseInfo purchaseInfo) {
+        System.out.println();
+        System.out.println(String.format(TICKET_PURCHASE_CONFIRM_MESSAGE,
+                purchaseInfo.getManualTicketsCount(), purchaseInfo.getAutoTicketsCount()));
     }
 
     private static void printTickets(final List<LottoTicketDto> tickets) {

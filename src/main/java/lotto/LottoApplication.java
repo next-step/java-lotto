@@ -28,6 +28,7 @@ public class LottoApplication {
         PurchaseInfo purchaseInfo = LottoSeller.buyTicket2(payInfo2);
 
         ResultView.printPurchaseInfo(payInfo, tickets);
+        ResultView.printPurchaseInfo2(purchaseInfo);
 
         List<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
