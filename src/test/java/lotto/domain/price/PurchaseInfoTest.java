@@ -60,6 +60,8 @@ public class PurchaseInfoTest {
     @DisplayName("구매한 모든 로또 티켓을 반환")
     @Test
     void getAllTickets() {
-
+        assertThat(PurchaseInfo.valueOf(manualTickets, autoTickets)
+                .getAllTickets()
+                .count()).isEqualTo(4);
     }
 }
