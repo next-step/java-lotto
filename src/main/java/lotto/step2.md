@@ -47,17 +47,16 @@
   * ResultView class
      * public void printLottoNumbers(Lotto)
 * 당첨 번호 6개를 `,` 구분자로 입력 받는다.
-* 당첨 통계를 출력한다. - 순위에 따른 일치 개수
+* 순위에 따른 일치 개수 통계를 계산한다.
   * n개 일치할때의 상금에 대한 Prize enum class
      * 6개 일치 2000000000원, 5개 일치 1500000원, 4개 일치 50000원, 3개 일치 5000원, 나머지는 순위밖
   * LottoStatisticUtil class
      * 당첨번호와 구입한 로또를 입력받으면 당첨에 대한 통계를 출력한다.
      * 순위권만과 일치 개수를 출력
      * public int getPrizeCount(Prize, Lotto, List<Lotto>)
-  * ResultView class
-     * public void printPrize(Prize, int)
-* 당첨 통계를 출력한다. - 수익률
+* 수익률을 계산한다.
   * LottoStatisticUtil class
      * public double getYield(Lotto, List<Lotto>)
+* 일치 개수별 로또 개수 통계와 수익률 통계를 출력한다.
   * ResultView class
-     * public void printYield(double)
+     * public void printStatistic(Lotto, List<Lotto>)
