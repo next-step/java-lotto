@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -39,23 +38,5 @@ public class StringAddCalculatorTest {
     private static Stream<Arguments> source_parse_customDelimiter_shouldSucceed() {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", 6));
-    }
-
-    @DisplayName("문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 throw RuntimeException")
-    @ParameterizedTest
-    @MethodSource("source_parse_invalidNumber_shouldFail")
-    public void parse_invalidNumber_shouldFail(String input) {
-        StringAddCalculator calculator = new StringAddCalculator();
-        assertThatThrownBy(() -> {
-            calculator.sum(input);
-        }).isInstanceOf(NumberFormatException.class);
-    }
-
-    private static Stream<Arguments> source_parse_invalidNumber_shouldFail() {
-        return Stream.of(
-                Arguments.of("-1;2,3"),
-                Arguments.of("//!\n-1!2!~"),
-                Arguments.of("a;b;3"),
-                Arguments.of("//;\n1;b;3"));
     }
 }
