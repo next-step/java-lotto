@@ -15,7 +15,7 @@ public class LottoNumberGeneratorTest {
     @Test
     void generate_void_LottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate();
-        
+
         lottoNumbers.stream()
                 .map(LottoNumber::get)
                 .forEach(System.out::println);

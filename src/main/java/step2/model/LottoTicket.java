@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -22,5 +23,11 @@ public class LottoTicket {
 
     private static boolean isValidLottoNumbers(List<LottoNumber> lottoNumbers) {
         return lottoNumbers != null && lottoNumbers.size() == ALLOWED_LOTTO_NUMBER_COUNT;
+    }
+
+    public List<Integer> getNumbers() {
+        return this.lottoNumbers.stream()
+                .map(LottoNumber::get)
+                .collect(Collectors.toList());
     }
 }

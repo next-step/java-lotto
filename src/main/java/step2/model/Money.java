@@ -15,11 +15,14 @@ public class Money {
     }
 
     public void useAmount(Priceable priceable) {
+        validateUseAmount(priceable);
+        this.amount -= priceable.getPrice();
+    }
+
+    private void validateUseAmount(Priceable priceable) {
         if (!this.isAvailableAmount(priceable)) {
             throw new IllegalStateException("보유중인 금액이 부족합니다.");
         }
-
-        this.amount -= priceable.getPrice();
     }
 
     public boolean isAvailableAmount(Priceable priceable) {

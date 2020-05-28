@@ -4,6 +4,7 @@ import step2.controller.LottoTicketMachine;
 import step2.model.LottoTickets;
 import step2.model.Money;
 import step2.view.InputView;
+import step2.view.ResultView;
 
 public class LottoApplication {
 
@@ -15,6 +16,7 @@ public class LottoApplication {
 
         LottoTickets lottoTickets = lottoTicketMachine.buy(money);
 
-        System.out.println(lottoTickets.getCount());
+        ResultView.printTickets(lottoTickets);
+        ResultView.printWinningStatistics(lottoTickets, InputView.getWinningNumbers());
     }
 }
