@@ -16,15 +16,15 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("source_create_validParameters_shouldSucceed")
     public void create_validParameters_shouldSucceed(int param, LottoNumber expected) {
-        LottoNumber result = new LottoNumber(param);
+        LottoNumber result = LottoNumber.generateByManual(param);
         assertThat(result).isEqualTo(expected);
     }
 
     private static Stream<Arguments> source_create_validParameters_shouldSucceed() {
         return Stream.of(
-                Arguments.of(1, new LottoNumber(1)),
-                Arguments.of(16, new LottoNumber(16)),
-                Arguments.of(45, new LottoNumber(45)));
+                Arguments.of(1, LottoNumber.generateByManual(1)),
+                Arguments.of(16, LottoNumber.generateByManual(16)),
+                Arguments.of(45, LottoNumber.generateByManual(45)));
     }
 
     @DisplayName("1 ~ 45 바깥의 수로 LottoNumber 생성시에 throw IllegalArgumentException")
@@ -32,7 +32,7 @@ class LottoNumberTest {
     @MethodSource("source_create_invalidParameters_shouldFail")
     public void create_invalidParameters_shouldFail(int param) {
         assertThatThrownBy(() -> {
-            new LottoNumber(param);
+            LottoNumber.generateByManual(param);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
