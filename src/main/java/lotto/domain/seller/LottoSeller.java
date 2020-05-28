@@ -1,7 +1,7 @@
 package lotto.domain.seller;
 
-import lotto.domain.price.PurchaseInfo;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.price.PayInfo;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.exception.ErrorMessage;
@@ -14,20 +14,20 @@ public class LottoSeller {
     private LottoSeller() {
     }
 
-    public static LottoTickets buyTicket(final PurchaseInfo purchaseInfo) {
-        validatePurchaseInfo(purchaseInfo);
+    public static LottoTickets buyTicket(final PayInfo payInfo) {
+        validatePayInfo(payInfo);
 
         LottoTickets autoTickets = LottoTickets.of(
                 Stream.generate(LottoNumbers::autoCreate)
-                    .limit(purchaseInfo.getAutoTicketsCount())
+                    .limit(payInfo.getAutoTicketsCount())
                     .map(LottoTicket::of)
                     .collect(Collectors.toList())
         );
-        return purchaseInfo.getManualTickets().merged(autoTickets);
+        return payInfo.getManualTickets().merged(autoTickets);
     }
 
-    private static void validatePurchaseInfo(final PurchaseInfo purchaseInfo) {
-        if (purchaseInfo == null) {
+    private static void validatePayInfo(final PayInfo payInfo) {
+        if (payInfo == null) {
             throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
         }
     }

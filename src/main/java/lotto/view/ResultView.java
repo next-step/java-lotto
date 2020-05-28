@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.dto.LottoTicketDto;
-import lotto.domain.price.PurchaseInfo;
+import lotto.domain.price.PayInfo;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.prize.Prize;
 import lotto.domain.ticket.LottoTickets;
@@ -17,15 +17,15 @@ public class ResultView {
     private static final String PRIZE_RESULT_INFO_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_PRIZE_RESULT_INFO_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
 
-    public static void printPurchaseInfo(final PurchaseInfo purchaseInfo, final LottoTickets tickets) {
-        printPurchasedTicketCount(purchaseInfo);
+    public static void printPurchaseInfo(final PayInfo payInfo, final LottoTickets tickets) {
+        printPurchasedTicketCount(payInfo);
         printTickets(LottoTicketDto.from(tickets));
     }
 
-    private static void printPurchasedTicketCount(final PurchaseInfo purchaseInfo) {
+    private static void printPurchasedTicketCount(final PayInfo payInfo) {
         System.out.println();
         System.out.println(String.format(TICKET_PURCHASE_CONFIRM_MESSAGE,
-                purchaseInfo.getManualTicketsCount(), purchaseInfo.getAutoTicketsCount()));
+                payInfo.getManualTicketsCount(), payInfo.getAutoTicketsCount()));
     }
 
     private static void printTickets(final List<LottoTicketDto> tickets) {

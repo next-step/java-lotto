@@ -1,6 +1,6 @@
 package lotto.domain.seller;
 
-import lotto.domain.price.PurchaseInfo;
+import lotto.domain.price.PayInfo;
 import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -34,7 +34,7 @@ public class LottoSellerTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() ->
                         LottoSeller.buyTicket(
-                            PurchaseInfo.valueOf(
+                            PayInfo.valueOf(
                                 Price.of(Price.ONE_TICKET_PRICE - 1), LottoTicketsGenerator.newInstance())
                         ));
     }
@@ -43,9 +43,9 @@ public class LottoSellerTest {
     @ParameterizedTest
     @MethodSource
     void buyTickets(final int money, final LottoTickets manualTickets, final int expected) {
-        PurchaseInfo purchaseInfo = PurchaseInfo.valueOf(Price.of(money), manualTickets);
+        PayInfo payInfo = PayInfo.valueOf(Price.of(money), manualTickets);
 
-        assertThat(LottoSeller.buyTicket(purchaseInfo).getLottoTickets().size())
+        assertThat(LottoSeller.buyTicket(payInfo).getLottoTickets().size())
                 .isEqualTo(expected);
     }
 
@@ -67,6 +67,6 @@ public class LottoSellerTest {
         LottoTickets manualTickets = LottoTickets.of(lottoTickets);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
-                .isThrownBy(() -> LottoSeller.buyTicket(PurchaseInfo.valueOf(price, manualTickets)));
+                .isThrownBy(() -> LottoSeller.buyTicket(PayInfo.valueOf(price, manualTickets)));
     }
 }

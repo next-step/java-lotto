@@ -4,12 +4,12 @@ import lotto.domain.ticket.LottoTickets;
 import lotto.exception.AvailableCountExceedException;
 import lotto.exception.ErrorMessage;
 
-public class PurchaseInfo {
+public class PayInfo {
 
     private Price price;
     private LottoTickets manualTickets;
 
-    private PurchaseInfo(final Price price, final LottoTickets manualTickets) {
+    private PayInfo(final Price price, final LottoTickets manualTickets) {
         validatePrice(price);
         verifyAvailableCount(price, manualTickets.count());
 
@@ -17,8 +17,8 @@ public class PurchaseInfo {
         this.manualTickets = manualTickets;
     }
 
-    public static PurchaseInfo valueOf(final Price price, final LottoTickets manualTickets) {
-        return new PurchaseInfo(price, manualTickets);
+    public static PayInfo valueOf(final Price price, final LottoTickets manualTickets) {
+        return new PayInfo(price, manualTickets);
     }
 
     private static void validatePrice(final Price price) {

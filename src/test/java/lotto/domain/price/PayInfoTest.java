@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class PurchaseInfoTest {
+public class PayInfoTest {
 
     private LottoTickets manualTickets;
 
@@ -35,13 +35,13 @@ public class PurchaseInfoTest {
     @Test
     void createFailure() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseInfo.valueOf(null, LottoTicketsGenerator.newInstance()));
+                .isThrownBy(() -> PayInfo.valueOf(null, LottoTicketsGenerator.newInstance()));
     }
 
     @DisplayName("Price 와 수동 로또 번호를 인자로 입력받아 객체를 생성")
     @Test
     void create() {
-        assertThatCode(() -> PurchaseInfo.valueOf(Price.of(Price.ONE_TICKET_PRICE), LottoTicketsGenerator.newInstance()))
+        assertThatCode(() -> PayInfo.valueOf(Price.of(Price.ONE_TICKET_PRICE), LottoTicketsGenerator.newInstance()))
                 .doesNotThrowAnyException();
     }
 
@@ -51,14 +51,14 @@ public class PurchaseInfoTest {
         Price price = Price.of(Price.ONE_TICKET_PRICE);
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
-                .isThrownBy(() -> PurchaseInfo.valueOf(price, manualTickets));
+                .isThrownBy(() -> PayInfo.valueOf(price, manualTickets));
     }
 
     @DisplayName("남은 금액으로 구매할 수 있는 autoTickets 개수를 반환")
     @ParameterizedTest
     @MethodSource
     void getAutoTicketsCount(final Price price, final LottoTickets manualTickets, final int expected) {
-        assertThat(PurchaseInfo.valueOf(price, manualTickets).getAutoTicketsCount())
+        assertThat(PayInfo.valueOf(price, manualTickets).getAutoTicketsCount())
                 .isEqualTo(expected);
     }
 
@@ -79,7 +79,7 @@ public class PurchaseInfoTest {
     @ParameterizedTest
     @MethodSource
     void getManualTicketsCount(final Price price, final LottoTickets manualTickets, final int expected) {
-        assertThat(PurchaseInfo.valueOf(price, manualTickets).getManualTicketsCount())
+        assertThat(PayInfo.valueOf(price, manualTickets).getManualTicketsCount())
                 .isEqualTo(expected);
     }
 
@@ -100,7 +100,7 @@ public class PurchaseInfoTest {
     void getManualTickets() {
         Price price = Price.of(Price.ONE_TICKET_PRICE * 3);
 
-        assertThat(PurchaseInfo.valueOf(price, manualTickets).getManualTickets())
+        assertThat(PayInfo.valueOf(price, manualTickets).getManualTickets())
                 .isEqualTo(manualTickets);
     }
 }

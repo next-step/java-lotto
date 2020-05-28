@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.LottoGame;
-import lotto.domain.price.PurchaseInfo;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.price.PayInfo;
 import lotto.domain.price.Price;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
@@ -20,10 +20,10 @@ public class LottoApplication {
         int manualTicketsCount = InputView.inputManualTicketsCount();
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketsCount);
 
-        PurchaseInfo purchaseInfo = PurchaseInfo.valueOf(price, manualTickets);
-        LottoTickets tickets = LottoSeller.buyTicket(purchaseInfo);
+        PayInfo payInfo = PayInfo.valueOf(price, manualTickets);
+        LottoTickets tickets = LottoSeller.buyTicket(payInfo);
 
-        ResultView.printPurchaseInfo(purchaseInfo, tickets);
+        ResultView.printPurchaseInfo(payInfo, tickets);
 
         List<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
