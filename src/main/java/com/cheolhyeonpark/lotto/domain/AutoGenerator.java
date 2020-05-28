@@ -1,6 +1,8 @@
 package com.cheolhyeonpark.lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class AutoGenerator {
@@ -11,10 +13,8 @@ public class AutoGenerator {
         IntStream.rangeClosed(1, 45).forEach(numbers::add);
     }
 
-    public List<Integer> generate() {
+    public LottoNumbers generate() {
         Collections.shuffle(numbers);
-        List<Integer> pickedNumbers = numbers.subList(0, 6);
-        Collections.sort(pickedNumbers);
-        return pickedNumbers;
+        return new LottoNumbers(numbers.subList(0, 6));
     }
 }
