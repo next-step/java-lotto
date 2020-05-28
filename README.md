@@ -50,10 +50,9 @@
   - [ ] 입력한 금액으로 1,000원당 1장의 로또 티켓을 반환한다.
 - LottoTicketGenerator
 - LottoTicket
+  - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다
 - LottoTickets
 - LottoNumberGenerator
 - LottoNumber
   - [x] 로또 번호는 1 ~ 45까지만 입력이 가능하다
   - [x] 로또 번호 범위를 벗어나면 RuntimeException이 발생한다.
-- LottoNumbers
-  - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다

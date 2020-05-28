@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+public class LottoTicketTest {
 
     @DisplayName("로또 번호의 개수가 6개가 아니면 예외가 발생한다")
     @Test
-    void newInstance_LottoNumbers_ExceptionThrown() {
-        assertThatThrownBy(() -> LottoNumbers.newInstance(new ArrayList<>()))
+    void create_LottoNumbers_ExceptionThrown() {
+        assertThatThrownBy(() -> LottoTicket.create(new ArrayList<>()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호 개수가 일치하지 않습니다");
     }
