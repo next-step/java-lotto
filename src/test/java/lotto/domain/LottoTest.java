@@ -24,8 +24,8 @@ class LottoTest {
 
     private static Stream<Arguments> source_create_notDuplicatedNumbers_shouldSucceed() {
         return Stream.of(
-                Arguments.of(Arrays.asList(new int[]{1, 2, 3, 4, 5, 6}), Lotto.generateByManual(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}))),
-                Arguments.of(Arrays.asList(new int[]{40, 41, 42, 43, 44, 45}), Lotto.generateByManual(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}))));
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Lotto.generateByManual(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}))),
+                Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}), Lotto.generateByManual(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}))));
     }
 
     @DisplayName("중복된 숫자 6개로 Lotto 생성 시에 throws IllegalArgumentException")
@@ -39,7 +39,7 @@ class LottoTest {
 
     private static Stream<Arguments> source_create_duplicatedNumbers_shouldFail() {
         return Stream.of(
-                Arguments.of(Arrays.asList(new int[]{1, 1, 3, 4, 5, 6})),
-                Arguments.of(Arrays.asList(new int[]{40, 41, 42, 43, 45, 45})));
+                Arguments.of(Arrays.asList(new Integer[]{1, 1, 3, 4, 5, 6})),
+                Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 45, 45})));
     }
 }
