@@ -10,7 +10,7 @@ public class LottoStore {
 
     public static PurchasedLottoTickets sell(Payment payment) {
         List<PurchasedLottoTicket> lottoTickets = IntStream.range(0, payment.getCountLottoTicket())
-            .mapToObj(i -> PurchasedLottoTicket.newInstance())
+            .mapToObj(i -> PurchasedLottoTicket.create())
             .collect(Collectors.toList());
 
         return PurchasedLottoTickets.create(lottoTickets);

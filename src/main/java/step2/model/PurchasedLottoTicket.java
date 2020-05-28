@@ -9,7 +9,7 @@ public class PurchasedLottoTicket extends LottoTicket {
         super(lottoNumbers);
     }
 
-    public static PurchasedLottoTicket newInstance() {
+    public static PurchasedLottoTicket create() {
         return new PurchasedLottoTicket(AutomaticLottoGenerator.createLottoNumbers());
     }
 

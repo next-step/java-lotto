@@ -30,12 +30,11 @@ public class OutputView {
             .forEach(lottoResult -> printWinResult(lottoResult, lottoResults.count(lottoResult)));
     }
 
-    private static void printWinResult(final LottoResult lottoResult, final Long resultCount) {
-        System.out
-            .println(String.format(RESULT_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
+    private static void printWinResult(LottoResult lottoResult, Long resultCount) {
+        System.out.println(String.format(RESULT_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
     }
 
-    public static void printProfitResult(final Double profit) {
+    public static void printProfitResult(Double profit) {
         if (profit < 1) {
             System.out.println(String.format(PROFIT_WITH_LOSS_FORMAT, profit));
             return;

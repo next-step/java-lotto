@@ -20,18 +20,18 @@ public abstract class LottoTicket {
         return numbers;
     }
 
-    private void validate(final List<LottoNumber> numbers) {
+    private void validate(List<LottoNumber> numbers) {
         validateNullOrEmpty(numbers);
         validateSize(numbers);
     }
 
-    private void validateNullOrEmpty(final List<LottoNumber> numbers) {
+    private void validateNullOrEmpty(List<LottoNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.isEmpty()) {
             throw new IllegalArgumentException("빈 공백 값은 로또 번호가 될 수 없습니다.");
         }
     }
 
-    private void validateSize(final List<LottoNumber> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         int size = (int) numbers.stream()
             .distinct()
             .count();

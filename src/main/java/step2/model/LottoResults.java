@@ -15,17 +15,17 @@ public class LottoResults {
 
     private Map<LottoResult, Long> lottoResults;
 
-    private LottoResults(final Map<LottoResult, Long> result) {
+    private LottoResults(Map<LottoResult, Long> result) {
         this.lottoResults = Collections.unmodifiableMap(result);
     }
 
-    public static LottoResults of(final List<LottoResult> lottoResults) {
+    public static LottoResults of(List<LottoResult> lottoResults) {
         Map<LottoResult, Long> result = lottoResults.stream()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return new LottoResults(result);
     }
 
-    public Long count(final LottoResult lottoResult) {
+    public Long count(LottoResult lottoResult) {
         return lottoResults.getOrDefault(lottoResult, 0L);
     }
 
