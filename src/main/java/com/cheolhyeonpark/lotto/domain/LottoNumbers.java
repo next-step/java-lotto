@@ -2,7 +2,6 @@ package com.cheolhyeonpark.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class LottoNumbers {

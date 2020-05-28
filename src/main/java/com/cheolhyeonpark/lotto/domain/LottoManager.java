@@ -1,10 +1,5 @@
 package com.cheolhyeonpark.lotto.domain;
 
-import com.cheolhyeonpark.lotto.domain.AutoGenerator;
-import com.cheolhyeonpark.lotto.domain.LottoNumbers;
-import com.cheolhyeonpark.lotto.view.InputView;
-import com.cheolhyeonpark.lotto.view.ResultView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;

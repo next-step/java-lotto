@@ -14,8 +14,8 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        int count = lottoNumbers.countSameNumbersAs(winningNumber);
+        Rank rank = lottoNumbers.getRank(winningNumber);
 
-        assertThat(count).isEqualTo(3);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
     }
 }
