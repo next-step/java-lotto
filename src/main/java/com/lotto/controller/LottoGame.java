@@ -22,7 +22,7 @@ public class LottoGame {
             this.lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers);
         }
         this.lottoWinningStatistic.viewWinningStatistic();
-        Long rateOfReturn = this.lottoWinningStatistic.getLottoRateOfReturn(extractedLotto.size());
+        Double rateOfReturn = this.lottoWinningStatistic.getLottoRateOfReturn(extractedLotto.size());
         this.lottoWinningStatistic.viewLottoRateOfReturn(rateOfReturn);
     }
 }

@@ -44,9 +44,9 @@ public class LottoWinningStatistic {
         this.lottoStatisticView.viewLottoStatistic(this.lottoWinningList);
     }
 
-    public Long getLottoRateOfReturn(Integer purchaseCount) {
+    public Double getLottoRateOfReturn(Integer purchaseCount) {
         Integer inputAmount = LottoViewHelper.getPurchaseAmountOfLotto(purchaseCount);
-        Long winningAmount = 0L;
+        Double winningAmount = 0.0;
         for (Map.Entry<LottoWinningType, Integer> entry : lottoWinningList.entrySet()) {
             LottoWinningType lottoWinningType = entry.getKey();
             Integer lottoWinningCount = entry.getValue();
@@ -58,7 +58,7 @@ public class LottoWinningStatistic {
         return winningAmount / inputAmount;
     }
 
-    public void viewLottoRateOfReturn(Long rate) {
+    public void viewLottoRateOfReturn(Double rate) {
         this.lottoStatisticView.viewRateOfReturn(rate);
     }
 }

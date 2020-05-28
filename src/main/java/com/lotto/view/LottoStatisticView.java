@@ -40,7 +40,7 @@ public class LottoStatisticView {
         }
     }
 
-    public void viewRateOfReturn(Long rateOfReturn) {
+    public void viewRateOfReturn(Double rateOfReturn) {
 
         BigDecimal rate = new BigDecimal(rateOfReturn);
         String damagesOrGain = rateOfReturn > 1 ? GAIN : DAMAGES;
