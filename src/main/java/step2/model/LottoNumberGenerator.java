@@ -1,15 +1,15 @@
 package step2.model;
 
-import java.util.LinkedHashSet;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    private static final Random random = new Random();
-    private static final Set<Integer> generatedLottoNumber = new LinkedHashSet<>();
+    private static final List<Integer> LOTTO_NUMBER_GROUP = IntStream.rangeClosed(1, 45)
+            .boxed()
+            .collect(Collectors.toList());
 
     private LottoNumberGenerator() {
     }
@@ -17,18 +17,11 @@ public class LottoNumberGenerator {
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
     public static List<LottoNumber> generate() {
-        generatedLottoNumber.clear();
+        Collections.shuffle(LOTTO_NUMBER_GROUP);
 
-        while (generatedLottoNumber.size() < LOTTO_NUMBER_MAX_COUNT) {
-            generatedLottoNumber.add(getRandomNumber());
-        }
-
-        return generatedLottoNumber.stream()
+        return LOTTO_NUMBER_GROUP.stream()
+                .limit(LOTTO_NUMBER_MAX_COUNT)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-    }
-
-    private static int getRandomNumber() {
-        return random.nextInt(45) + 1;
     }
 }
