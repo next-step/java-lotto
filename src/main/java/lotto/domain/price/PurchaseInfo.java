@@ -38,7 +38,7 @@ public class PurchaseInfo {
     }
 
     public int getAutoTicketsCount() {
-        return price.ticketCount() - manualTickets.count();
+        return price.ticketCount() - getManualTicketsCount();
     }
 
     public LottoTickets getManualTickets() {
