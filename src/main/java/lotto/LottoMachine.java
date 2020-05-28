@@ -1,19 +1,18 @@
 package lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoMachine {
 
     public Lottos issue(int paidMoney) {
         int quantity = getPurchasableQuantity(paidMoney);
 
-        List<Lotto> lottos = IntStream.range(0, quantity)
+        return IntStream.range(0, quantity)
                 .mapToObj(i -> new Lotto(new AutoLottoNumberSelectRule()))
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos);
+                .collect(collectingAndThen(toList(), Lottos::new));
     }
 
     private int getPurchasableQuantity(int paidMoney) {
