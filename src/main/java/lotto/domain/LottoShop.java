@@ -28,12 +28,12 @@ public class LottoShop {
             return amount;
         }
 
-        BigDecimal purchaseAmount = new BigDecimal(Math.ceil(priceAmount / LOTTO_PRICE) * LOTTO_PRICE);
+        BigDecimal purchaseAmount = new BigDecimal( Math.floorDiv(priceAmount, LOTTO_PRICE) * LOTTO_PRICE);
         return amount.divide(purchaseAmount, DECIMAL_POINT, BigDecimal.ROUND_CEILING);
     }
 
     public int calculatePurchaseCount(int price) {
-        return (int) Math.ceil(price / LOTTO_PRICE);
+        return Math.floorDiv(price, LOTTO_PRICE);
     }
 
     public void availablePurchase(int price) {
