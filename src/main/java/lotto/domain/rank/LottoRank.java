@@ -33,8 +33,8 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(MISS);
 
-        if (countOfMatch == SECOND.countOfMatch && matchBonus) {
-            return SECOND;
+        if (countOfMatch == SECOND.countOfMatch && !matchBonus) {
+            return THIRD;
         }
 
         return rank;
