@@ -6,7 +6,9 @@ public class Payment {
 
     private int money;
 
-    private Payment(int money) {this.money = money;}
+    private Payment(int money) {
+        this.money = money;
+    }
 
     public static Payment of(int money) {
         return new Payment(money);

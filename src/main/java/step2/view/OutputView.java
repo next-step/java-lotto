@@ -31,7 +31,8 @@ public class OutputView {
     }
 
     private static void printWinResult(final LottoResult lottoResult, final Long resultCount) {
-        System.out.println(String.format(RESULT_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
+        System.out
+            .println(String.format(RESULT_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
     }
 
     public static void printProfitResult(final Double profit) {

@@ -16,8 +16,9 @@ public enum LottoResult {
     FIVE(LottoMatchCount.of(5), 1_500_000L),
     SIX(LottoMatchCount.of(6), 2_000_000_000L);
 
-    private static final Map<LottoMatchCount, LottoResult> LOTTO_RESULTS = Collections.unmodifiableMap(Stream.of(values())
-        .collect(Collectors.toMap(LottoResult::getLottoMatchCount, Function.identity())));
+    private static final Map<LottoMatchCount, LottoResult> LOTTO_RESULTS =
+        Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(LottoResult::getLottoMatchCount, Function.identity())));
 
     private final LottoMatchCount matchCount;
     private final Long price;

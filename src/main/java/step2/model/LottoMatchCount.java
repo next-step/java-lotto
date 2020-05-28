@@ -3,6 +3,7 @@ package step2.model;
 import java.util.Objects;
 
 public class LottoMatchCount {
+
     private final Integer matchCount;
 
     private LottoMatchCount(Integer matchCount) {

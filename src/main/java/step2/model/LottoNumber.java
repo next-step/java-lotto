@@ -2,7 +2,7 @@ package step2.model;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
@@ -13,8 +13,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         this.number = number;
     }
 
-    public static LottoNumber of(Integer number)
-    {
+    public static LottoNumber of(Integer number) {
         validateRange(number);
         return new LottoNumber(number);
     }
