@@ -18,5 +18,7 @@ public class LottoGame {
         inputView.answerPrice(lottoList.size());
 
         lottoList.forEach(inputView::printLotto);
+
+        Lotto winLotto = inputView.insertWinLotto();
     }
 }
