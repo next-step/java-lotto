@@ -16,16 +16,20 @@ public class AutoLottoApplication {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
-        Money totalMoney = new Money(InputView.askTotalMoney());
-        LottoTickets lottoTickets = lottoStore.buy(totalMoney);
+        Money budget = Money.of(InputView.askTotalMoney());
+        LottoTickets lottoTickets = lottoStore.buy(budget);
 
         OutputView.printLottoTicketNumbers(lottoTickets);
 
-        LottoTicket winningLottoTicket = new LottoTicket(InputView.askLastWeekWinningNumbers());
-        BonusNumber bonusNumber = new BonusNumber(InputView.askBonusNumber());
-        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, bonusNumber);
+        WinningTicket winningTicket = makeWinningTicket();
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
 
-        OutputView.printResult(lottoResult, totalMoney);
+        OutputView.printResult(lottoResult, lottoTickets);
+    }
+
+    private static WinningTicket makeWinningTicket() {
+        LottoTicket winningLottoTicket = new LottoTicket(InputView.askLastWeekWinningNumbers());
+        BonusNumber bonusNumber = new BonusNumber(InputView.askBonusNumber());
+        return new WinningTicket(winningLottoTicket, bonusNumber);
     }
 }

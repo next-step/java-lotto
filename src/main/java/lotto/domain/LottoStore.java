@@ -12,12 +12,12 @@ import static lotto.domain.LottoGameProperty.LOTTO_TICKET_PRICE;
 public class LottoStore {
     private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
+    public LottoStore(final LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoTickets buy(final Money totalMoney) {
-        Money currentMoney = totalMoney;
+    public LottoTickets buy(final Money budget) {
+        Money currentMoney = budget;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         while (currentMoney.isEnoughToBuy(LOTTO_TICKET_PRICE)) {
@@ -28,7 +28,4 @@ public class LottoStore {
         return new LottoTickets(lottoTickets);
     }
 
-    private boolean isEnoughChange(Money currentChange) {
-        return currentChange.isEnoughToBuy(LOTTO_TICKET_PRICE);
-    }
 }

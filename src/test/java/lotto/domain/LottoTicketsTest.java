@@ -5,6 +5,7 @@ import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningTicket;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
+import lotto.support.LottoNumberConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,33 +23,32 @@ class LottoTicketsTest {
     @Test
     void resultTest() {
         //given
-        LottoTickets lottoTickets = createLottoTickets();
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
-        WinningTicket winningTicket = new WinningTicket(winningLottoTicket, new BonusNumber(7));
+        LottoTickets userTickets = createLottoTickets();
+        WinningTicket winningTicket = createWinningTicket();
         List<LottoPrize> expectedLottoPrizes = Arrays.asList(LottoPrize.FIRST, LottoPrize.SECOND, LottoPrize.FIFTH);
 
         //when
-        LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
+        LottoResult lottoResult = userTickets.getLottoResult(winningTicket);
 
         //then
         assertThat(lottoResult.getLottoStatistics()).isEqualTo(expectedLottoPrizes);
     }
 
+    private WinningTicket createWinningTicket() {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
+        return new WinningTicket(winningLottoTicket, new BonusNumber(7));
+    }
+
     private LottoTickets createLottoTickets() {
-        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(of(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
-        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(of(Arrays.asList(7, 1, 2, 4, 5, 6)))); // 5, bonus
-        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(of(Arrays.asList(1, 21, 3, 43, 12, 6)))); // 3
+        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
+        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(7, 1, 2, 4, 5, 6)))); // 5, bonus
+        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 21, 3, 43, 12, 6)))); // 3
 
         return new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));
     }
 
-    private List<LottoNumber> of(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 
 }

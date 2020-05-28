@@ -8,25 +8,24 @@ import java.util.List;
 public class LottoResult {
     private final List<LottoPrize> lottoStatistics;
 
-    public LottoResult(List<LottoPrize> lottoPrizes) {
+    public LottoResult(final List<LottoPrize> lottoPrizes) {
         this.lottoStatistics = lottoPrizes;
     }
 
-    public int getNumberOfHitTickets(final LottoPrize lottoPrize) {
+    public int countTicketsBy(final LottoPrize lottoPrize) {
         return Math.toIntExact(lottoStatistics.stream()
                 .filter(lottoStatistic -> lottoStatistic.equals(lottoPrize))
                 .count());
     }
 
-    public double getRateOfProfit(final Money spentMoney) {
-        Money totalProfit = calculateTotalReword();
-        return (double) totalProfit.getValue() / spentMoney.getValue();
+    public double getRateOfProfit(final Money expenditure) {
+        return calculateTotalReword().calculateYield(expenditure);
     }
 
     private Money calculateTotalReword() {
         return lottoStatistics.stream()
                 .map(LottoPrize::getReward)
-                .reduce(new Money(0), Money::sum);
+                .reduce(Money.of(0), Money::add);
     }
 
     public List<LottoPrize> getLottoStatistics() {

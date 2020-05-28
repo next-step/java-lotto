@@ -12,10 +12,13 @@ class LottoStoreTest {
     @DisplayName("금액을 입력하면 구매한 로또티켓을 반환한다")
     @Test
     void buyTest() {
+        //given
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
+        //when
         LottoTickets lottoTickets = lottoStore.buy(new Money(14000));
 
+        //then
         assertThat(lottoTickets.count()).isEqualTo(14);
     }
 

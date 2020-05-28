@@ -10,6 +10,8 @@ import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoGameProperty.*;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+    private static final int LOTTO_BALL_START_INDEX = 0;
+
     private final List<LottoNumber> lottoBalls;
 
     public AutoLottoNumberGenerator() {
@@ -25,6 +27,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     private List<LottoNumber> pickLottoBalls() {
-        return lottoBalls.subList(0, COUNT_OF_LOTTO_NUMBER);
+        return lottoBalls.subList(LOTTO_BALL_START_INDEX, COUNT_OF_LOTTO_NUMBER);
     }
 }
