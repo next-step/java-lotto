@@ -3,7 +3,6 @@ package calculator;
 import java.util.Arrays;
 
 public class StringAddCalculator {
-
     private static final int ZERO = 0;
     private final Parser parser;
 
