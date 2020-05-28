@@ -6,8 +6,8 @@ import lotto.exception.ErrorMessage;
 
 public class PayInfo {
 
-    private Price price;
-    private LottoTickets manualTickets;
+    private final Price price;
+    private final LottoTickets manualTickets;
 
     private PayInfo(final Price price, final LottoTickets manualTickets) {
         validatePrice(price);
