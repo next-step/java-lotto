@@ -1,0 +1,65 @@
+# 로또
+
+## 기능 요구사항
+
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+- 로또 1장의 가격은 1000원이다.
+
+## 프로그래밍 요구사항
+
+- 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+    - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
+    - UI 로직을 InputView, ResultView와 같은 클래스를 추가해 분리한다.
+- indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+- 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+    - 함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.
+- 모든 로직에 단위 테스트를 구현한다. 단, UI(System.out, System.in) 로직은 제외
+- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+- else 예약어를 쓰지 않는다.
+
+## Todo List
+
+### Lotto
+
+- Price: 금액(가격)
+    - [ ] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
+    
+- LottoSeller: 로또 판매자 
+    - [ ] LottoSeller는 구매자가 지불한 Price만큼 LottoTicketGenerator를 통하여 LottoTicket을 발급할 수 있다.
+    
+- LottoTicketGenerator: 로또 발급 기계
+    - [ ] LottoSeller로 부터 전달 받은 갯수만큼 LottoTicket을 발급할 수 있다.
+
+- LottoNumber: 로또 개별 번호
+    - [ ] 로또 번호 하나는 1~45 사이의 값을 갖는다.
+
+- LottoNumbers: 로또 1장
+    - [ ] 로또 1장은 LottoNumber 6개를 갖는다.
+
+- LottoTicket: 로또 티켓(묶음) 
+    - [ ] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
+    - [ ] WinningNumbers와 일치하는 갯수를 반환한다. 
+
+- NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
+    - [ ] 1~45 사이의 무작위 값을 생성한다.
+
+- WinningNumbers: 지난 주 당첨 번호
+    - [ ] 지난 주 당첨 LottoNumbers를 갖는다.
+
+- LottoGame: 로또 게임 실행기
+    - [ ] LottoTicket, WinningNumbers를 전달받아 로또 게임을 진행한다.
+
+- LottoRank: 로또 랭크
+    - [ ] 일치하는 갯수에 대한 상금액을 갖는다.
+
+- WinningStatistics: 당첨 통계
+    - [ ] LottoRank 별 당첨 갯수를 확인할 수 있다.
+    - [ ] 지불 Price 대비 수익률을 확인할 수 있다.
+
+- InputView
+    - [ ] 구입 Price를 입력 받을 수 있다.
+    - [ ] WinningNumbers를 입력 받을 수 있다.
+    
+- OutPutView
+    - [ ] 로또 구매 갯수와 LottoTicket을 출력할 수 있다.
+    - [ ] WinningStatistics를 출력할 수 있다.
