@@ -9,6 +9,9 @@ public class LottoTicketGenerator {
 
     private static final int TICKET_COUNT_MIN_VALUE = 1;
 
+    private LottoTicketGenerator() {
+    }
+
     public static LottoTickets generate(int ticketCount) {
         checkTicketCount(ticketCount);
 

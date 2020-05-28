@@ -49,6 +49,7 @@
 - LottoMachine
   - [x] 티켓 가격을 입력 할 수 있어야 한다
   - [x] 입력한 금액으로 구입 가능한 최대 티켓 장수를 반환한다.
+  - [x] 1장도 구입하지 못할 경우 RuntimeException이 발생한다
 - LottoTicketGenerator
   - [x] 티켓 장수를 입력하면 로또 번호를 가진 티켓을 반환한다
   - [x] 티켓 장수가 1장보다 적으면 RuntimeException이 발생한다

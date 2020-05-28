@@ -11,6 +11,9 @@ public class LottoNumberGenerator {
     private static final Random random = new Random();
     private static final Set<Integer> generatedLottoNumber = new LinkedHashSet<>();
 
+    private LottoNumberGenerator() {
+    }
+
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
     public static List<LottoNumber> generate() {
