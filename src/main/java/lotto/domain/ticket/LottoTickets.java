@@ -18,7 +18,7 @@ public class LottoTickets {
 
     public LottoResult getLottoResult(final WinningTicket winningTicket) {
         List<LottoPrize> lottoPrizes = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.compareWith(winningTicket))
+                .map(winningTicket::checkLottoNumbers)
                 .collect(toList());
         return new LottoResult(lottoPrizes);
     }

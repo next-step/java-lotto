@@ -1,6 +1,6 @@
 package lotto.domain.result;
 
-import lotto.domain.BonusNumber;
+import lotto.domain.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.support.LottoNumberConverter;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +17,7 @@ class WinningTicketTest {
     @Test
     void generate() {
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        BonusNumber bonusNumber = new BonusNumber(6);
+        LottoNumber bonusNumber = new LottoNumber(6);
 
         assertThatThrownBy(() -> new WinningTicket(winningLottoTicket, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)

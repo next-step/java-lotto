@@ -1,9 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
-import lotto.domain.result.LottoPrize;
-import lotto.domain.result.WinningTicket;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,24 +23,16 @@ public class LottoTicket {
         }
     }
 
-    public LottoPrize compareWith(final WinningTicket winningTicket) {
-        int matchCount = Math.toIntExact(lottoNumbers.stream()
-                .filter(winningTicket::contains)
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return Math.toIntExact(lottoTicket.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
                 .count());
-        boolean matchBonus = lottoNumbers.stream()
-                .anyMatch(winningTicket::matchBonus);
-
-        return LottoPrize.findByMathCount(matchCount, matchBonus);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public boolean contains(BonusNumber bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.getValue() == bonusNumber.getValue());
-    }
 
     @Override
     public String toString() {
