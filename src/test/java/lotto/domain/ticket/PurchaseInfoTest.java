@@ -1,7 +1,5 @@
-package lotto.domain.price;
+package lotto.domain.ticket;
 
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
 import lotto.util.LottoTicketGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

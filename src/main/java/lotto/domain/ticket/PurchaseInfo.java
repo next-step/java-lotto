@@ -1,6 +1,5 @@
-package lotto.domain.price;
+package lotto.domain.ticket;
 
-import lotto.domain.ticket.LottoTickets;
 import lotto.exception.ErrorMessage;
 
 public class PurchaseInfo {

@@ -3,7 +3,7 @@ package lotto.domain.seller;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.price.PayInfo;
-import lotto.domain.price.PurchaseInfo;
+import lotto.domain.ticket.PurchaseInfo;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.exception.ErrorMessage;

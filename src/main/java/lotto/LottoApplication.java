@@ -4,7 +4,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.price.PayInfo;
 import lotto.domain.price.Price;
-import lotto.domain.price.PurchaseInfo;
+import lotto.domain.ticket.PurchaseInfo;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.ticket.WinningLottoTicket;
