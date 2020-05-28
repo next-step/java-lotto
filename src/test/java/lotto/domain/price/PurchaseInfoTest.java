@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class PurchaseInfoTest {
 
@@ -25,8 +24,6 @@ public class PurchaseInfoTest {
         lottoTickets.add(LottoTicketGenerator.valueOf(1, 2, 3, 7, 8, 9));
 
         manualTickets = LottoTickets.of(lottoTickets);
-
-        lottoTickets.add(LottoTicketGenerator.valueOf(11, 12, 22, 23, 33, 34));
         autoTickets = LottoTickets.of(lottoTickets);
     }
 
@@ -49,13 +46,15 @@ public class PurchaseInfoTest {
     @DisplayName("구매한 manualTickets 개수 반환")
     @Test
     void getManualTicketsCount() {
-
+        assertThat(PurchaseInfo.valueOf(manualTickets, autoTickets).getManualTicketsCount())
+                .isEqualTo(2);
     }
 
     @DisplayName("구매한 autoTickets 개수 반환")
     @Test
     void getAutoTicketsCount() {
-
+        assertThat(PurchaseInfo.valueOf(manualTickets, autoTickets).getAutoTicketsCount())
+                .isEqualTo(2);
     }
 
     @DisplayName("구매한 모든 로또 티켓을 반환")
