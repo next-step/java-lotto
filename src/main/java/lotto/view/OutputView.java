@@ -8,10 +8,10 @@ import java.util.List;
 
 public class OutputView {
     static class TEXT {
-        public static String BOUGHT_LOTTO_COUNT = "%d 개를 구매했습니다.%n";
+        public static String BOUGHT_LOTTO_COUNT = "%d개를 구매했습니다.%n";
         public static String TITLE_WINNING_LOTTO_RESULT = "당첨 통계";
         public static String DASH_BAR = "---------------";
-        public static String WINNING_LOTTO_RESULT = "%d 개 일치(%d 원) - %개%n";
+        public static String WINNING_LOTTO_RESULT = "%d개 일치(%d 원) - %d개%n";
         public static String TOTAL_RETURN_VALUE = "총 수익률은 %.2f 입니다.%n";
     }
 
