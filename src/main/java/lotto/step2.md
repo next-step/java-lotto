@@ -19,10 +19,18 @@
 
 ### 기능 요구사항
 * 구입 금액을 관리하는 Price class
+  * 0 이상의 숫자이다.
 * 구입 금액을 입력 받으면 자동으로 6개의 숫자가 정해진다.
-  * 숫자는 1~45 사이의 숫자가 랜덤으로 정해진다.
+  * LottoNumber class
+     * 숫자는 1 ~ 45 사이의 숫자이다.
+     * 번호를 수동, 자동으로 생성해주는 정적 팩토리 메소드가 필요
+     * public static LottoNumber generateByManual()
+         * 테스트 가능한 부분
+     * public static LottoNumber generateByAuto()
+         * 불안정한 테스트로 인해 테스트 불가능한 부분
   * Lotto class
-     * 번호를 자동으로 생성해주는 정적 팩토리 메소드가 필요
+     * 중복없는 6개의 LottoNumber를 가진다.
+     * public static Lotto generateByManual()
      * public static Lotto generateByAuto()
 * 구입 금액에 따라 로또를 생성해준다.
   * LottoMachine class
