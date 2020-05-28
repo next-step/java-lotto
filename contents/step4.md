@@ -48,9 +48,12 @@
 
 #### LottoSeller
 : LottoTickets 를 금액만큼 구매하는 책임 
-- [x] PurchaseInfo 가 null 이면 예외를 반환한다.
+- [x] PayInfo 가 null 이면 예외를 반환한다.
 - [x] 수동으로 입력한 로또 티켓이 구매할 수 있는 티켓의 수보다 많으면 예외 반환
 - [x] 수동으로 입력한 로또 티켓 수를 구매하고 남은 돈으로 자동으로 로또 티켓을 생성한다.
+
+- [ ] 지불 정보(PayInfo)가 null 이면 예외를 반환한다.
+- [ ] 지불 정보에 따라 수동, 자동 티켓을 생성하여 구매 정보(PurchaseInfo) 를 반환한다.
 
 #### LottoNumberGenerator
 : 로또 숫자를 랜덤으로 자동 생성하는 책임 
