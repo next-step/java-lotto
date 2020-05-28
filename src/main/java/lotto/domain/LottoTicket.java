@@ -36,10 +36,6 @@ public class LottoTicket {
         if (Objects.isNull(lottoWinnerNumber)) {
             throw new IllegalArgumentException();
         }
-
-        if (lottoWinnerNumber.isValidWinnerNumber(LottoNumbers.LOTTO_SIZE)) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public String toString() {
