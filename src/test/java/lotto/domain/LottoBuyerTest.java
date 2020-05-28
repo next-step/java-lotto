@@ -67,8 +67,10 @@ class LottoBuyerTest {
         LottoBuyer lottoBuyer = this.createLottoBuyer(price, new LottoTickets(Arrays.asList(this.createLottoTicket(numbers))));
         LottoTickets lottoTickets = lottoBuyer.buyLotto(lottoShop);
         LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(convertLotto(winnerNumbers), new Lotto(bonusBall));
+
         List<LottoMatcher> lottoMatchers = lottoTickets.findLottoMatchResults(lottoWinnerNumber);
         BigDecimal calculateEarningRate = lottoBuyer.calculateEarningsRate(lottoMatchers, lottoShop);
+
         assertThat(calculateEarningRate.doubleValue()).isEqualTo(earningRate.doubleValue());
     }
 
