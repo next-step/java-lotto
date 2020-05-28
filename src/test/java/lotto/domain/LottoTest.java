@@ -77,6 +77,15 @@ public class LottoTest {
         assertThat(counts).isEqualTo(3);
     }
 
+    @DisplayName("String 문자열을 받아 정상적으로 Lotto 가 리턴된다.")
+    @Test
+    public void valueOfTest() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto actualLotto = Lotto.valueOf("1, 2, 3, 4, 5, 6");
+
+        assertThat(actualLotto).isEqualTo(lotto);
+    }
+
     private static Stream<Arguments> lottoNumbersOutOfRange() {
         return Stream.of(
                 Arguments.of(List.of(1,2,3,4,5,0),

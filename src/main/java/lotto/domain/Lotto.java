@@ -1,11 +1,14 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String SPLIT_REGX = ",";
+
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_LAST_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -17,6 +20,14 @@ public class Lotto {
         validateLottoNumberDuplicate(lottoNumbers);
         validateRangeOfNumbers(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public static Lotto valueOf(String lottoText) {
+        String[] winningNumberText = lottoText.split(SPLIT_REGX);
+        List<Integer> lottoNumber = Arrays.stream(winningNumberText)
+                .map(s -> Integer.parseInt(s.trim()))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumber);
     }
 
     public List<Integer> getNumbers() {
@@ -63,5 +74,18 @@ public class Lotto {
     public String toString() {
         List<String> lottoNumberText = lottoNumbers.stream().map(String::valueOf).collect(Collectors.toList());
         return "[" + String.join(", ", lottoNumberText) + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return lottoNumbers.equals(lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
