@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("로또 티켓")
@@ -28,5 +29,12 @@ class LottoTicketTest {
                 arguments(2000, 2),
                 arguments(10000, 10)
         );
+    }
+
+    @ParameterizedTest(name = "금액 = {0}원")
+    @ValueSource(ints = {100, 101, 222, 33333})
+    @DisplayName("로또 금액이 1000원 단위가 아닌 경우 IllegalArguments exception throw")
+    void 로또_발급_예외(int money) {
+        assertThrows(IllegalArgumentException.class, () -> new LottoService(money));
     }
 }
