@@ -2,13 +2,14 @@ package study.calculator.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Numbers {
     private List<Number> numbers;
 
     public Numbers(String[] strings) {
-        if(strings == null) {
-            throw new RuntimeException();
+        if(Objects.isNull(strings)) {
+            throw new IllegalArgumentException();
         }
 
         numbers = createNumbers(strings);

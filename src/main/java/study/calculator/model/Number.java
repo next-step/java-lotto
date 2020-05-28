@@ -12,6 +12,10 @@ public class Number {
     }
 
     private int getIntFromString(String str) {
+        if(str.isEmpty()) {
+            throw new IllegalArgumentException("빈 문자가 존재합니다.");
+        }
+
         int number = Integer.parseInt(str);
 
         if(number < 0) {
