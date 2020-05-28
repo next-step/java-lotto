@@ -15,7 +15,7 @@
 * LottoStore
     * [x] LottoStore 는 LottoTicket 를 판매한다.
     
-* LottoTicket
+* LottoTicket (abstract class)
     * [x] LottoTicket 은 LottoNumber 를 가지고 있다.
     
 * LottoNumber
@@ -27,9 +27,11 @@
 
 * PurchasedLottoTickets
     * [x] PurchasedLottoTickets 은 일급 컬렉션이다.
+    * [x] PurchasedLottoTickets 입력 받은 WinningLottoTicket 과 LottoNumber 를 match 하는 기능을 가지고 있다.
     
 * WinningLottoTicket
-
+    * [x] WinningLottoTicket 는 지난 주 당첨 Number 를 가지고 있다.
+    
 * LottoResult
 
 * LottoResults
@@ -42,5 +44,10 @@
 
 ### View
 * InputView
-
+    * [x] InputView 는 구입 금액을 입력 받는 기능을 수행한다.
+    * [x] 지난 주 당첨 번호를 입력받는 기능을 수행한다.
+    
 * OutputView
+    * [x] OutputView 는 LottoNumber 를 출력하는 기능을 수행한다.
+    * [] 당첨 통계를 출력하는 기능을 수행한다.
+    * [] 수익률을 출력하는 기능을 수행한다.
