@@ -12,7 +12,9 @@ public class InputView {
 
     public static int inputBuyAmount() {
         System.out.println(TEXT.INPUT_AMOUNT_FOR_BUY_LOTTO);
-        return scanner.nextInt();
+        int buyAmount = scanner.nextInt();
+        scanner.nextLine();
+        return buyAmount;
     }
 
     public static String inputWinningNumber() {
