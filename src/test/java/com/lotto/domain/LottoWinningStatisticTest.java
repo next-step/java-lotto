@@ -28,7 +28,7 @@ public class LottoWinningStatisticTest {
         LottoWinningStatistic lottoWinningStatistic = new LottoWinningStatistic();
 
         for (Lotto lotto : extractedLotto) {
-            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers);
+            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers, new LottoBonusBall(0));
         }
         Map<LottoWinningType, Integer> result = lottoWinningStatistic.getLottoWinningList();
         assertEquals(result, expected);
@@ -61,6 +61,7 @@ public class LottoWinningStatisticTest {
     private static Map<LottoWinningType, Integer> expectedValue1() {
         Map<LottoWinningType, Integer> expected = new TreeMap<>();
         expected.put(LottoWinningType.FIRST_CLASS, 1);
+        expected.put(LottoWinningType.BONUS_BALL_CLASS, 0);
         expected.put(LottoWinningType.SECOND_CLASS, 0);
         expected.put(LottoWinningType.THIRD_CLASS, 0);
         expected.put(LottoWinningType.FORTH_CLASS, 1);
@@ -71,6 +72,7 @@ public class LottoWinningStatisticTest {
     private static Map<LottoWinningType, Integer> expectedValue2() {
         Map<LottoWinningType, Integer> expected = new TreeMap<>();
         expected.put(LottoWinningType.FIRST_CLASS, 0);
+        expected.put(LottoWinningType.BONUS_BALL_CLASS, 0);
         expected.put(LottoWinningType.SECOND_CLASS, 1);
         expected.put(LottoWinningType.THIRD_CLASS, 0);
         expected.put(LottoWinningType.FORTH_CLASS, 1);
@@ -81,6 +83,7 @@ public class LottoWinningStatisticTest {
     private static Map<LottoWinningType, Integer> expectedValue3() {
         Map<LottoWinningType, Integer> expected = new TreeMap<>();
         expected.put(LottoWinningType.FIRST_CLASS, 0);
+        expected.put(LottoWinningType.BONUS_BALL_CLASS, 0);
         expected.put(LottoWinningType.SECOND_CLASS, 0);
         expected.put(LottoWinningType.THIRD_CLASS, 1);
         expected.put(LottoWinningType.FORTH_CLASS, 1);
@@ -91,6 +94,7 @@ public class LottoWinningStatisticTest {
     private static Map<LottoWinningType, Integer> expectedValue4() {
         Map<LottoWinningType, Integer> expected = new TreeMap<>();
         expected.put(LottoWinningType.FIRST_CLASS, 0);
+        expected.put(LottoWinningType.BONUS_BALL_CLASS, 0);
         expected.put(LottoWinningType.SECOND_CLASS, 0);
         expected.put(LottoWinningType.THIRD_CLASS, 0);
         expected.put(LottoWinningType.FORTH_CLASS, 1);
@@ -104,7 +108,7 @@ public class LottoWinningStatisticTest {
     void getLottoRateOfReturnTest(final List<Lotto> extractedLotto, final LottoWinningNumbers lottoWinningNumbers, final Double expected) {
         LottoWinningStatistic lottoWinningStatistic = new LottoWinningStatistic();
         for (Lotto lotto : extractedLotto) {
-            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers);
+            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers, new LottoBonusBall(0));
         }
 
         Double result = lottoWinningStatistic.getLottoRateOfReturn(extractedLotto.size());
