@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoStore {
 
-    public final static int LOTTO_PRICE_PER_ONE = 1000;
+    private final static int LOTTO_PRICE_PER_ONE = 1000;
 
     public static List<Lotto> buy(int price) {
         validatePrice(price);

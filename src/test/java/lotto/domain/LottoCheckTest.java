@@ -29,7 +29,7 @@ public class LottoCheckTest {
                 new Lotto(List.of(1,2,3,9,10,8)),
                 new Lotto(List.of(7,8,9,12,10,11)),
                 new Lotto(List.of(1,10,3,9,5,8)));
-        LottoCheck lottoCheck = new LottoCheck(winningNumber, lottos);
+        LottoCheck lottoCheck = LottoCheck.newInstance(lottos, winningNumber);
         final int[] count = new int[5];
 
         count[INDEX_RANK_1] = lottoCheck.getWinningLottoCount(RANK1);
@@ -57,7 +57,7 @@ public class LottoCheckTest {
                 new Lotto(List.of(7,8,9,12,10,11)),
                 new Lotto(List.of(1,10,3,9,5,8)));
 
-        LottoCheck lottoCheck = new LottoCheck(winningNumber, lottos);
+        LottoCheck lottoCheck =  LottoCheck.newInstance(lottos, winningNumber);
         BigDecimal expectedAmount = BigDecimal.valueOf(2 * 5000).add(BigDecimal.valueOf(1500000));
         BigDecimal actualAmount = lottoCheck.getWinningAmount();
 
