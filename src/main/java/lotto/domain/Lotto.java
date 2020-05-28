@@ -34,14 +34,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int getContainsCount(Integer number) {
-        return lottoNumbers.contains(number) ? 1 : 0;
+    private int addContainsCount(int currentCount, Integer number) {
+        return lottoNumbers.contains(number) ? currentCount + 1 : currentCount;
     }
 
     public int getContainCount(List<Integer> numbers) {
         int count = 0;
         for(Integer number : numbers) {
-            count += getContainsCount(number);
+            count = addContainsCount(count, number);
         }
         return count;
     }

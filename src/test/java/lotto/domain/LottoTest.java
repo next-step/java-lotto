@@ -70,10 +70,8 @@ public class LottoTest {
     public void getContainCountTest() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
 
-        int count = lotto.getContainsCount(1);
         int counts = lotto.getContainCount(List.of(1,2,3));
 
-        assertThat(count).isEqualTo(1);
         assertThat(counts).isEqualTo(3);
     }
 
