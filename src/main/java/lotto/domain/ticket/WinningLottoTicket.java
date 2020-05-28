@@ -19,12 +19,12 @@ public class WinningLottoTicket {
     public static WinningLottoTicket valueOf(final List<LottoNumber> winningNumbers, final int bonusNumber) {
         LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
-        validateDuplication(lottoNumbers, bonusLottoNumber);
+        verifyDuplication(lottoNumbers, bonusLottoNumber);
 
         return new WinningLottoTicket(lottoNumbers, bonusLottoNumber);
     }
 
-    private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusLottoNumber) {
+    private static void verifyDuplication(LottoNumbers lottoNumbers, LottoNumber bonusLottoNumber) {
         if (lottoNumbers.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
         }

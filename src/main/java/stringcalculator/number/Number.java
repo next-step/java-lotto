@@ -16,7 +16,7 @@ public class Number {
     }
 
     private Number(final int number) {
-        validateNegativeNumber(number);
+        verifyNegativeNumber(number);
         this.value = number;
     }
 
@@ -25,7 +25,7 @@ public class Number {
         return new Number(parsedInt);
     }
 
-    private void validateNegativeNumber(final int number) {
+    private void verifyNegativeNumber(final int number) {
         if (isNegative(number)) {
             throw new NegativeNumberException(number);
         }
