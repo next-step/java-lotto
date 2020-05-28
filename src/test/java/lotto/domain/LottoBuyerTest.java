@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoBuyerTest {
 
@@ -33,21 +32,22 @@ class LottoBuyerTest {
     @Test
     @DisplayName("LottoShop 객체가 null일경우 Exception")
     void validateNullLottoShop() {
-        assertThatThrownBy(() -> this.createLottoBuyer(1000, null, null))
+        LottoBuyer lottoBuyer = new LottoBuyer(1000, new LottoTickets(Arrays.asList(this.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)))));
+        assertThatThrownBy(() -> lottoBuyer.buyLotto(null))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 
-    private LottoBuyer createLottoBuyer(int price, LottoShop lottoShop, LottoTickets lottoTickets) {
-        return new LottoBuyer(price, lottoShop, lottoTickets);
+    private LottoBuyer createLottoBuyer(int price, LottoTickets lottoTickets) {
+        return new LottoBuyer(price, lottoTickets);
     }
 
     @ParameterizedTest
     @MethodSource("provideLottos")
     @DisplayName("로또 구매 테스트")
     void buyLottos(int price, int count, List<Integer> numbers) {
-        LottoBuyer lottoBuyer = this.createLottoBuyer(price, this.createLottoShop(), new LottoTickets(Arrays.asList(this.createLottoTicket(numbers))));
-        LottoTickets lottoTickets = lottoBuyer.buyLotto();
+        LottoShop lottoShop = this.createLottoShop();
+        LottoBuyer lottoBuyer = this.createLottoBuyer(price, new LottoTickets(Arrays.asList(this.createLottoTicket(numbers))));
+        LottoTickets lottoTickets = lottoBuyer.buyLotto(lottoShop);
         assertThat(lottoTickets.getPurchaseTicketCount()).isEqualTo(count);
     }
 
@@ -63,11 +63,12 @@ class LottoBuyerTest {
     @MethodSource("provideLottosForEarningsRate")
     @DisplayName("수익률 계산")
     void calculateEarningsRate(int price, List<Integer> numbers, List<Integer> winnerNumbers, int bonusBall, BigDecimal earningRate) {
-        LottoBuyer lottoBuyer = this.createLottoBuyer(price, this.createLottoShop(), new LottoTickets(Arrays.asList(this.createLottoTicket(numbers))));
-        LottoTickets lottoTickets = lottoBuyer.buyLotto();
+        LottoShop lottoShop = this.createLottoShop();
+        LottoBuyer lottoBuyer = this.createLottoBuyer(price, new LottoTickets(Arrays.asList(this.createLottoTicket(numbers))));
+        LottoTickets lottoTickets = lottoBuyer.buyLotto(lottoShop);
         LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(convertLotto(winnerNumbers), new Lotto(bonusBall));
         List<LottoMatcher> lottoMatchers = lottoTickets.findLottoMatchResults(lottoWinnerNumber);
-        BigDecimal calculateEarningRate = lottoBuyer.calculateEarningsRate(lottoMatchers);
+        BigDecimal calculateEarningRate = lottoBuyer.calculateEarningsRate(lottoMatchers, lottoShop);
         assertThat(calculateEarningRate.doubleValue()).isEqualTo(earningRate.doubleValue());
     }
 

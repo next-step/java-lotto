@@ -17,8 +17,9 @@ public class Application {
         // 수동 로또 구매 번호가 필요
         LottoTickets lottoTickets = InputView.inputManualNumbers(manualCount);
 
-        LottoBuyer lottoBuyer = new LottoBuyer(buyLottoAmount, new LottoShop(), lottoTickets);
-        LottoTickets buyLottoTickets = lottoBuyer.buyLotto();
+        LottoShop lottoShop = new LottoShop();
+        LottoBuyer lottoBuyer = new LottoBuyer(buyLottoAmount, lottoTickets);
+        LottoTickets buyLottoTickets = lottoBuyer.buyLotto(lottoShop);
 
         // 개수 출력 및 번호 출력
         OutputView.outputBuyCount(buyLottoTickets.getPurchaseTicketCount());
@@ -31,7 +32,7 @@ public class Application {
         LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(winnerNumbers, bonusBall);
         List<LottoMatcher> lottoMatchers = buyLottoTickets.findLottoMatchResults(lottoWinnerNumber);
 
-        BigDecimal earningRate = lottoBuyer.calculateEarningsRate(lottoMatchers);
+        BigDecimal earningRate = lottoBuyer.calculateEarningsRate(lottoMatchers, lottoShop);
 
         OutputView.output();
         OutputView.outputRankingStatistics(lottoMatchers);

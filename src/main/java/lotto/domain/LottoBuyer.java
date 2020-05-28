@@ -10,17 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoBuyer {
-    private final LottoShop lottoShop;
     private int price;
     private int availablePurchaseCount;
     private final LottoTickets lottoTickets;
 
-    public LottoBuyer(int price, LottoShop lottoShop, LottoTickets lottoTickets) {
-        this.validateLottoShop(lottoShop);
+    public LottoBuyer(int price, LottoTickets lottoTickets) {
         this.price = price;
-        this.lottoShop = lottoShop;
-        this.lottoShop.availablePurchase(price);
-        this.availablePurchaseCount = lottoShop.calculatePurchaseCount(this.price);
         this.lottoTickets = lottoTickets;
     }
 
@@ -30,16 +25,19 @@ public class LottoBuyer {
         }
     }
 
-    public LottoTickets buyLotto() {
-        List<LottoTicket> manualLottoTickets = this.buyManualLottos();
-        List<LottoTicket> autoLottoTickets = this.buyAutoLottos();
+    public LottoTickets buyLotto(LottoShop lottoShop) {
+        this.validateLottoShop(lottoShop);
+        this.availablePurchaseCount = lottoShop.calculatePurchaseCount(this.price);
+
+        List<LottoTicket> manualLottoTickets = this.buyManualLottos(lottoShop);
+        List<LottoTicket> autoLottoTickets = this.buyAutoLottos(lottoShop);
         List<LottoTicket> mergeLottoTickets = Stream.of(manualLottoTickets, autoLottoTickets)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         return new LottoTickets(mergeLottoTickets);
     }
 
-    private List<LottoTicket> buyManualLottos() {
+    private List<LottoTicket> buyManualLottos(LottoShop lottoShop) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         List<LottoTicket> purchaseLottoTickets = this.lottoTickets.getLottoTickets();
         for (LottoTicket lottos : purchaseLottoTickets) {
@@ -50,7 +48,7 @@ public class LottoBuyer {
         return lottoTickets;
     }
 
-    private List<LottoTicket> buyAutoLottos() {
+    private List<LottoTicket> buyAutoLottos(LottoShop lottoShop) {
         if (this.availablePurchaseCount == 0) {
             return Collections.EMPTY_LIST;
         }
@@ -64,7 +62,8 @@ public class LottoBuyer {
         return lottoTickets;
     }
 
-    public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers) {
-        return this.lottoShop.calculateEarningsRate(lottoMatchers, this.price);
+    public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers, LottoShop lottoShop) {
+        this.validateLottoShop(lottoShop);
+        return lottoShop.calculateEarningsRate(lottoMatchers, this.price);
     }
 }
