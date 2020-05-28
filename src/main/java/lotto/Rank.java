@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public enum Rank {
 
@@ -32,5 +33,9 @@ public enum Rank {
 				.filter(r -> count >= r.matchedCount)
 				.max(Comparator.comparingLong(r -> r.matchedCount))
 				.orElseThrow(() -> new IllegalArgumentException("등수를 매길 수 없습니다"));
+	}
+
+	public static List<Rank> getResultViewRanks() {
+		return Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
 	}
 }
