@@ -9,10 +9,6 @@ public class WinningLottoTicket extends LottoTicket {
         super(numbers);
     }
 
-    public static WinningLottoTicket create(List<LottoNumber> numbers) {
-        return new WinningLottoTicket(numbers);
-    }
-
     public static WinningLottoTicket createBy(List<Integer> numbers) {
         return new WinningLottoTicket(numbers.stream()
             .map(LottoNumber::of)
