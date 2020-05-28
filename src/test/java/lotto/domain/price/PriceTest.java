@@ -40,7 +40,7 @@ public class PriceTest {
     @ParameterizedTest
     @MethodSource
     void ticketCount(final int price, final int expected) {
-        assertThat(Price.of(price).ticketCount()).isEqualTo(expected);
+        assertThat(Price.of(price).getTicketCount()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> ticketCount() {

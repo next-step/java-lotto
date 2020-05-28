@@ -36,11 +36,11 @@ public class Price {
         return ((float) totalPrizes / price);
     }
 
-    public int ticketCount() {
+    public int getTicketCount() {
         return price / ONE_TICKET_PRICE;
     }
 
     public boolean isExceedCount(final int ticketCount) {
-        return this.ticketCount() < ticketCount;
+        return this.getTicketCount() < ticketCount;
     }
 }
