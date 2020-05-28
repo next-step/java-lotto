@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoUtil {
+public final class LottoUtil {
 
     private static final String DELIMITER = ",";
 

@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import step2.model.LottoNumber;
 
-public class AutomaticLottoGenerator {
+public final class AutomaticLottoGenerator {
 
     private static final int COUNT_OF_LOTTO_NUMBER = 6;
-    private static int START_LOTTO_NUMBER = 1;
-    private static int END_LOTTO_NUMBER = 45;
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int END_LOTTO_NUMBER = 45;
 
     private static List<LottoNumber> numbers = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
         .mapToObj(LottoNumber::of)
