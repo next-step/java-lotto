@@ -49,12 +49,12 @@
 - LottoMachine
   - [ ] 입력한 금액으로 1,000원당 1장의 로또 티켓을 반환한다.
 - LottoTicketGenerator
-  - [ ] 티켓 장수를 입력하면 로또 번호를 가진 티켓을 반환한다
+  - [x] 티켓 장수를 입력하면 로또 번호를 가진 티켓을 반환한다
+  - [x] 티켓 장수가 1장보다 적으면 RuntimeException이 발생한다
 - LottoTicket
   - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다
 - LottoTickets
 - LottoNumberGenerator
-  - [x] 로또 번호 6개를 생성한다
-- LottoNumber
+  - [x] 로또 번호 6개를 생성한다- LottoNumber
   - [x] 로또 번호는 1 ~ 45까지만 입력이 가능하다
   - [x] 로또 번호 범위를 벗어나면 RuntimeException이 발생한다.
