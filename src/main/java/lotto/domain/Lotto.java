@@ -36,8 +36,7 @@ public class Lotto {
     }
 
     private void validateLottoNumberDuplicate(final List<Integer> lottoNumbers) {
-        int setSize = new HashSet<>(lottoNumbers).size();
-        if(lottoNumbers.size() != setSize) {
+        if(lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호에 중복이 있습니다.");
         }
     }
