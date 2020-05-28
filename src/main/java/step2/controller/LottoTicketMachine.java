@@ -1,4 +1,9 @@
-package step2;
+package step2.controller;
+
+import step2.model.LottoTicketGenerator;
+import step2.model.LottoTicketPrice;
+import step2.model.LottoTickets;
+import step2.model.Money;
 
 public class LottoTicketMachine {
 

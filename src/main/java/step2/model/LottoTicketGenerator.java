@@ -1,7 +1,5 @@
-package step2;
+package step2.model;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;

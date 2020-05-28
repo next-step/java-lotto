@@ -1,7 +1,8 @@
-package step2;
+package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.model.LottoTicket;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 public enum LottoTicketPrice {
     PRICE_1000(1_000);
@@ -7,6 +7,10 @@ public enum LottoTicketPrice {
 
     LottoTicketPrice(int ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    public static LottoTicketPrice getDefault() {
+        return LottoTicketPrice.PRICE_1000;
     }
 
     public int getPrice() {

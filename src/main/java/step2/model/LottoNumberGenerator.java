@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 import java.util.LinkedHashSet;
 import java.util.List;

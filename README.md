@@ -52,6 +52,8 @@
 - LottoTicketGenerator
   - [x] 티켓 장수를 입력하면 로또 번호를 가진 티켓을 반환한다
   - [x] 티켓 장수가 1장보다 적으면 RuntimeException이 발생한다
+- LottoTickerPrice
+  - [x] 티켓 1장의 기본 가격은 1,000원 이다.
 - LottoTicket
   - [x] 로또 번호가 6개가 아니면 RuntimeException이 발생한다
 - LottoTickets

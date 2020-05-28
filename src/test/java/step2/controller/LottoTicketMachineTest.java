@@ -1,7 +1,11 @@
-package step2;
+package step2.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.controller.LottoTicketMachine;
+import step2.model.LottoTicketPrice;
+import step2.model.LottoTickets;
+import step2.model.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
