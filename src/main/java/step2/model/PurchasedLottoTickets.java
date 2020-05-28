@@ -26,4 +26,12 @@ public class PurchasedLottoTickets {
             .map(PurchasedLottoTicket::toString)
             .collect(Collectors.joining("\n"));
     }
+
+    public LottoResults match(WinningLottoTicket winningLottoTicket) {
+        List<LottoResult> lottoResults = purchasedLottoTickets.stream()
+            .map(ticket -> ticket.match(winningLottoTicket))
+            .collect(Collectors.toList());
+
+        return LottoResults.of(lottoResults);
+    }
 }

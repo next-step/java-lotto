@@ -15,7 +15,7 @@ public class WinningLottoTicket extends LottoTicket {
 
     public static WinningLottoTicket createBy(List<Integer> numbers) {
         return new WinningLottoTicket(numbers.stream()
-            .map(LottoNumber::newInstance)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
     }
 }

@@ -13,7 +13,7 @@ public class AutomaticLottoGenerator {
     private static int END_LOTTO_NUMBER = 45;
 
     private static List<LottoNumber> numbers = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-        .mapToObj(LottoNumber::newInstance)
+        .mapToObj(LottoNumber::of)
         .collect(Collectors.toList());
 
     public static List<LottoNumber> createLottoNumbers() {

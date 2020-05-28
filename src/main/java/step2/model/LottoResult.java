@@ -32,6 +32,18 @@ public enum LottoResult {
             .orElseThrow(() -> new IllegalArgumentException("매칭 되는 갯수는 0 ~ 6 사이 입니다."));
     }
 
+    public Integer getMatchCount() {
+        return matchCount.toInt();
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public boolean isBlank() {
+        return price.equals(0L);
+    }
+
     private LottoMatchCount getLottoMatchCount() {
         return matchCount;
     }

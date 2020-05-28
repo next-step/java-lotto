@@ -12,4 +12,13 @@ public class PurchasedLottoTicket extends LottoTicket {
     public static PurchasedLottoTicket newInstance() {
         return new PurchasedLottoTicket(AutomaticLottoGenerator.createLottoNumbers());
     }
+
+    public LottoResult match(LottoTicket lottoTicket) {
+        long count = lottoTicket.getNumbers()
+            .stream()
+            .filter(winningLottoNumber -> numbers.contains(winningLottoNumber))
+            .count();
+
+        return LottoResult.of(Math.toIntExact(count));
+    }
 }
