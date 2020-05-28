@@ -10,7 +10,7 @@ public class ResultView {
 
     private ResultView() {}
 
-    private static final Stream<Rank> RESULT_VIEW_RANKS = Stream.of(First, Second, Third, Fourth);
+    private static final Stream<Rank> RESULT_VIEW_RANKS = Stream.of(FIRST, SECOND, THIRD, FOURTH);
 
     public static void printLottos(Lottos lottos) {
         System.out.println(String.format("%d개를 구입했습니다.", lottos.size()));

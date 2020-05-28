@@ -12,7 +12,7 @@ class RankTest {
 
 	@DisplayName("일치 개수가 랭킹 구간 내에 존재하면 등수를 매길 수 있다")
 	@ParameterizedTest
-	@CsvSource({"6, First", "3, Fourth", "1, Losing", "0, Losing"})
+	@CsvSource({"6, FIRST", "3, FOURTH", "1, LOSING", "0, LOSING"})
 	void matchedCountExist_Then_IllegalArgumentException(long matchedCount, Rank expected) {
 		Rank rank = Rank.findByMatchedCount(matchedCount);
 		assertThat(rank).isEqualTo(expected);

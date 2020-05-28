@@ -32,11 +32,11 @@ class LottosTest {
         LottoResults lottoResults = lottos.checkResults(winningNumbers);
 
         return Stream.of(
-                Arguments.of(lottoResults, Rank.First, 1),
-                Arguments.of(lottoResults, Rank.Second, 2),
-                Arguments.of(lottoResults, Rank.Third, 1),
-                Arguments.of(lottoResults, Rank.Fourth, 0),
-                Arguments.of(lottoResults, Rank.Losing, 2)
+                Arguments.of(lottoResults, Rank.FIRST, 1),
+                Arguments.of(lottoResults, Rank.SECOND, 2),
+                Arguments.of(lottoResults, Rank.THIRD, 1),
+                Arguments.of(lottoResults, Rank.FOURTH, 0),
+                Arguments.of(lottoResults, Rank.LOSING, 2)
         );
     }
 }
