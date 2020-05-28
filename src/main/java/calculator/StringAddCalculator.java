@@ -11,10 +11,18 @@ public class StringAddCalculator {
     }
 
     public int sum(String input) {
-        String[] splitInput = parser.parse(input);
+        String[] stringNumbers = parser.parse(input);
 
-        int[] numbers = Arrays.stream(splitInput).mapToInt(Integer::parseInt).toArray();
+        int[] numbers = convertInt(stringNumbers);
 
         return Arrays.stream(numbers).reduce(Integer::sum).getAsInt();
+    }
+
+    private int[] convertInt(String[] stringNumbers) {
+        try {
+            return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("``stringNumbers` is must be number format");
+        }
     }
 }

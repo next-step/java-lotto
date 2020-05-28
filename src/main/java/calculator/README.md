@@ -23,6 +23,6 @@
   * 커스텀 구분자가 있는 경우, 없는 경우 테스트
   * 커스텀 구분가의 형식이 틀린 경우 테스트
 * 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
-  * private StringAddCalculator::convertInteger(String[] inputs) int[]
+  * private StringAddCalculator::convertInt(String[] inputs) int[]
   * 숫자 이외의 값에 대한 테스트 추가
   * 음수에 대한 테스트 추가
