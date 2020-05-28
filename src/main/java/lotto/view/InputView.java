@@ -60,6 +60,15 @@ public class InputView {
                         .collect(Collectors.toList()));
     }
 
+    public static List<List<LottoNumber>> inputManualTickets2(final int manualTicketsCount) {
+        System.out.println();
+        System.out.println(MANUAL_TICKET_NUMBERS_MESSAGE);
+
+        return Stream.generate(() -> convertToLottoNumbers(SCANNER.nextLine()))
+                .limit(manualTicketsCount)
+                .collect(Collectors.toList());
+    }
+
     private static String inputString(final String message) {
         System.out.println();
         System.out.println(message);

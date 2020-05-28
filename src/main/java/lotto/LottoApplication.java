@@ -19,6 +19,7 @@ public class LottoApplication {
         Price price = Price.of(InputView.inputPurchasePrice());
         int manualTicketsCount = InputView.inputManualTicketsCount();
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketsCount);
+        List<List<LottoNumber>> manualTickets2 = InputView.inputManualTickets2(manualTicketsCount);
 
         PayInfo payInfo = PayInfo.valueOf(price, manualTickets);
         LottoTickets tickets = LottoSeller.buyTicket(payInfo);
