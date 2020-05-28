@@ -14,7 +14,7 @@ public class LottoResult {
 
     public int countTicketsBy(final LottoPrize lottoPrize) {
         return Math.toIntExact(lottoStatistics.stream()
-                .filter(lottoStatistic -> lottoStatistic.equals(lottoPrize))
+                .filter(lottoPrize::equals)
                 .count());
     }
 
