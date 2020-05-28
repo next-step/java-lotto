@@ -17,7 +17,7 @@ public class LottoSeller {
     private LottoSeller() {
     }
 
-    public static PurchaseInfo buyTicket2(final PayInfo payInfo) {
+    public static PurchaseInfo buyTicket(final PayInfo payInfo) {
         validatePayInfo(payInfo);
 
         return PurchaseInfo.valueOf(

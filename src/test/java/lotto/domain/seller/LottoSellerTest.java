@@ -33,7 +33,7 @@ public class LottoSellerTest {
     @Test
     void buyTicketFailureByNullArgument2() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoSeller.buyTicket2(null));
+                .isThrownBy(() -> LottoSeller.buyTicket(null));
     }
 
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
@@ -41,7 +41,7 @@ public class LottoSellerTest {
     void buyTicketFailureByLackMoney2() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        LottoSeller.buyTicket2(
+                        LottoSeller.buyTicket(
                                 PayInfo.valueOf(
                                         Price.of(Price.ONE_TICKET_PRICE - 1), new ArrayList<>())
                         ));
@@ -53,7 +53,7 @@ public class LottoSellerTest {
     void buyTickets2(final int money, final List<List<LottoNumber>> manualTicketNumbers, final int expected) {
         PayInfo payInfo = PayInfo.valueOf(Price.of(money), manualTicketNumbers);
 
-        assertThat(LottoSeller.buyTicket2(payInfo).getAllTickets().count())
+        assertThat(LottoSeller.buyTicket(payInfo).getAllTickets().count())
                 .isEqualTo(expected);
     }
 
@@ -78,6 +78,6 @@ public class LottoSellerTest {
         manualTicketNumbers.add(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 7, 8, 9));
 
         assertThatExceptionOfType(AvailableCountExceedException.class)
-                .isThrownBy(() -> LottoSeller.buyTicket2(PayInfo.valueOf(price, manualTicketNumbers)));
+                .isThrownBy(() -> LottoSeller.buyTicket(PayInfo.valueOf(price, manualTicketNumbers)));
     }
 }

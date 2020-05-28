@@ -16,7 +16,7 @@ public class ResultView {
     private static final String PRIZE_RESULT_INFO_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_PRIZE_RESULT_INFO_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
 
-    public static void printPurchaseInfo2(final PurchaseInfo purchaseInfo) {
+    public static void printPurchaseInfo(final PurchaseInfo purchaseInfo) {
         printPurchasedTicketCount2(purchaseInfo);
         printTickets(LottoTicketDto.from(purchaseInfo.getAllTickets()));
     }

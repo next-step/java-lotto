@@ -1,9 +1,6 @@
 package lotto.view;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumbers;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,22 +42,7 @@ public class InputView {
         return inputInt(MANUAL_TICKET_COUNT_MESSAGE);
     }
 
-    public static LottoTickets inputManualTickets(final int manualTicketsCount) {
-        System.out.println();
-        System.out.println(MANUAL_TICKET_NUMBERS_MESSAGE);
-
-        List<LottoNumbers> lottoNumbers = Stream.generate(() -> convertToLottoNumbers(SCANNER.nextLine()))
-                        .limit(manualTicketsCount)
-                        .map(LottoNumbers::manualCreate)
-                        .collect(Collectors.toList());
-
-        return LottoTickets.of(
-                lottoNumbers.stream()
-                        .map(LottoTicket::of)
-                        .collect(Collectors.toList()));
-    }
-
-    public static List<List<LottoNumber>> inputManualTickets2(final int manualTicketsCount) {
+    public static List<List<LottoNumber>> inputManualTickets(final int manualTicketsCount) {
         System.out.println();
         System.out.println(MANUAL_TICKET_NUMBERS_MESSAGE);
 

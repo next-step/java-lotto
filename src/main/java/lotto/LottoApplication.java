@@ -18,19 +18,20 @@ public class LottoApplication {
     public static void main(String[] args) {
         Price price = Price.of(InputView.inputPurchasePrice());
         int manualTicketsCount = InputView.inputManualTicketsCount();
-        List<List<LottoNumber>> manualTicketNumbers = InputView.inputManualTickets2(manualTicketsCount);
+        List<List<LottoNumber>> manualTicketNumbers = InputView.inputManualTickets(manualTicketsCount);
 
-        PayInfo payInfo2 = PayInfo.valueOf(price, manualTicketNumbers);
-        PurchaseInfo purchaseInfo = LottoSeller.buyTicket2(payInfo2);
+        PayInfo payInfo = PayInfo.valueOf(price, manualTicketNumbers);
+        PurchaseInfo purchaseInfo = LottoSeller.buyTicket(payInfo);
 
-        ResultView.printPurchaseInfo2(purchaseInfo);
+        ResultView.printPurchaseInfo(purchaseInfo);
 
         List<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf(winningNumbers, bonusNumber);
 
-        LottoPrizeResult result2 = LottoGame.of(price, purchaseInfo.getAllTickets()).play(winningLottoTicket);
+        LottoPrizeResult result = LottoGame.of(price, purchaseInfo.getAllTickets())
+                .play(winningLottoTicket);
 
-        ResultView.printResult(result2);
+        ResultView.printResult(result);
     }
 }
