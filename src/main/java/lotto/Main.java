@@ -19,18 +19,18 @@ public class Main {
         OutputView.printNewLine();
 
         final String winningNumber = InputView.inputWinningNumber();
+        final Lotto winningLotto = Lotto.valueOf(winningNumber);
         OutputView.printNewLine();
 
         OutputView.printWinningLottoTitle();
         OutputView.printDashBar();
 
-        LottoCheck lottoCheck = LottoCheck.newInstance(lottosBought, winningNumber);
         for(LottoRank lottoRank : LottoRank.getWinningLotto()) {
             OutputView.printSameCountWinningNumber(lottoRank,
-                    lottoCheck.getWinningLottoCount(lottoRank));
+                    LottoCheck.getWinningLottoCount(lottosBought, winningLotto, lottoRank));
         }
 
-        OutputView.printReturnValue(lottoCheck.getWinningAmount(),
+        OutputView.printReturnValue(LottoCheck.getWinningAmount(lottosBought, winningLotto),
                 BigDecimal.valueOf(buyPriceAmount));
     }
 }

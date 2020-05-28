@@ -7,26 +7,17 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoRank.*;
 
 public class LottoCheck {
-    private static final String SPLIT_REGX = ",";
 
-    private final List<Lotto> lottos;
-    private final List<Integer> winningNumber;
-    private List<Integer> containWinningNumberCounts;
-
-    private LottoCheck(List<Lotto> lottos, String winningNumber) {
-        String[] winningNumberText = winningNumber.split(SPLIT_REGX);
-        this.lottos = lottos;
-        this.winningNumber = Arrays.stream(winningNumberText)
-                .map(s -> Integer.parseInt(s.trim()))
-                .collect(Collectors.toList());
-        this.containWinningNumberCounts = getContainCountsSame(this.winningNumber);
+    public static int getWinningLottoCount(final List<Lotto> lottos, final Lotto winningLotto, final LottoRank rank) {
+        int rankCount = 0;
+        List<Integer> containWinningNumberCounts = getContainCountsSame(lottos, winningLotto.getNumbers());
+        for(Integer containCount : containWinningNumberCounts) {
+            rankCount = addRankCount(rankCount, containCount, rank);
+        }
+        return rankCount;
     }
 
-    public static LottoCheck newInstance(List<Lotto> lottos, String winningNumber) {
-        return new LottoCheck(lottos, winningNumber);
-    }
-
-    private List<Integer> getContainCountsSame(final List<Integer> winningNumbers) {
+    private static List<Integer> getContainCountsSame(final List<Lotto> lottos, final List<Integer> winningNumbers) {
         List<Integer> counts = new ArrayList<>();
         for(Lotto lotto : lottos) {
             counts.add(lotto.getContainCount(winningNumbers));
@@ -34,15 +25,7 @@ public class LottoCheck {
         return counts;
     }
 
-    public int getWinningLottoCount(LottoRank rank) {
-        int rankCount = 0;
-        for(Integer containCount : containWinningNumberCounts) {
-            rankCount = addRankCount(rankCount, containCount, rank);
-        }
-        return rankCount;
-    }
-
-    private int addRankCount(int currentRankCount, Integer containCount, LottoRank rank) {
+    private static int addRankCount(final int currentRankCount, final Integer containCount, final LottoRank rank) {
         int result = currentRankCount;
         if(containCount.equals(rank.getContainCountsSameWinningNumber())) {
             result++;
@@ -50,14 +33,17 @@ public class LottoCheck {
         return result;
     }
 
-    public BigDecimal getWinningAmount() {
-        return getWinningAmount(RANK1)
-                .add(getWinningAmount(RANK2))
-                .add(getWinningAmount(RANK3))
-                .add(getWinningAmount(RANK4));
+    public static BigDecimal getWinningAmount(final List<Lotto> lottos, final Lotto winningLotto) {
+        return getWinningAmount(lottos, winningLotto, RANK1)
+                .add(getWinningAmount(lottos, winningLotto, RANK2))
+                .add(getWinningAmount(lottos, winningLotto, RANK3))
+                .add(getWinningAmount(lottos, winningLotto, RANK4));
     }
 
-    private BigDecimal getWinningAmount(LottoRank lottoRank) {
-        return BigDecimal.valueOf(getWinningLottoCount(lottoRank)).multiply(lottoRank.getWinningAmount());
+    private static BigDecimal getWinningAmount(final List<Lotto> lottos,
+                                               final Lotto winningLotto,
+                                               final LottoRank lottoRank) {
+        return BigDecimal.valueOf(getWinningLottoCount(lottos, winningLotto, lottoRank))
+                .multiply(lottoRank.getWinningAmount());
     }
 }
