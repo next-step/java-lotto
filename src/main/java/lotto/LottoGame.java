@@ -16,5 +16,7 @@ public class LottoGame {
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottoList = lottoMachine.buy(price);
         inputView.answerPrice(lottoList.size());
+
+        lottoList.forEach(inputView::printLotto);
     }
 }

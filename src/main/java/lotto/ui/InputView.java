@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
 import lotto.domain.Price;
 
 import java.util.Scanner;
@@ -16,5 +17,10 @@ public class InputView {
 
     public void answerPrice(int count) {
         System.out.println(String.format(ANSWER_INSERT_PRICE, count));
+    }
+
+    public void printLotto(Lotto lotto) {
+        String[] numbers = lotto.getLottoNumberList().stream().map(value -> String.valueOf(value.getNumber())).toArray(String[]::new);
+        System.out.println("[" + String.join(", ", numbers) + "]");
     }
 }
