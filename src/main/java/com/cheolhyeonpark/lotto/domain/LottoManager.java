@@ -1,27 +1,26 @@
 package com.cheolhyeonpark.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoManager {
 
-    public static final int GAME_PRICE = 1_000;
-
-    private final List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    private final LottoInformation lottoInformation;
     private final AutoGenerator generator;
 
-    public LottoManager(AutoGenerator generator) {
+    public LottoManager(LottoInformation lottoInformation, AutoGenerator generator) {
+        this.lottoInformation = lottoInformation;
         this.generator = generator;
+        createLottoNumbers();
     }
 
-    public void createLottoNumbers(int amount) {
-        IntStream.range(0, amount / GAME_PRICE)
+    private void createLottoNumbers() {
+        IntStream.range(0, lottoInformation.getGameCount())
                 .mapToObj(i -> generator.generate())
-                .forEach(lottoNumbersList::add);
+                .forEach(lottoInformation::addLottoNumbers);
     }
 
     public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
+        return lottoInformation.getLottoNumbersList();
     }
 }
