@@ -32,4 +32,8 @@ public class PurchaseInfo {
     public int getAutoTicketsCount() {
         return autoTickets.count();
     }
+
+    public LottoTickets getAllTickets() {
+        return manualTickets.merged(autoTickets);
+    }
 }
