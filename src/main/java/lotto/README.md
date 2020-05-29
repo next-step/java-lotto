@@ -31,7 +31,7 @@
     - [ ] LottoSeller로 부터 전달 받은 갯수만큼 LottoTicket을 발급할 수 있다.
 
 - LottoNumber: 로또 개별 번호
-    - [ ] 로또 번호 하나는 1~45 사이의 값을 갖는다.
+    - [X] 로또 번호 하나는 1~45 사이의 값을 갖는다.
 
 - LottoNumbers: 로또 1장
     - [ ] 로또 1장은 LottoNumber 6개를 갖는다.
@@ -41,7 +41,7 @@
     - [ ] WinningNumbers와 일치하는 갯수를 반환한다. 
 
 - NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
-    - [ ] 1~45 사이의 무작위 값을 생성한다.
+    - [x]  1~45 사이의 무작위 값으로 구성된 6개의 숫자를 생성한다.
 
 - WinningNumbers: 지난 주 당첨 번호
     - [ ] 지난 주 당첨 LottoNumbers를 갖는다.
