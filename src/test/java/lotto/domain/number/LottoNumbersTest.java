@@ -1,8 +1,13 @@
 package lotto.domain.number;
 
 import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,5 +21,27 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
 
         assertThat(lottoNumbers.getNumbers()).hasSize(6);
+    }
+
+    @DisplayName("WinningNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.")
+    @Test
+    void matchCount() {
+        String winningNumberString = "1,2,3,4,5,6";
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+
+        NumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
+        LottoNumbers lottoNumbers = new LottoNumbers(fixedNumberGenerator);
+
+        int matchCount = lottoNumbers.matchCount(winningNumbers);
+
+        assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
+    }
+
+    private static class FixedNumberGenerator implements NumberGenerator {
+
+        @Override
+        public List<Integer> getNumbers() {
+            return Arrays.asList(1, 2, 3, 4, 5, 6);
+        }
     }
 }

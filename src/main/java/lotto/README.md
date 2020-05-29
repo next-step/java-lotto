@@ -32,6 +32,7 @@
 
 - LottoNumbers: 로또 1장
     - [X] 로또 1장은 LottoNumber 6개를 갖는다.
+    - [X] WinningNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.  
 
 - LottoTicket: 로또 티켓(묶음) 
     - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.

@@ -1,6 +1,7 @@
 package lotto.domain.number;
 
 import lotto.domain.generator.NumberGenerator;
+import lotto.domain.winning.WinningNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,18 @@ public class LottoNumbers {
         return integers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    public int matchCount(WinningNumbers winningNumbers) {
+        return Math.toIntExact(
+                this.numbers.stream()
+                        .filter(winningNumbers::contains)
+                        .count()
+        );
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getNumbers() {
