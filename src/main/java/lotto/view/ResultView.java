@@ -17,11 +17,11 @@ public class ResultView {
     private static final String SECOND_PRIZE_RESULT_INFO_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
 
     public static void printPurchaseInfo(final PurchaseInfo purchaseInfo) {
-        printPurchasedTicketCount2(purchaseInfo);
+        printPurchasedTicketCount(purchaseInfo);
         printTickets(LottoTicketDto.from(purchaseInfo.getAllTickets()));
     }
 
-    private static void printPurchasedTicketCount2(final PurchaseInfo purchaseInfo) {
+    private static void printPurchasedTicketCount(final PurchaseInfo purchaseInfo) {
         System.out.println();
         System.out.println(String.format(TICKET_PURCHASE_CONFIRM_MESSAGE,
                 purchaseInfo.getManualTicketsCount(), purchaseInfo.getAutoTicketsCount()));
