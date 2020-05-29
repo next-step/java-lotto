@@ -1,9 +1,13 @@
 package lotto.domain.lotto;
 
+import lotto.domain.generator.FixedNumberGenerator;
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -21,5 +25,18 @@ public class LottoTicketTest {
                 () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(3),
                 () -> assertThat(lottoTicket.getLottoNumbers().get(0).getClass()).isEqualTo(LottoNumbers.class)
         );
+    }
+
+    @Test
+    void matchWinningNumber() {
+        int lottoCount = 2;
+        String winningNumberString = "1,2,3,4,5,6";
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+
+        LottoTicket lottoTicket = new LottoTicket(lottoCount, new FixedNumberGenerator());
+
+        Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningNumbers);
+
+        assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(lottoCount));
     }
 }

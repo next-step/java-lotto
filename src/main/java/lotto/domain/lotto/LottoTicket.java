@@ -5,7 +5,9 @@ import lotto.domain.number.LottoNumbers;
 import lotto.domain.winning.WinningNumbers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,10 +23,12 @@ public class LottoTicket {
         return IntStream.range(0, lottoCount)
                 .mapToObj(i -> new LottoNumbers(generator))
                 .collect(Collectors.toList());
-
     }
 
-    public void match(WinningNumbers winningNumbers) {
+    public Map<LottoRank, Long> matchWinningNumber(WinningNumbers winningNumbers) {
+        return this.lottoNumbers.stream()
+                .map(lottoNumber -> LottoRank.valueOf(lottoNumber.matchCount(winningNumbers)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public List<LottoNumbers> getLottoNumbers() {
