@@ -15,6 +15,5 @@ class AutoGeneratorTest {
     public void generateLottoNumbers() {
         LottoNumbers lottoNumbers = autoGenerator.generate();
         assertThat(lottoNumbers).isNotNull();
-        assertThat(lottoNumbers.getNumbers().size()).isEqualTo(6);
     }
 }

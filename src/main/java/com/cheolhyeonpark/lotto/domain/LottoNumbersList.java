@@ -15,6 +15,14 @@ public class LottoNumbersList {
         return lottoNumbersList;
     }
 
+    public int size() {
+        return lottoNumbersList.size();
+    }
+
+    public LottoNumbers getNumbers(int index) {
+        return lottoNumbersList.get(index);
+    }
+
     public GameResult getGameResult(List<Integer> winningNumbers) {
         GameResult gameResult = new GameResult();
         lottoNumbersList.stream().map(lottoNumbers -> lottoNumbers.getRank(winningNumbers)).forEach(gameResult::count);

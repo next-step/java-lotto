@@ -21,8 +21,4 @@ public class LottoNumbers {
         return Math.toIntExact(numbers.stream()
                 .filter(number -> winningNumbers.stream().anyMatch(Predicate.isEqual(number))).count());
     }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
 }
