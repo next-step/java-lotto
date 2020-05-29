@@ -17,7 +17,7 @@ public class LotteryStoreTest {
     public void publishLotteryTicketsGroup(long userInput) {
         PurchasePrice purchasePrice = PurchasePrice.from(userInput);
         LotteryStore lotteryStore = LotteryStore.getInstance();
-        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.publishLotteryTicketsGroup(purchasePrice);
+        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.sellLotteryTicketsGroup(purchasePrice);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(userInput / 1000);

@@ -9,10 +9,7 @@ public class LotteryStore {
         return new LotteryStore();
     }
 
-    public LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice) {
-        //List<LotteryTicket> lotteryTickets = Stream.generate(LotteryTicket)
-        //       .limit(purchasePrice.getPurchasableLotteryTicketCounts())
-        //       .collect(Collectors.toList());
-        return null;
+    public LotteryTicketsGroup sellLotteryTicketsGroup(PurchasePrice purchasePrice) {
+        return LotteryTicketsGroup.publishAutomaticLotteryTicketsGroup(purchasePrice);
     }
 }

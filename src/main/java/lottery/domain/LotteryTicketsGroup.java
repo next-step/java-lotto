@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LotteryTicketsGroup {
 
@@ -18,6 +19,13 @@ public class LotteryTicketsGroup {
     }
 
     public static LotteryTicketsGroup from(List<LotteryTicket> lotteryTickets) {
+        return new LotteryTicketsGroup(lotteryTickets);
+    }
+
+    public static LotteryTicketsGroup publishAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
+        List<LotteryTicket> lotteryTickets = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                .limit(purchasePrice.getPurchasableLotteryTicketCounts())
+                .collect(Collectors.toList());
         return new LotteryTicketsGroup(lotteryTickets);
     }
 

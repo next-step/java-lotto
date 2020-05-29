@@ -37,7 +37,7 @@ public class LotteryTicketTest {
     @Test
     public void makeLotteryTicketAutomaticMode() {
         assertThatCode(() -> {
-            LotteryTicket.publishAutomatic();
+            LotteryTicket.publishAutomaticLotteryTicket();
         }).doesNotThrowAnyException();
     }
 

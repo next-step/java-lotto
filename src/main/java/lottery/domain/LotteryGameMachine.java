@@ -2,12 +2,12 @@ package lottery.domain;
 
 import java.util.Map;
 
-public class LotteryMachine {
+public class LotteryGameMachine {
 
     private static final long LOTTERY_TICKET_PRICE = 1000;
     private final int lotteryTicketCounts;
 
-    public LotteryMachine(PurchasePrice purchasePrice) {
+    public LotteryGameMachine(PurchasePrice purchasePrice) {
         validatePurchasePrice(purchasePrice);
         this.lotteryTicketCounts = (int) (purchasePrice.getPurchasePrice() / LOTTERY_TICKET_PRICE);
     }

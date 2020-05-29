@@ -17,7 +17,7 @@ public class LotteryNumbersGenerator {
     private LotteryNumbersGenerator() {
     }
 
-    public static List<LotteryNumber> generateAutomatic() {
+    public static List<LotteryNumber> generateAutomaticNumbers() {
         Collections.shuffle(LOTTERY_NUMBERS_LIST);
         List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
         Collections.sort(pickedLotteryNumbers);

@@ -3,6 +3,7 @@ package lottery;
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryTicketsGroup;
+import lottery.domain.PurchasePrice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,11 +34,18 @@ public class LotteryTicketsGroupTest {
     public void makeLotteryTicketsGroupObject() {
         assertThatCode(() -> {
             LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
+            LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
+                    .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
         }).doesNotThrowAnyException();
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
+        LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
+                .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
+
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);
+        assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
+                .isEqualTo(automaticLotteryTicketsGroup.getLotteryTicketsNumbers().size());
     }
 
     @DisplayName("LotteryTicket 들의 번호 리스트를 추출해오는 테스트")

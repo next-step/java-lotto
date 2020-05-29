@@ -17,8 +17,8 @@ public class LotteryTicket {
         return new LotteryTicket(lotteryNumbers);
     }
 
-    public static LotteryTicket publishAutomatic() {
-        return new LotteryTicket(LotteryNumbersGenerator.generateAutomatic());
+    public static LotteryTicket publishAutomaticLotteryTicket() {
+        return new LotteryTicket(LotteryNumbersGenerator.generateAutomaticNumbers());
     }
 
     public List<Integer> getLotteryNumbers() {

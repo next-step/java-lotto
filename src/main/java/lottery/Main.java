@@ -1,18 +1,21 @@
 package lottery;
 
+import lottery.domain.LotteryStore;
+import lottery.domain.LotteryTicketsGroup;
 import lottery.domain.PurchasePrice;
 import lottery.view.InputView;
+import lottery.view.ResultView;
 
 public class Main {
 
     public static void main(String[] args) {
         PurchasePrice purchasePrice = PurchasePrice.from(InputView.getInputPurchasePrice());
-        /*
-        LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
-        ResultView.printLotteryTicketCounts(lotteryMachine);
+        LotteryStore lotteryStore = LotteryStore.getInstance();
+        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.sellLotteryTicketsGroup(purchasePrice);
 
-        LotteryTicketsGroup lotteryTicketsGroup = lotteryMachine.makeLotteryTicketsGroup();
-        ResultView.printLotteryTicketsNumbers(lotteryTicketsGroup);
+        ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
+
+        /*
 
         LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
         StatisticsBoard statisticsBoard = new StatisticsBoard(lotteryMachine

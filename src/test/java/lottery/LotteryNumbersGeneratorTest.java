@@ -14,7 +14,7 @@ public class LotteryNumbersGeneratorTest {
     @DisplayName("6개의 번호를 지닌 LotteryNumbers 리스트 반환 테스트")
     @Test
     public void generateLotteryNumbersAutomatic() {
-        List<LotteryNumber> lotteryNumbers = LotteryNumbersGenerator.generateAutomatic();
+        List<LotteryNumber> lotteryNumbers = LotteryNumbersGenerator.generateAutomaticNumbers();
 
         assertThat(lotteryNumbers.size()).isEqualTo(6);
     }
