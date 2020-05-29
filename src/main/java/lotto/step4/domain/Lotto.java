@@ -13,10 +13,12 @@ public class Lotto {
   public static final long PRICE = 1000L;
 
   private final SortedSet<LottoNumber> lottoNumbers;
+  private final boolean auto;
 
-  private Lotto (SortedSet<LottoNumber> lottoNumbers) {
-    validateCount(lottoNumbers);
+  private Lotto (SortedSet<LottoNumber> lottoNumbers, boolean auto) {
+    this.auto = auto;
     this.lottoNumbers = lottoNumbers;
+    validateCount();
   }
 
   public Stream<LottoNumber> stream () {
@@ -27,6 +29,10 @@ public class Lotto {
     return lottoNumbers.contains(number);
   }
 
+  public boolean isAuto () {
+    return auto;
+  }
+
   public long sameCount (Lotto lotto) {
     SortedSet<LottoNumber> temp = new TreeSet<>(lottoNumbers);
     temp.retainAll(lotto.lottoNumbers);
@@ -34,10 +40,14 @@ public class Lotto {
   }
 
   public static Lotto of (List<LottoNumber> lottoNumbers) {
-    return new Lotto(new TreeSet<>(lottoNumbers));
+    return new Lotto(new TreeSet<>(lottoNumbers), false);
   }
 
-  private static void validateCount (SortedSet<LottoNumber> lottoNumbers) throws RuntimeException {
+  public static Lotto ofDirect (List<LottoNumber> lottoNumbers) {
+    return new Lotto(new TreeSet<>(lottoNumbers), true);
+  }
+
+  private void validateCount () throws RuntimeException {
     if (lottoNumbers.size() != SIZE) {
       throw new LottoCountException();
     }
