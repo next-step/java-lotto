@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoStatisticUtil {
@@ -13,6 +14,10 @@ public class LottoStatisticUtil {
     }
 
     public static double getYield(Price totalPrice, Lotto winLotto, List<Lotto> lottoList) {
-        return 0.35f;
+        double prizeMoney = Arrays.stream(Prize.generateInRank()).map(prize ->
+                getPrizeCount(prize, winLotto, lottoList) * prize.getMoney()
+        ).reduce(Long::sum).orElse(0L);
+
+        return prizeMoney / totalPrice.getPrice();
     }
 }
