@@ -3,6 +3,8 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 public class Price {
+    public static final int LOTTO_PRICE = 1000;
+
     private final int price;
 
     public Price(int price) {
@@ -10,7 +12,15 @@ public class Price {
     }
 
     public int getPrice() {
-        return price;
+        return this.price;
+    }
+
+    public int getLottoCount() {
+        return this.price / LOTTO_PRICE;
+    }
+
+    public float calculateProfitRate(final int rankSum) {
+        return ((float) rankSum / this.price);
     }
 
     @Override
