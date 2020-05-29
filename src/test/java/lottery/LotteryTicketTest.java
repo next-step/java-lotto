@@ -9,28 +9,26 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LotteryTicketTest {
-/*
+
     private List<LotteryNumber> lotteryNumberList;
 
     @BeforeEach
     public void resetLotteryNumberList() {
         lotteryNumberList = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
-            lotteryNumberList.add(new LotteryNumber(i));
+            lotteryNumberList.add(LotteryNumber.from(i));
         }
     }
 
     @DisplayName("LotteryTicket 객체 정상 생성 테스트")
     @Test
     public void makeLotteryTicket() {
-        LotteryTicket lotteryTicket = new LotteryTicket(lotteryNumberList);
+        LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
         assertThat(lotteryTicket.getLotteryNumbers())
                 .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
@@ -42,7 +40,7 @@ public class LotteryTicketTest {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                   new LotteryTicket(lotteryNumberList);
+                    LotteryTicket.from(lotteryNumberList);
                 });
     }
 
@@ -50,11 +48,11 @@ public class LotteryTicketTest {
     @Test
     public void throwDuplicatedExceptionOnMakingLotteryTicket() {
         lotteryNumberList.remove(0);
-        lotteryNumberList.add(new LotteryNumber(2));
+        lotteryNumberList.add(LotteryNumber.from(2));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new LotteryTicket(lotteryNumberList);
+                    LotteryTicket.from(lotteryNumberList);
                 });
-    }*/
+    }
 }

@@ -8,9 +8,13 @@ public class LotteryTicket {
     public static final int LOTTERY_NUMBER_COUNTS = 6;
     private final List<LotteryNumber> lotteryNumbers;
 
-    public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
+    private LotteryTicket(List<LotteryNumber> lotteryNumbers) {
         validateLotteryNumbers(lotteryNumbers);
         this.lotteryNumbers = lotteryNumbers;
+    }
+
+    public static LotteryTicket from(List<LotteryNumber> lotteryNumbers) {
+        return new LotteryTicket(lotteryNumbers);
     }
 
     public List<Integer> getLotteryNumbers() {
@@ -33,9 +37,6 @@ public class LotteryTicket {
                 .map(LotteryNumber::getLotteryNumber)
                 .distinct()
                 .count();
-        if (lotteryNumbers.size() != filteredLotteryNumberCounts) {
-            return true;
-        }
-        return false;
+        return lotteryNumbers.size() != filteredLotteryNumberCounts;
     }
 }
