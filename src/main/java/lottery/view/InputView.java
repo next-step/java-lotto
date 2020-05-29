@@ -12,7 +12,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static long getPurchasePrice() {
+    public static long getInputPurchasePrice() {
         System.out.println(ViewMessages.INSTRUCTION_PURCHASE_PRICE);
         return Long.parseLong(scanner.nextLine());
     }

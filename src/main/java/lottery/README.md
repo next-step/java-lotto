@@ -1,12 +1,19 @@
 ## 구조
 
-* Domain
+### Domain
+
+* PurchasePrice
+    * 로또 구매 금액과 관련된 클래스
+    * 객체 생성시 입력받은 금액이 티켓 1장 가격(1000)보다 낮을 경우 예외 발생
+    * 해당 금액으로 구매할 수 있는 로또 티켓의 개수를 반환함
+
+
+    
     * LotteryMachine
     * LotteryNumber
     * LotteryTicket
     * LotteryTicketsGroup
     * LotteryRank (enum)
-    * PurchasePrice
     * StringParser
     * StatisticsBoard
     * RateOfReturn
@@ -18,8 +25,6 @@
     * ViewMessages
 
 * Main
-
-<br>
 
 ## 로또 기능 구현 목록
 

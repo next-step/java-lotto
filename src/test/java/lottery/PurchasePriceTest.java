@@ -26,7 +26,17 @@ public class PurchasePriceTest {
     public void throwExceptionOnMakingPurchasePriceObject(long userInput) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                   PurchasePrice.from(userInput);
+                    PurchasePrice.from(userInput);
                 });
+    }
+
+    @DisplayName("구입 가격으로 살 수 있는 티켓 개수 반환 테스트")
+    @ParameterizedTest
+    @ValueSource(longs = {1000, 2000, 3000, 4444})
+    public void getPurchasableLotteryTicketCounts(long userInput) {
+        PurchasePrice purchasePrice = PurchasePrice.from(userInput);
+
+        assertThat(purchasePrice.getPurchasableLotteryTicketCounts())
+                .isEqualTo(userInput / 1000);
     }
 }

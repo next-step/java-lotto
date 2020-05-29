@@ -1,14 +1,13 @@
 package lottery;
 
-import lottery.domain.*;
+import lottery.domain.PurchasePrice;
 import lottery.view.InputView;
-import lottery.view.ResultView;
 
 public class Main {
 
     public static void main(String[] args) {
+        PurchasePrice purchasePrice = PurchasePrice.from(InputView.getInputPurchasePrice());
         /*
-        PurchasePrice purchasePrice = new PurchasePrice(InputView.getPurchasePrice());
         LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
         ResultView.printLotteryTicketCounts(lotteryMachine);
 
@@ -21,7 +20,6 @@ public class Main {
         RateOfReturn rateOfReturn = new RateOfReturn(statisticsBoard.calculateRateOfReturn(purchasePrice));
         ResultView.printLotteryStatistics(statisticsBoard);
         ResultView.printRateOfReturn(rateOfReturn);
-
-         */
+*/
     }
 }
