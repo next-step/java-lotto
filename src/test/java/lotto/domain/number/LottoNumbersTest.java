@@ -11,10 +11,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @DisplayName("LottoNumbers 클래스 테스트")
 public class LottoNumbersTest {
-
     @DisplayName("NumberGenerator 타입을 주입 받아 LottoNumbers 객체를 생성할 수 있다.")
     @Test
     void createLottoNumbers() {
@@ -35,6 +33,17 @@ public class LottoNumbersTest {
         int matchCount = lottoNumbers.matchCount(winningNumbers);
 
         assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
+    }
+
+    @DisplayName("로또 번호를 포함하는지 확인할 수 있다.")
+    @Test
+    void contains() {
+        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoNumbers lottoNumbers = new LottoNumbers(new FixedNumberGenerator());
+
+        boolean contains = lottoNumbers.contains(lottoNumber);
+
+        assertThat(contains).isTrue();
     }
 
     private static class FixedNumberGenerator implements NumberGenerator {
