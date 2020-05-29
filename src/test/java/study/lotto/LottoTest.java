@@ -29,7 +29,7 @@ public class LottoTest {
     void compare_lotto_to_winning_numbers(String input) {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 5, 7, 9, 11));
 
-        String[] split = input.split(",| ");
+        String[] split = input.split(", ");
         List<Integer> winningNumbers = Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
 
         assertThat(lotto.compareToWinningNumbers(winningNumbers))

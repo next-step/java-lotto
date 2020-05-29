@@ -36,7 +36,7 @@ public class Lotto {
         return LOTTO_NUMBER_BASE.subList(0, 6);
     }
 
-    public int compareToWinningNumbers(List<Integer> winningNumbers) {
-        return 0;
+    public long compareToWinningNumbers(List<Integer> winningNumbers) {
+        return lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 }
