@@ -13,8 +13,12 @@ public class LotteryTicketsGroup {
     private static final int COUNT_ONE = 1;
     private final List<LotteryTicket> lotteryTickets;
 
-    public LotteryTicketsGroup(List<LotteryTicket> lotteryTickets) {
+    private LotteryTicketsGroup(List<LotteryTicket> lotteryTickets) {
         this.lotteryTickets = lotteryTickets;
+    }
+
+    public static LotteryTicketsGroup from(List<LotteryTicket> lotteryTickets) {
+        return new LotteryTicketsGroup(lotteryTickets);
     }
 
     public List<List<Integer>> getLotteryTicketsNumbers() {
@@ -38,13 +42,13 @@ public class LotteryTicketsGroup {
     }
 
     private int getMatchNumberCounts(LotteryTicket targetLotteryTicket, LotteryTicket lastWinnerTicket) {
-        return (int)targetLotteryTicket.getLotteryNumbers().stream()
+        return (int) targetLotteryTicket.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
     }
 
     private void updateWinnerTicketCountsByRankMap(Map<LotteryRank, Integer> winnerTicketCountsByRankMap,
-                                                    int matchNumberCounts) {
+                                                   int matchNumberCounts) {
         if (matchNumberCounts < MINIMUM_MATCH_NUMBER_COUNTS) {
             return;
         }
