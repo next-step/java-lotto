@@ -19,6 +19,8 @@ public class Lotto {
         Lotto lotto = new Lotto();
         lotto.lottoNumbers = lotto.generateLottoNumbers();
 
+        Collections.sort(lotto.getLottoNumbers());
+
         return lotto;
     }
 
