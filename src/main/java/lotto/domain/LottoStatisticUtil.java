@@ -11,4 +11,8 @@ public class LottoStatisticUtil {
         }
         return count;
     }
+
+    public static double getYield(Price totalPrice, Lotto winLotto, List<Lotto> lottoList) {
+        return 0.35f;
+    }
 }

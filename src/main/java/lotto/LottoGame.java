@@ -23,6 +23,6 @@ public class LottoGame {
         lottoList.forEach(resultView::printLotto);
 
         Lotto winLotto = inputView.insertWinLotto();
-        resultView.printStatistic(winLotto, lottoList);
+        resultView.printStatistic(price, winLotto, lottoList);
     }
 }

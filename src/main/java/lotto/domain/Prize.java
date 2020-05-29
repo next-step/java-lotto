@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Prize {
-    UNRANKED(0, 0),
-    COINCIDE_THREE(3, 5000),
-    COINCIDE_FOUR(4, 50000),
-    COINCIDE_FIVE(5, 1500000),
-    COINCIDE_SIX(6, 2000000000);
+    UNRANKED(0, 0L),
+    COINCIDE_THREE(3, 5000L),
+    COINCIDE_FOUR(4, 50000L),
+    COINCIDE_FIVE(5, 1500000L),
+    COINCIDE_SIX(6, 2000000000L);
 
     private final int number;
-    private final int money;
+    private final long money;
 
-    Prize(int number, int money) {
+    Prize(int number, long money) {
         this.number = number;
         this.money = money;
     }
@@ -22,7 +22,7 @@ public enum Prize {
         return number;
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 

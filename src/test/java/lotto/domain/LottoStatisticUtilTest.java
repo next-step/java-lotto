@@ -33,4 +33,21 @@ class LottoStatisticUtilTest {
                 Arguments.of(Prize.COINCIDE_FIVE, winLotto, lottoList, 1),
                 Arguments.of(Prize.COINCIDE_SIX, winLotto, lottoList, 2));
     }
+
+    @DisplayName("Prize 분포에 따른 수익률이 반환")
+    @ParameterizedTest
+    @MethodSource("source_getYield_shouldSucceed")
+    public void getYield_shouldSucceed(Price totalPrice, Lotto winLotto, List<Lotto> lottoList, double expected) {
+        double result = LottoStatisticUtil.getYield(totalPrice, winLotto, lottoList);
+        assertThat(Math.abs(result - expected) < 0.01).isEqualTo(true);
+    }
+
+    private static Stream<Arguments> source_getYield_shouldSucceed() {
+        Lotto winLotto = LottoFixtures.win();
+        List<Lotto> lottoList = Arrays.asList(LottoFixtures.unrank(), LottoFixtures.three(), LottoFixtures.three(),
+                LottoFixtures.four(), LottoFixtures.five(), LottoFixtures.six(), LottoFixtures.six());
+
+        return Stream.of(
+                Arguments.of(Price.of("7000"), winLotto, lottoList, 571651.4285714285f));
+    }
 }
