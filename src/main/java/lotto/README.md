@@ -24,7 +24,7 @@
 - Price: 금액(가격)
     - [ ] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
     
-- LottoSeller: 로또 판매자 
+- LottoSeller: 로또 판매자
     - [ ] LottoSeller는 구매자가 지불한 Price만큼 LottoTicketGenerator를 통하여 LottoTicket을 발급할 수 있다.
     
 - LottoTicketGenerator: 로또 발급 기계
@@ -37,7 +37,8 @@
     - [X] 로또 1장은 LottoNumber 6개를 갖는다.
 
 - LottoTicket: 로또 티켓(묶음) 
-    - [ ] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
+    - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
+    - [X] 입력받은 갯수 만큼 LottoTicket을 생성할 수 있다.
     - [ ] WinningNumbers와 일치하는 갯수를 반환한다. 
 
 - NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
