@@ -13,10 +13,27 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
-    @DisplayName("로또 번호 생성 테스트")
+    @DisplayName("로또 번호 생성 테스트 - 성공")
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 3, 5, 7, 23, 45 })
+    void create_lotto_number_with_proper_values(int value) {
+        assertThat(new LottoNumber(value))
+                .isInstanceOf(LottoNumber.class);
+    }
+
+    @DisplayName("로또 번호 생성 테스트 - 실패")
+    @ParameterizedTest
+    @ValueSource(ints = { -1, 0, 46, 80 })
+    void create_lotto_number_with_improper_values(int value) {
+        assertThatThrownBy(() -> new LottoNumber(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 생성 테스트")
     @Test
     void generate_lotto() {
         Lotto lotto = Lotto.generate();
