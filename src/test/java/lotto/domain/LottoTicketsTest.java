@@ -36,7 +36,7 @@ class LottoTicketsTest {
 
     private WinningTicket createWinningTicket() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
         return new WinningTicket(winningLottoTicket, LottoNumber.of(7));

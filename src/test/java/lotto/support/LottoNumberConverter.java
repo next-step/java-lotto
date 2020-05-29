@@ -9,7 +9,7 @@ public class LottoNumberConverter {
 
     public static List<LottoNumber> of(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

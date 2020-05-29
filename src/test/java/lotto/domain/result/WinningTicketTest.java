@@ -17,7 +17,7 @@ class WinningTicketTest {
     @Test
     void generate() {
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        LottoNumber bonusNumber = new LottoNumber(6);
+        LottoNumber bonusNumber = LottoNumber.of(6);
 
         assertThatThrownBy(() -> new WinningTicket(winningLottoTicket, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)

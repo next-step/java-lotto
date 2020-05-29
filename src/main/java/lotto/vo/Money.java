@@ -7,7 +7,7 @@ public class Money {
     private static final Map<Long, Money> CACHE = new HashMap<>();
     private final long value;
 
-    public Money(final long value) {
+    private Money(final long value) {
         this.value = value;
     }
 

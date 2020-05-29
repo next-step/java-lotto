@@ -11,7 +11,7 @@ public class LottoNumber {
     private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
     private final int value;
 
-    public LottoNumber(final int value) {
+    private LottoNumber(final int value) {
         validate(value);
         this.value = value;
     }
@@ -24,10 +24,6 @@ public class LottoNumber {
         if (value < LOTTO_NUMBER_BEGIN_BOUND || value > LOTTO_NUMBER_END_BOUND) {
             throw new IllegalArgumentException("로또 숫자는 1과 45사이여아 합니다.");
         }
-    }
-
-    public int getValue() {
-        return value;
     }
 
     @Override
