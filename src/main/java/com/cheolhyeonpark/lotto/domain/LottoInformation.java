@@ -25,4 +25,10 @@ public class LottoInformation {
     public List<LottoNumbers> getLottoNumbersList() {
         return lottoNumbersList;
     }
+
+    public GameResult getGameResult(List<Integer> winningNumbers) {
+        GameResult gameResult = new GameResult();
+        lottoNumbersList.stream().map(lottoNumbers -> lottoNumbers.getRank(winningNumbers)).forEach(gameResult::count);
+        return gameResult;
+    }
 }

@@ -23,4 +23,8 @@ public class LottoManager {
     public List<LottoNumbers> getLottoNumbersList() {
         return lottoInformation.getLottoNumbersList();
     }
+
+    public GameResult getGameResult(List<Integer> winningNumbers) {
+        return lottoInformation.getGameResult(winningNumbers);
+    }
 }
