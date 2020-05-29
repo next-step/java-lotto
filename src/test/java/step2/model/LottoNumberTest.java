@@ -2,7 +2,6 @@ package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.model.LottoNumber;
 
 import java.util.stream.IntStream;
 
@@ -23,11 +22,11 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 범위를 벗어나면 예외가 발생한다")
     @Test
     void valueOf_InvalidNumber_ExceptionThrown() {
-        assertThatThrownBy(() ->  LottoNumber.valueOf(0))
+        assertThatThrownBy(() -> LottoNumber.valueOf(0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호가 올바르지 않습니다.");
 
-        assertThatThrownBy(() ->  LottoNumber.valueOf(46))
+        assertThatThrownBy(() -> LottoNumber.valueOf(46))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호가 올바르지 않습니다.");
     }

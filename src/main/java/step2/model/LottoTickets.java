@@ -24,4 +24,23 @@ public class LottoTickets {
     public int getCount() {
         return this.lottoTickets.size();
     }
+
+    public LottoRankCount getLottoRankCount(List<Integer> winningNumbers) {
+        LottoRankCount lottoRankCount = LottoRankCount.newInstance();
+
+        this.lottoTickets.forEach(lottoTicket -> {
+            int matchCount = lottoTicket.getMatchCount(winningNumbers);
+            lottoRankCount.plusCount(LottoRank.findRank(matchCount));
+        });
+
+        return lottoRankCount;
+    }
+
+    public int getTotalWinningMoney(List<Integer> winningNumbers) {
+        return this.lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.getMatchCount(winningNumbers))
+                .map(LottoRank::findRank)
+                .map(LottoRank::getWinningMoney)
+                .reduce(0, Integer::sum);
+    }
 }

@@ -19,7 +19,9 @@ public class InputView {
 
     public static int getUseAmount() {
         System.out.println(USE_AMOUNT_QUESTION);
-        return scanner.nextInt();
+        int useAmount = scanner.nextInt();
+        scanner.nextLine();
+        return useAmount;
     }
 
     public static List<Integer> getWinningNumbers() {

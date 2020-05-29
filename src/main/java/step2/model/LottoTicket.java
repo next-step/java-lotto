@@ -30,4 +30,11 @@ public class LottoTicket {
                 .map(LottoNumber::get)
                 .collect(Collectors.toList());
     }
+
+    public int getMatchCount(List<Integer> winningNumbers) {
+        return Math.toIntExact(this.lottoNumbers.stream()
+                .map(LottoNumber::get)
+                .filter(winningNumbers::contains)
+                .count());
+    }
 }

@@ -6,19 +6,32 @@ import java.util.Objects;
 
 public class Money {
 
-    private int amount;
+    private int totalAmount;
+    private int usedAmount;
 
-    private Money(int amount) {
-        this.amount = amount;
+    private Money(int totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public static Money valueOf(int amount) {
-        return new Money(amount);
+    public static Money valueOf(int totalAmount) {
+        return new Money(totalAmount);
     }
 
     public void useAmount(Priceable priceable) {
         validateUseAmount(priceable);
-        this.amount -= priceable.getPrice();
+        this.usedAmount += priceable.getPrice();
+    }
+
+    public boolean isAvailableAmount(Priceable priceable) {
+        return (this.usedAmount + priceable.getPrice()) <= this.totalAmount;
+    }
+
+    public int getRemainingAmount() {
+        return totalAmount - usedAmount;
+    }
+
+    public int getUsedAmount() {
+        return this.usedAmount;
     }
 
     private void validateUseAmount(Priceable priceable) {
@@ -27,20 +40,16 @@ public class Money {
         }
     }
 
-    public boolean isAvailableAmount(Priceable priceable) {
-        return priceable.getPrice() <= this.amount;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return amount == money.amount;
+        return getRemainingAmount() == money.getRemainingAmount();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(this.getRemainingAmount());
     }
 }

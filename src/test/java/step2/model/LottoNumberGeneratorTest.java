@@ -13,7 +13,7 @@ public class LottoNumberGeneratorTest {
 
     @DisplayName("로또 번호 6개를 리스트로 반환한다")
     @Test
-    void generate_void_LottoNumbers() {
+    void generate__LottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate();
 
         lottoNumbers.stream()
