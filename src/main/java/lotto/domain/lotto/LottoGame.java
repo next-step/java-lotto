@@ -1,18 +1,22 @@
 package lotto.domain.lotto;
 
 import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningStatistics;
+
+import java.util.Map;
 
 public class LottoGame {
 
+    private final Price price;
     private final LottoTicket lottoTicket;
-    private final WinningNumbers winningNumbers;
 
-    public LottoGame(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+    public LottoGame(Price price, LottoTicket lottoTicket) {
+        this.price = price;
         this.lottoTicket = lottoTicket;
-        this.winningNumbers = winningNumbers;
     }
 
-    public void execute() {
-        this.lottoTicket.match(this.winningNumbers);
+    public WinningStatistics execute(WinningNumbers winningNumbers) {
+        Map<LottoRank, Long> lottoRank = this.lottoTicket.matchWinningNumber(winningNumbers);
+        return new WinningStatistics(this.price, lottoRank);
     }
 }
