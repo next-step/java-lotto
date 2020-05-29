@@ -2,6 +2,7 @@ package lottery.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LotteryTicket {
@@ -10,7 +11,8 @@ public class LotteryTicket {
     private final List<LotteryNumber> lotteryNumbers;
 
     private LotteryTicket(List<LotteryNumber> lotteryNumbers) {
-        validateLotteryNumbers(lotteryNumbers);
+        validateLotteryNumberCounts(lotteryNumbers);
+        validateLotteryNumbersDuplication(lotteryNumbers);
         this.lotteryNumbers = lotteryNumbers;
     }
 
@@ -36,20 +38,26 @@ public class LotteryTicket {
                 .collect(Collectors.toList());
     }
 
-    private void validateLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket) {
+        long matchNumberCounts = this.getLotteryNumbers().stream()
+                .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
+                .count();
+        return LotteryRank.valueOf((int) matchNumberCounts);
+    }
+
+    private void validateLotteryNumberCounts(List<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != LOTTERY_NUMBER_COUNTS) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_COUNTS);
         }
-        if (isDuplicatedLotteryNumbers(lotteryNumbers)) {
-            throw new IllegalArgumentException(ErrorMessages.DUPLICATED_NUMBER);
-        }
     }
 
-    private boolean isDuplicatedLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+    private void validateLotteryNumbersDuplication(List<LotteryNumber> lotteryNumbers) {
         long filteredLotteryNumberCounts = lotteryNumbers.stream()
                 .map(LotteryNumber::getLotteryNumber)
                 .distinct()
                 .count();
-        return lotteryNumbers.size() != filteredLotteryNumberCounts;
+        if (lotteryNumbers.size() != filteredLotteryNumberCounts) {
+            throw new IllegalArgumentException(ErrorMessages.DUPLICATED_NUMBER);
+        }
     }
 }

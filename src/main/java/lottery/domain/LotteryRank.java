@@ -6,7 +6,8 @@ public enum LotteryRank {
     FIRST_PRIZE(6, 2_000_000_000),
     SECOND_PRIZE(5, 1_500_000),
     THIRD_PRIZE(4, 50_000),
-    FOURTH_PRIZE(3,5_000);
+    FOURTH_PRIZE(3, 5_000),
+    MISS(0, 0);
 
     private final int matchNumberCounts;
     private final long prizeMoney;
@@ -17,6 +18,9 @@ public enum LotteryRank {
     }
 
     public static LotteryRank valueOf(int matchNumberCounts) {
+        if (matchNumberCounts < FOURTH_PRIZE.getMatchNumberCounts()) {
+            return MISS;
+        }
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.getMatchNumberCounts() == matchNumberCounts)
                 .findAny()
@@ -24,10 +28,12 @@ public enum LotteryRank {
     }
 
     public double calculatePrizeMoneySum(int winnerTicketCounts) {
-        return (double)prizeMoney * winnerTicketCounts;
+        return (double) prizeMoney * winnerTicketCounts;
     }
 
-    public long getPrizeMoney() { return prizeMoney; }
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
 
     public int getMatchNumberCounts() {
         return matchNumberCounts;

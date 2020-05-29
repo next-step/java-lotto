@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         PurchasePrice purchasePrice = PurchasePrice.from(InputView.getInputPurchasePrice());
         LotteryStore lotteryStore = LotteryStore.getInstance();
-        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.sellLotteryTicketsGroup(purchasePrice);
+        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.publishLotteryTicketsGroup(purchasePrice);
 
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 

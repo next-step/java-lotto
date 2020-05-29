@@ -1,6 +1,7 @@
 package lottery;
 
 import lottery.domain.LotteryNumber;
+import lottery.domain.LotteryRank;
 import lottery.domain.LotteryTicket;
 import lottery.view.ViewMessages;
 import org.junit.jupiter.api.BeforeEach;
@@ -73,5 +74,15 @@ public class LotteryTicketTest {
                 .isThrownBy(() -> {
                     LotteryTicket.from(lotteryNumberList);
                 });
+    }
+
+    @DisplayName("맞춘 로또 개수에 따라 그에 맞는 LotteryRank 반환")
+    @Test
+    public void getMatchLotteryRank() {
+        LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
+        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
+
+        assertThat(lotteryTicket.getMatchLotteryRank(winnerTicket))
+                .isEqualTo(LotteryRank.FIRST_PRIZE);
     }
 }

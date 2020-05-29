@@ -4,37 +4,15 @@ import java.util.Map;
 
 public class LotteryGame {
 
-
-/*    public LotteryTicketsGroup makeLotteryTicketsGroup() {
-        return new LotteryTicketsGroup(
-                Stream.generate(this::makeLotteryTicket)
-                        .limit(lotteryTicketCounts)
-                        .collect(Collectors.toList())
-        );
-    }*/
-
-    public Map<LotteryRank, Integer> findWinnerTicketCountsByRankMap(LotteryTicketsGroup lotteryTicketsGroup,
-                                                                     LotteryTicket lastWinnerTicket) {
-        return lotteryTicketsGroup.findWinnerTicketCountsByRankMap(lastWinnerTicket);
+    private LotteryGame() {
     }
 
-    /*private LotteryTicket makeLotteryTicket() {
-        Collections.shuffle(LOTTERY_NUMBERS_LIST);
-        List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
-        Collections.sort(pickedLotteryNumbers);
-        return new LotteryTicket(
-                pickedLotteryNumbers.stream()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList())
-        );
-    }*/
-/*
-    private void validatePurchasePrice(PurchasePrice purchasePrice) {
-        if (purchasePrice.getPurchasePrice() < LOTTERY_TICKET_PRICE)
-            throw new IllegalArgumentException(ErrorMessages.PURCHASE_PRICE_NOT_ENOUGH);
+    public static LotteryGame getInstance() {
+        return new LotteryGame();
     }
 
-    public int getLotteryTicketCounts() {
-        return lotteryTicketCounts;
-    }*/
+    public Map<LotteryRank, Integer> drawLottery(LotteryTicketsGroup lotteryTicketsGroup,
+                                                 LotteryTicket lastWinnerTicket) {
+        return lotteryTicketsGroup.findWinnerTicketCountsByRank(lastWinnerTicket);
+    }
 }
