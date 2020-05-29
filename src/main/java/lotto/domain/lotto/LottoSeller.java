@@ -9,7 +9,7 @@ public class LottoSeller {
         this.generator = generator;
     }
 
-    public LottoTicket buy(int price) {
-        return new LottoTicket(new Price(price).getLottoCount(), this.generator);
+    public LottoTicket buy(Price price) {
+        return new LottoTicket(price.getLottoCount(), this.generator);
     }
 }

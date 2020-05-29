@@ -56,9 +56,9 @@
     - [X] 지불 Price 대비 수익률을 확인할 수 있다.
 
 - InputView
-    - [ ] 구입 Price를 입력 받을 수 있다.
-    - [ ] WinningNumbers를 입력 받을 수 있다.
+    - [X] 구입 Price를 입력 받을 수 있다.
+    - [X] WinningNumbers를 입력 받을 수 있다.
     
 - OutPutView
-    - [ ] 로또 구매 갯수와 LottoTicket을 출력할 수 있다.
-    - [ ] WinningStatistics를 출력할 수 있다.
+    - [X] 로또 구매 갯수와 LottoTicket을 출력할 수 있다.
+    - [X] WinningStatistics를 출력할 수 있다.
