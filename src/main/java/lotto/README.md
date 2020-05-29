@@ -25,10 +25,7 @@
     - [ ] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
     
 - LottoSeller: 로또 판매자
-    - [ ] LottoSeller는 구매자가 지불한 Price만큼 LottoTicketGenerator를 통하여 LottoTicket을 발급할 수 있다.
-    
-- LottoTicketGenerator: 로또 발급 기계
-    - [ ] LottoSeller로 부터 전달 받은 갯수만큼 LottoTicket을 발급할 수 있다.
+    - [X] LottoSeller는 구매자가 지불한 Price만큼 LottoNumbers를 가진 LottoTicket을 발급할 수 있다.
 
 - LottoNumber: 로또 개별 번호
     - [X] 로또 번호 하나는 1~45 사이의 값을 갖는다.
