@@ -7,11 +7,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public final static int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
+    // TODO 정적 팩토리 메소드
     public LottoNumbers(NumberGenerator generator) {
         this.numbers = createLottoNumbers(generator);
+    }
+
+    public LottoNumbers(List<Integer> numbers) {
+        this.numbers = createLottoNumbersThroughInteger(numbers);
+    }
+
+    private List<LottoNumber> createLottoNumbersThroughInteger(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private List<LottoNumber> createLottoNumbers(NumberGenerator generator) {

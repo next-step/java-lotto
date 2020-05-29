@@ -22,7 +22,7 @@
 ### Lotto
 
 - Price: 금액(가격)
-    - [ ] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
+    - [X] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
     
 - LottoSeller: 로또 판매자
     - [X] LottoSeller는 구매자가 지불한 Price만큼 LottoNumbers를 가진 LottoTicket을 발급할 수 있다.
@@ -42,7 +42,7 @@
     - [x]  1~45 사이의 무작위 값으로 구성된 6개의 숫자를 생성한다.
 
 - WinningNumbers: 지난 주 당첨 번호
-    - [ ] 지난 주 당첨 LottoNumbers를 갖는다.
+    - [X] 지난 주 당첨 LottoNumbers를 갖는다.
 
 - LottoGame: 로또 게임 실행기
     - [ ] LottoTicket, WinningNumbers를 전달받아 로또 게임을 진행한다.
