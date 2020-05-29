@@ -12,7 +12,6 @@ public class ViewMessages {
     public static final String RESULT_SENTENCE_SUFFIX = "입니다.";
     public static final String RESULT_SURPLUS = "(기준이 1이기 때문에 결과적으로 이득입니다.)";
     public static final String RESULT_LOSS = "(기준이 1이기 때문에 결과적으로 손해입니다.)";
-    public static final String RESULT_EQUALITY = "(기준이 1이기 때문에 결과적으로 손해도 이득도 아닙니다.)";
     public static final String COMMA = ", ";
     public static final String LEFT_BRACKET = "[";
     public static final String RIGHT_BRACKET = "]";

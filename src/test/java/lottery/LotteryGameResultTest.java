@@ -28,7 +28,7 @@ public class LotteryGameResultTest {
     @DisplayName("우승 티켓 목록을 받으면 각 등수별 당첨자 수를 저장한 Map을 반환함")
     @Test
     public void getLotteryGameResult() {
-        LotteryGameResult lotteryGameResult = lotteryGame.drawLottery(winnerTicketsGroup, lastWinnerTicket);
+        LotteryGameResult lotteryGameResult = lotteryGame.drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket);
 
         assertThat(lotteryGameResult.findWinnerTicketCountsByRank(LotteryRank.FIRST_PRIZE))
                 .isEqualTo(1);
@@ -40,7 +40,7 @@ public class LotteryGameResultTest {
     @Test
     public void getReturnOfRate() {
         PurchasePrice purchasePrice = PurchasePrice.from(LotteryRank.FIRST_PRIZE.getPrizeMoney());
-        LotteryGameResult lotteryGameResult = lotteryGame.drawLottery(winnerTicketsGroup, lastWinnerTicket);
+        LotteryGameResult lotteryGameResult = lotteryGame.drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket);
 
         RateOfReturn returnOfRate = lotteryGameResult.calculateRateOfReturn(purchasePrice);
         double totalRevenue = LotteryRank.FIRST_PRIZE.getPrizeMoney() + LotteryRank.FOURTH_PRIZE.getPrizeMoney();

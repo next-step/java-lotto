@@ -3,7 +3,6 @@ package lottery.domain;
 public class RateOfReturn {
 
     private static final double MINIMUM_SURPLUS_LIMIT = 1.0;
-
     private final double rateOfReturn;
 
     private RateOfReturn(double rateOfReturn) {
