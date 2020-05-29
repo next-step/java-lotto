@@ -13,7 +13,7 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     private final List<Integer> numbers;
 
-    LottoNumberGenerator() {
+    public LottoNumberGenerator() {
         this.numbers = createNumbers();
     }
 
@@ -31,7 +31,7 @@ public class LottoNumberGenerator implements NumberGenerator {
     public List<Integer> getNumbers() {
         Collections.shuffle(this.numbers);
 
-        return numbers.subList(0, 5)
+        return numbers.subList(0, 6)
                 .stream()
                 .sorted()
                 .collect(toList());
