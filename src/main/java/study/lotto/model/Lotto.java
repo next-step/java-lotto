@@ -5,17 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private static final List<Integer> LOTTO_NUMBER_BASE = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     static {
         for(int i=1; i<46; i++) {
-            LOTTO_NUMBER_BASE.add(i);
+            LOTTO_NUMBER_BASE.add(new LottoNumber(i));
         }
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -26,17 +26,17 @@ public class Lotto {
         return lotto;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    private static List<Integer> generateLottoNumbers() {
+    private static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_BASE);
 
         return LOTTO_NUMBER_BASE.subList(0, 6);
     }
 
-    public long compareToWinningNumbers(List<Integer> winningNumbers) {
+    public long compareToWinningNumbers(List<LottoNumber> winningNumbers) {
         return lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 }
