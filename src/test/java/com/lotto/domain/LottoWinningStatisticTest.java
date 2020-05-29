@@ -23,12 +23,14 @@ public class LottoWinningStatisticTest {
     void calculateLottoWinningStaticsTest(
             final List<Lotto> extractedLotto,
             final LottoWinningNumbers lottoWinningNumbers,
-            final Map<LottoWinningType, Integer> expected) {
+            final Map<LottoWinningType, Integer> expected,
+            final Integer bonusBallNumber
+    ) {
 
         LottoWinningStatistic lottoWinningStatistic = new LottoWinningStatistic();
 
         for (Lotto lotto : extractedLotto) {
-            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers, new LottoBonusBall(0));
+            lottoWinningStatistic.calculateLottoWinningStatics(lotto, lottoWinningNumbers, new LottoBonusBall(bonusBallNumber));
         }
         Map<LottoWinningType, Integer> result = lottoWinningStatistic.getLottoWinningList();
         assertEquals(result, expected);
@@ -36,10 +38,11 @@ public class LottoWinningStatisticTest {
 
     private static Stream<Arguments> provideExtractedAndWinningLottoNumbers() {
         return Stream.of(
-                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 5, 6"), expectedValue1()),
-                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 4, 6, 8, 10, 19"), expectedValue2()),
-                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 11, 13"), expectedValue3()),
-                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 6, 8, 11, 13, 18"), expectedValue4())
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 5, 6"), expectedValue1(), 0),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 4, 6, 8, 10, 19"), expectedValue2(), 0),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("1, 2, 3, 4, 11, 13"), expectedValue3(), 0),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("2, 6, 8, 11, 13, 18"), expectedValue4(), 0),
+                Arguments.of(provideExtractedLotto(), LottoWinningNumbers.manipulateInputWinningLottoNumbers("3, 5, 7, 9, 11, 18"), expectedValue5(), 13)
         );
     }
 
@@ -98,6 +101,17 @@ public class LottoWinningStatisticTest {
         expected.put(LottoWinningType.SECOND_CLASS, 0);
         expected.put(LottoWinningType.THIRD_CLASS, 0);
         expected.put(LottoWinningType.FORTH_CLASS, 1);
+
+        return expected;
+    }
+
+    private static Map<LottoWinningType, Integer> expectedValue5() {
+        Map<LottoWinningType, Integer> expected = new TreeMap<>();
+        expected.put(LottoWinningType.FIRST_CLASS, 0);
+        expected.put(LottoWinningType.BONUS_BALL_CLASS, 1);
+        expected.put(LottoWinningType.SECOND_CLASS, 0);
+        expected.put(LottoWinningType.THIRD_CLASS, 0);
+        expected.put(LottoWinningType.FORTH_CLASS, 0);
 
         return expected;
     }
