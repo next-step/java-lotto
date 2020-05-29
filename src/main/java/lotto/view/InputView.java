@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -13,6 +14,8 @@ public class InputView {
     private static final String WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final String MANUAL_TICKET_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_TICKET_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -26,25 +29,46 @@ public class InputView {
     public static List<LottoNumber> inputWinningNumbers() {
         String winningNumbers = inputString(WINNING_NUMBERS_MESSAGE);
 
-        return Arrays.stream(winningNumbers.split(LOTTO_NUMBER_DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        return convertToLottoNumbers(winningNumbers);
     }
 
     public static int inputBonusNumber() {
         return inputInt(BONUS_NUMBER_MESSAGE);
     }
 
+    public static int inputManualTicketsCount() {
+        System.out.println();
+
+        return inputInt(MANUAL_TICKET_COUNT_MESSAGE);
+    }
+
+    public static List<List<LottoNumber>> inputManualTickets(final int manualTicketsCount) {
+        System.out.println();
+        System.out.println(MANUAL_TICKET_NUMBERS_MESSAGE);
+
+        return Stream.generate(() -> convertToLottoNumbers(SCANNER.nextLine()))
+                .limit(manualTicketsCount)
+                .collect(Collectors.toList());
+    }
+
     private static String inputString(final String message) {
         System.out.println();
         System.out.println(message);
+
         return SCANNER.nextLine();
     }
 
     private static int inputInt(final String message) {
         System.out.println(message);
+
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(final String input) {
+        return Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }

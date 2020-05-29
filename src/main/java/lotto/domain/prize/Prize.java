@@ -28,7 +28,7 @@ public enum Prize {
     }
 
     public static Prize of(final int matchedNumbersCount, final boolean matchBonus) {
-        validateMatchedNumbersCount(matchedNumbersCount);
+        verifyMatchedNumbersCountRange(matchedNumbersCount);
 
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.operate(matchedNumbersCount, matchBonus))
@@ -36,7 +36,7 @@ public enum Prize {
                 .orElse(MISS);
     }
 
-    private static void validateMatchedNumbersCount(final int matchedNumbersCount) {
+    private static void verifyMatchedNumbersCountRange(final int matchedNumbersCount) {
         if (matchedNumbersCount < MIN_MATCHED_COUNT || matchedNumbersCount > MAX_MATCHED_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.RANGE_OF_PRIZE_COUNT);
         }

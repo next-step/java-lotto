@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.prize.Prize;
 import lotto.util.LottoTicketGenerator;
+import lotto.util.LottoTicketsGenerator;
 import lotto.util.WinningLottoTicketGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,9 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -67,5 +66,20 @@ public class LottoTicketsTest {
                 Arguments.of(Prize.FIFTH, 2L),
                 Arguments.of(Prize.MISS, 1L)
         );
+    }
+
+    @DisplayName("LottoTicket 의 개수 반환")
+    @Test
+    void count() {
+        assertThat(LottoTickets.of(tickets).count()).isEqualTo(tickets.size());
+    }
+
+    @DisplayName("인자로 입력받은 LottoTickets 를 이어 붙인 LottoTickets 반환")
+    @Test
+    void merge() {
+        LottoTickets originTickets = LottoTicketsGenerator.valueOf(1, 2, 3, 4, 5, 6);
+
+        assertThat(originTickets.merged(LottoTickets.of(tickets)).count())
+                .isEqualTo(6);
     }
 }

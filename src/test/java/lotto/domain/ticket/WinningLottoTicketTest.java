@@ -22,7 +22,7 @@ public class WinningLottoTicketTest {
     @DisplayName("WinningLottoTicket 생성")
     @Test
     void create() {
-        final List<LottoNumber> numbers = LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+        final List<LottoNumber> numbers = LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6);
         assertThatCode(() -> WinningLottoTicket.valueOf(numbers, 7))
                 .doesNotThrowAnyException();
     }
@@ -37,8 +37,8 @@ public class WinningLottoTicketTest {
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5)),
-                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5)),
+                Arguments.of(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6, 7))
         );
     }
 
@@ -64,7 +64,7 @@ public class WinningLottoTicketTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2 })
     void duplicatedBonusNumber(final int bonusNumber) {
-        final List<LottoNumber> numbers = LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+        final List<LottoNumber> numbers = LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6);
 
         assertThatIllegalArgumentException().isThrownBy(() ->
                 WinningLottoTicket.valueOf(numbers, bonusNumber));

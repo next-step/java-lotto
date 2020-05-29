@@ -30,7 +30,7 @@ public class LottoNumbersTest {
     @DisplayName("LottoNumbers 생성")
     @Test
     void create() {
-        assertThatCode(() -> LottoNumbers.manualCreate(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> LottoNumbers.manualCreate(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6)))
                 .doesNotThrowAnyException();
         assertThatCode(LottoNumbers::autoCreate)
                 .doesNotThrowAnyException();
@@ -45,8 +45,8 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5)),
-                Arguments.of(LottoNumbersGenerator.convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5)),
+                Arguments.of(LottoNumbersGenerator.toLottoNumberList(1, 2, 3, 4, 5, 6, 7))
         );
     }
 

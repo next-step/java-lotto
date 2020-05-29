@@ -11,8 +11,8 @@ public class Price {
     private final int price;
 
     private Price(final int price) {
-        validateNegative(price);
-        validateAvailablePrice(price);
+        verifyNegative(price);
+        verifyAvailablePrice(price);
         this.price = price;
     }
 
@@ -20,13 +20,13 @@ public class Price {
         return new Price(price);
     }
 
-    private void validateNegative(final int price) {
+    private void verifyNegative(final int price) {
         if (price < MIN_PRICE) {
             throw new NegativeNumberException(price);
         }
     }
 
-    private void validateAvailablePrice(final int price) {
+    private void verifyAvailablePrice(final int price) {
         if (price < ONE_TICKET_PRICE) {
             throw new IllegalArgumentException(String.format(ErrorMessage.REQUIRED_MIN_PRICE, MIN_PRICE));
         }
@@ -36,7 +36,11 @@ public class Price {
         return ((float) totalPrizes / price);
     }
 
-    public int ticketCount() {
+    public int getTicketCount() {
         return price / ONE_TICKET_PRICE;
+    }
+
+    public boolean isExceedCount(final int ticketCount) {
+        return this.getTicketCount() < ticketCount;
     }
 }

@@ -35,16 +35,10 @@ public class LottoNumbers {
         if ((numbers == null) || (numbers.size() != LOTTO_NUMBER_SIZE)) {
             throw new IllegalArgumentException(String.format(ErrorMessage.REQUIRED_SIZE_OF_LOTTO_NUMBERS, LOTTO_NUMBER_SIZE));
         }
-        checkDuplication(numbers);
+        verifyDuplication(numbers);
     }
 
-    private static void validateNumbers(final String numbers) {
-        if (numbers == null || numbers.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
-        }
-    }
-
-    private void checkDuplication(final List<LottoNumber> numbers) {
+    private void verifyDuplication(final List<LottoNumber> numbers) {
         Set<LottoNumber> numbersOfNotDuplicated = new HashSet<>(numbers);
 
         if (numbersOfNotDuplicated.size() < LOTTO_NUMBER_SIZE) {

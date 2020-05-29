@@ -40,7 +40,7 @@ public class PriceTest {
     @ParameterizedTest
     @MethodSource
     void ticketCount(final int price, final int expected) {
-        assertThat(Price.of(price).ticketCount()).isEqualTo(expected);
+        assertThat(Price.of(price).getTicketCount()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> ticketCount() {
@@ -48,6 +48,21 @@ public class PriceTest {
                 Arguments.of(Price.ONE_TICKET_PRICE, 1),
                 Arguments.of(Price.ONE_TICKET_PRICE * 14, 14),
                 Arguments.of(Price.ONE_TICKET_PRICE * 14 + 100, 14)
+        );
+    }
+
+    @DisplayName("구매 가능한 개수인지 확인")
+    @ParameterizedTest
+    @MethodSource
+    void isExceedCount(final Price price, final int ticketCount, final boolean expected) {
+        assertThat(price.isExceedCount(ticketCount))
+                .isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> isExceedCount() {
+        return Stream.of(
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), 1, false),
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 2), 5, true)
         );
     }
 }

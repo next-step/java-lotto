@@ -12,6 +12,8 @@ public class WinningLottoTicket {
     private final LottoNumber bonusNumber;
 
     private WinningLottoTicket(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
+        verifyDuplication(lottoNumbers, bonusNumber);
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -19,12 +21,11 @@ public class WinningLottoTicket {
     public static WinningLottoTicket valueOf(final List<LottoNumber> winningNumbers, final int bonusNumber) {
         LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
-        validateDuplication(lottoNumbers, bonusLottoNumber);
 
         return new WinningLottoTicket(lottoNumbers, bonusLottoNumber);
     }
 
-    private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusLottoNumber) {
+    private static void verifyDuplication(LottoNumbers lottoNumbers, LottoNumber bonusLottoNumber) {
         if (lottoNumbers.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
         }
