@@ -1,6 +1,6 @@
 package lottery;
 
-public class LotteryGameMachineTest {
+public class LotteryGameTest {
 /*
     @DisplayName("LotteryMachine 객체 정상 생성 테스트")
     @ParameterizedTest

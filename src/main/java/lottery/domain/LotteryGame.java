@@ -2,15 +2,8 @@ package lottery.domain;
 
 import java.util.Map;
 
-public class LotteryGameMachine {
+public class LotteryGame {
 
-    private static final long LOTTERY_TICKET_PRICE = 1000;
-    private final int lotteryTicketCounts;
-
-    public LotteryGameMachine(PurchasePrice purchasePrice) {
-        validatePurchasePrice(purchasePrice);
-        this.lotteryTicketCounts = (int) (purchasePrice.getPurchasePrice() / LOTTERY_TICKET_PRICE);
-    }
 
 /*    public LotteryTicketsGroup makeLotteryTicketsGroup() {
         return new LotteryTicketsGroup(
@@ -35,7 +28,7 @@ public class LotteryGameMachine {
                 .collect(Collectors.toList())
         );
     }*/
-
+/*
     private void validatePurchasePrice(PurchasePrice purchasePrice) {
         if (purchasePrice.getPurchasePrice() < LOTTERY_TICKET_PRICE)
             throw new IllegalArgumentException(ErrorMessages.PURCHASE_PRICE_NOT_ENOUGH);
@@ -43,5 +36,5 @@ public class LotteryGameMachine {
 
     public int getLotteryTicketCounts() {
         return lotteryTicketCounts;
-    }
+    }*/
 }

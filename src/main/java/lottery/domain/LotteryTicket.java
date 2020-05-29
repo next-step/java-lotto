@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,14 @@ public class LotteryTicket {
 
     public static LotteryTicket from(List<LotteryNumber> lotteryNumbers) {
         return new LotteryTicket(lotteryNumbers);
+    }
+
+    public static LotteryTicket from(String[] lotteryNumbers) {
+        List<LotteryNumber> parsedLotteryNumbers = Arrays.stream(lotteryNumbers)
+                .map(Integer::parseInt)
+                .map(LotteryNumber::from)
+                .collect(Collectors.toList());
+        return new LotteryTicket(parsedLotteryNumbers);
     }
 
     public static LotteryTicket publishAutomaticLotteryTicket() {

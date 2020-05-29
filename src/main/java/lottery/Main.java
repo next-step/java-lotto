@@ -15,6 +15,7 @@ public class Main {
 
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 
+        //LotteryTicket lastWinnerTicket =
         /*
 
         LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();

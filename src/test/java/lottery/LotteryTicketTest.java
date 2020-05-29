@@ -2,6 +2,7 @@ package lottery;
 
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryTicket;
+import lottery.view.ViewMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,16 @@ public class LotteryTicketTest {
         assertThatCode(() -> {
             LotteryTicket.publishAutomaticLotteryTicket();
         }).doesNotThrowAnyException();
+    }
+
+    @DisplayName("LotteryTicket 문자열 배열을 받았을 때 객체 생성")
+    @Test
+    public void makeLotteryTicketFromStringArrays() {
+        String[] input = "1, 2, 3, 4, 5, 6".split(ViewMessages.COMMA);
+        LotteryTicket lotteryTicket = LotteryTicket.from(input);
+
+        assertThat(lotteryTicket.getLotteryNumbers())
+                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("LotteryTicket 객체 생성 실패(개수 예외)")

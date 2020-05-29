@@ -14,8 +14,9 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-/*    public static LotteryTicket getLastWinnerTicket() {
+    public static String[] getLastWinnerTicketNumbers() {
         System.out.println(ViewMessages.INSTRUCTION_LOTTERY_WINNER_NUMBERS);
-        return new LotteryTicket(StringParser.parseString(scanner.nextLine()));
-    }*/
+        return scanner.nextLine()
+                .split(ViewMessages.COMMA);
+    }
 }
