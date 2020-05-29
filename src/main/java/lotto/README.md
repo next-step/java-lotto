@@ -34,7 +34,7 @@
     - [X] 로또 번호 하나는 1~45 사이의 값을 갖는다.
 
 - LottoNumbers: 로또 1장
-    - [ ] 로또 1장은 LottoNumber 6개를 갖는다.
+    - [X] 로또 1장은 LottoNumber 6개를 갖는다.
 
 - LottoTicket: 로또 티켓(묶음) 
     - [ ] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
