@@ -12,6 +12,8 @@ public class WinningLottoTicket {
     private final LottoNumber bonusNumber;
 
     private WinningLottoTicket(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
+        verifyDuplication(lottoNumbers, bonusNumber);
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -19,7 +21,6 @@ public class WinningLottoTicket {
     public static WinningLottoTicket valueOf(final List<LottoNumber> winningNumbers, final int bonusNumber) {
         LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
-        verifyDuplication(lottoNumbers, bonusLottoNumber);
 
         return new WinningLottoTicket(lottoNumbers, bonusLottoNumber);
     }
