@@ -24,7 +24,7 @@ public class AutoLottoApplication {
         WinningTicket winningTicket = makeWinningTicket();
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
 
-        OutputView.printResult(lottoResult, lottoTickets);
+        OutputView.printResult(lottoResult);
     }
 
     private static WinningTicket makeWinningTicket() {
