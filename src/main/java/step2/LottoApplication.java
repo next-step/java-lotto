@@ -6,17 +6,21 @@ import step2.model.Money;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.List;
+
 public class LottoApplication {
 
-    private static final LottoMachine LOTTO_MACHINE = LottoMachine.newInstance();
+    private static final LottoMachine LOTTO_MACHINE = LottoMachine.create();
 
     public static void main(String[] args) {
         int useAmount = InputView.getUseAmount();
         Money money = Money.valueOf(useAmount);
 
         LottoTickets lottoTickets = LOTTO_MACHINE.buyTicket(money);
-
         ResultView.printTickets(lottoTickets);
-        ResultView.printWinningStatistics(lottoTickets, InputView.getWinningNumbers());
+
+        List<Integer> winningNumbers = InputView.getWinningNumbers();
+        ResultView.printWinningStatistics(lottoTickets, winningNumbers);
+        ResultView.printRateOfReturn(lottoTickets, winningNumbers, money);
     }
 }

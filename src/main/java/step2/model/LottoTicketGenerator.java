@@ -17,7 +17,7 @@ public class LottoTicketGenerator {
 
         return IntStream.rangeClosed(TICKET_COUNT_MIN_VALUE, ticketCount)
                 .mapToObj(i -> LottoTicket.create(LottoNumberGenerator.generate()))
-                .collect(collectingAndThen(toList(), LottoTickets::newInstance));
+                .collect(collectingAndThen(toList(), LottoTickets::create));
     }
 
     private static void validateTicketCount(int ticketCount) {

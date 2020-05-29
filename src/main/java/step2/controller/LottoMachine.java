@@ -16,11 +16,11 @@ public class LottoMachine {
         this.ticketPrice = ticketPrice;
     }
 
-    public static LottoMachine newInstance() {
+    public static LottoMachine create() {
         return new LottoMachine(LottoTicketPrice.getDefault());
     }
 
-    public static LottoMachine newInstance(LottoTicketPrice ticketPrice) {
+    public static LottoMachine create(LottoTicketPrice ticketPrice) {
         return new LottoMachine(ticketPrice);
     }
 

@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.LottoTicketGenerator;
-import step2.model.LottoTickets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +15,7 @@ public class LottoTicketGeneratorTest {
     @ParameterizedTest
     void generate_TicketCount_LottoTickets(int ticketCount) {
         LottoTickets lottoTickets = LottoTicketGenerator.generate(ticketCount);
-        assertThat(lottoTickets.getCount()).isEqualTo(ticketCount);
+        assertThat(lottoTickets.getTicketCount()).isEqualTo(ticketCount);
     }
 
     @DisplayName("입력한 티켓 장수가 1장보다 작으면 예외가 발생한다")

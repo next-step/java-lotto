@@ -11,22 +11,22 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets newInstance(List<LottoTicket> lottoTickets) {
+    public static LottoTickets create(List<LottoTicket> lottoTickets) {
         return new LottoTickets(lottoTickets);
     }
 
-    public List<List<Integer>> getNumberGroups() {
+    public int getTicketCount() {
+        return this.lottoTickets.size();
+    }
+
+    public List<List<Integer>> getAllNumbers() {
         return this.lottoTickets.stream()
                 .map(LottoTicket::getNumbers)
                 .collect(Collectors.toList());
     }
 
-    public int getCount() {
-        return this.lottoTickets.size();
-    }
-
-    public LottoRankCount getLottoRankCount(List<Integer> winningNumbers) {
-        LottoRankCount lottoRankCount = LottoRankCount.newInstance();
+    public LottoRankCount calculateLottoRankCount(List<Integer> winningNumbers) {
+        LottoRankCount lottoRankCount = LottoRankCount.create();
 
         this.lottoTickets.forEach(lottoTicket -> {
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
@@ -36,7 +36,7 @@ public class LottoTickets {
         return lottoRankCount;
     }
 
-    public int getTotalWinningMoney(List<Integer> winningNumbers) {
+    public int calculateWinningMoney(List<Integer> winningNumbers) {
         return this.lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.getMatchCount(winningNumbers))
                 .map(LottoRank::findRank)

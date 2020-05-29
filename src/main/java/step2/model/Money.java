@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Money {
 
-    private int totalAmount;
+    private final int totalAmount;
     private int usedAmount;
 
     private Money(int totalAmount) {

@@ -16,7 +16,7 @@ public class LottoRankCount {
                 .forEach(lottoRank -> this.lottoRankCount.put(lottoRank, MATCH_INITIAL_COUNT));
     }
 
-    public static LottoRankCount newInstance() {
+    public static LottoRankCount create() {
         return new LottoRankCount();
     }
 
