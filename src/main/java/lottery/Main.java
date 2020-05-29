@@ -1,8 +1,6 @@
 package lottery;
 
-import lottery.domain.LotteryStore;
-import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.PurchasePrice;
+import lottery.domain.*;
 import lottery.view.InputView;
 import lottery.view.ResultView;
 
@@ -15,15 +13,12 @@ public class Main {
 
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 
-        //LotteryTicket lastWinnerTicket =
-        /*
+        LotteryTicket lastWinnerTicket = LotteryTicket.from(InputView.getLastWinnerTicketNumbers());
+        LotteryGame lotteryGame = LotteryGame.getInstance();
+        LotteryGameResult lotteryGameResult = lotteryGame.drawLottery(lotteryTicketsGroup, lastWinnerTicket);
+        RateOfReturn rateOfReturn = lotteryGameResult.calculateRateOfReturn(purchasePrice);
 
-        LotteryTicket lastWinnerTicket = InputView.getLastWinnerTicket();
-        StatisticsBoard statisticsBoard = new StatisticsBoard(lotteryMachine
-                .findWinnerTicketCountsByRankMap(lotteryTicketsGroup, lastWinnerTicket));
-        RateOfReturn rateOfReturn = new RateOfReturn(statisticsBoard.calculateRateOfReturn(purchasePrice));
-        ResultView.printLotteryStatistics(statisticsBoard);
+        ResultView.printLotteryGameResult(lotteryGameResult);
         ResultView.printRateOfReturn(rateOfReturn);
-*/
     }
 }

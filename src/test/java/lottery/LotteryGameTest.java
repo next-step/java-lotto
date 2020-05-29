@@ -37,8 +37,7 @@ public class LotteryGameTest {
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(Arrays.asList(loser, winner));
 
         LotteryGame lotteryGame = LotteryGame.getInstance();
-        Map<LotteryRank, Integer> winnerTicketsGroup = lotteryGame
-                .drawLottery(lotteryTicketsGroup, winnerTicket);
+        Map<LotteryRank, Integer> winnerTicketsGroup = lotteryTicketsGroup.findWinnerTicketCountsByRank(winnerTicket);
 
         assertThat(winnerTicketsGroup.get(lotteryRank)).isEqualTo(winnerCounts);
     }

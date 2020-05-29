@@ -12,7 +12,6 @@ public class ResultView {
     private ResultView() {
     }
 
-
     public static void printLotteryGameInformation(PurchasePrice purchasePrice,
                                                    LotteryTicketsGroup lotteryTicketsGroup) {
         System.out.println(purchasePrice.getPurchasableLotteryTicketCounts()
@@ -22,19 +21,15 @@ public class ResultView {
 
     }
 
-    public static void printLotteryStatistics(StatisticsBoard statisticsBoard) {
+    public static void printLotteryGameResult(LotteryGameResult lotteryGameResult) {
         Arrays.stream(LotteryRank.values())
-                .forEach(lotteryRank -> printEachRankResult(lotteryRank, statisticsBoard));
+                .forEach(lotteryRank -> printEachRankResult(lotteryRank, lotteryGameResult));
     }
 
     public static void printRateOfReturn(RateOfReturn rateOfReturn) {
         System.out.print(ViewMessages.RESULT_REVENUE_TOTAL);
         System.out.print(rateOfReturn.getRateOfReturn());
         System.out.print(ViewMessages.RESULT_SENTENCE_SUFFIX);
-        if (rateOfReturn.isSurplus() == null) {
-            System.out.println(ViewMessages.RESULT_EQUALITY);
-            return;
-        }
         if (rateOfReturn.isSurplus()) {
             System.out.println(ViewMessages.RESULT_SURPLUS);
             return;
@@ -56,12 +51,12 @@ public class ResultView {
         stringBuilder.append(lotteryNumber);
     }
 
-    private static void printEachRankResult(LotteryRank lotteryRank, StatisticsBoard statisticsBoard) {
+    private static void printEachRankResult(LotteryRank lotteryRank, LotteryGameResult lotteryGameResult) {
         System.out.print(lotteryRank.getMatchNumberCounts());
         System.out.print(ViewMessages.RESULT_MATCH);
         System.out.print(lotteryRank.getPrizeMoney());
         System.out.print(ViewMessages.RESULT_MONETARY_UNIT);
-        System.out.print(statisticsBoard.findWinnerTicketCountsByLotteryRank(lotteryRank));
+        System.out.print(lotteryGameResult.findWinnerTicketCountsByRank(lotteryRank));
         System.out.println(ViewMessages.RESULT_COUNT);
     }
 }
