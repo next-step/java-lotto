@@ -35,6 +35,10 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public int getLottoNumbersCount() {
+        return this.lottoNumbers.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -37,23 +37,23 @@
 - LottoTicket: 로또 티켓(묶음) 
     - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
     - [X] 입력받은 갯수 만큼 LottoTicket을 생성할 수 있다.
-    - [ ] WinningNumbers와 일치하는 갯수를 반환한다. 
+    - [X] WinningNumbers와 매칭 결과를 반환한다. 
 
 - NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
-    - [x]  1~45 사이의 무작위 값으로 구성된 6개의 숫자를 생성한다.
+    - [X]  1~45 사이의 무작위 값으로 구성된 6개의 숫자를 생성한다.
 
 - WinningNumbers: 지난 주 당첨 번호
     - [X] 지난 주 당첨 LottoNumbers를 갖는다.
 
 - LottoGame: 로또 게임 실행기
-    - [ ] LottoTicket, WinningNumbers를 전달받아 로또 게임을 진행한다.
+    - [X] LottoTicket, WinningNumbers를 전달받아 로또 게임을 진행한다.
 
 - LottoRank: 로또 랭크
-    - [ ] 일치하는 갯수에 대한 상금액을 갖는다.
+    - [X] 일치하는 갯수에 대한 상금액을 갖는다.
 
 - WinningStatistics: 당첨 통계
-    - [ ] LottoRank 별 당첨 갯수를 확인할 수 있다.
-    - [ ] 지불 Price 대비 수익률을 확인할 수 있다.
+    - [X] LottoRank를 반환할 수 있다.
+    - [] 지불 Price 대비 수익률을 확인할 수 있다.
 
 - InputView
     - [ ] 구입 Price를 입력 받을 수 있다.
