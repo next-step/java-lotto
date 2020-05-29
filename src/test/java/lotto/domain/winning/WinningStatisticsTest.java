@@ -4,6 +4,7 @@ import lotto.domain.generator.FixedNumberGenerator;
 import lotto.domain.generator.NumberGenerator;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Price;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,29 +21,44 @@ public class WinningStatisticsTest {
     @DisplayName("WinningStatistics 객체를 생성할 수 있다.")
     @Test
     void create() {
-        int lottoCount = 2;
-        LottoTicket lottoTicket = new LottoTicket(lottoCount, new FixedNumberGenerator());
+        Price price = new Price(2000);
+        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
-        WinningStatistics winningStatistics = new WinningStatistics(lottoTicket.getLottoNumbersCount(), lottoRankMap);
+        WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
-        Map<LottoRank, Long> lottoRank = winningStatistics.getLottoRank();
+        Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
 
-        assertThat(lottoRank.get(LottoRank.FIRST)).isEqualTo(new Long(lottoCount));
+        assertThat(lottoRank.get(LottoRank.FIRST)).isEqualTo(price.getLottoCount());
     }
 
     @DisplayName("WinningStatistics 객체 생성시 LottoRank MISS는 삭제한다.")
     @Test
     void create_remove_miss() {
-        int lottoCount = 2;
-        LottoTicket lottoTicket = new LottoTicket(lottoCount, new NotMatchNumberGenerator());
+        Price price = new Price(2000);
+        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new NotMatchNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
-        WinningStatistics winningStatistics = new WinningStatistics(lottoTicket.getLottoNumbersCount(), lottoRankMap);
+        WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
-        Map<LottoRank, Long> lottoRank = winningStatistics.getLottoRank();
+        Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
 
-        assertThat(lottoRank).isEmpty();
+        assertThat(lottoRank.size()).isEqualTo(4);
+    }
+
+    @DisplayName("수익률을 확인할 수 있다.")
+    @Test
+    void calculateProfit() {
+        Price price = new Price(1000);
+        winningNumberString = "1,2,3,13,14,15";
+        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new FixedNumberGenerator());
+
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
+        WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
+
+        float profit = winningStatistics.calculateProfit();
+
+        assertThat(profit).isEqualTo((float) LottoRank.FIFTH.getWinningMoney() / price.getPrice());
     }
 
     private static class NotMatchNumberGenerator implements NumberGenerator {

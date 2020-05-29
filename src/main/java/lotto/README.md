@@ -53,7 +53,7 @@
 
 - WinningStatistics: 당첨 통계
     - [X] LottoRank를 반환할 수 있다.
-    - [] 지불 Price 대비 수익률을 확인할 수 있다.
+    - [X] 지불 Price 대비 수익률을 확인할 수 있다.
 
 - InputView
     - [ ] 구입 Price를 입력 받을 수 있다.

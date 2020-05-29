@@ -17,6 +17,6 @@ public class LottoSellerTest {
 
         LottoTicket lottoTicket = lottoSeller.buy(price);
 
-        assertThat(lottoTicket.getLottoNumbers()).hasSize(price/LottoSeller.LOTTO_PRICE);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(price/Price.LOTTO_PRICE);
     }
 }
