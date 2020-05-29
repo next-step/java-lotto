@@ -8,6 +8,8 @@ import static lotto.domain.LottoRank.*;
 
 public class LottoCheck {
 
+    private LottoCheck() {}
+
     public static int getWinningLottoCount(final List<Lotto> lottos, final Lotto winningLotto, final LottoRank rank) {
         int rankCount = 0;
         List<Integer> containWinningNumberCounts = getContainCountsSame(lottos, winningLotto.getNumbers());
