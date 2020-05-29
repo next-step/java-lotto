@@ -6,6 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public static final int MIN_VALUE = 1;
   public static final int MAX_VALUE = 45;
+  private static LottoNumber[] FACTORY = new LottoNumber[45];
 
   private final int number;
 
@@ -14,12 +15,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
     this.number = number;
   }
 
-  static public LottoNumber of (String number) {
-    return of(Integer.parseInt(number));
+  private static void validateNumbers (int number) throws RuntimeException {
+    if (number < MIN_VALUE || number > MAX_VALUE) {
+      throw new InvalidRangeNumberException();
+    }
   }
 
-  static public LottoNumber of (int number) {
-    return new LottoNumber(number);
+  static public LottoNumber valueOf(String number) {
+    return valueOf(Integer.parseInt(number));
+  }
+
+  static public LottoNumber valueOf(int number) {
+    int index = number - 1;
+    if (FACTORY[index] != null) {
+      return FACTORY[index];
+    }
+    FACTORY[index] = new LottoNumber(number);
+    return FACTORY[index];
   }
 
   public int getNumber () {
@@ -28,19 +40,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   @Override
   public boolean equals(Object lottoNumber) {
-    if (this == lottoNumber) {
-      return true;
-    }
-    if (!(lottoNumber instanceof LottoNumber)) {
-      return false;
-    }
-    return number == ((LottoNumber)lottoNumber).number;
-  }
-
-  private static void validateNumbers (int number) throws RuntimeException {
-    if (number < MIN_VALUE || number > MAX_VALUE) {
-      throw new InvalidRangeNumberException();
-    }
+    return this == lottoNumber;
   }
 
   @Override
