@@ -1,13 +1,11 @@
 package lotto.domain.number;
 
+import lotto.domain.generator.FixedNumberGenerator;
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.generator.NumberGenerator;
 import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,13 +42,5 @@ public class LottoNumbersTest {
         boolean contains = lottoNumbers.contains(lottoNumber);
 
         assertThat(contains).isTrue();
-    }
-
-    private static class FixedNumberGenerator implements NumberGenerator {
-
-        @Override
-        public List<Integer> getNumbers() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
-        }
     }
 }
