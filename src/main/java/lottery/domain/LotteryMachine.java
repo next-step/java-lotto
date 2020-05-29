@@ -1,11 +1,9 @@
 package lottery.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LotteryMachine {
 
@@ -19,23 +17,23 @@ public class LotteryMachine {
 
     public LotteryMachine(PurchasePrice purchasePrice) {
         validatePurchasePrice(purchasePrice);
-        this.lotteryTicketCounts = (int)(purchasePrice.getPurchasePrice() / LOTTERY_TICKET_PRICE);
+        this.lotteryTicketCounts = (int) (purchasePrice.getPurchasePrice() / LOTTERY_TICKET_PRICE);
     }
 
-    public LotteryTicketsGroup makeLotteryTicketsGroup() {
+/*    public LotteryTicketsGroup makeLotteryTicketsGroup() {
         return new LotteryTicketsGroup(
                 Stream.generate(this::makeLotteryTicket)
-                .limit(lotteryTicketCounts)
-                .collect(Collectors.toList())
+                        .limit(lotteryTicketCounts)
+                        .collect(Collectors.toList())
         );
-    }
+    }*/
 
     public Map<LotteryRank, Integer> findWinnerTicketCountsByRankMap(LotteryTicketsGroup lotteryTicketsGroup,
-                                                                 LotteryTicket lastWinnerTicket) {
+                                                                     LotteryTicket lastWinnerTicket) {
         return lotteryTicketsGroup.findWinnerTicketCountsByRankMap(lastWinnerTicket);
     }
 
-    private LotteryTicket makeLotteryTicket() {
+    /*private LotteryTicket makeLotteryTicket() {
         Collections.shuffle(LOTTERY_NUMBERS_LIST);
         List<Integer> pickedLotteryNumbers = LOTTERY_NUMBERS_LIST.subList(FIRST_INDEX, LAST_INDEX);
         Collections.sort(pickedLotteryNumbers);
@@ -44,7 +42,7 @@ public class LotteryMachine {
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList())
         );
-    }
+    }*/
 
     private void validatePurchasePrice(PurchasePrice purchasePrice) {
         if (purchasePrice.getPurchasePrice() < LOTTERY_TICKET_PRICE)

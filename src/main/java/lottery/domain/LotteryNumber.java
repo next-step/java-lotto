@@ -6,9 +6,13 @@ public class LotteryNumber {
     private static final int MAXIMUM_NUMBER = 45;
     private final int lotteryNumber;
 
-    public LotteryNumber(int lotteryNumber) {
+    private LotteryNumber(int lotteryNumber) {
         validateLotteryNumber(lotteryNumber);
         this.lotteryNumber = lotteryNumber;
+    }
+
+    public static LotteryNumber from(int lotteryNumber) {
+        return new LotteryNumber(lotteryNumber);
     }
 
     private void validateLotteryNumber(int lotteryNumber) {

@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LotteryNumberTest {
-/*
+
     @DisplayName("LotteryNumber 객체 정상 생성 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 45, 3, 15})
     public void makeLotteryNumberObject(int lotteryNumber) {
-        LotteryNumber lotteryNumberObject = new LotteryNumber(lotteryNumber);
+        LotteryNumber lotteryNumberObject = LotteryNumber.from(lotteryNumber);
 
         assertThat(lotteryNumberObject.getLotteryNumber())
                 .isEqualTo(lotteryNumber);
@@ -26,7 +26,7 @@ public class LotteryNumberTest {
     public void throwExceptionOnMakingLotteryNumberObject(int lotteryNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new LotteryNumber(lotteryNumber);
+                    LotteryNumber.from(lotteryNumber);
                 });
-    }*/
+    }
 }

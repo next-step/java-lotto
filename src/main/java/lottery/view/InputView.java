@@ -1,8 +1,5 @@
 package lottery.view;
 
-import lottery.domain.LotteryTicket;
-import lottery.domain.StringParser;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -17,8 +14,8 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public static LotteryTicket getLastWinnerTicket() {
+/*    public static LotteryTicket getLastWinnerTicket() {
         System.out.println(ViewMessages.INSTRUCTION_LOTTERY_WINNER_NUMBERS);
         return new LotteryTicket(StringParser.parseString(scanner.nextLine()));
-    }
+    }*/
 }

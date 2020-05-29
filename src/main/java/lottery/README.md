@@ -7,7 +7,8 @@
     * 객체 생성시 입력받은 금액이 티켓 1장 가격(1000)보다 낮을 경우 예외 발생
     * 해당 금액으로 구매할 수 있는 로또 티켓의 개수를 반환함
 
-
+* LotteryStore
+    * PurchasePrice를 통해 얻은 구매 가능한 티켓 개수를 기반으로 로또 티켓을 발행
     
     * LotteryMachine
     * LotteryNumber
