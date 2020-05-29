@@ -12,21 +12,21 @@ public class PurchasePriceTest {
 
     @DisplayName("PurchasePrice 객체 정상 생성 테스트")
     @ParameterizedTest
-    @ValueSource(longs = {500, 1000, 1500})
+    @ValueSource(longs = {2000, 1000, 1500})
     public void makePurchasePriceObject(long userInput) {
-        PurchasePrice purchasePrice = new PurchasePrice(userInput);
+        PurchasePrice purchasePrice = PurchasePrice.from(userInput);
 
         assertThat(purchasePrice.getPurchasePrice())
                 .isEqualTo(userInput);
     }
 
-    @DisplayName("PurchasePrice 객체 생성 실패 (0 이하)")
+    @DisplayName("PurchasePrice 객체 생성 실패(로또 티켓 비용 1000원 미만) 테스트")
     @ParameterizedTest
-    @ValueSource(longs = {0, -30, -999})
+    @ValueSource(longs = {0, -30, 300, 500, 999})
     public void throwExceptionOnMakingPurchasePriceObject(long userInput) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                   new PurchasePrice(userInput);
+                   PurchasePrice.from(userInput);
                 });
     }
 }

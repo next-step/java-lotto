@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 public class LotteryMachineTest {
-
+/*
     @DisplayName("LotteryMachine 객체 정상 생성 테스트")
     @ParameterizedTest
     @ValueSource(longs = {1300, 5000, 2300, 6000})
@@ -84,5 +84,5 @@ public class LotteryMachineTest {
                 Arguments.of(new LotteryTicket(StringParser.parseString("1, 2, 3, 44, 9, 8")),
                         LotteryRank.FOURTH_PRIZE, 2)
         );
-    }
+    }*/
 }

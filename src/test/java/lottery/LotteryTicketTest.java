@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LotteryTicketTest {
-
+/*
     private List<LotteryNumber> lotteryNumberList;
 
     @BeforeEach
@@ -56,5 +56,5 @@ public class LotteryTicketTest {
                 .isThrownBy(() -> {
                     new LotteryTicket(lotteryNumberList);
                 });
-    }
+    }*/
 }

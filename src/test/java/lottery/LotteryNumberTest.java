@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LotteryNumberTest {
-
+/*
     @DisplayName("LotteryNumber 객체 정상 생성 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 45, 3, 15})
@@ -28,5 +28,5 @@ public class LotteryNumberTest {
                 .isThrownBy(() -> {
                     new LotteryNumber(lotteryNumber);
                 });
-    }
+    }*/
 }
