@@ -5,8 +5,6 @@ import java.util.Map;
 public class LotteryMachine {
 
     private static final long LOTTERY_TICKET_PRICE = 1000;
-    private static final int FIRST_INDEX = 0;
-    private static final int LAST_INDEX = 6;
     private final int lotteryTicketCounts;
 
     public LotteryMachine(PurchasePrice purchasePrice) {
