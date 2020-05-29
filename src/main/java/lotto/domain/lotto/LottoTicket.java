@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.domain.generator.NumberGenerator;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.winning.WinningNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +22,9 @@ public class LottoTicket {
                 .mapToObj(i -> new LottoNumbers(generator))
                 .collect(Collectors.toList());
 
+    }
+
+    public void match(WinningNumbers winningNumbers) {
     }
 
     public List<LottoNumbers> getLottoNumbers() {
