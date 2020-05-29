@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class LotteryTicketTest {
 
@@ -29,8 +28,17 @@ public class LotteryTicketTest {
     @Test
     public void makeLotteryTicket() {
         LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
+
         assertThat(lotteryTicket.getLotteryNumbers())
                 .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @DisplayName("LotteryTicket 자동 생성 모드로 객체 생성 테스트")
+    @Test
+    public void makeLotteryTicketAutomaticMode() {
+        assertThatCode(() -> {
+            LotteryTicket.publishAutomatic();
+        }).doesNotThrowAnyException();
     }
 
     @DisplayName("LotteryTicket 객체 생성 실패(개수 예외)")

@@ -1,16 +1,10 @@
 package lottery.domain;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LotteryMachine {
 
     private static final long LOTTERY_TICKET_PRICE = 1000;
-    private static final List<Integer> LOTTERY_NUMBERS_LIST = IntStream.rangeClosed(1, 45)
-            .boxed()
-            .collect(Collectors.toList());
     private static final int FIRST_INDEX = 0;
     private static final int LAST_INDEX = 6;
     private final int lotteryTicketCounts;
