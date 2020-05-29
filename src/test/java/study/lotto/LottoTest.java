@@ -13,7 +13,7 @@ public class LottoTest {
     void generate_lotto() {
         Lotto lotto = Lotto.generate();
 
-        assertThat(lotto.getLottoNumbers()).anyMatch(num -> num>0 && num<46);
+        assertThat(lotto.getLottoNumbers()).allMatch(num -> num>0 && num<46);
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 }
