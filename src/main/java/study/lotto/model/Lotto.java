@@ -7,7 +7,7 @@ import java.util.List;
 public class Lotto {
     private static final List<Integer> LOTTO_NUMBER_BASE = new ArrayList<>();
 
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<Integer> lottoNumbers;
 
     static {
         for(int i=1; i<46; i++) {
@@ -15,10 +15,12 @@ public class Lotto {
         }
     }
 
-    public static Lotto generate() {
-        Lotto lotto = new Lotto();
-        lotto.lottoNumbers = lotto.generateLottoNumbers();
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
 
+    public static Lotto generate() {
+        Lotto lotto = new Lotto(generateLottoNumbers());
         Collections.sort(lotto.getLottoNumbers());
 
         return lotto;
@@ -28,9 +30,13 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private List<Integer> generateLottoNumbers() {
+    private static List<Integer> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_BASE);
 
         return LOTTO_NUMBER_BASE.subList(0, 6);
+    }
+
+    public int compareToWinningNumbers(List<Integer> winningNumbers) {
+        return 0;
     }
 }
