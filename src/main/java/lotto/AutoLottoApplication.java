@@ -17,13 +17,15 @@ public class AutoLottoApplication {
         LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
 
         Money budget = Money.of(InputView.askTotalMoney());
+        int numberOfManualLottoTicket = InputView.askNumberOfManualLottoTicket();
+
+        LottoTickets manualTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket);
         LottoTickets lottoTickets = lottoStore.buy(budget);
 
         OutputView.printLottoTicketNumbers(lottoTickets);
 
         WinningTicket winningTicket = makeWinningTicket();
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
-
         OutputView.printResult(lottoResult);
     }
 

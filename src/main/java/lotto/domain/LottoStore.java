@@ -16,6 +16,7 @@ public class LottoStore {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
+
     public LottoTickets buy(final Money budget) {
         Money currentMoney = budget;
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -27,5 +28,4 @@ public class LottoStore {
 
         return new LottoTickets(lottoTickets);
     }
-
 }
