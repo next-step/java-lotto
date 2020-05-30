@@ -3,7 +3,6 @@ package lotto.step4.domain;
 import lotto.step4.execption.LottoLesserPriceException;
 import lotto.step4.execption.LottoMinimumPriceException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -13,22 +12,18 @@ public class LottoShop {
 
   private LottoShop() {}
 
-  public static Lottos buyLotto (long price) {
+  public static Lottos buyLotto (long price, List<Lotto> lottos) {
     validateMinimumPrice(price);
-    return Lottos.of(Stream.generate(LottoGenerator::generateLotto)
-                           .limit(price / Lotto.PRICE)
-                           .collect(toList()),
-                     new ArrayList<>());
+    final long lesserPrice = price - lottos.size() * Lotto.PRICE;
+    validateLesserPrice(lesserPrice);
+    lottos.addAll(provideAutoLottos(lesserPrice));
+    return Lottos.of(lottos);
   }
 
-  public static Lottos buyLotto (long price, List<Lotto> directLottos) {
-    validateMinimumPrice(price);
-    final long lesserPrice = price - directLottos.size() * Lotto.PRICE;
-    validateLesserPrice(lesserPrice);
-    List<Lotto> autoLottos = Stream.generate(LottoGenerator::generateLotto)
-                                   .limit(lesserPrice / Lotto.PRICE)
-                                   .collect(toList());
-    return Lottos.of(autoLottos, directLottos);
+  private static List<Lotto> provideAutoLottos (long price) {
+    return Stream.generate(LottoGenerator::generateLotto)
+                 .limit(price / Lotto.PRICE)
+                 .collect(toList());
   }
 
   public static void validateMinimumPrice (long price) throws RuntimeException {
