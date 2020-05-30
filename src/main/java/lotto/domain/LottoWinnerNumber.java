@@ -43,4 +43,8 @@ public class LottoWinnerNumber {
     public Lotto getBonusBall() {
         return this.bonusBall;
     }
+
+    public boolean isValidWinnerNumber(int size) {
+        return this.winnerNumbers == null || this.winnerNumbers.size() != size;
+    }
 }

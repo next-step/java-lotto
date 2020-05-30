@@ -1,37 +1,24 @@
 package lotto.domain;
 
+import lotto.generator.LottoNumberGenerator;
+import lotto.matcher.LottoMatcher;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
     private final static int LOTTO_PRICE = 1000;
     private final int DECIMAL_POINT = 2;
 
-    private int price;
-
-    public LottoShop(int price) {
-        this.validatePrice(price);
-        this.price = price;
+    public LottoShop() {
     }
 
-    private void validatePrice(int price) {
-        if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("The price must be greater than the price of the Lotto");
-        }
+    public LottoTicket buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Lotto> allLotto, int size) {
+        List<Lotto> lotto = lottoNumberGenerator.generateLottoNumber(allLotto, size);
+        return new LottoTicket(lotto);
     }
 
-    public List<LottoNumberResult> buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Lotto> allLotto, int size) {
-        List<LottoNumberResult> lottoNumbers = new ArrayList<>();
-        int purchaseCount = (int) Math.ceil(this.price / LOTTO_PRICE);
-        for (int i = 0; i < purchaseCount; i++) {
-            List<Lotto> lotto = lottoNumberGenerator.generateLottoNumber(allLotto, size);
-            lottoNumbers.add(new LottoNumberResult(lotto));
-        }
-        return lottoNumbers;
-    }
-
-    public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers) {
+    public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers, int priceAmount) {
         BigDecimal amount = BigDecimal.ZERO;
         for (LottoMatcher lottoMatcher : lottoMatchers) {
             amount = amount.add(lottoMatcher.getPrice());
@@ -41,7 +28,17 @@ public class LottoShop {
             return amount;
         }
 
-        BigDecimal purchaseAmount = new BigDecimal(Math.ceil(price / LOTTO_PRICE) * LOTTO_PRICE);
+        BigDecimal purchaseAmount = new BigDecimal( Math.floorDiv(priceAmount, LOTTO_PRICE) * LOTTO_PRICE);
         return amount.divide(purchaseAmount, DECIMAL_POINT, BigDecimal.ROUND_CEILING);
+    }
+
+    public int calculatePurchaseCount(int price) {
+        return Math.floorDiv(price, LOTTO_PRICE);
+    }
+
+    public void availablePurchase(int price) {
+        if (LOTTO_PRICE > price) {
+            throw new IllegalArgumentException("The price must be greater than the price of the Lotto");
+        }
     }
 }

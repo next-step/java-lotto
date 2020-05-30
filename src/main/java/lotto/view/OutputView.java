@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoMatcher;
-import lotto.domain.LottoNumberResult;
+import lotto.domain.LottoTickets;
+import lotto.matcher.LottoMatcher;
+import lotto.domain.LottoTicket;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,8 +16,9 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void outputLottoNumbers(List<LottoNumberResult> lottoNumbers) {
-        lottoNumbers.forEach(number -> System.out.println(number));
+    public static void outputLottoNumbers(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets()
+                .forEach(number -> System.out.println(number));
         System.out.println(System.lineSeparator());
     }
 
