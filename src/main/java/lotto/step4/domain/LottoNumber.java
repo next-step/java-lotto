@@ -11,7 +11,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
   private final int number;
 
   private LottoNumber (int number) {
-    validateNumbers(number);
     this.number = number;
   }
 
@@ -26,6 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   }
 
   static public LottoNumber valueOf(int number) {
+    validateNumbers(number);
     int index = number - 1;
     if (FACTORY[index] != null) {
       return FACTORY[index];
