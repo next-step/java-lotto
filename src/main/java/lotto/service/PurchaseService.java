@@ -7,9 +7,10 @@ import lotto.collections.LottoTickets;
 
 public class PurchaseService {
 
+  private static final double TICKET_PRICE = 1000;
+
   public LottoTickets purchase(final Integer payable) {
-    final int DIVIDE_THRESHOLD = 1000;
-    final int NUMBER_OF_PURCHASED_LOTTO = (payable / DIVIDE_THRESHOLD);
+    final int NUMBER_OF_PURCHASED_LOTTO = (int) (payable / TICKET_PRICE);
 
     List<LottoTicket> lottoTicketList = new ArrayList<>();
 
