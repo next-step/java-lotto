@@ -16,7 +16,7 @@ public class LottoNumbersTest {
     void createLottoNumbers() {
         LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new LottoNumberGenerator());
 
-        assertThat(lottoNumbers.getNumbers()).hasSize(6);
+        assertThat(lottoNumbers.getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
     @DisplayName("WinningNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.")

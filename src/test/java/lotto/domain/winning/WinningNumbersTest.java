@@ -27,4 +27,10 @@ public class WinningNumbersTest {
 
         assertThat(contains).isTrue();
     }
+
+    @DisplayName("equals 메소드 테스트")
+    @Test
+    void equals() {
+        assertThat(winningNumbers.equals(new WinningNumbers(winningNumberString))).isTrue();
+    }
 }
