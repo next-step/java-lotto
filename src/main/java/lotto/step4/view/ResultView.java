@@ -35,12 +35,12 @@ public class ResultView {
 
   public void printStat (LottoResult lottoResult) {
     System.out.printf(HEAD_FORMAT,
-      lottoResult.stream()
-            .map(prize -> String.format(BODY_FORMAT,
-                                        prize.getRank().getSame(),
-                                        prize.getRank().getPrice(),
-                                        prize.getCount()))
-            .collect(joining(NEW_LINE))
+      lottoResult.getPrizes().stream()
+                             .map(prize -> String.format(BODY_FORMAT,
+                                                         prize.getRank().getSame(),
+                                                         prize.getRank().getPrice(),
+                                                         prize.getCount()))
+                             .collect(joining(NEW_LINE))
     );
   }
 

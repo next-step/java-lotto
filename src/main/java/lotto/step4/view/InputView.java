@@ -43,7 +43,7 @@ public class InputView {
 
   public LottoNumber inputBonus () {
     System.out.println("보너스 볼을 입력해 주세요.");
-    return LottoNumber.of(scanner.nextLine());
+    return LottoNumber.valueOf(scanner.nextLine());
   }
 
   public static InputView getInstance () {
