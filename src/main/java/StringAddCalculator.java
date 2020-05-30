@@ -29,8 +29,8 @@ public class StringAddCalculator {
 
     private static int sumIntArray(int[] intArray) {
         int sum = 0;
-        for (int i = 0; i < intArray.length; i++) {
-            sum += intArray[i];
+        for (int value : intArray) {
+            sum += value;
         }
         return sum;
     }
