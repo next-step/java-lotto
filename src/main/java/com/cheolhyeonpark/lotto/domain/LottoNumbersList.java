@@ -23,7 +23,7 @@ public class LottoNumbersList {
         return lottoNumbersList.get(index);
     }
 
-    public GameResult getGameResult(List<Integer> winningNumbers) {
+    public GameResult getGameResult(WinningNumbers winningNumbers) {
         GameResult gameResult = new GameResult();
         lottoNumbersList.stream().map(lottoNumbers -> lottoNumbers.getRank(winningNumbers)).forEach(gameResult::count);
         return gameResult;

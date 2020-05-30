@@ -1,6 +1,5 @@
 package com.cheolhyeonpark.lotto.domain;
 
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoManager {
@@ -22,7 +21,7 @@ public class LottoManager {
         return lottoNumbersList;
     }
 
-    public GameResult getGameResult(List<Integer> winningNumbers) {
+    public GameResult getGameResult(WinningNumbers winningNumbers) {
         return lottoNumbersList.getGameResult(winningNumbers);
     }
 }

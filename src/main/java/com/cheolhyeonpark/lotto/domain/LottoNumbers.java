@@ -2,7 +2,6 @@ package com.cheolhyeonpark.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class LottoNumbers {
 
@@ -13,13 +12,12 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Rank getRank(List<Integer> winningNumbers) {
+    public Rank getRank(WinningNumbers winningNumbers) {
         return Rank.findRank(countSameNumbersAs(winningNumbers));
     }
 
-    private int countSameNumbersAs(List<Integer> winningNumbers) {
-        return Math.toIntExact(numbers.stream()
-                .filter(number -> winningNumbers.stream().anyMatch(Predicate.isEqual(number))).count());
+    private int countSameNumbersAs(WinningNumbers winningNumbers) {
+        return Math.toIntExact(numbers.stream().filter(winningNumbers::anyMatch).count());
     }
 
     public List<Integer> getNumbers() {
