@@ -22,11 +22,12 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoCount, new LottoNumberGenerator());
 
         assertAll(
-                () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(3),
+                () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(lottoCount),
                 () -> assertThat(lottoTicket.getLottoNumbers().get(0).getClass()).isEqualTo(LottoNumbers.class)
         );
     }
 
+    @DisplayName("WinningNumbers와 매칭 결과(LottoRank)를 반환한다.")
     @Test
     void matchWinningNumber() {
         int lottoCount = 2;
