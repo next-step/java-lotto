@@ -1,4 +1,4 @@
-package modal;
+package model;
 
 
 import java.util.regex.Matcher;

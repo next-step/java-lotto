@@ -1,4 +1,4 @@
-import modal.StringAddCalculator;
+import model.StringAddCalculator;
 import view.LottoInput;
 import view.LottoOutput;
 

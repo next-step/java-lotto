@@ -1,4 +1,4 @@
-import modal.StringAddCalculator;
+import model.StringAddCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
