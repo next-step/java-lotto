@@ -3,33 +3,45 @@ package lotto.step4.domain;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class Lottos {
 
-  private final List<Lotto> autoLottos, directLottos;
+  private final List<Lotto> lottos;
 
-  private Lottos(List<Lotto> directLottos, List<Lotto> autoLottos) {
-    this.directLottos = directLottos;
-    this.autoLottos = autoLottos;
+  private Lottos(List<Lotto> lottos) {
+    this.lottos = lottos;
   }
 
-  public static Lottos of (List<Lotto> directLottos, List<Lotto> autoLottos) {
-    return new Lottos(directLottos, autoLottos);
+  public static Lottos of (List<Lotto> lottos) {
+    return new Lottos(lottos);
   }
 
   public long getPrice() {
-    return stream().count() * Lotto.PRICE;
+    return lottos.size() * Lotto.PRICE;
   }
 
   public long getAutoLottosSize() {
-    return autoLottos.size();
+    return stream()
+            .filter(Lotto::isAuto)
+            .count();
   }
 
   public long getDirectLottosSize() {
-    return directLottos.size();
+    return lottos.size() - getAutoLottosSize();
   }
 
   public Stream<Lotto> stream () {
-    return Stream.concat(directLottos.stream(), autoLottos.stream());
+    return lottos.stream();
   }
 
+  public Prizes matches (WinningLotto winningLotto) {
+    return Rank.stream()
+               .map(rank -> Prize.of(rank, lottos.stream()
+                                                 .map(winningLotto::getRankOfLotto)
+                                                 .filter(rank::equals)
+                                                 .count()))
+               .collect(collectingAndThen(toList(), Prizes::of));
+  }
 }
