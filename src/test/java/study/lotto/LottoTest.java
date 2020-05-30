@@ -57,8 +57,9 @@ public class LottoTest {
 
         String[] split = input.split(", ");
         List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
 
-        assertThat(lotto.compareToWinningNumbers(winningNumbers))
+        assertThat(lotto.compareToWinningNumbers(winningLotto))
                 .isEqualTo(3);
     }
 
@@ -82,8 +83,9 @@ public class LottoTest {
 
         String[] split = input.split(", ");
         List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
 
-        assertThat(lotto.getPrize(winningNumbers))
+        assertThat(lotto.getPrize(winningLotto))
                 .isEqualTo(5000);
     }
 }

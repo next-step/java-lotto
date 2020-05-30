@@ -6,6 +6,10 @@ import java.util.List;
 
 public class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+
+    // 당첨 번호와 동일한 번호 보유 개수에 따른 당첨금 배열
+    private static final int[] MATCH_PRIZES = new int[] { 0, 0, 0, 5000, 50000, 1500000, 2000000000 };
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -16,6 +20,10 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또는 6개의 숫자로 구성 되어야 합니다.");
+        }
+
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -36,11 +44,11 @@ public class Lotto {
         return LOTTO_NUMBER_BASE.subList(0, 6);
     }
 
-    public long compareToWinningNumbers(List<LottoNumber> winningNumbers) {
-        return lottoNumbers.stream().filter(winningNumbers::contains).count();
+    public long compareToWinningNumbers(Lotto winningLotto) {
+        return lottoNumbers.stream().filter(winningLotto.getLottoNumbers()::contains).count();
     }
 
-    public int getPrize(List<LottoNumber> winningNumbers) {
-        return 0;
+    public int getPrize(Lotto winningLotto) {
+        return MATCH_PRIZES[(int)compareToWinningNumbers(winningLotto)];
     }
 }
