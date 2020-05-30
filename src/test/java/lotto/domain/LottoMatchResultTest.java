@@ -20,23 +20,24 @@ class LottoMatchResultTest {
 
     @BeforeEach
     void setUp() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.newInstance(5000);
+        PurchasePrice purchasePrice = PurchasePrice.newInstance(5000);
 
-        List<String> numbers = Arrays.asList(
-                "1, 2, 3, 13, 14, 15",
-                "1, 2, 3, 4, 14, 15",
-                "1, 2, 3, 4, 5, 15",
-                "1, 2, 3, 4, 5, 7",
-                "1, 2, 3, 4, 5, 6"
+        List<LottoTicket> manualTickets = Arrays.asList(
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 13, 14, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 14, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 7"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 6")
         );
-        ManualNumbers manualNumbers = ManualNumbers.newInstance(numbers);
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, manualNumbers);
-        lottoGame.createLottoNumbers();
+        PurchaseInfo purchaseInfo = PurchaseInfo.newInstance(purchasePrice, manualTickets);
 
-        LottoNumber winLottoNumber = LottoNumber.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = BonusNumber.newInstance(7, winLottoNumber);
-        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumber, bonusNumber);
+        LottoGame lottoGame = new LottoGame(purchaseInfo);
+        lottoGame.createAutoLottoTickets();
+
+        LottoTicket winLottoTicket = LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = LottoNumber.newBonusNumber(7, winLottoTicket);
+        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoTicket, bonusNumber);
     }
 
     @DisplayName("당첨 개수를 1씩 증가할 수 있다.")
@@ -104,7 +105,7 @@ class LottoMatchResultTest {
     @DisplayName("총 수익률을 계산할 수 있다.")
     @Test
     void canCalculateProfitRate() {
-        PurchaseAmount purchaseAmount = PurchaseAmount.newInstance(1000);
-        assertThat(this.lottoMatchResult.calculateProfitRate(purchaseAmount)).isEqualTo(2_031_555);
+        PurchasePrice purchasePrice = PurchasePrice.newInstance(1000);
+        assertThat(this.lottoMatchResult.calculateProfitRate(purchasePrice)).isEqualTo(2_031_555);
     }
 }
