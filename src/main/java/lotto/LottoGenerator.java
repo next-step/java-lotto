@@ -9,7 +9,7 @@ public class LottoGenerator {
     private static final int LOTTO_GENERATE_COUNT = 6;
 
     public LottoTicket autoGenerate() {
-        List<LottoNumber> defaultLottoNumbers = LottoNumber.getDefaultLottoNumbers();
+        List<LottoNumber> defaultLottoNumbers = LottoNumbers.getDefaultLottoNumbers();
 
         Collections.shuffle(defaultLottoNumbers);
 
