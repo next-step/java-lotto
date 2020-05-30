@@ -17,7 +17,6 @@ public class Main {
         List<LottoTicket> lottoTickets = lottoShop.buy(amount);
         ResultView.printBuyingTickets(lottoTickets);
 
-        ResultView.printNewLine();
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 

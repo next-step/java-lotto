@@ -28,6 +28,8 @@ public class ResultView {
         lottoTickets.stream()
                 .map(LottoTicket::getLottoNumbers)
                 .forEach(System.out::println);
+
+        printNewLine();
     }
 
     public static void printLottoRanks(Map<LottoRank, Long> lottoRankMap) {
