@@ -4,6 +4,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Set;
 
 public class Main {
 
@@ -17,11 +18,11 @@ public class Main {
         List<LottoTicket> lottoTickets = lottoShop.buy(amount);
         ResultView.printBuyingTickets(lottoTickets);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        Set<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
         int round = 1;
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(winningNumbers), bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(winningNumbers), LottoNumber.of(bonusNumber));
         lottoGame.add(round, winningLotto);
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);

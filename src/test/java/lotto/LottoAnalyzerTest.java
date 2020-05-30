@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ public class LottoAnalyzerTest {
     @BeforeEach
     void setUp(){
         LottoGame lottoGame = new LottoGame();
-        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 8));
+        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(8)));
 
         lottoAnalyzer = new LottoAnalyzer(lottoGame);
     }
@@ -98,5 +99,11 @@ public class LottoAnalyzerTest {
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15))
                         ), 6000.0)
         );
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }

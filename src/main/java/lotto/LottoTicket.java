@@ -1,35 +1,43 @@
 package lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
     private static final int DEFAULT_SIZE = 6;
 
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(List<Integer> lottoNumbers) {
-
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             throw new NullPointerException();
         }
-
-        Set lottoSet = new TreeSet<>(lottoNumbers);
-        validate(lottoSet);
-
-        this.lottoNumbers = lottoSet;
+        validate(lottoNumbers);
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
-    public static LottoTicket of(List<Integer> lottoNumbers) {
+    public static LottoTicket of(Set<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public static LottoTicket of(List<Integer> lottoNumbers) {
+        if (Objects.isNull(lottoNumbers)) {
+            throw new NullPointerException();
+        }
+        return of(
+                lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet())
+        );
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
     public boolean contains(Integer number) {
-        return lottoNumbers.contains(number);
+        return lottoNumbers.contains(LottoNumber.of(number));
     }
 
     private void validate(Set lottoSet) {

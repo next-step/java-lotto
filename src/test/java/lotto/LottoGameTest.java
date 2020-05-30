@@ -19,7 +19,7 @@ public class LottoGameTest {
     @BeforeEach
     void setUp() {
         winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        lottoGame.add(round, WinningLotto.of(LottoTicket.of(winningNumbers),8));
+        lottoGame.add(round, WinningLotto.of(LottoTicket.of(winningNumbers),LottoNumber.of(8)));
     }
 
     @Test
