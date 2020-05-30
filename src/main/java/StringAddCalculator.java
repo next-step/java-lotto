@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if (text == null) {
@@ -7,16 +10,16 @@ public class StringAddCalculator {
             return 0;
         }
         String[] splitText = StringUtils.splitString(text);
-        int[] intArray = convertToIntArray(splitText);
+        List<Integer> intArray = convertToIntArray(splitText);
         return sumIntArray(intArray);
     }
 
-    private static int[] convertToIntArray(String[] stringArray) {
-        int[] intArray = new int[stringArray.length];
-        for (int i = 0; i < stringArray.length; i++) {
-            intArray[i] = convertUnsignedInt(stringArray[i]);
+    private static List<Integer> convertToIntArray(String[] stringArray) {
+        List<Integer> intList = new ArrayList<>();
+        for (String s : stringArray) {
+            intList.add(convertUnsignedInt(s));
         }
-        return intArray;
+        return intList;
     }
 
     private static int convertUnsignedInt(String text) {
@@ -27,7 +30,7 @@ public class StringAddCalculator {
         return integer;
     }
 
-    private static int sumIntArray(int[] intArray) {
+    private static int sumIntArray(List<Integer> intArray) {
         int sum = 0;
         for (int value : intArray) {
             sum += value;
