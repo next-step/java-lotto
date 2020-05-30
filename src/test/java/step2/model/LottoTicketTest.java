@@ -2,7 +2,6 @@ package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.model.LottoTicket;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,6 @@ public class LottoTicketTest {
     @Test
     void create_LottoNumbers_ExceptionThrown() {
         assertThatThrownBy(() -> LottoTicket.create(new ArrayList<>()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호 개수가 일치하지 않습니다");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

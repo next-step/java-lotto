@@ -7,26 +7,26 @@ public class LottoNumber {
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
 
-    private final int lottoNumber;
+    private final int value;
 
-    private LottoNumber(int lottoNumber) {
-        this.lottoNumber = lottoNumber;
-    }
-
-    public static LottoNumber valueOf(int lottoNumber) {
-        validateLottoNumber(lottoNumber);
-
-        return new LottoNumber(lottoNumber);
-    }
-
-    private static void validateLottoNumber(int lottoNumber) {
-        if (lottoNumber < MIN_VALUE || lottoNumber > MAX_VALUE) {
-            throw new IllegalArgumentException("로또 번호가 올바르지 않습니다.");
+    private LottoNumber(int number) {
+        if (isInvalidRange(number)) {
+            throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 입력이 가능합니다.");
         }
+
+        this.value = number;
     }
 
-    public int get() {
-        return this.lottoNumber;
+    private boolean isInvalidRange(int number) {
+        return number < MIN_VALUE || number > MAX_VALUE;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        return new LottoNumber(number);
+    }
+
+    public int getValue() {
+        return this.value;
     }
 
     @Override
@@ -34,11 +34,11 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(value);
     }
 }

@@ -2,8 +2,6 @@ package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.model.LottoNumber;
-import step2.model.LottoNumberGenerator;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class LottoNumberGeneratorTest {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate();
 
         lottoNumbers.stream()
-                .map(LottoNumber::get)
+                .map(LottoNumber::getValue)
                 .forEach(System.out::println);
 
         assertThat(lottoNumbers).hasSize(6);

@@ -7,33 +7,33 @@ public class LottoTicket {
 
     private static final int ALLOWED_LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> numbers;
 
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    private LottoTicket(List<LottoNumber> numbers) {
+        if (isInvalidCount(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 6개만 입력 가능합니다.");
+        }
+
+        this.numbers = numbers;
+    }
+
+    private boolean isInvalidCount(List<LottoNumber> numbers) {
+        return numbers == null || numbers.size() != ALLOWED_LOTTO_NUMBER_COUNT;
     }
 
     public static LottoTicket create(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
-
         return new LottoTicket(lottoNumbers);
     }
 
-    private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.size() != ALLOWED_LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호 개수가 일치하지 않습니다");
-        }
-    }
-
     public List<Integer> getNumbers() {
-        return this.lottoNumbers.stream()
-                .map(LottoNumber::get)
+        return this.numbers.stream()
+                .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
     }
 
     public int getMatchCount(List<Integer> winningNumbers) {
-        return Math.toIntExact(this.lottoNumbers.stream()
-                .map(LottoNumber::get)
+        return Math.toIntExact(this.numbers.stream()
+                .map(LottoNumber::getValue)
                 .filter(winningNumbers::contains)
                 .count());
     }

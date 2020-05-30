@@ -23,11 +23,9 @@ public class LottoNumberTest {
     @Test
     void valueOf_InvalidNumber_ExceptionThrown() {
         assertThatThrownBy(() -> LottoNumber.valueOf(0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호가 올바르지 않습니다.");
+                .isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> LottoNumber.valueOf(46))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호가 올바르지 않습니다.");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

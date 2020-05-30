@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.exception.NotEnoughMoneyException;
-import step2.model.Money;
 
 import java.util.stream.Stream;
 
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
-    @DisplayName("valueOf()는 Money의 Instance를 반환한다")
+    @DisplayName("스태틱 메소드 생성자는 Money의 인스턴스를 반환한다")
     @ValueSource(ints = {1, 2, 3, 4})
     @ParameterizedTest
     void valueOf_Amount_MoneyInstance(int amount) {

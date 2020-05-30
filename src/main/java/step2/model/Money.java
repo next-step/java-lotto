@@ -22,6 +22,16 @@ public class Money {
         this.usedAmount += priceable.getPrice();
     }
 
+    private void validateUseAmount(Priceable priceable) {
+        if (priceable == null) {
+            throw new IllegalArgumentException("금액을 입력해주세요.");
+        }
+
+        if (!this.isAvailableAmount(priceable)) {
+            throw new NotEnoughMoneyException();
+        }
+    }
+
     public boolean isAvailableAmount(Priceable priceable) {
         return (this.usedAmount + priceable.getPrice()) <= this.totalAmount;
     }
@@ -32,12 +42,6 @@ public class Money {
 
     public int getUsedAmount() {
         return this.usedAmount;
-    }
-
-    private void validateUseAmount(Priceable priceable) {
-        if (!this.isAvailableAmount(priceable)) {
-            throw new NotEnoughMoneyException();
-        }
     }
 
     @Override
