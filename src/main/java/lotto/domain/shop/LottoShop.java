@@ -1,14 +1,18 @@
-package lotto.domain;
+package lotto.domain.shop;
+
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
 
-    private final static int LOTTO_PRICE = 1000;
+    private LottoShop() {
 
-    public List<LottoTicket> publishLottoTickets(int inputMoney) {
-        int lottoTicketCount = getLottoTicketCount(inputMoney);
+    }
+
+    public static List<LottoTicket> publishLottoTickets(LottoPurchaseMoney lottoPurchaseMoney) {
+        int lottoTicketCount = lottoPurchaseMoney.getLottoTicketCount();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
         for (int i = 0; i < lottoTicketCount; i++) {
@@ -18,7 +22,4 @@ public class LottoShop {
         return lottoTicketList;
     }
 
-    private static int getLottoTicketCount(int money) {
-        return money / LOTTO_PRICE;
-    }
 }

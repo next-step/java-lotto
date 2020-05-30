@@ -1,6 +1,10 @@
 package lotto;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.LottoRankCalculator;
+import lotto.domain.shop.LottoPurchaseMoney;
 import lotto.service.LottoService;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -11,13 +15,17 @@ public class LottoMain {
 
     public static void main(String[] args) {
         LottoService lottoService = new LottoService();
-        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(InputView.inputMoney());
+        LottoPurchaseMoney lottoPurchaseMoney = InputView.inputMoney();
+        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(lottoPurchaseMoney);
 
         ResultView resultView = new ResultView();
         resultView.printLottoTicketList(lottoTicketList);
 
-        String winningNumbers = InputView.inputWinningNumbers();
-        List<Integer> lottoRankList = lottoService.matchLottoTicket(lottoTicketList, winningNumbers);
+        LottoTicket winLottoTicket = InputView.inputWinningNumbers();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
+
+        LottoRankCalculator lottoRankCalculator = new LottoRankCalculator(winLottoTicket, bonusNumber);
+        List<LottoRank> lottoRankList = lottoService.matchLottoTicket(lottoTicketList, lottoRankCalculator);
         resultView.printMatchResult(lottoRankList);
     }
 }
