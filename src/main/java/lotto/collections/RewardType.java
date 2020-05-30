@@ -26,4 +26,12 @@ public enum RewardType {
         .map(type -> type.reward * lottoStatistics.get(type.code))
         .reduce(0, Integer::sum);
   }
+
+  public int getCode() {
+    return code;
+  }
+
+  public int getReward() {
+    return reward;
+  }
 }
