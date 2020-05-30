@@ -1,6 +1,7 @@
 package lotto.domain.generator;
 
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +32,7 @@ public class LottoNumberGenerator implements NumberGenerator {
     public List<Integer> getNumbers() {
         Collections.shuffle(this.numbers);
 
-        return numbers.subList(0, 6)
+        return numbers.subList(0, LottoNumbers.LOTTO_SIZE)
                 .stream()
                 .sorted()
                 .collect(toList());
