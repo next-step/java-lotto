@@ -4,10 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.lotto.model.Lotto;
-import study.lotto.model.LottoList;
-import study.lotto.model.LottoNumber;
-import study.lotto.model.Statistics;
+import study.lotto.model.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -85,7 +82,23 @@ public class LottoTest {
         List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        assertThat(lotto.getPrize(winningLotto))
+        Prize prize = lotto.getPrize(winningLotto);
+
+        assertThat(prize.getPrize())
                 .isEqualTo(5000);
+    }
+
+    @DisplayName("수익률 계산")
+    @Test
+    void calculate_earning_rate() {
+        LottoList lottoList = LottoList.create(4);
+        Statistics statistics = new Statistics(lottoList);
+
+        String[] split = "1, 2, 3, 4, 5, 6".split(", ");
+        List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        assertThat(statistics.calculateEarningRate(winningLotto))
+                .isGreaterThanOrEqualTo(0);
     }
 }
