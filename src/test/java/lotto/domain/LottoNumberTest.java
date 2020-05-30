@@ -1,8 +1,9 @@
+package lotto.domain;
+
 import static lotto.domain.LottoNumber.MAXIMUM_NUMBER_BOUND;
 import static lotto.domain.LottoNumber.MINIMUM_NUMBER_BOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
