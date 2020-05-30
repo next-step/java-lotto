@@ -1,5 +1,6 @@
 package lotto;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,7 +8,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,7 +24,8 @@ public class LottoAnalyzerTest {
     @BeforeEach
     void setUp(){
         LottoGame lottoGame = new LottoGame();
-        lottoGame.add(round, WinningLotto.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(8)));
+        Set winningLottoSet = Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::of).collect(Collectors.toSet());
+        lottoGame.add(round, winningLottoSet, 8);
 
         lottoAnalyzer = new LottoAnalyzer(lottoGame);
     }

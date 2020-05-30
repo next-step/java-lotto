@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable {
 
     private int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         if (!isValidNumber(number)) {
             throw new IllegalArgumentException("로또 번호가 범위에 포함되어 있지 않습니다.");
         }

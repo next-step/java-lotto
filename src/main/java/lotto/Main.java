@@ -22,8 +22,7 @@ public class Main {
         int bonusNumber = InputView.inputBonusNumber();
 
         int round = 1;
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(winningNumbers), LottoNumber.of(bonusNumber));
-        lottoGame.add(round, winningLotto);
+        lottoGame.add(round, winningNumbers, bonusNumber);
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);
         List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round, lottoTickets);
