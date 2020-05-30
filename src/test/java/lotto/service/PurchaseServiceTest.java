@@ -1,7 +1,7 @@
+package lotto.service;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.PurchaseService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +20,6 @@ public class PurchaseServiceTest {
   @CsvSource({"14000, 14", "12300, 12", "18800, 18", "12500, 12"})
   @ParameterizedTest
   void 로또가_예상개수만큼_발급된다(Integer payable, Integer expected) {
-    assertThat(purchaseService.purchase(payable)).isEqualTo(expected);
+    assertThat(purchaseService.purchase(payable).numberOfLottoTickets()).isEqualTo(expected);
   }
 }
