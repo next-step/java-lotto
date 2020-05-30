@@ -3,8 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
 
@@ -28,5 +27,4 @@ public class LottoNumberTest {
         assertThat(LottoNumber.isValidNumber(0)).isFalse();
         assertThat(LottoNumber.isValidNumber(46)).isFalse();
     }
-
 }

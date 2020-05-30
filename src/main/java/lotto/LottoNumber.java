@@ -22,9 +22,6 @@ public class LottoNumber {
     }
 
     public static boolean isValidNumber(int number) {
-        if(number >= LOTTO_NUMBER_MIN && number <= LOTTO_NUMBER_MAX) {
-            return true;
-        }
-        return false;
+        return number >= LOTTO_NUMBER_MIN && number <= LOTTO_NUMBER_MAX;
     }
 }
