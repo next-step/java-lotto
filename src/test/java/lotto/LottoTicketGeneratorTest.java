@@ -10,19 +10,19 @@ import java.util.HashSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class LottoGeneratorTest {
+public class LottoTicketGeneratorTest {
 
-    private LottoAutoGenerator lottoGenerator;
+    private LottoTicketAutoGenerator lottoGenerator;
 
     @BeforeEach
     void setUp(){
-        lottoGenerator = new LottoAutoGenerator();
+        lottoGenerator = new LottoTicketAutoGenerator();
     }
 
     @Test
     @DisplayName("로또 생성기를 생성하는데 어떤 에러도 발생하지 않는다.")
     void 로또_생성기_생성_테스트() {
-        assertThatCode(() -> new LottoAutoGenerator()).doesNotThrowAnyException();
+        assertThatCode(() -> new LottoTicketAutoGenerator()).doesNotThrowAnyException();
     }
 
     @Test

@@ -6,15 +6,15 @@ import java.util.stream.IntStream;
 
 public class LottoShop {
 
-    private LottoGenerator lottoGenerator;
+    private LottoTicketGenerator lottoTicketGenerator;
 
-    public LottoShop(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoShop(LottoTicketGenerator lottoTicketGenerator) {
+        this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
     public List<LottoTicket> buy(int amount) {
         return IntStream.range(0, amount)
-                .mapToObj(integer -> lottoGenerator.generate())
+                .mapToObj(integer -> lottoTicketGenerator.generate())
                 .collect(Collectors.toList());
     }
 }

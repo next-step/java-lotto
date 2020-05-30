@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoAutoGenerator implements LottoGenerator {
+public class LottoTicketAutoGenerator implements LottoTicketGenerator {
 
     private static final int LOTTO_GENERATE_COUNT = 6;
 

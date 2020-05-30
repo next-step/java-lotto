@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Main {
 
-    private static LottoShop lottoShop = new LottoShop(new LottoAutoGenerator());
+    private static LottoShop lottoShop = new LottoShop(new LottoTicketAutoGenerator());
     private static LottoGame lottoGame = new LottoGame();
 
     public static void main(String[] args) {
@@ -24,11 +24,11 @@ public class Main {
         int round = 1;
         lottoGame.add(round, winningNumbers, bonusNumber);
 
-        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame);
-        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round, lottoTickets);
+        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame, lottoTickets);
+        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round);
 
         ResultView.printLottoRanks(LottoRank.convertLottoRankWithCount(lottoRanks));
-        ResultView.printRevenueRate(lottoAnalyzer.calculateRevenueRate(round, lottoTickets));
+        ResultView.printRevenueRate(lottoAnalyzer.calculateRevenueRate(round));
 
     }
 }
