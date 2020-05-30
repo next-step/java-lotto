@@ -1,31 +1,17 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.collections.WinningNumbers;
+import lotto.util.AutoLottoNumberGenerator;
 
 public class LottoTicket {
 
-  protected List<LottoNumber> lottoNumbers = new ArrayList<>();
+  protected List<LottoNumber> lottoNumbers;
 
   public LottoTicket() {
-    lottoNumbers = drawAllNumbers();
-    sortDescLottoNumbers();
+    lottoNumbers = new AutoLottoNumberGenerator().shuffle();
   }
-
-  private List<LottoNumber> drawAllNumbers() {
-    final int LOTTO_NUMBER_SIZE = 6;
-    for (int size = 0; size < LOTTO_NUMBER_SIZE; size++) {
-      lottoNumbers.add(new LottoNumber());
-    }
-    return lottoNumbers;
-  }
-
-  public void sortDescLottoNumbers() {
-    lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
-  }
-
   public int getMatchCounts(WinningNumbers winningNumbers) {
     return Math.toIntExact(lottoNumbers.stream()
         .filter(number -> number.getMatchCounts(winningNumbers))
@@ -38,8 +24,8 @@ public class LottoTicket {
 
   @Override
   public String toString() {
-    return "LottoTicket{" +
-        "lottoNumbers=" + lottoNumbers +
-        '}';
+    return "[" + lottoNumbers.stream()
+        .map(Object::toString)
+        .collect(Collectors.joining(", ")) + ']';
   }
 }
