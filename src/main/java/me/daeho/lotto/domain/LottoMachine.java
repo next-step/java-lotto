@@ -9,30 +9,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
+    private final LottoNumberRule lottoNumberRule;
     private final int unitPrice;
-    private final WinningPrize winningPrize;
 
-    private LottoMachine(int unitPrice, WinningPrize winningPrize) {
+    private LottoMachine(LottoNumberRule lottoNumberRule, int unitPrice) {
+        this.lottoNumberRule = lottoNumberRule;
         this.unitPrice = unitPrice;
-        this.winningPrize = winningPrize;
     }
 
-    public static LottoMachine create(int unitPrice, WinningPrize winningPrize) {
-        return new LottoMachine(unitPrice, winningPrize);
+    public static LottoMachine create(LottoNumberRule lottoNumberRule, int unitPrice) {
+        return new LottoMachine(lottoNumberRule, unitPrice);
     }
 
     public List<LottoTicket> buyRandom(int amount) {
         int count = amount / unitPrice;
 
         return IntStream.range(0, count)
-                .mapToObj(v -> LottoTicket.issue(RandomLottoNumber.make()))
+                .mapToObj(v -> LottoTicket.issue(lottoNumberRule.make()))
                 .collect(Collectors.toList());
     }
 
     public int totalPrize(Map<Integer, Integer> matchTicketCounts) {
         int totalPrize = 0;
         for(Map.Entry<Integer, Integer> entry : matchTicketCounts.entrySet()) {
-            totalPrize += winningPrize.prize(entry.getKey()) * entry.getValue();
+            totalPrize += (WinningPrize.getPrizeBy(entry.getKey()) * entry.getValue());
         }
         return totalPrize;
     }
