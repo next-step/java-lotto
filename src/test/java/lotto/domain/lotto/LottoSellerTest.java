@@ -15,7 +15,7 @@ public class LottoSellerTest {
         int price = 10000;
         LottoSeller lottoSeller = new LottoSeller(new LottoNumberGenerator());
 
-        LottoTicket lottoTicket = lottoSeller.buy(price);
+        LottoTicket lottoTicket = lottoSeller.buy(new Price(price));
 
         assertThat(lottoTicket.getLottoNumbers()).hasSize(price/Price.LOTTO_PRICE);
     }
