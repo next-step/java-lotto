@@ -1,10 +1,10 @@
-package dev.dahye.lotto.domain;
+package dev.dahye.lotto.service;
 
-import dev.dahye.lotto.service.LottoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
@@ -37,4 +37,14 @@ class LottoServiceTest {
     void 로또_발급_예외(int money) {
         assertThrows(IllegalArgumentException.class, () -> new LottoService(money));
     }
+
+    @ParameterizedTest(name = "입력 값 = {0}")
+    @ValueSource(strings = {"1, 2, 3, 4, 5"})
+    @NullAndEmptySource
+    @DisplayName("당첨 숫자가 6개가 아닌 경우 IllegalArguments exception throw")
+    void winners_must_be_six_numbers(String winnerNumbers) {
+        LottoService lottoService = new LottoService(1000);
+        assertThrows(IllegalArgumentException.class, () -> lottoService.getWinners(winnerNumbers));
+    }
+
 }
