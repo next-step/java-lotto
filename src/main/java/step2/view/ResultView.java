@@ -24,7 +24,7 @@ public class ResultView {
     public static void printWinningStatistics(LottoTickets lottoTickets, List<Integer> winningNumbers) {
         System.out.println("당첨 통계\n--------------------");
         LottoRankCount lottoRankCount = lottoTickets.calculateLottoRankCount(winningNumbers);
-        LottoRank.WINNING_GROUP.forEach(lottoRank -> {
+        LottoRank.getWinningGroup().forEach(lottoRank -> {
             int matchCount = lottoRankCount.findCount(lottoRank);
             System.out.println(lottoRank.getWinningMoney() + "원 - " + matchCount + "개");
         });

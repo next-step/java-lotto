@@ -1,7 +1,9 @@
 package step2.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public enum LottoRank {
@@ -12,7 +14,7 @@ public enum LottoRank {
     FOURTH((count) -> count.equals(3), 5_000),
     MISS((count) -> count <= 2, 0);
 
-    public final static EnumSet<LottoRank> WINNING_GROUP = EnumSet.of(
+    private final static EnumSet<LottoRank> WINNING_GROUP = EnumSet.of(
             LottoRank.FIRST,
             LottoRank.SECOND,
             LottoRank.THIRD,
@@ -29,9 +31,17 @@ public enum LottoRank {
 
     public static LottoRank findRank(int matchCount) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.match.test(matchCount))
+                .filter(lottoRank -> isMatch(matchCount, lottoRank))
                 .findFirst()
                 .orElse(LottoRank.MISS);
+    }
+
+    public static Set<LottoRank> getWinningGroup() {
+        return Collections.unmodifiableSet(WINNING_GROUP);
+    }
+
+    private static boolean isMatch(int matchCount, LottoRank lottoRank) {
+        return lottoRank.match.test(matchCount);
     }
 
     public int getWinningMoney() {
