@@ -1,30 +1,41 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResult {
-    private List<Integer> winningNumberList;
+    private WinningNumbers winningNumbers = new WinningNumbers();
+    private Statistics statistics = new Statistics();
 
-    public LottoResult(String winningNumbers) {
-        winningNumberList = new ArrayList();
-        String[] split = winningNumbers.split(",");
+    private LottoResult() {
+    }
+
+    public LottoResult(List<LotteryNumbers> lotteryNumbersList, String winningNumbers) {
+        this();
+        setWinningNumbers(winningNumbers.split(","));
+        compareLottoNumbers(lotteryNumbersList);
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
+    private void setWinningNumbers(String[] split) {
+        if (split.length > 6 || split.length < 6) {
+            throw new IllegalArgumentException("갯수를 맞춰주세요");
+        }
+
         for (String number : split) {
-            winningNumberList.add(Integer.parseInt(number.trim()));
+            this.winningNumbers.addNumber(Integer.parseInt(number.trim()));
         }
     }
 
-    public int getCountLottoNumberWinning(List<Integer> lottoNumberList) {
-        int count = 0;
-
-        for (Integer number : lottoNumberList) {
-            count += isWinningNumber(number);
+    private void compareLottoNumbers(List<LotteryNumbers> lotteryNumbersList) {
+        for (LotteryNumbers lotteryNumbers : lotteryNumbersList) {
+            setStatistics(lotteryNumbers.getLottoNumberList());
         }
-
-        return count;
     }
 
-    private int isWinningNumber(int number) {
-        return winningNumberList.contains(number) ? 1 : 0;
+    private void setStatistics(List<Integer> lottoNumberList) {
+        statistics.addCount(winningNumbers.countingWinningNumbers(lottoNumberList));
     }
 }

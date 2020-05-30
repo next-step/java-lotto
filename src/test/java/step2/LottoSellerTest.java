@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("로또 판매자 클래스 테스트")
 public class LottoSellerTest {
@@ -20,6 +21,14 @@ public class LottoSellerTest {
         List<LotteryNumbers> lotteryNumbersList = seller.receiveMoney(input);
 
         assertThat(lotteryNumbersList).hasSize(expected);
+    }
+
+    @Test
+    @DisplayName("금액 1000단위로 제대로 입력했는지 테스트")
+    void rightMoneyInputList() {
+        LottoSeller seller = new LottoSeller();
+        assertThatIllegalArgumentException().isThrownBy(() -> seller.receiveMoney(100));
+        assertThatIllegalArgumentException().isThrownBy(() -> seller.receiveMoney(1100));
 
     }
 

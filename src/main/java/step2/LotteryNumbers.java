@@ -17,4 +17,17 @@ public class LotteryNumbers {
     public List<Integer> getLottoNumberList() {
         return lottoNumberList;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (Integer number : lottoNumberList) {
+            stringBuilder.append(number).append(",");
+        }
+
+        int lastCommaIndex = stringBuilder.lastIndexOf(",");
+        stringBuilder.deleteCharAt(lastCommaIndex);
+
+        return stringBuilder.toString();
+    }
 }

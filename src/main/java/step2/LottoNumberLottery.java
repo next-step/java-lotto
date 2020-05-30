@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoNumberLottery {
     private static final int MAX_LOTTERY_NUMBER_COUNT = 6;
+    private List<Integer> lottoNumbers = LottoNumbers.getLottoNumbers();
 
     public List<LotteryNumbers> getLottoNumbersList(int count) {
         List<LotteryNumbers> lotteryNumbersList = new ArrayList<>();
@@ -17,7 +18,6 @@ public class LottoNumberLottery {
     }
 
     private LotteryNumbers getLotteryNumbers() {
-        List<Integer> lottoNumbers = LottoNumbers.getLottoNumbers();
         Collections.shuffle(lottoNumbers);
 
         LotteryNumbers lotteryNumbers = new LotteryNumbers();
