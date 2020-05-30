@@ -3,6 +3,7 @@ package study.lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
@@ -37,8 +38,9 @@ public class Lotto {
 
     private static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_BASE);
+        LOTTO_NUMBER_BASE.stream().map(LottoNumber::getNumber).forEach(System.out::print);
 
-        return LOTTO_NUMBER_BASE.subList(0, 6);
+        return new ArrayList<>(LOTTO_NUMBER_BASE.subList(0, 6));
     }
 
     public long compareToWinningNumbers(Lotto winningLotto) {
@@ -47,5 +49,9 @@ public class Lotto {
 
     public Prize getPrize(Lotto winningLotto) {
         return Prize.find((int)compareToWinningNumbers(winningLotto));
+    }
+
+    public String toString() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()).toString();
     }
 }
