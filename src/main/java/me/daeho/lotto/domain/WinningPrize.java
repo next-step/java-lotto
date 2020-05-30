@@ -1,34 +1,38 @@
 package me.daeho.lotto.domain;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class WinningPrize {
-    private final Map<Integer, Integer> prizes = new HashMap<>();
+import java.util.Arrays;
 
-    private WinningPrize() {
+public enum WinningPrize {
+    NOT_MATCH(0, 0),
+    MATCH_THREE(3, 5000),
+    MATCH_FOUR(4, 50000),
+    MATCH_FIVE(5, 1500000),
+    MATCH_SIX(6,2000000000)
+    ;
+
+    private final int count;
+    private final int prize;
+
+    WinningPrize(int count, int prize) {
+        this.count = count;
+        this.prize = prize;
     }
 
-    public static WinningPrize create() {
-        return new WinningPrize();
+    public int getCount() {
+        return count;
     }
 
-    public WinningPrize setting(int count, int prize) {
-        prizes.putIfAbsent(count, prize);
-        return this;
+    public int getPrize() {
+        return prize;
     }
 
-    public int prize(int count) {
-        return prizes.getOrDefault(count, 0);
+
+    public static int getCountBy(int prize) {
+        return Arrays.stream(values()).filter(v -> v.getPrize() == prize).findAny().orElse(NOT_MATCH).getCount();
     }
 
-    public int size() {
-        return prizes.size();
-    }
-
-    public Collection<Integer> winningCounts() {
-        return prizes.keySet();
+    public static int getPrizeBy(int count) {
+        return Arrays.stream(values()).filter(v -> v.getCount() == count).findAny().orElse(NOT_MATCH).getPrize();
     }
 }
