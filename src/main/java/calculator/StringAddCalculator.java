@@ -7,7 +7,7 @@ public class StringAddCalculator {
         if (validate(calculationText)) {
             return 0;
         }
-        return 0;
+        return Integer.parseInt(calculationText);
     }
 
     private static boolean validate(String calculationText) {
