@@ -22,10 +22,10 @@ public class StringAddCalculator {
         try {
             number = Integer.parseInt(stringNum);
             if(number < 0) {
-                throw new RuntimeException();
+                throw new RuntimeException("양수를 넣어주세");
             }
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("숫자가 아닙니다.");
         }
 
         return number;
