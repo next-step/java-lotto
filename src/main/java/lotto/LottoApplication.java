@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.DrawingMachine;
 import lotto.domain.LottoMachine;
 import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
@@ -21,11 +20,5 @@ public class LottoApplication {
         OutputView.printLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
-
-        DrawingMachine drawingMachine = new DrawingMachine(winningNumbers);
-
-        LottoResult lottoResult = new LottoResult(lottoMoney, drawingMachine.drawAllLottoTicket(lottoTickets));
-
-        OutputView.printWinningStatistics(lottoResult);
     }
 }
