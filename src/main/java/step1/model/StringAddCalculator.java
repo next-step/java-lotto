@@ -10,7 +10,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
 
     public static int splitAndSum(String inputString) {
-        if(checkNullinput(inputString)) {
+        if (checkNullinput(inputString)) {
             return 0;
         }
         String[] splitString = makeSplitString(inputString);
@@ -21,7 +21,7 @@ public class StringAddCalculator {
         int number = 0;
         try {
             number = Integer.parseInt(stringNum);
-            if(number < 0) {
+            if (number < 0) {
                 throw new RuntimeException("양수를 넣어주세");
             }
         } catch (NumberFormatException e) {
@@ -33,7 +33,7 @@ public class StringAddCalculator {
 
     private static int sumNumbers(String[] splitString) {
         int sum = 0;
-        for( String num :  splitString) {
+        for ( String num :  splitString) {
             sum += checkMinus(num);
         }
 
@@ -43,7 +43,7 @@ public class StringAddCalculator {
     private static String[] makeSplitString(String inputString) {
         String[] splitString = null;
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(inputString);
-        if(m.find()) {
+        if (m.find()) {
             DELIMITER = m.group(1);
             splitString = m.group(2).split(DELIMITER);
 
