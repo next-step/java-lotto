@@ -3,7 +3,7 @@ package stringAddCalculate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringSpliter {
+public class StringSplit {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
 

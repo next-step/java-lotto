@@ -12,7 +12,7 @@ public class NumberExpression {
     }
 
     private List<Number> convertToNumber(final String expression) {
-        String[] stringNumbers = StringSpliter.split(expression);
+        String[] stringNumbers = StringSplit.split(expression);
         return Arrays.stream(stringNumbers)
                 .map(value -> new Number(Integer.parseInt(value)))
                 .collect(Collectors.toList());
