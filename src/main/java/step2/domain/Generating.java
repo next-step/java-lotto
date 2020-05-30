@@ -6,7 +6,7 @@ public class Generating {
 
     private GenerableStrategy generableStrategy;
 
-    public List<Integer> generate(int count) {
+    public Lotto generate(int count) {
         return generableStrategy.generate(count);
     }
 

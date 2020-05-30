@@ -2,11 +2,11 @@ package step2.domain;
 
 public class LottoGameResultDto {
 
-    private double earningRate;
-    private int firstPrizeCount;
-    private int secondPrizeCount;
-    private int thirdPrizeCount;
-    private int forthPrizeCount;
+    private final double earningRate;
+    private final int firstPrizeCount;
+    private final int secondPrizeCount;
+    private final int thirdPrizeCount;
+    private final int forthPrizeCount;
 
     public LottoGameResultDto(double earningRate, int firstPrizeCount, int secondPrizeCount,
         int thirdPrizeCount, int forthPrizeCount) {

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+import step2.domain.Lotto;
 import step2.domain.RandomGenerableStrategy;
 
 class RandomGenerableStrategyTest {
@@ -37,12 +38,12 @@ class RandomGenerableStrategyTest {
     @Test
     void generate() {
         //given&when
-        List<Integer> generatedNumbers = randomGenerableStrategy.generate(LOTTO_SELECTION_COUNT);
+        Lotto generatedNumbers = randomGenerableStrategy.generate(LOTTO_SELECTION_COUNT);
 
         //then
-        assertThat(generatedNumbers).hasSize(6);
-        assertThat(generatedNumbers)
+        assertThat(generatedNumbers.getLottoNumbers()).hasSize(6);
+        assertThat(generatedNumbers.getLottoNumbers())
             .allMatch(number -> number >= LOTTO_FIRST_NUMBER && number <= LOTTO_LAST_NUMBER);
-        assertThat(generatedNumbers).isSorted();
+        assertThat(generatedNumbers.getLottoNumbers()).isSorted();
     }
 }

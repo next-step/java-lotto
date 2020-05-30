@@ -13,12 +13,20 @@ public class LottoGenerator extends Generating {
         this.setGenerableStrategy(new RandomGenerableStrategy());
     }
 
-    public List<List<Integer>> generateLottos(int lottoCount) {
+    public List<Lotto> generateLottos(int price) {
+        int lottoCount = getLottoCount(price);
 
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(this.generate(LOTTO_SELECTION_COUNT));
         }
         return lottos;
+    }
+
+    private int getLottoCount(int price) {
+        if (price < 1000) {
+            return 0;
+        }
+        return (int)Math.floor(price)/1000;
     }
 }

@@ -7,16 +7,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import step2.domain.GenerableStrategy;
 
 public class RandomGenerableStrategy implements GenerableStrategy {
 
     @Override
-    public List<Integer> generate(int count) {
+    public Lotto generate(int count) {
         List<Integer> sequentialNumbers = makeSequentialNumbers(
             LOTTO_FIRST_NUMBER,
             LOTTO_LAST_NUMBER);
-        return getSequentialShuffledNumbers(sequentialNumbers, count);
+        return new Lotto(getSequentialShuffledNumbers(sequentialNumbers, count));
     }
 
     private List<Integer> makeSequentialNumbers(int start, int end) {
