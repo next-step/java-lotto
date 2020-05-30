@@ -1,18 +1,28 @@
 package me.daeho.lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class RandomLottoNumber {
+public class RandomLottoNumber implements LottoNumberRule {
     private static final int NUMBER_COUNT = 6;
+    private final List<Integer> availableNumbers;
 
-    public static List<LottoNumber> make() {
-        Set<LottoNumber> randomNumbers = new HashSet<>(NUMBER_COUNT);
-        while(randomNumbers.size() != NUMBER_COUNT) {
-            randomNumbers.add(LottoNumber.random());
-        }
-        List<LottoNumber> numbers = new ArrayList<>(randomNumbers);
-        Collections.shuffle(numbers);
-        return numbers;
+    private RandomLottoNumber(List<Integer> availableNumbers) {
+        this.availableNumbers = availableNumbers;
+    }
+
+    public static RandomLottoNumber create(List<Integer> availableNumbers) {
+        return new RandomLottoNumber(availableNumbers);
+    }
+
+    public List<LottoNumber> make() {
+        Collections.shuffle(availableNumbers);
+
+        return IntStream.range(0, NUMBER_COUNT)
+                .mapToObj(availableNumbers::get)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }
 

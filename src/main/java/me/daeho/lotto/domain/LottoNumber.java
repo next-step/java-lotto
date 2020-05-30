@@ -1,10 +1,11 @@
 package me.daeho.lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private final static Random GENERATOR = new Random();
     private final static int MAX_VALUE = 45;
     private final static int MIN_VALUE = 1;
     private final int value;
@@ -18,21 +19,19 @@ public class LottoNumber {
         return new LottoNumber(value);
     }
 
-    public static LottoNumber random() {
-        return new LottoNumber(getRandomNumber());
-    }
-
     public int value() {
         return value;
     }
 
-    private static int getRandomNumber() {
-        return GENERATOR.nextInt(MAX_VALUE) + 1;
+    public static List<Integer> availableNumbers() {
+        return IntStream.range(MIN_VALUE, MAX_VALUE)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private static void validateLottoNumber(int value) {
         if(value > MAX_VALUE || value < MIN_VALUE)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호 범위를 초과하였습니다.");
     }
 
     @Override

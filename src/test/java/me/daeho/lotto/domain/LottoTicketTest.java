@@ -7,10 +7,9 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("로또 테스트")
-class LottoTicketTest {
+class DefaultLottoTicketTest {
     @Test
     public void issue_not_6_count_number() {
         List<LottoNumber> fiveNumbers = Arrays.asList(
@@ -31,10 +30,10 @@ class LottoTicketTest {
                 LottoNumber.of(7)
         );
 
-        assertThatThrownBy(() -> LottoTicket.issue(fiveNumbers))
+        assertThatThrownBy(() -> DefaultLottoTicket.issue(fiveNumbers))
                 .isInstanceOf(RuntimeException.class);
 
-        assertThatThrownBy(() -> LottoTicket.issue(sevenNumbers))
+        assertThatThrownBy(() -> DefaultLottoTicket.issue(sevenNumbers))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -58,7 +57,7 @@ class LottoTicketTest {
                 LottoNumber.of(12)
         );
 
-        LottoTicket lotto = LottoTicket.issue(numbers);
+        DefaultLottoTicket lotto = DefaultLottoTicket.issue(numbers);
         assertThat(lotto.containsCount(numbers)).isEqualTo(6);
         assertThat(lotto.containsCount(diffNumbers)).isEqualTo(0);
     }
