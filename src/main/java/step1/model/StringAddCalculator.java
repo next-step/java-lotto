@@ -1,4 +1,4 @@
-package modal;
+package step1.model;
 
 
 import java.util.regex.Matcher;
@@ -10,22 +10,29 @@ public class StringAddCalculator {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
 
     public static int splitAndSum(String inputString) {
-        if(checkNullinput(inputString)) {
+        if (checkNullinput(inputString)) {
             return 0;
         }
         String[] splitString = makeSplitString(inputString);
         return sumNumbers(splitString);
     }
 
-    private static int checkMinus(String stringNum) {
-        int number = 0;
+    private static boolean checkMinus(int num) {
+
+        if (num < 0) {
+            throw new RuntimeException("양수를 넣어주세");
+        }
+
+        return true;
+    }
+
+    private static int convrrtStringToint(String stringNum) {
+            int number = 0;
+
         try {
             number = Integer.parseInt(stringNum);
-            if(number < 0) {
-                throw new RuntimeException();
-            }
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("숫자가 아닙니다.");
         }
 
         return number;
@@ -33,8 +40,12 @@ public class StringAddCalculator {
 
     private static int sumNumbers(String[] splitString) {
         int sum = 0;
-        for( String num :  splitString) {
-            sum += checkMinus(num);
+        for ( String num :  splitString) {
+            int convertNum = convrrtStringToint(num);
+
+            if (checkMinus(convertNum)) {
+                sum += convertNum;
+            }
         }
 
         return sum;
@@ -43,7 +54,7 @@ public class StringAddCalculator {
     private static String[] makeSplitString(String inputString) {
         String[] splitString = null;
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(inputString);
-        if(m.find()) {
+        if (m.find()) {
             DELIMITER = m.group(1);
             splitString = m.group(2).split(DELIMITER);
 

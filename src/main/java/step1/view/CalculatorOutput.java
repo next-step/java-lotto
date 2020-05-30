@@ -1,8 +1,6 @@
-package view;
+package step1.view;
 
-import java.util.List;
-
-public class LottoOutput {
+public class CalculatorOutput {
 
     public static void printResult(int sum) {
         System.out.println(sum);
