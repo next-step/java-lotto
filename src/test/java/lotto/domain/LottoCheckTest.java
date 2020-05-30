@@ -25,11 +25,11 @@ public class LottoCheckTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", bonus);
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(List.of(1,2,3,4,5,8)),
-                new Lotto(List.of(1,2,3,9,10,8)),
-                new Lotto(List.of(7,8,9,12,10,11)),
-                new Lotto(List.of(1,10,3,9,5,8)),
-                new Lotto(List.of(1,2,3,4,5,7)));
+                Lotto.newInstance(List.of(1,2,3,4,5,8)),
+                Lotto.newInstance(List.of(1,2,3,9,10,8)),
+                Lotto.newInstance(List.of(7,8,9,12,10,11)),
+                Lotto.newInstance(List.of(1,10,3,9,5,8)),
+                Lotto.newInstance(List.of(1,2,3,4,5,7)));
         final int[] count = new int[6];
 
         count[INDEX_RANK_1] = LottoCheck.getWinningLottoCount(lottos, winningLotto, RANK1);
@@ -55,11 +55,11 @@ public class LottoCheckTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", bonus);
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(List.of(1,2,3,4,5,8)), // 5개 일치 15
-                new Lotto(List.of(1,2,3,9,10,8)), // 3개 5000
-                new Lotto(List.of(7,8,9,12,10,11)), // 0개
-                new Lotto(List.of(1,10,3,9,5,8)), //3
-                new Lotto(List.of(1,2,3,4,5,7))); // 5 개 보너스
+                Lotto.newInstance(List.of(1,2,3,4,5,8)), // 5개 일치 15
+                Lotto.newInstance(List.of(1,2,3,9,10,8)), // 3개 5000
+                Lotto.newInstance(List.of(7,8,9,12,10,11)), // 0개
+                Lotto.newInstance(List.of(1,10,3,9,5,8)), //3
+                Lotto.newInstance(List.of(1,2,3,4,5,7))); // 5 개 보너스
 
         BigDecimal expectedAmount = BigDecimal.valueOf(2 * 5000)
                 .add(BigDecimal.valueOf(1500000))

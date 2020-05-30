@@ -15,14 +15,18 @@ public class Lotto {
 
     private final List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<Integer> lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
         validateLottoNumberDuplicate(lottoNumbers);
         validateRangeOfNumbers(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public static Lotto valueOf(String lottoText) {
+    public static Lotto newInstance(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto newInstance(String lottoText) {
         String[] winningNumberText = lottoText.split(SPLIT_REGX);
         List<Integer> lottoNumber = Arrays.stream(winningNumberText)
                 .map(s -> Integer.parseInt(s.trim()))
