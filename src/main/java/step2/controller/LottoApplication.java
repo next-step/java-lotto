@@ -1,6 +1,7 @@
-package step2;
+package step2.controller;
 
-import step2.controller.LottoMachine;
+import step2.model.LottoMachine;
+import step2.model.LottoTicketPrice;
 import step2.model.LottoTickets;
 import step2.model.Money;
 import step2.view.InputView;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class LottoApplication {
 
-    private static final LottoMachine LOTTO_MACHINE = LottoMachine.create();
+    private static final LottoMachine LOTTO_MACHINE = LottoMachine.create(LottoTicketPrice.PRICE_1000);
 
     public static void main(String[] args) {
         int useAmount = InputView.getUseAmount();

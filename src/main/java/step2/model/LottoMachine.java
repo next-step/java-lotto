@@ -1,10 +1,8 @@
-package step2.controller;
+package step2.model;
 
 import step2.exception.NotEnoughMoneyException;
-import step2.model.LottoTicketGenerator;
-import step2.model.LottoTicketPrice;
-import step2.model.LottoTickets;
-import step2.model.Money;
+
+import javax.transaction.TransactionRequiredException;
 
 public class LottoMachine {
 
@@ -13,14 +11,15 @@ public class LottoMachine {
     private final LottoTicketPrice ticketPrice;
 
     private LottoMachine(LottoTicketPrice ticketPrice) {
+        if (ticketPrice == null) {
+            throw new IllegalArgumentException("티켓 금액을 설정해주세요.");
+        }
+
         this.ticketPrice = ticketPrice;
     }
 
-    public static LottoMachine create() {
-        return new LottoMachine(LottoTicketPrice.getDefault());
-    }
-
     public static LottoMachine create(LottoTicketPrice ticketPrice) {
+
         return new LottoMachine(ticketPrice);
     }
 

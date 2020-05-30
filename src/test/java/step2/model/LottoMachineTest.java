@@ -1,11 +1,8 @@
-package step2.controller;
+package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.NotEnoughMoneyException;
-import step2.model.LottoTicketPrice;
-import step2.model.LottoTickets;
-import step2.model.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,10 +11,16 @@ public class LottoMachineTest {
 
     private static final LottoMachine LOTTO_MACHINE = LottoMachine.create(LottoTicketPrice.PRICE_1000);
 
-    @DisplayName("티켓 가격을 입력 할 수 있다")
+    @DisplayName("스태틱 메소드 생성자는 LottoMachine 인스턴스를 반환한다")
     @Test
     void create_TicketPrice_MachineInstance() {
         assertThat(LOTTO_MACHINE).isInstanceOf(LottoMachine.class);
+    }
+
+    @DisplayName("스태틱 메소드 생성자에 Null을 입력하면 예외가 발생한다")
+    @Test
+    void create_Null_ExceptionThrown() {
+        assertThatThrownBy(() -> LottoMachine.create(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("입력한 금액으로 살 수 있는 최대 장수를 LottoTickets으로 반환한다")
