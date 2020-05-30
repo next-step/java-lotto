@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -79,7 +78,7 @@ public class LottoTest {
     @Test
     public void valueOfTest() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto actualLotto = Lotto.valueOf("1, 2, 3, 4, 5, 6");
+        Lotto actualLotto = Lotto.fromLottoText("1, 2, 3, 4, 5, 6");
 
         assertThat(actualLotto).isEqualTo(lotto);
     }

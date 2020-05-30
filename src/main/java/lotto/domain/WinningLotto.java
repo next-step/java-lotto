@@ -9,7 +9,7 @@ public class WinningLotto {
     private final int bonus;
 
     public WinningLotto(String winnigNumbers, int bonus) {
-        this.lotto = Lotto.valueOf(winnigNumbers);
+        this.lotto = Lotto.fromLottoText(winnigNumbers);
         this.bonus = bonus;
         validateContainLotto(lotto, bonus);
     }
