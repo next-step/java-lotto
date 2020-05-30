@@ -7,10 +7,9 @@ import step1.view.CalculatorOutput;
 public class CalculatorMain {
 
     public static void main(String[] args) {
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
         String inputString = CalculatorInput.inputGameCoin();
 
-        int result = stringAddCalculator.splitAndSum(inputString);
+        int result = StringAddCalculator.splitAndSum(inputString);
 
         CalculatorOutput.printResult(result);
     }
