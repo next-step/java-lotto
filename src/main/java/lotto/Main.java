@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Main {
 
-    private static LottoShop lottoShop = new LottoShop();
+    private static LottoShop lottoShop = new LottoShop(new LottoAutoGenerator());
     private static LottoGame lottoGame = new LottoGame();
 
     public static void main(String[] args) {
