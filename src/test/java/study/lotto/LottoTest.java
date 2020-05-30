@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
 import study.lotto.model.LottoList;
 import study.lotto.model.LottoNumber;
+import study.lotto.model.Statistics;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,5 +71,19 @@ public class LottoTest {
 
         assertThat(lottoList.getLottoList())
                 .allMatch(Objects::nonNull);
+    }
+
+    @DisplayName("로또 당첨금 계산")
+    @ParameterizedTest
+    @ValueSource(strings = { "1, 2, 3, 4, 5, 6", "2, 3, 4, 7, 9, 12" })
+    void check_prize(String input) {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::new).collect(Collectors.toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        String[] split = input.split(", ");
+        List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+
+        assertThat(lotto.getPrize(winningNumbers))
+                .isEqualTo(5000);
     }
 }

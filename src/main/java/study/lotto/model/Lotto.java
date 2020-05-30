@@ -39,4 +39,8 @@ public class Lotto {
     public long compareToWinningNumbers(List<LottoNumber> winningNumbers) {
         return lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
+
+    public int getPrize(List<LottoNumber> winningNumbers) {
+        return 0;
+    }
 }
