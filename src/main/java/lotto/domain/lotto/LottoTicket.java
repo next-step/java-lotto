@@ -21,7 +21,7 @@ public class LottoTicket {
 
     private List<LottoNumbers> createLottoTicket(int lottoCount, NumberGenerator generator) {
         return IntStream.range(0, lottoCount)
-                .mapToObj(i -> new LottoNumbers(generator))
+                .mapToObj(i -> LottoNumbers.newLottoNumbersWithNumberGenerator(generator))
                 .collect(Collectors.toList());
     }
 

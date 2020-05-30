@@ -12,12 +12,19 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    // TODO 정적 팩토리 메소드
-    public LottoNumbers(NumberGenerator generator) {
+    public static LottoNumbers newLottoNumbersWithNumberGenerator(NumberGenerator generator) {
+        return new LottoNumbers(generator);
+    }
+
+    public static LottoNumbers newLottoNumbersWithList(List<Integer> numbers) {
+        return new LottoNumbers(numbers);
+    }
+
+    private LottoNumbers(NumberGenerator generator) {
         this.numbers = createLottoNumbers(generator);
     }
 
-    public LottoNumbers(List<Integer> numbers) {
+    private LottoNumbers(List<Integer> numbers) {
         this.numbers = createLottoNumbersThroughInteger(numbers);
     }
 

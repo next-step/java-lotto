@@ -14,7 +14,7 @@ public class LottoNumbersTest {
     @DisplayName("NumberGenerator 타입을 주입 받아 LottoNumbers 객체를 생성할 수 있다.")
     @Test
     void createLottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new LottoNumberGenerator());
 
         assertThat(lottoNumbers.getNumbers()).hasSize(6);
     }
@@ -26,7 +26,7 @@ public class LottoNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
 
         NumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
-        LottoNumbers lottoNumbers = new LottoNumbers(fixedNumberGenerator);
+        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
 
         int matchCount = lottoNumbers.matchCount(winningNumbers);
 
@@ -37,7 +37,7 @@ public class LottoNumbersTest {
     @Test
     void contains() {
         LottoNumber lottoNumber = new LottoNumber(1);
-        LottoNumbers lottoNumbers = new LottoNumbers(new FixedNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new FixedNumberGenerator());
 
         boolean contains = lottoNumbers.contains(lottoNumber);
 
