@@ -23,6 +23,5 @@ class LottoNumberGeneratorTest {
                 () -> assertThat(numbers.get(0)).isBetween(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE),
                 () -> assertThat(numbers).hasSize(6)
         );
-
     }
 }

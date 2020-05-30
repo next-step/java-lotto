@@ -58,7 +58,7 @@ public class WinningStatisticsTest {
 
         float profit = winningStatistics.calculateProfit();
 
-        assertThat(profit).isEqualTo((float) LottoRank.FIFTH.getWinningMoney() / price.getPrice());
+        assertThat(profit).isEqualTo((float) LottoRank.FOURTH.getWinningMoney() / price.getPrice());
     }
 
     private static class NotMatchNumberGenerator implements NumberGenerator {
