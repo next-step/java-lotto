@@ -8,9 +8,6 @@ public class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    // 당첨 번호와 동일한 번호 보유 개수에 따른 당첨금 배열
-    private static final int[] MATCH_PRIZES = new int[] { 0, 0, 0, 5000, 50000, 1500000, 2000000000 };
-
     private final List<LottoNumber> lottoNumbers;
 
     static {
@@ -48,7 +45,7 @@ public class Lotto {
         return lottoNumbers.stream().filter(winningLotto.getLottoNumbers()::contains).count();
     }
 
-    public int getPrize(Lotto winningLotto) {
-        return MATCH_PRIZES[(int)compareToWinningNumbers(winningLotto)];
+    public Prize getPrize(Lotto winningLotto) {
+        return Prize.find((int)compareToWinningNumbers(winningLotto));
     }
 }
