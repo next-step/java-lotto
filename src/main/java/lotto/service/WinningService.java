@@ -1,12 +1,13 @@
 package lotto.service;
 
-import lotto.domain.LottoResult;
 import lotto.collections.LottoTickets;
 import lotto.collections.WinningNumbers;
+import lotto.collections.LottoResult;
 
 public class WinningService {
 
-  public LottoResult calculateLottoMatches(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
-    return lottoTickets.calculateLottoResult(winningNumbers);
+  protected LottoResult calculateLottoMatches(LottoTickets lottoTickets,
+      WinningNumbers winningNumbers) {
+    return lottoTickets.createLottoResult(winningNumbers);
   }
 }

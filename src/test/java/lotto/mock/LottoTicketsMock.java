@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.collections.LottoTickets;
 import lotto.collections.WinningNumbers;
-import lotto.domain.LottoResult;
+import lotto.collections.LottoResult;
 
 public class LottoTicketsMock extends LottoTickets {
 
@@ -18,7 +18,7 @@ public class LottoTicketsMock extends LottoTickets {
   }
 
   @Override
-  public LottoResult calculateLottoResult(WinningNumbers numbers) {
+  public LottoResult createLottoResult(WinningNumbers numbers) {
     Map<Integer, Integer> lottoStatistics = this.lottoTicketMockList.stream()
         .map(ticket -> ticket.getMatchCounts(numbers))
         .collect(Collectors

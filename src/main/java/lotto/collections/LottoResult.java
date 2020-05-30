@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.collections;
 
 import java.util.Map;
 

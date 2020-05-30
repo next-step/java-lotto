@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.collections.LottoResult;
 import lotto.collections.WinningNumbers;
-import lotto.domain.LottoResult;
 import lotto.mock.LottoTicketMock;
 import lotto.mock.LottoTicketsMock;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,8 @@ public class WinningServiceTest {
 
   @DisplayName("로또 개수와 당첨 번호를 비교한 후, 맞은 개수를 반환한다.")
   @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,6 : 6 : 1", "1,2,3,4,5,7 : 1,2,3,4,5,6 : 5 : 1"
-  , "3,4,5,6,22,33 : 1,2,3,4,5,6 : 4 : 1", "4,5,6,7,28,42 : 1,2,3,4,5,6 : 3 : 1"}, delimiter = ':')
+      , "3,4,5,6,22,33 : 1,2,3,4,5,6 : 4 : 1",
+      "4,5,6,7,28,42 : 1,2,3,4,5,6 : 3 : 1"}, delimiter = ':')
   @ParameterizedTest
   public void 당첨번호_입력시_일치여부가_리턴된다(String lottoNumber, String winningNumber,
       int expectedMatchType, int matchCount) {
