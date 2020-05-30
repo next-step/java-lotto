@@ -12,7 +12,7 @@ class LottoNumbersListTest {
     @Test
     void size() {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
-        lottoNumbersList.addLottoNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoNumbersList.addLottoNumbers(new LottoNumbers());
 
         int size = lottoNumbersList.size();
 
@@ -22,7 +22,7 @@ class LottoNumbersListTest {
     @Test
     void getNumbers() {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
-        lottoNumbersList.addLottoNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoNumbersList.addLottoNumbers(new LottoNumbers());
 
         LottoNumbers lottoNumbers = lottoNumbersList.getNumbers(0);
 

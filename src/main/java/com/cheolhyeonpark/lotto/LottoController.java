@@ -1,6 +1,5 @@
 package com.cheolhyeonpark.lotto;
 
-import com.cheolhyeonpark.lotto.domain.AutoGenerator;
 import com.cheolhyeonpark.lotto.domain.LottoManager;
 import com.cheolhyeonpark.lotto.domain.LottoNumbersList;
 import com.cheolhyeonpark.lotto.domain.WinningNumbers;
@@ -15,7 +14,7 @@ public class LottoController {
 
     public void run() {
         int amount = inputView.inputAmount();
-        LottoManager lottoManager = new LottoManager(new LottoNumbersList(), new AutoGenerator());
+        LottoManager lottoManager = new LottoManager(new LottoNumbersList());
         resultView.printLottoNumbersList(lottoManager.createLottoNumbers(amount));
         resultView.printGameResult(lottoManager.getGameResult(new WinningNumbers(inputView.inputWinningNumber())), amount);
     }

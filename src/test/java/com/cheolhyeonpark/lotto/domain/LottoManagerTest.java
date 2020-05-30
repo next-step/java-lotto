@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoManagerTest {
 
-    LottoManager lottoManager = new LottoManager(new LottoNumbersList() , new AutoGenerator());
+    LottoManager lottoManager = new LottoManager(new LottoNumbersList());
 
     @Test
     public void createLottoNumbersList() {
