@@ -38,7 +38,6 @@ public class Lotto {
 
     private static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_BASE);
-        LOTTO_NUMBER_BASE.stream().map(LottoNumber::getNumber).forEach(System.out::print);
 
         return new ArrayList<>(LOTTO_NUMBER_BASE.subList(0, 6));
     }

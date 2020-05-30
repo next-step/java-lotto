@@ -12,8 +12,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
 
@@ -91,14 +90,15 @@ public class LottoTest {
     @DisplayName("수익률 계산")
     @Test
     void calculate_earning_rate() {
-        LottoList lottoList = LottoList.create(4);
-        Statistics statistics = new Statistics(lottoList);
+        LottoList lottoList = LottoList.create(10);
 
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
         List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        assertThat(statistics.calculateEarningRate(winningLotto))
+        Statistics statistics = Statistics.createStatistics(4000, lottoList, winningLotto);
+
+        assertThat(statistics.getEarningRate())
                 .isGreaterThanOrEqualTo(0);
     }
 }
