@@ -15,7 +15,7 @@ public class LottoService {
         int lottoCount = money / LOTTO_PRICE;
         this.lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(LottoTicket.create());
+            lottoTickets.add(LottoTicket.issued());
         }
     }
 
