@@ -21,7 +21,7 @@ class WinningLottoTest {
     @Test
     public void createWinningLotto() {
         WinningLotto winningLotto = new WinningLotto(DEFAULT_WINNING_NUMBER_TEXT, 7);
-        Lotto lotto = Lotto.valueOf(DEFAULT_WINNING_NUMBER_TEXT);
+        Lotto lotto = Lotto.newInstance(DEFAULT_WINNING_NUMBER_TEXT);
         assertThat(winningLotto).isNotNull();
         assertThat(winningLotto.inContainBonus(lotto)).isFalse();
         assertThat(winningLotto.getContainCount(lotto)).isEqualTo(6);

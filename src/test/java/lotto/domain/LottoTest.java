@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     public void createLottoNumberTest() {
         List<Integer> lottoNumber = createLottoNumber(1,45, 6 );
-        Lotto lotto = new Lotto(lottoNumber);
+        Lotto lotto = Lotto.newInstance(lottoNumber);
         List<Integer> lottoNumberActual = lotto.getNumbers();
         assertAll(
                 () -> assertThat(lotto).isNotNull(),
@@ -42,7 +42,7 @@ public class LottoTest {
     @ValueSource(ints = {5, 7})
     public void validateSixNumberTest(int count) {
         assertThatThrownBy(() -> {
-            new Lotto(createLottoNumber(1, 45, count));
+            Lotto.newInstance(createLottoNumber(1, 45, count));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -51,7 +51,7 @@ public class LottoTest {
     @MethodSource("lottoNumbersOutOfRange")
     public void validateNumberRangeTest(List<Integer> lottoNumbers) {
         assertThatThrownBy(() -> {
-            new Lotto(lottoNumbers);
+            Lotto.newInstance(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -61,14 +61,14 @@ public class LottoTest {
     public void validateDuplicateNumberTest() {
         List<Integer> lottoNumbers = List.of(1,2,3,4,4,6);
         assertThatThrownBy(() -> {
-            new Lotto(lottoNumbers);
+            Lotto.newInstance(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또에 전달된 숫자들 중 몇개가 포함되어 있는 지 리턴한다.")
     @Test
     public void getContainCountTest() {
-        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto lotto = Lotto.newInstance(List.of(1,2,3,4,5,6));
 
         int counts = lotto.getContainCount(List.of(1,2,3));
 
@@ -78,8 +78,8 @@ public class LottoTest {
     @DisplayName("String 문자열을 받아 정상적으로 Lotto 가 리턴된다.")
     @Test
     public void valueOfTest() {
-        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto actualLotto = Lotto.valueOf("1, 2, 3, 4, 5, 6");
+        Lotto lotto = Lotto.newInstance(List.of(1,2,3,4,5,6));
+        Lotto actualLotto = Lotto.newInstance("1, 2, 3, 4, 5, 6");
 
         assertThat(actualLotto).isEqualTo(lotto);
     }
