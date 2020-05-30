@@ -43,7 +43,7 @@ public class WinningStatisticsTest {
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
 
-        assertThat(lottoRank.size()).isEqualTo(4);
+        assertThat(lottoRank.size()).isEqualTo(LottoRank.values().length - 1);
     }
 
     @DisplayName("수익률을 확인할 수 있다.")

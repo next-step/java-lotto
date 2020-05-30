@@ -19,7 +19,7 @@ public class Main {
 
         LottoTicket lottoTicket = lottoSeller.buy(price);
 
-        OutputView.printLottoTicket(lottoTicket);
+        OutputView.printPurchasedLottoTicket(lottoTicket);
 
         String winningNumbers = InputView.printRequireWinningNumbers();
 
