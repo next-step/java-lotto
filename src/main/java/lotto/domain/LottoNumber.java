@@ -1,93 +1,72 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int LOTTO_NUMBERS_COUNT = 6;
-    private static final String PREFIX = "[";
-    private static final String SUFFIX = "]";
-    private static final String DELIMITER_PATTERN = ", ";
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
-    private final List<Integer> lottoNumbers;
-    private final CreationType creationType;
+    private final int lottoNumber;
 
-    private LottoNumber(List<Integer> lottoNumbers, CreationType creationType) {
-        validateLottoNumbers(lottoNumbers);
-        validateCreationType(creationType);
-
-        this.lottoNumbers = lottoNumbers;
-        this.creationType = creationType;
+    private LottoNumber(int lottoNumber) {
+        validateLottoNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber newInstance(List<Integer> lottoNumbers) {
-        return new LottoNumber(lottoNumbers, CreationType.NONE);
+    private LottoNumber(int bonusNumber, LottoTicket lastWinLottoTicket) {
+        this(bonusNumber);
+        validateBonusNumber(lastWinLottoTicket);
     }
 
-    public static LottoNumber newInstance(List<Integer> lottoNumbers, CreationType creationType) {
-        return new LottoNumber(lottoNumbers, creationType);
+    public static LottoNumber newInstance(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
-    private static void validateLottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers == null) {
-            throw new IllegalArgumentException("로또 번호를 생성할 수 없습니다.");
-        }
+    public static LottoNumber newBonusNumber(int bonusNumber, LottoTicket lastWinLottoTicket) {
+        return new LottoNumber(bonusNumber, lastWinLottoTicket);
+    }
 
-        if (lottoNumbers.size() != LOTTO_NUMBERS_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
-        }
-
-        if (new HashSet<>(lottoNumbers).size() < LOTTO_NUMBERS_COUNT) {
-            throw new IllegalArgumentException("중복된 번호를 포함할 수 없습니다.");
+    private void validateLottoNumber(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 까지 입력 가능합니다.");
         }
     }
 
-    private void validateCreationType(CreationType creationType) {
-        if (creationType == null) {
-            throw new IllegalArgumentException("생성 유형이 존재하지 않습니다.");
+    private void validateBonusNumber(LottoTicket lastWinLottoTicket) {
+        if (lastWinLottoTicket == null) {
+            throw new IllegalArgumentException("당첨 번호가 존재하지 않습니다.");
+        }
+
+        if (lastWinLottoTicket.isMatchNumber(this)) {
+            throw new IllegalArgumentException("당첨 번호에 포함된 번호를 입력할 수 없습니다.");
         }
     }
 
-    public static List<Integer> createNonDuplicateNumbers() {
-        return NumbersFactory.createNonDuplicateNumbers(LOTTO_NUMBERS_COUNT);
-    }
-
-    public static List<Integer> createNonDuplicateNumbers(String manualNumbers) {
-        List<Integer> lottoNumbers = NumbersFactory.createManualNumbers(manualNumbers);
-
-        validateLottoNumbers(lottoNumbers);
-
-        return lottoNumbers;
-    }
-
-    public LottoNumber clone() {
-        return new LottoNumber(this.lottoNumbers, this.creationType);
-    }
-
-    public int getMatchCount(LottoNumber lotto) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lotto::isMatchNumber)
-                .count();
-    }
-
-    public CreationType getCreationType() {
-        return this.creationType;
-    }
-
-    public boolean isMatchNumber(int number) {
-        return this.lottoNumbers.contains(number);
-    }
-
-    private String getLottoNumbersToString() {
-        return this.lottoNumbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(DELIMITER_PATTERN));
+    public int getLottoNumber() {
+        return this.lottoNumber;
     }
 
     @Override
     public String toString() {
-        return PREFIX + getLottoNumbersToString() + SUFFIX;
+        return String.valueOf(this.lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.lottoNumber - other.getLottoNumber();
     }
 }
