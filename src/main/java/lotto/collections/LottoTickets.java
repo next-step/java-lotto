@@ -29,4 +29,8 @@ public class LottoTickets {
 
     return new LottoResult(lottoStatistics);
   }
+
+  public List<LottoTicket> getLottoTickets() {
+    return lottoTickets;
+  }
 }
