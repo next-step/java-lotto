@@ -1,5 +1,7 @@
 package step2.domain;
 
+import static step2.Constants.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class LottoGenerator extends Generating {
     }
 
     private int getLottoCount(int price) {
-        if (price < 1000) {
+        if (price < LOTTO_PRICE) {
             return 0;
         }
-        return (int)Math.floor(price)/1000;
+        return (int) Math.floor(price) / LOTTO_PRICE;
     }
 }

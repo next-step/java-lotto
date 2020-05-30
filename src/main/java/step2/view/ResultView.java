@@ -1,5 +1,6 @@
 package step2.view;
 
+import static step2.Constants.LOTTO_PRICE;
 import static step2.view.Messages.RESPONSE_PRICE_TEMPLATE;
 import static step2.view.Messages.WINNING_STATISTIC_RESULT_LOSS_CASE;
 import static step2.view.Messages.WINNING_STATISTIC_TEMPLATE;
@@ -7,12 +8,12 @@ import static step2.view.Messages.WINNING_STATISTIC_TEMPLATE;
 import java.util.List;
 import step2.domain.Lotto;
 import step2.domain.LottoGameResultDto;
+import step2.domain.Prize;
 
 public class ResultView {
 
-    private static final int LOTTO_PRICE = 1000;
     public void printPriceResult(int price) {
-        System.out.printf(RESPONSE_PRICE_TEMPLATE, price/LOTTO_PRICE);
+        System.out.printf(RESPONSE_PRICE_TEMPLATE, price / LOTTO_PRICE);
     }
 
     public void printLottos(List<Lotto> lottos) {
@@ -25,11 +26,15 @@ public class ResultView {
     }
 
     public void printStatistic(LottoGameResultDto lottoGameResultDto) {
+        System.out.println(lottoGameResultDto.toString());
         System.out.printf(WINNING_STATISTIC_TEMPLATE,
+            Prize.FORTH.getCashPrize(),
             lottoGameResultDto.getForthPrizeCount(),
+            Prize.THIRD.getCashPrize(),
             lottoGameResultDto.getThirdPrizeCount(),
+            Prize.SECOND.getCashPrize(),
             lottoGameResultDto.getSecondPrizeCount(),
-            lottoGameResultDto.getThirdPrizeCount(),
+            Prize.FIRST.getCashPrize(),
             lottoGameResultDto.getFirstPrizeCount(),
             lottoGameResultDto.getEarningRate());
         printStatisticResult(lottoGameResultDto.getEarningRate());

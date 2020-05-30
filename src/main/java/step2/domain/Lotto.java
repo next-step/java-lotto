@@ -1,5 +1,7 @@
 package step2.domain;
 
+import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
+
 import java.util.List;
 
 public class Lotto {
@@ -32,12 +34,25 @@ public class Lotto {
 
         drawLotto(winningNumbers);
 
-        if (this.hitCount < 2) {
-            this.prize = this.hitCount % 6 + 1;
+        if (this.hitCount >= 3) {
+            this.prize = this.hitCount % LOTTO_SELECTION_COUNT + 1;
         }
     }
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getCashPrice() {
+        return Prize.getCashPrize(this.prize);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+            "lottoNumbers=" + lottoNumbers +
+            ", hitCount=" + hitCount +
+            ", prize=" + prize +
+            '}';
     }
 }

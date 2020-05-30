@@ -1,4 +1,4 @@
-package step2.doamin;
+package step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.LottoGenerator;
 
 class LottoGeneratorTest {
 
@@ -23,18 +21,18 @@ class LottoGeneratorTest {
     }
 
     @Test
-    public void generateLottosWithRandom() {
+    public void generateLottos() {
         //given
-        int lottoCount = 5;
+        int userPrice = 5000;
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lotto lottoResult = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoGenerator.setGenerableStrategy(count -> lottoResult);
 
         //when
-        List<Lotto> lottos = lottoGenerator.generateLottos(lottoCount);
+        List<Lotto> lottos = lottoGenerator.generateLottos(userPrice);
 
         //then
-        assertThat(lottos).hasSize(lottoCount);
+        assertThat(lottos).hasSize(userPrice/1000);
         assertThat(lottos).containsOnly(lottoResult);
     }
 }

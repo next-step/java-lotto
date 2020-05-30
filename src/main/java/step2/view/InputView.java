@@ -15,7 +15,7 @@ public class InputView {
 
     public int inputPrice() {
         System.out.println(REQUEST_PRICE);
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 
     public String inputLastWeekWinningNumbers() {

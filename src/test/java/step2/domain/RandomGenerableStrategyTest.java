@@ -1,4 +1,4 @@
-package step2.doamin;
+package step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
@@ -9,8 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
-import step2.domain.Lotto;
-import step2.domain.RandomGenerableStrategy;
 
 class RandomGenerableStrategyTest {
 

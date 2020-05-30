@@ -1,7 +1,5 @@
 package step2.domain;
 
-import java.util.List;
-
 public class Generating {
 
     private GenerableStrategy generableStrategy;

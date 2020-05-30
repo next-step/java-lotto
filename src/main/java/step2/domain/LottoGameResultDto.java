@@ -36,4 +36,15 @@ public class LottoGameResultDto {
     public int getForthPrizeCount() {
         return forthPrizeCount;
     }
+
+    @Override
+    public String toString() {
+        return "LottoGameResultDto{" +
+            "earningRate=" + earningRate +
+            ", firstPrizeCount=" + firstPrizeCount +
+            ", secondPrizeCount=" + secondPrizeCount +
+            ", thirdPrizeCount=" + thirdPrizeCount +
+            ", forthPrizeCount=" + forthPrizeCount +
+            '}';
+    }
 }
