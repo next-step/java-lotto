@@ -4,24 +4,26 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
-        ManualLottoCount manualLottoCount = InputView.getManualLottoCount(purchaseAmount);
-        ManualNumbers manualNumbers = InputView.getManualNumbers(manualLottoCount);
+        PurchasePrice purchasePrice = InputView.getPurchasePrice();
+        List<LottoTicket> manualTickets = InputView.getManualTickets(InputView.getManualLottoCount());
+        PurchaseInfo purchaseInfo = PurchaseInfo.newInstance(purchasePrice, manualTickets);
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, manualNumbers);
-        LottoNumbers lottoNumbers = lottoGame.createLottoNumbers();
+        LottoGame lottoGame = new LottoGame(purchaseInfo);
+        LottoTickets lottoTickets = lottoGame.createAutoLottoTickets();
 
-        ResultView.printPurchaseCount(lottoNumbers);
-        ResultView.printLottoNumbers(lottoNumbers.toList());
+        ResultView.printPurchaseCount(lottoTickets);
+        ResultView.printLottoNumbers(lottoTickets.toList());
 
-        LottoNumber lastWinLottoNumber = LottoNumber.newInstance(InputView.getLastWeekLottoNumbers());
-        BonusNumber bonusNumber = InputView.getBonusNumber(lastWinLottoNumber);
+        LottoTicket lastWinLottoTicket = LottoTicket.newWinLottoTicket(InputView.getLastWeekLottoNumbers());
+        LottoNumber bonusNumber = InputView.getBonusNumber(lastWinLottoTicket);
 
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumber, bonusNumber);
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoTicket, bonusNumber);
         ResultView.printMatchResult(lottoMatchResult);
-        ResultView.printProfitRate(lottoMatchResult, purchaseAmount);
+        ResultView.printProfitRate(lottoMatchResult, purchasePrice);
     }
 }
