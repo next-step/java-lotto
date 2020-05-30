@@ -12,7 +12,10 @@ public class OutputView {
         public static String BOUGHT_LOTTO_COUNT = "%d개를 구매했습니다.%n";
         public static String TITLE_WINNING_LOTTO_RESULT = "당첨 통계";
         public static String DASH_BAR = "---------------";
-        public static String WINNING_LOTTO_RESULT = "%d개 일치(%s 원) - %d개%n";
+        public static String WINNING_LOTTO_PREFIX_RESULT = "%d개 일치";
+        public static String WINNING_LOTTO_BONUS_RESULT = ", 보너스 볼 일치";
+        public static String WINNING_LOTTO_POSTFIX_RESULT = " (%s원) - %d개%n";
+
         public static String TOTAL_RETURN_VALUE = "총 수익률은 %s 입니다.%n";
     }
 
@@ -34,11 +37,21 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printSameCountWinningNumber(LottoRank lottoRank, int sameCount) {
-        System.out.printf(TEXT.WINNING_LOTTO_RESULT,
+    public static void printSameCountWinningNumber(LottoRank lottoRank, int sameCount, boolean isBonus) {
+        System.out.printf(createSameCountWinningNumberText(isBonus),
                 lottoRank.getContainCountsSameWinningNumber(),
                 lottoRank.getWinningAmount().toString(),
                 sameCount);
+    }
+
+    private static String createSameCountWinningNumberText(boolean isBonus) {
+        StringBuilder textForPrint = new StringBuilder();
+        textForPrint.append(TEXT.WINNING_LOTTO_PREFIX_RESULT);
+        if(isBonus) {
+           textForPrint.append(TEXT.WINNING_LOTTO_BONUS_RESULT);
+        }
+        textForPrint.append(TEXT.WINNING_LOTTO_POSTFIX_RESULT);
+        return textForPrint.toString();
     }
 
     public static void printBuyLottoCount(int buyCount) {

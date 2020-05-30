@@ -49,4 +49,7 @@ public enum LottoRank {
         return winningAmount;
     }
 
+    public boolean isBonus() {
+        return isBonus;
+    }
 }
