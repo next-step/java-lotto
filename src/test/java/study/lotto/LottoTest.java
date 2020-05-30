@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
+import study.lotto.model.LottoList;
 import study.lotto.model.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,5 +59,16 @@ public class LottoTest {
 
         assertThat(lotto.compareToWinningNumbers(winningNumbers))
                 .isEqualTo(3);
+    }
+
+    @DisplayName("로또 여러개 동시 생성 테스트")
+    @Test
+    void create_lotto_list() {
+        LottoList lottoList = LottoList.create(4);
+
+        assertThat(lottoList.getLottoList().size()).isEqualTo(4);
+
+        assertThat(lottoList.getLottoList())
+                .allMatch(Objects::nonNull);
     }
 }
