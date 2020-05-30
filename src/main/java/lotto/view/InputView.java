@@ -17,13 +17,13 @@ public final class InputView {
     private InputView() {
     }
 
-    public static PurchaseAmount getPurchaseAmount() {
+    public static PurchasePrice getPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
         String inputValue = SCANNER.nextLine();
 
         validateBlank(inputValue);
 
-        return PurchaseAmount.newInstance(StringUtils.toInt(inputValue));
+        return PurchasePrice.newInstance(StringUtils.toInt(inputValue));
     }
 
     private static void validateBlank(String value) {
@@ -32,46 +32,48 @@ public final class InputView {
         }
     }
 
-    public static ManualLottoCount getManualLottoCount(PurchaseAmount purchaseAmount) {
+    public static int getManualLottoCount() {
         System.out.println(NEW_LINE + "수동으로 구매할 로또 수를 입력해 주세요.");
         String inputValue = SCANNER.nextLine();
 
-        int manualLottoCount = StringUtils.toInt(inputValue);
-        return ManualLottoCount.newInstance(manualLottoCount, purchaseAmount);
+        return StringUtils.toInt(inputValue);
     }
 
-    public static ManualNumbers getManualNumbers(ManualLottoCount manualLottoCount) {
+    public static List<LottoTicket> getManualTickets(int manualLottoCount) {
         System.out.println(NEW_LINE + "수동으로 구매할 번호를 입력해 주세요.");
 
-        return ManualNumbers.newInstance(inputManualNumbers(manualLottoCount));
+        List<String> manualNumbers = inputManualNumbers(manualLottoCount);
+        return manualNumbers.stream()
+                .map(LottoTicketFactory::createManualLottoTicket)
+                .collect(Collectors.toList());
     }
 
-    private static List<String> inputManualNumbers(ManualLottoCount manualLottoCount) {
+    private static List<String> inputManualNumbers(int manualLottoCount) {
         return Stream.generate(() -> {
                     String inputValue = SCANNER.nextLine();
                     validateBlank(inputValue);
                     return inputValue;
                 })
-                .limit(manualLottoCount.getManualLottoCount())
+                .limit(manualLottoCount)
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> getLastWeekLottoNumbers() {
+    public static List<LottoNumber> getLastWeekLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputValue = SCANNER.nextLine();
 
         validateBlank(inputValue);
 
-        return LottoNumber.createNonDuplicateNumbers(inputValue);
+        return LottoTicket.createNonDuplicateNumbers(inputValue);
     }
 
-    public static BonusNumber getBonusNumber(LottoNumber lastWinLottoNumber) {
+    public static LottoNumber getBonusNumber(LottoTicket lastWinLottoTicket) {
         System.out.println(NEW_LINE + "보너스 볼을 입력해 주세요.");
         String inputValue = SCANNER.nextLine();
 
         validateBlank(inputValue);
 
         int bonusNumber = StringUtils.toInt(inputValue);
-        return BonusNumber.newInstance(bonusNumber, lastWinLottoNumber);
+        return LottoNumber.newBonusNumber(bonusNumber, lastWinLottoTicket);
     }
 }
