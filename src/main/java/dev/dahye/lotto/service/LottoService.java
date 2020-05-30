@@ -37,51 +37,50 @@ public class LottoService {
         return money % LOTTO_PRICE != MUST_BE_REMAINDER;
     }
 
-    public int getTotalCount() {
+    protected int getTicketsCount() {
         return lottoTickets.size();
     }
 
-    public List<Winning> getWinners(String winnerNumbers) {
-        List<Integer> winners = validateWinnerNumbers(winnerNumbers);
-
-        return getWinnings(winners);
-    }
-
-    public List<Winning> getWinnings(List<Integer> winningNumbers) {
+    public List<Winning> getWinnings(String winningNumberInput) {
         List<Winning> winnings = new ArrayList<>();
+        List<Integer> winningNumbers = validateWinningNumbers(winningNumberInput);
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
-
-            if (Winning.isWinning(matchCount)) {
-                winnings.add(Winning.getWinning(matchCount));
-            }
+            getWinning(winnings, matchCount);
         }
 
         return winnings;
     }
 
-    private List<Integer> validateWinnerNumbers(String winnerNumbers) {
-        validateWinnersNullOrEmpty(winnerNumbers);
-        List<Integer> winners = convertStringListToIntegerList(Arrays.asList(winnerNumbers.split(WINNERS_DELIMITER)));
-        validateWinnerSize(winners);
+    private List<Integer> validateWinningNumbers(String winningNumberInput) {
+        validateWinnersNullOrEmpty(winningNumberInput);
+        List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
+        validateWinningNumberSize(winningNumbers);
 
-        return winners;
+        return winningNumbers;
     }
 
-    private void validateWinnersNullOrEmpty(String winnerNumbers) {
-        if (winnerNumbers == null || winnerNumbers.trim().isEmpty()) {
+    private void getWinning(List<Winning> winnings, int matchCount) {
+        if (Winning.isWinning(matchCount)) {
+            winnings.add(Winning.getWinning(matchCount));
+        }
+    }
+
+    private void validateWinnersNullOrEmpty(String winningNumberInput) {
+        if (winningNumberInput == null || winningNumberInput.trim().isEmpty()) {
             throw new IllegalArgumentException("당첨 번호는 반드시 입력되어야 합니다.");
         }
     }
 
-    private void validateWinnerSize(List<Integer> winners) {
-        if (winners.size() != WINNERS_COUNT) {
+    private void validateWinningNumberSize(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != WINNERS_COUNT) {
             throw new IllegalArgumentException("당첨 번호는 반드시 6개여야 합니다.");
         }
     }
 
-    private List<Integer> convertStringListToIntegerList(List<String> strings) {
+    private List<Integer> convertStringToIntegerList(String input) {
+        List<String> strings = Arrays.asList(input.split(WINNERS_DELIMITER));
         List<Integer> ints = new ArrayList<>();
 
         for (String string : strings) {
