@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottosTest {
   private static final List<Lotto> AUTO_LOTTOS = Stream.of(
+    LottoGenerator.generateLotto(),
+    LottoGenerator.generateLotto(),
+    LottoGenerator.generateLotto()
+  ).collect(toList());
+  private static final List<Lotto> DIRECT_LOTTOS = Stream.of(
     LottoGenerator.generateLotto("1,2,3,4,5,6"),
     LottoGenerator.generateLotto("11,12,13,14,15,16"),
     LottoGenerator.generateLotto("21,22,23,24,25,26")
-  ).collect(toList());
-  private static final List<Lotto> DIRECT_LOTTOS = Stream.of(
-    LottoGenerator.generateLotto("9,8,7,6,5,4"),
-    LottoGenerator.generateLotto("19,18,17,16,15,14"),
-    LottoGenerator.generateLotto("29,28,27,26,25,24")
   ).collect(toList());
 
   @DisplayName("자동 로또의 갯수를 검증")
@@ -35,8 +35,8 @@ public class LottosTest {
     List<Lotto> autoLottos1 = AUTO_LOTTOS.stream().limit(1L).collect(toList());
     List<Lotto> autoLottos2 = AUTO_LOTTOS.stream().limit(2L).collect(toList());
     return Stream.of(
-      Arguments.of(Lottos.of(DIRECT_LOTTOS, autoLottos1), 1),
-      Arguments.of(Lottos.of(DIRECT_LOTTOS, autoLottos2), 2)
+      Arguments.of(Lottos.of(autoLottos1), 1),
+      Arguments.of(Lottos.of(autoLottos2), 2)
     );
   }
 
@@ -51,15 +51,19 @@ public class LottosTest {
     List<Lotto> directLottos1 = DIRECT_LOTTOS.stream().limit(1L).collect(toList());
     List<Lotto> directLottos2 = DIRECT_LOTTOS.stream().limit(2L).collect(toList());
     return Stream.of(
-      Arguments.of(Lottos.of(directLottos1, AUTO_LOTTOS), 1),
-      Arguments.of(Lottos.of(directLottos2, AUTO_LOTTOS), 2)
+      Arguments.of(Lottos.of(directLottos1), 1),
+      Arguments.of(Lottos.of(directLottos2), 2)
     );
   }
 
   @DisplayName("전체 로또의 갯수를 검증")
   @Test
   void 전체_로또_갯수_테스트 () {
-    assertEquals(Lottos.of(DIRECT_LOTTOS, AUTO_LOTTOS).stream().count(), 6);
+    Lottos lottos = Lottos.of(
+      Stream.concat(DIRECT_LOTTOS.stream(), AUTO_LOTTOS.stream())
+            .collect(toList())
+    );
+    assertEquals(lottos.getDirectLottosSize() + lottos.getDirectLottosSize(), 6);
   }
 
 }

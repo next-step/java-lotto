@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -23,7 +24,7 @@ public class LottoShopTest {
   @ValueSource(ints = { -1000, 0, 999 })
   void 구매_금액_검증_테스트 (long price) {
     assertThatExceptionOfType(LottoMinimumPriceException.class)
-      .isThrownBy(() -> buyLotto(price));
+      .isThrownBy(() -> buyLotto(price, new ArrayList<>()));
   }
 
   @DisplayName("구매 금액에 비해 수동 입력 로또의 갯수가 많을 경우 LottoLesserPriceException 발생")
@@ -50,7 +51,7 @@ public class LottoShopTest {
   @ParameterizedTest
   @MethodSource("provideLottoCountAboutPrice")
   void 구매_갯수_테스트 (long price, long expected) {
-    assertEquals(expected, buyLotto(price).stream().count());
+    assertEquals(expected, buyLotto(price, new ArrayList<>()).stream().count());
   }
 
   private static Stream<Arguments> provideLottoCountAboutPrice () {
