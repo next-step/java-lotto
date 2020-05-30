@@ -12,11 +12,11 @@ public class LottoSellerTest {
     @DisplayName("Price만큼 LottoNumbers를 가진 LottoTicket을 발급할 수 있다.")
     @Test
     void buy() {
-        int price = 10000;
+        Price price = new Price(10000);
         LottoSeller lottoSeller = new LottoSeller(new LottoNumberGenerator());
 
-        LottoTicket lottoTicket = lottoSeller.buy(new Price(price));
+        LottoTicket lottoTicket = lottoSeller.buy(price);
 
-        assertThat(lottoTicket.getLottoNumbers()).hasSize(price/Price.LOTTO_PRICE);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(price.getLottoCount());
     }
 }
