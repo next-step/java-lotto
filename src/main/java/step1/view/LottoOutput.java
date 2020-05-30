@@ -1,6 +1,4 @@
-package view;
-
-import java.util.List;
+package step1.view;
 
 public class LottoOutput {
 

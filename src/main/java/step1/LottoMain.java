@@ -1,6 +1,8 @@
-import model.StringAddCalculator;
-import view.LottoInput;
-import view.LottoOutput;
+package step1;
+
+import step1.model.StringAddCalculator;
+import step1.view.LottoInput;
+import step1.view.LottoOutput;
 
 public class LottoMain {
 
