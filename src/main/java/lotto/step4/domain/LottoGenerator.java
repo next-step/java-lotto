@@ -16,7 +16,7 @@ public class LottoGenerator {
   static {
     LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
                              .boxed()
-                             .map(LottoNumber::of)
+                             .map(LottoNumber::valueOf)
                              .collect(toList());
   }
 
@@ -32,8 +32,8 @@ public class LottoGenerator {
   public static Lotto generateLotto (String lottoNumbers) {
     return Arrays.stream(lottoNumbers.split(DELIMITER))
                  .map(String::trim)
-                 .map(LottoNumber::of)
-                 .collect(collectingAndThen(toList(), Lotto::of));
+                 .map(LottoNumber::valueOf)
+                 .collect(collectingAndThen(toList(), Lotto::ofDirect));
   }
 
 }
