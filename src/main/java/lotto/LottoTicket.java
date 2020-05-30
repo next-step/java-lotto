@@ -6,7 +6,7 @@ public class LottoTicket {
 
     private static final int DEFAULT_SIZE = 6;
 
-    private Set<Integer> lottoNumbers;
+    private final Set<Integer> lottoNumbers;
 
     private LottoTicket(List<Integer> lottoNumbers) {
 
