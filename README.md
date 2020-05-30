@@ -103,9 +103,18 @@
 - [x] 로또 2등 출력 구현 
 
 
-
+-------
 - 원시값 정리
 > https://velog.io/@amobmocmo/Level-1-%EC%A0%95%EB%A6%AC-%EA%B8%B0%EC%88%A0-
 
 - Optional 
 > http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/
+
+- 불변객체
+> https://velog.io/@kyle/%EB%B6%88%EB%B3%80-%EA%B0%9D%EC%B2%B4%EB%9E%80-Java-Immutable-Object
+
+- 외부값 변조 방지 read-only
+> https://stackoverflow.com/questions/51881801/why-is-it-better-to-return-unmodifiablelist-from-a-method-where-list-is-created
+
+- 깊은 복사
+> https://os94.tistory.com/153

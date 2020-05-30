@@ -13,8 +13,7 @@ public class LottoShopTest {
     void buyLottoTicketTest_1개_구입() {
         int money = 1000;
         LottoPurchaseMoney input = LottoPurchaseMoney.input(money);
-        LottoShop lottoShop = new LottoShop();
-        List<LottoTicket> lottoTicketList = lottoShop.publishLottoTickets(input);
+        List<LottoTicket> lottoTicketList = LottoShop.publishLottoTickets(input);
         assertThat(lottoTicketList.size()).isEqualTo(1);
     }
 
@@ -22,8 +21,7 @@ public class LottoShopTest {
     void buyLottoTicketTest_여러개_구입() {
         int money = 14000;
         LottoPurchaseMoney input = LottoPurchaseMoney.input(money);
-        LottoShop lottoShop = new LottoShop();
-        List<LottoTicket> lottoTicketList = lottoShop.publishLottoTickets(input);
+        List<LottoTicket> lottoTicketList = LottoShop.publishLottoTickets(input);
         assertThat(lottoTicketList.size()).isEqualTo(14);
     }
 }

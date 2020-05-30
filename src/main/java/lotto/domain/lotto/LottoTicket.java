@@ -6,21 +6,14 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
 
-    private final static int LOTTO_MAX_NUMBER = 45;
-    private final static int LOTTO_MIN_NUMBER = 1;
-    private final static int LOTTO_TICKET_SIZE = 6;
-
     private final static int LOTTO_MATCH  = 1;
     private final static int LOTTO_NOT_MATCH  = 0;
-
-    private final static List<LottoNumber> lottoAllNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .mapToObj(LottoNumber::create)
-            .collect(Collectors.toList());
+    private final static int LOTTO_TICKET_SIZE = 6;
 
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoTicket() {
-        makeLottoTicket();
+        lottoNumbers = LottoTicketGenerator.makeLottoTicket();
     }
 
     public LottoTicket(String inputValue) {
@@ -49,7 +42,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     private int executeMatchLottoNumber(LottoNumber number) {
@@ -59,18 +52,6 @@ public class LottoTicket {
     private boolean isMatchNumber(LottoNumber number) {
         return lottoNumbers.stream()
                     .anyMatch(lottoNumber -> lottoNumber.isMatch(number));
-    }
-
-    private void makeLottoTicket() {
-        Collections.shuffle(lottoAllNumbers);
-
-        List<LottoNumber> newLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {
-            newLottoNumbers.add(lottoAllNumbers.get(i));
-        }
-
-        Collections.sort(newLottoNumbers);
-        this.lottoNumbers =  newLottoNumbers;
     }
 
     private void validateNumber(String[] splitNumbers) {

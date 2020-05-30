@@ -5,7 +5,7 @@ public class LottoPurchaseMoney {
     private final static int LOTTO_PRICE = 1000;
     private final static int ZERO_NUMBER = 0;
 
-    private int money;
+    private final int money;
 
     private LottoPurchaseMoney(int money) {
         validateMoney(money);

@@ -1,12 +1,13 @@
 package lotto.domain.rank;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoRevenueCalculator {
 
-    private Map<LottoRank, Integer> lottoRankCount =  new LinkedHashMap<>(Map.of(
+    private Map<LottoRank, Integer> lottoRankCount = new LinkedHashMap<>(Map.of(
             LottoRank.FIRST, 0,
             LottoRank.SECOND, 0,
             LottoRank.THIRD, 0,
@@ -18,12 +19,11 @@ public class LottoRevenueCalculator {
     private int totalMoney;
 
     public LottoRevenueCalculator(List<LottoRank> lottoRanks) {
-        addMoneyAndCount(lottoRanks);
-        this.totalSize = lottoRanks.size();
+        this.totalSize = addMoneyAndCount(lottoRanks);
     }
 
     public Map<LottoRank, Integer> getLottoRankCount() {
-        return lottoRankCount;
+        return Collections.unmodifiableMap(lottoRankCount);
     }
 
     public String getRevenueRate() {
@@ -31,13 +31,14 @@ public class LottoRevenueCalculator {
         return String.format("%.2f", revenueRate);
     }
 
-    private void addMoneyAndCount(List<LottoRank> lottoRankList) {
+    private int addMoneyAndCount(List<LottoRank> lottoRankList) {
         int winningMoney = 0;
         for (LottoRank lottoRank : lottoRankList) {
             saveRankCount(lottoRank);
             winningMoney += lottoRank.getWinningMoney();
         }
         this.totalMoney = winningMoney;
+        return lottoRankList.size();
     }
 
     private void saveRankCount(LottoRank rank) {

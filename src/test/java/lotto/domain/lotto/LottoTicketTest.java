@@ -2,6 +2,8 @@ package lotto.domain.lotto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
@@ -18,8 +20,12 @@ public class LottoTicketTest {
     void LottoTicket_1등_티켓_생성() {
         String winNumbers = "1, 2, 3, 4, 5, 6";
         int lottoNumberSize = 6;
+        int matchWinLottoTicketCount = 6;
 
-        LottoTicket lottoTicket = new LottoTicket(winNumbers);
-        assertThat(lottoTicket.size()).isEqualTo(lottoNumberSize);
+        LottoTicket winLottoTicket = new LottoTicket(winNumbers);
+        LottoTicket newLottoTicket = new LottoTicket(winNumbers);
+
+        assertThat(newLottoTicket.size()).isEqualTo(lottoNumberSize);
+        assertThat(winLottoTicket.matchLottoTicketCount(newLottoTicket)).isEqualTo(matchWinLottoTicketCount);
     }
 }

@@ -7,7 +7,11 @@ import java.util.List;
 
 public class LottoShop {
 
-    public List<LottoTicket> publishLottoTickets(LottoPurchaseMoney lottoPurchaseMoney) {
+    private LottoShop() {
+
+    }
+
+    public static List<LottoTicket> publishLottoTickets(LottoPurchaseMoney lottoPurchaseMoney) {
         int lottoTicketCount = lottoPurchaseMoney.getLottoTicketCount();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
@@ -17,7 +21,5 @@ public class LottoShop {
 
         return lottoTicketList;
     }
-
-
 
 }

@@ -12,8 +12,7 @@ import java.util.List;
 public class LottoService {
 
     public List<LottoTicket> purchaseLottoTicket(LottoPurchaseMoney lottoPurchaseMoney) {
-        LottoShop lottoShop = new LottoShop();
-        return lottoShop.publishLottoTickets(lottoPurchaseMoney);
+        return LottoShop.publishLottoTickets(lottoPurchaseMoney);
     }
 
     public List<LottoRank> matchLottoTicket(List<LottoTicket> lottoTicketList, LottoRankCalculator lottoRankCalculator) {
