@@ -20,14 +20,6 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public int getBonus() {
-        return bonus;
-    }
-
     public boolean inContainBonus(Lotto lotto) {
         return lotto.getContainCount(Collections.singletonList(bonus)) > 0;
     }
