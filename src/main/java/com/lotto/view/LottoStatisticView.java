@@ -10,8 +10,6 @@ public class LottoStatisticView {
 
     private static final String LOTTO_STATISTICS_TITLE = "당첨 통계";
     private static final String LOTTO_STATISTICS_SEPARATORS = "---------";
-    private static final String CORRECT_MESSAGE = "개 일치 (";
-    private static final String CORRECT_MESSAGE_SEPARATORS = ")- ";
     private static final String CORRECT_MESSAGE_UNIT = "개";
     private static final String RATE_OF_RETURN_PREFIX = "총 수익률은 ";
     private static final String RATE_OF_RETURN_POSTFIX = "입니다.";
@@ -26,13 +24,9 @@ public class LottoStatisticView {
         System.out.println(LOTTO_STATISTICS_SEPARATORS);
         for (Map.Entry<LottoWinningType, Integer> entry : result.entrySet()) {
             LottoWinningType lottoWinningType = entry.getKey();
-            Integer matchingCount = lottoWinningType.getMatchingCount();
 
             StringBuilder messageBuilder = new StringBuilder()
-                    .append(matchingCount)
-                    .append(CORRECT_MESSAGE)
-                    .append(lottoWinningType.getWinningAmount())
-                    .append(CORRECT_MESSAGE_SEPARATORS)
+                    .append(lottoWinningType.getMessage())
                     .append(entry.getValue())
                     .append(CORRECT_MESSAGE_UNIT);
 
@@ -40,7 +34,7 @@ public class LottoStatisticView {
         }
     }
 
-    public void viewRateOfReturn(Long rateOfReturn) {
+    public void viewRateOfReturn(Double rateOfReturn) {
 
         BigDecimal rate = new BigDecimal(rateOfReturn);
         String damagesOrGain = rateOfReturn > 1 ? GAIN : DAMAGES;
