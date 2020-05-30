@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoCheck;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStore;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,7 +16,8 @@ public class Main {
         OutputView.printNewLine();
 
         final String winningNumber = InputView.inputWinningNumber();
-        final Lotto winningLotto = Lotto.valueOf(winningNumber);
+        final int bonus = InputView.inputBonusNumber();
+        final WinningLotto winningLotto = new WinningLotto(winningNumber, bonus);
         OutputView.printNewLine();
 
         OutputView.printWinningLottoTitle();
@@ -30,7 +28,7 @@ public class Main {
                     LottoCheck.getWinningLottoCount(lottosBought, winningLotto, lottoRank));
         }
 
-        OutputView.printReturnValue(LottoCheck.getWinningAmount(lottosBought, winningLotto),
+        OutputView.printReturnValue(LottoCheck.getTotalWinningAmount(lottosBought, winningLotto),
                 BigDecimal.valueOf(buyPriceAmount));
     }
 }
