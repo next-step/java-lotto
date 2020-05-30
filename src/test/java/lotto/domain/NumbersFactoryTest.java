@@ -14,10 +14,10 @@ class NumbersFactoryTest {
     @DisplayName("중복되지 않은 숫자들을 얻을 수 있다.")
     @Test
     void canCreateNonDuplicateNumbers() {
-        List<Integer> nonDuplicateNumbers = NumbersFactory.createNonDuplicateNumbers(6);
+        List<LottoNumber> nonDuplicateNumbers = NumbersFactory.createNonDuplicateNumbers(6);
         assertThat(nonDuplicateNumbers).isNotNull();
 
-        Set<Integer> set = new HashSet<>(nonDuplicateNumbers);
+        Set<LottoNumber> set = new HashSet<>(nonDuplicateNumbers);
         assertThat(nonDuplicateNumbers.size()).isEqualTo(set.size());
     }
 
@@ -25,7 +25,7 @@ class NumbersFactoryTest {
     @Test
     void canCreateManualNumbers() {
         String numbers = "1, 2, 3, 4, 5, 6";
-        List<Integer> manualNumbers = NumbersFactory.createManualNumbers(numbers);
+        List<LottoNumber> manualNumbers = NumbersFactory.createManualNumbers(numbers);
 
         assertThat(manualNumbers).isNotNull();
 
