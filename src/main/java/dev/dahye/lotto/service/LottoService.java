@@ -1,6 +1,7 @@
 package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
+import dev.dahye.lotto.domain.Winning;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,10 @@ public class LottoService {
     private static final int WINNERS_COUNT = 6;
     private static final String WINNERS_DELIMITER = ",";
     private final List<LottoTicket> lottoTickets;
+
+    public LottoService(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
 
     public LottoService(int money) {
         validateMoney(money);
@@ -36,8 +41,24 @@ public class LottoService {
         return lottoTickets.size();
     }
 
-    public void getWinners(String winnerNumbers) {
+    public List<Winning> getWinners(String winnerNumbers) {
         List<Integer> winners = validateWinnerNumbers(winnerNumbers);
+
+        return getWinnings(winners);
+    }
+
+    public List<Winning> getWinnings(List<Integer> winningNumbers) {
+        List<Winning> winnings = new ArrayList<>();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            int matchCount = lottoTicket.getMatchCount(winningNumbers);
+
+            if (Winning.isWinning(matchCount)) {
+                winnings.add(Winning.getWinning(matchCount));
+            }
+        }
+
+        return winnings;
     }
 
     private List<Integer> validateWinnerNumbers(String winnerNumbers) {

@@ -10,7 +10,7 @@ public class LottoTicket {
     private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
-    private LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -30,7 +30,24 @@ public class LottoTicket {
         return numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE);
     }
 
-    public int getSize() {
-        return lottoNumbers.size();
+    public boolean validateLottoNumberSize() {
+        return lottoNumbers.size() == LOTTO_TICKET_NUMBER_MAX_SIZE;
+    }
+
+    public int getMatchCount(List<Integer> winningNumbers) {
+        int matchCount = 0;
+
+        for (Integer winningNumber : winningNumbers) {
+            matchCount = getMatchCount(matchCount, winningNumber);
+        }
+
+        return matchCount;
+    }
+
+    private int getMatchCount(int matchCount, Integer winningNumber) {
+        if (lottoNumbers.contains(winningNumber)) {
+            matchCount++;
+        }
+        return matchCount;
     }
 }

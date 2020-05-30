@@ -4,10 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 티켓")
@@ -17,7 +13,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓은 6개의 값으로 이루어져 있다.")
     void lotto_ticket_create() {
-        assertThat(LottoTicket.issued().getSize()).isEqualTo(LOTTO_TICKET_SIZE);
+        assertThat(LottoTicket.issued().validateLottoNumberSize()).isTrue();
     }
 
     @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
@@ -40,4 +36,5 @@ class LottoTicketTest {
             assertThat(lottoNumbers.get(i)).isLessThan(lottoNumbers.get(i + 1));
         }
     }
+
 }

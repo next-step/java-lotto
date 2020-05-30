@@ -1,5 +1,7 @@
 package dev.dahye.lotto.service;
 
+import dev.dahye.lotto.domain.LottoTicket;
+import dev.dahye.lotto.domain.Winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -7,6 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +49,22 @@ class LottoServiceTest {
     void winners_must_be_six_numbers(String winnerNumbers) {
         LottoService lottoService = new LottoService(1000);
         assertThrows(IllegalArgumentException.class, () -> lottoService.getWinners(winnerNumbers));
+    }
+
+    @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
+    @MethodSource("winnings")
+    @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
+    void lotto_ticket_winnings(String winningNumbers, Winning winning) {
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoService lottoServiceTest = new LottoService(Arrays.asList(lottoTicket));
+        assertThat(lottoServiceTest.getWinners(winningNumbers).get(0)).isEqualTo(winning);
+    }
+
+    private static Stream<Arguments> winnings() {
+        return Stream.of(
+                arguments("1, 2, 3, 23, 24, 25", Winning.FOURTH),
+                arguments("1, 2, 3, 4, 25, 26", Winning.THIRD)
+        );
     }
 
 }
