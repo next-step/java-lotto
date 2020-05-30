@@ -2,12 +2,12 @@ package stringAddCalculate;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(String expression) {
+    public static int calculate(String expression) {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
 
-        return new StringExpression(expression).sum();
+        return new NumberExpression(expression).sum();
     }
 
     private static boolean isNullOrEmpty(String expression) {
