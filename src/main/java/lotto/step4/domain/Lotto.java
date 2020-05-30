@@ -11,6 +11,8 @@ public class Lotto {
 
   public static final long SIZE = 6L;
   public static final long PRICE = 1000L;
+  private static final boolean IS_AUTO_LOTTO = true;
+  private static final boolean IS_DIRECT_LOTTO = false;
 
   private final SortedSet<LottoNumber> lottoNumbers;
   private final boolean auto;
@@ -40,11 +42,11 @@ public class Lotto {
   }
 
   public static Lotto of (List<LottoNumber> lottoNumbers) {
-    return new Lotto(new TreeSet<>(lottoNumbers), false);
+    return new Lotto(new TreeSet<>(lottoNumbers), IS_AUTO_LOTTO);
   }
 
   public static Lotto ofDirect (List<LottoNumber> lottoNumbers) {
-    return new Lotto(new TreeSet<>(lottoNumbers), true);
+    return new Lotto(new TreeSet<>(lottoNumbers), IS_DIRECT_LOTTO);
   }
 
   private void validateCount () throws RuntimeException {
