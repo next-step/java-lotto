@@ -2,7 +2,7 @@ package calculator;
 
 public class StringAddCalculator {
 
-    private static String delimeter = ",";
+    private static String delimeter = ",|:";
 
     public static int splitAndSum(String calculationText) {
 
@@ -32,7 +32,7 @@ public class StringAddCalculator {
     }
 
     private static String[] calculationTextSplit(String calculationText) {
-        return calculationText.split(",");
+        return calculationText.split(delimeter);
     }
 
 }
