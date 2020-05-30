@@ -19,7 +19,7 @@ public class LottoManager {
         return lottoNumbersList;
     }
 
-    public GameResult getGameResult(WinningNumbers winningNumbers) {
-        return lottoNumbersList.getGameResult(winningNumbers);
+    public GameResult getGameResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        return lottoNumbersList.getGameResult(winningNumbers, bonusNumber);
     }
 }

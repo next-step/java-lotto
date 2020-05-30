@@ -22,12 +22,16 @@ public class LottoNumbers {
         return source.stream().limit(6).collect(Collectors.toList());
     }
 
-    public Rank getRank(WinningNumbers winningNumbers) {
-        return Rank.findRank(countSameNumbersAs(winningNumbers));
+    public Rank getRank(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        return Rank.findRank(countSameNumbersAs(winningNumbers), hasBonusNumber(bonusNumber));
     }
 
     private int countSameNumbersAs(WinningNumbers winningNumbers) {
         return Math.toIntExact(numbers.stream().filter(winningNumbers::anyMatch).count());
+    }
+
+    private boolean hasBonusNumber(BonusNumber bonusNumber) {
+        return numbers.stream().anyMatch(bonusNumber::isMatch);
     }
 
     public List<Integer> getNumbers() {

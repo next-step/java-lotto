@@ -22,10 +22,12 @@ class LottoNumbersListTest {
     @Test
     void getNumbers() {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
-        lottoNumbersList.addLottoNumbers(new LottoNumbers());
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        lottoNumbersList.addLottoNumbers(lottoNumbers);
 
-        LottoNumbers lottoNumbers = lottoNumbersList.getNumbers(0);
+        LottoNumbers result = lottoNumbersList.getNumbers(0);
 
-        assertThat(lottoNumbers).isNotNull();
+        assertThat(result).isNotNull();
+        assertThat(result.getNumbers()).isEqualTo(lottoNumbers.getNumbers());
     }
 }

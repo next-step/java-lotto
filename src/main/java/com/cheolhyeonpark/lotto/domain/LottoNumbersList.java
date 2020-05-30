@@ -23,9 +23,9 @@ public class LottoNumbersList {
         return lottoNumbersList.get(index);
     }
 
-    public GameResult getGameResult(WinningNumbers winningNumbers) {
+    public GameResult getGameResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         GameResult gameResult = new GameResult();
-        lottoNumbersList.stream().map(lottoNumbers -> lottoNumbers.getRank(winningNumbers)).forEach(gameResult::count);
+        lottoNumbersList.stream().map(lottoNumbers -> lottoNumbers.getRank(winningNumbers, bonusNumber)).forEach(gameResult::count);
         return gameResult;
     }
 }

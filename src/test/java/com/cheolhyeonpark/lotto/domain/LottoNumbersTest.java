@@ -12,8 +12,9 @@ class LottoNumbersTest {
     public void countSameNumbersAsWinningNumber() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         WinningNumbers winningNumber = new WinningNumbers("1, 2, 3, 4, 5, 6");
+        BonusNumber bonusNumber = new BonusNumber(7);
 
-        Rank rank = lottoNumbers.getRank(winningNumber);
+        Rank rank = lottoNumbers.getRank(winningNumber, bonusNumber);
 
         assertThat(rank).isNotNull();
     }

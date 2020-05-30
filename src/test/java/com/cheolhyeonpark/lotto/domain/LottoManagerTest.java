@@ -17,6 +17,6 @@ class LottoManagerTest {
     @Test
     public void getGameResult() {
         LottoNumbersList lottoNumbersList = lottoManager.createLottoNumbers(10_000);
-        assertThat(lottoManager.getGameResult(new WinningNumbers("1, 2, 3, 4, 5, 6"))).isNotNull();
+        assertThat(lottoManager.getGameResult(new WinningNumbers("1, 2, 3, 4, 5, 6"), new BonusNumber(7))).isNotNull();
     }
 }
