@@ -30,7 +30,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return Integer.compare(lottoNumber.getNumber(), number);
+        return Integer.compare(number, lottoNumber.getNumber());
     }
 
     @Override
