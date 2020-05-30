@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 public class LottoAnalyzer {
 
     private LottoGame lottoGame;
+    private List<LottoTicket> lottoTickets;
 
-    public LottoAnalyzer(LottoGame lottoGame) {
+    public LottoAnalyzer(LottoGame lottoGame, List<LottoTicket> lottoTickets) {
         this.lottoGame = lottoGame;
+        this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoRank> gradeTicket(int round, List<LottoTicket> lottoTickets) {
+    public List<LottoRank> gradeTicketRank(int round) {
 
         WinningLotto winningLotto = getWinningLotto(round);
 
@@ -33,8 +35,8 @@ public class LottoAnalyzer {
         return winningLotto;
     }
 
-    public double calculateRevenueRate(int round, List<LottoTicket> lottoTickets) {
-        BigDecimal sum = gradeTicket(round, lottoTickets)
+    public double calculateRevenueRate(int round) {
+        BigDecimal sum = gradeTicketRank(round)
                 .stream()
                 .map(LottoRank::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

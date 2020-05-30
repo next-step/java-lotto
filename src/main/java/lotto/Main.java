@@ -25,7 +25,7 @@ public class Main {
         lottoGame.add(round, winningNumbers, bonusNumber);
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame, lottoTickets);
-        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round);
+        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicketRank(round);
 
         ResultView.printLottoRanks(LottoRank.convertLottoRankWithCount(lottoRanks));
         ResultView.printRevenueRate(lottoAnalyzer.calculateRevenueRate(round));
