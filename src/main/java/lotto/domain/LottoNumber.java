@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Random;
 import lotto.collections.WinningNumbers;
 
 public class LottoNumber {
@@ -10,13 +9,8 @@ public class LottoNumber {
 
   protected int number;
 
-  public LottoNumber() {
-    this.number = getLottoNumberInRange();
-  }
-
-  private int getLottoNumberInRange() {
-    return new Random().nextInt((MAXIMUM_NUMBER_BOUND - MINIMUM_NUMBER_BOUND) + 1)
-        + MINIMUM_NUMBER_BOUND;
+  public LottoNumber(int number) {
+    this.number = number;
   }
 
   public boolean getMatchCounts(WinningNumbers proposes) {
@@ -26,5 +20,10 @@ public class LottoNumber {
 
   public int getNumber() {
     return number;
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(number);
   }
 }
