@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,8 +17,11 @@ class StringAddCalculaterTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "0"})
     public void testClassInitialize(String numbers) {
+
         StringAddCalculater stringAddCalculater = new StringAddCalculater();
+
         assertThat(stringAddCalculater.splitAndSum(numbers)).isEqualTo(0);
+
     }
 
     @DisplayName("null check")
@@ -26,7 +30,9 @@ class StringAddCalculaterTest {
     public void testClassWithNull(String numbers) {
 
         StringAddCalculater stringAddCalculater = new StringAddCalculater();
+
         assertThat(stringAddCalculater.splitAndSum(numbers)).isEqualTo(0);
+
     }
 
     @DisplayName("Negetive number")
@@ -36,10 +42,9 @@ class StringAddCalculaterTest {
 
         StringAddCalculater stringAddCalculater = new StringAddCalculater();
 
-        Throwable throwable = assertThrows(RuntimeException.class, () -> {
-            stringAddCalculater.splitAndSum(numbers);
-        });
-        assertEquals("Found a negative number(s)", throwable.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> stringAddCalculater.splitAndSum(numbers))
+                .withMessage("Found a negative number(s)");
 
     }
 
@@ -50,10 +55,10 @@ class StringAddCalculaterTest {
 
         StringAddCalculater stringAddCalculater = new StringAddCalculater();
 
-        Throwable throwable = assertThrows(RuntimeException.class, () -> {
-            stringAddCalculater.splitAndSum(numbers);
-        });
-        assertEquals("Found a Not a number(s)", throwable.getMessage());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> stringAddCalculater.splitAndSum(numbers))
+                .withMessage("Found a not number(s)");
+
     }
 
 
@@ -61,7 +66,9 @@ class StringAddCalculaterTest {
     @ParameterizedTest
     @ValueSource(strings = {"//!\n3,3:4!58"})
     public void testClassOnCustomDelimiter(String numbers) {
+
         StringAddCalculater stringAddCalculater = new StringAddCalculater();
+
         assertThat(stringAddCalculater.splitAndSum(numbers)).isEqualTo(68);
 
     }
