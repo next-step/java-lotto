@@ -2,12 +2,15 @@ package stringAddCalculate;
 
 public class StringAddCalculator {
 
-    public static int calculate(String expression) {
+    public static int add(String expression) {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
 
-        return new NumberExpression(expression).sum();
+        NumberExpression numberExpression = new NumberExpression(expression);
+        return numberExpression.getNumbers().stream()
+                .map(Number::getNumber)
+                .reduce(0,Integer::sum);
     }
 
     private static boolean isNullOrEmpty(String expression) {
