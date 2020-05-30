@@ -14,6 +14,7 @@ public class LottoController {
 
     public void run() {
         int amount = inputView.inputAmount();
+        int bonus = inputView.inputBonusNumber();
         LottoManager lottoManager = new LottoManager(new LottoNumbersList());
         resultView.printLottoNumbersList(lottoManager.createLottoNumbers(amount));
         resultView.printGameResult(lottoManager.getGameResult(new WinningNumbers(inputView.inputWinningNumber())), amount);
