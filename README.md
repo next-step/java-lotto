@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+### 문자열 덧셈 계산기
+
+1. ADD - test코드 작성
+2. ADD - 비즈니스로직 작성
+3. fixed
+4. Refactor
