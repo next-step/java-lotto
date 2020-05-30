@@ -1,61 +1,39 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public class WinningLotto {
 
-    private static final int DEFAULT_SIZE = 6;
+    private LottoTicket lottoTicket;
+    private LottoNumber bonusNumber;
 
-    private List<Integer> winningLottoNumbers;
-
-    private WinningLotto(int[] winningLottoNumbers) {
-        List<Integer> convertedList = convertToList(winningLottoNumbers);
-
-        validateSize(winningLottoNumbers);
-        validateElements(convertedList);
-        validateOverlap(convertedList);
-
-        this.winningLottoNumbers = convertedList;
+    private WinningLotto(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        validate(lottoTicket, bonusNumber);
+        this.lottoTicket = lottoTicket;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(int[] winningLottoNumbers) {
-        return new WinningLotto(winningLottoNumbers);
+    public static WinningLotto of(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        return new WinningLotto(lottoTicket, bonusNumber);
     }
-
 
     public boolean contains(Integer number) {
-        return winningLottoNumbers.contains(number);
+        return lottoTicket.contains(number);
     }
 
-    private List<Integer> convertToList(int[] winningLottoNumbers) {
-        return Arrays.stream(winningLottoNumbers).boxed()
-                .collect(Collectors.toList());
+    public long getContainNumberCount(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoNumbers()
+                .stream()
+                .map(LottoNumber::getNumber)
+                .filter(this::contains)
+                .count();
     }
 
-    private void validateSize(int[] winningLottoNumbers) {
-        if (winningLottoNumbers.length < DEFAULT_SIZE) {
-            throw new IllegalArgumentException("당첨 번호의 개수가 알맞지 않습니다.");
+    public boolean isBonusMatch(LottoTicket lottoTicket) {
+        return lottoTicket.contains(bonusNumber.getNumber());
+    }
+
+    private void validate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.contains(bonusNumber.getNumber())) {
+            throw new IllegalArgumentException("보너스 번호가 이미 포함되어 있습니다.");
         }
-    }
-
-    private void validateElements(List<Integer> winningLottoNumbers) {
-        for (int i = 0; i < winningLottoNumbers.size(); i++) {
-            int number = winningLottoNumbers.get(i);
-            if (number < LottoNumber.LOTTO_NUMBER_MIN || number > LottoNumber.LOTTO_NUMBER_MAX) {
-                throw new IllegalArgumentException("당첨 번호의 범위가 알맞지 않습니다.");
-            }
-        }
-    }
-
-    private void validateOverlap(List<Integer> convertedList) {
-        convertedList.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .values().forEach(count -> {
-                    if(count > 1) throw new IllegalArgumentException("중복 되는 값이 존재합니다.");
-                });
     }
 }

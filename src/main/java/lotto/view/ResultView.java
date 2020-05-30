@@ -28,6 +28,8 @@ public class ResultView {
         lottoTickets.stream()
                 .map(LottoTicket::getLottoNumbers)
                 .forEach(System.out::println);
+
+        printNewLine();
     }
 
     public static void printLottoRanks(Map<LottoRank, Long> lottoRankMap) {
@@ -38,12 +40,21 @@ public class ResultView {
     }
 
     private static void printLottoRankMap(Map<LottoRank, Long> lottoRankMap, LottoRank lottoRank) {
-        Long count = lottoRankMap.getOrDefault(lottoRank, 0l);
+        Long count = lottoRankMap.getOrDefault(lottoRank, LottoRank.BOOM.getPrice().longValue());
         String message = String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
+
+        if(lottoRank.equals(LottoRank.SECOND)) {
+            message = String.format("%s개 일치, 보너스볼 일치(%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), count);
+        }
+
         System.out.println(message);
     }
 
     public static void printRevenueRate(double revenueRate) {
         System.out.println(PREFIX_REVENUE_MESSAGE + revenueRate + SUFFIX_REVENUE_MESSAGE);
+    }
+
+    public static void printNewLine() {
+        System.out.println();
     }
 }

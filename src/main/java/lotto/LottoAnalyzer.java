@@ -8,36 +8,35 @@ import java.util.stream.Collectors;
 public class LottoAnalyzer {
 
     private LottoGame lottoGame;
+    private List<LottoTicket> lottoTickets;
 
-    public LottoAnalyzer(LottoGame lottoGame) {
+    public LottoAnalyzer(LottoGame lottoGame, List<LottoTicket> lottoTickets) {
         this.lottoGame = lottoGame;
+        this.lottoTickets = lottoTickets;
     }
 
-    public int matchingCount(int round, LottoTicket lottoTicket) {
+    public List<LottoRank> gradeTicketRank(int round) {
 
-        WinningLotto winningLotto = lottoGame.get(round);
+        WinningLotto winningLotto = getWinningLotto(round);
 
-        if(Objects.isNull(winningLotto)) {
-            throw new IllegalArgumentException("존재하지 않는 회차입니다.");
-        }
-
-        return (int)lottoTicket.getLottoNumbers()
-                .stream()
-                .filter(winningLotto::contains)
-                .count();
-    }
-
-    public List<LottoRank> gradeTicket(int round, List<LottoTicket> lottoTickets){
         return lottoTickets.stream()
-                .map(lottoTicket -> matchingCount(round, lottoTicket))
-                .map(LottoRank::valueOf)
+                .map(lottoTicket -> LottoRank.valueOf(winningLotto.getContainNumberCount(lottoTicket), winningLotto.isBonusMatch(lottoTicket)))
                 .filter(Objects::nonNull)
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
                 .collect(Collectors.toList());
     }
 
-    public double calculateRevenueRate(int round, List<LottoTicket> lottoTickets) {
-        BigDecimal sum = gradeTicket(round, lottoTickets)
+    private WinningLotto getWinningLotto(int round) {
+        WinningLotto winningLotto = lottoGame.get(round);
+
+        if (Objects.isNull(winningLotto)) {
+            throw new IllegalArgumentException("존재하지 않는 회차입니다.");
+        }
+        return winningLotto;
+    }
+
+    public double calculateRevenueRate(int round) {
+        BigDecimal sum = gradeTicketRank(round)
                 .stream()
                 .map(LottoRank::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
