@@ -13,12 +13,12 @@ public final class NumbersFactory {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 46;
     private static final String DELIMITER_PATTERN = ", ";
-    private static final List<Integer> NUMBERS_REPOSITORY = initializeNumbersRepository();
+    private static final List<LottoNumber> NUMBERS_REPOSITORY = initializeNumbersRepository();
 
     private NumbersFactory() {
     }
 
-    public static List<Integer> createNonDuplicateNumbers(int lottoNumbersCount) {
+    public static List<LottoNumber> createNonDuplicateNumbers(int lottoNumbersCount) {
         shuffleNumbers();
 
         return NUMBERS_REPOSITORY.stream()
@@ -31,15 +31,15 @@ public final class NumbersFactory {
         Collections.shuffle(NUMBERS_REPOSITORY);
     }
 
-    public static List<Integer> createManualNumbers(String manualNumbers) {
+    public static List<LottoNumber> createManualNumbers(String manualNumbers) {
         return Arrays.stream(manualNumbers.split(DELIMITER_PATTERN))
-                .map(StringUtils::toInt)
+                .map(manualNumber -> LottoNumber.newInstance(StringUtils.toInt(manualNumber)))
                 .collect(Collectors.toList());
     }
 
-    private static List<Integer> initializeNumbersRepository() {
+    private static List<LottoNumber> initializeNumbersRepository() {
         return IntStream.range(START_NUMBER, END_NUMBER)
-                .boxed()
+                .mapToObj(LottoNumber::newInstance)
                 .collect(Collectors.toList());
     }
 }
