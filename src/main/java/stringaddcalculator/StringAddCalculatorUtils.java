@@ -11,17 +11,12 @@ public class StringAddCalculatorUtils {
   private final static String PREFIX_CUSTOM_DELIMITER = "//";
   private final static String POSTFIX_CUSTOM_DELIMITER = "\n";
 
-  private final static Pattern CHECK_NOT_EMPTY = Pattern.compile("\\S+");
   private final static Pattern SPLIT_NUMBER = Pattern.compile(COMMA + OR + COLON);
   private final static Pattern FIND_CUSTOM_DELIMITER = Pattern
       .compile("(?<=" + PREFIX_CUSTOM_DELIMITER + ").(?=" + POSTFIX_CUSTOM_DELIMITER + ")");
 
   public static boolean isNullOrEmpty(String s) {
-    if (s == null) {
-      return true;
-    }
-
-    return !(CHECK_NOT_EMPTY.matcher(s).find());
+    return s == null || s.trim().length() == 0;
   }
 
   public static String[] splitNumbers(String s) {
