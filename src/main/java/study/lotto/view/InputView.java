@@ -4,8 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
-    private static final String WINNING_NUMBER_DELIMITER = ", ";
-    private Scanner scanner = new Scanner(System.in);
+    private static final String WINNING_NUMBER_DELIMITER = ",";
+    private static final String BLANK_STRING = " ";
+
+    private final Scanner scanner = new Scanner(System.in);
 
     public int scanTotalPrice() {
         int totalPrice;
@@ -14,6 +16,7 @@ public class InputView {
 
         try {
             totalPrice = scanner.nextInt();
+            scanner.nextLine();     // 버퍼에서 개행문자 제거
         } catch(InputMismatchException e) {
             scanner.nextLine();     // 버퍼에서 개행문자 제거
             System.out.println("숫자만 입력 가능합니다. 다시 입력해주세요.");
@@ -31,6 +34,7 @@ public class InputView {
 
         try {
             answer = scanner.nextLine();
+            answer = answer.replaceAll(BLANK_STRING, "");
         } catch(InputMismatchException e) {
             scanner.nextLine();     // 버퍼에서 개행문자 제거
             System.out.println("문자만 입력 가능합니다. 다시 입력해주세요.");

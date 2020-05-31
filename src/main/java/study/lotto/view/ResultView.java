@@ -24,6 +24,6 @@ public class ResultView {
                             + statistics.getStatistics().get(lottoRank) + "개")
                 );
 
-        System.out.println("총 수익률은 " + statistics.getEarningRate() + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", statistics.getEarningRate()) + "입니다.");
     }
 }
