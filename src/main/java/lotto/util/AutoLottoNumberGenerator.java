@@ -13,6 +13,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
   private static final int MAXIMUM_NUMBER_BOUND = 45;
   private static final int START_INDEX_OF_NUMBER_ELEMENTS = 0;
   private static final int NUMBER_OF_NUMBER_ELEMENTS = 6;
+  
   private final List<LottoNumber> lottoNumbers;
 
   public AutoLottoNumberGenerator() {
