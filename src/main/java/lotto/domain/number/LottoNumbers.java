@@ -13,6 +13,7 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
+        validateLottoNumbers(numbers);
         this.numbers = numbers;
     }
 
@@ -32,6 +33,29 @@ public class LottoNumbers {
 
     private static List<LottoNumber> createLottoNumbers(NumberGenerator<LottoNumber> generator) {
         return generator.getNumbers();
+    }
+
+    private void validateLottoNumbers(List<LottoNumber> numbers) {
+        validateLottoNumbersLength(numbers);
+        validateLottoNumberDuplicate(numbers);
+    }
+
+    private void validateLottoNumbersLength(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new LottoNumbersLengthException();
+        }
+    }
+
+    private void validateLottoNumberDuplicate(List<LottoNumber> numbers) {
+        int distinctCount = Math.toIntExact(numbers.stream()
+                .map(LottoNumber::getNumber)
+                .distinct()
+                .count()
+        );
+
+        if (distinctCount != LOTTO_SIZE) {
+            throw new LottoNumbersDuplicateException();
+        }
     }
 
     public int matchCount(WinningNumbers winningNumbers) {
