@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 public class LottoNumber implements Comparable {
 
@@ -22,12 +18,6 @@ public class LottoNumber implements Comparable {
 
     public static LottoNumber of(int lottoValue) {
         return new LottoNumber(lottoValue);
-    }
-
-    public static List<LottoNumber> of(int... lottoValue) {
-        return Arrays.stream(lottoValue)
-                .mapToObj(LottoNumber::new)
-                .collect(toList());
     }
 
     public int getNumber() {
