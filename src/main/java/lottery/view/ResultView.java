@@ -23,6 +23,7 @@ public class ResultView {
     }
 
     public static void printLotteryGameResult(LotteryGameResult lotteryGameResult) {
+        System.out.println(ViewMessages.RESULT_HEADER);
         Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank != LotteryRank.MISS)
                 .sorted(Comparator.comparing(LotteryRank::getPrizeMoney))
