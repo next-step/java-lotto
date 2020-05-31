@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
-    public static final int LOTTERY_NUMBER_COUNTS = 6;
+    private static final int LOTTERY_NUMBER_COUNTS = 6;
     private final List<LotteryNumber> lotteryNumbers;
 
     private LotteryTicket(List<LotteryNumber> lotteryNumbers) {

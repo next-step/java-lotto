@@ -14,7 +14,7 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public static String[] getLastWinnerTicketNumbers() {
+    public static String[] getInputLastWinnerTicketNumbers() {
         System.out.println(ViewMessages.INSTRUCTION_LOTTERY_WINNER_NUMBERS);
         return scanner.nextLine()
                 .split(ViewMessages.COMMA);
