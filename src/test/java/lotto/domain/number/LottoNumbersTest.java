@@ -37,4 +37,15 @@ public class LottoNumbersTest {
                 .isThrownBy(() -> LottoNumbers.newLottoNumbersWithList(Arrays.asList(1, 2, 2, 3, 4, 5)))
                 .withMessage(LottoNumbersDuplicateException.MESSAGE);
     }
+
+    @DisplayName("LottoNumber와 비교하여 존재하는 갯수를 리턴할 수 있다.")
+    @Test
+    void matchCount() {
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new FixedNumberGenerator());
+
+        int actual = lottoNumbers.matchCount(bonusLottoNumber);
+
+        assertThat(actual).isEqualTo(1);
+    }
 }
