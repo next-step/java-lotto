@@ -1,6 +1,5 @@
 package lotto.domain.winning;
 
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
 import java.util.Arrays;
