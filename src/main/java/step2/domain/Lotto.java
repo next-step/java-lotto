@@ -34,7 +34,7 @@ public class Lotto extends AbstractLotto {
 
         drawLotto(winningNumbers);
 
-        if (this.hitCount >= 3) {
+        if (this.hitCount >= Prize.FORTH.getHitCount()) {
             this.prize = this.hitCount % LOTTO_SELECTION_COUNT + 1;
         }
     }
