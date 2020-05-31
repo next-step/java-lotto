@@ -20,16 +20,17 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
         .collect(Collectors.toList());
   }
 
-  public static List<LottoNumber> shuffle() {
-    Collections.shuffle(generateLottoNumbers());
-    return Collections.unmodifiableList(pickList());
+  public static List<LottoNumber> pickList() {
+    return Collections.unmodifiableList(shuffle());
   }
 
-  private static List<LottoNumber> pickList() {
-    List<LottoNumber> lottoNumberList =
-        generateLottoNumbers().subList(START_INDEX_OF_NUMBER_ELEMENTS, NUMBER_OF_NUMBER_ELEMENTS);
-    sortDescLottoNumbers(lottoNumberList);
-    return lottoNumberList;
+  public static List<LottoNumber> shuffle() {
+    List<LottoNumber> beforeShuffledList = generateLottoNumbers();
+    Collections.shuffle(beforeShuffledList);
+    List<LottoNumber> afterShuffledList = beforeShuffledList
+        .subList(START_INDEX_OF_NUMBER_ELEMENTS, NUMBER_OF_NUMBER_ELEMENTS);
+    sortDescLottoNumbers(afterShuffledList);
+    return afterShuffledList;
   }
 
   private static void sortDescLottoNumbers(List<LottoNumber> lottoNumberList) {
