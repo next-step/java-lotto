@@ -20,18 +20,24 @@ class LottoMatchResultTest {
 
     @BeforeEach
     void setUp() {
-        LottoGame lottoGame = new LottoGame();
-        List<String> manual = Arrays.asList(
-                "1, 2, 3, 13, 14, 15",
-                "1, 2, 3, 4, 14, 15",
-                "1, 2, 3, 4, 5, 15",
-                "1, 2, 3, 4, 5, 7",
-                "1, 2, 3, 4, 5, 6"
-        );
-        lottoGame.createManualLottoNumbers(manual);
+        PurchasePrice purchasePrice = PurchasePrice.newInstance(5000);
 
-        LottoNumbers winLottoNumbers = LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
-        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
+        List<LottoTicket> manualTickets = Arrays.asList(
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 13, 14, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 14, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 15"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 7"),
+                LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 6")
+        );
+
+        PurchaseInfo purchaseInfo = PurchaseInfo.newInstance(purchasePrice, manualTickets);
+
+        LottoGame lottoGame = new LottoGame(purchaseInfo);
+        lottoGame.createAutoLottoTickets();
+
+        LottoTicket winLottoTicket = LottoTicketFactory.createManualLottoTicket("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = LottoNumber.newBonusNumber(7, winLottoTicket);
+        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoTicket, bonusNumber);
     }
 
     @DisplayName("당첨 개수를 1씩 증가할 수 있다.")
@@ -99,6 +105,7 @@ class LottoMatchResultTest {
     @DisplayName("총 수익률을 계산할 수 있다.")
     @Test
     void canCalculateProfitRate() {
-        assertThat(this.lottoMatchResult.calculateProfitRate(5)).isEqualTo(406_311_000);
+        PurchasePrice purchasePrice = PurchasePrice.newInstance(1000);
+        assertThat(this.lottoMatchResult.calculateProfitRate(purchasePrice)).isEqualTo(2_031_555);
     }
 }

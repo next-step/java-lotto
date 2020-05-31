@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoMatchResult;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,21 +9,21 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
+        PurchasePrice purchasePrice = InputView.getPurchasePrice();
+        List<LottoTicket> manualTickets = InputView.getManualTickets(InputView.getManualLottoCount());
+        PurchaseInfo purchaseInfo = PurchaseInfo.newInstance(purchasePrice, manualTickets);
 
-        ResultView.printPurchaseCount(lottoGame.getPurchaseCount());
+        LottoGame lottoGame = new LottoGame(purchaseInfo);
+        LottoTickets lottoTickets = lottoGame.createAutoLottoTickets();
 
-        List<LottoNumbers> lottoNumbersGroup = lottoGame.createAutoLottoNumbers();
-        ResultView.printLottoNumbers(lottoNumbersGroup);
+        ResultView.printPurchaseCount(lottoTickets);
+        ResultView.printLottoNumbers(lottoTickets.toList());
 
-        LottoNumbers lastWinLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
-        int bonusNumber = InputView.getBonusNumber(lastWinLottoNumbers);
+        LottoTicket lastWinLottoTicket = LottoTicket.newWinLottoTicket(InputView.getLastWeekLottoNumbers());
+        LottoNumber bonusNumber = InputView.getBonusNumber(lastWinLottoTicket);
 
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumbers, bonusNumber);
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoTicket, bonusNumber);
         ResultView.printMatchResult(lottoMatchResult);
-
-        double profitRate = lottoMatchResult.calculateProfitRate(purchaseAmount);
-        ResultView.printProfitRate(profitRate, lottoMatchResult.getProfitOrLoss(profitRate));
+        ResultView.printProfitRate(lottoMatchResult, purchasePrice);
     }
 }
