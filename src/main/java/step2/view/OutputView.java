@@ -11,6 +11,8 @@ public class OutputView {
     private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String PROFIT_WITH_LOSS_FORMAT = PROFIT_FORMAT + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PRIZE_STATICS_TEXT = "당첨 통계";
+    private static final String DIVISION_LINE = "---------";
 
     public static void printLottoNumber(PurchasedLottoTickets purchasedLottoTickets) {
         System.out.println(String.format(PURCHASED_COUNT_FORMAT, purchasedLottoTickets.size()));
@@ -20,13 +22,13 @@ public class OutputView {
 
     public static void printLottoStatistics(LottoResults lottoResults) {
         System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(PRIZE_STATICS_TEXT);
+        System.out.println(DIVISION_LINE);
         Map<LottoResult, Long> printResult = lottoResults.getResult();
 
         printResult.keySet()
             .stream()
-            .filter(lottoResult -> !lottoResult.isBlank())
+            .filter(lottoResult -> !lottoResult.isZeroPrice())
             .forEach(lottoResult -> printWinResult(lottoResult, lottoResults.count(lottoResult)));
     }
 
