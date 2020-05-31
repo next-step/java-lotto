@@ -22,20 +22,6 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
-    @DisplayName("WinningNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.")
-    @Test
-    void matchCount() {
-        String winningNumberString = "1,2,3,4,5,6";
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
-
-        NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
-        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
-
-        int matchCount = lottoNumbers.matchCount(winningNumbers);
-
-        assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
-    }
-
     @DisplayName("로또 번호를 포함하는지 확인할 수 있다.")
     @Test
     void contains() {
