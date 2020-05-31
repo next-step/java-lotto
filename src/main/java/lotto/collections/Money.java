@@ -1,11 +1,16 @@
 package lotto.collections;
 
-public class Money {
+public final class Money {
 
-  private int money;
+  private final int money;
 
   public Money(int money) {
     this.money = money;
+  }
+
+  public int getNumberOfPurchasedLotto() {
+    final double TICKET_PRICE = 1000;
+    return (int) (money / TICKET_PRICE);
   }
 
   public int getMoney() {

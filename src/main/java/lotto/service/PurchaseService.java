@@ -8,10 +8,8 @@ import lotto.domain.LottoTicket;
 
 public class PurchaseService {
 
-  private static final double TICKET_PRICE = 1000;
-
   public LottoTickets purchase(final Money money) {
-    final int NUMBER_OF_PURCHASED_LOTTO = (int) (money.getMoney() / TICKET_PRICE);
+    final int NUMBER_OF_PURCHASED_LOTTO = money.getNumberOfPurchasedLotto();
 
     List<LottoTicket> lottoTicketList = new ArrayList<>();
 
