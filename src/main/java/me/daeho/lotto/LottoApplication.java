@@ -15,7 +15,10 @@ public class LottoApplication {
         List<LottoTicket> tickets = lottoMachine.buyRandom(amount);
         ResultView.ticketList(tickets);
 
-        Map<Integer, Integer> matchNumbers = lottoMachine.matchTicketCounts(InputView.lastWeekWinningNum(), tickets);
+        List<LottoNumber> lastWinningNumber = InputView.lastWeekWinningNum();
+        LottoNumber bonusBall = InputView.bonusBall();
+
+        Map<Rank, Integer> matchNumbers = lottoMachine.matchTicketCounts(lastWinningNumber, bonusBall, tickets);
         int totalPrize = lottoMachine.totalPrize(matchNumbers);
         double earningRate = lottoMachine.earningRate(amount, totalPrize);
         ResultView.statistics(matchNumbers, earningRate);

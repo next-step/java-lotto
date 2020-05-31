@@ -1,7 +1,6 @@
 package me.daeho.lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,25 +28,33 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public int totalPrize(Map<Integer, Integer> matchTicketCounts) {
+    public int totalPrize(Map<Rank, Integer> matchTicketCounts) {
         int totalPrize = 0;
-        for(Map.Entry<Integer, Integer> entry : matchTicketCounts.entrySet()) {
-            totalPrize += (WinningPrize.getPrizeBy(entry.getKey()) * entry.getValue());
+        for(Map.Entry<Rank, Integer> entry : matchTicketCounts.entrySet()) {
+            totalPrize += (entry.getKey().getPrize() * entry.getValue());
         }
         return totalPrize;
     }
 
-    public Map<Integer, Integer> matchTicketCounts(List<LottoNumber> lastWinningNumber, List<LottoTicket> tickets) {
-        final Map<Integer, Integer> matchNumbers = new HashMap<>();
+    public Map<Rank, Integer> matchTicketCounts(List<LottoNumber> lastWinningNumber, LottoNumber bonusBall, List<LottoTicket> tickets) {
+        final Map<Rank, Integer> rankCounts = new HashMap<>();
         tickets.forEach(t -> {
             int matchCount = t.containsCount(lastWinningNumber);
-            matchNumbers.put(matchCount, increaseMatchTicketCount(matchNumbers, matchCount));
+            Rank winningPrize = Rank.valueOf(matchCount, isMatchBonusBall(bonusBall, t));
+            rankCounts.put(
+                    winningPrize,
+                    increaseMatchTicketCount(rankCounts, winningPrize)
+            );
         });
-        return matchNumbers;
+        return rankCounts;
     }
 
-    private int increaseMatchTicketCount(Map<Integer, Integer> matchNumbers, int matchCount) {
-        return matchNumbers.getOrDefault(matchCount, 0) + 1;
+    private boolean isMatchBonusBall(LottoNumber bonusBall, LottoTicket t) {
+        return t.containsCount(bonusBall) == 1;
+    }
+
+    private int increaseMatchTicketCount(Map<Rank, Integer> matchNumbers, Rank winningPrize) {
+        return matchNumbers.getOrDefault(winningPrize, 0) + 1;
     }
 
     public double earningRate(int amount, int totalPrize) {

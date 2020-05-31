@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoMachineTest {
     private LottoNumberRule lottoNumberRule;
@@ -35,7 +36,9 @@ class LottoMachineTest {
                 LottoNumber.of(6)
         );
 
-        List<LottoNumber> lottoNumbers = Arrays.asList(
+        LottoNumber bonusBall = LottoNumber.of(7);
+
+        List<LottoNumber> thirdLottoNumbers = Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -44,16 +47,29 @@ class LottoMachineTest {
                 LottoNumber.of(33)
         );
 
-        List<LottoTicket> tickets = Arrays.asList(
-                LottoTicket.issue(lastWinningNumber),
-                LottoTicket.issue(lottoNumbers)
+        List<LottoNumber> secondLottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
         );
 
-        Map<Integer,Integer> matchNumbers = lottoMachine.matchTicketCounts(lastWinningNumber, tickets);
 
-        assertThat(matchNumbers.size()).isEqualTo(2);
-        assertThat(matchNumbers.get(3)).isEqualTo(1);
-        assertThat(matchNumbers.get(6)).isEqualTo(1);
+        List<LottoTicket> tickets = Arrays.asList(
+                LottoTicket.issue(secondLottoNumbers),
+                LottoTicket.issue(lastWinningNumber),
+                LottoTicket.issue(thirdLottoNumbers)
+        );
+
+        Map<Rank, Integer> rankCounts = lottoMachine
+                .matchTicketCounts(lastWinningNumber, bonusBall, tickets);
+
+        assertThat(rankCounts.size()).isEqualTo(3);
+        assertTrue(rankCounts.containsKey(Rank.SECOND));
+        assertTrue(rankCounts.containsKey(Rank.FIFTH));
+        assertTrue(rankCounts.containsKey(Rank.FIRST));
     }
 
     @Test
@@ -77,14 +93,14 @@ class LottoMachineTest {
 
     @Test
     public void totalPrizeTest() {
-        Map<Integer, Integer> matchNumberCounts = new HashMap<Integer, Integer>() {{
-            put(3, 2);
-            put(6, 1);
+        Map<Rank, Integer> matchNumberCounts = new HashMap<Rank, Integer>() {{
+            put(Rank.THIRD, 2);
+            put(Rank.FIRST, 1);
         }};
 
         int totalPrize = lottoMachine.totalPrize(matchNumberCounts);
 
-        int expectPrize = (WinningPrize.getPrizeBy(3) * 2) + (WinningPrize.getPrizeBy(6));
+        int expectPrize = (Rank.THIRD.getPrize() * 2) + (Rank.FIRST.getPrize());
         assertThat(totalPrize).isEqualTo(expectPrize);
     }
 }

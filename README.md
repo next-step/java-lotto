@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 구현 기능
+## 구현 기능 - Step3
 * 로또 번호
   - 로또 번호 범위 제한
   - 랜덤한 숫자 생성
@@ -19,6 +19,8 @@
 * 랜덤 로또 번호 복권 발행
 
 * 당첨 상금 
+  - 클래스 이름 변경 (WinningPrize -> Rank)
+  - 보너스 번호 확인 여부 필드 추가 
 
 * 로또 머신 
   - 발급 기능
