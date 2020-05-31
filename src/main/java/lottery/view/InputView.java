@@ -19,4 +19,9 @@ public class InputView {
         return scanner.nextLine()
                 .split(ViewMessages.COMMA);
     }
+
+    public static int getInputBonusBallNumber() {
+        System.out.println(ViewMessages.INSTRUCTION_BONUS_BALL_NUMBER);
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

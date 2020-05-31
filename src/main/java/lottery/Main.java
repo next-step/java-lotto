@@ -14,8 +14,11 @@ public class Main {
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 
         LotteryTicket lastWinnerTicket = LotteryTicket.from(InputView.getInputLastWinnerTicketNumbers());
+        LotteryNumber bonusBallNumber = LotteryNumber.from(InputView.getInputBonusBallNumber());
+
         LotteryGame lotteryGame = LotteryGame.getInstance();
-        LotteryGameResult lotteryGameResult = lotteryGame.drawWinnerLotteryTickets(lotteryTicketsGroup, lastWinnerTicket, null);
+        LotteryGameResult lotteryGameResult = lotteryGame
+                .drawWinnerLotteryTickets(lotteryTicketsGroup, lastWinnerTicket, bonusBallNumber);
         RateOfReturn rateOfReturn = lotteryGameResult.calculateRateOfReturn(purchasePrice);
 
         ResultView.printLotteryGameResult(lotteryGameResult);
