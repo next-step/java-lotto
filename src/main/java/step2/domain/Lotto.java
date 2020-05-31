@@ -1,5 +1,9 @@
 package step2.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /*
  * Lotto
  * ver. 1.0
@@ -8,27 +12,42 @@ package step2.domain;
  */
 public class Lotto {
 
-    private String[] lottoNumbers = new String[]{};
+    private List<Integer> lottoNumbers = new ArrayList<>();
 
     private Lotto() {
 
     }
 
-    public Lotto from(String[] collectedNumbers) {
+    public static Lotto of(int lottoMaxLimit, int lottoDrawLimit) {
 
         Lotto lotto = new Lotto();
-        lotto.lottoNumbers = collectedNumbers;
+
+        // ready
+        List<Integer> lottoGameNumbers = new ArrayList<>();
+
+        for (int i = 1; i < lottoMaxLimit; i++) {
+            lottoGameNumbers.add(i);
+        }
+
+        // shuffle
+        Collections.shuffle(lottoGameNumbers);
+
+        // pick LOTTO_DRAW_LIMIT
+        lotto.lottoNumbers = drawLottoNumbers(lottoGameNumbers, lottoDrawLimit);
+        lotto.lottoNumbers.sort(Integer::compareTo);
+
         return lotto;
 
     }
 
-    public String[] getNumbers() {
-        return lottoNumbers;
+    private static List<Integer> drawLottoNumbers(List<Integer> lottoGameNumbers, int lottoDrawLimitIndex) {
+        return lottoGameNumbers.subList(0, lottoDrawLimitIndex);
     }
 
 
-
-
+    public List<Integer> getNumbers() {
+        return lottoNumbers;
+    }
 
 
 }

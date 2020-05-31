@@ -1,15 +1,23 @@
 package step2.domain;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
+/*
+ * LOTTO GAME
+ * Number
+ * ver. 1.0
+ * 2020.05.31
+ * Copyright ...
+ */
 public class Number {
 
     private static final Pattern patternNumbersOnly = Pattern.compile("^[-+]?[0-9]+$");
 
     public static void checkNumber(String inputString) {
         if (!patternNumbersOnly.matcher(inputString).matches()) {
-            throw new IllegalArgumentException("Found a not number(s)");
+            throw new IllegalArgumentException("Found a not number(s).");
         }
     }
 
@@ -17,16 +25,28 @@ public class Number {
         Arrays.stream(inputString)
                 .forEach(string -> {
                             if (!patternNumbersOnly.matcher(string).matches()) {
-                                throw new IllegalArgumentException("Found a not number(s)");
+                                throw new IllegalArgumentException("Found a not number(s).");
                             }
                         }
                 );
     }
 
+    public static void checkNotNumber(int number) {
+
+        if (number < 0) {
+            throw new IllegalArgumentException("Found a Illegal Argument(s).");
+        }
+
+    }
+
     public static void checkNotNumber(String number) {
 
-        if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException("Found a negative number(s)");
+        if (Objects.isNull(number) || number.isEmpty()) {
+            throw new IllegalArgumentException("Found a Illegal Argument(s).");
+        }
+
+        if (Integer.valueOf(number) < 0) {
+            throw new IllegalArgumentException("Found a Illegal Argument(s).");
         }
 
     }
@@ -38,15 +58,28 @@ public class Number {
                 .map(Integer::parseInt)
                 .filter(number -> number < 0)
                 .count() > 0) {
-            throw new IllegalArgumentException("Found a negative number(s)");
+            throw new IllegalArgumentException("Found a Illegal Argument(s).");
         }
 
     }
 
-    public static int getGameCountByPayMoney(int payMoney, int goodsPrice) {
-        if (payMoney <= 0 || payMoney % goodsPrice != 0) {
-            throw new IllegalArgumentException();
-        }
-        return payMoney / goodsPrice;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

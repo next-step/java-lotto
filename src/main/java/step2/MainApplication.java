@@ -1,11 +1,9 @@
 package step2;
 
 
-import step2.domain.Lotto;
+import step2.domain.LottoGame;
 import step2.view.InputView;
-
-import java.util.ArrayList;
-import java.util.List;
+import step2.view.OutputView;
 
 
 /*
@@ -20,27 +18,32 @@ public class MainApplication {
 
     public static void main(String[] args) {
 
-
         // input to buy
-        int payMoney = InputView.inputPayMoney();
+        String payMoney = InputView.inputPayMoney();
 
         // check buy Lotto
-
-        // buy
-        List<Lotto> lottoList = new ArrayList<>();
+        int gameCount = LottoGame.buyLotto(payMoney);
 
         // lottoList = LottoGame.
+        LottoGame.issueLotto(gameCount);
 
         //OutputView.
-
-        // print
+        OutputView.outputLottoList(LottoGame.getLottoList());
 
         // get Wining Number
+        String winingNumber = InputView.inputWiningNumber();
+
+        LottoGame.checkWiningNumber(winingNumber);
+
+        // prize Rules!!
+        LottoGame.makeRules();
 
         // matching numbers
+        LottoGame.matchingWinningNumbers();
+        OutputView.outputPrizeList(LottoGame.getPrizeList());
 
         // calc ratio of win.
-
+        OutputView.outputWinningResult(LottoGame.totalResult());
 
     }
 

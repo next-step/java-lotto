@@ -15,10 +15,10 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int inputPayMoney() {
+    public static String inputPayMoney() {
 
         System.out.println(QUESTION_PAY_MONEY);
-        int result = SCANNER.nextInt();
+        String result = SCANNER.next();
         return result;
 
     }
@@ -30,12 +30,6 @@ public class InputView {
         return result;
 
     }
-
-
-
-
-
-
 
 
 }
