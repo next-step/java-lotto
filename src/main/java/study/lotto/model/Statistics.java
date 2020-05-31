@@ -6,7 +6,7 @@ import java.util.Map;
 public class Statistics {
     private final int totalPrice;
     private final LottoList lottoList;
-    private final Map<Prize, Integer> statistics;
+    private final Map<LottoRank, Integer> statistics;
 
     private int totalEarning = 0;
     private float earningRate = 0;
@@ -17,8 +17,8 @@ public class Statistics {
 
         statistics = new HashMap<>();
 
-        for(Prize prize : Prize.class.getEnumConstants()) {
-            statistics.put(prize, 0);
+        for(LottoRank lottoRank : LottoRank.class.getEnumConstants()) {
+            statistics.put(lottoRank, 0);
         }
     }
 
@@ -35,8 +35,8 @@ public class Statistics {
     private void calculateStatistics(Lotto winningLotto) {
         lottoList.getLottoList()
                 .forEach(lotto -> {
-                    Prize prize = lotto.getPrize(winningLotto);
-                    statistics.put(prize, statistics.get(prize)+1);
+                    LottoRank lottoRank = lotto.getPrize(winningLotto);
+                    statistics.put(lottoRank, statistics.get(lottoRank)+1);
                 });
     }
 
@@ -54,5 +54,9 @@ public class Statistics {
 
     public float getEarningRate() {
         return earningRate;
+    }
+
+    public Map<LottoRank, Integer> getStatistics() {
+        return statistics;
     }
 }

@@ -81,9 +81,9 @@ public class LottoTest {
         List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        Prize prize = lotto.getPrize(winningLotto);
+        LottoRank lottoRank = lotto.getPrize(winningLotto);
 
-        assertThat(prize.getPrize())
+        assertThat(lottoRank.getPrize())
                 .isEqualTo(5000);
     }
 

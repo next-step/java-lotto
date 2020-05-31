@@ -46,8 +46,8 @@ public class Lotto {
         return lottoNumbers.stream().filter(winningLotto.getLottoNumbers()::contains).count();
     }
 
-    public Prize getPrize(Lotto winningLotto) {
-        return Prize.find((int)compareToWinningNumbers(winningLotto));
+    public LottoRank getPrize(Lotto winningLotto) {
+        return LottoRank.find((int)compareToWinningNumbers(winningLotto));
     }
 
     public String toString() {
