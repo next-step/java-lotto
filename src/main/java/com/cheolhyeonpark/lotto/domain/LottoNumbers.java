@@ -15,7 +15,7 @@ public class LottoNumbers {
         Collections.sort(this.numbers);
     }
 
-    public List<Integer> generate() {
+    private List<Integer> generate() {
         List<Integer> source = new ArrayList<>();
         IntStream.rangeClosed(1, 45).forEach(source::add);
         Collections.shuffle(source);
