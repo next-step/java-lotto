@@ -3,14 +3,11 @@ package lotto;
 public class Application {
 
     public static void main(String[] args) {
-        int paidMoney = InputView.getPaid();
         LottoMachine machine = new LottoMachine();
-        Lottos lottos = machine.issue(paidMoney);
+        Lottos lottos = machine.issue(InputView.getPaid());
         ResultView.printLottos(lottos);
 
-        WinningNumbers winningNumbers = InputView.askWinningNumbers();
-        int bonusNumber = InputView.askBonusNumber();
-        LottoResults results = lottos.checkResults(winningNumbers, bonusNumber);
+        LottoResults results = lottos.checkResults(InputView.askWinningNumbers(), InputView.askBonusNumber());
         ResultView.printResults(results);
     }
 }
