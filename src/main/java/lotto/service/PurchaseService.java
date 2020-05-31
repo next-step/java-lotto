@@ -9,11 +9,11 @@ import lotto.domain.LottoTicket;
 public class PurchaseService {
 
   public LottoTickets purchase(final Money money) {
-    final int NUMBER_OF_PURCHASED_LOTTO = money.getNumberOfPurchasedLotto();
+    final int numberOfPurchasedLotto = money.getNumberOfPurchasedLotto();
 
     List<LottoTicket> lottoTicketList = new ArrayList<>();
 
-    for (int index = 0; index < NUMBER_OF_PURCHASED_LOTTO; index++) {
+    for (int index = 0; index < numberOfPurchasedLotto; index++) {
       lottoTicketList.add(new LottoTicket());
     }
 
