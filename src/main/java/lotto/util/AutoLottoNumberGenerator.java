@@ -3,7 +3,6 @@ package lotto.util;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
@@ -20,11 +19,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
     this.lottoNumbers = IntStream.rangeClosed(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
-  }
-
-  private int getLottoNumberInRange() {
-    return new Random().nextInt((MAXIMUM_NUMBER_BOUND - MINIMUM_NUMBER_BOUND) + 1)
-        + MINIMUM_NUMBER_BOUND;
   }
 
   @Override
