@@ -4,7 +4,7 @@ import lotto.collections.WinningNumbers;
 
 public class LottoNumber {
 
-  protected final Integer number;
+  protected final int number;
 
   public LottoNumber(Integer number) {
     this.number = validateNumberInRange(number);
@@ -15,7 +15,7 @@ public class LottoNumber {
         .anyMatch(winningNumber -> winningNumber.getNumber().equals(number));
   }
 
-  private int validateNumberInRange(Integer number) {
+  private int validateNumberInRange(int number) {
     if (number < 1 || number > 45) {
       throw new RuntimeException("winning number should be in between 1 and 45.");
     }
