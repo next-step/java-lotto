@@ -1,5 +1,6 @@
 package com.lotto.domain;
 
+import com.lotto.helper.LottoViewHelper;
 import com.lotto.view.LottoView;
 
 import java.util.ArrayList;
@@ -13,22 +14,64 @@ public class LottoMachine {
 
     private LottoExtractor lottoExtractor;
     private LottoView lottoView;
-    private LottoBonusBall lottoBonusBall;
 
-    public LottoMachine(LottoExtractor lottoExtractor, LottoView lottoView) {
-        this.lottoExtractor = lottoExtractor;
+    public LottoMachine(LottoView lottoView) {
         this.lottoView = lottoView;
+    }
+
+    public void setLottoExtractor(LottoExtractor lottoExtractor) {
+        this.lottoExtractor = lottoExtractor;
     }
 
     public List<Lotto> buyLotto() {
         Integer countOfLotto = this.lottoView.inputPurchaseAmountOfLotto();
+        Integer countOfManualLotto = this.lottoView.inputCountOfManualLotto();
+
+        validateManualLottoCount(countOfLotto, countOfManualLotto);
+        Integer countOfAutomaticLotto = countOfLotto - countOfManualLotto;
+
+        List<Lotto> extractedManualLotto = extractManualLotto(countOfManualLotto);
+        List<Lotto> extractedAutomaticLotto = extractAutomaticLotto(countOfAutomaticLotto);
+
+        this.lottoView.outputResultOfEachLottoCount(extractedAutomaticLotto.size(), extractedManualLotto.size());
+
+        List<Lotto> extractedLotto = new ArrayList<>();
+        extractedLotto.addAll(extractedManualLotto);
+        extractedLotto.addAll(extractedAutomaticLotto);
+
+        outPutExtractedLotto(extractedLotto);
+        return extractedLotto;
+    }
+
+    private void validateManualLottoCount(Integer countOfLotto, Integer countOfManualLotto) {
+        if (countOfLotto < countOfManualLotto) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 개수가 금액을 초과합니다.");
+        }
+    }
+
+    private List<Lotto> extractAutomaticLotto(Integer countOfLotto) {
+        setLottoExtractor(new ShuffleLottoExtractor());
+
         List<Lotto> extractedLotto = new ArrayList<>();
         IntStream.range(0, countOfLotto).forEach(i -> {
             List<Integer> extractedLottoNumbers = this.lottoExtractor.extractLottoNumbers(LottoMachine.availableLottoNumbers);
             extractedLotto.add(new Lotto(extractedLottoNumbers, 0));
         });
 
-        outPutExtractedLotto(extractedLotto);
+        return extractedLotto;
+    }
+
+    private List<Lotto> extractManualLotto(Integer countOfLotto) {
+        this.lottoView.outputManualLottoMessage();
+        setLottoExtractor(new ManualLottoExtractor());
+
+        List<Lotto> extractedLotto = new ArrayList<>();
+        IntStream.range(0, countOfLotto).forEach(i -> {
+            String manualLotto = this.lottoView.inputManualLotto();
+            List<Integer> extractedLottoNumbers = LottoViewHelper.manipulateInputLottoNumbers(manualLotto);
+            extractedLotto.add(new Lotto(extractedLottoNumbers, 0));
+        });
+
         return extractedLotto;
     }
 
