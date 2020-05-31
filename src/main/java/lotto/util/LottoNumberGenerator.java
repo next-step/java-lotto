@@ -5,5 +5,7 @@ import lotto.domain.LottoNumber;
 
 public interface LottoNumberGenerator {
 
-  List<LottoNumber> shuffle();
+  static List<LottoNumber> shuffle() {
+    return null;
+  }
 }

@@ -13,29 +13,26 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
   private static final int MAXIMUM_NUMBER_BOUND = 45;
   private static final int START_INDEX_OF_NUMBER_ELEMENTS = 0;
   private static final int NUMBER_OF_NUMBER_ELEMENTS = 6;
-  
-  private final List<LottoNumber> lottoNumbers;
 
-  public AutoLottoNumberGenerator() {
-    this.lottoNumbers = IntStream.rangeClosed(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)
+  public static List<LottoNumber> generateLottoNumbers() {
+    return IntStream.rangeClosed(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
   }
 
-  @Override
-  public List<LottoNumber> shuffle() {
-    Collections.shuffle(lottoNumbers);
+  public static List<LottoNumber> shuffle() {
+    Collections.shuffle(generateLottoNumbers());
     return Collections.unmodifiableList(pickList());
   }
 
-  private List<LottoNumber> pickList() {
+  private static List<LottoNumber> pickList() {
     List<LottoNumber> lottoNumberList =
-        lottoNumbers.subList(START_INDEX_OF_NUMBER_ELEMENTS, NUMBER_OF_NUMBER_ELEMENTS);
+        generateLottoNumbers().subList(START_INDEX_OF_NUMBER_ELEMENTS, NUMBER_OF_NUMBER_ELEMENTS);
     sortDescLottoNumbers(lottoNumberList);
     return lottoNumberList;
   }
 
-  private void sortDescLottoNumbers(List<LottoNumber> lottoNumberList) {
+  private static void sortDescLottoNumbers(List<LottoNumber> lottoNumberList) {
     lottoNumberList.sort(Comparator.comparing(LottoNumber::getNumber));
   }
 }
