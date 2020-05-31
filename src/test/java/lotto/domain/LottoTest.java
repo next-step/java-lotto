@@ -83,6 +83,18 @@ public class LottoTest {
         assertThat(actualLotto).isEqualTo(lotto);
     }
 
+
+    @DisplayName("로또가 몇등인지 학인핳 수 있다.")
+    @Test
+    public void getRankTest() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,7",6);
+
+        LottoRank lottoRank = lotto.getWinningRank(winningLotto);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.RANK2);
+    }
+
     private static Stream<Arguments> lottoNumbersOutOfRange() {
         return Stream.of(
                 Arguments.of(List.of(1,2,3,4,5,0),

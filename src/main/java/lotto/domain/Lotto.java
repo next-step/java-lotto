@@ -88,4 +88,9 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    public LottoRank getWinningRank(WinningLotto winningLotto) {
+        int containCount = winningLotto.getContainCount(this);
+        return LottoRank.getRank(containCount, winningLotto.isContainBonus(this));
+    }
 }
