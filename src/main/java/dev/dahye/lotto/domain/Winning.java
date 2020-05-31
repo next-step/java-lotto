@@ -16,6 +16,10 @@ public enum Winning {
         this.prize = prize;
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
     private boolean sameMathCount(int matchCount) {
         return this.matchCount == matchCount;
     }

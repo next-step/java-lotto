@@ -2,6 +2,7 @@ package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.Winning;
+import dev.dahye.lotto.util.DoubleUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,19 +13,24 @@ public class LottoService {
     private static final int MUST_BE_REMAINDER = 0;
     private static final int WINNERS_COUNT = 6;
     private static final String WINNERS_DELIMITER = ",";
-    private final List<LottoTicket> lottoTickets;
-
-    public LottoService(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-    }
+    private List<LottoTicket> lottoTickets;
+    private final int money;
 
     public LottoService(int money) {
         validateMoney(money);
-        int lottoCount = money / LOTTO_PRICE;
+
         this.lottoTickets = new ArrayList<>();
+        int lottoCount = money / LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.issued());
         }
+
+        this.money = money;
+    }
+
+    public LottoService(int money, List<LottoTicket> lottoTickets) {
+        this.money = money;
+        this.lottoTickets = lottoTickets;
     }
 
     private void validateMoney(int money) {
@@ -96,5 +102,14 @@ public class LottoService {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("당첨 번호는 숫자만 입력 가능합니다.");
         }
+    }
+
+    public double getWinningRate(List<Winning> winnings) {
+        int totalPrize = 0;
+        for (Winning winning : winnings) {
+            totalPrize += winning.getPrize();
+        }
+
+        return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);
     }
 }

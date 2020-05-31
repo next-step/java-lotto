@@ -2,6 +2,7 @@ package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.Winning;
+import dev.dahye.lotto.util.DoubleUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +58,7 @@ class LottoServiceTest {
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
     void lotto_ticket_winnings(String winningNumbers, Winning winning) {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoService lottoServiceTest = new LottoService(Arrays.asList(lottoTicket));
+        LottoService lottoServiceTest = new LottoService(1000, Arrays.asList(lottoTicket));
         assertThat(lottoServiceTest.getWinnings(winningNumbers).get(0)).isEqualTo(winning);
     }
 
@@ -65,6 +67,25 @@ class LottoServiceTest {
                 arguments("1, 2, 3, 23, 24, 25", Winning.FOURTH),
                 arguments("1, 2, 3, 4, 25, 26", Winning.THIRD)
         );
+    }
+
+    @Test
+    @DisplayName("로또 수익률을 구할 수 있다.")
+    void lotto_winning_rate() {
+        int money = 2000;
+        LottoTicket lottoTicketByWinningFirst = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicketByWinningSecond = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+        String winningNumbers = "1, 2, 3, 4, 5, 6";
+
+        LottoService lottoService = new LottoService(2000, Arrays.asList(
+                lottoTicketByWinningFirst,
+                lottoTicketByWinningSecond
+        ));
+
+        List<Winning> winnings = lottoService.getWinnings(winningNumbers);
+
+        assertThat(lottoService.getWinningRate(winnings))
+                .isEqualTo(DoubleUtils.parseDoubleSecondDigit((Winning.FIRST.getPrize() + Winning.SECOND.getPrize()) / money));
     }
 
 }
