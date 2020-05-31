@@ -42,12 +42,24 @@ public class Money {
         return (this.usedAmount + priceable.getPrice()) <= this.totalAmount;
     }
 
-    public int getRemainingAmount() {
-        return totalAmount - usedAmount;
+    public int getBalance() {
+        return this.totalAmount - this.usedAmount;
     }
 
     public int getUsedAmount() {
         return this.usedAmount;
+    }
+
+    public int getTotalAmount() {
+        return this.totalAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "totalAmount=" + totalAmount +
+                ", usedAmount=" + usedAmount +
+                '}';
     }
 
     @Override
@@ -55,11 +67,11 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return getRemainingAmount() == money.getRemainingAmount();
+        return getBalance() == money.getBalance();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getRemainingAmount());
+        return Objects.hash(this.getBalance());
     }
 }

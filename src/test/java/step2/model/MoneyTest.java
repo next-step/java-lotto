@@ -15,46 +15,61 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
-    @DisplayName("스태틱 메소드 생성자는 Money의 인스턴스를 반환한다")
-    @ValueSource(ints = {1, 2, 3, 4})
+    @DisplayName("valueOf() 정적 생성자는 Money 인스턴스를 반환한다")
+    @ValueSource(ints = {0, 1000, 2000, 3000})
     @ParameterizedTest
     void valueOf_Amount_MoneyInstance(int amount) {
         Money money = Money.valueOf(amount);
+
         assertThat(money).isInstanceOf(Money.class);
+        assertThat(money.getTotalAmount()).isEqualTo(amount);
     }
 
-    @DisplayName("useAmount()는 입력한 금액을 보유한 금액에서 차감한다")
+    @DisplayName("getBalance() 메소드는 현재 남은 금액을 반환한다")
+    @ValueSource(ints = {0, 1000, 2000, 3000})
+    @ParameterizedTest(name = "''{0}''를 입력하면 남은 금액은 ''{0}''이다")
+    void getBalance_Amount_Remain(int amount) {
+        Money money = Money.valueOf(amount);
+
+        assertThat(money.getBalance()).isEqualTo(amount);
+    }
+
+    @DisplayName("useAmount() 메소드는 입력한 금액을 보유한 금액에서 차감한다")
     @MethodSource("provideMoneyForUseAmount")
-    @ParameterizedTest
-    void useAmount_UsedAmount_SubtractAmount(int totalAmount) {
-        Money money = Money.valueOf(totalAmount);
-        money.useAmount(LottoTicketPrice.PRICE_1000);
-        assertThat(money).isEqualTo(Money.valueOf(totalAmount - LottoTicketPrice.PRICE_1000.getPrice()));
+    @ParameterizedTest(name = "''{0}''에서 1,000원 티켓 1장을 구입하면 ''{1}''이 남는다.")
+    void useAmount_UsedAmount_SubtractAmount(Money purchaseMoney, Money expectedMoney) {
+        purchaseMoney.useAmount(LottoTicketPrice.PRICE_1000);
+
+        assertThat(purchaseMoney).isEqualTo(expectedMoney);
     }
 
     private static Stream<Arguments> provideMoneyForUseAmount() {
         return Stream.of(
-                Arguments.of(10000),
-                Arguments.of(8000),
-                Arguments.of(5000),
-                Arguments.of(1000)
+                Arguments.of(Money.valueOf(10500), Money.valueOf(9500)),
+                Arguments.of(Money.valueOf(10000), Money.valueOf(9000)),
+                Arguments.of(Money.valueOf(5000), Money.valueOf(4000)),
+                Arguments.of(Money.valueOf(1010), Money.valueOf(10))
         );
     }
 
-    @DisplayName("useAmount()는 입력한 금액이 보유 금액보다 클 경우 예외가 발생한다")
+    @DisplayName("useAmount() 메소는 입력한 금액이 보유 금액보다 클 경우 예외가 발생한다")
     @Test
     void useAmount_NotAllowedAmount_ExceptionThrown() {
-        Money money = Money.valueOf(0);
-
-        assertThatThrownBy(() -> money.useAmount(LottoTicketPrice.PRICE_1000))
+        assertThatThrownBy(() -> Money.valueOf(999).useAmount(LottoTicketPrice.PRICE_1000))
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 
-    @DisplayName("isAvailableAmount()는 보유중인 금액과 비교해서 TRUE 또는 FALSE를 반환한다")
-    @Test
-    void isAvailableAmount_UsedAmount_Boolean() {
-        Money money = Money.valueOf(1000);
+    @DisplayName("isAvailableAmount() 메소드는 보유중인 금액과 비교해서 TRUE 또는 FALSE를 반환한다")
+    @MethodSource("provideMoneyForIsAvailableAmount")
+    @ParameterizedTest
+    void isAvailableAmount_UsedAmount_Boolean(Money money, boolean expected) {
+        assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_1000)).isEqualTo(expected);
+    }
 
-        assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_1000)).isTrue();
+    private static Stream<Arguments> provideMoneyForIsAvailableAmount() {
+        return Stream.of(
+                Arguments.of(Money.valueOf(1001), true),
+                Arguments.of(Money.valueOf(999), false)
+        );
     }
 }

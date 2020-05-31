@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketGeneratorTest {
 
-    @DisplayName("입력한 티켓 장수와 생성된 로또 티켓의 장수는 동일하다")
+    @DisplayName("getTicketCount() 메소드는 입력한 티켓 장수와 동일하다.")
     @ValueSource(ints = {1, 20, 100})
     @ParameterizedTest
     void generate_TicketCount_LottoTickets(int ticketCount) {
@@ -18,7 +18,7 @@ public class LottoTicketGeneratorTest {
         assertThat(lottoTickets.getTicketCount()).isEqualTo(ticketCount);
     }
 
-    @DisplayName("입력한 티켓 장수가 1장보다 작으면 예외가 발생한다")
+    @DisplayName("generate() 메소드는 1보다 작은 수를 입력하면 예외를 발생한다")
     @Test
     void generate_TicketCountZero_ExceptionThrown() {
         assertThatThrownBy(() -> LottoTicketGenerator.generate(0))

@@ -9,15 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberGeneratorTest {
 
-    @DisplayName("로또 번호 6개를 리스트로 반환한다")
+    @DisplayName("generate() 메소드는 로또 번호 6개를 리스트로 반환한다")
     @Test
     void generate_None_LottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate();
-
-        lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .forEach(System.out::println);
-
+        lottoNumbers.forEach(System.out::println);
         assertThat(lottoNumbers).hasSize(6);
     }
 }

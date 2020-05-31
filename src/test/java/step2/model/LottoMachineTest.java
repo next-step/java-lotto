@@ -16,22 +16,22 @@ public class LottoMachineTest {
 
     private static final LottoMachine LOTTO_MACHINE = LottoMachine.create(LottoTicketPrice.PRICE_1000);
 
-    @DisplayName("스태틱 메소드 생성자는 LottoMachine 인스턴스를 반환한다")
+    @DisplayName("create() 정적 생성자는 LottoMachine 인스턴스를 반환한다")
     @Test
     void create_TicketPrice_MachineInstance() {
         assertThat(LOTTO_MACHINE).isInstanceOf(LottoMachine.class);
     }
 
-    @DisplayName("스태틱 메소드 생성자에 Null을 입력하면 예외가 발생한다")
+    @DisplayName("create() 정적 생성자에 Null을 입력하면 예외가 발생한다")
     @Test
     void create_Null_ExceptionThrown() {
         assertThatThrownBy(() -> LottoMachine.create(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("입력한 금액으로 구매할 수 있는 최대 티켓 장수를 반환한다")
+    @DisplayName("buyTicket() 메소드는 입력한 금액으로 구매할 수 있는 최대 티켓 장수를 반환한다")
     @MethodSource("provideMoneyForBuyTicket")
-    @ParameterizedTest
+    @ParameterizedTest(name = "금액을 ''{0}'' 입력하면 ''{1}''장을 반환한다")
     void buyTicket_Money_LottoTickets(Money money, int expectedTicketCount) {
         LottoTickets lottoTickets = LOTTO_MACHINE.buyTicket(money);
 
@@ -47,7 +47,7 @@ public class LottoMachineTest {
         );
     }
 
-    @DisplayName("입력한 금액이 티켓 가격보다 적으면 예외가 발생한다")
+    @DisplayName("buyTicket() 메소드는 입력한 금액이 티켓 가격보다 적으면 예외가 발생한다")
     @Test
     void buyTicket_LackMoney_ExceptionThrown() {
         assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(Money.valueOf(10)))
