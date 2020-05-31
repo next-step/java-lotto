@@ -2,28 +2,21 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import step2.view.ErrorMessages;
 
 public class LottoGame {
 
-    private int userPrice;
+    private UserPrice userPrice;
     private List<Lotto> lottos;
     private LottoGenerator lottoGenerator;
 
     public LottoGame(int userPrice) {
-        this.userPrice = userPrice;
+        this.userPrice = new UserPrice(userPrice);
         this.lottos = new ArrayList<>();
         this.lottoGenerator = new LottoGenerator(new RandomGenerableStrategy());
     }
 
-    private void validateUserPrice(int userPrice) throws IllegalArgumentException {
-        if (userPrice < 1000 || userPrice > 100000) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_USER_PRICE);
-        }
-    }
-
     public void run() throws IllegalArgumentException {
-        validateUserPrice(userPrice);
+        this.userPrice.validateUserPrice();
         this.lottos = lottoGenerator.generateLottos(this.userPrice);
     }
 

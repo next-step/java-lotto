@@ -7,14 +7,14 @@ public class LottoGameResult {
     private List<Lotto> lottos;
     private WinningLotto winningLotto;
     private int cashPrize;
-    private int userPrice;
+    private UserPrice userPrice;
     private double earningRate;
     private int firstPrizeCount;
     private int secondPrizeCount;
     private int thirdPrizeCount;
     private int forthPrizeCount;
 
-    public LottoGameResult(List<Lotto> lottos, String winningNumbers, int userPrice) {
+    public LottoGameResult(List<Lotto> lottos, String winningNumbers, UserPrice userPrice) {
         this.lottos = lottos;
         this.winningLotto = new WinningLotto(winningNumbers);
         this.cashPrize = 0;
@@ -54,6 +54,6 @@ public class LottoGameResult {
 
     private double getEarningRate() {
         setCashPrize();
-        return (double) this.cashPrize / this.userPrice;
+        return (double) this.cashPrize / this.userPrice.getPrice();
     }
 }

@@ -15,8 +15,8 @@ public class LottoGenerator extends Generating {
         super(generableStrategy);
     }
 
-    public List<Lotto> generateLottos(int price) {
-        int lottoCount = getLottoCount(price);
+    public List<Lotto> generateLottos(UserPrice userPrice) {
+        int lottoCount = getLottoCount(userPrice);
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
@@ -25,10 +25,10 @@ public class LottoGenerator extends Generating {
         return lottos;
     }
 
-    private int getLottoCount(int price) {
-        if (price < LOTTO_PRICE) {
+    private int getLottoCount(UserPrice userPrice) {
+        if (userPrice.getPrice() < LOTTO_PRICE) {
             return 0;
         }
-        return (int) Math.floor(price) / LOTTO_PRICE;
+        return (int) Math.floor(userPrice.getPrice()) / LOTTO_PRICE;
     }
 }
