@@ -36,7 +36,7 @@ public class LotteryTicketsGroup {
     public Map<LotteryRank, Integer> findWinnerTicketCountsByRank(LotteryTicket lastWinnerTicket) {
         Map<LotteryRank, Integer> gameResultBoard = new HashMap<>();
         lotteryTickets.stream()
-                .map(targetLotteryTicket -> targetLotteryTicket.getMatchLotteryRank(lastWinnerTicket))
+                .map(targetLotteryTicket -> targetLotteryTicket.getMatchLotteryRank(lastWinnerTicket, null))
                 .forEach(targetLotteryRank -> updateGameResultBoard(targetLotteryRank, gameResultBoard));
         return gameResultBoard;
     }

@@ -38,11 +38,24 @@ public class LotteryTicket {
                 .collect(Collectors.toList());
     }
 
-    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket) {
+    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket, LotteryNumber bonusBallNumber) {
+        if (lastWinnerTicket.getLotteryNumbers().contains(bonusBallNumber.getLotteryNumber())) {
+            long matchNumberCounts = this.getLotteryNumbers().stream()
+                    .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
+                    .count();
+            boolean isBonusBall = this.getLotteryNumbers().stream()
+                    .anyMatch(target -> target == bonusBallNumber.getLotteryNumber());
+            return LotteryRank.valueOf((int) matchNumberCounts, isBonusBall);
+        }
         long matchNumberCounts = this.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
-        return LotteryRank.valueOf((int) matchNumberCounts, true);
+        boolean isBonusBall = this.getLotteryNumbers().stream()
+                .anyMatch(target -> target == bonusBallNumber.getLotteryNumber());
+        if (isBonusBall) {
+            matchNumberCounts++;
+        }
+        return LotteryRank.valueOf((int) matchNumberCounts, isBonusBall);
     }
 
     private void validateLotteryNumberCounts(List<LotteryNumber> lotteryNumbers) {
