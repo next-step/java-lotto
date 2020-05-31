@@ -25,8 +25,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
   @Override
   public List<LottoNumber> shuffle() {
     Collections.shuffle(lottoNumbers);
-    List<LottoNumber> lottoNumberList = Collections.unmodifiableList(pickList());
-    return lottoNumberList;
+    return Collections.unmodifiableList(pickList());
   }
 
   private List<LottoNumber> pickList() {

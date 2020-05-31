@@ -4,9 +4,9 @@ import lotto.collections.WinningNumbers;
 
 public class LottoNumber {
 
-  protected final int number;
+  protected final Integer number;
 
-  public LottoNumber(int number) {
+  public LottoNumber(Integer number) {
     this.number = validateNumberInRange(number);
   }
 
