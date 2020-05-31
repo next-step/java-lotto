@@ -41,7 +41,7 @@ public enum LottoResult {
         return price;
     }
 
-    public boolean isBlank() {
+    public boolean isZeroPrice() {
         return price.equals(0L);
     }
 
