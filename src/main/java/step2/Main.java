@@ -1,6 +1,6 @@
 package step2;
 
-import static step2.utils.LottoUtil.convertTo;
+import static step2.utils.Converter.convertTo;
 import static step2.view.InputView.inputPurchasePrice;
 import static step2.view.InputView.inputWinningLottoNumber;
 import static step2.view.OutputView.printLottoNumber;
@@ -27,6 +27,6 @@ public class Main {
 
         printLottoStatistics(lottoResults);
 
-        printProfitResult(lottoResults.profit());
+        printProfitResult(lottoResults.getProfit());
     }
 }
