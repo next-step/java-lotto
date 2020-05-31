@@ -13,6 +13,9 @@ public class LottoNumber {
     this.number = number;
   }
 
+  protected LottoNumber() {
+  }
+
   public boolean getMatchCounts(final WinningNumbers proposes) {
     return proposes.getWinningNumbers().stream()
         .anyMatch(propose -> propose.getNumber().equals(number));
