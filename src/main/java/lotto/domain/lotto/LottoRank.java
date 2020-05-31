@@ -12,7 +12,7 @@ public enum LottoRank {
     private final int countOfMatch;
     private final int winningMoney;
 
-    private LottoRank(int countOfMatch, int winningMoney) {
+    LottoRank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
