@@ -57,7 +57,7 @@ class LottoServiceTest {
     @MethodSource("winnings")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
     void lotto_ticket_winnings(String winningNumbers, Winning winning) {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoService lottoServiceTest = new LottoService(1000, Arrays.asList(lottoTicket));
         assertThat(lottoServiceTest.getWinnings(winningNumbers).get(0)).isEqualTo(winning);
     }
@@ -73,8 +73,8 @@ class LottoServiceTest {
     @DisplayName("로또 수익률을 구할 수 있다.")
     void lotto_winning_rate() {
         int money = 2000;
-        LottoTicket lottoTicketByWinningFirst = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicketByWinningSecond = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTicket lottoTicketByWinningFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicketByWinningSecond = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
         String winningNumbers = "1, 2, 3, 4, 5, 6";
 
         LottoService lottoService = new LottoService(2000, Arrays.asList(

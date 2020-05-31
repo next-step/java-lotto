@@ -14,6 +14,7 @@ public class LottoService {
     private static final int WINNERS_COUNT = 6;
     private static final String WINNERS_DELIMITER = ",";
     private List<LottoTicket> lottoTickets;
+    private LottoTicket winningTicket;
     private final int money;
 
     public LottoService(int money) {
@@ -22,7 +23,7 @@ public class LottoService {
         this.lottoTickets = new ArrayList<>();
         int lottoCount = money / LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(LottoTicket.issued());
+            lottoTickets.add(LottoTicket.autoIssued());
         }
 
         this.money = money;
@@ -53,22 +54,29 @@ public class LottoService {
 
     public List<Winning> getWinnings(String winningNumberInput) {
         List<Winning> winnings = new ArrayList<>();
-        List<Integer> winningNumbers = validateWinningNumbers(winningNumberInput);
+        validateWinningNumbers(winningNumberInput);
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.getMatchCount(winningNumbers);
+            int matchCount = lottoTicket.getMatchCount(winningTicket);
             getWinning(winnings, matchCount);
         }
 
         return winnings;
     }
 
-    private List<Integer> validateWinningNumbers(String winningNumberInput) {
+    private void validateWinningNumbers(String winningNumberInput) {
         validateWinnersNullOrEmpty(winningNumberInput);
         List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
         validateWinningNumberSize(winningNumbers);
+        validateAlreadyAssignedWinningTicket();
 
-        return winningNumbers;
+        this.winningTicket = LottoTicket.manualIssued(winningNumbers);
+    }
+
+    private void validateAlreadyAssignedWinningTicket() {
+        if (this.winningTicket != null) {
+            throw new RuntimeException("이미 할당된 당첨 번호가 존재합니다.");
+        }
     }
 
     private void getWinning(List<Winning> winnings, int matchCount) {
