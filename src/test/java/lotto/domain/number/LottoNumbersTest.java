@@ -25,7 +25,7 @@ public class LottoNumbersTest {
         String winningNumberString = "1,2,3,4,5,6";
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
 
-        NumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
+        NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
         LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
 
         int matchCount = lottoNumbers.matchCount(winningNumbers);

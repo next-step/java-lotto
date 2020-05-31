@@ -5,6 +5,7 @@ import lotto.domain.generator.NumberGenerator;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -63,10 +64,16 @@ public class WinningStatisticsTest {
         assertThat(profit).isEqualTo(new DecimalFormat("#,##0.00").format(LottoRank.FOURTH.getWinningMoney() / price.getPrice()));
     }
 
-    private static class NotMatchNumberGenerator implements NumberGenerator {
+    private static class NotMatchNumberGenerator implements NumberGenerator<LottoNumber> {
         @Override
-        public List<Integer> getNumbers() {
-            return Arrays.asList(7, 8, 9, 10, 11, 12);
+        public List<LottoNumber> getNumbers() {
+            return Arrays.asList(new LottoNumber(7),
+                    new LottoNumber(8),
+                    new LottoNumber(9),
+                    new LottoNumber(10),
+                    new LottoNumber(11),
+                    new LottoNumber(12)
+            );
         }
     }
 }

@@ -17,10 +17,10 @@ class LottoNumberGeneratorTest {
     void createNumbers() {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-        List<Integer> numbers = lottoNumberGenerator.getNumbers();
+        List<LottoNumber> numbers = lottoNumberGenerator.getNumbers();
 
         assertAll(
-                () -> assertThat(numbers.get(0)).isBetween(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE),
+                () -> assertThat(numbers.get(0).getNumber()).isBetween(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE),
                 () -> assertThat(numbers).hasSize(6)
         );
     }
