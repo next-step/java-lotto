@@ -8,6 +8,8 @@ import lotto.domain.lotto.Price;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +58,9 @@ public class WinningStatisticsTest {
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
-        float profit = winningStatistics.calculateProfit();
+        BigDecimal profit = winningStatistics.calculateProfit();
 
-        assertThat(profit).isEqualTo((float) LottoRank.FOURTH.getWinningMoney() / price.getPrice());
+        assertThat(profit).isEqualTo(new DecimalFormat("#,##0.00").format(LottoRank.FOURTH.getWinningMoney() / price.getPrice()));
     }
 
     private static class NotMatchNumberGenerator implements NumberGenerator {
