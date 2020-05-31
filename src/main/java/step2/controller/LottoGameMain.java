@@ -23,6 +23,7 @@ public class LottoGameMain {
             String lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
 
             resultView.printStatistic(lottoGame.getGameResult(lastWeekWinningNumbers));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
