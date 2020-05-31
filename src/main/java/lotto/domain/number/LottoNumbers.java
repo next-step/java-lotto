@@ -12,7 +12,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public static LottoNumbers newLottoNumbersWithNumberGenerator(NumberGenerator generator) {
+    public static LottoNumbers newLottoNumbersWithNumberGenerator(NumberGenerator<LottoNumber> generator) {
         return new LottoNumbers(generator);
     }
 
@@ -20,7 +20,7 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    private LottoNumbers(NumberGenerator generator) {
+    private LottoNumbers(NumberGenerator<LottoNumber> generator) {
         this.numbers = createLottoNumbers(generator);
     }
 
@@ -34,12 +34,8 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> createLottoNumbers(NumberGenerator generator) {
-        List<Integer> integers = generator.getNumbers();
-
-        return integers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    private List<LottoNumber> createLottoNumbers(NumberGenerator<LottoNumber> generator) {
+        return generator.getNumbers();
     }
 
     public int matchCount(WinningNumbers winningNumbers) {

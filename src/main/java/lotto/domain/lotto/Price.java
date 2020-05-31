@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Price {
     public static final int LOTTO_PRICE = 1000;
-    private final int DIVIDE_SCALE = 2;
 
     private final int price;
 
@@ -26,7 +25,8 @@ public class Price {
         BigDecimal rankSumVale = BigDecimal.valueOf(rankSum);
         BigDecimal priceValue = BigDecimal.valueOf(this.price);
 
-        return rankSumVale.divide(priceValue,DIVIDE_SCALE, RoundingMode.UP);
+        int DIVIDE_SCALE = 2;
+        return rankSumVale.divide(priceValue, DIVIDE_SCALE, RoundingMode.UP);
     }
 
     @Override

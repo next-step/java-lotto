@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.generator.NumberGenerator;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.winning.WinningNumbers;
 
@@ -15,11 +16,11 @@ public class LottoTicket {
 
     private final List<LottoNumbers> lottoNumbers;
 
-    public LottoTicket(int lottoCount, NumberGenerator generator) {
+    public LottoTicket(int lottoCount, NumberGenerator<LottoNumber> generator) {
         this.lottoNumbers = createLottoTicket(lottoCount, generator);
     }
 
-    private List<LottoNumbers> createLottoTicket(int lottoCount, NumberGenerator generator) {
+    private List<LottoNumbers> createLottoTicket(int lottoCount, NumberGenerator<LottoNumber> generator) {
         return IntStream.range(0, lottoCount)
                 .mapToObj(i -> LottoNumbers.newLottoNumbersWithNumberGenerator(generator))
                 .collect(Collectors.toList());
