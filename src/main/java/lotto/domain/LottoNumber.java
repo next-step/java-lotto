@@ -4,16 +4,10 @@ import lotto.collections.WinningNumbers;
 
 public class LottoNumber {
 
-  public static final int MINIMUM_NUMBER_BOUND = 1;
-  public static final int MAXIMUM_NUMBER_BOUND = 45;
-
-  protected int number;
+  protected final int number;
 
   public LottoNumber(int number) {
     this.number = validateNumberInRange(number);
-  }
-
-  protected LottoNumber() {
   }
 
   public boolean getMatchCounts(final WinningNumbers winningNumbers) {
