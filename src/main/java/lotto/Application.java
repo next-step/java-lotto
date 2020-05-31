@@ -9,7 +9,8 @@ public class Application {
         ResultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = InputView.askWinningNumbers();
-        LottoResults results = lottos.checkResults(winningNumbers);
+        int bonusNumber = InputView.askBonusNumber();
+        LottoResults results = lottos.checkResults(winningNumbers, bonusNumber);
         ResultView.printResults(results);
     }
 }

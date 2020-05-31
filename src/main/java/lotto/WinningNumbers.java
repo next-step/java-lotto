@@ -1,12 +1,12 @@
 package lotto;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
 
-	private List<Integer> numbers;
+	private Set<Integer> numbers;
 
-	public WinningNumbers(List<Integer> numbers) {
+	public WinningNumbers(Set<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
