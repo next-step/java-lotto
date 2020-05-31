@@ -61,6 +61,14 @@ public class LottoNumbers {
         return numbers;
     }
 
+    public int matchCount(LottoNumber bonusLottoNumber) {
+        return Math.toIntExact(
+                this.numbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
+                .count()
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
