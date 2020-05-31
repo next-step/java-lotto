@@ -9,7 +9,7 @@ import lotto.collections.WinningNumbers;
 
 public class WinningService {
 
-  public WinningNumbers createWinningNumbers(String winningNumber) {
+  public WinningNumbers createWinningNumbers(final String winningNumber) {
     List<Integer> winningNumberBeforeList = Arrays.stream(winningNumber.split(","))
         .map(String::trim)
         .map(Integer::valueOf)
@@ -17,8 +17,8 @@ public class WinningService {
     return new WinningNumbers(winningNumberBeforeList);
   }
 
-  public LottoResult calculateLottoMatches(LottoTickets lottoTickets,
-      WinningNumbers winningNumbers) {
+  public LottoResult calculateLottoMatches(final LottoTickets lottoTickets,
+      final WinningNumbers winningNumbers) {
     return lottoTickets.createLottoResult(winningNumbers);
   }
 }

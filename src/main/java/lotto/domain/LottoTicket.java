@@ -5,14 +5,14 @@ import java.util.stream.Collectors;
 import lotto.collections.WinningNumbers;
 import lotto.util.AutoLottoNumberGenerator;
 
-public class LottoTicket {
+public final class LottoTicket {
 
-  protected List<LottoNumber> lottoNumbers;
+  protected final List<LottoNumber> lottoNumbers;
 
   public LottoTicket() {
     lottoNumbers = new AutoLottoNumberGenerator().shuffle();
   }
-  public int getMatchCounts(WinningNumbers winningNumbers) {
+  public int getMatchCounts(final WinningNumbers winningNumbers) {
     return Math.toIntExact(lottoNumbers.stream()
         .filter(number -> number.getMatchCounts(winningNumbers))
         .count());

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 import lotto.util.LottoProfitCalculator;
 
-public class LottoResult {
+public final class LottoResult {
 
   private final Map<Integer, Integer> lottoStatistics;
 
