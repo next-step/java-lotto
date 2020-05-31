@@ -9,6 +9,9 @@ public class Generating {
     }
 
     public Generating(GenerableStrategy generableStrategy) {
+        if (generableStrategy == null) {
+            throw new IllegalArgumentException("generableStrategy cannot be null");
+        }
         this.generableStrategy = generableStrategy;
     }
 }

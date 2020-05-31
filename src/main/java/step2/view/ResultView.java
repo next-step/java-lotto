@@ -26,7 +26,6 @@ public class ResultView {
     }
 
     public void printStatistic(LottoGameResultDto lottoGameResultDto) {
-        System.out.println(lottoGameResultDto.toString());
         System.out.printf(WINNING_STATISTIC_TEMPLATE,
             Prize.FORTH.getCashPrize(),
             lottoGameResultDto.getForthPrizeCount(),

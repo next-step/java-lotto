@@ -52,7 +52,7 @@ public class LottoGame {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
 
-        if (winningNumbers.stream().anyMatch(number -> Character.isDigit(number.charAt(0)))) {
+        if (winningNumbers.stream().anyMatch(number -> !Character.isDigit(number.charAt(0)))) {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
     }
