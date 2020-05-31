@@ -10,7 +10,7 @@ public class LottoNumber {
   protected int number;
 
   public LottoNumber(int number) {
-    this.number = number;
+    this.number = validateNumberInRange(number);
   }
 
   protected LottoNumber() {
@@ -21,7 +21,14 @@ public class LottoNumber {
         .anyMatch(winningNumber -> winningNumber.getNumber().equals(number));
   }
 
-  public int getNumber() {
+  private int validateNumberInRange(Integer number) {
+    if (number < 1 || number > 45) {
+      throw new RuntimeException("winning number should be in between 1 and 45.");
+    }
+    return number;
+  }
+
+  public Integer getNumber() {
     return number;
   }
 
