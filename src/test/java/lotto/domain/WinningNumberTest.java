@@ -13,7 +13,7 @@ public class WinningNumberTest {
   @ParameterizedTest
   void 당첨번호가_1과_45_사이임이_보장된다(Integer number) {
     assertThatThrownBy(
-        () -> new WinningNumber(number))
+        () -> new LottoNumber(number))
         .isInstanceOf(RuntimeException.class);
   }
 }

@@ -4,8 +4,10 @@ import lotto.domain.LottoNumber;
 
 public class LottoNumberMock extends LottoNumber {
 
+  final int number;
+
   public LottoNumberMock(int number) {
-    super();
-    super.number = number;
+    super(number);
+    this.number = number;
   }
 }
