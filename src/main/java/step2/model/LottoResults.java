@@ -35,15 +35,15 @@ public class LottoResults {
         return result;
     }
 
-    public Double getProfit() {
-        return getTotalPrice() / getPurchasePayment();
-    }
-
     private static Map<LottoResult, Long> getDefaultResult() {
         Map<LottoResult, Long> defaultResult = new LinkedHashMap<>();
         Arrays.stream(LottoResult.values())
             .forEach(lottoResult -> defaultResult.put(lottoResult, 0L));
         return defaultResult;
+    }
+
+    public Double getProfit() {
+        return getTotalPrice() / getPurchasePayment();
     }
 
     private Long getTotalPrice() {
