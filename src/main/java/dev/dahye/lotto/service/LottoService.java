@@ -33,6 +33,10 @@ public class LottoService {
         this.lottoTickets = lottoTickets;
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     private void validateMoney(int money) {
         if (isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");

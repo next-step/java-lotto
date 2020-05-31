@@ -1,8 +1,6 @@
 package dev.dahye.lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Collections.shuffle;
 
@@ -11,7 +9,7 @@ public class LottoTicket {
     private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
 
         validateLottoNumberSize();
@@ -26,7 +24,8 @@ public class LottoTicket {
         List<Integer> numbers = LottoNumber.getNumbers();
         shuffle(numbers);
 
-        return numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE);
+
+        return new ArrayList<>(numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE));
     }
 
     protected boolean validateLottoNumberSize() {
@@ -53,5 +52,10 @@ public class LottoTicket {
             matchCount++;
         }
         return matchCount;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(lottoNumbers.toArray());
     }
 }

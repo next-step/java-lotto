@@ -3,10 +3,10 @@ package dev.dahye.lotto.domain;
 import java.util.Arrays;
 
 public enum Winning {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
+    FOURTH(3, 5000),
     THIRD(4, 50000),
-    FOURTH(3, 5000);
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private int prize;
@@ -14,6 +14,10 @@ public enum Winning {
     Winning(int matchCount, int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getPrize() {
