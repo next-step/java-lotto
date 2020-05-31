@@ -18,10 +18,10 @@ public class RandomGenerableStrategy implements GenerableStrategy {
     }
 
     @Override
-    public Lotto generate(int count) {
+    public List<Integer> generate(int count) {
         List<Integer> copiedLottoBaseNumbers = new ArrayList<>();
         copiedLottoBaseNumbers.addAll(this.lottoBaseNumbers);
-        return new Lotto(getSequentialShuffledNumbers(copiedLottoBaseNumbers, count));
+        return getSequentialShuffledNumbers(copiedLottoBaseNumbers, count);
     }
 
     private List<Integer> makeSequentialNumbers(int start, int end) {

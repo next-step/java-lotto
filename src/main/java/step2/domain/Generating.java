@@ -1,10 +1,12 @@
 package step2.domain;
 
+import java.util.List;
+
 public class Generating {
 
     private GenerableStrategy generableStrategy;
 
-    public Lotto generate(int count) {
+    public List<Integer> generate(int count) {
         return generableStrategy.generate(count);
     }
 

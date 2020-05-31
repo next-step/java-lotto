@@ -20,7 +20,7 @@ public class LottoGenerator extends Generating {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(this.generate(LOTTO_SELECTION_COUNT));
+            lottos.add(new Lotto(this.generate(LOTTO_SELECTION_COUNT)));
         }
         return lottos;
     }
