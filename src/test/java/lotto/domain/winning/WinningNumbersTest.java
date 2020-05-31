@@ -20,16 +20,6 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.getWinningLottoNumbers().getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
-    @DisplayName("로또 번호를 포함하는지 확인할 수 있다.")
-    @Test
-    void contains() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-
-        boolean contains = winningNumbers.contains(lottoNumber);
-
-        assertThat(contains).isTrue();
-    }
-
     @DisplayName("equals 메소드 테스트")
     @Test
     void equals() {

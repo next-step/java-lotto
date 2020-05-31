@@ -22,17 +22,6 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
-    @DisplayName("로또 번호를 포함하는지 확인할 수 있다.")
-    @Test
-    void contains() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new FixedNumberGenerator());
-
-        boolean contains = lottoNumbers.contains(lottoNumber);
-
-        assertThat(contains).isTrue();
-    }
-
     @DisplayName("6자리인지 검증할 수 있다.")
     @Test
     void validateLottoNumbersLength() {
