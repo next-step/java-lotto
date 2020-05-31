@@ -1,11 +1,13 @@
 package lotto;
 
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

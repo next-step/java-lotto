@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.ticket;
 
 public interface LottoTicketGenerator {
 

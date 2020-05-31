@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.*;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTicketAutoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
