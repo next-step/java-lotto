@@ -42,7 +42,7 @@ public class LotteryTicket {
         long matchNumberCounts = this.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
-        return LotteryRank.valueOf((int) matchNumberCounts);
+        return LotteryRank.valueOf((int) matchNumberCounts, true);
     }
 
     private void validateLotteryNumberCounts(List<LotteryNumber> lotteryNumbers) {

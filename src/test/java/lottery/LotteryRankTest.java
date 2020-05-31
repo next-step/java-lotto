@@ -2,6 +2,7 @@ package lottery;
 
 import lottery.domain.LotteryRank;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,6 +25,16 @@ public class LotteryRankTest {
         );
     }
 
+    private static Stream<Arguments> mockLotteryValueOfRankBuilder() {
+        return Stream.of(
+                Arguments.of(6, LotteryRank.FIRST_PRIZE),
+                Arguments.of(5, LotteryRank.THIRD_PRIZE),
+                Arguments.of(4, LotteryRank.FOURTH_PRIZE),
+                Arguments.of(3, LotteryRank.FIFTH_PRIZE),
+                Arguments.of(2, LotteryRank.MISS)
+        );
+    }
+
     @DisplayName("LotteryRanks Enum 값 비교 테스트")
     @ParameterizedTest
     @MethodSource("mockLotteryRanksBuilder")
@@ -37,9 +48,28 @@ public class LotteryRankTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     public void getMissEnum(int matchNumberCounts) {
-        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts);
+        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, false);
 
         assertThat(lotteryRank).isEqualTo(LotteryRank.MISS);
+    }
+
+    @DisplayName("맞춘 개수에 따라서 적합한 보너스 볼을 반환 받음")
+    @ParameterizedTest
+    @MethodSource("mockLotteryValueOfRankBuilder")
+    public void getProperLotteryRank(int matchNumberCounts, LotteryRank expectedRank) {
+        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, false);
+
+        assertThat(lotteryRank).isEqualTo(expectedRank);
+    }
+
+    @DisplayName("맞춘 개수가 5개일 때 보너스볼 포함 여부에 따라 2등 3등 분리 반환")
+    @Test
+    public void getSecondOrThirdLotteryRank() {
+        LotteryRank secondRank = LotteryRank.valueOf(5, true);
+        LotteryRank thirdRank = LotteryRank.valueOf(5, false);
+
+        assertThat(secondRank).isEqualTo(LotteryRank.SECOND_PRIZE);
+        assertThat(thirdRank).isEqualTo(LotteryRank.THIRD_PRIZE);
     }
 
     @DisplayName("LotteryRanks Enum 상금 합계 기능 테스트")

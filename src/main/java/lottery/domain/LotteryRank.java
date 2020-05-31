@@ -18,9 +18,15 @@ public enum LotteryRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LotteryRank valueOf(int matchNumberCounts) {
-        if (matchNumberCounts < FOURTH_PRIZE.getMatchNumberCounts()) {
+    public static LotteryRank valueOf(int matchNumberCounts, boolean isBonusBall) {
+        if (matchNumberCounts < FIFTH_PRIZE.getMatchNumberCounts()) {
             return MISS;
+        }
+        if (matchNumberCounts == 5 && isBonusBall) {
+            return SECOND_PRIZE;
+        }
+        if (matchNumberCounts == 5 && !isBonusBall) {
+            return THIRD_PRIZE;
         }
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.getMatchNumberCounts() == matchNumberCounts)
