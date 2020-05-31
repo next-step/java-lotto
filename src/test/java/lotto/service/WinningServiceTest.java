@@ -7,9 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.collections.LottoResult;
+import lotto.collections.LottoTickets;
 import lotto.collections.WinningNumbers;
-import lotto.mock.LottoTicketMock;
-import lotto.mock.LottoTicketsMock;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,19 +26,19 @@ public class WinningServiceTest {
       int expectedMatchType, int matchCount) {
 
     //given
-    List<Integer> lottoNumbersBeforeList = Arrays.stream(lottoNumber.split(","))
+    List<LottoNumber> lottoNumbersBeforeList = Arrays.stream(lottoNumber.split(","))
         .map(Integer::parseInt)
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
-    LottoTicketMock mockTicket = new LottoTicketMock(lottoNumbersBeforeList);
-    LottoTicketsMock mockTickets = new LottoTicketsMock(Collections.singletonList(mockTicket));
+    LottoTicket mockTicket = new LottoTicket(lottoNumbersBeforeList);
+    LottoTickets mockTickets = new LottoTickets(Collections.singletonList(mockTicket));
 
     //when
     List<Integer> winningNumbersBeforeList = Arrays.stream(winningNumber.split(","))
         .map(Integer::parseInt)
         .collect(Collectors.toList());
     WinningNumbers winningNumbers = new WinningNumbers(winningNumbersBeforeList);
-    LottoResult lottoResult = new WinningService()
-        .calculateLottoMatches(mockTickets, winningNumbers);
+    LottoResult lottoResult = WinningService.calculateLottoMatches(mockTickets, winningNumbers);
 
     //then
     assertThat(lottoResult.getLottoStatistics().get(expectedMatchType))

@@ -21,7 +21,7 @@ public class PurchaseServiceTest {
   @CsvSource({"14000, 14", "12300, 12", "18800, 18", "12500, 12"})
   @ParameterizedTest
   void 로또가_예상개수만큼_발급된다(Integer payable, Integer expected) {
-    assertThat(purchaseService.purchase(new Money(payable)).numberOfLottoTickets())
+    assertThat(PurchaseService.purchase(new Money(payable)).numberOfLottoTickets())
         .isEqualTo(expected);
   }
 }
