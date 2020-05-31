@@ -35,7 +35,7 @@ public class LottoResults {
         return result;
     }
 
-    public Double profit() {
+    public Double getProfit() {
         return getTotalPrice() / getPurchasePayment();
     }
 
