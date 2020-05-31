@@ -32,13 +32,21 @@ public abstract class LottoTicket {
     }
 
     private void validateSize(List<LottoNumber> numbers) {
-        int size = (int) numbers.stream()
+        int count = getDistinctLottoCount(numbers);
+
+        if (count < LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호 갯수는 중복 없이 6개 입니다. 6개 보다 적은 로또 번호가 입력되었습니다. - " + count);
+        }
+
+        if (count > LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호 갯수는 중복 없이 6개 입니다. 6개 보다 많은 로또 번호가 입력되었습니다. - " + count);
+        }
+    }
+
+    private int getDistinctLottoCount(List<LottoNumber> numbers) {
+        return (int) numbers.stream()
             .distinct()
             .count();
-
-        if (size != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호 갯수는 중복없이 6개 입니다.");
-        }
     }
 
     @Override
