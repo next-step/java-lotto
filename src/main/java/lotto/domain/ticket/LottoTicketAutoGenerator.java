@@ -8,14 +8,12 @@ import java.util.List;
 
 public class LottoTicketAutoGenerator implements LottoTicketGenerator {
 
-    private static final int LOTTO_GENERATE_COUNT = 6;
-
     @Override
-    public LottoTicket generate() {
+    public LottoTicket generate(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> defaultLottoNumbers = LottoNumber.getDefaultLottoNumbers();
         Collections.shuffle(defaultLottoNumbers);
 
-        List<LottoNumber> subLottoNumbers = defaultLottoNumbers.subList(0, LOTTO_GENERATE_COUNT);
+        List<LottoNumber> subLottoNumbers = defaultLottoNumbers.subList(0, LOTTO_GENERATE_MAX_COUNT);
         return LottoTicket.of(new HashSet<>(subLottoNumbers));
     }
 }

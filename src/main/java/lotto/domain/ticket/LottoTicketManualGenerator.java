@@ -1,8 +1,12 @@
 package lotto.domain.ticket;
 
-public class LottoTicketManualGenerator {
+import lotto.domain.LottoNumber;
 
-    public LottoTicket generate() {
+import java.util.List;
+
+public class LottoTicketManualGenerator implements LottoTicketGenerator {
+
+    public LottoTicket generate(List<LottoNumber> lottoNumbers) {
         return null;
     }
 }

@@ -17,7 +17,7 @@ public class LottoShop {
 
     public List<LottoTicket> buy(int amount) {
         return IntStream.range(0, amount)
-                .mapToObj(integer -> lottoTicketGenerator.generate())
+                .mapToObj(integer -> lottoTicketGenerator.generate(LottoNumber.getDefaultLottoNumbers()))
                 .collect(Collectors.toList());
     }
 }
