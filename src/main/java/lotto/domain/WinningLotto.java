@@ -20,7 +20,7 @@ public class WinningLotto {
         }
     }
 
-    public boolean inContainBonus(Lotto lotto) {
+    public boolean isContainBonus(Lotto lotto) {
         return lotto.getContainCount(Collections.singletonList(bonus)) > 0;
     }
 
