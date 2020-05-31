@@ -1,7 +1,7 @@
 package step2.model;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -19,10 +19,8 @@ public class LottoTickets {
         return this.lottoTickets.size();
     }
 
-    public List<List<Integer>> getAllNumbers() {
-        return this.lottoTickets.stream()
-                .map(LottoTicket::getNumbers)
-                .collect(Collectors.toList());
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(this.lottoTickets);
     }
 
     public LottoRankCount calculateLottoRankCount(List<Integer> winningNumbers) {

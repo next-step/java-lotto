@@ -56,6 +56,5 @@ public class MoneyTest {
         Money money = Money.valueOf(1000);
 
         assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_1000)).isTrue();
-        assertThat(money.isAvailableAmount(LottoTicketPrice.PRICE_2000)).isFalse();
     }
 }

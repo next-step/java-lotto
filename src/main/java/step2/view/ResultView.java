@@ -1,9 +1,6 @@
 package step2.view;
 
-import step2.model.LottoRank;
-import step2.model.LottoRankCount;
-import step2.model.LottoTickets;
-import step2.model.Money;
+import step2.model.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,8 +13,8 @@ public class ResultView {
 
     public static void printTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getTicketCount() + "장을 구매했습니다.");
-        lottoTickets.getAllNumbers().stream()
-                .map(Object::toString)
+        lottoTickets.getLottoTickets().stream()
+                .map(LottoTicket::toString)
                 .forEach(System.out::println);
     }
 

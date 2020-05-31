@@ -2,6 +2,7 @@ package step2.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
 
@@ -34,5 +35,23 @@ public class LottoTicket {
                 .map(LottoNumber::getValue)
                 .filter(winningNumbers::contains)
                 .count());
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber :: " + numbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
