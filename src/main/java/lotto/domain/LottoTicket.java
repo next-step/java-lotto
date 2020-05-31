@@ -10,7 +10,7 @@ public class LottoTicket {
   protected final List<LottoNumber> lottoNumbers;
 
   public LottoTicket() {
-    lottoNumbers = new AutoLottoNumberGenerator().shuffle();
+    lottoNumbers = AutoLottoNumberGenerator.shuffle();
   }
 
   public int getMatchCounts(final WinningNumbers winningNumbers) {
