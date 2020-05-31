@@ -26,7 +26,7 @@ public class LottoTicket {
 
     }
 
-    protected void validateLottoNumberSize() {
+    private void validateLottoNumberSize() {
         if(lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓은 6자리 숫자여야 합니다.");
         }
@@ -38,7 +38,7 @@ public class LottoTicket {
         }
     }
 
-    protected void validateDuplicateNumbers() {
+    private void validateDuplicateNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>(this.lottoNumbers);
         if(lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓에는 중복된 숫자가 없어야 합니다.");
@@ -56,13 +56,13 @@ public class LottoTicket {
         int matchCount = 0;
 
         for (Integer winningNumber : winningTicket.lottoNumbers) {
-            matchCount = getMatchCount(matchCount, winningNumber);
+            matchCount = getMatchCountWhenContainsNumber(matchCount, winningNumber);
         }
 
         return matchCount;
     }
 
-    private int getMatchCount(int matchCount, Integer winningNumber) {
+    private int getMatchCountWhenContainsNumber(int matchCount, Integer winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
             matchCount++;
         }

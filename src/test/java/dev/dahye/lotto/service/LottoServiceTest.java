@@ -38,8 +38,8 @@ class LottoServiceTest {
     }
 
     @ParameterizedTest(name = "금액 = {0}원")
-    @ValueSource(ints = {100, 101, 222, 33333})
-    @DisplayName("로또 금액이 1000원 단위가 아닌 경우 IllegalArguments exception throw")
+    @ValueSource(ints = {100, 101, 222, 33333, 0})
+    @DisplayName("로또 금액이 1000원 단위가 아니거나 0인 경우 IllegalArguments exception throw")
     void 로또_발급_예외(int money) {
         assertThrows(IllegalArgumentException.class, () -> new LottoService(money));
     }
@@ -75,17 +75,19 @@ class LottoServiceTest {
         int money = 2000;
         LottoTicket lottoTicketByWinningFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicketByWinningSecond = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
-        String winningNumbers = "1, 2, 3, 4, 5, 6";
 
         LottoService lottoService = new LottoService(2000, Arrays.asList(
                 lottoTicketByWinningFirst,
                 lottoTicketByWinningSecond
         ));
 
+        String winningNumbers = "1, 2, 3, 4, 5, 6";
         List<Winning> winnings = lottoService.getWinnings(winningNumbers);
 
         assertThat(lottoService.getWinningRate(winnings))
-                .isEqualTo(DoubleUtils.parseDoubleSecondDigit((Winning.FIRST.getPrize() + Winning.SECOND.getPrize()) / money));
+                .isEqualTo(DoubleUtils.parseDoubleSecondDigit(
+                        (Winning.FIRST.getPrize() + Winning.SECOND.getPrize()) / money)
+                );
     }
 
 }
