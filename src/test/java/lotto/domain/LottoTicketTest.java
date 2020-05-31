@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
 
-  @DisplayName("로또 티켓 하나는 7개의 숫자를 들고 있다.")
+  @DisplayName("로또 티켓 하나는 6개의 숫자를 들고 있다.")
   @Test
-  void 로또_티켓의_숫자는_7가지이다() {
+  void 로또_티켓의_숫자는_6가지이다() {
     final int LOTTO_NUMBER_SIZE = 6;
     assertThat(new LottoTicket().getLottoNumbers().size()).isEqualTo(LOTTO_NUMBER_SIZE);
   }
