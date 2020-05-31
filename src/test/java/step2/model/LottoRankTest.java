@@ -53,7 +53,7 @@ class LottoRankTest {
 
     @DisplayName("로또 우승 상금은 0보다 크거나 같다.")
     @Test
-    void getWinningMoney__WinningMoney() {
+    void getWinningMoney_None_WinningMoney() {
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> {
             assertThat(lottoRank.getWinningMoney()).isGreaterThanOrEqualTo(0);
         });
