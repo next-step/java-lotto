@@ -20,8 +20,8 @@ public class LottoShop {
         this.lottoTicketManualGenerator = lottoTicketManualGenerator;
         this.lottoTicketAutoGenerator = lottoTicketAutoGenerator;
     }
-    public List<LottoTicket> buy(List<LottoNumbers> lottoNumbersList, int autoBuyAmount) {
-        List<LottoTicket> lottoTickets = buyFromManualGenerator(lottoNumbersList);
+    public List<LottoTicket> buy(List<LottoNumbers> manualLottoNumbers, int autoBuyAmount) {
+        List<LottoTicket> lottoTickets = buyFromManualGenerator(manualLottoNumbers);
         lottoTickets.addAll(buyFromAutoGenerator(autoBuyAmount));
         return lottoTickets;
     }
@@ -32,8 +32,8 @@ public class LottoShop {
                 .collect(toList());
     }
 
-    public List<LottoTicket> buyFromManualGenerator(List<LottoNumbers> lottoNumbersList) {
-        return lottoNumbersList.stream()
+    public List<LottoTicket> buyFromManualGenerator(List<LottoNumbers> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .map(lottoTicketManualGenerator::generate)
                 .collect(toList());
