@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,14 +12,14 @@ public class Lotto {
     public static final int COUNT_OF_NUMBERS = 6;
     public static final List<Integer> CANDIDATE_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
 
     public Lotto(LottoNumberSelectRule numberSelectRule) {
-        this.numbers = Collections.unmodifiableList(numberSelectRule.select());
+        this.numbers = Collections.unmodifiableSet(numberSelectRule.select());
         validateCount(this.numbers.size());
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 

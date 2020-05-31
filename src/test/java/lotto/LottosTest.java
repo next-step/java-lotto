@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
@@ -20,12 +21,12 @@ class LottosTest {
     }
 
     private static Stream<Arguments> checkResultsArguments() {
-        Lotto lotto1 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto3 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto4 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 7, 8));
-        Lotto lotto5 = new Lotto(() -> Arrays.asList(1, 2, 7, 8, 9, 10));
-        Lotto lotto6 = new Lotto(() -> Arrays.asList(7, 8, 9, 10, 11, 12));
+        Lotto lotto1 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
+        Lotto lotto2 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 7).collect(toSet()));
+        Lotto lotto3 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 7).collect(toSet()));
+        Lotto lotto4 = new Lotto(() -> Stream.of(1, 2, 3, 4, 7, 8).collect(toSet()));
+        Lotto lotto5 = new Lotto(() -> Stream.of(1, 2, 7, 8, 9, 10).collect(toSet()));
+        Lotto lotto6 = new Lotto(() -> Stream.of(7, 8, 9, 10, 11, 12).collect(toSet()));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));

@@ -1,7 +1,7 @@
 package lotto;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LottoNumberSelectRule {
-    List<Integer> select();
+    Set<Integer> select();
 }
