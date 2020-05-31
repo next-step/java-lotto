@@ -1,30 +1,17 @@
 package study1;
 
 public class Validation {
-
-	Calculator calculator = new Calculator();
-
-	public int emptyStringValidation(String str) {
-		if (str == null) {
-			return 0;
+	
+	public static boolean negativeCheck(String[] numbers) {
+		for(String str : numbers) {
+			negativeparseInt(str);
 		}
-		if (str.isEmpty()) {
-			return 0;
-		}
-		return 0;
+		return false;
 	}
-
-	public void negativeValidation(String[] numbers) {
-		for (int i = 0; i < numbers.length; i++) {
-			negativeCheck(numbers[i]);
+	public static boolean negativeparseInt(String str) {
+		if (Integer.parseInt(str) < 0) {
+			throw new RuntimeException();
 		}
+		return false;
 	}
-
-	public void negativeCheck(String numbers) {
-		if (Integer.parseInt(numbers) < 0) {
-			throw new IllegalArgumentException("음수를 입력하지 마세요");
-		}
-
-	}
-
 }
