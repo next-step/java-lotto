@@ -19,4 +19,10 @@ public class LottoNumber {
     public static List<Integer> getNumbers() {
         return numbers;
     }
+
+    public static void validNumberRange(Integer number) {
+        if (!numbers.contains(number)) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
+        }
+    }
 }

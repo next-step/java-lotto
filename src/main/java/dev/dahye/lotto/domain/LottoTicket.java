@@ -12,6 +12,7 @@ public class LottoTicket {
     private LottoTicket(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
 
+        validateLottoNumberRange();
         validateLottoNumberSize();
         validateDuplicateNumbers();
     }
@@ -25,25 +26,30 @@ public class LottoTicket {
 
     }
 
-    private static List<Integer> createLottoNumbers() {
-        List<Integer> numbers = LottoNumber.getNumbers();
-        shuffle(numbers);
-
-
-        return new ArrayList<>(numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE));
-    }
-
     protected void validateLottoNumberSize() {
         if(lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓은 6자리 숫자여야 합니다.");
         }
     }
 
+    private void validateLottoNumberRange() {
+        for(Integer lottoNumber : this.lottoNumbers) {
+            LottoNumber.validNumberRange(lottoNumber);
+        }
+    }
+
     protected void validateDuplicateNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>(this.lottoNumbers);
         if(lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
-            throw new IllegalArgumentException("로또 티켓은 중복된 숫자가 없어야 합니다.");
+            throw new IllegalArgumentException("로또 티켓에는 중복된 숫자가 없어야 합니다.");
         }
+    }
+
+    private static List<Integer> createLottoNumbers() {
+        List<Integer> numbers = LottoNumber.getNumbers();
+        shuffle(numbers);
+
+        return new ArrayList<>(numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE));
     }
 
     public int getMatchCount(LottoTicket winningTicket) {
