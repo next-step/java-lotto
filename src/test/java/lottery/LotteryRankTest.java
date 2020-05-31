@@ -16,7 +16,7 @@ public class LotteryRankTest {
     private static Stream<Arguments> mockLotteryRanksBuilder() {
         return Stream.of(
                 Arguments.of(LotteryRank.FIRST_PRIZE, 0, 0),
-                Arguments.of(LotteryRank.SECOND_PRIZE, 1, 30_000_000 * 1),
+                Arguments.of(LotteryRank.SECOND_PRIZE, 1, 30_000_000),
                 Arguments.of(LotteryRank.THIRD_PRIZE, 2, 1_500_000 * 2),
                 Arguments.of(LotteryRank.FOURTH_PRIZE, 3, 50_000 * 3),
                 Arguments.of(LotteryRank.FIFTH_PRIZE, 4, 5000 * 4),
