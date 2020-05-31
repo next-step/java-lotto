@@ -38,9 +38,9 @@ public enum LotteryRank {
 
     private static LotteryRank getSecondOrThirdPrizeOnBonusBall(boolean isBonusBall) {
         if (isBonusBall) {
-            return LotteryRank.SECOND_PRIZE;
+            return SECOND_PRIZE;
         }
-        return LotteryRank.THIRD_PRIZE;
+        return THIRD_PRIZE;
     }
 
     public double calculatePrizeMoneySum(int winnerTicketCounts) {
