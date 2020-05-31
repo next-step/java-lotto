@@ -23,7 +23,7 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(DEFAULT_WINNING_NUMBER_TEXT, 7);
         Lotto lotto = Lotto.fromLottoText(DEFAULT_WINNING_NUMBER_TEXT);
         assertThat(winningLotto).isNotNull();
-        assertThat(winningLotto.inContainBonus(lotto)).isFalse();
+        assertThat(winningLotto.isContainBonus(lotto)).isFalse();
         assertThat(winningLotto.getContainCount(lotto)).isEqualTo(6);
     }
 
