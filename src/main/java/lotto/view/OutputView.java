@@ -16,7 +16,7 @@ public class OutputView {
     System.out.println("당첨통계");
     System.out.println("--------");
     System.out.printf(
-        "3개 일치(5000원) - %d개 \n", lottoResult.countTicketsByRewardType(RewardType.THIRD));
+        "3개 일치(5000원) - %d개 " + System.lineSeparator(), lottoResult.countTicketsByRewardType(RewardType.THIRD));
     System.out.printf(
         "4개 일치(50000원) - %d개 \n", lottoResult.countTicketsByRewardType(RewardType.FOURTH));
     System.out.printf(
