@@ -16,10 +16,13 @@ public class ResultView {
     }
 
     public void printGameResult(GameResult gameResult, int amount) {
+        int[] count = {3, 4, 5, 5, 6};
+        boolean[] hasBonus = {false, false, false, true, false};
         System.out.println("\n당첨 통계\n------------");
-        IntStream.rangeClosed(3, 6).forEach(i -> {
-            Rank rank = Rank.findRank(i);
-            System.out.println(i + "개 일 (" + rank.getPrice() + "원)- " + gameResult.getCount(rank) + "개");
+        IntStream.rangeClosed(0, 4).forEach(i -> {
+            Rank rank = Rank.findRank(count[i], hasBonus[i]);
+            System.out.println(count[i] + "개 일치" + (hasBonus[i] ? ", 보너스 볼 일치" : "")
+                   + " (" + rank.getPrice() + "원)- " + gameResult.getCount(rank) + "개");
         });
         System.out.printf("총 수익률은 %.2f 입니다.\n", gameResult.getYields(amount));
     }

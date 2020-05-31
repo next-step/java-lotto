@@ -16,7 +16,7 @@ class GameResultTest {
     @Test
     void getYields() {
         GameResult gameResult = new GameResult();
-        gameResult.count(Rank.FOURTH);
+        gameResult.count(Rank.FIFTH);
         assertThat(gameResult.getYields(10_000)).isEqualTo(0.5);
     }
 }

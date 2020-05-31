@@ -1,25 +1,37 @@
 package com.cheolhyeonpark.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
     private final List<Integer> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
-        Collections.sort(numbers);
-        this.numbers = numbers;
+    public LottoNumbers() {
+        this.numbers = generate();
+        Collections.sort(this.numbers);
     }
 
-    public Rank getRank(List<Integer> winningNumbers) {
-        return Rank.findRank(countSameNumbersAs(winningNumbers));
+    public List<Integer> generate() {
+        List<Integer> source = new ArrayList<>();
+        IntStream.rangeClosed(1, 45).forEach(source::add);
+        Collections.shuffle(source);
+        return source.stream().limit(6).collect(Collectors.toList());
     }
 
-    private int countSameNumbersAs(List<Integer> winningNumbers) {
-        return Math.toIntExact(numbers.stream()
-                .filter(number -> winningNumbers.stream().anyMatch(Predicate.isEqual(number))).count());
+    public Rank getRank(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        return Rank.findRank(countSameNumbersAs(winningNumbers), hasBonusNumber(bonusNumber));
+    }
+
+    private int countSameNumbersAs(WinningNumbers winningNumbers) {
+        return Math.toIntExact(numbers.stream().filter(winningNumbers::anyMatch).count());
+    }
+
+    private boolean hasBonusNumber(BonusNumber bonusNumber) {
+        return numbers.stream().anyMatch(bonusNumber::isMatch);
     }
 
     public List<Integer> getNumbers() {
