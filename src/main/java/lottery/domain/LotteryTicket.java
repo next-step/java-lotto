@@ -39,20 +39,12 @@ public class LotteryTicket {
     }
 
     public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket, LotteryNumber bonusBallNumber) {
-        if (lastWinnerTicket.getLotteryNumbers().contains(bonusBallNumber.getLotteryNumber())) {
-            long matchNumberCounts = this.getLotteryNumbers().stream()
-                    .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
-                    .count();
-            boolean isBonusBall = this.getLotteryNumbers().stream()
-                    .anyMatch(target -> target == bonusBallNumber.getLotteryNumber());
-            return LotteryRank.valueOf((int) matchNumberCounts, isBonusBall);
-        }
         long matchNumberCounts = this.getLotteryNumbers().stream()
                 .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
                 .count();
         boolean isBonusBall = this.getLotteryNumbers().stream()
                 .anyMatch(target -> target == bonusBallNumber.getLotteryNumber());
-        if (isBonusBall) {
+        if (isBonusBall && !lastWinnerTicket.isContainingLotteryNumber(bonusBallNumber)) {
             matchNumberCounts++;
         }
         return LotteryRank.valueOf((int) matchNumberCounts, isBonusBall);
@@ -72,5 +64,9 @@ public class LotteryTicket {
         if (lotteryNumbers.size() != filteredLotteryNumberCounts) {
             throw new IllegalArgumentException(ErrorMessages.DUPLICATED_NUMBER);
         }
+    }
+
+    private boolean isContainingLotteryNumber(LotteryNumber bonusBallNumber) {
+        return this.getLotteryNumbers().contains(bonusBallNumber.getLotteryNumber());
     }
 }
