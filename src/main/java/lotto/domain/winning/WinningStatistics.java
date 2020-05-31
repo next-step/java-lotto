@@ -3,6 +3,7 @@ package lotto.domain.winning;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.Price;
 
+import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class WinningStatistics {
         return lottoRank;
     }
 
-    public float calculateProfit() {
+    public BigDecimal calculateProfit() {
         int rankSum = this.lottoRank.keySet()
                 .stream()
                 .mapToInt(this::calculateRank)

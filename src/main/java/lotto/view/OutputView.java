@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class OutputView {
     private final static String PRINT_LOTTO_COUNT = "개를 구매했습니다.";
     private final static String PRINT_STATISTICS = "당첨 통계\n---------";
-    private static final String PRINT_PROFIT_RATE = "총 수익률은 %.2f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PRINT_RANK = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_PROFIT_RATE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printPurchasedLottoTicket(LottoTicket lottoTicket) {
         System.out.println(lottoTicket.getLottoNumbersCount() + PRINT_LOTTO_COUNT);
