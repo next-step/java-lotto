@@ -19,12 +19,12 @@ public enum LotteryRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LotteryRank valueOf(int matchNumberCounts, boolean isBonusBall) {
+    public static LotteryRank valueOf(int matchNumberCounts, boolean isContainingBonusBall) {
         if (isLosingTicket(matchNumberCounts)) {
             return MISS;
         }
         if (matchNumberCounts == DUPLICATE_MATCH_NUMBER_COUNTS) {
-            return getSecondOrThirdPrizeOnBonusBall(isBonusBall);
+            return getSecondOrThirdPrizeOnBonusBall(isContainingBonusBall);
         }
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.getMatchNumberCounts() == matchNumberCounts)
@@ -36,8 +36,8 @@ public enum LotteryRank {
         return matchNumberCounts < FIFTH_PRIZE.getMatchNumberCounts();
     }
 
-    private static LotteryRank getSecondOrThirdPrizeOnBonusBall(boolean isBonusBall) {
-        if (isBonusBall) {
+    private static LotteryRank getSecondOrThirdPrizeOnBonusBall(boolean isContainingBonusBall) {
+        if (isContainingBonusBall) {
             return SECOND_PRIZE;
         }
         return THIRD_PRIZE;

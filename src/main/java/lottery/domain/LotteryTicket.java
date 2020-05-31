@@ -43,12 +43,12 @@ public class LotteryTicket {
                 .filter(targetNumber ->
                         lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(targetNumber)))
                 .count();
-        boolean isBonusBall = this.getLotteryNumbers().stream()
+        boolean isContainingBonusBall = this.getLotteryNumbers().stream()
                 .anyMatch(targetNumber -> targetNumber == bonusBallNumber.getLotteryNumber());
-        if (isBonusBall && lastWinnerTicket.isNotContainingLotteryNumber(bonusBallNumber)) {
+        if (isContainingBonusBall && lastWinnerTicket.isNotContainingLotteryNumber(bonusBallNumber)) {
             matchNumberCounts++;
         }
-        return LotteryRank.valueOf((int) matchNumberCounts, isBonusBall);
+        return LotteryRank.valueOf((int) matchNumberCounts, isContainingBonusBall);
     }
 
     private void validateLotteryNumberCounts(List<LotteryNumber> lotteryNumbers) {
