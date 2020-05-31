@@ -10,7 +10,7 @@ public enum RewardType {
   THIRD(3, 5000),
   FOURTH(4, 50000),
   FIFTH(5, 1500000),
-  SIXTH(6, 2000000000);
+  SIXTH(6, 2_000_000_000);
 
   private final int code;
   private final int reward;

@@ -18,7 +18,7 @@ public class LottoTicketsMock extends LottoTickets {
   }
 
   @Override
-  public LottoResult createLottoResult(WinningNumbers numbers) {
+  public LottoResult calculateLottoResult(WinningNumbers numbers) {
     Map<Integer, Integer> lottoStatistics = this.lottoTicketMockList.stream()
         .map(ticket -> ticket.getMatchCounts(numbers))
         .collect(Collectors

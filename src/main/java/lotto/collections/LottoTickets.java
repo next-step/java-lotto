@@ -26,7 +26,6 @@ public class LottoTickets {
         .map(ticket -> ticket.getMatchCounts(numbers))
         .collect(Collectors
             .groupingBy(Function.identity(), Collectors.reducing(0, e -> 1, Integer::sum)));
-
     return new LottoResult(lottoStatistics);
   }
 
