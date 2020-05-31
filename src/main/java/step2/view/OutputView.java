@@ -1,8 +1,10 @@
 package step2.view;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 import step2.model.LottoResult;
 import step2.model.LottoResults;
+import step2.model.PurchasedLottoTicket;
 import step2.model.PurchasedLottoTickets;
 
 public class OutputView {
@@ -13,11 +15,18 @@ public class OutputView {
     private static final String PROFIT_WITH_LOSS_FORMAT = PROFIT_FORMAT + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PRIZE_STATICS_TEXT = "당첨 통계";
     private static final String DIVISION_LINE = "---------";
+    private static final String DELIMITER = "\n";
 
     public static void printLottoNumber(PurchasedLottoTickets purchasedLottoTickets) {
         System.out.println(String.format(PURCHASED_COUNT_FORMAT, purchasedLottoTickets.size()));
-        System.out.println(purchasedLottoTickets.toString());
+        System.out.println(printPurchasedLottoTickets(purchasedLottoTickets));
         System.out.println();
+    }
+
+    private static String printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {
+        return purchasedLottoTickets.getPurchasedLottoTickets().stream()
+            .map(PurchasedLottoTicket::toString)
+            .collect(Collectors.joining(DELIMITER));
     }
 
     public static void printLottoStatistics(LottoResults lottoResults) {

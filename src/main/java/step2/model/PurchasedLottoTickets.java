@@ -20,11 +20,8 @@ public class PurchasedLottoTickets {
         return purchasedLottoTickets.size();
     }
 
-    @Override
-    public String toString() {
-        return purchasedLottoTickets.stream()
-            .map(PurchasedLottoTicket::toString)
-            .collect(Collectors.joining("\n"));
+    public List<PurchasedLottoTicket> getPurchasedLottoTickets() {
+        return purchasedLottoTickets;
     }
 
     public LottoResults match(WinningLottoTicket winningLottoTicket) {
