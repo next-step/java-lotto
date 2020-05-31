@@ -2,8 +2,6 @@ package step2.model;
 
 import step2.exception.NotEnoughMoneyException;
 
-import javax.transaction.TransactionRequiredException;
-
 public class LottoMachine {
 
     private static final int TICKET_INITIAL_COUNT = 0;
@@ -19,7 +17,6 @@ public class LottoMachine {
     }
 
     public static LottoMachine create(LottoTicketPrice ticketPrice) {
-
         return new LottoMachine(ticketPrice);
     }
 

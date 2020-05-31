@@ -23,7 +23,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(this.lottoTickets);
     }
 
-    public LottoRankCount calculateLottoRankCount(List<Integer> winningNumbers) {
+    public LottoRankCount calculateLottoRankCount(List<LottoNumber> winningNumbers) {
         LottoRankCount lottoRankCount = LottoRankCount.create();
 
         this.lottoTickets.forEach(lottoTicket -> {
@@ -34,7 +34,7 @@ public class LottoTickets {
         return lottoRankCount;
     }
 
-    public int calculateWinningMoney(List<Integer> winningNumbers) {
+    public int calculateWinningMoney(List<LottoNumber> winningNumbers) {
         return this.lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.getMatchCount(winningNumbers))
                 .map(LottoRank::findRank)

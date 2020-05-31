@@ -6,10 +6,16 @@ import java.util.Objects;
 
 public class Money {
 
+    private static final int MIN_AMOUNT = 0;
+
     private final int totalAmount;
     private int usedAmount;
 
     private Money(int totalAmount) {
+        if (totalAmount < MIN_AMOUNT) {
+            throw new IllegalArgumentException("0원 이상 입력 할 수 있습니다.");
+        }
+
         this.totalAmount = totalAmount;
     }
 

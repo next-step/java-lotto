@@ -18,7 +18,7 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public static void printWinningStatistics(LottoTickets lottoTickets, List<Integer> winningNumbers) {
+    public static void printWinningStatistics(LottoTickets lottoTickets, List<LottoNumber> winningNumbers) {
         System.out.println("당첨 통계\n--------------------");
         LottoRankCount lottoRankCount = lottoTickets.calculateLottoRankCount(winningNumbers);
         LottoRank.getWinningGroup().forEach(lottoRank -> {
@@ -27,7 +27,7 @@ public class ResultView {
         });
     }
 
-    public static void printRateOfReturn(LottoTickets lottoTickets, List<Integer> winningNumbers, Money money) {
+    public static void printRateOfReturn(LottoTickets lottoTickets, List<LottoNumber> winningNumbers, Money money) {
         int winningMoney = lottoTickets.calculateWinningMoney(winningNumbers);
 
         BigDecimal rateOfReturn = BigDecimal.valueOf(winningMoney)
