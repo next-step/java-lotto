@@ -34,12 +34,12 @@ public class LottoMachine {
         List<Lotto> extractedAutomaticLotto = extractAutomaticLotto(countOfAutomaticLotto);
 
         this.lottoView.outputResultOfEachLottoCount(extractedAutomaticLotto.size(), extractedManualLotto.size());
+        outPutExtractedLotto(extractedAutomaticLotto);
 
         List<Lotto> extractedLotto = new ArrayList<>();
         extractedLotto.addAll(extractedManualLotto);
         extractedLotto.addAll(extractedAutomaticLotto);
 
-        outPutExtractedLotto(extractedLotto);
         return extractedLotto;
     }
 
