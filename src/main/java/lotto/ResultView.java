@@ -28,11 +28,21 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-		Rank.getResultViewRanks().forEach(r -> {
-			String msg = String.format("%d개 일치 (%d원)- %d개", r.getMatchedCount(), r.getPrizeMoney(), results.getCounts(r));
-			System.out.println(msg);
-		});
+        List<Rank> resultViewRanks = Rank.getResultViewRanks();
+        for (Rank r : resultViewRanks) {
+            printResult(results, r);
+        }
 
-		System.out.println(String.format("총 수익률은 %.2f입니다.", results.getProfitRate()));
+        System.out.println(String.format("총 수익률은 %.2f입니다.", results.getProfitRate()));
+    }
+
+    private static void printResult(LottoResults results, Rank r) {
+        String msg = String.format("%d개 일치%s (%d원)- %d개",
+                r.getMatchedCount(),
+                r.getMatchedBonusCount() > 0 ? ", 보너스 볼 일치" : "",
+                r.getPrizeMoney(),
+                results.getCounts(r));
+
+        System.out.println(msg);
     }
 }

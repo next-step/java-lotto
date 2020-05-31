@@ -36,7 +36,7 @@ class LottoResultsTest {
 	@Test
 	void getProfitRate() {
 		Map<Rank, Long> map = new HashMap<>();
-		map.put(Rank.FOURTH, 1L);
+		map.put(Rank.FIFTH, 1L);
 		map.put(Rank.LOSING, 9L);
 		LottoResults results = new LottoResults(map);
 

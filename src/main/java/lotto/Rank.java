@@ -1,22 +1,24 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public enum Rank {
 
-	FIRST(6, 2_000_000_000),
-	SECOND(5, 1_500_000),
-	THIRD(4, 50_000),
-	FOURTH(3, 5_000),
-	LOSING(0, 0);
+	FIRST(6, 0, 2_000_000_000),
+	SECOND(5, 1, 30_000_000),
+	THIRD(5, 0, 1_500_000),
+	FOURTH(4, 0, 50_000),
+	FIFTH(3, 0, 5_000),
+	LOSING(0, 0, 0);
 
 	private final long matchedCount;
+	private final long matchedBonusCount;
 	private final long prizeMoney;
 
-	Rank(long matchedCount, long prizeMoney) {
+	Rank(long matchedCount, long matchedBonusCount, long prizeMoney) {
 		this.matchedCount = matchedCount;
+		this.matchedBonusCount = matchedBonusCount;
 		this.prizeMoney = prizeMoney;
 	}
 
@@ -24,15 +26,20 @@ public enum Rank {
 		return matchedCount;
 	}
 
+	public long getMatchedBonusCount() {
+		return matchedBonusCount;
+	}
+
 	public long getPrizeMoney() {
 		return prizeMoney;
 	}
 
-	public static Rank findByMatchedCount(long count) {
+	public static Rank findByMatchedCount(long matchedCount, long matchedBonusCount) {
 		return Arrays.stream(Rank.values())
-				.filter(r -> count >= r.matchedCount)
-				.max(Comparator.comparingLong(r -> r.matchedCount))
-				.orElseThrow(() -> new IllegalArgumentException("등수를 매길 수 없습니다"));
+				.filter(r -> matchedCount >= r.matchedCount)
+				.filter(r -> matchedBonusCount >= r.matchedBonusCount)
+				.findFirst()
+				.orElse(Rank.LOSING);
 	}
 
 	public static List<Rank> getResultViewRanks() {

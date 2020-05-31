@@ -29,8 +29,9 @@ public class LottoTest {
     void winningNumbersSizeNotEquals_Then_IllegalArgumentException() {
         Lotto lotto = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
         WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3).collect(toSet()));
+        int bonusNumber = 45;
 
-        assertThatThrownBy(() -> lotto.checkResult(winningNumbers))
+        assertThatThrownBy(() -> lotto.checkResult(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,8 +40,9 @@ public class LottoTest {
     void checkResult() {
         Lotto lotto = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
         WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
+        int bonusNumber = 45;
 
-        Rank rank = lotto.checkResult(winningNumbers);
+        Rank rank = lotto.checkResult(winningNumbers, bonusNumber);
         assertThat(rank).isNotNull();
     }
 }

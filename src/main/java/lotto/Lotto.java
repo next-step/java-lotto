@@ -23,14 +23,25 @@ public class Lotto {
         return numbers;
     }
 
-    public Rank checkResult(WinningNumbers winningNumbers) {
+    public Rank checkResult(WinningNumbers winningNumbers, int bonusNumber) {
         validateCount(winningNumbers.size());
 
-        long matchedCount = numbers.stream()
+        long matchedCount = calculateMatchedCount(winningNumbers);
+        long matchedBonusCount = calculateMatchedBonusCount(bonusNumber);
+
+        return Rank.findByMatchedCount(matchedCount, matchedBonusCount);
+    }
+
+    private long calculateMatchedBonusCount(int bonusNumber) {
+        return numbers.stream()
+                .filter(n -> n == bonusNumber)
+                .count();
+    }
+
+    private long calculateMatchedCount(WinningNumbers winningNumbers) {
+        return numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-
-        return Rank.findByMatchedCount(matchedCount);
     }
 
     private void validateCount(int count) {

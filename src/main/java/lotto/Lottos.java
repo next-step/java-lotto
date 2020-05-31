@@ -26,9 +26,9 @@ public class Lottos {
         return lottos.get(index);
     }
 
-    public LottoResults checkResults(WinningNumbers winningNumbers) {
+    public LottoResults checkResults(WinningNumbers winningNumbers, int bonusNumber) {
         Map<Rank, Long> results = lottos.stream()
-                .map(l -> l.checkResult(winningNumbers))
+                .map(l -> l.checkResult(winningNumbers, bonusNumber))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoResults(results);
