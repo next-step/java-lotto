@@ -10,7 +10,7 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator {
 
     @Override
     public LottoTicket generate() {
-        List<LottoNumber> defaultLottoNumbers = LottoNumbers.getDefaultLottoNumbers();
+        List<LottoNumber> defaultLottoNumbers = LottoNumber.getDefaultLottoNumbers();
         Collections.shuffle(defaultLottoNumbers);
 
         List<LottoNumber> subLottoNumbers = defaultLottoNumbers.subList(0, LOTTO_GENERATE_COUNT);

@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable {
 
@@ -8,6 +11,13 @@ public class LottoNumber implements Comparable {
     public static final int LOTTO_NUMBER_MAX = 45;
 
     private int number;
+
+    private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS;
+    static {
+        DEFAULT_LOTTO_NUMBERS = IntStream.range(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX + 1)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     private LottoNumber(int number) {
         if (!isValidNumber(number)) {
@@ -22,6 +32,11 @@ public class LottoNumber implements Comparable {
 
     public int getNumber() {
         return number;
+    }
+
+
+    public static List<LottoNumber> getDefaultLottoNumbers() {
+        return DEFAULT_LOTTO_NUMBERS;
     }
 
     public static boolean isValidNumber(int number) {
