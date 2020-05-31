@@ -23,7 +23,7 @@ public class LottoGame {
         this.userPrice = userPrice;
         this.lottos = new ArrayList<>();
         this.cashPrize = 0;
-        this.lottoGenerator = new LottoGenerator();
+        this.lottoGenerator = new LottoGenerator(new RandomGenerableStrategy());
     }
 
     private void validateUserPrice(int userPrice) throws IllegalArgumentException {

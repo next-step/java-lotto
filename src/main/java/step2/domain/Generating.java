@@ -8,7 +8,7 @@ public class Generating {
         return generableStrategy.generate(count);
     }
 
-    public void setGenerableStrategy(GenerableStrategy generableStrategy) {
+    public Generating(GenerableStrategy generableStrategy) {
         this.generableStrategy = generableStrategy;
     }
 }
