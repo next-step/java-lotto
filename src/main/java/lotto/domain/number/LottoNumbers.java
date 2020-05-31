@@ -12,29 +12,25 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
+    private LottoNumbers(List<LottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
     public static LottoNumbers newLottoNumbersWithNumberGenerator(NumberGenerator<LottoNumber> generator) {
-        return new LottoNumbers(generator);
+        return new LottoNumbers(createLottoNumbers(generator));
     }
 
     public static LottoNumbers newLottoNumbersWithList(List<Integer> numbers) {
-        return new LottoNumbers(numbers);
+        return new LottoNumbers(createLottoNumbersThroughInteger(numbers));
     }
 
-    private LottoNumbers(NumberGenerator<LottoNumber> generator) {
-        this.numbers = createLottoNumbers(generator);
-    }
-
-    private LottoNumbers(List<Integer> numbers) {
-        this.numbers = createLottoNumbersThroughInteger(numbers);
-    }
-
-    private List<LottoNumber> createLottoNumbersThroughInteger(List<Integer> numbers) {
+    private static List<LottoNumber> createLottoNumbersThroughInteger(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> createLottoNumbers(NumberGenerator<LottoNumber> generator) {
+    private static List<LottoNumber> createLottoNumbers(NumberGenerator<LottoNumber> generator) {
         return generator.getNumbers();
     }
 
