@@ -43,7 +43,7 @@ public class LottoTicket {
     }
 
     private void validate(Set lottoSet) {
-        if (lottoSet.size() < DEFAULT_SIZE) {
+        if (lottoSet.size() != DEFAULT_SIZE) {
             throw new IllegalArgumentException("로또 번호의 개수가 알맞지 않습니다.");
         }
     }

@@ -19,10 +19,13 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또 티켓을 생성하는데 크기가 6보다 작으면 예외가 발생한다.")
+    @DisplayName("로또 티켓을 생성하는데 크기가 6과 같지 않으면 예외가 발생한다.")
     void 로또_번호_예외_테스트() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5)));
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7, 9)));
     }
 
     @Test

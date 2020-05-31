@@ -52,7 +52,7 @@ public class LottoTicketGeneratorTest {
     @Test
     @DisplayName("로또 수동 번호를 생성하고 LottoTicket을 반환한다.")
     void 로또_수동_번호_생성_테스트() {
-        LottoTicket lottoTicket = new LottoTicketManualGenerator().generate(LottoNumbers.of(1,2,3,4,5,6).getLottoNumbers());
+        LottoTicket lottoTicket = new LottoTicketManualGenerator().generate(LottoNumbers.of(1, 2, 3, 4, 5, 6).getLottoNumbers());
         assertThat(lottoTicket).isNotNull();
     }
 
