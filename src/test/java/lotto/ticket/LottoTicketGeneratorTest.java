@@ -56,7 +56,7 @@ public class LottoTicketGeneratorTest {
     }
 
     @Test
-    @DisplayName("로또 수동 번호 셍상 시 개수가 맞지 않으면 예외가 발생한다.")
+    @DisplayName("로또 수동 번호 생성 시 개수가 맞지 않으면 예외가 발생한다.")
     void 로또_수동_번호_생성_예외_테스트() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicketManualGenerator().generate(LottoNumber.of(1, 2, 3, 4, 5, 7, 9)));
