@@ -40,14 +40,15 @@ public class StringAddCalculator {
         return number;
     }
 
+    private static int add(int sum, int convertNum) {
+        return checkMinus(convertNum) ? sum + convertNum : sum;
+    }
+
     private static int sumNumbers(String[] splitString) {
         int sum = 0;
         for (String num : splitString) {
             int convertNum = convrrtStringToint(num);
-
-            if (checkMinus(convertNum)) {
-                sum += convertNum;
-            }
+            sum = add(sum, convertNum);
         }
 
         return sum;
