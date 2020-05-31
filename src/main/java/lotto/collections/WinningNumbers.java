@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber;
 
 public class WinningNumbers {
 
-  List<LottoNumber> winningNumbers;
+  final List<LottoNumber> winningNumbers;
 
   public WinningNumbers(List<Integer> winningNumberLists) {
     super();
