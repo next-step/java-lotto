@@ -13,6 +13,7 @@ public class OutputView {
     private final static String PRINT_LOTTO_COUNT = "개를 구매했습니다.";
     private final static String PRINT_STATISTICS = "당첨 통계\n---------";
     private static final String PRINT_RANK = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_SECOND_RANK = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PRINT_PROFIT_RATE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printPurchasedLottoTicket(LottoTicket lottoTicket) {
@@ -35,9 +36,17 @@ public class OutputView {
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
         lottoRank.keySet()
                 .stream()
-                .sorted(Comparator.comparingInt(LottoRank::getCountOfMatch))
+                .sorted(Comparator.comparingInt(LottoRank::getCountOfMatch)
+                        .thenComparingInt(LottoRank::getBonusCountOfMatch)
+                )
                 .forEach(rank -> {
-                    System.out.println(String.format(PRINT_RANK, rank.getCountOfMatch(), rank.getWinningMoney(), lottoRank.get(rank)));
+                    String print = PRINT_RANK;
+
+                    if (LottoRank.SECOND.equals(rank)) {
+                        print = PRINT_SECOND_RANK;
+                    }
+
+                    System.out.println(String.format(print, rank.getCountOfMatch(), rank.getWinningMoney(), lottoRank.get(rank)));
                 });
 
         System.out.println(String.format(PRINT_PROFIT_RATE, winningStatistics.calculateProfit()));
