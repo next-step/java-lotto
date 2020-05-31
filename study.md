@@ -12,3 +12,6 @@ https://sjh836.tistory.com/173
 - bigDecimal에 대한 사용 : https://jaehun2841.github.io/2019/02/28/effective-java-item60/
 
 - 객체의 책임 구별 : GRASP - https://vandbt.tistory.com/9
+
+- effective java item 61 : 박싱된 타입보다는 Primitive type 을 사용해라
+    + https://jaehun2841.github.io/2019/03/01/effective-jave-item61/#%EC%A0%95%EB%A6%AC
