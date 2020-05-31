@@ -12,7 +12,7 @@ public class ResultView {
     public void printLottoNumbersList(LottoNumbersList lottoNumbersList) {
         System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
         IntStream.range(0, lottoNumbersList.size()).mapToObj(lottoNumbersList::getNumbers)
-                .map(LottoNumbers::getNumbers).forEach(System.out::println);
+                .map(LottoNumbers::toString).forEach(System.out::println);
     }
 
     public void printGameResult(GameResult gameResult, int amount) {

@@ -28,6 +28,6 @@ class LottoNumbersListTest {
         LottoNumbers result = lottoNumbersList.getNumbers(0);
 
         assertThat(result).isNotNull();
-        assertThat(result.getNumbers()).isEqualTo(lottoNumbers.getNumbers());
+        assertThat(result.toString()).isEqualTo(lottoNumbers.toString());
     }
 }
