@@ -19,7 +19,7 @@ public class LottoGameTest {
         String winningNumberString = "1,2,3,4,5,6";
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
 
-        LottoGame lottoGame = new LottoGame(price, new LottoTicket(price.getLottoCount(), new LottoNumberGenerator()));
+        LottoGame lottoGame = new LottoGame(price, new LottoTicket(price, new LottoNumberGenerator()));
 
         WinningStatistics winningStatistics = lottoGame.execute(winningNumbers);
 

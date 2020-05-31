@@ -25,7 +25,7 @@ public class WinningStatisticsTest {
     @Test
     void create() {
         Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
@@ -39,7 +39,7 @@ public class WinningStatisticsTest {
     @Test
     void create_remove_miss() {
         Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new NotMatchNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(price, new NotMatchNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
@@ -54,7 +54,7 @@ public class WinningStatisticsTest {
     void calculateProfit() {
         Price price = new Price(1000);
         winningNumberString = "1,2,3,13,14,15";
-        LottoTicket lottoTicket = new LottoTicket(price.getLottoCount(), new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);

@@ -18,11 +18,11 @@ public class LottoTicketTest {
     @DisplayName("입력받은 갯수 만큼 LottoTicket을 생성할 수 있다.")
     @Test
     void createLottoTicket() {
-        int lottoCount = 3;
-        LottoTicket lottoTicket = new LottoTicket(lottoCount, new LottoNumberGenerator());
+        Price price= new Price(3000);
+        LottoTicket lottoTicket = new LottoTicket(price, new LottoNumberGenerator());
 
         assertAll(
-                () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(lottoCount),
+                () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(price.getLottoCount()),
                 () -> assertThat(lottoTicket.getLottoNumbers().get(0).getClass()).isEqualTo(LottoNumbers.class)
         );
     }
@@ -30,14 +30,14 @@ public class LottoTicketTest {
     @DisplayName("WinningNumbers와 매칭 결과(LottoRank)를 반환한다.")
     @Test
     void matchWinningNumber() {
-        int lottoCount = 2;
+        Price price= new Price(2000);
         String winningNumberString = "1,2,3,4,5,6";
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoCount, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningNumbers);
 
-        assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(lottoCount));
+        assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(price.getLottoCount()));
     }
 }
