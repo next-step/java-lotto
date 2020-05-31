@@ -36,7 +36,7 @@ class RandomGenerableStrategyTest {
     @Test
     void generate() {
         //given&when
-        Lotto generatedNumbers = randomGenerableStrategy.generate(LOTTO_SELECTION_COUNT);
+        Lotto generatedNumbers = new Lotto(randomGenerableStrategy.generate(LOTTO_SELECTION_COUNT));
 
         //then
         assertThat(generatedNumbers.getLottoNumbers()).hasSize(6);

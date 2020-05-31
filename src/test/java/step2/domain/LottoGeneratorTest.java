@@ -12,8 +12,8 @@ class LottoGeneratorTest {
 
     LottoGenerator lottoGenerator;
 
-    private static Lotto generate(int count) {
-        return new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static List<Integer> generate(int count) {
+        return Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @BeforeEach
