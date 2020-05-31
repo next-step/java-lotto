@@ -2,22 +2,22 @@ package lotto.collections;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.WinningNumber;
+import lotto.domain.LottoNumber;
 
 public class WinningNumbers {
 
-  List<WinningNumber> winningNumbers;
+  List<LottoNumber> winningNumbers;
 
   public WinningNumbers(List<Integer> winningNumberLists) {
     super();
     this.winningNumbers = createWinningNumbers(winningNumberLists);
   }
 
-  private List<WinningNumber> createWinningNumbers(List<Integer> winningNumberLists) {
+  private List<LottoNumber> createWinningNumbers(List<Integer> winningNumberLists) {
     validateSizeOfWinningNumbers(winningNumberLists);
-    List<WinningNumber> numbers = new ArrayList<>();
+    List<LottoNumber> numbers = new ArrayList<>();
     for (int number : winningNumberLists) {
-      numbers.add(new WinningNumber(number));
+      numbers.add(new LottoNumber(number));
     }
     return numbers;
   }
@@ -28,7 +28,7 @@ public class WinningNumbers {
     }
   }
 
-  public List<WinningNumber> getWinningNumbers() {
+  public List<LottoNumber> getWinningNumbers() {
     return winningNumbers;
   }
 }
