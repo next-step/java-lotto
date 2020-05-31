@@ -10,6 +10,7 @@ public enum LotteryRank {
     FIFTH_PRIZE(3, 5_000),
     MISS(0, 0);
 
+    private static final int DUPLICATE_MATCH_NUMBER_COUNTS = 5;
     private final int matchNumberCounts;
     private final long prizeMoney;
 
@@ -19,19 +20,27 @@ public enum LotteryRank {
     }
 
     public static LotteryRank valueOf(int matchNumberCounts, boolean isBonusBall) {
-        if (matchNumberCounts < FIFTH_PRIZE.getMatchNumberCounts()) {
+        if (isLosingTicket(matchNumberCounts)) {
             return MISS;
         }
-        if (matchNumberCounts == 5 && isBonusBall) {
-            return SECOND_PRIZE;
-        }
-        if (matchNumberCounts == 5 && !isBonusBall) {
-            return THIRD_PRIZE;
+        if (matchNumberCounts == DUPLICATE_MATCH_NUMBER_COUNTS) {
+            return getSecondOrThirdPrizeOnBonusBall(isBonusBall);
         }
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.getMatchNumberCounts() == matchNumberCounts)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS));
+    }
+
+    private static boolean isLosingTicket(int matchNumberCounts) {
+        return matchNumberCounts < FIFTH_PRIZE.getMatchNumberCounts();
+    }
+
+    private static LotteryRank getSecondOrThirdPrizeOnBonusBall(boolean isBonusBall) {
+        if (isBonusBall) {
+            return LotteryRank.SECOND_PRIZE;
+        }
+        return LotteryRank.THIRD_PRIZE;
     }
 
     public double calculatePrizeMoneySum(int winnerTicketCounts) {
