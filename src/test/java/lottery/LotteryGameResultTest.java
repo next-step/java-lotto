@@ -14,6 +14,7 @@ public class LotteryGameResultTest {
     private LotteryGame lotteryGame;
     private LotteryTicket lastWinnerTicket;
     private LotteryTicket thirdWinnerTicket;
+    private LotteryNumber bonusBallNumber;
     private LotteryTicketsGroup winnerTicketsGroup;
 
     @BeforeEach
@@ -23,16 +24,18 @@ public class LotteryGameResultTest {
         thirdWinnerTicket = LotteryTicket.from("11, 22, 33, 44, 9, 3".split(", "));
         winnerTicketsGroup = LotteryTicketsGroup.from(
                 Arrays.asList(lastWinnerTicket, thirdWinnerTicket));
+        bonusBallNumber = LotteryNumber.from(45);
     }
 
     @DisplayName("우승 티켓 목록을 받으면 각 등수별 당첨자 수를 저장한 Map을 반환함")
     @Test
     public void getLotteryGameResult() {
-        LotteryGameResult lotteryGameResult = lotteryGame.drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket);
+        LotteryGameResult lotteryGameResult = lotteryGame
+                .drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket, bonusBallNumber);
 
         assertThat(lotteryGameResult.findWinnerTicketCountsByRank(LotteryRank.FIRST_PRIZE))
                 .isEqualTo(1);
-        assertThat(lotteryGameResult.findWinnerTicketCountsByRank(LotteryRank.THIRD_PRIZE))
+        assertThat(lotteryGameResult.findWinnerTicketCountsByRank(LotteryRank.FOURTH_PRIZE))
                 .isEqualTo(1);
     }
 
@@ -40,7 +43,8 @@ public class LotteryGameResultTest {
     @Test
     public void getReturnOfRate() {
         PurchasePrice purchasePrice = PurchasePrice.from(LotteryRank.FIRST_PRIZE.getPrizeMoney());
-        LotteryGameResult lotteryGameResult = lotteryGame.drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket);
+        LotteryGameResult lotteryGameResult = lotteryGame
+                .drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket, bonusBallNumber);
 
         RateOfReturn returnOfRate = lotteryGameResult.calculateRateOfReturn(purchasePrice);
         double totalRevenue = LotteryRank.FIRST_PRIZE.getPrizeMoney() + LotteryRank.FOURTH_PRIZE.getPrizeMoney();

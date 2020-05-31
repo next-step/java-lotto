@@ -1,9 +1,6 @@
 package lottery;
 
-import lottery.domain.LotteryGame;
-import lottery.domain.LotteryRank;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryTicketsGroup;
+import lottery.domain.*;
 import lottery.view.ViewMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +20,7 @@ public class LotteryGameTest {
                 Arguments.of(LotteryTicket.from("11, 22, 33, 44, 1, 2".split(ViewMessages.COMMA)),
                         LotteryRank.FIRST_PRIZE, 1),
                 Arguments.of(LotteryTicket.from("1, 2, 3, 44, 9, 8".split(ViewMessages.COMMA)),
-                        LotteryRank.FOURTH_PRIZE, 2)
+                        LotteryRank.FIFTH_PRIZE, 2)
         );
     }
 
@@ -35,9 +32,11 @@ public class LotteryGameTest {
         LotteryTicket loser = LotteryTicket.from("1,2,3,4,5,6".split(","));
         LotteryTicket winner = LotteryTicket.from("11,22,33,44,1,2".split(","));
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(Arrays.asList(loser, winner));
+        LotteryNumber bonusBallNumber = LotteryNumber.from(45);
 
         LotteryGame lotteryGame = LotteryGame.getInstance();
-        Map<LotteryRank, Integer> winnerTicketsGroup = lotteryTicketsGroup.findWinnerTicketCountsByRank(winnerTicket);
+        Map<LotteryRank, Integer> winnerTicketsGroup = lotteryTicketsGroup
+                .findWinnerTicketCountsByRank(winnerTicket, bonusBallNumber);
 
         assertThat(winnerTicketsGroup.get(lotteryRank)).isEqualTo(winnerCounts);
     }

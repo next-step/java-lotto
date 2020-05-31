@@ -33,10 +33,11 @@ public class LotteryTicketsGroup {
                 .collect(Collectors.toList());
     }
 
-    public Map<LotteryRank, Integer> findWinnerTicketCountsByRank(LotteryTicket lastWinnerTicket) {
+    public Map<LotteryRank, Integer> findWinnerTicketCountsByRank(LotteryTicket lastWinnerTicket,
+                                                                  LotteryNumber bonusBallNumber) {
         Map<LotteryRank, Integer> gameResultBoard = new HashMap<>();
         lotteryTickets.stream()
-                .map(targetLotteryTicket -> targetLotteryTicket.getMatchLotteryRank(lastWinnerTicket, null))
+                .map(targetLotteryTicket -> targetLotteryTicket.getMatchLotteryRank(lastWinnerTicket, bonusBallNumber))
                 .forEach(targetLotteryRank -> updateGameResultBoard(targetLotteryRank, gameResultBoard));
         return gameResultBoard;
     }
