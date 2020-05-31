@@ -16,12 +16,12 @@ public class LottoTicket {
 
     private final List<LottoNumbers> lottoNumbers;
 
-    public LottoTicket(int lottoCount, NumberGenerator<LottoNumber> generator) {
-        this.lottoNumbers = createLottoTicket(lottoCount, generator);
+    public LottoTicket(Price price, NumberGenerator<LottoNumber> generator) {
+        this.lottoNumbers = createLottoTicket(price, generator);
     }
 
-    private List<LottoNumbers> createLottoTicket(int lottoCount, NumberGenerator<LottoNumber> generator) {
-        return IntStream.range(0, lottoCount)
+    private List<LottoNumbers> createLottoTicket(Price price, NumberGenerator<LottoNumber> generator) {
+        return IntStream.range(0, price.getLottoCount())
                 .mapToObj(i -> LottoNumbers.newLottoNumbersWithNumberGenerator(generator))
                 .collect(Collectors.toList());
     }

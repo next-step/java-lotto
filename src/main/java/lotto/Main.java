@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.lotto.LottoGame;
-import lotto.domain.lotto.LottoSeller;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
 import lotto.domain.winning.WinningNumbers;
@@ -15,9 +14,7 @@ public class Main {
         int inputPrice = InputView.printRequirePrice();
         Price price = new Price(inputPrice);
 
-        LottoSeller lottoSeller = new LottoSeller(new LottoNumberGenerator());
-
-        LottoTicket lottoTicket = lottoSeller.buy(price);
+        LottoTicket lottoTicket = new LottoTicket(price, new LottoNumberGenerator());
 
         OutputView.printPurchasedLottoTicket(lottoTicket);
 
