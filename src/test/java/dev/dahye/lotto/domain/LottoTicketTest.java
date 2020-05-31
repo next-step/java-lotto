@@ -21,4 +21,13 @@ class LottoTicketTest {
         assertThat(LottoTicket.issued().validateDuplicateNumbers()).isTrue();
     }
 
+    @Test
+    @DisplayName("로또 티켓은 랜덤한 값이므로 이전에 만들어진 티켓과 동일할 수 없다.")
+    void lotto_ticket_random() {
+        LottoTicket lottoTicket = LottoTicket.issued();
+        LottoTicket comparedLottoTicket = LottoTicket.issued();
+
+        assertThat(lottoTicket.equals(comparedLottoTicket)).isFalse();
+    }
+
 }
