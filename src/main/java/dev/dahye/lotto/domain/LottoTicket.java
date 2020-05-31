@@ -9,7 +9,8 @@ public class LottoTicket {
     private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
-    private LottoTicket(final List<Integer> lottoNumbers) {
+    private LottoTicket(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
 
         validateLottoNumberRange();
