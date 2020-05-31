@@ -14,9 +14,10 @@ public class LottoMachineTest {
 
     @DisplayName("로또 구매 : 랜던 값 추출 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {3, 5})
+    @ValueSource(ints = { 3, 5 })
     void buyLottoTest(final Integer countOfLotto) {
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoExtractor(), new TestLottoView(countOfLotto));
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoView(countOfLotto, 0));
+        lottoMachine.setLottoExtractor(new TestLottoExtractor());
         List<Lotto> extractedLotto = lottoMachine.buyLotto();
         assertEquals(extractedLotto.size(), countOfLotto);
     }
@@ -31,15 +32,32 @@ public class LottoMachineTest {
 
     private static class TestLottoView extends LottoView {
 
-        private Integer count;
+        private Integer countOfLotto;
+        private Integer countOfManualLotto;
 
-        TestLottoView(Integer count) {
-            this.count = count;
+        TestLottoView(Integer countOfLotto, Integer countOfManualLotto) {
+            this.countOfLotto = countOfLotto;
+            this.countOfManualLotto = countOfManualLotto;
         }
 
         @Override
         public Integer inputPurchaseAmountOfLotto() {
-            return count;
+            return this.countOfLotto;
+        }
+
+        @Override
+        public Integer inputCountOfManualLotto() {
+            return this.countOfManualLotto;
+        }
+
+        @Override
+        public void outputManualLottoMessage() {
+
+        }
+
+        @Override
+        public void outputResultOfEachLottoCount(Integer countOfAutomaticLotto, Integer countOfManualLotto) {
+
         }
 
         @Override
