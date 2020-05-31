@@ -10,10 +10,8 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator {
 
     @Override
     public LottoTicket generate(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> defaultLottoNumbers = LottoNumber.getDefaultLottoNumbers();
-        Collections.shuffle(defaultLottoNumbers);
-
-        List<LottoNumber> subLottoNumbers = defaultLottoNumbers.subList(0, LOTTO_GENERATE_MAX_COUNT);
+        Collections.shuffle(lottoNumbers);
+        List<LottoNumber> subLottoNumbers = lottoNumbers.subList(0, LOTTO_GENERATE_MAX_COUNT);
         return LottoTicket.of(new HashSet<>(subLottoNumbers));
     }
 }

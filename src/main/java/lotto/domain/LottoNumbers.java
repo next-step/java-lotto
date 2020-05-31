@@ -22,6 +22,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public static LottoNumbers of(int... lottoValues) {
         return new LottoNumbers(Arrays.stream(lottoValues)
                 .mapToObj(LottoNumber::of)

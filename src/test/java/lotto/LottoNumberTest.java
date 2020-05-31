@@ -13,7 +13,6 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자를 생성하는데 어떤 에러도 발생하지 않는다.")
     void 로또_숫자_생성_테스트() {
         assertThatCode(() -> LottoNumber.of(8)).doesNotThrowAnyException();
-        assertThatCode(() -> LottoNumber.of(1,2,3,4,5,6)).doesNotThrowAnyException();
     }
 
     @ValueSource(ints = {0, 46})
