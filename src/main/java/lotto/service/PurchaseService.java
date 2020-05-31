@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.collections.LottoTickets;
 import lotto.collections.Money;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.util.AutoLottoNumberGenerator;
 
 public class PurchaseService {
 
@@ -14,7 +16,8 @@ public class PurchaseService {
     List<LottoTicket> lottoTicketList = new ArrayList<>();
 
     for (int index = 0; index < numberOfPurchasedLotto; index++) {
-      lottoTicketList.add(new LottoTicket());
+      List<LottoNumber> lottoNumberList = AutoLottoNumberGenerator.pickList();
+      lottoTicketList.add(new LottoTicket(lottoNumberList));
     }
 
     return new LottoTickets(lottoTicketList);
