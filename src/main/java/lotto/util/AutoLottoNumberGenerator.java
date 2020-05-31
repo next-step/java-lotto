@@ -14,17 +14,17 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
   private static final int START_INDEX_OF_NUMBER_ELEMENTS = 0;
   private static final int NUMBER_OF_NUMBER_ELEMENTS = 6;
 
-  public static List<LottoNumber> generateLottoNumbers() {
+  public static List<LottoNumber> pickList() {
+    return Collections.unmodifiableList(shuffle());
+  }
+
+  private static List<LottoNumber> generateLottoNumbers() {
     return IntStream.rangeClosed(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
   }
 
-  public static List<LottoNumber> pickList() {
-    return Collections.unmodifiableList(shuffle());
-  }
-
-  public static List<LottoNumber> shuffle() {
+  private static List<LottoNumber> shuffle() {
     List<LottoNumber> beforeShuffledList = generateLottoNumbers();
     Collections.shuffle(beforeShuffledList);
     List<LottoNumber> afterShuffledList = beforeShuffledList
