@@ -12,6 +12,7 @@ public class LottoTicket {
   public LottoTicket() {
     lottoNumbers = new AutoLottoNumberGenerator().shuffle();
   }
+  
   public int getMatchCounts(WinningNumbers winningNumbers) {
     return Math.toIntExact(lottoNumbers.stream()
         .filter(number -> number.getMatchCounts(winningNumbers))
