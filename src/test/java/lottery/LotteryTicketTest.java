@@ -85,4 +85,19 @@ public class LotteryTicketTest {
         assertThat(lotteryTicket.getMatchLotteryRank(winnerTicket))
                 .isEqualTo(LotteryRank.FIRST_PRIZE);
     }
+
+    @DisplayName("보너스 볼 포함 여부를 확인해서 2등 3등을 구분해 LotteryRank 반환")
+    @Test
+    public void getSecondOrThirdLotteryRankOnBonusBall() {
+        LotteryTicket secondWinnerTicket = LotteryTicket.from(lotteryNumberList);
+        LotteryTicket thirdWinnerTicket = LotteryTicket.from("1,2,3,4,9,44".split(","));
+
+        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,44,45".split(","));
+        LotteryNumber bonusBallNumber = LotteryNumber.from(5);
+
+        assertThat(secondWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
+                .isEqualTo(LotteryRank.SECOND_PRIZE);
+        assertThat(thirdWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
+                .isEqualTo(LotteryRank.THIRD_PRIZE);
+    }
 }
