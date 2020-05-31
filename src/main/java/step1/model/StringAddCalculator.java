@@ -27,7 +27,7 @@ public class StringAddCalculator {
     }
 
     private static int convrrtStringToint(String stringNum) {
-            int number = 0;
+        int number = 0;
 
         try {
             number = Integer.parseInt(stringNum);
@@ -40,7 +40,7 @@ public class StringAddCalculator {
 
     private static int sumNumbers(String[] splitString) {
         int sum = 0;
-        for ( String num :  splitString) {
+        for (String num : splitString) {
             int convertNum = convrrtStringToint(num);
 
             if (checkMinus(convertNum)) {
