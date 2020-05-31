@@ -31,10 +31,4 @@ public class LottoNumberTest {
         assertThat(LottoNumber.isValidNumber(0)).isFalse();
         assertThat(LottoNumber.isValidNumber(46)).isFalse();
     }
-
-    @Test
-    @DisplayName("로또 1~45 숫자 리스트의 크기를 검증한다.")
-    void 로또_숫자_리스트_테스트() {
-        assertThat(LottoNumber.getDefaultLottoNumbers()).hasSize(LottoNumber.LOTTO_NUMBER_MAX);
-    }
 }
