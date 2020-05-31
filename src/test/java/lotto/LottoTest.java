@@ -3,7 +3,6 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toSet;
@@ -29,7 +28,7 @@ public class LottoTest {
     @Test
     void winningNumbersSizeNotEquals_Then_IllegalArgumentException() {
         Lotto lotto = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3));
+        WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3).collect(toSet()));
 
         assertThatThrownBy(() -> lotto.checkResult(winningNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -39,7 +38,7 @@ public class LottoTest {
     @Test
     void checkResult() {
         Lotto lotto = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
 
         Rank rank = lotto.checkResult(winningNumbers);
         assertThat(rank).isNotNull();

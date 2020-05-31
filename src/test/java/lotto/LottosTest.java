@@ -29,7 +29,7 @@ class LottosTest {
         Lotto lotto6 = new Lotto(() -> Stream.of(7, 8, 9, 10, 11, 12).collect(toSet()));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
         LottoResults lottoResults = lottos.checkResults(winningNumbers);
 
         return Stream.of(
