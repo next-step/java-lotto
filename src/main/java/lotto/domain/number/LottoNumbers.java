@@ -1,7 +1,6 @@
 package lotto.domain.number;
 
 import lotto.domain.generator.NumberGenerator;
-import lotto.domain.winning.WinningNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,14 +55,6 @@ public class LottoNumbers {
         if (distinctCount != LOTTO_SIZE) {
             throw new LottoNumbersDuplicateException();
         }
-    }
-
-    public int matchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(
-                this.numbers.stream()
-                        .filter(winningNumbers::contains)
-                        .count()
-        );
     }
 
     public boolean contains(LottoNumber lottoNumber) {

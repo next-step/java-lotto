@@ -32,6 +32,15 @@ public class WinningNumbers {
         return this.winningLottoNumbers.contains(lottoNumber);
     }
 
+    public int matchCount(LottoNumbers lottoNumbers) {
+        return Math.toIntExact(
+                this.winningLottoNumbers.getNumbers()
+                        .stream()
+                        .filter(lottoNumbers::contains)
+                        .count()
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

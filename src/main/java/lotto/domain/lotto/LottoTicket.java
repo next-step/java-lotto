@@ -28,7 +28,7 @@ public class LottoTicket {
 
     public Map<LottoRank, Long> matchWinningNumber(WinningNumbers winningNumbers) {
         return this.lottoNumbers.stream()
-                .map(lottoNumber -> LottoRank.valueOf(lottoNumber.matchCount(winningNumbers)))
+                .map(lottoNumber -> LottoRank.valueOf(winningNumbers.matchCount(lottoNumber)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
