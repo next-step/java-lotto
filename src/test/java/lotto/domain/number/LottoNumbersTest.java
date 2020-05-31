@@ -7,7 +7,10 @@ import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DisplayName("LottoNumbers 클래스 테스트")
 public class LottoNumbersTest {
@@ -42,5 +45,21 @@ public class LottoNumbersTest {
         boolean contains = lottoNumbers.contains(lottoNumber);
 
         assertThat(contains).isTrue();
+    }
+
+    @DisplayName("6자리인지 검증할 수 있다.")
+    @Test
+    void validateLottoNumbersLength() {
+        assertThatExceptionOfType(LottoNumbersLengthException.class)
+                .isThrownBy(() -> LottoNumbers.newLottoNumbersWithList(Arrays.asList(1, 2, 3, 4, 5)))
+                .withMessage(LottoNumbersLengthException.MESSAGE);
+    }
+
+    @DisplayName("중복된 값이 있는지 검증할 수 있다.")
+    @Test
+    void validateLottoNumberDuplicate() {
+        assertThatExceptionOfType(LottoNumbersDuplicateException.class)
+                .isThrownBy(() -> LottoNumbers.newLottoNumbersWithList(Arrays.asList(1, 2, 2, 3, 4, 5)))
+                .withMessage(LottoNumbersDuplicateException.MESSAGE);
     }
 }
