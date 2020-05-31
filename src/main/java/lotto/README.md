@@ -4,6 +4,8 @@
 
 - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 - 로또 1장의 가격은 1000원이다.
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
 
 ## 프로그래밍 요구사항
 
@@ -36,8 +38,8 @@
 
 - LottoTicket: 로또 티켓(묶음) 
     - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
-    - [X] 입력받은 갯수 만큼 LottoTicket을 생성할 수 있다.
-    - [X] WinningNumbers와 매칭 결과를 반환한다. 
+    - [X] 입력받은 Price 만큼 LottoTicket을 생성할 수 있다.
+    - [ ] WinningNumbers, 보너스 볼(LottoNumber)을 입력 받아 매칭 결과를 반환할 수 있다.
 
 - NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
     - [X]  1~45 사이의 무작위 값으로 구성된 6개의 숫자를 생성한다.
@@ -50,6 +52,7 @@
 
 - LottoRank: 로또 랭크
     - [X] 일치하는 갯수에 대한 상금액을 갖는다.
+    - [ ] 5개 일치, 보너스 볼 일치하는 2등을 갖는다.
 
 - WinningStatistics: 당첨 통계
     - [X] LottoRank를 반환할 수 있다.
@@ -58,6 +61,7 @@
 - InputView
     - [X] 구입 Price를 입력 받을 수 있다.
     - [X] WinningNumbers를 입력 받을 수 있다.
+    - [ ] 보너스 볼을 입력받 을 수 있다.
     
 - OutPutView
     - [X] 로또 구매 갯수와 LottoTicket을 출력할 수 있다.
