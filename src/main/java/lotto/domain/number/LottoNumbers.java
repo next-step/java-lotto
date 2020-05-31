@@ -57,10 +57,6 @@ public class LottoNumbers {
         }
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
-    }
-
     public List<LottoNumber> getNumbers() {
         return numbers;
     }

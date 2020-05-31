@@ -28,15 +28,11 @@ public class WinningNumbers {
         return winningLottoNumbers;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.winningLottoNumbers.contains(lottoNumber);
-    }
-
     public int matchCount(LottoNumbers lottoNumbers) {
         return Math.toIntExact(
                 this.winningLottoNumbers.getNumbers()
                         .stream()
-                        .filter(lottoNumbers::contains)
+                        .filter(winningNumber -> lottoNumbers.getNumbers().contains(winningNumber))
                         .count()
         );
     }
