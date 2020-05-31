@@ -3,14 +3,13 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.collections.WinningNumbers;
-import lotto.util.AutoLottoNumberGenerator;
 
 public class LottoTicket {
 
   protected final List<LottoNumber> lottoNumbers;
 
-  public LottoTicket() {
-    lottoNumbers = AutoLottoNumberGenerator.pickList();
+  public LottoTicket(List<LottoNumber> lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
   public int getMatchCounts(final WinningNumbers winningNumbers) {
