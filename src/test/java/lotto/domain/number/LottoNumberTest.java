@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("LottoNumber 클래스 테스트")
 public class LottoNumberTest {
@@ -24,5 +23,15 @@ public class LottoNumberTest {
     void equals() {
         assertThat(new LottoNumber(1).equals(new LottoNumber(1))).isTrue();
         assertThat(new LottoNumber(1).equals(new LottoNumber(2))).isFalse();
+    }
+
+    @DisplayName("1~45 사이의 값이 아니면 예외를 발생시킨다.")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 46})
+    void validateNumber(int number) {
+        assertThatExceptionOfType(IncorrectLottoNumberException.class)
+                .isThrownBy(() -> {
+                    new LottoNumber(number);
+                }).withMessage(IncorrectLottoNumberException.MESSAGE);
     }
 }
