@@ -21,7 +21,7 @@ public class LottoTickets {
     return lottoTickets.size();
   }
 
-  public LottoResult createLottoResult(WinningNumbers numbers) {
+  public LottoResult calculateLottoResult(WinningNumbers numbers) {
     Map<Integer, Integer> lottoStatistics = lottoTickets.stream()
         .map(ticket -> ticket.getMatchCounts(numbers))
         .collect(Collectors
