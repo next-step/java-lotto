@@ -16,9 +16,9 @@ public class LottoNumber {
   protected LottoNumber() {
   }
 
-  public boolean getMatchCounts(final WinningNumbers proposes) {
-    return proposes.getWinningNumbers().stream()
-        .anyMatch(propose -> propose.getNumber().equals(number));
+  public boolean getMatchCounts(final WinningNumbers winningNumbers) {
+    return winningNumbers.getWinningNumbers().stream()
+        .anyMatch(number -> number.getNumber().equals(number));
   }
 
   public int getNumber() {
