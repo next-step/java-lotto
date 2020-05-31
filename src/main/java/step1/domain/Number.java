@@ -8,7 +8,8 @@ public class Number {
     private static final Pattern patternNumbersOnly = Pattern.compile("^[-+]?[0-9]+$");
 
     public static void checkNumber(String[] inputString) {
-        Arrays.stream(inputString).forEach(string -> {
+        Arrays.stream(inputString)
+                .forEach(string -> {
                     if (!patternNumbersOnly.matcher(string).matches()) {
                         throw new IllegalArgumentException("Found a not number(s)");
                     }
