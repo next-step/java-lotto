@@ -2,8 +2,8 @@ package step2.view;
 
 import step2.model.LottoNumber;
 import step2.model.Money;
+import step2.util.WinningNumberSplitter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
-
-    private static final String WINNING_NUMBER_DELIMITER = ",";
 
     private InputView() {
     }
@@ -26,16 +24,10 @@ public class InputView {
 
     public static List<LottoNumber> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] winningNumberTokens = scanner.nextLine().split(WINNING_NUMBER_DELIMITER);
+        String winningNumber = scanner.nextLine();
 
-        try {
-            return Arrays.stream(winningNumberTokens)
-                    .map(Integer::parseInt)
-                    .map(LottoNumber::valueOf)
-                    .collect(Collectors.toList());
-
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("당첨 번호는 숫자만 입력 가능합니다.");
-        }
+        return WinningNumberSplitter.split(winningNumber).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
     }
 }
