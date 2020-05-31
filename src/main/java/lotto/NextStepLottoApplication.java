@@ -13,12 +13,11 @@ public class NextStepLottoApplication {
 
   public static void main(String[] args) {
     Money money = InputView.inputPurchaseMoney();
-    LottoTickets lottoTickets = new PurchaseService().purchase(money);
+    LottoTickets lottoTickets = PurchaseService.purchase(money);
     OutputView.printNumberOfPurchasedTickets(lottoTickets);
 
     WinningNumbers winningNumbers = InputView.inputLastWeekWinningNumbers();
-    LottoResult lottoResult = new WinningService()
-        .calculateLottoMatches(lottoTickets, winningNumbers);
+    LottoResult lottoResult = WinningService.calculateLottoMatches(lottoTickets, winningNumbers);
     OutputView.printResult(lottoResult, lottoTickets);
   }
 }

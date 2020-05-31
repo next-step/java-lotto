@@ -8,7 +8,7 @@ import lotto.domain.LottoTicket;
 
 public class PurchaseService {
 
-  public LottoTickets purchase(final Money money) {
+  public static LottoTickets purchase(final Money money) {
     final int numberOfPurchasedLotto = money.getNumberOfPurchasedLotto();
 
     List<LottoTicket> lottoTicketList = new ArrayList<>();
