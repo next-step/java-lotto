@@ -52,8 +52,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         String[] split = input.split(", ");
-        List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(split);
 
         assertThat(lotto.compareToWinningNumbers(winningLotto))
                 .isEqualTo(3);
@@ -78,8 +77,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         String[] split = input.split(", ");
-        List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(split);
 
         LottoRank lottoRank = lotto.getPrize(winningLotto);
 
@@ -93,9 +91,7 @@ public class LottoTest {
         LottoList lottoList = LottoList.create(10);
 
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
-        List<LottoNumber> winningNumbers = Arrays.stream(split).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(winningNumbers);
-
+        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(split);
         Statistics statistics = Statistics.createStatistics(4000, lottoList, winningLotto);
 
         assertThat(statistics.getEarningRate())
