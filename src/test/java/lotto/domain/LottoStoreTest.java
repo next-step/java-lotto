@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
 import lotto.vo.Money;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ class LottoStoreTest {
     @Test
     void buyTest() {
         //given
-        LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
+        LottoStore lottoStore = new LottoStore(new LottoTicketGenerator());
 
         //when
         LottoTickets lottoTickets = lottoStore.buy(Money.of(14000));

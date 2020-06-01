@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoGameProperty.*;
 
-public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+public class AutoLottoNumberGenerator {
     private static final int LOTTO_BALL_START_INDEX = 0;
 
     private final List<LottoNumber> lottoBalls;
@@ -20,7 +20,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
                 .collect(toList());
     }
 
-    @Override
     public Set<LottoNumber> generate() {
         Collections.shuffle(lottoBalls);
         return Collections.unmodifiableSet(new HashSet<>(pickLottoBalls()));
