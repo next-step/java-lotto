@@ -1,6 +1,6 @@
 package study1;
 
-public class Validation {
+public class Validator {
 	
 	public static boolean negativeCheck(String[] numbers) {
 		for(String str : numbers) {
