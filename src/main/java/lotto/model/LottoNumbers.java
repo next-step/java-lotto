@@ -5,19 +5,16 @@ import java.util.List;
 
 public class LottoNumbers {
 
-  private final static int SIZE = 6;
-
   private final List<Integer> numbers;
 
   public LottoNumbers(List<Integer> numbers) {
-    if (numbers.size() != SIZE) {
-      throw new IllegalArgumentException("로또 숫자는 6개가 입력되어야 합니다. " + numbers);
-    }
+    LottoValidationUtils.checkLottoNumberSize(numbers);
+    LottoValidationUtils.checkLottoNumberRange(numbers);
 
     this.numbers = new ArrayList<>(numbers);
   }
 
-  public List<Integer> getNumbers() {
+  public List<Integer> values() {
     return new ArrayList<>(numbers);
   }
 }

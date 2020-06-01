@@ -21,6 +21,10 @@ public enum LottoNumberPool {
     }
   }
 
+  public List<Integer> getNumbers(){
+    return new ArrayList<>(numbers);
+  }
+
   /**
    * 번호 풀에서 번호 자동 생성
    *

@@ -10,17 +10,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoNumbersTest {
+class WinningNumbersTest {
 
   @ParameterizedTest
   @MethodSource("numberListProvider")
-  void getNumbers(List<Integer> numberList) {
-    assertThat(new LottoNumbers(numberList).values()).isEqualTo(numberList);
+  void newInstanceByStrArr(String[] strArr, List<Integer> numberList) {
+    assertThat(WinningNumbers.newInstanceByStrArr(strArr).getNumbers().values())
+        .isEqualTo(numberList);
   }
 
   static Stream<Arguments> numberListProvider() {
     return Stream.of(
-        arguments(Arrays.asList(1, 2, 3, 4, 5, 6))
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, Arrays.asList(1, 2, 3, 4, 5, 6))
     );
   }
 }
