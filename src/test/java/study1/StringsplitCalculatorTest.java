@@ -3,11 +3,12 @@ package study1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.assertj.core.util.Strings;
+import org.assertj.core.internal.Strings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
 
 class StringsplitCalculatorTest {
 
@@ -16,9 +17,10 @@ class StringsplitCalculatorTest {
 	public void splitAndSum_null_또는_빈문자(String input) {
 
 		assertThatThrownBy(() -> Splitter.split(null)).isInstanceOf(NullPointerException.class);
-
 		assertThatThrownBy(() -> Splitter.split("")).isInstanceOf(IllegalArgumentException.class);
-		assertTrue(Strings.isBlank(input));
+		
+	//	assertTrue(Strings.isEmpty(input));
+		
 	}
 
 	@Test
