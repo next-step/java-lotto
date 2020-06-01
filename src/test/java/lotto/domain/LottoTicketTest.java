@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -18,8 +17,8 @@ class LottoTicketTest {
 
     static Stream<Arguments> lottoNumbers() {
         return Stream.of(
-                Arguments.of(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5)))),
-                Arguments.of(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))))
+                Arguments.of(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5))),
+                Arguments.of(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
         );
     }
 

@@ -16,8 +16,7 @@ public class ManualLottoNumbers {
 
     public ManualLottoNumbers(String manualLottoNumbers) {
         this.manualLottoNumbers = Arrays.stream(manualLottoNumbers.split(MANUAL_LOTTO_NUMBERS_DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .boxed()
+                .map(number -> Integer.parseInt(number.trim()))
                 .map(LottoNumber::of)
                 .collect(toSet());
     }
