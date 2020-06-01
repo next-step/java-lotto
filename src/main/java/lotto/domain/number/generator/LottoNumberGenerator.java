@@ -2,8 +2,6 @@ package lotto.domain.number.generator;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.number.generator.LottoNumberList;
-import lotto.domain.number.generator.NumberGenerator;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 import static java.util.stream.Collectors.*;
 
 public class LottoNumberGenerator implements NumberGenerator<LottoNumber> {
-    private static final List<LottoNumber> numbers = new LottoNumberList().getNumbers();
+    private static final List<LottoNumber> numbers = LottoNumbers.createWholeLottoNumbers();
 
     @Override
     public List<LottoNumber> getNumbers() {

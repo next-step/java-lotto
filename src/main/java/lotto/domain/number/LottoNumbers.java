@@ -4,7 +4,11 @@ import lotto.domain.number.generator.NumberGenerator;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoNumbers {
     public final static int LOTTO_SIZE = 6;
@@ -64,9 +68,20 @@ public class LottoNumbers {
     public int matchCount(LottoNumber bonusLottoNumber) {
         return Math.toIntExact(
                 this.numbers.stream()
-                .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
-                .count()
+                        .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
+                        .count()
         );
+    }
+
+    public static List<LottoNumber> createWholeLottoNumbers() {
+        int initialValue = LottoNumber.MIN_VALUE;
+        AtomicInteger value = new AtomicInteger(initialValue);
+
+        return IntStream.generate(value::getAndIncrement)
+                .limit(LottoNumber.MAX_VALUE)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 
     @Override
