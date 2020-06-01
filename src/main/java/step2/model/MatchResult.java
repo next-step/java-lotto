@@ -25,7 +25,7 @@ public class MatchResult {
         this.matchResult.computeIfPresent(lottoRank, (rank, count) -> count + COUNT_OPERAND);
     }
 
-    public int findCount(LottoRank lottoRank) {
+    public int findResult(LottoRank lottoRank) {
         return this.matchResult.get(lottoRank);
     }
 

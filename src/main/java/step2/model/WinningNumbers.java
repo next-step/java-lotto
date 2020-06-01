@@ -24,7 +24,7 @@ public class WinningNumbers {
         return new WinningNumbers(lottoNumbers);
     }
 
-    public boolean hasNumber(LottoNumber lottoNumber) {
+    public boolean containsNumber(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber);
     }
 

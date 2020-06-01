@@ -9,13 +9,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchResultTest {
 
-    @DisplayName("findCount() 메소드는 당첨된 로또가 없으면 0을 반환한다")
+    @DisplayName("findResult() 메소드는 당첨된 로또가 없으면 0을 반환한다")
     @Test
-    void findCount_LottoRank_ZeroValue() {
+    void findResult_LottoRank_ZeroValue() {
         MatchResult matchResult = MatchResult.create();
 
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> {
-            assertThat(matchResult.findCount(lottoRank)).isEqualTo(0);
+            assertThat(matchResult.findResult(lottoRank)).isEqualTo(0);
         });
     }
 
@@ -26,10 +26,10 @@ class MatchResultTest {
 
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> {
             matchResult.plusCount(lottoRank);
-            assertThat(matchResult.findCount(lottoRank)).isEqualTo(1);
+            assertThat(matchResult.findResult(lottoRank)).isEqualTo(1);
 
             matchResult.plusCount(lottoRank);
-            assertThat(matchResult.findCount(lottoRank)).isEqualTo(2);
+            assertThat(matchResult.findResult(lottoRank)).isEqualTo(2);
         });
     }
 }

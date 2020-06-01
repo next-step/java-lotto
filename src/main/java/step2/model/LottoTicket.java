@@ -33,7 +33,7 @@ public class LottoTicket {
 
     public int getMatchCount(WinningNumbers winningNumbers) {
         return Math.toIntExact(this.numbers.stream()
-                .filter(winningNumbers::hasNumber)
+                .filter(winningNumbers::containsNumber)
                 .count());
     }
 
