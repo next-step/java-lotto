@@ -27,9 +27,8 @@ public class OutputView {
 
         List<LottoRank> lottoRanks = LottoRank.getWinningLotto(false);
         for (LottoRank lottoRank : lottoRanks) {
-            System.out.println(lottosStatistics.getWinningCountString(lottoRank));
+            System.out.println(StatisticsString.of(lottosStatistics).getWinningCountString(lottoRank));
         }
-
-        System.out.println(lottosStatistics.getStringRateOfReturnAmount());
+        System.out.println(StatisticsString.of(lottosStatistics).getStringRateOfReturnAmount());
     }
 }
