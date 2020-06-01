@@ -61,4 +61,14 @@ public enum LottoRank {
     public boolean isBonus() {
         return isBonus;
     }
+
+    public String getString() {
+        return new StringBuilder()
+                .append(getMatchCount())
+                .append("개 일치")
+                .append(isBonus() ? ", 보너스 볼 일치" : " ")
+                .append("(")
+                .append(getWinningAmount())
+                .append(")").toString();
+    }
 }
