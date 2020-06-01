@@ -40,4 +40,18 @@ public class LottosStatistics {
     public float getRateOfReturnAmount() {
         return rateOfReturnAmount.floatValue();
     }
+
+    public String getWinningCountString(LottoRank lottoRank) {
+        return lottoRank.getString() + " - " + getWinningCount(lottoRank);
+    }
+
+    public String getStringRateOfReturnAmount() {
+        return new StringBuilder().append("총 수익률은 ")
+                .append(getRateOfReturnAmount())
+                .append("입니다. ")
+                .append("(기준이 1이기 때문에 결과적으로 ")
+                .append(getRateOfReturnAmount() > 1 ? "이득이 " : "손해")
+                .append("라는 의미임)").toString();
+    }
+
 }
