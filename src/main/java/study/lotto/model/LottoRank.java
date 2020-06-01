@@ -1,14 +1,14 @@
 package study.lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
-    FIRST_RANK(6, 2000000000),
-    SECOND_RANK(5, 1500000),
+    FIRST_RANK(6, 2_000_000_000),
+    SECOND_RANK(5, 1_500_000),
     THIRD_RANK(4, 50000),
     FORTH_RANK(3, 5000),
     NO_RANK(0, 0);
@@ -16,12 +16,14 @@ public enum LottoRank {
     private final int matches;
     private final int prize;
 
-    private static final int MINIMUM_MATCHES = 3;
+    private static final int MAXIMUM_PRIZE_MATCHES = 6;
+    private static final int MINIMUM_PRIZE_MATCHES = 3;
     private static final int NO_PRIZE_MATCHES = 0;
     private static final Map<Integer, LottoRank> BY_MATCHES;
 
     static {
-        BY_MATCHES = Arrays.stream(values()).collect(Collectors.toMap(o -> o.matches, Function.identity()));
+        BY_MATCHES = Arrays.stream(values())
+                .collect(Collectors.toMap(o -> o.matches, Function.identity()));
     }
 
     LottoRank(int matches, int prize) {
@@ -29,24 +31,28 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank find(int matches) {
-        if(matches < MINIMUM_MATCHES) {
-            matches = NO_PRIZE_MATCHES;
+    private static void validateMatchCount(int matches) {
+        if((matches < NO_PRIZE_MATCHES) || (matches > MAXIMUM_PRIZE_MATCHES)) {
+            throw new IllegalArgumentException("matches는 0~6사이의 값 이어야 합니다.");
         }
+    }
 
-        return Optional.ofNullable(BY_MATCHES.get(matches)).orElseThrow(IllegalArgumentException::new);
+    public static LottoRank find(int matches) {
+        validateMatchCount(matches);
+        return BY_MATCHES.getOrDefault(matches, LottoRank.NO_RANK);
+    }
+
+    public static List<LottoRank> getLottoRanksOverMinimumMatches() {
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.getMatches() >= MINIMUM_PRIZE_MATCHES)
+                .collect(Collectors.toList());
+    }
+
+    public int getMatches() {
+        return matches;
     }
 
     public int getPrize() {
         return prize;
-    }
-
-    public boolean isPrizeExists() {
-        return matches >= MINIMUM_MATCHES;
-    }
-
-    @Override
-    public String toString() {
-        return matches + "개 일치 (" + prize + "원)";
     }
 }
