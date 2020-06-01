@@ -38,12 +38,16 @@ public enum LottoRank {
     }
 
     public static List<LottoRank> getWinningLotto(boolean ascending) {
-        return Arrays.stream(values())
+        List<LottoRank> lottoRankOrderByAscending = Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.getMatchCount() > BOOM.getMatchCount())
-                .sorted((o1, o2) ->
-                    ascending ? o2.getWinningAmount().subtract(o1.getWinningAmount()).intValue() :
-                            o1.getWinningAmount().subtract(o2.getWinningAmount()).intValue())
+                .sorted((o1, o2) -> o2.getWinningAmount().subtract(o1.getWinningAmount()).intValue())
                 .collect(Collectors.toList());
+
+        if(!ascending) {
+            Collections.reverse(lottoRankOrderByAscending);
+        }
+
+        return lottoRankOrderByAscending;
     }
 
     public int getMatchCount() {
