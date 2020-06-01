@@ -23,7 +23,7 @@ public class ResultView {
 
         lottoTickets.getLottoTickets().stream()
                 .map(LottoTicket::toString)
-                .forEach(stringBuilder::append);
+                .forEach(s -> stringBuilder.append(s).append(LINE_FEED));
 
         System.out.println(stringBuilder.toString());
     }
@@ -45,7 +45,7 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printRateOfReturn(MatchReport matchReport) {
+    public static void printMatchReport(MatchReport matchReport) {
         System.out.println("총 수익률은 " + matchReport.calculateRateOfReturn() + "입니다.");
     }
 }

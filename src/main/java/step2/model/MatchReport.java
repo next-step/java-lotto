@@ -7,20 +7,34 @@ public class MatchReport {
 
     private static final int DECIMAL_DIGIT = 2;
 
-    private final Money money;
+    private final MoneyAmount moneyAmount;
     private final MatchResult matchResult;
 
-    private MatchReport(Money money, MatchResult matchResult) {
-        this.money = money;
+    private MatchReport(MoneyAmount moneyAmount, MatchResult matchResult) {
+        if (isNull(moneyAmount, matchResult)) {
+            throw new IllegalArgumentException();
+        }
+
+        this.moneyAmount = moneyAmount;
         this.matchResult = matchResult;
     }
 
-    public static MatchReport create(Money money, MatchResult matchResult) {
-        return new MatchReport(money, matchResult);
+    private boolean isNull(MoneyAmount moneyAmount, MatchResult matchResult) {
+        return moneyAmount == null || matchResult == null;
+    }
+
+    public static MatchReport create(MoneyAmount moneyAmount, MatchResult matchResult) {
+        return new MatchReport(moneyAmount, matchResult);
     }
 
     public BigDecimal calculateRateOfReturn() {
-        return BigDecimal.valueOf(this.matchResult.calculateTotalWinningMoney())
-                .divide(BigDecimal.valueOf(money.getUsedAmount()), DECIMAL_DIGIT, RoundingMode.DOWN);
+        BigDecimal winningMoney = BigDecimal.valueOf(this.matchResult.calculateTotalWinningMoney());
+        BigDecimal usedAmount = BigDecimal.valueOf(moneyAmount.getUsedAmount().getValue());
+
+        if (BigDecimal.ZERO.equals(usedAmount)) {
+            return BigDecimal.ZERO;
+        }
+
+        return winningMoney.divide(usedAmount, DECIMAL_DIGIT, RoundingMode.DOWN);
     }
 }

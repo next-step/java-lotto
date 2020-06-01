@@ -20,22 +20,17 @@ public class LottoMachine {
         return new LottoMachine(ticketPrice);
     }
 
-    public LottoTickets buyTicket(Money money) {
-        validateMoney(money);
+    public LottoTickets buyTicket(MoneyAmount moneyAmount) {
+        if (!moneyAmount.isEnoughMoney(ticketPrice)) {
+            throw new NotEnoughMoneyException();
+        }
 
         int buyTicketCount = TICKET_INITIAL_COUNT;
-
-        while (money.isAvailableAmount(ticketPrice)) {
-            money.useAmount(ticketPrice);
+        while (moneyAmount.isEnoughMoney(ticketPrice)) {
+            moneyAmount.useAmount(ticketPrice);
             buyTicketCount++;
         }
 
         return LottoTicketGenerator.generate(buyTicketCount);
-    }
-
-    private void validateMoney(Money money) {
-        if (!money.isAvailableAmount(ticketPrice)) {
-            throw new NotEnoughMoneyException();
-        }
     }
 }

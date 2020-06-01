@@ -1,9 +1,6 @@
 package step2.view;
 
-import step2.model.LottoNumber;
-import step2.model.LottoTickets;
-import step2.model.Money;
-import step2.model.WinningNumbers;
+import step2.model.*;
 import step2.util.WinningNumberSplitter;
 
 import java.util.List;
@@ -20,11 +17,11 @@ public class InputView {
     private InputView() {
     }
 
-    public static Money getPurchaseMoney() {
+    public static MoneyAmount getPurchaseAmount() {
         System.out.println("구입 금액을 입력해 주세요.");
         int useAmount = Integer.parseInt(scanner.nextLine());
 
-        return Money.valueOf(useAmount);
+        return MoneyAmount.create(Money.valueOf(useAmount));
     }
 
     public static WinningNumbers getWinningNumbers() {
