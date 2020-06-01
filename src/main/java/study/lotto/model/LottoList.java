@@ -9,7 +9,7 @@ public class LottoList {
     public static LottoList create(int num) {
         LottoList lottoList = new LottoList();
 
-        for(int i=0; i<num; i++) {
+        for(int i = 0; i < num; i++) {
             lottoList.addLotto(Lotto.generate());
         }
 
