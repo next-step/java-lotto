@@ -31,8 +31,8 @@ public enum LottoRank {
 
     public static LottoRank getRank(int containCount, boolean isBonus) {
         return lottoRanks.stream()
-                .filter(lotto -> lotto.isBonus == isBonus
-                        && lotto.getContainCountsSameWinningNumber() == containCount)
+                .filter(lotto -> lotto.isBonus == isBonus)
+                .filter(lotto -> lotto.getContainCountsSameWinningNumber() == containCount)
                 .findFirst()
                 .orElse(BOOM);
     }
