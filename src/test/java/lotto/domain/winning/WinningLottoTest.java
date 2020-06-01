@@ -10,32 +10,32 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("WinningNumbers 클래스 테스트")
-public class WinningNumbersTest {
+public class WinningLottoTest {
     String winningNumberString = "1,2,3,4,5,6";
-    WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+    WinningLotto winningLotto = new WinningLotto(winningNumberString);
 
     @DisplayName("WinningNumbers 객체 생성 시 지난 주 당첨 LottoNumbers를 갖는다.")
     @Test
     void createWinningNumber() {
-        assertThat(winningNumbers.getWinningLottoNumbers().getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
+        assertThat(winningLotto.getWinningLottoNumbers().getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
     @DisplayName("equals 메소드 테스트")
     @Test
     void equals() {
-        assertThat(winningNumbers.equals(new WinningNumbers(winningNumberString))).isTrue();
+        assertThat(winningLotto.equals(new WinningLotto(winningNumberString))).isTrue();
     }
 
     @DisplayName("LottoNumbers 비교하여 존재하는 갯수를 리턴할 수 있다.")
     @Test
     void matchCount() {
         String winningNumberString = "1,2,3,4,5,6";
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+        WinningLotto winningLotto = new WinningLotto(winningNumberString);
 
         NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
         LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
 
-        int matchCount = winningNumbers.matchCount(lottoNumbers);
+        int matchCount = winningLotto.matchCount(lottoNumbers);
 
         assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
     }

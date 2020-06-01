@@ -28,7 +28,7 @@ public class WinningStatisticsTest {
         Price price = new Price(2000);
         LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -42,7 +42,7 @@ public class WinningStatisticsTest {
         Price price = new Price(2000);
         LottoTicket lottoTicket = new LottoTicket(price, new NotMatchNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -57,7 +57,7 @@ public class WinningStatisticsTest {
         winningNumberString = "1,2,3,13,14,15";
         LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         BigDecimal profit = winningStatistics.calculateProfit();

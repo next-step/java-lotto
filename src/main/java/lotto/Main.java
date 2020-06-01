@@ -5,7 +5,7 @@ import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningLotto;
 import lotto.domain.winning.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,7 +24,7 @@ public class Main {
         String winningNumbers = InputView.printRequireWinningNumbers();
         int bonusNumber = InputView.printRequireBonusBall();
 
-        Map<LottoRank, Long> lottoRank = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumbers),
+        Map<LottoRank, Long> lottoRank = lottoTicket.matchWinningNumber(new WinningLotto(winningNumbers),
                 new LottoNumber(bonusNumber));
 
         OutputView.printStatistics(new WinningStatistics(price, lottoRank));

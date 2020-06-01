@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningLotto {
 
     private final LottoNumbers winningLottoNumbers;
 
-    public WinningNumbers(String winningNumbers) {
+    public WinningLotto(String winningNumbers) {
         this.winningLottoNumbers = createWinningNumbers(winningNumbers);
     }
 
@@ -39,8 +39,8 @@ public class WinningNumbers {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WinningNumbers)) return false;
-        WinningNumbers that = (WinningNumbers) o;
+        if (!(o instanceof WinningLotto)) return false;
+        WinningLotto that = (WinningLotto) o;
         return Objects.equals(winningLottoNumbers, that.winningLottoNumbers);
     }
 

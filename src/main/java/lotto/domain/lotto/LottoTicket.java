@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.generator.NumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningLotto;
 
 import java.util.List;
 import java.util.Map;
@@ -26,9 +26,9 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public Map<LottoRank, Long> matchWinningNumber(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    public Map<LottoRank, Long> matchWinningNumber(WinningLotto winningLotto, LottoNumber bonusNumber) {
         return this.lottoNumbers.stream()
-                .map(lottoNumbers -> LottoRank.valueOf(winningNumbers.matchCount(lottoNumbers), lottoNumbers.matchCount(bonusNumber)))
+                .map(lottoNumbers -> LottoRank.valueOf(winningLotto.matchCount(lottoNumbers), lottoNumbers.matchCount(bonusNumber)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 

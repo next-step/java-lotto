@@ -4,7 +4,7 @@ import lotto.domain.generator.FixedNumberGenerator;
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,12 +34,12 @@ public class LottoTicketTest {
         Price price= new Price(2000);
         String winningNumberString = "1,2,3,4,5,6";
         int bonusNumber = 7;
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+        WinningLotto winningLotto = new WinningLotto(winningNumberString);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
         LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningNumbers, bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningLotto, bonusLottoNumber);
 
         assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(price.getLottoCount()));
     }
