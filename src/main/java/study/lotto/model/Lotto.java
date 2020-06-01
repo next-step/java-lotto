@@ -1,6 +1,7 @@
 package study.lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +44,9 @@ public class Lotto {
     }
 
     public long compareToWinningNumbers(Lotto winningLotto) {
-        return lottoNumbers.stream().filter(winningLotto.getLottoNumbers()::contains).count();
+        return lottoNumbers.stream()
+                .filter(winningLotto.getLottoNumbers()::contains)
+                .count();
     }
 
     public LottoRank getPrize(Lotto winningLotto) {
@@ -51,6 +54,18 @@ public class Lotto {
     }
 
     public String toString() {
-        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()).toString();
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList())
+                .toString();
+    }
+
+    public static Lotto convertToLotto(String[] winningNumbers) {
+        List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new Lotto(winningNumberList);
     }
 }

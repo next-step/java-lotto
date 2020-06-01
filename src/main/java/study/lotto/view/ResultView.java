@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 public class ResultView {
 
+    public static void printPurchaseMessage(int numOfLotto) {
+        System.out.println(numOfLotto + "개를 구매했습니다.");
+    }
+
     public static void printLottoList(LottoList lottoList) {
         lottoList.getLottoList().forEach(System.out::println);
     }
