@@ -11,16 +11,16 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.vo.Money;
 
-public class AutoLottoApplication {
+public class LottoGameApplication {
 
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore(new LottoTicketGenerator());
 
         Money budget = Money.of(InputView.askTotalMoney());
         int numberOfManualLottoTicket = InputView.askNumberOfManualLottoTicket();
+        LottoTickets manualLottoTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket).toLottoTickets();
 
-        LottoTickets manualTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket);
-        LottoTickets lottoTickets = lottoStore.buy(budget);
+        LottoTickets lottoTickets = lottoStore.buy(budget, manualLottoTickets);
 
         OutputView.printLottoTicketNumbers(lottoTickets);
 

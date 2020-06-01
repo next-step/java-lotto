@@ -29,4 +29,9 @@ public class LottoStore {
 
         return new LottoTickets(lottoTickets);
     }
+
+    public LottoTickets buy(Money budget, LottoTickets manualLottoTickets) {
+
+        return null;
+    }
 }
