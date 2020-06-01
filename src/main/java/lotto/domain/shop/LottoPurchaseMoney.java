@@ -5,7 +5,7 @@ public class LottoPurchaseMoney {
     private final static int LOTTO_PRICE = 1000;
     private final static int ZERO_NUMBER = 0;
 
-    private final int money;
+    private int money;
 
     private LottoPurchaseMoney(int money) {
         validateMoney(money);
@@ -14,6 +14,12 @@ public class LottoPurchaseMoney {
 
     public static LottoPurchaseMoney input(int money) {
         return new LottoPurchaseMoney(money);
+    }
+
+    public LottoPurchaseMoney buyManualLottoTicket(int manualLottoTicketCount) {
+        this.money -= manualLottoTicketCount * LOTTO_PRICE;
+        validateMoney(money);
+        return LottoPurchaseMoney.input(manualLottoTicketCount * LOTTO_PRICE);
     }
 
     public int getLottoTicketCount() {

@@ -15,6 +15,13 @@ public class InputView {
         return LottoPurchaseMoney.input(money);
     }
 
+    public static LottoPurchaseMoney inputManualTicketCount(LottoPurchaseMoney lottoPurchaseMoney) {
+        System.out.println("수동으로 구매할 로또 수를 입력하세요");
+        Scanner scanner = new Scanner(System.in);
+        int ticketCount = scanner.nextInt();
+        return lottoPurchaseMoney.buyManualLottoTicket(ticketCount);
+    }
+
     public static LottoTicket inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
@@ -26,6 +33,4 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         return LottoNumber.create(scanner.nextInt());
     }
-
-
 }

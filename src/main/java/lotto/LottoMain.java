@@ -16,7 +16,11 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoService lottoService = new LottoService();
         LottoPurchaseMoney lottoPurchaseMoney = InputView.inputMoney();
-        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(lottoPurchaseMoney);
+
+        LottoPurchaseMoney changeLottoPurchaseMoney = InputView.inputManualTicketCount(lottoPurchaseMoney);
+
+
+        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(changeLottoPurchaseMoney);
 
         ResultView resultView = new ResultView();
         resultView.printLottoTicketList(lottoTicketList);
