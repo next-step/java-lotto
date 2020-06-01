@@ -12,6 +12,6 @@ public class ProfitRateCalculatorTest {
       "14000, 5000, 0.35"
   })
   void calculate(int expense, int income, double expected) {
-    assertThat(ProfitRateCalculator.calculate(income, expense)).isEqualTo(expected);
+    assertThat(ProfitRateCalculator.calculateByTwoDeicimalPlaces(income, expense)).isEqualTo(expected);
   }
 }
