@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -30,15 +31,15 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public int getMatchCount(List<LottoNumber> winningNumbers) {
+    public int getMatchCount(WinningNumbers winningNumbers) {
         return Math.toIntExact(this.numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningNumbers::hasNumber)
                 .count());
     }
 
     @Override
     public String toString() {
-        return "LottoNumber :: " + numbers;
+        return MessageFormat.format("LottoNumber :: {0}", numbers);
     }
 
     @Override

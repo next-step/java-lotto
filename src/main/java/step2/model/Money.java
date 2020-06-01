@@ -2,6 +2,7 @@ package step2.model;
 
 import step2.exception.NotEnoughMoneyException;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class Money {
@@ -56,10 +57,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money{" +
-                "totalAmount=" + totalAmount +
-                ", usedAmount=" + usedAmount +
-                '}';
+        return MessageFormat.format("총 금액:: {0}, 사용 금액:: {1}'}'", totalAmount, usedAmount);
     }
 
     @Override

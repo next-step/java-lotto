@@ -1,50 +1,54 @@
 package step2.model;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public enum LottoRank {
 
-    FIRST((count) -> count.equals(6), 2_000_000_000),
-    SECOND((count) -> count.equals(5), 1_500_000),
-    THIRD((count) -> count.equals(4), 50_000),
-    FOURTH((count) -> count.equals(3), 5_000),
-    MISS((count) -> count <= 2, 0);
+    MISS(0, 0),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
-    private final static EnumSet<LottoRank> WINNING_GROUP = EnumSet.of(
-            LottoRank.FIRST,
-            LottoRank.SECOND,
-            LottoRank.THIRD,
-            LottoRank.FOURTH
-    );
+    private final static List<LottoRank> WINNING_GROUP = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
 
-    private final Predicate<Integer> match;
+    private final int matchCount;
     private final int winningMoney;
 
-    LottoRank(Predicate<Integer> match, int winningMoney) {
-        this.match = match;
+    LottoRank(int matchCount, int winningMoney) {
+        this.matchCount = matchCount;
         this.winningMoney = winningMoney;
     }
 
     public static LottoRank findRank(int matchCount) {
-        return Arrays.stream(LottoRank.values())
+        return Arrays.stream(values())
                 .filter(lottoRank -> isMatch(matchCount, lottoRank))
                 .findFirst()
-                .orElse(LottoRank.MISS);
-    }
-
-    public static Set<LottoRank> getWinningGroup() {
-        return Collections.unmodifiableSet(WINNING_GROUP);
+                .orElse(MISS);
     }
 
     private static boolean isMatch(int matchCount, LottoRank lottoRank) {
-        return lottoRank.match.test(matchCount);
+        return lottoRank.getMatchCount() == matchCount;
+    }
+
+    public static List<LottoRank> getWinningRank() {
+        return Collections.unmodifiableList(WINNING_GROUP);
     }
 
     public int getWinningMoney() {
         return this.winningMoney;
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format("{0}개 일치 ({1}원)", matchCount, winningMoney);
     }
 }

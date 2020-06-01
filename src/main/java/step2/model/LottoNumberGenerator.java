@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    private static final List<LottoNumber> NUMBER_GROUP =
+    private static final List<LottoNumber> NUMBER_POOL =
             IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
                     .mapToObj(LottoNumber::valueOf)
                     .collect(Collectors.toList());
@@ -18,9 +18,9 @@ public class LottoNumberGenerator {
     }
 
     public static List<LottoNumber> generate() {
-        Collections.shuffle(NUMBER_GROUP);
+        Collections.shuffle(NUMBER_POOL);
 
-        return NUMBER_GROUP.stream()
+        return NUMBER_POOL.stream()
                 .limit(NUMBER_LIMIT_COUNT)
                 .collect(Collectors.toList());
     }
