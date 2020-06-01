@@ -1,8 +1,8 @@
 package study.lotto;
 
-import study.lotto.model.Lotto;
 import study.lotto.model.LottoList;
 import study.lotto.model.Statistics;
+import study.lotto.model.WinningLotto;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -19,7 +19,7 @@ public class LottoGame {
         ResultView.printLottoList(lottoList);
         ResultView.printEmptyLine();
 
-        Lotto winningLotto = Lotto.convertToLotto(InputView.scanWinningNumbers());
+        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(InputView.scanWinningNumbers());
 
         Statistics statistics = Statistics.createStatistics(totalPrice, lottoList, winningLotto);
 

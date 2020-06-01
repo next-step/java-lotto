@@ -22,7 +22,7 @@ public class Statistics {
         }
     }
 
-    public static Statistics createStatistics(int totalPrice, LottoList lottoList, Lotto winningLotto) {
+    public static Statistics createStatistics(int totalPrice, LottoList lottoList, WinningLotto winningLotto) {
         Statistics statistics = new Statistics(totalPrice, lottoList);
 
         statistics.calculateStatistics(winningLotto);
@@ -32,7 +32,7 @@ public class Statistics {
         return statistics;
     }
 
-    private void calculateStatistics(Lotto winningLotto) {
+    private void calculateStatistics(WinningLotto winningLotto) {
         lottoList.getLottoList()
                 .forEach(lotto -> {
                     LottoRank lottoRank = lotto.getPrize(winningLotto);

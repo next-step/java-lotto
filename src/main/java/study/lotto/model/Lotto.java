@@ -43,13 +43,13 @@ public class Lotto {
         return new ArrayList<>(LOTTO_NUMBER_BASE.subList(0, 6));
     }
 
-    public long compareToWinningNumbers(Lotto winningLotto) {
+    public long compareToWinningNumbers(WinningLotto winningLotto) {
         return lottoNumbers.stream()
                 .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
     }
 
-    public LottoRank getPrize(Lotto winningLotto) {
+    public LottoRank getPrize(WinningLotto winningLotto) {
         return LottoRank.find((int)compareToWinningNumbers(winningLotto));
     }
 
@@ -58,14 +58,5 @@ public class Lotto {
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList())
                 .toString();
-    }
-
-    public static Lotto convertToLotto(String[] winningNumbers) {
-        List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        return new Lotto(winningNumberList);
     }
 }
