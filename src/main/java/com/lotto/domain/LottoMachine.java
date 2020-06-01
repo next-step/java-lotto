@@ -19,10 +19,6 @@ public class LottoMachine {
         this.lottoView = lottoView;
     }
 
-    public void setLottoExtractor(LottoExtractor lottoExtractor) {
-        this.lottoExtractor = lottoExtractor;
-    }
-
     public List<Lotto> buyLotto() {
         Integer countOfLotto = this.lottoView.inputPurchaseAmountOfLotto();
         Integer countOfManualLotto = this.lottoView.inputCountOfManualLotto();
@@ -51,7 +47,7 @@ public class LottoMachine {
     }
 
     private List<Lotto> extractAutomaticLotto(Integer countOfLotto) {
-        setLottoExtractor(new ShuffleLottoExtractor());
+        this.lottoExtractor = new ShuffleLottoExtractor();
 
         List<Lotto> extractedLotto = new ArrayList<>();
         IntStream.range(0, countOfLotto).forEach(i -> {
@@ -64,7 +60,7 @@ public class LottoMachine {
 
     private List<Lotto> extractManualLotto(Integer countOfLotto) {
         this.lottoView.outputManualLottoMessage();
-        setLottoExtractor(new ManualLottoExtractor());
+        this.lottoExtractor = new ManualLottoExtractor();
 
         List<Lotto> extractedLotto = new ArrayList<>();
         IntStream.range(0, countOfLotto).forEach(i -> {
