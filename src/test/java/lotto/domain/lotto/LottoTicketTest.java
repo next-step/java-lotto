@@ -1,19 +1,31 @@
 package lotto.domain.lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
 
+    private List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void init() {
+        lottoNumbers = new ArrayList<>();
+        for (int i = 1; i < 7; i++) {
+            lottoNumbers.add(LottoNumber.create(i));
+        }
+    }
     @Test
     void LottoTicket_생성() {
-        LottoTicket lottoTicket = new LottoTicket();
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         int lottoNumberSize = 6;
         assertThat(lottoTicket.size()).isEqualTo(lottoNumberSize);
+        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(lottoNumbers);
     }
 
     @Test
@@ -27,5 +39,27 @@ public class LottoTicketTest {
 
         assertThat(newLottoTicket.size()).isEqualTo(lottoNumberSize);
         assertThat(winLottoTicket.matchLottoTicketCount(newLottoTicket)).isEqualTo(matchWinLottoTicketCount);
+    }
+
+    @Test
+    void hasBonusNumberTest_보너스넘버_있음() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(6));
+        assertThat(aBoolean).isTrue();
+    }
+
+    @Test
+    void hasBonusNumberTest_보너스넘버_없음() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(8));
+        assertThat(aBoolean).isFalse();
+    }
+
+    @Test
+    void matchLottoTicketCountTest() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket randomLottoTicket = new LottoTicket();
+        int matchLottoTicketCount = lottoTicket.matchLottoTicketCount(randomLottoTicket);
+        assertThat(matchLottoTicketCount).isBetween(0, 6);
     }
 }

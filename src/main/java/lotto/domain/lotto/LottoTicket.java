@@ -16,6 +16,10 @@ public class LottoTicket {
         lottoNumbers = LottoTicketGenerator.makeLottoTicket();
     }
 
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
     public LottoTicket(String inputValue) {
         String[] splitNumbers = inputValue.split(",");
         validateNumber(splitNumbers);
