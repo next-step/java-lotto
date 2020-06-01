@@ -17,8 +17,14 @@ public class LottoStore {
         this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
+    public LottoTickets buy(Money budget, LottoTickets manualLottoTickets) {
+        Money currentMoney = budget.spend(LOTTO_TICKET_PRICE.multiply(manualLottoTickets.count()));
+        LottoTickets autoLottoTickets = buy(currentMoney);
 
-    public LottoTickets buy(final Money budget) {
+        return manualLottoTickets.combine(autoLottoTickets);
+    }
+
+    private LottoTickets buy(final Money budget) {
         Money currentMoney = budget;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
@@ -28,10 +34,5 @@ public class LottoStore {
         }
 
         return new LottoTickets(lottoTickets);
-    }
-
-    public LottoTickets buy(Money budget, LottoTickets manualLottoTickets) {
-
-        return null;
     }
 }

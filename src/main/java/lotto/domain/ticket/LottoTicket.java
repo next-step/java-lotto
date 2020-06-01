@@ -6,7 +6,7 @@ import java.util.Set;
 
 import static lotto.domain.LottoGameProperty.COUNT_OF_LOTTO_NUMBER;
 
-public class LottoTicket {
+public abstract class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(final Set<LottoNumber> lottoNumbers) {
@@ -28,5 +28,12 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public abstract LottoTicketType getType();
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumbers);
     }
 }

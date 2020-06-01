@@ -26,6 +26,9 @@ public class InputView {
 
     public static ManualLottoNumberRequestDto askManualTicketNumbers(int numberOfManualLottoTicket) {
         List<ManualLottoNumbers> manualLottoNumbers = new ArrayList<>();
+        if (numberOfManualLottoTicket > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
         for (int i = 0; i < numberOfManualLottoTicket; i++) {
             manualLottoNumbers.add(new ManualLottoNumbers(SCANNER.nextLine()));
         }
