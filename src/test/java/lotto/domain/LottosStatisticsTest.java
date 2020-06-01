@@ -48,6 +48,6 @@ public class LottosStatisticsTest {
                 .add(BigDecimal.valueOf(1500000));
 
         assertThat(statistics.getRateOfReturnAmount())
-                .isEqualTo(totalAmount.divide(BigDecimal.valueOf(buyMoney), 2, RoundingMode.HALF_UP).toString());
+                .isEqualTo(totalAmount.divide(BigDecimal.valueOf(buyMoney), 2, RoundingMode.HALF_UP).floatValue());
     }
 }

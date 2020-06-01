@@ -37,7 +37,7 @@ public class LottosStatistics {
         countByRank.put(lottoRank, ++count);
     }
 
-    public String getRateOfReturnAmount() {
-        return rateOfReturnAmount.toString();
+    public float getRateOfReturnAmount() {
+        return rateOfReturnAmount.floatValue();
     }
 }
