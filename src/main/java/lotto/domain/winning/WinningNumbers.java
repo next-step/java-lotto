@@ -1,6 +1,5 @@
 package lotto.domain.winning;
 
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
 import java.util.Arrays;
@@ -28,8 +27,13 @@ public class WinningNumbers {
         return winningLottoNumbers;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.winningLottoNumbers.contains(lottoNumber);
+    public int matchCount(LottoNumbers lottoNumbers) {
+        return Math.toIntExact(
+                this.winningLottoNumbers.getNumbers()
+                        .stream()
+                        .filter(winningNumber -> lottoNumbers.getNumbers().contains(winningNumber))
+                        .count()
+        );
     }
 
     @Override

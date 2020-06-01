@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("WinningStatistics 클래스 테스트")
 public class WinningStatisticsTest {
     String winningNumberString = "1,2,3,4,5,6";
+    LottoNumber bonusLottoNumber = new LottoNumber(7);
 
     @DisplayName("WinningStatistics 객체를 생성할 수 있다.")
     @Test
@@ -27,7 +28,7 @@ public class WinningStatisticsTest {
         Price price = new Price(2000);
         LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -41,7 +42,7 @@ public class WinningStatisticsTest {
         Price price = new Price(2000);
         LottoTicket lottoTicket = new LottoTicket(price, new NotMatchNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -56,12 +57,12 @@ public class WinningStatisticsTest {
         winningNumberString = "1,2,3,13,14,15";
         LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString));
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         BigDecimal profit = winningStatistics.calculateProfit();
 
-        assertThat(profit).isEqualTo(new DecimalFormat("#,##0.00").format(LottoRank.FOURTH.getWinningMoney() / price.getPrice()));
+        assertThat(profit).isEqualTo(new DecimalFormat("#,##0.00").format(LottoRank.FIFTH.getWinningMoney() / price.getPrice()));
     }
 
     private static class NotMatchNumberGenerator implements NumberGenerator<LottoNumber> {

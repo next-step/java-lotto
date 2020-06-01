@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import lotto.domain.generator.FixedNumberGenerator;
+import lotto.domain.generator.NumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
@@ -18,19 +20,23 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.getWinningLottoNumbers().getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 
-    @DisplayName("로또 번호를 포함하는지 확인할 수 있다.")
-    @Test
-    void contains() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-
-        boolean contains = winningNumbers.contains(lottoNumber);
-
-        assertThat(contains).isTrue();
-    }
-
     @DisplayName("equals 메소드 테스트")
     @Test
     void equals() {
         assertThat(winningNumbers.equals(new WinningNumbers(winningNumberString))).isTrue();
+    }
+
+    @DisplayName("LottoNumbers 비교하여 존재하는 갯수를 리턴할 수 있다.")
+    @Test
+    void matchCount() {
+        String winningNumberString = "1,2,3,4,5,6";
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+
+        NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
+        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
+
+        int matchCount = winningNumbers.matchCount(lottoNumbers);
+
+        assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
     }
 }

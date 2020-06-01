@@ -1,7 +1,6 @@
 package lotto.domain.number;
 
 import lotto.domain.generator.NumberGenerator;
-import lotto.domain.winning.WinningNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,20 +57,16 @@ public class LottoNumbers {
         }
     }
 
-    public int matchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(
-                this.numbers.stream()
-                        .filter(winningNumbers::contains)
-                        .count()
-        );
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
-    }
-
     public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public int matchCount(LottoNumber bonusLottoNumber) {
+        return Math.toIntExact(
+                this.numbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
+                .count()
+        );
     }
 
     @Override
