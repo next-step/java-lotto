@@ -44,7 +44,7 @@ public class OutputView {
 
     private static String getStringWinningLottoResult(LottoRank lottoRank, LottosStatistics lottosStatistics) {
         return new StringBuilder()
-                .append(lottoRank.getContainCountsSameWinningNumber())
+                .append(lottoRank.getMatchCount())
                 .append(TEXT.STATISTICS_CONTAIN_WINNING_NUMBER)
                 .append(lottoRank.isBonus() ? TEXT.STATISTICS_CONTAIN_BONUS : TEXT.SPACE)
                 .append(TEXT.PARENTHESIS_LEFT)
