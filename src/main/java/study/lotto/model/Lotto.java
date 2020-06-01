@@ -1,7 +1,6 @@
 package study.lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +43,8 @@ public class Lotto {
     }
 
     public long compareToWinningNumbers(WinningLotto winningLotto) {
-        return lottoNumbers.stream()
+        return lottoNumbers
+                .stream()
                 .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
     }
@@ -54,7 +54,8 @@ public class Lotto {
     }
 
     public String toString() {
-        return lottoNumbers.stream()
+        return lottoNumbers
+                .stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList())
                 .toString();

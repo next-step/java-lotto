@@ -4,8 +4,6 @@ import study.lotto.model.LottoList;
 import study.lotto.model.LottoRank;
 import study.lotto.model.Statistics;
 
-import java.util.Arrays;
-
 public class ResultView {
 
     public static void printPurchaseMessage(int numOfLotto) {
@@ -30,7 +28,7 @@ public class ResultView {
                                     statistics.getStatistics().get(lottoRank)))
                 );
 
-        System.out.println("총 수익률은 " + String.format("%.2f", statistics.getEarningRate()) + "입니다.");
+        System.out.println(String.format("총 수익률은 %.2f 입니다.", statistics.getEarningRate()));
     }
 
     public static void printEmptyLine() {

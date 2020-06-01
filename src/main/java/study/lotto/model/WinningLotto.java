@@ -19,9 +19,9 @@ public class WinningLotto {
 
     public static WinningLotto convertToWinningLotto(String[] winningNumbers) {
         List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                                                .map(Integer::parseInt)
+                                                .map(LottoNumber::new)
+                                                .collect(Collectors.toList());
 
         return new WinningLotto(winningNumberList);
     }

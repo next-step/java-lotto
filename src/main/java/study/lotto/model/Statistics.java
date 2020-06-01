@@ -45,7 +45,10 @@ public class Statistics {
     }
 
     private void calculateTotalEarning() {
-        totalEarning = statistics.keySet().stream().map(prize -> prize.getPrize() * statistics.get(prize)).mapToInt(Integer::intValue).sum();
+        totalEarning = statistics.keySet()
+                .stream()
+                .map(prize -> prize.getPrize() * statistics.get(prize))
+                .mapToInt(Integer::intValue).sum();
     }
 
     public int getTotalEarning() {
