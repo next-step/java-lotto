@@ -1,48 +1,51 @@
 package step2.view;
 
-import step2.model.*;
-
-import java.text.MessageFormat;
+import step2.model.LottoTicket;
+import step2.model.LottoTickets;
+import step2.model.MatchReport;
+import step2.model.MatchResult;
 
 public class ResultView {
+
+    private static final String LINE_FEED = System.lineSeparator();
+    private static final String TICKET_UNIT = "개";
 
     private ResultView() {
     }
 
     public static void printTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getTicketCount() + "장을 구매했습니다.");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder
+                .append(lottoTickets.getTicketCount())
+                .append("장을 구매했습니다.")
+                .append(LINE_FEED);
 
         lottoTickets.getLottoTickets().stream()
                 .map(LottoTicket::toString)
-                .forEach(System.out::println);
+                .forEach(stringBuilder::append);
+
+        System.out.println(stringBuilder.toString());
     }
 
     public static void printMatchResult(MatchResult matchResult) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("당첨 통계").append(LINE_FEED);
+        stringBuilder.append("---------").append(LINE_FEED);
 
         matchResult.getWinningResult().forEach((lottoRank, matchCount) -> {
-            System.out.println(MessageFormat.format("{0}-{1}개", lottoRank.toString(), matchCount));
+            stringBuilder
+                    .append(lottoRank.toString())
+                    .append(matchCount)
+                    .append(TICKET_UNIT)
+                    .append(LINE_FEED);
         });
+
+        System.out.println(stringBuilder.toString());
     }
 
-//    public static void printWinningStatistics(LottoTickets lottoTickets, List<LottoNumber> winningNumbers) {
-//        System.out.println("당첨 통계");
-//        System.out.println("---------");
-//
-//        MatchResult matchResult = lottoTickets.calculateLottoRankCount(winningNumbers);
-//        LottoRank.getWinningGroup().forEach(lottoRank -> {
-//            int matchCount = matchResult.findCount(lottoRank);
-//            System.out.println(lottoRank.getWinningMoney() + "원 - " + matchCount + "개");
-//        });
-//    }
-//
-//    public static void printRateOfReturn(LottoTickets lottoTickets, List<LottoNumber> winningNumbers, Money money) {
-//        int winningMoney = lottoTickets.calculateWinningMoney(winningNumbers);
-//
-//        BigDecimal rateOfReturn = BigDecimal.valueOf(winningMoney)
-//                .divide(BigDecimal.valueOf(money.getUsedAmount()), 2, RoundingMode.DOWN);
-//
-//        System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
-//    }
+    public static void printRateOfReturn(MatchReport matchReport) {
+        System.out.println("총 수익률은 " + matchReport.calculateRateOfReturn() + "입니다.");
+    }
 }

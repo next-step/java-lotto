@@ -33,4 +33,10 @@ public class MatchResult {
         return LottoRank.getWinningRank().stream()
                 .collect(Collectors.toMap(Function.identity(), matchResult::get));
     }
+
+    public int calculateTotalWinningMoney() {
+        return this.getWinningResult().entrySet().stream()
+                .map(entry -> entry.getKey().getWinningMoney() * entry.getValue())
+                .reduce(0, Integer::sum);
+    }
 }

@@ -15,11 +15,11 @@ public class LottoApplication {
         ResultView.printTickets(lottoTickets);
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();
-        MatchResult matchResult = winningNumbers.calculateMatchResult(lottoTickets);
 
+        MatchResult matchResult = winningNumbers.calculateMatchResult(lottoTickets);
         ResultView.printMatchResult(matchResult);
 
-        //ResultView.printWinningStatistics(lottoTickets, winningNumbers);
-        //ResultView.printRateOfReturn(lottoTickets, winningNumbers, purchaseMoney);
+        MatchReport matchReport = MatchReport.create(purchaseMoney, matchResult);
+        ResultView.printRateOfReturn(matchReport);
     }
 }

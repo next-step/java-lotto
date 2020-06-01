@@ -8,6 +8,10 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
+        if (lottoTickets == null) {
+            throw new IllegalArgumentException();
+        }
+
         this.lottoTickets = lottoTickets;
     }
 
@@ -21,13 +25,5 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(this.lottoTickets);
-    }
-
-    public int calculateWinningMoney(WinningNumbers winningNumbers) {
-        return this.lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.getMatchCount(winningNumbers))
-                .map(LottoRank::findRank)
-                .map(LottoRank::getWinningMoney)
-                .reduce(0, Integer::sum);
     }
 }
