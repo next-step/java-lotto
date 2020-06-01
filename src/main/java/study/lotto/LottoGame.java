@@ -21,10 +21,12 @@ public class LottoGame {
 
         WinningLotto winningLotto = WinningLotto.convertToWinningLotto(InputView.scanWinningNumbers());
 
-        Statistics statistics = Statistics.createStatistics(totalPrice, lottoList, winningLotto);
+        Statistics statistics = new Statistics(lottoList);
+        statistics.calculateStatistics(winningLotto);
 
         ResultView.printEmptyLine();
         ResultView.printStatistics(statistics);
+        ResultView.printEarningRate(statistics.calculateEarningRate(totalPrice));
     }
 
     public static void main(String[] args) {

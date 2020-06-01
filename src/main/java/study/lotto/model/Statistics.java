@@ -1,38 +1,23 @@
 package study.lotto.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    private final int totalPrice;
     private final LottoList lottoList;
-    private final Map<LottoRank, Integer> statistics;
+    private final Map<LottoRank, Integer> statistics = new HashMap<>();
 
-    private int totalEarning = 0;
-    private float earningRate = 0;
-
-    private Statistics(int totalPrice, LottoList lottoList) {
-        this.totalPrice = totalPrice;
+    public Statistics(LottoList lottoList) {
         this.lottoList = lottoList;
 
-        statistics = new HashMap<>();
-
-        for(LottoRank lottoRank : LottoRank.class.getEnumConstants()) {
+        for(LottoRank lottoRank : LottoRank.values()) {
             statistics.put(lottoRank, 0);
         }
     }
 
-    public static Statistics createStatistics(int totalPrice, LottoList lottoList, WinningLotto winningLotto) {
-        Statistics statistics = new Statistics(totalPrice, lottoList);
-
-        statistics.calculateStatistics(winningLotto);
-        statistics.calculateTotalEarning();
-        statistics.calculateEarningRate();
-
-        return statistics;
-    }
-
-    private void calculateStatistics(WinningLotto winningLotto) {
+    public void calculateStatistics(WinningLotto winningLotto) {
         lottoList.getLottoList()
                 .forEach(lotto -> {
                     LottoRank lottoRank = lotto.getPrize(winningLotto);
@@ -40,23 +25,17 @@ public class Statistics {
                 });
     }
 
-    private void calculateEarningRate() {
-        earningRate = totalEarning / (float)totalPrice;
+    public BigDecimal calculateEarningRate(int totalPrice) {
+        BigDecimal totalEarning = new BigDecimal(calculateTotalEarning());
+
+        return totalEarning.divide(new BigDecimal(totalPrice), 10, RoundingMode.HALF_EVEN);
     }
 
-    private void calculateTotalEarning() {
-        totalEarning = statistics.keySet()
+    private int calculateTotalEarning() {
+        return statistics.keySet()
                 .stream()
                 .map(prize -> prize.getPrize() * statistics.get(prize))
                 .mapToInt(Integer::intValue).sum();
-    }
-
-    public int getTotalEarning() {
-        return totalEarning;
-    }
-
-    public float getEarningRate() {
-        return earningRate;
     }
 
     public Map<LottoRank, Integer> getStatistics() {

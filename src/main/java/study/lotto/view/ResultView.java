@@ -4,7 +4,12 @@ import study.lotto.model.LottoList;
 import study.lotto.model.LottoRank;
 import study.lotto.model.Statistics;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+
 public class ResultView {
+    private static final int EARNING_RATE_SCALE = 2;
 
     public static void printPurchaseMessage(int numOfLotto) {
         System.out.println(numOfLotto + "개를 구매했습니다.");
@@ -27,8 +32,14 @@ public class ResultView {
                                     lottoRank.getPrize(),
                                     statistics.getStatistics().get(lottoRank)))
                 );
+    }
 
-        System.out.println(String.format("총 수익률은 %.2f 입니다.", statistics.getEarningRate()));
+    public static void printEarningRate(BigDecimal earningRate) {
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(EARNING_RATE_SCALE);
+        format.setRoundingMode(RoundingMode.HALF_EVEN);
+
+        System.out.println(String.format("총 수익률은 %s 입니다.", format.format(earningRate)));
     }
 
     public static void printEmptyLine() {
