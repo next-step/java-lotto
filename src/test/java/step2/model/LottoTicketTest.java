@@ -35,6 +35,18 @@ public class LottoTicketTest {
         );
     }
 
+    @DisplayName("create() 정적 생성자는 중복 번호가 존재하면 예외를 발생한다.")
+    @Test
+    void create_LottoNumbers_ExceptionThrown() {
+        int duplicateNumber = 1;
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(i -> LottoNumber.valueOf(duplicateNumber))
+                .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> LottoTicket.create(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("getLottoNumbers() 메소드는 입력한 로또번호 리스트를 반환한다")
     @Test
     void getLottoNumbers_None_LottoNumbers() {

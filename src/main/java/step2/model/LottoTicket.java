@@ -2,6 +2,7 @@ package step2.model;
 
 import java.text.MessageFormat;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,11 +17,19 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 6개만 입력 가능합니다.");
         }
 
+        if (isDuplicateExist(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+
         this.numbers = numbers;
     }
 
     private boolean isInvalidCount(List<LottoNumber> numbers) {
         return numbers == null || numbers.size() != ALLOWED_LOTTO_NUMBER_COUNT;
+    }
+
+    private boolean isDuplicateExist(List<LottoNumber> numbers) {
+        return new HashSet<>(numbers).size() != ALLOWED_LOTTO_NUMBER_COUNT;
     }
 
     public static LottoTicket create(List<LottoNumber> lottoNumbers) {
