@@ -24,10 +24,11 @@ public class ResultView {
         System.out.println("총 수익률은 " + lottoRevenueCalculator.getRevenueRate() + " 입니다.");
     }
 
-    public void printLottoTicketList(List<LottoTicket> lottoTicketList) {
-        System.out.println(lottoTicketList.size() + "개를 구매했습니다.");
+    public void printLottoTicketList(List<LottoTicket> autoLottoTicketList, List<LottoTicket> manualLottoTicketList) {
+        System.out.println("수동으로 " + manualLottoTicketList.size() + "장, 자동으로 " + autoLottoTicketList.size() + "개를 구매했습니다.");
 
-        lottoTicketList.stream()
+        manualLottoTicketList.addAll(autoLottoTicketList);
+        manualLottoTicketList.stream()
                 .forEach(lottoTicket -> printLottoNumbers(lottoTicket));
 
         System.out.println();

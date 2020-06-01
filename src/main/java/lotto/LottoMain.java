@@ -17,19 +17,20 @@ public class LottoMain {
         LottoService lottoService = new LottoService();
         LottoPurchaseMoney lottoPurchaseMoney = InputView.inputMoney();
 
-        LottoPurchaseMoney changeLottoPurchaseMoney = InputView.inputManualTicketCount(lottoPurchaseMoney);
+        LottoPurchaseMoney manualLottoPurchaseMoney = InputView.inputManualTicketCount(lottoPurchaseMoney);
 
-
-        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(changeLottoPurchaseMoney);
+        List<LottoTicket> manualLottoTicketList = InputView.inputLottoTicketNumber(manualLottoPurchaseMoney);
+        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(lottoPurchaseMoney);
 
         ResultView resultView = new ResultView();
-        resultView.printLottoTicketList(lottoTicketList);
+        resultView.printLottoTicketList(lottoTicketList, manualLottoTicketList);
 
         LottoTicket winLottoTicket = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
+        manualLottoTicketList.addAll(lottoTicketList);
         LottoRankCalculator lottoRankCalculator = new LottoRankCalculator(winLottoTicket, bonusNumber);
-        List<LottoRank> lottoRankList = lottoService.matchLottoTicket(lottoTicketList, lottoRankCalculator);
+        List<LottoRank> lottoRankList = lottoService.matchLottoTicket(manualLottoTicketList, lottoRankCalculator);
         resultView.printMatchResult(lottoRankList);
     }
 }
