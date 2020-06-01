@@ -20,7 +20,7 @@ public class WinningLotto {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return LottoNumbers.newLottoNumbersWithList(winningNumbers);
+        return LottoNumbers.manualLottoNumber(winningNumbers);
     }
 
     public LottoNumbers getWinningLottoNumbers() {

@@ -15,7 +15,7 @@ public class LottoNumbersTest {
     @DisplayName("NumberGenerator 타입을 주입 받아 LottoNumbers 객체를 생성할 수 있다.")
     @Test
     void createLottoNumbers() {
-        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new LottoNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbers.autoLottoNumber(new LottoNumberGenerator());
 
         assertThat(lottoNumbers.getNumbers()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
@@ -24,7 +24,7 @@ public class LottoNumbersTest {
     @Test
     void validateLottoNumbersLength() {
         assertThatExceptionOfType(LottoNumbersLengthException.class)
-                .isThrownBy(() -> LottoNumbers.newLottoNumbersWithList(Arrays.asList(1, 2, 3, 4, 5)))
+                .isThrownBy(() -> LottoNumbers.manualLottoNumber(Arrays.asList(1, 2, 3, 4, 5)))
                 .withMessage(LottoNumbersLengthException.MESSAGE);
     }
 
@@ -32,7 +32,7 @@ public class LottoNumbersTest {
     @Test
     void validateLottoNumberDuplicate() {
         assertThatExceptionOfType(LottoNumbersDuplicateException.class)
-                .isThrownBy(() -> LottoNumbers.newLottoNumbersWithList(Arrays.asList(1, 2, 2, 3, 4, 5)))
+                .isThrownBy(() -> LottoNumbers.manualLottoNumber(Arrays.asList(1, 2, 2, 3, 4, 5)))
                 .withMessage(LottoNumbersDuplicateException.MESSAGE);
     }
 
@@ -40,7 +40,7 @@ public class LottoNumbersTest {
     @Test
     void matchCount() {
         LottoNumber bonusLottoNumber = new LottoNumber(1);
-        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(new FixedNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbers.autoLottoNumber(new FixedNumberGenerator());
 
         int actual = lottoNumbers.matchCount(bonusLottoNumber);
 

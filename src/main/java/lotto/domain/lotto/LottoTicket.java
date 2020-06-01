@@ -22,7 +22,7 @@ public class LottoTicket {
 
     private List<LottoNumbers> createLottoTicket(Price price, NumberGenerator<LottoNumber> generator) {
         return IntStream.range(0, price.getLottoCount())
-                .mapToObj(i -> LottoNumbers.newLottoNumbersWithNumberGenerator(generator))
+                .mapToObj(i -> LottoNumbers.autoLottoNumber(generator))
                 .collect(Collectors.toList());
     }
 

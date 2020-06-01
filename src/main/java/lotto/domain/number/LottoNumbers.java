@@ -16,11 +16,11 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers newLottoNumbersWithNumberGenerator(NumberGenerator<LottoNumber> generator) {
+    public static LottoNumbers autoLottoNumber(NumberGenerator<LottoNumber> generator) {
         return new LottoNumbers(createLottoNumbers(generator));
     }
 
-    public static LottoNumbers newLottoNumbersWithList(List<Integer> numbers) {
+    public static LottoNumbers manualLottoNumber(List<Integer> numbers) {
         return new LottoNumbers(createLottoNumbersThroughInteger(numbers));
     }
 

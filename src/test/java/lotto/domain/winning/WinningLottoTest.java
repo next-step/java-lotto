@@ -33,7 +33,7 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(winningNumberString);
 
         NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
-        LottoNumbers lottoNumbers = LottoNumbers.newLottoNumbersWithNumberGenerator(fixedNumberGenerator);
+        LottoNumbers lottoNumbers = LottoNumbers.autoLottoNumber(fixedNumberGenerator);
 
         int matchCount = winningLotto.matchCount(lottoNumbers);
 
