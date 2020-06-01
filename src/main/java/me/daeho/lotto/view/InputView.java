@@ -22,4 +22,9 @@ public class InputView {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
+
+    public static LottoNumber bonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return LottoNumber.of(new Scanner(System.in).nextInt());
+    }
 }

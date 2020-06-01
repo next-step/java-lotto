@@ -24,6 +24,10 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
+    public int containsCount(LottoNumber ... checkNumbers) {
+        return containsCount(Arrays.asList(checkNumbers));
+    }
+
     public int containsCount(List<LottoNumber> checkNumbers) {
         return (int) checkNumbers.stream()
                 .filter(numbers::contains)
