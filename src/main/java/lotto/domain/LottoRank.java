@@ -30,7 +30,7 @@ public enum LottoRank {
     }
 
     public static LottoRank getRank(int containCount, boolean isBonus) {
-        return lottoRanks.stream()
+        return Arrays.stream(values())
                 .filter(lotto -> lotto.isBonus == isBonus)
                 .filter(lotto -> lotto.getMatchCount() == containCount)
                 .findFirst()
