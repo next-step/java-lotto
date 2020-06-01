@@ -11,6 +11,8 @@ public class LottoNumbers {
     LottoValidationUtils.checkLottoNumberSize(numbers);
     LottoValidationUtils.checkLottoNumberRange(numbers);
 
+    numbers.sort(Integer::compareTo);
+
     this.numbers = new ArrayList<>(numbers);
   }
 

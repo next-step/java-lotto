@@ -22,4 +22,18 @@ public class WinningNumbers {
   public LottoNumbers getNumbers() {
     return numbers;
   }
+
+  public PrizeTier getPrizeTier(LottoNumbers numbers) {
+    int matchCnt = 0;
+
+    for (Integer number : numbers.values()) {
+      matchCnt += isMatchedToWinningNumber(number) ? 1 : 0;
+    }
+
+    return PrizeTierMapper.INSTANCE.getPrizeTierByMatchCnt(matchCnt);
+  }
+
+  private boolean isMatchedToWinningNumber(Integer number) {
+    return this.numbers.values().contains(number);
+  }
 }
