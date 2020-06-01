@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.dto.LottoRequestDto;
+import lotto.dto.WinningLottoDto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 public class InputView {
 
     private static final int PRICE_UNIT = 1000;
-    private static final String SEPARATOR = ",";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -27,7 +26,24 @@ public class InputView {
         throw new AssertionError();
     }
 
-    public static int inputLottoAmount() {
+
+    public static LottoRequestDto inputAmountAndLottoNumber() {
+        int amount = inputLottoAmount();
+        int manualLottoAmount = inputManualLottoAmount();
+        int autoLottoAmount = amount - manualLottoAmount;
+
+        List<String> manualLottoNumbers = inputManualLottoNumbers(manualLottoAmount);
+
+        return new LottoRequestDto(autoLottoAmount, manualLottoNumbers);
+    }
+
+    public static WinningLottoDto inputWinningLottoNumber(){
+        String winningNumber = inputWinningNumbers();
+        int bonusNumber = inputBonusNumber();
+        return new WinningLottoDto(winningNumber, bonusNumber);
+    }
+
+    private static int inputLottoAmount() {
         System.out.println(PURCHASE_PRICE_MESSAGE);
 
         int price = SCANNER.nextInt();
@@ -37,48 +53,33 @@ public class InputView {
         return amount;
     }
 
-    public static int inputManualLottoAmount() {
+    private static int inputManualLottoAmount() {
         System.out.println(PURCHASE_MANUAL_AMOUNT_MESSAGE);
         int amount = SCANNER.nextInt();
         System.out.println();
         return amount;
     }
 
-    public static Set<LottoNumber> inputWinningNumbers() {
-        System.out.println(WINNING_NUMBER_MESSAGE);
-
-        String winningNumbers = SCANNER.next();
-
-        return Arrays.stream(winningNumbers.split(SEPARATOR))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-    }
-
-    public static int inputBonusNumber() {
-        System.out.println(BONUS_BALL_MESSAGE);
-        int bonusNumber = SCANNER.nextInt();
-        System.out.println();
-        return bonusNumber;
-    }
-
-    public static List<LottoNumbers> inputManualLottoNumbers(int amount) {
+    private static List<String> inputManualLottoNumbers(int amount) {
         System.out.println(PURCHASE_MANUAL_NUMBER_MESSAGE);
 
-        List<LottoNumbers> lottoNumbers = IntStream.range(0, amount)
-            .mapToObj(value -> convertToIntArray(SCANNER.next()))
-            .map(LottoNumbers::of)
-            .collect(Collectors.toList());
+        List<String> lottoNumbers = IntStream.range(0, amount)
+                .mapToObj(value -> SCANNER.next())
+                .collect(Collectors.toList());
 
         System.out.println();
         return lottoNumbers;
     }
 
-    private static int[] convertToIntArray(String input) {
-        return Arrays.stream(input.split(SEPARATOR))
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+    private static String inputWinningNumbers() {
+        System.out.println(WINNING_NUMBER_MESSAGE);
+        return SCANNER.next();
+    }
+
+    private static int inputBonusNumber() {
+        System.out.println(BONUS_BALL_MESSAGE);
+        int bonusNumber = SCANNER.nextInt();
+        System.out.println();
+        return bonusNumber;
     }
 }

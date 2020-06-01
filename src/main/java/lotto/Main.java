@@ -4,11 +4,12 @@ import lotto.domain.*;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketAutoGenerator;
 import lotto.domain.ticket.LottoTicketManualGenerator;
+import lotto.dto.LottoRequestDto;
+import lotto.dto.WinningLottoDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Set;
 
 public class Main {
 
@@ -17,20 +18,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int amount = InputView.inputLottoAmount();
-        int manualLottoAmount = InputView.inputManualLottoAmount();
-        int autoLottoAmount = amount - manualLottoAmount;
+        LottoRequestDto lottoInputDto = InputView.inputAmountAndLottoNumber();
 
-        List<LottoNumbers> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoAmount);
-
-        List<LottoTicket> lottoTickets = lottoShop.buy(manualLottoNumbers, autoLottoAmount);
+        List<LottoTicket> lottoTickets = lottoShop.buy(lottoInputDto.getManualLottoNumbers(), lottoInputDto.getAutoAmount());
         ResultView.printBuyingTickets(lottoTickets);
 
-        Set<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        WinningLottoDto winningLottoDto = InputView.inputWinningLottoNumber();
 
         int round = 1;
-        lottoGame.add(round, winningNumbers, bonusNumber);
+        lottoGame.add(round, winningLottoDto.getWinningLottoNumber(), winningLottoDto.getBonusNumber());
 
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lottoGame, lottoTickets);
         List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicketRank(round);
