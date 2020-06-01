@@ -1,7 +1,7 @@
 package lotto.domain.winning;
 
-import lotto.domain.generator.FixedNumberGenerator;
-import lotto.domain.generator.NumberGenerator;
+import lotto.domain.lotto.generator.FixedNumberGenerator;
+import lotto.domain.number.generator.NumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;

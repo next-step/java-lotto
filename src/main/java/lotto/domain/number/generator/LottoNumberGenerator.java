@@ -1,7 +1,9 @@
-package lotto.domain.generator;
+package lotto.domain.number.generator;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.generator.LottoNumberList;
+import lotto.domain.number.generator.NumberGenerator;
 
 import java.util.Collections;
 import java.util.List;

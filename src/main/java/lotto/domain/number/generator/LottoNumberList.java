@@ -1,4 +1,4 @@
-package lotto.domain.generator;
+package lotto.domain.number.generator;
 
 import lotto.domain.number.LottoNumber;
 

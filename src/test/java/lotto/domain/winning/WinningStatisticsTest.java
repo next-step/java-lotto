@@ -1,7 +1,7 @@
 package lotto.domain.winning;
 
-import lotto.domain.generator.FixedNumberGenerator;
-import lotto.domain.generator.NumberGenerator;
+import lotto.domain.lotto.generator.FixedNumberGenerator;
+import lotto.domain.number.generator.NumberGenerator;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
