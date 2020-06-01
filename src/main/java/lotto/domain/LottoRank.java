@@ -37,8 +37,13 @@ public enum LottoRank {
                 .orElse(BOOM);
     }
 
-    public static List<LottoRank> getWinningLotto() {
-        return List.of(RANK1, RANK2, RANK3, RANK4, RANK5);
+    public static List<LottoRank> getWinningLotto(boolean ascending) {
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.getContainCountsSameWinningNumber() > BOOM.getContainCountsSameWinningNumber())
+                .sorted((o1, o2) ->
+                    ascending ? o2.getWinningAmount().subtract(o1.getWinningAmount()).intValue() :
+                            o1.getWinningAmount().subtract(o2.getWinningAmount()).intValue())
+                .collect(Collectors.toList());
     }
 
     public int getContainCountsSameWinningNumber() {

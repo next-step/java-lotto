@@ -36,11 +36,13 @@ class LottoRankTest {
         assertThat(LottoRank.BOOM.getWinningAmount()).isEqualTo(BigDecimal.ZERO);
     }
 
-    @DisplayName("당첨된 LottoRank 만 리턴한다")
+    @DisplayName("당첨된 LottoRank 만 정렬 순서에 맞게 리턴한다")
     @Test
     void getWinningLottoTest() {
-        List<LottoRank> lottoRanks = LottoRank.getWinningLotto();
+        List<LottoRank> lottoRanksAsc = LottoRank.getWinningLotto(true);
+        assertThat(lottoRanksAsc).containsSequence(LottoRank.RANK1, LottoRank.RANK2, LottoRank.RANK3, LottoRank.RANK4, LottoRank.RANK5);
 
-        assertThat(lottoRanks).containsOnly(LottoRank.RANK1, LottoRank.RANK2, LottoRank.RANK3, LottoRank.RANK4, LottoRank.RANK5);
+        List<LottoRank> lottoRanksDesc = LottoRank.getWinningLotto(false);
+        assertThat(lottoRanksDesc).containsSequence(LottoRank.RANK5, LottoRank.RANK4, LottoRank.RANK3, LottoRank.RANK2, LottoRank.RANK1);
     }
 }
