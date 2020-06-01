@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketAutoGenerator;
-import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTicketManualGenerator;
 
 import java.util.List;
@@ -12,8 +11,8 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
 
-    private final LottoTicketGenerator lottoTicketManualGenerator;
-    private final LottoTicketGenerator lottoTicketAutoGenerator;
+    private final LottoTicketManualGenerator lottoTicketManualGenerator;
+    private final LottoTicketAutoGenerator lottoTicketAutoGenerator;
 
     public LottoShop(LottoTicketManualGenerator lottoTicketManualGenerator,
                      LottoTicketAutoGenerator lottoTicketAutoGenerator) {
@@ -32,7 +31,7 @@ public class LottoShop {
                 .collect(toList());
     }
 
-    public List<LottoTicket> buyFromManualGenerator(List<LottoNumbers> manualLottoNumbers) {
+    private List<LottoTicket> buyFromManualGenerator(List<LottoNumbers> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .map(lottoTicketManualGenerator::generate)

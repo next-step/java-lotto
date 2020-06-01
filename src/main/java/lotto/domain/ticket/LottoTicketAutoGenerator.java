@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoTicketAutoGenerator implements LottoTicketGenerator {
+public class LottoTicketAutoGenerator {
 
-    @Override
+    private static final int LOTTO_GENERATE_MAX_COUNT = 6;
+
     public LottoTicket generate(List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> subLottoNumbers = lottoNumbers.subList(0, LOTTO_GENERATE_MAX_COUNT);
