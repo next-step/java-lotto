@@ -14,35 +14,23 @@ import java.util.stream.Collectors;
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
 
-    private final InputView inputView;
-    private final ResultView resultView;
-
-    public LottoGame() {
-        inputView = new InputView();
-        resultView = new ResultView();
-    }
-
     public void play() {
-        int totalPrice = inputView.scanTotalPrice();
+        int totalPrice = InputView.scanTotalPrice();
         int numOfLotto = totalPrice / LOTTO_PRICE;
 
         LottoList lottoList = LottoList.create(numOfLotto);
 
         System.out.println(numOfLotto + "개를 구매했습니다.");
 
-        resultView.printLottoList(lottoList);
-        printEmptyLine();
+        ResultView.printLottoList(lottoList);
+        ResultView.printEmptyLine();
 
-        Lotto winningLotto = convertToLotto(inputView.scanWinningNumbers());
+        Lotto winningLotto = convertToLotto(InputView.scanWinningNumbers());
 
         Statistics statistics = Statistics.createStatistics(totalPrice, lottoList, winningLotto);
 
-        printEmptyLine();
-        resultView.printStatistics(statistics);
-    }
-
-    private void printEmptyLine() {
-        System.out.println();
+        ResultView.printEmptyLine();
+        ResultView.printStatistics(statistics);
     }
 
     private Lotto convertToLotto(String[] winningNumbers) {

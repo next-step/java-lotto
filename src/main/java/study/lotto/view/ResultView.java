@@ -8,11 +8,11 @@ import java.util.Arrays;
 
 public class ResultView {
 
-    public void printLottoList(LottoList lottoList) {
+    public static void printLottoList(LottoList lottoList) {
         lottoList.getLottoList().forEach(System.out::println);
     }
 
-    public void printStatistics(Statistics statistics) {
+    public static void printStatistics(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
@@ -25,5 +25,9 @@ public class ResultView {
                 );
 
         System.out.println("총 수익률은 " + String.format("%.2f", statistics.getEarningRate()) + "입니다.");
+    }
+
+    public static void printEmptyLine() {
+        System.out.println();
     }
 }

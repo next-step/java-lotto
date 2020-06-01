@@ -7,9 +7,9 @@ public class InputView {
     private static final String WINNING_NUMBER_DELIMITER = ",";
     private static final String BLANK_STRING = " ";
 
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public int scanTotalPrice() {
+    public static int scanTotalPrice() {
         int totalPrice;
 
         System.out.println("구매 금액을 입력해 주세요.");
@@ -27,7 +27,7 @@ public class InputView {
         return totalPrice;
     }
 
-    public String[] scanWinningNumbers() {
+    public static String[] scanWinningNumbers() {
         String answer;
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
