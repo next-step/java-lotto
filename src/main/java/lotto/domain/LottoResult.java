@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Result {
+public class LottoResult {
     private final List<LottoNumber> lottoNumbers;
     private final List<Integer> winningNumbers;
     private final Map<String, Integer> resultMap;
 
-    public Result(List<LottoNumber> lottoNumbers, List<Integer> winningNumbers) {
+    public LottoResult(List<LottoNumber> lottoNumbers, List<Integer> winningNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.winningNumbers = winningNumbers;
         resultMap = new HashMap<>();
@@ -17,16 +17,16 @@ public class Result {
 
     public void matchList() {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            int count = lottoNumber.matches(winningNumbers);
-            int preCount = resultMap.get(String.valueOf(count));
-            resultMap.put(String.valueOf(count), preCount + 1);
+            String count = String.valueOf(lottoNumber.matches(winningNumbers));
+            int preCount = (resultMap.get(count) == null) ? 0 : resultMap.get(count);
+            resultMap.put(count, preCount + 1);
         }
     }
 
     public double statistics(int money) {
-        double profit = resultMap.entrySet().stream()
+        double profit = resultMap.keySet().stream()
                                 .map(String::valueOf)
-                                .filter(v -> Integer.parseInt(v) < 3)
+                                .filter(v -> Integer.parseInt(v) >= 3)
                                 .mapToDouble(v -> (LottoPrize.getPrize(v) * resultMap.get(v)))
                                 .sum();
         return profit / money;

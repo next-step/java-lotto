@@ -15,6 +15,6 @@ public class LottoPrize {
     }
 
     public static int getPrize(String count) {
-        return prizeMap.get(count);
+        return prizeMap.get(count) == null ? 0 : prizeMap.get(count);
     }
 }
