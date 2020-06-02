@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,5 +48,20 @@ public class LottoTicketTest {
         Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningLotto, bonusLottoNumber);
 
         assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(price.getLottoCount()));
+    }
+
+    @DisplayName("수동 로또 번호를 생성할 수 있다.")
+    @Test
+    void create_manualLotto() {
+        Price price= new Price(1000);
+
+        List<String> manualLottos = Collections.singletonList("1,2,3,4,5,6");
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, manualLottos);
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new LottoNumberGenerator());
+
+        LottoIssueRequest lottoIssueRequest2 = new LottoIssueRequest(price, Collections.emptyList());
+        LottoTicket lottoTicket2 = new LottoTicket(lottoIssueRequest2, new FixedNumberGenerator());
+
+        assertThat(lottoTicket).isEqualTo(lottoTicket2);
     }
 }
