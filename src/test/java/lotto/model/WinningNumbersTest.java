@@ -21,7 +21,8 @@ class WinningNumbersTest {
 
   static Stream<Arguments> numberListProvider() {
     return Stream.of(
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, Arrays.asList(1, 2, 3, 4, 5, 6))
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, Arrays.asList(1, 2, 3, 4, 5, 6)),
+        arguments("1, 2, 3, 4, 5, 6".split(","), Arrays.asList(1, 2, 3, 4, 5, 6))
     );
   }
 

@@ -13,7 +13,9 @@ public class WinningNumbers {
   }
 
   public static WinningNumbers newInstanceByStrArr(String[] numberArr) {
-    List<Integer> numberList = Stream.of(numberArr).mapToInt(Integer::parseInt).boxed()
+    List<Integer> numberList = Stream.of(numberArr)
+        .mapToInt(num -> Integer.parseInt(num.trim()))
+        .boxed()
         .collect(Collectors.toList());
 
     return new WinningNumbers(new LottoNumbers(numberList));
