@@ -1,12 +1,16 @@
 package lotto_step2.model;
 
+import java.util.List;
+
+import static lotto_step2.LottoConstants.*;
+
 public enum PrizeMachine {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
-    ZERO(0, 0);
+    FIRST(MATCH_PRIZE_FIRST, 2_000_000_000),
+    SECOND(MATCH_PRIZE_SECOND, 1_500_000),
+    THIRD(MATCH_PRIZE_THIRD, 50_000),
+    FOURTH(MATCH_PRIZE_FOURTH, 5_000),
+    ZERO(MATCH_ZERO, 0);
 
     private int matchCount;
     private int prize;
@@ -31,5 +35,14 @@ public enum PrizeMachine {
             }
         }
         return PrizeMachine.ZERO;
+    }
+
+    public static double calcRevenue(List<PrizeMachine> gameResults, int money) {
+        int totalPrize = 0;
+
+        for (PrizeMachine result : gameResults) {
+            totalPrize += result.getLottoPrize();
+        }
+        return (double) totalPrize / money;
     }
 }

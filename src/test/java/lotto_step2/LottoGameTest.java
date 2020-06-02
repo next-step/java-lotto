@@ -3,19 +3,21 @@ package lotto_step2;
 import lotto_step2.domain.LottoGame;
 import lotto_step2.model.Lotto;
 import lotto_step2.model.Lottos;
-import lotto_step2.model.Prize;
 import lotto_step2.model.PrizeMachine;
 import lotto_step2.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
 
@@ -24,7 +26,7 @@ public class LottoGameTest {
     private LottoGame lottoGame;
 
     @BeforeEach
-    void init(){
+    void init() {
         List<Integer> lastWeekLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         lotto = new Lotto(lastWeekLotto);
         lottoGame = new LottoGame();
@@ -63,42 +65,47 @@ public class LottoGameTest {
     }
 
     @DisplayName("4등 테스트 - 번호 3개 일치")
-    @Test
-    void fourthPrizeTest() {
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"FOURTH"})
+    void fourthPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
-        List<Prize> results = lottoGame.matches(lotto, myLotto);
-        assertThat(results.get(0).getPrize()).isEqualTo(PrizeMachine.FOURTH);
+        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
     @DisplayName("3등 테스트 - 번호 4개 일치")
-    @Test
-    void thirdPrizeTest() {
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"THIRD"})
+    void thirdPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45)));
-        List<Prize> results = lottoGame.matches(lotto, myLotto);
-        assertThat(results.get(0).getPrize()).isEqualTo(PrizeMachine.THIRD);
+        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
     @DisplayName("2등 테스트 - 번호 5개 일치")
-    @Test
-    void secondPrizeTest() {
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"SECOND"})
+    void secondPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)));
-        List<Prize> results = lottoGame.matches(lotto, myLotto);
-        assertThat(results.get(0).getPrize()).isEqualTo(PrizeMachine.SECOND);
+        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
     @DisplayName("1등 테스트 - 번호 6개 일치")
-    @Test
-    void firstPrizeTest() {
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"FIRST"})
+    void firstPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        List<Prize> results = lottoGame.matches(lotto, myLotto);
-        assertThat(results.get(0).getPrize()).isEqualTo(PrizeMachine.FIRST);
+        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
     @DisplayName("0개 일치")
-    @Test
-    void zeroPrizeTest() {
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"ZERO"})
+    void zeroPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16)));
-        List<Prize> results = lottoGame.matches(lotto, myLotto);
-        assertThat(results.get(0).getPrize()).isEqualTo(PrizeMachine.ZERO);
+        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 }

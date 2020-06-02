@@ -5,7 +5,7 @@ import static lotto_step2.LottoConstants.*;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(Lotto lotto){
         this.lottos = new ArrayList<>();
@@ -13,32 +13,18 @@ public class Lottos {
     }
 
     public Lottos(int money) {
-        this.lottos = new ArrayList<>();
+        LottoMachine lottoMachine = new LottoMachine();
         for (int i=0; i < buyLottoCount(money); i++) {
-            lottos.add(new Lotto(createRandomList()));
+            lottos.add(new Lotto(lottoMachine.createRandomList()));
         }
     }
 
-    public static List<Prize> matches(Lotto lastWeekLotto, Lottos myLotto) {
-        List<Prize> prizes = new ArrayList<>();
+    public static List<PrizeMachine> matches(Lotto lastWeekLotto, Lottos myLotto) {
+        List<PrizeMachine> prizes = new ArrayList<>();
         for(Lotto lotto : myLotto.getLottos()) {
             prizes.add(lotto.match(lastWeekLotto));
         }
         return prizes;
-    }
-
-    private List<Integer> createRandomList() {
-        Set<Integer> set = new HashSet<>();
-        while (set.size() != LOTTO_LIMIT_SIZE) {
-            set.add(getRandom());
-        }
-
-        List<Integer> createdLottos = new ArrayList<>(set);
-        return createdLottos;
-    }
-
-    private int getRandom() {
-        return new Random().nextInt(LOTTO_LIMIT_NUMBER) +1;
     }
 
     private int buyLottoCount(int money) {

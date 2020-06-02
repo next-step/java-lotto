@@ -2,7 +2,7 @@ package lotto_step2;
 
 import lotto_step2.domain.LottoGame;
 import lotto_step2.model.Lottos;
-import lotto_step2.model.Prize;
+import lotto_step2.model.PrizeMachine;
 import lotto_step2.view.InputView;
 import lotto_step2.view.ResultView;
 
@@ -18,7 +18,7 @@ public class RunLottoGame {
         Lottos lottos = lottoGame.getBuyLottos(money);
         inputView.printBuyLotto(lottos);
 
-        List<Prize> gameResults = lottoGame.matches(inputView.getLastWeekLotto(), lottos);
+        List<PrizeMachine> gameResults = lottoGame.matches(inputView.getLastWeekLotto(), lottos);
 
         ResultView resultView = new ResultView();
         resultView.printGameResult(gameResults);

@@ -10,4 +10,5 @@ public class LottoConstants {
     public static final int MATCH_PRIZE_SECOND = 5;
     public static final int MATCH_PRIZE_THIRD = 4;
     public static final int MATCH_PRIZE_FOURTH = 3;
+    public static final int MATCH_ZERO = 0;
 }

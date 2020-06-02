@@ -7,13 +7,13 @@ import lotto_step2.model.Lottos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static lotto_step2.LottoConstants.*;
 
 public class InputView {
 
     private Scanner scanner = new Scanner(System.in);
-    private static List<Integer> intSplitValues = new ArrayList<>();
 
     public int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -39,12 +39,13 @@ public class InputView {
         String inputValue = scanner.nextLine();
 
         List<String> splitValues = Splitter.on(',').splitToList(inputValue);
-
-        getIntSplitValues(splitValues);
-        return new Lotto(intSplitValues);
+        return new Lotto(getIntSplitValues(splitValues));
     }
 
     private List<Integer> getIntSplitValues(List<String> splitValues) {
+
+        List<Integer> intSplitValues = new ArrayList<>();
+
         for(String splitValue : splitValues) {
             checkSplitValue(Integer.parseInt(splitValue));
             intSplitValues.add(Integer.parseInt(splitValue));
@@ -66,8 +67,12 @@ public class InputView {
     }
 
     public void checkIntSplitValues(List<Integer> intSplitValues) {
-        if (!(intSplitValues.size() == LOTTO_LIMIT_SIZE)) {
-            throw new IllegalArgumentException("지난 주 당첨 번호가 6개가 아닙니다.");
+        List<Integer> checkList = intSplitValues.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if (!(checkList.size() == LOTTO_LIMIT_SIZE)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호 입력 오류 발생");
         }
     }
 }
