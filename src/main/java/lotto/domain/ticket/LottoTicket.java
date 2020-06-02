@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.ticket;
+
+import lotto.domain.LottoNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +27,7 @@ public class LottoTicket {
         if (Objects.isNull(lottoNumbers)) {
             throw new NullPointerException();
         }
-        return of(
+        return new LottoTicket(
                 lottoNumbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet())
@@ -41,11 +43,7 @@ public class LottoTicket {
     }
 
     private void validate(Set lottoSet) {
-        validateSize(lottoSet.size());
-    }
-
-    private void validateSize(int size) {
-        if (size < DEFAULT_SIZE) {
+        if (lottoSet.size() != DEFAULT_SIZE) {
             throw new IllegalArgumentException("로또 번호의 개수가 알맞지 않습니다.");
         }
     }

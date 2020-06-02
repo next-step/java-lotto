@@ -1,13 +1,10 @@
 package lotto.view;
 
-import lotto.LottoRank;
-import lotto.LottoTicket;
+import lotto.domain.LottoRank;
+import lotto.domain.ticket.LottoTicket;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String SUFFIX_BUY_MESSAGE = "를 구매했습니다.";
