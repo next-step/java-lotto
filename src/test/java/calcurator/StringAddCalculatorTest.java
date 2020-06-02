@@ -51,7 +51,8 @@ class StringAddCalculatorTest {
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)")
     void splitAndSum_음수전달시_예외처리(String input) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("양수를 입력해주세요.");
     }
 
     @Test
