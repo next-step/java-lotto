@@ -48,7 +48,7 @@ public class LotteryRankTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     public void getMissEnum(int matchNumberCounts) {
-        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, false);
+        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, 0);
 
         assertThat(lotteryRank).isEqualTo(LotteryRank.MISS);
     }
@@ -57,7 +57,7 @@ public class LotteryRankTest {
     @ParameterizedTest
     @MethodSource("mockLotteryValueOfRankBuilder")
     public void getProperLotteryRank(int matchNumberCounts, LotteryRank expectedRank) {
-        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, false);
+        LotteryRank lotteryRank = LotteryRank.valueOf(matchNumberCounts, 0);
 
         assertThat(lotteryRank).isEqualTo(expectedRank);
     }
@@ -65,8 +65,8 @@ public class LotteryRankTest {
     @DisplayName("맞춘 개수가 5개일 때 보너스볼 포함 여부에 따라 2등 3등 분리 반환")
     @Test
     public void getSecondOrThirdLotteryRank() {
-        LotteryRank secondRank = LotteryRank.valueOf(5, true);
-        LotteryRank thirdRank = LotteryRank.valueOf(5, false);
+        LotteryRank secondRank = LotteryRank.valueOf(5, 1);
+        LotteryRank thirdRank = LotteryRank.valueOf(5, 0);
 
         assertThat(secondRank).isEqualTo(LotteryRank.SECOND_PRIZE);
         assertThat(thirdRank).isEqualTo(LotteryRank.THIRD_PRIZE);
