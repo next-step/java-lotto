@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
     @ParameterizedTest
@@ -29,7 +30,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2=3","3,6=9"}, delimiter = '=')
+    @CsvSource(value = {"1,2=3", "3,6=9"}, delimiter = '=')
     @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
     void splitAndSum_쉼표구분자(String input, int expectedCount) {
         int result = StringAddCalculator.splitAndSum(input);
@@ -37,10 +38,18 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:2=3","3:6,2=11"}, delimiter = '=')
+    @CsvSource(value = {"1:2=3", "3:6,2=11"}, delimiter = '=')
     @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
     void splitAndSum_컴마와콜론구분자(String input, int expectedCount) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expectedCount);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "3,-6,2"})
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)")
+    void splitAndSum_음수전달시_예외처리(String input) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class);
     }
 }
