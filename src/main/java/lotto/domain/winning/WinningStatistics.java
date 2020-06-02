@@ -44,8 +44,4 @@ public class WinningStatistics {
     private int getMatchedTicketCount(LottoRank rank) {
         return this.lottoRank.get(rank);
     }
-
-    public Price getPrice() {
-        return price;
-    }
 }
