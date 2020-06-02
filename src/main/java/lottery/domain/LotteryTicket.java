@@ -43,7 +43,7 @@ public class LotteryTicket {
                 .filter(targetNumber ->
                         lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(targetNumber)))
                 .count();
-        boolean isContainingBonusBall = this.isContainingLotteryNumber(bonusBallNumber);
+        boolean isContainingBonusBall = this.isContainingLotteryNumber(bonusBallNumber.getLotteryNumber());
         return LotteryRank.valueOf((int) matchNumberCounts, isContainingBonusBall);
     }
 
@@ -63,7 +63,7 @@ public class LotteryTicket {
         }
     }
 
-    private boolean isContainingLotteryNumber(LotteryNumber bonusBallNumber) {
-        return this.getLotteryNumbers().contains(bonusBallNumber.getLotteryNumber());
+    public boolean isContainingLotteryNumber(int lotteryNumber) {
+        return this.getLotteryNumbers().contains(lotteryNumber);
     }
 }
