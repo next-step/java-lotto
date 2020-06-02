@@ -1,7 +1,6 @@
 package lotto.collections;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public enum RewardType {
 	NOTHING(0, new Money(0)),
@@ -17,13 +16,6 @@ public enum RewardType {
 	RewardType(int code, Money reward) {
 		this.code = code;
 		this.reward = reward;
-	}
-
-	public static int calculateProfit(Map<Integer, Integer> lottoStatistics) {
-		return Arrays.stream(values())
-			.filter(type -> lottoStatistics.containsKey(type.code))
-			.map(type -> type.reward.getMoney() * lottoStatistics.get(type.code))
-			.reduce(0, Integer::sum);
 	}
 
 	public static RewardType findTypeByCount(final Integer matchCount, final boolean matchBonus) {

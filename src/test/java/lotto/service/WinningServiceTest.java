@@ -2,22 +2,46 @@ package lotto.service;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.collections.LottoResult;
 import lotto.collections.LottoTickets;
+import lotto.collections.RewardType;
 import lotto.collections.WinningNumbers;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class WinningServiceTest {
+
+	private static Stream<Arguments> lottoStatisticsMock() { // argument source method
+		// Map<Integer, Integer> oneLottoStatistics = new HashMap<>();
+		// oneLottoStatistics.put(1, 1);
+		// oneLottoStatistics.put(2, 1);
+		// oneLottoStatistics.put(3, 1);
+		// oneLottoStatistics.put(4, 0);
+		// oneLottoStatistics.put(5, 0);
+
+		List<RewardType> oneLottoStatistics = new ArrayList<>();
+		oneLottoStatistics.add(RewardType.NOTHING);
+		oneLottoStatistics.add(RewardType.THIRD);
+		oneLottoStatistics.add(RewardType.FOURTH);
+		oneLottoStatistics.add(RewardType.FIFTH);
+
+		return Stream.of(
+			Arguments.of(oneLottoStatistics, 1555000)
+		);
+	}
 
 	@DisplayName("로또 개수와 당첨 번호를 비교한 후, 맞은 개수를 반환한다.")
 	@CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,6 : 6 : 1", "1,2,3,4,5,7 : 1,2,3,4,5,6 : 5 : 1"
@@ -40,7 +64,7 @@ public class WinningServiceTest {
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 		WinningNumbers winningNumbers = new WinningNumbers(winningNumbersBeforeList);
-		LottoResult lottoResult = WinningService.calculateLottoMatches(mockTickets, winningNumbers);
+		LottoResult lottoResult = new WinningService().calculateLottoMatches(mockTickets, winningNumbers);
 
 		//then
 		assertThat(lottoResult.getLottoStatistics().get(expectedMatchType))
@@ -66,6 +90,13 @@ public class WinningServiceTest {
 		LottoNumber bonusBall = new LottoNumber(bonusBallValue);
 
 		//then
-		assertThat(WinningService.isBonusBall(mockTickets, bonusBall)).isEqualTo(bonusBallValidity);
+		assertThat(new WinningService().isBonusBall(mockTickets, bonusBall)).isEqualTo(bonusBallValidity);
+	}
+
+	@DisplayName("로또 통계에 따라 당첨 타입과 당첨 금액을 활용하여 최종 수익을 계산한다.")
+	@MethodSource("lottoStatisticsMock")
+	@ParameterizedTest
+	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int profit) {
+		assertThat(new WinningService().calculateProfit(lottoStatistics).getValue()).isEqualTo(profit);
 	}
 }
