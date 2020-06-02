@@ -12,10 +12,6 @@ public class StringAddCalculator {
         if (checkNullOrEmpty(input))
             return Const.INITIAL_NUMBER_ZERO;
 
-        if (input.length() == Const.STRING_LENGTH_NUM_ONE) {
-            return Integer.parseInt(input);
-        }
-
         String[] splitInputs = splitSeparator(input);
         return addSum(splitInputs);
     }
