@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoService {
+public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO_VALUE = 0;
     private static final String WINNERS_DELIMITER = ",";
+
     private List<LottoTicket> lottoTickets;
     private LottoTicket winningTicket;
     private final int money;
 
-    public LottoService(int money) {
+    public LottoMachine(int money) {
         validateMoney(money);
 
         this.lottoTickets = new ArrayList<>();
@@ -28,7 +29,7 @@ public class LottoService {
         this.money = money;
     }
 
-    public LottoService(int money, List<LottoTicket> lottoTickets) {
+    public LottoMachine(int money, List<LottoTicket> lottoTickets) {
         this.money = money;
         this.lottoTickets = lottoTickets;
     }
