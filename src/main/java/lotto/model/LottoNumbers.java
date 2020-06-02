@@ -8,8 +8,8 @@ public class LottoNumbers {
   private final List<Integer> numbers;
 
   public LottoNumbers(List<Integer> numbers) {
-    LottoValidationUtils.checkLottoNumberSize(numbers);
-    LottoValidationUtils.checkLottoNumberRange(numbers);
+    checkLottoNumberSize(numbers);
+    checkLottoNumberRange(numbers);
 
     numbers.sort(Integer::compareTo);
 
@@ -19,4 +19,18 @@ public class LottoNumbers {
   public List<Integer> values() {
     return new ArrayList<>(numbers);
   }
+
+  private void checkLottoNumberSize(List<Integer> numbers) {
+    if (numbers.size() != Lotto.SIZE) {
+      throw new IllegalArgumentException("로또 숫자는 6개가 입력되어야 합니다. " + numbers);
+    }
+  }
+
+  private void checkLottoNumberRange(List<Integer> numberList) {
+    if (!LottoNumberPool.INSTANCE.getNumbers().containsAll(numberList)) {
+      throw new IllegalArgumentException("로또 숫자는 1~45 사이로 입력되어야 합니다.");
+    }
+  }
+
+
 }
