@@ -21,4 +21,12 @@ public class LottoIssueRequest {
                 .map(StringUtil::splitAndToIntegerList)
                 .collect(Collectors.toList());
     }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public List<List<Integer>> getManualNumbers() {
+        return manualNumbers;
+    }
 }
