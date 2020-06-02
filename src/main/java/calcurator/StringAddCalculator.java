@@ -2,8 +2,12 @@ package calcurator;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+
     public static int splitAndSum(String input) {
         if (checkNullOrEmpty(input))
             return Const.INITIAL_NUMBER_ZERO;
@@ -12,12 +16,22 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
-        return splitSeparatorAndSum(input);
+        String[] splitInputs = splitSeparator(input);
+        return addSum(splitInputs);
     }
 
-    private static int splitSeparatorAndSum(String input) {
+    private static String[] splitSeparator(String input) {
+        Matcher matcher = CUSTOM_PATTERN.matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(Const.PATTERN_SEPARATOR_INDEX);
+            return matcher.group(Const.PATTERN_SEPARATOR_INPUTS).split(customDelimiter);
+        }
+        return input.split(Const.SYMBOL_COMMA_AND_COLON);
+    }
+
+    private static int addSum(String[] inputs) {
         AtomicInteger sumNumber = new AtomicInteger();
-        Arrays.stream(input.split(Const.SYMBOL_COMMA_AND_COLON)).forEach(numberString -> {
+        Arrays.stream(inputs).forEach(numberString -> {
             int parseInt = Integer.parseInt(numberString);
             if (parseInt < Const.ZERO_NUM) {
                 throw new RuntimeException("양수를 입력해주세요.");

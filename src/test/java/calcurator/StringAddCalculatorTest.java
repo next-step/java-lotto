@@ -1,6 +1,7 @@
 package calcurator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -51,5 +52,14 @@ class StringAddCalculatorTest {
     void splitAndSum_음수전달시_예외처리(String input) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\\n1;2;3” => 6)")
+    void splitAndSum_커스텀구분자() {
+        String input = "//;\n1;2;3";
+        int expectedCount = 6;
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expectedCount);
     }
 }
