@@ -43,7 +43,7 @@ class WinningStatisticsTest {
     WinningStatistics winningStatistics = WinningStatistics
         .newInstanceFromLottoAndWinningNumbers(lotto, winningNumbers);
 
-    assertThat(winningStatistics.getPrifitRate()).isEqualTo(expected);
+    assertThat(winningStatistics.getProfitRate()).isEqualTo(expected);
   }
 
   static Stream<Arguments> lottoAndWinningNumbersWithProfitProvider() {

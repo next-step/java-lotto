@@ -33,6 +33,6 @@ public class LottoController {
 
     LottoView.printPrizeTierCnt(winningStatistics.getPrizeTierCntMap());
 
-    LottoView.printProfitRate(winningStatistics.getPrifitRate());
+    LottoView.printProfitRate(winningStatistics.getProfitRate());
   }
 }

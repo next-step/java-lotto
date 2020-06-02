@@ -39,6 +39,7 @@ public class WinningStatistics {
   }
 
   private static Map<PrizeTier, Integer> sortPrizeTierIntegerMap(
+  public double getProfitRate() {
       Map<PrizeTier, Integer> prizeTierCntMap) {
     return prizeTierCntMap.entrySet().stream()
         .sorted(Comparator.comparingInt(e -> e.getKey().getMatchCnt())
@@ -52,7 +53,6 @@ public class WinningStatistics {
     return prizeTierCntMap;
   }
 
-  public double getPrifitRate() {
     return ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense);
   }
 }
