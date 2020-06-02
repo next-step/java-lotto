@@ -3,18 +3,14 @@ package calcurator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
     @ParameterizedTest
-    @NullSource
-    @EmptySource
+    @NullAndEmptySource
     @DisplayName("null 또는 빈문자")
     void splitAndSum_null_또는_빈문자(String input) {
         int result = StringAddCalculator.splitAndSum(input);
