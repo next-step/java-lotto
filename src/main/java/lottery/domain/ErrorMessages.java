@@ -8,6 +8,7 @@ public class ErrorMessages {
     public static final String DUPLICATED_NUMBER = "Error : 로또 티켓의 번호들은 중복될 수 없습니다.";
     public static final String INVALID_MATCH_NUMBER_COUNTS = "Error : 정의 되지 않은 당첨 번호 개수입니다.";
     public static final String INVALID_BONUS_BALL_NUMBER = "Error : 보너스 번호는 당첨 티켓 번호와 중복될 수 없ㅅ브니다.";
+    public static final String INVALID_BONUS_BALL_COUNT = "Error : 보너스 번호를 2개 이상 가질 수 없습니다.";
 
     private ErrorMessages() {
     }

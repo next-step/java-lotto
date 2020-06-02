@@ -22,6 +22,7 @@ public enum LotteryRank {
 
     public static LotteryRank valueOf(int matchNumberCounts, int bonusBallCount) {
         validateMatchNumberCounts(matchNumberCounts);
+        validateBonusBallCount(bonusBallCount);
         return Arrays.stream(values())
                 .filter(lotteryRank -> lotteryRank.matchNumberCounts <= matchNumberCounts)
                 .filter(lotteryRank -> lotteryRank.bonusBallCount <= bonusBallCount)
@@ -32,6 +33,12 @@ public enum LotteryRank {
     private static void validateMatchNumberCounts(int matchNumberCounts) {
         if (matchNumberCounts < MISS.matchNumberCounts || matchNumberCounts > FIRST_PRIZE.matchNumberCounts) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS);
+        }
+    }
+
+    private static void validateBonusBallCount(int bonusBallCount) {
+        if (bonusBallCount < MISS.bonusBallCount || bonusBallCount > SECOND_PRIZE.bonusBallCount) {
+            throw new IllegalArgumentException(ErrorMessages.INVALID_BONUS_BALL_COUNT);
         }
     }
 
