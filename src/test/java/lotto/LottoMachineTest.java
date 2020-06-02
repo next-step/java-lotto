@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.application.LottoIssueRequest;
+import lotto.application.LottoIssueResponse;
+import lotto.application.LottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

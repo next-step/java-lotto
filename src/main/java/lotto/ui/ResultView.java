@@ -1,4 +1,10 @@
-package lotto;
+package lotto.ui;
+
+import lotto.application.LottoIssueResponse;
+import lotto.domain.Lotto;
+import lotto.domain.LottoResults;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;

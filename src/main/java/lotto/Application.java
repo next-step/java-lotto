@@ -1,15 +1,14 @@
 package lotto;
 
+import lotto.application.LottoIssueResponse;
+import lotto.application.LottoMachine;
+import lotto.ui.LottoController;
+
 public class Application {
 
     public static void main(String[] args) {
-        LottoMachine machine = new LottoMachine();
-        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(InputView.getPaid(), InputView.askManualNumbers());
-        LottoIssueResponse lottoIssueResponse = machine.issue(lottoIssueRequest);
-        ResultView.printLottos(lottoIssueResponse);
-
-        Lottos lottos = lottoIssueResponse.getLottos();
-        LottoResults results = lottos.checkResults(InputView.askWinningNumbers(), InputView.askBonusNumber());
-        ResultView.printResults(results);
+        LottoController lottoController = new LottoController(new LottoMachine());
+        LottoIssueResponse issueResponse = lottoController.issueLottos();
+        lottoController.rankLottos(issueResponse.getLottos());
     }
 }

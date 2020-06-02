@@ -1,4 +1,6 @@
-package lotto;
+package lotto.infra.domain;
+
+import lotto.domain.LottoNumberSelectRule;
 
 import java.util.Collections;
 import java.util.Set;

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.ui;
+
+import lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.application;
+
+import lotto.domain.Lotto;
 
 import java.util.List;
 import java.util.Set;
@@ -12,10 +14,6 @@ public class LottoIssueRequest {
 		this.paidMoney = paidMoney;
 		this.manualNumbers = manualNumbers;
 		validate();
-	}
-
-	public int getPaidMoney() {
-		return paidMoney;
 	}
 
 	public List<Set<Integer>> getManualNumbers() {

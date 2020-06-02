@@ -1,4 +1,9 @@
-package lotto;
+package lotto.application;
+
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.infra.domain.AutoLottoNumberSelectRule;
+import lotto.infra.domain.ManualLottoNumberSelectRule;
 
 import java.util.List;
 import java.util.Set;

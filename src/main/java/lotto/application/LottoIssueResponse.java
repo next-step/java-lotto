@@ -1,4 +1,6 @@
-package lotto;
+package lotto.application;
+
+import lotto.domain.Lottos;
 
 public class LottoIssueResponse {
 
