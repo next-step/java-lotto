@@ -4,17 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
-
     private List<Lotto> lottoTicket;
 
-    public List<Lotto> purchaseLotto(int purchaseAmount) {
-        int quantity = calculateLottoQuantity(purchaseAmount);
+    public List<Lotto> purchaseLotto(int quantity) {
         lottoTicket = createLotto(quantity);
-        for(Lotto lotto : lottoTicket){
-            System.out.println(lotto.getLottoNumber());
-
-        }
         return lottoTicket;
     }
 
@@ -26,8 +19,5 @@ public class LottoMachine {
         return lottoTicket;
     }
 
-    private int calculateLottoQuantity(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PRICE;
-    }
 
 }
