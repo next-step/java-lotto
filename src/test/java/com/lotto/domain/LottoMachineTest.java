@@ -20,8 +20,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @ValueSource(ints = { 3, 5 })
     void buyLottoTest(final Integer countOfLotto) {
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoView(countOfLotto, 0));
-        lottoMachine.setLottoExtractor(new TestLottoExtractor());
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoView(countOfLotto, 0), new TestShuffleLottoExtractor(), new ManualLottoExtractor());
         List<Lotto> extractedLotto = lottoMachine.buyLotto();
         assertEquals(extractedLotto.size(), countOfLotto);
     }
@@ -30,8 +29,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("provideManualLottoCount")
     void buyLottoIllegalArgumentExceptionTest(final Integer countOfAutomaticLotto, final Integer countOfManualLotto) {
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoView(countOfAutomaticLotto, countOfManualLotto));
-        lottoMachine.setLottoExtractor(new TestLottoExtractor());
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoView(countOfAutomaticLotto, countOfManualLotto), new TestShuffleLottoExtractor(), new ManualLottoExtractor());
 
         assertThatThrownBy(lottoMachine::buyLotto)
                 .isInstanceOf(RuntimeException.class);
@@ -44,7 +42,7 @@ public class LottoMachineTest {
         );
     }
 
-    private static class TestLottoExtractor extends ShuffleLottoExtractor {
+    private static class TestShuffleLottoExtractor extends ShuffleLottoExtractor {
 
         @Override
         public List<Integer> extractLottoNumbers(List<Integer> availableLottoNumbers) {
@@ -70,6 +68,11 @@ public class LottoMachineTest {
         @Override
         public Integer inputCountOfManualLotto() {
             return this.countOfManualLotto;
+        }
+
+        @Override
+        public String inputManualLotto() {
+            return "1, 2, 3, 4, 5, 6";
         }
 
         @Override
