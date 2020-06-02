@@ -21,16 +21,9 @@ public class WinningStatistics {
 
     prizeTierCntMap = sortPrizeTierIntegerMap(prizeTierCntMap);
 
-    for (LottoNumbers numbers : lotto.getLottoList()) {
-      prizeTierCntMap
-          .computeIfPresent(winningNumbers.getPrizeTier(numbers), (key, value) -> ++value);
-    }
+    countPrizeTier(lotto, winningNumbers);
 
-    for (PrizeTier prizeTier : prizeTierCntMap.keySet()) {
-      int lottoCnt = prizeTierCntMap.get(prizeTier);
-      income += prizeTier.getPrize() * lottoCnt;
-      expense += Price.LOTTO.getPrice() * lottoCnt;
-    }
+    setIncomeAndExpense();
   }
 
   public static WinningStatistics newInstanceFromLottoAndWinningNumbers(Lotto lotto,
@@ -38,8 +31,15 @@ public class WinningStatistics {
     return new WinningStatistics(lotto, winningNumbers);
   }
 
-  private static Map<PrizeTier, Integer> sortPrizeTierIntegerMap(
+  public Map<PrizeTier, Integer> getPrizeTierCntMap() {
+    return prizeTierCntMap;
+  }
+
   public double getProfitRate() {
+    return ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense);
+  }
+
+  private Map<PrizeTier, Integer> sortPrizeTierIntegerMap(
       Map<PrizeTier, Integer> prizeTierCntMap) {
     return prizeTierCntMap.entrySet().stream()
         .sorted(Comparator.comparingInt(e -> e.getKey().getMatchCnt())
@@ -49,10 +49,18 @@ public class WinningStatistics {
         );
   }
 
-  public Map<PrizeTier, Integer> getPrizeTierCntMap() {
-    return prizeTierCntMap;
+  private void countPrizeTier(Lotto lotto, WinningNumbers winningNumbers) {
+    for (LottoNumbers numbers : lotto.getLottoList()) {
+      prizeTierCntMap
+          .computeIfPresent(winningNumbers.getPrizeTier(numbers), (key, value) -> ++value);
+    }
   }
 
-    return ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense);
+  private void setIncomeAndExpense() {
+    for (PrizeTier prizeTier : prizeTierCntMap.keySet()) {
+      int lottoCnt = prizeTierCntMap.get(prizeTier);
+      income += prizeTier.getPrize() * lottoCnt;
+      expense += Price.LOTTO.getPrice() * lottoCnt;
+    }
   }
 }
