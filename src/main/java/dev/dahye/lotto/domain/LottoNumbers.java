@@ -3,7 +3,7 @@ package dev.dahye.lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumbers {
     private static final List<Integer> numbers;
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;

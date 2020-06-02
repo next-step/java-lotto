@@ -35,7 +35,7 @@ public class LottoTicket {
 
     private void validateLottoNumberRange() {
         for(Integer lottoNumber : this.lottoNumbers) {
-            LottoNumber.validNumberRange(lottoNumber);
+            LottoNumbers.validNumberRange(lottoNumber);
         }
     }
 
@@ -47,7 +47,7 @@ public class LottoTicket {
     }
 
     private static List<Integer> createLottoNumbers() {
-        List<Integer> numbers = LottoNumber.getNumbers();
+        List<Integer> numbers = LottoNumbers.getNumbers();
         shuffle(numbers);
 
         return new ArrayList<>(numbers.subList(LOTTO_TICKET_NUMBER_MIN_SIZE, LOTTO_TICKET_NUMBER_MAX_SIZE));
