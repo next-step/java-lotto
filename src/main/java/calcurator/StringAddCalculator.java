@@ -20,6 +20,10 @@ public class StringAddCalculator {
         return addSum(splitInputs);
     }
 
+    private static boolean checkNullOrEmpty(String input) {
+        return (input == null || input.isEmpty());
+    }
+
     private static String[] splitSeparator(String input) {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
         if (matcher.find()) {
@@ -39,9 +43,5 @@ public class StringAddCalculator {
             sumNumber.addAndGet(parseInt);
         });
         return sumNumber.get();
-    }
-
-    private static boolean checkNullOrEmpty(String input) {
-        return (input == null || input.isEmpty());
     }
 }
