@@ -1,32 +1,30 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
   @ParameterizedTest
-  @CsvSource({
-      "1000, 1",
-      "800, 0",
-      "0, 0",
-      "1100, 1",
-      "2000, 2",
-      "2123, 2"
-  })
-  void lotto_생성(int money, int expected) {
-    Lotto lotto = Lotto.newInstanceByMoney(money);
+  @MethodSource("lottoListProvider")
+  void getLottoList(List<LottoNumbers> lottoList) {
+    Lotto lotto = new Lotto(lottoList);
 
-    assertThat(lotto.getLottoList().size()).isEqualTo(expected);
+    assertThat(lotto.getLottoList()).isEqualTo(lottoList);
   }
 
-  @Test
-  void lotto_0원이하입력() {
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      Lotto.newInstanceByMoney(-1000);
-    });
+  static Stream<Arguments> lottoListProvider() {
+    return Stream.of(
+        arguments(Arrays.asList(
+            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))
+        ))
+    );
   }
 }
