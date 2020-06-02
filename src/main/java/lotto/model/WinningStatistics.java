@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public class WinningStatistics {
 
   private Map<PrizeTier, Integer> prizeTierCntMap;
-  private int income = 0;
-  private int expense = 0;
+  private long income = 0;
+  private long expense = 0;
 
   private WinningStatistics(Lotto lotto, WinningNumbers winningNumbers) {
     prizeTierCntMap = new HashMap<>();

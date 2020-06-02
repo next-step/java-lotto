@@ -9,9 +9,10 @@ public class ProfitRateCalculatorTest {
 
   @ParameterizedTest
   @CsvSource({
-      "14000, 5000, 0.35"
+      "14000, 5000, 0.35",
+      "14000, 2000000000, 142857.14"
   })
-  void calculate(int expense, int income, double expected) {
+  void calculate(long expense, long income, double expected) {
     assertThat(ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense)).isEqualTo(expected);
   }
 }

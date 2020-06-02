@@ -7,15 +7,15 @@ public enum PrizeTier {
   MATCH_THREE(5000, 3),
   MATCH_ZERO(0, 0);
 
-  private final int prize;
+  private final long prize;
   private final int matchCnt;
 
-  PrizeTier(int prize, int matchCnt) {
+  PrizeTier(long prize, int matchCnt) {
     this.prize = prize;
     this.matchCnt = matchCnt;
   }
 
-  public int getPrize() {
+  public long getPrize() {
     return prize;
   }
 
