@@ -10,12 +10,19 @@ public class LottoTicket {
     private final List<Integer> lottoNumbers;
 
     private LottoTicket(List<Integer> lottoNumbers) {
+        validateLottoNumberIsNotNull(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
 
         validateLottoNumberRange();
         validateLottoNumberSize();
         validateDuplicateNumbers();
+    }
+
+    private void validateLottoNumberIsNotNull(List<Integer> lottoNumbers) {
+        if(lottoNumbers == null) {
+            throw new IllegalArgumentException("lottoNumbers는 null일 수 없습니다.");
+        }
     }
 
     public static LottoTicket autoIssued() {

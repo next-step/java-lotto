@@ -2,8 +2,11 @@ package dev.dahye.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -41,4 +44,10 @@ class LottoTicketTest {
                 "로또 번호는 1 ~ 45의 숫자만 가능합니다.");
     }
 
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("로또 수동 발행 시 null인 경우 IllegalArgument Exception throw")
+    void validate_lotto_number_null(List<Integer> lottoNumbers) {
+        assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(lottoNumbers));
+    }
 }
