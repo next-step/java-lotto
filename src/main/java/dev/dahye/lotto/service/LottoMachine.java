@@ -19,8 +19,8 @@ public class LottoMachine {
 
     public LottoMachine(int money) {
         validateMoney(money);
+        initializeTickets();
 
-        this.lottoTickets = new ArrayList<>();
         int lottoCount = money / LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.autoIssued());
@@ -29,7 +29,12 @@ public class LottoMachine {
         this.money = money;
     }
 
+    private void initializeTickets() {
+        this.lottoTickets = new ArrayList<>();
+    }
+
     public LottoMachine(int money, List<LottoTicket> lottoTickets) {
+        validateMoney(money);
         this.money = money;
         this.lottoTickets = lottoTickets;
     }
@@ -57,22 +62,21 @@ public class LottoMachine {
     }
 
     public List<Winning> getWinnings(String winningNumberInput) {
-        List<Winning> winnings = new ArrayList<>();
-        validateWinningNumbers(winningNumberInput);
+        validateWinnersNullOrEmpty(winningNumberInput);
+        List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
+        setWinningTicket(winningNumbers);
 
+        List<Winning> winnings = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getMatchCount(winningTicket);
-            getWinning(winnings, matchCount);
+            addWhenIsWinning(winnings, matchCount);
         }
 
         return winnings;
     }
 
-    private void validateWinningNumbers(String winningNumberInput) {
-        validateWinnersNullOrEmpty(winningNumberInput);
-        List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
+    private void setWinningTicket(List<Integer> winningNumbers) {
         validateAlreadyAssignedWinningTicket();
-
         this.winningTicket = LottoTicket.manualIssued(winningNumbers);
     }
 
@@ -82,7 +86,7 @@ public class LottoMachine {
         }
     }
 
-    private void getWinning(List<Winning> winnings, int matchCount) {
+    private void addWhenIsWinning(List<Winning> winnings, int matchCount) {
         if (Winning.isWinning(matchCount)) {
             winnings.add(Winning.getWinning(matchCount));
         }
