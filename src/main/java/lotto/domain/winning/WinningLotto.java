@@ -1,11 +1,10 @@
 package lotto.domain.winning;
 
 import lotto.domain.number.LottoNumbers;
+import lotto.util.StringUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -16,10 +15,7 @@ public class WinningLotto {
     }
 
     private LottoNumbers createWinningNumbers(String winningNumberString) {
-        List<Integer> winningNumbers = Arrays.stream(winningNumberString.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
+        List<Integer> winningNumbers = StringUtil.splitAndToIntegerList(winningNumberString);
         return LottoNumbers.manualLottoNumber(winningNumbers);
     }
 
