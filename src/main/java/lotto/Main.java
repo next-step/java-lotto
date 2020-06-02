@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,10 +11,11 @@ public class Main {
         int buyLottoMoney = InputView.buyLotto();
         Money money = new Money(buyLottoMoney);
 
-        int lottoCount = money.countLotto();
-        Lotto lotto = new Lotto(lottoCount);
+        Lotto lotto = new Lotto(money.countLotto());
         lotto.drawingLotto();
+        ResultView.printLottoNumbers(lotto);
 
-        ResultView.printLottoNumbers(lottoCount, lotto.getLottoNumbers());
+        String[] winningNumbers = InputView.inputWinningNumber();
+        WinningNumber winningNumber = new WinningNumber(winningNumbers);
     }
 }

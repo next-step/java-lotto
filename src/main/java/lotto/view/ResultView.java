@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-
-import java.util.List;
+import lotto.domain.Lotto;
 
 public class ResultView {
 
-    public static void printLottoNumbers(int lottoCount, List<LottoNumber> lottoNumbers) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoNumbers(Lotto lotto) {
+        System.out.println(lotto.getLottoCount() + "개를 구매했습니다.");
+
+        lotto.getLottoNumbers().forEach(lottoNumber -> System.out.println(lottoNumber.getNumbers()));
     }
 
 //  당첨 통계
