@@ -1,6 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
+import lotto.domain.LottoResult;
+
+import java.util.Map;
 
 public class ResultView {
 
@@ -10,11 +14,16 @@ public class ResultView {
         lotto.getLottoNumbers().forEach(lottoNumber -> System.out.println(lottoNumber.getNumbers()));
     }
 
-//  당첨 통계
-//---------
-//  3개 일치 (5000원)- 1개
-//  4개 일치 (50000원)- 0개
-//  5개 일치 (1500000원)- 0개
-//  6개 일치 (2000000000원)- 0개
-//   총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+    public static void printResult(LottoResult lottoResult) {
+        Map<String, Integer> map = lottoResult.getResultMap();
+
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (int idx = 3; idx <= 6; idx++) {
+            System.out.print(idx + "개 일치 (");
+            System.out.print(LottoPrize.getPrize(String.valueOf(idx)) + "원)- ");
+            System.out.println(map.get(String.valueOf(idx)) + "개");
+        }
+        System.out.printf("총 수익률은 %.2f입니다.", lottoResult.getProfitRate());
+    }
 }

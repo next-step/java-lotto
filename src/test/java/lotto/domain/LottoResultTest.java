@@ -34,21 +34,20 @@ class LottoResultTest {
     @Test
     void matchList() {
         LottoResult lottoResult = new LottoResult(lottoNumbers, winningNumbers);
-        lottoResult.matchList();
 
         Map<String, Integer> resultMap = lottoResult.getResultMap();
         assertThat(resultMap.get("2")).isEqualTo(1);
         assertThat(resultMap.get("3")).isEqualTo(1);
-        assertThat(resultMap.get("4")).isEqualTo(null);
+        assertThat(resultMap.get("4")).isEqualTo(0);
     }
 
     @Test
     @DisplayName("수익률")
     void statistics() {
         LottoResult lottoResult = new LottoResult(lottoNumbers, winningNumbers);
-        lottoResult.matchList();
+        lottoResult.statistics(2000);
 
-        int result = (int) (lottoResult.statistics(2000) * 100);
+        int result = (int) (lottoResult.getProfitRate() * 100);
         assertThat(result).isEqualTo(250);
     }
 }

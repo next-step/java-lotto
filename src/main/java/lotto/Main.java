@@ -20,7 +20,8 @@ public class Main {
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
 
         LottoResult lottoResult = new LottoResult(lotto.getLottoNumbers(), winningNumber.getWinningNumbers());
-        lottoResult.matchList();
-        double result = lottoResult.statistics(buyLottoMoney);
+        lottoResult.statistics(buyLottoMoney);
+
+        ResultView.printResult(lottoResult);
     }
 }
