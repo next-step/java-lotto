@@ -22,6 +22,6 @@ class LottoUtilTest {
 
         assertThat(winningNumbers).size().isEqualTo(6);
         assertThat(winningNumbers).containsExactly(1, 2, 3, 4, 5, 6);
-
     }
+
 }
