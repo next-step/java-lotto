@@ -4,16 +4,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoNumber implements LottoNumberRule {
+public class ShuffleLottoNumber implements RandomLottoNumberRule {
     private static final int NUMBER_COUNT = 6;
-    private final List<Integer> availableNumbers;
+    private final List<LottoNumber> availableNumbers;
 
-    private RandomLottoNumber(List<Integer> availableNumbers) {
+    private ShuffleLottoNumber(List<LottoNumber> availableNumbers) {
         this.availableNumbers = availableNumbers;
     }
 
-    public static RandomLottoNumber create(List<Integer> availableNumbers) {
-        return new RandomLottoNumber(availableNumbers);
+    public static ShuffleLottoNumber create(List<LottoNumber> availableNumbers) {
+        return new ShuffleLottoNumber(availableNumbers);
     }
 
     public List<LottoNumber> make() {
@@ -21,7 +21,6 @@ public class RandomLottoNumber implements LottoNumberRule {
 
         return IntStream.range(0, NUMBER_COUNT)
                 .mapToObj(availableNumbers::get)
-                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }
