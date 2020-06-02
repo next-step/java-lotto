@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,5 +27,14 @@ class LottoNumberTest {
     void valid_lotto_numbers_byValidNumberRange(int lottoNumber) {
         assertThrows(IllegalArgumentException.class, () -> LottoNumber.validNumberRange(lottoNumber));
         assertThrows(IllegalArgumentException.class, () -> LottoNumber.validNumberRange(lottoNumber));
+    }
+
+    @Test
+    @DisplayName("numbers 값은 변경 불가능한 값이어야한다.")
+    void not_change_lotto_numbers() {
+        List<Integer> originalNumbers = LottoNumber.getNumbers();
+        originalNumbers.clear();
+        List<Integer> changedNumbers = LottoNumber.getNumbers();
+        assertThat(changedNumbers).isNotEmpty();
     }
 }
