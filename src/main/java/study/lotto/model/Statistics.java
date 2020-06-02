@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    private final LottoList lottoList;
+    private final Lottos lottos;
     private final Map<LottoRank, Integer> statistics = new HashMap<>();
 
-    public Statistics(LottoList lottoList) {
-        this.lottoList = lottoList;
+    public Statistics(Lottos lottos) {
+        this.lottos = lottos;
 
         for(LottoRank lottoRank : LottoRank.values()) {
             statistics.put(lottoRank, 0);
@@ -18,7 +18,7 @@ public class Statistics {
     }
 
     public void calculateStatistics(WinningLotto winningLotto) {
-        lottoList.getLottoList()
+        lottos.getLottoList()
                 .forEach(lotto -> {
                     LottoRank lottoRank = lotto.getPrize(winningLotto);
                     statistics.put(lottoRank, statistics.get(lottoRank)+1);

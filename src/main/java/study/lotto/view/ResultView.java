@@ -1,6 +1,6 @@
 package study.lotto.view;
 
-import study.lotto.model.LottoList;
+import study.lotto.model.Lottos;
 import study.lotto.model.LottoRank;
 import study.lotto.model.Statistics;
 
@@ -11,16 +11,25 @@ import java.text.NumberFormat;
 public class ResultView {
     private static final int EARNING_RATE_SCALE = 2;
 
-    public static void printPurchaseMessage(int numOfLotto) {
+    public static void printPurchaseMessage(int numOfLotto, Lottos lottos) {
         System.out.println(numOfLotto + "개를 구매했습니다.");
+
+        printLottoList(lottos);
+        printEmptyLine();
     }
 
-    public static void printLottoList(LottoList lottoList) {
-        lottoList.getLottoList()
+    public static void printStatisticsMessage(Statistics statistics, BigDecimal earningRate) {
+        printEmptyLine();
+        printStatistics(statistics);
+        printEarningRate(earningRate);
+    }
+
+    private static void printLottoList(Lottos lottos) {
+        lottos.getLottoList()
                 .forEach(System.out::println);
     }
 
-    public static void printStatistics(Statistics statistics) {
+    private static void printStatistics(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
@@ -34,7 +43,7 @@ public class ResultView {
                 );
     }
 
-    public static void printEarningRate(BigDecimal earningRate) {
+    private static void printEarningRate(BigDecimal earningRate) {
         NumberFormat format = NumberFormat.getInstance();
         format.setMaximumFractionDigits(EARNING_RATE_SCALE);
         format.setRoundingMode(RoundingMode.HALF_EVEN);
@@ -42,7 +51,7 @@ public class ResultView {
         System.out.println(String.format("총 수익률은 %s 입니다.", format.format(earningRate)));
     }
 
-    public static void printEmptyLine() {
+    private static void printEmptyLine() {
         System.out.println();
     }
 }

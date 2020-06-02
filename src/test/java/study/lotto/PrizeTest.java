@@ -24,7 +24,7 @@ public class PrizeTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         String[] split = input.split(", ");
-        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(split);
+        WinningLotto winningLotto = WinningLotto.of(split);
 
         LottoRank lottoRank = lotto.getPrize(winningLotto);
 

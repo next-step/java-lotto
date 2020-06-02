@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
+    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
+
+    private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -17,7 +19,7 @@ public class Lotto {
         }
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 구성 되어야 합니다.");
         }
@@ -30,6 +32,10 @@ public class Lotto {
         Collections.sort(lotto.getLottoNumbers());
 
         return lotto;
+    }
+
+    public static int calculateNumOfLottos(int totalPrice) {
+        return totalPrice / LOTTO_PRICE;
     }
 
     public List<LottoNumber> getLottoNumbers() {

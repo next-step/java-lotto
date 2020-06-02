@@ -9,7 +9,7 @@ public class WinningLotto {
 
     private final List<LottoNumber> winningNumbers;
 
-    public WinningLotto(List<LottoNumber> winningNumbers) {
+    private WinningLotto(List<LottoNumber> winningNumbers) {
         if(winningNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 구성 되어야 합니다.");
         }
@@ -17,7 +17,7 @@ public class WinningLotto {
         this.winningNumbers = winningNumbers;
     }
 
-    public static WinningLotto convertToWinningLotto(String[] winningNumbers) {
+    public static WinningLotto of(String[] winningNumbers) {
         List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers)
                                                 .map(Integer::parseInt)
                                                 .map(LottoNumber::new)

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
-import study.lotto.model.LottoList;
+import study.lotto.model.Lottos;
 import study.lotto.model.LottoNumber;
 import study.lotto.model.WinningLotto;
 
@@ -57,7 +57,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         String[] split = input.split(", ");
-        WinningLotto winningLotto = WinningLotto.convertToWinningLotto(split);
+        WinningLotto winningLotto = WinningLotto.of(split);
 
         assertThat(lotto.compareToWinningNumbers(winningLotto))
                 .isEqualTo(3);
@@ -66,11 +66,11 @@ public class LottoTest {
     @DisplayName("로또 여러개 동시 생성 테스트")
     @Test
     void create_lotto_list() {
-        LottoList lottoList = LottoList.create(4);
+        Lottos lottos = Lottos.create(4);
 
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(lottoList.getLottoList().size()).isEqualTo(4);
-        softly.assertThat(lottoList.getLottoList())
+        softly.assertThat(lottos.getLottoList().size()).isEqualTo(4);
+        softly.assertThat(lottos.getLottoList())
                 .allMatch(Objects::nonNull);
         softly.assertAll();
     }

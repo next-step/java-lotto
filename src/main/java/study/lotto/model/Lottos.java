@@ -3,17 +3,17 @@ package study.lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoList {
+public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public static LottoList create(int num) {
-        LottoList lottoList = new LottoList();
+    public static Lottos create(int num) {
+        Lottos lottos = new Lottos();
 
         for(int i = 0; i < num; i++) {
-            lottoList.addLotto(Lotto.generate());
+            lottos.addLotto(Lotto.generate());
         }
 
-        return lottoList;
+        return lottos;
     }
 
     private void addLotto(Lotto lotto) {
