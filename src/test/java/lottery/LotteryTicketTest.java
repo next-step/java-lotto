@@ -1,5 +1,6 @@
 package lottery;
 
+import lottery.domain.BonusBall;
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryRank;
 import lottery.domain.LotteryTicket;
@@ -83,7 +84,8 @@ public class LotteryTicketTest {
         LotteryTicket fourthTicket = LotteryTicket.from("1,2,3,4,10,15".split(","));
 
         LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
-        LotteryNumber bonusBallNumber = LotteryNumber.from(10);
+        BonusBall bonusBallNumber = BonusBall.of(10, winnerTicket);
+
 
         assertThat(firstTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
                 .isEqualTo(LotteryRank.FIRST_PRIZE);
@@ -98,7 +100,7 @@ public class LotteryTicketTest {
         LotteryTicket thirdWinnerTicket = LotteryTicket.from("1,2,3,4,5,7".split(","));
 
         LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,8".split(","));
-        LotteryNumber bonusBallNumber = LotteryNumber.from(6);
+        BonusBall bonusBallNumber = BonusBall.of(6, winnerTicket);
 
         assertThat(secondWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
                 .isEqualTo(LotteryRank.SECOND_PRIZE);

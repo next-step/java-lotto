@@ -32,7 +32,7 @@ public class LotteryGameTest {
         LotteryTicket loser = LotteryTicket.from("1,2,3,4,5,6".split(","));
         LotteryTicket winner = LotteryTicket.from("11,22,33,44,1,2".split(","));
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(Arrays.asList(loser, winner));
-        LotteryNumber bonusBallNumber = LotteryNumber.from(45);
+        BonusBall bonusBallNumber = BonusBall.of(45, winnerTicket);
 
         LotteryGame lotteryGame = LotteryGame.getInstance();
         Map<LotteryRank, Integer> winnerTicketsGroup = lotteryTicketsGroup

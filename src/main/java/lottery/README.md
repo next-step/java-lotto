@@ -38,6 +38,9 @@
 * LotteryGameResult
     * 로또 당첨자 명단을 바탕으로 수익률 집계 및 각 순위별 당첨 티켓의 수 정보를 제공함.
 
+* BonusBall
+    * 보너스 볼 번호 래핑
+ 
 * RateOfRetrun
     * 수익률을 바탕으로 적자인지 흑자인지를 판단함
 

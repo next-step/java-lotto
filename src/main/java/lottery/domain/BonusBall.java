@@ -18,4 +18,8 @@ public class BonusBall {
             throw new IllegalArgumentException(ErrorMessages.INVALID_BONUS_BALL_NUMBER);
         }
     }
+
+    public int getLotteryNumber() {
+        return bonusBallNumber.getLotteryNumber();
+    }
 }

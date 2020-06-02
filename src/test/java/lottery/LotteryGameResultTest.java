@@ -14,7 +14,7 @@ public class LotteryGameResultTest {
     private LotteryGame lotteryGame;
     private LotteryTicket lastWinnerTicket;
     private LotteryTicket thirdWinnerTicket;
-    private LotteryNumber bonusBallNumber;
+    private BonusBall bonusBallNumber;
     private LotteryTicketsGroup winnerTicketsGroup;
 
     @BeforeEach
@@ -24,7 +24,7 @@ public class LotteryGameResultTest {
         thirdWinnerTicket = LotteryTicket.from("11, 22, 33, 44, 9, 3".split(", "));
         winnerTicketsGroup = LotteryTicketsGroup.from(
                 Arrays.asList(lastWinnerTicket, thirdWinnerTicket));
-        bonusBallNumber = LotteryNumber.from(45);
+        bonusBallNumber = BonusBall.of(45, lastWinnerTicket);
     }
 
     @DisplayName("우승 티켓 목록을 받으면 각 등수별 당첨자 수를 저장한 Map을 반환함")

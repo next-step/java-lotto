@@ -38,12 +38,12 @@ public class LotteryTicket {
                 .collect(Collectors.toList());
     }
 
-    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket, LotteryNumber bonusBallNumber) {
+    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket, BonusBall bonusBall) {
         long matchNumberCounts = this.getLotteryNumbers().stream()
                 .filter(targetNumber ->
                         lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(targetNumber)))
                 .count();
-        boolean isContainingBonusBall = this.isContainingLotteryNumber(bonusBallNumber.getLotteryNumber());
+        boolean isContainingBonusBall = this.isContainingLotteryNumber(bonusBall.getLotteryNumber());
         return LotteryRank.valueOf((int) matchNumberCounts, isContainingBonusBall);
     }
 
