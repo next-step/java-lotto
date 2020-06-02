@@ -11,7 +11,7 @@ import lotto.collections.Money;
 public class MoneyTest {
 
 	@DisplayName("돈의 범위가 1000원 미만인 경우 오류를 뱉는다.")
-	@CsvSource({"999", "-999", "0", "-1", "1"})
+	@CsvSource({"999", "-999", "11", "-1", "1"})
 	@ParameterizedTest
 	void 구매할_금액이_1000원_미만일_수_없다(int value) {
 		assertThatThrownBy(

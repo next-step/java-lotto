@@ -9,6 +9,9 @@ public final class Money {
 	}
 
 	private int validateMoneyRange(Integer money) {
+		if (money == 0) {
+			return money;
+		}
 		if (money < 1000) {
 			throw new RuntimeException("money input is wrong.");
 		}
