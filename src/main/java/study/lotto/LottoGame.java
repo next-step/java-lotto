@@ -13,7 +13,7 @@ public class LottoGame {
         int totalPrice = InputView.scanTotalPrice();
         int numOfLottos = Lotto.calculateNumOfLottos(totalPrice);
 
-        Lottos lottos = Lottos.create(numOfLottos);
+        Lottos lottos = Lottos.of(numOfLottos);
 
         ResultView.printPurchaseMessage(numOfLottos, lottos);
 
