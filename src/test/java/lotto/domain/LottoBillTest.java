@@ -69,7 +69,7 @@ class LottoBillTest {
 
     private LottoTicket createLottoTicket(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         return new LottoTicket(lottoNumbers);
