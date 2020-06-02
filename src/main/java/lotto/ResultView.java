@@ -7,8 +7,12 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구입했습니다.", lottos.size()));
+    public static void printLottos(LottoIssueResponse response) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+                response.sizeAutoLottos(),
+                response.sizeManualLottos()));
+
+        Lottos lottos = response.getLottos();
 
         for (int i = 0; i < lottos.size(); i++) {
             printLotto(lottos.getLotto(i));

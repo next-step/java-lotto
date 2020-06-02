@@ -22,6 +22,10 @@ public class LottoIssueRequest {
 		return manualNumbers;
 	}
 
+	public int getAutoQuantity() {
+		return paidMoney / Lotto.PRICE - manualNumbers.size();
+	}
+
 	private void validate() {
 		validatePaidMoney();
 		validateManualNumbers();

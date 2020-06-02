@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -7,15 +9,21 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoMachine {
 
-    public Lottos issue(LottoIssueRequest request) {
-        int quantity = getPurchasableQuantity(request.getPaidMoney());
+    public LottoIssueResponse issue(LottoIssueRequest request) {
+        Lottos autoLottos = issueAutoLottos(request.getAutoQuantity());
+        Lottos manualLottos = issueManualLottos(request.getManualNumbers());
+        return new LottoIssueResponse(autoLottos, manualLottos);
+    }
 
+    private Lottos issueAutoLottos(int quantity) {
         return IntStream.range(0, quantity)
                 .mapToObj(i -> new Lotto(new AutoLottoNumberSelectRule()))
                 .collect(collectingAndThen(toList(), Lottos::new));
     }
 
-    private int getPurchasableQuantity(int paidMoney) {
-        return paidMoney / Lotto.PRICE;
+    private Lottos issueManualLottos(List<Set<Integer>> manualNumbers) {
+        return manualNumbers.stream()
+                .map(m -> new Lotto(new ManualLottoNumberSelectRule(m)))
+                .collect(collectingAndThen(toList(), Lottos::new));
     }
 }

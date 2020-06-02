@@ -4,10 +4,11 @@ public class Application {
 
     public static void main(String[] args) {
         LottoMachine machine = new LottoMachine();
-        LottoIssueRequest request = new LottoIssueRequest(InputView.getPaid(), InputView.askManualNumbers());
-        Lottos lottos = machine.issue(request);
-        ResultView.printLottos(lottos);
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(InputView.getPaid(), InputView.askManualNumbers());
+        LottoIssueResponse lottoIssueResponse = machine.issue(lottoIssueRequest);
+        ResultView.printLottos(lottoIssueResponse);
 
+        Lottos lottos = lottoIssueResponse.getLottos();
         LottoResults results = lottos.checkResults(InputView.askWinningNumbers(), InputView.askBonusNumber());
         ResultView.printResults(results);
     }
