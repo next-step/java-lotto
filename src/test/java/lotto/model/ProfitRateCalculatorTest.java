@@ -13,6 +13,6 @@ public class ProfitRateCalculatorTest {
       "14000, 2000000000, 142857.14"
   })
   void calculate(long expense, long income, double expected) {
-    assertThat(ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense)).isEqualTo(expected);
+    assertThat(ProfitRateCalculator.calculateByTwoDecimalPlaces(new Money(income), new Money(expense))).isEqualTo(expected);
   }
 }

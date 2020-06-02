@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Lotto {
 
+  public final static Money PRICE = new Money(1000);
+
   private final List<LottoNumbers> lottoList;
 
   public Lotto(List<LottoNumbers> lottoList) {

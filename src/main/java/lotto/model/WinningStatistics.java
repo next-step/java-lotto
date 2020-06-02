@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 public class WinningStatistics {
 
   private Map<PrizeTier, Integer> prizeTierCntMap;
-  private long income = 0;
-  private long expense = 0;
+  private Money income;
+  private Money expense;
 
   private WinningStatistics(Lotto lotto, WinningNumbers winningNumbers) {
     prizeTierCntMap = new HashMap<>();
+    income = new Money(0);
+    expense = new Money(0);
 
     for (PrizeTier prizeTier : PrizeTier.values()) {
       prizeTierCntMap.put(prizeTier, 0);
@@ -59,8 +61,8 @@ public class WinningStatistics {
   private void setIncomeAndExpense() {
     for (PrizeTier prizeTier : prizeTierCntMap.keySet()) {
       int lottoCnt = prizeTierCntMap.get(prizeTier);
-      income += prizeTier.getPrize() * lottoCnt;
-      expense += Price.LOTTO.getPrice() * lottoCnt;
+      income.add(new Money(prizeTier.getPrize() * lottoCnt));
+      expense.add(new Money(Lotto.PRICE.getValue() * lottoCnt));
     }
   }
 }

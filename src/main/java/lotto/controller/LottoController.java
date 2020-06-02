@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Scanner;
 import lotto.model.Lotto;
 import lotto.model.LottoFactory;
+import lotto.model.Money;
 import lotto.model.WinningNumbers;
 import lotto.model.WinningStatistics;
 import lotto.view.LottoView;
@@ -14,7 +15,7 @@ public class LottoController {
   public static void main(String[] args) {
     LottoView.printPurchaseRequestMsg();
 
-    Lotto lotto = LottoFactory.createLottoByQuickPick(scanner.nextInt());
+    Lotto lotto = LottoFactory.createLottoByQuickPick(new Money(scanner.nextInt()));
     scanner.nextLine();
 
     LottoView.printPurchaseDoneMsg(lotto.getLottoList().size());
