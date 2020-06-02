@@ -10,7 +10,6 @@ public enum LottoNumberPool {
 
   private final static int MIN = 1;
   private final static int MAX = 45;
-  private final static int SIZE = 6;
 
   private final List<Integer> numbers;
 
@@ -21,7 +20,7 @@ public enum LottoNumberPool {
     }
   }
 
-  public List<Integer> getNumbers(){
+  public List<Integer> getNumbers() {
     return new ArrayList<>(numbers);
   }
 
@@ -33,7 +32,7 @@ public enum LottoNumberPool {
   public List<Integer> quickPick() {
     Collections.shuffle(numbers);
 
-    return numbers.stream().limit(SIZE).sorted(Integer::compareTo)
+    return numbers.stream().limit(Lotto.SIZE).sorted(Integer::compareTo)
         .collect(Collectors.toList());
   }
 }
