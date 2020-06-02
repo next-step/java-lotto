@@ -2,14 +2,15 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.collections.LottoResult;
+import lotto.collections.RewardType;
 
 public class LottoResultTest {
 
@@ -18,9 +19,8 @@ public class LottoResultTest {
 	@ParameterizedTest
 	void 구매액을_기준으로_수익률을_반환한다(int lottoTicketSize, double expected) {
 		//given
-		Map<Integer, Integer> lottoStatistics = new HashMap<>();
-		lottoStatistics.put(2, 0);
-		lottoStatistics.put(3, 1);
+		List<RewardType> lottoStatistics = new ArrayList<>();
+		lottoStatistics.add(RewardType.THIRD);
 		LottoResult lottoResult = new LottoResult(lottoStatistics);
 
 		//then
