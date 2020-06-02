@@ -34,7 +34,7 @@ class LottoGameTest {
         int gameCount = lottoGame.buyLotto(input);
 
         // lottoList = LottoGame.
-        LottoGame.issueLotto(gameCount);
+        lottoGame.issueLotto(gameCount);
 
         //OutputView.
         OutputView.outputLottoList(lottoGame.getLottoList());

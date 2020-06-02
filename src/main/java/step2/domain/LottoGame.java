@@ -16,15 +16,26 @@ public class LottoGame {
     private static final int LOTTO_DRAW_LIMIT = 6;
     private static final String FIXED_DELIMITER = ",|:| ";
 
-
+    private static List<Integer> lottoGameNumbers = new ArrayList<>();
     private static List<Lotto> lottoList = new ArrayList<>();
+
     private static List<Integer> winningNumberList = new ArrayList<>();
-
-
     private static List<Prize> prizeList = new ArrayList<>();
 
+
+    public LottoGame() {
+
+        // ready
+        List<Integer> lottoGameNumbers = new ArrayList<>();
+
+        for (int i = 1; i < LOTTO_MAX_LIMIT; i++) {
+            lottoGameNumbers.add(i);
+        }
+
+    }
+
     // buy
-    public static int buyLotto(String payMoney) {
+    public int buyLotto(String payMoney) {
 
         Number.checkNotNumber(payMoney);
         Number.checkNumber(payMoney);
@@ -36,15 +47,15 @@ public class LottoGame {
     }
 
     // issue
-    public static void issueLotto(int gameCount) {
+    public void issueLotto(int gameCount) {
 
         for (int i = 0; i < gameCount; i++) {
-            lottoList.add(Lotto.of(LOTTO_MAX_LIMIT, LOTTO_DRAW_LIMIT));
+            lottoList.add(Lotto.of(LOTTO_DRAW_LIMIT, lottoGameNumbers));
         }
 
     }
 
-    private static int getGameCountByPayMoney(int payMoney) {
+    private int getGameCountByPayMoney(int payMoney) {
 
         if (payMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");
@@ -52,7 +63,7 @@ public class LottoGame {
         return payMoney / LOTTO_PRICE;
     }
 
-    public static void checkWiningNumber(String winingNumber) {
+    public void checkWiningNumber(String winingNumber) {
 
         String[] winningNumberArray = winingNumber.split(FIXED_DELIMITER);
 
@@ -67,7 +78,7 @@ public class LottoGame {
                 .map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    public static void makeRules() {
+    public void makeRules() {
 
         prizeList.add(Prize.of(3, 5000));
         prizeList.add(Prize.of(4, 50000));
@@ -79,16 +90,16 @@ public class LottoGame {
     }
 
 
-    public static List<Lotto> getLottoList() {
+    public List<Lotto> getLottoList() {
         return lottoList;
     }
 
-    public static List<Prize> getPrizeList() {
+    public List<Prize> getPrizeList() {
         return prizeList;
     }
 
 
-    public static void matchingWinningNumbers() {
+    public void matchingWinningNumbers() {
 
         lottoList.forEach(lotto -> {
                     int matchedNumber = getWinningcount(lotto);
@@ -99,7 +110,7 @@ public class LottoGame {
     }
 
 
-    private static int getWinningcount(Lotto lotto) {
+    private int getWinningcount(Lotto lotto) {
 
         int result = 0;
 
@@ -113,7 +124,7 @@ public class LottoGame {
     }
 
 
-    private static void addPrize(int matchedNumber) {
+    private void addPrize(int matchedNumber) {
 
         for (Prize prize : prizeList) {
             if (prize.getMatchedNumber() == matchedNumber) {
@@ -123,9 +134,14 @@ public class LottoGame {
     }
 
 
-    public static double totalResult() {
+    public double totalResult() {
 
         int sum = prizeList.stream().mapToInt(prize -> prize.getPrizeTotal()).sum();
         return sum / (lottoList.size() * LOTTO_PRICE);
     }
+
+    public List<Integer> getLottoGameNumbers() {
+        return lottoGameNumbers;
+    }
+
 }

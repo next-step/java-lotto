@@ -18,16 +18,9 @@ public class Lotto {
 
     }
 
-    public static Lotto of(int lottoMaxLimit, int lottoDrawLimit) {
+    public static Lotto of(int lottoDrawLimit, List<Integer> lottoGameNumbers) {
 
         Lotto lotto = new Lotto();
-
-        // ready
-        List<Integer> lottoGameNumbers = new ArrayList<>();
-
-        for (int i = 1; i < lottoMaxLimit; i++) {
-            lottoGameNumbers.add(i);
-        }
 
         // shuffle
         Collections.shuffle(lottoGameNumbers);
