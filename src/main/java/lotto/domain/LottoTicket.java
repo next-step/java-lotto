@@ -23,6 +23,11 @@ public class LottoTicket {
 		return lottoNumbers;
 	}
 
+	public boolean doesContainBonusBall(LottoNumber bonusBall) {
+		return lottoNumbers.stream()
+			.anyMatch(number -> number.getNumber().equals(bonusBall.getNumber()));
+	}
+
 	@Override
 	public String toString() {
 		return "[" + lottoNumbers.stream()

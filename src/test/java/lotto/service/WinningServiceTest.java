@@ -46,4 +46,26 @@ public class WinningServiceTest {
 		assertThat(lottoResult.getLottoStatistics().get(expectedMatchType))
 			.isEqualTo(matchCount);
 	}
+
+	@DisplayName("보너스 볼을 입력했을 때 게임에서 유효한 보너스 볼일 지 검증한다.")
+	@CsvSource(value = {"1,2,3,4,5,6 : 6 : true", "1,2,3,4,5,7 : 7 : true"
+		, "3,4,5,6,22,33 : 44 : false",
+		"4,5,6,7,28,42 : 23 : false"}, delimiter = ':')
+	@ParameterizedTest
+	public void 보너스볼_입력시_유효한지_확인한다(String lottoNumber, int bonusBallValue, boolean bonusBallValidity) {
+
+		//given
+		List<LottoNumber> lottoNumbersBeforeList = Arrays.stream(lottoNumber.split(","))
+			.map(Integer::parseInt)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
+		LottoTicket mockTicket = new LottoTicket(lottoNumbersBeforeList);
+		LottoTickets mockTickets = new LottoTickets(Collections.singletonList(mockTicket));
+
+		//when
+		LottoNumber bonusBall = new LottoNumber(bonusBallValue);
+
+		//then
+		assertThat(WinningService.isBonusBall(mockTickets, bonusBall)).isEqualTo(bonusBallValidity);
+	}
 }
