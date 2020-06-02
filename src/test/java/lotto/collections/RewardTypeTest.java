@@ -15,12 +15,11 @@ public class RewardTypeTest {
 
 	private static Stream<Arguments> lottoStatisticsMock() { // argument source method
 		Map<Integer, Integer> oneLottoStatistics = new HashMap<>();
-		oneLottoStatistics.put(1, 0);
+		oneLottoStatistics.put(1, 1);
 		oneLottoStatistics.put(2, 1);
 		oneLottoStatistics.put(3, 1);
-		oneLottoStatistics.put(4, 1);
-		oneLottoStatistics.put(5, 1);
-		oneLottoStatistics.put(6, 0);
+		oneLottoStatistics.put(4, 0);
+		oneLottoStatistics.put(5, 0);
 
 		return Stream.of(
 			Arguments.of(oneLottoStatistics, 1555000)

@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum RewardType {
-	THIRD(3, new Money(5000)),
-	FOURTH(4, new Money(50000)),
-	FIFTH(5, new Money(1500000)),
-	SIXTH(6, new Money(2_000_000_000));
+	THIRD(1, new Money(5000)),
+	FOURTH(2, new Money(50000)),
+	FIFTH(3, new Money(1500000)),
+	FIFTH_BONUS(4, new Money(30000000)),
+	SIXTH(5, new Money(2_000_000_000));
 
 	private final int code;
 	private final Money reward;
