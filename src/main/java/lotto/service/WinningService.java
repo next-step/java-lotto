@@ -13,7 +13,7 @@ import lotto.domain.LottoNumber;
 
 public class WinningService {
 
-	public WinningNumbers createWinningNumbers(final String winningNumber) {
+	public static WinningNumbers createWinningNumbers(final String winningNumber) {
 		List<Integer> winningNumberBeforeList = Arrays.stream(winningNumber.split(","))
 			.map(String::trim)
 			.map(Integer::valueOf)
@@ -21,24 +21,22 @@ public class WinningService {
 		return new WinningNumbers(winningNumberBeforeList);
 	}
 
-	public LottoResult calculateLottoMatches(final LottoTickets lottoTickets,
+	public static LottoResult calculateLottoMatches(final LottoTickets lottoTickets,
 		final WinningNumbers winningNumbers) {
 		return lottoTickets.calculateLottoResult(winningNumbers);
 	}
 
-	public Money calculateProfit(List<RewardType> lottoStatistics) {
-		int value = Arrays.stream(RewardType.values())
-			.filter(lottoStatistics::contains)
-			.map(type -> type.getReward().getValue() *
-				lottoStatistics.stream()
-					.filter(element -> element.equals(type))
-					.mapToInt(i -> 1)
-					.sum()
-			).reduce(0, Integer::sum);
+	public static Money calculateProfit(List<RewardType> lottoStatistics) {
+		int value = Arrays.stream(RewardType.values()).filter(lottoStatistics::contains)
+			.map(type -> type.getReward().getValue() * lottoStatistics.stream()
+				.filter(element -> element.equals(type))
+				.mapToInt(i -> 1)
+				.sum())
+			.reduce(0, Integer::sum);
 		return new Money(value);
 	}
 
-	public boolean isBonusBall(final LottoTickets lottoTickets, final LottoNumber bonusBall) {
+	public static boolean isBonusBall(final LottoTickets lottoTickets, final LottoNumber bonusBall) {
 		return lottoTickets.getLottoTickets().stream()
 			.anyMatch(ticket -> ticket.doesContainBonusBall(bonusBall));
 	}
