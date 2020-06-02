@@ -1,7 +1,6 @@
 package com.lotto;
 
 import com.lotto.controller.LottoGame;
-import com.lotto.domain.ShuffleLottoExtractor;
 
 public class LottoMain {
 

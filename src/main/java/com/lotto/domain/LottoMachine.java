@@ -12,10 +12,13 @@ public class LottoMachine {
 
     private static List<Integer> availableLottoNumbers = Collections.unmodifiableList(makeAvailableLottoNumbers());
 
-    private LottoExtractor lottoExtractor;
+    private LottoExtractor shuffleLottoExtractor;
+    private LottoExtractor manualLottoExtractor;
     private LottoView lottoView;
 
-    public LottoMachine(LottoView lottoView) {
+    public LottoMachine(LottoView lottoView, LottoExtractor shuffleLottoExtractor, LottoExtractor manualLottoExtractor) {
+        this.shuffleLottoExtractor = shuffleLottoExtractor;
+        this.manualLottoExtractor = manualLottoExtractor;
         this.lottoView = lottoView;
     }
 
@@ -47,25 +50,22 @@ public class LottoMachine {
     }
 
     private List<Lotto> extractAutomaticLotto(Integer countOfLotto) {
-        this.lottoExtractor = new ShuffleLottoExtractor();
-
-        List<Lotto> extractedLotto = new ArrayList<>();
-        IntStream.range(0, countOfLotto).forEach(i -> {
-            List<Integer> extractedLottoNumbers = this.lottoExtractor.extractLottoNumbers(LottoMachine.availableLottoNumbers);
-            extractedLotto.add(new Lotto(extractedLottoNumbers, 0));
-        });
-
-        return extractedLotto;
+        return extractLotto(countOfLotto, this.shuffleLottoExtractor, LottoMachine.availableLottoNumbers);
     }
 
     private List<Lotto> extractManualLotto(Integer countOfLotto) {
-        this.lottoView.outputManualLottoMessage();
-        this.lottoExtractor = new ManualLottoExtractor();
+        return extractLotto(countOfLotto, this.manualLottoExtractor, getManualLotto());
+    }
 
+    private List<Integer> getManualLotto() {
+        String manualLotto = this.lottoView.inputManualLotto();
+        return LottoViewHelper.manipulateInputLottoNumbers(manualLotto);
+    }
+
+    private List<Lotto> extractLotto(Integer countOfLotto, LottoExtractor lottoExtractor, List<Integer> availableLottoNumbers) {
         List<Lotto> extractedLotto = new ArrayList<>();
         IntStream.range(0, countOfLotto).forEach(i -> {
-            String manualLotto = this.lottoView.inputManualLotto();
-            List<Integer> extractedLottoNumbers = LottoViewHelper.manipulateInputLottoNumbers(manualLotto);
+            List<Integer> extractedLottoNumbers = lottoExtractor.extractLottoNumbers(availableLottoNumbers);
             extractedLotto.add(new Lotto(extractedLottoNumbers, 0));
         });
 

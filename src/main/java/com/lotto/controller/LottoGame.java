@@ -5,6 +5,8 @@ import com.lotto.domain.LottoBonusBall;
 import com.lotto.domain.LottoMachine;
 import com.lotto.domain.LottoWinningNumbers;
 import com.lotto.domain.LottoWinningStatistic;
+import com.lotto.domain.ManualLottoExtractor;
+import com.lotto.domain.ShuffleLottoExtractor;
 import com.lotto.view.LottoView;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class LottoGame {
     private LottoWinningStatistic lottoWinningStatistic;
 
     public LottoGame() {
-        this.lottoMachine = new LottoMachine(new LottoView());
+        this.lottoMachine = new LottoMachine(new LottoView(), new ShuffleLottoExtractor(), new ManualLottoExtractor());
         this.lottoWinningStatistic = new LottoWinningStatistic();
     }
 
