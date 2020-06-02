@@ -72,7 +72,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return Arrays.toString(lottoNumbers.toArray());
+        return String.valueOf(lottoNumbers);
     }
 
     @Override
