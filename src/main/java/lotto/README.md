@@ -36,7 +36,7 @@
     - [X] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
     
 - LottoIssueRequest: 로또 발급 요청
-    - [ ] 수동 발급 번호와, 구입 Price를 가질 수 있다.
+    - [X] 수동 발급 번호와, 구입 Price를 가질 수 있다.
     
 - LottoNumber: 로또 개별 번호
     - [X] 로또 번호 하나는 1~45 사이의 값을 갖는다.
@@ -51,12 +51,12 @@
 - LottoTicket: 로또 티켓(묶음) 
     - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
     - [X] WinningNumbers, 보너스 볼(LottoNumber)을 입력 받아 매칭 결과를 반환할 수 있다.
-    - [ ] LottoIssueRequest를 요청받아 LottoTicket을 생성할 수 있다.
+    - [X] LottoIssueRequest와 NumberGenerator를 요청 받아 LottoTicket을 생성할 수 있다.
 
 - NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
     - [X] 1~45 사이의 무작위 값으로 구성된 6개의 숫자를 반환할 수 있다.
 
-- WinningNumbers: 지난 주 당첨 번호
+- WinningLotto: 지난 주 당첨 번호
     - [X] 지난 주 당첨 LottoNumbers를 갖는다.
     - [X] LottoNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.
 
@@ -72,10 +72,10 @@
     - [X] 구입 Price를 입력 받을 수 있다.
     - [X] WinningNumbers를 입력 받을 수 있다.
     - [X] 보너스 볼을 입력 받을 수 있다.
-    - [ ] 수동 로또 발급 수를 입력 받을 수 있다.
-    - [ ] 수동 로또 번호를 발급 갯수만큼 입력 받을 수 있다.
+    - [X] 수동 로또 발급 수를 입력 받을 수 있다.
+    - [X] 수동 로또 번호를 발급 갯수만큼 입력 받을 수 있다.
     
 - OutPutView
-    - [ ] 수동 로또 구매 갯수와 자동 로또 구매 갯수를 출력할 수 있다.
+    - [X] 수동 로또 구매 갯수와 자동 로또 구매 갯수를 출력할 수 있다.
     - [X] LottoTicket을 출력할 수 있다.
     - [X] WinningStatistics를 출력할 수 있다.
