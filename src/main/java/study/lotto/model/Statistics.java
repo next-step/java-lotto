@@ -17,10 +17,18 @@ public class Statistics {
         }
     }
 
-    public void calculateStatistics(WinningLotto winningLotto) {
+    private void validateBonusNumber(WinningLotto winningLotto, int bonusNumber) {
+        if(winningLotto.getLottoNumbers().contains(new LottoNumber(bonusNumber))) {
+            throw new IllegalArgumentException("당첨 번호에 보너스볼 번호가 포함되면 안됩니다.");
+        }
+    }
+
+    public void calculateStatistics(WinningLotto winningLotto, int bonusNumber) {
+        validateBonusNumber(winningLotto, bonusNumber);
+
         lottos.getLottoList()
                 .forEach(lotto -> {
-                    LottoRank lottoRank = lotto.getPrize(winningLotto);
+                    LottoRank lottoRank = lotto.getLottoRank(winningLotto, bonusNumber);
                     statistics.put(lottoRank, statistics.get(lottoRank)+1);
                 });
     }
@@ -34,7 +42,7 @@ public class Statistics {
     private int calculateTotalEarning() {
         return statistics.keySet()
                 .stream()
-                .map(prize -> prize.getPrize() * statistics.get(prize))
+                .map(lottoRank -> lottoRank.getPrize() * statistics.get(lottoRank))
                 .mapToInt(Integer::intValue).sum();
     }
 

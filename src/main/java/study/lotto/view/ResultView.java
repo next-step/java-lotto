@@ -10,6 +10,8 @@ import java.text.NumberFormat;
 
 public class ResultView {
     private static final int EARNING_RATE_SCALE = 2;
+    private static final String LOTTO_RANK_STRING_FORMAT_BASIC = "%d개 일치 (%d원)- %d개";
+    private static final String LOTTO_RANK_STRING_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
 
     public static void printPurchaseMessage(int numOfLotto, Lottos lottos) {
         System.out.println(numOfLotto + "개를 구매했습니다.");
@@ -36,7 +38,8 @@ public class ResultView {
         LottoRank.getLottoRanksOverMinimumMatches()
                 .forEach(lottoRank ->
                     System.out.println(
-                            String.format("%d개 일치 (%d원)- %d개",
+                            String.format(lottoRank.equals(LottoRank.SECOND_RANK) ?
+                                            LOTTO_RANK_STRING_FORMAT_SECOND : LOTTO_RANK_STRING_FORMAT_BASIC,
                                     lottoRank.getMatches(),
                                     lottoRank.getPrize(),
                                     statistics.getStatistics().get(lottoRank)))

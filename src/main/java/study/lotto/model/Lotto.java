@@ -1,6 +1,8 @@
 package study.lotto.model;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -33,8 +35,6 @@ public class Lotto {
         return lottoNumbers;
     }
 
-
-
     public long compareToWinningNumbers(WinningLotto winningLotto) {
         return lottoNumbers
                 .stream()
@@ -42,8 +42,14 @@ public class Lotto {
                 .count();
     }
 
-    public LottoRank getPrize(WinningLotto winningLotto) {
-        return LottoRank.find((int)compareToWinningNumbers(winningLotto));
+    private boolean containsBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    }
+
+    public LottoRank getLottoRank(WinningLotto winningLotto, int bonusNumber) {
+        return LottoRank.find(
+                (int)compareToWinningNumbers(winningLotto),
+                containsBonusNumber(bonusNumber));
     }
 
     public String toString() {

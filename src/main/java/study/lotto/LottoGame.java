@@ -11,6 +11,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
         int totalPrice = InputView.scanTotalPrice();
+        int bonusNumber = InputView.scanBonusNumber();
         int numOfLottos = Lotto.calculateNumOfLottos(totalPrice);
 
         Lottos lottos = Lottos.of(numOfLottos);
@@ -20,7 +21,7 @@ public class LottoGame {
         WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningNumbers());
 
         Statistics statistics = new Statistics(lottos);
-        statistics.calculateStatistics(winningLotto);
+        statistics.calculateStatistics(winningLotto, bonusNumber);
 
         ResultView.printStatisticsMessage(statistics, statistics.calculateEarningRate(totalPrice));
     }

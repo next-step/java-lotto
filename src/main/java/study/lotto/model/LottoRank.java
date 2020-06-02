@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 
 public enum LottoRank {
     FIRST_RANK(6, 2_000_000_000),
-    SECOND_RANK(5, 1_500_000),
-    THIRD_RANK(4, 50_000),
-    FORTH_RANK(3, 5_000),
+    SECOND_RANK(5, 30_000_000),
+    THIRD_RANK(5, 1_500_000),
+    FORTH_RANK(4, 50_000),
+    FIFTH_RANK(3, 5_000),
     NO_RANK(0, 0);
 
     private static final int MAXIMUM_PRIZE_MATCHES = 6;
+    private static final int SECOND_PRIZE_MATCHES = 5;
     private static final int MINIMUM_PRIZE_MATCHES = 3;
     private static final int NO_PRIZE_MATCHES = 0;
 
@@ -24,6 +26,7 @@ public enum LottoRank {
 
     static {
         BY_MATCHES = Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.getMatches() != SECOND_PRIZE_MATCHES)
                 .collect(Collectors.toMap(o -> o.matches, Function.identity()));
     }
 
@@ -38,8 +41,13 @@ public enum LottoRank {
         }
     }
 
-    public static LottoRank find(int matches) {
+    public static LottoRank find(int matches, boolean matchBonus) {
         validateMatchCount(matches);
+
+        if(matches == (SECOND_PRIZE_MATCHES-1)) {
+            return matchBonus? SECOND_RANK : THIRD_RANK;
+        }
+
         return BY_MATCHES.getOrDefault(matches, LottoRank.NO_RANK);
     }
 
