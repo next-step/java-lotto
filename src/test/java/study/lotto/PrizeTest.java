@@ -21,7 +21,7 @@ public class PrizeTest {
     @ValueSource(strings = { "1, 2, 3, 4, 5, 6", "2, 3, 4, 7, 9, 12" })
     void check_prize(String input) {
         List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::new).collect(Collectors.toList());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = input.split(", ");
         WinningLotto winningLotto = WinningLotto.of(split);

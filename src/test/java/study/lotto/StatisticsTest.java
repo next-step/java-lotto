@@ -15,7 +15,7 @@ public class StatisticsTest {
     @DisplayName("수익률 계산")
     @Test
     void calculate_earning_rate() {
-        Lottos lottos = Lottos.create(10);
+        Lottos lottos = Lottos.of(10);
 
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
         WinningLotto winningLotto = WinningLotto.of(split);
