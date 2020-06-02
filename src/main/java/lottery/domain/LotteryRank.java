@@ -21,19 +21,20 @@ public enum LotteryRank {
     }
 
     public static LotteryRank valueOf(int matchNumberCounts, boolean isContainingBonusBall) {
-        if (isLosingTicket(matchNumberCounts)) {
-            return MISS;
-        }
+        validateMatchNumberCounts(matchNumberCounts);
         return Arrays.stream(values())
                 .filter(lotteryRank -> lotteryRank.matchNumberCounts == matchNumberCounts
                         && lotteryRank.isContainingBonusBall == isContainingBonusBall)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS));
+                .findFirst()
+                .orElse(MISS);
     }
 
-    private static boolean isLosingTicket(int matchNumberCounts) {
-        return MISS.matchNumberCounts <= matchNumberCounts && matchNumberCounts < FIFTH_PRIZE.matchNumberCounts;
+    private static void validateMatchNumberCounts(int matchNumberCounts) {
+        if (matchNumberCounts < MISS.matchNumberCounts || matchNumberCounts > FIFTH_PRIZE.matchNumberCounts) {
+            throw new IllegalArgumentException(ErrorMessages.INVALID_MATCH_NUMBER_COUNTS);
+        }
     }
+
 
     public double calculatePrizeMoneySum(int winnerTicketCounts) {
         return (double) prizeMoney * winnerTicketCounts;

@@ -44,9 +44,6 @@ public class LotteryTicket {
                         lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(targetNumber)))
                 .count();
         boolean isContainingBonusBall = this.isContainingLotteryNumber(bonusBallNumber);
-        if (isContainingBonusBall && !lastWinnerTicket.isContainingLotteryNumber(bonusBallNumber)) {
-            matchNumberCounts++;
-        }
         return LotteryRank.valueOf((int) matchNumberCounts, isContainingBonusBall);
     }
 
