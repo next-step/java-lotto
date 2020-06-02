@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoNumbers {
@@ -10,6 +11,7 @@ public class LottoNumbers {
   public LottoNumbers(List<Integer> numbers) {
     checkLottoNumberSize(numbers);
     checkLottoNumberRange(numbers);
+    checkLottoNumberDuplicated(numbers);
 
     numbers.sort(Integer::compareTo);
 
@@ -32,5 +34,9 @@ public class LottoNumbers {
     }
   }
 
-
+  private void checkLottoNumberDuplicated(List<Integer> numbers) {
+    if (new HashSet<>(numbers).size() != Lotto.SIZE) {
+      throw new IllegalArgumentException("로또 숫자는 중복되면 안됩니다.");
+    }
+  }
 }
