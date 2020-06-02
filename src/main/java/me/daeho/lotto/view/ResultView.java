@@ -1,5 +1,6 @@
 package me.daeho.lotto.view;
 
+import me.daeho.lotto.domain.EarningRate;
 import me.daeho.lotto.domain.LottoTicket;
 import me.daeho.lotto.domain.Rank;
 
@@ -15,7 +16,7 @@ public class ResultView {
         }
     }
 
-    public static void statistics(Map<Rank, Integer> rankCounts, double earningRate) {
+    public static void statistics(Map<Rank, Integer> rankCounts, EarningRate earningRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Rank.values())
@@ -26,7 +27,7 @@ public class ResultView {
                                     + " (" + rank.getPrize() + "원)- "
                                     + rankCounts.getOrDefault(rank, 0) + "개")
                 );
-        System.out.print("총 수익률은 " + earningRate + "입니다.");
+        System.out.print("총 수익률은 " + earningRate.value() + "입니다.");
         System.out.println("(기준이 1이기 때문에 결과적으로 " + getResult(earningRate) + "라는 의미임)");
     }
 
@@ -37,10 +38,10 @@ public class ResultView {
         return "";
     }
 
-    private static String getResult(double earningRate) {
-        if(earningRate < 1)
-            return "손해";
+    private static String getResult(EarningRate earningRate) {
+        if(earningRate.isProfit())
+            return "이득";
 
-        return "이득";
+        return "손해";
     }
 }

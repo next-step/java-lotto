@@ -4,12 +4,12 @@ package me.daeho.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NONE(0, 0, false),
-    FIFTH(3, 5000, false),
-    FOURTH(4, 50000, false),
-    THIRD(5, 1500000, false),
+    FIRST(6,2000000000, false),
     SECOND(5, 3000000, true),
-    FIRST(6,2000000000, false)
+    THIRD(5, 1500000, false),
+    FOURTH(4, 50000, false),
+    FIFTH(3, 5000, false),
+    NONE(0, 0, false)
     ;
 
     private final int count;

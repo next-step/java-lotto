@@ -3,26 +3,19 @@ package me.daeho.lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoMachineTest {
-    private LottoNumberRule lottoNumberRule;
-    private int unitPrice;
+    private RandomLottoNumberRule lottoNumberRule;
     private LottoMachine lottoMachine;
 
     @BeforeEach
     public void setup() {
-        lottoNumberRule = RandomLottoNumber.create(LottoNumber.availableNumbers());
-        unitPrice = 1000;
-        lottoMachine = LottoMachine.create(lottoNumberRule, unitPrice);
+        lottoNumberRule = ShuffleLottoNumber.create(LottoNumber.availableNumbers());
+        lottoMachine = LottoMachine.create(lottoNumberRule, LottoPrice.defaultPrice());
     }
 
     @Test
@@ -73,22 +66,101 @@ class LottoMachineTest {
     }
 
     @Test
-    public void buyRandomTest() {
-        List<LottoNumber> numbers = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+    public void matchTicketCounts_null() {
+        List<LottoNumber> lastWinningNumber = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
 
-        lottoMachine = LottoMachine.create(() -> numbers, unitPrice);
-        List<LottoTicket> tickets = lottoMachine.buyRandom(1000);
-        assertThat(tickets.size()).isEqualTo(1);
-        assertThat(tickets.get(0).containsCount(numbers)).isEqualTo(6);
+        LottoNumber bonusBall = LottoNumber.of(7);
+
+        List<LottoNumber> thirdLottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(11),
+                LottoNumber.of(22),
+                LottoNumber.of(33)
+        );
+
+        List<LottoNumber> secondLottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
+
+
+        List<LottoTicket> tickets = Arrays.asList(
+                LottoTicket.issue(secondLottoNumbers),
+                LottoTicket.issue(lastWinningNumber),
+                LottoTicket.issue(thirdLottoNumbers)
+        );
+
+        assertThatThrownBy(() -> lottoMachine.matchTicketCounts(null, bonusBall, tickets))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> lottoMachine.matchTicketCounts(lastWinningNumber, null, tickets))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> lottoMachine.matchTicketCounts(lastWinningNumber, bonusBall, null))
+                .isInstanceOf(IllegalArgumentException.class);
+
     }
+
 
     @Test
     public void earningRateTest() {
-        double earningRate = lottoMachine.earningRate(5000, 10000);
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
 
-        assertThat(earningRate).isEqualTo(2);
+        LottoPurchase purchase = LottoPurchase.of(1_000,
+                1,
+                Collections.singletonList(LottoTicket.issue(lottoNumbers)
+        ));
+
+        TotalPrize totalPrize = TotalPrize.of(2000);
+
+        EarningRate earningRate = lottoMachine.earningRate(purchase, totalPrize);
+
+        assertThat(earningRate.value()).isEqualTo(2);
+    }
+
+    @Test
+    public void earningRate_null() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
+
+        LottoPurchase purchase = LottoPurchase.of(1_000,
+                1,
+                Collections.singletonList(LottoTicket.issue(lottoNumbers)
+                ));
+
+        TotalPrize totalPrize = TotalPrize.of(2000);
+
+        assertThatThrownBy(() -> lottoMachine.earningRate(null, totalPrize))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> lottoMachine.earningRate(purchase, null))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -98,9 +170,29 @@ class LottoMachineTest {
             put(Rank.FIRST, 1);
         }};
 
-        int totalPrize = lottoMachine.totalPrize(matchNumberCounts);
+        TotalPrize totalPrize = lottoMachine.totalPrize(matchNumberCounts);
 
         int expectPrize = (Rank.THIRD.getPrize() * 2) + (Rank.FIRST.getPrize());
-        assertThat(totalPrize).isEqualTo(expectPrize);
+        assertThat(totalPrize.value()).isEqualTo(expectPrize);
+    }
+
+    @Test
+    public void totalPrize_null() {
+        Map<Rank, Integer> rankCountNull = new HashMap<Rank, Integer>() {{
+            put(Rank.THIRD, null);
+        }};
+
+        Map<Rank, Integer> rankNull = new HashMap<Rank, Integer>() {{
+            put(null, 1);
+        }};
+
+        assertThatThrownBy(() -> lottoMachine.totalPrize(null))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        TotalPrize totalPrize = lottoMachine.totalPrize(rankCountNull);
+        assertThat(totalPrize.value()).isEqualTo(0);
+
+        assertThatThrownBy(() -> lottoMachine.totalPrize(rankNull))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

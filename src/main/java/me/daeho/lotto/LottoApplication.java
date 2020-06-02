@@ -9,18 +9,22 @@ import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int amount = InputView.amount();
+        LottoPurchase purchase = InputView.purchase();
 
-        LottoMachine lottoMachine = LottoMachine.create(RandomLottoNumber.create(LottoNumber.availableNumbers()),1_000);
-        List<LottoTicket> tickets = lottoMachine.buyRandom(amount);
+        LottoMachine lottoMachine = LottoMachine.create(
+                ShuffleLottoNumber.create(LottoNumber.availableNumbers()),
+                LottoPrice.defaultPrice()
+        );
+
+        List<LottoTicket> tickets = lottoMachine.buy(purchase);
         ResultView.ticketList(tickets);
 
         List<LottoNumber> lastWinningNumber = InputView.lastWeekWinningNum();
         LottoNumber bonusBall = InputView.bonusBall();
 
         Map<Rank, Integer> matchNumbers = lottoMachine.matchTicketCounts(lastWinningNumber, bonusBall, tickets);
-        int totalPrize = lottoMachine.totalPrize(matchNumbers);
-        double earningRate = lottoMachine.earningRate(amount, totalPrize);
+        TotalPrize totalPrize = lottoMachine.totalPrize(matchNumbers);
+        EarningRate earningRate = lottoMachine.earningRate(purchase, totalPrize);
         ResultView.statistics(matchNumbers, earningRate);
     }
 }

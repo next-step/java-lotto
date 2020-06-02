@@ -10,9 +10,15 @@ public class LottoTicket {
     private final Set<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
+        validNull(numbers);
         this.numbers = new HashSet<>(NUMBER_COUNT);
         this.numbers.addAll(numbers);
         validateNumberSize(this.numbers);
+    }
+
+    private void validNull(List<LottoNumber> numbers) {
+        if(numbers == null)
+            throw new IllegalArgumentException("올바르지 않은 로또 번호 입니다.");
     }
 
     private void validateNumberSize(Set<LottoNumber> numbers) {

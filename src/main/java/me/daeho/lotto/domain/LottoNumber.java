@@ -23,9 +23,9 @@ public class LottoNumber {
         return value;
     }
 
-    public static List<Integer> availableNumbers() {
+    public static List<LottoNumber> availableNumbers() {
         return IntStream.range(MIN_VALUE, MAX_VALUE)
-                .boxed()
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
