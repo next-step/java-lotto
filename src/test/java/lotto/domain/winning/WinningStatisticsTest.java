@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.domain.LottoIssueRequest;
 import lotto.domain.lotto.generator.FixedNumberGenerator;
 import lotto.domain.number.generator.NumberGenerator;
 import lotto.domain.lotto.LottoRank;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +28,8 @@ public class WinningStatisticsTest {
     @Test
     void create() {
         Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
@@ -40,7 +43,8 @@ public class WinningStatisticsTest {
     @Test
     void create_remove_miss() {
         Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price, new NotMatchNumberGenerator());
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new NotMatchNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
@@ -54,8 +58,9 @@ public class WinningStatisticsTest {
     @Test
     void calculateProfit() {
         Price price = new Price(1000);
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
         winningNumberString = "1,2,3,13,14,15";
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);

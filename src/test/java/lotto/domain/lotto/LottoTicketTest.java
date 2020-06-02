@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.LottoIssueRequest;
 import lotto.domain.lotto.generator.FixedNumberGenerator;
 import lotto.domain.number.generator.LottoNumberGenerator;
 import lotto.domain.number.LottoNumber;
@@ -8,6 +9,7 @@ import lotto.domain.winning.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +22,8 @@ public class LottoTicketTest {
     @Test
     void createLottoTicket() {
         Price price= new Price(3000);
-        LottoTicket lottoTicket = new LottoTicket(price, new LottoNumberGenerator());
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new LottoNumberGenerator());
 
         assertAll(
                 () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(price.getLottoCount()),
@@ -32,12 +35,14 @@ public class LottoTicketTest {
     @Test
     void matchWinningNumber() {
         Price price= new Price(2000);
+        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
+
         String winningNumberString = "1,2,3,4,5,6";
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(winningNumberString);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new FixedNumberGenerator());
 
         Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningLotto, bonusLottoNumber);
 
