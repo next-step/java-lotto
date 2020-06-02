@@ -1,6 +1,14 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
+import java.util.List;
+
 public class ResultView {
+
+    public static void printLottoNumbers(int lottoCount, List<LottoNumber> lottoNumbers) {
+        System.out.println(lottoCount + "개를 구매했습니다.");
+    }
 
 //  당첨 통계
 //---------

@@ -18,4 +18,8 @@ public class Lotto {
             lottoNumbers.add(new LottoNumber(machine.raffle()));
         }
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
