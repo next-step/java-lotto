@@ -1,24 +1,20 @@
 package lotto.domain;
 
-public enum LottoPrize {
-    THREE_MATCHES("3", 5000),
-    FOUR_MATCHES("4" ,50000),
-    FIVE_MATCHES("5", 1500000),
-    SIX_MATCHES("6", 2000000000);
+import java.util.HashMap;
+import java.util.Map;
 
-    private final String count;
-    private final int prize;
+public class LottoPrize {
+    private static final Map<String, Integer> prizeMap;
 
-    LottoPrize(String count,int prize) {
-        this.count = count;
-        this.prize = prize;
+    static {
+        prizeMap = new HashMap<>();
+        prizeMap.put("3", 5000);
+        prizeMap.put("4", 50000);
+        prizeMap.put("5", 1500000);
+        prizeMap.put("6", 2000000000);
     }
 
-    public String getCount() {
-        return count;
-    }
-
-    public int getPrize() {
-        return prize;
+    public static int getPrize(String count) {
+        return prizeMap.get(count);
     }
 }

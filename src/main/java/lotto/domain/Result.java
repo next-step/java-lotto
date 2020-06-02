@@ -19,12 +19,17 @@ public class Result {
         for (LottoNumber lottoNumber : lottoNumbers) {
             int count = lottoNumber.matches(winningNumbers);
             int preCount = resultMap.get(String.valueOf(count));
-            resultMap.put(String.valueOf(count), preCount+1);
+            resultMap.put(String.valueOf(count), preCount + 1);
         }
     }
 
-    public void statistics() {
-
+    public double statistics(int money) {
+        double profit = resultMap.entrySet().stream()
+                                .map(String::valueOf)
+                                .filter(v -> Integer.parseInt(v) < 3)
+                                .mapToDouble(v -> (LottoPrize.getPrize(v) * resultMap.get(v)))
+                                .sum();
+        return profit / money;
     }
 
     public Map<String, Integer> getResultMap() {
