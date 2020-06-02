@@ -9,12 +9,12 @@ public class StringAddCalculator {
         if (input.length() == Const.STRING_LENGTH_NUM_ONE) {
             return Integer.parseInt(input);
         }
-        return splitCommaAndSum(input);
+        return splitSeparatorAndSum(input);
     }
 
-    private static int splitCommaAndSum(String input) {
+    private static int splitSeparatorAndSum(String input) {
         AtomicInteger sumNumber = new AtomicInteger();
-        Arrays.stream(input.split(Const.SYMBOL_COMMA)).forEach(numberString ->
+        Arrays.stream(input.split(Const.SYMBOL_COMMA_AND_COLON)).forEach(numberString ->
                 sumNumber.addAndGet(Integer.parseInt(numberString))
         );
         return sumNumber.get();
