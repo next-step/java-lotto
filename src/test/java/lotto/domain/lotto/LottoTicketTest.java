@@ -44,14 +44,14 @@ public class LottoTicketTest {
     @Test
     void hasBonusNumberTest_보너스넘버_있음() {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(6));
+        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(4));
         assertThat(aBoolean).isTrue();
     }
 
     @Test
     void hasBonusNumberTest_보너스넘버_없음() {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(8));
+        Boolean aBoolean = lottoTicket.hasBonusNumber(LottoNumber.create(11));
         assertThat(aBoolean).isFalse();
     }
 

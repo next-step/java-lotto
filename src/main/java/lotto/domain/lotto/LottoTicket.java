@@ -38,7 +38,7 @@ public class LottoTicket {
     }
 
     public Boolean hasBonusNumber(LottoNumber lottoBonusNumber) {
-        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.isMatch(lottoBonusNumber)).findFirst().isEmpty();
+        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.isMatch(lottoBonusNumber)).anyMatch(bonusBoolean -> bonusBoolean == true);
     }
 
     public int size() {

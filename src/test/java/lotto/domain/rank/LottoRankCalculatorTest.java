@@ -57,7 +57,7 @@ public class LottoRankCalculatorTest {
         LottoNumber lottoBonusNumber = LottoNumber.create(7);
         LottoRankCalculator lottoRankCalculator = new LottoRankCalculator(winLottoTicket, lottoBonusNumber);
 
-        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 8, 9, 10");
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 9, 10");
         LottoRank rank = lottoRankCalculator.calculate(lottoTicket);
 
         assertThat(rank.getCountOfMatch()).isEqualTo(LottoRank.FOURTH.getCountOfMatch());

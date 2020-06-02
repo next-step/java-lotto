@@ -17,7 +17,7 @@ public class LottoRevenueCalculatorTest {
         lottoRanks.add(LottoRank.MISS);
 
         LottoRevenueCalculator lottoRevenueCalculator = new LottoRevenueCalculator(lottoRanks);
-        assertThat(lottoRevenueCalculator.getRevenueRate()).isEqualTo(2.50);
+        assertThat(lottoRevenueCalculator.getRevenueRate()).isEqualTo("2.50");
     }
 
     @Test

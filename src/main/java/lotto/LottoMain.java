@@ -14,13 +14,12 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService();
         LottoPurchaseMoney lottoPurchaseMoney = InputView.inputMoney();
 
         LottoPurchaseMoney manualLottoPurchaseMoney = InputView.inputManualTicketCount(lottoPurchaseMoney);
 
         List<LottoTicket> manualLottoTicketList = InputView.inputLottoTicketNumber(manualLottoPurchaseMoney);
-        List<LottoTicket> lottoTicketList = lottoService.purchaseLottoTicket(lottoPurchaseMoney);
+        List<LottoTicket> lottoTicketList = LottoService.purchaseLottoTicket(lottoPurchaseMoney);
 
         ResultView resultView = new ResultView();
         resultView.printLottoTicketList(lottoTicketList, manualLottoTicketList);
@@ -30,7 +29,7 @@ public class LottoMain {
 
         manualLottoTicketList.addAll(lottoTicketList);
         LottoRankCalculator lottoRankCalculator = new LottoRankCalculator(winLottoTicket, bonusNumber);
-        List<LottoRank> lottoRankList = lottoService.matchLottoTicket(manualLottoTicketList, lottoRankCalculator);
+        List<LottoRank> lottoRankList = LottoService.matchLottoTicket(manualLottoTicketList, lottoRankCalculator);
         resultView.printMatchResult(lottoRankList);
     }
 }
