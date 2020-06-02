@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.NullSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("로또 티켓")
@@ -26,15 +25,6 @@ class LottoTicketTest {
     void validate_lotto_number_duplicate() {
         assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(Arrays.asList(1, 1, 3, 4, 5, 6)),
                 "로또 티켓에는 중복된 숫자가 없어야 합니다.");
-    }
-
-    @Test
-    @DisplayName("로또 티켓은 랜덤한 값이므로 이전에 만들어진 티켓과 동일할 수 없다.")
-    void lotto_ticket_random() {
-        LottoTicket lottoTicket = LottoTicket.autoIssued();
-        LottoTicket comparedLottoTicket = LottoTicket.autoIssued();
-
-        assertThat(lottoTicket.equals(comparedLottoTicket)).isFalse();
     }
 
     @Test
