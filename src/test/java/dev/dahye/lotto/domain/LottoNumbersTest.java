@@ -16,16 +16,16 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호는 1부터 45까지의 수만 가능하다.")
     void valid_lotto_numbers() {
-        assertThat(LottoNumbers.getNumbers().size()).isEqualTo(45);
-        assertThat(Collections.min(LottoNumbers.getNumbers())).isEqualTo(1);
-        assertThat(Collections.max(LottoNumbers.getNumbers())).isEqualTo(45);
+        List<Integer> lottoNumbers = LottoNumbers.getNumbers();
+        assertThat(lottoNumbers.size()).isEqualTo(45);
+        assertThat(Collections.min(lottoNumbers)).isEqualTo(1);
+        assertThat(Collections.max(lottoNumbers)).isEqualTo(45);
     }
 
     @ParameterizedTest(name = "입력값 : {0}")
     @ValueSource(ints = {0, 46})
     @DisplayName("로또 번호는 1부터 45까지의 수가 아닌 경우 IllegalArgumentException throw")
     void valid_lotto_numbers_byValidNumberRange(int lottoNumber) {
-        assertThrows(IllegalArgumentException.class, () -> LottoNumbers.validNumberRange(lottoNumber));
         assertThrows(IllegalArgumentException.class, () -> LottoNumbers.validNumberRange(lottoNumber));
     }
 
