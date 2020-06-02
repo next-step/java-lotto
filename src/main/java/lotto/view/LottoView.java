@@ -44,14 +44,16 @@ public class LottoView {
   }
 
   public static void printProfitRate(double profit) {
+    System.out.println(getProfitRateMessage(profit));
+  }
+
+  private static String getProfitRateMessage(double profit) {
     if (profit < 1) {
-      System.out.println("총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-    }
-    if (profit == 1) {
-      System.out.println("총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)");
-    }
-    if (1 < profit) {
-      System.out.println("총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+      return "총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    } else if (profit == 1) {
+      return "총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
+    } else {
+      return "총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     }
   }
 }
