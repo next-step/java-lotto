@@ -1,22 +1,37 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class ResultDTO {
 
-    private int money;
-    private List<Integer> winningList;
+    private Map<Prize, Integer> result;
+    private double profitRatio;
 
-    public ResultDTO(int money, List<Integer> winningList) {
-        this.money = money;
-        this.winningList = winningList;
+    public ResultDTO(Map<Prize, Integer> result, double profitRatio) {
+        this.result = result;
+        this.profitRatio = profitRatio;
     }
 
-    public int getMoney() {
-        return money;
+    public Map<Prize, Integer> getResult() {
+        return result;
     }
 
-    public List<Integer> getWinningList() {
-        return winningList;
+    public double getProfitRatio() {
+        return profitRatio;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResultDTO resultDTO = (ResultDTO) o;
+        return Double.compare(resultDTO.profitRatio, profitRatio) == 0 &&
+                Objects.equals(result, resultDTO.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result, profitRatio);
     }
 }

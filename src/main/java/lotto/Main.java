@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Buyer;
+import lotto.domain.ProfitStatistics;
 import lotto.domain.ResultDTO;
 import lotto.view.ResultView;
 import lotto.view.ScannerView;
@@ -31,10 +32,10 @@ public class Main {
     buyer.checkLotto(winningNumbers);
     List<Integer> winningList = buyer.checkWin();
 
-    ResultDTO resultDTO = new ResultDTO(money, winningList);
+    ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);
+
+    ResultDTO resultDTO = profitStatistics.analysis();
     resultView.view(resultDTO);
-
-
 
     }
 

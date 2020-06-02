@@ -14,15 +14,14 @@ public class Lotto {
     }
 
     public boolean isContainsNumber(int number) {
-//        return numberList.stream().anyMatch(integer -> integer.equals(number));
         return numberList.contains(number);
     }
 
     public int checkRightNumberCount(List<Integer> winningNumbers) {
 
-//        int rightCount = (int) winningNumbers.stream().filter(this::isContainsNumber).count();
-
-        int rightCount = (int) winningNumbers.stream().filter( winningNumber -> isContainsNumber(winningNumber)).count();
+        int rightCount = (int) winningNumbers.stream()
+                                    .filter( winningNumber -> isContainsNumber(winningNumber))
+                                    .count();
 
         return rightCount;
     }

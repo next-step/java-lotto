@@ -1,8 +1,5 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ScannerView implements View{
 
     @Override

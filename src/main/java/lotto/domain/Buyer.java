@@ -36,7 +36,7 @@ public class Buyer {
         LottoMachine lottoMachine = new LottoMachine();
         int count = this.money / 1000;
         for(int i=0 ; i < count ; i++){
-            lottoList.add(lottoMachine.generateLotto(new RandomLottoNumber().generateNumber()));
+            lottoList.add(lottoMachine.generateLotto(new ArrayList<>(new RandomLottoNumber().generateNumber())));
         }
     }
 
@@ -54,9 +54,6 @@ public class Buyer {
     }
 
     public void checkLotto(List<Integer> winningNumbers) {
-
-        winningNumbers.stream().forEach(integer -> System.out.println(integer));
-
         lottoList.forEach(lotto -> {
             int rightNumberCount = lotto.checkRightNumberCount(winningNumbers);
             putWinningList(rightNumberCount, lotto);
