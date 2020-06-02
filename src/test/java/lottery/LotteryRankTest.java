@@ -53,7 +53,7 @@ public class LotteryRankTest {
         assertThat(lotteryRank).isEqualTo(LotteryRank.MISS);
     }
 
-    @DisplayName("맞춘 개수에 따라서 적합한 보너스 볼을 반환 받음")
+    @DisplayName("맞춘 개수에 따라서 적합한 랭크를 반환 받음")
     @ParameterizedTest
     @MethodSource("mockLotteryValueOfRankBuilder")
     public void getProperLotteryRank(int matchNumberCounts, LotteryRank expectedRank) {
