@@ -19,16 +19,16 @@ public class Numbers {
 
     private static List<Integer> toInts(String[] numbers) {
         return Stream.of(numbers)
-                .map(Integer::new)
                 .map(value -> validateInputNumber(value))
                 .collect(Collectors.toList());
     }
 
-    private static int validateInputNumber(int input) {
-        if (input < NUMBER_ZERO){
+    private static int validateInputNumber(String input) {
+        int result = Integer.parseInt(input);
+        if (result < NUMBER_ZERO){
             throw new RuntimeException();
         }
-        return input;
+        return result;
     }
 
     public int sum() {

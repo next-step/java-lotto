@@ -3,7 +3,7 @@ package study.step1;
 public class StringAddCalculator {
 
     public static int splitAndSum(String expression) {
-        String [] splitExpression = new Expression(expression).split();
-        return new Numbers(splitExpression).sum();
+        String validatedExpression = Expression.validateExpression(expression);
+        return new Numbers(Expression.split(validatedExpression)).sum();
     }
 }
