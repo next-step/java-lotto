@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoCheck;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStore;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,23 +11,15 @@ public class Main {
     public static void main(String[] args) {
         final int buyPriceAmount = InputView.inputBuyAmount();
         List<Lotto> lottosBought = LottoStore.buy(buyPriceAmount);
-        OutputView.printBuyLottoCount(lottosBought.size());
-        OutputView.printLottos(lottosBought);
-        OutputView.printNewLine();
+        OutputView.printBuyLottos(lottosBought);
 
         final String winningNumber = InputView.inputWinningNumber();
-        final Lotto winningLotto = Lotto.valueOf(winningNumber);
-        OutputView.printNewLine();
+        final int bonus = InputView.inputBonusNumber();
 
-        OutputView.printWinningLottoTitle();
-        OutputView.printDashBar();
-
-        for(LottoRank lottoRank : LottoRank.getWinningLotto()) {
-            OutputView.printSameCountWinningNumber(lottoRank,
-                    LottoCheck.getWinningLottoCount(lottosBought, winningLotto, lottoRank));
-        }
-
-        OutputView.printReturnValue(LottoCheck.getWinningAmount(lottosBought, winningLotto),
-                BigDecimal.valueOf(buyPriceAmount));
+        final WinningLotto winningLotto = new WinningLotto(winningNumber, bonus);
+        LottosStatistics statistics = new LottosStatistics(lottosBought,
+                BigDecimal.valueOf(buyPriceAmount),
+                winningLotto);
+        OutputView.printLottoStatistics(statistics);
     }
 }

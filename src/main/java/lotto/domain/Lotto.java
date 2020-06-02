@@ -22,7 +22,7 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public static Lotto valueOf(String lottoText) {
+    public static Lotto fromLottoText(String lottoText) {
         String[] winningNumberText = lottoText.split(SPLIT_REGX);
         List<Integer> lottoNumber = Arrays.stream(winningNumberText)
                 .map(s -> Integer.parseInt(s.trim()))
@@ -87,5 +87,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    public LottoRank getWinningRank(WinningLotto winningLotto) {
+        int containCount = winningLotto.getContainCount(this);
+        return LottoRank.getRank(containCount, winningLotto.isContainBonus(this));
     }
 }
