@@ -19,4 +19,8 @@ public final class Money {
 		final double TICKET_PRICE = 1000;
 		return (int)(money / TICKET_PRICE);
 	}
+
+	public Integer getMoney() {
+		return money;
+	}
 }
