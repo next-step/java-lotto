@@ -2,6 +2,7 @@ package lotto.collections;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import lotto.service.WinningService;
@@ -9,14 +10,19 @@ import lotto.util.LottoProfitCalculator;
 
 public final class LottoResult {
 
-	private final List<RewardType> lottoStatistics;
+	private Map<Integer, Integer> lottoStatistics;
+	private List<RewardType> lottoStatistics2;
 
-	public LottoResult(List<RewardType> lottoStatistics) {
+	public LottoResult(Map<Integer, Integer> lottoStatistics) {
 		this.lottoStatistics = lottoStatistics;
 	}
 
+	public LottoResult(List<RewardType> lottoStatistics2) {
+		this.lottoStatistics2 = lottoStatistics2;
+	}
+
 	public double getLottoProfitRate(final int lottoTicketSize) {
-		double totalProfit = new WinningService().calculateProfit(lottoStatistics).getValue();
+		double totalProfit = WinningService.calculateProfit(lottoStatistics2).getValue();
 		return LottoProfitCalculator.getConvertProfit(totalProfit, lottoTicketSize);
 	}
 
@@ -29,7 +35,7 @@ public final class LottoResult {
 			.orElse(0);
 	}
 
-	public List<RewardType> getLottoStatistics() {
+	public Map<Integer, Integer> getLottoStatistics() {
 		return lottoStatistics;
 	}
 }
