@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private List<Integer> numbers;
+    private static final List<Integer> numbers;
 
-    public LottoMachine() {
-        settings();
-    }
-
-    private void settings() {
+    static {
         numbers = new ArrayList<>();
         for (int idx = 1; idx <= 45; idx++) {
             numbers.add(idx);
         }
+    }
+
+    public LottoMachine() {
     }
 
     public List<Integer> raffle() {
