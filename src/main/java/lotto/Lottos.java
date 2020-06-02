@@ -14,10 +14,6 @@ public class Lottos {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public int getPriceTotal() {
-        return Lotto.PRICE * lottos.size();
-    }
-
     public int size() {
         return lottos.size();
     }

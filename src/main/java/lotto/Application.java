@@ -4,7 +4,8 @@ public class Application {
 
     public static void main(String[] args) {
         LottoMachine machine = new LottoMachine();
-        Lottos lottos = machine.issue(InputView.getPaid());
+        LottoIssueRequest request = new LottoIssueRequest(InputView.getPaid(), InputView.askManualNumbers());
+        Lottos lottos = machine.issue(request);
         ResultView.printLottos(lottos);
 
         LottoResults results = lottos.checkResults(InputView.askWinningNumbers(), InputView.askBonusNumber());
