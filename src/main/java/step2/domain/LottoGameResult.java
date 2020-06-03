@@ -24,7 +24,7 @@ public class LottoGameResult {
     public LottoGameResultDto getResult() {
         drawLottos(winningLotto.getLottoNumbers());
 
-        this.earningRate = getEarningRate();
+        earningRate = getEarningRate();
         countPrize();
 
         return new LottoGameResultDto(
@@ -36,27 +36,27 @@ public class LottoGameResult {
     }
 
     private void countPrize() {
-        this.firstPrizeCount = (int) this.lottos.stream()
+        firstPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.FIRST.getGrade())
             .count();
-        this.secondPrizeCount = (int) this.lottos.stream()
+        secondPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.SECOND.getGrade())
             .count();
-        this.thirdPrizeCount = (int) this.lottos.stream()
+        thirdPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.THIRD.getGrade())
             .count();
-        this.forthPrizeCount = (int) this.lottos.stream()
+        forthPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.FORTH.getGrade())
             .count();
     }
 
     private void setCashPrize() {
-        this.lottos.stream().forEach(lotto -> this.cashPrize += lotto.getCashPrice());
+        lottos.stream().forEach(lotto -> cashPrize += lotto.getCashPrice());
     }
 
     private double getEarningRate() {
         setCashPrize();
-        return (double) this.cashPrize / this.userPrice.getPrice();
+        return (double) cashPrize / userPrice.getPrice();
     }
 
     private void drawLottos(List<Integer> winningNumbers) {

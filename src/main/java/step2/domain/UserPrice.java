@@ -19,7 +19,7 @@ public class UserPrice {
     }
 
     public void validateUserPrice() throws IllegalArgumentException {
-        if (this.price < MINIMUM_USER_PRICE || this.price > MAXIMUM_USER_PRICE) {
+        if (price < MINIMUM_USER_PRICE || price > MAXIMUM_USER_PRICE) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_USER_PRICE);
         }
     }

@@ -7,7 +7,7 @@ public abstract class AbstractLotto {
     private List<Integer> lottoNumbers;
 
     public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+        return lottoNumbers;
     }
 
     public void setLottoNumbers(List<Integer> lottoNumbers) {

@@ -14,13 +14,13 @@ public class RandomGenerableStrategy implements GenerableStrategy {
     private List<Integer> lottoBaseNumbers;
 
     public RandomGenerableStrategy() {
-        this.lottoBaseNumbers = makeSequentialNumbers(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
+        lottoBaseNumbers = makeSequentialNumbers(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
     }
 
     @Override
     public List<Integer> generate(int count) {
         List<Integer> copiedLottoBaseNumbers = new ArrayList<>();
-        copiedLottoBaseNumbers.addAll(this.lottoBaseNumbers);
+        copiedLottoBaseNumbers.addAll(lottoBaseNumbers);
         return getSequentialShuffledNumbers(copiedLottoBaseNumbers, count);
     }
 

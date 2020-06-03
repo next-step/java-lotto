@@ -31,7 +31,7 @@ public class WinningLotto extends AbstractLotto {
     public void validateWinningNumbers()
         throws IllegalArgumentException {
 
-        List<String> parsedWinningNumbers = parseWinningNumbers(this.winningNumberString);
+        List<String> parsedWinningNumbers = parseWinningNumbers(winningNumberString);
 
         if (CollectionUtils.size(parsedWinningNumbers) != LOTTO_SELECTION_COUNT) {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
