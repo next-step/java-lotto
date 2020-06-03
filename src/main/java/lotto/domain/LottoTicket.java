@@ -28,6 +28,10 @@ public class LottoTicket {
 			.anyMatch(number -> number.getNumber().equals(bonusBall.getNumber()));
 	}
 
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public String toString() {
 		return "[" + lottoNumbers.stream()
