@@ -16,19 +16,12 @@ public class LottoGenerator extends Generating {
     }
 
     public List<Lotto> generateLottos(UserPrice userPrice) {
-        int lottoCount = getLottoCount(userPrice);
+        int lottoCount = userPrice.getLottoCount();
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(new Lotto(this.generate(LOTTO_SELECTION_COUNT)));
         }
         return lottos;
-    }
-
-    private int getLottoCount(UserPrice userPrice) {
-        if (userPrice.getPrice() < LOTTO_PRICE) {
-            return 0;
-        }
-        return (int) Math.floor(userPrice.getPrice()) / LOTTO_PRICE;
     }
 }

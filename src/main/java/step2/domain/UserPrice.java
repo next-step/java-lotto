@@ -1,5 +1,7 @@
 package step2.domain;
 
+import static step2.Constants.LOTTO_PRICE;
+
 import step2.view.ErrorMessages;
 
 public class UserPrice {
@@ -20,5 +22,12 @@ public class UserPrice {
         if (this.price < MINIMUM_USER_PRICE || this.price > MAXIMUM_USER_PRICE) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_USER_PRICE);
         }
+    }
+
+    public int getLottoCount() {
+        if (price < LOTTO_PRICE) {
+            return 0;
+        }
+        return (int) Math.floor(price) / LOTTO_PRICE;
     }
 }
