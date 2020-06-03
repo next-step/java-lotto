@@ -1,11 +1,10 @@
 package lotto.domain.winning;
 
-import lotto.domain.lotto.generator.FixedNumberGenerator;
-import lotto.domain.number.generator.NumberGenerator;
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,11 +31,10 @@ public class WinningLottoTest {
         String winningNumberString = "1,2,3,4,5,6";
         WinningLotto winningLotto = new WinningLotto(winningNumberString);
 
-        NumberGenerator<LottoNumber> fixedNumberGenerator = new FixedNumberGenerator();
-        LottoNumbers lottoNumbers = LottoNumbers.autoLottoNumber(fixedNumberGenerator);
+        LottoNumbers lottoNumbers = LottoNumbers.manualLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         int matchCount = winningLotto.matchCount(lottoNumbers);
 
-        assertThat(matchCount).isEqualTo(fixedNumberGenerator.getNumbers().size());
+        assertThat(matchCount).isEqualTo(lottoNumbers.getNumbers().size());
     }
 }

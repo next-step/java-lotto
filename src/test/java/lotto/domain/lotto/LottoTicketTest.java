@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.LottoIssueRequest;
-import lotto.domain.lotto.generator.FixedNumberGenerator;
-import lotto.domain.number.generator.LottoNumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.winning.WinningLotto;
@@ -23,8 +20,8 @@ public class LottoTicketTest {
     @Test
     void createLottoTicket() {
         Price price= new Price(3000);
-        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
-        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new LottoNumberGenerator());
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
         assertAll(
                 () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(price.getLottoCount()),
@@ -35,15 +32,17 @@ public class LottoTicketTest {
     @DisplayName("WinningNumbers와 매칭 결과(LottoRank)를 반환한다.")
     @Test
     void matchWinningNumber() {
-        Price price= new Price(2000);
-        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, Collections.emptyList());
+        Price price= new Price(1000);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.singletonList("1,2,3,4,5,6"));
+
+        System.out.println(lottoNumberGenerator);
 
         String winningNumberString = "1,2,3,4,5,6";
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(winningNumberString);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
         Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningLotto, bonusLottoNumber);
 
@@ -54,14 +53,11 @@ public class LottoTicketTest {
     @Test
     void create_manualLotto() {
         Price price= new Price(1000);
-
         List<String> manualLottos = Collections.singletonList("1,2,3,4,5,6");
-        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, manualLottos);
-        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new LottoNumberGenerator());
 
-        LottoIssueRequest lottoIssueRequest2 = new LottoIssueRequest(price, Collections.emptyList());
-        LottoTicket lottoTicket2 = new LottoTicket(lottoIssueRequest2, new FixedNumberGenerator());
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, manualLottos);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
-        assertThat(lottoTicket).isEqualTo(lottoTicket2);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(1);
     }
 }
