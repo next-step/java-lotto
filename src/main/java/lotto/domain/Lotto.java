@@ -9,17 +9,18 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private final Set<Integer> lottoNumberSet;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumberSet) {
-        this.lottoNumberSet = lottoNumberSet.stream().filter(i -> MIN_NUMBER <= i && i <= MAX_NUMBER).collect(Collectors.toSet());
-        if (this.lottoNumberSet.size() != 6) {
+    public Lotto(List<Integer> lottoNumberList) {
+        Set<Integer> lottoNumberSet = lottoNumberList.stream().filter(i -> MIN_NUMBER <= i && i <= MAX_NUMBER).collect(Collectors.toSet());
+        if (lottoNumberSet.size() != 6) {
             throw new IllegalArgumentException("`lottoNumber` is invalid");
         }
+        this.lottoNumbers = new LottoNumbers(lottoNumberSet);
     }
 
-    public List<Integer> getLottoNumberSet() {
-        return new ArrayList<>(lottoNumberSet);
+    public List<Integer> getLottoNumberList() {
+        return new ArrayList<>(lottoNumbers.getLottoNumberSet());
     }
 
     @Override
@@ -27,11 +28,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumberSet, lotto.lottoNumberSet);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumberSet);
+        return Objects.hash(lottoNumbers);
     }
 }
