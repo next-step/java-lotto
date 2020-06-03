@@ -7,20 +7,25 @@ public class StringAddCalculator {
     private StringAddCalculator() {}
 
     public static int splitAndSum(String input) {
-        if (isNullOrEmpty(input))
+        if (isNullOrEmpty(input)) {
             return 0;
+        }
 
-        if (isOneNumber(input))
+        if (isOneNumber(input)) {
             return Integer.parseInt(input);
+        }
 
-        if (isCustomSeparator(input))
+        if (isCustomSeparator(input)) {
             return findSeparatorAndSum(input);
+        }
 
         return getBasicSum(",|:", input);
     }
 
     private static boolean isNullOrEmpty(String input) {
-        if (input == null) return true;
+        if (input == null) {
+            return true;
+        }
         return input.isEmpty();
     }
 
@@ -55,8 +60,10 @@ public class StringAddCalculator {
     }
 
     private static void checkNegative(int number) {
-        if (number < 0)
+        if (number < 0){
             throw new RuntimeException("음수 값이 입력 되었습니다.");
+        }
+
     }
 
 }
