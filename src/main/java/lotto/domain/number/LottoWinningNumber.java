@@ -1,6 +1,7 @@
 package lotto.domain.number;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
     private final List<LottoNumber> winningNumbers;
@@ -8,9 +9,10 @@ public class LottoWinningNumber {
 
     public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-
-        this.winningNumbers = LottoNumberGenerator.findAllByNumbers(winningNumbers);
-        this.bonusNumber = LottoNumberGenerator.findByNumber(bonusNumber);
+        this.winningNumbers = winningNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     public List<LottoNumber> getWinningNumbers() {

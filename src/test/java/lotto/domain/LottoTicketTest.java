@@ -43,7 +43,7 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        assertThat(lottoTicket.isContainingLottoNumbers(new LottoNumber(number))).isEqualTo(expectResult);
+        assertThat(lottoTicket.isContainingLottoNumbers(LottoNumber.valueOf(number))).isEqualTo(expectResult);
     }
 
     @DisplayName("가지고있는 LottoNumber 리스트를 Integer 리스트로 반환")
@@ -58,7 +58,7 @@ class LottoTicketTest {
 
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

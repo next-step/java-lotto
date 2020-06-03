@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.number.LottoNumber.LOTTO_NUMBER_UNDER_BOUND;
+import static lotto.domain.number.LottoNumber.LOTTO_NUMBER_UPPER_BOUND;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
@@ -16,6 +20,34 @@ public class LottoTicket {
         validateSize(lottoNumbers);
         validateDuplicateNumbers(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    private LottoTicket() {
+        this.lottoNumbers = Collections.unmodifiableList(peekLottoNumbers());
+        validateSize(lottoNumbers);
+        validateDuplicateNumbers(lottoNumbers);
+    }
+
+    public static LottoTicket buyAutoLottoTicket() {
+        return new LottoTicket();
+    }
+
+    private List<LottoNumber> peekLottoNumbers() {
+        List<Integer> numbers = generateNumbers();
+
+        Collections.shuffle(numbers);
+
+        return numbers.stream()
+                .limit(LOTTO_NUMBERS_SIZE)
+                .sorted()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> generateNumbers() {
+        return IntStream.rangeClosed(LOTTO_NUMBER_UNDER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

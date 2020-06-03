@@ -25,7 +25,6 @@
 ### 기능 목록
 
 - 로또 번호 하나를 가지는 LottoNumber 클래스
-- LottoNumber를 생성하고 6개만큼 조합하는 LottoNumberGenerator
 - 6개의 LottoNumber 를 관리하는 일급 컬렉션 LottoTicket
 - LottoTicket 을 발급하는 LottoMachine
 - 로또를 추첨하는 추첨기 Drawing Machine
