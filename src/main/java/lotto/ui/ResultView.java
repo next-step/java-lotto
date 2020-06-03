@@ -17,10 +17,11 @@ public class ResultView {
         LottoRevenueCalculator lottoRevenueCalculator = new LottoRevenueCalculator(lottoRankList);
         Map<LottoRank, Integer> lottoRankCount = lottoRevenueCalculator.getLottoRankCount();
 
-        lottoRankCount.forEach((lottoRank, count) -> {
-            System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getWinningMoney() + ")- " + count + "개");
-        });
-
+        System.out.println(LottoRank.FIFTH.getCountOfMatch() + "개 일치 (" + LottoRank.FIFTH.getWinningMoney() + "원)- " + lottoRankCount.get(LottoRank.FIFTH) + "개");
+        System.out.println(LottoRank.FOURTH.getCountOfMatch() + "개 일치 (" + LottoRank.FOURTH.getWinningMoney() + "원)- " + lottoRankCount.get(LottoRank.FOURTH) + "개");
+        System.out.println(LottoRank.THIRD.getCountOfMatch() + "개 일치 (" + LottoRank.THIRD.getWinningMoney() + "원)- " + lottoRankCount.get(LottoRank.THIRD) + "개");
+        System.out.println(LottoRank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + LottoRank.SECOND.getWinningMoney() + "원)- " + lottoRankCount.get(LottoRank.SECOND) + "개");
+        System.out.println(LottoRank.FIRST.getCountOfMatch() + "개 일치 (" + LottoRank.FIRST.getWinningMoney() + "원)- " + lottoRankCount.get(LottoRank.FIRST) + "개");
         System.out.println("총 수익률은 " + lottoRevenueCalculator.getRevenueRate() + " 입니다.");
     }
 

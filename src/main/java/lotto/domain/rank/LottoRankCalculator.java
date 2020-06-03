@@ -18,6 +18,7 @@ public class LottoRankCalculator {
     public LottoRank calculate(LottoTicket lottoTicket) {
         int matchCount = winLottoTicket.matchLottoTicketCount(lottoTicket);
         Boolean isMatchBonusNumber = lottoTicket.hasBonusNumber(bonusNumber);
+        System.out.println(isMatchBonusNumber + " : " + matchCount);
         return LottoRank.valueOf(matchCount, isMatchBonusNumber);
     }
 

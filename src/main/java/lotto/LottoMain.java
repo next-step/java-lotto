@@ -27,7 +27,6 @@ public class LottoMain {
         LottoTicket winLottoTicket = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        manualLottoTicketList.addAll(lottoTicketList);
         LottoRankCalculator lottoRankCalculator = new LottoRankCalculator(winLottoTicket, bonusNumber);
         List<LottoRank> lottoRankList = LottoService.matchLottoTicket(manualLottoTicketList, lottoRankCalculator);
         resultView.printMatchResult(lottoRankList);
