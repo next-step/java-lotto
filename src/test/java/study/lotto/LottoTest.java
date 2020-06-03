@@ -1,6 +1,5 @@
 package study.lotto;
 
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,6 +15,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
 
@@ -48,12 +48,11 @@ public class LottoTest {
     void generate_lotto() {
         Lotto lotto = Lotto.auto();
 
-        SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(lotto.getLottoNumbers())
-                .allMatch(lottoNumber -> lottoNumber.getNumber()>0 && lottoNumber.getNumber()<46);
-        softly.assertThat(lotto.getLottoNumbers().size())
-                .isEqualTo(6);
-        softly.assertAll();
+        assertAll(
+                () -> assertThat(lotto.getLottoNumbers())
+                        .allMatch(lottoNumber -> lottoNumber.getNumber() > 0 && lottoNumber.getNumber() < 46),
+                () -> assertThat(lotto.getLottoNumbers().size()).isEqualTo(6)
+        );
     }
 
     @DisplayName("당첨 번호 대조 테스트")
