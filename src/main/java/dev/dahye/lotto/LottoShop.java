@@ -7,7 +7,7 @@ import dev.dahye.lotto.view.ResultView;
 
 import java.util.List;
 
-public class LottoPlay {
+public class LottoShop {
     public static void main(String[] args) {
         int money = InputView.doInputMoney();
 
