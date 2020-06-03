@@ -2,6 +2,8 @@ package dev.dahye.learning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,25 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Collections 객체 학습 테스트")
 public class CollectionsTest {
-    @Test
-    @DisplayName("contains() 메소드 학습 테스트 - return true")
-    void contains_true() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        List<Integer> comparedNumbers = Arrays.asList(1, 2);
+    private static final List<Integer> comparedList = Arrays.asList(1, 2, 3);
 
-        for (Integer number : comparedNumbers) {
-            assertTrue(numbers.contains(number));
-        }
+    @ParameterizedTest(name = "comparedList에 포함되어 있는 번호 {0}는 true를 반환한다.")
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("contains() 메소드 학습 테스트 - return true")
+    void contains_true(int targetNumber) {
+        assertTrue(comparedList.contains(targetNumber));
     }
 
-    @Test
+    @ParameterizedTest(name = "comparedList에 포함되어 있지 않은 번호 {0}는 false를 반환한다.")
+    @ValueSource(ints = {4, 5})
     @DisplayName("contains() 메소드 학습 테스트 - return false")
-    void contains_false() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        List<Integer> comparedNumbers = Arrays.asList(4, 5);
-
-        for (Integer number : comparedNumbers) {
-            assertFalse(numbers.contains(number));
-        }
+    void contains_false(int targetNumber) {
+        assertFalse(comparedList.contains(targetNumber));
     }
 }
