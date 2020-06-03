@@ -1,20 +1,18 @@
 package study.lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
-    private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBER_BASE = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+                                                                            .mapToObj(LottoNumber::new)
+                                                                            .collect(Collectors.toList());
 
     private final int number;
-
-    static {
-        for(int i=1; i<46; i++) {
-            LOTTO_NUMBER_BASE.add(new LottoNumber(i));
-        }
-    }
 
     public LottoNumber(int number) {
         validateLottoNumber(number);

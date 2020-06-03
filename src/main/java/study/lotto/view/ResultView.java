@@ -1,7 +1,7 @@
 package study.lotto.view;
 
-import study.lotto.model.Lottos;
 import study.lotto.model.LottoRank;
+import study.lotto.model.Lottos;
 import study.lotto.model.Statistics;
 
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ public class ResultView {
     public static void printPurchaseMessage(int numOfLotto, Lottos lottos) {
         System.out.println(numOfLotto + "개를 구매했습니다.");
 
-        printLottoList(lottos);
+        printLottos(lottos);
         printEmptyLine();
     }
 
@@ -26,9 +26,8 @@ public class ResultView {
         printEarningRate(earningRate);
     }
 
-    private static void printLottoList(Lottos lottos) {
-        lottos.getLottoList()
-                .forEach(System.out::println);
+    private static void printLottos(Lottos lottos) {
+        System.out.println(lottos);
     }
 
     private static void printStatistics(Statistics statistics) {
@@ -42,7 +41,7 @@ public class ResultView {
                                             LOTTO_RANK_STRING_FORMAT_SECOND : LOTTO_RANK_STRING_FORMAT_BASIC,
                                     lottoRank.getMatches(),
                                     lottoRank.getPrize(),
-                                    statistics.getStatistics().get(lottoRank)))
+                                    statistics.getStatistics().getOrDefault(lottoRank, 0)))
                 );
     }
 

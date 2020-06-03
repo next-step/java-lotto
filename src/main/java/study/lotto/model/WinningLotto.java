@@ -2,7 +2,6 @@ package study.lotto.model;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -21,7 +20,7 @@ public class WinningLotto {
         return new WinningLotto(Lotto.of(winningNumberList));
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return winningNumbers.getLottoNumbers();
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 }

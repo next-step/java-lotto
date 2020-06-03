@@ -46,7 +46,7 @@ public class Lotto {
     public long compareToWinningNumbers(WinningLotto winningLotto) {
         return lottoNumbers
                 .stream()
-                .filter(winningLotto.getLottoNumbers()::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
@@ -58,6 +58,10 @@ public class Lotto {
         return LottoRank.find(
                 (int)compareToWinningNumbers(winningLotto),
                 containsBonusNumber(bonusNumber));
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public String toString() {

@@ -7,12 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
-import study.lotto.model.Lottos;
 import study.lotto.model.LottoNumber;
 import study.lotto.model.WinningLotto;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,7 +46,7 @@ public class LottoTest {
     @DisplayName("로또 생성 테스트")
     @Test
     void generate_lotto() {
-        Lotto lotto = Lotto.generate();
+        Lotto lotto = Lotto.auto();
 
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(lotto.getLottoNumbers())
@@ -70,17 +68,5 @@ public class LottoTest {
 
         assertThat(lotto.compareToWinningNumbers(winningLotto))
                 .isEqualTo(3);
-    }
-
-    @DisplayName("로또 여러개 동시 생성 테스트")
-    @Test
-    void create_lotto_list() {
-        Lottos lottos = Lottos.of(4);
-
-        SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(lottos.getLottoList().size()).isEqualTo(4);
-        softly.assertThat(lottos.getLottoList())
-                .allMatch(Objects::nonNull);
-        softly.assertAll();
     }
 }
