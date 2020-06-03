@@ -1,17 +1,11 @@
 package lotto;
 
-import lotto.domain.lotto.LottoNumberGenerator;
-import lotto.domain.lotto.LottoRank;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.Price;
-import lotto.domain.number.LottoNumber;
-import lotto.domain.winning.WinningLotto;
+import lotto.domain.lotto.*;
 import lotto.domain.winning.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,19 +15,14 @@ public class Main {
         int manualLottoCount = InputView.printRequireManualLottoCount();
         List<String> manualLottoNumbers = InputView.printRequireManualLottoNumbers(manualLottoCount);
 
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, manualLottoNumbers);
+        LottoMachine lottoMachine = new LottoMachine(price, manualLottoNumbers);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
-
-        OutputView.printPurchasedLottoCount(manualLottoCount, lottoTicket);
-        OutputView.printPurchasedLottoTicket(lottoTicket);
+        OutputView.printPurchasedLottoCount(manualLottoCount, lottoMachine.getLottoTicket());
+        OutputView.printPurchasedLottoTicket(lottoMachine.getLottoTicket());
 
         String winningNumbers = InputView.printRequireWinningNumbers();
         int bonusNumber = InputView.printRequireBonusBall();
 
-        Map<LottoRank, Long> lottoRank = lottoTicket.matchWinningNumber(new WinningLotto(winningNumbers),
-                new LottoNumber(bonusNumber));
-
-        OutputView.printStatistics(new WinningStatistics(price, lottoRank));
+        OutputView.printStatistics(new WinningStatistics(price, lottoMachine.match(winningNumbers, bonusNumber)));
     }
 }
