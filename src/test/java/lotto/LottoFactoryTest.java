@@ -20,7 +20,7 @@ public class LottoFactoryTest {
     public void whenInputNegativeThenExceptionTest(int price){
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoFactory.generateLottos(price)
+                () -> LottoFactory.createLottos(price)
         );
     }
 
@@ -29,7 +29,9 @@ public class LottoFactoryTest {
     @CsvSource(value = {"1000, 1", "3000, 3", "10000, 10"})
     public void whenInputPriceThenGenerateLottoTest(int price, int expected){
         // when
-        List<Lotto> lottos = LottoFactory.generateLottos(price);
+        List<Lotto> lottos = LottoFactory.createLottos(price);
+
+        System.out.println(lottos.get(0).getNumbers());
 
         // then
         assertThat(lottos).hasSize(expected);

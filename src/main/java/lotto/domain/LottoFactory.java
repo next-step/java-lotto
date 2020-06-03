@@ -7,14 +7,19 @@ public class LottoFactory {
 
     private static final int PRICE = 1000;
 
-    public static List<Lotto> generateLottos(int totalPrice) {
+    public static List<Lotto> createLottos(int totalPrice, NumberGeneratorStrategy strategy) {
         validationCheck(totalPrice);
+
         int lottoCount = totalPrice / PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(strategy.generateNumbers()));
         }
         return lottos;
+    }
+
+    public static List<Lotto> createLottos(int totalPrice) {
+        return createLottos(totalPrice, new RandomNumberGeneratorStrategy());
     }
 
     private static void validationCheck(int totalPrice) {
