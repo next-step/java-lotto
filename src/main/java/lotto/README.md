@@ -35,8 +35,9 @@
 - Price: 금액(가격)
     - [X] 로또 구매자는 로또 구매를 위해 Price를 지불할 수 있다.
     
-- LottoIssueRequest: 로또 발급 요청
-    - [X] 수동 발급 번호와, 구입 Price를 가질 수 있다.
+- LottoMachine: 로또 기계
+    - [X] LottoTicket을 발급할 수 있다.
+    - [x] 발급된 LottoTicket과 WinningLotto, 보너스볼을 매칭할 수 있다.
     
 - LottoNumber: 로또 개별 번호
     - [X] 로또 번호 하나는 1~45 사이의 값을 갖는다.
@@ -51,18 +52,20 @@
 - LottoTicket: 로또 티켓(묶음) 
     - [X] LottoTicket 한 장은 LottoNumbers 하나 이상을 갖는다.
     - [X] WinningNumbers, 보너스 볼(LottoNumber)을 입력 받아 매칭 결과를 반환할 수 있다.
-    - [X] LottoIssueRequest와 NumberGenerator를 요청 받아 LottoTicket을 생성할 수 있다.
+    - [X] LottoNumbers 여러개를 요청 받아 LottoTicket을 생성할 수 있다.
+    
+- LottoRank: 로또 랭크
+    - [X] 일치하는 갯수에 대한 상금액을 갖는다.
+    - [X] 5개 일치, 보너스 볼 일치하는 2등을 갖는다.
 
-- NumberGenerator, LottoNumberGenerator: 로또 번호 자동 생성
+- LottoNumberGenerator: 로또 번호 생성
     - [X] 1~45 사이의 무작위 값으로 구성된 6개의 숫자를 반환할 수 있다.
+    - [X] 자동 로또 번호를 생성할 수 있다.
+    - [X] 수동 로또 번호를 생성할 수 있다.
 
 - WinningLotto: 지난 주 당첨 번호
     - [X] 지난 주 당첨 LottoNumbers를 갖는다.
     - [X] LottoNumbers와 비교하여 존재하는 갯수를 리턴할 수 있다.
-
-- LottoRank: 로또 랭크
-    - [X] 일치하는 갯수에 대한 상금액을 갖는다.
-    - [X] 5개 일치, 보너스 볼 일치하는 2등을 갖는다.
 
 - WinningStatistics: 당첨 통계
     - [X] LottoRank를 반환할 수 있다.
