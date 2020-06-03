@@ -1,7 +1,5 @@
 package lotto.domain.prize;
 
-import lotto.domain.Lotto;
-
 import java.util.List;
 
 public class WinningChecker {
@@ -14,7 +12,7 @@ public class WinningChecker {
     }
 
     private int getWinCount(List<Integer> lottoNumber, int winCount, int winNumber) {
-        if(lottoNumber.contains(winNumber)) {
+        if (lottoNumber.contains(winNumber)) {
             winCount++;
         }
         return winCount;

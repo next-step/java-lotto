@@ -20,7 +20,7 @@ public class LottoAnalyzer {
 
     public int calculateWinPrize(Map<Integer, Integer> matchCountMap) {
         int winPrize = 0;
-        for(Prize prize : Prize.values()){
+        for (Prize prize : Prize.values()) {
             int matchCount = matchCountMap.get(prize.getMatch());
             winPrize += prize.calculate(matchCount);
         }

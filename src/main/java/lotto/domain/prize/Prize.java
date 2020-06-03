@@ -8,12 +8,22 @@ public enum Prize {
 
     private int match;
     private int price;
+
     Prize(int match, int price) {
         this.match = match;
         this.price = price;
     }
 
-    public int calculate(int matchCount){
+    public int getMatch() {
+        return match;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int calculate(int matchCount) {
         return this.price * matchCount;
     }
+
 }

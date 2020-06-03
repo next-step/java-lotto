@@ -13,7 +13,6 @@ class PrizeTest {
         int i = 0;
         for (Prize prize : Prize.values()) {
             int prizeMoney = prize.calculate(matchCount);
-            System.out.println(prizeMoney);
             assertThat(prizeMoney).isEqualTo(matchCount * price[i++]);
         }
     }

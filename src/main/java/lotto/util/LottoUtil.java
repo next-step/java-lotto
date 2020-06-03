@@ -6,8 +6,7 @@ import java.util.List;
 public class LottoUtil {
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoUtil() {
-    }
+    private LottoUtil() {}
 
     public static int calculateLottoQuantity(int purchaseAmount) {
         return purchaseAmount / LOTTO_PRICE;
