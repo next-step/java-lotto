@@ -12,7 +12,7 @@ public class WinningStatistics {
   private Money income;
   private Money expense;
 
-  private WinningStatistics(Lotto lotto, WinningNumbers winningNumbers) {
+  private WinningStatistics(Lottos lottos, WinningLotto winningLotto) {
     prizeTierCntMap = new HashMap<>();
     income = new Money(0);
     expense = new Money(0);
@@ -23,22 +23,9 @@ public class WinningStatistics {
 
     prizeTierCntMap = sortPrizeTierIntegerMap(prizeTierCntMap);
 
-    countPrizeTier(lotto, winningNumbers);
+    countPrizeTier(lottos, winningLotto);
 
     setIncomeAndExpense();
-  }
-
-  public static WinningStatistics newInstanceFromLottoAndWinningNumbers(Lotto lotto,
-      WinningNumbers winningNumbers) {
-    return new WinningStatistics(lotto, winningNumbers);
-  }
-
-  public Map<PrizeTier, Integer> getPrizeTierCntMap() {
-    return prizeTierCntMap;
-  }
-
-  public double getProfitRate() {
-    return ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense);
   }
 
   private Map<PrizeTier, Integer> sortPrizeTierIntegerMap(
@@ -51,10 +38,10 @@ public class WinningStatistics {
         );
   }
 
-  private void countPrizeTier(Lotto lotto, WinningNumbers winningNumbers) {
-    for (LottoNumbers numbers : lotto.getLottoList()) {
+  private void countPrizeTier(Lottos lottos, WinningLotto winningLotto) {
+    for (Lotto lotto : lottos.getLottoList()) {
       prizeTierCntMap
-          .computeIfPresent(winningNumbers.getPrizeTier(numbers), (key, value) -> ++value);
+          .computeIfPresent(winningLotto.getPrizeTier(lotto), (key, value) -> ++value);
     }
   }
 
@@ -64,5 +51,18 @@ public class WinningStatistics {
       income.add(new Money(prizeTier.getPrize() * lottoCnt));
       expense.add(new Money(Lotto.PRICE.getValue() * lottoCnt));
     }
+  }
+
+  public static WinningStatistics newInstanceFromLottoAndWinningNumbers(Lottos lottos,
+      WinningLotto winningLotto) {
+    return new WinningStatistics(lottos, winningLotto);
+  }
+
+  public Map<PrizeTier, Integer> getPrizeTierCntMap() {
+    return prizeTierCntMap;
+  }
+
+  public double getProfitRate() {
+    return ProfitRateCalculator.calculateByTwoDecimalPlaces(income, expense);
   }
 }

@@ -32,7 +32,7 @@ public enum LottoNumberPool {
   public List<Integer> quickPick() {
     Collections.shuffle(numbers);
 
-    return numbers.stream().limit(Lotto.SIZE).sorted(Integer::compareTo)
+    return numbers.stream().limit(Lotto.LOTTO_SIZE).sorted(Integer::compareTo)
         .collect(Collectors.toList());
   }
 }

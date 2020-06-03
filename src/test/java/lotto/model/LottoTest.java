@@ -13,18 +13,59 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
   @ParameterizedTest
-  @MethodSource("lottoListProvider")
-  void getLottoList(List<LottoNumbers> lottoList) {
-    Lotto lotto = new Lotto(lottoList);
-
-    assertThat(lotto.getLottoList()).isEqualTo(lottoList);
+  @MethodSource("numberListProvider")
+  void checkLottoNumberSize(List<Integer> numberList) {
+    new Lotto(numberList);
   }
 
-  static Stream<Arguments> lottoListProvider() {
+  static Stream<Arguments> numberListProvider() {
     return Stream.of(
-        arguments(Arrays.asList(
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))
-        ))
+        arguments(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        arguments(Arrays.asList(1, 2, 3, 4, 5, 42))
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("wrongSizeListProvider")
+  void checkLottoNumberSize_크기가6이아닌경우(List<Integer> numberList) {
+    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+      new Lotto(numberList);
+    });
+  }
+
+  static Stream<Arguments> wrongSizeListProvider() {
+    return Stream.of(
+        arguments(Arrays.asList(1, 2, 3, 4, 5)),
+        arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("wrongNumberListProvider")
+  void checkLottoNumberRange(List<Integer> numberList) {
+    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+      new Lotto(numberList);
+    });
+  }
+
+  static Stream<Arguments> wrongNumberListProvider() {
+    return Stream.of(
+        arguments(Arrays.asList(1, 2, 3, 4, 5, 46)),
+        arguments(Arrays.asList(0, 2, 3, 4, 5, 6))
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("duplicatedNumberListProvider")
+  void checkLottoNumberDuplicated(List<Integer> numberList) {
+    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+      new Lotto(numberList);
+    });
+  }
+
+  static Stream<Arguments> duplicatedNumberListProvider() {
+    return Stream.of(
+        arguments(Arrays.asList(1, 1, 3, 4, 5, 45))
     );
   }
 }

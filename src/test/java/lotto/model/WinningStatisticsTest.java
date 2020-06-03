@@ -15,10 +15,10 @@ class WinningStatisticsTest {
 
   @ParameterizedTest
   @MethodSource("lottoAndWinningNumbersWithPrizeTierCntMapProvider")
-  void newInstanceFromLottoAndWinningNumbers(Lotto lotto, WinningNumbers winningNumbers,
+  void newInstanceFromLottoAndWinningNumbers(Lottos lottos, WinningLotto winningLotto,
       Map<PrizeTier, Integer> prizeTierCntMap) {
     WinningStatistics winningStatistics = WinningStatistics
-        .newInstanceFromLottoAndWinningNumbers(lotto, winningNumbers);
+        .newInstanceFromLottoAndWinningNumbers(lottos, winningLotto);
 
     for (PrizeTier prizeTier : prizeTierCntMap.keySet()) {
       assertThat(winningStatistics.getPrizeTierCntMap().get(prizeTier))
@@ -28,8 +28,8 @@ class WinningStatisticsTest {
 
   static Stream<Arguments> lottoAndWinningNumbersWithPrizeTierCntMapProvider() {
     return Stream.of(
-        arguments(new Lotto(Arrays.asList(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-            new WinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),
+        arguments(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
+            new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))),
             new HashMap<PrizeTier, Integer>() {{
               put(PrizeTier.MATCH_SIX, 1);
             }}
@@ -39,9 +39,9 @@ class WinningStatisticsTest {
 
   @ParameterizedTest
   @MethodSource("lottoAndWinningNumbersWithProfitProvider")
-  void 수익률얼만지(Lotto lotto, WinningNumbers winningNumbers, double expected) {
+  void 수익률얼만지(Lottos lottos, WinningLotto winningLotto, double expected) {
     WinningStatistics winningStatistics = WinningStatistics
-        .newInstanceFromLottoAndWinningNumbers(lotto, winningNumbers);
+        .newInstanceFromLottoAndWinningNumbers(lottos, winningLotto);
 
     assertThat(winningStatistics.getProfitRate()).isEqualTo(expected);
   }
@@ -49,23 +49,23 @@ class WinningStatisticsTest {
   static Stream<Arguments> lottoAndWinningNumbersWithProfitProvider() {
     return Stream.of(
         arguments(
-            new Lotto(Arrays.asList(
-                new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6)),
-                new LottoNumbers(Arrays.asList(11, 22, 33, 4, 5, 6))
+            new Lottos(Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6)),
+                new Lotto(Arrays.asList(11, 22, 33, 4, 5, 6))
             )),
-            new WinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9))),
+            new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9))),
             0.35
         )
     );

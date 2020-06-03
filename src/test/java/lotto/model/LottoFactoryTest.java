@@ -18,15 +18,15 @@ class LottoFactoryTest {
       "2123, 2"
   })
   void createLottoByQuickPick(int money, int expected) {
-    Lotto lotto = LottoFactory.createLottoByQuickPick(new Money(money));
+    Lottos lottos = LottoFactory.createLottosByQuickPick(new Money(money));
 
-    assertThat(lotto.getLottoList().size()).isEqualTo(expected);
+    assertThat(lottos.getLottoList().size()).isEqualTo(expected);
   }
 
   @Test
   void createLottoByQuickPick_0원이하입력() {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      LottoFactory.createLottoByQuickPick(new Money(-1000));
+      LottoFactory.createLottosByQuickPick(new Money(-1000));
     });
   }
 }

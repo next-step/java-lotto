@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import java.util.Scanner;
-import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.LottoFactory;
 import lotto.model.Money;
-import lotto.model.WinningNumbers;
+import lotto.model.WinningLotto;
 import lotto.model.WinningStatistics;
 import lotto.view.LottoView;
 
@@ -15,22 +15,22 @@ public class LottoController {
   public static void main(String[] args) {
     LottoView.printPurchaseRequestMsg();
 
-    Lotto lotto = LottoFactory.createLottoByQuickPick(new Money(scanner.nextInt()));
+    Lottos lottos = LottoFactory.createLottosByQuickPick(new Money(scanner.nextInt()));
     scanner.nextLine();
 
-    LottoView.printPurchaseDoneMsg(lotto.getLottoList().size());
+    LottoView.printPurchaseDoneMsg(lottos.getLottoList().size());
 
-    LottoView.printLottoNumbers(lotto);
+    LottoView.printLottoNumbers(lottos);
 
     LottoView.printWinningNumberRequestMsg();
 
-    WinningNumbers winningNumbers = WinningNumbers
+    WinningLotto winningLotto = WinningLotto
         .newInstanceByStrArr(scanner.nextLine().split(","));
 
     LottoView.printStatisticsMsg();
 
     WinningStatistics winningStatistics = WinningStatistics
-        .newInstanceFromLottoAndWinningNumbers(lotto, winningNumbers);
+        .newInstanceFromLottoAndWinningNumbers(lottos, winningLotto);
 
     LottoView.printPrizeTierCnt(winningStatistics.getPrizeTierCntMap());
 

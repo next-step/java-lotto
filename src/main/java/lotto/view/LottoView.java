@@ -1,8 +1,8 @@
 package lotto.view;
 
 import java.util.Map;
+import lotto.model.Lottos;
 import lotto.model.Lotto;
-import lotto.model.LottoNumbers;
 import lotto.model.PrizeTier;
 
 public class LottoView {
@@ -15,10 +15,10 @@ public class LottoView {
     System.out.println(quantity + "개를 구매했습니다.");
   }
 
-  public static void printLottoNumbers(Lotto lotto) {
+  public static void printLottoNumbers(Lottos lottos) {
     StringBuilder sb = new StringBuilder();
-    for (LottoNumbers numbers : lotto.getLottoList()) {
-      sb.append(numbers.values()).append("\n");
+    for (Lotto lotto : lottos.getLottoList()) {
+      sb.append(lotto.toString()).append("\n");
     }
     System.out.println(sb);
   }
