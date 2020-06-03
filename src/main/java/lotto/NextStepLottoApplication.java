@@ -22,7 +22,7 @@ public class NextStepLottoApplication {
 		LottoNumber bonusBall = InputView.inputBonusBall();
 		WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusBall);
 
-		// LottoResult lottoResult = WinningService.calculateLottoMatches(lottoTickets, winningNumbers);
-		// OutputView.printResult(lottoResult, lottoTickets);
+		LottoResult lottoResult = new WinningService().getLottoResult(lottoTickets, winningTicket);
+		OutputView.printResult(lottoResult, lottoTickets);
 	}
 }
