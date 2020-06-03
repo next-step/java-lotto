@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoAnalyzer {
+    private LottoAnalyzer() {}
+
+    public static LottoAnalyzer create(){
+        return new LottoAnalyzer();
+    }
+
     public Map<Integer, Integer> calculateWinningStatistics(List<Lotto> lottoTicket, List<Integer> winningNumbers) {
         WinningChecker winningChecker = new WinningChecker();
         Map<Integer, Integer> matchCountMap = new HashMap<>();

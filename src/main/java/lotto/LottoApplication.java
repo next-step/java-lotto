@@ -20,7 +20,7 @@ public class LottoApplication {
 
 
         //로또 기계에서 로또 구매
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = LottoMachine.create();
         List<Lotto> lottoTicket = lottoMachine.purchaseLotto(quantity);
         ResultView.printLottoTicket(lottoTicket);
 
@@ -29,7 +29,7 @@ public class LottoApplication {
         List<Integer> winningNumbers = LottoUtil.convertWinningNumber(winningNumber);
 
         //당첨 통계 출력
-        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
+        LottoAnalyzer lottoAnalyzer = LottoAnalyzer.create();
         Map<Integer, Integer> matchCountMap = lottoAnalyzer.calculateWinningStatistics(lottoTicket, winningNumbers);
         ResultView.printWinStatistics(matchCountMap);
 

@@ -6,6 +6,12 @@ import java.util.List;
 public class LottoMachine {
     private List<Lotto> lottoTicket;
 
+    private LottoMachine() {}
+
+    public static LottoMachine create(){
+        return new LottoMachine();
+    }
+
     public List<Lotto> purchaseLotto(int quantity) {
         lottoTicket = createLotto(quantity);
         return lottoTicket;

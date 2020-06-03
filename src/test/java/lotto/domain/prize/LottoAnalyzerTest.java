@@ -12,11 +12,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoAnalyzerTest {
-    LottoAnalyzer lottoAnalyzer;
+    private LottoAnalyzer lottoAnalyzer;
 
     @BeforeEach
     void setUp() {
-        lottoAnalyzer = new LottoAnalyzer();
+        lottoAnalyzer = LottoAnalyzer.create();
     }
 
     @Test
