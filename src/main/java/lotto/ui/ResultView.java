@@ -19,7 +19,7 @@ public class ResultView {
     }
 
     public void printLotto(Lotto lotto) {
-        String[] numbers = lotto.getLottoNumberList().stream().map(String::valueOf).toArray(String[]::new);
+        String[] numbers = lotto.getLottoNumberSet().stream().map(String::valueOf).toArray(String[]::new);
         System.out.println("[" + String.join(", ", numbers) + "]");
     }
 

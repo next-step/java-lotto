@@ -27,7 +27,7 @@ public enum Prize {
     }
 
     public static Prize award(Lotto winLotto, Lotto lotto) {
-        int count = (int) counting(winLotto.getLottoNumberList(), lotto.getLottoNumberList());
+        int count = (int) counting(winLotto.getLottoNumberSet(), lotto.getLottoNumberSet());
         return Arrays.stream(values())
                 .filter(prize -> prize.number == count)
                 .findFirst()
