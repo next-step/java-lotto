@@ -37,13 +37,6 @@ class LottoMachineTest {
         );
     }
 
-    @ParameterizedTest(name = "금액 = {0}원")
-    @ValueSource(ints = {100, 101, 222, 33333, 0})
-    @DisplayName("로또 금액이 1000원 단위가 아니거나 0인 경우 IllegalArguments exception throw")
-    void 로또_발급_예외(int money) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoMachine(money));
-    }
-
     @ParameterizedTest(name = "입력 값 = {0}")
     @ValueSource(strings = {"1, 2, 3, 4, 5"})
     @NullAndEmptySource
