@@ -1,6 +1,8 @@
 package lotto.collections;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.service.WinningService;
 
 public class WinningTicket {
 
@@ -19,5 +21,10 @@ public class WinningTicket {
 			throw new RuntimeException("로또 번호와 보너스 볼은 중복 불가합니다.");
 		}
 		return bonusBall;
+	}
+
+	public RewardType checkLottoNumbers(final LottoTicket lottoTicket) {
+		return RewardType.findTypeByCount(new WinningService().getMatchCount(winningNumbers, lottoTicket),
+			lottoTicket.contains(bonusBall));
 	}
 }
