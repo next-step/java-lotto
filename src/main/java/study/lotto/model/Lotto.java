@@ -19,12 +19,20 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto generate() {
-        return new Lotto(LottoNumber.generateLottoNumbers());
+    private Lotto(List<LottoNumber> lottoNumberList) {
+        this(new TreeSet<>(lottoNumberList));
+    }
+
+    private Lotto() {
+        this(LottoNumber.generateLottoNumbers());
+    }
+
+    public static Lotto auto() {
+        return new Lotto();
     }
 
     public static Lotto of(List<LottoNumber> lottoNumberList) {
-        return new Lotto(new TreeSet<>(lottoNumberList));
+        return new Lotto(lottoNumberList);
     }
 
     public static int calculateNumOfLottos(int totalPrice) {
