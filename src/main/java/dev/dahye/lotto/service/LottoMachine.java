@@ -1,6 +1,7 @@
 package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
+import dev.dahye.lotto.domain.Money;
 import dev.dahye.lotto.domain.Winning;
 import dev.dahye.lotto.util.DoubleUtils;
 
@@ -10,23 +11,21 @@ import java.util.List;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private static final int ZERO_VALUE = 0;
     private static final String WINNERS_DELIMITER = ",";
 
     private List<LottoTicket> lottoTickets;
     private LottoTicket winningTicket;
-    private final int money;
+    private final Money money;
 
     public LottoMachine(int money) {
-        validateMoney(money);
+        this.money = new Money(money);
+
         initializeTickets();
 
         int lottoCount = money / LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.autoIssued());
         }
-
-        this.money = money;
     }
 
     private void initializeTickets() {
@@ -34,27 +33,12 @@ public class LottoMachine {
     }
 
     public LottoMachine(int money, List<LottoTicket> lottoTickets) {
-        validateMoney(money);
-        this.money = money;
+        this.money = new Money(money);
         this.lottoTickets = lottoTickets;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
-    }
-
-    private void validateMoney(int money) {
-        if (validZeroValue(money) || isNoRemainder(money)) {
-            throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
-        }
-    }
-
-    private boolean validZeroValue(int money) {
-        return money == ZERO_VALUE;
-    }
-
-    private boolean isNoRemainder(int money) {
-        return money % LOTTO_PRICE != ZERO_VALUE;
     }
 
     protected int getTicketsCount() {
@@ -123,6 +107,6 @@ public class LottoMachine {
             totalPrize += winning.getPrize();
         }
 
-        return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);
+        return DoubleUtils.parseDoubleSecondDigit(totalPrize / money.getMoney());
     }
 }
