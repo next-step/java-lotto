@@ -1,18 +1,11 @@
 package lotto.domain.number;
 
-import lotto.domain.number.generator.NumberGenerator;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toList;
 
 public class LottoNumbers {
     public final static int LOTTO_SIZE = 6;
-
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
@@ -20,22 +13,14 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers autoLottoNumber(NumberGenerator<LottoNumber> generator) {
-        return new LottoNumbers(createLottoNumbers(generator));
+    public static LottoNumbers autoLottoNumber(List<LottoNumber> autoLottoNumbers) {
+        return new LottoNumbers(autoLottoNumbers);
     }
 
     public static LottoNumbers manualLottoNumber(List<Integer> numbers) {
-        return new LottoNumbers(createLottoNumbersThroughInteger(numbers));
-    }
-
-    private static List<LottoNumber> createLottoNumbersThroughInteger(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    private static List<LottoNumber> createLottoNumbers(NumberGenerator<LottoNumber> generator) {
-        return generator.getNumbers();
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
     }
 
     private void validateLottoNumbers(List<LottoNumber> numbers) {
@@ -71,17 +56,6 @@ public class LottoNumbers {
                         .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
                         .count()
         );
-    }
-
-    public static List<LottoNumber> createWholeLottoNumbers() {
-        int initialValue = LottoNumber.MIN_VALUE;
-        AtomicInteger value = new AtomicInteger(initialValue);
-
-        return IntStream.generate(value::getAndIncrement)
-                .limit(LottoNumber.MAX_VALUE)
-                .boxed()
-                .map(LottoNumber::new)
-                .collect(toList());
     }
 
     @Override

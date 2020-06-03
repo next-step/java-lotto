@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoIssueRequest;
-import lotto.domain.number.generator.LottoNumberGenerator;
+import lotto.domain.lotto.LottoNumberGenerator;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
@@ -22,9 +21,9 @@ public class Main {
         int manualLottoCount = InputView.printRequireManualLottoCount();
         List<String> manualLottoNumbers = InputView.printRequireManualLottoNumbers(manualLottoCount);
 
-        LottoIssueRequest lottoIssueRequest = new LottoIssueRequest(price, manualLottoNumbers);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, manualLottoNumbers);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoIssueRequest, new LottoNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
         OutputView.printPurchasedLottoCount(manualLottoCount, lottoTicket);
         OutputView.printPurchasedLottoTicket(lottoTicket);
