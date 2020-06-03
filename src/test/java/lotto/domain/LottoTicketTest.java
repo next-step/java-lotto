@@ -18,20 +18,16 @@ class LottoTicketTest {
     @DisplayName("LottoNumber 리스트의 크기가 6이 아니면 IllegalArgumentException Throw")
     @Test
     void lottoTicketThrowsExceptionWhenSizeOver() {
-        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .withMessage("로또 번호는 6개만 가능합니다.");
     }
 
     @DisplayName("LottoNumber 리스트에 중복된 번호가 있으면 IllegalArgumentExceptionThrow")
     @Test
     void lottoTicketThrowsExceptionWhenDuplicateNumber() {
-        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5));
-
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .withMessage("로또 번호는 중복 될 수 없습니다.");
     }
 
@@ -39,9 +35,7 @@ class LottoTicketTest {
     @ParameterizedTest
     @CsvSource({"3, true", "7, false"})
     void isContainingLottoNumber(int number, boolean expectResult) {
-        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket.isContainingLottoNumbers(LottoNumber.valueOf(number))).isEqualTo(expectResult);
     }
@@ -49,16 +43,8 @@ class LottoTicketTest {
     @DisplayName("가지고있는 LottoNumber 리스트를 Integer 리스트로 반환")
     @Test
     void getLottoNumbers() {
-        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-    }
-
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 }

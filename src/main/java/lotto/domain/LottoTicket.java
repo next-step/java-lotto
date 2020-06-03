@@ -16,20 +16,18 @@ public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateDuplicateNumbers(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
-    }
-
-    private LottoTicket() {
-        this.lottoNumbers = Collections.unmodifiableList(peekLottoNumbers());
+    public LottoTicket(List<Integer> numbers) {
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
         validateSize(lottoNumbers);
         validateDuplicateNumbers(lottoNumbers);
     }
 
-    public static LottoTicket buyAutoLottoTicket() {
-        return new LottoTicket();
+    public LottoTicket() {
+        this.lottoNumbers = peekLottoNumbers();
+        validateSize(lottoNumbers);
+        validateDuplicateNumbers(lottoNumbers);
     }
 
     private List<LottoNumber> peekLottoNumbers() {
@@ -68,6 +66,12 @@ public class LottoTicket {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
+    }
+
+    public long findMatchCount(LottoTicket lottoTicket) {
+        return lottoTicket.lottoNumbers.stream()
+                .filter(this::isContainingLottoNumbers)
+                .count();
     }
 
     public boolean isContainingLottoNumbers(LottoNumber lottoNumber) {

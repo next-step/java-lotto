@@ -13,7 +13,7 @@ public class LottoMachine {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoMoney.getNumberOfTicket(); i++) {
-            lottoTickets.add(LottoTicket.buyAutoLottoTicket());
+            lottoTickets.add(new LottoTicket());
         }
 
         return lottoTickets;

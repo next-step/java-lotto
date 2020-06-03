@@ -1,35 +1,27 @@
 package lotto.domain.number;
 
-import java.util.HashSet;
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningSheet;
+
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
-    private static final int WINNING_NUMBER_SIZE = 6;
-    private final List<LottoNumber> winningNumbers;
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
     public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
-        validateWinningNumbers(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
 
-        this.winningNumbers = convertLottoNumbers(winningNumbers);
+        this.winningTicket = new LottoTicket(winningNumbers);
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
-    public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+    public LottoTicket getWinningTicket() {
+        return winningTicket;
     }
 
     public LottoNumber getBonusNumber() {
         return bonusNumber;
-    }
-
-    private List<LottoNumber> convertLottoNumbers(List<Integer> winningNumbers) {
-        return winningNumbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
@@ -38,22 +30,8 @@ public class LottoWinningNumber {
         }
     }
 
-    private void validateWinningNumbers(List<Integer> winningNumbers) {
-        validateWinningNumberSize(winningNumbers);
-        validateDuplicateWinningNumbers(winningNumbers);
-    }
-
-    private void validateWinningNumberSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != WINNING_NUMBER_SIZE) {
-            throw new IllegalArgumentException("당첨 번호의 갯수가 6이 아닙니다. - " + winningNumbers);
-        }
-    }
-
-    private void validateDuplicateWinningNumbers(List<Integer> winningNumbers) {
-        Set<Integer> nonDupulicateNumbers = new HashSet<>(winningNumbers);
-
-        if (nonDupulicateNumbers.size() != WINNING_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복되는 당첨 번호가 존재합니다. - " + winningNumbers);
-        }
+    public WinningSheet findMatchingSheet(LottoTicket lottoTicket) {
+        return WinningSheet.findByMatchCount((int) lottoTicket.findMatchCount(winningTicket)
+                , lottoTicket.isContainingLottoNumbers(bonusNumber));
     }
 }
