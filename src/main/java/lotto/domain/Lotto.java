@@ -1,39 +1,43 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private static final int COUNT_OF_LOTTO_NUMBER = 6;
-    private final List<LottoNumber> lottoNumberList;
+    private static final List<Integer> LOTTO_NUMBER_LIST = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed().collect(Collectors.toList());
+    private final List<Integer> lottoNumberList;
 
-    private Lotto(List<LottoNumber> lottoNumberList) {
+    private Lotto(List<Integer> lottoNumberList) {
         this.lottoNumberList = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumberList) {
+        for (Integer lottoNumber : lottoNumberList) {
             if (this.lottoNumberList.contains(lottoNumber)) {
                 throw new IllegalArgumentException("`lottoNumber` is must not be duplicated");
+            }
+            if (!LOTTO_NUMBER_LIST.contains(lottoNumber)) {
+                throw new IllegalArgumentException(String.format("`number` is must be %d ~ %d", MIN_NUMBER, MAX_NUMBER));
             }
             this.lottoNumberList.add(lottoNumber);
         }
     }
 
     public static Lotto generateByManual(List<Integer> numberList) {
-        return new Lotto(numberList.stream().map(LottoNumber::generateByManual).collect(Collectors.toList()));
+        return new Lotto(numberList);
     }
 
     public static Lotto generateByAuto() {
-        List<LottoNumber> lottoNumberList = IntStream.range(0, COUNT_OF_LOTTO_NUMBER).mapToObj(i -> LottoNumber.generateByAuto()).collect(Collectors.toList());
-        try {
-            return new Lotto(lottoNumberList);
-        } catch (IllegalArgumentException e) {
-            return generateByAuto();
-        }
+        Collections.shuffle(LOTTO_NUMBER_LIST);
+        List<Integer> numberList = LOTTO_NUMBER_LIST.subList(0, COUNT_OF_LOTTO_NUMBER);
+        return new Lotto(numberList);
     }
 
-    public List<LottoNumber> getLottoNumberList() {
+    public List<Integer> getLottoNumberList() {
         return lottoNumberList;
     }
 

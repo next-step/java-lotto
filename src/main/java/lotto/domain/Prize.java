@@ -34,7 +34,7 @@ public enum Prize {
                 .orElse(UNRANKED);
     }
 
-    private static long counting(List<LottoNumber> winLottoNumberList, List<LottoNumber> lottoNumberList) {
+    private static long counting(List<Integer> winLottoNumberList, List<Integer> lottoNumberList) {
         return lottoNumberList.stream().filter(winLottoNumberList::contains).count();
     }
 

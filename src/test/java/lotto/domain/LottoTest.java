@@ -42,4 +42,19 @@ class LottoTest {
                 Arguments.of(Arrays.asList(new Integer[]{1, 1, 3, 4, 5, 6})),
                 Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 45, 45})));
     }
+
+    @DisplayName("1 ~ 45 바깥의 수로 Lotto 생성시에 throw IllegalArgumentException")
+    @ParameterizedTest
+    @MethodSource("source_generateByManual_invalidParameters_shouldFail")
+    public void generateByManual_invalidParameters_shouldFail(List<Integer> param) {
+        assertThatThrownBy(() -> {
+            Lotto.generateByManual(param);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> source_generateByManual_invalidParameters_shouldFail() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(0,1,2,3,4,5)),
+                Arguments.of(Arrays.asList(41,42,43,44,45,46)));
+    }
 }
