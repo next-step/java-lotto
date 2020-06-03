@@ -12,11 +12,11 @@ public class NumberGenerator {
                                                     31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
                                                     41, 42, 43, 44, 45);
 
-    public static int[] getNumber(){
-        int[] lottoNumber = new int[6];
+    public static String[] getNumber(){
+        String[] lottoNumber = new String[6];
         Collections.shuffle(lottoNumbers);
         for (int i = 0; i < 6; i++) {
-            lottoNumber[i] = lottoNumbers.get(i);
+            lottoNumber[i] = lottoNumbers.get(i).toString();
         }
         return lottoNumber;
     }

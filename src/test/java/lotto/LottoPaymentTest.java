@@ -21,8 +21,7 @@ public class LottoPaymentTest {
             "900:0"},
             delimiter = ':')
     void LOTTO_PRICE_TEST(String payPrice, int lottoCount) {
-        LottoPayment lottoPayment = new LottoPayment();
-        assertThat(lottoPayment.pay(payPrice)).isEqualTo(lottoCount);
+        assertThat(new LottoPayment().pay(payPrice)).isEqualTo(lottoCount);
     }
 
     @DisplayName("exception test")
