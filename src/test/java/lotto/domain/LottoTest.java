@@ -23,8 +23,8 @@ public class LottoTest {
     @DisplayName("로또 DATA 객체가 제대로 생성되는 지 확인")
     @Test
     public void createLottoNumberTest() {
-        List<Integer> lottoNumber = createLottoNumber(1,45, 6 );
-        Lotto lotto = new Lotto(lottoNumber);
+        List<LottoNumber> lottoNumbers = createLottoNumber(1,45, 6 );
+        Lotto lotto = new Lotto(lottoNumbers);
         List<Integer> lottoNumberActual = lotto.getNumbers();
         assertAll(
                 () -> assertThat(lotto).isNotNull(),

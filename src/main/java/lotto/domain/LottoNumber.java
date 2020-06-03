@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_LAST_NUMBER = 45;
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_LAST_NUMBER = 45;
 
     private final int number;
 
