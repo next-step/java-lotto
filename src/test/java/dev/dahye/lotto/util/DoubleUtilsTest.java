@@ -14,7 +14,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class DoubleUtilsTest {
     @ParameterizedTest(name = "input = {0}, expected = {1}")
     @MethodSource("doubleValues")
-    @DisplayName("소수점 두자리까지 노출")
+    @DisplayName("소수점 둘째 자리 이후 올림")
     void double_utils(double input, double expected) {
         assertThat(DoubleUtils.parseDoubleSecondDigit(input)).isEqualTo(expected);
     }
@@ -24,8 +24,8 @@ class DoubleUtilsTest {
                 arguments(1, 1),
                 arguments(0.1, 0.1),
                 arguments(0.12, 0.12),
-                arguments(0.123, 0.12),
-                arguments(0.1234, 0.12)
+                arguments(0.126, 0.13),
+                arguments(0.1256, 0.13)
         );
     }
 }
