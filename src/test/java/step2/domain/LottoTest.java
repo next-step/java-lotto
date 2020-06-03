@@ -4,21 +4,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
-    @Test
-    public void setPrizeTest() {
+
+    private static Stream<Arguments> setPrizeTestCase() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Prize.FIRST.getGrade()),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), Prize.SECOND.getGrade()),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), Prize.THIRD.getGrade()),
+            Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), Prize.FORTH.getGrade()),
+            Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), Prize.NONE.getGrade()),
+            Arguments.of(Arrays.asList(1, 12, 13, 14, 15, 16), Prize.NONE.getGrade()),
+            Arguments.of(Arrays.asList(11, 12, 13, 14, 15, 16), Prize.NONE.getGrade())
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("setPrizeTestCase")
+    public void setPrizeTest(List<Integer> winningLottos, int expected) {
         //given
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(winningNumbers);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        ReflectionTestUtils.invokeMethod(lotto, "setPrize", winningNumbers);
+        lotto.setPrize(winningLottos);
 
         //then
-        assertThat(lotto.getPrize()).isEqualTo(Prize.FIRST.getGrade());
+        assertThat(lotto.getPrize()).isEqualTo(expected);
     }
 }
