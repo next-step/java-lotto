@@ -54,10 +54,12 @@ public class LottoResults {
     }
 
     private double getPurchasePayment() {
-        return (double) lottoResults.keySet()
+        double totalPrice = (double) lottoResults.keySet()
             .stream()
             .mapToLong(result -> lottoResults.getOrDefault(result, 0L))
-            .sum() * LOTTO_PRICE;
+            .sum();
+
+        return totalPrice * LOTTO_PRICE;
     }
 
     @Override
