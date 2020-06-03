@@ -34,9 +34,15 @@ public class MatchResult {
                 .collect(Collectors.toMap(Function.identity(), matchResult::get));
     }
 
-    public int calculateTotalWinningMoney() {
-        return this.getWinningResult().entrySet().stream()
-                .map(entry -> entry.getKey().getWinningMoney() * entry.getValue())
+    public Money calculateTotalWinningMoney() {
+        int winningMoney = this.getWinningResult().entrySet().stream()
+                .map(this::multiplyWinningMoney)
                 .reduce(0, Integer::sum);
+
+        return Money.valueOf(winningMoney);
+    }
+
+    private int multiplyWinningMoney(Map.Entry<LottoRank, Integer> entry) {
+        return entry.getKey().getWinningMoney() * entry.getValue();
     }
 }

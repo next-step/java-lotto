@@ -28,13 +28,17 @@ public class MatchReport {
     }
 
     public BigDecimal calculateRateOfReturn() {
-        BigDecimal winningMoney = BigDecimal.valueOf(this.matchResult.calculateTotalWinningMoney());
-        BigDecimal usedAmount = BigDecimal.valueOf(moneyAmount.getUsedAmount().getValue());
+        BigDecimal winningMoney = convertBigDecimal(this.matchResult.calculateTotalWinningMoney());
+        BigDecimal usedAmount = convertBigDecimal(moneyAmount.getUsedAmount());
 
         if (BigDecimal.ZERO.equals(usedAmount)) {
             return BigDecimal.ZERO;
         }
 
         return winningMoney.divide(usedAmount, DECIMAL_DIGIT, RoundingMode.DOWN);
+    }
+
+    private BigDecimal convertBigDecimal(Money money) {
+        return BigDecimal.valueOf(money.getValue());
     }
 }

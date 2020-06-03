@@ -45,7 +45,7 @@ class LottoRankTest {
         assertThat(lottoRank).isEqualTo(LottoRank.MISS);
     }
 
-    @DisplayName("getWinningMoney() 메소드의 반환 값은 0보다 크거나 같다.")
+    @DisplayName("getWinningMoney() 메소드는 우승 상금을 반환한다.")
     @MethodSource("provideLottoRankForGetWinningMoney")
     @ParameterizedTest(name = "로또 등수가 ''{0}''이면 우승 상금은 ''{1}''원 이다")
     void getWinningMoney_None_WinningMoney(LottoRank lottoRank, int expectedWiningMoney) {

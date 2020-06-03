@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -41,9 +42,14 @@ public class LottoTicket {
     }
 
     public int getMatchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(this.numbers.stream()
+        List<LottoNumber> lottoNumbers = matchingResult(winningNumbers);
+        return lottoNumbers.size();
+    }
+
+    private List<LottoNumber> matchingResult(WinningNumbers winningNumbers) {
+        return this.numbers.stream()
                 .filter(winningNumbers::containsNumber)
-                .count());
+                .collect(Collectors.toList());
     }
 
     @Override

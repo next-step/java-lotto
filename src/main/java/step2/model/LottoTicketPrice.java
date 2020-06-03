@@ -4,14 +4,14 @@ public enum LottoTicketPrice implements Priceable {
 
     PRICE_1000(1_000);
 
-    private final int ticketPrice;
+    private final Money ticketPrice;
 
     LottoTicketPrice(int ticketPrice) {
-        this.ticketPrice = ticketPrice;
+        this.ticketPrice = Money.valueOf(ticketPrice);
     }
 
     @Override
-    public int getPrice() {
+    public Money getPrice() {
         return this.ticketPrice;
     }
 }

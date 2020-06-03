@@ -26,12 +26,8 @@ public class LottoTicketTest {
 
     private static Stream<Arguments> provideLottoNumbersForCreate() {
         return Stream.of(
-                Arguments.of(IntStream.rangeClosed(1, 5)
-                        .mapToObj(LottoNumber::valueOf)
-                        .collect(Collectors.toList())),
-                Arguments.of(IntStream.rangeClosed(1, 7)
-                        .mapToObj(LottoNumber::valueOf)
-                        .collect(Collectors.toList()))
+                Arguments.of(LottoData.createLottoNumbers(5)),
+                Arguments.of(LottoData.createLottoNumbers(7))
         );
     }
 

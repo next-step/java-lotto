@@ -19,7 +19,8 @@ public class LottoMachineTest {
     @DisplayName("create() 정적 생성자는 LottoMachine 인스턴스를 반환한다")
     @Test
     void create_TicketPrice_MachineInstance() {
-        assertThat(LOTTO_MACHINE).isInstanceOf(LottoMachine.class);
+        LottoMachine lottoMachine = LottoMachine.create(LottoTicketPrice.PRICE_1000);
+        assertThat(lottoMachine).isInstanceOf(LottoMachine.class);
     }
 
     @DisplayName("create() 정적 생성자에 Null을 입력하면 예외가 발생한다")

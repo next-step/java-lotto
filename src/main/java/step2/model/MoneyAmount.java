@@ -31,18 +31,14 @@ public class MoneyAmount {
             throw new NotEnoughMoneyException();
         }
 
-        this.usedAmount = this.usedAmount.plus(toMoney(priceable));
+        this.usedAmount = this.usedAmount.plus(priceable.getPrice());
     }
 
     public boolean isEnoughMoney(Priceable priceable) {
         Money availableAmount = totalAmount.minus(this.usedAmount);
-        Money useAmount = toMoney(priceable);
+        Money useAmount = priceable.getPrice();
 
         return availableAmount.greaterThan(useAmount);
-    }
-
-    private Money toMoney(Priceable priceable) {
-        return Money.valueOf(priceable.getPrice());
     }
 
     public Money getTotalAmount() {
