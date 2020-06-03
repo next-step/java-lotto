@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
-    public static final int LOTTERY_NUMBER_COUNTS = 6;
+    private static final int LOTTERY_NUMBER_COUNTS = 6;
     private final List<LotteryNumber> lotteryNumbers;
 
     private LotteryTicket(List<LotteryNumber> lotteryNumbers) {
@@ -38,11 +38,17 @@ public class LotteryTicket {
                 .collect(Collectors.toList());
     }
 
-    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket) {
+    public LotteryRank getMatchLotteryRank(LotteryTicket lastWinnerTicket, BonusBall bonusBall) {
         long matchNumberCounts = this.getLotteryNumbers().stream()
-                .filter(target -> lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(target)))
+                .filter(targetNumber ->
+                        lastWinnerTicket.getLotteryNumbers().stream().anyMatch(Predicate.isEqual(targetNumber)))
                 .count();
-        return LotteryRank.valueOf((int) matchNumberCounts);
+        int bonusBallCount = getContainingBonusBallCount(bonusBall);
+        return LotteryRank.valueOf((int) matchNumberCounts, bonusBallCount);
+    }
+
+    public boolean isContainingLotteryNumber(int lotteryNumber) {
+        return this.getLotteryNumbers().contains(lotteryNumber);
     }
 
     private void validateLotteryNumberCounts(List<LotteryNumber> lotteryNumbers) {
@@ -59,5 +65,12 @@ public class LotteryTicket {
         if (lotteryNumbers.size() != filteredLotteryNumberCounts) {
             throw new IllegalArgumentException(ErrorMessages.DUPLICATED_NUMBER);
         }
+    }
+
+    private int getContainingBonusBallCount(BonusBall bonusBall) {
+        int bonusBallNumber = bonusBall.getLotteryNumber();
+        return (int) this.getLotteryNumbers().stream()
+                .filter(targetNumber -> targetNumber == bonusBallNumber)
+                .count();
     }
 }

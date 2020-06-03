@@ -1,5 +1,6 @@
 package lottery;
 
+import lottery.domain.BonusBall;
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryRank;
 import lottery.domain.LotteryTicket;
@@ -76,13 +77,34 @@ public class LotteryTicketTest {
                 });
     }
 
-    @DisplayName("맞춘 로또 개수에 따라 그에 맞는 LotteryRank 반환")
+    @DisplayName("맞춘 로또 개수에 따라 그에 맞는 LotteryRank 반환(맞춘 개수가 5개 아니면서 보너스 볼을 포함하는 경우)")
     @Test
     public void getMatchLotteryRank() {
-        LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
-        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
+        LotteryTicket firstTicket = LotteryTicket.from(lotteryNumberList);
+        LotteryTicket fourthTicket = LotteryTicket.from("1,2,3,4,10,15".split(","));
 
-        assertThat(lotteryTicket.getMatchLotteryRank(winnerTicket))
+        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
+        BonusBall bonusBallNumber = BonusBall.of(10, winnerTicket);
+
+
+        assertThat(firstTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
                 .isEqualTo(LotteryRank.FIRST_PRIZE);
+        assertThat(fourthTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
+                .isEqualTo(LotteryRank.FOURTH_PRIZE);
+    }
+
+    @DisplayName("당첨 번호에 보너스볼 포함 여부에 따른 2등 3등 로또 순위 반환 테스트")
+    @Test
+    public void getSecondOrThirdLotteryRankWhenBonusBallNotInWinnerTicket() {
+        LotteryTicket secondWinnerTicket = LotteryTicket.from(lotteryNumberList);
+        LotteryTicket thirdWinnerTicket = LotteryTicket.from("1,2,3,4,5,7".split(","));
+
+        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,8".split(","));
+        BonusBall bonusBallNumber = BonusBall.of(6, winnerTicket);
+
+        assertThat(secondWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
+                .isEqualTo(LotteryRank.SECOND_PRIZE);
+        assertThat(thirdWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))
+                .isEqualTo(LotteryRank.THIRD_PRIZE);
     }
 }

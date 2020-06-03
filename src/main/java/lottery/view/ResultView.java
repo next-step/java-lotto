@@ -3,6 +3,7 @@ package lottery.view;
 import lottery.domain.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -14,22 +15,23 @@ public class ResultView {
 
     public static void printLotteryGameInformation(PurchasePrice purchasePrice,
                                                    LotteryTicketsGroup lotteryTicketsGroup) {
-        System.out.println(purchasePrice.getPurchasableLotteryTicketCounts()
-                + ViewMessages.RESULT_LOTTERY_TICKET_COUNTS);
+        System.out.printf(ViewMessages.RESULT_LOTTERY_TICKET_COUNTS
+                , purchasePrice.getPurchasableLotteryTicketCounts());
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
 
     }
 
     public static void printLotteryGameResult(LotteryGameResult lotteryGameResult) {
+        System.out.println(ViewMessages.RESULT_HEADER);
         Arrays.stream(LotteryRank.values())
+                .filter(lotteryRank -> lotteryRank != LotteryRank.MISS)
+                .sorted(Comparator.comparing(LotteryRank::getPrizeMoney))
                 .forEach(lotteryRank -> printEachRankResult(lotteryRank, lotteryGameResult));
     }
 
     public static void printRateOfReturn(RateOfReturn rateOfReturn) {
-        System.out.print(ViewMessages.RESULT_REVENUE_TOTAL);
-        System.out.print(rateOfReturn.getRateOfReturn());
-        System.out.print(ViewMessages.RESULT_SENTENCE_SUFFIX);
+        System.out.printf(ViewMessages.RESULT_RATE_OF_RETURN, rateOfReturn.getRateOfReturn());
         if (rateOfReturn.isSurplus()) {
             System.out.println(ViewMessages.RESULT_SURPLUS);
             return;
@@ -52,11 +54,12 @@ public class ResultView {
     }
 
     private static void printEachRankResult(LotteryRank lotteryRank, LotteryGameResult lotteryGameResult) {
-        System.out.print(lotteryRank.getMatchNumberCounts());
-        System.out.print(ViewMessages.RESULT_MATCH);
-        System.out.print(lotteryRank.getPrizeMoney());
-        System.out.print(ViewMessages.RESULT_MONETARY_UNIT);
-        System.out.print(lotteryGameResult.findWinnerTicketCountsByRank(lotteryRank));
-        System.out.println(ViewMessages.RESULT_COUNT);
+        System.out.printf(ViewMessages.RESULT_MATCH_NUMBER_COUNTS, lotteryRank.getMatchNumberCounts());
+        if (lotteryRank == LotteryRank.SECOND_PRIZE) {
+            System.out.printf(ViewMessages.RESULT_BONUS_BALL_SUFFIX);
+        }
+        System.out.printf(ViewMessages.RESULT_MONETARY_UNIT_COUNTS,
+                lotteryRank.getPrizeMoney(),
+                lotteryGameResult.findWinnerTicketCountsByRank(lotteryRank));
     }
 }

@@ -12,8 +12,10 @@ public class LotteryGame {
     }
 
     public LotteryGameResult drawWinnerLotteryTickets(LotteryTicketsGroup lotteryTicketsGroup,
-                                                      LotteryTicket lastWinnerTicket) {
-        Map<LotteryRank, Integer> gameResultBoard = lotteryTicketsGroup.findWinnerTicketCountsByRank(lastWinnerTicket);
+                                                      LotteryTicket lastWinnerTicket,
+                                                      BonusBall bonusBall) {
+        Map<LotteryRank, Integer> gameResultBoard = lotteryTicketsGroup
+                .findWinnerTicketCountsByRank(lastWinnerTicket, bonusBall);
         return LotteryGameResult.from(gameResultBoard);
     }
 }
