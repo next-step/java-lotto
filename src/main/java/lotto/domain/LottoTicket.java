@@ -68,8 +68,8 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public long findMatchCount(LottoTicket lottoTicket) {
-        return lottoTicket.lottoNumbers.stream()
+    public int findMatchCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.lottoNumbers.stream()
                 .filter(this::isContainingLottoNumbers)
                 .count();
     }

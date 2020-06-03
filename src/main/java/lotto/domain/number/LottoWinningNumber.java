@@ -31,7 +31,7 @@ public class LottoWinningNumber {
     }
 
     public WinningSheet findMatchingSheet(LottoTicket lottoTicket) {
-        return WinningSheet.findByMatchCount((int) lottoTicket.findMatchCount(winningTicket)
+        return WinningSheet.findByMatchCount(lottoTicket.findMatchCount(winningTicket)
                 , lottoTicket.isContainingLottoNumbers(bonusNumber));
     }
 }
