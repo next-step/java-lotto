@@ -24,7 +24,7 @@ public class WinningTicket {
 	}
 
 	public RewardType checkLottoNumbers(final LottoTicket lottoTicket) {
-		return RewardType.findTypeByCount(new WinningService().getMatchCount(winningNumbers, lottoTicket),
+		return RewardType.findTypeByCount(WinningService.getMatchCount(winningNumbers, lottoTicket),
 			lottoTicket.contains(bonusBall));
 	}
 }
