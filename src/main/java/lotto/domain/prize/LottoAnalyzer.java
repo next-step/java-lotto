@@ -12,7 +12,9 @@ public class LottoAnalyzer {
         Map<Integer, Integer> matchCountMap = new HashMap<>();
         for (Lotto lotto : lottoTicket) {
             int winCount = winningChecker.checkWinNumber(lotto.getLottoNumber(), winningNumbers);
-            matchCountMap.put(winCount, matchCountMap.getOrDefault(winCount, 0) + 1);
+            if(winCount > 2) {
+                matchCountMap.put(winCount, matchCountMap.getOrDefault(winCount, 0) + 1);
+            }
 
         }
         return matchCountMap;
@@ -21,7 +23,7 @@ public class LottoAnalyzer {
     public int calculateWinPrize(Map<Integer, Integer> matchCountMap) {
         int winPrize = 0;
         for (Prize prize : Prize.values()) {
-            int matchCount = matchCountMap.get(prize.getMatch());
+            int matchCount = matchCountMap.getOrDefault(prize.getMatch(), 0);
             winPrize += prize.calculate(matchCount);
         }
         return winPrize;
