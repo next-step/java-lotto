@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.number.LottoWinningNumber;
 import lotto.domain.vo.LottoMoney;
 
 import java.util.Arrays;
@@ -25,6 +26,13 @@ public class InputView {
         }
     }
 
+    public static LottoWinningNumber inputWinngInfo() {
+        List<Integer> winningNumbers = inputLastWinningNumbers();
+        int bonusNumber = inputBonusNumber();
+
+        return new LottoWinningNumber(winningNumbers, bonusNumber);
+    }
+
     public static List<Integer> inputLastWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
@@ -33,5 +41,13 @@ public class InputView {
                 .map(String::trim)
                 .map(Integer::new)
                 .collect(Collectors.toList());
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+
+        String stringBonusNumber = SCANNER.nextLine();
+
+        return Integer.parseInt(stringBonusNumber);
     }
 }

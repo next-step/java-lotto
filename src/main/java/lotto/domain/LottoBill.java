@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.number.LottoWinningNumber;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,5 +17,9 @@ public class LottoBill {
         return lottoTickets.stream()
                 .map(lottoWinningNumber::findMatchingSheet)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
+    }
+
+    public List<LottoTicket> getAllTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

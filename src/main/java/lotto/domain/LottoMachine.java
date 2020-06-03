@@ -9,13 +9,13 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static List<LottoTicket> purchaseLottoTicket(LottoMoney lottoMoney) {
+    public static LottoBill purchaseLottoTicket(LottoMoney lottoMoney) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoMoney.getNumberOfTicket(); i++) {
             lottoTickets.add(new LottoTicket());
         }
 
-        return lottoTickets;
+        return new LottoBill(lottoTickets);
     }
 }

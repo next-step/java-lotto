@@ -14,4 +14,10 @@ public class LottoResult {
                 .mapToInt(WinningSheet::getPrice)
                 .sum();
     }
+
+    public int countPrize(WinningSheet targetSheet) {
+        return (int) winningSheets.stream()
+                .filter(winningSheet -> winningSheet.equals(targetSheet))
+                .count();
+    }
 }

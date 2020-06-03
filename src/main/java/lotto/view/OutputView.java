@@ -23,25 +23,22 @@ public class OutputView {
                 .forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers()));
     }
 
-    public static void printWinningStatistics(LottoResult lottoResult) {
+    public static void printWinningStatistics(LottoResult lottoResult, LottoMoney lottoMoney) {
         System.out.println("당첨 통계");
+
         System.out.println("----------");
 
-        Map<WinningSheet, Long> winningStatistics = lottoResult.getWinningStatistics();
+        System.out.println(makeStringStatistics(WinningSheet.FIFTH, lottoResult.countPrize(WinningSheet.FIFTH)));
+        System.out.println(makeStringStatistics(WinningSheet.FOURTH, lottoResult.countPrize(WinningSheet.FOURTH)));
+        System.out.println(makeStringStatistics(WinningSheet.THIRD, lottoResult.countPrize(WinningSheet.THIRD)));
+        System.out.println(makeStringStatistics(WinningSheet.SECOND, lottoResult.countPrize(WinningSheet.SECOND)));
+        System.out.println(makeStringStatistics(WinningSheet.FIRST, lottoResult.countPrize(WinningSheet.FIRST)));
 
-        for (Map.Entry<WinningSheet, Long> statistics : winningStatistics.entrySet()) {
-            if (statistics.getKey().equals(WinningSheet.FAIL)) {
-                continue;
-            }
+        printRateOfReturn(lottoMoney.calculateRateOfReturn(lottoResult.sumAllPrize()));
+    }
 
-            WinningSheet winningSheet = statistics.getKey();
-
-            System.out.println(String.format("%d개 일치 (%d원)- %d개", winningSheet.getMatchCount(),
-                    winningSheet.getPrice(),
-                    statistics.getValue()));
-        }
-
-        printRateOfReturn(lottoResult.calculateRateOfReturn());
+    private static String makeStringStatistics(WinningSheet winningSheet, int countPrize) {
+        return String.format("%d개 일치 (%d원)- %d개", winningSheet.getMatchCount(), winningSheet.getPrice(), countPrize);
     }
 
     private static void printRateOfReturn(double rateOfReturn) {
