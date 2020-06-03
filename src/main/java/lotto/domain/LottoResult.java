@@ -11,7 +11,7 @@ public class LottoResult {
 
     public int sumAllPrize() {
         return winningSheets.stream()
-                .mapToInt(WinningSheet::getPrice)
+                .mapToInt(WinningSheet::getPrize)
                 .sum();
     }
 

@@ -1,7 +1,6 @@
 package lotto.domain.vo;
 
 import lotto.domain.WinningSheet;
-import lotto.domain.vo.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +33,7 @@ class LottoMoneyTest {
     @Test
     void calculateRateOfReturn() {
         LottoMoney lottoMoney = new LottoMoney(2000);
-        int sumOfPrize = WinningSheet.FIFTH.getPrice() + WinningSheet.FOURTH.getPrice();
+        int sumOfPrize = WinningSheet.FIFTH.getPrize() + WinningSheet.FOURTH.getPrize();
 
         double rateOfReturn = lottoMoney.calculateRateOfReturn(sumOfPrize);
 

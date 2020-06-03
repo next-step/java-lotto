@@ -11,11 +11,11 @@ public enum WinningSheet {
     FIRST(6, 2_000_000_000);
 
     private final int matchCount;
-    private final int price;
+    private final int prize;
 
-    WinningSheet(int matchCount, int price) {
+    WinningSheet(int matchCount, int prize) {
         this.matchCount = matchCount;
-        this.price = price;
+        this.prize = prize;
     }
 
     public static WinningSheet findByMatchCount(int matchCount, boolean matchBonus) {
@@ -39,8 +39,8 @@ public enum WinningSheet {
         return matchCount;
     }
 
-    public int getPrice() {
-        return price;
+    public int getPrize() {
+        return prize;
     }
 
     private boolean isSameMatchCount(int matchCount) {

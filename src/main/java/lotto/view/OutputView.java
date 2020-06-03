@@ -6,8 +6,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.WinningSheet;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class OutputView {
     private static final int NOT_LOSE_RATE = 1;
@@ -38,7 +36,7 @@ public class OutputView {
     }
 
     private static String makeStringStatistics(WinningSheet winningSheet, int countPrize) {
-        return String.format("%d개 일치 (%d원)- %d개", winningSheet.getMatchCount(), winningSheet.getPrice(), countPrize);
+        return String.format("%d개 일치 (%d원)- %d개", winningSheet.getMatchCount(), winningSheet.getPrize(), countPrize);
     }
 
     private static void printRateOfReturn(double rateOfReturn) {
