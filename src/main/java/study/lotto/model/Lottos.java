@@ -28,7 +28,7 @@ public class Lottos {
 
         lottoList
             .forEach(lotto -> {
-                LottoRank lottoRank = lotto.getLottoRank(winningLotto, bonusNumber);
+                LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
                 rankToCount.put(lottoRank, rankToCount.getOrDefault(lottoRank, 0) + 1);
             });
 

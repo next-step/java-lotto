@@ -54,7 +54,7 @@ public class Lotto {
         return lottoNumbers.contains(new LottoNumber(bonusNumber));
     }
 
-    public LottoRank getLottoRank(WinningLotto winningLotto, int bonusNumber) {
+    public LottoRank checkLottoRank(WinningLotto winningLotto, int bonusNumber) {
         return LottoRank.find(
                 (int)compareToWinningNumbers(winningLotto),
                 containsBonusNumber(bonusNumber));
