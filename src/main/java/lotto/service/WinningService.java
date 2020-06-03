@@ -36,13 +36,13 @@ public class WinningService {
 		return new Money(value);
 	}
 
-	public LottoResult getLottoResult(final LottoTickets lottoTickets, final WinningTicket winningTicket) {
+	public static LottoResult getLottoResult(final LottoTickets lottoTickets, final WinningTicket winningTicket) {
 		return lottoTickets.getLottoTickets().stream()
 			.map(winningTicket::checkLottoNumbers)
 			.collect(collectingAndThen(toList(), LottoResult::new));
 	}
 
-	public int getMatchCount(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
+	public static int getMatchCount(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
 		return winningNumbers.getWinningNumbers().stream()
 			.mapToInt(lottoTicket::getMatchCount).sum();
 	}
