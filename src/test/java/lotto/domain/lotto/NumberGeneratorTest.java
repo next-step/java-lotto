@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.lotto.NumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

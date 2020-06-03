@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoMachine;
 import lotto.domain.prize.LottoAnalyzer;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
