@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.Price;
+import lotto.util.IntegerUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +24,7 @@ public class InputView {
         System.out.println(QUESTION_INSERT_WIN_LOTTO);
         Scanner scanner = new Scanner(System.in);
         String[] winNumberStrings = scanner.nextLine().split(LOTTO_DELIMITER);
-        List<Integer> winNumberList = Arrays.stream(winNumberStrings).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
+        List<Integer> winNumberList = Arrays.stream(winNumberStrings).map(IntegerUtils::parsePositiveInt).collect(Collectors.toList());
         return new Lotto(winNumberList);
     }
 }

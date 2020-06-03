@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.IntegerUtils;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -11,19 +13,7 @@ public class Price {
     }
 
     public static Price of(String numberString) {
-        if (numberString == null || numberString.isEmpty()) {
-            throw new NumberFormatException("``price` is must not be null or empty");
-        }
-        int number;
-        try {
-            number = Integer.parseInt(numberString);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("``value` is must be number string");
-        }
-        if (number < 0) {
-            throw new NumberFormatException("``value` is must be positive number");
-        }
-        return new Price(new BigDecimal(number));
+        return new Price(new BigDecimal(IntegerUtils.parsePositiveInt(numberString)));
     }
 
     public int getPrice() {
