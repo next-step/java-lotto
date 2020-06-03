@@ -13,4 +13,8 @@ public class Money {
             throw new IllegalArgumentException();
         this.money = money;
     }
+
+    public int lotteryCount() {
+        return money / LOTTERY_MONEY;
+    }
 }
