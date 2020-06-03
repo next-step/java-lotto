@@ -1,6 +1,8 @@
 package dev.dahye.lotto.domain;
 
+import dev.dahye.lotto.util.DoubleUtils;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -52,5 +54,22 @@ class LottoResultTest {
                 arguments("1, 2, 3, 4, 5, 26", Winning.SECOND),
                 arguments("1, 2, 3, 4, 5, 6", Winning.FIRST)
         );
+    }
+
+    @Test
+    @DisplayName("로또 수익률을 구할 수 있다.")
+    void lotto_winning_rate() {
+        int myMoney = 2000;
+        LottoTicket lottoTicketByWinningFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicketByWinningSecond = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        LottoResult lottoResult = new LottoResult(Arrays.asList(
+                lottoTicketByWinningFirst,
+                lottoTicketByWinningSecond
+        ), "1, 2, 3, 4, 5, 6");
+
+        double expectedResult
+                = DoubleUtils.parseDoubleSecondDigit((Winning.FIRST.getPrize() + Winning.SECOND.getPrize()) / myMoney);
+        assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
     }
 }
