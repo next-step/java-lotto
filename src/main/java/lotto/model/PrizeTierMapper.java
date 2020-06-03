@@ -4,14 +4,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum PrizeTierMapper {
-  INSTANCE;
+public class PrizeTierMapper {
 
   private final Map<Integer, PrizeTier> mapper;
 
-  PrizeTierMapper() {
+  private PrizeTierMapper() {
     this.mapper = Stream.of(PrizeTier.values())
         .collect(Collectors.toMap(PrizeTier::getMatchCnt, prizeTier -> prizeTier));
+  }
+
+  public static PrizeTierMapper getInstance() {
+    return LazyHolder.INSTANCE;
+  }
+
+  private static class LazyHolder {
+
+    private static final PrizeTierMapper INSTANCE = new PrizeTierMapper();
   }
 
   /**

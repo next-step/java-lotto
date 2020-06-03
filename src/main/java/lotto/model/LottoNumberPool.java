@@ -5,19 +5,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LottoNumberPool {
-  INSTANCE;
+public class LottoNumberPool {
 
   private final static int MIN = 1;
   private final static int MAX = 45;
 
   private final List<Integer> numbers;
 
-  LottoNumberPool() {
+  private LottoNumberPool() {
     numbers = new ArrayList<>();
     for (int i = MIN; i <= MAX; i++) {
       numbers.add(i);
     }
+  }
+
+  public static LottoNumberPool getInstance() {
+    return LazyHolder.INSTANCE;
+  }
+
+  private static class LazyHolder {
+
+    private static final LottoNumberPool INSTANCE = new LottoNumberPool();
   }
 
   public List<Integer> getNumbers() {

@@ -18,6 +18,6 @@ class PrizeTierMapperTest {
       "6, MATCH_SIX",
   })
   void getPrizeTierByMatchCnt(int matchCnt, PrizeTier expected) {
-    assertThat(PrizeTierMapper.INSTANCE.getPrizeTierByMatchCnt(matchCnt)).isEqualTo(expected);
+    assertThat(PrizeTierMapper.getInstance().getPrizeTierByMatchCnt(matchCnt)).isEqualTo(expected);
   }
 }

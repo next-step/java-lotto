@@ -9,7 +9,7 @@ class LottoNumberPoolTest {
 
   @Test
   void quickPick() {
-    List<Integer> numbers = LottoNumberPool.INSTANCE.quickPick();
+    List<Integer> numbers = LottoNumberPool.getInstance().quickPick();
     assertThat(numbers.size()).isEqualTo(6);
     assertThat(numbers.stream().distinct().toArray().length).isEqualTo(6);
   }
@@ -17,7 +17,7 @@ class LottoNumberPoolTest {
   @Test
   void quickPick_무작위수확인() {
     for (int i = 0; i < 100; i++) {
-      System.out.println(LottoNumberPool.INSTANCE.quickPick());
+      System.out.println(LottoNumberPool.getInstance().quickPick());
     }
   }
 }

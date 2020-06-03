@@ -29,7 +29,7 @@ public class Lotto {
   }
 
   private void checkLottoNumberRange(List<Integer> numberList) {
-    if (!LottoNumberPool.INSTANCE.getNumbers().containsAll(numberList)) {
+    if (!LottoNumberPool.getInstance().getNumbers().containsAll(numberList)) {
       throw new IllegalArgumentException("로또 숫자는 1~45 사이로 입력되어야 합니다.");
     }
   }

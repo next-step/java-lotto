@@ -26,6 +26,6 @@ public class WinningLotto {
   }
 
   public PrizeTier getPrizeTier(Lotto target) {
-    return PrizeTierMapper.INSTANCE.getPrizeTierByMatchCnt(this.lotto.numberOfMatchesTo(target));
+    return PrizeTierMapper.getInstance().getPrizeTierByMatchCnt(this.lotto.numberOfMatchesTo(target));
   }
 }

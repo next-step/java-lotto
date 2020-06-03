@@ -9,7 +9,7 @@ public class LottoFactory {
     List<Lotto> lottoList = new ArrayList<>();
 
     for (int i = 0; i < money.getValue() / Lotto.PRICE.getValue(); i++) {
-      lottoList.add(new Lotto(LottoNumberPool.INSTANCE.quickPick()));
+      lottoList.add(new Lotto(LottoNumberPool.getInstance().quickPick()));
     }
 
     return new Lottos(lottoList);
