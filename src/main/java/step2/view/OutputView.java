@@ -29,12 +29,14 @@ public class OutputView {
 
     private static void printNumbers(Lotto lotto) {
 
-        System.out.print("[");
-        System.out.print(lotto.getNumbers()
+        StringBuilder stringBuilder = new StringBuilder("[");
+        stringBuilder.append(lotto.getNumbers()
                 .stream()
                 .map(number -> Integer.toString(number))
                 .collect(Collectors.joining(NUMBER_DELIMITER)));
-        System.out.println("]");
+        stringBuilder.append("]");
+
+        System.out.println(stringBuilder);
 
     }
 
@@ -45,7 +47,9 @@ public class OutputView {
         System.out.println("-------------");
 
         prizeList.forEach(prize -> {
-            System.out.println(prize.getMatchedNumber() + " matched. (" + prize.getPrizePrice() + ") : " + prize.getPrizeCount());
+            System.out.println(prize.getMatchedNumber()
+                    + " matched. (" + String.format("%15,d", prize.getPrizePrice())
+                    + ") : " + String.format("%3d", prize.getPrizeCount()));
         });
 
     }

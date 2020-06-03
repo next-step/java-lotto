@@ -26,21 +26,19 @@ public class Lotto {
         Collections.shuffle(lottoGameNumbers);
 
         // pick LOTTO_DRAW_LIMIT
-        lotto.lottoNumbers = drawLottoNumbers(lottoGameNumbers, lottoDrawLimit);
+        lotto.lottoNumbers = drawLottoNumbers(lottoDrawLimit, lottoGameNumbers);
         lotto.lottoNumbers.sort(Integer::compareTo);
 
         return lotto;
 
     }
 
-    private static List<Integer> drawLottoNumbers(List<Integer> lottoGameNumbers, int lottoDrawLimitIndex) {
+    private static List<Integer> drawLottoNumbers(int lottoDrawLimitIndex, List<Integer> lottoGameNumbers) {
         return lottoGameNumbers.subList(0, lottoDrawLimitIndex);
     }
-
 
     public List<Integer> getNumbers() {
         return lottoNumbers;
     }
-
 
 }

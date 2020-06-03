@@ -19,9 +19,11 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoGame.buyLotto(input))
+                .isThrownBy(() -> {
+                    Money money = new Money(input);
+                    lottoGame.getGameCountByPayMoney(money);
+                })
                 .withMessage("Found a Illegal Argument(s).");
-
     }
 
     // init with 1000 ~
@@ -30,8 +32,10 @@ class LottoGameTest {
     @ValueSource(strings = {"0", "1000", "2000", "5000", "10000"})
     public void testClassWithNormalInput(String input) {
 
+        Money money = new Money(input);
+
         LottoGame lottoGame = new LottoGame();
-        int gameCount = lottoGame.buyLotto(input);
+        int gameCount = lottoGame.getGameCountByPayMoney(money);
 
         // lottoList = LottoGame.
         lottoGame.issueLotto(gameCount);
@@ -48,7 +52,12 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoGame.buyLotto(input))
+                .isThrownBy(() ->
+                        {
+                            Money money = new Money(input);
+                            lottoGame.getGameCountByPayMoney(money);
+                        }
+                )
                 .withMessage("Found a Illegal Argument(s).");
     }
 
@@ -60,7 +69,6 @@ class LottoGameTest {
 
         LottoGame lottoGame = new LottoGame();
 
-
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoGame.checkWiningNumber(input));
     }
@@ -71,10 +79,11 @@ class LottoGameTest {
     @ValueSource(strings = {"-1000", "-1"})
     public void testGetGameCountByPayMoneyWithError(String input) {
 
+        Money money = new Money(input);
         LottoGame lottoGame = new LottoGame();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoGame.buyLotto(input))
+                .isThrownBy(() -> lottoGame.getGameCountByPayMoney(money))
                 .withMessage("Found a Illegal Argument(s).");
     }
 

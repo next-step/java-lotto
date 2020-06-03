@@ -13,7 +13,12 @@ public class Prize {
     private int prizePrice;
     private int prizeCount = 0;
 
+    private static Prize prize = null;
+
     private Prize() {
+    }
+
+    private Prize(int matchedNumber, int prizePrice) {
     }
 
     public static Prize of(int matchedNumber, int prizePrice) {
@@ -25,6 +30,7 @@ public class Prize {
         Prize prize = new Prize();
         prize.matchedNumber = matchedNumber;
         prize.prizePrice = prizePrice;
+
         return prize;
 
     }

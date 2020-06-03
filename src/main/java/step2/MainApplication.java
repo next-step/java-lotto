@@ -2,6 +2,7 @@ package step2;
 
 
 import step2.domain.LottoGame;
+import step2.domain.Money;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -18,32 +19,34 @@ public class MainApplication {
 
     public static void main(String[] args) {
 
+        LottoGame lottoGame = new LottoGame();
+
         // input to buy
-        String payMoney = InputView.inputPayMoney();
+        Money payedmoney = new Money(InputView.inputPayMoney());
 
         // check buy Lotto
-        int gameCount = LottoGame.buyLotto(payMoney);
+        int gameCount = lottoGame.getGameCountByPayMoney(payedmoney);
 
         // lottoList = LottoGame.
-        LottoGame.issueLotto(gameCount);
+        lottoGame.issueLotto(gameCount);
 
         //OutputView.
-        OutputView.outputLottoList(LottoGame.getLottoList());
+        OutputView.outputLottoList(lottoGame.getLottoList());
 
         // get Wining Number
         String winingNumber = InputView.inputWiningNumber();
 
-        LottoGame.checkWiningNumber(winingNumber);
+        lottoGame.checkWiningNumber(winingNumber);
 
         // prize Rules!!
-        LottoGame.makeRules();
+        lottoGame.makeRules();
 
         // matching numbers
-        LottoGame.matchingWinningNumbers();
-        OutputView.outputPrizeList(LottoGame.getPrizeList());
+        lottoGame.matchingWinningNumbers();
+        OutputView.outputPrizeList(lottoGame.getPrizeList());
 
         // calc ratio of win.
-        OutputView.outputWinningResult(LottoGame.totalResult());
+        OutputView.outputWinningResult(lottoGame.totalResult());
 
     }
 

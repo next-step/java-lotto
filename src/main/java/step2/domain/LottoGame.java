@@ -1,6 +1,8 @@
 package step2.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /*
@@ -16,52 +18,50 @@ public class LottoGame {
     private static final int LOTTO_DRAW_LIMIT = 6;
     private static final String FIXED_DELIMITER = ",|:| ";
 
+    private List<Lotto> lottoList = new ArrayList<>();
+
+    private List<Integer> winningNumberList = new ArrayList<>();
+    private List<Prize> prizeList = new ArrayList<>();
+
+
+    // default 1 to LOTTO_MAX_LIMIT
     private static List<Integer> lottoGameNumbers = new ArrayList<>();
-    private static List<Lotto> lottoList = new ArrayList<>();
-
-    private static List<Integer> winningNumberList = new ArrayList<>();
-    private static List<Prize> prizeList = new ArrayList<>();
-
 
     public LottoGame() {
-
         // ready
-        List<Integer> lottoGameNumbers = new ArrayList<>();
-
-        for (int i = 1; i < LOTTO_MAX_LIMIT; i++) {
+        for (int i = 1; i <= LOTTO_MAX_LIMIT; i++) {
             lottoGameNumbers.add(i);
         }
-
     }
 
     // buy
-    public int buyLotto(String payMoney) {
+    public int getGameCountByPayMoney(Money payedMoney) {
 
-        Number.checkNotNumber(payMoney);
-        Number.checkNumber(payMoney);
-
-        int gameCount = getGameCountByPayMoney(Integer.parseInt(payMoney));
+        int gameCount = calculteGameCountByPayMoney(payedMoney.getPayedMoney());
 
         return gameCount;
 
     }
 
-    // issue
-    public void issueLotto(int gameCount) {
-
-        for (int i = 0; i < gameCount; i++) {
-            lottoList.add(Lotto.of(LOTTO_DRAW_LIMIT, lottoGameNumbers));
-        }
-
-    }
-
-    private int getGameCountByPayMoney(int payMoney) {
+    private int calculteGameCountByPayMoney(int payMoney) {
 
         if (payMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");
         }
         return payMoney / LOTTO_PRICE;
     }
+
+
+    // issue
+    public void issueLotto(int gameCount) {
+
+        for (int i = 0; i < gameCount; i++) {
+
+            lottoList.add(Lotto.of(LOTTO_DRAW_LIMIT, lottoGameNumbers));
+        }
+
+    }
+
 
     public void checkWiningNumber(String winingNumber) {
 
@@ -80,10 +80,10 @@ public class LottoGame {
 
     public void makeRules() {
 
-        prizeList.add(Prize.of(3, 5000));
-        prizeList.add(Prize.of(4, 50000));
-        prizeList.add(Prize.of(5, 1500000));
-        prizeList.add(Prize.of(6, 2000000000));
+        prizeList.add(Prize.of(3, 5_000));
+        prizeList.add(Prize.of(4, 50_000));
+        prizeList.add(Prize.of(5, 1_500_000));
+        prizeList.add(Prize.of(6, 2_000_000_000));
 
         // ...
 
@@ -91,6 +91,7 @@ public class LottoGame {
 
 
     public List<Lotto> getLottoList() {
+        List<Lotto> lottoList = this.lottoList;
         return lottoList;
     }
 
@@ -115,11 +116,16 @@ public class LottoGame {
         int result = 0;
 
         for (int eachNumber : lotto.getNumbers()) {
-            if (winningNumberList.contains(eachNumber)) {
-                result++;
-            }
+            result = getMatchedCountAdd(result, eachNumber);
         }
 
+        return result;
+    }
+
+    private int getMatchedCountAdd(int result, int eachNumber) {
+        if (winningNumberList.contains(eachNumber)) {
+            result++;
+        }
         return result;
     }
 
@@ -136,12 +142,17 @@ public class LottoGame {
 
     public double totalResult() {
 
-        int sum = prizeList.stream().mapToInt(prize -> prize.getPrizeTotal()).sum();
+        int sum = prizeList.stream()
+                .mapToInt(prize -> prize.getPrizeTotal())
+                .sum();
+
         return sum / (lottoList.size() * LOTTO_PRICE);
     }
 
-    public List<Integer> getLottoGameNumbers() {
+
+    public static List<Integer> getLottoGameNumbers() {
         return lottoGameNumbers;
     }
+
 
 }

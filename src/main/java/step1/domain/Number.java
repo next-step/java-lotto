@@ -9,12 +9,12 @@ public class Number {
 
     public static void checkNumber(String[] inputString) {
         Arrays.stream(inputString)
-                .forEach(string -> {
-                    if (!patternNumbersOnly.matcher(string).matches()) {
-                        throw new IllegalArgumentException("Found a not number(s)");
+            .forEach(string -> {
+                if (!patternNumbersOnly.matcher(string).matches()) {
+                    throw new IllegalArgumentException("Found a not number(s)");
                     }
                 }
-        );
+            );
     }
 
     public static void checkNotNumber(String[] numbers) {

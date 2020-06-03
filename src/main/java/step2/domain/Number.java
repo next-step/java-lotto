@@ -53,33 +53,16 @@ public class Number {
 
     public static void checkNotNumber(String[] numbers) {
 
-        // find a negative number(s).
-        if (Arrays.stream(numbers)
+        long count = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .filter(number -> number < 0)
-                .count() > 0) {
+                .count();
+
+        // find a negative number(s).
+        if (count > 0) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
