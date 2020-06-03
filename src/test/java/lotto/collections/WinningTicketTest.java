@@ -22,10 +22,10 @@ public class WinningTicketTest {
 		);
 	}
 
-	@DisplayName("로또 번호와 보너스 볼은 중복될 수 없다.")
+	@DisplayName("지난 회차 승리 번호와 보너스 볼은 중복될 수 없다.")
 	@MethodSource("SIX_ELEMENTS_OF_WINNING_NUMBERS")
 	@ParameterizedTest
-	void 로또_번호와_보너스_볼은_중복되지_않는다(List<Integer> winningNumberList, int bonusBall) {
+	void 승리_번호와_보너스_볼은_중복되지_않는다(List<Integer> winningNumberList, int bonusBall) {
 		//given
 		WinningNumbers winningNumbers = new WinningNumbers(winningNumberList);
 		//when

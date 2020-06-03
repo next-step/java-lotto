@@ -4,6 +4,8 @@ import lotto.collections.LottoResult;
 import lotto.collections.LottoTickets;
 import lotto.collections.Money;
 import lotto.collections.WinningNumbers;
+import lotto.collections.WinningTicket;
+import lotto.domain.LottoNumber;
 import lotto.service.PurchaseService;
 import lotto.service.WinningService;
 import lotto.view.InputView;
@@ -17,7 +19,10 @@ public class NextStepLottoApplication {
 		OutputView.printNumberOfPurchasedTickets(lottoTickets);
 
 		WinningNumbers winningNumbers = InputView.inputLastWeekWinningNumbers();
-		LottoResult lottoResult = WinningService.calculateLottoMatches(lottoTickets, winningNumbers);
-		OutputView.printResult(lottoResult, lottoTickets);
+		LottoNumber bonusBall = InputView.inputBonusBall();
+		WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusBall);
+
+		// LottoResult lottoResult = WinningService.calculateLottoMatches(lottoTickets, winningNumbers);
+		// OutputView.printResult(lottoResult, lottoTickets);
 	}
 }
