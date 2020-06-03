@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 public class LottoNumber {
     private static final Map<Integer, LottoNumber> LOTTERY_NUMBERS = new HashMap<>();
@@ -18,5 +20,17 @@ public class LottoNumber {
         if (no < LOTTERY_MINIMUM_NUMBER || no > LOTTERY_MAXIMUM_NUMBER) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public static LottoNumber of(String value) {
+        if (Objects.isNull(value)) {
+            throw new IllegalArgumentException();
+        }
+        return of(Integer.parseInt(value.trim()));
+    }
+
+    public static LottoNumber of(int number) {
+        return Optional.ofNullable(LOTTERY_NUMBERS.get(number))
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
