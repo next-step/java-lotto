@@ -15,23 +15,17 @@ public class WinningLotto extends AbstractLotto {
 
     private String winningNumberString;
 
-    public WinningLotto(String winningNumberString) {
+    public WinningLotto(String winningNumberString) throws IllegalArgumentException {
         this.winningNumberString = winningNumberString;
-    }
-
-    @Override
-    public List<Integer> getLottoNumbers() throws IllegalArgumentException{
-        if (super.getLottoNumbers() == null) {
-            setLottoNumbers();
-        }
-        return super.getLottoNumbers();
-    }
-
-    private void setLottoNumbers() throws IllegalArgumentException{
         validateWinningNumbers();
 
         List<String> parsedWinningNumbers = parseWinningNumbers(this.winningNumberString);
         super.setLottoNumbers(convertStringToIntegerList(parsedWinningNumbers));
+    }
+
+    @Override
+    public List<Integer> getLottoNumbers() throws IllegalArgumentException {
+        return super.getLottoNumbers();
     }
 
     public void validateWinningNumbers()
@@ -43,7 +37,8 @@ public class WinningLotto extends AbstractLotto {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
 
-        if (parsedWinningNumbers.stream().anyMatch(number -> !Character.isDigit(number.charAt(0)))) {
+        if (parsedWinningNumbers.stream()
+            .anyMatch(number -> !Character.isDigit(number.charAt(0)))) {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
     }
