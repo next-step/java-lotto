@@ -31,7 +31,7 @@ class LottoWinningNumberTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoWinningNumber(winningNumbers, bonusNumber))
-                .withMessage("당첨 번호의 갯수가 6이 아닙니다. - " + winningNumbers);
+                .withMessage("로또 번호는 6개만 가능합니다. - " + winningNumbers);
     }
 
     @DisplayName("당첨 번호가 중복되는 값이 있다면 IllegalArgumentException throw")
@@ -42,6 +42,6 @@ class LottoWinningNumberTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoWinningNumber(winningNumbers, bonusNumber))
-                .withMessage("중복되는 당첨 번호가 존재합니다. - " + winningNumbers);
+                .withMessage("로또 번호는 중복 될 수 없습니다. - " + winningNumbers);
     }
 }

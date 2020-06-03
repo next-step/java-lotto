@@ -61,4 +61,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return cache.get(number - 1);
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

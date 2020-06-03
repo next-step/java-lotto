@@ -18,7 +18,7 @@ class LottoMoneyTest {
     void cannotBuyLotto(int purchaseAmount) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoMoney(purchaseAmount))
-                .withMessage("로또를 살 수 없습니다.");
+                .withMessage("로또를 살 수 없습니다. - " + purchaseAmount);
     }
 
     @DisplayName("입력받은 금액으로 구매 가능한 로또의 개수를 계산한다.")

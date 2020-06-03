@@ -18,17 +18,19 @@ class LottoTicketTest {
     @DisplayName("LottoNumber 리스트의 크기가 6이 아니면 IllegalArgumentException Throw")
     @Test
     void lottoTicketThrowsExceptionWhenSizeOver() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
-                .withMessage("로또 번호는 6개만 가능합니다.");
+                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .withMessage("로또 번호는 6개만 가능합니다. - " + lottoNumbers);
     }
 
     @DisplayName("LottoNumber 리스트에 중복된 번호가 있으면 IllegalArgumentExceptionThrow")
     @Test
     void lottoTicketThrowsExceptionWhenDuplicateNumber() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 5)))
-                .withMessage("로또 번호는 중복 될 수 없습니다.");
+                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .withMessage("로또 번호는 중복 될 수 없습니다. - " + lottoNumbers);
     }
 
     @DisplayName("LottoNumber 리스트에 매개값으로 받은 번호가 존재하는지 판단.")

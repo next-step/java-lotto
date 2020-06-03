@@ -50,7 +50,7 @@ public class LottoTicket {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개만 가능합니다. - " + lottoNumbers);
         }
     }
 
@@ -58,7 +58,7 @@ public class LottoTicket {
         Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
 
         if (nonDuplicateNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복 될 수 없습니다.");
+            throw new IllegalArgumentException("로또 번호는 중복 될 수 없습니다. - " + lottoNumbers);
         }
     }
 

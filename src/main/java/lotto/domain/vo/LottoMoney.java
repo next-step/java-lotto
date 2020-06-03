@@ -19,7 +19,7 @@ public class LottoMoney {
 
     private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또를 살 수 없습니다.");
+            throw new IllegalArgumentException("로또를 살 수 없습니다. - " + purchaseAmount);
         }
     }
 
