@@ -12,7 +12,7 @@ public class LottoPlay {
         int money = InputView.doInputMoney();
 
         LottoMachine lottoMachine = new LottoMachine(money);
-        ResultView.buyLottoTickets(lottoMachine.getLottoTickets());
+        ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
 
         String winningNumbers = InputView.doInputWinningNumbers();
         List<Winning> winnings = lottoMachine.getWinnings(winningNumbers);

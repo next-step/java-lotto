@@ -6,7 +6,7 @@ import dev.dahye.lotto.domain.Winning;
 import java.util.List;
 
 public class ResultView {
-    public static void buyLottoTickets(List<LottoTicket> lottoTickets) {
+    public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() + "개를 구입했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.toString());
