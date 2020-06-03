@@ -1,5 +1,6 @@
 package dev.dahye.lotto.view;
 
+import dev.dahye.lotto.domain.LottoResult;
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.Winning;
 
@@ -13,30 +14,13 @@ public class ResultView {
         }
     }
 
-    public static void printWinningStatistics(List<Winning> winnings) {
+    public static void printWinningStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Winning winning : Winning.values()) {
-            int count = getCountWhenSpecificWinning(winnings, winning);
-            System.out.println(winning.getMatchCount() + "개 일치 (" + winning.getPrize() + "원) - " + count + "개");
+            System.out.println(winning.getMatchCount() + "개 일치 (" + winning.getPrize() + "원) - "
+                    + lottoResult.getTotalCountWhenSpecificWinning(winning) + "개");
         }
-    }
-
-    private static int getCountWhenSpecificWinning(List<Winning> winnings, Winning target) {
-        int count = 0;
-
-        for (Winning winning : winnings) {
-            count = plusCountWhenEquals(target, count, winning);
-        }
-
-        return count;
-    }
-
-    private static int plusCountWhenEquals(Winning target, int count, Winning winning) {
-        if (winning.equals(target)) {
-            count++;
-        }
-        return count;
     }
 
     public static void printWinningRate(double number) {

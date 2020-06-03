@@ -50,10 +50,10 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCount(LottoTicket winningTicket) {
+    public int getMatchCount(List<Integer> winningNumbers) {
         int matchCount = 0;
 
-        for (Integer winningNumber : winningTicket.lottoNumbers) {
+        for (Integer winningNumber : winningNumbers) {
             matchCount = getMatchCountWhenContainsNumber(matchCount, winningNumber);
         }
 
