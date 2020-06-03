@@ -21,7 +21,8 @@ public class LottoTicket {
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {
-		return lottoNumbers.contains(lottoNumber);
+		return lottoNumbers.stream()
+			.anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
 	}
 
 	public int getMatchCount(LottoNumber winningNumber) {
