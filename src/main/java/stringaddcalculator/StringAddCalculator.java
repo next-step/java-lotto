@@ -22,7 +22,7 @@ public class StringAddCalculator {
             return findSeparatorAndSum(input);
         }
 
-        return getBasicSum(SEPARATOR, input);
+        return sum(SEPARATOR, input);
     }
 
     private static boolean isNullOrEmpty(String input) {
@@ -42,15 +42,15 @@ public class StringAddCalculator {
 
     private static int findSeparatorAndSum(String input) {
         Matcher matcher = PATTERN.matcher(input);
-        String separator = ",|:";
+        String separator = SEPARATOR;
         if (matcher.find()) {
             separator = matcher.group(1);
             input = matcher.group(2);
         }
-        return getBasicSum(separator, input);
+        return sum(separator, input);
     }
 
-    private static int getBasicSum(String separator, String input) {
+    private static int sum(String separator, String input) {
         String[] splitValues = input.split(separator);
         int result = 0;
         for (String value : splitValues) {
