@@ -26,7 +26,7 @@ public enum LottoRank {
 
     static {
         BY_MATCHES = Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.getMatches() != SECOND_PRIZE_MATCHES)
+                .filter(lottoRank -> !lottoRank.equals(SECOND_RANK))
                 .collect(Collectors.toMap(o -> o.matches, Function.identity()));
     }
 
@@ -44,8 +44,8 @@ public enum LottoRank {
     public static LottoRank find(int matches, boolean matchBonus) {
         validateMatchCount(matches);
 
-        if(matches == (SECOND_PRIZE_MATCHES-1)) {
-            return matchBonus? SECOND_RANK : THIRD_RANK;
+        if((matches == (SECOND_PRIZE_MATCHES-1)) && matchBonus) {
+            return SECOND_RANK;
         }
 
         return BY_MATCHES.getOrDefault(matches, LottoRank.NO_RANK);
