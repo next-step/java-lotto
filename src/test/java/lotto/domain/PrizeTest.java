@@ -17,8 +17,8 @@ class PrizeTest {
     @ParameterizedTest
     @MethodSource("source_award_inRank_shouldSucceed")
     public void award_inRank_shouldSucceed(List<Integer> winNumberList, List<Integer> lottoNumberList, Prize expected) {
-        Lotto winLotto = Lotto.generateByManual(winNumberList);
-        Lotto lotto = Lotto.generateByManual(lottoNumberList);
+        Lotto winLotto = new Lotto(winNumberList);
+        Lotto lotto = new Lotto(lottoNumberList);
         Prize result = Prize.award(winLotto, lotto);
         assertThat(result).isEqualTo(expected);
     }
@@ -35,8 +35,8 @@ class PrizeTest {
     @ParameterizedTest
     @MethodSource("source_award_unRank_shouldSucceed")
     public void award_unRank_shouldSucceed(List<Integer> winNumberList, List<Integer> lottoNumberList, Prize expected) {
-        Lotto winLotto = Lotto.generateByManual(winNumberList);
-        Lotto lotto = Lotto.generateByManual(lottoNumberList);
+        Lotto winLotto = new Lotto(winNumberList);
+        Lotto lotto = new Lotto(lottoNumberList);
         Prize result = Prize.award(winLotto, lotto);
         assertThat(result).isEqualTo(expected);
     }

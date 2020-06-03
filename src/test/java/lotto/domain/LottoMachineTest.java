@@ -17,7 +17,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_validParameters_shouldSucceed")
     public void buy_validParameters_shouldSucceed(String param, int expectedSize) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
         Price price = Price.of(param);
         List<Lotto> result = lottoMachine.buy(price);
         assertThat(result.size()).isEqualTo(expectedSize);
@@ -33,7 +33,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_invalidParameters_shouldSucceed")
     public void buy_invalidParameters_shouldSucceed(String param) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
         Price price = Price.of(param);
         assertThatThrownBy(() -> {
             lottoMachine.buy(price);

@@ -24,6 +24,6 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String[] winNumberStrings = scanner.nextLine().split(LOTTO_DELIMITER);
         List<Integer> winNumberList = Arrays.stream(winNumberStrings).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
-        return Lotto.generateByManual(winNumberList);
+        return new Lotto(winNumberList);
     }
 }

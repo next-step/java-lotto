@@ -18,14 +18,14 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("source_generateByManual_notDuplicatedNumbers_shouldSucceed")
     public void generateByManual_notDuplicatedNumbers_shouldSucceed(List<Integer> param, Lotto expected) {
-        Lotto result = Lotto.generateByManual(param);
+        Lotto result = new Lotto(param);
         assertThat(result).isEqualTo(expected);
     }
 
     private static Stream<Arguments> source_generateByManual_notDuplicatedNumbers_shouldSucceed() {
         return Stream.of(
-                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Lotto.generateByManual(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}))),
-                Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}), Lotto.generateByManual(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}))));
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), new Lotto(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}))),
+                Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}), new Lotto(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}))));
     }
 
     @DisplayName("중복된 숫자 6개로 Lotto 생성 시에 throws IllegalArgumentException")
@@ -33,7 +33,7 @@ class LottoTest {
     @MethodSource("source_generateByManual_duplicatedNumbers_shouldFail")
     public void create_generateByManual_create_duplicatedNumbers_shouldFail(List<Integer> param) {
         assertThatThrownBy(() -> {
-            Lotto.generateByManual(param);
+            new Lotto(param);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -48,7 +48,7 @@ class LottoTest {
     @MethodSource("source_generateByManual_invalidParameters_shouldFail")
     public void generateByManual_invalidParameters_shouldFail(List<Integer> param) {
         assertThatThrownBy(() -> {
-            Lotto.generateByManual(param);
+            new Lotto(param);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
