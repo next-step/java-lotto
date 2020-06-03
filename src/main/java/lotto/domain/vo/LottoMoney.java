@@ -12,7 +12,7 @@ public class LottoMoney {
     }
 
     public double calculateRateOfReturn(int profit) {
-        double rateOfReturn = (double) profit / purchaseAmount;
+        double rateOfReturn = profit / purchaseAmount;
 
         return rateOfReturn;
     }
