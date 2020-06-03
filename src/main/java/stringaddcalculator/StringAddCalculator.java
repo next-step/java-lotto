@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+    public static final String SEPARATOR = ",|:";
+
     private StringAddCalculator() {}
 
     public static int splitAndSum(String input) {
@@ -19,7 +22,7 @@ public class StringAddCalculator {
             return findSeparatorAndSum(input);
         }
 
-        return getBasicSum(",|:", input);
+        return getBasicSum(SEPARATOR, input);
     }
 
     private static boolean isNullOrEmpty(String input) {
@@ -38,8 +41,7 @@ public class StringAddCalculator {
     }
 
     private static int findSeparatorAndSum(String input) {
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = PATTERN.matcher(input);
         String separator = ",|:";
         if (matcher.find()) {
             separator = matcher.group(1);
