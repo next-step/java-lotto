@@ -14,14 +14,16 @@ public class LottoGameResult {
     private int thirdPrizeCount;
     private int forthPrizeCount;
 
-    public LottoGameResult(List<Lotto> lottos, String winningNumbers, UserPrice userPrice) {
+    public LottoGameResult(List<Lotto> lottos, WinningLotto winningLotto, UserPrice userPrice) {
         this.lottos = lottos;
-        this.winningLotto = new WinningLotto(winningNumbers);
+        this.winningLotto = winningLotto;
         this.cashPrize = 0;
         this.userPrice = userPrice;
     }
 
     public LottoGameResultDto getResult() {
+        drawLottos(winningLotto.getLottoNumbers());
+
         this.earningRate = getEarningRate();
         countPrize();
 
@@ -55,5 +57,11 @@ public class LottoGameResult {
     private double getEarningRate() {
         setCashPrize();
         return (double) this.cashPrize / this.userPrice.getPrice();
+    }
+
+    private void drawLottos(List<Integer> winningNumbers) {
+        lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers));
+        //for logging
+        //lottos.stream().forEach(lotto -> System.out.println(lotto));
     }
 }

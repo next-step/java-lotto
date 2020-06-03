@@ -25,15 +25,7 @@ public class LottoGame {
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
         winningLotto.validateWinningNumbers();
 
-        drawLottos(winningLotto.getLottoNumbers());
-
-        return new LottoGameResult(this.lottos, winningNumbers, userPrice).getResult();
-    }
-
-    private void drawLottos(List<Integer> winningNumbers) {
-        lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers));
-        //for logging
-        //lottos.stream().forEach(lotto -> System.out.println(lotto));
+        return new LottoGameResult(this.lottos, winningLotto, userPrice).getResult();
     }
 
     public List<Lotto> getLottos() {
