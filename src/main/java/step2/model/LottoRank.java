@@ -1,6 +1,5 @@
 package step2.model;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -31,32 +30,39 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-        LottoRank lottoRank = Arrays.stream(values())
-                .filter(rank -> rank.isMatch(countOfMatch))
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(countOfMatch, matchBonus))
                 .findFirst()
                 .orElse(MISS);
+    }
 
-        if (isRequireBonusMatch(matchBonus, lottoRank)) {
-            return THIRD;
+    private boolean isMatch(int countOfMatch, boolean matchBonus) {
+        boolean matchResult = this.countOfMatch == countOfMatch;
+
+        if (this.isBonusRequired()) {
+            return matchResult && matchBonus;
         }
 
-        return lottoRank;
+        return matchResult;
     }
 
-    private static boolean isRequireBonusMatch(boolean matchBonus, LottoRank lottoRank) {
-        return LottoRank.SECOND.equals(lottoRank) && !matchBonus;
-    }
-
-    private boolean isMatch(int countOfMatch) {
-        return this.countOfMatch == countOfMatch;
+    public boolean isBonusRequired() {
+        return LottoRank.SECOND.equals(this);
     }
 
     public int getWinningMoney() {
-        return this.winningMoney;
+        return winningMoney;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0}개 일치 ({1}원)", countOfMatch, winningMoney);
+        return "LottoRank{" +
+                "countOfMatch=" + countOfMatch +
+                ", winningMoney=" + winningMoney +
+                '}';
     }
 }
