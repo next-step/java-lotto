@@ -1,4 +1,4 @@
-package lotto.domain.number;
+package lotto.domain.ticket;
 
 import lotto.domain.ticket.LottoWinningTicket;
 import org.junit.jupiter.api.DisplayName;
