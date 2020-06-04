@@ -35,7 +35,7 @@
 1. 구입금액 입력
    - 테스트 구현 X
 2. 입력 만큼 객체생성
-   - [ ] Test fails
+   - [X] Test fails
    - [ ] Test Passes
    - [ ] Refactor
 3. 생성된 객체 수만큼 로또 발급(중복체크)
