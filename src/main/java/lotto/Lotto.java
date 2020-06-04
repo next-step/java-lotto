@@ -5,8 +5,12 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
-    public static final String SYMBOL_COMMA = ",";
+    private static final int INCREMENT_NUMBER_1 = 1;
     private static final int LOTTO_SIZE = 6;
+    private static final int INITIAL_NUMBER = 0;
+    private static final String SYMBOL_COMMA = ",";
+
+
     private final Set<LottoNumber> lotto;
 
     public Lotto(Set<LottoNumber> lotto) {
@@ -44,6 +48,25 @@ public class Lotto {
             lotto.add(LottoNumber.of(number));
         }
         return new Lotto(lotto);
+    }
+
+    public int match(Lotto otherLotto) {
+        int count = INITIAL_NUMBER;
+        for (LottoNumber lottoNumber : lotto) {
+            count += matchCount(otherLotto, lottoNumber);
+        }
+        return count;
+    }
+
+    private int matchCount(Lotto otherLotto, LottoNumber lottoNumber) {
+        if (otherLotto.contains(lottoNumber)) {
+            return INCREMENT_NUMBER_1;
+        }
+        return INITIAL_NUMBER;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
     @Override

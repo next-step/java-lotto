@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,5 +42,14 @@ class LottoTest {
     public void ofComma_중복값(String input) {
         assertThatThrownBy(() -> Lotto.ofComma(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6=6"}, delimiter = '=')
+    @DisplayName("로또와 당첨번호 갯수를 비교한다.")
+    public void match(String input, int expected) {
+        Lotto userLotto = Lotto.ofComma(input);
+        Lotto winningLotto = Lotto.ofComma(input);
+        assertThat(userLotto.match(winningLotto)).isEqualTo(expected);
     }
 }
