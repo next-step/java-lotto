@@ -11,12 +11,12 @@ public class InputView {
 
     public int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return inputInt();
     }
 
     public int inputManualCount() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return inputInt();
     }
 
     public List<String> inputManualNumbers(int count) {
@@ -34,7 +34,15 @@ public class InputView {
 
     public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return inputInt();
+    }
+
+    private int inputInt() {
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Only numbers can be entered.");
+        }
     }
 
     @Override
