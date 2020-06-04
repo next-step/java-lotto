@@ -12,8 +12,8 @@ public class LottoMatchCount {
         this.lottoBonusResult = lottoBonusResult;
     }
 
-    public static LottoMatchCount of(Integer matchCount, boolean isMatchedLottoBonusNumber) {
-        return new LottoMatchCount(matchCount, LottoBonusResult.of(matchCount, isMatchedLottoBonusNumber));
+    public static LottoMatchCount of(Integer matchCount, boolean isMatchLottoBonusNumber) {
+        return new LottoMatchCount(matchCount, LottoBonusResult.of(matchCount, isMatchLottoBonusNumber));
     }
 
     public static LottoMatchCount newInstance(Integer matchCount, LottoBonusResult lottoBonusResult) {

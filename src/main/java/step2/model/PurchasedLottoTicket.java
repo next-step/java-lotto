@@ -14,13 +14,20 @@ public class PurchasedLottoTicket extends LottoTicket {
     }
 
     public LottoResult match(WinningLottoTicket winningLottoTicket) {
-        long count = winningLottoTicket.getNumbers()
-            .stream()
-            .filter(winningLottoNumber -> numbers.contains(winningLottoNumber))
-            .count();
+        long count = getMatchCount(winningLottoTicket);
+        boolean isMatchLottoBonusNumber = isMatchLottoBonusNumber(winningLottoTicket);
 
-        boolean isMatchedLottoBonusNumber = numbers.contains(winningLottoTicket.getBonusLottoNumber());
+        return LottoResult.of(LottoMatchCount.of(Math.toIntExact(count), isMatchLottoBonusNumber));
+    }
 
-        return LottoResult.of(LottoMatchCount.of(Math.toIntExact(count), isMatchedLottoBonusNumber));
+    private long getMatchCount(WinningLottoTicket winningLottoTicket) {
+        return winningLottoTicket.getNumbers()
+                .stream()
+                .filter(winningLottoNumber -> numbers.contains(winningLottoNumber))
+                .count();
+    }
+
+    private boolean isMatchLottoBonusNumber(WinningLottoTicket winningLottoTicket) {
+        return numbers.contains(winningLottoTicket.getBonusLottoNumber());
     }
 }
