@@ -1,20 +1,18 @@
 package lotto.infra.domain;
 
 import lotto.domain.LottoNumberSelectRule;
-
-import java.util.Collections;
-import java.util.Set;
+import lotto.domain.LottoNumbers;
 
 public class ManualLottoNumberSelectRule implements LottoNumberSelectRule {
 
-	private final Set<Integer> numbers;
+	private final LottoNumbers numbers;
 
-	public ManualLottoNumberSelectRule(Set<Integer> numbers) {
-		this.numbers = Collections.unmodifiableSet(numbers);
+	public ManualLottoNumberSelectRule(LottoNumbers numbers) {
+		this.numbers = numbers;
 	}
 
 	@Override
-	public Set<Integer> select() {
+	public LottoNumbers select() {
 		return numbers;
 	}
 }

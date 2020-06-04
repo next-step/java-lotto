@@ -1,10 +1,7 @@
 package lotto.ui;
 
 import lotto.application.LottoIssueResponse;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResults;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +23,8 @@ public class ResultView {
     }
 
     private static void printLotto(Lotto lotto) {
-        List<String> numbers = lotto.getNumbers().stream()
+        LottoNumbers lottoNumbers = lotto.getNumbers();
+        List<String> numbers = lottoNumbers.getNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
 

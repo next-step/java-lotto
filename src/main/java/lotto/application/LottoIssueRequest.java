@@ -1,25 +1,25 @@
 package lotto.application;
 
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbers;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoIssueRequest {
 
 	private LottoMoney paidMoney;
-	private List<Set<Integer>> manualNumbers;
+	private List<LottoNumbers> manualNumbersList;
 
-	public LottoIssueRequest(LottoMoney paidMoney, List<Set<Integer>> manualNumbers) {
+	public LottoIssueRequest(LottoMoney paidMoney, List<LottoNumbers> manualNumbersList) {
 		this.paidMoney = paidMoney;
-		this.manualNumbers = manualNumbers;
+		this.manualNumbersList = manualNumbersList;
 	}
 
-	public List<Set<Integer>> getManualNumbers() {
-		return manualNumbers;
+	public List<LottoNumbers> getManualNumbersList() {
+		return manualNumbersList;
 	}
 
 	public int getAutoQuantity() {
-		return paidMoney.computePurchasableLottoQuantity(manualNumbers.size());
+		return paidMoney.computePurchasableLottoQuantity(manualNumbersList.size());
 	}
 }

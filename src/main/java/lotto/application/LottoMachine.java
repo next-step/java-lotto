@@ -1,12 +1,12 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.infra.domain.AutoLottoNumberSelectRule;
 import lotto.infra.domain.ManualLottoNumberSelectRule;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -16,7 +16,7 @@ public class LottoMachine {
 
     public LottoIssueResponse issue(LottoIssueRequest request) {
         Lottos autoLottos = issueAutoLottos(request.getAutoQuantity());
-        Lottos manualLottos = issueManualLottos(request.getManualNumbers());
+        Lottos manualLottos = issueManualLottos(request.getManualNumbersList());
         return new LottoIssueResponse(autoLottos, manualLottos);
     }
 
@@ -26,8 +26,8 @@ public class LottoMachine {
                 .collect(collectingAndThen(toList(), Lottos::new));
     }
 
-    private Lottos issueManualLottos(List<Set<Integer>> manualNumbers) {
-        return manualNumbers.stream()
+    private Lottos issueManualLottos(List<LottoNumbers> manualNumbersList) {
+        return manualNumbersList.stream()
                 .map(m -> new Lotto(new ManualLottoNumberSelectRule(m)))
                 .collect(collectingAndThen(toList(), Lottos::new));
     }

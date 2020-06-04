@@ -4,6 +4,7 @@ import lotto.application.LottoIssueRequest;
 import lotto.application.LottoIssueResponse;
 import lotto.application.LottoMachine;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +13,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toSet;
@@ -36,9 +36,9 @@ public class LottoMachineTest {
     @DisplayName("입력한 수동 번호만큼 수동 로또를 발급한다")
     @Test
     void issue_manualLottos() {
-        List<Set<Integer>> manualNumbers = Arrays.asList(
-                Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()),
-                Stream.of(1, 2, 3, 4, 5, 6).collect(toSet())
+        List<LottoNumbers> manualNumbers = Arrays.asList(
+                new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet())),
+                new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()))
         );
 
         LottoIssueRequest request = new LottoIssueRequest(LottoMoney.of(10_000), manualNumbers);

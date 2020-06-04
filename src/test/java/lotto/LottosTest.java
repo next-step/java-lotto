@@ -1,10 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResults;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,15 +22,15 @@ class LottosTest {
     }
 
     private static Stream<Arguments> checkResultsArguments() {
-        Lotto lotto1 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));
-        Lotto lotto2 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 45).collect(toSet()));
-        Lotto lotto3 = new Lotto(() -> Stream.of(1, 2, 3, 4, 5, 7).collect(toSet()));
-        Lotto lotto4 = new Lotto(() -> Stream.of(1, 2, 3, 4, 7, 8).collect(toSet()));
-        Lotto lotto4_2 = new Lotto(() -> Stream.of(1, 2, 3, 4, 7, 45).collect(toSet()));
-        Lotto lotto5 = new Lotto(() -> Stream.of(1, 2, 3, 8, 9, 10).collect(toSet()));
-        Lotto lotto5_2 = new Lotto(() -> Stream.of(1, 2, 3, 8, 9, 45).collect(toSet()));
-        Lotto lotto6 = new Lotto(() -> Stream.of(7, 8, 9, 10, 11, 12).collect(toSet()));
-        Lotto lotto6_2 = new Lotto(() -> Stream.of(7, 8, 9, 10, 11, 45).collect(toSet()));
+        Lotto lotto1 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet())));
+        Lotto lotto2 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 45).collect(toSet())));
+        Lotto lotto3 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 7).collect(toSet())));
+        Lotto lotto4 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 4, 7, 8).collect(toSet())));
+        Lotto lotto4_2 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 4, 7, 45).collect(toSet())));
+        Lotto lotto5 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 8, 9, 10).collect(toSet())));
+        Lotto lotto5_2 = new Lotto(() -> new LottoNumbers(Stream.of(1, 2, 3, 8, 9, 45).collect(toSet())));
+        Lotto lotto6 = new Lotto(() -> new LottoNumbers(Stream.of(7, 8, 9, 10, 11, 12).collect(toSet())));
+        Lotto lotto6_2 = new Lotto(() -> new LottoNumbers(Stream.of(7, 8, 9, 10, 11, 45).collect(toSet())));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto4_2, lotto5, lotto5_2, lotto6, lotto6_2));
         WinningNumbers winningNumbers = new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 6).collect(toSet()));

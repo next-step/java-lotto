@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbers;
 import lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
@@ -22,13 +23,13 @@ public class InputView {
         return LottoMoney.of(SCANNER.nextInt());
     }
 
-    public static List<Set<Integer>> askManualNumbers() {
+    public static List<LottoNumbers> askManualNumbers() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualCount = SCANNER.nextInt();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         return IntStream.range(0, manualCount)
-                .mapToObj(i -> parseIntSet(SCANNER.next()))
+                .mapToObj(i -> new LottoNumbers(parseIntSet(SCANNER.next())))
                 .collect(Collectors.toList());
     }
 
