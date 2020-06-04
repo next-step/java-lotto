@@ -18,4 +18,20 @@ public enum Rank {
         this.winningMoney = winningMoney;
         this.displayText = displayText;
     }
+
+    public static Rank valueOf(int countOfMatch) {
+        if (countOfMatch < WINNING_MIN_COUNT) {
+            return FAILURE;
+        }
+        for (Rank rank : values()) {
+            if (rank.matchCount(countOfMatch)) {
+                return rank;
+            }
+        }
+        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+    }
+
+    private boolean matchCount(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
+    }
 }

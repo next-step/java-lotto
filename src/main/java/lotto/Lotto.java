@@ -63,15 +63,15 @@ public class Lotto {
         return lotto.size();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     private int matchCount(Lotto otherLotto, LottoNumber lottoNumber) {
         if (otherLotto.contains(lottoNumber)) {
             return INCREMENT_NUMBER_1;
         }
         return INITIAL_NUMBER;
-    }
-
-    private boolean contains(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
     }
 
     @Override
