@@ -19,8 +19,7 @@ public class LottoTicketTest {
         lottoNumbers.add(14);
         lottoNumbers.add(40);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        List<Integer> winningNumber = lottoNumbers;
-        assertThat(lottoTicket.matchWinningNumber(winningNumber)).isEqualTo(6);
+        assertThat(lottoTicket.matchWinningNumber(lottoNumbers)).isEqualTo(6);
     }
 
     @Test
@@ -35,8 +34,7 @@ public class LottoTicketTest {
                     lottoNumbers.add(14);
                     lottoNumbers.add(40);
                     LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-                    List<Integer> winningNumber = lottoNumbers;
-                    lottoTicket.matchWinningNumber(winningNumber);
+                    lottoTicket.matchWinningNumber(lottoNumbers);
                 });
     }
 }
