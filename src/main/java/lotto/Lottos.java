@@ -13,6 +13,14 @@ public class Lottos {
         return lottos.size();
     }
 
+    public MatchingResults match(WinningLotto winningLotto) {
+        MatchingResults result = new MatchingResults(lottos.size());
+        for (Lotto userLotto : lottos) {
+            result.add(winningLotto.match(userLotto));
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return lottos + "";

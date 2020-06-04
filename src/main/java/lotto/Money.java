@@ -9,12 +9,12 @@ public class Money {
     }
 
     public Money(int money) {
-        if (money < LOTTERY_MONEY)
-            throw new IllegalArgumentException();
         this.money = money;
     }
 
     public int lotteryCount() {
+        if (money < LOTTERY_MONEY)
+            throw new IllegalArgumentException();
         return money / LOTTERY_MONEY;
     }
 
@@ -24,6 +24,10 @@ public class Money {
 
     public double profitRate(Money prize) {
         return prize.money / money;
+    }
+
+    public Money sum(Money money) {
+        return new Money(this.money + money.money);
     }
 
     @Override

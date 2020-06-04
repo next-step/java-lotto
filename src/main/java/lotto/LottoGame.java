@@ -12,5 +12,8 @@ public class LottoGame {
         System.out.println(lottos);
 
         WinningLotto winningLotto = inputView.winningNumber();
+        MatchingResults result = lottos.match(winningLotto);
+
+        resultView.show(result);
     }
 }
