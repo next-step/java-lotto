@@ -22,8 +22,8 @@ class WinningLottoTicketTest {
 
     private static Stream<Arguments> createWinningLottoTestCases() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
-            Arguments.of(Arrays.asList(10, 20, 30, 40, 41, 45, 7))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arguments.of(Arrays.asList(10, 20, 30, 40, 41, 45), 7)
         );
     }
 
@@ -38,8 +38,24 @@ class WinningLottoTicketTest {
 
     private static Stream<Arguments> createWinningLottoExceptionTestCases() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 70, 9)),
-            Arguments.of(Arrays.asList(-10, 2, 3, 9, 5, 6, 10))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 70), 9),
+            Arguments.of(Arrays.asList(-10, 2, 3, 9, 5, 6), 10)
+        );
+    }
+
+    @DisplayName("당첨 로또 생성 오류 테스트 > 보너스볼 중복")
+    @ParameterizedTest
+    @MethodSource("createWinningLottoExceptionByDuplicationTestCases")
+    public void createWinningLottoExceptionByDuplicationTest(List<Integer> numbers, int bonusLottoNumber) {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> WinningLottoTicket.createBy(numbers, LottoNumber.of(bonusLottoNumber)))
+            .withMessageContaining("보너스 볼은 당첨 번호와 중복될 수 없습니다. - " + bonusLottoNumber);
+    }
+
+    private static Stream<Arguments> createWinningLottoExceptionByDuplicationTestCases() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+            Arguments.of(Arrays.asList(11, 22, 33, 9, 5, 6), 11)
         );
     }
 }
