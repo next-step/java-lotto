@@ -1,8 +1,5 @@
-package lotto;
+package lotto.application;
 
-import lotto.application.LottoIssueRequest;
-import lotto.application.LottoIssueResponse;
-import lotto.application.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;

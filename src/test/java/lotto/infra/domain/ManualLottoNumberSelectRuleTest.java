@@ -1,7 +1,6 @@
-package lotto;
+package lotto.infra.domain;
 
 import lotto.domain.LottoNumbers;
-import lotto.infra.domain.ManualLottoNumberSelectRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
