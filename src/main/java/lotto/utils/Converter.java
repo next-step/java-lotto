@@ -1,4 +1,4 @@
-package step2.utils;
+package lotto.utils;
 
 import java.util.Arrays;
 import java.util.List;

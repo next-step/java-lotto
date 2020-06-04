@@ -1,4 +1,4 @@
-package step2.model;
+package lotto.model;
 
 public enum LottoBonusResult {
     NOTHING,

@@ -1,10 +1,10 @@
-package step2.utils;
+package lotto.utils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import step2.model.LottoNumber;
+import lotto.model.LottoNumber;
 
 public final class AutomaticLottoGenerator {
 

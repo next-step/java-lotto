@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.model.LottoNumber;
-import step2.model.PurchasedLottoTicket;
+import lotto.model.LottoNumber;
+import lotto.model.PurchasedLottoTicket;
 
 class AutomaticLottoGeneratorTest {
     @DisplayName("로또 생성 테스트")

@@ -1,11 +1,11 @@
-package step2.view;
+package lotto.view;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-import step2.model.LottoResult;
-import step2.model.LottoResults;
-import step2.model.PurchasedLottoTicket;
-import step2.model.PurchasedLottoTickets;
+import lotto.model.LottoResult;
+import lotto.model.LottoResults;
+import lotto.model.PurchasedLottoTicket;
+import lotto.model.PurchasedLottoTickets;
 
 public class OutputView {
 

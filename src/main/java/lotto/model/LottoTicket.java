@@ -1,4 +1,4 @@
-package step2.model;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;

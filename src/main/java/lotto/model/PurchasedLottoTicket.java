@@ -1,7 +1,7 @@
-package step2.model;
+package lotto.model;
 
 import java.util.List;
-import step2.utils.AutomaticLottoGenerator;
+import lotto.utils.AutomaticLottoGenerator;
 
 public class PurchasedLottoTicket extends LottoTicket {
 

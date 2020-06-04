@@ -1,19 +1,19 @@
-package step2;
+package lotto;
 
-import static step2.utils.Converter.convertTo;
-import static step2.view.InputView.inputBonusLottoNumber;
-import static step2.view.InputView.inputPurchasePrice;
-import static step2.view.InputView.inputWinningLottoNumber;
-import static step2.view.OutputView.printLottoNumber;
-import static step2.view.OutputView.printLottoStatistics;
-import static step2.view.OutputView.printProfitResult;
+import static lotto.utils.Converter.convertTo;
+import static lotto.view.InputView.inputBonusLottoNumber;
+import static lotto.view.InputView.inputPurchasePrice;
+import static lotto.view.InputView.inputWinningLottoNumber;
+import static lotto.view.OutputView.printLottoNumber;
+import static lotto.view.OutputView.printLottoStatistics;
+import static lotto.view.OutputView.printProfitResult;
 
-import step2.model.LottoNumber;
-import step2.model.LottoResults;
-import step2.model.LottoStore;
-import step2.model.Payment;
-import step2.model.PurchasedLottoTickets;
-import step2.model.WinningLottoTicket;
+import lotto.model.LottoResults;
+import lotto.model.Payment;
+import lotto.model.LottoNumber;
+import lotto.model.LottoStore;
+import lotto.model.PurchasedLottoTickets;
+import lotto.model.WinningLottoTicket;
 
 public class Main {
     public static void main(String[] args) {
