@@ -13,12 +13,14 @@ public class PurchasedLottoTicket extends LottoTicket {
         return new PurchasedLottoTicket(AutomaticLottoGenerator.createLottoNumbers());
     }
 
-    public LottoResult match(LottoTicket lottoTicket) {
-        long count = lottoTicket.getNumbers()
+    public LottoResult match(WinningLottoTicket winningLottoTicket) {
+        long count = winningLottoTicket.getNumbers()
             .stream()
             .filter(winningLottoNumber -> numbers.contains(winningLottoNumber))
             .count();
 
-        return LottoResult.of(Math.toIntExact(count));
+        boolean isMatchedLottoBonusNumber = numbers.contains(winningLottoTicket.getBonusLottoNumber());
+
+        return LottoResult.of(LottoMatchCount.of(Math.toIntExact(count), isMatchedLottoBonusNumber));
     }
 }

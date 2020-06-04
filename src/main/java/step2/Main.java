@@ -1,12 +1,14 @@
 package step2;
 
 import static step2.utils.Converter.convertTo;
+import static step2.view.InputView.inputBonusLottoNumber;
 import static step2.view.InputView.inputPurchasePrice;
 import static step2.view.InputView.inputWinningLottoNumber;
 import static step2.view.OutputView.printLottoNumber;
 import static step2.view.OutputView.printLottoStatistics;
 import static step2.view.OutputView.printProfitResult;
 
+import step2.model.LottoNumber;
 import step2.model.LottoResults;
 import step2.model.LottoStore;
 import step2.model.Payment;
@@ -21,12 +23,13 @@ public class Main {
         printLottoNumber(purchasedLottoTickets);
 
         String inputWinningLottoNumberString = inputWinningLottoNumber();
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.createBy(convertTo(inputWinningLottoNumberString));
+        int inputBonusLottoNumber = inputBonusLottoNumber();
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.createBy(
+            convertTo(inputWinningLottoNumberString), LottoNumber.of(inputBonusLottoNumber)
+        );
 
         LottoResults lottoResults = purchasedLottoTickets.match(winningLottoTicket);
-
         printLottoStatistics(lottoResults);
-
         printProfitResult(lottoResults.getProfit());
     }
 }
