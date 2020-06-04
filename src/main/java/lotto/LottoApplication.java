@@ -19,15 +19,16 @@ public class LottoApplication {
 
         LottoMoney lottoMoney = new LottoMoney(purchaseAmount, numberOfManualTicket);
 
-        OutputView.printNumberOfTicket(lottoMoney);
-
         List<ManualLottoDto> manualLottoDtos = InputView.inputManualNumber(lottoMoney.getNumberOfManualTicket());
 
         LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualLottoDtos, lottoMoney.getNumberOfAutoTicket());
 
+        OutputView.printNumberOfTicket(lottoMoney);
+
         OutputView.printLottoTickets(lottoBill.getAllTickets());
 
         List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
+
         int bonusNumber = InputView.inputBonusNumber();
 
         LottoWinningTicket lottoWinningTicket = new LottoWinningTicket(winningNumbers, bonusNumber);
