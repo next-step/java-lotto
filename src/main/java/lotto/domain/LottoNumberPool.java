@@ -28,6 +28,25 @@ public class LottoNumberPool {
         return new ArrayList<>(LOTTO_NUMBER_POOL.values());
     }
 
+    public static LottoNumber get(String number) {
+        return get(covertIntAfterValidate(number));
+    }
+
+    public static List<LottoNumber> get(String[] numbers) {
+        return Arrays.stream(numbers)
+                .map(s -> get(covertIntAfterValidate(s)))
+                .collect(Collectors.toList());
+    }
+
+    private static int covertIntAfterValidate(String number) {
+        try {
+            return Integer.parseInt(number);
+        }
+        catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또번호는 숫자형식만 입력이 가능합니다.");
+        }
+    }
+
     private static LottoNumber getNumberAfterValidate(Integer key) {
         LottoNumber number = LOTTO_NUMBER_POOL.get(key);
         if(number == null) {
