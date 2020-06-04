@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -62,5 +63,24 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> unmodifiableLottoNumbers.remove(0))
                 .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @DisplayName("containsNumber() 메서드는 로또 번호가 존재하면 TRUE 존재하지 않으면 FALSE를 반환한다")
+    @Test
+    void containsBonus_LottoNumber_Boolean() {
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
+
+        assertAll(
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(1))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(2))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(3))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(4))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(5))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(6))).isTrue(),
+                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(7))).isFalse()
+        );
     }
 }

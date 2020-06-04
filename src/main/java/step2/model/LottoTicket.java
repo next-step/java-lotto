@@ -46,6 +46,10 @@ public class LottoTicket {
         return lottoNumbers.size();
     }
 
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
     private List<LottoNumber> matchingResult(WinningNumbers winningNumbers) {
         return this.numbers.stream()
                 .filter(winningNumbers::containsNumber)

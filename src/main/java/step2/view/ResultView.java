@@ -8,6 +8,8 @@ import step2.model.MatchResult;
 public class ResultView {
 
     private static final String LINE_FEED = System.lineSeparator();
+
+    private static final String TICKET_INDICATOR = " - ";
     private static final String TICKET_UNIT = "개";
 
     private ResultView() {
@@ -37,6 +39,7 @@ public class ResultView {
         matchResult.getWinningResult().forEach((lottoRank, matchCount) -> {
             stringBuilder
                     .append(lottoRank.toString())
+                    .append(TICKET_INDICATOR)
                     .append(matchCount)
                     .append(TICKET_UNIT)
                     .append(LINE_FEED);
@@ -46,6 +49,6 @@ public class ResultView {
     }
 
     public static void printMatchReport(MatchReport matchReport) {
-        System.out.println("총 수익률은 " + matchReport.calculateRateOfReturn() + "입니다.");
+        System.out.println("총 수익률은 " + matchReport.calculateEarningRate() + "입니다.");
     }
 }

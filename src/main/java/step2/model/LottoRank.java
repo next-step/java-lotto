@@ -30,7 +30,7 @@ public enum LottoRank {
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank findRank(int countOfMatch, boolean matchBonus) {
+    public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         LottoRank lottoRank = Arrays.stream(values())
                 .filter(rank -> rank.isMatch(countOfMatch))
                 .findFirst()

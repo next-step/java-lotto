@@ -27,8 +27,8 @@ public class MatchReport {
         return new MatchReport(moneyAmount, matchResult);
     }
 
-    public BigDecimal calculateRateOfReturn() {
-        BigDecimal winningMoney = convertBigDecimal(this.matchResult.calculateTotalWinningMoney());
+    public BigDecimal calculateEarningRate() {
+        BigDecimal winningMoney = convertBigDecimal(matchResult.calculateTotalWinningMoney());
         BigDecimal usedAmount = convertBigDecimal(moneyAmount.getUsedAmount());
 
         if (BigDecimal.ZERO.equals(usedAmount)) {
