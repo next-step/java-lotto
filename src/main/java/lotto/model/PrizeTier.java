@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public enum PrizeTier {
   MATCH_SIX(2000000000, new MatchCnt(6, false)),
-  MATCH_FIVE_WITH_BONUS(1500000, new MatchCnt(5, true)),
+  MATCH_FIVE_WITH_BONUS(30000000, new MatchCnt(5, true)),
   MATCH_FIVE(1500000, new MatchCnt(5, false)),
   MATCH_FOUR(50000, new MatchCnt(4, false)),
   MATCH_THREE(5000, new MatchCnt(3, false)),
