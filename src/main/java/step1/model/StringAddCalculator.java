@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static String DELIMITER = "[,:]";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
 
-    private static Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
     public static int splitAndSum(String inputString) {
         if (checkNullinput(inputString)) {
