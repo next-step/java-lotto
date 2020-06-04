@@ -16,7 +16,8 @@ public class LottoGameResult {
         forthPrizeCount = 0;
     }
 
-    public LottoGameResultDto getResult(List<Lotto> lottos, WinningLotto winningLotto, UserPrice userPrice) {
+    public LottoGameResultDto getResult(List<UserLotto> lottos, Lotto winningLotto,
+        UserPrice userPrice) {
         drawLottos(lottos, winningLotto.getLottoNumbers());
 
         countPrize(lottos);
@@ -29,7 +30,7 @@ public class LottoGameResult {
             forthPrizeCount);
     }
 
-    private void countPrize(List<Lotto> lottos) {
+    private void countPrize(List<UserLotto> lottos) {
         firstPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.FIRST.getGrade())
             .count();
@@ -44,7 +45,7 @@ public class LottoGameResult {
             .count();
     }
 
-    private void drawLottos(List<Lotto> lottos, List<Integer> winningNumbers) {
+    private void drawLottos(List<UserLotto> lottos, List<Integer> winningNumbers) {
         lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers));
         //for logging
         //lottos.stream().forEach(lotto -> System.out.println(lotto));

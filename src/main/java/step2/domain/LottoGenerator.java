@@ -1,7 +1,5 @@
 package step2.domain;
 
-import static step2.Constants.LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +13,12 @@ public class LottoGenerator extends Generating {
         super(generableStrategy);
     }
 
-    public List<Lotto> generateLottos(UserPrice userPrice) {
+    public List<UserLotto> generateLottos(UserPrice userPrice) {
         int lottoCount = userPrice.getLottoCount();
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<UserLotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new Lotto(this.generate(LOTTO_SELECTION_COUNT)));
+            lottos.add(new UserLotto(this.generate(LOTTO_SELECTION_COUNT)));
         }
         return lottos;
     }

@@ -13,16 +13,18 @@ class LottoGameResultTest {
     public void getResultTest() {
         //given
         int price = 1000;
-        List<Lotto> lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
+        List<UserLotto> lottos = Arrays.asList(new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         UserPrice userPrice = new UserPrice(price);
 
         //when
-        LottoGameResultDto lottoGameResultDto = new LottoGameResult().getResult(lottos, winningLotto, userPrice);
+        LottoGameResultDto lottoGameResultDto = new LottoGameResult()
+            .getResult(lottos, winningLotto, userPrice);
 
         //then
         assertThat(lottoGameResultDto.getEarningRate()).isNotNull();
-        assertThat(lottoGameResultDto.getEarningRate()).isEqualTo(Prize.FIRST.getCashPrize()/price);
+        assertThat(lottoGameResultDto.getEarningRate())
+            .isEqualTo(Prize.FIRST.getCashPrize() / price);
         assertThat(lottoGameResultDto.getFirstPrizeCount()).isEqualTo(1);
     }
 }

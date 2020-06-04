@@ -5,12 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoTest {
+class UserLottoTest {
 
 
     private static Stream<Arguments> setPrizeTestCase() {
@@ -29,7 +28,7 @@ class LottoTest {
     @MethodSource("setPrizeTestCase")
     public void setPrizeTest(List<Integer> winningLottos, int expected) {
         //given
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        UserLotto lotto = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
         lotto.setPrize(winningLottos);

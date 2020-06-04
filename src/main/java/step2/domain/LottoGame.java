@@ -1,12 +1,16 @@
 package step2.domain;
 
+import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
+import static step2.view.ErrorMessages.INVALID_WINNING_NUMBERS;
+
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoGame {
 
     private UserPrice userPrice;
-    private List<Lotto> lottos;
+    private List<UserLotto> lottos;
     private LottoGenerator lottoGenerator;
 
     public LottoGame(int userPrice) {
@@ -20,15 +24,24 @@ public class LottoGame {
         lottos = lottoGenerator.generateLottos(userPrice);
     }
 
-    public LottoGameResultDto getGameResult(String winningNumbers) throws IllegalArgumentException {
+    public LottoGameResultDto getGameResult(List<Integer> winningNumbers)
+        throws IllegalArgumentException {
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        winningLotto.validateWinningNumbers();
+        Lotto winningLotto = new Lotto(winningNumbers);
+        validateWinningNumbers(winningNumbers);
 
         return new LottoGameResult().getResult(lottos, winningLotto, userPrice);
     }
 
-    public List<Lotto> getLottos() {
+    public List<UserLotto> getLottos() {
         return lottos;
+    }
+
+    private void validateWinningNumbers(List<Integer> winningNumbers)
+        throws IllegalArgumentException {
+
+        if (CollectionUtils.size(winningNumbers) != LOTTO_SELECTION_COUNT) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
+        }
     }
 }

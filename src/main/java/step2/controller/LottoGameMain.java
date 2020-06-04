@@ -1,5 +1,6 @@
 package step2.controller;
 
+import java.util.List;
 import step2.domain.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -20,7 +21,7 @@ public class LottoGameMain {
             resultView.printPriceResult(userPrice);
             resultView.printLottos(lottoGame.getLottos());
 
-            String lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
+            List<Integer> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
 
             resultView.printStatistic(lottoGame.getGameResult(lastWeekWinningNumbers));
 
