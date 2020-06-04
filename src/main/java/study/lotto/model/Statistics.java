@@ -4,25 +4,27 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Statistics {
-    private final LottoList lottoList;
-    private final Map<LottoRank, Integer> statistics = new HashMap<>();
+    private final Lottos lottos;
 
-    public Statistics(LottoList lottoList) {
-        this.lottoList = lottoList;
+    private Map<LottoRank, Integer> statistics;
 
-        for(LottoRank lottoRank : LottoRank.values()) {
-            statistics.put(lottoRank, 0);
+    public Statistics(Lottos lottos) {
+        this.lottos = lottos;
+    }
+
+    private void validateBonusNumber(WinningLotto winningLotto, int bonusNumber) {
+        if(winningLotto.contains(new LottoNumber(bonusNumber))) {
+            throw new IllegalArgumentException("당첨 번호에 보너스볼 번호가 포함되면 안됩니다.");
         }
     }
 
-    public void calculateStatistics(WinningLotto winningLotto) {
-        lottoList.getLottoList()
-                .forEach(lotto -> {
-                    LottoRank lottoRank = lotto.getPrize(winningLotto);
-                    statistics.put(lottoRank, statistics.get(lottoRank)+1);
-                });
+    public void calculateStatistics(WinningLotto winningLotto, int bonusNumber) {
+        validateBonusNumber(winningLotto, bonusNumber);
+
+        statistics = lottos.countingByLottoRank(winningLotto, bonusNumber);
     }
 
     public BigDecimal calculateEarningRate(int totalPrice) {
@@ -34,7 +36,7 @@ public class Statistics {
     private int calculateTotalEarning() {
         return statistics.keySet()
                 .stream()
-                .map(prize -> prize.getPrize() * statistics.get(prize))
+                .map(lottoRank -> lottoRank.getPrize() * statistics.get(lottoRank))
                 .mapToInt(Integer::intValue).sum();
     }
 

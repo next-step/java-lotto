@@ -1,23 +1,17 @@
 package study.lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final List<LottoNumber> LOTTO_NUMBER_BASE = new ArrayList<>();
+    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    static {
-        for(int i=1; i<46; i++) {
-            LOTTO_NUMBER_BASE.add(new LottoNumber(i));
-        }
-    }
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 구성 되어야 합니다.");
         }
@@ -25,32 +19,49 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto generate() {
-        Lotto lotto = new Lotto(generateLottoNumbers());
-        Collections.sort(lotto.getLottoNumbers());
-
-        return lotto;
+    private Lotto(List<LottoNumber> lottoNumberList) {
+        this(new TreeSet<>(lottoNumberList));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    private Lotto() {
+        this(LottoNumber.generateLottoNumbers());
+    }
+
+    public static Lotto auto() {
+        return new Lotto();
+    }
+
+    public static Lotto of(List<LottoNumber> lottoNumberList) {
+        return new Lotto(lottoNumberList);
+    }
+
+    public static int calculateNumOfLottos(int totalPrice) {
+        return totalPrice / LOTTO_PRICE;
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    private static List<LottoNumber> generateLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBER_BASE);
-
-        return new ArrayList<>(LOTTO_NUMBER_BASE.subList(0, 6));
     }
 
     public long compareToWinningNumbers(WinningLotto winningLotto) {
         return lottoNumbers
                 .stream()
-                .filter(winningLotto.getLottoNumbers()::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
-    public LottoRank getPrize(WinningLotto winningLotto) {
-        return LottoRank.find((int)compareToWinningNumbers(winningLotto));
+    private boolean containsBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    }
+
+    public LottoRank checkLottoRank(WinningLotto winningLotto, int bonusNumber) {
+        return LottoRank.find(
+                (int)compareToWinningNumbers(winningLotto),
+                containsBonusNumber(bonusNumber));
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public String toString() {

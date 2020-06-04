@@ -10,12 +10,20 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int scanTotalPrice() {
-        int totalPrice;
+        return scanInt("구매 금액을 입력해 주세요.");
+    }
 
-        System.out.println("구매 금액을 입력해 주세요.");
+    public static int scanBonusNumber() {
+        return scanInt("보너스 볼을 입력해 주세요.");
+    }
+
+    private static int scanInt(String message) {
+        int input;
+
+        System.out.println(message);
 
         try {
-            totalPrice = scanner.nextInt();
+            input = scanner.nextInt();
             scanner.nextLine();     // 버퍼에서 개행문자 제거
         } catch(InputMismatchException e) {
             scanner.nextLine();     // 버퍼에서 개행문자 제거
@@ -24,7 +32,7 @@ public class InputView {
             return scanTotalPrice();
         }
 
-        return totalPrice;
+        return input;
     }
 
     public static String[] scanWinningNumbers() {
