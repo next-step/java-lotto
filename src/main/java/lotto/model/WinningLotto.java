@@ -19,6 +19,10 @@ public class WinningLotto {
         .map(num -> new LottoNumber(Integer.parseInt(num.trim()), false))
         .collect(Collectors.toList());
 
+    if (numberList.stream().anyMatch(number -> number.compareTo(bonusNumber) == 0)) {
+      throw new IllegalArgumentException("보너스 볼이 당첨번호와 중복됩니다.");
+    }
+
     return new WinningLotto(new Lotto(numberList), bonusNumber);
   }
 
@@ -28,7 +32,7 @@ public class WinningLotto {
 
   public PrizeTier getPrizeTier(Lotto target) {
     int numberOfMatches = lotto.numberOfMatchesTo(target);
-    
+
     return PrizeTier.valueOf(new MatchCnt(lotto.numberOfMatchesTo(target),
         numberOfMatches == 5 && target.has(bonusNumber)));
   }
