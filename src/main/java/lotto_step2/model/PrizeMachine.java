@@ -1,5 +1,6 @@
 package lotto_step2.model;
 
+import java.util.EnumMap;
 import java.util.List;
 
 import static lotto_step2.LottoConstants.*;
@@ -44,5 +45,28 @@ public enum PrizeMachine {
             totalPrize += result.getLottoPrize();
         }
         return (double) totalPrize / money;
+    }
+
+    public static EnumMap<PrizeMachine, Integer> calcGameResult(List<PrizeMachine> gameResults) {
+
+        EnumMap<PrizeMachine, Integer> matches = new EnumMap<>(PrizeMachine.class);
+
+        matches.put(FOURTH, (int) gameResults.stream()
+                .filter(result -> result.getMatchCount() == MATCH_PRIZE_FOURTH)
+                .count());
+
+        matches.put(THIRD, (int) gameResults.stream()
+                .filter(result -> result.getMatchCount() == MATCH_PRIZE_THIRD)
+                .count());
+
+        matches.put(SECOND, (int) gameResults.stream()
+                .filter(result -> result.getMatchCount() == MATCH_PRIZE_SECOND)
+                .count());
+
+        matches.put(FIRST, (int) gameResults.stream()
+                .filter(result -> result.getMatchCount() == MATCH_PRIZE_FIRST)
+                .count());
+
+        return matches;
     }
 }

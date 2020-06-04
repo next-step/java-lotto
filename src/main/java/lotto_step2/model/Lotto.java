@@ -7,7 +7,7 @@ public class Lotto {
     private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if(checkLotto(numbers)) {
+        if(isValidLotto(numbers)) {
             this.numbers = numbers;
         }
     }
@@ -24,7 +24,7 @@ public class Lotto {
         return PrizeMachine.matchPrize(matchCount);
     }
 
-    public boolean checkLotto(List<Integer> numbers) {
+    public boolean isValidLotto(List<Integer> numbers) {
         return numbers.stream().distinct().collect(Collectors.toList()).size() < 6 ?
                 false : true;
     }
