@@ -16,7 +16,24 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers){
+        validationCheck(numbers);
         this.numbers = numbers;
+    }
+
+    private void validationCheck(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
+        }
+
+        numbers
+                .forEach(
+                        number -> {
+                            if (number < MIN_VALUE || number > MAX_VALUE) {
+                                throw new IllegalArgumentException("로또번호는 1 ~ 45 사이의 숫자로 구성 되어야 합니다.");
+                            }
+                        }
+                );
+        ;
     }
 
     public List<Integer> getNumbers() {
