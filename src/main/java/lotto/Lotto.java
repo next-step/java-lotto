@@ -38,6 +38,14 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
+    public static Lotto of(Set<Integer> numbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
+        for (Integer number : numbers) {
+            lotto.add(LottoNumber.of(number));
+        }
+        return new Lotto(lotto);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

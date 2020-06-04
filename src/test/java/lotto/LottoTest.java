@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,5 +25,12 @@ class LottoTest {
     public void ofComma_문자열_isNull(String input) {
         assertThatThrownBy(() -> Lotto.ofComma(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("컴마로 분리한 객체와 타입이 일치하는지 확인한다.")
+    public void of_Set() {
+        HashSet lotto = new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(Lotto.of(lotto)).isEqualTo(Lotto.ofComma("1,2,3,4,5,6"));
     }
 }
