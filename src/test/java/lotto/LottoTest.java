@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,5 +33,13 @@ class LottoTest {
     public void of_Set() {
         HashSet lotto = new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(Lotto.of(lotto)).isEqualTo(Lotto.ofComma("1,2,3,4,5,6"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 5", "1, 2, 2, 4, 5, 6"})
+    @DisplayName("로또넘버에 중복된 값이 있으면 예외 발생")
+    public void ofComma_중복값(String input) {
+        assertThatThrownBy(() -> Lotto.ofComma(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
