@@ -9,7 +9,8 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final int INITIAL_NUMBER = 0;
     private static final String SYMBOL_COMMA = ",";
-
+    private static final String SYMBOL_PREFIX_BRACKET = "[";
+    private static final String SYMBOL_SUFFIX_BRACKET = "]";
 
     private final Set<LottoNumber> lotto;
 
@@ -75,5 +76,17 @@ public class Lotto {
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto1 = (Lotto) o;
         return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(SYMBOL_PREFIX_BRACKET);
+        for (LottoNumber lottoNumber : lotto) {
+            sb.append(lottoNumber + SYMBOL_COMMA);
+        }
+        sb.append(SYMBOL_SUFFIX_BRACKET);
+        sb.append(System.getProperty("line.separator"));
+        return sb.toString();
     }
 }
