@@ -34,3 +34,4 @@
 - LottoTicket을 감싸는 일급 컬렉션 LottoBill
 - 당첨번호와 보너스 번호를 가지는 LottoWinningNumber
 - LottoNumber를 캐싱하는 LottoNumber의 내부 LottoNumberCache 클래스
+- 수동으로 입력한 번호를 파싱하는 ManualLottoDto 클래스
