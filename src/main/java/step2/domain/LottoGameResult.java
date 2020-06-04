@@ -4,38 +4,32 @@ import java.util.List;
 
 public class LottoGameResult {
 
-    private List<Lotto> lottos;
-    private WinningLotto winningLotto;
-    private int cashPrize;
-    private UserPrice userPrice;
-    private double earningRate;
     private int firstPrizeCount;
     private int secondPrizeCount;
     private int thirdPrizeCount;
     private int forthPrizeCount;
 
-    public LottoGameResult(List<Lotto> lottos, WinningLotto winningLotto, UserPrice userPrice) {
-        this.lottos = lottos;
-        this.winningLotto = winningLotto;
-        this.cashPrize = 0;
-        this.userPrice = userPrice;
+    public LottoGameResult() {
+        firstPrizeCount = 0;
+        secondPrizeCount = 0;
+        thirdPrizeCount = 0;
+        forthPrizeCount = 0;
     }
 
-    public LottoGameResultDto getResult() {
-        drawLottos(winningLotto.getLottoNumbers());
+    public LottoGameResultDto getResult(List<Lotto> lottos, WinningLotto winningLotto, UserPrice userPrice) {
+        drawLottos(lottos, winningLotto.getLottoNumbers());
 
-        earningRate = getEarningRate();
-        countPrize();
+        countPrize(lottos);
 
         return new LottoGameResultDto(
-            earningRate,
+            userPrice.getEarningRate(lottos),
             firstPrizeCount,
             secondPrizeCount,
             thirdPrizeCount,
             forthPrizeCount);
     }
 
-    private void countPrize() {
+    private void countPrize(List<Lotto> lottos) {
         firstPrizeCount = (int) lottos.stream()
             .filter(lotto -> lotto.getPrize() == Prize.FIRST.getGrade())
             .count();
@@ -50,16 +44,7 @@ public class LottoGameResult {
             .count();
     }
 
-    private void setCashPrize() {
-        lottos.stream().forEach(lotto -> cashPrize += lotto.getCashPrice());
-    }
-
-    private double getEarningRate() {
-        setCashPrize();
-        return (double) cashPrize / userPrice.getPrice();
-    }
-
-    private void drawLottos(List<Integer> winningNumbers) {
+    private void drawLottos(List<Lotto> lottos, List<Integer> winningNumbers) {
         lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers));
         //for logging
         //lottos.stream().forEach(lotto -> System.out.println(lotto));

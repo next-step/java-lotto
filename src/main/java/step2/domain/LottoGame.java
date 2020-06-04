@@ -25,7 +25,7 @@ public class LottoGame {
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
         winningLotto.validateWinningNumbers();
 
-        return new LottoGameResult(lottos, winningLotto, userPrice).getResult();
+        return new LottoGameResult().getResult(lottos, winningLotto, userPrice);
     }
 
     public List<Lotto> getLottos() {

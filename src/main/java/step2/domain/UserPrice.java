@@ -2,6 +2,7 @@ package step2.domain;
 
 import static step2.Constants.LOTTO_PRICE;
 
+import java.util.List;
 import step2.view.ErrorMessages;
 
 public class UserPrice {
@@ -29,5 +30,14 @@ public class UserPrice {
             return 0;
         }
         return (int) Math.floor(price) / LOTTO_PRICE;
+    }
+
+    private int getTotalCashPrize(List<Lotto> lottos) {
+        int totalCashPrize = lottos.stream().mapToInt(Lotto::getCashPrice).sum();
+        return totalCashPrize;
+    }
+
+    public double getEarningRate(List<Lotto> lottos) {
+        return (double) getTotalCashPrize(lottos) / price;
     }
 }

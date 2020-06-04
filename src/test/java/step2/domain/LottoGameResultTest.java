@@ -16,10 +16,9 @@ class LottoGameResultTest {
         List<Lotto> lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)));
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
         UserPrice userPrice = new UserPrice(price);
-        LottoGameResult lottoGameResult =  new LottoGameResult(lottos, winningLotto, userPrice);
 
         //when
-        LottoGameResultDto lottoGameResultDto = lottoGameResult.getResult();
+        LottoGameResultDto lottoGameResultDto = new LottoGameResult().getResult(lottos, winningLotto, userPrice);
 
         //then
         assertThat(lottoGameResultDto.getEarningRate()).isNotNull();
