@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumbersListTest {
 
+    NumbersGenerator numbersGenerator = new NumbersGenerator();
+
     @Test
     void size() {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
-        lottoNumbersList.addLottoNumbers(new LottoNumbers());
+        lottoNumbersList.addLottoNumbers(numbersGenerator.getAutoLottoNumbers());
 
         int size = lottoNumbersList.size();
 
@@ -22,7 +24,7 @@ class LottoNumbersListTest {
     @Test
     void getNumbers() {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = numbersGenerator.getAutoLottoNumbers();
         lottoNumbersList.addLottoNumbers(lottoNumbers);
 
         LottoNumbers result = lottoNumbersList.getNumbers(0);

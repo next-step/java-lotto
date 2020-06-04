@@ -8,11 +8,13 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoNumbersTest {
 
+    NumbersGenerator numbersGenerator = new NumbersGenerator();
+
     @Test
     public void countSameNumbersAsWinningNumber() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        WinningNumbers winningNumber = new WinningNumbers("1, 2, 3, 4, 5, 6");
-        BonusNumber bonusNumber = new BonusNumber(7);
+        LottoNumbers lottoNumbers = numbersGenerator.getAutoLottoNumbers();
+        WinningNumbers winningNumber = numbersGenerator.getWinningNumbers("1, 2, 3, 4, 5, 6");
+        BonusNumber bonusNumber = numbersGenerator.getBonusNumber(7);
 
         Rank rank = lottoNumbers.getRank(winningNumber, bonusNumber);
 

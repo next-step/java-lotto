@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoManagerTest {
 
-    LottoManager lottoManager = new LottoManager(new LottoNumbersList());
+    LottoManager lottoManager = new LottoManager(new LottoNumbersList(), new NumbersGenerator());
 
     @Test
     public void createLottoNumbersList() {
@@ -17,6 +17,6 @@ class LottoManagerTest {
     @Test
     public void getGameResult() {
         LottoNumbersList lottoNumbersList = lottoManager.createLottoNumbers(10_000);
-        assertThat(lottoManager.getGameResult(new WinningNumbers("1, 2, 3, 4, 5, 6"), new BonusNumber(7))).isNotNull();
+        assertThat(lottoManager.getGameResult("1, 2, 3, 4, 5, 6", 7)).isNotNull();
     }
 }
