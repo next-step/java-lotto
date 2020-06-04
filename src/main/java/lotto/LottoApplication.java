@@ -20,7 +20,7 @@ public class LottoApplication {
 
         OutputView.printNumberOfTicket(lottoMoney);
 
-        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(lottoMoney);
+        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(lottoMoney.getNumberOfAutoTicket());
 
         OutputView.printLottoTickets(lottoBill.getAllTickets());
 

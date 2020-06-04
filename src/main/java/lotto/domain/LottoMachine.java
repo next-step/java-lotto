@@ -10,10 +10,10 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static LottoBill purchaseLottoTicket(LottoMoney lottoMoney) {
+    public static LottoBill purchaseLottoTicket(int numberOfAutoTicket) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < lottoMoney.getNumberOfAutoTicket(); i++) {
+        for (int i = 0; i < numberOfAutoTicket; i++) {
             lottoTickets.add(LottoTicket.ofAuto());
         }
 
