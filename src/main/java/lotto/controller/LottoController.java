@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Scanner;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.LottoFactory;
 import lotto.model.Money;
@@ -25,7 +26,8 @@ public class LottoController {
     LottoView.printWinningNumberRequestMsg();
 
     WinningLotto winningLotto = WinningLotto
-        .newInstanceByStrArr(scanner.nextLine().split(","));
+        .newInstanceByStrArr(scanner.nextLine().split(","),
+            new LottoNumber(scanner.nextInt(), true));
 
     LottoView.printStatisticsMsg();
 

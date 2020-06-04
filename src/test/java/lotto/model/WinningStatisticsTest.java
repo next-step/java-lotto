@@ -37,7 +37,7 @@ class WinningStatisticsTest {
     ));
     return Stream.of(
         arguments(new Lottos(Arrays.asList(lotto_number1to6)),
-            new WinningLotto(lotto_number1to6),
+            new WinningLotto(lotto_number1to6, new LottoNumber(7, true)),
             new HashMap<PrizeTier, Integer>() {{
               put(PrizeTier.MATCH_SIX, 1);
             }}
@@ -95,8 +95,9 @@ class WinningStatisticsTest {
                 new LottoNumber(3, false),
                 new LottoNumber(7, false),
                 new LottoNumber(8, false),
-                new LottoNumber(9, false)
-            ))),
+                new LottoNumber(9, false))),
+                new LottoNumber(10, true)
+            ),
             0.35
         )
     );

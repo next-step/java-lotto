@@ -7,18 +7,19 @@ import java.util.stream.Stream;
 public class WinningLotto {
 
   private final Lotto lotto;
+  private final LottoNumber bonusNumber;
 
-  public WinningLotto(Lotto lotto) {
+  public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
     this.lotto = lotto;
+    this.bonusNumber = bonusNumber;
   }
 
-  public static WinningLotto newInstanceByStrArr(String[] numberArr) {
+  public static WinningLotto newInstanceByStrArr(String[] numberArr, LottoNumber bonusNumber) {
     List<LottoNumber> numberList = Stream.of(numberArr)
         .map(num -> new LottoNumber(Integer.parseInt(num.trim()), false))
-//            .boxed()
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
 
-    return new WinningLotto(new Lotto(numberList));
+    return new WinningLotto(new Lotto(numberList), bonusNumber);
   }
 
   public Lotto getLotto() {
@@ -26,7 +27,9 @@ public class WinningLotto {
   }
 
   public PrizeTier getPrizeTier(Lotto target) {
-    return PrizeTierMapper.getInstance()
-        .getPrizeTierByMatchCnt(this.lotto.numberOfMatchesTo(target));
+    int numberOfMatches = lotto.numberOfMatchesTo(target);
+    
+    return PrizeTier.valueOf(new MatchCnt(lotto.numberOfMatchesTo(target),
+        numberOfMatches == 5 && target.has(bonusNumber)));
   }
 }

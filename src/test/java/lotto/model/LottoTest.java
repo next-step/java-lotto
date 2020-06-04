@@ -6,6 +6,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -66,5 +67,17 @@ class LottoTest {
     return Stream.of(
         arguments(Arrays.asList(1, 1, 3, 4, 5, 45))
     );
+  }
+
+  @Test
+  void has() {
+    assertThat(new Lotto(Arrays.asList(
+        new LottoNumber(1, false),
+        new LottoNumber(2, false),
+        new LottoNumber(3, false),
+        new LottoNumber(4, false),
+        new LottoNumber(5, false),
+        new LottoNumber(42, false)
+    )).has(new LottoNumber(1, true))).isEqualTo(true);
   }
 }

@@ -43,8 +43,8 @@ public class Lotto {
     return matchCnt;
   }
 
-  public boolean has(LottoNumber number) {
-    return this.numbers.contains(number);
+  public boolean has(LottoNumber target) {
+    return this.numbers.stream().anyMatch(number -> number.compareTo(target) == 0);
   }
 
   @Override

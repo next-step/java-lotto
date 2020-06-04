@@ -18,4 +18,19 @@ class PrizeTierTest {
   void getPrize(PrizeTier tier, int prize) {
     assertThat(tier.getPrize()).isEqualTo(prize);
   }
+
+  @ParameterizedTest
+  @CsvSource({
+      "0, false, MATCH_ZERO",
+      "1, false, MATCH_ONE",
+      "2, false, MATCH_TWO",
+      "3, false, MATCH_THREE",
+      "4, false, MATCH_FOUR",
+      "5, false, MATCH_FIVE",
+      "5, true, MATCH_FIVE_WITH_BONUS",
+      "6, false, MATCH_SIX",
+  })
+  void getPrizeTierByMatchCnt(int matchCnt, boolean matchBonus, PrizeTier expected) {
+    assertThat(PrizeTier.valueOf(new MatchCnt(matchCnt, matchBonus))).isEqualTo(expected);
+  }
 }
