@@ -59,6 +59,10 @@ public class Lotto {
         return count;
     }
 
+    public int size() {
+        return lotto.size();
+    }
+
     private int matchCount(Lotto otherLotto, LottoNumber lottoNumber) {
         if (otherLotto.contains(lottoNumber)) {
             return INCREMENT_NUMBER_1;
