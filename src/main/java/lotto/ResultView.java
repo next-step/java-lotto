@@ -4,10 +4,6 @@ public class ResultView {
     private static final String NEWLINE = System.getProperty("line.separator");
     private static final String LOTTO_REPORT_HEADER = "당첨 통계" + NEWLINE + "----" + NEWLINE;
 
-    public void printPurchaseTicketCount(int count){
-        System.out.println(String.format("%s개를 구매했습니다.", count));
-    }
-
     public static void show(MatchingResults result) {
         StringBuilder sb = new StringBuilder(LOTTO_REPORT_HEADER);
 
@@ -27,5 +23,9 @@ public class ResultView {
         sb.append(matchingResult.getCountOfMatchingLotto());
         sb.append("개");
         sb.append(NEWLINE);
+    }
+
+    public void printPurchaseTicketCount(int count) {
+        System.out.println(String.format("%s개를 구매했습니다.", count));
     }
 }

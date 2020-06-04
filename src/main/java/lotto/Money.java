@@ -12,14 +12,14 @@ public class Money {
         this.money = money;
     }
 
+    public static Money buyingMoney(int countOfLotto) {
+        return new Money(countOfLotto * LOTTERY_MONEY);
+    }
+
     public int lotteryCount() {
         if (money < LOTTERY_MONEY)
             throw new IllegalArgumentException();
         return money / LOTTERY_MONEY;
-    }
-
-    public static Money buyingMoney(int countOfLotto) {
-        return new Money(countOfLotto * LOTTERY_MONEY);
     }
 
     public double profitRate(Money prize) {
