@@ -47,4 +47,5 @@ public class LottoTest {
         int matchingNumber = lotto.checkWinnerNumber(winnerNumber, userNumber);
         assertThat(lotto.getLottoPrize(matchingNumber)).isEqualTo(lottoPrize[prizePosition]);
     }
+
 }

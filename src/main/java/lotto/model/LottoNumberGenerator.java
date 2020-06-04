@@ -1,10 +1,11 @@
 package lotto.model;
 
+import java.util.Comparator;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class NumberGenerator {
+public class LottoNumberGenerator {
 
     private static List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                                                     11, 12, 13 ,14, 15, 16, 17, 18, 19, 20,
@@ -18,6 +19,12 @@ public class NumberGenerator {
         for (int i = 0; i < 6; i++) {
             lottoNumber[i] = lottoNumbers.get(i).toString();
         }
+        Arrays.sort(lottoNumber, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return Integer.valueOf(o1).compareTo(Integer.valueOf(o2));
+            }
+        });
         return lottoNumber;
     }
 }
