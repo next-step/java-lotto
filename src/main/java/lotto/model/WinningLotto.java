@@ -13,10 +13,10 @@ public class WinningLotto {
   }
 
   public static WinningLotto newInstanceByStrArr(String[] numberArr) {
-    List<Integer> numberList = Stream.of(numberArr)
-        .mapToInt(num -> Integer.parseInt(num.trim()))
-        .boxed()
-        .collect(Collectors.toList());
+    List<LottoNumber> numberList = Stream.of(numberArr)
+        .map(num -> new LottoNumber(Integer.parseInt(num.trim()), false))
+//            .boxed()
+            .collect(Collectors.toList());
 
     return new WinningLotto(new Lotto(numberList));
   }
@@ -26,6 +26,7 @@ public class WinningLotto {
   }
 
   public PrizeTier getPrizeTier(Lotto target) {
-    return PrizeTierMapper.getInstance().getPrizeTierByMatchCnt(this.lotto.numberOfMatchesTo(target));
+    return PrizeTierMapper.getInstance()
+        .getPrizeTierByMatchCnt(this.lotto.numberOfMatchesTo(target));
   }
 }

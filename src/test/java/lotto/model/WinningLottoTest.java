@@ -4,25 +4,38 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
+  static Lotto lotto_number1to6;
+
+  @BeforeAll
+  static void setUp(){
+    lotto_number1to6 = new Lotto(Arrays.asList(
+        new LottoNumber(1, false),
+        new LottoNumber(2, false),
+        new LottoNumber(3, false),
+        new LottoNumber(4, false),
+        new LottoNumber(5, false),
+        new LottoNumber(6, false)
+    ));
+  }
 
   @ParameterizedTest
   @MethodSource("numberListProvider")
-  void newInstanceByStrArr(String[] strArr, List<Integer> numberList) {
+  void newInstanceByStrArr(String[] strArr, Lotto lotto) {
     assertThat(WinningLotto.newInstanceByStrArr(strArr).getLotto())
-        .isEqualTo(new Lotto(numberList));
+        .isEqualTo(lotto);
   }
 
   static Stream<Arguments> numberListProvider() {
     return Stream.of(
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, Arrays.asList(1, 2, 3, 4, 5, 6)),
-        arguments("1, 2, 3, 4, 5, 6".split(","), Arrays.asList(1, 2, 3, 4, 5, 6))
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, lotto_number1to6),
+        arguments("1, 2, 3, 4, 5, 6".split(","), lotto_number1to6)
     );
   }
 
@@ -35,32 +48,33 @@ class WinningLottoTest {
   }
 
   static Stream<Arguments> numberListWithPrizeTierProvider() {
+
     return Stream.of(
         arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            lotto_number1to6,
             PrizeTier.MATCH_SIX
         ),
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+        arguments(new String[]{"1", "2", "3", "4", "5", "7"},
+            lotto_number1to6,
             PrizeTier.MATCH_FIVE
         ),
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)),
+        arguments(new String[]{"1", "2", "3", "4", "7", "8"},
+            lotto_number1to6,
             PrizeTier.MATCH_FOUR
         ),
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)),
+        arguments(new String[]{"1", "2", "3", "7", "8", "9"},
+            lotto_number1to6,
             PrizeTier.MATCH_THREE
         ),
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)),
+        arguments(new String[]{"1", "2", "7", "8", "9", "10"},
+            lotto_number1to6,
             PrizeTier.MATCH_ZERO
-        ), arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)),
+        ), arguments(new String[]{"1", "7", "8", "9", "10", "11"},
+            lotto_number1to6,
             PrizeTier.MATCH_ZERO
         ),
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"},
-            new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)),
+        arguments(new String[]{"7", "8", "9", "10", "11", "12"},
+            lotto_number1to6,
             PrizeTier.MATCH_ZERO
         )
     );

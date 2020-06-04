@@ -23,7 +23,12 @@ class LottosTest {
   static Stream<Arguments> lottoListProvider() {
     return Stream.of(
         arguments(Arrays.asList(
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+            new LottoNumber(1, false),
+            new LottoNumber(2, false),
+            new LottoNumber(3, false),
+            new LottoNumber(4, false),
+            new LottoNumber(5, false),
+            new LottoNumber(6, false)
         ))
     );
   }

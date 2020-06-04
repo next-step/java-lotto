@@ -14,20 +14,34 @@ class LottoTest {
 
   @ParameterizedTest
   @MethodSource("numberListProvider")
-  void checkLottoNumberSize(List<Integer> numberList) {
+  void checkLottoNumberSize(List<LottoNumber> numberList) {
     new Lotto(numberList);
   }
 
   static Stream<Arguments> numberListProvider() {
     return Stream.of(
-        arguments(Arrays.asList(1, 2, 3, 4, 5, 6)),
-        arguments(Arrays.asList(1, 2, 3, 4, 5, 42))
+        arguments(Arrays.asList(
+            new LottoNumber(1, false),
+            new LottoNumber(2, false),
+            new LottoNumber(3, false),
+            new LottoNumber(4, false),
+            new LottoNumber(5, false),
+            new LottoNumber(6, false)
+        )),
+        arguments(Arrays.asList(
+            new LottoNumber(1, false),
+            new LottoNumber(2, false),
+            new LottoNumber(3, false),
+            new LottoNumber(4, false),
+            new LottoNumber(5, false),
+            new LottoNumber(42, false)
+        ))
     );
   }
 
   @ParameterizedTest
   @MethodSource("wrongSizeListProvider")
-  void checkLottoNumberSize_크기가6이아닌경우(List<Integer> numberList) {
+  void checkLottoNumberSize_크기가6이아닌경우(List<LottoNumber> numberList) {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
       new Lotto(numberList);
     });
@@ -41,23 +55,8 @@ class LottoTest {
   }
 
   @ParameterizedTest
-  @MethodSource("wrongNumberListProvider")
-  void checkLottoNumberRange(List<Integer> numberList) {
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      new Lotto(numberList);
-    });
-  }
-
-  static Stream<Arguments> wrongNumberListProvider() {
-    return Stream.of(
-        arguments(Arrays.asList(1, 2, 3, 4, 5, 46)),
-        arguments(Arrays.asList(0, 2, 3, 4, 5, 6))
-    );
-  }
-
-  @ParameterizedTest
   @MethodSource("duplicatedNumberListProvider")
-  void checkLottoNumberDuplicated(List<Integer> numberList) {
+  void checkLottoNumberDuplicated(List<LottoNumber> numberList) {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
       new Lotto(numberList);
     });
