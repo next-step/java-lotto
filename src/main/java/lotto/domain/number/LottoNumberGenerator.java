@@ -3,6 +3,7 @@ package lotto.domain.number;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,6 +31,6 @@ public class LottoNumberGenerator {
         return numbers.stream()
                 .sorted()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }
