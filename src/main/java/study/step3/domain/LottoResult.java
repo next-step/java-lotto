@@ -16,10 +16,10 @@ public class LottoResult {
         return result;
     }
 
-    public long countRank(WinningRank ranks) {
+    public long countRank(WinningRank rank) {
         List<WinningRank> winningRanks = (List<WinningRank>) result.get(LOTTO_RESULT_RANKS);
         return winningRanks.stream()
-                    .filter(winningRank -> winningRank.equals(ranks))
+                    .filter(winningRank -> winningRank.equals(rank))
                     .count();
     }
 }
