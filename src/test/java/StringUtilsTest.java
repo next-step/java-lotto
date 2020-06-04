@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import utils.StringUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
