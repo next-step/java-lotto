@@ -22,27 +22,24 @@ public class MoneyAmount {
         return new MoneyAmount(money);
     }
 
-    public void useAmount(Priceable priceable) {
-        if (priceable == null) {
+    public void useAmount(Money money) {
+        if (money == null) {
             throw new IllegalArgumentException("금액을 입력해주세요.");
         }
 
-        if (!isEnoughMoney(priceable)) {
+        if (!isEnoughMoney(money)) {
             throw new NotEnoughMoneyException();
         }
 
-        this.usedAmount = this.usedAmount.plus(priceable.getPrice());
+        this.usedAmount = this.usedAmount.plus(money);
     }
 
-    public boolean isEnoughMoney(Priceable priceable) {
-        Money availableAmount = totalAmount.minus(this.usedAmount);
-        Money useAmount = priceable.getPrice();
-
-        return availableAmount.greaterThan(useAmount);
+    public boolean isEnoughMoney(Money money) {
+        return getRemainAmount().greaterThan(money);
     }
 
-    public Money getTotalAmount() {
-        return totalAmount;
+    public Money getRemainAmount() {
+        return totalAmount.minus(usedAmount);
     }
 
     public Money getUsedAmount() {

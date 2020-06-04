@@ -23,14 +23,14 @@ class MoneyAmountTest {
         MoneyAmount moneyAmount = MoneyAmount.create(money);
 
         assertThat(moneyAmount).isInstanceOf(MoneyAmount.class);
-        assertThat(moneyAmount.getTotalAmount()).isEqualTo(money);
+        assertThat(moneyAmount.getRemainAmount()).isEqualTo(money);
     }
 
     @DisplayName("useAmount() 메소드는 입력 금액만큼 사용 금액을 증가시킨다")
     @Test
     void useAmount_UsedAmount_SubtractAmount() {
         MoneyAmount moneyAmount = LottoData.createMoneyAmount(1_000);
-        moneyAmount.useAmount(LottoTicketPrice.PRICE_1000);
+        moneyAmount.useAmount(Money.valueOf(1000));
 
         assertThat(moneyAmount.getUsedAmount()).isEqualTo(Money.valueOf(1_000));
     }
@@ -38,7 +38,7 @@ class MoneyAmountTest {
     @DisplayName("useAmount() 메소드는 입력한 금액이 보유 금액보다 클 경우 예외가 발생한다")
     @Test
     void useAmount_LessThenAmount_ExceptionThrown() {
-        assertThatThrownBy(() -> LottoData.createMoneyAmount(999).useAmount(LottoTicketPrice.PRICE_1000))
+        assertThatThrownBy(() -> LottoData.createMoneyAmount(999).useAmount(Money.valueOf(1000)))
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 
@@ -46,7 +46,7 @@ class MoneyAmountTest {
     @MethodSource("provideMoneyAmountForIsEnoughMoney")
     @ParameterizedTest(name = "''{0}''은 1,000원 티켓 1장을 구입하기에 금액이 ''{1}''하다")
     void isEnoughMoney_Amount_Boolean(MoneyAmount moneyAmount, boolean expected) {
-        boolean isEnough = moneyAmount.isEnoughMoney(LottoTicketPrice.PRICE_1000);
+        boolean isEnough = moneyAmount.isEnoughMoney(Money.valueOf(1000));
 
         assertThat(isEnough).isEqualTo(expected);
     }

@@ -34,7 +34,7 @@ class MatchReportTest {
     @Test
     void calculateEarningRate_MoneyAndMatchResult_RateOfReturn() {
         MoneyAmount moneyAmount = LottoData.createMoneyAmount(1_000);
-        moneyAmount.useAmount(LottoTicketPrice.PRICE_1000);
+        moneyAmount.useAmount(Money.valueOf(1000));
         MatchResult matchResult = LottoData.createMatchResult(LottoRank.FIRST, 1);
         MatchReport matchReport = MatchReport.create(moneyAmount, matchResult);
 

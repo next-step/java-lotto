@@ -4,7 +4,7 @@ import step2.exception.NotEnoughMoneyException;
 
 public class LottoMachine {
 
-    private static final int TICKET_INITIAL_COUNT = 0;
+    private static final int MIN_TICKET_COUNT = 1;
 
     private final LottoTicketPrice ticketPrice;
 
@@ -21,16 +21,14 @@ public class LottoMachine {
     }
 
     public LottoTickets buyTicket(MoneyAmount moneyAmount) {
-        if (!moneyAmount.isEnoughMoney(ticketPrice)) {
+        int ticketCount = ticketPrice.getAvailablePurchase(moneyAmount);
+
+        if (ticketCount < MIN_TICKET_COUNT) {
             throw new NotEnoughMoneyException();
         }
 
-        int buyTicketCount = TICKET_INITIAL_COUNT;
-        while (moneyAmount.isEnoughMoney(ticketPrice)) {
-            moneyAmount.useAmount(ticketPrice);
-            buyTicketCount++;
-        }
+        moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(ticketCount));
 
-        return LottoTicketGenerator.generate(buyTicketCount);
+        return LottoTicketGenerator.generate(ticketCount);
     }
 }
