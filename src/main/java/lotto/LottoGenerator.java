@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,5 +21,13 @@ public class LottoGenerator {
 
     private static List<Integer> createSeed() {
         return IntStream.range(LOTTERY_RANDOM_START_NUM, LOTTERY_RANDOM_END_NUM).boxed().collect(Collectors.toList());
+    }
+
+    public static Lottos generateByMoney(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < money.lotteryCount(); i++) {
+            lottos.add(generateAuto());
+        }
+        return new Lottos(lottos);
     }
 }
