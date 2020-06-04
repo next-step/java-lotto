@@ -11,6 +11,7 @@ public class OutputView {
 
     private static final String PURCHASED_COUNT_FORMAT = "%d개를 구매했습니다.";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String RESULT_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String PROFIT_WITH_LOSS_FORMAT = PROFIT_FORMAT + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PRIZE_STATICS_TEXT = "당첨 통계";
@@ -42,6 +43,10 @@ public class OutputView {
     }
 
     private static void printWinResult(LottoResult lottoResult, Long resultCount) {
+        if (lottoResult.equals(LottoResult.FIVE_WITH_BONUS)) {
+            System.out.println(String.format(RESULT_WITH_BONUS_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
+            return;
+        }
         System.out.println(String.format(RESULT_FORMAT, lottoResult.getMatchCount(), lottoResult.getPrice(), resultCount));
     }
 
