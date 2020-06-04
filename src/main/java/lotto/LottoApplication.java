@@ -25,18 +25,18 @@ public class LottoApplication {
         ResultView.printLottoTicket(lottoTicket);
 
         //당첨번호 입력
-        String winningNumber = InputView.enterWinningNumber();
-        List<Integer> winningNumbers = LottoUtil.convertWinningNumber(winningNumber);
+        //String winningNumber = InputView.enterWinningNumber();
+        //List<Integer> winningNumbers = LottoUtil.convertWinningNumber(winningNumber);
 
         //당첨 통계 출력
-        LottoAnalyzer lottoAnalyzer = LottoAnalyzer.create();
-        Map<Integer, Integer> matchCountMap = lottoAnalyzer.calculateWinningStatistics(lottoTicket, winningNumbers);
-        ResultView.printWinStatistics(matchCountMap);
+        //LottoAnalyzer lottoAnalyzer = LottoAnalyzer.create();
+        //Map<Integer, Integer> matchCountMap = lottoAnalyzer.calculateWinningStatistics(lottoTicket, winningNumbers);
+        //ResultView.printWinStatistics(matchCountMap);
 
         // 수익율 계산
-        double winPrize = lottoAnalyzer.calculateWinPrize(matchCountMap);
-        double winRate = lottoAnalyzer.calculateWinRate(purchaseAmount, winPrize);
-        ResultView.printWinRate(winRate);
+        //double winPrize = lottoAnalyzer.calculateWinPrize(matchCountMap);
+        //double winRate = lottoAnalyzer.calculateWinRate(purchaseAmount, winPrize);
+        //ResultView.printWinRate(winRate);
 
     }
 }
