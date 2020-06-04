@@ -1,11 +1,11 @@
-package study.step3;
+package study.step3.test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.step2_1.domain.LottoShop;
-import study.step2_1.domain.LottoTickets;
+import study.step3.domain.LottoShop;
+import study.step3.domain.LottoTickets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

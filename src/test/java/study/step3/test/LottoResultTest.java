@@ -1,9 +1,9 @@
-package study.step3;
+package study.step3.test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2_1.domain.LottoResult;
-import study.step2_1.domain.WinningRank;
+import study.step3.domain.LottoResult;
+import study.step3.domain.WinningRank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
