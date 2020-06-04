@@ -18,20 +18,11 @@ public class ProfitStatistics {
         HashMap<Prize, Integer> resultMap = new HashMap<>();
         AtomicInteger startIndex = new AtomicInteger(WIN_MIN_COUNT);
 
-        winningList.stream().forEach( winRanking -> {
-            resultMap.put(getMatchPrize(startIndex.getAndIncrement()), winRanking);
+        winningList.stream().forEach(winRanking -> {
+            resultMap.put(Prize.getMatchPrize(startIndex.getAndIncrement()), winRanking);
         });
 
         return new ResultDTO(resultMap, getProfitRatio());
-    }
-
-    private Prize getMatchPrize(int matchCount) {
-        Prize properPrize = Arrays.stream(Prize.values())
-                .filter(prize -> prize.getMatchCount() == matchCount)
-                .findFirst()
-                .orElseThrow();
-
-        return properPrize;
     }
 
     public double getProfitRatio() {
@@ -49,8 +40,8 @@ public class ProfitStatistics {
     }
 
     private int calculateWinningList(int winCount, int startIndex) {
-        if(winCount > 0) {
-            return getMatchPrize(startIndex).getWinningPrize();
+        if (winCount > 0) {
+            return Prize.getMatchPrize(startIndex).getWinningPrize();
         }
         return 0;
     }

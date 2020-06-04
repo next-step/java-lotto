@@ -3,39 +3,41 @@ package lotto;
 import lotto.domain.Buyer;
 import lotto.domain.ProfitStatistics;
 import lotto.domain.ResultDTO;
+import lotto.view.LottoView;
 import lotto.view.ResultView;
-import lotto.view.ScannerView;
+import lotto.view.TextView;
 
 import java.util.List;
 
 public class Main {
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
+        NumberInputScanner numberInputScanner = new NumberInputScanner();
+        StringInputScanner stringInputScanner = new StringInputScanner();
 
-    NumberInputScanner numberInputScanner = new NumberInputScanner();
-    StringInputScanner stringInputScanner = new StringInputScanner();
-    ScannerView scannerView = new ScannerView();
-    ResultView resultView = new ResultView();
+        ResultView resultView = new ResultView();
+        LottoView lottoView = new LottoView();
 
-    scannerView.view("구입금액을 입력해 주세요.");
+        lottoView.printAskMoney();
 
-    int money = numberInputScanner.getNumber();
-    Buyer buyer = new Buyer(money);
-    buyer.buyAutoLotto();
+        int money = numberInputScanner.getNumber();
+        Buyer buyer = new Buyer(money);
+        buyer.buyAutoLotto();
 
-    scannerView.view(buyer.getLottoCount() + "개를 구매했습니다.");
-    scannerView.view(buyer.getLottoListNumber());
+        lottoView.printLottoCount(buyer.getLottoCount());
+        lottoView.printLottoListNumber(buyer.getLottoListNumbers());
 
-    scannerView.view("지난 주 당첨 번호를 입력해 주세요.");
-    List<Integer> winningNumbers = stringInputScanner.getNumbers();
+        lottoView.printAskWinNumber();
 
-    buyer.checkLotto(winningNumbers);
-    List<Integer> winningList = buyer.checkWin();
+        List<Integer> winningNumbers = stringInputScanner.getNumbers();
 
-    ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);
+        buyer.checkLotto(winningNumbers);
+        List<Integer> winningList = buyer.checkWin();
 
-    ResultDTO resultDTO = profitStatistics.analysis();
-    resultView.view(resultDTO);
+        ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);
+
+        ResultDTO resultDTO = profitStatistics.analysis();
+        resultView.view(resultDTO);
 
     }
 

@@ -43,7 +43,7 @@ public class ResultView implements View {
     private void printWinningCount(Map<Prize, Integer> resultMap, Prize prize) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(resultMap.get(prize))
-                    .append("개");
+                .append("개");
 
         System.out.println(stringBuffer.toString());
     }

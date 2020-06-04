@@ -1,6 +1,6 @@
 package lotto.view;
 
-public class ScannerView implements View{
+public class TextView implements View{
 
     @Override
     public void view(Object o) {
