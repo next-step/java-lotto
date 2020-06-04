@@ -16,8 +16,8 @@ class LottoMachineTest {
     @CsvSource({"1000, 1", "3500, 3", "14000, 14"})
     void purchaseLottoTicket(int purchaseAmount, int ticketAmount) {
         LottoMoney lottoMoney = new LottoMoney(purchaseAmount);
-        List<LottoTicket> lottoTickets = LottoMachine.purchaseLottoTicket(lottoMoney);
+        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(lottoMoney);
 
-        assertThat(lottoTickets.size()).isEqualTo(ticketAmount);
+        assertThat(lottoBill.getAllTickets().size()).isEqualTo(ticketAmount);
     }
 }

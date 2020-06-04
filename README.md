@@ -25,10 +25,12 @@
 ### 기능 목록
 
 - 로또 번호 하나를 가지는 LottoNumber 클래스
-- LottoNumber를 생성하고 6개만큼 조합하는 LottoNumberGenerator
 - 6개의 LottoNumber 를 관리하는 일급 컬렉션 LottoTicket
+- LottoNumber 를 생성하거나, 정수 리스트를 LottoNumber로 변환하는 LottoNumberGenerator 
 - LottoTicket 을 발급하는 LottoMachine
-- 로또를 추첨하는 추첨기 Drawing Machine
 - 로또 당첨표 정보를 가지고 있는 Enum WinningSheet
 - 로또 금액과 로또 구매 개수 가지고 있는 LottoMoney
-- 추첨기를 통해 얻은 결과를 가지고 당첨 통계를 계산하는 LottoResult 
+- 추첨기를 통해 얻은 결과를 가지고 당첨 통계 맵을 만드는 LottoResult 
+- LottoTicket을 감싸는 일급 컬렉션 LottoBill
+- 당첨번호와 보너스 번호를 가지는 LottoWinningNumber
+- LottoNumber를 캐싱하는 LottoNumber의 내부 LottoNumberCache 클래스

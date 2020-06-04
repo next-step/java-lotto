@@ -1,22 +1,28 @@
 package lotto.domain.number;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int LOTTO_NUMBER_UNDER_BOUND = 1;
-    private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    public static final int LOTTO_NUMBER_UNDER_BOUND = 1;
+    public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumber(number);
+    private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        validateNumber(number);
+        return LottoNumberCache.getLottoNumber(number);
     }
 
     public int getNumber() {
         return number;
     }
 
-    private void validateNumber(int number) {
+    private static void validateNumber(int number) {
         if (number < LOTTO_NUMBER_UNDER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 값이어야 합니다. - " + number);
         }
@@ -38,5 +44,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return Integer.compare(this.number, o.number);
+    }
+
+    private static class LottoNumberCache {
+        private static final Map<Integer, LottoNumber> cache;
+
+        static {
+            cache = new HashMap<>();
+
+            for (int number = LOTTO_NUMBER_UNDER_BOUND; number <= LOTTO_NUMBER_UPPER_BOUND; number++) {
+                cache.put(number, new LottoNumber(number));
+            }
+        }
+
+        private static LottoNumber getLottoNumber(int number) {
+            return cache.get(number);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

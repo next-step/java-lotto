@@ -11,9 +11,15 @@ public class LottoMoney {
         this.numberOfTicket = purchaseAmount / LOTTO_PRICE;
     }
 
+    public double calculateRateOfReturn(int profit) {
+        double rateOfReturn = profit / purchaseAmount;
+
+        return rateOfReturn;
+    }
+
     private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또를 살 수 없습니다.");
+            throw new IllegalArgumentException("로또를 살 수 없습니다. - " + purchaseAmount);
         }
     }
 

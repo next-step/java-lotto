@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumberGenerator;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.vo.LottoMoney;
 
 import java.util.ArrayList;
@@ -11,14 +10,13 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static List<LottoTicket> purchaseLottoTicket(LottoMoney lottoMoney) {
+    public static LottoBill purchaseLottoTicket(LottoMoney lottoMoney) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoMoney.getNumberOfTicket(); i++) {
-            List<LottoNumber> lottoNumbers = LottoNumberGenerator.generateLottoNumbers();
-            lottoTickets.add(new LottoTicket(lottoNumbers));
+            lottoTickets.add(LottoTicket.ofAuto());
         }
 
-        return lottoTickets;
+        return new LottoBill(lottoTickets);
     }
 }

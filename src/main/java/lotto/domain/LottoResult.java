@@ -1,47 +1,36 @@
 package lotto.domain;
 
-import lotto.domain.vo.LottoMoney;
-
-import java.util.LinkedHashMap;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private final LottoMoney lottoMoney;
-    private final Map<WinningSheet, Long> winningStatistics;
+    private final Map<WinningSheet, Integer> winningStatistics;
 
-    public LottoResult(LottoMoney lottoMoney, List<Integer> drawResults) {
-        this.lottoMoney = lottoMoney;
-        this.winningStatistics = makeWinningStatistics(drawResults);
+    public LottoResult(List<WinningSheet> winningSheets) {
+        this.winningStatistics = makeStatistics(winningSheets);
     }
 
-    public Map<WinningSheet, Long> getWinningStatistics() {
-        return this.winningStatistics;
-    }
-
-    private Map<WinningSheet, Long> makeWinningStatistics(List<Integer> drawResults) {
-        Map<WinningSheet, Long> winningStatistics = new LinkedHashMap<>();
+    private Map<WinningSheet, Integer> makeStatistics(List<WinningSheet> winningSheets) {
+        Map<WinningSheet, Integer> statistics = new EnumMap<>(WinningSheet.class);
 
         for (WinningSheet winningSheet : WinningSheet.values()) {
-            long count = drawResults.stream()
-                    .filter(drawResult -> winningSheet.getMatchCount() == drawResult)
-                    .count();
-
-            winningStatistics.put(winningSheet, count);
+            statistics.put(winningSheet, winningSheet.countInList(winningSheets));
         }
 
+        statistics.remove(WinningSheet.FAIL);
+
+        return Collections.unmodifiableMap(statistics);
+    }
+
+    public Map<WinningSheet, Integer> getWinningStatistics() {
         return winningStatistics;
     }
 
-    public double calculateRateOfReturn() {
-        double profit = winningStatistics.entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .map(entry -> entry.getKey().getPrice())
-                .reduce(Integer::sum)
-                .orElse(0);
-
-        double rateOfReturn = profit / lottoMoney.getPurchaseAmount();
-
-        return Double.parseDouble(String.format("%.2f", rateOfReturn));
+    public int sumAllPrize() {
+        return winningStatistics.entrySet().stream()
+                .mapToInt(statistic -> statistic.getKey().getPrize() * statistic.getValue())
+                .sum();
     }
 }
