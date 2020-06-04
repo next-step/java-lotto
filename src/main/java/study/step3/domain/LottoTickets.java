@@ -1,5 +1,7 @@
 package study.step3.domain;
 
+import study.step3.dto.LottoInputDto;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +27,11 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public LottoResult confirmWinningResult(String lastWinningNumbers) {
+    public LottoResult confirmWinningResult(LottoInputDto lastWinningNumbers) {
         Map<String,Object> result = new HashMap<>();
         List<WinningRank> winningRanks = checkLottoRank(lastWinningNumbers);
         result.put(LOTTO_RESULT_RANKS,winningRanks);
-
+        
         long totalPrize = calculateTotalPrize(winningRanks);
         double earningsRate = calculateEarningsRate(totalPrize);
         result.put(LOTTO_RESULT_EARNINGS_RATE,earningsRate);
@@ -46,10 +48,10 @@ public class LottoTickets {
         return totalPrize / (double) (lottoTickets.size() * LOTTO_PRICE_PER_PIECE);
     }
 
-    private List<WinningRank> checkLottoRank(String lastWinningNumbers) {
-        LottoTicket winningTicket = new LottoTicket(lastWinningNumbers);
+    private List<WinningRank> checkLottoRank(LottoInputDto lastWinningNumbers) {
+        LottoTicket winningTicket = new LottoTicket(lastWinningNumbers.getLottoNumbers());
         return lottoTickets.stream()
-                    .map(lottoTicket -> lottoTicket.checkWinningRank(winningTicket))
+                    .map(lottoTicket -> lottoTicket.checkWinningRank(winningTicket, lastWinningNumbers.getBonusBall()))
                     .filter(winningRank -> winningRank != WinningRank.NOTHING)
                     .collect(Collectors.toList());
     }

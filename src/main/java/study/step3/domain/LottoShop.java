@@ -27,7 +27,7 @@ public class LottoShop {
     private List<LottoTicket> publishLottoTickets(long lottoCounting) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (long i = INIT_INDEX; i < lottoCounting; i++){
-            lottoTickets.add(new LottoTicket().buyAuto());
+            lottoTickets.add(new LottoTicket().auto());
         }
         return lottoTickets;
     }

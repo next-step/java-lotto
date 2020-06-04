@@ -11,21 +11,13 @@ public class LottoNumber {
     private final static int LIMITED_NUMBER = 45;
     public final static int LOTTO_NUMBERS_COUNT = 6;
 
-    private List<Integer> numbers;
-
-    public LottoNumber() {
-        initLottoNumbers();
-    }
-
-    private void initLottoNumbers() {
-        List<Integer> initNumbers = IntStream.rangeClosed(INIT_NUMBER, LIMITED_NUMBER)
+    private static List<Integer> numbers = IntStream.rangeClosed(INIT_NUMBER, LIMITED_NUMBER)
                                              .boxed()
                                              .collect(Collectors.toList());
-        this.numbers = initNumbers;
-    }
 
+    private LottoNumber(){}
 
-    public Set<Integer> getLottoNumbers() {
+    public static Set<Integer> getLottoNumbers() {
         Collections.shuffle(numbers);
 
         return numbers.stream()
