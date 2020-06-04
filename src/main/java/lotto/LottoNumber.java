@@ -16,10 +16,13 @@ public class LottoNumber {
         }
     }
 
+    private final int no;
+
     public LottoNumber(int no) {
         if (no < LOTTERY_MINIMUM_NUMBER || no > LOTTERY_MAXIMUM_NUMBER) {
             throw new IllegalArgumentException();
         }
+        this.no = no;
     }
 
     public static LottoNumber of(String value) {
@@ -32,5 +35,10 @@ public class LottoNumber {
     public static LottoNumber of(int number) {
         return Optional.ofNullable(LOTTERY_NUMBERS.get(number))
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(no);
     }
 }
