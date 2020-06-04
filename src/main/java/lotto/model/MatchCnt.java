@@ -4,12 +4,16 @@ import java.util.Objects;
 
 public class MatchCnt implements Comparable<MatchCnt> {
 
-  private int cnt;
+  private int value;
   private boolean matchBonus;
 
-  public MatchCnt(int cnt, boolean matchBonus) {
-    this.cnt = cnt;
+  public MatchCnt(int value, boolean matchBonus) {
+    this.value = value;
     this.matchBonus = matchBonus;
+  }
+
+  public int getValue() {
+    return value;
   }
 
   @Override
@@ -21,25 +25,26 @@ public class MatchCnt implements Comparable<MatchCnt> {
       return false;
     }
     MatchCnt matchCnt = (MatchCnt) o;
-    return cnt == matchCnt.cnt &&
+    return value == matchCnt.value &&
         matchBonus == matchCnt.matchBonus;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cnt, matchBonus);
+    return Objects.hash(value, matchBonus);
   }
 
   @Override
   public String toString() {
-    return "MatchCnt{" +
-        "cnt=" + cnt +
-        ", matchBonus=" + matchBonus +
-        '}';
+    String message = value + "개 일치";
+    if (matchBonus) {
+      message = message.concat(", 보너스 볼 일치");
+    }
+    return message;
   }
 
   @Override
   public int compareTo(MatchCnt target) {
-    return Integer.compare(this.cnt, target.cnt);
+    return Integer.compare(this.value, target.value);
   }
 }
