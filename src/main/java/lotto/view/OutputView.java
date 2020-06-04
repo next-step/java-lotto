@@ -6,9 +6,11 @@ import lotto.domain.LottoTicket;
 import lotto.domain.WinningSheet;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final int NOT_LOSE_RATE = 1;
+
     private OutputView() {
     }
 
@@ -17,8 +19,7 @@ public class OutputView {
     }
 
     public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.stream()
-                .forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers()));
+        lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers()));
     }
 
     public static void printWinningStatistics(LottoResult lottoResult, LottoMoney lottoMoney) {
@@ -26,17 +27,17 @@ public class OutputView {
 
         System.out.println("----------");
 
-        System.out.println(makeStringStatistics(WinningSheet.FIFTH, lottoResult.countPrize(WinningSheet.FIFTH)));
-        System.out.println(makeStringStatistics(WinningSheet.FOURTH, lottoResult.countPrize(WinningSheet.FOURTH)));
-        System.out.println(makeStringStatistics(WinningSheet.THIRD, lottoResult.countPrize(WinningSheet.THIRD)));
-        System.out.println(makeStringStatistics(WinningSheet.SECOND, lottoResult.countPrize(WinningSheet.SECOND)));
-        System.out.println(makeStringStatistics(WinningSheet.FIRST, lottoResult.countPrize(WinningSheet.FIRST)));
+        for (Map.Entry<WinningSheet, Integer> statistics : lottoResult.getWinningStatistics().entrySet()) {
+            WinningSheet winningSheet = statistics.getKey();
+
+            String format = winningSheet.equals(WinningSheet.SECOND) ? "%d개 일치 보너스 볼 일치(%d원)- %d개" :
+                    "%d개 일치 (%d원)- %d개";
+
+            System.out.println(String.format(format, winningSheet.getMatchCount()
+                    , winningSheet.getPrize(), statistics.getValue()));
+        }
 
         printRateOfReturn(lottoMoney.calculateRateOfReturn(lottoResult.sumAllPrize()));
-    }
-
-    private static String makeStringStatistics(WinningSheet winningSheet, int countPrize) {
-        return String.format("%d개 일치 (%d원)- %d개", winningSheet.getMatchCount(), winningSheet.getPrize(), countPrize);
     }
 
     private static void printRateOfReturn(double rateOfReturn) {

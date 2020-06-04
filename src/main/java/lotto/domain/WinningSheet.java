@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum WinningSheet {
     FAIL(0, 0),
@@ -41,6 +42,12 @@ public enum WinningSheet {
 
     public int getPrize() {
         return prize;
+    }
+
+    public int countInList(List<WinningSheet> winningSheets) {
+        return (int) winningSheets.stream()
+                .filter(this::equals)
+                .count();
     }
 
     private boolean isSameMatchCount(int matchCount) {

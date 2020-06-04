@@ -1,23 +1,36 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoResult {
-    private final List<WinningSheet> winningSheets;
+    private final Map<WinningSheet, Integer> winningStatistics;
 
     public LottoResult(List<WinningSheet> winningSheets) {
-        this.winningSheets = winningSheets;
+        this.winningStatistics = makeStatistics(winningSheets);
+    }
+
+    private Map<WinningSheet, Integer> makeStatistics(List<WinningSheet> winningSheets) {
+        Map<WinningSheet, Integer> statistics = new EnumMap<>(WinningSheet.class);
+
+        for (WinningSheet winningSheet : WinningSheet.values()) {
+            statistics.put(winningSheet, winningSheet.countInList(winningSheets));
+        }
+
+        statistics.remove(WinningSheet.FAIL);
+
+        return Collections.unmodifiableMap(statistics);
+    }
+
+    public Map<WinningSheet, Integer> getWinningStatistics() {
+        return winningStatistics;
     }
 
     public int sumAllPrize() {
-        return winningSheets.stream()
-                .mapToInt(WinningSheet::getPrize)
+        return winningStatistics.entrySet().stream()
+                .mapToInt(statistic -> statistic.getKey().getPrize() * statistic.getValue())
                 .sum();
-    }
-
-    public int countPrize(WinningSheet targetSheet) {
-        return (int) winningSheets.stream()
-                .filter(winningSheet -> winningSheet.equals(targetSheet))
-                .count();
     }
 }
