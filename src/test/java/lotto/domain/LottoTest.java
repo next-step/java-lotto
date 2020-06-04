@@ -55,7 +55,7 @@ public class LottoTest {
     @Test
     public void getRankTest() {
         Lotto lotto = Lotto.of(LottoNumberPool.get(1,2,3,4,5,6));
-        WinningLotto winningLotto = new WinningLotto(LottoNumberPool.get(1,2,3,4,5,7),LottoNumber.of(6));
+        WinningLotto winningLotto = new WinningLotto(LottoNumberPool.get(1,2,3,4,5,7), LottoNumberPool.get(6));
 
         LottoRank lottoRank = lotto.getWinningRank(winningLotto);
 
