@@ -1,6 +1,5 @@
 package com.cheolhyeonpark.lotto;
 
-import com.cheolhyeonpark.lotto.domain.BonusNumber;
 import com.cheolhyeonpark.lotto.domain.LottoManager;
 import com.cheolhyeonpark.lotto.domain.LottoNumbersList;
 import com.cheolhyeonpark.lotto.domain.NumbersGenerator;
@@ -15,7 +14,8 @@ public class LottoController {
 
     public void run() {
         int amount = inputView.inputAmount();
-        resultView.printLottoNumbersList(lottoManager.createLottoNumbers(amount));
+        resultView.printLottoNumbersList(lottoManager.createLottoNumbers(amount,
+                inputView.inputManualNumbers(inputView.inputManualCount())));
         resultView.printGameResult(lottoManager
                 .getGameResult(inputView.inputWinningNumber(), inputView.inputBonusNumber()), amount);
     }

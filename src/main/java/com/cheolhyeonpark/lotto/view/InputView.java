@@ -20,13 +20,14 @@ public class InputView {
     }
 
     public List<String> inputManualNumbers(int count) {
-        consumeNextLine();
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, count).mapToObj(i -> scanner.nextLine()).collect(Collectors.toList());
     }
 
     public String inputWinningNumber() {
-        consumeNextLine();
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
@@ -40,11 +41,5 @@ public class InputView {
     protected void finalize() throws Throwable {
         scanner.close();
         super.finalize();
-    }
-
-    private void consumeNextLine() {
-        while (scanner.hasNextLine()) {
-            scanner.nextLine();
-        }
     }
 }

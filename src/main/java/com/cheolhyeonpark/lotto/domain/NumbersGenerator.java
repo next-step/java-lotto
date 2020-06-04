@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class NumbersGenerator {
 
-    public LottoNumbers getLottoNumbers(String input) {
+    public LottoNumbers getManualLottoNumbers(String input) {
         return new LottoNumbers(getNumberListFromString(input));
     }
 

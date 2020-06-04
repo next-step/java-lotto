@@ -1,5 +1,6 @@
 package com.cheolhyeonpark.lotto.domain;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoManager {
@@ -14,11 +15,19 @@ public class LottoManager {
         this.numbersGenerator = numbersGenerator;
     }
 
-    public LottoNumbersList createLottoNumbers(int amount) {
-        IntStream.range(0, amount / GAME_PRICE)
-                .mapToObj(i -> numbersGenerator.getAutoLottoNumbers())
-                .forEach(lottoNumbersList::addLottoNumbers);
+    public LottoNumbersList createLottoNumbers(int amount, List<String> manualNumbers) {
+        addManualNumbers(manualNumbers);
+        addAutoNumbers(amount - GAME_PRICE * manualNumbers.size());
         return lottoNumbersList;
+    }
+
+    private void addManualNumbers(List<String> manualNumbers) {
+        manualNumbers.stream().map(numbersGenerator::getManualLottoNumbers).forEach(lottoNumbersList::addLottoNumbers);
+    }
+
+    private void addAutoNumbers(int amount) {
+        IntStream.range(0, amount / GAME_PRICE).mapToObj(i -> numbersGenerator.getAutoLottoNumbers())
+                .forEach(lottoNumbersList::addLottoNumbers);
     }
 
     public GameResult getGameResult(String winningNumbers, int bonusNumber) {
