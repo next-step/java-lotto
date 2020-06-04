@@ -47,4 +47,18 @@ class MoneyTest {
         //Then
         assertThat(profitRate).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10000,5000,15000", "2000,5000,7000"})
+    @DisplayName("금액 합산하기")
+    public void sum(int initialPrice, int addPrice, int sumPrice) {
+        //Given
+        Money money = new Money(initialPrice);
+
+        //When
+        Money actual = money.sum(new Money(addPrice));
+
+        //Then
+        assertThat(actual).isEqualTo(new Money(sumPrice));
+    }
 }
