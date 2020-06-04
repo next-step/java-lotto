@@ -31,4 +31,19 @@ class MoneyTest {
         //Then
         assertThat(usingLotteryCount).isEqualTo(expectedCount);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000,10", "2000,5"})
+    @DisplayName("수익률 구하기")
+    public void profitRate(int investPrice, int expected) {
+        //Given
+        Money prize = new Money(10_000);
+
+        //When
+        Money investMoney = new Money(investPrice);
+        double profitRate = investMoney.profitRate(prize);
+
+        //Then
+        assertThat(profitRate).isEqualTo(expected);
+    }
 }
