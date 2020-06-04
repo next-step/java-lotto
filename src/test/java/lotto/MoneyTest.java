@@ -13,8 +13,9 @@ class MoneyTest {
     @ParameterizedTest
     @ValueSource(strings = {"900", "200"})
     @DisplayName("입력한 금액이 1000원 미만이면 exception")
-    void money_100원미만(String input) {
-        assertThatThrownBy(() -> new Money(input))
+    void lotteryCount(String input) {
+        Money money = new Money(input);
+        assertThatThrownBy(() -> money.lotteryCount())
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
