@@ -24,10 +24,13 @@ public class LottoController {
     LottoView.printLottoNumbers(lottos);
 
     LottoView.printWinningNumberRequestMsg();
+    String[] winningNumberArr = scanner.nextLine().split(",");
 
-    WinningLotto winningLotto = WinningLotto
-        .newInstanceByStrArr(scanner.nextLine().split(","),
-            new LottoNumber(scanner.nextInt(), true));
+    LottoView.printWinningBonusNumberRequestMsg();
+
+    LottoNumber bonusNumber = new LottoNumber(scanner.nextInt(), true);
+
+    WinningLotto winningLotto = WinningLotto.newInstanceByStrArr(winningNumberArr, bonusNumber);
 
     LottoView.printStatisticsMsg();
 
