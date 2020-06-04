@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoMoney;
 import lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
@@ -16,9 +17,9 @@ public class InputView {
 
     private InputView() {}
 
-    public static int getPaid() {
+    public static LottoMoney getPaid() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        return LottoMoney.of(SCANNER.nextInt());
     }
 
     public static List<Set<Integer>> askManualNumbers() {

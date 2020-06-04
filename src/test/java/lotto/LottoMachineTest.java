@@ -3,6 +3,7 @@ package lotto;
 import lotto.application.LottoIssueRequest;
 import lotto.application.LottoIssueResponse;
 import lotto.application.LottoMachine;
+import lotto.domain.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +26,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource({"3000, 3", "10000, 10"})
     void issue_Then_issuedLottoPriceEqualsToPaidPrice(int paidMoney, int expected) {
-        LottoIssueRequest request = new LottoIssueRequest(paidMoney, Collections.emptyList());
+        LottoIssueRequest request = new LottoIssueRequest(LottoMoney.of(paidMoney), Collections.emptyList());
 
         LottoIssueResponse response = lottoMachine.issue(request);
 
@@ -40,7 +41,7 @@ public class LottoMachineTest {
                 Stream.of(1, 2, 3, 4, 5, 6).collect(toSet())
         );
 
-        LottoIssueRequest request = new LottoIssueRequest(10000, manualNumbers);
+        LottoIssueRequest request = new LottoIssueRequest(LottoMoney.of(10_000), manualNumbers);
 
         LottoIssueResponse response = lottoMachine.issue(request);
 
