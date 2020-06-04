@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ class LottoTicketTest {
     void lottoTicketThrowsExceptionWhenSizeOver() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isThrownBy(() -> LottoTicket.ofFixed(lottoNumbers))
                 .withMessage("로또 번호는 6개만 가능합니다. - " + lottoNumbers);
     }
 
@@ -29,15 +30,15 @@ class LottoTicketTest {
     void lottoTicketThrowsExceptionWhenDuplicateNumber() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(lottoNumbers))
-                .withMessage("로또 번호는 중복 될 수 없습니다. - " + lottoNumbers);
+                .isThrownBy(() -> LottoTicket.ofFixed(lottoNumbers))
+                .withMessageContaining("로또 번호는 중복 될 수 없습니다.");
     }
 
     @DisplayName("LottoNumber 리스트에 매개값으로 받은 번호가 존재하는지 판단.")
     @ParameterizedTest
     @CsvSource({"3, true", "7, false"})
     void isContainingLottoNumber(int number, boolean expectResult) {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket.isContainingLottoNumbers(LottoNumber.valueOf(number))).isEqualTo(expectResult);
     }
@@ -45,7 +46,7 @@ class LottoTicketTest {
     @DisplayName("가지고있는 LottoNumber 리스트를 Integer 리스트로 반환")
     @Test
     void getLottoNumbers() {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }

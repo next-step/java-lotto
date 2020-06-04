@@ -12,7 +12,7 @@ public class LottoWinningNumber {
     public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
 
-        this.winningTicket = new LottoTicket(winningNumbers);
+        this.winningTicket = LottoTicket.ofFixed(winningNumbers);
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 

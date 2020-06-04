@@ -42,6 +42,6 @@ class LottoWinningNumberTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoWinningNumber(winningNumbers, bonusNumber))
-                .withMessage("로또 번호는 중복 될 수 없습니다. - " + winningNumbers);
+                .withMessageContaining("로또 번호는 중복 될 수 없습니다.");
     }
 }

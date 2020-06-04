@@ -12,9 +12,9 @@ class LottoBillTest {
     @DisplayName("모든 로또 티켓과 당첨 번호를 비교하여 추첨 결과를 반환한다.")
     @Test
     void drawAllLotto() {
-        LottoTicket ticket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket2 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
-        LottoTicket ticket3 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 8));
+        LottoTicket ticket1 = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket2 = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTicket ticket3 = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 8));
 
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
