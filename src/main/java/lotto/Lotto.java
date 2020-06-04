@@ -3,6 +3,7 @@ package lotto;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int INCREMENT_NUMBER_1 = 1;
@@ -84,13 +85,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(SYMBOL_PREFIX_BRACKET);
-        for (LottoNumber lottoNumber : lotto) {
-            sb.append(lottoNumber + SYMBOL_COMMA);
-        }
-        sb.append(SYMBOL_SUFFIX_BRACKET);
-        sb.append(System.getProperty("line.separator"));
-        return sb.toString();
+        return lotto
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(SYMBOL_COMMA, SYMBOL_PREFIX_BRACKET, SYMBOL_SUFFIX_BRACKET));
     }
 }

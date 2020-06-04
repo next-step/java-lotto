@@ -23,6 +23,7 @@ public class Lottos {
 
     @Override
     public String toString() {
-        return lottos + "";
+        lottos.stream().forEach(System.out::println);
+        return "";
     }
 }
