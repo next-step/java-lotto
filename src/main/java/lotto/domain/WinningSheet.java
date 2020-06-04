@@ -20,7 +20,7 @@ public enum WinningSheet {
     }
 
     public static WinningSheet findByMatchCount(int matchCount, boolean matchBonus) {
-        WinningSheet findSheet = Arrays.stream(WinningSheet.values())
+        WinningSheet findSheet = Arrays.stream(values())
                 .filter(winningSheet -> winningSheet.isSameMatchCount(matchCount))
                 .findFirst()
                 .orElse(WinningSheet.FAIL);
