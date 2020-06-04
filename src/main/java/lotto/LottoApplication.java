@@ -2,11 +2,9 @@ package lotto;
 
 import lotto.domain.LottoBill;
 import lotto.domain.LottoMachine;
-import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoWinningNumber;
+import lotto.domain.ticket.LottoWinningTicket;
 import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -25,9 +23,9 @@ public class LottoApplication {
         List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        LottoWinningTicket lottoWinningTicket = new LottoWinningTicket(winningNumbers, bonusNumber);
 
-        LottoResult lottoResult = lottoBill.drawAllLotto(lottoWinningNumber);
+        LottoResult lottoResult = lottoBill.drawAllLotto(lottoWinningTicket);
 
         OutputView.printWinningStatistics(lottoResult, lottoMoney);
     }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.number.LottoWinningNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoWinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +17,11 @@ class LottoBillTest {
         LottoTicket ticket2 = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoTicket ticket3 = LottoTicket.ofFixed(Arrays.asList(1, 2, 3, 4, 5, 8));
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        LottoWinningTicket lottoWinningTicket = new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         LottoBill lottoBill = new LottoBill(Arrays.asList(ticket1, ticket2, ticket3));
 
-        LottoResult lottoResult = lottoBill.drawAllLotto(lottoWinningNumber);
+        LottoResult lottoResult = lottoBill.drawAllLotto(lottoWinningTicket);
 
         LottoResult expectedResult = new LottoResult(Arrays.asList(WinningSheet.FIRST, WinningSheet.SECOND
                 , WinningSheet.THIRD));

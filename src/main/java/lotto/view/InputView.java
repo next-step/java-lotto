@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.number.LottoWinningNumber;
 import lotto.domain.vo.LottoMoney;
 
 import java.util.Arrays;

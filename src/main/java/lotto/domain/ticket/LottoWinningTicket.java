@@ -1,15 +1,15 @@
-package lotto.domain.number;
+package lotto.domain.ticket;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.WinningSheet;
 
 import java.util.List;
 
-public class LottoWinningNumber {
+public class LottoWinningTicket {
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
+    public LottoWinningTicket(List<Integer> winningNumbers, int bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
 
         this.winningTicket = LottoTicket.ofFixed(winningNumbers);

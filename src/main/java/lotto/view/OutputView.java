@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.WinningSheet;
 
 import java.util.List;
