@@ -1,7 +1,7 @@
 package lotto.domain.number;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -47,18 +47,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static class LottoNumberCache {
-        private static final List<LottoNumber> cache;
+        private static final Map<Integer, LottoNumber> cache;
 
         static {
-            cache = new ArrayList<>();
+            cache = new HashMap<>();
 
             for (int number = LOTTO_NUMBER_UNDER_BOUND; number <= LOTTO_NUMBER_UPPER_BOUND; number++) {
-                cache.add(new LottoNumber(number));
+                cache.put(number, new LottoNumber(number));
             }
         }
 
         private static LottoNumber getLottoNumber(int number) {
-            return cache.get(number - 1);
+            return cache.get(number);
         }
     }
 
