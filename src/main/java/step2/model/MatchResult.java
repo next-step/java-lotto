@@ -30,7 +30,7 @@ public class MatchResult {
     }
 
     public Map<LottoRank, Integer> getWinningResult() {
-        return LottoRank.getWinningRank().stream()
+        return LottoRank.WINNING_RANKS.stream()
                 .collect(Collectors.toMap(Function.identity(), matchResult::get));
     }
 

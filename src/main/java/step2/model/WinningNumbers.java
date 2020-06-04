@@ -33,7 +33,7 @@ public class WinningNumbers {
 
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
             int matchCount = lottoTicket.getMatchCount(this);
-            matchResult.plusCount(LottoRank.findRank(matchCount));
+            matchResult.plusCount(LottoRank.findRank(matchCount, false));
         });
 
         return matchResult;
