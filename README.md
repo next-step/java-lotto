@@ -33,9 +33,7 @@
 #### 구현할 기능 목록
 
 1. 구입금액 입력
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - 테스트 구현 X
 2. 입력 만큼 객체생성
    - [ ] Test fails
    - [ ] Test Passes
@@ -72,3 +70,5 @@
    - [ ] Test fails
    - [ ] Test Passes
    - [ ] Refactor
+11. 최종 ResultView
+   - 테스트 구현 X  
