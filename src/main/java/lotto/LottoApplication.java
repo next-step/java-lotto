@@ -12,7 +12,11 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoMoney lottoMoney = InputView.inputPurchaseAmount();
+        int purchaseAmount = InputView.inputPurchaseAmount();
+
+        int numberOfManualTicket = InputView.inputNumberOfManualTicket();
+
+        LottoMoney lottoMoney = new LottoMoney(purchaseAmount, numberOfManualTicket);
 
         OutputView.printNumberOfTicket(lottoMoney);
 

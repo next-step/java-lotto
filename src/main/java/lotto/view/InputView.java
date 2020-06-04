@@ -14,12 +14,21 @@ public class InputView {
     private InputView() {
     }
 
-    public static LottoMoney inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
 
         try {
-            int purchaseAmount = Integer.parseInt(SCANNER.nextLine());
-            return new LottoMoney(purchaseAmount);
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요.");
+        }
+    }
+
+    public static int inputNumberOfManualTicket() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        try {
+            return Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }
