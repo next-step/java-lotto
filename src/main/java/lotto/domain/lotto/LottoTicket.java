@@ -1,34 +1,26 @@
 package lotto.domain.lotto;
 
-import lotto.domain.generator.NumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningLotto;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
 
     private final List<LottoNumbers> lottoNumbers;
 
-    public LottoTicket(Price price, NumberGenerator<LottoNumber> generator) {
-        this.lottoNumbers = createLottoTicket(price, generator);
+    public LottoTicket(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private List<LottoNumbers> createLottoTicket(Price price, NumberGenerator<LottoNumber> generator) {
-        return IntStream.range(0, price.getLottoCount())
-                .mapToObj(i -> LottoNumbers.newLottoNumbersWithNumberGenerator(generator))
-                .collect(Collectors.toList());
-    }
-
-    public Map<LottoRank, Long> matchWinningNumber(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    public Map<LottoRank, Long> matchWinningNumber(WinningLotto winningLotto, LottoNumber bonusNumber) {
         return this.lottoNumbers.stream()
-                .map(lottoNumbers -> LottoRank.valueOf(winningNumbers.matchCount(lottoNumbers), lottoNumbers.matchCount(bonusNumber)))
+                .map(lottoNumbers -> LottoRank.valueOf(winningLotto.matchCount(lottoNumbers), lottoNumbers.matchCount(bonusNumber)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 

@@ -1,7 +1,6 @@
 package lotto.domain.winning;
 
-import lotto.domain.generator.FixedNumberGenerator;
-import lotto.domain.generator.NumberGenerator;
+import lotto.domain.lotto.LottoNumberGenerator;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Price;
@@ -11,8 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,10 +23,11 @@ public class WinningStatisticsTest {
     @DisplayName("WinningStatistics 객체를 생성할 수 있다.")
     @Test
     void create() {
-        Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        Price price = new Price(1000);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.singletonList("1,2,3,4,5,6"));
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -40,9 +39,10 @@ public class WinningStatisticsTest {
     @Test
     void create_remove_miss() {
         Price price = new Price(2000);
-        LottoTicket lottoTicket = new LottoTicket(price, new NotMatchNumberGenerator());
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         Map<LottoRank, Integer> lottoRank = winningStatistics.getLottoRank();
@@ -54,27 +54,15 @@ public class WinningStatisticsTest {
     @Test
     void calculateProfit() {
         Price price = new Price(1000);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.singletonList("1,2,3,4,5,6"));
         winningNumberString = "1,2,3,13,14,15";
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
-        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningNumbers(winningNumberString), bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankMap = lottoTicket.matchWinningNumber(new WinningLotto(winningNumberString), bonusLottoNumber);
         WinningStatistics winningStatistics = new WinningStatistics(price, lottoRankMap);
 
         BigDecimal profit = winningStatistics.calculateProfit();
 
         assertThat(profit).isEqualTo(new DecimalFormat("#,##0.00").format(LottoRank.FIFTH.getWinningMoney() / price.getPrice()));
-    }
-
-    private static class NotMatchNumberGenerator implements NumberGenerator<LottoNumber> {
-        @Override
-        public List<LottoNumber> getNumbers() {
-            return Arrays.asList(new LottoNumber(7),
-                    new LottoNumber(8),
-                    new LottoNumber(9),
-                    new LottoNumber(10),
-                    new LottoNumber(11),
-                    new LottoNumber(12)
-            );
-        }
     }
 }

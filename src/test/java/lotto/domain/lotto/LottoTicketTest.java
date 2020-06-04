@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-import lotto.domain.generator.FixedNumberGenerator;
-import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +20,8 @@ public class LottoTicketTest {
     @Test
     void createLottoTicket() {
         Price price= new Price(3000);
-        LottoTicket lottoTicket = new LottoTicket(price, new LottoNumberGenerator());
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.emptyList());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
         assertAll(
                 () -> assertThat(lottoTicket.getLottoNumbers()).hasSize(price.getLottoCount()),
@@ -31,16 +32,32 @@ public class LottoTicketTest {
     @DisplayName("WinningNumbers와 매칭 결과(LottoRank)를 반환한다.")
     @Test
     void matchWinningNumber() {
-        Price price= new Price(2000);
+        Price price= new Price(1000);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, Collections.singletonList("1,2,3,4,5,6"));
+
+        System.out.println(lottoNumberGenerator);
+
         String winningNumberString = "1,2,3,4,5,6";
         int bonusNumber = 7;
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberString);
+        WinningLotto winningLotto = new WinningLotto(winningNumberString);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        LottoTicket lottoTicket = new LottoTicket(price, new FixedNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
 
-        Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningNumbers, bonusLottoNumber);
+        Map<LottoRank, Long> lottoRankLongMap = lottoTicket.matchWinningNumber(winningLotto, bonusLottoNumber);
 
         assertThat(lottoRankLongMap.get(LottoRank.FIRST)).isEqualTo(new Long(price.getLottoCount()));
+    }
+
+    @DisplayName("수동 로또 번호를 생성할 수 있다.")
+    @Test
+    void create_manualLotto() {
+        Price price= new Price(1000);
+        List<String> manualLottos = Collections.singletonList("1,2,3,4,5,6");
+
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(price, manualLottos);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator.getLottoNumbers());
+
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(1);
     }
 }

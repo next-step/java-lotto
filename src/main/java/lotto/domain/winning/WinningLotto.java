@@ -1,26 +1,22 @@
 package lotto.domain.winning;
 
 import lotto.domain.number.LottoNumbers;
+import lotto.util.StringUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningLotto {
 
     private final LottoNumbers winningLottoNumbers;
 
-    public WinningNumbers(String winningNumbers) {
+    public WinningLotto(String winningNumbers) {
         this.winningLottoNumbers = createWinningNumbers(winningNumbers);
     }
 
     private LottoNumbers createWinningNumbers(String winningNumberString) {
-        List<Integer> winningNumbers = Arrays.stream(winningNumberString.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        return LottoNumbers.newLottoNumbersWithList(winningNumbers);
+        List<Integer> winningNumbers = StringUtil.splitAndToIntegerList(winningNumberString);
+        return LottoNumbers.manualLottoNumber(winningNumbers);
     }
 
     public LottoNumbers getWinningLottoNumbers() {
@@ -39,8 +35,8 @@ public class WinningNumbers {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WinningNumbers)) return false;
-        WinningNumbers that = (WinningNumbers) o;
+        if (!(o instanceof WinningLotto)) return false;
+        WinningLotto that = (WinningLotto) o;
         return Objects.equals(winningLottoNumbers, that.winningLottoNumbers);
     }
 
