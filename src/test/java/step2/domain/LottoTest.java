@@ -1,54 +1,69 @@
 package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
 
-    @DisplayName("init Class")
+    private static List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+
+
+    @DisplayName("init Class 생성테스트")
     @ParameterizedTest
-    @CsvSource(value = {"6:45"}, delimiter = ':')
-    public void testClassNormalInitialize(int lottoDrawLimit, int lottoMaxLimit) {
+    @ValueSource(ints = {6})
+    public void testGetInstance(int lottoDrawLimit) {
 
-        // ready
-        LottoGame lottoGame = new LottoGame();
-
-        List<Integer> lottoGameNumbers = lottoGame.getLottoGameNumbers();
-
-        assertThat(lottoGameNumbers.size()).isEqualTo(lottoMaxLimit);
-
-        Lotto lotto = Lotto.of(lottoDrawLimit, lottoGameNumbers);
-
+        Lotto lotto = Lotto.getInstance();
         assertThat(lotto.getNumbers().size()).isEqualTo(lottoDrawLimit);
-
 
     }
 
-    @DisplayName("init Class boundary error")
-    @ParameterizedTest
-    @CsvSource(value = {"5:100", "7:25"}, delimiter = ':')
-    public void testClassInitialize(int lottoDrawLimit, int lottoMaxLimit) {
+    @DisplayName("init Class 생성테스트")
+    @Test
+    public void testFrom() {
 
-        // 내부상수를 통해 결정되어 있는 내용을 외부에서 테스트 하는게 옳은가? 에 대한 의문이 듭니다.
+        Integer[] test = {6, 2, 3, 4, 5, 1};
+        Integer[] testResult = {1, 2, 3, 4, 5, 6};
 
-        // ready
-        LottoGame lottoGame = new LottoGame();
-        List<Integer> lottoGameNumbers = lottoGame.getLottoGameNumbers();
+        Lotto lotto = Lotto.from(Arrays.asList(test));
 
-/*
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    Lotto.of(lottoDrawLimit, lottoGameNumbers);
-                });
-*/
+        assertThat(lotto.getNumbers()).isEqualTo(Arrays.asList(testResult));
 
-        assertThat(lottoGameNumbers.size()).isNotEqualTo(lottoMaxLimit);
+    }
+
+    @DisplayName("6 개 번호 선별 테스트")
+    @Test
+    public void testDrawLottoNumbers() {
+
+        assertThat(Lotto.drawLottoNumbers(lottoGameNumbers).size()).isEqualTo(6);
+
+    }
+
+
+    @DisplayName("당첨번호 체크 오류입력")
+    @Test
+    public void testCheckWiningNumberWithError() {
+
+        String[] testString = {"2", "3", "A", "7", "8", "10"};
+
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                Lotto.checkWiningNumber(testString));
 
     }
 
 }
+
+
+
+
+

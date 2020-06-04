@@ -2,13 +2,61 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.view.OutputView;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoGameTest {
+
+
+    // init with 1000 ~
+    @DisplayName("금액별 구매 매수 체크")
+    @ParameterizedTest
+    @CsvSource(value = {"0:0", "1000:1", "2000:2", "5000:5", "10000:10"}, delimiter = ':')
+    public void testCalculateGameCountByPayMoney(String input, int count) {
+
+        Money money = new Money(input);
+        LottoGame lottoGame = new LottoGame();
+        int gameCount = lottoGame.calculateGameCountByPayMoney(money);
+
+        assertThat(gameCount).isEqualTo(count);
+
+    }
+
+
+    // init with 1000 ~
+    @DisplayName("금액별 구매 매수 체크")
+    @ParameterizedTest
+    @ValueSource(strings = {"1100", "100", "1400", "5400", "10001"})
+    public void testCalculateGameCountByPayMoneyWithError(String input) {
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    Money money = new Money(input);
+                    LottoGame lottoGame = new LottoGame();
+                    lottoGame.calculateGameCountByPayMoney(money);
+                });
+
+    }
+
+
+    @DisplayName("init Class with negative input")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1000", "-1"})
+    public void testCalculateGameCountByPayMoneyWithNegativeInput(String input) {
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    LottoGame lottoGame = new LottoGame();
+                    Money money = new Money(input);
+                    lottoGame.calculateGameCountByPayMoney(money);
+                });
+
+    }
+
 
     // init with null, emtpy
     @DisplayName("init Class")
@@ -21,45 +69,12 @@ class LottoGameTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     Money money = new Money(input);
-                    lottoGame.getGameCountByPayMoney(money);
-                })
-                .withMessage("Found a Illegal Argument(s).");
+                    lottoGame.calculateGameCountByPayMoney(money);
+                });
+
     }
 
-    // init with 1000 ~
-    @DisplayName("init Class")
-    @ParameterizedTest
-    @ValueSource(strings = {"0", "1000", "2000", "5000", "10000"})
-    public void testClassWithNormalInput(String input) {
 
-        Money money = new Money(input);
-
-        LottoGame lottoGame = new LottoGame();
-        int gameCount = lottoGame.getGameCountByPayMoney(money);
-
-        // lottoList = LottoGame.
-        lottoGame.issueLotto(gameCount);
-
-        //OutputView.
-        OutputView.outputLottoList(lottoGame.getLottoList());
-    }
-
-    @DisplayName("init Class with negative input")
-    @ParameterizedTest
-    @ValueSource(strings = {"-1000", "-1"})
-    public void testClassWithNormalInputWithError(String input) {
-
-        LottoGame lottoGame = new LottoGame();
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() ->
-                        {
-                            Money money = new Money(input);
-                            lottoGame.getGameCountByPayMoney(money);
-                        }
-                )
-                .withMessage("Found a Illegal Argument(s).");
-    }
 
 
     @DisplayName("test get Game Count length error")
@@ -71,20 +86,6 @@ class LottoGameTest {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoGame.checkWiningNumber(input));
-    }
-
-
-    @DisplayName("init Class with negative input")
-    @ParameterizedTest
-    @ValueSource(strings = {"-1000", "-1"})
-    public void testGetGameCountByPayMoneyWithError(String input) {
-
-        Money money = new Money(input);
-        LottoGame lottoGame = new LottoGame();
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoGame.getGameCountByPayMoney(money))
-                .withMessage("Found a Illegal Argument(s).");
     }
 
 

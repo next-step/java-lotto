@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class PrizeTest {
 
     // init
-    @DisplayName("init Class")
+    @DisplayName("init Class 생성 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     public void testInitClassWithNormalInput(int input) {
@@ -22,26 +22,14 @@ class PrizeTest {
     }
 
     // init
-    @DisplayName("init Class")
+    @DisplayName("init Class negative data")
     @ParameterizedTest
-    @ValueSource(ints = {0, -1, -2})
+    @ValueSource(ints = {-1, -2})
     public void testInitClassWithError1(int input) {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Prize.of(input, 1));
 
     }
-
-    // init
-    @DisplayName("init Class")
-    @ParameterizedTest
-    @ValueSource(ints = {-1, -2})
-    public void testInitClassWithError2(int input) {
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Prize.of(1, input));
-
-    }
-
 
 }

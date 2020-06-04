@@ -24,8 +24,9 @@ public class MainApplication {
         // input to buy
         Money payedmoney = new Money(InputView.inputPayMoney());
 
+
         // check buy Lotto
-        int gameCount = lottoGame.getGameCountByPayMoney(payedmoney);
+        int gameCount = lottoGame.calculateGameCountByPayMoney(payedmoney);
 
         // lottoList = LottoGame.
         lottoGame.issueLotto(gameCount);

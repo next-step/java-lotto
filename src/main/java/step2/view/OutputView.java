@@ -3,6 +3,7 @@ package step2.view;
 import step2.domain.Lotto;
 import step2.domain.Prize;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder("[");
         stringBuilder.append(lotto.getNumbers()
                 .stream()
-                .map(number -> Integer.toString(number))
+                .map(number -> String.format("%3d", number))
                 .collect(Collectors.joining(NUMBER_DELIMITER)));
         stringBuilder.append("]");
 
@@ -48,14 +49,14 @@ public class OutputView {
 
         prizeList.forEach(prize -> {
             System.out.println(prize.getMatchedNumber()
-                    + " matched. (" + String.format("%15,d", prize.getPrizePrice())
+                    + " matched. (" + String.format("%15d", prize.getPrizePrice())
                     + ") : " + String.format("%3d", prize.getPrizeCount()));
         });
 
     }
 
 
-    public static void outputWinningResult(double totalResult) {
+    public static void outputWinningResult(BigDecimal totalResult) {
         System.out.println("-------------");
         System.out.println("Total Profit Ratio : " + totalResult);
         System.out.println("-------------");

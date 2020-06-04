@@ -16,6 +16,11 @@ public class Number {
     private static final Pattern patternNumbersOnly = Pattern.compile("^[-+]?[0-9]+$");
 
     public static void checkNumber(String inputString) {
+
+        if (Objects.isNull(inputString)) {
+            throw new IllegalArgumentException("Found a not number(s).");
+        }
+
         if (!patternNumbersOnly.matcher(inputString).matches()) {
             throw new IllegalArgumentException("Found a not number(s).");
         }

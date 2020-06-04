@@ -1,5 +1,8 @@
 package step2.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /*
  * LOTTO GAME
  * Prize
@@ -7,36 +10,40 @@ package step2.domain;
  * 2020.05.31
  * Copyright ...
  */
-public class Prize {
+public enum Prize {
+
+    PRIZE0(0),
+    PRIZE1(1),
+    PRIZE2(2),
+    PRIZE3(3),
+    PRIZE4(4),
+    PRIZE5(5),
+    PRIZE6(6);
 
     private int matchedNumber;
     private int prizePrice;
-    private int prizeCount = 0;
+    private int prizeCount; // int initial value = 0
 
-    private static Prize prize = null;
-
-    private Prize() {
-    }
-
-    private Prize(int matchedNumber, int prizePrice) {
+    // constructor
+    Prize(int matchedNumber) {
+        this.matchedNumber = matchedNumber;
     }
 
     public static Prize of(int matchedNumber, int prizePrice) {
 
-        if (matchedNumber <= 0 || prizePrice < 0) {
+        if (matchedNumber < 0) {
             throw new IllegalArgumentException();
         }
 
-        Prize prize = new Prize();
-        prize.matchedNumber = matchedNumber;
-        prize.prizePrice = prizePrice;
+        Optional<Prize>
+                prize = Arrays.stream(Prize.values()).
+                filter(x -> x.getMatchedNumber() == matchedNumber).
+                findFirst();
 
-        return prize;
+        prize.get().prizePrice = prizePrice;
 
-    }
+        return prize.orElseThrow(IllegalArgumentException::new);
 
-    public void addCount(int count) {
-        this.prizeCount += count;
     }
 
     public int getMatchedNumber() {
@@ -51,9 +58,14 @@ public class Prize {
         return prizePrice;
     }
 
-    public int getPrizeTotal() {
+    public long getPrizeTotal() {
         return prizePrice * prizeCount;
     }
+
+    public void addWinning() {
+        this.prizeCount += 1;
+    }
+
 
 }
 
