@@ -24,9 +24,9 @@ public class LottoTickets {
     }
 
     public LottoTickets combine(final LottoTickets lottoTickets) {
-        List<LottoTicket> combinedLottoTickets = new ArrayList<>(this.lottoTickets);
-        combinedLottoTickets.addAll(lottoTickets.getLottoTickets());
-        return new LottoTickets(combinedLottoTickets);
+        List<LottoTicket> allLottoTickets = new ArrayList<>(this.lottoTickets);
+        allLottoTickets.addAll(lottoTickets.getLottoTickets());
+        return new LottoTickets(allLottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {

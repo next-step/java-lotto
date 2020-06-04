@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
 import lotto.support.LottoNumberConverter;
 import lotto.vo.Money;
@@ -36,7 +35,7 @@ class LottoStoreTest {
     @ParameterizedTest
     void buyTest(Money budget, LottoTickets manualLottoTickets) {
         //given
-        LottoStore lottoStore = new LottoStore(new LottoTicketGenerator());
+        LottoStore lottoStore = new LottoStore(new AutoLottoTicketGenerator());
 
         //when
         LottoTickets lottoTickets = lottoStore.buy(budget, manualLottoTickets);

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
 import lotto.vo.Money;
 
@@ -11,10 +10,10 @@ import java.util.List;
 import static lotto.domain.LottoGameProperty.LOTTO_TICKET_PRICE;
 
 public class LottoStore {
-    private final LottoTicketGenerator lottoTicketGenerator;
+    private final AutoLottoTicketGenerator autoLottoTicketGenerator;
 
-    public LottoStore(final LottoTicketGenerator lottoTicketGenerator) {
-        this.lottoTicketGenerator = lottoTicketGenerator;
+    public LottoStore(AutoLottoTicketGenerator autoLottoTicketGenerator) {
+        this.autoLottoTicketGenerator = autoLottoTicketGenerator;
     }
 
     public LottoTickets buy(Money budget, LottoTickets manualLottoTickets) {
@@ -29,7 +28,7 @@ public class LottoStore {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         while (currentMoney.isEnoughToBuy(LOTTO_TICKET_PRICE)) {
-            lottoTickets.add(lottoTicketGenerator.createAutoLottoTicket());
+            lottoTickets.add(autoLottoTicketGenerator.createTicket());
             currentMoney = currentMoney.spend(LOTTO_TICKET_PRICE);
         }
 
