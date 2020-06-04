@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.domain.dto.ManualLottoDto;
 import lotto.domain.vo.LottoMoney;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -32,6 +34,19 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }
+    }
+
+    public static List<ManualLottoDto> inputManualNumber(int numberOfManualTicket) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<ManualLottoDto> manualNumbersDtos = new ArrayList<>();
+
+        for (int i = 0; i < numberOfManualTicket; i++) {
+            String[] manualNumbers = SCANNER.nextLine().split(DELIMITER);
+            manualNumbersDtos.add(new ManualLottoDto(manualNumbers));
+        }
+
+        return manualNumbersDtos;
     }
 
     public static List<Integer> inputLastWinningNumbers() {

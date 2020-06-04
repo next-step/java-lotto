@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoBill;
 import lotto.domain.LottoMachine;
+import lotto.domain.dto.ManualLottoDto;
 import lotto.domain.ticket.LottoWinningTicket;
 import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
@@ -20,7 +21,9 @@ public class LottoApplication {
 
         OutputView.printNumberOfTicket(lottoMoney);
 
-        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(lottoMoney.getNumberOfAutoTicket());
+        List<ManualLottoDto> manualLottoDtos = InputView.inputManualNumber(lottoMoney.getNumberOfManualTicket());
+
+        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualLottoDtos, lottoMoney.getNumberOfAutoTicket());
 
         OutputView.printLottoTickets(lottoBill.getAllTickets());
 
