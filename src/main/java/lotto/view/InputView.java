@@ -26,13 +26,6 @@ public class InputView {
         }
     }
 
-    public static LottoWinningNumber inputWinngInfo() {
-        List<Integer> winningNumbers = inputLastWinningNumbers();
-        int bonusNumber = inputBonusNumber();
-
-        return new LottoWinningNumber(winningNumbers, bonusNumber);
-    }
-
     public static List<Integer> inputLastWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 

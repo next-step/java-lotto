@@ -22,7 +22,10 @@ public class LottoApplication {
 
         OutputView.printLottoTickets(lottoBill.getAllTickets());
 
-        LottoWinningNumber lottoWinningNumber = InputView.inputWinngInfo();
+        List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
+
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
 
         LottoResult lottoResult = lottoBill.drawAllLotto(lottoWinningNumber);
 
