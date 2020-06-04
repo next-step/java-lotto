@@ -15,11 +15,11 @@ public class Main {
 
         final String winningNumber = InputView.inputWinningNumber();
         final int bonus = InputView.inputBonusNumber();
-
+/*
         final WinningLotto winningLotto = new WinningLotto(winningNumber, bonus);
         LottosStatistics statistics = new LottosStatistics(lottosBought,
                 BigDecimal.valueOf(buyPriceAmount),
                 winningLotto);
-        OutputView.printLottoStatistics(statistics);
+        OutputView.printLottoStatistics(statistics);*/
     }
 }
