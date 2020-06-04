@@ -16,30 +16,30 @@ class WinningLottoTicketTest {
     @DisplayName("당첨 로또 생성 테스트")
     @ParameterizedTest
     @MethodSource("createWinningLottoTestCases")
-    public void generateLottoTest(List<Integer> numbers) {
-        assertThatCode(() -> WinningLottoTicket.createBy(numbers)).doesNotThrowAnyException();
+    public void generateLottoTest(List<Integer> numbers, int bonusLottoNumber) {
+        assertThatCode(() -> WinningLottoTicket.createBy(numbers, LottoNumber.of(bonusLottoNumber))).doesNotThrowAnyException();
     }
 
     private static Stream<Arguments> createWinningLottoTestCases() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            Arguments.of(Arrays.asList(10, 20, 30, 40, 41, 45))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+            Arguments.of(Arrays.asList(10, 20, 30, 40, 41, 45, 7))
         );
     }
 
     @DisplayName("당첨 로또 생성 오류 테스트")
     @ParameterizedTest
     @MethodSource("createWinningLottoExceptionTestCases")
-    public void createWinningLottoExceptionTest(List<Integer> numbers) {
+    public void createWinningLottoExceptionTest(List<Integer> numbers, int bonusLottoNumber) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> WinningLottoTicket.createBy(numbers))
+            .isThrownBy(() -> WinningLottoTicket.createBy(numbers, LottoNumber.of(bonusLottoNumber)))
             .withMessageContaining("로또의 수 범위는 1 ~ 45 까지의 입니다.");
     }
 
     private static Stream<Arguments> createWinningLottoExceptionTestCases() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 70)),
-            Arguments.of(Arrays.asList(-10, 2, 3, 9, 5, 6))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 70, 9)),
+            Arguments.of(Arrays.asList(-10, 2, 3, 9, 5, 6, 10))
         );
     }
 }
