@@ -9,6 +9,7 @@ public class Buyer {
 
     private static final int WINNING_MIN_COUNT = 3;
     private static final int WINNING_MAX_COUNT = 6;
+    private static final int LOTTO_PRIZE = 1000;
 
     private int money;
     private List<Lotto> lottoList;
@@ -22,10 +23,10 @@ public class Buyer {
         this.money = money;
         this.lottoList = lottoList;
 
-        winningListInit();
+        initWinningList();
     }
 
-    private void winningListInit() {
+    private void initWinningList() {
         winningList.put(3, new ArrayList<>());
         winningList.put(4, new ArrayList<>());
         winningList.put(5, new ArrayList<>());
@@ -34,8 +35,8 @@ public class Buyer {
 
     public void buyAutoLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        int count = this.money / 1000;
-        for(int i=0 ; i < count ; i++){
+        int count = this.money / LOTTO_PRIZE;
+        for (int i = 0; i < count; i++) {
             lottoList.add(lottoMachine.generateLotto(new ArrayList<>(new RandomLottoNumber().generateNumber())));
         }
     }
@@ -44,13 +45,14 @@ public class Buyer {
         return lottoList.size();
     }
 
-    public String getLottoListNumber() {
-        StringBuffer stringBuffer = new StringBuffer();
+    public List<List<Integer>> getLottoListNumbers() {
+        List<List<Integer>> lottoListNumbers = new ArrayList<>();
+
         lottoList.stream().forEach(lotto -> {
-            stringBuffer.append(lotto.getLottoNumber());
-            stringBuffer.append("\n");
+            lottoListNumbers.add(lotto.getLottoNumber());
         });
-        return stringBuffer.toString();
+
+        return lottoListNumbers;
     }
 
     public void checkLotto(List<Integer> winningNumbers) {
@@ -61,13 +63,13 @@ public class Buyer {
     }
 
     private void putWinningList(int rightNumberCount, Lotto lotto) {
-        if(rightNumberCount >= WINNING_MIN_COUNT)
+        if (rightNumberCount >= WINNING_MIN_COUNT)
             winningList.get(rightNumberCount).add(lotto);
     }
 
-    public ArrayList checkWin() {
-        ArrayList winCountList = new ArrayList();
-        for(int i = WINNING_MIN_COUNT ; i <= WINNING_MAX_COUNT ; i++) {
+    public List<Integer> checkWin() {
+        List<Integer> winCountList = new ArrayList();
+        for (int i = WINNING_MIN_COUNT; i <= WINNING_MAX_COUNT; i++) {
             winCountList.add(winningList.get(i).size());
         }
         return winCountList;

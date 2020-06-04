@@ -20,20 +20,13 @@ public class Lotto {
     public int checkRightNumberCount(List<Integer> winningNumbers) {
 
         int rightCount = (int) winningNumbers.stream()
-                                    .filter( winningNumber -> isContainsNumber(winningNumber))
-                                    .count();
+                .filter(winningNumber -> isContainsNumber(winningNumber))
+                .count();
 
         return rightCount;
     }
 
-    public String getLottoNumber() {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("[");
-        numberList.stream().sorted().forEach(integer -> {
-            stringBuffer.append(integer).append(", ");
-        });
-
-        stringBuffer.append("]");
-        return stringBuffer.toString();
+    public List<Integer> getLottoNumber() {
+        return numberList;
     }
 }
