@@ -19,7 +19,8 @@ public class LottoRevenueCalculator {
     private int totalMoney;
 
     public LottoRevenueCalculator(List<LottoRank> lottoRanks) {
-        this.totalSize = addMoneyAndCount(lottoRanks);
+        this.totalMoney = addMoneyAndCount(lottoRanks);
+        this.totalSize = lottoRanks.size();
     }
 
     public Map<LottoRank, Integer> getLottoRankCount() {
@@ -37,8 +38,7 @@ public class LottoRevenueCalculator {
             saveRankCount(lottoRank);
             winningMoney += lottoRank.getWinningMoney();
         }
-        this.totalMoney = winningMoney;
-        return lottoRankList.size();
+        return winningMoney;
     }
 
     private void saveRankCount(LottoRank rank) {

@@ -1,6 +1,5 @@
 package calculator;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,13 +9,8 @@ public class StringAddCalculatorTest {
 
     @Test
     void splitAndSum_null_또는_빈문자() {
-        StringAddCalculator execute = StringAddCalculator.execute(null);
-        int result = execute.sum();
-        assertThat(result).isEqualTo(0);
-
-        execute = StringAddCalculator.execute("");
-        result = execute.sum();
-        assertThat(result).isEqualTo(0);
+        assertThatThrownBy(() -> StringAddCalculator.execute(null))
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test

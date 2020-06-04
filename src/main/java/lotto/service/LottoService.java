@@ -11,11 +11,11 @@ import java.util.List;
 
 public class LottoService {
 
-    public List<LottoTicket> purchaseLottoTicket(LottoPurchaseMoney lottoPurchaseMoney) {
+    public static List<LottoTicket> purchaseLottoTicket(LottoPurchaseMoney lottoPurchaseMoney) {
         return LottoShop.publishLottoTickets(lottoPurchaseMoney);
     }
 
-    public List<LottoRank> matchLottoTicket(List<LottoTicket> lottoTicketList, LottoRankCalculator lottoRankCalculator) {
+    public static List<LottoRank> matchLottoTicket(List<LottoTicket> lottoTicketList, LottoRankCalculator lottoRankCalculator) {
         List<LottoRank> lottoRankList = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTicketList) {

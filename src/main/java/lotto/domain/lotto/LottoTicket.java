@@ -16,6 +16,10 @@ public class LottoTicket {
         lottoNumbers = LottoTicketGenerator.makeLottoTicket();
     }
 
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
     public LottoTicket(String inputValue) {
         String[] splitNumbers = inputValue.split(",");
         validateNumber(splitNumbers);
@@ -34,7 +38,7 @@ public class LottoTicket {
     }
 
     public Boolean hasBonusNumber(LottoNumber lottoBonusNumber) {
-        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.isMatch(lottoBonusNumber)).findFirst().isEmpty();
+        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.isMatch(lottoBonusNumber)).anyMatch(bonusBoolean -> bonusBoolean == true);
     }
 
     public int size() {
