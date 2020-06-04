@@ -22,8 +22,8 @@ public enum Prize {
         return price;
     }
 
-    public int calculate(int matchCount) {
-        return this.price * matchCount;
+    public int calculate(int winningCount) {
+        return this.price * winningCount;
     }
 
 }

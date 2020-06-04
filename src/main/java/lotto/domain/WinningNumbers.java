@@ -11,17 +11,17 @@ public class WinningNumbers {
 
     private List<Integer> winningNumbers;
 
-    public WinningNumbers(String winningNumber) {
-        List<Integer> winningNumbers = convertWinningNumber(winningNumber);
+    public WinningNumbers(String enteredWinNumber) {
+        List<Integer> winningNumbers = convertWinningNumber(enteredWinNumber);
         checkSize(winningNumbers);
         checkDuplicate(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
 
-    private List<Integer> convertWinningNumber(String winningNumber) {
+    private List<Integer> convertWinningNumber(String enteredWinNumber) {
         List<Integer> winningNumbers = new ArrayList<>();
-        String[] winningNumberArray = winningNumber.split(SEPARATOR);
-        for (String number : winningNumberArray) {
+        String[] enteredWinNumbers = enteredWinNumber.split(SEPARATOR);
+        for (String number : enteredWinNumbers) {
             winningNumbers.add(Integer.valueOf(number.trim()));
         }
         return winningNumbers;
