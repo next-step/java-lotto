@@ -1,3 +1,5 @@
+package utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class StringAddCalculator {
         return sumIntArray(intArray);
     }
 
-    private static List<Integer> convertToIntArray(String[] stringArray) {
+    public static List<Integer> convertToIntArray(String[] stringArray) {
         List<Integer> intList = new ArrayList<>();
         for (String s : stringArray) {
             intList.add(convertUnsignedInt(s));
