@@ -10,14 +10,22 @@ public class PositiveNumber {
     }
 
     public static PositiveNumber of(String value) {
-        if (value == null || value.isEmpty()) {
-            throw new NumberFormatException("``value` is must not be null or empty");
-        }
-        int number = Integer.parseInt(value);
+        int number = convertInt(value);
         if (number < 0) {
             throw new NumberFormatException("``value` is must be positive number");
         }
         return new PositiveNumber(number);
+    }
+
+    private static int convertInt(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new NumberFormatException("``value` is must not be null or empty");
+        }
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("``value` is must be number string");
+        }
     }
 
     public int getValue() {
