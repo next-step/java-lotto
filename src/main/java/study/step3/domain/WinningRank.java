@@ -3,11 +3,12 @@ package study.step3.domain;
 import java.util.stream.Stream;
 
 public enum WinningRank {
-    NOTHING(0,0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NOTHING(0,0);
 
     private int matchingCount;
     private long prizeMoney;
@@ -17,7 +18,11 @@ public enum WinningRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static WinningRank findRanking(long inputMatchingCount){
+    public static WinningRank findRanking(long inputMatchingCount, boolean matchBonus){
+        if (inputMatchingCount == 5 && !matchBonus){
+            return WinningRank.THIRD;
+        }
+
         return Stream.of(values())
                 .filter(rank -> isaEqualRank(inputMatchingCount, rank))
                 .findFirst()
