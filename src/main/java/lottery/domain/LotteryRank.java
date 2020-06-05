@@ -1,7 +1,5 @@
 package lottery.domain;
 
-import java.util.Arrays;
-
 public enum LotteryRank {
     FIRST_PRIZE(6, 0, 2_000_000_000),
     SECOND_PRIZE(5, 1, 30_000_000),
@@ -23,11 +21,12 @@ public enum LotteryRank {
     public static LotteryRank valueOf(int matchNumberCounts, int bonusBallCount) {
         validateMatchNumberCounts(matchNumberCounts);
         validateBonusBallCount(bonusBallCount);
-        return Arrays.stream(values())
-                .filter(lotteryRank -> lotteryRank.matchNumberCounts <= matchNumberCounts)
-                .filter(lotteryRank -> lotteryRank.bonusBallCount <= bonusBallCount)
-                .findFirst()
-                .orElse(MISS);
+        return searchLotteryRank(matchNumberCounts, bonusBallCount, new BonusBallRankSearchingStrategy());
+    }
+
+    private static LotteryRank searchLotteryRank(int matchNumberCounts, int bonusBallCount,
+                                                 RankSearchingStrategy rankSearchingStrategy) {
+        return rankSearchingStrategy.searchLotteryRank(matchNumberCounts, bonusBallCount);
     }
 
     private static void validateMatchNumberCounts(int matchNumberCounts) {
@@ -52,5 +51,9 @@ public enum LotteryRank {
 
     public int getMatchNumberCounts() {
         return matchNumberCounts;
+    }
+
+    public int getBonusBallCount() {
+        return bonusBallCount;
     }
 }
