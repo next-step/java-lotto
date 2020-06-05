@@ -16,10 +16,8 @@ class ManualLottoDtoTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,a,5,6", "1,2,,, ,4"})
     void parseStringSplits(String wrongNumbers) {
-        String[] splits = wrongNumbers.split(",");
-
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new ManualLottoDto(splits))
-                .withMessage("숫자를 입력해 주세요. - " + Arrays.toString(splits));
+                .isThrownBy(() -> new ManualLottoDto(wrongNumbers))
+                .withMessage("숫자를 입력해 주세요. - " + wrongNumbers);
     }
 }

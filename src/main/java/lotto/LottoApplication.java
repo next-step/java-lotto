@@ -38,9 +38,9 @@ public class LottoApplication {
     }
 
     private static LottoWinningTicket makeWinningTicket() {
-        List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
+        ManualLottoDto manualLottoDto = InputView.inputLastWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        return new LottoWinningTicket(winningNumbers, bonusNumber);
+        return new LottoWinningTicket(manualLottoDto, bonusNumber);
     }
 }

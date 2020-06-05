@@ -20,7 +20,7 @@ class LottoMachineTest {
     private static Stream<Arguments> provideManualLottoNumbersAndNumberOfAutoTicket() {
         return Stream.of(
                 Arguments.of(new ArrayList<ManualLottoDto>(), 2, 2),
-                Arguments.of(Arrays.asList(new ManualLottoDto(new String[]{"1", "2", "3", "4", "5", "6"})), 1, 2)
+                Arguments.of(Arrays.asList(new ManualLottoDto("1, 2, 3, 4, 5, 6")), 1, 2)
         );
     }
 
