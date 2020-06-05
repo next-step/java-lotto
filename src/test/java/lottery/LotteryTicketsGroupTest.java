@@ -68,15 +68,16 @@ public class LotteryTicketsGroupTest {
 
     @DisplayName("PurchasePrice와 수동 입력 티켓 번호들을 입력 받으면 정상적으로 티켓 리스트를 반환함")
     @ParameterizedTest
-    @ValueSource(longs = {1000, 2000, 3000, 4444, 5555})
+    @ValueSource(longs = {2000, 3000, 4000, 4444, 5555})
     public void getLotteryTicketsUsingAutoAndManual(long inputPrice) {
-        PurchasePrice purchasePrice = PurchasePrice.of(inputPrice, 0);
+        PurchasePrice purchasePrice = PurchasePrice.of(inputPrice, 2);
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
                 .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
-                .isEqualTo(purchasePrice.getAutomaticTicketCounts() + 2);
+                .isEqualTo(purchasePrice.getAutomaticTicketCounts() +
+                        purchasePrice.getManualTicketCounts());
     }
 
     @DisplayName("자동이 0개인 경우 티켓 정상 생성")

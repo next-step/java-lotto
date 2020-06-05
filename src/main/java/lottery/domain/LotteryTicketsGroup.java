@@ -42,7 +42,7 @@ public class LotteryTicketsGroup {
                 .map(LotteryTicket::publishManualLotteryTicket);
         Stream<LotteryTicket> autoTicketsStream = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
                 .limit(purchasePrice.getAutomaticTicketCounts());
-        return Stream.concat(autoTicketsStream, manualTicketsStream)
+        return Stream.concat(manualTicketsStream, autoTicketsStream)
                 .collect(Collectors.toList());
     }
 
