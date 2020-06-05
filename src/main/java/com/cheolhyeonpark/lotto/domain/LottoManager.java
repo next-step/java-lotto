@@ -1,37 +1,35 @@
 package com.cheolhyeonpark.lotto.domain;
 
+import com.cheolhyeonpark.lotto.domain.number.LottoTicket;
+import com.cheolhyeonpark.lotto.domain.number.Numbers;
+import com.cheolhyeonpark.lotto.domain.number.WinningNumbers;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoManager {
 
-    public static final int GAME_PRICE = 1_000;
+    private final LottoTicket lottoTicket;
 
-    private final LottoNumbersList lottoNumbersList;
-    private final NumbersGenerator numbersGenerator;
-
-    public LottoManager(LottoNumbersList lottoNumbersList, NumbersGenerator numbersGenerator) {
-        this.lottoNumbersList = lottoNumbersList;
-        this.numbersGenerator = numbersGenerator;
+    public LottoManager(LottoTicket lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    public LottoNumbersList createLottoNumbers(int amount, List<String> manualNumbers) {
+    public LottoTicket createLottoNumbers(Count autoCount, List<String> manualNumbers) {
         addManualNumbers(manualNumbers);
-        addAutoNumbers(amount - GAME_PRICE * manualNumbers.size());
-        return lottoNumbersList;
+        addAutoNumbers(autoCount);
+        return lottoTicket;
     }
 
     private void addManualNumbers(List<String> manualNumbers) {
-        manualNumbers.stream().map(numbersGenerator::getManualLottoNumbers).forEach(lottoNumbersList::addLottoNumbers);
+        manualNumbers.stream().map(Numbers::new).forEach(lottoTicket::addNumbers);
     }
 
-    private void addAutoNumbers(int amount) {
-        IntStream.range(0, amount / GAME_PRICE).mapToObj(i -> numbersGenerator.getAutoLottoNumbers())
-                .forEach(lottoNumbersList::addLottoNumbers);
+    private void addAutoNumbers(Count count) {
+        IntStream.range(0, count.getCount()).mapToObj(i -> new Numbers()).forEach(lottoTicket::addNumbers);
     }
 
-    public GameResult getGameResult(String winningNumbers, int bonusNumber) {
-        return lottoNumbersList.getGameResult(numbersGenerator.getWinningNumbers(winningNumbers),
-                numbersGenerator.getBonusNumber(bonusNumber));
+    public LottoResult getGameResult(WinningNumbers winningNumbers) {
+        return lottoTicket.getResult(winningNumbers);
     }
 }
