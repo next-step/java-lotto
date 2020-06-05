@@ -13,8 +13,4 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
-
-    public void setLottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
 }
