@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,21 +16,57 @@ public class LottoStoreTest {
 
     @DisplayName("지불금액만큼 로또가 구매된다.")
     @ParameterizedTest
-    @ValueSource(ints = {10000, 1500, 2000})
+    @ValueSource(ints = {2000, 3000, 4000})
     public void buyTest(int price) {
-        List<Lotto> lottos = LottoStore.buy(price);
+        LottoStore lottoStore = new LottoStore();
+        List<Lotto> lottos = lottoStore.buy(price, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+
         final int count = (int) Math.floor(price / PRICE_PER_ONE);
 
         assertThat(lottos.size()).isEqualTo(count);
     }
 
+    @DisplayName("구매된 로또에 수동번호으로 구매 요구한 로또가 생성되어있다.")
+    @Test
+    public void buyManualLottosTest() {
+        LottoStore lottoStore = new LottoStore();
+        ManualLottoMemo lottoMemo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12"));
+
+        List<Lotto> lottos = lottoStore.buy(2000, lottoMemo);
+
+        assertThat(lottos.size()).isEqualTo(2);
+        assertThat(lottos).containsOnly(Lotto.of(lottoMemo.getLottoMemo(0)), Lotto.of(lottoMemo.getLottoMemo(1)));
+    }
+
+    @DisplayName("수동번호가 없어도 정상적으로 구매가 된다.")
+    @Test
+    public void buyTestNoManual() {
+        LottoStore lottoStore = new LottoStore();
+
+        List<Lotto> lottos = lottoStore.buy(3000, ManualLottoMemo.empty());
+
+        assertThat(lottos.size()).isEqualTo(3);
+    }
+
+    @DisplayName("로또금액으로 구매할 수 있는 로또 수보다 수동으로 생성할 번호가 많으면 IllegalArgument 예외가 발생한다.")
+    @Test
+    public void buyOverManualLottosTest() {
+        LottoStore lottoStore = new LottoStore();
+
+        assertThatThrownBy(() -> {
+            lottoStore.buy(1000, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
+
     @DisplayName("로또금액은 1000원 미만으로 입력될 경우 IllegalArgument 예외가 발생한다.")
     @Test
     public void validateBuyTest() {
+        LottoStore lottoStore = new LottoStore();
         int price = 500;
 
         assertThatThrownBy(() -> {
-            List<Lotto> lottos = LottoStore.buy(price);
+            lottoStore.buy(price, ManualLottoMemo.empty());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
