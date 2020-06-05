@@ -37,10 +37,10 @@ class ManualLottoMemoTest {
     @DisplayName("입력할 로또번호들이 없어도 메모가 정상적으로 생성된다.")
     @Test
     void getLottoMemoNullEmptyTest() {
-        ManualLottoMemo manualLottoMemo = ManualLottoMemo.of(null);
+        ManualLottoMemo manualLottoMemoCase1 = ManualLottoMemo.of(null);
+        ManualLottoMemo manualLottoMemoCase2 = ManualLottoMemo.empty();
 
-        assertThat(manualLottoMemo).isNotNull();
-        assertThat(manualLottoMemo.isEmpty()).isTrue();
+        assertThat(manualLottoMemoCase1.isEmpty()).isTrue();
+        assertThat(manualLottoMemoCase2.isEmpty()).isTrue();
     }
-
 }

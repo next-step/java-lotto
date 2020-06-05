@@ -27,6 +27,10 @@ public class ManualLottoMemo {
         return new ManualLottoMemo(manualLottoStrings);
     }
 
+    public static ManualLottoMemo empty() {
+        return new ManualLottoMemo(null);
+    }
+
     public List<List<LottoNumber>> getLottoMemos() {
         return lottoMemos;
     }
