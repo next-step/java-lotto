@@ -1,16 +1,15 @@
 package step1.domain;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculater {
 
-    private final static Pattern patternCustomDelimiter = Pattern.compile("//(.)\n(.*)");
-    private final static Pattern patternNumbersOnly = Pattern.compile("^[-+]?[0-9]+$");
+    private static final Pattern patternCustomDelimiter = Pattern.compile("//(.)\n(.*)");
 
     private static final String FIXED_DELIMITER = ",|:";
-    private static String customDelimiter = "";
 
 
     public int splitAndSum(String inputString) {
@@ -19,54 +18,43 @@ public class StringAddCalculater {
             return 0;
         }
 
+        // check custom delimiter
         String token = FIXED_DELIMITER;
+        String customDelimiter = checkCustomDelimiter(inputString);
 
-        if (checkCustomDelimiter(inputString)) {
-            inputString = inputString.substring(inputString.indexOf('\n') + 1);
+        if (!customDelimiter.isEmpty()) {
             token = token + "|" + customDelimiter;
+            inputString = removeCustomDelimiter(inputString);
         }
-
 
         // split
         String[] numbers = inputString.split(token);
 
         // find a not a number(s).
-        for (String number : numbers) {
-            checkNumber(number);
-        }
-
-        // find a negative number(s).
-        if (Arrays.stream(numbers).map(Integer::parseInt).filter(number -> number < 0).count() > 0) {
-            throw new RuntimeException("Found a negative number(s)");
-        }
+        Number.checkNumber(numbers);
+        Number.checkNotNumber(numbers);
 
         // sum
-        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
 
     }
 
 
     private boolean checkEmpty(String inputString) {
         // empty check
-        if (null == inputString || inputString.isEmpty()) {
-            return true;
-        }
-        return false;
+        return Objects.isNull(inputString) || inputString.isEmpty();
     }
 
-    private boolean checkCustomDelimiter(String inputString) {
+    private String checkCustomDelimiter(String inputString) {
         Matcher matcher = patternCustomDelimiter.matcher(inputString);
-        if (matcher.find()) {
-            customDelimiter = matcher.group(1);
-            return true;
-        }
-        return false;
+        return (matcher.find()) ? matcher.group(1) : new String();
     }
 
-    private void checkNumber(String inputString) {
-        if (!patternNumbersOnly.matcher(inputString).matches()) {
-            throw new RuntimeException("Found a Not a number(s)");
-        }
+    private String removeCustomDelimiter(String inputString) {
+        inputString = inputString.substring(inputString.indexOf('\n') + 1);
+        return inputString;
     }
 
 
