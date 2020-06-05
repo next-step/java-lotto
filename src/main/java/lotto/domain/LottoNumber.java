@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.collections.WinningNumbers;
-
 public class LottoNumber {
 
 	protected final int number;
@@ -10,9 +8,8 @@ public class LottoNumber {
 		this.number = validateNumberInRange(number);
 	}
 
-	public boolean getMatchCounts(final WinningNumbers winningNumbers) {
-		return winningNumbers.getWinningNumbers().stream()
-			.anyMatch(winningNumber -> winningNumber.getNumber().equals(number));
+	public boolean compareBonusBallIdentity(LottoNumber bonusBall) {
+		return number == bonusBall.getNumber();
 	}
 
 	private int validateNumberInRange(int number) {
