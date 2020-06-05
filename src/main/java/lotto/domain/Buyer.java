@@ -13,7 +13,7 @@ public class Buyer {
 
     private int money;
     private List<Lotto> lottoList;
-    private Map<Integer, List<Lotto>> winningList = new HashMap<>();
+    private Map<Prize, List<Lotto>> winningList = new HashMap<>();
 
     public Buyer(int money) {
         this(money, new ArrayList<>());
@@ -27,10 +27,12 @@ public class Buyer {
     }
 
     private void initWinningList() {
-        winningList.put(3, new ArrayList<>());
-        winningList.put(4, new ArrayList<>());
-        winningList.put(5, new ArrayList<>());
-        winningList.put(6, new ArrayList<>());
+        winningList.put(Prize.FIRST, new ArrayList<>());
+        winningList.put(Prize.SECOND, new ArrayList<>());
+        winningList.put(Prize.THIRD, new ArrayList<>());
+        winningList.put(Prize.FOURTH, new ArrayList<>());
+        winningList.put(Prize.FIFTH, new ArrayList<>());
+        winningList.put(Prize.MISS, new ArrayList<>());
     }
 
     public void buyAutoLotto() {
@@ -55,16 +57,16 @@ public class Buyer {
         return lottoListNumbers;
     }
 
-    public void checkLotto(List<Integer> winningNumbers) {
+    public void checkLotto(List<Integer> winningNumbers, int bonusNumber) {
         lottoList.forEach(lotto -> {
-            int rightNumberCount = lotto.checkRightNumberCount(winningNumbers);
-            putWinningList(rightNumberCount, lotto);
+            Prize prize = lotto.getLottoPrize(winningNumbers, bonusNumber);
+            putWinningList(prize, lotto);
         });
     }
 
-    private void putWinningList(int rightNumberCount, Lotto lotto) {
-        if (rightNumberCount >= WINNING_MIN_COUNT)
-            winningList.get(rightNumberCount).add(lotto);
+    private void putWinningList(Prize prize, Lotto lotto) {
+        if (prize.getMatchCount() >= WINNING_MIN_COUNT)
+            winningList.get(prize).add(lotto);
     }
 
     public List<Integer> checkWin() {
@@ -74,6 +76,5 @@ public class Buyer {
         }
         return winCountList;
     }
-
 
 }
