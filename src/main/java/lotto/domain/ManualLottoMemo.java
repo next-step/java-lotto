@@ -42,4 +42,8 @@ public class ManualLottoMemo {
     public boolean isEmpty() {
         return lottoMemos.isEmpty();
     }
+
+    public int size() {
+        return lottoMemos.size();
+    }
 }

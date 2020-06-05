@@ -43,4 +43,12 @@ class ManualLottoMemoTest {
         assertThat(manualLottoMemoCase1.isEmpty()).isTrue();
         assertThat(manualLottoMemoCase2.isEmpty()).isTrue();
     }
+
+    @DisplayName("입력한 로또번호들의 수를 정상적으로 얻을 수 있다.")
+    @Test
+    void getSizeTest() {
+        ManualLottoMemo manualLottoMemo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "2,3,4,5,6,7"));
+
+        assertThat(manualLottoMemo.size()).isEqualTo(2);
+    }
 }
