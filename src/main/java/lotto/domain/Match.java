@@ -31,4 +31,12 @@ public enum Match {
                 .mapToInt(map -> map.prizeMoney)
                 .sum();
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
