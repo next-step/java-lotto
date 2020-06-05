@@ -1,5 +1,6 @@
 package study.lotto.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,6 +34,19 @@ public class Lotto {
 
     public static Lotto of(List<LottoNumber> lottoNumberList) {
         return new Lotto(lottoNumberList);
+    }
+
+    public static Lotto of(String[] lottoNumbers) {
+        List<LottoNumber> lottoNumberList = Arrays.stream(lottoNumbers)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new Lotto(lottoNumberList);
+    }
+
+    public static int calculateTotalPrice(int numOfLottos) {
+        return numOfLottos * LOTTO_PRICE;
     }
 
     public static int calculateNumOfLottos(int totalPrice) {

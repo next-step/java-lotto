@@ -1,9 +1,6 @@
 package study.lotto.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -21,6 +18,22 @@ public class Lottos {
         }
 
         return new Lottos(lottoList);
+    }
+
+    public static Lottos of(List<Lotto> lottoList) {
+        return new Lottos(lottoList);
+    }
+
+    public static Lottos merge(Lottos manualLottos, Lottos autoLottos) {
+        return Optional.ofNullable(manualLottos)
+                .map(manual -> manual.addAll(autoLottos))
+                .orElse(autoLottos);
+    }
+
+    private Lottos addAll(Lottos lottos) {
+        lottoList.addAll(lottos.lottoList);
+
+        return this;
     }
 
     public Map<LottoRank, Integer> countingByLottoRank(WinningLotto winningLotto, int bonusNumber) {
