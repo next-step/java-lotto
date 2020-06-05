@@ -1,6 +1,7 @@
 package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,8 +21,12 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Lotto의 결과를 출력하는 객체")
 class LottoResultTest {
-    private final List<LottoTicket> autoLottoTickets = Collections.singletonList(LottoTicket.autoIssued());
-    private final List<LottoTicket> manualLottoTickets = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    private List<LottoTicket> autoLottoTickets;
+
+    @BeforeEach
+    void setUp() {
+        autoLottoTickets = Collections.singletonList(LottoTicket.autoIssued());
+    }
 
     @ParameterizedTest(name = "입력 값 = {0}")
     @NullAndEmptySource
@@ -43,6 +48,9 @@ class LottoResultTest {
     @MethodSource("winnings")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
     void getResult_myWinnings(String winningNumbers, Winning winning) {
+        List<LottoTicket> manualLottoTickets
+                = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
         LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers);
         assertThat(lottoResult.getMyWinnings().get(0)).isEqualTo(winning);
     }
