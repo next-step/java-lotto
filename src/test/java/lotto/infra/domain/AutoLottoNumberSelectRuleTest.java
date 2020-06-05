@@ -1,9 +1,8 @@
-package lotto;
+package lotto.infra.domain;
 
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +13,7 @@ class AutoLottoNumberSelectRuleTest {
     @DisplayName("선택된 로또 숫자는 6개이다")
     @Test
     void select_Then_selectedNumberCountIs6() {
-        Set<Integer> selectedNumber = numberSelectRule.select();
+        LottoNumbers selectedNumber = numberSelectRule.select();
         assertThat(selectedNumber.size()).isEqualTo(6);
     }
 }

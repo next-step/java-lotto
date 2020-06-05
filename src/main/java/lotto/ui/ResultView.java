@@ -1,4 +1,7 @@
-package lotto;
+package lotto.ui;
+
+import lotto.application.LottoIssueResponse;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +10,12 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구입했습니다.", lottos.size()));
+    public static void printLottos(LottoIssueResponse response) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+                response.sizeAutoLottos(),
+                response.sizeManualLottos()));
+
+        Lottos lottos = response.getLottos();
 
         for (int i = 0; i < lottos.size(); i++) {
             printLotto(lottos.getLotto(i));
@@ -16,7 +23,8 @@ public class ResultView {
     }
 
     private static void printLotto(Lotto lotto) {
-        List<String> numbers = lotto.getNumbers().stream()
+        LottoNumbers lottoNumbers = lotto.getNumbers();
+        List<String> numbers = lottoNumbers.getNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
 

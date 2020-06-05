@@ -1,9 +1,15 @@
-package lotto;
+package lotto.ui;
+
+import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbers;
+import lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -12,9 +18,19 @@ public class InputView {
 
     private InputView() {}
 
-    public static int getPaid() {
+    public static LottoMoney getPaid() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        return LottoMoney.of(SCANNER.nextInt());
+    }
+
+    public static List<LottoNumbers> askManualNumbers() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualCount = SCANNER.nextInt();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> new LottoNumbers(parseIntSet(SCANNER.next())))
+                .collect(Collectors.toList());
     }
 
     public static WinningNumbers askWinningNumbers() {
@@ -25,6 +41,7 @@ public class InputView {
 
     private static Set<Integer> parseIntSet(String input) {
         return Arrays.stream(input.split(NUMBERS_SPLIT_DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }

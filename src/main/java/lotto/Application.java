@@ -1,16 +1,14 @@
 package lotto;
 
+import lotto.application.LottoIssueResponse;
+import lotto.application.LottoMachine;
+import lotto.ui.LottoController;
+
 public class Application {
 
     public static void main(String[] args) {
-        int paidMoney = InputView.getPaid();
-        LottoMachine machine = new LottoMachine();
-        Lottos lottos = machine.issue(paidMoney);
-        ResultView.printLottos(lottos);
-
-        WinningNumbers winningNumbers = InputView.askWinningNumbers();
-        int bonusNumber = InputView.askBonusNumber();
-        LottoResults results = lottos.checkResults(winningNumbers, bonusNumber);
-        ResultView.printResults(results);
+        LottoController lottoController = new LottoController(new LottoMachine());
+        LottoIssueResponse issueResponse = lottoController.issueLottos();
+        lottoController.rankLottos(issueResponse.getLottos());
     }
 }
