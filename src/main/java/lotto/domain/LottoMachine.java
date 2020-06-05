@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.dto.ManualLottoDto;
+import lotto.domain.dto.ManualNumberDto;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.vo.LottoMoney;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,9 +10,9 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static LottoBill purchaseLottoTicket(List<ManualLottoDto> manualLottoDtos, int numberOfAutoTicket) {
-        List<LottoTicket> lottoTickets = manualLottoDtos.stream()
-                .map(ManualLottoDto::getManualNumbers)
+    public static LottoBill purchaseLottoTicket(List<ManualNumberDto> manualNumberDtos, int numberOfAutoTicket) {
+        List<LottoTicket> lottoTickets = manualNumberDtos.stream()
+                .map(ManualNumberDto::getManualNumbers)
                 .map(LottoTicket::ofFixed)
                 .collect(Collectors.toList());
 

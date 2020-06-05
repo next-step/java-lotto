@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoBill;
 import lotto.domain.LottoMachine;
-import lotto.domain.dto.ManualLottoDto;
+import lotto.domain.dto.ManualNumberDto;
 import lotto.domain.ticket.LottoWinningTicket;
 import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
@@ -15,9 +15,9 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoMoney lottoMoney = makeLottoMoney();
 
-        List<ManualLottoDto> manualLottoDtos = InputView.inputManualNumber(lottoMoney.getNumberOfManualTicket());
+        List<ManualNumberDto> manualNumberDtos = InputView.inputManualNumber(lottoMoney.getNumberOfManualTicket());
 
-        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualLottoDtos, lottoMoney.getNumberOfAutoTicket());
+        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualNumberDtos, lottoMoney.getNumberOfAutoTicket());
 
         OutputView.printNumberOfTicket(lottoMoney);
 
@@ -38,9 +38,9 @@ public class LottoApplication {
     }
 
     private static LottoWinningTicket makeWinningTicket() {
-        ManualLottoDto manualLottoDto = InputView.inputLastWinningNumbers();
+        ManualNumberDto manualNumberDto = InputView.inputLastWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        return new LottoWinningTicket(manualLottoDto, bonusNumber);
+        return new LottoWinningTicket(manualNumberDto, bonusNumber);
     }
 }

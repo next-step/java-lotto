@@ -8,11 +8,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ManualLottoDto {
+public class ManualNumberDto {
     private static final String DELIMITER = ",";
     private final List<Integer> manualNumbers;
 
-    public ManualLottoDto(String stringNumbers) {
+    public ManualNumberDto(String stringNumbers) {
         Objects.requireNonNull(stringNumbers, "");
         try {
             this.manualNumbers = Stream.of(stringNumbers.split(DELIMITER))

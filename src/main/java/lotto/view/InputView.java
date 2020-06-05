@@ -1,14 +1,11 @@
 package lotto.view;
 
-import lotto.domain.dto.ManualLottoDto;
-import lotto.domain.vo.LottoMoney;
+import lotto.domain.dto.ManualNumberDto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -36,26 +33,26 @@ public class InputView {
         }
     }
 
-    public static List<ManualLottoDto> inputManualNumber(int numberOfManualTicket) {
+    public static List<ManualNumberDto> inputManualNumber(int numberOfManualTicket) {
         if (numberOfManualTicket < 1) {
             return Collections.emptyList();
         }
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<ManualLottoDto> manualNumbersDtos = new ArrayList<>();
+        List<ManualNumberDto> manualNumbersDtos = new ArrayList<>();
 
         for (int i = 0; i < numberOfManualTicket; i++) {
-            manualNumbersDtos.add(new ManualLottoDto(SCANNER.nextLine()));
+            manualNumbersDtos.add(new ManualNumberDto(SCANNER.nextLine()));
         }
 
         return manualNumbersDtos;
     }
 
-    public static ManualLottoDto inputLastWinningNumbers() {
+    public static ManualNumberDto inputLastWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return new ManualLottoDto(SCANNER.nextLine());
+        return new ManualNumberDto(SCANNER.nextLine());
     }
 
     public static int inputBonusNumber() {

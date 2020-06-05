@@ -1,12 +1,10 @@
 package lotto.domain.ticket;
 
-import lotto.domain.dto.ManualLottoDto;
-import lotto.domain.ticket.LottoWinningTicket;
+import lotto.domain.dto.ManualNumberDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -19,7 +17,7 @@ class LottoWinningTicketTest {
         int bonusNumber = 5;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoWinningTicket(new ManualLottoDto("1, 2, 3, 4, 5, 6"), bonusNumber))
+                .isThrownBy(() -> new LottoWinningTicket(new ManualNumberDto("1, 2, 3, 4, 5, 6"), bonusNumber))
                 .withMessage("보너스 번호는 당첨 번호와 중복 될 수 없습니다. - " + bonusNumber);
     }
 
@@ -29,7 +27,7 @@ class LottoWinningTicketTest {
         int bonusNumber = 8;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoWinningTicket(new ManualLottoDto("1, 2, 3, 4, 5, 6, 7"), bonusNumber))
+                .isThrownBy(() -> new LottoWinningTicket(new ManualNumberDto("1, 2, 3, 4, 5, 6, 7"), bonusNumber))
                 .withMessage("로또 번호는 6개만 가능합니다. - " + Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     }
 
@@ -39,7 +37,7 @@ class LottoWinningTicketTest {
         int bonusNumber = 8;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoWinningTicket(new ManualLottoDto("1, 2, 3, 3, 4, 5"), bonusNumber))
+                .isThrownBy(() -> new LottoWinningTicket(new ManualNumberDto("1, 2, 3, 3, 4, 5"), bonusNumber))
                 .withMessageContaining("로또 번호는 중복 될 수 없습니다.");
     }
 }

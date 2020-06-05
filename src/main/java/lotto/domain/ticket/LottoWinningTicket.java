@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.dto.ManualLottoDto;
+import lotto.domain.dto.ManualNumberDto;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.WinningSheet;
 
@@ -10,10 +10,10 @@ public class LottoWinningTicket {
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningTicket(ManualLottoDto manualLottoDto, int bonusNumber) {
-        validateDuplicateBonusNumber(manualLottoDto.getManualNumbers(), bonusNumber);
+    public LottoWinningTicket(ManualNumberDto manualNumberDto, int bonusNumber) {
+        validateDuplicateBonusNumber(manualNumberDto.getManualNumbers(), bonusNumber);
 
-        this.winningTicket = LottoTicket.ofFixed(manualLottoDto.getManualNumbers());
+        this.winningTicket = LottoTicket.ofFixed(manualNumberDto.getManualNumbers());
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
