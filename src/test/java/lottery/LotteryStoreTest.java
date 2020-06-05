@@ -15,7 +15,7 @@ public class LotteryStoreTest {
     @ParameterizedTest
     @ValueSource(longs = {1000, 2000, 3000, 4444})
     public void publishLotteryTicketsGroup(long userInput) {
-        PurchasePrice purchasePrice = PurchasePrice.from(userInput);
+        PurchasePrice purchasePrice = PurchasePrice.of(userInput, 0);
         LotteryStore lotteryStore = LotteryStore.getInstance();
         LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.publishLotteryTicketsGroup(purchasePrice);
 

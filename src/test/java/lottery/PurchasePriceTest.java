@@ -29,12 +29,12 @@ public class PurchasePriceTest {
     @ParameterizedTest
     @MethodSource("mockPurchasePriceBuilder")
     public void makePurchasePriceObject(long priceInput, int manualTicketCounts) {
-        PurchasePrice purchasePrice = PurchasePrice.of(userInput, manualTicketCounts);
+        PurchasePrice purchasePrice = PurchasePrice.of(priceInput, manualTicketCounts);
 
         int automaticTicketCounts = (int) ((priceInput - (1000 * manualTicketCounts)) / 1000);
 
         assertThat(purchasePrice.getPurchasePrice())
-                .isEqualTo(userInput);
+                .isEqualTo(priceInput);
         assertThat(purchasePrice.getManualTicketCounts())
                 .isEqualTo(manualTicketCounts);
         assertThat(purchasePrice.getAutomaticTicketCounts())

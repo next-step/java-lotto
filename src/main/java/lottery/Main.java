@@ -7,7 +7,8 @@ import lottery.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        PurchasePrice purchasePrice = PurchasePrice.from(InputView.getInputPurchasePrice());
+        PurchasePrice purchasePrice = PurchasePrice.of(InputView.getInputPurchasePrice(),
+                InputView.getInputManualTicketCounts());
         LotteryStore lotteryStore = LotteryStore.getInstance();
         LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.publishLotteryTicketsGroup(purchasePrice);
 

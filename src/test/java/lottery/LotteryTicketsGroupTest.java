@@ -35,12 +35,12 @@ public class LotteryTicketsGroupTest {
         assertThatCode(() -> {
             LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
             LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                    .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
+                    .publishAutomaticLotteryTicketsGroup(PurchasePrice.of(2000, 0));
         }).doesNotThrowAnyException();
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
         LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
+                .publishAutomaticLotteryTicketsGroup(PurchasePrice.of(2000, 0));
 
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);

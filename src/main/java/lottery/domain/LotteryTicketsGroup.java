@@ -22,7 +22,7 @@ public class LotteryTicketsGroup {
 
     public static LotteryTicketsGroup publishAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
         List<LotteryTicket> lotteryTickets = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
-                .limit(purchasePrice.getPurchasableLotteryTicketCounts())
+                .limit(purchasePrice.getAutomaticTicketCounts())
                 .collect(Collectors.toList());
         return new LotteryTicketsGroup(lotteryTickets);
     }

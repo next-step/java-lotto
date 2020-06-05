@@ -16,7 +16,7 @@ public class ResultView {
     public static void printLotteryGameInformation(PurchasePrice purchasePrice,
                                                    LotteryTicketsGroup lotteryTicketsGroup) {
         System.out.printf(ViewMessages.RESULT_LOTTERY_TICKET_COUNTS
-                , purchasePrice.getPurchasableLotteryTicketCounts());
+                , purchasePrice.getAutomaticTicketCounts());
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
 

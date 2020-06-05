@@ -42,7 +42,7 @@ public class LotteryGameResultTest {
     @DisplayName("수익률 계산")
     @Test
     public void getReturnOfRate() {
-        PurchasePrice purchasePrice = PurchasePrice.from(LotteryRank.FIRST_PRIZE.getPrizeMoney());
+        PurchasePrice purchasePrice = PurchasePrice.of(LotteryRank.FIRST_PRIZE.getPrizeMoney(), 0);
         LotteryGameResult lotteryGameResult = lotteryGame
                 .drawWinnerLotteryTickets(winnerTicketsGroup, lastWinnerTicket, bonusBallNumber);
 
