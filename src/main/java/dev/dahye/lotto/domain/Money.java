@@ -16,13 +16,13 @@ public class Money {
     }
 
     protected void validateMoney(int money) {
-        if (validZeroValue(money) || isNoRemainder(money)) {
+        if (mustBePositiveNumber(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
     }
 
-    private boolean validZeroValue(int money) {
-        return money == ZERO_VALUE;
+    private boolean mustBePositiveNumber(int money) {
+        return money <= ZERO_VALUE;
     }
 
     private boolean isNoRemainder(int money) {
