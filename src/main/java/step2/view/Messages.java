@@ -11,4 +11,5 @@ public class Messages {
         + "6개 일치 (%d원)- %d개\n"
         + "총 수익률은 %.2f입니다.";
     public static final String WINNING_STATISTIC_RESULT_LOSS_CASE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.\n";
 }

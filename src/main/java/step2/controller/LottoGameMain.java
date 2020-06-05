@@ -22,6 +22,7 @@ public class LottoGameMain {
             resultView.printLottos(lottoGame.getLottos());
 
             List<Integer> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
+            //int bonusNumber = inputView.inputBonusNumber();
 
             resultView.printStatistic(lottoGame.getGameResult(lastWeekWinningNumbers));
 

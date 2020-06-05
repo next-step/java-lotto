@@ -1,5 +1,6 @@
 package step2.view;
 
+import static step2.view.Messages.REQUEST_BONUS_NUMBER;
 import static step2.view.Messages.REQUEST_LAST_WEEK_WINNING_NUMBER;
 import static step2.view.Messages.REQUEST_PRICE;
 
@@ -23,5 +24,10 @@ public class InputView {
     public List<Integer> inputLastWeekWinningNumbers() {
         System.out.println(REQUEST_LAST_WEEK_WINNING_NUMBER);
         return Utils.convertStringToIntegerList(Utils.convertCsvStringToList(scanner.nextLine()));
+    }
+
+    public int inputBonusNumber() {
+        System.out.println(REQUEST_BONUS_NUMBER);
+        return scanner.nextInt();
     }
 }
