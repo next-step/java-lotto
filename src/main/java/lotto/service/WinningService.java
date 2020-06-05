@@ -26,13 +26,7 @@ public class WinningService {
 	}
 
 	public static Money calculateProfit(List<RewardType> lottoStatistics) {
-		int value = Arrays.stream(RewardType.values())
-			.filter(lottoStatistics::contains)
-			.map(type -> type.getReward().getValue() * lottoStatistics.stream()
-				.filter(element -> element.equals(type))
-				.mapToInt(i -> 1)
-				.sum())
-			.reduce(0, Integer::sum);
+		int value = RewardType.calculateProfit(lottoStatistics);
 		return new Money(value);
 	}
 
