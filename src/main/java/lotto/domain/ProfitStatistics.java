@@ -1,28 +1,16 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProfitStatistics {
 
     private static final int WIN_MIN_COUNT = 3;
-    private List<Integer> winningList;
+    private Map<Prize, List<Lotto>> winningList;
     private int money;
 
-    public ProfitStatistics(List<Integer> winningList, int money) {
+    public ProfitStatistics(Map<Prize, List<Lotto>> winningList, int money) {
         this.winningList = winningList;
         this.money = money;
-    }
-
-    public ResultDTO analysis() {
-        HashMap<Prize, Integer> resultMap = new HashMap<>();
-        AtomicInteger startIndex = new AtomicInteger(WIN_MIN_COUNT);
-
-        winningList.stream().forEach(winRanking -> {
-            resultMap.put(Prize.getMatchPrize(startIndex.getAndIncrement()), winRanking);
-        });
-
-        return new ResultDTO(resultMap, getProfitRatio());
     }
 
     public double getProfitRatio() {
@@ -30,19 +18,12 @@ public class ProfitStatistics {
     }
 
     private int calculateProfit() {
-        AtomicInteger startIndex = new AtomicInteger(WIN_MIN_COUNT);
-
-        int prizeSum = winningList.stream()
-                .mapToInt(winCount -> calculateWinningList(winCount, startIndex.getAndIncrement()))
-                .sum();
+        int prizeSum = winningList.keySet().stream().mapToInt(this::calculateWinningList).sum();
 
         return prizeSum;
     }
 
-    private int calculateWinningList(int winCount, int startIndex) {
-        if (winCount > 0) {
-            return Prize.getMatchPrize(startIndex).getWinningPrize();
-        }
-        return 0;
+    private int calculateWinningList(Prize prize) {
+        return prize.getWinningPrize() * winningList.get(prize).size();
     }
 }

@@ -57,23 +57,17 @@ public class Buyer {
         return lottoListNumbers;
     }
 
-    public void checkLotto(List<Integer> winningNumbers, int bonusNumber) {
+    public Map<Prize, List<Lotto>> checkLotto(List<Integer> winningNumbers, int bonusNumber) {
+
         lottoList.forEach(lotto -> {
             Prize prize = lotto.getLottoPrize(winningNumbers, bonusNumber);
             putWinningList(prize, lotto);
         });
+
+        return winningList;
     }
 
     private void putWinningList(Prize prize, Lotto lotto) {
-        if (prize.getMatchCount() >= WINNING_MIN_COUNT)
-            winningList.get(prize).add(lotto);
-    }
-
-    public List<Integer> checkWin() {
-        List<Integer> winCountList = new ArrayList();
-        for (int i = WINNING_MIN_COUNT; i <= WINNING_MAX_COUNT; i++) {
-            winCountList.add(winningList.get(i).size());
-        }
-        return winCountList;
+        winningList.get(prize).add(lotto);
     }
 }
