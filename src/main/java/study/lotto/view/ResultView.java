@@ -13,8 +13,9 @@ public class ResultView {
     private static final String LOTTO_RANK_STRING_FORMAT_BASIC = "%d개 일치 (%d원)- %d개";
     private static final String LOTTO_RANK_STRING_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
 
-    public static void printPurchaseMessage(int numOfLotto, Lottos lottos) {
-        System.out.println(numOfLotto + "개를 구매했습니다.");
+    public static void printPurchaseMessage(int numOfManualLottos, int numOfAutoLottos, Lottos lottos) {
+        printEmptyLine();
+        System.out.println(String.format("수동으로 %d매, 자동으로 %d매를 구매했습니다.", numOfManualLottos, numOfAutoLottos));
 
         printLottos(lottos);
         printEmptyLine();
