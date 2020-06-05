@@ -10,7 +10,7 @@ public class LotteryStore {
     }
 
     public LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
-                                                          ManualTicketsNumbersDto manualTicketsNumbersDto) {
-        return LotteryTicketsGroup.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
+                                                          ManualTicketsNumbers manualTicketsNumbers) {
+        return LotteryTicketsGroup.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
     }
 }

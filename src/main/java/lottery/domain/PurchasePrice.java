@@ -33,6 +33,10 @@ public class PurchasePrice {
         }
     }
 
+    public boolean isContainingZeroManualTicketCounts() {
+        return manualTicketCounts == ZERO_TICKET_COUNTS;
+    }
+
     public long getPurchasePrice() {
         return purchasePrice;
     }

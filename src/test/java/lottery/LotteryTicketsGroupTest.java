@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 public class LotteryTicketsGroupTest {
 
     private List<LotteryTicket> lotteryTicketList;
-    private ManualTicketsNumbersDto manualTicketsNumbersDto;
+    private ManualTicketsNumbers manualTicketsNumbers;
 
     @BeforeEach
     public void setupLotteryTicket() {
@@ -30,7 +30,7 @@ public class LotteryTicketsGroupTest {
 
         List<String[]> manualTicketsNumbers = Arrays.asList("1,2,3,4,5,6".split(","),
                 "11,12,13,14,15,16".split(","));
-        manualTicketsNumbersDto = new ManualTicketsNumbersDto(manualTicketsNumbers);
+        this.manualTicketsNumbers = new ManualTicketsNumbers(manualTicketsNumbers);
     }
 
     @DisplayName("LotteryTicketsGroup 정상 생성 테스트")
@@ -40,13 +40,13 @@ public class LotteryTicketsGroupTest {
             LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
             LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
                     .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
-                            new ManualTicketsNumbersDto(null));
+                            new ManualTicketsNumbers(null));
         }).doesNotThrowAnyException();
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
         LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
                 .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
-                        new ManualTicketsNumbersDto(null));
+                        new ManualTicketsNumbers(null));
 
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);
@@ -73,7 +73,7 @@ public class LotteryTicketsGroupTest {
         PurchasePrice purchasePrice = PurchasePrice.of(inputPrice, 2);
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getAutomaticTicketCounts() +
@@ -89,7 +89,7 @@ public class LotteryTicketsGroupTest {
                 .isEqualTo(0);
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getManualTicketCounts());
@@ -102,7 +102,7 @@ public class LotteryTicketsGroupTest {
         PurchasePrice purchasePrice = PurchasePrice.of(userInput, 0);
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbersDto(null));
+                .publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbers(null));
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getAutomaticTicketCounts());

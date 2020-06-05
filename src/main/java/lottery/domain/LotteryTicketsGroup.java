@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 public class LotteryTicketsGroup {
 
     private static final int DEFAULT_WINNER_TICKET_COUNTS = 0;
-    private static final int COUNT_ZERO = 0;
     private static final int COUNT_ONE = 1;
     private final List<LotteryTicket> lotteryTickets;
 
@@ -22,11 +21,11 @@ public class LotteryTicketsGroup {
     }
 
     public static LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
-                                                                 ManualTicketsNumbersDto manualTicketsNumbersDto) {
-        if (purchasePrice.getManualTicketCounts() == COUNT_ZERO) {
+                                                                 ManualTicketsNumbers manualTicketsNumbers) {
+        if (purchasePrice.isContainingZeroManualTicketCounts()) {
             return new LotteryTicketsGroup(publishOnlyAutomaticLotteryTicketsGroup(purchasePrice));
         }
-        return new LotteryTicketsGroup(publishMixedLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto));
+        return new LotteryTicketsGroup(publishMixedLotteryTicketsGroup(purchasePrice, manualTicketsNumbers));
     }
 
     private static List<LotteryTicket> publishOnlyAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
@@ -36,8 +35,8 @@ public class LotteryTicketsGroup {
     }
 
     private static List<LotteryTicket> publishMixedLotteryTicketsGroup(PurchasePrice purchasePrice,
-                                                                       ManualTicketsNumbersDto manualTicketsNumbersDto) {
-        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbersDto.getManualTicketsNumbers()
+                                                                       ManualTicketsNumbers manualTicketsNumbers) {
+        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbers.getManualTicketsNumbers()
                 .stream()
                 .map(LotteryTicket::publishManualLotteryTicket);
         Stream<LotteryTicket> autoTicketsStream = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)

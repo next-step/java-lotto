@@ -9,11 +9,11 @@ public class Main {
     public static void main(String[] args) {
         PurchasePrice purchasePrice =
                 PurchasePrice.of(InputView.getInputPurchasePrice(), InputView.getInputManualTicketCounts());
-        ManualTicketsNumbersDto manualTicketsNumbersDto =
-                new ManualTicketsNumbersDto(InputView.getInputManualTicketsNumbers(purchasePrice));
+        ManualTicketsNumbers manualTicketsNumbers =
+                new ManualTicketsNumbers(InputView.getInputManualTicketsNumbers(purchasePrice));
         LotteryStore lotteryStore = LotteryStore.getInstance();
         LotteryTicketsGroup lotteryTicketsGroup =
-                lotteryStore.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
+                lotteryStore.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
 
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 

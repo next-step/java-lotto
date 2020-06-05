@@ -2,7 +2,7 @@ package lottery;
 
 import lottery.domain.LotteryStore;
 import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.ManualTicketsNumbersDto;
+import lottery.domain.ManualTicketsNumbers;
 import lottery.domain.PurchasePrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +19,7 @@ public class LotteryStoreTest {
         PurchasePrice purchasePrice = PurchasePrice.of(userInput, 0);
         LotteryStore lotteryStore = LotteryStore.getInstance();
         LotteryTicketsGroup lotteryTicketsGroup =
-                lotteryStore.publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbersDto(null));
+                lotteryStore.publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbers(null));
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(userInput / 1000);
