@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.Split;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ class ManualLottoMemoTest {
         ManualLottoMemo manualLottoMemo = ManualLottoMemo.of(null);
 
         assertThat(manualLottoMemo).isNotNull();
-        assertThat(manualLottoMemo.size()).isEqualTo(0);
+        assertThat(manualLottoMemo.isEmpty()).isTrue();
     }
 
 }

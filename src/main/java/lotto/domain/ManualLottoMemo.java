@@ -35,7 +35,7 @@ public class ManualLottoMemo {
         return lottoMemos.get(index);
     }
 
-    public int size() {
-        return lottoMemos.size();
+    public boolean isEmpty() {
+        return lottoMemos.isEmpty();
     }
 }
