@@ -3,6 +3,7 @@ package lottery.domain;
 public class PurchasePrice {
 
     private static final int LOTTERY_TICKET_PRICE = 1000;
+    private static final int ZERO_TICKET_COUNTS = 0;
     private final long purchasePrice;
     private final int manualTicketCounts;
 
@@ -21,11 +22,11 @@ public class PurchasePrice {
     }
 
     private void validatePurchasePrice(long purchasePrice, int manualTicketCounts) {
-        if (manualTicketCounts < 0) {
-            throw new IllegalArgumentException("error");
+        if (manualTicketCounts < ZERO_TICKET_COUNTS) {
+            throw new IllegalArgumentException(ErrorMessages.TICKET_COUNTS_NEGATIVE);
         }
-        if (manualTicketCounts == 0 && purchasePrice < LOTTERY_TICKET_PRICE) {
-            throw new IllegalArgumentException("error");
+        if (manualTicketCounts == ZERO_TICKET_COUNTS && purchasePrice < LOTTERY_TICKET_PRICE) {
+            throw new IllegalArgumentException(ErrorMessages.PURCHASE_PRICE_NOT_ENOUGH);
         }
         if (purchasePrice < LOTTERY_TICKET_PRICE * manualTicketCounts) {
             throw new IllegalArgumentException(ErrorMessages.PURCHASE_PRICE_NOT_ENOUGH);
