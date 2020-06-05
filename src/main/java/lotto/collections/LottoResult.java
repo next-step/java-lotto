@@ -14,8 +14,9 @@ public final class LottoResult {
 	}
 
 	public double getLottoProfitRate(final int lottoTicketSize) {
-		double totalProfit = WinningService.calculateProfit(lottoStatistics).getValue();
-		return LottoProfitCalculator.getConvertProfit(totalProfit, lottoTicketSize);
+		Money profitAsMoney = WinningService.calculateProfit(lottoStatistics);
+		double totalProfitValue = profitAsMoney.getValue();
+		return LottoProfitCalculator.getConvertProfit(totalProfitValue, lottoTicketSize);
 	}
 
 	public int countTicketsByRewardType(final RewardType rewardType) {
