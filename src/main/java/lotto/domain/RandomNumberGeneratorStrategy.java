@@ -11,6 +11,7 @@ public class RandomNumberGeneratorStrategy implements NumberGeneratorStrategy{
         Collections.shuffle(Lotto.NUMBERS);
         return Lotto.NUMBERS.stream()
                 .limit(Lotto.LOTTO_NUMBERS_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
     }
 }
