@@ -48,6 +48,11 @@ public class LottoResult {
     }
 
     private void validateWinningNumbers() {
+        validateWinningNumberSize();
+        LottoNumbers.validNumberRange(winningNumbers);
+    }
+
+    private void validateWinningNumberSize() {
         if (winningNumbers.size() != WINNING_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 6자리 숫자여야 합니다.");
         }

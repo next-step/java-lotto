@@ -26,4 +26,10 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
         }
     }
+
+    public static void validNumberRange(List<Integer> number) {
+        if (!numbers.containsAll(number)) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
+        }
+    }
 }

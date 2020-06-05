@@ -30,18 +30,38 @@ class LottoResultTest {
 
     @ParameterizedTest(name = "입력 값 = {0}")
     @NullAndEmptySource
-    @DisplayName("당첨 숫자가 null이거나 빈 값인 경우 IllegalArguments exception throw")
+    @DisplayName("당첨 번호가 null이거나 빈 값인 경우 IllegalArguments exception throw")
     void winningNumbers_must_not_be_null_or_empty(String winningNumbers) {
         assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers),
                 "당첨 번호는 반드시 입력되어야 합니다.");
     }
 
     @ParameterizedTest(name = "입력 값 = {0}")
-    @ValueSource(strings = {"1, 2, 3, 4, 5"})
-    @DisplayName("당첨 숫자가 6자리가 아닌 경우 IllegalArguments exception throw")
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
+    @DisplayName("당첨 번호가 6자리가 아닌 경우 IllegalArguments exception throw")
     void winningNumbers_must_be_six_numbers(String winningNumbers) {
         assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers),
                 "당첨 번호는 6자리 숫자여야 합니다.");
+    }
+
+    @ParameterizedTest(name = "입력 값 = {0}")
+    @ValueSource(strings = {"0", "46"})
+    @DisplayName("당첨 번호가 범위에 벗어난 경우 IllegalArguments exception throw")
+    void validate_winningNumbers(int invalidNumber) {
+        String winningNumbers = "1, 2, 3, 4, 5, " + invalidNumber;
+
+        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers),
+                "로또 번호는 1 ~ 45의 숫자만 가능합니다.");
+    }
+
+    @ParameterizedTest(name = "입력 값 = {0}")
+    @ValueSource(strings = {"가", "&"})
+    @DisplayName("당첨 번호가 숫자가 아닌 경우 IllegalArguments exception throw")
+    void winningNumbers_invalid_number(String invalidNumber) {
+        String winningNumbers = "1, 2, 3, 4, 5, " + invalidNumber;
+
+        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers),
+                "당첨 번호는 숫자만 입력 가능합니다.");
     }
 
     @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
