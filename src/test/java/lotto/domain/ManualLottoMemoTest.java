@@ -13,10 +13,15 @@ class ManualLottoMemoTest {
     @DisplayName("로또 String 목록에 대한 Memo 객체가 정상적으로 생성된다.")
     @Test
     void ofTest() {
-        ManualLottoMemo manualLottoMemo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "2,3,4,5,6,7"));
+        String lottoMemo1 = "1,2,3,4,5,6";
+        String lottoMemo2 = "1,2,3,7,5,8";
+
+        ManualLottoMemo manualLottoMemo = ManualLottoMemo.of(List.of(lottoMemo1, lottoMemo2));
 
         assertThat(manualLottoMemo).isNotNull();
-        assertThat(manualLottoMemo.size()).isEqualTo(2);
+        assertThat(manualLottoMemo.getLottoMemos()).contains(
+                LottoNumberPool.get(Split.from(lottoMemo1, ",")),
+                LottoNumberPool.get(Split.from(lottoMemo2, ",")));
     }
 
     @DisplayName("Memo의 기록된 로또번호들이 정상적으로 생성된다.")
