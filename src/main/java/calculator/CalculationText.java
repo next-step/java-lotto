@@ -8,19 +8,24 @@ public class CalculationText {
     private static String delimeter = ",|:";
     private static final String delimeterDividor = "|";
     private static Pattern calculatorMatcher = Pattern.compile("//(.)\n(.*)");
+    private static String[] DEFAULT_VALUE = { "0" };
+    private String[] calculationText;
 
-    public String[] divide(String text) {
-        if (validate(text)) {
-            return new String[]{"0"};
-        }
-        return execute(text);
+    public CalculationText(String calculationText){
+        this.calculationText = (validate(calculationText))
+                                ? DEFAULT_VALUE
+                                : divideByDelimeter(calculationText);
+    }
+
+    public String[] getDivideString() {
+        return this.calculationText;
     }
 
     private boolean validate(String calculationText) {
         return calculationText == null || calculationText.isEmpty() || calculationText.isBlank();
     }
 
-    private static String[] execute(String calculationText) {
+    private String[] divideByDelimeter(String calculationText) {
         Matcher m = calculatorMatcher.matcher(calculationText);
         if (m.find()) {
             delimeter += delimeterDividor + m.group(1);
