@@ -17,7 +17,7 @@ public class LottoApplication {
 
         List<ManualNumberDto> manualNumberDtos = InputView.inputManualNumber(lottoMoney.getNumberOfManualTicket());
 
-        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualNumberDtos, lottoMoney.getNumberOfAutoTicket());
+        LottoBill lottoBill = LottoMachine.purchaseLottoTicket(manualNumberDtos, lottoMoney);
 
         OutputView.printNumberOfTicket(lottoMoney);
 
