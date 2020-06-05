@@ -27,14 +27,18 @@ public class MatchReport {
         return new MatchReport(moneyAmount, matchResult);
     }
 
-    public BigDecimal calculateRateOfReturn() {
-        BigDecimal winningMoney = BigDecimal.valueOf(this.matchResult.calculateTotalWinningMoney());
-        BigDecimal usedAmount = BigDecimal.valueOf(moneyAmount.getUsedAmount().getValue());
+    public BigDecimal calculateEarningRate() {
+        BigDecimal winningMoney = convertBigDecimal(matchResult.calculateTotalWinningMoney());
+        BigDecimal usedAmount = convertBigDecimal(moneyAmount.getUsedAmount());
 
         if (BigDecimal.ZERO.equals(usedAmount)) {
             return BigDecimal.ZERO;
         }
 
         return winningMoney.divide(usedAmount, DECIMAL_DIGIT, RoundingMode.DOWN);
+    }
+
+    private BigDecimal convertBigDecimal(Money money) {
+        return BigDecimal.valueOf(money.getValue());
     }
 }

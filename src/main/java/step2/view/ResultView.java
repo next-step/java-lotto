@@ -1,13 +1,14 @@
 package step2.view;
 
-import step2.model.LottoTicket;
-import step2.model.LottoTickets;
-import step2.model.MatchReport;
-import step2.model.MatchResult;
+import step2.model.*;
+
+import java.text.MessageFormat;
 
 public class ResultView {
 
     private static final String LINE_FEED = System.lineSeparator();
+
+    private static final String TICKET_INDICATOR = " - ";
     private static final String TICKET_UNIT = "개";
 
     private ResultView() {
@@ -36,7 +37,8 @@ public class ResultView {
 
         matchResult.getWinningResult().forEach((lottoRank, matchCount) -> {
             stringBuilder
-                    .append(lottoRank.toString())
+                    .append(getLottoRankFormat(lottoRank))
+                    .append(TICKET_INDICATOR)
                     .append(matchCount)
                     .append(TICKET_UNIT)
                     .append(LINE_FEED);
@@ -45,7 +47,17 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
+    private static String getLottoRankFormat(LottoRank lottoRank) {
+        if (lottoRank.isBonusRequired()) {
+            return MessageFormat.format("{0}개 일치, 보너스 볼 일치 ({1}원)",
+                    lottoRank.getCountOfMatch(), lottoRank.getWinningMoney());
+        }
+
+        return MessageFormat.format("{0}개 일치 ({1}원)",
+                lottoRank.getCountOfMatch(), lottoRank.getWinningMoney());
+    }
+
     public static void printMatchReport(MatchReport matchReport) {
-        System.out.println("총 수익률은 " + matchReport.calculateRateOfReturn() + "입니다.");
+        System.out.println("총 수익률은 " + matchReport.calculateEarningRate() + "입니다.");
     }
 }

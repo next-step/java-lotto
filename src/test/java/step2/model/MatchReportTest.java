@@ -5,15 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step1.Operand;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MatchReportTest {
 
@@ -33,14 +30,14 @@ class MatchReportTest {
         );
     }
 
-    @DisplayName("calculateRateOfReturn() 메서드는 총 상금에서 구입 금액을 나눈 값을 반환한다")
+    @DisplayName("calculateEarningRate() 메서드는 총 상금에서 구입 금액을 나눈 값을 반환한다")
     @Test
-    void calculateRateOfReturn_MoneyAndMatchResult_RateOfReturn() {
+    void calculateEarningRate_MoneyAndMatchResult_RateOfReturn() {
         MoneyAmount moneyAmount = LottoData.createMoneyAmount(1_000);
-        moneyAmount.useAmount(LottoTicketPrice.PRICE_1000);
+        moneyAmount.useAmount(Money.valueOf(1000));
         MatchResult matchResult = LottoData.createMatchResult(LottoRank.FIRST, 1);
         MatchReport matchReport = MatchReport.create(moneyAmount, matchResult);
 
-        assertThat(matchReport.calculateRateOfReturn()).isEqualTo(BigDecimal.valueOf(200000000,2));
+        assertThat(matchReport.calculateEarningRate()).isEqualTo(BigDecimal.valueOf(200000000,2));
     }
 }

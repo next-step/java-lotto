@@ -12,7 +12,7 @@ public class LottoTickets {
             throw new IllegalArgumentException();
         }
 
-        this.lottoTickets = lottoTickets;
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
     public static LottoTickets create(List<LottoTicket> lottoTickets) {
@@ -24,6 +24,6 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(this.lottoTickets);
+        return this.lottoTickets;
     }
 }

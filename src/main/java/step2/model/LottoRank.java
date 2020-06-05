@@ -1,54 +1,68 @@
 package step2.model;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public enum LottoRank {
 
-    MISS(0, 0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    private final static List<LottoRank> WINNING_GROUP = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+    public final static List<LottoRank> WINNING_RANKS = Collections.unmodifiableList(Arrays.asList(
+            FIRST,
+            SECOND,
+            THIRD,
+            FOURTH,
+            FIFTH
+    ));
 
-    private final int matchCount;
+    private final int countOfMatch;
     private final int winningMoney;
 
-    LottoRank(int matchCount, int winningMoney) {
-        this.matchCount = matchCount;
+    LottoRank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank findRank(int matchCount) {
+    public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(lottoRank -> isMatch(matchCount, lottoRank))
+                .filter(rank -> rank.isMatch(countOfMatch, matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
 
-    private static boolean isMatch(int matchCount, LottoRank lottoRank) {
-        return lottoRank.getMatchCount() == matchCount;
+    private boolean isMatch(int countOfMatch, boolean matchBonus) {
+        boolean matchResult = this.countOfMatch == countOfMatch;
+
+        if (this.isBonusRequired()) {
+            return matchResult && matchBonus;
+        }
+
+        return matchResult;
     }
 
-    public static List<LottoRank> getWinningRank() {
-        return Collections.unmodifiableList(WINNING_GROUP);
+    public boolean isBonusRequired() {
+        return LottoRank.SECOND.equals(this);
     }
 
     public int getWinningMoney() {
-        return this.winningMoney;
+        return winningMoney;
     }
 
-    public int getMatchCount() {
-        return this.matchCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0}개 일치 ({1}원)", matchCount, winningMoney);
+        return "LottoRank{" +
+                "countOfMatch=" + countOfMatch +
+                ", winningMoney=" + winningMoney +
+                '}';
     }
 }

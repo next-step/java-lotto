@@ -29,6 +29,14 @@ public class Money {
         return ZERO;
     }
 
+    public int divideBy(Money divisor) {
+        return this.value / divisor.getValue();
+    }
+
+    public Money multiply(int multiplier) {
+        return Money.valueOf(this.value * multiplier);
+    }
+
     public Money plus(Money money) {
         return Money.valueOf(this.value + money.getValue());
     }
