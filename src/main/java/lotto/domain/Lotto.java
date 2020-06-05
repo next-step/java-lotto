@@ -26,6 +26,19 @@ public class Lotto {
         return rightCount;
     }
 
+    public boolean checkRightBonusNumber(int bonusNumber) {
+        return numberList.stream()
+                .filter(integer -> integer == bonusNumber)
+                .findAny()
+                .isPresent();
+    }
+
+    public Prize getLottoPrize(List<Integer> winningNumbers, int bonusNumber) {
+        int rightCount = checkRightNumberCount(winningNumbers);
+        boolean isRightBonusNumber = checkRightBonusNumber(bonusNumber);
+        return Prize.valueOf(rightCount, isRightBonusNumber);
+    }
+
     public List<Integer> getLottoNumber() {
         return numberList;
     }
