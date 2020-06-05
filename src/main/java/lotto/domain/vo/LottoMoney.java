@@ -2,19 +2,20 @@ package lotto.domain.vo;
 
 public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
-    private final int purchaseAmount;
-    private final int numberOfTicket;
+    private int numberOfAutoTicket;
+    private int numberOfManualTicket;
 
-    public LottoMoney(int purchaseAmount) {
+    public LottoMoney(int purchaseAmount, int numberOfManualTicket) {
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
-        this.numberOfTicket = purchaseAmount / LOTTO_PRICE;
+        validateNumberOfManualTicket(purchaseAmount, numberOfManualTicket);
+        this.numberOfManualTicket = numberOfManualTicket;
+        this.numberOfAutoTicket = purchaseAmount / LOTTO_PRICE - numberOfManualTicket;
     }
 
     public double calculateRateOfReturn(int profit) {
-        double rateOfReturn = profit / purchaseAmount;
+        int purchaseAmount = (numberOfAutoTicket + numberOfManualTicket) * LOTTO_PRICE;
 
-        return rateOfReturn;
+        return profit / purchaseAmount;
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
@@ -23,11 +24,17 @@ public class LottoMoney {
         }
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
+    private void validateNumberOfManualTicket(int purchaseAmount, int numberOfManualTicket) {
+        if (purchaseAmount < LOTTO_PRICE * numberOfManualTicket) {
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 개수를 초과했습니다. - " + numberOfManualTicket);
+        }
     }
 
-    public int getNumberOfTicket() {
-        return numberOfTicket;
+    public int getNumberOfAutoTicket() {
+        return numberOfAutoTicket;
+    }
+
+    public int getNumberOfManualTicket() {
+        return numberOfManualTicket;
     }
 }
