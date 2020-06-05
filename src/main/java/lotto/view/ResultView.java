@@ -1,16 +1,21 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Prize;
 import lotto.domain.ResultDTO;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class ResultView implements View {
 
+    private static final String STATISTICS_START_TEXT = "당첨 통계";
+
     @Override
     public void view(Object o) {
         ResultDTO resultDTO = (ResultDTO) o;
-        Map<Prize, Integer> result = resultDTO.getResult();
+        Map<Prize, List<Lotto>> result = resultDTO.getResult();
         double profitRatio = resultDTO.getProfitRatio();
 
         printStatistics(result);
@@ -18,11 +23,11 @@ public class ResultView implements View {
 
     }
 
-    private void printStatistics(Map<Prize, Integer> resultMap) {
-        System.out.println("당첨 통계");
+    private void printStatistics(Map<Prize, List<Lotto>> resultMap) {
+        System.out.println(STATISTICS_START_TEXT);
         System.out.println("---------");
 
-        resultMap.keySet().stream().forEach(prize -> {
+        resultMap.keySet().stream().sorted(Comparator.comparingInt(Prize::getWinningPrize)).forEach(prize -> {
             printPrize(prize);
             printWinningCount(resultMap, prize);
         });
@@ -32,17 +37,22 @@ public class ResultView implements View {
         StringBuffer stringBuffer = new StringBuffer();
 
         stringBuffer.append(prize.getMatchCount())
-                .append("개 일치")
-                .append("(")
+                .append("개 일치");
+
+        if (prize.isSecondPrize(prize)) {
+            stringBuffer.append(", 보너스 볼 일치");
+        }
+
+        stringBuffer.append("(")
                 .append(prize.getWinningPrize())
-                .append(")- ");
+                .append("원)- ");
 
         System.out.print(stringBuffer.toString());
     }
 
-    private void printWinningCount(Map<Prize, Integer> resultMap, Prize prize) {
+    private void printWinningCount(Map<Prize, List<Lotto>> resultMap, Prize prize) {
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(resultMap.get(prize))
+        stringBuffer.append(resultMap.get(prize).size())
                 .append("개");
 
         System.out.println(stringBuffer.toString());

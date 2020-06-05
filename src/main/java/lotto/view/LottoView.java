@@ -7,6 +7,7 @@ public class LottoView extends TextView {
     private static final String ASK_MONEY_TEXT = "구입금액을 입력해 주세요.";
     private static final String ASK_WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String LOTTO_COUNT_POSTFIX = "개를 구매했습니다.";
+    private static final String ASK_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     @Override
     public void view(Object o) {
@@ -23,6 +24,10 @@ public class LottoView extends TextView {
 
     public void printLottoCount(int lottoCount) {
         view(lottoCount + LOTTO_COUNT_POSTFIX);
+    }
+
+    public void printAskBonusNumber() {
+        view(ASK_BONUS_NUMBER);
     }
 
     public void printLottoListNumber(List<List<Integer>> lottoListNumbers) {

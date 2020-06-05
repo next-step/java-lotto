@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Prize {
 
@@ -40,17 +38,23 @@ public enum Prize {
 
     public static Prize valueOf(int rightCount, boolean matchBonus) {
         Prize properPrize = Arrays.stream(Prize.values())
-                .filter(prize -> prize.getMatchCount() == rightCount)
+                .filter(prize -> prize.getMatchCount() <= rightCount)
                 .findFirst()
                 .orElseThrow();
 
-        return isSecondPrize(properPrize, matchBonus);
+        return matchRealPrize(properPrize, matchBonus);
     }
 
-    private static Prize isSecondPrize(Prize properPrize, boolean matchBonus) {
-        if(properPrize.getMatchCount() == SECOND.getMatchCount() && matchBonus) {
+    private static Prize matchRealPrize(Prize properPrize, boolean matchBonus) {
+        if (properPrize.getMatchCount() == SECOND.getMatchCount() && matchBonus) {
             return Prize.SECOND;
         }
         return properPrize;
     }
+
+    public static boolean isSecondPrize(Prize prize) {
+        return prize.equals(Prize.SECOND);
+    }
+
+
 }

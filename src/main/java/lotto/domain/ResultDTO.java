@@ -1,19 +1,20 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class ResultDTO {
 
-    private Map<Prize, Integer> result;
+    private Map<Prize, List<Lotto>> result;
     private double profitRatio;
 
-    public ResultDTO(Map<Prize, Integer> result, double profitRatio) {
+    public ResultDTO(Map<Prize, List<Lotto>> result, double profitRatio) {
         this.result = result;
         this.profitRatio = profitRatio;
     }
 
-    public Map<Prize, Integer> getResult() {
+    public Map<Prize, List<Lotto>> getResult() {
         return result;
     }
 
