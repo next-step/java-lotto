@@ -20,10 +20,21 @@ public class LotteryTicketsGroup {
         return new LotteryTicketsGroup(lotteryTickets);
     }
 
-    public static LotteryTicketsGroup publishAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
-        List<LotteryTicket> lotteryTickets = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
-                .limit(purchasePrice.getAutomaticTicketCounts())
+    public static LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
+                                                                 ManualTicketsNumbersDto manualTicketsNumbersDto) {
+        if (manualTicketsNumbersDto.getManualTicketsNumbers() == null) {
+            return new LotteryTicketsGroup(Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                    .limit(purchasePrice.getAutomaticTicketCounts())
+                    .collect(Collectors.toList()));
+        }
+        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbersDto.getManualTicketsNumbers().stream()
+                .map(LotteryTicket::publishManualLotteryTicket);
+
+        Stream<LotteryTicket> autoTicketsStream = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                .limit(purchasePrice.getAutomaticTicketCounts());
+        List<LotteryTicket> lotteryTickets = Stream.concat(autoTicketsStream, manualTicketsStream)
                 .collect(Collectors.toList());
+
         return new LotteryTicketsGroup(lotteryTickets);
     }
 

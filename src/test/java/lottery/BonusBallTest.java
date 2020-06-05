@@ -14,7 +14,7 @@ public class BonusBallTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     public void throwExceptionWhenBonusBallDuplicatesWinnerTicket(int bonusBallNumber) {
-        LotteryTicket lastWinnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
+        LotteryTicket lastWinnerTicket = LotteryTicket.publishManualLotteryTicket("1,2,3,4,5,6".split(","));
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     BonusBall.of(bonusBallNumber, lastWinnerTicket);

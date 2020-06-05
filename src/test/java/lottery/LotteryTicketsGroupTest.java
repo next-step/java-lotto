@@ -1,9 +1,6 @@
 package lottery;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.PurchasePrice;
+import lottery.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 public class LotteryTicketsGroupTest {
 
     private List<LotteryTicket> lotteryTicketList;
+    private ManualTicketsNumbersDto manualTicketsNumbersDto;
 
     @BeforeEach
     public void setupLotteryTicket() {
@@ -29,6 +27,10 @@ public class LotteryTicketsGroupTest {
         }
         LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
         lotteryTicketList = Arrays.asList(lotteryTicket, lotteryTicket);
+
+        List<String[]> manualTicketsNumbers = Arrays.asList("1,2,3,4,5,6".split(","),
+                "11,12,13,14,15,16".split(","));
+        manualTicketsNumbersDto = new ManualTicketsNumbersDto(manualTicketsNumbers);
     }
 
     @DisplayName("LotteryTicketsGroup 정상 생성 테스트")
@@ -37,12 +39,14 @@ public class LotteryTicketsGroupTest {
         assertThatCode(() -> {
             LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
             LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                    .publishAutomaticLotteryTicketsGroup(PurchasePrice.of(2000, 0));
+                    .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
+                            new ManualTicketsNumbersDto(null));
         }).doesNotThrowAnyException();
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
         LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                .publishAutomaticLotteryTicketsGroup(PurchasePrice.of(2000, 0));
+                .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
+                        new ManualTicketsNumbersDto(null));
 
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);
@@ -67,11 +71,9 @@ public class LotteryTicketsGroupTest {
     @ValueSource(longs = {1000, 2000, 3000, 4444, 5555})
     public void getLotteryTicketsUsingAutoAndManual(long inputPrice) {
         PurchasePrice purchasePrice = PurchasePrice.of(inputPrice, 0);
-        List<String[]> manualTicketsNumbers = Arrays.asList("1,2,3,4,5,6".split(","),
-                "11,12,13,14,15,16".split(","));
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getAutomaticTicketCounts() + 2);
@@ -85,11 +87,8 @@ public class LotteryTicketsGroupTest {
         assertThat(purchasePrice.getAutomaticTicketCounts())
                 .isEqualTo(0);
 
-        List<String[]> manualTicketsNumbers = Arrays.asList("1,2,3,4,5,6".split(","),
-                "11,12,13,14,15,16".split(","));
-
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto);
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getManualTicketCounts());
@@ -102,7 +101,7 @@ public class LotteryTicketsGroupTest {
         PurchasePrice purchasePrice = PurchasePrice.of(userInput, 0);
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
-                .publishLotteryTicketsGroup(purchasePrice, null);
+                .publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbersDto(null));
 
         assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
                 .isEqualTo(purchasePrice.getAutomaticTicketCounts());

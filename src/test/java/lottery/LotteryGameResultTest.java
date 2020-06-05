@@ -20,8 +20,8 @@ public class LotteryGameResultTest {
     @BeforeEach
     public void setupVariables() {
         lotteryGame = LotteryGame.getInstance();
-        lastWinnerTicket = LotteryTicket.from("11, 22, 33, 44, 1, 2".split(", "));
-        thirdWinnerTicket = LotteryTicket.from("11, 22, 33, 44, 9, 3".split(", "));
+        lastWinnerTicket = LotteryTicket.publishManualLotteryTicket("11, 22, 33, 44, 1, 2".split(", "));
+        thirdWinnerTicket = LotteryTicket.publishManualLotteryTicket("11, 22, 33, 44, 9, 3".split(", "));
         winnerTicketsGroup = LotteryTicketsGroup.from(
                 Arrays.asList(lastWinnerTicket, thirdWinnerTicket));
         bonusBallNumber = BonusBall.of(45, lastWinnerTicket);
