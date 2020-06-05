@@ -14,7 +14,7 @@ public class InputView {
 
     public static String enterWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumber = SCANNER.nextLine();
+        String winningNumber = SCANNER.next();
         return winningNumber;
     }
 
