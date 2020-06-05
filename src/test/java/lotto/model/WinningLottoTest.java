@@ -17,12 +17,12 @@ class WinningLottoTest {
   @BeforeAll
   static void setUp() {
     lotto_number1to6 = new Lotto(Arrays.asList(
-        new LottoNumber(1, false),
-        new LottoNumber(2, false),
-        new LottoNumber(3, false),
-        new LottoNumber(4, false),
-        new LottoNumber(5, false),
-        new LottoNumber(6, false)
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(6)
     ));
   }
 
@@ -30,7 +30,7 @@ class WinningLottoTest {
   @MethodSource("numberListProvider")
   void newInstanceByStrArr(String[] strArr, int bonusNumber, Lotto lotto) {
     assertThat(
-        WinningLotto.newInstanceByStrArr(strArr, new LottoNumber(bonusNumber, true)).getLotto())
+        WinningLotto.newInstanceByStrArr(strArr, new LottoNumber(bonusNumber)).getLotto())
         .isEqualTo(lotto);
   }
 
@@ -45,7 +45,7 @@ class WinningLottoTest {
   @MethodSource("numberListWithPrizeTierProvider")
   void getPrizeTier(String[] strArr, int bonusNumber, Lotto numbers, PrizeTier prizeTier) {
     WinningLotto winningLotto = WinningLotto
-        .newInstanceByStrArr(strArr, new LottoNumber(bonusNumber, true));
+        .newInstanceByStrArr(strArr, new LottoNumber(bonusNumber));
 
     assertThat(winningLotto.getPrizeTier(numbers)).isEqualTo(prizeTier);
   }

@@ -41,7 +41,7 @@ public class LottoNumberPool {
     Collections.shuffle(numbers);
 
     List<LottoNumber> result = numbers.stream().limit(Lotto.LOTTO_SIZE)
-        .map(i -> new LottoNumber(i, false)).sorted(LottoNumber::compareTo)
+        .map(i -> new LottoNumber(i)).sorted(LottoNumber::compareTo)
         .collect(Collectors.toList());
 
     return result;

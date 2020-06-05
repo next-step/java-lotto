@@ -5,13 +5,11 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
 
   private final int number;
-  private final boolean isBonusNumber;
 
-  public LottoNumber(int number, boolean isBonusNumber) {
+  public LottoNumber(int number) {
     checkLottoNumberRange(number);
 
     this.number = number;
-    this.isBonusNumber = isBonusNumber;
   }
 
   private void checkLottoNumberRange(int number) {
@@ -34,13 +32,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
       return false;
     }
     LottoNumber that = (LottoNumber) o;
-    return number == that.number &&
-        isBonusNumber == that.isBonusNumber;
+    return number == that.number;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(number, isBonusNumber);
+    return Objects.hash(number);
   }
 
   @Override

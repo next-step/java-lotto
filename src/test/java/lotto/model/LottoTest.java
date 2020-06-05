@@ -22,20 +22,20 @@ class LottoTest {
   static Stream<Arguments> numberListProvider() {
     return Stream.of(
         arguments(Arrays.asList(
-            new LottoNumber(1, false),
-            new LottoNumber(2, false),
-            new LottoNumber(3, false),
-            new LottoNumber(4, false),
-            new LottoNumber(5, false),
-            new LottoNumber(6, false)
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
         )),
         arguments(Arrays.asList(
-            new LottoNumber(1, false),
-            new LottoNumber(2, false),
-            new LottoNumber(3, false),
-            new LottoNumber(4, false),
-            new LottoNumber(5, false),
-            new LottoNumber(42, false)
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(42)
         ))
     );
   }
@@ -72,12 +72,12 @@ class LottoTest {
   @Test
   void has() {
     assertThat(new Lotto(Arrays.asList(
-        new LottoNumber(1, false),
-        new LottoNumber(2, false),
-        new LottoNumber(3, false),
-        new LottoNumber(4, false),
-        new LottoNumber(5, false),
-        new LottoNumber(42, false)
-    )).has(new LottoNumber(1, true))).isEqualTo(true);
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(42)
+    )).has(new LottoNumber(1))).isEqualTo(true);
   }
 }

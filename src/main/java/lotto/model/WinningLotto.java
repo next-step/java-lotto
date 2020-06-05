@@ -16,7 +16,7 @@ public class WinningLotto {
 
   public static WinningLotto newInstanceByStrArr(String[] numberArr, LottoNumber bonusNumber) {
     List<LottoNumber> numberList = Stream.of(numberArr)
-        .map(num -> new LottoNumber(Integer.parseInt(num.trim()), false))
+        .map(num -> new LottoNumber(Integer.parseInt(num.trim())))
         .collect(Collectors.toList());
 
     if (numberList.stream().anyMatch(number -> number.compareTo(bonusNumber) == 0)) {

@@ -28,7 +28,7 @@ public class LottoController {
 
     LottoView.printWinningBonusNumberRequestMsg();
 
-    LottoNumber bonusNumber = new LottoNumber(scanner.nextInt(), true);
+    LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
 
     WinningLotto winningLotto = WinningLotto.newInstanceByStrArr(winningNumberArr, bonusNumber);
 

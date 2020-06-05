@@ -14,7 +14,7 @@ public class LottoNumberTest {
   @MethodSource("wrongNumberListProvider")
   void checkLottoNumberRange(int number) {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      new LottoNumber(number, false);
+      new LottoNumber(number);
     });
   }
 
