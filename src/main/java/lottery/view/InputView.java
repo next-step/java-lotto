@@ -14,6 +14,11 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
+    public static int getInputManualLotteryTicketCounts() {
+        System.out.println(ViewMessages.INSTRUCTION_MANUAL_LOTTERY_TICKET_COUNTS);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public static String[] getInputLastWinnerTicketNumbers() {
         System.out.println(ViewMessages.INSTRUCTION_LOTTERY_WINNER_NUMBERS);
         return scanner.nextLine()

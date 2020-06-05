@@ -3,6 +3,8 @@ package lottery.view;
 public class ViewMessages {
 
     public static final String INSTRUCTION_PURCHASE_PRICE = "로또 구입 금액을 입력해주세요.";
+    public static final String INSTRUCTION_MANUAL_LOTTERY_TICKET_COUNTS = "수동으로 구매할 로또 수를 입력하세요.";
+    public static final String INSTRUCTION_MANUAL_LOTTERY_TICKETS_NUMBERS = "수동으로 구매할 번호를 입력하세요.";
     public static final String INSTRUCTION_LOTTERY_WINNER_NUMBERS = "지난 주 당첨 번호를 입력하세요.";
     public static final String INSTRUCTION_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
 
