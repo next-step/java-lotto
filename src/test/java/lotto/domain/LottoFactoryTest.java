@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoFactoryTest {
 
-    @DisplayName("구입 금액이 음수인 경우 예외가 발생한다")
+    @DisplayName("구입 금액이 1000원 미만인 경우 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(ints = {-1, -2, -4})
+    @ValueSource(ints = {-1, -2, -4, 999})
     public void whenInputNegativeThenExceptionTest(int price){
         // then
         assertThatIllegalArgumentException().isThrownBy(

@@ -23,8 +23,8 @@ public class LottoFactory {
     }
 
     private static void validationCheck(int totalPrice) {
-        if (totalPrice < 0) {
-            throw new IllegalArgumentException("구입금액은 음수를 입력할 수 없습니다.");
+        if (totalPrice < 1000) {
+            throw new IllegalArgumentException("구입금액은 최소 1000원 이상입니다.");
         }
     }
 }
