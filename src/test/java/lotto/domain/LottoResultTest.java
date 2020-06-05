@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -32,7 +33,10 @@ class LottoResultTest {
     @Test
     void makeMatchesTest(){
         // given
-        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7))));
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7));
+
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 9, 10));
 
         // when
@@ -42,6 +46,42 @@ class LottoResultTest {
 
         // then
         assertThat(lottoResult.getMatches()).hasSize(2);
+    }
 
+    @DisplayName("LottoResult 생성시 통계 결과 반환")
+    @Test
+    void whenCreateLottoResultThenReturnStatistics(){
+        // given
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7));
+        Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7));
+
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 9, 10));
+
+        // when
+        LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
+        Map<Match, Integer> matchResult = lottoResult.getMatchResult();
+
+        // then
+        assertThat(matchResult.get(Match.THREE)).isEqualTo(1);
+        assertThat(matchResult.get(Match.FOUR)).isEqualTo(2);
+    }
+
+    @DisplayName("LottoResult 생성 후 구매금액 입력 시 수익률 반환")
+    @Test
+    void whenInputPurchasePriceReturnRate(){
+        // given
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7));
+
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 9, 10));
+
+        // when
+        LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
+        double returnRate = lottoResult.getReturnRate(3000);
+
+        assertThat(returnRate).isEqualTo(18.33);
     }
 }

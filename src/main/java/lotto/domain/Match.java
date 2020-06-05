@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Match {
     THREE(3, 5000),
@@ -23,5 +24,11 @@ public enum Match {
                 .filter(match -> match.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static int priceMoneySum(List<Match> matches){
+        return matches.stream()
+                .mapToInt(map -> map.prizeMoney)
+                .sum();
     }
 }
