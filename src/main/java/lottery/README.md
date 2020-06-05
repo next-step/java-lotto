@@ -7,7 +7,7 @@
     * 객체 생성시 입력받은 금액과 수동 구매 희망 티켓 개수를 계산하여 금액 부족시 예외 발생
     * 해당 금액으로 구매할 수 있는 로또 티켓의 개수를 반환함
 
-* ManualTicketsNumbersDto
+* ManualTicketsNumbers
     * 수동 입력한 로또 티켓 번호 문자열들의 리스트(List<String[]>)를 가지고 있는 객체.
    
 * LotteryStore

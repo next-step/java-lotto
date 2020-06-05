@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public class LotteryTicketsGroup {
 
     private static final int DEFAULT_WINNER_TICKET_COUNTS = 0;
+    private static final int COUNT_ZERO = 0;
     private static final int COUNT_ONE = 1;
     private final List<LotteryTicket> lotteryTickets;
 
@@ -22,20 +23,27 @@ public class LotteryTicketsGroup {
 
     public static LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
                                                                  ManualTicketsNumbersDto manualTicketsNumbersDto) {
-        if (manualTicketsNumbersDto.getManualTicketsNumbers() == null) {
-            return new LotteryTicketsGroup(Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
-                    .limit(purchasePrice.getAutomaticTicketCounts())
-                    .collect(Collectors.toList()));
+        if (purchasePrice.getManualTicketCounts() == COUNT_ZERO) {
+            return new LotteryTicketsGroup(publishOnlyAutomaticLotteryTicketsGroup(purchasePrice));
         }
-        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbersDto.getManualTicketsNumbers().stream()
-                .map(LotteryTicket::publishManualLotteryTicket);
+        return new LotteryTicketsGroup(publishMixedLotteryTicketsGroup(purchasePrice, manualTicketsNumbersDto));
+    }
 
+    private static List<LotteryTicket> publishOnlyAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
+        return Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                .limit(purchasePrice.getAutomaticTicketCounts())
+                .collect(Collectors.toList());
+    }
+
+    private static List<LotteryTicket> publishMixedLotteryTicketsGroup(PurchasePrice purchasePrice,
+                                                                       ManualTicketsNumbersDto manualTicketsNumbersDto) {
+        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbersDto.getManualTicketsNumbers()
+                .stream()
+                .map(LotteryTicket::publishManualLotteryTicket);
         Stream<LotteryTicket> autoTicketsStream = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
                 .limit(purchasePrice.getAutomaticTicketCounts());
-        List<LotteryTicket> lotteryTickets = Stream.concat(autoTicketsStream, manualTicketsStream)
+        return Stream.concat(autoTicketsStream, manualTicketsStream)
                 .collect(Collectors.toList());
-
-        return new LotteryTicketsGroup(lotteryTickets);
     }
 
     public List<List<Integer>> getLotteryTicketsNumbers() {
