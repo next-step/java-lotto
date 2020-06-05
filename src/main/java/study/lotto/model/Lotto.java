@@ -39,7 +39,7 @@ public class Lotto {
     public static Lotto of(String[] lottoNumbers) {
         List<LottoNumber> lottoNumberList = Arrays.stream(lottoNumbers)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumberList);
@@ -65,7 +65,7 @@ public class Lotto {
     }
 
     private boolean containsBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+        return lottoNumbers.contains(LottoNumber.of(bonusNumber));
     }
 
     public LottoRank checkLottoRank(WinningLotto winningLotto, int bonusNumber) {

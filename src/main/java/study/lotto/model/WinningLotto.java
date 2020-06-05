@@ -14,7 +14,7 @@ public class WinningLotto {
     public static WinningLotto of(String[] winningNumbers) {
         List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers)
                                                 .map(Integer::parseInt)
-                                                .map(LottoNumber::new)
+                                                .map(LottoNumber::of)
                                                 .collect(Collectors.toList());
 
         return new WinningLotto(Lotto.of(winningNumberList));

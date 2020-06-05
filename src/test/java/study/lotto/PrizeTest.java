@@ -21,7 +21,7 @@ public class PrizeTest {
     @ParameterizedTest
     @ValueSource(strings = { "1, 2, 3, 4, 5, 6", "2, 3, 4, 7, 9, 12" })
     void check_prize(String input) {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::of).collect(Collectors.toList());
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = input.split(", ");
@@ -36,7 +36,7 @@ public class PrizeTest {
     @DisplayName("로또 당첨금 계산 - 2등")
     @Test
     void check_prize_should_return_second_prize() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::of).collect(Collectors.toList());
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = "1, 3, 5, 7, 10, 12".split(", ");

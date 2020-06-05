@@ -16,7 +16,7 @@ public class Statistics {
     }
 
     private void validateBonusNumber(WinningLotto winningLotto, int bonusNumber) {
-        if(winningLotto.contains(new LottoNumber(bonusNumber))) {
+        if(winningLotto.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException("당첨 번호에 보너스볼 번호가 포함되면 안됩니다.");
         }
     }

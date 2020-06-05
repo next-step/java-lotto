@@ -23,7 +23,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 3, 5, 7, 23, 45 })
     void create_lotto_number_with_proper_values(int value) {
-        assertThat(new LottoNumber(value))
+        assertThat(LottoNumber.of(value))
                 .isInstanceOf(LottoNumber.class);
     }
 
@@ -31,7 +31,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = { -1, 0, 46, 80 })
     void create_lotto_number_with_improper_values(int value) {
-        assertThatThrownBy(() -> new LottoNumber(value))
+        assertThatThrownBy(() -> LottoNumber.of(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,8 +39,8 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource(value = { "1:1", "1:2", "10:20" }, delimiterString = ":")
     void compare_lotto_number(int a, int b) {
-        assertThat(new LottoNumber(a))
-                .isLessThanOrEqualTo(new LottoNumber(b));
+        assertThat(LottoNumber.of(a))
+                .isLessThanOrEqualTo(LottoNumber.of(b));
     }
 
     @DisplayName("로또 생성 테스트")
@@ -59,7 +59,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(strings = { "1, 2, 3, 4, 5, 6", "2, 3, 4, 7, 9, 12" })
     void compare_lotto_to_winning_numbers(String input) {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11).map(LottoNumber::of).collect(Collectors.toList());
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = input.split(", ");
