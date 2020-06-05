@@ -23,7 +23,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket autoIssued() {
-        return new LottoTicket(LottoNumbers.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
+        return new LottoTicket(LottoNumberMaker.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
     }
 
     public static LottoTicket manualIssued(List<Integer> lottoNumbers) {
