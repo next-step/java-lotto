@@ -24,10 +24,6 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    private List<Integer> getNumbers(Numbers numbers) {
-        return numbers.getNumbers();
-    }
-
     private void checkSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != END_LOTTO_RANGE) {
             throw new IllegalArgumentException("당첨 번호는" + END_LOTTO_RANGE + "개 입니다");
@@ -39,6 +35,10 @@ public class LottoNumbers {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개 입니다.");
         }
+    }
+
+    private List<Integer> getNumbers(Numbers numbers) {
+        return numbers.getNumbers();
     }
 
     public List<Integer> getLottoNumbers() {
