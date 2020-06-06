@@ -39,9 +39,13 @@
    - [X] Test Passes
    - [X] Refactor
 3. 생성된 객체 수만큼 로또 발급(중복체크)
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
+3.5 로또 번호 뷰
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 4. 당첨번호입력 / 저장
    - [ ] Test fails
    - [ ] Test Passes
