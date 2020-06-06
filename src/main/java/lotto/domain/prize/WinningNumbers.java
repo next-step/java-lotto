@@ -1,5 +1,7 @@
 package lotto.domain.prize;
 
+import lotto.domain.lotto.LottoNumbers;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,9 +42,9 @@ public class WinningNumbers {
         }
     }
 
-    public int getMatchCount(List<Integer> lottoNumber) {
+    public int getMatchCount(LottoNumbers lottoNumbers) {
         int matchCount = 0;
-        for (int number : lottoNumber) {
+        for (int number : lottoNumbers.getLottoNumbers()) {
             matchCount += checkMatch(number);
         }
         return matchCount;
