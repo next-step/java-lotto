@@ -40,10 +40,9 @@ public class LottoNumberPool {
   public List<LottoNumber> quickPick() {
     Collections.shuffle(numbers);
 
-    List<LottoNumber> result = numbers.stream().limit(Lotto.LOTTO_SIZE)
-        .map(i -> new LottoNumber(i)).sorted(LottoNumber::compareTo)
+    return numbers.stream()
+        .limit(Lotto.LOTTO_SIZE)
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
-
-    return result;
   }
 }
