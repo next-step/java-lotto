@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 public class Lotto {
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> inputNumber) {
-        lottoNumbers = inputNumber;
+    public Lotto(List<Integer> inputLottoNumber) {
+        lottoNumbers = inputLottoNumber;
     }
 
     public List<Integer> getLottonumbers() {
