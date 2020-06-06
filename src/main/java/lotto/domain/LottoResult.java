@@ -11,7 +11,7 @@ public class LottoResult {
         this.lottoPrizeList = lottoPrizeList;
     }
 
-    public Map<Integer, Integer> matchLottoCount() {
+    public Map<Integer, Integer> matchResult() {
         Map<Integer, Integer> result = new HashMap<>();
         lottoPrizeList.stream().filter(lottoPrize -> lottoPrize != LottoPrize.MISS)
                 .forEach(lottoPrize -> {

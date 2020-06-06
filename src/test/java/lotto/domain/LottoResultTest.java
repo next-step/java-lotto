@@ -38,9 +38,9 @@ class LottoResultTest {
 
     @Test
     @DisplayName("맞춘 번호 개수별 합계 확인")
-    void matchLottoCount() {
+    void matchResult() {
         LottoResult lottoResult = new LottoResult(lottoPrizeList);
-        Map<Integer, Integer> resultMap = lottoResult.matchLottoCount();
+        Map<Integer, Integer> resultMap = lottoResult.matchResult();
 
         assertAll(
                 () -> assertThat(resultMap.get(3)).isEqualTo(1),
