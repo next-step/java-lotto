@@ -6,20 +6,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private List<Integer> LottoNumbers;
+    private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> inputNumber) {
-        LottoNumbers = inputNumber;
+        lottoNumbers = inputNumber;
     }
 
     public List<Integer> getLottonumbers() {
-        return Collections.unmodifiableList(LottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int checkWinningCount(List<Integer> winningNumbers) {
         int cnt = 0;
         for (Integer number : winningNumbers) {
-            if (LottoNumbers.contains(number)) {
+            if (lottoNumbers.contains(number)) {
                 cnt++;
             }
         }
