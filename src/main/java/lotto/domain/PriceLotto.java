@@ -32,7 +32,11 @@ public class PriceLotto {
         }
     }
 
-    public int get() {
+    public BigDecimal get() {
+        return price;
+    }
+
+    public int getIntValue() {
         return price.intValue();
     }
 }

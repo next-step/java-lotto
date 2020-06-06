@@ -22,7 +22,7 @@ public class LottoStore {
     }
 
     private int getCountPossibleBuyAutoLotto(PriceLotto price, ManualLottoMemo manualLottoMemo) {
-        return ((int) Math.floor(price.get() / LOTTO_PRICE_PER_ONE)) - manualLottoMemo.size();
+        return ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoMemo.size();
     }
 
     private List<Lotto> generator() {
@@ -32,13 +32,13 @@ public class LottoStore {
     }
 
     private static void validatePrice(PriceLotto price) {
-        if(price.get() < LOTTO_PRICE_PER_ONE) {
+        if(price.getIntValue() < LOTTO_PRICE_PER_ONE) {
             throw new IllegalArgumentException("입력된 금액이 로또구매 최소금액보다 작습니다.");
         }
     }
 
     private static void validatePriceOverManualLottoCount(PriceLotto price, ManualLottoMemo manualLottoMemo) {
-        if(price.get() < manualLottoMemo.size() * LOTTO_PRICE_PER_ONE) {
+        if(price.getIntValue() < manualLottoMemo.size() * LOTTO_PRICE_PER_ONE) {
             throw new IllegalArgumentException("입력된 금액으로는 원하시는 수동 로또 수 만큼 구매할 수 없습니다.");
         }
     }
