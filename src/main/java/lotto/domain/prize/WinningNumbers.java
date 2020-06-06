@@ -31,7 +31,7 @@ public class WinningNumbers {
 
     private void checkSize(List<Integer> winningNumbers) {
         if (winningNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("당첨 번호는" + LOTTO_NUMBER_SIZE + "개 입니다");
+            throw new IllegalArgumentException("당첨 번호는 " + LOTTO_NUMBER_SIZE + "개 입니다" + winningNumbers.size());
         }
     }
 
