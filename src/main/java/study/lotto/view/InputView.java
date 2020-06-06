@@ -36,6 +36,10 @@ public class InputView {
     public static List<Lotto> scanManualLottoNumbers(int num) {
         List<Lotto> lottos = new ArrayList<>();
 
+        if(num <= 0) {
+            return lottos;
+        }
+
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
         for(int i=0; i<num; i++) {

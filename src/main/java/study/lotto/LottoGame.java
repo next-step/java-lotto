@@ -13,21 +13,13 @@ public class LottoGame {
 
     public static void main(String[] args) {
         int totalPrice = InputView.scanTotalPrice();
+        int numOfLottos = Lotto.calculateNumOfLottos(totalPrice);
         int numOfManualLottos = InputView.scanNumOfManualLottos();
 
-        Lottos manualLottos = null;
+        Lottos lottos = Lottos.of(InputView.scanManualLottoNumbers(numOfManualLottos));
 
-        if(numOfManualLottos > 0) {
-            List<Lotto> lottoList = InputView.scanManualLottoNumbers(numOfManualLottos);
-            manualLottos = Lottos.of(lottoList);
-        }
-
-        int manualLottosTotalPrice = Lotto.calculateTotalPrice(numOfManualLottos);
-        int numOfAutoLottos = Lotto.calculateNumOfLottos(totalPrice - manualLottosTotalPrice);
-
-        Lottos autoLottos = Lottos.of(numOfAutoLottos);
-
-        Lottos lottos = Lottos.merge(manualLottos, autoLottos);
+        int numOfAutoLottos = numOfLottos - numOfManualLottos;
+        lottos.addAll(Lottos.of(numOfAutoLottos));
 
         ResultView.printPurchaseMessage(numOfManualLottos, numOfAutoLottos, lottos);
 

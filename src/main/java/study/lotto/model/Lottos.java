@@ -24,16 +24,8 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos merge(Lottos manualLottos, Lottos autoLottos) {
-        return Optional.ofNullable(manualLottos)
-                .map(manual -> manual.addAll(autoLottos))
-                .orElse(autoLottos);
-    }
-
-    private Lottos addAll(Lottos lottos) {
-        this.lottos.addAll(lottos.lottos);
-
-        return this;
+    public void addAll(Lottos otherLottos) {
+        lottos.addAll(otherLottos.lottos);
     }
 
     public Map<LottoRank, Integer> countingByLottoRank(WinningLotto winningLotto, int bonusNumber) {

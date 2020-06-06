@@ -45,10 +45,6 @@ public class Lotto {
         return new Lotto(lottoNumberList);
     }
 
-    public static int calculateTotalPrice(int numOfLottos) {
-        return numOfLottos * LOTTO_PRICE;
-    }
-
     public static int calculateNumOfLottos(int totalPrice) {
         return totalPrice / LOTTO_PRICE;
     }
