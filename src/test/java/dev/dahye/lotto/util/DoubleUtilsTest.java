@@ -14,7 +14,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class DoubleUtilsTest {
     @ParameterizedTest(name = "input = {0}, expected = {1}")
     @MethodSource("doubleValues")
-    @DisplayName("소수점 둘째 자리 이후 올림")
+    @DisplayName("소수점 둘째 자리 이후 반올림")
     void double_utils(double input, double expected) {
         assertThat(DoubleUtils.parseDoubleSecondDigit(input)).isEqualTo(expected);
     }
