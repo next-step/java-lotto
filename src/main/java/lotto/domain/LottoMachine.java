@@ -17,10 +17,7 @@ public class LottoMachine {
         }
     }
 
-    public LottoMachine() {
-    }
-
-    public List<Integer> raffle() {
+    public static List<Integer> raffle() {
         Collections.shuffle(numbers);
         return numbers.subList(0, 6).stream()
                 .sorted().collect(Collectors.toList());

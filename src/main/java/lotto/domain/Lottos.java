@@ -13,9 +13,8 @@ public class Lottos {
     }
 
     public void drawLotto() {
-        LottoMachine machine = new LottoMachine();
         for (int idx = 0; idx < lottoCount; idx++) {
-            lottos.add(new Lotto(machine.raffle()));
+            lottos.add(new Lotto(LottoMachine.raffle()));
         }
     }
 

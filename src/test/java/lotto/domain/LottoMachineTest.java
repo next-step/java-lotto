@@ -12,8 +12,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("로또 뽑기")
     void raffle() {
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Integer> result = lottoMachine.raffle();
+        List<Integer> result = LottoMachine.raffle();
 
         assertThat(result).hasSize(6);
     }
