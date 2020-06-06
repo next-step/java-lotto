@@ -23,4 +23,17 @@ public class PurchaseService {
 
 		return new LottoTickets(lottoTicketList);
 	}
+
+	public static LottoTickets purchase2(final Money money) {
+		final int numberOfPurchasedLotto = money.getNumberOfPurchasedLotto();
+
+		List<LottoTicket> lottoTicketList = new ArrayList<>();
+
+		for (int index = 0; index < numberOfPurchasedLotto; index++) {
+			List<LottoNumber> lottoNumberList = AutoLottoNumberGenerator.pickList();
+			lottoTicketList.add(new LottoTicket(lottoNumberList));
+		}
+
+		return new LottoTickets(lottoTicketList);
+	}
 }
