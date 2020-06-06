@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.Objects;
 
@@ -51,6 +52,10 @@ public class Money {
 
     public int getValue() {
         return value;
+    }
+
+    public BigDecimal toBigDecimal() {
+        return BigDecimal.valueOf(this.value);
     }
 
     @Override
