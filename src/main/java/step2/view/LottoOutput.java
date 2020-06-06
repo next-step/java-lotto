@@ -35,7 +35,7 @@ public class LottoOutput {
 
     public static void printWinningStatistics(Map<WinnerTier, Integer> WinningResult, double Yield) {
 
-        for(int i=3; i<7; i++) {
+        for(int i=(int)WinnerTier.MATCH_THREE.getMatchCnt(); i<(int)WinnerTier.MATCH_SIX.getMatchCnt(); i++) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.valueOf(i).getMatchCnt(), WinnerTier.valueOf(i).getPrize(), WinningResult.get(WinnerTier.valueOf(i)));
         }
 
