@@ -1,9 +1,14 @@
 package step3.domain;
 
-
-
 import java.util.List;
 
+/*
+ * Lotto
+ * Lotto Tickets
+ * ver. 1.0
+ * 2020.06.06.
+ * Copyright ...
+ */
 public class LottoTickets {
 
     private final List<Lotto> lottoTickets;
@@ -19,7 +24,6 @@ public class LottoTickets {
     public int getLottoTicketsSize() {
         return lottoTickets.size();
     }
-
 
 
 }

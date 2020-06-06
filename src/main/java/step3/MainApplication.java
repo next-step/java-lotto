@@ -23,7 +23,6 @@ public class MainApplication {
         // input to buy
         Money payedmoney = new Money(InputView.inputPayMoney());
 
-
         // check buy Lotto
         int gameCount = lottoGame.calculateGameCountByPayMoney(payedmoney);
 
@@ -35,13 +34,13 @@ public class MainApplication {
 
         // get Wining Number
         String winingNumber = InputView.inputWiningNumber();
-        String bonusNumber = InputView.inputBonusNumber();
 
+        String bonusNumber = InputView.inputBonusNumber();
         lottoGame.checkWiningNumber(winingNumber, bonusNumber);
 
         // matching numbers
         lottoGame.matchingWinningNumbers();
-        OutputView.outputPrizeList(lottoGame.getPrizeList());
+        OutputView.outputPrizeList();
 
         // calc ratio of win.
         OutputView.outputWinningResult(lottoGame.totalResult());

@@ -26,6 +26,9 @@ public enum Prize {
     private int prizePrice;
     private String rank;
     private int prizeCount; // int initial value = 0
+
+
+
     private boolean bonusNumberMatching;
 
     // constructor
@@ -63,12 +66,15 @@ public enum Prize {
         this.prizeCount += 1;
     }
 
+    public boolean isBonusNumberMatching() {
+        return bonusNumberMatching;
+    }
 
     public static Prize valueOf(int matchedNumber, boolean bonusNumberMatching) {
 
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.matchedNumber == matchedNumber
-                        && prize.bonusNumberMatching == bonusNumberMatching
+                .filter(prize -> prize.getMatchedNumber() == matchedNumber
+                        && prize.isBonusNumberMatching() == bonusNumberMatching
                 )
                 .findFirst()
                 .get();
@@ -76,4 +82,13 @@ public enum Prize {
 
 
 }
+
+
+
+
+
+
+
+
+
 

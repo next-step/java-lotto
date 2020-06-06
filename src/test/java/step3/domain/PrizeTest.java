@@ -26,7 +26,6 @@ class PrizeTest {
 
         Prize prize = Prize.valueOf(matchedNumber, bonusNumberMatching);
 
-
         assertThat(prize.getPrizePrice()).isEqualTo(prizePrice);
 
     }

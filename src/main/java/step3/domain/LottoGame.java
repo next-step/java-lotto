@@ -20,8 +20,6 @@ public class LottoGame {
 
     private Lotto winningNumberLotto;
 
-    private List<Prize> prizeList = new ArrayList<>();
-
     // pay
     public int calculateGameCountByPayMoney(Money money) {
 
@@ -39,24 +37,14 @@ public class LottoGame {
     public void checkWiningNumber(String winingNumber, String bonusNumber) {
 
         String[] winningNumberArray = winingNumber.split(FIXED_DELIMITER);
-
         winningNumberLotto = Lotto.checkWiningNumber(winningNumberArray, bonusNumber);
 
     }
 
-
-    public List<Prize> getPrizeList() {
-        return prizeList;
-    }
-
-
     public void matchingWinningNumbers() {
-
         lottoTickets.getLottoTickets().forEach(lotto -> {
             int matchedNumber = getWinningcount(lotto);
-            if (matchedNumber == 5) {
-                addPrize(matchedNumber, checkBonusNumberMatching(lotto));
-            }
+            addPrize(matchedNumber, checkBonusNumberMatching(lotto, matchedNumber));
         });
 
     }
@@ -77,14 +65,22 @@ public class LottoGame {
                 .isPresent();
     }
 
-    private boolean checkBonusNumberMatching(Lotto lotto) {
+    private boolean checkBonusNumberMatching(Lotto lotto, int matchedNumber) {
 
-        return lotto.getNumbers().stream()
-                .filter(lottoNumber ->
-                        lottoNumber == winningNumberLotto.getBonusNumber())
-                .findAny()
-                .isPresent();
+        List<Integer> bounsGameChanceNumbers = new ArrayList<>();
 
+        Arrays.stream(Prize.values())
+                .forEach(prize -> {
+                            if (prize.isBonusNumberMatching()) {
+                                bounsGameChanceNumbers.add(prize.getMatchedNumber());
+                            }
+                        }
+                );
+
+
+        return bounsGameChanceNumbers.contains(matchedNumber)
+                && !lotto.getNumbers().contains(winningNumberLotto.getBonusNumber())
+                ? true : false;
     }
 
 
@@ -99,7 +95,7 @@ public class LottoGame {
     public BigDecimal totalResult() {
 
         // winningResult
-        BigDecimal sum = BigDecimal.valueOf(prizeList.stream()
+        BigDecimal sum = BigDecimal.valueOf(Arrays.stream(Prize.values())
                 .mapToLong(prize -> prize.getPrizeTotal())
                 .sum());
 

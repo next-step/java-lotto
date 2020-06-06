@@ -1,11 +1,11 @@
 package step3.view.view;
 
 import step3.domain.Lotto;
-import step3.domain.Prize;
 import step3.domain.LottoTickets;
+import step3.domain.Prize;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /*
@@ -42,18 +42,18 @@ public class OutputView {
 
     }
 
-    public static void outputPrizeList(List<Prize> prizeList) {
+    public static void outputPrizeList() {
 
         System.out.println("-------------");
         System.out.println("PRIZE !! LIST");
         System.out.println("-------------");
 
-        prizeList.forEach(prize -> {
+        Arrays.stream(Prize.values()).forEach(prize -> {
             System.out.println(prize.getMatchedNumber()
                     + " matched. (" + String.format("%15d", prize.getPrizePrice())
-                    + ") : " + String.format("%3d", prize.getPrizeCount()));
-        });
+                    + ") : " + String.format("%3d", prize.getPrizeCount()) + (prize.isBonusNumberMatching() ? " with Bonus Number Match." : ""));
 
+        });
     }
 
 

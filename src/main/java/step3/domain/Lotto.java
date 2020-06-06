@@ -22,7 +22,6 @@ public class Lotto {
     // each Lotto numbers.
     private List<Integer> lottoNumbers;
 
-
     private int bonusNumber;
 
     // default 1 to LOTTO_MAX_LIMIT (45)
@@ -48,10 +47,15 @@ public class Lotto {
 
     public static Lotto auto() {
 
-        Collections.shuffle(new ArrayList<>(drawLottoNumbers()));
+        // default 1 to LOTTO_MAX_LIMIT (45)
+        List<Integer> lottoGameNumbersInner = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
+                .boxed()
+                .collect(Collectors.toList());
+
+         Collections.shuffle(lottoGameNumbersInner);
 
         // pick LOTTO_DRAW_LIMIT
-        return new Lotto(new ArrayList<>(drawLottoNumbers()));
+        return new Lotto(drawLottoNumbers(lottoGameNumbersInner));
 
     }
 
@@ -63,8 +67,8 @@ public class Lotto {
     }
 
 
-    public static List<Integer> drawLottoNumbers() {
-        return lottoGameNumbers.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
+    public static List<Integer> drawLottoNumbers(List<Integer> lottoGameNumbersInner) {
+        return lottoGameNumbersInner.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
     }
 
     public List<Integer> getNumbers() {
@@ -96,7 +100,7 @@ public class Lotto {
 
         int bonusNumberInt = Integer.valueOf(bonusNumber);
 
-        if ( bonusNumberInt > LOTTO_DRAW_BASE_NUMBER &&  bonusNumberInt <= LOTTO_MAX_LIMIT) {
+        if ( bonusNumberInt > LOTTO_DRAW_BASE_NUMBER &&  bonusNumberInt > LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException("Not matched range of bonus ball.");
         }
 
