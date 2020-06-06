@@ -8,7 +8,7 @@ public class LottoNumber {
 		this.number = validateNumberInRange(number);
 	}
 
-	public boolean compareBonusBallIdentity(LottoNumber bonusBall) {
+	public boolean compareBallIdentity(LottoNumber bonusBall) {
 		return number == bonusBall.getNumber();
 	}
 
