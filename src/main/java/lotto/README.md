@@ -63,6 +63,7 @@
 . 로또 LottoTicket
     - 구입 장 수만큼 LottoNumbers 가지는 컬렉션 객체
     - 구입 장 수만큼 로또 번호를 생성 한다
+    - 구입 장수가 0인경 체크 
      
 . 당첨 번호 WinningNumbers
     - 당첨 번호를 가지는 컬렉션 객체
