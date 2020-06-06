@@ -1,21 +1,21 @@
 package dev.dahye.lotto.domain;
 
-public class Money {
+public class LottoMoney {
     private static final int ZERO_VALUE = 0;
     private static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
-    public Money(int money) {
-        validateMoney(money);
+    public LottoMoney(int money) {
+        validate(money);
         this.money = money;
     }
 
-    public int getLottoCount() {
+    public int getCountOfLotto() {
         return money / LOTTO_PRICE;
     }
 
-    protected void validateMoney(int money) {
+    protected void validate(int money) {
         if (mustBePositiveNumber(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }

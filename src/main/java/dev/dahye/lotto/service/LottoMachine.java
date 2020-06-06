@@ -1,7 +1,7 @@
 package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
-import dev.dahye.lotto.domain.Money;
+import dev.dahye.lotto.domain.LottoMoney;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,14 +9,14 @@ import java.util.List;
 
 public class LottoMachine {
     private List<LottoTicket> lottoTickets;
-    private final Money money;
+    private final LottoMoney lottoMoney;
 
-    public LottoMachine(int money) {
-        this.money = new Money(money);
+    public LottoMachine(LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
 
         initializeTickets();
 
-        int lottoCount = this.money.getLottoCount();
+        int lottoCount = this.lottoMoney.getCountOfLotto();
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.autoIssued());
         }

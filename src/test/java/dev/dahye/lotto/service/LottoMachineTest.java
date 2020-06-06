@@ -1,5 +1,6 @@
 package dev.dahye.lotto.service;
 
+import dev.dahye.lotto.domain.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,7 +17,7 @@ class LottoMachineTest {
     @MethodSource("moneyForTicket")
     @DisplayName("로또 구입 금액을 입력하면 구입 금액 만큼 로또를 발급한다.")
     void 로또_발급(int money, int ticketCount) {
-        LottoMachine lottoMachine = new LottoMachine(money);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(money));
         assertThat(ticketCount).isEqualTo(lottoMachine.getTicketsCount());
     }
 
