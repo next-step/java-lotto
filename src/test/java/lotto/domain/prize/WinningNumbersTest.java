@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.prize;
 
+import lotto.domain.prize.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

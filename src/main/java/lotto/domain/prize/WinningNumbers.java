@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.prize;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,14 +28,16 @@ public class WinningNumbers {
     }
 
     private void checkSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != LOTTO_NUMBER_SIZE)
+        if (winningNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호는" + LOTTO_NUMBER_SIZE + "개 입니다");
+        }
     }
 
     private void checkDuplicate(List<Integer> winningNumbers) {
         Set<Integer> winNumberSet = new HashSet<>(winningNumbers);
-        if (winNumberSet.size() != LOTTO_NUMBER_SIZE)
+        if (winNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 당첨 번호가 있습니다");
+        }
     }
 
     public int getMatchCount(List<Integer> lottoNumber) {
