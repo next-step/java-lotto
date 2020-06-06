@@ -17,7 +17,7 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private List<Integer> createLottoNumbers() {
+    protected List<Integer> createLottoNumbers() {
         Collections.shuffle(getNumbers(numbers));
         List<Integer> lottoNumbers = new ArrayList<>(getNumbers(numbers).subList(START_LOTTO_RANGE, END_LOTTO_RANGE));
         Collections.sort(lottoNumbers);
