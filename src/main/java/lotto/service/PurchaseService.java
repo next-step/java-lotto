@@ -17,7 +17,7 @@ public class PurchaseService {
 		List<LottoTicket> lottoTicketList = new ArrayList<>();
 
 		for (int index = 0; index < numberOfPurchasedLotto; index++) {
-			List<LottoNumber> lottoNumberList = AutoLottoNumberGenerator.pickList();
+			List<LottoNumber> lottoNumberList = new AutoLottoNumberGenerator().pickList();
 			lottoTicketList.add(new LottoTicket(lottoNumberList));
 		}
 
