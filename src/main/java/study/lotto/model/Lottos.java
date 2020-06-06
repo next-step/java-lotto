@@ -4,24 +4,24 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public static Lottos of(int num) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         for(int i = 0; i < num; i++) {
-            lottoList.add(Lotto.auto());
+            lottos.add(Lotto.auto());
         }
 
-        return new Lottos(lottoList);
+        return new Lottos(lottos);
     }
 
-    public static Lottos of(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public static Lottos merge(Lottos manualLottos, Lottos autoLottos) {
@@ -31,7 +31,7 @@ public class Lottos {
     }
 
     private Lottos addAll(Lottos lottos) {
-        lottoList.addAll(lottos.lottoList);
+        this.lottos.addAll(lottos.lottos);
 
         return this;
     }
@@ -39,7 +39,7 @@ public class Lottos {
     public Map<LottoRank, Integer> countingByLottoRank(WinningLotto winningLotto, int bonusNumber) {
         Map<LottoRank, Integer> rankToCount = new HashMap<>();
 
-        lottoList
+        lottos
             .forEach(lotto -> {
                 LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
                 rankToCount.put(lottoRank, rankToCount.getOrDefault(lottoRank, 0) + 1);
@@ -50,6 +50,6 @@ public class Lottos {
 
     @Override
     public String toString() {
-        return lottoList.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+        return lottos.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
     }
 }

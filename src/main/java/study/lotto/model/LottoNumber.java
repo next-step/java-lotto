@@ -15,15 +15,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(int number) {
-        validateLottoNumber(number);
         this.number = number;
     }
 
     public static LottoNumber of(int number) {
-        return new LottoNumber(number);
+        validateLottoNumber(number);
+        return LOTTO_NUMBER_BASE.get(number);
     }
 
-    private void validateLottoNumber(int number) {
+    private static void validateLottoNumber(int number) {
         if(number < LOTTO_NUMBER_MIN) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_MIN + "보다 작을 수 없습니다.");
         }

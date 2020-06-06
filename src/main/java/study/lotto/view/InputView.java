@@ -34,15 +34,15 @@ public class InputView {
     }
 
     public static List<Lotto> scanManualLottoNumbers(int num) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
         for(int i=0; i<num; i++) {
-            lottoList.add(Lotto.of(scanStringArray()));
+            lottos.add(Lotto.of(scanStringArray()));
         }
 
-        return lottoList;
+        return lottos;
     }
 
     private static int scanInt() {
