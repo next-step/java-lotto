@@ -49,13 +49,13 @@
    - [X] Refactor
    
 4. 당첨번호입력 / 저장
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 5. 지난주 당첨번호 입력
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 6. 생성된 로또와 지난주 당첨번호 비교
    - [ ] Test fails
    - [ ] Test Passes
