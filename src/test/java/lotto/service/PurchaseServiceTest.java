@@ -34,7 +34,7 @@ public class PurchaseServiceTest {
 	@CsvSource({"14000, 14", "12300, 12", "18800, 18", "12500, 12"})
 	@ParameterizedTest
 	void 로또가_예상개수만큼_발급된다(Integer payable, Integer expected) {
-		assertThat(PurchaseService.purchase(new Money(payable)).numberOfLottoTickets())
+		assertThat(PurchaseService.purchaseAllAuto(new Money(payable)).numberOfLottoTickets())
 			.isEqualTo(expected);
 	}
 
@@ -79,5 +79,17 @@ public class PurchaseServiceTest {
 		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets() - getAutoLottoNum).isEqualTo(manualExpected);
 		assertThat(getAutoLottoNum).isEqualTo(autoExpected);
 		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets()).isEqualTo(totalExpected);
+	}
+
+	@DisplayName("사용자가 수동으로 로또를 구매하면 해당하는 로또번호를 반환한다.")
+	@CsvSource({"8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44"})
+	@ParameterizedTest
+	void 수동입력한_로또티켓_하나가_반환된다(String lottoNumberValue) {
+		List<Integer> winningNumberBeforeList = Arrays.stream(lottoNumberValue.split(","))
+			.map(String::trim)
+			.map(Integer::valueOf)
+			.collect(Collectors.toList());
+		assertThat(PurchaseService.drawUserPickedTicket(winningNumberBeforeList))
+			.isInstanceOf(LottoTicket.class);
 	}
 }
