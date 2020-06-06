@@ -15,7 +15,7 @@ public class NextStepLottoApplication {
 
 	public static void main(String[] args) {
 		Money money = InputView.inputPurchaseMoney();
-		LottoTickets lottoTickets = PurchaseService.purchase(money);
+		LottoTickets lottoTickets = PurchaseService.purchaseAllAuto(money);
 		OutputView.printNumberOfPurchasedTickets(lottoTickets);
 
 		WinningNumbers winningNumbers = InputView.inputLastWeekWinningNumbers();
