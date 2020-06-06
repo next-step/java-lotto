@@ -107,6 +107,10 @@ public class LottoResult {
             totalPrize += rank.getPrize();
         }
 
+        return getWinningRate(totalPrize, money);
+    }
+
+    public static double getWinningRate(int totalPrize, int money) {
         return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);
     }
 }

@@ -1,6 +1,5 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.DoubleUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -98,8 +97,8 @@ class LottoResultTest {
                 lottoTicketByWinningThird
         ), "1, 2, 3, 4, 5, 6", 8);
 
-        double expectedResult
-                = DoubleUtils.parseDoubleSecondDigit((Rank.FIRST.getPrize() + Rank.THIRD.getPrize()) / myMoney);
+        int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
+        double expectedResult = LottoResult.getWinningRate(totalPrize, myMoney);
         assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
     }
 }
