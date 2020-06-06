@@ -21,7 +21,7 @@ public class PurchaseServiceMock extends PurchaseService {
 		List<LottoTicket> lottoTicketList = new ArrayList<>(lottoTickets.getLottoTickets());
 
 		for (int index = 0; index < autoDrawnCount; index++) {
-			List<LottoNumber> lottoNumberList = AutoLottoNumberGenerator.pickList();
+			List<LottoNumber> lottoNumberList = new AutoLottoNumberGenerator().pickList();
 			lottoTicketList.add(new LottoTicket(lottoNumberList));
 		}
 		return new LottoTickets(lottoTicketList);
