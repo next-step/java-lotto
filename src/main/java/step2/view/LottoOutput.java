@@ -32,9 +32,11 @@ public class LottoOutput {
     }
 
     public static void printWinningStatistics(Map<WinnerTier, Integer> WinningResult, double Yield) {
-        for (WinnerTier winnerTier : WinningResult.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", winnerTier.getMatchCnt(), winnerTier.getPrize(), WinningResult.get(winnerTier));
-        }
+        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_THREE.getMatchCnt(), WinnerTier.MATCH_THREE.getPrize(), WinningResult.get(WinnerTier.MATCH_THREE));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_FOUR.getMatchCnt(), WinnerTier.MATCH_FOUR.getPrize(), WinningResult.get(WinnerTier.MATCH_FOUR));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_FIVE.getMatchCnt(), WinnerTier.MATCH_FIVE.getPrize(), WinningResult.get(WinnerTier.MATCH_FIVE));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_SIX.getMatchCnt(), WinnerTier.MATCH_SIX.getPrize(), WinningResult.get(WinnerTier.MATCH_SIX));
+
         System.out.printf("총 수익률은 %.2f입니다.", Yield);
     }
 }
