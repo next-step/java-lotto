@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class LottoResults {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private Map<LottoResult, Long> lottoResults;
 
     private LottoResults(Map<LottoResult, Long> result) {
@@ -59,7 +57,7 @@ public class LottoResults {
             .mapToLong(result -> lottoResults.getOrDefault(result, 0L))
             .sum();
 
-        return totalPrice * LOTTO_PRICE;
+        return totalPrice * Payment.LOTTO_PRICE;
     }
 
     @Override

@@ -2,7 +2,7 @@ package lotto.model;
 
 public class Payment {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
 
     private int money;
