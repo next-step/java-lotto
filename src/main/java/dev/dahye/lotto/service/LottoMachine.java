@@ -27,8 +27,4 @@ public class LottoMachine {
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
-
-    protected int getTicketsCount() {
-        return lottoTickets.size();
-    }
 }
