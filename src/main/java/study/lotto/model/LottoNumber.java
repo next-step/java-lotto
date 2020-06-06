@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(int number) {
         validateLottoNumber(number);
-        return LOTTO_NUMBER_BASE.get(number);
+        return LOTTO_NUMBER_BASE.get(number - 1);
     }
 
     private static void validateLottoNumber(int number) {
