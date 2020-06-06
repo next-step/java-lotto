@@ -1,9 +1,8 @@
 package lotto.ui;
 
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.prize.Prize;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -11,14 +10,12 @@ public class ResultView {
 
     public static void printLottoQuantity(int quantity){
         System.out.println(quantity + "개를 구매했습니다.");
-        System.out.println();
     }
 
-    public static void printLottoTicket(List<Lotto> lottoTicket) {
-        for(Lotto lotto: lottoTicket){
-            System.out.println(lotto);
-        }
-        System.out.println();
+    public static void printLottoTicket(LottoTicket lottoTicket) {
+        lottoTicket.getLottoTicket()
+                .forEach(ticket -> System.out.println(ticket.toString()));
+
     }
 
     public static void printWinStatistics(Map<Integer, Integer> matchCountMap) {
@@ -34,4 +31,5 @@ public class ResultView {
         System.out.println("총 수익률은 " + winRate + "입니다.");
         System.out.println("(기준이 1이기 때문에 결과적으로 " + result + "의 의미임)");
     }
+
 }

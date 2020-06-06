@@ -1,23 +1,20 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoMachine;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import lotto.service.LottoMachine;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @Test
-    void 로또티켓을_구매한다() {
-        int quantity = 5;
-        LottoMachine lottoMachine = LottoMachine.create();
-        List<Lotto> lottoTicket = lottoMachine.purchaseLotto(quantity);
 
-        assertThat(lottoTicket).size().isEqualTo(quantity);
-
+    @ParameterizedTest
+    @CsvSource(value = {"14000, 14", "5000, 5"})
+    void 로또를_구입금액에_맞게_생성한다(int purchaseAmount, int quantity) {
+        LottoMachine lottoMachine = LottoMachine.turnOn();
+        LottoTicket lottoTicket = lottoMachine.purchaseLotto(purchaseAmount);
+        assertThat(lottoTicket.getLottoTicket()).size().isEqualTo(quantity);
     }
 
 }
