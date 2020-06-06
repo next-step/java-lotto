@@ -15,7 +15,7 @@ public class LottoMoney {
         return money / LOTTO_PRICE;
     }
 
-    protected void validate(int money) {
+    private void validate(int money) {
         if (mustBePositiveNumber(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
