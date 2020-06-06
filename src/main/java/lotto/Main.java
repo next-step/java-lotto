@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.WinningNumber;
@@ -12,14 +12,14 @@ public class Main {
         int buyLottoMoney = InputView.buyLotto();
         Money money = new Money(buyLottoMoney);
 
-        Lotto lotto = new Lotto(money.countLotto());
-        lotto.drawingLotto();
-        ResultView.printLottoNumbers(lotto);
+        Lottos lottos = new Lottos(money.countLotto());
+        lottos.drawLotto();
+        ResultView.printLottoNumbers(lottos);
 
         String[] winningNumbers  = InputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
 
-        LottoResult lottoResult = new LottoResult(lotto.getLottoNumbers(), winningNumber.getWinningNumbers());
+        LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningNumber.getWinningNumbers());
         lottoResult.statistics(buyLottoMoney);
 
         ResultView.printResult(lottoResult);

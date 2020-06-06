@@ -1,22 +1,33 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
-    private static final int LOTTO_COUNT = 3;
+    private List<Integer> numbers;
+    private List<Integer> winningNumbers;
+
+    @BeforeEach
+    void setup() {
+        int[] intNumbers = {1, 10, 30, 33, 40, 45};
+        numbers = Arrays.stream(intNumbers).boxed().collect(Collectors.toList());
+
+        int[] intWinningNumbers = {1, 12, 30, 33, 35, 41};
+        winningNumbers = Arrays.stream(intWinningNumbers).boxed().collect(Collectors.toList());
+    }
 
     @Test
-    void drawingLotto() {
-        Lotto lotto = new Lotto(LOTTO_COUNT);
+    void matches() {
+        Lotto lotto = new Lotto(numbers);
 
-        lotto.drawingLotto();
-        List<LottoNumber> numberList = lotto.getLottoNumbers();
+        int count = lotto.matches(winningNumbers);
 
-        long count = numberList.stream().filter(lottoNumber -> lottoNumber.getNumbers().size() == 6).count();
         assertThat(count).isEqualTo(3);
     }
 }

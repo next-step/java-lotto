@@ -13,19 +13,19 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
-    private List<LottoNumber> lottoNumbers;
+    private List<Lotto> lottos;
     private List<Integer> winningNumbers;
 
     @BeforeEach
     void setup() {
-        lottoNumbers = new ArrayList<>();
+        lottos = new ArrayList<>();
         int[] intNumbers = {1, 10, 30, 33, 40, 45};
         List<Integer> numbers = Arrays.stream(intNumbers).boxed().collect(Collectors.toList());
-        lottoNumbers.add(new LottoNumber(numbers));
+        lottos.add(new Lotto(numbers));
 
         intNumbers = new int[]{1, 12, 20, 22, 40, 45};
         numbers = Arrays.stream(intNumbers).boxed().collect(Collectors.toList());
-        lottoNumbers.add(new LottoNumber(numbers));
+        lottos.add(new Lotto(numbers));
 
         int[] intWinningNumbers = {1, 12, 30, 33, 35, 41};
         winningNumbers = Arrays.stream(intWinningNumbers).boxed().collect(Collectors.toList());
@@ -33,7 +33,7 @@ class LottoResultTest {
 
     @Test
     void matchList() {
-        LottoResult lottoResult = new LottoResult(lottoNumbers, winningNumbers);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
 
         Map<String, Integer> resultMap = lottoResult.getResultMap();
         assertThat(resultMap.get("2")).isEqualTo(1);
@@ -44,7 +44,7 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률")
     void statistics() {
-        LottoResult lottoResult = new LottoResult(lottoNumbers, winningNumbers);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
         lottoResult.statistics(2000);
 
         int result = (int) (lottoResult.getProfitRate() * 100);

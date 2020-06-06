@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
 
@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printLottoNumbers(Lotto lotto) {
-        System.out.println(lotto.getLottoCount() + "개를 구매했습니다.");
+    public static void printLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.getLottoCount() + "개를 구매했습니다.");
 
-        lotto.getLottoNumbers().forEach(lottoNumber -> System.out.println(lottoNumber.getNumbers()));
+        lottos.getLottos().forEach(lottoNumber -> System.out.println(lottoNumber.getNumbers()));
     }
 
     public static void printResult(LottoResult lottoResult) {

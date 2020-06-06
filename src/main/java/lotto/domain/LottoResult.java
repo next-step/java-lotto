@@ -8,16 +8,16 @@ public class LottoResult {
     private final Map<String, Integer> resultMap;
     private double profitRate;
 
-    public LottoResult(List<LottoNumber> lottoNumbers, List<Integer> winningNumbers) {
-        this.resultMap = matchList( lottoNumbers, winningNumbers);
+    public LottoResult(List<Lotto> lottos,List<Integer> winningNumbers) {
+        this.resultMap = matchList(lottos, winningNumbers);
     }
 
-    private Map<String, Integer> matchList(List<LottoNumber> lottoNumbers, List<Integer> winningNumbers) {
+    private Map<String, Integer> matchList(List<Lotto> lottos,List<Integer> winningNumbers) {
         Map<String, Integer> map = new HashMap<>();
         initMap(map);
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            String count = String.valueOf(lottoNumber.matches(winningNumbers));
+        for (Lotto lotto : lottos) {
+            String count = String.valueOf(lotto.matches(winningNumbers));
             int preCount = map.get(count);
 
             map.put(count, preCount + 1);

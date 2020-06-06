@@ -1,29 +1,26 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
-    private final int lottoCount;
+    private final List<Integer> numbers;
 
-    public Lotto(int lottoCount) {
-        lottoNumbers = new ArrayList<>();
-        this.lottoCount = lottoCount;
+    public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
+        this.numbers = numbers;
     }
 
-    public void drawingLotto() {
-        LottoMachine machine = new LottoMachine();
-        for (int idx = 0; idx < lottoCount; idx++) {
-            lottoNumbers.add(new LottoNumber(machine.raffle()));
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("숫자가 부족합니다");
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public int matches(List<Integer> winningNumbers) {
+        return (int) numbers.stream().filter(winningNumbers::contains).count();
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
