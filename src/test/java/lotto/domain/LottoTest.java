@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -23,6 +24,7 @@ class LottoTest {
     }
 
     @Test
+    @DisplayName("당첨번호와 비교")
     void matches() {
         Lotto lotto = new Lotto(numbers);
 

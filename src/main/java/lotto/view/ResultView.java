@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoMatcher;
 import lotto.domain.Lottos;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
@@ -7,23 +8,37 @@ import lotto.domain.LottoResult;
 import java.util.Map;
 
 public class ResultView {
+    private static StringBuilder stringBuilder;
 
     public static void printLottoNumbers(Lottos lottos) {
-        System.out.println(lottos.getLottoCount() + "개를 구매했습니다.");
+        stringBuilder = new StringBuilder();
+        stringBuilder.append(lottos.getLottoCount()).append("개를 구매했습니다.\n");
 
-        lottos.getLottos().forEach(lottoNumber -> System.out.println(lottoNumber.getNumbers()));
+        lottos.getLottos().forEach(lottoNumber -> {
+            stringBuilder.append(lottoNumber.getNumbers());
+            stringBuilder.append("\n");
+        });
+        System.out.println(stringBuilder.toString());
     }
 
-    public static void printResult(LottoResult lottoResult) {
-        Map<String, Integer> map = lottoResult.getResultMap();
+    public static void printResult(LottoMatcher lottoMatcher, int money) {
+        stringBuilder = new StringBuilder();
+        LottoResult lottoResult = new LottoResult(lottoMatcher.getLottoPrizeList());
+        Map<Integer, Integer> matchLottoResult = lottoResult.matchResult();
 
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        stringBuilder.append("당첨 통계\n");
+        stringBuilder.append("---------\n");
         for (int idx = 3; idx <= 6; idx++) {
-            System.out.print(idx + "개 일치 (");
-            System.out.print(LottoPrize.getPrize(String.valueOf(idx)) + "원)- ");
-            System.out.println(map.get(String.valueOf(idx)) + "개");
+            stringBuilder.append(idx);
+            stringBuilder.append("개 일치 (");
+            stringBuilder.append(LottoPrize.valueOf(idx).getPrize());
+            stringBuilder.append("원)- ");
+            stringBuilder.append(matchLottoResult.getOrDefault(idx, 0));
+            stringBuilder.append("개\n");
         }
-        System.out.printf("총 수익률은 %.2f입니다.", lottoResult.getProfitRate());
+        stringBuilder.append("총 수익률은 ");
+        stringBuilder.append(lottoResult.statistics(money));
+        stringBuilder.append("입니다.");
+        System.out.println(stringBuilder.toString());
     }
 }
