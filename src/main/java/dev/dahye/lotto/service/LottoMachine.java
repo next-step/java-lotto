@@ -16,10 +16,8 @@ public class LottoMachine {
 
         initializeTickets();
 
-        int lottoCount = this.lottoMoney.getCountOfLotto();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(LottoTicket.autoIssued());
-        }
+        int countOfLotto = this.lottoMoney.getCountOfLotto();
+        lottoTickets = LottoTicket.autoIssued(countOfLotto);
     }
 
     private void initializeTickets() {

@@ -53,4 +53,20 @@ class LottoTicketTest {
     void validate_lotto_number_null(List<Integer> lottoNumbers) {
         assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(lottoNumbers));
     }
+
+    @ParameterizedTest(name = "티켓 수 = {0}")
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("로또 티켓 생성 시 여러장을 발급할 수 있다.")
+    void lotto_tickets_issued(int countOfLotto) {
+        List<LottoTicket> lottoTickets = LottoTicket.autoIssued(countOfLotto);
+        assertThat(lottoTickets.size()).isEqualTo(countOfLotto);
+    }
+
+    @ParameterizedTest(name = "티켓 수 = {0}")
+    @ValueSource(ints = {-2, -1, 0})
+    @DisplayName("로또 티켓 생성 시 티켓의 갯수는 0이상의 양수여야 한다.")
+    void validate_lotto_tickets_issued(int countOfLotto) {
+        assertThrows(IllegalArgumentException.class, () -> LottoTicket.autoIssued(countOfLotto),
+                "로또 티켓 생성 갯수가 유효하지 않습니다.");
+    }
 }

@@ -4,6 +4,8 @@ import java.util.*;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
+    private static final int ZERO_VALUE = 0;
+
     private final List<Integer> lottoNumbers;
 
     private LottoTicket(List<Integer> lottoNumbers) {
@@ -24,6 +26,23 @@ public class LottoTicket {
 
     public static LottoTicket autoIssued() {
         return new LottoTicket(LottoNumberMaker.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
+    }
+
+    public static List<LottoTicket> autoIssued(int countOfLotto) {
+        validateCountOfLotto(countOfLotto);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (int i = 0; i < countOfLotto; i++) {
+            lottoTickets.add(LottoTicket.autoIssued());
+        }
+
+        return lottoTickets;
+    }
+
+    private static void validateCountOfLotto(int countOfLotto) {
+        if(countOfLotto <= ZERO_VALUE) {
+            throw new IllegalArgumentException("로또 티켓 생성 갯수가 유효하지 않습니다.");
+        }
     }
 
     public static LottoTicket manualIssued(List<Integer> lottoNumbers) {
