@@ -19,10 +19,16 @@ public class Lotto {
     public int checkWinningCount(List<Integer> winningNumbers) {
         int cnt = 0;
         for (Integer number : winningNumbers) {
-            if (lottoNumbers.contains(number)) {
-                cnt++;
-            }
+            cnt = plusContainNumber(number);
         }
         return cnt;
+    }
+
+    public int plusContainNumber(Integer number) {
+        if (lottoNumbers.contains(number)) {
+            number++;
+        }
+
+        return number;
     }
 }
