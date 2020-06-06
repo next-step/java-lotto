@@ -3,6 +3,7 @@ package study2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,9 @@ import study2.domain.LottoNumbers;
 import study2.view.InputView;
 
 class LottoTest {
-
-	List<Lotto> lottoNumbers;
+	
+	LottoNumbers lottoNumbers = new LottoNumbers();
+	List<Lotto> lottoSize = new ArrayList<Lotto>();
 	
 	@BeforeEach
 	void init() {
@@ -38,7 +40,7 @@ class LottoTest {
 	@Test
 	@DisplayName("로또번호가 46일떄 테스트")
 	void 로또번호가_46일때는_어떻게될까() {
-		assertThatThrownBy(() -> new Lotto((long) 46).getNumber())
+		assertThatThrownBy(() -> new Lotto(46).getNumber())
 		.isInstanceOf(IllegalArgumentException.class);
 		
 	}
@@ -46,14 +48,14 @@ class LottoTest {
 	@Test
 	@DisplayName("로또번호값이 45일때 테스트")
 	void 로또번호가_45일때는_테스트가통가할까() {
-		assertThat(new Lotto((long) 45).getNumber()).isEqualTo(45);
+		assertThat(new Lotto(45).getNumber()).isEqualTo(45);
 	}
 	
 	@Test
 	@DisplayName("입력금액만큼 로또가 생성될까")
 	void 입력금액_만큼_로또가_생성테스트() {
-		lottoNumbers = LottoNumbers.getLottoNumbers(15000);
-		assertThat(lottoNumbers.size()).isEqualTo(15);
+		lottoSize = lottoNumbers.getLottoNumbers(15000);
+		assertThat(lottoSize.size() / 1000).isEqualTo(15);
 	}
 	
 }
