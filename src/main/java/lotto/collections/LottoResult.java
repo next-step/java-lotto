@@ -2,6 +2,8 @@ package lotto.collections;
 
 import java.util.List;
 
+import lotto.domain.Money;
+import lotto.domain.RewardType;
 import lotto.service.WinningService;
 import lotto.util.LottoProfitCalculator;
 

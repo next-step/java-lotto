@@ -2,8 +2,6 @@ package lotto.collections;
 
 import java.util.List;
 
-import lotto.domain.LottoTicket;
-
 public class LottoTickets {
 
 	private List<LottoTicket> lottoTickets;

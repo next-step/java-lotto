@@ -17,12 +17,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.collections.LottoResult;
+import lotto.collections.LottoTicket;
 import lotto.collections.LottoTickets;
-import lotto.collections.RewardType;
 import lotto.collections.WinningNumbers;
 import lotto.collections.WinningTicket;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.RewardType;
 
 public class WinningServiceTest {
 

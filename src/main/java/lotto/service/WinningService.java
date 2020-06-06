@@ -5,13 +5,13 @@ import static java.util.stream.Collectors.*;
 import java.util.List;
 
 import lotto.collections.LottoResult;
+import lotto.collections.LottoTicket;
 import lotto.collections.LottoTickets;
-import lotto.collections.Money;
-import lotto.collections.RewardType;
 import lotto.collections.WinningNumbers;
 import lotto.collections.WinningTicket;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.RewardType;
 import lotto.util.NumberStringParser;
 
 public class WinningService {
