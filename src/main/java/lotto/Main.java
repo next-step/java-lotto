@@ -28,7 +28,7 @@ public class Main {
             convertTo(inputWinningLottoNumberString), LottoNumber.of(inputBonusLottoNumber)
         );
 
-        LottoResults lottoResults = purchasedLottoTickets.match(winningLottoTicket);
+        LottoResults lottoResults = winningLottoTicket.match(purchasedLottoTickets);
         printLottoStatistics(lottoResults);
         printProfitResult(lottoResults.getProfit());
     }

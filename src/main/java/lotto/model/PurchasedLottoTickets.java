@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PurchasedLottoTickets {
 
@@ -22,13 +21,5 @@ public class PurchasedLottoTickets {
 
     public List<PurchasedLottoTicket> getPurchasedLottoTickets() {
         return purchasedLottoTickets;
-    }
-
-    public LottoResults match(WinningLottoTicket winningLottoTicket) {
-        List<LottoResult> lottoResults = purchasedLottoTickets.stream()
-            .map(ticket -> ticket.match(winningLottoTicket))
-            .collect(Collectors.toList());
-
-        return LottoResults.of(lottoResults);
     }
 }

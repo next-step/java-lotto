@@ -29,7 +29,30 @@ public class WinningLottoTicket extends LottoTicket {
         return new WinningLottoTicket(LottoNumbers, bonusLottoNumber);
     }
 
-    public LottoNumber getBonusLottoNumber() {
-        return bonusLottoNumber;
+    public LottoResults match(PurchasedLottoTickets purchasedLottoTickets) {
+        List<LottoResult> lottoResults = purchasedLottoTickets.getPurchasedLottoTickets()
+            .stream()
+            .map(this::matchWinningLotto)
+            .collect(Collectors.toList());
+
+        return LottoResults.of(lottoResults);
+    }
+
+    private LottoResult matchWinningLotto(PurchasedLottoTicket purchasedLottoTicket) {
+        long count = getMatchCount(purchasedLottoTicket);
+        boolean isMatchLottoBonusNumber = isMatchLottoBonusNumber(purchasedLottoTicket);
+
+        return LottoResult.of(LottoMatchCount.of(Math.toIntExact(count), isMatchLottoBonusNumber));
+    }
+
+    private long getMatchCount(PurchasedLottoTicket purchasedLottoTicket) {
+        return purchasedLottoTicket.getNumbers()
+            .stream()
+            .filter(purchasedLottoNumber -> numbers.contains(purchasedLottoNumber))
+            .count();
+    }
+
+    private boolean isMatchLottoBonusNumber(PurchasedLottoTicket purchasedLottoTicket) {
+        return purchasedLottoTicket.getNumbers().contains(this.bonusLottoNumber);
     }
 }
