@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class Converter {
+public final class StringConverter {
 
     private static final String DELIMITER = ",";
 

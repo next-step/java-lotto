@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.utils.Converter.convertTo;
+import static lotto.utils.StringConverter.convertTo;
 import static lotto.view.InputView.inputBonusLottoNumber;
 import static lotto.view.InputView.inputPurchasePrice;
 import static lotto.view.InputView.inputWinningLottoNumber;
@@ -8,10 +8,10 @@ import static lotto.view.OutputView.printLottoNumber;
 import static lotto.view.OutputView.printLottoStatistics;
 import static lotto.view.OutputView.printProfitResult;
 
-import lotto.model.LottoResults;
-import lotto.model.Payment;
 import lotto.model.LottoNumber;
+import lotto.model.LottoResults;
 import lotto.model.LottoStore;
+import lotto.model.Payment;
 import lotto.model.PurchasedLottoTickets;
 import lotto.model.WinningLottoTicket;
 
