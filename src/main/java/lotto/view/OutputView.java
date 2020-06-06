@@ -10,8 +10,9 @@ public class OutputView {
     }
 
 
-    public static void printLottoTicketNumbers(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.count() + "개를 구매했습니다.");
+    public static void printLottoTicketNumbers(LottoTickets lottoTickets, final int numberOfManualLottoTicket) {
+        int numberOfAutoTickets = lottoTickets.count() - numberOfManualLottoTicket;
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", numberOfManualLottoTicket, numberOfAutoTickets);
         lottoTickets.getLottoTickets().forEach(System.out::println);
     }
 

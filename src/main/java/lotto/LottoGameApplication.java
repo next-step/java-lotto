@@ -22,7 +22,7 @@ public class LottoGameApplication {
 
         LottoTickets lottoTickets = lottoStore.buy(budget, manualLottoTickets);
 
-        OutputView.printLottoTicketNumbers(lottoTickets);
+        OutputView.printLottoTicketNumbers(lottoTickets, manualLottoTickets.count());
 
         WinningTicket winningTicket = makeWinningTicket();
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);

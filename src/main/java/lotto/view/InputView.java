@@ -5,7 +5,6 @@ import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -27,15 +26,16 @@ public class InputView {
     }
 
     public static LottoTickets askManualTicketNumbers(int numberOfManualLottoTicket) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         if (numberOfManualLottoTicket <= 0) {
-            return new LottoTickets(Collections.emptyList());
+            return new LottoTickets(lottoTickets);
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < numberOfManualLottoTicket; i++) {
             Set<LottoNumber> lottoNumbers = Arrays.stream(SCANNER.nextLine().split(LOTTO_NUMBER_DELIMITER))
-                    .map(lottoNumber -> LottoNumber.of(Integer.parseInt(lottoNumber)))
-                    .collect(Collectors.toSet());
+                    .map(number -> Integer.parseInt(number.trim()))
+                    .map(LottoNumber::of)
+                    .collect(toSet());
             lottoTickets.add(new LottoTicket(lottoNumbers));
         }
         return new LottoTickets(lottoTickets);
