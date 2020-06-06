@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static lotto.model.Payment.ZERO;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -57,7 +59,15 @@ public class LottoResults {
             .mapToLong(result -> lottoResults.getOrDefault(result, 0L))
             .sum();
 
+        validatePurchasePayment(totalPrice * Payment.LOTTO_PRICE);
+
         return totalPrice * Payment.LOTTO_PRICE;
+    }
+
+    private void validatePurchasePayment(double purchasePayment) {
+        if (purchasePayment <= ZERO) {
+           throw new IllegalArgumentException("구매 금액은 0원입니다. 구매 금액을 확인해 주세요.");
+        }
     }
 
     @Override
