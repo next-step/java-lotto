@@ -10,6 +10,10 @@ public class WinningLotto {
   private final LottoNumber bonusNumber;
 
   public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+    if (lotto.has(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 볼이 당첨번호와 중복됩니다.");
+    }
+
     this.lotto = lotto;
     this.bonusNumber = bonusNumber;
   }
@@ -18,10 +22,6 @@ public class WinningLotto {
     List<LottoNumber> numberList = Stream.of(numberArr)
         .map(num -> new LottoNumber(Integer.parseInt(num.trim())))
         .collect(Collectors.toList());
-
-    if (numberList.stream().anyMatch(number -> number.compareTo(bonusNumber) == 0)) {
-      throw new IllegalArgumentException("보너스 볼이 당첨번호와 중복됩니다.");
-    }
 
     return new WinningLotto(new Lotto(numberList), bonusNumber);
   }
