@@ -19,7 +19,8 @@ public class LottoStoreTest {
     @ValueSource(ints = {2000, 3000, 4000})
     public void buyTest(int price) {
         LottoStore lottoStore = new LottoStore();
-        List<Lotto> lottos = lottoStore.buy(price, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+        PriceLotto priceLotto = PriceLotto.of(price);
+        List<Lotto> lottos = lottoStore.buy(priceLotto, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
 
         final int count = (int) Math.floor(price / PRICE_PER_ONE);
 
@@ -32,7 +33,7 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
         ManualLottoMemo lottoMemo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12"));
 
-        List<Lotto> lottos = lottoStore.buy(2000, lottoMemo);
+        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(2000), lottoMemo);
 
         assertThat(lottos.size()).isEqualTo(2);
         assertThat(lottos).containsOnly(Lotto.of(lottoMemo.getLottoMemo(0)), Lotto.of(lottoMemo.getLottoMemo(1)));
@@ -43,7 +44,7 @@ public class LottoStoreTest {
     public void buyTestNoManual() {
         LottoStore lottoStore = new LottoStore();
 
-        List<Lotto> lottos = lottoStore.buy(3000, ManualLottoMemo.empty());
+        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(3000), ManualLottoMemo.empty());
 
         assertThat(lottos.size()).isEqualTo(3);
     }
@@ -54,7 +55,7 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         assertThatThrownBy(() -> {
-            lottoStore.buy(1000, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+            lottoStore.buy(PriceLotto.of(1000), ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -66,7 +67,7 @@ public class LottoStoreTest {
         int price = 500;
 
         assertThatThrownBy(() -> {
-            lottoStore.buy(price, ManualLottoMemo.empty());
+            lottoStore.buy(PriceLotto.of(price), ManualLottoMemo.empty());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
