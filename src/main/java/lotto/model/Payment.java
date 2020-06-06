@@ -21,6 +21,10 @@ public class Payment {
         if (money <= ZERO) {
             throw new IllegalArgumentException("금액은 0 이상의 값으로 입력해주세요.");
         }
+
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또의 금액은 " + LOTTO_PRICE + " 원 입니다." + LOTTO_PRICE + "원 이상의 금액을 입력해주세요.");
+        }
     }
 
     public int getCountLottoTicket() {
