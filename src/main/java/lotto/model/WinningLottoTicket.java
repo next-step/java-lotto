@@ -32,13 +32,13 @@ public class WinningLottoTicket extends LottoTicket {
     public LottoResults match(PurchasedLottoTickets purchasedLottoTickets) {
         List<LottoResult> lottoResults = purchasedLottoTickets.getPurchasedLottoTickets()
             .stream()
-            .map(this::matchWinningLotto)
+            .map(this::match)
             .collect(Collectors.toList());
 
         return LottoResults.of(lottoResults);
     }
 
-    private LottoResult matchWinningLotto(PurchasedLottoTicket purchasedLottoTicket) {
+    private LottoResult match(PurchasedLottoTicket purchasedLottoTicket) {
         long count = getMatchCount(purchasedLottoTicket);
         boolean isMatchLottoBonusNumber = isMatchLottoBonusNumber(purchasedLottoTicket);
 
