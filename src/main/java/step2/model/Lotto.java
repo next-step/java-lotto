@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ public class Lotto {
     }
 
     public List<Integer> getLottonumbers() {
-        return LottoNumbers;
+        return Collections.unmodifiableList(LottoNumbers);
     }
 
     public int checkWinningCount(List<Integer> winningNumbers) {
