@@ -14,6 +14,7 @@ import lotto.collections.WinningNumbers;
 import lotto.collections.WinningTicket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.util.ManualLottoNumberGenerator;
 
 public class WinningService {
 
@@ -44,5 +45,10 @@ public class WinningService {
 	public static boolean isBonusBall(final LottoTickets lottoTickets, final LottoNumber bonusBall) {
 		return lottoTickets.getLottoTickets().stream()
 			.anyMatch(ticket -> ticket.doesContainBonusBall(bonusBall));
+	}
+
+	public static LottoTicket drawUserPickedTicket(List<Integer> pickedValues) {
+		List<LottoNumber> lottoNumberList = new ManualLottoNumberGenerator().pickList(pickedValues);
+		return new LottoTicket(lottoNumberList);
 	}
 }
