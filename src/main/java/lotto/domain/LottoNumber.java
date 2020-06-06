@@ -17,6 +17,19 @@ public class LottoNumber {
         return new LottoNumber(number);
     }
 
+    public static LottoNumber of(String number) {
+        return new LottoNumber(covertIntAfterValidate(number));
+    }
+
+    private static int covertIntAfterValidate(String number) {
+        try {
+            return Integer.parseInt(number);
+        }
+        catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또번호는 숫자형식만 입력이 가능합니다.");
+        }
+    }
+
     private void validateOutOfRange(int number) {
         if(number < LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이만 올 수 있습니다.");
