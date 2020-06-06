@@ -36,8 +36,8 @@
    - 테스트 구현 X
 2. 입력 만큼 객체생성
    - [X] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test Passes
+   - [X] Refactor
 3. 생성된 객체 수만큼 로또 발급(중복체크)
    - [ ] Test fails
    - [ ] Test Passes
