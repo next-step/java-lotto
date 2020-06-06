@@ -3,10 +3,10 @@ package lotto.mock;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.collections.LottoTicket;
 import lotto.collections.LottoTickets;
-import lotto.collections.Money;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.service.PurchaseService;
 import lotto.util.AutoLottoNumberGenerator;
 
