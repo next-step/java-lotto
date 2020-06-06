@@ -106,4 +106,16 @@ public class WinningServiceTest {
 	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int profit) {
 		assertThat(WinningService.calculateProfit(lottoStatistics).getValue()).isEqualTo(profit);
 	}
+
+	@DisplayName("사용자가 수동으로 로또를 구매하면 해당하는 로또번호를 반환한다.")
+	@CsvSource({"8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44"})
+	@ParameterizedTest
+	void 수동입력한_로또티켓이_반환된다(String lottoNumberValue) {
+		List<Integer> winningNumberBeforeList = Arrays.stream(lottoNumberValue.split(","))
+			.map(String::trim)
+			.map(Integer::valueOf)
+			.collect(Collectors.toList());
+		assertThat(WinningService.drawUserPickedTicket(winningNumberBeforeList))
+			.isInstanceOf(LottoTicket.class);
+	}
 }
