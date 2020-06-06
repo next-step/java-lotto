@@ -29,6 +29,14 @@ class WinningNumbersTest {
                 .isInstanceOf(IllegalArgumentException.class).hasMessage("중복된 당첨 번호가 있습니다");
     }
 
+    @Test
+    void 당첨번호_입력범위_확인() {
+        String enteredWinNumber = "0, 1, 32, 37, 45, 49";
+        assertThatThrownBy(() -> new WinningNumbers(enteredWinNumber))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("당첨 번호는 1 ~ 45 사이의 수 입니다");
+
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"2, 3, 4, 5, 9, 19 | 0", "1, 7, 23, 32, 33, 34 | 4"
             , "1, 7, 23, 34, 37, 44 | 6"}, delimiter = '|')

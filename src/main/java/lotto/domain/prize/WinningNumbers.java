@@ -2,14 +2,13 @@ package lotto.domain.prize;
 
 import lotto.domain.lotto.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WinningNumbers {
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final String SEPARATOR = ",";
+    public static final int MAX_NUMBER_RANGE = 45;
+    public static final int MIN_NUMBER_RANGE = 1;
 
     private List<Integer> winningNumbers;
 
@@ -17,6 +16,7 @@ public class WinningNumbers {
         List<Integer> winningNumbers = convertWinningNumber(enteredWinNumber);
         checkSize(winningNumbers);
         checkDuplicate(winningNumbers);
+        checkInRange(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
 
@@ -39,6 +39,16 @@ public class WinningNumbers {
         Set<Integer> winNumberSet = new HashSet<>(winningNumbers);
         if (winNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 당첨 번호가 있습니다");
+        }
+    }
+
+
+    private void checkInRange(List<Integer> winningNumbers) {
+        int max = Collections.max(winningNumbers);
+        int min = Collections.min(winningNumbers);
+
+        if (min < MIN_NUMBER_RANGE || max > MAX_NUMBER_RANGE) {
+            throw new IllegalArgumentException("당첨 번호는 1 ~ 45 사이의 수 입니다");
         }
     }
 
