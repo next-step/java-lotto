@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class LottoOutput {
 
+    private LottoOutput() {};
+
     private static final String LOTTO_NUMBER_DELEVETER = ",";
 
     public static void printLottoNumbers(LottoGame lottoGame) {
@@ -32,10 +34,10 @@ public class LottoOutput {
     }
 
     public static void printWinningStatistics(Map<WinnerTier, Integer> WinningResult, double Yield) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_THREE.getMatchCnt(), WinnerTier.MATCH_THREE.getPrize(), WinningResult.get(WinnerTier.MATCH_THREE));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_FOUR.getMatchCnt(), WinnerTier.MATCH_FOUR.getPrize(), WinningResult.get(WinnerTier.MATCH_FOUR));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_FIVE.getMatchCnt(), WinnerTier.MATCH_FIVE.getPrize(), WinningResult.get(WinnerTier.MATCH_FIVE));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.MATCH_SIX.getMatchCnt(), WinnerTier.MATCH_SIX.getPrize(), WinningResult.get(WinnerTier.MATCH_SIX));
+
+        for(int i=3; i<7; i++) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.valueOf(i).getMatchCnt(), WinnerTier.valueOf(i).getPrize(), WinningResult.get(WinnerTier.valueOf(i)));
+        }
 
         System.out.printf("총 수익률은 %.2f입니다.", Yield);
     }

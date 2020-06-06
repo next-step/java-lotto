@@ -1,11 +1,12 @@
 package step2;
 
+import step2.model.Lotto;
 import step2.model.LottoGame;
 import step2.model.LottoTotalCalculator;
 import step2.model.WinnerTier;
-import step2.util.LottoStringtoNumbers;
 import step2.view.LottoInput;
 import step2.view.LottoOutput;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +20,10 @@ public class LottoMain {
         LottoOutput.printLottoNumbers(lottoGame);
 
         String inputWinnerNumbers = LottoInput.inputWinnerNumbers();
-        List<Integer> WinnerNumbers = LottoStringtoNumbers.convertStringtoNumbers(inputWinnerNumbers);
+        Lotto winnerNumbers = new Lotto(inputWinnerNumbers);
 
         LottoTotalCalculator lottoTotalCalculator = new LottoTotalCalculator();
-        Map<WinnerTier, Integer> WinningResult = lottoTotalCalculator.countWinners(lottoGame, WinnerNumbers);
+        Map<WinnerTier, Integer> WinningResult = lottoTotalCalculator.countWinners(lottoGame, winnerNumbers);
         double Yield = lottoTotalCalculator.returnYield(lottoMoney);
 
         LottoOutput.printWinningStatistics(WinningResult, Yield);
