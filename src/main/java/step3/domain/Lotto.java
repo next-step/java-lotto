@@ -22,6 +22,9 @@ public class Lotto {
     // each Lotto numbers.
     private List<Integer> lottoNumbers;
 
+
+    private int bonusNumber;
+
     // default 1 to LOTTO_MAX_LIMIT (45)
     private static List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
             .boxed()
@@ -31,6 +34,15 @@ public class Lotto {
     public Lotto(List<Integer> lottoNumbers) {
         lottoNumbers.sort(Integer::compareTo);
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = 0;
+
+    }
+
+    public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
+        lottoNumbers.sort(Integer::compareTo);
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
+
     }
 
 
@@ -43,10 +55,10 @@ public class Lotto {
 
     }
 
-    public static Lotto from(List<Integer> winningNumberList) {
+    public static Lotto from(List<Integer> winningNumberList, int bonusBall) {
 
         // pick LOTTO_DRAW_LIMIT
-        return new Lotto(new ArrayList<>(winningNumberList));
+        return new Lotto(new ArrayList<>(winningNumberList), bonusBall);
 
     }
 
@@ -70,7 +82,7 @@ public class Lotto {
 
     }
 
-    public static Lotto checkWiningNumber(String[] winningNumberArray) {
+    public static Lotto checkWiningNumber(String[] winningNumberArray, String bonusNumber) {
 
         if (winningNumberArray.length != LOTTO_DRAW_LIMIT) {
             throw new IllegalArgumentException("Not matched with draw limits. ");
@@ -79,9 +91,22 @@ public class Lotto {
         Number.checkNotNumber(winningNumberArray);
         Number.checkNumber(winningNumberArray);
 
+        Number.checkNotNumber(bonusNumber);
+        Number.checkNumber(bonusNumber);
+
+        int bonusNumberInt = Integer.valueOf(bonusNumber);
+
+        if ( bonusNumberInt > LOTTO_DRAW_BASE_NUMBER &&  bonusNumberInt <= LOTTO_MAX_LIMIT) {
+            throw new IllegalArgumentException("Not matched range of bonus ball.");
+        }
+
         return Lotto.from(Arrays.stream(winningNumberArray)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), bonusNumberInt);
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
 }

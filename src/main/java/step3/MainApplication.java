@@ -1,11 +1,10 @@
 package step3;
 
 
-import step2.domain.LottoGame;
-import step2.domain.Money;
-import step2.view.InputView;
-import step2.view.OutputView;
-
+import step3.domain.LottoGame;
+import step3.domain.Money;
+import step3.view.view.InputView;
+import step3.view.view.OutputView;
 
 /*
  * LOTTO GAME
@@ -32,12 +31,13 @@ public class MainApplication {
         lottoGame.issueLotto(gameCount);
 
         //OutputView.
-        OutputView.outputLottoList(lottoGame.getLottoList());
+        OutputView.outputLottoList(lottoGame.getLottoTickets());
 
         // get Wining Number
         String winingNumber = InputView.inputWiningNumber();
+        String bonusNumber = InputView.inputBonusNumber();
 
-        lottoGame.checkWiningNumber(winingNumber);
+        lottoGame.checkWiningNumber(winingNumber, bonusNumber);
 
         // matching numbers
         lottoGame.matchingWinningNumbers();

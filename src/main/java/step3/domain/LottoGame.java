@@ -16,8 +16,6 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final String FIXED_DELIMITER = ",|:";
 
-
-    //private List<Lotto> lottoList = new ArrayList<>();
     private LottoTickets lottoTickets;
 
     private Lotto winningNumberLotto;
@@ -38,17 +36,13 @@ public class LottoGame {
         lottoTickets = Lotto.issueLotto(gameCount);
     }
 
-    public void checkWiningNumber(String winingNumber) {
+    public void checkWiningNumber(String winingNumber, String bonusNumber) {
+
         String[] winningNumberArray = winingNumber.split(FIXED_DELIMITER);
-        winningNumberLotto = Lotto.checkWiningNumber(winningNumberArray);
+
+        winningNumberLotto = Lotto.checkWiningNumber(winningNumberArray, bonusNumber);
 
     }
-
-
-    public LottoTickets getLottoTickets() {
-        return lottoTickets;
-    }
-
 
 
     public List<Prize> getPrizeList() {
@@ -59,10 +53,11 @@ public class LottoGame {
     public void matchingWinningNumbers() {
 
         lottoTickets.getLottoTickets().forEach(lotto -> {
-                    int matchedNumber = getWinningcount(lotto);
-                    addPrize(matchedNumber);
-                }
-        );
+            int matchedNumber = getWinningcount(lotto);
+            if (matchedNumber == 5) {
+                addPrize(matchedNumber, checkBonusNumberMatching(lotto));
+            }
+        });
 
     }
 
@@ -74,7 +69,6 @@ public class LottoGame {
                 .count();
     }
 
-
     private boolean isPresentWinningNumber(Integer lottoNumber) {
         return winningNumberLotto.getNumbers()
                 .stream()
@@ -83,14 +77,21 @@ public class LottoGame {
                 .isPresent();
     }
 
+    private boolean checkBonusNumberMatching(Lotto lotto) {
 
-    private void addPrize(int matchedNumber) {
+        return lotto.getNumbers().stream()
+                .filter(lottoNumber ->
+                        lottoNumber == winningNumberLotto.getBonusNumber())
+                .findAny()
+                .isPresent();
 
-        Arrays.stream(Prize.values())
-                .filter(prize -> prize.getMatchedNumber() == matchedNumber)
-                .findFirst()
-                .get()
-                .addWinning();
+    }
+
+
+    private void addPrize(int matchedNumber, boolean bonusNumberMatching) {
+
+        Prize prize = Prize.valueOf(matchedNumber, bonusNumberMatching);
+        prize.addWinning();
 
     }
 
@@ -103,6 +104,10 @@ public class LottoGame {
                 .sum());
 
         return sum.divide(BigDecimal.valueOf(lottoTickets.getLottoTicketsSize() * LOTTO_PRICE), 3, BigDecimal.ROUND_HALF_EVEN);
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 
 }

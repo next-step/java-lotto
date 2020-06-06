@@ -12,6 +12,7 @@ public class InputView {
 
     private static final String QUESTION_PAY_MONEY = "How much do you pay for Lotto Games ? : ";
     private static final String QUESTION_LAST_WEEK_WINNING_NUMBER = "Input Winning Number of last week. : ";
+    private static final String QUESTION_LAST_WEEK_BONUS_BALL_NUMBER = "Input Winning Number of last week. : ";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -30,5 +31,17 @@ public class InputView {
         return result;
 
     }
+
+    public static String inputBonusNumber() {
+
+        System.out.println(QUESTION_LAST_WEEK_BONUS_BALL_NUMBER);
+        String result = SCANNER.next();
+        return result;
+
+    }
+
+
+
+
 
 }

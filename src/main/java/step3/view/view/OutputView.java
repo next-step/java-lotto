@@ -1,7 +1,8 @@
 package step3.view.view;
 
-import step2.domain.Lotto;
-import step2.domain.Prize;
+import step3.domain.Lotto;
+import step3.domain.Prize;
+import step3.domain.LottoTickets;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,11 +18,11 @@ public class OutputView {
 
     private static final String NUMBER_DELIMITER = ",";
 
-    public static void outputLottoList(List<Lotto> lottoList) {
+    public static void outputLottoList(LottoTickets lottoTickets) {
 
-        System.out.println("You bought (a) " + lottoList.size() + " games.");
+        System.out.println("You bought (a) " + lottoTickets.getLottoTicketsSize() + " games.");
 
-        lottoList.forEach(lotto -> {
+        lottoTickets.getLottoTickets().forEach(lotto -> {
             printNumbers(lotto);
         });
 

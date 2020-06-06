@@ -75,17 +75,15 @@ class LottoGameTest {
     }
 
 
-
-
     @DisplayName("test get Game Count length error")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
-    public void testCheckWiningNumber(String input) {
+    @CsvSource(value = {"1,2,3,4,5:6", "1,2,3,4,5,6,7:8"}, delimiter = ':')
+    public void testCheckWiningNumber(String input, String bonusNumber) {
 
         LottoGame lottoGame = new LottoGame();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoGame.checkWiningNumber(input));
+                .isThrownBy(() -> lottoGame.checkWiningNumber(input, bonusNumber));
     }
 
 
