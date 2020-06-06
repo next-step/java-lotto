@@ -42,10 +42,12 @@
    - [X] Test fails
    - [X] Test Passes
    - [X] Refactor
-3.5 로또 번호 뷰
+   
+ 3.5 로또 번호 뷰
    - [X] Test fails
    - [X] Test Passes
    - [X] Refactor
+   
 4. 당첨번호입력 / 저장
    - [ ] Test fails
    - [ ] Test Passes
