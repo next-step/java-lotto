@@ -34,10 +34,10 @@ class MatchReportTest {
     @Test
     void calculateEarningRate_MoneyAndMatchResult_RateOfReturn() {
         MoneyAmount moneyAmount = LottoData.createMoneyAmount(1_000);
-        moneyAmount.useAmount(Money.valueOf(1000));
+        moneyAmount.useAmount(Money.valueOf(1_000));
         MatchResult matchResult = LottoData.createMatchResult(LottoRank.FIRST, 1);
         MatchReport matchReport = MatchReport.create(moneyAmount, matchResult);
 
-        assertThat(matchReport.calculateEarningRate()).isEqualTo(BigDecimal.valueOf(200000000,2));
+        assertThat(matchReport.calculateEarningRate()).isEqualTo(BigDecimal.valueOf(200_000_000,2));
     }
 }

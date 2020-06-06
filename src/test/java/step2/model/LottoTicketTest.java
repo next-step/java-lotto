@@ -65,22 +65,25 @@ public class LottoTicketTest {
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
-    @DisplayName("containsNumber() 메서드는 로또 번호가 존재하면 TRUE 존재하지 않으면 FALSE를 반환한다")
+    @DisplayName("containsNumber() 메서드는 로또 번호가 존재하면 TRUE를 반환한다")
     @Test
-    void containsBonus_LottoNumber_Boolean() {
+    void containsBonus_LottoNumber_True() {
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
 
-        assertAll(
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(1))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(2))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(3))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(4))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(5))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(6))).isTrue(),
-                () -> assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(7))).isFalse()
-        );
+        lottoNumbers.forEach(lottoNumber -> assertThat(lottoTicket.containsNumber(lottoNumber)).isTrue());
+    }
+
+    @DisplayName("containsNumber() 메서드는 로또 번호가 존재하지 않으면 False를 반환한다")
+    @Test
+    void containsBonus_LottoNumber_False() {
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
+
+        assertThat(lottoTicket.containsNumber(LottoNumber.valueOf(7))).isFalse();
     }
 }

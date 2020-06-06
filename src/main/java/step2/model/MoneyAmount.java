@@ -34,7 +34,7 @@ public class MoneyAmount {
         this.usedAmount = this.usedAmount.plus(money);
     }
 
-    public boolean isEnoughMoney(Money money) {
+    private boolean isEnoughMoney(Money money) {
         return getRemainAmount().greaterThan(money);
     }
 
@@ -50,6 +50,4 @@ public class MoneyAmount {
     public String toString() {
         return MessageFormat.format("총 금액:: {0}, 남은 금액:: {1}", totalAmount, usedAmount);
     }
-
-
 }

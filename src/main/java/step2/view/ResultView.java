@@ -58,6 +58,6 @@ public class ResultView {
     }
 
     public static void printMatchReport(MatchReport matchReport) {
-        System.out.println("총 수익률은 " + matchReport.calculateEarningRate() + "입니다.");
+        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", matchReport.calculateEarningRate()));
     }
 }

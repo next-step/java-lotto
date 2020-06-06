@@ -41,22 +41,4 @@ class MoneyAmountTest {
         assertThatThrownBy(() -> LottoData.createMoneyAmount(999).useAmount(Money.valueOf(1000)))
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
-
-    @DisplayName("isEnoughMoney() 메소드는 사용가능한 금액에 따라서 TRUE 또는 FALSE를 반환한다.")
-    @MethodSource("provideMoneyAmountForIsEnoughMoney")
-    @ParameterizedTest(name = "''{0}''은 1,000원 티켓 1장을 구입하기에 금액이 ''{1}''하다")
-    void isEnoughMoney_Amount_Boolean(MoneyAmount moneyAmount, boolean expected) {
-        boolean isEnough = moneyAmount.isEnoughMoney(Money.valueOf(1000));
-
-        assertThat(isEnough).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> provideMoneyAmountForIsEnoughMoney() {
-        return Stream.of(
-                Arguments.of(LottoData.createMoneyAmount(999), false),
-                Arguments.of(LottoData.createMoneyAmount(1000), true),
-                Arguments.of(LottoData.createMoneyAmount(1001), true)
-        );
-    }
-
 }
