@@ -8,21 +8,17 @@ public class LottoTotalCalculator {
     private final String EXCEPTION_NOTSIX_NUMBER = "당첨 숫자는 중복되지 않은 6개만 입력 가능합니다.";
     private final String EXCEPTION_OVER_NUMBER = "당첨 숫자는 1~45만 가능합니다.";
 
-    private final int PERCENTAGE = 100;
-
     private final static int MIN = 1;
     private final static int MAX = 45;
     private final static int SIZE = 6;
 
     private Map<WinnerTier, Integer> WinningResult = new HashMap<>();
 
-    public Map<WinnerTier, Integer> countWinners(LottoGame lottoGame, List<Integer> WinnerNumbers) {
-
-        checkValidationWinerNumbers(WinnerNumbers);
+    public Map<WinnerTier, Integer> countWinners(LottoGame lottoGame, Lotto WinnerLotto) {
 
         for (WinnerTier winnerTier : WinnerTier.values()) {
             long matchCount = lottoGame.getLottos().stream()
-                    .filter(lotto -> lotto.checkWinningCount(WinnerNumbers) == winnerTier.getMatchCnt())
+                    .filter(lotto -> lotto.checkWinningCount(WinnerLotto) == winnerTier.getMatchCnt())
                     .count();
 
             WinningResult.put(winnerTier, (int) matchCount);
@@ -39,21 +35,5 @@ public class LottoTotalCalculator {
         }
 
         return Math.floor(sum / lottoMoney * 100) / 100;
-    }
-
-    public void checkValidationWinerNumbers(List<Integer> WinnerNumbers) {
-        int cnt = (int) WinnerNumbers.stream()
-                .distinct()
-                .count();
-
-        if (cnt != SIZE) {
-            throw new IllegalArgumentException(EXCEPTION_NOTSIX_NUMBER);
-        }
-
-        for (Integer number : WinnerNumbers) {
-            if (number > MAX || number < MIN) {
-                throw new IllegalArgumentException(EXCEPTION_OVER_NUMBER);
-            }
-        }
     }
 }
