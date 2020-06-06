@@ -103,6 +103,6 @@ public class LottoResult {
     }
 
     public static double getWinningRate(int totalPrize, int money) {
-        return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);
+        return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
     }
 }

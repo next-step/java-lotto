@@ -104,6 +104,12 @@ class LottoResultTest {
         assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
     }
 
+    @Test
+    @DisplayName("당첨율 구하기")
+    void winning_rate() {
+        assertThat(LottoResult.getWinningRate(5000, 14000)).isEqualTo(0.35);
+    }
+
     private static class LottoResultForBonus extends LottoResult {
         public LottoResultForBonus(int bonusNumber) {
             super(autoLottoTickets, winningNumbers, bonusNumber);
