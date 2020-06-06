@@ -1,28 +1,31 @@
 package lotto.collections;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
+import lotto.service.WinningService;
 import lotto.util.LottoProfitCalculator;
 
 public final class LottoResult {
 
-	private final Map<Integer, Integer> lottoStatistics;
+	private List<RewardType> lottoStatistics;
 
-	public LottoResult(Map<Integer, Integer> lottoStatistics) {
+	public LottoResult(List<RewardType> lottoStatistics) {
 		this.lottoStatistics = lottoStatistics;
 	}
 
 	public double getLottoProfitRate(final int lottoTicketSize) {
-		double totalProfit = RewardType.calculateProfit(lottoStatistics);
-		return LottoProfitCalculator.getConvertProfit(totalProfit, lottoTicketSize);
+		Money profitAsMoney = WinningService.calculateProfit(lottoStatistics);
+		double totalProfitValue = profitAsMoney.getValue();
+		return LottoProfitCalculator.getConvertProfit(totalProfitValue, lottoTicketSize);
 	}
 
-	public int countTicketsByRewardType(RewardType rewardType) {
-		return Optional.ofNullable(lottoStatistics.get(rewardType.getCode())).orElse(0);
+	public int countTicketsByRewardType(final RewardType rewardType) {
+		return Math.toIntExact(lottoStatistics.stream()
+			.filter(type -> type.equals(rewardType))
+			.count());
 	}
 
-	public Map<Integer, Integer> getLottoStatistics() {
+	public List<RewardType> getLottoStatistics() {
 		return lottoStatistics;
 	}
 }

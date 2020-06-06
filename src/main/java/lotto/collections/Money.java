@@ -2,13 +2,16 @@ package lotto.collections;
 
 public final class Money {
 
-	private final Integer money;
+	private final Integer value;
 
-	public Money(Integer money) {
-		this.money = validateMoneyRange(money);
+	public Money(Integer value) {
+		this.value = validateMoneyRange(value);
 	}
 
 	private int validateMoneyRange(Integer money) {
+		if (money == 0) {
+			return money;
+		}
 		if (money < 1000) {
 			throw new RuntimeException("money input is wrong.");
 		}
@@ -17,6 +20,10 @@ public final class Money {
 
 	public int getNumberOfPurchasedLotto() {
 		final double TICKET_PRICE = 1000;
-		return (int)(money / TICKET_PRICE);
+		return (int) (value / TICKET_PRICE);
+	}
+
+	public Integer getValue() {
+		return value;
 	}
 }

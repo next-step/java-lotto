@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import lotto.collections.Money;
 import lotto.collections.WinningNumbers;
+import lotto.domain.LottoNumber;
 import lotto.service.WinningService;
 
 public class InputView {
@@ -16,10 +17,15 @@ public class InputView {
 		return new Money(scanner.nextInt());
 	}
 
+	public static LottoNumber inputBonusBall() {
+		System.out.println("보너스 볼을 입력해주세요.");
+		return new LottoNumber(scanner.nextInt());
+	}
+
 	public static WinningNumbers inputLastWeekWinningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String winningNumber = scanner.next();
-		return new WinningService().createWinningNumbers(winningNumber);
+		return WinningService.createWinningNumbers(winningNumber);
 	}
 
 }

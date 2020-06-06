@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.collections.WinningNumbers;
-
 public class LottoTicket {
 
 	protected final List<LottoNumber> lottoNumbers;
@@ -13,14 +11,24 @@ public class LottoTicket {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public int getMatchCounts(final WinningNumbers winningNumbers) {
-		return Math.toIntExact(lottoNumbers.stream()
-			.filter(number -> number.getMatchCounts(winningNumbers))
-			.count());
-	}
-
 	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
+	}
+
+	public boolean doesContainBonusBall(LottoNumber bonusBall) {
+		return lottoNumbers.stream()
+			.anyMatch(number -> number.getNumber().equals(bonusBall.getNumber()));
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.stream()
+			.anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
+	}
+
+	public int getMatchCount(LottoNumber winningNumber) {
+		return (int) this.lottoNumbers.stream()
+			.filter(number -> winningNumber.getNumber().equals(number.getNumber()))
+			.count();
 	}
 
 	@Override

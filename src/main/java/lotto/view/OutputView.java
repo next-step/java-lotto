@@ -21,6 +21,8 @@ public class OutputView {
 			"4개 일치(50000원) - %d개 \n", lottoResult.countTicketsByRewardType(RewardType.FOURTH));
 		System.out.printf(
 			"5개 일치(1500000원) - %d개 \n", lottoResult.countTicketsByRewardType(RewardType.FIFTH));
+		System.out.printf(
+			"5개 일치, 보너스 볼 일치(30000000원) - %d개 \n", lottoResult.countTicketsByRewardType(RewardType.FIFTH_BONUS));
 		System.out.printf("6개 일치(2000000000원) - %d개 \n",
 			lottoResult.countTicketsByRewardType(RewardType.SIXTH));
 		System.out.println("총 수익률은 " + getRateOfProfit(lottoResult, lottoTickets) + "입니다.");

@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import lotto.domain.LottoNumber;
 
-public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+public class AutoLottoNumberGenerator {
 
 	private static final int MINIMUM_NUMBER_BOUND = 1;
 	private static final int MAXIMUM_NUMBER_BOUND = 45;
