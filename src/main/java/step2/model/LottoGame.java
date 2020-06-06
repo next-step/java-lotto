@@ -1,8 +1,9 @@
 package step2.model;
 
-import step2.util.LottoRandom;
+import step2.util.LottoRandomNumbers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -14,10 +15,12 @@ public class LottoGame {
 
     public LottoGame(int lottoMoney) {
         lottoCount = lottoMoney / LOTTO_COST;
-        LottoRandom lottoRandom = new LottoRandom();
+        createRandomLotto();
+    }
 
+    private void createRandomLotto() {
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoRandom.getRandomNumber()));
+            lottos.add(LottoRandomNumbers.getRandomNumber());
         }
     }
 
@@ -26,6 +29,6 @@ public class LottoGame {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }
