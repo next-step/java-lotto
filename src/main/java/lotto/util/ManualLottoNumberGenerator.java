@@ -16,6 +16,7 @@ public class ManualLottoNumberGenerator implements LottoNumberGenerator {
 
 	public List<LottoNumber> pickList(List<Integer> pickedValues) {
 		List<LottoNumber> pickedValuesToNumbers = create(pickedValues);
+		LottoNumberGenerator.sortDescLottoNumbers(pickedValuesToNumbers);
 		return Collections.unmodifiableList(pickedValuesToNumbers);
 	}
 
