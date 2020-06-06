@@ -11,15 +11,22 @@ public class LottoResult {
 
     private final List<LottoTicket> lottoTickets;
     private final List<Integer> winningNumbers;
+    private final int bonusNumber;
 
-    public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput) {
+    public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput, int bonusNumber) {
         validateWinnersNullOrEmpty(winningNumberInput);
         List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
 
         this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
 
         validateWinningNumbers();
+        validateBonusNumber();
+    }
+
+    private void validateBonusNumber() {
+        LottoNumbers.validNumberRange(bonusNumber);
     }
 
     private void validateWinnersNullOrEmpty(String winningNumberInput) {
@@ -63,15 +70,16 @@ public class LottoResult {
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
-            addWhenIsWinning(ranks, matchCount);
+            boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
+            addWhenIsWinning(ranks, matchCount, isMatchBonusNumber);
         }
 
         return ranks;
     }
 
-    private void addWhenIsWinning(List<Rank> ranks, int matchCount) {
-        if (Rank.canRanking(matchCount)) {
-            ranks.add(Rank.valueOf(matchCount));
+    private void addWhenIsWinning(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
+        if (Rank.canRanking(matchCount, isMatchBonusNumber)) {
+            ranks.add(Rank.valueOf(matchCount, isMatchBonusNumber));
         }
     }
 
