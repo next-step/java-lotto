@@ -13,19 +13,19 @@ public class LottosStatistics {
     private final Map<LottoRank, Integer> countByRank = new HashMap<>();
     private final BigDecimal rateOfReturnAmount;
 
-    public LottosStatistics(List<Lotto> Lottos, BigDecimal buyPrice, WinningLotto winningLotto) {
+    public LottosStatistics(List<Lotto> Lottos, PriceLotto buyPrice, WinningLotto winningLotto) {
         for (Lotto lotto: Lottos) {
             addLottoRank(lotto.getWinningRank(winningLotto));
         }
         this.rateOfReturnAmount = calculateRateOfReturnAmount(buyPrice);
     }
 
-    private BigDecimal calculateRateOfReturnAmount(BigDecimal buyAmount) {
+    private BigDecimal calculateRateOfReturnAmount(PriceLotto buyAmount) {
         BigDecimal sumAmount = BigDecimal.ZERO;
         for(LottoRank lottoRank : LottoRank.getWinningLotto(true)) {
             sumAmount = sumAmount.add(lottoRank.getWinningAmount().multiply(BigDecimal.valueOf(getWinningCount(lottoRank))));
         }
-        return sumAmount.divide(buyAmount, 2, RoundingMode.HALF_UP);
+        return sumAmount.divide(buyAmount.get(), 2, RoundingMode.HALF_UP);
     }
 
     public int getWinningCount(LottoRank rank) {
