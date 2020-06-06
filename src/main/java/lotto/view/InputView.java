@@ -1,11 +1,13 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.dto.ManualLottoNumberRequestDto;
-import lotto.dto.ManualLottoNumbers;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 public class InputView {
     private static final String LOTTO_NUMBER_DELIMITER = ",";
@@ -24,15 +26,19 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static ManualLottoNumberRequestDto askManualTicketNumbers(int numberOfManualLottoTicket) {
-        List<ManualLottoNumbers> manualLottoNumbers = new ArrayList<>();
-        if (numberOfManualLottoTicket > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    public static LottoTickets askManualTicketNumbers(int numberOfManualLottoTicket) {
+        if (numberOfManualLottoTicket <= 0) {
+            return new LottoTickets(Collections.emptyList());
         }
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < numberOfManualLottoTicket; i++) {
-            manualLottoNumbers.add(new ManualLottoNumbers(SCANNER.nextLine()));
+            Set<LottoNumber> lottoNumbers = Arrays.stream(SCANNER.nextLine().split(LOTTO_NUMBER_DELIMITER))
+                    .map(lottoNumber -> LottoNumber.of(Integer.parseInt(lottoNumber)))
+                    .collect(Collectors.toSet());
+            lottoTickets.add(new LottoTicket(lottoNumbers));
         }
-        return new ManualLottoNumberRequestDto(manualLottoNumbers);
+        return new LottoTickets(lottoTickets);
     }
 
     public static Set<LottoNumber> askLastWeekWinningNumbers() {
@@ -41,7 +47,7 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(winningNumber -> Integer.valueOf(winningNumber.trim()))
                 .map(LottoNumber::of)
-                .collect(Collectors.toSet());
+                .collect(toSet());
     }
 
     public static int askBonusNumber() {

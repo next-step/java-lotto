@@ -18,7 +18,7 @@ public class LottoGameApplication {
 
         Money budget = Money.of(InputView.askTotalMoney());
         int numberOfManualLottoTicket = InputView.askNumberOfManualLottoTicket();
-        LottoTickets manualLottoTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket).toLottoTickets();
+        LottoTickets manualLottoTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket);
 
         LottoTickets lottoTickets = lottoStore.buy(budget, manualLottoTickets);
 
