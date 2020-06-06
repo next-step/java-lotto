@@ -58,35 +58,35 @@ public class LottoResult {
         }
     }
 
-    public List<Winning> getMyWinnings() {
-        List<Winning> winnings = new ArrayList<>();
+    public List<Rank> getMyWinnings() {
+        List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
-            addWhenIsWinning(winnings, matchCount);
+            addWhenIsWinning(ranks, matchCount);
         }
 
-        return winnings;
+        return ranks;
     }
 
-    private void addWhenIsWinning(List<Winning> winnings, int matchCount) {
-        if (Winning.isWinning(matchCount)) {
-            winnings.add(Winning.getWinning(matchCount));
+    private void addWhenIsWinning(List<Rank> ranks, int matchCount) {
+        if (Rank.canRanking(matchCount)) {
+            ranks.add(Rank.valueOf(matchCount));
         }
     }
 
-    public int getTotalCountWhenSpecificWinning(Winning target) {
+    public int getTotalCountWhenSpecificWinning(Rank target) {
         int count = 0;
 
-        for (Winning winning : this.getMyWinnings()) {
-            count = plusCountWhenEquals(count, winning, target);
+        for (Rank rank : this.getMyWinnings()) {
+            count = plusCountWhenEquals(count, rank, target);
         }
 
         return count;
     }
 
-    private int plusCountWhenEquals(int count, Winning winning, Winning target) {
-        if (winning.equals(target)) {
+    private int plusCountWhenEquals(int count, Rank rank, Rank target) {
+        if (rank.equals(target)) {
             count++;
         }
         return count;
@@ -95,8 +95,8 @@ public class LottoResult {
     public double getMyWinningRate(int money) {
         int totalPrize = 0;
 
-        for (Winning winning : this.getMyWinnings()) {
-            totalPrize += winning.getPrize();
+        for (Rank rank : this.getMyWinnings()) {
+            totalPrize += rank.getPrize();
         }
 
         return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);

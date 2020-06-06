@@ -2,8 +2,6 @@ package dev.dahye.lotto.service;
 
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.Money;
-import dev.dahye.lotto.domain.Winning;
-import dev.dahye.lotto.util.DoubleUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

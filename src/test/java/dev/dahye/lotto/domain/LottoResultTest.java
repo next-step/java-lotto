@@ -67,20 +67,20 @@ class LottoResultTest {
     @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
     @MethodSource("winnings")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
-    void getResult_myWinnings(String winningNumbers, Winning winning) {
+    void getResult_myWinnings(String winningNumbers, Rank rank) {
         List<LottoTicket> manualLottoTickets
                 = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers);
-        assertThat(lottoResult.getMyWinnings().get(0)).isEqualTo(winning);
+        assertThat(lottoResult.getMyWinnings().get(0)).isEqualTo(rank);
     }
 
     private static Stream<Arguments> winnings() {
         return Stream.of(
-                arguments("1, 2, 3, 23, 24, 25", Winning.FOURTH),
-                arguments("1, 2, 3, 4, 25, 26", Winning.THIRD),
-                arguments("1, 2, 3, 4, 5, 26", Winning.SECOND),
-                arguments("1, 2, 3, 4, 5, 6", Winning.FIRST)
+                arguments("1, 2, 3, 23, 24, 25", Rank.FOURTH),
+                arguments("1, 2, 3, 4, 25, 26", Rank.THIRD),
+                arguments("1, 2, 3, 4, 5, 26", Rank.SECOND),
+                arguments("1, 2, 3, 4, 5, 6", Rank.FIRST)
         );
     }
 
@@ -97,7 +97,7 @@ class LottoResultTest {
         ), "1, 2, 3, 4, 5, 6");
 
         double expectedResult
-                = DoubleUtils.parseDoubleSecondDigit((Winning.FIRST.getPrize() + Winning.SECOND.getPrize()) / myMoney);
+                = DoubleUtils.parseDoubleSecondDigit((Rank.FIRST.getPrize() + Rank.SECOND.getPrize()) / myMoney);
         assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
     }
 }
