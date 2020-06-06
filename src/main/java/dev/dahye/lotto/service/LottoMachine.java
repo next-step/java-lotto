@@ -26,11 +26,6 @@ public class LottoMachine {
         this.lottoTickets = new ArrayList<>();
     }
 
-    public LottoMachine(int money, List<LottoTicket> lottoTickets) {
-        this.money = new Money(money);
-        this.lottoTickets = lottoTickets;
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
