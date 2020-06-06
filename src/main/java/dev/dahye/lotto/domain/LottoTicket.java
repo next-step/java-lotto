@@ -28,7 +28,6 @@ public class LottoTicket {
 
     public static LottoTicket manualIssued(List<Integer> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
-
     }
 
     private void validateLottoNumberSize() {
