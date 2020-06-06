@@ -25,7 +25,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket autoIssued() {
-        return new LottoTicket(LottoNumberMaker.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
+        return new LottoTicket(LottoTicketExtractor.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
     }
 
     public static List<LottoTicket> autoIssued(int countOfLotto) {
