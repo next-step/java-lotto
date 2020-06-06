@@ -71,12 +71,13 @@ public class PurchaseServiceTest {
 	@DisplayName("수동으로 구매한 로또티켓의 리스트가 들어오면, 그 리스트의 개수를 제외한 만큼 자동으로 발급해준다.")
 	@MethodSource("autoAndManualLottoNumber")
 	@ParameterizedTest
-	void 수동로또를_제외하고_자동로또가_발급된다(Integer payable, LottoTickets lottoTickets, Integer manualExpected,
+	void 수동로또를_제외하고_자동로또가_추가로_발급된다(Integer payable, LottoTickets lottoTickets, Integer manualExpected,
 		Integer autoExpected, Integer totalExpected) {
-		LottoTickets lottoTicketAfterAuto = PurchaseServiceMock.purchase2(new Money(payable), lottoTickets);
+		int getAutoLottoNum = PurchaseServiceMock.countToAutoDrawnLotto(new Money(payable), lottoTickets);
+		LottoTickets lottoTicketsAfterAuto = PurchaseServiceMock.purchaseAutoDrawnLotto(getAutoLottoNum, lottoTickets);
 
-		assertThat(lottoTicketAfterAuto.getManualLottoNum()).isEqualTo(manualExpected);
-		assertThat(lottoTicketAfterAuto.getAutoLottoNum()).isEqualTo(autoExpected);
-		assertThat(lottoTicketAfterAuto.numberOfLottoTickets()).isEqualTo(totalExpected);
+		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets() - getAutoLottoNum).isEqualTo(manualExpected);
+		assertThat(getAutoLottoNum).isEqualTo(autoExpected);
+		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets()).isEqualTo(totalExpected);
 	}
 }
