@@ -68,21 +68,21 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCount(List<Integer> winningNumbers) {
-        int matchCount = 0;
+    public int getCountOfMatch(LottoTicket winningTicket) {
+        int countOfMatch = 0;
 
-        for (Integer winningNumber : winningNumbers) {
-            matchCount = getMatchCountWhenContainsNumber(matchCount, winningNumber);
+        for (Integer winningNumber : winningTicket.lottoNumbers) {
+            countOfMatch = getCountOfMatchWhenContainsNumber(countOfMatch, winningNumber);
         }
 
-        return matchCount;
+        return countOfMatch;
     }
 
-    private int getMatchCountWhenContainsNumber(int matchCount, Integer winningNumber) {
+    private int getCountOfMatchWhenContainsNumber(int countOfMatch, Integer winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
-            matchCount++;
+            countOfMatch++;
         }
-        return matchCount;
+        return countOfMatch;
     }
 
     @Override

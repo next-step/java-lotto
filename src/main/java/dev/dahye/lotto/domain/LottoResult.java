@@ -7,10 +7,9 @@ import java.util.List;
 
 public class LottoResult {
     private static final String WINNERS_DELIMITER = ",";
-    private static final int WINNING_NUMBER_MAX_SIZE = 6;
 
     private final List<LottoTicket> lottoTickets;
-    private final List<Integer> winningNumbers;
+    private final LottoTicket winningTicket;
     private final int bonusNumber;
 
     public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput, int bonusNumber) {
@@ -18,10 +17,9 @@ public class LottoResult {
         List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
 
         this.lottoTickets = lottoTickets;
-        this.winningNumbers = winningNumbers;
+        this.winningTicket = LottoTicket.manualIssued(winningNumbers);
         this.bonusNumber = bonusNumber;
 
-        validateWinningNumbers();
         validateBonusNumber();
     }
 
@@ -54,22 +52,11 @@ public class LottoResult {
         }
     }
 
-    private void validateWinningNumbers() {
-        validateWinningNumberSize();
-        LottoNumbers.validNumberRange(winningNumbers);
-    }
-
-    private void validateWinningNumberSize() {
-        if (winningNumbers.size() != WINNING_NUMBER_MAX_SIZE) {
-            throw new IllegalArgumentException("당첨 번호는 6자리 숫자여야 합니다.");
-        }
-    }
-
     public List<Rank> getMyWinnings() {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.getMatchCount(winningNumbers);
+            int matchCount = lottoTicket.getCountOfMatch(winningTicket);
             boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
             addWhenIsWinning(ranks, matchCount, isMatchBonusNumber);
         }

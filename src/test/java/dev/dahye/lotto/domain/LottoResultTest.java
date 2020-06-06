@@ -41,7 +41,7 @@ class LottoResultTest {
     @DisplayName("당첨 번호가 6자리가 아닌 경우 IllegalArguments exception throw")
     void winningNumbers_must_be_six_numbers(String winningNumbers) {
         assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers, BONUS_NUMBER),
-                "당첨 번호는 6자리 숫자여야 합니다.");
+                "로또 티켓은 6자리 숫자여야 합니다.");
     }
 
     @ParameterizedTest(name = "입력 값 = {0}")
