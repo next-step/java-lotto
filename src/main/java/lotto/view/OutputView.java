@@ -3,12 +3,15 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottosStatistics;
 import lotto.domain.LottoRank;
+import lotto.domain.ManualLottoMemo;
 
+import java.text.Format;
 import java.util.List;
 
 public class OutputView {
-    public static void printBuyLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + TextFixture.BOUGHT_LOTTO_COUNT);
+    public static void printBuyLottos(List<Lotto> lottos, ManualLottoMemo manualLottoMemo) {
+        String summary = String.format(TextFixture.BOUGHT_LOTTO_COUNT, manualLottoMemo.size(), lottos.size() - manualLottoMemo.size());
+        System.out.println(summary);
         for(Lotto lotto : lottos) {
             System.out.println(lotto);
         }
