@@ -13,8 +13,8 @@ public class LottoShop {
         ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
 
         String winningNumbers = InputView.doInputWinningNumbers();
-
-        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningNumbers, 1);
+        int bonusNumber = InputView.doInputBonusNumber();
+        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningNumbers, bonusNumber);
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printWinningRate(lottoResult.getMyWinningRate(money));
