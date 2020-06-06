@@ -5,46 +5,26 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<String, Integer> resultMap;
-    private double profitRate;
+    private final List<LottoPrize> lottoPrizeList;
 
-    public LottoResult(List<Lotto> lottos,List<Integer> winningNumbers) {
-        this.resultMap = matchList(lottos, winningNumbers);
+    public LottoResult(List<LottoPrize> lottoPrizeList) {
+        this.lottoPrizeList = lottoPrizeList;
     }
 
-    private Map<String, Integer> matchList(List<Lotto> lottos,List<Integer> winningNumbers) {
-        Map<String, Integer> map = new HashMap<>();
-        initMap(map);
+    public Map<Integer, Integer> matchLottoCount() {
+        Map<Integer, Integer> result = new HashMap<>();
+        lottoPrizeList.stream().filter(lottoPrize -> lottoPrize != LottoPrize.MISS)
+                .forEach(lottoPrize -> {
+                    result.put(lottoPrize.getCountOfMatch(), result.getOrDefault(lottoPrize.getCountOfMatch(),0) + 1);
+                });
 
-        for (Lotto lotto : lottos) {
-            String count = String.valueOf(lotto.matches(winningNumbers));
-            int preCount = map.get(count);
-
-            map.put(count, preCount + 1);
-        }
-        return map;
+        return result;
     }
 
-    private void initMap(Map<String, Integer> map) {
-        for (int idx = 0; idx <= 6; idx++) {
-            map.put(String.valueOf(idx), 0);
-        }
-    }
-
-    public void statistics(int money) {
-        double profit = resultMap.keySet().stream()
-                                .map(String::valueOf)
-                                .filter(v -> Integer.parseInt(v) >= 3)
-                                .mapToDouble(v -> (LottoPrize.getPrize(v) * resultMap.get(v)))
+    public double statistics(int money) {
+        double profit = lottoPrizeList.stream()
+                                .mapToDouble(LottoPrize::getPrize)
                                 .sum();
-        profitRate = profit / money;
-    }
-
-    public Map<String, Integer> getResultMap() {
-        return resultMap;
-    }
-
-    public double getProfitRate() {
-        return profitRate;
+        return Math.round((profit / money) * 100) / 100.0;
     }
 }
