@@ -15,10 +15,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.collections.LottoTicket;
 import lotto.collections.LottoTickets;
-import lotto.collections.Money;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.mock.PurchaseServiceMock;
 
 public class PurchaseServiceTest {
@@ -74,9 +74,10 @@ public class PurchaseServiceTest {
 	void 수동로또를_제외하고_자동로또가_추가로_발급된다(Integer payable, LottoTickets lottoTickets, Integer manualExpected,
 		Integer autoExpected, Integer totalExpected) {
 		int getAutoLottoNum = PurchaseServiceMock.countToAutoDrawnLotto(new Money(payable), lottoTickets);
-		LottoTickets lottoTicketsAfterAuto = PurchaseServiceMock.purchaseAutoDrawnLotto(getAutoLottoNum, lottoTickets);
+		LottoTickets lottoTicketsAfterAuto = PurchaseService.purchaseAutoDrawnTickets(new Money(payable), lottoTickets);
+		int getTotalLottoNum = lottoTicketsAfterAuto.numberOfLottoTickets();
 
-		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets() - getAutoLottoNum).isEqualTo(manualExpected);
+		assertThat(getTotalLottoNum - getAutoLottoNum).isEqualTo(manualExpected);
 		assertThat(getAutoLottoNum).isEqualTo(autoExpected);
 		assertThat(lottoTicketsAfterAuto.numberOfLottoTickets()).isEqualTo(totalExpected);
 	}
