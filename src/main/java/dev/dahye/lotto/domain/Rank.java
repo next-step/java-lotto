@@ -27,6 +27,10 @@ public enum Rank {
         return prize;
     }
 
+    public boolean isMatchBonusNumber() {
+        return isMatchBonusNumber;
+    }
+
     private boolean same(int countOfMatch, boolean isMatchBonusNumber) {
         return (this.countOfMatch == countOfMatch && this.isMatchBonusNumber == isMatchBonusNumber);
     }

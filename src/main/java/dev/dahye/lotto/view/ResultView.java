@@ -18,9 +18,14 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
-            System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getPrize() + "원) - "
+            System.out.println(rank.getCountOfMatch() + "개 일치" + printBonusBall(rank.isMatchBonusNumber())
+                    + rank.getPrize() + "원) - "
                     + lottoResult.getTotalCountWhenSpecificWinning(rank) + "개");
         }
+    }
+
+    private static String printBonusBall(boolean isMatchBonusNumber) {
+        return (isMatchBonusNumber ? ", 보너스 볼 일치(" : " (");
     }
 
     public static void printWinningRate(double number) {
