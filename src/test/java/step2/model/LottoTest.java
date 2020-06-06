@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.util.LottoStringtoNumbers;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
 
@@ -26,8 +26,20 @@ class LottoTest {
         testNumbers.add(5);
         testNumbers.add(6);
 
-        Lotto lotto = new Lotto(testNumbers);
+        assertThat(new Lotto(testNumbers).checkWinningCount(new Lotto(input))).isEqualTo(result);
+    }
 
-        assertThat(lotto.checkWinningCount(LottoStringtoNumbers.convertStringtoNumbers(input))).isEqualTo(result);
+    @ParameterizedTest
+    @ValueSource( strings = { "-1,2,3,4,5,6", "0,1,2,3,4,5", "1,2,3,4,5,46" } )
+    @DisplayName("구입한 로또 대비 당첨된 개수")
+    void checkNumber(String lottoNumbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers));
+    }
+
+    @ParameterizedTest
+    @ValueSource( strings = { "1,2,3,4,5", "1,2,3,4,5,6,7" })
+    @DisplayName("구입한 로또 대비 당첨된 개수")
+    void checkSize(String lottoNumbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
 }
