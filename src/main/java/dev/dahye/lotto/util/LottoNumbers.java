@@ -1,4 +1,4 @@
-package dev.dahye.lotto.domain;
+package dev.dahye.lotto.util;
 
 import java.util.ArrayList;
 import java.util.List;

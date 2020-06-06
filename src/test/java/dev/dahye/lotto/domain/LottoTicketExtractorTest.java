@@ -1,5 +1,6 @@
 package dev.dahye.lotto.domain;
 
+import dev.dahye.lotto.util.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

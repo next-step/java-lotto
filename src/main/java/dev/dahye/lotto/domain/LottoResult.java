@@ -1,6 +1,7 @@
 package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
+import dev.dahye.lotto.util.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;

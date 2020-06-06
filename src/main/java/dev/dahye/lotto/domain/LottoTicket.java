@@ -1,5 +1,7 @@
 package dev.dahye.lotto.domain;
 
+import dev.dahye.lotto.util.LottoNumbers;
+
 import java.util.*;
 
 public class LottoTicket {
