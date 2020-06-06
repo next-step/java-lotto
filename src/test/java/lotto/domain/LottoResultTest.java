@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoResultTest {
     private List<Lotto> lottos;
@@ -36,9 +37,11 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
 
         Map<String, Integer> resultMap = lottoResult.getResultMap();
-        assertThat(resultMap.get("2")).isEqualTo(1);
-        assertThat(resultMap.get("3")).isEqualTo(1);
-        assertThat(resultMap.get("4")).isEqualTo(0);
+        assertAll(
+                () -> assertThat(resultMap.get("2")).isEqualTo(1),
+                () -> assertThat(resultMap.get("3")).isEqualTo(1),
+                () -> assertThat(resultMap.get("4")).isEqualTo(0)
+        );
     }
 
     @Test
