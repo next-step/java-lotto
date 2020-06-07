@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import stringCalculator.Operations;
 import stringCalculator.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,5 +43,11 @@ public class StringAddCalculatorTest {
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void splitAndSum_숫자가_아닌_경우() {
+        assertThatThrownBy(() -> Operations.strToInt("a"))
+                .isInstanceOf(NumberFormatException.class);
     }
 }

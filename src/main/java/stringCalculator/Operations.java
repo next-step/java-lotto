@@ -11,11 +11,15 @@ public class Operations {
     }
 
     public static int strToInt(String calcStr) throws RuntimeException {
-        int num = Integer.parseInt(calcStr);
-        if (num < 0) {
-            throw new RuntimeException();
-        }
+        try {
+            int num = Integer.parseInt(calcStr);
+            if (num < 0) {
+                throw new RuntimeException();
+            }
 
-        return num;
+            return num;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
     }
 }
