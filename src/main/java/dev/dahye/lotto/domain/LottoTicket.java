@@ -87,7 +87,7 @@ public class LottoTicket {
         return Objects.hash(lottoNumbers);
     }
 
-    public boolean contains(int bonusNumber) {
-        return this.lottoNumbers.contains(bonusNumber);
+    public boolean contains(int number) {
+        return this.lottoNumbers.contains(number);
     }
 }

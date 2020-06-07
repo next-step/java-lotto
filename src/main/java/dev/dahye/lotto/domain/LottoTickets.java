@@ -33,12 +33,12 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public List<Rank> calculateWinningRate(LottoTicket winningTicket, int bonusNumber) {
+    public List<Rank> calculateWinningRate(LottoTicket winningTicket, BonusBall bonusBall) {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getCountOfMatch(winningTicket);
-            boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
+            boolean isMatchBonusNumber = lottoTicket.contains(bonusBall.getBonusNumber());
             addWhenIsRanking(ranks, matchCount, isMatchBonusNumber);
         }
 

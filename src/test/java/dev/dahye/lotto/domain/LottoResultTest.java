@@ -19,13 +19,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 @DisplayName("Lotto의 결과를 출력하는 객체")
 class LottoResultTest {
     private static LottoTickets autoLottoTickets;
-    private static String winningNumbers;
     private static final int BONUS_NUMBER = 1;
 
     @BeforeEach
     void setUp() {
         autoLottoTickets = LottoTickets.autoIssued(1);
-        winningNumbers = "1, 2, 3, 4, 5, 6";
     }
 
     @ParameterizedTest(name = "입력 값 = {0}")
@@ -105,26 +103,4 @@ class LottoResultTest {
     void winning_rate() {
         assertThat(LottoResult.divideTotalPrizeByMoney(5000, 14000)).isEqualTo(0.36);
     }
-
-    private static class LottoResultForBonus extends LottoResult {
-        public LottoResultForBonus(int bonusNumber) {
-            super(autoLottoTickets, winningNumbers, bonusNumber);
-        }
-    }
-
-    @ParameterizedTest(name = "보너스 볼 = {0}")
-    @ValueSource(ints = {-1, 0, 46})
-    @DisplayName("보너스 볼은 로또 번호의 유효성 검증 로직에 부합하지 않는 경우 IllegalArgumentException throw")
-    void validate_bonus_ball(int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResultForBonus(bonusNumber));
-    }
-
-    @ParameterizedTest(name = "보너스 볼 = {0}")
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    @DisplayName("보너스 볼은 당첨 번호와 중복될 수 없다.")
-    void duplicate_bonus_ball(int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResultForBonus(bonusNumber),
-                "보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-    }
-
 }

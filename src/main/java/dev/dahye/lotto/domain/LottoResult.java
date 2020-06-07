@@ -1,7 +1,6 @@
 package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
-import dev.dahye.lotto.util.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class LottoResult {
 
     private final LottoTickets lottoTickets;
     private final LottoTicket winningTicket;
-    private final int bonusNumber;
+    private final BonusBall bonusNumber;
 
     public LottoResult(LottoTickets lottoTickets, String winningNumberInput, int bonusNumber) {
         validateWinnersNullOrEmpty(winningNumberInput);
@@ -19,17 +18,7 @@ public class LottoResult {
 
         this.lottoTickets = lottoTickets;
         this.winningTicket = LottoTicket.manualIssued(winningNumbers);
-        this.bonusNumber = bonusNumber;
-
-        validateBonusNumber();
-    }
-
-    private void validateBonusNumber() {
-        LottoNumbers.validNumberRange(bonusNumber);
-
-        if (winningTicket.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-        }
+        this.bonusNumber = BonusBall.createBy(bonusNumber, this.winningTicket);
     }
 
     private void validateWinnersNullOrEmpty(String winningNumberInput) {
