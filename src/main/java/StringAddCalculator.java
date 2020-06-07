@@ -6,7 +6,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = calcStr.split(",");
+        String[] numbers = calcStr.split(",|:");
         for (String number: numbers) {
             result += Integer.parseInt(number);
         }
