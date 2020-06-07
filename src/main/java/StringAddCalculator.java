@@ -11,7 +11,8 @@ public class StringAddCalculator {
             return strToInt(calcStr);
         }
 
-        return splitStr(calcStr);
+        String[] numbers = splitStr(calcStr);
+        return operationSum(numbers);
     }
 
     private static int strToInt(String calcStr) throws RuntimeException {
@@ -23,28 +24,26 @@ public class StringAddCalculator {
         return num;
     }
 
-    private static int splitStr(String calcStr) {
+    private static String[] splitStr(String calcStr) {
         if (isDefaultDelimiter(calcStr)) {
-            String[] numbers = calcStr.split(",|:");
-            return sum(numbers);
+            return calcStr.split(",|:");
         }
 
         return splitWithCustomDelimiter(calcStr);
     }
 
-    private static int splitWithCustomDelimiter(String calcStr) {
+    private static String[] splitWithCustomDelimiter(String calcStr) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(calcStr);
 
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-            return sum(tokens);
+            return m.group(2).split(customDelimiter);
         }
 
-        return 0;
+        return new String[0];
     }
 
-    private static int sum(String[] numbers) {
+    private static int operationSum(String[] numbers) {
         int sum = 0;
         for (String number: numbers) {
             sum += strToInt(number);
