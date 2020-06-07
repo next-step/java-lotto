@@ -23,15 +23,18 @@ public class Lotto {
 
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> inputLottoNumberList) {
+    private Lotto(List<Integer> inputLottoNumberList) {
         validateNumbers(inputLottoNumberList);
         lottoNumbers = inputLottoNumberList;
     }
 
-    public Lotto(String inputWinnerNumbers) {
+    public static Lotto newListLotto(List<Integer> inputLottoNumberList) {
+        return new Lotto(inputLottoNumberList);
+    }
+
+    public static Lotto newStringLotto(String inputWinnerNumbers) {
         List<Integer> convertLottoNumber = convertStringToNumbers(inputWinnerNumbers);
-        validateNumbers(convertLottoNumber);
-        lottoNumbers = convertLottoNumber;
+        return new Lotto(convertLottoNumber);
     }
 
     public List<Integer> getLottoNumbers() {
@@ -85,7 +88,7 @@ public class Lotto {
         }
     }
 
-    private List<Integer> convertStringToNumbers(String inputWinnerNumbers) {
+    private static List<Integer> convertStringToNumbers(String inputWinnerNumbers) {
         try {
             return Stream.of(inputWinnerNumbers.split(DELIMETER))
                     .map(String::trim)

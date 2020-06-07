@@ -26,20 +26,20 @@ class LottoTest {
         testNumbers.add(5);
         testNumbers.add(6);
 
-        assertThat(new Lotto(testNumbers).checkWinningCount(new Lotto(input))).isEqualTo(result);
+        assertThat(Lotto.newListLotto(testNumbers).checkWinningCount(Lotto.newStringLotto(input))).isEqualTo(result);
     }
 
     @ParameterizedTest
     @ValueSource( strings = { "-1,2,3,4,5,6", "0,1,2,3,4,5", "1,2,3,4,5,46" } )
     @DisplayName("구입한 로또 대비 당첨된 개수")
     void checkNumber(String lottoNumbers) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.newStringLotto(lottoNumbers));
     }
 
     @ParameterizedTest
     @ValueSource( strings = { "1,2,3,4,5", "1,2,3,4,5,6,7" })
     @DisplayName("구입한 로또 대비 당첨된 개수")
     void checkSize(String lottoNumbers) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.newStringLotto(lottoNumbers));
     }
 }

@@ -20,7 +20,7 @@ public class LottoMain {
         LottoOutput.printLottoNumbers(lottoGame);
 
         String inputWinnerNumbers = LottoInput.inputWinnerNumbers();
-        Lotto winnerNumbers = new Lotto(inputWinnerNumbers);
+        Lotto winnerNumbers = Lotto.newStringLotto(inputWinnerNumbers);
 
         LottoTotalCalculator lottoTotalCalculator = new LottoTotalCalculator();
         Map<WinnerTier, Integer> WinningResult = lottoTotalCalculator.countWinners(lottoGame, winnerNumbers);
