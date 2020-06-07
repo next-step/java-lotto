@@ -41,7 +41,7 @@ public class UserLotto extends Lotto {
         prize = Prize.valueOf(hitCount, isMatchedBonus).getGrade();
     }
 
-    public int getCashPrice() {
+    public long getCashPrice() {
         return Prize.getCashPrize(prize);
     }
 

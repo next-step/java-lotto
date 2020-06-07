@@ -32,8 +32,8 @@ public class UserPrice {
         return (int) Math.floor(price) / LOTTO_PRICE;
     }
 
-    private int getTotalCashPrize(List<UserLotto> lottos) {
-        int totalCashPrize = lottos.stream().mapToInt(UserLotto::getCashPrice).sum();
+    private long getTotalCashPrize(List<UserLotto> lottos) {
+        long totalCashPrize = lottos.stream().mapToLong(UserLotto::getCashPrice).sum();
         return totalCashPrize;
     }
 

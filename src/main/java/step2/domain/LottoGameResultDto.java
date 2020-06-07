@@ -7,14 +7,16 @@ public class LottoGameResultDto {
     private final int secondPrizeCount;
     private final int thirdPrizeCount;
     private final int forthPrizeCount;
+    private final int fifthPrizeCount;
 
     public LottoGameResultDto(double earningRate, int firstPrizeCount, int secondPrizeCount,
-        int thirdPrizeCount, int forthPrizeCount) {
+        int thirdPrizeCount, int forthPrizeCount, int fifthPrizeCount) {
         this.earningRate = earningRate;
         this.firstPrizeCount = firstPrizeCount;
         this.secondPrizeCount = secondPrizeCount;
         this.thirdPrizeCount = thirdPrizeCount;
         this.forthPrizeCount = forthPrizeCount;
+        this.fifthPrizeCount = fifthPrizeCount;
     }
 
     public double getEarningRate() {
@@ -37,6 +39,10 @@ public class LottoGameResultDto {
         return forthPrizeCount;
     }
 
+    public int getFifthPrizeCount() {
+        return fifthPrizeCount;
+    }
+
     @Override
     public String toString() {
         return "LottoGameResultDto{" +
@@ -45,6 +51,7 @@ public class LottoGameResultDto {
             ", secondPrizeCount=" + secondPrizeCount +
             ", thirdPrizeCount=" + thirdPrizeCount +
             ", forthPrizeCount=" + forthPrizeCount +
+            ", fifthPrizeCount=" + fifthPrizeCount +
             '}';
     }
 }

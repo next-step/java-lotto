@@ -27,6 +27,8 @@ public class ResultView {
 
     public void printStatistic(LottoGameResultDto lottoGameResultDto) {
         System.out.printf(WINNING_STATISTIC_TEMPLATE,
+            Prize.FIFTH.getCashPrize(),
+            lottoGameResultDto.getFifthPrizeCount(),
             Prize.FORTH.getCashPrize(),
             lottoGameResultDto.getForthPrizeCount(),
             Prize.THIRD.getCashPrize(),

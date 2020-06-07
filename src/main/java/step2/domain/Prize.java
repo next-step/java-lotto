@@ -13,11 +13,11 @@ public enum Prize {
     ;
 
     private int grade;
-    private int cashPrize;
+    private long cashPrize;
     private int hitCount;
     private boolean isMatchedBonus;
 
-    Prize(int grade, int cashPrize, int hitCount, boolean isMatchedBonus) {
+    Prize(int grade, long cashPrize, int hitCount, boolean isMatchedBonus) {
         this.grade = grade;
         this.cashPrize = cashPrize;
         this.hitCount = hitCount;
@@ -28,11 +28,11 @@ public enum Prize {
         return grade;
     }
 
-    public int getCashPrize() {
+    public long getCashPrize() {
         return cashPrize;
     }
 
-    public static int getCashPrize(int grade) {
+    public static long getCashPrize(int grade) {
         for (Prize prize : values()) {
             if (prize.grade == grade) {
                 return prize.cashPrize;
