@@ -18,14 +18,11 @@ import study2.domain.Ranking.Rank;
 class RankTest {
 
 	Ranking ranking;
-	LottoNumbers lottonumbers;
 	List<Integer> lottolist = Arrays.asList(25, 1, 2, 3, 7, 6);
 	int count = 0;
 
 	@BeforeEach
 	void init() {
-		lottonumbers = new LottoNumbers();
-
 		ranking = new Ranking();
 	}
 
@@ -44,7 +41,7 @@ class RankTest {
 			}
 		}
 
-		assertThat(count).isEqualTo(3);
+		assertThat(count).isEqualTo(Rank.THREEMATCH.getCountOfMatch());
 	}
 
 }

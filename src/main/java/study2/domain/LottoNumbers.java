@@ -43,16 +43,11 @@ public class LottoNumbers {
 
 	public List<Lotto> getLottoNumbers(int inputPrice) {
 
-		// 리팩토링 필요 : 리팩토링 할만한 조언부탁드리겠습니다.
+		// for문에 대한 리팩토링 필요할까요? : 리팩토링 할만한 조언부탁드리겠습니다.
 		for (int i = 0; i < inputPrice; i++) {
-
-			// Q) 로또번호 list view 부분인데요, 굳이 ResultView로 빼낼 필요가 있을까요?
-			System.out.println(LottoGenerator.generateLottoNumber());
-
 			lottoNumbers.add(new Lotto(
-					(LottoGenerator.generateLottoNumber())
-					));
-
+					(LottoGenerator.generateLottoNumber()
+							)));
 		}
 		return lottoNumbers;
 

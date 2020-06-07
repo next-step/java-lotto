@@ -36,6 +36,7 @@ public class InputView {
 	
 	public static String rankMessages() {
 		System.out.println(winRankMessages);
+		scanner.nextLine();
 		return scanner.nextLine();
 	}
 }
