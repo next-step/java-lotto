@@ -13,7 +13,7 @@ public class PriceLottoTest {
     public void createPriceTest() {
         PriceLotto priceLotto = PriceLotto.of(10_000);
 
-        assertThat(priceLotto.get()).isEqualTo(10_000);
+        assertThat(priceLotto.getIntValue()).isEqualTo(10_000);
     }
 
     @DisplayName("음수가 입력될 경우 IllegalArgument 예외가 발생한다.")
@@ -30,7 +30,7 @@ public class PriceLottoTest {
         PriceLotto priceLotto = PriceLotto.of(10_000);
         priceLotto.boughtLotto(5, 1000);
 
-        assertThat(priceLotto.get()).isEqualTo(5_000);
+        assertThat(priceLotto.getIntValue()).isEqualTo(5_000);
     }
 
     @DisplayName("구매한 로또수의 금액이 잔액보다 크면 IllegalArgumetException 을 발생한다.")
