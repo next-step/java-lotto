@@ -8,7 +8,7 @@ public class OutputView {
 
 	public static void printNumberOfPurchasedTickets(LottoTickets userManualTickets, LottoTickets allTickets) {
 		final int numberOfUserManualTickets = userManualTickets.numberOfLottoTickets();
-		final int numberOfAutoDrawnTickets = allTickets.numberOfLottoTickets();
+		final int numberOfAutoDrawnTickets = allTickets.numberOfLottoTickets() - numberOfUserManualTickets;
 		System.out.println("수동으로" + numberOfUserManualTickets + "개를 구매했습니다.");
 		System.out.println("자동으로" + numberOfAutoDrawnTickets + "개를 구매했습니다.");
 		allTickets.getLottoTickets()
