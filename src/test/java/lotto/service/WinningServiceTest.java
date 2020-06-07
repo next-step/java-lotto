@@ -34,7 +34,7 @@ public class WinningServiceTest {
 		oneLottoStatistics.add(RewardType.FIFTH);
 
 		return Stream.of(
-			Arguments.of(oneLottoStatistics, 1555000)
+			Arguments.of(oneLottoStatistics, 4, 388.75)
 		);
 	}
 
@@ -103,7 +103,7 @@ public class WinningServiceTest {
 	@DisplayName("로또 통계에 따라 당첨 타입과 당첨 금액을 활용하여 최종 수익을 계산한다.")
 	@MethodSource("lottoStatisticsMock")
 	@ParameterizedTest
-	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int profit) {
-		assertThat(WinningService.calculateProfit(lottoStatistics).getValue()).isEqualTo(profit);
+	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int totalLottoSize, double profit) {
+		assertThat(WinningService.calculateProfit(lottoStatistics, totalLottoSize)).isEqualTo(profit);
 	}
 }
