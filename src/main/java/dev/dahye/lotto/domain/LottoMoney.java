@@ -11,17 +11,17 @@ public class LottoMoney {
         this.money = money;
     }
 
-    public int getCountOfLotto() {
+    public int calculateCountOfLotto() {
         return money / LOTTO_PRICE;
     }
 
     private void validate(int money) {
-        if (mustBePositiveNumber(money) || isNoRemainder(money)) {
+        if (isNegativeNumber(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
     }
 
-    private boolean mustBePositiveNumber(int money) {
+    private boolean isNegativeNumber(int money) {
         return money <= ZERO_VALUE;
     }
 

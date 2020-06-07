@@ -67,17 +67,17 @@ class LottoResultTest {
     }
 
     @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
-    @MethodSource("winnings")
+    @MethodSource("ranks")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
-    void getResult_myWinnings(String winningNumbers, int bonusNumber, Rank rank) {
+    void getResult_myRanks(String winningNumbers, int bonusNumber, Rank rank) {
         List<LottoTicket> manualLottoTickets
                 = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers, bonusNumber);
-        assertThat(lottoResult.getMyWinnings().get(0)).isEqualTo(rank);
+        assertThat(lottoResult.getMyRanks().get(0)).isEqualTo(rank);
     }
 
-    private static Stream<Arguments> winnings() {
+    private static Stream<Arguments> ranks() {
         return Stream.of(
                 arguments("1, 2, 3, 23, 24, 25", 45, Rank.FIFTH),
                 arguments("1, 2, 3, 4, 25, 26", 45, Rank.FOURTH),
@@ -91,23 +91,23 @@ class LottoResultTest {
     @DisplayName("로또 수익률을 구할 수 있다.")
     void lotto_winning_rate() {
         int myMoney = 2000;
-        LottoTicket lottoTicketByWinningFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicketByWinningThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTicket lottoTicketByRankFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicketByRankThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         LottoResult lottoResult = new LottoResult(Arrays.asList(
-                lottoTicketByWinningFirst,
-                lottoTicketByWinningThird
+                lottoTicketByRankFirst,
+                lottoTicketByRankThird
         ), "1, 2, 3, 4, 5, 6", 8);
 
         int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
-        double expectedResult = LottoResult.getWinningRate(totalPrize, myMoney);
+        double expectedResult = LottoResult.divideTotalPrizeByMoney(totalPrize, myMoney);
         assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
     }
 
     @Test
     @DisplayName("당첨율 구하기")
     void winning_rate() {
-        assertThat(LottoResult.getWinningRate(5000, 14000)).isEqualTo(0.35);
+        assertThat(LottoResult.divideTotalPrizeByMoney(5000, 14000)).isEqualTo(0.35);
     }
 
     private static class LottoResultForBonus extends LottoResult {

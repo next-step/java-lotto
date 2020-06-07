@@ -16,7 +16,7 @@ public class LottoMachine {
 
         initializeTickets();
 
-        int countOfLotto = this.lottoMoney.getCountOfLotto();
+        int countOfLotto = this.lottoMoney.calculateCountOfLotto();
         lottoTickets = LottoTicket.autoIssued(countOfLotto);
     }
 

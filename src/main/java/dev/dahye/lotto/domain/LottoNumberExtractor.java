@@ -6,7 +6,7 @@ import java.util.List;
 
 import static java.util.Collections.shuffle;
 
-public class LottoTicketExtractor {
+public class LottoNumberExtractor {
     public static final int ZERO_VALUE = 0;
 
     public static List<Integer> createShuffled(int maxSize) {

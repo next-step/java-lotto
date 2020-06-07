@@ -16,7 +16,7 @@ class RankTest {
     @ParameterizedTest(name = "일치 횟수 = {0}, 보너스볼 {1}, 결과 = {2}")
     @MethodSource("ranks")
     @DisplayName("당첨된 횟수가 상금을 받을 수 있는 경우 valueOf() 을 호출하면 Rank 값 return")
-    void getWinning_success(int matchCount, boolean isMatchBonusBall, Rank expectedRank) {
+    void valueOf_success(int matchCount, boolean isMatchBonusBall, Rank expectedRank) {
         assertThat(Rank.valueOf(matchCount, isMatchBonusBall)).isEqualByComparingTo(expectedRank);
     }
 
@@ -33,7 +33,7 @@ class RankTest {
     @ParameterizedTest(name = "일치 횟수 = {0}, 보너스볼 {1}")
     @MethodSource("invalidRanks")
     @DisplayName("정의된 당첨 횟수가 아닌 경우 valueOf() 메서드를 호출하면 IllegalArgumentException throw")
-    void getWinning_fail(int matchCount, boolean isMatchBonusBall) {
+    void valueOf_fail(int matchCount, boolean isMatchBonusBall) {
         assertThrows(IllegalArgumentException.class, () -> Rank.valueOf(matchCount, isMatchBonusBall));
     }
 
@@ -52,7 +52,7 @@ class RankTest {
     @ParameterizedTest(name = "일치 횟수 = {0}, 보너스볼 {1}")
     @MethodSource("invalidRanks")
     @DisplayName("일치된 횟수가 상금을 수여할 수 없는 경우 canRanking(matchCount)는 false를 반환한다.")
-    void getWinning_false(int matchCount, boolean isMatchBonusBall) {
+    void can_not_ranking(int matchCount, boolean isMatchBonusBall) {
         assertThat(Rank.canRanking(matchCount, isMatchBonusBall)).isFalse();
     }
 }

@@ -37,12 +37,12 @@ public enum Rank {
 
     public static boolean canRanking(int countOfMatch, boolean isMatchBonusNumber) {
         return Arrays.stream(Rank.values())
-                .anyMatch(winning -> winning.same(countOfMatch, isMatchBonusNumber));
+                .anyMatch(rank -> rank.same(countOfMatch, isMatchBonusNumber));
     }
 
     public static Rank valueOf(int countOfMatch, boolean isMatchBonusNumber) {
         return Arrays.stream(Rank.values())
-                .filter(winning -> winning.same(countOfMatch, isMatchBonusNumber))
+                .filter(rank -> rank.same(countOfMatch, isMatchBonusNumber))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

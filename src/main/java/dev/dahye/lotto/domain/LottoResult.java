@@ -57,28 +57,28 @@ public class LottoResult {
         }
     }
 
-    public List<Rank> getMyWinnings() {
+    public List<Rank> getMyRanks() {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getCountOfMatch(winningTicket);
             boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
-            addWhenIsWinning(ranks, matchCount, isMatchBonusNumber);
+            addWhenIsRanking(ranks, matchCount, isMatchBonusNumber);
         }
 
         return ranks;
     }
 
-    private void addWhenIsWinning(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
+    private void addWhenIsRanking(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
         if (Rank.canRanking(matchCount, isMatchBonusNumber)) {
             ranks.add(Rank.valueOf(matchCount, isMatchBonusNumber));
         }
     }
 
-    public int getTotalCountWhenSpecificWinning(Rank target) {
+    public int getTotalCountOf(Rank target) {
         int count = 0;
 
-        for (Rank rank : this.getMyWinnings()) {
+        for (Rank rank : this.getMyRanks()) {
             count = plusCountWhenEquals(count, rank, target);
         }
 
@@ -95,14 +95,14 @@ public class LottoResult {
     public double getMyWinningRate(int money) {
         int totalPrize = 0;
 
-        for (Rank rank : this.getMyWinnings()) {
+        for (Rank rank : this.getMyRanks()) {
             totalPrize += rank.getPrize();
         }
 
-        return getWinningRate(totalPrize, money);
+        return divideTotalPrizeByMoney(totalPrize, money);
     }
 
-    public static double getWinningRate(int totalPrize, int money) {
+    public static double divideTotalPrizeByMoney(int totalPrize, int money) {
         return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
     }
 }

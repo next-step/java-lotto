@@ -27,7 +27,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket autoIssued() {
-        return new LottoTicket(LottoTicketExtractor.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
+        return new LottoTicket(LottoNumberExtractor.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
     }
 
     public static List<LottoTicket> autoIssued(int countOfLotto) {
@@ -74,13 +74,13 @@ public class LottoTicket {
         int countOfMatch = 0;
 
         for (Integer winningNumber : winningTicket.lottoNumbers) {
-            countOfMatch = getCountOfMatchWhenContainsNumber(countOfMatch, winningNumber);
+            countOfMatch = plusCountOfMatchWhenContainsNumber(countOfMatch, winningNumber);
         }
 
         return countOfMatch;
     }
 
-    private int getCountOfMatchWhenContainsNumber(int countOfMatch, Integer winningNumber) {
+    private int plusCountOfMatchWhenContainsNumber(int countOfMatch, Integer winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
             countOfMatch++;
         }

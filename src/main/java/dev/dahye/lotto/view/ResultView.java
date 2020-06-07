@@ -20,7 +20,7 @@ public class ResultView {
         for (Rank rank : Rank.values()) {
             System.out.println(rank.getCountOfMatch() + "개 일치" + printBonusBall(rank.isMatchBonusNumber())
                     + rank.getPrize() + "원) - "
-                    + lottoResult.getTotalCountWhenSpecificWinning(rank) + "개");
+                    + lottoResult.getTotalCountOf(rank) + "개");
         }
     }
 
