@@ -15,11 +15,28 @@ public class LottoView {
     System.out.println(quantity + "개를 구매했습니다.");
   }
 
-  public static void printLottoNumbers(Lottos lottos) {
+  public static void printManualPurchaseNumberRequestMsg() {
+    System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+  }
+
+  public static void printManualPurchaseRequestMsg() {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요");
+  }
+
+  public static void printLottoNumbers(Lottos quickpickedLotto, Lottos manualPickedLotto) {
     StringBuilder sb = new StringBuilder();
-    for (Lotto lotto : lottos.getLottoList()) {
+
+    sb.append("수동으로 ").append(manualPickedLotto.getLottoList().size()).append("장, ");
+    sb.append("자동으로 ").append(quickpickedLotto.getLottoList().size()).append("개를 구매했습니다.\n");
+
+    for (Lotto lotto : manualPickedLotto.getLottoList()) {
       sb.append(lotto.toString()).append("\n");
     }
+
+    for (Lotto lotto : quickpickedLotto.getLottoList()) {
+      sb.append(lotto.toString()).append("\n");
+    }
+
     System.out.println(sb);
   }
 
