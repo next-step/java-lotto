@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class BonusBall {
     private final static String LOTTO_BONUS_BALL_EXCEPTION = "이미 입력한 번호는 보너스로 입력 불가합니다.";
+
     private final LottoNumber bonusNumber;
 
     public BonusBall(int bonusNumber) {

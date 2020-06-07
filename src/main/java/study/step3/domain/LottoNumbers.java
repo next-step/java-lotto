@@ -11,7 +11,6 @@ import static java.util.stream.Collectors.toList;
 public class LottoNumbers {
     private final static int INIT_NUMBER = 1;
     private final static int LIMITED_NUMBER = 45;
-
     public final static int LOTTO_NUMBERS_COUNT = 6;
 
     private static List<LottoNumber> numbers = IntStream.rangeClosed(INIT_NUMBER, LIMITED_NUMBER)

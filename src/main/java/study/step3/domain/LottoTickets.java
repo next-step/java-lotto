@@ -8,7 +8,6 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
     private final static int INIT_INDEX = 0;
-    private final static int LOTTO_PRICE_PER_PIECE = 1000;
 
     private final List<LottoTicket> lottoTickets;
 
