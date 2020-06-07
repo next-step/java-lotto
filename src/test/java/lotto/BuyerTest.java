@@ -36,8 +36,8 @@ public class BuyerTest {
         Lotto lotto = new Lotto(numberList);
         List<Lotto> lottoList = new ArrayList<>(List.of(lotto));
         Buyer winBuyer = new Buyer(0, lottoList);
-        Map<Prize, List<Lotto>> winningList = winBuyer.checkLotto(winningNumberList, bonusNumber);
-        assertThat(winningList.get(Prize.FIRST).size()).isEqualTo(1);
+        Map<Prize, Integer> winningList = winBuyer.checkLotto(winningNumberList, bonusNumber);
+        assertThat(winningList.get(Prize.FIRST)).isEqualTo(1);
     }
 
 
