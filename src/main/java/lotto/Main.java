@@ -34,7 +34,7 @@ public class Main {
 
         int bonusNumber = numberInputScanner.getNumber();
 
-        Map<Prize, List<Lotto>> winningList = buyer.checkLotto(winningNumbers, bonusNumber);
+        Map<Prize, Integer> winningList = buyer.checkLotto(winningNumbers, bonusNumber);
 
         ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);
 

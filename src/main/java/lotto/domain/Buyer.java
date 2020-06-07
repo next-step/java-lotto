@@ -13,7 +13,7 @@ public class Buyer {
 
     private int money;
     private List<Lotto> lottoList;
-    private Map<Prize, List<Lotto>> winningList = new HashMap<>();
+    private Map<Prize, Integer> winningList = new HashMap<>();
 
     public Buyer(int money) {
         this(money, new ArrayList<>());
@@ -27,12 +27,12 @@ public class Buyer {
     }
 
     private void initWinningList() {
-        winningList.put(Prize.FIRST, new ArrayList<>());
-        winningList.put(Prize.SECOND, new ArrayList<>());
-        winningList.put(Prize.THIRD, new ArrayList<>());
-        winningList.put(Prize.FOURTH, new ArrayList<>());
-        winningList.put(Prize.FIFTH, new ArrayList<>());
-        winningList.put(Prize.MISS, new ArrayList<>());
+        winningList.put(Prize.FIRST, 0);
+        winningList.put(Prize.SECOND, 0);
+        winningList.put(Prize.THIRD, 0);
+        winningList.put(Prize.FOURTH, 0);
+        winningList.put(Prize.FIFTH, 0);
+        winningList.put(Prize.MISS, 0);
     }
 
     public void buyAutoLotto() {
@@ -57,17 +57,17 @@ public class Buyer {
         return lottoListNumbers;
     }
 
-    public Map<Prize, List<Lotto>> checkLotto(List<Integer> winningNumbers, int bonusNumber) {
+    public Map<Prize, Integer> checkLotto(List<Integer> winningNumbers, int bonusNumber) {
 
         lottoList.forEach(lotto -> {
             Prize prize = lotto.getLottoPrize(winningNumbers, bonusNumber);
-            putWinningList(prize, lotto);
+            putWinningList(prize);
         });
 
         return winningList;
     }
 
-    private void putWinningList(Prize prize, Lotto lotto) {
-        winningList.get(prize).add(lotto);
+    private void putWinningList(Prize prize) {
+        winningList.computeIfPresent(prize, (prizeKey, value) -> ++value);
     }
 }

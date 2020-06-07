@@ -23,9 +23,9 @@ public class ProfitStatisticsTest {
     @BeforeEach
     void setUp() {
         money = 5000;
-        Map<Prize, List<Lotto>> winningList = new HashMap<>();
-        winningList.put(Prize.SECOND, List.of(new Lotto()));
-        winningList.put(Prize.THIRD, List.of(new Lotto()));
+        Map<Prize, Integer> winningList = new HashMap<>();
+        winningList.put(Prize.SECOND, 1);
+        winningList.put(Prize.THIRD, 1);
         profitStatistics = new ProfitStatistics(winningList, money);
     }
 

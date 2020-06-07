@@ -4,11 +4,10 @@ import java.util.*;
 
 public class ProfitStatistics {
 
-    private static final int WIN_MIN_COUNT = 3;
-    private Map<Prize, List<Lotto>> winningList;
+    private Map<Prize, Integer> winningList;
     private int money;
 
-    public ProfitStatistics(Map<Prize, List<Lotto>> winningList, int money) {
+    public ProfitStatistics(Map<Prize, Integer> winningList, int money) {
         this.winningList = winningList;
         this.money = money;
     }
@@ -24,6 +23,6 @@ public class ProfitStatistics {
     }
 
     private int calculateWinningList(Prize prize) {
-        return prize.getWinningPrize() * winningList.get(prize).size();
+        return prize.getWinningPrize() * winningList.get(prize);
     }
 }

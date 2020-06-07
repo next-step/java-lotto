@@ -6,15 +6,15 @@ import java.util.Objects;
 
 public class ResultDTO {
 
-    private Map<Prize, List<Lotto>> result;
+    private Map<Prize, Integer> result;
     private double profitRatio;
 
-    public ResultDTO(Map<Prize, List<Lotto>> result, double profitRatio) {
+    public ResultDTO(Map<Prize, Integer> result, double profitRatio) {
         this.result = result;
         this.profitRatio = profitRatio;
     }
 
-    public Map<Prize, List<Lotto>> getResult() {
+    public Map<Prize, Integer> getResult() {
         return result;
     }
 
