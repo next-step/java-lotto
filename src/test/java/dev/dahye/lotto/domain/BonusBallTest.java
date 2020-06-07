@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BonusBallTest {
@@ -28,8 +29,9 @@ class BonusBallTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     @DisplayName("보너스 볼은 당첨 번호와 중복될 수 없다.")
     void duplicate_bonus_ball(int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> BonusBall.createBy(bonusNumber, winningTicket),
-                "보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+        assertThatThrownBy(() -> BonusBall.createBy(bonusNumber, winningTicket))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
     }
 
 }
