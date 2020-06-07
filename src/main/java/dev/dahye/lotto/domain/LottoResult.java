@@ -2,7 +2,6 @@ package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResult {
@@ -27,13 +26,19 @@ public class LottoResult {
     }
 
     public double getMyWinningRate(int money) {
+        int totalPrize = calculateTotalPrize();
+
+        return divideTotalPrizeByMoney(totalPrize, money);
+    }
+
+    public int calculateTotalPrize() {
         int totalPrize = 0;
 
         for (Rank rank : this.getMyRanks()) {
             totalPrize += rank.getPrize();
         }
 
-        return divideTotalPrizeByMoney(totalPrize, money);
+        return totalPrize;
     }
 
     public static double divideTotalPrizeByMoney(int totalPrize, int money) {
