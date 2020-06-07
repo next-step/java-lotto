@@ -10,6 +10,14 @@ public class StringAddCalculator {
             return Integer.parseInt(calcStr);
         }
 
+        String[] numbers = calcStr.split(",");
+        int sum = 0;
+        for (String number: numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        result = sum;
+
         return result;
     }
 }
