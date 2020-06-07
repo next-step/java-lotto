@@ -5,11 +5,9 @@ import dev.dahye.lotto.domain.LottoTickets;
 
 public class LottoMachine {
     private LottoTickets lottoTickets;
-    private final LottoMoney lottoMoney;
 
     public LottoMachine(LottoMoney lottoMoney) {
-        this.lottoMoney = lottoMoney;
-        int countOfLotto = this.lottoMoney.calculateCountOfLotto();
+        int countOfLotto = lottoMoney.calculateCountOfLotto();
         lottoTickets = LottoTickets.autoIssued(countOfLotto);
     }
 

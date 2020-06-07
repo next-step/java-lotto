@@ -27,12 +27,6 @@ public class LottoNumbers {
         }
     }
 
-    public static void validNumberRange(List<Integer> number) {
-        if (!numbers.containsAll(number)) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
-        }
-    }
-
     public static void validateMaxSize(int maxSize) {
         if (maxSize > MAX_VALUE) {
             throw new IllegalArgumentException("로또 번호의 최대 사이즈는 45입니다.");

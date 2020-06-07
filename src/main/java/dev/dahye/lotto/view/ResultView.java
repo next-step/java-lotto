@@ -1,11 +1,8 @@
 package dev.dahye.lotto.view;
 
 import dev.dahye.lotto.domain.LottoResult;
-import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.LottoTickets;
 import dev.dahye.lotto.domain.Rank;
-
-import java.util.List;
 
 public class ResultView {
     public static void printPurchasedLottoTickets(LottoTickets lottoTickets) {
