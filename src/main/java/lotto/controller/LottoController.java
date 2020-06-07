@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Scanner;
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.LottoFactory;
@@ -15,27 +16,36 @@ public class LottoController {
 
   public static void main(String[] args) {
     LottoView.printPurchaseRequestMsg();
+    int purchaseQuantity = (int) (new Money(scanner.nextInt()).getValue() / Lotto.PRICE.getValue());
+    LottoView.printPurchaseDoneMsg(purchaseQuantity);
 
-    Lottos lottos = LottoFactory.createLottosByQuickPick(new Money(scanner.nextInt()));
+    LottoView.printManualPurchaseNumberRequestMsg();
+    int manualQuantity = scanner.nextInt();
+    String[] numberStrArr = new String[manualQuantity];
     scanner.nextLine();
 
-    LottoView.printPurchaseDoneMsg(lottos.getLottoList().size());
+    LottoView.printManualPurchaseRequestMsg();
+    for (int i = 0; i < numberStrArr.length; i++) {
+      numberStrArr[i] = scanner.nextLine();
+    }
 
-    LottoView.printLottoNumbers(lottos);
+    Lottos quickPickedLottos = LottoFactory
+        .createLottosByQuickPick(purchaseQuantity - manualQuantity);
+    Lottos manualPickedLottos = LottoFactory.createLottosByManual(numberStrArr);
+
+    LottoView.printLottoNumbers(quickPickedLottos, manualPickedLottos);
 
     LottoView.printWinningNumberRequestMsg();
     String[] winningNumberArr = scanner.nextLine().split(",");
 
     LottoView.printWinningBonusNumberRequestMsg();
-
     LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
-
     WinningLotto winningLotto = WinningLotto.newInstanceByStrArr(winningNumberArr, bonusNumber);
 
     LottoView.printStatisticsMsg();
-
     WinningStatistics winningStatistics = WinningStatistics
-        .newInstanceFromLottoAndWinningNumbers(lottos, winningLotto);
+        .newInstanceFromLottoAndWinningNumbers(
+            Lottos.of(quickPickedLottos, manualPickedLottos), winningLotto);
 
     LottoView.printPrizeTierCnt(winningStatistics.getPrizeTierCntMap());
 
