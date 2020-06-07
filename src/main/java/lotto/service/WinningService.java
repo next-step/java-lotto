@@ -12,6 +12,7 @@ import lotto.collections.WinningTicket;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.RewardType;
+import lotto.util.LottoProfitCalculator;
 import lotto.util.NumberStringParser;
 
 public class WinningService {
@@ -21,8 +22,10 @@ public class WinningService {
 		return new WinningNumbers(winningNumberBeforeList);
 	}
 
-	public static Money calculateProfit(List<RewardType> lottoStatistics) {
-		return RewardType.calculateProfit(lottoStatistics);
+	public static double calculateProfit(List<RewardType> lottoStatistics, int lottoTicketSize) {
+		Money winningPrice = RewardType.calculateProfit(lottoStatistics);
+		int winningPriceValue = winningPrice.getValue();
+		return LottoProfitCalculator.getConvertProfit(winningPriceValue, lottoTicketSize);
 	}
 
 	public static LottoResult getLottoResult(final LottoTickets lottoTickets, final WinningTicket winningTicket) {

@@ -2,10 +2,8 @@ package lotto.collections;
 
 import java.util.List;
 
-import lotto.domain.Money;
 import lotto.domain.RewardType;
 import lotto.service.WinningService;
-import lotto.util.LottoProfitCalculator;
 
 public final class LottoResult {
 
@@ -16,9 +14,7 @@ public final class LottoResult {
 	}
 
 	public double getLottoProfitRate(final int lottoTicketSize) {
-		Money profitAsMoney = WinningService.calculateProfit(lottoStatistics);
-		double totalProfitValue = profitAsMoney.getValue();
-		return LottoProfitCalculator.getConvertProfit(totalProfitValue, lottoTicketSize);
+		return WinningService.calculateProfit(lottoStatistics, lottoTicketSize);
 	}
 
 	public int countTicketsByRewardType(final RewardType rewardType) {
