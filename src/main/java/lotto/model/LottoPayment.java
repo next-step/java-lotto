@@ -6,18 +6,18 @@ public class LottoPayment {
     private String inputPrice;
 
     public LottoPayment(String inputPrice) {
+        if(validate(inputPrice)) {
+            throw new IllegalArgumentException("금액을 입력해 주세요.");
+        }
         this.inputPrice = inputPrice;
     }
 
     public int pay() {
-        return getLottoCount(this.inputPrice);
+        return getLottoCount();
     }
 
-    private int getLottoCount(String price){
-        if(validate(price)) {
-            throw new IllegalArgumentException("금액을 입력해 주세요.");
-        }
-        int lottoPrice = Integer.parseInt(price);
+    private int getLottoCount(){
+        int lottoPrice = Integer.parseInt(this.inputPrice);
         if(lottoPrice < LOTTO_PRICE) {
             return 0;
         }

@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.model.LottoPayment;
-
-import java.util.Scanner;
-
 public class InputView {
 
     private final String INTRO_MESSAGE = "구입금액을 입력해 주세요.";

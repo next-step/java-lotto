@@ -9,6 +9,7 @@ public class CalculationText {
     private static final String delimeterDividor = "|";
     private static Pattern calculatorMatcher = Pattern.compile("//(.)\n(.*)");
     private static String[] DEFAULT_VALUE = { "0" };
+
     private String[] calculationText;
 
     public CalculationText(String calculationText){

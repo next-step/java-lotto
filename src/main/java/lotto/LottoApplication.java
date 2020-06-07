@@ -22,8 +22,9 @@ public class LottoApplication {
         resultView.displayLottoNumbers(lottoNumbers);
 
         input.displayLastLottoNumberInputUI();
-        List<Winner> winners = new LottoResult(lottoNumbers, sc.nextLine().split(input.DELIMITER)).getLottoResult();
-        resultView.displayResult(new WinnerCollection(winners), paymentPrice);
+        List<Integer> lottoRankList = lotto.getLottoWinnerNumbers(sc.nextLine().split(input.DELIMITER));
+
+        resultView.displayResult(new WinningNumbers(new LottoResult(lottoRankList).getLottoResult()), paymentPrice);
     }
 
 }
