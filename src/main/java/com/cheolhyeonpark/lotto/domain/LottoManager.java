@@ -1,25 +1,35 @@
 package com.cheolhyeonpark.lotto.domain;
 
+import com.cheolhyeonpark.lotto.domain.number.LottoTicket;
+import com.cheolhyeonpark.lotto.domain.number.Numbers;
+import com.cheolhyeonpark.lotto.domain.number.WinningNumbers;
+
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoManager {
 
-    public static final int GAME_PRICE = 1_000;
+    private final LottoTicket lottoTicket;
 
-    private final LottoNumbersList lottoNumbersList;
-
-    public LottoManager(LottoNumbersList lottoNumbersList) {
-        this.lottoNumbersList = lottoNumbersList;
+    public LottoManager(LottoTicket lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    public LottoNumbersList createLottoNumbers(int amount) {
-        IntStream.range(0, amount / GAME_PRICE)
-                .mapToObj(i -> new LottoNumbers())
-                .forEach(lottoNumbersList::addLottoNumbers);
-        return lottoNumbersList;
+    public LottoTicket createLottoNumbers(Count autoCount, List<String> manualNumbers) {
+        addManualNumbers(manualNumbers);
+        addAutoNumbers(autoCount);
+        return lottoTicket;
     }
 
-    public GameResult getGameResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        return lottoNumbersList.getGameResult(winningNumbers, bonusNumber);
+    private void addManualNumbers(List<String> manualNumbers) {
+        manualNumbers.stream().map(Numbers::new).forEach(lottoTicket::addNumbers);
+    }
+
+    private void addAutoNumbers(Count count) {
+        IntStream.range(0, count.getCount()).mapToObj(i -> new Numbers()).forEach(lottoTicket::addNumbers);
+    }
+
+    public LottoResult getGameResult(WinningNumbers winningNumbers) {
+        return lottoTicket.getResult(winningNumbers);
     }
 }

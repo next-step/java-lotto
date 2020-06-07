@@ -34,7 +34,8 @@ public enum Rank {
 
     public static Rank findRank(int count, boolean hasBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.getCount() == count && rank.hasBonus() == hasBonus)
+                .filter(rank -> rank.getCount() == count)
+                .filter(rank -> rank.hasBonus() == hasBonus)
                 .findFirst()
                 .orElse(NONE);
     }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameResult {
+public class LottoResult {
 
     private final Map<Rank, Integer> rankCount = new HashMap<>();
 
@@ -20,7 +20,7 @@ public class GameResult {
         return Arrays.stream(Rank.values()).mapToInt(rank -> rank.getPrice() * getCount(rank)).sum();
     }
 
-    public double getYields(int amount) {
-        return (double) getTotalPrice() / amount;
+    public double getYields(Amount amount) {
+        return amount.getYields(getTotalPrice());
     }
 }
