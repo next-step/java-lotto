@@ -7,7 +7,7 @@ public class Money {
     private static final Map<Long, Money> CACHE = new HashMap<>();
     private final long value;
 
-    public Money(final long value) {
+    private Money(final long value) {
         this.value = value;
     }
 
@@ -19,6 +19,7 @@ public class Money {
         if (money.value == 0) {
             return this;
         }
+        validatePossibleSpend(money);
         return Money.of(this.value - money.value);
     }
 
@@ -39,5 +40,18 @@ public class Money {
 
     public boolean isEnoughToBuy(final Money price) {
         return this.value >= price.value;
+    }
+
+    private void validatePossibleSpend(Money money) {
+        if (money.value > this.value) {
+            throw new IllegalArgumentException(String.format("금액을 지불할 수 없습니다. 현재금액: %d, 지출시도금액:%d", this.value, money.value));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "value=" + value +
+                '}';
     }
 }

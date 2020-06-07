@@ -10,22 +10,28 @@ import java.util.List;
 import static lotto.domain.LottoGameProperty.LOTTO_TICKET_PRICE;
 
 public class LottoStore {
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final AutoLottoTicketGenerator autoLottoTicketGenerator;
 
-    public LottoStore(final LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoStore(AutoLottoTicketGenerator autoLottoTicketGenerator) {
+        this.autoLottoTicketGenerator = autoLottoTicketGenerator;
     }
 
-    public LottoTickets buy(final Money budget) {
+    public LottoTickets buy(Money budget, LottoTickets manualLottoTickets) {
+        Money currentMoney = budget.spend(LOTTO_TICKET_PRICE.multiply(manualLottoTickets.count()));
+        LottoTickets autoLottoTickets = buy(currentMoney);
+
+        return manualLottoTickets.combine(autoLottoTickets);
+    }
+
+    private LottoTickets buy(final Money budget) {
         Money currentMoney = budget;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         while (currentMoney.isEnoughToBuy(LOTTO_TICKET_PRICE)) {
-            lottoTickets.add(new LottoTicket(lottoNumberGenerator.generate()));
+            lottoTickets.add(autoLottoTicketGenerator.createTicket());
             currentMoney = currentMoney.spend(LOTTO_TICKET_PRICE);
         }
 
         return new LottoTickets(lottoTickets);
     }
-
 }

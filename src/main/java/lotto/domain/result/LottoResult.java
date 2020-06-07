@@ -5,6 +5,8 @@ import lotto.vo.Money;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoGameProperty.LOTTO_TICKET_PRICE;
+
 public class LottoResult {
     private final List<LottoPrize> lottoStatistics;
 
@@ -18,8 +20,8 @@ public class LottoResult {
                 .count());
     }
 
-    public double getRateOfProfit(final Money expenditure) {
-        return calculateTotalReword().calculateYield(expenditure);
+    public double getRateOfProfit() {
+        return calculateTotalReword().calculateYield(LOTTO_TICKET_PRICE.multiply(lottoStatistics.size()));
     }
 
     private Money calculateTotalReword() {

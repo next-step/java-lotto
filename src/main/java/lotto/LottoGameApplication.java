@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.AutoLottoNumberGenerator;
+import lotto.domain.AutoLottoTicketGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
 import lotto.domain.result.LottoResult;
@@ -11,20 +11,22 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.vo.Money;
 
-public class AutoLottoApplication {
+public class LottoGameApplication {
 
     public static void main(String[] args) {
-        LottoStore lottoStore = new LottoStore(new AutoLottoNumberGenerator());
+        LottoStore lottoStore = new LottoStore(new AutoLottoTicketGenerator());
 
         Money budget = Money.of(InputView.askTotalMoney());
-        LottoTickets lottoTickets = lottoStore.buy(budget);
+        int numberOfManualLottoTicket = InputView.askNumberOfManualLottoTicket();
+        LottoTickets manualLottoTickets = InputView.askManualTicketNumbers(numberOfManualLottoTicket);
 
-        OutputView.printLottoTicketNumbers(lottoTickets);
+        LottoTickets lottoTickets = lottoStore.buy(budget, manualLottoTickets);
+
+        OutputView.printLottoTicketNumbers(lottoTickets, manualLottoTickets.count());
 
         WinningTicket winningTicket = makeWinningTicket();
         LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket);
-
-        OutputView.printResult(lottoResult, lottoTickets);
+        OutputView.printResult(lottoResult);
     }
 
     private static WinningTicket makeWinningTicket() {

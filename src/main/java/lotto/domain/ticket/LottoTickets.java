@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningTicket;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class LottoTickets {
         return lottoTickets.stream()
                 .map(winningTicket::checkLottoNumbers)
                 .collect(collectingAndThen(toList(), LottoResult::new));
+    }
+
+    public LottoTickets combine(final LottoTickets lottoTickets) {
+        List<LottoTicket> allLottoTickets = new ArrayList<>(this.lottoTickets);
+        allLottoTickets.addAll(lottoTickets.getLottoTickets());
+        return new LottoTickets(allLottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {

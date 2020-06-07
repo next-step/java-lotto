@@ -36,16 +36,16 @@ class LottoTicketsTest {
 
     private WinningTicket createWinningTicket() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         LottoTicket winningLottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
         return new WinningTicket(winningLottoTicket, LottoNumber.of(7));
     }
 
     private LottoTickets createLottoTickets() {
-        LottoTicket lottoTicket1 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
-        LottoTicket lottoTicket2 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(7, 1, 2, 4, 5, 6)))); // 5, bonus
-        LottoTicket lottoTicket3 = new LottoTicket(new HashSet<>(LottoNumberConverter.of(Arrays.asList(1, 21, 3, 43, 12, 6)))); // 3
+        LottoTicket lottoTicket1 = new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 2, 3, 4, 5, 6))); // 6
+        LottoTicket lottoTicket2 = new LottoTicket(LottoNumberConverter.of(Arrays.asList(7, 1, 2, 4, 5, 6))); // 5, bonus
+        LottoTicket lottoTicket3 = new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 21, 3, 43, 12, 6))); // 3
 
         return new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));
     }
