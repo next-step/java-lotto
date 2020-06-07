@@ -1,16 +1,25 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
 
     private List<LottoNumbers> lottoTicket;
 
-    public LottoTicket(int quantity) {
+    private LottoTicket(int quantity) {
         checkQuantity(quantity);
         this.lottoTicket = addLottoNumbers(quantity);
+    }
+
+    public static LottoTicket create(int quantity) {
+        return new LottoTicket(quantity);
+    }
+
+    public List<LottoNumbers> getLottoTicket() {
+        return lottoTicket;
     }
 
     private void checkQuantity(int quantity) {
@@ -20,17 +29,11 @@ public class LottoTicket {
     }
 
     private List<LottoNumbers> addLottoNumbers(int quantity) {
-        lottoTicket = new ArrayList<>();
-        while (quantity > 0) {
-            lottoTicket.add(new LottoNumbers());
-            quantity--;
-        }
-        return lottoTicket;
+        return IntStream.range(0, quantity)
+                .mapToObj(i -> LottoNumbers.create())
+                .collect(Collectors.toList());
     }
 
-    public List<LottoNumbers> getLottoTicket() {
-        return lottoTicket;
-    }
 
     @Override
     public boolean equals(Object o) {
