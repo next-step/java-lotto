@@ -107,7 +107,7 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨율 구하기")
     void winning_rate() {
-        assertThat(LottoResult.divideTotalPrizeByMoney(5000, 14000)).isEqualTo(0.35);
+        assertThat(LottoResult.divideTotalPrizeByMoney(5000, 14000)).isEqualTo(0.36);
     }
 
     private static class LottoResultForBonus extends LottoResult {
