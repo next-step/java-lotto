@@ -8,10 +8,19 @@ public class StringAddCalculator {
         }
 
         if (!isContainDelimiter(calcStr)) {
-            return Integer.parseInt(calcStr);
+            return strToInt(calcStr);
         }
 
         return splitStr(calcStr);
+    }
+
+    private static int strToInt(String calcStr) throws RuntimeException {
+        int num = Integer.parseInt(calcStr);
+        if (num < 0) {
+            throw new RuntimeException();
+        }
+
+        return num;
     }
 
     private static int splitStr(String calcStr) {
@@ -38,7 +47,7 @@ public class StringAddCalculator {
     private static int sum(String[] numbers) {
         int sum = 0;
         for (String number: numbers) {
-            sum += Integer.parseInt(number);
+            sum += strToInt(number);
         }
 
         return sum;
