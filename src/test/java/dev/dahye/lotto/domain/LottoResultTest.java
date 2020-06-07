@@ -10,8 +10,6 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,13 +18,13 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Lotto의 결과를 출력하는 객체")
 class LottoResultTest {
-    private static List<LottoTicket> autoLottoTickets;
+    private static LottoTickets autoLottoTickets;
     private static String winningNumbers;
     private static final int BONUS_NUMBER = 1;
 
     @BeforeEach
     void setUp() {
-        autoLottoTickets = Collections.singletonList(LottoTicket.autoIssued());
+        autoLottoTickets = LottoTickets.autoIssued(1);
         winningNumbers = "1, 2, 3, 4, 5, 6";
     }
 
@@ -70,8 +68,8 @@ class LottoResultTest {
     @MethodSource("ranks")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
     void getResult_myRanks(String winningNumbers, int bonusNumber, Rank rank) {
-        List<LottoTicket> manualLottoTickets
-                = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTickets manualLottoTickets
+                = LottoTickets.manualIssued(Arrays.asList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers, bonusNumber);
         assertThat(lottoResult.getMyRanks().get(0)).isEqualTo(rank);
@@ -93,11 +91,9 @@ class LottoResultTest {
         int myMoney = 2000;
         LottoTicket lottoTicketByRankFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicketByRankThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTickets lottoTickets = LottoTickets.manualIssued(Arrays.asList(lottoTicketByRankFirst, lottoTicketByRankThird));
 
-        LottoResult lottoResult = new LottoResult(Arrays.asList(
-                lottoTicketByRankFirst,
-                lottoTicketByRankThird
-        ), "1, 2, 3, 4, 5, 6", 8);
+        LottoResult lottoResult = new LottoResult(lottoTickets, "1, 2, 3, 4, 5, 6", 8);
 
         int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
         double expectedResult = LottoResult.divideTotalPrizeByMoney(totalPrize, myMoney);

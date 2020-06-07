@@ -9,11 +9,11 @@ import java.util.List;
 public class LottoResult {
     private static final String WINNERS_DELIMITER = ",";
 
-    private final List<LottoTicket> lottoTickets;
+    private final LottoTickets lottoTickets;
     private final LottoTicket winningTicket;
     private final int bonusNumber;
 
-    public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput, int bonusNumber) {
+    public LottoResult(LottoTickets lottoTickets, String winningNumberInput, int bonusNumber) {
         validateWinnersNullOrEmpty(winningNumberInput);
         List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
 
@@ -58,21 +58,7 @@ public class LottoResult {
     }
 
     public List<Rank> getMyRanks() {
-        List<Rank> ranks = new ArrayList<>();
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.getCountOfMatch(winningTicket);
-            boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
-            addWhenIsRanking(ranks, matchCount, isMatchBonusNumber);
-        }
-
-        return ranks;
-    }
-
-    private void addWhenIsRanking(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
-        if (Rank.canRanking(matchCount, isMatchBonusNumber)) {
-            ranks.add(Rank.valueOf(matchCount, isMatchBonusNumber));
-        }
+        return this.lottoTickets.calculateWinningRate(winningTicket, bonusNumber);
     }
 
     public int getTotalCountOf(Rank target) {
