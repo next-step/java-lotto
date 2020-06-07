@@ -20,7 +20,7 @@ public class LottoOutput {
 
         for (Lotto lotto : lottos) {
 
-            String lottoNumbers = lotto.getLottonumbers().stream()
+            String lottoNumbers = lotto.getLottoNumbers().stream()
                     .sorted()
                     .map(i -> i.toString())
                     .collect(Collectors.joining(LOTTO_NUMBER_DELEVETER));

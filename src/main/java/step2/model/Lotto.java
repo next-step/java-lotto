@@ -23,19 +23,17 @@ public class Lotto {
     private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> inputLottoNumberList) {
-        if (validateNumbers(inputLottoNumberList)) {
-            lottoNumbers = inputLottoNumberList;
-        }
+        validateNumbers(inputLottoNumberList);
+        lottoNumbers = inputLottoNumberList;
     }
 
     public Lotto(String inputWinnerNumbers) {
         List<Integer> convertLottoNumber = convertStringtoNumbers(inputWinnerNumbers);
-        if (validateNumbers(convertLottoNumber)) {
-            lottoNumbers = convertLottoNumber;
-        }
+        validateNumbers(convertLottoNumber);
+        lottoNumbers = convertLottoNumber;
     }
 
-    public List<Integer> getLottonumbers() {
+    public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -55,11 +53,9 @@ public class Lotto {
         return PLUS_ZERO;
     }
 
-    public boolean validateNumbers(List<Integer> lottoNumbers) {
+    public void validateNumbers(List<Integer> lottoNumbers) {
         checkNumber(lottoNumbers);
         checkSize(lottoNumbers);
-
-        return true;
     }
 
     private void checkNumber(List<Integer> lottoNumbers) {
