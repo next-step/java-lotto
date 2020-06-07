@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public Lotto(String inputWinnerNumbers) {
-        List<Integer> convertLottoNumber = convertStringtoNumbers(inputWinnerNumbers);
+        List<Integer> convertLottoNumber = convertStringToNumbers(inputWinnerNumbers);
         validateNumbers(convertLottoNumber);
         lottoNumbers = convertLottoNumber;
     }
@@ -85,7 +85,7 @@ public class Lotto {
         }
     }
 
-    private List<Integer> convertStringtoNumbers(String inputWinnerNumbers) {
+    private List<Integer> convertStringToNumbers(String inputWinnerNumbers) {
         try {
             return Stream.of(inputWinnerNumbers.split(DELIMETER))
                     .map(String::trim)
