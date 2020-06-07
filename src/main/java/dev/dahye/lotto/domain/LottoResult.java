@@ -51,20 +51,9 @@ public class LottoResult {
     }
 
     public int getTotalCountOf(Rank target) {
-        int count = 0;
-
-        for (Rank rank : this.getMyRanks()) {
-            count = plusCountWhenEquals(count, rank, target);
-        }
-
-        return count;
-    }
-
-    private int plusCountWhenEquals(int count, Rank rank, Rank target) {
-        if (rank.equals(target)) {
-            count++;
-        }
-        return count;
+        return (int) this.getMyRanks().stream()
+                .filter(rank -> rank == target)
+                .count();
     }
 
     public double getMyWinningRate(int money) {
