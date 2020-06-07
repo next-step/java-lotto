@@ -4,17 +4,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Prize {
-    UNRANKED(0, 0L),
-    COINCIDE_THREE(3, 5000L),
-    COINCIDE_FOUR(4, 50000L),
-    COINCIDE_FIVE(5, 1500000L),
-    COINCIDE_SIX(6, 2000000000L);
+    UNRANKED(0, false, "3개 이하 일치 ", 0L),
+    FIFTH(3, false, "3개 일치 ", 5000L),
+    FOURTH(4, false, "4개 일치 ", 50000L),
+    THIRD(5, false, "5개 일치 ", 1500000L),
+    SECOND(5, true, "5개 일치, 보너스 볼 일치", 30000000L),
+    FIRST(6, false, "6개 일치 ", 2000000000L);
 
     private final int number;
+    private final boolean bonusMatched;
+    private final String comment;
     private final long money;
 
-    Prize(int number, long money) {
+    Prize(int number, boolean bonusMatched, String comment, long money) {
         this.number = number;
+        this.bonusMatched = bonusMatched;
+        this.comment = comment;
         this.money = money;
     }
 
@@ -22,14 +27,22 @@ public enum Prize {
         return number;
     }
 
+    public boolean isBonusMatched() {
+        return bonusMatched;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
     public long getMoney() {
         return money;
     }
 
-    public static Prize award(Lotto winLotto, Lotto lotto) {
+    public static Prize award(Lotto winLotto, boolean bonusMatched, Lotto lotto) {
         int count = (int) counting(winLotto.getLottoNumberList(), lotto.getLottoNumberList());
         return Arrays.stream(values())
-                .filter(prize -> prize.number == count)
+                .filter(prize -> prize.number == count && prize.isBonusMatched() == bonusMatched)
                 .findFirst()
                 .orElse(UNRANKED);
     }

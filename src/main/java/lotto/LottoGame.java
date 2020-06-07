@@ -24,6 +24,7 @@ public class LottoGame {
         lottoList.forEach(resultView::printLotto);
 
         Lotto winLotto = inputView.insertWinLotto();
-        resultView.printStatistic(price, winLotto, lottoList);
+        int bonusNumber = inputView.insertBonusNumber();
+        resultView.printStatistic(price, winLotto, bonusNumber, lottoList);
     }
 }

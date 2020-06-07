@@ -11,7 +11,7 @@ import java.util.List;
 public class ResultView {
     private static final String PRINT_LOTTO_COUNT = "%d개를 구매했습니다.";
     private static final String PRINT_STATISTIC = "당첨 통계\n---------";
-    private static final String PRINT_PRIZE = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_PRIZE = "%s(%d원)- %d개";
     private static final String PRINT_YIELD = "총 수익률은 %.2f입니다.";
 
     public void printLottoCount(int count) {
@@ -23,13 +23,13 @@ public class ResultView {
         System.out.println("[" + String.join(", ", numbers) + "]");
     }
 
-    public void printStatistic(Price totalPrice, Lotto winLotto, List<Lotto> lottoList) {
+    public void printStatistic(Price totalPrice, Lotto winLotto, int bonusNumber, List<Lotto> lottoList) {
         System.out.println(PRINT_STATISTIC);
 
         Arrays.stream(Prize.generateInRank()).forEach(prize -> {
-            System.out.println(String.format(PRINT_PRIZE, prize.getNumber(), prize.getMoney(), LottoStatisticUtil.getPrizeCount(prize, winLotto, lottoList)));
+            System.out.println(String.format(PRINT_PRIZE, prize.getComment(), prize.getMoney(), LottoStatisticUtil.getPrizeCount(prize, winLotto, bonusNumber, lottoList)));
         });
 
-        System.out.println(String.format(PRINT_YIELD, LottoStatisticUtil.getYield(totalPrice, winLotto, lottoList)));
+        System.out.println(String.format(PRINT_YIELD, LottoStatisticUtil.getYield(totalPrice, winLotto, bonusNumber, lottoList)));
     }
 }

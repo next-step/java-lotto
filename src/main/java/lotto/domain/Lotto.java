@@ -23,6 +23,10 @@ public class Lotto {
         return new ArrayList<>(lottoNumbers.getLottoNumberSet());
     }
 
+    public boolean isBonusMatched(int bonusNumber) {
+        return lottoNumbers.getLottoNumberSet().contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

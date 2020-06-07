@@ -19,16 +19,32 @@ class PrizeTest {
     public void award_inRank_shouldSucceed(List<Integer> winNumberList, List<Integer> lottoNumberList, Prize expected) {
         Lotto winLotto = new Lotto(winNumberList);
         Lotto lotto = new Lotto(lottoNumberList);
-        Prize result = Prize.award(winLotto, lotto);
+        Prize result = Prize.award(winLotto, false, lotto);
         assertThat(result).isEqualTo(expected);
     }
 
     private static Stream<Arguments> source_award_inRank_shouldSucceed() {
         return Stream.of(
-                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 7, 8, 9}), Prize.COINCIDE_THREE),
-                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 7, 8}), Prize.COINCIDE_FOUR),
-                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 7}), Prize.COINCIDE_FIVE),
-                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Prize.COINCIDE_SIX));
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 7, 8, 9}), Prize.FIFTH),
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 7, 8}), Prize.FOURTH),
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 7}), Prize.THIRD),
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Prize.FIRST));
+    }
+
+    @DisplayName("5개 + 보너스 넘버가 일치하는 경우 적절한 Second Prize 객체가 반환")
+    @ParameterizedTest
+    @MethodSource("source_secondPrize_shouldSucceed")
+    public void secondPrize_shouldSucceed(List<Integer> winNumberList, List<Integer> lottoNumberList, Prize expected) {
+        Lotto winLotto = new Lotto(winNumberList);
+        Lotto lotto = new Lotto(lottoNumberList);
+        Prize result = Prize.award(winLotto, true, lotto);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> source_secondPrize_shouldSucceed() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 10}), Prize.SECOND),
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 20, 3, 5, 4}), Prize.SECOND));
     }
 
     @DisplayName("0 ~ 2개가 일치하는 경우 디폴트 Prize 객체(UNRANKED)가 반환")
@@ -37,7 +53,7 @@ class PrizeTest {
     public void award_unRank_shouldSucceed(List<Integer> winNumberList, List<Integer> lottoNumberList, Prize expected) {
         Lotto winLotto = new Lotto(winNumberList);
         Lotto lotto = new Lotto(lottoNumberList);
-        Prize result = Prize.award(winLotto, lotto);
+        Prize result = Prize.award(winLotto, false, lotto);
         assertThat(result).isEqualTo(expected);
     }
 

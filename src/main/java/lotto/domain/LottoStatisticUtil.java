@@ -5,17 +5,17 @@ import java.util.List;
 
 public class LottoStatisticUtil {
 
-    public static int getPrizeCount(Prize prize, Lotto winLotto, List<Lotto> lottoList) {
+    public static int getPrizeCount(Prize prize, Lotto winLotto, int bonusNumber, List<Lotto> lottoList) {
         int count = 0;
         for (Lotto lotto : lottoList) {
-            count += prize == Prize.award(winLotto, lotto) ? 1 : 0;
+            count += prize == Prize.award(winLotto, lotto.isBonusMatched(bonusNumber), lotto) ? 1 : 0;
         }
         return count;
     }
 
-    public static double getYield(Price totalPrice, Lotto winLotto, List<Lotto> lottoList) {
+    public static double getYield(Price totalPrice, Lotto winLotto, int bonusMatched, List<Lotto> lottoList) {
         double prizeMoney = Arrays.stream(Prize.generateInRank()).map(prize ->
-                getPrizeCount(prize, winLotto, lottoList) * prize.getMoney()
+                getPrizeCount(prize, winLotto, bonusMatched, lottoList) * prize.getMoney()
         ).reduce(Long::sum).orElse(0L);
 
         return prizeMoney / totalPrice.getPrice();
