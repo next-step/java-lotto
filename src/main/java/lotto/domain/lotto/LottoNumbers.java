@@ -1,49 +1,48 @@
 package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumbers {
-    public static final int START_LOTTO_RANGE = 0;
-    public static final int END_LOTTO_RANGE = 6;
-    private static final Numbers numbers = new Numbers();
 
+    public static final int LOTTO_NUMBER_SIZE = 6;
+    private static final Numbers numbers = Numbers.create();
     private List<Integer> lottoNumbers;
 
-    public LottoNumbers() {
-        List<Integer> lottoNumbers = createLottoNumbers();
+    private LottoNumbers(List<Integer> lottoNumbers) {
         checkSize(lottoNumbers);
         checkDuplicate(lottoNumbers);
-
         this.lottoNumbers = lottoNumbers;
     }
 
-    protected List<Integer> createLottoNumbers() {
-        Collections.shuffle(getNumbers(numbers));
-        List<Integer> lottoNumbers = new ArrayList<>(getNumbers(numbers).subList(START_LOTTO_RANGE, END_LOTTO_RANGE));
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+    public static LottoNumbers create() {
+        List<Integer> lottoNumbers = numbers.createLottoNumbers();
+        return new LottoNumbers(lottoNumbers);
     }
 
-    private void checkSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != END_LOTTO_RANGE) {
-            throw new IllegalArgumentException("당첨 번호는" + END_LOTTO_RANGE + "개 입니다");
-        }
-    }
-
-    private void checkDuplicate(List<Integer> lottoNumbers) {
-        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumbers);
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개 입니다.");
-        }
-    }
-
-    private List<Integer> getNumbers(Numbers numbers) {
-        return numbers.getNumbers();
+    public static LottoNumbers create(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    private void checkSize(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개 입니다");
+        }
+    }
+
+    private void checkDuplicate(List<Integer> lottoNumbers) {
+        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("중복된 로또 번호가 존재 합니다");
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {
