@@ -22,7 +22,7 @@ public enum Prize {
         return price;
     }
 
-    public int calculate(int winningCount) {
+    public int calculateTotalPrice(int winningCount) {
         return this.price * winningCount;
     }
 

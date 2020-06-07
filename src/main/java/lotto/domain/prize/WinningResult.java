@@ -37,7 +37,7 @@ public class WinningResult {
         int winPrize = 0;
         for (Prize prize : Prize.values()) {
             int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
-            winPrize += prize.calculate(winningCount);
+            winPrize += prize.calculateTotalPrice(winningCount);
         }
         return winPrize;
     }

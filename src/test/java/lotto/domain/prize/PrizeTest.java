@@ -12,7 +12,7 @@ class PrizeTest {
         int[] price = new int[]{5_000, 50_000, 1_500_000, 2_000_000_000};
         int i = 0;
         for (Prize prize : Prize.values()) {
-            int prizeMoney = prize.calculate(matchCount);
+            int prizeMoney = prize.calculateTotalPrice(matchCount);
             assertThat(prizeMoney).isEqualTo(matchCount * price[i++]);
         }
     }
