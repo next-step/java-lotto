@@ -33,4 +33,12 @@ public class LottoFixtures {
         Lotto lotto = new Lotto(Arrays.asList(new Integer[]{1, 5, 11, 18, 20, 43}));
         return lotto;
     }
+
+    public static int matchedBonusNumber() {
+        return 33;
+    }
+
+    public static int unmatchedBonusNumber() {
+        return 44;
+    }
 }
