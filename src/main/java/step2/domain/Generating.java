@@ -1,5 +1,7 @@
 package step2.domain;
 
+import static step2.view.ErrorMessages.INVALID_PARAMETER_GENERABLE_STRATEGY;
+
 import java.util.List;
 
 public class Generating {
@@ -12,7 +14,7 @@ public class Generating {
 
     public Generating(GenerableStrategy generableStrategy) {
         if (generableStrategy == null) {
-            throw new IllegalArgumentException("generableStrategy cannot be null");
+            throw new IllegalArgumentException(INVALID_PARAMETER_GENERABLE_STRATEGY);
         }
         this.generableStrategy = generableStrategy;
     }
