@@ -23,7 +23,7 @@ public class LottoGenerator {
 
 	private static List<Integer> shuffleLottoNumbers(List<Integer> lottoNumbers) {
 		
-		Collections.shuffle(lottoNumbers); // 이부분을 주석처리하면 왜 정상적으로 실행되지 않는지 이해가 되지를 않습니다.
+		Collections.shuffle(lottoNumbers); // 섞기 
 		return sortLottoNumber(lottoNumbers);
 	}
 	

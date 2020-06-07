@@ -13,7 +13,6 @@ public class LottoNumbers {
 	public static int Lotto_numbers_size = 6;
 	private static List<Lotto> lottoNumbers = new ArrayList<Lotto>();
 
-	
 	public void createLottoNumbers(List<Lotto> lottoNumbers) {
 
 		// Q : LottoGenerator에서 스트림의 distinct와 limit으로 중복제거 및 사이즈 제한을 하고있습니다.
@@ -46,8 +45,13 @@ public class LottoNumbers {
 
 		// 리팩토링 필요 : 리팩토링 할만한 조언부탁드리겠습니다.
 		for (int i = 0; i < inputPrice; i++) {
+
+			// Q) 로또번호 list view 부분인데요, 굳이 ResultView로 빼낼 필요가 있을까요?
 			System.out.println(LottoGenerator.generateLottoNumber());
-			lottoNumbers.add(new Lotto((LottoGenerator.generateLottoNumber())));
+
+			lottoNumbers.add(new Lotto(
+					(LottoGenerator.generateLottoNumber())
+					));
 
 		}
 		return lottoNumbers;
