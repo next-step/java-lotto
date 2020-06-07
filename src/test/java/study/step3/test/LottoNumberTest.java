@@ -1,29 +1,28 @@
 package study.step3.test;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 import study.step3.domain.LottoNumber;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
-    @RepeatedTest(20)
-    @DisplayName("로또 티켓은 6개의 번호로 되어 있는지 테스트")
-    public void lottoNumberCountTest(){
-        assertThat(LottoNumber.getLottoNumbers()).hasSize(6);
+    @ParameterizedTest
+    @DisplayName("로또 번호는 1부터 45 사이의 숫자인지 테스트")
+    @ValueSource(ints = {-1, 46, 0, 100})
+    public void lottoNumberInvalid(int inputNumber){
+        assertThatThrownBy(()-> new LottoNumber(inputNumber)
+                ).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @RepeatedTest(20)
-    @DisplayName("랜덤으로 이루어진 로또 번호 각각은 중복되지 않는지 테스트")
-    public void lottoTicketNumberDuplicationTest(){
-        List<Integer> deduplicationNumbers =  LottoNumber.getLottoNumbers()
-                                                         .stream()
-                                                         .distinct()
-                                                         .collect(Collectors.toList());
-        assertThat(deduplicationNumbers).hasSize(6);
+    @ParameterizedTest
+    @DisplayName("로또 번호 빈 값 입력시 예외처리 테스트")
+    @NullAndEmptySource
+    public void lottoNumberNullTest(String inputNull){
+        assertThatThrownBy(()-> new LottoNumber(inputNull)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
