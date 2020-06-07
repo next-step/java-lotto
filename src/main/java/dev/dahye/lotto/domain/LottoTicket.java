@@ -53,20 +53,9 @@ public class LottoTicket {
     }
 
     public int getCountOfMatch(LottoTicket winningTicket) {
-        int countOfMatch = 0;
-
-        for (Integer winningNumber : winningTicket.lottoNumbers) {
-            countOfMatch = plusCountOfMatchWhenContainsNumber(countOfMatch, winningNumber);
-        }
-
-        return countOfMatch;
-    }
-
-    private int plusCountOfMatchWhenContainsNumber(int countOfMatch, Integer winningNumber) {
-        if (lottoNumbers.contains(winningNumber)) {
-            countOfMatch++;
-        }
-        return countOfMatch;
+        return (int) winningTicket.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     @Override
