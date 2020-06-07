@@ -11,16 +11,7 @@ public class WinningTicket {
 
 	public WinningTicket(WinningNumbers winningNumbers, LottoNumber bonusBall) {
 		this.winningNumbers = winningNumbers;
-		this.bonusBall = validateBonusBall(bonusBall);
-	}
-
-	private LottoNumber validateBonusBall(LottoNumber bonusBall) {
-		if (this.winningNumbers.getWinningNumbers()
-			.stream()
-			.anyMatch(number -> number.compareBallIdentity(bonusBall))) {
-			throw new RuntimeException("로또 번호와 보너스 볼은 중복 불가합니다.");
-		}
-		return bonusBall;
+		this.bonusBall = winningNumbers.validateBonusBall(bonusBall);
 	}
 
 	public RewardType checkLottoNumbers(final LottoTicket lottoTicket) {
