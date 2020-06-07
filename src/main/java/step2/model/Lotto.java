@@ -41,7 +41,7 @@ public class Lotto {
 
     public int checkWinningCount(Lotto winningLotto) {
         int cnt = 0;
-        for (Integer number : winningLotto.getLottonumbers()) {
+        for (Integer number : winningLotto.lottoNumbers) {
             cnt += plusContainNumber(number);
         }
         return cnt;
