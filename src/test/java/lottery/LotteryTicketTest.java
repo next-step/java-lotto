@@ -48,7 +48,7 @@ public class LotteryTicketTest {
     @Test
     public void makeLotteryTicketFromStringArrays() {
         String[] input = "1, 2, 3, 4, 5, 6".split(ViewMessages.COMMA);
-        LotteryTicket lotteryTicket = LotteryTicket.from(input);
+        LotteryTicket lotteryTicket = LotteryTicket.publishManualLotteryTicket(input);
 
         assertThat(lotteryTicket.getLotteryNumbers())
                 .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -81,9 +81,9 @@ public class LotteryTicketTest {
     @Test
     public void getMatchLotteryRank() {
         LotteryTicket firstTicket = LotteryTicket.from(lotteryNumberList);
-        LotteryTicket fourthTicket = LotteryTicket.from("1,2,3,4,10,15".split(","));
+        LotteryTicket fourthTicket = LotteryTicket.publishManualLotteryTicket("1,2,3,4,10,15".split(","));
 
-        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,6".split(","));
+        LotteryTicket winnerTicket = LotteryTicket.publishManualLotteryTicket("1,2,3,4,5,6".split(","));
         BonusBall bonusBallNumber = BonusBall.of(10, winnerTicket);
 
 
@@ -97,9 +97,9 @@ public class LotteryTicketTest {
     @Test
     public void getSecondOrThirdLotteryRankWhenBonusBallNotInWinnerTicket() {
         LotteryTicket secondWinnerTicket = LotteryTicket.from(lotteryNumberList);
-        LotteryTicket thirdWinnerTicket = LotteryTicket.from("1,2,3,4,5,7".split(","));
+        LotteryTicket thirdWinnerTicket = LotteryTicket.publishManualLotteryTicket("1,2,3,4,5,7".split(","));
 
-        LotteryTicket winnerTicket = LotteryTicket.from("1,2,3,4,5,8".split(","));
+        LotteryTicket winnerTicket = LotteryTicket.publishManualLotteryTicket("1,2,3,4,5,8".split(","));
         BonusBall bonusBallNumber = BonusBall.of(6, winnerTicket);
 
         assertThat(secondWinnerTicket.getMatchLotteryRank(winnerTicket, bonusBallNumber))

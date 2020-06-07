@@ -20,7 +20,7 @@ public class LotteryTicket {
         return new LotteryTicket(lotteryNumbers);
     }
 
-    public static LotteryTicket from(String[] lotteryNumbers) {
+    public static LotteryTicket publishManualLotteryTicket(String[] lotteryNumbers) {
         List<LotteryNumber> parsedLotteryNumbers = Arrays.stream(lotteryNumbers)
                 .map(Integer::parseInt)
                 .map(LotteryNumber::from)

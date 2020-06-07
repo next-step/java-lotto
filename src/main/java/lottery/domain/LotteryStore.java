@@ -9,7 +9,8 @@ public class LotteryStore {
         return new LotteryStore();
     }
 
-    public LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice) {
-        return LotteryTicketsGroup.publishAutomaticLotteryTicketsGroup(purchasePrice);
+    public LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
+                                                          ManualTicketsNumbers manualTicketsNumbers) {
+        return LotteryTicketsGroup.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
     }
 }

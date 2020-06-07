@@ -20,11 +20,29 @@ public class LotteryTicketsGroup {
         return new LotteryTicketsGroup(lotteryTickets);
     }
 
-    public static LotteryTicketsGroup publishAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
-        List<LotteryTicket> lotteryTickets = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
-                .limit(purchasePrice.getPurchasableLotteryTicketCounts())
+    public static LotteryTicketsGroup publishLotteryTicketsGroup(PurchasePrice purchasePrice,
+                                                                 ManualTicketsNumbers manualTicketsNumbers) {
+        if (purchasePrice.isContainingZeroManualTicketCounts()) {
+            return new LotteryTicketsGroup(publishOnlyAutomaticLotteryTicketsGroup(purchasePrice));
+        }
+        return new LotteryTicketsGroup(publishMixedLotteryTicketsGroup(purchasePrice, manualTicketsNumbers));
+    }
+
+    private static List<LotteryTicket> publishOnlyAutomaticLotteryTicketsGroup(PurchasePrice purchasePrice) {
+        return Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                .limit(purchasePrice.getAutomaticTicketCounts())
                 .collect(Collectors.toList());
-        return new LotteryTicketsGroup(lotteryTickets);
+    }
+
+    private static List<LotteryTicket> publishMixedLotteryTicketsGroup(PurchasePrice purchasePrice,
+                                                                       ManualTicketsNumbers manualTicketsNumbers) {
+        Stream<LotteryTicket> manualTicketsStream = manualTicketsNumbers.getManualTicketsNumbers()
+                .stream()
+                .map(LotteryTicket::publishManualLotteryTicket);
+        Stream<LotteryTicket> autoTicketsStream = Stream.generate(LotteryTicket::publishAutomaticLotteryTicket)
+                .limit(purchasePrice.getAutomaticTicketCounts());
+        return Stream.concat(manualTicketsStream, autoTicketsStream)
+                .collect(Collectors.toList());
     }
 
     public List<List<Integer>> getLotteryTicketsNumbers() {

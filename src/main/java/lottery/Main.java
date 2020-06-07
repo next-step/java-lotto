@@ -7,13 +7,18 @@ import lottery.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        PurchasePrice purchasePrice = PurchasePrice.from(InputView.getInputPurchasePrice());
+        PurchasePrice purchasePrice =
+                PurchasePrice.of(InputView.getInputPurchasePrice(), InputView.getInputManualTicketCounts());
+        ManualTicketsNumbers manualTicketsNumbers =
+                new ManualTicketsNumbers(InputView.getInputManualTicketsNumbers(purchasePrice));
         LotteryStore lotteryStore = LotteryStore.getInstance();
-        LotteryTicketsGroup lotteryTicketsGroup = lotteryStore.publishLotteryTicketsGroup(purchasePrice);
+        LotteryTicketsGroup lotteryTicketsGroup =
+                lotteryStore.publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
 
         ResultView.printLotteryGameInformation(purchasePrice, lotteryTicketsGroup);
 
-        LotteryTicket lastWinnerTicket = LotteryTicket.from(InputView.getInputLastWinnerTicketNumbers());
+        LotteryTicket lastWinnerTicket =
+                LotteryTicket.publishManualLotteryTicket(InputView.getInputLastWinnerTicketNumbers());
         BonusBall bonusBall = BonusBall.of(InputView.getInputBonusBallNumber(), lastWinnerTicket);
 
         LotteryGame lotteryGame = LotteryGame.getInstance();

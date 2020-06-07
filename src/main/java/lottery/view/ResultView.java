@@ -15,11 +15,10 @@ public class ResultView {
 
     public static void printLotteryGameInformation(PurchasePrice purchasePrice,
                                                    LotteryTicketsGroup lotteryTicketsGroup) {
-        System.out.printf(ViewMessages.RESULT_LOTTERY_TICKET_COUNTS
-                , purchasePrice.getPurchasableLotteryTicketCounts());
+        System.out.printf(ViewMessages.RESULT_LOTTERY_TICKET_COUNTS,
+                purchasePrice.getManualTicketCounts(), purchasePrice.getAutomaticTicketCounts());
         List<List<Integer>> lotteryTicketsNumbers = lotteryTicketsGroup.getLotteryTicketsNumbers();
         lotteryTicketsNumbers.forEach(ResultView::printLotteryNumbers);
-
     }
 
     public static void printLotteryGameResult(LotteryGameResult lotteryGameResult) {

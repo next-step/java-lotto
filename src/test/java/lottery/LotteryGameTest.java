@@ -17,9 +17,9 @@ public class LotteryGameTest {
 
     private static Stream<Arguments> mockLotteryTicketBuilder() {
         return Stream.of(
-                Arguments.of(LotteryTicket.from("11, 22, 33, 44, 1, 2".split(ViewMessages.COMMA)),
+                Arguments.of(LotteryTicket.publishManualLotteryTicket("11, 22, 33, 44, 1, 2".split(ViewMessages.COMMA)),
                         LotteryRank.FIRST_PRIZE, 1),
-                Arguments.of(LotteryTicket.from("1, 2, 3, 44, 9, 8".split(ViewMessages.COMMA)),
+                Arguments.of(LotteryTicket.publishManualLotteryTicket("1, 2, 3, 44, 9, 8".split(ViewMessages.COMMA)),
                         LotteryRank.FIFTH_PRIZE, 2)
         );
     }
@@ -29,8 +29,8 @@ public class LotteryGameTest {
     @MethodSource("mockLotteryTicketBuilder")
     public void findLotteryWinnerTicketsGroup(LotteryTicket winnerTicket, LotteryRank lotteryRank,
                                               int winnerCounts) {
-        LotteryTicket loser = LotteryTicket.from("1,2,3,4,5,6".split(","));
-        LotteryTicket winner = LotteryTicket.from("11,22,33,44,1,2".split(","));
+        LotteryTicket loser = LotteryTicket.publishManualLotteryTicket("1,2,3,4,5,6".split(","));
+        LotteryTicket winner = LotteryTicket.publishManualLotteryTicket("11,22,33,44,1,2".split(","));
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(Arrays.asList(loser, winner));
         BonusBall bonusBallNumber = BonusBall.of(45, winnerTicket);
 

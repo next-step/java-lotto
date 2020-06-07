@@ -1,12 +1,11 @@
 package lottery;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryTicketsGroup;
-import lottery.domain.PurchasePrice;
+import lottery.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 public class LotteryTicketsGroupTest {
 
     private List<LotteryTicket> lotteryTicketList;
+    private ManualTicketsNumbers manualTicketsNumbers;
 
     @BeforeEach
     public void setupLotteryTicket() {
@@ -27,6 +27,10 @@ public class LotteryTicketsGroupTest {
         }
         LotteryTicket lotteryTicket = LotteryTicket.from(lotteryNumberList);
         lotteryTicketList = Arrays.asList(lotteryTicket, lotteryTicket);
+
+        List<String[]> manualTicketsNumbers = Arrays.asList("1,2,3,4,5,6".split(","),
+                "11,12,13,14,15,16".split(","));
+        this.manualTicketsNumbers = new ManualTicketsNumbers(manualTicketsNumbers);
     }
 
     @DisplayName("LotteryTicketsGroup 정상 생성 테스트")
@@ -35,12 +39,14 @@ public class LotteryTicketsGroupTest {
         assertThatCode(() -> {
             LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
             LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                    .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
+                    .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
+                            new ManualTicketsNumbers(null));
         }).doesNotThrowAnyException();
 
         LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup.from(lotteryTicketList);
         LotteryTicketsGroup automaticLotteryTicketsGroup = LotteryTicketsGroup
-                .publishAutomaticLotteryTicketsGroup(PurchasePrice.from(2000));
+                .publishLotteryTicketsGroup(PurchasePrice.of(2000, 0),
+                        new ManualTicketsNumbers(null));
 
         assertThat(lotteryTicketsGroup.getClass())
                 .isEqualTo(LotteryTicketsGroup.class);
@@ -58,5 +64,47 @@ public class LotteryTicketsGroupTest {
         List<List<Integer>> targetList = Arrays.asList(oneToSixList, oneToSixList);
 
         assertThat(lotteryTicketsNumbers).isEqualTo(targetList);
+    }
+
+    @DisplayName("PurchasePrice와 수동 입력 티켓 번호들을 입력 받으면 정상적으로 티켓 리스트를 반환함")
+    @ParameterizedTest
+    @ValueSource(longs = {2000, 3000, 4000, 4444, 5555})
+    public void getLotteryTicketsUsingAutoAndManual(long inputPrice) {
+        PurchasePrice purchasePrice = PurchasePrice.of(inputPrice, 2);
+
+        LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
+
+        assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
+                .isEqualTo(purchasePrice.getAutomaticTicketCounts() +
+                        purchasePrice.getManualTicketCounts());
+    }
+
+    @DisplayName("자동이 0개인 경우 티켓 정상 생성")
+    @Test
+    public void getOnlyAutomaticLotteryTicketsGroup() {
+        PurchasePrice purchasePrice = PurchasePrice.of(2000, 2);
+
+        assertThat(purchasePrice.getAutomaticTicketCounts())
+                .isEqualTo(0);
+
+        LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
+                .publishLotteryTicketsGroup(purchasePrice, manualTicketsNumbers);
+
+        assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
+                .isEqualTo(purchasePrice.getManualTicketCounts());
+    }
+
+    @DisplayName("수동이 0개인 경우 티켓 정상 생성")
+    @ParameterizedTest
+    @ValueSource(longs = {1000, 2000, 3000, 4000})
+    public void getOnlyManualTicketsGroup(long userInput) {
+        PurchasePrice purchasePrice = PurchasePrice.of(userInput, 0);
+
+        LotteryTicketsGroup lotteryTicketsGroup = LotteryTicketsGroup
+                .publishLotteryTicketsGroup(purchasePrice, new ManualTicketsNumbers(null));
+
+        assertThat(lotteryTicketsGroup.getLotteryTicketsNumbers().size())
+                .isEqualTo(purchasePrice.getAutomaticTicketCounts());
     }
 }
