@@ -62,10 +62,10 @@ public class Lotto {
 
     private void checkNumber(List<Integer> lottoNumbers) {
         lottoNumbers.stream()
-                .forEach(number -> {
-                    if (number > MAX || number < MIN) {
-                        throw new IllegalArgumentException(EXCEPTION_SIX_NUMBER);
-                    }
+                .filter(number -> number > MAX || number < MIN)
+                .findAny()
+                .ifPresent(number -> {
+                    throw new IllegalArgumentException(EXCEPTION_SIX_NUMBER);
                 });
     }
 
