@@ -25,5 +25,4 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-
 }

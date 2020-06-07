@@ -3,6 +3,7 @@ package step3;
 
 import step3.domain.LottoGame;
 import step3.domain.Money;
+import step3.domain.WinningLotto;
 import step3.view.view.InputView;
 import step3.view.view.OutputView;
 
@@ -34,12 +35,13 @@ public class MainApplication {
 
         // get Wining Number
         String winingNumber = InputView.inputWiningNumber();
-
         String bonusNumber = InputView.inputBonusNumber();
-        lottoGame.checkWiningNumber(winingNumber, bonusNumber);
+
+        WinningLotto winningLotto = new WinningLotto(winingNumber, bonusNumber);
 
         // matching numbers
-        lottoGame.matchingWinningNumbers();
+        winningLotto.matchingWinningNumbers(lottoGame.getLottoTickets());
+
         OutputView.outputPrizeList();
 
         // calc ratio of win.
