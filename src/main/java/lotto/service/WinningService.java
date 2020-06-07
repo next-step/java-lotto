@@ -22,8 +22,7 @@ public class WinningService {
 	}
 
 	public static Money calculateProfit(List<RewardType> lottoStatistics) {
-		int value = RewardType.calculateProfit(lottoStatistics);
-		return new Money(value);
+		return RewardType.calculateProfit(lottoStatistics);
 	}
 
 	public static LottoResult getLottoResult(final LottoTickets lottoTickets, final WinningTicket winningTicket) {

@@ -12,8 +12,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.domain.RewardType;
-
 public class RewardTypeTest {
 
 	@DisplayName("매칭된 카운트에 따라 타입이 결정된다는 것을 최종적인 리워드 값을 통하여 검증한다.")
@@ -40,6 +38,6 @@ public class RewardTypeTest {
 	@MethodSource("lottoStatisticsMock")
 	@ParameterizedTest
 	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int profit) {
-		assertThat(RewardType.calculateProfit(lottoStatistics)).isEqualTo(profit);
+		assertThat(RewardType.calculateProfit(lottoStatistics).getValue()).isEqualTo(profit);
 	}
 }
