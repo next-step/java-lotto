@@ -29,3 +29,22 @@
 * 일치갯수에 따라 로또 구매갯수 대비 수익률 판별
 * 수익률 = 당첨금/로또구매금액 (소수점 둘째자리까지 나머지 절삭)
 * 수익률이 1보다 작으면 손해, 1보다 크면 이득
+
+##진행중 step3 TODO list
+* ~~lottotickets 의 confirmWinningResult메소드 리팩토링~~ 
+* ~~LottoTickets -> 일급 콜렉션을 사용한다면 calculateTotalPrize / calculateEarningsRate 메소드를스스로 수행 할 수 있을 것 같아요.~~
+
+## DONE list
+* number 값 포장
+* bonusBall 포장 -> lottoTicket의 checkWinningRank 리팩토링 가능
+* lottotickets 의 confirmWinningResult메소드 리팩토링 
+* WinningRank의 findRanking -> 매직넘버 변환
+* LottoTicket -> validateLottoNumberMinMax 메소드 Integer 포장하면 해당 클래스에서 해결 가능할듯 (number값 포장)
+* validateLottoNumberMinMax 메소드 매직넘벼 변환
+* LottoTicket -> public static LottoTicket auto() {
+                 return new LottoTicket(LottoNumber.getLottoNumbers());
+                 }
+                 LottoTicket.auto() 로 생성하실 수 있을 것 같아요.
+* LottoTickets -> WinningLottoTicket 과 lastWinningNumbers.getBonusBall() 를 묶어서 객체로 관리
+* LottoTickets -> 일급 콜렉션을 사용한다면 calculateTotalPrize / calculateEarningsRate 메소드를스스로 수행 할 수 있을 것 같아요.
+* checkWinningRank 테스트 방법 찾기
