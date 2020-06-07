@@ -29,6 +29,14 @@ public class WinningNumbers {
 		}
 	}
 
+	protected LottoNumber validateBonusBall(LottoNumber bonusBall) {
+		if (this.winningNumbers.stream()
+			.anyMatch(number -> number.compareBallIdentity(bonusBall))) {
+			throw new RuntimeException("로또 번호와 보너스 볼은 중복 불가합니다.");
+		}
+		return bonusBall;
+	}
+
 	public List<LottoNumber> getWinningNumbers() {
 		return winningNumbers;
 	}
