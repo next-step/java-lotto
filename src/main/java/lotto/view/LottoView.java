@@ -27,20 +27,24 @@ public class LottoView {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
   }
 
+  public static void printWinningBonusNumberRequestMsg() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+  }
+
   public static void printStatisticsMsg() {
     System.out.println("\n당첨 통계");
     System.out.println("---------");
   }
 
   public static void printPrizeTierCnt(Map<PrizeTier, Integer> prizeTierCntMap) {
-    prizeTierCntMap.remove(PrizeTier.MATCH_ZERO);
-
-    for (PrizeTier prizeTier : prizeTierCntMap.keySet()) {
-      System.out.printf("%d개 일치 (%d원) - %d개\n",
-          prizeTier.getMatchCnt(),
-          prizeTier.getPrize(),
-          prizeTierCntMap.get(prizeTier));
-    }
+    prizeTierCntMap.entrySet().stream()
+        .filter(e -> 3 <= e.getKey().getMatchCnt().getValue())
+        .forEach(e -> {
+          System.out.printf("%s (%d원) - %d개\n",
+              e.getKey().getMatchCnt().toString(),
+              e.getKey().getPrize(),
+              prizeTierCntMap.get(e.getKey()));
+        });
   }
 
   public static void printProfitRate(double profit) {
@@ -56,4 +60,5 @@ public class LottoView {
       return "총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     }
   }
+
 }

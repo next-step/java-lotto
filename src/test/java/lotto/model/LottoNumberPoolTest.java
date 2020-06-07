@@ -9,7 +9,7 @@ class LottoNumberPoolTest {
 
   @Test
   void quickPick() {
-    List<Integer> numbers = LottoNumberPool.getInstance().quickPick();
+    List<LottoNumber> numbers = LottoNumberPool.getInstance().quickPick();
     assertThat(numbers.size()).isEqualTo(6);
     assertThat(numbers.stream().distinct().toArray().length).isEqualTo(6);
   }

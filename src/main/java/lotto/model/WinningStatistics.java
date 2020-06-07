@@ -31,7 +31,7 @@ public class WinningStatistics {
   private Map<PrizeTier, Integer> sortPrizeTierIntegerMap(
       Map<PrizeTier, Integer> prizeTierCntMap) {
     return prizeTierCntMap.entrySet().stream()
-        .sorted(Comparator.comparingInt(e -> e.getKey().getMatchCnt())
+        .sorted(Comparator.comparing(e -> e.getKey().getMatchCnt())
         ).collect(Collectors
             .toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,
                 LinkedHashMap::new)

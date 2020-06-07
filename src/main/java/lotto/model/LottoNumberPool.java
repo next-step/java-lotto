@@ -37,10 +37,12 @@ public class LottoNumberPool {
    *
    * @return 1~45 사이 랜덤 수 6자리
    */
-  public List<Integer> quickPick() {
+  public List<LottoNumber> quickPick() {
     Collections.shuffle(numbers);
 
-    return numbers.stream().limit(Lotto.LOTTO_SIZE).sorted(Integer::compareTo)
+    return numbers.stream()
+        .limit(Lotto.LOTTO_SIZE)
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
   }
 }
