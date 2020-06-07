@@ -1,6 +1,6 @@
 package study.step3.view;
 
-import study.step3.dto.LottoInputDto;
+import study.step3.domain.WinningLotto;
 
 import java.util.Scanner;
 
@@ -17,8 +17,8 @@ public class InputView {
         return scanner.nextLong();
     }
 
-    public static LottoInputDto inputLastWinningNumbers(){
-        return new LottoInputDto(inputWinningNumbers(), inputBonusBall());
+    public static WinningLotto inputLastWinningNumbers(){
+        return new WinningLotto(inputWinningNumbers(), inputBonusBall());
     }
 
     private static int inputBonusBall() {

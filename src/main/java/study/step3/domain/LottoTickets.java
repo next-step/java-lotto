@@ -1,17 +1,14 @@
 package study.step3.domain;
 
-import study.step3.dto.LottoInputDto;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
+    private final static int INIT_INDEX = 0;
     private final static int LOTTO_PRICE_PER_PIECE = 1000;
-    private final static String LOTTO_RESULT_RANKS = "winningRanks";
-    private final static String LOTTO_RESULT_EARNINGS_RATE = "earningsRate";
 
     private final List<LottoTicket> lottoTickets;
 
@@ -27,32 +24,21 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public LottoResult confirmWinningResult(LottoInputDto lastWinningNumbers) {
-        Map<String,Object> result = new HashMap<>();
-        List<WinningRank> winningRanks = checkLottoRank(lastWinningNumbers);
-        result.put(LOTTO_RESULT_RANKS,winningRanks);
-        
-        long totalPrize = calculateTotalPrize(winningRanks);
-        double earningsRate = calculateEarningsRate(totalPrize);
-        result.put(LOTTO_RESULT_EARNINGS_RATE,earningsRate);
-        return new LottoResult(result);
+    public static LottoTickets publish(long lottoCounting) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (long i = INIT_INDEX; i < lottoCounting; i++){
+            lottoTickets.add(LottoTicket.auto());
+        }
+        return new LottoTickets(lottoTickets);
     }
 
-    private long calculateTotalPrize(List<WinningRank> winningRanks) {
-        return winningRanks.stream()
-                .mapToLong(winningRank -> winningRank.getPrizeMoney())
-                .sum();
+    public LottoResult confirmWinningResult(WinningLotto lastWinningNumbers) {
+        return new LottoResult(checkLottoRank(lastWinningNumbers));
     }
 
-    private double calculateEarningsRate(long totalPrize) {
-        return totalPrize / (double) (lottoTickets.size() * LOTTO_PRICE_PER_PIECE);
-    }
-
-    private List<WinningRank> checkLottoRank(LottoInputDto lastWinningNumbers) {
-        LottoTicket winningTicket = new LottoTicket(lastWinningNumbers.getLottoNumbers());
+    private WinningRanks checkLottoRank(WinningLotto lastWinningNumbers) {
         return lottoTickets.stream()
-                    .map(lottoTicket -> lottoTicket.checkWinningRank(winningTicket, lastWinningNumbers.getBonusBall()))
-                    .filter(winningRank -> winningRank != WinningRank.NOTHING)
-                    .collect(Collectors.toList());
+                           .map(lottoTicket -> lottoTicket.checkWinningRank(lastWinningNumbers))
+                           .collect(collectingAndThen(toList(),WinningRanks::new));
     }
 }

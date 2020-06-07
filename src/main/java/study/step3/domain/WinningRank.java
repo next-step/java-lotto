@@ -10,6 +10,8 @@ public enum WinningRank {
     FIFTH(3, 5_000),
     NOTHING(0,0);
 
+    private final static int MATCH_COUNT_FIVE = 5;
+
     private int matchingCount;
     private long prizeMoney;
 
@@ -19,7 +21,7 @@ public enum WinningRank {
     }
 
     public static WinningRank findRanking(long inputMatchingCount, boolean matchBonus){
-        if (inputMatchingCount == 5 && !matchBonus){
+        if (inputMatchingCount == MATCH_COUNT_FIVE && !matchBonus){
             return WinningRank.THIRD;
         }
 

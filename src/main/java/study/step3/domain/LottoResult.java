@@ -1,25 +1,26 @@
 package study.step3.domain;
 
-import java.util.List;
-import java.util.Map;
-
 public class LottoResult {
-    private final static String LOTTO_RESULT_RANKS = "winningRanks";
+    private WinningRanks winningRanks;
+    private double earningRate;
 
-    private final Map<String, Object> result;
-
-    public LottoResult(Map<String, Object> result) {
-       this.result = result; 
+    public LottoResult(WinningRanks winningRanks){
+        this(winningRanks, winningRanks.calculateEarningsRate());
     }
 
-    public Map<String,Object> getResult(){
-        return result;
+    public LottoResult(WinningRanks winningRanks, double earningRate) {
+        this.winningRanks = winningRanks;
+        this.earningRate = earningRate;
+    }
+
+    public double getEarningRate() {
+        return earningRate;
     }
 
     public long countRank(WinningRank rank) {
-        List<WinningRank> winningRanks = (List<WinningRank>) result.get(LOTTO_RESULT_RANKS);
-        return winningRanks.stream()
-                    .filter(winningRank -> winningRank.equals(rank))
-                    .count();
+        return winningRanks.getWinningRanks()
+                           .stream()
+                           .filter(winningRank -> winningRank.equals(rank))
+                           .count();
     }
 }
