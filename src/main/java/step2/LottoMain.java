@@ -23,7 +23,7 @@ public class LottoMain {
         Lotto winnerNumbers = Lotto.newStringLotto(inputWinnerNumbers);
 
         LottoTotalCalculator lottoTotalCalculator = new LottoTotalCalculator();
-        Map<WinnerTier, Integer> WinningResult = lottoTotalCalculator.countWinners(lottoGame, winnerNumbers);
+        Map<WinnerTier, Integer> WinningResult = lottoTotalCalculator.countWinners(lottoGame.getLottos(), winnerNumbers);
         double Yield = lottoTotalCalculator.returnYield(lottoMoney);
 
         LottoOutput.printWinningStatistics(WinningResult, Yield);

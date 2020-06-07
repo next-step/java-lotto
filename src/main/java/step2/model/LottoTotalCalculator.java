@@ -7,10 +7,10 @@ import java.util.Map;
 public class LottoTotalCalculator {
     private Map<WinnerTier, Integer> winningResult = new HashMap<>();
 
-    public Map<WinnerTier, Integer> countWinners(LottoGame lottoGame, Lotto winnerLotto) {
+    public Map<WinnerTier, Integer> countWinners(List<Lotto> lottoGame, Lotto winnerLotto) {
 
         for (WinnerTier winnerTier : WinnerTier.values()) {
-            long matchCount = lottoGame.getLottos().stream()
+            long matchCount = lottoGame.stream()
                     .filter(lotto -> lotto.checkWinningCount(winnerLotto) == winnerTier.getMatchCnt())
                     .count();
 
