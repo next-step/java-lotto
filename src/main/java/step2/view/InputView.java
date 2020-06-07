@@ -28,6 +28,6 @@ public class InputView {
 
     public int inputBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER);
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 }

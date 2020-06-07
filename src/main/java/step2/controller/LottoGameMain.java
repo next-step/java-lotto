@@ -22,9 +22,9 @@ public class LottoGameMain {
             resultView.printLottos(lottoGame.getLottos());
 
             List<Integer> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
-            //int bonusNumber = inputView.inputBonusNumber();
+            int bonusNumber = inputView.inputBonusNumber();
 
-            resultView.printStatistic(lottoGame.getGameResult(lastWeekWinningNumbers));
+            resultView.printStatistic(lottoGame.getGameResult(lastWeekWinningNumbers, bonusNumber));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

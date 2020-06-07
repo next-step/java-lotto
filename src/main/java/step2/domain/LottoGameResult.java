@@ -17,8 +17,8 @@ public class LottoGameResult {
     }
 
     public LottoGameResultDto getResult(List<UserLotto> lottos, Lotto winningLotto,
-        UserPrice userPrice) {
-        drawLottos(lottos, winningLotto.getLottoNumbers());
+        UserPrice userPrice, int bonusNumber) {
+        drawLottos(lottos, winningLotto.getLottoNumbers(), bonusNumber);
 
         countPrize(lottos);
 
@@ -45,9 +45,9 @@ public class LottoGameResult {
             .count();
     }
 
-    private void drawLottos(List<UserLotto> lottos, List<Integer> winningNumbers) {
-        lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers));
+    private void drawLottos(List<UserLotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+        lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers, bonusNumber));
         //for logging
-        //lottos.stream().forEach(lotto -> System.out.println(lotto));
+        lottos.stream().forEach(lotto -> System.out.println(lotto));
     }
 }

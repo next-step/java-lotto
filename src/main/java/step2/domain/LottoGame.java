@@ -24,13 +24,13 @@ public class LottoGame {
         lottos = lottoGenerator.generateLottos(userPrice);
     }
 
-    public LottoGameResultDto getGameResult(List<Integer> winningNumbers)
+    public LottoGameResultDto getGameResult(List<Integer> winningNumbers, int bonusNumber)
         throws IllegalArgumentException {
 
         Lotto winningLotto = new Lotto(winningNumbers);
         validateWinningNumbers(winningNumbers);
 
-        return new LottoGameResult().getResult(lottos, winningLotto, userPrice);
+        return new LottoGameResult().getResult(lottos, winningLotto, userPrice, bonusNumber);
     }
 
     public List<UserLotto> getLottos() {

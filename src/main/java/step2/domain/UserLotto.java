@@ -1,7 +1,5 @@
 package step2.domain;
 
-import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -9,20 +7,26 @@ public class UserLotto extends Lotto {
 
     private int hitCount;
     private int prize;
+    private boolean isMatchedBonus;
 
     public UserLotto(List<Integer> lottoNumbers) {
         super(lottoNumbers);
         this.hitCount = 0;
         this.prize = 0;
+        this.isMatchedBonus = false;
     }
 
-    private void drawLotto(List<Integer> winningNumbers) {
-        winningNumbers.stream().forEach(this::findHit);
+    private void drawLotto(List<Integer> winningNumbers, int bonusNumber) {
+        winningNumbers.stream().forEach(number -> findHit(number, bonusNumber));
     }
 
-    private void findHit(Integer winningNumber) {
+    private void findHit(Integer winningNumber, int bonusNumber) {
         if (getLottoNumbers().contains(winningNumber)) {
             this.hitCount++;
+        }
+
+        if (getLottoNumbers().contains(bonusNumber)) {
+            isMatchedBonus = true;
         }
     }
 
@@ -30,14 +34,11 @@ public class UserLotto extends Lotto {
         return prize;
     }
 
-    public void setPrize(List<Integer> winningNumbers) {
+    public void setPrize(List<Integer> winningNumbers, int bonusNumber) {
 
-        drawLotto(winningNumbers);
+        drawLotto(winningNumbers, bonusNumber);
 
-        if (hitCount >= Prize.FORTH.getHitCount()) {
-            prize = (LOTTO_SELECTION_COUNT + 1) % hitCount
-                + (LOTTO_SELECTION_COUNT / hitCount - 1) * 3;
-        }
+        prize = Prize.valueOf(hitCount, isMatchedBonus).getGrade();
     }
 
     public int getCashPrice() {
@@ -47,9 +48,9 @@ public class UserLotto extends Lotto {
     @Override
     public String toString() {
         return "UserLotto{" +
-            "lottoNumbers=" + getLottoNumbers() +
-            ", hitCount=" + hitCount +
+            "hitCount=" + hitCount +
             ", prize=" + prize +
+            ", isMatchedBonus=" + isMatchedBonus +
             '}';
     }
 
