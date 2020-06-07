@@ -1,25 +1,35 @@
 package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
+import dev.dahye.lotto.util.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResult {
     private static final String WINNERS_DELIMITER = ",";
-    private static final int WINNING_NUMBER_MAX_SIZE = 6;
 
     private final List<LottoTicket> lottoTickets;
-    private final List<Integer> winningNumbers;
+    private final LottoTicket winningTicket;
+    private final int bonusNumber;
 
-    public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput) {
+    public LottoResult(List<LottoTicket> lottoTickets, String winningNumberInput, int bonusNumber) {
         validateWinnersNullOrEmpty(winningNumberInput);
         List<Integer> winningNumbers = convertStringToIntegerList(winningNumberInput);
 
         this.lottoTickets = lottoTickets;
-        this.winningNumbers = winningNumbers;
+        this.winningTicket = LottoTicket.manualIssued(winningNumbers);
+        this.bonusNumber = bonusNumber;
 
-        validateWinningNumbers();
+        validateBonusNumber();
+    }
+
+    private void validateBonusNumber() {
+        LottoNumbers.validNumberRange(bonusNumber);
+
+        if (winningTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+        }
     }
 
     private void validateWinnersNullOrEmpty(String winningNumberInput) {
@@ -47,41 +57,36 @@ public class LottoResult {
         }
     }
 
-    private void validateWinningNumbers() {
-        if (winningNumbers.size() != WINNING_NUMBER_MAX_SIZE) {
-            throw new IllegalArgumentException("당첨 번호는 6자리 숫자여야 합니다.");
-        }
-    }
-
-    public List<Winning> getMyWinnings() {
-        List<Winning> winnings = new ArrayList<>();
+    public List<Rank> getMyWinnings() {
+        List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.getMatchCount(winningNumbers);
-            addWhenIsWinning(winnings, matchCount);
+            int matchCount = lottoTicket.getCountOfMatch(winningTicket);
+            boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
+            addWhenIsWinning(ranks, matchCount, isMatchBonusNumber);
         }
 
-        return winnings;
+        return ranks;
     }
 
-    private void addWhenIsWinning(List<Winning> winnings, int matchCount) {
-        if (Winning.isWinning(matchCount)) {
-            winnings.add(Winning.getWinning(matchCount));
+    private void addWhenIsWinning(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
+        if (Rank.canRanking(matchCount, isMatchBonusNumber)) {
+            ranks.add(Rank.valueOf(matchCount, isMatchBonusNumber));
         }
     }
 
-    public int getTotalCountWhenSpecificWinning(Winning target) {
+    public int getTotalCountWhenSpecificWinning(Rank target) {
         int count = 0;
 
-        for (Winning winning : this.getMyWinnings()) {
-            count = plusCountWhenEquals(count, winning, target);
+        for (Rank rank : this.getMyWinnings()) {
+            count = plusCountWhenEquals(count, rank, target);
         }
 
         return count;
     }
 
-    private int plusCountWhenEquals(int count, Winning winning, Winning target) {
-        if (winning.equals(target)) {
+    private int plusCountWhenEquals(int count, Rank rank, Rank target) {
+        if (rank.equals(target)) {
             count++;
         }
         return count;
@@ -90,10 +95,14 @@ public class LottoResult {
     public double getMyWinningRate(int money) {
         int totalPrize = 0;
 
-        for (Winning winning : this.getMyWinnings()) {
-            totalPrize += winning.getPrize();
+        for (Rank rank : this.getMyWinnings()) {
+            totalPrize += rank.getPrize();
         }
 
-        return DoubleUtils.parseDoubleSecondDigit(totalPrize / money);
+        return getWinningRate(totalPrize, money);
+    }
+
+    public static double getWinningRate(int totalPrize, int money) {
+        return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
     }
 }
