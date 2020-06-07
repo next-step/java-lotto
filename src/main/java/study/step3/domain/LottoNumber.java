@@ -7,6 +7,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     private final static int LOTTO_MIN_NUMBER = 1;
     private final static String LOTTO_NULL_EXCEPTION = "당첨번호는 빈 값을 입력할 수 없습니다.";
     private final static String LOTTO_LIMIT_NUMBER_EXCEPTION = "로또 번호는 1보다 작거나 45보다 클 수 없습니다.";
+
     private final int lottoNumber;
 
     public LottoNumber(String lottoNumber) {
