@@ -1,24 +1,30 @@
 package lotto.view;
 
-import lotto.domain.LottoMatcher;
-import lotto.domain.Lottos;
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static StringBuilder stringBuilder;
 
-    public static void printLottoNumbers(Lottos lottos) {
+    public static void printLotto(List<Lotto> lottos, int countLotto) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottos.getLottoCount()).append("개를 구매했습니다.\n");
+        stringBuilder.append(countLotto).append("개를 구매했습니다.\n");
 
-        lottos.getLottos().forEach(lottoNumber -> {
-            stringBuilder.append(lottoNumber.getNumbers());
+        lottos.forEach(lotto -> {
+            printLottoNumbers(lotto.getLottoNumbers());
             stringBuilder.append("\n");
         });
         System.out.println(stringBuilder.toString());
+    }
+
+    private static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        List<Integer> numbers = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+        stringBuilder.append(numbers);
     }
 
     public static void printResult(LottoMatcher lottoMatcher, int money) {

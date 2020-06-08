@@ -12,9 +12,7 @@ public class Main {
         Money money = new Money(buyLottoMoney);
 
         List<Lotto> lottos = LottoMachine.createLottos(money.countLotto());
-//        Lottos lottos = new Lottos(money.countLotto());
-//        lottos.drawLotto();
-//        ResultView.printLottoNumbers(lottos);
+        ResultView.printLotto(lottos, money.countLotto());
 
         String[] winningNumbers  = InputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
@@ -23,6 +21,6 @@ public class Main {
 
         LottoMatcher lottoMatcher = new LottoMatcher(lottos, winningNumber.getWinningNumbers());
 
-        ResultView.printResult(lottoMatcher, buyLottoMoney);
+        //ResultView.printResult(lottoMatcher, buyLottoMoney);
     }
 }
