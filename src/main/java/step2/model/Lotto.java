@@ -50,7 +50,7 @@ public class Lotto {
         return cnt;
     }
 
-    public int plusContainNumber(int number) {
+    private int plusContainNumber(int number) {
         if (lottoNumbers.contains(number)) {
             return PLUS_ONE;
         }
@@ -58,7 +58,7 @@ public class Lotto {
         return PLUS_ZERO;
     }
 
-    public void validateNumbers(List<Integer> lottoNumbers) {
+    private void validateNumbers(List<Integer> lottoNumbers) {
         checkNumber(lottoNumbers);
         checkSize(lottoNumbers);
         countWithoutDuplication(lottoNumbers);
