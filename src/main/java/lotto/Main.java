@@ -16,6 +16,8 @@ public class Main {
         String[] winningNumbers  = InputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
 
+        int bonusBall = InputView.inputBonusBall();
+
         LottoMatcher lottoMatcher = new LottoMatcher(lottos.getLottos(), winningNumber.getWinningNumbers());
 
         ResultView.printResult(lottoMatcher, buyLottoMoney);
