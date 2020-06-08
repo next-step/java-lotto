@@ -1,6 +1,10 @@
 package step2.domain;
 
+import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
+import static step2.view.ErrorMessages.INVALID_WINNING_NUMBERS;
+
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class Lotto {
 
@@ -12,5 +16,12 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public void validateWinningNumbers() throws IllegalArgumentException {
+
+        if (CollectionUtils.size(lottoNumbers) != LOTTO_SELECTION_COUNT) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
+        }
     }
 }
