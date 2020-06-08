@@ -25,7 +25,7 @@ public class WinningNumbers {
         return new WinningNumbers(enteredWinNumber);
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers) {
+    public int findMatchCount(LottoNumbers lottoNumbers) {
         int matchCount = 0;
         for (int number : lottoNumbers.getLottoNumbers()) {
             matchCount += checkMatch(number);

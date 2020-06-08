@@ -1,9 +1,6 @@
 package lotto.domain.lotto;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LottoNumbers {
 
@@ -27,7 +24,7 @@ public class LottoNumbers {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     private void checkSize(List<Integer> lottoNumbers) {

@@ -46,7 +46,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
         LottoNumbers lottoNumbers = LottoNumbers.create(Arrays.asList(1, 7, 23, 34, 37, 44));
 
-        int matchCount = winningNumbers.getMatchCount(lottoNumbers);
+        int matchCount = winningNumbers.findMatchCount(lottoNumbers);
 
         assertThat(matchCount).isEqualTo(expectedCount);
     }
