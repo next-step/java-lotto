@@ -18,7 +18,7 @@ public class LottoShop {
         List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(countOfManualLotto);
 
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, countOfManualLotto, manualLottoTickets);
-        ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
+        ResultView.printPurchasedLottoTickets(lottoMachine);
 
         LottoTicket winningTicket
                 = LottoTicket.manualIssued(ConvertUtils.convertStringToIntegerList(InputView.doInputWinningNumbers()));

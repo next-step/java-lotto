@@ -7,16 +7,13 @@ import dev.dahye.lotto.domain.LottoTickets;
 import java.util.List;
 
 public class LottoMachine {
-    private LottoTickets lottoTickets;
-
-    public LottoMachine(LottoMoney lottoMoney) {
-        int countOfLotto = lottoMoney.calculateCountOfLotto();
-        lottoTickets = LottoTickets.autoIssued(countOfLotto);
-    }
+    private final LottoTickets lottoTickets;
+    private final int countOfManualLotto;
 
     public LottoMachine(LottoMoney lottoMoney, int countOfManualLotto, List<LottoTicket> manualLottoTickets) {
         int countOfLotto = lottoMoney.calculateCountOfLotto();
         validateManualLotto(countOfLotto, countOfManualLotto, manualLottoTickets);
+        this.countOfManualLotto = countOfManualLotto;
         lottoTickets = LottoTickets.multiIssued(countOfLotto, manualLottoTickets);
     }
 
@@ -36,5 +33,13 @@ public class LottoMachine {
 
     public LottoTickets getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int getCountOfManualLotto() {
+        return countOfManualLotto;
+    }
+
+    public int getCountOfAutoLotto() {
+        return this.lottoTickets.size() - countOfManualLotto;
     }
 }
