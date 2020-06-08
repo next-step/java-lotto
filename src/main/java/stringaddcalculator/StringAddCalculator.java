@@ -4,23 +4,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+    public static final String SEPARATOR = ",|:";
+
     private StringAddCalculator() {}
 
     public static int splitAndSum(String input) {
-        if (isNullOrEmpty(input))
+        if (isNullOrEmpty(input)) {
             return 0;
+        }
 
-        if (isOneNumber(input))
+        if (isOneNumber(input)) {
             return Integer.parseInt(input);
+        }
 
-        if (isCustomSeparator(input))
+        if (isCustomSeparator(input)) {
             return findSeparatorAndSum(input);
+        }
 
-        return getBasicSum(",|:", input);
+        return sum(SEPARATOR, input);
     }
 
     private static boolean isNullOrEmpty(String input) {
-        if (input == null) return true;
+        if (input == null) {
+            return true;
+        }
         return input.isEmpty();
     }
 
@@ -33,17 +41,16 @@ public class StringAddCalculator {
     }
 
     private static int findSeparatorAndSum(String input) {
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
-        Matcher matcher = pattern.matcher(input);
-        String separator = ",|:";
+        Matcher matcher = PATTERN.matcher(input);
+        String separator = SEPARATOR;
         if (matcher.find()) {
             separator = matcher.group(1);
             input = matcher.group(2);
         }
-        return getBasicSum(separator, input);
+        return sum(separator, input);
     }
 
-    private static int getBasicSum(String separator, String input) {
+    private static int sum(String separator, String input) {
         String[] splitValues = input.split(separator);
         int result = 0;
         for (String value : splitValues) {
@@ -55,8 +62,10 @@ public class StringAddCalculator {
     }
 
     private static void checkNegative(int number) {
-        if (number < 0)
+        if (number < 0){
             throw new RuntimeException("음수 값이 입력 되었습니다.");
+        }
+
     }
 
 }
