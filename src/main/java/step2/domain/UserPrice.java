@@ -11,15 +11,16 @@ public class UserPrice {
     private static final int MAXIMUM_USER_PRICE = 100000;
     private int price;
 
-    public UserPrice(int price) {
+    public UserPrice(int price) throws IllegalArgumentException {
         this.price = price;
+        validateUserPrice();
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void validateUserPrice() throws IllegalArgumentException {
+    private void validateUserPrice() throws IllegalArgumentException {
         if (price < MINIMUM_USER_PRICE || price > MAXIMUM_USER_PRICE) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_USER_PRICE);
         }

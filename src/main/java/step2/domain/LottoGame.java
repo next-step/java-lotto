@@ -16,7 +16,6 @@ public class LottoGame {
     }
 
     public void run() throws IllegalArgumentException {
-        userPrice.validateUserPrice();
         lottos = lottoGenerator.generateLottos(userPrice);
     }
 
