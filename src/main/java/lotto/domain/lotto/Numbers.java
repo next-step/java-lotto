@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    public static final int RANGE_START = 1;
-    public static final int RANGE_CLOSED = 46;
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
 
     public static final int START_LOTTO_RANGE = 0;
     public static final int END_LOTTO_RANGE = 6;
@@ -16,7 +16,7 @@ public class Numbers {
     private final List<Integer> numbers;
 
     private Numbers() {
-        List<Integer> numbers = IntStream.range(RANGE_START, RANGE_CLOSED)
+        List<Integer> numbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
                 .boxed().collect(Collectors.toList());
         this.numbers = numbers;
     }
