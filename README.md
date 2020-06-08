@@ -8,7 +8,14 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-### Step2 - 로또 (수동)
+### Step1 - 문자열 덧셈 계산기
+#### 구현 기능 목록
+* 문자열을 쉼표(,), 콜론(:)으로 분리한다.
+* 숫자를 더한다.
+* 커스텀 구분자를 정한다. "//","\n"사이에 있는것이 구분자다.
+* 음수와 숫자 이외의 값은 throw new RuntimeException 
+
+### Step2 - 로또 (자동)
 #### 구현 기능 목록
 * 입력뷰
     * 금액입력
