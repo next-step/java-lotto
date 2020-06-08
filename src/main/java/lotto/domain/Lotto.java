@@ -33,6 +33,10 @@ public class Lotto {
         return (int) lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 
+    public boolean isContainBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
