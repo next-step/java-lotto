@@ -1,19 +1,19 @@
 package lotto.ui;
 
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.prize.Prize;
+import lotto.domain.prize.WinningResult;
+
+import java.util.stream.IntStream;
 
 public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoQuantity(int quantity) {
+    public static void printLottoTicket(int quantity, LottoTicket lottoTicket) {
         System.out.println(quantity + "개를 구매했습니다.");
-    }
-
-    public static void printLottoTicket(LottoTicket lottoTicket) {
-        lottoTicket.getLottoTicket()
-                .forEach(ticket -> System.out.println(ticket.toString()));
-
+        IntStream.range(0, quantity).forEach(i -> System.out.println(lottoTicket.tellLottoNumbers(i)));
+        System.out.println();
     }
 
     public static void printWinningRate(double winningRate) {
@@ -23,12 +23,11 @@ public class ResultView {
         }
     }
 
-    public static void printWinningResult() {
+    public static void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n————");
+        for(Prize prize : Prize.values()){
+            int winningCount = winningResult.tellWinningCount(prize.getMatch());
+            System.out.println(prize.getMatch()+ "개 일치(" + prize.getPrice() + "원) - " + winningCount + "개");
+        }
     }
-
-    public static void printWinningResult(int match, int price, int winningCount) {
-        System.out.println(match + "개 일치(" + price + "원) - " + winningCount + "개");
-    }
-
 }

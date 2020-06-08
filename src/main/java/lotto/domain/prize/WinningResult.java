@@ -1,45 +1,16 @@
 package lotto.domain.prize;
 
-import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.lotto.LottoTicket;
-import lotto.ui.ResultView;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public class WinningResult {
-    private final Map<Integer, Integer> winningResult = new HashMap<>();
+    private final Map<Integer, Integer> winningResult;
 
-    private WinningResult(LottoTicket lottoTicket, String enteredWinNumber) {
-        makeWinningResult(lottoTicket, enteredWinNumber);
+    private WinningResult(Map<Integer, Integer> winningResult) {
+        this.winningResult = winningResult;
     }
 
-    public static WinningResult create(LottoTicket lottoTicket, String enteredWinNumber) {
-        return new WinningResult(lottoTicket, enteredWinNumber);
-    }
-
-
-    private void makeWinningResult(LottoTicket lottoTicket, String enteredWinNumber) {
-        WinningNumbers winningNumbers = new WinningNumbers(enteredWinNumber);
-        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
-            int matchCount = winningNumbers.getMatchCount(lottoNumbers);
-            putWinningResult(matchCount);
-        }
-    }
-
-    private void putWinningResult(int matchCount) {
-        if (matchCount > 2) {
-            winningResult.put(matchCount, winningResult.getOrDefault(matchCount, 0) + 1);
-        }
-    }
-
-    private int calculateWinningPrize() {
-        int winPrize = 0;
-        for (Prize prize : Prize.values()) {
-            int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
-            winPrize += prize.calculateTotalPrice(winningCount);
-        }
-        return winPrize;
+    public static WinningResult create(Map<Integer, Integer> winningResult) {
+        return new WinningResult(winningResult);
     }
 
     public double calculateWinningRate(double purchaseAmount) {
@@ -49,16 +20,16 @@ public class WinningResult {
         return winningRate;
     }
 
-    public Map<Integer, Integer> printWinningResult() {
-        ResultView.printWinningResult();
-        for (Prize prize : Prize.values()) {
-            int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
-            ResultView.printWinningResult(prize.getMatch(), prize.getPrice(), winningCount);
-        }
-        return winningResult;
+    public int tellWinningCount(int key) {
+        return winningResult.getOrDefault(key, 0);
     }
 
-    public Map<Integer, Integer> getWinningResult() {
-        return winningResult;
+    private int calculateWinningPrize() {
+        int winPrize = 0;
+        for (Prize prize : Prize.values()) {
+            int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
+            winPrize += prize.calculateTotalPrice(winningCount);
+        }
+        return winPrize;
     }
 }

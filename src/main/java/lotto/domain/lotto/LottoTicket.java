@@ -1,6 +1,11 @@
 package lotto.domain.lotto;
 
+import lotto.domain.prize.WinningNumbers;
+import lotto.domain.prize.WinningResult;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,8 +23,24 @@ public class LottoTicket {
         return new LottoTicket(quantity);
     }
 
-    public List<LottoNumbers> getLottoTicket() {
-        return lottoTicket;
+    public WinningResult makeWinningResult(String enteredWinNumber) {
+        WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
+        Map<Integer, Integer> winningCountMap = new HashMap<>();
+        for (LottoNumbers lottoNumbers : this.lottoTicket) {
+            int matchCount = winningNumbers.findMatchCount(lottoNumbers);
+            putWinningCount(winningCountMap, matchCount);
+        }
+        return WinningResult.create(winningCountMap);
+    }
+
+    private void putWinningCount(Map<Integer, Integer> winningCountMap, int matchCount) {
+        if (matchCount > 2) {
+            winningCountMap.put(matchCount, winningCountMap.getOrDefault(matchCount, 0) + 1);
+        }
+    }
+
+    public List<Integer> tellLottoNumbers(int i) {
+        return lottoTicket.get(i).getLottoNumbers();
     }
 
     private void checkQuantity(int quantity) {
@@ -34,7 +55,6 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +67,6 @@ public class LottoTicket {
     public String toString() {
         return String.valueOf(lottoTicket);
     }
+
+
 }
