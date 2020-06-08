@@ -23,7 +23,7 @@ public class ParserUtilsTest {
     public void checkEmptyTest() {
         String input = "";
         boolean result = parserUtils.checkEmpty(input);
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isEqualTo(true);
     }
 
     @DisplayName("null 입력을 확인한다.")
@@ -31,7 +31,7 @@ public class ParserUtilsTest {
     public void checkNullTest() {
         String input = null;
         boolean result = parserUtils.checkNull(input);
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isEqualTo(true);
     }
 
     @DisplayName("숫자 하나를 입력했을때 해당 숫자 반환")

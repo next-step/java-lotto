@@ -1,30 +1,29 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParserUtils {
 
-    public boolean checkEmpty(String input) {
+    public static boolean checkEmpty(String input) {
 
         if (input.isEmpty()) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public boolean checkNull(String input) {
+    public static boolean checkNull(String input) {
 
         if (input == null) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public List stringToArray(String input) {
+    public static List<Integer> stringToArray(String input) {
 
 
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
@@ -37,19 +36,19 @@ public class ParserUtils {
         return stringListToIntList(splitText);
     }
 
-    private List stringListToIntList(String[] splitText) {
+    private static List stringListToIntList(String[] splitText) {
 
         List resultList = new ArrayList();
 
         for (String text : splitText) {
-            int number = Integer.parseInt(text);
+            int number = Integer.parseInt(text.trim());
             isMinus(number);
             resultList.add(number);
         }
         return resultList;
     }
 
-    private void isMinus(int inputNumber) {
+    private static void isMinus(int inputNumber) {
         if (inputNumber < 0) {
             throw new RuntimeException();
         }
