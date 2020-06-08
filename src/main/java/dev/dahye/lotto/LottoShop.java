@@ -14,7 +14,6 @@ public class LottoShop {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.doInputMoney());
         int countOfManualLotto = InputView.doInputCountOfManualLotto();
-        InputView.printManualLottoInputHeader();
         List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(countOfManualLotto);
 
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, countOfManualLotto, manualLottoTickets);

@@ -25,18 +25,19 @@ public class InputView {
         return countOfManualLotto;
     }
 
-    public static void printManualLottoInputHeader() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-    }
-
     public static List<LottoTicket> doInputManualLotto(int countOfManualLotto) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         if (isExistManualLotto(countOfManualLotto)) {
+            printManualLottoInputHeader();
             doInputManualLotto(countOfManualLotto, lottoTickets);
         }
 
         return lottoTickets;
+    }
+
+    private static void printManualLottoInputHeader() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     private static void doInputManualLotto(int countOfManualLotto, List<LottoTicket> lottoTickets) {
