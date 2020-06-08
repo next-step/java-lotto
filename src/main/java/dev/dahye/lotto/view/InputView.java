@@ -40,8 +40,6 @@ public class InputView {
     }
 
     private static void doInputManualLotto(int countOfManualLotto, List<LottoTicket> lottoTickets) {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-
         for (int i = 0; i < countOfManualLotto; i++) {
             lottoTickets.add(LottoTicket.manualIssued(ConvertUtils.convertStringToIntegerList(scanner.nextLine())));
         }

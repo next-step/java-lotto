@@ -1,7 +1,8 @@
 package dev.dahye.lotto;
 
-import dev.dahye.lotto.domain.LottoResult;
 import dev.dahye.lotto.domain.LottoMoney;
+import dev.dahye.lotto.domain.LottoResult;
+import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.service.LottoMachine;
 import dev.dahye.lotto.util.ConvertUtils;
 import dev.dahye.lotto.view.InputView;
@@ -12,8 +13,11 @@ import java.util.List;
 public class LottoShop {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.doInputMoney());
+        int countOfManualLotto = InputView.doInputCountOfManualLotto();
+        InputView.printManualLottoInputHeader();
+        List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(countOfManualLotto);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, countOfManualLotto, manualLottoTickets);
         ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
 
         String winningNumberInput = InputView.doInputWinningNumbers();

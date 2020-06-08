@@ -1,7 +1,5 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.DoubleUtils;
-
 import java.util.List;
 
 public class LottoResult {
