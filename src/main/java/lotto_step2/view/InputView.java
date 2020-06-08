@@ -27,7 +27,7 @@ public class InputView {
     public void printBuyLotto(Lottos lottos) {
         System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
 
-        for (Lotto lotto: lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getNumbers());
         }
         System.out.println();
@@ -42,11 +42,15 @@ public class InputView {
         return new Lotto(getIntSplitValues(splitValues));
     }
 
-    private List<Integer> getIntSplitValues(List<String> splitValues) {
+    public int getBonusLotto() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 
+    private List<Integer> getIntSplitValues(List<String> splitValues) {
         List<Integer> intSplitValues = new ArrayList<>();
 
-        for(String splitValue : splitValues) {
+        for (String splitValue : splitValues) {
             checkSplitValue(Integer.parseInt(splitValue));
             intSplitValues.add(Integer.parseInt(splitValue));
         }

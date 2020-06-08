@@ -12,7 +12,8 @@ public class LottoGame {
         return new Lottos(money);
     }
 
-    public List<PrizeMachine> matches(Lotto lastWeekLotto, Lottos myLottos) {
-        return Lottos.matches(lastWeekLotto, myLottos);
+    public List<PrizeMachine> matches(Lotto lastWeekLotto, int bonusLotto, Lottos myLottos) {
+        Lottos lottos = new Lottos();
+        return lottos.matches(lastWeekLotto, bonusLotto, myLottos);
     }
 }

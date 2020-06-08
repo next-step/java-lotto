@@ -7,7 +7,7 @@ public class Lotto {
     private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if(isValidLotto(numbers)) {
+        if (isValidLotto(numbers)) {
             this.numbers = numbers;
         }
     }
@@ -16,12 +16,13 @@ public class Lotto {
         return numbers;
     }
 
-    public PrizeMachine match(Lotto lastWeekLotto) {
+    public PrizeMachine match(Lotto lastWeekLotto, int bonusLotto) {
         int matchCount = Math.toIntExact(lastWeekLotto.getNumbers().stream()
                 .filter(number -> this.getNumbers().contains(number))
                 .count());
 
-        return PrizeMachine.matchPrize(matchCount);
+        boolean isBonus = this.getNumbers().contains(bonusLotto);
+        return PrizeMachine.matchPrize(matchCount, isBonus);
     }
 
     public boolean isValidLotto(List<Integer> numbers) {

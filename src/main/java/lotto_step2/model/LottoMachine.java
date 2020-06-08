@@ -17,6 +17,6 @@ public class LottoMachine {
     }
 
     private int getRandom() {
-        return new Random().nextInt(LOTTO_LIMIT_NUMBER) +1;
+        return new Random().nextInt(LOTTO_LIMIT_NUMBER) + 1;
     }
 }

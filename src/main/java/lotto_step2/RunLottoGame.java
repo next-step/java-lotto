@@ -18,7 +18,7 @@ public class RunLottoGame {
         Lottos lottos = lottoGame.getBuyLottos(money);
         inputView.printBuyLotto(lottos);
 
-        List<PrizeMachine> gameResults = lottoGame.matches(inputView.getLastWeekLotto(), lottos);
+        List<PrizeMachine> gameResults = lottoGame.matches(inputView.getLastWeekLotto(), inputView.getBonusLotto(), lottos);
 
         ResultView resultView = new ResultView();
         resultView.printGameResult(gameResults);

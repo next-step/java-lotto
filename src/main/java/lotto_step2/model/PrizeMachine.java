@@ -8,9 +8,10 @@ import static lotto_step2.LottoConstants.*;
 public enum PrizeMachine {
 
     FIRST(MATCH_PRIZE_FIRST, 2_000_000_000),
-    SECOND(MATCH_PRIZE_SECOND, 1_500_000),
-    THIRD(MATCH_PRIZE_THIRD, 50_000),
-    FOURTH(MATCH_PRIZE_FOURTH, 5_000),
+    SECOND(MATCH_PRIZE_SECOND, 30_000_000),
+    THIRD(MATCH_PRIZE_SECOND, 1_500_000),
+    FOURTH(MATCH_PRIZE_THIRD, 50_000),
+    FIFTH(MATCH_PRIZE_FOURTH, 5_000),
     ZERO(MATCH_ZERO, 0);
 
     private int matchCount;
@@ -25,17 +26,22 @@ public enum PrizeMachine {
         return this.prize;
     }
 
-    public int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public static PrizeMachine matchPrize(int matchCount) {
+    public static PrizeMachine matchPrize(int matchCount, boolean isBonus) {
         for (PrizeMachine prize : PrizeMachine.values()) {
-            if (prize.matchCount == matchCount) {
-                return prize;
+            if ((prize.matchCount == SECOND.matchCount) && isBonus) {
+                return SECOND;
+            } else if (prize.matchCount == matchCount) {
+                return calcPrize(prize);
             }
         }
         return PrizeMachine.ZERO;
+    }
+
+    private static PrizeMachine calcPrize(PrizeMachine prize) {
+        if (prize == SECOND) {
+            prize = THIRD;
+        }
+        return prize;
     }
 
     public static double calcRevenue(List<PrizeMachine> gameResults, int money) {
@@ -51,20 +57,24 @@ public enum PrizeMachine {
 
         EnumMap<PrizeMachine, Integer> matches = new EnumMap<>(PrizeMachine.class);
 
+        matches.put(FIFTH, (int) gameResults.stream()
+                .filter(result -> result == FIFTH)
+                .count());
+
         matches.put(FOURTH, (int) gameResults.stream()
-                .filter(result -> result.getMatchCount() == MATCH_PRIZE_FOURTH)
+                .filter(result -> result == FOURTH)
                 .count());
 
         matches.put(THIRD, (int) gameResults.stream()
-                .filter(result -> result.getMatchCount() == MATCH_PRIZE_THIRD)
+                .filter(result -> result == THIRD)
                 .count());
 
         matches.put(SECOND, (int) gameResults.stream()
-                .filter(result -> result.getMatchCount() == MATCH_PRIZE_SECOND)
+                .filter(result -> result == SECOND)
                 .count());
 
         matches.put(FIRST, (int) gameResults.stream()
-                .filter(result -> result.getMatchCount() == MATCH_PRIZE_FIRST)
+                .filter(result -> result == FIRST)
                 .count());
 
         return matches;

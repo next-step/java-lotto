@@ -24,12 +24,14 @@ public class LottoGameTest {
     private InputView inputView = new InputView();
     private Lotto lotto;
     private LottoGame lottoGame;
+    private int bonus;
 
     @BeforeEach
     void init() {
         List<Integer> lastWeekLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         lotto = new Lotto(lastWeekLotto);
         lottoGame = new LottoGame();
+        bonus = 7;
     }
 
     @Test
@@ -64,30 +66,44 @@ public class LottoGameTest {
         assertThat(lottos.getLottos()).hasSize(10);
     }
 
-    @DisplayName("4등 테스트 - 번호 3개 일치")
+    @DisplayName("5등 테스트 - 번호 3개 일치")
+    @ParameterizedTest
+    @EnumSource(value = PrizeMachine.class, names = {"FIFTH"})
+    void fifthPrizeTest(PrizeMachine prizeMachine) {
+        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
+        List<PrizeMachine> results = lottoGame.matches(lotto, bonus, myLotto);
+        assertThat(results.get(0)).isEqualTo(prizeMachine);
+    }
+
+    @DisplayName("4등 테스트 - 번호 4개 일치")
     @ParameterizedTest
     @EnumSource(value = PrizeMachine.class, names = {"FOURTH"})
     void fourthPrizeTest(PrizeMachine prizeMachine) {
-        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
-        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45)));
+        List<PrizeMachine> results = lottoGame.matches(lotto, bonus, myLotto);
         assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
-    @DisplayName("3등 테스트 - 번호 4개 일치")
+    @DisplayName("3등 테스트 - 번호 5개 일치")
     @ParameterizedTest
     @EnumSource(value = PrizeMachine.class, names = {"THIRD"})
     void thirdPrizeTest(PrizeMachine prizeMachine) {
-        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45)));
-        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)));
+        List<PrizeMachine> results = lottoGame.matches(lotto, bonus, myLotto);
         assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
-    @DisplayName("2등 테스트 - 번호 5개 일치")
+    @DisplayName("2등 테스트 - 번호 5개 일치, 보너스볼")
     @ParameterizedTest
     @EnumSource(value = PrizeMachine.class, names = {"SECOND"})
     void secondPrizeTest(PrizeMachine prizeMachine) {
-        Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)));
-        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        int secondPrizeTestBonus = 6;
+        Lottos myLotto = new Lottos(lotto);
+
+        List<Integer> secondPrizeTestLastWeekLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 44));
+        Lotto secondPrizeTestLotto = new Lotto(secondPrizeTestLastWeekLotto);
+
+        List<PrizeMachine> results = lottoGame.matches(secondPrizeTestLotto, secondPrizeTestBonus, myLotto);
         assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
@@ -96,7 +112,7 @@ public class LottoGameTest {
     @EnumSource(value = PrizeMachine.class, names = {"FIRST"})
     void firstPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        List<PrizeMachine> results = lottoGame.matches(lotto, bonus, myLotto);
         assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 
@@ -105,7 +121,7 @@ public class LottoGameTest {
     @EnumSource(value = PrizeMachine.class, names = {"ZERO"})
     void zeroPrizeTest(PrizeMachine prizeMachine) {
         Lottos myLotto = new Lottos(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16)));
-        List<PrizeMachine> results = lottoGame.matches(lotto, myLotto);
+        List<PrizeMachine> results = lottoGame.matches(lotto, bonus, myLotto);
         assertThat(results.get(0)).isEqualTo(prizeMachine);
     }
 }
