@@ -1,7 +1,6 @@
 package step3.domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,50 +17,47 @@ public class Lotto {
     public static final int LOTTO_DRAW_BASE_NUMBER = 0;
 
     // each Lotto numbers.
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
+
     private int bonusNumber;
 
     // default 1 to LOTTO_MAX_LIMIT (45)
-    private static final List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
+    private static final List<Integer> lottoGameNumbers = Collections.unmodifiableList(IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
             .boxed()
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
 
 
-    public Lotto(List<Integer> lottoNumbers) {
-        lottoNumbers.sort(Integer::compareTo);
+    public Lotto(Set<Integer> lottoNumbers) {
+
+        //lottoNumbers.sort(Integer::compareTo);
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = 0;
 
     }
 
-    public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
-        lottoNumbers.sort(Integer::compareTo);
+    public Lotto(Set<Integer> lottoNumbers, int bonusNumber) {
+
+        //lottoNumbers.sort(Integer::compareTo);
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
 
     }
 
-
     public static Lotto auto() {
 
-        // default 1 to LOTTO_MAX_LIMIT (45)
-        List<Integer> lottoGameNumbersInner = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(lottoGameNumbersInner);
-
+        Collections.shuffle(lottoGameNumbers);
         // pick LOTTO_DRAW_LIMIT
-        return new Lotto(drawLottoNumbers(lottoGameNumbersInner));
-
+        return new Lotto(new TreeSet<>(drawLottoNumbers()));
     }
 
 
-    private static List<Integer> drawLottoNumbers(List<Integer> lottoGameNumbersInner) {
-        return lottoGameNumbersInner.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
+    private static List<Integer> drawLottoNumbers() {
+        return lottoGameNumbers.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return lottoNumbers;
     }
 

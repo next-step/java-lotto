@@ -2,6 +2,7 @@ package step3;
 
 
 import step3.domain.LottoGame;
+import step3.domain.LottoTickets;
 import step3.domain.Money;
 import step3.domain.WinningLotto;
 import step3.view.view.InputView;
@@ -40,7 +41,7 @@ public class MainApplication {
         WinningLotto winningLotto = new WinningLotto(winingNumber, bonusNumber);
 
         // matching numbers
-        winningLotto.matchingWinningNumbers(lottoGame.getLottoTickets());
+        lottoGame.getLottoTickets().matchingWinningNumbers(winningLotto);
 
         OutputView.outputPrizeList();
 
