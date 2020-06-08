@@ -48,4 +48,12 @@ public class ParserUtilsTest {
         List result = parserUtils.stringToArray(input);
         assertThat(result).contains(1,2);
     }
+
+    @DisplayName(",이외에 콜론으로도 구분이 가능하다")
+    @Test
+    public void stringToArrayWithAnotherSymbol() {
+        String input = "1,2:3";
+        List result = parserUtils.stringToArray(input);
+        assertThat(result).contains(1,2,3);
+    }
 }
