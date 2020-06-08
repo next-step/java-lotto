@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -29,13 +30,8 @@ public class MatchResult {
         return this.matchResult.get(lottoRank);
     }
 
-    public Map<LottoRank, Integer> getWinningResult() {
-        return LottoRank.WINNING_RANKS.stream()
-                .collect(Collectors.toMap(Function.identity(), matchResult::get));
-    }
-
     public Money calculateTotalWinningMoney() {
-        int winningMoney = this.getWinningResult().entrySet().stream()
+        int winningMoney = this.matchResult.entrySet().stream()
                 .map(this::multiplyWinningMoney)
                 .reduce(0, Integer::sum);
 

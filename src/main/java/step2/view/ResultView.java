@@ -3,6 +3,8 @@ package step2.view;
 import step2.model.*;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class ResultView {
 
@@ -35,14 +37,18 @@ public class ResultView {
         stringBuilder.append("당첨 통계").append(LINE_FEED);
         stringBuilder.append("---------").append(LINE_FEED);
 
-        matchResult.getWinningResult().forEach((lottoRank, matchCount) -> {
-            stringBuilder
-                    .append(getLottoRankFormat(lottoRank))
-                    .append(TICKET_INDICATOR)
-                    .append(matchCount)
-                    .append(TICKET_UNIT)
-                    .append(LINE_FEED);
-        });
+        LottoRank.WINNING_RANKS.stream()
+                .sorted(Comparator.reverseOrder())
+                .forEach(lottoRank -> {
+                    int matchCount = matchResult.findResult(lottoRank);
+
+                    stringBuilder
+                            .append(getLottoRankFormat(lottoRank))
+                            .append(TICKET_INDICATOR)
+                            .append(matchCount)
+                            .append(TICKET_UNIT)
+                            .append(LINE_FEED);
+                });
 
         System.out.println(stringBuilder.toString());
     }
