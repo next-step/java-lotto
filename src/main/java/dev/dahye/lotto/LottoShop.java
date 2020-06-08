@@ -20,11 +20,11 @@ public class LottoShop {
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, countOfManualLotto, manualLottoTickets);
         ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
 
-        String winningNumberInput = InputView.doInputWinningNumbers();
+        LottoTicket winningTicket
+                = LottoTicket.manualIssued(ConvertUtils.convertStringToIntegerList(InputView.doInputWinningNumbers()));
         int bonusNumber = InputView.doInputBonusNumber();
 
-        List<Integer> winningNumbers = ConvertUtils.convertStringToIntegerList(winningNumberInput);
-        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningTicket, bonusNumber);
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printWinningRate(lottoResult.getMyWinningRate(lottoMoney));

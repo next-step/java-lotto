@@ -7,9 +7,9 @@ public class LottoResult {
     private final LottoTicket winningTicket;
     private final BonusBall bonusNumber;
 
-    public LottoResult(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber) {
+    public LottoResult(LottoTickets lottoTickets, LottoTicket winningTicket, int bonusNumber) {
         this.lottoTickets = lottoTickets;
-        this.winningTicket = LottoTicket.manualIssued(winningNumbers);
+        this.winningTicket = winningTicket;
         this.bonusNumber = BonusBall.createBy(bonusNumber, this.winningTicket);
     }
 
