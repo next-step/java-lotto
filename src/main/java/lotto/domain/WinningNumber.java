@@ -6,9 +6,11 @@ import java.util.stream.Stream;
 
 public class WinningNumber {
     private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumber(String[] inputNumbers) {
+    public WinningNumber(String[] inputNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = convertToLottoNumber(inputNumbers);
+        this.bonusNumber = bonusNumber;
     }
 
     private List<LottoNumber> convertToLottoNumber(String[] inputNumbers) {
@@ -23,5 +25,9 @@ public class WinningNumber {
 
     public List<LottoNumber> getWinningNumbers() {
         return winningNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

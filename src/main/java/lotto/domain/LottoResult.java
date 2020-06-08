@@ -5,26 +5,24 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private final List<LottoPrize> lottoPrizeList;
+    private static Map<Rank, Integer> result;
 
-    public LottoResult(List<LottoPrize> lottoPrizeList) {
-        this.lottoPrizeList = lottoPrizeList;
+    public LottoResult() {
+        result = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
     }
 
-    public Map<Integer, Integer> matchResult() {
-        Map<Integer, Integer> result = new HashMap<>();
-        lottoPrizeList.stream().filter(lottoPrize -> lottoPrize != LottoPrize.MISS)
-                .forEach(lottoPrize -> {
-                    result.put(lottoPrize.getCountOfMatch(), result.getOrDefault(lottoPrize.getCountOfMatch(),0) + 1);
-                });
+    public Map<Rank, Integer> matchResult(List<Lotto> lottos, WinningNumber winningNumber) {
+        List<LottoNumber> winningNumbers = winningNumber.getWinningNumbers();
 
+        for (Lotto lotto : lottos) {
+            int countOfMatch = lotto.matches(winningNumbers);
+            boolean matchBonus = lotto.isContainBonus(winningNumber.getBonusNumber());
+            Rank rank = Rank.valueOf(countOfMatch, matchBonus);
+            result.put(rank, result.get(rank) + 1);
+        }
         return result;
-    }
-
-    public double statistics(int money) {
-        double profit = lottoPrizeList.stream()
-                                .mapToDouble(LottoPrize::getPrize)
-                                .sum();
-        return Math.round((profit / money) * 100) / 100.0;
     }
 }

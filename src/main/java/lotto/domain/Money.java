@@ -13,6 +13,10 @@ public class Money {
         return money / ONE_SALE_PRICE;
     }
 
+    public double statistics(double sum) {
+        return Math.round((sum / money) * 100) / 100.0;
+    }
+
     private void validateMoney(final int money) {
         if (money < ONE_SALE_PRICE) {
             throw new IllegalArgumentException("로또를 구입할 수가 없습니다.");

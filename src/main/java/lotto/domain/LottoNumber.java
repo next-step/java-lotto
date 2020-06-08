@@ -15,7 +15,7 @@ public class LottoNumber {
         }
     }
 
-    private LottoNumber(int number) {
+    public LottoNumber(int number) {
         this.number = number;
     }
 

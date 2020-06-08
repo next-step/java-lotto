@@ -18,7 +18,7 @@ public class LottoMachine {
         return lottos;
     }
 
-    public static List<Integer> raffle() {
+    private static List<Integer> raffle() {
         List<Integer> numbers = createNumber();
         Collections.shuffle(numbers);
         return numbers.subList(0, 6).stream()
