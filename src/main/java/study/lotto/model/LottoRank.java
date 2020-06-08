@@ -44,7 +44,7 @@ public enum LottoRank {
     public static LottoRank find(int matches, boolean matchBonus) {
         validateMatchCount(matches);
 
-        if((matches == (SECOND_PRIZE_MATCHES-1)) && matchBonus) {
+        if((matches >= (SECOND_PRIZE_MATCHES-1)) && matchBonus) {
             return SECOND_RANK;
         }
 
