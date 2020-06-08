@@ -15,15 +15,8 @@ public class LottoNumberPool {
     private LottoNumberPool() {}
 
     public static LottoNumber get(int number) {
-        return getNumberAfterValidate(number);
-    }
-
-    public static List<LottoNumber> get(Integer... numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer key : numbers) {
-            lottoNumbers.add(getNumberAfterValidate(key));
-        }
-        return lottoNumbers;
+        validateIfContainLottoNumberPool(number);
+        return LOTTO_NUMBER_POOL.get(number);
     }
 
     public static List<LottoNumber> getAll() {
@@ -31,29 +24,25 @@ public class LottoNumberPool {
     }
 
     public static LottoNumber get(String number) {
-        return get(covertIntAfterValidate(number));
+        validateIfParseNumberFormat(number);
+        int intAfterPare = Integer.parseInt(number);
+        validateIfContainLottoNumberPool(intAfterPare);
+        return LOTTO_NUMBER_POOL.get(intAfterPare);
     }
 
-    public static List<LottoNumber> get(String[] numbers) {
-        return Arrays.stream(numbers)
-                .map(s -> get(covertIntAfterValidate(s)))
-                .collect(Collectors.toList());
-    }
-
-    private static int covertIntAfterValidate(String number) {
+    private static void validateIfParseNumberFormat(String number) {
         try {
-            return Integer.parseInt(number);
+            Integer.parseInt(number);
         }
         catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 숫자형식만 입력이 가능합니다.");
         }
     }
 
-    private static LottoNumber getNumberAfterValidate(Integer key) {
-        LottoNumber number = LOTTO_NUMBER_POOL.get(key);
-        if(number == null) {
+    private static void validateIfContainLottoNumberPool(int number) {
+        if(!LOTTO_NUMBER_POOL.containsKey(number)) {
             throw new IllegalArgumentException("유효하지 않은 로또 번호 입니다.");
         }
-        return number;
     }
+
 }
