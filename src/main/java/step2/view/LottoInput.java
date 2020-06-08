@@ -1,9 +1,6 @@
 package step2.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoInput {
     private static final String INPUT_MENT = "구입금액을 입력해 주세요.";

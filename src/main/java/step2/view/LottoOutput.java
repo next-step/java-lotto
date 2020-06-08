@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 
 public class LottoOutput {
 
-    private LottoOutput() {};
+    private LottoOutput() {
+    }
+
+    ;
 
     private static final String LOTTO_NUMBER_DELEVETER = ",";
 
@@ -34,7 +37,7 @@ public class LottoOutput {
 
     public static void printWinningStatistics(Map<WinnerTier, Integer> winningResult, double yield) {
 
-        for( WinnerTier winnerTier : WinnerTier.WINNINGS) {
+        for (WinnerTier winnerTier : WinnerTier.WINNINGS) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", winnerTier.getMatchCnt(), winnerTier.getPrize(), winningResult.get(winnerTier));
         }
 

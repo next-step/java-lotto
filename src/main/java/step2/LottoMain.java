@@ -7,7 +7,6 @@ import step2.model.WinnerTier;
 import step2.view.LottoInput;
 import step2.view.LottoOutput;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoMain {
