@@ -1,80 +1,39 @@
 package step2.model;
 
-import java.text.MessageFormat;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private static final int ALLOWED_LOTTO_NUMBER_COUNT = 6;
+    private final List<Lotto> lottos;
 
-    private final List<LottoNumber> numbers;
-
-    private LottoTicket(List<LottoNumber> numbers) {
-        validateArguments(numbers);
-
-        this.numbers = numbers;
-    }
-
-    private void validateArguments(List<LottoNumber> numbers) {
-        if (isInvalidCount(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 6개만 입력 가능합니다.");
+    private LottoTicket(List<Lotto> lottos) {
+        if (lottos == null) {
+            throw new IllegalArgumentException();
         }
 
-        if (isDuplicateExist(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    private boolean isInvalidCount(List<LottoNumber> numbers) {
-        return numbers == null || numbers.size() != ALLOWED_LOTTO_NUMBER_COUNT;
+    public static LottoTicket create(List<Lotto> lottos) {
+        return new LottoTicket(lottos);
     }
 
-    private boolean isDuplicateExist(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() != ALLOWED_LOTTO_NUMBER_COUNT;
+    public int getLottoCount() {
+        return this.lottos.size();
     }
 
-    public static LottoTicket create(List<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(this.numbers);
-    }
+    public MatchResult calculateMatchResult(WinningNumbers winningNumbers) {
+        MatchResult matchResult = MatchResult.create();
 
-    public int getMatchCount(WinningNumbers winningNumbers) {
-        List<LottoNumber> lottoNumbers = matchingResult(winningNumbers);
-        return lottoNumbers.size();
-    }
+        this.lottos.stream()
+                .map(winningNumbers::calculateMatchRank)
+                .forEach(matchResult::plusCount);
 
-    private List<LottoNumber> matchingResult(WinningNumbers winningNumbers) {
-        return this.numbers.stream()
-                .filter(winningNumbers::containsNumber)
-                .collect(Collectors.toList());
-    }
-
-    public boolean containsNumber(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
-    }
-
-    @Override
-    public String toString() {
-        return MessageFormat.format("LottoNumber :: {0}", numbers);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
-        return Objects.equals(numbers, that.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
+        return matchResult;
     }
 }

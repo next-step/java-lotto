@@ -10,7 +10,7 @@ public class LottoMachine {
 
     private LottoMachine(LottoTicketPrice ticketPrice) {
         if (ticketPrice == null) {
-            throw new IllegalArgumentException("티켓 금액을 설정해주세요.");
+            throw new IllegalArgumentException("티켓 금액을 입력해주세요.");
         }
 
         this.ticketPrice = ticketPrice;
@@ -20,7 +20,7 @@ public class LottoMachine {
         return new LottoMachine(ticketPrice);
     }
 
-    public LottoTickets buyTicket(MoneyAmount moneyAmount) {
+    public LottoTicket buyTicket(MoneyAmount moneyAmount) {
         int ticketCount = ticketPrice.getAvailablePurchase(moneyAmount);
 
         if (ticketCount < MIN_TICKET_COUNT) {

@@ -42,9 +42,9 @@ public class WinningNumbers {
         return this.numbers.contains(lottoNumber);
     }
 
-    public LottoRank calculateMatchRank(LottoTicket lottoTicket) {
-        int countOfMatch = lottoTicket.getMatchCount(this);
-        boolean matchBonus = lottoTicket.containsNumber(bonusNumber);
+    public LottoRank calculateMatchRank(Lotto lotto) {
+        int countOfMatch = lotto.getMatchCount(this);
+        boolean matchBonus = lotto.containsNumber(bonusNumber);
 
         return LottoRank.valueOf(countOfMatch, matchBonus);
     }

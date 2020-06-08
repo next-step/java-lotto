@@ -12,12 +12,12 @@ public class LottoTicketGenerator {
     private LottoTicketGenerator() {
     }
 
-    public static LottoTickets generate(int ticketCount) {
+    public static LottoTicket generate(int ticketCount) {
         validateTicketCount(ticketCount);
 
         return IntStream.rangeClosed(TICKET_COUNT_MIN_VALUE, ticketCount)
-                .mapToObj(i -> LottoTicket.create(LottoNumberGenerator.generate()))
-                .collect(collectingAndThen(toList(), LottoTickets::create));
+                .mapToObj(i -> Lotto.create(LottoNumberGenerator.generate()))
+                .collect(collectingAndThen(toList(), LottoTicket::create));
     }
 
     private static void validateTicketCount(int ticketCount) {

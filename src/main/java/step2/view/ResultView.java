@@ -3,7 +3,6 @@ package step2.view;
 import step2.model.*;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class ResultView {
@@ -16,16 +15,16 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
+    public static void printTickets(LottoTicket lottoTicket) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
-                .append(lottoTickets.getTicketCount())
+                .append(lottoTicket.getLottoCount())
                 .append("장을 구매했습니다.")
                 .append(LINE_FEED);
 
-        lottoTickets.getLottoTickets().stream()
-                .map(LottoTicket::toString)
+        lottoTicket.getLottos().stream()
+                .map(Lotto::toString)
                 .forEach(s -> stringBuilder.append(s).append(LINE_FEED));
 
         System.out.println(stringBuilder.toString());

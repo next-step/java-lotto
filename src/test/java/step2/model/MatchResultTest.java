@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchResultTest {
 
-    @DisplayName("findResult() 메소드는 당첨된 로또가 없으면 0을 반환한다")
+    @DisplayName("당첨된 로또가 없으면 0을 반환")
     @Test
-    void findResult_LottoRank_ZeroValue() {
+    void findResult() {
         MatchResult matchResult = MatchResult.create();
 
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> {
@@ -19,9 +19,9 @@ class MatchResultTest {
         });
     }
 
-    @DisplayName("plusCount() 메소드는 LottoRank의 당첨 개수를 1씩 증가시킨다")
+    @DisplayName("로또 등수에 해당하는 당첨 개수를 1씩 증가")
     @Test
-    void plusCount_LottoRank_IncreasedValue() {
+    void plusCount() {
         MatchResult matchResult = MatchResult.create();
 
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> {

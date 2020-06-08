@@ -16,10 +16,10 @@ public class LottoData {
         return matchResult;
     }
 
-    public static List<LottoTicket> createLottoTickets(int count) {
+    public static List<Lotto> createLottoTickets(int count) {
         return IntStream.rangeClosed(1, count)
                 .mapToObj(i -> createLottoNumbers(6))
-                .map(LottoTicket::create)
+                .map(Lotto::create)
                 .collect(Collectors.toList());
     }
 
