@@ -1,22 +1,22 @@
 package step2.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
 
     private static final int ALLOWED_LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumbers(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    private WinningNumbers(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         validateArguments(numbers, bonusNumber);
 
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateArguments(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    private void validateArguments(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         if (isInvalidCount(numbers)) {
             throw new IllegalArgumentException("당첨 번호는 6개만 입력 가능합니다.");
         }
@@ -30,11 +30,11 @@ public class WinningNumbers {
         }
     }
 
-    private boolean isInvalidCount(List<LottoNumber> numbers) {
+    private boolean isInvalidCount(Set<LottoNumber> numbers) {
         return numbers == null || numbers.size() != ALLOWED_LOTTO_NUMBER_COUNT;
     }
 
-    public static WinningNumbers create(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    public static WinningNumbers create(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         return new WinningNumbers(numbers, bonusNumber);
     }
 
