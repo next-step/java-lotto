@@ -16,11 +16,7 @@ public class UserLotto extends Lotto {
         this.isMatchedBonus = false;
     }
 
-    private void drawLotto(List<Integer> winningNumbers, int bonusNumber) {
-        winningNumbers.stream().forEach(number -> findHit(number, bonusNumber));
-    }
-
-    private void findHit(Integer winningNumber, int bonusNumber) {
+    public void findHit(Integer winningNumber, int bonusNumber) {
         if (getLottoNumbers().contains(winningNumber)) {
             this.hitCount++;
         }
@@ -34,9 +30,9 @@ public class UserLotto extends Lotto {
         return prize;
     }
 
-    public void setPrize(List<Integer> winningNumbers, int bonusNumber) {
+    public void setPrize(WinningLotto winningLotto) {
 
-        drawLotto(winningNumbers, bonusNumber);
+        winningLotto.drawLotto(this);
 
         prize = Prize.valueOf(hitCount, isMatchedBonus).getGrade();
     }

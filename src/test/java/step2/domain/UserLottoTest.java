@@ -32,7 +32,7 @@ class UserLottoTest {
         UserLotto lotto = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        lotto.setPrize(winningLottos, bonusNumber);
+        lotto.setPrize(new WinningLotto(winningLottos, bonusNumber));
 
         //then
         assertThat(lotto.getPrize()).isEqualTo(expected);

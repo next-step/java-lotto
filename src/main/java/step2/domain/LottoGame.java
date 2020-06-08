@@ -19,12 +19,12 @@ public class LottoGame {
         lottos = lottoGenerator.generateLottos(userPrice);
     }
 
-    public LottoGameResultDto getGameResult(Lotto winningLotto, int bonusNumber)
+    public LottoGameResultDto getGameResult(WinningLotto winningLotto)
         throws IllegalArgumentException {
 
         winningLotto.validateWinningNumbers();
 
-        return new LottoGameResult().getResult(lottos, winningLotto, userPrice, bonusNumber);
+        return new LottoGameResult().getResult(lottos, winningLotto, userPrice);
     }
 
     public List<UserLotto> getLottos() {

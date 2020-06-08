@@ -18,9 +18,10 @@ public class LottoGameResult {
         fifthPrizeCount = 0;
     }
 
-    public LottoGameResultDto getResult(List<UserLotto> lottos, Lotto winningLotto,
-        UserPrice userPrice, int bonusNumber) {
-        drawLottos(lottos, winningLotto.getLottoNumbers(), bonusNumber);
+    public LottoGameResultDto getResult(List<UserLotto> lottos, WinningLotto winningLotto,
+        UserPrice userPrice) {
+
+        drawLottos(lottos, winningLotto);
 
         countPrize(lottos);
 
@@ -51,8 +52,8 @@ public class LottoGameResult {
             .count();
     }
 
-    private void drawLottos(List<UserLotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        lottos.stream().forEach(lotto -> lotto.setPrize(winningNumbers, bonusNumber));
+    private void drawLottos(List<UserLotto> lottos, WinningLotto winningLotto) {
+        lottos.stream().forEach(lotto -> lotto.setPrize(winningLotto));
         //for logging
         //lottos.stream().forEach(lotto -> System.out.println(lotto));
     }

@@ -1,8 +1,8 @@
 package step2.controller;
 
 import java.util.List;
-import step2.domain.Lotto;
 import step2.domain.LottoGame;
+import step2.domain.WinningLotto;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -26,7 +26,7 @@ public class LottoGameMain {
             int bonusNumber = inputView.inputBonusNumber();
 
             resultView.printStatistic(
-                lottoGame.getGameResult(new Lotto(lastWeekWinningNumbers), bonusNumber));
+                lottoGame.getGameResult(new WinningLotto(lastWeekWinningNumbers, bonusNumber)));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
