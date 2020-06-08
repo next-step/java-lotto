@@ -30,13 +30,15 @@ public enum WinnerTier {
         return matchCnt;
     }
 
-    public boolean equalMatchCnt(long matchCnt) { return this.matchCnt == matchCnt; }
+    public boolean equalMatchCnt(long matchCnt) {
+        return this.matchCnt == matchCnt;
+    }
 
-    public static Stream<WinnerTier> stream () {
+    public static Stream<WinnerTier> stream() {
         return Stream.of(MATCH_THREE, MATCH_FOUR, MATCH_FIVE, MATCH_SIX);
     }
 
-    public static WinnerTier valueOf (long matchCnt) {
+    public static WinnerTier valueOf(long matchCnt) {
         return stream().filter(rank -> rank.equalMatchCnt(matchCnt))
                 .findFirst()
                 .orElse(MISS);
