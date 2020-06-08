@@ -44,8 +44,8 @@ class LottoResultTest {
 
         assertAll(
                 () -> assertThat(resultMap.get(3)).isEqualTo(1),
-                () -> assertThat(resultMap.get(4)).isEqualTo(null),
-                () -> assertThat(resultMap.get(5)).isEqualTo(null)
+                () -> assertThat(resultMap.get(4)).isNull(),
+                () -> assertThat(resultMap.get(5)).isNull()
         );
     }
 

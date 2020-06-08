@@ -16,7 +16,7 @@ class LottoPrizeTest {
     @DisplayName("맞춘 번호 갯수에 대한 정보 잘 가져오는지 체크")
     void getPrize(int count, LottoPrize expected) {
         LottoPrize result = LottoPrize.valueOf(count);
-        assertThat(result).isEqualByComparingTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideLottoMatchCount() {

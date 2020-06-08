@@ -9,6 +9,7 @@ public class Main {
         int buyLottoMoney = InputView.buyLotto();
         Money money = new Money(buyLottoMoney);
 
+
         Lottos lottos = new Lottos(money.countLotto());
         lottos.drawLotto();
         ResultView.printLottoNumbers(lottos);

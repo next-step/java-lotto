@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -8,6 +10,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    private static final int MATCH_MIN_COUNT = 3;
     private int countOfMatch;
     private int winningMoney;
 
@@ -25,7 +28,25 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        return null;
+        if (countOfMatch < MATCH_MIN_COUNT) {
+            return MISS;
+        }
+
+        if (SECOND.isMatch(countOfMatch)) {
+            return matchBonus ? SECOND : THIRD;
+        }
+
+        return valueOf(countOfMatch);
+    }
+
+    private static Rank valueOf(int countOfMatch) {
+        return Arrays.stream(Rank.values())
+                .filter(v -> v.isMatch(countOfMatch))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("맞는 숫자가 없습니다."));
+    }
+
+    private boolean isMatch(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 }
