@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.data.Lotto;
+import lotto.domain.data.LottoRank;
+import lotto.domain.data.PriceLotto;
+import lotto.domain.data.WinningLotto;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;

@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.data;
 
+import lotto.domain.LottoNumberPool;
+import lotto.domain.data.LottoNumber;
+import lotto.domain.data.ManualLottoMemo;
 import lotto.util.Split;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

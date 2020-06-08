@@ -1,11 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.data.Lotto;
 import lotto.domain.LottosStatistics;
-import lotto.domain.LottoRank;
-import lotto.domain.ManualLottoMemo;
+import lotto.domain.data.LottoRank;
+import lotto.domain.data.ManualLottoMemo;
 
-import java.text.Format;
 import java.util.List;
 
 public class OutputView {

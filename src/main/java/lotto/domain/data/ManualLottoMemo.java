@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.data;
 
+import lotto.domain.LottoNumberPool;
 import lotto.util.Split;
 
 import java.util.ArrayList;

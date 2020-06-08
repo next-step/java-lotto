@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.data.Lotto;
+import lotto.domain.data.ManualLottoMemo;
+import lotto.domain.data.PriceLotto;
+import lotto.domain.data.WinningLotto;
 import lotto.util.Split;
 import lotto.view.InputView;
 import lotto.view.OutputView;

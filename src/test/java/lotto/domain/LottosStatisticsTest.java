@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.data.Lotto;
+import lotto.domain.data.LottoRank;
+import lotto.domain.data.PriceLotto;
+import lotto.domain.data.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

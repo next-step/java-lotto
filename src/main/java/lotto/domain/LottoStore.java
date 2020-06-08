@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import lotto.domain.data.Lotto;
+import lotto.domain.data.ManualLottoMemo;
+import lotto.domain.data.PriceLotto;
+import lotto.domain.generator.LottoGenerator;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoStore {
 
