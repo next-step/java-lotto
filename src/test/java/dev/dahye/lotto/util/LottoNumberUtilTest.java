@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("로또 번호 util class")
-class LottoNumbersTest {
+class LottoNumberUtilTest {
     @Test
     @DisplayName("로또 번호는 1부터 45까지의 수만 가능하다.")
     void valid_lotto_numbers() {
-        List<Integer> lottoNumbers = LottoNumbers.getNumbers();
+        List<Integer> lottoNumbers = LottoNumberUtil.getNumbers();
         assertThat(lottoNumbers.size()).isEqualTo(45);
         assertThat(Collections.min(lottoNumbers)).isEqualTo(1);
         assertThat(Collections.max(lottoNumbers)).isEqualTo(45);
@@ -26,15 +26,15 @@ class LottoNumbersTest {
     @ValueSource(ints = {0, 46})
     @DisplayName("로또 번호는 1부터 45까지의 수가 아닌 경우 IllegalArgumentException throw")
     void valid_lotto_numbers_byValidNumberRange(int lottoNumber) {
-        assertThrows(IllegalArgumentException.class, () -> LottoNumbers.validNumberRange(lottoNumber));
+        assertThrows(IllegalArgumentException.class, () -> LottoNumberUtil.validNumberRange(lottoNumber));
     }
 
     @Test
     @DisplayName("numbers 값은 변경 불가능한 값이어야한다.")
     void not_change_lotto_numbers() {
-        List<Integer> originalNumbers = LottoNumbers.getNumbers();
+        List<Integer> originalNumbers = LottoNumberUtil.getNumbers();
         originalNumbers.clear();
-        List<Integer> changedNumbers = LottoNumbers.getNumbers();
+        List<Integer> changedNumbers = LottoNumberUtil.getNumbers();
         assertThat(changedNumbers).isNotEmpty();
     }
 }

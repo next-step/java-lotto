@@ -1,6 +1,6 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumbers;
+import dev.dahye.lotto.util.LottoNumberUtil;
 
 public class BonusBall {
     private final int bonusNumber;
@@ -16,7 +16,7 @@ public class BonusBall {
     }
 
     private void validateBonusNumber() {
-        LottoNumbers.validNumberRange(bonusNumber);
+        LottoNumberUtil.validNumberRange(bonusNumber);
     }
 
     private static void validateContainsWinningTicket(LottoTicket winningTicket, int bonusNumber) {

@@ -1,6 +1,6 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumbers;
+import dev.dahye.lotto.util.LottoNumberUtil;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class LottoNumberExtractor {
     public static final int ZERO_VALUE = 0;
 
     public static List<Integer> createShuffled(int maxSize) {
-        LottoNumbers.validateMaxSize(maxSize);
-        List<Integer> numbers = LottoNumbers.getNumbers();
+        LottoNumberUtil.validateMaxSize(maxSize);
+        List<Integer> numbers = LottoNumberUtil.getNumbers();
         shuffle(numbers);
 
         return numbers.subList(ZERO_VALUE, maxSize);

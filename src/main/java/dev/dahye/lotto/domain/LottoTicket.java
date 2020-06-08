@@ -1,6 +1,6 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumbers;
+import dev.dahye.lotto.util.LottoNumberUtil;
 
 import java.util.*;
 
@@ -41,7 +41,7 @@ public class LottoTicket {
 
     private void validateLottoNumberRange() {
         for (Integer lottoNumber : this.lottoNumbers) {
-            LottoNumbers.validNumberRange(lottoNumber);
+            LottoNumberUtil.validNumberRange(lottoNumber);
         }
     }
 
