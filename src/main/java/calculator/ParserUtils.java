@@ -24,7 +24,11 @@ public class ParserUtils {
     public List stringToArray(String input) {
 
         List result = new ArrayList();
-        result.add(Integer.parseInt(input));
+        String[] splitText = input.split(",");
+
+        for (String text: splitText) {
+            result.add(Integer.parseInt(text));
+        }
 
         return result;
     }

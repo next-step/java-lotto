@@ -40,4 +40,12 @@ public class ParserUtilsTest {
         List result = parserUtils.stringToArray(input);
         assertThat(result).contains(1);
     }
+
+    @DisplayName(",포함된 숫자 두개 입력시 리스트로 반환")
+    @Test
+    public void stringToArrayWithComma() {
+        String input = "1,2";
+        List result = parserUtils.stringToArray(input);
+        assertThat(result).contains(1,2);
+    }
 }
