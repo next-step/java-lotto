@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParserUtils {
 
     public boolean checkEmpty(String input) {
@@ -18,5 +21,11 @@ public class ParserUtils {
         return true;
     }
 
+    public List stringToArray(String input) {
 
+        List result = new ArrayList();
+        result.add(Integer.parseInt(input));
+
+        return result;
+    }
 }

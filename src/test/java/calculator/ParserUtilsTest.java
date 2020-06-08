@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParserUtilsTest {
@@ -31,4 +33,11 @@ public class ParserUtilsTest {
         assertThat(result).isEqualTo(false);
     }
 
+    @DisplayName("숫자 하나를 입력했을때 해당 숫자 반환")
+    @Test
+    public void stringToArray() {
+        String input = "1";
+        List result = parserUtils.stringToArray(input);
+        assertThat(result).contains(1);
+    }
 }
