@@ -32,12 +32,12 @@ public class LottoOutput {
         System.out.printf("%d개를 구매했습니다.\n", lottoCount);
     }
 
-    public static void printWinningStatistics(Map<WinnerTier, Integer> WinningResult, double Yield) {
+    public static void printWinningStatistics(Map<WinnerTier, Integer> winningResult, double yield) {
 
         for( WinnerTier winnerTier : WinnerTier.WINNINGS) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", winnerTier.getMatchCnt(), winnerTier.getPrize(), WinningResult.get(winnerTier));
+            System.out.printf("%d개 일치 (%d원)- %d개\n", winnerTier.getMatchCnt(), winnerTier.getPrize(), winningResult.get(winnerTier));
         }
 
-        System.out.printf("총 수익률은 %.2f입니다.", Yield);
+        System.out.printf("총 수익률은 %.2f입니다.", yield);
     }
 }
