@@ -77,7 +77,7 @@ class LottoResultTest {
     @Test
     @DisplayName("로또 수익률을 구할 수 있다.")
     void lotto_winning_rate() {
-        int myMoney = 2000;
+        LottoMoney lottoMoney = new LottoMoney(2000);
         LottoTicket lottoTicketByRankFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicketByRankThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoTickets lottoTickets = LottoTickets.manualIssued(Arrays.asList(lottoTicketByRankFirst, lottoTicketByRankThird));
@@ -85,13 +85,14 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6), 8);
 
         int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
-        double expectedResult = LottoResult.divideTotalPrizeByMoney(totalPrize, myMoney);
-        assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
+        double expectedResult = lottoMoney.divideTotalPrizeByMoney(totalPrize);
+        assertThat(lottoResult.getMyWinningRate(lottoMoney)).isEqualTo(expectedResult);
     }
 
     @Test
     @DisplayName("당첨율 구하기")
     void winning_rate() {
-        assertThat(LottoResult.divideTotalPrizeByMoney(5000, 14000)).isEqualTo(0.36);
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        assertThat(lottoMoney.divideTotalPrizeByMoney(5000)).isEqualTo(0.36);
     }
 }

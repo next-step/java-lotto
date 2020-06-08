@@ -11,9 +11,9 @@ import java.util.List;
 
 public class LottoShop {
     public static void main(String[] args) {
-        int money = InputView.doInputMoney();
+        LottoMoney lottoMoney = new LottoMoney(InputView.doInputMoney());
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(money));
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney);
         ResultView.printPurchasedLottoTickets(lottoMachine.getLottoTickets());
 
         String winningNumberInput = InputView.doInputWinningNumbers();
@@ -23,6 +23,6 @@ public class LottoShop {
         LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningNumbers, bonusNumber);
 
         ResultView.printWinningStatistics(lottoResult);
-        ResultView.printWinningRate(lottoResult.getMyWinningRate(money));
+        ResultView.printWinningRate(lottoResult.getMyWinningRate(lottoMoney));
     }
 }

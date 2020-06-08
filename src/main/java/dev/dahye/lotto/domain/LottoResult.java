@@ -25,10 +25,10 @@ public class LottoResult {
                 .count();
     }
 
-    public double getMyWinningRate(int money) {
+    public double getMyWinningRate(LottoMoney lottoMoney) {
         int totalPrize = calculateTotalPrize();
 
-        return divideTotalPrizeByMoney(totalPrize, money);
+        return lottoMoney.divideTotalPrizeByMoney(totalPrize);
     }
 
     public int calculateTotalPrize() {
@@ -39,9 +39,5 @@ public class LottoResult {
         }
 
         return totalPrize;
-    }
-
-    public static double divideTotalPrizeByMoney(int totalPrize, int money) {
-        return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
     }
 }

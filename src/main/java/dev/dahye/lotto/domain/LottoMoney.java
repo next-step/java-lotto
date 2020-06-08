@@ -1,5 +1,7 @@
 package dev.dahye.lotto.domain;
 
+import dev.dahye.lotto.util.DoubleUtils;
+
 public class LottoMoney {
     private static final int ZERO_VALUE = 0;
     private static final int LOTTO_PRICE = 1000;
@@ -27,5 +29,9 @@ public class LottoMoney {
 
     private boolean isNoRemainder(int money) {
         return money % LOTTO_PRICE != ZERO_VALUE;
+    }
+
+    public double divideTotalPrizeByMoney(int totalPrize) {
+        return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
     }
 }
