@@ -29,16 +29,38 @@ class LottoTest {
         assertThat(Lotto.newListLotto(testNumbers).checkWinningCount(Lotto.newStringLotto(input))).isEqualTo(result);
     }
 
+    @Test
+    @DisplayName("입력한 숫자를 포함하는지 여부")
+    void checkContainNumber() {
+        String inputNumber = "1,2,3,4,5,6";
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(1)).isTrue();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(2)).isTrue();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(3)).isTrue();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(4)).isTrue();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(5)).isTrue();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(6)).isTrue();
+
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(0)).isFalse();
+        assertThat(Lotto.newStringLotto(inputNumber).getLottoNumbers().contains(7)).isFalse();
+    }
+
     @ParameterizedTest
-    @ValueSource( strings = { "-1,2,3,4,5,6", "0,1,2,3,4,5", "1,2,3,4,5,46" } )
-    @DisplayName("구입한 로또 대비 당첨된 개수")
+    @ValueSource( strings = { "1,2,3,4,5,5", "1,1,1,1,1,1" })
+    @DisplayName("중복 숫자 검사")
+    void checkDujplicate(String inputNumber) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.newStringLotto(inputNumber));
+    }
+
+    @ParameterizedTest
+    @ValueSource( strings = { "-1,2,3,4,5,6", "0,1,2,3,4,5", "1,2,3,4,5,46" })
+    @DisplayName("1~45를 벗어나는 숫자 입력")
     void checkNumber(String lottoNumbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.newStringLotto(lottoNumbers));
     }
 
     @ParameterizedTest
     @ValueSource( strings = { "1,2,3,4,5", "1,2,3,4,5,6,7" })
-    @DisplayName("구입한 로또 대비 당첨된 개수")
+    @DisplayName("6개가 아닌 개수 입력")
     void checkSize(String lottoNumbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.newStringLotto(lottoNumbers));
     }
