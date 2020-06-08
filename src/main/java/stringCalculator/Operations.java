@@ -3,7 +3,7 @@ package stringCalculator;
 public class Operations {
     public static int operationSum(String[] numbers) {
         int sum = 0;
-        for (String number: numbers) {
+        for (String number : numbers) {
             sum += strToInt(number);
         }
 

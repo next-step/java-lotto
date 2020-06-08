@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private final static String defaultDelimiter = ",|:";
+
     public static int splitAndSum(String calcStr) {
         if (ConditionValidation.isBlank(calcStr)) {
             return 0;
@@ -19,7 +21,7 @@ public class StringAddCalculator {
 
     private static String[] splitStr(String calcStr) {
         if (ConditionValidation.isDefaultDelimiter(calcStr)) {
-            return calcStr.split(",|:");
+            return calcStr.split(defaultDelimiter);
         }
 
         return splitWithCustomDelimiter(calcStr);
