@@ -12,9 +12,7 @@ class AutoLottoGeneratorTest {
     @DisplayName("입력 된 수만큼 자동으로 Lotto가 생성된다.")
     @Test
     void getGeneratorLottosTest() {
-        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(10);
-
-        List<Lotto> lottos = autoLottoGenerator.generator();
+        List<Lotto> lottos = AutoLottoGenerator.generate(10);
 
         assertThat(lottos.size()).isEqualTo(10);
     }
@@ -22,9 +20,8 @@ class AutoLottoGeneratorTest {
     @DisplayName("0개를 입력하면 빈 List<Lotto>가 생성된다.")
     @Test
     void getGeneratorLottosEmptyTest() {
-        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(0);
 
-        List<Lotto> lottos = autoLottoGenerator.generator();
+        List<Lotto> lottos = AutoLottoGenerator.generate(0);
 
         assertThat(lottos.size()).isEqualTo(0);
     }

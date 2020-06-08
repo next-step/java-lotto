@@ -2,28 +2,17 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class ManualLottoGenerator implements LottoGenerator {
+public class ManualLottoGenerator {
 
-    private ManualLottoMemo manualLottoMemo;
-    private final List<Lotto> lottos = new ArrayList<>();
-
-    public ManualLottoGenerator(ManualLottoMemo manualLottoMemo) {
-            this.manualLottoMemo = getManualLottoMemoAfterValidateNullEmpty(manualLottoMemo);
-    }
-
-    @Override
-    public List<Lotto> generator() {
-        for (List<LottoNumber> lottoNumbers : manualLottoMemo.getLottoMemos()) {
+    public static List<Lotto> generate(ManualLottoMemo manualLottoMemo) {
+        final List<Lotto> lottos = new ArrayList<>();
+        ManualLottoMemo manualMemo = Optional.ofNullable(manualLottoMemo).orElse(ManualLottoMemo.empty());
+        for (List<LottoNumber> lottoNumbers : manualMemo.getLottoMemos()) {
             lottos.add(Lotto.of(lottoNumbers));
         }
         return lottos;
     }
 
-    public ManualLottoMemo getManualLottoMemoAfterValidateNullEmpty(ManualLottoMemo memo) {
-        if(memo == null) {
-            return ManualLottoMemo.empty();
-        }
-        return memo;
-    }
 }

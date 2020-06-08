@@ -5,24 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public class AutoLottoGenerator {
 
-    private int lottoCount;
-
-    public AutoLottoGenerator(int count) {
-        lottoCount = count;
-    }
-
-    private List<LottoNumber> createRandomLottoNumbers() {
+    private static List<LottoNumber> createRandomLottoNumbers() {
         List<LottoNumber> lottoNumberAll = LottoNumberPool.getAll();
         Collections.shuffle(lottoNumberAll);
         return lottoNumberAll.stream().limit(Lotto.LOTTO_NUMBER_COUNT).collect(Collectors.toList());
     }
 
-    @Override
-    public List<Lotto> generator() {
+    public static List<Lotto> generate(int autoLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0 ; i < lottoCount ; i++) {
+        for(int i = 0 ; i < autoLottoCount ; i++) {
             lottos.add(Lotto.of(createRandomLottoNumbers()));
         }
         return lottos;

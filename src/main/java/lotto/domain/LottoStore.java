@@ -1,34 +1,24 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoStore {
 
     private final static int LOTTO_PRICE_PER_ONE = 1000;
-    private final List<LottoGenerator> lottoGenerators = new ArrayList<>();
 
     public LottoStore() {}
 
     public List<Lotto> buy(PriceLotto price, ManualLottoMemo memo) {
         validatePrice(price);
         validatePriceOverManualLottoCount(price, memo);
-        lottoGenerators.add(new ManualLottoGenerator(memo));
-        lottoGenerators.add(new AutoLottoGenerator(getCountPossibleBuyAutoLotto(price, memo)));
-        List<Lotto> lottos = generator();
+        List<Lotto> lottos = LottoGenerator.generate(getCountPossibleBuyAutoLotto(price, memo), memo);
         price.boughtLotto(lottos.size(), LOTTO_PRICE_PER_ONE);
         return lottos;
     }
 
     private int getCountPossibleBuyAutoLotto(PriceLotto price, ManualLottoMemo manualLottoMemo) {
         return ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoMemo.size();
-    }
-
-    private List<Lotto> generator() {
-        return lottoGenerators.stream()
-                .flatMap(lottoGenerator -> lottoGenerator.generator().stream())
-                .collect(Collectors.toList());
     }
 
     private static void validatePrice(PriceLotto price) {
