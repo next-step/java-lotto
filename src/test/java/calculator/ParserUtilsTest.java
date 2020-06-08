@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ParserUtilsTest {
 
@@ -46,7 +47,7 @@ public class ParserUtilsTest {
     public void stringToArrayWithComma() {
         String input = "1,2";
         List result = parserUtils.stringToArray(input);
-        assertThat(result).contains(1,2);
+        assertThat(result).contains(1, 2);
     }
 
     @DisplayName(",이외에 콜론으로도 구분하여 리스트 반환")
@@ -54,7 +55,7 @@ public class ParserUtilsTest {
     public void stringToArrayWithAnotherSymbol() {
         String input = "1,2:3";
         List result = parserUtils.stringToArray(input);
-        assertThat(result).contains(1,2,3);
+        assertThat(result).contains(1, 2, 3);
     }
 
     @DisplayName("//와 \n 문자 사이에 커스텀 구분자를 통해 리스트로 반환")
@@ -62,6 +63,16 @@ public class ParserUtilsTest {
     public void stringToArrayWithCustomSymbol() {
         String input = "//;\n1;2;3";
         List result = parserUtils.stringToArray(input);
-        assertThat(result).contains(1,2,3);
+        assertThat(result).contains(1, 2, 3);
     }
+
+    @DisplayName("음수 입력시 에러가 발생함")
+    @Test
+    public void stringToArrayWithMinusInput() {
+        String input = "-1,2,3";
+        assertThatThrownBy(() -> {
+            parserUtils.stringToArray(input);
+        }).isInstanceOf(RuntimeException.class);
+    }
+
 }

@@ -28,7 +28,7 @@ public class ParserUtils {
 
 
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if(matcher.find()){
+        if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return stringListToIntList(matcher.group(2).split(customDelimiter));
         }
@@ -37,12 +37,21 @@ public class ParserUtils {
         return stringListToIntList(splitText);
     }
 
-    private List stringListToIntList(String[] splitText){
-        List resultList = new ArrayList();
-        for (String text:splitText) {
-            resultList.add(Integer.parseInt(text));
-        }
+    private List stringListToIntList(String[] splitText) {
 
+        List resultList = new ArrayList();
+
+        for (String text : splitText) {
+            int number = Integer.parseInt(text);
+            isMinus(number);
+            resultList.add(number);
+        }
         return resultList;
+    }
+
+    private void isMinus(int inputNumber) {
+        if (inputNumber < 0) {
+            throw new RuntimeException();
+        }
     }
 }
