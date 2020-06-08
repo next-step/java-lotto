@@ -10,16 +10,24 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     private WinningNumbers(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+        validateArguments(numbers, bonusNumber);
+
+        this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validateArguments(List<LottoNumber> numbers, LottoNumber bonusNumber) {
         if (isInvalidCount(numbers)) {
             throw new IllegalArgumentException("당첨 번호는 6개만 입력 가능합니다.");
+        }
+
+        if (bonusNumber == null) {
+            throw new IllegalArgumentException("보너스 번호를 입력하세요.");
         }
 
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호가 당첨 번호에 존재합니다.");
         }
-
-        this.numbers = numbers;
-        this.bonusNumber = bonusNumber;
     }
 
     private boolean isInvalidCount(List<LottoNumber> numbers) {
@@ -34,16 +42,10 @@ public class WinningNumbers {
         return this.numbers.contains(lottoNumber);
     }
 
-    public MatchResult calculateMatchResult(LottoTickets lottoTickets) {
-        MatchResult matchResult = MatchResult.create();
+    public LottoRank calculateMatchRank(LottoTicket lottoTicket) {
+        int countOfMatch = lottoTicket.getMatchCount(this);
+        boolean matchBonus = lottoTicket.containsNumber(bonusNumber);
 
-        lottoTickets.getLottoTickets().forEach(lottoTicket -> {
-            int countOfMatch = lottoTicket.getMatchCount(this);
-            boolean matchBonus = lottoTicket.containsNumber(bonusNumber);
-
-            matchResult.plusCount(LottoRank.valueOf(countOfMatch, matchBonus));
-        });
-
-        return matchResult;
+        return LottoRank.valueOf(countOfMatch, matchBonus);
     }
 }

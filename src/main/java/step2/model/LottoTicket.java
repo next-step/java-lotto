@@ -14,6 +14,12 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
+        validateArguments(numbers);
+
+        this.numbers = numbers;
+    }
+
+    private void validateArguments(List<LottoNumber> numbers) {
         if (isInvalidCount(numbers)) {
             throw new IllegalArgumentException("로또 번호는 6개만 입력 가능합니다.");
         }
@@ -21,8 +27,6 @@ public class LottoTicket {
         if (isDuplicateExist(numbers)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
-
-        this.numbers = numbers;
     }
 
     private boolean isInvalidCount(List<LottoNumber> numbers) {
@@ -46,14 +50,14 @@ public class LottoTicket {
         return lottoNumbers.size();
     }
 
-    public boolean containsNumber(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
-    }
-
     private List<LottoNumber> matchingResult(WinningNumbers winningNumbers) {
         return this.numbers.stream()
                 .filter(winningNumbers::containsNumber)
                 .collect(Collectors.toList());
+    }
+
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     @Override

@@ -26,4 +26,14 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return this.lottoTickets;
     }
+
+    public MatchResult calculateMatchResult(WinningNumbers winningNumbers) {
+        MatchResult matchResult = MatchResult.create();
+
+        this.lottoTickets.stream()
+                .map(winningNumbers::calculateMatchRank)
+                .forEach(matchResult::plusCount);
+
+        return matchResult;
+    }
 }

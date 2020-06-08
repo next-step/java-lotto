@@ -16,7 +16,7 @@ public class LottoApplication {
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();
 
-        MatchResult matchResult = winningNumbers.calculateMatchResult(lottoTickets);
+        MatchResult matchResult = lottoTickets.calculateMatchResult(winningNumbers);
         ResultView.printMatchResult(matchResult);
 
         MatchReport matchReport = MatchReport.create(purchaseAmount, matchResult);
