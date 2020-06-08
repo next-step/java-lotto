@@ -19,14 +19,4 @@ public class LottoTotalCalculator {
 
         return winningResult;
     }
-
-    public double returnYield(int lottoMoney) {
-        double sum = 0;
-
-        for (WinnerTier winnerTier : WinnerTier.values()) {
-            sum += winnerTier.getPrize() * winningResult.get(winnerTier);
-        }
-
-        return Math.floor(sum / lottoMoney * 100) / 100;
-    }
 }
