@@ -1,9 +1,5 @@
 package lotto.model;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class WinningLotto {
 
   private final Lotto lotto;
@@ -19,11 +15,7 @@ public class WinningLotto {
   }
 
   public static WinningLotto newInstanceByStrArr(String[] numberArr, LottoNumber bonusNumber) {
-    List<LottoNumber> numberList = Stream.of(numberArr)
-        .map(num -> new LottoNumber(Integer.parseInt(num.trim())))
-        .collect(Collectors.toList());
-
-    return new WinningLotto(new Lotto(numberList), bonusNumber);
+    return new WinningLotto(LottoFactory.createLottoByStrArr(numberArr), bonusNumber);
   }
 
   public Lotto getLotto() {
