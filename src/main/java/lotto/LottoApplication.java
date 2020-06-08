@@ -10,6 +10,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = InputView.enterPurchaseAmount();
 
+        // 로또 생성
         int quantity = LottoUtil.calculateLottoQuantity(purchaseAmount);
         LottoTicket lottoTicket = LottoTicket.create(quantity);
         ResultView.printLottoTicket(quantity, lottoTicket);

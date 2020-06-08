@@ -23,6 +23,10 @@ public class LottoTicket {
         return new LottoTicket(quantity);
     }
 
+    public List<Integer> tellLottoNumbers(int i) {
+        return lottoTicket.get(i).getLottoNumbers();
+    }
+
     public WinningResult makeWinningResult(String enteredWinNumber) {
         WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
         Map<Integer, Integer> winningCountMap = new HashMap<>();
@@ -31,16 +35,6 @@ public class LottoTicket {
             putWinningCount(winningCountMap, matchCount);
         }
         return WinningResult.create(winningCountMap);
-    }
-
-    private void putWinningCount(Map<Integer, Integer> winningCountMap, int matchCount) {
-        if (matchCount > 2) {
-            winningCountMap.put(matchCount, winningCountMap.getOrDefault(matchCount, 0) + 1);
-        }
-    }
-
-    public List<Integer> tellLottoNumbers(int i) {
-        return lottoTicket.get(i).getLottoNumbers();
     }
 
     private void checkQuantity(int quantity) {
@@ -53,6 +47,12 @@ public class LottoTicket {
         return IntStream.range(0, quantity)
                 .mapToObj(i -> LottoNumbers.create())
                 .collect(Collectors.toList());
+    }
+
+    private void putWinningCount(Map<Integer, Integer> winningCountMap, int matchCount) {
+        if (matchCount > 2) {
+            winningCountMap.put(matchCount, winningCountMap.getOrDefault(matchCount, 0) + 1);
+        }
     }
 
     @Override
