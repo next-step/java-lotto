@@ -19,7 +19,20 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(int number) {
         return numbers.get(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

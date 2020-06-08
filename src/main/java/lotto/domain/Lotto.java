@@ -1,14 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
     private static final int NUMBER_COUNT = 6;
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.lottoNumbers = new ArrayList<>();
+        convertToLottoNumber(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
@@ -17,15 +19,21 @@ public class Lotto {
         }
     }
 
+    private void convertToLottoNumber(List<Integer> numbers) {
+        for (Integer integer : numbers) {
+            lottoNumbers.add(LottoNumber.valueOf(integer));
+        }
+    }
+
     private boolean isSatisfied(int count) {
         return count == NUMBER_COUNT;
     }
 
-    public int matches(List<Integer> winningNumbers) {
-        return (int) numbers.stream().filter(winningNumbers::contains).count();
+    public int matches(List<LottoNumber> winningNumbers) {
+        return (int) lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
