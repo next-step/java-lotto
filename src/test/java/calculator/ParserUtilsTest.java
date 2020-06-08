@@ -49,10 +49,18 @@ public class ParserUtilsTest {
         assertThat(result).contains(1,2);
     }
 
-    @DisplayName(",이외에 콜론으로도 구분이 가능하다")
+    @DisplayName(",이외에 콜론으로도 구분하여 리스트 반환")
     @Test
     public void stringToArrayWithAnotherSymbol() {
         String input = "1,2:3";
+        List result = parserUtils.stringToArray(input);
+        assertThat(result).contains(1,2,3);
+    }
+
+    @DisplayName("//와 \n 문자 사이에 커스텀 구분자를 통해 리스트로 반환")
+    @Test
+    public void stringToArrayWithCustomSymbol() {
+        String input = "//;\n1;2;3";
         List result = parserUtils.stringToArray(input);
         assertThat(result).contains(1,2,3);
     }

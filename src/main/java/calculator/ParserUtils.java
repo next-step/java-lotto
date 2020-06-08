@@ -1,7 +1,10 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParserUtils {
 
@@ -23,12 +26,23 @@ public class ParserUtils {
 
     public List stringToArray(String input) {
 
-        List result = new ArrayList();
-        String[] splitText = input.split(",|:");
 
-        for (String text: splitText) {
-            result.add(Integer.parseInt(text));
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if(matcher.find()){
+            String customDelimiter = matcher.group(1);
+            return stringListToIntList(matcher.group(2).split(customDelimiter));
         }
-        return result;
+
+        String[] splitText = input.split(",|:");
+        return stringListToIntList(splitText);
+    }
+
+    private List stringListToIntList(String[] splitText){
+        List resultList = new ArrayList();
+        for (String text:splitText) {
+            resultList.add(Integer.parseInt(text));
+        }
+
+        return resultList;
     }
 }
