@@ -1,5 +1,7 @@
 package step2.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -9,6 +11,8 @@ public enum WinnerTier {
     MATCH_FOUR(50_000, 4),
     MATCH_THREE(5_000, 3),
     MISS(0, 0);
+
+    public static final List<WinnerTier> WINNINGS = Arrays.asList(MATCH_THREE, MATCH_FOUR, MATCH_FIVE, MATCH_SIX);
 
     private final long prize;
     private final long matchCnt;

@@ -21,7 +21,6 @@ public class LottoOutput {
         for (Lotto lotto : lottos) {
 
             String lottoNumbers = lotto.getLottoNumbers().stream()
-                    .sorted()
                     .map(i -> i.toString())
                     .collect(Collectors.joining(LOTTO_NUMBER_DELEVETER));
 
@@ -35,8 +34,8 @@ public class LottoOutput {
 
     public static void printWinningStatistics(Map<WinnerTier, Integer> WinningResult, double Yield) {
 
-        for(int i=(int)WinnerTier.MATCH_THREE.getMatchCnt(); i<(int)WinnerTier.MATCH_SIX.getMatchCnt(); i++) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", WinnerTier.valueOf(i).getMatchCnt(), WinnerTier.valueOf(i).getPrize(), WinningResult.get(WinnerTier.valueOf(i)));
+        for( WinnerTier winnerTier : WinnerTier.WINNINGS) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", winnerTier.getMatchCnt(), winnerTier.getPrize(), WinningResult.get(winnerTier));
         }
 
         System.out.printf("총 수익률은 %.2f입니다.", Yield);

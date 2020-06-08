@@ -26,6 +26,7 @@ public class Lotto {
     private Lotto(List<Integer> inputLottoNumberList) {
         validateNumbers(inputLottoNumberList);
         lottoNumbers = inputLottoNumberList;
+        Collections.sort(lottoNumbers);
     }
 
     public static Lotto newListLotto(List<Integer> inputLottoNumberList) {
