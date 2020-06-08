@@ -1,13 +1,13 @@
 package step2.view;
 
-import step2.model.*;
+import step2.model.LottoNumber;
+import step2.model.Money;
+import step2.model.MoneyAmount;
 import step2.util.WinningNumberSplitter;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class InputView {
@@ -24,15 +24,19 @@ public class InputView {
         return MoneyAmount.create(Money.valueOf(useAmount));
     }
 
-    public static WinningNumbers getWinningNumbers() {
+    public static List<LottoNumber> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumber = scanner.nextLine();
 
-        System.out.println("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = LottoNumber.valueOf(scanner.nextInt());
-
         return WinningNumberSplitter.split(winningNumber).stream()
                 .map(LottoNumber::valueOf)
-                .collect(collectingAndThen(toList(), lottoNumbers -> WinningNumbers.create(lottoNumbers, bonusNumber)));
+                .collect(toList());
+    }
+
+    public static LottoNumber getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+
+        return LottoNumber.valueOf(bonusNumber);
     }
 }
