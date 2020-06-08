@@ -1,6 +1,9 @@
 package study.lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -33,7 +36,8 @@ public class Lottos {
 
         lottos
             .forEach(lotto -> {
-                LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
+//                LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
+                LottoRank lottoRank = winningLotto.checkLottoRank(lotto, bonusNumber);
                 rankToCount.put(lottoRank, rankToCount.getOrDefault(lottoRank, 0) + 1);
             });
 

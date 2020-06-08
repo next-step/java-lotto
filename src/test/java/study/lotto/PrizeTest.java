@@ -27,7 +27,7 @@ public class PrizeTest {
         String[] split = input.split(", ");
         WinningLotto winningLotto = WinningLotto.of(split);
 
-        LottoRank lottoRank = lotto.checkLottoRank(winningLotto, 1);
+        LottoRank lottoRank = winningLotto.checkLottoRank(lotto, 1);
 
         assertThat(lottoRank.getPrize())
                 .isEqualTo(5000);
@@ -44,7 +44,7 @@ public class PrizeTest {
 
         int bonusNumber = 9;
 
-        LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
+        LottoRank lottoRank = winningLotto.checkLottoRank(lotto, bonusNumber);
 
         assertThat(lottoRank)
                 .isEqualTo(LottoRank.SECOND_RANK);

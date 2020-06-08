@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private final Lotto winningNumbers;
+    private final Lotto winningLotto;
 
-    private WinningLotto(Lotto winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    private WinningLotto(Lotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
     public static WinningLotto of(String[] winningNumbers) {
@@ -21,6 +21,23 @@ public class WinningLotto {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return winningNumbers.contains(lottoNumber);
+        return winningLotto.contains(lottoNumber);
+    }
+
+    public LottoRank checkLottoRank(Lotto lotto, int bonusNumber) {
+        return LottoRank.find(
+                (int)compareToWinningNumbers(lotto),
+                containsBonusNumber(lotto, bonusNumber));
+    }
+
+    public long compareToWinningNumbers(Lotto lotto) {
+        return winningLotto.getLottoNumbers()
+                .stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
+    private boolean containsBonusNumber(Lotto lotto, int bonusNumber) {
+        return lotto.contains(LottoNumber.of(bonusNumber));
     }
 }

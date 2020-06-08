@@ -53,23 +53,6 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public long compareToWinningNumbers(WinningLotto winningLotto) {
-        return lottoNumbers
-                .stream()
-                .filter(winningLotto::contains)
-                .count();
-    }
-
-    private boolean containsBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(LottoNumber.of(bonusNumber));
-    }
-
-    public LottoRank checkLottoRank(WinningLotto winningLotto, int bonusNumber) {
-        return LottoRank.find(
-                (int)compareToWinningNumbers(winningLotto),
-                containsBonusNumber(bonusNumber));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

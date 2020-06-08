@@ -65,7 +65,7 @@ public class LottoTest {
         String[] split = input.split(", ");
         WinningLotto winningLotto = WinningLotto.of(split);
 
-        assertThat(lotto.compareToWinningNumbers(winningLotto))
+        assertThat(winningLotto.compareToWinningNumbers(lotto))
                 .isEqualTo(3);
     }
 }
