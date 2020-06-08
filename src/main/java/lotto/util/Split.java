@@ -1,14 +1,16 @@
 package lotto.util;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Split {
 
     private Split() {}
 
-    public static String[] from(String text, String regx) {
+    public static List<String> from(String text, String regx) {
         validateNullOrEmpty(text);
-        return Arrays.stream(text.split(regx)).map(String::trim).toArray(String[]::new);
+        return Arrays.stream(text.split(regx)).map(String::trim).collect(Collectors.toList());
     }
 
     private static void validateNullOrEmpty(String text) {
