@@ -4,7 +4,7 @@ import dev.dahye.lotto.util.DoubleUtils;
 
 public class LottoMoney {
     private static final int ZERO_VALUE = 0;
-    private static final int PRICE_PER_LOTTO = 1000;
+    public static final int PRICE_PER_LOTTO = 1000;
 
     private final int money;
 
