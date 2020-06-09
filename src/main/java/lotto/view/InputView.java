@@ -15,4 +15,9 @@ public class InputView {
         scanner.nextLine();
         return scanner.nextLine().split(", ");
     }
+
+    public static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }

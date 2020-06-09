@@ -1,44 +1,62 @@
 package lotto.view;
 
-import lotto.domain.LottoMatcher;
-import lotto.domain.Lottos;
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static StringBuilder stringBuilder;
 
-    public static void printLottoNumbers(Lottos lottos) {
+    public static void printLotto(List<Lotto> lottos) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottos.getLottoCount()).append("개를 구매했습니다.\n");
+        stringBuilder.append(lottos.size()).append("개를 구매했습니다.\n");
 
-        lottos.getLottos().forEach(lottoNumber -> {
-            stringBuilder.append(lottoNumber.getNumbers());
+        lottos.forEach(lotto -> {
+            printLottoNumbers(lotto.getLottoNumbers());
             stringBuilder.append("\n");
         });
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printResult(LottoMatcher lottoMatcher, int money) {
+    private static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        List<Integer> numbers = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+        stringBuilder.append(numbers);
+    }
+
+    public static void printResult(Map<Rank, Integer> lottoResult, Money money) {
         stringBuilder = new StringBuilder();
-        LottoResult lottoResult = new LottoResult(lottoMatcher.getLottoPrizeList());
-        Map<Integer, Integer> matchLottoResult = lottoResult.matchResult();
 
         stringBuilder.append("당첨 통계\n");
         stringBuilder.append("---------\n");
-        for (int idx = 3; idx <= 6; idx++) {
-            stringBuilder.append(idx);
-            stringBuilder.append("개 일치 (");
-            stringBuilder.append(LottoPrize.valueOf(idx).getPrize());
-            stringBuilder.append("원)- ");
-            stringBuilder.append(matchLottoResult.getOrDefault(idx, 0));
-            stringBuilder.append("개\n");
+        double profit = 0.0;
+        for (Rank rank : Rank.values()) {
+            printMatch(lottoResult, rank);
+            profit += rank.getWinningMoney() * lottoResult.getOrDefault(rank, 0);
         }
+
         stringBuilder.append("총 수익률은 ");
-        stringBuilder.append(lottoResult.statistics(money));
+        stringBuilder.append(money.statistics(profit));
         stringBuilder.append("입니다.");
         System.out.println(stringBuilder.toString());
+    }
+
+    private static void printMatch(Map<Rank, Integer> lottoResult, Rank rank) {
+        if (rank.equals(Rank.MISS)) {
+            return;
+        }
+        stringBuilder.append(rank.getCountOfMatch());
+        stringBuilder.append("개 ");
+        if (rank.equals(Rank.SECOND)) {
+            stringBuilder.append("일치, 보너스 볼 ");
+        }
+        stringBuilder.append("일치 (");
+        stringBuilder.append(rank.getWinningMoney());
+        stringBuilder.append("원)- ");
+        stringBuilder.append(lottoResult.get(rank));
+        stringBuilder.append("개\n");
     }
 }

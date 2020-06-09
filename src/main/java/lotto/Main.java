@@ -4,20 +4,23 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
         int buyLottoMoney = InputView.buyLotto();
         Money money = new Money(buyLottoMoney);
 
-        Lottos lottos = new Lottos(money.countLotto());
-        lottos.drawLotto();
-        ResultView.printLottoNumbers(lottos);
+        List<Lotto> lottos = LottoMachine.createLottos(money.countLotto());
+        ResultView.printLotto(lottos);
 
         String[] winningNumbers  = InputView.inputWinningNumber();
-        WinningNumber winningNumber = new WinningNumber(winningNumbers);
+        int bonusBall = InputView.inputBonusBall();
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, LottoNumber.valueOf(bonusBall));
 
-        LottoMatcher lottoMatcher = new LottoMatcher(lottos.getLottos(), winningNumber.getWinningNumbers());
-
-        ResultView.printResult(lottoMatcher, buyLottoMoney);
+        LottoResult lottoResult = new LottoResult();
+        Map<Rank, Integer> result = lottoResult.matchResult(lottos, winningNumber);
+        ResultView.printResult(result, money);
     }
 }
