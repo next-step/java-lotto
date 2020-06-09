@@ -2,10 +2,13 @@ package lotto;
 
 import lotto.model.LottoResult;
 import lotto.model.Rank;
+import lotto.model.RankReward;
+import lotto.model.RewardLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,19 +20,17 @@ public class LottoResultTest {
     @DisplayName("로또 당첨번호 매칭")
     @ParameterizedTest
     @CsvSource(value = {
-            "3:3",
-            "4:4",
-            "5:5",
-            "6:6",},
+            "3:true",
+            "4:false",
+            "5:true",
+            "6:false",},
             delimiter = ':')
-    void LOTTO_WINNER_NUMBER_MATCHING(String lottoNumber, int matchingCount) {
-        List<Integer> userNumber = Arrays.asList(lottoNumber.split(","))
-                .stream().map(Integer::parseInt)
-                .collect(Collectors.toList());
-        Rank rank = new LottoResult(userNumber).getLottoResult().get(0);
+    void LOTTO_WINNER_NUMBER_MATCHING(int matchingCount, boolean bonus) {
+        List<RewardLotto> rewardLottos = new ArrayList<>();
+        rewardLottos.add(new RewardLotto(matchingCount, bonus));
 
-        assertThat(rank).isEqualTo(Rank.valueOf(matchingCount, false));
-        assertThat(rank.getWinningMoney()).isEqualTo(Rank.valueOf(matchingCount, false).getWinningMoney());
+        RankReward reward = new LottoResult(rewardLottos).getLottoResult();
+        assertThat(reward.getTotalPrize()).isEqualTo(Rank.valueOf(matchingCount, false).getWinningMoney());
     }
 
 }

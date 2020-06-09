@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Rank;
-import lotto.model.WinningNumbers;
+import lotto.model.RankReward;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     private final String RESULT_MESSAGE = "당첨 통계.\n------";
-    private int[] matchingStandard = { 3, 4, 5, 6 };
+    private int[] lottoRank = { 5, 4, 3, 2, 1 };
 
     public void displayLottoNumbers(List<List<Integer>> lottoNumbers){
         StringBuilder uiBuilder = new StringBuilder();
@@ -20,15 +20,22 @@ public class ResultView {
         System.out.println(uiBuilder.toString());
     }
 
-    public void displayResult(WinningNumbers winnerCollection, int paymentPrice) {
+    public void displayResult(RankReward winnerCollection, int paymentPrice) {
         System.out.println(RESULT_MESSAGE);
-        for (int standard : matchingStandard) {
-            int count = winnerCollection.getWinnerCount(standard);
-            System.out.println(standard + "개 일치(" + Rank.valueOf(standard, false).getWinningMoney() + ") - " + count + "개");
+        for (int ranking : lottoRank) {
+            int count = winnerCollection.getWinnerCount(ranking);
+            System.out.println(displayLottoRank(ranking, count));
         }
         int totalPrize = winnerCollection.getTotalPrize();
         float profitRate = (float) totalPrize / paymentPrice;
         System.out.println("총 수익률은 " + getProfit(profitRate) + "입니다." + getProfitRateMessage(profitRate));
+    }
+
+    private String displayLottoRank (int ranking, int count) {
+        return Rank.find(ranking).getCountOfMatch()
+                + "개 일치 "
+                + ((ranking == 2) ? ", 보너스볼 일치" : "")
+                + "(" + Rank.find(ranking).getWinningMoney() + ") - " +count + "개";
     }
 
     private String getProfit(float profitRate) {

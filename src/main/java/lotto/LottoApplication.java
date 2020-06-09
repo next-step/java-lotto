@@ -22,9 +22,12 @@ public class LottoApplication {
         resultView.displayLottoNumbers(lottoNumbers);
 
         input.displayLastLottoNumberInputUI();
-        List<Integer> lottoRankList = lotto.getLottoWinnerNumbers(sc.nextLine().split(input.DELIMITER));
+        String[] inputNumber = sc.nextLine().split(input.DELIMITER);
+        input.displayBonusLottoNumberInputUI();
+        int bonusNumber = sc.nextInt();
 
-        resultView.displayResult(new WinningNumbers(new LottoResult(lottoRankList).getLottoResult()), paymentPrice);
+        List<RewardLotto> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
+        resultView.displayResult(new LottoResult(lottoRankList).getLottoResult(), paymentPrice);
     }
 
 }

@@ -18,18 +18,18 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public List<Integer> getLottoWinnerNumbers(String[] winningNumber) {
+    public List<RewardLotto> getRewardLotto(String[] winningNumber, int bonus) {
         return lottoNumbers.stream()
-                        .map(lottoNumber -> checkWinnerNumber(lottoNumber, winningNumber))
+                        .map(lottoNumber -> checkWinnerNumber(lottoNumber, winningNumber, bonus))
                         .collect(Collectors.toList());
     }
 
-    private int checkWinnerNumber(List<Integer> lottoNumber, String[] winningNumber) {
+    private RewardLotto checkWinnerNumber(List<Integer> lottoNumber, String[] winningNumber, int bonus) {
         int matchingCount = 0;
         for (int i = 0; i < winningNumber.length; i++) {
             matchingCount += (lottoNumber.contains(Integer.parseInt(winningNumber[i]))) ? 1 : 0;
         }
-        return matchingCount;
+        return new RewardLotto(matchingCount, lottoNumber.contains(bonus));
     }
 
 }
