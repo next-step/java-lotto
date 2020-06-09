@@ -15,7 +15,7 @@ class NumbersTest {
 
     @Test
     void 여섯자리_로또번호를_생성한다() {
-        List<Integer> lottoNumbers = Numbers.create().createLottoNumbers();
+        List<LottoNumber> lottoNumbers = Numbers.create().createLottoNumbers();
         assertThat(lottoNumbers).size().isEqualTo(6);
     }
 

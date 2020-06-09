@@ -1,5 +1,6 @@
 package lotto.domain.prize;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,6 +8,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -44,7 +48,10 @@ class WinningNumbersTest {
             , "1, 7, 23, 34, 37, 44 | 6"}, delimiter = '|')
     void 당첨번호_일치개수를_확인한다(String enteredWinNumber, int expectedCount) {
         WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
-        LottoNumbers lottoNumbers = LottoNumbers.create(Arrays.asList(1, 7, 23, 34, 37, 44));
+        List<LottoNumber> lottoNumber = Arrays.asList(1, 7, 23, 34, 37, 44).stream()
+                .map(k -> LottoNumber.create(k)).collect(Collectors.toList());
+
+        LottoNumbers lottoNumbers = LottoNumbers.create(lottoNumber);
 
         int matchCount = winningNumbers.findMatchCount(lottoNumbers);
 

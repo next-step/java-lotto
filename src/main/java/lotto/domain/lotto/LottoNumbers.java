@@ -6,40 +6,44 @@ public class LottoNumbers {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final Numbers numbers = Numbers.create();
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
         checkDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers create() {
-        List<Integer> lottoNumbers = numbers.createLottoNumbers();
+        List<LottoNumber> lottoNumbers = numbers.createLottoNumbers();
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers create(List<Integer> lottoNumbers) {
+    public static LottoNumbers create(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean isExist(int bonusBall) {
-        return this.lottoNumbers.contains(bonusBall);
+    public boolean isExist(int number) {
+        for(LottoNumber lottoNumber : lottoNumbers){
+            if(lottoNumber.isExist(number))
+                return true;
+        }
+        return false;
     }
 
-    private void checkSize(List<Integer> lottoNumbers) {
+    private void checkSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개 입니다");
         }
     }
 
-    private void checkDuplicate(List<Integer> lottoNumbers) {
-        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumbers);
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 로또 번호가 존재 합니다");
         }
     }
@@ -56,4 +60,5 @@ public class LottoNumbers {
     public String toString() {
         return String.valueOf(lottoNumbers);
     }
+
 }

@@ -18,8 +18,8 @@ public class BonusBall {
         return new BonusBall(bonusBall, winningNumbers);
     }
 
-    public boolean isMatch(LottoNumbers lottoNumbers) {
-        return lottoNumbers.isExist(this.bonusBall);
+    public int getBonusBall() {
+        return bonusBall;
     }
 
     private void checkInRange(int bonusBall) {

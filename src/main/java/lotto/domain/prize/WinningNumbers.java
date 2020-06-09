@@ -1,5 +1,6 @@
 package lotto.domain.prize;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;
 
 import java.util.*;
@@ -27,7 +28,7 @@ public class WinningNumbers {
 
     public int findMatchCount(LottoNumbers lottoNumbers) {
         int matchCount = 0;
-        for (int number : lottoNumbers.getLottoNumbers()) {
+        for (LottoNumber number : lottoNumbers.getLottoNumbers()) {
             matchCount += checkMatch(number);
         }
         return matchCount;
@@ -65,8 +66,8 @@ public class WinningNumbers {
         }
     }
 
-    private int checkMatch(int number) {
-        if (this.winningNumbers.contains(number)) {
+    private int checkMatch(LottoNumber number) {
+        if (number.isContains(winningNumbers)) {
             return 1;
         }
         return 0;

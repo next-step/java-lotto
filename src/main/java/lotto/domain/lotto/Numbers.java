@@ -25,9 +25,12 @@ public class Numbers {
         return new Numbers();
     }
 
-    public List<Integer> createLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(START_LOTTO_RANGE, END_LOTTO_RANGE));
+        List<LottoNumber> lottoNumbers = new ArrayList<>(
+                numbers.subList(START_LOTTO_RANGE, END_LOTTO_RANGE)
+                        .stream().map(k -> LottoNumber.create(k)).collect(Collectors.toList()));
+
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }

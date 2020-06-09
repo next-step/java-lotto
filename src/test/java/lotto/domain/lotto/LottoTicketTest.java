@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -45,7 +47,9 @@ class LottoTicketTest {
 
     @Test
     void 당첨통계를_만든다() {
-        LottoNumbers lottoNumbers = LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+                .map(k -> LottoNumber.create(k)).collect(Collectors.toList());
+        LottoNumbers lottoNumbers = LottoNumbers.create(lottoNumber);
         LottoTicket lottoTicket = LottoTicket.createOne(Arrays.asList(lottoNumbers));
 
         String enteredWinNumber = "1, 2, 3, 4, 5, 7";
@@ -53,7 +57,7 @@ class LottoTicketTest {
 
         WinningResult winningResult = lottoTicket.makeWinningResult(enteredWinNumber, enteredBonusBall);
 
-        assertThat(winningResult.tellWinningCount(Rank.FIFTH)).isEqualTo(0);
+        assertThat(winningResult.tellWinningCount(Rank.FIRST)).isEqualTo(0);
         assertThat(winningResult.tellWinningCount(Rank.SECOND)).isEqualTo(1);
         assertThat(winningResult.tellWinningCount(Rank.MISS)).isEqualTo(0);
     }

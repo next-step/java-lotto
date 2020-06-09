@@ -32,7 +32,7 @@ public class LottoTicket {
         return new LottoTicket(lottoTicket);
     }
 
-    public List<Integer> tellLottoNumbers(int i) {
+    public List<LottoNumber> tellLottoNumbers(int i) {
         return lottoTicket.get(i).getLottoNumbers();
     }
 
@@ -40,10 +40,9 @@ public class LottoTicket {
         WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
         BonusBall bonusBall = BonusBall.create(enteredBonusBall, winningNumbers);
         Map<Rank, Integer> winningCountMap = new HashMap<>();
-
         for (LottoNumbers lottoNumbers : this.lottoTicket) {
             int matchCount = winningNumbers.findMatchCount(lottoNumbers);
-            boolean matchBonus = bonusBall.isMatch(lottoNumbers);
+            boolean matchBonus = lottoNumbers.isExist(bonusBall.getBonusBall());
             Rank rank = Rank.valueOf(matchCount, matchBonus);
             winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
         }
