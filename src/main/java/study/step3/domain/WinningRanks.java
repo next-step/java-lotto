@@ -11,17 +11,19 @@ public class WinningRanks {
         this.winningRanks = winningRanks;
     }
 
-    public List<WinningRank> getWinningRanks() {
-        return winningRanks;
-    }
-
     public long calculateTotalPrize() {
         return winningRanks.stream()
-                .mapToLong(winningRank -> winningRank.getPrizeMoney())
+                .mapToLong(WinningRank::getPrizeMoney)
                 .sum();
     }
 
     public double calculateEarningsRate() {
         return calculateTotalPrize() / (double) (winningRanks.size() * LOTTO_PRICE_PER_PIECE);
+    }
+
+    public long countRank(WinningRank rank) {
+        return winningRanks.stream()
+                           .filter(winningRank -> winningRank.equals(rank))
+                           .count();
     }
 }
