@@ -1,21 +1,20 @@
 package step2.domain;
 
+import static step2.Constants.EMPTY_COUNT;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGameResult {
 
-    private int firstPrizeCount;
-    private int secondPrizeCount;
-    private int thirdPrizeCount;
-    private int forthPrizeCount;
-    private int fifthPrizeCount;
+    private Map<Integer, Integer> prizeResult;
 
     public LottoGameResult() {
-        firstPrizeCount = 0;
-        secondPrizeCount = 0;
-        thirdPrizeCount = 0;
-        forthPrizeCount = 0;
-        fifthPrizeCount = 0;
+        prizeResult = new HashMap<>();
+        Arrays.stream(Prize.values())
+            .forEach(prize -> prizeResult.put(prize.getGrade(), EMPTY_COUNT));
     }
 
     public LottoGameResultDto getResult(List<UserLotto> lottos, WinningLotto winningLotto,
@@ -27,29 +26,14 @@ public class LottoGameResult {
 
         return new LottoGameResultDto(
             userPrice.getEarningRate(lottos),
-            firstPrizeCount,
-            secondPrizeCount,
-            thirdPrizeCount,
-            forthPrizeCount,
-            fifthPrizeCount);
+            prizeResult);
     }
 
     private void countPrize(List<UserLotto> lottos) {
-        firstPrizeCount = (int) lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.FIRST.getGrade())
-            .count();
-        secondPrizeCount = (int) lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.SECOND.getGrade())
-            .count();
-        thirdPrizeCount = (int) lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.THIRD.getGrade())
-            .count();
-        forthPrizeCount = (int) lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.FORTH.getGrade())
-            .count();
-        fifthPrizeCount = (int) lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.FIFTH.getGrade())
-            .count();
+
+        lottos.stream().forEach(lotto ->
+            this.prizeResult.put(lotto.getPrize(), prizeResult.get(lotto.getPrize()).intValue() + 1)
+        );
     }
 
     private void drawLottos(List<UserLotto> lottos, WinningLotto winningLotto) {
