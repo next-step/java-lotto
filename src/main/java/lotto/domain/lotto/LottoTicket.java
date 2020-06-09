@@ -77,5 +77,4 @@ public class LottoTicket {
         return String.valueOf(lottoTicket);
     }
 
-
 }

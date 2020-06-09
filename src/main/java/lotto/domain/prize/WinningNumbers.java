@@ -33,6 +33,10 @@ public class WinningNumbers {
         return matchCount;
     }
 
+    public boolean isExist(int number) {
+        return winningNumbers.contains(number);
+    }
+
     private List<Integer> convertWinningNumber(String enteredWinNumber) {
         String[] enteredWinNumbers = enteredWinNumber.split(SEPARATOR);
         return Arrays.stream(enteredWinNumbers)
@@ -66,9 +70,5 @@ public class WinningNumbers {
             return 1;
         }
         return 0;
-    }
-
-    public boolean isExist(int number) {
-        return winningNumbers.contains(number);
     }
 }

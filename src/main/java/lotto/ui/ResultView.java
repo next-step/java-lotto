@@ -7,8 +7,7 @@ import lotto.domain.prize.WinningResult;
 import java.util.stream.IntStream;
 
 public class ResultView {
-    private ResultView() {
-    }
+    private ResultView() {}
 
     public static void printLottoTicket(int quantity, LottoTicket lottoTicket) {
         System.out.println(quantity + "개를 구매했습니다.");

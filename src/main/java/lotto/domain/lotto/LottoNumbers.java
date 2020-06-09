@@ -27,6 +27,10 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public boolean isExist(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
+
     private void checkSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개 입니다");
@@ -51,10 +55,5 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
-    }
-
-
-    public boolean isExist(int bonusBall) {
-        return this.lottoNumbers.contains(bonusBall);
     }
 }
