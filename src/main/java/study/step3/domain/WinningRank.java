@@ -10,7 +10,7 @@ public enum WinningRank {
     FIFTH(3, 5_000),
     NOTHING(0,0);
 
-    private final static int MATCH_COUNT_FIVE = 5;
+    private static final int MATCH_COUNT_FIVE = 5;
 
     private int matchingCount;
     private long prizeMoney;
