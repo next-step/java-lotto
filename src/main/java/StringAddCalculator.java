@@ -1,5 +1,9 @@
+import java.util.Arrays;
+
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
+
+
         if (isNumeric(text)) {
             return parseInt(text);
         };
@@ -9,7 +13,8 @@ public class StringAddCalculator {
         if(text.isEmpty()) {
             return 0;
         }
-        return 0;
+        String[] split = text.split(",|\\:");
+        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
     }
 
     private static int parseInt(String text) {
