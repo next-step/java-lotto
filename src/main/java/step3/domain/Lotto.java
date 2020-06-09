@@ -12,24 +12,18 @@ import java.util.stream.IntStream;
  */
 public class Lotto {
 
-    public static final int LOTTO_MAX_LIMIT = 45;
-    public static final int LOTTO_DRAW_LIMIT = 6;
-    public static final int LOTTO_DRAW_BASE_NUMBER = 0;
-
     // each Lotto numbers.
     private Set<Integer> lottoNumbers;
-
     private int bonusNumber;
 
     // default 1 to LOTTO_MAX_LIMIT (45)
-    private static final List<Integer> lottoGameNumbers = Collections.unmodifiableList(IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
+    private static final List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, LottoNumber.LOTTO_MAX_LIMIT)
             .boxed()
-            .collect(Collectors.toList()));
-
+            .collect(Collectors.toList());
 
     public Lotto(Set<Integer> lottoNumbers) {
 
-        //lottoNumbers.sort(Integer::compareTo);
+        LottoNumber.checkLottoRules(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = 0;
@@ -38,7 +32,11 @@ public class Lotto {
 
     public Lotto(Set<Integer> lottoNumbers, int bonusNumber) {
 
-        //lottoNumbers.sort(Integer::compareTo);
+        LottoNumber.checkLottoRules(lottoNumbers, bonusNumber);
+
+        if (bonusNumber > LottoNumber.LOTTO_DRAW_BASE_NUMBER && bonusNumber > LottoNumber.LOTTO_MAX_LIMIT) {
+            throw new IllegalArgumentException("Not matched range of bonus ball.");
+        }
 
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
@@ -48,13 +46,21 @@ public class Lotto {
     public static Lotto auto() {
 
         Collections.shuffle(lottoGameNumbers);
+
         // pick LOTTO_DRAW_LIMIT
-        return new Lotto(new TreeSet<>(drawLottoNumbers()));
+        return new Lotto(new ArrayList<>(LottoNumber.drawLottoNumbers(lottoGameNumbers))
+                .stream()
+                .collect(Collectors.toSet()));
     }
 
+    public static Lotto winning(String winningLotto, String bonusNumber) {
 
-    private static List<Integer> drawLottoNumbers() {
-        return lottoGameNumbers.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
+        // pick LOTTO_DRAW_LIMIT
+        return new Lotto(new HashSet<>(Arrays.asList(winningLotto.split(LottoNumber.FIXED_DELIMITER)).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet()))
+                , Integer.parseInt(bonusNumber));
+
     }
 
     public Set<Integer> getNumbers() {

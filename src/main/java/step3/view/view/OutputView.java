@@ -28,7 +28,6 @@ public class OutputView {
 
     }
 
-
     private static void printNumbers(Lotto lotto) {
 
         StringBuilder stringBuilder = new StringBuilder("[");
@@ -55,7 +54,6 @@ public class OutputView {
 
         });
     }
-
 
     public static void outputWinningResult(BigDecimal totalResult) {
         System.out.println("-------------");

@@ -1,8 +1,7 @@
 package step3;
 
-
+import step3.domain.Lotto;
 import step3.domain.LottoGame;
-import step3.domain.LottoTickets;
 import step3.domain.Money;
 import step3.domain.WinningLotto;
 import step3.view.view.InputView;
@@ -38,10 +37,11 @@ public class MainApplication {
         String winingNumber = InputView.inputWiningNumber();
         String bonusNumber = InputView.inputBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(winingNumber, bonusNumber);
+        Lotto winLotto = Lotto.winning(winingNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winLotto);
 
         // matching numbers
-        lottoGame.getLottoTickets().matchingWinningNumbers(winningLotto);
+        lottoGame.matchingWinningNumbers(winningLotto);
 
         OutputView.outputPrizeList();
 

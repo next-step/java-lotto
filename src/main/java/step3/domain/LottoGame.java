@@ -14,23 +14,19 @@ import java.util.List;
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
-    public static final String FIXED_DELIMITER = ",|:";
-
     private static LottoTickets lottoTickets;
-
 
     // pay
     public int calculateGameCountByPayMoney(Money money) {
 
-        if (money.getPayedMoney() % LOTTO_PRICE != 0) {
+        int buyCount = money.getPayedMoney() / LOTTO_PRICE;
+        if (buyCount < 1) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");
         }
-        return money.getPayedMoney() / LOTTO_PRICE;
+        return buyCount;
     }
 
-
     // issue
-
     public static void issueLotto(int gameCount) {
 
         List<Lotto> lottoList = new ArrayList<>();
@@ -42,16 +38,21 @@ public class LottoGame {
 
     }
 
+    // matching
+    public void matchingWinningNumbers(WinningLotto winningLotto) {
+        winningLotto.matchingWinningNumbers(lottoTickets);
+    }
 
+    // winningResult
     public BigDecimal totalResult() {
 
-        // winningResult
         BigDecimal sum = BigDecimal.valueOf(Arrays.stream(Prize.values())
                 .mapToLong(prize -> prize.getPrizeTotal())
                 .sum());
 
         return sum.divide(BigDecimal.valueOf(lottoTickets.getLottoTicketsSize() * LOTTO_PRICE), 3, BigDecimal.ROUND_HALF_EVEN);
     }
+
 
     public LottoTickets getLottoTickets() {
         return lottoTickets;

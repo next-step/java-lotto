@@ -15,7 +15,7 @@ class LottoGameTest {
     // init with 1000 ~
     @DisplayName("금액별 구매 매수 체크")
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "1000:1", "2000:2", "5000:5", "10000:10"}, delimiter = ':')
+    @CsvSource(value = {"1000:1", "2000:2", "5500:5", "12200:12"}, delimiter = ':')
     public void testCalculateGameCountByPayMoney(String input, int count) {
 
         Money money = new Money(input);
@@ -27,10 +27,10 @@ class LottoGameTest {
     }
 
 
-    // init with 1000 ~
-    @DisplayName("금액별 구매 매수 체크")
+    // init with under 1000 ~
+    @DisplayName("부족 금액 입력 체크")
     @ParameterizedTest
-    @ValueSource(strings = {"1100", "100", "1400", "5400", "10001"})
+    @ValueSource(strings = {"0", "100", " 900"})
     public void testCalculateGameCountByPayMoneyWithError(String input) {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
