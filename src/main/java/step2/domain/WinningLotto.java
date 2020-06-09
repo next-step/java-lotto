@@ -11,7 +11,7 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public void drawLotto(UserLotto userLotto) {
-        getLottoNumbers().stream().forEach(number -> userLotto.findHit(number, bonusNumber));
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }

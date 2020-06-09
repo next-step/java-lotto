@@ -12,29 +12,29 @@ import org.junit.jupiter.params.provider.MethodSource;
 class UserLottoTest {
 
 
-    private static Stream<Arguments> setPrizeTestCase() {
+    private static Stream<Arguments> getPrizeTestCase() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, Prize.FIRST.getGrade()), // 6 + 0
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), 6, Prize.SECOND.getGrade()), // 5 + 1
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), 7, Prize.THIRD.getGrade()), // 5 + 0
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), 5, Prize.FORTH.getGrade()), // 4 + 1/0
-            Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), 4, Prize.FIFTH.getGrade()), // 3 + 1/0
-            Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), 4, Prize.NONE.getGrade()),  // 2 + 1/0
-            Arguments.of(Arrays.asList(1, 12, 13, 14, 15, 16), 4, Prize.NONE.getGrade()), // 1 + 1/0
-            Arguments.of(Arrays.asList(11, 12, 13, 14, 15, 16), 4, Prize.NONE.getGrade()) // 0 + 1/0
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, Prize.FIRST), // 6 + 0
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), 6, Prize.SECOND), // 5 + 1
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), 7, Prize.THIRD), // 5 + 0
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), 5, Prize.FORTH), // 4 + 1/0
+            Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), 4, Prize.FIFTH), // 3 + 1/0
+            Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), 4, Prize.NONE),  // 2 + 1/0
+            Arguments.of(Arrays.asList(1, 12, 13, 14, 15, 16), 4, Prize.NONE), // 1 + 1/0
+            Arguments.of(Arrays.asList(11, 12, 13, 14, 15, 16), 4, Prize.NONE) // 0 + 1/0
         );
     }
 
     @ParameterizedTest
-    @MethodSource("setPrizeTestCase")
-    public void setPrizeTest(List<Integer> winningLottos, int bonusNumber, int expected) {
+    @MethodSource("getPrizeTestCase")
+    public void getPrizeTest(List<Integer> winningLottos, int bonusNumber, Prize expected) {
         //given
         UserLotto lotto = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        lotto.setPrize(new WinningLotto(winningLottos, bonusNumber));
+        Prize prize = lotto.getPrize(new WinningLotto(winningLottos, bonusNumber));
 
         //then
-        assertThat(lotto.getPrize()).isEqualTo(expected);
+        assertThat(prize).isEqualTo(expected);
     }
 }

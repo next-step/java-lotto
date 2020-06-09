@@ -20,25 +20,20 @@ public class LottoGameResult {
     public LottoGameResultDto getResult(List<UserLotto> lottos, WinningLotto winningLotto,
         UserPrice userPrice) {
 
-        drawLottos(lottos, winningLotto);
-
-        countPrize(lottos);
+        drawPrize(lottos, winningLotto);
 
         return new LottoGameResultDto(
-            userPrice.getEarningRate(lottos),
+            userPrice.getEarningRate(lottos, winningLotto),
             prizeResult);
     }
 
-    private void countPrize(List<UserLotto> lottos) {
+    private void drawPrize(List<UserLotto> lottos, WinningLotto winningLotto) {
 
-        lottos.stream().forEach(lotto ->
-            this.prizeResult.put(lotto.getPrize(), prizeResult.get(lotto.getPrize()).intValue() + 1)
+        lottos.stream().forEach(lotto -> {
+                Prize prize = lotto.getPrize(winningLotto);
+                this.prizeResult
+                    .put(prize.getGrade(), prizeResult.get(prize.getGrade()).intValue() + 1);
+            }
         );
-    }
-
-    private void drawLottos(List<UserLotto> lottos, WinningLotto winningLotto) {
-        lottos.stream().forEach(lotto -> lotto.setPrize(winningLotto));
-        //for logging
-        //lottos.stream().forEach(lotto -> System.out.println(lotto));
     }
 }

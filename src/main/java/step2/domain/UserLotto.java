@@ -5,49 +5,27 @@ import java.util.Objects;
 
 public class UserLotto extends Lotto {
 
-    private int hitCount;
-    private int prize;
-    private boolean isMatchedBonus;
-
     public UserLotto(List<Integer> lottoNumbers) {
         super(lottoNumbers);
-        this.hitCount = 0;
-        this.prize = 0;
-        this.isMatchedBonus = false;
     }
 
-    public void findHit(Integer winningNumber, int bonusNumber) {
-        if (getLottoNumbers().contains(winningNumber)) {
-            this.hitCount++;
-        }
+    public Prize getPrize(WinningLotto winningLotto) {
+        int hitCount;
+        boolean isMatchedBonus = false;
 
-        if (getLottoNumbers().contains(bonusNumber)) {
+        hitCount = (int) getLottoNumbers().stream()
+            .filter(number -> winningLotto.getLottoNumbers().contains(number)).count();
+
+        if (getLottoNumbers().contains(winningLotto.getBonusNumber())) {
             isMatchedBonus = true;
         }
-    }
 
-    public int getPrize() {
-        return prize;
-    }
-
-    public void setPrize(WinningLotto winningLotto) {
-
-        winningLotto.drawLotto(this);
-
-        prize = Prize.valueOf(hitCount, isMatchedBonus).getGrade();
-    }
-
-    public long getCashPrice() {
-        return Prize.getCashPrize(prize);
+        return Prize.valueOf(hitCount, isMatchedBonus);
     }
 
     @Override
     public String toString() {
-        return "UserLotto{" +
-            "hitCount=" + hitCount +
-            ", prize=" + prize +
-            ", isMatchedBonus=" + isMatchedBonus +
-            '}';
+        return super.toString();
     }
 
     @Override

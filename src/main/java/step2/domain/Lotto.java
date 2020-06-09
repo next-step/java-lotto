@@ -24,4 +24,11 @@ public class Lotto {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+            "lottoNumbers=" + lottoNumbers +
+            '}';
+    }
 }

@@ -33,12 +33,13 @@ public class UserPrice {
         return (int) Math.floor(price) / LOTTO_PRICE;
     }
 
-    private long getTotalCashPrize(List<UserLotto> lottos) {
-        long totalCashPrize = lottos.stream().mapToLong(UserLotto::getCashPrice).sum();
+    private long getTotalCashPrize(List<UserLotto> lottos, WinningLotto winningLotto) {
+        long totalCashPrize = lottos.stream()
+            .mapToLong(lotto -> lotto.getPrize(winningLotto).getCashPrize()).sum();
         return totalCashPrize;
     }
 
-    public double getEarningRate(List<UserLotto> lottos) {
-        return (double) getTotalCashPrize(lottos) / price;
+    public double getEarningRate(List<UserLotto> lottos, WinningLotto winningLotto) {
+        return (double) getTotalCashPrize(lottos, winningLotto) / price;
     }
 }
