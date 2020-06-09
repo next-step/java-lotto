@@ -1,8 +1,8 @@
 package study.step3.domain;
 
 public class LottoShop {
-    private final static int LOTTO_PRICE_PER_PIECE = 1000;
-    private final static String LOTTO_PRICE_EXCEPTION = "로또 구매 금액은 1000원 보다 작을 수 없습니다.";
+    private static final int LOTTO_PRICE_PER_PIECE = 1000;
+    private static final String LOTTO_PRICE_EXCEPTION = "로또 구매 금액은 1000원 보다 작을 수 없습니다.";
 
     public static LottoTickets buyLottoTickets(long price) {
         validatePrice(price);
