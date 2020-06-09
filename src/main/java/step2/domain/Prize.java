@@ -32,14 +32,6 @@ public enum Prize {
         return cashPrize;
     }
 
-    public static long getCashPrize(int grade) {
-        for (Prize prize : values()) {
-            if (prize.grade == grade) {
-                return prize.cashPrize;
-            }
-        }
-        throw new IllegalArgumentException(String.valueOf(grade));
-    }
 
     public static Prize valueOf(int countOfMatch, boolean isMatchedBonus) {
         Prize[] prizes = values();
