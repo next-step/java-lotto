@@ -37,9 +37,12 @@
     
 * LottoResult
     * [x] LottoResult 는 맞은 갯수별 상금 금액을 가지고 있다.
-    
+     
 * LottoResults
     * [x] LottoResults 은 일급 컬렉션이다.
+
+* LottoBonusResult
+    * [x] LottoBonusResult 는 보너스 볼과의 Match 상태를 가지고 있다.
 
 ### Utils
 * AutomaticLottoGenerator
@@ -47,7 +50,7 @@
     * [x] Shuffling 하여 값을 준비한다.
     * [x] 6 개의 LottoNumber 를 만든다. 
     
-* Converter
+* StringConverter
     * [x] Converter 은 문자열을 받아 List<Integer> 로 변환한다.
 
 ### View
@@ -60,7 +63,7 @@
     * [x] 당첨 통계를 출력하는 기능을 수행한다.
     * [x] 수익률을 출력하는 기능을 수행한다.
     
-#Step3
+## Step3
 
 ### 기능 요구 사항
 * 2등을 위해 추가 번호를 하나 더 추첨한다.
