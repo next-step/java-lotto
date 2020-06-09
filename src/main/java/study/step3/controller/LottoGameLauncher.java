@@ -1,9 +1,6 @@
 package study.step3.controller;
 
-import study.step3.domain.LottoResult;
-import study.step3.domain.LottoShop;
-import study.step3.domain.LottoTickets;
-import study.step3.domain.WinningLotto;
+import study.step3.domain.*;
 import study.step3.view.InputView;
 import study.step3.view.ResultView;
 
@@ -15,7 +12,8 @@ public class LottoGameLauncher {
         ResultView.printLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = InputView.inputLastWinningNumbers();
-        LottoResult lottoResult = lottoTickets.confirmWinningResult(winningLotto);
-        ResultView.printLottoResult(lottoResult);
+
+        WinningRanks winningRanks = lottoTickets.confirmWinningResult(winningLotto);
+        ResultView.printLottoResult(winningRanks);
     }
 }
