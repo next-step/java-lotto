@@ -3,42 +3,41 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ParserUtilsTest {
 
-    private ParserUtils parserUtils;
+    @DisplayName("빈 문자열과 null 입력을 확인한다.")
+    @ParameterizedTest
+    @MethodSource
+    public void checkValid(String input, boolean expectedResult){
+        boolean result = ParserUtils.checkValid(input);
+        assertThat(result).isEqualTo(expectedResult);
 
-    @BeforeEach
-    void setUp() {
-        parserUtils = new ParserUtils();
     }
 
-    @DisplayName("빈 문자열 입력을 확인한다.")
-    @Test
-    public void checkEmptyTest() {
-        String input = "";
-        boolean result = parserUtils.checkEmpty(input);
-        assertThat(result).isEqualTo(true);
+    private static Stream<Arguments> checkValid() {
+        return Stream.of(
+                Arguments.of(null, true),
+                Arguments.of("",true),
+                Arguments.of("1:2", false)
+        );
     }
 
-    @DisplayName("null 입력을 확인한다.")
-    @Test
-    public void checkNullTest() {
-        String input = null;
-        boolean result = parserUtils.checkNull(input);
-        assertThat(result).isEqualTo(true);
-    }
 
     @DisplayName("숫자 하나를 입력했을때 해당 숫자 반환")
     @Test
     public void stringToArray() {
         String input = "1";
-        List result = parserUtils.stringToArray(input);
+        List result = ParserUtils.stringToArray(input);
         assertThat(result).contains(1);
     }
 
@@ -46,7 +45,7 @@ public class ParserUtilsTest {
     @Test
     public void stringToArrayWithComma() {
         String input = "1,2";
-        List result = parserUtils.stringToArray(input);
+        List result = ParserUtils.stringToArray(input);
         assertThat(result).contains(1, 2);
     }
 
@@ -54,7 +53,7 @@ public class ParserUtilsTest {
     @Test
     public void stringToArrayWithAnotherSymbol() {
         String input = "1,2:3";
-        List result = parserUtils.stringToArray(input);
+        List result = ParserUtils.stringToArray(input);
         assertThat(result).contains(1, 2, 3);
     }
 
@@ -62,7 +61,7 @@ public class ParserUtilsTest {
     @Test
     public void stringToArrayWithCustomSymbol() {
         String input = "//;\n1;2;3";
-        List result = parserUtils.stringToArray(input);
+        List result = ParserUtils.stringToArray(input);
         assertThat(result).contains(1, 2, 3);
     }
 
@@ -71,7 +70,7 @@ public class ParserUtilsTest {
     public void stringToArrayWithMinusInput() {
         String input = "-1,2,3";
         assertThatThrownBy(() -> {
-            parserUtils.stringToArray(input);
+            ParserUtils.stringToArray(input);
         }).isInstanceOf(RuntimeException.class);
     }
 
