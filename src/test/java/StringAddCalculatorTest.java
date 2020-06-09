@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -38,9 +39,24 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Disabled
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void getDelimiter() {
+        String text = "//;\n1;2;3";
+        String substring = StringAddCalculator.getDelimiter(text);
+        assertThat(substring).isEqualTo(";");
+    }
+
+    @Test
+    void getCalculableText() {
+        String text = "//;\n1;2;3";
+        String calculableText = StringAddCalculator.getCalculableText(text);
+        assertThat(calculableText).isEqualTo("1;2;3");
     }
 }

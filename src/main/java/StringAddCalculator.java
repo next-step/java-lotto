@@ -6,16 +6,29 @@ public class StringAddCalculator {
     private static final int ZERO = 0;
 
     public static int splitAndSum(String text) {
-        if (isNumeric(text)) {
-            return parseInt(text);
-        };
         if(isNull(text)) {
             return ZERO;
         }
         if(text.isEmpty()) {
             return ZERO;
         }
+        if(text.contains("\n")){
+            String delimiter = getDelimiter(text);
+            String calculableText = getCalculableText(text);
+            return addCustom(calculableText, delimiter);
+        }
+        if(isNumeric(text)) {
+            return parseInt(text);
+        };
+
         return addDefault(text);
+    }
+
+    private static int addCustom(String text, String delimiter) {
+        String[] split = text.split(delimiter);
+        return Arrays.stream(split)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 
     private static int addDefault(String text) {
@@ -37,4 +50,13 @@ public class StringAddCalculator {
         return text == null;
     }
 
+    public static String getDelimiter(String text) {
+        int index = text.indexOf("\n");
+        return text.substring(2, index);
+    }
+
+    public static String getCalculableText(String text) {
+        int index = text.indexOf("\n");
+        return text.substring(index + 1);
+    }
 }
