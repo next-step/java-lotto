@@ -17,7 +17,7 @@ class LottoStatisticUtilTest {
     @ParameterizedTest
     @MethodSource("source_award_inRank_shouldSucceed")
     public void getPrizeCount_shouldSucceed(Prize prize, Lotto winLotto, int bonusNumber, List<Lotto> lottoList, int expected) {
-        int result = LottoStatisticUtil.getPrizeCount(prize, winLotto, bonusNumber, lottoList);
+        int result = LottoStatisticUtil.getPrizeCount(prize, winLotto, bonusNumber, Lottos.of(lottoList));
         assertThat(result).isEqualTo(expected);
     }
 
@@ -39,7 +39,7 @@ class LottoStatisticUtilTest {
     @ParameterizedTest
     @MethodSource("source_getYield_shouldSucceed")
     public void getYield_shouldSucceed(Price totalPrice, Lotto winLotto, int bonusNumber, List<Lotto> lottoList, double expected) {
-        double result = LottoStatisticUtil.getYield(totalPrice, winLotto, bonusNumber, lottoList);
+        double result = LottoStatisticUtil.getYield(totalPrice, winLotto, bonusNumber, Lottos.of(lottoList));
         assertThat(Math.abs(result - expected) < 0.01).isEqualTo(true);
     }
 

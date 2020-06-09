@@ -1,12 +1,8 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatisticUtil;
-import lotto.domain.Price;
-import lotto.domain.Prize;
+import lotto.domain.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class ResultView {
     private static final String PRINT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
@@ -23,13 +19,13 @@ public class ResultView {
         System.out.println("[" + String.join(", ", numbers) + "]");
     }
 
-    public void printStatistic(Price totalPrice, Lotto winLotto, int bonusNumber, List<Lotto> lottoList) {
+    public void printStatistic(Price totalPrice, Lotto winLotto, int bonusNumber, Lottos lottos) {
         System.out.println(PRINT_STATISTIC);
 
         Arrays.stream(Prize.generateInRank()).forEach(prize -> {
-            System.out.println(String.format(PRINT_PRIZE, prize.getComment(), prize.getMoney(), LottoStatisticUtil.getPrizeCount(prize, winLotto, bonusNumber, lottoList)));
+            System.out.println(String.format(PRINT_PRIZE, prize.getComment(), prize.getMoney(), LottoStatisticUtil.getPrizeCount(prize, winLotto, bonusNumber, lottos)));
         });
 
-        System.out.println(String.format(PRINT_YIELD, LottoStatisticUtil.getYield(totalPrice, winLotto, bonusNumber, lottoList)));
+        System.out.println(String.format(PRINT_YIELD, LottoStatisticUtil.getYield(totalPrice, winLotto, bonusNumber, lottos)));
     }
 }

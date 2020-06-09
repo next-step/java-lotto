@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.Lottos;
 import lotto.domain.Price;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -19,13 +20,13 @@ public class LottoGame {
         List<List<Integer>> manualLottoNumbersList = inputView.insertManualLottoNumberList();
 
         LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottoList = lottoMachine.buy(price, manualLottoNumbersList);
-        resultView.printLottoCount(manualLottoNumbersList.size(), lottoList.size() - manualLottoNumbersList.size());
+        Lottos lottos = lottoMachine.buy(price, manualLottoNumbersList);
+        resultView.printLottoCount(manualLottoNumbersList.size(), lottos.size() - manualLottoNumbersList.size());
 
-        lottoList.forEach(resultView::printLotto);
+        lottos.forEach(resultView::printLotto);
 
         Lotto winLotto = inputView.insertWinLotto();
         int bonusNumber = inputView.insertBonusNumber();
-        resultView.printStatistic(price, winLotto, bonusNumber, lottoList);
+        resultView.printStatistic(price, winLotto, bonusNumber, lottos);
     }
 }

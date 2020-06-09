@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
@@ -12,16 +11,16 @@ public class LottoMachine {
     public LottoMachine() {
     }
 
-    public List<Lotto> buy(Price price, List<List<Integer>> manualLottoNumbersList) {
+    public Lottos buy(Price price, List<List<Integer>> manualLottoNumbersList) {
         validatePurchasable(price, manualLottoNumbersList.size());
 
         int lottoCount = getLottoCount(price);
 
-        List<Lotto> manualLottoList = manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList());
+        Lottos manualLottos = Lottos.of(manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList()));
 
-        List<Lotto> autoLottoList = IntStream.range(manualLottoList.size(), lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
+        Lottos autoLottos = Lottos.of(IntStream.range(manualLottos.size(), lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList()));
 
-        return Stream.concat(manualLottoList.stream(), autoLottoList.stream()).collect(Collectors.toList());
+        return Lottos.of(manualLottos, autoLottos);
     }
 
     private int getLottoCount(Price price) {

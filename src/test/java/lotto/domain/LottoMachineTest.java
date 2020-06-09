@@ -21,7 +21,7 @@ class LottoMachineTest {
     public void buy_validPrice_shouldSucceed(String param, int expectedSize) {
         LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
-        List<Lotto> result = lottoMachine.buy(price, Collections.emptyList());
+        Lottos result = lottoMachine.buy(price, Collections.emptyList());
         assertThat(result.size()).isEqualTo(expectedSize);
     }
 
@@ -55,10 +55,10 @@ class LottoMachineTest {
     public void buy_manualLotto_shouldSucceed(String param, List<Integer> manualLottoNumbersList) {
         LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
-        List<Lotto> result = lottoMachine.buy(price, Arrays.asList(manualLottoNumbersList));
+        Lottos result = lottoMachine.buy(price, Arrays.asList(manualLottoNumbersList));
 
         Lotto manualLotto = new Lotto(manualLottoNumbersList);
-        assertThat(result.contains(manualLotto)).isTrue();
+        assertThat(result.getLottoList().contains(manualLotto)).isTrue();
     }
 
     private static Stream<Arguments> source_buy_manualLotto_shouldSucceed() {
@@ -73,7 +73,7 @@ class LottoMachineTest {
     public void buy_autoLottoUsingRemain_shouldSucceed(String param, List<List<Integer>> manualLottoNumbersList, int expected) {
         LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
-        List<Lotto> result = lottoMachine.buy(price, manualLottoNumbersList);
+        Lottos result = lottoMachine.buy(price, manualLottoNumbersList);
 
         assertThat(result.size()).isEqualTo(expected);
     }
