@@ -13,14 +13,15 @@ class LottoGameResultTest {
     public void getResultTest() {
         //given
         int price = 1000;
-        List<UserLotto> lottos = Arrays.asList(new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoSheet lottoSheet = new LottoSheet(
+            Arrays.asList(new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         UserPrice userPrice = new UserPrice(price);
         int bonusNumber = 7;
 
         //when
         LottoGameResultDto lottoGameResultDto = new LottoGameResult()
-            .getResult(lottos, new WinningLotto(winningNumbers, bonusNumber), userPrice);
+            .getResult(lottoSheet, new WinningLotto(winningNumbers, bonusNumber), userPrice);
 
         //then
         assertThat(lottoGameResultDto.getEarningRate()).isNotNull();

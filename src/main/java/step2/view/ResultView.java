@@ -5,8 +5,8 @@ import static step2.view.Messages.RESPONSE_PRICE_TEMPLATE;
 import static step2.view.Messages.WINNING_STATISTIC_RESULT_LOSS_CASE;
 import static step2.view.Messages.WINNING_STATISTIC_TEMPLATE;
 
-import java.util.List;
 import step2.domain.LottoGameResultDto;
+import step2.domain.LottoSheet;
 import step2.domain.Prize;
 import step2.domain.UserLotto;
 
@@ -16,8 +16,8 @@ public class ResultView {
         System.out.printf(RESPONSE_PRICE_TEMPLATE, price / LOTTO_PRICE);
     }
 
-    public void printLottos(List<UserLotto> lottos) {
-        lottos.stream().forEach(this::printLotto);
+    public void printLottos(LottoSheet lottoSheet) {
+        lottoSheet.getLottos().stream().forEach(this::printLotto);
         System.out.println();
     }
 

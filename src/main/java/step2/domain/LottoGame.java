@@ -1,22 +1,19 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
 
     private UserPrice userPrice;
-    private List<UserLotto> lottos;
+    private LottoSheet lottoSheet;
     private LottoGenerator lottoGenerator;
 
     public LottoGame(int userPrice) {
         this.userPrice = new UserPrice(userPrice);
-        lottos = new ArrayList<>();
+        lottoSheet = new LottoSheet();
         lottoGenerator = new LottoGenerator(new RandomGenerableStrategy());
     }
 
     public void run() throws IllegalArgumentException {
-        lottos = lottoGenerator.generateLottos(userPrice);
+        lottoSheet = new LottoSheet(lottoGenerator.generateLottos(userPrice));
     }
 
     public LottoGameResultDto getGameResult(WinningLotto winningLotto)
@@ -24,10 +21,10 @@ public class LottoGame {
 
         winningLotto.validateWinningNumbers();
 
-        return new LottoGameResult().getResult(lottos, winningLotto, userPrice);
+        return new LottoGameResult().getResult(lottoSheet, winningLotto, userPrice);
     }
 
-    public List<UserLotto> getLottos() {
-        return lottos;
+    public LottoSheet getLottoSheet() {
+        return lottoSheet;
     }
 }
