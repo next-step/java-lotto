@@ -20,10 +20,10 @@ public class ResultView {
     public void printStatistics(LottoResult lottoResult, int purchasePrice){
         System.out.println("당첨통계");
         System.out.println("---------");
-        Map<Match, Integer> matchResult = lottoResult.getMatchResult();
+        Map<Match, Long> matchResult = lottoResult.getMatches();
 
-        for (Map.Entry<Match, Integer> entry : matchResult.entrySet()) {
-            System.out.println(entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrizeMoney() + ")- " + matchResult.getOrDefault(entry.getKey(), 0) + "개");
+        for (Map.Entry<Match, Long> entry : matchResult.entrySet()) {
+            System.out.println(entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrizeMoney() + ")- " + matchResult.getOrDefault(entry.getKey(), 0L) + "개");
         }
 
         System.out.println("총 수익률은 " + lottoResult.getReturnRate(purchasePrice) + "입니다.");

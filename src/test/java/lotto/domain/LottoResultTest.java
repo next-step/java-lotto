@@ -62,7 +62,7 @@ class LottoResultTest {
 
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
-        Map<Match, Integer> matchResult = lottoResult.getMatchResult();
+        Map<Match, Long> matchResult = lottoResult.getMatches();
 
         // then
         assertThat(matchResult.get(Match.THREE)).isEqualTo(1);
