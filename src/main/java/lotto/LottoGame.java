@@ -18,6 +18,8 @@ public class LottoGame {
 
         Price price = inputView.insertPrice();
 
+        int manualLottoCount = inputView.insertManualLottoCount();
+
         LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
         List<Lotto> lottoList = lottoMachine.buy(price, Collections.emptyList());
         resultView.printLottoCount(lottoList.size());

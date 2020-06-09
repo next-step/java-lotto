@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String QUESTION_INSERT_PRICE = "구입금액을 입력해 주세요.";
     private static final String QUESTION_INSERT_WIN_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String QUESTION_INSERT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String QUESTION_INSERT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_DELIMITER = ",";
 
@@ -19,6 +20,12 @@ public class InputView {
         System.out.println(QUESTION_INSERT_PRICE);
         Scanner scanner = new Scanner(System.in);
         return Price.of(scanner.nextLine());
+    }
+
+    public int insertManualLottoCount() {
+        System.out.println(QUESTION_INSERT_MANUAL_LOTTO_COUNT);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public Lotto insertWinLotto() {
