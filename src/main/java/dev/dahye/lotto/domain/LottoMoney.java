@@ -4,7 +4,7 @@ import dev.dahye.lotto.util.DoubleUtils;
 
 public class LottoMoney {
     private static final int ZERO_VALUE = 0;
-    private static final int LOTTO_PRICE = 1000;
+    private static final int PRICE_PER_LOTTO = 1000;
 
     private final int money;
 
@@ -14,7 +14,7 @@ public class LottoMoney {
     }
 
     public int calculateCountOfLotto() {
-        return money / LOTTO_PRICE;
+        return money / PRICE_PER_LOTTO;
     }
 
     private void validate(int money) {
@@ -28,7 +28,7 @@ public class LottoMoney {
     }
 
     private boolean isNoRemainder(int money) {
-        return money % LOTTO_PRICE != ZERO_VALUE;
+        return money % PRICE_PER_LOTTO != ZERO_VALUE;
     }
 
     public double divideTotalPrizeByMoney(int totalPrize) {
