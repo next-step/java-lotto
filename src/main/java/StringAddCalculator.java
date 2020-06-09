@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.IntUnaryOperator;
 
 public class StringAddCalculator {
 
@@ -32,7 +34,21 @@ public class StringAddCalculator {
         String[] numbers = text.split(delimiter);
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
+                .map(getExceptionUnary())
                 .sum();
+    }
+
+    private static IntUnaryOperator getExceptionUnary() {
+        return number -> {
+            if(isNegative(number)) {
+                throw new RuntimeException();
+            }
+            return number;
+        };
+    }
+
+    private static boolean isNegative(int number) {
+        return number < 0;
     }
 
     public static String getDelimiter(String text) {
@@ -63,6 +79,17 @@ public class StringAddCalculator {
 
     private static boolean isNull(String text) {
         return text == null;
+    }
+
+    static Consumer<Integer> lambdaWrapper(Consumer<Integer> consumer) {
+        return i -> {
+            try {
+                consumer.accept(i);
+            } catch (ArithmeticException e) {
+                System.err.println(
+                        "Arithmetic Exception occured : " + e.getMessage());
+            }
+        };
     }
 
 
