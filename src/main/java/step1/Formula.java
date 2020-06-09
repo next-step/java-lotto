@@ -1,30 +1,37 @@
 package step1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Formula {
-    private static String[] formulaArray;
+    private List<Integer> formulaNumbers = new ArrayList<>();
 
     public Formula(String stringFormula) {
+        setFormulaNumbers(stringFormula);
+        validateNumbers();
+    }
+
+    private void setFormulaNumbers(String stringFormula) {
         if (stringFormula == null || stringFormula.trim().equals("")) {
-            formulaArray = new String[]{"0"};
+            formulaNumbers.add(0);
 
             return;
         }
 
-        formulaArray = Separator.split(stringFormula);
-        validateNumbers(formulaArray);
+        this.formulaNumbers = Arrays.stream(Separator.split(stringFormula)).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    private void validateNumbers(String[] array) {
-        Arrays.stream(array).forEach(number -> {
-            if (Integer.parseInt(number) < 0) {
+    private void validateNumbers() {
+        this.formulaNumbers.forEach(integer -> {
+            if (integer < 0) {
                 throw new RuntimeException();
             }
         });
     }
 
-    public String[] getArray() {
-        return formulaArray;
+    public List<Integer> getFormulaNumbers() {
+        return this.formulaNumbers;
     }
 }

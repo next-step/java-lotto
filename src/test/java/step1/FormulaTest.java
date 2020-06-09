@@ -24,7 +24,7 @@ class FormulaTest {
     @DisplayName("숫자 하나 입력하면 배열 사이즈 1개")
     void input1NumberReturn1Number(String number) {
         Formula formula = new Formula(number);
-        assertThat(formula.getArray()).hasSize(1);
+        assertThat(formula.getFormulaNumbers()).hasSize(1);
     }
 
     @ParameterizedTest
@@ -32,7 +32,7 @@ class FormulaTest {
     @DisplayName("null이나 공백을 입력받으면 0리턴")
     void 널_이나_0_입력_리턴_0(String input) {
         Formula formula = new Formula(input);
-        assertThat(formula.getArray()).contains("0");
+        assertThat(formula.getFormulaNumbers()).contains(0);
     }
 
 }

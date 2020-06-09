@@ -9,8 +9,8 @@ public class StringAddCalculator {
 
     public int sum() {
         int total = 0;
-        for (String number : formula.getArray()) {
-            total += Integer.parseInt(number);
+        for (Integer number : formula.getFormulaNumbers()) {
+            total += number;
         }
 
         return total;
