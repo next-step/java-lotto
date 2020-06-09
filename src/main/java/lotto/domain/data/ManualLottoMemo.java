@@ -1,10 +1,12 @@
 package lotto.domain.data;
 
 import lotto.domain.LottoNumberPool;
+import lotto.util.ConvertInt;
 import lotto.util.Split;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualLottoMemo {
     private final static String COMMA = ",";
@@ -20,7 +22,10 @@ public class ManualLottoMemo {
 
     private void addLottoToMemosFrom(List<String> manualLottoStrings) {
         for (String lottoNumbers : manualLottoStrings) {
-            lottoMemos.add(LottoNumberPool.get(Split.from(lottoNumbers, COMMA)));
+            List<LottoNumber> manualLotto = Split.from(lottoNumbers, COMMA).stream()
+                    .map(s -> LottoNumberPool.get(ConvertInt.from(s)))
+                    .collect(Collectors.toList());
+            lottoMemos.add(manualLotto);
         }
     }
 
