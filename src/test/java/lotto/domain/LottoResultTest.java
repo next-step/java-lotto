@@ -62,11 +62,11 @@ class LottoResultTest {
 
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
-        Map<Match, Long> matchResult = lottoResult.getMatches();
+        Map<Rank, Long> matchResult = lottoResult.getMatches();
 
         // then
-        assertThat(matchResult.get(Match.THREE)).isEqualTo(1);
-        assertThat(matchResult.get(Match.FOUR)).isEqualTo(2);
+        assertThat(matchResult.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(matchResult.get(Rank.THIRD)).isEqualTo(2);
     }
 
     @DisplayName("LottoResult 생성 후 구매금액 입력 시 수익률 반환")

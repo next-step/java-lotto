@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -20,9 +20,9 @@ public class ResultView {
     public void printStatistics(LottoResult lottoResult, int purchasePrice){
         System.out.println("당첨통계");
         System.out.println("---------");
-        Map<Match, Long> matchResult = lottoResult.getMatches();
+        Map<Rank, Long> matchResult = lottoResult.getMatches();
 
-        for (Map.Entry<Match, Long> entry : matchResult.entrySet()) {
+        for (Map.Entry<Rank, Long> entry : matchResult.entrySet()) {
             System.out.println(entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrizeMoney() + ")- " + matchResult.getOrDefault(entry.getKey(), 0L) + "개");
         }
 

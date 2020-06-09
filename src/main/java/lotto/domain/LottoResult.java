@@ -11,9 +11,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class LottoResult {
 
-    private final Map<Match, Long> matches;
+    private final Map<Rank, Long> matches;
 
-    private LottoResult(Map<Match, Long> matches) {
+    private LottoResult(Map<Rank, Long> matches) {
         this.matches = matches;
     }
 
@@ -28,19 +28,19 @@ public class LottoResult {
         }
     }
 
-    private static Map<Match, Long> getMatches(Set<Integer> winningNumbers, List<Lotto> lottos) {
+    private static Map<Rank, Long> getMatches(Set<Integer> winningNumbers, List<Lotto> lottos) {
         return lottos.stream()
                     .map(lotto -> lotto.matchWith(winningNumbers))
-                    .filter(match -> !match.equals(Match.NONE))
+                    .filter(match -> !match.equals(Rank.MISS))
                     .collect(groupingBy(Function.identity(), counting()));
     }
 
     public double getReturnRate(int purchasePrice){
-        int sum =  Match.priceMoneySum(matches);
+        int sum =  Rank.priceMoneySum(matches);
         return Math.round(((double) sum / purchasePrice) * 100) / 100.0;
     }
 
-    public Map<Match, Long> getMatches() {
+    public Map<Rank, Long> getMatches() {
         return Collections.unmodifiableMap(matches);
     }
 }

@@ -43,7 +43,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(StringParser.getParseNumbers(input));
 
         // when
-        Match match = lotto.matchWith(winningNumbers);
+        Rank match = lotto.matchWith(winningNumbers);
 
         // then
         assertThat(match.name()).isEqualTo(expected);
