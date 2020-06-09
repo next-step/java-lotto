@@ -15,4 +15,12 @@ public class SeparatorTest {
 
         assertThat(Separator.split(formula)).doesNotContain(":", ",");
     }
+
+    @Test
+    @DisplayName("커스텀 구분자로 분리한다")
+    void 커스텀_구분자_분리() {
+        String customSeparatorFormula = "//;\n1;2;3";
+
+        assertThat(Separator.splitCustom(customSeparatorFormula)).doesNotContain(";");
+    }
 }
