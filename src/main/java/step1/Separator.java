@@ -9,22 +9,18 @@ public class Separator {
 
     private Separator(){}
 
-    private static String[] split(String formula, String separator) {
-        return formula.split(separator);
-    }
-
     public static String[] split(String formula) {
-        return split(formula, DEFAULT_SEPARATOR);
-    }
-
-    public static String[] splitCustom(String customSeparatorFormula) {
-        Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(customSeparatorFormula);
+        Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(formula);
         if (matcher.find()) {
             String customSeparator = matcher.group(1);
-            String formula = matcher.group(2);
-            return split(formula, customSeparator);
+            String customSeparatorFormula = matcher.group(2);
+            return defaultSplit(customSeparatorFormula, customSeparator);
         }
 
-        return null;
+        return defaultSplit(formula, DEFAULT_SEPARATOR);
+    }
+
+    private static String[] defaultSplit(String formula, String separator) {
+        return formula.split(separator);
     }
 }

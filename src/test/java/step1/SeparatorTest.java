@@ -13,7 +13,7 @@ public class SeparatorTest {
     void 문자열_쉼표_또는_콜론_분리() {
         String formula = "1 : 3 , 4 : 3";
 
-        assertThat(Separator.split(formula)).doesNotContain(":", ",");
+        assertThat(Separator.split(formula)).doesNotContain(":", ",").hasSize(4);
     }
 
     @Test
@@ -21,6 +21,6 @@ public class SeparatorTest {
     void 커스텀_구분자_분리() {
         String customSeparatorFormula = "//;\n1;2;3";
 
-        assertThat(Separator.splitCustom(customSeparatorFormula)).doesNotContain(";");
+        assertThat(Separator.split(customSeparatorFormula)).doesNotContain(";").hasSize(3);
     }
 }
