@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,6 +43,6 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+        return Collections.unmodifiableList(numbers);
     }
 }
