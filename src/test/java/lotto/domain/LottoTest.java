@@ -54,7 +54,22 @@ class LottoTest {
 
     private static Stream<Arguments> source_generateByManual_invalidParameters_shouldFail() {
         return Stream.of(
-                Arguments.of(Arrays.asList(0,1,2,3,4,5)),
-                Arguments.of(Arrays.asList(41,42,43,44,45,46)));
+                Arguments.of(Arrays.asList(0, 1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(41, 42, 43, 44, 45, 46)));
+    }
+
+    @DisplayName("같은 번호를 가진 Lotto 객체들은 같다")
+    @ParameterizedTest
+    @MethodSource("source_equals_sameNumbers_shouldTrue")
+    public void equals_sameNumbers_shouldTrue(List<Integer> lottoNumbers1, List<Integer> lottoNumbers2) {
+        Lotto lotto1 = new Lotto(lottoNumbers1);
+        Lotto lotto2 = new Lotto(lottoNumbers2);
+        assertThat(lotto1.equals(lotto2)).isTrue();
+    }
+
+    public static Stream<Arguments> source_equals_sameNumbers_shouldTrue() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6})),
+                Arguments.of(Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45}), Arrays.asList(new Integer[]{40, 41, 42, 43, 44, 45})));
     }
 }

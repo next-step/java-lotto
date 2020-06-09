@@ -32,7 +32,7 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return Objects.equals(lottoNumbers.getLottoNumberSet(), lotto.lottoNumbers.getLottoNumberSet());
     }
 
     @Override
