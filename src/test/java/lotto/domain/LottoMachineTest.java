@@ -19,7 +19,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_validPrice_shouldSucceed")
     public void buy_validPrice_shouldSucceed(String param, int expectedSize) {
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
         List<Lotto> result = lottoMachine.buy(price, Collections.emptyList());
         assertThat(result.size()).isEqualTo(expectedSize);
@@ -35,7 +35,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_invalidPrice_shouldSucceed")
     public void buy_invalidPrice_shouldSucceed(String param) {
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
         assertThatThrownBy(() -> {
             lottoMachine.buy(price, Collections.emptyList());
@@ -53,7 +53,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_manualLotto_shouldSucceed")
     public void buy_manualLotto_shouldSucceed(String param, List<Integer> manualLottoNumbersList) {
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
         List<Lotto> result = lottoMachine.buy(price, Arrays.asList(manualLottoNumbersList));
 
@@ -71,7 +71,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_autoLottoUsingRemain_shouldSucceed")
     public void buy_autoLottoUsingRemain_shouldSucceed(String param, List<List<Integer>> manualLottoNumbersList, int expected) {
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
         List<Lotto> result = lottoMachine.buy(price, manualLottoNumbersList);
 
@@ -88,7 +88,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("source_buy_manualLottoOverPrice_shouldFail")
     public void buy_manualLottoOverPrice_shouldFail(String param, List<List<Integer>> manualLottoNumbersList) {
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         Price price = Price.of(param);
         assertThatThrownBy(() -> {
             lottoMachine.buy(price, manualLottoNumbersList);

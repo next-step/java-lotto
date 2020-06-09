@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.AutoLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.Price;
@@ -19,7 +18,7 @@ public class LottoGame {
 
         List<List<Integer>> manualLottoNumbersList = inputView.insertManualLottoNumberList();
 
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottoList = lottoMachine.buy(price, manualLottoNumbersList);
         resultView.printLottoCount(manualLottoNumbersList.size(), lottoList.size() - manualLottoNumbersList.size());
 

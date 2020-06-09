@@ -7,10 +7,9 @@ import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private final LottoGenerator lottoGenerator;
+    private static final LottoGenerator lottoGenerator = new AutoLottoGenerator();
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoMachine() {
     }
 
     public List<Lotto> buy(Price price, List<List<Integer>> manualLottoNumbersList) {
