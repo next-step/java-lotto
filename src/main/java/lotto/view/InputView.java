@@ -1,10 +1,18 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import lotto.model.ManualLottoTicket;
+import lotto.model.ManualLottoTickets;
+import lotto.utils.StringConverter;
 
 public class InputView {
 
     private static final String INPUT_PURCHASE_PRICE_TEXT = "구입금액을 입력해 주세요.";
+    private static final String INPUT_PURCHASE_MANUAL_LOTTO_COUNT_TEXT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBER_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_LOTTO_NUMBER_TEXT = "보너스 볼을 입력해 주세요.";
 
@@ -13,6 +21,21 @@ public class InputView {
     public static int inputPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_TEXT);
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static int inputPurchaseManualLottoCount() {
+        System.out.println(INPUT_PURCHASE_MANUAL_LOTTO_COUNT_TEXT);
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static ManualLottoTickets inputPurchasedManualTicketsByCount(final int purchaseManualLottoCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_TEXT);
+
+        List<ManualLottoTicket> manualLottoTickets = Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
+            .limit(purchaseManualLottoCount)
+            .collect(Collectors.toList());
+
+        return ManualLottoTickets.create(manualLottoTickets);
     }
 
     public static String inputWinningLottoNumber() {
