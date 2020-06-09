@@ -1,36 +1,20 @@
 package step1;
 
-import java.util.Arrays;
-
 public class StringAddCalculator {
-    private static String[] formulaArray;
+    private Formula formula;
 
-    public StringAddCalculator(String formula) {
-        if (formula == null || formula.trim().equals("")) {
-            formulaArray = new String[]{"0"};
-
-            return;
-        }
-
-        formulaArray = Separator.split(formula);
-        validateNumbers(formulaArray);
+    public StringAddCalculator(Formula formula) {
+       this.formula = formula;
     }
 
     public int sum() {
         int total = 0;
-        for (String number : formulaArray) {
+        for (String number : formula.getArray()) {
             total += Integer.parseInt(number);
         }
 
         return total;
     }
 
-    private static void validateNumbers(String[] array) {
-        Arrays.stream(array).forEach(number -> {
-            if (Integer.parseInt(number) < 0) {
-                throw new RuntimeException();
-            }
-        });
-    }
 
 }
