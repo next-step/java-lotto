@@ -1,5 +1,6 @@
 package dev.dahye.lotto.view;
 
+import dev.dahye.lotto.domain.LottoOrder;
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.util.ConvertUtils;
 
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static final int ZERO_VALUE = 0;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int doInputMoney() {
@@ -25,12 +25,12 @@ public class InputView {
         return countOfManualLotto;
     }
 
-    public static List<LottoTicket> doInputManualLotto(int countOfManualLotto) {
+    public static List<LottoTicket> doInputManualLotto(LottoOrder lottoOrder) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        if (isExistManualLotto(countOfManualLotto)) {
+        if (lottoOrder.isExistManualLotto()) {
             printManualLottoInputHeader();
-            doInputManualLotto(countOfManualLotto, lottoTickets);
+            doInputManualLotto(lottoOrder, lottoTickets);
         }
 
         return lottoTickets;
@@ -40,14 +40,10 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    private static void doInputManualLotto(int countOfManualLotto, List<LottoTicket> lottoTickets) {
-        for (int i = 0; i < countOfManualLotto; i++) {
+    private static void doInputManualLotto(LottoOrder lottoOrder, List<LottoTicket> lottoTickets) {
+        for (int i = 0; i < lottoOrder.getCountOfManualLotto(); i++) {
             lottoTickets.add(LottoTicket.manualIssued(ConvertUtils.convertStringToIntegerList(scanner.nextLine())));
         }
-    }
-
-    private static boolean isExistManualLotto(int countOfManualLotto) {
-        return countOfManualLotto > ZERO_VALUE;
     }
 
     public static String doInputWinningNumbers() {
