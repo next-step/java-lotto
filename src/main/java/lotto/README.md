@@ -44,6 +44,12 @@
 * LottoBonusResult
     * [x] LottoBonusResult 는 보너스 볼과의 Match 상태를 가지고 있다.
 
+* ManualLottoTicket
+    * [x] ManualLottoTicket 은 수동으로 생성된 로또 번호를 가지고 있다.
+    
+* ManualLottoTickets 
+    * [x] ManualLottoTickets 은 ManualLottoTicket 의 일급컬렉션이다.
+    
 ### Utils
 * AutomaticLottoGenerator
     * [x] AutomaticLottoGenerator 은 1 ~ 45 까지 LottoNumber 를 만든다.
