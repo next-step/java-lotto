@@ -35,7 +35,7 @@ public class WinningNumbers {
 
     private List<Integer> convertWinningNumber(String enteredWinNumber) {
         String[] enteredWinNumbers = enteredWinNumber.split(SEPARATOR);
-        return Arrays.asList(enteredWinNumbers).stream()
+        return Arrays.stream(enteredWinNumbers)
                 .map(x -> Integer.parseInt(x.trim())).collect(Collectors.toList());
     }
 
