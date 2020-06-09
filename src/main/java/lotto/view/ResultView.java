@@ -21,10 +21,11 @@ public class ResultView {
         System.out.println("당첨통계");
         System.out.println("---------");
         Map<Match, Integer> matchResult = lottoResult.getMatchResult();
-        for (int i = 3; i <= 6; i++) {
-            Match match = Match.findByMatchCount(i);
-            System.out.println(i + "개 일치 (" + match.getPrizeMoney() + ")- " + matchResult.getOrDefault(Match.findByMatchCount(i), 0) + "개");
+
+        for (Map.Entry<Match, Integer> entry : matchResult.entrySet()) {
+            System.out.println(entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrizeMoney() + ")- " + matchResult.getOrDefault(entry.getKey(), 0) + "개");
         }
+
         System.out.println("총 수익률은 " + lottoResult.getReturnRate(purchasePrice) + "입니다.");
     }
 }
