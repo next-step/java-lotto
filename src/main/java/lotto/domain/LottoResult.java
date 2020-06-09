@@ -27,7 +27,7 @@ public class LottoResult {
 
     private static List<Match> getMatches(Set<Integer> winningNumbers, List<Lotto> lottos) {
         return lottos.stream()
-                    .map(lotto -> Match.findByMatchCount(lotto.matchCount(winningNumbers)))
+                    .map(lotto -> lotto.matchWith(winningNumbers))
                     .filter(match -> !match.equals(Match.NONE))
                     .collect(Collectors.toList());
     }

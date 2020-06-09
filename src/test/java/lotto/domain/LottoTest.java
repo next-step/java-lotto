@@ -34,18 +34,18 @@ public class LottoTest {
         );
     }
 
-    @DisplayName("당첨 번호 입력 시 일치하는 개수 반환")
+    @DisplayName("당첨 번호 입력 시 Match 반환")
     @ParameterizedTest
-    @CsvSource(value = {"3, 4, 5, 6, 7, 8:4", "3,4,8,9,10,11:2"}, delimiterString = ":")
-    void whenInputWinningNumbersThenReturnMatchCount(String input, int expected) {
+    @CsvSource(value = {"3, 4, 5, 6, 7, 8:FOUR", "3,4,8,9,10,11:NONE"}, delimiterString = ":")
+    void whenInputWinningNumbersThenReturnMatchCount(String input, String expected) {
         // given
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(StringParser.getParseNumbers(input));
 
         // when
-        int matchCount = lotto.matchCount(winningNumbers);
+        Match match = lotto.matchWith(winningNumbers);
 
         // then
-        assertThat(matchCount).isEqualTo(expected);
+        assertThat(match.name()).isEqualTo(expected);
     }
 }
