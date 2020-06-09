@@ -9,6 +9,8 @@ public class StringAddCalculator {
     private static String DELIMITER = "[,:]";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
 
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+
     public static int splitAndSum(String inputString) {
         if (checkNullinput(inputString)) {
             return 0;
@@ -27,7 +29,7 @@ public class StringAddCalculator {
     }
 
     private static int convrrtStringToint(String stringNum) {
-            int number = 0;
+        int number = 0;
 
         try {
             number = Integer.parseInt(stringNum);
@@ -38,14 +40,15 @@ public class StringAddCalculator {
         return number;
     }
 
+    private static int add(int sum, int convertNum) {
+        return checkMinus(convertNum) ? sum + convertNum : sum;
+    }
+
     private static int sumNumbers(String[] splitString) {
         int sum = 0;
-        for ( String num :  splitString) {
+        for (String num : splitString) {
             int convertNum = convrrtStringToint(num);
-
-            if (checkMinus(convertNum)) {
-                sum += convertNum;
-            }
+            sum = add(sum, convertNum);
         }
 
         return sum;
@@ -53,7 +56,7 @@ public class StringAddCalculator {
 
     private static String[] makeSplitString(String inputString) {
         String[] splitString = null;
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(inputString);
+        Matcher m = pattern.matcher(inputString);
         if (m.find()) {
             DELIMITER = m.group(1);
             splitString = m.group(2).split(DELIMITER);
