@@ -67,6 +67,23 @@ class LottoMachineTest {
                 Arguments.of("3000", Arrays.asList(3, 23, 34, 19, 43, 6)));
     }
 
+    @DisplayName("구입금액에서 수동로또 가격을 뺀 나머지는 모두 수동로또를 구매해야 한다")
+    @ParameterizedTest
+    @MethodSource("source_buy_autoLottoUsingRemain_shouldSucceed")
+    public void buy_autoLottoUsingRemain_shouldSucceed(String param, List<List<Integer>> manualLottoNumbersList, int expected) {
+        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
+        Price price = Price.of(param);
+        List<Lotto> result = lottoMachine.buy(price, manualLottoNumbersList);
+
+        assertThat(result.size()).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> source_buy_autoLottoUsingRemain_shouldSucceed() {
+        return Stream.of(
+                Arguments.of("9000", Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6)), 9),
+                Arguments.of("13000", Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6)), 13));
+    }
+
     @DisplayName("수동으로 구매하고자 하는 로또 금액이 구입금액보다 비싸면 IllegalArgumentException")
     @ParameterizedTest
     @MethodSource("source_buy_manualLottoOverPrice_shouldFail")

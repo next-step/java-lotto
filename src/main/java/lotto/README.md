@@ -68,6 +68,7 @@
 * 개발 순서
     * 테스트 작성
       * 로또 생성시에 수동으로 입력받은 로또가 포함되어야 한다
+      * 구입금액에서 수동로또 가격을 뺀 나머지는 모두 수동로또를 구매해야 한다
       * 구입금액보다 수동 로또 금액이 크다면 예외발생
     * 수동으로 Lotto를 만들어주는 로직을 완성
       * LottoMachine > public List<Lotto> buy(Price price, List<Integer> ManualLottoNumbers)
