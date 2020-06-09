@@ -26,7 +26,7 @@ public class LottoApplication {
         input.displayBonusLottoNumberInputUI();
         int bonusNumber = sc.nextInt();
 
-        List<RewardLotto> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
+        List<RewardStatus> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
         resultView.displayResult(new LottoResult(lottoRankList).getLottoResult(), paymentPrice);
     }
 

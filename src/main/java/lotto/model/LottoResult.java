@@ -7,11 +7,11 @@ public class LottoResult {
 
     private RankReward rankReward;
 
-    public LottoResult(List<RewardLotto> rewardlottos) {
+    public LottoResult(List<RewardStatus> rewardlottos) {
         this.rankReward = setWinnerResult(rewardlottos);
     }
 
-    private RankReward setWinnerResult(List<RewardLotto> lottoWinerNumbers) {
+    private RankReward setWinnerResult(List<RewardStatus> lottoWinerNumbers) {
         return new RankReward(lottoWinerNumbers.stream()
                                 .map(i -> Rank.valueOf(i.getMatchingCount(), i.isMatchingBonus()))
                                 .collect(Collectors.toList()));

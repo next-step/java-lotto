@@ -4,21 +4,21 @@ import java.util.List;
 
 public class RankReward {
 
-    private List<Rank> winnerLottoNumbers;
+    private List<Rank> rankList;
 
-    public RankReward(List<Rank> winnerLottoNumbers) {
-        this.winnerLottoNumbers = winnerLottoNumbers;
+    public RankReward(List<Rank> rankList) {
+        this.rankList = rankList;
     }
 
     public int getWinnerCount(int matchingCount) {
-        return (int) winnerLottoNumbers
+        return (int) rankList
                         .stream()
                         .filter(o -> o.getLottoRank() == matchingCount)
                         .count();
     }
 
     public int getTotalPrize() {
-        return winnerLottoNumbers.stream().mapToInt(Rank::getWinningMoney).sum();
+        return rankList.stream().mapToInt(Rank::getWinningMoney).sum();
     }
 
 

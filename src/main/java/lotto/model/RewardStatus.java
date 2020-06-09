@@ -2,12 +2,12 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class RewardLotto {
+public class RewardStatus {
 
     private int matchingCount;
     private boolean isMatchingBonus;
 
-    public RewardLotto(int matchingCount, boolean isMatchingBonus) {
+    public RewardStatus(int matchingCount, boolean isMatchingBonus) {
         this.matchingCount = matchingCount;
         this.isMatchingBonus = isMatchingBonus;
     }
@@ -24,7 +24,7 @@ public class RewardLotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RewardLotto that = (RewardLotto) o;
+        RewardStatus that = (RewardStatus) o;
         return matchingCount == that.matchingCount &&
                 isMatchingBonus == that.isMatchingBonus;
     }

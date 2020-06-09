@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
-import lotto.model.RewardLotto;
+import lotto.model.RewardStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ public class LottoTest {
         String[] winnerExpected = lottoNumbers.get(0).stream().map(n -> n.toString()).toArray(String[]::new);
 
         assertThat(lotto.getRewardLotto(winnerExpected, 0).get(0))
-                    .isEqualTo(new RewardLotto(winnerExpected.length, false));
+                    .isEqualTo(new RewardStatus(winnerExpected.length, false));
     }
 
     @DisplayName("로또 보너스 번 테스트")
@@ -39,7 +39,7 @@ public class LottoTest {
         int bonus = Integer.parseInt(winnerExpected[0]);
         winnerExpected[0] = "0";
         assertThat(lotto.getRewardLotto(winnerExpected, bonus).get(0))
-                    .isEqualTo(new RewardLotto(winnerExpected.length - 1, true));
+                    .isEqualTo(new RewardStatus(winnerExpected.length - 1, true));
     }
 
 
