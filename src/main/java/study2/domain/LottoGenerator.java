@@ -12,8 +12,8 @@ public class LottoGenerator {
 		
 		return shuffleLottoNumbers(
 				IntStream.range(
-				Lotto.Min_Lotto_number,
-				Lotto.Max_Lotto_number)
+				Lotto.MIN_LOTTO_NUMBER,
+				Lotto.MAX_LOTTO_NUMBER)
 				.distinct()
 				.boxed()
 				.collect(Collectors.toList())

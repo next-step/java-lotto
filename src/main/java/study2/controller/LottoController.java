@@ -24,7 +24,7 @@ public class LottoController {
 	//	lottonumbers.createLottoNumbers(lottoNumbersList); // 사용되진 않지만 주석처리 해놓겠습니다.
 		
 		// 지난 주 당첨 번호 입력
-		int[] winNumber = rank.winNumSplit(InputView.rankMessages());
+		List<String> winNumber = rank.winNumSplit(InputView.rankMessages());
 		rank.matchNumber(lottoNumbersList, winNumber);
 	}
 }

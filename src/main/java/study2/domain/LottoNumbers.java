@@ -15,11 +15,8 @@ public class LottoNumbers {
 
 	public void createLottoNumbers(List<Lotto> lottoNumbers) {
 
-		// Q : LottoGenerator에서 스트림의 distinct와 limit으로 중복제거 및 사이즈 제한을 하고있습니다.
-		// 이렇게 처리하는 경우와 아래 주석으로 validation으로 처리하는 방법과 어떤 방법이 효율적일까요?
-
-		// validateSize(lottoNumbers);
-		// validateDuplicate(lottoNumbers);
+		validateSize(lottoNumbers);
+		validateDuplicate(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
 
 	}
