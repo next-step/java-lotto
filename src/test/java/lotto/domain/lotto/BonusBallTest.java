@@ -11,6 +11,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class BonusBallTest {
     private WinningNumbers winningNumbers = WinningNumbers.create("2, 3, 4, 5, 6, 7");
 
+    @Test
+    void 생성_테스트() {
+        assertThatCode(() -> BonusBall.create(1, winningNumbers)).doesNotThrowAnyException();
+    }
 
     @Test
     void 보너스볼은_당첨번호와_중복되지않는다() {

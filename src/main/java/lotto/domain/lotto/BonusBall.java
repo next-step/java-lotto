@@ -8,7 +8,7 @@ public class BonusBall {
     public static final int END_RANGE = 45;
     private int bonusBall;
 
-    public BonusBall(int bonusBall, WinningNumbers winningNumbers) {
+    private BonusBall(int bonusBall, WinningNumbers winningNumbers) {
         checkDuplicate(bonusBall, winningNumbers);
         checkInRange(bonusBall);
         this.bonusBall = bonusBall;
@@ -16,6 +16,10 @@ public class BonusBall {
 
     public static BonusBall create(int bonusBall, WinningNumbers winningNumbers) {
         return new BonusBall(bonusBall, winningNumbers);
+    }
+
+    public boolean isMatch(LottoNumbers lottoNumbers) {
+        return lottoNumbers.isExist(this.bonusBall);
     }
 
     private void checkInRange(int bonusBall) {
@@ -29,12 +33,10 @@ public class BonusBall {
     }
 
     private void checkDuplicate(int bonusBall, WinningNumbers winningNumbers) {
-        if (winningNumbers.isExist(bonusBall)){
+        if (winningNumbers.isExist(bonusBall)) {
             throw new IllegalArgumentException("보너스 볼과 당첨 번호가 중복 됩니다");
         }
     }
 
-    public boolean isMatch(LottoNumbers lottoNumbers) {
-        return lottoNumbers.isExist(this.bonusBall);
-    }
+
 }
