@@ -16,6 +16,7 @@ public class LottoTicketTest {
         int bonusBall = 1;
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
 
-        assertThat(new LottoTicket(selectedMyLottoNumbers).checkWinningRank(winningLotto)).isEqualTo(WinningRank.SECOND);
+        assertThat(new LottoTicket(selectedMyLottoNumbers).checkWinningRank(winningLotto))
+                .isEqualTo(WinningRank.SECOND);
     }
 }

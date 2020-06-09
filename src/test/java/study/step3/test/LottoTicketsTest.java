@@ -13,6 +13,7 @@ public class LottoTicketsTest {
     @ParameterizedTest
     @ValueSource(ints = {1,40,100})
     public void publishLottoTicketsTest(int inputCount){
-        assertThat(LottoTickets.publish(inputCount).getLottoTickets()).hasSize(inputCount);
+        assertThat(LottoTickets.publish(inputCount).getLottoTickets())
+                .hasSize(inputCount);
     }
 }

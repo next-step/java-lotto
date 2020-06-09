@@ -11,6 +11,7 @@ public class LottoNumbersTest {
     @RepeatedTest(20)
     @DisplayName("로또 티켓은 6개의 번호로 되어 있는지 테스트")
     public void lottoNumberCountTest(){
-        assertThat(LottoNumbers.getLottoNumbers()).hasSize(6);
+        assertThat(LottoNumbers.getLottoNumbers())
+                .hasSize(6);
     }
 }
