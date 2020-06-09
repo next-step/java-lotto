@@ -12,12 +12,19 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("문자열 덧셈 계산기 클래스 테스트")
 public class StringAddCalculatorTest {
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4>10", "3:2,3:4>12", ">0"}, delimiter = '>')
     @DisplayName("문자열 합을 구한다")
-    void 문자열_다_더하기() {
-        String numbers = "1:2:3:4";
-        StringAddCalculator calculator = new StringAddCalculator(numbers);
-        assertThat(calculator.sum()).isEqualTo(10);
+    void 문자열_다_더하기(String input, int expected) {
+        StringAddCalculator calculator = new StringAddCalculator(input);
+        assertThat(calculator.sum()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("커스컴 문자열 합을 구한다")
+    void 커스텀_문자열_더하기() {
+        StringAddCalculator calculator = new StringAddCalculator("//;\n1;3;4");
+        assertThat(calculator.sum()).isEqualTo(8);
     }
 
     @Test
