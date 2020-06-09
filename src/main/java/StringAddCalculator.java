@@ -1,7 +1,7 @@
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if (isNumeric(text)) {
-            return Integer.parseInt(text);
+            return parseInt(text);
         };
         if(isNull(text)) {
             return 0;
@@ -12,13 +12,12 @@ public class StringAddCalculator {
         return 0;
     }
 
+    private static int parseInt(String text) {
+        return Integer.parseInt(text);
+    }
+
     private static boolean isNumeric(String text) {
-        for (char letter : text.toCharArray()) {
-            if (!Character.isDigit(letter)) {
-                return false;
-            }
-        }
-        return true;
+        return text.chars().allMatch(Character::isDigit);
     }
 
 
