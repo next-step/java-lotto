@@ -1,3 +1,5 @@
+package step1;
+
 public class StringUtil {
 
     static int parseInt(String text) {

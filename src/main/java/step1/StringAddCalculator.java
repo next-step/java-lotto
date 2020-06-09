@@ -1,4 +1,4 @@
-import com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultText;
+package step1;
 
 import java.util.Arrays;
 import java.util.function.IntUnaryOperator;
