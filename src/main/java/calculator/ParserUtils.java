@@ -7,21 +7,21 @@ import java.util.regex.Pattern;
 
 public class ParserUtils {
 
-    private final static String DEFAULT_DELIMITER = ",|:" ;
-    private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private final static int CUSTOM_DELIMITER_INDEX = 1;
-    private final static int TEXT_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int EXPRESSION_INDEX = 2;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     private ParserUtils() {
     }
 
     public static List<Integer> stringToArray(String input) {
 
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
-            return stringListToIntList(matcher.group(TEXT_INDEX).split(customDelimiter));
+            return stringListToIntList(matcher.group(EXPRESSION_INDEX).split(customDelimiter));
         }
 
         String[] splitText = input.split(DEFAULT_DELIMITER);
