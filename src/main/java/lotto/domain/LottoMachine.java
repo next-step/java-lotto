@@ -14,6 +14,8 @@ public class LottoMachine {
     }
 
     public List<Lotto> buy(Price price, List<List<Integer>> manualLottoNumbersList) {
+        validatePurchasable(price, manualLottoNumbersList.size());
+
         int lottoCount = getLottoCount(price);
 
         List<Lotto> manualLottoList = manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList());
@@ -24,11 +26,13 @@ public class LottoMachine {
     }
 
     private int getLottoCount(Price price) {
-        validatePurchasable(price);
         return price.getPrice() / LOTTO_PRICE;
     }
 
-    private void validatePurchasable(Price price) {
+    private void validatePurchasable(Price price, int manualLottoCount) {
+        if (price.getPrice() < manualLottoCount * LOTTO_PRICE) {
+            throw new IllegalArgumentException("price of manualLotto is over `price`");
+        }
         if (price.getPrice() < LOTTO_PRICE) {
             throw new IllegalArgumentException(String.format("`price` is grater than %d", LOTTO_PRICE));
         }
