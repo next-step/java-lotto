@@ -20,7 +20,7 @@ public class LottoMachine {
 
         List<Lotto> manualLottoList = manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList());
 
-        List<Lotto> autoLottoList = IntStream.range(lottoCount - manualLottoList.size(), lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
+        List<Lotto> autoLottoList = IntStream.range(manualLottoList.size(), lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
 
         return Stream.concat(manualLottoList.stream(), autoLottoList.stream()).collect(Collectors.toList());
     }
