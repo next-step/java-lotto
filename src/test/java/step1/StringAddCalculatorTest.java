@@ -3,6 +3,8 @@ package step1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -32,5 +34,13 @@ public class StringAddCalculatorTest {
     void input1NumberReturn1Number(String number) {
         StringAddCalculator calculator = new StringAddCalculator(number);
         assertThat(calculator.sum()).isEqualTo(Integer.parseInt(number));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("null이나 공백을 입력받으면 0리턴")
+    void 널_이나_0_입력_리턴_0(String input) {
+        StringAddCalculator calculator = new StringAddCalculator(input);
+        assertThat(calculator.sum()).isEqualTo(0);
     }
 }

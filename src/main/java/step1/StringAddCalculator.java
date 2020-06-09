@@ -6,6 +6,12 @@ public class StringAddCalculator {
     private static String[] formulaArray;
 
     public StringAddCalculator(String formula) {
+        if (formula == null || formula.trim().equals("")) {
+            formulaArray = new String[]{"0"};
+
+            return;
+        }
+
         formulaArray = Separator.split(formula);
         validateNumbers(formulaArray);
     }
