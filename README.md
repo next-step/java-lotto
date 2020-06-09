@@ -30,9 +30,9 @@
 * 수익률 = 당첨금/로또구매금액 (소수점 둘째자리까지 나머지 절삭)
 * 수익률이 1보다 작으면 손해, 1보다 크면 이득
 
+***
 ##진행중 step3 TODO list
-* ~~lottotickets 의 confirmWinningResult메소드 리팩토링~~ 
-* ~~LottoTickets -> 일급 콜렉션을 사용한다면 calculateTotalPrize / calculateEarningsRate 메소드를스스로 수행 할 수 있을 것 같아요.~~
+done
 
 ## DONE list
 * number 값 포장
@@ -48,3 +48,10 @@
 * LottoTickets -> WinningLottoTicket 과 lastWinningNumbers.getBonusBall() 를 묶어서 객체로 관리
 * LottoTickets -> 일급 콜렉션을 사용한다면 calculateTotalPrize / calculateEarningsRate 메소드를스스로 수행 할 수 있을 것 같아요.
 * checkWinningRank 테스트 방법 찾기
+* BonusBall 은 LottoNumber와 "속성"이 같다 -> 무의미하다
+* LottoResult 클래스 -> 20~21라인 winningRnaks 가 getter 를 사용하지 않고 스스로 찾을 수 있을 것 같아요.
+  그렇게 된다면 이 객체가 필요한지도 고민 해볼 수 있겠어요
+* LottoTicket 클래스 -> 60~62라인 winningLottoTicket 에서 match 메소드를 호출한다면 getter 를 사용하지 않을 수 있을 것 같아요.
+* 코딩 규칙, 객체지향 생활체조 원칙 확인 https://myeonguni.tistory.com/1596
+* LottoNumber 클래스 값 객체의 경우 객체를 재사용하기 좋은데요.
+                      템플릿 메서드 패턴의 장점 중 하나인 객체 재사용을 적용할 수 있을 것 같아요.
