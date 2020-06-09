@@ -40,19 +40,15 @@ public enum Rank {
         return countOfMatch;
     }
 
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public int calculateTotalPrice(int winningCount) {
         return this.winningMoney * winningCount;
     }
 
     @Override
     public String toString() {
-        if(this == SECOND){
+        if (this == SECOND) {
             return "5개 일치, 보너스 볼 일치(30000000원)";
         }
-        return this.countOfMatch + "개 일치 ("+this.winningMoney+"원)";
+        return this.countOfMatch + "개 일치 (" + this.winningMoney + "원)";
     }
 }

@@ -17,7 +17,9 @@ public class LottoApplication {
 
         //당첨번호 입력 및 당첨 결과 출력
         String enteredWinNumber = InputView.enterWinningNumber();
-        WinningResult winningResult = lottoTicket.makeWinningResult(enteredWinNumber);
+        int enteredBonusBall = InputView.enterBonusBall();
+
+        WinningResult winningResult = lottoTicket.makeWinningResult(enteredWinNumber, enteredBonusBall);
         ResultView.printWinningResult(winningResult);
 
         //수익율 출력

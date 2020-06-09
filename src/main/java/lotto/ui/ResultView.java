@@ -16,13 +16,6 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningRate(double winningRate) {
-        System.out.println("총 수익률은 " + winningRate + "입니다.");
-        if (winningRate < 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해의 의미임)");
-        }
-    }
-
     public static void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n————");
         for (Rank rank : Rank.values()) {
@@ -31,6 +24,13 @@ public class ResultView {
             }
             int winningCount = winningResult.tellWinningCount(rank);
             System.out.println(rank + " - " + winningCount + "개");
+        }
+    }
+
+    public static void printWinningRate(double winningRate) {
+        System.out.println("총 수익률은 " + winningRate + "입니다.");
+        if (winningRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해의 의미임)");
         }
     }
 }
