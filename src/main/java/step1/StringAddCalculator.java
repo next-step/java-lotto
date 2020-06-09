@@ -3,16 +3,16 @@ package step1;
 import java.util.Arrays;
 
 public class StringAddCalculator {
-    private String[] formulaArray;
+    private static String[] formulaArray;
 
     public StringAddCalculator(String formula) {
-        //this.formulaArray = formula;
+        formulaArray = Separator.split(formula);
+        validateNumbers(formulaArray);
     }
 
-    public static int sum(String[] array) {
-        validateNumbers(array);
+    public int sum() {
         int total = 0;
-        for (String number : array) {
+        for (String number : formulaArray) {
             total += Integer.parseInt(number);
         }
 
