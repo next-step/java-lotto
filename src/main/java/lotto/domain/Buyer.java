@@ -13,7 +13,7 @@ public class Buyer {
 
     private int money;
     private List<Lotto> lottoList;
-    private Map<Integer, List<Lotto>> winningList = new HashMap<>();
+    private Map<Prize, Integer> winningList = new HashMap<>();
 
     public Buyer(int money) {
         this(money, new ArrayList<>());
@@ -27,10 +27,12 @@ public class Buyer {
     }
 
     private void initWinningList() {
-        winningList.put(3, new ArrayList<>());
-        winningList.put(4, new ArrayList<>());
-        winningList.put(5, new ArrayList<>());
-        winningList.put(6, new ArrayList<>());
+        winningList.put(Prize.FIRST, 0);
+        winningList.put(Prize.SECOND, 0);
+        winningList.put(Prize.THIRD, 0);
+        winningList.put(Prize.FOURTH, 0);
+        winningList.put(Prize.FIFTH, 0);
+        winningList.put(Prize.MISS, 0);
     }
 
     public void buyAutoLotto() {
@@ -55,25 +57,17 @@ public class Buyer {
         return lottoListNumbers;
     }
 
-    public void checkLotto(List<Integer> winningNumbers) {
+    public Map<Prize, Integer> checkLotto(List<Integer> winningNumbers, int bonusNumber) {
+
         lottoList.forEach(lotto -> {
-            int rightNumberCount = lotto.checkRightNumberCount(winningNumbers);
-            putWinningList(rightNumberCount, lotto);
+            Prize prize = lotto.getLottoPrize(winningNumbers, bonusNumber);
+            putWinningList(prize);
         });
+
+        return winningList;
     }
 
-    private void putWinningList(int rightNumberCount, Lotto lotto) {
-        if (rightNumberCount >= WINNING_MIN_COUNT)
-            winningList.get(rightNumberCount).add(lotto);
+    private void putWinningList(Prize prize) {
+        winningList.computeIfPresent(prize, (prizeKey, value) -> ++value);
     }
-
-    public List<Integer> checkWin() {
-        List<Integer> winCountList = new ArrayList();
-        for (int i = WINNING_MIN_COUNT; i <= WINNING_MAX_COUNT; i++) {
-            winCountList.add(winningList.get(i).size());
-        }
-        return winCountList;
-    }
-
-
 }

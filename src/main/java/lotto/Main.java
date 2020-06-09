@@ -1,13 +1,12 @@
 package lotto;
 
-import lotto.domain.Buyer;
-import lotto.domain.ProfitStatistics;
-import lotto.domain.ResultDTO;
+import lotto.domain.*;
 import lotto.view.LottoView;
 import lotto.view.ResultView;
 import lotto.view.TextView;
 
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String args[]) {
@@ -31,13 +30,15 @@ public class Main {
 
         List<Integer> winningNumbers = stringInputScanner.getNumbers();
 
-        buyer.checkLotto(winningNumbers);
-        List<Integer> winningList = buyer.checkWin();
+        lottoView.printAskBonusNumber();
+
+        int bonusNumber = numberInputScanner.getNumber();
+
+        Map<Prize, Integer> winningList = buyer.checkLotto(winningNumbers, bonusNumber);
 
         ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);
 
-        ResultDTO resultDTO = profitStatistics.analysis();
-        resultView.view(resultDTO);
+        resultView.view(new ResultDTO(winningList, profitStatistics.getProfitRatio()));
 
     }
 

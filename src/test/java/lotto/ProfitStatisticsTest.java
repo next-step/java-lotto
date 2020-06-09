@@ -23,16 +23,9 @@ public class ProfitStatisticsTest {
     @BeforeEach
     void setUp() {
         money = 5000;
-        winningList = new ArrayList<>();
-        //4등 갯수
-        winningList.add(0);
-        //3등 갯수
-        winningList.add(1);
-        //2등 갯수
-        winningList.add(1);
-        //1등 갯수
-        winningList.add(0);
-
+        Map<Prize, Integer> winningList = new HashMap<>();
+        winningList.put(Prize.SECOND, 1);
+        winningList.put(Prize.THIRD, 1);
         profitStatistics = new ProfitStatistics(winningList, money);
     }
 
@@ -43,24 +36,8 @@ public class ProfitStatisticsTest {
 
     @Test
     void profitRatioTest() {
-        int sum = Prize.second.getWinningPrize() + Prize.third.getWinningPrize();
+        int sum = Prize.SECOND.getWinningPrize() + Prize.THIRD.getWinningPrize();
         double expectRatio = (double) sum / money;
         assertThat(expectRatio).isEqualTo(profitStatistics.getProfitRatio());
     }
-
-    @Test
-    void analysisTest() {
-        Map<Prize, Integer> prizeMap = new HashMap<>();
-        prizeMap.put(Prize.fouth, 0);
-        prizeMap.put(Prize.third, 1);
-        prizeMap.put(Prize.second, 1);
-        prizeMap.put(Prize.first, 0);
-
-        double profitRatio = profitStatistics.getProfitRatio();
-        ResultDTO expectResultDTO = new ResultDTO(prizeMap, profitRatio);
-        ResultDTO resultDTO = profitStatistics.analysis();
-
-        assertThat(expectResultDTO).isEqualTo(resultDTO);
-    }
-
 }
