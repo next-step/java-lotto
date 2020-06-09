@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.prize.Prize;
+import lotto.domain.prize.Rank;
 import lotto.domain.prize.WinningResult;
 
 import java.util.stream.IntStream;
@@ -25,9 +25,9 @@ public class ResultView {
 
     public static void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n————");
-        for(Prize prize : Prize.values()){
-            int winningCount = winningResult.tellWinningCount(prize.getMatch());
-            System.out.println(prize.getMatch()+ "개 일치(" + prize.getPrice() + "원) - " + winningCount + "개");
+        for(Rank rank : Rank.values()){
+            int winningCount = winningResult.tellWinningCount(rank.getCountOfMatch());
+            System.out.println(rank.getCountOfMatch()+ "개 일치(" + rank.getWinningMoney() + "원) - " + winningCount + "개");
         }
     }
 }

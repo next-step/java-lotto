@@ -26,9 +26,9 @@ public class WinningResult {
 
     private int calculateWinningPrize() {
         int winPrize = 0;
-        for (Prize prize : Prize.values()) {
-            int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
-            winPrize += prize.calculateTotalPrice(winningCount);
+        for (Rank rank : Rank.values()) {
+            int winningCount = winningResult.getOrDefault(rank.getCountOfMatch(), 0);
+            winPrize += rank.calculateTotalPrice(winningCount);
         }
         return winPrize;
     }
