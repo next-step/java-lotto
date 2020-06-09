@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
-    private final static int INIT_INDEX = 0;
+    private static final int INIT_INDEX = 0;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -31,8 +31,8 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoResult confirmWinningResult(WinningLotto lastWinningNumbers) {
-        return new LottoResult(checkLottoRank(lastWinningNumbers));
+    public WinningRanks confirmWinningResult(WinningLotto lastWinningNumbers) {
+        return checkLottoRank(lastWinningNumbers);
     }
 
     private WinningRanks checkLottoRank(WinningLotto lastWinningNumbers) {
