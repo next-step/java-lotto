@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private static final String CUSTOM_DELIMITER_WRAPPER = "\n";
     private static final String DEFAULT_DELIMITER = ",|\\:";
     private static final int ZERO = 0;
 
@@ -12,30 +13,44 @@ public class StringAddCalculator {
         if(text.isEmpty()) {
             return ZERO;
         }
-        if(text.contains("\n")){
-            String delimiter = getDelimiter(text);
-            String calculableText = getCalculableText(text);
-            return addCustom(calculableText, delimiter);
-        }
         if(isNumeric(text)) {
             return parseInt(text);
         };
-
-        return addDefault(text);
+        if(hasCustomDelimiter(text)){
+            return sumCustom(text);
+        }
+        return sum(text, DEFAULT_DELIMITER);
     }
 
-    private static int addCustom(String text, String delimiter) {
-        String[] split = text.split(delimiter);
-        return Arrays.stream(split)
+    private static int sumCustom(String text) {
+        String delimiter = getDelimiter(text);
+        String calculableText = getCalculableText(text);
+        return sum(calculableText, delimiter);
+    }
+
+    private static int sum(String text, String delimiter) {
+        String[] numbers = text.split(delimiter);
+        return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
 
-    private static int addDefault(String text) {
-        String[] split = text.split(DEFAULT_DELIMITER);
-        return Arrays.stream(split)
-                .mapToInt(Integer::parseInt)
-                .sum();
+    public static String getDelimiter(String text) {
+        int index = indexOfSplit(text);
+        return text.substring(2, index);
+    }
+
+    public static String getCalculableText(String text) {
+        int index = indexOfSplit(text);
+        return text.substring(index + 1);
+    }
+
+    private static boolean hasCustomDelimiter(String text) {
+        return text.contains(CUSTOM_DELIMITER_WRAPPER);
+    }
+
+    private static int indexOfSplit(String text) {
+        return text.indexOf(CUSTOM_DELIMITER_WRAPPER);
     }
 
     private static int parseInt(String text) {
@@ -50,13 +65,5 @@ public class StringAddCalculator {
         return text == null;
     }
 
-    public static String getDelimiter(String text) {
-        int index = text.indexOf("\n");
-        return text.substring(2, index);
-    }
 
-    public static String getCalculableText(String text) {
-        int index = text.indexOf("\n");
-        return text.substring(index + 1);
-    }
 }
