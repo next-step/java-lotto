@@ -1,11 +1,11 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StringParser {
 
-    public static List<Integer> getParseNumbers(String input) {
+    public static Set<Integer> getParseNumbers(String input) {
         return toIntegers(getSplits(input));
     }
 
@@ -14,8 +14,8 @@ public class StringParser {
         return input.split(",");
     }
 
-    private static List<Integer> toIntegers(String[] split) {
-        List<Integer> result = new ArrayList<>();
+    private static Set<Integer> toIntegers(String[] split) {
+        Set<Integer> result = new HashSet<>();
 
         try {
             for (String number : split) {

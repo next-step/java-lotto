@@ -2,13 +2,13 @@ package lotto.view;
 
 import lotto.StringParser;
 
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 
     private int purchasePrice;
-    private List<Integer> winningNumbers;
+    private Set<Integer> winningNumbers;
     private final Scanner sc;
 
     public InputView() {
@@ -38,7 +38,7 @@ public class InputView {
         return purchasePrice;
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Set<Integer> getWinningNumbers() {
         return winningNumbers;
     }
 }
