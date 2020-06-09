@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
@@ -14,7 +15,12 @@ public class LottoMachine {
 
     public List<Lotto> buy(Price price, List<List<Integer>> manualLottoNumbersList) {
         int lottoCount = getLottoCount(price);
-        return IntStream.range(0, lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
+
+        List<Lotto> manualLottoList = manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList());
+
+        List<Lotto> autoLottoList = IntStream.range(lottoCount - manualLottoList.size(), lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
+
+        return Stream.concat(manualLottoList.stream(), autoLottoList.stream()).collect(Collectors.toList());
     }
 
     private int getLottoCount(Price price) {
