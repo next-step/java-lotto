@@ -25,7 +25,7 @@ class LottoNumberPoolTest {
     @DisplayName("LottoPool 안에 있는 여러개의 로또번호를 정상적으로 가져온다.")
     @Test
     void testGetNumbersTest() {
-        List<LottoNumber> lottoNumbers = LottoNumberPool.get(1,2,3);
+        List<LottoNumber> lottoNumbers = LottoNumberPool.get(List.of(1,2,3));
         assertThat(lottoNumbers).containsOnly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3));
     }
 

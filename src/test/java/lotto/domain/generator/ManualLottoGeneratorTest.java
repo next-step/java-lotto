@@ -2,6 +2,7 @@ package lotto.domain.generator;
 
 import lotto.domain.LottoNumberPool;
 import lotto.domain.data.Lotto;
+import lotto.domain.data.LottoNumber;
 import lotto.domain.data.ManualLottoMemo;
 import lotto.domain.generator.ManualLottoGenerator;
 import lotto.util.Split;
@@ -17,15 +18,15 @@ class ManualLottoGeneratorTest {
     @DisplayName("수동번호 메모대로 lotto 가 생성된다,")
     @Test
     public void generatorTest() {
-        String lottoMemo1 = "1,2,3,4,5,6";
-        String lottoMemo2 = "1,2,3,7,5,8";
-        ManualLottoMemo memo = ManualLottoMemo.of(List.of(lottoMemo1, lottoMemo2));
+        List<Integer> lottoMemo1 = List.of(1,2,3,4,5,6);
+        List<Integer> lottoMemo2 = List.of(1,2,3,7,5,8);
+        ManualLottoMemo memo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "1,2,3,7,5,8"));
 
         List<Lotto> lottos = ManualLottoGenerator.generate(memo);
         assertThat(lottos.size()).isEqualTo(2);
         assertThat(lottos).contains(
-                Lotto.of(LottoNumberPool.get(Split.from(lottoMemo1, ","))),
-                Lotto.of(LottoNumberPool.get(Split.from(lottoMemo2, ","))));
+                Lotto.of(LottoNumberPool.get(lottoMemo1)),
+                Lotto.of(LottoNumberPool.get(lottoMemo2)));
     }
 
     @DisplayName("수동번호를 메모를 전달하지 않을 경우 빈 List가 전달된다.")

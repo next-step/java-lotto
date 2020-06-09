@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
-    private final static List<LottoNumber> DEFAULT_WINNING_NUMBERS = LottoNumberPool.get(1,2,3,4,5,6);
+    private final static List<LottoNumber> DEFAULT_WINNING_NUMBERS = LottoNumberPool.get(List.of(1,2,3,4,5,6));
 
     @DisplayName("보너스번호가 당첨번호와 중복될 경우 IllegalArgument 예외가 발생한다.")
     @Test
