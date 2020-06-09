@@ -19,8 +19,9 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
-                .append(lottoTicket.getLottoCount())
-                .append("장을 구매했습니다.")
+                .append(MessageFormat.format("수동으로 {0}장, 자동으로 {1}장을 구매했습니다.",
+                        lottoTicket.getManualCount(),
+                        lottoTicket.getAutoCount()))
                 .append(LINE_FEED);
 
         lottoTicket.getLottos().stream()

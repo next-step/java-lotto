@@ -20,7 +20,7 @@ public class LottoTest {
     @MethodSource("provideLottoNumbersForCreate")
     @ParameterizedTest(name = "로또 번호:: {0}")
     void createInvalidRange(List<LottoNumber> lottoNumbers) {
-        assertThatThrownBy(() -> Lotto.create(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.createAuto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,7 +39,7 @@ public class LottoTest {
                 .mapToObj(i -> LottoNumber.valueOf(duplicateNumber))
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> Lotto.create(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.createAuto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -49,7 +49,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        Lotto lotto = Lotto.create(lottoNumbers);
+        Lotto lotto = Lotto.createAuto(lottoNumbers);
 
         lottoNumbers.forEach(lottoNumber -> assertThat(lotto.containsNumber(lottoNumber)).isTrue());
     }
@@ -60,7 +60,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        Lotto lotto = Lotto.create(lottoNumbers);
+        Lotto lotto = Lotto.createAuto(lottoNumbers);
 
         assertThat(lotto.containsNumber(LottoNumber.valueOf(7))).isFalse();
     }

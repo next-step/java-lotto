@@ -19,8 +19,16 @@ public class LottoTicket {
         return new LottoTicket(lottos);
     }
 
-    public int getLottoCount() {
-        return this.lottos.size();
+    public int getManualCount() {
+        return (int) this.lottos.stream()
+                .filter(Lotto::isManual)
+                .count();
+    }
+
+    public int getAutoCount() {
+        return (int) this.lottos.stream()
+                .filter(Lotto::isAuto)
+                .count();
     }
 
     public List<Lotto> getLottos() {

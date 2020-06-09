@@ -20,15 +20,15 @@ public class LottoTicketTest {
     @DisplayName("입력한 로또 개수 반환")
     @Test
     void getTicketCount() {
-        LottoTicket lottoTicket = LottoTicket.create(LottoData.createLottoTickets(5));
+        LottoTicket lottoTicket = LottoTicket.create(LottoData.createAutoLottos(5));
 
-        assertThat(lottoTicket.getLottoCount()).isEqualTo(5);
+        assertThat(lottoTicket.getAutoCount()).isEqualTo(5);
     }
 
     @DisplayName("로또 목록을 변경하면 UnsupportedOperationException 예외 발생")
     @Test
     void getLottoTicketsExceptionThrown() {
-        LottoTicket lottoTicket = LottoTicket.create(LottoData.createLottoTickets(5));
+        LottoTicket lottoTicket = LottoTicket.create(LottoData.createAutoLottos(5));
 
         List<Lotto> unmodifiableLottos = lottoTicket.getLottos();
 

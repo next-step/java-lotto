@@ -1,10 +1,12 @@
 package step2.view;
 
+import step2.model.Lotto;
 import step2.model.LottoNumber;
 import step2.model.Money;
 import step2.model.MoneyAmount;
 import step2.util.LottoNumberSplitter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -26,18 +28,31 @@ public class InputView {
 
     public static int getManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int manualCount = scanner.nextInt();
 
-        return manualCount;
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<LottoNumber> getManualLottoNumber() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        String manualLottoNumbers = scanner.nextLine();
+    public static List<Lotto> getManualLottoNumber(int manualCount) {
+        if (manualCount == 0) {
+            return new ArrayList<>();
+        }
 
-        return LottoNumberSplitter.split(manualLottoNumbers).stream()
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<Lotto> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualLottoNumbers.add(readManualLotto());
+        }
+
+        return manualLottoNumbers;
+    }
+
+    public static Lotto readManualLotto() {
+        List<LottoNumber> lottoNumbers = LottoNumberSplitter.split(scanner.nextLine()).stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
+
+        return Lotto.createManual(lottoNumbers);
     }
 
     public static Set<LottoNumber> getWinningNumbers() {

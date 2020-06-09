@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step2.exception.NotEnoughMoneyException;
 
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,9 +35,9 @@ public class LottoMachineTest {
     @MethodSource("provideMoneyForBuyTicket")
     @ParameterizedTest(name = "금액을 ''{0}'' 입력하면 ''{1}''장 반환")
     void buyTicket(MoneyAmount moneyAmount, int expectedTicketCount) {
-        LottoTicket lottoTicket = LOTTO_MACHINE.buyTicket(moneyAmount);
+        LottoTicket lottoTicket = LOTTO_MACHINE.buyTicket(moneyAmount, new ArrayList<>());
 
-        assertThat(lottoTicket.getLottoCount()).isEqualTo(expectedTicketCount);
+        assertThat(lottoTicket.getAutoCount()).isEqualTo(expectedTicketCount);
     }
 
     private static Stream<Arguments> provideMoneyForBuyTicket() {
@@ -51,7 +52,7 @@ public class LottoMachineTest {
     @DisplayName("입력한 금액이 티켓 가격보다 적으면 예외 발생")
     @Test
     void buyTicketExceptionThrown() {
-        assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(LottoData.createMoneyAmount(999)))
+        assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(LottoData.createMoneyAmount(999), new ArrayList<>()))
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 }
