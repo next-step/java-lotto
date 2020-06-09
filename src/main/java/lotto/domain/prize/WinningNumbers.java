@@ -68,4 +68,7 @@ public class WinningNumbers {
         return 0;
     }
 
+    public boolean isExist(int number) {
+        return winningNumbers.contains(number);
+    }
 }
