@@ -15,11 +15,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoResultTest {
 
     List<Lotto> lottos;
+    Set<Integer> winningNumbers;
 
     @BeforeEach
     void setUp(){
         Lotto lotto1 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lotto lotto2 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
+
+        winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10));
 
         lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
     }
@@ -40,8 +43,6 @@ class LottoResultTest {
     @DisplayName("LottoResult 생성시 로또 목록과 당첨번호를 넘기면 Match 생성")
     @Test
     void makeMatchesTest(){
-        // given
-        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10));
 
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
@@ -59,8 +60,6 @@ class LottoResultTest {
         Lotto lotto3 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 6, 7)));
         lottos.add(lotto3);
 
-        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10));
-
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
         Map<Match, Integer> matchResult = lottoResult.getMatchResult();
@@ -73,7 +72,6 @@ class LottoResultTest {
     @DisplayName("LottoResult 생성 후 구매금액 입력 시 수익률 반환")
     @Test
     void whenInputPurchasePriceReturnRate(){
-        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10));
 
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
