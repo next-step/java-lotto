@@ -33,4 +33,8 @@ public class BonusBall {
             throw new IllegalArgumentException("보너스 볼과 당첨 번호가 중복 됩니다");
         }
     }
+
+    public boolean isMatch(LottoNumbers lottoNumbers) {
+        return lottoNumbers.isExist(this.bonusBall);
+    }
 }

@@ -1,11 +1,14 @@
 package lotto.domain.lotto;
 
+import lotto.domain.prize.Rank;
+import lotto.domain.prize.WinningResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -19,7 +22,7 @@ class LottoTicketTest {
         int quantity = 5;
         LottoTicket lottoTicket = LottoTicket.create(quantity);
 
-        assertThatCode(() -> lottoTicket.tellLottoNumbers(quantity-1)).doesNotThrowAnyException();
+        assertThatCode(() -> lottoTicket.tellLottoNumbers(quantity - 1)).doesNotThrowAnyException();
         assertThatThrownBy(() -> lottoTicket.tellLottoNumbers(quantity)).isInstanceOf(IndexOutOfBoundsException.class);
     }
 
@@ -34,8 +37,24 @@ class LottoTicketTest {
     void 당첨결과를_생성한다() {
         String enteredWinNumber = "1, 11, 17, 23, 31, 43";
         LottoTicket lottoTicket = LottoTicket.create(1);
+        int enteredBonusBall = 7;
         assertThatCode(() -> {
-            lottoTicket.makeWinningResult(enteredWinNumber);
+            lottoTicket.makeWinningResult(enteredWinNumber, enteredBonusBall);
         }).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 당첨통계를_만든다() {
+        LottoNumbers lottoNumbers = LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.createOne(Arrays.asList(lottoNumbers));
+
+        String enteredWinNumber = "1, 2, 3, 4, 5, 7";
+        int enteredBonusBall = 6;
+
+        WinningResult winningResult = lottoTicket.makeWinningResult(enteredWinNumber, enteredBonusBall);
+
+        assertThat(winningResult.tellWinningCount(Rank.FIFTH)).isEqualTo(0);
+        assertThat(winningResult.tellWinningCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(winningResult.tellWinningCount(Rank.MISS)).isEqualTo(0);
     }
 }

@@ -40,7 +40,6 @@ public class LottoNumbers {
         }
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,4 +54,7 @@ public class LottoNumbers {
     }
 
 
+    public boolean isExist(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
 }

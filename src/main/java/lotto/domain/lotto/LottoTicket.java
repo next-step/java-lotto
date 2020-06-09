@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.prize.Rank;
 import lotto.domain.prize.WinningNumbers;
 import lotto.domain.prize.WinningResult;
 
@@ -19,23 +20,37 @@ public class LottoTicket {
         this.lottoTicket = addLottoNumbers(quantity);
     }
 
+    private LottoTicket(List<LottoNumbers> lottoTicket) {
+        this.lottoTicket = lottoTicket;
+    }
+
     public static LottoTicket create(int quantity) {
         return new LottoTicket(quantity);
+    }
+
+    public static LottoTicket createOne(List<LottoNumbers> lottoTicket) {
+        return new LottoTicket(lottoTicket);
     }
 
     public List<Integer> tellLottoNumbers(int i) {
         return lottoTicket.get(i).getLottoNumbers();
     }
 
-    public WinningResult makeWinningResult(String enteredWinNumber) {
+    public WinningResult makeWinningResult(String enteredWinNumber, int enteredBonusBall) {
         WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
-        Map<Integer, Integer> winningCountMap = new HashMap<>();
+        BonusBall bonusBall = BonusBall.create(enteredBonusBall, winningNumbers);
+        Map<Rank, Integer> winningCountMap = new HashMap<>();
+
         for (LottoNumbers lottoNumbers : this.lottoTicket) {
             int matchCount = winningNumbers.findMatchCount(lottoNumbers);
-            putWinningCount(winningCountMap, matchCount);
+            boolean matchBonus = bonusBall.isMatch(lottoNumbers);
+            Rank rank = Rank.valueOf(matchCount, matchBonus);
+            winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
         }
+
         return WinningResult.create(winningCountMap);
     }
+
 
     private void checkQuantity(int quantity) {
         if (quantity < 1) {
@@ -47,12 +62,6 @@ public class LottoTicket {
         return IntStream.range(0, quantity)
                 .mapToObj(i -> LottoNumbers.create())
                 .collect(Collectors.toList());
-    }
-
-    private void putWinningCount(Map<Integer, Integer> winningCountMap, int matchCount) {
-        if (matchCount > 2) {
-            winningCountMap.put(matchCount, winningCountMap.getOrDefault(matchCount, 0) + 1);
-        }
     }
 
     @Override
