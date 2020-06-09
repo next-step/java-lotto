@@ -21,7 +21,7 @@ public class LottoGame {
 
         LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
         List<Lotto> lottoList = lottoMachine.buy(price, manualLottoNumbersList);
-        resultView.printLottoCount(lottoList.size());
+        resultView.printLottoCount(manualLottoNumbersList.size(), lottoList.size() - manualLottoNumbersList.size());
 
         lottoList.forEach(resultView::printLotto);
 

@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
-    private static final String PRINT_LOTTO_COUNT = "%d개를 구매했습니다.";
+    private static final String PRINT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String PRINT_STATISTIC = "당첨 통계\n---------";
     private static final String PRINT_PRIZE = "%s(%d원)- %d개";
     private static final String PRINT_YIELD = "총 수익률은 %.2f입니다.";
 
-    public void printLottoCount(int count) {
-        System.out.println(String.format(PRINT_LOTTO_COUNT, count));
+    public void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println(String.format(PRINT_LOTTO_COUNT, manualLottoCount, autoLottoCount));
     }
 
     public void printLotto(Lotto lotto) {
