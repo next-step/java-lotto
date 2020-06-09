@@ -25,9 +25,12 @@ public class ResultView {
 
     public static void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n————");
-        for(Rank rank : Rank.values()){
-            int winningCount = winningResult.tellWinningCount(rank.getCountOfMatch());
-            System.out.println(rank.getCountOfMatch()+ "개 일치(" + rank.getWinningMoney() + "원) - " + winningCount + "개");
+        for (Rank rank : Rank.values()) {
+            if(rank == Rank.MISS){
+                continue;
+            }
+            int winningCount = winningResult.tellWinningCount(rank);
+            System.out.println(rank + " - " + winningCount + "개");
         }
     }
 }
