@@ -12,7 +12,7 @@ public class LottoMachine {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> buy(Price price) {
+    public List<Lotto> buy(Price price, List<List<Integer>> manualLottoNumbersList) {
         int lottoCount = getLottoCount(price);
         return IntStream.range(0, lottoCount).mapToObj(i -> lottoGenerator.generate()).collect(Collectors.toList());
     }

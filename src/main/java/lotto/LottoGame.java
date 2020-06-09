@@ -7,6 +7,7 @@ import lotto.domain.Price;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -18,7 +19,7 @@ public class LottoGame {
         Price price = inputView.insertPrice();
 
         LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
-        List<Lotto> lottoList = lottoMachine.buy(price);
+        List<Lotto> lottoList = lottoMachine.buy(price, Collections.emptyList());
         resultView.printLottoCount(lottoList.size());
 
         lottoList.forEach(resultView::printLotto);
