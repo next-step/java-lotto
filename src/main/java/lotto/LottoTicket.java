@@ -35,7 +35,7 @@ public class LottoTicket {
         if(number <= 0) {
             throw new IllegalArgumentException("Lotto numbers must be positive number.");
         }
-        if(number >45) {
+        if(number > RandomPicker.LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("Lotto numbers must be less than 46.");
         }
     }
