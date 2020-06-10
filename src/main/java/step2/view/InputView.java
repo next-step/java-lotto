@@ -1,9 +1,12 @@
 package step2.view;
 
+import static step2.view.Messages.REQUEST_BONUS_NUMBER;
 import static step2.view.Messages.REQUEST_LAST_WEEK_WINNING_NUMBER;
 import static step2.view.Messages.REQUEST_PRICE;
 
+import java.util.List;
 import java.util.Scanner;
+import step2.util.Utils;
 
 public class InputView {
 
@@ -18,8 +21,13 @@ public class InputView {
         return Integer.valueOf(scanner.nextLine());
     }
 
-    public String inputLastWeekWinningNumbers() {
+    public List<Integer> inputLastWeekWinningNumbers() {
         System.out.println(REQUEST_LAST_WEEK_WINNING_NUMBER);
-        return scanner.nextLine();
+        return Utils.convertStringToIntegerList(Utils.convertCsvStringToList(scanner.nextLine()));
+    }
+
+    public int inputBonusNumber() {
+        System.out.println(REQUEST_BONUS_NUMBER);
+        return Integer.valueOf(scanner.nextLine());
     }
 }

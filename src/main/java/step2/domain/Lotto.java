@@ -1,71 +1,34 @@
 package step2.domain;
 
 import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
+import static step2.view.ErrorMessages.INVALID_WINNING_NUMBERS;
 
 import java.util.List;
-import java.util.Objects;
+import org.apache.commons.collections4.CollectionUtils;
 
-public class Lotto extends AbstractLotto {
+public class Lotto {
 
-    private int hitCount;
-    private int prize;
+    private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        super.setLottoNumbers(lottoNumbers);
-        this.hitCount = 0;
-        this.prize = 0;
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void drawLotto(List<Integer> winningNumbers) {
-        winningNumbers.stream().forEach(this::findHit);
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private void findHit(Integer winningNumber) {
-        if (getLottoNumbers().contains(winningNumber)) {
-            this.hitCount++;
+    public void validateWinningNumbers() throws IllegalArgumentException {
+
+        if (CollectionUtils.size(lottoNumbers) != LOTTO_SELECTION_COUNT) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }
-    }
-
-    public int getPrize() {
-        return prize;
-    }
-
-    public void setPrize(List<Integer> winningNumbers) {
-
-        drawLotto(winningNumbers);
-
-        if (this.hitCount >= Prize.FORTH.getHitCount()) {
-            this.prize = this.hitCount % LOTTO_SELECTION_COUNT + 1;
-        }
-    }
-
-    public int getCashPrice() {
-        return Prize.getCashPrize(this.prize);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-            "lottoNumbers=" + getLottoNumbers() +
-            ", hitCount=" + hitCount +
-            ", prize=" + prize +
+            "lottoNumbers=" + lottoNumbers +
             '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getLottoNumbers());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(getLottoNumbers(), lotto.getLottoNumbers());
     }
 }

@@ -1,50 +1,30 @@
 package step2.domain;
 
+import java.util.Map;
+
 public class LottoGameResultDto {
 
     private final double earningRate;
-    private final int firstPrizeCount;
-    private final int secondPrizeCount;
-    private final int thirdPrizeCount;
-    private final int forthPrizeCount;
+    private Map<Integer, Integer> prizeResult;
 
-    public LottoGameResultDto(double earningRate, int firstPrizeCount, int secondPrizeCount,
-        int thirdPrizeCount, int forthPrizeCount) {
+    public LottoGameResultDto(double earningRate, Map<Integer, Integer> prizeResult) {
         this.earningRate = earningRate;
-        this.firstPrizeCount = firstPrizeCount;
-        this.secondPrizeCount = secondPrizeCount;
-        this.thirdPrizeCount = thirdPrizeCount;
-        this.forthPrizeCount = forthPrizeCount;
+        this.prizeResult = prizeResult;
     }
 
     public double getEarningRate() {
         return earningRate;
     }
 
-    public int getFirstPrizeCount() {
-        return firstPrizeCount;
-    }
-
-    public int getSecondPrizeCount() {
-        return secondPrizeCount;
-    }
-
-    public int getThirdPrizeCount() {
-        return thirdPrizeCount;
-    }
-
-    public int getForthPrizeCount() {
-        return forthPrizeCount;
+    public Map<Integer, Integer> getPrizeResult() {
+        return prizeResult;
     }
 
     @Override
     public String toString() {
         return "LottoGameResultDto{" +
             "earningRate=" + earningRate +
-            ", firstPrizeCount=" + firstPrizeCount +
-            ", secondPrizeCount=" + secondPrizeCount +
-            ", thirdPrizeCount=" + thirdPrizeCount +
-            ", forthPrizeCount=" + forthPrizeCount +
+            ", prizeResult=" + prizeResult +
             '}';
     }
 }

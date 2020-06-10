@@ -1,59 +1,28 @@
 package step2.domain;
 
-import java.util.List;
+import static step2.Constants.EMPTY_COUNT;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoGameResult {
 
-    private List<Lotto> lottos;
-    private WinningLotto winningLotto;
-    private int cashPrize;
-    private UserPrice userPrice;
-    private double earningRate;
-    private int firstPrizeCount;
-    private int secondPrizeCount;
-    private int thirdPrizeCount;
-    private int forthPrizeCount;
+    private Map<Integer, Integer> prizeResult;
 
-    public LottoGameResult(List<Lotto> lottos, String winningNumbers, UserPrice userPrice) {
-        this.lottos = lottos;
-        this.winningLotto = new WinningLotto(winningNumbers);
-        this.cashPrize = 0;
-        this.userPrice = userPrice;
+    public LottoGameResult() {
+        prizeResult = new HashMap<>();
+        Arrays.stream(Prize.values())
+            .forEach(prize -> prizeResult.put(prize.getGrade(), EMPTY_COUNT));
     }
 
-    public LottoGameResultDto getResult() {
-        this.earningRate = getEarningRate();
-        countPrize();
+    public LottoGameResultDto getResult(LottoSheet lottoSheet, WinningLotto winningLotto,
+        UserPrice userPrice) {
+
+        lottoSheet.drawPrize(winningLotto, prizeResult);
 
         return new LottoGameResultDto(
-            earningRate,
-            firstPrizeCount,
-            secondPrizeCount,
-            thirdPrizeCount,
-            forthPrizeCount);
-    }
-
-    private void countPrize() {
-        this.firstPrizeCount = (int) this.lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.FIRST.getGrade())
-            .count();
-        this.secondPrizeCount = (int) this.lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.SECOND.getGrade())
-            .count();
-        this.thirdPrizeCount = (int) this.lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.THIRD.getGrade())
-            .count();
-        this.forthPrizeCount = (int) this.lottos.stream()
-            .filter(lotto -> lotto.getPrize() == Prize.FORTH.getGrade())
-            .count();
-    }
-
-    private void setCashPrize() {
-        this.lottos.stream().forEach(lotto -> this.cashPrize += lotto.getCashPrice());
-    }
-
-    private double getEarningRate() {
-        setCashPrize();
-        return (double) this.cashPrize / this.userPrice.getPrice();
+            userPrice.getEarningRate(lottoSheet, winningLotto),
+            prizeResult);
     }
 }

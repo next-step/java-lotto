@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.jws.soap.SOAPBinding.Use;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,10 +25,10 @@ class LottoGeneratorTest {
     public void generateLottos() {
         //given
         UserPrice userPrice = new UserPrice(5000);
-        Lotto lottoResult = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        UserLotto lottoResult = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        List<Lotto> lottos = lottoGenerator.generateLottos(userPrice);
+        List<UserLotto> lottos = lottoGenerator.generateLottos(userPrice);
 
         //then
         assertThat(lottos).hasSize(userPrice.getPrice() / 1000);

@@ -1,70 +1,32 @@
 package step2.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Java6Assertions.catchThrowable;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.test.util.ReflectionTestUtils;
 
 class WinningLottoTest {
 
-    @Test
-    public void convertStringToIntegerListTest() {
-        //given
-        List<String> integerStringList = Arrays.asList("1", "2", "3");
-
-        //when
-        List<Integer> integerList = ReflectionTestUtils
-            .invokeMethod(new WinningLotto("1,2,3,4,5,6"),
-                "convertStringToIntegerList",
-                integerStringList);
-
-        //then
-        assertThat(integerList).hasSize(3);
-        assertThat(integerList).containsExactly(1, 2, 3);
-    }
-
-    private static Stream<Arguments> parseWinningNumbersTestCase() {
+    private static Stream<Arguments> validateWinningNumbersTestCase() {
         return Stream.of(
-            Arguments.of("1,2,3,4,5,6", Arrays.asList("1", "2", "3", "4", "5", "6")),
-            Arguments.of("1, 2, 3, 4, 5, 6", Arrays.asList("1", "2", "3", "4", "5", "6")),
-            Arguments.of("1,2, 3, 4,5, 6", Arrays.asList("1", "2", "3", "4", "5", "6"))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), false),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5), false),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("parseWinningNumbersTestCase")
-    public void parseWinningNumbersTest(String input, List<String> expected) {
-        //when
-        List<String> parsedWinningNumbers = ReflectionTestUtils
-            .invokeMethod(new WinningLotto("1,2,3,4,5,6"),
-                "parseWinningNumbers",
-                input);
-        //then
-        assertThat(parsedWinningNumbers).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"a,b,c,d,e,f/false", "a,1,2,3,4,5/false", "1,2,3,4,5,/false",
-        "1,2,3,4,5,6/true"}, delimiter = '/')
-    public void validateWinningNumbersTest(String input, String expected) {
-        //when
-        Throwable thrown = catchThrowable(() ->
-            ReflectionTestUtils
-                .invokeMethod(new WinningLotto("1,2,3,4,5,6"),
-                    "validateWinningNumbers",
-                    Integer.valueOf(input)));
-
-        //then
+    @MethodSource("validateWinningNumbersTestCase")
+    public void validateWinningNumbersTest(List<Integer> input, Boolean expected) {
+        //when&then
         if (false == Boolean.valueOf(expected)) {
-            assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(
+                () -> new Lotto(input).validateWinningNumbers())
+                .isInstanceOf(IllegalArgumentException.class);
         }
     }
 }
