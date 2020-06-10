@@ -1,12 +1,9 @@
 package study.lotto;
 
 import study.lotto.helper.LottoHelper;
-import study.lotto.model.LottoResult;
 import study.lotto.model.Lottos;
-import study.lotto.model.WinningLottoInfo;
-import study.lotto.utils.StatisticUtils;
+import study.lotto.service.LottoService;
 import study.lotto.view.InputView;
-import study.lotto.view.ResultView;
 
 public class LottoGame {
 
@@ -14,16 +11,10 @@ public class LottoGame {
         LottoHelper lottoHelper = new LottoHelper(InputView.scanPurchaseAmount());
         lottoHelper.setManualLottoCount(InputView.scanManualLottoCount());
 
-        Lottos lottos = Lottos.of(InputView.scanManualLottoNumbers(lottoHelper.getManualLottoCount()));
+        LottoService lottoService = new LottoService();
 
-        lottos.addAll(Lottos.of(lottoHelper.getAutoLottoCount()));
+        Lottos lottos = lottoService.purchaseLottos(lottoHelper);
 
-        ResultView.printPurchaseMessage(lottoHelper.getManualLottoCount(), lottoHelper.getAutoLottoCount(), lottos);
-
-        WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(InputView.scanWinningNumbers(), InputView.scanBonusNumber());
-
-        LottoResult lottoResult = LottoResult.produce(lottos, winningLottoInfo);
-
-        ResultView.printStatisticsMessage(lottoResult, StatisticUtils.calculateEarningRate(lottoHelper.getPurchaseAmount(), lottoResult));
+        lottoService.checkLottoResult(lottos, lottoHelper);
     }
 }

@@ -18,7 +18,7 @@ public class LottoHelper {
 
     public void setManualLottoCount(int manualLottoCount) {
         this.manualLottoCount = manualLottoCount;
-        autoLottoCount = getLottoCount() - manualLottoCount;
+        this.autoLottoCount = getLottoCount() - manualLottoCount;
     }
 
     public int getPurchaseAmount() {
