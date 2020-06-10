@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIFTH(3, 5_000, false),
@@ -32,6 +34,12 @@ public enum Rank {
         }
 
         return findRank;
+    }
+    
+    public static List<Rank> successValues(){
+        return Arrays.stream(values())
+                .filter(rank -> !rank.equals(MISS))
+                .collect(Collectors.toList());
     }
 
     public int getMatchCount() {

@@ -22,9 +22,7 @@ public class ResultView {
         System.out.println("---------");
         Map<Rank, Long> matchResult = lottoResult.getMatches();
 
-        Rank[] values = Rank.values();
-        for (int i = 0; i < values.length - 1; i++) {
-            Rank rank = values[i];
+        for (Rank rank : Rank.successValues()) {
             System.out.println(rank.getMatchCount() + "개 일치" + secondPrizeCheck(rank) + "(" + rank.getPrizeMoney() + ")- " + matchResult.getOrDefault(rank, 0L) + "개");
         }
 
