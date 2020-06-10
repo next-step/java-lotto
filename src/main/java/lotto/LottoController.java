@@ -19,14 +19,16 @@ public class LottoController {
     private List<Integer> winningNumbers = new ArrayList<>();
     private int[] winningmatcher = new int[7];
     private int sumPrize = 0;
-    private String numbers;
+    private TicketCollection tickets;
 
     public LottoController() {
-        investAmount = inputView.inputPurchaseAmount();
-        if (investAmount <= 0) {
-            throw new IllegalArgumentException("Only positive numbers can be entered.");
-        }
-        count = investAmount / LOTTO_PRICE;
+        tickets = new TicketCollection(uiManager.takeCount());
+    }
+
+    public void buyLotto() {
+        tickets.printLottoPurchase();
+        calculateWinningStatistics();
+        uiManager.printWinningStatistics(winningMatcher, sumPrize);
     }
 
     public void makeLottoTicket() {
