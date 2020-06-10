@@ -18,9 +18,9 @@ public class LottoSellerTest {
     @DisplayName("금액 입력받고 금액만큼 로또 받는 테스트")
     void putMoneyGetLottoNumberList(int input, int expected) {
         LottoSeller seller = new LottoSeller();
-        List<LotteryNumbers> lotteryNumbersList = seller.receiveMoney(input);
+        List<LottoTicket> lottoTicketList = seller.receiveMoney(input);
 
-        assertThat(lotteryNumbersList).hasSize(expected);
+        assertThat(lottoTicketList).hasSize(expected);
     }
 
     @Test

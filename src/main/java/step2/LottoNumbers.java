@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    private static final List<Integer> LOTTO_NUMBERS= new ArrayList<>();
+    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
 
     private LottoNumbers() {
     }

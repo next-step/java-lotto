@@ -18,27 +18,27 @@ class LottoResultTest {
         String winningNumbers = "1, 2, 3, 4, 5, 6";
         int sameNumberCount = 3;
 
-        List<LotteryNumbers> lotteryNumbersList = new ArrayList<>();
-        LotteryNumbers lotteryNumbers = new LotteryNumbers();
-        lotteryNumbers.addLottoNumber(1);
-        lotteryNumbers.addLottoNumber(2);
-        lotteryNumbers.addLottoNumber(3);
-        lotteryNumbers.addLottoNumber(9);
-        lotteryNumbers.addLottoNumber(30);
-        lotteryNumbers.addLottoNumber(33);
-        LotteryNumbers lotteryNumbers2 = new LotteryNumbers();
-        lotteryNumbers.addLottoNumber(10);
-        lotteryNumbers.addLottoNumber(12);
-        lotteryNumbers.addLottoNumber(13);
-        lotteryNumbers.addLottoNumber(19);
-        lotteryNumbers.addLottoNumber(30);
-        lotteryNumbers.addLottoNumber(33);
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        LottoTicket lottoTicket = new LottoTicket();
+        lottoTicket.addLottoNumber(1);
+        lottoTicket.addLottoNumber(2);
+        lottoTicket.addLottoNumber(3);
+        lottoTicket.addLottoNumber(9);
+        lottoTicket.addLottoNumber(30);
+        lottoTicket.addLottoNumber(33);
+        LottoTicket lottoTicket2 = new LottoTicket();
+        lottoTicket.addLottoNumber(10);
+        lottoTicket.addLottoNumber(12);
+        lottoTicket.addLottoNumber(13);
+        lottoTicket.addLottoNumber(19);
+        lottoTicket.addLottoNumber(30);
+        lottoTicket.addLottoNumber(33);
 
-        lotteryNumbersList.add(lotteryNumbers);
-        lotteryNumbersList.add(lotteryNumbers2);
+        lottoTicketList.add(lottoTicket);
+        lottoTicketList.add(lottoTicket2);
 
-        LottoResult result = new LottoResult(lotteryNumbersList, winningNumbers);
-        Map<Integer, Integer> statistics = result.getStatistics().getStatisticsMap();
+        LottoResult result = new LottoResult(lottoTicketList, winningNumbers);
+        Map<Integer, Integer> statistics = result.getStatistics().getStatistics();
 
         assertThat(statistics.get(sameNumberCount)).isEqualTo(1);
     }

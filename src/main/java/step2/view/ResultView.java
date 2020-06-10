@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.LotteryNumbers;
+import step2.LottoTicket;
 import step2.Statistics;
 import step2.WinningStatistics;
 import step2.Yield;
@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultView {
-    private List<LotteryNumbers> lotteryNumbersList = new ArrayList<>();
+    private List<LottoTicket> lottoTicketList = new ArrayList<>();
 
     private ResultView() {
     }
 
-    public ResultView(List<LotteryNumbers> lotteryNumbersList){
-        this.lotteryNumbersList = lotteryNumbersList;
-        printMessage(lotteryNumbersList.size() + "개를 구매했습니다.");
-        for (LotteryNumbers lotteryNumbers : lotteryNumbersList) {
-            printMessage(lotteryNumbers.getLottoNumberList().toString());
+    public ResultView(List<LottoTicket> lottoTicketList){
+        this.lottoTicketList = lottoTicketList;
+        printMessage(lottoTicketList.size() + "개를 구매했습니다.");
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            printMessage(lottoTicket.getNumbers().toString());
         }
     }
 
@@ -28,9 +28,9 @@ public class ResultView {
 
         printStatistics(result);
 
-        double yield = Yield.calculate(result.getTotalPrice(), lotteryNumbersList.size() * 1000);
+        double yield = Yield.calculate(result.getTotalPrice(), lottoTicketList.size() * 1000);
         String message = "총 수익률은 " + yield + "입니다.";
-        if (yield < 0) {
+        if (yield < 1) {
             message += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         printMessage(message);
@@ -41,7 +41,7 @@ public class ResultView {
     }
 
     private void printStatistics(Statistics result) {
-        result.getStatisticsMap().forEach((key, value) -> {
+        result.getStatistics().forEach((key, value) -> {
             WinningStatistics winning = WinningStatistics.valueOfWinningCount(key);
             winning.print(value);
         });

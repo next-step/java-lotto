@@ -17,7 +17,7 @@ class StatisticsTest {
     @DisplayName("1,2,3,4 등 맞춘갯수 셋팅 확인 테스트")
     void initMapTest(int input) {
         Statistics statistics = new Statistics();
-        Map<Integer, Integer> statisticsMap = statistics.getStatisticsMap();
+        Map<Integer, Integer> statisticsMap = statistics.getStatistics();
         assertThat(statisticsMap).containsKeys(input);
     }
 

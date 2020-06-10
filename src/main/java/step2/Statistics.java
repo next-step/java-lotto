@@ -4,29 +4,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    private Map<Integer, Integer> statisticsMap;
+    private Map<Integer, Integer> statistics = new HashMap<>();
 
     public Statistics() {
-        this.statisticsMap = new HashMap<>();
         initMap();
     }
 
-    public Map<Integer, Integer> getStatisticsMap() {
-        return statisticsMap;
+    public Map<Integer, Integer> getStatistics() {
+        return statistics;
     }
 
     public void addCount(int winningCount) {
-        if (!statisticsMap.containsKey(winningCount)) {
+        if (!statistics.containsKey(winningCount)) {
             return;
         }
 
-        Integer count = statisticsMap.get(winningCount);
-        statisticsMap.put(winningCount, ++count);
+        Integer count = statistics.get(winningCount);
+        statistics.put(winningCount, ++count);
     }
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for (Map.Entry<Integer, Integer> entry : statisticsMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : statistics.entrySet()) {
             WinningStatistics winningStatistics = WinningStatistics.valueOfWinningCount(entry.getKey());
             totalPrice += getPrice(winningStatistics.getWinningPrice(), entry.getValue());
         }
@@ -44,7 +43,7 @@ public class Statistics {
 
     private void initMap() {
         for (WinningStatistics value : WinningStatistics.values()) {
-            statisticsMap.put(value.getMatchedNumberCount(), 0);
+            statistics.put(value.getMatchedNumberCount(), 0);
         }
     }
 }

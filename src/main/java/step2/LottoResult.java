@@ -3,16 +3,16 @@ package step2;
 import java.util.List;
 
 public class LottoResult {
+    private static final int LOTTO_WINNING_NUMBER_COUNT = 6;
     private WinningNumbers winningNumbers = new WinningNumbers();
     private Statistics statistics = new Statistics();
 
     private LottoResult() {
     }
 
-    public LottoResult(List<LotteryNumbers> lotteryNumbersList, String winningNumbers) {
-        this();
+    public LottoResult(List<LottoTicket> lottoTicketList, String winningNumbers) {
         setWinningNumbers(winningNumbers.split(","));
-        compareLottoNumbers(lotteryNumbersList);
+        compareLottoNumbers(lottoTicketList);
     }
 
     public Statistics getStatistics() {
@@ -20,7 +20,7 @@ public class LottoResult {
     }
 
     private void setWinningNumbers(String[] split) {
-        if (split.length > 6 || split.length < 6) {
+        if (split.length != LOTTO_WINNING_NUMBER_COUNT) {
             throw new IllegalArgumentException("갯수를 맞춰주세요");
         }
 
@@ -29,9 +29,9 @@ public class LottoResult {
         }
     }
 
-    private void compareLottoNumbers(List<LotteryNumbers> lotteryNumbersList) {
-        for (LotteryNumbers lotteryNumbers : lotteryNumbersList) {
-            setStatistics(lotteryNumbers.getLottoNumberList());
+    private void compareLottoNumbers(List<LottoTicket> lottoTicketList) {
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            setStatistics(lottoTicket.getNumbers());
         }
     }
 

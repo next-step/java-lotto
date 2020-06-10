@@ -11,7 +11,7 @@ public class WinningNumbers {
     }
 
     public void addNumber(int number) throws IllegalArgumentException {
-        validation(number);
+        validateNumber(number);
         winningNumberList.add(number);
     }
 
@@ -19,7 +19,7 @@ public class WinningNumbers {
         return (int) (lottoNumberList.stream().filter(number -> winningNumberList.contains(number)).count());
     }
 
-    private void validation(int number) throws IllegalArgumentException {
+    private void validateNumber(int number) throws IllegalArgumentException {
         if (winningNumberList.size() > 6) {
             throw new IllegalArgumentException("당첨 번호는 6개입니다.");
         }

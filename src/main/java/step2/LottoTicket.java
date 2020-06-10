@@ -3,25 +3,25 @@ package step2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LotteryNumbers {
-    private List<Integer> lottoNumberList;
+public class LottoTicket {
+    private List<Integer> numbers;
 
-    public LotteryNumbers() {
-        lottoNumberList = new ArrayList<>();
+    public LottoTicket() {
+        numbers = new ArrayList<>();
     }
 
     public void addLottoNumber(int number) {
-        lottoNumberList.add(number);
+        numbers.add(number);
     }
 
-    public List<Integer> getLottoNumberList() {
-        return lottoNumberList;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("[");
-        for (Integer number : lottoNumberList) {
+        for (Integer number : numbers) {
             stringBuilder.append(number).append(",");
         }
 

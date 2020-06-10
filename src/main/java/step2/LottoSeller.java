@@ -5,15 +5,15 @@ import java.util.List;
 public class LottoSeller {
     private static final int DEFAULT_LOTTO_PRICE = 1000;
 
-    public List<LotteryNumbers> receiveMoney(int money) {
-        validation(money);
+    public List<LottoTicket> receiveMoney(int money) {
+        validateMoney(money);
         int canBuyLottoCount = money / DEFAULT_LOTTO_PRICE;
-        LottoNumberLottery lottery = new LottoNumberLottery();
+        LottoStore lottery = new LottoStore();
 
-        return lottery.getLottoNumbersList(canBuyLottoCount);
+        return lottery.getLotteryTickets(canBuyLottoCount);
     }
 
-    private void validation(int money) {
+    private void validateMoney(int money) {
         if (money < DEFAULT_LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원이 기본금액입니다.");
         }
