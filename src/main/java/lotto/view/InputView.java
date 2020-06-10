@@ -1,14 +1,16 @@
 package lotto.view;
 
 import lotto.StringParser;
+import lotto.domain.WinningNumbers;
 
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 
     private int purchasePrice;
-    private List<Integer> winningNumbers;
+    private Set<Integer> winningNumbers;
+    private int bonusNumber;
     private final Scanner sc;
 
     public InputView() {
@@ -27,10 +29,14 @@ public class InputView {
         }
     }
 
-    public void inputWinningNumbers(){
+    public void inputWinningNumbersAndBonusNumber(){
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = sc.nextLine();
         winningNumbers = StringParser.getParseNumbers(input);
+        System.out.println();
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        bonusNumber = sc.nextInt();
         System.out.println();
     }
 
@@ -38,7 +44,7 @@ public class InputView {
         return purchasePrice;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public WinningNumbers getWinningNumbers() {
+        return WinningNumbers.of(winningNumbers, bonusNumber);
     }
 }

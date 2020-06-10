@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class StringAddCalculatorTest {
+public class CalculatorTest {
 
     @DisplayName("빈 문자열 또는 null 을 입력한 경우 0을 반환한다")
     @ParameterizedTest
@@ -87,7 +87,7 @@ public class StringAddCalculatorTest {
         // given
         Calculator calculator = new Calculator();
 
-        // when`
+        // when
         int result = calculator.sum("//;\n1;2;3");
 
         // then

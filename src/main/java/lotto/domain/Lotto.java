@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,20 +14,21 @@ public class Lotto {
                                                         .boxed()
                                                         .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers){
+    public Lotto(Set<Integer> numbers){
         validationCheck(numbers);
         this.numbers = numbers;
     }
 
-    public int matchCount(List<Integer> winningNumbers){
-        return (int) winningNumbers.stream()
+    public Rank matchWith(WinningNumbers winningNumbers){
+        int count = (int) winningNumbers.getWinningNumbers().stream()
                 .filter(numbers::contains)
                 .count();
+        return Rank.findByCountAndBonus(count, numbers.contains(winningNumbers.getBonusNumber()));
     }
 
-    private void validationCheck(List<Integer> numbers) {
+    private void validationCheck(Set<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
@@ -42,7 +44,7 @@ public class Lotto {
         ;
     }
 
-    public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 }

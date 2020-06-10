@@ -12,6 +12,11 @@ public class StringParser {
 
     public List<Integer> getNumbers(String input) {
         List<Integer> numbers = new ArrayList<>();
+
+        if (isNullOrEmpty(input)) {
+            return numbers;
+        }
+
         String[] splits = getSplitsString(input);
         for (String split : splits) {
             numbers.add(toInteger(split));
@@ -45,5 +50,9 @@ public class StringParser {
             e.printStackTrace();
         }
         return number;
+    }
+
+    private boolean isNullOrEmpty(String input) {
+        return input == null || input.replaceAll(" ", "").isEmpty();
     }
 }
