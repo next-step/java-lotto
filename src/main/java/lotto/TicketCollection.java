@@ -33,7 +33,7 @@ public class TicketCollection {
         int sumPrize = 0;
         for (LottoTicket ticket : tickets) {
             int cnt = ticket.matchWinningNumber(winningNumbers);
-            winningMatcher.set(cnt, winningNumbers.get(cnt)+1);
+            winningMatcher.set(cnt, winningMatcher.get(cnt)+1);
             sumPrize += PRIZE.get(cnt);
         }
         return sumPrize;

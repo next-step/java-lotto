@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoController {
     private UiManager uiManager = new UiManager();
     private List<Integer> winningNumbers = new ArrayList<>();
-    private List<Integer> winningMatcher = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0));
+    private List<Integer> winningMatcher = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0, 0));
     private int sumPrize = 0;
     private TicketCollection tickets;
 
