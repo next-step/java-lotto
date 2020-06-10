@@ -15,14 +15,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoResultTest {
 
     List<Lotto> lottos;
-    Set<Integer> winningNumbers;
+    WinningNumbers winningNumbers;
 
     @BeforeEach
     void setUp(){
         Lotto lotto1 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lotto lotto2 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-        winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10));
+        winningNumbers = WinningNumbers.of(new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10)), 11);
 
         lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
     }
@@ -36,7 +36,7 @@ class LottoResultTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoResult.of(winningNumbers, null)
+                () -> LottoResult.of(WinningNumbers.of(winningNumbers, 1), null)
         );
     }
 
@@ -65,8 +65,8 @@ class LottoResultTest {
         Map<Rank, Long> matchResult = lottoResult.getMatches();
 
         // then
-        assertThat(matchResult.get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(matchResult.get(Rank.THIRD)).isEqualTo(2);
+        assertThat(matchResult.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(matchResult.get(Rank.FOURTH)).isEqualTo(2);
     }
 
     @DisplayName("LottoResult 생성 후 구매금액 입력 시 수익률 반환")

@@ -20,8 +20,8 @@ public class Lotto {
         this.numbers = new LottoNumbers(numbers);
     }
 
-    public Rank matchWith(Set<Integer> winningNumbers){
-        int count = (int) winningNumbers.stream()
+    public Rank matchWith(Lotto lotto){
+        int count = (int) lotto.getNumbers().stream()
                 .filter(numbers::contains)
                 .count();
         return Rank.findByMatchCount(count);

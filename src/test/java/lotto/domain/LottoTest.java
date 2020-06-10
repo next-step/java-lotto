@@ -36,14 +36,14 @@ public class LottoTest {
 
     @DisplayName("당첨 번호 입력 시 Match 반환")
     @ParameterizedTest
-    @CsvSource(value = {"3, 4, 5, 6, 7, 8:FOUR", "3,4,8,9,10,11:NONE"}, delimiterString = ":")
-    void whenInputWinningNumbersThenReturnMatchCount(String input, String expected) {
+    @CsvSource(value = {"3, 4, 5, 6, 7, 8:FOURTH", "3,4,8,9,10,11:MISS"}, delimiterString = ":")
+    void whenInputWinningNumbersThenReturnMatchCount(String lottoNumbers, String expected) {
         // given
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(StringParser.getParseNumbers(input));
+        Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
 
         // when
-        Rank match = lotto.matchWith(winningNumbers);
+        Rank match = lotto.matchWith(new Lotto(winningNumbers));
 
         // then
         assertThat(match.name()).isEqualTo(expected);
