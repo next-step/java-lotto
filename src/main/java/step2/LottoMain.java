@@ -1,9 +1,6 @@
 package step2;
 
-import step2.model.Lotto;
-import step2.model.LottoGame;
-import step2.model.LottoTotalCalculator;
-import step2.model.WinnerTier;
+import step2.model.*;
 import step2.view.LottoInput;
 import step2.view.LottoOutput;
 
@@ -13,7 +10,7 @@ public class LottoMain {
     public static void main(String[] args) {
         int lottoMoney = LottoInput.inputGameMoney();
 
-        LottoGame lottoGame = new LottoGame(lottoMoney);
+        LottoGame lottoGame = new LottoGame(new LottoMoney(lottoMoney));
 
         LottoOutput.printPurchaseNumbers(lottoGame.getLottoCount());
         LottoOutput.printLottoNumbers(lottoGame);

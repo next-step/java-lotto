@@ -12,8 +12,8 @@ public class LottoGame {
 
     private LottoMoney lottoMoney;
 
-    public LottoGame(int inputMoney) {
-        lottoMoney = new LottoMoney(inputMoney);
+    public LottoGame(LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
         createRandomLotto();
     }
 
