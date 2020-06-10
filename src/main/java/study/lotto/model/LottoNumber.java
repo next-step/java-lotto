@@ -12,6 +12,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
                                                                             .mapToObj(LottoNumber::new)
                                                                             .collect(Collectors.toList());
 
+    private static final List<LottoNumber> LOTTO_NUMBER_SHUFFLE = new ArrayList<>(LOTTO_NUMBER_BASE);
+
     private final int number;
 
     private LottoNumber(int number) {
@@ -34,9 +36,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     static Set<LottoNumber> generateLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBER_BASE);
+        Collections.shuffle(LOTTO_NUMBER_SHUFFLE);
 
-        return new TreeSet<>(LOTTO_NUMBER_BASE.subList(0, 6));
+        return new TreeSet<>(LOTTO_NUMBER_SHUFFLE.subList(0, 6));
     }
 
     public int getNumber() {
