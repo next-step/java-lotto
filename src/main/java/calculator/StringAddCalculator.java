@@ -4,14 +4,13 @@ import java.util.List;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator(){
 
-    public int splitAndSum(String inputString) {
+    }
 
-        if (ParserUtils.checkNull(inputString)) {
-            return 0;
-        }
+    public static int splitAndSum(String inputString) {
 
-        if (ParserUtils.checkEmpty(inputString)) {
+        if (ParserUtils.checkValid(inputString)) {
             return 0;
         }
 

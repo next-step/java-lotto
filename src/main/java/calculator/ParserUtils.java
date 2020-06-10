@@ -7,32 +7,24 @@ import java.util.regex.Pattern;
 
 public class ParserUtils {
 
-    public static boolean checkEmpty(String input) {
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int EXPRESSION_INDEX = 2;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String DEFAULT_DELIMITER = ",|:";
 
-        if (input.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean checkNull(String input) {
-
-        if (input == null) {
-            return true;
-        }
-        return false;
+    private ParserUtils() {
     }
 
     public static List<Integer> stringToArray(String input) {
 
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return stringListToIntList(matcher.group(2).split(customDelimiter));
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
+            return stringListToIntList(matcher.group(EXPRESSION_INDEX).split(customDelimiter));
         }
 
-        String[] splitText = input.split(",|:");
+        String[] splitText = input.split(DEFAULT_DELIMITER);
         return stringListToIntList(splitText);
     }
 
@@ -52,5 +44,10 @@ public class ParserUtils {
         if (inputNumber < 0) {
             throw new RuntimeException();
         }
+    }
+
+    public static boolean checkValid(String input) {
+
+        return input == null || input.isEmpty();
     }
 }
