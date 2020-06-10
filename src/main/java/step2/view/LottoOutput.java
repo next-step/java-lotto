@@ -10,10 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoOutput {
 
-    private LottoOutput() {
-    }
-
-    ;
+    private LottoOutput() {};
 
     private static final String LOTTO_NUMBER_DELEVETER = ",";
 
@@ -22,7 +19,6 @@ public class LottoOutput {
         List<Lotto> lottos = lottoGame.getLottos();
 
         for (Lotto lotto : lottos) {
-
             String lottoNumbers = lotto.getLottoNumbers().stream()
                     .map(i -> i.toString())
                     .collect(Collectors.joining(LOTTO_NUMBER_DELEVETER));
