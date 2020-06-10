@@ -31,7 +31,7 @@ public class UiManager {
     }
 
     public void printWinningStatistics(List<Integer> winningmatcher, int sumPrize) {
-        ResultView.printStatistics(winningmatcher, sumPrize / investAmount);
+        ResultView.printStatistics(winningmatcher, sumPrize / (double)investAmount);
     }
 
     private int takeCount(int investAmount) {
