@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,11 +14,11 @@ public class Lotto {
                                                         .boxed()
                                                         .collect(Collectors.toList());
 
-    private final LottoNumbers numbers;
+    private final Set<Integer> numbers;
 
     public Lotto(Set<Integer> numbers){
         validationCheck(numbers);
-        this.numbers = new LottoNumbers(numbers);
+        this.numbers = numbers;
     }
 
     public Rank matchWith(Lotto lotto){
@@ -44,6 +45,6 @@ public class Lotto {
     }
 
     public Set<Integer> getNumbers() {
-        return numbers.getNumbers();
+        return Collections.unmodifiableSet(numbers);
     }
 }
