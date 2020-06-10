@@ -1,17 +1,25 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
     private List<Integer> numbers;
 
-    public LottoTicket() {
-        numbers = new ArrayList<>();
+    public LottoTicket(List<Integer> numbers) {
+        validateNumbers(numbers);
+        this.numbers = numbers;
     }
 
-    public void addLottoNumber(int number) {
-        numbers.add(number);
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+
+        numbers.forEach(integer -> {
+            if (integer < 1 || integer > 45) {
+                throw new IllegalArgumentException();
+            }
+        });
     }
 
     public List<Integer> getNumbers() {
@@ -20,14 +28,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("[");
-        for (Integer number : numbers) {
-            stringBuilder.append(number).append(",");
-        }
-
-        int lastCommaIndex = stringBuilder.lastIndexOf(",");
-        stringBuilder.deleteCharAt(lastCommaIndex);
-
-        return stringBuilder.toString();
+        return numbers.toString();
     }
 }
