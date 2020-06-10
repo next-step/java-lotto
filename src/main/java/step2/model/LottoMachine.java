@@ -23,7 +23,7 @@ public class LottoMachine {
     }
 
     public LottoTicket buyTicket(MoneyAmount moneyAmount, List<Lotto> manualLottos) {
-        int availableCount = ticketPrice.getAvailablePurchase(moneyAmount);
+        int availableCount = ticketPrice.calculatePurchaseCount(moneyAmount);
 
         int manualCount = manualLottos.size();
         int autoCount = availableCount - manualCount;
