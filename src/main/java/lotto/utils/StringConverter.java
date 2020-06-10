@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.LottoNumber;
-import lotto.model.ManualLottoTicket;
+import lotto.model.PurchasedLottoTicket;
 
 
 public final class StringConverter {
@@ -18,11 +18,11 @@ public final class StringConverter {
             .collect(Collectors.toList());
     }
 
-    public static ManualLottoTicket convertToLottoNumbers(String s) {
+    public static PurchasedLottoTicket convertToLottoNumbers(String s) {
         List<LottoNumber> numbers = Arrays.stream(s.split(DELIMITER))
             .map(v -> LottoNumber.of(Integer.parseInt(v)))
             .collect(Collectors.toList());
 
-        return ManualLottoTicket.create(numbers);
+        return PurchasedLottoTicket.create(numbers);
     }
 }

@@ -4,12 +4,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
+import lotto.model.PurchaseInfo;
 import lotto.model.PurchasedLottoTicket;
 import lotto.model.PurchasedLottoTickets;
 
 public class OutputView {
 
-    private static final String PURCHASED_COUNT_FORMAT = "%d개를 구매했습니다.";
+    private static final String PURCHASED_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String RESULT_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
@@ -18,10 +19,11 @@ public class OutputView {
     private static final String DIVISION_LINE = "---------";
     private static final String DELIMITER = "\n";
 
-    public static void printLottoNumber(PurchasedLottoTickets purchasedLottoTickets) {
-        System.out.println(String.format(PURCHASED_COUNT_FORMAT, purchasedLottoTickets.size()));
-        System.out.println(printPurchasedLottoTickets(purchasedLottoTickets));
+    public static void printLottoNumber(PurchaseInfo purchaseInfo) {
         System.out.println();
+        System.out.println(String.format(PURCHASED_COUNT_FORMAT,
+            purchaseInfo.getCountOfManualTickets(), purchaseInfo.getCountOfAutoTickets()));
+        System.out.println(printPurchasedLottoTickets(purchaseInfo.getAllTickets()));
     }
 
     private static String printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {

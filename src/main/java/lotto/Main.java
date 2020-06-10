@@ -13,8 +13,8 @@ import static lotto.view.OutputView.printProfitResult;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResults;
 import lotto.model.LottoStore;
-import lotto.model.ManualLottoTickets;
 import lotto.model.Payment;
+import lotto.model.PurchaseInfo;
 import lotto.model.PurchasedLottoTickets;
 import lotto.model.WinningLottoTicket;
 
@@ -23,11 +23,11 @@ public class Main {
         int purchasePrice = inputPurchasePrice();
         int purchaseManualLottoCount = inputPurchaseManualLottoCount();
 
-        ManualLottoTickets manualLottoTickets = inputPurchasedManualTicketsByCount(purchaseManualLottoCount);
+        PurchasedLottoTickets manualLottoTickets = inputPurchasedManualTicketsByCount(purchaseManualLottoCount);
+        PurchasedLottoTickets purchasedLottoTickets = LottoStore.sell(Payment.of(purchasePrice, manualLottoTickets.count()));
 
-        PurchasedLottoTickets purchasedLottoTickets = LottoStore.sell(Payment.of(purchasePrice));
-
-        printLottoNumber(purchasedLottoTickets);
+        PurchaseInfo purchaseInfo = PurchaseInfo.create(manualLottoTickets, purchasedLottoTickets);
+        printLottoNumber(purchaseInfo);
 
         String inputWinningLottoNumberString = inputWinningLottoNumber();
         int inputBonusLottoNumber = inputBonusLottoNumber();
@@ -35,7 +35,7 @@ public class Main {
             convertTo(inputWinningLottoNumberString), LottoNumber.of(inputBonusLottoNumber)
         );
 
-        LottoResults lottoResults = winningLottoTicket.match(purchasedLottoTickets);
+        LottoResults lottoResults = winningLottoTicket.match(purchaseInfo.getAllTickets());
         printLottoStatistics(lottoResults);
         printProfitResult(lottoResults.getProfit());
     }

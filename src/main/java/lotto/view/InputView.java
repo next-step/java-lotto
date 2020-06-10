@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.model.ManualLottoTicket;
-import lotto.model.ManualLottoTickets;
+import lotto.model.PurchasedLottoTicket;
+import lotto.model.PurchasedLottoTickets;
 import lotto.utils.StringConverter;
 
 public class InputView {
@@ -28,14 +28,14 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static ManualLottoTickets inputPurchasedManualTicketsByCount(final int purchaseManualLottoCount) {
+    public static PurchasedLottoTickets inputPurchasedManualTicketsByCount(final int purchaseManualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_TEXT);
 
-        List<ManualLottoTicket> manualLottoTickets = Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
+        List<PurchasedLottoTicket> purchasedLottoTickets = Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
             .limit(purchaseManualLottoCount)
             .collect(Collectors.toList());
 
-        return ManualLottoTickets.create(manualLottoTickets);
+        return PurchasedLottoTickets.create(purchasedLottoTickets);
     }
 
     public static String inputWinningLottoNumber() {
