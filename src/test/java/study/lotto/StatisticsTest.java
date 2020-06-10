@@ -2,13 +2,15 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.model.LottoResult;
 import study.lotto.model.Lottos;
-import study.lotto.model.Statistics;
 import study.lotto.model.WinningLottoInfo;
+import study.lotto.utils.StatisticUtils;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StatisticsTest {
 
@@ -19,10 +21,10 @@ public class StatisticsTest {
 
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
         WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(split, 7);
-        Statistics statistics = new Statistics(lottos);
-        statistics.calculateStatistics(winningLottoInfo);
 
-        assertThat(statistics.calculateEarningRate(14000))
+        LottoResult lottoResult = LottoResult.produce(lottos, winningLottoInfo);
+
+        assertThat(StatisticUtils.calculateEarningRate(14000, lottoResult))
                 .isGreaterThanOrEqualTo(BigDecimal.ZERO);
     }
 

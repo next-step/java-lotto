@@ -1,8 +1,8 @@
 package study.lotto.view;
 
 import study.lotto.model.LottoRank;
+import study.lotto.model.LottoResult;
 import study.lotto.model.Lottos;
-import study.lotto.model.Statistics;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,9 +21,9 @@ public class ResultView {
         printEmptyLine();
     }
 
-    public static void printStatisticsMessage(Statistics statistics, BigDecimal earningRate) {
+    public static void printStatisticsMessage(LottoResult lottoResult, BigDecimal earningRate) {
         printEmptyLine();
-        printStatistics(statistics);
+        printLottoResult(lottoResult);
         printEarningRate(earningRate);
     }
 
@@ -31,7 +31,7 @@ public class ResultView {
         System.out.println(lottos);
     }
 
-    private static void printStatistics(Statistics statistics) {
+    private static void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
@@ -42,7 +42,7 @@ public class ResultView {
                                             LOTTO_RANK_STRING_FORMAT_SECOND : LOTTO_RANK_STRING_FORMAT_BASIC,
                                     lottoRank.getMatches(),
                                     lottoRank.getPrize(),
-                                    statistics.getStatistics().getOrDefault(lottoRank, 0)))
+                                    lottoResult.getRankToCount().getOrDefault(lottoRank, 0)))
                 );
     }
 

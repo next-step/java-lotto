@@ -28,16 +28,8 @@ public class Lottos {
         lottos.addAll(otherLottos.lottos);
     }
 
-    public Map<LottoRank, Integer> countingByLottoRank(WinningLottoInfo winningLottoInfo) {
-        Map<LottoRank, Integer> rankToCount = new HashMap<>();
-
-        lottos
-            .forEach(lotto -> {
-                LottoRank lottoRank = winningLottoInfo.checkLottoRank(lotto);
-                rankToCount.put(lottoRank, rankToCount.getOrDefault(lottoRank, 0) + 1);
-            });
-
-        return rankToCount;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
