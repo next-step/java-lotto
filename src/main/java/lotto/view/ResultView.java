@@ -5,16 +5,18 @@ import lotto.model.Rank;
 import lotto.model.RankReward;
 import lotto.model.RewardStatus;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
     private final String RESULT_MESSAGE = "당첨 통계.\n------";
-    private final RewardStatus[] RewardList = { new RewardStatus(3, false),
-                                            new RewardStatus(4, false),
-                                            new RewardStatus(5, false),
-                                            new RewardStatus(5, true),
-                                            new RewardStatus(6, false) };
+    private final List<Rank> rankList = Arrays.stream(Rank.values())
+                                                    .sorted(Comparator.comparing(Rank::getWinningMoney))
+                                                    .filter(r -> r.getCountOfMatch() >= 3)
+                                                    .collect(Collectors.toList());
 
     public void displayLottoNumbers(List<LottoNumber> lottoNumberList){
         StringBuilder uiBuilder = new StringBuilder();
@@ -26,9 +28,10 @@ public class ResultView {
 
     public void displayResult(RankReward rankReward) {
         System.out.println(RESULT_MESSAGE);
-        for (RewardStatus rewardStatus : RewardList) {
-            int count = rankReward.getWinnerCount(rewardStatus);
-            System.out.println(displayLottoRank(rewardStatus, count));
+
+        for (Rank rank : rankList) {
+            int count = rankReward.getWinnerCount(rank.getRewardStatus());
+            System.out.println(displayLottoRank(rank.getRewardStatus(), count));
         }
     }
 

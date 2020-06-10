@@ -18,17 +18,16 @@ public class LottoTest {
         assertThat(new Lotto(5).getLottoNumbers()).hasSize(5);
     }
 
-    @DisplayName("로또 당번호 테스트")
+    @DisplayName("로또 당첨 테스트")
     @Test
     void USER_WINNER_NUMBER() {
         Lotto lotto = new Lotto(5);
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        //String[] winnerExpected = lottoNumbers.get(0).stream().map(n -> n.toString()).toArray(String[]::new);
         String[] winnerExpected = lottoNumbers.get(0).getLottoNumbertoString().split(",");
 
         assertThat(lotto.getRewardLotto(winnerExpected, 0).get(0))
-                    .isEqualTo(new RewardStatus(winnerExpected.length, false));
+                    .isEqualTo(new RewardStatus(6, false));
     }
 
     @DisplayName("로또 보너스 2등 테스트")
@@ -41,7 +40,7 @@ public class LottoTest {
         int bonus = Integer.parseInt(winnerExpected[0]);
         winnerExpected[0] = "0";
         assertThat(lotto.getRewardLotto(winnerExpected, bonus).get(0))
-                    .isEqualTo(new RewardStatus(winnerExpected.length - 1, true));
+                    .isEqualTo(new RewardStatus(5, true));
     }
 
 

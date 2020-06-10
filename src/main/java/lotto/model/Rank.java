@@ -31,7 +31,7 @@ public enum Rank {
         return Optional.ofNullable(rankHash.get(rewardStatus)).orElse(MISS);
     }
 
-    private RewardStatus getRewardStatus() {
+    public RewardStatus getRewardStatus() {
         return new RewardStatus(countOfMatch, bonus);
     }
 
