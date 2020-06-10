@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -14,13 +15,9 @@ public class Lottos {
     }
 
     public static Lottos of(int num) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for(int i = 0; i < num; i++) {
-            lottos.add(Lotto.auto());
-        }
-
-        return new Lottos(lottos);
+        return Stream.generate(Lotto::auto)
+                .limit(num)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     public static Lottos of(List<Lotto> lottos) {

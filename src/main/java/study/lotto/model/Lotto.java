@@ -36,12 +36,10 @@ public class Lotto {
     }
 
     public static Lotto of(String[] lottoNumbers) {
-        List<LottoNumber> lottoNumberList = Arrays.stream(lottoNumbers)
+        return Arrays.stream(lottoNumbers)
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return new Lotto(lottoNumberList);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
