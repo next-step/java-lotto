@@ -64,9 +64,21 @@ class WinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,8,9,10:FIFTH"}, delimiterString = ":")
     void lottoNumbersAndWinningNumbersMatchTest(String lottoNumbers, String expected){
+        assertLottoRankTest(lottoNumbers, expected);
+    }
+
+    @DisplayName("2등 당첨번호와 보너스 번호 일치 시 SECOND 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,9:SECOND", "2,3,4,5,6,9:SECOND"}, delimiterString = ":")
+    void secondRankTest(String lottoNumbers, String expected){
+        assertLottoRankTest(lottoNumbers, expected);
+    }
+
+    private void assertLottoRankTest(String lottoNumbers, String expected) {
         // given
-        Lotto lotto =  new Lotto(StringParser.getParseNumbers(lottoNumbers));
-        WinningNumbers winningNumber = WinningNumbers.of(winningNumbers, 9);
+        int bonusNumber = 9;
+        Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
+        WinningNumbers winningNumber = WinningNumbers.of(winningNumbers, bonusNumber);
 
         // when
         Rank rank = winningNumber.matchWithLotto(lotto);
@@ -74,5 +86,4 @@ class WinningNumbersTest {
         // then
         assertThat(rank.name()).isEqualTo(expected);
     }
-
 }
