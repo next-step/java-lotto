@@ -36,17 +36,4 @@ public class WinningNumbers {
     public Integer getBonusNumber() {
         return bonusNumber;
     }
-
-    //    public Rank matchWithLotto(Lotto lottoNumbers) {
-//        Rank rank = winningNumbers.matchWith(lottoNumbers);
-//
-//        if (isSecondRank(lottoNumbers, rank)) {
-//            return Rank.SECOND;
-//        }
-//        return rank;
-//    }
-
-//    private boolean isSecondRank(Lotto lottoNumbers, Rank rank) {
-//        return rank.getMatchCount() == Rank.SECOND.getMatchCount() && lottoNumbers.getNumbers().contains(bonusNumber);
-//    }
 }

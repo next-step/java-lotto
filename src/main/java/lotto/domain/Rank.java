@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public enum Rank {
     FIFTH(3, 5_000, false),
@@ -33,12 +32,6 @@ public enum Rank {
         }
 
         return findRank;
-    }
-
-    public static int priceMoneySum(Map<Rank, Long> matches){
-        return matches.entrySet().stream()
-                .mapToInt(entry -> (int) (entry.getKey().getPrizeMoney() * entry.getValue()))
-                .sum();
     }
 
     public int getMatchCount() {

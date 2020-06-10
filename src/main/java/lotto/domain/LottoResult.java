@@ -20,7 +20,6 @@ public class LottoResult {
         return new LottoResult(getMatches(winningNumbers, lottos));
     }
 
-
     private static Map<Rank, Long> getMatches(WinningNumbers winningNumbers, List<Lotto> lottos) {
         return lottos.stream()
                     .map(lotto -> lotto.matchWith(winningNumbers))
@@ -29,7 +28,9 @@ public class LottoResult {
     }
 
     public double getReturnRate(int purchasePrice){
-        int sum =  Rank.priceMoneySum(matches);
+        int sum =  matches.entrySet().stream()
+                .mapToInt(entry -> (int) (entry.getKey().getPrizeMoney() * entry.getValue()))
+                .sum();
         return Math.round(((double) sum / purchasePrice) * 100) / 100.0;
     }
 
