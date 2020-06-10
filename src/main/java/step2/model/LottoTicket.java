@@ -3,6 +3,9 @@ package step2.model;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoTicket {
 
     private final List<Lotto> lottos;
@@ -36,12 +39,8 @@ public class LottoTicket {
     }
 
     public MatchResult calculateMatchResult(WinningNumbers winningNumbers) {
-        MatchResult matchResult = MatchResult.create();
-
-        this.lottos.stream()
+        return this.lottos.stream()
                 .map(winningNumbers::calculateMatchRank)
-                .forEach(matchResult::plusCount);
-
-        return matchResult;
+                .collect(collectingAndThen(toList(), MatchResult::create));
     }
 }

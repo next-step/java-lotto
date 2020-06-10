@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -10,18 +11,22 @@ public class MatchResult {
     private static final Integer MATCH_INITIAL_COUNT = 0;
     private static final Integer COUNT_OPERAND = 1;
 
-    private final Map<LottoRank, Integer> matchResult;
+    private final Map<LottoRank, Integer> matchResult = Arrays.stream(LottoRank.values())
+            .collect(Collectors.toMap(Function.identity(), v -> MATCH_INITIAL_COUNT));
 
-    private MatchResult() {
-        matchResult = Arrays.stream(LottoRank.values())
-                .collect(Collectors.toMap(Function.identity(), v -> MATCH_INITIAL_COUNT));
+    private MatchResult(List<LottoRank> lottoRanks) {
+        if (lottoRanks == null) {
+            throw new IllegalArgumentException("로또 등수를 입력해주세요");
+        }
+
+        lottoRanks.forEach(this::plusCount);
     }
 
-    public static MatchResult create() {
-        return new MatchResult();
+    public static MatchResult create(List<LottoRank> lottoRanks) {
+        return new MatchResult(lottoRanks);
     }
 
-    public void plusCount(LottoRank lottoRank) {
+    private void plusCount(LottoRank lottoRank) {
         this.matchResult.computeIfPresent(lottoRank, (rank, count) -> count + COUNT_OPERAND);
     }
 

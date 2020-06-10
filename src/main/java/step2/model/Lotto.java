@@ -50,13 +50,8 @@ public class Lotto {
     }
 
     public int getMatchCount(WinningNumbers winningNumbers) {
-        return matchingResult(winningNumbers).size();
-    }
-
-    private List<LottoNumber> matchingResult(WinningNumbers winningNumbers) {
-        return numbers.stream()
-                .filter(winningNumbers::containsNumber)
-                .collect(Collectors.toList());
+        return (int) numbers.stream()
+                .filter(winningNumbers::containsNumber).count();
     }
 
     public boolean containsNumber(LottoNumber lottoNumber) {

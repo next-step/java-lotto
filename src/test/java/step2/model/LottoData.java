@@ -1,19 +1,14 @@
 package step2.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoData {
 
-    public static MatchResult createMatchResult(LottoRank lottoRank, int matchCount) {
-        MatchResult matchResult = MatchResult.create();
-
-        IntStream.range(0, matchCount).forEach(i -> {
-            matchResult.plusCount(lottoRank);
-        });
-
-        return matchResult;
+    public static MatchResult createMatchResult(LottoRank lottoRank) {
+        return MatchResult.create(Collections.singletonList(lottoRank));
     }
 
     public static List<Lotto> createAutoLottos(int count) {

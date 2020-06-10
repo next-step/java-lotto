@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +27,7 @@ class MatchReportTest {
         return Stream.of(
                 Arguments.of(null, null),
                 Arguments.of(LottoData.createMoneyAmount(1), null),
-                Arguments.of(null, MatchResult.create())
+                Arguments.of(null, MatchResult.create(new ArrayList<>()))
         );
     }
 
@@ -35,7 +36,7 @@ class MatchReportTest {
     void calculateEarningRate() {
         MoneyAmount moneyAmount = LottoData.createMoneyAmount(1_000);
         moneyAmount.useAmount(Money.valueOf(1_000));
-        MatchResult matchResult = LottoData.createMatchResult(LottoRank.FIRST, 1);
+        MatchResult matchResult = LottoData.createMatchResult(LottoRank.FIRST);
         MatchReport matchReport = MatchReport.create(moneyAmount, matchResult);
 
         assertThat(matchReport.calculateEarningRate()).isEqualTo(BigDecimal.valueOf(200_000_000,2));
