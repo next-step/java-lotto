@@ -7,14 +7,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("기본 로또 번호 콜렉션 클래스 테스트")
+@DisplayName("45자리 로또 번호 클래스 테스트")
 class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 1부터 45까지 존재하는지 확인하는 테스트")
     void lottoNumbersTest() {
-        List<Integer> lottoNumbers = LottoNumbers.getLottoNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<Integer> numbers = lottoNumbers.getNumbers();
         for (int i = 1; i <= 45; i++) {
-            assertThat(i).isEqualTo(lottoNumbers.get(i - 1));
+            assertThat(i).isEqualTo(numbers.get(i - 1));
         }
     }
 }

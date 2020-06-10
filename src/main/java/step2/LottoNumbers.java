@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
-    private LottoNumbers() {
+    public LottoNumbers() {
+        for (int i = 1 ; i <= 45 ; i++) {
+            numbers.add(i);
+        }
     }
 
-    public static List<Integer> getLottoNumbers() {
-        for (int i = 1; i <= 45 ; i++) {
-            LOTTO_NUMBERS.add(i);
-        }
-
-        return LOTTO_NUMBERS;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
