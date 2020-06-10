@@ -16,11 +16,7 @@ public class UiManager {
         if (investAmount <= 0) {
             throw new IllegalArgumentException("Only positive numbers can be entered.");
         }
-        int count = investAmount / LOTTO_PRICE;
-        if(count <= 0) {
-            throw new IllegalArgumentException("Please enter more than the ticket price.");
-        }
-        return investAmount / LOTTO_PRICE;
+        return takeCount(investAmount);
     }
 
     public List<Integer> takeWinningNumber() {
@@ -34,9 +30,16 @@ public class UiManager {
         return numbers.split(",");
     }
 
-
     public void printWinningStatistics(List<Integer> winningmatcher, int sumPrize) {
         ResultView.printStatistics(winningmatcher, sumPrize / investAmount);
+    }
+
+    private int takeCount(int investAmount) {
+        int count = investAmount / LOTTO_PRICE;
+        if(count <= 0) {
+            throw new IllegalArgumentException("Please enter more than the ticket price.");
+        }
+        return investAmount / LOTTO_PRICE;
     }
 
 }
