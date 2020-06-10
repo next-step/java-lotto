@@ -23,7 +23,7 @@ public class LottoResult {
 
     private static Map<Rank, Long> getMatches(WinningNumbers winningNumbers, List<Lotto> lottos) {
         return lottos.stream()
-                    .map(winningNumbers::matchWithLotto)
+                    .map(lotto -> lotto.matchWith(winningNumbers))
                     .filter(match -> !match.equals(Rank.MISS))
                     .collect(groupingBy(Function.identity(), counting()));
     }

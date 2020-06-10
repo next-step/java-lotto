@@ -43,7 +43,22 @@ public class LottoTest {
         Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
 
         // when
-        Rank match = lotto.matchWith(new Lotto(winningNumbers));
+        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, 9));
+
+        // then
+        assertThat(match.name()).isEqualTo(expected);
+    }
+
+    @DisplayName("2등 당첨번호와 보너스 번호 일치 시 SECOND 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,9:SECOND", "2,3,4,5,6,9:SECOND"}, delimiterString = ":")
+    void secondRankTest(String lottoNumbers, String expected){
+        // given
+        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
+
+        // when
+        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, 9));
 
         // then
         assertThat(match.name()).isEqualTo(expected);

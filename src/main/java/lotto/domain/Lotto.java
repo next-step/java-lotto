@@ -21,11 +21,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Rank matchWith(Lotto lotto){
-        int count = (int) lotto.getNumbers().stream()
+    public Rank matchWith(WinningNumbers winningNumbers){
+        int count = (int) winningNumbers.getWinningNumbers().stream()
                 .filter(numbers::contains)
                 .count();
-        return Rank.findByMatchCount(count);
+        return Rank.findByCountAndBonus(count, numbers.contains(winningNumbers.getBonusNumber()));
     }
 
     private void validationCheck(Set<Integer> numbers) {
