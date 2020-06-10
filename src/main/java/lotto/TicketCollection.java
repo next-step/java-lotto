@@ -1,6 +1,5 @@
 package lotto;
 
-import view.InputView;
 import view.ResultView;
 
 import java.util.ArrayList;
