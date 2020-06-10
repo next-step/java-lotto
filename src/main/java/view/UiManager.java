@@ -16,6 +16,10 @@ public class UiManager {
         if (investAmount <= 0) {
             throw new IllegalArgumentException("Only positive numbers can be entered.");
         }
+        int count = investAmount / LOTTO_PRICE;
+        if(count <= 0) {
+            throw new IllegalArgumentException("Please enter more than the ticket price.");
+        }
         return investAmount / LOTTO_PRICE;
     }
 
