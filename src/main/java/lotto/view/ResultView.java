@@ -22,10 +22,19 @@ public class ResultView {
         System.out.println("---------");
         Map<Rank, Long> matchResult = lottoResult.getMatches();
 
-        for (Map.Entry<Rank, Long> entry : matchResult.entrySet()) {
-            System.out.println(entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrizeMoney() + ")- " + matchResult.getOrDefault(entry.getKey(), 0L) + "개");
+        Rank[] values = Rank.values();
+        for (int i = 0; i < values.length - 1; i++) {
+            Rank rank = values[i];
+            System.out.println(rank.getMatchCount() + "개 일치" + secondPrizeCheck(rank) + "(" + rank.getPrizeMoney() + ")- " + matchResult.getOrDefault(rank, 0L) + "개");
         }
 
         System.out.println("총 수익률은 " + lottoResult.getReturnRate(purchasePrice) + "입니다.");
+    }
+
+    private String secondPrizeCheck(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            return ", 보너스볼 일치";
+        }
+        return "";
     }
 }

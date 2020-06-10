@@ -34,6 +34,8 @@ public class InputView {
         String input = sc.nextLine();
         winningNumbers = StringParser.getParseNumbers(input);
         System.out.println();
+
+        System.out.println("보너스 볼을 입력해 주세요.");
         bonusNumber = sc.nextInt();
         System.out.println();
     }
