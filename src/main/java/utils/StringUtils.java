@@ -17,6 +17,10 @@ public class StringUtils {
         return text.split(key);
     }
 
+    public static String removeWhiteSpace(String text) {
+        return text.replace(" ","");
+    }
+
     private static Matcher findSplitKey(String text) {
         return patternKey.matcher(text);
     }
