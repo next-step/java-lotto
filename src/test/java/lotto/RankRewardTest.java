@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.Rank;
 import lotto.model.RankReward;
+import lotto.model.RewardStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankRewardTest {
 
     List<Rank> winnerLottoNumbers = new ArrayList<>();
-    Rank lottoRank_First = Rank.getRankByMatchInfo(6, false);
-    Rank testRank_Second = Rank.getRankByMatchInfo(5, true);
-    Rank testRank_Third = Rank.getRankByMatchInfo(5, false);
-    Rank testRank_Miss = Rank.getRankByMatchInfo(2, true);
-    Rank testRank_Miss2 = Rank.getRankByMatchInfo(0, false);
+    Rank lottoRank_First = Rank.getRankByMatchInfo(new RewardStatus(6, false));
+    Rank testRank_Second = Rank.getRankByMatchInfo(new RewardStatus(5, true));
+    Rank testRank_Third = Rank.getRankByMatchInfo(new RewardStatus(5, false));
+    Rank testRank_Miss = Rank.getRankByMatchInfo(new RewardStatus(2, true));
+    Rank testRank_Miss2 = Rank.getRankByMatchInfo(new RewardStatus(0, false));
     @BeforeEach
     void winnerTestBefore() {
         winnerLottoNumbers.add(lottoRank_First);
@@ -32,15 +33,18 @@ public class RankRewardTest {
     @DisplayName("당첨 리스트 일급 컬렉션 카운트 테스트")
     @ParameterizedTest
     @CsvSource(value = {
-            "1:1",
-            "2:1",
-            "3:1",
-            "4:0",
-            "5:0",
-            "6:2",},
+            "6,false:1",
+            "5,true:1",
+            "5,false:1",
+            "3,false:0",
+            "2,false:0",
+            "1,false:0",},
             delimiter = ':')
-    void winnerCountTest(int rank, int matchCount) {
-        assertThat(new RankReward(winnerLottoNumbers).getWinnerCount(rank)).isEqualTo(matchCount);
+    void winnerCountTest(String matchCount, int expectedRank) {
+        String[] matchArray = matchCount.split(",");
+        int cnt = Integer.parseInt(matchArray[0]);
+        Boolean bonus = Boolean.valueOf(matchArray[1]);
+        assertThat(new RankReward(winnerLottoNumbers).getWinnerCount(new RewardStatus(cnt, bonus))).isEqualTo(expectedRank);
     }
 
     @DisplayName("당첨 리스트 일급 컬렉션 테스트 당첨")

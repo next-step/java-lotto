@@ -13,7 +13,7 @@ public class LottoResult {
 
     private List<Rank> setWinnerResult(List<RewardStatus> lottoWinerNumbers) {
         return lottoWinerNumbers.stream()
-                                .map(i -> Rank.getRankByMatchInfo(i.getMatchingCount(), i.isMatchingBonus()))
+                                .map(i -> Rank.find(i))
                                 .collect(Collectors.toList());
     }
 

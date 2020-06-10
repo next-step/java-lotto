@@ -3,13 +3,18 @@ package lotto.view;
 import lotto.model.LottoNumber;
 import lotto.model.Rank;
 import lotto.model.RankReward;
+import lotto.model.RewardStatus;
 
 import java.util.List;
 
 public class ResultView {
 
     private final String RESULT_MESSAGE = "당첨 통계.\n------";
-    private int[] lottoRank = { 5, 4, 3, 2, 1 };
+    private final RewardStatus[] RewardList = { new RewardStatus(3, false),
+                                            new RewardStatus(4, false),
+                                            new RewardStatus(5, false),
+                                            new RewardStatus(5, true),
+                                            new RewardStatus(6, false) };
 
     public void displayLottoNumbers(List<LottoNumber> lottoNumberList){
         StringBuilder uiBuilder = new StringBuilder();
@@ -19,24 +24,23 @@ public class ResultView {
         System.out.println(uiBuilder.toString());
     }
 
-    public void displayResult(RankReward winnerCollection) {
+    public void displayResult(RankReward rankReward) {
         System.out.println(RESULT_MESSAGE);
-        for (int ranking : lottoRank) {
-            int count = winnerCollection.getWinnerCount(ranking);
-            System.out.println(displayLottoRank(ranking, count));
+        for (RewardStatus rewardStatus : RewardList) {
+            int count = rankReward.getWinnerCount(rewardStatus);
+            System.out.println(displayLottoRank(rewardStatus, count));
         }
-
     }
 
     public void displayResultRateMessage(float profitRate) {
         System.out.println("총 수익률은 " + getProfit(profitRate) + "입니다." + getProfitRateMessage(profitRate));
     }
 
-    private String displayLottoRank (int ranking, int count) {
-        return Rank.find(ranking).getCountOfMatch()
+    private String displayLottoRank (RewardStatus rewardStatus, int count) {
+        return Rank.find(rewardStatus).getCountOfMatch()
                 + "개 일치 "
-                + ((ranking == 2) ? ", 보너스볼 일치" : "")
-                + "(" + Rank.find(ranking).getWinningMoney() + ") - " +count + "개";
+                + ((rewardStatus.isMatchingBonus()) ? ", 보너스볼 일치" : "")
+                + "(" + Rank.find(rewardStatus).getWinningMoney() + ") - " +count + "개";
     }
 
     private String getProfit(float profitRate) {

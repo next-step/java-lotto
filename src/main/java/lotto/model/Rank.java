@@ -1,41 +1,38 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(1, 6, 2_000_000_000),
-    SECOND(2, 5, 30_000_000),
-    THIRD(3, 5, 1_500_000),
-    FOURTH(4, 4, 50_000),
-    FIFTH(5, 3, 5_000),
-    MISS(6, 0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(0, 0, false);
 
-    private int lottoRank;
     private int countOfMatch;
     private int winningMoney;
+    private boolean bonus;
 
-    private Rank(int lottoRank, int countOfMatch, int winningMoney) {
-        this.lottoRank    = lottoRank;
+    private Rank(int countOfMatch, int winningMoney, boolean bonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.bonus = bonus;
     }
 
-    private static Map<Integer, Rank> rankHash = Collections
+    private static Map<RewardStatus, Rank> rankHash = Collections
                                                             .unmodifiableMap(Stream.of(values())
-                                                            .collect(Collectors.toMap(Rank::getLottoRank, Function.identity())));
+                                                            .collect(Collectors.toMap(Rank::getRewardStatus, Function.identity())));
 
-    public static Rank find(int ranking) {
-        return Optional.ofNullable(rankHash.get(ranking)).orElse(MISS);
+    public static Rank find(RewardStatus rewardStatus) {
+        return Optional.ofNullable(rankHash.get(rewardStatus)).orElse(MISS);
     }
 
-    public int getLottoRank() {
-        return lottoRank;
+    private RewardStatus getRewardStatus() {
+        return new RewardStatus(countOfMatch, bonus);
     }
 
     public int getCountOfMatch() {
@@ -46,13 +43,17 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank getRankByMatchInfo(int countOfMatch, boolean matchBonus) {
-        if(countOfMatch == 5) {
-            return findSecondRank(matchBonus);
+    public boolean getBonus() {
+        return bonus;
+    }
+
+    public static Rank getRankByMatchInfo(RewardStatus rewardStatus) {
+        if(rewardStatus.getMatchingCount() == 5) {
+            return findSecondRank(rewardStatus.isMatchingBonus());
         }
 
         return Arrays.stream(Rank.values())
-                .filter(e -> e.getCountOfMatch() == countOfMatch)
+                .filter(e -> e.getCountOfMatch() == rewardStatus.getMatchingCount())
                 .findFirst()
                 .orElse(MISS);
     }

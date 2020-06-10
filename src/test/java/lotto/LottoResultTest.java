@@ -29,7 +29,7 @@ public class LottoResultTest {
         rewardLottos.add(new RewardStatus(matchingCount, bonus));
         List<Rank> rankList = new LottoResult(rewardLottos).getLottoResult();
 
-        assertThat(new RankReward(rankList).getTotalPrize()).isEqualTo(Rank.getRankByMatchInfo(matchingCount, bonus).getWinningMoney());
+        assertThat(new RankReward(rankList).getTotalPrize()).isEqualTo(Rank.find(new RewardStatus(matchingCount, bonus)).getWinningMoney());
     }
 
 }

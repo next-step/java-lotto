@@ -10,11 +10,11 @@ public class RankReward {
         this.rankList = rankList;
     }
 
-    public int getWinnerCount(int matchingCount) {
+    public int getWinnerCount(RewardStatus rewardStatus) {
         return (int) rankList
                         .stream()
-                        .filter(o -> o.getLottoRank() == matchingCount)
-                        .count();
+                        .filter(o -> o.getCountOfMatch() == rewardStatus.getMatchingCount()
+                                        && o.getBonus() == rewardStatus.isMatchingBonus()).count();
     }
 
     public int getTotalPrize() {
