@@ -8,7 +8,6 @@ import java.util.List;
 public class UiManager {
     private final InputView inputView = new InputView();
     private int investAmount;
-    private int count;
     private static final int LOTTO_PRICE = 1000;
 
 
@@ -17,9 +16,7 @@ public class UiManager {
         if (investAmount <= 0) {
             throw new IllegalArgumentException("Only positive numbers can be entered.");
         }
-        count = investAmount / LOTTO_PRICE;
-
-        return count;
+        return investAmount / LOTTO_PRICE;
     }
 
     public List<Integer> takeWinningNumber() {
