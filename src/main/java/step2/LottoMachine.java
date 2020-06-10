@@ -35,11 +35,8 @@ public class LottoMachine {
     }
 
     private List<Integer> extract6Numbers(List<Integer> numbers) {
-        List<Integer> sixNumbers = new ArrayList<>();
-        for (int i = 0 ; i < LOTTO_TICKET_NUMBER_COUNT ; i++) {
-            sixNumbers.add(numbers.get(i));
-        }
+        //Stream<Integer> sixNumbers = numbers.stream().limit(LOTTO_TICKET_NUMBER_COUNT);
 
-        return sixNumbers;
+        return numbers.subList(0, LOTTO_TICKET_NUMBER_COUNT);
     }
 }
