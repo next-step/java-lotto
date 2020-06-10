@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
 import study.lotto.model.LottoNumber;
 import study.lotto.model.LottoRank;
-import study.lotto.model.WinningLotto;
+import study.lotto.model.WinningLottoInfo;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +25,9 @@ public class PrizeTest {
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = input.split(", ");
-        WinningLotto winningLotto = WinningLotto.of(split);
+        WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(split, 13);
 
-        LottoRank lottoRank = winningLotto.checkLottoRank(lotto, 1);
+        LottoRank lottoRank = winningLottoInfo.checkLottoRank(lotto);
 
         assertThat(lottoRank.getPrize())
                 .isEqualTo(5000);
@@ -40,11 +40,9 @@ public class PrizeTest {
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = "1, 3, 5, 7, 10, 12".split(", ");
-        WinningLotto winningLotto = WinningLotto.of(split);
+        WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(split, 9);
 
-        int bonusNumber = 9;
-
-        LottoRank lottoRank = winningLotto.checkLottoRank(lotto, bonusNumber);
+        LottoRank lottoRank = winningLottoInfo.checkLottoRank(lotto);
 
         assertThat(lottoRank)
                 .isEqualTo(LottoRank.SECOND_RANK);

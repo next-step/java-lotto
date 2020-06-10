@@ -31,13 +31,12 @@ public class Lottos {
         lottos.addAll(otherLottos.lottos);
     }
 
-    public Map<LottoRank, Integer> countingByLottoRank(WinningLotto winningLotto, int bonusNumber) {
+    public Map<LottoRank, Integer> countingByLottoRank(WinningLottoInfo winningLottoInfo) {
         Map<LottoRank, Integer> rankToCount = new HashMap<>();
 
         lottos
             .forEach(lotto -> {
-//                LottoRank lottoRank = lotto.checkLottoRank(winningLotto, bonusNumber);
-                LottoRank lottoRank = winningLotto.checkLottoRank(lotto, bonusNumber);
+                LottoRank lottoRank = winningLottoInfo.checkLottoRank(lotto);
                 rankToCount.put(lottoRank, rankToCount.getOrDefault(lottoRank, 0) + 1);
             });
 

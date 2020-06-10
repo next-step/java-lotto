@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import study.lotto.model.Lotto;
 import study.lotto.model.LottoNumber;
-import study.lotto.model.WinningLotto;
+import study.lotto.model.WinningLottoInfo;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,9 +63,9 @@ public class LottoTest {
         Lotto lotto = Lotto.of(lottoNumbers);
 
         String[] split = input.split(", ");
-        WinningLotto winningLotto = WinningLotto.of(split);
+        WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(split, 13);
 
-        assertThat(winningLotto.compareToWinningNumbers(lotto))
+        assertThat(winningLottoInfo.compareToWinningNumbers(lotto))
                 .isEqualTo(3);
     }
 }

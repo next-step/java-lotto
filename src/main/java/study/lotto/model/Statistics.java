@@ -13,16 +13,8 @@ public class Statistics {
         this.lottos = lottos;
     }
 
-    public void calculateStatistics(WinningLotto winningLotto, int bonusNumber) {
-        validateBonusNumber(winningLotto, bonusNumber);
-
-        statistics = lottos.countingByLottoRank(winningLotto, bonusNumber);
-    }
-
-    private void validateBonusNumber(WinningLotto winningLotto, int bonusNumber) {
-        if(winningLotto.contains(LottoNumber.of(bonusNumber))) {
-            throw new IllegalArgumentException("당첨 번호에 보너스볼 번호가 포함되면 안됩니다.");
-        }
+    public void calculateStatistics(WinningLottoInfo winningLottoInfo) {
+        statistics = lottos.countingByLottoRank(winningLottoInfo);
     }
 
     public BigDecimal calculateEarningRate(int totalPrice) {
