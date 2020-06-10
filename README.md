@@ -31,10 +31,7 @@
 * 수익률이 1보다 작으면 손해, 1보다 크면 이득
 
 ***
-##진행중 step3 TODO list
-done
-
-## DONE list
+## step3 DONE list
 * number 값 포장
 * bonusBall 포장 -> lottoTicket의 checkWinningRank 리팩토링 가능
 * lottotickets 의 confirmWinningResult메소드 리팩토링 
@@ -55,3 +52,8 @@ done
 * 코딩 규칙, 객체지향 생활체조 원칙 확인 https://myeonguni.tistory.com/1596
 * LottoNumber 클래스 값 객체의 경우 객체를 재사용하기 좋은데요.
                       템플릿 메서드 패턴의 장점 중 하나인 객체 재사용을 적용할 수 있을 것 같아요.
+* ResultView 인덴트 규칙 위반
+* 캐시를 전체에서 사용 하도록 변경 -> 인터페이스 단일화(불필요 로또넘버 생성자 제거)                      
+
+## step4 DONE list
+* 수동 구매 추가
