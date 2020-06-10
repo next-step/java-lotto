@@ -13,7 +13,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int scanTotalPrice() {
+    public static int scanPurchaseAmount() {
         System.out.println("구매 금액을 입력해 주세요.");
         return scanInt();
     }
@@ -23,7 +23,7 @@ public class InputView {
         return scanInt();
     }
 
-    public static int scanNumOfManualLottos() {
+    public static int scanManualLottoCount() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return scanInt();
     }
@@ -59,7 +59,7 @@ public class InputView {
             scanner.nextLine();     // 버퍼에서 개행문자 제거
             System.out.println("숫자만 입력 가능합니다. 다시 입력해주세요.");
 
-            return scanTotalPrice();
+            return scanPurchaseAmount();
         }
 
         return input;

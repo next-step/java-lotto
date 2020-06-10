@@ -1,27 +1,23 @@
 package study.lotto;
 
-import study.lotto.model.Lotto;
+import study.lotto.helper.LottoHelper;
 import study.lotto.model.Lottos;
 import study.lotto.model.Statistics;
 import study.lotto.model.WinningLotto;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoGame {
 
     public static void main(String[] args) {
-        int totalPrice = InputView.scanTotalPrice();
-        int numOfLottos = Lotto.calculateNumOfLottos(totalPrice);
-        int numOfManualLottos = InputView.scanNumOfManualLottos();
+        LottoHelper lottoHelper = new LottoHelper(InputView.scanPurchaseAmount());
+        lottoHelper.setManualLottoCount(InputView.scanManualLottoCount());
 
-        Lottos lottos = Lottos.of(InputView.scanManualLottoNumbers(numOfManualLottos));
+        Lottos lottos = Lottos.of(InputView.scanManualLottoNumbers(lottoHelper.getManualLottoCount()));
 
-        int numOfAutoLottos = numOfLottos - numOfManualLottos;
-        lottos.addAll(Lottos.of(numOfAutoLottos));
+        lottos.addAll(Lottos.of(lottoHelper.getAutoLottoCount()));
 
-        ResultView.printPurchaseMessage(numOfManualLottos, numOfAutoLottos, lottos);
+        ResultView.printPurchaseMessage(lottoHelper.getManualLottoCount(), lottoHelper.getAutoLottoCount(), lottos);
 
         WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningNumbers());
         int bonusNumber = InputView.scanBonusNumber();
@@ -29,6 +25,6 @@ public class LottoGame {
         Statistics statistics = new Statistics(lottos);
         statistics.calculateStatistics(winningLotto, bonusNumber);
 
-        ResultView.printStatisticsMessage(statistics, statistics.calculateEarningRate(totalPrice));
+        ResultView.printStatisticsMessage(statistics, statistics.calculateEarningRate(lottoHelper.getPurchaseAmount()));
     }
 }

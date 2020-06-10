@@ -7,7 +7,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
@@ -43,10 +42,6 @@ public class Lotto {
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumberList);
-    }
-
-    public static int calculateNumOfLottos(int totalPrice) {
-        return totalPrice / LOTTO_PRICE;
     }
 
     public Set<LottoNumber> getLottoNumbers() {
