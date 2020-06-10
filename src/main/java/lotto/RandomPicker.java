@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class RandomPicker {
     private final static int LOTTO_MIN_NUMBER = 1;
-    private final static int LOTTO_MAX_NUMBER = 45;
+    public final static int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> lottoAllNumbers = new ArrayList<>();
 
     public RandomPicker() {
