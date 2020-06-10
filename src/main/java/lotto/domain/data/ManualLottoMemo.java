@@ -1,6 +1,5 @@
 package lotto.domain.data;
 
-import lotto.domain.LottoNumberPool;
 import lotto.util.ConvertInt;
 import lotto.util.Split;
 

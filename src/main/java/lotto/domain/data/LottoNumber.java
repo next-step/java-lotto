@@ -13,11 +13,11 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    protected static LottoNumber of(int number) {
         return new LottoNumber(number);
     }
 
-    public static LottoNumber of(String number) {
+    protected static LottoNumber of(String number) {
         return new LottoNumber(covertIntAfterValidate(number));
     }
 
@@ -34,6 +34,10 @@ public class LottoNumber {
         if(number < LOTTO_START_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이만 올 수 있습니다.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package lotto.domain.generator;
 
-import lotto.domain.LottoNumberPool;
+import lotto.domain.data.LottoNumberPool;
 import lotto.domain.data.Lotto;
 import lotto.domain.data.LottoNumber;
 
