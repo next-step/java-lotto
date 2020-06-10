@@ -25,10 +25,11 @@ public class LottoResultTest {
             delimiter = ':')
     void LOTTO_WINNER_NUMBER_MATCHING(int matchingCount, boolean bonus) {
         List<RewardStatus> rewardLottos = new ArrayList<>();
-        rewardLottos.add(new RewardStatus(matchingCount, bonus));
 
-        RankReward reward = new LottoResult(rewardLottos).getLottoResult();
-        assertThat(reward.getTotalPrize()).isEqualTo(Rank.valueOf(matchingCount, false).getWinningMoney());
+        rewardLottos.add(new RewardStatus(matchingCount, bonus));
+        List<Rank> rankList = new LottoResult(rewardLottos).getLottoResult();
+
+        assertThat(new RankReward(rankList).getTotalPrize()).isEqualTo(Rank.getRankByMatchInfo(matchingCount, bonus).getWinningMoney());
     }
 
 }

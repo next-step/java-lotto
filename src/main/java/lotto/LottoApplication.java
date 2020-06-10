@@ -18,7 +18,7 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
 
         input.displayIntroInputUI(paymentPrice);
-        List<List<Integer>> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         resultView.displayLottoNumbers(lottoNumbers);
 
         input.displayLastLottoNumberInputUI();
@@ -27,7 +27,9 @@ public class LottoApplication {
         int bonusNumber = sc.nextInt();
 
         List<RewardStatus> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
-        resultView.displayResult(new LottoResult(lottoRankList).getLottoResult(), paymentPrice);
+        RankReward rankReward = new RankReward(new LottoResult(lottoRankList).getLottoResult());
+        resultView.displayResult(rankReward);
+        resultView.displayResultRateMessage((float) rankReward.getTotalPrize() / paymentPrice);
     }
 
 }

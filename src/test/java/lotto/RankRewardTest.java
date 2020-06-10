@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankRewardTest {
 
     List<Rank> winnerLottoNumbers = new ArrayList<>();
-    Rank lottoRank_First = Rank.valueOf(6, false);
-    Rank testRank_Second = Rank.valueOf(5, true);
-    Rank testRank_Third = Rank.valueOf(5, false);
-    Rank testRank_Miss = Rank.valueOf(2, true);
-    Rank testRank_Miss2 = Rank.valueOf(0, false);
+    Rank lottoRank_First = Rank.getRankByMatchInfo(6, false);
+    Rank testRank_Second = Rank.getRankByMatchInfo(5, true);
+    Rank testRank_Third = Rank.getRankByMatchInfo(5, false);
+    Rank testRank_Miss = Rank.getRankByMatchInfo(2, true);
+    Rank testRank_Miss2 = Rank.getRankByMatchInfo(0, false);
     @BeforeEach
     void winnerTestBefore() {
         winnerLottoNumbers.add(lottoRank_First);

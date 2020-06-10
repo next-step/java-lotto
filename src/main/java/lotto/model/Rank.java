@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(1, 6, 2000000000),
-    SECOND(2, 5, 30000000),
-    THIRD(3, 5, 1500000),
-    FOURTH(4, 4, 50000),
-    FIFTH(5, 3, 5000),
+    FIRST(1, 6, 2_000_000_000),
+    SECOND(2, 5, 30_000_000),
+    THIRD(3, 5, 1_500_000),
+    FOURTH(4, 4, 50_000),
+    FIFTH(5, 3, 5_000),
     MISS(6, 0, 0);
 
     private int lottoRank;
@@ -46,7 +46,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static Rank getRankByMatchInfo(int countOfMatch, boolean matchBonus) {
         if(countOfMatch == 5) {
             return findSecondRank(matchBonus);
         }
