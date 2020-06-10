@@ -4,7 +4,7 @@ public class LottoMoney {
 
     private static final int LOTTO_COST = 1000;
 
-    private int lottoMoney;
+    private final int lottoMoney;
 
     public LottoMoney(int inputMoney) {
         lottoMoney = inputMoney;
