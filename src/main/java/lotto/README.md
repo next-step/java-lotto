@@ -60,3 +60,21 @@
 * 일치 개수별 로또 개수 통계와 수익률 통계를 출력한다.
   * ResultView class
      * public void printStatistic(Lotto, List<Lotto>)
+
+### Step4
+* 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+* 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+* 개발 순서
+    * 테스트 작성
+      * 로또 생성시에 수동으로 입력받은 로또가 포함되어야 한다
+      * 구입금액에서 수동로또 가격을 뺀 나머지는 모두 수동로또를 구매해야 한다
+      * 구입금액보다 수동 로또 금액이 크다면 예외발생
+    * 수동으로 Lotto를 만들어주는 로직을 완성
+      * LottoMachine > public List<Lotto> buy(Price price, List<Integer> ManualLottoNumbers)
+    * input UI
+      * 수동으로 구매할 로또 수를 입력해 주세요.
+      * 수동으로 구매할 번호를 입력해 주세요.
+    * output UI
+      * 수동으로 3장, 자동으로 11개를 구매했습니다.
+    * 리팩토링

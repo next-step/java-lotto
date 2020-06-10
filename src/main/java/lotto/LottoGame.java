@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.AutoLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.Lottos;
 import lotto.domain.Price;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -17,14 +17,16 @@ public class LottoGame {
 
         Price price = inputView.insertPrice();
 
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator());
-        List<Lotto> lottoList = lottoMachine.buy(price);
-        resultView.printLottoCount(lottoList.size());
+        List<List<Integer>> manualLottoNumbersList = inputView.insertManualLottoNumberList();
 
-        lottoList.forEach(resultView::printLotto);
+        LottoMachine lottoMachine = new LottoMachine();
+        Lottos lottos = lottoMachine.buy(price, manualLottoNumbersList);
+        resultView.printLottoCount(manualLottoNumbersList.size(), lottos.size() - manualLottoNumbersList.size());
+
+        lottos.forEach(resultView::printLotto);
 
         Lotto winLotto = inputView.insertWinLotto();
         int bonusNumber = inputView.insertBonusNumber();
-        resultView.printStatistic(price, winLotto, bonusNumber, lottoList);
+        resultView.printStatistic(price, winLotto, bonusNumber, lottos);
     }
 }
