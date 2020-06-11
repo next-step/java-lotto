@@ -6,7 +6,7 @@ import java.util.Scanner;
  * InputView
  * ver. 1.0
  * 2020.05.31
- * Copyright ...
+
  */
 public class InputView {
 

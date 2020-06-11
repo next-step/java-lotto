@@ -9,16 +9,19 @@ import java.util.List;
  * LottoGame
  * ver. 1.0
  * 2020.05.31
- * Copyright ...
  */
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
     private static LottoTickets lottoTickets;
 
-    // pay
-    public int calculateGameCountByPayMoney(Money money) {
+    public LottoGame(Money money) {
+        int buyCount = calculateGameCountByPayMoney(money);
+        issueLotto(buyCount);
+    }
 
+    // pay
+    private static int calculateGameCountByPayMoney(Money money) {
         int buyCount = money.getPayedMoney() / LOTTO_PRICE;
         if (buyCount < 1) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");
@@ -27,15 +30,12 @@ public class LottoGame {
     }
 
     // issue
-    public static void issueLotto(int gameCount) {
-
+    private static void issueLotto(int gameCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < gameCount; i++) {
             lottoList.add(Lotto.auto());
         }
-
         lottoTickets = new LottoTickets(lottoList);
-
     }
 
     // matching
@@ -45,18 +45,12 @@ public class LottoGame {
 
     // winningResult
     public BigDecimal totalResult() {
-
-        BigDecimal sum = BigDecimal.valueOf(Arrays.stream(Prize.values())
-                .mapToLong(prize -> prize.getPrizeTotal())
-                .sum());
-
-        return sum.divide(BigDecimal.valueOf(lottoTickets.getLottoTicketsSize() * LOTTO_PRICE), 3, BigDecimal.ROUND_HALF_EVEN);
+        PrizeCount prizeCount = PrizeCount.getInstance();
+        return prizeCount.getPrizeTotalSum();
     }
-
-
+    
     public LottoTickets getLottoTickets() {
         return lottoTickets;
     }
-
 
 }

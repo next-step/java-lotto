@@ -1,14 +1,12 @@
 package step3.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 /*
  * LOTTO GAME
  * Prize
  * ver. 1.0
  * 2020.05.31
- * Copyright ...
  */
 public enum Prize {
 
@@ -24,8 +22,6 @@ public enum Prize {
     private int matchedNumber;
     private int prizePrice;
     private String rank;
-    private int prizeCount; // int initial value = 0
-
     private boolean bonusNumberMatching;
 
     // constructor
@@ -36,25 +32,12 @@ public enum Prize {
         this.bonusNumberMatching = bonusNumberMatching;
     }
 
-
     public int getMatchedNumber() {
         return matchedNumber;
     }
 
-    public int getPrizeCount() {
-        return prizeCount;
-    }
-
     public int getPrizePrice() {
         return prizePrice;
-    }
-
-    public long getPrizeTotal() {
-        return prizePrice * prizeCount;
-    }
-
-    public void addWinning() {
-        this.prizeCount += 1;
     }
 
     public boolean isBonusNumberMatching() {
@@ -62,13 +45,11 @@ public enum Prize {
     }
 
     public static Prize valueOf(int matchedNumber, boolean bonusNumberMatching) {
-
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.getMatchedNumber() == matchedNumber
-                        && prize.isBonusNumberMatching() == bonusNumberMatching
-                )
+                .filter(prize -> prize.matchedNumber == matchedNumber
+                        && prize.bonusNumberMatching == bonusNumberMatching)
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException());
     }
 
 }

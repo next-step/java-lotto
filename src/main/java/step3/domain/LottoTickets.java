@@ -7,7 +7,6 @@ import java.util.List;
  * Lotto Tickets
  * ver. 1.0
  * 2020.06.06.
- * Copyright ...
  */
 public class LottoTickets {
 

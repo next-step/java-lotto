@@ -20,14 +20,11 @@ class PrizeTest {
             "5:1500000:false",
             "5:30000000:true",
             "6:2000000000:false"
-        }, delimiter = ':'
+    }, delimiter = ':'
     )
     public void Prize_상금_체크(int matchedNumber, int prizePrice, boolean bonusNumberMatching) {
-
         Prize prize = Prize.valueOf(matchedNumber, bonusNumberMatching);
-
         assertThat(prize.getPrizePrice()).isEqualTo(prizePrice);
-
     }
 
 }
