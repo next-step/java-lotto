@@ -17,11 +17,6 @@ public class LottoTicket {
 		return lottoNumbers;
 	}
 
-	public boolean doesContainBonusBall(LottoNumber bonusBall) {
-		return lottoNumbers.stream()
-			.anyMatch(number -> number.getNumber().equals(bonusBall.getNumber()));
-	}
-
 	public boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.stream()
 			.anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
