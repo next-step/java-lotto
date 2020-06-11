@@ -10,7 +10,9 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Money money = new Money(InputView.buyLotto());
+        int manualLottoCount = InputView.buyManualLotto(money.countLotto());
 
+        List<Lotto> manualLottos = ManualLottoCreator.createLottos(InputView.inputManualNumbers(manualLottoCount));
         List<Lotto> lottos = LottoMachine.createLottos(money.countLotto());
         ResultView.printLotto(lottos);
 
