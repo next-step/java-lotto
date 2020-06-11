@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class LottoNumbers {
+public class NumberFactory {
     private static final int INIT_NUMBER = 1;
     private static final int LIMITED_NUMBER = 45;
     private static final int LOTTO_NUMBERS_COUNT = 6;
@@ -17,7 +17,7 @@ public class LottoNumbers {
                                                         .mapToObj(LottoNumber::cacheNumber)
                                                         .collect(toList());
 
-    private LottoNumbers(){}
+    private NumberFactory(){}
 
     public static Set<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numbers);
