@@ -54,8 +54,6 @@ public class LottoMachine {
     }
 
     private List<Integer> extract6Numbers(List<Integer> numbers) {
-        //Stream<Integer> sixNumbers = numbers.stream().limit(LOTTO_TICKET_NUMBER_COUNT);
-
-        return numbers.subList(0, LOTTO_TICKET_NUMBER_COUNT);
+         return numbers.stream().map(Integer::new).limit(LOTTO_TICKET_NUMBER_COUNT).collect(Collectors.toList());
     }
 }
