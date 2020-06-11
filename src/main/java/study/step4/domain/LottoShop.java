@@ -19,29 +19,29 @@ public class LottoShop {
                 lottos.countLottoTickets(), lottoInputDto.getManualAmount());
     }
 
-    private static LottoTickets buyAutoTickets(LottoInputDto lottoInputDto) {
-        return LottoTickets.autoPublish(lottoInputDto);
-    }
-
-    public static long calculateAutoLottoCounting(LottoInputDto lottoInputDto) {
-        return countTotalLottoTicket(lottoInputDto.getPrice()) - lottoInputDto.getManualAmount();
-    }
-
-    private static LottoTickets buyManualTickets(LottoInputDto lottoInputDto) {
-        return LottoTickets.manualPublish(lottoInputDto);
-    }
-
     private static void validatePrice(long price) {
         if (price < LOTTO_PRICE_PER_PIECE){
             throw new IllegalArgumentException(LOTTO_PRICE_EXCEPTION);
         }
     }
 
-    private static long countTotalLottoTicket(long price) {
-        return Math.floorDiv(price, LOTTO_PRICE_PER_PIECE);
+    private static LottoTickets buyAutoTickets(LottoInputDto lottoInputDto) {
+        return LottoTickets.autoPublish(calculateAutoLottoCounting(lottoInputDto));
     }
 
     private static boolean IsManualNotZero(LottoInputDto lottoInputDto) {
         return lottoInputDto.getManualAmount() > ZERO_COUNT;
+    }
+
+    private static LottoTickets buyManualTickets(LottoInputDto lottoInputDto) {
+        return LottoTickets.manualPublish(lottoInputDto);
+    }
+
+    public static long calculateAutoLottoCounting(LottoInputDto lottoInputDto) {
+        return countTotalLottoTicket(lottoInputDto.getPrice()) - lottoInputDto.getManualAmount();
+    }
+
+    private static long countTotalLottoTicket(long price) {
+        return Math.floorDiv(price, LOTTO_PRICE_PER_PIECE);
     }
 }
