@@ -1,24 +1,18 @@
-package study.lotto.helper;
+package study.lotto.model;
 
-public class LottoHelper {
+public class LottoPurchase {
     private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
+    private final int manualLottoCount;
 
-    private int manualLottoCount;
-    private int autoLottoCount;
-
-    public LottoHelper(int purchaseAmount) {
+    public LottoPurchase(int purchaseAmount, int manualLottoCount) {
         this.purchaseAmount = purchaseAmount;
+        this.manualLottoCount = manualLottoCount;
     }
 
     public int getLottoCount() {
         return purchaseAmount / LOTTO_PRICE;
-    }
-
-    public void setManualLottoCount(int manualLottoCount) {
-        this.manualLottoCount = manualLottoCount;
-        this.autoLottoCount = getLottoCount() - manualLottoCount;
     }
 
     public int getPurchaseAmount() {
@@ -30,6 +24,6 @@ public class LottoHelper {
     }
 
     public int getAutoLottoCount() {
-        return autoLottoCount;
+        return getLottoCount() - manualLottoCount;
     }
 }
