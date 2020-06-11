@@ -3,21 +3,21 @@ package lotto.model;
 public class PurchaseInfo {
 
     private final PurchasedLottoTickets manualTickets;
-    private final PurchasedLottoTickets autoTickets;
+    private final PurchasedLottoTickets automaticTickets;
 
-    private PurchaseInfo(PurchasedLottoTickets manualTickets, PurchasedLottoTickets autoTickets) {
-        validate(manualTickets, autoTickets);
+    private PurchaseInfo(PurchasedLottoTickets manualTickets, PurchasedLottoTickets automaticTickets) {
+        validate(manualTickets, automaticTickets);
 
         this.manualTickets = manualTickets;
-        this.autoTickets = autoTickets;
+        this.automaticTickets = automaticTickets;
     }
 
-    public static PurchaseInfo create(PurchasedLottoTickets manualTickets, PurchasedLottoTickets autoTickets) {
-        return new PurchaseInfo(manualTickets, autoTickets);
+    public static PurchaseInfo create(PurchasedLottoTickets manualTickets, PurchasedLottoTickets automaticTickets) {
+        return new PurchaseInfo(manualTickets, automaticTickets);
     }
 
-    private void validate(PurchasedLottoTickets manualTickets, PurchasedLottoTickets autoTickets) {
-        if (manualTickets == null || autoTickets == null) {
+    private void validate(PurchasedLottoTickets manualTickets, PurchasedLottoTickets automaticTickets) {
+        if (manualTickets == null || automaticTickets == null) {
             throw new IllegalArgumentException("수동으로 구매할 로또와 자동으로 구매할 로또를 입력해주세요.");
         }
     }
@@ -26,11 +26,11 @@ public class PurchaseInfo {
         return manualTickets.count();
     }
 
-    public int getCountOfAutoTickets() {
-        return autoTickets.count();
+    public int getCountOfAutomaticTickets() {
+        return automaticTickets.count();
     }
 
     public PurchasedLottoTickets getAllTickets() {
-        return manualTickets.merged(autoTickets);
+        return manualTickets.merged(automaticTickets);
     }
 }

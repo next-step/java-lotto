@@ -22,7 +22,7 @@ public class OutputView {
     public static void printLottoNumber(PurchaseInfo purchaseInfo) {
         System.out.println();
         System.out.println(String.format(PURCHASED_COUNT_FORMAT,
-            purchaseInfo.getCountOfManualTickets(), purchaseInfo.getCountOfAutoTickets()));
+            purchaseInfo.getCountOfManualTickets(), purchaseInfo.getCountOfAutomaticTickets()));
         System.out.println(printPurchasedLottoTickets(purchaseInfo.getAllTickets()));
     }
 

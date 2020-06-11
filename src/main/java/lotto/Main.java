@@ -24,9 +24,9 @@ public class Main {
         int purchaseManualLottoCount = inputPurchaseManualLottoCount();
 
         PurchasedLottoTickets manualLottoTickets = inputPurchasedManualTicketsByCount(purchaseManualLottoCount);
-        PurchasedLottoTickets purchasedLottoTickets = LottoStore.sell(Payment.of(purchasePrice, manualLottoTickets.count()));
+        PurchasedLottoTickets automaticLottoTickets = LottoStore.sell(Payment.of(purchasePrice, manualLottoTickets.count()));
 
-        PurchaseInfo purchaseInfo = PurchaseInfo.create(manualLottoTickets, purchasedLottoTickets);
+        PurchaseInfo purchaseInfo = PurchaseInfo.create(manualLottoTickets, automaticLottoTickets);
         printLottoNumber(purchaseInfo);
 
         String inputWinningLottoNumberString = inputWinningLottoNumber();
