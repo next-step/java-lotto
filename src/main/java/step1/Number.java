@@ -2,7 +2,7 @@ package step1;
 
 import java.util.Objects;
 
-public class Number {
+public final class Number {
 
     private final int number;
 
