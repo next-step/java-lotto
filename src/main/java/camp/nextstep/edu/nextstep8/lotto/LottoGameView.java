@@ -15,12 +15,12 @@ public class LottoGameView {
 
     public static void showWinningResult(LottoWinningResult result) {
         StringBuilder output = new StringBuilder();
-        output.append("당첨 통계");
-        output.append("---------");
+        output.append("당첨 통계\n");
+        output.append("---------\n");
         Arrays.stream(LottoAward.values())
                 .sorted(Comparator.comparingInt(LottoAward::getCondition))
                 .forEach(e -> {
-                    output.append(e.getCondition() + "개 일치 (" + e.getPrize() + "원) - ");
+                    output.append(e.getCondition() + "개 일치 (" + e.getPrize() + "원) -\t");
                     output.append(result.getWinningCount(e) + "개 \n");
                 });
         System.out.println(output.toString());
