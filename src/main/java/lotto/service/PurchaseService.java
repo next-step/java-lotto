@@ -26,8 +26,7 @@ public class PurchaseService {
 	}
 
 	public static LottoTicket drawUserPickedTicket(List<Integer> pickedValues) {
-		List<LottoNumber> lottoNumberList = new ManualLottoNumberGenerator().pickList(pickedValues);
-		return new LottoTicket(lottoNumberList);
+		return new ManualLottoNumberGenerator().pickList(pickedValues);
 	}
 
 	public static LottoTickets purchaseAutoDrawnTickets(Money money, LottoTickets lottoTickets) {

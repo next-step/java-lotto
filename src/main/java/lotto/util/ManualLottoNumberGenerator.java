@@ -1,9 +1,9 @@
 package lotto.util;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.collections.LottoTicket;
 import lotto.domain.LottoNumber;
 
 public class ManualLottoNumberGenerator implements LottoNumberGenerator {
@@ -14,10 +14,10 @@ public class ManualLottoNumberGenerator implements LottoNumberGenerator {
 		this.allNumberList = LottoNumberGenerator.generateLottoNumbers();
 	}
 
-	public List<LottoNumber> pickList(List<Integer> pickedValues) {
+	public LottoTicket pickList(List<Integer> pickedValues) {
 		List<LottoNumber> pickedValuesToNumbers = create(pickedValues);
 		LottoNumberGenerator.sortDescLottoNumbers(pickedValuesToNumbers);
-		return Collections.unmodifiableList(pickedValuesToNumbers);
+		return new LottoTicket(pickedValuesToNumbers);
 	}
 
 	private List<LottoNumber> create(List<Integer> pickedValues) {
