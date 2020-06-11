@@ -41,6 +41,6 @@ public class WinningService {
 
 	public static boolean isBonusBall(final LottoTickets lottoTickets, final LottoNumber bonusBall) {
 		return lottoTickets.getLottoTickets().stream()
-			.anyMatch(ticket -> ticket.doesContainBonusBall(bonusBall));
+			.anyMatch(ticket -> ticket.contains(bonusBall));
 	}
 }
