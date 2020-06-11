@@ -1,5 +1,7 @@
 package step2.model;
 
+import step2.exception.LottoNotNumberException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +15,6 @@ public class Lotto {
 
     private final static int PLUS_ONE = 1;
     private final static int PLUS_ZERO = 0;
-
-    private static final String EXCEPTION_NOT_NUMBER = "숫자만 입력해 주세요";
 
     private static final String DELIMETER = ",";
 
@@ -62,7 +62,7 @@ public class Lotto {
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(EXCEPTION_NOT_NUMBER, e);
+            throw new LottoNotNumberException();
         }
     }
 }
