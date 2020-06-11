@@ -36,4 +36,8 @@ public class WinningNumbers {
     public Integer getBonusNumber() {
         return bonusNumber;
     }
+
+    public boolean hasNumber(int number) {
+        return winningNumbers.getNumbers().contains(number);
+    }
 }

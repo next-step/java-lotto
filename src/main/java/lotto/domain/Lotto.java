@@ -22,8 +22,8 @@ public class Lotto {
     }
 
     public Rank matchWith(WinningNumbers winningNumbers){
-        int count = (int) winningNumbers.getWinningNumbers().stream()
-                .filter(numbers::contains)
+        int count = (int) numbers.stream()
+                .filter(winningNumbers::hasNumber)
                 .count();
         return Rank.findByCountAndBonus(count, numbers.contains(winningNumbers.getBonusNumber()));
     }

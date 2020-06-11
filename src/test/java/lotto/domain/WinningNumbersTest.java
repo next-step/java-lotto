@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -56,4 +58,19 @@ class WinningNumbersTest {
         assertThatThrownBy(() -> WinningNumbers.of(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+    
+    @DisplayName("당첨 번호가 특정 번호를 가지고 있는지 여부 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,true", "3,true", "7,false", "8,false"})
+    void winningNumbersHasNumberTest(int number, boolean expected){
+        // given
+        WinningNumbers winningNumbers = WinningNumbers.of(this.winningNumbers, 9);
+
+        // when
+        boolean hasNumber = winningNumbers.hasNumber(number);
+
+        // then
+        assertThat(hasNumber).isEqualTo(expected);
+    }
+
 }
