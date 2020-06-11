@@ -54,6 +54,13 @@
                       템플릿 메서드 패턴의 장점 중 하나인 객체 재사용을 적용할 수 있을 것 같아요.
 * ResultView 인덴트 규칙 위반
 * 캐시를 전체에서 사용 하도록 변경 -> 인터페이스 단일화(불필요 로또넘버 생성자 제거)                      
+## step4 TODO list
+* ResultView =>  LottoGame 혹은 Lottos -> Ranks -> RankDto 순으로 변화
+* LottoNumbers => 클래스 이름이 어색. 변경필요
+* LottoShop => private 메소드는 public 메소드 하단에 위치하도록
+* LottoTickets => LottoShop 다시 호출 불필요 -> 구매할 갯수만 입력받기
+* LottoTickets => 42라인 collectingAndThen 사용
+* WinningLotto => 생성자 줄일 수 있는지 고민해보기
 
 ## step4 DONE list
 * 수동 구매 추가
