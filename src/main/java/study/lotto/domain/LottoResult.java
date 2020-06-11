@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<LottoRank, Integer> rankToCount;
+    private final Map<LottoRank, Integer> rankToCount;
 
     private LottoResult(Lottos lottos, WinningLottoInfo winningLottoInfo) {
         rankToCount = countingByLottoRank(lottos, winningLottoInfo);

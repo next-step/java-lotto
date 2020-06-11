@@ -35,7 +35,7 @@ public class LottoService {
     public void checkLottoResult(Lottos lottos, LottoPurchase lottoPurchase) {
         WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(InputView.scanWinningNumbers(), InputView.scanBonusNumber());
 
-        LottoResult lottoResult = LottoResult.produce(lottos, winningLottoInfo);
+        LottoResult lottoResult = lottos.produceLottoResult(winningLottoInfo);
 
         ResultView.printStatisticsMessage(lottoResult, StatisticUtils.calculateEarningRate(lottoPurchase.getPurchaseAmount(), lottoResult));
     }

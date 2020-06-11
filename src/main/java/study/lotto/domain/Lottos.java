@@ -29,6 +29,10 @@ public class Lottos {
         return lottos;
     }
 
+    public LottoResult produceLottoResult(WinningLottoInfo winningLottoInfo) {
+        return LottoResult.produce(this, winningLottoInfo);
+    }
+
     @Override
     public String toString() {
         return lottos.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
