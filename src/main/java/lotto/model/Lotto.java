@@ -6,30 +6,22 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<List<Integer>> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
-            this.lottoNumbers.add(LottoNumberGenerator.getNumber());
+            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.getNumber()));
         }
     }
 
-    public List<List<Integer>> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
-    public List<Integer> getLottoWinnerNumbers(String[] winningNumber) {
+    public List<RewardStatus> getRewardLotto(String[] winningNumber, int bonus) {
         return lottoNumbers.stream()
-                        .map(lottoNumber -> checkWinnerNumber(lottoNumber, winningNumber))
+                        .map(lottoNumber -> lottoNumber.getRewardStatus(winningNumber, bonus))
                         .collect(Collectors.toList());
-    }
-
-    private int checkWinnerNumber(List<Integer> lottoNumber, String[] winningNumber) {
-        int matchingCount = 0;
-        for (int i = 0; i < winningNumber.length; i++) {
-            matchingCount += (lottoNumber.contains(Integer.parseInt(winningNumber[i]))) ? 1 : 0;
-        }
-        return matchingCount;
     }
 
 }

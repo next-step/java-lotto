@@ -5,20 +5,20 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private List<Rank> winnerLottoNumberResult;
+    private List<Rank> rankList;
 
-    public LottoResult(List<Integer> lottoWinerNumbers) {
-        this.winnerLottoNumberResult = setWinnerResult(lottoWinerNumbers);
+    public LottoResult(List<RewardStatus> rewardlottos) {
+        this.rankList = setWinnerResult(rewardlottos);
     }
 
-    private List<Rank> setWinnerResult(List<Integer> lottoWinerNumbers) {
+    private List<Rank> setWinnerResult(List<RewardStatus> lottoWinerNumbers) {
         return lottoWinerNumbers.stream()
-                .map(i -> Rank.valueOf(i, false))
-                .collect(Collectors.toList());
+                                .map(i -> Rank.find(i))
+                                .collect(Collectors.toList());
     }
 
     public List<Rank> getLottoResult() {
-        return this.winnerLottoNumberResult;
+        return this.rankList;
     }
 
 
