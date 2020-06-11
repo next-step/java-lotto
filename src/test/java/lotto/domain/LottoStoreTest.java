@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import lotto.domain.data.Lotto;
-import lotto.domain.data.ManualLottoMemo;
+import lotto.domain.data.ManualLotto;
 import lotto.domain.data.PriceLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,7 @@ public class LottoStoreTest {
     public void buyTest(int price) {
         LottoStore lottoStore = new LottoStore();
         PriceLotto priceLotto = PriceLotto.of(price);
-        List<Lotto> lottos = lottoStore.buy(priceLotto, ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+        List<Lotto> lottos = lottoStore.buy(priceLotto, ManualLotto.list(List.of(List.of(1,2,3,4,5,6), List.of(7,8,9,10,11,12))));
 
         final int count = (int) Math.floor(price / PRICE_PER_ONE);
 
@@ -34,12 +35,12 @@ public class LottoStoreTest {
     @Test
     public void buyManualLottosTest() {
         LottoStore lottoStore = new LottoStore();
-        ManualLottoMemo lottoMemo = ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12"));
+        List<ManualLotto> manualLottos = ManualLotto.list(List.of(List.of(1,2,3,4,5,6), List.of(7,8,9,10,11,12)));
 
-        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(2000), lottoMemo);
+        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(2000), manualLottos);
 
         assertThat(lottos.size()).isEqualTo(2);
-        assertThat(lottos).containsOnly(Lotto.of(lottoMemo.getLottoMemo(0)), Lotto.of(lottoMemo.getLottoMemo(1)));
+        assertThat(lottos).containsOnly(Lotto.of(manualLottos.get(0).getNumbers()), Lotto.of(manualLottos.get(1).getNumbers()));
     }
 
     @DisplayName("수동번호가 없어도 정상적으로 구매가 된다.")
@@ -47,7 +48,7 @@ public class LottoStoreTest {
     public void buyTestNoManual() {
         LottoStore lottoStore = new LottoStore();
 
-        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(3000), ManualLottoMemo.empty());
+        List<Lotto> lottos = lottoStore.buy(PriceLotto.of(3000), new ArrayList<>());
 
         assertThat(lottos.size()).isEqualTo(3);
     }
@@ -56,9 +57,10 @@ public class LottoStoreTest {
     @Test
     public void buyOverManualLottosTest() {
         LottoStore lottoStore = new LottoStore();
+        List<ManualLotto> manualLottos = ManualLotto.list(List.of(List.of(1,2,3,4,5,6), List.of(7,8,9,10,11,12)));
 
         assertThatThrownBy(() -> {
-            lottoStore.buy(PriceLotto.of(1000), ManualLottoMemo.of(List.of("1,2,3,4,5,6", "7,8,9,10,11,12")));
+            lottoStore.buy(PriceLotto.of(1000), manualLottos);
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -70,7 +72,7 @@ public class LottoStoreTest {
         int price = 500;
 
         assertThatThrownBy(() -> {
-            lottoStore.buy(PriceLotto.of(price), ManualLottoMemo.empty());
+            lottoStore.buy(PriceLotto.of(price), new ArrayList<>());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

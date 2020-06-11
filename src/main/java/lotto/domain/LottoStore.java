@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.data.Lotto;
-import lotto.domain.data.ManualLottoMemo;
+import lotto.domain.data.ManualLotto;
 import lotto.domain.data.PriceLotto;
 import lotto.domain.generator.LottoGenerator;
 
@@ -13,16 +13,16 @@ public class LottoStore {
 
     public LottoStore() {}
 
-    public List<Lotto> buy(PriceLotto price, ManualLottoMemo memo) {
+    public List<Lotto> buy(PriceLotto price, List<ManualLotto> manualLottos) {
         validatePrice(price);
-        validatePriceOverManualLottoCount(price, memo);
-        List<Lotto> lottos = LottoGenerator.generate(getCountPossibleBuyAutoLotto(price, memo), memo);
+        validatePriceOverManualLottoCount(price, manualLottos);
+        List<Lotto> lottos = LottoGenerator.generate(getCountPossibleBuyAutoLotto(price, manualLottos.size()), manualLottos);
         price.boughtLotto(lottos.size(), LOTTO_PRICE_PER_ONE);
         return lottos;
     }
 
-    private int getCountPossibleBuyAutoLotto(PriceLotto price, ManualLottoMemo manualLottoMemo) {
-        return ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoMemo.size();
+    private int getCountPossibleBuyAutoLotto(PriceLotto price, int manualLottoCount) {
+        return ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoCount;
     }
 
     private static void validatePrice(PriceLotto price) {
@@ -31,8 +31,8 @@ public class LottoStore {
         }
     }
 
-    private static void validatePriceOverManualLottoCount(PriceLotto price, ManualLottoMemo manualLottoMemo) {
-        if(price.getIntValue() < manualLottoMemo.size() * LOTTO_PRICE_PER_ONE) {
+    private static void validatePriceOverManualLottoCount(PriceLotto price, List<ManualLotto> manualLottos) {
+        if(price.getIntValue() < manualLottos.size() * LOTTO_PRICE_PER_ONE) {
             throw new IllegalArgumentException("입력된 금액으로는 원하시는 수동 로또 수 만큼 구매할 수 없습니다.");
         }
     }

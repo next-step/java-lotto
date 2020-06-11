@@ -1,21 +1,28 @@
 package lotto.domain.generator;
 
-import lotto.domain.data.ManualLottoMemo;
 import lotto.domain.data.Lotto;
-import lotto.domain.data.LottoNumber;
+import lotto.domain.data.ManualLotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ManualLottoGenerator {
 
-    public static List<Lotto> generate(ManualLottoMemo manualLottoMemo) {
+    public static List<Lotto> generate(List<ManualLotto> manualLottos) {
         final List<Lotto> lottos = new ArrayList<>();
-        ManualLottoMemo manualMemo = Optional.ofNullable(manualLottoMemo).orElse(ManualLottoMemo.empty());
-        for (List<LottoNumber> lottoNumbers : manualMemo.getLottoMemos()) {
-            lottos.add(Lotto.of(lottoNumbers));
+
+        if(manualLottos == null) {
+            return lottos;
         }
+
+        List<ManualLotto> targetManualLottos = manualLottos.stream()
+                .filter(manualLotto -> !manualLotto.isEmpty())
+                .collect(Collectors.toList());
+        for (ManualLotto manualLotto : targetManualLottos) {
+            lottos.add(Lotto.of(manualLotto.getNumbers()));
+        }
+
         return lottos;
     }
 
