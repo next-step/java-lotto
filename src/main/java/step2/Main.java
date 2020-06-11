@@ -12,14 +12,13 @@ public class Main {
         InputView priceInputView= InputView.addQuestion("구매금액을 입력해 주세요.");
         int price = priceInputView.inputPrice();
 
-        List<LottoTicket> lottoTicketList = seller.receiveMoney(price);
+        List<LottoTicket> lottoTicketList = seller.buyLotto(price);
         ResultView resultView = new ResultView(lottoTicketList);
 
         InputView winningNumbersInputView = InputView.addQuestion("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbers = winningNumbersInputView.inputWinnerNumbers();
-        LottoResult result = new LottoResult(lottoTicketList, winningNumbers);
+        List<Integer> winningCountList = seller.requestLottoChecking(winningNumbersInputView.inputWinnerNumbers(), lottoTicketList);
 
-        resultView.printResult(result.getStatistics());
+        resultView.printResult(new Statistics(winningCountList));
 
     }
 }
