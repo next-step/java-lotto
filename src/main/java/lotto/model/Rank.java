@@ -47,19 +47,4 @@ public enum Rank {
         return bonus;
     }
 
-    public static Rank getRankByMatchInfo(RewardStatus rewardStatus) {
-        if(rewardStatus.getMatchingCount() == 5) {
-            return findSecondRank(rewardStatus.isMatchingBonus());
-        }
-
-        return Arrays.stream(Rank.values())
-                .filter(e -> e.getCountOfMatch() == rewardStatus.getMatchingCount())
-                .findFirst()
-                .orElse(MISS);
-    }
-
-    private static Rank findSecondRank(boolean matchBonus) {
-        return (matchBonus) ? Rank.SECOND : Rank.THIRD;
-    }
-
 }
