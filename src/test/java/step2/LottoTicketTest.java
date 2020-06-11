@@ -17,7 +17,7 @@ class LottoTicketTest {
     void settingLottoNumberTest() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.makeLottoTicket(numbers);
 
         assertThat(lottoTicket.getNumbers()).isEqualTo(lottoTicket.getNumbers());
     }
@@ -26,11 +26,9 @@ class LottoTicketTest {
     @DisplayName("로또 번호 검증 테스트")
     void validateLottoNumberTest() {
         List<Integer> validationTarget1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(validationTarget1));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.makeLottoTicket(validationTarget1));
 
         List<Integer> validationTarget2 = Arrays.asList(1, 2, 3, 4, 5, -3);
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(validationTarget2));
-
-
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.makeLottoTicket(validationTarget2));
     }
 }

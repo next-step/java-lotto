@@ -1,11 +1,33 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private List<Integer> numbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public static LottoTicket makeLottoTicket(List<Integer> numbers) {
+        return new LottoTicket(numbers);
+    }
+
+    public static LottoTicket makeWinningLottoTicket(String stringWinningNumbers) {
+        String[] split = stringWinningNumbers.split(",");
+        List<Integer> winningLottoNumbers = Arrays.stream(split).map(winningNumber
+                -> Integer.parseInt(winningNumber.trim())).collect(Collectors.toList());
+        return new LottoTicket(winningLottoNumbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+    private LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
@@ -20,14 +42,5 @@ public class LottoTicket {
                 throw new IllegalArgumentException();
             }
         });
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
     }
 }
