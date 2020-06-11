@@ -5,22 +5,21 @@ import java.util.stream.Collectors;
 
 public class LottoNumber {
 
-    private List<Integer> numberlist;
+    private List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numberlist) {
-        this.numberlist = numberlist;
+    public LottoNumber(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public RewardStatus getRewardStatus(String[] winningNumber, int bonus) {
         int matchingCount = 0;
         for (int i = 0; i < winningNumber.length; i++) {
-            matchingCount += (numberlist.contains(Integer.parseInt(winningNumber[i]))) ? 1 : 0;
+            matchingCount += (numbers.contains(Integer.parseInt(winningNumber[i]))) ? 1 : 0;
         }
-        return new RewardStatus(matchingCount, numberlist.contains(bonus));
+        return new RewardStatus(matchingCount, numbers.contains(bonus));
     }
 
-    public String getLottoNumbertoString() {
-        return numberlist.stream().map(String::valueOf)
-                .collect(Collectors.joining(","));
+    public List<Integer> getLottoNumber() {
+        return numbers;
     }
 }

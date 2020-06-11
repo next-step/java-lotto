@@ -12,21 +12,21 @@ public class LottoApplication {
     public static void main(String[] args) {
 
         InputView input = new InputView();
-        int paymentPrice = new LottoPayment(input.displayLottoIntro()).pay();
-        Lotto lotto = new Lotto(paymentPrice);
+        int lottoCount = new LottoPayment(input.displayLottoIntro()).pay();
+        Lotto lotto = new Lotto(lottoCount);
         ResultView resultView = new ResultView();
 
-        input.displayIntroInputUI(paymentPrice);
+        input.displayIntroInputUI(lottoCount);
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         resultView.displayLottoNumbers(lottoNumbers);
 
         String[] inputNumber = input.displayLastLottoNumberInputUI();
         int bonusNumber = input.displayBonusLottoNumberInputUI();
 
-        List<RewardStatus> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
-        RankReward rankReward = new RankReward(new LottoResult(lottoRankList).getLottoResult());
-        resultView.displayResult(rankReward);
-        resultView.displayResultRateMessage((float) rankReward.getTotalPrize() / paymentPrice);
+        List<RewardStatus> lottoRewars = lotto.getRewardLotto(inputNumber, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottoRewars);
+        resultView.displayResult(lottoResult);
+        resultView.displayResultRateMessage((float) lottoResult.getTotalPrize() / lottoCount);
     }
 
 }

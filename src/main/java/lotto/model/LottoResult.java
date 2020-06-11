@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private List<Rank> rankList;
+    private List<Rank> ranks;
 
     public LottoResult(List<RewardStatus> rewardlottos) {
-        this.rankList = setWinnerResult(rewardlottos);
+        this.ranks = setWinnerResult(rewardlottos);
     }
 
     private List<Rank> setWinnerResult(List<RewardStatus> lottoWinerNumbers) {
@@ -18,7 +18,17 @@ public class LottoResult {
     }
 
     public List<Rank> getLottoResult() {
-        return this.rankList;
+        return this.ranks;
+    }
+
+    public int getWinnerCount(RewardStatus rewardStatus) {
+        return (int) ranks
+                .stream()
+                .filter(o -> o.equals(Rank.find(rewardStatus))).count();
+    }
+
+    public int getTotalPrize() {
+        return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
     }
 
 

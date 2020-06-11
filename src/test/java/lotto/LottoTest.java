@@ -24,7 +24,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(5);
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        String[] winnerExpected = lottoNumbers.get(0).getLottoNumbertoString().split(",");
+        String[] winnerExpected = lottoNumbers.get(0).getLottoNumber().toString().split(",");
 
         assertThat(lotto.getRewardLotto(winnerExpected, 0).get(0))
                     .isEqualTo(new RewardStatus(6, false));
@@ -36,7 +36,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(1);
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        String[] winnerExpected = lottoNumbers.get(0).getLottoNumbertoString().split(",");
+        String[] winnerExpected = lottoNumbers.get(0).getLottoNumber().toString().split(",");
         int bonus = Integer.parseInt(winnerExpected[0]);
         winnerExpected[0] = "0";
         assertThat(lotto.getRewardLotto(winnerExpected, bonus).get(0))

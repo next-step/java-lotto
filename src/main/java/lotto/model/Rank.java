@@ -23,12 +23,12 @@ public enum Rank {
         this.bonus = bonus;
     }
 
-    private static Map<RewardStatus, Rank> rankHash = Collections
+    private static Map<RewardStatus, Rank> RANKS = Collections
                                                             .unmodifiableMap(Stream.of(values())
                                                             .collect(Collectors.toMap(Rank::getRewardStatus, Function.identity())));
 
     public static Rank find(RewardStatus rewardStatus) {
-        return Optional.ofNullable(rankHash.get(rewardStatus)).orElse(MISS);
+        return Optional.ofNullable(RANKS.get(rewardStatus)).orElse(MISS);
     }
 
     public RewardStatus getRewardStatus() {

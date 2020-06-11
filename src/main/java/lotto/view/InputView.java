@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private final String INTRO_MESSAGE = "구입금액을 입력해 주세요.";
-    private final String LAST_LOTTO_WINNER_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
-    public final String DELIMITER = ",";
+    private final static String INTRO_MESSAGE = "구입금액을 입력해 주세요.";
+    private final static String LAST_LOTTO_WINNER_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private final static String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private final static String DELIMITER = ",";
     Scanner sc = new Scanner(System.in);
 
     public String displayLottoIntro() {
