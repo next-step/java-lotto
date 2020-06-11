@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
-    private static final int LOTTO_RANGE_START_NUMBER = 1;
-    private static final int LOTTO_RANGE_LAST_NUMBER = 45;
-    private static final int LOTTO_CREATE_COUNT = 6;
+    public static final int LOTTO_RANGE_START_NUMBER = 1;
+    public static final int LOTTO_RANGE_LAST_NUMBER = 45;
+    public static final int LOTTO_CREATE_COUNT = 6;
     private static List<Integer> lottoNumbers = IntStream.rangeClosed(LOTTO_RANGE_START_NUMBER, LOTTO_RANGE_LAST_NUMBER)
                                                     .boxed()
                                                     .collect(Collectors.toList());
