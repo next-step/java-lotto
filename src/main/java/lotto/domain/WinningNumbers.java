@@ -29,15 +29,11 @@ public class WinningNumbers {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    public Set<Integer> getWinningNumbers() {
-        return winningNumbers.getNumbers();
-    }
-
     public Integer getBonusNumber() {
         return bonusNumber;
     }
 
     public boolean hasNumber(int number) {
-        return winningNumbers.getNumbers().contains(number);
+        return winningNumbers.contains(number);
     }
 }

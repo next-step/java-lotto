@@ -47,4 +47,8 @@ public class Lotto {
     public Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
+    
+    public boolean contains(int number){
+        return numbers.contains(number);
+    }
 }
