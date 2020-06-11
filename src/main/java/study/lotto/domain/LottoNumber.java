@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final int LOTTO_NUMBER_SUBLIST_START = 0;
+    private static final int LOTTO_NUMBER_SUBLIST_END = 6;
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
@@ -38,7 +40,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     static Set<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_SHUFFLE);
 
-        return new TreeSet<>(LOTTO_NUMBER_SHUFFLE.subList(0, 6));
+        return new TreeSet<>(LOTTO_NUMBER_SHUFFLE.subList(LOTTO_NUMBER_SUBLIST_START, LOTTO_NUMBER_SUBLIST_END));
     }
 
     public int getNumber() {
