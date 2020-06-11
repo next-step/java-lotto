@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.util.ConvertInt;
+import lotto.util.Split;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,9 +17,10 @@ public class InputView {
         return buyAmount;
     }
 
-    public static String inputWinningNumber() {
+    public static List<Integer> inputWinningNumber() {
         System.out.println(TextFixture.INPUT_WINNING_LOTTO_NUMBERS);
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        return ConvertInt.from(Split.from(input, ","));
     }
 
     public static int inputBonusNumber() {
@@ -33,15 +37,16 @@ public class InputView {
         return count;
     }
 
-    public static List<String> inputManualLottos(int count) {
-        List<String> lottos = new ArrayList<>();
+    public static List<List<Integer>> inputManualLottos(int count) {
+        List<List<Integer>> lottos = new ArrayList<>();
         if (count < 0) {
             return lottos;
         }
 
         System.out.println(TextFixture.INPUT_BUY_MANUAL_NUMBERS);
         for (int i = 0; i < count; i++) {
-            lottos.add(scanner.nextLine());
+            String input = scanner.nextLine();
+            lottos.add(ConvertInt.from(Split.from(input, ",")));
         }
         return lottos;
     }
