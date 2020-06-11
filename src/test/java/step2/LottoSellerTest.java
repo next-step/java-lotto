@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +31,18 @@ public class LottoSellerTest {
         LottoSeller seller = new LottoSeller();
         assertThatIllegalArgumentException().isThrownBy(() -> seller.buyLotto(100));
         assertThatIllegalArgumentException().isThrownBy(() -> seller.buyLotto(1100));
+    }
 
+
+    @Test
+    @DisplayName("맞춤 갯수가 몇개인지 확인하는 테스트")
+    void 숫자_몇개_맞췄나() {
+
+        LottoTicket lottoTicket = LottoTicket.makeLottoTicket(Arrays.asList(1,2,3,4,5,6));
+        LottoSeller seller = new LottoSeller();
+        List<Integer> winningCountList = seller.requestLottoChecking("1,2,3,4,11,12", Collections.singletonList(lottoTicket));
+
+        assertThat(4).isEqualTo(winningCountList.get(0));
     }
 
 }

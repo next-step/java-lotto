@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,11 +24,9 @@ class StatisticsTest {
 
     @Test
     @DisplayName("당첨 등수 추가했을때 당첨 금액 확인 테스트")
-    void getTotalPriceTest(int input) {
+    void getTotalPriceTest() {
         int totalPrice = 5000 + 50000;
-        Statistics statistics = new Statistics();
-        statistics.addCount(3);
-        statistics.addCount(4);
+        Statistics statistics = new Statistics(Arrays.asList(3, 4));
         assertThat(totalPrice).isEqualTo(statistics.getTotalPrice());
     }
 }
