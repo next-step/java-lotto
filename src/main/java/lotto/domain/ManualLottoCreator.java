@@ -15,6 +15,7 @@ public class ManualLottoCreator {
 
             lottos.add(new Lotto(Arrays.stream(splitNumbers)
                     .map(ManualLottoCreator::parseInt)
+                    .sorted()
                     .collect(Collectors.toList())));
         }
         return lottos;
