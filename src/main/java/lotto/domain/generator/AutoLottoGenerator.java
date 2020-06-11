@@ -17,7 +17,7 @@ public class AutoLottoGenerator {
         return lottoNumberAll.stream().limit(Lotto.LOTTO_NUMBER_COUNT).collect(Collectors.toList());
     }
 
-    public static List<Lotto> generate(int autoLottoCount) {
+    protected static List<Lotto> generate(int autoLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for(int i = 0 ; i < autoLottoCount ; i++) {
             lottos.add(Lotto.of(createRandomLottoNumbers()));

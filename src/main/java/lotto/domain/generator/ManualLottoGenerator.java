@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ManualLottoGenerator {
 
-    public static List<Lotto> generate(List<ManualLotto> manualLottos) {
+    protected static List<Lotto> generate(List<ManualLotto> manualLottos) {
         final List<Lotto> lottos = new ArrayList<>();
 
         if(manualLottos == null) {
