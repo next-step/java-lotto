@@ -1,26 +1,28 @@
 package step2;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Statistics {
-    private Map<Integer, Integer> statistics = new HashMap<>();
+    private static final Map<Integer, Integer> statistics = new HashMap<>();
 
     public Statistics() {
-        initMap();
+        for (WinningStatistics value : WinningStatistics.values()) {
+            statistics.put(value.getMatchedNumberCount(), 0);
+        }
+    }
+    public Statistics(List<Integer> winningCountList) {
+        this();
+
+        winningCountList.stream().filter(statistics::containsKey).forEach(key -> {
+            int count = statistics.get(key);
+            statistics.put(key, ++count);
+        });
     }
 
     public Map<Integer, Integer> getStatistics() {
         return statistics;
-    }
-
-    public void addCount(int winningCount) {
-        if (!statistics.containsKey(winningCount)) {
-            return;
-        }
-
-        Integer count = statistics.get(winningCount);
-        statistics.put(winningCount, ++count);
     }
 
     public int getTotalPrice() {
@@ -39,11 +41,5 @@ public class Statistics {
         }
 
         return 0;
-    }
-
-    private void initMap() {
-        for (WinningStatistics value : WinningStatistics.values()) {
-            statistics.put(value.getMatchedNumberCount(), 0);
-        }
     }
 }
