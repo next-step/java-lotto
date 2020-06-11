@@ -48,15 +48,12 @@ public class Lotto {
 		return numbers.size();
 	}
 
-	public int getRankWithWinningLotto(List<String> winningLotto) {
+	public int getRankWithWinningLotto(List<Integer> winningLotto) {
 		
 		System.out.println("this.numbers" + this.numbers);
 		System.out.println("winningLotto" + winningLotto);
 		
 		
-		// 로그를 찍어서 확인하고 있지만 
-		// Q) 여기서 자꾸 0을 반환하고 있어 계산이 어려운 부분이있습니다. ㅜㅜ 시간을 너무 잡아먹어서  리뷰요청을 드려야될것같습니다.
-			
 		System.out.println(this.numbers.stream()
                 .filter(winningLotto::contains)
                 .count());
