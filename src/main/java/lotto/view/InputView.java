@@ -1,12 +1,14 @@
 package lotto.view;
 
+import static lotto.utils.StringConverter.DELIMITER;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.model.LottoNumber;
 import lotto.model.PurchasedLottoTicket;
-import lotto.model.PurchasedLottoTickets;
-import lotto.utils.StringConverter;
 
 public class InputView {
 
@@ -31,9 +33,17 @@ public class InputView {
     public static List<PurchasedLottoTicket> inputPurchasedManualTicketsByCount(int purchaseManualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_TEXT);
 
-        return Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
+        return Stream.generate(() -> convertToLottoNumbers(SCANNER.nextLine()))
             .limit(purchaseManualLottoCount)
             .collect(Collectors.toList());
+    }
+
+    private static PurchasedLottoTicket convertToLottoNumbers(String s) {
+        List<LottoNumber> numbers = Arrays.stream(s.split(DELIMITER))
+            .map(v -> LottoNumber.of(Integer.parseInt(v)))
+            .collect(Collectors.toList());
+
+        return PurchasedLottoTicket.create(numbers);
     }
 
     public static String inputWinningLottoNumber() {
