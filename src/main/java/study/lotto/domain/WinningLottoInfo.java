@@ -30,10 +30,6 @@ public class WinningLottoInfo {
         }
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return winningLotto.contains(lottoNumber);
-    }
-
     public LottoRank checkLottoRank(Lotto lotto) {
         return LottoRank.find(
                 (int)compareToWinningNumbers(lotto),
@@ -41,10 +37,7 @@ public class WinningLottoInfo {
     }
 
     public long compareToWinningNumbers(Lotto lotto) {
-        return winningLotto.getLottoNumbers()
-                .stream()
-                .filter(lotto::contains)
-                .count();
+        return winningLotto.compareToLotto(lotto);
     }
 
     private boolean containsBonusNumber(Lotto lotto, int bonusNumber) {

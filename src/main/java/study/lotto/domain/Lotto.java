@@ -50,6 +50,12 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public long compareToLotto(Lotto lotto) {
+        return lottoNumbers.stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
     public String toString() {
         return lottoNumbers
                 .stream()
