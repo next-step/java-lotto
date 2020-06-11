@@ -15,7 +15,7 @@ public class LottoTicketsTest {
     @CsvSource(value = {"14000:0:14", "20000:0:20", "5000:0:5"}, delimiter = ':')
     public void publishLottoTicketsTest(int price, long manualAmount, long totalCount){
         LottoInputDto lottoInputDto = new LottoInputDto(price,  manualAmount, null);
-        assertThat(LottoShop.buyLottos(lottoInputDto).getlottoTickets().size())
+        assertThat(LottoShop.buyLottos(lottoInputDto).getLottoTickets().size())
                                                     .isEqualTo(totalCount);
     }
 }

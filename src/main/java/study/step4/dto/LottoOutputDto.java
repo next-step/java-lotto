@@ -2,28 +2,24 @@ package study.step4.dto;
 
 import study.step4.domain.LottoTicket;
 import study.step4.domain.LottoTickets;
+import study.step4.domain.WinningRanks;
 
 import java.util.List;
 
 public class LottoOutputDto{
+    private LottoTickets lottoTickets;
+    private long autoLottoAmount;
+    private long manualLottoAmount;
+    private WinningRanks winningRanks;
 
-    private final LottoTickets lottoTickets;
-    private final long autoLottoAmount;
-    private final long manualLottoAmount;
-
-    public LottoOutputDto(LottoTickets lottoTickets,
-                          long autoLottoAmount, long manualLottoAmount) {
+    public LottoOutputDto(LottoTickets lottoTickets, long autoLottoAmount, long manualLottoAmount) {
         this.lottoTickets = lottoTickets;
         this.autoLottoAmount = autoLottoAmount;
         this.manualLottoAmount = manualLottoAmount;
     }
 
-    public LottoTickets getObjectLottoTickets() {
-        return lottoTickets;
-    }
-
-    public List<LottoTicket> getlottoTickets(){
-        return lottoTickets.getLottoTickets();
+    public LottoOutputDto(WinningRanks winningRanks){
+        this.winningRanks = winningRanks;
     }
 
     public long getAutoLottoAmount() {
@@ -32,5 +28,9 @@ public class LottoOutputDto{
 
     public long getManualLottoAmount() {
         return manualLottoAmount;
+    }
+
+    public List<LottoTicket> getlottoTickets() {
+        return lottoTickets.getLottoTickets();
     }
 }

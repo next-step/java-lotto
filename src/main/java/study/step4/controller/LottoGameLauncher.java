@@ -9,9 +9,12 @@ import study.step4.view.ResultView;
 public class LottoGameLauncher {
     public static void main(String[] args) {
         LottoInputDto lottoInputDto = InputView.inputLottoValues();
-        LottoOutputDto lottoOutputDto = LottoShop.buyLottos(lottoInputDto);
+        LottoTickets lottoTickets = LottoShop.buyLottos(lottoInputDto);
+        LottoOutputDto lottoOutputDto = new LottoOutputDto(lottoTickets, lottoTickets.countLottoTickets(),
+                                                            lottoInputDto.getManualAmount());
         ResultView.printLottoTickets(lottoOutputDto);
         WinningLotto winningLotto = InputView.inputLastWinningNumbers();
-        ResultView.printLottoResult(lottoOutputDto, winningLotto);
+        WinningRanks winningRanks = lottoTickets.confirmWinningResult(winningLotto);
+        ResultView.printLottoResult(winningRanks);
     }
 }

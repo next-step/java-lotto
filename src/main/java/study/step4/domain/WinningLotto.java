@@ -10,7 +10,7 @@ public class WinningLotto {
         this(new LottoTicket(winningLottoNumbers), LottoNumber.cacheNumber(bonusBall));
     }
 
-    public WinningLotto(LottoTicket winningLottoTicket, LottoNumber bonusBall) {
+    private WinningLotto(LottoTicket winningLottoTicket, LottoNumber bonusBall) {
         bonusBall.validateDuplicationBonusBall(winningLottoTicket.getLottoNumbers());
         this.winningLottoTicket = winningLottoTicket;
         this.bonusBall = bonusBall;

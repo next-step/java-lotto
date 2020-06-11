@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import study.step4.domain.LottoShop;
+import study.step4.domain.LottoTickets;
 import study.step4.dto.LottoInputDto;
 import study.step4.dto.LottoOutputDto;
 
@@ -31,8 +32,8 @@ public class LottoShopTest {
     @CsvSource(value = {"10000:10", "14000:14", "20000:20", "31500:31"}, delimiter = ':')
     public void buyLottoTicketsTest(long price, int lottoCounting){
         LottoInputDto lottoInputDto = new LottoInputDto(price, 0, null);
-        LottoOutputDto lottoOutputDto = LottoShop.buyLottos(lottoInputDto);
-        assertThat(lottoOutputDto.getlottoTickets())
+        LottoTickets lottoTickets = LottoShop.buyLottos(lottoInputDto);
+        assertThat(lottoTickets.getLottoTickets())
                 .hasSize(lottoCounting);
     }
 
@@ -45,8 +46,8 @@ public class LottoShopTest {
         inputNumbers.add("5,6,7,8,9,10");
         LottoInputDto lottoInputDto = new LottoInputDto(price, inputNumbers.size(), inputNumbers);
 
-        LottoOutputDto lottoOutputDto = LottoShop.buyLottos(lottoInputDto);
-        assertThat(lottoOutputDto.getlottoTickets())
+        LottoTickets lottoTickets = LottoShop.buyLottos(lottoInputDto);
+        assertThat(lottoTickets.getLottoTickets())
                 .hasSize(lottoCounting);
     }
 }

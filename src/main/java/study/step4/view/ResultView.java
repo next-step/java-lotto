@@ -21,8 +21,7 @@ public class ResultView {
                 lottoOutputDto.getManualLottoAmount(),lottoOutputDto.getAutoLottoAmount()));
     }
 
-    public static void printLottoResult(LottoOutputDto lottoOutputDto, WinningLotto winningLotto) {
-        WinningRanks winningRanks = lottoOutputDto.getObjectLottoTickets().confirmWinningResult(winningLotto);
+    public static void printLottoResult(WinningRanks winningRanks) {
         Stream.of(WinningRank.values())
               .filter(rank -> !WinningRank.NOTHING.equals(rank))
               .forEach(rank -> System.out.println(String.format("[%s] %d개 일치 (%d원)- %d개",

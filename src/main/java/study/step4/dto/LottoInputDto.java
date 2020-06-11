@@ -3,9 +3,9 @@ package study.step4.dto;
 import java.util.List;
 
 public class LottoInputDto {
-    private final long price;
-    private final long manualAmount;
-    private final List<String> inputNumbers;
+    private long price;
+    private long manualAmount;
+    private List<String> inputNumbers;
 
     public LottoInputDto(long price, long manualAmount, List<String> inputNumbers) {
         this.price = price;
