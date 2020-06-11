@@ -10,10 +10,10 @@ public class LottoTicketGenerator {
     private LottoTicketGenerator() {
     }
 
-    public static LottoTicket generate(int autoCount, List<Lotto> manualLottos) {
+    public static LottoTicket generate(int autoCount, ManualLottoNumbers manualLottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(createAutoLottos(autoCount));
-        lottos.addAll(manualLottos);
+        lottos.addAll(manualLottoNumbers.toLottos());
 
         return LottoTicket.create(lottos);
     }

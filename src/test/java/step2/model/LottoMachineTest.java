@@ -35,7 +35,7 @@ public class LottoMachineTest {
     @MethodSource("provideMoneyForBuyTicket")
     @ParameterizedTest(name = "금액을 ''{0}'' 입력하면 ''{1}''장 반환")
     void buyTicket(MoneyAmount moneyAmount, int expectedTicketCount) {
-        LottoTicket lottoTicket = LOTTO_MACHINE.buyTicket(moneyAmount, new ArrayList<>());
+        LottoTicket lottoTicket = LOTTO_MACHINE.buyTicket(moneyAmount, ManualLottoNumbers.empty());
 
         assertThat(lottoTicket.getAutoCount()).isEqualTo(expectedTicketCount);
     }
@@ -52,7 +52,7 @@ public class LottoMachineTest {
     @DisplayName("입력한 금액이 티켓 가격보다 적으면 예외 발생")
     @Test
     void buyTicketExceptionThrown() {
-        assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(LottoData.createMoneyAmount(999), new ArrayList<>()))
+        assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(LottoData.createMoneyAmount(999), ManualLottoNumbers.empty()))
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 }

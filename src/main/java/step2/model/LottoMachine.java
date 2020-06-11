@@ -22,10 +22,10 @@ public class LottoMachine {
         return new LottoMachine(ticketPrice);
     }
 
-    public LottoTicket buyTicket(MoneyAmount moneyAmount, List<Lotto> manualLottos) {
+    public LottoTicket buyTicket(MoneyAmount moneyAmount, ManualLottoNumbers manualLottoNumbers) {
         int availableCount = ticketPrice.calculatePurchaseCount(moneyAmount);
 
-        int manualCount = manualLottos.size();
+        int manualCount = manualLottoNumbers.getManualCount();
         int autoCount = availableCount - manualCount;
 
         if (isLessThanMinCount(availableCount)
@@ -35,7 +35,7 @@ public class LottoMachine {
 
         moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(availableCount));
 
-        return LottoTicketGenerator.generate(autoCount, manualLottos);
+        return LottoTicketGenerator.generate(autoCount, manualLottoNumbers);
     }
 
     private boolean isOverManualLottos(int availableCount, int manualCount) {

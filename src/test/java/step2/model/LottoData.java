@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoData {
 
     public static MatchResult createMatchResult(LottoRank lottoRank) {
@@ -18,11 +21,10 @@ public class LottoData {
                 .collect(Collectors.toList());
     }
 
-    public static List<Lotto> createManualLottos(int count) {
+    public static ManualLottoNumbers createManualLottoNumbers(int count) {
         return IntStream.rangeClosed(1, count)
                 .mapToObj(i -> createLottoNumbers(6))
-                .map(Lotto::createManual)
-                .collect(Collectors.toList());
+                .collect(collectingAndThen(toList(), ManualLottoNumbers::create));
     }
 
     public static List<LottoNumber> createLottoNumbers(int count) {

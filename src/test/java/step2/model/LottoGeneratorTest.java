@@ -16,15 +16,15 @@ public class LottoGeneratorTest {
     @ValueSource(ints = {1, 20, 100})
     @ParameterizedTest
     void generateAutoType(int autoCount) {
-        LottoTicket lottoTicket = LottoTicketGenerator.generate(autoCount, new ArrayList<>());
+        LottoTicket lottoTicket = LottoTicketGenerator.generate(autoCount, ManualLottoNumbers.empty());
         assertThat(lottoTicket.getAutoCount()).isEqualTo(autoCount);
     }
 
     @DisplayName("입력한 수동 로또 개수와 생성된 수동 개수는 동일")
     @Test
     void generateManualType() {
-        List<Lotto> manualLottos = LottoData.createManualLottos(10);
-        LottoTicket lottoTicket = LottoTicketGenerator.generate(0, manualLottos);
+        ManualLottoNumbers manualLottoNumbers = LottoData.createManualLottoNumbers(10);
+        LottoTicket lottoTicket = LottoTicketGenerator.generate(0, manualLottoNumbers);
         assertThat(lottoTicket.getManualCount()).isEqualTo(10);
     }
 }

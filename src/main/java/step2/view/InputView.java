@@ -1,9 +1,6 @@
 package step2.view;
 
-import step2.model.Lotto;
-import step2.model.LottoNumber;
-import step2.model.Money;
-import step2.model.MoneyAmount;
+import step2.model.*;
 import step2.util.LottoNumberSplitter;
 
 import java.util.ArrayList;
@@ -11,6 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
@@ -32,27 +33,22 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Lotto> getManualLottoNumber(int manualCount) {
+    public static ManualLottoNumbers getManualLottoNumber(int manualCount) {
         if (manualCount == 0) {
-            return new ArrayList<>();
+            return ManualLottoNumbers.empty();
         }
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<Lotto> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            manualLottoNumbers.add(readManualLotto());
-        }
-
-        return manualLottoNumbers;
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> readManualLottoNumbers())
+                .collect(collectingAndThen(toList(), ManualLottoNumbers::create));
     }
 
-    public static Lotto readManualLotto() {
-        List<LottoNumber> lottoNumbers = LottoNumberSplitter.split(scanner.nextLine()).stream()
+    public static List<LottoNumber> readManualLottoNumbers() {
+        return LottoNumberSplitter.split(scanner.nextLine()).stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-
-        return Lotto.createManual(lottoNumbers);
     }
 
     public static Set<LottoNumber> getWinningNumbers() {
