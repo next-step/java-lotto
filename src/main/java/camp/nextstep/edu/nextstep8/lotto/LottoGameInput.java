@@ -12,7 +12,7 @@ public class LottoGameInput {
         throw new IllegalArgumentException("구입 금액을 숫자로 정확히 입력해 주세요");
     }
 
-    public static String getWinnerNumberAtLastWeek() {
+    public static String getWinnerNumbersAtLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
         if(SCANNER.hasNextLine()) {
             return SCANNER.next().trim();
