@@ -10,7 +10,9 @@ public class LottoTicketGenerator {
     private LottoTicketGenerator() {
     }
 
-    public static LottoTicket generate(int autoCount, ManualLottoNumbers manualLottoNumbers) {
+    public static LottoTicket generate(LottoCount lottoCount, ManualLottoNumbers manualLottoNumbers) {
+        int autoCount = lottoCount.calculateAutoCount(manualLottoNumbers);
+
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(createAutoLottos(autoCount));
         lottos.addAll(manualLottoNumbers.toLottos());

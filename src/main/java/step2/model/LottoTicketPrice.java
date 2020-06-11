@@ -10,11 +10,12 @@ public enum LottoTicketPrice {
         this.ticketPrice = Money.valueOf(ticketPrice);
     }
 
-    public int calculatePurchaseCount(MoneyAmount moneyAmount) {
-        return moneyAmount.getRemainAmount().divideBy(ticketPrice);
+    public LottoCount calculatePurchaseCount(MoneyAmount moneyAmount) {
+        int purchaseCount = moneyAmount.getRemainAmount().divideBy(ticketPrice);
+        return LottoCount.valueOf(purchaseCount);
     }
 
-    public Money calculatePurchaseAmount(int ticketCount) {
-        return ticketPrice.multiply(ticketCount);
+    public Money calculatePurchaseAmount(LottoCount lottoCount) {
+        return ticketPrice.multiply(lottoCount.getValue());
     }
 }

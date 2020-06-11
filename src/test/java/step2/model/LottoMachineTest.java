@@ -53,6 +53,6 @@ public class LottoMachineTest {
     @Test
     void buyTicketExceptionThrown() {
         assertThatThrownBy(() -> LOTTO_MACHINE.buyTicket(LottoData.createMoneyAmount(999), ManualLottoNumbers.empty()))
-                .isInstanceOf(NotEnoughMoneyException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

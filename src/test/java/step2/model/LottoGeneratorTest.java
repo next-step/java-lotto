@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
@@ -16,7 +13,7 @@ public class LottoGeneratorTest {
     @ValueSource(ints = {1, 20, 100})
     @ParameterizedTest
     void generateAutoType(int autoCount) {
-        LottoTicket lottoTicket = LottoTicketGenerator.generate(autoCount, ManualLottoNumbers.empty());
+        LottoTicket lottoTicket = LottoTicketGenerator.generate(LottoCount.valueOf(autoCount), ManualLottoNumbers.empty());
         assertThat(lottoTicket.getAutoCount()).isEqualTo(autoCount);
     }
 
@@ -24,7 +21,7 @@ public class LottoGeneratorTest {
     @Test
     void generateManualType() {
         ManualLottoNumbers manualLottoNumbers = LottoData.createManualLottoNumbers(10);
-        LottoTicket lottoTicket = LottoTicketGenerator.generate(0, manualLottoNumbers);
+        LottoTicket lottoTicket = LottoTicketGenerator.generate(LottoCount.valueOf(10), manualLottoNumbers);
         assertThat(lottoTicket.getManualCount()).isEqualTo(10);
     }
 }

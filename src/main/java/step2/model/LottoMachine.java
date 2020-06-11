@@ -2,11 +2,7 @@ package step2.model;
 
 import step2.exception.NotEnoughMoneyException;
 
-import java.util.List;
-
 public class LottoMachine {
-
-    private static final int MIN_TICKET_COUNT = 1;
 
     private final LottoTicketPrice ticketPrice;
 
@@ -23,26 +19,14 @@ public class LottoMachine {
     }
 
     public LottoTicket buyTicket(MoneyAmount moneyAmount, ManualLottoNumbers manualLottoNumbers) {
-        int availableCount = ticketPrice.calculatePurchaseCount(moneyAmount);
+        LottoCount lottoCount = ticketPrice.calculatePurchaseCount(moneyAmount);
 
-        int manualCount = manualLottoNumbers.getManualCount();
-        int autoCount = availableCount - manualCount;
-
-        if (isLessThanMinCount(availableCount)
-                || isOverManualLottos(availableCount, manualCount)) {
+        if (lottoCount.isOverManualCount(manualLottoNumbers)) {
             throw new NotEnoughMoneyException();
         }
 
-        moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(availableCount));
+        moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(lottoCount));
 
-        return LottoTicketGenerator.generate(autoCount, manualLottoNumbers);
-    }
-
-    private boolean isOverManualLottos(int availableCount, int manualCount) {
-        return availableCount < manualCount;
-    }
-
-    private boolean isLessThanMinCount(int availableCount) {
-        return availableCount < MIN_TICKET_COUNT;
+        return LottoTicketGenerator.generate(lottoCount, manualLottoNumbers);
     }
 }
