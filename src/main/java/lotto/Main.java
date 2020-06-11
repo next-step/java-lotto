@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,12 @@ public class Main {
         int manualLottoCount = InputView.buyManualLotto(money.countLotto());
 
         List<Lotto> manualLottos = ManualLottoCreator.createLottos(InputView.inputManualNumbers(manualLottoCount));
-        List<Lotto> lottos = LottoMachine.createLottos(money.countLotto());
-        ResultView.printLotto(lottos);
+        List<Lotto> autoLottos = LottoMachine.createLottos(money.countLotto() - manualLottoCount);
+        ResultView.printLotto(manualLottos, autoLottos);
+
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(autoLottos);
 
         String[] winningNumbers  = InputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(winningNumbers, LottoNumber.valueOf(InputView.inputBonusBall()));

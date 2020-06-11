@@ -11,8 +11,26 @@ public class ManualLottoCreator {
         List<Lotto> lottos = new ArrayList<>();
         for (String numbers : lottoNumbers) {
             String[] splitNumbers = numbers.split(", ");
-            lottos.add(new Lotto(Arrays.stream(splitNumbers).map(Integer::parseInt).collect(Collectors.toList())));
+            validateNumbersLength(splitNumbers);
+
+            lottos.add(new Lotto(Arrays.stream(splitNumbers)
+                    .map(ManualLottoCreator::parseInt)
+                    .collect(Collectors.toList())));
         }
         return lottos;
+    }
+
+    private static void validateNumbersLength(String[] splitNumbers) {
+        if (splitNumbers.length != 6) {
+            throw new IllegalArgumentException("로또 숫자가 부족합니다.");
+        }
+    }
+
+    private static int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자가 아닙니다.");
+        }
     }
 }

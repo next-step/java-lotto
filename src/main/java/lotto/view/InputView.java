@@ -12,8 +12,7 @@ public class InputView {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("숫자로 입력해 주세요.");
-            return 0;
+            throw new NumberFormatException("숫자로 입력해 주세요.");
         }
     }
 
@@ -23,7 +22,7 @@ public class InputView {
         try {
             manualLottoCount = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("숫자로 입력해 주세요.");
+            throw new NumberFormatException("숫자로 입력해 주세요.");
         }
         if (manualLottoCount > lottoCount) {
             throw new ArithmeticException("돈이 부족합니다.");
@@ -42,7 +41,6 @@ public class InputView {
 
     public static String[] inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
         return scanner.nextLine().split(", ");
     }
 
@@ -51,8 +49,7 @@ public class InputView {
         try {
             return scanner.nextInt();
         } catch (NumberFormatException e) {
-            System.out.println("숫자로 입력해 주세요.");
-            return 0;
+            throw new NumberFormatException("숫자로 입력해 주세요.");
         }
     }
 }
