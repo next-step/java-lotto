@@ -28,14 +28,12 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static PurchasedLottoTickets inputPurchasedManualTicketsByCount(final int purchaseManualLottoCount) {
+    public static List<PurchasedLottoTicket> inputPurchasedManualTicketsByCount(int purchaseManualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_TEXT);
 
-        List<PurchasedLottoTicket> purchasedLottoTickets = Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
+        return Stream.generate(() -> StringConverter.convertToLottoNumbers(SCANNER.nextLine()))
             .limit(purchaseManualLottoCount)
             .collect(Collectors.toList());
-
-        return PurchasedLottoTickets.create(purchasedLottoTickets);
     }
 
     public static String inputWinningLottoNumber() {
