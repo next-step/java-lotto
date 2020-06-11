@@ -64,26 +64,3 @@ class StringLottoNumberConvertorTest {
                 .hasMessage("잘못된 번호 입니다 : 46");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
