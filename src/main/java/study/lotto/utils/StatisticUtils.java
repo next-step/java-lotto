@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class StatisticUtils {
 
+    private StatisticUtils() {}
+
     public static BigDecimal calculateEarningRate(int totalPrice, LottoResult lottoResult) {
         BigDecimal totalEarning = new BigDecimal(calculateTotalEarning(lottoResult.getRankToCount()));
 
