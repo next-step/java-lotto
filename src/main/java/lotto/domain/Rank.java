@@ -11,10 +11,10 @@ public enum Rank {
     FIRST(6, 2_000_000_000);
 
     private static final int MATCH_MIN_COUNT = 3;
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
