@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.data;
 
-import lotto.domain.data.LottoNumber;
-import lotto.domain.data.LottoNumberPool;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,23 +18,21 @@ class LottoNumberPoolTest {
     @Test
     void getOneNumberTest() {
         LottoNumber lottoNumber = LottoNumberPool.get(1);
-
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
     }
 
     @DisplayName("LottoPool 안에 있는 여러개의 로또번호를 정상적으로 가져온다.")
     @Test
     void testGetNumbersTest() {
         List<LottoNumber> lottoNumbers = LottoNumberPool.get(List.of(1,2,3));
-        List<Integer> lottoNumberInt = lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
-        assertThat(lottoNumberInt).containsOnly(1,2,3);
+        assertThat(lottoNumbers).containsOnly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3));
     }
 
     @DisplayName("LottoPool 안에 있는 모든 로또번호를 정상적으로 가져온다.")
     @Test
     void getAllTest() {
-        List<Integer> lottoNumbers = LottoNumberPool.getAll().stream().map(LottoNumber::getNumber).collect(Collectors.toList());
-        List<Integer> expectationNumbers = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = LottoNumberPool.getAll();
+        List<LottoNumber> expectationNumbers = IntStream.rangeClosed(1,45).boxed().map(LottoNumber::of).collect(Collectors.toList());
 
         assertThat(lottoNumbers).containsAll(expectationNumbers);
     }
