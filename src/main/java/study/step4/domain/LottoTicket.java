@@ -45,7 +45,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket auto(){
-        return new LottoTicket(LottoNumbers.getLottoNumbers());
+        return new LottoTicket(NumberFactory.getLottoNumbers());
     }
 
     public List<LottoNumber> getLottoNumbers() {
