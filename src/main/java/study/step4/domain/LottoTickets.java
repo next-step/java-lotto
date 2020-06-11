@@ -26,8 +26,7 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public static LottoTickets autoPublish(LottoInputDto lottoInputDto) {
-        long autoLottoCounting = LottoShop.calculateAutoLottoCounting(lottoInputDto);
+    public static LottoTickets autoPublish(long autoLottoCounting) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (long i = INIT_INDEX; i < autoLottoCounting; i++){
             lottoTickets.add(LottoTicket.auto());
@@ -36,11 +35,10 @@ public class LottoTickets {
     }
 
     public static LottoTickets manualPublish(LottoInputDto lottoInputDto) {
-        List<LottoTicket> lottoTickets = lottoInputDto.getInputNumbers()
-                                                      .stream()
-                                                      .map(LottoTicket::manual)
-                                                      .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+        return lottoInputDto.getInputNumbers()
+                .stream()
+                .map(LottoTicket::manual)
+                .collect(collectingAndThen(toList(), LottoTickets::new));
     }
 
 
