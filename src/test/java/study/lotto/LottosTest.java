@@ -2,9 +2,9 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.model.Lotto;
-import study.lotto.model.LottoNumber;
-import study.lotto.model.Lottos;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
+import study.lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.Arrays;

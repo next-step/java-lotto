@@ -1,7 +1,7 @@
 package study.lotto;
 
-import study.lotto.model.LottoPurchase;
-import study.lotto.model.Lottos;
+import study.lotto.domain.LottoPurchase;
+import study.lotto.domain.Lottos;
 import study.lotto.service.LottoService;
 import study.lotto.view.InputView;
 

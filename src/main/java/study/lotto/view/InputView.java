@@ -1,6 +1,6 @@
 package study.lotto.view;
 
-import study.lotto.model.Lotto;
+import study.lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

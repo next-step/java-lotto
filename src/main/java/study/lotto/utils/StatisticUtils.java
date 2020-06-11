@@ -1,7 +1,7 @@
 package study.lotto.utils;
 
-import study.lotto.model.LottoRank;
-import study.lotto.model.LottoResult;
+import study.lotto.domain.LottoRank;
+import study.lotto.domain.LottoResult;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

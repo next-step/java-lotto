@@ -1,4 +1,4 @@
-package study.lotto.model;
+package study.lotto.domain;
 
 public class LottoPurchase {
     private static final int LOTTO_PRICE = 1000;

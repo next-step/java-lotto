@@ -2,9 +2,9 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.model.LottoResult;
-import study.lotto.model.Lottos;
-import study.lotto.model.WinningLottoInfo;
+import study.lotto.domain.LottoResult;
+import study.lotto.domain.Lottos;
+import study.lotto.domain.WinningLottoInfo;
 import study.lotto.utils.StatisticUtils;
 
 import java.math.BigDecimal;

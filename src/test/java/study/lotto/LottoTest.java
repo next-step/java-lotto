@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.lotto.model.Lotto;
-import study.lotto.model.LottoNumber;
-import study.lotto.model.WinningLottoInfo;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
+import study.lotto.domain.WinningLottoInfo;
 
 import java.util.List;
 import java.util.stream.Collectors;

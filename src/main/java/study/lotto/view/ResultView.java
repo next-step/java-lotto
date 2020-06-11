@@ -1,8 +1,8 @@
 package study.lotto.view;
 
-import study.lotto.model.LottoRank;
-import study.lotto.model.LottoResult;
-import study.lotto.model.Lottos;
+import study.lotto.domain.LottoRank;
+import study.lotto.domain.LottoResult;
+import study.lotto.domain.Lottos;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

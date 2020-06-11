@@ -1,9 +1,9 @@
 package study.lotto.service;
 
-import study.lotto.model.LottoResult;
-import study.lotto.model.Lottos;
-import study.lotto.model.LottoPurchase;
-import study.lotto.model.WinningLottoInfo;
+import study.lotto.domain.LottoResult;
+import study.lotto.domain.Lottos;
+import study.lotto.domain.LottoPurchase;
+import study.lotto.domain.WinningLottoInfo;
 import study.lotto.utils.StatisticUtils;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
