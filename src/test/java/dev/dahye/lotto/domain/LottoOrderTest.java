@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
@@ -55,5 +56,14 @@ class LottoOrderTest {
                 arguments(1, 1),
                 arguments(2, 1)
         );
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("로또 금액이 null인 경우 IllegalArgumentException")
+    void exception_lottoMoney_is_null(LottoMoney lottoMoney) {
+        assertThatThrownBy(() -> LottoOrder.of(lottoMoney, 1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 금액이 입력되지 않았습니다.");
     }
 }
