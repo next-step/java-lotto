@@ -1,12 +1,12 @@
-package study.lotto.model;
+package study.lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
@@ -35,33 +35,25 @@ public class Lotto {
         return new Lotto(lottoNumberList);
     }
 
-    public static int calculateNumOfLottos(int totalPrice) {
-        return totalPrice / LOTTO_PRICE;
+    public static Lotto of(String[] lottoNumbers) {
+        return Arrays.stream(lottoNumbers)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public long compareToWinningNumbers(WinningLotto winningLotto) {
-        return lottoNumbers
-                .stream()
-                .filter(winningLotto::contains)
-                .count();
-    }
-
-    private boolean containsBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
-    }
-
-    public LottoRank checkLottoRank(WinningLotto winningLotto, int bonusNumber) {
-        return LottoRank.find(
-                (int)compareToWinningNumbers(winningLotto),
-                containsBonusNumber(bonusNumber));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public long compareToLotto(Lotto lotto) {
+        return lottoNumbers.stream()
+                .filter(lotto::contains)
+                .count();
     }
 
     public String toString() {

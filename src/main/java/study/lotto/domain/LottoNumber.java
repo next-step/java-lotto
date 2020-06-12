@@ -1,10 +1,12 @@
-package study.lotto.model;
+package study.lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final int LOTTO_NUMBER_SUBLIST_START = 0;
+    private static final int LOTTO_NUMBER_SUBLIST_END = 6;
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
@@ -12,14 +14,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
                                                                             .mapToObj(LottoNumber::new)
                                                                             .collect(Collectors.toList());
 
+    private static final List<LottoNumber> LOTTO_NUMBER_SHUFFLE = new ArrayList<>(LOTTO_NUMBER_BASE);
+
     private final int number;
 
-    public LottoNumber(int number) {
-        validateLottoNumber(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateLottoNumber(int number) {
+    public static LottoNumber of(int number) {
+        validateLottoNumber(number);
+        return LOTTO_NUMBER_BASE.get(number - 1);
+    }
+
+    private static void validateLottoNumber(int number) {
         if(number < LOTTO_NUMBER_MIN) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_MIN + "보다 작을 수 없습니다.");
         }
@@ -30,9 +38,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     static Set<LottoNumber> generateLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBER_BASE);
+        Collections.shuffle(LOTTO_NUMBER_SHUFFLE);
 
-        return new TreeSet<>(LOTTO_NUMBER_BASE.subList(0, 6));
+        return new TreeSet<>(LOTTO_NUMBER_SHUFFLE.subList(LOTTO_NUMBER_SUBLIST_START, LOTTO_NUMBER_SUBLIST_END));
     }
 
     public int getNumber() {

@@ -2,13 +2,15 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.model.Lottos;
-import study.lotto.model.Statistics;
-import study.lotto.model.WinningLotto;
+import study.lotto.domain.LottoResult;
+import study.lotto.domain.Lottos;
+import study.lotto.domain.WinningLottoInfo;
+import study.lotto.utils.StatisticUtils;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StatisticsTest {
 
@@ -18,23 +20,19 @@ public class StatisticsTest {
         Lottos lottos = Lottos.of(10);
 
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
-        WinningLotto winningLotto = WinningLotto.of(split);
-        Statistics statistics = new Statistics(lottos);
-        statistics.calculateStatistics(winningLotto, 7);
+        WinningLottoInfo winningLottoInfo = WinningLottoInfo.of(split, 7);
 
-        assertThat(statistics.calculateEarningRate(14000))
+        LottoResult lottoResult = LottoResult.produce(lottos, winningLottoInfo);
+
+        assertThat(StatisticUtils.calculateEarningRate(14000, lottoResult))
                 .isGreaterThanOrEqualTo(BigDecimal.ZERO);
     }
 
     @DisplayName("당첨금 통계 계산 - 당첨 번호와 보너스 번호가 중복되어 IllegalArgumentException 발생")
     @Test
     void calculate_statistics_with_error() {
-        Lottos lottos = Lottos.of(10);
-
         String[] split = "1, 2, 3, 4, 5, 6".split(", ");
-        WinningLotto winningLotto = WinningLotto.of(split);
-        Statistics statistics = new Statistics(lottos);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> statistics.calculateStatistics(winningLotto, 1));
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLottoInfo.of(split, 1));
     }
 }

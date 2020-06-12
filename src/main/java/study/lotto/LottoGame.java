@@ -1,28 +1,18 @@
 package study.lotto;
 
-import study.lotto.model.Lotto;
-import study.lotto.model.Lottos;
-import study.lotto.model.Statistics;
-import study.lotto.model.WinningLotto;
+import study.lotto.domain.LottoPurchase;
+import study.lotto.domain.Lottos;
+import study.lotto.service.LottoService;
 import study.lotto.view.InputView;
-import study.lotto.view.ResultView;
 
 public class LottoGame {
 
     public static void main(String[] args) {
-        int totalPrice = InputView.scanTotalPrice();
-        int bonusNumber = InputView.scanBonusNumber();
-        int numOfLottos = Lotto.calculateNumOfLottos(totalPrice);
+        LottoPurchase lottoPurchase = new LottoPurchase(InputView.scanPurchaseAmount(), InputView.scanManualLottoCount());
+        LottoService lottoService = new LottoService();
 
-        Lottos lottos = Lottos.of(numOfLottos);
+        Lottos lottos = lottoService.purchaseLottos(lottoPurchase);
 
-        ResultView.printPurchaseMessage(numOfLottos, lottos);
-
-        WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningNumbers());
-
-        Statistics statistics = new Statistics(lottos);
-        statistics.calculateStatistics(winningLotto, bonusNumber);
-
-        ResultView.printStatisticsMessage(statistics, statistics.calculateEarningRate(totalPrice));
+        lottoService.checkLottoResult(lottos, lottoPurchase);
     }
 }
