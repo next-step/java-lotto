@@ -6,7 +6,7 @@ public class LottoSeller {
     private static final int MIN_LOTTO_PRICE = 1000;
     private LottoMachine machine = new LottoMachine();
 
-    public List<LottoTicket> buyLotto(int money) {
+    public List<LottoTicket> sellLotto(int money) {
         validateMoney(money);
         int lottoCount = money / MIN_LOTTO_PRICE;
 
@@ -15,7 +15,7 @@ public class LottoSeller {
     }
 
     public List<Integer> requestLottoChecking(String stringWinningNumbers, List<LottoTicket> lottoTicketList) {
-        return machine.checkLottoWinning(LottoTicket.makeWinningLottoTicket(stringWinningNumbers), lottoTicketList);
+        return machine.checkLottoWinning(LottoTicket.newLottoTicketFromString(stringWinningNumbers), lottoTicketList);
     }
 
     private void validateMoney(int money) {
