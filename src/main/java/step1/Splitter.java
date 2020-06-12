@@ -1,31 +1,34 @@
 package step1;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Splitter {
 
-    private static final String COLON_DELIMITER = ":";
-    private static final String COMMA_DELIMITER = ",";
     private static final String DEFAULT_DELIMITER = ",|\\:";
+    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
 
     public String[] split(String text) {
-        String delimiter = getDefaultDelimiter(text);
+        String delimiter = getMatchedDelimiter(text);
         return text.split(delimiter);
     }
 
-    private String getDefaultDelimiter(String text) {
-        if(text.contains(COMMA_DELIMITER) || text.contains(COLON_DELIMITER)) {
-            return DEFAULT_DELIMITER;
+    private String getMatchedDelimiter(String text) {
+        String delimiter = "";
+        if(text.matches(DEFAULT_DELIMITER)) {
+            delimiter = getDelimiter(text, DEFAULT_DELIMITER, 0);
         }
-        throw new RuntimeException(Error.DELIMITER_NOT_EXIST);
+        if(text.matches(CUSTOM_DELIMITER)) {
+            delimiter = getDelimiter(text, CUSTOM_DELIMITER, 1);
+        }
+        return delimiter;
     }
 
-
-    public List<Number> parseNumber(String[] list) {
-        return Arrays.stream(list)
-                .map(text -> new Number(text))
-                .collect(Collectors.toList());
+    public String getDelimiter(String text, String delimiter, int index) {
+        Matcher matcher = Pattern.compile(delimiter).matcher(text);
+        if (matcher.find()) {
+            return matcher.group(index);
+        }
+        throw new RuntimeException(Error.DELIMITER_NOT_EXIST);
     }
 }
