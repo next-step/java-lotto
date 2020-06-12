@@ -29,10 +29,8 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public static LottoTickets multiIssued(int countOfLotto, List<LottoTicket> manualLottoTickets) {
+    public static LottoTickets multiIssued(int countOfAutoLotto, List<LottoTicket> manualLottoTickets) {
         LottoTickets lottoTickets = LottoTickets.manualIssued(manualLottoTickets);
-
-        int countOfAutoLotto = countOfLotto - manualLottoTickets.size();
         lottoTickets.addAll(createAutoIssued(countOfAutoLotto));
 
         return lottoTickets;

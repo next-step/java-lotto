@@ -14,7 +14,7 @@ public class LottoMachine {
     public LottoMachine(LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
         validateCountOfManualLottoTickets(lottoOrder, manualLottoTickets);
         this.lottoOrder = lottoOrder;
-        lottoTickets = LottoTickets.multiIssued(lottoOrder.getCountOfManualLotto(), manualLottoTickets);
+        lottoTickets = LottoTickets.multiIssued(lottoOrder.getCountOfAutoLotto(), manualLottoTickets);
     }
 
     public LottoTickets getLottoTickets() {
