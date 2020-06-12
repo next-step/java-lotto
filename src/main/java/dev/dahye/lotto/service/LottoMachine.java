@@ -12,7 +12,7 @@ public class LottoMachine {
     private final LottoOrder lottoOrder;
 
     public LottoMachine(LottoMoney lottoMoney, LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
-        validateCountOfManualLottoTickets(manualLottoTickets);
+        validateCountOfManualLottoTickets(lottoOrder, manualLottoTickets);
         this.lottoOrder = lottoOrder;
         lottoTickets = LottoTickets.multiIssued(lottoMoney.calculateCountOfLotto(), manualLottoTickets);
     }
@@ -29,8 +29,8 @@ public class LottoMachine {
         return this.lottoTickets.size() - getCountOfManualLotto();
     }
 
-    private void validateCountOfManualLottoTickets(List<LottoTicket> manualLottoTickets) {
-        if (manualLottoTickets.size() != getCountOfManualLotto()) {
+    private void validateCountOfManualLottoTickets(LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
+        if (manualLottoTickets.size() != lottoOrder.getCountOfManualLotto()) {
             throw new IllegalArgumentException("수동 로또 갯수 만큼 로또 티켓을 입력해주세요.");
         }
     }
