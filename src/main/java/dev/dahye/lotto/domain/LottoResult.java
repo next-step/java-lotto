@@ -10,7 +10,7 @@ public class LottoResult {
     public LottoResult(LottoTickets lottoTickets, LottoTicket winningTicket, int bonusNumber) {
         this.lottoTickets = lottoTickets;
         this.winningTicket = winningTicket;
-        this.bonusNumber = BonusBall.createBy(bonusNumber, this.winningTicket);
+        this.bonusNumber = BonusBall.of(bonusNumber, this.winningTicket);
     }
 
     public List<Rank> getMyRanks() {

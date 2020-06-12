@@ -1,22 +1,21 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumberUtil;
+import dev.dahye.lotto.util.LottoNumber;
 
 import java.util.*;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     private LottoTicket(List<Integer> lottoNumbers) {
         validateLottoNumberIsNotNull(lottoNumbers);
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        validateLottoNumberSize(lottoNumbers);
+        validateDuplicateNumbers(lottoNumbers);
 
-        validateLottoNumberRange();
-        validateLottoNumberSize();
-        validateDuplicateNumbers();
+        this.lottoNumbers = convertLottNumber(lottoNumbers);
     }
 
     private void validateLottoNumberIsNotNull(List<Integer> lottoNumbers) {
@@ -33,21 +32,25 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    private void validateLottoNumberSize() {
+    private void validateLottoNumberSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓은 6자리 숫자여야 합니다.");
         }
     }
 
-    private void validateLottoNumberRange() {
-        for (Integer lottoNumber : this.lottoNumbers) {
-            LottoNumberUtil.validNumberRange(lottoNumber);
+    private List<LottoNumber> convertLottNumber(List<Integer> lottoNumbers) {
+        List<LottoNumber> convertedLottoNumbers = new ArrayList<>();
+
+        for (Integer lottoNumber : lottoNumbers) {
+            convertedLottoNumbers.add(LottoNumber.of(lottoNumber));
         }
+
+        return convertedLottoNumbers;
     }
 
-    private void validateDuplicateNumbers() {
-        Set<Integer> lottoNumbers = new HashSet<>(this.lottoNumbers);
-        if (lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
+    private void validateDuplicateNumbers(List<Integer> lottoNumbers) {
+        Set<Integer> deduplicatedNumbers = new HashSet<>(lottoNumbers);
+        if (deduplicatedNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓에는 중복된 숫자가 없어야 합니다.");
         }
     }
@@ -76,7 +79,8 @@ public class LottoTicket {
         return Objects.hash(lottoNumbers);
     }
 
-    public boolean contains(int number) {
-        return this.lottoNumbers.contains(number);
+    public boolean contains(LottoNumber number) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 }

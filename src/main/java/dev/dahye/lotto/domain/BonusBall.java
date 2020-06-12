@@ -1,31 +1,27 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumberUtil;
+import dev.dahye.lotto.util.LottoNumber;
 
 public class BonusBall {
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private BonusBall(int bonusNumber) {
+    private BonusBall(LottoNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
-        validateBonusNumber();
     }
 
-    public static BonusBall createBy(int bonusNumber, LottoTicket winningTicket) {
-        validateContainsWinningTicket(winningTicket, bonusNumber);
-        return new BonusBall(bonusNumber);
+    public static BonusBall of(int bonusNumber, LottoTicket winningTicket) {
+        LottoNumber bonusBall = LottoNumber.of(bonusNumber);
+        validateContainsWinningTicket(winningTicket, bonusBall);
+        return new BonusBall(bonusBall);
     }
 
-    private void validateBonusNumber() {
-        LottoNumberUtil.validNumberRange(bonusNumber);
-    }
-
-    private static void validateContainsWinningTicket(LottoTicket winningTicket, int bonusNumber) {
+    private static void validateContainsWinningTicket(LottoTicket winningTicket, LottoNumber bonusNumber) {
         if (winningTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return this.bonusNumber;
     }
 }
