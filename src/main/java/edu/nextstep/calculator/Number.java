@@ -1,4 +1,4 @@
-package edu.nextstep.calculator.model;
+package edu.nextstep.calculator;
 
 public class Number {
     private final int value;
@@ -12,5 +12,9 @@ public class Number {
         if (value < 0) {
             throw new RuntimeException("Negative not permitted");
         }
+    }
+
+    public int getValue() {
+        return this.value;
     }
 }
