@@ -29,9 +29,9 @@ public class PriceLottoTest {
     @Test
     public void balanceAfterBuyLottoTest() {
         PriceLotto priceLotto = PriceLotto.of(10_000);
-        priceLotto.boughtLotto(5, 1000);
+        priceLotto.boughtLotto(1000,5, 1);
 
-        assertThat(priceLotto.getIntValue()).isEqualTo(5_000);
+        assertThat(priceLotto.getIntValue()).isEqualTo(4_000);
     }
 
     @DisplayName("구매한 로또수의 금액이 잔액보다 크면 IllegalArgumetException 을 발생한다.")
@@ -40,7 +40,7 @@ public class PriceLottoTest {
         PriceLotto priceLotto = PriceLotto.of(10_000);
 
         assertThatThrownBy(() -> {
-            priceLotto.boughtLotto(5, 10_000);
+            priceLotto.boughtLotto(1000,5, 6);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

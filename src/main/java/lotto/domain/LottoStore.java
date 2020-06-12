@@ -14,26 +14,19 @@ public class LottoStore {
     public LottoStore() {}
 
     public List<Lotto> buy(PriceLotto price, List<ManualLotto> manualLottos) {
-        validatePrice(price);
-        validatePriceOverManualLottoCount(price, manualLottos);
-        List<Lotto> lottos = LottoGenerator.generate(getCountPossibleBuyAutoLotto(price, manualLottos.size()), manualLottos);
-        price.boughtLotto(lottos.size(), LOTTO_PRICE_PER_ONE);
+        int autoLottoCount = getCountPossibleBuyAutoLotto(price, manualLottos.size());
+        int manualLottoCount = manualLottos.size();
+
+        price.validateEnoughPrice(LOTTO_PRICE_PER_ONE, autoLottoCount, manualLottoCount);
+        List<Lotto> lottos = LottoGenerator.generate(autoLottoCount, manualLottos);
+        price.boughtLotto(LOTTO_PRICE_PER_ONE, autoLottoCount, manualLottoCount);
+
         return lottos;
     }
 
     private int getCountPossibleBuyAutoLotto(PriceLotto price, int manualLottoCount) {
-        return ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoCount;
+        int autoLottoCount = ((int) Math.floor(price.getIntValue() / LOTTO_PRICE_PER_ONE)) - manualLottoCount;
+        return Math.max(autoLottoCount, 0);
     }
 
-    private static void validatePrice(PriceLotto price) {
-        if(price.getIntValue() < LOTTO_PRICE_PER_ONE) {
-            throw new IllegalArgumentException("입력된 금액이 로또구매 최소금액보다 작습니다.");
-        }
-    }
-
-    private static void validatePriceOverManualLottoCount(PriceLotto price, List<ManualLotto> manualLottos) {
-        if(price.getIntValue() < manualLottos.size() * LOTTO_PRICE_PER_ONE) {
-            throw new IllegalArgumentException("입력된 금액으로는 원하시는 수동 로또 수 만큼 구매할 수 없습니다.");
-        }
-    }
 }

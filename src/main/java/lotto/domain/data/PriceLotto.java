@@ -15,9 +15,9 @@ public class PriceLotto {
         return new PriceLotto(BigDecimal.valueOf(price));
     }
 
-    public void boughtLotto(int count, int pricePerOneLotto) {
-        validateEnoughPrice(count, pricePerOneLotto);
-        price = price.subtract(BigDecimal.valueOf(count * pricePerOneLotto));
+    public void boughtLotto(int pricePerLotto, int autoLottoCount, int manualLottoCount) {
+        validateEnoughPrice(pricePerLotto, autoLottoCount, manualLottoCount);
+        price = price.subtract(BigDecimal.valueOf((autoLottoCount + manualLottoCount) * pricePerLotto));
     }
 
     private static void validateNegativePrice(int price) {
@@ -26,9 +26,10 @@ public class PriceLotto {
         }
     }
 
-    private void validateEnoughPrice(int count, int pricePerOneLotto) {
-        if(price.intValue() < count * pricePerOneLotto) {
-            throw new IllegalArgumentException("남은 잔액으로는 해당 수만큼 로또를 구매할 수 없습니다.");
+    public void validateEnoughPrice(int pricePerLotto, int autoLottoCount, int manualLottoCount) {
+        if(price.intValue() < pricePerLotto ||
+                price.intValue() < pricePerLotto * (autoLottoCount + manualLottoCount)) {
+            throw new IllegalArgumentException("현재 금액으로는 로또를 구매할 수 없습니다.");
         }
     }
 
