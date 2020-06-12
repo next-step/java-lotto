@@ -15,7 +15,7 @@ public class LottoShop {
         LottoOrder lottoOrder = LottoOrder.of(lottoMoney, InputView.doInputCountOfManualLotto());
         List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(lottoOrder);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottoOrder, manualLottoTickets);
+        LottoMachine lottoMachine = new LottoMachine(lottoOrder, manualLottoTickets);
         ResultView.printPurchasedLottoTickets(lottoMachine);
 
         LottoTicket winningTicket

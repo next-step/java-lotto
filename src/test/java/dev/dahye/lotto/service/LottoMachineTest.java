@@ -23,7 +23,7 @@ class LottoMachineTest {
     void validateCountOfManualLottoTickets(int totalCountOfLotto, int countOfManualLotto, List<LottoTicket> lottoTickets) {
         LottoMoney lottoMoney = new LottoMoney(totalCountOfLotto * LottoMoney.PRICE_PER_LOTTO);
         LottoOrder lottoOrder = LottoOrder.of(lottoMoney, countOfManualLotto);
-        assertThatThrownBy(() -> new LottoMachine(lottoMoney, lottoOrder, lottoTickets))
+        assertThatThrownBy(() -> new LottoMachine(lottoOrder, lottoTickets))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동 로또 갯수 만큼 로또 티켓을 입력해주세요.");
     }

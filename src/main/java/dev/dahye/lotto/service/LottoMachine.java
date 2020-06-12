@@ -11,10 +11,10 @@ public class LottoMachine {
     private final LottoTickets lottoTickets;
     private final LottoOrder lottoOrder;
 
-    public LottoMachine(LottoMoney lottoMoney, LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
+    public LottoMachine(LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
         validateCountOfManualLottoTickets(lottoOrder, manualLottoTickets);
         this.lottoOrder = lottoOrder;
-        lottoTickets = LottoTickets.multiIssued(lottoMoney.calculateCountOfLotto(), manualLottoTickets);
+        lottoTickets = LottoTickets.multiIssued(lottoOrder.getCountOfManualLotto(), manualLottoTickets);
     }
 
     public LottoTickets getLottoTickets() {
