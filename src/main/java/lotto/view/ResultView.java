@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printLottos(List<Lotto> lottos){
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public void printLottos(List<Lotto> lottos, int manualPurchaseSize){
+        System.out.println("수동으로 " + manualPurchaseSize + "장, 자동으로 " + (lottos.size() - manualPurchaseSize) + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
