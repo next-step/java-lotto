@@ -13,7 +13,9 @@ public class ResultView {
 
     public static void printLottoTicket(int quantity, LottoTicket lottoTicket) {
         System.out.println(quantity + "개를 구매했습니다.");
-        IntStream.range(0, quantity).forEach(i -> System.out.println(lottoTicket.tellLottoNumbers(i)));
+        IntStream.range(0, quantity)
+                .mapToObj(x -> lottoTicket.tellLottoNumbers(x))
+                .forEach(System.out::println);
         System.out.println();
     }
 
