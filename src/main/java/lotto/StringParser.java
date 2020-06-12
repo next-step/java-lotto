@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class StringParser {
@@ -15,7 +15,7 @@ public class StringParser {
     }
 
     private static Set<Integer> toIntegers(String[] split) {
-        Set<Integer> result = new HashSet<>();
+        Set<Integer> result = new LinkedHashSet<>();
 
         try {
             for (String number : split) {
