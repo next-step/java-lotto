@@ -28,13 +28,9 @@ public class Winning {
     }
 
     public Rank ranking(LottoTicket lottoTicket) {
-        int matchCount = this.getCountOfMatch(lottoTicket);
+        int matchCount = this.winningTicket.getCountOfMatch(lottoTicket);
         boolean isMatchBonusNumber = lottoTicket.contains(bonusNumber);
 
         return Rank.valueOf(matchCount, isMatchBonusNumber);
-    }
-
-    public int getCountOfMatch(LottoTicket lottoTicket) {
-        return this.winningTicket.getCountOfMatch(lottoTicket);
     }
 }
