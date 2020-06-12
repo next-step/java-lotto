@@ -1,22 +1,14 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final int MIN_VALUE = 1;
-    public static final int MAX_VALUE = 45;
     public static final int LOTTO_NUMBERS_SIZE = 6;
-    public static final List<Integer> NUMBERS = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
-                                                        .boxed()
-                                                        .collect(Collectors.toList());
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<Integer> numbers){
+    public Lotto(Set<LottoNumber> numbers){
         validationCheck(numbers);
         this.numbers = numbers;
     }
@@ -28,27 +20,17 @@ public class Lotto {
         return Rank.findByCountAndBonus(count, numbers.contains(winningNumbers.getBonusNumber()));
     }
 
-    private void validationCheck(Set<Integer> numbers) {
-        if (numbers.size() != 6) {
+    private void validationCheck(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
-
-        numbers
-                .forEach(
-                        number -> {
-                            if (number < MIN_VALUE || number > MAX_VALUE) {
-                                throw new IllegalArgumentException("로또번호는 1 ~ 45 사이의 숫자로 구성 되어야 합니다.");
-                            }
-                        }
-                );
-        ;
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
     
-    public boolean contains(int number){
+    public boolean contains(LottoNumber number){
         return numbers.contains(number);
     }
 }

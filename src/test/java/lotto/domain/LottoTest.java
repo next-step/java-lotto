@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +18,7 @@ public class LottoTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+                () -> new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 6, 7"))
         );
     }
 
@@ -30,7 +28,7 @@ public class LottoTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 46)))
+                () -> new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 46"))
         );
     }
 
@@ -39,11 +37,12 @@ public class LottoTest {
     @CsvSource(value = {"3, 4, 5, 6, 7, 8:FOURTH", "3,4,8,9,10,11:MISS"}, delimiterString = ":")
     void whenInputWinningNumbersThenReturnMatchCount(String lottoNumbers, String expected) {
         // given
-        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
+        Set<LottoNumber> winningNumbers = StringParser.getParseNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(9);
 
         // when
-        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, 9));
+        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, bonusNumber));
 
         // then
         assertThat(match.name()).isEqualTo(expected);
@@ -54,11 +53,12 @@ public class LottoTest {
     @CsvSource(value = {"1,2,3,4,5,9:SECOND", "2,3,4,5,6,9:SECOND"}, delimiterString = ":")
     void secondRankTest(String lottoNumbers, String expected){
         // given
-        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(StringParser.getParseNumbers(lottoNumbers));
+        Set<LottoNumber> winningNumbers = StringParser.getParseNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(9);
 
         // when
-        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, 9));
+        Rank match = lotto.matchWith(WinningNumbers.of(winningNumbers, bonusNumber));
 
         // then
         assertThat(match.name()).isEqualTo(expected);

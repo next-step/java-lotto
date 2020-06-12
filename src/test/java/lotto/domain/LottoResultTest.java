@@ -19,10 +19,11 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp(){
-        Lotto lotto1 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Lotto lotto2 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Lotto lotto1 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 6"));
+        Lotto lotto2 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 7"));
 
-        winningNumbers = WinningNumbers.of(new HashSet<>(Arrays.asList(1, 2, 3, 7, 9, 10)), 11);
+        LottoNumber bonusNumber = new LottoNumber(11);
+        winningNumbers = WinningNumbers.of(StringParser.getParseNumbers("1, 2, 3, 7, 9, 10"), bonusNumber);
 
         lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
     }
@@ -32,11 +33,12 @@ class LottoResultTest {
     @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,4,5"})
     void whenWinningNumbersHasNot6NumbersThenException(String input){
         // given
-        Set<Integer> winningNumbers = StringParser.getParseNumbers(input);
+        Set<LottoNumber> winningNumbers = StringParser.getParseNumbers(input);
+        LottoNumber bonusNumber = new LottoNumber(9);
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoResult.of(WinningNumbers.of(winningNumbers, 1), null)
+                () -> LottoResult.of(WinningNumbers.of(winningNumbers, bonusNumber), null)
         );
     }
 
@@ -57,7 +59,7 @@ class LottoResultTest {
     @Test
     void whenCreateLottoResultThenReturnStatistics(){
         // given
-        Lotto lotto3 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 6, 7)));
+        Lotto lotto3 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 6, 7"));
         lottos.add(lotto3);
 
         // when

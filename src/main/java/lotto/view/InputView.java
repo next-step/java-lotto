@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.StringParser;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningNumbers;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class InputView {
     private PurchaseLottoInput purchaseLottoInput;
 
     /* 당첨 번호 */
-    private int bonusNumber;
-    private Set<Integer> winningNumbers;
+    private LottoNumber bonusNumber;
+    private Set<LottoNumber> winningNumbers;
 
     private final Scanner sc;
 
@@ -54,7 +55,7 @@ public class InputView {
         System.out.println();
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        bonusNumber = sc.nextInt();
+        bonusNumber = new LottoNumber(sc.nextInt());
         System.out.println();
     }
 
