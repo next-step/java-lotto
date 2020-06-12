@@ -10,8 +10,6 @@ import java.util.List;
 public class ResultView {
     private static final int LOTTO_PRICE = 1000;
     private int lottoTicketCount;
-    private ResultView() {
-    }
 
     public ResultView(List<LottoTicket> lottoTicketList){
         this.lottoTicketCount = lottoTicketList.size();
@@ -37,15 +35,15 @@ public class ResultView {
 
     }
 
-    private static void printMessage(String message) {
-        System.out.println(message);
-    }
-
     private void printStatistics(Statistics result) {
         result.getStatistics().forEach((key, value) -> {
             WinningStatistics winning = WinningStatistics.valueOfWinningCount(key);
-            String message = winning.getMatchedNumberCount() + "개 일치 (" + winning.getWinningPrice() + "원)- " + value +"개";
+            String message = winning.getMatchedNumberCount() + "개 일치 (" + winning.getWinningMoney() + "원)- " + value +"개";
             printMessage(message);
         });
+    }
+
+    private void printMessage(String message) {
+        System.out.println(message);
     }
 }
