@@ -2,7 +2,10 @@ package dev.dahye.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,5 +26,14 @@ class LottoTicketsTest {
         assertThatThrownBy(() -> LottoTickets.autoIssued(countOfLotto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 티켓 생성 갯수가 유효하지 않습니다.");
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없다.")
+    void exception_lottoMoney_is_null(List<LottoTicket> lottoTickets) {
+        assertThatThrownBy(() -> LottoTickets.manualIssued(lottoTickets))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없습니다.");
     }
 }
