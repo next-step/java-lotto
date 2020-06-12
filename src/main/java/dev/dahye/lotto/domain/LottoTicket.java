@@ -3,7 +3,7 @@ package dev.dahye.lotto.domain;
 import java.util.*;
 
 public class LottoTicket {
-    private static final int LOTTO_TICKET_NUMBER_MAX_SIZE = 6;
+    private static final int MAX_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -23,7 +23,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket autoIssued() {
-        return new LottoTicket(LottoNumberExtractor.createShuffled(LOTTO_TICKET_NUMBER_MAX_SIZE));
+        return new LottoTicket(LottoNumberExtractor.createShuffled(MAX_SIZE));
     }
 
     public static LottoTicket manualIssued(List<Integer> lottoNumbers) {
@@ -31,7 +31,7 @@ public class LottoTicket {
     }
 
     private void validateLottoNumberSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
+        if (lottoNumbers.size() != MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓은 6자리 숫자여야 합니다.");
         }
     }
@@ -48,7 +48,7 @@ public class LottoTicket {
 
     private void validateDuplicateNumbers(List<Integer> lottoNumbers) {
         Set<Integer> deduplicatedNumbers = new HashSet<>(lottoNumbers);
-        if (deduplicatedNumbers.size() != LOTTO_TICKET_NUMBER_MAX_SIZE) {
+        if (deduplicatedNumbers.size() != MAX_SIZE) {
             throw new IllegalArgumentException("로또 티켓에는 중복된 숫자가 없어야 합니다.");
         }
     }

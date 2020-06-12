@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.Collections.shuffle;
 
 public class LottoNumberExtractor {
-    public static final int ZERO_VALUE = 0;
+    public static final int START_INDEX = 0;
     private static final List<Integer> numbers;
 
     static {
@@ -22,7 +22,7 @@ public class LottoNumberExtractor {
         List<Integer> numbers = getNumbers();
         shuffle(numbers);
 
-        return numbers.subList(ZERO_VALUE, maxSize);
+        return numbers.subList(START_INDEX, maxSize);
     }
 
     private static List<Integer> getNumbers() {

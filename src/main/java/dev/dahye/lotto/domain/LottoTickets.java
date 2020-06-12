@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private static final int ZERO_VALUE = 0;
+    private static final int MIN_COUNT = 0;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -32,7 +32,7 @@ public class LottoTickets {
     }
 
     private static void validateCountOfLotto(int countOfLotto) {
-        if (countOfLotto <= ZERO_VALUE) {
+        if (countOfLotto <= MIN_COUNT) {
             throw new IllegalArgumentException("로또 티켓 생성 갯수가 유효하지 않습니다.");
         }
     }

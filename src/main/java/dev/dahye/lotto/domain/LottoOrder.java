@@ -1,7 +1,7 @@
 package dev.dahye.lotto.domain;
 
 public class LottoOrder {
-    private static final int ZERO_VALUE = 0;
+    private static final int MIN_COUNT = 0;
 
     private final LottoMoney lottoMoney;
     private final int countOfManualLotto;
@@ -28,7 +28,7 @@ public class LottoOrder {
     }
 
     public boolean isExistManualLotto() {
-        return countOfManualLotto > ZERO_VALUE;
+        return countOfManualLotto > MIN_COUNT;
     }
 
     private void validateManualLotto(LottoMoney lottoMoney, int countOfManualLotto) {

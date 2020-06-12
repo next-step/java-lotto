@@ -3,7 +3,7 @@ package dev.dahye.lotto.domain;
 import dev.dahye.lotto.util.DoubleUtils;
 
 public class LottoMoney {
-    private static final int ZERO_VALUE = 0;
+    private static final int MIN_VALUE = 0;
     public static final int PRICE_PER_LOTTO = 1000;
 
     private final int money;
@@ -24,11 +24,11 @@ public class LottoMoney {
     }
 
     private boolean isNegativeNumber(int money) {
-        return money <= ZERO_VALUE;
+        return money <= MIN_VALUE;
     }
 
     private boolean isNoRemainder(int money) {
-        return money % PRICE_PER_LOTTO != ZERO_VALUE;
+        return money % PRICE_PER_LOTTO != MIN_VALUE;
     }
 
     public double divideBy(LottoMoney lottoMoney) {
