@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class NumberInputScanner {
 
-    private int MIN_INPUT_VALUE = 0;
     private int number;
 
     private void getInputStream() {
         Scanner scanner = new Scanner(System.in);
-        this.number  = scanner.nextInt();
+        try {
+            this.number = scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못 입력하셨습니다. 숫자를 입력해 주세요");
+        }
     }
 
     public int getNumber() {
         getInputStream();
-        if(number <= MIN_INPUT_VALUE) {
-            throw new IllegalArgumentException("Input number should be more than 0");
-        }
         return number;
     }
 }
