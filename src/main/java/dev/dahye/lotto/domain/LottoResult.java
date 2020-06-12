@@ -7,8 +7,15 @@ public class LottoResult {
     private final Winning winning;
 
     public LottoResult(LottoTickets lottoTickets, Winning winning) {
+        isNotNull(lottoTickets, winning);
         this.lottoTickets = lottoTickets;
         this.winning = winning;
+    }
+
+    private void isNotNull(LottoTickets lottoTickets, Winning winning) {
+        if (lottoTickets == null || winning == null) {
+            throw new IllegalArgumentException("LottoResult를 생성할 수 없습니다.");
+        }
     }
 
     public List<Rank> getMyRanks() {

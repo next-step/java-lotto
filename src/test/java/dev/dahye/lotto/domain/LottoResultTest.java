@@ -1,5 +1,6 @@
 package dev.dahye.lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,10 +11,19 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Lotto의 결과를 출력하는 객체")
 class LottoResultTest {
+    private static Winning winning;
+
+    @BeforeEach
+    void setup() {
+        LottoTicket winningTicket = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winning = Winning.of(winningTicket, LottoNumber.of(8));
+    }
+
     @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
     @MethodSource("ranks")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
@@ -42,9 +52,8 @@ class LottoResultTest {
         LottoTicket lottoTicketByRankFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicketByRankThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoTickets lottoTickets = LottoTickets.manualIssued(Arrays.asList(lottoTicketByRankFirst, lottoTicketByRankThird));
-        LottoTicket winningTicket = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        LottoResult lottoResult = new LottoResult(lottoTickets, Winning.of(winningTicket, LottoNumber.of(8)));
+        LottoResult lottoResult = new LottoResult(lottoTickets, winning);
 
         LottoMoney totalPrize = new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
         double expectedResult = lottoMoney.divideBy(totalPrize);
@@ -58,5 +67,22 @@ class LottoResultTest {
         LottoMoney totalPrize = new LottoMoney(5000);
 
         assertThat(lottoMoney.divideBy(totalPrize)).isEqualTo(0.36);
+    }
+
+    @ParameterizedTest
+    @MethodSource("nullCases")
+    @DisplayName("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없다.")
+    void exception_lottoMoney_is_null(LottoTickets lottoTickets, Winning winning) {
+        assertThatThrownBy(() -> new LottoResult(lottoTickets, winning))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("LottoResult를 생성할 수 없습니다.");
+    }
+
+    private static Stream<Arguments> nullCases() {
+        return Stream.of(
+                arguments(null, winning),
+                arguments(LottoTickets.autoIssued(1), null),
+                arguments(null, null)
+        );
     }
 }
