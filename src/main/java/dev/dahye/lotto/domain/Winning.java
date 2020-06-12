@@ -5,12 +5,12 @@ public class Winning {
     private final LottoNumber bonusNumber;
 
     private Winning(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        validateContainsWinningTicket(winningTicket, bonusNumber);
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
 
     public static Winning of(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        validateContainsWinningTicket(winningTicket, bonusNumber);
         return new Winning(winningTicket, bonusNumber);
     }
 

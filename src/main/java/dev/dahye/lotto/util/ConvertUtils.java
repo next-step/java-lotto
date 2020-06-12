@@ -30,7 +30,7 @@ public final class ConvertUtils {
 
     private static int convertStringToInteger(String string) {
         try {
-            return Integer.parseInt(string.trim());
+            return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력 값은 숫자만 입력 가능합니다.");
         }

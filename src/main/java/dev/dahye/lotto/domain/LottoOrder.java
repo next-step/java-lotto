@@ -7,9 +7,9 @@ public class LottoOrder {
     private final int countOfManualLotto;
 
     private LottoOrder(LottoMoney lottoMoney, int countOfManualLotto) {
+        validateManualLotto(lottoMoney, countOfManualLotto);
         this.lottoMoney = lottoMoney;
         this.countOfManualLotto = countOfManualLotto;
-        validateManualLotto();
     }
 
     public static LottoOrder of(LottoMoney lottoMoney, int countOfManualLotto) {
@@ -24,7 +24,7 @@ public class LottoOrder {
         return countOfManualLotto > ZERO_VALUE;
     }
 
-    private void validateManualLotto() {
+    private void validateManualLotto(LottoMoney lottoMoney, int countOfManualLotto) {
         validateGreaterThan(lottoMoney.calculateCountOfLotto(), countOfManualLotto, "수동 로또 갯수는 전체 갯수를 초과할 수 없습니다.");
         validateGreaterThan(countOfManualLotto, 0, "수동 로또 갯수는 음수일 수 없습니다.");
     }
