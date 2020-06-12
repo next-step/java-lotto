@@ -10,13 +10,16 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         MoneyAmount purchaseAmount = InputView.getPurchaseAmount();
-        LottoTickets lottoTickets = LOTTO_MACHINE.buyTicket(purchaseAmount);
+        int manualLottoNo = InputView.getManualCount();
+        ManualLottoNumbers manualLottoNumbers = InputView.getManualLottoNumber(manualLottoNo);
 
-        ResultView.printTickets(lottoTickets);
+        LottoTicket lottoTicket = LOTTO_MACHINE.buyTicket(purchaseAmount, manualLottoNumbers);
 
-        WinningNumbers winningNumbers = InputView.getWinningNumbers();
+        ResultView.printTickets(lottoTicket);
 
-        MatchResult matchResult = winningNumbers.calculateMatchResult(lottoTickets);
+        WinningNumbers winningNumbers = WinningNumbers.create(InputView.getWinningNumbers(), InputView.getBonusNumber());
+
+        MatchResult matchResult = lottoTicket.calculateMatchResult(winningNumbers);
         ResultView.printMatchResult(matchResult);
 
         MatchReport matchReport = MatchReport.create(purchaseAmount, matchResult);

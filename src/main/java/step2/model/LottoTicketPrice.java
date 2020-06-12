@@ -1,6 +1,6 @@
 package step2.model;
 
-public enum LottoTicketPrice implements Priceable {
+public enum LottoTicketPrice {
 
     PRICE_1000(1_000);
 
@@ -10,16 +10,12 @@ public enum LottoTicketPrice implements Priceable {
         this.ticketPrice = Money.valueOf(ticketPrice);
     }
 
-    @Override
-    public Money getPrice() {
-        return this.ticketPrice;
+    public LottoCount calculatePurchaseCount(MoneyAmount moneyAmount) {
+        int purchaseCount = moneyAmount.getRemainAmount().divideBy(ticketPrice);
+        return LottoCount.valueOf(purchaseCount);
     }
 
-    public int getAvailablePurchase(MoneyAmount moneyAmount) {
-        return moneyAmount.getRemainAmount().divideBy(ticketPrice);
-    }
-
-    public Money calculatePurchaseAmount(int ticketCount) {
-        return ticketPrice.multiply(ticketCount);
+    public Money calculatePurchaseAmount(LottoCount lottoCount) {
+        return ticketPrice.multiply(lottoCount.getValue());
     }
 }

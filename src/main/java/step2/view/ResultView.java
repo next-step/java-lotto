@@ -3,6 +3,7 @@ package step2.view;
 import step2.model.*;
 
 import java.text.MessageFormat;
+import java.util.Comparator;
 
 public class ResultView {
 
@@ -14,16 +15,17 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
+    public static void printTickets(LottoTicket lottoTicket) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
-                .append(lottoTickets.getTicketCount())
-                .append("장을 구매했습니다.")
+                .append(MessageFormat.format("수동으로 {0}장, 자동으로 {1}장을 구매했습니다.",
+                        lottoTicket.getManualCount(),
+                        lottoTicket.getAutoCount()))
                 .append(LINE_FEED);
 
-        lottoTickets.getLottoTickets().stream()
-                .map(LottoTicket::toString)
+        lottoTicket.getLottos().stream()
+                .map(Lotto::toString)
                 .forEach(s -> stringBuilder.append(s).append(LINE_FEED));
 
         System.out.println(stringBuilder.toString());
@@ -35,14 +37,18 @@ public class ResultView {
         stringBuilder.append("당첨 통계").append(LINE_FEED);
         stringBuilder.append("---------").append(LINE_FEED);
 
-        matchResult.getWinningResult().forEach((lottoRank, matchCount) -> {
-            stringBuilder
-                    .append(getLottoRankFormat(lottoRank))
-                    .append(TICKET_INDICATOR)
-                    .append(matchCount)
-                    .append(TICKET_UNIT)
-                    .append(LINE_FEED);
-        });
+        LottoRank.WINNING_RANKS.stream()
+                .sorted(Comparator.reverseOrder())
+                .forEach(lottoRank -> {
+                    int matchCount = matchResult.findResult(lottoRank);
+
+                    stringBuilder
+                            .append(getLottoRankFormat(lottoRank))
+                            .append(TICKET_INDICATOR)
+                            .append(matchCount)
+                            .append(TICKET_UNIT)
+                            .append(LINE_FEED);
+                });
 
         System.out.println(stringBuilder.toString());
     }
@@ -58,6 +64,6 @@ public class ResultView {
     }
 
     public static void printMatchReport(MatchReport matchReport) {
-        System.out.println("총 수익률은 " + matchReport.calculateEarningRate() + "입니다.");
+        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", matchReport.calculateEarningRate()));
     }
 }

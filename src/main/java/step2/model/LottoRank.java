@@ -37,17 +37,19 @@ public enum LottoRank {
     }
 
     private boolean isMatch(int countOfMatch, boolean matchBonus) {
-        boolean matchResult = this.countOfMatch == countOfMatch;
-
-        if (this.isBonusRequired()) {
-            return matchResult && matchBonus;
+        if (this.countOfMatch != countOfMatch) {
+            return false;
         }
 
-        return matchResult;
+        if (isBonusRequired()) {
+            return matchBonus;
+        }
+
+        return true;
     }
 
     public boolean isBonusRequired() {
-        return LottoRank.SECOND.equals(this);
+        return this == SECOND;
     }
 
     public int getWinningMoney() {

@@ -4,13 +4,11 @@ import step2.exception.NotEnoughMoneyException;
 
 public class LottoMachine {
 
-    private static final int MIN_TICKET_COUNT = 1;
-
     private final LottoTicketPrice ticketPrice;
 
     private LottoMachine(LottoTicketPrice ticketPrice) {
         if (ticketPrice == null) {
-            throw new IllegalArgumentException("티켓 금액을 설정해주세요.");
+            throw new IllegalArgumentException("티켓 금액을 입력해주세요.");
         }
 
         this.ticketPrice = ticketPrice;
@@ -20,15 +18,15 @@ public class LottoMachine {
         return new LottoMachine(ticketPrice);
     }
 
-    public LottoTickets buyTicket(MoneyAmount moneyAmount) {
-        int ticketCount = ticketPrice.getAvailablePurchase(moneyAmount);
+    public LottoTicket buyTicket(MoneyAmount moneyAmount, ManualLottoNumbers manualLottoNumbers) {
+        LottoCount lottoCount = ticketPrice.calculatePurchaseCount(moneyAmount);
 
-        if (ticketCount < MIN_TICKET_COUNT) {
+        if (lottoCount.isOverManualCount(manualLottoNumbers)) {
             throw new NotEnoughMoneyException();
         }
 
-        moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(ticketCount));
+        moneyAmount.useAmount(ticketPrice.calculatePurchaseAmount(lottoCount));
 
-        return LottoTicketGenerator.generate(ticketCount);
+        return LottoTicketGenerator.generate(lottoCount, manualLottoNumbers);
     }
 }

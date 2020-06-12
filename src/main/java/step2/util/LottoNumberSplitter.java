@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class WinningNumberSplitter {
+public class LottoNumberSplitter {
 
     private static final Pattern NUMBER_SPLIT_PATTERN = Pattern.compile("\\s*,\\s*");
 
     public static List<Integer> split(String winningNumber) {
         return Arrays.stream(NUMBER_SPLIT_PATTERN.split(winningNumber))
-                .map(WinningNumberSplitter::parseInt)
+                .map(LottoNumberSplitter::parseInt)
                 .collect(Collectors.toList());
     }
 

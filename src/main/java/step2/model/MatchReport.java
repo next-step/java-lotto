@@ -39,6 +39,6 @@ public class MatchReport {
     }
 
     private BigDecimal convertBigDecimal(Money money) {
-        return BigDecimal.valueOf(money.getValue());
+        return money.toBigDecimal();
     }
 }

@@ -1,28 +1,28 @@
 package step2.model;
 
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicketGenerator {
-
-    private static final int TICKET_COUNT_MIN_VALUE = 1;
 
     private LottoTicketGenerator() {
     }
 
-    public static LottoTickets generate(int ticketCount) {
-        validateTicketCount(ticketCount);
+    public static LottoTicket generate(LottoCount lottoCount, ManualLottoNumbers manualLottoNumbers) {
+        int autoCount = lottoCount.calculateAutoCount(manualLottoNumbers);
 
-        return IntStream.rangeClosed(TICKET_COUNT_MIN_VALUE, ticketCount)
-                .mapToObj(i -> LottoTicket.create(LottoNumberGenerator.generate()))
-                .collect(collectingAndThen(toList(), LottoTickets::create));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(createAutoLottos(autoCount));
+        lottos.addAll(manualLottoNumbers.toLottos());
+
+        return LottoTicket.create(lottos);
     }
 
-    private static void validateTicketCount(int ticketCount) {
-        if (ticketCount < TICKET_COUNT_MIN_VALUE) {
-            throw new IllegalArgumentException("티켓은 최소 1장부터 생성 할 수 있습니다.");
-        }
+    private static List<Lotto> createAutoLottos(int autoCount) {
+        return Stream.generate(() -> Lotto.createAuto(LottoNumberGenerator.generate()))
+                .limit(autoCount)
+                .collect(Collectors.toList());
     }
 }

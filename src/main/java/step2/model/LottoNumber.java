@@ -25,10 +25,6 @@ public class LottoNumber {
         return new LottoNumber(number);
     }
 
-    public int getValue() {
-        return this.value;
-    }
-
     @Override
     public String toString() {
         return String.valueOf(value);

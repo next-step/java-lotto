@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankTest {
 
-    @DisplayName("valueOf() 메소드는 일치 개수를 입력하면 로또 등수를 반환한다.")
+    @DisplayName("일치 개수와 보너스 여부를 입력하면 로또 등수를 반환")
     @MethodSource("provideLottoRankForValueOf")
-    @ParameterizedTest(name = "일치 개수가 ''{0}''이고 보너스가 ''{1}''이면 로또 상금은 ''{2}''이다")
-    void valueOf_MatchCount_LottoRank(int matchCount, boolean matchBonus, LottoRank expectedRank) {
+    @ParameterizedTest(name = "일치 개수 ''{0}'', 보너스 ''{1}''이면 로또 등수는 ''{2}''이다")
+    void valueOf(int matchCount, boolean matchBonus, LottoRank expectedRank) {
         LottoRank lottoRank = LottoRank.valueOf(matchCount, matchBonus);
         assertThat(lottoRank).isEqualTo(expectedRank);
     }
@@ -35,18 +35,18 @@ class LottoRankTest {
         );
     }
 
-    @DisplayName("valueOf() 메소드는 일치 개수가 3 ~ 6이 아니면 MISS를 반환한다")
+    @DisplayName("일치 개수가 3 ~ 6이 아니면 MISS를 반환")
     @ValueSource(ints = {2, 7})
     @ParameterizedTest
-    void valueOf_NotWinningCount_LottoRankMiss(int matchCount) {
+    void valueOfInvalidRange(int matchCount) {
         LottoRank lottoRank = LottoRank.valueOf(matchCount, false);
         assertThat(lottoRank).isEqualTo(LottoRank.MISS);
     }
 
-    @DisplayName("getWinningMoney() 메소드는 우승 상금을 반환한다.")
+    @DisplayName("등수에 해당하는 우승 상금을 반환")
     @MethodSource("provideLottoRankForGetWinningMoney")
-    @ParameterizedTest(name = "로또 등수가 ''{0}''이면 우승 상금은 ''{1}''원 이다")
-    void getWinningMoney_None_WinningMoney(LottoRank lottoRank, int expectedWiningMoney) {
+    @ParameterizedTest(name = "로또 등수가 ''{0}''이면 우승 상금은 ''{1}''원")
+    void getWinningMoney(LottoRank lottoRank, int expectedWiningMoney) {
         assertThat(lottoRank.getWinningMoney()).isGreaterThanOrEqualTo(expectedWiningMoney);
     }
 
