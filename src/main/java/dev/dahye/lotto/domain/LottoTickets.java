@@ -15,7 +15,7 @@ public class LottoTickets {
     }
 
     private void isNotEmptyOrNull(List<LottoTicket> lottoTickets) {
-        if(lottoTickets == null || lottoTickets.isEmpty()) {
+        if (lottoTickets == null || lottoTickets.isEmpty()) {
             throw new IllegalArgumentException("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없습니다.");
         }
     }
@@ -74,6 +74,6 @@ public class LottoTickets {
     public String toString() {
         return lottoTickets.stream()
                 .map(LottoTicket::toString)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
