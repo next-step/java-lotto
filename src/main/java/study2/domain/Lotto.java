@@ -48,20 +48,11 @@ public class Lotto {
 		return numbers.size();
 	}
 
-	public int getRankWithWinningLotto(List<Integer> winningLotto) {
-		
-		System.out.println("this.numbers" + this.numbers);
-		System.out.println("winningLotto" + winningLotto);
-		
-		
-		System.out.println(this.numbers.stream()
-                .filter(winningLotto::contains)
-                .count());
-				
+	public  int getRankWithWinningLotto(List<Integer> winningLotto) {
+								
 		return  (int) this.numbers.stream()
                 .filter(winningLotto::contains)
                 .count();
-		
 	}
 
 	

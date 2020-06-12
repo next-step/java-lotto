@@ -35,18 +35,39 @@ public class Ranking {
 			throw new IllegalArgumentException("공백이나 null은 안됩니다.");
 		}
 
-		return Arrays.asList(inputWinNumber.split(",")).stream()
-				.mapToInt(Integer::parseInt)
-				.boxed().collect(Collectors.toList());
+		return Arrays.asList(inputWinNumber
+				.split(","))
+				.stream()
+				.mapToInt(Integer::parseInt).boxed()
+				.collect(Collectors.toList());
 
 	}
 
 	public int matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
-
+		
+		// 여기서 matchedNumber를 최종값만 반환하고있는데요
+		// List를 만들어서 다시 matchedNumber를 담아주는것이 좋을까요??
+		
 		lottoNumbers.forEach(lotto -> {
 			matchedNumber = lotto.getRankWithWinningLotto(winningLotto);
 		});
-
+		
 		return matchedNumber;
+		
+	}
+
+	public static Rank getRanking(int matchedNumber) {
+		
+		
+		
+		System.out.println(Arrays.stream(Rank.values())
+				.filter(Rank -> Rank.getCountOfMatch() == matchedNumber)
+				.findFirst().orElse(Rank.MISS));
+		
+		return Arrays.stream(Rank.values())
+				.filter(Rank -> Rank.getCountOfMatch() == matchedNumber)
+				.findFirst()
+				.orElse(Rank.MISS);
+
 	}
 }

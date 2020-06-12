@@ -6,6 +6,7 @@ import java.util.List;
 import study2.domain.Lotto;
 import study2.domain.LottoNumbers;
 import study2.domain.Ranking;
+import study2.domain.Ranking.Rank;
 import study2.view.InputView;
 import study2.view.ResultView;
 
@@ -25,6 +26,10 @@ public class LottoController {
 		
 		// 지난 주 당첨 번호 입력
 		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
-		rank.matchNumber(lottoNumbersList, winNumber);
+		int rankingNumber = rank.matchNumber(lottoNumbersList, winNumber);
+		
+		System.out.println(Ranking.getRanking(rankingNumber));
+		resultview.outPutMessages(Ranking.getRanking(rankingNumber), lottoNumbersList);
+		
 	}
 }
