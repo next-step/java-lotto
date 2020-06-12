@@ -9,5 +9,7 @@ public class StringAddCalculatorTest {
     public void whenNullOrEmptyString_thenZero() {
         int nullResult = StringAddCalculator.calculate(null);
         assertThat(nullResult).isEqualTo(0);
+        int emptyStringResult = StringAddCalculator.calculate("");
+        assertThat(emptyStringResult).isEqualTo(0);
     }
 }
