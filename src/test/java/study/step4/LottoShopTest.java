@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import study.step4.domain.LottoShop;
 import study.step4.domain.LottoTickets;
 import study.step4.dto.LottoInputDto;
-import study.step4.dto.LottoOutputDto;
 
 import java.util.ArrayList;
 import java.util.List;
