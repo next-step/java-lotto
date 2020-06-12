@@ -11,6 +11,10 @@ public final class Number {
         this.number = Integer.parseInt(text);
     }
 
+    public int plus(Number number) {
+        return this.number + number.number;
+    }
+
     private void check(String text) {
         checkEmpty(text);
         checkNull(text);
@@ -47,4 +51,23 @@ public final class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+
+    public static Number of(int number) {
+        return new Number(number);
+    }
+
+    private Number(int number) {
+        this.number = number;
+    }
+
+    public Number sum(Number number) {
+        return Number.of(this.number + number.number);
+    }
+
+    public int valueOf() {
+        return this.number;
+    }
+
+
 }

@@ -32,4 +32,12 @@ public class NumberTest {
         assertThatThrownBy(() -> new Number(negative))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    void sum() {
+        Number one = new Number("1");
+        Number two = new Number("2");
+        int three = one.plus(two);
+        assertThat(three).isEqualTo(3);
+    }
 }

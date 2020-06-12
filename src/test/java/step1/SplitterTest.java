@@ -7,21 +7,21 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TextTest {
+public class SplitterTest {
 
     @DisplayName(",으로 나눈다")
     @Test
     void split() {
-        Text text = new Text("1,2");
-        String[] numbers = text.split(",");
+        Splitter splitter = new Splitter();
+        String[] numbers = splitter.split("1,2");
         assertThat(numbers).contains("1");
     }
 
     @Test
     void convert_string_to_number() {
-        Text text = new Text("1,2");
+        Splitter splitter = new Splitter();
         String[] list = {"1","2"};
-        List<Number> numbers = text.parseNumber(list);
+        List<Number> numbers = splitter.parseNumber(list);
         assertThat(numbers).contains(new Number("1"));
     }
 }
