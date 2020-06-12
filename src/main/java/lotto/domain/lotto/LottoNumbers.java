@@ -5,12 +5,12 @@ import java.util.*;
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final NumberGenerator NUMBER_GENERATOR = NumberGenerator.create();
-    private List<LottoNumber> lottoLottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<LottoNumber> lottoLottoNumbers) {
-        checkSize(lottoLottoNumbers);
-        checkDuplicate(lottoLottoNumbers);
-        this.lottoLottoNumbers = lottoLottoNumbers;
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkSize(lottoNumbers);
+        checkDuplicate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers create() {
@@ -22,22 +22,19 @@ public class LottoNumbers {
         return new LottoNumbers(lottoLottoNumbers);
     }
 
-    public List<LottoNumber> getLottoLottoNumbers() {
-        return Collections.unmodifiableList(lottoLottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int findMatchCount(LottoNumbers winningNumbers) {
-        return (int) winningNumbers.getLottoLottoNumbers().stream()
-                .filter(lottoNumber ->  lottoLottoNumbers.contains(lottoNumber))
+        return (int) winningNumbers.getLottoNumbers().stream()
+                .filter(lottoNumber ->  lottoNumbers.contains(lottoNumber))
                 .count();
     }
 
     public boolean haveBonusBall(LottoNumber bonusBall) {
-        for (LottoNumber lottoNumber : lottoLottoNumbers) {
-            if (lottoNumber.equals(bonusBall))
-                return true;
-        }
-        return false;
+        return lottoNumbers.stream()
+                .anyMatch(number -> number.equals(bonusBall));
     }
 
     private void checkSize(List<LottoNumber> lottoLottoNumbers) {
@@ -58,12 +55,12 @@ public class LottoNumbers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(lottoLottoNumbers, that.lottoLottoNumbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lottoLottoNumbers);
+        return String.valueOf(lottoNumbers);
     }
 
 
