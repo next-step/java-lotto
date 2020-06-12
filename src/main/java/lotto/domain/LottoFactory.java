@@ -1,30 +1,41 @@
 package lotto.domain;
 
+import lotto.StringParser;
+import lotto.view.PurchaseLottoInput;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoFactory {
 
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
-    public static List<Lotto> createLottos(int totalPrice, NumberGeneratorStrategy strategy) {
-        validationCheck(totalPrice);
+    private static List<Lotto> createAutoLottos(PurchaseLottoInput purchaseLottoInput, NumberGeneratorStrategy strategy) {
 
-        int lottoCount = totalPrice / PRICE;
+        int lottoCount = purchaseLottoInput.getAutoSize();
+
         List<Lotto> lottos = new ArrayList<>();
+
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(strategy.generateNumbers()));
         }
         return lottos;
     }
 
-    public static List<Lotto> createLottos(int totalPrice) {
-        return createLottos(totalPrice, new RandomNumberGeneratorStrategy());
+    private static List<Lotto> createManualLottos(PurchaseLottoInput purchaseLottoInput) {
+
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (String numbers : purchaseLottoInput.getManualLottoNumbers()) {
+            lottos.add(new Lotto(StringParser.getParseNumbers(numbers)));
+        }
+        return lottos;
     }
 
-    private static void validationCheck(int totalPrice) {
-        if (totalPrice < 1000) {
-            throw new IllegalArgumentException("구입금액은 최소 1000원 이상입니다.");
-        }
+    public static List<Lotto> createLottos(PurchaseLottoInput purchaseLottoInput){
+        List<Lotto> autoLottos = createAutoLottos(purchaseLottoInput, new RandomNumberGeneratorStrategy());
+        autoLottos.addAll(createManualLottos(purchaseLottoInput));
+        return Collections.unmodifiableList(autoLottos);
     }
 }
