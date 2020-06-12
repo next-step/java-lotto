@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -38,5 +39,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    public boolean isContains(List<LottoNumber> lottoLottoNumbers) {
+        return lottoLottoNumbers.contains(this.lottoNumber);
     }
 }

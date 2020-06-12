@@ -27,13 +27,9 @@ public class LottoNumbers {
     }
 
     public int findMatchCount(LottoNumbers winningNumbers) {
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : winningNumbers.getLottoLottoNumbers()) {
-            if (this.lottoLottoNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        return (int) winningNumbers.getLottoLottoNumbers().stream()
+                .filter(lottoNumber ->  lottoLottoNumbers.contains(lottoNumber))
+                .count();
     }
 
     public boolean haveBonusBall(LottoNumber bonusBall) {
