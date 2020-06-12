@@ -4,13 +4,13 @@ import study.step4.dto.LottoInputDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
-    private static final int INIT_INDEX = 0;
-
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -26,11 +26,9 @@ public class LottoTickets {
     }
 
     public static LottoTickets autoPublish(long autoLottoCounting) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (long i = INIT_INDEX; i < autoLottoCounting; i++){
-            lottoTickets.add(LottoTicket.auto());
-        }
-        return new LottoTickets(lottoTickets);
+        return Stream.generate(LottoTicket::auto)
+                     .limit(autoLottoCounting)
+                     .collect(collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
     public static LottoTickets manualPublish(LottoInputDto lottoInputDto) {
