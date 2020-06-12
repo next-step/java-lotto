@@ -2,19 +2,19 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
     int lottoNumber;
 
-    private Number(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public static Number create(int lottoNumber) {
-        return new Number(lottoNumber);
+    public static LottoNumber create(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
     @Override
-    public int compareTo(Number out) {
+    public int compareTo(LottoNumber out) {
         if (this.lottoNumber > out.lottoNumber)
             return 1;
         if (this.lottoNumber < out.lottoNumber)
@@ -30,9 +30,9 @@ public class Number implements Comparable<Number> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Number)) return false;
-        Number number = (Number) o;
-        return lottoNumber == number.lottoNumber;
+        if (!(o instanceof LottoNumber)) return false;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return this.lottoNumber == lottoNumber.lottoNumber;
     }
 
     @Override
