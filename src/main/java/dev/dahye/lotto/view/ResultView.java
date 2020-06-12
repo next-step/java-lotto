@@ -1,14 +1,14 @@
 package dev.dahye.lotto.view;
 
 import dev.dahye.lotto.domain.LottoResult;
+import dev.dahye.lotto.domain.LottoTickets;
 import dev.dahye.lotto.domain.Rank;
-import dev.dahye.lotto.service.LottoMachine;
 
 public class ResultView {
-    public static void printPurchasedLottoTickets(LottoMachine lottoMachine) {
-        System.out.println("수동으로 " + lottoMachine.getCountOfManualLotto() + "장, " +
-                "자동으로 " + lottoMachine.getCountOfAutoLotto() + "장을 구입했습니다.");
-        System.out.println(lottoMachine.getLottoTickets().toString());
+    public static void printPurchasedLottoTickets(int countOfManualLotto, int countOfAutoLotto, LottoTickets lottoTickets) {
+        System.out.println("수동으로 " + countOfManualLotto + "장, " +
+                "자동으로 " + countOfAutoLotto + "장을 구입했습니다.");
+        System.out.println(lottoTickets.toString());
     }
 
     public static void printWinningStatistics(LottoResult lottoResult) {

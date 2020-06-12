@@ -10,14 +10,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
-        isNotEmptyOrNull(lottoTickets);
         this.lottoTickets = lottoTickets;
-    }
-
-    private void isNotEmptyOrNull(List<LottoTicket> lottoTickets) {
-        if (lottoTickets == null || lottoTickets.isEmpty()) {
-            throw new IllegalArgumentException("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없습니다.");
-        }
     }
 
     public static LottoTickets autoIssued(int countOfLotto) {

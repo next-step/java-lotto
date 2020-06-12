@@ -21,14 +21,6 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public int getCountOfManualLotto() {
-        return this.lottoOrder.getCountOfManualLotto();
-    }
-
-    public int getCountOfAutoLotto() {
-        return this.lottoTickets.size() - getCountOfManualLotto();
-    }
-
     private void validateCountOfManualLottoTickets(LottoOrder lottoOrder, List<LottoTicket> manualLottoTickets) {
         if (manualLottoTickets.size() != lottoOrder.getCountOfManualLotto()) {
             throw new IllegalArgumentException("수동 로또 갯수 만큼 로또 티켓을 입력해주세요.");
