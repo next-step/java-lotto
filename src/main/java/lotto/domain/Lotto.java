@@ -4,20 +4,20 @@ import java.util.List;
 
 public class Lotto {
 
-    List<Integer> numberList;
+    List<LottoNo> numberList;
 
     public Lotto() {
     }
 
-    public Lotto(List<Integer> numberList) {
+    public Lotto(List<LottoNo> numberList) {
         this.numberList = numberList;
     }
 
-    public boolean isContainsNumber(int number) {
-        return numberList.contains(number);
+    public boolean isContainsNumber(LottoNo lottoNo) {
+        return numberList.contains(lottoNo);
     }
 
-    public int checkRightNumberCount(List<Integer> winningNumbers) {
+    public int checkRightNumberCount(List<LottoNo> winningNumbers) {
 
         int rightCount = (int) winningNumbers.stream()
                 .filter(winningNumber -> isContainsNumber(winningNumber))
@@ -26,20 +26,20 @@ public class Lotto {
         return rightCount;
     }
 
-    public boolean checkRightBonusNumber(int bonusNumber) {
+    public boolean checkRightBonusNumber(LottoNo bonusNumber) {
         return numberList.stream()
-                .filter(integer -> integer == bonusNumber)
+                .filter(lottoNo -> lottoNo.equals(bonusNumber))
                 .findAny()
                 .isPresent();
     }
 
-    public Prize getLottoPrize(List<Integer> winningNumbers, int bonusNumber) {
+    public Prize getLottoPrize(List<LottoNo> winningNumbers, LottoNo bonusNumber) {
         int rightCount = checkRightNumberCount(winningNumbers);
         boolean isRightBonusNumber = checkRightBonusNumber(bonusNumber);
         return Prize.valueOf(rightCount, isRightBonusNumber);
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNo> getLottoNumber() {
         return numberList;
     }
 }
