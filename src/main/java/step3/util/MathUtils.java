@@ -2,7 +2,7 @@ package step3.util;
 
 public class MathUtils {
     public static double calculateYield(double winningAmount, double purchaseAmount) {
-        if (winningAmount == 0) {
+        if (purchaseAmount == 0) {
             return 0;
         }
         return winningAmount / purchaseAmount;
