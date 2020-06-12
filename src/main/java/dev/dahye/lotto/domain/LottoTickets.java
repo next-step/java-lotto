@@ -49,7 +49,7 @@ public class LottoTickets {
         this.lottoTickets.add(lottoTicket);
     }
 
-    public List<Rank> calculateWinningRate(Winning winning) {
+    public List<Rank> rankings(Winning winning) {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {

@@ -12,7 +12,7 @@ public class LottoResult {
     }
 
     public List<Rank> getMyRanks() {
-        return this.lottoTickets.calculateWinningRate(winning);
+        return this.lottoTickets.rankings(winning);
     }
 
     public int getTotalCountOf(Rank target) {
