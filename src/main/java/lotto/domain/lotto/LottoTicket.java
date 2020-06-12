@@ -1,12 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.prize.Rank;
-import lotto.domain.prize.WinningNumbers;
-import lotto.domain.prize.WinningResult;
-
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,36 +15,25 @@ public class LottoTicket {
         this.lottoTicket = addLottoNumbers(quantity);
     }
 
-    private LottoTicket(List<LottoNumbers> lottoTicket) {
-        this.lottoTicket = lottoTicket;
+    private LottoTicket(List<LottoNumbers> lottoNumbers) {
+        this.lottoTicket = lottoNumbers;
     }
 
     public static LottoTicket create(int quantity) {
         return new LottoTicket(quantity);
     }
 
-    public static LottoTicket createOne(List<LottoNumbers> lottoTicket) {
-        return new LottoTicket(lottoTicket);
+    public static LottoTicket createOne(List<LottoNumbers> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public List<LottoNumbers> getLottoTicket() {
+        return Collections.unmodifiableList(lottoTicket);
     }
 
     public List<LottoNumber> tellLottoNumbers(int i) {
-        return lottoTicket.get(i).getLottoNumbers();
+        return lottoTicket.get(i).getLottoLottoNumbers();
     }
-
-    public WinningResult makeWinningResult(String enteredWinNumber, int enteredBonusBall) {
-        WinningNumbers winningNumbers = WinningNumbers.create(enteredWinNumber);
-        BonusBall bonusBall = BonusBall.create(enteredBonusBall, winningNumbers);
-        Map<Rank, Integer> winningCountMap = new HashMap<>();
-        for (LottoNumbers lottoNumbers : this.lottoTicket) {
-            int matchCount = winningNumbers.findMatchCount(lottoNumbers);
-            boolean matchBonus = lottoNumbers.isExist(bonusBall.getBonusBall());
-            Rank rank = Rank.valueOf(matchCount, matchBonus);
-            winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
-        }
-
-        return WinningResult.create(winningCountMap);
-    }
-
 
     private void checkQuantity(int quantity) {
         if (quantity < 1) {
