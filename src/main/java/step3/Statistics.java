@@ -29,7 +29,7 @@ public class Statistics {
         int totalPrice = 0;
         for (Map.Entry<Integer, Integer> entry : statistics.entrySet()) {
             WinningStatistics winningStatistics = WinningStatistics.valueOfWinningCount(entry.getKey());
-            totalPrice += getPrice(winningStatistics.getWinningPrice(), entry.getValue());
+            totalPrice += getPrice(winningStatistics.getWinningMoney(), entry.getValue());
         }
 
         return totalPrice;
