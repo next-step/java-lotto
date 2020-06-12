@@ -3,8 +3,11 @@ package dev.dahye.lotto.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertUtils {
+public final class ConvertUtils {
     private static final String WINNERS_DELIMITER = ",";
+
+    private ConvertUtils() {
+    }
 
     public static List<Integer> convertStringToIntegerList(String input) {
         validateWinnersNullOrEmpty(input);
