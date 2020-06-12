@@ -1,25 +1,25 @@
 package lotto.domain.lotto;
 
-import java.util.List;
+import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class Number implements Comparable<Number> {
     int lottoNumber;
 
-    private LottoNumber(int lottoNumber) {
+    private Number(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber create(int lottoNumber) {
-        return new LottoNumber(lottoNumber);
+    public static Number create(int lottoNumber) {
+        return new Number(lottoNumber);
     }
 
-
-    public boolean isContains(List<Integer> Numbers) {
-        return Numbers.contains(lottoNumber);
-    }
-
-    public boolean isExist(int number) {
-        return lottoNumber == number;
+    @Override
+    public int compareTo(Number out) {
+        if (this.lottoNumber > out.lottoNumber)
+            return 1;
+        if (this.lottoNumber < out.lottoNumber)
+            return -1;
+        return 0;
     }
 
     @Override
@@ -28,13 +28,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber out) {
-        if (this.lottoNumber > out.lottoNumber)
-            return 1;
-        if (this.lottoNumber < out.lottoNumber)
-            return -1;
-        return 0;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Number)) return false;
+        Number number = (Number) o;
+        return lottoNumber == number.lottoNumber;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
 }
