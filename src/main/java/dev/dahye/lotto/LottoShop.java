@@ -3,7 +3,7 @@ package dev.dahye.lotto;
 import dev.dahye.lotto.domain.*;
 import dev.dahye.lotto.service.LottoMachine;
 import dev.dahye.lotto.util.ConvertUtils;
-import dev.dahye.lotto.util.LottoNumber;
+import dev.dahye.lotto.domain.LottoNumber;
 import dev.dahye.lotto.view.InputView;
 import dev.dahye.lotto.view.ResultView;
 

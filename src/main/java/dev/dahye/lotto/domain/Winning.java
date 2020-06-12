@@ -1,7 +1,5 @@
 package dev.dahye.lotto.domain;
 
-import dev.dahye.lotto.util.LottoNumber;
-
 public class Winning {
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;

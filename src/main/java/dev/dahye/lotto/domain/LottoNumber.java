@@ -1,4 +1,4 @@
-package dev.dahye.lotto.util;
+package dev.dahye.lotto.domain;
 
 import java.util.Objects;
 
