@@ -22,18 +22,18 @@ public class LottoResult {
     }
 
     public double getMyWinningRate(LottoMoney lottoMoney) {
-        int totalPrize = calculateTotalPrize();
+        LottoMoney totalPrize = calculateTotalPrize();
 
-        return lottoMoney.divideTotalPrizeByMoney(totalPrize);
+        return lottoMoney.divideBy(totalPrize);
     }
 
-    public int calculateTotalPrize() {
+    public LottoMoney calculateTotalPrize() {
         int totalPrize = 0;
 
         for (Rank rank : this.getMyRanks()) {
             totalPrize += rank.getPrize();
         }
 
-        return totalPrize;
+        return new LottoMoney(totalPrize);
     }
 }

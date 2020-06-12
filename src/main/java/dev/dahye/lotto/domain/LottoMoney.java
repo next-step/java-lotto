@@ -31,7 +31,7 @@ public class LottoMoney {
         return money % PRICE_PER_LOTTO != ZERO_VALUE;
     }
 
-    public double divideTotalPrizeByMoney(int totalPrize) {
-        return DoubleUtils.parseDoubleSecondDigit((double) totalPrize / money);
+    public double divideBy(LottoMoney lottoMoney) {
+        return DoubleUtils.parseDoubleSecondDigit((double) lottoMoney.money / money);
     }
 }

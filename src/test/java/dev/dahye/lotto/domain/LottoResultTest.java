@@ -46,8 +46,8 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(lottoTickets, Winning.of(winningTicket, LottoNumber.of(8)));
 
-        int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
-        double expectedResult = lottoMoney.divideTotalPrizeByMoney(totalPrize);
+        LottoMoney totalPrize = new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
+        double expectedResult = lottoMoney.divideBy(totalPrize);
         assertThat(lottoResult.getMyWinningRate(lottoMoney)).isEqualTo(expectedResult);
     }
 
@@ -55,6 +55,8 @@ class LottoResultTest {
     @DisplayName("당첨율 구하기")
     void winning_rate() {
         LottoMoney lottoMoney = new LottoMoney(14000);
-        assertThat(lottoMoney.divideTotalPrizeByMoney(5000)).isEqualTo(0.36);
+        LottoMoney totalPrize = new LottoMoney(5000);
+
+        assertThat(lottoMoney.divideBy(totalPrize)).isEqualTo(0.36);
     }
 }
