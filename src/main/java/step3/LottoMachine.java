@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
-    private static final int COMPARE_SAME_NUMBER_COUNT = 1;
     private LottoNumbers lottoNumbers = new LottoNumbers();
 
     public List<LottoTicket> extractLottoTicketsByCount(int lottoCount) {
@@ -32,8 +31,7 @@ public class LottoMachine {
     }
 
     private boolean compareLottoNumber(int winningNumber, List<Integer> myLottoNumbers) {
-        return COMPARE_SAME_NUMBER_COUNT == myLottoNumbers.stream().filter(myLottoNumber
-                                                -> myLottoNumber == winningNumber).count();
+        return myLottoNumbers.contains(winningNumber);
     }
 
     private LottoTicket extractLottoTicket() {
@@ -42,7 +40,7 @@ public class LottoMachine {
         List<Integer> myLottoTicketNumbers = this.extract6Numbers(lottoNumbers);
         this.sortNumbers(myLottoTicketNumbers);
 
-        return LottoTicket.makeLottoTicket(myLottoTicketNumbers);
+        return LottoTicket.newLottoTicket(myLottoTicketNumbers);
     }
 
     private void shuffleNumbers(List<Integer> numbers) {
