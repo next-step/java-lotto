@@ -22,13 +22,8 @@ public class LottoTickets {
 
     public static LottoTickets autoIssued(int countOfLotto) {
         validateCountOfLotto(countOfLotto);
-        List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < countOfLotto; i++) {
-            lottoTickets.add(LottoTicket.autoIssued());
-        }
-
-        return new LottoTickets(lottoTickets);
+        return new LottoTickets(createAutoIssued(countOfLotto));
     }
 
     private static void validateCountOfLotto(int countOfLotto) {
@@ -45,15 +40,23 @@ public class LottoTickets {
         LottoTickets lottoTickets = LottoTickets.manualIssued(manualLottoTickets);
 
         int countOfAutoLotto = countOfLotto - manualLottoTickets.size();
-        for (int i = 0; i < countOfAutoLotto; i++) {
+        lottoTickets.addAll(createAutoIssued(countOfAutoLotto));
+
+        return lottoTickets;
+    }
+
+    private static List<LottoTicket> createAutoIssued(int count) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
             lottoTickets.add(LottoTicket.autoIssued());
         }
 
         return lottoTickets;
     }
 
-    private void add(LottoTicket lottoTicket) {
-        this.lottoTickets.add(lottoTicket);
+    private void addAll(List<LottoTicket> lottoTickets) {
+        lottoTickets.addAll(lottoTickets);
     }
 
     public List<Rank> rankings(Winning winning) {
