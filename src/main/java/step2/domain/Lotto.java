@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step3.domain.LottoTickets;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,7 +13,7 @@ import java.util.stream.IntStream;
  * Lotto
  * ver. 1.0
  * 2020.05.31
- * Copyright ...
+
  */
 public class Lotto {
 
@@ -76,7 +78,6 @@ public class Lotto {
         for (int i = 0; i < gameCount; i++) {
             lottoList.add(Lotto.getInstance());
         }
-
         return lottoList;
 
     }
