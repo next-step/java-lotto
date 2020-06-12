@@ -19,8 +19,6 @@ public class LottoGame {
     public LottoGameResultDto getGameResult(WinningLotto winningLotto)
         throws IllegalArgumentException {
 
-        winningLotto.validateWinningNumbers();
-
         return new LottoGameResult().getResult(lottoSheet, winningLotto, userPrice);
     }
 

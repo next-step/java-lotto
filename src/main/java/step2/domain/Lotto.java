@@ -12,14 +12,14 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validateWinningNumbers();
     }
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public void validateWinningNumbers() throws IllegalArgumentException {
-
+    private void validateWinningNumbers() throws IllegalArgumentException {
         if (CollectionUtils.size(lottoNumbers) != LOTTO_SELECTION_COUNT) {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS);
         }

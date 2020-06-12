@@ -25,7 +25,7 @@ class WinningLottoTest {
         //when&then
         if (false == Boolean.valueOf(expected)) {
             assertThatThrownBy(
-                () -> new Lotto(input).validateWinningNumbers())
+                () -> new Lotto(input))
                 .isInstanceOf(IllegalArgumentException.class);
         }
     }
