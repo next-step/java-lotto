@@ -5,29 +5,34 @@ import java.util.regex.Pattern;
 
 public class Splitter {
 
-    private static final String DEFAULT_DELIMITER = ",|\\:";
-    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String COMMA_DELIMITER = ",";
+    private static final String COLON_DELIMITER = ":";
+    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
     public String[] split(String text) {
-        String delimiter = getMatchedDelimiter(text);
-        return text.split(delimiter);
+        return getSplitText(text);
     }
 
-    private String getMatchedDelimiter(String text) {
-        String delimiter = "";
-        if(text.matches(DEFAULT_DELIMITER)) {
-            delimiter = getDelimiter(text, DEFAULT_DELIMITER, 0);
+    private String[] getSplitText(String text) {
+        if(text.contains(COLON_DELIMITER) || text.contains(COMMA_DELIMITER)) {
+            return getDefaultSplitText(text);
         }
-        if(text.matches(CUSTOM_DELIMITER)) {
-            delimiter = getDelimiter(text, CUSTOM_DELIMITER, 1);
+        if(text.matches(CUSTOM_DELIMITER_REGEX)) {
+            return getCustomSplitText(text);
         }
-        return delimiter;
+        throw new RuntimeException(Error.DELIMITER_NOT_EXIST);
     }
 
-    public String getDelimiter(String text, String delimiter, int index) {
-        Matcher matcher = Pattern.compile(delimiter).matcher(text);
+    public String[] getDefaultSplitText(String text) {
+        return text.split(DEFAULT_DELIMITER_REGEX);
+    }
+
+    public String[] getCustomSplitText(String text) {
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
         if (matcher.find()) {
-            return matcher.group(index);
+            String delimiter =  matcher.group(1);
+            return matcher.group(2).split(delimiter);
         }
         throw new RuntimeException(Error.DELIMITER_NOT_EXIST);
     }
