@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.RandomLottoNumber;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoMachineTest {
 
     private LottoMachine lottoMachine;
-    private List<Integer> numberSetList = new ArrayList<Integer>();
-    private LottoNumber randomLottoNumber = new RandomLottoNumber();
+    private List<Lotto> lottoList = new ArrayList<Lotto>();
+    private LottoNumbers randomLottoNumber = new RandomLottoNumbers();
 
     private static final List<Integer> totalNumberList = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10
             , 11, 12, 13, 14, 15, 16, 17, 18, 19
@@ -28,13 +25,9 @@ public class LottoMachineTest {
 
     @BeforeEach
     void setUp() {
-        lottoMachine = new LottoMachine();
-
-        numberSetList.add(1);
-        numberSetList.add(3);
-        numberSetList.add(5);
-        numberSetList.add(7);
-        numberSetList.add(9);
+        int money = 3000;
+        int manualCount = 1;
+        lottoMachine = new LottoMachine(money, manualCount);
     }
 
     @Test
@@ -42,21 +35,14 @@ public class LottoMachineTest {
         assertThat(lottoMachine.getClass().getSimpleName()).isEqualTo("LottoMachine");
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 3, 5, 7, 9})
-    void lottoGenerateTest(int number) {
-        Lotto lotto = lottoMachine.generateLotto(numberSetList);
-        assertThat(lotto.isContainsNumber(number)).isTrue();
-    }
-
     @Test
     void RandomLottoNumberSizeTest() {
         int EXPECTED_LIST_SIZE = 6;
-        assertThat(randomLottoNumber.generateNumber().size()).isEqualTo(6);
+        assertThat(randomLottoNumber.generateNumbers().size()).isEqualTo(EXPECTED_LIST_SIZE);
     }
 
     @Test
     void RandomLottoNumberTest() {
-        assertThat(randomLottoNumber.generateNumber()).isSubsetOf(totalNumberList);
+        assertThat(randomLottoNumber.generateNumbers().stream().mapToInt(value -> value.getNumber())).isSubsetOf(totalNumberList);
     }
 }

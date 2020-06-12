@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.NumberInputScanner;
+import lotto.StringInputScanner;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,20 +10,23 @@ import java.util.Map;
 
 public class Buyer {
 
-    private static final int WINNING_MIN_COUNT = 3;
-    private static final int WINNING_MAX_COUNT = 6;
-    private static final int LOTTO_PRIZE = 1000;
-
     private int money;
+    private int manualCount;
     private List<Lotto> lottoList;
     private Map<Prize, Integer> winningList = new HashMap<>();
+    LottoMachine lottoMachine;
 
     public Buyer(int money) {
-        this(money, new ArrayList<>());
+        this(money, 0);
     }
 
-    public Buyer(int money, List<Lotto> lottoList) {
+    public Buyer(int money, int manualCount) {
+        this(money, manualCount, new ArrayList<>());
+    }
+
+    public Buyer(int money, int manualCount, List<Lotto> lottoList) {
         this.money = money;
+        this.manualCount = manualCount;
         this.lottoList = lottoList;
 
         initWinningList();
@@ -35,20 +41,21 @@ public class Buyer {
         winningList.put(Prize.MISS, 0);
     }
 
-    public void buyAutoLotto() {
-        LottoMachine lottoMachine = new LottoMachine();
-        int count = this.money / LOTTO_PRIZE;
-        for (int i = 0; i < count; i++) {
-            lottoList.add(lottoMachine.generateLotto(new ArrayList<>(new RandomLottoNumber().generateNumber())));
-        }
+    public void buyLotto() {
+        lottoMachine = new LottoMachine(this.money, manualCount);
+        lottoList = lottoMachine.generateLotto();
     }
 
-    public int getLottoCount() {
-        return lottoList.size();
+    public int getAutoLottoCount() {
+        return lottoMachine.getAutoLottoCount();
     }
 
-    public List<List<Integer>> getLottoListNumbers() {
-        List<List<Integer>> lottoListNumbers = new ArrayList<>();
+    public int getManualLottoCount() {
+        return lottoMachine.getManualLottoCount();
+    }
+
+    public List<List<LottoNo>> getLottoListNumbers() {
+        List<List<LottoNo>> lottoListNumbers = new ArrayList<>();
 
         lottoList.stream().forEach(lotto -> {
             lottoListNumbers.add(lotto.getLottoNumber());
@@ -57,7 +64,7 @@ public class Buyer {
         return lottoListNumbers;
     }
 
-    public Map<Prize, Integer> checkLotto(List<Integer> winningNumbers, int bonusNumber) {
+    public Map<Prize, Integer> checkLotto(List<LottoNo> winningNumbers, LottoNo bonusNumber) {
 
         lottoList.forEach(lotto -> {
             Prize prize = lotto.getLottoPrize(winningNumbers, bonusNumber);
