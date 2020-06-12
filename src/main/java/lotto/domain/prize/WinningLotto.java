@@ -42,7 +42,8 @@ public class WinningLotto {
     private List<LottoNumber> convertStringToNumber(String enteredStringNumber) {
         String[] enteredStringNumbers = enteredStringNumber.split(SEPARATOR);
         return Arrays.stream(enteredStringNumbers)
-                .map(x -> LottoNumber.create(Integer.parseInt(x.trim()))).collect(Collectors.toList());
+                .map(x -> LottoNumber.create(Integer.parseInt(x.trim())))
+                .collect(Collectors.toList());
     }
 
     private void checkBonusBallDuplicate() {

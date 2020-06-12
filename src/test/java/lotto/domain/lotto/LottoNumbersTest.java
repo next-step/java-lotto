@@ -46,7 +46,7 @@ class LottoNumbersTest {
     @Test
     void 여섯자리_로또번호를_생성한다() {
         LottoNumbers lottoNumbers = LottoNumbers.create();
-        assertThat(lottoNumbers.getLottoLottoNumbers()).size().isEqualTo(6);
+        assertThat(lottoNumbers.getLottoNumbers()).size().isEqualTo(6);
     }
 
     @Test

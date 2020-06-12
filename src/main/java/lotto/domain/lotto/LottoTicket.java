@@ -32,7 +32,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> tellLottoNumbers(int i) {
-        return lottoTicket.get(i).getLottoLottoNumbers();
+        return lottoTicket.get(i).getLottoNumbers();
     }
 
     private void checkQuantity(int quantity) {

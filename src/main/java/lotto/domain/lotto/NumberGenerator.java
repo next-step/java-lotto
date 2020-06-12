@@ -17,7 +17,8 @@ public class NumberGenerator {
 
     private NumberGenerator() {
         List<Integer> numbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-                .boxed().collect(Collectors.toList());
+                .boxed()
+                .collect(Collectors.toList());
         this.numbers = numbers;
     }
 
@@ -28,9 +29,9 @@ public class NumberGenerator {
     public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(numbers);
         List<LottoNumber> lottoLottoNumbers = new ArrayList<>(numbers.subList(START_LOTTO_RANGE, END_LOTTO_RANGE)
-                        .stream()
-                        .map(k -> LottoNumber.create(k))
-                        .collect(Collectors.toList()));
+                .stream()
+                .map(k -> LottoNumber.create(k))
+                .collect(Collectors.toList()));
         Collections.sort(lottoLottoNumbers);
         return lottoLottoNumbers;
     }
