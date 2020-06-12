@@ -42,9 +42,9 @@ public class InputView {
         System.out.println(MANUAL_NUMBER_COUNT_INPUT_MESSAGE);
         int countNumber = sc.nextInt();
 
-        System.out.println(MANUAL_NUMBER_INPUT_MESSAGE);
+        System.out.println(MANUAL_NUMBER_INPUT_MESSAGE + countNumber);
         for (int i = 0; i < countNumber; i++) {
-            manualNumber.add(sc.nextLine());
+            manualNumber.add(sc.next());
         }
 
         return manualNumber;

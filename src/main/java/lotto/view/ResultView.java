@@ -15,9 +15,13 @@ public class ResultView {
                                                     .filter(r -> r.getCountOfMatch() >= 3)
                                                     .collect(Collectors.toList());
 
-    public void displayLottoNumbers(List<LottoNumber> lottoNumberList){
+    public void displayLottoNumbers(Lotto lotto){
+
         StringBuilder uiBuilder = new StringBuilder();
-        for (LottoNumber lottoNumber : lottoNumberList) {
+        uiBuilder.append("수동으로 " + lotto.getManualLotto() + "장, ");
+        uiBuilder.append("자동으로 " + lotto.getAutoLotto() + "장");
+        uiBuilder.append("구매했습니다.\n");
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             uiBuilder.append(lottoNumber.getLottoNumber() + "\n");
         }
         System.out.println(uiBuilder.toString());

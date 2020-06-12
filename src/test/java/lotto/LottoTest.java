@@ -18,8 +18,12 @@ public class LottoTest {
     @Test
     void LOTTO_NUMBER_COUNT() {
         List<String> manuaLottoNumbers = new ArrayList<>();
-        manuaLottoNumbers.add("1,2,3,4,5,6");
-        assertThat(new Lotto(5, manuaLottoNumbers).getLottoNumbers()).hasSize(6);
+
+        Lotto lott = new Lotto(5, manuaLottoNumbers);
+
+        assertThat(lott.getLottoNumbers()).hasSize(5);
+        assertThat(lott.getAutoLotto()).isEqualTo(5);
+        assertThat(lott.getManualLotto()).isEqualTo(0);
     }
 
     @DisplayName("로또 수동 생성 테스트")
@@ -28,7 +32,11 @@ public class LottoTest {
         List<String> manuaLottoNumbers = new ArrayList<>();
         manuaLottoNumbers.add("1,2,3,4,5,6");
         manuaLottoNumbers.add("16,18,29,30,31,32");
-        assertThat(new Lotto(0, manuaLottoNumbers).getLottoNumbers()).hasSize(2);
+
+        Lotto lott = new Lotto(0, manuaLottoNumbers);
+        assertThat(lott.getLottoNumbers()).hasSize(2);
+        assertThat(lott.getAutoLotto()).isEqualTo(0);
+        assertThat(lott.getManualLotto()).isEqualTo(2);
     }
 
     @DisplayName("로또 수동 생성 오류 테스트")

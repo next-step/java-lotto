@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoApplication {
 
@@ -14,12 +13,11 @@ public class LottoApplication {
         InputView input = new InputView();
         int lottoCount = new LottoPayment(input.displayLottoIntro()).pay();
         List<String> manualNumber = input.displayManualLottoNumberInputUI();
-        Lotto lotto = new Lotto(lottoCount, manualNumber);
+        Lotto lotto = new Lotto(lottoCount - manualNumber.size(), manualNumber);
         ResultView resultView = new ResultView();
 
         input.displayIntroInputUI(lottoCount);
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-        resultView.displayLottoNumbers(lottoNumbers);
+        resultView.displayLottoNumbers(lotto);
 
         String[] inputNumber = input.displayLastLottoNumberInputUI();
         int bonusNumber = input.displayBonusLottoNumberInputUI();

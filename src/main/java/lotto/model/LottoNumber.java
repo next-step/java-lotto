@@ -15,6 +15,10 @@ public class LottoNumber {
         this.issueType = issueType;
     }
 
+    public String getIssueType() {
+        return this.issueType;
+    }
+
     public RewardStatus getRewardStatus(String[] winningNumber, int bonus) {
         int matchingCount = 0;
         for (int i = 0; i < winningNumber.length; i++) {
