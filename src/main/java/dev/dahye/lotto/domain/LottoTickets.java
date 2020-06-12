@@ -49,22 +49,14 @@ public class LottoTickets {
         this.lottoTickets.add(lottoTicket);
     }
 
-    public List<Rank> calculateWinningRate(LottoTicket winningTicket, BonusBall bonusBall) {
+    public List<Rank> calculateWinningRate(Winning winning) {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.getCountOfMatch(winningTicket);
-            boolean isMatchBonusNumber = lottoTicket.contains(bonusBall.getBonusNumber());
-            addWhenIsRanking(ranks, matchCount, isMatchBonusNumber);
+            ranks.add(winning.ranking(lottoTicket));
         }
 
         return ranks;
-    }
-
-    private void addWhenIsRanking(List<Rank> ranks, int matchCount, boolean isMatchBonusNumber) {
-        if (Rank.canRanking(matchCount, isMatchBonusNumber)) {
-            ranks.add(Rank.valueOf(matchCount, isMatchBonusNumber));
-        }
     }
 
     public int size() {

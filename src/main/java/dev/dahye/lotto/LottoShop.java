@@ -1,11 +1,9 @@
 package dev.dahye.lotto;
 
-import dev.dahye.lotto.domain.LottoMoney;
-import dev.dahye.lotto.domain.LottoOrder;
-import dev.dahye.lotto.domain.LottoResult;
-import dev.dahye.lotto.domain.LottoTicket;
+import dev.dahye.lotto.domain.*;
 import dev.dahye.lotto.service.LottoMachine;
 import dev.dahye.lotto.util.ConvertUtils;
+import dev.dahye.lotto.util.LottoNumber;
 import dev.dahye.lotto.view.InputView;
 import dev.dahye.lotto.view.ResultView;
 
@@ -22,9 +20,9 @@ public class LottoShop {
 
         LottoTicket winningTicket
                 = LottoTicket.manualIssued(ConvertUtils.convertStringToIntegerList(InputView.doInputWinningNumbers()));
-        int bonusNumber = InputView.doInputBonusNumber();
+        LottoNumber bonusBall = LottoNumber.of(InputView.doInputBonusNumber());
 
-        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), winningTicket, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoTickets(), Winning.of(winningTicket, bonusBall));
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printWinningRate(lottoResult.getMyWinningRate(lottoMoney));

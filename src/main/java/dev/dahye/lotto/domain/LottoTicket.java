@@ -55,8 +55,8 @@ public class LottoTicket {
         }
     }
 
-    public int getCountOfMatch(LottoTicket winningTicket) {
-        return (int) winningTicket.lottoNumbers.stream()
+    public int getCountOfMatch(LottoTicket lottoTicket) {
+        return (int) lottoTicket.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }

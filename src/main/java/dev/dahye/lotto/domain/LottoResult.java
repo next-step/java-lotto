@@ -4,17 +4,15 @@ import java.util.List;
 
 public class LottoResult {
     private final LottoTickets lottoTickets;
-    private final LottoTicket winningTicket;
-    private final BonusBall bonusNumber;
+    private final Winning winning;
 
-    public LottoResult(LottoTickets lottoTickets, LottoTicket winningTicket, int bonusNumber) {
+    public LottoResult(LottoTickets lottoTickets, Winning winning) {
         this.lottoTickets = lottoTickets;
-        this.winningTicket = winningTicket;
-        this.bonusNumber = BonusBall.of(bonusNumber, this.winningTicket);
+        this.winning = winning;
     }
 
     public List<Rank> getMyRanks() {
-        return this.lottoTickets.calculateWinningRate(winningTicket, bonusNumber);
+        return this.lottoTickets.calculateWinningRate(winning);
     }
 
     public int getTotalCountOf(Rank target) {

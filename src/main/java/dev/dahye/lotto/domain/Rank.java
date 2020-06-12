@@ -3,6 +3,7 @@ package dev.dahye.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
+    NO_RANK(0, 0, false),
     FIFTH(3, 5000, false),
     FOURTH(4, 50000, false),
     THIRD(5, 1500000, false),
@@ -35,15 +36,10 @@ public enum Rank {
         return (this.countOfMatch == countOfMatch && this.isMatchBonusNumber == isMatchBonusNumber);
     }
 
-    public static boolean canRanking(int countOfMatch, boolean isMatchBonusNumber) {
-        return Arrays.stream(Rank.values())
-                .anyMatch(rank -> rank.same(countOfMatch, isMatchBonusNumber));
-    }
-
     public static Rank valueOf(int countOfMatch, boolean isMatchBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.same(countOfMatch, isMatchBonusNumber))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(NO_RANK);
     }
 }

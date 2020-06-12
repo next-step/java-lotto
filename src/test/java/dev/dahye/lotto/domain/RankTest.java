@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Rank 테스트")
@@ -32,9 +31,9 @@ class RankTest {
 
     @ParameterizedTest(name = "일치 횟수 = {0}, 보너스볼 {1}")
     @MethodSource("invalidRanks")
-    @DisplayName("정의된 당첨 횟수가 아닌 경우 valueOf() 메서드를 호출하면 IllegalArgumentException throw")
+    @DisplayName("정의된 당첨 횟수가 아닌 경우 valueOf() 메서드를 호출하면 NO_RANK를 반환한다.")
     void valueOf_fail(int matchCount, boolean isMatchBonusBall) {
-        assertThrows(IllegalArgumentException.class, () -> Rank.valueOf(matchCount, isMatchBonusBall));
+        assertThat(Rank.valueOf(matchCount, isMatchBonusBall)).isEqualTo(Rank.NO_RANK);
     }
 
     private static Stream<Arguments> invalidRanks() {
@@ -47,12 +46,5 @@ class RankTest {
                 arguments(7, false),
                 arguments(7, true)
         );
-    }
-
-    @ParameterizedTest(name = "일치 횟수 = {0}, 보너스볼 {1}")
-    @MethodSource("invalidRanks")
-    @DisplayName("일치된 횟수가 상금을 수여할 수 없는 경우 canRanking(matchCount)는 false를 반환한다.")
-    void can_not_ranking(int matchCount, boolean isMatchBonusBall) {
-        assertThat(Rank.canRanking(matchCount, isMatchBonusBall)).isFalse();
     }
 }

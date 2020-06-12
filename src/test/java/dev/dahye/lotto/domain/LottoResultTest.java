@@ -1,5 +1,6 @@
 package dev.dahye.lotto.domain;
 
+import dev.dahye.lotto.util.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ class LottoResultTest {
         LottoTickets manualLottoTickets
                 = LottoTickets.manualIssued(Arrays.asList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
-        LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(manualLottoTickets, Winning.of(winningNumbers, LottoNumber.of(bonusNumber)));
         assertThat(lottoResult.getMyRanks().get(0)).isEqualTo(rank);
     }
 
@@ -44,7 +45,7 @@ class LottoResultTest {
         LottoTickets lottoTickets = LottoTickets.manualIssued(Arrays.asList(lottoTicketByRankFirst, lottoTicketByRankThird));
         LottoTicket winningTicket = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        LottoResult lottoResult = new LottoResult(lottoTickets, winningTicket, 8);
+        LottoResult lottoResult = new LottoResult(lottoTickets, Winning.of(winningTicket, LottoNumber.of(8)));
 
         int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
         double expectedResult = lottoMoney.divideTotalPrizeByMoney(totalPrize);

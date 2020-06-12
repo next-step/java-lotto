@@ -56,4 +56,10 @@ class LottoTicketTest {
     void validate_lotto_number_null(List<Integer> lottoNumbers) {
         assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(lottoNumbers));
     }
+
+    @Test
+    @DisplayName("로또의 일치 횟수 구하기")
+    void count_of_match() {
+
+    }
 }
