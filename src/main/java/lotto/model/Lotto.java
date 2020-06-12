@@ -6,11 +6,17 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public final static String LOTTO_TYPE_AUTO = "auto";
+    public final static String LOTTO_TYPE_MANUAL = "manual";
+
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public Lotto(int lottoCount) {
+    public Lotto(int lottoCount, List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.getManualNumber(manualNumber), LOTTO_TYPE_MANUAL));
+        }
         for (int i = 0; i < lottoCount; i++) {
-            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.getNumber()));
+            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.getAutoNumber(), LOTTO_TYPE_AUTO));
         }
     }
 

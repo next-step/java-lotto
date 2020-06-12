@@ -13,7 +13,8 @@ public class LottoApplication {
 
         InputView input = new InputView();
         int lottoCount = new LottoPayment(input.displayLottoIntro()).pay();
-        Lotto lotto = new Lotto(lottoCount);
+        List<String> manualNumber = input.displayManualLottoNumberInputUI();
+        Lotto lotto = new Lotto(lottoCount, manualNumber);
         ResultView resultView = new ResultView();
 
         input.displayIntroInputUI(lottoCount);

@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class LottoNumberGenerator {
                                                     .boxed()
                                                     .collect(Collectors.toList());
 
-    public static List<Integer> getNumber(){
+    public static List<Integer> getAutoNumber(){
         List<Integer> lottoNumber = new ArrayList<>();
         Collections.shuffle(lottoNumbers);
         for (int i = 0; i < LOTTO_CREATE_COUNT; i++) {
@@ -22,5 +23,11 @@ public class LottoNumberGenerator {
         }
         Collections.sort(lottoNumber);
         return lottoNumber;
+    }
+
+    public static List<Integer> getManualNumber(String manualNumber){
+        return Arrays.asList(manualNumber.split(",")).stream()
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 }

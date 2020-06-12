@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 public class LottoNumber {
 
     private List<Integer> numbers;
+    private String issueType;
 
-    public LottoNumber(List<Integer> numbers) {
+    public LottoNumber(List<Integer> numbers, String issueType) {
         validate(numbers);
         this.numbers = numbers;
+        this.issueType = issueType;
     }
 
     public RewardStatus getRewardStatus(String[] winningNumber, int bonus) {
@@ -31,11 +33,9 @@ public class LottoNumber {
                 || LottoNumberGenerator.LOTTO_CREATE_COUNT != numbers.size()) {
             throw new IllegalArgumentException("로또 번호 입력 에러발");
         }
-
-        if (LottoNumberGenerator.LOTTO_RANGE_LAST_NUMBER > Collections.max(numbers)) {
+        if (LottoNumberGenerator.LOTTO_RANGE_LAST_NUMBER < Collections.max(numbers)) {
             throw new IllegalArgumentException("45초과 번호 입력!!");
         }
-
         if (LottoNumberGenerator.LOTTO_RANGE_START_NUMBER > Collections.min(numbers)) {
             throw new IllegalArgumentException("1미만 번호 입력!!");
         }
