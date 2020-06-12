@@ -1,19 +1,32 @@
 package lotto.domain.generator;
 
+import lotto.domain.data.Lotto;
+import lotto.domain.data.LottoNumberPool;
+import lotto.domain.data.ManualLotto;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
 
-    @DisplayName("요청한 개수 만큼 로또 번호를 생성한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 5, 6})
-    public void generatorTest(int count) {
-   /*     LottoGenerator lottoGenerator = LottoGenerator.newInstance();
+    @DisplayName("입력한 수대로 Lotto 가 생성된다.")
+    @Test
+    void generateTest() {
+        List<Integer> lottoMemo1 = List.of(1,2,3,4,5,6);
+        List<Integer> lottoMemo2 = List.of(1,2,3,7,5,8);
+        List<ManualLotto> manualLottos = ManualLotto.list(List.of(lottoMemo1, lottoMemo2));
 
-        List<Lotto> lottos = lottoGenerator.generator(count);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Lotto> lottos = lottoGenerator.generate(2, manualLottos);
 
-        Assertions.assertThat(lottos.size()).isEqualTo(count);*/
+
+        assertThat(lottos.size()).isEqualTo(4);
+        assertThat(lottos).contains(
+                Lotto.of(LottoNumberPool.get(lottoMemo1)),
+                Lotto.of(LottoNumberPool.get(lottoMemo2)));
+
     }
 }
