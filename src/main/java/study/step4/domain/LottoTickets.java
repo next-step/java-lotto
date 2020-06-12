@@ -33,9 +33,9 @@ public class LottoTickets {
 
     public static LottoTickets manualPublish(LottoInputDto lottoInputDto) {
         return lottoInputDto.getInputNumbers()
-                .stream()
-                .map(LottoTicket::manual)
-                .collect(collectingAndThen(toList(), LottoTickets::new));
+                            .stream()
+                            .map(LottoTicket::manual)
+                            .collect(collectingAndThen(toList(), LottoTickets::new));
     }
 
 
