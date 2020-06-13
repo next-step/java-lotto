@@ -27,8 +27,23 @@ public class LottoNumberGenerator {
     }
 
     public static List<Integer> makeManualNumber(String manualNumber){
-        return Arrays.stream(manualNumber.split(LOTTO_AUTO_NUMBER_DELIMETER))
+        return validate(Arrays.stream(manualNumber.split(LOTTO_AUTO_NUMBER_DELIMETER))
                 .map(Integer::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+    }
+
+    private static List<Integer> validate(List<Integer> numbers) {
+        int numberSize = (int) numbers.stream().distinct().count();
+        if (LottoNumberGenerator.LOTTO_CREATE_COUNT != numberSize
+                || LottoNumberGenerator.LOTTO_CREATE_COUNT != numbers.size()) {
+            throw new IllegalArgumentException("로또 번호 입력 에러발");
+        }
+        if (LottoNumberGenerator.LOTTO_RANGE_LAST_NUMBER < Collections.max(numbers)) {
+            throw new IllegalArgumentException("45초과 번호 입력!!");
+        }
+        if (LottoNumberGenerator.LOTTO_RANGE_START_NUMBER > Collections.min(numbers)) {
+            throw new IllegalArgumentException("1미만 번호 입력!!");
+        }
+        return numbers;
     }
 }
