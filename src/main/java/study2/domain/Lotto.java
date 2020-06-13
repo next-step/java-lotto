@@ -48,11 +48,13 @@ public class Lotto {
 		return numbers.size();
 	}
 
-	public  int getRankWithWinningLotto(List<Integer> winningLotto) {
+	public  Rank getRankWithWinningLotto(List<Integer> winningLotto) {
 								
-		return  (int) this.numbers.stream()
+		int matchedNumber =  (int) this.numbers.stream()
                 .filter(winningLotto::contains)
                 .count();
+		
+		return Ranking.getRanking(matchedNumber);
 	}
 
 	

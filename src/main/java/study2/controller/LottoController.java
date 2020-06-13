@@ -26,10 +26,10 @@ public class LottoController {
 		
 		// 지난 주 당첨 번호 입력
 		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
-		int rankingNumber = rank.matchNumber(lottoNumbersList, winNumber);
-		
-		System.out.println(Ranking.getRanking(rankingNumber));
-		resultview.outPutMessages(Ranking.getRanking(rankingNumber), lottoNumbersList);
+		rank.matchNumber(lottoNumbersList, winNumber);
+	
+	
+		resultview.outPutMessages(, lottoNumbersList);
 		
 	}
 }

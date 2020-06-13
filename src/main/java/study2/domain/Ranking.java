@@ -43,29 +43,23 @@ public class Ranking {
 
 	}
 
-	public int matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
+	public Rank matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
 		
-		// 여기서 matchedNumber를 최종값만 반환하고있는데요
-		// List를 만들어서 다시 matchedNumber를 담아주는것이 좋을까요??
+		// 질문을 다시드려야 될것같아요!
+		// rank를 담는 배열을 생성하는편이 좋을까요?
 		
 		lottoNumbers.forEach(lotto -> {
-			matchedNumber = lotto.getRankWithWinningLotto(winningLotto);
+			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
+			
 		});
-		
-		return matchedNumber;
-		
+				
+		return rank;
 	}
 
 	public static Rank getRanking(int matchedNumber) {
 		
-		
-		
-		System.out.println(Arrays.stream(Rank.values())
-				.filter(Rank -> Rank.getCountOfMatch() == matchedNumber)
-				.findFirst().orElse(Rank.MISS));
-		
 		return Arrays.stream(Rank.values())
-				.filter(Rank -> Rank.getCountOfMatch() == matchedNumber)
+				.filter(rank -> rank.getCountOfMatch() == matchedNumber)
 				.findFirst()
 				.orElse(Rank.MISS);
 
