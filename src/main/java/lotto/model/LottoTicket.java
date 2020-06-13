@@ -5,22 +5,46 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private static final List<Integer> lottoDrawNumbers = new ArrayList(); //{1, 2, 3, 4};
+    private Lotto lotto = new Lotto();
+    private List<Integer> myNumbers;
 
     public LottoTicket() {
-        for(int i = 1; i <= 45; i++) {
-            lottoDrawNumbers.add(i);
-        }
+        myNumbers = buyTicket();
+    }
+
+    public LottoTicket(int[] numbers) {
+        this.myNumbers = arrToList(numbers);
     }
 
     public List<Integer> buyTicket() {
-        Collections.shuffle(lottoDrawNumbers);
+        Collections.shuffle(lotto.lottoDrawNumbers);
         List<Integer> numbers = new ArrayList<>();
 
-        for(int i = 0; i < 6; i++) {
-            numbers.add(lottoDrawNumbers.get(i));
+        for(int i = 0; i < Lotto.LIMIT; i++) {
+            numbers.add(lotto.lottoDrawNumbers.get(i));
         }
 
         return numbers;
+    }
+
+    public int isWinner(List<Integer> winningNumbers) {
+        int winningRank = 0;
+
+        for (int i : winningNumbers) {
+            if (myNumbers.contains(i)) {
+                winningRank++;
+            }
+        }
+
+        return winningRank;
+    }
+
+    private List<Integer> arrToList(int[] numbers) {
+        List<Integer> list = new ArrayList<>();
+        for (int i : numbers) {
+            list.add(i);
+        }
+
+        return list;
     }
 }
