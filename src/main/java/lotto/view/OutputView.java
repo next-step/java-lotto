@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.Lotto;
+
 public class OutputView {
     /*
      * 구입한 로또의 갯수를 출력하는 뷰
@@ -7,21 +9,6 @@ public class OutputView {
      * 당첨 통계를 출력하는 뷰 - 3, 4, 5, 6개 일치
      * 수익률을 출력하는 뷰
      */
-
-    private enum Rank {
-        ALL_MATCH(6, 2000000000),
-        MISS_ONE(5, 1500000),
-        MISS_TWO(4, 50000),
-        MISS_THREE(3,5000);
-
-        private final int matchNumber;
-        private final int prize;
-
-        Rank(int matchNumber, int prize) {
-            this.matchNumber = matchNumber;
-            this.prize = prize;
-        }
-    }
 
     public void howManyLottoTicketsView(int num) {
         System.out.println(num + "개를 구매했습니다.");
@@ -41,8 +28,8 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.matchNumber, rank.prize, -999);
+        for (Lotto.Rank rank : Lotto.Rank.values()) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), -999);
         }
     }
 

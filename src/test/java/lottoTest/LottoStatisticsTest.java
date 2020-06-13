@@ -1,5 +1,6 @@
 package lottoTest;
 
+import lotto.model.Lotto;
 import lotto.model.LottoStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ public class LottoStatisticsTest {
 
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"1, 2000000000", "2, 1500000", "3, 50000", "4, 5000", "5, 0"})
-    public void getPrizeMoney(int rank, int prize) {
+    @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000", "NONE, 0"})
+    public void getPrizeMoney(Lotto.Rank rank, int prize) {
         int money = lottoStatic.getPrizeMoney(rank);
         assertThat(money).isEqualTo(prize);
     }
