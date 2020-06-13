@@ -1,4 +1,4 @@
-package lotto.collections;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -38,6 +38,6 @@ public class RewardTypeTest {
 	@MethodSource("lottoStatisticsMock")
 	@ParameterizedTest
 	void 로또_통계에_따라_최종_수익을_계산한다(List<RewardType> lottoStatistics, int profit) {
-		assertThat(RewardType.calculateProfit(lottoStatistics)).isEqualTo(profit);
+		assertThat(RewardType.calculateProfit(lottoStatistics).getValue()).isEqualTo(profit);
 	}
 }

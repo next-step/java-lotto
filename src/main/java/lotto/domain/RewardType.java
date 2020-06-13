@@ -1,4 +1,4 @@
-package lotto.collections;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,11 +36,12 @@ public enum RewardType {
 		return FIFTH;
 	}
 
-	public static int calculateProfit(List<RewardType> lottoStatistics) {
-		return Arrays.stream(RewardType.values())
+	public static Money calculateProfit(List<RewardType> lottoStatistics) {
+		int totalProfitValue = Arrays.stream(RewardType.values())
 			.filter(lottoStatistics::contains)
 			.map(type -> type.getMoneyValue() * countSameType(lottoStatistics, type))
 			.reduce(0, Integer::sum);
+		return new Money(totalProfitValue);
 	}
 
 	public static int countSameType(List<RewardType> lottoStatistics, RewardType type) {

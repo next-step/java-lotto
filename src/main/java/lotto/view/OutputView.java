@@ -2,13 +2,16 @@ package lotto.view;
 
 import lotto.collections.LottoResult;
 import lotto.collections.LottoTickets;
-import lotto.collections.RewardType;
+import lotto.domain.RewardType;
 
 public class OutputView {
 
-	public static void printNumberOfPurchasedTickets(LottoTickets lottoTickets) {
-		System.out.println(lottoTickets.numberOfLottoTickets() + "개를 구매했습니다.");
-		lottoTickets.getLottoTickets()
+	public static void printNumberOfPurchasedTickets(LottoTickets userManualTickets, LottoTickets allTickets) {
+		final int numberOfUserManualTickets = userManualTickets.numberOfLottoTickets();
+		final int numberOfAutoDrawnTickets = allTickets.numberOfLottoTickets() - numberOfUserManualTickets;
+		System.out.println("수동으로" + numberOfUserManualTickets + "개를 구매했습니다.");
+		System.out.println("자동으로" + numberOfAutoDrawnTickets + "개를 구매했습니다.");
+		allTickets.getLottoTickets()
 			.forEach(ticket -> System.out.println(ticket.toString()));
 	}
 

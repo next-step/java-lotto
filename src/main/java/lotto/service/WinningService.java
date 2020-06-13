@@ -2,32 +2,30 @@ package lotto.service;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lotto.collections.LottoResult;
+import lotto.collections.LottoTicket;
 import lotto.collections.LottoTickets;
-import lotto.collections.Money;
-import lotto.collections.RewardType;
 import lotto.collections.WinningNumbers;
 import lotto.collections.WinningTicket;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.RewardType;
+import lotto.util.LottoProfitCalculator;
+import lotto.util.NumberStringParser;
 
 public class WinningService {
 
 	public static WinningNumbers createWinningNumbers(final String winningNumber) {
-		List<Integer> winningNumberBeforeList = Arrays.stream(winningNumber.split(","))
-			.map(String::trim)
-			.map(Integer::valueOf)
-			.collect(Collectors.toList());
+		List<Integer> winningNumberBeforeList = NumberStringParser.NumberStringToIntegerList(winningNumber);
 		return new WinningNumbers(winningNumberBeforeList);
 	}
 
-	public static Money calculateProfit(List<RewardType> lottoStatistics) {
-		int value = RewardType.calculateProfit(lottoStatistics);
-		return new Money(value);
+	public static double calculateProfit(List<RewardType> lottoStatistics, int lottoTicketSize) {
+		Money winningPrice = RewardType.calculateProfit(lottoStatistics);
+		int winningPriceValue = winningPrice.getValue();
+		return LottoProfitCalculator.getConvertProfit(winningPriceValue, lottoTicketSize);
 	}
 
 	public static LottoResult getLottoResult(final LottoTickets lottoTickets, final WinningTicket winningTicket) {
@@ -43,6 +41,6 @@ public class WinningService {
 
 	public static boolean isBonusBall(final LottoTickets lottoTickets, final LottoNumber bonusBall) {
 		return lottoTickets.getLottoTickets().stream()
-			.anyMatch(ticket -> ticket.doesContainBonusBall(bonusBall));
+			.anyMatch(ticket -> ticket.contains(bonusBall));
 	}
 }

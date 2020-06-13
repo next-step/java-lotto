@@ -1,7 +1,9 @@
-package lotto.domain;
+package lotto.collections;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lotto.domain.LottoNumber;
 
 public class LottoTicket {
 
@@ -13,11 +15,6 @@ public class LottoTicket {
 
 	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
-	}
-
-	public boolean doesContainBonusBall(LottoNumber bonusBall) {
-		return lottoNumbers.stream()
-			.anyMatch(number -> number.getNumber().equals(bonusBall.getNumber()));
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {
