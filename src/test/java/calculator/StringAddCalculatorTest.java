@@ -63,6 +63,6 @@ public class StringAddCalculatorTest {
     public void whenPutNegativeInt_thenThrowRuntimeException() {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             StringAddCalculator.calculate("1,-1");
-        }).withMessage("the negative integer cannot be passed.");
+        }).withMessage("The negative integer cannot be passed.");
     }
 }

@@ -11,7 +11,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_SEPARATOR_INDICATOR = CUSTOM_SEPARATOR_WRAPPER_PREFIX + ".+" + CUSTOM_SEPARATOR_WRAPPER_POSTFIX;
     private static final Pattern CUSTOM_SEPARATOR_INDICATOR_PATTERN = Pattern.compile(CUSTOM_SEPARATOR_INDICATOR);
     private static final String BAD_EXPRESSION_NON_INTEGER = "The expression must consist only of integers separated by the specific separator.";
-    private static final String BAD_EXPRESSION_NEGATIVE_INTEGER = "the negative integer cannot be passed.";
+    private static final String BAD_EXPRESSION_NEGATIVE_INTEGER = "The negative integer cannot be passed.";
 
     public static int calculate(String expression) {
         if (isNullOrEmpty(expression)) {
