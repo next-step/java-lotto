@@ -1,8 +1,9 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoStore;
+import lotto.domain.LottosStatistics;
 import lotto.domain.data.*;
-import lotto.util.Split;
+import lotto.domain.generator.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,22 +11,20 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-  /*      final int buyPriceAmount = InputView.inputBuyAmount();
+        final int buyPriceAmount = InputView.inputBuyAmount();
         final int countManualLottoCount = InputView.inputManualLottoCount();
-        final List<String> manualLottos = InputView.inputManualLottos(countManualLottoCount);
+        final List<List<Integer>> manualLottoInput = InputView.inputManualLottos(countManualLottoCount);
 
-        LottoStore lottoStore = new LottoStore();
-        ManualLottoMemo manualLottoMemo =ManualLottoMemo.of(manualLottos);
+        LottoStore lottoStore = new LottoStore(new LottoGenerator());
+        List<ManualLotto> manualLottos = ManualLotto.list(manualLottoInput);
+        List<Lotto> lottosBought = lottoStore.buy(PriceLotto.of(buyPriceAmount), manualLottos);
+        OutputView.printBuyLottos(lottosBought, manualLottos);
 
-        List<Lotto> lottosBought = lottoStore.buy(PriceLotto.of(buyPriceAmount), manualLottoMemo);
-        OutputView.printBuyLottos(lottosBought, manualLottoMemo);
-
-        final String winningNumber = InputView.inputWinningNumber();
+        final List<Integer> winningNumber = InputView.inputWinningNumber();
         final int bonus = InputView.inputBonusNumber();
 
-        final WinningLotto winningLotto = new WinningLotto(LottoNumberPool.get(Split.from(winningNumber, ",")), LottoNumberPool.get(bonus));
-        LottosStatistics statistics = new LottosStatistics(lottosBought, PriceLotto.of(buyPriceAmount),
-                winningLotto);
-        OutputView.printLottoStatistics(statistics);*/
+        final WinningLotto winningLotto = new WinningLotto(LottoNumberPool.get(winningNumber), LottoNumberPool.get(bonus));
+        LottosStatistics statistics = new LottosStatistics(lottosBought, PriceLotto.of(buyPriceAmount), winningLotto);
+        OutputView.printLottoStatistics(statistics);
     }
 }
