@@ -1,6 +1,8 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,5 +13,12 @@ public class StringAddCalculatorTest {
         assertThat(nullResult).isEqualTo(0);
         int emptyStringResult = StringAddCalculator.calculate("");
         assertThat(emptyStringResult).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 1})
+    public void whenPutASingleInt_thenReturnItAsInt(Integer value) {
+        int result = StringAddCalculator.calculate(value.toString());
+        assertThat(result).isEqualTo(value);
     }
 }
