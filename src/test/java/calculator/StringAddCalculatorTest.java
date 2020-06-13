@@ -28,4 +28,10 @@ public class StringAddCalculatorTest {
         int sum = StringAddCalculator.calculate(expression);
         assertThat(sum).isEqualTo(3);
     }
+
+    @Test
+    public void whenPutIntStringWithCustomSeparator_thenReturnSumUsingTheSeparator() {
+        int sum = StringAddCalculator.calculate("//;\n1;2;3");
+        assertThat(sum).isEqualTo(6);
+    }
 }
