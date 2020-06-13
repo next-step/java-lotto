@@ -11,6 +11,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_SEPARATOR_INDICATOR = CUSTOM_SEPARATOR_WRAPPER_PREFIX + ".+" + CUSTOM_SEPARATOR_WRAPPER_POSTFIX;
     private static final Pattern CUSTOM_SEPARATOR_INDICATOR_PATTERN = Pattern.compile(CUSTOM_SEPARATOR_INDICATOR);
     private static final String BAD_EXPRESSION_NON_INTEGER = "The expression must consist only of integers separated by the specific separator.";
+    private static final String BAD_EXPRESSION_NEGATIVE_INTEGER = "the negative integer cannot be passed.";
 
     public static int calculate(String expression) {
         if (isNullOrEmpty(expression)) {
@@ -53,13 +54,15 @@ public class StringAddCalculator {
 
     private static int sumIntString(String[] intStrings) {
         return Arrays.stream(intStrings)
-                .mapToInt(string -> {
-                    int value = Integer.parseInt(string);
-                    if (value < 0) {
-                        throw new RuntimeException("the negative integer cannot be passed.");
-                    }
-                    return value;
-                })
+                .mapToInt(StringAddCalculator::parseNonNegativeInt)
                 .sum();
+    }
+
+    private static int parseNonNegativeInt(String s) {
+        int value = Integer.parseInt(s);
+        if (value < 0) {
+            throw new RuntimeException(BAD_EXPRESSION_NEGATIVE_INTEGER);
+        }
+        return value;
     }
 }
