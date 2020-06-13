@@ -23,8 +23,8 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2", "1:2"})
-    public void whenPutTwoIntStringWithCommaOrColonSeparator_thenReturnSumOfThem(String expression) {
+    @ValueSource(strings = {"1,2", "1:2", "1:1,1"})
+    public void whenPutIntStringsWithCommaOrColonSeparator_thenReturnSumOfThem(String expression) {
         int sum = StringAddCalculator.calculate(expression);
         assertThat(sum).isEqualTo(3);
     }
