@@ -21,4 +21,10 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.calculate(value.toString());
         assertThat(result).isEqualTo(value);
     }
+
+    @Test
+    public void whenPutTwoIntStringWithComma_thenReturnSumOfThem() {
+        int sum = StringAddCalculator.calculate("1,2");
+        assertThat(sum).isEqualTo(3);
+    }
 }
