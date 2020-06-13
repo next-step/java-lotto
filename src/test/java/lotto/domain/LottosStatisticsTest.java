@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.data.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,18 +11,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosStatisticsTest {
-    private final WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
+    private final WinningLotto winningLotto = new WinningLotto(LottoNumberPool.get(List.of(1,2,3,4,5,6)), LottoNumberPool.get(7));
     private final List<Lotto> Lottos = List.of(
-            new Lotto(List.of(1, 2, 3, 4, 5, 8)), // 5개 일치, 1500000원
-            new Lotto(List.of(1, 2, 3, 9, 10, 8)), // 3개 일치, 5000원
-            new Lotto(List.of(7, 8, 9, 12, 10, 11)), // 0개 일치,
-            new Lotto(List.of(1, 10, 3, 9, 5, 8)), // 3개 일치, 5000원
-            new Lotto(List.of(1, 2, 3, 4, 5, 7))); // 5개 일치 & 보너스 일치, 30000000원
+            Lotto.of(LottoNumberPool.get(List.of(1, 2, 3, 4, 5, 8))), // 5개 일치, 1500000원
+            Lotto.of(LottoNumberPool.get(List.of(1, 2, 3, 9, 10, 8))), // 3개 일치, 5000원
+            Lotto.of(LottoNumberPool.get(List.of(7, 8, 9, 12, 10, 11))), // 0개 일치,
+            Lotto.of(LottoNumberPool.get(List.of(1, 10, 3, 9, 5, 8))), // 3개 일치, 5000원
+            Lotto.of(LottoNumberPool.get(List.of(1, 2, 3, 4, 5, 7)))); // 5개 일치 & 보너스 일치, 30000000원
 
     private final int buyMoney = Lottos.size() * 1000;
 
     private final LottosStatistics statistics =
-            new LottosStatistics(Lottos, BigDecimal.valueOf(buyMoney), winningLotto);
+            new LottosStatistics(Lottos, PriceLotto.of(buyMoney), winningLotto);
 
     @DisplayName("로또들에 대한 각 당첨된 등수별 개수를 가져올 수 있다.")
     @Test

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoRank;
+import lotto.domain.data.LottoRank;
 import lotto.domain.LottosStatistics;
 
 public class StatisticsString {

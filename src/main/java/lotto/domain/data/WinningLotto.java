@@ -1,21 +1,22 @@
-package lotto.domain;
+package lotto.domain.data;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final int bonus;
+    private final LottoNumber bonus;
 
-    public WinningLotto(String winnigNumbers, int bonus) {
-        this.lotto = Lotto.fromLottoText(winnigNumbers);
+    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonus) {
+        validateContainLotto(winningNumbers, bonus);
+        this.lotto = Lotto.of(winningNumbers);
         this.bonus = bonus;
-        validateContainLotto(lotto, bonus);
     }
 
-    private void validateContainLotto(Lotto lotto, int bonus) {
-        if(lotto.getContainCount(Collections.singletonList(bonus)) > 0) {
+    private void validateContainLotto(List<LottoNumber> winningNumbers, LottoNumber bonus) {
+        if(winningNumbers.contains(bonus)) {
             throw new IllegalArgumentException("보너스는 당첨번호와 중복이 되면 안됩니다.");
         }
     }
@@ -33,8 +34,8 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonus == that.bonus &&
-                lotto.equals(that.lotto);
+        return lotto.equals(that.lotto) &&
+                bonus.equals(that.bonus);
     }
 
     @Override
