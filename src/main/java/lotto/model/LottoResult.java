@@ -27,6 +27,8 @@ public class LottoResult {
         return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
     }
 
-
+    public float getLottoProfit(int lottoCount) {
+        return (float) getTotalPrize() / lottoCount;
+    }
 
 }

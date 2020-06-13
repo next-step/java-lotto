@@ -27,7 +27,7 @@ public class LottoApplication {
 
         LottoResult lottoResult = new LottoResult(lottoRewars);
         resultView.displayResult(lottoResult);
-        resultView.displayResultRateMessage((float) lottoResult.getTotalPrize() / lottoCount);
+        resultView.displayResultRateMessage(lottoResult.getLottoProfit(lottoCount));
     }
 
 }
