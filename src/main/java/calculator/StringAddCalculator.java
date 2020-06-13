@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
+    private static final Pattern CUSTOM_SEPARATOR_EXPRESSION_REGEX = Pattern.compile("//.+\n");
 
     public static int calculate(String expression) {
         if (isNullOrEmpty(expression)) {
@@ -20,7 +21,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String expression) {
-        Matcher a = Pattern.compile("//.+\n").matcher(expression);
+        Matcher a = CUSTOM_SEPARATOR_EXPRESSION_REGEX.matcher(expression);
         if (a.find()) {
             String customSeparator = a.group()
                     .replace("//", "")
