@@ -2,8 +2,10 @@ package lottoTest;
 
 import lotto.model.LottoStatic;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,4 +20,11 @@ public class LottoStatisticsTest {
         assertThat(purchase).isEqualTo(expected);
     }
 
+    @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2000000000", "2, 1500000", "3, 50000", "4, 5000", "5, 0"})
+    public void getPrizeMoney(int rank, int prize) {
+        int money = lottoStatic.getPrizeMoney(rank);
+        assertThat(money).isEqualTo(prize);
+    }
 }
