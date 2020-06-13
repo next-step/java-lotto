@@ -11,18 +11,23 @@ public class StringAddCalculator {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
+        String[] intNumbers = split(expression);
+        return sum(intNumbers);
+    }
+
+    private static boolean isNullOrEmpty(String string) {
+        return string == null || string.isEmpty();
+    }
+
+    private static String[] split(String expression) {
         Matcher a = Pattern.compile("//.+\n").matcher(expression);
         if (a.find()) {
             String customSeparator = a.group()
                     .replace("//", "")
                     .replace("\n", "");
-            return sum(expression.split("\n")[1].split(customSeparator));
+            return expression.split("\n")[1].split(customSeparator);
         }
-        return sum(expression.split(SEPARATOR_REGEX));
-    }
-
-    private static boolean isNullOrEmpty(String string) {
-        return string == null || string.isEmpty();
+        return expression.split(SEPARATOR_REGEX);
     }
 
     private static int sum(String[] intStrings) {
