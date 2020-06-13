@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import lotto.collections.LottoTicket;
 import lotto.domain.LottoNumber;
 
-public class ManualLottoNumberGenerator implements LottoNumberGenerator {
+public class ManualLottoNumberGenerator extends LottoNumberGenerator {
 
 	List<LottoNumber> allNumberList;
 

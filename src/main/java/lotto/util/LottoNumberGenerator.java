@@ -7,12 +7,17 @@ import java.util.stream.IntStream;
 
 import lotto.domain.LottoNumber;
 
-interface LottoNumberGenerator {
+abstract class LottoNumberGenerator {
 
-	int MINIMUM_NUMBER_BOUND = 1;
-	int MAXIMUM_NUMBER_BOUND = 45;
-	int START_INDEX_OF_NUMBER_ELEMENTS = 0;
-	int NUMBER_OF_NUMBER_ELEMENTS = 6;
+	static int MINIMUM_NUMBER_BOUND = 1;
+	static int MAXIMUM_NUMBER_BOUND = 45;
+
+	public static List<LottoNumber> getLottoNumbers() {
+		List<LottoNumber> lottoNumbers;
+		lottoNumbers = generateLottoNumbers();
+		sortDescLottoNumbers(generateLottoNumbers());
+		return lottoNumbers;
+	}
 
 	static List<LottoNumber> generateLottoNumbers() {
 		return IntStream.rangeClosed(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)

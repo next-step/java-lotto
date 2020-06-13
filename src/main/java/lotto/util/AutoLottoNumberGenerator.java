@@ -5,12 +5,15 @@ import java.util.List;
 
 import lotto.domain.LottoNumber;
 
-public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+public class AutoLottoNumberGenerator extends LottoNumberGenerator {
+
+	int START_INDEX_OF_NUMBER_ELEMENTS = 0;
+	int NUMBER_OF_NUMBER_ELEMENTS = 6;
 
 	List<LottoNumber> beforeShuffledList;
 
 	public AutoLottoNumberGenerator() {
-		this.beforeShuffledList = LottoNumberGenerator.generateLottoNumbers();
+		this.beforeShuffledList = LottoNumberGenerator.getLottoNumbers();
 	}
 
 	public List<LottoNumber> pickList() {
