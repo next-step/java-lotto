@@ -42,7 +42,15 @@ public class StringAddCalculator {
         return source.substring(startIndex, endIndex);
     }
 
-    private static int sum(String[] intStrings) {
+    private static int sum(String[] strings) {
+        try {
+            return sumIntString(strings);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("The expression must consist only of integers separated by the specific separator.");
+        }
+    }
+
+    private static int sumIntString(String[] intStrings) {
         return Arrays.stream(intStrings)
                 .mapToInt(Integer::parseInt)
                 .sum();
