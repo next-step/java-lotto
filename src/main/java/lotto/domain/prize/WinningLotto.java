@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     public static final String SEPARATOR = ",";
+
     private LottoNumbers winningNumbers;
     private LottoNumber bonusBall;
 

@@ -5,6 +5,7 @@ import java.util.*;
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final NumberGenerator NUMBER_GENERATOR = NumberGenerator.create();
+
     private List<LottoNumber> lottoNumbers;
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
