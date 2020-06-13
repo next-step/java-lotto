@@ -24,8 +24,11 @@ public class ResultView {
 
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.MISS)
-                .map(rank -> String.format("%s - %s 개", rank.printRankStatus(), winningResult.tellWinningCount(rank)))
-                .sorted(String::compareTo)
+                .map(rank -> {
+                    String matchStr = rank == Rank.SECOND ? "개 일치, 보너스 볼 일치(" : "개 일치 (";
+                    return rank.getCountOfMatch() + matchStr + rank.getWinningMoney() + "원) - " + winningResult.tellWinningCount(rank) + "개";
+                })
+                .sorted()
                 .forEach(System.out::println);
     }
 

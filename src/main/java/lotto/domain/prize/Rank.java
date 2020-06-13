@@ -51,13 +51,6 @@ public enum Rank {
         return this.winningMoney * winningCount;
     }
 
-    public String printRankStatus() {
-        if (this == SECOND) {
-            return this.countOfMatch + "개 일치, 보너스 볼 일치(" + this.winningMoney + "원)";
-        }
-        return this.countOfMatch + "개 일치 (" + this.winningMoney + "원)";
-    }
-
     @Override
     public String toString() {
         return "Rank{" +
