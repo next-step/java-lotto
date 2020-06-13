@@ -21,8 +21,8 @@ public class LottoApplication {
         int enteredBonusBall = InputView.enterBonusBall();
 
         //당첨 결과 출력
-        WinningLotto winningLotto = WinningLotto.create(lottoTicket, enteredWinNumber, enteredBonusBall);
-        WinningResult winningResult = winningLotto.makeWinningResult();
+        WinningLotto winningLotto = WinningLotto.create(enteredWinNumber, enteredBonusBall);
+        WinningResult winningResult = winningLotto.makeWinningResult(lottoTicket);
         ResultView.printWinningResult(winningResult);
 
         //수익율 출력
