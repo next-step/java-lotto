@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.util.ConvertInt;
-import lotto.util.Split;
+import lotto.util.IntConverter;
+import lotto.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class InputView {
     public static List<Integer> inputWinningNumber() {
         System.out.println(TextFixture.INPUT_WINNING_LOTTO_NUMBERS);
         String input = scanner.nextLine();
-        return ConvertInt.from(Split.from(input, ","));
+        return IntConverter.from(StringUtils.from(input, ","));
     }
 
     public static int inputBonusNumber() {
@@ -46,7 +46,7 @@ public class InputView {
         System.out.println(TextFixture.INPUT_BUY_MANUAL_NUMBERS);
         for (int i = 0; i < count; i++) {
             String input = scanner.nextLine();
-            lottos.add(ConvertInt.from(Split.from(input, ",")));
+            lottos.add(IntConverter.from(StringUtils.from(input, ",")));
         }
         return lottos;
     }

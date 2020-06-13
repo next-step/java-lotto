@@ -8,33 +8,33 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ConvertIntTest {
+class IntConverterTest {
 
     @DisplayName("string 을 int로 정상적으로 변환한다.")
     @Test
     public void fromStringTest() {
-        assertThat(ConvertInt.from("1")).isEqualTo(1);
+        assertThat(IntConverter.from("1")).isEqualTo(1);
     }
 
     @DisplayName("string 이 숫자 형태가 아닐 때 IllegalArgumentException 이 발생한다.")
     @Test
     public void fromNoNumberFormatTest() {
         assertThatThrownBy(()->{
-            ConvertInt.from("#1");
+            IntConverter.from("#1");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("string 리스트를 변환 시 숫자 형태가 아닐 때 IllegalArgumentException 이 발생한다.")
     @Test
     public void fromStringListTest() {
-        assertThat(ConvertInt.from(List.of("1","2","3"))).containsOnly(1,2,3);
+        assertThat(IntConverter.from(List.of("1","2","3"))).containsOnly(1,2,3);
     }
 
     @DisplayName("string 리스트를 int리스트로 정상적으로 변환한다.")
     @Test
     public void fromStringListNoNumberFormatTest() {
         assertThatThrownBy(()->{
-            ConvertInt.from(List.of("1","^2","3"));
+            IntConverter.from(List.of("1","^2","3"));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

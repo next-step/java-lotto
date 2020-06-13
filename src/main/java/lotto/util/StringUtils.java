@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Split {
+public class StringUtils {
 
-    private Split() {}
+    private StringUtils() {}
 
     public static List<String> from(String text, String regx) {
         validateNullOrEmpty(text);
