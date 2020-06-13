@@ -40,6 +40,8 @@ public class Main {
 
         LottoNo bonusNumber = manualLottoNumbers.generateNumber();
 
+        lottoView.printAskBonusNumber();
+
         Map<Prize, Integer> winningList = buyer.checkLotto(winningNumbers, bonusNumber);
 
         ProfitStatistics profitStatistics = new ProfitStatistics(winningList, money);

@@ -25,7 +25,6 @@ public class Lotto {
 
         return rightCount;
     }
-
     public boolean checkRightBonusNumber(LottoNo bonusNumber) {
         return numberList.stream()
                 .filter(lottoNo -> lottoNo.equals(bonusNumber))
