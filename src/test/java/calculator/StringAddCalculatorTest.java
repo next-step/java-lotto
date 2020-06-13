@@ -21,7 +21,7 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 1})
+    @ValueSource(ints = {0, 1})
     public void whenPutASingleInt_thenReturnItAsInt(Integer value) {
         int result = StringAddCalculator.calculate(value.toString());
         assertThat(result).isEqualTo(value);
@@ -57,5 +57,12 @@ public class StringAddCalculatorTest {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             StringAddCalculator.calculate(illegalExpression);
         }).withMessage("The expression must consist only of integers separated by the specific separator.");
+    }
+
+    @Test
+    public void whenPutNegativeInt_thenThrowRuntimeException() {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            StringAddCalculator.calculate("1,-1");
+        }).withMessage("the negative integer cannot be passed.");
     }
 }
