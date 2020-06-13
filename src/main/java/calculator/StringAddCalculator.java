@@ -53,7 +53,13 @@ public class StringAddCalculator {
 
     private static int sumIntString(String[] intStrings) {
         return Arrays.stream(intStrings)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(string -> {
+                    int value = Integer.parseInt(string);
+                    if (value < 0) {
+                        throw new RuntimeException("the negative integer cannot be passed.");
+                    }
+                    return value;
+                })
                 .sum();
     }
 }
