@@ -37,7 +37,7 @@ public class ResultView {
 			totalMoney += rank.getWinningMoney() * matchNumber.getOrDefault(rank, new ArrayList<>()).size();
 		}
 		
-		System.out.println("총 수익률은 "+totalMoney / (lottoNumbers.size() * 1000) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		System.out.println("총 수익률은 "+totalMoney / (lottoNumbers.size() * 1000) + "입니다.(기준이 1이기 때문에 넘으면 이득 낮으면 손해)");
 	}
 
 }

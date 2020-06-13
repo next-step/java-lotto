@@ -29,8 +29,7 @@ public class LottoController {
 		// 지난 주 당첨 번호 입력
 		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
 		matchNumber =rank.matchNumber(lottoNumbersList, winNumber);
-	
-	
+		
 		resultview.outPutMessages(matchNumber, lottoNumbersList);
 		
 	}

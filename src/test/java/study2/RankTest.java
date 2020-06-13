@@ -31,8 +31,7 @@ class RankTest {
 	void 세개가_일치하는_경우() {
 
 		String[] winNumber = { "1", "2", "3", "4", "5" };
-		int[] nums = Arrays.stream(winNumber)
-				.mapToInt(Integer::parseInt).toArray();
+		int[] nums = Arrays.stream(winNumber).mapToInt(Integer::parseInt).toArray();
 
 		// 테스트 코드에서도 indent를 1로 맞춰야 될까요?
 		for (int i = 0; i < winNumber.length; i++) {
@@ -42,6 +41,16 @@ class RankTest {
 		}
 
 		assertThat(count).isEqualTo(Rank.THREEMATCH.getCountOfMatch());
+	}
+
+	@Test
+	@DisplayName("5개를 구입하고 1등당첨되면 수익률은 사십만입니다.")
+	void 다섯개_로또사고_일등당첨되면_개이득() {
+		int 전체상금의가격 = 2000000000;
+		int 구입한_로또개수 = 5;
+		int 로또_한장의_가격 = 1000;
+		assertThat(400000).isEqualTo(전체상금의가격/ (구입한_로또개수 * 로또_한장의_가격));
+		
 	}
 
 }
