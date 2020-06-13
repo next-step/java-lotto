@@ -5,14 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final String SEPARATOR_REGEX = "[,:]";
+    private static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
 
     public static int calculate(String expression) {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
-        String[] intNumbers = split(expression);
-        return sum(intNumbers);
+        String[] intStrings = split(expression);
+        return sum(intStrings);
     }
 
     private static boolean isNullOrEmpty(String string) {
@@ -27,7 +27,7 @@ public class StringAddCalculator {
                     .replace("\n", "");
             return expression.split("\n")[1].split(customSeparator);
         }
-        return expression.split(SEPARATOR_REGEX);
+        return expression.split(DEFAULT_SEPARATOR_REGEX);
     }
 
     private static int sum(String[] intStrings) {
