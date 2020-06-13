@@ -10,12 +10,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class SplitTest {
+class StringUtilsTest {
 
     @DisplayName("입력된 Text 를 구분자로 잘라서 리턴한다.")
     @Test
     void fromTest() {
-        List<String> splitText = Split.from("1, 2, 3, 4, 5, 6", ",");
+        List<String> splitText = StringUtils.from("1, 2, 3, 4, 5, 6", ",");
 
         assertThat(splitText).contains("1","2","3","4","5","6");
     }
@@ -25,7 +25,7 @@ class SplitTest {
     @NullAndEmptySource
     void nullOrEmptyTest(String text) {
         assertThatThrownBy(() -> {
-            Split.from(text, ",");
+            StringUtils.from(text, ",");
         }).isInstanceOf(IllegalArgumentException.class);
 
     }

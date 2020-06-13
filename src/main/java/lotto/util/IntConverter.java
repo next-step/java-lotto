@@ -3,9 +3,9 @@ package lotto.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConvertInt {
+public class IntConverter {
 
-    private ConvertInt() {}
+    private IntConverter() {}
 
     public static int from(String text) {
         try {
