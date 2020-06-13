@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Numbers {
+public class NumberGenerator {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
 
@@ -15,20 +15,24 @@ public class Numbers {
 
     private final List<Integer> numbers;
 
-    private Numbers() {
+    private NumberGenerator() {
         List<Integer> numbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-                .boxed().collect(Collectors.toList());
+                .boxed()
+                .collect(Collectors.toList());
         this.numbers = numbers;
     }
 
-    public static Numbers create() {
-        return new Numbers();
+    public static NumberGenerator create() {
+        return new NumberGenerator();
     }
 
-    public List<Integer> createLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(START_LOTTO_RANGE, END_LOTTO_RANGE));
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        List<LottoNumber> lottoLottoNumbers = new ArrayList<>(numbers.subList(START_LOTTO_RANGE, END_LOTTO_RANGE)
+                .stream()
+                .map(k -> LottoNumber.create(k))
+                .collect(Collectors.toList()));
+        Collections.sort(lottoLottoNumbers);
+        return lottoLottoNumbers;
     }
 }

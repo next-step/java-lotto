@@ -19,7 +19,7 @@ class LottoTicketTest {
         int quantity = 5;
         LottoTicket lottoTicket = LottoTicket.create(quantity);
 
-        assertThatCode(() -> lottoTicket.tellLottoNumbers(quantity-1)).doesNotThrowAnyException();
+        assertThatCode(() -> lottoTicket.tellLottoNumbers(quantity - 1)).doesNotThrowAnyException();
         assertThatThrownBy(() -> lottoTicket.tellLottoNumbers(quantity)).isInstanceOf(IndexOutOfBoundsException.class);
     }
 
@@ -30,12 +30,4 @@ class LottoTicketTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 당첨결과를_생성한다() {
-        String enteredWinNumber = "1, 11, 17, 23, 31, 43";
-        LottoTicket lottoTicket = LottoTicket.create(1);
-        assertThatCode(() -> {
-            lottoTicket.makeWinningResult(enteredWinNumber);
-        }).doesNotThrowAnyException();
-    }
 }

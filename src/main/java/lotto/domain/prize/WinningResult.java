@@ -3,13 +3,13 @@ package lotto.domain.prize;
 import java.util.Map;
 
 public class WinningResult {
-    private final Map<Integer, Integer> winningResult;
+    private final Map<Rank, Integer> winningResult;
 
-    private WinningResult(Map<Integer, Integer> winningResult) {
+    private WinningResult(Map<Rank, Integer> winningResult) {
         this.winningResult = winningResult;
     }
 
-    public static WinningResult create(Map<Integer, Integer> winningResult) {
+    public static WinningResult create(Map<Rank, Integer> winningResult) {
         return new WinningResult(winningResult);
     }
 
@@ -20,15 +20,15 @@ public class WinningResult {
         return winningRate;
     }
 
-    public int tellWinningCount(int key) {
-        return winningResult.getOrDefault(key, 0);
+    public int tellWinningCount(Rank rank) {
+        return winningResult.getOrDefault(rank, 0);
     }
 
     private int calculateWinningPrize() {
         int winPrize = 0;
-        for (Prize prize : Prize.values()) {
-            int winningCount = winningResult.getOrDefault(prize.getMatch(), 0);
-            winPrize += prize.calculateTotalPrice(winningCount);
+        for (Rank rank : Rank.values()) {
+            int winningCount = winningResult.getOrDefault(rank, 0);
+            winPrize += rank.calculateTotalPrice(winningCount);
         }
         return winPrize;
     }
