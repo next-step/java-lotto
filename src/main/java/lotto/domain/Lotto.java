@@ -1,27 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
+import lotto.utils.LottoType;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 public class Lotto {
 
-    private static int LOTTO_MAX_NUMBER= 60;
-    private static int LOTTO_MIN_NUMBER = 1;
-    private static int NEED_LOTTO_COUNT= 6;
+    private static String COMMA_SPACE = ", ";
+    private LottoType lottoType;
+    private List<Integer> selectedLottoNumber;
 
-    private List<Integer> selectedLottoNumber = new ArrayList<>();
+    public Lotto(LottoType lottoType) {
+        this.lottoType = lottoType;
+    }
 
     public void makeLottoNumber() {
 
-        List<Integer> lottoGameNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER,LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
-        Collections.shuffle(lottoGameNumber);
-        this.selectedLottoNumber = lottoGameNumber.stream().limit(NEED_LOTTO_COUNT).collect(Collectors.toList());
+        List lottoNumbers = lottoType.makeLottoNumber();
+        this.selectedLottoNumber = lottoNumbers;
     }
 
-    public List getLottoNumber(){
-        return this.selectedLottoNumber;
+    public String getSelectedLottoNumber() {
+        String joinNumbers = selectedLottoNumber.stream()
+                .map(number -> String.valueOf(number))
+                .collect(Collectors.joining(COMMA_SPACE));
+        return "[" + joinNumbers + "]";
     }
 }

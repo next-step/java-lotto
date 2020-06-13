@@ -1,26 +1,25 @@
 package lotto.domain;
 
+import lotto.utils.LottoInput;
+import lotto.utils.LottoShuffle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private Lotto lotto;
-    @BeforeEach
-    public void setUp() {
-        lotto = new Lotto();
-    }
-
-    @DisplayName("lotto 번호 생성 테스트")
+    @DisplayName("생성된 로또 번호 확인")
     @Test
-    public void getLottoNumber() {
+    public void makeLottoNumberWithInput() {
+
+        LottoInput lottoInput = new LottoInput(Arrays.asList(10, 20, 30, 40, 45));
+        Lotto lotto = new Lotto(lottoInput);
         lotto.makeLottoNumber();
-        List result = lotto.getLottoNumber();
-        assertThat(result.size()).isEqualTo(6);
+        String selectedLottoNumber = lotto.getSelectedLottoNumber();
+        assertThat(selectedLottoNumber).isEqualTo("[10, 20, 30, 40, 45]");
     }
 }
