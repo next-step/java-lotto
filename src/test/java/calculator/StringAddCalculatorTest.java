@@ -53,7 +53,7 @@ public class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"0,alpha,1", "1.1,8,3"})
-    public void whenPutIntOrNonInteger_thenThrowRuntimeException(String illegalExpression) {
+    public void whenPutNonInteger_thenThrowRuntimeException(String illegalExpression) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             StringAddCalculator.calculate(illegalExpression);
         }).withMessage("The expression must consist only of integers separated by the specific separator.");
