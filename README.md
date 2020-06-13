@@ -57,24 +57,24 @@
    - [X] Test Passes
    - [X] Refactor
 6. 생성된 로또와 지난주 당첨번호 비교
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 7. 당첨 통계로직 (몇개가 맞았는지에 따라 분기)
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 8. 당첨 통계 뷰
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 9. 수익률 계산로직
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 10. 수익률 뷰
-   - [ ] Test fails
-   - [ ] Test Passes
-   - [ ] Refactor
+   - [X] Test fails
+   - [X] Test Passes
+   - [X] Refactor
 11. 최종 ResultView
    - 테스트 구현 X  
