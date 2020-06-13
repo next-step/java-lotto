@@ -16,7 +16,7 @@ class PaymentTest {
     @MethodSource("createPaymentExceptionTestCases")
     public void createPaymentExceptionTest(int money) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Payment.of(money))
+            .isThrownBy(() -> Payment.of(money, 1))
             .withMessageContaining("금액은 0 이상의 값으로 입력해주세요.");
     }
 
@@ -24,6 +24,22 @@ class PaymentTest {
         return Stream.of(
             Arguments.of(0),
             Arguments.of(-1000)
+        );
+    }
+
+    @DisplayName("수동 로또를 금액보다 많이 구매 했을 때 오류 테스트")
+    @ParameterizedTest
+    @MethodSource("createPaymentByManyManualLottoTicketExceptionTestCases")
+    public void createPaymentByManyManualLottoTicketExceptionTest(int money, int countOfManualLottoTicket) {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> Payment.of(money, countOfManualLottoTicket).getCountOfTotalLottoTicket())
+            .withMessageContaining("구매 금액보다 수동으로 구매할 로또의 수가 많습니다. 금액을 확인해 주세요.");
+    }
+
+    private static Stream<Arguments> createPaymentByManyManualLottoTicketExceptionTestCases() {
+        return Stream.of(
+            Arguments.of(1000, 2),
+            Arguments.of(2000, 3)
         );
     }
 }

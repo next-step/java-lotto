@@ -15,7 +15,14 @@ public class PurchasedLottoTickets {
         return new PurchasedLottoTickets(purchasedLottoTickets);
     }
 
-    public int size() {
+    public PurchasedLottoTickets merged(PurchasedLottoTickets tickets) {
+        List<PurchasedLottoTicket> mergeTickets = new ArrayList<>(purchasedLottoTickets);
+        mergeTickets.addAll(tickets.purchasedLottoTickets);
+
+        return PurchasedLottoTickets.create(mergeTickets);
+    }
+
+    public int count() {
         return purchasedLottoTickets.size();
     }
 
