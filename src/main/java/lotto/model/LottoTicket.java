@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoTicket {
     private Lotto lotto = new Lotto();
     private List<Integer> myNumbers;
+    private int rank = 0;
 
     public LottoTicket() {
         myNumbers = buyTicket();
@@ -27,16 +28,18 @@ public class LottoTicket {
         return numbers;
     }
 
-    public int isWinner(List<Integer> winningNumbers) {
-        int winningRank = 0;
-
+    public int announceRank(List<Integer> winningNumbers) {
         for (int i : winningNumbers) {
-            if (myNumbers.contains(i)) {
-                winningRank++;
-            }
+            isWinner(i);
         }
 
-        return winningRank;
+        return rank;
+    }
+    
+    private void isWinner(int winningNumber) {
+        if (myNumbers.contains(winningNumber)) {
+            rank++;
+        }
     }
 
     private List<Integer> arrToList(int[] numbers) {

@@ -2,18 +2,15 @@ package lottoTest;
 
 import lotto.model.Lotto;
 import lotto.model.LottoTicket;
-import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import utils.IntegerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
@@ -40,21 +37,14 @@ public class LottoTicketTest {
             "1,2,3,4,15,16 : 4",
             "1,2,3,4,5,16 : 5",
             "1,2,3,4,5,6 : 6"}, delimiter = ':')
-    public void getPrize(String nums, int expected) {
-        String[] splitNumbers = nums.split(",");
-        int[] numbers = new int[splitNumbers.length];
-        for (int i = 0; i < splitNumbers.length; i++) {
-            numbers[i] = IntegerUtils.parsing(splitNumbers[i]);
-        }
-
-        LottoTicket ticketWithNumbers = new LottoTicket(numbers);
-
+    public void getPrize(String myNumbers, int expected) {
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LIMIT; i++) {
             winningNumbers.add(i + 1);
         }
+        LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseInt(myNumbers));
 
-        assertThat(ticketWithNumbers.isWinner(winningNumbers)).isEqualTo(expected);
+        assertThat(ticketWithNumbers.announceRank(winningNumbers)).isEqualTo(expected);
     }
 
 }
