@@ -1,20 +1,23 @@
 package study2.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Ranking {
 
 	int matchedNumber;
-
+	
 	public enum Rank {
 		SIXMATCH(6, 2_000_000_000), FIVEMATCH(5, 15_000_000), FOURMATCH(4, 50_000), THREEMATCH(3, 5_000), MISS(0, 0);
 
 		int countOfMatch;
 		int winningMoney;
-
+				
 		private Rank(int countOfMatch, int winningMoney) {
 			this.countOfMatch = countOfMatch;
 			this.winningMoney = winningMoney;
@@ -43,17 +46,24 @@ public class Ranking {
 
 	}
 
-	public Rank matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
+	public Map<Rank, Integer> matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
 		
-		// 질문을 다시드려야 될것같아요!
-		// rank를 담는 배열을 생성하는편이 좋을까요?
+		Map<Rank, Integer> rankRepository = new HashMap<>();
+	
 		
 		lottoNumbers.forEach(lotto -> {
 			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
 			
+			Integer countOfRank =rankRepository.getOrDefault(rank, new Integer(0));
+			
+			
+			rankRepository.put(rank, countOfRank);
+			
+			
 		});
-				
-		return rank;
+		
+		System.out.println(rankRepository);
+		return rankRepository;
 	}
 
 	public static Rank getRanking(int matchedNumber) {

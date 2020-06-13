@@ -2,6 +2,7 @@ package study2.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import study2.domain.Lotto;
 import study2.domain.LottoNumbers;
@@ -17,6 +18,7 @@ public class LottoController {
 		List<Lotto> lottoNumbersList = new ArrayList<Lotto>();
 		ResultView resultview = new ResultView();
 		Ranking rank = new Ranking();
+		Map<Rank, Integer> matchNumber;
 		
 		int price = InputView.initMessages();
 		lottoNumbersList = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
@@ -26,10 +28,10 @@ public class LottoController {
 		
 		// 지난 주 당첨 번호 입력
 		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
-		rank.matchNumber(lottoNumbersList, winNumber);
+		matchNumber =rank.matchNumber(lottoNumbersList, winNumber);
 	
 	
-		resultview.outPutMessages(, lottoNumbersList);
+		resultview.outPutMessages(matchNumber, lottoNumbersList);
 		
 	}
 }
