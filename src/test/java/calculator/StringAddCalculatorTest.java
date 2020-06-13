@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 public class StringAddCalculatorTest {
@@ -50,4 +51,11 @@ public class StringAddCalculatorTest {
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"0,alpha,1", "1.1,8,3"})
+    public void whenPutIntOrNonInteger_thenThrowRuntimeException(String illegalExpression) {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            StringAddCalculator.calculate(illegalExpression);
+        }).withMessage("The expression must consist only of integers separated by the specific separator.");
+    }
 }
