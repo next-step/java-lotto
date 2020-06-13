@@ -17,12 +17,14 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
 
         input.displayIntroInputUI(lottoCount);
-        resultView.displayLottoNumbers(lotto);
+        resultView.displayLottoNumbers(lotto.getManualLottoNumbers(), lotto.getAutoLottoNumbers());
 
         String[] inputNumber = input.displayLastLottoNumberInputUI();
         int bonusNumber = input.displayBonusLottoNumberInputUI();
 
-        List<RewardStatus> lottoRewars = lotto.getRewardLotto(inputNumber, bonusNumber);
+        List<RewardStatus> lottoRewars = lotto.getManualRewardLotto(inputNumber, bonusNumber);
+        lottoRewars.addAll(lotto.getAutoRewardLotto(inputNumber, bonusNumber));
+
         LottoResult lottoResult = new LottoResult(lottoRewars);
         resultView.displayResult(lottoResult);
         resultView.displayResultRateMessage((float) lottoResult.getTotalPrize() / lottoCount);

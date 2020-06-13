@@ -17,10 +17,6 @@ public class LottoResult {
                                 .collect(Collectors.toList());
     }
 
-    public List<Rank> getLottoResult() {
-        return this.ranks;
-    }
-
     public int getWinnerCount(RewardStatus rewardStatus) {
         return (int) ranks
                 .stream()

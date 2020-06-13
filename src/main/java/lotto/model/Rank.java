@@ -43,8 +43,4 @@ public enum Rank {
         return winningMoney;
     }
 
-    public boolean getBonus() {
-        return bonus;
-    }
-
 }

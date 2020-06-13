@@ -7,16 +7,10 @@ import java.util.stream.Collectors;
 public class LottoNumber {
 
     private List<Integer> numbers;
-    private String issueType;
 
-    public LottoNumber(List<Integer> numbers, String issueType) {
+    public LottoNumber(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
-        this.issueType = issueType;
-    }
-
-    public String getIssueType() {
-        return this.issueType;
     }
 
     public RewardStatus getRewardStatus(String[] winningNumber, int bonus) {

@@ -2,12 +2,14 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.RewardStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -21,7 +23,6 @@ public class LottoTest {
 
         Lotto lott = new Lotto(5, manuaLottoNumbers);
 
-        assertThat(lott.getLottoNumbers()).hasSize(5);
         assertThat(lott.getAutoLotto()).isEqualTo(5);
         assertThat(lott.getManualLotto()).isEqualTo(0);
     }
@@ -34,7 +35,6 @@ public class LottoTest {
         manuaLottoNumbers.add("16,18,29,30,31,32");
 
         Lotto lott = new Lotto(0, manuaLottoNumbers);
-        assertThat(lott.getLottoNumbers()).hasSize(2);
         assertThat(lott.getAutoLotto()).isEqualTo(0);
         assertThat(lott.getManualLotto()).isEqualTo(2);
     }
@@ -54,12 +54,15 @@ public class LottoTest {
     void USER_WINNER_NUMBER() {
         List<String> manuaLottoNumbers = new ArrayList<>();
         Lotto lotto = new Lotto(5, manuaLottoNumbers);
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        LottoNumbers lottoNumbers = lotto.getAutoLottoNumbers();
 
-        String[] winnerExpected = lottoNumbers.get(0).getLottoNumber().toString().split(",");
+        String[] winnerExpected = lottoNumbers.getLottoNumbers().get(0).getLottoNumber()
+                                    .stream().map(n -> n.toString())
+                                    .collect(Collectors.toList())
+                                    .toArray(String[]::new);
 
-        assertThat(lotto.getRewardLotto(winnerExpected, 0).get(0))
-                    .isEqualTo(new RewardStatus(6, false));
+        assertThat(lotto.getAutoRewardLotto(winnerExpected, 0).get(0))
+                   .isEqualTo(new RewardStatus(6, false));
     }
 
     @DisplayName("로또 보너스 2등 테스트")
@@ -67,12 +70,16 @@ public class LottoTest {
     void USER_WINNER_WITH_BONUS_NUMBER() {
         List<String> manuaLottoNumbers = new ArrayList<>();
         Lotto lotto = new Lotto(1, manuaLottoNumbers);
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        LottoNumbers lottoNumbers = lotto.getAutoLottoNumbers();
 
-        String[] winnerExpected = lottoNumbers.get(0).getLottoNumber().toString().split(",");
+        String[] winnerExpected = lottoNumbers.getLottoNumbers().get(0).getLottoNumber()
+                .stream().map(n -> n.toString())
+                .collect(Collectors.toList())
+                .toArray(String[]::new);
         int bonus = Integer.parseInt(winnerExpected[0]);
         winnerExpected[0] = "0";
-        assertThat(lotto.getRewardLotto(winnerExpected, bonus).get(0))
+
+        assertThat(lotto.getAutoRewardLotto(winnerExpected, bonus).get(0))
                     .isEqualTo(new RewardStatus(5, true));
     }
 

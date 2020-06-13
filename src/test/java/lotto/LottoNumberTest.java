@@ -29,7 +29,7 @@ public class LottoNumberTest {
                                         .map(Integer::valueOf)
                                         .collect(Collectors.toList());
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumber(numberlist, "auto");
+            new LottoNumber(numberlist);
         });
     }
 }
