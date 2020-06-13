@@ -29,7 +29,7 @@ public class InputView {
 
     public String[] displayLastLottoNumberInputUI() {
         System.out.println(LAST_LOTTO_WINNER_NUMBER_INPUT_MESSAGE);
-        return sc.nextLine().split(DELIMITER);
+        return sc.next().split(DELIMITER);
     }
 
     public int displayBonusLottoNumberInputUI() {
@@ -42,7 +42,7 @@ public class InputView {
         System.out.println(MANUAL_NUMBER_COUNT_INPUT_MESSAGE);
         int countNumber = sc.nextInt();
 
-        System.out.println(MANUAL_NUMBER_INPUT_MESSAGE + countNumber);
+        System.out.println(MANUAL_NUMBER_INPUT_MESSAGE);
         for (int i = 0; i < countNumber; i++) {
             manualNumber.add(sc.next());
         }

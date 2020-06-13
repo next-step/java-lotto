@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,6 +82,23 @@ public class LottoTest {
 
         assertThat(lotto.getAutoRewardLotto(winnerExpected, bonus).get(0))
                     .isEqualTo(new RewardStatus(5, true));
+    }
+
+
+    @DisplayName("로또 당첨 테스트")
+    @Test
+    void USER_AUTO_WINNER_TEST() {
+        List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,7", "1,2,3,4,5,8");
+        Lotto lotto = new Lotto(0, manualLottoNumbers);
+        String[] winnerNumber = {"1", "2", "3", "4", "5", "6"};
+
+        List<RewardStatus> expectedRewardStatuses = Arrays.asList(
+                new RewardStatus(6,false),
+                new RewardStatus(5,true),
+                new RewardStatus(5,false)
+        );
+
+        assertThat(lotto.getManualRewardLotto(winnerNumber, 7)).isEqualTo(expectedRewardStatuses);
     }
 
 
