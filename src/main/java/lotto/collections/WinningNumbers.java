@@ -38,6 +38,6 @@ public class WinningNumbers {
 	}
 
 	public List<LottoNumber> getWinningNumbers() {
-		return winningNumbers;
+		return Collections.unmodifiableList(winningNumbers);
 	}
 }
