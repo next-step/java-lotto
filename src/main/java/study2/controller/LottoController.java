@@ -18,7 +18,7 @@ public class LottoController {
 		List<Lotto> lottoNumbersList = new ArrayList<Lotto>();
 		ResultView resultview = new ResultView();
 		Ranking rank = new Ranking();
-		Map<Rank, Integer> matchNumber;
+		Map<Rank, List<Integer>> matchNumber;
 		
 		int price = InputView.initMessages();
 		lottoNumbersList = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
