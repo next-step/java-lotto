@@ -100,3 +100,12 @@ if (m.find()) {
 * 일급 컬렉션을 쓴다
 * 메소드의 인자수를 최소화 한다 (최대 2개)
 * private method 를 분리해서 단위테스트 를 해야 하는 게 아닌가 의심한다
+
+### step2 리뷰 사항
+[ ][fix#1][LottoAward.java] 세미콜론 위치 조정할 것 (enum의 제일 마지막)
+[ ][fix#2][LottoGameView.java] 당첨 결과 출력용 문자열을 만드는 것을 LottoWinningResult로 이동하고 View에서는 단순히 콘솔창 표시 책임만 수행하도록 수정할 것
+[ ][fix#3][LottoMatcher.java] 빈 중괄호는 한 줄로 붙여쓰기
+[ ][fix#4][LottonNumber.java] toString은 불가피한 사유가 아니면 직접구현 피하기
+[ ][fix#5][LottoTicket.java] 상수와 인스턴스 변수의 구분을 위해 개행 추가하기
+[ ][fix#6][LottoWinnerNumber.java] 파라미터 명에 불필요한 접미사 제거하기
+[ ][fix#7][StringLottoNumberConvertor.java] static method만 존재할 경우 생성자 숨기기 (private constructor)
