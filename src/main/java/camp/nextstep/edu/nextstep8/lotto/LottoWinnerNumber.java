@@ -5,8 +5,8 @@ import java.util.List;
 public class LottoWinnerNumber {
     private final List<Integer> winnerNumbers;
 
-    public LottoWinnerNumber(String winnerNumbersStr) {
-        this.winnerNumbers = StringLottoNumberConvertor.convert(winnerNumbersStr);
+    public LottoWinnerNumber(String winnerNumbers) {
+        this.winnerNumbers = StringLottoNumberConvertor.convert(winnerNumbers);
     }
 
     public int getMatchCount(LottoNumber lottoNumber) {

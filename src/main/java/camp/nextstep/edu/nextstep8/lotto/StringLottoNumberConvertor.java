@@ -12,6 +12,8 @@ public class StringLottoNumberConvertor {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
+    private StringLottoNumberConvertor(){}
+
     public static List<Integer> convert(String lottoNumberStr) {
         List<Integer> lottoNumbers =  makeLottoNumbers(lottoNumberStr);
         validateCount(lottoNumbers);
