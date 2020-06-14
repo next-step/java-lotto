@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 
 public class StandardOutputView {
     public void printBoughtLotto(LottoGames pages) {
-        System.out.println(String.format("%d개를 구입했습니다.", pages.getSize()));
+        System.out.printf("%d개를 구입했습니다.", pages.getSize());
         for (LottoGame page : pages) {
             System.out.println(page.getPageContent());
         }
     }
 
     public void printSinglePage(int[] pageNumbers) {
-        System.out.println(String.format("[%s]", Arrays.stream(pageNumbers)
+        System.out.printf("[%s]", Arrays.stream(pageNumbers)
                 .mapToObj(String::valueOf)
-                .collect(Collectors.joining(", ")))
+                .collect(Collectors.joining(", "))
         );
     }
 
@@ -26,9 +26,9 @@ public class StandardOutputView {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (PrizeEnum prize : PrizeEnum.values()) {
-            System.out.println(pages.getPrizesContentByEnum(prize, winnerPage, bonusNumber));
-            }
-        System.out.println(String.format("총 수익률은 %.2f입니다",
-                pages.getExpectation(winnerPage, bonusNumber)));
+            System.out.print(pages.getPrizesContentByEnum(prize, winnerPage, bonusNumber));
+        }
+        System.out.printf("총 수익률은 %.2f입니다",
+                pages.getExpectation(winnerPage, bonusNumber));
     }
 }

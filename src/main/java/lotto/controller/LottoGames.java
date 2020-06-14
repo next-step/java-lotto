@@ -33,16 +33,26 @@ public class LottoGames implements Iterable<LottoGame> {
     public String getPrizesContentByEnum(PrizeEnum prizeEnum, int[] winnerNumber, int bonusNumber) {
         if (prizeEnum == PrizeEnum.FAIL) return "";
         if (prizeEnum == PrizeEnum.FIVE_BONUS) {
-            return String.format("5개 일치, 보너스 볼 일치(30000000원)- %d개\n",
-                    games.stream().filter(
-                            page -> page.LottoCompare(winnerNumber, bonusNumber) == prizeEnum.getMatch()
-                    ).count());
+            StringBuilder builder = new StringBuilder();
+            builder.append("5개 일치 - 보너스 볼 일치(30000000원)- ");
+            builder.append(games.stream().filter(
+                    page -> page.LottoCompare(winnerNumber, bonusNumber) == prizeEnum.getMatch()
+            ).count());
+            builder.append("개\n");
+            return builder.toString();
         }
 
-        return String.format("%d개 일치 (%d원)- %d개",(int) prizeEnum.getMatch(), prizeEnum.getPrize(),
+        StringBuilder builder = new StringBuilder();
+        builder.append(prizeEnum.getMatch());
+        builder.append("개 일치 (");
+        builder.append(prizeEnum.getPrize());
+        builder.append("원) - ");
+        builder.append(
                 (int) games.stream().filter(
                         page -> page.LottoCompare(winnerNumber, bonusNumber) == prizeEnum.getMatch()
                 ).count());
+        builder.append("\n");
+        return builder.toString();
     }
 
     public double getExpectation(int[] winnerNumber, int bonusNumber) {

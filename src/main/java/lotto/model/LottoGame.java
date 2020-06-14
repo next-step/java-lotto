@@ -37,7 +37,11 @@ public class LottoGame {
     }
 
     public String getPageContent() {
-        return String.format("[%s]", Arrays.stream(pageNumbers).mapToObj(Integer::toString)
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        builder.append(Arrays.stream(pageNumbers).mapToObj(Integer::toString)
                 .collect(Collectors.joining(", ")));
+        builder.append("]");
+        return builder.toString();
     }
 }
