@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
-import lotto.model.LottoStatic;
+import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,7 +22,7 @@ import java.util.List;
 public class LottoStart {
 	private static InputView inputView = new InputView();
 	private static OutputView outputView = new OutputView();
-	private LottoStatic lottoStatic = new LottoStatic();
+	private LottoStatistics lottoStatistics = new LottoStatistics();
 
 	private static int budget;
 	private static int numberOfTickets;
@@ -38,10 +38,10 @@ public class LottoStart {
 
 		for (int i = 0; i < numberOfTickets; i++) {
 			Lotto.Rank rank = tickets.get(i).announceRank(winningNumbers);
-			prize += lottoStatic.getPrizeMoney(rank);
+			prize += lottoStatistics.getPrizeMoney(rank);
 		}
 
-		double profit = lottoStatic.calcProfit(prize, budget);
+		double profit = lottoStatistics.calcProfit(prize, budget);
 		outputView.printEarningRateView(profit);
 	}
 
@@ -55,7 +55,7 @@ public class LottoStart {
 	}
 
 	public int setTicketNumber(int budget) {
-		numberOfTickets = lottoStatic.buyLottos(budget);
+		numberOfTickets = lottoStatistics.buyLottos(budget);
 		outputView.howManyLottoTicketsView(numberOfTickets);
 		return numberOfTickets;
 	}

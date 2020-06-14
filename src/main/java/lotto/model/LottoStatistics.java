@@ -1,6 +1,6 @@
 package lotto.model;
 
-public class LottoStatic {
+public class LottoStatistics {
     public int buyLottos(int budget) {
         int purchase =  budget / Lotto.LOTTO_PRICE;
 
