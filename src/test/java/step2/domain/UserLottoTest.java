@@ -5,8 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class UserLottoTest {
@@ -36,5 +38,17 @@ class UserLottoTest {
 
         //then
         assertThat(prize).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,true", "2,true", "3,true", "4,true", "5,true", "6,true", "7, false"})
+    public void hasNumberTest(String input, String expected) {
+        //given
+        UserLotto userLotto = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when&then
+        assertThat(userLotto.hasNumber(Integer.valueOf(input)))
+            .isEqualTo(Boolean.valueOf(expected));
+
     }
 }

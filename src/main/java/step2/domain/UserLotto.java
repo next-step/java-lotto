@@ -10,11 +10,9 @@ public class UserLotto extends Lotto {
     }
 
     public Prize getPrize(WinningLotto winningLotto) {
-        int hitCount;
         boolean isMatchedBonus = false;
-
-        hitCount = (int) getLottoNumbers().stream()
-            .filter(number -> winningLotto.getLottoNumbers().contains(number)).count();
+        int hitCount = (int) getLottoNumbers().stream()
+            .filter(number -> winningLotto.hasNumber(number)).count();
 
         if (getLottoNumbers().contains(winningLotto.getBonusNumber())) {
             isMatchedBonus = true;
