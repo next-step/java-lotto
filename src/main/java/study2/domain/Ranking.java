@@ -39,7 +39,9 @@ public class Ranking {
 			throw new IllegalArgumentException("공백이나 null은 안됩니다.");
 		}
 
-		return Arrays.asList(inputWinNumber.split(","))
+		return Arrays.asList(inputWinNumber.trim()
+				.replace(" ", "")
+				.split(","))
 				.stream()
 				.mapToInt(Integer::parseInt)
 				.boxed()
