@@ -4,6 +4,8 @@ import dev.dahye.lotto.domain.LottoResult;
 import dev.dahye.lotto.domain.LottoTickets;
 import dev.dahye.lotto.domain.Rank;
 
+import java.math.BigDecimal;
+
 public class ResultView {
     public static void printPurchasedLottoTickets(int countOfManualLotto, int countOfAutoLotto, LottoTickets lottoTickets) {
         System.out.println("수동으로 " + countOfManualLotto + "장, " +
@@ -25,7 +27,7 @@ public class ResultView {
         return (isMatchBonusNumber ? ", 보너스 볼 일치(" : " (");
     }
 
-    public static void printWinningRate(double number) {
+    public static void printWinningRate(BigDecimal number) {
         System.out.println("총 수익률은 " + number + "입니다.");
     }
 }

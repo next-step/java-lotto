@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -56,7 +57,7 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(lottoTickets, winning);
 
         LottoMoney totalPrize = new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
-        double expectedResult = lottoMoney.divideBy(totalPrize);
+        BigDecimal expectedResult = lottoMoney.divideBy(totalPrize);
         assertThat(lottoResult.getMyWinningRate(lottoMoney)).isEqualTo(expectedResult);
     }
 
@@ -66,7 +67,7 @@ class LottoResultTest {
         LottoMoney lottoMoney = new LottoMoney(14000);
         LottoMoney totalPrize = new LottoMoney(5000);
 
-        assertThat(lottoMoney.divideBy(totalPrize)).isEqualTo(0.36);
+        assertThat(lottoMoney.divideBy(totalPrize)).isEqualTo(new BigDecimal("0.36"));
     }
 
     @ParameterizedTest

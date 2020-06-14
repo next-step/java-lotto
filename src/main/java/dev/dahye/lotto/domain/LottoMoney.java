@@ -2,6 +2,8 @@ package dev.dahye.lotto.domain;
 
 import dev.dahye.lotto.util.DoubleUtils;
 
+import java.math.BigDecimal;
+
 public class LottoMoney {
     private static final int MIN_VALUE = 0;
     public static final int PRICE_PER_LOTTO = 1000;
@@ -31,7 +33,7 @@ public class LottoMoney {
         return money % PRICE_PER_LOTTO != MIN_VALUE;
     }
 
-    public double divideBy(LottoMoney lottoMoney) {
+    public BigDecimal divideBy(LottoMoney lottoMoney) {
         return DoubleUtils.parseDoubleSecondDigit((double) lottoMoney.money / money);
     }
 }

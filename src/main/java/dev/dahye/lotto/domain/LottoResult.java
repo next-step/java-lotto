@@ -1,5 +1,6 @@
 package dev.dahye.lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class LottoResult {
                 .count();
     }
 
-    public double getMyWinningRate(LottoMoney lottoMoney) {
+    public BigDecimal getMyWinningRate(LottoMoney lottoMoney) {
         LottoMoney totalPrize = calculateTotalPrize();
 
         return lottoMoney.divideBy(totalPrize);
