@@ -20,10 +20,8 @@
 * LottoNumber
     * 로또 번호 하나
 * LottoMachine
-    * Collections.shuffle() 사용하여 로또 자동 생성
-    * 로또 정렬
-* ManualLottoCreator
     * 수동 로또 생성
+    * Collections.shuffle() 사용하여 로또 자동 생성
     * 로또 정렬
 * WinningNumber
     * 당첨 로또 번호
