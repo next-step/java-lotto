@@ -12,6 +12,7 @@ public class LottoMain {
         StandardOutputView outputView = new StandardOutputView();
         outputView.printBoughtLotto(pages);
         int[] winner = input.getWinnerNumber();
-        outputView.printStat(pages, winner);
+        int bonusNumber = input.getBonusNumber();
+        outputView.printStat(pages, winner, bonusNumber);
     }
 }

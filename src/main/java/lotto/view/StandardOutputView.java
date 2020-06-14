@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.controller.LottoPages;
 import lotto.model.LottoSinglePage;
-import lotto.model.WinnerEnum;
+import lotto.model.PrizeEnum;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ public class StandardOutputView {
     public void printBoughtLotto(LottoPages pages) {
         System.out.println(String.format("%d개를 구입했습니다.", pages.getSize()));
         for (LottoSinglePage page : pages) {
-            page.printPages(this);
+            System.out.println(page.getPageContent());
         }
     }
 
@@ -22,14 +22,13 @@ public class StandardOutputView {
         );
     }
 
-    public void printStat(LottoPages pages, int[] winnerPage) {
+    public void printStat(LottoPages pages, int[] winnerPage, int bonusNumber) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (WinnerEnum winner : WinnerEnum.values()) {
-            if (winner == WinnerEnum.FAIL) continue;
-            System.out.println(String.format("%d개 일치 (%d)- %d개", winner.getMatch(), winner.getPrize(),
-                    pages.getPrizesByEnum(winner, winnerPage)));
-        }
-        System.out.println(String.format("총 수익률은 %.2f입니다", pages.getExpectation(winnerPage)));
+        for (PrizeEnum prize : PrizeEnum.values()) {
+            System.out.println(pages.getPrizesContentByEnum(prize, winnerPage, bonusNumber));
+            }
+        System.out.println(String.format("총 수익률은 %.2f입니다",
+                pages.getExpectation(winnerPage, bonusNumber)));
     }
 }

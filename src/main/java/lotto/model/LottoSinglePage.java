@@ -26,14 +26,18 @@ public class LottoSinglePage {
         pageNumbers = writtenNumbers;
     }
 
-    public int LottoCompare(int[] winnerNumbers) {
-        return (int) Arrays.stream(pageNumbers).
+    public double LottoCompare(int[] winnerNumbers, int bonusNumber) {
+        int matched = (int) Arrays.stream(pageNumbers).
                 filter(myNumber ->
                         Arrays.stream(winnerNumbers).boxed().collect(Collectors.toList()).contains(myNumber)
                 ).count();
+
+        return matched + (matched == 5 &&
+                Arrays.stream(pageNumbers).anyMatch(myNumber -> myNumber == bonusNumber) ? 0.5 : 0);
     }
 
-    public void printPages(StandardOutputView view) {
-        view.printSinglePage(pageNumbers);
+    public String getPageContent() {
+        return String.format("[%s]", Arrays.stream(pageNumbers).mapToObj(Integer::toString)
+                .collect(Collectors.joining(", ")));
     }
 }

@@ -24,4 +24,10 @@ public class StandardInputView implements LottoInput {
         return Arrays.stream(line.replace(" ", "").
                 split(",")).mapToInt(Integer::parseInt).toArray();
     }
+
+    @Override
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return scanner.nextInt();
+    }
 }
