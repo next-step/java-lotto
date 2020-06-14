@@ -12,8 +12,8 @@ import step2.domain.UserLotto;
 
 public class ResultView {
 
-    public void printPriceResult(int price) {
-        System.out.printf(RESPONSE_PRICE_TEMPLATE, price / LOTTO_PRICE);
+    public void printPriceResult(int price, int manualLottoCount) {
+        System.out.printf(RESPONSE_PRICE_TEMPLATE, manualLottoCount, price / LOTTO_PRICE - manualLottoCount);
     }
 
     public void printLottos(LottoSheet lottoSheet) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoSheet {
 
@@ -17,8 +18,23 @@ public class LottoSheet {
         this.lottos = lottos;
     }
 
+    public LottoSheet mergeLottoSheet(LottoSheet lottoSheet) {
+        List<UserLotto> mergedLottoList = new ArrayList<>();
+        mergedLottoList.addAll(this.lottos);
+        if (lottoSheet != null) {
+            mergedLottoList.addAll(lottoSheet.getLottos());
+        }
+        LottoSheet mergedLottoSheet = new LottoSheet(mergedLottoList);
+
+        return mergedLottoSheet;
+    }
+
     public List<UserLotto> getLottos() {
         return lottos;
+    }
+
+    public int getLottoCount() {
+        return CollectionUtils.size(lottos);
     }
 
     public Map<Prize, Integer> getPrizeResult(WinningLotto winningLotto) {

@@ -13,13 +13,12 @@ public class LottoGenerator extends Generating {
         super(generableStrategy);
     }
 
-    public List<UserLotto> generateLottos(UserPrice userPrice) {
-        int lottoCount = userPrice.getLottoCount();
+    public LottoSheet generateLottos(int lottoCount) {
 
         List<UserLotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(new UserLotto(this.generate(LOTTO_SELECTION_COUNT)));
         }
-        return lottos;
+        return new LottoSheet(lottos);
     }
 }

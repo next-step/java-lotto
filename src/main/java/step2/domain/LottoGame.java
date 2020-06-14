@@ -6,14 +6,18 @@ public class LottoGame {
     private LottoSheet lottoSheet;
     private LottoGenerator lottoGenerator;
 
-    public LottoGame(int userPrice) {
-        this.userPrice = new UserPrice(userPrice);
-        lottoSheet = new LottoSheet();
+    public LottoGame(UserPrice userPrice, LottoSheet manualLottoSheet) {
+        this.userPrice = userPrice;
+        lottoSheet = manualLottoSheet;
+        if (manualLottoSheet == null) {
+            lottoSheet = new LottoSheet();
+        }
         lottoGenerator = new LottoGenerator(new RandomGenerableStrategy());
     }
 
     public void run() throws IllegalArgumentException {
-        lottoSheet = new LottoSheet(lottoGenerator.generateLottos(userPrice));
+        this.lottoSheet = lottoSheet.mergeLottoSheet(
+            lottoGenerator.generateLottos(userPrice.getLottoCount() - lottoSheet.getLottoCount()));
     }
 
     public LottoGameResultDto getGameResult(WinningLotto winningLotto)
