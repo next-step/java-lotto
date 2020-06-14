@@ -63,7 +63,7 @@ class LottoOrderTest {
     @DisplayName("로또 금액이 null인 경우 IllegalArgumentException")
     void exception_lottoMoney_is_null(LottoMoney lottoMoney) {
         assertThatThrownBy(() -> LottoOrder.of(lottoMoney, 1))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 금액이 입력되지 않았습니다.");
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage("lottoMoney must not be null");
     }
 }

@@ -17,8 +17,8 @@ public class LottoTicket {
     }
 
     private void validateLottoNumberIsNotNull(List<Integer> lottoNumbers) {
-        if (lottoNumbers == null) {
-            throw new IllegalArgumentException("lottoNumbers는 null일 수 없습니다.");
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException("lottoNumbers는 null이거나 빈 값일 수 없습니다.");
         }
     }
 

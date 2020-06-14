@@ -1,21 +1,15 @@
 package dev.dahye.lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoResult {
     private final LottoTickets lottoTickets;
     private final Winning winning;
 
     public LottoResult(LottoTickets lottoTickets, Winning winning) {
-        isNotNull(lottoTickets, winning);
-        this.lottoTickets = lottoTickets;
-        this.winning = winning;
-    }
-
-    private void isNotNull(LottoTickets lottoTickets, Winning winning) {
-        if (lottoTickets == null || winning == null) {
-            throw new IllegalArgumentException("LottoResult를 생성할 수 없습니다.");
-        }
+        this.lottoTickets = Objects.requireNonNull(lottoTickets, "lottoTickets must not be null");
+        this.winning = Objects.requireNonNull(winning, "winning must not be null");
     }
 
     public List<Rank> getMyRanks() {

@@ -72,17 +72,16 @@ class LottoResultTest {
     @ParameterizedTest
     @MethodSource("nullCases")
     @DisplayName("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없다.")
-    void exception_lottoMoney_is_null(LottoTickets lottoTickets, Winning winning) {
+    void exception_lottoMoney_is_null(LottoTickets lottoTickets, Winning winning, String expected) {
         assertThatThrownBy(() -> new LottoResult(lottoTickets, winning))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("LottoResult를 생성할 수 없습니다.");
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage(expected + " must not be null");
     }
 
     private static Stream<Arguments> nullCases() {
         return Stream.of(
-                arguments(null, winning),
-                arguments(LottoTickets.autoIssued(1), null),
-                arguments(null, null)
+                arguments(null, winning, "lottoTickets"),
+                arguments(LottoTickets.autoIssued(1), null, "winning")
         );
     }
 }

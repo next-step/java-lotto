@@ -1,20 +1,18 @@
 package dev.dahye.lotto.domain;
 
+import java.util.Objects;
+
 public class Winning {
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
     private Winning(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        isNotNull(winningTicket, bonusNumber);
+        Objects.requireNonNull(winningTicket, "winningTicket must not be null");
+        Objects.requireNonNull(bonusNumber, "bonusNumber must not be null");
+
         validateContainsWinningTicket(winningTicket, bonusNumber);
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
-    }
-
-    private void isNotNull(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        if (winningTicket == null || bonusNumber == null) {
-            throw new IllegalArgumentException("Winning 객체를 생성할 수 없습니다.");
-        }
     }
 
     public static Winning of(LottoTicket winningTicket, LottoNumber bonusNumber) {

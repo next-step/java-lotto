@@ -1,20 +1,17 @@
 package dev.dahye.lotto.domain;
 
+import java.util.Objects;
+
 public class LottoOrder {
     private final LottoMoney lottoMoney;
     private final int countOfManualLotto;
 
     private LottoOrder(LottoMoney lottoMoney, int countOfManualLotto) {
-        isNotNullLottoMoney(lottoMoney);
+        Objects.requireNonNull(lottoMoney, "lottoMoney must not be null");
+
         validateManualLotto(lottoMoney, countOfManualLotto);
         this.lottoMoney = lottoMoney;
         this.countOfManualLotto = countOfManualLotto;
-    }
-
-    private void isNotNullLottoMoney(LottoMoney lottoMoney) {
-        if (lottoMoney == null) {
-            throw new IllegalArgumentException("로또 금액이 입력되지 않았습니다.");
-        }
     }
 
     public static LottoOrder of(LottoMoney lottoMoney, int countOfManualLotto) {

@@ -54,6 +54,8 @@ class LottoTicketTest {
     @NullAndEmptySource
     @DisplayName("로또 수동 발행 시 null인 경우 IllegalArgument Exception throw")
     void validate_lotto_number_null(List<Integer> lottoNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(lottoNumbers));
+        assertThatThrownBy(() -> LottoTicket.manualIssued(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("lottoNumbers는 null이거나 빈 값일 수 없습니다.");
     }
 }
