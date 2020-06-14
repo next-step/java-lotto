@@ -13,7 +13,7 @@ public class Utils {
     public static List<Integer> convertStringToIntegerList(List<String> stringList) {
         List<Integer> result = new ArrayList<>();
         try {
-            stringList.stream().forEach(string -> result.add(Integer.parseInt(string)));
+            stringList.forEach(string -> result.add(Integer.parseInt(string)));
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
