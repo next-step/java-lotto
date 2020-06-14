@@ -1,43 +1,35 @@
 package step2.model;
 
-import step2.exception.LottoDuplicateNumberException;
-import step2.exception.LottoLengthException;
 import step2.exception.LottoOutOfBoundException;
 
-import java.util.List;
+public class LottoNumber implements Comparable<LottoNumber> {
 
-public class LottoNumber {
+    public final static int MIN = 1;
+    public final static int MAX = 45;
 
-    private LottoNumber() {};
+    private final int LottoNumber;
 
-    public static void validateNumbers(List<Integer> lottoNumbers) {
-        checkNumber(lottoNumbers);
-        checkSize(lottoNumbers);
-        countWithoutDuplication(lottoNumbers);
+    public LottoNumber(int lottoNumber) {
+        validateNumbers(lottoNumber);
+        this.LottoNumber = lottoNumber;
     }
 
-    private static void checkNumber(List<Integer> lottoNumbers) {
-        lottoNumbers.stream()
-                .filter(number -> number > Lotto.MAX || number < Lotto.MIN)
-                .findAny()
-                .ifPresent(number -> {
-                    throw new LottoOutOfBoundException();
-                });
+    public int getNumber() {
+        return LottoNumber;
     }
 
-    private static void checkSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != Lotto.SIZE) {
-            throw new LottoLengthException();
+    static public LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
+    public static void validateNumbers(int lottoNumber) {
+        if (lottoNumber < MIN || lottoNumber > MAX) {
+            throw new LottoOutOfBoundException();
         }
     }
 
-    private static void countWithoutDuplication(List<Integer> lottoNumbers) {
-        int cnt = (int) lottoNumbers.stream()
-                .distinct()
-                .count();
-
-        if (cnt != Lotto.SIZE) {
-            throw new LottoDuplicateNumberException();
-        }
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return LottoNumber - lottoNumber.LottoNumber;
     }
 }
