@@ -28,15 +28,15 @@ public class ResultView {
     public void printStatistic(LottoGameResultDto lottoGameResultDto) {
         System.out.printf(WINNING_STATISTIC_TEMPLATE,
             Prize.FIFTH.getCashPrize(),
-            lottoGameResultDto.getPrizeResult().get(Prize.FIFTH).intValue(),
+            lottoGameResultDto.getPrizeResult().getOrDefault(Prize.FIFTH, 0).intValue(),
             Prize.FORTH.getCashPrize(),
-            lottoGameResultDto.getPrizeResult().get(Prize.FORTH).intValue(),
+            lottoGameResultDto.getPrizeResult().getOrDefault(Prize.FORTH, 0).intValue(),
             Prize.THIRD.getCashPrize(),
-            lottoGameResultDto.getPrizeResult().get(Prize.THIRD).intValue(),
+            lottoGameResultDto.getPrizeResult().getOrDefault(Prize.THIRD, 0).intValue(),
             Prize.SECOND.getCashPrize(),
-            lottoGameResultDto.getPrizeResult().get(Prize.SECOND).intValue(),
+            lottoGameResultDto.getPrizeResult().getOrDefault(Prize.SECOND, 0).intValue(),
             Prize.FIRST.getCashPrize(),
-            lottoGameResultDto.getPrizeResult().get(Prize.FIRST).intValue(),
+            lottoGameResultDto.getPrizeResult().getOrDefault(Prize.FIRST, 0).intValue(),
             lottoGameResultDto.getEarningRate());
         printStatisticResult(lottoGameResultDto.getEarningRate());
     }

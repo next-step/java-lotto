@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +21,14 @@ public class LottoSheet {
         return lottos;
     }
 
-    public void drawPrize(WinningLotto winningLotto, Map<Prize, Integer> prizeResult) {
+    public Map<Prize, Integer> getPrizeResult(WinningLotto winningLotto) {
+        Map<Prize, Integer> prizeResult = new HashMap<>();
+        lottos.forEach(lottos -> {
+            Prize prize = lottos.getPrize(winningLotto);
+            prizeResult.put(prize, prizeResult.getOrDefault(prize, 0) + 1);
+        });
 
-        lottos.stream().forEach(lotto -> {
-                Prize prize = lotto.getPrize(winningLotto);
-                prizeResult.put(prize, prizeResult.get(prize).intValue() + 1);
-            }
-        );
+        return prizeResult;
     }
 
     @Override
