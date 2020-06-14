@@ -28,7 +28,7 @@ class LottoTicketTest {
     void validate_lotto_number_size() {
         assertThatThrownBy(() -> LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 티켓은 6자리 숫자여야 합니다.");
+                .hasMessage("로또 티켓에는 중복된 숫자가 없는 6자리 숫자여야 합니다.");
     }
 
     @Test
@@ -36,7 +36,7 @@ class LottoTicketTest {
     void validate_lotto_number_duplicate() {
         assertThatThrownBy(() -> LottoTicket.manualIssued(Arrays.asList(1, 1, 3, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 티켓에는 중복된 숫자가 없어야 합니다.");
+                .hasMessage("로또 티켓에는 중복된 숫자가 없는 6자리 숫자여야 합니다.");
     }
 
     @ParameterizedTest(name = "유효하지 않은 숫자 = {0}")
@@ -47,7 +47,7 @@ class LottoTicketTest {
         validLottoNumbers.add(invalidLottoNumber);
 
         assertThrows(IllegalArgumentException.class, () -> LottoTicket.manualIssued(validLottoNumbers),
-                "로또 번호는 1 ~ 45의 숫자만 가능합니다.");
+                "유효하지 않은 로또 번호입니다.");
     }
 
     @ParameterizedTest
