@@ -30,12 +30,13 @@ public class LottoGame {
     }
 
     // issue
-    private static void issueLotto(int gameCount) {
+    private static LottoTickets issueLotto(int gameCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < gameCount; i++) {
             lottoList.add(Lotto.auto());
         }
         lottoTickets = new LottoTickets(lottoList);
+        return lottoTickets;
     }
 
     // matching

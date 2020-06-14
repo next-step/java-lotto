@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     // each Lotto numbers.
-    private TreeSet<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     // default 1 to LOTTO_MAX_LIMIT (45)
     private static final List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, LottoNumber.LOTTO_MAX_LIMIT)
@@ -36,7 +36,7 @@ public class Lotto {
         return new Lotto(new TreeSet<>(LottoNumber.drawLottoNumbers(lottoGameNumbers)));
     }
 
-    public TreeSet<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return lottoNumbers;
     }
 
