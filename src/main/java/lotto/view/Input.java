@@ -1,0 +1,24 @@
+package lotto.view;
+
+import java.util.Scanner;
+
+public class Input {
+
+    private Scanner scanner;
+    private int inputMoney;
+    private String inputLastLottoNumbers;
+
+    public Input(Scanner scan) {
+        scanner = scan;
+    }
+
+    public void moneyInput(){
+        System.out.println("구입금액을 입력해 주세요.");
+        this.inputMoney = scanner.nextInt();
+    }
+
+    public void inputLastLottoNumber(){
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        this.inputLastLottoNumbers = scanner.next();
+    }
+}
