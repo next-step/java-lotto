@@ -38,9 +38,9 @@ public class LottoTicketTest {
             "1,2,3,4,5,16 : 5",
             "1,2,3,4,5,6 : 6"}, delimiter = ':')
     public void getPrize(String myNumbers, int expected) {
-        List<Integer> winningNumbers = new ArrayList<>();
+        int[] winningNumbers = new int[Lotto.LIMIT];
         for (int i = 0; i < Lotto.LIMIT; i++) {
-            winningNumbers.add(i + 1);
+            winningNumbers[i] = i + 1;
         }
         LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseInt(myNumbers));
 

@@ -30,11 +30,16 @@ public class LottoStart {
 
 	public void makeWish() {
 		setBudget();
-		makeTickets(numberOfTickets);
+		setTicketNumber(budget);
+		tickets = buyTickets();
 		setWinningNumbers();
+
+		for (int i = 0; i < numberOfTickets; i++) {
+			tickets.get(i).announceRank(winningNumbers);
+		}
 	}
 
-	public List<LottoTicket> makeTickets(int numberOfTickets) {
+	public List<LottoTicket> buyTickets() {
 		for (int i = 0; i < numberOfTickets; i++) {
 			tickets.add(new LottoTicket());
 			outputView.printLottoNumbersView(tickets.get(i).getMyNumbers());

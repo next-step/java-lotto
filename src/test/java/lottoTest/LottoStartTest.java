@@ -3,7 +3,6 @@ package lottoTest;
 import lotto.LottoStart;
 import lotto.model.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,7 +26,7 @@ public class LottoStartTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 5})
     public void testNumberOfTicket(int numOfPurchase) {
-        List<LottoTicket> ticketList = lottoStart.makeTickets(numOfPurchase);
+        List<LottoTicket> ticketList = lottoStart.buyTickets();
         assertThat(ticketList.size()).isEqualTo(numOfPurchase);
     }
 }

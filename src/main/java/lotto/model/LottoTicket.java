@@ -5,14 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private Lotto lotto = new Lotto();
-
-    public int[] getMyNumbers() {
-        return myNumbers;
-    }
-
     private int[] myNumbers;
     private int rank = 0;
+
+    private Lotto lotto = new Lotto();
 
     public LottoTicket() {
         myNumbers = buyTicket();
@@ -22,6 +18,10 @@ public class LottoTicket {
         this.myNumbers = numbers;
     }
 
+    public int[] getMyNumbers() {
+        return myNumbers;
+    }
+    
     public int[] buyTicket() {
         Collections.shuffle(lotto.lottoDrawNumbers);
         int[] numbers = new int[Lotto.LIMIT];
@@ -33,7 +33,7 @@ public class LottoTicket {
         return numbers;
     }
 
-    public int announceRank(List<Integer> winningNumbers) {
+    public int announceRank(int[] winningNumbers) {
         for (int i : winningNumbers) {
             isWinner(i);
         }
