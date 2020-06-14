@@ -1,6 +1,7 @@
 package dev.dahye.lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int MAX_SIZE = 6;
@@ -37,13 +38,9 @@ public class LottoTicket {
     }
 
     private List<LottoNumber> convertLottNumber(List<Integer> lottoNumbers) {
-        List<LottoNumber> convertedLottoNumbers = new ArrayList<>();
-
-        for (Integer lottoNumber : lottoNumbers) {
-            convertedLottoNumbers.add(LottoNumber.of(lottoNumber));
-        }
-
-        return convertedLottoNumbers;
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     private void validateDuplicateNumbers(List<Integer> lottoNumbers) {

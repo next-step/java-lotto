@@ -1,7 +1,8 @@
 package dev.dahye.lotto.util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class ConvertUtils {
     private static final String WINNERS_DELIMITER = ",";
@@ -13,13 +14,11 @@ public final class ConvertUtils {
         validateWinnersNullOrEmpty(input);
 
         String[] strings = input.split(WINNERS_DELIMITER);
-        List<Integer> ints = new ArrayList<>();
 
-        for (String string : strings) {
-            ints.add(convertStringToInteger(string.trim()));
-        }
-
-        return ints;
+        return Arrays.stream(strings)
+                .map(String::trim)
+                .map(ConvertUtils::convertStringToInteger)
+                .collect(Collectors.toList());
     }
 
     private static void validateWinnersNullOrEmpty(String input) {

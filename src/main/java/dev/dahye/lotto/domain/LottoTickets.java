@@ -1,8 +1,8 @@
 package dev.dahye.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private static final int MIN_COUNT = 0;
@@ -37,13 +37,9 @@ public class LottoTickets {
     }
 
     private static List<LottoTicket> createAutoIssued(int count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(LottoTicket.autoIssued());
-        }
-
-        return lottoTickets;
+        return Stream.generate(LottoTicket::autoIssued)
+                .limit(count)
+                .collect(Collectors.toList());
     }
 
     private void addAll(List<LottoTicket> lottoTickets) {
@@ -51,13 +47,9 @@ public class LottoTickets {
     }
 
     public List<Rank> rankings(Winning winning) {
-        List<Rank> ranks = new ArrayList<>();
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.add(winning.ranking(lottoTicket));
-        }
-
-        return ranks;
+        return lottoTickets.stream()
+                .map(winning::ranking)
+                .collect(Collectors.toList());
     }
 
     public int size() {
