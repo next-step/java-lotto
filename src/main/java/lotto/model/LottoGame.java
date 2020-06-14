@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoSinglePage {
+public class LottoGame {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private int[] pageNumbers;
 
-    public LottoSinglePage() {
+    public LottoGame() {
         List<Integer> numbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
         pageNumbers = numbers.subList(0, 6).stream().sorted().mapToInt(i -> i).toArray();
     }
 
-    public LottoSinglePage(int[] writtenNumbers) throws IllegalArgumentException{
+    public LottoGame(int[] writtenNumbers) throws IllegalArgumentException{
         if (writtenNumbers.length != 6)
             throw new IllegalArgumentException("갯수가 잘못되었습니다.");
         pageNumbers = writtenNumbers;

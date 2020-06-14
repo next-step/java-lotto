@@ -1,16 +1,16 @@
 package lotto.view;
 
-import lotto.controller.LottoPages;
-import lotto.model.LottoSinglePage;
+import lotto.controller.LottoGames;
+import lotto.model.LottoGame;
 import lotto.model.PrizeEnum;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class StandardOutputView {
-    public void printBoughtLotto(LottoPages pages) {
+    public void printBoughtLotto(LottoGames pages) {
         System.out.println(String.format("%d개를 구입했습니다.", pages.getSize()));
-        for (LottoSinglePage page : pages) {
+        for (LottoGame page : pages) {
             System.out.println(page.getPageContent());
         }
     }
@@ -22,7 +22,7 @@ public class StandardOutputView {
         );
     }
 
-    public void printStat(LottoPages pages, int[] winnerPage, int bonusNumber) {
+    public void printStat(LottoGames pages, int[] winnerPage, int bonusNumber) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (PrizeEnum prize : PrizeEnum.values()) {

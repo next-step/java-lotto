@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.controller.LottoPages;
+import lotto.controller.LottoGames;
 import lotto.view.LottoInput;
 import lotto.view.StandardInputView;
 import lotto.view.StandardOutputView;
@@ -8,11 +8,11 @@ import lotto.view.StandardOutputView;
 public class LottoMain {
     public static void main(String[] args) {
         LottoInput input = new StandardInputView();
-        LottoPages pages = new LottoPages(input.getPurchacePrice());
+        LottoGames games = new LottoGames(input.getPurchacePrice());
         StandardOutputView outputView = new StandardOutputView();
-        outputView.printBoughtLotto(pages);
+        outputView.printBoughtLotto(games);
         int[] winner = input.getWinnerNumber();
         int bonusNumber = input.getBonusNumber();
-        outputView.printStat(pages, winner, bonusNumber);
+        outputView.printStat(games, winner, bonusNumber);
     }
 }
