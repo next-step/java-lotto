@@ -1,35 +1,29 @@
 package lotto.view;
 
-import lotto.controller.LottoPages;
-import lotto.model.LottoSinglePage;
-import lotto.model.WinnerEnum;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import lotto.controller.LottoGames;
+import lotto.model.LottoLine;
+import lotto.model.LottoResult;
+import lotto.model.PrizeEnum;
 
 public class StandardOutputView {
-    public void printBoughtLotto(LottoPages pages) {
-        System.out.println(String.format("%d개를 구입했습니다.", pages.getSize()));
-        for (LottoSinglePage page : pages) {
-            page.printPages(this);
+    public void printBoughtLotto(LottoGames games) {
+        System.out.printf("%d개를 구입했습니다.", games.getSize());
+        for (LottoLine line : games) {
+            System.out.println(line.getLineContent());
         }
     }
 
     public void printSinglePage(int[] pageNumbers) {
-        System.out.println(String.format("[%s]", Arrays.stream(pageNumbers)
-                .mapToObj(String::valueOf)
-                .collect(Collectors.joining(", ")))
-        );
+        System.out.println(new LottoLine(pageNumbers).getLineContent());
     }
 
-    public void printStat(LottoPages pages, int[] winnerPage) {
+    public void printStat(LottoGames games, LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (WinnerEnum winner : WinnerEnum.values()) {
-            if (winner == WinnerEnum.FAIL) continue;
-            System.out.println(String.format("%d개 일치 (%d)- %d개", winner.getMatch(), winner.getPrize(),
-                    pages.getPrizesByEnum(winner, winnerPage)));
+        for (PrizeEnum prize : PrizeEnum.values()) {
+            System.out.print(games.getPrizesContentByEnum(prize, result));
         }
-        System.out.println(String.format("총 수익률은 %.2f입니다", pages.getExpectation(winnerPage)));
+        System.out.printf("총 수익률은 %.2f입니다",
+                games.getExpectation(result));
     }
 }
