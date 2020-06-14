@@ -20,12 +20,19 @@ public class LottoSheet {
         return lottos;
     }
 
-    public void drawPrize(WinningLotto winningLotto, Map<Integer, Integer> prizeResult) {
+    public void drawPrize(WinningLotto winningLotto, Map<Prize, Integer> prizeResult) {
 
         lottos.stream().forEach(lotto -> {
                 Prize prize = lotto.getPrize(winningLotto);
-                prizeResult.put(prize.getGrade(), prizeResult.get(prize.getGrade()).intValue() + 1);
+                prizeResult.put(prize, prizeResult.get(prize).intValue() + 1);
             }
         );
+    }
+
+    @Override
+    public String toString() {
+        return "LottoSheet{" +
+            "lottos=" + lottos +
+            '}';
     }
 }

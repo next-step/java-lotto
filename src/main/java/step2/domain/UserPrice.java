@@ -41,4 +41,11 @@ public class UserPrice {
     public double getEarningRate(LottoSheet lottoSheet, WinningLotto winningLotto) {
         return (double) getTotalCashPrize(lottoSheet, winningLotto) / price;
     }
+
+    @Override
+    public String toString() {
+        return "UserPrice{" +
+            "price=" + price +
+            '}';
+    }
 }

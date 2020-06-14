@@ -8,15 +8,16 @@ import java.util.Map;
 
 public class LottoGameResult {
 
-    private Map<Integer, Integer> prizeResult;
+    private Map<Prize, Integer> prizeResult;
 
     public LottoGameResult() {
         prizeResult = new HashMap<>();
         Arrays.stream(Prize.values())
-            .forEach(prize -> prizeResult.put(prize.getGrade(), EMPTY_COUNT));
+            .forEach(prize -> prizeResult.put(prize, EMPTY_COUNT));
     }
 
-    public LottoGameResultDto getResult(LottoSheet lottoSheet, WinningLotto winningLotto,
+    public LottoGameResultDto getResult(LottoSheet lottoSheet,
+        WinningLotto winningLotto,
         UserPrice userPrice) {
 
         lottoSheet.drawPrize(winningLotto, prizeResult);

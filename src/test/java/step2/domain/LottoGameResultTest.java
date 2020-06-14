@@ -27,6 +27,6 @@ class LottoGameResultTest {
         assertThat(lottoGameResultDto.getEarningRate()).isNotNull();
         assertThat(lottoGameResultDto.getEarningRate())
             .isEqualTo(Prize.FIRST.getCashPrize() / price);
-        assertThat(lottoGameResultDto.getPrizeResult().get(Prize.FIRST.getGrade())).isEqualTo(1);
+        assertThat(lottoGameResultDto.getPrizeResult().get(Prize.FIRST)).isEqualTo(1);
     }
 }
