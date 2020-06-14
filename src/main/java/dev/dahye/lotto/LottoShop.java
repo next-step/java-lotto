@@ -11,10 +11,11 @@ import java.util.List;
 public class LottoShop {
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.doInputMoney());
-        LottoOrder lottoOrder = LottoOrder.of(lottoMoney, InputView.doInputCountOfManualLotto());
-        List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(lottoOrder.getCountOfManualLotto());
+        int countOfManualLotto = InputView.doInputCountOfManualLotto();
+        List<LottoTicket> manualLottoTickets = InputView.doInputManualLotto(countOfManualLotto);
+        LottoOrder lottoOrder = LottoOrder.of(lottoMoney, countOfManualLotto, manualLottoTickets);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoOrder, manualLottoTickets);
+        LottoMachine lottoMachine = new LottoMachine(lottoOrder);
         ResultView.printPurchasedLottoTickets(
                 lottoOrder.getCountOfManualLotto(),
                 lottoOrder.getCountOfAutoLotto(),

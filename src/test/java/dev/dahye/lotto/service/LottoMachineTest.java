@@ -9,44 +9,24 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("로또 머신 객체")
 class LottoMachineTest {
-    @ParameterizedTest(name = "로또의 전체 갯수는 {0}개, 수동 로또 갯수는 {1}인 경우, 로또티켓의 갯수는 {1}개 여야 한다.")
-    @MethodSource("lottoMachine_fail")
-    @DisplayName("수동 로또 갯수만큼 수동 로또 티켓이 입력되지 않은 경우 IllegalArgument Exception throw")
-    void validateCountOfManualLottoTickets(int totalCountOfLotto, int countOfManualLotto, List<LottoTicket> lottoTickets) {
-        LottoMoney lottoMoney = new LottoMoney(totalCountOfLotto * LottoMoney.PRICE_PER_LOTTO);
-        LottoOrder lottoOrder = LottoOrder.of(lottoMoney, countOfManualLotto);
-        assertThatThrownBy(() -> new LottoMachine(lottoOrder, lottoTickets))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("수동 로또 갯수 만큼 로또 티켓을 입력해주세요.");
-    }
-
-    private static Stream<Arguments> lottoMachine_fail() {
-        return Stream.of(
-                arguments(2, 1, Arrays.asList(LottoTicket.autoIssued(), LottoTicket.autoIssued())),
-                arguments(2, 0, Arrays.asList(LottoTicket.autoIssued()))
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("lottoMachine_issued")
     @DisplayName("구입 금액과 수동으로 구매할 로또 수를 입력하면 로또를 발행할 수 있다.")
-    void issued(LottoOrder lottoOrder, List<LottoTicket> lottoTickets, int expectedCountOfLotto) {
-        LottoMachine lottoMachine = new LottoMachine(lottoOrder, lottoTickets);
+    void issued(LottoOrder lottoOrder, int expectedCountOfLotto) {
+        LottoMachine lottoMachine = new LottoMachine(lottoOrder);
         assertThat(lottoMachine.getLottoTickets().size()).isEqualTo(expectedCountOfLotto);
     }
 
     private static Stream<Arguments> lottoMachine_issued() {
         return Stream.of(
-                arguments(LottoOrder.of(new LottoMoney(3000), 1), Arrays.asList(LottoTicket.autoIssued()), 3)
+                arguments(LottoOrder.of(new LottoMoney(3000), 1, Arrays.asList(LottoTicket.autoIssued())), 3)
         );
     }
 }
