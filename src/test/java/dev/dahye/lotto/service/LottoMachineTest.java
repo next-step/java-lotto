@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -32,6 +33,20 @@ class LottoMachineTest {
         return Stream.of(
                 arguments(2, 1, Arrays.asList(LottoTicket.autoIssued(), LottoTicket.autoIssued())),
                 arguments(2, 0, Arrays.asList(LottoTicket.autoIssued()))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("lottoMachine_issued")
+    @DisplayName("구입 금액과 수동으로 구매할 로또 수를 입력하면 로또를 발행할 수 있다.")
+    void issued(LottoOrder lottoOrder, List<LottoTicket> lottoTickets, int expectedCountOfLotto) {
+        LottoMachine lottoMachine = new LottoMachine(lottoOrder, lottoTickets);
+        assertThat(lottoMachine.getLottoTickets().size()).isEqualTo(expectedCountOfLotto);
+    }
+
+    private static Stream<Arguments> lottoMachine_issued() {
+        return Stream.of(
+                arguments(LottoOrder.of(new LottoMoney(3000), 1), Arrays.asList(LottoTicket.autoIssued()), 3)
         );
     }
 }

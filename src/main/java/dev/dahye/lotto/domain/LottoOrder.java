@@ -19,7 +19,7 @@ public class LottoOrder {
     }
 
     public int getCountOfAutoLotto() {
-        return this.lottoMoney.calculateCountOfLotto();
+        return this.lottoMoney.calculateCountOfLotto() - countOfManualLotto;
     }
 
     public int getCountOfManualLotto() {

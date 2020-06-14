@@ -1,6 +1,5 @@
 package dev.dahye.lotto.service;
 
-import dev.dahye.lotto.domain.LottoMoney;
 import dev.dahye.lotto.domain.LottoOrder;
 import dev.dahye.lotto.domain.LottoTicket;
 import dev.dahye.lotto.domain.LottoTickets;

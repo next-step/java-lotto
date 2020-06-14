@@ -1,5 +1,6 @@
 package dev.dahye.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,20 +31,17 @@ public class LottoTickets {
     }
 
     public static LottoTickets multiIssued(int countOfAutoLotto, List<LottoTicket> manualLottoTickets) {
-        LottoTickets lottoTickets = LottoTickets.manualIssued(manualLottoTickets);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.addAll(manualLottoTickets);
         lottoTickets.addAll(createAutoIssued(countOfAutoLotto));
 
-        return lottoTickets;
+        return LottoTickets.manualIssued(lottoTickets);
     }
 
     private static List<LottoTicket> createAutoIssued(int count) {
         return Stream.generate(LottoTicket::autoIssued)
                 .limit(count)
                 .collect(Collectors.toList());
-    }
-
-    private void addAll(List<LottoTicket> lottoTickets) {
-        lottoTickets.addAll(lottoTickets);
     }
 
     public List<Rank> rankings(Winning winning) {
