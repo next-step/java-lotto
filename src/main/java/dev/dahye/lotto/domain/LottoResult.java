@@ -30,7 +30,7 @@ public class LottoResult {
     }
 
     public LottoMoney calculateTotalPrize() {
-        int totalPrize = 0;
+        long totalPrize = 0;
 
         for (Rank rank : this.getMyRanks()) {
             totalPrize += rank.getPrize();

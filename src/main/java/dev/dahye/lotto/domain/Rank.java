@@ -11,10 +11,10 @@ public enum Rank {
     FIRST(6, 2000000000, false);
 
     private int countOfMatch;
-    private int prize;
+    private long prize;
     private boolean isMatchBonusNumber;
 
-    Rank(int countOfMatch, int prize, boolean isMatchBonusNumber) {
+    Rank(int countOfMatch, long prize, boolean isMatchBonusNumber) {
         this.countOfMatch = countOfMatch;
         this.prize = prize;
         this.isMatchBonusNumber = isMatchBonusNumber;
@@ -24,7 +24,7 @@ public enum Rank {
         return countOfMatch;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 

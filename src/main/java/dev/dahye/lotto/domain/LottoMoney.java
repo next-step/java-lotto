@@ -8,28 +8,28 @@ public class LottoMoney {
     private static final int MIN_VALUE = 0;
     public static final int PRICE_PER_LOTTO = 1000;
 
-    private final int money;
+    private final long money;
 
-    public LottoMoney(int money) {
+    public LottoMoney(long money) {
         validate(money);
         this.money = money;
     }
 
     public int calculateCountOfLotto() {
-        return money / PRICE_PER_LOTTO;
+        return (int) (money / PRICE_PER_LOTTO);
     }
 
-    private void validate(int money) {
+    private void validate(long money) {
         if (isNegative(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
     }
 
-    private boolean isNegative(int money) {
+    private boolean isNegative(long money) {
         return money <= MIN_VALUE;
     }
 
-    private boolean isNoRemainder(int money) {
+    private boolean isNoRemainder(long money) {
         return money % PRICE_PER_LOTTO != MIN_VALUE;
     }
 

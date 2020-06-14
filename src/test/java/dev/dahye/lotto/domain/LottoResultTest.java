@@ -46,19 +46,33 @@ class LottoResultTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("lottoRates")
     @DisplayName("로또 수익률을 구할 수 있다.")
-    void lotto_winning_rate() {
+    void lotto_winning_rate(LottoTickets lottoTickets, LottoMoney totalPrize) {
         LottoMoney lottoMoney = new LottoMoney(2000);
-        LottoTicket lottoTicketByRankFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicketByRankThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
-        LottoTickets lottoTickets = LottoTickets.manualIssued(Arrays.asList(lottoTicketByRankFirst, lottoTicketByRankThird));
-
         LottoResult lottoResult = new LottoResult(lottoTickets, winning);
 
-        LottoMoney totalPrize = new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
         BigDecimal expectedResult = lottoMoney.divideBy(totalPrize);
         assertThat(lottoResult.getMyWinningRate(lottoMoney)).isEqualTo(expectedResult);
+    }
+
+    private static Stream<Arguments> lottoRates() {
+        return Stream.of(
+                arguments(
+                        LottoTickets.manualIssued(Arrays.asList(
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7))
+                        )),
+                        new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize())),
+                arguments(
+                        LottoTickets.manualIssued(Arrays.asList(
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6))
+                        )),
+                        new LottoMoney(Rank.FIRST.getPrize() + Rank.FIRST.getPrize() + Rank.FIRST.getPrize()))
+        );
     }
 
     @Test
