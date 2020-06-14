@@ -2,7 +2,6 @@ package lotto.model;
 
 import utils.IntegerUtils;
 import java.util.Collections;
-import java.util.List;
 
 public class LottoTicket {
     private int[] myNumbers;
@@ -23,10 +22,6 @@ public class LottoTicket {
         return myNumbers;
     }
 
-    public Lotto.Rank getRankType() {
-        return rankType;
-    }
-
     public int[] buyTicket() {
         Collections.shuffle(lotto.lottoDrawNumbers);
         int[] numbers = new int[Lotto.LIMIT];
@@ -44,6 +39,11 @@ public class LottoTicket {
         }
 
         setRank(rank);
+
+        if (rankType == null) {
+            rankType = Lotto.Rank.NONE;
+        }
+
         return rankType;
     }
     

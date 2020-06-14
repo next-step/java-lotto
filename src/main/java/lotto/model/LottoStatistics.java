@@ -1,7 +1,5 @@
 package lotto.model;
 
-import java.util.HashMap;
-
 public class LottoStatistics {
     public int buyLottos(int budget) {
         int purchase =  budget / Lotto.LOTTO_PRICE;
