@@ -26,7 +26,7 @@ public class LottoStartTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 5})
     public void testNumberOfTicket(int numOfPurchase) {
-        List<LottoTicket> ticketList = lottoStart.buyTickets();
+        List<LottoTicket> ticketList = lottoStart.buyTickets(numOfPurchase);
         assertThat(ticketList.size()).isEqualTo(numOfPurchase);
     }
 }

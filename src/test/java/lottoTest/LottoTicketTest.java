@@ -31,8 +31,8 @@ public class LottoTicketTest {
     @ParameterizedTest
     @CsvSource(value = {
             "11,12,13,14,15,16 : 0",
-            "1,12,13,14,15,16 : 1",
-            "1,2,13,14,15,16 : 2",
+            "1,12,13,14,15,16 : 0",
+            "1,2,13,14,15,16 : 0",
             "1,2,3,14,15,16 : 3",
             "1,2,3,4,15,16 : 4",
             "1,2,3,4,5,16 : 5",
@@ -44,7 +44,7 @@ public class LottoTicketTest {
         }
         LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseInt(myNumbers));
 
-        assertThat(ticketWithNumbers.announceRank(winningNumbers)).isEqualTo(expected);
+        assertThat(ticketWithNumbers.announceRank(winningNumbers).getMatchNumber()).isEqualTo(expected);
     }
 
 }
