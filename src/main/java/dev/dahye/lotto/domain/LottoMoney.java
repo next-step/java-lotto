@@ -18,12 +18,12 @@ public class LottoMoney {
     }
 
     private void validate(int money) {
-        if (isNegativeNumber(money) || isNoRemainder(money)) {
+        if (isNegative(money) || isNoRemainder(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위로 구입할 수 있습니다.");
         }
     }
 
-    private boolean isNegativeNumber(int money) {
+    private boolean isNegative(int money) {
         return money <= MIN_VALUE;
     }
 
