@@ -23,12 +23,12 @@ public enum Rank {
         this.bonus = bonus;
     }
 
-    private static Map<RewardStatus, Rank> rankHash = Collections
+    private static Map<RewardStatus, Rank> RANKS = Collections
                                                             .unmodifiableMap(Stream.of(values())
                                                             .collect(Collectors.toMap(Rank::getRewardStatus, Function.identity())));
 
     public static Rank find(RewardStatus rewardStatus) {
-        return Optional.ofNullable(rankHash.get(rewardStatus)).orElse(MISS);
+        return Optional.ofNullable(RANKS.get(rewardStatus)).orElse(MISS);
     }
 
     public RewardStatus getRewardStatus() {
@@ -41,25 +41,6 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
-    }
-
-    public boolean getBonus() {
-        return bonus;
-    }
-
-    public static Rank getRankByMatchInfo(RewardStatus rewardStatus) {
-        if(rewardStatus.getMatchingCount() == 5) {
-            return findSecondRank(rewardStatus.isMatchingBonus());
-        }
-
-        return Arrays.stream(Rank.values())
-                .filter(e -> e.getCountOfMatch() == rewardStatus.getMatchingCount())
-                .findFirst()
-                .orElse(MISS);
-    }
-
-    private static Rank findSecondRank(boolean matchBonus) {
-        return (matchBonus) ? Rank.SECOND : Rank.THIRD;
     }
 
 }

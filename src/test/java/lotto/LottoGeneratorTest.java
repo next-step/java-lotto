@@ -10,7 +10,7 @@ public class LottoGeneratorTest {
 
     @DisplayName("로또 번호 생성트기 테스")
     @Test
-    void LOTTO_NUMBER_GENERATOR_TEST() {
-        assertThat(LottoNumberGenerator.getNumber()).hasSize(6);
+    void LOTTO_AUTO_NUMBER_GENERATOR_TEST() {
+        assertThat(LottoNumberGenerator.makeAutoNumber()).hasSize(6);
     }
 }

@@ -5,28 +5,29 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
 
         InputView input = new InputView();
-        int paymentPrice = new LottoPayment(input.displayLottoIntro()).pay();
-        Lotto lotto = new Lotto(paymentPrice);
+        int lottoCount = new LottoPayment(input.displayLottoIntro()).pay();
+        List<String> manualNumber = input.displayManualLottoNumberInputUI();
+        Lotto lotto = new Lotto(lottoCount - manualNumber.size(), manualNumber);
         ResultView resultView = new ResultView();
 
-        input.displayIntroInputUI(paymentPrice);
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-        resultView.displayLottoNumbers(lottoNumbers);
+        input.displayIntroInputUI(lottoCount);
+        resultView.displayLottoNumbers(lotto.getManualLottoNumbers(), lotto.getAutoLottoNumbers());
 
         String[] inputNumber = input.displayLastLottoNumberInputUI();
         int bonusNumber = input.displayBonusLottoNumberInputUI();
 
-        List<RewardStatus> lottoRankList = lotto.getRewardLotto(inputNumber, bonusNumber);
-        RankReward rankReward = new RankReward(new LottoResult(lottoRankList).getLottoResult());
-        resultView.displayResult(rankReward);
-        resultView.displayResultRateMessage((float) rankReward.getTotalPrize() / paymentPrice);
+        List<RewardStatus> lottoRewars = lotto.getManualRewardLotto(inputNumber, bonusNumber);
+        lottoRewars.addAll(lotto.getAutoRewardLotto(inputNumber, bonusNumber));
+
+        LottoResult lottoResult = new LottoResult(lottoRewars);
+        resultView.displayResult(lottoResult);
+        resultView.displayResultRateMessage(lottoResult.getLottoProfit(lottoCount));
     }
 
 }
