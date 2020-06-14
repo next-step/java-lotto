@@ -11,7 +11,15 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
+        isNotNullOrEmpty(lottoTickets);
+
         this.lottoTickets = lottoTickets;
+    }
+
+    private void isNotNullOrEmpty(List<LottoTicket> lottoTickets) {
+        if (lottoTickets == null || lottoTickets.isEmpty()) {
+            throw new IllegalArgumentException("LottoTickets는 null이거나 빈 값으로는 생성할 수 없습니다.");
+        }
     }
 
     public static LottoTickets autoIssued(int countOfLotto) {
