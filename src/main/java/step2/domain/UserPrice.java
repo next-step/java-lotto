@@ -32,16 +32,6 @@ public class UserPrice {
         return (int) Math.floor(price) / LOTTO_PRICE;
     }
 
-    private long getTotalCashPrize(LottoSheet lottoSheet, WinningLotto winningLotto) {
-        long totalCashPrize = lottoSheet.getLottos().stream()
-            .mapToLong(lotto -> lotto.getPrize(winningLotto).getCashPrize()).sum();
-        return totalCashPrize;
-    }
-
-    public double getEarningRate(LottoSheet lottoSheet, WinningLotto winningLotto) {
-        return (double) getTotalCashPrize(lottoSheet, winningLotto) / price;
-    }
-
     @Override
     public String toString() {
         return "UserPrice{" +
