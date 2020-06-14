@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    private static final double LOTTO_PRICE = 1000;
-
     private final int numberOfLotto;
 
-    public LottoStore(double money) {
-        if (!isValid(money)) {
-            throw new IllegalArgumentException();
-        }
-        this.numberOfLotto = (int)(money / LOTTO_PRICE);
+    public LottoStore(LottoMoney lottoMoney) {
+        this.numberOfLotto = lottoMoney.getNumberOfLotto();
     }
 
     public List<Lotto> sellLotto() {
@@ -22,10 +17,6 @@ public class LottoStore {
             lottos.add(Lotto.getAutoLotto());
         }
         return lottos;
-    }
-
-    private boolean isValid(final double money) {
-        return (money % LOTTO_PRICE == 0) && (money >= LOTTO_PRICE);
     }
 
 }

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         InputView inputView = InputView.enterInput();
 
-        LottoStore lottoStore = new LottoStore(inputView.getMoney());
+        LottoStore lottoStore = new LottoStore(inputView.getLottoMoney());
         List<Lotto> lottos = lottoStore.sellLotto();
         WinnerLotto winnerLotto = new WinnerLotto(lottos);
 
