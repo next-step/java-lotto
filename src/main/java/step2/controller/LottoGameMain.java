@@ -38,7 +38,7 @@ public class LottoGameMain {
                 lottoGame.getGameResult(new WinningLotto(lastWeekWinningNumbers, bonusNumber)));
 
         } catch (Exception e) {
-            System.out.println(e.fillInStackTrace());
+            System.out.println(e.getMessage());
             return;
         }
     }
