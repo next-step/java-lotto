@@ -2,8 +2,6 @@ package camp.nextstep.edu.nextstep8.lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class LottoGameView {
 
@@ -17,12 +15,7 @@ public class LottoGameView {
         StringBuilder output = new StringBuilder();
         output.append("당첨 통계\n");
         output.append("---------\n");
-        Arrays.stream(LottoAward.values())
-                .sorted(Comparator.comparingInt(LottoAward::getCondition))
-                .forEach(e -> {
-                    output.append(e.getCondition() + "개 일치 (" + e.getPrize() + "원) -\t");
-                    output.append(result.getWinningCount(e) + "개 \n");
-                });
+        output.append(result.getResultForPrint());
         System.out.println(output.toString());
     }
 

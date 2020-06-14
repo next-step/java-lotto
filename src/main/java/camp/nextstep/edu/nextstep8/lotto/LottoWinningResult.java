@@ -1,5 +1,7 @@
 package camp.nextstep.edu.nextstep8.lotto;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,18 @@ public class LottoWinningResult {
 
     private boolean emptyMatch() {
         return ZERO == matchResult.size();
+    }
+
+    public String getResultForPrint() {
+        StringBuilder output = new StringBuilder();
+
+        Arrays.stream(LottoAward.values())
+                .sorted(Comparator.comparingInt(LottoAward::getCondition))
+                .forEach(e -> {
+                    output.append(e.getCondition() + "개 일치 (" + e.getPrize() + "원) -\t");
+                    output.append(getWinningCount(e) + "개 \n");
+                });
+        return output.toString();
     }
 }
 
