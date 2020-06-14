@@ -21,7 +21,7 @@ public class LottoLine {
     }
 
     public LottoLine(int... lineNumbers) {
-        if (lineNumbers.length != 6) {
+        if (lineNumbers.length != LOTTO_CONTAINING_NUMBER) {
             throw new IllegalArgumentException("갯수가 잘못되었습니다");
         }
         this.lineNumbers = lineNumbers;
