@@ -32,8 +32,7 @@ public class LottoNumber {
         return Collections.unmodifiableList(numbers);
     }
 
-    @Override
-    public String toString() {
+    public String getResultForPrint() {
         StringBuilder builder = new StringBuilder();
         builder.append(LEFT_BRACE);
         builder.append(numbers.stream()

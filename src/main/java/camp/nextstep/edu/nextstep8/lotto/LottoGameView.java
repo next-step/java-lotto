@@ -6,9 +6,9 @@ import java.math.RoundingMode;
 public class LottoGameView {
 
     public static void showLottoTicket(LottoTicket lottoTicket) {
-        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
-            System.out.println(lottoNumber);
-        }
+        lottoTicket.getLottoNumbers().forEach(
+                lottoNumber -> System.out.println(lottoNumber.getResultForPrint())
+        );
     }
 
     public static void showWinningResult(LottoWinningResult result) {
