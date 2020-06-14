@@ -24,31 +24,29 @@ public class LottoStart {
 	private LottoStatic lottoStatic = new LottoStatic();
 
 	private static int budget;
-//	private static int numberOfTickets;
+	private static int numberOfTickets;
 	private static int[] winningNumbers;
-	private static List<LottoTicket> tickets = new ArrayList<>();
+	private List<LottoTicket> tickets = new ArrayList<>();
 
 	public void makeWish() {
 		setBudget();
-		outputView.howManyLottoTicketsView(setTicketNumber(budget));
-
-		// TODO: 구매한 티켓 만큼의 티켓 리스트 생성
-		// TODO: 티켓 리스트에 실제로 랜덤의 티켓 할당
-
+		makeTickets(numberOfTickets);
 		setWinningNumbers();
-
 	}
 
 	public List<LottoTicket> makeTickets(int numberOfTickets) {
 		for (int i = 0; i < numberOfTickets; i++) {
 			tickets.add(new LottoTicket());
+			outputView.printLottoNumbersView(tickets.get(i).getMyNumbers());
 		}
 
 		return tickets;
 	}
 
 	public int setTicketNumber(int budget) {
-		return lottoStatic.buyLottos(budget);
+		numberOfTickets = lottoStatic.buyLottos(budget);
+		outputView.howManyLottoTicketsView(numberOfTickets);
+		return numberOfTickets;
 	}
 
 	private void setBudget() {

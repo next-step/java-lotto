@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IntegerUtils {
     public static int parsing(String calcStr) {
         try {
@@ -20,5 +23,14 @@ public class IntegerUtils {
         }
 
         return results;
+    }
+
+    public static List<Integer> arrToList(int[] numbers) {
+        List<Integer> list = new ArrayList<>();
+        for (int i : numbers) {
+            list.add(i);
+        }
+
+        return list;
     }
 }

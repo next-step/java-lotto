@@ -1,12 +1,17 @@
 package lotto.model;
 
-import java.util.ArrayList;
+import utils.IntegerUtils;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
     private Lotto lotto = new Lotto();
-    private List<Integer> myNumbers;
+
+    public int[] getMyNumbers() {
+        return myNumbers;
+    }
+
+    private int[] myNumbers;
     private int rank = 0;
 
     public LottoTicket() {
@@ -14,15 +19,15 @@ public class LottoTicket {
     }
 
     public LottoTicket(int[] numbers) {
-        this.myNumbers = arrToList(numbers);
+        this.myNumbers = numbers;
     }
 
-    public List<Integer> buyTicket() {
+    public int[] buyTicket() {
         Collections.shuffle(lotto.lottoDrawNumbers);
-        List<Integer> numbers = new ArrayList<>();
+        int[] numbers = new int[Lotto.LIMIT];
 
         for(int i = 0; i < Lotto.LIMIT; i++) {
-            numbers.add(lotto.lottoDrawNumbers.get(i));
+            numbers[i] = lotto.lottoDrawNumbers.get(i);
         }
 
         return numbers;
@@ -37,17 +42,8 @@ public class LottoTicket {
     }
     
     private void isWinner(int winningNumber) {
-        if (myNumbers.contains(winningNumber)) {
+        if (IntegerUtils.arrToList(myNumbers).contains(winningNumber)) {
             rank++;
         }
-    }
-
-    private List<Integer> arrToList(int[] numbers) {
-        List<Integer> list = new ArrayList<>();
-        for (int i : numbers) {
-            list.add(i);
-        }
-
-        return list;
     }
 }

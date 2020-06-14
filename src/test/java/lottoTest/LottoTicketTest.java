@@ -19,11 +19,11 @@ public class LottoTicketTest {
     @DisplayName("로또 번호를 자동으로 생성한다 - 중복 없는지 체크")
     @Test
     public void isItDuplication() {
-        List<Integer> lotto1 = ticket.buyTicket();
-        List<Integer> lotto2 = ticket.buyTicket();
+        int[] lotto1 = ticket.buyTicket();
+        int[] lotto2 = ticket.buyTicket();
 
-        assertThat(lotto1.size()).isEqualTo(6);
-        assertThat(lotto2.size()).isEqualTo(6);
+        assertThat(lotto1.length).isEqualTo(6);
+        assertThat(lotto2.length).isEqualTo(6);
         assertThat(lotto1).isNotEqualTo(lotto2);
     }
 
