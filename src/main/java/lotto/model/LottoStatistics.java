@@ -20,6 +20,8 @@ public class LottoStatistics {
     }
 
     public void gatherResult(Lotto.Rank rank) {
-        rank.plusCount();
+        if (rank != null) {
+            rank.plusCount();
+        }
     }
 }

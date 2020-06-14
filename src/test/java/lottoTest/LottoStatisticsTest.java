@@ -5,6 +5,7 @@ import lotto.model.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,10 +22,18 @@ public class LottoStatisticsTest {
 
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000", "NONE, 0"})
+    @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000"})
     public void takePrizeMoney(Lotto.Rank rank, int prize) {
         int money = lottoStatistics.getPrizeMoney(rank);
         assertThat(money).isEqualTo(prize);
+    }
+
+    @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
+    @ParameterizedTest
+    @NullSource
+    public void takePrizeMoneyNulll(Lotto.Rank rank) {
+        int money = lottoStatistics.getPrizeMoney(rank);
+        assertThat(money).isEqualTo(0);
     }
 
     @DisplayName("구입 금액을 받아 수익률을 계산한다")

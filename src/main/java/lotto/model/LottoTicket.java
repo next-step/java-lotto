@@ -39,11 +39,6 @@ public class LottoTicket {
         }
 
         setRank(rank);
-
-        if (rankType == null) {
-            rankType = Lotto.Rank.NONE;
-        }
-
         return rankType;
     }
     
