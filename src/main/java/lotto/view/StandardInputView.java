@@ -20,7 +20,7 @@ public class StandardInputView implements LottoInput {
     public LottoLine getWinnerLine() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         String line = scanner.nextLine();
-        if( line.equals("") )
+        if (line.equals(""))
             line = scanner.nextLine();
 
         return new LottoLine(Arrays.stream(line.replace(" ", "").

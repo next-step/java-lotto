@@ -14,7 +14,7 @@ public class LottoGames implements Iterable<LottoLine> {
 
     public LottoGames(int price) {
         this.lines = new ArrayList<>();
-        for (int i = 0; i < price / 1000; i ++) {
+        for (int i = 0; i < price / 1000; i++) {
             lines.add(new LottoLine());
         }
     }
@@ -56,7 +56,7 @@ public class LottoGames implements Iterable<LottoLine> {
     }
 
     public double getExpectation(LottoResult result) {
-        return (double)getPrizes(result) / (lines.size() * 1000);
+        return (double) getPrizes(result) / (lines.size() * 1000);
     }
 
     @Override
