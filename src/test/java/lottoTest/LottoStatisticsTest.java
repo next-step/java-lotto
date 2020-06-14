@@ -24,8 +24,16 @@ public class LottoStatisticsTest {
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
     @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000", "NONE, 0"})
-    public void getPrizeMoney(Lotto.Rank rank, int prize) {
+    public void takePrizeMoney(Lotto.Rank rank, int prize) {
         int money = lottoStatic.getPrizeMoney(rank);
         assertThat(money).isEqualTo(prize);
+    }
+
+    @DisplayName("구입 금액을 받아 수익률을 계산한다")
+    @ParameterizedTest
+    @CsvSource(value = {"5000, 14000, 0.35", "100, 100, 1", "100, 1000, 0.1", "1000, 100, 10"})
+    public void calcProfit(int prize, int budget, double expected) {
+        double profits = lottoStatic.calcProfit(prize, budget);
+        assertThat(profits).isEqualTo(expected);
     }
 }

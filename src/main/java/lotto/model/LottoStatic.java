@@ -10,4 +10,8 @@ public class LottoStatic {
     public int getPrizeMoney(Lotto.Rank rank) {
         return rank.getPrize();
     }
+
+    public double calcProfit(double prize, double budget) {
+        return Math.floor(prize / budget * 100) / 100.0;
+    }
 }
