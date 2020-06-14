@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.LottoLine;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -15,14 +17,14 @@ public class StandardInputView implements LottoInput {
         return scanner.nextInt();
     }
 
-    public int[] getWinnerNumber() {
+    public LottoLine getWinnerLine() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         String line = scanner.nextLine();
         if( line.equals("") )
             line = scanner.nextLine();
 
-        return Arrays.stream(line.replace(" ", "").
-                split(",")).mapToInt(Integer::parseInt).toArray();
+        return new LottoLine(Arrays.stream(line.replace(" ", "").
+                split(",")).mapToInt(Integer::parseInt).toArray());
     }
 
     @Override

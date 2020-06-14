@@ -1,50 +1,55 @@
 package lotto;
 
-import lotto.model.LottoGame;
+import lotto.model.LottoLine;
+import lotto.model.LottoResult;
+import lotto.model.PrizeEnum;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
-    static LottoGame sampleGame;
+    static LottoLine sampleLine;
     @BeforeAll
     public static void setup() {
-        sampleGame = new LottoGame(new int[]{2, 5, 7, 13, 16, 19});
+        sampleLine = new LottoLine(2, 5, 7, 13, 16, 19);
     }
     @Test
     public void testIsLottoWinner() {
-        LottoGame game = new LottoGame(new int[]{1, 2, 3, 4, 5, 6});
+        LottoLine game = new LottoLine(1, 2, 3, 4, 5, 6);
 
-        assertThat(game.getPageContent()).isEqualTo("[1, 2, 3, 4, 5, 6]");
-        assertThat(game.LottoCompare(new int[]{1, 2, 3, 4, 5, 6}, 7)).isEqualTo(6);
+        assertThat(game.getLineContent()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        LottoResult result = new LottoResult(new LottoLine(1, 2, 3, 4, 5, 6), 7);
+        assertThat(result.lineResult(game)).isEqualTo(PrizeEnum.SIX);
     }
 
     @Test
     public void testLottoFailed() {
-        assertThat(sampleGame.LottoCompare(new int[]{1, 3, 4, 6, 8, 9}, 2)).isEqualTo(0);
+        LottoResult result = new LottoResult(new LottoLine(1, 3, 4, 6, 8, 9), 2);
+        assertThat(result.lineResult(sampleLine)).isEqualTo(PrizeEnum.FAIL);
     }
 
     @Test
     public void testLottoGenerator() {
-        LottoGame game = new LottoGame();
-        assertThat(game.getPageContent().split(", ").length).isEqualTo(6);
+        LottoLine line = new LottoLine();
+        assertThat(line.getLineContent().split(",").length).isEqualTo(6);
     }
 
     @Test
     public void testLottoCountError() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoGame(new int[]{1, 2, 3, 4, 5, 6, 7}));
+                () -> new LottoLine(new int[]{1, 2, 3, 4, 5, 6, 7}));
     }
 
     @Test
     public void testWinnerCount() {
-        assertThat(sampleGame.LottoCompare(new int[]{2, 3, 7, 13, 21, 34}, 1)).isEqualTo(3);
+        LottoResult result = new LottoResult(new LottoLine(2, 3, 7, 13, 21, 34), 1);
+        assertThat(result.lineResult(sampleLine)).isEqualTo(PrizeEnum.THREE);
     }
 
     @Test
     public void testBonusWinnerCount() {
-        // LottoSinglePage page = new LottoSinglePage(new int[] {2, 5, 7, 13, 16, 19});
-        assertThat(sampleGame.LottoCompare(new int[]{3, 5, 7, 13, 16, 19}, 2)).isEqualTo(5.5);
+        LottoResult result = new LottoResult(new LottoLine(3, 5, 7, 13, 16, 19), 2);
+        assertThat(result.lineResult(sampleLine)).isEqualTo(PrizeEnum.FIVE_BONUS);
     }
 }

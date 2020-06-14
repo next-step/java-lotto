@@ -1,9 +1,13 @@
 package lotto;
 
 import lotto.controller.LottoGames;
+import lotto.model.LottoLine;
+import lotto.model.LottoResult;
 import lotto.view.LottoInput;
 import lotto.view.StandardInputView;
 import lotto.view.StandardOutputView;
+
+import javax.sound.sampled.Line;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -11,8 +15,7 @@ public class LottoMain {
         LottoGames games = new LottoGames(input.getPurchacePrice());
         StandardOutputView outputView = new StandardOutputView();
         outputView.printBoughtLotto(games);
-        int[] winner = input.getWinnerNumber();
-        int bonusNumber = input.getBonusNumber();
-        outputView.printStat(games, winner, bonusNumber);
+        LottoResult result = new LottoResult(input.getWinnerLine(), input.getBonusNumber());
+        outputView.printStat(games, result);
     }
 }
