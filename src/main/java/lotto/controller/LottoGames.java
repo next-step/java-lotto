@@ -31,7 +31,9 @@ public class LottoGames implements Iterable<LottoGame> {
     }
 
     public String getPrizesContentByEnum(PrizeEnum prizeEnum, int[] winnerNumber, int bonusNumber) {
-        if (prizeEnum == PrizeEnum.FAIL) return "";
+        if (prizeEnum == PrizeEnum.FAIL) {
+            return "";
+        }
         if (prizeEnum == PrizeEnum.FIVE_BONUS) {
             StringBuilder builder = new StringBuilder();
             builder.append("5개 일치 - 보너스 볼 일치(30000000원)- ");
