@@ -22,14 +22,13 @@ public class OutputView {
         System.out.println(lottoNumbers[lottoNumbers.length - 1] + "]");
     }
 
-    // TODO: 당첨된 로또 갯수 몇 개인지 어떻게 알아내지?
     public void winningResultView() {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (Lotto.Rank rank : Lotto.Rank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), -999);
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), rank.getCount());
         }
     }
 

@@ -38,8 +38,11 @@ public class LottoStart {
 
 		for (int i = 0; i < numberOfTickets; i++) {
 			Lotto.Rank rank = tickets.get(i).announceRank(winningNumbers);
+			lottoStatistics.gatherResult(rank);
 			prize += lottoStatistics.getPrizeMoney(rank);
 		}
+
+		outputView.winningResultView();
 
 		double profit = lottoStatistics.calcProfit(prize, budget);
 		outputView.printEarningRateView(profit);
