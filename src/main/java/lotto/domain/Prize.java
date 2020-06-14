@@ -45,7 +45,7 @@ public enum Prize {
         Prize properPrize = Arrays.stream(Prize.values())
                 .filter(prize -> prize.checkPrize(matchCount, matchBonus))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(IllegalArgumentException::new);
 
         return properPrize;
     }
