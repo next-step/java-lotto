@@ -14,19 +14,21 @@ public class LottoGameMain {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        int userPrice = inputView.inputPrice();
-        int manualLottoCount = inputView.inputManualLottoCount();
-        LottoSheet manualLottoSheet = new LottoSheet();
-        if (manualLottoCount > 0) {
-            manualLottoSheet = inputView.inputManualLotto(manualLottoCount);
-        }
-
-        LottoGame lottoGame = new LottoGame(new UserPrice(userPrice), manualLottoSheet);
-
         try {
+            int price = inputView.inputPrice();
+            UserPrice userPrice = new UserPrice(price);
+
+            int manualLottoCount = inputView.inputManualLottoCount();
+            LottoSheet manualLottoSheet = new LottoSheet();
+            if (manualLottoCount > 0) {
+                manualLottoSheet = inputView.inputManualLotto(manualLottoCount);
+            }
+
+            LottoGame lottoGame = new LottoGame(userPrice, manualLottoSheet);
+
             lottoGame.run();
 
-            resultView.printPriceResult(userPrice, manualLottoCount);
+            resultView.printPriceResult(price, manualLottoCount);
             resultView.printLottos(lottoGame.getLottoSheet());
 
             List<Integer> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
@@ -36,7 +38,7 @@ public class LottoGameMain {
                 lottoGame.getGameResult(new WinningLotto(lastWeekWinningNumbers, bonusNumber)));
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.fillInStackTrace());
             return;
         }
     }
