@@ -13,8 +13,8 @@ public class Main {
         Money money = new Money(InputView.buyLotto());
         int manualLottoCount = InputView.buyManualLotto(money.countLotto());
 
-        List<Lotto> manualLottos = ManualLottoCreator.createLottos(InputView.inputManualNumbers(manualLottoCount));
-        List<Lotto> autoLottos = LottoMachine.createLottos(money.countLotto() - manualLottoCount);
+        List<Lotto> manualLottos = LottoMachine.createManualLottos(InputView.inputManualNumbers(manualLottoCount));
+        List<Lotto> autoLottos = LottoMachine.createAutoLottos(money.countLotto() - manualLottoCount);
         ResultView.printLotto(manualLottos, autoLottos);
 
         List<Lotto> lottos = new ArrayList<>();

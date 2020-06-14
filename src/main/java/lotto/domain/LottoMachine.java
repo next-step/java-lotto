@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +11,20 @@ public class LottoMachine {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    public static List<Lotto> createLottos(int lottoCount) {
+    public static List<Lotto> createManualLottos(List<String> lottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String numbers : lottoNumbers) {
+            String[] splitNumbers = numbers.split(", ");
+
+            lottos.add(new Lotto(Arrays.stream(splitNumbers)
+                    .map(LottoMachine::parseInt)
+                    .sorted()
+                    .collect(Collectors.toList())));
+        }
+        return lottos;
+    }
+
+    public static List<Lotto> createAutoLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int idx = 0; idx < lottoCount; idx++) {
             lottos.add(new Lotto(raffle()));
@@ -29,5 +43,13 @@ public class LottoMachine {
         return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    private static int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자가 아닙니다.");
+        }
     }
 }
