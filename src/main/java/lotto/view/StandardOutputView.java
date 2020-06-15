@@ -6,8 +6,8 @@ import lotto.model.LottoResult;
 import lotto.model.PrizeEnum;
 
 public class StandardOutputView {
-    public void printBoughtLotto(LottoGames games) {
-        System.out.printf("%d개를 구입했습니다.", games.getSize());
+    public void printBoughtLotto(int manualSize, LottoGames games) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구입했습니다.\n", manualSize, games.getSize());
         for (LottoLine line : games) {
             System.out.println(line.getLineContent());
         }
