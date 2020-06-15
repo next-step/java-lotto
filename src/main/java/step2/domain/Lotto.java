@@ -1,35 +1,30 @@
 package step2.domain;
 
-import step2.domain.strategy.LottoGeneratorStrategy;
+import step2.domain.strategy.LottoNumberGeneratorStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
-    private List<String> lottoNumbers = new ArrayList<>();
-    private LottoGeneratorStrategy lottoGeneratorStrategy;
+    private final int MAX_LOTTO_NUMBER_SIZE = 6;
+    private List<Integer> lottoNumbers = new ArrayList<>();
 
-    public Lotto(LottoGeneratorStrategy lottoGeneratorStrategy) {
-        this.lottoGeneratorStrategy = lottoGeneratorStrategy;
-    }
-
-    public void generateNumber() {
-        while (lottoNumbers.size() < Constants.MAX_LOTTO_NUMBER_SIZE) {
-            String lottoNum = String.valueOf(lottoGeneratorStrategy.getLottoNumber());
+    public void generateNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+        while (lottoNumbers.size() < MAX_LOTTO_NUMBER_SIZE) {
+            int lottoNum = lottoNumberGeneratorStrategy.generateLottoNumber();
 
             if (!lottoNumbers.contains(lottoNum))
                 lottoNumbers.add(lottoNum);
         }
     }
 
-    public int getMatchCount(List<String> winningNumber) {
+    public int getMatchCount(Optional<WinningNumbers> winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumber::contains)
+                .filter(winningNumbers.orElseThrow(() -> new NoSuchElementException("당첨번호가 필요합니다.")).getWinningNumbers()::contains)
                 .count();
     }
 
     @Override
     public String toString() {
-        return "[" + String.join(", ", lottoNumbers) + "]";
+        return Arrays.toString(lottoNumbers.toArray());
     }
 }
