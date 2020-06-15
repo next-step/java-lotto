@@ -12,12 +12,13 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = InputView.enterPurchaseAmount();
-        
+        int quantity = LottoUtil.calculateLottoQuantity(purchaseAmount);
+
         int manualCount = InputView.enterManualCount();
+        LottoUtil.checkManualCount(quantity, manualCount);
         List<String> manualNumber = InputView.enterManualNumber(manualCount);
 
         //로또 생성
-        int quantity = LottoUtil.calculateLottoQuantity(purchaseAmount);
         LottoTicket lottoTicket = LottoTicket.create(quantity, manualNumber);
         ResultView.printLottoTicket(quantity, manualCount, lottoTicket);
 
