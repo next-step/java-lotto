@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -27,10 +28,10 @@ public class Lottos {
 
     private void initResultScore() {
         resultScore = new HashMap();
-        resultScore.put(3,0);
-        resultScore.put(4,0);
-        resultScore.put(5,0);
-        resultScore.put(6,0);
+        resultScore.put(3, 0);
+        resultScore.put(4, 0);
+        resultScore.put(5, 0);
+        resultScore.put(6, 0);
     }
 
     public Map makeResultStatics(List lastWeekNumbers) {
@@ -51,5 +52,11 @@ public class Lottos {
             resultScore.put(equalsCount, value);
         }
 
+    }
+
+    public List<String> getLottoNumbers() {
+        return lottos.stream()
+                .map(lotto -> lotto.getSelectedLottoNumbers())
+                .collect(Collectors.toList());
     }
 }
