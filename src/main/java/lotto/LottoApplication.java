@@ -7,14 +7,19 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 import lotto.util.LottoUtil;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = InputView.enterPurchaseAmount();
+        
+        int manualCount = InputView.enterManualCount();
+        List<String> manualNumber = InputView.enterManualNumber(manualCount);
 
-        // 로또 생성
+        //로또 생성
         int quantity = LottoUtil.calculateLottoQuantity(purchaseAmount);
-        LottoTicket lottoTicket = LottoTicket.create(quantity);
-        ResultView.printLottoTicket(quantity, lottoTicket);
+        LottoTicket lottoTicket = LottoTicket.create(quantity, manualNumber);
+        ResultView.printLottoTicket(quantity, manualCount, lottoTicket);
 
         //당첨번호, 보너스볼 입력
         String enteredWinNumber = InputView.enterWinningNumber();
