@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LottoGames implements Iterable<LottoLine> {
-    List<LottoLine> lines;
+    private List<LottoLine> lines;
 
     private LottoGames(LottoGamesBuilder builder) {
         this.lines = builder.lines;
