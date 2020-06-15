@@ -1,30 +1,20 @@
 package dev.dahye.lotto.service;
 
-import dev.dahye.lotto.domain.LottoTicket;
-import dev.dahye.lotto.domain.LottoMoney;
+import dev.dahye.lotto.domain.LottoOrder;
+import dev.dahye.lotto.domain.LottoTickets;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
 public class LottoMachine {
-    private List<LottoTicket> lottoTickets;
-    private final LottoMoney lottoMoney;
+    private final LottoTickets lottoTickets;
 
-    public LottoMachine(LottoMoney lottoMoney) {
-        this.lottoMoney = lottoMoney;
+    public LottoMachine(LottoOrder lottoOrder) {
+        Objects.requireNonNull(lottoOrder, "lottoOrder must not be null");
 
-        initializeTickets();
-
-        int countOfLotto = this.lottoMoney.getCountOfLotto();
-        lottoTickets = LottoTicket.autoIssued(countOfLotto);
+        lottoTickets = lottoOrder.issued();
     }
 
-    private void initializeTickets() {
-        this.lottoTickets = new ArrayList<>();
-    }
-
-    public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 }

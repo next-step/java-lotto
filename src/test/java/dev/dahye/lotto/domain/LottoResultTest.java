@@ -6,129 +6,97 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Lotto의 결과를 출력하는 객체")
 class LottoResultTest {
-    private static List<LottoTicket> autoLottoTickets;
-    private static String winningNumbers;
-    private static final int BONUS_NUMBER = 1;
+    private static Winning winning;
 
     @BeforeEach
-    void setUp() {
-        autoLottoTickets = Collections.singletonList(LottoTicket.autoIssued());
-        winningNumbers = "1, 2, 3, 4, 5, 6";
-    }
-
-    @ParameterizedTest(name = "입력 값 = {0}")
-    @NullAndEmptySource
-    @DisplayName("당첨 번호가 null이거나 빈 값인 경우 IllegalArguments exception throw")
-    void winningNumbers_must_not_be_null_or_empty(String winningNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers, BONUS_NUMBER),
-                "당첨 번호는 반드시 입력되어야 합니다.");
-    }
-
-    @ParameterizedTest(name = "입력 값 = {0}")
-    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
-    @DisplayName("당첨 번호가 6자리가 아닌 경우 IllegalArguments exception throw")
-    void winningNumbers_must_be_six_numbers(String winningNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers, BONUS_NUMBER),
-                "로또 티켓은 6자리 숫자여야 합니다.");
-    }
-
-    @ParameterizedTest(name = "입력 값 = {0}")
-    @ValueSource(strings = {"0", "46"})
-    @DisplayName("당첨 번호가 범위에 벗어난 경우 IllegalArguments exception throw")
-    void validate_winningNumbers(int invalidNumber) {
-        String winningNumbers = "1, 2, 3, 4, 5, " + invalidNumber;
-
-        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers, BONUS_NUMBER),
-                "로또 번호는 1 ~ 45의 숫자만 가능합니다.");
-    }
-
-    @ParameterizedTest(name = "입력 값 = {0}")
-    @ValueSource(strings = {"가", "&"})
-    @DisplayName("당첨 번호가 숫자가 아닌 경우 IllegalArguments exception throw")
-    void winningNumbers_invalid_number(String invalidNumber) {
-        String winningNumbers = "1, 2, 3, 4, 5, " + invalidNumber;
-
-        assertThrows(IllegalArgumentException.class, () -> new LottoResult(autoLottoTickets, winningNumbers, BONUS_NUMBER),
-                "당첨 번호는 숫자만 입력 가능합니다.");
+    void setup() {
+        LottoTicket winningTicket = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winning = Winning.of(winningTicket, LottoNumber.of(8));
     }
 
     @ParameterizedTest(name = "입력 값 = {0}, 예상 결과 = {1}")
-    @MethodSource("winnings")
+    @MethodSource("ranks")
     @DisplayName("당첨 번호를 입력하면 당첨 여부를 알 수 있다.")
-    void getResult_myWinnings(String winningNumbers, int bonusNumber, Rank rank) {
-        List<LottoTicket> manualLottoTickets
-                = Collections.singletonList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    void getResult_myRanks(LottoTicket winningNumbers, int bonusNumber, Rank rank) {
+        LottoTickets manualLottoTickets
+                = LottoTickets.manualIssued(Arrays.asList(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
-        LottoResult lottoResult = new LottoResult(manualLottoTickets, winningNumbers, bonusNumber);
-        assertThat(lottoResult.getMyWinnings().get(0)).isEqualTo(rank);
+        LottoResult lottoResult = new LottoResult(manualLottoTickets, Winning.of(winningNumbers, LottoNumber.of(bonusNumber)));
+        assertThat(lottoResult.getMyRanks().get(0)).isEqualTo(rank);
     }
 
-    private static Stream<Arguments> winnings() {
+    private static Stream<Arguments> ranks() {
         return Stream.of(
-                arguments("1, 2, 3, 23, 24, 25", 45, Rank.FIFTH),
-                arguments("1, 2, 3, 4, 25, 26", 45, Rank.FOURTH),
-                arguments("1, 2, 3, 4, 5, 26", 45, Rank.THIRD),
-                arguments("1, 2, 3, 4, 5, 26", 6, Rank.SECOND),
-                arguments("1, 2, 3, 4, 5, 6", 45, Rank.FIRST)
+                arguments(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 23, 24, 25)), 45, Rank.FIFTH),
+                arguments(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 25, 26)), 45, Rank.FOURTH),
+                arguments(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 26)), 45, Rank.THIRD),
+                arguments(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 26)), 6, Rank.SECOND),
+                arguments(LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)), 45, Rank.FIRST)
         );
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("lottoRates")
     @DisplayName("로또 수익률을 구할 수 있다.")
-    void lotto_winning_rate() {
-        int myMoney = 2000;
-        LottoTicket lottoTicketByWinningFirst = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicketByWinningThird = LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7));
+    void lotto_winning_rate(LottoTickets lottoTickets, LottoMoney totalPrize) {
+        LottoMoney lottoMoney = new LottoMoney(2000);
+        LottoResult lottoResult = new LottoResult(lottoTickets, winning);
 
-        LottoResult lottoResult = new LottoResult(Arrays.asList(
-                lottoTicketByWinningFirst,
-                lottoTicketByWinningThird
-        ), "1, 2, 3, 4, 5, 6", 8);
+        BigDecimal expectedResult = lottoMoney.divideBy(totalPrize);
+        assertThat(lottoResult.getMyWinningRate(lottoMoney)).isEqualTo(expectedResult);
+    }
 
-        int totalPrize = Rank.FIRST.getPrize() + Rank.THIRD.getPrize();
-        double expectedResult = LottoResult.getWinningRate(totalPrize, myMoney);
-        assertThat(lottoResult.getMyWinningRate(myMoney)).isEqualTo(expectedResult);
+    private static Stream<Arguments> lottoRates() {
+        return Stream.of(
+                arguments(
+                        LottoTickets.manualIssued(Arrays.asList(
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 7))
+                        )),
+                        new LottoMoney(Rank.FIRST.getPrize() + Rank.THIRD.getPrize())),
+                arguments(
+                        LottoTickets.manualIssued(Arrays.asList(
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.manualIssued(Arrays.asList(1, 2, 3, 4, 5, 6))
+                        )),
+                        new LottoMoney(Rank.FIRST.getPrize() + Rank.FIRST.getPrize() + Rank.FIRST.getPrize()))
+        );
     }
 
     @Test
     @DisplayName("당첨율 구하기")
     void winning_rate() {
-        assertThat(LottoResult.getWinningRate(5000, 14000)).isEqualTo(0.35);
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney totalPrize = new LottoMoney(5000);
+
+        assertThat(lottoMoney.divideBy(totalPrize)).isEqualTo(new BigDecimal("0.36"));
     }
 
-    private static class LottoResultForBonus extends LottoResult {
-        public LottoResultForBonus(int bonusNumber) {
-            super(autoLottoTickets, winningNumbers, bonusNumber);
-        }
+    @ParameterizedTest
+    @MethodSource("nullCases")
+    @DisplayName("로또 티켓이 없는 경우 LottoTickets를 생성할 수 없다.")
+    void exception_lottoMoney_is_null(LottoTickets lottoTickets, Winning winning, String expected) {
+        assertThatThrownBy(() -> new LottoResult(lottoTickets, winning))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage(expected + " must not be null");
     }
 
-    @ParameterizedTest(name = "보너스 볼 = {0}")
-    @ValueSource(ints = {-1, 0, 46})
-    @DisplayName("보너스 볼은 로또 번호의 유효성 검증 로직에 부합하지 않는 경우 IllegalArgumentException throw")
-    void validate_bonus_ball(int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResultForBonus(bonusNumber));
+    private static Stream<Arguments> nullCases() {
+        return Stream.of(
+                arguments(null, winning, "lottoTickets"),
+                arguments(LottoTickets.autoIssued(1), null, "winning")
+        );
     }
-
-    @ParameterizedTest(name = "보너스 볼 = {0}")
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    @DisplayName("보너스 볼은 당첨 번호와 중복될 수 없다.")
-    void duplicate_bonus_ball(int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoResultForBonus(bonusNumber),
-                "보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-    }
-
 }

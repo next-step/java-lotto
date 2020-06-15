@@ -3,6 +3,7 @@ package dev.dahye.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
+    NO_RANK(0, 0, false),
     FIFTH(3, 5000, false),
     FOURTH(4, 50000, false),
     THIRD(5, 1500000, false),
@@ -10,10 +11,10 @@ public enum Rank {
     FIRST(6, 2000000000, false);
 
     private int countOfMatch;
-    private int prize;
+    private long prize;
     private boolean isMatchBonusNumber;
 
-    Rank(int countOfMatch, int prize, boolean isMatchBonusNumber) {
+    Rank(int countOfMatch, long prize, boolean isMatchBonusNumber) {
         this.countOfMatch = countOfMatch;
         this.prize = prize;
         this.isMatchBonusNumber = isMatchBonusNumber;
@@ -23,7 +24,7 @@ public enum Rank {
         return countOfMatch;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 
@@ -35,15 +36,10 @@ public enum Rank {
         return (this.countOfMatch == countOfMatch && this.isMatchBonusNumber == isMatchBonusNumber);
     }
 
-    public static boolean canRanking(int countOfMatch, boolean isMatchBonusNumber) {
-        return Arrays.stream(Rank.values())
-                .anyMatch(winning -> winning.same(countOfMatch, isMatchBonusNumber));
-    }
-
     public static Rank valueOf(int countOfMatch, boolean isMatchBonusNumber) {
         return Arrays.stream(Rank.values())
-                .filter(winning -> winning.same(countOfMatch, isMatchBonusNumber))
+                .filter(rank -> rank.same(countOfMatch, isMatchBonusNumber))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(NO_RANK);
     }
 }
