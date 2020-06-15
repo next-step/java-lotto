@@ -14,12 +14,12 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers create() {
+    public static LottoNumbers createAuto() {
         List<LottoNumber> lottoLottoNumbers = NUMBER_GENERATOR.createLottoNumbers();
         return new LottoNumbers(lottoLottoNumbers);
     }
 
-    public static LottoNumbers create(List<LottoNumber> lottoLottoNumbers) {
+    public static LottoNumbers createManual(List<LottoNumber> lottoLottoNumbers) {
         return new LottoNumbers(lottoLottoNumbers);
     }
 
@@ -29,7 +29,7 @@ public class LottoNumbers {
 
     public int findMatchCount(LottoNumbers winningNumbers) {
         return (int) winningNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber ->  lottoNumbers.contains(lottoNumber))
+                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
                 .count();
     }
 
