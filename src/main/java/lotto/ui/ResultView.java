@@ -11,12 +11,11 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoTicket(int quantity, LottoTicket lottoTicket) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public static void printLottoTicket(int quantity, int manualCount, LottoTicket lottoTicket) {
+        System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " + (quantity - manualCount) + "개를 구매했습니다.");
         IntStream.range(0, quantity)
                 .mapToObj(x -> lottoTicket.tellLottoNumbers(x))
                 .forEach(System.out::println);
-        System.out.println();
     }
 
     public static void printWinningResult(WinningResult winningResult) {
