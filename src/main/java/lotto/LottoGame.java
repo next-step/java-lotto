@@ -3,6 +3,7 @@ package lotto;
 import lotto.model.Lotto;
 import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
+import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import utils.IntegerUtils;
@@ -37,7 +38,7 @@ public class LottoGame {
 		setWinningNumbers();
 
 		for (int i = 0; i < numberOfTickets; i++) {
-			Lotto.Rank rank = tickets.get(i).announceRank(winningNumbers);
+			Rank rank = tickets.get(i).announceRank(winningNumbers);
 			lottoStatistics.gatherResult(rank);
 			prize += lottoStatistics.getPrizeMoney(rank);
 		}

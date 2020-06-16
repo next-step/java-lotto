@@ -7,7 +7,7 @@ public class LottoStatistics {
         return purchase;
     }
 
-    public int getPrizeMoney(Lotto.Rank rank) {
+    public int getPrizeMoney(Rank rank) {
         if (rank == null) {
             return 0;
         }
@@ -19,7 +19,7 @@ public class LottoStatistics {
         return Math.floor(prize / budget * 100) / 100.0;
     }
 
-    public void gatherResult(Lotto.Rank rank) {
+    public void gatherResult(Rank rank) {
         if (rank != null) {
             rank.plusCount();
         }

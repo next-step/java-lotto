@@ -6,7 +6,7 @@ import java.util.Collections;
 public class LottoTicket {
     private int[] myNumbers;
     private int rank = 0;
-    private Lotto.Rank rankType;
+    private Rank rankType;
 
     private Lotto lotto = new Lotto();
 
@@ -33,7 +33,7 @@ public class LottoTicket {
         return numbers;
     }
 
-    public Lotto.Rank announceRank(int[] winningNumbers) {
+    public Rank announceRank(int[] winningNumbers) {
         for (int i : winningNumbers) {
             isWinner(i);
         }
@@ -49,7 +49,7 @@ public class LottoTicket {
     }
 
     private void setRank(int rank) {
-        for (Lotto.Rank rank1 : Lotto.Rank.values()) {
+        for (Rank rank1 : Rank.values()) {
             if (rank1.getMatchNumber() == rank) {
                 rankType = rank1;
                 break;

@@ -2,6 +2,7 @@ package lottoTest;
 
 import lotto.model.Lotto;
 import lotto.model.LottoStatistics;
+import lotto.model.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -23,7 +24,7 @@ public class LottoStatisticsTest {
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
     @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000"})
-    public void takePrizeMoney(Lotto.Rank rank, int prize) {
+    public void takePrizeMoney(Rank rank, int prize) {
         int money = lottoStatistics.getPrizeMoney(rank);
         assertThat(money).isEqualTo(prize);
     }
@@ -31,7 +32,7 @@ public class LottoStatisticsTest {
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
     @NullSource
-    public void takePrizeMoneyNulll(Lotto.Rank rank) {
+    public void takePrizeMoneyNulll(Rank rank) {
         int money = lottoStatistics.getPrizeMoney(rank);
         assertThat(money).isEqualTo(0);
     }
