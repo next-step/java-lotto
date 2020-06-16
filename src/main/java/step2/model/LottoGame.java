@@ -13,15 +13,15 @@ public class LottoGame {
 
     public LottoGame(LottoMoney lottoMoney) {
         this.lottoMoney = lottoMoney;
-        createRandomLotto();
+        this.lottos = createRandomLotto();
     }
 
-    private void createRandomLotto() {
+    private Lottos createRandomLotto() {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoMoney.getLottoCount(); i++) {
             lottoList.add(LottoMakeNumbers.getRandomNumber());
         }
-        lottos = Lottos.of(lottoList);
+        return Lottos.of(lottoList);
     }
 
     public int getLottoCount() {
