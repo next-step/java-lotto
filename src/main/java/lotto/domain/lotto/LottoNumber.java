@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
-    private static final List<LottoNumber> lottoNumbers =
+    private static final List<LottoNumber> LOTTO_NUMBERS =
             Collections.unmodifiableList(IntStream.rangeClosed(START_NUMBER, END_NUMBER)
                     .mapToObj(number -> new LottoNumber(number))
                     .collect(Collectors.toList()));
@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber create(int lottoNumber) {
         checkInRange(lottoNumber);
-        return lottoNumbers.get(lottoNumber - 1);
+        return LOTTO_NUMBERS.get(lottoNumber - 1);
     }
 
     private static void checkInRange(int lottoNumber) {
