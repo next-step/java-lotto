@@ -38,22 +38,13 @@ public class LottoTicket {
             isWinner(i);
         }
 
-        setRank(rank);
+        rankType = Rank.getValue(rank);
         return rankType;
     }
     
     private void isWinner(int winningNumber) {
         if (IntegerUtils.arrToList(myNumbers).contains(winningNumber)) {
             rank++;
-        }
-    }
-
-    private void setRank(int rank) {
-        for (Rank rank1 : Rank.values()) {
-            if (rank1.getMatchNumber() == rank) {
-                rankType = rank1;
-                break;
-            }
         }
     }
 }
