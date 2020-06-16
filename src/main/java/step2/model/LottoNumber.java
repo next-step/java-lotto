@@ -30,6 +30,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return LottoNumber - lottoNumber.LottoNumber;
+        return Integer.compare(this.LottoNumber, lottoNumber.LottoNumber);
     }
 }
