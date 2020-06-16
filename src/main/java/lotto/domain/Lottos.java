@@ -12,6 +12,7 @@ public class Lottos {
 
     private List<Lotto> lottos;
     private Map<Integer, Integer> resultScore;
+    private float totalRevenue;
 
     public Lottos(int inputTimes, LottoType lottoType) {
 
@@ -58,5 +59,29 @@ public class Lottos {
         return lottos.stream()
                 .map(lotto -> lotto.getSelectedLottoNumbers())
                 .collect(Collectors.toList());
+    }
+
+    public float getTotalRevenue(){
+        float totalPrize = 0;
+        for (Map.Entry<Integer, Integer> gameResult : resultScore.entrySet()) {
+            String money = Prize.findByMoney(gameResult.getKey()).getMoney();
+            int prize = Integer.parseInt(money);
+            int count = gameResult.getValue();
+            totalPrize += (prize * count);
+        }
+
+        float size = lottos.size();
+        float totalBuy = size * 1000;
+        this.totalRevenue = totalPrize / totalBuy;
+        return totalRevenue;
+
+    }
+
+    public String getRevenueMention(){
+
+        if(totalRevenue < 1){
+            return "손해";
+        }
+        return "이득";
     }
 }

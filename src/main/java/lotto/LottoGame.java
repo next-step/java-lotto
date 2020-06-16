@@ -14,22 +14,19 @@ public class LottoGame {
     public static void main(String[] args) {
         Input input = new Input(new Scanner(System.in));
         Output output = new Output();
-        InputUtils inputUtils = new InputUtils();
 
         input.moneyInput();
-        int money = input.getMoney();
-        inputUtils.validMoneyGreaterZero(money);
-        int buyCount = inputUtils.parserMoney(money);
-
+        int buyCount = InputUtils.parserMoney(input.getMoney());
         output.printLottoCount(buyCount);
-        Lottos lottos = new Lottos(buyCount, new LottoShuffle());
-        List<String> lottoNumbers = lottos.getLottoNumbers();
 
-        output.printBuyLottoNumber(lottoNumbers);
+        Lottos lottos = new Lottos(buyCount, new LottoShuffle());
+        output.printBuyLottoNumber(lottos.getLottoNumbers());
+
         input.inputLastLottoNumber();
-        String lastLottoNumberString = input.getLastLottoNumber();
-        List lastLottoNumbers = inputUtils.stringToArray(lastLottoNumberString);
+        List lastLottoNumbers = InputUtils.stringToArray(input.getLastLottoNumber());
         output.printResultStatic(lottos.makeResultStatics(lastLottoNumbers));
+
+        output.printTotalRevenue(lottos.getTotalRevenue(),lottos.getRevenueMention());
 
     }
 }

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.utils.InputUtils;
+
 import java.util.Scanner;
 
 public class Input {
@@ -14,7 +16,9 @@ public class Input {
 
     public void moneyInput(){
         System.out.println("구입금액을 입력해 주세요.");
-        this.money = scanner.nextInt();
+        int inputMoney = scanner.nextInt();
+        InputUtils.validMoneyGreaterZero(inputMoney);
+        this.money = inputMoney;
     }
 
     public void inputLastLottoNumber(){
