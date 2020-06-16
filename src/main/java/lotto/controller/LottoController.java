@@ -23,6 +23,6 @@ public class LottoController {
 
         WinningNumbers winningNumbers = WinningNumbers.of(Lotto.of(inputView.getWinningNumbers()), LottoNumber.of(inputView.getBonusNumber()));
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
-        resultView.printStatistics(lottoResult, inputView.getPurchasePrice());
+        resultView.printStatistics(lottoResult, money);
     }
 }
