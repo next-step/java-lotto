@@ -12,6 +12,8 @@ public enum Rank {
     private int rank;
     private int match;
     private int reward;
+    private int count = 0;
+
 
     Rank(int rank, int match, int reward) {
         this.rank = rank;
@@ -25,4 +27,16 @@ public enum Rank {
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     };
+
+    public void count() {
+        this.count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getTotal() {
+        return reward * count;
+    }
 }
