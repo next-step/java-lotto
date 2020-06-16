@@ -4,18 +4,13 @@ import java.util.List;
 
 public class LottoSeller {
     private static final int MIN_LOTTO_PRICE = 1000;
-    private LottoMachine machine = new LottoMachine();
+    private static final LottoNumbers LOTTO_NUMBERS = new LottoNumbers();
 
     public List<LottoTicket> sellLotto(int money) {
         validateMoney(money);
         int lottoCount = money / MIN_LOTTO_PRICE;
 
-
-        return machine.extractLottoTicketsByCount(lottoCount);
-    }
-
-    public List<Integer> requestLottoChecking(String stringWinningNumbers, List<LottoTicket> lottoTicketList) {
-        return machine.checkLottoWinning(LottoTicket.newLottoTicketFromString(stringWinningNumbers), lottoTicketList);
+        return LOTTO_NUMBERS.extractLottoTicketsByCount(lottoCount);
     }
 
     private void validateMoney(int money) {

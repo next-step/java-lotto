@@ -16,9 +16,12 @@ public class Main {
         ResultView resultView = new ResultView(lottoTicketList);
 
         InputView winningNumbersInputView = InputView.addQuestion("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> winningCountList = seller.requestLottoChecking(winningNumbersInputView.inputWinnerNumbers(), lottoTicketList);
+        String stringWinningNumbers = winningNumbersInputView.inputWinnerNumbers();
 
-        resultView.printResult(new Statistics(winningCountList));
+        LottoTicket winningNumbers = LottoTicket.newLottoTicketFromString(stringWinningNumbers);
+        Statistics statistics = new Statistics(winningNumbers.checkLottoWinning(lottoTicketList));
+
+        resultView.printResult(statistics);
 
     }
 }
