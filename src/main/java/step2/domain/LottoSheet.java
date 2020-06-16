@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoSheet {
 
@@ -34,7 +33,7 @@ public class LottoSheet {
     }
 
     public int getLottoCount() {
-        return CollectionUtils.size(lottos);
+        return lottos.size();
     }
 
     public Map<Prize, Integer> getPrizeResult(WinningLotto winningLotto) {
