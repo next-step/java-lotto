@@ -12,6 +12,10 @@ public final class Number {
         return new Number(getRandom());
     }
 
+    public static Number mock(int number) {
+        return new Number(number);
+    }
+
     public Number(int number) {
         this.number = number;
     }
@@ -35,5 +39,12 @@ public final class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "Number{" +
+                "number=" + number +
+                '}';
     }
 }
