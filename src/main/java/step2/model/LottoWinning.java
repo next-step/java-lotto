@@ -19,6 +19,4 @@ public class LottoWinning {
         boolean matchBonus = lotto.has(bonusNumber);
         return LottoRank.valueOf(same, matchBonus);
     }
-
-
 }
