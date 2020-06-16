@@ -20,15 +20,19 @@ public class ResultView {
 
     public static void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n————");
-
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.MISS)
-                .map(rank -> {
-                    String matchStr = rank == Rank.SECOND ? "개 일치, 보너스 볼 일치(" : "개 일치 (";
-                    return rank.getCountOfMatch() + matchStr + rank.getWinningMoney() + "원) - " + winningResult.tellWinningCount(rank) + "개";
-                })
+                .map(rank -> getStatistics(winningResult, rank))
                 .sorted()
                 .forEach(System.out::println);
+    }
+
+    private static String getStatistics(WinningResult winningResult, Rank rank) {
+        String format = "%d개 일치 (%d원)- %d개";
+        if (rank == Rank.SECOND) {
+            format = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+        }
+        return String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), winningResult.tellWinningCount(rank));
     }
 
     public static void printWinningRate(double winningRate) {
