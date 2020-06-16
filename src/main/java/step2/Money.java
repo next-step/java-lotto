@@ -10,6 +10,14 @@ public class Money {
         return new Money(money);
     }
 
+    public int divide(int lottoPrice) {
+        return money / lottoPrice;
+    }
+
+    public double getYield(int sum) {
+        return sum / money;
+    }
+
     private Money(int money) {
         check(money);
         this.money = money;
@@ -45,7 +53,5 @@ public class Money {
         return Objects.hash(money);
     }
 
-    public int divide(int lottoPrice) {
-        return money / lottoPrice;
-    }
+
 }

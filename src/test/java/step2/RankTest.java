@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class RankTest {
 
+
     @Test
     void create() {
         Rank first = Rank.valueOf("FIRST");
@@ -27,9 +28,9 @@ public class RankTest {
 
     @Test
     void total_reward() {
-        Rank first = Rank.FIRST;
-        first.count();
-        int total = first.getTotal();
-        assertThat(total).isEqualTo(2000000000);
+        Rank second = Rank.SECOND;
+        second.count();
+        int total = second.getTotal();
+        assertThat(total).isEqualTo(1500000);
     }
 }
