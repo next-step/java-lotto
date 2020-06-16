@@ -14,11 +14,11 @@ public class LottoTicket {
         this(quantity, Collections.emptyList());
     }
 
-    private LottoTicket(int quantity, List<String> enteredManualNumber) {
+    private LottoTicket(int quantity, List<String> enteredManualNumbers) {
         checkQuantity(quantity);
 
-        int autoSize = quantity - enteredManualNumber.size();
-        List<LottoNumbers> manualTicket = generateManualNumbers(enteredManualNumber);
+        int autoSize = quantity - enteredManualNumbers.size();
+        List<LottoNumbers> manualTicket = generateManualNumbers(enteredManualNumbers);
         List<LottoNumbers> autoTicket = generateAutoTicket(autoSize);
 
         this.lottoTicket = Stream.concat(manualTicket.stream(), autoTicket.stream())
@@ -29,8 +29,8 @@ public class LottoTicket {
         return new LottoTicket(quantity);
     }
 
-    public static LottoTicket create(int quantity, List<String> enteredManualNumber) {
-        return new LottoTicket(quantity, enteredManualNumber);
+    public static LottoTicket create(int quantity, List<String> enteredManualNumbers) {
+        return new LottoTicket(quantity, enteredManualNumbers);
     }
 
     public List<LottoNumbers> getLottoTicket() {
@@ -47,9 +47,9 @@ public class LottoTicket {
         }
     }
 
-    private List<LottoNumbers> generateManualNumbers(List<String> enteredManualNumber) {
+    private List<LottoNumbers> generateManualNumbers(List<String> enteredManualNumbers) {
         List<LottoNumbers> manualTicket = new ArrayList<>();
-        for (String enteredNumber : enteredManualNumber) {
+        for (String enteredNumber : enteredManualNumbers) {
             List<LottoNumber> manualNumber = Arrays.stream(enteredNumber.split(SEPARATOR))
                     .map(number -> LottoNumber.create(Integer.parseInt(number.trim())))
                     .collect(Collectors.toList());

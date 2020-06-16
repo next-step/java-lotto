@@ -24,7 +24,7 @@ public class InputView {
         return manualCount;
     }
 
-    public static List<String> enterManualNumber(int manualCount) {
+    public static List<String> enterManualNumbers(int manualCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return Stream.generate(() -> SCANNER.nextLine())
                 .limit(manualCount)
