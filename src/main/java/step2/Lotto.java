@@ -1,6 +1,5 @@
 package step2;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,11 +9,20 @@ public class Lotto {
     private final Set<Number> lotto;
 
     public Lotto(Set<Number> lotto) {
-        this.lotto = lotto;
+        checkSize(lotto);
+        this.lotto = new HashSet<>(lotto);
     }
 
     public static Lotto buy() {
         return new Lotto(getRandom());
+    }
+
+    public static Lotto win(Set<Number> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto mock(Set<Number> numbers) {
+        return new Lotto(numbers);
     }
 
     public Set<Number> getLotto() {
@@ -29,7 +37,23 @@ public class Lotto {
         return numbers;
     }
 
+    private void checkSize(Set<Number> lotto) {
+        if(!isLottoSize(lotto)) {
+            throw new IllegalArgumentException(Error.NOT_REQUIRED_SIZE);
+        }
+    }
+
     private static boolean isLottoSize(Set<Number> numbers) {
         return numbers.size() == SIZE_OF_LOTTO;
+    }
+
+    public int compare(Lotto win) {
+        return (int) lotto.stream()
+                .filter(number -> win.contains(number))
+                .count();
+    }
+
+    private boolean contains(Number number) {
+        return lotto.contains(number);
     }
 }

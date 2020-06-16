@@ -12,11 +12,15 @@ public final class Number {
         return new Number(getRandom());
     }
 
+    public static Number win(int number) {
+        return new Number(number);
+    }
+
     public static Number mock(int number) {
         return new Number(number);
     }
 
-    public Number(int number) {
+    private Number(int number) {
         this.number = number;
     }
 
