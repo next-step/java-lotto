@@ -21,4 +21,12 @@ public class MoneyTest {
         assertThatThrownBy(() -> Money.buy(-1))
                 .isInstanceOf(IllegalArgumentException.class) ;
     }
+
+    @Test
+    void divide() {
+        Money money = Money.buy(14000);
+        int divide = money.divide(1000);
+        assertThat(divide).isEqualTo(14);
+
+    }
 }

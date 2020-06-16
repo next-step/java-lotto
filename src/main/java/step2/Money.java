@@ -44,4 +44,8 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
+    public int divide(int lottoPrice) {
+        return money / lottoPrice;
+    }
 }
