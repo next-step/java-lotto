@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import java.util.stream.Stream;
 
 public class Lotto {
-    public final static int SIZE = 6;
+    public static final int SIZE = 6;
     public static final long PRICE = 1000L;
 
     private final SortedSet<LottoNumber> lottoNumbers;
