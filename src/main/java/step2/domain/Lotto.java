@@ -3,9 +3,6 @@ package step2.domain;
 import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
 import static step2.domain.LottoGenerator.LOTTO_LAST_NUMBER;
 import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
-import static step2.view.ErrorMessages.DUPLICATED_LOTTO_NUMBER;
-import static step2.view.ErrorMessages.INVALID_LOTTO_NUMBER_RANGE;
-import static step2.view.ErrorMessages.INVALID_NUMBERS_COUNT;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +10,10 @@ import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class Lotto {
+
+    private static final String INVALID_NUMBERS_COUNT = "로또번호는 6자리 숫자로 이루어져야 합니다. (ex, 1,2,3,4,5,6)";
+    private static final String DUPLICATED_LOTTO_NUMBER = "로또 번호는 중복되지 않아야 합니다.";
+    private static final String INVALID_LOTTO_NUMBER_RANGE = "로또 번호는 1~45 사이의 숫자로 이루어져야 합니다.";
 
     private List<Integer> lottoNumbers;
 

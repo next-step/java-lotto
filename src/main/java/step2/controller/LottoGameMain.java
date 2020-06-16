@@ -28,7 +28,7 @@ public class LottoGameMain {
 
             lottoGame.run();
 
-            resultView.printPriceResult(price, manualLottoCount);
+            resultView.printPriceResult(userPrice, manualLottoCount);
             resultView.printLottos(lottoGame.getLottoSheet());
 
             List<Integer> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();

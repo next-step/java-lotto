@@ -1,6 +1,5 @@
 package step2.view;
 
-import static step2.Constants.LOTTO_PRICE;
 import static step2.view.Messages.RESPONSE_PRICE_TEMPLATE;
 import static step2.view.Messages.WINNING_STATISTIC_RESULT_LOSS_CASE;
 import static step2.view.Messages.WINNING_STATISTIC_TEMPLATE;
@@ -9,11 +8,12 @@ import step2.domain.LottoGameResultDto;
 import step2.domain.LottoSheet;
 import step2.domain.Prize;
 import step2.domain.UserLotto;
+import step2.domain.UserPrice;
 
 public class ResultView {
 
-    public void printPriceResult(int price, int manualLottoCount) {
-        System.out.printf(RESPONSE_PRICE_TEMPLATE, manualLottoCount, price / LOTTO_PRICE - manualLottoCount);
+    public void printPriceResult(UserPrice userPrice, int manualLottoCount) {
+        System.out.printf(RESPONSE_PRICE_TEMPLATE, manualLottoCount, userPrice.getLottoCount(manualLottoCount));
     }
 
     public void printLottos(LottoSheet lottoSheet) {

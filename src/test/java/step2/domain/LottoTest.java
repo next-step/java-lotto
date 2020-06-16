@@ -1,8 +1,6 @@
 package step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.view.ErrorMessages.DUPLICATED_LOTTO_NUMBER;
-import static step2.view.ErrorMessages.INVALID_LOTTO_NUMBER_RANGE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,16 +13,16 @@ class LottoTest {
 
     private static Stream<Arguments> validLottoNumberTestCase() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 1, 3, 4, 5, 6), DUPLICATED_LOTTO_NUMBER),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 99), INVALID_LOTTO_NUMBER_RANGE),
-            Arguments.of(Arrays.asList(0, 2, 3, 4, 5, 6), INVALID_LOTTO_NUMBER_RANGE)
+            Arguments.of(Arrays.asList(1, 1, 3, 4, 5, 6)),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 99)),
+            Arguments.of(Arrays.asList(0, 2, 3, 4, 5, 6))
         );
     }
 
     @ParameterizedTest
     @MethodSource("validLottoNumberTestCase")
-    void validLottoNumberTest(List<Integer> lottoNumber, String errorMessage) {
+    void validLottoNumberTest(List<Integer> lottoNumber) {
         //when&then
-        assertThatThrownBy(() -> new Lotto(lottoNumber)).hasMessage(errorMessage);
+        assertThatThrownBy(() -> new Lotto(lottoNumber)).isInstanceOf(IllegalArgumentException.class);
     }
 }
