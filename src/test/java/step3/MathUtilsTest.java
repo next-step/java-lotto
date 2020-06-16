@@ -3,7 +3,7 @@ package step3;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.util.MathUtils;
+import step3.util.MathUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
