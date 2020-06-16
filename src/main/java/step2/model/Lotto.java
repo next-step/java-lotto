@@ -13,7 +13,7 @@ public class Lotto {
 
     private final SortedSet<LottoNumber> lottoNumbers;
 
-    public Lotto(SortedSet<LottoNumber> lottoNumbers) {
+    private Lotto(SortedSet<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
