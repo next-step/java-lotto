@@ -14,19 +14,12 @@ public class LottoTotalCalculator {
         this.lottoWinning = lottoWinning;
         this.lottos = lottos;
         this.lottoPrizes = LottoRank.stream()
-                .map(rank -> LottoPrize.of(rank, getWinningCount(rank)))
+                .map(rank -> LottoPrize.of(rank, lottos.getWinningCount(rank, lottoWinning)))
                 .collect(toList());
     }
 
     public static LottoTotalCalculator of (Lottos lottos, LottoWinning winningLotto) {
         return new LottoTotalCalculator(lottos, winningLotto);
-    }
-
-    private long getWinningCount (LottoRank rank) {
-        return lottos.stream()
-                .map(lottoWinning::getRankOfLotto)
-                .filter(rank::equals)
-                .count();
     }
 
     public Stream<LottoPrize> stream() {

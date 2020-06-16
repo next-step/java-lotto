@@ -23,4 +23,11 @@ public class Lottos {
         return lottos.stream();
     }
 
+    public long getWinningCount (LottoRank rank, LottoWinning lottoWinning) {
+        return lottos.stream()
+                .map(lottoWinning::getRankOfLotto)
+                .filter(rank::equals)
+                .count();
+    }
+
 }
