@@ -1,31 +1,22 @@
 package lotto.domain;
 
-import java.util.Set;
-
 public class WinningNumbers {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumbers(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-//        validateBonusNumber(bonusNumber);
+    private WinningNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
         validateDuplicateNumber(winningNumbers, bonusNumber);
-        this.winningNumbers = new Lotto(winningNumbers);
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicateNumber(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    private void validateDuplicateNumber(Lotto winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스볼은 당첨번호와 중복될 수 없습니다.");
         }
     }
 
-//    private void validateBonusNumber(LottoNumber bonusNumber) {
-//        if (bonusNumber < Lotto.MIN_VALUE || bonusNumber > Lotto.MAX_VALUE) {
-//            throw new IllegalArgumentException("보너스볼은 1 ~ 45 사이의 숫자로 구성 되어야 합니다.");
-//        }
-//    }
-
-    public static WinningNumbers of(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static WinningNumbers of(Lotto winningNumbers, LottoNumber bonusNumber) {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 

@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
@@ -31,6 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return this.number == other.getNumber();
         }
         return false;
+    }
+
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
     }
 
     @Override

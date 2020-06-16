@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
@@ -24,6 +25,13 @@ public class Lotto {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
+    }
+
+    public static Lotto of(Set<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+        return new Lotto(lottoNumbers);
     }
 
     public Set<LottoNumber> getNumbers() {
