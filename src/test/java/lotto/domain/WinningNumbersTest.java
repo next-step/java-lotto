@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,18 +19,18 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningNumbersTest {
 
-    Set<LottoNumber> winningNumbers;
+    Lotto winningNumbers;
 
     @BeforeEach
     void setUp(){
-        winningNumbers = StringParser.getParseNumbers("1, 2, 3, 4, 5, 6");
+        winningNumbers = Lotto.of(StringParser.getParseNumbers("1, 2, 3, 4, 5, 6"));
     }
 
     @DisplayName("당첨 번호 수가 안 맞는 경우 예외발생")
     @ParameterizedTest
     @MethodSource("listProvider")
-    void numbersSizeTest(Set<LottoNumber> numbers){
-        LottoNumber bonusNumber = new LottoNumber(9);
+    void numbersSizeTest(Lotto numbers){
+        LottoNumber bonusNumber = LottoNumber.of(9);
         assertThatThrownBy(() -> WinningNumbers.of(numbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -50,7 +49,7 @@ class WinningNumbersTest {
     void bonusNumberBoundaryTest(int number){
 
         // then
-        assertThatThrownBy(() -> WinningNumbers.of(winningNumbers, new LottoNumber(number)))
+        assertThatThrownBy(() -> WinningNumbers.of(winningNumbers, LottoNumber.of(number)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -59,7 +58,7 @@ class WinningNumbersTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void containsTest(int number) {
         // given
-        LottoNumber bonusNumber = new LottoNumber(number);
+        LottoNumber bonusNumber = LottoNumber.of(number);
 
         // then
         assertThatThrownBy(() -> WinningNumbers.of(winningNumbers, bonusNumber))
@@ -71,8 +70,8 @@ class WinningNumbersTest {
     @CsvSource(value = {"1,true", "2,true", "3,true", "7,false", "8,false"})
     void winningNumbersHasNumberTest(int number, boolean expected){
         // given
-        LottoNumber lottoNumber = new LottoNumber(number);
-        LottoNumber bonusNumber = new LottoNumber(9);
+        LottoNumber lottoNumber = LottoNumber.of(number);
+        LottoNumber bonusNumber = LottoNumber.of(9);
         WinningNumbers winningNumbers = WinningNumbers.of(this.winningNumbers, bonusNumber);
 
         // when

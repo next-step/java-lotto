@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.StringParser;
 import lotto.view.PurchaseLottoInput;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -29,6 +30,19 @@ public class LottoFactoryTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(
                 () -> LottoFactory.createLottos(new PurchaseLottoInput(price, Collections.emptyList()))
+        );
+    }
+
+    @DisplayName("수동 구매 개수가 (구매 금액 / 로또 가격) 보다 클 경우 예외가 발생한다")
+    @Test
+    void manualCountExceedPurchaseCountExceptionTest() {
+        // given
+        int price = 3000;
+        List<String> numbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8", "5,6,7,8,9,10");
+
+        // then
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> LottoFactory.createLottos(new PurchaseLottoInput(price, numbers))
         );
     }
 

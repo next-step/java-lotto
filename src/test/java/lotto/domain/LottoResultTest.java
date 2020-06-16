@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -19,11 +22,12 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp(){
-        Lotto lotto1 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 6"));
-        Lotto lotto2 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 5, 7"));
+        Lotto lotto1 = Lotto.of(StringParser.getParseNumbers("1, 2, 3, 4, 5, 6"));
+        Lotto lotto2 = Lotto.of(StringParser.getParseNumbers("1, 2, 3, 4, 5, 7"));
 
-        LottoNumber bonusNumber = new LottoNumber(11);
-        winningNumbers = WinningNumbers.of(StringParser.getParseNumbers("1, 2, 3, 7, 9, 10"), bonusNumber);
+        Lotto winningLotto = Lotto.of(StringParser.getParseNumbers("1, 2, 3, 7, 9, 10"));
+        LottoNumber bonusNumber = LottoNumber.of(11);
+        winningNumbers = WinningNumbers.of(winningLotto, bonusNumber);
 
         lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
     }
@@ -32,13 +36,14 @@ class LottoResultTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,4,5"})
     void whenWinningNumbersHasNot6NumbersThenException(String input){
-        // given
-        Set<LottoNumber> winningNumbers = StringParser.getParseNumbers(input);
-        LottoNumber bonusNumber = new LottoNumber(9);
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoResult.of(WinningNumbers.of(winningNumbers, bonusNumber), null)
+                () -> {
+                    Lotto winningNumbers = Lotto.of(StringParser.getParseNumbers(input));
+                    LottoNumber bonusNumber = LottoNumber.of(9);
+                    LottoResult.of(WinningNumbers.of(winningNumbers, bonusNumber), null);
+                }
         );
     }
 
@@ -59,7 +64,7 @@ class LottoResultTest {
     @Test
     void whenCreateLottoResultThenReturnStatistics(){
         // given
-        Lotto lotto3 = new Lotto(StringParser.getParseNumbers("1, 2, 3, 4, 6, 7"));
+        Lotto lotto3 = Lotto.of(StringParser.getParseNumbers("1, 2, 3, 4, 6, 7"));
         lottos.add(lotto3);
 
         // when

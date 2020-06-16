@@ -14,8 +14,8 @@ public class LottoNumberTest {
     @Test
     void equalsTest(){
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(9);
-        LottoNumber lottoNumber2 = new LottoNumber(9);
+        LottoNumber lottoNumber1 = LottoNumber.of(9);
+        LottoNumber lottoNumber2 = LottoNumber.of(9);
 
         // when
         boolean isEqual = lottoNumber1.equals(lottoNumber2);
@@ -27,9 +27,9 @@ public class LottoNumberTest {
     @Test
     void sortingTest(){
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(2);
-        LottoNumber lottoNumber2 = new LottoNumber(3);
-        LottoNumber lottoNumber3 = new LottoNumber(1);
+        LottoNumber lottoNumber1 = LottoNumber.of(2);
+        LottoNumber lottoNumber2 = LottoNumber.of(3);
+        LottoNumber lottoNumber3 = LottoNumber.of(1);
         List<LottoNumber> list = Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3);
 
         // when
@@ -42,13 +42,13 @@ public class LottoNumberTest {
     @Test
     void containsTest(){
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(2);
-        LottoNumber lottoNumber2 = new LottoNumber(3);
-        LottoNumber lottoNumber3 = new LottoNumber(1);
+        LottoNumber lottoNumber1 = LottoNumber.of(2);
+        LottoNumber lottoNumber2 = LottoNumber.of(3);
+        LottoNumber lottoNumber3 = LottoNumber.of(1);
         Set<LottoNumber> list = new HashSet<>(Arrays.asList(lottoNumber1, lottoNumber2, lottoNumber3));
 
         // when
-        boolean hasNumber = list.contains(new LottoNumber(3));
+        boolean hasNumber = list.contains(LottoNumber.of(3));
 
         assertThat(hasNumber).isTrue();
     }

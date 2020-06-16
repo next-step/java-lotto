@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class RandomNumberGeneratorStrategy implements NumberGeneratorStrategy{
 
     public static final List<LottoNumber> NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
 
     @Override
