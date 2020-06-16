@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-    public static final String SEPARATOR = ",";
-
     private List<LottoNumbers> lottoTicket;
 
     private LottoTicket(int quantity) {
@@ -48,14 +48,9 @@ public class LottoTicket {
     }
 
     private List<LottoNumbers> generateManualNumbers(List<String> enteredManualNumbers) {
-        List<LottoNumbers> manualTicket = new ArrayList<>();
-        for (String enteredNumber : enteredManualNumbers) {
-            List<LottoNumber> manualNumber = Arrays.stream(enteredNumber.split(SEPARATOR))
-                    .map(number -> LottoNumber.create(Integer.parseInt(number.trim())))
-                    .collect(Collectors.toList());
-            manualTicket.add(LottoNumbers.createManual(manualNumber));
-        }
-        return manualTicket;
+        return enteredManualNumbers.stream()
+                .map(enteredNumber -> LottoNumbers.createManual(enteredNumber))
+                .collect(Collectors.toList());
     }
 
     private List<LottoNumbers> generateAutoTicket(int quantity) {

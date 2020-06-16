@@ -17,7 +17,7 @@ public class WinningLotto {
     private LottoNumber bonusBall;
 
     private WinningLotto(String enteredWinningNumber, int bonusBall) {
-        this.winningNumbers = LottoNumbers.createManual(convertStringToNumber(enteredWinningNumber));
+        this.winningNumbers = LottoNumbers.create(convertStringToNumber(enteredWinningNumber));
         this.bonusBall = LottoNumber.create(bonusBall);
         checkBonusBallDuplicate();
     }

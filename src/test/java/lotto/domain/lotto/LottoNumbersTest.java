@@ -18,15 +18,16 @@ class LottoNumbersTest {
     @Test
     void 생성_테스트() {
         assertThatCode(() -> LottoNumbers.createAuto()).doesNotThrowAnyException();
-        assertThatCode(() -> LottoNumbers.createManual(lottoNumber)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbers.createManual("1, 2, 3, 4, 5, 6")).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbers.create(lottoNumber)).doesNotThrowAnyException();
     }
 
     @Test
     void 당첨번호와_로또번호의_일치수를_반환한다() {
-        LottoNumbers lottoNumbers = LottoNumbers.createManual(lottoNumber);
+        LottoNumbers lottoNumbers = LottoNumbers.create(lottoNumber);
         List<LottoNumber> winningLottoNumber = Arrays.asList(3, 4, 5, 11, 22, 33).stream()
                 .map(k -> LottoNumber.create(k)).collect(Collectors.toList());
-        LottoNumbers winningNumbers = LottoNumbers.createManual(winningLottoNumber);
+        LottoNumbers winningNumbers = LottoNumbers.create(winningLottoNumber);
 
         int matchCount = lottoNumbers.findMatchCount(winningNumbers);
 
@@ -36,7 +37,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1, true", "6, true", "34, false"})
     void 보너스볼_존재_확인(int bonus, boolean expected) {
-        LottoNumbers lottoNumbers = LottoNumbers.createManual(lottoNumber);
+        LottoNumbers lottoNumbers = LottoNumbers.create(lottoNumber);
         LottoNumber bonusBall = LottoNumber.create(bonus);
 
         boolean result = lottoNumbers.haveBonusBall(bonusBall);
@@ -54,7 +55,7 @@ class LottoNumbersTest {
         List<LottoNumber> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6, 7).stream()
                 .map(k -> LottoNumber.create(k)).collect(Collectors.toList());
 
-        assertThatThrownBy(() -> LottoNumbers.createManual(lottoNumber))
+        assertThatThrownBy(() -> LottoNumbers.create(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -63,7 +64,7 @@ class LottoNumbersTest {
         List<LottoNumber> lottoNumber = Arrays.asList(1, 2, 3, 4, 6, 6).stream()
                 .map(k -> LottoNumber.create(k)).collect(Collectors.toList());
 
-        assertThatThrownBy(() -> LottoNumbers.createManual(lottoNumber))
+        assertThatThrownBy(() -> LottoNumbers.create(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage("중복된 로또 번호가 존재 합니다");
     }
 }

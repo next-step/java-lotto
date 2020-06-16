@@ -1,8 +1,10 @@
 package lotto.domain.lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final String SEPARATOR = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final NumberGenerator NUMBER_GENERATOR = NumberGenerator.create();
 
@@ -19,7 +21,14 @@ public class LottoNumbers {
         return new LottoNumbers(lottoLottoNumbers);
     }
 
-    public static LottoNumbers createManual(List<LottoNumber> lottoLottoNumbers) {
+    public static LottoNumbers createManual(String enteredNumber) {
+        List<LottoNumber> manualNumber = Arrays.stream(enteredNumber.split(SEPARATOR))
+                .map(number -> LottoNumber.create(Integer.parseInt(number.trim())))
+                .collect(Collectors.toList());
+        return new LottoNumbers(manualNumber);
+    }
+
+    public static LottoNumbers create(List<LottoNumber> lottoLottoNumbers) {
         return new LottoNumbers(lottoLottoNumbers);
     }
 
