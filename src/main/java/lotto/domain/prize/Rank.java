@@ -17,7 +17,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private static final Map<Integer, Rank> rankWithoutSecond = Collections.unmodifiableMap(Stream.of(values())
+    private static final Map<Integer, Rank> RANK_WITHOUT_SECOND = Collections.unmodifiableMap(Stream.of(values())
             .filter(not(rank -> rank.equals(Rank.SECOND)))
             .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity())));
     private int countOfMatch;
@@ -32,7 +32,7 @@ public enum Rank {
         if (isSecond(countOfMatch, matchBonus)) {
             return SECOND;
         }
-        return Optional.ofNullable(rankWithoutSecond.get(countOfMatch)).orElse(MISS);
+        return Optional.ofNullable(RANK_WITHOUT_SECOND.get(countOfMatch)).orElse(MISS);
     }
 
     private static boolean isSecond(int countOfMatch, boolean matchBonus) {
@@ -49,13 +49,6 @@ public enum Rank {
 
     public int calculateTotalPrice(int winningCount) {
         return this.winningMoney * winningCount;
-    }
-
-    public String printRankStatus() {
-        if (this == SECOND) {
-            return this.countOfMatch + "개 일치, 보너스 볼 일치(" + this.winningMoney + "원)";
-        }
-        return this.countOfMatch + "개 일치 (" + this.winningMoney + "원)";
     }
 
     @Override

@@ -12,24 +12,23 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     public static final String SEPARATOR = ",";
-    private LottoTicket lottoTicket;
+
     private LottoNumbers winningNumbers;
     private LottoNumber bonusBall;
 
-    private WinningLotto(LottoTicket lottoTicket, String enteredWinningNumber, int bonusBall) {
-        this.lottoTicket = lottoTicket;
+    private WinningLotto(String enteredWinningNumber, int bonusBall) {
         this.winningNumbers = LottoNumbers.create(convertStringToNumber(enteredWinningNumber));
         this.bonusBall = LottoNumber.create(bonusBall);
         checkBonusBallDuplicate();
     }
 
-    public static WinningLotto create(LottoTicket lottoTicket, String enteredWinningNumber, int bonusBall) {
-        return new WinningLotto(lottoTicket, enteredWinningNumber, bonusBall);
+    public static WinningLotto create(String enteredWinningNumber, int bonusBall) {
+        return new WinningLotto(enteredWinningNumber, bonusBall);
     }
 
-    public WinningResult makeWinningResult() {
+    public WinningResult makeWinningResult(LottoTicket lottoTicket) {
         Map<Rank, Integer> winningCountMap = new HashMap<>();
-        for (LottoNumbers lottoNumbers : this.lottoTicket.getLottoTicket()) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
             int matchCount = lottoNumbers.findMatchCount(this.winningNumbers);
             boolean matchBonus = lottoNumbers.haveBonusBall(this.bonusBall);
 

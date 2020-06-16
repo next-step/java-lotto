@@ -5,26 +5,32 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTicket {
-
     private List<LottoNumbers> lottoTicket;
 
     private LottoTicket(int quantity) {
-        checkQuantity(quantity);
-        this.lottoTicket = addLottoNumbers(quantity);
+        this(quantity, Collections.emptyList());
     }
 
-    private LottoTicket(List<LottoNumbers> lottoNumbers) {
-        this.lottoTicket = lottoNumbers;
+    private LottoTicket(int quantity, List<String> enteredManualNumbers) {
+        checkQuantity(quantity);
+
+        int autoSize = quantity - enteredManualNumbers.size();
+        List<LottoNumbers> manualTicket = generateManualNumbers(enteredManualNumbers);
+        List<LottoNumbers> autoTicket = generateAutoTicket(autoSize);
+
+        this.lottoTicket = Stream.concat(manualTicket.stream(), autoTicket.stream())
+                .collect(Collectors.toList());
     }
 
     public static LottoTicket create(int quantity) {
         return new LottoTicket(quantity);
     }
 
-    public static LottoTicket createOne(List<LottoNumbers> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
+    public static LottoTicket create(int quantity, List<String> enteredManualNumbers) {
+        return new LottoTicket(quantity, enteredManualNumbers);
     }
 
     public List<LottoNumbers> getLottoTicket() {
@@ -41,9 +47,15 @@ public class LottoTicket {
         }
     }
 
-    private List<LottoNumbers> addLottoNumbers(int quantity) {
+    private List<LottoNumbers> generateManualNumbers(List<String> enteredManualNumbers) {
+        return enteredManualNumbers.stream()
+                .map(enteredNumber -> LottoNumbers.createManual(enteredNumber))
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> generateAutoTicket(int quantity) {
         return IntStream.range(0, quantity)
-                .mapToObj(i -> LottoNumbers.create())
+                .mapToObj(i -> LottoNumbers.createAuto())
                 .collect(Collectors.toList());
     }
 

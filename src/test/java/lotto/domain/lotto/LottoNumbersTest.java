@@ -17,7 +17,8 @@ class LottoNumbersTest {
 
     @Test
     void 생성_테스트() {
-        assertThatCode(() -> LottoNumbers.create()).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbers.createAuto()).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbers.createManual("1, 2, 3, 4, 5, 6")).doesNotThrowAnyException();
         assertThatCode(() -> LottoNumbers.create(lottoNumber)).doesNotThrowAnyException();
     }
 
@@ -45,7 +46,7 @@ class LottoNumbersTest {
 
     @Test
     void 여섯자리_로또번호를_생성한다() {
-        LottoNumbers lottoNumbers = LottoNumbers.create();
+        LottoNumbers lottoNumbers = LottoNumbers.createAuto();
         assertThat(lottoNumbers.getLottoNumbers()).size().isEqualTo(6);
     }
 
@@ -66,6 +67,4 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> LottoNumbers.create(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage("중복된 로또 번호가 존재 합니다");
     }
-
-
 }

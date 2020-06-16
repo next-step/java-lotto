@@ -1,10 +1,13 @@
 package lotto.domain.lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final String SEPARATOR = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final NumberGenerator NUMBER_GENERATOR = NumberGenerator.create();
+
     private List<LottoNumber> lottoNumbers;
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -13,9 +16,16 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers create() {
+    public static LottoNumbers createAuto() {
         List<LottoNumber> lottoLottoNumbers = NUMBER_GENERATOR.createLottoNumbers();
         return new LottoNumbers(lottoLottoNumbers);
+    }
+
+    public static LottoNumbers createManual(String enteredNumber) {
+        List<LottoNumber> manualNumber = Arrays.stream(enteredNumber.split(SEPARATOR))
+                .map(number -> LottoNumber.create(Integer.parseInt(number.trim())))
+                .collect(Collectors.toList());
+        return new LottoNumbers(manualNumber);
     }
 
     public static LottoNumbers create(List<LottoNumber> lottoLottoNumbers) {
@@ -28,7 +38,7 @@ public class LottoNumbers {
 
     public int findMatchCount(LottoNumbers winningNumbers) {
         return (int) winningNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber ->  lottoNumbers.contains(lottoNumber))
+                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
                 .count();
     }
 
