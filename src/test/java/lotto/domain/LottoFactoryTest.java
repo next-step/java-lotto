@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.StringParser;
-import lotto.view.PurchaseLottoInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +28,7 @@ public class LottoFactoryTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoFactory.createLottos(new PurchaseLottoInput(price, Collections.emptyList()))
+                () -> LottoFactory.createLottos(Money.of(price), Collections.emptyList())
         );
     }
 
@@ -42,7 +41,7 @@ public class LottoFactoryTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LottoFactory.createLottos(new PurchaseLottoInput(price, numbers))
+                () -> LottoFactory.createLottos(Money.of(price), numbers)
         );
     }
 
@@ -52,7 +51,7 @@ public class LottoFactoryTest {
     void whenInputPriceThenGenerateLottoTest(int price, int expected) {
 
         // when
-        List<Lotto> lottos = LottoFactory.createLottos(new PurchaseLottoInput(price, Collections.emptyList()));
+        List<Lotto> lottos = LottoFactory.createLottos(Money.of(price), Collections.emptyList());
 
         System.out.println(lottos.get(0).getNumbers());
 
@@ -66,7 +65,7 @@ public class LottoFactoryTest {
     void manualLottoSizeTest(int price, List<String> manualNumbers) {
 
         // when
-        List<Lotto> lottos = LottoFactory.createLottos(new PurchaseLottoInput(price, manualNumbers));
+        List<Lotto> lottos = LottoFactory.createLottos(Money.of(price), manualNumbers);
 
         // then
         assertThat(lottos).hasSize(manualNumbers.size());
@@ -78,11 +77,11 @@ public class LottoFactoryTest {
     void manualLottoNumbersTest(int price, List<String> manualNumbers) {
 
         // when
-        List<Lotto> lottos = LottoFactory.createLottos(new PurchaseLottoInput(price, manualNumbers));
+        List<Lotto> lottos = LottoFactory.createLottos(Money.of(price), manualNumbers);
 
         // then
         for (int i = 0; i < lottos.size(); i++) {
-            assertIterableEquals(lottos.get(i).getNumbers(), StringParser.getParseNumbers(manualNumbers.get(i)));
+            assertIterableEquals(lottos.get(i).getNumbers(), Lotto.of(StringParser.getParseNumbers(manualNumbers.get(i))).getNumbers());
         }
     }
 
@@ -98,7 +97,7 @@ public class LottoFactoryTest {
     @MethodSource("manualNumbersAndSizeProvider")
     void autoAndManualNumbersTest(int price, List<String> manualNumbers, int size){
         // when
-        List<Lotto> lottos = LottoFactory.createLottos(new PurchaseLottoInput(price, manualNumbers));
+        List<Lotto> lottos = LottoFactory.createLottos(Money.of(price), manualNumbers);
 
         // then
         assertThat(lottos).hasSize(size);

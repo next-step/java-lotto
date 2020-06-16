@@ -27,11 +27,11 @@ public class LottoResult {
                     .collect(groupingBy(Function.identity(), counting()));
     }
 
-    public double getReturnRate(int purchasePrice){
+    public double getReturnRate(Money money){
         int sum =  matches.entrySet().stream()
                 .mapToInt(entry -> (int) (entry.getKey().getPrizeMoney() * entry.getValue()))
                 .sum();
-        return Math.round(((double) sum / purchasePrice) * 100) / 100.0;
+        return money.calculateReturnRate(sum);
     }
 
     public Map<Rank, Long> getMatches() {

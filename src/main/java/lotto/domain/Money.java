@@ -24,4 +24,8 @@ public class Money {
     public int getTotalPurchaseSize() {
         return purchasePrice / LOTTO_PRICE;
     }
+
+    public double calculateReturnRate(int winningPrice) {
+        return Math.round(((double) winningPrice / purchasePrice) * 100) / 100.0;
+    }
 }

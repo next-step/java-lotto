@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printStatistics(LottoResult lottoResult, int purchasePrice){
+    public void printStatistics(LottoResult lottoResult, Money money){
         System.out.println("당첨통계");
         System.out.println("---------");
         Map<Rank, Long> matchResult = lottoResult.getMatches();
@@ -26,7 +27,7 @@ public class ResultView {
             System.out.println(rank.getMatchCount() + "개 일치" + secondPrizeCheck(rank) + "(" + rank.getPrizeMoney() + ")- " + matchResult.getOrDefault(rank, 0L) + "개");
         }
 
-        System.out.println("총 수익률은 " + lottoResult.getReturnRate(purchasePrice) + "입니다.");
+        System.out.println("총 수익률은 " + lottoResult.getReturnRate(money) + "입니다.");
     }
 
     private String secondPrizeCheck(Rank rank) {
