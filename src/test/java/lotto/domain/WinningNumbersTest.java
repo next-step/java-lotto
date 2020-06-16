@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,9 +30,9 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호 수가 안 맞는 경우 예외발생")
     @ParameterizedTest
     @MethodSource("listProvider")
-    void numbersSizeTest(Lotto numbers){
+    void numbersSizeTest(Set<Integer> numbers){
         LottoNumber bonusNumber = LottoNumber.of(9);
-        assertThatThrownBy(() -> WinningNumbers.of(numbers, bonusNumber))
+        assertThatThrownBy(() -> WinningNumbers.of(Lotto.of(numbers), bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

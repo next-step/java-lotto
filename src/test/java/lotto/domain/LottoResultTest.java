@@ -80,9 +80,12 @@ class LottoResultTest {
     @Test
     void whenInputPurchasePriceReturnRate(){
 
+        // given
+        Money money = Money.of(3000);
+
         // when
         LottoResult lottoResult = LottoResult.of(winningNumbers, lottos);
-        double returnRate = lottoResult.getReturnRate(3000);
+        double returnRate = lottoResult.getReturnRate(money);
 
         assertThat(returnRate).isEqualTo(18.33);
     }
