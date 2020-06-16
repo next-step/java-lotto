@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum WinningStatistics {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
+    MISS(0, 0),
     FIFTH(3, 5_000),
-    MISS(0, 0);
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    //    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private static final Map<Integer, WinningStatistics> matchedCounts =
             Collections.unmodifiableMap(Stream.of(values()).
@@ -29,6 +29,10 @@ public enum WinningStatistics {
 
     public static WinningStatistics valueOfWinningCount(int winningCount) {
         return Optional.ofNullable(matchedCounts.get(winningCount)).orElse(MISS);
+    }
+
+    public static boolean matchedCount(int count) {
+        return matchedCounts.containsKey(count);
     }
 
     public int getMatchedNumberCount() {
