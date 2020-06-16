@@ -18,9 +18,10 @@ public class LottoTicket {
 
     public static LottoTicket newLottoTicketFromString(String stringWinningNumbers) {
         String[] split = stringWinningNumbers.split(",");
-        List<Integer> winningLottoNumbers = Arrays.stream(split).map(winningNumber
-                -> Integer.parseInt(winningNumber.trim())).collect(Collectors.toList());
-        return new LottoTicket(winningLottoNumbers);
+
+        return new LottoTicket(Arrays.stream(split)
+                .map(winningNumber -> Integer.parseInt(winningNumber.trim()))
+                .collect(Collectors.toList()));
     }
 
     public List<Integer> getNumbers() {
