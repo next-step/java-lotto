@@ -1,45 +1,45 @@
 package step3;
 
+import step3.util.MathUtils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Statistics {
-    private static final Map<Integer, Integer> statistics = new HashMap<>();
+    private static final Map<WinningStatistics, Integer> statistics = new HashMap<>();
+    private static final int LOTTO_PRICE = 1000;
 
-    public Statistics() {
+    private Statistics() {
         for (WinningStatistics value : WinningStatistics.values()) {
-            statistics.put(value.getMatchedNumberCount(), 0);
+            statistics.put(value, 0);
         }
     }
+
     public Statistics(List<Integer> winningCountList) {
         this();
 
-        winningCountList.stream().filter(statistics::containsKey).forEach(key -> {
-            int count = statistics.get(key);
-            statistics.put(key, ++count);
-        });
+        winningCountList.stream()
+                .filter(WinningStatistics::matchedCount)
+                .forEach(winningCount -> {
+                    WinningStatistics key = WinningStatistics.valueOfWinningCount(winningCount);
+                    int value = statistics.get(key);
+                    statistics.put(key, ++value);
+                });
     }
 
-    public Map<Integer, Integer> getStatistics() {
+    public Map<WinningStatistics, Integer> getStatistics() {
         return statistics;
     }
 
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for (Map.Entry<Integer, Integer> entry : statistics.entrySet()) {
-            WinningStatistics winningStatistics = WinningStatistics.valueOfWinningCount(entry.getKey());
-            totalPrice += getPrice(winningStatistics.getWinningMoney(), entry.getValue());
-        }
-
-        return totalPrice;
+    public double calculateYield(int lottoTicketCount) {
+        return MathUtils.calculateYield(getTotalPrice(), lottoTicketCount * LOTTO_PRICE);
     }
 
-    private int getPrice(int price, int count) {
-        if (count >= 1) {
-            return price;
-        }
-
-        return 0;
+    private int getTotalPrice() {
+        return statistics.entrySet().stream()
+                .filter(entry -> entry.getValue() >= 1)
+                .map(entry -> entry.getKey().getWinningMoney())
+                .reduce(0, Integer::sum);
     }
 }
