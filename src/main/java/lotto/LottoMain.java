@@ -2,7 +2,7 @@ package lotto;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoStart start = new LottoStart();
-        start.makeWish();
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.makeWish();
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
  * 뷰에게 수익률 출력을 요청한다
  */
 
-public class LottoStart {
+public class LottoGame {
 	private static InputView inputView = new InputView();
 	private static OutputView outputView = new OutputView();
 	private LottoStatistics lottoStatistics = new LottoStatistics();

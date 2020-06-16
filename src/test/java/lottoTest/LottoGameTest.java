@@ -1,6 +1,6 @@
 package lottoTest;
 
-import lotto.LottoStart;
+import lotto.LottoGame;
 import lotto.model.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,14 +11,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoStartTest {
-    LottoStart lottoStart = new LottoStart();
+public class LottoGameTest {
+    LottoGame lottoGame = new LottoGame();
 
     @DisplayName("구입 금액 요청 - 로또 티켓을 얼마나 살지 결정.")
     @ParameterizedTest
     @CsvSource(value = {"1000, 1", "2000, 2", "500, 0", "1440, 1", "0, 0"})
     public void purchaseLottoTicket(int budget, int expected) {
-        int num = lottoStart.setTicketNumber(budget);
+        int num = lottoGame.setTicketNumber(budget);
         assertThat(num).isEqualTo(expected);
     }
 
@@ -26,7 +26,7 @@ public class LottoStartTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 5})
     public void testNumberOfTicket(int numOfPurchase) {
-        List<LottoTicket> ticketList = lottoStart.buyTickets(numOfPurchase);
+        List<LottoTicket> ticketList = lottoGame.buyTickets(numOfPurchase);
         assertThat(ticketList.size()).isEqualTo(numOfPurchase);
     }
 }
