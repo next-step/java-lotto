@@ -14,7 +14,8 @@ public class LottoController {
         inputView.inputPurchaseLotto();
 
         PurchaseLottoInput purchaseLottoInput = inputView.getPurchaseLottoInput();
-        List<Lotto> lottos = LottoFactory.createLottos(purchaseLottoInput);
+        Money money = Money.of(purchaseLottoInput.getPurchasePrice());
+        List<Lotto> lottos = LottoFactory.createLottos(money, purchaseLottoInput.getManualLottoNumbers());
 
         ResultView resultView = new ResultView();
         resultView.printLottos(lottos, purchaseLottoInput.getManualSize());
