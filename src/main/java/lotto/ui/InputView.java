@@ -1,5 +1,8 @@
 package lotto.ui;
 
+import lotto.util.LottoUtil;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -24,11 +27,17 @@ public class InputView {
         return manualCount;
     }
 
-    public static List<String> enterManualNumbers(int manualCount) {
+    public static List<String> enterManualNumbers(int quantity, int manualCount) {
+        LottoUtil.checkManualCount(quantity, manualCount);
+        if(manualCount == 0) {
+            return Collections.emptyList();
+        }
+
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return Stream.generate(() -> SCANNER.nextLine())
                 .limit(manualCount)
                 .collect(Collectors.toList());
+
     }
 
     public static String enterWinningNumber() {

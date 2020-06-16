@@ -15,8 +15,7 @@ public class LottoApplication {
         int quantity = LottoUtil.calculateLottoQuantity(purchaseAmount);
 
         int manualCount = InputView.enterManualCount();
-        LottoUtil.checkManualCount(quantity, manualCount);
-        List<String> manualNumber = InputView.enterManualNumbers(manualCount);
+        List<String> manualNumber = InputView.enterManualNumbers(quantity, manualCount);
 
         //로또 생성
         LottoTicket lottoTicket = LottoTicket.create(quantity, manualNumber);
