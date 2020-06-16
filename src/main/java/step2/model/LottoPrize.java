@@ -9,19 +9,19 @@ public class LottoPrize {
         this.count = count;
     }
 
-    public static LottoPrize of (LottoRank rank, long count) {
+    public static LottoPrize of(LottoRank rank, long count) {
         return new LottoPrize(rank, count);
     }
 
-    public long getTotalPrize () {
+    public long getTotalPrize() {
         return rank.getPrice() * count;
     }
 
-    public LottoRank getRank () {
+    public LottoRank getRank() {
         return rank;
     }
 
-    public long getCount () {
+    public long getCount() {
         return count;
     }
 }
