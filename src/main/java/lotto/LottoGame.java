@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.model.Lotto;
 import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
 import lotto.model.Rank;
@@ -21,21 +20,17 @@ import java.util.List;
  */
 
 public class LottoGame {
+	private static int prize = 0;
+
 	private static InputView inputView = new InputView();
 	private static OutputView outputView = new OutputView();
 	private LottoStatistics lottoStatistics = new LottoStatistics();
 
-	private static int budget;
-	private static int numberOfTickets;
-	private static int prize = 0;
-	private static int[] winningNumbers;
-	private List<LottoTicket> tickets = new ArrayList<>();
-
 	public void makeWish() {
-		setBudget();
-		setTicketNumber(budget);
-		tickets = buyTickets(numberOfTickets);
-		setWinningNumbers();
+		int budget = setBudget();
+		int numberOfTickets = setTicketNumber(budget);
+		List<LottoTicket> tickets = buyTickets(numberOfTickets);
+		int[] winningNumbers = setWinningNumbers();
 
 		for (int i = 0; i < numberOfTickets; i++) {
 			Rank rank = tickets.get(i).announceRank(winningNumbers);
@@ -50,6 +45,8 @@ public class LottoGame {
 	}
 
 	public List<LottoTicket> buyTickets(int numberOfTickets) {
+		List<LottoTicket> tickets = new ArrayList<>();
+
 		for (int i = 0; i < numberOfTickets; i++) {
 			tickets.add(new LottoTicket());
 			outputView.printLottoNumbersView(tickets.get(i).getMyNumbers());
@@ -59,17 +56,17 @@ public class LottoGame {
 	}
 
 	public int setTicketNumber(int budget) {
-		numberOfTickets = lottoStatistics.buyLottos(budget);
+		int numberOfTickets = lottoStatistics.buyLottos(budget);
 		outputView.howManyLottoTicketsView(numberOfTickets);
 		return numberOfTickets;
 	}
 
-	private void setBudget() {
-		budget = inputView.inputBudgetView();
+	private int setBudget() {
+		return inputView.inputBudgetView();
 	}
 
-	private void setWinningNumbers() {
+	private int[] setWinningNumbers() {
 		String str = inputView.inputWinningNumbersView();
-		winningNumbers = IntegerUtils.splitAndParseInt(str);
+		return IntegerUtils.splitAndParseInt(str);
 	}
 }
