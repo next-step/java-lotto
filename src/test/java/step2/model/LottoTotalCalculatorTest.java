@@ -30,7 +30,7 @@ class LottoTotalCalculatorTest {
     @DisplayName("로또 당첨 수를 구하는 메소드 검증")
     @ParameterizedTest
     @MethodSource("provideWinningLottoCount")
-    void 로또_당첨수_테스트 (LottoTotalCalculator lottoTotalCalculator, LottoRank rank, long expected) {
+    void 로또_당첨수_테스트(LottoTotalCalculator lottoTotalCalculator, LottoRank rank, long expected) {
         assertEquals(
                 lottoTotalCalculator.stream()
                         .filter(prize -> prize.getRank().equals(rank))
@@ -39,7 +39,7 @@ class LottoTotalCalculatorTest {
         );
     }
 
-    private static Stream<Arguments> provideWinningLottoCount () {
+    private static Stream<Arguments> provideWinningLottoCount() {
         return Stream.of(
                 Arguments.of(LOTTO_RESULT, LottoRank.MATCH_BONUS, 1),
                 Arguments.of(LOTTO_RESULT, LottoRank.MATCH_FIVE, 1),
@@ -49,13 +49,14 @@ class LottoTotalCalculatorTest {
 
     @DisplayName("로또 당첨 금액을 구하는 테스트")
     @Test
-    void 로또_당첨_금액_테스트 () {
+    void 로또_당첨_금액_테스트() {
         long expected = LottoRank.MATCH_BONUS.getPrice() + LottoRank.MATCH_FIVE.getPrice() + (LottoRank.MATCH_THREE.getPrice() * 2);
         assertEquals(
                 LOTTO_RESULT.getPayoff(),
                 expected
         );
     }
+
     private static final String RATIO_FORMAT = "%.2f";
     private static final LottoNumber BONUS_NUMBER = LottoNumber.of(7);
     private static final Lottos lottos = Lottos.of(
@@ -71,12 +72,12 @@ class LottoTotalCalculatorTest {
     @DisplayName("로또 당첨 금액의 수익률 검증 테스트")
     @ParameterizedTest
     @MethodSource("provideLottoGameAndWinningPrice")
-    void 로또_당첨_수익률_테스트 (LottoTotalCalculator lottoResult, String expected) {
+    void 로또_당첨_수익률_테스트(LottoTotalCalculator lottoResult, String expected) {
         String payoffRatio = String.format(RATIO_FORMAT, lottoResult.resultLottoGamePayOffRatio());
         assertEquals(expected, payoffRatio);
     }
 
-    private static Stream<Arguments> provideLottoGameAndWinningPrice () {
+    private static Stream<Arguments> provideLottoGameAndWinningPrice() {
         final long payoff = LottoRank.stream().mapToLong(LottoRank::getPrice).sum();
         final String payoffRatio1 = String.format(RATIO_FORMAT, payoff / (5.0 * Lotto.PRICE));
         final String payoffRatio2 = "0.00";

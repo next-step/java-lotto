@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.exception.LottoLengthException;
-import step2.exception.LottoOutOfBoundException;
 import step2.util.LottoMakeNumbers;
 
 import java.util.ArrayList;
@@ -17,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value={"1,2,10,20,30,40:2", "1,2,3,4,5,6:6", "1,20,2,40,3,44:3"}, delimiter = ':')
     @DisplayName("구입한 로또 대비 당첨된 개수")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,10,20,30,40:2", "1,2,3,4,5,6:6", "1,20,2,40,3,44:3"}, delimiter = ':')
     void 로또_당첨_개수(String input, int result) {
         List<LottoNumber> testNumbers = new ArrayList<>();
         testNumbers.add(LottoNumber.of(1));
@@ -31,15 +30,15 @@ class LottoTest {
 
         assertThat(
                 Lotto.of(testNumbers).checkWinningCount(
-                    Lotto.of(
-                            LottoMakeNumbers.convertStringToNumbers(input)
-                    )
+                        Lotto.of(
+                                LottoMakeNumbers.convertStringToNumbers(input)
+                        )
                 )
         ).isEqualTo(result);
     }
 
-    @Test
     @DisplayName("입력한 숫자를 포함하는지 여부")
+    @Test
     void 입력한_숫자_포함여부() {
         String inputNumber = "1,2,3,4,5,6";
         assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(1))).isTrue();
@@ -53,16 +52,9 @@ class LottoTest {
         assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(7))).isFalse();
     }
 
-    @ParameterizedTest
-    @ValueSource( strings = { "-1,2,3,4,5,6", "0,1,2,3,4,5", "1,2,3,4,5,46" })
-    @DisplayName("1~45를 벗어나는 숫자 입력")
-    void 범위_벗어난는_숫자(String lottoNumbers) {
-        assertThatExceptionOfType(LottoOutOfBoundException.class).isThrownBy(() -> Lotto.of(LottoMakeNumbers.convertStringToNumbers(lottoNumbers)));
-    }
-
-    @ParameterizedTest
-    @ValueSource( strings = { "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,5" })
     @DisplayName("중첩된 숫자 및 6개가 아닌 개수 입력")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,5"})
     void 중첩_6개_검사(String lottoNumbers) {
         assertThatExceptionOfType(LottoLengthException.class).isThrownBy(() -> Lotto.of(LottoMakeNumbers.convertStringToNumbers(lottoNumbers)));
     }

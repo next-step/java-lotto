@@ -9,16 +9,16 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinnerTierTest {
+class LottoRankTest {
 
     @DisplayName("보너스 볼과 일치하는 로또 번호로부터 랭크를 가져")
     @ParameterizedTest
     @MethodSource("provideEqualRank")
-    void 랭크_일치_테스트 (int same, boolean matchBonus, LottoRank expected) {
+    void 랭크_일치_테스트(int same, boolean matchBonus, LottoRank expected) {
         assertThat(expected).isEqualTo(LottoRank.valueOf(same, matchBonus));
     }
 
-    private static Stream<Arguments> provideEqualRank () {
+    private static Stream<Arguments> provideEqualRank() {
         return Stream.of(
                 Arguments.of(1, true, LottoRank.MISS),
                 Arguments.of(1, false, LottoRank.MISS),

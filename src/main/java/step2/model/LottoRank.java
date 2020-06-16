@@ -15,12 +15,11 @@ public enum LottoRank {
     public static final List<LottoRank> WINNINGS = Arrays.asList(MATCH_THREE, MATCH_FOUR, MATCH_FIVE, MATCH_BONUS, MATCH_SIX);
 
     private final long price;
-    private final long matchCount;
-
+    private final long matchCnt;
 
     LottoRank(long price, long matchCount) {
         this.price = price;
-        this.matchCount = matchCount;
+        this.matchCnt = matchCount;
     }
 
     public long getPrice() {
@@ -28,7 +27,7 @@ public enum LottoRank {
     }
 
     public long getMatchCnt() {
-        return matchCount;
+        return matchCnt;
     }
 
     public static Stream<LottoRank> stream() {
@@ -36,7 +35,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(long matchCnt, boolean matchBonus) {
-        return stream().filter(rank -> rank.matchCount == matchCnt)
+        return stream().filter(rank -> rank.matchCnt == matchCnt)
                 .filter(rank -> !rank.equals(MATCH_BONUS) || matchBonus )
                 .findAny().orElse(MISS);
     }
