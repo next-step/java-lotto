@@ -6,16 +6,14 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoTotalCalculator {
-    private final List<LottoPrize> lottoPrizes;
+    private final LottoPrizes lottoPrizes;
     private final LottoWinning lottoWinning;
     private final Lottos lottos;
 
     private LottoTotalCalculator(Lottos lottos, LottoWinning lottoWinning) {
         this.lottoWinning = lottoWinning;
         this.lottos = lottos;
-        this.lottoPrizes = LottoRank.stream()
-                .map(rank -> LottoPrize.of(rank, lottos.getWinningCount(rank, lottoWinning)))
-                .collect(toList());
+        this.lottoPrizes = LottoPrizes.of(lottos, lottoWinning);
     }
 
     public static LottoTotalCalculator of (Lottos lottos, LottoWinning winningLotto) {
