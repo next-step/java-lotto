@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     private LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -37,6 +37,16 @@ public class LottoTicket {
                 throw new IllegalArgumentException();
             }
         });
+    }
+
+    public List<Integer> checkLottoWinning(List<LottoTicket> lottoTicketList) {
+        return lottoTicketList.stream().map(this::compareLottoNumber).collect(Collectors.toList());
+    }
+
+    private int compareLottoNumber(LottoTicket lottoTicket) {
+        List<Integer> myLottoNumbers = lottoTicket.getNumbers();
+
+        return (int) this.numbers.stream().filter(myLottoNumbers::contains).count();
     }
 
     @Override
