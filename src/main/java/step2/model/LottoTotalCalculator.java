@@ -1,22 +1,34 @@
 package step2.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoTotalCalculator {
-    private Map<WinnerTier, Integer> winningResult = new HashMap<>();
+    private final LottoPrizes lottoPrizes;
+    private final LottoWinning lottoWinning;
+    private final Lottos lottos;
 
-    public Map<WinnerTier, Integer> countWinners(List<Lotto> lottoGame, Lotto winnerLotto) {
+    private LottoTotalCalculator(Lottos lottos, LottoWinning lottoWinning) {
+        this.lottoWinning = lottoWinning;
+        this.lottos = lottos;
+        this.lottoPrizes = LottoPrizes.of(lottos, lottoWinning);
+    }
 
-        for (WinnerTier winnerTier : WinnerTier.values()) {
-            long matchCount = lottoGame.stream()
-                    .filter(lotto -> lotto.checkWinningCount(winnerLotto) == winnerTier.getMatchCnt())
-                    .count();
+    public static LottoTotalCalculator of (Lottos lottos, LottoWinning winningLotto) {
+        return new LottoTotalCalculator(lottos, winningLotto);
+    }
 
-            winningResult.put(winnerTier, (int) matchCount);
-        }
+    public Stream<LottoPrize> stream() {
+        return lottoPrizes.stream();
+    }
 
-        return winningResult;
+    public long getPayoff () {
+        return stream().mapToLong(LottoPrize::getTotalPrize).sum();
+    }
+
+    public double resultLottoGamePayOffRatio () {
+        return (double)getPayoff() / lottos.getPrice();
     }
 }
