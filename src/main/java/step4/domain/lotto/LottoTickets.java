@@ -18,12 +18,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<Lotto> getLottoTickets() {
-        return lottoTickets;
+    public void add(List<Lotto> lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets);
+
     }
 
-    public void showIssuedLottoTickets() {
-        OutputView.outputLottoList(lottoTickets);
+    public List<Lotto> getLottoTickets() {
+        return lottoTickets;
     }
 
 }
