@@ -1,9 +1,6 @@
 package step4.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -28,7 +25,7 @@ public class LottoNumber {
         return new LottoTickets(lottoList);
     }
 
-    public static void checkLottoRules(TreeSet<Integer> lottoNumbers) {
+    public static void checkLottoRules(Set<Integer> lottoNumbers) {
         if (Collections.max(lottoNumbers) > LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException();
         }

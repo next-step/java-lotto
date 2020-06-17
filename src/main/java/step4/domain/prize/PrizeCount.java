@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PrizeCount {
 
-    List<PrizeAdder> prizes = new ArrayList<>();
+    private List<PrizeAdder> prizes = new ArrayList<>();
 
     private PrizeCount() {
         for (Prize prize : Prize.values()) {

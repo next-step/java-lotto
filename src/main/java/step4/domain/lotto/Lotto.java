@@ -15,15 +15,16 @@ public class Lotto {
     // each Lotto numbers.
     private Set<Integer> lottoNumbers;
 
-    public Lotto(TreeSet<Integer> lottoNumbers) {
+    public Lotto(Set<Integer> lottoNumbers) {
         LottoNumber.checkLottoRules(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(String lottoNumbers) {
-        this.lottoNumbers = new TreeSet<>(Arrays.asList(lottoNumbers.split(LottoNumber.FIXED_DELIMITER)).stream()
+        this.lottoNumbers = Arrays.asList(lottoNumbers.split(LottoNumber.FIXED_DELIMITER))
+                .stream()
                 .map(Integer::parseInt)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.collectingAndThen(Collectors.toSet(), TreeSet::new));
     }
 
     public Set<Integer> getNumbers() {

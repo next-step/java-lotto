@@ -6,25 +6,25 @@ package step4.domain;
  * ver. 1.0
  * 2020.05.31
  */
-public class Money {
+public class PurchaseInfo {
 
-    private Integer payedMoney;
-    private Integer lottoPrice;
-    private Integer boughtLottoCount;
+    private int payedMoney;
+    private int lottoPrice;
+    private int boughtLottoCount;
 
-    public Money(String input, Integer lottoPrice) {
+    public PurchaseInfo(String input, int lottoPrice) {
         Number.checkNumber(input);
         Number.checkNotNumber(input);
         this.payedMoney = Integer.parseInt(input);
         this.lottoPrice = lottoPrice;
     }
 
-    public Integer getBoughtLottoCount() {
+    public int getBoughtLottoCount() {
         return calculateGameCountByPayMoney();
     }
 
     // pay
-    private Integer calculateGameCountByPayMoney() {
+    private int calculateGameCountByPayMoney() {
         boughtLottoCount = payedMoney / lottoPrice;
         if (boughtLottoCount < 1) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");

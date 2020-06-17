@@ -4,6 +4,7 @@ import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoTickets;
 import step4.domain.lotto.WinningLotto;
 import step4.domain.prize.PrizeCount;
+import step4.view.OutputView;
 
 /*
  * LottoGame
@@ -16,7 +17,7 @@ public class LottoGame {
 
     public LottoGame(Integer boughtLottoCount) {
         lottoTickets = LottoNumber.issueLotto(boughtLottoCount);
-        lottoTickets.showIssuedLottoTickets();
+        OutputView.outputLottoList(lottoTickets.getLottoTickets());
     }
 
    // matching
