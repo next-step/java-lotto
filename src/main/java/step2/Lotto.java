@@ -57,5 +57,10 @@ public class Lotto {
         return lotto.contains(number);
     }
 
-
+    @Override
+    public String toString() {
+        return "{" +
+                " " + lotto +
+                '}';
+    }
 }

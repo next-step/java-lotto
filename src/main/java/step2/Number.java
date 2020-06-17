@@ -9,7 +9,8 @@ public final class Number {
     private final int number;
 
     public static Number random(){
-        return new Number(getRandom());
+        int number = getRandom();
+        return new Number(number);
     }
 
     public static Number win(int number) {
@@ -20,7 +21,7 @@ public final class Number {
         return new Number(number);
     }
 
-    private Number(int number) {
+    private Number(final int number) {
         this.number = number;
     }
 
@@ -47,8 +48,6 @@ public final class Number {
 
     @Override
     public String toString() {
-        return "Number{" +
-                "number=" + number +
-                '}';
+        return number + "";
     }
 }
