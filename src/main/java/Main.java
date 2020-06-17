@@ -1,4 +1,4 @@
-import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoStore;
 import lotto.domain.WinnerLotto;
 import lotto.view.InputView;
@@ -12,8 +12,8 @@ public class Main {
         InputView inputView = InputView.enterInput();
 
         LottoStore lottoStore = new LottoStore(inputView.getLottoMoney());
-        List<Lotto> lottos = lottoStore.sellLotto();
-        WinnerLotto winnerLotto = new WinnerLotto(lottos);
+        List<LottoTicket> lottoTickets = lottoStore.sellLottoTicket();
+        WinnerLotto winnerLotto = new WinnerLotto(lottoTickets);
 
         ResultView.printLottoResult(winnerLotto.getPrize(winnerLotto.enterWinningNumbers()));
     }

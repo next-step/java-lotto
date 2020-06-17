@@ -19,7 +19,7 @@ public class LottoStoreTest {
     @MethodSource("provideValidMoney")
     void LottoCountIsEqualWithMoneyPaid(LottoMoney input, int expected) {
         LottoStore lottoStore = new LottoStore(input);
-        int actual = lottoStore.sellLotto().size();
+        int actual = lottoStore.sellLottoTicket().size();
 
         assertThat(actual).isEqualTo(expected);
     }

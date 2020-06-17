@@ -36,7 +36,7 @@ public class LottoMoneyTest {
     @MethodSource("provideMoney")
     void NumberOfLottoIsEqualWithMoneyPaid(BigDecimal input, int expected) {
         LottoMoney lottoMoney = new LottoMoney(input);
-        int actual = lottoMoney.getNumberOfLotto();
+        int actual = lottoMoney.getNumberOfLottoByMoneyPaid();
 
         assertThat(actual).isEqualTo(expected);
     }

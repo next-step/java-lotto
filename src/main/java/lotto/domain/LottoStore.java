@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    private final int numberOfLotto;
+    private final int numberOfLottoTicket;
 
     public LottoStore(LottoMoney lottoMoney) {
-        this.numberOfLotto = lottoMoney.getNumberOfLotto();
+        this.numberOfLottoTicket = lottoMoney.getNumberOfLottoByMoneyPaid();
     }
 
-    public List<Lotto> sellLotto() {
-        final List<Lotto> lottos = new ArrayList<>();
+    public List<LottoTicket> sellLottoTicket() {
+        final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < numberOfLotto; i++) {
-            lottos.add(Lotto.getAutoLotto());
+        for (int i = 0; i < numberOfLottoTicket; i++) {
+            lottoTickets.add(LottoTicket.getAutoLotto());
         }
-        return lottos;
+        return lottoTickets;
     }
 
 }

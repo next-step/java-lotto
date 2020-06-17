@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 public class WinnerLotto {
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    private final List<Lotto> lottos;
+    private final List<LottoTicket> lottoTickets;
 
-    public WinnerLotto(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public WinnerLotto(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public List<Prize> getPrize(final List<Integer> winningLotto) {
         final List<Prize> prizes = new ArrayList<>();
 
-        for (Lotto lotto : lottos) {
-            Prize prize = Prize.valueOf(lotto.getLottoNumberMappingCount(winningLotto));
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Prize prize = Prize.valueOf(lottoTicket.getLottoNumberMappingCount(winningLotto));
             prizes.add(prize);
         }
         return prizes;

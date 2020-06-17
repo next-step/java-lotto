@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
     private final List<Integer> lottoNumbers;
 
-    public Lotto(final List<Integer> lottoNumbers) {
+    public LottoTicket(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto getAutoLotto() {
+    public static LottoTicket getAutoLotto() {
         final List<Integer> lottoNumberList = new ArrayList<>();
         final List<Integer> lottos = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class Lotto {
         }
 
         Collections.sort(lottos);
-        return new Lotto(lottos);
+        return new LottoTicket(lottos);
     }
 
     public List<Integer> getLottoNumbers() {

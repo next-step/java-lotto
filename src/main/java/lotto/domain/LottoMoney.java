@@ -19,7 +19,7 @@ public class LottoMoney {
         return (lottoMoney.remainder(LOTTO_PRICE).intValue() == 0) && (lottoMoney.compareTo(LOTTO_PRICE) >= 0);
     }
 
-    public int getNumberOfLotto() {
+    public int getNumberOfLottoByMoneyPaid() {
         return this.amount.divide(LOTTO_PRICE, RoundingMode.DOWN).intValue();
     }
 

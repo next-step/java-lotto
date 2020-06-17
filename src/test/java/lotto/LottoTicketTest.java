@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +10,12 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+public class LottoTicketTest {
 
     @Test
     @DisplayName("생성한 로또 번호의 숫자가 6개인지 테스트")
     void IsLottoNumbersSizeEqualWithSix() {
-        int actual = Lotto.getAutoLotto().getLottoNumbers().size();
+        int actual = LottoTicket.getAutoLotto().getLottoNumbers().size();
 
         assertThat(actual).isEqualTo(6);
     }
@@ -23,7 +23,7 @@ public class LottoTest {
     @Test
     @DisplayName("생성한 로또 번호에 중복이 있는지 테스트")
     void IsDuplicateNumberExistInLotto() {
-        List<Integer> lottoNumbers = Lotto.getAutoLotto().getLottoNumbers();
+        List<Integer> lottoNumbers = LottoTicket.getAutoLotto().getLottoNumbers();
         Set<Integer> set = new HashSet<>(lottoNumbers);
         int actual = lottoNumbers.size();
         int expected = set.size();
