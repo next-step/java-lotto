@@ -1,7 +1,7 @@
 package view;
 
 import lotto.LottoTicket;
-import lotto.TicketCollection;
+import lotto.Prize;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ public class ResultView {
 
     public static void printStatistics(List<Integer> matcher, double percentage) {
         System.out.println("당첨 통계");
-        for (int i = 3; i < 7; i++) {
-            System.out.println(i + "개 일치 (" + TicketCollection.PRIZE.get(i) + ")- " + matcher.get(i) + "개");
+        for (int i = Prize.FORTH.getCnt(); i < Prize.FIRST.getCnt() + 1; i++) {
+            System.out.println(i + "개 일치 (" + Prize.matchPrize(i) + ")- " + matcher.get(i) + "개");
         }
         System.out.println("총 수익률은 " + percentage + "입니다.");
     }

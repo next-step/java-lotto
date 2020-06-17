@@ -33,8 +33,8 @@ public class TicketCollection {
         int sumPrize = 0;
         for (LottoTicket ticket : tickets) {
             int cnt = ticket.matchWinningNumber(winningNumbers);
-            winningMatcher.set(cnt, winningMatcher.get(cnt)+1);
-            sumPrize += PRIZE.get(cnt);
+            winningMatcher.set(cnt, winningMatcher.get(cnt) + 1);
+            sumPrize += Prize.matchPrize(cnt);
         }
         return sumPrize;
     }
