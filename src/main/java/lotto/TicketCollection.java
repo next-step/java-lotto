@@ -10,7 +10,6 @@ public class TicketCollection {
     private int count;
     private final List<LottoTicket> tickets = new ArrayList<>();
     private final RandomPicker randomPicker = new RandomPicker();
-    public static final List<Integer> PRIZE = new ArrayList<>(Arrays.asList(0, 0, 0, 5000, 50000, 1500000, 2000000000));
 
     public TicketCollection(int count) {
         this.count = count;
