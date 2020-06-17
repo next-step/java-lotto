@@ -1,9 +1,6 @@
 package lotto;
 
-import view.ResultView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TicketCollection {
@@ -23,11 +20,6 @@ public class TicketCollection {
         }
     }
 
-    public void printLottoPurchase() {
-        ResultView.printNumberOfLottoTicek(count);
-        ResultView.printTickets(tickets);
-    }
-
     public int calculateStatics(List<Integer> winningNumbers, List<Integer> winningMatcher) {
         int sumPrize = 0;
         for (LottoTicket ticket : tickets) {
@@ -36,5 +28,13 @@ public class TicketCollection {
             sumPrize += Prize.matchPrize(cnt);
         }
         return sumPrize;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public List<LottoTicket> getTickets() {
+        return tickets;
     }
 }

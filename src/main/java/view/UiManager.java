@@ -1,5 +1,6 @@
 package view;
 
+import lotto.LottoTicket;
 import utils.StringAddCalculator;
 import utils.StringUtils;
 
@@ -30,13 +31,18 @@ public class UiManager {
         return numbers.split(",");
     }
 
+    public void printLottoPurchase(int count, List<LottoTicket> tickets) {
+        ResultView.printNumberOfLottoTicek(count);
+        ResultView.printTickets(tickets);
+    }
+
     public void printWinningStatistics(List<Integer> winningmatcher, int sumPrize) {
         ResultView.printStatistics(winningmatcher, sumPrize / (double)investAmount);
     }
 
     private int takeCount(int investAmount) {
         int count = investAmount / LOTTO_PRICE;
-        if(count <= 0) {
+        if (count <= 0) {
             throw new IllegalArgumentException("Please enter more than the ticket price.");
         }
         return investAmount / LOTTO_PRICE;
