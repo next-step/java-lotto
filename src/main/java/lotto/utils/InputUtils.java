@@ -9,7 +9,7 @@ public class InputUtils {
     private static int LOTTO_GAME_PRICE = 1000;
     private static final String COMMA = ",";
 
-    public InputUtils(){
+    public InputUtils() {
     }
 
     public static void validMoneyGreaterZero(int money) {
@@ -30,29 +30,29 @@ public class InputUtils {
                 .boxed()
                 .collect(Collectors.toList());
 
-        if(parsingNumbers.size() != 6){
+        if (parsingNumbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개 입니다.");
         }
 
-        for (int number: parsingNumbers) {
+        for (int number : parsingNumbers) {
             inputLottoNumberCheck(number);
         }
 
         return parsingNumbers;
     }
 
-    private static void isEmpty(String inputName) {
-        if (isBlank(inputName)) {
+    private static void isEmpty(String inputNumber) {
+        if (isBlank(inputNumber)) {
             throw new IllegalArgumentException("번호가 입력되지 않았습니다.");
         }
     }
 
-    private static boolean isBlank(String inputName) {
-        return inputName == null || inputName.trim().isEmpty();
+    private static boolean isBlank(String inputNumber) {
+        return inputNumber == null || inputNumber.trim().isEmpty();
     }
 
-    private static void inputLottoNumberCheck(int number){
-        if(number > 45){
+    private static void inputLottoNumberCheck(int number) {
+        if (number > 45) {
             throw new IllegalArgumentException("로또 번호는 45보다 클 수 없습니다.");
         }
     }

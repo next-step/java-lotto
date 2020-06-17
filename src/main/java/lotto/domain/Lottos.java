@@ -70,7 +70,7 @@ public class Lottos {
             totalPrize += (prize * count);
         }
 
-        float size = lottos.size();
+        int size = lottos.size();
         float totalBuy = size * 1000;
         this.totalRevenue = totalPrize / totalBuy;
         return totalRevenue;

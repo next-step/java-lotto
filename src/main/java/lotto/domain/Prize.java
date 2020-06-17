@@ -21,11 +21,11 @@ public enum Prize {
         return rank;
     }
 
-    public String getMoney(){
+    public String getMoney() {
         return money;
     }
 
-    public static Prize findByMoney(int rank){
+    public static Prize findByMoney(int rank) {
         return Arrays.stream(values())
                 .filter(prize -> prize.getRank() == rank)
                 .findFirst()

@@ -2,11 +2,11 @@ package lotto.utils;
 
 import java.util.List;
 
-public class LottoInput implements LottoType{
+public class LottoInput implements LottoType {
 
     private List lottoNumbers;
 
-    public LottoInput(List inputNubers){
+    public LottoInput(List inputNubers) {
         this.lottoNumbers = inputNubers;
     }
 

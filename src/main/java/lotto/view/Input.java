@@ -14,23 +14,23 @@ public class Input {
         scanner = scan;
     }
 
-    public void moneyInput(){
+    public void moneyInput() {
         System.out.println("구입금액을 입력해 주세요.");
         int inputMoney = scanner.nextInt();
         InputUtils.validMoneyGreaterZero(inputMoney);
         this.money = inputMoney;
     }
 
-    public void inputLastLottoNumber(){
+    public void inputLastLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         this.inputLastLottoNumbers = scanner.next();
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return this.money;
     }
 
-    public String getLastLottoNumber(){
+    public String getLastLottoNumber() {
         return this.inputLastLottoNumbers;
     }
 

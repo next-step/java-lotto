@@ -13,7 +13,7 @@ public class LottoShuffle implements LottoType {
     private static int NEED_LOTTO_COUNT = 6;
     private List<Integer> lottoGameNumber;
 
-    public LottoShuffle(){
+    public LottoShuffle() {
         lottoGameNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
     }
 

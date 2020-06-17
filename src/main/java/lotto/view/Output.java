@@ -21,7 +21,7 @@ public class Output {
 
         for (Map.Entry<Integer, Integer> gameResult : inputResultStatic.entrySet()) {
             String money = Prize.findByMoney(gameResult.getKey()).getMoney();
-            System.out.println(gameResult.getKey() + "개 일치" + "("+money + "원) -" + gameResult.getValue() + "개");
+            System.out.println(gameResult.getKey() + "개 일치" + "(" + money + "원) -" + gameResult.getValue() + "개");
 
         }
 
@@ -29,7 +29,7 @@ public class Output {
 
     public void printTotalRevenue(float totalRevenue, String mention) {
 
-        System.out.print("총 수익률은 " + totalRevenue +"입니다.");
-        System.out.print(" (기준이 1이기 때문에 결과적으로 " + mention + " 라는 의미임)");
+        System.out.print("총 수익률은 " + totalRevenue + "입니다.");
+        System.out.print(" (기준이 1이기 때문에 결과적으로 " + mention + " 이라는 의미임)");
     }
 }

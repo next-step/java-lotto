@@ -12,7 +12,7 @@ public class Lotto {
     private static String COMMA_SPACE = ", ";
     private LottoType lottoType;
     private List<Integer> selectedLottoNumber;
-    private int equalCount  = 0;
+    private int equalCount = 0;
 
     public Lotto(LottoType lottoType) {
         this.lottoType = lottoType;
@@ -33,7 +33,7 @@ public class Lotto {
 
     public int getEqualsCount(List<Integer> lastWeekNumbers) {
 
-        for (Integer number: lastWeekNumbers) {
+        for (Integer number : lastWeekNumbers) {
             containCheck(number);
         }
         return this.equalCount;
@@ -41,7 +41,7 @@ public class Lotto {
 
     private void containCheck(Integer number) {
 
-        if(selectedLottoNumber.contains(number)){
+        if (selectedLottoNumber.contains(number)) {
             this.equalCount += 1;
         }
     }

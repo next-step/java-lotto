@@ -26,7 +26,7 @@ public class LottoGame {
         List lastLottoNumbers = InputUtils.stringToArray(input.getLastLottoNumber());
         output.printResultStatic(lottos.makeResultStatics(lastLottoNumbers));
 
-        output.printTotalRevenue(lottos.getTotalRevenue(),lottos.getRevenueMention());
+        output.printTotalRevenue(lottos.getTotalRevenue(), lottos.getRevenueMention());
 
     }
 }
