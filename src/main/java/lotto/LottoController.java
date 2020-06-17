@@ -9,8 +9,6 @@ import java.util.List;
 public class LottoController {
     private UiManager uiManager = new UiManager();
     private List<Integer> winningNumbers = new ArrayList<>();
-    private List<Integer> winningMatcher = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0, 0));
-    private int sumPrize = 0;
     private TicketCollection tickets;
 
     public LottoController() {
@@ -18,13 +16,10 @@ public class LottoController {
     }
 
     public void buyLotto() {
-        tickets.printLottoPurchase();
-        calculateWinningStatistics();
-        uiManager.printWinningStatistics(winningMatcher, sumPrize);
-    }
-
-    public void calculateWinningStatistics() {
+        uiManager.printLottoPurchase(tickets.getCount(), tickets.getTickets());
         winningNumbers = uiManager.takeWinningNumber();
-        sumPrize = tickets.calculateStatics(winningNumbers, winningMatcher);
+        List<Integer> winningMatcher = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+        int sumPrize = tickets.calculateStatics(winningNumbers, winningMatcher);
+        uiManager.printWinningStatistics(winningMatcher, sumPrize);
     }
 }
