@@ -1,9 +1,11 @@
 package step2;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
 
+    private static final int PERCENTAGE = 100;
     private final int money;
 
     public static Money buy(int money){
@@ -14,8 +16,8 @@ public class Money {
         return money / lottoPrice;
     }
 
-    public double getYield(int sum) {
-        return sum / money;
+    public BigDecimal getYield(int sum) {
+        return new BigDecimal((double) sum / money * PERCENTAGE);
     }
 
     private Money(int money) {

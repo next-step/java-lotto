@@ -2,35 +2,32 @@ package step2;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Statistic {
 
+    private static final int DECIMAL_DIGIT = 2;
+
     public static int sum() {
         return Arrays.stream(Rank.values())
-                .mapToInt(Rank::getTotal)
+                .mapToInt(Rank::getProfit)
                 .sum();
     }
 
-
     public static BigDecimal getYield(Money money) {
-        return new BigDecimal(money.getYield(sum()))
-                .setScale(2, RoundingMode.HALF_EVEN);
+        int total = Rank.getTotal();
+        BigDecimal bigDecimal = money.getYield(total)
+                .setScale(DECIMAL_DIGIT, RoundingMode.HALF_EVEN);
+        return bigDecimal;
+
     }
 
     public static void compare(List<Lotto> lottos, Lotto winLotto) {
-        List<Integer> list = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            int compare = lotto.compare(winLotto);
-            list.add(compare);
-        }
-        for(Integer match : list) {
-            Rank matches = Rank.matches(match);
-            matches.count();
-        }
+        lottos.stream()
+                .map(lotto -> lotto.compare(winLotto))
+                .map(Rank::matches)
+                .filter(rank -> !rank.isEmpty())
+                .forEach(Rank::count);
     }
-
-
 }

@@ -2,27 +2,24 @@ package step2.view;
 
 import step2.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
 
-    public static List<Lotto> getLotto(Money money) {
+    public static void getLotto(Money money, List<Lotto> lottos) {
         print(money);
-        List<Lotto> lottos = LottoMachine.buy(money);
-        lottos.forEach(lotto -> System.out.println(lotto.getLotto()));
-        return lottos;
+        lottos.forEach(lotto -> print(lotto));
     }
 
     public static void getResult(Money money) {
-        print("당첨 통계");
-        print("---------");
-        Arrays.stream(Rank.values())
-                .filter(rank -> !rank.equals(Rank.EMPTY))
-                .forEach(rank -> {
-            print(rank.getMatch() + "개 일치 (" + rank.getReward() + "원) = " + rank.getCount()+ "개");
-        });
+        print("당첨 통계\n---------");
+        Rank.getCounted()
+            .forEach(OutputView::printMatched);
         print("총 수익률을 " + Statistic.getYield(money) + "입니다");
+    }
+
+    private static void printMatched(Rank rank) {
+        print(rank.getMatch() + "개 일치 (" + rank.getReward() + "원) = " + rank.getCount()+ "개");
     }
 
     private static void print(Money money) {
@@ -32,6 +29,8 @@ public class OutputView {
     private static void print(String message) {
         System.out.println(message);
     }
+
+    private static void print(Lotto lotto) { System.out.println(lotto.getLotto()); }
 
 
 }

@@ -2,6 +2,7 @@ package step2;
 
 import org.assertj.core.internal.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -18,12 +19,14 @@ public class StatisticTest {
         Rank.FORTH.count();
     }
 
+    @DisplayName("전체 당첨금의 합계를 구한다")
     @Test
     void sum() {
         int sum = Statistic.sum();
         assertThat(sum).isEqualTo(60000);
     }
 
+    @DisplayName("수익율을 구한다")
     @Test
     void get_yield() {
         Money buy = Money.buy(14000);
@@ -31,6 +34,7 @@ public class StatisticTest {
         assertThat(yield.equals(new BigDecimal(4.00)));
     }
 
+    @DisplayName("당첨 로또와 몇개의 숫자가 맞는지 구한다")
     @Test
     void compare() {
         List<Lotto> lottos = Arrays.asList(

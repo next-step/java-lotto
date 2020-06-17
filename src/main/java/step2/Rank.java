@@ -1,6 +1,8 @@
 package step2;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -30,6 +32,27 @@ public enum Rank {
                 .orElse(EMPTY);
     };
 
+    public static List<Rank> getCounted() {
+        return Arrays.stream(values())
+                .filter(Rank::isNotEmpty)
+                .collect(Collectors.toList());
+    }
+
+    public static int getTotal() {
+        return Arrays.stream(values())
+                .mapToInt(Rank::getProfit)
+                .sum();
+    }
+
+    public boolean isEmpty() {
+        return this.equals(Rank.EMPTY);
+    }
+
+    public boolean isNotEmpty() {
+
+        return !this.equals(Rank.EMPTY);
+    }
+
     public void count() {
         this.count++;
     }
@@ -38,12 +61,8 @@ public enum Rank {
         return count;
     }
 
-    public int getTotal() {
+    public int getProfit() {
         return reward * count;
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public int getMatch() {
@@ -53,4 +72,6 @@ public enum Rank {
     public int getReward() {
         return reward;
     }
+
+
 }

@@ -1,5 +1,6 @@
 package step2;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
+    @DisplayName("로또를 생성한다")
     @Test
     void create() {
         Set<Number> numbers = mockLotto();
@@ -17,6 +19,7 @@ public class LottoTest {
         assertThat(lotto.getLotto()).contains(Number.mock(1));
     }
 
+    @DisplayName("랜덤 값을 가져온다")
     @Test
     void get_random() {
         Set<Number> numbers = mockLotto();
@@ -25,18 +28,21 @@ public class LottoTest {
         assertThat(random.size()).isEqualTo(6);
     }
 
+    @DisplayName("로또를 구매한다")
     @Test
     void lotto_buy() {
         Lotto lotto = Lotto.buy();
         assertThat(lotto.getLotto().size()).isEqualTo(6);
     }
 
+    @DisplayName("당첨 로또를 생성한다")
     @Test
     void lotto_win() {
         Lotto win = Lotto.win(mockLotto());
         assertThat(win.getLotto()).contains(Number.win(1));
     }
 
+    @DisplayName("로또의 숫자가 6자리 인지 체크한다")
     @Test
     void is_required_size() {
         assertThatThrownBy(() -> {
@@ -45,6 +51,7 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("당첨 로또 번호와 로또들의 번호를 비교한다")
     @Test
     void compare() {
         Lotto win = Lotto.win(mockLotto());
