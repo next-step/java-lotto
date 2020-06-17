@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 
 public class Ranking {
 
-	int matchedNumber;
-	Integer count = 0;
-
 	public enum Rank {
 		SIXMATCH(6, 2_000_000_000), FIVEMATCH(5, 15_000_000), FOURMATCH(4, 50_000), THREEMATCH(3, 5_000), MISS(0, 0);
 
@@ -33,37 +30,39 @@ public class Ranking {
 		}
 
 	}
-
-	public static List<Integer> winNumSplit(String inputWinNumber) {
+	
+	// List<Integer>말고 Integer로 반환할때
+	// String -> Integer로 받을수있나요?
+	public static Integer winNumSplit(String inputWinNumber) {
 		if (inputWinNumber.equals("") || inputWinNumber == null) {
 			throw new IllegalArgumentException("공백이나 null은 안됩니다.");
 		}
 
-		return Arrays.asList(inputWinNumber.trim()
+		return inputWinNumber.trim()
 				.replace(" ", "")
-				.split(","))
+				.split(",")
 				.stream()
 				.mapToInt(Integer::parseInt)
 				.boxed()
 				.collect(Collectors.toList());
 	}
 
-	public Map<Rank, List<Integer>> matchNumber(List<Lotto> lottoNumbers, List<Integer> winningLotto) {
+	public Map<Rank, Integer> matchNumber(List<Lotto> lottos, Integer winningLotto) {
 
-		Map<Rank, List<Integer>> rankRepository = new HashMap<>();
+		Map<Rank, Integer> rankRepository = new HashMap<>();
 
-		lottoNumbers.forEach(lotto -> {
+		lottos.forEach(lotto -> {
 			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
-
-			List<Integer> countOfRank = rankRepository
+			
+			// Integer 이부분에서 카운트를 어떻게 하면좋을까요?
+			Integer countOfRank = rankRepository
 					.getOrDefault(rank, new ArrayList<>());
 			countOfRank.add(1);
 
 			rankRepository.put(rank, countOfRank);
 
 		});
-
-		System.out.println(rankRepository);
+		
 		return rankRepository;
 	}
 

@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 import study1.Splitter;
 import study2.domain.Lotto;
-import study2.domain.LottoNumbers;
+import study2.domain.Lottos;
 import study2.view.InputView;
 
 class LottoTest {
 	
-	LottoNumbers lottoNumbers = new LottoNumbers();
+	Lottos lottoNumbers = new Lottos();
 	List<Lotto> lottoSize = new ArrayList<Lotto>();
 	
 	@BeforeEach

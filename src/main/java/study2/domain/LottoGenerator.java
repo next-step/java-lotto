@@ -18,24 +18,21 @@ public class LottoGenerator {
 				.boxed()
 				.collect(Collectors.toList())
 				);
-
 	}
 
-	private static List<Integer> shuffleLottoNumbers(List<Integer> lottoNumbers) {
+	private static List<Integer> shuffleLottoNumbers(List<Integer> lottos) {
 		
-		Collections.shuffle(lottoNumbers); // 섞기 
-		return sortLottoNumber(lottoNumbers);
+		Collections.shuffle(lottos); // 섞기 
+		return sortLottoNumber(lottos);
 	}
 	
-	private static List<Integer> sortLottoNumber(List<Integer> lottoNumbers){
+	private static List<Integer> sortLottoNumber(List<Integer> lottos){
 		
-		return  lottoNumbers
+		return  lottos
 				.stream()
-				.limit(LottoNumbers.Lotto_numbers_size)
+				.limit(Lottos.Lotto_numbers_size)
 				.sorted()
 				.collect(Collectors.toList());
 				
 	}
-	
-
 }

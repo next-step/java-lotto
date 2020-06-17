@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import study2.domain.Lotto;
-import study2.domain.LottoNumbers;
+import study2.domain.Lottos;
 import study2.domain.Ranking;
 import study2.domain.Ranking.Rank;
 

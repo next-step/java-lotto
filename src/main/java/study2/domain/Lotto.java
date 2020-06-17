@@ -9,17 +9,8 @@ public class Lotto {
 
 	static final int MAX_LOTTO_NUMBER = 45;
 	static final int MIN_LOTTO_NUMBER = 1;
-	private int number;
+	
 	private List<Integer> numbers;
-
-	public Lotto() {
-
-	}
-
-	public Lotto(int number) {
-		isWrongNumberList(number);
-		this.number = number;
-	}
 
 	public Lotto(List<Integer> numbers) {
 		for (int i : numbers) {
@@ -38,16 +29,11 @@ public class Lotto {
 		return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
 	}
 
-	public int getNumber() {
-		return number;
-	}
+	
 	public List<Integer> getNumbers() {
 		return numbers;
 	}
-	public int size() {
-		return numbers.size();
-	}
-
+	
 	public  Rank getRankWithWinningLotto(List<Integer> winningLotto) {
 								
 		int matchedNumber =  (int) this.numbers.stream()
