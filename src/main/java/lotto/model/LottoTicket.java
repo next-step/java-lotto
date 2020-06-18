@@ -1,36 +1,20 @@
 package lotto.model;
 
 import utils.IntegerUtils;
-import java.util.Collections;
 
 public class LottoTicket {
-    private int[] myNumbers;
     private int rank = 0;
     private Rank rankType;
 
-    private Lotto lotto = new Lotto();
+    private LottoNumbers myNumbers = new LottoNumbers();
 
-    public LottoTicket() {
-        myNumbers = buyTicket();
-    }
-
-    public LottoTicket(int[] numbers) {
+    public LottoTicket() { }
+    public LottoTicket(LottoNumbers numbers) {
         this.myNumbers = numbers;
     }
 
-    public int[] getMyNumbers() {
+    public LottoNumbers getMyNumbers() {
         return myNumbers;
-    }
-
-    public int[] buyTicket() {
-        Collections.shuffle(lotto.lottoDrawNumbers);
-        int[] numbers = new int[Lotto.LIMIT];
-
-        for(int i = 0; i < Lotto.LIMIT; i++) {
-            numbers[i] = lotto.lottoDrawNumbers.get(i);
-        }
-
-        return numbers;
     }
 
     public Rank announceRank(int[] winningNumbers) {
@@ -43,7 +27,7 @@ public class LottoTicket {
     }
     
     private void isWinner(int winningNumber) {
-        if (IntegerUtils.arrToList(myNumbers).contains(winningNumber)) {
+        if (IntegerUtils.numbersToList(myNumbers.getNumbers()).contains(winningNumber)) {
             rank++;
         }
     }

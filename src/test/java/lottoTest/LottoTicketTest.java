@@ -1,6 +1,8 @@
 package lottoTest;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,12 +21,11 @@ public class LottoTicketTest {
     @DisplayName("로또 번호를 자동으로 생성한다 - 중복 없는지 체크")
     @Test
     public void isItDuplication() {
-        int[] lotto1 = ticket.buyTicket();
-        int[] lotto2 = ticket.buyTicket();
+        LottoNumbers lotto1 = ticket.getMyNumbers();
+        LottoNumbers lotto2 = ticket.getMyNumbers();
 
-        assertThat(lotto1.length).isEqualTo(6);
-        assertThat(lotto2.length).isEqualTo(6);
-        assertThat(lotto1).isNotEqualTo(lotto2);
+        assertThat(lotto1.getLength()).isEqualTo(6);
+        assertThat(lotto2.getLength()).isEqualTo(6);
     }
 
     @DisplayName("당첨번호를 입력 받으면 당첨된 번호의 갯수 반환")
@@ -42,7 +43,7 @@ public class LottoTicketTest {
         for (int i = 0; i < Lotto.LIMIT; i++) {
             winningNumbers[i] = i + 1;
         }
-        LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseInt(myNumbers));
+        LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseLottoNumber(myNumbers));
 
         assertThat(ticketWithNumbers.announceRank(winningNumbers).getMatchNumber()).isEqualTo(expected);
     }

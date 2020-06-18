@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.Rank;
 
 public class OutputView {
@@ -15,12 +17,13 @@ public class OutputView {
         System.out.println(num + "개를 구매했습니다.");
     }
 
-    public void printLottoNumbersView(int[] lottoNumbers) {
+    public void printLottoNumbersView(LottoNumbers numbers) {
+        LottoNumber[] lottoNumbers = numbers.getNumbers();
         System.out.print("[");
         for (int i = 0; i < lottoNumbers.length - 1; i++) {
-            System.out.print(lottoNumbers[i] + ", ");
+            System.out.print(lottoNumbers[i].getNumber() + ", ");
         }
-        System.out.println(lottoNumbers[lottoNumbers.length - 1] + "]");
+        System.out.println(lottoNumbers[lottoNumbers.length - 1].getNumber() + "]");
     }
 
     public void winningResultView() {

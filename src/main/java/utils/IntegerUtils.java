@@ -1,5 +1,8 @@
 package utils;
 
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +28,31 @@ public class IntegerUtils {
         return results;
     }
 
+    public static LottoNumbers splitAndParseLottoNumber(String stringNumbers) {
+        String[] numbers = stringNumbers.split(",");
+        int size = numbers.length;
+        LottoNumber[] lottoNumbers = new LottoNumber[size];
+
+        for (int i = 0; i < size; i++) {
+            lottoNumbers[i] = new LottoNumber(parsing(numbers[i]));
+        }
+
+        return new LottoNumbers(lottoNumbers);
+    }
+
     public static List<Integer> arrToList(int[] numbers) {
         List<Integer> list = new ArrayList<>();
         for (int i : numbers) {
             list.add(i);
+        }
+
+        return list;
+    }
+
+    public static List<Integer> numbersToList(LottoNumber[] numbers) {
+        List<Integer> list = new ArrayList<>();
+        for (LottoNumber number : numbers) {
+            list.add(number.getNumber());
         }
 
         return list;
