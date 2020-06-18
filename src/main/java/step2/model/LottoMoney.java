@@ -18,7 +18,7 @@ public class LottoMoney {
     }
 
     private void validatePrice(int inputMoney) {
-        if ( inputMoney < LOTTO_COST ) {
+        if (inputMoney < LOTTO_COST) {
             throw new LottoLowMoneyException();
         }
     }
