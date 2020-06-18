@@ -1,11 +1,8 @@
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
-        int sum = 0;
-        String[] numbers = text.split(",|:");
-
-        for (String number : numbers) {
-            sum += Integer.parseInt(number);
+        if (InputText.checkNullOrEmptyText(text)) {
+            return 0;
         }
-        return sum;
+        return new SumText(Operator.matchDelimiter(text)).sum();
     }
 }
