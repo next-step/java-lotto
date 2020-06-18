@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.LottoLine;
+import lotto.model.LottoNo;
 import lotto.model.LottoResult;
 import lotto.model.PrizeEnum;
 import org.junit.jupiter.api.BeforeAll;
@@ -51,5 +52,12 @@ public class LottoTest {
     public void testBonusWinnerCount() {
         LottoResult result = new LottoResult(new LottoLine(3, 5, 7, 13, 16, 19), 2);
         assertThat(result.lineResult(sampleLine)).isEqualTo(PrizeEnum.FIVE_BONUS);
+    }
+
+    @Test
+    public void testLottoNumberClass() {
+        LottoNo no = new LottoNo(4);
+        assertThat(no.toString()).isEqualTo("4");
+        assertThat(no.equals(new LottoNo(9))).isEqualTo(false);
     }
 }
