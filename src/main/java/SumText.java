@@ -8,8 +8,17 @@ public class SumText {
 
     public int sum() {
         for (String value : text) {
-            sum += Integer.parseInt(value);
+            sum += convertStringToInt(value);
         }
         return sum;
+    }
+
+    private int convertStringToInt(String string) {
+        int castingValue = Integer.parseInt(string);
+
+        if (castingValue < 0) {
+            throw new RuntimeException();
+        }
+        return castingValue;
     }
 }
