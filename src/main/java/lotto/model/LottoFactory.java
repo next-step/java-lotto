@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.List;
 
 public class LottoFactory {
-    public int gameStart(int numberOfTickets, LottoNumbers winningNumbers, List<LottoTicket> tickets) {
+    public int calcPrize(int numberOfTickets, LottoNumbers winningNumbers, List<LottoTicket> tickets) {
         int prize = 0;
         LottoStatistics lottoStatistics = new LottoStatistics();
 
