@@ -19,7 +19,7 @@ public class IntegerUtils {
         int[] results = new int[size];
 
         for (int i = 0; i < size; i++) {
-            results[i] = IntegerUtils.parsing(numbers[i]);
+            results[i] = IntegerUtils.parsing(numbers[i].trim());
         }
 
         return results;

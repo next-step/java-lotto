@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.LottoFactory;
 import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
 import lotto.model.Rank;
@@ -20,27 +21,20 @@ import java.util.List;
  */
 
 public class LottoGame {
-	private static int prize = 0;
-
 	private static InputView inputView = new InputView();
 	private static OutputView outputView = new OutputView();
 	private LottoStatistics lottoStatistics = new LottoStatistics();
+	private LottoFactory lottoFactory = new LottoFactory();
 
 	public void makeWish() {
 		int budget = setBudget();
 		int numberOfTickets = setTicketNumber(budget);
 		List<LottoTicket> tickets = buyTickets(numberOfTickets);
 		int[] winningNumbers = setWinningNumbers();
-
-		for (int i = 0; i < numberOfTickets; i++) {
-			Rank rank = tickets.get(i).announceRank(winningNumbers);
-			lottoStatistics.gatherResult(rank);
-			prize += lottoStatistics.getPrizeMoney(rank);
-		}
+		int prize = lottoFactory.gameStart(numberOfTickets, winningNumbers, tickets);
+		double profit = lottoStatistics.calcProfit(prize, budget);
 
 		outputView.winningResultView();
-
-		double profit = lottoStatistics.calcProfit(prize, budget);
 		outputView.printEarningRateView(profit);
 	}
 
