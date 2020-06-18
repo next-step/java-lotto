@@ -3,7 +3,6 @@ package lotto;
 import lotto.model.LottoFactory;
 import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
-import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import utils.IntegerUtils;
@@ -34,8 +33,7 @@ public class LottoGame {
 		int prize = lottoFactory.gameStart(numberOfTickets, winningNumbers, tickets);
 		double profit = lottoStatistics.calcProfit(prize, budget);
 
-		outputView.winningResultView();
-		outputView.printEarningRateView(profit);
+		showResult(profit);
 	}
 
 	public List<LottoTicket> buyTickets(int numberOfTickets) {
@@ -53,6 +51,11 @@ public class LottoGame {
 		int numberOfTickets = lottoStatistics.buyLottos(budget);
 		outputView.howManyLottoTicketsView(numberOfTickets);
 		return numberOfTickets;
+	}
+
+	private void showResult(double profit) {
+		outputView.winningResultView();
+		outputView.printEarningRateView(profit);
 	}
 
 	private int setBudget() {
