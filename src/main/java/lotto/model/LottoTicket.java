@@ -2,13 +2,18 @@ package lotto.model;
 
 import utils.IntegerUtils;
 
+import java.util.List;
+
 public class LottoTicket {
     private int rank = 0;
     private Rank rankType;
 
-    private LottoNumbers myNumbers = new LottoNumbers();
+    private LottoNumbers myNumbers; // = new LottoNumbers();
 
-    public LottoTicket() { }
+    public LottoTicket() {
+        this.myNumbers = new LottoNumbers();
+    }
+
     public LottoTicket(LottoNumbers numbers) {
         this.myNumbers = numbers;
     }
@@ -17,17 +22,18 @@ public class LottoTicket {
         return myNumbers;
     }
 
-    public Rank announceRank(int[] winningNumbers) {
-        for (int i : winningNumbers) {
-            isWinner(i);
+    public Rank announceRank(LottoNumbers winningNumbers) {
+        for (LottoNumber number : winningNumbers.getNumbers()) {
+            isWinner(number);
         }
 
         rankType = Rank.getValue(rank);
         return rankType;
     }
     
-    private void isWinner(int winningNumber) {
-        if (IntegerUtils.numbersToList(myNumbers.getNumbers()).contains(winningNumber)) {
+    private void isWinner(LottoNumber winningNumber) {
+        List<Integer> myNumberList = IntegerUtils.numbersToList(myNumbers.getNumbers());
+        if (myNumberList.contains(winningNumber.getNumber())) {
             rank++;
         }
     }

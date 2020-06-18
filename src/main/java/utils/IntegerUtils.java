@@ -34,7 +34,7 @@ public class IntegerUtils {
         LottoNumber[] lottoNumbers = new LottoNumber[size];
 
         for (int i = 0; i < size; i++) {
-            lottoNumbers[i] = new LottoNumber(parsing(numbers[i]));
+            lottoNumbers[i] = new LottoNumber(parsing(numbers[i].trim()));
         }
 
         return new LottoNumbers(lottoNumbers);

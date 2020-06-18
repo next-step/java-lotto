@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.LottoFactory;
+import lotto.model.LottoNumbers;
 import lotto.model.LottoStatistics;
 import lotto.model.LottoTicket;
 import lotto.view.InputView;
@@ -29,7 +30,7 @@ public class LottoGame {
 		int budget = setBudget();
 		int numberOfTickets = setTicketNumber(budget);
 		List<LottoTicket> tickets = buyTickets(numberOfTickets);
-		int[] winningNumbers = setWinningNumbers();
+		LottoNumbers winningNumbers = setWinningNumbers();
 		int prize = lottoFactory.gameStart(numberOfTickets, winningNumbers, tickets);
 		double profit = lottoStatistics.calcProfit(prize, budget);
 
@@ -62,8 +63,8 @@ public class LottoGame {
 		return inputView.inputBudgetView();
 	}
 
-	private int[] setWinningNumbers() {
+	private LottoNumbers setWinningNumbers() {
 		String str = inputView.inputWinningNumbersView();
-		return IntegerUtils.splitAndParseInt(str);
+		return IntegerUtils.splitAndParseLottoNumber(str);
 	}
 }

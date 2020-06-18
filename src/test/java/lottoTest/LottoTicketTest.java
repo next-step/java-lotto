@@ -39,13 +39,14 @@ public class LottoTicketTest {
             "1,2,3,4,5,16 : 5",
             "1,2,3,4,5,6 : 6"}, delimiter = ':')
     public void getPrize(String myNumbers, int expected) {
-        int[] winningNumbers = new int[Lotto.LIMIT];
+        LottoNumber[] winningNumbers = new LottoNumber[Lotto.LIMIT];
         for (int i = 0; i < Lotto.LIMIT; i++) {
-            winningNumbers[i] = i + 1;
+            winningNumbers[i] = new LottoNumber(i + 1);
         }
         LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseLottoNumber(myNumbers));
+        LottoNumbers winningLotto = new LottoNumbers(winningNumbers);
 
-        assertThat(ticketWithNumbers.announceRank(winningNumbers).getMatchNumber()).isEqualTo(expected);
+        assertThat(ticketWithNumbers.announceRank(winningLotto).getMatchNumber()).isEqualTo(expected);
     }
 
 }
