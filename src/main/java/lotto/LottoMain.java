@@ -11,7 +11,8 @@ public class LottoMain {
         LottoInput input = new StandardInputView();
         StandardOutputView outputView = new StandardOutputView();
         LottoGames games = new LottoGames.LottoGamesBuilder(input.getPurchasePrice())
-                .manualLines(input.getManualLottoLines()).build(outputView);
+                .manualLines(input.getManualLottoLines())
+                .build(outputView);
         LottoResult result = new LottoResult(input.getWinnerLine(), input.getBonusNumber());
         outputView.printStat(games, result);
     }

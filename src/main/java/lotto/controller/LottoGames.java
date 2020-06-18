@@ -27,9 +27,7 @@ public class LottoGames implements Iterable<LottoLine> {
         }
 
         public LottoGamesBuilder manualLines(List<LottoLine> lines) {
-            for (LottoLine line : lines) {
-                this.lines.add(line);
-            }
+            this.lines.addAll(lines);
             return this;
         }
 

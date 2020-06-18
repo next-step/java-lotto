@@ -40,7 +40,7 @@ public class LottoLine {
     }
 
     public boolean containNumber(LottoNo number) {
-        return lineNumbers.stream().collect(Collectors.toList()).contains(number);
+        return lineNumbers.stream().anyMatch(n -> n.equals(number));
     }
 
     public String getLineContent() {
