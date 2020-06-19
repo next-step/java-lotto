@@ -1,5 +1,7 @@
 package stringCalculator;
 
+import utils.IntegerUtils;
+
 public class Operations {
     public static int operationSum(String[] numbers) {
         int sum = 0;
