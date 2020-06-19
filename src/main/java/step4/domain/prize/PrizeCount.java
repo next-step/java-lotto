@@ -45,6 +45,10 @@ public class PrizeCount {
             return prizeSum;
         }
 
+        public long getPrizePriceSum() {
+            return prize.getPrizePrice() * prizeSum;
+        }
+
         public boolean isMatchedNumber(Prize prize) {
             return this.prize.getMatchedNumber() == prize.getMatchedNumber()
                     && this.prize.isBonusNumberMatching() == prize.isBonusNumberMatching();
@@ -93,8 +97,8 @@ public class PrizeCount {
         return BigDecimal.valueOf(
                 prizes.stream()
                         .mapToLong(
-                                prizes -> prizes.getPrizeSum()
-                                        * prizes.getPrize().getPrizePrice()).sum())
+                                prizes -> prizes.getPrizePriceSum()
+                        ).sum())
                 .divide(
                         BigDecimal.valueOf(prizes.stream()
                                 .mapToLong(PrizeAdder::getPrizeSum).sum())

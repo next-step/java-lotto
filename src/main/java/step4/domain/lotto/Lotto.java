@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     // each Lotto numbers.
-    private Set<Integer> lottoNumbers;
+    private Set<LottoNo> lottoNumbers;
 
-    public Lotto(Set<Integer> lottoNumbers) {
+    public Lotto(Set<LottoNo> lottoNumbers) {
         LottoNumber.checkLottoRules(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -23,11 +23,11 @@ public class Lotto {
     public Lotto(String lottoNumbers) {
         this.lottoNumbers = Arrays.asList(lottoNumbers.split(LottoNumber.FIXED_DELIMITER))
                 .stream()
-                .map(Integer::parseInt)
+                .map(x -> new LottoNo(Integer.parseInt(x)))
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), TreeSet::new));
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNo> getNumbers() {
         return lottoNumbers;
     }
 

@@ -27,10 +27,9 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6,7,8,9,0", "2,1,43,44,33,4,49,22,23,12,3", "6,5,4,3,2,1,7,8,9"})
     void drawLottoNumbers(String input) {
-
-        List<Integer> result = LottoNumber.drawLottoNumbers(Arrays.stream(input.split(",")).map(Integer::parseInt).collect(Collectors.toList()));
+        List<LottoNo> result = LottoNumber.drawLottoNumbers(
+                Arrays.stream(input.split(",")).map(x -> new LottoNo(Integer.parseInt(x))).collect(Collectors.toList()));
         assertThat(result.size()).isEqualTo(LOTTO_DRAW_LIMIT);
-
     }
 
 }

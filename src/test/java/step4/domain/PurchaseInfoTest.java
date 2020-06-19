@@ -11,24 +11,24 @@ class PurchaseInfoTest {
 
     @DisplayName("초기화테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1000:1000", "2000:1000", "1500000:1000"}, delimiter = ':')
-    public void initTest(String inputString, int price) {
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputString, price);
+    @CsvSource(value = {"1000:0", "2000:0", "1500000:0"}, delimiter = ':')
+    public void initTest(String inputString, String selfChooseCount) {
+        PurchaseInfo purchaseInfo = new PurchaseInfo(inputString, selfChooseCount);
     }
 
     @DisplayName("초기화오류테스트_음수입력")
     @ParameterizedTest
-    @CsvSource(value = {"-1:1000", "-2000:1000", "-1500000:1000"}, delimiter = ':')
-    public void initTest_음수입력(String inputString, int price) {
+    @CsvSource(value = {"-1:0", "-2000:0", "-1500000:0"}, delimiter = ':')
+    public void initTest_음수입력(String inputString, String selfChooseCount) {
         assertThatIllegalArgumentException().isThrownBy(() ->
-                new PurchaseInfo(inputString, price));
+                new PurchaseInfo(inputString, selfChooseCount));
     }
 
     @DisplayName("입력금액에 맞는 로또구매 매수")
     @ParameterizedTest
-    @CsvSource(value = {"1000:1000:1", "2000:1000:2", "1500000:1000:1500"}, delimiter = ':')
-    public void getBoughtLottoCount(String inputString, int price, int boughtLotto) {
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputString, price);
+    @CsvSource(value = {"1000:0:1", "2000:0:2", "1500000:0:1500"}, delimiter = ':')
+    public void getBoughtLottoCount(String inputString, String selfChooseCount, int boughtLotto) {
+        PurchaseInfo purchaseInfo = new PurchaseInfo(inputString, selfChooseCount);
         assertThat(purchaseInfo.getBoughtLottoCount()).isEqualTo(boughtLotto);
     }
 

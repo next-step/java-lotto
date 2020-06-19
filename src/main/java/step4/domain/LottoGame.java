@@ -5,7 +5,6 @@ import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoTickets;
 import step4.domain.lotto.WinningLotto;
 import step4.domain.prize.PrizeCount;
-import step4.view.OutputView;
 
 import java.util.List;
 
@@ -16,11 +15,10 @@ import java.util.List;
  */
 public class LottoGame {
 
-    private static LottoTickets lottoTickets;
+    private LottoTickets lottoTickets;
 
     private LottoGame(LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
-        OutputView.outputLottoList(lottoTickets.getLottoTickets());
     }
 
     public static LottoGame create(PurchaseInfo purchaseInfo, List<Lotto> selfChosenLottos) {
@@ -30,16 +28,19 @@ public class LottoGame {
         return new LottoGame(lottoTickets);
     }
 
-
     // matching
     public void matchingWinningNumbers(WinningLotto winningLotto) {
         winningLotto.matchingWinningNumbers(lottoTickets);
     }
-
     // winningResult
+
     public void totalResult() {
         PrizeCount prizeCount = PrizeCount.getInstance();
         prizeCount.outputWinningResult();
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 
 }

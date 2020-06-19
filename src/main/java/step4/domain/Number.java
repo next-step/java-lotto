@@ -19,10 +19,7 @@ public class Number {
     }
 
     public static void checkNumber(String inputString) {
-        if (Objects.isNull(inputString)) {
-            throw new IllegalArgumentException("Found a not number(s).");
-        }
-        if (!patternNumbersOnly.matcher(inputString).matches()) {
+        if (Objects.isNull(inputString) || !patternNumbersOnly.matcher(inputString).matches()) {
             throw new IllegalArgumentException("Found a not number(s).");
         }
     }
@@ -30,11 +27,15 @@ public class Number {
     public static void checkNumber(String[] inputString) {
         Arrays.stream(inputString)
                 .forEach(string -> {
-                            if (!patternNumbersOnly.matcher(string).matches()) {
-                                throw new IllegalArgumentException("Found a not number(s).");
-                            }
+                            checkMatchingPatternNumberOnly(string);
                         }
                 );
+    }
+
+    private static void checkMatchingPatternNumberOnly(String string) {
+        if (!patternNumbersOnly.matcher(string).matches()) {
+            throw new IllegalArgumentException("Found a not number(s).");
+        }
     }
 
     public static void checkNotNumber(int number) {

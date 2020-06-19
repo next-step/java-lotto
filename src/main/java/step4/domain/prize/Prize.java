@@ -19,7 +19,7 @@ public enum Prize {
 
     public static final int MISS_MATCHED_CUT_LINE = 2;
     private int matchedNumber;
-    private int prizePrice;
+    private long prizePrice;
     private String rank;
     private boolean bonusNumberMatching;
 
@@ -35,7 +35,7 @@ public enum Prize {
         return matchedNumber;
     }
 
-    public int getPrizePrice() {
+    public long getPrizePrice() {
         return prizePrice;
     }
 
@@ -45,10 +45,9 @@ public enum Prize {
 
     public static Prize valueOf(int matchedNumber, boolean bonusNumberMatching) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.matchedNumber == checkMatchedNumberInCutLine(matchedNumber)
-                        && prize.bonusNumberMatching == bonusNumberMatching)
+                .filter(prize -> prize.matchedNumber == matchedNumber && prize.bonusNumberMatching == bonusNumberMatching)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException());
+                .orElseGet(() -> MISS);
     }
 
     private static int checkMatchedNumberInCutLine(int matchedNumber) {

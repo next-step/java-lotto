@@ -1,10 +1,5 @@
 package step4.view;
 
-import step4.domain.PurchaseInfo;
-import step4.domain.lotto.Lotto;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -34,14 +29,10 @@ public class InputView {
         return result;
     }
 
-    public static List<Lotto> inputChooseNumbersForSelf(PurchaseInfo purchaseInfo) {
+    public static String inputChooseNumbersForSelf() {
         System.out.println(QUESTION_CHOOSE_NUMBER);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseInfo.getSelfChooseCount(); i++) {
-            String result = SCANNER.next();
-            lottos.add(new Lotto(result));
-        }
-        return lottos;
+        String result = SCANNER.next();
+        return result;
     }
 
     public static String inputWiningNumber() {

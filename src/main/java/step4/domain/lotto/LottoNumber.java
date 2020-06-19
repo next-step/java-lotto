@@ -1,5 +1,7 @@
 package step4.domain.lotto;
 
+import step4.domain.PurchaseInfo;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,9 +14,16 @@ public class LottoNumber {
     public static final String FIXED_DELIMITER = ",|:";
 
     // default 1 to LOTTO_MAX_LIMIT (45)
-    private static final List<Integer> lottoGameNumbers = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
-            .boxed()
-            .collect(Collectors.toList());
+    private static List<LottoNo> lottoGameNumbers = new ArrayList<>();
+
+    static {
+        List<Integer> numbers645 = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
+                .boxed()
+                .collect(Collectors.toList());
+        for (Integer integer : numbers645) {
+            lottoGameNumbers.add(new LottoNo(integer));
+        }
+    }
 
     // issue
     public static LottoTickets issueLotto(Integer boughtLottoCount) {
@@ -25,8 +34,8 @@ public class LottoNumber {
         return new LottoTickets(lottoList);
     }
 
-    public static void checkLottoRules(Set<Integer> lottoNumbers) {
-        if (Collections.max(lottoNumbers) > LOTTO_MAX_LIMIT) {
+    public static void checkLottoRules(Set<LottoNo> lottoNumbers) {
+        if (Collections.max(lottoNumbers).getLottoNo() > LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException();
         }
         if (lottoNumbers.size() != LOTTO_DRAW_LIMIT) {
@@ -34,7 +43,7 @@ public class LottoNumber {
         }
     }
 
-    public static List<Integer> drawLottoNumbers(List<Integer> lottoNumbers) {
+    public static List<LottoNo> drawLottoNumbers(List<LottoNo> lottoNumbers) {
         return lottoNumbers.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
     }
 

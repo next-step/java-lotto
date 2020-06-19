@@ -23,7 +23,6 @@ class LottoTest {
         Set<Integer> testResult = new TreeSet<>(Arrays.asList(resultString.split(LottoNumber.FIXED_DELIMITER)).stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet()));
-
         assertThat(lotto.getNumbers()).isEqualTo(testResult);
     }
 

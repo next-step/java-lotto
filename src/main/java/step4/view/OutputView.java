@@ -1,12 +1,13 @@
 package step4.view;
 
+import step4.domain.LottoGame;
 import step4.domain.lotto.Lotto;
+import step4.domain.lotto.LottoTickets;
 import step4.domain.prize.Prize;
 import step4.domain.prize.PrizeCount;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /*
@@ -18,9 +19,10 @@ public class OutputView {
 
     private static final String NUMBER_DELIMITER = ",";
 
-    public static void outputLottoList(List<Lotto> lottoTickets) {
-        System.out.println("You bought (a) " + lottoTickets.size() + " games.");
-        lottoTickets.forEach(lotto -> {
+    public static void outputLottoList(LottoGame lottoGame) {
+        LottoTickets lottoTickets = lottoGame.getLottoTickets();
+        System.out.println("You bought (a) " + lottoTickets.getLottoTickets().size() + " games.");
+        lottoTickets.getLottoTickets().forEach(lotto -> {
             printNumbers(lotto);
         });
     }
@@ -29,7 +31,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder("[");
         stringBuilder.append(lotto.getNumbers()
                 .stream()
-                .map(number -> String.format("%3d", number))
+                .map(number -> String.format("%3d", number.getLottoNo()))
                 .collect(Collectors.joining(NUMBER_DELIMITER)));
         stringBuilder.append("]");
         System.out.println(stringBuilder);
