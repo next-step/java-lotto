@@ -31,7 +31,11 @@ public class OutputView {
         System.out.println("---------");
 
         for (Rank rank : Rank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), rank.getMatchCount());
+            StringBuilder msg = new StringBuilder("개 일치");
+            if (rank == Rank.SECOND) {
+                msg.append(", 보너스 볼 일치 ");
+            }
+            System.out.printf("%d" + msg + " (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), rank.getMatchCount());
         }
     }
 
