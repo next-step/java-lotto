@@ -31,6 +31,7 @@ public class Lottos {
 		for (int i = 0; i < inputPrice / 1000; i++) {
 			lottos.add(new Lotto((LottoGenerator.generateLottoNumber())));
 		}
+		
 		return lottos;
 	}
 }

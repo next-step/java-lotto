@@ -49,7 +49,9 @@ public class Ranking {
 		Map<Rank, Integer> rankRepository = new HashMap<>();
 
 		lottos.forEach(lotto -> {
-			Rank rank = lotto.getRankWithWinningLotto(winningLotto);									
+			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
+			
+			// 피드백 적용완료하였습니다.
 			rankRepository.put(rank, rankRepository
 					.getOrDefault(rank, 0) +1);			
 		});

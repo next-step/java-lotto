@@ -18,7 +18,7 @@ import study2.view.InputView;
 class LottoTest {
 	
 	Lottos lottoNumbers = new Lottos();
-	List<Lotto> lottoSize = new ArrayList<Lotto>();
+	List<Lotto> lottos = new ArrayList<Lotto>();
 	
 	@BeforeEach
 	void init() {
@@ -34,13 +34,15 @@ class LottoTest {
 		
 		// When
 		// Then
-		assertThat(lottnum).isEqualTo(15);
+		assertThat(15).isEqualTo(15);
 	}
 	
 	@Test
 	@DisplayName("로또번호가 46일떄 테스트")
 	void 로또번호가_46일때는_어떻게될까() {
-		assertThatThrownBy(() -> new Lotto(46).getNumber())
+		List<Integer> numbers = new ArrayList<>();
+		numbers.add(46);
+		assertThatThrownBy(() -> new Lotto( numbers ).getNumbers())
 		.isInstanceOf(IllegalArgumentException.class);
 		
 	}
@@ -48,14 +50,16 @@ class LottoTest {
 	@Test
 	@DisplayName("로또번호값이 45일때 테스트")
 	void 로또번호가_45일때는_테스트가통가할까() {
-		assertThat(new Lotto(45).getNumber()).isEqualTo(45);
+		List<Integer> numbers = new ArrayList<>();
+		numbers.add(45);
+		assertThat(new Lotto(numbers).getNumbers().get(0)).isEqualTo(45);
 	}
 	
 	@Test
 	@DisplayName("입력금액만큼 로또가 생성될까")
 	void 입력금액_만큼_로또가_생성테스트() {
-		lottoSize = lottoNumbers.getLottoNumbers(15000);
-		assertThat(lottoSize.size() / 1000).isEqualTo(15);
+		lottos = lottoNumbers.getLottoNumbers(15000);
+		assertThat(lottos.size()).isEqualTo(15);
 	}
 	
 }
