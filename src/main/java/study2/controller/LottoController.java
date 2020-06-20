@@ -25,7 +25,8 @@ public class LottoController {
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
 		// 지난 주 당첨 번호 입력
-		Integer winNumber = rank.winNumSplit(InputView.rankMessages());
+		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
+		
 		matchNumber =rank.matchNumber(lottos, winNumber);
 		
 		resultview.outPutMessages(matchNumber, lottos);

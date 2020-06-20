@@ -37,8 +37,8 @@ public class Lotto {
 	public  Rank getRankWithWinningLotto(List<Integer> winningLotto) {
 								
 		int matchedNumber =  (int) this.numbers.stream()
-                .filter(winningLotto::contains)
-                .count();
+				        .filter(winningLotto::contains)
+				        .count();
 		
 		return Ranking.getRanking(matchedNumber);
 	}

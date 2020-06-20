@@ -27,7 +27,7 @@ public class InputView {
 		
 		System.out.println(inputPrice / lottoPrice + inputPriceMessage);
 		
-		return (inputPrice / lottoPrice);
+		return inputPrice;
 	}
 	
 	private static boolean negativePrice(int inputPrice) {

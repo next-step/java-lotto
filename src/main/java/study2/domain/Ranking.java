@@ -3,6 +3,7 @@ package study2.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -30,46 +31,36 @@ public class Ranking {
 		}
 
 	}
-	
-	// List<Integer>말고 Integer로 반환할때
-	// String -> Integer로 받을수있나요?
-	public static Integer winNumSplit(String inputWinNumber) {
+		
+	public static List<Integer> winNumSplit(String inputWinNumber) {
 		if (inputWinNumber.equals("") || inputWinNumber == null) {
 			throw new IllegalArgumentException("공백이나 null은 안됩니다.");
 		}
 
-		return inputWinNumber.trim()
-				.replace(" ", "")
-				.split(",")
+		return 	Arrays.asList(inputWinNumber.replace(" ", "")
+				.split(","))				
 				.stream()
 				.mapToInt(Integer::parseInt)
 				.boxed()
-				.collect(Collectors.toList());
+				.collect(Collectors.toList());				
 	}
 
-	public Map<Rank, Integer> matchNumber(List<Lotto> lottos, Integer winningLotto) {
-
+	public Map<Rank, Integer> matchNumber(List<Lotto> lottos, List<Integer> winningLotto) {
 		Map<Rank, Integer> rankRepository = new HashMap<>();
 
 		lottos.forEach(lotto -> {
-			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
-			
-			// Integer 이부분에서 카운트를 어떻게 하면좋을까요?
-			Integer countOfRank = rankRepository
-					.getOrDefault(rank, new ArrayList<>());
-			countOfRank.add(1);
-
-			rankRepository.put(rank, countOfRank);
-
+			Rank rank = lotto.getRankWithWinningLotto(winningLotto);									
+			rankRepository.put(rank, rankRepository
+					.getOrDefault(rank, 0) +1);			
 		});
 		
 		return rankRepository;
 	}
 
 	public static Rank getRanking(int matchedNumber) {
-
-		return Arrays.stream(Rank.values()).filter(rank -> rank.getCountOfMatch() == matchedNumber).findFirst()
+		return Arrays.stream(Rank.values())
+				.filter(rank -> rank.getCountOfMatch()== matchedNumber)
+				.findFirst()
 				.orElse(Rank.MISS);
-
-	}
+	}	
 }

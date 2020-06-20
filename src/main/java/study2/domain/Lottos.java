@@ -14,11 +14,9 @@ public class Lottos {
 	private List<Lotto> lottos = new ArrayList<Lotto>();
 
 	private void validateSize(List<Lotto> lottoNumbers) {
-
 		if (lottoNumbers.size() != Lotto_numbers_size) {
 			throw new IllegalArgumentException("로또는 6개 숫자 입니다.");
 		}
-
 	}
 
 	private void validateDuplicate(List<Lotto> lottoNumbers) {
@@ -29,13 +27,10 @@ public class Lottos {
 	}
 
 	public List<Lotto> getLottoNumbers(int inputPrice) {
-
-		// for문에 대한 리팩토링 필요할까요? : 리팩토링 할만한 조언부탁드리겠습니다.
-		for (int i = 0; i < inputPrice; i++) {
+		
+		for (int i = 0; i < inputPrice / 1000; i++) {
 			lottos.add(new Lotto((LottoGenerator.generateLottoNumber())));
 		}
 		return lottos;
-
 	}
-
 }
