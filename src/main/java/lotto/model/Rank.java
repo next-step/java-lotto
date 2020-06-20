@@ -41,23 +41,20 @@ public enum Rank {
     }
 
     public static Rank getValue(int matchNumber, boolean matchBonus) {
-        Rank rankType = null;
-
         if (matchNumber == 1 || matchNumber == 2) {
             return MISS;
         }
 
+        if (matchNumber == SECOND.getMatchNumber()) {
+            return (matchBonus ? SECOND : THIRD);
+        }
+
         for (Rank rank : Rank.values()) {
             if (rank.getMatchNumber() == matchNumber) {
-                rankType = rank;
-                break;
+                return rank;
             }
         }
 
-        if (rankType == SECOND && !matchBonus) {
-            rankType = THIRD;
-        }
-
-       return rankType;
+       return null;
     }
 }
