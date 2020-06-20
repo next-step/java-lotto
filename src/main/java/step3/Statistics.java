@@ -16,13 +16,13 @@ public class Statistics {
         }
     }
 
-    public Statistics(List<Integer> winningCountList) {
+    public Statistics(List<LottoResult> winningCountList) {
         this();
 
         winningCountList.stream()
-                .filter(WinningStatistics::matchedCount)
-                .forEach(winningCount -> {
-                    WinningStatistics key = WinningStatistics.valueOfWinningCount(winningCount);
+                .filter(lottoResult -> WinningStatistics.checkMatchedCount(lottoResult.getWinningCount()))
+                .forEach(lottoResult -> {
+                    WinningStatistics key = WinningStatistics.valueOfWinningCount(lottoResult.getWinningCount(), lottoResult.hasBonus());
                     int value = statistics.get(key);
                     statistics.put(key, ++value);
                 });

@@ -1,5 +1,6 @@
 package step3;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -12,12 +13,8 @@ public enum WinningStatistics {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    //    SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
-
-    private static final Map<Integer, WinningStatistics> matchedCounts =
-            Collections.unmodifiableMap(Stream.of(values()).
-                    collect(Collectors.toMap(WinningStatistics::getMatchedNumberCount, Function.identity())));
 
     private int matchedNumberCount;
     private int winningMoney;
@@ -27,12 +24,20 @@ public enum WinningStatistics {
         this.winningMoney = winningMoney;
     }
 
-    public static WinningStatistics valueOfWinningCount(int winningCount) {
-        return Optional.ofNullable(matchedCounts.get(winningCount)).orElse(MISS);
+    public static WinningStatistics valueOfWinningCount(int winningCount, boolean hasBonus) {
+        if (winningCount == THIRD.matchedNumberCount && hasBonus) {
+            return SECOND;
+        }
+
+        return Optional.of(Arrays.stream(values())
+                    .filter(winningStatistics -> winningStatistics.matchedNumberCount == winningCount)
+                    .findAny()
+                    .orElse(MISS)
+                ).orElse(MISS);
     }
 
-    public static boolean matchedCount(int count) {
-        return matchedCounts.containsKey(count);
+    public static boolean checkMatchedCount(int count) {
+        return Arrays.stream(values()).anyMatch(winningStatistics -> winningStatistics.matchedNumberCount == count);
     }
 
     public int getMatchedNumberCount() {

@@ -17,8 +17,10 @@ public class Main {
 
         InputView winningNumbersInputView = InputView.addQuestion("지난 주 당첨 번호를 입력해 주세요.");
         String stringWinningNumbers = winningNumbersInputView.inputWinnerNumbers();
+        InputView bonusView = InputView.addQuestion("보너스 볼을 입력해 주세요.");
+        int bonusNumber = bonusView.inputPrice();
 
-        LottoTicket winningNumbers = LottoTicket.newLottoTicketFromString(stringWinningNumbers);
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(stringWinningNumbers, bonusNumber);
         Statistics statistics = new Statistics(winningNumbers.checkLottoWinning(lottoTicketList));
 
         resultView.printResult(statistics);
