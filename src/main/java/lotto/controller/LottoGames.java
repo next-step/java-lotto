@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.model.LottoLine;
 import lotto.model.LottoResult;
 import lotto.model.PrizeEnum;
+import lotto.view.StandardOutputView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,12 +11,39 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LottoGames implements Iterable<LottoLine> {
-    List<LottoLine> lines;
+    private List<LottoLine> lines;
 
-    public LottoGames(int price) {
-        this.lines = new ArrayList<>();
-        for (int i = 0; i < price / 1000; i++) {
-            lines.add(new LottoLine());
+    private LottoGames(LottoGamesBuilder builder) {
+        this.lines = builder.lines;
+    }
+
+    public static class LottoGamesBuilder {
+        List<LottoLine> lines;
+        int price;
+
+        public LottoGamesBuilder(int price) {
+            lines = new ArrayList<>();
+            this.price = price;
+        }
+
+        public LottoGamesBuilder manualLines(List<LottoLine> lines) {
+            this.lines.addAll(lines);
+            return this;
+        }
+
+        public LottoGames build(StandardOutputView view) {
+            if (this.lines.size() * 1000 > price) {
+                throw new IllegalArgumentException("가격을 초과하여 수동 구매를 하였습니다.");
+            }
+            int manualSize = this.lines.size();
+
+            for (int i = manualSize; i < price / 1000; i++) {
+                this.lines.add(new LottoLine());
+            }
+
+            LottoGames games = new LottoGames(this);
+            view.printBoughtLotto(manualSize, games);
+            return games;
         }
     }
 

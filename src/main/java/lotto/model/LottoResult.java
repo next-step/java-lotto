@@ -2,11 +2,11 @@ package lotto.model;
 
 public class LottoResult {
     private LottoLine winner;
-    private int bonusNumber;
+    private LottoNo bonusNumber;
 
     public LottoResult(LottoLine line, int bonusNumber) {
         this.winner = line;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNo(bonusNumber);
     }
 
     public PrizeEnum lineResult(LottoLine line) {

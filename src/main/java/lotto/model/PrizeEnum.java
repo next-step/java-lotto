@@ -36,7 +36,11 @@ public enum PrizeEnum {
     public static PrizeEnum getMatchPrizeEnum(int match, boolean bonus) {
         return Arrays.stream(PrizeEnum.values())
                 .filter(
-                        prizeEnum -> prizeEnum.getMatch() == match && prizeEnum.isBonusMatched() == bonus
+                        prizeEnum -> prizeEnum.equals(match, bonus)
                 ).findAny().orElse(PrizeEnum.FAIL);
+    }
+
+    public boolean equals(int match, boolean bonusMatched) {
+        return this.match == match && this.bonusMatched == bonusMatched;
     }
 }
