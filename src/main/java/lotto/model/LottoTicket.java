@@ -22,7 +22,7 @@ public class LottoTicket {
         return myNumbers;
     }
 
-    public Rank announceRank(LottoNumbers winningNumbers) {
+    public Rank announceRank(LottoNumbers winningNumbers, int bonusBall) {
         for (LottoNumber number : winningNumbers.getNumbers()) {
             isWinner(number);
         }

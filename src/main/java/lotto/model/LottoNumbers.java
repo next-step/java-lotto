@@ -20,4 +20,8 @@ public class LottoNumbers {
     public int getLength() {
         return numbers.length;
     }
+
+    public int getBonusBall() {
+        return numbers[Lotto.LIMIT - 1].getNumber();
+    }
 }

@@ -31,7 +31,8 @@ public class LottoGame {
 		int numberOfTickets = setTicketNumber(budget);
 		List<LottoTicket> tickets = buyTickets(numberOfTickets);
 		LottoNumbers winningNumbers = setWinningNumbers();
-		int prize = lottoFactory.calcPrize(numberOfTickets, winningNumbers, tickets);
+		int bonusBall = inputView.inputBonusBallView();
+		int prize = lottoFactory.calcPrize(winningNumbers, bonusBall, tickets);
 		double profit = lottoStatistics.calcProfit(prize, budget);
 
 		showResult(profit);
