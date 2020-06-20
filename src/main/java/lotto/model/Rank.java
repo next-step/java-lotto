@@ -12,7 +12,7 @@ public enum Rank {
     private final int rank;
     private final int matchNumber;
     private final int prize;
-    private int count;
+    private int matchCount;
 
     Rank(int rank, int matchNumber, int prize) {
         this.rank = rank;
@@ -32,12 +32,12 @@ public enum Rank {
         return prize;
     }
 
-    public int getCount() {
-        return count;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public void plusCount() {
-        this.count++;
+        this.matchCount++;
     }
 
     public static Rank getValue(int matchNumber, boolean matchBonus) {

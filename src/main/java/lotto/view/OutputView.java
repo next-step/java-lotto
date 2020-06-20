@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.Rank;
@@ -32,7 +31,7 @@ public class OutputView {
         System.out.println("---------");
 
         for (Rank rank : Rank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), rank.getCount());
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchNumber(), rank.getPrize(), rank.getMatchCount());
         }
     }
 
