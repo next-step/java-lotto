@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 2단계 로또(자동) 기능 목록
+* 입출력 UI인 InputView, ResultView 구현
+* 로또 1개 생성 로직
+* 입력값을 1000원으로 나눈 개수 만큼 로또 생성하는 로직
+* 로또 1개에 당첨번호 확인 로직
+* 전체 로또 개수의 당첨번호 관리 로직
