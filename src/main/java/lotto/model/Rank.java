@@ -20,6 +20,10 @@ public enum Rank {
         this.prize = prize;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
     public int getMatchNumber() {
         return matchNumber;
     }
@@ -37,16 +41,23 @@ public enum Rank {
     }
 
     public static Rank getValue(int matchNumber, boolean matchBonus) {
+        Rank rankType = null;
+
         if (matchNumber == 1 || matchNumber == 2) {
             return MISS;
         }
 
         for (Rank rank : Rank.values()) {
             if (rank.getMatchNumber() == matchNumber) {
-                return rank;
+                rankType = rank;
+                break;
             }
         }
 
-       return null;
+        if (rankType == SECOND && !matchBonus) {
+            rankType = THIRD;
+        }
+
+       return rankType;
     }
 }

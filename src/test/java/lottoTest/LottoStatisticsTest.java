@@ -23,7 +23,7 @@ public class LottoStatisticsTest {
 
     @DisplayName("당첨된 번호 갯수를 가지고 당첨 금액을 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"ALL_MATCH, 2000000000", "MISS_ONE, 1500000", "MISS_TWO, 50000", "MISS_THREE, 5000"})
+    @CsvSource(value = {"FIRST, 2000000000", "SECOND, 30000000", "THIRD, 1500000", "FOURTH, 50000", "FIFTH, 5000", "MISS, 0"})
     public void takePrizeMoney(Rank rank, int prize) {
         int money = lottoStatistics.getPrizeMoney(rank);
         assertThat(money).isEqualTo(prize);
