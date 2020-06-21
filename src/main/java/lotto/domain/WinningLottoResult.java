@@ -9,7 +9,7 @@ public class WinningLottoResult {
 
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
-    private static int LOTTO_GAME_PRICE = 1000;
+    private final static int LOTTO_GAME_PRICE = 1000;
 
     public WinningLottoResult() {
         rankResult = new ArrayList();
