@@ -1,11 +1,13 @@
 package lotto;
 
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
+import lotto.domain.WinningMatch;
 import lotto.utils.InputUtils;
 import lotto.utils.LottoShuffle;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,14 +21,19 @@ public class LottoGame {
         int buyCount = InputUtils.parserMoney(input.getMoney());
         output.printLottoCount(buyCount);
 
-        Lottos lottos = new Lottos(buyCount, new LottoShuffle());
-        output.printBuyLottoNumber(lottos.getLottoNumbers());
+        List<Lotto> lottos = new ArrayList<Lotto>();
+        for (int i = 0; i < buyCount; i++) {
+            List lottoNumbers = LottoShuffle.makeLottoNumber();
+            Lotto lotto = new Lotto(lottoNumbers);
+            output.printBuyLottoNumber(lotto);
+            lottos.add(lotto);
+        }
 
-        input.inputLastLottoNumber();
-        List lastLottoNumbers = InputUtils.stringToArray(input.getLastLottoNumber());
-        output.printResultStatic(lottos.makeResultStatics(lastLottoNumbers));
+        input.inputLastWinningNumber();
+        List lastWinningNumbers = InputUtils.stringToArray(input.getLastLottoNumber());
+        Lotto winningLotto = new Lotto(lastWinningNumbers);
 
-        output.printTotalRevenue(lottos.getTotalRevenue(),lottos.getRevenueMention());
+
 
     }
 }

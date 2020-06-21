@@ -21,7 +21,7 @@ public class Input {
         this.money = inputMoney;
     }
 
-    public void inputLastLottoNumber(){
+    public void inputLastWinningNumber(){
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         this.inputLastLottoNumbers = scanner.next();
     }
