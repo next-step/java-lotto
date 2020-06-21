@@ -26,11 +26,15 @@ public enum Prize {
         return money;
     }
 
-    public static Prize findByMoney(int matchCount) {
+    public static Prize findByPrize(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.isSameMatchCount(matchCount))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public int sumMoney(int totalMoney){
+        return money + totalMoney;
     }
 
 
