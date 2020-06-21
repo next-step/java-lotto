@@ -10,11 +10,12 @@ public class LottoStore {
         this.numberOfLottoTicket = lottoMoney.getNumberOfLottoByMoneyPaid();
     }
 
-    public List<LottoTicket> sellLottoTicket() {
+    public List<LottoTicket> sellAutoLottoTicket() {
         final List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottoTicket; i++) {
-            lottoTickets.add(LottoTicket.getAutoLotto());
+            final LottoTicket lottoTicket = new AutoLottoTicket(null);
+            lottoTickets.add(lottoTicket);
         }
         return lottoTickets;
     }
