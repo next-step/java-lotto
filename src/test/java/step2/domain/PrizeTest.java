@@ -2,6 +2,7 @@ package step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,5 +19,14 @@ class PrizeTest {
         //when&then
         assertThat(Prize.valueOf(hitCount, isMatchedBonus).getGrade())
             .isEqualTo(Integer.valueOf(prizeInput));
+    }
+
+    @Test
+    void winningValues() {
+        //when
+        Prize[] prizes = Prize.winningValues();
+
+        //then
+        assertThat(prizes.length).isEqualTo(Prize.values().length - 1);
     }
 }
