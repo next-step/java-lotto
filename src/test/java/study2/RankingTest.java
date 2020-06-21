@@ -41,7 +41,7 @@ class RankingTest {
 
 		// TODO : int[] nums = Arrays.stream(winNumber).mapToInt(Integer::parseInt).toArray();
 		
-		Map<Rank, Integer> matchNumber = ranking.matchNumber(lottos, lottolist);
+		Map<Rank, Integer> matchNumber = ranking.matchNumber(lottos, lottolist, 0);
 	
 		assertThat(matchNumber.get(Rank.THREEMATCH)).isEqualTo(1);
 	}

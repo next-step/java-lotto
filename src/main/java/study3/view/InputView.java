@@ -1,9 +1,9 @@
-package study2.view;
+package study3.view;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import study2.domain.Lotto;
+import study3.domain.Lotto;
 
 public class InputView {
 	private static final String INIT_MESSAGE = "구입금액을 입력해 주세요.";

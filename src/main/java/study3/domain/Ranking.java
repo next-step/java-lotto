@@ -1,4 +1,4 @@
-package study2.domain;
+package study3.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,8 +43,14 @@ public class Ranking {
 		lottos.forEach(lotto -> {
 			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
 						
+			if(rank == Rank.FOURMATCH || lotto.lottoContainsBonusBall(bonusBall)) {				
+				rankRepository.put(rank.FIVEPLUSBONUS, rankRepository
+						.getOrDefault(rank.FIVEPLUSBONUS, 0) +1);				
+			}
 			rankRepository.put(rank, rankRepository
 					.getOrDefault(rank, 0) +1);			
+			
+			System.out.println(rankRepository);
 		});
 		return rankRepository;
 	}

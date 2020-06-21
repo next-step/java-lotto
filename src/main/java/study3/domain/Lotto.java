@@ -1,9 +1,9 @@
-package study2.domain;
+package study3.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import study2.domain.Ranking.Rank;
+import study3.domain.Ranking.Rank;
 
 public class Lotto {
 
@@ -41,5 +41,9 @@ public class Lotto {
 				        .count();
 		
 		return Ranking.getRanking(matchedNumber);
-	} 
+	}
+
+	public boolean lottoContainsBonusBall(int bonusBall) {
+		return this.numbers.contains(bonusBall);
+	}
 }
