@@ -5,20 +5,20 @@ import lotto.domain.LottoMoney;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class InputView {
+public class MoneyInputView {
     private final static Scanner SCANNER = new Scanner(System.in);
 
     private final LottoMoney lottoMoney;
 
-    private InputView(BigDecimal money) {
+    private MoneyInputView(BigDecimal money) {
         this.lottoMoney = new LottoMoney(money);
     }
 
-    public static InputView enterInput() {
-        return new InputView(enterMoney());
+    public static MoneyInputView enterMoney() {
+        return new MoneyInputView(getInput());
     }
 
-    private static BigDecimal enterMoney() {
+    private static BigDecimal getInput() {
         System.out.println("구입 금액을 입력해 주세요.");
         return SCANNER.nextBigDecimal();
     }
@@ -26,4 +26,5 @@ public class InputView {
     public LottoMoney getLottoMoney() {
         return lottoMoney;
     }
+
 }
