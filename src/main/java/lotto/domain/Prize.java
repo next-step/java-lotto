@@ -33,7 +33,7 @@ public enum Prize {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public int sumMoney(int totalMoney){
+    public int sumMoney(int totalMoney) {
         return money + totalMoney;
     }
 

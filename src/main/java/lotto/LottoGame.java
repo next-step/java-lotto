@@ -1,14 +1,12 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.Prize;
 import lotto.domain.WinningLottoResult;
 import lotto.utils.InputUtils;
 import lotto.utils.LottoShuffle;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,12 +33,11 @@ public class LottoGame {
         Lotto winningLotto = new Lotto(InputUtils.stringToArray(input.getLastLottoNumber()));
 
         WinningLottoResult lottoResult = new WinningLottoResult();
-        for(Lotto lotto : lottos){
+        for (Lotto lotto : lottos) {
             int count = lotto.matchCount(winningLotto);
             lottoResult.match(count);
         }
         output.printResultStatic(lottoResult, buyCount);
-
 
 
     }

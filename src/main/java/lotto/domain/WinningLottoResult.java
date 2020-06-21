@@ -9,6 +9,7 @@ public class WinningLottoResult {
 
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
+    private static int LOTTO_GAME_PRICE = 1000;
 
     public WinningLottoResult() {
         rankResult = new ArrayList();
@@ -40,7 +41,7 @@ public class WinningLottoResult {
 
     public float getRevenueStatic(int buyCount) {
         int totalSum = getTotalSum();
-        return totalSum / (buyCount * 1000);
+        return totalSum / (buyCount * LOTTO_GAME_PRICE);
     }
 
     private int getTotalSum() {

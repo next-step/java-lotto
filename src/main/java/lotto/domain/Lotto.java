@@ -19,7 +19,7 @@ public class Lotto {
             throw new IllegalArgumentException();
         }
 
-        for (Integer number:inputNumbers){
+        for (Integer number : inputNumbers) {
             this.numbers.add(new LottoNumber(number));
         }
 
@@ -30,13 +30,13 @@ public class Lotto {
         return checkNumbers.size() != LOTTO_SIZE;
     }
 
-    public List<Integer> getNumbers(){
+    public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(number -> number.getNumber())
                 .collect(Collectors.toList());
     }
 
-    public int matchCount(Lotto winningLotto){
+    public int matchCount(Lotto winningLotto) {
 
         int count = 0;
 
