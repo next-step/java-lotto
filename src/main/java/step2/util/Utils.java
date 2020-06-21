@@ -7,6 +7,7 @@ import static step2.Constants.REX_WHITE_SPACE_IN_STRING;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import step2.domain.LottoNumber;
 
 public class Utils {
 
@@ -20,6 +21,25 @@ public class Utils {
         return result;
     }
 
+    public static List<LottoNumber> convertStringToLottoNumberList(List<String> stringList) {
+        List<LottoNumber> result = new ArrayList<>();
+        try {
+            stringList.forEach(string -> result.add(new LottoNumber(Integer.parseInt(string))));
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+        return result;
+    }
+
+    public static List<LottoNumber> convertIntegerToLottoNumberList(List<Integer> integerList) {
+        List<LottoNumber> result = new ArrayList<>();
+        try {
+            integerList.forEach(integer -> result.add(new LottoNumber(integer)));
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+        return result;
+    }
 
     public static List<String> convertCsvStringToList(String csvString)
         throws IllegalArgumentException {

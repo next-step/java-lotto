@@ -1,7 +1,5 @@
 package step2.domain;
 
-import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
-import static step2.domain.LottoGenerator.LOTTO_LAST_NUMBER;
 import static step2.domain.LottoGenerator.LOTTO_SELECTION_COUNT;
 
 import java.util.HashSet;
@@ -15,18 +13,18 @@ public class Lotto {
     private static final String DUPLICATED_LOTTO_NUMBER = "로또 번호는 중복되지 않아야 합니다.";
     private static final String INVALID_LOTTO_NUMBER_RANGE = "로또 번호는 1~45 사이의 숫자로 이루어져야 합니다.";
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         validLottoNumber();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public boolean hasNumber(int number) {
+    public boolean hasNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
@@ -35,17 +33,21 @@ public class Lotto {
             throw new IllegalArgumentException(INVALID_NUMBERS_COUNT);
         }
 
-        Set<Integer> set = new HashSet<>(lottoNumbers);
+        Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (CollectionUtils.size(set) < CollectionUtils.size(lottoNumbers)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER);
         }
 
-        lottoNumbers.forEach(number -> {
-            if (number < LOTTO_FIRST_NUMBER || number > LOTTO_LAST_NUMBER) {
+        lottoNumbers.stream().forEach(lottoNumber -> {
+            if (!lottoNumber.isValid()) {
                 throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
+
             }
         });
 
+//        lottoNumbers.stream().filter(lottoNumber -> !lottoNumber.isValid()).forEach(lottoNumber -> {
+//            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
+//        });
     }
 
     @Override

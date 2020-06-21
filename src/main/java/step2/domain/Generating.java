@@ -8,8 +8,8 @@ public class Generating {
 
     private GenerableStrategy generableStrategy;
 
-    public List<Integer> generate(int count) {
-        return generableStrategy.generate(count);
+    public List<LottoNumber> generate(int start, int end, int count) {
+        return generableStrategy.generate(start, end, count);
     }
 
     public Generating(GenerableStrategy generableStrategy) {

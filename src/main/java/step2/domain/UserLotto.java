@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class UserLotto extends Lotto {
 
-    public UserLotto(List<Integer> lottoNumbers) {
+    public UserLotto(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 

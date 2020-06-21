@@ -7,13 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step2.util.Utils;
 
 class LottoGeneratorTest {
 
     LottoGenerator lottoGenerator;
 
-    private static List<Integer> generate(int count) {
-        return Arrays.asList(1, 2, 3, 4, 5, 6);
+    private static List<LottoNumber> generate(int start, int end, int count) {
+        return Utils.convertIntegerToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @BeforeEach
@@ -25,7 +26,8 @@ class LottoGeneratorTest {
     public void generateLottos() {
         //given
         int lottoCount = 5;
-        UserLotto lottoResult = new UserLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        UserLotto lottoResult = new UserLotto(
+            Utils.convertIntegerToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
         LottoSheet lottoSheet = lottoGenerator.generateLottos(lottoCount);

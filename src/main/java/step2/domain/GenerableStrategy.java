@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface GenerableStrategy {
 
-    List<Integer> generate(int count);
+    List<LottoNumber> generate(int start, int end, int count);
 }

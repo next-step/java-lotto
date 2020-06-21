@@ -21,7 +21,8 @@ public class LottoGenerator extends Generating {
         }
         List<UserLotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new UserLotto(this.generate(LOTTO_SELECTION_COUNT)));
+            lottos.add(new UserLotto(
+                this.generate(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER, LOTTO_SELECTION_COUNT)));
         }
         return new LottoSheet(lottos);
     }
