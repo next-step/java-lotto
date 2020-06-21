@@ -25,7 +25,7 @@ public class ResultView {
         for (Prize prize : Prize.winningValues()) {
             System.out.printf(ResultMessageTemplate.valueOf(prize.getGrade()).messageTemplate,
                 prize.getCashPrize(),
-                lottoGameResultDto.getPrizeResult().getOrDefault(prize, 0).intValue());
+                lottoGameResultDto.getPrizeCount(prize));
         }
         System.out.printf(earningStatisticTemplate, lottoGameResultDto.getEarningRate());
         printStatisticResult(lottoGameResultDto.getEarningRate());

@@ -16,8 +16,8 @@ public class LottoGameResultDto {
         return earningRate;
     }
 
-    public Map<Prize, Integer> getPrizeResult() {
-        return prizeResult;
+    public int getPrizeCount(Prize prize) {
+        return prizeResult.getOrDefault(prize, 0).intValue();
     }
 
     @Override

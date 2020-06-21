@@ -55,8 +55,8 @@ public enum Prize {
     public static Prize[] winningValues() {
         List<Prize> prizes = new ArrayList<>();
         prizes.addAll(Arrays.asList(values()));
-        Collections.sort(prizes, (prize1, prize2) -> prize2.getGrade() - prize1.getGrade());
         prizes.removeIf(prize -> prize == NONE);
+        Collections.sort(prizes, (prize1, prize2) -> prize2.getGrade() - prize1.getGrade());
         return prizes.toArray(new Prize[prizes.size()]);
     }
 
