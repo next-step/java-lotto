@@ -38,16 +38,12 @@ public class Lotto {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER);
         }
 
-        lottoNumbers.stream().forEach(lottoNumber -> {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             if (!lottoNumber.isValid()) {
                 throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
 
             }
-        });
-
-//        lottoNumbers.stream().filter(lottoNumber -> !lottoNumber.isValid()).forEach(lottoNumber -> {
-//            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
-//        });
+        }
     }
 
     @Override
