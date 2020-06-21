@@ -4,14 +4,14 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
+    public WinningLotto(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         super(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }

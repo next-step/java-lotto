@@ -1,28 +1,26 @@
 package step2.domain;
 
-import static step2.Constants.EMPTY_COUNT;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameResult {
 
-    private Map<Integer, Integer> prizeResult;
-
-    public LottoGameResult() {
-        prizeResult = new HashMap<>();
-        Arrays.stream(Prize.values())
-            .forEach(prize -> prizeResult.put(prize.getGrade(), EMPTY_COUNT));
-    }
-
-    public LottoGameResultDto getResult(LottoSheet lottoSheet, WinningLotto winningLotto,
+    public LottoGameResultDto getResult(LottoSheet lottoSheet,
+        WinningLotto winningLotto,
         UserPrice userPrice) {
 
-        lottoSheet.drawPrize(winningLotto, prizeResult);
+        Map<Prize, Integer> prizeResult = lottoSheet.getPrizeResult(winningLotto);
 
         return new LottoGameResultDto(
-            userPrice.getEarningRate(lottoSheet, winningLotto),
-            prizeResult);
+            getEarningRate(lottoSheet, winningLotto, userPrice), prizeResult);
+    }
+
+    private long getTotalCashPrize(LottoSheet lottoSheet, WinningLotto winningLotto) {
+        long totalCashPrize = lottoSheet.getLottos().stream()
+            .mapToLong(lotto -> lotto.getPrize(winningLotto).getCashPrize()).sum();
+        return totalCashPrize;
+    }
+
+    private double getEarningRate(LottoSheet lottoSheet, WinningLotto winningLotto, UserPrice userPrice) {
+        return (double) getTotalCashPrize(lottoSheet, winningLotto) / userPrice.getPrice();
     }
 }

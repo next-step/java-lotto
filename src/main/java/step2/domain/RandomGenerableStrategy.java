@@ -1,36 +1,22 @@
 package step2.domain;
 
-import static step2.domain.LottoGenerator.LOTTO_FIRST_NUMBER;
-import static step2.domain.LottoGenerator.LOTTO_LAST_NUMBER;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import step2.util.Utils;
 
 public class RandomGenerableStrategy implements GenerableStrategy {
 
-    private List<Integer> lottoBaseNumbers;
-
-    public RandomGenerableStrategy() {
-        lottoBaseNumbers = makeSequentialNumbers(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
-    }
-
     @Override
-    public List<Integer> generate(int count) {
-        List<Integer> copiedLottoBaseNumbers = new ArrayList<>();
-        copiedLottoBaseNumbers.addAll(lottoBaseNumbers);
-        return getSequentialShuffledNumbers(copiedLottoBaseNumbers, count);
+    public List<LottoNumber> generate(int start, int end, int count) {
+        List<Integer> generatedNumbers = getSequentialShuffledNumbers(start, end, count);
+        return Utils.convertIntegerToLottoNumberList(generatedNumbers);
     }
 
-    private List<Integer> makeSequentialNumbers(int start, int end) {
-        return IntStream.rangeClosed(start, end)
-            .boxed()
-            .collect(Collectors.toList());
-    }
-
-    private List<Integer> getSequentialShuffledNumbers(List<Integer> sequentialNumbers, int count) {
+    private List<Integer> getSequentialShuffledNumbers(int start, int end, int count) {
+        List<Integer> sequentialNumbers = Arrays
+            .asList(IntStream.rangeClosed(start, end).boxed().toArray(Integer[]::new));
         Collections.shuffle(sequentialNumbers);
         sequentialNumbers = sequentialNumbers.subList(0, count);
         Collections.sort(sequentialNumbers);

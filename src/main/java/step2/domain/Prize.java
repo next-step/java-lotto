@@ -1,6 +1,9 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 public enum Prize {
@@ -47,5 +50,23 @@ public enum Prize {
             }
             return prize.hitCount == countOfMatch;
         };
+    }
+
+    public static Prize[] winningValues() {
+        List<Prize> prizes = new ArrayList<>();
+        prizes.addAll(Arrays.asList(values()));
+        prizes.removeIf(prize -> prize == NONE);
+        Collections.sort(prizes, (prize1, prize2) -> prize2.getGrade() - prize1.getGrade());
+        return prizes.toArray(new Prize[prizes.size()]);
+    }
+
+    @Override
+    public String toString() {
+        return "Prize{" +
+            "grade=" + grade +
+            ", cashPrize=" + cashPrize +
+            ", hitCount=" + hitCount +
+            ", isMatchedBonus=" + isMatchedBonus +
+            '}';
     }
 }

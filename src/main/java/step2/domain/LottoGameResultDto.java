@@ -5,9 +5,9 @@ import java.util.Map;
 public class LottoGameResultDto {
 
     private final double earningRate;
-    private Map<Integer, Integer> prizeResult;
+    private Map<Prize, Integer> prizeResult;
 
-    public LottoGameResultDto(double earningRate, Map<Integer, Integer> prizeResult) {
+    public LottoGameResultDto(double earningRate, Map<Prize, Integer> prizeResult) {
         this.earningRate = earningRate;
         this.prizeResult = prizeResult;
     }
@@ -16,8 +16,8 @@ public class LottoGameResultDto {
         return earningRate;
     }
 
-    public Map<Integer, Integer> getPrizeResult() {
-        return prizeResult;
+    public int getPrizeCount(Prize prize) {
+        return prizeResult.getOrDefault(prize, 0).intValue();
     }
 
     @Override
