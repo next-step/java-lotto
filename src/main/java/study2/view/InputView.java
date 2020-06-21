@@ -13,7 +13,7 @@ public class InputView {
 	
 	static Scanner scanner = new Scanner(System.in);
 	
-	public static int initMessages() {
+	public static int enterPriceMessage() {
 		System.out.println(initMessage);
 		
 		return scanner.nextInt();

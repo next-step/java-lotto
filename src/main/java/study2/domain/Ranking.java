@@ -31,27 +31,13 @@ public class Ranking {
 		}
 
 	}
-		
-	public static List<Integer> winNumSplit(String inputWinNumber) {
-		if (inputWinNumber.equals("") || inputWinNumber == null) {
-			throw new IllegalArgumentException("공백이나 null은 안됩니다.");
-		}
-
-		return 	Arrays.asList(inputWinNumber.replace(" ", "")
-				.split(","))				
-				.stream()
-				.mapToInt(Integer::parseInt)
-				.boxed()
-				.collect(Collectors.toList());				
-	}
-
+	
 	public Map<Rank, Integer> matchNumber(List<Lotto> lottos, List<Integer> winningLotto) {
 		Map<Rank, Integer> rankRepository = new HashMap<>();
 
 		lottos.forEach(lotto -> {
 			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
 			
-			// 피드백 적용완료하였습니다.
 			rankRepository.put(rank, rankRepository
 					.getOrDefault(rank, 0) +1);			
 		});

@@ -20,21 +20,15 @@ class LottoTest {
 	Lottos lottoNumbers = new Lottos();
 	List<Lotto> lottos = new ArrayList<Lotto>();
 	
-	@BeforeEach
-	void init() {
-		Lotto lotto;
-				
-	}
-	
 	@Test
 	@DisplayName("구입 금액 나누기 1000은 로또 개수이다.")
 	void 로또_개수를_테스트하자() {
 		//Given
-		int lottnum = InputView.inputNumberMessages(15000);
+		int lottonum = InputView.inputNumberMessages(15000) / 1000;
 		
 		// When
 		// Then
-		assertThat(15).isEqualTo(15);
+		assertThat(lottonum).isEqualTo(15);
 	}
 	
 	@Test

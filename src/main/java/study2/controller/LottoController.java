@@ -18,16 +18,16 @@ public class LottoController {
 		List<Lotto> lottos = new ArrayList<Lotto>();
 		ResultView resultview = new ResultView();
 		Ranking rank = new Ranking();
-		Map<Rank, Integer> matchNumber; // 피드백 적용하였습니다.
+		Map<Rank, Integer> matchNumber;
 		
-		int price = InputView.initMessages();
+		int price = InputView.enterPriceMessage();
 		lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
 		// 지난 주 당첨 번호 입력
-		List<Integer> winNumber = rank.winNumSplit(InputView.rankMessages());
+		List<Integer> winNumber = lottonumbers.winNumSplit(InputView.rankMessages());
 		
-		matchNumber =rank.matchNumber(lottos, winNumber);
+		matchNumber = rank.matchNumber(lottos, winNumber);
 		
 		resultview.outPutMessages(matchNumber, lottos);
 		
