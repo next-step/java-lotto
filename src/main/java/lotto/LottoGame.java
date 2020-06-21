@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.WinningMatch;
 import lotto.utils.InputUtils;
 import lotto.utils.LottoShuffle;
 import lotto.view.Input;
@@ -32,8 +31,6 @@ public class LottoGame {
         input.inputLastWinningNumber();
         List lastWinningNumbers = InputUtils.stringToArray(input.getLastLottoNumber());
         Lotto winningLotto = new Lotto(lastWinningNumbers);
-
-
 
     }
 }

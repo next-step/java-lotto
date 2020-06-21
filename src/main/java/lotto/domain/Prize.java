@@ -22,11 +22,11 @@ public enum Prize {
         return this.matchCount == matchCount;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return money;
     }
 
-    public static Prize findByMoney(int matchCount){
+    public static Prize findByMoney(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.isSameMatchCount(matchCount))
                 .findFirst()

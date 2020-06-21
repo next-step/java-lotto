@@ -1,18 +1,17 @@
 package lotto.utils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoShuffle{
+public class LottoShuffle {
 
     private static int LOTTO_MAX_NUMBER = 45;
     private static int LOTTO_MIN_NUMBER = 1;
     private static int NEED_LOTTO_COUNT = 6;
 
-    public LottoShuffle(){
+    private LottoShuffle() {
     }
 
     public static List makeLottoNumber() {
@@ -22,7 +21,6 @@ public class LottoShuffle{
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
-
 
 
 }

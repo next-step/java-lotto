@@ -9,7 +9,7 @@ public class InputUtils {
     private static int LOTTO_GAME_PRICE = 1000;
     private static final String COMMA = ",";
 
-    public InputUtils(){
+    public InputUtils() {
     }
 
     public static void validMoneyGreaterZero(int money) {
@@ -23,7 +23,7 @@ public class InputUtils {
     }
 
     public static List stringToArray(String input) {
-        if(isEmptyOrBlank(input)){
+        if (isEmptyOrBlank(input)) {
             throw new IllegalArgumentException("값이 입력되지 않았습니다.");
         }
         return Arrays.stream(input.split(COMMA))
@@ -37,5 +37,6 @@ public class InputUtils {
     private static Boolean isEmptyOrBlank(String inputName) {
         return inputName == null || inputName.trim().isEmpty();
     }
+
 
 }

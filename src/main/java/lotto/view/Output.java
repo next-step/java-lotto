@@ -29,5 +29,6 @@ public class Output {
 
         System.out.print("총 수익률은 " + totalRevenue + "입니다.");
         System.out.print(" (기준이 1이기 때문에 결과적으로 " + mention + " 라는 의미임)");
+
     }
 }
