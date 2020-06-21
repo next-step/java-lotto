@@ -1,9 +1,6 @@
 package edu.nextstep.lotto;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ResultView {
     public static int lottoCount(int money) {
@@ -22,7 +19,22 @@ public class ResultView {
         for (int i = 1; i < lotto.size(); i++) {
             System.out.print(", " + lotto.get(i));
         }
-        System.out.print("]");
+        System.out.println("]");
+    }
+
+    public static void rankView(Map<Integer, Integer> result, Map<Integer, Integer> info) {
+        if (result == null) {
+            throw new NullPointerException("result is null");
+        }
+
+        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
+            System.out.println(entry.getKey() + "개 일치 (" + info.get(entry.getKey()) + "원)- " + entry.getValue() + "개");
+        }
+    }
+
+    public static void profitView(float profit) {
+        String profitStrType = String.format("%.2f", profit);
+        System.out.println("총 수익률은 " + profitStrType + "입니다.");
     }
 
 }
