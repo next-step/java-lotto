@@ -8,7 +8,7 @@ import java.util.Map;
 public class Output {
 
     public void printBuyLottoNumber(Lotto lottoNumbers) {
-        System.out.println(lottoNumbers.toString());
+        System.out.println(lottoNumbers.getNumbers());
     }
 
     public void printLottoCount(int count) {
