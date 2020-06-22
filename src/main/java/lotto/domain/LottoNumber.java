@@ -32,12 +32,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object inputLottoNumber) {
+
+        if (this == inputLottoNumber) return true;
+        if (inputLottoNumber == null || getClass() != inputLottoNumber.getClass()) return false;
         LottoNumber lottoNumber = (LottoNumber) inputLottoNumber;
-        return lottoNumber.number == this.number;
+        return number == lottoNumber.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override
     public String toString() {
         return Integer.toString(number);
     }
+
 }

@@ -10,9 +10,11 @@ public class WinningLottoResult {
     private static final int LOTTO_GAME_PRICE = 1000;
     private static final int INIT_ZERO = 0;
     private static final int PRIZE_MIN_MATCH_COUNT = 3;
-    private static final int BREAK_EVEN_POINT = 1;
+    private static final float BREAK_EVEN_POINT = 1.0f;
+    private static final int ADD_COUNT_ONE =1;
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
+
 
 
     public WinningLottoResult() {
@@ -36,7 +38,8 @@ public class WinningLottoResult {
     public Map<Prize, Integer> getResult() {
 
         for (Prize prize : this.rankResult) {
-            Integer plusCount = result.get(prize) + 1;
+
+            Integer plusCount = result.get(prize) + ADD_COUNT_ONE;
             result.put(prize, plusCount);
         }
 
