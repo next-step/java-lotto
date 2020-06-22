@@ -2,13 +2,10 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoMachine {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
-    public static List<Lotto> createManualLottos(List<String> lottoNumbers) {
+    public static List<Lotto> createLottos(List<String> lottoNumbers, int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (String numbers : lottoNumbers) {
             String[] splitNumbers = numbers.split(", ");
@@ -18,12 +15,8 @@ public class LottoMachine {
                     .sorted()
                     .collect(Collectors.toList())));
         }
-        return lottos;
-    }
 
-    public static List<Lotto> createAutoLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int idx = 0; idx < lottoCount; idx++) {
+        for (int idx = 0; idx < lottoCount - lottoNumbers.size(); idx++) {
             lottos.add(new Lotto(raffle()));
         }
         return lottos;
