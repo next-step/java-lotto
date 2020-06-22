@@ -10,19 +10,21 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoGame {
     private Lottos lottos;
-    private Lottos lottosSelf;
+
+    private int lottoSelfCount;
+
     private LottoMoney lottoMoney;
 
     public LottoGame(LottoMoney lottoMoney, Lottos lottosSelf) {
         this.lottoMoney = lottoMoney;
-        this.lottosSelf = lottosSelf;
+        this.lottoSelfCount = lottosSelf.getCount();
 
         validateLottoGame();
 
-        this.lottos = createRandomLotto();
+        this.lottos = createRandomLotto(lottosSelf);
     }
 
-    private Lottos createRandomLotto() {
+    private Lottos createRandomLotto(Lottos lottosSelf) {
         Lottos lottos = Stream.generate(LottoMakeNumbers::getRandomNumber)
                 .limit(getLottoRandomCount())
                 .collect(collectingAndThen(toList(), Lottos::of));
@@ -32,11 +34,11 @@ public class LottoGame {
     }
 
     public int getLottoRandomCount() {
-        return lottoMoney.getLottoCount() - lottosSelf.getCount();
+        return lottoMoney.getLottoCount() - lottoSelfCount;
     }
 
     public int getLottoSelfCount() {
-        return lottosSelf.getCount();
+        return lottoSelfCount;
     }
 
     public Lottos getLottos() {
@@ -44,7 +46,7 @@ public class LottoGame {
     }
 
     private void validateLottoGame() {
-        if(lottoMoney.getLottoCount() < lottosSelf.getCount()) {
+        if (lottoMoney.getLottoCount() < lottoSelfCount) {
             throw new LottoOutOfSelfLottoException();
         }
     }
