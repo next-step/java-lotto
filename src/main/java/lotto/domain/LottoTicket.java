@@ -42,9 +42,12 @@ public abstract class LottoTicket {
     }
 
     public Rank getRankBy(final LottoTicket winningLottoTicket) {
-        lottoNumbers.retainAll(winningLottoTicket.getLottoNumbers());
-
-        final int countOfMatch = lottoNumbers.size();
+        int countOfMatch = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningLottoTicket.getLottoNumbers().contains(lottoNumber)) {
+                countOfMatch++;
+            }
+        }
         return Rank.valueOf(countOfMatch);
     }
 
