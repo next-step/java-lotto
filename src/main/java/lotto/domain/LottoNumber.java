@@ -28,6 +28,10 @@ public class LottoNumber {
         return number;
     }
 
+    public static Map<Integer, LottoNumber> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -21,8 +21,7 @@ public class Main {
         lottos.addAll(manualLottos);
         lottos.addAll(autoLottos);
 
-        String[] winningNumbers  = InputView.inputWinningNumber();
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, LottoNumber.valueOf(InputView.inputBonusBall()));
+        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber(), LottoNumber.valueOf(InputView.inputBonusBall()));
 
         LottoResult lottoResult = new LottoResult();
         Map<Rank, Integer> result = lottoResult.matchResult(lottos, winningNumber);
