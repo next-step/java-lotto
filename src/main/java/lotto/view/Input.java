@@ -1,38 +1,41 @@
 package lotto.view;
 
-import lotto.utils.InputUtils;
+import lotto.domain.Money;
 
 import java.util.Scanner;
 
 public class Input {
 
     private Scanner scanner;
-    private int money;
     private String inputLastLottoNumbers;
 
     public Input(Scanner scan) {
         scanner = scan;
     }
 
-    public void moneyInput() {
+    public Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         int inputMoney = scanner.nextInt();
-        InputUtils.validMoneyGreaterZero(inputMoney);
-        this.money = inputMoney;
+        return new Money(inputMoney);
     }
 
     public void inputLastWinningNumber() {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        this.inputLastLottoNumbers = scanner.next();
-    }
+        String inputLastWinningNumber = scanner.next();
 
-    public int getMoney() {
-        return this.money;
+        if (isEmptyOrBlank(inputLastWinningNumber)) {
+            throw new IllegalArgumentException("값이 입력되지 않았습니다.");
+        }
+
+        this.inputLastLottoNumbers = inputLastWinningNumber;
     }
 
     public String getLastLottoNumber() {
         return this.inputLastLottoNumbers;
     }
 
+    private Boolean isEmptyOrBlank(String inputName) {
+        return inputName == null || inputName.trim().isEmpty();
+    }
 }

@@ -1,22 +1,25 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Prize;
-import lotto.domain.WinningLottoResult;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class Output {
 
-    public void printBuyLottoNumber(Lotto lottoNumbers) {
-        System.out.println(lottoNumbers.getNumbers());
+    private Output() {
     }
 
-    public void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printBuyLottoNumber(Lotto lottoNumbers) {
+        System.out.println(lottoNumbers);
     }
 
-    public void printResultStatic(WinningLottoResult lottoResult, int buyCount) {
+    public static void printLottoCount(Money money) {
+
+        System.out.println(money.getBuyCount() + "개를 구매했습니다.");
+    }
+
+    public static void printResultStatic(WinningLottoResult lottoResult, int buyCount) {
         Map<Prize, Integer> result = lottoResult.getResult();
 
         for (Map.Entry<Prize, Integer> gameResult : result.entrySet()) {

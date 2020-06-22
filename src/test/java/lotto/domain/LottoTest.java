@@ -1,17 +1,45 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
-    private List lastWeekNumbers = Arrays.asList(10, 15, 20, 30, 40, 45);
+    private Lotto lotto;
 
+    @BeforeEach
+    void setUp(){
+
+        List<LottoNumber> lottoNumber = new ArrayList<LottoNumber>();
+        lottoNumber.add(new LottoNumber(1));
+        lottoNumber.add(new LottoNumber(10));
+        lottoNumber.add(new LottoNumber(20));
+        lottoNumber.add(new LottoNumber(33));
+        lottoNumber.add(new LottoNumber(40));
+        lottoNumber.add(new LottoNumber(45));
+        lotto = new Lotto(lottoNumber);
+    }
+
+    @DisplayName("유저 로또번호와 우승로또번호 6자리가 일치할때")
     @Test
-    void makeResultStaticsOneTimes() {
-        Lotto lotto = new Lotto(Arrays.asList(10, 20, 25, 30, 40, 45));
-        System.out.println(lotto.toString());
+    void matchCount() {
+        List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>();
+        winningNumbers.add(new LottoNumber(1));
+        winningNumbers.add(new LottoNumber(10));
+        winningNumbers.add(new LottoNumber(20));
+        winningNumbers.add(new LottoNumber(33));
+        winningNumbers.add(new LottoNumber(40));
+        winningNumbers.add(new LottoNumber(45));
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        int matchCount = lotto.matchCount(winningLotto);
+        assertThat(matchCount).isEqualTo(6);
     }
 }

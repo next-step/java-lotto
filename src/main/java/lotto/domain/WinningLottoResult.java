@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class WinningLottoResult {
 
+    private static final int LOTTO_GAME_PRICE = 1000;
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
-    private final static int LOTTO_GAME_PRICE = 1000;
 
     public WinningLottoResult() {
         rankResult = new ArrayList();
@@ -22,6 +22,7 @@ public class WinningLottoResult {
     }
 
     public void match(int count) {
+
         if (count > 3) {
             Prize prize = Prize.findByPrize(count);
             rankResult.add(prize);
@@ -59,6 +60,5 @@ public class WinningLottoResult {
         }
         return "이득";
     }
-
 
 }
