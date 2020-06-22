@@ -21,7 +21,7 @@ public class LottoGame {
         int buyCount = InputUtils.parserMoney(input.getMoney());
         output.printLottoCount(buyCount);
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<Lotto>();
         for (int i = 0; i < buyCount; i++) {
             List lottoNumbers = LottoShuffle.makeLottoNumber();
             Lotto lotto = new Lotto(lottoNumbers);
