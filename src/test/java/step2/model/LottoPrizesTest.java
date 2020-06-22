@@ -19,10 +19,10 @@ class LottoPrizesTest {
 
     private static final LottoNumber BONUS_NUMBER = LottoNumber.of(7);
 
-    @DisplayName("로또의 맞춘 개수를 검증")
+    @DisplayName("생성된_Prize_개수_검증")
     @ParameterizedTest
     @MethodSource("provideLottoAndLottoWinning")
-    void 로또_맞은_개수_검증(Lottos lottos, LottoWinning winningLotto, LottoRank expected) {
+    void 생성된_Prize_개수_검증(Lottos lottos, LottoWinning winningLotto, int expected) {
         assertEquals(expected, LottoPrizes.of(lottos, winningLotto).stream().count());
     }
 
@@ -37,10 +37,10 @@ class LottoPrizesTest {
         lottoList.add(Lotto.of(LottoMakeNumbers.convertStringToNumbers("1,2,3,4,5,7")));
         lottoList.add(Lotto.of(LottoMakeNumbers.convertStringToNumbers("1,2,3,4,7,8")));
         lottoList.add(Lotto.of(LottoMakeNumbers.convertStringToNumbers("1,2,3,7,8,9")));
-        lottoList.add(Lotto.of(LottoMakeNumbers.convertStringToNumbers("1,2,7,8,9,9")));
+        lottoList.add(Lotto.of(LottoMakeNumbers.convertStringToNumbers("1,2,7,8,9,10")));
 
         return Stream.of(
-                Arguments.of(Lottos.of(lottoList), winningLotto, 6)
+                Arguments.of(Lottos.of(lottoList), winningLotto, 5)
         );
     }
 }

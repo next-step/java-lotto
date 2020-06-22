@@ -51,7 +51,7 @@ class LottoTest {
         assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(5))).isTrue();
         assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(6))).isTrue();
 
-        assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(0))).isFalse();
+        assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(8))).isFalse();
         assertThat(Lotto.of(LottoMakeNumbers.convertStringToNumbers(inputNumber)).has(LottoNumber.of(7))).isFalse();
     }
 
