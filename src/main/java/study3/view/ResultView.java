@@ -13,8 +13,10 @@ public class ResultView {
 
 	private static final String rankMessages = "당첨 통계";
 	private static final String dividMessages = "---------------";
-	public static final String MESSAGE_OF_LOTTO_RESULT = "%d개 일치 (%d원) - %d개";
-
+	private static final String MESSAGE_OF_LOTTO_RESULT = "%d개 일치 (%d원) - %d개";
+	private static final String MESSAGE_OF_BONUS_BALL_RESULT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+	private static final int FOUR_PLUS_BONUS_MONEY = 30_000_000;
+	
 	Long totalMoney = 0L;
 
 	static Scanner scanner = new Scanner(System.in);
@@ -33,12 +35,19 @@ public class ResultView {
 		}
 		
 		for (Rank rank : Rank.values()) {
-						
+			
+			if(rank.getWinningMoney() == FOUR_PLUS_BONUS_MONEY) {
+				System.out.println(String.format(MESSAGE_OF_BONUS_BALL_RESULT,
+						rank.getCountOfMatch(),
+						rank.getWinningMoney(),
+						matchNumber.get(rank)));
+			}
+			if(rank.getWinningMoney() != FOUR_PLUS_BONUS_MONEY) {
 			System.out.println(String.format(MESSAGE_OF_LOTTO_RESULT,
 					rank.getCountOfMatch(),
 					rank.getWinningMoney(),
 					matchNumber.get(rank)));
-						
+			}			
 			totalMoney += rank.getWinningMoney() * matchNumber.get(rank);
 		}		
 		System.out.println("총 수익률은 "+totalMoney / (lottoNumbers.size() * 1000) + "입니다.(기준이 1이기 때문에 넘으면 이득 낮으면 손해)");
