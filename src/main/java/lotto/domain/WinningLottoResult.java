@@ -8,22 +8,26 @@ import java.util.Map;
 public class WinningLottoResult {
 
     private static final int LOTTO_GAME_PRICE = 1000;
+    private static final int INIT_ZERO = 0;
+    private static final int PRIZE_MIN_MATCH_COUNT = 3;
+    private static final int BREAK_EVEN_POINT = 1;
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
+
 
     public WinningLottoResult() {
         rankResult = new ArrayList();
         result = new LinkedHashMap<>();
-        result.put(Prize.FOURTH, 0);
-        result.put(Prize.THIRD, 0);
-        result.put(Prize.SECOND, 0);
-        result.put(Prize.FIRST, 0);
+        result.put(Prize.FOURTH, INIT_ZERO);
+        result.put(Prize.THIRD, INIT_ZERO);
+        result.put(Prize.SECOND, INIT_ZERO);
+        result.put(Prize.FIRST, INIT_ZERO);
 
     }
 
     public void match(int count) {
 
-        if (count > 3) {
+        if (count > PRIZE_MIN_MATCH_COUNT) {
             Prize prize = Prize.findByPrize(count);
             rankResult.add(prize);
         }
@@ -55,7 +59,7 @@ public class WinningLottoResult {
 
     public String benefitOrLoss(float revenue) {
 
-        if (revenue < 1) {
+        if (revenue < BREAK_EVEN_POINT) {
             return "손해";
         }
         return "이득";

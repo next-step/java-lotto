@@ -17,7 +17,7 @@ public class LottoGame {
         Output.printLottoCount(money);
 
         LottoController lottoController = new LottoController(money);
-        lottoController.createLotto(money);
+        lottoController.createLotto();
 
         input.inputLastWinningNumber();
         Lotto winningLotto = new Lotto(input.getLastLottoNumber());
