@@ -1,30 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public final class ResultView {
+public final class LottoResultView {
     private static final int MINIMUM_MONEY_TO_PRINT = 0;
 
-    private ResultView() {}
-
-    public static void printBuyingLotto(final int buyingLotto) {
-        System.out.println(buyingLotto + "개를 구매했습니다.");
-    }
-
-    public static void printLottoTickets(final List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            final String lottoTicketResultString = lottoTicket.getLottoNumbers().stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(","));
-            System.out.println(String.format("[%s]", lottoTicketResultString));
-        }
-    }
+    private LottoResultView() {}
 
     public static void printRankResult(final List<Rank> lottoResults) {
         System.out.println("당첨 통계");

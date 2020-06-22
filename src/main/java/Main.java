@@ -1,7 +1,8 @@
 import lotto.domain.*;
+import lotto.view.LottoResultView;
+import lotto.view.LottoTicketResultView;
 import lotto.view.MoneyInputView;
 import lotto.view.NumberInputView;
-import lotto.view.ResultView;
 
 import java.util.List;
 
@@ -13,14 +14,14 @@ public class Main {
         LottoStore lottoStore = new LottoStore(payMoney);
         List<LottoTicket> buyingLottoTickets = lottoStore.sellAutoLottoTicket();
 
-        ResultView.printBuyingLotto(payMoney.getNumberOfLottoByMoneyPaid());
-        ResultView.printLottoTickets(buyingLottoTickets);
+        LottoTicketResultView.printBuyingLotto(payMoney.getNumberOfLottoByMoneyPaid());
+        LottoTicketResultView.printLottoTickets(buyingLottoTickets);
 
         NumberInputView numberInputView = NumberInputView.enterWinningLottoNumbers();
         WinningLotto winningLotto = new WinningLotto(new CustomLottoTicket(numberInputView.getLottoNumbers()));
         List<Rank> lottoResults = winningLotto.getLottoRank(buyingLottoTickets);
 
-        ResultView.printRankResult(lottoResults);
-        ResultView.printTotalEarningRate(lottoResults, payMoney.getPayAmount());
+        LottoResultView.printRankResult(lottoResults);
+        LottoResultView.printTotalEarningRate(lottoResults, payMoney.getPayAmount());
     }
 }
