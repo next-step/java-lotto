@@ -40,17 +40,18 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber winnerNumber : winningLotto.getNumbers()) {
-            count += isContain(winnerNumber);
+            Match match = isContain(winnerNumber);
+            count += match.getValue();
         }
         return count;
 
     }
 
-    private int isContain(LottoNumber winnerNumber) {
+    private Match isContain(LottoNumber winnerNumber) {
         if (numbers.contains(winnerNumber)) {
-            return 1;
+            return Match.HAS;
         }
-        return 0;
+        return Match.EMPTY;
     }
 
     @Override

@@ -16,6 +16,7 @@ public class LottoController {
 
     private Money money;
     private List<Lotto> lottos;
+    private Lotto winningLotto;
 
     public LottoController(Money money) {
 
@@ -35,12 +36,18 @@ public class LottoController {
     }
 
 
-    public WinningLottoResult matchLotto(Lotto winningLotto) {
+    public WinningLottoResult matchLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
+        isDuplicateBonus(bonusNumber);
         WinningLottoResult lottoResult = new WinningLottoResult();
         for (Lotto lotto : lottos) {
             int count = lotto.matchCount(winningLotto);
             lottoResult.match(count);
         }
         return lottoResult;
+    }
+
+    public void isDuplicateBonus(LottoNumber bonusNumber) {
+
     }
 }
