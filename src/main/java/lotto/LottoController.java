@@ -15,19 +15,17 @@ import static lotto.domain.Lotto.LOTTO_GAME_PRICE;
 public class LottoController {
 
     private Money money;
-    private int buyCount;
     private List<Lotto> lottos;
 
     public LottoController(Money money) {
 
         lottos = new ArrayList<Lotto>();
         this.money = money;
-        buyCount = money.getBuyCount();
     }
 
     public void createLotto() {
 
-        for (int i = 0; i < buyCount; i++) {
+        for (int i = 0; i < money.getBuyCount(); i++) {
             List<LottoNumber> lottoNumbers = LottoShuffle.makeLottoNumber();
             Lotto lotto = new Lotto(lottoNumbers);
             Output.printBuyLottoNumber(lotto);
