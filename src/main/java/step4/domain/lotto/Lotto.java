@@ -1,6 +1,7 @@
 package step4.domain.lotto;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -13,9 +14,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     // each Lotto numbers.
-    private Set<LottoNo> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNo> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         LottoNumber.checkLottoRules(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -23,11 +24,12 @@ public class Lotto {
     public Lotto(String lottoNumbers) {
         this.lottoNumbers = Arrays.asList(lottoNumbers.split(LottoNumber.FIXED_DELIMITER))
                 .stream()
-                .map(x -> new LottoNo(Integer.parseInt(x)))
+                .map(x -> LottoNumber.of(Integer.valueOf(x)))
+                .limit(LottoNumber.LOTTO_DRAW_LIMIT)
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), TreeSet::new));
     }
 
-    public Set<LottoNo> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
 

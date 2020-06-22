@@ -31,7 +31,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder("[");
         stringBuilder.append(lotto.getNumbers()
                 .stream()
-                .map(number -> String.format("%3d", number.getLottoNo()))
+                .map(number -> String.format("%3d", number.getLottoNumber()))
                 .collect(Collectors.joining(NUMBER_DELIMITER)));
         stringBuilder.append("]");
         System.out.println(stringBuilder);

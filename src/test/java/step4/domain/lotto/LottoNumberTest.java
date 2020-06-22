@@ -6,10 +6,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoNumberTest {
 
@@ -23,13 +24,21 @@ class LottoNumberTest {
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(result);
     }
 
+    //@ValueSource(strings = {"1,2,3,4,5,6,7,8,9,0", "2,1,43,44,33,4,49,22,23,12,3", "6,5,4,3,2,1,7,8,9"})
     @DisplayName("LOTTO_DRAW_LIMIT 갯수에 맞는 당첨번호 반환")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6,7,8,9,0", "2,1,43,44,33,4,49,22,23,12,3", "6,5,4,3,2,1,7,8,9"})
+    @ValueSource(strings = {"6,5,4,3,2,1,7,8,9"})
     void drawLottoNumbers(String input) {
-        List<LottoNo> result = LottoNumber.drawLottoNumbers(
-                Arrays.stream(input.split(",")).map(x -> new LottoNo(Integer.parseInt(x))).collect(Collectors.toList()));
-        assertThat(result.size()).isEqualTo(LOTTO_DRAW_LIMIT);
+        Set<LottoNumber> result =
+                Arrays.stream(input.split(","))
+                        .map(x -> LottoNumber.of(Integer.parseInt(x)))
+                        .collect(Collectors.toSet());
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                {
+                    Lotto lotto = new Lotto(result);
+                    assertThat(lotto.getNumbers().size()).isEqualTo(LOTTO_DRAW_LIMIT);
+                }
+        );
     }
 
 }

@@ -38,13 +38,13 @@ public class WinningLotto {
     private int getWinningcount(Lotto lotto) {
         return (int) lotto.getNumbers().stream()
                 .filter(lottoNumber ->
-                        isPresentWinningNumber(lottoNumber.getLottoNo()))
+                        isPresentWinningNumber(lottoNumber.getLottoNumber()))
                 .count();
     }
 
     private boolean isPresentWinningNumber(Integer lottoNumber) {
         return lottoNumbers.getNumbers().stream()
-                .filter(winningNumber -> winningNumber.getLottoNo() == lottoNumber)
+                .filter(winningNumber -> winningNumber.getLottoNumber() == lottoNumber)
                 .findFirst()
                 .isPresent();
     }

@@ -1,12 +1,10 @@
 package step4.domain.lotto;
 
-import step4.domain.PurchaseInfo;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable {
 
     public static final int LOTTO_MAX_LIMIT = 45;
     public static final int LOTTO_DRAW_LIMIT = 6;
@@ -14,15 +12,25 @@ public class LottoNumber {
     public static final String FIXED_DELIMITER = ",|:";
 
     // default 1 to LOTTO_MAX_LIMIT (45)
-    private static List<LottoNo> lottoGameNumbers = new ArrayList<>();
+    private static List<LottoNumber> lottoGameNumbers;
+
+    private final int lottoNumber;
 
     static {
-        List<Integer> numbers645 = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
+        lottoGameNumbers = IntStream.rangeClosed(1, LOTTO_MAX_LIMIT)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        for (Integer integer : numbers645) {
-            lottoGameNumbers.add(new LottoNo(integer));
-        }
+    }
+
+    private LottoNumber(int lottoNumber) {
+        checkLottoRules(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int index) {
+        checkLottoRules(index);
+        return lottoGameNumbers.get(index - 1);
     }
 
     // issue
@@ -34,16 +42,24 @@ public class LottoNumber {
         return new LottoTickets(lottoList);
     }
 
-    public static void checkLottoRules(Set<LottoNo> lottoNumbers) {
-        if (Collections.max(lottoNumbers).getLottoNo() > LOTTO_MAX_LIMIT) {
+    public static void checkLottoRules(Collection<LottoNumber> lottoNumbers) {
+        if (Collections.min(lottoNumbers).getLottoNumber() < 1) {
             throw new IllegalArgumentException();
         }
-        if (lottoNumbers.size() != LOTTO_DRAW_LIMIT) {
+        if (Collections.max(lottoNumbers).getLottoNumber() > LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException();
         }
     }
 
-    public static List<LottoNo> drawLottoNumbers(List<LottoNo> lottoNumbers) {
+
+    public static void checkLottoRules(int input) {
+        if (input > LOTTO_MAX_LIMIT || input < 1) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static List<LottoNumber> drawLottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkLottoRules(lottoNumbers);
         return lottoNumbers.subList(LOTTO_DRAW_BASE_NUMBER, LOTTO_DRAW_LIMIT);
     }
 
@@ -51,6 +67,18 @@ public class LottoNumber {
         Collections.shuffle(lottoGameNumbers);
         // pick LOTTO_DRAW_LIMIT
         return new Lotto(new TreeSet<>(drawLottoNumbers(lottoGameNumbers)));
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this.lottoNumber == ((LottoNumber) o).getLottoNumber()) {
+            return 0;
+        }
+        return ((LottoNumber) o).getLottoNumber() > this.lottoNumber ? -1 : 1;
     }
 
 }
