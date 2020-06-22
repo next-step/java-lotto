@@ -37,7 +37,7 @@ public class Lottos {
     }
 
     public void addLottos(Lottos lottos) {
-        this.lottos.addAll(lottos.stream().collect(toList()));
+        this.lottos.addAll(0, lottos.stream().collect(toList()));
     }
 
 }
