@@ -25,7 +25,8 @@ public class LottoGenerator {
 
     public static Lottos generateByMoney(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.lotteryCount(); i++) {
+        int moneyCount = money.lotteryCount();
+        for (int i = 0; i < moneyCount; i++) {
             lottos.add(generateAuto());
         }
         return new Lottos(lottos);
