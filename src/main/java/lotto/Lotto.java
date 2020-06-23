@@ -85,9 +85,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto
-                .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(SYMBOL_COMMA, SYMBOL_PREFIX_BRACKET, SYMBOL_SUFFIX_BRACKET));
+        return lotto + "";
     }
 }
