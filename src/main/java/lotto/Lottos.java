@@ -9,7 +9,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int count() {
+    public int getLottoCount() {
         return lottos.size();
     }
 

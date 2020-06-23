@@ -12,6 +12,6 @@ class LottosTest {
     @DisplayName("금액만큼 로또를 생성한다.")
     void generateByMoney(int input, int expectedCount) {
         Lottos lottos = LottoGenerator.generateByMoney(new Money(input));
-        assertThat(lottos.count()).isEqualTo(expectedCount);
+        assertThat(lottos.getLottoCount()).isEqualTo(expectedCount);
     }
 }
