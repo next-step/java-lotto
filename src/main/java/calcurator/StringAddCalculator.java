@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class StringAddCalculator {
+    private static final int INITIAL_NUMBER_ZERO = 0;
+
     public static int splitAndSum(String input) {
         if (checkNullOrEmpty(input))
-            return Const.INITIAL_NUMBER_ZERO;
+            return INITIAL_NUMBER_ZERO;
 
         return addSum(Splitter.split(input));
     }
@@ -19,7 +21,7 @@ public class StringAddCalculator {
         AtomicInteger sumNumber = new AtomicInteger();
         Arrays.stream(inputs).forEach(numberString -> {
             int parseInt = Integer.parseInt(numberString);
-            if (parseInt < Const.ZERO_NUM) {
+            if (parseInt < INITIAL_NUMBER_ZERO) {
                 throw new RuntimeException("양수를 입력해주세요.");
             }
             sumNumber.addAndGet(parseInt);

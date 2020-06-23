@@ -14,7 +14,7 @@ class StringAddCalculatorTest {
     @DisplayName("null 또는 빈문자")
     void splitAndSum_null_또는_빈문자(String input) {
         int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(Const.INITIAL_NUMBER_ZERO);
+        assertThat(result).isEqualTo(0);
     }
 
     @ParameterizedTest
