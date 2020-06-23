@@ -22,6 +22,9 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
+        if (countOfMatch < WINNING_MIN_COUNT) {
+            return FAILURE;
+        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount(countOfMatch))
                 .findFirst()
