@@ -22,7 +22,7 @@ public class LottoTicket {
         return myNumbers;
     }
 
-    public Rank announceRank(LottoNumbers winningNumbers, int bonusBall) {
+    public Rank announceRank(LottoNumbers winningNumbers, LottoNumber bonusBall) {
         for (LottoNumber number : winningNumbers.getNumbers()) {
             isWinner(number);
         }
@@ -31,7 +31,7 @@ public class LottoTicket {
         return rankType;
     }
 
-    private boolean isBonus(int bonusBall) {
+    private boolean isBonus(LottoNumber bonusBall) {
         List<Integer> myNumberList = IntegerUtils.numbersToList(myNumbers.getNumbers());
         return myNumberList.contains(bonusBall);
     }
