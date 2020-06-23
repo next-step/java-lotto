@@ -18,11 +18,15 @@ public class ResultView {
     }
 
     private static void appendByMatch(StringBuilder sb, MatchingResult matchingResult) {
-        sb.append(matchingResult.getDisplayText());
+        sb.append(getRankOfDisplayMatch(matchingResult));
         sb.append(" - ");
         sb.append(matchingResult.getCountOfMatchingLotto());
         sb.append("개");
         sb.append(NEWLINE);
+    }
+
+    private static String getRankOfDisplayMatch(MatchingResult matchingResult) {
+        return matchingResult.getDisplayText();
     }
 
     public void printPurchaseTicketCount(int count) {
