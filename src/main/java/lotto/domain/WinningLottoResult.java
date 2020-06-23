@@ -20,17 +20,19 @@ public class WinningLottoResult {
     public WinningLottoResult() {
         rankResult = new ArrayList();
         result = new LinkedHashMap<>();
+        result.put(Prize.FIFTH, INIT_ZERO);
         result.put(Prize.FOURTH, INIT_ZERO);
         result.put(Prize.THIRD, INIT_ZERO);
         result.put(Prize.SECOND, INIT_ZERO);
         result.put(Prize.FIRST, INIT_ZERO);
 
+
     }
 
-    public void match(int count) {
+    public void match(int count, Match match) {
 
         if (count > PRIZE_MIN_MATCH_COUNT) {
-            Prize prize = Prize.findByPrize(count);
+            Prize prize = Prize.findByPrize(count, match.isCheck());
             rankResult.add(prize);
         }
     }

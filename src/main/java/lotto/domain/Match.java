@@ -2,18 +2,24 @@ package lotto.domain;
 
 public enum Match {
 
-    HAS(true,1),
+
+    HAS(true, 1),
     EMPTY(false, 0);
 
     private boolean check;
-    private int value;
+    private int count;
 
-    Match(boolean check, int value){
+    Match(boolean check, int count) {
         this.check = check;
-        this.value = value;
+        this.count = count;
+
     }
 
-    public int getValue() {
-        return value;
+    public int getCount() {
+        return this.count;
+    }
+
+    public boolean isCheck() {
+        return this.check;
     }
 }

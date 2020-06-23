@@ -41,18 +41,31 @@ public class Lotto {
 
         for (LottoNumber winnerNumber : winningLotto.getNumbers()) {
             Match match = isContain(winnerNumber);
-            count += match.getValue();
+            count += match.getCount();
+
         }
+
         return count;
 
     }
 
-    private Match isContain(LottoNumber winnerNumber) {
+    public Match isContain(LottoNumber winnerNumber) {
+
         if (numbers.contains(winnerNumber)) {
             return Match.HAS;
         }
         return Match.EMPTY;
     }
+
+    public void duplicateBonusNumber(LottoNumber bonusNumber) {
+
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 지난주 당첨번호와 중복됩니다.");
+        }
+
+    }
+
+
 
     @Override
     public String toString() {

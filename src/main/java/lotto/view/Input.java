@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 
@@ -20,7 +20,8 @@ public class Input {
         return new Money(inputMoney);
     }
 
-    public Lotto inputLastWinningNumber() {
+
+    public String inputLastWinningNumber() {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputLastWinningNumber = scanner.next();
@@ -29,7 +30,16 @@ public class Input {
             throw new IllegalArgumentException("값이 입력되지 않았습니다.");
         }
 
-        return new Lotto(inputLastWinningNumber);
+
+        return inputLastWinningNumber;
+    }
+
+    public LottoNumber inputLastBonusNumber() {
+
+        System.out.println("보너스 번호를 입력해주세요.");
+        int inputBonusNumber = scanner.nextInt();
+        return new LottoNumber(inputBonusNumber);
+
     }
 
     private Boolean isEmptyOrBlank(String inputName) {

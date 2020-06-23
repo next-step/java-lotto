@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
-import lotto.domain.WinningLottoResult;
+import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -21,10 +18,13 @@ public class LottoGame {
         lottoController.createLotto();
 
 
-        Lotto winningLotto = input.inputLastWinningNumber();
-        LottoNumber bonusNumber = input.inputBonusNumber();
+        Lotto winningLotto = new Lotto(input.inputLastWinningNumber());
+
+        LottoNumber bonusNumber = input.inputLastBonusNumber();
+        winningLotto.duplicateBonusNumber(bonusNumber);
 
         WinningLottoResult lottoResult = lottoController.matchLotto(winningLotto, bonusNumber);
+
         Output.printResultStatic(lottoResult, money.getBuyCount());
 
 

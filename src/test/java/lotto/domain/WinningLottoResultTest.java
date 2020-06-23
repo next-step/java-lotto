@@ -17,8 +17,8 @@ class WinningLottoResultTest {
     @BeforeEach
     void setUp() {
         winningLottoResult = new WinningLottoResult();
-        winningLottoResult.match(6);
-        winningLottoResult.match(2);
+        winningLottoResult.match(6, Match.EMPTY);
+        winningLottoResult.match(2, Match.HAS);
     }
 
 
@@ -26,9 +26,9 @@ class WinningLottoResultTest {
     @Test
     void matchAndGetResult() {
         WinningLottoResult winningLottoResultMulti = new WinningLottoResult();
-        winningLottoResultMulti.match(6);
-        winningLottoResultMulti.match(6);
-        winningLottoResultMulti.match(2);
+        winningLottoResultMulti.match(6, Match.EMPTY);
+        winningLottoResultMulti.match(6, Match.EMPTY);
+        winningLottoResultMulti.match(2, Match.HAS);
         Map<Prize, Integer> result = winningLottoResultMulti.getResult();
         assertThat(result.get(Prize.FIRST)).isEqualTo(2);
     }
@@ -37,15 +37,16 @@ class WinningLottoResultTest {
     @Test
     void matchAndGetResultWithZero() {
         WinningLottoResult winningLottoWithZero = new WinningLottoResult();
-        winningLottoWithZero.match(2);
-        winningLottoWithZero.match(1);
-        winningLottoWithZero.match(2);
+        winningLottoWithZero.match(2, Match.HAS);
+        winningLottoWithZero.match(1, Match.EMPTY);
+        winningLottoWithZero.match(2, Match.EMPTY);
 
         Map<Prize, Integer> result = winningLottoWithZero.getResult();
         assertThat(result.get(Prize.FIRST)).isEqualTo(0);
         assertThat(result.get(Prize.SECOND)).isEqualTo(0);
         assertThat(result.get(Prize.THIRD)).isEqualTo(0);
         assertThat(result.get(Prize.FOURTH)).isEqualTo(0);
+        assertThat(result.get(Prize.FIFTH)).isEqualTo(0);
     }
 
     @DisplayName("2게임중 1등 한번일때 수익률 계산")
