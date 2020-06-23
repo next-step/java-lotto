@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
-import lotto.domain.WinningLottoResult;
+import lotto.domain.*;
 import lotto.utils.LottoShuffle;
 import lotto.view.Output;
 
@@ -35,12 +32,14 @@ public class LottoController {
     }
 
 
-    public WinningLottoResult matchLotto(Lotto winningLotto) {
+    public WinningLottoResult matchLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         WinningLottoResult lottoResult = new WinningLottoResult();
         for (Lotto lotto : lottos) {
+            Match contain = lotto.isContain(bonusNumber);
             int count = lotto.matchCount(winningLotto);
-            lottoResult.match(count);
+            lottoResult.match(count, contain);
         }
         return lottoResult;
     }
+
 }

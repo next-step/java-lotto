@@ -27,10 +27,10 @@ public class WinningLottoResult {
 
     }
 
-    public void match(int count) {
+    public void match(int count, Match match) {
 
         if (count > PRIZE_MIN_MATCH_COUNT) {
-            Prize prize = Prize.findByPrize(count);
+            Prize prize = Prize.findByPrize(count, match.isCheck());
             rankResult.add(prize);
         }
     }
