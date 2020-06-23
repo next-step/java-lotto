@@ -17,8 +17,9 @@ public class Money {
     }
 
     public int lotteryCount() {
-        if (money < LOTTERY_MONEY)
+        if (money < LOTTERY_MONEY){
             throw new IllegalArgumentException();
+        }
         return money / LOTTERY_MONEY;
     }
 
