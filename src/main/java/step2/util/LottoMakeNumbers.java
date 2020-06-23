@@ -31,14 +31,13 @@ public class LottoMakeNumbers {
                     .collect(collectingAndThen(toList(), Lotto::of));
     }
 
-    public static List convertStringToNumbers(String inputWinnerNumbers) {
+    public static List<LottoNumber> convertStringToNumbers(String inputWinnerNumbers) {
         try {
             return Stream.of(inputWinnerNumbers.split(DELIMETER))
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .map(LottoNumber::of)
                     .collect(toList());
-
         } catch (NumberFormatException e) {
             throw new LottoNotNumberException();
         }

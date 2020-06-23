@@ -3,6 +3,8 @@ package step2.model;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lottos {
 
     private final List<Lotto> lottos;
@@ -23,11 +25,19 @@ public class Lottos {
         return lottos.stream();
     }
 
+    public int getCount() {
+        return lottos.size();
+    }
+
     public long getWinningCount (LottoRank rank, LottoWinning lottoWinning) {
         return lottos.stream()
                 .map(lottoWinning::getRankOfLotto)
                 .filter(rank::equals)
                 .count();
+    }
+
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(0, lottos.stream().collect(toList()));
     }
 
 }
