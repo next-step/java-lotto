@@ -1,7 +1,8 @@
-package study2.domain;
+package study3.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +33,7 @@ public class Lottos {
 			lottos.add(new Lotto((LottoGenerator.generateLottoNumber())));
 		}
 		
-		return lottos;
+		return Collections.unmodifiableList(lottos);
 	}
 	
 	public static List<Integer> winNumSplit(String inputWinNumber) {

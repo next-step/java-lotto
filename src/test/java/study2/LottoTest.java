@@ -11,30 +11,24 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import study1.Splitter;
-import study2.domain.Lotto;
-import study2.domain.Lottos;
-import study2.view.InputView;
+import study3.domain.Lotto;
+import study3.domain.Lottos;
+import study3.view.InputView;
 
 class LottoTest {
 	
 	Lottos lottoNumbers = new Lottos();
 	List<Lotto> lottos = new ArrayList<Lotto>();
 	
-	@BeforeEach
-	void init() {
-		Lotto lotto;
-				
-	}
-	
 	@Test
 	@DisplayName("구입 금액 나누기 1000은 로또 개수이다.")
 	void 로또_개수를_테스트하자() {
 		//Given
-		int lottnum = InputView.inputNumberMessages(15000);
+		int lottonum = InputView.inputNumberMessages(15000) / 1000;
 		
 		// When
 		// Then
-		assertThat(15).isEqualTo(15);
+		assertThat(lottonum).isEqualTo(15);
 	}
 	
 	@Test
@@ -62,4 +56,23 @@ class LottoTest {
 		assertThat(lottos.size()).isEqualTo(15);
 	}
 	
+	@Test
+	@DisplayName("보너스 번호가 로또 1장안에 포함되면 true")
+	void 한장의_로또에_보너스가_포함되어있나() {
+		
+		
+		List<Integer> numbers = new ArrayList<>();
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+		
+		Lotto lotto = new Lotto(numbers);
+		
+		int bonusNumber = 3;
+		
+		boolean flag = lotto.lottoContainsBonusBall(bonusNumber);
+		
+		assertThat(flag).isTrue();
+		
+	}
 }

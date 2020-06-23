@@ -1,4 +1,4 @@
-package study2.domain;
+package study3.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +9,13 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import study2.domain.Ranking.Rank;
+
 public class Ranking {
 
 	public enum Rank {
 		SIXMATCH(6, 2_000_000_000), 
-		FIVEPLUSBONUS(5, 30_000_000),
+		FOURPLUSBONUS(5, 30_000_000),
 		FIVEMATCH(5, 15_000_000),
 		FOURMATCH(4, 50_000),
 		THREEMATCH(3, 5_000),
@@ -41,17 +43,32 @@ public class Ranking {
 		Map<Rank, Integer> rankRepository = new HashMap<>();
 
 		lottos.forEach(lotto -> {
-			Rank rank = lotto.getRankWithWinningLotto(winningLotto);
+			Boolean bonusBallFlag = lotto.lottoContainsBonusBall(bonusBall);
+			
+			Rank rank = lotto.getRankWithWinningLotto(winningLotto, bonusBallFlag);
 						
+			/* TODO 잠시 주석처리입니다.
+			 * if(rank == Rank.FOURMATCH && bonusBallFlag) {
+			 * rankRepository.put(rank.FIVEPLUSBONUS, rankRepository
+			 * .getOrDefault(rank.FIVEPLUSBONUS, 0) +1); rankRepository.put(rank,
+			 * rankRepository .getOrDefault(rank, 0) -1); }
+			 */ 
+			
 			rankRepository.put(rank, rankRepository
 					.getOrDefault(rank, 0) +1);			
 		});
 		return rankRepository;
 	}
 
-	public static Rank getRanking(int matchedNumber) {
+	public static Rank getRanking(int matchedNumber, Boolean bonusBallFlag) {
+		
+		if(bonusBallFlag && matchedNumber == Rank.FOURMATCH.countOfMatch) {
+			return Rank.FOURPLUSBONUS;
+		}
+		
 		return Arrays.stream(Rank.values())
-				.filter(rank -> rank.getCountOfMatch()== matchedNumber)
+				.filter(rank -> rank.winningMoney != Rank.FOURPLUSBONUS.winningMoney)
+				.filter(rank -> rank .getCountOfMatch() == matchedNumber)
 				.findFirst()
 				.orElse(Rank.MISS);
 	}

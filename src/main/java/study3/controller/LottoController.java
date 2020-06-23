@@ -1,15 +1,15 @@
-package study2.controller;
+package study3.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import study2.domain.Lotto;
-import study2.domain.Lottos;
-import study2.domain.Ranking;
-import study2.domain.Ranking.Rank;
-import study2.view.InputView;
-import study2.view.ResultView;
+import study3.domain.Lotto;
+import study3.domain.Lottos;
+import study3.domain.Ranking;
+import study3.domain.Ranking.Rank;
+import study3.view.InputView;
+import study3.view.ResultView;
 
 public class LottoController {
 	public static void main(String[] args) {

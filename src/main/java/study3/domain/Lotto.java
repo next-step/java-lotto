@@ -1,9 +1,10 @@
-package study2.domain;
+package study3.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import study2.domain.Ranking.Rank;
+import study3.domain.Ranking.Rank;
 
 public class Lotto {
 
@@ -31,15 +32,19 @@ public class Lotto {
 
 	
 	public List<Integer> getNumbers() {
-		return numbers;
+		return Collections.unmodifiableList(numbers);
 	}
 	
-	public  Rank getRankWithWinningLotto(List<Integer> winningLotto) {
+	public  Rank getRankWithWinningLotto(List<Integer> winningLotto, Boolean bonusBallFlag) {
 								
 		int matchedNumber =  (int) this.numbers.stream()
 				        .filter(winningLotto::contains)
 				        .count();
 		
-		return Ranking.getRanking(matchedNumber);
-	} 
+		return Ranking.getRanking(matchedNumber, bonusBallFlag);
+	}
+
+	public boolean lottoContainsBonusBall(int bonusBall) {
+		return this.numbers.contains(bonusBall);
+	}
 }
