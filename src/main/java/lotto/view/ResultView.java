@@ -9,15 +9,16 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static StringBuilder stringBuilder;
 
-    public static void printLotto(List<Lotto> lottos) {
+    public static void printLotto(List<Lotto> lottos, int manualLottoCount) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottos.size()).append("개를 구매했습니다.\n");
+        stringBuilder.append("수동으로 ").append(manualLottoCount).append("장, ");
+        stringBuilder.append("자동으로 ").append(lottos.size() - manualLottoCount).append("개를 구매했습니다.\n");
 
         lottos.forEach(lotto -> {
             printLottoNumbers(lotto.getLottoNumbers());
             stringBuilder.append("\n");
         });
-        System.out.println(stringBuilder.toString());
+        System.out.print(stringBuilder.toString());
     }
 
     private static void printLottoNumbers(List<LottoNumber> lottoNumbers) {

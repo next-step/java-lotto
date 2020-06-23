@@ -9,15 +9,13 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        int buyLottoMoney = InputView.buyLotto();
-        Money money = new Money(buyLottoMoney);
+        Money money = new Money(InputView.buyLotto());
+        int manualLottoCount = InputView.buyManualLotto(money.countLotto());
 
-        List<Lotto> lottos = LottoMachine.createLottos(money.countLotto());
-        ResultView.printLotto(lottos);
+        List<Lotto> lottos = LottoMachine.createLottos(InputView.inputManualNumbers(manualLottoCount), money.countLotto());
+        ResultView.printLotto(lottos, manualLottoCount);
 
-        String[] winningNumbers  = InputView.inputWinningNumber();
-        int bonusBall = InputView.inputBonusBall();
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, LottoNumber.valueOf(bonusBall));
+        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber(), LottoNumber.valueOf(InputView.inputBonusBall()));
 
         LottoResult lottoResult = new LottoResult();
         Map<Rank, Integer> result = lottoResult.matchResult(lottos, winningNumber);
