@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST_PLACE(6, "6개 일치 (2000000000원)", 2_000_000_000),
     SECOND_PLACE(5, "5개 일치 (1500000원)", 1_500_000),
@@ -20,15 +22,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        if (countOfMatch < WINNING_MIN_COUNT) {
-            return FAILURE;
-        }
-        for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
-                return rank;
-            }
-        }
-        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount(countOfMatch))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다."));
     }
 
     public String getDisplayText() {
