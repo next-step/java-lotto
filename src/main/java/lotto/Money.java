@@ -1,5 +1,7 @@
 package lotto;
 
+import java.math.BigDecimal;
+
 public class Money {
     private static final int LOTTERY_MONEY = 1_000;
     private final int money;
@@ -12,8 +14,8 @@ public class Money {
         this.money = money;
     }
 
-    public static Money buyingMoney(int countOfLotto) {
-        return new Money(countOfLotto * LOTTERY_MONEY);
+    public static BigDecimal buyingMoney(int countOfLotto) {
+        return new BigDecimal(countOfLotto * LOTTERY_MONEY);
     }
 
     public int lotteryCount() {
@@ -21,10 +23,6 @@ public class Money {
             throw new IllegalArgumentException();
         }
         return money / LOTTERY_MONEY;
-    }
-
-    public double profitRate(Money prize) {
-        return prize.money / money;
     }
 
     public Money sum(Money money) {

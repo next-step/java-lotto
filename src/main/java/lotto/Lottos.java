@@ -14,7 +14,7 @@ public class Lottos {
     }
 
     public MatchingResults match(WinningLotto winningLotto) {
-        MatchingResults result = new MatchingResults(lottos.size());
+        MatchingResults result = new MatchingResults(getLottoCount());
         for (Lotto userLotto : lottos) {
             result.add(winningLotto.match(userLotto));
         }

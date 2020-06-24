@@ -5,8 +5,8 @@ public class LottoGame {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        Money money = new Money(inputView.purchaseAmount());
-//        Money money = new Money(1000);
+//        Money money = new Money(inputView.purchaseAmount());
+        Money money = new Money(1000);
         resultView.printPurchaseTicketCount(money.lotteryCount());
 
         Lottos lottos = LottoGenerator.generateByMoney(money);

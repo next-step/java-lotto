@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Rank.*;
+import java.math.BigDecimal;
 
 public class MatchingResult {
     private final Rank rank;
@@ -19,7 +19,7 @@ public class MatchingResult {
         return countOfMatchingLotto;
     }
 
-    public Money prizePerRank() {
+    public BigDecimal prizePerRank() {
         return rank.prize(countOfMatchingLotto);
     }
 
