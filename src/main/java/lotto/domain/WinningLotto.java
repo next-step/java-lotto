@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final LottoTicket winningTicket;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoTicket winningTicket, int bonusNumber) {
-        if (!isValid(winningTicket, bonusNumber)) {
+    public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if (winningTicket.has(bonusNumber)) {
             throw new IllegalArgumentException();
         }
         this.bonusNumber = bonusNumber;
@@ -19,10 +19,6 @@ public class WinningLotto {
         return buyingLottoTickets.stream()
                 .map((buyingLottoTicket -> buyingLottoTicket.getRankBy(winningTicket, bonusNumber)))
                 .collect(Collectors.toList());
-    }
-
-    private boolean isValid(final LottoTicket lottoTicket, final int bonusNumber) {
-        return !lottoTicket.hasNumber(bonusNumber);
     }
 
 }

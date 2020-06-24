@@ -4,12 +4,13 @@ import java.util.List;
 
 public class CustomLottoTicket extends LottoTicket{
 
-    public CustomLottoTicket(List<Integer> lottoNumbers) {
+    public CustomLottoTicket(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
     @Override
-    protected List<Integer> createLottoNumber(List<Integer> lottoNumbers) {
+    protected List<LottoNumber> createLottoNumber(List<LottoNumber> lottoNumbers) {
         return lottoNumbers;
     }
+
 }

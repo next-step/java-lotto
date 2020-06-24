@@ -1,5 +1,6 @@
 import lotto.domain.*;
 import lotto.util.ListConverter;
+import lotto.util.RankCalculator;
 import lotto.view.LottoResultView;
 import lotto.view.LottoTicketResultView;
 import lotto.view.MoneyInputView;
@@ -19,11 +20,12 @@ public class Main {
         LottoTicketResultView.printLottoTickets(buyingLottoTickets);
 
         NumberInputView numberInputView = NumberInputView.enterWinningLottoNumbers();
-        WinningLotto winningLotto = new WinningLotto(new CustomLottoTicket(ListConverter.convertCommaStringToNumberList(numberInputView.getLottoNumbers())),
-                numberInputView.getBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(new CustomLottoTicket(ListConverter.convertCommaStringToLottoNumbers(numberInputView.getLottoNumbers())),
+                new LottoNumber(numberInputView.getBonusNumber()));
         List<Rank> lottoResults = winningLotto.getLottoRank(buyingLottoTickets);
 
-        LottoResultView.printRankResult(lottoResults);
-        LottoResultView.printTotalEarningRate(lottoResults, payInput.getMoney());
+        LottoResultView.printRankResult(RankCalculator.getRankResult(lottoResults));
+        LottoResultView.printTotalEarningRate(RankCalculator.getTotalEarningRate(lottoResults, payInput.getMoney()));
     }
+
 }
