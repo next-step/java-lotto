@@ -12,7 +12,7 @@ public abstract class LottoTicket {
 
     private final List<Integer> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    protected LottoTicket(List<Integer> lottoNumbers) {
         final List<Integer> createdLottoNumber = createLottoNumber(lottoNumbers);
         if (!isValid(createdLottoNumber)) {
             throw new RuntimeException();
@@ -41,14 +41,26 @@ public abstract class LottoTicket {
         return set.size() == lottoNumbers.size();
     }
 
-    public Rank getRankBy(final LottoTicket winningLottoTicket) {
+    public Rank getRankBy(final LottoTicket winningLottoTicket, final int bonusNumber) {
         int countOfMatch = 0;
         for (int lottoNumber : lottoNumbers) {
-            if (winningLottoTicket.getLottoNumbers().contains(lottoNumber)) {
+            if (winningLottoTicket.hasNumber(lottoNumber)) {
                 countOfMatch++;
             }
         }
-        return Rank.valueOf(countOfMatch);
+
+        boolean isBonusMatch = false;
+
+        if (countOfMatch == 5) {
+            if (this.hasNumber(bonusNumber)) {
+                isBonusMatch = true;
+            }
+        }
+        return Rank.valueOf(countOfMatch, isBonusMatch);
+    }
+
+    public boolean hasNumber(final int lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public List<Integer> getLottoNumbers() {
