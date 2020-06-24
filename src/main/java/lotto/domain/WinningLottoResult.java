@@ -11,10 +11,9 @@ public class WinningLottoResult {
     private static final int INIT_ZERO = 0;
     private static final int PRIZE_MIN_MATCH_COUNT = 3;
     private static final float BREAK_EVEN_POINT = 1.0f;
-    private static final int ADD_COUNT_ONE =1;
+    private static final int ADD_COUNT_ONE = 1;
     private List<Prize> rankResult;
     private Map<Prize, Integer> result;
-
 
 
     public WinningLottoResult() {
@@ -26,13 +25,12 @@ public class WinningLottoResult {
         result.put(Prize.SECOND, INIT_ZERO);
         result.put(Prize.FIRST, INIT_ZERO);
 
-
     }
 
-    public void match(int count, Match match) {
+    public void match(int count, boolean check) {
 
         if (count > PRIZE_MIN_MATCH_COUNT) {
-            Prize prize = Prize.findByPrize(count, match.isCheck());
+            Prize prize = Prize.findByPrize(count, check);
             rankResult.add(prize);
         }
     }

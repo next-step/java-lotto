@@ -34,9 +34,8 @@ public class LottoController {
 
         WinningLottoResult lottoResult = new WinningLottoResult();
         for (Lotto lotto : lottos) {
-            Match contain = lotto.isContain(bonusNumber);
             int count = lotto.matchCount(winningLotto);
-            lottoResult.match(count, contain);
+            lottoResult.match(count, lotto.isContain(bonusNumber));
         }
         return lottoResult;
     }

@@ -46,9 +46,4 @@ public class Input {
         return inputName == null || inputName.trim().isEmpty();
     }
 
-    public LottoNumber inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bonus = scanner.nextInt();
-        return new LottoNumber(bonus);
-    }
 }

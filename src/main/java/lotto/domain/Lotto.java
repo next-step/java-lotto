@@ -36,25 +36,17 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningLotto) {
+        HashSet<LottoNumber> cloneNumbers = new HashSet<>(numbers);
+        cloneNumbers.retainAll(winningLotto.getNumbers());
 
-        int count = 0;
-
-        for (LottoNumber winnerNumber : winningLotto.getNumbers()) {
-            Match match = isContain(winnerNumber);
-            count += match.getCount();
-
-        }
-
-        return count;
+        return cloneNumbers.size();
 
     }
 
-    public Match isContain(LottoNumber winnerNumber) {
+    public boolean isContain(LottoNumber winnerNumber) {
 
-        if (numbers.contains(winnerNumber)) {
-            return Match.HAS;
-        }
-        return Match.EMPTY;
+        return numbers.contains(winnerNumber);
+
     }
 
     public void duplicateBonusNumber(LottoNumber bonusNumber) {
@@ -64,7 +56,6 @@ public class Lotto {
         }
 
     }
-
 
 
     @Override
