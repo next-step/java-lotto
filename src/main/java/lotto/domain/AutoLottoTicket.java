@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 public class AutoLottoTicket extends LottoTicket {
     private static final int START_INDEX = 0;
 
-    public AutoLottoTicket(List<Integer> lottoNumbers) {
-        super(lottoNumbers);
+    public AutoLottoTicket() {
+        super(Collections.EMPTY_LIST);
     }
 
     @Override
@@ -20,4 +20,5 @@ public class AutoLottoTicket extends LottoTicket {
         Collections.shuffle(lottoNumberCollections);
         return lottoNumberCollections.subList(START_INDEX, NUMBER_OF_LOTTO_NUMBERS);
     }
+
 }
