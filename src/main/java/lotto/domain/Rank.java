@@ -19,16 +19,14 @@ public enum Rank {
     }
 
     public static Rank valueOf(final int countOfMatch, final boolean isBonusMatch) {
+        if (countOfMatch == 5 && isBonusMatch) {
+            return Rank.SECOND;
+        }
+        if (countOfMatch == 5) {
+            return Rank.THIRD;
+        }
         return Arrays.stream(Rank.values())
-                .filter((rank) -> {
-                    if (isBonusMatch) {
-                        return rank == Rank.SECOND;
-                    } else if(countOfMatch == 5) {
-                        return rank == Rank.THIRD;
-                    } else {
-                        return rank.getCountOfMatch() == countOfMatch;
-                    }
-                })
+                .filter((rank) -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(Rank.MISS);
     }
