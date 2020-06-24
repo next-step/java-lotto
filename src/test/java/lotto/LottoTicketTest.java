@@ -71,22 +71,24 @@ public class LottoTicketTest {
     @ParameterizedTest
     @DisplayName("당첨 로또의 갯수에 맞는 Rank를 반환하는지 테스트")
     @MethodSource("provideLottoTicketForRank")
-    void IsRankEqualWithMatchingCountOfLottoNumbers(List<Integer> left, List<Integer> right, Rank expected) {
+    void IsRankEqualWithMatchingCountOfLottoNumbers(List<Integer> left, List<Integer> right, int bonusNumber, Rank expected) {
         CustomLottoTicket buyingLottoTicket = new CustomLottoTicket(left);
         CustomLottoTicket winningLottoTicket = new CustomLottoTicket(right);
 
-        Rank actual = buyingLottoTicket.getRankBy(winningLottoTicket);
+        Rank actual = buyingLottoTicket.getRankBy(winningLottoTicket, bonusNumber);
 
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideLottoTicketForRank() {
         return Stream.of(
-                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), Rank.FIRST),
-                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,5,45)), Rank.SECOND),
-                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,44,45)), Rank.THIRD),
-                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,42,43,45)), Rank.FOURTH),
-                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,41,42,43,45)), Rank.MISS)
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 7, Rank.FIRST),
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,7)), new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 7, Rank.SECOND),
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,5,45)), 7, Rank.THIRD),
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,4,43,45)), 7, Rank.FOURTH),
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,3,42,43,45)), 7, Rank.FIFTH),
+                Arguments.of(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), new ArrayList<>(Arrays.asList(1,2,41,42,43,45)), 7, Rank.MISS)
         );
     }
+
 }
