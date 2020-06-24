@@ -36,27 +36,17 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningLotto) {
+
         HashSet<LottoNumber> cloneNumbers = new HashSet<>(numbers);
+
         cloneNumbers.retainAll(winningLotto.getNumbers());
 
         return cloneNumbers.size();
-
     }
 
     public boolean isContain(LottoNumber winnerNumber) {
-
         return numbers.contains(winnerNumber);
-
     }
-
-    public void duplicateBonusNumber(LottoNumber bonusNumber) {
-
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호가 지난주 당첨번호와 중복됩니다.");
-        }
-
-    }
-
 
     @Override
     public String toString() {

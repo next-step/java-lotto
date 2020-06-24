@@ -17,11 +17,8 @@ public class LottoGame {
         LottoController lottoController = new LottoController(money);
         lottoController.createLotto();
 
-
         Lotto winningLotto = new Lotto(input.inputLastWinningNumber());
-
         LottoNumber bonusNumber = input.inputLastBonusNumber();
-        winningLotto.duplicateBonusNumber(bonusNumber);
 
         WinningLottoResult lottoResult = lottoController.matchLotto(winningLotto, bonusNumber);
 

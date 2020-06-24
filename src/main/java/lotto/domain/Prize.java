@@ -49,7 +49,7 @@ public enum Prize {
         return this;
     }
 
-    public int sumMoney(int totalMoney) {
+    public long sumMoney(long totalMoney) {
         return money + totalMoney;
     }
 

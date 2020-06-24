@@ -29,7 +29,7 @@ public class WinningLottoResult {
 
     public void match(int count, boolean check) {
 
-        if (count > PRIZE_MIN_MATCH_COUNT) {
+        if (count >= PRIZE_MIN_MATCH_COUNT) {
             Prize prize = Prize.findByPrize(count, check);
             rankResult.add(prize);
         }
@@ -48,12 +48,12 @@ public class WinningLottoResult {
 
 
     public float getRevenueStatic(int buyCount) {
-        int totalSum = getTotalSum();
-        return totalSum / (buyCount * LOTTO_GAME_PRICE);
+        long totalSum = getTotalSum();
+        return (float)totalSum / (buyCount * LOTTO_GAME_PRICE);
     }
 
-    private int getTotalSum() {
-        int totalSum = 0;
+    private long getTotalSum() {
+        long totalSum = 0;
         for (Prize prize : this.rankResult) {
             totalSum = prize.sumMoney(totalSum);
         }

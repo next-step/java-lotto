@@ -31,6 +31,9 @@ public class LottoController {
 
 
     public WinningLottoResult matchLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.isContain(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 지난주 당첨번호와 중복됩니다.");
+        }
 
         WinningLottoResult lottoResult = new WinningLottoResult();
         for (Lotto lotto : lottos) {
