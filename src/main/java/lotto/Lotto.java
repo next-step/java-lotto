@@ -3,15 +3,12 @@ package lotto;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int INCREMENT_NUMBER_1 = 1;
     private static final int LOTTO_SIZE = 6;
     private static final int INITIAL_NUMBER = 0;
     private static final String SYMBOL_COMMA = ",";
-    private static final String SYMBOL_PREFIX_BRACKET = "[";
-    private static final String SYMBOL_SUFFIX_BRACKET = "]";
 
     private final Set<LottoNumber> lotto;
 
