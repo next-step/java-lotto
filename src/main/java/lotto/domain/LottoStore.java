@@ -7,7 +7,7 @@ public final class LottoStore {
 
     private LottoStore() {}
 
-    public static List<LottoTicket> sellAutoLottoTicket(LottoMoney lottoMoney) {
+    public static List<LottoTicket> sellAutoLottoTicket(final LottoMoney lottoMoney) {
         final List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoMoney.getNumberOfLottoByMoneyPaid(); i++) {
