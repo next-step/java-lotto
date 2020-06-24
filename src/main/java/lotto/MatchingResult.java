@@ -15,8 +15,7 @@ public class MatchingResult {
     }
 
     int match() {
-        countOfMatchingLotto++;
-        return countOfMatchingLotto;
+        return ++countOfMatchingLotto;
     }
 
     public BigDecimal prizePerRank() {
