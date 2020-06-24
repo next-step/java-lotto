@@ -10,10 +10,10 @@ import java.util.List;
 public class WinningLotto {
 
     private Lotto lottoNumbers;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
-    private WinningLotto(Lotto lottoNumbers, int bonusNumber) {
-        if (bonusNumber <= LottoNumber.LOTTO_DRAW_BASE_NUMBER && bonusNumber > LottoNumber.LOTTO_MAX_LIMIT) {
+    private WinningLotto(Lotto lottoNumbers, LottoNumber bonusNumber) {
+        if (bonusNumber.getLottoNumber() <= LottoNumber.LOTTO_DRAW_BASE_NUMBER && bonusNumber.getLottoNumber() > LottoNumber.LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException("Not matched range of bonus ball.");
         }
         this.lottoNumbers = lottoNumbers;
@@ -21,7 +21,7 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(String winningLotto, String bonusNumber) {
-        return new WinningLotto(new Lotto(winningLotto), Integer.parseInt(bonusNumber));
+        return new WinningLotto(new Lotto(winningLotto), LottoNumber.of(Integer.valueOf(bonusNumber)));
     }
 
     // matching
@@ -57,8 +57,8 @@ public class WinningLotto {
                         }
                 );
         if (bounsGameChanceNumbers.contains(matchedNumber)
-                && lotto.getNumbers().contains(bonusNumber)
-                && !lottoNumbers.getNumbers().contains(bonusNumber)) {
+                && lotto.contains(bonusNumber)
+                && !lottoNumbers.contains(bonusNumber)) {
             return true;
         }
         return false;

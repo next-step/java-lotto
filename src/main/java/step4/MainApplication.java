@@ -23,6 +23,7 @@ public class MainApplication {
             selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
         }
         LottoGame lottoGame = LottoGame.create(purchaseInfo, selfChosenLottos);
+        //LottoGame lottoGame = LottoGame.create(purchaseInfo);
         OutputView.outputLottoList(lottoGame);
         // get Wining Number
         String winingNumber = InputView.inputWiningNumber();

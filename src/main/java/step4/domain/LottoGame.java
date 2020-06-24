@@ -5,7 +5,9 @@ import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoTickets;
 import step4.domain.lotto.WinningLotto;
 import step4.domain.prize.PrizeCount;
+import step4.view.InputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -21,11 +23,23 @@ public class LottoGame {
         this.lottoTickets = lottoTickets;
     }
 
+    //public static LottoGame create(PurchaseInfo purchaseInfo) {
     public static LottoGame create(PurchaseInfo purchaseInfo, List<Lotto> selfChosenLottos) {
-        LottoTickets lottoTickets = LottoNumber.issueLotto(purchaseInfo.getBoughtLottoCount());
+        LottoTickets lottoTicketsInner = LottoNumber.issueLotto(purchaseInfo.getBoughtLottoCount());
         // self chosen numbers.
-        lottoTickets.add(selfChosenLottos);
-        return new LottoGame(lottoTickets);
+        //List<Lotto> selfChosenLottos = createSelfChoosenLottos(purchaseInfo);
+        lottoTicketsInner.add(selfChosenLottos);
+
+        return new LottoGame(lottoTicketsInner);
+    }
+
+    private static List<Lotto> createSelfChoosenLottos(PurchaseInfo purchaseInfo) {
+        // set
+        List<Lotto> selfChosenLottos = new ArrayList<>();
+        for (int i = 0; i < purchaseInfo.getSelfChooseCount(); i++) {
+            selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
+        }
+        return selfChosenLottos;
     }
 
     // matching

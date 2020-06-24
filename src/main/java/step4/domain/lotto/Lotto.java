@@ -1,7 +1,6 @@
 package step4.domain.lotto;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -31,6 +30,10 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
 }

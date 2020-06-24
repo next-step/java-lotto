@@ -12,7 +12,7 @@ public class LottoNumber implements Comparable {
     public static final String FIXED_DELIMITER = ",|:";
 
     // default 1 to LOTTO_MAX_LIMIT (45)
-    private static List<LottoNumber> lottoGameNumbers;
+    private static final List<LottoNumber> lottoGameNumbers;
 
     private final int lottoNumber;
 
@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable {
                 .collect(Collectors.toList());
     }
 
-    private LottoNumber(int lottoNumber) {
+    public LottoNumber(int lottoNumber) {
         checkLottoRules(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

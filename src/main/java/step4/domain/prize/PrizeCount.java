@@ -6,10 +6,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class PrizeCount {
 
     private List<PrizeAdder> prizes = new ArrayList<>();
+    private static PrizeCount prizeCount;
 
     private PrizeCount() {
         for (Prize prize : Prize.values()) {
@@ -17,12 +19,11 @@ public class PrizeCount {
         }
     }
 
-    public static class LazyHolder {
-        public static final PrizeCount prizeCount = new PrizeCount();
-    }
-
     public static PrizeCount getInstance() {
-        return LazyHolder.prizeCount;
+        if (Objects.isNull(prizeCount)) {
+            prizeCount = new PrizeCount();
+        }
+        return prizeCount;
     }
 
     private class PrizeAdder {

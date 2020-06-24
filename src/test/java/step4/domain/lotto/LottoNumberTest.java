@@ -24,17 +24,25 @@ class LottoNumberTest {
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(result);
     }
 
-    //@ValueSource(strings = {"1,2,3,4,5,6,7,8,9,0", "2,1,43,44,33,4,49,22,23,12,3", "6,5,4,3,2,1,7,8,9"})
+    //    @ValueSource(strings = {"6,5,4,3,2,1,7,8,9"})
     @DisplayName("LOTTO_DRAW_LIMIT 갯수에 맞는 당첨번호 반환")
     @ParameterizedTest
-    @ValueSource(strings = {"6,5,4,3,2,1,7,8,9"})
+    @ValueSource(strings = {"1,2,3,4,5,6,7,8,9", "2,1,43,44,33,4,22,23,12,3", "6,5,4,3,2,1,7,8,9"})
     void drawLottoNumbers(String input) {
-        Set<LottoNumber> result =
-                Arrays.stream(input.split(","))
-                        .map(x -> LottoNumber.of(Integer.parseInt(x)))
-                        .collect(Collectors.toSet());
+        Lotto lotto = new Lotto(input);
+        assertThat(lotto.getNumbers().size()).isEqualTo(LOTTO_DRAW_LIMIT);
+    }
+
+    @DisplayName("LOTTO_DRAW_LIMIT 갯수에 맞는 당첨번호 반환 범위초과")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,6,7,8,9,0", "2,1,43,44,33,4,49,22,23,12,3", "6,5,4,3,2,1,7,8,9,90"})
+    void drawLottoNumbersOverRanage(String input) {
         assertThatIllegalArgumentException().isThrownBy(() ->
                 {
+                    Set<LottoNumber> result =
+                            Arrays.stream(input.split(","))
+                                    .map(x -> LottoNumber.of(Integer.valueOf(x)))
+                                    .collect(Collectors.toSet());
                     Lotto lotto = new Lotto(result);
                     assertThat(lotto.getNumbers().size()).isEqualTo(LOTTO_DRAW_LIMIT);
                 }

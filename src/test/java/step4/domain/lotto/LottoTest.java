@@ -25,4 +25,15 @@ class LottoTest {
         assertThat(lotto.getNumbers()).isEqualTo(testResult);
     }
 
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:1,2,3,4,5,6", "2,4,6,8,10,45:2,4,6,8,10,45", "1,2,3,43,44,45:1,2,3,43,44,45"}, delimiter = ':')
+    public void LottoCount(String inputString, String resultString) {
+        Lotto lotto = new Lotto(inputString);
+
+        System.out.println(lotto.getNumbers().toString());
+
+        //assertThat(lotto.getNumbers()).isEqualTo(testResult);
+    }
+
 }

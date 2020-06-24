@@ -18,7 +18,7 @@ class LottoGameTest {
     @CsvSource(value = {"1000", "2000", "15000"}, delimiter = ':')
     public void matchingWinningNumbers(String boughtLotto) {
         PurchaseInfo purchaseInfo = new PurchaseInfo(boughtLotto, "0");
-        LottoGame lottoGame = LottoGame.create(purchaseInfo, new ArrayList<Lotto>());
+        LottoGame lottoGame = LottoGame.create(purchaseInfo);
         // 테스트만을 위한 메소드 생성이 옳은가... 에 대한 고민..
         //assertThat(lottoGame.).isEqualTo(boughtLotto);
     }

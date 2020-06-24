@@ -1,7 +1,5 @@
 package step4.domain.lotto;
 
-import step4.view.OutputView;
-
 import java.util.List;
 
 /*
@@ -20,7 +18,6 @@ public class LottoTickets {
 
     public void add(List<Lotto> lottoTickets) {
         this.lottoTickets.addAll(lottoTickets);
-
     }
 
     public List<Lotto> getLottoTickets() {
