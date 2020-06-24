@@ -33,7 +33,7 @@ public class LottoTicket {
 
     private boolean isBonus(LottoNumber bonusBall) {
         List<Integer> myNumberList = IntegerUtils.numbersToList(myNumbers.getNumbers());
-        return myNumberList.contains(bonusBall);
+        return myNumberList.contains(bonusBall.getNumber());
     }
 
     private void isWinner(LottoNumber winningNumber) {

@@ -3,12 +3,12 @@ package lotto.model;
 import java.util.List;
 
 public class LottoFactory {
-    public int calcPrize(LottoNumbers winningNumbers, LottoNumber bonusBall, List<LottoTicket> tickets) {
+    public int calcPrize(LottoNumberBonus lottoNumberBonus, List<LottoTicket> tickets) {
         int prize = 0;
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         for (LottoTicket ticket : tickets) {
-            Rank rank = ticket.announceRank(winningNumbers, bonusBall);
+            Rank rank = ticket.announceRank(lottoNumberBonus.getLottoNumbers(), lottoNumberBonus.getBonus());
             lottoStatistics.gatherResult(rank);
             prize += lottoStatistics.getPrizeMoney(rank);
         }

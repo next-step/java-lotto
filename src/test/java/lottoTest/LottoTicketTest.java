@@ -47,7 +47,7 @@ public class LottoTicketTest {
         LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseLottoNumber(myNumbers));
         LottoNumbers winningLotto = new LottoNumbers(winningNumbers);
 
-        assertThat(ticketWithNumbers.announceRank(winningLotto, ticket.isBonus(new LottoNumber(bonus))).getRank()).isEqualTo(expected);
+        assertThat(ticketWithNumbers.announceRank(winningLotto, new LottoNumber(bonus)).getRank()).isEqualTo(expected);
     }
 
 }

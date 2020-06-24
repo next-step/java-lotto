@@ -29,7 +29,7 @@ public class LottoGame {
 		List<LottoTicket> tickets = buyTickets(numberOfTickets);
 		LottoNumbers winningNumbers = setWinningNumbers();
 		LottoNumber bonusBall = setBonusBall();
-		int prize = lottoFactory.calcPrize(winningNumbers, bonusBall, tickets);
+		int prize = lottoFactory.calcPrize(new LottoNumberBonus(winningNumbers, bonusBall), tickets);
 		double profit = lottoStatistics.calcProfit(prize, budget);
 
 		showResult(profit);
