@@ -18,8 +18,7 @@ public class LottoStoreTest {
     @DisplayName("로또를 팔았을 경우 입력한 돈과 판매한 로또의 장수가 일치 하는 지 테스트")
     @MethodSource("provideValidMoney")
     void LottoCountIsEqualWithMoneyPaid(LottoMoney input, int expected) {
-        LottoStore lottoStore = new LottoStore(input);
-        int actual = lottoStore.sellAutoLottoTicket().size();
+        int actual = LottoStore.sellAutoLottoTicket(input).size();
 
         assertThat(actual).isEqualTo(expected);
     }

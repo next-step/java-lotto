@@ -1,5 +1,7 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +10,9 @@ public final class ListConverter {
 
     private ListConverter() {}
 
-    public static List<Integer> convertCommaStringToNumberList(final String commaString) {
+    public static List<LottoNumber> convertCommaStringToLottoNumbers(final String commaString) {
         return Arrays.stream(commaString.split(","))
-                .map(Integer::valueOf)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

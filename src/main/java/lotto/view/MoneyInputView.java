@@ -1,17 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LottoMoney;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class MoneyInputView {
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    private final LottoMoney lottoMoney;
+    private final BigDecimal money;
 
     private MoneyInputView(BigDecimal money) {
-        this.lottoMoney = new LottoMoney(money);
+        this.money = money;
     }
 
     public static MoneyInputView enterMoney() {
@@ -23,8 +21,8 @@ public class MoneyInputView {
         return SCANNER.nextBigDecimal();
     }
 
-    public LottoMoney getLottoMoney() {
-        return lottoMoney;
+    public BigDecimal getMoney() {
+        return money;
     }
 
 }

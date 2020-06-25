@@ -1,4 +1,6 @@
 import lotto.domain.*;
+import lotto.util.ListConverter;
+import lotto.util.RankCalculator;
 import lotto.view.LottoResultView;
 import lotto.view.LottoTicketResultView;
 import lotto.view.MoneyInputView;
@@ -10,18 +12,20 @@ public class Main {
 
     public static void main(String[] args) {
         MoneyInputView payInput = MoneyInputView.enterMoney();
-        LottoMoney payMoney = payInput.getLottoMoney();
-        LottoStore lottoStore = new LottoStore(payMoney);
-        List<LottoTicket> buyingLottoTickets = lottoStore.sellAutoLottoTicket();
 
-        LottoTicketResultView.printBuyingLotto(payMoney.getNumberOfLottoByMoneyPaid());
+        LottoMoney lottoMoney = new LottoMoney(payInput.getMoney());
+        List<LottoTicket> buyingLottoTickets = LottoStore.sellAutoLottoTicket(lottoMoney);
+
+        LottoTicketResultView.printBuyingLotto(lottoMoney.getNumberOfLottoByMoneyPaid());
         LottoTicketResultView.printLottoTickets(buyingLottoTickets);
 
         NumberInputView numberInputView = NumberInputView.enterWinningLottoNumbers();
-        WinningLotto winningLotto = new WinningLotto(new CustomLottoTicket(numberInputView.getLottoNumbers()));
+        WinningLotto winningLotto = new WinningLotto(new CustomLottoTicket(ListConverter.convertCommaStringToLottoNumbers(numberInputView.getLottoNumbers())),
+                new LottoNumber(numberInputView.getBonusNumber()));
         List<Rank> lottoResults = winningLotto.getLottoRank(buyingLottoTickets);
 
-        LottoResultView.printRankResult(lottoResults);
-        LottoResultView.printTotalEarningRate(lottoResults, payMoney.getPayAmount());
+        LottoResultView.printRankResult(RankCalculator.getRankResult(lottoResults));
+        LottoResultView.printTotalEarningRate(RankCalculator.getTotalEarningRate(lottoResults, payInput.getMoney()));
     }
+
 }
