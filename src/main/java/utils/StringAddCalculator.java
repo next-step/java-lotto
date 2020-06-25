@@ -1,7 +1,6 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
@@ -16,8 +15,16 @@ public class StringAddCalculator {
         return sumIntArray(intArray);
     }
 
-    public static List<Integer> convertToIntArray(String[] stringArray) {
+    private static List<Integer> convertToIntArray(String[] stringArray) {
         List<Integer> intList = new ArrayList<>();
+        for (String s : stringArray) {
+            intList.add(convertUnsignedInt(s));
+        }
+        return intList;
+    }
+
+    public static Set<Integer> convertToIntSet(String[] stringArray) {
+        Set<Integer> intList = new TreeSet<>();
         for (String s : stringArray) {
             intList.add(convertUnsignedInt(s));
         }

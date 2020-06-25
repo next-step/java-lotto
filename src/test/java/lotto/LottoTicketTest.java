@@ -2,8 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class LottoTicketTest {
     @Test
     void lottoTicketTest() {
-        List<Integer> lottoNumbers = new ArrayList<>();
+        Set<Integer> lottoNumbers = new TreeSet<>();
         lottoNumbers.add(3);
         lottoNumbers.add(5);
         lottoNumbers.add(8);
@@ -26,7 +25,7 @@ public class LottoTicketTest {
     void negativeAmountTest() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    List<Integer> lottoNumbers = new ArrayList<>();
+                    Set<Integer> lottoNumbers = new TreeSet<>();
                     lottoNumbers.add(-3);
                     lottoNumbers.add(5);
                     lottoNumbers.add(8);

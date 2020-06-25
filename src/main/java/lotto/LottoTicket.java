@@ -1,20 +1,23 @@
 package lotto;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(Set<Integer> lottoNumbers) {
+        for (Integer lottoNumber : lottoNumbers) {
+            checkLottoNumber(lottoNumber);
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
     public String makeTicketForPrint() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        int length = lottoNumbers.size();
-        for (int i = 0; i < length; i++) {
-            sb.append(lottoNumbers.get(i));
+        for (Integer lottoNumber : lottoNumbers) {
+            sb.append(lottoNumber);
             sb.append(", ");
         }
         sb.delete(sb.length() - 2, sb.length());
@@ -22,13 +25,11 @@ public class LottoTicket {
         return sb.toString();
     }
 
-    public int matchWinningNumber(List<Integer> winningNumbers) {
-        int matchCnt = 0;
-        for (Integer number : winningNumbers) {
-            checkLottoNumber(number);
-            matchCnt = lottoNumbers.contains(number) ? matchCnt + 1 : matchCnt;
-        }
-        return matchCnt;
+    public int matchWinningNumber(Set<Integer> winningNumbers) {
+        return lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .collect(Collectors.toSet())
+                .size();
     }
 
     public void checkLottoNumber(Integer number) {

@@ -5,6 +5,7 @@ import utils.StringAddCalculator;
 import utils.StringUtils;
 
 import java.util.List;
+import java.util.Set;
 
 public class UiManager {
     private final InputView inputView = new InputView();
@@ -20,10 +21,10 @@ public class UiManager {
         return takeCount(investAmount);
     }
 
-    public List<Integer> takeWinningNumber() {
+    public Set<Integer> takeWinningNumber() {
         String numbers = inputView.inputWinningNumber();
         String[] num = splitWinningNumber(numbers);
-        return StringAddCalculator.convertToIntArray(num);
+        return StringAddCalculator.convertToIntSet(num);
     }
 
     private String[] splitWinningNumber(String numbers) {

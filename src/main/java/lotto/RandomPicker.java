@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,10 +13,9 @@ public class RandomPicker {
         IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).forEach(lottoAllNumbers::add);
     }
 
-    public List<Integer> pickRandomLotto() {
+    public Set<Integer> pickRandomLotto() {
         Collections.shuffle(lottoAllNumbers);
         List<Integer> lottoNumbers = lottoAllNumbers.stream().limit(6).collect(Collectors.toList());
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new TreeSet<>(lottoNumbers);
     }
 }

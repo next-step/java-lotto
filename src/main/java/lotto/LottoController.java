@@ -2,13 +2,11 @@ package lotto;
 
 import view.UiManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LottoController {
     private UiManager uiManager = new UiManager();
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private Set<Integer> winningNumbers = new TreeSet<>();
     private TicketCollection tickets;
 
     public LottoController() {

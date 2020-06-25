@@ -1,10 +1,13 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Prize {
     FIRST(2000000000, 6),
     SECOND(1500000, 5),
     THIRD(50000, 4),
-    FORTH(5000, 3);
+    FORTH(5000, 3),
+    NONE(0,0);
 
     private int money;
     private int cnt;
@@ -18,22 +21,13 @@ public enum Prize {
         return this.cnt;
     }
 
-    static public int matchPrize(int cnt) {
-        switch (cnt) {
-            case 6: {
-                return FIRST.money;
-            }
-            case 5: {
-                return SECOND.money;
-            }
-            case 4: {
-                return THIRD.money;
-            }
-            case 3: {
-                return FORTH.money;
-            }
-            default:
-                return 0;
-        }
+    public int getMoney() {
+        return this.money;
+    }
+
+    static public Prize matchPrize(int cnt) {
+        return Arrays.stream(values()).filter((prize) -> prize.cnt == cnt)
+                .findFirst()
+                .orElse(NONE);
     }
 }

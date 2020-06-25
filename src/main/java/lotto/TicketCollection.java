@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class TicketCollection {
     private int count;
@@ -20,12 +22,12 @@ public class TicketCollection {
         }
     }
 
-    public int calculateStatics(List<Integer> winningNumbers, List<Integer> winningMatcher) {
+    public int calculateStatics(Set<Integer> winningNumbers, List<Integer> winningMatcher) {
         int sumPrize = 0;
         for (LottoTicket ticket : tickets) {
             int cnt = ticket.matchWinningNumber(winningNumbers);
             winningMatcher.set(cnt, winningMatcher.get(cnt) + 1);
-            sumPrize += Prize.matchPrize(cnt);
+            sumPrize += Prize.matchPrize(cnt).getMoney();
         }
         return sumPrize;
     }
@@ -35,6 +37,6 @@ public class TicketCollection {
     }
 
     public List<LottoTicket> getTickets() {
-        return tickets;
+        return Collections.unmodifiableList(tickets);
     }
 }
