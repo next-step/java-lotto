@@ -36,6 +36,21 @@ public class Lottos {
 		return Collections.unmodifiableList(lottos);
 	}
 	
+	public List<Lotto> getLottoNumbersByManual(List<String> inputNumberByManual) {
+		
+		
+		
+		/* TODO
+		 * return inputNumberByManual
+		 * 			 .stream()
+		 *  		.mapToInt(Integer::parseInt)
+		 *  		 .boxed()
+		 * 			.forEach(Lottos::add)
+		 * 			 .sorted()
+		 * 			 .collect(Collectors.toList());
+		 */
+	}
+	
 	public static List<Integer> winNumSplit(String inputWinNumber) {
 		if (inputWinNumber.equals("") || inputWinNumber == null) {
 			throw new IllegalArgumentException("공백이나 null은 안됩니다.");

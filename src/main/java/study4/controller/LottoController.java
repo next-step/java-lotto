@@ -19,10 +19,13 @@ public class LottoController {
 		Ranking rank = new Ranking();
 		
 		int price = InputView.enterPriceMessage();
-		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
 		
 		int mannualLottoNumbers = InputView.manualLottoNumber();
-		InputView.inputNumberByManual(mannualLottoNumbers);
+		
+		// 수동
+		List<Lotto> inputNumberByManual = lottonumbers.getLottoNumbersByManual(InputView.inputNumberByManual(mannualLottoNumbers));
+		
+		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price - mannualLottoNumbers));
 		
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
