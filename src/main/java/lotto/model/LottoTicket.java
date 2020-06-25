@@ -8,7 +8,7 @@ public class LottoTicket {
     private int rank = 0;
     private Rank rankType;
 
-    private LottoNumbers myNumbers; // = new LottoNumbers();
+    private LottoNumbers myNumbers;
 
     public LottoTicket() {
         this.myNumbers = new LottoNumbers();
@@ -22,15 +22,20 @@ public class LottoTicket {
         return myNumbers;
     }
 
-    public Rank announceRank(LottoNumbers winningNumbers) {
+    public Rank announceRank(LottoNumbers winningNumbers, LottoNumber bonusBall) {
         for (LottoNumber number : winningNumbers.getNumbers()) {
             isWinner(number);
         }
 
-        rankType = Rank.getValue(rank);
+        rankType = Rank.getValue(rank, isBonus(bonusBall));
         return rankType;
     }
-    
+
+    private boolean isBonus(LottoNumber bonusBall) {
+        List<Integer> myNumberList = IntegerUtils.numbersToList(myNumbers.getNumbers());
+        return myNumberList.contains(bonusBall.getNumber());
+    }
+
     private void isWinner(LottoNumber winningNumber) {
         List<Integer> myNumberList = IntegerUtils.numbersToList(myNumbers.getNumbers());
         if (myNumberList.contains(winningNumber.getNumber())) {

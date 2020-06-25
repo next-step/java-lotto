@@ -1,22 +1,29 @@
 package lotto.model;
 
 public enum Rank {
-    ALL_MATCH(1,6, 2000000000),
-    MISS_ONE(2, 5, 1500000),
-    MISS_TWO(3, 4, 50000),
-    MISS_THREE(4, 3,5000),
-    NONE(5, 0, 0)
+    FIRST(1, 6, 2000000000, false),
+    SECOND(2, 5, 30000000, true),
+    THIRD(3, 5, 1500000, false),
+    FOURTH(4, 4, 50000, false),
+    FIFTH(5, 3, 5000, false),
+    MISS(6, 0, 0, false)
     ;
 
     private final int rank;
     private final int matchNumber;
     private final int prize;
-    private int count;
+    private int matchCount;
+    private boolean isBonusValid;
 
-    Rank(int rank, int matchNumber, int prize) {
+    Rank(int rank, int matchNumber, int prize, boolean isBonusValid) {
         this.rank = rank;
         this.matchNumber = matchNumber;
         this.prize = prize;
+        this.isBonusValid = isBonusValid;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public int getMatchNumber() {
@@ -27,17 +34,21 @@ public enum Rank {
         return prize;
     }
 
-    public int getCount() {
-        return count;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public void plusCount() {
-        this.count++;
+        this.matchCount++;
     }
 
-    public static Rank getValue(int matchNumber) {
+    public static Rank getValue(int matchNumber, boolean matchBonus) {
         if (matchNumber == 1 || matchNumber == 2) {
-            return NONE;
+            return MISS;
+        }
+
+        if (matchNumber == SECOND.getMatchNumber()) {
+            return (matchBonus ? SECOND : THIRD);
         }
 
         for (Rank rank : Rank.values()) {

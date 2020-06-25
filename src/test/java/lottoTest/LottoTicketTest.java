@@ -31,14 +31,15 @@ public class LottoTicketTest {
     @DisplayName("당첨번호를 입력 받으면 당첨된 번호의 갯수 반환")
     @ParameterizedTest
     @CsvSource(value = {
-            "11,12,13,14,15,16 : 0",
-            "1,12,13,14,15,16 : 0",
-            "1,2,13,14,15,16 : 0",
-            "1,2,3,14,15,16 : 3",
-            "1,2,3,4,15,16 : 4",
-            "1,2,3,4,5,16 : 5",
-            "1,2,3,4,5,6 : 6"}, delimiter = ':')
-    public void getPrize(String myNumbers, int expected) {
+            "11,12,13,14,15,16 : 16 : 6",
+            "1,12,13,14,15,16 : 16 : 6",
+            "1,2,13,14,15,16 : 16 : 6",
+            "1,2,3,14,15,16 : 16 : 5",
+            "1,2,3,4,15,16 : 16 : 4",
+            "1,2,3,4,5,17 : 16 : 3",
+            "1,2,3,4,5,16 : 16 : 2",
+            "1,2,3,4,5,6 : 16 : 1"}, delimiter = ':')
+    public void getPrize(String myNumbers, int bonus, int expected) {
         LottoNumber[] winningNumbers = new LottoNumber[Lotto.LIMIT];
         for (int i = 0; i < Lotto.LIMIT; i++) {
             winningNumbers[i] = new LottoNumber(i + 1);
@@ -46,7 +47,7 @@ public class LottoTicketTest {
         LottoTicket ticketWithNumbers = new LottoTicket(IntegerUtils.splitAndParseLottoNumber(myNumbers));
         LottoNumbers winningLotto = new LottoNumbers(winningNumbers);
 
-        assertThat(ticketWithNumbers.announceRank(winningLotto).getMatchNumber()).isEqualTo(expected);
+        assertThat(ticketWithNumbers.announceRank(winningLotto, new LottoNumber(bonus)).getRank()).isEqualTo(expected);
     }
 
 }

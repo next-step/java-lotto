@@ -1,15 +1,7 @@
 package lotto.model;
 
-import java.util.Collections;
-
 public class LottoNumber {
     private int number;
-
-    public LottoNumber() {
-        Lotto lotto = new Lotto();
-        Collections.shuffle(lotto.lottoDrawNumbers);
-        number = lotto.lottoDrawNumbers.get(0);
-    }
 
     public LottoNumber(int number) {
         this.number = number;
@@ -18,4 +10,6 @@ public class LottoNumber {
     public int getNumber() {
         return number;
     }
+
+    // TODO: number는 1~45 사이의 숫자여야 한다 -> 조건체크 메소드 만들기
 }
