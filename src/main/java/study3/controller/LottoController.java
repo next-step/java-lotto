@@ -15,22 +15,20 @@ public class LottoController {
 	public static void main(String[] args) {
 		
 		Lottos lottonumbers = new Lottos();
-		List<Lotto> lottos = new ArrayList<Lotto>();
 		ResultView resultview = new ResultView();
 		Ranking rank = new Ranking();
 		
 		int price = InputView.enterPriceMessage();
-		lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
+		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
 		// 지난 주 당첨 번호 입력
-		List<Integer> winNumber = lottonumbers.winNumSplit(InputView.rankMessages());
+		List<Integer> winNumber = Lottos.winNumSplit(InputView.rankMessages());
 		
 		int bonusBall = InputView.enterBonusBallMessage();
 				
 		Map<Rank, Integer> matchNumber = rank.matchNumber(lottos, winNumber, bonusBall);
 				
-		resultview.outPutMessages(matchNumber, lottos);
-		
+		resultview.outPutMessages(matchNumber, lottos);		
 	}
 }

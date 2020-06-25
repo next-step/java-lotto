@@ -43,7 +43,7 @@ public class Ranking {
 		Map<Rank, Integer> rankRepository = new HashMap<>();
 
 		lottos.forEach(lotto -> {
-			Boolean bonusBallFlag = lotto.lottoContainsBonusBall(bonusBall);
+			boolean bonusBallFlag = lotto.lottoContainsBonusBall(bonusBall);
 			
 			Rank rank = lotto.getRankWithWinningLotto(winningLotto, bonusBallFlag);
 						
