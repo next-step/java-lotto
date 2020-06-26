@@ -21,12 +21,8 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> inputNumbers) {
 
-        this.numbers = new LinkedHashSet<>();
-        for (LottoNumber number : inputNumbers) {
-            numbers.add(number);
-        }
+        this.numbers = new LinkedHashSet<>(inputNumbers);
         isDuplicate();
-
     }
 
     private void isDuplicate() {
@@ -36,26 +32,20 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers.stream()
-                .collect(Collectors.toList());
+        return new ArrayList<>(numbers);
     }
 
     public int matchCount(Lotto winningLotto) {
 
-        int count = 0;
+        HashSet<LottoNumber> cloneNumbers = new HashSet<>(numbers);
 
-        for (LottoNumber winnerNumber : winningLotto.getNumbers()) {
-            count += isContain(winnerNumber);
-        }
-        return count;
+        cloneNumbers.retainAll(winningLotto.getNumbers());
 
+        return cloneNumbers.size();
     }
 
-    private int isContain(LottoNumber winnerNumber) {
-        if (numbers.contains(winnerNumber)) {
-            return 1;
-        }
-        return 0;
+    public boolean isContain(LottoNumber winnerNumber) {
+        return numbers.contains(winnerNumber);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Output {
 
         for (Map.Entry<Prize, Integer> gameResult : result.entrySet()) {
             int money = gameResult.getKey().getMoney();
-            System.out.println(gameResult.getKey() + "개 일치" + "(" + money + "원) -" + gameResult.getValue() + "개");
+            System.out.println(gameResult.getKey().getDetail()  + "(" + money + "원) -" + gameResult.getValue() + "개");
 
         }
 

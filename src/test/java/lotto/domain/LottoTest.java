@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
     private Lotto lotto;
+    private Lotto winningLotto;
 
     @BeforeEach
     void setUp(){
@@ -25,11 +27,7 @@ class LottoTest {
         lottoNumber.add(new LottoNumber(40));
         lottoNumber.add(new LottoNumber(45));
         lotto = new Lotto(lottoNumber);
-    }
 
-    @DisplayName("유저 로또번호와 우승로또번호 6자리가 일치할때")
-    @Test
-    void matchCount() {
         List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>();
         winningNumbers.add(new LottoNumber(1));
         winningNumbers.add(new LottoNumber(10));
@@ -37,9 +35,24 @@ class LottoTest {
         winningNumbers.add(new LottoNumber(33));
         winningNumbers.add(new LottoNumber(40));
         winningNumbers.add(new LottoNumber(45));
-        Lotto winningLotto = new Lotto(winningNumbers);
+        winningLotto = new Lotto(winningNumbers);
+    }
+
+    @DisplayName("유저 로또번호와 우승로또번호 6자리가 일치할때")
+    @Test
+    void matchCount() {
+
 
         int matchCount = lotto.matchCount(winningLotto);
-        assertThat(matchCount).isEqualTo(6);
+        assertThat(matchCount).isEqualTo(5);
+    }
+
+    @DisplayName("보너스 번호 입력값이  지난주 당첨번호들중 중복되는 값이 있을경우")
+    @Test
+    void duplicateBonusNumber() {
+
+        assertThatThrownBy(() ->{
+            winningLotto.duplicateBonusNumber(new LottoNumber(1));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
