@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+---
+### step2 기능 구현 목록
+1. InputView
+2. ResultView
+3. Input으로 받은 금액을 통해서 몇개를 만들지 정한다.
+4. 1번부터 45번까지 들어있는 list를 만든다.
+5. Collection.shuffle을 이용해서 6개씩 뽑아낸다.
+7. 사둔 복권을 저장해둔다.
+8. 입력 받은 당첨번호와 사둔 복권과 비교한다.
+9. 수익률을 반환한다.

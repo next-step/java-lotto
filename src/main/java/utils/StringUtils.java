@@ -1,7 +1,11 @@
+package utils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
+    private static final Pattern patternKey = Pattern.compile("//(.)\n(.*)");
+
     public static String[] splitString(String text) {
         String key = ",|:";
         Matcher m = findSplitKey(text);
@@ -14,7 +18,11 @@ public class StringUtils {
         return text.split(key);
     }
 
+    public static String removeWhiteSpace(String text) {
+        return text.replace(" ", "");
+    }
+
     private static Matcher findSplitKey(String text) {
-        return Pattern.compile("//(.)\n(.*)").matcher(text);
+        return patternKey.matcher(text);
     }
 }
