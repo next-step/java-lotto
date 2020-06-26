@@ -16,6 +16,7 @@ public class WinningLottoResult {
     private Map<Prize, Integer> result;
 
 
+
     public WinningLottoResult() {
         rankResult = new ArrayList();
         result = new LinkedHashMap<>();
@@ -24,6 +25,7 @@ public class WinningLottoResult {
         result.put(Prize.THIRD, INIT_ZERO);
         result.put(Prize.SECOND, INIT_ZERO);
         result.put(Prize.FIRST, INIT_ZERO);
+
 
     }
 

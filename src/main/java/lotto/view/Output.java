@@ -10,13 +10,10 @@ public class Output {
     private Output() {
     }
 
-    public static void printBuyLottoNumber(Lotto lottoNumbers) {
-        System.out.println(lottoNumbers);
-    }
-
-    public static void printLottoCount(Money money) {
-
-        System.out.println(money.getBuyCount() + "개를 구매했습니다.");
+    public static void printBuyLottoNumber(List<Lotto> lottoNumbers) {
+        for (Lotto lotto : lottoNumbers) {
+            System.out.println(lotto);
+        }
     }
 
     public static void printResultStatic(WinningLottoResult lottoResult, int buyCount) {
@@ -31,5 +28,10 @@ public class Output {
         float revenue = lottoResult.getRevenueStatic(buyCount);
         System.out.print("총 수익률은 " + revenue + "입니다");
         System.out.println("(기준이 1이기 때문에 결과적으로 " + lottoResult.benefitOrLoss(revenue) + " 라는 의미임)");
+    }
+
+    public static void printAutoCountSelectCount(Money money) {
+        System.out.print("수동으로 " + money.getSelectGameCount() + "장, ");
+        System.out.println("자동으로 " + money.getAutoGameCount() + "개를 구매핬습니다.");
     }
 }
