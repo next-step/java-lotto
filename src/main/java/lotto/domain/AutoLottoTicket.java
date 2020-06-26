@@ -11,7 +11,7 @@ public class AutoLottoTicket extends LottoTicket {
     }
 
     @Override
-    protected List<LottoNumber> createLottoNumber(List<LottoNumber> lottoNumbers) {
+    protected List<LottoNumber> create(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> lottoNumberCollections = LottoNumber.getLottoNumberCollection();
         Collections.shuffle(lottoNumberCollections);
         return lottoNumberCollections.subList(START_INDEX, NUMBER_OF_LOTTO_NUMBERS);

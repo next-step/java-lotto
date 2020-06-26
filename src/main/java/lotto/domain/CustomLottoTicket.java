@@ -9,7 +9,7 @@ public class CustomLottoTicket extends LottoTicket{
     }
 
     @Override
-    protected List<LottoNumber> createLottoNumber(List<LottoNumber> lottoNumbers) {
+    protected List<LottoNumber> create(List<LottoNumber> lottoNumbers) {
         return lottoNumbers;
     }
 
