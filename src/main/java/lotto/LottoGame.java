@@ -22,12 +22,9 @@ public class LottoGame {
         LottoController lottoController = new LottoController(money, selectLottos);
         lottoController.createLotto();
 
-        Lotto winningLotto = new Lotto(Input.inputLastWinningNumber());
-        LottoNumber bonusNumber = Input.inputLastBonusNumber();
+        WinningLotto winningLotto = Input.inputLastWinningNumber();
+        WinningLottoResult lottoResult = lottoController.matchLotto(winningLotto);
 
-        WinningLottoResult lottoResult = lottoController.matchLotto(winningLotto, bonusNumber);
-
-        //Output.printResultStatic(lottoResult, money.getBuyCount());
         Output.printResultStatic(lottoResult, money.getAutoGameCount());
 
     }

@@ -32,15 +32,12 @@ public class LottoController {
     }
 
 
-    public WinningLottoResult matchLotto(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.isContain(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호가 지난주 당첨번호와 중복됩니다.");
-        }
+    public WinningLottoResult matchLotto(WinningLotto winningLotto) {
 
         WinningLottoResult lottoResult = new WinningLottoResult();
         for (Lotto lotto : lottos) {
-            int count = lotto.matchCount(winningLotto);
-            lottoResult.match(count, lotto.isContain(bonusNumber));
+            int count = lotto.matchCount(winningLotto.getWinninglotto());
+            lottoResult.match(count, lotto.isContain(winningLotto.getBonusNumber()));
         }
         return lottoResult;
     }

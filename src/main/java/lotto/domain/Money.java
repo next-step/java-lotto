@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.Input;
+
 import static lotto.domain.Lotto.LOTTO_GAME_PRICE;
 
 public class Money {
@@ -30,9 +32,12 @@ public class Money {
     }
 
     public void resetBuyCount(int selectCount) {
+
         if (autoGameCount < selectCount) {
+
             throw new IllegalArgumentException("수동으로 구매할 수 있는 게임 수가 구입금액을 넘을 수 없습니다.");
         }
+
         this.selectGameCount = selectCount;
         this.autoGameCount -= selectGameCount;
     }
