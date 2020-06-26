@@ -6,95 +6,58 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+
 
 public class PrizeCount {
 
-    private List<PrizeAdder> prizes = new ArrayList<>();
-    private static PrizeCount prizeCount;
+    private List<Prize> prizes = new ArrayList<>();
 
-    private PrizeCount() {
+    public PrizeCount() {
         for (Prize prize : Prize.values()) {
-            prizes.add(new PrizeAdder(prize));
+            prizes.add(prize);
         }
     }
 
-    public static PrizeCount getInstance() {
-        if (Objects.isNull(prizeCount)) {
-            prizeCount = new PrizeCount();
-        }
-        return prizeCount;
+    public static PrizeCount of() {
+        return new PrizeCount();
     }
 
-    private class PrizeAdder {
-        Prize prize;
-        int prizeSum = 0;
-
-        public PrizeAdder(Prize prize) {
-            this.prize = prize;
-        }
-
-        public Prize getPrize() {
-            return prize;
-        }
-
-        public void addPrizeSum() {
-            prizeSum++;
-        }
-
-        public int getPrizeSum() {
-            return prizeSum;
-        }
-
-        public long getPrizePriceSum() {
-            return prize.getPrizePrice() * prizeSum;
-        }
-
-        public boolean isMatchedNumber(Prize prize) {
-            return this.prize.getMatchedNumber() == prize.getMatchedNumber()
-                    && this.prize.isBonusNumberMatching() == prize.isBonusNumberMatching();
-        }
-
-        public boolean isMatchedBonusNumber(Prize prize) {
-            return this.prize.isBonusNumberMatching() == prize.isBonusNumberMatching();
-        }
+    public boolean isMatchedNumber(Prize prize, Prize inputPrize) {
+        return prize.getMatchedNumber() == inputPrize.getMatchedNumber()
+                && prize.isBonusNumberMatching() == inputPrize.isBonusNumberMatching();
     }
 
-    public void prizeAdd(Prize prize) {
+    public boolean isMatchedBonusNumber(Prize prize, Prize inputPrize) {
+        return prize.isBonusNumberMatching() == inputPrize.isBonusNumberMatching();
+    }
+
+    public void prizeAdd(Prize inputPrize) {
         prizes.stream()
-                .filter(prizeAdder -> prizeAdder.isMatchedNumber(prize)
-                        && prizeAdder.isMatchedBonusNumber(prize)
+                .filter(prize -> isMatchedNumber(prize, inputPrize)
+                        && isMatchedBonusNumber(prize, inputPrize)
                 )
-                .findFirst()
-                .get()
-                .addPrizeSum();
+                .forEach(prize -> prize.addMatchedCount());
     }
 
-    public int getPrizeSum(Prize prize) {
+    public long getPrizeSum(Prize inputPrize) {
         return prizes.stream()
-                .filter(prizeAdder -> prizeAdder.isMatchedNumber(prize) &&
-                        prizeAdder.isMatchedBonusNumber(prize)
+                .filter(prize -> isMatchedNumber(prize, inputPrize) &&
+                        isMatchedBonusNumber(prize, inputPrize)
                 )
                 .findFirst()
                 .get()
-                .getPrizeSum();
+                .getPrizePriceSum();
     }
 
-    public List<PrizeAdder> getPrizes() {
+    public List<Prize> getPrizes() {
         return Collections.unmodifiableList(prizes);
     }
-
 
     public void showPrizeCounts() {
         OutputView.outputPrizeList(this);
     }
 
-    public void outputWinningResult() {
-        OutputView.outputWinningResult(getPrizeTotalSum());
-
-    }
-
-    private BigDecimal getPrizeTotalSum() {
+    public BigDecimal getPrizeTotalSum() {
         return BigDecimal.valueOf(
                 prizes.stream()
                         .mapToLong(
@@ -102,7 +65,7 @@ public class PrizeCount {
                         ).sum())
                 .divide(
                         BigDecimal.valueOf(prizes.stream()
-                                .mapToLong(PrizeAdder::getPrizeSum).sum())
+                                .mapToLong(Prize::getPrizePriceSum).sum())
                         , 3
                         , BigDecimal.ROUND_HALF_EVEN);
     }

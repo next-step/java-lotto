@@ -1,5 +1,6 @@
 package step4.domain.lotto;
 
+import step4.domain.LottoGame;
 import step4.domain.prize.Prize;
 import step4.domain.prize.PrizeCount;
 
@@ -25,14 +26,11 @@ public class WinningLotto {
     }
 
     // matching
-    public void matchingWinningNumbers(LottoTickets lottoTickets) {
-        lottoTickets.getLottoTickets().forEach(lotto -> {
+    public void matchingWinningNumbers(LottoGame lottoGame, PrizeCount prizeCount) {
+        lottoGame.getLottoTickets().forEach(lotto -> {
             int matchedNumber = getWinningcount(lotto);
-            addPrize(matchedNumber, checkBonusNumberMatching(lotto, matchedNumber));
+            prizeCount.prizeAdd(Prize.valueOf(matchedNumber, checkBonusNumberMatching(lotto, matchedNumber)));
         });
-        // to print result.
-        PrizeCount prizeCount = PrizeCount.getInstance();
-        prizeCount.showPrizeCounts();
     }
 
     private int getWinningcount(Lotto lotto) {
@@ -70,9 +68,4 @@ public class WinningLotto {
         }
     }
 
-    private void addPrize(int matchedNumber, boolean bonusNumberMatching) {
-        Prize prize = Prize.valueOf(matchedNumber, bonusNumberMatching);
-        PrizeCount prizeCount = PrizeCount.getInstance();
-        prizeCount.prizeAdd(prize);
-    }
 }

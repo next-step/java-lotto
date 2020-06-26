@@ -4,6 +4,7 @@ import step4.domain.LottoGame;
 import step4.domain.PurchaseInfo;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.WinningLotto;
+import step4.domain.prize.PrizeCount;
 import step4.view.InputView;
 import step4.view.OutputView;
 
@@ -14,25 +15,34 @@ public class MainApplication {
 
     public static void main(String[] args) {
         // ready
-        String payMoney = InputView.inputPayMoney();
-        String countForSelf = InputView.inputCountForSelf();
+        //String payMoney = InputView.inputPayMoney();
+        String payMoney = "3000";
+        //String countForSelf = InputView.inputCountForSelf();
+        String countForSelf = "2";
         PurchaseInfo purchaseInfo = new PurchaseInfo(payMoney, countForSelf);
         // set
         List<Lotto> selfChosenLottos = new ArrayList<>();
         for (int i = 0; i < purchaseInfo.getSelfChooseCount(); i++) {
-            selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
+            //selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
+            selfChosenLottos.add(new Lotto("1,2,3,4,5,6"));
         }
         LottoGame lottoGame = LottoGame.create(purchaseInfo, selfChosenLottos);
-        //LottoGame lottoGame = LottoGame.create(purchaseInfo);
         OutputView.outputLottoList(lottoGame);
+
         // get Wining Number
-        String winingNumber = InputView.inputWiningNumber();
-        String bonusNumber = InputView.inputBonusNumber();
+        //String winingNumber = InputView.inputWiningNumber();
+        String winingNumber = "1,2,3,4,5,6";
+
+        //String bonusNumber = InputView.inputBonusNumber();
+        String bonusNumber = "7";
+
         WinningLotto winningLotto = WinningLotto.of(winingNumber, bonusNumber);
-        // matching numbers
-        lottoGame.matchingWinningNumbers(winningLotto);
+
+        PrizeCount prizeCount = PrizeCount.of();
+        winningLotto.matchingWinningNumbers(lottoGame, prizeCount);
+        OutputView.outputPrizeList(prizeCount);
         // total result
-        lottoGame.totalResult();
+        OutputView.outputWinningResult(prizeCount);
     }
 
 }

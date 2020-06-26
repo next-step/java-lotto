@@ -23,16 +23,14 @@ public class LottoGame {
         this.lottoTickets = lottoTickets;
     }
 
-    //public static LottoGame create(PurchaseInfo purchaseInfo) {
     public static LottoGame create(PurchaseInfo purchaseInfo, List<Lotto> selfChosenLottos) {
         LottoTickets lottoTicketsInner = LottoNumber.issueLotto(purchaseInfo.getBoughtLottoCount());
         // self chosen numbers.
-        //List<Lotto> selfChosenLottos = createSelfChoosenLottos(purchaseInfo);
         lottoTicketsInner.add(selfChosenLottos);
-
         return new LottoGame(lottoTicketsInner);
     }
 
+    /*
     private static List<Lotto> createSelfChoosenLottos(PurchaseInfo purchaseInfo) {
         // set
         List<Lotto> selfChosenLottos = new ArrayList<>();
@@ -41,20 +39,10 @@ public class LottoGame {
         }
         return selfChosenLottos;
     }
+    */
 
-    // matching
-    public void matchingWinningNumbers(WinningLotto winningLotto) {
-        winningLotto.matchingWinningNumbers(lottoTickets);
-    }
-    // winningResult
-
-    public void totalResult() {
-        PrizeCount prizeCount = PrizeCount.getInstance();
-        prizeCount.outputWinningResult();
-    }
-
-    public LottoTickets getLottoTickets() {
-        return lottoTickets;
+    public List<Lotto> getLottoTickets() {
+        return lottoTickets.getLottoTickets();
     }
 
 }

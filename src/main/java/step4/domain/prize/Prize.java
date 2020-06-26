@@ -22,6 +22,7 @@ public enum Prize {
     private long prizePrice;
     private String rank;
     private boolean bonusNumberMatching;
+    private int matchedCount = 0;
 
     // constructor
     Prize(int matchedNumber, int prizePrice, String rank, boolean bonusNumberMatching) {
@@ -52,6 +53,14 @@ public enum Prize {
 
     private static int checkMatchedNumberInCutLine(int matchedNumber) {
         return matchedNumber <= MISS_MATCHED_CUT_LINE ? 0 : matchedNumber;
+    }
+
+    public void addMatchedCount() {
+        this.matchedCount += 1;
+    }
+
+    public long getPrizePriceSum() {
+        return matchedCount;
     }
 
 }
