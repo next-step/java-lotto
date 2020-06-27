@@ -9,10 +9,10 @@ public final class LottoStore {
 
     private LottoStore() {}
 
-    public static List<LottoTicket> sellAutoLottoTicket(final int numberOfLottoByMoneyPaid) {
+    public static List<LottoTicket> sellAutoLottoTicket(final int numberOfAutoLottoTicket) {
         final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < numberOfLottoByMoneyPaid; i++) {
+        for (int i = 0; i < numberOfAutoLottoTicket; i++) {
             final LottoTicket lottoTicket = new AutoLottoTicket();
             lottoTickets.add(lottoTicket);
         }
