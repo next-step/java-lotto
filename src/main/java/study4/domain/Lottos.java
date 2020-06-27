@@ -38,16 +38,30 @@ public class Lottos {
 	
 	public List<Lotto> getLottoNumbersByManual(List<String> inputNumberByManual) {
 		
+			// 너무 괴상망측 한가요?? ㅠㅠ
+			for(int i=0; i< inputNumberByManual.size(); i ++) {
+				lottos.add (
+				new Lotto(
+				Arrays.asList(inputNumberByManual.get(i)
+						.replace(" ", "")
+						.split(","))
+				.stream()
+				.mapToInt(Integer::parseInt)
+				.boxed()
+				.collect(Collectors.toList())) );
+			}
 		
-		
-		/* TODO
-		 * return inputNumberByManual
-		 * 			 .stream()
-		 *  		.mapToInt(Integer::parseInt)
-		 *  		 .boxed()
-		 * 			.forEach(Lottos::add)
-		 * 			 .sorted()
-		 * 			 .collect(Collectors.toList());
+			 return lottos;	
+		 
+		   /* TODO
+		    * return inputNumberByManual
+		  			 .stream()
+		  			 .mapToInt(Integer::parseInt)
+		  			 .boxed()
+		   		.map(String-> new Lotto(String))		   		 
+		  			.forEach(Lottos::add)
+		  			 .sorted()
+		  			 .collect(Collectors.toList());
 		 */
 	}
 	

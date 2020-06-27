@@ -11,12 +11,13 @@ import study4.domain.Ranking.Rank;
 
 public class ResultView {
 
-	private static final String rankMessages = "당첨 통계";
-	private static final String dividMessages = "---------------";
+	private static final String RANK_MESSAGES = "당첨 통계";
+	private static final String DIVID_MESSAGES = "---------------";
 	private static final String MESSAGE_OF_LOTTO_RESULT = "%d개 일치 (%d원) - %d개";
 	private static final String MESSAGE_OF_BONUS_BALL_RESULT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
 	private static final int FOUR_PLUS_BONUS_MONEY = 30_000_000;
-	
+	private static final String AUTO_COUNT_MANUAL_COUNT = "수동으로 %d장 , 자동으로 %d개를 구매했습니다.";
+	private static final int LOTTO_PRICE = 1000;
 	Long totalMoney = 0L;
 
 	static Scanner scanner = new Scanner(System.in);
@@ -27,8 +28,8 @@ public class ResultView {
 	}
 
 	public void outPutMessages(Map<Rank, Integer> matchNumber, List<Lotto> lottoNumbers) {
-		System.out.println(rankMessages);
-		System.out.println(dividMessages);
+		System.out.println(RANK_MESSAGES);
+		System.out.println(DIVID_MESSAGES);
 		
 		for (Rank rank : Rank.values()) {
 			matchNumberIsNullPutZero(matchNumber, rank);
@@ -58,6 +59,12 @@ public class ResultView {
 		if(matchNumber.get(rank) == null) {
 			matchNumber.put(rank, 0);
 		}
+	}
+
+	public void AutoNumberAndMannualNumberCount(int price, int mannualLottoPrice) {
+		
+		System.out.println(String.format(AUTO_COUNT_MANUAL_COUNT, mannualLottoPrice / LOTTO_PRICE, (price -mannualLottoPrice) / LOTTO_PRICE));
+		
 	}
 
 }

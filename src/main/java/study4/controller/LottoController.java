@@ -20,13 +20,16 @@ public class LottoController {
 		
 		int price = InputView.enterPriceMessage();
 		
-		int mannualLottoNumbers = InputView.manualLottoNumber();
+		int mannualLottoPrice = InputView.manualLottoNumber();
+		
 		
 		// 수동
-		List<Lotto> inputNumberByManual = lottonumbers.getLottoNumbersByManual(InputView.inputNumberByManual(mannualLottoNumbers));
+		List<Lotto> inputNumberByManual = lottonumbers.getLottoNumbersByManual(InputView.inputNumberByManual(mannualLottoPrice));
 		
-		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price - mannualLottoNumbers));
 		
+		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price - mannualLottoPrice));
+		
+		resultview.AutoNumberAndMannualNumberCount(price, mannualLottoPrice);
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
 		// 지난 주 당첨 번호 입력

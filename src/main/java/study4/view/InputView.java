@@ -42,7 +42,8 @@ public class InputView {
 	public static int manualLottoNumber() {
 		
 		System.out.println(MANNUAL_LOTTOS_COUNT);
-		return scanner.nextInt();
+		int manualCount = scanner.nextInt() ;
+		return manualCount * LOTTO_PRICE;
 	}
 	
 	public static List<String> inputNumberByManual(int mannualLottoNumbers) {
@@ -51,7 +52,7 @@ public class InputView {
 		System.out.println(MANNUAL_LOTTO_NUMBERS);
 		
 		List<String> mannualLottos = new ArrayList<>(); 
-		for(int i=0; i< mannualLottoNumbers; i++) {
+		for(int i=0; i< mannualLottoNumbers / LOTTO_PRICE ; i++) {
 			mannualLottos.add(scanner.nextLine());
 		}
 		return mannualLottos;
@@ -63,7 +64,7 @@ public class InputView {
 	
 	public static String rankMessages() {
 		System.out.println(WIN_RANK_MESSAGE);
-		scanner.nextLine();
+		
 		return scanner.nextLine();
 	}
 }
