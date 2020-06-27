@@ -16,16 +16,16 @@ public class Output {
         }
     }
 
-    public static void printResultStatic(WinningLottoResult lottoResult, int buyCount) {
+    public static void printResultStatic(WinningLottoResult lottoResult, LottoGame lottoGame) {
         Map<Prize, Integer> result = lottoResult.getResult();
 
         for (Map.Entry<Prize, Integer> gameResult : result.entrySet()) {
             int money = gameResult.getKey().getMoney();
-            System.out.println(gameResult.getKey().getDetail()  + "(" + money + "원) -" + gameResult.getValue() + "개");
+            System.out.println(gameResult.getKey().getDetail() + "(" + money + "원) -" + gameResult.getValue() + "개");
 
         }
 
-        float revenue = lottoResult.getRevenueStatic(buyCount);
+        float revenue = lottoResult.getRevenueStatic(lottoGame.getAutoGame());
         System.out.print("총 수익률은 " + revenue + "입니다");
         System.out.println("(기준이 1이기 때문에 결과적으로 " + lottoResult.benefitOrLoss(revenue) + " 라는 의미임)");
     }

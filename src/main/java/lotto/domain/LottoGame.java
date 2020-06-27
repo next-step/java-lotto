@@ -11,8 +11,14 @@ public class LottoGame {
     private int selectGame;
 
     public LottoGame(Money money, int selectCount) {
-        totalGame = money.getMoney() / LOTTO_GAME_PRICE;
-        this.autoGame = setAutoCount(selectCount);
+        this((money.getMoney() / LOTTO_GAME_PRICE), selectCount);
+    }
+
+    public LottoGame(int totalGame, int selectCount) {
+        this.totalGame = totalGame;
+        int autoGameCount = setAutoCount(selectCount);
+        this.autoGame = autoGameCount;
+        this.selectGame = totalGame - autoGameCount;
     }
 
     private int setAutoCount(int selectCount) {
@@ -22,7 +28,7 @@ public class LottoGame {
             }
             return totalGame - selectCount;
         } catch (Exception error) {
-            error.getMessage();
+            System.out.println(error.getMessage());
             return setAutoCount(Input.inputSelectLottoCount());
         }
 
@@ -34,6 +40,10 @@ public class LottoGame {
 
     public int getSelectGame() {
         return this.selectGame;
+    }
+
+    public int getTotalGame() {
+        return this.totalGame;
     }
 
 }

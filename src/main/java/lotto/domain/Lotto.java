@@ -15,6 +15,7 @@ public class Lotto {
 
         this(Arrays.stream(numberString.split(COMMA))
                 .map(String::trim)
+                .filter(text -> !text.isEmpty())
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
@@ -27,7 +28,7 @@ public class Lotto {
 
     private void isDuplicate() {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호 입력이 잘못되었습니다.");
         }
     }
 

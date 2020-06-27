@@ -12,11 +12,9 @@ public class LottoMain {
 
         Money money = Input.inputMoney();
 
+        LottoGame lottoGame = new LottoGame(money, Input.inputSelectLottoCount());
 
-        int selectCount = Input.inputSelectLottoCount();
-        LottoGame lottoGame = new LottoGame(money, selectCount);
-
-        List<Lotto> selectLottos = Input.inputSelectLottonumber(lottoGame.getSelectGame());
+        List<Lotto> selectLottos = Input.inputSelectLottonumber(lottoGame);
         Output.printAutoCountSelectCount(lottoGame);
 
         LottoController lottoController = new LottoController(lottoGame, selectLottos);
@@ -25,7 +23,7 @@ public class LottoMain {
         WinningLotto winningLotto = Input.inputLastWinningNumber();
         WinningLottoResult lottoResult = lottoController.matchLotto(winningLotto);
 
-        Output.printResultStatic(lottoResult, lottoGame.getAutoGame());
+        Output.printResultStatic(lottoResult, lottoGame);
 
     }
 }

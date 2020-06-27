@@ -30,8 +30,4 @@ class PrizeTest {
         assertThat(sameMatchCount).isEqualTo(false);
     }
 
-    @Test
-    void findByPrize() {
-        findByPrize();
-    }
 }

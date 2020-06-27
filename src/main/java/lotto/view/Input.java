@@ -1,18 +1,17 @@
 package lotto.view;
 
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Input {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final int INIT_ZERO = 0;
 
     private Input() {
     }
@@ -34,28 +33,27 @@ public class Input {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             Lotto wininglotto = new Lotto(inputNumbers());
-            LottoNumber bonusNumber = inputLastBonusNumber();
-            return new WinningLotto(wininglotto, bonusNumber);
+            return inputLastBonusNumber(wininglotto);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return inputLastWinningNumber();
         }
     }
 
-    public static LottoNumber inputLastBonusNumber() {
+    public static WinningLotto inputLastBonusNumber(Lotto wininglotto) {
 
         try {
             System.out.println("보너스 번호를 입력해주세요.");
             int inputBonusNumber = scanner.nextInt();
-            return new LottoNumber(inputBonusNumber);
+            return new WinningLotto(wininglotto, new LottoNumber(inputBonusNumber));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return inputLastBonusNumber();
+            return inputLastBonusNumber(wininglotto);
         }
 
     }
 
-    private static Boolean isEmptyOrBlank(String inputName) {
+    public static Boolean isEmptyOrBlank(String inputName) {
         return inputName == null || inputName.trim().isEmpty();
     }
 
@@ -65,20 +63,20 @@ public class Input {
         return scanner.nextInt();
     }
 
-    public static List<Lotto> inputSelectLottonumber(int selectLottoCount) {
+    public static List<Lotto> inputSelectLottonumber(LottoGame lottoGame) {
 
         List<Lotto> selectLottos = new ArrayList<Lotto>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        int count = 0;
-        try{
-            for (count = 0; count < selectLottoCount; count++) {
+        int count = INIT_ZERO;
+        try {
+            for (count = 0; count < lottoGame.getSelectGame(); count++) {
                 Lotto lotto = new Lotto(inputNumbers());
                 selectLottos.add(lotto);
             }
-        }catch (Exception error){
-            count += 1;
+        } catch (Exception error) {
             System.out.println(error.getMessage());
-            selectLottos.addAll(inputSelectLottonumber(selectLottoCount - count));
+            LottoGame retryInputLotto = new LottoGame(lottoGame.getTotalGame(), lottoGame.getSelectGame() - count);
+            selectLottos.addAll(inputSelectLottonumber(retryInputLotto));
         }
 
         return selectLottos;

@@ -26,11 +26,9 @@ public class LottoController {
             Lotto lotto = new Lotto(lottoNumbers);
             lottos.add(lotto);
         }
-
         Output.printBuyLottoNumber(lottos);
 
     }
-
 
     public WinningLottoResult matchLotto(WinningLotto winningLotto) {
 
