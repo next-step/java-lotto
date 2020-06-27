@@ -21,12 +21,10 @@ public class LottoController {
 		int price = InputView.enterPriceMessage();
 		
 		int mannualLottoPrice = InputView.manualLottoNumber();
-		
-		
+				
 		// 수동
 		List<Lotto> inputNumberByManual = lottonumbers.getLottoNumbersByManual(InputView.inputNumberByManual(mannualLottoPrice));
-		
-		
+		// 수동을 제외한 로또		
 		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price - mannualLottoPrice));
 		
 		resultview.AutoNumberAndMannualNumberCount(price, mannualLottoPrice);

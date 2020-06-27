@@ -32,7 +32,6 @@ public class LottoGenerator {
 				.stream()
 				.limit(Lottos.LOTTO_NUMBERS_SIZE)
 				.sorted()
-				.collect(Collectors.toList());
-				
+				.collect(Collectors.toList());				
 	}
 }

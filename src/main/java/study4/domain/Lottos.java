@@ -38,6 +38,7 @@ public class Lottos {
 	
 	public List<Lotto> getLottoNumbersByManual(List<String> inputNumberByManual) {
 		
+			// Question
 			// 너무 괴상망측 한가요?? ㅠㅠ
 			for(int i=0; i< inputNumberByManual.size(); i ++) {
 				lottos.add (
