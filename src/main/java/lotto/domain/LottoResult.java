@@ -1,29 +1,31 @@
-package lotto.util;
-
-import lotto.domain.Rank;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class RankCalculator {
+public class LottoResult {
     private static final int MINIMUM_MONEY_TO_PRINT = 0;
 
-    private RankCalculator() {}
+    private final List<Rank> ranks;
 
-    public static List<String> getRankResult(final List<Rank> lottoResults) {
+    public LottoResult(List<Rank> ranks) {
+        this.ranks = ranks;
+    }
+
+    public List<String> getRankResult() {
         return Arrays.stream(Rank.values())
                 .filter((rank) -> rank.getWinningMoney() > MINIMUM_MONEY_TO_PRINT)
                 .map((rank) -> {
-                    int countOfRank = getCountOfRank(lottoResults, rank);
+                    int countOfRank = getCountOfRank(ranks, rank);
                     return getRankString(rank, countOfRank);
                 })
                 .collect(Collectors.toList());
     }
 
-    private static int getCountOfRank(final List<Rank> lottoResult, Rank rank) {
-        return (int) lottoResult.stream()
+    private static int getCountOfRank(final List<Rank> ranks, Rank rank) {
+        return (int) ranks.stream()
                 .filter(result -> result == rank)
                 .count();
     }
@@ -34,8 +36,8 @@ public final class RankCalculator {
                 : String.format("%d개 일치 (%d원) - (%d)개", rank.getCountOfMatch(), rank.getWinningMoney(), countOfRank);
     }
 
-    public static BigDecimal getTotalEarningRate(final List<Rank> lottoResults, BigDecimal payMoney) {
-        final long winningMoney = lottoResults.stream().mapToLong(Rank::getWinningMoney).sum();
+    public BigDecimal getTotalEarningRate(final BigDecimal payMoney) {
+        final long winningMoney = ranks.stream().mapToLong(Rank::getWinningMoney).sum();
         return BigDecimal.valueOf(winningMoney).divide(payMoney, 3, BigDecimal.ROUND_UP);
     }
 
