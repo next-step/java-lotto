@@ -10,14 +10,14 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private Lotto lottoNumbers;
+    private Lotto winningLottoNumbers;
     private LottoNumber bonusNumber;
 
     private WinningLotto(Lotto lottoNumbers, LottoNumber bonusNumber) {
         if (bonusNumber.getLottoNumber() <= LottoNumber.LOTTO_DRAW_BASE_NUMBER && bonusNumber.getLottoNumber() > LottoNumber.LOTTO_MAX_LIMIT) {
             throw new IllegalArgumentException("Not matched range of bonus ball.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.winningLottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
@@ -28,27 +28,20 @@ public class WinningLotto {
     // matching
     public void matchingWinningNumbers(LottoGame lottoGame, PrizeCount prizeCount) {
         lottoGame.getLottoTickets().forEach(lotto -> {
-            int matchedNumber = getWinningcount(lotto);
+            long matchedNumber = getWinningCount(lotto);
             prizeCount.prizeAdd(Prize.valueOf(matchedNumber, checkBonusNumberMatching(lotto, matchedNumber)));
         });
     }
 
-    private int getWinningcount(Lotto lotto) {
-        return (int) lotto.getNumbers().stream()
+    private long getWinningCount(Lotto lotto) {
+        return winningLottoNumbers.getNumbers().stream()
                 .filter(lottoNumber ->
-                        isPresentWinningNumber(lottoNumber.getLottoNumber()))
+                        lotto.contains(lottoNumber))
                 .count();
     }
 
-    private boolean isPresentWinningNumber(Integer lottoNumber) {
-        return lottoNumbers.getNumbers().stream()
-                .filter(winningNumber -> winningNumber.getLottoNumber() == lottoNumber)
-                .findFirst()
-                .isPresent();
-    }
-
-    private boolean checkBonusNumberMatching(Lotto lotto, int matchedNumber) {
-        List<Integer> bounsGameChanceNumbers = new ArrayList<>();
+    private boolean checkBonusNumberMatching(Lotto lotto, long matchedNumber) {
+        List<Long> bounsGameChanceNumbers = new ArrayList<>();
         Arrays.stream(Prize.values())
                 .forEach(prize -> {
                             addBonusChanceNumber(bounsGameChanceNumbers, prize);
@@ -56,13 +49,13 @@ public class WinningLotto {
                 );
         if (bounsGameChanceNumbers.contains(matchedNumber)
                 && lotto.contains(bonusNumber)
-                && !lottoNumbers.contains(bonusNumber)) {
+                && !winningLottoNumbers.contains(bonusNumber)) {
             return true;
         }
         return false;
     }
 
-    private void addBonusChanceNumber(List<Integer> bonusGameChanceNumbers, Prize prize) {
+    private void addBonusChanceNumber(List<Long> bonusGameChanceNumbers, Prize prize) {
         if (prize.isBonusNumberMatching()) {
             bonusGameChanceNumbers.add(prize.getMatchedNumber());
         }

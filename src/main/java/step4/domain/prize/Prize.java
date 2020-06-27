@@ -1,5 +1,7 @@
 package step4.domain.prize;
 
+import step4.domain.PurchaseInfo;
+
 import java.util.Arrays;
 
 /*
@@ -17,12 +19,12 @@ public enum Prize {
     SECOND(5, 30_000_000, "2등", true),
     FIRST(6, 2_000_000_000, "1등", false);
 
-    public static final int MISS_MATCHED_CUT_LINE = 2;
+    private static final int MISS_MATCHED_CUT_LINE = 2;
     private int matchedNumber;
     private long prizePrice;
     private String rank;
     private boolean bonusNumberMatching;
-    private int matchedCount = 0;
+    private long matchedCount;
 
     // constructor
     Prize(int matchedNumber, int prizePrice, String rank, boolean bonusNumberMatching) {
@@ -30,9 +32,10 @@ public enum Prize {
         this.prizePrice = prizePrice;
         this.rank = rank;
         this.bonusNumberMatching = bonusNumberMatching;
+        this.matchedCount = 0L;
     }
 
-    public int getMatchedNumber() {
+    public long getMatchedNumber() {
         return matchedNumber;
     }
 
@@ -44,7 +47,7 @@ public enum Prize {
         return bonusNumberMatching;
     }
 
-    public static Prize valueOf(int matchedNumber, boolean bonusNumberMatching) {
+    public static Prize valueOf(long matchedNumber, boolean bonusNumberMatching) {
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.matchedNumber == matchedNumber && prize.bonusNumberMatching == bonusNumberMatching)
                 .findFirst()
@@ -60,7 +63,11 @@ public enum Prize {
     }
 
     public long getPrizePriceSum() {
-        return matchedCount;
+        return this.matchedCount * prizePrice;
+    }
+
+    public long getMatchedCountPrice() {
+        return this.matchedCount * PurchaseInfo.LOTTO_PRICE;
     }
 
 }

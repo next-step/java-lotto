@@ -58,7 +58,6 @@ public class Number {
                 .map(Integer::parseInt)
                 .filter(number -> number < 0)
                 .count();
-
         // find a negative number(s).
         if (count > 0) {
             throw new IllegalArgumentException("Found a Illegal Argument(s).");

@@ -30,7 +30,10 @@ public class LottoNumber implements Comparable {
 
     public static LottoNumber of(int index) {
         checkLottoRules(index);
-        return lottoGameNumbers.get(index - 1);
+        return lottoGameNumbers.stream()
+                .filter(x -> x.getLottoNumber() == index)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException());
     }
 
     // issue
@@ -50,7 +53,6 @@ public class LottoNumber implements Comparable {
             throw new IllegalArgumentException();
         }
     }
-
 
     public static void checkLottoRules(int input) {
         if (input > LOTTO_MAX_LIMIT || input < 1) {
@@ -81,4 +83,10 @@ public class LottoNumber implements Comparable {
         return ((LottoNumber) o).getLottoNumber() > this.lottoNumber ? -1 : 1;
     }
 
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "lottoNumber=" + lottoNumber +
+                '}';
+    }
 }

@@ -2,7 +2,6 @@ package step4.view;
 
 import step4.domain.LottoGame;
 import step4.domain.lotto.Lotto;
-import step4.domain.lotto.LottoTickets;
 import step4.domain.prize.Prize;
 import step4.domain.prize.PrizeCount;
 

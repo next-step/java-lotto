@@ -21,8 +21,7 @@ public class Lotto {
     }
 
     public Lotto(String lottoNumbers) {
-        this.lottoNumbers = Arrays.asList(lottoNumbers.split(LottoNumber.FIXED_DELIMITER))
-                .stream()
+        this.lottoNumbers = Arrays.stream(lottoNumbers.split(LottoNumber.FIXED_DELIMITER))
                 .map(x -> LottoNumber.of(Integer.valueOf(x)))
                 .limit(LottoNumber.LOTTO_DRAW_LIMIT)
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), TreeSet::new));
@@ -36,4 +35,10 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }

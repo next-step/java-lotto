@@ -8,7 +8,7 @@ package step4.domain;
  */
 public class PurchaseInfo {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private int payedMoney;
     private int selfChooseCount;

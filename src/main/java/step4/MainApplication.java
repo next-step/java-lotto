@@ -15,27 +15,20 @@ public class MainApplication {
 
     public static void main(String[] args) {
         // ready
-        //String payMoney = InputView.inputPayMoney();
-        String payMoney = "3000";
-        //String countForSelf = InputView.inputCountForSelf();
-        String countForSelf = "2";
+        String payMoney = InputView.inputPayMoney();
+        String countForSelf = InputView.inputCountForSelf();
         PurchaseInfo purchaseInfo = new PurchaseInfo(payMoney, countForSelf);
         // set
         List<Lotto> selfChosenLottos = new ArrayList<>();
         for (int i = 0; i < purchaseInfo.getSelfChooseCount(); i++) {
-            //selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
-            selfChosenLottos.add(new Lotto("1,2,3,4,5,6"));
+            selfChosenLottos.add(new Lotto(InputView.inputChooseNumbersForSelf()));
         }
         LottoGame lottoGame = LottoGame.create(purchaseInfo, selfChosenLottos);
         OutputView.outputLottoList(lottoGame);
 
         // get Wining Number
-        //String winingNumber = InputView.inputWiningNumber();
-        String winingNumber = "1,2,3,4,5,6";
-
-        //String bonusNumber = InputView.inputBonusNumber();
-        String bonusNumber = "7";
-
+        String winingNumber = InputView.inputWiningNumber();
+        String bonusNumber = InputView.inputBonusNumber();
         WinningLotto winningLotto = WinningLotto.of(winingNumber, bonusNumber);
 
         PrizeCount prizeCount = PrizeCount.of();

@@ -3,11 +3,7 @@ package step4.domain;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoTickets;
-import step4.domain.lotto.WinningLotto;
-import step4.domain.prize.PrizeCount;
-import step4.view.InputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
