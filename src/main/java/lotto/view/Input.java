@@ -69,13 +69,16 @@ public class Input {
 
         List<Lotto> selectLottos = new ArrayList<Lotto>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        int count = 0;
         try{
-            for (int count = 0; count < selectLottoCount; count++) {
+            for (count = 0; count < selectLottoCount; count++) {
                 Lotto lotto = new Lotto(inputNumbers());
                 selectLottos.add(lotto);
             }
-        }catch (Exception e){
-
+        }catch (Exception error){
+            count += 1;
+            System.out.println(error.getMessage());
+            selectLottos.addAll(inputSelectLottonumber(selectLottoCount - count));
         }
 
         return selectLottos;
