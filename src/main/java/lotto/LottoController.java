@@ -9,19 +9,19 @@ import java.util.List;
 
 public class LottoController {
 
-    private Money money;
+    private LottoGame lottoGame;
     private List<Lotto> lottos;
 
-    public LottoController(Money money, List<Lotto> selectLottos) {
+    public LottoController(LottoGame lottoGame, List<Lotto> selectLottos) {
 
         lottos = new ArrayList<Lotto>();
         lottos.addAll(selectLottos);
-        this.money = money;
+        this.lottoGame = lottoGame;
     }
 
     public void createLotto() {
 
-        for (int i = 0; i < money.getAutoGameCount(); i++) {
+        for (int i = 0; i < lottoGame.getAutoGame(); i++) {
             List<LottoNumber> lottoNumbers = LottoShuffle.makeLottoNumber();
             Lotto lotto = new Lotto(lottoNumbers);
             lottos.add(lotto);

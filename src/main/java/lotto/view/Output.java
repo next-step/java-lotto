@@ -30,8 +30,8 @@ public class Output {
         System.out.println("(기준이 1이기 때문에 결과적으로 " + lottoResult.benefitOrLoss(revenue) + " 라는 의미임)");
     }
 
-    public static void printAutoCountSelectCount(Money money) {
-        System.out.print("수동으로 " + money.getSelectGameCount() + "장, ");
-        System.out.println("자동으로 " + money.getAutoGameCount() + "개를 구매핬습니다.");
+    public static void printAutoCountSelectCount(LottoGame lottoGame) {
+        System.out.print("수동으로 " + lottoGame.getSelectGame() + "장, ");
+        System.out.println("자동으로 " + lottoGame.getAutoGame() + "개를 구매핬습니다.");
     }
 }

@@ -60,6 +60,7 @@ public class Input {
     }
 
     public static int inputSelectLottoCount() {
+
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextInt();
     }
@@ -68,8 +69,13 @@ public class Input {
 
         List<Lotto> selectLottos = new ArrayList<Lotto>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int count = 0; count < selectLottoCount; count++) {
-            selectLottos.add(new Lotto(inputNumbers()));
+        try{
+            for (int count = 0; count < selectLottoCount; count++) {
+                Lotto lotto = new Lotto(inputNumbers());
+                selectLottos.add(lotto);
+            }
+        }catch (Exception e){
+
         }
 
         return selectLottos;
@@ -83,7 +89,7 @@ public class Input {
                 throw new IllegalArgumentException("값이 입력되지 않았습니다.");
             }
             return inputLastWinningNumber;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputNumbers();
         }
