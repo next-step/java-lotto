@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000);
+    MISS(0,0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 500_00),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private int matchCount;
     private int money;
@@ -41,7 +42,7 @@ public enum Prize {
                 .filter(prize -> prize.isSameMatchCount(matchCount))
                 .map(prize -> prize.checkPrizeSecond(match))
                 .findFirst()
-                .orElseThrow(() ->new IllegalArgumentException("일치하는 값이 없습니다."));
+                .orElse(Prize.MISS);
     }
 
     private Prize checkPrizeSecond(boolean match) {

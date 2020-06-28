@@ -7,7 +7,7 @@ public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
     private static final String COMMA = ",";
-    public static final int LOTTO_GAME_PRICE = 1000;
+
 
     private Set<LottoNumber> numbers;
 

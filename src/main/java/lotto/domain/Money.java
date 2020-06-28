@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.view.Input;
 
-import static lotto.domain.Lotto.LOTTO_GAME_PRICE;
+import static lotto.LottoController.LOTTO_GAME_PRICE;
 
 public class Money {
 
@@ -21,8 +21,8 @@ public class Money {
         this.money = inputMoney;
     }
 
-    public int getMoney() {
-        return money;
+    public int canBuyLottoGameCount(){
+        return money / LOTTO_GAME_PRICE;
     }
 
 }

@@ -14,11 +14,11 @@ public class WinningLotto {
 
     }
 
-    public Lotto getWinninglotto() {
-        return winninglotto;
+    public int getMatchCount(Lotto lotto) {
+        return lotto.matchCount(winninglotto);
     }
 
-    public LottoNumber getBonusNumber(){
-        return bonusNumber;
+    public boolean isContainBonusNumber(Lotto lotto) {
+        return lotto.isContain(bonusNumber);
     }
 }

@@ -16,22 +16,20 @@ public class Output {
         }
     }
 
-    public static void printResultStatic(WinningLottoResult lottoResult, LottoGame lottoGame) {
-        Map<Prize, Integer> result = lottoResult.getResult();
-
-        for (Map.Entry<Prize, Integer> gameResult : result.entrySet()) {
-            int money = gameResult.getKey().getMoney();
-            System.out.println(gameResult.getKey().getDetail() + "(" + money + "원) -" + gameResult.getValue() + "개");
-
+    public static void printResultWinningStatic(List<String> lottoResult) {
+        for (String result : lottoResult) {
+            System.out.println(result);
         }
-
-        float revenue = lottoResult.getRevenueStatic(lottoGame.getAutoGame());
-        System.out.print("총 수익률은 " + revenue + "입니다");
-        System.out.println("(기준이 1이기 때문에 결과적으로 " + lottoResult.benefitOrLoss(revenue) + " 라는 의미임)");
     }
 
-    public static void printAutoCountSelectCount(LottoGame lottoGame) {
-        System.out.print("수동으로 " + lottoGame.getSelectGame() + "장, ");
-        System.out.println("자동으로 " + lottoGame.getAutoGame() + "개를 구매핬습니다.");
+    public static void printResultRevenu(Revenue revenueRate) {
+
+        System.out.print("총 수익률은 " + revenueRate.getRevenueStatic() + "입니다");
+        System.out.println("(기준이 1이기 때문에 결과적으로 " + revenueRate.benefitOrLoss() + " 라는 의미임)");
+    }
+
+    public static void printAutoCountSelectCount(int autoGameCount, int selectGameCount) {
+        System.out.print("수동으로 " + autoGameCount + "장, ");
+        System.out.println("자동으로 " + selectGameCount + "개를 구매핬습니다.");
     }
 }
