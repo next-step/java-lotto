@@ -23,4 +23,8 @@ public class LottoMoney {
         return this.amount.divide(LOTTO_PRICE, RoundingMode.DOWN).intValue();
     }
 
+    public boolean canBuyLottoTicket(final int numberOfManualLotto) {
+        return getNumberOfLottoByMoneyPaid() >= numberOfManualLotto;
+    }
+
 }

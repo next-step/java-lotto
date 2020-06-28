@@ -12,11 +12,9 @@ public class Main {
 
         ManualLottoInputView manualLottoInput = ManualLottoInputView.enterManualLottoInput();
 
-        int numberOfAutoLottoTicket = LottoSeller.getNumberOfAutoLottoTicket(lottoMoney.getNumberOfLottoByMoneyPaid(), manualLottoInput.getNumberOfManual());
-        List<LottoTicket> buyingLottoTickets = LottoStore.sellAutoLottoTicket(numberOfAutoLottoTicket);
-        buyingLottoTickets.addAll(LottoStore.sellManualLottoTicket(manualLottoInput.getStringManualNumbers()));
+        List<LottoTicket> buyingLottoTickets = LottoStore.sellLottoTicket(lottoMoney, manualLottoInput.getStringManualNumbers());
 
-        LottoTicketResultView.printBuyingLotto(numberOfAutoLottoTicket, manualLottoInput.getNumberOfManual());
+        LottoTicketResultView.printBuyingLotto(manualLottoInput.getNumberOfManual(), LottoStore.getNumberOfAutoTicket(lottoMoney, manualLottoInput.getNumberOfManual()));
         LottoTicketResultView.printLottoTickets(buyingLottoTickets);
 
         NumberInputView numberInputView = NumberInputView.enterWinningLottoNumbers();
