@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 
 import java.util.List;
 import java.util.stream.Collectors;

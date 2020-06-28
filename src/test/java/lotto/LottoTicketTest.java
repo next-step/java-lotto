@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.CustomLottoTicket;
-import lotto.domain.LottoNumber;
-import lotto.domain.Rank;
+import lotto.domain.ticket.CustomLottoTicket;
+import lotto.domain.store.LottoNumber;
+import lotto.domain.winning.Rank;
 import lotto.util.ListConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

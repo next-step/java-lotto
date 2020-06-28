@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.store;
 
+import lotto.domain.ticket.AutoLottoTicket;
+import lotto.domain.ticket.CustomLottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.util.ListConverter;
 
 import java.util.ArrayList;

@@ -1,4 +1,10 @@
-import lotto.domain.*;
+import lotto.domain.winning.LottoResult;
+import lotto.domain.winning.WinningLotto;
+import lotto.domain.store.LottoMoney;
+import lotto.domain.store.LottoNumber;
+import lotto.domain.store.LottoStore;
+import lotto.domain.ticket.CustomLottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.util.ListConverter;
 import lotto.view.*;
 

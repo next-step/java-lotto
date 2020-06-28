@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.ticket;
+
+import lotto.domain.store.LottoNumber;
+import lotto.domain.winning.Rank;
 
 import java.util.Collections;
 import java.util.HashSet;
