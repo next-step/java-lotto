@@ -11,20 +11,16 @@ import java.util.Scanner;
 public class Input {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int INIT_ZERO = 0;
 
     private Input() {
     }
 
     public static Money inputMoney() {
-        try {
-            System.out.println("구입금액을 입력해 주세요.");
-            int inputMoney = scanner.nextInt();
-            return new Money(inputMoney);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputMoney();
-        }
+
+        System.out.println("구입금액을 입력해 주세요.");
+        int inputMoney = scanner.nextInt();
+        return new Money(inputMoney);
+
     }
 
 
@@ -66,17 +62,10 @@ public class Input {
     }
 
     private static String inputNumbers() {
-        try {
-            String inputLastWinningNumber = scanner.next();
-
-            if (isEmptyOrBlank(inputLastWinningNumber)) {
-                throw new IllegalArgumentException("값이 입력되지 않았습니다.");
-            }
-            return inputLastWinningNumber;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputNumbers();
+        String inputLastWinningNumber = scanner.next();
+        if (isEmptyOrBlank(inputLastWinningNumber)) {
+            throw new IllegalArgumentException("값이 입력되지 않았습니다.");
         }
-
+        return inputLastWinningNumber;
     }
 }

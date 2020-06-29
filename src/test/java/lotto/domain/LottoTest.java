@@ -43,7 +43,7 @@ class LottoTest {
     void matchCount() {
 
         int matchCount = lotto.matchCount(winningLotto);
-        assertThat(matchCount).isEqualTo(5);
+        assertThat(matchCount).isEqualTo(6);
     }
 
 }

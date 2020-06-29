@@ -1,10 +1,11 @@
 package lotto.domain;
 
 public class WinningLotto {
+
     private Lotto winninglotto;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto wininglotto, LottoNumber bonusNumber){
+    public WinningLotto(Lotto wininglotto, LottoNumber bonusNumber) {
         this.winninglotto = wininglotto;
 
         if (winninglotto.isContain(bonusNumber)) {

@@ -28,7 +28,7 @@ public class Lotto {
 
     private void isDuplicate() {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호 입력이 잘못되었습니다.");
+            throw new IllegalArgumentException("로또 번호 갯수가 일치하지 않습니다.");
         }
     }
 

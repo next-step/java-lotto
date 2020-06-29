@@ -12,9 +12,7 @@ import java.util.stream.Stream;
 public class LottoController {
 
     public static final int LOTTO_GAME_PRICE = 1000;
-    private static final int PRIZE_MIN_MATCH_COUNT = 3;
-    private static final int ADD_COUNT_ONE = 1;
-    private final int MISS_ZERO = 0;
+    private static final int MISS_ZERO = 0;
     private int totalGame;
     private int autoGame;
     private int selectGame;
@@ -25,10 +23,13 @@ public class LottoController {
     public LottoController(Money money, int selectLottoCount) {
 
         this.totalGame = money.canBuyLottoGameCount();
+        if (totalGame < selectLottoCount) {
+            throw new IllegalArgumentException("수동게임이 총 게임수를 넘어갈 수 없습니다.");
+        }
         this.autoGame = totalGame - selectLottoCount;
         this.selectGame = selectLottoCount;
         rankResult = new ArrayList();
-
+        lottos = new ArrayList<>();
     }
 
     public void createLottoWithUserInput() {
@@ -54,7 +55,7 @@ public class LottoController {
         }
     }
 
-    private void match(int count, boolean hasBounusNumber){
+    private void match(int count, boolean hasBounusNumber) {
 
         Prize prize = Prize.findByPrize(count, hasBounusNumber);
         rankResult.add(prize);
@@ -67,7 +68,7 @@ public class LottoController {
             totalSum = prize.sumMoney(totalSum);
         }
 
-        return new Revenue((float)totalSum / (totalGame * LOTTO_GAME_PRICE));
+        return new Revenue(totalSum,  totalGame );
     }
 
     public void printBuyLottoGames() {
@@ -81,23 +82,23 @@ public class LottoController {
     public void printResultWinningStatic() {
 
 
-        List<String> stringStream = Arrays.stream(Prize.values())
+        List<String> resultStatics = Arrays.stream(Prize.values())
                 .filter(prize -> !prize.isSameMatchCount(MISS_ZERO))
                 .map(prize -> {
                     int prizeCount = getPrizeCount(prize);
                     return makeDetailString(prizeCount, prize);
                 }).collect(Collectors.toList());
 
-        Output.printResultWinningStatic(stringStream);
+        Output.printResultWinningStatic(resultStatics);
     }
 
     private String makeDetailString(int prizeCount, Prize prize) {
         String detail = prize.getMatchCount() + "개 일치";
-        if(prize ==Prize.SECOND){
+        if (prize == Prize.SECOND) {
             detail += "보너스 볼 일치";
         }
 
-        return  detail+ "(" + prize.getMoney() + "원) -" + prizeCount + "개";
+        return detail + "(" + prize.getMoney() + "원) -" + prizeCount + "개";
 
     }
 
@@ -107,7 +108,7 @@ public class LottoController {
                 .count();
     }
 
-    public void printRevenueStatic(){
+    public void printRevenueStatic() {
         Output.printResultRevenu(getRevenueStatic());
     }
 

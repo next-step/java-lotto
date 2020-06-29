@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.Revenue;
 
 import java.util.List;
-import java.util.Map;
 
 public class Output {
 
@@ -29,7 +29,7 @@ public class Output {
     }
 
     public static void printAutoCountSelectCount(int autoGameCount, int selectGameCount) {
-        System.out.print("수동으로 " + autoGameCount + "장, ");
-        System.out.println("자동으로 " + selectGameCount + "개를 구매핬습니다.");
+        System.out.print("수동으로 " + selectGameCount + "장, ");
+        System.out.println("자동으로 " + autoGameCount + "개를 구매핬습니다.");
     }
 }

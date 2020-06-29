@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    MISS(0,0),
+    MISS(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 500_00),
     THIRD(5, 1_500_000),
@@ -27,14 +27,6 @@ public enum Prize {
 
     public int getMoney() {
         return money;
-    }
-
-    public String getDetail() {
-        String resultDetail = matchCount + "개 일치";
-        if(this == Prize.SECOND){
-            resultDetail += " 보너스 볼 일치";
-        }
-        return resultDetail;
     }
 
     public static Prize findByPrize(int matchCount, boolean match) {
