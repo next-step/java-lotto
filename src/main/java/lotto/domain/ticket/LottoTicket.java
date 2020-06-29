@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.ticket;
+
+import lotto.domain.store.LottoNumber;
+import lotto.domain.winning.Rank;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,7 +14,7 @@ public abstract class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     protected LottoTicket(List<LottoNumber> lottoNumbers) {
-        final List<LottoNumber> createdLottoNumber = createLottoNumber(lottoNumbers);
+        final List<LottoNumber> createdLottoNumber = create(lottoNumbers);
         if (!isValid(createdLottoNumber)) {
             throw new RuntimeException();
         }
@@ -49,5 +52,5 @@ public abstract class LottoTicket {
         return lottoNumbers;
     }
 
-    protected abstract List<LottoNumber> createLottoNumber(final List<LottoNumber> lottoNumbers);
+    protected abstract List<LottoNumber> create(final List<LottoNumber> lottoNumbers);
 }

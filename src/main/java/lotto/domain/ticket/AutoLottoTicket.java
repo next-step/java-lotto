@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
+
+import lotto.domain.store.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ public class AutoLottoTicket extends LottoTicket {
     }
 
     @Override
-    protected List<LottoNumber> createLottoNumber(List<LottoNumber> lottoNumbers) {
+    protected List<LottoNumber> create(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> lottoNumberCollections = LottoNumber.getLottoNumberCollection();
         Collections.shuffle(lottoNumberCollections);
         return lottoNumberCollections.subList(START_INDEX, NUMBER_OF_LOTTO_NUMBERS);

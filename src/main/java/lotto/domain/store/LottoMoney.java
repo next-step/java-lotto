@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.store;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,6 +21,10 @@ public class LottoMoney {
 
     public int getNumberOfLottoByMoneyPaid() {
         return this.amount.divide(LOTTO_PRICE, RoundingMode.DOWN).intValue();
+    }
+
+    public boolean canBuyLottoTicket(final int numberOfManualLotto) {
+        return getNumberOfLottoByMoneyPaid() >= numberOfManualLotto;
     }
 
 }

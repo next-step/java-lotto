@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.winning;
 
 import java.util.Arrays;
 
@@ -19,10 +19,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(final int countOfMatch, final boolean isBonusMatch) {
-        if (countOfMatch == 5 && isBonusMatch) {
+        if (countOfMatch == SECOND.getCountOfMatch() && isBonusMatch) {
             return Rank.SECOND;
         }
-        if (countOfMatch == 5) {
+        if (countOfMatch == THIRD.getCountOfMatch()) {
             return Rank.THIRD;
         }
         return Arrays.stream(Rank.values())
