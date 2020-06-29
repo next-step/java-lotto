@@ -1,4 +1,4 @@
-package study3.domain;
+package study4.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import study3.domain.Ranking.Rank;
+import study4.domain.Ranking.Rank;
 
 public class Ranking {
 

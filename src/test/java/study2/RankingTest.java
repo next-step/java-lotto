@@ -28,13 +28,7 @@ class RankingTest {
 
 		Ranking rank = new Ranking();
 		List<Lotto> lottos = new ArrayList<>();
-		List<Integer> lottonum = new ArrayList<>();
-
-		lottonum.add(1);
-		lottonum.add(2);
-		lottonum.add(3);
-		lottonum.add(9);
-		lottonum.add(10);
+		List<Integer> lottonum = Arrays.asList(1, 2, 3, 9, 10);
 
 		Lotto lotto = new Lotto(lottonum);
 		lottos.add(lotto);

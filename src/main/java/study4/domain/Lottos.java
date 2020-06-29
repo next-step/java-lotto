@@ -1,4 +1,4 @@
-package study3.domain;
+package study4.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +34,36 @@ public class Lottos {
 		}
 		
 		return Collections.unmodifiableList(lottos);
+	}
+	
+	public List<Lotto> getLottoNumbersByManual(List<String> inputNumberByManual) {
+		
+			// Question
+			// 너무 괴상망측 한가요?? ㅠㅠ
+			for(int i=0; i< inputNumberByManual.size(); i ++) {
+				lottos.add (
+				new Lotto(
+				Arrays.asList(inputNumberByManual.get(i)
+						.replace(" ", "")
+						.split(","))
+				.stream()
+				.mapToInt(Integer::parseInt)
+				.boxed()
+				.collect(Collectors.toList())) );
+			}
+		
+			 return lottos;	
+		 
+		   /* TODO
+		    * return inputNumberByManual
+		  			 .stream()
+		  			 .mapToInt(Integer::parseInt)
+		  			 .boxed()
+		   		.map(String-> new Lotto(String))		   		 
+		  			.forEach(Lottos::add)
+		  			 .sorted()
+		  			 .collect(Collectors.toList());
+		 */
 	}
 	
 	public static List<Integer> winNumSplit(String inputWinNumber) {

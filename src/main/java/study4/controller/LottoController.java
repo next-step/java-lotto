@@ -1,15 +1,15 @@
-package study3.controller;
+package study4.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import study3.domain.Lotto;
-import study3.domain.Lottos;
-import study3.domain.Ranking;
-import study3.domain.Ranking.Rank;
-import study3.view.InputView;
-import study3.view.ResultView;
+import study4.domain.Lotto;
+import study4.domain.Lottos;
+import study4.domain.Ranking;
+import study4.domain.Ranking.Rank;
+import study4.view.InputView;
+import study4.view.ResultView;
 
 public class LottoController {
 	public static void main(String[] args) {
@@ -19,7 +19,15 @@ public class LottoController {
 		Ranking rank = new Ranking();
 		
 		int price = InputView.enterPriceMessage();
-		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price));
+		
+		int mannualLottoPrice = InputView.manualLottoNumber();
+				
+		// 수동
+		List<Lotto> inputNumberByManual = lottonumbers.getLottoNumbersByManual(InputView.inputNumberByManual(mannualLottoPrice));
+		// 수동을 제외한 로또		
+		List<Lotto> lottos = lottonumbers.getLottoNumbers(InputView.inputNumberMessages(price - mannualLottoPrice));
+		
+		resultview.AutoNumberAndMannualNumberCount(price, mannualLottoPrice);
 		resultview.getOutputLottoNumbers(lottos); // 리스트 출력
 		
 		// 지난 주 당첨 번호 입력
