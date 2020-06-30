@@ -7,7 +7,7 @@ public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
     private static final String COMMA = ",";
-    public static final int LOTTO_GAME_PRICE = 1000;
+
 
     private Set<LottoNumber> numbers;
 
@@ -15,6 +15,7 @@ public class Lotto {
 
         this(Arrays.stream(numberString.split(COMMA))
                 .map(String::trim)
+                .filter(text -> !text.isEmpty())
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
@@ -27,7 +28,7 @@ public class Lotto {
 
     private void isDuplicate() {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호 갯수가 일치하지 않습니다.");
         }
     }
 

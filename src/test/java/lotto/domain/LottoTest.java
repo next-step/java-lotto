@@ -42,17 +42,8 @@ class LottoTest {
     @Test
     void matchCount() {
 
-
         int matchCount = lotto.matchCount(winningLotto);
-        assertThat(matchCount).isEqualTo(5);
+        assertThat(matchCount).isEqualTo(6);
     }
 
-    @DisplayName("보너스 번호 입력값이  지난주 당첨번호들중 중복되는 값이 있을경우")
-    @Test
-    void duplicateBonusNumber() {
-
-        assertThatThrownBy(() ->{
-            winningLotto.duplicateBonusNumber(new LottoNumber(1));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
 }
