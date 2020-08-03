@@ -96,3 +96,9 @@ public class StringAddCalculatorTest {
     }
 }
 </code></pre>
+
+### Step1 리뷰사항 
+* [ ] [fix01][StringAddCalculator.java] 숫자 1, 2를 상수화 하여 Readability 개선하기
+* [ ] [fix02][StringAddCalculator.java] delimiter 상수 합치기
+* [ ] [fix03][StringAddCalculatorTest.java] @DisplayName 이용하여 테스트에 Description 부여하기 
+
