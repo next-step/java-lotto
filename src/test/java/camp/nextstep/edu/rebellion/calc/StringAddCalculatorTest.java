@@ -1,5 +1,6 @@
 package camp.nextstep.edu.rebellion.calc;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,6 +44,15 @@ class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("음수 입니다");
+    }
+
+    @DisplayName("숫자형식이 아닌경우 예외 발생")
+    @Test
+    public void splitAndSum_notNumeric() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("A,2,3"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("For input string");
     }
 }
