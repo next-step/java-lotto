@@ -7,10 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
+    private static final Pattern CUSTOM_DELIMITER_MATCHER = Pattern.compile("//(.)\\n(.*)");
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final Pattern CUSTOM_DELIMITER_MATCHER = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
     private static final int ZERO = 0;
+    private static final int DELIMITER_GROUP = 1;
+    private static final int EXPRESSION_GROUP = 2;
 
     private StringAddCalculator() {}
 
@@ -31,8 +32,8 @@ public class StringAddCalculator {
     private static String[] makeTokens(String expression) {
         Matcher matcher = CUSTOM_DELIMITER_MATCHER.matcher(expression);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(DELIMITER_GROUP);
+            return matcher.group(EXPRESSION_GROUP).split(customDelimiter);
         }
 
         return expression.split(DEFAULT_DELIMITER);
