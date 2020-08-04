@@ -2,13 +2,12 @@ package camp.nextstep.edu.rebellion.lotto.domain.winning;
 
 import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
 import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoNumber;
+import camp.nextstep.edu.rebellion.lotto.util.StringUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
-    private static final String DELIMITER = ",";
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int WIN = 1;
@@ -28,7 +27,8 @@ public class LottoWinningNumber {
     }
 
     private List<Integer> generateWinningNumbers(String numbers) {
-        return Arrays.stream(numbers.split(DELIMITER))
+        return StringUtil.convertList(numbers)
+                .stream()
                 .map(Integer::parseInt)
                 .map(this::checkRange)
                 .collect(Collectors.toList());

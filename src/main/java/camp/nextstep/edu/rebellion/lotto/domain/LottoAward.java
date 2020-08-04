@@ -17,6 +17,10 @@ public enum LottoAward {
         this.prize = prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getPrize() {
         return prize;
     }

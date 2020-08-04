@@ -2,7 +2,6 @@ package camp.nextstep.edu.rebellion.lotto.domain.winning;
 
 import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LottoWinningResult {
@@ -12,7 +11,17 @@ public class LottoWinningResult {
         this.awardResult = awardResult;
     }
 
-    public List<LottoAward> getAwardResult() {
-        return Collections.unmodifiableList(awardResult);
+    public int getAwardCount(LottoAward award) {
+        return (int) awardResult
+                .stream()
+                .filter(r -> r == award)
+                .count();
+    }
+
+    public long getTotalPrize() {
+        return awardResult
+                .stream()
+                .mapToLong(a -> a.getPrize())
+                .sum();
     }
 }

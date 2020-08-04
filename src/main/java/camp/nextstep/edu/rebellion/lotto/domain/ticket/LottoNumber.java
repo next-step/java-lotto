@@ -11,9 +11,7 @@ public class LottoNumber {
     }
 
     public boolean match(int number) {
-        return this.numbers
-                .stream()
-                .anyMatch(n -> n == number);
+        return this.numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {
