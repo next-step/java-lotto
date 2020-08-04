@@ -28,7 +28,8 @@ public class ResultView {
     }
 
     public static void printReturnOfInvestment(int purchaseAmount, long totalReward) {
-        System.out.println(String.format(PRIZE_RESULT_FORMAT, totalReward / (double) purchaseAmount));
+        System.out.println(String.format(PRIZE_RESULT_FORMAT,
+                totalReward / (double) purchaseAmount));
     }
 
     private static String makeAwardTitle() {
@@ -50,6 +51,7 @@ public class ResultView {
     }
 
     private static String wrapAward(LottoAward award, int awardCount) {
-        return String.format(AWARD_RESULT_FORMAT, award.getMatchCount(), award.getPrize(), awardCount);
+        return String.format(AWARD_RESULT_FORMAT,
+                award.getMatchCount(), award.getPrize(), awardCount);
     }
 }
