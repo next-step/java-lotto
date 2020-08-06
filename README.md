@@ -161,19 +161,19 @@ U* I 로직을 InputView, ResultView와 같은 클래스를 추가해 분리한�
     * else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
 
 ### Step2 리뷰사항 
-* [ ] [fix01][LottoTicketGenerator.java] 로또 후보 번호 생성 로직 수정하기 range(1, 46) or rangeClosed(1, 45)
-* [ ] [fix02][LottoWinningNumber.java] LottoNumber 와 성질이 유사하므로 합쳐보기
-* [ ] [fix03][LottoTicketGenerator.java] lambda 로 로직 개선
+* [x] [fix01][LottoTicketGenerator.java] 로또 후보 번호 생성 로직 수정하기 range(1, 46) or rangeClosed(1, 45)
+* [x] [fix02][LottoWinningNumber.java] LottoNumber 와 성질이 유사하므로 합쳐보기
+* [x] [fix03][LottoTicketGenerator.java] lambda 로 로직 개선
 <pre><code>
 return Stream.generate(LottoTicketGenerator::generateNumbers)
             .limit(amount / LOTTERY_PRICE)
             .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
 </code></pre>
-* [ ] [fix04][LottoWinningNumber.java] 로또 번호(Integer)도 객체로 분리해 보기
-* [ ] [fix05][ResultView.java] 수익률 계산하는 비즈니스 로직 이동
-* [ ] [fix06][LottoAward.java] 상금에 언더 바(_) 추가하여 가독성 개선하기 
-* [ ] [fix07][LottoAward.java] if 문에서 불 필요한 괄호 제거 
-* [ ] [fix08][LottoAward.java] match 를 ==로 변경해보기  
+* [x] [fix04][LottoWinningNumber.java] 로또 번호(Integer)도 객체로 분리해 보기
+* [x] [fix05][ResultView.java] 수익률 계산하는 비즈니스 로직 이동
+* [x] [fix06][LottoAward.java] 상금에 언더 바(_) 추가하여 가독성 개선하기 
+* [x] [fix07][LottoAward.java] if 문에서 불 필요한 괄호 제거 
+* [x] [fix08][LottoAward.java] match 를 ==로 변경해보기  
 
 # 3단계 - 로또(2등)
 ### 기능 요구사항
