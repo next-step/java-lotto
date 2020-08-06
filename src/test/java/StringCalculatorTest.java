@@ -3,6 +3,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringCalculatorTest {
 
@@ -39,5 +40,11 @@ class StringCalculatorTest {
     @Test
     void calculateWithCustomDelimiter() {
         assertThat(StringCalculator.calculate("//;\n1;1;3")).isEqualTo(5);
+    }
+
+    @Test
+    void calculateThrowException() throws Exception {
+        assertThatThrownBy(() -> StringCalculator.calculate("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }

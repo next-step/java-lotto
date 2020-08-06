@@ -22,6 +22,8 @@ public class StringCalculator {
 
         String[] values = parse(text);
 
+        valid(values);
+
         if (values.length == 1)
             return Integer.parseInt(values[0]);
 
@@ -32,6 +34,19 @@ public class StringCalculator {
                 .forEach(index -> result.addAndGet(Integer.parseInt(otherValues[index])));
 
         return result.get();
+    }
+
+    /**
+     * 문자열 값의 유효성을 확인한다.
+     *
+     * @param values
+     */
+    private static void valid(String[] values) {
+        Arrays.stream(values)
+                .forEach(value -> {
+                    if (Integer.parseInt(value) < 0)
+                        throw new RuntimeException("음수는 계산 할 수 없습니다.");
+                });
     }
 
     private static final String DEFAULT_DELIMITER = ",|:";
