@@ -14,10 +14,12 @@ public class LottoGame {
         ResultView.printLottoTicket(ticket);
 
         String winnerNumbersAtLastWeek = InputView.getWinnerNumbersAtLastWeek();
-        LottoWinningNumber winningNumber = new LottoWinningNumber(winnerNumbersAtLastWeek);
-        LottoWinningResult result = ticket.match(winningNumber);
+        int bonusNumber = InputView.getBonusNumber();
 
+        LottoWinningNumber winningNumber = new LottoWinningNumber(winnerNumbersAtLastWeek, bonusNumber);
+
+        LottoWinningResult result = ticket.getWinningResult(winningNumber);
         ResultView.printWinningResult(result);
-        ResultView.printReturnOfInvestment(purchaseAmount, result.getTotalPrize());
+        ResultView.printReturnOfInvestment(result.getReturnOfInvestment(ticket.getPrice()));
     }
 }

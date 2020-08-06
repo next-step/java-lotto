@@ -22,4 +22,12 @@ public class InputView {
         }
         throw new IllegalArgumentException("입력 값이 없습니다");
     }
+
+    public static int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요");
+        if (SCANNER.hasNextInt()) {
+            return SCANNER.nextInt();
+        }
+        throw new IllegalArgumentException("입력 값이 없거나 숫자형식이 아닙니다");
+    }
 }

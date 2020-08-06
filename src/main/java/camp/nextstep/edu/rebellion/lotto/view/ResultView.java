@@ -1,23 +1,43 @@
 package camp.nextstep.edu.rebellion.lotto.view;
 
 import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
+import camp.nextstep.edu.rebellion.lotto.domain.ticket.Lotto;
+import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoNumber;
 import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoTicket;
 import camp.nextstep.edu.rebellion.lotto.domain.winning.LottoWinningResult;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String ENTER = "\n";
-    private static final String AWARD_RESULT_FORMAT = "%2d개 일치 (%12d원) - %d개";
-    private static final String PRIZE_RESULT_FORMAT = "총 수익률은 %.2f 입니다";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final String LOTTO_LEFT_BRACE = "[";
+    private static final String LOTTO_RIGHT_BRACE = "]";
+    private static final String LOTTO_AWARD_RESULT_FORMAT = "%2d개 일치 (%12d원) - %d개";
+    private static final String LOTTO_BONUS_AWARD_RESULT_FORMAT = "%2d개 일치, 보너스 볼 일치(%12d원) - %d개";
+    private static final String LOTTO_ROI_FORMAT = "총 수익률은 %.2f 입니다";
 
     private ResultView() {}
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
-        lottoTicket.getLottoNumbers().forEach(
-                lottoNumber -> System.out.println(lottoNumber.getNumbers())
-        );
+        StringBuilder output = new StringBuilder();
+        lottoTicket.getLottoNumbers()
+                .forEach(lotto -> output
+                        .append(LOTTO_LEFT_BRACE)
+                        .append(makePrintingLotto(lotto))
+                        .append(LOTTO_RIGHT_BRACE)
+                        .append(ENTER));
+        System.out.println(output.toString());
+    }
+
+    private static String makePrintingLotto(Lotto lotto) {
+        return lotto.getNumbers()
+                .stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 
     public static void printWinningResult(LottoWinningResult result) {
@@ -27,9 +47,8 @@ public class ResultView {
         System.out.println(output.toString());
     }
 
-    public static void printReturnOfInvestment(int purchaseAmount, long totalReward) {
-        System.out.println(String.format(PRIZE_RESULT_FORMAT,
-                totalReward / (double) purchaseAmount));
+    public static void printReturnOfInvestment(double roi) {
+        System.out.println(String.format(LOTTO_ROI_FORMAT, roi));
     }
 
     private static String makeAwardTitle() {
@@ -51,7 +70,13 @@ public class ResultView {
     }
 
     private static String wrapAward(LottoAward award, int awardCount) {
-        return String.format(AWARD_RESULT_FORMAT,
-                award.getMatchCount(), award.getPrize(), awardCount);
+        return String.format(pickAwardFormat(award),
+                award.getCountOfMatch(), award.getPrize(), awardCount);
+    }
+
+    private static String pickAwardFormat(LottoAward award) {
+        return LottoAward.SECOND == award ?
+                LOTTO_BONUS_AWARD_RESULT_FORMAT :
+                LOTTO_AWARD_RESULT_FORMAT;
     }
 }
