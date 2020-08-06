@@ -1,20 +1,27 @@
 package camp.nextstep.edu.rebellion.lotto.domain.ticket;
 
-import java.util.Collections;
-import java.util.List;
-
 public class LottoNumber {
-    private final List<Integer> numbers;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private final int number;
 
-    public LottoNumber(List<Integer> numbers) {
-        this.numbers = numbers;
+    public LottoNumber(int number) {
+        checkRange(number);
+        this.number = number;
     }
 
-    public boolean match(int number) {
-        return this.numbers.contains(number);
+    public boolean equals(LottoNumber number) {
+        return this.number == number.getNumber();
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public int getNumber() {
+        return number;
+    }
+
+    private int checkRange(int number) {
+        if(LOTTO_MIN_NUMBER > number || LOTTO_MAX_NUMBER < number) {
+            throw new IllegalArgumentException("당첨번호가 잘못되었습니다 " + number);
+        }
+        return number;
     }
 }

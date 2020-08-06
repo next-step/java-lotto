@@ -24,4 +24,8 @@ public class LottoWinningResult {
                 .mapToLong(a -> a.getPrize())
                 .sum();
     }
+
+    public double getReturnOfInvestment(int purchaseAmount) {
+        return getTotalPrize() / (double) purchaseAmount;
+    }
 }

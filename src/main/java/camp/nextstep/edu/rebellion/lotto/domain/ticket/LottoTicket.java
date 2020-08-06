@@ -8,20 +8,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<Lotto> lottos;
+    private final int price;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoTicket(List<Lotto> lottos, int price) {
+        this.lottos = lottos;
+        this.price = price;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<Lotto> getLottoNumbers() {
+        return Collections.unmodifiableList(lottos);
     }
 
-    public LottoWinningResult match(LottoWinningNumber lottoWinningNumber) {
-        return this.lottoNumbers
+    public int getPrice() {
+        return price;
+    }
+
+    public LottoWinningResult getWinningResult(LottoWinningNumber winningNumber) {
+        return this.lottos
                 .stream()
-                .map(lottoNumber -> lottoWinningNumber.getMatchResult(lottoNumber))
+                .map(lotto -> lotto.getAwardResult(winningNumber))
                 .collect(Collectors.collectingAndThen(Collectors.toList(),
                         LottoWinningResult::new));
     }

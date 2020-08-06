@@ -1,7 +1,7 @@
 package camp.nextstep.edu.rebellion.lotto.domain.winning;
 
 import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
-import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoNumber;
+import camp.nextstep.edu.rebellion.lotto.domain.ticket.Lotto;
 import camp.nextstep.edu.rebellion.lotto.util.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +49,7 @@ class LottoWinningNumberTest {
     public void matchResultTest(String numbers, int matchCount) {
         // given
         String winningNumberInput = "1,2,3,4,5,6";
-        LottoNumber lottoNumber = new LottoNumber(
+        Lotto lotto = new Lotto(
                 StringUtil.convertList(numbers)
                         .stream()
                         .map(Integer::parseInt)
@@ -60,7 +60,7 @@ class LottoWinningNumberTest {
                 new LottoWinningNumber(winningNumberInput);
 
         // when
-        LottoAward result = winningNumber.getMatchResult(lottoNumber);
+        LottoAward result = winningNumber.getMatchResult(lotto);
 
         // then
         assertThat(result).isEqualTo(LottoAward.of(matchCount));

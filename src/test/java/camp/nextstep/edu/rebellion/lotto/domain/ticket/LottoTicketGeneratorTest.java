@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketGeneratorTest {
     @DisplayName("입력한 금액에 맞게 로또가 생성 되는지 확인")
@@ -34,14 +33,14 @@ class LottoTicketGeneratorTest {
 
         // when
         LottoTicket ticket = LottoTicketGenerator.purchaseGoodLuck(purchaseAmount);
-        LottoNumber lottoNumber = ticket.getLottoNumbers().get(0);
+        Lotto lotto = ticket.getLottoNumbers().get(0);
 
         // then
-        assertThat(lottoNumber.getNumbers()
+        assertThat(lotto.getNumbers()
                 .stream()
                 .distinct()
                 .count()).isEqualTo(6);
-        assertThat(lottoNumber.getNumbers()
+        assertThat(lotto.getNumbers()
                 .stream()
                 .filter(n -> (45 < n || 1 > n))
                 .count()).isEqualTo(0);

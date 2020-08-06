@@ -3,36 +3,41 @@ package camp.nextstep.edu.rebellion.lotto.domain;
 import java.util.Arrays;
 
 public enum LottoAward {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     LOSE(0, 0);
 
-    private int matchCount;
+    private int countOfMatch;
     private int prize;
 
-    LottoAward(int matchCount, int prize) {
-        this.matchCount = matchCount;
+    LottoAward(int countOfMatch, int prize) {
+        this.countOfMatch = countOfMatch;
         this.prize = prize;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     public int getPrize() {
         return prize;
     }
 
-    public static LottoAward of(int matchCount) {
-        return Arrays.stream(values())
-                .filter(award -> award.match(matchCount))
-                .findFirst()
-                .orElse(LOSE);
+    public static LottoAward valueOf(int countOfMatch, boolean matchBonus) {
+        if (5 == countOfMatch && matchBonus) {
+            return LottoAward.SECOND;
+        }
+
+        return match(countOfMatch);
     }
 
-    private boolean match(int matchCount) {
-        return (this.matchCount == matchCount);
+    private static LottoAward match(int countOfMatch) {
+        return Arrays.stream(values())
+                .filter(award -> award.getCountOfMatch() == countOfMatch)
+                .findFirst()
+                .orElse(LOSE);
     }
 }

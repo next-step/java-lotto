@@ -1,6 +1,5 @@
 package camp.nextstep.edu.rebellion.lotto.domain.winning;
 
-import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
 import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoNumber;
 import camp.nextstep.edu.rebellion.lotto.util.StringUtil;
 
@@ -8,36 +7,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int WIN = 1;
-    private static final int LOSE = 0;
+    private List<LottoNumber> numbers;
+    private LottoNumber bonus;
 
-    private final List<Integer> winningNumbers;
-
-    public LottoWinningNumber(String numbers) {
-        winningNumbers = generateWinningNumbers(numbers);
+    public LottoWinningNumber(String inputNumbers, int bonusNumber) {
+        this.numbers = generateWinningNumbers(inputNumbers);
+        this.bonus = new LottoNumber(bonusNumber);
     }
 
-    public LottoAward getMatchResult(LottoNumber lottoNumber) {
-        return LottoAward.of(winningNumbers
+    public boolean contain(LottoNumber number) {
+        return this.numbers
                 .stream()
-                .mapToInt(winningNumber -> lottoNumber.match(winningNumber) ? WIN : LOSE)
-                .sum());
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
-    private List<Integer> generateWinningNumbers(String numbers) {
-        return StringUtil.convertList(numbers)
+    public boolean containBonus(LottoNumber number) {
+        return this.bonus.equals(number);
+    }
+
+
+    private List<LottoNumber> generateWinningNumbers(String inputNumbers) {
+        return StringUtil.convertList(inputNumbers)
                 .stream()
                 .map(Integer::parseInt)
-                .map(this::checkRange)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private int checkRange(int number) {
-        if(LOTTO_MIN_NUMBER > number || LOTTO_MAX_NUMBER < number) {
-            throw new IllegalArgumentException("당첨번호가 잘못되었습니다 " + number);
-        }
-        return number;
     }
 }
