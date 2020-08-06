@@ -25,7 +25,6 @@ public class LottoWinningNumber {
         return this.bonus.equals(number);
     }
 
-
     private List<LottoNumber> generateWinningNumbers(String inputNumbers) {
         return StringUtil.convertList(inputNumbers)
                 .stream()

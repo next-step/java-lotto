@@ -25,24 +25,5 @@ class LottoTicketGeneratorTest {
         assertThat(result.getLottoNumbers()).hasSize(expected);
     }
 
-    @DisplayName("생성된 로또 번호가 올바른지 확인")
-    @Test
-    public void rangeTest() {
-        // given
-        int purchaseAmount = 1000;
 
-        // when
-        LottoTicket ticket = LottoTicketGenerator.purchaseGoodLuck(purchaseAmount);
-        Lotto lotto = ticket.getLottoNumbers().get(0);
-
-        // then
-        assertThat(lotto.getNumbers()
-                .stream()
-                .distinct()
-                .count()).isEqualTo(6);
-        assertThat(lotto.getNumbers()
-                .stream()
-                .filter(n -> (45 < n || 1 > n))
-                .count()).isEqualTo(0);
-    }
 }
