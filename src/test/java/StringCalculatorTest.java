@@ -17,4 +17,22 @@ class StringCalculatorTest {
     void calculateOnlyOne(String text) {
         assertThat(StringCalculator.calculate(text)).isEqualTo(Integer.parseInt(text));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,1=2", "3,1=4"}, delimiter = '=')
+    void calculateWithComma(String text, int expect) {
+        assertThat(StringCalculator.calculate(text)).isEqualTo(expect);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1=2", "3:1=4"}, delimiter = '=')
+    void calculateWithColon(String text, int expect) {
+        assertThat(StringCalculator.calculate(text)).isEqualTo(expect);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1,3=5", "3,1:4=8"}, delimiter = '=')
+    void calculateWithCommaAndColon(String text, int expect) {
+        assertThat(StringCalculator.calculate(text)).isEqualTo(expect);
+    }
 }
