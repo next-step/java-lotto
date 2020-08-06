@@ -35,4 +35,9 @@ class StringCalculatorTest {
     void calculateWithCommaAndColon(String text, int expect) {
         assertThat(StringCalculator.calculate(text)).isEqualTo(expect);
     }
+
+    @Test
+    void calculateWithCustomDelimiter() {
+        assertThat(StringCalculator.calculate("//;\n1;1;3")).isEqualTo(5);
+    }
 }
