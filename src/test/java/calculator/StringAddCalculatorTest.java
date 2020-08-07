@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,25 +57,54 @@ public class StringAddCalculatorTest {
         assertThat(calculatedResult).isEqualTo(answer);
     }
 
+    @DisplayName("사용자 정의 구분자")
+    @Test
+    public void splitAndSum_customSeparator() {
+        assertThat(StringAddCalculator.splitAndSum("//;\n1;2")).isEqualTo(3);
+        assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
+        assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3;4")).isEqualTo(10);
+    }
+
     private static class StringAddCalculator {
         private static final int DEFAULT_VALUE = 0;
         private static final String DEFAULT_SEPARATOR = "[,:]";
-        private static final String DEFAULT_SEPARATOR_PATTERN = format("\\d+(?:%s\\d+){0,}",DEFAULT_SEPARATOR);
+        private static final String DEFAULT_SEPARATOR_PATTERN = format("\\d+(?:%s\\d+)*",DEFAULT_SEPARATOR);
+        private static final String CUSTOM_SEPARATOR_PATTERN = "//(?<customDelimiter>[^/])\n(?<text>\\d+(\\k<customDelimiter>\\d)*)";
+        private static final Pattern customPattern = Pattern.compile(CUSTOM_SEPARATOR_PATTERN);
 
         public static int splitAndSum(String text) {
             if (null == text || "".equals(text.trim())) {
                 return DEFAULT_VALUE;
             }
-            return defaultSplitAndSum(text);
+            int defaultSplitAndSum = defaultSplitAndSum(text);
+            if (0 == defaultSplitAndSum){
+                return customSplitAndSum(text);
+            }
+            return defaultSplitAndSum;
         }
+
         private static int defaultSplitAndSum(String text){
             if (text.matches(DEFAULT_SEPARATOR_PATTERN)) {
-                return Arrays.stream(text.split(DEFAULT_SEPARATOR))
-                         .mapToInt(Integer::parseInt)
-                         .sum()
-                ;
+                String[] defaultSplit = text.split(DEFAULT_SEPARATOR);
+                return numStringsToSum(text.split(DEFAULT_SEPARATOR));
             }
             return DEFAULT_VALUE;
+        }
+
+        static int customSplitAndSum(String customText){
+            final Matcher matcher = customPattern.matcher(customText);
+            if (matcher.matches()) {
+                final String customDelimiter = matcher.group("customDelimiter");
+                final String text = matcher.group("text");
+                return numStringsToSum(text.split(customDelimiter));
+            }
+            return DEFAULT_VALUE;
+        }
+
+        private static int numStringsToSum(String[] splitNumStrings) {
+            return Arrays.stream(splitNumStrings)
+                         .mapToInt(Integer::parseInt)
+                         .sum();
         }
     }
 }
