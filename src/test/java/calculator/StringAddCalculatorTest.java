@@ -65,6 +65,14 @@ public class StringAddCalculatorTest {
         assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3;4")).isEqualTo(10);
     }
 
+    @DisplayName("잘못된 사용자 정의 구분자")
+    @Test
+    public void splitAndSum_unexpectedcustomSeparator() {
+        assertThat(StringAddCalculator.splitAndSum("///\n1/2")).isEqualTo(0);
+        assertThat(StringAddCalculator.splitAndSum("//;\n1-2-3")).isEqualTo(0);
+        assertThat(StringAddCalculator.splitAndSum("//---\n1;2;3;4")).isEqualTo(0);
+    }
+
     private static class StringAddCalculator {
         private static final int DEFAULT_VALUE = 0;
         private static final String DEFAULT_SEPARATOR = "[,:]";
