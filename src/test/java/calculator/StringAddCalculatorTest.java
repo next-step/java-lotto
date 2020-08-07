@@ -38,10 +38,18 @@ public class StringAddCalculatorTest {
         assertThat(calculatedResult).isEqualTo(answer);
     }
 
+    @DisplayName("쉼표 또는 콜론 구분자")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2=3","1,2:3=6", "1,2:3:4=10"},delimiter = '=')
+    public void splitAndSum_commaOrColonSeparator(String text, int answer) {
+        int calculatedResult = StringAddCalculator.splitAndSum(text);
+        assertThat(calculatedResult).isEqualTo(answer);
+    }
+
 
     private static class StringAddCalculator {
         public static final int DEFAULT_VALUE = 0;
-        public static final String DEFAULT_SEPARATOR = ",";
+        public static final String DEFAULT_SEPARATOR = "[,:]";
 
         public static int splitAndSum(String text) {
             if(null == text || "".equals(text.trim())){
