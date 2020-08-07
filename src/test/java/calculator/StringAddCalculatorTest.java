@@ -1,7 +1,11 @@
 package calculator;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,12 +30,27 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(1);
     }
 
+    @DisplayName("쉼표 구분자")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2=3","1,2,3=6", "1,2,3,4=10"},delimiter = '=')
+    public void splitAndSum_commaSeparator(String text, int answer) {
+        int calculatedResult = StringAddCalculator.splitAndSum(text);
+        assertThat(calculatedResult).isEqualTo(answer);
+    }
+
+
     private static class StringAddCalculator {
+        public static final int DEFAULT_VALUE = 0;
+        public static final String DEFAULT_SEPARATOR = ",";
+
         public static int splitAndSum(String text) {
             if(null == text || "".equals(text.trim())){
-                return 0;
+                return DEFAULT_VALUE;
             }
-            return Integer.parseInt(text);
+            return Arrays.stream(text.split(DEFAULT_SEPARATOR))
+                         .mapToInt(Integer::parseInt)
+                         .sum()
+                ;
         }
     }
 }
