@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
@@ -46,19 +47,33 @@ public class StringAddCalculatorTest {
         assertThat(calculatedResult).isEqualTo(answer);
     }
 
+    @DisplayName("기본구분자(쉼표,콜론)이 아닌 문자가 들어온 경우 0리턴")
+    @ParameterizedTest
+    @CsvSource(value = {"1-2=0","1a2b3=0", "a13413aaaa=0"},delimiter = '=')
+    public void splitAndSum_unexpectedSeparator(String text, int answer) {
+        int calculatedResult = StringAddCalculator.splitAndSum(text);
+        assertThat(calculatedResult).isEqualTo(answer);
+    }
 
     private static class StringAddCalculator {
-        public static final int DEFAULT_VALUE = 0;
-        public static final String DEFAULT_SEPARATOR = "[,:]";
+        private static final int DEFAULT_VALUE = 0;
+        private static final String DEFAULT_SEPARATOR = "[,:]";
+        private static final String DEFAULT_SEPARATOR_PATTERN = format("\\d+(?:%s\\d+){0,}",DEFAULT_SEPARATOR);
 
         public static int splitAndSum(String text) {
-            if(null == text || "".equals(text.trim())){
+            if (null == text || "".equals(text.trim())) {
                 return DEFAULT_VALUE;
             }
-            return Arrays.stream(text.split(DEFAULT_SEPARATOR))
+            return defaultSplitAndSum(text);
+        }
+        private static int defaultSplitAndSum(String text){
+            if (text.matches(DEFAULT_SEPARATOR_PATTERN)) {
+                return Arrays.stream(text.split(DEFAULT_SEPARATOR))
                          .mapToInt(Integer::parseInt)
                          .sum()
                 ;
+            }
+            return DEFAULT_VALUE;
         }
     }
 }
