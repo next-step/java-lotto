@@ -19,9 +19,19 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @DisplayName("숫자하나")
+    @Test
+    void splitAndSum_singleNum() {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
     private static class StringAddCalculator {
         public static int splitAndSum(String text) {
-            return 0;
+            if(null == text || "".equals(text.trim())){
+                return 0;
+            }
+            return Integer.parseInt(text);
         }
     }
 }
