@@ -1,16 +1,13 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static java.lang.String.format;
+import static calculator.StringAddCalculator.ERROR_MSG_NEGATIVE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringAddCalculatorTest {
     @DisplayName("null 또는 빈문자")
@@ -73,46 +70,10 @@ public class StringAddCalculatorTest {
         assertThat(StringAddCalculator.splitAndSum("//---\n1;2;3;4")).isEqualTo(0);
     }
 
-    private static class StringAddCalculator {
-        private static final int DEFAULT_VALUE = 0;
-        private static final String DEFAULT_SEPARATOR = "[,:]";
-        private static final String DEFAULT_SEPARATOR_PATTERN = format("\\d+(?:%s\\d+)*",DEFAULT_SEPARATOR);
-        private static final String CUSTOM_SEPARATOR_PATTERN = "//(?<customDelimiter>[^/])\n(?<text>\\d+(\\k<customDelimiter>\\d)*)";
-        private static final Pattern customPattern = Pattern.compile(CUSTOM_SEPARATOR_PATTERN);
-
-        public static int splitAndSum(String text) {
-            if (null == text || "".equals(text.trim())) {
-                return DEFAULT_VALUE;
-            }
-            int defaultSplitAndSum = defaultSplitAndSum(text);
-            if (0 == defaultSplitAndSum){
-                return customSplitAndSum(text);
-            }
-            return defaultSplitAndSum;
-        }
-
-        private static int defaultSplitAndSum(String text){
-            if (text.matches(DEFAULT_SEPARATOR_PATTERN)) {
-                String[] defaultSplit = text.split(DEFAULT_SEPARATOR);
-                return numStringsToSum(text.split(DEFAULT_SEPARATOR));
-            }
-            return DEFAULT_VALUE;
-        }
-
-        static int customSplitAndSum(String customText){
-            final Matcher matcher = customPattern.matcher(customText);
-            if (matcher.matches()) {
-                final String customDelimiter = matcher.group("customDelimiter");
-                final String text = matcher.group("text");
-                return numStringsToSum(text.split(customDelimiter));
-            }
-            return DEFAULT_VALUE;
-        }
-
-        private static int numStringsToSum(String[] splitNumStrings) {
-            return Arrays.stream(splitNumStrings)
-                         .mapToInt(Integer::parseInt)
-                         .sum();
-        }
+    @DisplayName("숫자에 음수가 전달될 경우 예외 발생")
+    @Test
+    public void splitAndSum_negative() {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3")).withMessage(ERROR_MSG_NEGATIVE_VALUE);
+        assertThatIllegalArgumentException().isThrownBy(() -> StringAddCalculator.splitAndSum("//;\n1;2;-3;4")).withMessage(ERROR_MSG_NEGATIVE_VALUE);
     }
 }
