@@ -1,5 +1,6 @@
 package camp.nextstep.edu.rebellion.lotto;
 
+import camp.nextstep.edu.rebellion.lotto.domain.ticket.Lotto;
 import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoTicket;
 import camp.nextstep.edu.rebellion.lotto.domain.ticket.LottoTicketGenerator;
 import camp.nextstep.edu.rebellion.lotto.domain.winning.LottoWinningNumber;
@@ -13,10 +14,13 @@ public class LottoGame {
         LottoTicket ticket = LottoTicketGenerator.purchaseGoodLuck(purchaseAmount);
         ResultView.printLottoTicket(ticket);
 
+
+
         String winnerNumbersAtLastWeek = InputView.getWinnerNumbersAtLastWeek();
         int bonusNumber = InputView.getBonusNumber();
 
-        LottoWinningNumber winningNumber = new LottoWinningNumber(winnerNumbersAtLastWeek, bonusNumber);
+        LottoWinningNumber winningNumber = new LottoWinningNumber(
+                new Lotto(winnerNumbersAtLastWeek), bonusNumber);
 
         LottoWinningResult result = ticket.getWinningResult(winningNumber);
         ResultView.printWinningResult(result);

@@ -27,16 +27,9 @@ public enum LottoAward {
     }
 
     public static LottoAward valueOf(int countOfMatch, boolean matchBonus) {
-        if (5 == countOfMatch && matchBonus) {
-            return LottoAward.SECOND;
-        }
-
-        return match(countOfMatch);
-    }
-
-    private static LottoAward match(int countOfMatch) {
         return Arrays.stream(values())
-                .filter(award -> award.getCountOfMatch() == countOfMatch)
+                .filter(award -> award.countOfMatch == countOfMatch)
+                .filter(award-> !award.equals(SECOND) || matchBonus)
                 .findFirst()
                 .orElse(LOSE);
     }

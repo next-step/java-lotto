@@ -21,7 +21,7 @@ public class LottoTicket {
     public LottoWinningResult getWinningResult(LottoWinningNumber winningNumber) {
         return this.lottos
                 .stream()
-                .map(lotto -> lotto.getAwardResult(winningNumber))
+                .map(winningNumber::getAwardResult)
                 .collect(Collectors.collectingAndThen(Collectors.toList(),
                         LottoWinningResult::new));
     }

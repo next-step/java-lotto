@@ -28,4 +28,19 @@ public class LottoNumber {
         }
         return number;
     }
+
+    @Override
+    public int hashCode() {
+        return number.intValue();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (null == obj) {
+            return false;
+        }
+
+        return (obj instanceof LottoNumber &&
+                ((LottoNumber) obj).number == this.number);
+    }
 }
