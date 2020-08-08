@@ -11,8 +11,16 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class StringAddCalculator {
 
+    private static final char DEFAULT_DELIMITER_COLON = ':';
+    private static final char DEFAULT_DELIMITER_COMMA = ',';
+
+    private static final String CUSTOM_DELIMITER_START = "//";
+    private static final String CUSTOM_DELIMITER_END = "\n";
+
     private static final String NEGATIVE_ERROR_MESSAGE = "음수는 사용할 수 없습니다";
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+
+    private static final Pattern CUSTOM_DELIMITER_PATTERN
+            = Pattern.compile(CUSTOM_DELIMITER_START + "(.)" + CUSTOM_DELIMITER_END + "(.*)");
 
     public static int splitAndSum(String text) {
         if (StringUtils.isBlank(text)) {
@@ -20,8 +28,8 @@ public class StringAddCalculator {
         }
 
         List<String> delimiters = new ArrayList<>();
-        delimiters.add(",");
-        delimiters.add(":");
+        delimiters.add(DEFAULT_DELIMITER_COLON + "");
+        delimiters.add(DEFAULT_DELIMITER_COMMA + "");
 
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
