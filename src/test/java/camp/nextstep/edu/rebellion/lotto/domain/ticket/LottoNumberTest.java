@@ -48,7 +48,7 @@ class LottoNumberTest {
         LottoNumber number = new LottoNumber(1);
 
         // when & then
-        assertThat(number.match(input))
+        assertThat(number.equals(new LottoNumber(input)))
                 .isEqualTo(expected);
     }
 }

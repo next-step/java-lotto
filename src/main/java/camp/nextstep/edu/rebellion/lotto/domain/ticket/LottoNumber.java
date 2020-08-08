@@ -14,16 +14,16 @@ public class LottoNumber {
         this(Integer.parseInt(str));
     }
 
-    public boolean match(int number) {
-        return this.number == Integer.valueOf(number);
+    public boolean equals(LottoNumber n) {
+        return this.number == n.number;
     }
 
     public int getNumber() {
-        return number.intValue();
+        return this.number.intValue();
     }
 
     private int checkRange(int number) {
-        if(LottoGameRule.getLottoNumberMin() > number || LottoGameRule.getLottoNumberMax() < number) {
+        if (LottoGameRule.getLottoNumberMin() > number || LottoGameRule.getLottoNumberMax() < number) {
             throw new IllegalArgumentException("당첨번호가 잘못되었습니다 " + number);
         }
         return number;

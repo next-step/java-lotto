@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_NUMBERS = 6;
     private static final int AWARD_2ND_OR_3RD = 5;
     private static final int WIN = 1;
     private static final int LOSE = 0;
@@ -22,7 +21,7 @@ public class Lotto {
     public LottoAward getAwardResult(LottoWinningNumber winningNumber) {
         int matchCount = getMatchCount(winningNumber);
         return LottoAward.valueOf(matchCount,
-                getBonusMatchResult(matchCount, winningNumber));
+                getBonusMatchResult(winningNumber));
     }
 
     public List<LottoNumber> getNumbers() {
@@ -36,11 +35,8 @@ public class Lotto {
                 .sum();
     }
 
-    private boolean getBonusMatchResult(int matchCount, LottoWinningNumber winningNumber) {
-        if (AWARD_2ND_OR_3RD == matchCount) {
-            return this.numbers.stream().anyMatch(winningNumber::containBonus);
-        }
-        return false;
+    private boolean getBonusMatchResult(LottoWinningNumber winningNumber) {
+        return this.numbers.stream().anyMatch(winningNumber::containBonus);
     }
 
     /*

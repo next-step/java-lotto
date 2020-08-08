@@ -28,7 +28,6 @@ public class LottoWinningNumber {
     private List<LottoNumber> generateWinningNumbers(String inputNumbers) {
         return StringUtil.convertList(inputNumbers)
                 .stream()
-                .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
