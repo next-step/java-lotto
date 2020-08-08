@@ -1,6 +1,7 @@
 package camp.nextstep.edu.rebellion.lotto.domain.winning;
 
 import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
+import camp.nextstep.edu.rebellion.lotto.rule.LottoGameRule;
 
 import java.util.List;
 
@@ -25,7 +26,11 @@ public class LottoWinningResult {
                 .sum();
     }
 
-    public double getReturnOfInvestment(int purchaseAmount) {
-        return getTotalPrize() / (double) purchaseAmount;
+    public double getReturnOfInvestment() {
+        return getTotalPrize() / getPurchaseAmount();
+    }
+
+    private double getPurchaseAmount() {
+        return (double) awardResult.size() * LottoGameRule.getLottoPrice();
     }
 }

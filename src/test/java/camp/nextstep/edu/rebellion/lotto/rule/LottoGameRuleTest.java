@@ -11,12 +11,14 @@ class LottoGameRuleTest {
     @Test
     public void ruleTest() {
         // given
+        int lottoCount = 6;
         int lottoPrice = 1000;
         int lottoNumberMin = 1;
         int lottoNumberMax = 45;
 
         // when & then
         assertAll(
+                () -> assertThat(LottoGameRule.getLottoCount()).isEqualTo(lottoCount),
                 () -> assertThat(LottoGameRule.getLottoPrice()).isEqualTo(lottoPrice),
                 () -> assertThat(LottoGameRule.getLottoNumberMin()).isEqualTo(lottoNumberMin),
                 () -> assertThat(LottoGameRule.getLottoNumberMax()).isEqualTo(lottoNumberMax)

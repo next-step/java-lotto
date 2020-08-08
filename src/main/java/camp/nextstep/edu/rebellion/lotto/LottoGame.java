@@ -20,6 +20,5 @@ public class LottoGame {
 
         LottoWinningResult result = ticket.getWinningResult(winningNumber);
         ResultView.printWinningResult(result);
-        ResultView.printReturnOfInvestment(result.getReturnOfInvestment(ticket.getPrice()));
     }
 }

@@ -15,7 +15,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        checkDuplicate(numbers);
+        // checkDuplicate(numbers);
         this.numbers = numbers;
     }
 
@@ -43,6 +43,7 @@ public class Lotto {
         return false;
     }
 
+    /*
     private void checkDuplicate(List<LottoNumber> numbers) {
         if (numbers
                 .stream()
@@ -52,4 +53,5 @@ public class Lotto {
            throw new IllegalArgumentException("중복된 번호가 있습니다 로또 번호는 6개여야 합니다");
         }
     }
+     */
 }

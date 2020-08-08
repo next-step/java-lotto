@@ -44,11 +44,8 @@ public class ResultView {
         StringBuilder output = new StringBuilder();
         output.append(makeAwardTitle());
         output.append(makeAwardResult(result));
+        output.append(makeReturnOfInvestment(result.getReturnOfInvestment()));
         System.out.println(output.toString());
-    }
-
-    public static void printReturnOfInvestment(double roi) {
-        System.out.println(String.format(LOTTO_ROI_FORMAT, roi));
     }
 
     private static String makeAwardTitle() {
@@ -56,6 +53,10 @@ public class ResultView {
         builder.append("당첨 통계").append(ENTER);
         builder.append("----------").append(ENTER);
         return builder.toString();
+    }
+
+    private static String makeReturnOfInvestment(double roi) {
+        return String.format(LOTTO_ROI_FORMAT, roi);
     }
 
     private static String makeAwardResult(LottoWinningResult result) {

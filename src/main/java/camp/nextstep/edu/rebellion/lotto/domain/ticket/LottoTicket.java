@@ -9,19 +9,13 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final List<Lotto> lottos;
-    private final int price;
 
-    public LottoTicket(List<Lotto> lottos, int price) {
+    public LottoTicket(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.price = price;
     }
 
     public List<Lotto> getLottoNumbers() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public LottoWinningResult getWinningResult(LottoWinningNumber winningNumber) {

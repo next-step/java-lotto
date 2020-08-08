@@ -24,6 +24,4 @@ class LottoTicketGeneratorTest {
         // then
         assertThat(result.getLottoNumbers()).hasSize(expected);
     }
-
-
 }

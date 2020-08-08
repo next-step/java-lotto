@@ -13,6 +13,10 @@ public class LottoGameRule {
 
     private LottoGameRule() {}
 
+    public static int getLottoCount() {
+        return getRules("lotto.count");
+    }
+
     public static int getLottoPrice() {
         return getRules("lotto.price");
     }

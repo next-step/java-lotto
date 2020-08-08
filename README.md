@@ -254,7 +254,7 @@ Arrays.stream(values())
 * [ ] [fix02][Lotto.java] 중복을 허용하지 않는 구조체로 개선해보기 
 * [ ] [fix03][Lotto.java] if (AWARD_2ND_OR_3RD == matchCount 조건문 재 검토 해보기
 * [ ] [fix04][Lotto.java] getter 는 최대한 없애보기 (출력용도제외)
-* [ ] [fix05][LottoNumber.java] getter 는 최대한 없애보기 (출력용도제외)
+* [x] [fix05][LottoNumber.java] getter 는 최대한 없애보기 (출력용도제외)
 * 값 객체의 경우 객체를 재사용하기 좋음
 * 템플릿 메서드 패턴의 장점 중 하나인 객체 재사용을 적용해 볼 것
 <pre><code>
@@ -266,11 +266,11 @@ public static Integer valueOf(int i) {
 </code></pre>
 * 위 코드인 Integer.valueOf구현을 보면 특정 값은 Cache하여 사용하는 것을 볼 수 있음
 * 플라이웨이트 패턴 키워드로 검색해 볼 것
-* [ ] [fix06][LottoNumber.java] 게임과 관련된 변수를 한군데서 관리하는 집합 만들어 보기
-* [ ] [fix07][LottoTicketGenerator.java] LottoNumber 로 Pool 만들어 보기
+* [x] [fix06][LottoNumber.java] 게임과 관련된 변수를 한군데서 관리하는 집합 만들어 보기
+* [x] [fix07][LottoTicketGenerator.java] LottoNumber 로 Pool 만들어 보기
 * [ ] [fix08][LottoTicketGenerator.java] 일급 컬렉션 만 갖도록 해보기 (price를 가진게 아닌)
 * [ ] [fix09][LottoTicketGenerator.java] numbers를 그냥 Lotto로 치환하면 어떤 장점이 있을까 생각해보기
-* [ ] [fix10][LottoNumber.java] LottoNumber가 String도 받을 수 있도록 수정하기
+* [x] [fix10][LottoNumber.java] LottoNumber가 String도 받을 수 있도록 수정하기
 
 # 4단계 - 로또(수동)
 ### 기능 요구사항
