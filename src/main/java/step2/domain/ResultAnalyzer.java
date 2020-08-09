@@ -48,10 +48,10 @@ public class ResultAnalyzer {
     public static final double getRateReturn(final int[] winningNumbers, final List<Ticket> tickets, int spending) {
         int prizeMoney = 0;
 
-        prizeMoney += getPrizeMoney(LottoRanking.FIRST, winningNumbers, tickets);
-        prizeMoney += getPrizeMoney(LottoRanking.SECOND, winningNumbers, tickets);
-        prizeMoney += getPrizeMoney(LottoRanking.THIRD, winningNumbers, tickets);
-        prizeMoney += getPrizeMoney(LottoRanking.FOURTH, winningNumbers, tickets);
+        // 등수별 합계
+        for (LottoRanking ranking : LottoRanking.values()) {
+            prizeMoney += getPrizeMoney(ranking, winningNumbers, tickets);
+        }
 
         return Math.ceil((prizeMoney / spending * 100) / 100.0);
     }
