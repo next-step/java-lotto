@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_COUNT = LottoGameRule.getLottoCount();
     private static final int WIN = 1;
     private static final int LOSE = 0;
 
@@ -48,14 +49,14 @@ public class Lotto {
     }
 
     private void checkCount(int size) {
-        if (LottoGameRule.getLottoCount() != size) {
+        if (LOTTO_COUNT != size) {
             throw new IllegalArgumentException("로또 번호 개수가 6개가 아닙니다");
         }
     }
 
     private void checkDuplicate (List<LottoNumber> numbers) {
         final Set<LottoNumber> set = new HashSet<>(numbers);
-        if (LottoGameRule.getLottoCount() != set.size()) {
+        if (LOTTO_COUNT != set.size()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다");
         }
     }
