@@ -12,15 +12,17 @@ class LottoTicketGeneratorTest {
     @DisplayName("입력한 금액에 맞게 로또가 생성 되는지 확인")
     @ParameterizedTest
     @CsvSource(value = {
-            "0:0",
             "1000:1",
             "9500:9",
             "10000:10",
             "10001:10"
         }, delimiter = ':')
     public void purchaseGookLuckTest(int amount, int expected) {
+        //given
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount, 0);
+
         // when
-        LottoTicket result = LottoTicketGenerator.purchaseGoodLuck(amount, Collections.emptyList());
+        LottoTicket result = LottoTicketGenerator.purchaseGoodLuck(purchaseAmount, Collections.emptyList());
 
         // then
         assertThat(result.getLottos()).hasSize(expected);

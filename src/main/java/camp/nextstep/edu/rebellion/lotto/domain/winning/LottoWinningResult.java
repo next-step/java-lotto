@@ -25,12 +25,4 @@ public class LottoWinningResult {
                 .mapToLong(a -> a.getPrize())
                 .sum();
     }
-
-    public double getReturnOfInvestment() {
-        return getTotalPrize() / getPurchaseAmount();
-    }
-
-    private double getPurchaseAmount() {
-        return (double) awardResult.size() * LottoGameRule.getLottoPrice();
-    }
 }

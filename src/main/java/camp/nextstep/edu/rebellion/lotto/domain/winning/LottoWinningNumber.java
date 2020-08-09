@@ -13,6 +13,10 @@ public class LottoWinningNumber {
         this.bonus = new LottoNumber(bonusNumber);
     }
 
+    public LottoWinningNumber(String winningLottoNumbers, int bonusNumber) {
+        this(new Lotto(winningLottoNumbers), bonusNumber);
+    }
+
     public LottoAward getAwardResult(Lotto lotto) {
         int matchCount = lotto.getMatchCount(winningLotto);
         return LottoAward.valueOf(matchCount, lotto.contain(bonus));

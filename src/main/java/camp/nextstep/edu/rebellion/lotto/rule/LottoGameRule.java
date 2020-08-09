@@ -21,6 +21,10 @@ public class LottoGameRule {
         return getRules("lotto.price");
     }
 
+    public static int getLottoPurchaseLimit() {
+        return getRules("lotto.purchase.limit");
+    }
+
     public static int getLottoNumberMin() {
         return getRules("lotto.number.min");
     }

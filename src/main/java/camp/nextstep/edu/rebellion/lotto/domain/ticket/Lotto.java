@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
     private static final int WIN = 1;
@@ -18,7 +17,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) {
         checkCount(numbers.size());
-        checkDuplicate(numbers.stream());
+        checkDuplicate(numbers);
         this.numbers = numbers;
     }
 
@@ -49,14 +48,14 @@ public class Lotto {
     }
 
     private void checkCount(int size) {
-        if(LottoGameRule.getLottoCount() != size) {
+        if (LottoGameRule.getLottoCount() != size) {
             throw new IllegalArgumentException("로또 번호 개수가 6개가 아닙니다");
         }
     }
 
-    private void checkDuplicate (final Stream<LottoNumber> stream) {
-        final Set<LottoNumber> seen = new HashSet<>();
-        if (!stream.allMatch(seen::add)) {
+    private void checkDuplicate (List<LottoNumber> numbers) {
+        final Set<LottoNumber> set = new HashSet<>(numbers);
+        if (LottoGameRule.getLottoCount() != set.size()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다");
         }
     }
