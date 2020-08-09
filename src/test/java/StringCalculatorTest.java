@@ -34,7 +34,7 @@ class StringCalculatorTest {
     @CsvSource(value = {"1,2,3=6", "2,3,4=9"}, delimiter = '=')
     @DisplayName("쉼표가 구분자일 때 덧셈 결과 값을 반환한다.")
     void plusTest1(String input, int expected) {
-        int result = calculator.calculate(input, ",");
+        int result = calculator.calculateDefaultDelimiter(input);
 
         assertThat(result).isEqualTo(expected);
     }
@@ -43,7 +43,7 @@ class StringCalculatorTest {
     @CsvSource(value = {"1:2:3=6", "2:3:4=9"}, delimiter = '=')
     @DisplayName("콜론이 구분자일 때 덧셈 결과 값을 반환한다.")
     void plusTest2(String input, int expected) {
-        int result = calculator.calculate(input, ":");
+        int result = calculator.calculateDefaultDelimiter(input);
 
         assertThat(result).isEqualTo(expected);
     }

@@ -23,4 +23,14 @@ public class StringCalculator {
         }
         return Collections.emptyList();
     }
+
+    public int calculateDefaultDelimiter(String input) {
+        if (input == null || input.isEmpty()) return 0;
+
+        String[] split = input.split("[,:]");
+
+        return Arrays.stream(split)
+                .map(Integer::parseInt)
+                .reduce(Integer::sum).orElseThrow(RuntimeException::new);
+    }
 }
