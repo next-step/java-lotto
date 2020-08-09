@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int calculate(String input, String delimiter) {
+        if (input == null || input.isEmpty()) return 0;
+
         delimiter = String.format("\\%s", delimiter);
         String[] split = input.split(delimiter);
 
