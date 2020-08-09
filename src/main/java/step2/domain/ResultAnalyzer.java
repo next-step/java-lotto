@@ -34,7 +34,7 @@ public class ResultAnalyzer {
      */
     private static final int getTotalPrizeMoney(final int[] winningNumbers, final List<Ticket> tickets) {
         return tickets.stream()
-                .mapToInt(ticket -> ticket.getPrizeMoney(winningNumbers))
+                .mapToInt(ticket -> ticket.prizeMoney(winningNumbers))
                 .sum();
     }
 

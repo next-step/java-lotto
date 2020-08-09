@@ -28,6 +28,6 @@ class TicketTest {
         Ticket matchTicket = new Ticket();
         int[] winningNumber = matchTicket.getNumbers();
 
-        assertThat(matchTicket.getPrizeMoney(winningNumber)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
+        assertThat(matchTicket.prizeMoney(winningNumber)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
     }
 }

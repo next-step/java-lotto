@@ -1,7 +1,6 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.LottoRanking;
 import step2.domain.ResultAnalyzer;
 import step2.domain.Ticket;
 
@@ -31,7 +30,7 @@ class ResultAnalyzerTest {
         int[] winningNumber = matchTicket.getNumbers();
 
         assertThat(
-                ResultAnalyzer.getRateReturn(winningNumber, Arrays.asList(matchTicket), LottoRanking.FIRST.getPrizeMoney())
+                ResultAnalyzer.getRateReturn(winningNumber, Arrays.asList(matchTicket), matchTicket.prizeMoney(winningNumber))
         ).isEqualTo(1.0);
     }
 }

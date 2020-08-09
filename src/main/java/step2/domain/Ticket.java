@@ -124,7 +124,7 @@ public class Ticket {
      * @param winningNumber
      * @return
      */
-    public int getPrizeMoney(final int[] winningNumber) {
+    public int prizeMoney(final int[] winningNumber) {
         final long matchCount = matchCount(winningNumber);
 
         LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
