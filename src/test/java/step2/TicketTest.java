@@ -12,4 +12,12 @@ class TicketTest {
 
         assertThat(ticket.getNumbers().length).isEqualTo(6);
     }
+
+    @Test
+    void getHitCount() {
+        Ticket ticket = new Ticket();
+        int[] numbers = ticket.getNumbers();
+
+        assertThat(ticket.getHitCount(numbers)).isEqualTo(numbers.length);
+    }
 }

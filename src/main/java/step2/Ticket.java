@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Lotto
@@ -29,7 +30,7 @@ public class Ticket {
      * @return
      */
     public int[] getNumbers() {
-        return numbers;
+        return Arrays.copyOf(numbers, NUMBER_COUNT);
     }
 
     /**
@@ -102,6 +103,19 @@ public class Ticket {
                 .filter(value -> value == number)
                 .findFirst()
                 .isPresent();
+    }
+
+    /**
+     * 숫자 배열과 비교하여 일치하는 숫자의 갯수를 반환한다.
+     *
+     * @param target
+     * @return
+     */
+    public long getHitCount(final int[] target) {
+        return Arrays.stream(this.numbers)
+                .boxed()
+                .filter(Arrays.stream(target).boxed().collect(Collectors.toList())::contains)
+                .count();
     }
 
     @Override
