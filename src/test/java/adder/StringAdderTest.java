@@ -1,9 +1,9 @@
 package adder;
 
+import common.StringResources;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringAdderTest {
 
@@ -42,7 +42,17 @@ public class StringAdderTest {
 
     @Test
     public void splitAndSum_negative() throws Exception {
-        assertThatThrownBy(() -> StringAdder.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> StringAdder.splitAndSum("-1,2,3"))
+                .withMessage(StringResources.ERR_NO_NEGATIVE);
+    }
+
+    @Test
+    public void splitAndSum_another_character() throws Exception {
+
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> StringAdder.splitAndSum("o,2,3"))
+                .withMessage(StringResources.ERR_ONLY_NUMBER);
     }
 }

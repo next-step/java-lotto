@@ -1,11 +1,10 @@
 package adder;
 
+import common.StringResources;
+
 import java.util.Arrays;
 
 public class StringAdder {
-
-    public static final String ERR_NO_NEGATIVE = "음수를 넣지 마세요";
-    public static final String ERR_ONLY_NUMBER = "숫자만 넣어주세요.";
 
     public static final String LINE_FEED = "\n";
     public static final String CUSTOM_SEPARATOR_STARTER = "//";
@@ -57,13 +56,13 @@ public class StringAdder {
             verifyNegative(num);
             return num;
         } catch (NumberFormatException e) {
-            throw new RuntimeException(ERR_ONLY_NUMBER);
+            throw new RuntimeException(StringResources.ERR_ONLY_NUMBER);
         }
     }
 
     private static void verifyNegative(int num) {
         if (num < 0) {
-            throw new RuntimeException(ERR_NO_NEGATIVE);
+            throw new RuntimeException(StringResources.ERR_NO_NEGATIVE);
         }
     }
 }
