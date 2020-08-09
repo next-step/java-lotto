@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.domain.Ticket;
+import step2.domain.TicketSellingMachine;
 
 import java.util.List;
 

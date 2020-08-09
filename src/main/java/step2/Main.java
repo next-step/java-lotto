@@ -1,5 +1,12 @@
 package step2;
 
+import step2.domain.LottoRanking;
+import step2.domain.ResultAnalyzer;
+import step2.domain.Ticket;
+import step2.domain.TicketSellingMachine;
+import step2.lib.PrintMessage;
+import step2.view.InputScanner;
+
 import java.util.List;
 
 public class Main {

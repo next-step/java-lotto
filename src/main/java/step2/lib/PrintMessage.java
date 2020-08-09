@@ -1,4 +1,4 @@
-package step2;
+package step2.lib;
 
 /**
  * 출력에 관한 Util 클래스
@@ -9,6 +9,7 @@ public class PrintMessage {
 
     /**
      * 메세지 출력
+     *
      * @param message
      */
     public static void print(String message) {
@@ -17,6 +18,7 @@ public class PrintMessage {
 
     /**
      * 메세지 출력
+     *
      * @param format
      * @param message
      */
@@ -33,6 +35,7 @@ public class PrintMessage {
 
     /**
      * 메세지 출력
+     *
      * @param message
      */
     public static void println(String message) {

@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +17,7 @@ public class TicketSellingMachine {
     /**
      * 금액을 기준으로 티켓을 발권한다.
      * 티켓 한장의 가격은 1000원이다.
+     *
      * @param money
      * @return
      */

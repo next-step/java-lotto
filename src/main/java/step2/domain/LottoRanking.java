@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 /**
  * 당첨 관련된 상수 정의 Enum
@@ -31,6 +31,4 @@ public enum LottoRanking {
     public int getHitCount() {
         return hitCount;
     }
-
-
 }

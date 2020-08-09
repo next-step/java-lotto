@@ -1,6 +1,9 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoRanking;
+import step2.domain.ResultAnalyzer;
+import step2.domain.Ticket;
 
 import java.util.Arrays;
 

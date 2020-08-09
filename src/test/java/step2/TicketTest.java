@@ -1,6 +1,7 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.Ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
