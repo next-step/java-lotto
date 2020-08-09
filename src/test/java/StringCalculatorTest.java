@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+import java.util.function.ToIntFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,9 +44,22 @@ class StringCalculatorTest {
     @CsvSource(value = {"//;\\n1;2;3=;", "//^\\n1^2^3=^"}, delimiter = '=')
     @DisplayName("커스텀 구분자를 추출한다")
     void getDelimiter(String input, String expected) {
-        String delimiter = calculator.getDelimiter(input).orElse(",");
+        List<String> delimiterAndInput = calculator.getDelimiterAndInput(input);
 
-        assertThat(delimiter).isEqualTo(expected);
+        assertThat(delimiterAndInput.get(0)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"//;\\n1;2;3=6", "//^\\n1^2^3=6"}, delimiter = '=')
+    @DisplayName("커스텀 구분자가 있으면 추출해 덧셈 결과 값을 반환한다.")
+    void plusTest3(String inputStr, int expected) {
+        List<String> delimiterAndInput = calculator.getDelimiterAndInput(inputStr);
+
+        String delimiter = delimiterAndInput.get(0);
+        String input = delimiterAndInput.get(1);
+
+        int actual = calculator.calculate(input, delimiter);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }
