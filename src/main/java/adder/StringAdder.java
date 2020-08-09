@@ -4,6 +4,14 @@ import java.util.Arrays;
 
 public class StringAdder {
 
+    public static final String ERR_NO_NEGATIVE = "음수를 넣지 마세요";
+    public static final String ERR_ONLY_NUMBER = "숫자만 넣어주세요.";
+
+    public static final String LINE_FEED = "\n";
+    public static final String CUSTOM_SEPARATOR_STARTER = "//";
+    public static final String DEFAULT_SEPARATOR = "[,:";
+    public static final String SEPARATOR_CLOSER = "]";
+
     public static int splitAndSum(String numberStr) {
 
         if (isEmptyNumbers(numberStr)) {
@@ -19,19 +27,19 @@ public class StringAdder {
 
     private static String makeSeparator(String numberStr) {
 
-        StringBuilder separator = new StringBuilder("[,:");
+        StringBuilder separator = new StringBuilder(DEFAULT_SEPARATOR);
 
-        if (numberStr.startsWith("//")) {
-            separator.append(numberStr, 2, numberStr.indexOf("\n"));
+        if (numberStr.startsWith(CUSTOM_SEPARATOR_STARTER)) {
+            separator.append(numberStr, 2, numberStr.indexOf(LINE_FEED));
         }
 
-        return separator.append("]")
+        return separator.append(SEPARATOR_CLOSER)
                 .toString();
     }
 
     private static String[] split(String numberStr, String separator) {
-        if (numberStr.startsWith("//")) {
-            numberStr = numberStr.substring(numberStr.indexOf("\n") + 1);
+        if (numberStr.startsWith(CUSTOM_SEPARATOR_STARTER)) {
+            numberStr = numberStr.substring(numberStr.indexOf(LINE_FEED) + 1);
         }
         return numberStr.split(separator);
     }
@@ -49,13 +57,13 @@ public class StringAdder {
             verifyNegative(num);
             return num;
         } catch (NumberFormatException e) {
-            throw new RuntimeException("숫자만 넣어주세요.");
+            throw new RuntimeException(ERR_ONLY_NUMBER);
         }
     }
 
     private static void verifyNegative(int num) {
         if (num < 0) {
-            throw new RuntimeException("음수를 넣지 마세요");
+            throw new RuntimeException(ERR_NO_NEGATIVE);
         }
     }
 }
