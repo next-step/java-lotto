@@ -243,7 +243,7 @@ public enum Rank {
 </code></pre>
 
 ### Step3 리뷰사항
-* [ ] [fix01][LottoAward.java] 로직 개선하기
+* [x] [fix01][LottoAward.java] 로직 개선하기
 <pre><code>
 Arrays.stream(values())
             .filter(award-> rank.countOfMatch== countOfMatch)
@@ -251,7 +251,7 @@ Arrays.stream(values())
             .findFirst()
             .orElse(LOSE);
 </code></pre>
-* [ ] [fix02][Lotto.java] 중복을 허용하지 않는 구조체로 개선해보기 
+* [x] [fix02][Lotto.java] 중복을 허용하지 않는 구조체로 개선해보기 
 * [x] [fix03][Lotto.java] if (AWARD_2ND_OR_3RD == matchCount 조건문 재 검토 해보기
 * [x] [fix04][Lotto.java] getter 는 최대한 없애보기 (출력용도제외)
 * [x] [fix05][LottoNumber.java] getter 는 최대한 없애보기 (출력용도제외)
@@ -269,7 +269,7 @@ public static Integer valueOf(int i) {
 * [x] [fix06][LottoNumber.java] 게임과 관련된 변수를 한군데서 관리하는 집합 만들어 보기
 * [x] [fix07][LottoTicketGenerator.java] LottoNumber 로 Pool 만들어 보기
 * [x] [fix08][LottoTicketGenerator.java] 일급 컬렉션 만 갖도록 해보기 (price를 가진게 아닌)
-* [ ] [fix09][LottoTicketGenerator.java] numbers를 그냥 Lotto로 치환하면 어떤 장점이 있을까 생각해보기
+* [x] [fix09][LottoTicketGenerator.java] numbers를 그냥 Lotto로 치환하면 어떤 장점이 있을까 생각해보기
 * [x] [fix10][LottoNumber.java] LottoNumber가 String도 받을 수 있도록 수정하기
 
 # 4단계 - 로또(수동)

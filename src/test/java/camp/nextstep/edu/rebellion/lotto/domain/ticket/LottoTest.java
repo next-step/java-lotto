@@ -1,7 +1,5 @@
 package camp.nextstep.edu.rebellion.lotto.domain.ticket;
 
-import camp.nextstep.edu.rebellion.lotto.domain.LottoAward;
-import camp.nextstep.edu.rebellion.lotto.domain.winning.LottoWinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

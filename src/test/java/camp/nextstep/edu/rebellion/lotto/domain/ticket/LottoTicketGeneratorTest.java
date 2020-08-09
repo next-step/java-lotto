@@ -1,9 +1,10 @@
 package camp.nextstep.edu.rebellion.lotto.domain.ticket;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,9 +20,9 @@ class LottoTicketGeneratorTest {
         }, delimiter = ':')
     public void purchaseGookLuckTest(int amount, int expected) {
         // when
-        LottoTicket result = LottoTicketGenerator.purchaseGoodLuck(amount);
+        LottoTicket result = LottoTicketGenerator.purchaseGoodLuck(amount, Collections.emptyList());
 
         // then
-        assertThat(result.getLottoNumbers()).hasSize(expected);
+        assertThat(result.getLottos()).hasSize(expected);
     }
 }

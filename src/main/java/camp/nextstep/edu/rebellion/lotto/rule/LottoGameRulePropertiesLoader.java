@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.Properties;
 
 public class LottoGameRulePropertiesLoader {
-
     private static final String RESOURCE = "lotto-game-rule.properties";
 
     private LottoGameRulePropertiesLoader() {}

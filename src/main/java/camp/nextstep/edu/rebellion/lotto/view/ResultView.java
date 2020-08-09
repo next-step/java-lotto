@@ -23,7 +23,7 @@ public class ResultView {
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
         StringBuilder output = new StringBuilder();
-        lottoTicket.getLottoNumbers()
+        lottoTicket.getLottos()
                 .forEach(lotto -> output
                         .append(LOTTO_LEFT_BRACE)
                         .append(makePrintingLotto(lotto))
