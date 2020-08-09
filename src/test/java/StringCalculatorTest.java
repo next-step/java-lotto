@@ -10,8 +10,7 @@ import java.util.function.ToIntFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
@@ -62,4 +61,13 @@ class StringCalculatorTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1;2;3=6", "1;h;3"})
+    void exceptionTest(String input) {
+
+        assertThatThrownBy(() -> calculator.calculate(input, ";"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
 }
