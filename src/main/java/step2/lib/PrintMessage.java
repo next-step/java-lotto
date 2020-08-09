@@ -5,8 +5,7 @@ package step2.lib;
  */
 public class PrintMessage {
 
-    private PrintMessage() {
-    }
+    private PrintMessage() {}
 
     /**
      * 메세지 출력
