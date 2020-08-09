@@ -5,7 +5,8 @@ package step2.lib;
  */
 public class PrintMessage {
 
-    private PrintMessage() {}
+    private PrintMessage() {
+    }
 
     /**
      * 메세지 출력
@@ -39,6 +40,15 @@ public class PrintMessage {
      * @param message
      */
     public static void println(String message) {
+        System.out.println(message);
+    }
+
+    /**
+     * 메세지 출력
+     *
+     * @param message
+     */
+    public static void println(Object message) {
         System.out.println(message);
     }
 }

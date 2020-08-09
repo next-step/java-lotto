@@ -34,10 +34,7 @@ public class InputScanner {
     public static int[] getInts(String message) {
         PrintMessage.println(message);
         return Arrays.stream(SCANNER.next().split(","))
-                .map(value -> {
-                    System.out.println(value);
-                    return Integer.parseInt(value.trim());
-                })
+                .map(value -> Integer.parseInt(value.trim()))
                 .mapToInt(Integer::intValue)
                 .toArray();
     }

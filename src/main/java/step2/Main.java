@@ -18,7 +18,7 @@ public class Main {
         PrintMessage.println();
 
         tickets.stream()
-                .forEach(ticket -> System.out.println(ticket));
+                .forEach(ticket -> PrintMessage.println(ticket));
 
         PrintMessage.println();
         int[] winningNumber = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.");
