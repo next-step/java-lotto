@@ -6,11 +6,6 @@ import java.util.Arrays;
 
 public class StringAdder {
 
-    public static final String LINE_FEED = "\n";
-    public static final String CUSTOM_SEPARATOR_STARTER = "//";
-    public static final String DEFAULT_SEPARATOR = "[,:";
-    public static final String SEPARATOR_CLOSER = "]";
-
     public static int splitAndSum(String numberStr) {
 
         if (isEmptyNumbers(numberStr)) {
@@ -26,19 +21,19 @@ public class StringAdder {
 
     private static String makeSeparator(String numberStr) {
 
-        StringBuilder separator = new StringBuilder(DEFAULT_SEPARATOR);
+        StringBuilder separator = new StringBuilder(StringResources.DEFAULT_SEPARATOR);
 
-        if (numberStr.startsWith(CUSTOM_SEPARATOR_STARTER)) {
-            separator.append(numberStr, 2, numberStr.indexOf(LINE_FEED));
+        if (numberStr.startsWith(StringResources.CUSTOM_SEPARATOR_STARTER)) {
+            separator.append(numberStr, 2, numberStr.indexOf(StringResources.LINE_FEED));
         }
 
-        return separator.append(SEPARATOR_CLOSER)
+        return separator.append(StringResources.SEPARATOR_CLOSER)
                 .toString();
     }
 
     private static String[] split(String numberStr, String separator) {
-        if (numberStr.startsWith(CUSTOM_SEPARATOR_STARTER)) {
-            numberStr = numberStr.substring(numberStr.indexOf(LINE_FEED) + 1);
+        if (numberStr.startsWith(StringResources.CUSTOM_SEPARATOR_STARTER)) {
+            numberStr = numberStr.substring(numberStr.indexOf(StringResources.LINE_FEED) + 1);
         }
         return numberStr.split(separator);
     }
