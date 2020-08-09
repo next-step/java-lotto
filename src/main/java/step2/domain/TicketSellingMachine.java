@@ -14,6 +14,8 @@ public class TicketSellingMachine {
      */
     private static final int TICKET_PRICE = 1000;
 
+    private TicketSellingMachine() {}
+
     /**
      * 금액을 기준으로 티켓을 발권한다.
      * 티켓 한장의 가격은 1000원이다.

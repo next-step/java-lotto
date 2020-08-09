@@ -11,11 +11,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        TicketSellingMachine ticketSellingMachine = new TicketSellingMachine();
-
         int spendingMoney = InputScanner.getInt("구입금액을 입력해 주세요.");
 
-        List<Ticket> tickets = ticketSellingMachine.buy(spendingMoney);
+        List<Ticket> tickets = TicketSellingMachine.buy(spendingMoney);
         PrintMessage.print("%s개를 구매했습니다.\n", tickets.size());
         PrintMessage.println();
 
