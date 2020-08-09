@@ -24,7 +24,7 @@ public class Lotto {
 
     public int getCountOfMatch(Lotto lotto) {
         long countOfMatch = lottoNumbers.stream()
-                .filter(lottoNumber -> lotto.contain(lottoNumber.getNumber()))
+                .filter(lotto::contain)
                 .count();
         return Math.toIntExact(countOfMatch);
     }
@@ -35,9 +35,8 @@ public class Lotto {
                 .toArray();
     }
 
-    public boolean contain(int number) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.getNumber() == number);
+    public boolean contain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public static Lotto generateAuto() {

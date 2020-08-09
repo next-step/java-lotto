@@ -25,7 +25,7 @@ public class LottoResultView {
         System.out.println("---------");
         for (LottoRanking lottoRanking : LottoRanking.values()) {
             int winningCount = winningResultMap.getOrDefault(lottoRanking, 0);
-            int matchCount = lottoRanking.getMatchCount();
+            int matchCount = lottoRanking.getCountOfMatch();
             int prize = lottoRanking.getPrize();
             System.out.println(
                     MessageFormat.format("{0}개 일치 ({1}원)- {2}개", matchCount, prize, winningCount));

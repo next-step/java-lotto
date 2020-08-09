@@ -19,10 +19,7 @@ public class LottoMain {
         String winningNumbers = LottoInputView.lastWeekWinningNumber();
         // 입력 종료
 
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.setWinningLotto(Lotto.fromString(winningNumbers));
-
-        LottoResult lottoResult = lottoGame.match(lottos);
+        LottoResult lottoResult = LottoGame.match(Lotto.fromString(winningNumbers), lottos);
 
         // 결과 출력 시작
         LottoResultView.printWinningResult(lottoResult.getRankingMap());

@@ -14,14 +14,13 @@ public class LottoGameTest {
     @DisplayName("특정 개수 매칭 결과 확인")
     void match() {
         // given
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.setWinningLotto(Lotto.fromString("16,22,33,41,45,46"));
+        Lotto winningLotto = Lotto.fromString("16,22,33,41,45,46");
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(Lotto.fromString("16,22,33,40,44,47"));
         lottos.add(Lotto.fromString("16,22,33,39,44,47"));
 
         // when
-        LottoResult lottoResult = lottoGame.match(lottos);
+        LottoResult lottoResult = LottoGame.match(winningLotto, lottos);
 
         // then
         assertThat(lottoResult.getTotalPrize()).isEqualTo(10000);
