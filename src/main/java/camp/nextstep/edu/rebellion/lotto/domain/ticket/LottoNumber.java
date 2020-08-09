@@ -24,7 +24,7 @@ public class LottoNumber {
 
     private int checkRange(int number) {
         if (LottoGameRule.getLottoNumberMin() > number || LottoGameRule.getLottoNumberMax() < number) {
-            throw new IllegalArgumentException("당첨번호가 잘못되었습니다 " + number);
+            throw new IllegalArgumentException("로또 번호가 잘못되었습니다 " + number);
         }
         return number;
     }
