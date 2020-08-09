@@ -47,6 +47,6 @@ public class ResultAnalyzer {
      * @return
      */
     public static final double getRateReturn(final int[] winningNumbers, final List<Ticket> tickets, int spending) {
-        return Math.ceil((getTotalPrizeMoney(winningNumbers, tickets) / spending * 100) / 100.0);
+        return getTotalPrizeMoney(winningNumbers, tickets) / (spending * 1.0);
     }
 }
