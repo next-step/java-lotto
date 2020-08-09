@@ -39,17 +39,19 @@ public class StringAdder {
     private static int sum(String[] numbers) {
 
         return Arrays.stream(numbers)
-                .mapToInt(number -> {
-                    try {
-                        int num = Integer.parseInt(number);
-                        if (num < 0) {
-                            throw new RuntimeException("음수를 넣지 마세요");
-                        }
-                        return num;
-                    } catch (NumberFormatException e) {
-                        throw new RuntimeException("숫자만 넣어주세요.");
-                    }
-                })
+                .mapToInt(StringAdder::toInt)
                 .sum();
+    }
+
+    private static int toInt(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new RuntimeException("음수를 넣지 마세요");
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자만 넣어주세요.");
+        }
     }
 }
