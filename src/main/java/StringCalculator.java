@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    private final Pattern p = Pattern.compile("//(.)\\\\n(.*)");
+
     public int calculate(String input, String delimiter) {
         if (input == null || input.isEmpty()) return 0;
 
@@ -17,7 +19,7 @@ public class StringCalculator {
     }
 
     public List<String> getDelimiterAndInput(String str) {
-        Matcher m = Pattern.compile("//(.)\\\\n(.*)").matcher(str);
+        Matcher m = p.matcher(str);
         if (m.find()) {
             return Arrays.asList(m.group(1), m.group(2));
         }
