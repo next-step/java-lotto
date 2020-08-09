@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Lotto
+ * Lotto Ticket
  */
 public class Ticket {
     private static final Random DICE = new Random();
@@ -108,14 +108,34 @@ public class Ticket {
     /**
      * 숫자 배열과 비교하여 일치하는 숫자의 갯수를 반환한다.
      *
-     * @param target
+     * @param compareObj
      * @return
      */
-    public long getHitCount(final int[] target) {
+    public long getHitCount(final int[] compareObj) {
         return Arrays.stream(this.numbers)
                 .boxed()
-                .filter(Arrays.stream(target).boxed().collect(Collectors.toList())::contains)
+                .filter(Arrays.stream(compareObj).boxed().collect(Collectors.toList())::contains)
                 .count();
+    }
+
+    /**
+     * 당첨금을 반환한다.
+     *
+     * @param winningNumber
+     * @return
+     */
+    public int getPrizeMoney(final int[] winningNumber) {
+        final long hitCount = getHitCount(winningNumber);
+
+        LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
+                .filter(ranking -> ranking.getHitCount() == hitCount)
+                .findFirst()
+                .orElse(null);
+
+        if (lottoRanking == null)
+            return 0;
+
+        return lottoRanking.getPrizeMoney();
     }
 
     @Override

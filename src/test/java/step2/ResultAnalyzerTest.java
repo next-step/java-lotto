@@ -26,16 +26,6 @@ class ResultAnalyzerTest {
     }
 
     @Test
-    void getPrizeMoney() {
-        Ticket matchTicket = new Ticket();
-        int[] winningNumber = matchTicket.getNumbers();
-
-        assertThat(
-                ResultAnalyzer.getPrizeMoney(LottoRanking.FIRST, winningNumber, Arrays.asList(matchTicket))
-        ).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
-    }
-
-    @Test
     void getRateReturn() {
         Ticket matchTicket = new Ticket();
         int[] winningNumber = matchTicket.getNumbers();

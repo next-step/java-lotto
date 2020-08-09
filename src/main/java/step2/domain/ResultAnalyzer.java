@@ -28,13 +28,14 @@ public class ResultAnalyzer {
     /**
      * 당첨금을 반환한다.
      *
-     * @param ranking
      * @param winningNumbers
      * @param tickets
      * @return
      */
-    public static final int getPrizeMoney(final LottoRanking ranking, final int[] winningNumbers, final List<Ticket> tickets) {
-        return ranking.getPrizeMoney(getHitListCount(winningNumbers, tickets, ranking.getHitCount()));
+    private static final int getTotalPrizeMoney(final int[] winningNumbers, final List<Ticket> tickets) {
+        return tickets.stream()
+                .mapToInt(ticket -> ticket.getPrizeMoney(winningNumbers))
+                .sum();
     }
 
     /**
@@ -46,13 +47,6 @@ public class ResultAnalyzer {
      * @return
      */
     public static final double getRateReturn(final int[] winningNumbers, final List<Ticket> tickets, int spending) {
-        int prizeMoney = 0;
-
-        // 등수별 합계
-        for (LottoRanking ranking : LottoRanking.values()) {
-            prizeMoney += getPrizeMoney(ranking, winningNumbers, tickets);
-        }
-
-        return Math.ceil((prizeMoney / spending * 100) / 100.0);
+        return Math.ceil((getTotalPrizeMoney(winningNumbers, tickets) / spending * 100) / 100.0);
     }
 }
