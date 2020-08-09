@@ -15,12 +15,12 @@ public class ResultAnalyzer {
      *
      * @param winningNumbers
      * @param tickets
-     * @param hitCount
+     * @param matchCount
      * @return
      */
-    public static final int getHitListCount(final int[] winningNumbers, final List<Ticket> tickets, final int hitCount) {
+    public static final int getMatchTicketCount(final int[] winningNumbers, final List<Ticket> tickets, final int matchCount) {
         return tickets.stream()
-                .filter(ticket -> ticket.getHitCount(winningNumbers) == hitCount)
+                .filter(ticket -> ticket.matchCount(winningNumbers) == matchCount)
                 .collect(Collectors.toList())
                 .size();
     }

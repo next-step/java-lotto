@@ -111,7 +111,7 @@ public class Ticket {
      * @param compareObj
      * @return
      */
-    public long getHitCount(final int[] compareObj) {
+    public long matchCount(final int[] compareObj) {
         return Arrays.stream(this.numbers)
                 .boxed()
                 .filter(Arrays.stream(compareObj).boxed().collect(Collectors.toList())::contains)
@@ -125,10 +125,10 @@ public class Ticket {
      * @return
      */
     public int getPrizeMoney(final int[] winningNumber) {
-        final long hitCount = getHitCount(winningNumber);
+        final long matchCount = matchCount(winningNumber);
 
         LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.getHitCount() == hitCount)
+                .filter(ranking -> ranking.getMatchCount() == matchCount)
                 .findFirst()
                 .orElse(null);
 

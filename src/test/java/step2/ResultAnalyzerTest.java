@@ -12,16 +12,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResultAnalyzerTest {
 
     @Test
-    void getHitListCount() {
+    void getMatchTicketCount() {
         Ticket matchTicket = new Ticket();
         int[] winningNumber = matchTicket.getNumbers();
 
         assertThat(
-                ResultAnalyzer.getHitListCount(winningNumber, Arrays.asList(matchTicket), winningNumber.length)
+                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(matchTicket), winningNumber.length)
         ).isEqualTo(1);
 
         assertThat(
-                ResultAnalyzer.getHitListCount(winningNumber, Arrays.asList(matchTicket), winningNumber.length - 1)
+                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(matchTicket), winningNumber.length - 1)
         ).isEqualTo(0);
     }
 

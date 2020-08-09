@@ -30,9 +30,9 @@ public class Main {
         for (LottoRanking ranking : LottoRanking.values()) {
             PrintMessage.print(
                     "%s개 일치 (%,d원)- %s개\n",
-                    ranking.getHitCount(),
+                    ranking.getMatchCount(),
                     ranking.getPrizeMoney(),
-                    ResultAnalyzer.getHitListCount(winningNumber, tickets, ranking.getHitCount())
+                    ResultAnalyzer.getMatchTicketCount(winningNumber, tickets, ranking.getMatchCount())
             );
         }
 

@@ -13,22 +13,18 @@ public enum LottoRanking {
     private int prizeMoney;
 
     // 당첨 숫자 갯수
-    private int hitCount;
+    private int matchCount;
 
-    LottoRanking(int prizeMoney, int hitCount) {
+    LottoRanking(int prizeMoney, int matchCount) {
         this.prizeMoney = prizeMoney;
-        this.hitCount = hitCount;
+        this.matchCount = matchCount;
     }
 
     public int getPrizeMoney() {
         return prizeMoney;
     }
 
-    public int getPrizeMoney(int count) {
-        return prizeMoney * count;
-    }
-
-    public int getHitCount() {
-        return hitCount;
+    public int getMatchCount() {
+        return matchCount;
     }
 }
