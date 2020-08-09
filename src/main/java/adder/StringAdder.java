@@ -46,12 +46,16 @@ public class StringAdder {
     private static int toInt(String number) {
         try {
             int num = Integer.parseInt(number);
-            if (num < 0) {
-                throw new RuntimeException("음수를 넣지 마세요");
-            }
+            verifyNegative(num);
             return num;
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자만 넣어주세요.");
+        }
+    }
+
+    private static void verifyNegative(int num) {
+        if (num < 0) {
+            throw new RuntimeException("음수를 넣지 마세요");
         }
     }
 }
