@@ -28,7 +28,7 @@ class ResultAnalyzerTest {
         int[] winningNumber = matchTicket.getNumbers();
 
         assertThat(
-                ResultAnalyzer.getPrizeMoney(winningNumber, Arrays.asList(matchTicket), LottoRanking.FIRST.getPrizeMoney(), LottoRanking.FIRST.getHitCount())
+                ResultAnalyzer.getPrizeMoney(LottoRanking.FIRST, winningNumber, Arrays.asList(matchTicket))
         ).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
     }
 

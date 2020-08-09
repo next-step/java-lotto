@@ -26,14 +26,13 @@ public class ResultAnalyzer {
 
     /**
      * 당첨금을 반환한다.
+     * @param ranking
      * @param winningNumbers
      * @param tickets
-     * @param prizeMoney
-     * @param hitCount
      * @return
      */
-    public static final int getPrizeMoney(final int[] winningNumbers, final List<Ticket> tickets, final int prizeMoney, final int hitCount) {
-        return prizeMoney * getHitListCount(winningNumbers, tickets, hitCount);
+    public static final int getPrizeMoney(final LottoRanking ranking, final int[] winningNumbers, final List<Ticket> tickets) {
+        return ranking.getPrizeMoney(getHitListCount(winningNumbers, tickets, ranking.getHitCount()));
     }
 
     /**
@@ -46,10 +45,10 @@ public class ResultAnalyzer {
     public static final double getRateReturn(final int[] winningNumbers, final List<Ticket> tickets, int spending) {
         int prizeMoney = 0;
 
-        prizeMoney += getPrizeMoney(winningNumbers, tickets, LottoRanking.FIRST.getPrizeMoney(), LottoRanking.FIRST.getHitCount());
-        prizeMoney += getPrizeMoney(winningNumbers, tickets, LottoRanking.SECOND.getPrizeMoney(), LottoRanking.SECOND.getHitCount());
-        prizeMoney += getPrizeMoney(winningNumbers, tickets, LottoRanking.THIRD.getPrizeMoney(), LottoRanking.THIRD.getHitCount());
-        prizeMoney += getPrizeMoney(winningNumbers, tickets, LottoRanking.FOURTH.getPrizeMoney(), LottoRanking.FOURTH.getHitCount());
+        prizeMoney += getPrizeMoney(LottoRanking.FIRST, winningNumbers, tickets);
+        prizeMoney += getPrizeMoney(LottoRanking.SECOND, winningNumbers, tickets);
+        prizeMoney += getPrizeMoney(LottoRanking.THIRD, winningNumbers, tickets);
+        prizeMoney += getPrizeMoney(LottoRanking.FOURTH, winningNumbers, tickets);
 
         return Math.ceil((prizeMoney / spending * 100) / 100.0);
     }
