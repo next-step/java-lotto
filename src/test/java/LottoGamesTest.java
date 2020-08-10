@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGamesTest {
     private LottoGames lottoGames;
-    private LottoWinningNumbers lottoWinningNumbers;
 
     @BeforeEach
     void setUp() {
@@ -36,16 +35,17 @@ class LottoGamesTest {
 
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoMoney inputMoney = new LottoMoney(14000);
 
-        lottoGames = new LottoGames(games);
-        lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        lottoGames = new LottoGames(games, inputMoney, lottoWinningNumbers);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"6=0", "5=0", "4=0", "3=1"}, delimiter = '=')
     @DisplayName("다수의 로또 게임과 당첨 번호를 비교해 3개 이상 6개 이하 일치하는 횟수를 구한다.")
     void lottoGamesTest(int key, int expected) {
-        Map<Integer, Integer> result = lottoGames.getWinningStatistics(lottoWinningNumbers);
+        Map<Integer, Integer> result = lottoGames.getWinningStatistics();
 
         assertThat(result.get(key)).isEqualTo(expected);
     }
@@ -53,10 +53,9 @@ class LottoGamesTest {
     @Test
     @DisplayName("수익률을 구한다.")
     void getBenefitRateTest() {
-        Map<Integer, Integer> winningStatistics = lottoGames.getWinningStatistics(lottoWinningNumbers);
-        LottoMoney inputMoney = new LottoMoney(14000);
+        Map<Integer, Integer> winningStatistics = lottoGames.getWinningStatistics();
 
-        double benefitRate = lottoGames.getBenefitRate(winningStatistics, inputMoney);
+        double benefitRate = lottoGames.getBenefitRate(winningStatistics);
         String benefitRateStr = String.format("%.2f", benefitRate);
         assertThat(benefitRateStr).isEqualTo("0.36");
     }

@@ -1,8 +1,10 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoGames {
     public static final int FIRST_WINNING_MONEY = 2000000000;
@@ -29,17 +31,37 @@ public class LottoGames {
         return map;
     }
 
-    private final List<LottoGame> lottoGames;
+    public static LottoGames of(int money, String winningNumberStr) {
+        LottoMoney lottoMoney = new LottoMoney(money);
+        List<LottoGame> lottoGameList = lottoMoney.generateLottoGame();
+        List<Integer> winningNumberList = getWinningListFromString(winningNumberStr);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumberList);
 
-    public LottoGames(List<LottoGame> games) {
-        this.lottoGames = games;
+        return new LottoGames(lottoGameList, lottoMoney, lottoWinningNumbers);
     }
 
-    public Map<Integer, Integer> getWinningStatistics(LottoWinningNumbers winningNumbers) {
+    private static List<Integer> getWinningListFromString(String winningNumberStr) {
+        return Arrays.stream(winningNumberStr.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private final List<LottoGame> lottoGames;
+    private final LottoMoney lottoMoney;
+    private final LottoWinningNumbers lottoWinningNumbers;
+
+    public LottoGames(List<LottoGame> games, LottoMoney lottoMoney, LottoWinningNumbers lottoWinningNumbers) {
+        this.lottoGames = games;
+        this.lottoMoney = lottoMoney;
+        this.lottoWinningNumbers = lottoWinningNumbers;
+    }
+
+    public Map<Integer, Integer> getWinningStatistics() {
         Map<Integer, Integer> map = initMap();
 
         for (LottoGame lottoGame : lottoGames) {
-            Integer winningNumber = winningNumbers.getWinningNumberInLottoGame(lottoGame);
+            Integer winningNumber = lottoWinningNumbers.getWinningNumberInLottoGame(lottoGame);
             Integer value = map.getOrDefault(winningNumber, 0) + 1;
             map.put(winningNumber, value);
         }
@@ -59,7 +81,7 @@ public class LottoGames {
         return map;
     }
 
-    public double getBenefitRate(Map<Integer, Integer> winningStatistics, LottoMoney inputMoney) {
+    public double getBenefitRate(Map<Integer, Integer> winningStatistics) {
         winningMoneyMap = initWinningMoneyMap();
         double winningMoney = 0;
         for (Map.Entry<Integer, Integer> entry : winningStatistics.entrySet()) {
@@ -67,6 +89,14 @@ public class LottoGames {
             winningMoney += benefit;
         }
 
-        return inputMoney.getBenefitRate(winningMoney);
+        return lottoMoney.getBenefitRate(winningMoney);
+    }
+
+    public List<LottoGame> getLottoGames() {
+        return lottoGames;
+    }
+
+    public LottoWinningNumbers getLottoWinningNumbers() {
+        return lottoWinningNumbers;
     }
 }
