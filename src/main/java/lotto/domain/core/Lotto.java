@@ -1,7 +1,10 @@
 package lotto.domain.core;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import static java.util.stream.Collectors.toCollection;
 import static lotto.domain.core.LottoNoValidator.verifyLottoNo;
 
 public class Lotto {
@@ -29,5 +32,12 @@ public class Lotto {
 
     int size(){
         return lottoNos.size();
+    }
+
+    public Set<Integer> getPrimitiveLottoNos(){
+        return lottoNos.stream()
+            .map(LottoNo::getLottoNo)
+            .collect(toCollection(LinkedHashSet::new))
+            ;
     }
 }

@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.core.LottoGenerator;
 import lotto.domain.core.WinLotto;
 
-import static lotto.domain.LottoStoreTest.LottoStore.ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT;
+import static lotto.domain.LottoStore.ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT;
 import static lotto.domain.LottoWinningAndPrizeMoney.FIFTH;
 import static lotto.domain.core.LottoGenerator.from;
 import static lotto.domain.core.LottoGenerator.winLotto;
@@ -58,44 +56,16 @@ class LottoStoreTest {
         assertThat(statistics.getGrossProfit()).isEqualTo(0.35);
     }
 
-    public static class LottoStore {
-        public static final String ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT = "로또 구매금액은 0보다 커야 합니다.";
-        private static final int ZERO = 0;
-        private final LottoPurchase lottoPurchase;
-        private final ImmutableLottoList lottos;
-
-        private static void verifyPurchaseAmount(int purchaseAmount) {
-            if (ZERO >= purchaseAmount) {
-                throw new IllegalArgumentException(ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT);
-            }
-        }
-
-        LottoStore(int purchaseAmount) {
-            verifyPurchaseAmount(purchaseAmount);
-            lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
-            lottos = ImmutableLottoList.builder()
-                                       .autoLottos(lottoPurchase.getAutoLottoGeneratedCount())
-                                       .build()
+    @DisplayName("화면에 표시되는 로또 테스트")
+    @Test
+    void display_lottos() {
+        ImmutableLottoList lottos = ImmutableLottoList.builder()
+                                                      .lotto(LottoGenerator.from(8, 21, 23, 41, 42, 43))
+                                                      .build()
             ;
-        }
 
-        LottoStore(int purchaseAmount, ImmutableLottoList lottos) {
-            verifyPurchaseAmount(purchaseAmount);
-            this.lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
-            this.lottos = lottos;
-        }
-
-        public static LottoStore purchaseAutoLotto(int purchaseAmount) {
-            return new LottoStore(purchaseAmount);
-        }
-
-        public int countOfPurchased() {
-            return lottos.size();
-        }
-
-        public LottoStatistics getStatistics(WinLotto winLotto){
-            List<LottoWinningAndPrizeMoney> allMatchCount = lottos.compareToEachLottoWithWonLotto(winLotto);
-            return LottoStatistics.fromAllMatchCount(lottoPurchase, allMatchCount);
-        }
+        LottoStore lottoStore = new LottoStore(14_000, lottos);
+        final String displayLottoList = lottoStore.displayLottoList().toString();
+        assertThat(displayLottoList).isEqualTo("[ 8, 21, 23, 41, 42, 43]");
     }
 }

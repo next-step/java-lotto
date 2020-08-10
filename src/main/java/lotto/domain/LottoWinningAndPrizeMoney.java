@@ -40,4 +40,8 @@ public enum LottoWinningAndPrizeMoney {
     public long getPrizeMoney() {
         return prizeMoney;
     }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
 }

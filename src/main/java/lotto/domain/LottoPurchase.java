@@ -3,7 +3,7 @@ package lotto.domain;
 class LottoPurchase {
     public static final int LOTTO_PRICE = 1_000;
 
-    private final int purchaseAmount;
+    private final long purchaseAmount;
     private final int autoLottoGeneratedCount;
     private final int manualLottoCount;
 
@@ -17,7 +17,7 @@ class LottoPurchase {
         return new LottoPurchase(purchaseAmount, purchaseAmount / LOTTO_PRICE, 0);
     }
 
-    public int getPurchaseAmount() {
+    public long getPurchaseAmount() {
         return purchaseAmount;
     }
 
