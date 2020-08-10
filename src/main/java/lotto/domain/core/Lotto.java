@@ -16,11 +16,11 @@ public class Lotto {
         return new Lotto(lottoNos);
     }
 
-    public long countOfMatch(Lotto otherLotto){
-        return lottoNos.stream()
-                       .filter(otherLotto::contains)
-                       .count()
-            ;
+    public int countOfMatch(Lotto otherLotto){
+        long count = lottoNos.stream()
+                             .filter(otherLotto::contains)
+                             .count();
+        return Math.toIntExact(count);
     }
 
     boolean contains(LottoNo lottoNo){
