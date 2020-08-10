@@ -22,6 +22,8 @@ final class LottoNo {
         cached = Collections.unmodifiableSet(lottoNos);
     }
 
+    private static final LottoNo empty = new LottoNo(0);
+
     private final int lottoNo;
 
     private LottoNo(int lottoNo) {
@@ -34,6 +36,10 @@ final class LottoNo {
                      .findAny()
                      .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_UNEXPECTED_RANGE_NUMBER))
             ;
+    }
+
+    static LottoNo empty() {
+        return empty;
     }
 
     static List<LottoNo> shuffle(){

@@ -54,4 +54,8 @@ public class LottoGenerator {
         return Lotto.of(autoLottoNos);
     }
 
+    public static WinLotto winLotto(Lotto lotto){
+        return new WinLotto(lotto,LottoNo.empty());
+    }
+
 }
