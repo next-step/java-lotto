@@ -9,24 +9,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TicketTest {
 
     @Test
-    void constructor() {
-        Ticket ticket = new Ticket();
-
-        assertThat(ticket.getNumbers().length).isEqualTo(6);
-    }
-
-    @Test
     void matchCount() {
-        Ticket ticket = new Ticket();
-        int[] numbers = ticket.getNumbers();
+        int[] numbers = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(numbers);
 
         assertThat(ticket.matchCount(numbers)).isEqualTo(numbers.length);
     }
 
     @Test
     void getPrizeMoney() {
-        Ticket matchTicket = new Ticket();
-        int[] winningNumber = matchTicket.getNumbers();
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket matchTicket = new Ticket(winningNumber);
 
         assertThat(matchTicket.prizeMoney(winningNumber)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
     }

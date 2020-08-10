@@ -1,23 +1,12 @@
 package step2.domain;
 
-import java.util.*;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
  * Lotto Ticket
  */
 public class Ticket {
-    private static final Random DICE = new Random();
-
-    /**
-     * 번호 갯수
-     */
-    private static final int NUMBER_COUNT = 6;
-
-    /**
-     * 무작위로 정의되는 번호의 범위
-     */
-    private static final int NUMBER_BOUNDARY = 45;
 
     /**
      * 번호 목록
@@ -30,79 +19,15 @@ public class Ticket {
      * @return
      */
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, NUMBER_COUNT);
+        return Arrays.copyOf(numbers, numbers.length);
     }
 
     /**
      * 생성자를 통해 초기화한다.
      * 번호 목록을 생성한다.
      */
-    public Ticket() {
-        this.numbers = createNumbers();
-    }
-
-    /**
-     * 번호 목록을 생성하여 반환한다.
-     *
-     * @return
-     */
-    private static final int[] createNumbers() {
-        List<Integer> result = new ArrayList<>();
-
-        while (result.size() < NUMBER_COUNT) {
-            result.add(nextNumber(result));
-        }
-
-        // 생성된 번호 목록을 섞는다.
-        Collections.shuffle(result);
-
-        return result.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
-    }
-
-    /**
-     * numbers 목록을 기준으로 중복되지 않는 숫자를 반환한다.
-     * 숫자는 nextInt() 함수를 통해 생성한다. (숫자 범위 1 ~ 45)
-     *
-     * @param numbers
-     * @return
-     */
-    private static final int nextNumber(final List<Integer> numbers) {
-        int result = nextInt(NUMBER_BOUNDARY);
-        boolean duplicated = checkDuplicate(numbers, result);
-
-        while (duplicated) {
-            result = nextInt(NUMBER_BOUNDARY);
-            duplicated = checkDuplicate(numbers, result);
-        }
-
-        return result;
-    }
-
-    /**
-     * 숫자를 반환한다.
-     * 숫자 범위 1 ~ 45
-     *
-     * @param bound
-     * @return
-     */
-    private static final int nextInt(final int bound) {
-        return DICE.nextInt(bound) + 1;
-    }
-
-    /**
-     * 숫자 목록과 숫자를 비교하여 중복된 숫자 여부를 판별한다.
-     *
-     * @param numbers
-     * @param number
-     * @return
-     */
-    private static final boolean checkDuplicate(final List<Integer> numbers, final int number) {
-        return numbers.stream()
-                .filter(value -> value == number)
-                .findFirst()
-                .isPresent();
+    public Ticket(int[] numbers) {
+        this.numbers = numbers;
     }
 
     /**
