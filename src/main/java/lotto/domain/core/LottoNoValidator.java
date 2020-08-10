@@ -1,6 +1,7 @@
 package lotto.domain.core;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import static java.lang.String.format;
 
@@ -15,8 +16,8 @@ class LottoNoValidator {
         verifyDuplicateLottoNo(lottoNos);
     }
 
-    static void verifyRequireNonNull(Collection<LottoNo> lottoNos) {
-        if (null == lottoNos) {
+    static void verifyRequireNonNull(Object lottoNos) {
+        if (Objects.isNull(lottoNos)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATE_LOTTO_NO);
         }
     }

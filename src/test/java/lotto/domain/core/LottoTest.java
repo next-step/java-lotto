@@ -3,6 +3,7 @@ package lotto.domain.core;
 import java.util.Arrays;
 import java.util.List;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,14 +32,8 @@ public class LottoTest {
     @Test
     void lotto_moreThanSixLottoNoCheck() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Lotto.of(list(
-                  valueOf(1)
-                , valueOf(2)
-                , valueOf(3)
-                , valueOf(4)
-                , valueOf(5)
-                , valueOf(7)
-                , valueOf(8)
+            .isThrownBy(() -> LottoGenerator.fromIntSet(newLinkedHashSet(
+                1, 2, 3, 4, 5, 6, 7, 8
             )))
             .withMessage(ERROR_MESSAGE_DUPLICATE_LOTTO_NO);
     }
@@ -61,7 +56,7 @@ public class LottoTest {
     @DisplayName("자동생성된 로또 번호 갯수가 6개 인지 확인")
     @Test
     void lotto_auto() {
-        Lotto autoLotto = Lotto.automaticGenerator();
+        Lotto autoLotto = LottoGenerator.automatic();
         assertThat(autoLotto.size()).isEqualTo(MAX_LOTTO_NO_COUNT);
     }
 
@@ -76,15 +71,10 @@ public class LottoTest {
         , "1, 7, 8, 9,10,11=1"
         , "7, 8, 9,10,11,12=0"
     }, delimiter = '=')
-    void lott_countOfMatch(String lotto, int expectedCountOfMatch) {
-        final Lotto wonLotto = Lotto.of(newLinkedHashSet(
-            valueOf(1)
-            , valueOf(2)
-            , valueOf(3)
-            , valueOf(4)
-            , valueOf(5)
-            , valueOf(6)
-        ));
+    void lotto_countOfMatch(String lotto, int expectedCountOfMatch) {
+        final Lotto wonLotto = LottoGenerator.from(
+            1, 2, 3, 4, 5, 6
+        );
 
         final List<LottoNo> lottoNos = Arrays.stream(lotto.replaceAll(" ","").split(","))
                                       .mapToInt(Integer::valueOf)
