@@ -23,10 +23,8 @@ public class Lotto {
     }
 
     public int countOfMatch(Lotto lotto) {
-        long countOfMatch = lottoNumbers.stream()
-                .filter(lotto::contain)
-                .count();
-        return Math.toIntExact(countOfMatch);
+        lotto.lottoNumbers.retainAll(lottoNumbers);
+        return lotto.lottoNumbers.size();
     }
 
     public int[] toArray() {
