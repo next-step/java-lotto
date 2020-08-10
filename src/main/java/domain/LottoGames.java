@@ -1,7 +1,8 @@
+package domain;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class LottoGames {
     public static final int FIRST_WINNING_MONEY = 2000000000;
@@ -10,6 +11,23 @@ public class LottoGames {
     public static final int FORTH_WINNING_MONEY = 5000;
     public static final int NOTHING = 0;
 
+    public static Map<Integer, Integer> winningMoneyMap;
+
+    static {
+        winningMoneyMap = initWinningMoneyMap();
+    }
+
+    private static Map<Integer, Integer> initWinningMoneyMap() {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, NOTHING);
+        map.put(1, NOTHING);
+        map.put(2, NOTHING);
+        map.put(3, FORTH_WINNING_MONEY);
+        map.put(4, THIRD_WINNING_MONEY);
+        map.put(5, SECOND_WINNING_MONEY);
+        map.put(6, FIRST_WINNING_MONEY);
+        return map;
+    }
 
     private final List<LottoGame> lottoGames;
 
@@ -42,7 +60,7 @@ public class LottoGames {
     }
 
     public double getBenefitRate(Map<Integer, Integer> winningStatistics, LottoMoney inputMoney) {
-        Map<Integer, Integer> winningMoneyMap = initWinningMoneyMap();
+        winningMoneyMap = initWinningMoneyMap();
         double winningMoney = 0;
         for (Map.Entry<Integer, Integer> entry : winningStatistics.entrySet()) {
             int benefit = winningMoneyMap.get(entry.getKey()) * entry.getValue();
@@ -50,17 +68,5 @@ public class LottoGames {
         }
 
         return inputMoney.getBenefitRate(winningMoney);
-    }
-
-    private Map<Integer, Integer> initWinningMoneyMap() {
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, NOTHING);
-        map.put(1, NOTHING);
-        map.put(2, NOTHING);
-        map.put(3, FORTH_WINNING_MONEY);
-        map.put(4, THIRD_WINNING_MONEY);
-        map.put(5, SECOND_WINNING_MONEY);
-        map.put(6, FIRST_WINNING_MONEY);
-        return map;
     }
 }

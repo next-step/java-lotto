@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +29,7 @@ public class LottoGame {
 
     @Override
     public String toString() {
-        return "LottoGame{" +
+        return "domain.LottoGame{" +
                 "numbers=" + numbers +
                 '}';
     }

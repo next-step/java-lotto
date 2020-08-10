@@ -1,14 +1,16 @@
+import domain.LottoGame;
+import domain.LottoGames;
+import domain.LottoMoney;
+import domain.LottoWinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGamesTest {
     private LottoGames lottoGames;
@@ -40,7 +42,7 @@ class LottoGamesTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"6=1", "5=1", "4=1", "3=2"}, delimiter = '=')
+    @CsvSource(value = {"6=0", "5=0", "4=0", "3=1"}, delimiter = '=')
     @DisplayName("다수의 로또 게임과 당첨 번호를 비교해 3개 이상 6개 이하 일치하는 횟수를 구한다.")
     void lottoGamesTest(int key, int expected) {
         Map<Integer, Integer> result = lottoGames.getWinningStatistics(lottoWinningNumbers);
