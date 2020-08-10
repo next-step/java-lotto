@@ -15,6 +15,6 @@ public class LottoResultTest {
         // when
         result.addRanking(LottoRanking.THIRD);
         // then
-        assertThat(result.getTotalPrize()).isEqualTo(LottoRanking.THIRD.getPrize());
+        assertThat(result.getTotalPrize()).isEqualTo(LottoRanking.THIRD.prize());
     }
 }

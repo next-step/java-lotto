@@ -11,7 +11,7 @@ public class LottoResult {
 
     public void addRanking(LottoRanking lottoRanking) {
         rankingMap.put(lottoRanking, rankingMap.getOrDefault(lottoRanking, 0) + 1);
-        totalPrize += lottoRanking.getPrize();
+        totalPrize += lottoRanking.prize();
     }
 
     public Map<LottoRanking, Integer> getRankingMap() {

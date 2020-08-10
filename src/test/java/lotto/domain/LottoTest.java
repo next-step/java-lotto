@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -23,14 +25,16 @@ public class LottoTest {
     @Test
     @DisplayName("당첨번호 6개 입력")
     void fromNumber_insertSix_returnLottoNumber() {
-        assertThat(Lotto.fromString("16,22,33,41,45,46").toArray()).isEqualTo(new int[] {16,22,33,41,45,46});
+        int[] lottoArray = Lotto.fromString("16,22,33,41,44,45").toArray();
+        Arrays.sort(lottoArray);
+        assertThat(lottoArray).isEqualTo(new int[] {16,22,33,41,44,45});
     }
 
     @Test
     @DisplayName("당첨번호 매칭 개수 확인")
     void getMatchCount() {
-        Lotto lotto1 = Lotto.fromString("16,22,33,41,45,46");
-        Lotto lotto2 = Lotto.fromString("16,22,33,41,45,49");
-        assertThat(lotto1.getCountOfMatch(lotto2)).isEqualTo(5);
+        Lotto lotto1 = Lotto.fromString("16,22,33,41,44,45");
+        Lotto lotto2 = Lotto.fromString("16,22,33,40,44,45");
+        assertThat(lotto1.countOfMatch(lotto2)).isEqualTo(5);
     }
 }
