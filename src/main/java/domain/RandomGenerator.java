@@ -1,19 +1,17 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomGenerator {
     private static final Random RANDOM = new Random();
 
     public static List<Integer> getSixRandomNumber() {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        Set<Integer> result = new HashSet<>();
+        while(result.size() != 6) {
             int num = RANDOM.nextInt(45) + 1;
             result.add(num);
         }
-        return result;
+        return new ArrayList<>(result);
     }
 
 
