@@ -17,7 +17,7 @@ public class OutputView {
         Map<Integer, Integer> winningStatistics = lottoGames.getWinningStatistics();
         System.out.println();
         for (int i = 3; i <= 6; i++) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", i, LottoGames.winningMoneyMap.get(i), winningStatistics.get(i));
+            System.out.printf("%d개 일치 (%d원) - %d개\n", i, LottoGames.winningMoneyMap.getWinningMoney(i), winningStatistics.get(i));
         }
         return winningStatistics;
     }
