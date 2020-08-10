@@ -15,7 +15,7 @@ public class LottoMoney {
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoGames.add(new LottoGame(new RandomGenerator().getSixRandomNumber()));
+            lottoGames.add(new LottoGame(RandomGenerator.getSixRandomNumber()));
         }
 
         return lottoGames;
