@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoShop;
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -17,13 +14,15 @@ public class LottoMain {
         LottoResultView.printPurchasedLottoNumbers(lottos);
 
         String winningNumbers = LottoInputView.lastWeekWinningNumber();
+        int bonusBall = LottoInputView.bonusBall();
         // 입력 종료
 
-        LottoResult lottoResult = LottoGame.match(Lotto.fromString(winningNumbers), lottos);
+        LottoResult lottoResult = LottoGame.match(
+            Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall), lottos);
 
         // 결과 출력 시작
         LottoResultView.printWinningResult(lottoResult.getRankingMap());
-        LottoResultView.printSaveOfReturn(lottoResult.getTotalPrize() * 1.0 / price);
+        LottoResultView.printSaveOfReturn(LottoUtil.calculateSaveOfReturn(price, lottoResult.getTotalPrize()));
         // 결과 출력 종료
     }
 }
