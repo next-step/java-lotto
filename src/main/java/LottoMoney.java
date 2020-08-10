@@ -20,4 +20,8 @@ public class LottoMoney {
 
         return lottoGames;
     }
+
+    public double getBenefitRate(double winningMoney) {
+        return winningMoney / money;
+    }
 }
