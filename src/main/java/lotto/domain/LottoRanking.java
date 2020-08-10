@@ -8,13 +8,16 @@ public enum LottoRanking {
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
+    BONUS(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private static final Map<Integer, LottoRanking> BY_COUNT_OF_MATCH = new HashMap<>();
 
     static {
         for (LottoRanking ranking : values()) {
-            BY_COUNT_OF_MATCH.put(ranking.countOfMatch, ranking);
+            if (ranking != BONUS) {
+                BY_COUNT_OF_MATCH.put(ranking.countOfMatch, ranking);
+            }
         }
     }
 
@@ -26,15 +29,15 @@ public enum LottoRanking {
         this.prize = prize;
     }
 
-    public int getCountOfMatch() {
+    public int countOfMatch() {
         return countOfMatch;
     }
 
-    public int getPrize() {
+    public int prize() {
         return prize;
     }
 
-    public static LottoRanking valueOfCount(int countOfMatch) {
+    public static LottoRanking valueOf(int countOfMatch) {
         return BY_COUNT_OF_MATCH.get(countOfMatch);
     }
 }
