@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoResult {
 
     private final Map<LottoRanking, Integer> rankingMap = new HashMap<>();
-    private int totalPrize = 0;
+    private long totalPrize = 0;
 
     public void addRanking(LottoRanking lottoRanking) {
         rankingMap.put(lottoRanking, rankingMap.getOrDefault(lottoRanking, 0) + 1);
@@ -18,7 +18,7 @@ public class LottoResult {
         return Collections.unmodifiableMap(rankingMap);
     }
 
-    public int getTotalPrize() {
+    public long getTotalPrize() {
         return totalPrize;
     }
 }
