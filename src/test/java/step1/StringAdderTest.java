@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,5 +23,12 @@ public class StringAdderTest {
 	@ValueSource(strings = {"1","2","3"})
 	void testSingleInt(String string) {
 		assertThat(StringAdder.calculate(string)).isEqualTo(Integer.parseInt(string));
+	}
+
+	@DisplayName("쉼표혹은 콜론으로 구분된 문자열을 구분자로 분리 후 합을 반환한다.")
+	@ParameterizedTest
+	@CsvSource(value = {"1,2,3*6", "4:5:8*17", "1:4,2*7", "1 , 2*3"}, delimiter = '*')
+	void testDelimitedStringSum(String input, int result) {
+		assertThat(StringAdder.calculate(input)).isEqualTo(result);
 	}
 }
