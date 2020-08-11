@@ -8,33 +8,36 @@ public class StringCalculator {
     if (nullOrEmpty(sentence)) return 0;
 
     Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(sentence);
-    if (matcher.find()) {
-      String customSeparator = matcher.group(1);
-      String[] tokens = matcher.group(2).split(customSeparator);
-      return Arrays.stream(tokens)
-          .map(v -> toInt(v))
-          .reduce((a, b) -> a + b)
-          .get();
+    if (matcher.find()) {  // has custom separator
+      return add(matcher.group(1), matcher.group(2));
     }
 
-    String[] values = sentence.split(",|:");
+    return add(",|:", sentence);
+  }
+
+  private static int add(String regex, String sentence) {
+    String[] values = sentence.split(regex);
     if (lengthIsOne(values)) return toInt(sentence);
 
-    return Arrays.stream(values)
+    return add(values);
+  }
+
+  private static Integer add(String[] tokens) {
+    return Arrays.stream(tokens)
         .map(v -> toInt(v))
         .reduce((a, b) -> a + b)
         .get();
   }
 
-  private static int toInt(String value) {
-    return Integer.parseInt(value);
+  private static boolean nullOrEmpty(String sentence) {
+    return sentence == null || sentence.isEmpty();
   }
 
   private static boolean lengthIsOne(String[] values) {
     return values.length == 1;
   }
 
-  private static boolean nullOrEmpty(String sentence) {
-    return sentence == null || sentence.isEmpty();
+  private static int toInt(String value) {
+    return Integer.parseInt(value);
   }
 }
