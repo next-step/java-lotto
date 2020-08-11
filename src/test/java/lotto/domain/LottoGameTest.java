@@ -17,7 +17,7 @@ public class LottoGameTest {
         // given
         Lotto winningLotto = Lotto.fromString("16,22,33,41,44,45");
         LottoNumber bonusBall = LottoNumber.of(17);
-        List<Lotto> lottos = new ArrayList<>();
+        Lottos lottos = new Lottos();
         lottos.add(Lotto.fromString("16,22,33,38,42,45"));
         lottos.add(Lotto.fromString("16,22,33,39,43,45"));
 
@@ -36,7 +36,7 @@ public class LottoGameTest {
         // given
         Lotto winningLotto = Lotto.fromString("16,22,33,41,44,45");
         LottoNumber bonusBall = LottoNumber.of(45);
-        List<Lotto> lottos = new ArrayList<>();
+        Lottos lottos = new Lottos();
         lottos.add(Lotto.fromString("16,22,30,41,44,45"));
         lottos.add(Lotto.fromString("6,7,12,13,14,25"));
 

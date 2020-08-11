@@ -1,16 +1,16 @@
 package lotto.view;
 
-import lotto.domain.LottoRanking;
 import lotto.domain.Lotto;
+import lotto.domain.LottoRanking;
+import lotto.domain.Lottos;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResultView {
 
-    public static void printPurchasedLottoNumbers(List<Lotto> lottos) {
+    public static void printPurchasedLottoNumbers(Lottos lottos) {
         System.out.println(MessageFormat.format("{0}개를 구매했습니다", lottos.size()));
         for (Lotto lotto : lottos) {
             int[] numbers = lotto.toArray();

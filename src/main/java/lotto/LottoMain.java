@@ -4,13 +4,11 @@ import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
-import java.util.List;
-
 public class LottoMain {
     public static void main(String[] args) {
         // 입력 시작
         int price = LottoInputView.purchasePrice();
-        List<Lotto> lottos = LottoShop.buyAuto(price);
+        Lottos lottos = LottoShop.buyAuto(price);
         LottoResultView.printPurchasedLottoNumbers(lottos);
 
         String winningNumbers = LottoInputView.lastWeekWinningNumber();
