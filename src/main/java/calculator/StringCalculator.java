@@ -25,7 +25,7 @@ public class StringCalculator {
 
     private static int stringToInt(String text) {
         int number = Integer.parseInt(text);
-        if (number < 0) {
+        if (number < ZERO) {
             throw new RuntimeException(NEGATIVE_NOT_VALID_MESSAGE);
         }
         return number;
