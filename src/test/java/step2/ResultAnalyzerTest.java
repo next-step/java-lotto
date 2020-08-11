@@ -14,15 +14,15 @@ class ResultAnalyzerTest {
 
     @Test
     void getMatchTicketCount() {
-        Ticket ticket = TicketSellingMachine.ticketing();
-        int[] winningNumber = ticket.getNumbers();
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(ticket), winningNumber.length)
+                ResultAnalyzer.getMatchTicketCount(winningNumber, 0, winningNumber.length, 0, Arrays.asList(ticket))
         ).isEqualTo(1);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(ticket), winningNumber.length - 1)
+                ResultAnalyzer.getMatchTicketCount(winningNumber, 0, winningNumber.length - 1, 0, Arrays.asList(ticket))
         ).isEqualTo(0);
     }
 

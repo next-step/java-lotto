@@ -24,21 +24,29 @@ public class Main {
         int[] winningNumber = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.");
 
         PrintMessage.println();
+        int bonusNumber = InputScanner.getInt("보너스 볼을 입력해 주세요.");
+
+        PrintMessage.println();
         PrintMessage.println("당첨 통계");
         PrintMessage.println("---------");
 
         for (LottoRanking ranking : LottoRanking.values()) {
             PrintMessage.print(
-                    "%s개 일치 (%,d원)- %s개\n",
-                    ranking.getMatchCount(),
-                    ranking.getPrizeMoney(),
-                    ResultAnalyzer.getMatchTicketCount(winningNumber, tickets, ranking.getMatchCount())
+                    "%s - %s개\n",
+                    ranking,
+                    ResultAnalyzer.getMatchTicketCount(
+                            winningNumber,
+                            bonusNumber,
+                            ranking.getMatchCount(),
+                            ranking.getBonusMatchCount(),
+                            tickets
+                    )
             );
         }
 
         PrintMessage.print(
                 "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n",
-                ResultAnalyzer.getRateReturn(winningNumber, 0, tickets, spendingMoney)
+                ResultAnalyzer.getRateReturn(winningNumber, bonusNumber, tickets, spendingMoney)
         );
     }
 }

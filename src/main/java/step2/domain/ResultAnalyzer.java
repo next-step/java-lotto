@@ -16,13 +16,21 @@ public class ResultAnalyzer {
      * 당첨 된 로또 갯수를 반환한다.
      *
      * @param winningNumbers
-     * @param tickets
+     * @param bonusNumber
      * @param matchCount
+     * @param bonusMatchCount
+     * @param tickets
      * @return
      */
-    public static final int getMatchTicketCount(final int[] winningNumbers, final List<Ticket> tickets, final int matchCount) {
+    public static final int getMatchTicketCount(
+            final int[] winningNumbers,
+            final int bonusNumber,
+            final int matchCount,
+            final int bonusMatchCount,
+            final List<Ticket> tickets) {
         return tickets.stream()
                 .filter(ticket -> ticket.matchCount(winningNumbers) == matchCount)
+                .filter(ticket -> ticket.matchCount(bonusNumber) == bonusMatchCount)
                 .collect(Collectors.toList())
                 .size();
     }
@@ -31,6 +39,7 @@ public class ResultAnalyzer {
      * 총 당첨금을 반환한다.
      *
      * @param winningNumbers
+     * @param bonusNumber
      * @param tickets
      * @return
      */
@@ -44,6 +53,7 @@ public class ResultAnalyzer {
      * 당첨금을 반환한다.
      *
      * @param winningNumber
+     * @param bonusNumber
      * @return
      */
     public static final int getPrizeMoney(final int[] winningNumber, final int bonusNumber, final Ticket ticket) {
@@ -69,6 +79,7 @@ public class ResultAnalyzer {
      * 수익률을 반환한다.
      *
      * @param winningNumbers
+     * @param bonusNumber
      * @param tickets
      * @param spending
      * @return
