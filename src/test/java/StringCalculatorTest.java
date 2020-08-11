@@ -36,4 +36,8 @@ class StringCalculatorTest {
     assertThat(StringCalculator.add(sentence)).isEqualTo(6);
   }
 
+  @Test
+  void givenCustomSeparator() {
+    assertThat(StringCalculator.add("//;\n1;2;3")).isEqualTo(6);
+  }
 }
