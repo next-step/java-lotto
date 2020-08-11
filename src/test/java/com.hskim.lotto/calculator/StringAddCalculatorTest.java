@@ -27,7 +27,7 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    private Stream<Arguments> provideTokenList() {
+    private static Stream<Arguments> provideTokenList() {
 
         return Stream.of(
                 Arguments.of(Arrays.asList("3", "5", "7", "9"), 24),

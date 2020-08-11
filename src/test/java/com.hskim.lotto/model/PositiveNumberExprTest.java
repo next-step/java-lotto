@@ -1,6 +1,8 @@
 package com.hskim.lotto.model;
 
 
+import com.hskim.lotto.exception.CalculatorException;
+import com.hskim.lotto.exception.CalculatorExceptionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PositiveNumberExprTest {
 
-    private PositiveNumberExpr;
+    private PositiveNumberExpr positiveNumberExpr;
 
 
     @DisplayName("빈문자열 혹은 null이 들어오는 경우 생성 테스트")
@@ -27,7 +29,7 @@ public class PositiveNumberExprTest {
         PositiveNumberExpr positiveNumberExpr = new PositiveNumberExpr(input);
 
         // then
-        assertThat(positiveNumberExpr.getTokenList()).isEqualsTo(Arrays.asList("0"));
+        assertThat(positiveNumberExpr.getTokenList()).isEqualTo(Arrays.asList("0"));
     }
 
     private static Stream<String> provideEmptyInputs() {
@@ -47,7 +49,7 @@ public class PositiveNumberExprTest {
         PositiveNumberExpr positiveNumberExpr = new PositiveNumberExpr(input);
 
         // then
-        assertThat(positiveNumberExpr.getTokenList()).isEqualsTo(expected);
+        assertThat(positiveNumberExpr.getTokenList()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideCustomInputs() {
@@ -68,7 +70,7 @@ public class PositiveNumberExprTest {
         PositiveNumberExpr positiveNumberExpr = new PositiveNumberExpr(input);
 
         // then
-        assertThat(positiveNumberExpr.getTokenList()).isEqualsTo(expected);
+        assertThat(positiveNumberExpr.getTokenList()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideNormalInputs() {
@@ -87,16 +89,16 @@ public class PositiveNumberExprTest {
     void 양수가_아닌_문자열_예외_테스트(String input, CalculatorException expected) {
 
         // when & then
-        assertThatExceptionOfType(expected).isThrownBy(() -> {
+        assertThatExceptionOfType(CalculatorException.class).isThrownBy(() -> {
             new PositiveNumberExpr(input);
-        });
+        }).withMessage(expected.getMessage());
     }
 
     private static Stream<Arguments> provideInvalidInputs() {
 
         return Stream.of(
                 Arguments.of("3,5,7,a", new CalculatorException(CalculatorExceptionType.CONTAINS_NO_NUMERIC)),
-                Arguments.of("//;\n1;2;-3", new CalculatorException(CalculatorExceptionType.CONTAINS_NEGATIVE_NUMERIC)),
+                Arguments.of("//;\n1;2;-3", new CalculatorException(CalculatorExceptionType.CONTAINS_NEGATIVE_NUMERIC))
                 );
     }
 }
