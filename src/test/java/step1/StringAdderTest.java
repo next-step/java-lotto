@@ -16,4 +16,11 @@ public class StringAdderTest {
 		if("null".equals(string)) string = null;
 		assertThat(StringAdder.calculate(string)).isEqualTo(0);
 	}
+
+	@DisplayName("숫자 하나를 입력 했을 때 해당 숫자를 반환한다.")
+	@ParameterizedTest
+	@ValueSource(strings = {"1","2","3"})
+	void testSingleInt(String string) {
+		assertThat(StringAdder.calculate(string)).isEqualTo(Integer.parseInt(string));
+	}
 }
