@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public enum LottoRanking {
 
@@ -37,7 +38,11 @@ public enum LottoRanking {
         return prize;
     }
 
-    public static LottoRanking valueOf(int countOfMatch) {
-        return BY_COUNT_OF_MATCH.get(countOfMatch);
+    public static LottoRanking valueOf(int countOfMatch, Supplier<Boolean> bonusSupplier) {
+        LottoRanking ranking = BY_COUNT_OF_MATCH.get(countOfMatch);
+        if (ranking == SECOND && bonusSupplier.get()) {
+            return BONUS;
+        }
+        return ranking;
     }
 }
