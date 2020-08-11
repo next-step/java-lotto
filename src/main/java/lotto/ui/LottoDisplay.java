@@ -19,7 +19,7 @@ public class LottoDisplay {
 
     public static void newLine(int newLineCount){
         Stream
-            .iterate(0,(i)->i+1)
+            .iterate(0, (i) -> i+1)
             .limit(newLineCount)
             .map(e -> NEW_LINE)
             .forEach(System.out::print);
