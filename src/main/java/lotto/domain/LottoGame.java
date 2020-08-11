@@ -1,15 +1,20 @@
 package lotto.domain;
 
-import java.util.Optional;
-
 public class LottoGame {
 
-    public static LottoResult match(Lotto winningLotto, LottoNumber bonusBall, Lottos lottos) {
+    private final Lotto winningLotto;
+    private final LottoNumber bonusBall;
+
+    public LottoGame(Lotto winningLotto, LottoNumber bonusBall) {
+        this.winningLotto = winningLotto;
+        this.bonusBall = bonusBall;
+    }
+
+    public LottoResult match(Lottos lottos) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
             int countOfMatch = winningLotto.countOfMatch(lotto);
-            LottoRanking lottoRanking = LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall));
-            Optional.ofNullable(lottoRanking).ifPresent(lottoResult::addRanking);
+            lottoResult.addRanking(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
         }
         return lottoResult;
     }

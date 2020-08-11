@@ -20,7 +20,8 @@ public class LottoGameTest {
         lottos.add(Lotto.fromString("16,22,33,39,43,45"));
 
         // when
-        LottoResult lottoResult = LottoGame.match(winningLotto, bonusBall, lottos);
+        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
+        LottoResult lottoResult = lottoGame.match(lottos);
         Map<LottoRanking, Integer> rankingMap = lottoResult.getRankingMap();
 
         // then
@@ -33,13 +34,14 @@ public class LottoGameTest {
     void match_with_bonus() {
         // given
         Lotto winningLotto = Lotto.fromString("16,22,33,41,44,45");
-        LottoNumber bonusBall = LottoNumber.of(45);
+        LottoNumber bonusBall = LottoNumber.of(43);
         Lottos lottos = new Lottos();
-        lottos.add(Lotto.fromString("16,22,30,41,44,45"));
+        lottos.add(Lotto.fromString("16,22,33,41,43,45"));
         lottos.add(Lotto.fromString("6,7,12,13,14,25"));
 
         // when
-        LottoResult lottoResult = LottoGame.match(winningLotto, bonusBall, lottos);
+        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
+        LottoResult lottoResult = lottoGame.match(lottos);
 
         // then
         assertThat(lottoResult.getTotalPrize()).isEqualTo(LottoRanking.BONUS.prize());
