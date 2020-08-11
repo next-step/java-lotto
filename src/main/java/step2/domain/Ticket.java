@@ -39,28 +39,10 @@ public class Ticket {
     public long matchCount(final int[] compareObj) {
         return Arrays.stream(this.numbers)
                 .boxed()
-                .filter(Arrays.stream(compareObj).boxed().collect(Collectors.toList())::contains)
+                .filter(Arrays.stream(compareObj)
+                        .boxed()
+                        .collect(Collectors.toList())::contains)
                 .count();
-    }
-
-    /**
-     * 당첨금을 반환한다.
-     *
-     * @param winningNumber
-     * @return
-     */
-    public int prizeMoney(final int[] winningNumber) {
-        final long matchCount = matchCount(winningNumber);
-
-        LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(null);
-
-        if (lottoRanking == null)
-            return 0;
-
-        return lottoRanking.getPrizeMoney();
     }
 
     @Override

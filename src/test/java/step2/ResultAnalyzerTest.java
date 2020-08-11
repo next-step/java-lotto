@@ -1,6 +1,7 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoRanking;
 import step2.domain.ResultAnalyzer;
 import step2.domain.Ticket;
 import step2.domain.TicketSellingMachine;
@@ -26,12 +27,36 @@ class ResultAnalyzerTest {
     }
 
     @Test
+    void getPrizeMoney() {
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(winningNumber);
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
+    }
+
+    @Test
+    void getPrizeMoneyForSecond() {
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(new int[]{1, 2, 3, 4, 5, 7});
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 7, ticket)).isEqualTo(LottoRanking.SECOND.getPrizeMoney());
+    }
+
+    @Test
+    void getPrizeMoneyForThird() {
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(new int[]{1, 2, 3, 4, 5, 7});
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
+    }
+
+    @Test
     void getRateReturn() {
-        Ticket ticket = TicketSellingMachine.ticketing();
-        int[] winningNumber = ticket.getNumbers();
+        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getRateReturn(winningNumber, Arrays.asList(ticket), ticket.prizeMoney(winningNumber))
+                ResultAnalyzer.getRateReturn(winningNumber, 0, Arrays.asList(ticket), LottoRanking.FIRST.getPrizeMoney())
         ).isEqualTo(1.0);
     }
 }
