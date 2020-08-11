@@ -3,7 +3,7 @@ public class StringCalculator {
   public static int add(String sentence) {
     if (nullOrEmpty(sentence)) return 0;
 
-    String[] values = sentence.split(",");
+    String[] values = sentence.split(",|:");
     return Integer.parseInt(values[0]) + Integer.parseInt(values[1]);
   }
 

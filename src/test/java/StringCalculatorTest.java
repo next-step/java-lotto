@@ -16,4 +16,9 @@ class StringCalculatorTest {
   void givenCommaSeparator() {
     assertThat(StringCalculator.add("1,2")).isEqualTo(3);
   }
+
+  @Test
+  void givenColonSeparator() {
+    assertThat(StringCalculator.add("1:2")).isEqualTo(3);
+  }
 }
