@@ -13,11 +13,11 @@ public class DelimiterAndNumbers {
 
 	private static final String EMPTY_STRING = "";
 
-	private static final String CUSTOM_DELIMITER_PREFIX = "//";
-
 	private static final Pattern DEFAULT_DELIMITER = Pattern.compile("[,:]");
 
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.+)");
+	private static final Pattern NON_CUSTOM_DELIMITER_PATTERN = Pattern.compile("(\\d"+DEFAULT_DELIMITER+")*\\d");
+
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n((\\d\\1)*\\d)");
 
 	private static final Pattern NON_NUMBER_PATTERN = Pattern.compile("\\D");
 
@@ -47,12 +47,16 @@ public class DelimiterAndNumbers {
 	}
 
 	private Pattern initDelimiter(String input) {
-		if(!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+		if(NON_CUSTOM_DELIMITER_PATTERN.matcher(input)
+										.matches()) {
 			return DEFAULT_DELIMITER;
 		}
-		Matcher customDelimiterPatternMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-		return Pattern.compile(extractSpecificGroup(customDelimiterPatternMatcher,1));
 
+		if(CUSTOM_DELIMITER_PATTERN.matcher(input).matches()) {
+			return Pattern.compile(extractSpecificGroup(CUSTOM_DELIMITER_PATTERN.matcher(input),1));
+		}
+
+		throw new RuntimeException("숫자만 더할 수 있습니다.");
 	}
 
 	private int[] initNumbers(String input) {
@@ -61,9 +65,7 @@ public class DelimiterAndNumbers {
 			input = extractSpecificGroup(customDelimiterPatternMatcher, 2);
 		}
 
-		String[] split = validateAndReturn(delimiter.split(input));
-
-		return parseInt(split);
+		return parseInt(delimiter.split(input));
 	}
 
 	private String extractSpecificGroup(Matcher patternMatcher, int groupNumber) {
@@ -74,20 +76,10 @@ public class DelimiterAndNumbers {
 		return numbers;
 	}
 
-	private String[] validateAndReturn(String[] split) {
-		if(Arrays.stream(split)
-				.anyMatch(s -> NON_NUMBER_PATTERN
-								.matcher(s)
-								.matches())) {
-			throw new RuntimeException("숫자만 더할 수 있습니다.");
-		}
-		return split;
-	}
-
 	private int[] parseInt(String[] split) {
 		if(Arrays.stream(split)
 				.mapToInt(Integer::parseInt)
-				.anyMatch(number -> number < 0)) {
+				.anyMatch(number -> number < ZERO)) {
 			throw new RuntimeException("양수만 더할 수 있습니다.");
 		}
 		return Arrays.stream(split)
