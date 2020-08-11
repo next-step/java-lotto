@@ -6,7 +6,12 @@ public class StringCalculator {
     String[] values = sentence.split(",|:");
     if (lengthIsOne(values)) return toInt(sentence);
 
-    return toInt(values[0]) + toInt(values[1]);
+    int result = toInt(values[0]);
+    for (int i = 1; i < values.length; i++) {
+      result += toInt(values[i]);
+    }
+
+    return result;
   }
 
   private static int toInt(String value) {
