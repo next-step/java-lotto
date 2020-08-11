@@ -60,4 +60,10 @@ class StringCalculatorTest {
     assertThatThrownBy(() -> StringCalculator.add("1,2:c")).isInstanceOf(RuntimeException.class);
   }
 
+  @DisplayName("0 문자열 숫자 포함")
+  @Test
+  void givenContainZero() {
+    assertThat(StringCalculator.add("1,2:0")).isEqualTo(3);
+  }
+
 }

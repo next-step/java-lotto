@@ -38,17 +38,18 @@ public class StringCalculator {
   }
 
   private static int toInt(String value) {
-    int intValue = 0;
-    try {
-      intValue = Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-      throw new RuntimeException(e);
-    }
-    validatorNegative(intValue);
-    return intValue;
+    validatorNumber(value);
+    return returnIntAfterValidatorNegative(Integer.parseInt(value));
   }
 
-  private static void validatorNegative(int intValue) {
+  private static void validatorNumber(String value) {
+    for (char ch : value.toCharArray()) {
+      if (!Character.isDigit(ch)) throw new RuntimeException();
+    }
+  }
+
+  private static int returnIntAfterValidatorNegative(int intValue) {
     if (intValue < 0) throw new RuntimeException();
+    return intValue;
   }
 }
