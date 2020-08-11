@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class StringAdderTest {
@@ -42,5 +43,12 @@ public class StringAdderTest {
 	void testCustomDelimitedStringSum(String input, int result) {
 		assertThat(StringAdder.calculate(input))
 				.isEqualTo(result);
+	}
+
+	@DisplayName("숫자가 아닌 것을 더하려고 하거나, 음수를 더하려고 하면 RuntimeException")
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\\n1;a;3", "//@\\n4@-5@8", "a,b,c", "-1,1"})
+	void testCustomDelimitedStringSum(String input) {
+		assertThrows(RuntimeException.class, () -> StringAdder.calculate(input));
 	}
 }

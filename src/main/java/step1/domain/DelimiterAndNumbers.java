@@ -1,4 +1,4 @@
-package step1;
+package step1.domain;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -17,11 +17,13 @@ public class DelimiterAndNumbers {
 
 	private static final Pattern DEFAULT_DELIMITER = Pattern.compile("[,:]");
 
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("(//)(.)(\\\\n)(.+)");
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.+)");
+
+	private static final Pattern NON_NUMBER_PATTERN = Pattern.compile("\\D");
 
 	private final Pattern delimiter;
 
-	private final String[] numbers;
+	private final int[] numbers;
 
 	public DelimiterAndNumbers(String input) {
 		String removedSpace = removeSpace(input);
@@ -29,14 +31,13 @@ public class DelimiterAndNumbers {
 		this.numbers = initNumbers(removedSpace);
 	}
 	//For Test
-	public DelimiterAndNumbers(Pattern delimiter, String[] numbers) {
+	public DelimiterAndNumbers(Pattern delimiter, int[] numbers) {
 		this.delimiter = delimiter;
 		this.numbers = numbers;
 	}
 
 	public int sum() {
 		return Arrays.stream(numbers)
-				.map(Integer::parseInt)
 				.reduce(ZERO, Integer::sum);
 	}
 
@@ -50,17 +51,19 @@ public class DelimiterAndNumbers {
 			return DEFAULT_DELIMITER;
 		}
 		Matcher customDelimiterPatternMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-		return Pattern.compile(extractSpecificGroup(customDelimiterPatternMatcher,2));
+		return Pattern.compile(extractSpecificGroup(customDelimiterPatternMatcher,1));
 
 	}
 
-	private String[] initNumbers(String input) {
+	private int[] initNumbers(String input) {
 		if(delimiter != DEFAULT_DELIMITER) {
 			Matcher customDelimiterPatternMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-			input = extractSpecificGroup(customDelimiterPatternMatcher, 4);
+			input = extractSpecificGroup(customDelimiterPatternMatcher, 2);
 		}
 
-		return delimiter.split(input);
+		String[] split = validateAndReturn(delimiter.split(input));
+
+		return parseInt(split);
 	}
 
 	private String extractSpecificGroup(Matcher patternMatcher, int groupNumber) {
@@ -69,6 +72,27 @@ public class DelimiterAndNumbers {
 			numbers = patternMatcher.group(groupNumber);
 		}
 		return numbers;
+	}
+
+	private String[] validateAndReturn(String[] split) {
+		if(Arrays.stream(split)
+				.anyMatch(s -> NON_NUMBER_PATTERN
+								.matcher(s)
+								.matches())) {
+			throw new RuntimeException("숫자만 더할 수 있습니다.");
+		}
+		return split;
+	}
+
+	private int[] parseInt(String[] split) {
+		if(Arrays.stream(split)
+				.mapToInt(Integer::parseInt)
+				.anyMatch(number -> number < 0)) {
+			throw new RuntimeException("양수만 더할 수 있습니다.");
+		}
+		return Arrays.stream(split)
+					.mapToInt(Integer::parseInt)
+					.toArray();
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package step1;
 
+import step1.domain.DelimiterAndNumbers;
+
 public class StringAdder {
 
 	private static final int ZERO = 0;
