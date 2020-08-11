@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class StringCalculator {
 
   public static int add(String sentence) {
@@ -6,12 +8,10 @@ public class StringCalculator {
     String[] values = sentence.split(",|:");
     if (lengthIsOne(values)) return toInt(sentence);
 
-    int result = toInt(values[0]);
-    for (int i = 1; i < values.length; i++) {
-      result += toInt(values[i]);
-    }
-
-    return result;
+    return Arrays.stream(values)
+        .map(v -> toInt(v))
+        .reduce((a, b) -> a + b)
+        .get();
   }
 
   private static int toInt(String value) {
