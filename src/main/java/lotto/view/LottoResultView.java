@@ -24,6 +24,9 @@ public class LottoResultView {
         System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
         for (LottoRanking lottoRanking : LottoRanking.values()) {
+            if (lottoRanking == LottoRanking.NOT_MATCH) {
+                continue;
+            }
             int winningCount = winningResultMap.getOrDefault(lottoRanking, 0);
             System.out.println(printLottoRanking(lottoRanking, winningCount));
         }

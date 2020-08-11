@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 public enum LottoRanking {
 
+    NOT_MATCH(0, 0),
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
@@ -16,7 +17,7 @@ public enum LottoRanking {
 
     static {
         for (LottoRanking ranking : values()) {
-            if (ranking != BONUS) {
+            if (ranking != BONUS && ranking != NOT_MATCH) {
                 BY_COUNT_OF_MATCH.put(ranking.countOfMatch, ranking);
             }
         }
@@ -40,9 +41,11 @@ public enum LottoRanking {
 
     public static LottoRanking valueOf(int countOfMatch, Supplier<Boolean> bonusSupplier) {
         LottoRanking ranking = BY_COUNT_OF_MATCH.get(countOfMatch);
-        if (ranking == SECOND && bonusSupplier.get()) {
-            return BONUS;
+        if (ranking == null) {
+            return NOT_MATCH;
         }
-        return ranking;
+        return ranking == SECOND && bonusSupplier.get()
+            ? BONUS
+            : ranking;
     }
 }
