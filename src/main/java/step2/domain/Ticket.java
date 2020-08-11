@@ -31,6 +31,18 @@ public class Ticket {
     }
 
     /**
+     * 숫자와 비교하여 일치하는 숫자의 갯수를 반환한다.
+     *
+     * @param compareObj
+     * @return
+     */
+    public long matchCount(final int compareObj) {
+        return Arrays.stream(this.numbers)
+                .filter(number -> number == compareObj)
+                .count();
+    }
+
+    /**
      * 숫자 배열과 비교하여 일치하는 숫자의 갯수를 반환한다.
      *
      * @param compareObj

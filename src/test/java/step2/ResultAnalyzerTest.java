@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import step2.domain.LottoRanking;
 import step2.domain.ResultAnalyzer;
 import step2.domain.Ticket;
-import step2.domain.TicketSellingMachine;
 
 import java.util.Arrays;
 
@@ -18,11 +17,21 @@ class ResultAnalyzerTest {
         Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, 0, winningNumber.length, 0, Arrays.asList(ticket))
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        0,
+                        LottoRanking.FIRST.getMatchCount(),
+                        false,
+                        Arrays.asList(ticket))
         ).isEqualTo(1);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, 0, winningNumber.length - 1, 0, Arrays.asList(ticket))
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        0,
+                        LottoRanking.FIRST.getMatchCount(),
+                        true,
+                        Arrays.asList(ticket))
         ).isEqualTo(0);
     }
 

@@ -1,7 +1,7 @@
 package step2.domain;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
  */
 public class ResultAnalyzer {
 
-    private ResultAnalyzer() {
-    }
+    private ResultAnalyzer() {}
 
     /**
      * 당첨 된 로또 갯수를 반환한다.
@@ -18,7 +17,7 @@ public class ResultAnalyzer {
      * @param winningNumbers
      * @param bonusNumber
      * @param matchCount
-     * @param bonusMatchCount
+     * @param bonusMatch
      * @param tickets
      * @return
      */
@@ -26,11 +25,15 @@ public class ResultAnalyzer {
             final int[] winningNumbers,
             final int bonusNumber,
             final int matchCount,
-            final int bonusMatchCount,
+            final boolean bonusMatch,
             final List<Ticket> tickets) {
+        Predicate<Ticket> predicate = ticket -> ticket.matchCount(winningNumbers) == matchCount;
+
+        if (bonusMatch)
+            predicate = predicate.and(ticket -> ticket.matchCount(bonusNumber) > 0);
+
         return tickets.stream()
-                .filter(ticket -> ticket.matchCount(winningNumbers) == matchCount)
-                .filter(ticket -> ticket.matchCount(bonusNumber) == bonusMatchCount)
+                .filter(predicate)
                 .collect(Collectors.toList())
                 .size();
     }
@@ -54,25 +57,11 @@ public class ResultAnalyzer {
      *
      * @param winningNumber
      * @param bonusNumber
+     * @param ticket
      * @return
      */
     public static final int getPrizeMoney(final int[] winningNumber, final int bonusNumber, final Ticket ticket) {
-        final long matchCount = ticket.matchCount(winningNumber);
-
-        LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(null);
-
-        if (lottoRanking == null)
-            return 0;
-
-        // 5개 번호 + 보너스 번호를 맞춘 경우 (2등)
-        if (lottoRanking == LottoRanking.THIRD && ticket.matchCount(new int[]{bonusNumber}) == 1)
-            return LottoRanking.SECOND.getPrizeMoney();
-
-
-        return lottoRanking.getPrizeMoney();
+        return LottoRanking.valueOf(ticket.matchCount(winningNumber), ticket.matchCount(bonusNumber) > 0).getPrizeMoney();
     }
 
     /**

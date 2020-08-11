@@ -31,14 +31,19 @@ public class Main {
         PrintMessage.println("---------");
 
         for (LottoRanking ranking : LottoRanking.values()) {
+            if (ranking == LottoRanking.MISS) // 출력 제외
+                continue;
+
             PrintMessage.print(
-                    "%s - %s개\n",
-                    ranking,
+                    "%s개 일치 %s(%,d원) - %s개\n",
+                    ranking.getMatchCount(),
+                    ranking == LottoRanking.SECOND ? ", 보너스 볼 일치 " : "",
+                    ranking.getPrizeMoney(),
                     ResultAnalyzer.getMatchTicketCount(
                             winningNumber,
                             bonusNumber,
                             ranking.getMatchCount(),
-                            ranking.getBonusMatchCount(),
+                            ranking == LottoRanking.SECOND ? true : false,
                             tickets
                     )
             );
