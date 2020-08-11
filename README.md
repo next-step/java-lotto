@@ -26,12 +26,15 @@
 - [ ] PositiveNumberTokens class - 덧셈 계산기의 token들이 담길 일급컬렉션 
  
 ### TDD - 기능검증이 필요한 메소드 구상
-- **PositiveNumberExpr class**
-- [ ] boolean isEmpty(String expression) -> 0 또는 Null 이면 false / 그 외 true
-- [ ] boolean isContainCustomDelimiter(String expression)  -> 커스텀 delimiter가 포함된 식이면 true / 그 외 false
-- [ ] void validatePositiveNumber(List<String> tokenList) -> list에 양수가 아닌 문자열이 포함되어 있으면 Throw RuntimeException
-- **StringAddCalculator class**     
-- [ ] int calculate(List<String> tokenList) -> list에 들어있는 숫자들의 합을 반환
-- **InputView class**
-- [ ] PositiveNumberTokens makeTokens(String input) -> 사용자 입력을 받아 PositiveNumberTokens를 만들어 반환
+####**PositiveNumberExpr class**
+- [x] 생성하면서 아래의 케이스 테스트
+- boolean isEmpty(String input) -> 빈 문자열 또는 Null 이면 false / 그 외 true
+- boolean isContainCustomDelimiter(String input)  -> 커스텀 delimiter가 포함된 식이면 true / 그 외 false
+- void validatePositiveNumber(List<String> tokenList) -> list에 양수가 아닌 문자열이 포함되어 있으면 Throw RuntimeException
+
+####**StringAddCalculator class**     
+- [x] int calculate(List<String> tokenList) -> list에 들어있는 숫자들의 합을 반환
+
+####**CalculatorInputView class**
+- [x] PositiveNumberTokens makeTokens(String input) -> 사용자 입력을 받아 PositiveNumberTokens를 만들어 반환
 
