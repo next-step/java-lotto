@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,4 +41,23 @@ class StringCalculatorTest {
   void givenCustomSeparator() {
     assertThat(StringCalculator.add("//;\n1;2;3")).isEqualTo(6);
   }
+
+  @DisplayName("음수 문자열 숫자 하나만 입력")
+  @Test
+  void givenNegativeOneNumberAsString() {
+    assertThatThrownBy(() -> StringCalculator.add("-1")).isInstanceOf(RuntimeException.class);
+  }
+
+  @DisplayName("음수 문자열 숫자 포함")
+  @Test
+  void givenContainNegativeNumberAsString() {
+    assertThatThrownBy(() -> StringCalculator.add("1,2,-3")).isInstanceOf(RuntimeException.class);
+  }
+
+  @DisplayName("숫자 이외의 값 포함")
+  @Test
+  void givenContainNegativeValue() {
+    assertThatThrownBy(() -> StringCalculator.add("1,2:c")).isInstanceOf(RuntimeException.class);
+  }
+
 }

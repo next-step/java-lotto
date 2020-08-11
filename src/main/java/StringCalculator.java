@@ -38,6 +38,17 @@ public class StringCalculator {
   }
 
   private static int toInt(String value) {
-    return Integer.parseInt(value);
+    int intValue = 0;
+    try {
+      intValue = Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw new RuntimeException(e);
+    }
+    validatorNegative(intValue);
+    return intValue;
+  }
+
+  private static void validatorNegative(int intValue) {
+    if (intValue < 0) throw new RuntimeException();
   }
 }
