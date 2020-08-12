@@ -6,8 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringUtilsTest {
 
@@ -43,5 +42,23 @@ public class StringUtilsTest {
     @ValueSource(strings = {"-", "한글", "Englisheiscute"})
     void isBlank_not_blank_test(String input) {
         assertThat(StringUtils.isBlank(input)).isFalse();
+    }
+
+    @DisplayName("toNumber 정상적으로 변환되는 경우 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"3:3", "-1:-1", "000:0"}, delimiter = ':')
+    void toNumber_test(String input, int result) {
+        assertThatCode(() -> StringUtils.toNumber(input))
+                .isEqualTo(result)
+                .doesNotThrowAnyException();
+    }
+
+    @DisplayName("toNumber 숫자로 변환할 수 없는 경우 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"3ㅋㄷ", "O", "())"})
+        void toNumber_throw_exception_test(String input) {
+            assertThatIllegalArgumentException()
+                    .isThrownBy(() -> StringUtils.toNumber(input))
+                .withMessage("입력값이 숫자가 아닙니다.");
     }
 }
