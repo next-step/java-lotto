@@ -16,7 +16,8 @@ public class CalculatorTest {
         return Stream.of(
                 Arguments.of(Arrays.asList(3, 5, 11), 19),
                 Arguments.of(Arrays.asList(0, 7), 7),
-                Arguments.of(Arrays.asList(1, 1, 1, 1, 1), 5)
+                Arguments.of(Arrays.asList(1, 1, 1, 1, 1), 5),
+                Arguments.of(Arrays.asList(3), 3)
         );
     }
 
