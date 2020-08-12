@@ -1,15 +1,33 @@
-package calculator;
+package calculator.domain;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
 
-    @Test
-    void add() {
+    private static Stream<Arguments> makeCalculatorNumbers() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(3, 5, 11), 19),
+                Arguments.of(Arrays.asList(0, 7), 7),
+                Arguments.of(Arrays.asList(1, 1, 1, 1, 1), 5)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("makeCalculatorNumbers")
+    void add(List<Integer> inputNumbers, int expectedResult) {
         Calculator calculator = new Calculator();
-        Numbers num
-        calculator
+        Numbers numbers = new Numbers(inputNumbers);
+
+        int calculatorResult = calculator.add(numbers);
+
+        assertThat(calculatorResult).isEqualTo(expectedResult);
     }
 }
