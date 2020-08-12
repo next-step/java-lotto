@@ -6,6 +6,7 @@ import step2.domain.ResultAnalyzer;
 import step2.domain.Ticket;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,6 +58,13 @@ class ResultAnalyzerTest {
         Ticket ticket = new Ticket(new int[]{1, 2, 3, 4, 5, 7});
 
         assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
+    }
+
+    @Test
+    void getRankingReports(){
+        List<LottoRanking> reports = ResultAnalyzer.getRankingReports();
+
+        assertThat(reports).hasSize(5);
     }
 
     @Test

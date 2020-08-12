@@ -30,10 +30,8 @@ public class Main {
         PrintMessage.println("당첨 통계");
         PrintMessage.println("---------");
 
-        for (LottoRanking ranking : LottoRanking.values()) {
-            if (ranking == LottoRanking.MISS) // 출력 제외
-                continue;
 
+        for (LottoRanking ranking : ResultAnalyzer.getRankingReports()) {
             PrintMessage.print(
                     "%s개 일치 %s(%,d원) - %s개\n",
                     ranking.getMatchCount(),

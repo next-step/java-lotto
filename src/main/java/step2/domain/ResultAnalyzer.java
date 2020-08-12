@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -75,5 +76,15 @@ public class ResultAnalyzer {
      */
     public static final double getRateReturn(final int[] winningNumbers, final int bonusNumber, final List<Ticket> tickets, final int spending) {
         return getTotalPrizeMoney(winningNumbers, bonusNumber, tickets) / (spending * 1.0);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static List<LottoRanking> getRankingReports() {
+        return Arrays.stream(LottoRanking.values())
+                .filter(lottoRanking -> lottoRanking != LottoRanking.MISS)
+                .collect(Collectors.toList());
     }
 }
