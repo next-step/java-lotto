@@ -58,4 +58,8 @@ public class LottoGenerator {
         return new WinLotto(lotto,LottoNo.empty());
     }
 
+    public static WinLotto winLotto(Lotto lotto, int bonusNo){
+        return new WinLotto(lotto,LottoNo.valueOf(bonusNo));
+    }
+
 }

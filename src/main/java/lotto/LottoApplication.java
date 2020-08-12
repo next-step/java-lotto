@@ -7,6 +7,7 @@ import lotto.domain.core.WinLotto;
 import static lotto.domain.core.LottoGenerator.fromIntSet;
 import static lotto.ui.LottoDisplay.display;
 import static lotto.ui.LottoDisplay.newLine;
+import static lotto.ui.LottoUserInput.inputBonusNo;
 import static lotto.ui.LottoUserInput.inputPurchaseAmount;
 import static lotto.ui.LottoUserInput.inputWinLotto;
 
@@ -24,7 +25,7 @@ public class LottoApplication {
     }
 
     private static void displayLottoStatistics(LottoStore lottoStore) {
-        final WinLotto winLotto = LottoGenerator.winLotto(fromIntSet(inputWinLotto()));
+        final WinLotto winLotto = LottoGenerator.winLotto(fromIntSet(inputWinLotto()), inputBonusNo());
         newLine(1);
         display("당첨 통계");
         display("---------");
