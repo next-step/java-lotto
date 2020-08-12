@@ -38,7 +38,7 @@ class LottoStoreTest {
     @Test
     void statistics() {
         WinLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
-        ImmutableLottoList lottos = ImmutableLottoList.builder()
+        ImmutableLotteries lottos = ImmutableLotteries.builder()
                                                       .lotto(LottoGenerator.from(8, 21, 23, 41, 42, 43))
                                                       .lotto(LottoGenerator.from(3, 5, 11, 16, 32, 38))
                                                       .lotto(LottoGenerator.from(7, 11, 16, 35, 36, 44))
@@ -59,7 +59,7 @@ class LottoStoreTest {
     @DisplayName("화면에 표시되는 로또 테스트")
     @Test
     void display_lottos() {
-        ImmutableLottoList lottos = ImmutableLottoList.builder()
+        ImmutableLotteries lottos = ImmutableLotteries.builder()
                                                       .lotto(LottoGenerator.from(8, 21, 23, 41, 42, 43))
                                                       .build()
             ;

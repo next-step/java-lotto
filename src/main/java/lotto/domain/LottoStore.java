@@ -10,7 +10,7 @@ public class LottoStore {
     public static final String ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT = "로또 구매금액은 0보다 커야 합니다.";
     private static final int ZERO = 0;
     private final LottoPurchase lottoPurchase;
-    private final ImmutableLottoList lottos;
+    private final ImmutableLotteries lottos;
 
     private static void verifyPurchaseAmount(int purchaseAmount) {
         if (ZERO >= purchaseAmount) {
@@ -21,13 +21,13 @@ public class LottoStore {
     LottoStore(int purchaseAmount) {
         verifyPurchaseAmount(purchaseAmount);
         lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
-        lottos = ImmutableLottoList.builder()
+        lottos = ImmutableLotteries.builder()
                                    .autoLottos(lottoPurchase.getAutoLottoGeneratedCount())
                                    .build()
         ;
     }
 
-    LottoStore(int purchaseAmount, ImmutableLottoList lottos) {
+    LottoStore(int purchaseAmount, ImmutableLotteries lottos) {
         verifyPurchaseAmount(purchaseAmount);
         this.lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
         this.lottos = lottos;
