@@ -14,18 +14,18 @@ public class CalculatorTest {
 
     private static Stream<Arguments> makeCalculatorNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList(3, 5, 11), 19),
-                Arguments.of(Arrays.asList(0, 7), 7),
-                Arguments.of(Arrays.asList(1, 1, 1, 1, 1), 5),
-                Arguments.of(Arrays.asList(3), 3)
+                Arguments.of(Arrays.asList("3", "5", "11"), 19),
+                Arguments.of(Arrays.asList("0", "7"), 7),
+                Arguments.of(Arrays.asList("1", "1", "1", "1", "1"), 5),
+                Arguments.of(Arrays.asList("3"), 3)
         );
     }
 
     @ParameterizedTest
     @MethodSource("makeCalculatorNumbers")
-    void add(List<Integer> inputNumbers, int expectedResult) {
+    void add(List<String> inputNumbers, int expectedResult) {
         Calculator calculator = new Calculator();
-        Numbers numbers = new Numbers(inputNumbers);
+        Numbers numbers = Numbers.create(inputNumbers);
 
         int calculatorResult = calculator.add(numbers);
 

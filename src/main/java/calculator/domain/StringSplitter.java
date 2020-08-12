@@ -1,14 +1,11 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class StringSplitter {
 
-    public static StringSplitter create(String input, List<String> delimiter) {
-        return null;
-    }
-
-    public List<String> split() {
-        return null;
+    public static List<String> split(String input, String delimiters) {
+        return Arrays.asList(input.split(delimiters));
     }
 }

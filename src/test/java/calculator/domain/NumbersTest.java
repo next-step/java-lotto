@@ -18,7 +18,7 @@ public class NumbersTest {
 
     @Test
     void create() {
-        List<Integer> inputList = Arrays.asList(4,4,4);
+        List<String> inputList = Arrays.asList("4","4","4");
         Numbers numbers = Numbers.create(inputList);
 
         assertThat(numbers).isNotNull();
@@ -27,8 +27,7 @@ public class NumbersTest {
     @DisplayName("hasNegativeNumber - 음수값 존재하는 경우 테스트")
     @ParameterizedTest
     @MethodSource("makeNumbersWithNegative")
-    void hasNegativeNumber_test() {
-        List<Integer> inputList = Arrays.asList(4,4,4);
+    void hasNegativeNumber_test(List<String> inputList) {
         Numbers numbers = Numbers.create(inputList);
 
         Exception exception = assertThrows(RuntimeException.class, numbers::hasNegativeNumber);
@@ -41,8 +40,8 @@ public class NumbersTest {
 
     private static Stream<Arguments> makeNumbersWithNegative() {
         return Stream.of(
-                Arguments.of(Arrays.asList(3, -100, 24)),
-                Arguments.of(Arrays.asList(-1))
+                Arguments.of(Arrays.asList("3", "-100", "24")),
+                Arguments.of(Arrays.asList("-1"))
         );
     }
 
