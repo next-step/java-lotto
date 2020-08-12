@@ -10,4 +10,7 @@ public class Numbers {
     public static Numbers create(List<Integer> inputList) {
         return null;
     }
+
+    public void hasNegativeNumber() {
+    }
 }
