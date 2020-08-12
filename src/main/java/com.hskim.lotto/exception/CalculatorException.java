@@ -10,4 +10,9 @@ public class CalculatorException extends RuntimeException {
         this.calculatorExceptionType = calculatorExceptionType;
         message = calculatorExceptionType.getMessage();
     }
+
+    public String getMessage() {
+
+        return message;
+    }
 }

@@ -1,11 +1,13 @@
 package com.hskim.lotto.calculator;
 
-import java.util.List;
+import com.hskim.lotto.model.PositiveNumberTokens;
 
 public class StringAddCalculator {
 
-    public int calculate(List<String> tokenList) {
+    public int calculate(PositiveNumberTokens positiveNumberExpr) {
 
-        return 0;
+        return positiveNumberExpr.getTokenList().stream()
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
     }
 }
