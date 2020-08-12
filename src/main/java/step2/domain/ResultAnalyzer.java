@@ -17,7 +17,6 @@ public class ResultAnalyzer {
      *
      * @param winningNumbers
      * @param bonusNumber
-     * @param matchCount
      * @param bonusMatch
      * @param tickets
      * @return
@@ -25,13 +24,12 @@ public class ResultAnalyzer {
     public static final int getMatchTicketCount(
             final int[] winningNumbers,
             final int bonusNumber,
-            final int matchCount,
             final boolean bonusMatch,
             final List<Ticket> tickets) {
-        Predicate<Ticket> predicate = ticket -> ticket.matchCount(winningNumbers) == matchCount;
+        Predicate<Ticket> predicate = ticket -> ticket.checkPrize(winningNumbers);
 
         if (bonusMatch)
-            predicate = predicate.and(ticket -> ticket.matchCount(bonusNumber) > 0);
+            predicate = predicate.and(ticket -> ticket.checkBonusNumber(bonusNumber));
 
         return tickets.stream()
                 .filter(predicate)

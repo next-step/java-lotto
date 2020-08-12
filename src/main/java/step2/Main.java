@@ -40,7 +40,6 @@ public class Main {
                     ResultAnalyzer.getMatchTicketCount(
                             winningNumber,
                             bonusNumber,
-                            ranking.getMatchCount(),
                             ranking == LottoRanking.SECOND ? true : false,
                             tickets
                     )

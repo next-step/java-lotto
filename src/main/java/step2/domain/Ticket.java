@@ -57,6 +57,24 @@ public class Ticket {
                 .count();
     }
 
+    /**
+     * 당첨 여부를 판별한다.
+     * @param compareObj
+     * @return
+     */
+    public boolean checkPrize(final int[] compareObj) {
+        return this.matchCount(compareObj) == this.numbers.length;
+    }
+
+    /**
+     * 보너스 번호 당첨 여부를 판별한다.
+     * @param bonusNumber
+     * @return
+     */
+    public boolean checkBonusNumber(final int bonusNumber) {
+        return this.matchCount(bonusNumber) > 0;
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(this.numbers);

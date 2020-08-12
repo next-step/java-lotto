@@ -21,7 +21,6 @@ class ResultAnalyzerTest {
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
                         0,
-                        LottoRanking.FIRST.getMatchCount(),
                         false,
                         Arrays.asList(ticket))
         ).isEqualTo(1);
@@ -30,7 +29,6 @@ class ResultAnalyzerTest {
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
                         0,
-                        LottoRanking.FIRST.getMatchCount(),
                         true,
                         Arrays.asList(ticket))
         ).isEqualTo(0);
