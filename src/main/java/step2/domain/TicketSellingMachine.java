@@ -62,14 +62,13 @@ public class TicketSellingMachine {
      *
      * @return
      */
-    private static final int[] createNumbers() {
+    private static final List<Integer> createNumbers() {
         // 생성된 번호 목록을 섞는다.
         Collections.shuffle(COLLECT);
 
         return COLLECT.stream()
                 .limit(NUMBER_SIZE)
-                .mapToInt(Integer::intValue)
-                .toArray();
+                .collect(Collectors.toList());
     }
 
     /**

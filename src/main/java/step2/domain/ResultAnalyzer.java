@@ -22,7 +22,7 @@ public class ResultAnalyzer {
      * @return
      */
     public static final int getMatchTicketCount(
-            final int[] winningNumbers,
+            final List<Integer> winningNumbers,
             final int bonusNumber,
             final boolean bonusMatch,
             final List<Ticket> tickets) {
@@ -45,7 +45,7 @@ public class ResultAnalyzer {
      * @param tickets
      * @return
      */
-    private static final int getTotalPrizeMoney(final int[] winningNumbers, final int bonusNumber, final List<Ticket> tickets) {
+    private static final int getTotalPrizeMoney(final List<Integer> winningNumbers, final int bonusNumber, final List<Ticket> tickets) {
         return tickets.stream()
                 .mapToInt(ticket -> getPrizeMoney(winningNumbers, bonusNumber, ticket))
                 .sum();
@@ -59,7 +59,7 @@ public class ResultAnalyzer {
      * @param ticket
      * @return
      */
-    public static final int getPrizeMoney(final int[] winningNumber, final int bonusNumber, final Ticket ticket) {
+    public static final int getPrizeMoney(final List<Integer> winningNumber, final int bonusNumber, final Ticket ticket) {
         return LottoRanking.valueOf(ticket.matchCount(winningNumber), ticket.matchCount(bonusNumber) > 0).getPrizeMoney();
     }
 
@@ -72,7 +72,7 @@ public class ResultAnalyzer {
      * @param spending
      * @return
      */
-    public static final double getRateReturn(final int[] winningNumbers, final int bonusNumber, final List<Ticket> tickets, final int spending) {
+    public static final double getRateReturn(final List<Integer> winningNumbers, final int bonusNumber, final List<Ticket> tickets, final int spending) {
         return getTotalPrizeMoney(winningNumbers, bonusNumber, tickets) / (spending * 1.0);
     }
 

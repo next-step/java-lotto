@@ -1,7 +1,7 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * Lotto Ticket
@@ -11,22 +11,22 @@ public class Ticket {
     /**
      * 번호 목록
      */
-    private final int[] numbers;
+    private final List<Integer> numbers;
 
     /**
      * 번호 목록을 반환한다.
      *
      * @return
      */
-    public int[] getNumbers() {
-        return Arrays.copyOf(numbers, numbers.length);
+    public List<Integer> getNumbers() {
+        return this.numbers;
     }
 
     /**
      * 생성자를 통해 초기화한다.
      * 번호 목록을 생성한다.
      */
-    public Ticket(int[] numbers) {
+    public Ticket(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -37,7 +37,7 @@ public class Ticket {
      * @return
      */
     public long matchCount(final int compareObj) {
-        return Arrays.stream(this.numbers)
+        return this.numbers.stream()
                 .filter(number -> number == compareObj)
                 .count();
     }
@@ -48,26 +48,25 @@ public class Ticket {
      * @param compareObj
      * @return
      */
-    public long matchCount(final int[] compareObj) {
-        return Arrays.stream(this.numbers)
-                .boxed()
-                .filter(Arrays.stream(compareObj)
-                        .boxed()
-                        .collect(Collectors.toList())::contains)
+    public long matchCount(final List<Integer> compareObj) {
+        return this.numbers.stream()
+                .filter(compareObj::contains)
                 .count();
     }
 
     /**
      * 당첨 여부를 판별한다.
+     *
      * @param compareObj
      * @return
      */
-    public boolean checkPrize(final int[] compareObj) {
-        return this.matchCount(compareObj) == this.numbers.length;
+    public boolean checkPrize(final List<Integer> compareObj) {
+        return this.matchCount(compareObj) == this.numbers.size();
     }
 
     /**
      * 보너스 번호 당첨 여부를 판별한다.
+     *
      * @param bonusNumber
      * @return
      */
@@ -77,6 +76,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return Arrays.toString(this.numbers);
+        return Arrays.toString(this.numbers.toArray());
     }
 }

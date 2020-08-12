@@ -21,7 +21,7 @@ public class Main {
                 .forEach(ticket -> PrintMessage.println(ticket));
 
         PrintMessage.println();
-        int[] winningNumber = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> winningNumber = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.");
 
         PrintMessage.println();
         int bonusNumber = InputScanner.getInt("보너스 볼을 입력해 주세요.");

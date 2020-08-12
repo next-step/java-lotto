@@ -16,7 +16,7 @@ class TicketSellingMachineTest {
     void ticketing() {
         Ticket ticket = TicketSellingMachine.ticketing();
 
-        assertThat(ticket.getNumbers().length).isEqualTo(6);
+        assertThat(ticket.getNumbers().size()).isEqualTo(6);
     }
 
     @ParameterizedTest

@@ -3,7 +3,9 @@ package step2.view;
 import step2.lib.PrintMessage;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * 사용자의 입력을 받아 입력한 값을 반환해주는 작업을 처리하는 클래스
@@ -31,11 +33,10 @@ public class InputScanner {
      * @param message
      * @return
      */
-    public static int[] getInts(String message) {
+    public static List<Integer> getInts(String message) {
         PrintMessage.println(message);
         return Arrays.stream(SCANNER.next().split(","))
                 .map(value -> Integer.parseInt(value.trim()))
-                .mapToInt(Integer::intValue)
-                .toArray();
+                .collect(Collectors.toList());
     }
 }

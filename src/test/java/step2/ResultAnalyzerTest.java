@@ -14,7 +14,7 @@ class ResultAnalyzerTest {
 
     @Test
     void getMatchTicketCount() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
@@ -36,7 +36,7 @@ class ResultAnalyzerTest {
 
     @Test
     void getPrizeMoney() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(winningNumber);
 
         assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
@@ -44,16 +44,16 @@ class ResultAnalyzerTest {
 
     @Test
     void getPrizeMoneyForSecond() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
-        Ticket ticket = new Ticket(new int[]{1, 2, 3, 4, 5, 7});
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 7, ticket)).isEqualTo(LottoRanking.SECOND.getPrizeMoney());
     }
 
     @Test
     void getPrizeMoneyForThird() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
-        Ticket ticket = new Ticket(new int[]{1, 2, 3, 4, 5, 7});
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
     }
@@ -67,7 +67,7 @@ class ResultAnalyzerTest {
 
     @Test
     void getRateReturn() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
