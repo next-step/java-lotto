@@ -28,11 +28,9 @@ public class NumbersTest {
     @ParameterizedTest
     @MethodSource("makeNumbersWithNegative")
     void hasNegativeNumber_test(List<String> inputList) {
-        Numbers numbers = Numbers.create(inputList);
+        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.create(inputList));
 
-        Exception exception = assertThrows(RuntimeException.class, numbers::hasNegativeNumber);
-
-        String expectedMessage = "음수값은 입력이 불가능합니다.";
+        String expectedMessage = "음수는 입력이 불가능합니다.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

@@ -12,7 +12,7 @@
 #### 입력된 문자열 유효성체크 
 * [X] null, 빈값 입력 시, 0을 반환한다.
 * [ ] 숫자 하나 입력 시, 입력한 숫자를 반환한다. 
-* [ ] 음수 입력 시, RuntimeException이 발생한다. 
+* [X] 음수 입력 시, RuntimeException이 발생한다. 
 * [X] 숫자 아닌 문자열 입력시 IllegalException 발생한다. 
 
 #### 계산 및 로직 

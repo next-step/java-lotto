@@ -17,9 +17,13 @@ public class Numbers {
     public static Numbers create(List<String> strings) {
         return strings.stream()
                 .map(StringUtils::toNumber)
+                .peek(Numbers::validateNegativeNumber)
                 .collect(collectingAndThen(Collectors.toList(), Numbers::new));
     }
 
-    public void hasNegativeNumber() {
+    public static void validateNegativeNumber(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 입력이 불가능합니다.");
+        }
     }
 }
