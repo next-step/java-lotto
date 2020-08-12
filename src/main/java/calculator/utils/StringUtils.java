@@ -6,7 +6,7 @@ public class StringUtils {
     }
 
     public static boolean isBlank(String input) {
-        return false;
+        return input == null || input.trim().equals("");
     }
 
     public static int toNumber(String input) {
