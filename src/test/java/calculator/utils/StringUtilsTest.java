@@ -59,6 +59,6 @@ public class StringUtilsTest {
         void toNumber_throw_exception_test(String input) {
             assertThatIllegalArgumentException()
                     .isThrownBy(() -> StringUtils.toNumber(input))
-                .withMessage("입력값이 숫자가 아닙니다.");
+                .withMessage("숫자를 제대로 입력해주세요.");
     }
 }

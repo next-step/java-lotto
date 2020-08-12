@@ -10,6 +10,16 @@ public class StringUtils {
     }
 
     public static int toNumber(String input) {
-        return 0;
+        validateNumber(input);
+
+        return Integer.parseInt(input);
+    }
+
+    public static void validateNumber(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 제대로 입력해주세요.");
+        }
     }
 }
