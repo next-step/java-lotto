@@ -25,4 +25,23 @@ public class StringUtilsTest {
                 .isThrownBy(() -> StringUtils.isNumber(null))
                 .withMessageContaining("입력값이 숫자가 아닙니다.");
     }
+
+    @DisplayName("isBlank - null 입력 테스트")
+    @Test
+    void isBlank_null_test() {
+        assertThat(StringUtils.isBlank(null)).isTrue();
+    }
+
+    @DisplayName("isBlank - 빈 문자열 입력 테스트")
+    @Test
+    void isBlank_empty_string_test() {
+        assertThat(StringUtils.isBlank(" ")).isTrue();
+    }
+
+    @DisplayName("isBlank - 여러 문자열 입력 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"-", "한글", "Englisheiscute"})
+    void isBlank_not_blank_test(String input) {
+        assertThat(StringUtils.isBlank(input)).isFalse();
+    }
 }
