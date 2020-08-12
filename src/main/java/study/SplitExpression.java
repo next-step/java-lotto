@@ -1,12 +1,16 @@
 package study;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SplitExpression {
     private List<Integer> numbers;
 
     public SplitExpression(String expression) {
-        this.numbers = SplitUtil.splitExpression(expression);
+        this.numbers = Arrays.stream(SplitUtil.splitExpression(expression))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public int sum() {
