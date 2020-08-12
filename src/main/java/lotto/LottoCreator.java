@@ -18,15 +18,15 @@ public class LottoCreator {
                 .collect(Collectors.toList());
     }
 
-    public static List<Lotto> create(final int money) {
+    public static List<LottoNumber> create(final int money) {
 
-        List<Lotto> lottoList = new ArrayList<>();
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
 
         for (int i = 0; i < money / 1000; i++) {
             Collections.shuffle(ORIGINAL_LOTTO_NUMBERS, RANDOM_INSTANCE);
-            lottoList.add(new Lotto(ORIGINAL_LOTTO_NUMBERS.subList(0, 6)));
+            lottoNumberList.add(new LottoNumber(ORIGINAL_LOTTO_NUMBERS.subList(0, 6)));
         }
 
-        return lottoList;
+        return lottoNumberList;
     }
 }

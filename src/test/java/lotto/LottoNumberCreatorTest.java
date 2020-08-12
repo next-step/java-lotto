@@ -9,18 +9,18 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LottoCreatorTest {
+public class LottoNumberCreatorTest {
 
     @ParameterizedTest
     @ValueSource(ints = { 10000, 13000, 15000 } )
     public void buyingLottoTest(int money) {
 
-        List<Lotto> lottoList = LottoCreator.create(money);
-        assertThat(lottoList.size()).isEqualTo(money / 1000);
+        List<LottoNumber> lottoNumberList = LottoCreator.create(money);
+        assertThat(lottoNumberList.size()).isEqualTo(money / 1000);
 
-        for (Lotto lotto : lottoList) {
+        for (LottoNumber lottoNumber : lottoNumberList) {
 
-            List<Integer> numbers = lotto.getNumbers();
+            List<Integer> numbers = lottoNumber.getNumbers();
 
             // 중복 미허용
             assertThat(numbers.stream()

@@ -4,6 +4,7 @@ import common.StringResources;
 
 public class LottoInput {
 
+    public static final int LOTTO_PRICE = 1000;
     private final int amountMoney;
 
     public LottoInput(int amountMoney) {
@@ -12,7 +13,7 @@ public class LottoInput {
             throw new IllegalArgumentException(StringResources.ERR_MUST_BUY);
         }
 
-        if (amountMoney % 1000 != 0) {
+        if (amountMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_UNIT);
         }
 
