@@ -59,13 +59,6 @@ class ResultAnalyzerTest {
     }
 
     @Test
-    void getRankingReports(){
-        List<LottoRanking> reports = ResultAnalyzer.getRankingReports();
-
-        assertThat(reports).hasSize(5);
-    }
-
-    @Test
     void getRateReturn() {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(winningNumber);
