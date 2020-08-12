@@ -20,7 +20,7 @@ class ResultAnalyzerTest {
         assertThat(
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
-                        0,
+                        7,
                         false,
                         Arrays.asList(ticket))
         ).isEqualTo(1);
@@ -28,7 +28,7 @@ class ResultAnalyzerTest {
         assertThat(
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
-                        0,
+                        7,
                         true,
                         Arrays.asList(ticket))
         ).isEqualTo(0);
@@ -39,7 +39,7 @@ class ResultAnalyzerTest {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(winningNumber);
 
-        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 7, ticket)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
     }
 
     @Test
@@ -55,7 +55,7 @@ class ResultAnalyzerTest {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
 
-        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 0, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 8, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
     }
 
     @Test
@@ -71,7 +71,7 @@ class ResultAnalyzerTest {
         Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getRateReturn(winningNumber, 0, Arrays.asList(ticket), LottoRanking.FIRST.getPrizeMoney())
+                ResultAnalyzer.getRateReturn(winningNumber, 7, Arrays.asList(ticket), LottoRanking.FIRST.getPrizeMoney())
         ).isEqualTo(1.0);
     }
 }

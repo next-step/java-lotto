@@ -30,7 +30,6 @@ public class Main {
         PrintMessage.println("당첨 통계");
         PrintMessage.println("---------");
 
-
         for (LottoRanking ranking : ResultAnalyzer.getRankingReports()) {
             PrintMessage.print(
                     "%s개 일치 %s(%,d원) - %s개\n",

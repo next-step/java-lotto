@@ -26,6 +26,7 @@ public class ResultAnalyzer {
             final int bonusNumber,
             final boolean bonusMatch,
             final List<Ticket> tickets) {
+
         Predicate<Ticket> predicate = ticket -> ticket.checkPrize(winningNumbers);
 
         if (bonusMatch)
@@ -60,7 +61,7 @@ public class ResultAnalyzer {
      * @return
      */
     public static final int getPrizeMoney(final List<Integer> winningNumber, final int bonusNumber, final Ticket ticket) {
-        return LottoRanking.valueOf(ticket.matchCount(winningNumber), ticket.matchCount(bonusNumber) > 0).getPrizeMoney();
+        return LottoRanking.valueOf(ticket.matchCount(winningNumber), ticket.checkBonusNumber(bonusNumber)).getPrizeMoney();
     }
 
     /**
@@ -76,10 +77,6 @@ public class ResultAnalyzer {
         return getTotalPrizeMoney(winningNumbers, bonusNumber, tickets) / (spending * 1.0);
     }
 
-    /**
-     *
-     * @return
-     */
     public static List<LottoRanking> getRankingReports() {
         return Arrays.stream(LottoRanking.values())
                 .filter(lottoRanking -> lottoRanking != LottoRanking.MISS)

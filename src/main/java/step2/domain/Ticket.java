@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Lotto Ticket
@@ -11,57 +12,34 @@ public class Ticket {
     /**
      * 번호 목록
      */
-    private final List<Integer> numbers;
-
-    /**
-     * 번호 목록을 반환한다.
-     *
-     * @return
-     */
-    public List<Integer> getNumbers() {
-        return this.numbers;
-    }
+    private final LottoNumbers numbers;
 
     /**
      * 생성자를 통해 초기화한다.
      * 번호 목록을 생성한다.
      */
-    public Ticket(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Ticket(final List<Integer> numbers) {
+        this.numbers = new LottoNumbers(numbers);
     }
 
     /**
-     * 숫자와 비교하여 일치하는 숫자의 갯수를 반환한다.
+     * 숫자 목록과 비교하여 일치하는 횟수를 반환한다.
      *
-     * @param compareObj
+     * @param numbers
      * @return
      */
-    public long matchCount(final int compareObj) {
-        return this.numbers.stream()
-                .filter(number -> number == compareObj)
-                .count();
-    }
-
-    /**
-     * 숫자 배열과 비교하여 일치하는 숫자의 갯수를 반환한다.
-     *
-     * @param compareObj
-     * @return
-     */
-    public long matchCount(final List<Integer> compareObj) {
-        return this.numbers.stream()
-                .filter(compareObj::contains)
-                .count();
+    public long matchCount(final List<Integer> numbers) {
+        return this.numbers.matchCount(numbers);
     }
 
     /**
      * 당첨 여부를 판별한다.
      *
-     * @param compareObj
+     * @param numbers
      * @return
      */
-    public boolean checkPrize(final List<Integer> compareObj) {
-        return this.matchCount(compareObj) == this.numbers.size();
+    public boolean checkPrize(final List<Integer> numbers) {
+        return this.numbers.compare(numbers);
     }
 
     /**
@@ -71,11 +49,24 @@ public class Ticket {
      * @return
      */
     public boolean checkBonusNumber(final int bonusNumber) {
-        return this.matchCount(bonusNumber) > 0;
+        return this.numbers.matchCount(Arrays.asList(bonusNumber)) > 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(numbers, ticket.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(this.numbers.toArray());
+        return this.numbers.toString();
     }
 }
