@@ -10,6 +10,8 @@ public class Calculator {
             return 0;
         }
 
+        String delimiters = DelimiterUtils.findDelimiters(input);
+
         return 0;
     }
 
