@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-import lotto.ui.view.DisplayLottoStatistics;
-
 public enum LottoWinningAndPrizeMoney {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),

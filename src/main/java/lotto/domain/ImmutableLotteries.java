@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import lotto.domain.core.Lotto;
-import lotto.domain.core.WinLotto;
+import lotto.domain.core.WinningLotto;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,9 +31,9 @@ final class ImmutableLotteries extends AbstractCollection<Lotto> {
         return new ImmutableLotteriesBuilder();
     }
 
-    List<LottoWinningAndPrizeMoney> compareToEachLottoWithWonLotto(final WinLotto winLotto){
+    List<LottoWinningAndPrizeMoney> compareToEachLottoWithWonLotto(final WinningLotto winningLotto){
         return stream()
-                     .map(winLotto::award)
+                     .map(winningLotto::award)
                      .collect(toList())
             ;
     }

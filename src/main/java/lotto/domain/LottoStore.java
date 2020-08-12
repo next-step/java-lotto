@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-import lotto.domain.core.WinLotto;
+import lotto.domain.core.WinningLotto;
 import lotto.ui.view.DisplayLottoList;
 import lotto.ui.view.DisplayLottoStatistics;
 
@@ -41,8 +41,8 @@ public class LottoStore {
         return lottos.size();
     }
 
-    public LottoStatistics getStatistics(WinLotto winLotto){
-        List<LottoWinningAndPrizeMoney> allMatchCount = lottos.compareToEachLottoWithWonLotto(winLotto);
+    public LottoStatistics getStatistics(WinningLotto winningLotto){
+        List<LottoWinningAndPrizeMoney> allMatchCount = lottos.compareToEachLottoWithWonLotto(winningLotto);
         return LottoStatistics.fromAllMatchCount(lottoPurchase, allMatchCount);
     }
 
@@ -50,7 +50,7 @@ public class LottoStore {
         return new DisplayLottoList(lottos);
     }
 
-    public DisplayLottoStatistics displayLottoStatistics(WinLotto winLotto){
-        return new DisplayLottoStatistics(getStatistics(winLotto));
+    public DisplayLottoStatistics displayLottoStatistics(WinningLotto winningLotto){
+        return new DisplayLottoStatistics(getStatistics(winningLotto));
     }
 }

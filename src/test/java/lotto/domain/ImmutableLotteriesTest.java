@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.core.WinLotto;
+import lotto.domain.core.WinningLotto;
 
 import static lotto.domain.LottoWinningAndPrizeMoney.FIFTH;
 import static lotto.domain.LottoWinningAndPrizeMoney.LOSE;
@@ -30,7 +30,7 @@ class ImmutableLotteriesTest {
     @DisplayName("등록된 모든 로또 목록와 지난주 당첨 로또 비교 테스트")
     @Test
     void all_compare() {
-        WinLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
+        WinningLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
 
         ImmutableLotteries lottos = ImmutableLotteries.builder()
                                                       .lotto(from(8, 21, 23, 41, 42, 43))

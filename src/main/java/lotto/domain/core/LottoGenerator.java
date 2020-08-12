@@ -54,12 +54,12 @@ public class LottoGenerator {
         return Lotto.of(autoLottoNos);
     }
 
-    public static WinLotto winLotto(Lotto lotto){
-        return new WinLotto(lotto,LottoNo.empty());
+    public static WinningLotto winLotto(Lotto lotto){
+        return new WinningLotto(lotto, LottoNo.empty());
     }
 
-    public static WinLotto winLotto(Lotto lotto, int bonusNo){
-        return new WinLotto(lotto,LottoNo.valueOf(bonusNo));
+    public static WinningLotto winLotto(Lotto lotto, int bonusNo){
+        return new WinningLotto(lotto, LottoNo.valueOf(bonusNo));
     }
 
 }

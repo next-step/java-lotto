@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.core.LottoGenerator;
-import lotto.domain.core.WinLotto;
+import lotto.domain.core.WinningLotto;
 
 import static lotto.domain.LottoStore.ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT;
 import static lotto.domain.LottoWinningAndPrizeMoney.FIFTH;
@@ -37,7 +37,7 @@ class LottoStoreTest {
     @DisplayName("로또 당첨 통계 정보 확인")
     @Test
     void statistics() {
-        WinLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
+        WinningLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
         ImmutableLotteries lottos = ImmutableLotteries.builder()
                                                       .lotto(LottoGenerator.from(8, 21, 23, 41, 42, 43))
                                                       .lotto(LottoGenerator.from(3, 5, 11, 16, 32, 38))
