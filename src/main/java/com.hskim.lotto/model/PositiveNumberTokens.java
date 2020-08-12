@@ -1,15 +1,14 @@
 package com.hskim.lotto.model;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PositiveNumberExpr {
 
     public List<String> tokenList;
 
-    public PositiveNumberExpr(String input) {
+    public PositiveNumberExpr(List<String> tokenList) {
 
-        tokenList = Collections.emptyList();
+        this.tokenList = tokenList;
     }
 
     public List<String> getTokenList() {
