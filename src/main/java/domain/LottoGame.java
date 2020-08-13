@@ -10,7 +10,7 @@ public class LottoGame {
     private final int buyAmount;
 
     public LottoGame(int buyPrice) {
-        this.buyAmount = CalculatorUtil.divide(buyPrice, LOTTO_PRICE);
+        this.buyAmount = CalculatorUtil.divideWholeNumber(buyPrice, LOTTO_PRICE);
     }
 
     public int getBuyAmount() {

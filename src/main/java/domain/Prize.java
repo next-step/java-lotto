@@ -27,6 +27,10 @@ public enum Prize {
         return this.hitNumber;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public static Prize of(int hitNumber) {
         return prizes.get(hitNumber);
     }

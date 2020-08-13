@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    public static final int LOTTO_NUMBERS = 6;
     private final List<Lotto> lottos;
 
     public Lottos(int buyAmount, NumberGenerator randomNumberGenerator) {
@@ -22,6 +23,10 @@ public class Lottos {
     }
 
     public LottoPrize getPrizes(List<Integer> winningNumbers) {
+        if(winningNumbers.size() != LOTTO_NUMBERS) {
+            throw new RuntimeException();
+        }
+
         LottoPrize prize = new LottoPrize();
         for (Lotto lotto : lottos) {
             prize.win(lotto.hasWinningNumber(winningNumbers));

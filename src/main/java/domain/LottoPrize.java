@@ -28,4 +28,13 @@ public class LottoPrize {
     public Map<Prize, Integer> getPrizes() {
         return this.prizes;
     }
+
+    public int getTotalPrizeMoney() {
+        int result = 0;
+        for (Map.Entry<Prize, Integer> entry : prizes.entrySet()) {
+            result += entry.getKey().getMoney() * entry.getValue();
+        }
+
+        return result;
+    }
 }

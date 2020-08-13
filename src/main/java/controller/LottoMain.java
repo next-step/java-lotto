@@ -2,12 +2,17 @@ package controller;
 
 
 import domain.LottoGame;
+import domain.LottoPrize;
 import domain.Lottos;
 import strategy.RandomNumberGenerator;
+import util.SplitUtil;
 import view.InputView;
 import view.ResultView;
 
 public class LottoMain {
+
+    public static final String DELIMETER = ",";
+
     public static void main(String[] args) {
         int buyPrice = InputView.inputBuyPrice();
 
@@ -18,5 +23,9 @@ public class LottoMain {
         ResultView.viewIssuedLotto(lottos);
 
         String winningNumbers = InputView.inputWinningNumber();
+        LottoPrize prizes = lottos.getPrizes(SplitUtil.splitToNumber(winningNumbers, DELIMETER));
+
+        ResultView.viewPrize(prizes);
+        ResultView.viewWinningRate(buyPrice, prizes);
     }
 }

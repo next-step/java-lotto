@@ -20,5 +20,4 @@ public class SplitUtil {
 
         return expression.split(SPLIT_DELIMITER);
     }
-
 }
