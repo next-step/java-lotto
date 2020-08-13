@@ -5,12 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class ExpressionTest {
 
@@ -34,6 +34,35 @@ public class ExpressionTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+
+    @Test
+    @DisplayName("Expression 생성 성공")
+    void expression_success() {
+        // when
+        Expression expression = new Expression("1", "2", "10000");
+
+        // then
+        assertThat(expression).isEqualTo(new Expression("1", "2", "10000"));
+    }
+
+
+    private static Stream<Arguments> provideStringsForInvalidExpression() {
+        return Stream.of(
+                (Object) Arrays.array("-1", "2", "3"),
+                Arrays.array("10", "-20"),
+                Arrays.array("a00", "120", "50", "1")
+        ).map(Arguments::of);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideStringsForInvalidExpression")
+    @DisplayName("Expression 생성시 인자가 양의 정수가 아닌경우 Exception 발생")
+    void expression_throw_exception(String[] input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Expression expression = new Expression(input);
+        }).withMessageContaining(CalculatorExceptionMessage.INVALID_NUMBER);
     }
 
 }
