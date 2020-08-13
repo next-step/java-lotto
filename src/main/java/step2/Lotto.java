@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +13,7 @@ public class Lotto {
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);
     validateDuplicate(numbers);
+    Collections.sort(numbers);
     this.numbers = numbers;
   }
 

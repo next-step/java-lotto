@@ -26,4 +26,12 @@ class LottoTest {
         .isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
   }
 
+  @Test
+  void createSortedNormal() {
+    assertThat(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)))
+        .isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+  }
+
+
+
 }
