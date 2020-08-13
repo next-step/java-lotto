@@ -20,4 +20,13 @@ public class Lottos {
     public List<Lotto> getValue() {
         return this.lottos;
     }
+
+    public LottoPrize getPrizes(List<Integer> winningNumbers) {
+        LottoPrize prize = new LottoPrize();
+        for (Lotto lotto : lottos) {
+            prize.win(lotto.hasWinningNumber(winningNumbers));
+        }
+
+        return prize;
+    }
 }

@@ -19,4 +19,14 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+
+    public int hasWinningNumber(List<Integer> winningNumbers) {
+        int hitCount = 0;
+        for (Integer winningNumber : winningNumbers) {
+            hitCount += numbers.contains(winningNumber) ? 1 : 0;
+        }
+
+        return hitCount;
+    }
 }
