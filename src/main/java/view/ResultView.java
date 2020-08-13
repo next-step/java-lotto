@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoPrize;
-import domain.Lottos;
-import domain.Prize;
+import domain.*;
 import util.CalculatorUtil;
 
 import java.util.Map;
@@ -25,16 +22,15 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void viewPrize(LottoPrize prizes) {
+    public static void viewPrize(LottoResults prizes) {
         System.out.println(RESULT_VIEW_MESSAGE);
 
-        for (Map.Entry<Prize, Integer> value : prizes.getPrizes().entrySet()) {
-            Prize key = value.getKey();
-            System.out.println(String.format(PRIZE_MESSAGE, key.getHitNumber(), key.getMoney(), value.getValue()));
+        for (LottoResult value : prizes.getPrizes()) {
+            System.out.println(String.format(PRIZE_MESSAGE, value.getPrizeHitNumber(), value.getPrizeMoney(), value.getWinningNumber()));
         }
     }
 
-    public static void viewWinningRate(int buyPrice, LottoPrize prizes) {
+    public static void viewWinningRate(int buyPrice, LottoResults prizes) {
         System.out.println(String.format(WINNING_RATE_MESSAGE, CalculatorUtil.divideFloatNumber(prizes.getTotalPrizeMoney(), buyPrice)));
     }
 }

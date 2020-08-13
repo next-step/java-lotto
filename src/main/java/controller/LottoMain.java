@@ -2,7 +2,7 @@ package controller;
 
 
 import domain.LottoGame;
-import domain.LottoPrize;
+import domain.LottoResults;
 import domain.Lottos;
 import strategy.RandomNumberGenerator;
 import util.SplitUtil;
@@ -23,7 +23,7 @@ public class LottoMain {
         ResultView.viewIssuedLotto(lottos);
 
         String winningNumbers = InputView.inputWinningNumber();
-        LottoPrize prizes = lottos.getPrizes(SplitUtil.splitToNumber(winningNumbers, DELIMETER));
+        LottoResults prizes = lottos.getPrizes(SplitUtil.splitToNumber(winningNumbers, DELIMETER));
 
         ResultView.viewPrize(prizes);
         ResultView.viewWinningRate(buyPrice, prizes);

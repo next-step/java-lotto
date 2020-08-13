@@ -22,12 +22,12 @@ public class Lottos {
         return this.lottos;
     }
 
-    public LottoPrize getPrizes(List<Integer> winningNumbers) {
+    public LottoResults getPrizes(List<Integer> winningNumbers) {
         if(winningNumbers.size() != LOTTO_NUMBERS) {
             throw new RuntimeException();
         }
 
-        LottoPrize prize = new LottoPrize();
+        LottoResults prize = new LottoResults();
         for (Lotto lotto : lottos) {
             prize.win(lotto.hasWinningNumber(winningNumbers));
         }
