@@ -1,5 +1,7 @@
 package step1.domain;
 
+import step1.exception.StringAdderException;
+
 import java.util.Objects;
 
 public class Number {
@@ -10,16 +12,23 @@ public class Number {
 
 	private static final String NEGATIVE_NOT_ALLOWED = "숫자는 양수로 입력해주세요.";
 
+	private static final String PLEASE_INPUT_POSITIVE_INT = "더할 숫자는 자연수로 입력해주세요.";
+
 	private final int number;
 
 	public Number(String input) {
-		this(Integer.parseInt(input));
+		try {
+			int number = Integer.parseInt(input);
+			validatePositiveNumber(number);
+			this.number = number;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			throw new StringAdderException(PLEASE_INPUT_POSITIVE_INT);
+		}
 	}
 
 	public Number(int number) {
-		if(number < ZERO) {
-			throw new RuntimeException(NEGATIVE_NOT_ALLOWED);
-		}
+		validatePositiveNumber(number);
 		this.number = number;
 	}
 
@@ -29,6 +38,12 @@ public class Number {
 
 	public int intValue() {
 		return number;
+	}
+
+	private void validatePositiveNumber(int number) {
+		if(number < ZERO) {
+			throw new StringAdderException(NEGATIVE_NOT_ALLOWED);
+		}
 	}
 
 	@Override

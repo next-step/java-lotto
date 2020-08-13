@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step1.domain.collections.Numbers;
+import step1.exception.StringAdderException;
 
 import java.util.stream.Stream;
 
@@ -23,7 +24,7 @@ class DefaultOperationTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1&2", "a,b,c"})
 	void testFailConstruction(String input) {
-		assertThrows(RuntimeException.class, () -> new DefaultOperation(input));
+		assertThrows(StringAdderException.class, () -> new DefaultOperation(input));
 	}
 
 	@ParameterizedTest

@@ -3,6 +3,7 @@ package step1.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.exception.StringAdderException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,7 +19,7 @@ class NumberTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"-1", "a"})
 	void failTestConstruct(String stringInput) {
-		assertThrows(RuntimeException.class, () -> new Number(stringInput));
+		assertThrows(StringAdderException.class, () -> new Number(stringInput));
 	}
 
 	@ParameterizedTest

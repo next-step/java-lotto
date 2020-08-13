@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step1.domain.collections.Numbers;
+import step1.exception.StringAdderException;
 
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -22,7 +23,7 @@ class CustomDelimiterOperationTest {
 	@ParameterizedTest
 	@MethodSource("provideFailConstructSource")
 	void testFailConstruction(Pattern customDelimiter, String input) {
-		assertThrows(RuntimeException.class, () -> new CustomDelimiterOperation(customDelimiter, input));
+		assertThrows(StringAdderException.class, () -> new CustomDelimiterOperation(customDelimiter, input));
 	}
 
 	@ParameterizedTest

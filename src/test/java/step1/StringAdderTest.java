@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.exception.StringAdderException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,10 +46,17 @@ public class StringAdderTest {
 				.isEqualTo(result);
 	}
 
-	@DisplayName("숫자가 아닌 것을 더하려고 하거나, 음수를 더하려고 하면 RuntimeException")
+	@DisplayName("숫자가 아닌 것을 더하려고 하거나, 음수를 더하려고 하면 StringAdderException")
 	@ParameterizedTest
 	@ValueSource(strings = {"//;\\n1;a;3", "//@\\n4@-5@8", "a,b,c", "-1,1"})
 	void testCustomDelimitedStringSum(String input) {
-		assertThrows(RuntimeException.class, () -> StringAdder.calculate(input));
+		assertThrows(StringAdderException.class, () -> StringAdder.calculate(input));
+	}
+
+	@DisplayName("포맷에 맞지 않는 값을 더하려고 하면 StringAdderException")
+	@ParameterizedTest
+	@ValueSource(strings = {"fafjoa", "//aldnf2:3", "fjofjo2:1\\n", "//;\\n;;;;"})
+	void testInvalidFormat(String input) {
+		assertThrows(StringAdderException.class, () -> StringAdder.calculate(input));
 	}
 }
