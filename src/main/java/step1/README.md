@@ -19,3 +19,4 @@
 3. Operation 인터페이스 작성
 4. StringAdder 클래스 새로운 설계에 맞게 리팩토링 (이걸 먼저 해야 Operation 구현체들 디자인이 떠오를거같다...)
 5. Operation 구현체 (커스텀 구분자, 디폴트 구분자) 작성
+6. StringUtils Test 추가
