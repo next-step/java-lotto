@@ -7,17 +7,12 @@ public class Delimiter {
 
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
-    public static String[] splitByDefaultDelimiter(String text) {
-        return text.split(",|:");
-    }
-
-    public static String[] splitByCustomDelimiter(String text) {
+    public static String[] splitByDelimiter(String text) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
-        String[] texts = null;
         if(m.find()) {
             String customDelimeter = m.group(1);
-            texts = m.group(2).split(customDelimeter);
+            return m.group(2).split(customDelimeter);
         }
-        return texts;
+        return text.split(",|:");
     }
 }
