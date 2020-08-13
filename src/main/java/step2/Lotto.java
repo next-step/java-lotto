@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Lotto {
 
   public static final int FIXED_COUNT = 6;
-  private List<Integer> numbers;
+  protected List<Integer> numbers;
 
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);
@@ -45,5 +45,9 @@ public class Lotto {
   @Override
   public int hashCode() {
     return Objects.hash(numbers);
+  }
+
+  protected boolean hasNumber(Integer number) {
+    return numbers.contains(number);
   }
 }

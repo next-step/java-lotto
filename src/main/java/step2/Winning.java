@@ -1,14 +1,27 @@
 package step2;
 
-public class Winning {
+import java.util.List;
 
-  private Lotto winner;
+public class Winning extends Lotto {
 
-  public Winning(Lotto winner) {
-    this.winner = winner;
+  private final Lotto winner;
+
+  public Winning(List<Integer> numbers) {
+    super(numbers);
+    this.winner = new Lotto(numbers);
   }
 
   public boolean isWinner(Lotto lotto) {
     return winner.equals(lotto);
+  }
+
+  public int sameNumberCount(Lotto lotto) {
+    if (isWinner(lotto)) {
+      return Lotto.FIXED_COUNT;
+    }
+
+    return numbers.stream().filter(number -> lotto.hasNumber(number))
+        .mapToInt(i -> 1)
+        .sum();
   }
 }

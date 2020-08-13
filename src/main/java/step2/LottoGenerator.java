@@ -11,6 +11,6 @@ public class LottoGenerator {
 
   public static Lotto generate() {
     Collections.shuffle(NUMBER_POOL);
-    return new Lotto(new ArrayList<>(NUMBER_POOL.subList(0, 6)));
+    return new Lotto(new ArrayList<>(NUMBER_POOL.subList(0, Lotto.FIXED_COUNT)));
   }
 }
