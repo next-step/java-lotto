@@ -1,6 +1,10 @@
 package domain;
 
+import strategy.RandomNumberGenerator;
 import util.CalculatorUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGame {
 
@@ -14,5 +18,15 @@ public class LottoGame {
 
     public int getBuyAmount() {
         return buyAmount;
+    }
+
+    public List<Lotto> issue(RandomNumberGenerator randomNumberGenerator) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < this.buyAmount; i++) {
+            lottos.add(new Lotto(randomNumberGenerator));
+        }
+
+        return lottos;
     }
 }
