@@ -6,7 +6,7 @@ public class StringUtil {
 
     public static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "문자열에 음수값이 포함되어 있습니다.";
 
-    public static int[] stringToInt(String[] texts) {
+    public static int[] textToInt(String[] texts) {
       return Arrays.stream(texts).mapToInt(text -> toPositiveNumber(text)).toArray();
     }
 

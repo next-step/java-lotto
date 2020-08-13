@@ -13,7 +13,7 @@ class StringUtilTest {
     @DisplayName("문자열을 숫자로 변환하는 테스트")
     void text_To_Int_Test(){
         String[] texts = {"1", "2", "3"};
-        int[] numbers = StringUtil.stringToInt(texts);
+        int[] numbers = StringUtil.textToInt(texts);
 
         assertThat(numbers.length).isEqualTo(3);
         assertEquals(1 , numbers[0]);
@@ -24,7 +24,7 @@ class StringUtilTest {
     void negative_number_check_test(){
         Assertions.assertThrows(RuntimeException.class, () -> {
             String[] texts = {"-1", "2", "3"};
-            StringUtil.stringToInt(texts);
+            StringUtil.textToInt(texts);
         });
     }
 
