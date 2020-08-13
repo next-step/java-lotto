@@ -7,7 +7,7 @@ public class Delimiter {
 
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
-    public static String[] splitByDelimiter(String text) {
+    public String[] splitByDelimiter(String text) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
         if(m.find()) {
             String customDelimeter = m.group(1);
