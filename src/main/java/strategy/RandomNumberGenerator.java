@@ -17,7 +17,7 @@ public class RandomNumberGenerator implements NumberGenerator {
     private List<Integer> getNumberBound() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < MAX_NUMBER_BOUND; i++) {
-            numbers.add(i);
+            numbers.add(i+1);
         }
         return numbers;
     }

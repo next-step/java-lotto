@@ -2,6 +2,7 @@ package controller;
 
 
 import domain.LottoGame;
+import domain.Lottos;
 import strategy.RandomNumberGenerator;
 import view.InputView;
 import view.ResultView;
@@ -13,6 +14,9 @@ public class LottoMain {
         LottoGame lottoGame = new LottoGame(buyPrice);
 
         ResultView.viewBuyAmount(lottoGame.getBuyAmount());
-        ResultView.viewIssuedLotto(lottoGame.issue(new RandomNumberGenerator()));
+        Lottos lottos = lottoGame.issue(new RandomNumberGenerator());
+        ResultView.viewIssuedLotto(lottos);
+
+        String winningNumbers = InputView.inputWinningNumber();
     }
 }

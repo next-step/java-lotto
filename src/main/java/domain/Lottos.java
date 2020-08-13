@@ -1,15 +1,14 @@
 package domain;
 
-import strategy.RandomNumberGenerator;
+import strategy.NumberGenerator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int buyAmount, RandomNumberGenerator randomNumberGenerator) {
+    public Lottos(int buyAmount, NumberGenerator randomNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < buyAmount; i++) {
             lottos.add(new Lotto(randomNumberGenerator));
