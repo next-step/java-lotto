@@ -1,14 +1,14 @@
 package view;
 
-import domain.LottoGame;
+import domain.LottoNumbers;
 import domain.LottoGames;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void printLottoGames(List<LottoGame> lottoGameList) {
-        for (LottoGame lottoGame : lottoGameList) {
+    public static void printLottoGames(List<LottoNumbers> lottoGameList) {
+        for (LottoNumbers lottoGame : lottoGameList) {
             System.out.println(lottoGame.getNumbers());
         }
     }

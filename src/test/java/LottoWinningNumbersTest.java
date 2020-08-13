@@ -1,4 +1,4 @@
-import domain.LottoGame;
+import domain.LottoNumbers;
 import domain.LottoWinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +22,7 @@ class LottoWinningNumbersTest {
 
         List<Integer> collect = makeInputToIntegerList(input);
 
-        LottoGame lottoGame = new LottoGame(collect);
+        LottoNumbers lottoGame = new LottoNumbers(collect);
 
         int actual = lottoWinningNumbers.getWinningNumberInLottoGame(lottoGame);
 

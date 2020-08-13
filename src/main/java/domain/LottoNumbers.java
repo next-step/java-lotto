@@ -3,10 +3,10 @@ package domain;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoGame {
+public class LottoNumbers {
     private final List<Integer> numbers;
 
-    public LottoGame(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -18,7 +18,7 @@ public class LottoGame {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoGame lottoGame = (LottoGame) o;
+        LottoNumbers lottoGame = (LottoNumbers) o;
         return Objects.equals(numbers, lottoGame.numbers);
     }
 

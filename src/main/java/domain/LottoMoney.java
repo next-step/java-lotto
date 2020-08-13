@@ -12,12 +12,12 @@ public class LottoMoney {
         this.money = money;
     }
 
-    public List<LottoGame> generateLottoGame() {
-        List<LottoGame> lottoGames = new ArrayList<>();
+    public List<LottoNumbers> generateLottoGame() {
+        List<LottoNumbers> lottoGames = new ArrayList<>();
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoGames.add(new LottoGame(RandomGenerator.getSixRandomNumber()));
+            lottoGames.add(new LottoNumbers(RandomGenerator.getSixRandomNumber()));
         }
 
         return lottoGames;

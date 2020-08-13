@@ -1,4 +1,4 @@
-import domain.LottoGame;
+import domain.LottoNumbers;
 import domain.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +15,7 @@ class LottoMoneyTest {
     @DisplayName("입력받은 금액만큼 로또 게임을 생성한다.")
     void createLottoGameByMoneyTest(int inputMoney) {
         LottoMoney lottoMoney = new LottoMoney(inputMoney);
-        List<LottoGame> lottoGames = lottoMoney.generateLottoGame();
+        List<LottoNumbers> lottoGames = lottoMoney.generateLottoGame();
 
         int expected = inputMoney / LottoMoney.MONEY_PER_GAME;
         assertThat(lottoGames.size()).isEqualTo(expected);

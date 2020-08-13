@@ -10,7 +10,7 @@ public class LottoWinningNumbers {
         this.winningNumbers = winningNumbers;
     }
 
-    public int getWinningNumberInLottoGame(LottoGame lottoGame) {
+    public int getWinningNumberInLottoGame(LottoNumbers lottoGame) {
         List<Integer> collect = lottoGame.getNumbers().stream()
                 .filter(winningNumbers::contains)
                 .collect(Collectors.toList());

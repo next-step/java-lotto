@@ -8,19 +8,19 @@ import java.util.stream.IntStream;
 public class LottoGames {
     public static LottoGameWinningMoneyMaps winningMoneyMap = new LottoGameWinningMoneyMaps();
 
-    private final List<LottoGame> lottoGames;
+    private final List<LottoNumbers> lottoGames;
     private final LottoMoney lottoMoney;
     private final LottoWinningNumbers lottoWinningNumbers;
 
     public static LottoGames of(int money, List<Integer> winningNumbers) {
         LottoMoney lottoMoney = new LottoMoney(money);
-        List<LottoGame> lottoGameList = lottoMoney.generateLottoGame();
+        List<LottoNumbers> lottoGameList = lottoMoney.generateLottoGame();
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
 
         return new LottoGames(lottoGameList, lottoMoney, lottoWinningNumbers);
     }
 
-    public LottoGames(List<LottoGame> games, LottoMoney lottoMoney, LottoWinningNumbers lottoWinningNumbers) {
+    public LottoGames(List<LottoNumbers> games, LottoMoney lottoMoney, LottoWinningNumbers lottoWinningNumbers) {
         this.lottoGames = games;
         this.lottoMoney = lottoMoney;
         this.lottoWinningNumbers = lottoWinningNumbers;
@@ -29,7 +29,7 @@ public class LottoGames {
     public Map<Integer, Integer> getWinningStatistics() {
         Map<Integer, Integer> map = initMap();
 
-        for (LottoGame lottoGame : lottoGames) {
+        for (LottoNumbers lottoGame : lottoGames) {
             Integer winningNumber = lottoWinningNumbers.getWinningNumberInLottoGame(lottoGame);
             Integer value = map.getOrDefault(winningNumber, 0) + 1;
             map.put(winningNumber, value);
@@ -57,7 +57,7 @@ public class LottoGames {
         return lottoMoney.getBenefitRate(winningMoney);
     }
 
-    public List<LottoGame> getLottoGames() {
+    public List<LottoNumbers> getLottoGames() {
         return lottoGames;
     }
 }
