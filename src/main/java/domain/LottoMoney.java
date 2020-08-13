@@ -1,29 +1,21 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 public class LottoMoney {
-    public static final int MONEY_PER_GAME = 1000;
+    public static final BigDecimal MONEY_PER_GAME = new BigDecimal(1000);
 
-    private final int money;
+    private final BigDecimal money;
 
     public LottoMoney(int money) {
-        this.money = money;
+        this.money = new BigDecimal(money);
     }
 
-    public List<LottoNumbers> generateLottoGame() {
-        List<LottoNumbers> lottoGames = new ArrayList<>();
-        int gameCount = money / MONEY_PER_GAME;
-
-        for (int i = 0; i < gameCount; i++) {
-            lottoGames.add(new LottoNumbers(RandomGenerator.getSixRandomNumber()));
-        }
-
-        return lottoGames;
+    public BigDecimal getMoney() {
+        return money;
     }
 
-    public double getBenefitRate(double winningMoney) {
-        return winningMoney / money;
+    public BigDecimal multiply(int winningNumber) {
+        return money.multiply(new BigDecimal(winningNumber));
     }
 }
