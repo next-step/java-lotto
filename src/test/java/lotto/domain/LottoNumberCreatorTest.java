@@ -1,13 +1,14 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.LottoCreator;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumberCreatorTest {
 
@@ -20,26 +21,13 @@ public class LottoNumberCreatorTest {
 
         for (LottoNumber lottoNumber : lottoNumberList) {
 
-            List<Integer> numbers = lottoNumber.getNumbers();
+            Set<Integer> numbers = lottoNumber.getNumbers();
 
             // 중복 미허용
             assertThat(numbers.stream()
                     .distinct()
                     .count()
             ).isEqualTo(6);
-
-            // 최소값 == numbers[0]
-            Optional<Integer> minNumber = numbers.stream()
-                    .min(Integer::compareTo);
-
-            assertTrue(minNumber.isPresent());
-            assertThat(minNumber.get()).isEqualTo(numbers.get(0));
-
-            // 최대값 == numbers[5]
-            Optional<Integer> maxNumber = numbers.stream()
-                    .max(Integer::compareTo);
-
-            assertThat(maxNumber.get()).isEqualTo(numbers.get(5));
         }
     }
 }

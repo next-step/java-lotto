@@ -1,4 +1,4 @@
-package lotto;
+package lotto.ui;
 
 import common.StringResources;
 
@@ -8,6 +8,8 @@ public class LottoInput {
     private final int amountMoney;
 
     public LottoInput(int amountMoney) {
+
+        ResultView.print(StringResources.MSG_BUY_MONEY);
 
         if (amountMoney == 0) {
             throw new IllegalArgumentException(StringResources.ERR_MUST_BUY);
@@ -19,6 +21,7 @@ public class LottoInput {
 
         this.amountMoney = amountMoney;
 
+        ResultView.print((amountMoney % 1000) + StringResources.MSG_BUY_QUANTITY);
     }
 
     public int getAmountMoney() {

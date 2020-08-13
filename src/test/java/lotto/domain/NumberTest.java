@@ -1,6 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import common.StringResources;
+import lotto.domain.Number;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoNumberTest {
+public class NumberTest {
 
     @Test
     public void makeLottoNumberSuccess() {
@@ -29,7 +30,7 @@ public class LottoNumberTest {
 
             List<Integer> numbers = fullNumberList.subList(0, 6);
             Collections.sort(numbers);
-            assertThat(new LottoNumber(numbers)).isNotNull();
+            assertThat(new Number(numbers)).isNotNull();
         }
     }
 
@@ -40,11 +41,11 @@ public class LottoNumberTest {
         List<Integer> hasTooLargeValueList = Arrays.asList(46, 1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(hasTooSmallValueList))
+                .isThrownBy(() -> new Number(hasTooSmallValueList))
                 .withMessage(StringResources.ERR_WRONG_RANGE_NUMBER);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(hasTooLargeValueList))
+                .isThrownBy(() -> new Number(hasTooLargeValueList))
                 .withMessage(StringResources.ERR_WRONG_RANGE_NUMBER);
     }
 
@@ -54,7 +55,27 @@ public class LottoNumberTest {
         List<Integer> hasDuplicatedNumberList = Arrays.asList(1, 1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(hasDuplicatedNumberList))
+                .isThrownBy(() -> new Number(hasDuplicatedNumberList))
+                .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
+    }
+
+    @Test
+    public void tooFewItems() {
+
+        List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Number(tooManyItems))
+                .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
+    }
+
+    @Test
+    public void tooManyItems() {
+
+        List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Number(tooManyItems))
                 .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
     }
 }

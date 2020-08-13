@@ -1,4 +1,4 @@
-package lotto;
+package lotto.ui;
 
 import common.StringResources;
 import org.junit.jupiter.api.Test;
