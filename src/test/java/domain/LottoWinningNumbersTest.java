@@ -1,5 +1,5 @@
-import domain.LottoNumbers;
-import domain.LottoWinningNumbers;
+package domain;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +16,7 @@ class LottoWinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6=6", "2,3,4,5,6,7=5", "10,24,26,32,27,1=1"}, delimiter = '=')
     @DisplayName("한 로또 게임과 당첨 번호를 비교해 몇 개가 일치하는지 구한다.")
-    void winningNumberTest(String input, int expected) {
+    void winningNumberTest(String input, int expectedNum) {
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
 
@@ -24,7 +24,9 @@ class LottoWinningNumbersTest {
 
         LottoNumbers lottoGame = new LottoNumbers(collect);
 
-        int actual = lottoWinningNumbers.getWinningNumberInLottoGame(lottoGame);
+        LottoWinningType actual = lottoWinningNumbers.getWinningType(lottoGame);
+
+        LottoWinningType expected = LottoWinningType.getWinningType(expectedNum);
 
         assertThat(actual).isEqualTo(expected);
 
