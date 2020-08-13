@@ -10,16 +10,17 @@ import org.junit.jupiter.api.Test;
 
 class CollectionsTest {
 
+  private final List<Integer> sortedNumbers
+      = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());;
+
+  private final List<Integer> shuffleNumbers =
+      Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
   @Test
   void shuffle() {
-    List<Integer> sortedNumbers =
-        Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
-    List<Integer> shuffleNumbers =
-        Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
-
     assertThat(sortedNumbers).isEqualTo(shuffleNumbers);
 
     Collections.shuffle(sortedNumbers);
     assertThat(sortedNumbers).isNotEqualTo(shuffleNumbers);
   }
+
 }

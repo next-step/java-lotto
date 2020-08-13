@@ -8,8 +8,12 @@ class LottoGeneratorTest {
 
   @Test
   void generateLotto() {
-    Lotto lotto = LottoGenerator.generate();
-
-    assertThat(lotto).isNotNull();
+    assertThat(LottoGenerator.generate()).isNotNull();
   }
+
+  @Test
+  void duplicateLotto() {
+    assertThat(LottoGenerator.generate()).isNotEqualTo(LottoGenerator.generate());
+  }
+
 }
