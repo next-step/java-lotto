@@ -19,9 +19,9 @@ public class LottoGameTest {
     void issue() {
         LottoGame lottoGame = new LottoGame(10000);
 
-        List<Lotto> issuedLottos = lottoGame.issue(new RandomNumberGenerator());
+        Lottos issuedLottos = lottoGame.issue(new RandomNumberGenerator());
 
-        assertThat(issuedLottos.size()).isEqualTo(10);
+        assertThat(issuedLottos.getValue().size()).isEqualTo(10);
 
     }
 }

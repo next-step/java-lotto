@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.Lottos;
 
 import java.util.List;
 
@@ -11,9 +12,10 @@ public class ResultView {
         System.out.println(buyAmount + BUY_AMOUNT_MESSAGE);
     }
 
-    public static void viewIssuedLotto(List<Lotto> issue) {
-        for (Lotto lotto : issue) {
+    public static void viewIssuedLotto(Lottos lottos) {
+        for (Lotto lotto : lottos.getValue()) {
             System.out.println(lotto.getNumbers());
         }
+        System.out.println();
     }
 }

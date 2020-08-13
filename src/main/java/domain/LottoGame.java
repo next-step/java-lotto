@@ -3,9 +3,6 @@ package domain;
 import strategy.RandomNumberGenerator;
 import util.CalculatorUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
@@ -20,13 +17,7 @@ public class LottoGame {
         return buyAmount;
     }
 
-    public List<Lotto> issue(RandomNumberGenerator randomNumberGenerator) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < this.buyAmount; i++) {
-            lottos.add(new Lotto(randomNumberGenerator));
-        }
-
-        return lottos;
+    public Lottos issue(RandomNumberGenerator randomNumberGenerator) {
+        return new Lottos(buyAmount, randomNumberGenerator);
     }
 }
