@@ -11,3 +11,11 @@
 4. 커스텀 구분자를 포함한 문자열을 커스텀 구분자를 이용해서 분리한 후 합을 반환하는 테스트 작성 후 통과시키기
 5. 숫자가 아닌 문자열이나 음수를 더하려고 하면 RuntimeException 발생시키는 테스트 작성 후 통과시키기
 6. 리팩토링 1 - non custom delimiter 패턴도 사용해서 startwith 쓰던 부분도 패턴 사용
+
+## after review refactoring
+** 도메인을 잘 쪼개서 생각해보기 **
+1. Number 클래스 작성 (primitive type wrapper class)
+2. Numbers 클래스 작성(일급 콜렉션)
+3. Operation 인터페이스 작성
+4. StringAdder 클래스 새로운 설계에 맞게 리팩토링 (이걸 먼저 해야 Operation 구현체들 디자인이 떠오를거같다...)
+5. Operation 구현체 (커스텀 구분자, 디폴트 구분자) 작성
