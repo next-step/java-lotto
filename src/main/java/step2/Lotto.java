@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Lotto {
 
+  public static final int FIXED_COUNT = 6;
   private List<Integer> numbers;
 
   public Lotto(List<Integer> numbers) {
@@ -15,7 +16,7 @@ public class Lotto {
   }
 
   private void validateLength(List<Integer> numbers) {
-    if (numbers.size() != 6) {
+    if (numbers.size() != FIXED_COUNT) {
       throw new IllegalArgumentException("로또번호는 6개입니다.");
     }
   }
