@@ -17,7 +17,7 @@ public class Numbers {
 	public Numbers(String input, Pattern delimiter) {
 		this.numbers = toNumbers(input, delimiter);
 	}
-
+	//For Test
 	public Numbers(List<Number> numbers) {
 		this.numbers = numbers;
 	}
