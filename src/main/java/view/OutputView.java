@@ -1,10 +1,8 @@
 package view;
 
-import domain.LottoNumbers;
-import domain.LottoGames;
+import domain.*;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     public static void printLottoGames(List<LottoNumbers> lottoGameList) {
@@ -13,17 +11,18 @@ public class OutputView {
         }
     }
 
-    public static Map<Integer, Integer> printWinningInfo(LottoGames lottoGames) {
-        Map<Integer, Integer> winningStatistics = lottoGames.getWinningStatistics();
+    public static void printWinningInfo(LottoGame lottoGame) {
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos();
         System.out.println();
-        for (int i = 3; i <= 6; i++) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", i, LottoGames.winningMoneyMap.getWinningMoney(i), winningStatistics.get(i));
-        }
-        return winningStatistics;
+
+        List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();
+        winningInfos.forEach(e -> System.out.printf("%d개 일치 (%d원) - %d개\n", e.getWinningType().getHitNumber(),
+                e.getWinningType().getLottoMoney().getMoney().intValue(),
+                e.getWinningNumber()));
     }
 
-    public static void printBenefitRate(LottoGames lottoGames, Map<Integer, Integer> gameStatistics) {
-        double benefitRate = lottoGames.getBenefitRate(gameStatistics);
+    public static void printBenefitRate(LottoGame lottoGame) {
+        double benefitRate = lottoGame.getBenefitRate();
         System.out.println("=========");
         System.out.printf("총 수익률 : %.2f\n", benefitRate);
     }

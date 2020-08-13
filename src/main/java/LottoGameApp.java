@@ -1,19 +1,18 @@
-import domain.LottoGames;
+import domain.LottoGame;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoGameApp {
     public static void main(String[] args) {
         int money = InputView.getMoney();
         List<Integer> winningNumberStr = InputView.getWinningNumberStr();
-        LottoGames lottoGames = LottoGames.of(money, winningNumberStr);
+        LottoGame lottoGame = LottoGame.of(money, winningNumberStr);
 
-        OutputView.printLottoGames(lottoGames.getLottoGames());
+        OutputView.printLottoGames(lottoGame.getLottoNumbersList());
 
-        Map<Integer, Integer> gameStatistics = OutputView.printWinningInfo(lottoGames);
-        OutputView.printBenefitRate(lottoGames, gameStatistics);
+        OutputView.printWinningInfo(lottoGame);
+        OutputView.printBenefitRate(lottoGame);
     }
 }
