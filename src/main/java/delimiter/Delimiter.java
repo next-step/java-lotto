@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Delimiter {
 
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    public static final String DEFAULT_DELIMITER_REGEX = ",|:";
 
     public String[] splitByDelimiter(String text) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
@@ -13,6 +14,6 @@ public class Delimiter {
             String customDelimeter = m.group(1);
             return m.group(2).split(customDelimeter);
         }
-        return text.split(",|:");
+        return text.split(DEFAULT_DELIMITER_REGEX);
     }
 }
