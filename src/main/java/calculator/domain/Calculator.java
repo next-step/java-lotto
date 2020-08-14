@@ -12,7 +12,7 @@ public class Calculator {
         }
 
         String delimiters = DelimiterUtils.findDelimiters(input);
-        String filteredInput = DelimiterUtils.filteredStringFromDelimiter(input);
+        String filteredInput = DelimiterUtils.filterCustomDelimiter(input);
         List<String> strings = StringSplitter.split(filteredInput, delimiters);
 
         return Numbers.create(strings).sum();

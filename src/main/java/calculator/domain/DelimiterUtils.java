@@ -15,14 +15,6 @@ public class DelimiterUtils {
         this.input = input;
     }
 
-    public static DelimiterUtils create(String input) {
-        return new DelimiterUtils(input);
-    }
-
-    public static boolean isEmpty(String input) {
-        return false;
-    }
-
     public static String findDelimiters(String input) {
         Matcher delimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
@@ -33,7 +25,7 @@ public class DelimiterUtils {
         return DEFAULT_DELIMITER;
     }
 
-    public static String filteredStringFromDelimiter(String input) {
+    public static String filterCustomDelimiter(String input) {
         Matcher delimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
         if (delimiterMatcher.find()) {
@@ -49,10 +41,6 @@ public class DelimiterUtils {
         }
 
         return delimiters;
-    }
-
-    public boolean needDelimiterFinder() {
-        return false;
     }
 
 }
