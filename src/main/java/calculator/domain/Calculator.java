@@ -7,13 +7,13 @@ import java.util.List;
 public class Calculator {
 
     public int add(String input) {
-
         if(StringUtils.isBlank(input)) {
             return 0;
         }
 
         String delimiters = DelimiterUtils.findDelimiters(input);
-        List<String> strings = StringSplitter.split(input, delimiters);
+        String filteredInput = DelimiterUtils.filteredStringFromDelimiter(input);
+        List<String> strings = StringSplitter.split(filteredInput, delimiters);
 
         Numbers.create(strings);
 
