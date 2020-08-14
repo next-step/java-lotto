@@ -26,4 +26,9 @@ public class Numbers {
             throw new RuntimeException("음수는 입력이 불가능합니다.");
         }
     }
+
+    public int sum() {
+        return this.numbers.stream()
+                .reduce(0, Integer::sum);
+    }
 }

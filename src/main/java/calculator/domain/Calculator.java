@@ -15,13 +15,6 @@ public class Calculator {
         String filteredInput = DelimiterUtils.filteredStringFromDelimiter(input);
         List<String> strings = StringSplitter.split(filteredInput, delimiters);
 
-        Numbers.create(strings);
-
-
-        return 0;
-    }
-
-    public int add(Numbers numbers) {
-        return 0;
+        return Numbers.create(strings).sum();
     }
 }
