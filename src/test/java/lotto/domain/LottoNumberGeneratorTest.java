@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumberGeneratorTest {
 
     @Test
-    @DisplayName("번호 숫자가 6에서 45 사이")
+    @DisplayName("번호 숫자가 1에서 45 사이")
     void generate_checkNumberRange() {
         Set<LottoNumber> lottoNumbers = LottoNumberGenerator.shuffleAndGet();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            assertThat(lottoNumber.getNumber()).isGreaterThanOrEqualTo(6);
+            assertThat(lottoNumber.getNumber()).isGreaterThanOrEqualTo(1);
             assertThat(lottoNumber.getNumber()).isLessThanOrEqualTo(45);
         }
     }
