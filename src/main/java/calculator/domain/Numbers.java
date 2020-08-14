@@ -14,7 +14,7 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public static Numbers create(List<String> strings) {
+    public static Numbers of(List<String> strings) {
         return strings.stream()
                 .map(StringUtils::toNumber)
                 .peek(Numbers::validateNegativeNumber)
@@ -27,7 +27,7 @@ public class Numbers {
         }
     }
 
-    public int sum() {
+    public int add() {
         return this.numbers.stream()
                 .reduce(0, Integer::sum);
     }

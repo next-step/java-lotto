@@ -19,7 +19,7 @@ public class NumbersTest {
     @Test
     void create() {
         List<String> inputList = Arrays.asList("4","4","4");
-        Numbers numbers = Numbers.create(inputList);
+        Numbers numbers = Numbers.of(inputList);
 
         assertThat(numbers).isNotNull();
     }
@@ -28,7 +28,7 @@ public class NumbersTest {
     @ParameterizedTest
     @MethodSource("makeNumbersWithNegative")
     void hasNegativeNumber_test(List<String> inputList) {
-        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.create(inputList));
+        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.of(inputList));
 
         String expectedMessage = "음수는 입력이 불가능합니다.";
         String actualMessage = exception.getMessage();

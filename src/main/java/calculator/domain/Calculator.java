@@ -1,20 +1,13 @@
 package calculator.domain;
 
-import calculator.utils.StringUtils;
-
-import java.util.List;
-
 public class Calculator {
 
-    public int add(String input) {
-        if(StringUtils.isBlank(input)) {
-            return 0;
-        }
+    public int calculate(String input) {
+        InputManager inputManager = InputManager.of(input);
 
-        String delimiters = DelimiterUtils.findDelimiters(input);
-        String filteredInput = DelimiterUtils.filterCustomDelimiter(input);
-        List<String> strings = StringSplitter.split(filteredInput, delimiters);
+        Numbers numbers = inputManager.getNumbers();
 
-        return Numbers.create(strings).sum();
+        return numbers.add();
     }
+
 }
