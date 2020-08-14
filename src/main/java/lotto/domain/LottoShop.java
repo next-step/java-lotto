@@ -6,7 +6,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class LottoShop {
 
-    private static final int DEFAULT_PRICE_UNIT = 1000;
+    public static final int DEFAULT_PRICE_UNIT = 1000;
+
     private static final String PRICE_ERROR_MESSAGE = "price must be at least zero";
     private static final String PRICE_UNIT_MESSAGE = "price {0} won unit";
 
