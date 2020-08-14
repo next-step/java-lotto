@@ -18,11 +18,20 @@ import static lotto.ui.LottoUserInput.inputWinLotto;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int purchaseAmount = inputPurchaseAmount();
-        int manualLottoCount = inputManualLottoCount();
-        LottoStore lottoStore = inputManualLotto(LottoStore.purchaseManualOrAutoLotto(purchaseAmount, manualLottoCount));
-        displayLottoList(lottoStore);
-        displayLottoStatistics(lottoStore);
+        try {
+            int purchaseAmount = inputPurchaseAmount();
+            int manualLottoCount = inputManualLottoCount();
+            LottoStore lottoStore = inputManualLotto(LottoStore.purchaseManualOrAutoLotto(purchaseAmount, manualLottoCount));
+            displayLottoList(lottoStore);
+            displayLottoStatistics(lottoStore);
+        }catch (IllegalArgumentException e){
+            displayUserErrorLog(e);
+        }
+    }
+
+    private static void displayUserErrorLog(IllegalArgumentException e) {
+        display("[사용자 등록 오류 발생]");
+        display(e.getMessage());
     }
 
     private static LottoStore inputManualLotto(LottoManualSalesStoreBuilder lottoManualSalesStoreBuilder) {
