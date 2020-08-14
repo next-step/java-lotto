@@ -1,4 +1,4 @@
-package com.hskim.lotto.exception;
+package com.hskim.lotto.calculator.exception;
 
 public enum CalculatorExceptionType {
 

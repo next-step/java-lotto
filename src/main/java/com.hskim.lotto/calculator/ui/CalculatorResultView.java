@@ -1,6 +1,6 @@
-package com.hskim.lotto.ui;
+package com.hskim.lotto.calculator.ui;
 
-import com.hskim.lotto.model.CalculateResult;
+import com.hskim.lotto.calculator.model.CalculateResult;
 
 public class CalculatorResultView {
 

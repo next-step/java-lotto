@@ -1,10 +1,8 @@
-package com.hskim.lotto.ui;
+package com.hskim.lotto.calculator.ui;
 
-import com.hskim.lotto.model.UserInput;
+import com.hskim.lotto.calculator.model.UserInput;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CalculatorInputView {
 

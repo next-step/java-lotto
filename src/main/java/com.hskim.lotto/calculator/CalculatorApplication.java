@@ -1,10 +1,10 @@
 package com.hskim.lotto.calculator;
 
-import com.hskim.lotto.model.CalculateResult;
-import com.hskim.lotto.model.CalculatorNumberTokens;
-import com.hskim.lotto.model.UserInput;
-import com.hskim.lotto.ui.CalculatorInputView;
-import com.hskim.lotto.ui.CalculatorResultView;
+import com.hskim.lotto.calculator.model.CalculateResult;
+import com.hskim.lotto.calculator.model.CalculatorNumberTokens;
+import com.hskim.lotto.calculator.model.UserInput;
+import com.hskim.lotto.calculator.ui.CalculatorInputView;
+import com.hskim.lotto.calculator.ui.CalculatorResultView;
 
 public class CalculatorApplication {
 

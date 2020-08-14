@@ -1,4 +1,4 @@
-package com.hskim.lotto.model;
+package com.hskim.lotto.calculator.model;
 
 import org.apache.commons.lang3.StringUtils;
 

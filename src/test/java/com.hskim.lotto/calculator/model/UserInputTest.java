@@ -1,5 +1,7 @@
-package com.hskim.lotto.model;
+package com.hskim.lotto.calculator.model;
 
+import com.hskim.lotto.calculator.model.CalculatorNumberTokens;
+import com.hskim.lotto.calculator.model.UserInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
