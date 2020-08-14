@@ -16,7 +16,6 @@ public class StringAddCalculator {
     }
 
     public CalculateResult calculate(CalculatorNumberTokens calculatorNumberTokens) {
-
         return new CalculateResult(calculatorNumberTokens.getSum());
     }
 }

@@ -9,7 +9,6 @@ import com.hskim.lotto.ui.CalculatorResultView;
 public class CalculatorApplication {
 
     public static void main(String[] args) {
-
         StringAddCalculator stringAddCalculator = StringAddCalculator.getInstance();
         CalculatorInputView calculatorInputView = new CalculatorInputView();
         CalculatorResultView calculatorResultView = new CalculatorResultView();

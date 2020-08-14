@@ -11,14 +11,11 @@ public class CalculatorNumberTokens {
     private List<String> tokenList;
 
     public static CalculatorNumberTokens of(UserInput userInput) {
-
         return userInput.getNumberTokens();
     }
 
     public CalculatorNumberTokens(List<String> tokenList) {
-
         for (String token : tokenList) {
-
             validateNumeric(token);
             validatePositive(token);
         }
@@ -27,27 +24,20 @@ public class CalculatorNumberTokens {
     }
 
     private void validateNumeric(String token) {
-
         try {
-
             Integer.parseInt(token);
-
         } catch (NumberFormatException numberFormatException) {
-
             throw new CalculatorException(CalculatorExceptionType.CONTAINS_NO_NUMERIC);
         }
     }
 
     private void validatePositive(String token) {
-
         if (Integer.parseInt(token) < 0) {
-
             throw new CalculatorException(CalculatorExceptionType.CONTAINS_NEGATIVE_NUMERIC);
         }
     }
 
     public int getSum() {
-
         return tokenList.stream()
                 .map(Integer::parseInt)
                 .reduce(0, Integer::sum);

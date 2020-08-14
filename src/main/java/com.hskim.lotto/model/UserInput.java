@@ -24,15 +24,12 @@ public class UserInput {
     private Matcher matcher;
 
     public UserInput(String userInput) {
-
         this.userInput = Optional.ofNullable(userInput).orElse("");
         setMatcher();
     }
 
     private void setMatcher() {
-
         if (matcherCache.containsKey(userInput)) {
-
             matcher = matcherCache.get(userInput);
             return;
         }
@@ -44,9 +41,7 @@ public class UserInput {
     }
 
     public CalculatorNumberTokens getNumberTokens() {
-
         if (StringUtils.isBlank(userInput)) {
-
             return new CalculatorNumberTokens(Collections.singletonList("0"));
         }
 

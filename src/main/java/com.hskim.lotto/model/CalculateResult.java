@@ -10,12 +10,10 @@ public class CalculateResult {
     private int result;
 
     public CalculateResult(int result) {
-
         this.result = result;
     }
 
     public String createResultString() {
-
         return String.valueOf(result);
     }
 

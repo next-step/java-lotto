@@ -12,12 +12,10 @@ public class CalculatorInputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public void printInputMessage() {
-
         System.out.print(INPUT_MESSAGE);
     }
 
     public UserInput getUserInput() {
-
         return new UserInput(scanner.nextLine());
     }
 }

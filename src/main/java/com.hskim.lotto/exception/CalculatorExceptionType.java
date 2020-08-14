@@ -8,7 +8,6 @@ public enum CalculatorExceptionType {
     private String message;
 
     CalculatorExceptionType(String message) {
-
         this.message = message;
     }
 
