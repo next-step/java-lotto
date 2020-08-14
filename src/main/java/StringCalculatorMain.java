@@ -1,7 +1,7 @@
+import common.ExceptionMessage;
 import view.InputView;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class StringCalculatorMain {
@@ -64,10 +64,10 @@ public class StringCalculatorMain {
     }
 
     private static boolean validateExpression(String param) {
-        if (param == null || param.equals("")) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
+        if (ExpressionValidator.validExpression(param)) {
+            return true;
         }
 
-        return true;
+        throw new IllegalArgumentException(ExceptionMessage.WRONG_EXPRESSION.printMessage());
     }
 }
