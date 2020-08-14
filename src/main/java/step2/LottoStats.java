@@ -11,10 +11,9 @@ public class LottoStats {
   }
 
   public double rate(int payment) {
-    int total = 0;
-    for (LottoStat lottoStat : lottoStats) {
-      total += lottoStat.total();
-    }
+    double total = lottoStats.stream()
+        .mapToDouble(LottoStat::total)
+        .sum();
 
     return total / payment;
   }
