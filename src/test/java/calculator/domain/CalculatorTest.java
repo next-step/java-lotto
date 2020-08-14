@@ -1,11 +1,13 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,11 +49,13 @@ public class CalculatorTest {
 
     }
 
-    @Test
-    void meta_character_test() {
+    @ParameterizedTest
+    @CsvSource(value = {"1^1:\\^", "1*1:\\*", "1$1:\\$", "1+1:\\+", "1{1:\\{", "1)1:\\)", "1.1:\\.", "1?1:\\?"}
+            , delimiter = ':')
+    void meta_character_test(String input, String symbol) {
         // ^, *, $, +, {, }, (, ), [, ], ., ?
-        String asterikaString = "1*1";
-        Stream.of(asterikaString.split("\\*"))
-                .forEach(System.out::println);
+        List<String> actual = Arrays.asList(input.split(symbol));
+
+        assertThat(actual).containsExactly("1", "1");
     }
 }
