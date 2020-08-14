@@ -8,6 +8,8 @@ public class DelimiterUtils {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
     private static final Pattern META_CHARACTERS = Pattern.compile("[\\\\\\]\\[(){}\\-!$?*+<>^\\|]");
     private static final String META_CHARACTER_SUPPORTER = "\\";
+    private static final int DELIMITER_POSITION = 1;
+    private static final int NUMBER_STRING_POSITION = 2;
 
     private DelimiterUtils() {
     }
@@ -16,7 +18,7 @@ public class DelimiterUtils {
         Matcher delimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
         if (delimiterMatcher.find()) {
-            return checkMetaCharacter(delimiterMatcher.group(1));
+            return checkMetaCharacter(delimiterMatcher.group(DELIMITER_POSITION));
         }
 
         return DEFAULT_DELIMITER;
@@ -26,7 +28,7 @@ public class DelimiterUtils {
         Matcher delimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
         if (delimiterMatcher.find()) {
-            return delimiterMatcher.group(2);
+            return delimiterMatcher.group(NUMBER_STRING_POSITION);
         }
 
         return input;
