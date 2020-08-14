@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## STEP01 문자열 덧셈 계산기
+### 기능 요구사항
+- [x] ',' ':' 로 구분된 숫자 문자열을 받아 숫자들의 합을 구한다. ex) 1:2:3 -> 6
+- [x] 커스텀 구분자 사용 가능하다 '//'와 '\n' 사이에 커스텀 구분자 입력가능. ex) //$\n1$2$3 -> 6
+- [x] 빈문자열 or null이 들어오면 return 0
+- [x] 숫자가 들어와야하는 곳에 숫자 이외의 문자가 들어오면 Runtime Exception.
+- [x] 음수가 들어오면 Runtime Exception
+- [x] 숫자가 1개면 그 숫자 return
+
+
