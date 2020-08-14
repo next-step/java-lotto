@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGameTest {
+public class WinningLottoTest {
 
     @Test
     @DisplayName("특정 개수 매칭 결과 확인")
@@ -23,7 +23,7 @@ public class LottoGameTest {
         lottos.add(Lotto.fromString("16,22,33,40,42,43"));
 
         // when
-        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
+        WinningLotto lottoGame = new WinningLotto(winningLotto, bonusBall);
         LottoResult lottoResult = lottoGame.match(lottos);
         Map<LottoRanking, Integer> rankingMap = lottoResult.getRankingMap();
 
@@ -44,7 +44,7 @@ public class LottoGameTest {
         lottos.add(Lotto.fromString("6,7,12,13,14,25"));
 
         // when
-        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
+        WinningLotto lottoGame = new WinningLotto(winningLotto, bonusBall);
         LottoResult lottoResult = lottoGame.match(lottos);
 
         // then

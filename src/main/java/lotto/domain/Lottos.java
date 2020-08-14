@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Lottos implements Iterable<Lotto> {
 
@@ -30,11 +29,15 @@ public class Lottos implements Iterable<Lotto> {
         lottos.add(lotto);
     }
 
-    public void matchWinningLotto(Lotto winningLotto, LottoNumber bonusBall, Consumer<LottoRanking> rankingConsumer) {
+    public List<LottoRanking> matchWinningLotto(WinningLotto winningLotto) {
+        List<LottoRanking> rankings = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int countOfMatch = winningLotto.countOfMatch(lotto);
-            rankingConsumer.accept(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
+            int countOfMatch = winningLotto.getWinningLotto()
+                    .countOfMatch(lotto);
+            LottoNumber bonusBall = winningLotto.getBonusBall();
+            rankings.add(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
         }
+        return rankings;
     }
 
     public int getTotalPrice() {
