@@ -15,7 +15,7 @@ public class LottoMain {
         int bonusBall = LottoInputView.bonusBall();
         // 입력 종료
 
-        LottoGame lottoGame = new LottoGame(Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall), price);
+        LottoGame lottoGame = new LottoGame(Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall));
         LottoResult lottoResult = lottoGame.match(lottos);
 
         // 결과 출력 시작

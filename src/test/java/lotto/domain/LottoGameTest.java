@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static lotto.domain.LottoShop.DEFAULT_PRICE_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
@@ -17,19 +16,19 @@ public class LottoGameTest {
         Lotto winningLotto = Lotto.fromString("16,22,33,41,44,45");
         LottoNumber bonusBall = LottoNumber.of(17);
         Lottos lottos = new Lottos();
-        final int money = 10000;
-        for (int i = 0; i < 10000 / DEFAULT_PRICE_UNIT - 1; i++) {
+        final int buyCount = 10;
+        for (int i = 0; i < 9; i++) {
             lottos.add(Lotto.fromString("18,23,34,38,42,43"));
         }
         lottos.add(Lotto.fromString("16,22,33,40,42,43"));
 
         // when
-        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall, money);
+        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
         LottoResult lottoResult = lottoGame.match(lottos);
         Map<LottoRanking, Integer> rankingMap = lottoResult.getRankingMap();
 
         // then
-        assertThat(lottoResult.getSaveOfReturn()).isEqualTo(0.5);
+        assertThat(lottoResult.getSaveOfReturn()).isEqualTo(lottoResult.getTotalPrize() * 1.0 / (buyCount * LottoShop.DEFAULT_PRICE_UNIT));
         assertThat(lottoResult.getTotalPrize()).isEqualTo(LottoRanking.FOURTH.prize());
         assertThat(rankingMap).containsKey(LottoRanking.FOURTH);
     }
@@ -45,7 +44,7 @@ public class LottoGameTest {
         lottos.add(Lotto.fromString("6,7,12,13,14,25"));
 
         // when
-        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall, 0);
+        LottoGame lottoGame = new LottoGame(winningLotto, bonusBall);
         LottoResult lottoResult = lottoGame.match(lottos);
 
         // then
