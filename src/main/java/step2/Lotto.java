@@ -30,6 +30,10 @@ public class Lotto {
     }
   }
 
+  protected boolean hasNumber(Integer number) {
+    return numbers.contains(number);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -47,7 +51,8 @@ public class Lotto {
     return Objects.hash(numbers);
   }
 
-  protected boolean hasNumber(Integer number) {
-    return numbers.contains(number);
+  @Override
+  public String toString() {
+    return "[" + numbers + ']';
   }
 }

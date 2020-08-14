@@ -1,10 +1,19 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Winning extends Lotto {
 
   private final Lotto winner;
+
+  public Winning(String numbersAsString) {
+    this(
+        Arrays.stream(numbersAsString.split(","))
+            .map(value -> Integer.parseInt(value.trim()))
+            .collect(Collectors.toList()));
+  }
 
   public Winning(List<Integer> numbers) {
     super(numbers);
@@ -20,8 +29,6 @@ public class Winning extends Lotto {
       return Lotto.FIXED_COUNT;
     }
 
-    return numbers.stream().filter(number -> lotto.hasNumber(number))
-        .mapToInt(i -> 1)
-        .sum();
+    return numbers.stream().filter(number -> lotto.hasNumber(number)).mapToInt(i -> 1).sum();
   }
 }

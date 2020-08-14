@@ -23,4 +23,6 @@ public abstract class LottoStat {
   }
 
   abstract int getCount();
+
+  abstract void decide(int sameNumberCount);
 }

@@ -97,4 +97,12 @@ class LottoStatsTest {
 
     assertThat(lottoStats.rate(1400)).isEqualTo(5);
   }
+
+  @Test
+  void decideWinning() {
+    LottoStats lottoStats = new LottoStats();
+    lottoStats.decide(3);
+
+    assertThat(lottoStats.rate(1000)).isEqualTo(5);
+  }
 }
