@@ -10,7 +10,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class LottoNumber {
 
-    public static final int LOTTO_NUMBER_START = 6;
+    public static final int LOTTO_NUMBER_START = 1;
     public static final int LOTTO_NUMBER_END = 45;
 
     private static final String NUMBER_BLANK_MESSAGE = "number not allowed null or empty";
