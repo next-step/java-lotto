@@ -17,4 +17,4 @@
 9. OrderHere Class 작성
 10. PurchaseRequest Class 작성 (도메인 클래스...)
 11. DisplayHere Class 작성
-12. Main 및 CustomException, 유틸 Class 작성
+12. Main 및 CustomException 작성
