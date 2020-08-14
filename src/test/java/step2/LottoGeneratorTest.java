@@ -24,8 +24,13 @@ class LottoGeneratorTest {
   }
 
   @Test
-  void generateByMoney() {
+  void generateByPayment() {
     assertThat(LottoGenerator.generate(1000).size()).isEqualTo(1);
+  }
+
+  @Test
+  void generateByPayment14000() {
+    assertThat(LottoGenerator.generate(14000).size()).isEqualTo(14);
   }
 
 }

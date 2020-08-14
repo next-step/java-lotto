@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.jws.Oneway;
 
 public class LottoGenerator {
   public static final int ONE_PRICE = 1000;
@@ -18,10 +19,12 @@ public class LottoGenerator {
 
   public static List<Lotto> generate(int payment) {
     validatePayment(payment);
+
     List<Lotto> lottos = new ArrayList<>();
-    do {
+    int canBuyCount = payment / ONE_PRICE;
+    for (int i = 0; i < canBuyCount; i++) {
       lottos.add(generate());
-    } while (payment - ONE_PRICE >= ONE_PRICE);
+    }
 
     return lottos;
   }
