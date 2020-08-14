@@ -25,7 +25,7 @@ public class StringResources {
     };
     public static final String MSG_EARNINGS_RATE = "총 수익률은 ##%입니다.";
 
-    public static final String ERR_MUST_BUY = "1장 이상 구매해주세요.";
+    public static final String ERR_MUST_BUY = "금액은 0 이상의 정수만 입력해주세요.";
     public static final String ERR_WRONG_UNIT = "1000원 단위로만 입력해주세요.";
     public static final String ERR_DUPLICATE_NUMBER = "중복되지 않은 6개의 번호로 구성해주세요.";
     public static final String ERR_WRONG_RANGE_NUMBER = "1 이상 45 이하의 수만 사용할 수 있습니다.";

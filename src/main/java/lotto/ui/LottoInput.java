@@ -21,7 +21,7 @@ public class LottoInput {
 
         this.amountMoney = amountMoney;
 
-        ResultView.print((amountMoney % 1000) + StringResources.MSG_BUY_QUANTITY);
+        ResultView.print((amountMoney / 1000) + StringResources.MSG_BUY_QUANTITY);
     }
 
     public int getAmountMoney() {

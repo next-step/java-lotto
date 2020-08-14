@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class LottoResultTest {
+class LottoResultTest {
 
     private LottoResultNumber lottoResultNumber;
     private List<LottoNumber> lottoNumberList;
@@ -36,7 +36,7 @@ public class LottoResultTest {
     }
 
     @Test
-    public void lottoResultTest() {
+    void lottoResultTest() {
         assertEquals(lottoResult.getWinningCount(3), 0);
         assertEquals(lottoResult.getWinningCount(4), 1);
         assertEquals(lottoResult.getWinningCount(5), 1);
@@ -44,7 +44,7 @@ public class LottoResultTest {
     }
 
     @Test
-    public void wrongWinningCount() {
+    void wrongWinningCount() {
         assertThatIllegalArgumentException().isThrownBy(() ->
             lottoResult.getWinningCount(-1)
         ).withMessage(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);

@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class NumberTest {
+class NumberTest {
 
     @Test
-    public void makeLottoNumberSuccess() {
+    void makeLottoNumberSuccess() {
 
         List<Integer> fullNumberList = Stream.iterate(1, i -> i + 1)
                 .limit(45)
@@ -35,7 +35,7 @@ public class NumberTest {
     }
 
     @Test
-    public void wrongRangeNumbers() {
+    void wrongRangeNumbers() {
 
         List<Integer> hasTooSmallValueList = Arrays.asList(0, 1, 2, 3, 4, 5);
         List<Integer> hasTooLargeValueList = Arrays.asList(46, 1, 2, 3, 4, 5);
@@ -50,7 +50,7 @@ public class NumberTest {
     }
 
     @Test
-    public void duplicateNumbers() {
+    void duplicateNumbers() {
 
         List<Integer> hasDuplicatedNumberList = Arrays.asList(1, 1, 2, 3, 4, 5);
 
@@ -60,7 +60,7 @@ public class NumberTest {
     }
 
     @Test
-    public void tooFewItems() {
+    void tooFewItems() {
 
         List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5);
 
@@ -70,7 +70,7 @@ public class NumberTest {
     }
 
     @Test
-    public void tooManyItems() {
+    void tooManyItems() {
 
         List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 

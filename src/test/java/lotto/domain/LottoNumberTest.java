@@ -1,18 +1,15 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResultNumber;
-import lotto.domain.Number;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
     @Test
-    public void makeLottoNumberTest() {
+    void makeLottoNumberTest() {
 
         Number number = new Number(Arrays.asList(1, 2, 3, 4, 5, 6));
 
@@ -21,7 +18,7 @@ public class LottoNumberTest {
     }
 
     @Test
-    public void makeLottoResultNumberTest() {
+    void makeLottoResultNumberTest() {
 
         Number number = new Number(Arrays.asList(1, 2, 3, 4, 5, 6));
 

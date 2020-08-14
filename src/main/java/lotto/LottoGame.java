@@ -31,11 +31,9 @@ public class LottoGame {
 
         for (LottoNumber lottoNumber : lottoNumberList) {
 
-            String message = lottoNumber.getNumbers().stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX));
-
-            ResultView.print(lottoNumber.toString());
+            ResultView.print(lottoNumber.getNumbers().stream()
+                                        .map(String::valueOf)
+                                        .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)));
         }
     }
 
