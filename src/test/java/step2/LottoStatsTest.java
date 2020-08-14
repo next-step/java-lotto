@@ -67,5 +67,16 @@ class LottoStatsTest {
     assertThat(lottoStats.rate(1000)).isEqualTo(2000000);
   }
 
+  @Test
+  void winningFourthPayment14000() {
+    LottoStats lottoStats = new LottoStats(
+        Arrays.asList(
+            new LottoFirstStat(0),
+            new LottoSecondStat(0),
+            new LottoThirdStat(0),
+            new LottoFourthStat(1)));
+
+    assertThat(lottoStats.rate(14000)).isEqualTo(0.35);
+  }
 
 }

@@ -15,7 +15,7 @@ public class LottoStats {
         .mapToDouble(LottoStat::total)
         .sum();
 
-    return total / payment;
+    return Math.floor((total / payment)  * 100)  / 100.0;
   }
 
 }
