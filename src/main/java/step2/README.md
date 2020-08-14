@@ -9,8 +9,8 @@
 2. LottoGame Class 작성하기
 3. LottoGameFactory Class 작성하기
 4. LottoGames Class 작성하기 (일급 컬렉션)
-5. ConfirmResult Class 작성하기
-6. PrizeGrade Class 작성하기
+5. PrizeGrade Class 작성하기
+6. ConfirmResult Class 작성하기
 7. ConfirmResults Class 작성하기 (일급 컬렉션)
 #### UI 시작
 8. OrderHere Class 작성
