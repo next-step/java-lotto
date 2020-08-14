@@ -11,16 +11,9 @@ public class LottoGame {
     }
 
     public LottoResult match(Lottos lottos) {
-        LottoResult lottoResult = new LottoResult(getPurchasePrice(lottos));
-        for (Lotto lotto : lottos) {
-            int countOfMatch = winningLotto.countOfMatch(lotto);
-            lottoResult.addRanking(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
-        }
+        LottoResult lottoResult = new LottoResult(lottos.getTotalPrice());
+        lottos.findLottoResult(winningLotto, bonusBall, lottoResult::addRanking);
         return lottoResult;
-    }
-
-    private int getPurchasePrice(Lottos lottos) {
-        return lottos.size() * LottoShop.DEFAULT_PRICE_UNIT;
     }
 
 }

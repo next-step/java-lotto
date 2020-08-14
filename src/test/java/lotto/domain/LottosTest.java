@@ -37,4 +37,20 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(count);
     }
 
+    @Test
+    @DisplayName("로또 가격 확인")
+    void getTotalPrice() {
+        // given
+        final int count = 10;
+        Lottos lottos = new Lottos();
+
+        // when
+        for (int i = 0; i < count; i++) {
+            lottos.add(Lotto.generateAuto());
+        }
+
+        // then
+        assertThat(lottos.getTotalPrice()).isEqualTo(count * LottoShop.DEFAULT_PRICE_UNIT);
+    }
+
 }
