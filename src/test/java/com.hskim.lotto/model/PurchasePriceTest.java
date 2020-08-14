@@ -9,16 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-/**
- * Created by hs kim on 2020/08/14
- */
 public class PurchasePriceTest {
 
     @DisplayName("생성 테스트")
     @Test
     void create() {
         // given
-        String price = String.valueOf(LottoTicket.LOTTO_PRICE*3);
+        String price = String.valueOf(LottoTicket.LOTTO_PRICE * 3);
         PurchasePrice purchasePrice = new PurchasePrice(price);
 
         // when & then
@@ -40,7 +37,7 @@ public class PurchasePriceTest {
     void create_나누어지지_않는수_실패(double purchasePrice) {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new PurchasePrice(String.valueOf((int)purchasePrice));
+            new PurchasePrice(String.valueOf((int) purchasePrice));
         }).withMessage(LottoExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
     }
 }
