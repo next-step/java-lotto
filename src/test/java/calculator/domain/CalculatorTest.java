@@ -22,10 +22,10 @@ public class CalculatorTest {
         );
     }
 
-    @DisplayName("add 테스트")
+    @DisplayName("calculate 테스트")
     @ParameterizedTest
     @MethodSource("makeCalculatorString")
-    void add(String input, int expectedResult) {
+    void calculate(String input, int expectedResult) {
         assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
     }
 
@@ -39,10 +39,10 @@ public class CalculatorTest {
         );
     }
 
-    @DisplayName("add 테스트 - split Meta Character가 delimiters인 경우")
+    @DisplayName("calculate 테스트 - split Meta Character가 delimiters인 경우")
     @ParameterizedTest
     @MethodSource("makeCalculatorStringWithMetaCharacter")
-    void add_with_meta_character(String input, int expectedResult) {
+    void calculate_with_meta_character(String input, int expectedResult) {
         assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
 
     }
