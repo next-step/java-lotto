@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumberGenerator {
 
@@ -15,9 +13,9 @@ public class LottoNumberGenerator {
         }
     }
 
-    public static List<LottoNumber> shuffleAndGet() {
+    public static Set<LottoNumber> shuffleAndGet() {
         Collections.shuffle(NUMBERS);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int i = 0; i < Lotto.LOTTO_NUMBER_COUNT; i++) {
             lottoNumbers.add(LottoNumber.of(NUMBERS.get(i)));
         }

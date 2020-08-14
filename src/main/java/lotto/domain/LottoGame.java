@@ -1,38 +1,19 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class LottoGame {
 
-    private final Map<Integer, LottoRanking> rankingByCountMap;
-    private Lotto winningLotto;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusBall;
 
-    public LottoGame() {
-        rankingByCountMap = new HashMap<>();
-        for (LottoRanking lottoRanking : LottoRanking.values()) {
-            rankingByCountMap.put(lottoRanking.getMatchCount(), lottoRanking);
-        }
+    public LottoGame(Lotto winningLotto, LottoNumber bonusBall) {
+        this.winningLotto = winningLotto;
+        this.bonusBall = bonusBall;
     }
 
-    public void setWinningLotto(Lotto lotto) {
-        winningLotto = lotto;
-    }
-
-    public LottoResult match(List<Lotto> lottos) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos) {
-            int countOfMatch = winningLotto.getCountOfMatch(lotto);
-            addRankingToResult(lottoResult, countOfMatch);
-        }
+    public LottoResult match(Lottos lottos) {
+        LottoResult lottoResult = new LottoResult(lottos.getTotalPrice());
+        lottos.matchWinningLotto(winningLotto, bonusBall, lottoResult::addRanking);
         return lottoResult;
     }
 
-    private void addRankingToResult(LottoResult lottoResult, int countOfMatch) {
-        LottoRanking lottoRanking = rankingByCountMap.get(countOfMatch);
-        if (lottoRanking != null) {
-            lottoResult.addRanking(lottoRanking);
-        }
-    }
 }

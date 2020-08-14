@@ -3,8 +3,8 @@ package lotto.domain;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -16,16 +16,16 @@ public class Lotto {
     private static final String TEXT_BLANK_MESSAGE = "text not allowed null or empty";
     private static final String NUMBER_COUNT_MESSAGE = "number count must be {0}";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int getCountOfMatch(Lotto lotto) {
+    public int countOfMatch(Lotto lotto) {
         long countOfMatch = lottoNumbers.stream()
-                .filter(lottoNumber -> lotto.contain(lottoNumber.getNumber()))
-                .count();
+            .filter(lotto::contain)
+            .count();
         return Math.toIntExact(countOfMatch);
     }
 
@@ -35,9 +35,8 @@ public class Lotto {
                 .toArray();
     }
 
-    public boolean contain(int number) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.getNumber() == number);
+    public boolean contain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public static Lotto generateAuto() {
@@ -51,7 +50,7 @@ public class Lotto {
         checkArgument(tokens.length == LOTTO_NUMBER_COUNT,
             MessageFormat.format(NUMBER_COUNT_MESSAGE, LOTTO_NUMBER_COUNT));
 
-        List<LottoNumber> newNumbers = new ArrayList<>();
+        Set<LottoNumber> newNumbers = new HashSet<>();
         for (String token : tokens) {
             newNumbers.add(LottoNumber.of(token));
         }

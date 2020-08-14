@@ -16,6 +16,12 @@ public class LottoInputView {
         return scanner.nextLine();
     }
 
+    public static int bonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = createScanner();
+        return scanner.nextInt();
+    }
+
     private static Scanner createScanner() {
         return new Scanner(System.in);
     }
