@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface NumberMaker {
 
-    List<String> makeNumber()
+    List<String> makeNumbers(int lowBound, int upperBound, int size);
 }

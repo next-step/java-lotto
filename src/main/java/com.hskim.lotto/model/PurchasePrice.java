@@ -4,9 +4,6 @@ import com.hskim.lotto.exception.LottoExceptionMessage;
 
 import java.util.Objects;
 
-/**
- * Created by hs kim on 2020/08/14
- */
 public class PurchasePrice {
 
     private int purchasePrice;
@@ -18,7 +15,7 @@ public class PurchasePrice {
     }
 
     private void validateNumeric(String purchasePrice) {
-        try{
+        try {
             Integer.parseInt(purchasePrice);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException(LottoExceptionMessage.NON_NUMERICAL_VALUE.getMessage());
@@ -26,9 +23,13 @@ public class PurchasePrice {
     }
 
     private void validatePrice(String purchasePrice) {
-        if(Integer.parseInt(purchasePrice) % LottoTicket.LOTTO_PRICE != 0) {
+        if (Integer.parseInt(purchasePrice) % LottoTicket.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
         }
+    }
+
+    public GameNum getGameNum() {
+        return new GameNum(purchasePrice / LottoTicket.LOTTO_PRICE);
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
@@ -21,7 +20,7 @@ public class LottoTicket {
     }
 
     private void validateSize(List<String> lottoNumberList) {
-        if(lottoNumberList.size() != LOTTO_NUMBERS_SIZE) {
+        if (lottoNumberList.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_NUMBER_SIZE.getMessage());
         }
     }
@@ -29,7 +28,7 @@ public class LottoTicket {
     private void validateDuplicate(List<String> lottoNumberList) {
         Set<String> validateSet = new HashSet<>(lottoNumberList);
 
-        if(validateSet.size() != LOTTO_NUMBERS_SIZE) {
+        if (validateSet.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LottoExceptionMessage.DUPLICATED_NUMBER.getMessage());
         }
     }
@@ -45,5 +44,10 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumberList);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTicket : " + lottoNumberList;
     }
 }
