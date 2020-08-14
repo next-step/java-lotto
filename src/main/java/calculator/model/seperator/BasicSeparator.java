@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BasicSeparator implements Separator {
 
-    private final String delimiters = ",|:";
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     private BasicSeparator() {
     }
@@ -20,7 +20,7 @@ public class BasicSeparator implements Separator {
 
     @Override
     public List<String> splitByDelimiter(String input) {
-        return Arrays.asList(input.split(delimiters));
+        return Arrays.asList(input.split(DEFAULT_DELIMITER));
     }
 
 }

@@ -1,8 +1,8 @@
 package calculator;
 
-import calculator.model.BasicSeparator;
-import calculator.model.CustomSeparator;
-import calculator.model.Separator;
+import calculator.model.seperator.BasicSeparator;
+import calculator.model.seperator.CustomSeparator;
+import calculator.model.seperator.Separator;
 import calculator.model.SeparatorFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
