@@ -7,26 +7,26 @@ import java.util.List;
 
 public class Lottos implements Iterable<Lotto> {
 
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public void generateAuto(int count) {
         for (int i = 0; i < count; i++) {
-            lottoList.add(Lotto.generateAuto());
+            lottos.add(Lotto.generateAuto());
         }
     }
 
     @Nonnull
     @Override
     public Iterator<Lotto> iterator() {
-        return lottoList.iterator();
+        return lottos.iterator();
     }
 
     public int size() {
-        return lottoList.size();
+        return lottos.size();
     }
 
     public void add(Lotto lotto) {
-        lottoList.add(lotto);
+        lottos.add(lotto);
     }
 
 }
