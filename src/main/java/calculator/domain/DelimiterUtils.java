@@ -9,10 +9,7 @@ public class DelimiterUtils {
     private static final Pattern META_CHARACTERS = Pattern.compile("[\\\\\\]\\[(){}\\-!$?*+<>^\\|]");
     private static final String META_CHARACTER_SUPPORTER = "\\";
 
-    private String input;
-
-    private DelimiterUtils(String input) {
-        this.input = input;
+    private DelimiterUtils() {
     }
 
     public static String findDelimiters(String input) {
