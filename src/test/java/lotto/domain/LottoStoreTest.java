@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import lotto.domain.core.LottoGenerator;
 import lotto.domain.core.WinningLotto;
 
-import static lotto.domain.LottoStore.ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT;
+import static lotto.domain.LottoPurchase.ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT;
 import static lotto.domain.LottoWinningAndPrizeMoney.FIFTH;
 import static lotto.domain.core.LottoGenerator.from;
 import static lotto.domain.core.LottoGenerator.winLotto;
@@ -67,5 +67,28 @@ class LottoStoreTest {
         LottoStore lottoStore = new LottoStore(14_000, lottos);
         final String displayLottoList = lottoStore.displayLottoList().toString();
         assertThat(displayLottoList).isEqualTo("[ 8, 21, 23, 41, 42, 43]");
+    }
+
+    @DisplayName("화면객체에 표시되는 로또 테스트")
+    @Test
+    void display_lottos2() {
+        WinningLotto wonLotto = winLotto(from(1, 2, 3, 4, 5, 6));
+        ImmutableLotteries lottos = ImmutableLotteries.builder()
+                                                      .lotto(LottoGenerator.from(8, 21, 23, 41, 42, 43))
+                                                      .build()
+            ;
+        LottoPurchase lottoPurchase = LottoPurchase.buyAutoOrManual(14_000, 0);
+        LottoStore lottoStore = new LottoStore(lottoPurchase, lottos);
+        String actualDisplayLottoStatistics = lottoStore
+            .displayLottoStatistics(wonLotto)
+            .toString()
+            ;
+        assertThat(actualDisplayLottoStatistics)
+            .hasToString("3개 일치\t\t\t\t(      5000원)-  0개\n" +
+                         "4개 일치\t\t\t\t(     50000원)-  0개\n" +
+                         "5개 일치\t\t\t\t(   1500000원)-  0개\n" +
+                         "5개 일치, 보너스 볼 일치  (  30000000원)-  0개\n" +
+                         "6개 일치\t\t\t\t(2000000000원)-  0개\n" +
+                         "총 수익률은 0.00 입니다");
     }
 }

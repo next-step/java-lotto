@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import lotto.domain.core.Lotto;
@@ -39,6 +41,17 @@ class ImmutableLotteriesBuilder {
                                              .collect(toList());
 
         lottos(autoLottos);
+        return this;
+    }
+
+    ImmutableLotteriesBuilder manualLotto(int manualLottoCount, Supplier<Set<Integer>> manualLotto){
+        init();
+        final  List<Lotto> manualLottos = Stream.generate(manualLotto)
+                                                .limit(manualLottoCount)
+                                                .map(LottoGenerator::fromIntSet)
+                                                .collect(toList())
+            ;
+        lottos(manualLottos);
         return this;
     }
 
