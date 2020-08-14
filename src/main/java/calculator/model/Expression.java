@@ -1,4 +1,6 @@
-package calculator;
+package calculator.model;
+
+import calculator.exception.CalculatorExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ public class Expression {
 
     private final List<Integer> numbers;
 
-    public Expression(String... elements) {
+    public Expression(List<String> elements) {
         numbers = new ArrayList<>();
         for (String element : elements) {
             numbers.add(parseValidNumber(element));

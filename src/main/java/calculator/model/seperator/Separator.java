@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.seperator;
 
 import java.util.List;
 
