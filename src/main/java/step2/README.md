@@ -15,6 +15,6 @@
 #### UI 시작
 8. InputChannel, OutputChannel 인터페이스 및 구현체 (System.in, System.out) 작성
 9. OrderHere Class 작성
-10. PurchaseRequest Class 작성
+10. PurchaseRequest Class 작성 (도메인 클래스...)
 11. DisplayHere Class 작성
 12. Main 및 CustomException, 유틸 Class 작성

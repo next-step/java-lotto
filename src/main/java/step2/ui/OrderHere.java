@@ -1,6 +1,6 @@
 package step2.ui;
 
-import step2.PurchaseRequest;
+import step2.domain.PurchaseRequest;
 import step2.domain.LottoGame;
 import step2.ui.input.InputChannel;
 import step2.ui.output.OutputChannel;
