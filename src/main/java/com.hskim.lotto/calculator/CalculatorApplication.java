@@ -1,6 +1,8 @@
 package com.hskim.lotto.calculator;
 
-import com.hskim.lotto.model.PositiveNumberTokens;
+import com.hskim.lotto.model.CalculateResult;
+import com.hskim.lotto.model.CalculatorNumberTokens;
+import com.hskim.lotto.model.UserInput;
 import com.hskim.lotto.ui.CalculatorInputView;
 import com.hskim.lotto.ui.CalculatorResultView;
 
@@ -8,16 +10,18 @@ public class CalculatorApplication {
 
     public static void main(String[] args) {
 
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+        StringAddCalculator stringAddCalculator = StringAddCalculator.getInstance();
         CalculatorInputView calculatorInputView = new CalculatorInputView();
         CalculatorResultView calculatorResultView = new CalculatorResultView();
-        PositiveNumberTokens positiveNumberTokens;
+        CalculatorNumberTokens calculatorNumberTokens;
+        CalculateResult calculateResult;
 
         calculatorInputView.printInputMessage();
-        String userInput = calculatorInputView.getUserInput();
+        UserInput userInput = calculatorInputView.getUserInput();
 
-        positiveNumberTokens = new PositiveNumberTokens(calculatorInputView.makeTokenList(userInput));
+        calculatorNumberTokens = CalculatorNumberTokens.of(userInput);
+        calculateResult = stringAddCalculator.calculate(calculatorNumberTokens);
 
-        calculatorResultView.printResult(stringAddCalculator, positiveNumberTokens);
+        calculatorResultView.printResult(calculateResult);
     }
 }

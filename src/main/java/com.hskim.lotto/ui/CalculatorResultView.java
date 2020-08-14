@@ -1,15 +1,13 @@
 package com.hskim.lotto.ui;
 
-import com.hskim.lotto.calculator.StringAddCalculator;
-import com.hskim.lotto.model.PositiveNumberTokens;
+import com.hskim.lotto.model.CalculateResult;
 
 public class CalculatorResultView {
 
     private static final String RESULT_MESSAGE = "결과 : ";
 
-    public void printResult(StringAddCalculator stringAddCalculator, PositiveNumberTokens positiveNumberTokens) {
+    public void printResult(CalculateResult calculateResult) {
 
-        System.out.print(RESULT_MESSAGE);
-        System.out.println(stringAddCalculator.calculate(positiveNumberTokens));
+        System.out.println(RESULT_MESSAGE + calculateResult.createResultString());
     }
 }
