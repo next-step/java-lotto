@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,31 +17,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NumbersTest {
 
-    @Test
-    void create() {
-        List<String> inputList = Arrays.asList("4","4","4");
-        Numbers numbers = Numbers.of(inputList);
-
-        assertThat(numbers).isNotNull();
-    }
-
-    @DisplayName("hasNegativeNumber - 음수값 존재하는 경우 테스트")
+    @DisplayName("toNumber - 숫자 아닌 문자 입력한 경우 테스트")
     @ParameterizedTest
-    @MethodSource("makeNumbersWithNegative")
-    void hasNegativeNumber_test(List<String> inputList) {
-        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.of(inputList));
+    @ValueSource(strings = {"1,ㄱ,4", "o-,ds;,"})
+    void toNumber_test(String input) {
+        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.of(input));
 
-        String expectedMessage = "음수는 입력이 불가능합니다.";
+        String expectedMessage = "숫자를 제대로 입력해주세요.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
-    private static Stream<Arguments> makeNumbersWithNegative() {
-        return Stream.of(
-                Arguments.of(Arrays.asList("3", "-100", "24")),
-                Arguments.of(Arrays.asList("-1"))
-        );
+    @DisplayName("validateNegativeNumber - 음수값 존재하는 경우 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"3,-100,24", "-1"})
+    void validateNegativeNumber_test(String input) {
+        Exception exception = assertThrows(RuntimeException.class, () -> Numbers.of(input));
+
+        String expectedMessage = "음수는 입력이 불가능합니다.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
 }
