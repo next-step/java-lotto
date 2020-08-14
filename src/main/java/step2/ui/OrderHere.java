@@ -7,9 +7,7 @@ import step2.ui.output.OutputChannel;
 
 import java.util.function.Supplier;
 
-import static com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text.NEW_LINE;
-import static step2.constants.MessageConstant.PLEASE_INPUT_LAST_WEEK_PRIZE;
-import static step2.constants.MessageConstant.PLEASE_INPUT_PURCHASING_PRICE;
+import static step2.constants.MessageConstant.*;
 import static step2.utils.StringUtils.splitByDelimiter;
 
 public class OrderHere {

@@ -1,11 +1,12 @@
 package step1.domain.collections;
 
-import com.sun.tools.javac.util.List;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step1.domain.Number;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 

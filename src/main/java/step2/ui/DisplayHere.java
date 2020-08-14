@@ -1,12 +1,11 @@
 package step2.ui;
 
-import step2.domain.PurchaseRequest;
 import step2.constants.RateOfReturn;
 import step2.domain.ConfirmResults;
 import step2.domain.LottoGames;
+import step2.domain.PurchaseRequest;
 import step2.ui.output.OutputChannel;
 
-import static com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text.NEW_LINE;
 import static step2.constants.MessageConstant.*;
 
 public class DisplayHere {
