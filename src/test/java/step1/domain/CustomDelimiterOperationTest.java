@@ -1,6 +1,7 @@
 package step1.domain;
 
 import com.sun.tools.javac.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,18 +15,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CustomDelimiterOperationTest {
+
+	@DisplayName("객체 생성 테스트")
 	@ParameterizedTest
 	@MethodSource("provideConstructSource")
 	void testConstruction(Pattern customDelimiter, String input, Numbers expect) {
 		assertThat(new CustomDelimiterOperation(customDelimiter, input)).isEqualTo(new CustomDelimiterOperation(expect));
 	}
 
+	@DisplayName("객체 생성 실패 테스트")
 	@ParameterizedTest
 	@MethodSource("provideFailConstructSource")
 	void testFailConstruction(Pattern customDelimiter, String input) {
 		assertThrows(StringAdderException.class, () -> new CustomDelimiterOperation(customDelimiter, input));
 	}
 
+	@DisplayName("문자열 합 검증 테스트")
 	@ParameterizedTest
 	@MethodSource("provideSumSource")
 	void testSum(Pattern customDelimiter, String input, int expect) {

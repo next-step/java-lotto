@@ -1,6 +1,6 @@
 package step1.exception;
 
-public class StringAdderException extends RuntimeException{
+public class StringAdderException extends RuntimeException {
 
 	public StringAdderException(String message) {
 		super(message);
