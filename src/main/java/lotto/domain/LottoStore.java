@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-import lotto.domain.core.WinLotto;
+import lotto.domain.core.WinningLotto;
 import lotto.ui.view.DisplayLottoList;
 import lotto.ui.view.DisplayLottoStatistics;
 
@@ -10,7 +10,7 @@ public class LottoStore {
     public static final String ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT = "로또 구매금액은 0보다 커야 합니다.";
     private static final int ZERO = 0;
     private final LottoPurchase lottoPurchase;
-    private final ImmutableLottoList lottos;
+    private final ImmutableLotteries lottos;
 
     private static void verifyPurchaseAmount(int purchaseAmount) {
         if (ZERO >= purchaseAmount) {
@@ -21,13 +21,13 @@ public class LottoStore {
     LottoStore(int purchaseAmount) {
         verifyPurchaseAmount(purchaseAmount);
         lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
-        lottos = ImmutableLottoList.builder()
+        lottos = ImmutableLotteries.builder()
                                    .autoLottos(lottoPurchase.getAutoLottoGeneratedCount())
                                    .build()
         ;
     }
 
-    LottoStore(int purchaseAmount, ImmutableLottoList lottos) {
+    LottoStore(int purchaseAmount, ImmutableLotteries lottos) {
         verifyPurchaseAmount(purchaseAmount);
         this.lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
         this.lottos = lottos;
@@ -41,8 +41,8 @@ public class LottoStore {
         return lottos.size();
     }
 
-    public LottoStatistics getStatistics(WinLotto winLotto){
-        List<LottoWinningAndPrizeMoney> allMatchCount = lottos.compareToEachLottoWithWonLotto(winLotto);
+    public LottoStatistics getStatistics(WinningLotto winningLotto){
+        List<LottoWinningAndPrizeMoney> allMatchCount = lottos.compareToEachLottoWithWonLotto(winningLotto);
         return LottoStatistics.fromAllMatchCount(lottoPurchase, allMatchCount);
     }
 
@@ -50,7 +50,7 @@ public class LottoStore {
         return new DisplayLottoList(lottos);
     }
 
-    public DisplayLottoStatistics displayLottoStatistics(WinLotto winLotto){
-        return new DisplayLottoStatistics(getStatistics(winLotto));
+    public DisplayLottoStatistics displayLottoStatistics(WinningLotto winningLotto){
+        return new DisplayLottoStatistics(getStatistics(winningLotto));
     }
 }

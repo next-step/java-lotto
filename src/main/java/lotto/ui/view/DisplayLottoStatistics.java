@@ -3,12 +3,10 @@ package lotto.ui.view;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoWinningAndPrizeMoney;
 
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static lotto.domain.LottoWinningAndPrizeMoney.FIFTH;
 import static lotto.domain.LottoWinningAndPrizeMoney.FIRST;
@@ -35,14 +33,6 @@ public class DisplayLottoStatistics {
         this.statistics = statistics;
     }
 
-    public String format(LottoWinningAndPrizeMoney lottoWinningAndPrizeMoney){
-        return String.format("%d개 일치 (%10d원)- %2d개"
-            , lottoWinningAndPrizeMoney.getCountOfMatch()
-            , lottoWinningAndPrizeMoney.getPrizeMoney()
-            , statistics.getTotalMatchCount(lottoWinningAndPrizeMoney)
-        );
-    }
-
     @Override
     public String toString() {
         return String.join(NEW_LINE
@@ -53,7 +43,7 @@ public class DisplayLottoStatistics {
 
     private String displayPrizeMoney() {
         return orderd.stream()
-                     .map(this::format)
+                     .map(e -> e.format(statistics))
             .collect(joining(NEW_LINE));
     }
 
