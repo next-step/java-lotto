@@ -12,7 +12,7 @@ public class LottoGame {
 
     public LottoResult match(Lottos lottos) {
         LottoResult lottoResult = new LottoResult(lottos.getTotalPrice());
-        lottos.findLottoResult(winningLotto, bonusBall, lottoResult::addRanking);
+        lottos.matchWinningLotto(winningLotto, bonusBall, lottoResult::addRanking);
         return lottoResult;
     }
 

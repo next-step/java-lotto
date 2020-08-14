@@ -30,7 +30,7 @@ public class Lottos implements Iterable<Lotto> {
         lottos.add(lotto);
     }
 
-    public void findLottoResult(Lotto winningLotto, LottoNumber bonusBall, Consumer<LottoRanking> rankingConsumer) {
+    public void matchWinningLotto(Lotto winningLotto, LottoNumber bonusBall, Consumer<LottoRanking> rankingConsumer) {
         for (Lotto lotto : lottos) {
             int countOfMatch = winningLotto.countOfMatch(lotto);
             rankingConsumer.accept(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
