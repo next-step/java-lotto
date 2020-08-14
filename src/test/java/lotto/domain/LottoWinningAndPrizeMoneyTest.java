@@ -16,6 +16,7 @@ class LottoWinningAndPrizeMoneyTest {
     @Test
     void test() {
         assertThat(LottoWinningAndPrizeMoney.confirmWin(6,false)).isEqualTo(FIRST);
+        assertThat(LottoWinningAndPrizeMoney.confirmWin(6,true)).isEqualTo(FIRST);
         assertThat(LottoWinningAndPrizeMoney.confirmWin(5,true)).isEqualTo(SECOND);
         assertThat(LottoWinningAndPrizeMoney.confirmWin(5,false)).isEqualTo(THIRD);
         assertThat(LottoWinningAndPrizeMoney.confirmWin(4, false)).isEqualTo(FOURTH);

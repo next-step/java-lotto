@@ -31,8 +31,11 @@ public enum LottoWinningAndPrizeMoney {
     }
 
     public boolean isWinningMatch(int countOfMatch, boolean bonusNoMatch) {
-        return this.countOfMatch == countOfMatch
-            && this.bonusNoMatch == bonusNoMatch;
+        if (this.bonusNoMatch) {
+            return bonusNoMatch
+                && this.countOfMatch == countOfMatch;
+        }
+        return this.countOfMatch == countOfMatch;
     }
 
     public static boolean isNotLose(LottoWinningAndPrizeMoney lottoWinningAndPrizeMoney) {
