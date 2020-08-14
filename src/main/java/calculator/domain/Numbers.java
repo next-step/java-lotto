@@ -21,7 +21,7 @@ public class Numbers {
                 .collect(collectingAndThen(Collectors.toList(), Numbers::new));
     }
 
-    public static void validateNegativeNumber(int number) {
+    private static void validateNegativeNumber(int number) {
         if (number < 0) {
             throw new RuntimeException("음수는 입력이 불가능합니다.");
         }
