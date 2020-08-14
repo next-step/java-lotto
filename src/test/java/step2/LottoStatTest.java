@@ -37,8 +37,8 @@ class LottoStatTest {
   void fourthStat() {
     LottoStat lottoStat = new LottoFirstStat(1);
 
-    assertThat(lottoStat.getMessage()).isEqualTo("3개 일치");
-    assertThat(lottoStat.getAmount()).isEqualTo(5000);
+    assertThat(lottoStat.getMessage()).isEqualTo("6개 일치");
+    assertThat(lottoStat.getAmount()).isEqualTo(2000000000);
     assertThat(lottoStat.getCount()).isEqualTo(1);
   }
 }

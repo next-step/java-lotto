@@ -28,7 +28,7 @@ public class LottoStats {
             new LottoFourthStat(fourth)));
   }
 
-  LottoStats(List<LottoStat> lottoStats) {
+  private LottoStats(List<LottoStat> lottoStats) {
     this.lottoStats = lottoStats;
   }
 
