@@ -43,7 +43,7 @@ public class LottoNumber {
 
     public static LottoNumber of(String text) {
         checkArgument(StringUtils.isNotBlank(text), NUMBER_BLANK_MESSAGE);
-        return of(Integer.parseInt(text));
+        return of(Integer.parseInt(text.trim()));
     }
 
 }
