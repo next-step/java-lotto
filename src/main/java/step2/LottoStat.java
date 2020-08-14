@@ -18,5 +18,9 @@ public abstract class LottoStat {
     return amount;
   }
 
+  public int total() {
+    return amount * getCount();
+  }
+
   abstract int getCount();
 }
