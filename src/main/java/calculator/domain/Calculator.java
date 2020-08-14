@@ -3,9 +3,7 @@ package calculator.domain;
 public class Calculator {
 
     public int calculate(String input) {
-        InputManager inputManager = InputManager.of(input);
-
-        Numbers numbers = inputManager.getNumbers();
+        Numbers numbers = Numbers.of(input);
 
         return numbers.add();
     }

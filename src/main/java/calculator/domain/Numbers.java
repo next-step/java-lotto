@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.utils.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,11 +15,23 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public static Numbers of(List<String> strings) {
+    public static Numbers of(String input) {
+        if (input == null) {
+            return new Numbers(Collections.emptyList());
+        }
+
+        List<String> strings = split(input);
         return strings.stream()
                 .map(StringUtils::toNumber)
                 .peek(Numbers::validateNegativeNumber)
                 .collect(collectingAndThen(Collectors.toList(), Numbers::new));
+    }
+
+    private static List<String> split(String input) {
+        String delimiters = DelimiterUtils.findDelimiters(input);
+        String filteredInput = DelimiterUtils.filterCustomDelimiter(input);
+
+        return StringSplitter.split(filteredInput, delimiters);
     }
 
     private static void validateNegativeNumber(int number) {
