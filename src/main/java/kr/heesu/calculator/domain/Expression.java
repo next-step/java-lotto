@@ -13,8 +13,8 @@ public class Expression {
         return args.hasNext();
     }
 
-    public int nextOperation(int result) {
-        return operator.operate(result, nextArgument());
+    public Operator getOperator() {
+        return this.operator;
     }
 
     public int nextArgument() {

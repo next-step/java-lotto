@@ -3,10 +3,10 @@ package kr.heesu.calculator.domain;
 import java.util.List;
 
 public class Arguments {
-    private List<Integer> args;
+    private List<Number> args;
 
-    private Arguments(List<Integer> nums) {
-        this.args = nums;
+    private Arguments(List<Number> numbers) {
+        this.args = numbers;
     }
 
     public boolean hasNext() {
@@ -14,10 +14,11 @@ public class Arguments {
     }
 
     public int nextArgument() {
-        return this.args.remove(0);
+        Number next = this.args.remove(0);
+        return next.getVal();
     }
 
-    public static Arguments of(List<Integer> nums) {
-        return new Arguments(nums);
+    public static Arguments of(List<Number> numbers) {
+        return new Arguments(numbers);
     }
 }

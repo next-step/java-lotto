@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +15,12 @@ public class CalculatorTest {
 
     @BeforeEach
     void setUp() {
-        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3));
-        Arguments args = Arguments.of(nums);
+        List<Number> numbers = Arrays.asList(1, 2, 3)
+                .stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
+
+        Arguments args = Arguments.of(numbers);
         Expression exp = Expression.of(args);
 
         calculator = Calculator.of(exp);

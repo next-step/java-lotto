@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,21 +16,21 @@ public class ExpressionTest {
 
     @BeforeEach
     void setUp() {
-        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2));
-        Arguments args = Arguments.of(nums);
+        List<Number> numbers = Arrays.asList(1, 2)
+                .stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
+
+        Arguments args = Arguments.of(numbers);
 
         this.expression = Expression.of(args);
     }
 
     @Test
     void expressionTest() {
-        int a = this.expression.nextArgument();
-
         assertThat(this.expression.hasNextArgument()).isTrue();
-        assertThat(a).isEqualTo(1);
-
-        assertThat(this.expression.nextOperation(a)).isEqualTo(3);
-
+        assertThat(this.expression.nextArgument()).isEqualTo(1);
+        assertThat(this.expression.nextArgument()).isEqualTo(2);
         assertThat(this.expression.hasNextArgument()).isFalse();
     }
 }

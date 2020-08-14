@@ -14,9 +14,10 @@ public class Calculator {
     }
 
     public void calculate() {
-        int intermediate = result.getVal();
+        int operand = expression.nextArgument();
+        Operator operator = expression.getOperator();
 
-        result.set(expression.nextOperation(intermediate));
+        result.next(operand, operator);
     }
 
     public boolean hasNext() {

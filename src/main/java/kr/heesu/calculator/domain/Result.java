@@ -7,8 +7,8 @@ public class Result {
         this.result = 0;
     }
 
-    public void set(int interMediateResult) {
-        this.result = interMediateResult;
+    public void next(int operand, Operator operator) {
+        this.result = operator.operate(this.result, operand);
     }
 
     public int getVal() {
