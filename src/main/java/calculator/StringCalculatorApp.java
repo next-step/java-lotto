@@ -1,7 +1,11 @@
 package calculator;
 
-public class CalculatorApp {
+import calculator.domain.StringCalculator;
+import calculator.view.InsertView;
+import calculator.view.ResultView;
+
+public class StringCalculatorApp {
     public static void main(String[] args) {
-        System.out.println("test");
+        ResultView.print(StringCalculator.splitAndSum(InsertView.inputText()));
     }
 }
