@@ -13,8 +13,8 @@
 6. ConfirmResult Class 작성하기
 7. ConfirmResults Class 작성하기 (일급 컬렉션)
 #### UI 시작
-8. OrderHere Class 작성
-9. InputChannel, OutputChannel 인터페이스 및 구현체 (System.in, System.out) 작성
+8. InputChannel, OutputChannel 인터페이스 및 구현체 (System.in, System.out) 작성
+9. OrderHere Class 작성
 10. PurchaseRequest Class 작성
 11. DisplayHere Class 작성
 12. Main 및 CustomException, 유틸 Class 작성
