@@ -8,15 +8,23 @@ public class LottoMain {
     public static void main(String[] args) {
         // 입력 시작
         int price = LottoInputView.purchasePrice();
-        Lottos lottos = LottoShop.buyAuto(price);
-        LottoResultView.printPurchasedLottoNumbers(lottos);
+        int manualCount = LottoInputView.manualCount();
+
+        LottoInputView.manualLottoNumberStart();
+        LottoShop lottoShop = LottoShop.purchasePrice(price)
+                .buyManual(manualCount, () -> Lotto.fromString(LottoInputView.manualLottoNumber()))
+                .buyAuto();
+
+        Lottos lottos = lottoShop.getLottos();
+
+        LottoResultView.printPurchasedLottoNumbers(lottoShop);
 
         String winningNumbers = LottoInputView.lastWeekWinningNumber();
         int bonusBall = LottoInputView.bonusBall();
         // 입력 종료
 
-        LottoGame lottoGame = new LottoGame(Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall));
-        LottoResult lottoResult = lottoGame.match(lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall));
+        LottoResult lottoResult = winningLotto.match(lottos);
 
         // 결과 출력 시작
         LottoResultView.printWinningResult(lottoResult.getRankingMap());

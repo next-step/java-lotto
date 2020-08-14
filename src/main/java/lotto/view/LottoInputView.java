@@ -10,6 +10,19 @@ public class LottoInputView {
         return scanner.nextInt();
     }
 
+    public static int manualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return createScanner().nextInt();
+    }
+
+    public static void manualLottoNumberStart() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static String manualLottoNumber() {
+        return createScanner().nextLine();
+    }
+
     public static String lastWeekWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = createScanner();

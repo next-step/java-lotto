@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoRanking;
+import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 
 import java.text.MessageFormat;
@@ -10,8 +11,11 @@ import java.util.Map;
 
 public class LottoResultView {
 
-    public static void printPurchasedLottoNumbers(Lottos lottos) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다", lottos.size()));
+    public static void printPurchasedLottoNumbers(LottoShop lottoShop) {
+        System.out.println(
+                MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
+                        lottoShop.getManualCount(), lottoShop.getAutoCount()));
+        Lottos lottos = lottoShop.getLottos();
         for (Lotto lotto : lottos) {
             int[] numbers = lotto.toArray();
             Arrays.sort(numbers);
