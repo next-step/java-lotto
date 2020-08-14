@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public enum LottoRanking {
 
@@ -13,14 +14,12 @@ public enum LottoRanking {
     BONUS(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private static final Map<Integer, LottoRanking> BY_COUNT_OF_MATCH = new HashMap<>();
+    private static final Map<Integer, LottoRanking> BY_COUNT_OF_MATCH;
 
     static {
-        for (LottoRanking ranking : values()) {
-            if (ranking != BONUS && ranking != NOT_MATCH) {
-                BY_COUNT_OF_MATCH.put(ranking.countOfMatch, ranking);
-            }
-        }
+        BY_COUNT_OF_MATCH = Arrays.stream(values())
+                .filter(rank -> rank != BONUS && rank != NOT_MATCH)
+                .collect(Collectors.toMap(rank -> rank.countOfMatch, rank -> rank));
     }
 
     private final int countOfMatch;
