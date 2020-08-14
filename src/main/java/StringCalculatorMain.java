@@ -1,10 +1,12 @@
+import view.InputView;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class StringCalculatorMain {
     public static void main(String[] args) {
-        String param = input();
+        String param = InputView.expressionValue();
         String delimiter = "[,:]";
 
         validateExpression(param);
@@ -59,12 +61,6 @@ public class StringCalculatorMain {
         }
 
         return delimiter;
-    }
-
-    private static String input() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("문자열 덧셈 수식을 입력해주세요");
-        return sc.nextLine();
     }
 
     private static boolean validateExpression(String param) {
