@@ -5,12 +5,10 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class RandomNumberMaker implements NumberMaker {
-
     private static final Random random = new Random();
 
     @Override
     public List<String> makeNumbers(int lowBound, int upperBound, int size) {
-
         return random.ints(lowBound, upperBound + 1)
                 .boxed()
                 .distinct()

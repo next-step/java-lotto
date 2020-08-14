@@ -7,17 +7,14 @@ public class GameNum {
     private int gameNum;
 
     public GameNum(int gameNum) {
-
         this.gameNum = gameNum;
     }
 
     public void playGame() {
-
         gameNum--;
     }
 
-    public boolean isPlayable(){
-
+    public boolean isPlayable() {
         return gameNum > 0;
     }
 

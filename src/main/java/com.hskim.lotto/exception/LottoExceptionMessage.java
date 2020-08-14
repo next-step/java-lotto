@@ -10,7 +10,6 @@ public enum LottoExceptionMessage {
     INVALID_PURCHASE_PRICE("구매 가격이 잘못되었습니다. 로또 한장의 가격은 " + LottoTicket.LOTTO_PRICE + "입니다.");
 
     LottoExceptionMessage(String message) {
-
         this.message = message;
     }
 

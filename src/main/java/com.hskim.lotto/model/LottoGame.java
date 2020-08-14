@@ -29,14 +29,12 @@ public class LottoGame {
     }
 
     public String makeLottoTicketsString() {
-
         return lottoTickets.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n"));
     }
 
     public String makeTicketsSizeString() {
-
         return String.valueOf(lottoTickets.size());
     }
 
