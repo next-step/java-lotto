@@ -11,11 +11,7 @@ public class LottoGameTest {
     @Test
     void create() {
         // given
-        NumberMaker numberMaker = new FixedNumberMaker();
-        PurchasePrice purchasePrice = new PurchasePrice("14000");
-        LottoGame lottoGame = new LottoGame(purchasePrice, numberMaker);
 
         // when & then
-        assertThat(lottoGame).isEqualTo(new LottoGame(purchasePrice, numberMaker));
     }
 }
