@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
 
     private final Lotto winningLotto;
@@ -12,20 +10,8 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public LottoResult match(Lottos lottos) {
-        LottoResult lottoResult = new LottoResult(lottos.getTotalPrice());
-        List<LottoRanking> rankings = lottos.matchWinningLotto(this);
-        for (LottoRanking ranking : rankings) {
-            lottoResult.addRanking(ranking);
-        }
-        return lottoResult;
-    }
-
-    public Lotto getWinningLotto() {
-        return winningLotto;
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
+    public LottoRanking match(Lotto lotto) {
+        int countOfMatch = winningLotto.countOfMatch(lotto);
+        return LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall));
     }
 }
