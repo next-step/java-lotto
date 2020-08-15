@@ -10,21 +10,26 @@ public class LottoMain {
         int price = LottoInputView.purchasePrice();
         int manualCount = LottoInputView.manualCount();
 
+        Lottos lottos = LottoShop.purchase(price, manualCount);
+
         LottoInputView.manualLottoNumberStart();
-        LottoShop lottoShop = LottoShop.purchasePrice(price)
-                .buyManual(manualCount, () -> Lotto.fromString(LottoInputView.manualLottoNumber()))
-                .buyAuto();
+        for (int i = 0; i < manualCount; i++) {
+            lottos.add(Lotto.fromString(LottoInputView.manualLottoNumber()));
+        }
 
-        Lottos lottos = lottoShop.getLottos();
+        int autoCount = lottos.fillAuto();
 
-        LottoResultView.printPurchasedLottoNumbers(lottoShop);
+        // 로또 번호 출력 시작
+        LottoResultView.printLottoCount(manualCount, autoCount);
+        LottoResultView.printLottos(lottos);
+        // 로또 번호 출력 종료
 
         String winningNumbers = LottoInputView.lastWeekWinningNumber();
         int bonusBall = LottoInputView.bonusBall();
         // 입력 종료
 
         WinningLotto winningLotto = new WinningLotto(Lotto.fromString(winningNumbers), LottoNumber.of(bonusBall));
-        LottoResult lottoResult = winningLotto.match(lottos);
+        LottoResult lottoResult = lottos.matchWinningLotto(winningLotto);
 
         // 결과 출력 시작
         LottoResultView.printWinningResult(lottoResult.getRankingMap());
