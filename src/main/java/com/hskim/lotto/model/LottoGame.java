@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-    private static final int LOW_BOUND = 0;
+    private static final int LOW_BOUND = 1;
     private static final int UPPER_BOUND = 45;
 
     private List<LottoTicket> lottoTickets;
@@ -16,13 +16,12 @@ public class LottoGame {
     }
 
     private List<LottoTicket> makeLottoTickets(PurchasePrice purchasePrice, NumberMaker numberMaker) {
-        GameNum gameNum = purchasePrice.getGameNum();
+        GameNumber gameNumber = purchasePrice.getGameNum();
         List<LottoTicket> result = new LinkedList<>();
-
-        while (gameNum.isPlayable()) {
+        while (gameNumber.isPlayable()) {
             List<String> lottoNumbers = numberMaker.makeNumbers(LOW_BOUND, UPPER_BOUND, LottoTicket.LOTTO_NUMBERS_SIZE);
             result.add(new LottoTicket(lottoNumbers));
-            gameNum.playGame();
+            gameNumber.playGame();
         }
 
         return result;

@@ -28,8 +28,8 @@ public class PurchasePrice {
         }
     }
 
-    public GameNum getGameNum() {
-        return new GameNum(purchasePrice / LottoTicket.LOTTO_PRICE);
+    public GameNumber getGameNum() {
+        return new GameNumber(purchasePrice / LottoTicket.LOTTO_PRICE);
     }
 
     @Override

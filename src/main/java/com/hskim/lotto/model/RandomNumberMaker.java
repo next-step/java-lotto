@@ -13,6 +13,7 @@ public class RandomNumberMaker implements NumberMaker {
                 .boxed()
                 .distinct()
                 .limit(size)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
     }

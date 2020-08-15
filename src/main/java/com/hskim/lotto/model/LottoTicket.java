@@ -33,6 +33,12 @@ public class LottoTicket {
         }
     }
 
+    public WinningCondition getWinningCondition(List<String> winningNumbers) {
+        return new WinningCondition((int)lottoNumberList.stream()
+                .filter(winningNumbers::contains)
+                .count());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

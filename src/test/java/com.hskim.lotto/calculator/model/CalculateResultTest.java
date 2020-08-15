@@ -1,6 +1,5 @@
 package com.hskim.lotto.calculator.model;
 
-import com.hskim.lotto.calculator.model.CalculateResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

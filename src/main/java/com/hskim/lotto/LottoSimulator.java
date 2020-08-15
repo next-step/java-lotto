@@ -1,11 +1,9 @@
 package com.hskim.lotto;
 
-import com.hskim.lotto.model.LottoGame;
-import com.hskim.lotto.model.NumberMaker;
-import com.hskim.lotto.model.PurchasePrice;
-import com.hskim.lotto.model.RandomNumberMaker;
+import com.hskim.lotto.model.*;
 import com.hskim.lotto.ui.LottoInputView;
 import com.hskim.lotto.ui.LottoResultView;
+
 
 public class LottoSimulator {
 
@@ -22,5 +20,8 @@ public class LottoSimulator {
 
         lottoResultView.printPurchaseNum(lottoGame.makeTicketsSizeString());
         lottoResultView.printString(lottoGame.makeLottoTicketsString());
+
+        lottoInputView.printWinPhrase();
+        LottoWinningTicket winningTicket = lottoInputView.getWinningTicket();
     }
 }

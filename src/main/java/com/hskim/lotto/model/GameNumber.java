@@ -2,11 +2,11 @@ package com.hskim.lotto.model;
 
 import java.util.Objects;
 
-public class GameNum {
+public class GameNumber {
 
     private int gameNum;
 
-    public GameNum(int gameNum) {
+    public GameNumber(int gameNum) {
         this.gameNum = gameNum;
     }
 
@@ -21,9 +21,9 @@ public class GameNum {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GameNum)) return false;
-        GameNum gameNum1 = (GameNum) o;
-        return gameNum == gameNum1.gameNum;
+        if (!(o instanceof GameNumber)) return false;
+        GameNumber gameNumber1 = (GameNumber) o;
+        return gameNum == gameNumber1.gameNum;
     }
 
     @Override

@@ -10,28 +10,28 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GameNumTest {
+public class GameNumberTest {
 
     @DisplayName("생성 테스트")
     @Test
     void create() {
         // given
-        GameNum gameNum = new GameNum(5);
+        GameNumber gameNumber = new GameNumber(5);
 
         // when & then
-        assertThat(gameNum).isEqualTo(new GameNum(5));
+        assertThat(gameNumber).isEqualTo(new GameNumber(5));
     }
 
     @DisplayName("playGame() 테스트")
     @Test
     void playGame() {
         // given
-        GameNum gameNum = new GameNum(5);
-        gameNum.playGame();
-        gameNum.playGame();
+        GameNumber gameNumber = new GameNumber(5);
+        gameNumber.playGame();
+        gameNumber.playGame();
 
         // when & then
-        assertThat(gameNum).isEqualTo(new GameNum(3));
+        assertThat(gameNumber).isEqualTo(new GameNumber(3));
     }
 
     @DisplayName("isPlayable() 테스트")
@@ -39,10 +39,10 @@ public class GameNumTest {
     @MethodSource("provideGameNum")
     void isPlayable(int num, boolean expected) {
         // given
-        GameNum gameNum = new GameNum(num);
+        GameNumber gameNumber = new GameNumber(num);
 
         // when & then
-        assertThat(gameNum.isPlayable()).isEqualTo(expected);
+        assertThat(gameNumber.isPlayable()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideGameNum() {

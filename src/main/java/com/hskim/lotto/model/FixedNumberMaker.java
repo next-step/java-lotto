@@ -10,6 +10,7 @@ public class FixedNumberMaker implements NumberMaker {
         return IntStream.rangeClosed(lowBound, upperBound)
                 .boxed()
                 .limit(size)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
     }
