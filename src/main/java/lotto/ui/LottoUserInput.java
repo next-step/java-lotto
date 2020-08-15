@@ -37,7 +37,7 @@ public class LottoUserInput {
         return stringArrayToIntSet(lottos);
     }
 
-    private static Set<Integer> stringArrayToIntSet(String[] lottos) {
+    static Set<Integer> stringArrayToIntSet(String[] lottos) {
         return Stream.of(lottos)
                      .map(String::trim)
                      .map(Integer::valueOf)
