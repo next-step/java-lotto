@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.Objects;
+
 public abstract class LottoStat {
 
   public enum Grade {
@@ -24,23 +26,59 @@ public abstract class LottoStat {
       return amount;
     }
 
+    public boolean isWin(int sameCount) {
+      return this.sameCount == sameCount;
+    }
+
     @Override
     public String toString() {
       return String.format("%d개 일치 (%d원)", sameCount, amount);
     }
   }
 
-  protected final Grade grade;
+  private final Grade grade;
+  private int count;
 
-  public LottoStat(Grade grade) {
+  LottoStat(Grade grade, int count) {
     this.grade = grade;
+    this.count = count;
   }
 
   public int total() {
-    return grade.getAmount() * getCount();
+    return grade.getAmount() * count;
   }
 
-  abstract int getCount();
+  public void decide(int sameNumberCount) {
+    if (grade.isWin(sameNumberCount)) {
+      count++;
+    }
+  }
 
-  abstract void decide(int sameNumberCount);
+  public int getCount() {
+    return count;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoStat lottoStat = (LottoStat) o;
+    return count == lottoStat.count &&
+        grade == lottoStat.grade;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(grade, count);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s- %d개", grade, count);
+  }
+
 }
