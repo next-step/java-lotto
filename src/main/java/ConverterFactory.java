@@ -1,20 +1,16 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConverterFactory {
 
     public static Converter ofConverter(String inputNumbers) {
-        final Matcher normalMatcher = Pattern.compile(Constant.NORMAL).matcher(inputNumbers);
-        final Matcher customDelimiterMatcher = Pattern.compile(Constant.CUSTOM).matcher(inputNumbers);
+        List<Converter> converters = Arrays.asList(
+                new ConverterCustomDelimiterImpl(inputNumbers),
+                new ConverterImpl(inputNumbers));
 
-        if (customDelimiterMatcher.find()) {
-            return new ConverterCustomDelimiterImpl(customDelimiterMatcher);
-        }
-
-        if (normalMatcher.find()) {
-            return new ConverterImpl(inputNumbers);
-        }
-
-        return null;
+        return converters.stream()
+                .filter(Converter::supports)
+                .findFirst()
+                .orElse(null);
     }
 }
