@@ -46,4 +46,15 @@ public class ExpressionValidatorTest {
         // then
         assertThat(actual).isFalse();
     }
+
+    @DisplayName("문자열덧셈식 요소 검사 - 0 이상 숫자인 경우 true, 음수이거나 숫자가 아닌경우 false")
+    @ParameterizedTest
+    @CsvSource(value = {"0,true", "-1,false",".,false","가,false"})
+    void validateNumber(String number, boolean expected) {
+        //when
+        boolean actual = ExpressionValidator.validNumber(number);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
