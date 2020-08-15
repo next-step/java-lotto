@@ -40,7 +40,7 @@ public class LottoGame {
         int gameCount = money.divide(MONEY_PER_GAME, RoundingMode.DOWN).intValue();
 
         for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumbers(LottoNumberShuffler.getShuffleSixLottoNumber()));
+            lottoNumbers.add(new LottoNumbers(LottoNumberPublisher.getShuffleSixLottoNumber()));
         }
 
         return lottoNumbers;
