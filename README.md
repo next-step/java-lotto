@@ -41,17 +41,50 @@
 
 ### 객체 모델링
 
-#### Number
-
-- 로또에서 사용하는 하나의 숫자를 담은 객체
-- [ ] 1~45 범위의 숫자를 가진다.
-
-#### LottoNumbers
-
-- Number를 6개 모아놓은 객체
-
 #### LottoGame
 
 - LottoNumbers를 여러개 가짐
-- 
+- LottoWinningNumbers를 가짐
+- WinningInfos(결과 통계값)을 계산한다
+- 수익률을 계산한다.
 
+#### LottoMoney
+
+- 사용자가 입력한 금액 값을 가짐
+- 금액값이 1000원 이상인지 검사한다.
+
+#### LottoNumberPublisher
+
+- 1~45 사이의 랜덤한 숫자를 제공
+
+#### LottoNumbers
+
+- 사용자가 입력한 숫자(Number)를 여러개 가진다.
+
+#### LottoWinningMoney
+
+- 당청금 값을 가짐
+- 곱셉한 값 제공
+
+#### LottoWinningNumbers
+
+- 당첨 번호를 가짐
+- LottoNumbers를 받아 당첨 타입(LottoWinningType) 제공
+
+#### LottoWinningType
+
+- 당첨 타입
+
+#### Number
+
+- 로또에서 사용하는 하나의 숫자를 담은 객체
+- 1~45 범위의 숫자를 가진다.
+
+#### WinningInfo
+
+- LottoWinningType과 당첨된 횟수를 저장 
+
+#### WinningInfos
+
+- WinningInfo를 여러개 저장
+- getTotalWinningMoney : 총 당첨 금액을 제공

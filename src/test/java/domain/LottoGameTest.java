@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
     private LottoGame lottoGame;
+    private LottoMoney lottoMoney;
 
     @BeforeEach
     void setUp() {
@@ -36,20 +36,12 @@ class LottoGameTest {
         numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))));
 
         int money = 14000;
-        LottoMoney lottoMoney = new LottoMoney(money);
+        lottoMoney = new LottoMoney(money);
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(makeNumbers(winningNumbers));
 
-        WinningInfos winningInfos = WinningInfos.of();
-        for (LottoNumbers lottoNumbers : numbersList) {
-            LottoWinningType winningType = lottoWinningNumbers.getWinningType(lottoNumbers);
-            winningInfos.add(winningType);
-        }
-
-        double benefitRate = winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
-
-        lottoGame = new LottoGame(numbersList, winningInfos, benefitRate);
+        lottoGame = new LottoGame(numbersList, lottoWinningNumbers);
     }
 
     private List<Number> makeNumbers(List<Integer> integers) {
@@ -74,7 +66,7 @@ class LottoGameTest {
     @Test
     @DisplayName("수익률을 구한다.")
     void getBenefitRateTest() {
-        double benefitRate = lottoGame.getBenefitRate();
+        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos());
         assertThat(benefitRate).isEqualTo(0.35);
     }
 }

@@ -3,7 +3,7 @@ package domain;
 import java.math.BigDecimal;
 
 public class LottoMoney {
-    public static final BigDecimal MONEY_PER_GAME = new BigDecimal(1000);
+    public static final int MONEY_PER_GAME = 1000;
 
     private final BigDecimal money;
 

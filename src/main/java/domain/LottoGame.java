@@ -10,36 +10,22 @@ import static domain.LottoMoney.MONEY_PER_GAME;
 
 public class LottoGame {
     private final List<LottoNumbers> lottoNumbersList;
-    private final WinningInfos winningInfos;
-    private final double benefitRate;
+    private final LottoWinningNumbers lottoWinningNumbers;
 
-    public static LottoGame of(int money, List<Integer> winningNumbers) {
-        LottoMoney lottoMoney = new LottoMoney(money);
-        List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(lottoMoney.getMoney());
-        List<Number> collect = winningNumbers.stream().map(Number::new).collect(Collectors.toList());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(collect);
-        WinningInfos winningInfos = generateLottoWinningInfos(lottoNumbersList, lottoWinningNumbers);
-        double benefitRate = generateBenefitRate(lottoMoney, winningInfos);
-
-        return new LottoGame(lottoNumbersList, winningInfos, benefitRate);
+    public static LottoGame of(int money, List<Number> winningNumbers) {
+        List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(money);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        return new LottoGame(lottoNumbersList, lottoWinningNumbers);
     }
 
-    private static double generateBenefitRate(LottoMoney lottoMoney, WinningInfos winningInfos) {
-        if (lottoMoney.getMoney().equals(BigDecimal.ZERO)) {
-            return 0.0;
-        }
-        return winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
-    }
-
-    public LottoGame(List<LottoNumbers> lottoNumbersList, WinningInfos winningInfos, double benefitRate) {
+    public LottoGame(List<LottoNumbers> lottoNumbersList, LottoWinningNumbers lottoWinningNumbers) {
         this.lottoNumbersList = lottoNumbersList;
-        this.winningInfos = winningInfos;
-        this.benefitRate = benefitRate;
+        this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
-    private static List<LottoNumbers> generateLottoNumbersList(BigDecimal money) {
+    private static List<LottoNumbers> generateLottoNumbersList(int money) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        int gameCount = money.divide(MONEY_PER_GAME, RoundingMode.DOWN).intValue();
+        int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
             lottoNumbers.add(new LottoNumbers(LottoNumberPublisher.getShuffleSixLottoNumber()));
@@ -48,7 +34,11 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    private static WinningInfos generateLottoWinningInfos(List<LottoNumbers> lottoNumbersList, LottoWinningNumbers lottoWinningNumbers) {
+    public List<LottoNumbers> getLottoNumbersList() {
+        return lottoNumbersList;
+    }
+
+    public WinningInfos getWinningInfos() {
         WinningInfos winningInfos = WinningInfos.of();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             LottoWinningType winningType = lottoWinningNumbers.getWinningType(lottoNumbers);
@@ -57,15 +47,10 @@ public class LottoGame {
         return winningInfos;
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
-    }
-
-    public WinningInfos getWinningInfos() {
-        return winningInfos;
-    }
-
-    public double getBenefitRate() {
-        return benefitRate;
+    public double getBenefitRate(LottoMoney lottoMoney, WinningInfos winningInfos) {
+        if (lottoMoney.getMoney().equals(BigDecimal.ZERO)) {
+            return 0.0;
+        }
+        return winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
     }
 }
