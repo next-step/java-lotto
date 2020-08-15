@@ -8,7 +8,14 @@ public class LottoMoney {
     private final BigDecimal money;
 
     public LottoMoney(int money) {
+        validate(money);
         this.money = new BigDecimal(money);
+    }
+
+    private void validate(int money) {
+        if (money < 1000) {
+            throw new IllegalArgumentException("1000원 이상의 금액을 입력해 주세요.");
+        }
     }
 
     public BigDecimal getMoney() {
