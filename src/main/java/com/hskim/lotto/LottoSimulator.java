@@ -10,18 +10,22 @@ public class LottoSimulator {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
         LottoResultView lottoResultView = new LottoResultView();
-        NumberMaker numberMaker = new RandomNumberMaker();
         LottoGame lottoGame;
+        LottoTickets lottoTickets;
         PurchasePrice purchasePrice;
 
         lottoInputView.printPurchasePhrase();
         purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        lottoGame = new LottoGame(purchasePrice, numberMaker);
+        lottoTickets = new LottoTickets(purchasePrice, new RandomNumberMaker());
 
-        lottoResultView.printPurchaseNum(lottoGame.makeTicketsSizeString());
-        lottoResultView.printString(lottoGame.makeLottoTicketsString());
+        lottoResultView.printPurchaseNum(lottoTickets.makeTicketsSizeString());
+        lottoResultView.printString(lottoTickets.makeLottoTicketsString());
 
         lottoInputView.printWinPhrase();
         LottoWinningTicket winningTicket = lottoInputView.getWinningTicket();
+
+        lottoGame = new LottoGame(lottoTickets, winningTicket);
+        lottoGame.drawLots();
+        lottoResultView.printString(lottoGame.getWinnerStatisticString());
     }
 }

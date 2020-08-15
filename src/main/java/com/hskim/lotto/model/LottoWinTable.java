@@ -31,4 +31,12 @@ public enum LottoWinTable {
     private boolean checkWinningCondition(WinningCondition condition) {
         return winningCondition.equals(condition);
     }
+
+    @Override
+    public String toString() {
+        return message
+                + "("
+                + prizeAmount
+                + "원) ";
+    }
 }
