@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.Ticket;
 import step2.domain.TicketSellingMachine;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +17,14 @@ class TicketSellingMachineTest {
     void ticketing() {
         Ticket ticket = TicketSellingMachine.ticketing();
 
-        assertThat(ticket.getNumbers().length).isEqualTo(6);
+        assertThat(ticket).isNotNull();
+    }
+
+    @Test
+    void forceTicketing() {
+        Ticket ticket = TicketSellingMachine.ticketing(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(ticket).isEqualTo(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest

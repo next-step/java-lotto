@@ -1,11 +1,12 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoRanking;
 import step2.domain.ResultAnalyzer;
 import step2.domain.Ticket;
-import step2.domain.TicketSellingMachine;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,25 +14,57 @@ class ResultAnalyzerTest {
 
     @Test
     void getMatchTicketCount() {
-        Ticket ticket = TicketSellingMachine.ticketing();
-        int[] winningNumber = ticket.getNumbers();
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(ticket), winningNumber.length)
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        7,
+                        false,
+                        Arrays.asList(ticket))
         ).isEqualTo(1);
 
         assertThat(
-                ResultAnalyzer.getMatchTicketCount(winningNumber, Arrays.asList(ticket), winningNumber.length - 1)
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        7,
+                        true,
+                        Arrays.asList(ticket))
         ).isEqualTo(0);
     }
 
     @Test
+    void getPrizeMoney() {
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(winningNumber);
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 7, ticket)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
+    }
+
+    @Test
+    void getPrizeMoneyForSecond() {
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 7, ticket)).isEqualTo(LottoRanking.SECOND.getPrizeMoney());
+    }
+
+    @Test
+    void getPrizeMoneyForThird() {
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(ResultAnalyzer.getPrizeMoney(winningNumber, 8, ticket)).isEqualTo(LottoRanking.THIRD.getPrizeMoney());
+    }
+
+    @Test
     void getRateReturn() {
-        Ticket ticket = TicketSellingMachine.ticketing();
-        int[] winningNumber = ticket.getNumbers();
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(winningNumber);
 
         assertThat(
-                ResultAnalyzer.getRateReturn(winningNumber, Arrays.asList(ticket), ticket.prizeMoney(winningNumber))
+                ResultAnalyzer.getRateReturn(winningNumber, 7, Arrays.asList(ticket), LottoRanking.FIRST.getPrizeMoney())
         ).isEqualTo(1.0);
     }
 }

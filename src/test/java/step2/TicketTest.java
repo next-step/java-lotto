@@ -1,26 +1,30 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.LottoRanking;
 import step2.domain.Ticket;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TicketTest {
 
     @Test
-    void matchCount() {
-        int[] numbers = new int[]{1, 2, 3, 4, 5, 6};
-        Ticket ticket = new Ticket(numbers);
+    void constructor() {
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(ticket.matchCount(numbers)).isEqualTo(numbers.length);
+        assertThat(ticket).isEqualTo(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
-    void getPrizeMoney() {
-        int[] winningNumber = new int[]{1, 2, 3, 4, 5, 6};
-        Ticket matchTicket = new Ticket(winningNumber);
+    void checkPrize() {
+        assertThat(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)).checkPrize(Arrays.asList(1, 2, 3, 4, 5, 6))).isTrue();
+        assertThat(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)).checkPrize(Arrays.asList(1, 2, 3, 4, 5, 7))).isFalse();
+    }
 
-        assertThat(matchTicket.prizeMoney(winningNumber)).isEqualTo(LottoRanking.FIRST.getPrizeMoney());
+    @Test
+    void checkBonusNumber() {
+        assertThat(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)).checkBonusNumber(1)).isTrue();
+        assertThat(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)).checkBonusNumber(7)).isFalse();
     }
 }

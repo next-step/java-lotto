@@ -1,7 +1,8 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Lotto Ticket
@@ -11,60 +12,61 @@ public class Ticket {
     /**
      * 번호 목록
      */
-    private final int[] numbers;
-
-    /**
-     * 번호 목록을 반환한다.
-     *
-     * @return
-     */
-    public int[] getNumbers() {
-        return Arrays.copyOf(numbers, numbers.length);
-    }
+    private final LottoNumbers numbers;
 
     /**
      * 생성자를 통해 초기화한다.
      * 번호 목록을 생성한다.
      */
-    public Ticket(int[] numbers) {
-        this.numbers = numbers;
+    public Ticket(final List<Integer> numbers) {
+        this.numbers = new LottoNumbers(numbers);
     }
 
     /**
-     * 숫자 배열과 비교하여 일치하는 숫자의 갯수를 반환한다.
+     * 숫자 목록과 비교하여 일치하는 횟수를 반환한다.
      *
-     * @param compareObj
+     * @param numbers
      * @return
      */
-    public long matchCount(final int[] compareObj) {
-        return Arrays.stream(this.numbers)
-                .boxed()
-                .filter(Arrays.stream(compareObj).boxed().collect(Collectors.toList())::contains)
-                .count();
+    public long matchCount(final List<Integer> numbers) {
+        return this.numbers.matchCount(numbers);
     }
 
     /**
-     * 당첨금을 반환한다.
+     * 당첨 여부를 판별한다.
      *
-     * @param winningNumber
+     * @param numbers
      * @return
      */
-    public int prizeMoney(final int[] winningNumber) {
-        final long matchCount = matchCount(winningNumber);
+    public boolean checkPrize(final List<Integer> numbers) {
+        return this.numbers.compare(numbers);
+    }
 
-        LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(null);
+    /**
+     * 보너스 번호 당첨 여부를 판별한다.
+     *
+     * @param bonusNumber
+     * @return
+     */
+    public boolean checkBonusNumber(final int bonusNumber) {
+        return this.numbers.matchCount(Arrays.asList(bonusNumber)) > 0;
+    }
 
-        if (lottoRanking == null)
-            return 0;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(numbers, ticket.numbers);
+    }
 
-        return lottoRanking.getPrizeMoney();
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(this.numbers);
+        return this.numbers.toString();
     }
 }

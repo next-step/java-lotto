@@ -12,19 +12,9 @@ import java.util.stream.Stream;
 public class TicketSellingMachine {
 
     /**
-     * 무작위로 정의되는 번호의 범위
-     */
-    private static final int NUMBER_BOUNDARY = 45;
-
-    /**
-     * 번호 갯수
-     */
-    private static final int NUMBER_SIZE = 6;
-
-    /**
      * 번호 목록
      */
-    private static final List<Integer> COLLECT = IntStream.rangeClosed(1, NUMBER_BOUNDARY)
+    private static final List<Integer> COLLECT = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
@@ -49,6 +39,26 @@ public class TicketSellingMachine {
     }
 
     /**
+     * 금액을 기준으로 발권할 수 있는 티켓의 갯수를 반환한다.
+     *
+     * @param money
+     * @return
+     */
+    private static final int getCount(final int money) {
+        return money / TICKET_PRICE;
+    }
+
+    /**
+     * 티켓을 발행한다.
+     *
+     * @param numbers
+     * @return
+     */
+    public static final Ticket ticketing(List<Integer> numbers) {
+        return new Ticket(numbers);
+    }
+
+    /**
      * 티켓을 발행한다.
      *
      * @return
@@ -62,23 +72,12 @@ public class TicketSellingMachine {
      *
      * @return
      */
-    private static final int[] createNumbers() {
+    private static final List<Integer> createNumbers() {
         // 생성된 번호 목록을 섞는다.
         Collections.shuffle(COLLECT);
 
         return COLLECT.stream()
-                .limit(NUMBER_SIZE)
-                .mapToInt(Integer::intValue)
-                .toArray();
-    }
-
-    /**
-     * 금액을 기준으로 발권할 수 있는 티켓의 갯수를 반환한다.
-     *
-     * @param money
-     * @return
-     */
-    private static final int getCount(final int money) {
-        return money / TICKET_PRICE;
+                .limit(LottoNumbers.SIZE)
+                .collect(Collectors.toList());
     }
 }
