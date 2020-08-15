@@ -35,7 +35,7 @@ public class LottoSalesman {
     System.out.println(SCRIPT_INFORM_WINNING);
     System.out.println("--------");
     System.out.print(analyze);
-    System.out.printf("총 수익률은 %f입니다.", analyze.rate(payment));
+    System.out.printf("총 수익률은 %.2f입니다.", analyze.rate(payment));
   }
 
 }

@@ -2,60 +2,28 @@ package step2;
 
 import java.util.Objects;
 
-public abstract class LottoStat {
+public class LottoStat {
 
-  public enum Grade {
-    First(6, 2000000000),
-    Second(5, 1500000),
-    Third(4, 50000),
-    Fourth(3, 5000);
+  private final LottoRank rank;
+  private int winningCount;
 
-    private int sameCount;
-    private int amount;
-
-    Grade(int sameCount, int amount) {
-      this.sameCount = sameCount;
-      this.amount = amount;
-    }
-
-    public int getSameCount() {
-      return sameCount;
-    }
-
-    public int getAmount() {
-      return amount;
-    }
-
-    public boolean isWin(int sameCount) {
-      return this.sameCount == sameCount;
-    }
-
-    @Override
-    public String toString() {
-      return String.format("%d개 일치 (%d원)", sameCount, amount);
-    }
+  public LottoStat(LottoRank rank) {
+    this(rank, 0);
   }
 
-  private final Grade grade;
-  private int count;
-
-  LottoStat(Grade grade, int count) {
-    this.grade = grade;
-    this.count = count;
+  public LottoStat(LottoRank rank, int winningCount) {
+    this.rank = rank;
+    this.winningCount = winningCount;
   }
 
   public int total() {
-    return grade.getAmount() * count;
+    return rank.getAmount() * winningCount;
   }
 
-  public void decide(int sameNumberCount) {
-    if (grade.isWin(sameNumberCount)) {
-      count++;
+  public void decide(int matchCount) {
+    if (rank.ismMatchCount(matchCount)) {
+      winningCount++;
     }
-  }
-
-  public int getCount() {
-    return count;
   }
 
   @Override
@@ -67,18 +35,18 @@ public abstract class LottoStat {
       return false;
     }
     LottoStat lottoStat = (LottoStat) o;
-    return count == lottoStat.count &&
-        grade == lottoStat.grade;
+    return winningCount == lottoStat.winningCount &&
+        rank == lottoStat.rank;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(grade, count);
+    return Objects.hash(rank, winningCount);
   }
 
   @Override
   public String toString() {
-    return String.format("%s- %d개", grade, count);
+    return String.format("%s- %d개", rank, winningCount);
   }
 
 }

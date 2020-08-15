@@ -8,21 +8,21 @@ class LottoStatTest {
 
   @Test
   void firstStatEquals() {
-    assertThat((LottoStat) new LottoFirstStat(1)).isEqualTo(new LottoFirstStat(1));
+    assertThat((LottoStat) new LottoStat(LottoRank.First, 1)).isEqualTo(new LottoStat(LottoRank.First, 1));
   }
 
   @Test
   void secondStatEquals() {
-    assertThat((LottoStat) new LottoSecondStat(1)).isEqualTo(new LottoSecondStat(1));
+    assertThat((LottoStat) new LottoStat(LottoRank.Second, 1)).isEqualTo(new LottoStat(LottoRank.Second, 1));
   }
 
   @Test
   void thirdStatEquals() {
-    assertThat((LottoStat) new LottoThirdStat(1)).isEqualTo(new LottoThirdStat(1));
+    assertThat((LottoStat) new LottoStat(LottoRank.Third, 1)).isEqualTo(new LottoStat(LottoRank.Third, 1));
   }
 
   @Test
   void fourthStatEquals() {
-    assertThat((LottoStat) new LottoFourthStat(1)).isEqualTo(new LottoFourthStat(1));
+    assertThat((LottoStat) new LottoStat(LottoRank.Fourth, 1)).isEqualTo(new LottoStat(LottoRank.Fourth, 1));
   }
 }
