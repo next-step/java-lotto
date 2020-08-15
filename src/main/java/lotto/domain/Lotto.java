@@ -24,8 +24,8 @@ public class Lotto {
 
     public int countOfMatch(Lotto lotto) {
         long countOfMatch = lottoNumbers.stream()
-            .filter(lotto::contain)
-            .count();
+                .filter(lotto::contain)
+                .count();
         return Math.toIntExact(countOfMatch);
     }
 

@@ -4,16 +4,27 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
+
+import static com.google.common.base.Preconditions.checkState;
 
 public class Lottos implements Iterable<Lotto> {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private static final String SIZE_EXCEEDED_MESSAGE = "lotto size exceeded";
 
-    public void generateAuto(int count) {
-        for (int i = 0; i < count; i++) {
+    private final int initSize;
+    private final List<Lotto> lottos;
+
+    public Lottos(int initSize) {
+        this.initSize = initSize;
+        lottos = new ArrayList<>();
+    }
+
+    public int fillAuto() {
+        int remainSize = initSize - lottos.size();
+        for (int i = 0; i < remainSize; i++) {
             lottos.add(Lotto.generateAuto());
         }
+        return remainSize;
     }
 
     @Nonnull
@@ -22,19 +33,17 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.iterator();
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
     public void add(Lotto lotto) {
+        checkState(lottos.size() < initSize, SIZE_EXCEEDED_MESSAGE);
         lottos.add(lotto);
     }
 
-    public void matchWinningLotto(Lotto winningLotto, LottoNumber bonusBall, Consumer<LottoRanking> rankingConsumer) {
+    public LottoResult matchWinningLotto(WinningLotto winningLotto) {
+        LottoResult result = new LottoResult(getTotalPrice());
         for (Lotto lotto : lottos) {
-            int countOfMatch = winningLotto.countOfMatch(lotto);
-            rankingConsumer.accept(LottoRanking.valueOf(countOfMatch, () -> lotto.contain(bonusBall)));
+            result.addRanking(winningLotto.match(lotto));
         }
+        return result;
     }
 
     public int getTotalPrice() {

@@ -10,8 +10,12 @@ import java.util.Map;
 
 public class LottoResultView {
 
-    public static void printPurchasedLottoNumbers(Lottos lottos) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다", lottos.size()));
+    public static void printLottoCount(int manualCount, int autoCount) {
+        System.out.println(
+                MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualCount, autoCount));
+    }
+
+    public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos) {
             int[] numbers = lotto.toArray();
             Arrays.sort(numbers);
@@ -20,16 +24,13 @@ public class LottoResultView {
         System.out.println();
     }
 
-    public static void printWinningResult(Map<LottoRanking, Integer> winningResultMap) {
+    public static void printWinningResult(Map<LottoRanking, Integer> rankingMap) {
         System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
-        for (LottoRanking lottoRanking : LottoRanking.values()) {
-            if (lottoRanking == LottoRanking.NOT_MATCH) {
-                continue;
-            }
-            int winningCount = winningResultMap.getOrDefault(lottoRanking, 0);
-            System.out.println(printLottoRanking(lottoRanking, winningCount));
-        }
+
+        Arrays.stream(LottoRanking.values())
+                .filter(ranking -> ranking != LottoRanking.NOT_MATCH)
+                .forEach(ranking -> printLottoRanking(ranking, rankingMap.getOrDefault(ranking, 0)));
     }
 
     public static void printSaveOfReturn(double saveOfReturn) {
@@ -38,12 +39,15 @@ public class LottoResultView {
                 saveOfReturn));
     }
 
-    private static String printLottoRanking(LottoRanking ranking, int winningCount) {
-        int matchCount = ranking.countOfMatch();
-        int prize = ranking.prize();
-        return ranking == LottoRanking.BONUS
-            ? MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원)- {2}개", matchCount, prize, winningCount)
-            : MessageFormat.format("{0}개 일치 ({1}원)- {2}개", matchCount, prize, winningCount);
-
+    private static void printLottoRanking(LottoRanking ranking, int winningCount) {
+        String messageFormat = ranking == LottoRanking.BONUS
+                ? "{0}개 일치, 보너스 볼 일치({1}원)- {2}개"
+                : "{0}개 일치 ({1}원)- {2}개";
+        System.out.println(
+                MessageFormat.format(messageFormat,
+                        ranking.countOfMatch(),
+                        ranking.prize(),
+                        winningCount));
     }
+
 }
