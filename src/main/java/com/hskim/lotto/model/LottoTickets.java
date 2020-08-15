@@ -1,5 +1,6 @@
 package com.hskim.lotto.model;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +42,10 @@ public class LottoTickets {
 
     public Stream<LottoTicket> getLottoTicketStream() {
         return lottoTickets.stream();
+    }
+
+    public BigDecimal getTotalTicketPrice() {
+        return BigDecimal.valueOf(lottoTickets.size() * LottoTicket.LOTTO_PRICE);
     }
 
     @Override

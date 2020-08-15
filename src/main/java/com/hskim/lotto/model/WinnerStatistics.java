@@ -1,8 +1,7 @@
 package com.hskim.lotto.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinnerStatistics {
@@ -11,11 +10,26 @@ public class WinnerStatistics {
     private final Map<LottoWinTable, Integer> winnerMap;
 
     public WinnerStatistics() {
-        this.winnerMap = new HashMap<>();
+        this.winnerMap = new LinkedHashMap<>();
+        setDefaultData();
     }
 
     public WinnerStatistics(Map<LottoWinTable, Integer> winnerMap) {
         this.winnerMap = winnerMap;
+        setDefaultData();
+    }
+
+    private void setDefaultData() {
+        Arrays.stream(LottoWinTable.values())
+                .forEach(this::putDefaultData);
+    }
+
+    private void putDefaultData(LottoWinTable winTable) {
+        if(winnerMap.containsKey(winTable)) {
+            return;
+        }
+
+        winnerMap.put(winTable, 0);
     }
 
     public void putData(LottoWinTable lottoWinTable) {
@@ -25,16 +39,31 @@ public class WinnerStatistics {
     public String makeStatisticString() {
         return winnerMap.keySet()
                 .stream()
-                .map(this::getDataString)
+                .map(this::makeDataString)
                 .collect(Collectors.joining(STATISTIC_STRING_JOINING_DELIMITER));
     }
 
-    private String getDataString(LottoWinTable lottoWinTable) {
+    private String makeDataString(LottoWinTable lottoWinTable) {
         return lottoWinTable.toString()
                 + " - "
                 + winnerMap.get(lottoWinTable)
                 + "개";
     }
+
+    public BigDecimal getTotalPrizeAmount() {
+        return winnerMap.keySet()
+                .stream()
+                .map(this::getPrizeAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal getPrizeAmount(LottoWinTable winTable) {
+        return BigDecimal.valueOf(
+                winnerMap.get(winTable))
+                .multiply(winTable.getPrizeAmount()
+                );
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -29,6 +29,12 @@ public class LottoGame {
         return winnerStatistics.makeStatisticString();
     }
 
+    public String getEarningRateString() {
+        return new EarningRate(winnerStatistics.getTotalPrizeAmount(),
+                lottoTickets.getTotalTicketPrice())
+                .makeEarningRateString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

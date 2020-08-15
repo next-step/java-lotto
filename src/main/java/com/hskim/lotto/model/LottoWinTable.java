@@ -8,7 +8,7 @@ import static java.util.Arrays.stream;
 public enum LottoWinTable {
 
     FIRST_PLACE(new WinningCondition(6), "6개 일치", BigDecimal.valueOf(2000000000)),
-    SECOND_PLACE(new WinningCondition(5), "5개 일치", BigDecimal.valueOf(15000000)),
+    SECOND_PLACE(new WinningCondition(5), "5개 일치", BigDecimal.valueOf(1500000)),
     THIRD_PLACE(new WinningCondition(4), "4개 일치", BigDecimal.valueOf(50000)),
     FOURTH_PLACE(new WinningCondition(3), "3개 일치", BigDecimal.valueOf(5000));
 
@@ -30,6 +30,10 @@ public enum LottoWinTable {
 
     private boolean checkWinningCondition(WinningCondition condition) {
         return winningCondition.equals(condition);
+    }
+
+    public BigDecimal getPrizeAmount() {
+        return prizeAmount;
     }
 
     @Override

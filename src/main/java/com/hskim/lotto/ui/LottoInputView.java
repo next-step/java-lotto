@@ -12,6 +12,8 @@ public class LottoInputView {
     private static final String WIN_PHRASE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_DELIMITER = ",";
     private static final String NEW_LINE = System.lineSeparator();
+    private static final String WHITE_SPACE_REGEX = "\\s+";
+    private static final String BLANK_STRING = "";
 
     public void printPurchasePhrase() {
         System.out.println(PURCHASE_PHRASE);
@@ -27,6 +29,7 @@ public class LottoInputView {
 
     public LottoWinningTicket getWinningTicket() {
         String[] inputs = scanner.nextLine()
+                .replaceAll(WHITE_SPACE_REGEX,BLANK_STRING)
                 .split(INPUT_DELIMITER);
         return new LottoWinningTicket(Arrays.asList(inputs));
     }

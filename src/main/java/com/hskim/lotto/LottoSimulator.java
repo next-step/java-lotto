@@ -26,6 +26,9 @@ public class LottoSimulator {
 
         lottoGame = new LottoGame(lottoTickets, winningTicket);
         lottoGame.drawLots();
+
+        lottoResultView.printStatisticPhrase();
         lottoResultView.printString(lottoGame.getWinnerStatisticString());
+        lottoResultView.printString(lottoGame.getEarningRateString());
     }
 }
