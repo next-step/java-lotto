@@ -11,7 +11,7 @@ class ConverterCustomDelimiterImplTest {
     }
 
     @Test
-    void ConverterCustomDelimite_notSupported() {
+    void ConverterCustomDelimiter_notSupported() {
         Converter converterCustomDelimiter = new ConverterCustomDelimiterImpl("1,2,3");
         assertThat(converterCustomDelimiter.supports()).isFalse();
     }
