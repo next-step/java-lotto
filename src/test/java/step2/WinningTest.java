@@ -8,26 +8,26 @@ import org.junit.jupiter.api.Test;
 public class WinningTest {
 
   @Test
-  void sameNumberIsNone() {
-    Winning winning = new Winning(Arrays.asList(40, 41, 42, 43, 44, 45));
+  void matchCountIsNone() {
+    Winning winning = new Winning(Arrays.asList(40, 41, 42, 43, 44, 45), 7);
 
-    assertThat(winning.sameNumberCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+    assertThat(winning.matchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
         .isEqualTo(0);
   }
 
   @Test
-  void sameNumberIsOne() {
-    Winning winning = new Winning(Arrays.asList(1, 41, 42, 43, 44, 45));
+  void matchCountIsOne() {
+    Winning winning = new Winning(Arrays.asList(1, 41, 42, 43, 44, 45), 7);
 
-    assertThat(winning.sameNumberCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+    assertThat(winning.matchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
         .isEqualTo(1);
   }
 
   @Test
-  void isWinner() {
-    Winning winning = new Winning(Arrays.asList(1, 2, 3, 4, 5, 6));
+  void matchCountIsAll() {
+    Winning winning = new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
-    assertThat(winning.sameNumberCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+    assertThat(winning.matchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
         .isEqualTo(LottoRank.First.getMatchCount());
   }
 }

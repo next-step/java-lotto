@@ -20,8 +20,8 @@ public class LottoStat {
     return rank.getAmount() * winningCount;
   }
 
-  public void decide(int matchCount) {
-    if (rank.ismMatchCount(matchCount)) {
+  public void decide(int matchCount, boolean hasBonusNumber) {
+    if (rank.isWin(matchCount, hasBonusNumber)) {
       winningCount++;
     }
   }

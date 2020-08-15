@@ -15,9 +15,10 @@ public class LottoStand {
     // 구입내역 출력
     LottoSalesman.informPurchase(lottos);
 
-    // 당첨번호 입력
+    // 당첨번호/보너스번호 입력
     String numbersAsString = LottoSalesman.winningNumber(scanner);
-    Winning winning = new Winning(numbersAsString);
+    int bonusNumber = LottoSalesman.bonusNumber(scanner);
+    Winning winning = new Winning(numbersAsString, bonusNumber);
 
     // 당첨결과 출력 
     LottoAnalysis lottoAnalysis = new LottoAnalysis(winning, lottos);

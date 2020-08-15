@@ -11,39 +11,59 @@ class LottoAnalysisTest {
   void analyzeFirstOne() {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
-            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
             Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
-    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(1, 0, 0, 0));
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(1, 0, 0, 0, 0));
   }
 
   @Test
   void analyzeSecondOne() {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
-            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
             Arrays.asList(new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6))));
 
-    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 1, 0, 0));
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 1, 0, 0,0));
   }
 
   @Test
   void analyzeThirdOne() {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
-            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            Arrays.asList(new Lotto(Arrays.asList(7, 8, 3, 4, 5, 6))));
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arrays.asList(new Lotto(Arrays.asList(8, 2, 3, 4, 5, 6))));
 
-    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 1, 0));
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 1, 0,0));
+  }
+
+  @Test
+  void analyzeFourthOne() {
+    LottoAnalysis lottoAnalysis =
+        new LottoAnalysis(
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arrays.asList(new Lotto(Arrays.asList(8, 9, 3, 4, 5, 6))));
+
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 0, 1,0));
+  }
+
+  @Test
+  void analyzeFifthOne() {
+    LottoAnalysis lottoAnalysis =
+        new LottoAnalysis(
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arrays.asList(new Lotto(Arrays.asList(8, 9, 10, 4, 5, 6))));
+
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 0, 0,1));
   }
 
   @Test
   void analyzeOut() {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
-            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
             Arrays.asList(new Lotto(Arrays.asList(7, 8, 9, 10, 5, 6))));
 
-    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 0, 0));
+    assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(0, 0, 0, 0,0));
   }
 }

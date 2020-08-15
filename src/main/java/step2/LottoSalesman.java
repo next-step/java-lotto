@@ -12,6 +12,9 @@ public class LottoSalesman {
   private static final Function<Scanner, String> WINNING_NUMBER_QUEST = (s) -> s.next();
   private static final String SCRIPT_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
 
+  private static final Function<Scanner, Integer> BONUS_NUMBER_QUEST = (s) -> s.nextInt();
+  private static final String SCRIPT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+
   private static final String SCRIPT_INFORM_WINNING = "\n당첨 통계";
 
   public static int purchaseAmount(Scanner scanner) {
@@ -29,6 +32,11 @@ public class LottoSalesman {
   public static String winningNumber(Scanner scanner) {
     System.out.println(SCRIPT_WINNING_NUMBER);
     return WINNING_NUMBER_QUEST.apply(scanner);
+  }
+
+  public static int bonusNumber(Scanner scanner) {
+    System.out.println(SCRIPT_BONUS_NUMBER);
+    return BONUS_NUMBER_QUEST.apply(scanner);
   }
 
   public static void informWinning(Scanner scanner, LottoStats analyze, int payment) {

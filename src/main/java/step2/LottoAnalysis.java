@@ -15,7 +15,7 @@ public class LottoAnalysis {
   public LottoStats analyze() {
     LottoStats lottoStats = new LottoStats();
     for (Lotto lotto : lottos) {
-      lottoStats.decide(winning.sameNumberCount(lotto));
+      lottoStats.decide(winning.matchCount(lotto), winning.hasBonusNumber(lotto));
     }
 
     return lottoStats;
