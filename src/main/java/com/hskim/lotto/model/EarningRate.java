@@ -18,7 +18,7 @@ public class EarningRate {
     }
 
     private void validateExpense(BigDecimal expense) {
-        if(expense.equals(BigDecimal.ZERO)) {
+        if (expense.equals(BigDecimal.ZERO)) {
             throw new IllegalArgumentException();
         }
     }
@@ -28,11 +28,11 @@ public class EarningRate {
     }
 
     public String makeEarningRateString() {
-        String result =  "총 수익률은 "
+        String result = "총 수익률은 "
                 + earningRate
                 + "입니다.";
 
-        if(isProfit) {
+        if (isProfit) {
             return result;
         }
 

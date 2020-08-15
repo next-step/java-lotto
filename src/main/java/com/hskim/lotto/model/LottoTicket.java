@@ -34,7 +34,7 @@ public class LottoTicket {
     }
 
     public WinningCondition getWinningCondition(List<String> winningNumbers) {
-        return new WinningCondition((int)lottoNumberList.stream()
+        return new WinningCondition((int) lottoNumberList.stream()
                 .filter(winningNumbers::contains)
                 .count());
     }

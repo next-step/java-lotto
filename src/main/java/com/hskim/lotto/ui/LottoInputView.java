@@ -29,7 +29,7 @@ public class LottoInputView {
 
     public LottoWinningTicket getWinningTicket() {
         String[] inputs = scanner.nextLine()
-                .replaceAll(WHITE_SPACE_REGEX,BLANK_STRING)
+                .replaceAll(WHITE_SPACE_REGEX, BLANK_STRING)
                 .split(INPUT_DELIMITER);
         return new LottoWinningTicket(Arrays.asList(inputs));
     }

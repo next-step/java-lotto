@@ -25,7 +25,7 @@ public class WinnerStatistics {
     }
 
     private void putDefaultData(LottoWinTable winTable) {
-        if(winnerMap.containsKey(winTable)) {
+        if (winnerMap.containsKey(winTable)) {
             return;
         }
 
