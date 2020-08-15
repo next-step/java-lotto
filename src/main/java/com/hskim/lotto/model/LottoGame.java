@@ -1,15 +1,15 @@
 package com.hskim.lotto.model;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGame {
     private static final int LOW_BOUND = 1;
     private static final int UPPER_BOUND = 45;
+    private static final String LOTTO_TICKET_JOINING_DELIMITER = "\n";
 
     private List<LottoTicket> lottoTickets;
+    private final Map<LottoWinTable, Integer> winnerMap = new HashMap<>();
 
     public LottoGame(PurchasePrice purchasePrice, NumberMaker numberMaker) {
         lottoTickets = makeLottoTickets(purchasePrice, numberMaker);
@@ -30,7 +30,7 @@ public class LottoGame {
     public String makeLottoTicketsString() {
         return lottoTickets.stream()
                 .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(LOTTO_TICKET_JOINING_DELIMITER));
     }
 
     public String makeTicketsSizeString() {

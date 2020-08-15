@@ -17,11 +17,6 @@
 - [x] 음수가 들어오면 Runtime Exception
 - [x] 숫자가 1개면 그 숫자 return
 
-
-
-####**CalculatorInputView class**
-- [x] List<String> makeTokenList(String input) -> 사용자 입력을 받아 token list를 만들어 반환
-
 ## STEP02 로또(자동)
 ### Todo
 - [x] 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다. (로또 1장의 가격은 1000원 이다.)

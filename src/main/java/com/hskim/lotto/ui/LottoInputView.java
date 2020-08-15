@@ -1,6 +1,5 @@
 package com.hskim.lotto.ui;
 
-import com.hskim.lotto.model.LottoTicket;
 import com.hskim.lotto.model.LottoWinningTicket;
 import com.hskim.lotto.model.PurchasePrice;
 
