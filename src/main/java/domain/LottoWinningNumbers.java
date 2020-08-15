@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoWinningNumbers {
-    private final Set<Integer> winningNumbers;
+    private final Set<Number> winningNumbers;
 
-    public LottoWinningNumbers(List<Integer> winningNumbers) {
+    public LottoWinningNumbers(List<Number> winningNumbers) {
         this.winningNumbers = new HashSet<>(winningNumbers);
         validate();
     }
@@ -20,7 +20,7 @@ public class LottoWinningNumbers {
     }
 
     public LottoWinningType getWinningType(LottoNumbers lottoNumbers) {
-        List<Integer> collect = lottoNumbers.getNumbers().stream()
+        List<Number> collect = lottoNumbers.getNumbers().stream()
                 .filter(winningNumbers::contains)
                 .collect(Collectors.toList());
 

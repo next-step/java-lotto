@@ -21,8 +21,4 @@ public class LottoMoney {
     public BigDecimal getMoney() {
         return money;
     }
-
-    public BigDecimal multiply(int winningNumber) {
-        return money.multiply(new BigDecimal(winningNumber));
-    }
 }

@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,36 +20,43 @@ class LottoGameTest {
     @BeforeEach
     void setUp() {
         List<LottoNumbers> numbersList = new ArrayList<>();
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(8, 21, 23, 41, 42, 43))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(3, 5, 11, 16, 32, 38))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(7, 11, 16, 35, 36, 44))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(1, 8, 11, 31, 41, 42))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(13, 14, 16, 38, 42, 45))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(7, 11, 30, 40, 42, 43))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(2, 13, 22, 32, 38, 45))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(23, 25, 33, 36, 39, 41))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(1, 3, 5, 14, 22, 45))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(5, 9, 38, 41, 43, 44))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(2, 8, 9, 18, 19, 21))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(13, 14, 18, 21, 23, 35))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(17, 21, 29, 37, 42, 45))));
-        numbersList.add(new LottoNumbers(new ArrayList<>(Arrays.asList(3, 8, 27, 30, 35, 44))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(8, 21, 23, 41, 42, 43))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(3, 5, 11, 16, 32, 38))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(7, 11, 16, 35, 36, 44))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1, 8, 11, 31, 41, 42))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(13, 14, 16, 38, 42, 45))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(7, 11, 30, 40, 42, 43))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(2, 13, 22, 32, 38, 45))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(23, 25, 33, 36, 39, 41))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1, 3, 5, 14, 22, 45))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(5, 9, 38, 41, 43, 44))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(2, 8, 9, 18, 19, 21))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(13, 14, 18, 21, 23, 35))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(17, 21, 29, 37, 42, 45))));
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))));
 
         int money = 14000;
         LottoMoney lottoMoney = new LottoMoney(money);
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(makeNumbers(winningNumbers));
 
         WinningInfos winningInfos = WinningInfos.of();
         for (LottoNumbers lottoNumbers : numbersList) {
             LottoWinningType winningType = lottoWinningNumbers.getWinningType(lottoNumbers);
             winningInfos.add(winningType);
         }
-        
+
         double benefitRate = winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
 
-        lottoGame = new LottoGame(numbersList,winningInfos, benefitRate);
+        lottoGame = new LottoGame(numbersList, winningInfos, benefitRate);
+    }
+
+    private List<Number> makeNumbers(List<Integer> integers) {
+        return new ArrayList<>(integers)
+                .stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     @ParameterizedTest

@@ -11,11 +11,13 @@ public class LottoNumberPublisher {
             .collect(Collectors.toList());
 
 
-    public static List<Integer> getShuffleSixLottoNumber() {
+    public static List<Number> getShuffleSixLottoNumber() {
         Collections.shuffle(lottoNumbers);
         List<Integer> result = lottoNumbers.subList(0, 6);
         Collections.sort(result);
-        return result;
+        return result.stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
 

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
 
@@ -15,7 +16,8 @@ public class LottoGame {
     public static LottoGame of(int money, List<Integer> winningNumbers) {
         LottoMoney lottoMoney = new LottoMoney(money);
         List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(lottoMoney.getMoney());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        List<Number> collect = winningNumbers.stream().map(Number::new).collect(Collectors.toList());
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(collect);
         WinningInfos winningInfos = generateLottoWinningInfos(lottoNumbersList, lottoWinningNumbers);
         double benefitRate = generateBenefitRate(lottoMoney, winningInfos);
 

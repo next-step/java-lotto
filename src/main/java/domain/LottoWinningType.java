@@ -10,14 +10,14 @@ public enum LottoWinningType {
     NOTHING(0, 0);
 
     private final int hitNumber;
-    private final LottoMoney lottoMoney;
+    private final LottoWinningMoney lottoMoney;
 
     LottoWinningType(int hitNumber, int lottoMoney) {
         this.hitNumber = hitNumber;
-        this.lottoMoney = new LottoMoney(lottoMoney);
+        this.lottoMoney = new LottoWinningMoney(lottoMoney);
     }
 
-    public LottoMoney getLottoMoney() {
+    public LottoWinningMoney getLottoMoney() {
         return lottoMoney;
     }
 

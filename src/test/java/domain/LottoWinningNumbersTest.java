@@ -17,10 +17,11 @@ class LottoWinningNumbersTest {
     @CsvSource(value = {"1,2,3,4,5,6=6", "2,3,4,5,6,7=5", "10,24,26,32,27,1=1"}, delimiter = '=')
     @DisplayName("한 로또 게임과 당첨 번호를 비교해 몇 개가 일치하는지 구한다.")
     void winningNumberTest(String input, int expectedNum) {
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Number> winningNumbers = integers.stream().map(Number::new).collect(Collectors.toList());
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
 
-        List<Integer> collect = makeInputToIntegerList(input);
+        List<Number> collect = makeInputToIntegerList(input);
 
         LottoNumbers lottoGame = new LottoNumbers(collect);
 
@@ -32,9 +33,12 @@ class LottoWinningNumbersTest {
 
     }
 
-    private List<Integer> makeInputToIntegerList(String input) {
+    private List<Number> makeInputToIntegerList(String input) {
         String[] split = input.split(",");
-        return Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(split)
+                .map(Integer::parseInt)
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
 }
