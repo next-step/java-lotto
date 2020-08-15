@@ -2,24 +2,42 @@ package step2;
 
 public abstract class LottoStat {
 
-  private final String message;
-  private final int amount;
+  public enum Grade {
+    First(6, 2000000000),
+    Second(5, 1500000),
+    Third(4, 50000),
+    Fourth(3, 5000);
 
-  public LottoStat(String message, int amount) {
-    this.message = message;
-    this.amount = amount;
+    private int sameCount;
+    private int amount;
+
+    Grade(int sameCount, int amount) {
+      this.sameCount = sameCount;
+      this.amount = amount;
+    }
+
+    public int getSameCount() {
+      return sameCount;
+    }
+
+    public int getAmount() {
+      return amount;
+    }
+
+    @Override
+    public String toString() {
+      return String.format("%d개 일치 (%d원)", sameCount, amount);
+    }
   }
 
-  public String getMessage() {
-    return message;
-  }
+  protected final Grade grade;
 
-  public int getAmount() {
-    return amount;
+  public LottoStat(Grade grade) {
+    this.grade = grade;
   }
 
   public int total() {
-    return amount * getCount();
+    return grade.getAmount() * getCount();
   }
 
   abstract int getCount();

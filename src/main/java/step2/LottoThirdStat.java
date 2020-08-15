@@ -10,9 +10,8 @@ public class LottoThirdStat extends LottoStat {
     this(0);
   }
 
-
   public LottoThirdStat(int count) {
-    super("4개 일치", 50000);
+    super(Grade.Third);
     this.count = count;
   }
 
@@ -23,7 +22,7 @@ public class LottoThirdStat extends LottoStat {
 
   @Override
   void decide(int sameNumberCount) {
-    if (sameNumberCount == 4) {
+    if (sameNumberCount == grade.getSameCount()) {
       count++;
     }
   }
@@ -47,6 +46,6 @@ public class LottoThirdStat extends LottoStat {
 
   @Override
   public String toString() {
-    return String.format("%s (%d원)- %d개", getMessage(), getAmount(), count);
+    return String.format("%s- %d개", grade, count);
   }
 }
