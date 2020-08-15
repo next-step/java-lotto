@@ -14,25 +14,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoResultTest {
 
-    private LottoResultNumber lottoResultNumber;
-    private List<LottoNumber> lottoNumberList;
     private LottoResult lottoResult;
 
     @BeforeEach
     public void setup() {
 
-        lottoResultNumber = new LottoResultNumber(
-                new Number(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoResultNumber lottoResultNumber = new LottoResultNumber(
+                new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        lottoNumberList = new ArrayList<>();
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
 
         for (int i = 1; i <= 3; i++) {
-            lottoNumberList.add(new LottoNumber(new Number(
+            lottoNumberList.add(new LottoNumber(new Ticket(
                     Arrays.asList(i, i + 1, i + 2, i + 3, i + 4, i + 5)
             )));
         }
 
-        lottoResult = new LottoResult(lottoNumberList, lottoResultNumber);
+        lottoResult = new LottoResult(10000, lottoNumberList, lottoResultNumber);
     }
 
     @Test
@@ -52,5 +50,10 @@ public class LottoResultTest {
         assertThatIllegalArgumentException().isThrownBy(() ->
                 lottoResult.getWinningCount(7)
         ).withMessage(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);
+    }
+
+    @Test
+    public void earningsRateTest() {
+        assertEquals(200155, lottoResult.getEarningsRate());
     }
 }

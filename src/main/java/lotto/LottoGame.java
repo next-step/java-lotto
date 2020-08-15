@@ -1,45 +1,39 @@
 package lotto;
 
 import common.StringResources;
-import lotto.domain.LottoCreator;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoResultNumber;
-import lotto.ui.LottoInput;
-import lotto.ui.LottoResultInput;
 import lotto.ui.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    public static final String DELIMITER = ", ";
-    private static final String PREFIX = "[";
-    private static final String POSTFIX = "]";
+    private final int money;
+    private final List<LottoNumber> lottoNumberList;
 
-    private final int amountMoney;
-    private List<LottoNumber> lottoNumberList;
-    private LottoResultNumber lottoResultNumber;
-
-    public LottoGame(LottoInput lottoInput) {
-        amountMoney = lottoInput.getAmountMoney();
+    public LottoGame(int money, List<LottoNumber> lottoNumberList) {
+        this.money = money;
+        this.lottoNumberList = lottoNumberList;
     }
 
     public void buy() {
 
-        lottoNumberList = LottoCreator.create(amountMoney);
+        ResultView.print((money / 1000) + StringResources.MSG_BUY_QUANTITY);
 
         for (LottoNumber lottoNumber : lottoNumberList) {
-
-            String message = lottoNumber.getNumbers().stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX));
-
             ResultView.print(lottoNumber.toString());
         }
     }
 
-    public void winning(LottoResultInput lottoResultInput) {
-        ResultView.print(StringResources.MSG_WINNING_NUMBER);
+    public void winning(LottoResultNumber lottoResultNumber) {
+
+        ResultView.print(StringResources.MSG_WINNING_STATUS);
+        ResultView.print(StringResources.LINE_SEPARATOR);
+
+        LottoResult lottoResult = new LottoResult(money, lottoNumberList, lottoResultNumber);
+        ResultView.printLottoResult(lottoResult);
+        ResultView.printLottoEarningsRate(lottoResult);
     }
 }

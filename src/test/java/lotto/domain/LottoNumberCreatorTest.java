@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoCreator;
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,7 +14,7 @@ public class LottoNumberCreatorTest {
     @ValueSource(ints = { 10000, 13000, 15000 } )
     public void buyingLottoTest(int money) {
 
-        List<LottoNumber> lottoNumberList = LottoCreator.create(money);
+        List<LottoNumber> lottoNumberList = RandomLottoCreator.createLottoList(money);
         assertThat(lottoNumberList.size()).isEqualTo(money / 1000);
 
         for (LottoNumber lottoNumber : lottoNumberList) {

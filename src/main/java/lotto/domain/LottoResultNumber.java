@@ -1,16 +1,13 @@
 package lotto.domain;
 
-import java.util.Set;
+public class LottoResultNumber extends AbstractLottoNumber {
 
-public class LottoResultNumber {
-
-    private final Number number;
-
-    public LottoResultNumber(Number number) {
-        this.number = number;
+    public LottoResultNumber(Ticket ticket) {
+        super(ticket);
     }
 
-    public Set<Integer> getNumbers() {
-        return number.getNumbers();
+    @Override
+    public String toString() {
+        return ticket.toString().substring(1, ticket.toString().length() - 1);
     }
 }

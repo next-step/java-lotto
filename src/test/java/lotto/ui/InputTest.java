@@ -22,6 +22,6 @@ public class InputTest {
 
         int money = 10000;
         LottoInput input = new LottoInput(money);
-        assertThat(input.getAmountMoney()).isEqualTo(money);
+        assertThat(input.getMoney()).isEqualTo(money);
     }
 }

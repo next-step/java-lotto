@@ -3,21 +3,26 @@ package lotto.domain;
 import common.StringResources;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
-public class Number {
+public class Ticket {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
 
+    private static final String DELIMITER = ", ";
+    private static final String PREFIX = "[";
+    private static final String POSTFIX = "]";
+
     private final Set<Integer> numbers;
 
-    public Number(List<Integer> numbers) {
+    public Ticket(List<Integer> numbers) {
 
-        this.numbers = new HashSet<>(numbers);
+        this.numbers = new TreeSet<>(numbers);
 
         verifyNumbersCount();
         verifyWrongRangeNumber();
@@ -41,5 +46,12 @@ public class Number {
                 number > LOTTO_MAXIMUM_NUMBER)) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_RANGE_NUMBER);
         }
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX));
     }
 }
