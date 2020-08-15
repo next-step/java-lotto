@@ -18,7 +18,7 @@ public class Operands {
 		this.currentIndex = 0;
 	}
 
-	public static Operands zero() {
+	public static final Operands zero() {
 		return ZERO;
 	}
 
