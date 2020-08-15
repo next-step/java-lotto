@@ -4,21 +4,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
 
     @Test
-    @DisplayName("로또 생성 및 사이즈 확인")
+    @DisplayName("로또 자동생성 사이즈 확인")
     void generateAuto() {
         // given
         final int count = 100;
-        Lottos lottos = new Lottos();
+        Lottos lottos = new Lottos(100);
 
         // when
-        lottos.generateAuto(count);
+        lottos.fillAuto();
 
         // then
-        assertThat(lottos.size()).isEqualTo(count);
+        assertThat(lottos).hasSize(count);
     }
 
     @Test
@@ -26,15 +27,13 @@ public class LottosTest {
     void add() {
         // given
         final int count = 10;
-        Lottos lottos = new Lottos();
+        Lottos lottos = new Lottos(count);
 
         // when
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.generateAuto());
-        }
+        lottos.add(Lotto.generateAuto());
 
         // then
-        assertThat(lottos.size()).isEqualTo(count);
+        assertThat(lottos).hasSize(1);
     }
 
     @Test
@@ -42,15 +41,22 @@ public class LottosTest {
     void getTotalPrice() {
         // given
         final int count = 10;
-        Lottos lottos = new Lottos();
+        Lottos lottos = new Lottos(count);
 
         // when
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.generateAuto());
-        }
+        lottos.fillAuto();
 
         // then
         assertThat(lottos.getTotalPrice()).isEqualTo(count * LottoShop.DEFAULT_PRICE_UNIT);
+    }
+
+    @Test
+    @DisplayName("로또 사이즈 보다 많이 등록 시 예외")
+    void add_overSize_exceptThrown() {
+        final int count = 1;
+        Lottos lottos = new Lottos(count);
+        lottos.add(Lotto.generateAuto());
+        assertThatThrownBy(() -> lottos.add(Lotto.generateAuto())).isInstanceOf(IllegalStateException.class);
     }
 
 }
