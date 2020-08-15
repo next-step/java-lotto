@@ -11,9 +11,6 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by hs kim on 2020/08/14
- */
 public class UserInput {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("//(.)\\\\n(.*)");

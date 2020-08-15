@@ -2,9 +2,6 @@ package com.hskim.lotto.calculator.model;
 
 import java.util.Objects;
 
-/**
- * Created by hs kim on 2020/08/14
- */
 public class CalculateResult {
 
     private int result;

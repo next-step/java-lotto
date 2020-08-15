@@ -12,14 +12,12 @@ public class CalculatorApplication {
         StringAddCalculator stringAddCalculator = StringAddCalculator.getInstance();
         CalculatorInputView calculatorInputView = new CalculatorInputView();
         CalculatorResultView calculatorResultView = new CalculatorResultView();
-        CalculatorNumberTokens calculatorNumberTokens;
         CalculateResult calculateResult;
 
         calculatorInputView.printInputMessage();
         UserInput userInput = calculatorInputView.getUserInput();
 
-        calculatorNumberTokens = CalculatorNumberTokens.of(userInput);
-        calculateResult = stringAddCalculator.calculate(calculatorNumberTokens);
+        calculateResult = stringAddCalculator.calculate(CalculatorNumberTokens.of(userInput));
 
         calculatorResultView.printResult(calculateResult);
     }
