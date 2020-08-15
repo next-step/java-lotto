@@ -27,7 +27,7 @@ public class StringAdder {
             separator.append(numberStr, 2, numberStr.indexOf(StringResources.LINE_FEED));
         }
 
-        return separator.append(StringResources.SEPARATOR_CLOSER)
+        return separator.append(StringResources.BRACKET_CLOSER)
                 .toString();
     }
 
