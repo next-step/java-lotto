@@ -18,4 +18,20 @@ public class LottoTicketsTest {
         // when & then
         assertThat(lottoTickets).isEqualTo(new LottoTickets(purchasePrice, numberMaker));
     }
+
+    @DisplayName("getTotalTicketPrice() 테스트")
+    @Test
+    void getTotalTicketPrice() {
+        // given
+        String expense = "14000";
+        NumberMaker numberMaker = new FixedNumberMaker();
+        PurchasePrice purchasePrice = new PurchasePrice(expense);
+        LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
+
+        // when
+        String result = lottoTickets.getTotalTicketPrice().toString();
+
+        // then
+        assertThat(result).isEqualTo(expense);
+    }
 }
