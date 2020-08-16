@@ -1,4 +1,4 @@
-package com.hskim.lotto.calculator.exception;
+package com.hskim.calculator.exception;
 
 public class CalculatorException extends RuntimeException {
 

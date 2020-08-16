@@ -1,7 +1,7 @@
-package com.hskim.lotto.calculator.model;
+package com.hskim.calculator.model;
 
-import com.hskim.lotto.calculator.exception.CalculatorException;
-import com.hskim.lotto.calculator.exception.CalculatorExceptionType;
+import com.hskim.calculator.exception.CalculatorException;
+import com.hskim.calculator.exception.CalculatorExceptionType;
 
 import java.util.List;
 import java.util.Objects;

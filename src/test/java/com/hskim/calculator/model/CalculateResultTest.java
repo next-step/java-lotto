@@ -1,4 +1,4 @@
-package com.hskim.lotto.calculator.model;
+package com.hskim.calculator.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

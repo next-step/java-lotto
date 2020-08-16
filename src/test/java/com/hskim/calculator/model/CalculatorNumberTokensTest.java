@@ -1,7 +1,7 @@
-package com.hskim.lotto.calculator.model;
+package com.hskim.calculator.model;
 
-import com.hskim.lotto.calculator.exception.CalculatorException;
-import com.hskim.lotto.calculator.exception.CalculatorExceptionType;
+import com.hskim.calculator.exception.CalculatorException;
+import com.hskim.calculator.exception.CalculatorExceptionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

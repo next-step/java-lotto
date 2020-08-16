@@ -1,6 +1,6 @@
-package com.hskim.lotto.calculator.ui;
+package com.hskim.calculator.ui;
 
-import com.hskim.lotto.calculator.model.UserInput;
+import com.hskim.calculator.model.UserInput;
 
 import java.util.*;
 

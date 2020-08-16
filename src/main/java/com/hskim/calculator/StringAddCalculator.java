@@ -1,7 +1,7 @@
-package com.hskim.lotto.calculator;
+package com.hskim.calculator;
 
-import com.hskim.lotto.calculator.model.CalculateResult;
-import com.hskim.lotto.calculator.model.CalculatorNumberTokens;
+import com.hskim.calculator.model.CalculateResult;
+import com.hskim.calculator.model.CalculatorNumberTokens;
 
 public class StringAddCalculator {
 
