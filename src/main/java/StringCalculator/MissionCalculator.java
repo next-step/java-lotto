@@ -13,10 +13,22 @@ public class MissionCalculator {
         }
     }
 
+    public MissionCalculator() {
+        this.calculationArgument = new ArrayList<>();
+    }
+
     public int calculate() {
         return calculationArgument
                 .stream()
                 .reduce(Integer::sum)
                 .get();
+    }
+
+    public int splitAndCalculate(String inputValue) {
+        String[] value = inputValue.split(",|;");
+        for (String input : value) {
+            calculationArgument.add(Integer.valueOf(input));
+        }
+        return calculate();
     }
 }
