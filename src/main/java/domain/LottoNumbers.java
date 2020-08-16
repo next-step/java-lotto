@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,10 +17,14 @@ public class LottoNumbers {
         }
     }
 
-    public Set<Number> getContainNumbers(LottoNumbers lottoNumbers) {
-        return lottoNumbers.numbers.stream()
+    public Set<Number> getContainNumbers(LottoNumbers lottoWinningNumbers) {
+        return lottoWinningNumbers.numbers.stream()
                 .filter(this.numbers::contains)
                 .collect(Collectors.toSet());
+    }
+
+    public boolean isContainBonus(Number bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     @Override public String toString() {

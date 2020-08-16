@@ -36,7 +36,7 @@ public class LottoGame {
     public WinningInfos getWinningInfos(LottoNumbers lottoWinningNumbers) {
         WinningInfos winningInfos = WinningInfos.of();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            Rank rank = Rank.getRank(lottoNumbers, lottoWinningNumbers);
+            Rank rank = Rank.getType(lottoNumbers, lottoWinningNumbers, new Number(7));
             winningInfos.update(rank);
         }
         return winningInfos;

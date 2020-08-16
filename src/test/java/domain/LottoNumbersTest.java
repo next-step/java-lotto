@@ -1,14 +1,12 @@
 package domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,6 +50,16 @@ class LottoNumbersTest {
                 .map(Integer::parseInt)
                 .map(Number::new)
                 .collect(Collectors.toSet());
+    }
+
+    @Test
+    @DisplayName("자신이 가진 로또 번호가 보너스 숫자를 포함하는지 결과값 제공")
+    void isContainBonusTest() {
+        Set<Number> numbers = makeInputToNumbers("1,2,3,4,5,6");
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        Number bonusNumber = new Number(6);
+
+        assertThat(lottoNumbers.isContainBonus(bonusNumber)).isTrue();
     }
 
 }

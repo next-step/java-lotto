@@ -2,14 +2,14 @@ package domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FORTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FORTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private final int countOfMatch;
@@ -20,14 +20,19 @@ public enum Rank {
         this.winningMoney = new BigDecimal(winningMoney);
     }
 
-    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers) {
+    public static Rank getType(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers, Number bonusNumber) {
         Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
-        return findRankType(numbersInWinningNumbers.size());
+        boolean matchBonus = lottoNumbers.isContainBonus(bonusNumber);
+        return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);
     }
 
-    protected static Rank findRankType(int hitNumber) {
+    protected static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch == 5) {
+            return matchBonus? SECOND : THIRD;
+        }
+
         return Arrays.stream(Rank.values())
-                .filter(e -> e.countOfMatch == hitNumber)
+                .filter(e -> e.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
     }
