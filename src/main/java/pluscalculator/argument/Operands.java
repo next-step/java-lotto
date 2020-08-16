@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Operands {
 
 	private static final Operands ZERO = new Operands(Arrays.asList(0));

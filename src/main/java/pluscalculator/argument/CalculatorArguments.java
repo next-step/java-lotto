@@ -3,12 +3,15 @@ package pluscalculator.argument;
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 @AllArgsConstructor(staticName = "of")
 public class CalculatorArguments {
+	private static final CalculatorArguments NON_VALUE = new CalculatorArguments(Operands.zero(), Operator.NONE);
+
 	private final Operands operands;
 	private final Operator operator;
-	private static final CalculatorArguments NON_VALUE = new CalculatorArguments(Operands.zero(), Operator.NONE);
 
 	public static final CalculatorArguments nonValue() {
 		return NON_VALUE;
