@@ -12,7 +12,7 @@ public class ValidationNumber {
     }
 
     public static void negativeQuantity(int number) {
-        if (number < 0) {
+        if (number < StringAddCalculator.ZERO_NUMBER) {
             throw new RuntimeException();
         }
     }
