@@ -1,23 +1,22 @@
 package calculator;
 
-import delimiter.Delimiter;
+import delimiter.StringDelimiter;
 import util.StringUtil;
 import util.ValidationUtil;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class StringCalculator {
-
-    Delimiter delimiter = new Delimiter();
 
     public int add(String text) {
         if(ValidationUtil.isBlank(text)){
             return 0;
         }
-        return sum(StringUtil.textToInt(delimiter.splitByDelimiter(text)));
+        return sum(StringUtil.textToInt(StringDelimiter.splitByDelimiter(text)));
     }
 
-    public int sum(int[] numbers) {
-        return Arrays.stream(numbers).sum();
+    public int sum(List<Integer> numbers) {
+        return numbers.stream()
+            .reduce(0, Integer::sum);
     }
 }

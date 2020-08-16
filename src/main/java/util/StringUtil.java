@@ -1,6 +1,8 @@
 package util;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringUtil {
 
@@ -9,11 +11,13 @@ public class StringUtil {
     private StringUtil() {
     }
 
-    public static int[] textToInt(String[] texts) {
-      return Arrays.stream(texts).mapToInt(text -> toPositiveNumber(text)).toArray();
+    public static List<Integer> textToInt(String[] texts) {
+      return Stream.of(texts)
+              .map(text -> validatePositiveNumber(text))
+              .collect(Collectors.toList());
     }
 
-    public static int toPositiveNumber(String text) {
+    public static int validatePositiveNumber(String text) {
         int number = Integer.parseInt(text);
         if(number < 0) {
             throw new RuntimeException(NEGATIVE_NUMBER_ERROR_MESSAGE);

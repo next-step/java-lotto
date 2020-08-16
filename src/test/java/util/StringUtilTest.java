@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,10 +15,10 @@ class StringUtilTest {
     @DisplayName("문자열을 숫자로 변환하는 테스트")
     void text_To_Int_Test(){
         String[] texts = {"1", "2", "3"};
-        int[] numbers = StringUtil.textToInt(texts);
+        List<Integer> numbers = StringUtil.textToInt(texts);
 
-        assertThat(numbers.length).isEqualTo(3);
-        assertEquals(1 , numbers[0]);
+        assertThat(numbers.size()).isEqualTo(3);
+        assertEquals(1 , numbers.get(0));
     }
 
     @Test

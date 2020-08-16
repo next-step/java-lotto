@@ -4,7 +4,7 @@ public class ValidationUtil {
     private ValidationUtil() {
     }
 
-    public static Boolean isBlank(String text) {
+    public static boolean isBlank(String text) {
         return text == null || text.isEmpty();
     }
 }
