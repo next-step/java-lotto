@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.utils.StringUtils;
+import utils.StringUtils;
 
 import java.util.Collections;
 import java.util.List;

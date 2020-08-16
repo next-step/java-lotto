@@ -1,4 +1,4 @@
-package calculator.utils;
+package utils;
 
 public class StringUtils {
     public static boolean isBlank(String input) {
