@@ -4,6 +4,8 @@ import com.hskim.lotto.model.*;
 import com.hskim.lotto.ui.LottoInputView;
 import com.hskim.lotto.ui.LottoResultView;
 
+import java.util.List;
+
 
 public class LottoSimulator {
 
@@ -12,23 +14,21 @@ public class LottoSimulator {
         LottoResultView lottoResultView = new LottoResultView();
         LottoGame lottoGame;
         LottoTickets lottoTickets;
-        PurchasePrice purchasePrice;
 
         lottoInputView.printPurchasePhrase();
-        purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        lottoTickets = new LottoTickets(purchasePrice, new RandomNumberMaker());
+        String purchasePrice = lottoInputView.getPurchasePriceFromInput();
+        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomNumberMaker());
 
-        lottoResultView.printPurchaseNum(lottoTickets.makeTicketsSizeString());
+        lottoResultView.printPurchaseNum(lottoTickets.getTicketsSize());
         lottoResultView.printString(lottoTickets.makeLottoTicketsString());
 
         lottoInputView.printWinPhrase();
-        LottoWinningTicket winningTicket = lottoInputView.getWinningTicket();
+        List<Integer> winningTicketNumbers = lottoInputView.getWinningTicketNumbers();
 
-        lottoGame = new LottoGame(lottoTickets, winningTicket);
+        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers));
         lottoGame.drawLots();
 
-        lottoResultView.printStatisticPhrase();
-        lottoResultView.printString(lottoGame.getWinnerStatisticString());
-        lottoResultView.printString(lottoGame.getEarningRateString());
+        lottoResultView.printStatisticResult(lottoGame.getWinnerMap());
+        lottoResultView.printEarningRate(lottoGame.getEarningRate(), lottoGame.isProfit());
     }
 }

@@ -5,8 +5,7 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class EarningRate {
-    private static final double STANDARD_RATE = 1.0;
-    private static final String LOSS_ALERT_MESSAGE = "(기준이" + STANDARD_RATE + "이기 때문에 결과적으로 손해라는 의미임)";
+    public static final double STANDARD_RATE = 1.0;
 
     private String earningRate;
     private boolean isProfit;
@@ -27,16 +26,12 @@ public class EarningRate {
         isProfit = Double.parseDouble(earningRate) > STANDARD_RATE;
     }
 
-    public String makeEarningRateString() {
-        String result = "총 수익률은 "
-                + earningRate
-                + "입니다.";
+    public String getEarningRate() {
+        return earningRate;
+    }
 
-        if (isProfit) {
-            return result;
-        }
-
-        return result + LOSS_ALERT_MESSAGE;
+    public boolean isProfit() {
+        return isProfit;
     }
 
     @Override

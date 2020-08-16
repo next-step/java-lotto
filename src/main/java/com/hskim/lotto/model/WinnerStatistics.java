@@ -2,10 +2,8 @@ package com.hskim.lotto.model;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WinnerStatistics {
-    private static final String STATISTIC_STRING_JOINING_DELIMITER = "\n";
 
     private final Map<LottoWinTable, Integer> winnerMap;
 
@@ -36,18 +34,8 @@ public class WinnerStatistics {
         winnerMap.put(lottoWinTable, winnerMap.getOrDefault(lottoWinTable, 0) + 1);
     }
 
-    public String makeStatisticString() {
-        return winnerMap.keySet()
-                .stream()
-                .map(this::makeDataString)
-                .collect(Collectors.joining(STATISTIC_STRING_JOINING_DELIMITER));
-    }
-
-    private String makeDataString(LottoWinTable lottoWinTable) {
-        return lottoWinTable.toString()
-                + " - "
-                + winnerMap.get(lottoWinTable)
-                + "개";
+    public Map<LottoWinTable, Integer> getWinnerMap() {
+        return winnerMap;
     }
 
     public BigDecimal getTotalPrizeAmount() {

@@ -1,10 +1,9 @@
 package com.hskim.lotto.ui;
 
-import com.hskim.lotto.model.LottoWinningTicket;
-import com.hskim.lotto.model.PurchasePrice;
-
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoInputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -19,18 +18,19 @@ public class LottoInputView {
         System.out.println(PURCHASE_PHRASE);
     }
 
-    public PurchasePrice getPurchasePriceFromInput() {
-        return new PurchasePrice(scanner.nextLine());
+    public String getPurchasePriceFromInput() {
+        return scanner.nextLine();
     }
 
     public void printWinPhrase() {
         System.out.println(NEW_LINE + WIN_PHRASE);
     }
 
-    public LottoWinningTicket getWinningTicket() {
-        String[] inputs = scanner.nextLine()
+    public List<Integer> getWinningTicketNumbers() {
+        return Arrays.stream(scanner.nextLine()
                 .replaceAll(WHITE_SPACE_REGEX, BLANK_STRING)
-                .split(INPUT_DELIMITER);
-        return new LottoWinningTicket(Arrays.asList(inputs));
+                .split(INPUT_DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }

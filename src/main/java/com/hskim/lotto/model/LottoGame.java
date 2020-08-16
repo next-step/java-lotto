@@ -7,6 +7,7 @@ public class LottoGame {
     private LottoTickets lottoTickets;
     private LottoWinningTicket winningTicket;
     private WinnerStatistics winnerStatistics = new WinnerStatistics();
+    private EarningRate earningRate;
 
     public LottoGame(LottoTickets lottoTickets, LottoWinningTicket winningTicket) {
         this.lottoTickets = lottoTickets;
@@ -14,25 +15,22 @@ public class LottoGame {
     }
 
     public void drawLots() {
-        lottoTickets.getLottoTicketStream()
-                .map(this::mapToWinnerTable)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+        lottoTickets.getWinTableList(winningTicket)
                 .forEach(winnerStatistics::putData);
+
+        earningRate = new EarningRate(winnerStatistics.getTotalPrizeAmount(), lottoTickets.getTotalTicketPrice());
     }
 
-    private Optional<LottoWinTable> mapToWinnerTable(LottoTicket lottoTicket) {
-        return winningTicket.findWinnerTable(lottoTicket);
+    public Map<LottoWinTable, Integer> getWinnerMap() {
+        return winnerStatistics.getWinnerMap();
     }
 
-    public String getWinnerStatisticString() {
-        return winnerStatistics.makeStatisticString();
+    public String getEarningRate() {
+        return earningRate.getEarningRate();
     }
 
-    public String getEarningRateString() {
-        return new EarningRate(winnerStatistics.getTotalPrizeAmount(),
-                lottoTickets.getTotalTicketPrice())
-                .makeEarningRateString();
+    public boolean isProfit() {
+        return earningRate.isProfit();
     }
 
     @Override
