@@ -17,16 +17,31 @@ public class LottoUserInput {
         return scanner.nextInt();
     }
 
+    public static int inputManualLottoCount(){
+        display("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
     public static Set<Integer> inputWinLotto() {
         display("지난 주 당첨 번호를 입력해 주세요.");
         String[] lottos =  scanner.next()
                                  .trim()
                                  .split(SPLIT_STR);
+        return stringArrayToIntSet(lottos);
+    }
+
+    public static Set<Integer> inputManualLotto() {
+        String[] lottos =  scanner.next()
+                                  .trim()
+                                  .split(SPLIT_STR);
+        return stringArrayToIntSet(lottos);
+    }
+
+    static Set<Integer> stringArrayToIntSet(String[] lottos) {
         return Stream.of(lottos)
                      .map(String::trim)
                      .map(Integer::valueOf)
-                     .collect(Collectors.toCollection(LinkedHashSet::new))
-            ;
+                     .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public static int inputBonusNo() {

@@ -6,20 +6,11 @@ import lotto.domain.core.WinningLotto;
 import lotto.ui.view.DisplayLottoList;
 import lotto.ui.view.DisplayLottoStatistics;
 
-public class LottoStore {
-    public static final String ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT = "로또 구매금액은 0보다 커야 합니다.";
-    private static final int ZERO = 0;
+public final class LottoStore {
     private final LottoPurchase lottoPurchase;
     private final ImmutableLotteries lottos;
 
-    private static void verifyPurchaseAmount(int purchaseAmount) {
-        if (ZERO >= purchaseAmount) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_CHECK_PURCHASE_AMOUNT);
-        }
-    }
-
     LottoStore(int purchaseAmount) {
-        verifyPurchaseAmount(purchaseAmount);
         lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
         lottos = ImmutableLotteries.builder()
                                    .autoLottos(lottoPurchase.getAutoLottoGeneratedCount())
@@ -28,13 +19,22 @@ public class LottoStore {
     }
 
     LottoStore(int purchaseAmount, ImmutableLotteries lottos) {
-        verifyPurchaseAmount(purchaseAmount);
         this.lottoPurchase = LottoPurchase.buyAllAuto(purchaseAmount);
+        this.lottos = lottos;
+    }
+
+    LottoStore(LottoPurchase lottoPurchase, ImmutableLotteries lottos){
+        this.lottoPurchase = lottoPurchase;
         this.lottos = lottos;
     }
 
     public static LottoStore purchaseAutoLotto(int purchaseAmount) {
         return new LottoStore(purchaseAmount);
+    }
+
+    public static LottoManualSalesStoreBuilder purchaseManualOrAutoLotto(int purchaseAmount, int manualLottoCount) {
+        final LottoPurchase lottoPurchase = LottoPurchase.buyAutoOrManual(purchaseAmount, manualLottoCount);
+        return LottoManualSalesStoreBuilder.createManualLottos(lottoPurchase);
     }
 
     public int countOfPurchased() {
