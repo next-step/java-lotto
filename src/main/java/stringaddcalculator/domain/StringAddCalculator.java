@@ -26,7 +26,9 @@ public class StringAddCalculator {
     }
 
     private static int toInt(String number) {
-        return Integer.parseInt(number);
+        int result = Integer.parseInt(number);
+        ValidationNumber.negativeQuantity(result);
+        return result;
     }
 
     public static String[] splitDelimiterCheck(String expression) {

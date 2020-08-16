@@ -67,4 +67,13 @@ public class StringAddCalculatorTest {
                 });
     }
 
+    @Test
+    @DisplayName("계산식에 음수가 들어올 경우 RuntimeException 발생")
+    void numberIsNegativeQuantityCheck() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    StringAddCalculator.sum("-1,2,3");
+                });
+    }
+
 }
