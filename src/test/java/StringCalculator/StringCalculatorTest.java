@@ -19,4 +19,6 @@ public class StringCalculatorTest {
         MissionCalculator calculator = new MissionCalculator(value);
         assertThat(calculator.calculate()).isEqualTo(9);
     }
+
+
 }
