@@ -3,7 +3,6 @@ package pluscalculator.argument;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Operands {
@@ -22,7 +21,7 @@ public class Operands {
 		return ZERO;
 	}
 
-	public static Operands of(List<Integer> operands) {
+	private static Operands of(List<Integer> operands) {
 		return new Operands(operands);
 	}
 
@@ -34,9 +33,9 @@ public class Operands {
 
 	public String[] toStringArray() {
 		String[] operandsArray = new String[operands.size()];
-		IntStream.range(0, operands.size())
-				 .forEach(i -> operandsArray[i] = String.valueOf(operands.get(i)));
-
+		for (int i = 0; i < operands.size(); i++) {
+			operandsArray[i] = String.valueOf(operands.get(i));
+		}
 		return operandsArray;
 	}
 
