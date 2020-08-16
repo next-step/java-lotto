@@ -1,28 +1,19 @@
 package stringaddcalculator;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import stringaddcalculator.domain.StringAddCalculator;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class StringAddCalculatorTest {
 
     @ParameterizedTest
-    @DisplayName("콤마(,)로 구분된 숫자의 합")
-    @CsvSource(value = {"1,2/3", "3,4/7"}, delimiter = '/')
-    void splitAndSumCommas(String expression, int expected) {
-        int result = StringAddCalculator.commaSum(expression);
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @DisplayName("콜론(:)으로 구분된 숫자의 합")
-    @CsvSource(value = {"1:2/3", "3:4/7"}, delimiter = '/')
-    void splitAndSumColons(String expression, int expected) {
-        int result = StringAddCalculator.colonSum(expression);
-        assertThat(result).isEqualTo(expected);
+    @DisplayName("콜론(:) 및 콤마(,)로 구분된 숫자의 합")
+    @CsvSource(value = {"3,4/7", "1:2/3", "1,2:3/6", "1:3,6/10"}, delimiter = '/')
+    void splitAndSum(String expression, int expected) {
+        int result = StringAddCalculator.sum(expression);
+        Assertions.assertThat(result).isEqualTo(expected);
     }
 
 }
