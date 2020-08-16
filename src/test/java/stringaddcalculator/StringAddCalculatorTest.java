@@ -50,4 +50,11 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자로 입력값 덧셈")
+    void cumtomDelimiter() {
+        int result = StringAddCalculator.sum("//@\n1@2@3");
+        assertThat(result).isEqualTo(6);
+    }
+
 }
