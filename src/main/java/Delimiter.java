@@ -1,4 +1,10 @@
+import common.ExceptionMessage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Delimiter {
     private static final String DEFAULT_DELIMITER_PATTERN = "[,:]";
@@ -38,5 +44,14 @@ public class Delimiter {
     @Override
     public int hashCode() {
         return Objects.hash(delimiter);
+    }
+
+    public ExpressionNumbers splitValue(String value) {
+        if (StringUtils.isBlank(value)) {
+            throw new IllegalArgumentException(ExceptionMessage.WRONG_EXPRESSION.printMessage());
+        }
+
+        String[] values = value.split(this.delimiter);
+        return ExpressionNumbers.newInstance(values);
     }
 }

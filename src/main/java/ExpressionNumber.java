@@ -3,7 +3,7 @@ import common.ExceptionMessage;
 import java.util.Objects;
 
 public class ExpressionNumber {
-    private static final String DEFAULT_NUMBER = "0";
+    private static final int DEFAULT_NUMBER = 0;
     private Integer number;
 
     private ExpressionNumber(String numberValue) {
