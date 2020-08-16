@@ -3,6 +3,9 @@ package StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Lotto Mission - Step1 테스트")
@@ -29,8 +32,12 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("음수 제약조건 확인")
     void calculateTest_ExceptionForNegativeNumber() {
-        //String[] value = "-1,2".split(",|;");
         assertThatThrownBy(() -> new MissionCalculator().splitAndCalculate("-1,2"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void splitText_includingCustomDelimiter() {
+        assertThat(new MissionCalculator().splitAndCalculate("//;\n1;2;3")).isEqualTo(6);
     }
 }
