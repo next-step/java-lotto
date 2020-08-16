@@ -4,7 +4,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import stringaddcalculator.domain.StringAddCalculator;
+import stringaddcalculator.domain.ValidationNumber;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
 
@@ -14,6 +18,14 @@ public class StringAddCalculatorTest {
     void splitAndSum(String expression, int expected) {
         int result = StringAddCalculator.sum(expression);
         Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("공백 또는 null이 들어올 경우 True을 리턴")
+    @NullAndEmptySource
+    void numberIsBlank(String expression) {
+        boolean isResult = ValidationNumber.isBlank(expression);
+        assertThat(isResult).isTrue();
     }
 
 }
