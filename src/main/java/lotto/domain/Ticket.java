@@ -41,11 +41,15 @@ public class Ticket {
     }
 
     private void verifyWrongRangeNumber() {
-        if (numbers.stream().anyMatch(
-                number -> number < LOTTO_MINIMUM_NUMBER ||
-                number > LOTTO_MAXIMUM_NUMBER)) {
+        if (isOutOfRangeNumber()) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_RANGE_NUMBER);
         }
+    }
+
+    private boolean isOutOfRangeNumber() {
+        return numbers.stream().anyMatch(
+                number -> number < LOTTO_MINIMUM_NUMBER ||
+                        number > LOTTO_MAXIMUM_NUMBER);
     }
 
     @Override

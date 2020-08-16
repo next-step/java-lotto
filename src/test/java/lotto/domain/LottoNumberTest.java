@@ -15,6 +15,7 @@ public class LottoNumberTest {
     public void setup() {
         ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
+
     @Test
     public void makeLottoNumberTest() {
         LottoNumber lottoNumber = new LottoNumber(ticket);

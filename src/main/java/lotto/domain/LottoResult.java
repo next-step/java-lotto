@@ -14,18 +14,8 @@ public class LottoResult {
     private final LottoResultNumber lottoResultNumber;
 
     private final Map<Integer, Integer> winCount;
-    private static final Map<Integer, Integer> winMoney;
 
     private final double earningsRate;
-
-    static {
-        winMoney = new HashMap<>();
-        winMoney.put(3, 5000);
-        winMoney.put(4, 50000);
-        winMoney.put(5, 1500000);
-        winMoney.put(6, 2000000000);
-        Collections.unmodifiableMap(winMoney);
-    }
 
     public LottoResult(int money, List<LottoNumber> lottoNumberList, LottoResultNumber lottoResultNumber) {
 
@@ -67,7 +57,7 @@ public class LottoResult {
         int earningMoney = 0;
 
         for (int i = 3; i <= 6; i++) {
-            earningMoney += winCount.get(i) * winMoney.get(i);
+            earningMoney += winCount.get(i) * WinningAmount.of(i).getMoney();
         }
 
         return (double)earningMoney / (double)money;

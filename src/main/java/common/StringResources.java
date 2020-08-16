@@ -34,6 +34,8 @@ public class StringResources {
     public static final String ERR_DUPLICATE_NUMBER = "중복되지 않은 6개의 번호로 구성해주세요.";
     public static final String ERR_WRONG_RANGE_NUMBER = "1 이상 45 이하의 수만 사용할 수 있습니다.";
     public static final String ERR_WRONG_RANGE_RESULT_NUMBER = "0 이상 6 이하의 수만 사용할 수 있습니다.";
+    public static final String ERR_NO_LOTTO_LIST = "로또를 구매하지 않았습니다.";
+    public static final String ERR_WRONG_RESULT_INPUT = "당첨번호는 ', '으로 구분하여 총 6개 입력해야 합니다.";
 
     public static final String LINE_SEPARATOR = "---------";
 }
