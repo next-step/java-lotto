@@ -1,7 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
+
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class LottoNumber {
     public static final int MIN_VALUE = 1;
@@ -9,11 +10,15 @@ public class LottoNumber {
 
     private int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
     }
 
     public static LottoNumber of(int number) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
+            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_RANGE);
+        }
+
         return new LottoNumber(number);
     }
 

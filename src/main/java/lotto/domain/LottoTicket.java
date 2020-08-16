@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-    private static final int DEFAULT_LOTTO_NUMBER_COUNT = 6;
+    public static final int DEFAULT_LOTTO_NUMBER_COUNT = 6;
     private static final List<LottoNumber> LOTTO_NUMBERS;
 
     private List<LottoNumber> lottoNumbers;

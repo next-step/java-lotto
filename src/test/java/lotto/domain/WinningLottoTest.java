@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,7 +28,7 @@ public class WinningLottoTest {
     void create_invalid_count(String winningLottoNumbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLotto.of(winningLottoNumbers))
-                .withMessage("당첨 로또 번호는 총 6개의 숫자를 입력 바랍니다.");
+                .withMessage(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT);
     }
 
     @DisplayName("당첨 번호 범위 오입력 시, 생성 테스트")
@@ -36,7 +37,7 @@ public class WinningLottoTest {
     void create_invalid_range(String winningLottoNumbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLotto.of(winningLottoNumbers))
-                .withMessage("로또 번호는 1이상 45 이하의 숫자만 입력 가능합니다.");
+                .withMessage(LottoExceptionMessage.INVALID_LOTTO_NUMBER_RANGE);
     }
 
     @DisplayName("당첨 번호 숫자 미입력 시 , 생성 테스트")
@@ -45,7 +46,7 @@ public class WinningLottoTest {
     void create_invalid_number(String winningLottoNumbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLotto.of(winningLottoNumbers))
-                .withMessage("로또 번호는 숫자만 입력 가능합니다.");
+                .withMessage("숫자를 제대로 입력해주세요.");
     }
 
     private static Stream<Arguments> makeWinningLottoBadParameter() {
