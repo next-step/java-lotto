@@ -9,13 +9,6 @@ public class MissionCalculator {
     public static final String DEFAULT_REGEX_DELIMITER = "[,;]";
     private List<Integer> calculationArgument;
 
-    public MissionCalculator(String[] value) {
-        this.calculationArgument = new ArrayList<>();
-        for (String input : value) {
-            calculationArgument.add(Integer.valueOf(input));
-        }
-    }
-
     public MissionCalculator() {
         this.calculationArgument = new ArrayList<>();
     }
@@ -32,10 +25,14 @@ public class MissionCalculator {
             return 0;
         }
         String[] value = splitInputString(inputValue);
+        addIntegerValueForCalculation(value);
+        return calculate();
+    }
+
+    private void addIntegerValueForCalculation(String[] value) {
         for (String input : value) {
             calculationArgument.add(validateInput(input));
         }
-        return calculate();
     }
 
     private int validateInput(String input) {
