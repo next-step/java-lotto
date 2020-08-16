@@ -11,7 +11,7 @@ public class Number {
     }
 
     private void validate(int number) {
-        if (!(1 <= number && number <= 45)) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException("1 이상 45 이하의 값을 입력해주세요.");
         }
     }

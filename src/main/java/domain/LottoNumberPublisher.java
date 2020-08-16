@@ -19,6 +19,4 @@ public class LottoNumberPublisher {
                 .map(Number::new)
                 .collect(Collectors.toList());
     }
-
-
 }
