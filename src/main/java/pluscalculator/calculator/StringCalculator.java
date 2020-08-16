@@ -10,12 +10,12 @@ import pluscalculator.result.CalculatorResult;
 public class StringCalculator {
 
 	public static CalculatorResult calculate(CalculatorArguments arguments) {
-		CalculatorResult result = CalculatorResult.init(arguments.getFirst());
+		int result = arguments.getFirst();
 
 		while (arguments.hasNextOperand()) {
-			result.nextResult(arguments.getOperator(), arguments.nextOperand());
+			result += arguments.getOperator().calculate(result, arguments.nextOperand());
 		}
 
-		return result;
+		return CalculatorResult.of(result);
 	}
 }

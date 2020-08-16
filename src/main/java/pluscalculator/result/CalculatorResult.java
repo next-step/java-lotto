@@ -1,7 +1,5 @@
 package pluscalculator.result;
 
-import pluscalculator.argument.Operator;
-
 public class CalculatorResult {
 
 	private int result;
@@ -10,12 +8,8 @@ public class CalculatorResult {
 		this.result = result;
 	}
 
-	public static CalculatorResult init(int initValue) {
+	public static CalculatorResult of(int initValue) {
 		return new CalculatorResult(initValue);
-	}
-
-	public void nextResult(Operator operator, int operand2) {
-		result = operator.calculate(result, operand2);
 	}
 
 	public String viewResult() {
