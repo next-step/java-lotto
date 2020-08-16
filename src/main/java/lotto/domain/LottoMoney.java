@@ -4,7 +4,7 @@ import lotto.exception.LottoExceptionMessage;
 import utils.StringUtils;
 
 public class LottoMoney {
-    private static final int LOTTO_MONEY_DEFAULT_UNIT = 1_000;
+    private static final int DEFAULT_LOTTO_MONEY_UNIT = 1_000;
 
     private int lottoMoney;
 
@@ -20,8 +20,12 @@ public class LottoMoney {
     }
 
     private static void validateMoneyUnit(int lottoMoney) {
-        if (lottoMoney % LOTTO_MONEY_DEFAULT_UNIT != 0) {
+        if (lottoMoney % DEFAULT_LOTTO_MONEY_UNIT != 0) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_MONEY_UNIT);
         }
+    }
+
+    public int getBuyCount() {
+        return lottoMoney / DEFAULT_LOTTO_MONEY_UNIT;
     }
 }

@@ -2,11 +2,12 @@ package lotto.domain;
 
 import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoMoneyTest {
 
@@ -36,4 +37,10 @@ public class LottoMoneyTest {
                 .withMessage("숫자를 제대로 입력해주세요.");
     }
 
+    @DisplayName("로또 구매개수 확인 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"4000,4", "333000,333", "1000,1"})
+    void getBuyCount(String lottoMoney, int buyCount) {
+        assertThat(LottoMoney.of(lottoMoney).getBuyCount()).isEqualTo(buyCount);
+    }
 }
