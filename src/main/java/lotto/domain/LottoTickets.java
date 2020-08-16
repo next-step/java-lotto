@@ -1,7 +1,7 @@
 package lotto.domain;
 
-public class Lotto {
-    public static Lotto of(int i) {
+public class LottoTickets {
+    public static LottoTickets of(int i) {
         return null;
     }
 

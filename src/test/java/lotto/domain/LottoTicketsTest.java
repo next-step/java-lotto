@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+public class LottoTicketsTest {
 
     @Test
     void create() {
         int purchaseNumber = 5;
-        Lotto lotto = Lotto.of(5);
+        LottoTickets lottoTickets = LottoTickets.of(5);
 
-        assertThat(lotto.number()).isEqualTo(purchaseNumber);
+        assertThat(lottoTickets.number()).isEqualTo(purchaseNumber);
     }
 }
