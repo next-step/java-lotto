@@ -5,7 +5,6 @@ import lotto.domain.LottoResultNumber;
 import lotto.domain.Ticket;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoInput {
@@ -28,7 +27,6 @@ public class LottoInput {
         verifyPositiveMoney(money);
         verifyMoneyUnit(money);
 
-        ResultView.print(String.valueOf(money));
         return money;
     }
 
@@ -57,7 +55,9 @@ public class LottoInput {
         return new LottoResultNumber(new Ticket(
                 Arrays.stream(split)
                         .map(Integer::valueOf)
-                        .collect(Collectors.toList())));
+                        .collect(Collectors.toList()),
+                inputBonus())
+        );
     }
 
     private void verifyResultInput(String inputLine) {
@@ -70,5 +70,10 @@ public class LottoInput {
         if (split.length != 6) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_RESULT_INPUT);
         }
+    }
+
+    private int inputBonus() {
+        System.out.println(StringResources.MSG_BONUS_NUMBER);
+        return input.nextInt();
     }
 }

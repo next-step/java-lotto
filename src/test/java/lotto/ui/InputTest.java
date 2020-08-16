@@ -56,7 +56,7 @@ public class InputTest {
 
     @Test
     public void inputLottoResultSuccess() {
-        Input input = when(0, "1, 2, 3, 4, 5, 6");
+        Input input = when(7, "1, 2, 3, 4, 5, 6");
         assertThat(new LottoInput(input).inputLottoResult()).isNotNull();
     }
 

@@ -20,7 +20,8 @@ public class RandomLottoCreator {
 
         Collections.shuffle(ORIGINAL_LOTTO_NUMBERS, RANDOM_INSTANCE);
         return new Ticket(
-                ORIGINAL_LOTTO_NUMBERS.subList(0, Ticket.LOTTO_NUMBERS_SIZE));
+                ORIGINAL_LOTTO_NUMBERS.subList(0, Ticket.LOTTO_NUMBERS_SIZE),
+                ORIGINAL_LOTTO_NUMBERS.get(6));
     }
 
     public static List<LottoNumber> createLottoList(int money) {

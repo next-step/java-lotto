@@ -1,30 +1,32 @@
 package lotto.domain;
 
-import common.StringResources;
-
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningCountMap {
 
-    private final Map<Integer, Integer> map;
+    private final Map<Rank, Integer> map;
 
     public WinningCountMap() {
-        map = new HashMap<>();
-        map.put(3, 0);
-        map.put(4, 0);
-        map.put(5, 0);
-        map.put(6, 0);
+        map = new LinkedHashMap<>();
+        map.put(Rank.FIFTH, 0);
+        map.put(Rank.FOURTH, 0);
+        map.put(Rank.THIRD, 0);
+        map.put(Rank.SECOND, 0);
+        map.put(Rank.FIRST, 0);
     }
 
-    public void addCount(int matchCount) {
-        map.computeIfPresent(matchCount, (Integer key, Integer value) -> ++value);
+    public void addCount(Rank rank) {
+        map.computeIfPresent(rank, (Rank key, Integer value) -> ++value);
     }
 
-    public int get(int matchCount) {
-        if (matchCount < 0 || matchCount > 6) {
-            throw new IllegalArgumentException(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);
-        }
-        return map.get(matchCount);
+    public int getAllWinningMoney() {
+        return map.entrySet().stream()
+                .mapToInt(entry -> entry.getValue() * entry.getKey().getMoney())
+                .sum();
+    }
+
+    public Map<Rank, Integer> getAllData() {
+        return map;
     }
 }

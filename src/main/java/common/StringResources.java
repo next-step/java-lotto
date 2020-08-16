@@ -18,12 +18,14 @@ public class StringResources {
     public static final String MSG_BUY_MONEY = "구입금액을 입력해 주세요.";
     public static final String MSG_BUY_QUANTITY = "개를 구매했습니다.";
     public static final String MSG_WINNING_NUMBER = "지난 주 당첨번호를 입력해주세요.";
+    public static final String MSG_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
     public static final String MSG_WINNING_STATUS = "당첨 통계";
 
     public static final String[] MSG_LOTTO_RESULT = new String[] {
             "3개 일치 (5000원)- ##개",
             "4개 일치 (50000원)- ##개",
             "5개 일치 (1500000원)- ##개",
+            "5개 일치, 보너스볼 일치 (30000000원)- ##개",
             "6개 일치 (2000000000원)- ##개"
     };
 

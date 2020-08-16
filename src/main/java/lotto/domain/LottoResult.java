@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import common.StringResources;
-
 import java.util.List;
 
 public class LottoResult {
@@ -33,23 +31,20 @@ public class LottoResult {
                     .filter(array -> array[0] == array[1])
                     .count();
 
-            winningCountMap.addCount((int) count);
+            boolean matchBonus = lottoNumber.getBonus() == lottoResultNumber.getBonus();
+
+            winningCountMap.addCount(Rank.of((int) count, matchBonus));
         }
+    }
+
+    public WinningCountMap getWinningCountMap() {
+        return winningCountMap;
     }
 
     private double calculateEarningsRate() {
 
-        int earningMoney = 0;
-
-        for (int i = 3; i <= 6; i++) {
-            earningMoney += winningCountMap.get(i) * WinningAmount.of(i).getMoney();
-        }
-
+        int earningMoney = winningCountMap.getAllWinningMoney();
         return (double)earningMoney / (double)money;
-    }
-
-    public int getWinningCount(int matchCount) {
-        return winningCountMap.get(matchCount);
     }
 
     public double getEarningsRate() {

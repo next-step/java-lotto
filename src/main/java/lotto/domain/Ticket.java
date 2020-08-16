@@ -19,10 +19,12 @@ public class Ticket {
     private static final String POSTFIX = "]";
 
     private final Set<Integer> numbers;
+    private final int bonus;
 
-    public Ticket(List<Integer> numbers) {
+    public Ticket(List<Integer> numbers, int bonus) {
 
         this.numbers = new TreeSet<>(numbers);
+        this.bonus = bonus;
 
         verifyNumbersCount();
         verifyWrongRangeNumber();
@@ -34,6 +36,10 @@ public class Ticket {
         return numbers;
     }
 
+    public int getBonus() {
+        return bonus;
+    }
+
     private void verifyNumbersCount() {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(StringResources.ERR_DUPLICATE_NUMBER);
@@ -41,21 +47,31 @@ public class Ticket {
     }
 
     private void verifyWrongRangeNumber() {
-        if (isOutOfRangeNumber()) {
+        if (hasWrongRangeNumbers() || isWrongBonusRange()) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_RANGE_NUMBER);
         }
     }
 
-    private boolean isOutOfRangeNumber() {
-        return numbers.stream().anyMatch(
-                number -> number < LOTTO_MINIMUM_NUMBER ||
-                        number > LOTTO_MAXIMUM_NUMBER);
+    private boolean hasWrongRangeNumbers() {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .anyMatch(this::isOutOfRangeNumber);
+    }
+
+    private boolean isWrongBonusRange() {
+        return isOutOfRangeNumber(bonus);
+    }
+
+    private boolean isOutOfRangeNumber(int number) {
+        return number < LOTTO_MINIMUM_NUMBER ||
+                number > LOTTO_MAXIMUM_NUMBER;
     }
 
     @Override
     public String toString() {
         return numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX));
+                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)
+                ) + " / " + bonus;
     }
 }

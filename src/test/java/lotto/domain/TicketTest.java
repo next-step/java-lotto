@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TicketTest {
 
@@ -30,7 +30,7 @@ public class TicketTest {
 
             List<Integer> numbers = fullNumberList.subList(0, 6);
             Collections.sort(numbers);
-            assertThat(new Ticket(numbers)).isNotNull();
+            assertThat(new Ticket(numbers, random.nextInt(45) + 1)).isNotNull();
         }
     }
 
@@ -40,12 +40,14 @@ public class TicketTest {
         List<Integer> hasTooSmallValueList = Arrays.asList(0, 1, 2, 3, 4, 5);
         List<Integer> hasTooLargeValueList = Arrays.asList(46, 1, 2, 3, 4, 5);
 
+        int bonus = 7;
+
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Ticket(hasTooSmallValueList))
+                .isThrownBy(() -> new Ticket(hasTooSmallValueList, bonus))
                 .withMessage(StringResources.ERR_WRONG_RANGE_NUMBER);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Ticket(hasTooLargeValueList))
+                .isThrownBy(() -> new Ticket(hasTooLargeValueList, bonus))
                 .withMessage(StringResources.ERR_WRONG_RANGE_NUMBER);
     }
 
@@ -55,7 +57,7 @@ public class TicketTest {
         List<Integer> hasDuplicatedNumberList = Arrays.asList(1, 1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Ticket(hasDuplicatedNumberList))
+                .isThrownBy(() -> new Ticket(hasDuplicatedNumberList, 7))
                 .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
     }
 
@@ -65,7 +67,7 @@ public class TicketTest {
         List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Ticket(tooManyItems))
+                .isThrownBy(() -> new Ticket(tooManyItems, 6))
                 .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
     }
 
@@ -75,7 +77,7 @@ public class TicketTest {
         List<Integer> tooManyItems = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Ticket(tooManyItems))
+                .isThrownBy(() -> new Ticket(tooManyItems, 8))
                 .withMessage(StringResources.ERR_DUPLICATE_NUMBER);
     }
 
@@ -87,16 +89,10 @@ public class TicketTest {
 
         String toStringText = ticket.toString();
 
-        assertEquals(toStringText.charAt(0), '[');
-        assertEquals(toStringText.charAt(toStringText.length() - 1), ']');
-
-        String numbersText = toStringText.substring(1, toStringText.length() - 1);
-        String[] stringNumbers = numbersText.split(", ");
-
-        assertEquals(numbers.length, stringNumbers.length);
-
-        for (int i = 0; i < numbers.length; i++) {
-            assertEquals(numbers[i], Integer.parseInt(stringNumbers[i]));
+        for (int number : numbers) {
+            assertTrue(toStringText.contains(String.valueOf(number)));
         }
+
+        assertTrue(toStringText.contains(String.valueOf(ticket.getBonus())));
     }
 }

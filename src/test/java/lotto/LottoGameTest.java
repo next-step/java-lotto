@@ -18,7 +18,7 @@ public class LottoGameTest {
         lottoGame.buy();
 
         lottoGame.winning(new LottoResultNumber(
-                new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6))));
+                new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6), 7)));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class LottoGameTest {
 
         assertThatThrownBy(() ->
                 lottoGame.winning(new LottoResultNumber(
-                                new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                                new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6), 7)))
         ).hasMessage(StringResources.ERR_NO_LOTTO_LIST);
     }
 }
