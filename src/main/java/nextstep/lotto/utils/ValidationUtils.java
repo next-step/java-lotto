@@ -12,10 +12,7 @@ public class ValidationUtils {
             return true;
         }
 
-        if(inputValue.trim().equals(EMPTY_STRING)) {
-            return true;
-        }
-        return false;
+        return inputValue.trim().equals(EMPTY_STRING);
     }
 
 }
