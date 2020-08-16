@@ -1,3 +1,5 @@
+package stringcalculator.common;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;

@@ -1,36 +1,24 @@
-import common.ExceptionMessage;
+package stringcalculator.expression;
+
+import stringcalculator.common.ExceptionMessage;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Delimiter {
     private static final String DEFAULT_DELIMITER_PATTERN = "[,:]";
     private String delimiter;
 
-    private Delimiter(String expression) {
-        if (ExpressionValidator.isCustomDelimiterExist(expression)) {
-            this.delimiter = extractCustomDelimiter(expression);
-            return;
-        }
-
-        this.delimiter = DEFAULT_DELIMITER_PATTERN;
+    private Delimiter(String delimiter) {
+        this.delimiter = delimiter;
     }
 
-    private String extractCustomDelimiter(String expression) {
-        return expression.replaceAll("([0-9])(.[0-9])*", "")
-                .replaceAll("//", "")
-                .replaceAll("\n", "");
+    public static Delimiter newInstance() {
+        return new Delimiter(DEFAULT_DELIMITER_PATTERN);
     }
 
-    public static Delimiter newInstance(String expression) {
-        return new Delimiter(expression);
-    }
-
-    public String pattern() {
-        return this.delimiter;
+    public static Delimiter newInstance(String delimiter) {
+        return new Delimiter(delimiter);
     }
 
     @Override

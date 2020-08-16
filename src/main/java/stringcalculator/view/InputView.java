@@ -1,4 +1,4 @@
-package view;
+package stringcalculator.view;
 
 import org.apache.commons.lang3.StringUtils;
 

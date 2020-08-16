@@ -1,4 +1,7 @@
-import common.ExceptionMessage;
+package stringcalculator.expression;
+
+import stringcalculator.common.ExceptionMessage;
+import stringcalculator.common.ExpressionValidator;
 
 import java.util.Objects;
 

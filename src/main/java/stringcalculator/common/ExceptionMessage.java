@@ -1,4 +1,4 @@
-package common;
+package stringcalculator.common;
 
 public enum ExceptionMessage {
     WRONG_EXPRESSION("입력한 수식이 잘못됐습니다."),

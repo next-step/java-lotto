@@ -1,4 +1,6 @@
-import common.ExceptionMessage;
+package stringcalculator.expression;
+
+import stringcalculator.common.ExceptionMessage;
 
 import java.util.Arrays;
 import java.util.List;

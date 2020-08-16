@@ -1,9 +1,11 @@
-import org.apache.commons.lang3.StringUtils;
+package stringcalculator.common;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import stringcalculator.TestInputUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +16,7 @@ class ExpressionValidatorTest {
     @CsvSource(value = {"1:2,3;true", "//?\\n1?2?3;true", "1::2;3;false", "\\n1?2?3;false", " ;false"}, delimiter = ';')
     void validateExpression(String value, boolean expected) {
         //given
-        String expressionValue = reformatLinefeed(value);
+        String expressionValue = TestInputUtils.replaceLinefeed(value);
 
         //when
         boolean actual = ExpressionValidator.validExpression(expressionValue);
@@ -40,7 +42,7 @@ class ExpressionValidatorTest {
     @ValueSource(strings = {"1:2;3", "//?\n1?2?3"})
     void validateNormalExpression(String value) {
         //given
-        String expressionValue = reformatLinefeed(value);
+        String expressionValue = TestInputUtils.replaceLinefeed(value);
 
         //when
         boolean actual = ExpressionValidator.validExpression(expressionValue);
@@ -54,7 +56,7 @@ class ExpressionValidatorTest {
     @ValueSource(strings = {"1::2;3", "\\n1?2?3", " "})
     void validateWrongExpression(String value) {
         //given
-        String expressionValue = reformatLinefeed(value);
+        String expressionValue = TestInputUtils.replaceLinefeed(value);
 
         //when
         boolean actual = ExpressionValidator.validExpression(expressionValue);
@@ -87,20 +89,12 @@ class ExpressionValidatorTest {
     @CsvSource(value = {"//?\\n1?2?3,true", "1:2;3,false"})
     void isCustomDelimiterExist(String value, boolean expected) {
         //given
-        String expressionValue = reformatLinefeed(value);
+        String expressionValue = TestInputUtils.replaceLinefeed(value);
 
         //when
         boolean actual = ExpressionValidator.isCustomDelimiterExist(expressionValue);
 
         //then
         assertEquals(expected, actual);
-    }
-
-    private String reformatLinefeed(String expressionValue) {
-        if (StringUtils.isNotBlank(expressionValue) && expressionValue.contains("\\n")) {
-            return expressionValue.replace("\\n", "\n");
-        }
-
-        return expressionValue;
     }
 }
