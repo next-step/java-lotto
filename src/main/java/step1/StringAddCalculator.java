@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class StringAddCalculator {
     public static final String DELIMITER = "[,:]";
 
-    public static int splitAndSum(String s) {
-        String[] splitedStrings = s.split(DELIMITER);
+    public static int splitAndSum(String target) {
+        String[] splitedStrings = target.split(DELIMITER);
         List<Integer> parsedNumbers = Arrays.stream(splitedStrings)
                 .map(StringAddCalculator::parseInt)
                 .collect(Collectors.toList());
