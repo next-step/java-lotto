@@ -76,4 +76,13 @@ public class StringAddCalculatorTest {
                 });
     }
 
+    @Test
+    @DisplayName("계산식에 유효하지 않은 값 들어올 경우 RuntimeException 발생")
+    void invalidInputCheck() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    ValidationNumber.invalidInput("a,2,3");
+                });
+    }
+
 }
