@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private StringAddCalculator() {}
 
     public static final String DELIMITER_REGEX = "//(.)\n(.*)";
 
