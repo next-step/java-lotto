@@ -53,6 +53,12 @@ class LottoGameTest {
                 .collect(Collectors.toSet());
     }
 
+    @Test
+    @DisplayName("구입 금액에 따라 LottoNumbers를 여러 개 생성한다.")
+    void makeLottoNumberListTest() {
+        assertThat(lottoGame.getLottoNumbersList().size()).isEqualTo(14);
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"6=0", "5=0", "4=0", "3=1"}, delimiter = '=')
     @DisplayName("다수의 로또 게임과 당첨 번호를 비교해 3개 이상 6개 이하 일치하는 횟수를 구한다.")
