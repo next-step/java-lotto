@@ -13,8 +13,8 @@ import pluscalculator.result.CalculatorResult;
 public class CalculatorController {
 
 	public static void execute() {
-		CalculatorArguments arguments = InputView.input();
-		CalculatorResult result = StringCalculator.calculate(arguments);
+		String inputOfUser = InputView.input();
+		CalculatorResult result = StringCalculator.calculate(CalculatorArguments.from(inputOfUser));
 		OutputView.output(result);
 	}
 }
