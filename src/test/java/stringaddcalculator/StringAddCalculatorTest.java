@@ -16,4 +16,13 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.commaSum(expression);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @DisplayName("콜론(:)으로 구분된 숫자의 합")
+    @CsvSource(value = {"1:2/3", "3:4/7"}, delimiter = '/')
+    void splitAndSumColons(String expression, int expected) {
+        int result = StringAddCalculator.colonSum(expression);
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
