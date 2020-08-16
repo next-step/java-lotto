@@ -61,7 +61,7 @@ class LottoGameTest {
 
     @ParameterizedTest
     @CsvSource(value = {"6=0", "5=0", "4=0", "3=1"}, delimiter = '=')
-    @DisplayName("다수의 로또 게임과 당첨 번호를 비교해 3개 이상 6개 이하 일치하는 횟수를 구한다.")
+    @DisplayName("당첨 번호에 따라 당첨 정보를 반환한다.")
     void lottoGamesTest(int countOfMatch, int expected) {
         Number bonusNumber = new Number(7);
         WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers, bonusNumber);
