@@ -12,6 +12,7 @@ public class DelimiterExtractor {
 		return delimiter.toString();
 	}
 
+	// getter를 따로 사용하지 않고 이 메서드에서 구분자를 바로 반환하고 싶었는데 잘 안돼서 분리한 문자열을 반환했습니다ㅠㅠ
 	public String separateDelimiterAndIntegers(String inputString) {
 		String[] separatedString = inputString.replaceAll(START_SIGN, BACK_SLASHES).split(END_SIGN);
 		if (separatedString.length > 1) {
