@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class Expression {
     public static final String DEFAULT_DELIMITER = "[,:]";
 
-    private List<Integer> targetNumbers;
+    private final List<Integer> targetNumbers;
 
     public Expression(List<Integer> targetNumbers) {
         this(targetNumbers, Expression::throwIfNumberIsNegative);
