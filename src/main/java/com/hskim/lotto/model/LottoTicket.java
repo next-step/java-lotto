@@ -11,29 +11,29 @@ public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_PRICE = 1000;
 
-    private final List<String> lottoNumberList;
+    private final List<Integer> lottoNumberList;
 
-    public LottoTicket(List<String> lottoNumberList) {
+    public LottoTicket(List<Integer> lottoNumberList) {
         validateSize(lottoNumberList);
         validateDuplicate(lottoNumberList);
         this.lottoNumberList = lottoNumberList;
     }
 
-    private void validateSize(List<String> lottoNumberList) {
+    private void validateSize(List<Integer> lottoNumberList) {
         if (lottoNumberList.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_NUMBER_SIZE.getMessage());
         }
     }
 
-    private void validateDuplicate(List<String> lottoNumberList) {
-        Set<String> validateSet = new HashSet<>(lottoNumberList);
+    private void validateDuplicate(List<Integer> lottoNumberList) {
+        Set<Integer> validateSet = new HashSet<>(lottoNumberList);
 
         if (validateSet.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LottoExceptionMessage.DUPLICATED_NUMBER.getMessage());
         }
     }
 
-    public WinningCondition getWinningCondition(List<String> winningNumbers) {
+    public WinningCondition getWinningCondition(List<Integer> winningNumbers) {
         return new WinningCondition((int) lottoNumberList.stream()
                 .filter(winningNumbers::contains)
                 .count());
@@ -54,6 +54,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return "LottoTicket : " + lottoNumberList;
+        return lottoNumberList.toString();
     }
 }
