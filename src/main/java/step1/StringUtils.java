@@ -1,6 +1,8 @@
 package step1;
 
 public class StringUtils {
+    private StringUtils() {}
+
     public static boolean isEmpty(String target) {
         return target == null || target.isEmpty();
     }
