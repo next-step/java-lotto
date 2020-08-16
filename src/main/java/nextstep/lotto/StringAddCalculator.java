@@ -1,8 +1,11 @@
 package nextstep.lotto;
 
-import nextstep.lotto.utils.IntegerUtils;
+import nextstep.lotto.dto.InputNumber;
+import nextstep.lotto.dto.NumberFactory;
 import nextstep.lotto.utils.StringUtils;
 import nextstep.lotto.utils.ValidationUtils;
+
+import java.util.List;
 
 
 public class StringAddCalculator {
@@ -16,9 +19,10 @@ public class StringAddCalculator {
 
     private static int sumInArrayNumber(String[] splitString){
         int sum = 0;
+        List<InputNumber> inputNumbers = NumberFactory.create(splitString);
 
-        for(String targetString : splitString){
-            sum += IntegerUtils.parsePositiveInt(targetString);
+        for(InputNumber number : inputNumbers){
+            sum += number.getNumber();
         }
 
         return sum;
