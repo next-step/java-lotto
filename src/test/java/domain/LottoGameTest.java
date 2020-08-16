@@ -74,7 +74,7 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("수익률을 구한다.")
+    @DisplayName("당첨 정보에 따라 수익률을 반환한다.")
     void getBenefitRateTest() {
         double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos(lottoNumbers, new Number(7)));
         assertThat(benefitRate).isEqualTo(0.35);
