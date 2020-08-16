@@ -18,9 +18,16 @@ public class StringAddCalculator {
 
     public static int parseInt(String target) {
         try {
-            return Integer.parseInt(target);
+            return throwIfNumberIsNegative(Integer.parseInt(target));
         } catch (NumberFormatException e) {
             throw new RuntimeException(String.format("Passed wrong formatted string %s", target), e);
         }
+    }
+
+    public static int throwIfNumberIsNegative(int target) {
+        if (target < 0) {
+            throw new RuntimeException("The given number is negative!");
+        }
+        return target;
     }
 }
