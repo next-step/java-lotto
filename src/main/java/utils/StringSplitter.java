@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class StringSplitter {
     private static final String REGEX_DEFAULT_DELIMITER = "[,:]";
-    private static final Pattern REGEX_CUSTOM_DELIMITER = Pattern.compile("(.)\\n(.*)");
+    private static final Pattern REGEX_CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_NUMBER_GROUP = 2;
 
