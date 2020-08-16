@@ -14,6 +14,7 @@ public class ExpressionTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
     public void of() {
         assertThat(Expression.of("3,5:2,3:4,0,2").stream())
                 .containsExactly(3, 5, 2, 3, 4, 0, 2);
