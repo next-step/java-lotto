@@ -9,4 +9,9 @@ public class ValidationNumber {
         return false;
     }
 
+    public static void negativeQuantity(int number) {
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+    }
 }

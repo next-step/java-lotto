@@ -10,6 +10,7 @@ import stringaddcalculator.domain.StringAddCalculator;
 import stringaddcalculator.domain.ValidationNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringAddCalculatorTest {
 
@@ -55,6 +56,15 @@ public class StringAddCalculatorTest {
     void cumtomDelimiter() {
         int result = StringAddCalculator.sum("//@\n1@2@3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수가 들어올 경우 RuntimeException 발생")
+    void numberIsNegativeQuantity() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    ValidationNumber.negativeQuantity(-1);
+                });
     }
 
 }
