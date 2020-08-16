@@ -2,11 +2,11 @@ package StringCalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Lotto Mission - Step1 테스트")
 public class StringCalculatorTest {
@@ -37,7 +37,28 @@ public class StringCalculatorTest {
     }
 
     @Test
+    @DisplayName("Custom Delimiter 입력시 분리여부 체크")
     void splitText_includingCustomDelimiter() {
         assertThat(new MissionCalculator().splitAndCalculate("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("텍스트 문자 포함될 경우 Exception 확인")
+    void calculateTest_ExceptionForCharacterIncluded() {
+        assertThatThrownBy(() -> new MissionCalculator().splitAndCalculate("30,13A"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("입력값이 Null이거나 빈 값인 경우 테스트")
+    void calculateTest_NullAndEmptyValueTest(String input) {
+        assertThat(new MissionCalculator().splitAndCalculate(input)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("값 중간에 Empty값 들어가 있어도 계산 잘하는지 확인")
+    void calculateTest_calculationWithNullValueInMedium() {
+        assertThat(new MissionCalculator().splitAndCalculate("//;\n1;;2;3")).isEqualTo(6);
     }
 }
