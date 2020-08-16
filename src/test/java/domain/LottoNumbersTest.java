@@ -1,8 +1,6 @@
 package domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -29,29 +27,26 @@ class LottoNumbersTest {
                 .collect(Collectors.toSet());
         assertThatThrownBy(() -> new LottoNumbers(collect))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6=6", "2,3,4,5,6,7=5", "10,24,26,32,27,1=1"}, delimiter = '=')
-    @DisplayName("한 로또 게임과 당첨 번호를 비교해 몇 개가 일치하는지 구한다.")
-    void winningNumberTest(String input, int expectedNum) {
-        List<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Set<Number> winningNumbers = integers.stream().map(Number::new).collect(Collectors.toSet());
-        LottoNumbers lottoNumbers = new LottoNumbers(winningNumbers);
+    @CsvSource(value = {"1,2,3,4,5,6=1,2,3,4,5,6", "2,3,4,5,6,7=2,3,4,5,6", "10,24,26,32,27,1=1"}, delimiter = '=')
+    @DisplayName("자신이 가진 로또 번호와 제공된 로또 번호에서 일치하는 번호 리스트를 제공한다.")
+    void getContainNumbersTest(String input, String expectedInput) {
+        Set<Number> numbers = makeInputToNumbers(input);
+        Set<Number> winningNumbers = makeInputToNumbers("1,2,3,4,5,6");
 
-        Set<Number> collect = makeInputToIntegerList(input);
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
 
-        LottoNumbers lottoGame = new LottoNumbers(collect);
+        Set<Number> actual = lottoNumbers.getContainNumbers(winningLottoNumbers);
 
-        Rank actual = lottoNumbers.getRank(lottoGame);
-
-        Rank expected = Rank.getRank(expectedNum);
+        Set<Number> expected = makeInputToNumbers(expectedInput);
 
         assertThat(actual).isEqualTo(expected);
     }
 
-    private Set<Number> makeInputToIntegerList(String input) {
+    private Set<Number> makeInputToNumbers(String input) {
         String[] split = input.split(",");
         return Arrays.stream(split)
                 .map(Integer::parseInt)

@@ -5,11 +5,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final Set<Number> winningNumbers;
+    private final Set<Number> numbers;
 
     public LottoNumbers(Set<Number> numbers) {
         validate(numbers);
-        this.winningNumbers = numbers;
+        this.numbers = numbers;
     }
 
     private void validate(Set<Number> numbers) {
@@ -18,15 +18,13 @@ public class LottoNumbers {
         }
     }
 
-    public Rank getRank(LottoNumbers lottoWinningNumbers) {
-        List<Number> collect = lottoWinningNumbers.winningNumbers.stream()
-                .filter(winningNumbers::contains)
-                .collect(Collectors.toList());
-
-        return Rank.getRank(collect.size());
+    public Set<Number> getContainNumbers(LottoNumbers lottoNumbers) {
+        return lottoNumbers.numbers.stream()
+                .filter(this.numbers::contains)
+                .collect(Collectors.toSet());
     }
 
     @Override public String toString() {
-        return winningNumbers.toString();
+        return numbers.toString();
     }
 }

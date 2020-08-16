@@ -59,7 +59,7 @@ class LottoGameTest {
     void lottoGamesTest(int hitNumber, int expected) {
         WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers);
 
-        Rank expectedWinningType = Rank.getRank(hitNumber);
+        Rank expectedWinningType = Rank.findRankType(hitNumber);
         lottoWinningInfos.getWinningInfos().stream()
                 .filter(e -> e.getRank().equals(expectedWinningType))
                 .forEach(e -> assertThat(e.getWinningNumber()).isEqualTo(expected));

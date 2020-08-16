@@ -2,6 +2,8 @@ package domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -18,7 +20,12 @@ public enum Rank {
         this.winningMoney = new BigDecimal(winningMoney);
     }
 
-    public static Rank getRank(int hitNumber) {
+    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers) {
+        Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
+        return findRankType(numbersInWinningNumbers.size());
+    }
+
+    protected static Rank findRankType(int hitNumber) {
         return Arrays.stream(Rank.values())
                 .filter(e -> e.countOfMatch == hitNumber)
                 .findFirst()
