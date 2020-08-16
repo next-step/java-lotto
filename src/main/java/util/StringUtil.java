@@ -6,8 +6,6 @@ import java.util.stream.Stream;
 
 public class StringUtil {
 
-    public static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "문자열에 음수값이 포함되어 있습니다.";
-
     private StringUtil() {
     }
 
@@ -20,7 +18,7 @@ public class StringUtil {
     public static int validatePositiveNumber(String text) {
         int number = Integer.parseInt(text);
         if(number < 0) {
-            throw new RuntimeException(NEGATIVE_NUMBER_ERROR_MESSAGE);
+            throw new RuntimeException("문자열에 음수값이 포함되어 있습니다.");
         }
         return number;
     }
