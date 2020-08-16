@@ -14,7 +14,7 @@ public class LottoGameTest {
     void create() {
         // given
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice("10000"), new FixedNumberMaker());
-        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList("1", "8", "9", "10", "17", "25"));
+        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 8, 9, 10, 17, 25));
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
 
         // when & then

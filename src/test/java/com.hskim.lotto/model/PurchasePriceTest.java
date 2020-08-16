@@ -16,9 +16,11 @@ public class PurchasePriceTest {
     void create() {
         // given
         String price = String.valueOf(LottoTicket.LOTTO_PRICE * 3);
+
+        // when
         PurchasePrice purchasePrice = new PurchasePrice(price);
 
-        // when & then
+        // then
         assertThat(purchasePrice).isEqualTo(new PurchasePrice(price));
     }
 
