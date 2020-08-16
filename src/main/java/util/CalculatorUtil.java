@@ -5,14 +5,10 @@ public class CalculatorUtil {
     }
 
     public static int divideWholeNumber(int target, int divideNumber) {
-        if (target < divideNumber || divideNumber == 0) {
-            return 0;
-        }
-
-        return target / divideNumber;
+        return (int) Math.round(divide(target, divideNumber));
     }
 
-    public static float divideFloatNumber(int target, int divideNumber) {
+    public static double divide(int target, int divideNumber) {
         if (divideNumber == 0) {
             return 0;
         }

@@ -12,7 +12,6 @@ public class SplitUtilTest {
     void splitToNumber() {
         List<Integer> result = SplitUtil.splitToNumber("1,2,3,4", ",");
 
-        assertThat(result).hasSize(4);
-        assertThat(result).containsExactly(1, 2, 3, 4);
+        assertThat(result).hasSize(4).containsExactly(1, 2, 3, 4);
     }
 }

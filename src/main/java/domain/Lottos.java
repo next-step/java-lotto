@@ -1,29 +1,28 @@
 package domain;
 
 import strategy.NumberGenerator;
+import study.ValidateUtil;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
-    public static final int LOTTO_NUMBERS = 6;
     private final List<Lotto> lottos;
 
     public Lottos(int buyAmount, NumberGenerator randomNumberGenerator) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyAmount; i++) {
-            lottos.add(new Lotto(randomNumberGenerator));
-        }
-
-        this.lottos = lottos;
+        this.lottos = IntStream.range(0, buyAmount)
+                .mapToObj(i -> new Lotto(randomNumberGenerator))
+                .collect(Collectors.toList());
     }
 
-    public List<Lotto> getValue() {
-        return this.lottos;
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(this.lottos);
     }
 
     public LottoResults getPrizes(List<Integer> winningNumbers) {
-        if(winningNumbers.size() != LOTTO_NUMBERS) {
+        if (!ValidateUtil.valdateWinningNumbers(winningNumbers)) {
             throw new RuntimeException();
         }
 

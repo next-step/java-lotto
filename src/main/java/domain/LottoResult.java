@@ -1,33 +1,28 @@
 package domain;
 
 public class LottoResult {
-    private Prize prize;
-    private int winningNumber;
+    private final Prize prize;
+    private final WinningCount winningCount;
 
     public LottoResult(Prize prize, int winningNumber) {
         this.prize = prize;
-        this.winningNumber = winningNumber;
+        this.winningCount = new WinningCount(winningNumber);
     }
 
     public int calculateWinningMoney() {
-        return prize.getMoney() * winningNumber;
+        return winningCount.calculateWinningMoney(prize.getMoney());
     }
 
-    public void winning(int hitNumber) {
-        if(prize.getHitNumber() != hitNumber) {
+    public void winning(long hitNumber) {
+        if (prize.getHitNumber() != hitNumber) {
             return;
         }
 
-        this.winningNumber++;
+        this.winningCount.increase();
     }
 
-
-    public Prize getPrize() {
-        return prize;
-    }
-
-    public int getWinningNumber() {
-        return winningNumber;
+    public int getWinningCount() {
+        return winningCount.getValue();
     }
 
     public int getPrizeHitNumber() {

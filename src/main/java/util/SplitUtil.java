@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SplitUtil {
-    public static List<Integer> splitToNumber(String target, String delimeter) {
-        return Arrays.stream(target.split(delimeter))
+    private SplitUtil() {
+    }
+
+    public static List<Integer> splitToNumber(String target, String delimiter) {
+        return Arrays.stream(target.split(delimiter))
                 .map(Integer::parseInt)
-                .distinct()
                 .collect(Collectors.toList());
     }
 }

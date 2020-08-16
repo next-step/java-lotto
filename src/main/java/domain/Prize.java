@@ -12,10 +12,11 @@ public enum Prize {
     THIRD(4, 50000),
     FOURTH(3, 5000);
 
-    private int hitNumber;
-    private int money;
+    private final int hitNumber;
+    private final int money;
 
-    private static final Map<Integer, Prize> prizes = Collections.unmodifiableMap(Stream.of(values()).collect(Collectors.toMap(Prize::getHitNumber, Function.identity())));
+    private static final Map<Integer, Prize> prizes = Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(Prize::getHitNumber, Function.identity())));
 
 
     Prize(int hitNumber, int money) {
