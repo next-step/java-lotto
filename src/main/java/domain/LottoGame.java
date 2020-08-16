@@ -33,10 +33,10 @@ public class LottoGame {
         return lottoNumbersList;
     }
 
-    public WinningInfos getWinningInfos(LottoNumbers lottoWinningNumbers) {
+    public WinningInfos getWinningInfos(LottoNumbers lottoWinningNumbers, Number bonusNumber) {
         WinningInfos winningInfos = WinningInfos.of();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            Rank rank = Rank.getType(lottoNumbers, lottoWinningNumbers, new Number(7));
+            Rank rank = Rank.getRank(lottoNumbers, lottoWinningNumbers, bonusNumber);
             winningInfos.update(rank);
         }
         return winningInfos;

@@ -10,6 +10,7 @@ public class WinningInfos {
 
     public static WinningInfos of() {
         List<WinningInfo> list = new ArrayList<>(Arrays.asList(
+                WinningInfo.of(Rank.FIFTH),
                 WinningInfo.of(Rank.FORTH),
                 WinningInfo.of(Rank.THIRD),
                 WinningInfo.of(Rank.SECOND),

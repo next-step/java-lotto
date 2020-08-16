@@ -20,7 +20,7 @@ public enum Rank {
         this.winningMoney = new BigDecimal(winningMoney);
     }
 
-    public static Rank getType(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers, Number bonusNumber) {
+    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers, Number bonusNumber) {
         Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
         boolean matchBonus = lottoNumbers.isContainBonus(bonusNumber);
         return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);

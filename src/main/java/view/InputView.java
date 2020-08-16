@@ -3,7 +3,6 @@ package view;
 import domain.Number;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +20,13 @@ public class InputView {
         String str = scanner.nextLine();
         return getWinningListFromString(str);
     }
+
+    public static Number getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String s = scanner.nextLine();
+        return new Number(Integer.parseInt(s));
+    }
+
     private static Set<Number> getWinningListFromString(String winningNumberStr) {
         return Arrays.stream(winningNumberStr.split(","))
                 .map(String::trim)

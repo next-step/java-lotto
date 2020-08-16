@@ -1,6 +1,7 @@
 package view;
 
 import domain.*;
+import domain.Number;
 
 import java.util.List;
 
@@ -11,14 +12,18 @@ public class OutputView {
         }
     }
 
-    public static WinningInfos printWinningInfo(LottoGame lottoGame, LottoNumbers lottoNumbers) {
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers);
+    public static WinningInfos printWinningInfo(LottoGame lottoGame, LottoNumbers lottoNumbers, Number bonusNumber) {
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers, bonusNumber);
         System.out.println();
 
         List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();
-        winningInfos.forEach(e -> System.out.printf("%d개 일치 (%d원) - %d개\n", e.getRank().getCountOfMatch(),
-                e.getRank().getWinningMoney().intValue(),
-                e.getWinningNumber()));
+        winningInfos.forEach(e -> {
+            String str = e.getRank().equals(Rank.SECOND)? ", 보너스 볼 일치" : "";
+            System.out.printf("%d개 일치%s (%d원) - %d개\n", e.getRank().getCountOfMatch(),
+                    str,
+                    e.getRank().getWinningMoney().intValue(),
+                    e.getWinningNumber());
+        });
         return lottoWinningInfos;
     }
 
