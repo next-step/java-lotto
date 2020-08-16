@@ -13,7 +13,7 @@ public class StringCalculator {
 		int result = arguments.getFirst();
 
 		while (arguments.hasNextOperand()) {
-			result += arguments.getOperator().calculate(result, arguments.nextOperand());
+			result = arguments.getOperator().calculate(result, arguments.nextOperand());
 		}
 
 		return CalculatorResult.of(result);

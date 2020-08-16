@@ -10,9 +10,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import pluscalculator.argument.CalculatorArguments;
 import pluscalculator.calculator.StringCalculator;
 import pluscalculator.result.CalculatorResult;
-import pluscalculator.util.InputAnalyzer;
 
 @DisplayName("계산 테스트")
 public class CalculatorTest {
@@ -21,7 +21,7 @@ public class CalculatorTest {
 	@DisplayName("기본 패턴 테스트")
 	@MethodSource("basicParameterProvider")
 	public void basicPatternTest(String param, String expect) {
-		CalculatorResult result = StringCalculator.calculate(InputAnalyzer.analyze(param));
+		CalculatorResult result = StringCalculator.calculate(CalculatorArguments.from(param));
 		assertThat(result.viewResult()).isEqualTo(expect);
 	}
 
@@ -29,7 +29,7 @@ public class CalculatorTest {
 	@DisplayName("커스텀 패턴 테스트")
 	@MethodSource("customParameterProvider")
 	public void customPatternTest(String param, String expect) {
-		CalculatorResult result = StringCalculator.calculate(InputAnalyzer.analyze(param));
+		CalculatorResult result = StringCalculator.calculate(CalculatorArguments.from(param));
 		assertThat(result.viewResult()).isEqualTo(expect);
 	}
 
@@ -37,25 +37,25 @@ public class CalculatorTest {
 	@DisplayName("그 외 경우 테스트")
 	@MethodSource("etcParameterProvider")
 	public void etcPatternTest(String param, String expect) {
-		CalculatorResult result = StringCalculator.calculate(InputAnalyzer.analyze(param));
+		CalculatorResult result = StringCalculator.calculate(CalculatorArguments.from(param));
 		assertThat(result.viewResult()).isEqualTo(expect);
 	}
 
 	private static Stream<Arguments> basicParameterProvider() {
 		return Stream.of(
-				Arguments.arguments("1:2", "3"),
-				Arguments.arguments("1:2:4", "7"),
-				Arguments.arguments("11:22:1:100", "134"),
-				Arguments.arguments("1,2,3", "6"),
-				Arguments.arguments("1,2:3", "6")
+				Arguments.arguments("10:2", "12"),
+				Arguments.arguments("46:10:44", "100"),
+				Arguments.arguments("43:23:10:8", "84"),
+				Arguments.arguments("13,55,789", "857"),
+				Arguments.arguments("10,39:1", "50")
 						);
 	}
 
 	private static Stream<Arguments> customParameterProvider() {
 		return Stream.of(
-				Arguments.arguments("//;\\n1;2;3", "6"),
-				Arguments.arguments("//%\\n1%2%3", "6"),
-				Arguments.arguments("//;\\n11;200;3;45", "259")
+				Arguments.arguments("//;\\n4;5;1", "10"),
+				Arguments.arguments("//%\\n20%43%11", "74"),
+				Arguments.arguments("//;\\n47;46;1;23", "117")
 						);
 	}
 
