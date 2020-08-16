@@ -1,38 +1,33 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<Number> numbers;
+    private final Set<Number> winningNumbers;
 
-    public LottoNumbers(List<Number> numbers) {
-        this.numbers = numbers;
+    public LottoNumbers(List<Number> winningNumbers) {
+        this.winningNumbers = new HashSet<>(winningNumbers);
+        validate();
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    private void validate() {
+        if (this.winningNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개의 다른 값 이여야 합니다.");
+        }
     }
 
+    public Rank getRank(LottoNumbers lottoWinningNumbers) {
+        List<Number> collect = lottoWinningNumbers.winningNumbers.stream()
+                .filter(winningNumbers::contains)
+                .collect(Collectors.toList());
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers lottoGame = (LottoNumbers) o;
-        return Objects.equals(numbers, lottoGame.numbers);
+        return Rank.getRank(collect.size());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "domain.LottoGame{" +
-                "numbers=" + numbers +
-                '}';
+    @Override public String toString() {
+        return winningNumbers.toString();
     }
 }

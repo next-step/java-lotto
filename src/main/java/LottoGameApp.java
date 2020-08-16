@@ -1,7 +1,5 @@
-import domain.LottoGame;
-import domain.LottoMoney;
+import domain.*;
 import domain.Number;
-import domain.WinningInfos;
 import view.InputView;
 import view.OutputView;
 
@@ -11,13 +9,12 @@ public class LottoGameApp {
     public static void main(String[] args) {
         int money = InputView.getMoney();
         LottoMoney lottoMoney = new LottoMoney(money);
-        List<Number> winningNumber = InputView.getWinningNumber();
-        LottoGame lottoGame = LottoGame.of(money, winningNumber);
-
-
+        LottoGame lottoGame = LottoGame.of(money);
         OutputView.printLottoGames(lottoGame.getLottoNumbersList());
+        List<Number> winningNumber = InputView.getWinningNumber();
+        LottoNumbers lottoNumbers = new LottoNumbers(winningNumber);
 
-        WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame);
+        WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame, lottoNumbers);
         OutputView.printBenefitRate(lottoGame, lottoMoney, winningInfos);
     }
 }

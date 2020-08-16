@@ -6,18 +6,18 @@ import java.util.List;
 
 public class OutputView {
     public static void printLottoGames(List<LottoNumbers> lottoGameList) {
-        for (LottoNumbers lottoGame : lottoGameList) {
-            System.out.println(lottoGame.getNumbers());
+        for (LottoNumbers lottoNumbers : lottoGameList) {
+            System.out.println(lottoNumbers);
         }
     }
 
-    public static WinningInfos printWinningInfo(LottoGame lottoGame) {
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos();
+    public static WinningInfos printWinningInfo(LottoGame lottoGame, LottoNumbers lottoNumbers) {
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers);
         System.out.println();
 
         List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();
-        winningInfos.forEach(e -> System.out.printf("%d개 일치 (%d원) - %d개\n", e.getWinningType().getHitNumber(),
-                e.getWinningType().getLottoMoney().getMoney().intValue(),
+        winningInfos.forEach(e -> System.out.printf("%d개 일치 (%d원) - %d개\n", e.getRank().getCountOfMatch(),
+                e.getRank().getWinningMoney().intValue(),
                 e.getWinningNumber()));
         return lottoWinningInfos;
     }

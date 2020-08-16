@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGameTest {
     private LottoGame lottoGame;
     private LottoMoney lottoMoney;
+    private LottoNumbers lottoNumbers;
 
     @BeforeEach
     void setUp() {
@@ -39,9 +40,9 @@ class LottoGameTest {
         lottoMoney = new LottoMoney(money);
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(makeNumbers(winningNumbers));
+        lottoNumbers = new LottoNumbers(makeNumbers(winningNumbers));
 
-        lottoGame = new LottoGame(numbersList, lottoWinningNumbers);
+        lottoGame = new LottoGame(numbersList);
     }
 
     private List<Number> makeNumbers(List<Integer> integers) {
@@ -55,18 +56,18 @@ class LottoGameTest {
     @CsvSource(value = {"6=0", "5=0", "4=0", "3=1"}, delimiter = '=')
     @DisplayName("다수의 로또 게임과 당첨 번호를 비교해 3개 이상 6개 이하 일치하는 횟수를 구한다.")
     void lottoGamesTest(int hitNumber, int expected) {
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos();
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers);
 
-        LottoWinningType expectedWinningType = LottoWinningType.getWinningType(hitNumber);
+        Rank expectedWinningType = Rank.getRank(hitNumber);
         lottoWinningInfos.getWinningInfos().stream()
-                .filter(e -> e.getWinningType().equals(expectedWinningType))
+                .filter(e -> e.getRank().equals(expectedWinningType))
                 .forEach(e -> assertThat(e.getWinningNumber()).isEqualTo(expected));
     }
 
     @Test
     @DisplayName("수익률을 구한다.")
     void getBenefitRateTest() {
-        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos());
+        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos(lottoNumbers));
         assertThat(benefitRate).isEqualTo(0.35);
     }
 }

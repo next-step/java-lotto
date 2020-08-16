@@ -13,7 +13,7 @@ public class LottoMoney {
     }
 
     private void validate(int money) {
-        if (money < 1000) {
+        if (money < MONEY_PER_GAME) {
             throw new IllegalArgumentException("1000원 이상의 금액을 입력해 주세요.");
         }
     }

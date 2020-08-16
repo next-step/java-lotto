@@ -1,26 +1,21 @@
 package domain;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
 
 public class LottoGame {
     private final List<LottoNumbers> lottoNumbersList;
-    private final LottoWinningNumbers lottoWinningNumbers;
 
-    public static LottoGame of(int money, List<Number> winningNumbers) {
+    public static LottoGame of(int money) {
         List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(money);
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
-        return new LottoGame(lottoNumbersList, lottoWinningNumbers);
+        return new LottoGame(lottoNumbersList);
     }
 
-    public LottoGame(List<LottoNumbers> lottoNumbersList, LottoWinningNumbers lottoWinningNumbers) {
+    public LottoGame(List<LottoNumbers> lottoNumbersList) {
         this.lottoNumbersList = lottoNumbersList;
-        this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
     private static List<LottoNumbers> generateLottoNumbersList(int money) {
@@ -38,19 +33,18 @@ public class LottoGame {
         return lottoNumbersList;
     }
 
-    public WinningInfos getWinningInfos() {
+    public WinningInfos getWinningInfos(LottoNumbers lottoWinningNumbers) {
         WinningInfos winningInfos = WinningInfos.of();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            LottoWinningType winningType = lottoWinningNumbers.getWinningType(lottoNumbers);
-            winningInfos.add(winningType);
+            Rank rank = lottoNumbers.getRank(lottoWinningNumbers);
+            winningInfos.update(rank);
         }
         return winningInfos;
     }
 
     public double getBenefitRate(LottoMoney lottoMoney, WinningInfos winningInfos) {
-        if (lottoMoney.getMoney().equals(BigDecimal.ZERO)) {
-            return 0.0;
-        }
-        return winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
+        return winningInfos.getTotalWinningMoney()
+                .divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN)
+                .doubleValue();
     }
 }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWinningNumbersTest {
+class LottoNumbersTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6=6", "2,3,4,5,6,7=5", "10,24,26,32,27,1=1"}, delimiter = '=')
@@ -19,15 +19,15 @@ class LottoWinningNumbersTest {
     void winningNumberTest(String input, int expectedNum) {
         List<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Number> winningNumbers = integers.stream().map(Number::new).collect(Collectors.toList());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(winningNumbers);
 
         List<Number> collect = makeInputToIntegerList(input);
 
         LottoNumbers lottoGame = new LottoNumbers(collect);
 
-        LottoWinningType actual = lottoWinningNumbers.getWinningType(lottoGame);
+        Rank actual = lottoNumbers.getRank(lottoGame);
 
-        LottoWinningType expected = LottoWinningType.getWinningType(expectedNum);
+        Rank expected = Rank.getRank(expectedNum);
 
         assertThat(actual).isEqualTo(expected);
 
