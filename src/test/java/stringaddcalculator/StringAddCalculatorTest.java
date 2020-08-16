@@ -42,4 +42,12 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @ParameterizedTest
+    @DisplayName("숫자 하나만 입력할 경우 해당 숫자 반환")
+    @CsvSource(value = {"10:10", "50:50", "1:1"}, delimiter = ':')
+    void numberSizeIsOne(String number, int expected) {
+        int result = StringAddCalculator.sum(number);
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
