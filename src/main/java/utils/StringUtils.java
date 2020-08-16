@@ -11,7 +11,7 @@ public class StringUtils {
         return Integer.parseInt(input);
     }
 
-    private static void validateNumber(String input) {
+    public static void validateNumber(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
