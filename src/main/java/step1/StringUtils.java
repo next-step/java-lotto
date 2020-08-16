@@ -8,4 +8,7 @@ public class StringUtils {
 		return integers.split(extractor.getDelimiter());
 	}
 
+	public static boolean isEmpty(String inputString) {
+		return null == inputString || inputString.isEmpty();
+	}
 }
