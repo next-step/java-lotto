@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LottoNumber {
     public static final int MIN_VALUE = 1;
@@ -27,5 +28,9 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public static int valueOf(LottoNumber lottoNumber) {
+        return lottoNumber.number;
     }
 }

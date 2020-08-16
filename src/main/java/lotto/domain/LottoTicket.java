@@ -31,4 +31,8 @@ public class LottoTicket {
 
         return new LottoTicket(lottoNumbers);
     }
+
+    public static List<LottoNumber> stream(LottoTicket lottoTicket) {
+        return lottoTicket.lottoNumbers;
+    }
 }

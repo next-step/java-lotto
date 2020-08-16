@@ -23,4 +23,8 @@ public class LottoTickets {
     public int number() {
         return lottoTickets.size();
     }
+
+    public Stream<LottoTicket> stream() {
+        return this.lottoTickets.stream();
+    }
 }
