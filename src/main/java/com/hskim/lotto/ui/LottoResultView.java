@@ -13,17 +13,18 @@ public class LottoResultView {
     private static final String UNDER_LINE = "================";
     private static final String EARNING_RATE_PHRASE = "총 수익률은 ";
     private static final String END_PHRASE = "입니다.";
-    private static final String LOSS_ALERT_MESSAGE = "(기준이 " + (int)EarningRate.STANDARD_RATE
+    private static final String LOSS_ALERT_MESSAGE = "(기준이 " + (int) EarningRate.STANDARD_RATE
             + "이기 때문에 결과적으로 손해라는 의미임)";
     private static final String STATISTIC_STRING_JOINING_DELIMITER = "\n";
     private static final String HYPHEN = "-";
     private static final String NUM_PHRASE = "개";
 
-    public void printEarningRate (String earningRate, boolean isProfit) {
+    public void printEarningRate(String earningRate, boolean isProfit) {
         String phrase = EARNING_RATE_PHRASE + earningRate + END_PHRASE;
 
         if (isProfit) {
             System.out.println(phrase);
+            return;
         }
 
         System.out.println(phrase + LOSS_ALERT_MESSAGE);
