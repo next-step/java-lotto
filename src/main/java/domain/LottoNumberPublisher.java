@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,12 +12,12 @@ public class LottoNumberPublisher {
             .collect(Collectors.toList());
 
 
-    public static List<Number> getShuffleSixLottoNumber() {
+    public static Set<Number> getShuffleSixLottoNumber() {
         Collections.shuffle(lottoNumbers);
         List<Integer> result = lottoNumbers.subList(0, 6);
         Collections.sort(result);
         return result.stream()
                 .map(Number::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }
