@@ -1,33 +1,15 @@
 package step1;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class StringAddCalculator {
-    public static final String DELIMITER = "[,:]";
-
     public static int splitAndSum(String target) {
-        String[] splitedStrings = target.split(DELIMITER);
-        List<Integer> parsedNumbers = Arrays.stream(splitedStrings)
-                .map(StringAddCalculator::parseInt)
-                .collect(Collectors.toList());
-
-        return parsedNumbers.stream().reduce(0, (acc, cur) -> acc += cur);
+        if (StringUtils.isEmpty(target)) {
+            return 0;
+        }
+        Expression expression = createExpression(target);
+        return expression.stream().reduce(0, (acc, cur) -> acc += cur);
     }
 
-    public static int parseInt(String target) {
-        try {
-            return throwIfNumberIsNegative(Integer.parseInt(target));
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(String.format("Passed wrong formatted string %s", target), e);
-        }
-    }
-
-    public static int throwIfNumberIsNegative(int target) {
-        if (target < 0) {
-            throw new RuntimeException("The given number is negative!");
-        }
-        return target;
+    private static Expression createExpression(String target) {
+        return Expression.of(target);
     }
 }
