@@ -11,4 +11,12 @@ public class NumberTest {
         assertThatThrownBy(() -> new Number(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void plusTest() {
+        Number number = new Number(3);
+        Number operand = new Number(2);
+
+
+    }
 }

@@ -13,9 +13,8 @@ public class Arguments {
         return !args.isEmpty();
     }
 
-    public int nextArgument() {
-        Number next = this.args.remove(0);
-        return next.getVal();
+    public Number nextArgument() {
+        return this.args.remove(0);
     }
 
     public static Arguments of(List<Number> numbers) {

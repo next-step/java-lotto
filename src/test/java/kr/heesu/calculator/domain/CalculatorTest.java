@@ -34,7 +34,7 @@ public class CalculatorTest {
 
         Result result = calculator.getResult();
 
-        assertThat(result.getVal()).isEqualTo(6);
+        assertThat(result.getVal().getVal()).isEqualTo(6);
         assertThat(calculator.hasNext()).isFalse();
     }
 }

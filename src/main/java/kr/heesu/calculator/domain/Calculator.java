@@ -2,11 +2,9 @@ package kr.heesu.calculator.domain;
 
 public class Calculator {
     private final Expression expression;
-    private final Result result;
 
     private Calculator(Expression expression) {
         this.expression = expression;
-        this.result = Result.of();
     }
 
     public static Calculator of(Expression expression) {
@@ -14,10 +12,7 @@ public class Calculator {
     }
 
     public void calculate() {
-        int operand = expression.nextArgument();
-        Operator operator = expression.getOperator();
-
-        result.next(operand, operator);
+        expression.nextOperation();
     }
 
     public boolean hasNext() {
@@ -25,6 +20,6 @@ public class Calculator {
     }
 
     public Result getResult() {
-        return result;
+        return expression.getResult();
     }
 }
