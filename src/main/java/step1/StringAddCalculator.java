@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
+    public static final String DELIMITER_REGEX = "//(.)\n(.*)";
+
     public static int splitAndSum(String target) {
         if (StringUtils.isEmpty(target)) {
             return 0;
@@ -13,7 +16,7 @@ public class StringAddCalculator {
     }
 
     private static Expression createExpression(String target) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(target);
+        Matcher m = Pattern.compile(DELIMITER_REGEX).matcher(target);
         if (m.find()) {
             return Expression.of(m.group(2), m.group(1));
         }
