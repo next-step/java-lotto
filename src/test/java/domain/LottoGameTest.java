@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGameTest {
     private LottoGame lottoGame;
     private LottoMoney lottoMoney;
-    private LottoNumbers lottoNumbers;
+    private LottoNumbers lottoWinningNumbers;
 
     @BeforeEach
     void setUp() {
@@ -41,7 +43,7 @@ class LottoGameTest {
         lottoMoney = new LottoMoney(money);
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoNumbers = new LottoNumbers(makeNumbers(winningNumbers));
+        lottoWinningNumbers = new LottoNumbers(makeNumbers(winningNumbers));
 
         lottoGame = new LottoGame(numbersList);
     }
@@ -64,10 +66,9 @@ class LottoGameTest {
     @DisplayName("당첨 번호에 따라 당첨 정보를 반환한다.")
     void lottoGamesTest(int countOfMatch, int expected) {
         Number bonusNumber = new Number(7);
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers, bonusNumber);
-        boolean containBonus = lottoNumbers.isContainBonus(bonusNumber);
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoWinningNumbers, bonusNumber);
 
-        Rank expectedWinningType = Rank.valueOf(countOfMatch, containBonus);
+        Rank expectedWinningType = Rank.valueOf(countOfMatch, false);
         lottoWinningInfos.getWinningInfos().stream()
                 .filter(e -> e.getRank().equals(expectedWinningType))
                 .forEach(e -> assertThat(e.getWinningNumber()).isEqualTo(expected));
@@ -76,7 +77,29 @@ class LottoGameTest {
     @Test
     @DisplayName("당첨 정보에 따라 수익률을 반환한다.")
     void getBenefitRateTest() {
-        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos(lottoNumbers, new Number(7)));
+        Number notMatchBonusNumber = new Number(7);
+        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos(lottoWinningNumbers, notMatchBonusNumber));
         assertThat(benefitRate).isEqualTo(0.35);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10,11})
+    @DisplayName("보너스 번호 테스트")
+    void bonusNumberTest(int bonusNumberInput) {
+        List<LottoNumbers> numbersList = new ArrayList<>();
+        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1,2,3,4,5,10))));
+
+        LottoGame lottoGame = new LottoGame(numbersList);
+
+        Number bonusNumber = new Number(bonusNumberInput);
+
+        WinningInfos winningInfos = lottoGame.getWinningInfos(lottoWinningNumbers, bonusNumber);
+
+        BigDecimal expectedMoney = Rank.SECOND.getWinningMoney();
+        if (bonusNumberInput == 11) {
+            expectedMoney = Rank.THIRD.getWinningMoney();
+        }
+
+        assertThat(winningInfos.getTotalWinningMoney()).isEqualTo(expectedMoney);
     }
 }
