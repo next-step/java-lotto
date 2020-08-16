@@ -21,7 +21,7 @@ public class WinningInfo {
         return rank.getWinningMoney().multiply(winningNumber);
     }
 
-    public void increaseHitNumber() {
+    public void increaseWinningNumber() {
         winningNumber++;
     }
 

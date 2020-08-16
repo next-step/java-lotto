@@ -35,7 +35,7 @@ public class WinningInfos {
                 .filter(e -> e.getRank().equals(rank))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
-        winningInfo.increaseHitNumber();
+        winningInfo.increaseWinningNumber();
     }
 
     public BigDecimal getTotalWinningMoney() {
