@@ -1,4 +1,4 @@
-package step1;
+package step1.util;
 
 public class StringUtils {
     private StringUtils() {}
