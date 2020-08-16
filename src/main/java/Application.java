@@ -26,6 +26,7 @@ public class Application {
 
         @Override
         public String nextLine() {
+            scanner.nextLine();
             return scanner.nextLine();
         }
     }
