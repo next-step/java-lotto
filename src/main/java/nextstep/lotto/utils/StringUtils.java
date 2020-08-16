@@ -10,12 +10,13 @@ public class StringUtils {
     private static final int PATTERN_REGEX_DELOMITER_GROUP = 1;
     private static final int PATTERN_REGEX_PARAMETER_TEXT_GROUP = 2;
 
+    private static Pattern pattern = Pattern.compile(SEPERATOR_REGEX_CUSTOM);
+
     private StringUtils() {
     }
 
     public static String[] splitString(String inputValue) {
-        System.out.println("Input : "+inputValue);
-        Matcher m = Pattern.compile(SEPERATOR_REGEX_CUSTOM).matcher(inputValue);
+        Matcher m = pattern.matcher(inputValue);
 
         if (m.find()) {
             String customDelimiter = m.group(PATTERN_REGEX_DELOMITER_GROUP);
