@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 public class StringCalculatorMain {
     public static void main(String[] args) {
         String param = InputView.expressionValue();
-        String delimiter = "[,:]";
 
         validateExpression(param);
-        delimiter = extractCustomDelimiter(param, delimiter);
+        Delimiter delimiter = extractCustomDelimiter(param);
         param = extractExpression(param);
         List<ExpressionNumber> expressionValues = splitValues(param, delimiter);
 
@@ -21,33 +20,20 @@ public class StringCalculatorMain {
     }
 
     private static ExpressionNumber add(List<ExpressionNumber> expressionValues) {
-        return expressionValues.stream()
-                .reduce((x, y) -> x.add(y))
-                .get();
-    }
+        ExpressionNumber expressionNumber = ExpressionNumber.newInstance();
+        for (ExpressionNumber expressionValue : expressionValues) {
+            expressionNumber.add(expressionValue);
+        }
 
-    private static List<ExpressionNumber> splitValues(String param, String delimiter) {
-        String[] split = param.split(delimiter);
-
-        return Arrays.stream(split)
-                .map(numberValue -> ExpressionNumber.newInstance(numberValue))
-                .collect(Collectors.toList());
+        return expressionNumber;
     }
 
     private static String extractExpression(String param) {
         if (param.startsWith("//")) {
-            return param.substring(5);
+            return param.substring(4);
         }
 
         return param;
-    }
-
-    private static String extractCustomDelimiter(String param, String delimiter) {
-        if (param.startsWith("//")) {
-            delimiter = param.substring(2, 3);
-        }
-
-        return delimiter;
     }
 
     private static boolean validateExpression(String param) {
@@ -56,5 +42,18 @@ public class StringCalculatorMain {
         }
 
         throw new IllegalArgumentException(ExceptionMessage.WRONG_EXPRESSION.printMessage());
+    }
+
+
+    private static List<ExpressionNumber> splitValues(String param, Delimiter delimiter) {
+        String[] split = param.split(delimiter.pattern());
+
+        return Arrays.stream(split)
+                .map(numberValue -> ExpressionNumber.newInstance(numberValue))
+                .collect(Collectors.toList());
+    }
+
+    private static Delimiter extractCustomDelimiter(String expressionValue) {
+        return Delimiter.newInstance(expressionValue);
     }
 }

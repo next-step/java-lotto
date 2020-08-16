@@ -3,6 +3,7 @@ import common.ExceptionMessage;
 import java.util.Objects;
 
 public class ExpressionNumber {
+    private static final String DEFAULT_NUMBER = "0";
     private Integer number;
 
     private ExpressionNumber(String numberValue) {
@@ -29,9 +30,13 @@ public class ExpressionNumber {
         return new ExpressionNumber(numberValue);
     }
 
+    public static ExpressionNumber newInstance() {
+        return new ExpressionNumber(DEFAULT_NUMBER);
+    }
+
     public ExpressionNumber add(ExpressionNumber expressionNumber) {
-        int result = this.number + expressionNumber.number;
-        return new ExpressionNumber(result);
+        this.number = this.number + expressionNumber.number;
+        return this;
     }
 
     public Integer getNumber() {
