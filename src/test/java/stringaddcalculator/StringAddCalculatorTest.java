@@ -2,6 +2,7 @@ package stringaddcalculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -26,6 +27,19 @@ public class StringAddCalculatorTest {
     void numberIsBlank(String expression) {
         boolean isResult = ValidationNumber.isBlank(expression);
         assertThat(isResult).isTrue();
+    }
+
+    @Test
+    @DisplayName("문자열에 공백또는 null이 들어올 경우 0을 리턴")
+    void numberIsBlankAndNull() {
+        int result = StringAddCalculator.sum(null);
+        assertThat(result).isEqualTo(0);
+
+        result = StringAddCalculator.sum("");
+        assertThat(result).isEqualTo(0);
+
+        result = StringAddCalculator.sum(" ");
+        assertThat(result).isEqualTo(0);
     }
 
 }

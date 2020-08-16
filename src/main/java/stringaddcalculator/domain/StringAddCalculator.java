@@ -7,6 +7,10 @@ public class StringAddCalculator {
     private static final String DELIMITER = ":|,";
 
     public static int sum(String expression) {
+        if (ValidationNumber.isBlank(expression)) {
+            return 0;
+        }
+
         String[] numbers = expressionSplit(expression);
 
         return Arrays.stream(numbers)
