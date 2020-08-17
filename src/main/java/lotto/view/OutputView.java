@@ -5,10 +5,13 @@ import lotto.domain.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.collectingAndThen;
+
 public class OutputView {
     private static final int DEFAULT_SHOW_MATCH_COUNT = 0;
     private static final double RESULT_REFERENCE_RATE = 1.00D;
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_NUMBERS_MESSAGE = "[%s]";
     private static final String WINNING_INTRO_MESSAGE = "\n당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
     private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다. (%s)";
@@ -26,17 +29,16 @@ public class OutputView {
 
     private static List<String> getLottoNumberResult(LottoTickets lottoTickets) {
         return lottoTickets.stream()
-                .map(LottoTicket::stream)
-                .map(OutputView::getLottoNumbersByTicket)
-                .map(numbers -> "[" + numbers + "]")
+                .map(LottoTicket::getNumbers)
+                .map(OutputView::makeNumbersToString)
                 .collect(Collectors.toList());
     }
 
-    private static String getLottoNumbersByTicket(List<LottoNumber> lottoNumbers) {
+    private static String makeNumbersToString(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::valueOf)
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .collect(collectingAndThen(Collectors.joining(", ")
+                        , numbers -> String.format(LOTTO_NUMBERS_MESSAGE, numbers)));
     }
 
     public static void printLottoResult(WinningResult winningResult) {

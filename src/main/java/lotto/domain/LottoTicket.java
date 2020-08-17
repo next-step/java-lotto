@@ -32,13 +32,15 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static List<LottoNumber> stream(LottoTicket lottoTicket) {
-        return lottoTicket.lottoNumbers;
-    }
-
     public int getMatchCountWith(List<LottoNumber> winningLottoNumbers) {
         lottoNumbers.retainAll(winningLottoNumbers);
 
         return lottoNumbers.size();
+    }
+
+    public static List<Integer> getNumbers(LottoTicket lottoTicket) {
+        return lottoTicket.lottoNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
     }
 }
