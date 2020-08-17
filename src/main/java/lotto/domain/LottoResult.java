@@ -1,52 +1,25 @@
 package lotto.domain;
 
-import common.StringResources;
-
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoResult {
 
     private final int money;
     private final List<LottoNumber> lottoNumberList;
     private final LottoResultNumber lottoResultNumber;
-
-    private final Map<Integer, Integer> winCount;
-    private static final Map<Integer, Integer> winMoney;
+    private final WinningCountMap winningCountMap;
 
     private final double earningsRate;
-
-    static {
-        winMoney = new HashMap<>();
-        winMoney.put(3, 5000);
-        winMoney.put(4, 50000);
-        winMoney.put(5, 1500000);
-        winMoney.put(6, 2000000000);
-        Collections.unmodifiableMap(winMoney);
-    }
 
     public LottoResult(int money, List<LottoNumber> lottoNumberList, LottoResultNumber lottoResultNumber) {
 
         this.money = money;
-        this.winCount = setWinCount();
-
+        this.winningCountMap = new WinningCountMap();
         this.lottoNumberList = lottoNumberList;
         this.lottoResultNumber = lottoResultNumber;
 
         matchNumbersCheck();
         this.earningsRate = calculateEarningsRate();
-    }
-
-    private Map<Integer, Integer> setWinCount() {
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(3, 0);
-        map.put(4, 0);
-        map.put(5, 0);
-        map.put(6, 0);
-        Collections.unmodifiableMap(map);
-        return map;
     }
 
     private void matchNumbersCheck() {
@@ -58,28 +31,20 @@ public class LottoResult {
                     .filter(array -> array[0] == array[1])
                     .count();
 
-            winCount.computeIfPresent((int) count, (Integer key, Integer value) -> ++value);
+            boolean matchBonus = lottoNumber.getBonus() == lottoResultNumber.getBonus();
+
+            winningCountMap.addCount(Rank.of((int) count, matchBonus));
         }
+    }
+
+    public WinningCountMap getWinningCountMap() {
+        return winningCountMap;
     }
 
     private double calculateEarningsRate() {
 
-        int earningMoney = 0;
-
-        for (int i = 3; i <= 6; i++) {
-            earningMoney += winCount.get(i) * winMoney.get(i);
-        }
-
+        int earningMoney = winningCountMap.getAllWinningMoney();
         return (double)earningMoney / (double)money;
-    }
-
-    public int getWinningCount(int matchCount) {
-
-        if (matchCount < 0 || matchCount > 6) {
-            throw new IllegalArgumentException(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);
-        }
-
-        return winCount.get(matchCount);
     }
 
     public double getEarningsRate() {

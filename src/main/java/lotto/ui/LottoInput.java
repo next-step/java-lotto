@@ -1,29 +1,79 @@
 package lotto.ui;
 
 import common.StringResources;
+import lotto.domain.LottoResultNumber;
+import lotto.domain.Ticket;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class LottoInput {
 
-    public static final int LOTTO_PRICE = 1000;
-    private final int money;
+    private static final String DELIMITER = ", ";
 
-    public LottoInput(int money) {
+    public static final int LOTTO_PRICE = 1000;
+
+    private final Input input;
+
+    public LottoInput(Input input) {
+        this.input = input;
+    }
+
+    public int inputMoney() {
 
         ResultView.print(StringResources.MSG_BUY_MONEY);
+        int money = input.nextInt();
 
-        if (money == 0) {
+        verifyPositiveMoney(money);
+        verifyMoneyUnit(money);
+
+        return money;
+    }
+
+    private void verifyPositiveMoney(int money) {
+        if (money <= 0) {
             throw new IllegalArgumentException(StringResources.ERR_MUST_BUY);
         }
+    }
 
+    private void verifyMoneyUnit(int money) {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_UNIT);
         }
-
-        this.money = money;
-        ResultView.print(String.valueOf(money));
     }
 
-    public int getMoney() {
-        return money;
+    public LottoResultNumber inputLottoResult() {
+
+        ResultView.print(StringResources.MSG_WINNING_NUMBER);
+
+        String inputLine = input.nextLine();
+        verifyResultInput(inputLine);
+
+        String[] split = inputLine.split(DELIMITER);
+        verifySplitArray(split);
+
+        return new LottoResultNumber(new Ticket(
+                Arrays.stream(split)
+                        .map(Integer::valueOf)
+                        .collect(Collectors.toList()),
+                inputBonus())
+        );
+    }
+
+    private void verifyResultInput(String inputLine) {
+        if (inputLine == null || inputLine.trim().equals("")) {
+            throw new IllegalArgumentException(StringResources.ERR_WRONG_RESULT_INPUT);
+        }
+    }
+
+    private void verifySplitArray(String[] split) {
+        if (split.length != 6) {
+            throw new IllegalArgumentException(StringResources.ERR_WRONG_RESULT_INPUT);
+        }
+    }
+
+    private int inputBonus() {
+        System.out.println(StringResources.MSG_BONUS_NUMBER);
+        return input.nextInt();
     }
 }

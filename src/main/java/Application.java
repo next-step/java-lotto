@@ -1,21 +1,33 @@
 import lotto.LottoGame;
-import lotto.domain.RandomLottoCreator;
-import lotto.domain.LottoResultNumber;
+import lotto.ui.Input;
 import lotto.ui.LottoInput;
-import lotto.ui.LottoResultInput;
+
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
 
-        LottoInput lottoInput = new LottoInput(20000);
+        LottoInput lottoInput = new LottoInput(new ScannerInput());
 
-        LottoGame lottoGame = new LottoGame(lottoInput.getMoney(), RandomLottoCreator.createLottoList(lottoInput.getMoney()));
+        LottoGame lottoGame = new LottoGame(lottoInput.inputMoney());
         lottoGame.buy();
 
-        LottoResultInput lottoResultInput = new LottoResultInput(
-                new LottoResultNumber(RandomLottoCreator.createTicket())
-        );
+        lottoGame.winning(lottoInput.inputLottoResult());
+    }
 
-        lottoGame.winning(lottoResultInput.getLottoResultNumber());
+    static class ScannerInput implements Input {
+
+        static Scanner scanner = new Scanner(System.in);
+
+        @Override
+        public int nextInt() {
+            return scanner.nextInt();
+        }
+
+        @Override
+        public String nextLine() {
+            scanner.nextLine();
+            return scanner.nextLine();
+        }
     }
 }

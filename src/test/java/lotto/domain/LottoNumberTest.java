@@ -13,8 +13,9 @@ public class LottoNumberTest {
 
     @BeforeEach
     public void setup() {
-        ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
     }
+
     @Test
     public void makeLottoNumberTest() {
         LottoNumber lottoNumber = new LottoNumber(ticket);

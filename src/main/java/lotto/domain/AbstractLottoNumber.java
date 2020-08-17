@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Set;
 
-public abstract class AbstractLottoNumber {
+public class AbstractLottoNumber {
 
     protected final Ticket ticket;
 
@@ -14,6 +14,12 @@ public abstract class AbstractLottoNumber {
         return ticket.getNumbers();
     }
 
+    public int getBonus() {
+        return ticket.getBonus();
+    }
+
     @Override
-    public abstract String toString();
+    public String toString() {
+        return ticket.toString();
+    }
 }

@@ -2,6 +2,11 @@ package lotto.ui;
 
 import common.StringResources;
 import lotto.domain.LottoResult;
+import lotto.domain.Rank;
+import lotto.domain.WinningCountMap;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ResultView {
 
@@ -12,10 +17,15 @@ public class ResultView {
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        System.out.println(StringResources.MSG_LOTTO_RESULT[0].replace(REPLACE_TARGET, String.valueOf(lottoResult.getWinningCount(3))));
-        System.out.println(StringResources.MSG_LOTTO_RESULT[1].replace(REPLACE_TARGET, String.valueOf(lottoResult.getWinningCount(4))));
-        System.out.println(StringResources.MSG_LOTTO_RESULT[2].replace(REPLACE_TARGET, String.valueOf(lottoResult.getWinningCount(5))));
-        System.out.println(StringResources.MSG_LOTTO_RESULT[3].replace(REPLACE_TARGET, String.valueOf(lottoResult.getWinningCount(6))));
+
+        WinningCountMap winningCountMap = lottoResult.getWinningCountMap();
+
+        int i = 0;
+        for (Entry<Rank, Integer> entry : winningCountMap.getAllData().entrySet()) {
+            System.out.println(StringResources.MSG_LOTTO_RESULT[i++].replace(
+                    REPLACE_TARGET,
+                    String.valueOf(entry.getValue())));
+        }
     }
 
     public static void printLottoEarningsRate(LottoResult lottoResult) {
