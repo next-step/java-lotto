@@ -20,14 +20,14 @@ public class LottoStats {
             new LottoStat(LottoRank.Fifth)));
   }
 
-  public LottoStats(int first, int second, int third, int fourth, int fifth) {
+  public LottoStats(WinningCounts winningCounts) {
     this(
         Arrays.asList(
-            new LottoStat(LottoRank.First, first),
-            new LottoStat(LottoRank.Second, second),
-            new LottoStat(LottoRank.Third, third),
-            new LottoStat(LottoRank.Fourth, fourth),
-            new LottoStat(LottoRank.Fifth, fifth)));
+            new LottoStat(LottoRank.First, winningCounts.getFirst()),
+            new LottoStat(LottoRank.Second, winningCounts.getSecond()),
+            new LottoStat(LottoRank.Third, winningCounts.getThird()),
+            new LottoStat(LottoRank.Fourth, winningCounts.getFourth()),
+            new LottoStat(LottoRank.Fifth, winningCounts.getFifth())));
   }
 
   private LottoStats(List<LottoStat> lottoStats) {
