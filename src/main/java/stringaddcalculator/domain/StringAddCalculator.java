@@ -11,7 +11,7 @@ public class StringAddCalculator {
     public static final int ZERO_NUMBER = 0;
     private static final int CUSTOM_DELIMITER_CHERKER_ONE = 1;
     private static final int CUSTOM_DELIMITER_CHECKER_TWO = 2;
-    private static Matcher expressionMatcher;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
 
     public static int sum(String expression) {
         if (ValidationNumber.isBlank(expression)) {
@@ -36,10 +36,10 @@ public class StringAddCalculator {
     }
 
     public static String[] splitDelimiterCheck(String expression) {
-        expressionMatcher = Pattern.compile(CUSTOM_DELIMITER).matcher(expression);
-        if (expressionMatcher.find()) {
-            String customDelimiter = expressionMatcher.group(CUSTOM_DELIMITER_CHERKER_ONE);
-            return expressionMatcher.group(CUSTOM_DELIMITER_CHECKER_TWO).split(customDelimiter);
+        Matcher delimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(expression);
+        if (delimiterMatcher.find()) {
+            String customDelimiter = delimiterMatcher.group(CUSTOM_DELIMITER_CHERKER_ONE);
+            return delimiterMatcher.group(CUSTOM_DELIMITER_CHECKER_TWO).split(customDelimiter);
         }
         return splitExpression(expression);
     }
