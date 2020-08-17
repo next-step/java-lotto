@@ -14,10 +14,11 @@ class StringSplitterTest {
     @ValueSource(strings = {
             "1,2,3",
             "2,5:6:4,2",
-            "//.\n5.6",
-            "//-\n5-6",
-            "//&\n5&6",
-            "//;\n1;1;1"})
+            "//.\\n5.6",
+            "//-\\n5-6",
+            "//.\\n5.3",
+            "//&\\n5&6",
+            "//;\\n1;1;1"})
     public void split_delimiter_Test(String input) {
         int output = StringSplitter.splitDelimiter(input).size();
         List<Integer> result = StringSplitter.splitDelimiter(input);
