@@ -4,7 +4,6 @@ import step2.domain.*;
 import step2.lib.PrintMessage;
 import step2.view.InputScanner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +12,13 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) {
         int spendingMoney = InputScanner.getInt("구입금액을 입력해 주세요.");
-        int directPurchaseCount = InputScanner.getInt("수동으로 구매할 로또 수를 입력해 주세요.");
-        List<List<Integer>> numbers = new ArrayList<>();
+        List<List<Integer>> numbers = InputScanner.getNumbersList("수동으로 구매할 로또 수를 입력해 주세요.");
 
         PrintMessage.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int count = 0; count < directPurchaseCount; count++) {
-            numbers.add(InputScanner.getInts(""));
+        for (int count = 0; count < numbers.size(); count++) {
+            numbers.set(count, InputScanner.getInts(""));
         }
+
         PrintMessage.println();
 
         Receipt receiptBySelf = TicketSellingMachine.buy(new Wallet(spendingMoney), numbers);
