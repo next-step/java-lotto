@@ -4,7 +4,7 @@ import lotto.exception.LottoExceptionMessage;
 import utils.StringUtils;
 
 public class LottoMoney {
-    private static final int DEFAULT_LOTTO_MONEY_UNIT = 1_000;
+    public static final int DEFAULT_LOTTO_MONEY_UNIT = 1_000;
 
     private int lottoMoney;
 

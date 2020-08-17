@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
+
 import java.util.Map;
 
 public class WinningResult {
@@ -10,11 +12,23 @@ public class WinningResult {
     }
 
     public static WinningResult of(Map<LottoRank, Long> lottoResultByRank) {
+        if (lottoResultByRank == null) {
+            throw new IllegalArgumentException(LottoExceptionMessage.RESULT_IS_NULL);
+        }
         return new WinningResult(lottoResultByRank);
     }
 
     public double calculateWinningRate() {
-        return 0.0d;
+        double buyCount = lottoResultByRank.values()
+                .stream()
+                .reduce(0L, Long::sum);
+
+        double totalPrize = lottoResultByRank.keySet()
+                .stream()
+                .map(lottoRank -> lottoRank.getPrize() * lottoResultByRank.get(lottoRank))
+                .reduce(0L, Long::sum);
+
+        return totalPrize / (buyCount * LottoMoney.DEFAULT_LOTTO_MONEY_UNIT);
     }
 
     public Long getRankCount(LottoRank rank) {

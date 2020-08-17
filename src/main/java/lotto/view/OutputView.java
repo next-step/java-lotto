@@ -10,7 +10,7 @@ public class OutputView {
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_INTRO_MESSAGE = "당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
-    private static final String WINNING_RATE_MESSAGE = "총 수익률은 %f 입니다.";
+    private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
 
     private OutputView() {
     }

@@ -25,11 +25,6 @@ public enum LottoRank {
                 .orElse(LottoRank.DROP);
     }
 
-    public static Stream<LottoRank> stream() {
-        return Stream.of(LottoRank.values())
-                .sorted(Comparator.comparingInt(rank -> rank.matchCount));
-    }
-
     public int getMatchCount() {
         return matchCount;
     }
@@ -37,4 +32,10 @@ public enum LottoRank {
     public int getPrize() {
         return prize;
     }
+
+    public static Stream<LottoRank> stream() {
+        return Stream.of(LottoRank.values())
+                .sorted(Comparator.comparingInt(rank -> rank.matchCount));
+    }
+
 }
