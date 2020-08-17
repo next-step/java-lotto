@@ -16,7 +16,7 @@ public class LottoMain {
     public static void main(String[] args) {
         int buyPrice = InputView.inputBuyPrice();
 
-        LottoGame lottoGame = new LottoGame(buyPrice);
+        LottoGame lottoGame = LottoGame.of(buyPrice);
 
         ResultView.viewBuyAmount(lottoGame.getBuyAmount());
         Lottos lottos = lottoGame.issue(new RandomLottoNumberGenerator());

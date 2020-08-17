@@ -15,7 +15,7 @@ public enum Rank {
     private final int hitNumber;
     private final int money;
 
-    private static final Map<Integer, Rank> prizes = Collections.unmodifiableMap(Stream.of(values())
+    private static final Map<Integer, Rank> Ranks = Collections.unmodifiableMap(Stream.of(values())
             .collect(Collectors.toMap(Rank::getHitNumber, Function.identity())));
 
 
@@ -33,7 +33,7 @@ public enum Rank {
     }
 
     public static Rank of(int hitNumber) {
-        return prizes.get(hitNumber);
+        return Ranks.get(hitNumber);
     }
 
 }

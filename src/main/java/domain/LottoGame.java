@@ -1,5 +1,6 @@
 package domain;
 
+import exception.LottoGamePriceException;
 import strategy.RandomLottoNumberGenerator;
 import util.CalculatorUtil;
 
@@ -9,8 +10,21 @@ public class LottoGame {
 
     private final int buyAmount;
 
-    public LottoGame(int buyPrice) {
-        this.buyAmount = CalculatorUtil.divideWholeNumber(buyPrice, LOTTO_PRICE);
+    private LottoGame(int buyAmount) {
+        this.buyAmount = buyAmount;
+    }
+
+    public static LottoGame of(int buyPrice) {
+        int buyAmount = CalculatorUtil.divideWholeNumber(buyPrice, LOTTO_PRICE);
+        validate(buyAmount);
+
+        return new LottoGame(buyAmount);
+    }
+
+    private static void validate(int buyAmount) {
+        if(buyAmount < 1) {
+            throw new LottoGamePriceException();
+        }
     }
 
     public int getBuyAmount() {

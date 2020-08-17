@@ -16,9 +16,11 @@ public class Lottos {
     }
 
     public static Lottos of(int buyAmount, LottoNumberGenerator randomLottoNumberGenerator) {
-        return new Lottos(IntStream.range(0, buyAmount)
+        List<Lotto> lottos = IntStream.range(0, buyAmount)
                 .mapToObj(i -> Lotto.of(randomLottoNumberGenerator))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
@@ -26,7 +28,7 @@ public class Lottos {
     }
 
     public LottoResults getLottoResult(List<Integer> winningNumbers) {
-        ValidateUtil.valdateWinningNumbers(winningNumbers);
+        ValidateUtil.validateLottoNumberCount(winningNumbers);
 
         LottoResults result = LottoResults.of();
         for (Lotto lotto : lottos) {
