@@ -1,28 +1,23 @@
 package step2;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Winning extends Lotto {
+public class Winning {
 
+  private final Lotto lotto;
   private int bonusNumber;
 
   public Winning(String numbersAsString, int bonusNumber) {
-    this(
-        Arrays.stream(numbersAsString.split(","))
-            .map(value -> Integer.parseInt(value.trim()))
-            .collect(Collectors.toList()),
-        bonusNumber);
+    this(LottosGenerator.list(numbersAsString), bonusNumber);
   }
 
   public Winning(List<Integer> numbers, int bonusNumber) {
-    super(numbers);
+    this.lotto = new Lotto(numbers);
     this.bonusNumber = bonusNumber;
   }
 
   public int matchCount(Lotto lotto) {
-    return numbers.stream().filter(number -> lotto.hasNumber(number)).mapToInt(i -> 1).sum();
+    return this.lotto.stream().filter(lotto::hasNumber).mapToInt(i -> 1).sum();
   }
 
   public boolean hasBonusNumber(Lotto lotto) {

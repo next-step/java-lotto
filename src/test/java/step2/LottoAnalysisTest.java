@@ -12,7 +12,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().first(1).build()));
   }
@@ -22,7 +22,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().second(1).build()));
   }
@@ -32,7 +32,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(8, 2, 3, 4, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(8, 2, 3, 4, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().third(1).build()));
   }
@@ -42,7 +42,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(8, 9, 3, 4, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(8, 9, 3, 4, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().fourth(1).build()));
   }
@@ -52,7 +52,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(8, 9, 10, 4, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(8, 9, 10, 4, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().fifth(1).build()));
   }
@@ -62,7 +62,7 @@ class LottoAnalysisTest {
     LottoAnalysis lottoAnalysis =
         new LottoAnalysis(
             new Winning(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
-            Arrays.asList(new Lotto(Arrays.asList(7, 8, 9, 10, 5, 6))));
+            Lottos.of(new Lotto(Arrays.asList(7, 8, 9, 10, 5, 6))));
 
     assertThat(lottoAnalysis.analyze()).isEqualTo(new LottoStats(new WinningCounts.Builder().build()));
   }

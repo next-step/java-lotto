@@ -1,9 +1,6 @@
 package step2;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoStand {
 
@@ -18,8 +15,8 @@ public class LottoStand {
 
     // 수동 로또번호 입력
     String[] lottoNumbers = LottoSalesman.inputManualLotto(scanner, lottoCount);
-    List<Lotto> manualLottos = LottoGenerator.asLottos(payment, lottoNumbers);
-    List<Lotto> autoLottos = LottoGenerator.generate(payment, lottoCount);
+    Lottos manualLottos = LottosGenerator.valueOf(payment, lottoNumbers);
+    Lottos autoLottos = LottosGenerator.generate(payment, lottoCount);
 
    // 구입내역 출력
     LottoSalesman.informPurchase(manualLottos, autoLottos);
@@ -30,7 +27,7 @@ public class LottoStand {
     Winning winning = new Winning(numbersAsString, bonusNumber);
 
     // 당첨결과 출력
-    List<Lotto> lottos = Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList());
+    Lottos lottos = Lottos.concat(manualLottos, autoLottos);
     LottoAnalysis lottoAnalysis = new LottoAnalysis(winning, lottos);
     LottoStats analyze = lottoAnalysis.analyze();
     LottoSalesman.informWinning(scanner, analyze, payment);

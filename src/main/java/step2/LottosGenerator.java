@@ -5,29 +5,30 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class LottoGenerator {
+public class LottosGenerator {
   public static final int ONE_PRICE = 1000;
   private static final List<Integer> NUMBER_POOL =
-      Stream.iterate(1, n -> ++n).limit(45).collect(Collectors.toList());
+      IntStream.rangeClosed(1, 45)
+          .boxed()
+          .collect(Collectors.toList());
 
-  public static Lotto generate() {
-    Collections.shuffle(NUMBER_POOL);
-    return new Lotto(new ArrayList<>(NUMBER_POOL.subList(0, Lotto.FIXED_COUNT)));
-  }
-
-  public static List<Lotto> asLottos(int payment, String[] lottoNumbers) {
+  public static Lottos valueOf(int payment, String[] lottoNumbers) {
     validatePayment(payment);
     validateCanBuyLottoCount(payment, lottoNumbers);
 
-    return Arrays.stream(lottoNumbers)
-        .map(
-            lottoNumber ->
-                Arrays.stream(lottoNumber.split(","))
-                    .map(value -> Integer.parseInt(value.trim()))
-                    .collect(Collectors.toList()))
-        .map(numbers -> new Lotto(numbers))
+    return new Lottos(
+        Arrays.stream(lottoNumbers)
+            .map(LottosGenerator::list)
+            .map(Lotto::new)
+            .collect(Collectors.toList()));
+  }
+
+  public static List<Integer> list(String lottoNumbers) {
+    return Arrays.stream(lottoNumbers.split(","))
+        .map(value -> Integer.parseInt(value.trim()))
         .collect(Collectors.toList());
   }
 
@@ -39,7 +40,7 @@ public class LottoGenerator {
     }
   }
 
-  public static List<Lotto> generate(int payment, int manualLottoCount) {
+  public static Lottos generate(int payment, int manualLottoCount) {
     validatePayment(payment);
 
     List<Lotto> lottos = new ArrayList<>();
@@ -48,7 +49,12 @@ public class LottoGenerator {
       lottos.add(generate());
     }
 
-    return lottos;
+    return new Lottos(lottos);
+  }
+
+  public static Lotto generate() {
+    Collections.shuffle(NUMBER_POOL);
+    return new Lotto(new ArrayList<>(NUMBER_POOL.subList(0, Lotto.FIXED_COUNT)));
   }
 
   private static void validatePayment(int payment) {

@@ -2,16 +2,19 @@ package step2;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
-public class Lotto {
+public final class Lotto implements Iterable<Integer> {
 
   public static final int FIXED_COUNT = 6;
   protected List<Integer> numbers;
 
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);
+    validateRange(numbers);
     validateDuplicate(numbers);
     Collections.sort(numbers);
     this.numbers = numbers;
@@ -23,6 +26,12 @@ public class Lotto {
     }
   }
 
+  private void validateRange(List<Integer> numbers) {
+    if (numbers.stream().anyMatch(n -> n < 0 || n > 45)) {
+      throw new IllegalArgumentException("로또번호는 1부터 45번까지입니다.");
+    }
+  }
+
   private void validateDuplicate(List<Integer> numbers) {
     HashSet<Integer> sets = new HashSet(numbers);
     if (numbers.size() != sets.size()) {
@@ -30,9 +39,14 @@ public class Lotto {
     }
   }
 
-  protected boolean hasNumber(Integer number) {
+  public boolean hasNumber(Integer number) {
     return numbers.contains(number);
   }
+
+  public Stream<Integer> stream() {
+    return numbers.stream();
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -54,5 +68,22 @@ public class Lotto {
   @Override
   public String toString() {
     return "[" + numbers + ']';
+  }
+
+  @Override
+  public Iterator<Integer> iterator() {
+    return new Iterator<Integer>() {
+      int current = 0;
+
+      @Override
+      public boolean hasNext() {
+        return current < numbers.size();
+      }
+
+      @Override
+      public Integer next() {
+        return numbers.get(current++);
+      }
+    };
   }
 }

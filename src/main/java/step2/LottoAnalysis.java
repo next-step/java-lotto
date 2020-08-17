@@ -1,13 +1,11 @@
 package step2;
 
-import java.util.List;
-
 public class LottoAnalysis {
 
   private final Winning winning;
-  private final List<Lotto> lottos;
+  private final Lottos lottos;
 
-  public LottoAnalysis(Winning winning, List<Lotto> lottos) {
+  public LottoAnalysis(Winning winning, Lottos lottos) {
     this.winning = winning;
     this.lottos = lottos;
   }

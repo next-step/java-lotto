@@ -42,13 +42,13 @@ public class LottoSalesman {
     return lottoNumbers;
   }
 
-  public static void informPurchase(List<Lotto> manualLottos, List<Lotto> lottos) {
-    System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",manualLottos.size(), lottos.size()));
+  public static void informPurchase(Lottos manualLottos, Lottos autoLottos) {
+    System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",manualLottos.count(), autoLottos.count()));
     for (Lotto lotto : manualLottos) {
       System.out.println(lotto.numbers);
     }
 
-    for (Lotto lotto : lottos) {
+    for (Lotto lotto : autoLottos) {
       System.out.println(lotto.numbers);
     }
   }
