@@ -19,11 +19,11 @@ public class CalculatorTest {
 	}
 
 	@DisplayName(value = "커스텀 구분자로 문자열의 총 합을 구하는 기능 테스트")
-	@Test
-	void getIntegerSumOfStringsWithCustomDelimiter() {
-		String value = "//*\n5*4*3";
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3", "//-\n1-2-3"})
+	void getIntegerSumOfStringsWithCustomDelimiter(String value) {
 		int result = Calculator.getIntegerSumOfStrings(value);
-		assertThat(result).isEqualTo(12);
+		assertThat(result).isEqualTo(6);
 	}
 
 	@DisplayName(value = "숫자 이외의 값이나 음수 입력 시 예외 발생 테스트")
