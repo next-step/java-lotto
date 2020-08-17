@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static LottoNumber of(int number) {
-        return new LottoNumber(number);
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     private static void initLottoNumberCaches() {

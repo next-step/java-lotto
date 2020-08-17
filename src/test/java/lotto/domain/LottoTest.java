@@ -33,8 +33,8 @@ class LottoTest {
     @DisplayName("로또 숫자 포함여부 테스트")
     @Test
     void increaseCountTest() {
-        assertThat(lotto.increase(LottoNumber.of(3))).isOne();
-        assertThat(lotto.increase(LottoNumber.of(4))).isZero();
+        assertThat(lotto.containsCount(LottoNumber.of(3))).isOne();
+        assertThat(lotto.containsCount(LottoNumber.of(4))).isZero();
     }
 
     @DisplayName("로또 숫자 매칭 테스트")

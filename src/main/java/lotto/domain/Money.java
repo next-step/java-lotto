@@ -17,12 +17,12 @@ public class Money {
         return new Money(price);
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public int getLottoCount() {
         return price / LOTTO_PRICE;
+    }
+
+    public int getPurchasePrice() {
+        return getLottoCount() * LOTTO_PRICE;
     }
 
     private void validate(final int price) {

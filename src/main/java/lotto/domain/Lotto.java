@@ -29,11 +29,11 @@ public class Lotto {
 
     public int matchNumber(Lotto lotto) {
         return this.lottoNumbers.stream()
-                .mapToInt(lotto::increase)
+                .mapToInt(lotto::containsCount)
                 .sum();
     }
 
-    public int increase(LottoNumber lottoNumber) {
+    public int containsCount(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
 

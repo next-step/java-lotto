@@ -24,7 +24,7 @@ public class LottoResult {
         for (Ranking ranking : lottoResultMap.keySet()) {
             totalMoney += lottoResultMap.get(ranking) * ranking.getPrizeMoney();
         }
-        return (double) totalMoney / money.getPrice();
+        return (double) totalMoney / money.getPurchasePrice();
     }
 
     @Override
