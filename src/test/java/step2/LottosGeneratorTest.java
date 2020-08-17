@@ -19,30 +19,30 @@ class LottosGeneratorTest {
   }
 
   @Test
-  void cantByLotto() {
-    assertThatThrownBy(() -> LottosGenerator.generate(999, 0))
+  void cantBuyAutoLottos() {
+    assertThatThrownBy(() -> LottosGenerator.autoLottos(999, 0))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  void generateByPayment() {
-    assertThat(LottosGenerator.generate(1000, 0).count()).isEqualTo(1);
+  void autoLottosByPayment() {
+    assertThat(LottosGenerator.autoLottos(1000, 0).count()).isEqualTo(1);
   }
 
   @Test
-  void generateByPayment14000() {
-    assertThat(LottosGenerator.generate(14000, 0).count()).isEqualTo(14);
+  void autoLottosByPayment14000() {
+    assertThat(LottosGenerator.autoLottos(14000, 0).count()).isEqualTo(14);
   }
 
   @Test
-  void asLottosIsOne() {
-    assertThat(LottosGenerator.valueOf(1000, new String[] {"1,2,3,4,5,6"}))
+  void autoLottosIsOne() {
+    assertThat(LottosGenerator.manualLottos(1000, new String[] {"1,2,3,4,5,6"}))
         .isEqualTo(Lottos.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
   }
 
   @Test
-  void asLottoIsTwo() {
-    assertThat(LottosGenerator.valueOf(2000, new String[] {"1,2,3,4,5,6", "2,3,4,5,6,7"}))
+  void manualLottosIsTwo() {
+    assertThat(LottosGenerator.manualLottos(2000, new String[] {"1,2,3,4,5,6", "2,3,4,5,6,7"}))
         .isEqualTo(
             Lottos.of(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
@@ -50,16 +50,16 @@ class LottosGeneratorTest {
   }
 
   @Test
-  void cantBuyAsLottos() {
+  void cantBuyManualLottos() {
     assertThatThrownBy(
-        () -> LottosGenerator.valueOf(1000, new String[] {"1,2,3,4,5,6", "2,3,4,5,6,7"}))
+        () -> LottosGenerator.manualLottos(1000, new String[] {"1,2,3,4,5,6", "2,3,4,5,6,7"}))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  void invalidRangeOfNumbers() {
+  void invalidRangeOfNumbersAtManualLottos() {
     assertThatThrownBy(
-        () -> LottosGenerator.valueOf(1000, new String[] {"1,2,3,4,5,46"}))
+        () -> LottosGenerator.manualLottos(1000, new String[] {"1,2,3,4,5,46"}))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

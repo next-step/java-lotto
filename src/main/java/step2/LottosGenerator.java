@@ -15,7 +15,7 @@ public class LottosGenerator {
           .boxed()
           .collect(Collectors.toList());
 
-  public static Lottos valueOf(int payment, String[] lottoNumbers) {
+  public static Lottos manualLottos(int payment, String[] lottoNumbers) {
     validatePayment(payment);
     validateCanBuyLottoCount(payment, lottoNumbers);
 
@@ -40,7 +40,7 @@ public class LottosGenerator {
     }
   }
 
-  public static Lottos generate(int payment, int manualLottoCount) {
+  public static Lottos autoLottos(int payment, int manualLottoCount) {
     validatePayment(payment);
 
     List<Lotto> lottos = new ArrayList<>();

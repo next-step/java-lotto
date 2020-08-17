@@ -1,11 +1,11 @@
 package step2;
 
-public class LottoAnalysis {
+public class LottosAnalysis {
 
   private final Winning winning;
   private final Lottos lottos;
 
-  public LottoAnalysis(Winning winning, Lottos lottos) {
+  public LottosAnalysis(Winning winning, Lottos lottos) {
     this.winning = winning;
     this.lottos = lottos;
   }
