@@ -21,18 +21,12 @@ public class StringAddCalculator {
         String[] numbers = splitDelimiterCheck(expression);
 
         return Arrays.stream(numbers)
-                .map(number -> toInt(number))
+                .map(number -> new Number(number).is())
                 .reduce(ZERO_NUMBER, Integer::sum);
     }
 
     private static String[] splitExpression(String expression) {
         return expression.split(DELIMITER);
-    }
-
-    private static int toInt(String number) {
-        int result = Integer.parseInt(number);
-        ValidationNumber.negativeQuantity(result);
-        return result;
     }
 
     public static String[] splitDelimiterCheck(String expression) {
