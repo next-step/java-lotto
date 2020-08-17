@@ -10,7 +10,7 @@ public class OutputView {
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_INTRO_MESSAGE = "당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
-    private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
+    private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다. (%s)";
 
     private OutputView() {
     }
@@ -41,6 +41,11 @@ public class OutputView {
     public static void printLottoResult(WinningResult winningResult) {
         System.out.println(WINNING_INTRO_MESSAGE);
 
+        printLottoResultByRank(winningResult);
+        printLottoResultRate(winningResult);
+    }
+
+    private static void printLottoResultByRank(WinningResult winningResult) {
         LottoRank.stream()
                 .filter(rank -> rank.getMatchCount() > DEFAULT_SHOW_MATCH_COUNT)
                 .map(rank -> String.format(WINNING_RESULT_MESSAGE,
@@ -48,7 +53,14 @@ public class OutputView {
                         rank.getPrize(),
                         winningResult.getRankCount(rank)))
                 .forEach(System.out::println);
+    }
 
-        System.out.printf(WINNING_RATE_MESSAGE, winningResult.calculateWinningRate());
+    private static void printLottoResultRate(WinningResult winningResult) {
+        double winningRate = winningResult.calculateWinningRate();
+
+        System.out.printf(WINNING_RATE_MESSAGE,
+                winningRate,
+                winningRate > 100D ? "이익" : "손해"
+        );
     }
 }
