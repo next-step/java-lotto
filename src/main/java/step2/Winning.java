@@ -6,29 +6,26 @@ import java.util.stream.Collectors;
 
 public class Winning extends Lotto {
 
-  private final Lotto winner;
+  private int bonusNumber;
 
-  public Winning(String numbersAsString) {
+  public Winning(String numbersAsString, int bonusNumber) {
     this(
         Arrays.stream(numbersAsString.split(","))
             .map(value -> Integer.parseInt(value.trim()))
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList()),
+        bonusNumber);
   }
 
-  public Winning(List<Integer> numbers) {
+  public Winning(List<Integer> numbers, int bonusNumber) {
     super(numbers);
-    this.winner = new Lotto(numbers);
+    this.bonusNumber = bonusNumber;
   }
 
-  public boolean isWinner(Lotto lotto) {
-    return winner.equals(lotto);
-  }
-
-  public int sameNumberCount(Lotto lotto) {
-    if (isWinner(lotto)) {
-      return Lotto.FIXED_COUNT;
-    }
-
+  public int matchCount(Lotto lotto) {
     return numbers.stream().filter(number -> lotto.hasNumber(number)).mapToInt(i -> 1).sum();
+  }
+
+  public boolean hasBonusNumber(Lotto lotto) {
+    return lotto.hasNumber(bonusNumber);
   }
 }

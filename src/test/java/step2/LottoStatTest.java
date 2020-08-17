@@ -7,38 +7,22 @@ import org.junit.jupiter.api.Test;
 class LottoStatTest {
 
   @Test
-  void firstStat() {
-    LottoStat lottoStat = new LottoFirstStat(1);
-
-    assertThat(lottoStat.getMessage()).isEqualTo("6개 일치");
-    assertThat(lottoStat.getAmount()).isEqualTo(2000000000);
-    assertThat(lottoStat.getCount()).isEqualTo(1);
+  void firstStatEquals() {
+    assertThat((LottoStat) new LottoStat(LottoRank.First, 1)).isEqualTo(new LottoStat(LottoRank.First, 1));
   }
 
   @Test
-  void secondStat() {
-    LottoStat lottoStat = new LottoSecondStat(1);
-
-    assertThat(lottoStat.getMessage()).isEqualTo("5개 일치");
-    assertThat(lottoStat.getAmount()).isEqualTo(1500000);
-    assertThat(lottoStat.getCount()).isEqualTo(1);
+  void secondStatEquals() {
+    assertThat((LottoStat) new LottoStat(LottoRank.Second, 1)).isEqualTo(new LottoStat(LottoRank.Second, 1));
   }
 
   @Test
-  void thirdStat() {
-    LottoStat lottoStat = new LottoThirdStat(1);
-
-    assertThat(lottoStat.getMessage()).isEqualTo("4개 일치");
-    assertThat(lottoStat.getAmount()).isEqualTo(50000);
-    assertThat(lottoStat.getCount()).isEqualTo(1);
+  void thirdStatEquals() {
+    assertThat((LottoStat) new LottoStat(LottoRank.Third, 1)).isEqualTo(new LottoStat(LottoRank.Third, 1));
   }
 
   @Test
-  void fourthStat() {
-    LottoStat lottoStat = new LottoFirstStat(1);
-
-    assertThat(lottoStat.getMessage()).isEqualTo("6개 일치");
-    assertThat(lottoStat.getAmount()).isEqualTo(2000000000);
-    assertThat(lottoStat.getCount()).isEqualTo(1);
+  void fourthStatEquals() {
+    assertThat((LottoStat) new LottoStat(LottoRank.Fourth, 1)).isEqualTo(new LottoStat(LottoRank.Fourth, 1));
   }
 }

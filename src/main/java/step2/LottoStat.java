@@ -1,28 +1,52 @@
 package step2;
 
-public abstract class LottoStat {
+import java.util.Objects;
 
-  private final String message;
-  private final int amount;
+public class LottoStat {
 
-  public LottoStat(String message, int amount) {
-    this.message = message;
-    this.amount = amount;
+  private final LottoRank rank;
+  private int winningCount;
+
+  public LottoStat(LottoRank rank) {
+    this(rank, 0);
   }
 
-  public String getMessage() {
-    return message;
-  }
-
-  public int getAmount() {
-    return amount;
+  public LottoStat(LottoRank rank, int winningCount) {
+    this.rank = rank;
+    this.winningCount = winningCount;
   }
 
   public int total() {
-    return amount * getCount();
+    return rank.getAmount() * winningCount;
   }
 
-  abstract int getCount();
+  public void decide(int matchCount, boolean hasBonusNumber) {
+    if (rank.isWin(matchCount, hasBonusNumber)) {
+      winningCount++;
+    }
+  }
 
-  abstract void decide(int sameNumberCount);
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoStat lottoStat = (LottoStat) o;
+    return winningCount == lottoStat.winningCount &&
+        rank == lottoStat.rank;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(rank, winningCount);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s- %d개", rank, winningCount);
+  }
+
 }

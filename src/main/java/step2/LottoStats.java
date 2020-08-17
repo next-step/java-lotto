@@ -13,19 +13,21 @@ public class LottoStats {
   public LottoStats() {
     this(
         Arrays.asList(
-            new LottoFirstStat(),
-            new LottoSecondStat(),
-            new LottoThirdStat(),
-            new LottoFourthStat()));
+            new LottoStat(LottoRank.First),
+            new LottoStat(LottoRank.Second),
+            new LottoStat(LottoRank.Third),
+            new LottoStat(LottoRank.Fourth),
+            new LottoStat(LottoRank.Fifth)));
   }
 
-  public LottoStats(int first, int second, int third, int fourth) {
+  public LottoStats(WinningCounts winningCounts) {
     this(
         Arrays.asList(
-            new LottoFirstStat(first),
-            new LottoSecondStat(second),
-            new LottoThirdStat(third),
-            new LottoFourthStat(fourth)));
+            new LottoStat(LottoRank.First, winningCounts.getFirst()),
+            new LottoStat(LottoRank.Second, winningCounts.getSecond()),
+            new LottoStat(LottoRank.Third, winningCounts.getThird()),
+            new LottoStat(LottoRank.Fourth, winningCounts.getFourth()),
+            new LottoStat(LottoRank.Fifth, winningCounts.getFifth())));
   }
 
   private LottoStats(List<LottoStat> lottoStats) {
@@ -39,9 +41,9 @@ public class LottoStats {
     return Math.floor((total / amount) * 100) / 100.0;
   }
 
-  public void decide(int sameNumberCount) {
+  public void decide(int matchCount, boolean hasBonusNumber) {
     for (LottoStat lottoStat : lottoStats) {
-      lottoStat.decide(sameNumberCount);
+      lottoStat.decide(matchCount, hasBonusNumber);
     }
   }
 
