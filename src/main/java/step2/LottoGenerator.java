@@ -1,11 +1,11 @@
 package step2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.jws.Oneway;
 
 public class LottoGenerator {
   public static final int ONE_PRICE = 1000;
@@ -17,11 +17,33 @@ public class LottoGenerator {
     return new Lotto(new ArrayList<>(NUMBER_POOL.subList(0, Lotto.FIXED_COUNT)));
   }
 
-  public static List<Lotto> generate(int payment) {
+  public static List<Lotto> asLottos(int payment, String[] lottoNumbers) {
+    validatePayment(payment);
+    validateCanBuyLottoCount(payment, lottoNumbers);
+
+    return Arrays.stream(lottoNumbers)
+        .map(
+            lottoNumber ->
+                Arrays.stream(lottoNumber.split(","))
+                    .map(value -> Integer.parseInt(value.trim()))
+                    .collect(Collectors.toList()))
+        .map(numbers -> new Lotto(numbers))
+        .collect(Collectors.toList());
+  }
+
+  private static void validateCanBuyLottoCount(int payment, String[] lottoNumbers) {
+    int canBuyCount = payment / ONE_PRICE;
+
+    if (lottoNumbers.length > canBuyCount) {
+      throw new IllegalArgumentException("구매가능 로또보다 더 많은 개수를 입력 했습니다.");
+    }
+  }
+
+  public static List<Lotto> generate(int payment, int manualLottoCount) {
     validatePayment(payment);
 
     List<Lotto> lottos = new ArrayList<>();
-    int canBuyCount = payment / ONE_PRICE;
+    int canBuyCount = payment / ONE_PRICE - manualLottoCount;
     for (int i = 0; i < canBuyCount; i++) {
       lottos.add(generate());
     }
