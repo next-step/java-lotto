@@ -2,13 +2,10 @@ package stringaddcalculator.domain;
 
 public class ValidationNumber {
 
-    private static final String NUMERICAL_REGULAR_EXPRESSION = "^[0-9]+$]";
+    private static final String NUMERICAL_REGULAR_EXPRESSION = "^[0-9]+$";
 
     public static boolean isBlank(String expression) {
-        if (expression == null || expression.trim().isEmpty()) {
-            return true;
-        }
-        return false;
+        return expression == null || expression.trim().isEmpty();
     }
 
     public static void negativeQuantity(int number) {
