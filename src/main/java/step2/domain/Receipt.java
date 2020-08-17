@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Receipt {
 
-    private int change;
+    private Money change;
 
     private List<Ticket> tickets;
 
     public Receipt(final int change, final List<Ticket> tickets) {
-        this.change = change;
+        this.change = new Money(change);
         this.tickets = tickets;
     }
 
-    public int getChange() {
+    public Money getChange() {
         return change;
     }
 

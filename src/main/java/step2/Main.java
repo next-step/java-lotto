@@ -22,8 +22,8 @@ public class Main {
         }
         PrintMessage.println();
 
-        Receipt receiptBySelf = TicketSellingMachine.buy(spendingMoney, numbers);
-        Receipt receipt = TicketSellingMachine.buy(receiptBySelf.getChange());
+        Receipt receiptBySelf = TicketSellingMachine.buy(new Wallet(spendingMoney), numbers);
+        Receipt receipt = TicketSellingMachine.buy(new Wallet(receiptBySelf.getChange().toInt()));
         PrintMessage.print("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n", receiptBySelf.getTickets().size(), receipt.getTickets().size());
         PrintMessage.println();
 
