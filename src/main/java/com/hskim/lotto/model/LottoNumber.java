@@ -18,11 +18,11 @@ public class LottoNumber {
     }
 
     private void validateLottoNumber(int lottoNumber) {
-        if(lottoNumber < LOW_BOUND) {
+        if (lottoNumber < LOW_BOUND) {
             throw new IllegalArgumentException(LottoExceptionMessage.LESS_THEN_LOW_BOUND.getMessage());
         }
 
-        if(lottoNumber > UPPER_BOUND) {
+        if (lottoNumber > UPPER_BOUND) {
             throw new IllegalArgumentException(LottoExceptionMessage.EXCEED_UPPER_BOUND.getMessage());
         }
     }

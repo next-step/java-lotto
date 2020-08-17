@@ -39,8 +39,8 @@ public class LottoResultView {
     }
 
     public void printStatisticResult(Map<LottoWinTable, Integer> winnerMap) {
-        System.out.println();
-        System.out.println(STATISTIC_PHRASE
+        System.out.println(NEW_LINE
+                + STATISTIC_PHRASE
                 + NEW_LINE
                 + UNDER_LINE
                 + NEW_LINE

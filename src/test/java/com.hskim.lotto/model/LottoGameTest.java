@@ -35,7 +35,7 @@ public class LottoGameTest {
         winnerStatistics.putData(Arrays.asList(LottoWinTable.FIRST_PLACE,
                 LottoWinTable.SECOND_PLACE, LottoWinTable.THIRD_PLACE));
         BigDecimal income = LottoWinTable.FIRST_PLACE.getPrizeAmount().add(LottoWinTable.SECOND_PLACE.getPrizeAmount())
-                .add( LottoWinTable.THIRD_PLACE.getPrizeAmount());
+                .add(LottoWinTable.THIRD_PLACE.getPrizeAmount());
 
         EarningRate earningRate = new EarningRate(income, BigDecimal.valueOf(lottoTickets.getTotalTicketPrice()));
         LottoGameResult expected = new LottoGameResult(winnerStatistics, earningRate);
@@ -52,9 +52,9 @@ public class LottoGameTest {
      */
     private LottoTickets makeLottoTickets() {
         List<LottoTicket> lottoTicketList = new LinkedList<>();
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1,2,3,4,5,6)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1,2,3,4,5,7)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1,2,3,4,8,9)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 8, 9)));
 
         return new LottoTickets(lottoTicketList);
     }
