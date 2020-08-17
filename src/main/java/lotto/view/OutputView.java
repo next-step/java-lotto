@@ -7,8 +7,9 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     private static final int DEFAULT_SHOW_MATCH_COUNT = 0;
+    private static final double RESULT_REFERENCE_RATE = 1.00D;
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
-    private static final String WINNING_INTRO_MESSAGE = "당첨 통계 \n---------";
+    private static final String WINNING_INTRO_MESSAGE = "\n당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
     private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다. (%s)";
 
@@ -60,7 +61,7 @@ public class OutputView {
 
         System.out.printf(WINNING_RATE_MESSAGE,
                 winningRate,
-                winningRate > 100D ? "이익" : "손해"
+                winningRate > RESULT_REFERENCE_RATE ? "이익" : "손해"
         );
     }
 }
