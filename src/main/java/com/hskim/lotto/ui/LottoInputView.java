@@ -18,8 +18,11 @@ public class LottoInputView {
         System.out.println(PURCHASE_PHRASE);
     }
 
-    public String getPurchasePriceFromInput() {
-        return scanner.nextLine();
+    public int getPurchasePriceFromInput() {
+        int purchasePrice = scanner.nextInt();
+        scanner.nextLine();
+
+        return purchasePrice;
     }
 
     public void printWinPhrase() {

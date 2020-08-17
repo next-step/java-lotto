@@ -66,8 +66,8 @@ public class LottoTickets {
         return winningTicket.findWinnerTable(lottoTicket);
     }
 
-    public BigDecimal getTotalTicketPrice() {
-        return BigDecimal.valueOf(lottoTickets.size() * LottoTicket.LOTTO_PRICE);
+    public int getTotalTicketPrice() {
+        return lottoTickets.size() * LottoTicket.LOTTO_PRICE;
     }
 
     @Override

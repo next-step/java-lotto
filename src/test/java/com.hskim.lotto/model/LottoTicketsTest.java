@@ -16,7 +16,7 @@ public class LottoTicketsTest {
     void create() {
         // given
         NumberMaker numberMaker = new FixedNumberMaker();
-        PurchasePrice purchasePrice = new PurchasePrice("14000");
+        PurchasePrice purchasePrice = new PurchasePrice(14000);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
         // when & then
@@ -27,13 +27,13 @@ public class LottoTicketsTest {
     @Test
     void getTotalTicketPrice() {
         // given
-        String expense = "14000";
+        int expense = 14000;
         NumberMaker numberMaker = new FixedNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(expense);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
         // when
-        String result = lottoTickets.getTotalTicketPrice().toString();
+        int result = lottoTickets.getTotalTicketPrice();
 
         // then
         assertThat(result).isEqualTo(expense);

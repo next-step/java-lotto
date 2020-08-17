@@ -1,5 +1,6 @@
 package com.hskim.lotto.model;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class LottoGame {
@@ -18,7 +19,8 @@ public class LottoGame {
         lottoTickets.getWinTableList(winningTicket)
                 .forEach(winnerStatistics::putData);
 
-        earningRate = new EarningRate(winnerStatistics.getTotalPrizeAmount(), lottoTickets.getTotalTicketPrice());
+        earningRate = new EarningRate(winnerStatistics.getTotalPrizeAmount()
+                , BigDecimal.valueOf(lottoTickets.getTotalTicketPrice()));
     }
 
     public Map<LottoWinTable, Integer> getWinnerMap() {
