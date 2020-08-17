@@ -18,7 +18,7 @@ public class LottoSimulator {
 
         lottoInputView.printPurchasePhrase();
         int purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomNumberMaker());
+        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomLottoNumberMaker());
 
         lottoResultView.printPurchaseNum(lottoTickets.getTicketsSize());
         lottoResultView.printString(lottoTickets.makeLottoTicketsString());

@@ -5,10 +5,10 @@ import java.util.Optional;
 
 public class LottoWinningTicket {
 
-    private final List<Integer> winningNumberList;
+    private final List<LottoNumber> winningNumberList;
 
     public LottoWinningTicket(List<Integer> winningNumberList) {
-        this.winningNumberList = winningNumberList;
+        this.winningNumberList = LottoNumber.convertToLottoNumberList(winningNumberList);
     }
 
     public Optional<LottoWinTable> findWinnerTable(LottoTicket lottoTicket) {

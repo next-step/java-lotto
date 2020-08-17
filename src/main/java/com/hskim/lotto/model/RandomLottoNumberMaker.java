@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RandomNumberMaker implements NumberMaker {
+public class RandomLottoNumberMaker implements LottoNumberMaker {
 
     @Override
-    public List<Integer> makeNumbers(List<Integer> numberPool, int size) {
-        Collections.shuffle(numberPool);
+    public List<Integer> makeNumbers(int size) {
+        Collections.shuffle(NUMBER_POOL);
 
-        return numberPool.stream()
+        return NUMBER_POOL.stream()
                 .limit(size)
                 .sorted()
                 .collect(Collectors.toList());

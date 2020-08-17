@@ -51,7 +51,8 @@ public class LottoTicketTest {
         List<Integer> winningNumbers = Arrays.asList(1, 8, 9, 10, 17, 25);
 
         // when
-        WinningCondition result = lottoTicket.getWinningCondition(winningNumbers);
+        WinningCondition result = lottoTicket.getWinningCondition(
+                LottoNumber.convertToLottoNumberList(winningNumbers));
 
         // then
         assertThat(result).isEqualTo(expected);

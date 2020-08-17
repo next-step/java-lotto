@@ -41,6 +41,6 @@ public enum LottoWinTable {
         return message
                 + "("
                 + prizeAmount
-                + "원) ";
+                + "원)";
     }
 }

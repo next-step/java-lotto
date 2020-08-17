@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +14,7 @@ public class LottoTicketsTest {
     @Test
     void create() {
         // given
-        NumberMaker numberMaker = new FixedNumberMaker();
+        LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(14000);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
@@ -28,7 +27,7 @@ public class LottoTicketsTest {
     void getTotalTicketPrice() {
         // given
         int expense = 14000;
-        NumberMaker numberMaker = new FixedNumberMaker();
+        LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(expense);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
