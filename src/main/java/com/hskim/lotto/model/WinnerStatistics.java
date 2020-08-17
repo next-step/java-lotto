@@ -19,6 +19,7 @@ public class WinnerStatistics {
 
     private void setDefaultData() {
         Arrays.stream(LottoWinTable.values())
+                .sorted(Comparator.reverseOrder())
                 .forEach(this::putDefaultData);
     }
 

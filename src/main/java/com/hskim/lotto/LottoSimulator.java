@@ -25,8 +25,10 @@ public class LottoSimulator {
 
         lottoInputView.printWinPhrase();
         List<Integer> winningTicketNumbers = lottoInputView.getWinningTicketNumbers();
+        lottoInputView.printBonusBallPhrase();
+        int bonusNumber = lottoInputView.getBonusNumber();
 
-        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers));
+        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers, bonusNumber));
         lottoGameResult = lottoGame.drawLotteryTicket();
 
         lottoResultView.printStatisticResult(lottoGameResult.getStatisticMap());

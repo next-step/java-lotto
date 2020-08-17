@@ -51,7 +51,7 @@ public class LottoTickets {
     }
 
     private Optional<LottoWinTable> mapToWinnerTable(LottoWinningTicket winningTicket, LottoTicket lottoTicket) {
-        return winningTicket.findWinnerTable(lottoTicket);
+        return LottoWinTable.find(winningTicket.getWinningCondition(lottoTicket.getLottoNumberList()));
     }
 
     public int getTotalTicketPrice() {
