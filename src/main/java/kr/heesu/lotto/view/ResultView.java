@@ -1,13 +1,11 @@
 package kr.heesu.lotto.view;
 
-import kr.heesu.lotto.domain.LottoResult;
-import kr.heesu.lotto.domain.MultipleLotto;
+import kr.heesu.lotto.domain.LottoStatistics;
+import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.PurchaseAmount;
 import kr.heesu.lotto.enums.LottoPolicy;
-import kr.heesu.lotto.enums.Message;
 
 import java.io.PrintWriter;
-import java.util.Map;
 
 public class ResultView {
     private static final Double STANDARD = 1.0;
@@ -17,41 +15,40 @@ public class ResultView {
         this.writer = new PrintWriter(System.out, true);
     }
 
-    public void printLottoResult(LottoResult result) {
+    public void printLottoStatistics(LottoStatistics result) {
         printMatchResult(result);
         printProfitRate(result);
     }
 
-    private void printMatchResult(LottoResult result) {
-        Map<Long, Long> matches = result.getMatches();
+    private void printMatchResult(LottoStatistics result) {
 
         for (LottoPolicy policy : LottoPolicy.values()) {
             Long count = policy.getCount();
             Long price = policy.getPrice();
-            Long actualMatch = matches.get(count);
+            Long frequency = result.getMatchFrequency(count);
 
-            writer.println(String.format(Message.OUTPUT_FORMAT_FOR_MATCH_RESULT.of(), count, price, actualMatch));
+            writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_MATCH_RESULT.getMessage(), count, price, frequency));
         }
     }
 
-    private void printProfitRate(LottoResult result) {
+    private void printProfitRate(LottoStatistics result) {
         Double profitRate = result.getProfitRate();
-        writer.print(String.format(Message.OUTPUT_FORMAT_FOR_PROFIT_RATE.of(), profitRate));
+        writer.print(String.format(ViewMessage.OUTPUT_FORMAT_FOR_PROFIT_RATE.getMessage(), profitRate));
 
         if (profitRate < STANDARD) {
-            writer.println(Message.OUTPUT_FOR_PROFIT_RATE_LOSS.of());
+            writer.println(ViewMessage.OUTPUT_FOR_PROFIT_RATE_LOSS.getMessage());
             return;
         }
-        writer.println(Message.OUTPUT_FOR_PROFIT_RATE_BENEFIT.of());
+        writer.println(ViewMessage.OUTPUT_FOR_PROFIT_RATE_BENEFIT.getMessage());
     }
 
-    public void printMultipleLotto(MultipleLotto multipleLotto) {
+    public void printMultipleLotto(Lottos multipleLotto) {
         writer.println(multipleLotto);
     }
 
     public void printPurchaseAmount(PurchaseAmount amount) {
         int size = amount.getSize();
-        writer.println(String.format(Message.OUTPUT_FORMAT_FOR_PURCHASE_SIZE.of(), size));
+        writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_PURCHASE_SIZE.getMessage(), size));
     }
 
     public static ResultView of() {

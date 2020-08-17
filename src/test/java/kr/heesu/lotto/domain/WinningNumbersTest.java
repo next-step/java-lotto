@@ -2,8 +2,9 @@ package kr.heesu.lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,12 +13,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class WinningNumbersTest {
 
     @Test
-    void winningNumbers_test() {
-        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumbers numbers = WinningNumbers.of(integers);
-        assertThat(numbers.getWinningNumbers().size()).isEqualTo(integers.size());
+    void winningNumbers_creation_test() {
+        List<LottoNumber> numbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> WinningNumbers.of(Arrays.asList(1, 2, 3, 4))).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> WinningNumbers.of(Arrays.asList(-1, 2, 3, 60, 0, 2))).isInstanceOf(IllegalArgumentException.class);
+        WinningNumbers winningNumbers = WinningNumbers.of(numbers);
+
+        int actual = winningNumbers.getWinningNumbers().size();
+        int expected = numbers.size();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void winningNumbers_validation_test() {
+        List<LottoNumber> numbers = Stream.of(1, 2, 3, 4, 5)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> WinningNumbers.of(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
 }

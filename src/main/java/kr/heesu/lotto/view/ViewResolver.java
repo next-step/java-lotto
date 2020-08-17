@@ -1,9 +1,8 @@
 package kr.heesu.lotto.view;
 
-import kr.heesu.lotto.domain.LottoResult;
-import kr.heesu.lotto.domain.MultipleLotto;
+import kr.heesu.lotto.domain.LottoStatistics;
+import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.PurchaseAmount;
-import kr.heesu.lotto.domain.WinningNumbers;
 
 public class ViewResolver {
     private final InputView inputView;
@@ -14,23 +13,28 @@ public class ViewResolver {
         this.resultView = ResultView.of();
     }
 
-    public PurchaseAmount getPurchaseAmount() {
-        return inputView.getPurchaseAmount();
-    }
-
-    public WinningNumbers getWinningNumbers() {
-        return inputView.getWinningNumbers();
-    }
-
     public static ViewResolver of() {
         return new ViewResolver();
     }
 
-    public void printLottoResult(LottoResult result) {
-        resultView.printLottoResult(result);
+    public String getPurchaseAmount() {
+        System.out.println(ViewMessage.INPUT_FOR_PURCHASE_AMOUNT.getMessage());
+        return this.inputView.read();
     }
 
-    public void printMultipleLotto(MultipleLotto multipleLotto) {
+    public String getWinningNumbers() {
+        System.out.println(ViewMessage.INPUT_FOR_WINNING_NUMBERS.getMessage());
+        return this.inputView.read();
+    }
+
+    public void printLottoStatistics(LottoStatistics result) {
+        System.out.println(ViewMessage.OUTPUT_FOR_LOTTO_STATISTICS);
+        System.out.println(ViewMessage.OUTPUT_FOR_LINE);
+
+        resultView.printLottoStatistics(result);
+    }
+
+    public void printMultipleLotto(Lottos multipleLotto) {
         resultView.printMultipleLotto(multipleLotto);
     }
 

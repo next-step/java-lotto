@@ -1,45 +1,31 @@
 package kr.heesu.lotto.domain;
 
-import kr.heesu.lotto.enums.Message;
+import kr.heesu.lotto.enums.ExceptionMessage;
 
 import java.util.List;
 
 public class WinningNumbers {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
     private static final int SIZE = 6;
 
-    private List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private WinningNumbers(List<Integer> numbers) {
-        if (isNotValid(numbers)) {
-            throw new IllegalArgumentException(Message.EXCEPTION_FOR_WINNING_NUMBERS.of());
-        }
+    private WinningNumbers(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return this.numbers;
-    }
-
-    private boolean isInRange(int number) {
-        return number < MIN || number > MAX;
-    }
-
-    private boolean isNotValid(List<Integer> numbers) {
-        if (numbers.size() < SIZE) {
-            return true;
-        }
-
-        long count = numbers.stream()
-                .filter(this::isInRange)
-                .count();
-
-        return count > 0;
-    }
-
-    public static WinningNumbers of(List<Integer> numbers) {
+    public static WinningNumbers of(List<LottoNumber> numbers) {
+        validationCheck(numbers);
         return new WinningNumbers(numbers);
+    }
+
+    private static void validationCheck(List<LottoNumber> numbers) {
+        if (numbers.size() != SIZE) {
+            throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_WINNING_NUMBERS.getMessage());
+        }
+    }
+
+    public List<LottoNumber> getWinningNumbers() {
+        return this.numbers;
     }
 }
 

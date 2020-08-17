@@ -1,39 +1,62 @@
 package kr.heesu.lotto.controller;
 
-import kr.heesu.lotto.domain.LottoResult;
-import kr.heesu.lotto.domain.MultipleLotto;
-import kr.heesu.lotto.domain.PurchaseAmount;
-import kr.heesu.lotto.domain.WinningNumbers;
+import kr.heesu.lotto.domain.*;
 import kr.heesu.lotto.utils.LottoFactory;
 import kr.heesu.lotto.view.ViewResolver;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
     private final ViewResolver viewResolver;
 
-    private LottoController() {
-        this.viewResolver = ViewResolver.of();
+    private LottoController(ViewResolver viewResolver) {
+        this.viewResolver = viewResolver;
+    }
+
+    public static LottoController of() {
+        return new LottoController(ViewResolver.of());
     }
 
     public void main() {
         try {
-            PurchaseAmount amount = viewResolver.getPurchaseAmount();
+            String stringAmount = viewResolver.getPurchaseAmount();
+            PurchaseAmount amount = makePurchaseAmountFromUserInput(stringAmount);
+
             viewResolver.printPurchaseAmount(amount);
 
-            MultipleLotto multipleLotto = LottoFactory.createMultipleLottos(amount);
+            Lottos multipleLotto = LottoFactory.createMultipleLottos(amount);
             viewResolver.printMultipleLotto(multipleLotto);
 
-            WinningNumbers winningNumbers = viewResolver.getWinningNumbers();
+            String stringWinningNumbers = viewResolver.getWinningNumbers();
+            WinningNumbers winningNumbers = makeWinningNumbersFromUserInput(stringWinningNumbers);
 
-            LottoResult result = multipleLotto.matches(winningNumbers);
+            MatchResult matches = multipleLotto.matches(winningNumbers);
 
-            viewResolver.printLottoResult(result);
+            LottoStatistics statistics = makeLottoStatistics(matches, amount);
+
+            viewResolver.printLottoStatistics(statistics);
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
         }
     }
 
-    public static LottoController of() {
-        return new LottoController();
+    private LottoStatistics makeLottoStatistics(MatchResult matches, PurchaseAmount amount) {
+        return LottoStatistics.of(matches, amount);
+    }
+
+    private WinningNumbers makeWinningNumbersFromUserInput(String input) {
+        List<LottoNumber> numbers = Stream.of(input.split(", "))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        return WinningNumbers.of(numbers);
+    }
+
+    private PurchaseAmount makePurchaseAmountFromUserInput(String input) {
+        return PurchaseAmount.of(Integer.parseInt(input));
     }
 }

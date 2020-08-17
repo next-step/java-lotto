@@ -1,7 +1,8 @@
 package kr.heesu.lotto.utils;
 
 import kr.heesu.lotto.domain.Lotto;
-import kr.heesu.lotto.domain.MultipleLotto;
+import kr.heesu.lotto.domain.LottoNumber;
+import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.PurchaseAmount;
 
 import java.util.Collections;
@@ -20,16 +21,27 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> generateLottoNumbers() {
+    private LottoFactory() {}
+
+    public static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(RANGE);
-        return RANGE.subList(0, SIZE);
+
+        return RANGE.subList(0, SIZE)
+                .stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
-    public static Lotto createLotto(List<Integer> numbers) {
+    public static Lotto createLotto(List<LottoNumber> numbers) {
         return Lotto.of(numbers);
     }
 
-    public static MultipleLotto createMultipleLottos(PurchaseAmount amount) {
-        return MultipleLotto.of(amount);
+    public static Lottos createMultipleLottos(PurchaseAmount amount) {
+        List<Lotto> lottos = Stream.generate(LottoFactory::generateLottoNumbers)
+                .limit(amount.getSize())
+                .map(LottoFactory::createLotto)
+                .collect(Collectors.toList());
+
+        return Lottos.of(lottos);
     }
 }

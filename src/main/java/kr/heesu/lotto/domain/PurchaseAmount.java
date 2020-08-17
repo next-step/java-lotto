@@ -1,31 +1,29 @@
 package kr.heesu.lotto.domain;
 
-import kr.heesu.lotto.enums.Message;
+import kr.heesu.lotto.enums.ExceptionMessage;
 
 public class PurchaseAmount {
     private static final int PRICE_PER_LOTTO = 1000;
+
     private final int amount;
 
     private PurchaseAmount(int amount) {
-        if (isNotValid(amount)) {
-            throw new IllegalArgumentException(Message.EXCEPTION_FOR_PURCHASE_AMOUNT.of());
-        }
         this.amount = amount;
     }
 
-    private boolean isNotValid(int amount) {
+    public static PurchaseAmount of(int amount) {
+        validationCheck(amount);
+        return new PurchaseAmount(amount);
+    }
+
+    private static void validationCheck(int amount) {
         if (amount < PRICE_PER_LOTTO) {
-            return true;
+            throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_PURCHASE_AMOUNT.getMessage());
         }
-        return false;
     }
 
     public int getAmount() {
         return amount;
-    }
-
-    public static PurchaseAmount of(int amount) {
-        return new PurchaseAmount(amount);
     }
 
     public int getSize() {

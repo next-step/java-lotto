@@ -1,20 +1,34 @@
 package kr.heesu.lotto.domain;
 
-import javafx.scene.effect.Bloom;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
     @Test
+    void validation_test() {
+        List<LottoNumber> numbers = Stream.of(3, 4, 5, 6)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> Lotto.of(numbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void match_test() {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<Integer> answer = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9));
+        List<LottoNumber> numbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        List<LottoNumber> answer = Stream.of(1, 2, 3, 7, 8, 9)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
 
         Lotto lotto = Lotto.of(numbers);
 
