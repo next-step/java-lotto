@@ -10,7 +10,6 @@ public class StringCalculator {
     public void run() {
         List<Integer> inputFormula = InputView.inputFormula();
 
-        StringAdder stringAdder = new StringAdder();
-        ResultView.printResult(stringAdder.adder(inputFormula));
+        ResultView.printResult(StringAdder.adder(inputFormula));
     }
 }

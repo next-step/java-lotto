@@ -6,10 +6,6 @@ public final class StringAdderExceptionHandler {
     private StringAdderExceptionHandler() { }
 
     public static void validate(int inputNumber) {
-        isNegative(inputNumber);
-    }
-
-    private static void isNegative(int inputNumber) {
         if (inputNumber < 0) {
             throw new RuntimeException(INPUT_NEGATIVE_VALUE);
         }
