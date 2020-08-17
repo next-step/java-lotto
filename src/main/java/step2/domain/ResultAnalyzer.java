@@ -23,12 +23,13 @@ public class ResultAnalyzer {
      */
     public static final int getMatchTicketCount(
             final List<Integer> winningNumbers,
+            final int hitCount,
             final int bonusNumber,
             final boolean bonusMatch,
             final List<Ticket> tickets) {
 
         return tickets.stream()
-                .filter(ticket -> ticket.checkPrize(winningNumbers) && (!bonusMatch || ticket.checkBonusNumber(bonusNumber)))
+                .filter(ticket -> ticket.matchCount(winningNumbers) >= hitCount && (!bonusMatch || ticket.checkBonusNumber(bonusNumber)))
                 .collect(Collectors.toList())
                 .size();
     }

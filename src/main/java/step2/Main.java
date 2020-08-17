@@ -61,7 +61,7 @@ public class Main {
                 ranking.getMatchCount(),
                 ranking == LottoRanking.SECOND ? ", 보너스 볼 일치 " : "",
                 ranking.getPrizeMoney(),
-                ResultAnalyzer.getMatchTicketCount(winningNumbers, bonusNumber, ranking == LottoRanking.SECOND ? true : false, tickets)
+                ResultAnalyzer.getMatchTicketCount(winningNumbers, ranking.getMatchCount(), bonusNumber, ranking == LottoRanking.SECOND ? true : false, tickets)
         );
     }
 }

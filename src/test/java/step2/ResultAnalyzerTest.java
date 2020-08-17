@@ -15,11 +15,12 @@ class ResultAnalyzerTest {
     @Test
     void getMatchTicketCount() {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(winningNumber);
+        Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         assertThat(
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
+                        1,
                         7,
                         false,
                         Arrays.asList(ticket))
@@ -28,7 +29,26 @@ class ResultAnalyzerTest {
         assertThat(
                 ResultAnalyzer.getMatchTicketCount(
                         winningNumber,
+                        5,
                         7,
+                        false,
+                        Arrays.asList(ticket))
+        ).isEqualTo(1);
+
+        assertThat(
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        6,
+                        7,
+                        false,
+                        Arrays.asList(ticket))
+        ).isEqualTo(0);
+
+        assertThat(
+                ResultAnalyzer.getMatchTicketCount(
+                        winningNumber,
+                        5,
+                        8,
                         true,
                         Arrays.asList(ticket))
         ).isEqualTo(0);
