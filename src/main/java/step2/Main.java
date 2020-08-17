@@ -1,15 +1,14 @@
 package step2;
 
-import step2.domain.LottoRanking;
-import step2.domain.ResultAnalyzer;
-import step2.domain.Ticket;
-import step2.domain.TicketSellingMachine;
+import step2.domain.*;
 import step2.lib.PrintMessage;
 import step2.view.InputScanner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,12 +22,16 @@ public class Main {
         }
         PrintMessage.println();
 
-        List<Ticket> ticketsBySelf = TicketSellingMachine.buy(directPurchaseCount, numbers);
-        List<Ticket> tickets = TicketSellingMachine.buy(spendingMoney - (directPurchaseCount * TicketSellingMachine.TICKET_PRICE));
-        PrintMessage.print("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n", ticketsBySelf.size(), tickets.size());
+        Receipt receiptBySelf = TicketSellingMachine.buy(spendingMoney, numbers);
+        Receipt receipt = TicketSellingMachine.buy(receiptBySelf.getChange());
+        PrintMessage.print("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n", receiptBySelf.getTickets().size(), receipt.getTickets().size());
         PrintMessage.println();
 
-        tickets.stream()
+        List<Ticket> collect = Stream.concat(
+                receiptBySelf.getTickets().stream(), receipt.getTickets().stream()
+        ).collect(Collectors.toList());
+
+        receipt.getTickets().stream()
                 .forEach(ticket -> PrintMessage.println(ticket));
 
         PrintMessage.println();
@@ -44,12 +47,12 @@ public class Main {
         // Ranking 에 따른 출력
         Arrays.stream(LottoRanking.values())
                 .filter(lottoRanking -> lottoRanking != LottoRanking.MISS) // 결과 계산에서 제외
-                .map(ranking -> createReport(ranking, winningNumbers, bonusNumber, tickets))
+                .map(ranking -> createReport(ranking, winningNumbers, bonusNumber, collect))
                 .forEach(message -> PrintMessage.print(message));
 
         PrintMessage.print(
                 "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n",
-                ResultAnalyzer.getRateReturn(winningNumbers, bonusNumber, tickets, spendingMoney)
+                ResultAnalyzer.getRateReturn(winningNumbers, bonusNumber, collect, spendingMoney)
         );
     }
 

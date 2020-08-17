@@ -33,10 +33,12 @@ public class TicketSellingMachine {
      * @param money
      * @return
      */
-    public static final List<Ticket> buy(final int money) {
-        return Stream.generate(TicketSellingMachine::ticketing)
-                .limit(getCount(money))
-                .collect(Collectors.toList());
+    public static final Receipt buy(final int money) {
+        return new Receipt(
+                money % TICKET_PRICE,
+                Stream.generate(TicketSellingMachine::ticketing)
+                        .limit(getCount(money))
+                        .collect(Collectors.toList()));
     }
 
     /**
@@ -49,15 +51,19 @@ public class TicketSellingMachine {
         return money / TICKET_PRICE;
     }
 
-    public static List<Ticket> buy(int ticketCount, List<List<Integer>> numbers) {
-        List<Ticket> collect = numbers.stream()
+    /**
+     * 금액과 입력 번호 목록을 기준으로 티켓을 발권한다.
+     * 티켓 한장의 가격은 1000원이다.
+     *
+     * @param money
+     * @param numbers
+     * @return
+     */
+    public static Receipt buy(final int money, List<List<Integer>> numbers) {
+        List<Ticket> tickets = numbers.stream()
                 .map(TicketSellingMachine::ticketing)
                 .collect(Collectors.toList());
-
-        if (ticketCount != collect.size())
-            throw new IllegalArgumentException(String.format("구매 수량과 입력된 번호의 갯수가 다릅니다. 수량: %s, 일력 수랑: %s", ticketCount, collect.size()));
-
-        return collect;
+        return new Receipt(money - (tickets.size() * TICKET_PRICE), tickets);
     }
 
     /**
