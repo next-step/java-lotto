@@ -22,8 +22,7 @@ public class LottoMain {
         Lottos lottos = lottoGame.issue(new RandomLottoNumberGenerator());
         ResultView.viewIssuedLotto(lottos);
 
-        String winningNumbers = InputView.inputWinningNumber();
-        LottoResults prizes = lottos.getLottoResult(SplitUtil.splitToNumber(winningNumbers, DELIMETER));
+        LottoResults prizes = lottos.getLottoResult(InputView.inputWinningNumber(), InputView.inputBonusNumber());
 
         ResultView.viewPrize(prizes);
         ResultView.viewWinningRate(buyPrice, prizes);
