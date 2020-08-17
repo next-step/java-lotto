@@ -27,4 +27,12 @@ public class ValidateUtil {
             throw new LottoCountException();
         }
     }
+
+    public static void validateLottoWinningNumber(List<Integer> numbers, int bonusNumber) {
+        validateLottoNumberCount(numbers);
+
+        if (numbers.contains(bonusNumber)) {
+            throw new InvalidWinningNumberException();
+        }
+    }
 }

@@ -31,7 +31,7 @@ public class Lottos {
 
     public LottoResults getLottoResult(String numbers, int bonusNumber) {
         List<Integer> winningNumbers = SplitUtil.splitToNumber(numbers, DELIMITER);
-        ValidateUtil.validateLottoNumberCount(winningNumbers);
+        ValidateUtil.validateLottoWinningNumber(winningNumbers, bonusNumber);
 
         LottoResults result = LottoResults.of();
         for (Lotto lotto : lottos) {
