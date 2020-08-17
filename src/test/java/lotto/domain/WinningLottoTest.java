@@ -3,12 +3,7 @@ package lotto.domain;
 import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -47,29 +42,6 @@ public class WinningLottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLotto.of(winningLottoNumbers))
                 .withMessage("숫자를 제대로 입력해주세요.");
-    }
-
-    private static Stream<Arguments> makeWinningLottoBadParameter() {
-        List<LottoNumber> winningLottoNumbers1 = new ArrayList<>();
-        winningLottoNumbers1.add(LottoNumber.of(1));
-        winningLottoNumbers1.add(LottoNumber.of(3));
-        winningLottoNumbers1.add(LottoNumber.of(5));
-        winningLottoNumbers1.add(LottoNumber.of(7));
-        winningLottoNumbers1.add(LottoNumber.of(9));
-        winningLottoNumbers1.add(LottoNumber.of(11));
-
-        List<LottoNumber> winningLottoNumbers2 = new ArrayList<>();
-        winningLottoNumbers1.add(LottoNumber.of(2));
-        winningLottoNumbers1.add(LottoNumber.of(4));
-        winningLottoNumbers1.add(LottoNumber.of(6));
-        winningLottoNumbers1.add(LottoNumber.of(8));
-        winningLottoNumbers1.add(LottoNumber.of(10));
-        winningLottoNumbers1.add(LottoNumber.of(14));
-
-        return Stream.of(
-                Arguments.of(winningLottoNumbers1),
-                Arguments.of(winningLottoNumbers2)
-        );
     }
 
 }
