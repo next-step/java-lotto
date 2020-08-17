@@ -9,7 +9,7 @@ public class LottoController {
         final Money money = Money.of(InputView.inputMoney());
         final Lottos lottos = new LottoStore().issueLotto(money.getLottoCount());
         ResultView.displayLottoCount(money);
-        ResultView.displayLottoList(lottos);
+        ResultView.displayLottos(lottos);
 
         final WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningLotto()) ;
         final LottoResult lottoResult = lottos.getResult(winningLotto);

@@ -16,9 +16,9 @@ public class ResultView {
         System.out.println(String.format(PURCHASE_COUNT_MESSAGE, money.getLottoCount()));
     }
 
-    public static void displayLottoList(Lottos lottos) {
+    public static void displayLottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos.getLottoList()) {
+        for (Lotto lotto : lottos.getLottos()) {
             stringBuilder.append(lotto.toString()).append(LINE_SEPARATOR);
         }
         System.out.println(stringBuilder.toString());

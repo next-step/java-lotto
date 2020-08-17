@@ -9,11 +9,11 @@ public class LottoStore {
 
     public Lottos issueLotto(final int count) {
         validate(count);
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoList.add(new AutoLottoGenerator().generate());
+            lottos.add(new AutoLottoGenerator().generate());
         }
-        return Lottos.of(lottoList);
+        return Lottos.of(lottos);
     }
 
     private void validate(int count) {

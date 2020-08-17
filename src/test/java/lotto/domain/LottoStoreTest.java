@@ -14,7 +14,7 @@ class LottoStoreTest {
     @ValueSource(ints = {1, 10, 20})
     void issueLottoTest(int count) {
         Lottos lottos = new LottoStore().issueLotto(count);
-        assertThat(lottos.getLottoList()).hasSize(count);
+        assertThat(lottos.getLottos()).hasSize(count);
     }
 
     @DisplayName("로또 1미만의 수 예외처리 테스트")
