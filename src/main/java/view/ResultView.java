@@ -25,13 +25,25 @@ public class ResultView {
 
     public static void viewPrize(LottoResults prizes) {
         System.out.println(RESULT_VIEW_MESSAGE);
-
-        for (LottoResult value : prizes.getLottoResults()) {
-            System.out.println(String.format(PRIZE_MESSAGE, value.getPrizeHitNumber(), value.getPrizeMoney(), value.getWinningCount()));
-        }
+        System.out.println(viewLottoPrizes(prizes));
     }
 
     public static void viewWinningRate(int buyPrice, LottoResults prizes) {
         System.out.println(String.format(WINNING_RATE_MESSAGE, CalculatorUtil.divide(prizes.getTotalPrizeMoney(), buyPrice)));
+    }
+
+    private static String viewLottoPrizes(LottoResults prizes) {
+        StringBuilder sb = new StringBuilder();
+
+        for (LottoResult value : prizes.getLottoResults()) {
+            sb.append(String.format(
+                    PRIZE_MESSAGE,
+                    value.getPrizeHitNumber(),
+                    value.getPrizeMoney(),
+                    value.getWinningCount()));
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 }
