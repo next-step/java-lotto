@@ -1,14 +1,16 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final int DEFAULT_SHOW_MATCH_COUNT = 0;
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String WINNING_INTRO_MESSAGE = "당첨 통계 \n---------";
+    private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String WINNING_RATE_MESSAGE = "총 수익률은 %f 입니다.";
 
     private OutputView() {
     }
@@ -18,6 +20,7 @@ public class OutputView {
 
         List<String> lottoNumbers = getLottoNumberResult(lottoTickets);
         lottoNumbers.forEach(System.out::println);
+        System.out.println();
     }
 
     private static List<String> getLottoNumberResult(LottoTickets lottoTickets) {
@@ -33,5 +36,19 @@ public class OutputView {
                 .map(LottoNumber::valueOf)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
+    }
+
+    public static void printLottoResult(WinningResult winningResult) {
+        System.out.println(WINNING_INTRO_MESSAGE);
+
+        LottoRank.stream()
+                .filter(rank -> rank.getMatchCount() > DEFAULT_SHOW_MATCH_COUNT)
+                .map(rank -> String.format(WINNING_RESULT_MESSAGE,
+                        rank.getMatchCount(),
+                        rank.getPrize(),
+                        winningResult.getRankCount(rank)))
+                .forEach(System.out::println);
+
+        System.out.printf(WINNING_RATE_MESSAGE, winningResult.calculateWinningRate());
     }
 }

@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.*;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
@@ -26,5 +29,11 @@ public class LottoTickets {
 
     public Stream<LottoTicket> stream() {
         return this.lottoTickets.stream();
+    }
+
+    public WinningResult getWinningResult(WinningLotto winningLotto) {
+        return this.lottoTickets.stream()
+                .map(winningLotto::getWinningRank)
+                .collect(collectingAndThen(groupingBy(Function.identity(), counting()), WinningResult::of));
     }
 }

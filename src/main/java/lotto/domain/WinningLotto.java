@@ -32,4 +32,10 @@ public class WinningLotto {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT);
         }
     }
+
+    public LottoRank getWinningRank(LottoTicket lottoTicket) {
+        int matchCount = lottoTicket.getMatchCountWith(winningLottoNumbers);
+
+        return LottoRank.of(matchCount);
+    }
 }

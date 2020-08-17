@@ -35,4 +35,10 @@ public class LottoTicket {
     public static List<LottoNumber> stream(LottoTicket lottoTicket) {
         return lottoTicket.lottoNumbers;
     }
+
+    public int getMatchCountWith(List<LottoNumber> winningLottoNumbers) {
+        lottoNumbers.retainAll(winningLottoNumbers);
+
+        return lottoNumbers.size();
+    }
 }
