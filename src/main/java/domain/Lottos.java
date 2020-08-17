@@ -26,9 +26,7 @@ public class Lottos {
     }
 
     public LottoResults getLottoResult(List<Integer> winningNumbers) {
-        if (!ValidateUtil.valdateWinningNumbers(winningNumbers)) {
-            throw new RuntimeException();
-        }
+        ValidateUtil.valdateWinningNumbers(winningNumbers);
 
         LottoResults result = LottoResults.of();
         for (Lotto lotto : lottos) {

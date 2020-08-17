@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class ValidateUtil {
     public static final int LOTTO_NUMBERS = 6;
+    public static final String INVALID_WINNING_NUMBERS_MESSAGE = "Invalid Winning numbers count";
 
     private ValidateUtil() {
     }
@@ -14,9 +15,15 @@ public class ValidateUtil {
         return expression == null || expression.isEmpty();
     }
 
-    public static boolean valdateWinningNumbers(List<Integer> winningNumbers) {
-        Set<Integer> numbers = new HashSet(winningNumbers);
+    public static void valdateWinningNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != LOTTO_NUMBERS) {
+            throw new RuntimeException(INVALID_WINNING_NUMBERS_MESSAGE);
+        }
 
-        return numbers.size() == LOTTO_NUMBERS;
+        Set<Integer> distinctWinningNumbers = new HashSet(winningNumbers);
+
+        if (distinctWinningNumbers.size() != LOTTO_NUMBERS) {
+            throw new RuntimeException(INVALID_WINNING_NUMBERS_MESSAGE);
+        }
     }
 }
