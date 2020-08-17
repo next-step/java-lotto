@@ -21,7 +21,7 @@ public class StringAddCalculator {
         String[] numbers = splitDelimiterCheck(expression);
 
         return Arrays.stream(numbers)
-                .map(number -> new Number(number).is())
+                .map(number -> new Number(number).getNumber())
                 .reduce(ZERO_NUMBER, Integer::sum);
     }
 
