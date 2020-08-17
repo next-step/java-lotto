@@ -12,8 +12,9 @@ public class LottoSimulator {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
         LottoResultView lottoResultView = new LottoResultView();
-        LottoGame lottoGame;
         LottoTickets lottoTickets;
+        LottoGame lottoGame;
+        LottoGameResult lottoGameResult;
 
         lottoInputView.printPurchasePhrase();
         int purchasePrice = lottoInputView.getPurchasePriceFromInput();
@@ -26,9 +27,9 @@ public class LottoSimulator {
         List<Integer> winningTicketNumbers = lottoInputView.getWinningTicketNumbers();
 
         lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers));
-        lottoGame.drawLots();
+        lottoGameResult = lottoGame.drawLotteryTicket();
 
-        lottoResultView.printStatisticResult(lottoGame.getWinnerMap());
-        lottoResultView.printEarningRate(lottoGame.getEarningRate(), lottoGame.isProfit());
+        lottoResultView.printStatisticResult(lottoGameResult.getStatisticMap());
+        lottoResultView.printEarningRate(lottoGameResult.getEarningRate(), lottoGameResult.isProfit());
     }
 }
