@@ -34,24 +34,13 @@ public class TicketSellingMachine {
      * @return
      */
     public static final Receipt buy(final Wallet wallet) {
-        int ticketCount = getCount(wallet);
-        wallet.spend(ticketCount * TICKET_PRICE);
+        int ticketCount = wallet.getQuantityOfItems(TICKET_PRICE);
 
         return new Receipt(
-                wallet.getMoney(),
+                wallet.spend(ticketCount, TICKET_PRICE),
                 Stream.generate(TicketSellingMachine::ticketing)
                         .limit(ticketCount)
                         .collect(Collectors.toList()));
-    }
-
-    /**
-     * 금액을 기준으로 발권할 수 있는 티켓의 갯수를 반환한다.
-     *
-     * @param wallet
-     * @return
-     */
-    private static final int getCount(final Wallet wallet) {
-        return wallet.getMoney() / TICKET_PRICE;
     }
 
     /**
@@ -67,9 +56,7 @@ public class TicketSellingMachine {
                 .map(TicketSellingMachine::ticketing)
                 .collect(Collectors.toList());
 
-        wallet.spend(tickets.size() * TICKET_PRICE);
-
-        return new Receipt(wallet.getMoney(), tickets);
+        return new Receipt(wallet.spend(tickets.size(), TICKET_PRICE), tickets);
     }
 
     /**

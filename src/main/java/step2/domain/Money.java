@@ -26,7 +26,11 @@ public class Money {
         return this.money;
     }
 
-    public void subtraction(int value) {
-        this.money -= value;
+    public void subtraction(int money) {
+        this.money -= money;
+    }
+
+    public int getQuantityOfItems(int price) {
+        return money / price;
     }
 }
