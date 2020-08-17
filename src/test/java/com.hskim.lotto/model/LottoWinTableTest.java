@@ -22,11 +22,12 @@ public class LottoWinTableTest {
 
     private static Stream<Arguments> provideWinTableAndCondition() {
         return Stream.of(
-                Arguments.of(new WinningCondition(6), Optional.of(LottoWinTable.FIRST_PLACE)),
-                Arguments.of(new WinningCondition(5), Optional.of(LottoWinTable.SECOND_PLACE)),
-                Arguments.of(new WinningCondition(4), Optional.of(LottoWinTable.THIRD_PLACE)),
-                Arguments.of(new WinningCondition(3), Optional.of(LottoWinTable.FOURTH_PLACE)),
-                Arguments.of(new WinningCondition(2), Optional.empty())
+                Arguments.of(new WinningCondition(6, false), Optional.of(LottoWinTable.FIRST_PLACE)),
+                Arguments.of(new WinningCondition(5, true), Optional.of(LottoWinTable.SECOND_PLACE)),
+                Arguments.of(new WinningCondition(5, false), Optional.of(LottoWinTable.THIRD_PLACE)),
+                Arguments.of(new WinningCondition(4, false), Optional.of(LottoWinTable.FOURTH_PLACE)),
+                Arguments.of(new WinningCondition(3, false), Optional.of(LottoWinTable.FIFTH_PLACE)),
+                Arguments.of(new WinningCondition(2, false), Optional.empty())
         );
     }
 }

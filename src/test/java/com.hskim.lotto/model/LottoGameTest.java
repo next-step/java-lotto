@@ -17,7 +17,7 @@ public class LottoGameTest {
     void create() {
         // given
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(10000), new FixedLottoNumberMaker());
-        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 8, 9, 10, 17, 25));
+        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 8, 9, 10, 17, 25), 5);
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
 
         // when & then
@@ -29,7 +29,7 @@ public class LottoGameTest {
     void drawLotteryTicket() {
         // given
         LottoTickets lottoTickets = makeLottoTickets();
-        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
         WinnerStatistics winnerStatistics = new WinnerStatistics();
         winnerStatistics.putData(Arrays.asList(LottoWinTable.FIRST_PLACE,
@@ -48,13 +48,13 @@ public class LottoGameTest {
     }
 
     /*
-        당첨번호 1,2,3,4,5,6 에 대해 1,2,3등 복권
+        당첨번호 1,2,3,4,5,6 + 7에 대해 1,2,3등 복권
      */
     private LottoTickets makeLottoTickets() {
         List<LottoTicket> lottoTicketList = new LinkedList<>();
         lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 8, 9)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         return new LottoTickets(lottoTicketList);
     }
