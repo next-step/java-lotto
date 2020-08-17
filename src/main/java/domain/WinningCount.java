@@ -3,12 +3,16 @@ package domain;
 public class WinningCount {
     private int winningNumber;
 
-    public WinningCount() {
-        this(0);
+    private WinningCount(int winningNumber) {
+        this.winningNumber = winningNumber;
     }
 
-    public WinningCount(int winningNumber) {
-        this.winningNumber = winningNumber;
+    public static WinningCount of() {
+        return new WinningCount(0);
+    }
+
+    public static WinningCount of(int winningNumber) {
+        return new WinningCount(winningNumber);
     }
 
     public void increase() {

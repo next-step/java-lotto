@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import strategy.RandomNumberGenerator;
+import strategy.RandomLottoNumberGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +24,7 @@ public class LottoGameTest {
     void issue() {
         LottoGame lottoGame = new LottoGame(10000);
 
-        Lottos issuedLottos = lottoGame.issue(new RandomNumberGenerator());
+        Lottos issuedLottos = lottoGame.issue(new RandomLottoNumberGenerator());
 
         assertThat(issuedLottos.getLottos()).hasSize(10);
 

@@ -1,18 +1,29 @@
 package domain;
 
-import strategy.NumberGenerator;
+import strategy.LottoNumberGenerator;
 
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     private List<Integer> numbers;
 
-    public Lotto(NumberGenerator randomNumberGenerator) {
-        List<Integer> shuffleNumbers = randomNumberGenerator.generator();
-        Collections.sort(shuffleNumbers);
+    private Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
 
-        this.numbers = shuffleNumbers;
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto of(LottoNumberGenerator randomLottoNumberGenerator) {
+        return randomLottoNumberGenerator
+                .generator()
+                .stream()
+                .sorted()
+                .collect(collectingAndThen(toList(), Lotto::of));
     }
 
     public List<Integer> getNumbers() {

@@ -8,10 +8,14 @@ public class LottoResults {
 
     private List<LottoResult> lottoResults;
 
-    public LottoResults() {
-        this.lottoResults = Arrays.stream(Prize.values())
-                .map(it -> new LottoResult(it, 0))
-                .collect(Collectors.toList());
+    public LottoResults(List<LottoResult> lottoResults) {
+        this.lottoResults = lottoResults;
+    }
+
+    public static LottoResults of() {
+        return new LottoResults(Arrays.stream(Rank.values())
+                .map(LottoResult::of)
+                .collect(Collectors.toList()));
     }
 
     public void win(long hitNumber) {
@@ -20,15 +24,14 @@ public class LottoResults {
         }
 
         for (LottoResult result : lottoResults) {
-            result.winning(hitNumber);
+            result.win(hitNumber);
         }
     }
 
     public int getTotalPrizeMoney() {
         return lottoResults.stream()
                 .map(LottoResult::calculateWinningMoney)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     public List<LottoResult> getLottoResults() {

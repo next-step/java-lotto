@@ -2,7 +2,7 @@ package strategy;
 
 import java.util.*;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     public static final int MAX_NUMBER_BOUND = 45;
     public static final int LOTTO_NUMBER = 6;

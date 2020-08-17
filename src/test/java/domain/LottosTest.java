@@ -16,7 +16,7 @@ public class LottosTest {
     @DisplayName("buyAmount에 맞추어 로또를 발행")
     @Test
     void lottos() {
-        Lottos lottos = new Lottos(1, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottos = Lottos.of(1, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottos.getLottos()).hasSize(1);
     }
@@ -25,9 +25,9 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("generateData")
     void getPrizes_invalidWinningNumber(List<Integer> input) {
-        Lottos lottos = new Lottos(1, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottos = Lottos.of(1, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThatThrownBy(() -> lottos.getPrizes(input)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> lottos.getLottoResult(input)).isInstanceOf(RuntimeException.class);
     }
 
     static Stream<Arguments> generateData() {

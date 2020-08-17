@@ -3,6 +3,6 @@ package strategy;
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberGenerator {
+public interface LottoNumberGenerator {
     List<Integer> generator();
 }

@@ -1,6 +1,6 @@
 package domain;
 
-import strategy.RandomNumberGenerator;
+import strategy.RandomLottoNumberGenerator;
 import util.CalculatorUtil;
 
 public class LottoGame {
@@ -17,7 +17,7 @@ public class LottoGame {
         return buyAmount;
     }
 
-    public Lottos issue(RandomNumberGenerator randomNumberGenerator) {
-        return new Lottos(buyAmount, randomNumberGenerator);
+    public Lottos issue(RandomLottoNumberGenerator randomNumberGenerator) {
+        return Lottos.of(buyAmount, randomNumberGenerator);
     }
 }

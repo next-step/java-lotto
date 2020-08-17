@@ -10,7 +10,7 @@ public class WinningCountTest {
     @DisplayName("WinningCount의 수를 증가")
     @Test
     void increase() {
-        WinningCount winningCount = new WinningCount();
+        WinningCount winningCount = WinningCount.of();
 
         winningCount.increase();
 
@@ -20,7 +20,7 @@ public class WinningCountTest {
     @DisplayName("WinningCount에 money를 넣어 상금을 계산")
     @Test
     void calculateWinningMoney() {
-        WinningCount winningCount = new WinningCount(10);
+        WinningCount winningCount = WinningCount.of(10);
 
         int result = winningCount.calculateWinningMoney(1000);
 
