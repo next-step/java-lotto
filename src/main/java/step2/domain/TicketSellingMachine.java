@@ -21,9 +21,10 @@ public class TicketSellingMachine {
     /**
      * 장당 티켓의 가격
      */
-    private static final int TICKET_PRICE = 1000;
+    public static final int TICKET_PRICE = 1000;
 
-    private TicketSellingMachine() {}
+    private TicketSellingMachine() {
+    }
 
     /**
      * 금액을 기준으로 티켓을 발권한다.
@@ -46,6 +47,17 @@ public class TicketSellingMachine {
      */
     private static final int getCount(final int money) {
         return money / TICKET_PRICE;
+    }
+
+    public static List<Ticket> buy(int ticketCount, List<List<Integer>> numbers) {
+        List<Ticket> collect = numbers.stream()
+                .map(TicketSellingMachine::ticketing)
+                .collect(Collectors.toList());
+
+        if (ticketCount != collect.size())
+            throw new IllegalArgumentException(String.format("구매 수량과 입력된 번호의 갯수가 다릅니다. 수량: %s, 일력 수랑: %s", ticketCount, collect.size()));
+
+        return collect;
     }
 
     /**

@@ -7,22 +7,32 @@ import step2.domain.TicketSellingMachine;
 import step2.lib.PrintMessage;
 import step2.view.InputScanner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         int spendingMoney = InputScanner.getInt("구입금액을 입력해 주세요.");
+        int directPurchaseCount = InputScanner.getInt("수동으로 구매할 로또 수를 입력해 주세요.");
+        List<List<Integer>> numbers = new ArrayList<>();
 
-        List<Ticket> tickets = TicketSellingMachine.buy(spendingMoney);
-        PrintMessage.print("%s개를 구매했습니다.\n", tickets.size());
+        PrintMessage.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int count = 0; count < directPurchaseCount; count++) {
+            numbers.add(InputScanner.getInts(""));
+        }
+        PrintMessage.println();
+
+        List<Ticket> ticketsBySelf = TicketSellingMachine.buy(directPurchaseCount, numbers);
+        List<Ticket> tickets = TicketSellingMachine.buy(spendingMoney - (directPurchaseCount * TicketSellingMachine.TICKET_PRICE));
+        PrintMessage.print("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n", ticketsBySelf.size(), tickets.size());
         PrintMessage.println();
 
         tickets.stream()
                 .forEach(ticket -> PrintMessage.println(ticket));
 
         PrintMessage.println();
-        List<Integer> winningNumbers = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> winningNumbers = InputScanner.getInts("지난 주 당첨 번호를 입력해 주세요.\n");
 
         PrintMessage.println();
         int bonusNumber = InputScanner.getInt("보너스 볼을 입력해 주세요.");

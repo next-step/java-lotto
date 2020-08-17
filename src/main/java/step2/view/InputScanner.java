@@ -34,7 +34,7 @@ public class InputScanner {
      * @return
      */
     public static List<Integer> getInts(String message) {
-        PrintMessage.println(message);
+        PrintMessage.print(message);
         return Arrays.stream(SCANNER.next().split(","))
                 .map(value -> Integer.parseInt(value.trim()))
                 .collect(Collectors.toList());
