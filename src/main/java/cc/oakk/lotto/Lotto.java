@@ -15,6 +15,13 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
+    public Rank compare(Lotto target) {
+        int matchingCount = (int) numbers.stream()
+                .filter(target.numbers::contains)
+                .count();
+        return Rank.getRankByMatchingCount(matchingCount);
+    }
+
     private static int throwIfBelowZero(int target) {
         if (target <= 0) {
             throw new IllegalArgumentException(String.format("%d is below zero.", target));
