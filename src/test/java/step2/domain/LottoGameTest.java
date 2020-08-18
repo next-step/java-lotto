@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step2.LottoException;
+import step2.constants.PrizeGrade;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -43,7 +44,7 @@ class LottoGameTest {
 	@ParameterizedTest
 	@MethodSource("provideTestingConfirmPrize")
 	void confirmPrize(List<LottoNumber> lottoNumbers, List<LottoNumber> prizeNumbers, int matchCount) {
-		assertThat(new LottoGame(lottoNumbers).confirmPrize(new LottoGame(prizeNumbers))).isEqualTo(new ConfirmResult(matchCount));
+		assertThat(new LottoGame(lottoNumbers).confirmPrize(new LottoGame(prizeNumbers))).isEqualTo(PrizeGrade.of(matchCount));
 	}
 
 	@DisplayName("toString 테스트")

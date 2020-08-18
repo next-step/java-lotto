@@ -25,8 +25,7 @@
 3. 로또 게임 출력 시 정렬해서 출력
 4. 줄바꿈 문자 System.lineSeparator()로 변경
 5. 긴 숫자에 언더스코어 적용해서 가독성 높이기 && 금액 필드 long으로 변경
-6. 구매 금액 입력시 최소 1000원 입력해야 함
+6. 구매 금액 입력시 최소 1000원 입력해야 함, PurchaseRequest의 이름을 PurchaseStandBy로 변경해 purchase 행위가 어색하지 않게 함
 7. 불필요한 ConfirmResult 클래스 삭제
 8. DisplayHere <-> ConfirmResults 간 책임이 뒤섞여 있는 코드 정리
-9. PurchaseRequest의 이름을 PurchaseStandBy로 변경해 purchase 행위가 어색하지 않게 함
-10. Input/OutputChannel getDefaultChannel 삭제
+9. Input/OutputChannel getDefaultChannel 삭제

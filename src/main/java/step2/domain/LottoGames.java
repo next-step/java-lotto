@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.constants.PrizeGrade;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,7 +26,7 @@ public class LottoGames {
 		return new ConfirmResults(getConfirmResults(lastWeekPrize));
 	}
 
-	private List<ConfirmResult> getConfirmResults(LottoGame lastWeekPrize) {
+	private List<PrizeGrade> getConfirmResults(LottoGame lastWeekPrize) {
 		return lottoGames.stream()
 				.map(lottoGame -> lottoGame.confirmPrize(lastWeekPrize))
 				.collect(Collectors.toList());

@@ -10,7 +10,7 @@ import static step2.configuration.LottoConfig.LOTTO_MIN_NUM;
 
 public class LottoGameFactory {
 
-	private static final List<LottoNumber> lottoNumberPool = IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM + 1)
+	private static final List<LottoNumber> lottoNumberPool = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
 																		.mapToObj(LottoNumber::new)
 																		.collect(Collectors.toList());
 
