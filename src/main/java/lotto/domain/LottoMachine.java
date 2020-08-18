@@ -1,16 +1,29 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    public List<Integer> generateLottoNumber() {
-        List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45)
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_END_NUMBER = 45;
+
+    private static List<Integer> lottoNumbers = new ArrayList<>();
+
+    private LottoMachine() {
+        lottoNumbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
                 .boxed().collect(Collectors.toList());
+    }
+
+    public static LottoMachine getInstance() {
+        return new LottoMachine();
+    }
+
+    public static Set<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 5);
+        return lottoNumbers.subList(0, 6).stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toSet());
     }
 }
