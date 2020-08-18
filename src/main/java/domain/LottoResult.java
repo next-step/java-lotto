@@ -40,4 +40,8 @@ public class LottoResult {
     public int getPrizeMoney() {
         return rank.getMoney();
     }
+
+    public Rank getRank() {
+        return rank;
+    }
 }
