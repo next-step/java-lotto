@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class PublishedLottoTicket {
 
@@ -12,10 +13,10 @@ public class PublishedLottoTicket {
         publishLottoTicket(lottoTicketCounts);
     }
 
-    private void publishLottoTicket(int lottoTicketCounts) {
+    public void publishLottoTicket(int lottoTicketCounts) {
         for (int i = 0; i < lottoTicketCounts; i++) {
-            Set<LottoNumber> manualLottoNumbers = LottoMachine.generateLottoNumber();
-            this.publishedLottoTicket.add(new LottoTicket(manualLottoNumbers));
+            Set<LottoNumber> lottoNumbers = LottoMachine.generateLottoNumber();
+            this.publishedLottoTicket.add(new LottoTicket(lottoNumbers));
         }
     }
 

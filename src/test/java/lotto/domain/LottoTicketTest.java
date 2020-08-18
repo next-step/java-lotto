@@ -13,6 +13,5 @@ public class LottoTicketTest {
         LottoMachine.getInstance();
         assertThatCode(() -> new LottoTicket(LottoMachine.generateLottoNumber()))
                 .doesNotThrowAnyException();
-
     }
 }
