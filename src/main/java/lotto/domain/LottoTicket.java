@@ -14,10 +14,10 @@ public class LottoTicket {
         return lottoTicketMaker.create();
     }
 
-    public int getMatchCountWith(List<LottoNumber> winningLottoNumbers) {
-        lottoNumbers.retainAll(winningLottoNumbers);
-
-        return lottoNumbers.size();
+    public long getMatchCountWith(List<LottoNumber> winningLottoNumbers) {
+        return lottoNumbers.stream()
+                .filter(winningLottoNumbers::contains)
+                .count();
     }
 
     public List<Integer> getNumbers() {

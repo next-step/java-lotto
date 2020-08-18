@@ -20,7 +20,7 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank of(int matchCount) {
+    public static LottoRank of(long matchCount) {
         return Stream.of(LottoRank.values())
                 .filter(lottoRank -> lottoRank.matchCount == matchCount)
                 .findFirst()

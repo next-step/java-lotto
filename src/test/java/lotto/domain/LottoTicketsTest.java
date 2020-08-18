@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
     private static final LottoTicketMaker LOTTO_TICKET_RANDOM_MAKER = new LottoTicketRandomMaker();
 
-    @DisplayName("로또 랜덤 생성 테스트")
+    @DisplayName("로또 구매금액에 따라 생성 테스트")
     @ParameterizedTest
     @CsvSource(value = {"5000:5", "20000:20", "210000:210"}, delimiter = ':')
     void create_tickets_random(String lottoMoney, int expectedBuyCount) {

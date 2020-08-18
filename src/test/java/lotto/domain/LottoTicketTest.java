@@ -52,7 +52,7 @@ public class LottoTicketTest {
     @MethodSource("makeWinningLotto")
     void getMatchCountWith(List<LottoNumber> winningLotto) {
         LottoTicket lottoTicket = LottoTicket.create(LOTTO_TICKET_RANDOM_MAKER);
-        int matchCount = lottoTicket.getMatchCountWith(winningLotto);
+        long matchCount = lottoTicket.getMatchCountWith(winningLotto);
 
         List<Integer> originLottoNumbers = lottoTicket.getNumbers();
         List<Integer> copiedLottoNumbers = new ArrayList<>(originLottoNumbers);
