@@ -4,6 +4,7 @@ import step1.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,8 +35,21 @@ public class Expression {
         return new Expression(numbers);
     }
 
-    public Stream<Integer> stream() {
-        return targetNumbers.stream();
+    public int calculate() {
+        return targetNumbers.stream().reduce(0, (acc, cur) -> acc += cur);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(targetNumbers, that.targetNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return targetNumbers.hashCode();
     }
 
     private static int throwIfNumberIsNegative(int target) {

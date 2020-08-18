@@ -16,13 +16,13 @@ public class ExpressionTest {
 
     @Test
     public void of() {
-        assertThat(Expression.of("3,5:2,3:4,0,2").stream())
-                .containsExactly(3, 5, 2, 3, 4, 0, 2);
+        assertThat(Expression.of("3,5:2,3:4,0,2"))
+                .isEqualTo(new Expression(Arrays.asList(3, 5, 2, 3, 4, 0, 2)));
     }
 
     @Test
     public void of_CustomDelimiter() {
-        assertThat(Expression.of("3@5@2@3@4@0@2", "@").stream())
-                .containsExactly(3, 5, 2, 3, 4, 0, 2);
+        assertThat(Expression.of("3@5@2@3@4@0@2", "@"))
+                .isEqualTo(new Expression(Arrays.asList(3, 5, 2, 3, 4, 0, 2)));
     }
 }
