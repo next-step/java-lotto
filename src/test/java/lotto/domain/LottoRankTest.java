@@ -22,10 +22,10 @@ public class LottoRankTest {
         );
     }
 
-    @DisplayName("")
+    @DisplayName("LottoRank 생성(of 메소드) 테스트")
     @ParameterizedTest
     @MethodSource("makeLottoRankData")
-    void name(int matchCount, LottoRank lottoRank) {
+    void of_test(int matchCount, LottoRank lottoRank) {
         assertThat(LottoRank.of(matchCount)).isEqualTo(lottoRank);
     }
 }
