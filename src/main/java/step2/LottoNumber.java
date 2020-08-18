@@ -19,6 +19,7 @@ public class LottoNumber {
 		Integer[] randomValues = new Integer[MAX_LOTTO_NUMBER];
 		Collections.shuffle(Arrays.asList(lottoValues));
 		System.arraycopy(lottoValues, 0, randomValues, 0, MAX_LOTTO_NUMBER);
+		Arrays.sort(randomValues);
 		return randomValues;
 	}
 }
