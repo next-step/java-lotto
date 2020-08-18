@@ -11,15 +11,10 @@ class LottoTicketsTest {
 
     private LottoTickets lottoTickets;
 
-    @BeforeEach
-    void setUp() {
-        lottoTickets = new LottoTickets();
-    }
-
     @Test
     @DisplayName("구매한 로또 복권 개수 확인")
     void purchasedLottoTicket() {
-        lottoTickets.purchasedLottoTicket(5);
+        lottoTickets = new LottoTickets(5);
         assertThat(lottoTickets.count()).isEqualTo(5);
     }
 

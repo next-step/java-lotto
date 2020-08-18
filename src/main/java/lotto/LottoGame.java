@@ -1,8 +1,11 @@
 package lotto;
 
 import lotto.domain.LottoService;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.view.InputView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -14,5 +17,8 @@ public class LottoGame {
         LottoService lottoService = new LottoService();
         int lottoTicketQuantity = lottoService.buyLottoTicket(lottoPrice);
         InputView.printLottoBuyQuantity(lottoTicketQuantity);
+
+        LottoTickets lottoTickets = new LottoTickets(lottoTicketQuantity);
+        InputView.printLottoTickets(lottoTickets);
     }
 }

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoTickets;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -14,6 +16,13 @@ public class InputView {
 
     public static void printLottoBuyQuantity(int quantity) {
         System.out.println(quantity + BUY_LOTTO_QUANTITY);
+    }
+
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        for (int i = 0; i < lottoTickets.count(); i++) {
+            System.out.println(lottoTickets.getLottoTicket(i));
+        }
+        System.out.println();
     }
 
 }

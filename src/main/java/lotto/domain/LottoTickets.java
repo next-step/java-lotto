@@ -7,8 +7,9 @@ public class LottoTickets {
 
     private List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
+    public LottoTickets(int gameCount) {
         this.lottoTickets = new ArrayList<>();
+        this.lottoTickets = purchasedLottoTicket(gameCount);
     }
 
     public List<LottoTicket> purchasedLottoTicket(int gameCount) {
@@ -16,6 +17,10 @@ public class LottoTickets {
             lottoTickets.add(new LottoTicket(new LottoNumbers()));
         }
         return lottoTickets;
+    }
+
+    public LottoTicket getLottoTicket(int index) {
+        return lottoTickets.get(index);
     }
 
     public long count() {
