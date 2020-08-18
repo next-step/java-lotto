@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -14,11 +14,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets of(int buyCount) {
-        List<LottoTicket> lottoTickets = Stream.iterate(0, buy -> buy + 1)
-                .limit(buyCount)
-                .map(buy -> LottoTicket.create())
-                .collect(Collectors.toList());
+    public static LottoTickets of(BuyCount buyCount, LottoTicketMaker lottoTicketMaker) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        while(buyCount.canBuy()) {
+            lottoTickets.add(LottoTicket.create(lottoTicketMaker));
+            buyCount.subtract();
+        }
 
         return new LottoTickets(lottoTickets);
     }

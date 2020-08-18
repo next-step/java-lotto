@@ -28,7 +28,7 @@ public class WinningResult {
                 .map(lottoRank -> lottoRank.getPrize() * lottoResultByRank.get(lottoRank))
                 .reduce(0L, Long::sum);
 
-        return totalPrize / (buyCount * LottoMoney.DEFAULT_LOTTO_MONEY_UNIT);
+        return totalPrize / (buyCount * BuyCount.DEFAULT_LOTTO_MONEY_UNIT);
     }
 
     public Long getRankCount(LottoRank rank) {

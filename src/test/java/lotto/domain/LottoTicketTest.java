@@ -19,10 +19,10 @@ public class LottoTicketTest {
     @DisplayName("로또 번호 랜덤 생성 테스트")
     @Test
     void create() {
-        LottoTicket lottoTicket = LottoTicket.create();
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketRandomMaker());
         List<Integer> lottoNumbers = lottoTicket.getNumbers();
 
-        assertThat(lottoNumbers).hasSize(LottoTicket.DEFAULT_LOTTO_NUMBER_COUNT);
+        assertThat(lottoNumbers).hasSize(LottoTicketMaker.DEFAULT_LOTTO_NUMBER_COUNT);
         assertThat(lottoNumbers.stream()
                 .filter(number -> number > LottoNumber.MAX_VALUE || number < LottoNumber.MIN_VALUE)
                 .findAny()).isEmpty();
@@ -32,7 +32,7 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("makeWinningLotto")
     void getMatchCountWith(List<LottoNumber> winningLotto) {
-        LottoTicket lottoTicket = LottoTicket.create();
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketRandomMaker());
         int matchCount = lottoTicket.getMatchCountWith(winningLotto);
 
         List<Integer> originLottoNumbers = lottoTicket.getNumbers();

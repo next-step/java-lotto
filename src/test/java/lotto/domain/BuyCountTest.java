@@ -8,38 +8,38 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoMoneyTest {
+public class BuyCountTest {
 
     @DisplayName("로또 구입 금액 정상 입력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"12000", "1000"})
-    void create(String money) {
-        assertThatCode(() -> LottoMoney.of(money))
+    void of(String money) {
+        assertThatCode(() -> BuyCount.of(money))
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("로또 구입 금액 비정상 입력 (1000단위) 테스트")
+    @DisplayName("로또 구입 금액 1000단위 아닌 입력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"333", "10", "11001"})
-    void create_invalid_money_unit(String money) {
+    void of_invalid_money_unit(String money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMoney.of(money))
+                .isThrownBy(() -> BuyCount.of(money))
                 .withMessage(LottoExceptionMessage.INVALID_MONEY_UNIT);
     }
 
-    @DisplayName("로또 구입 금액 비정상 입력 (숫자 아닌 문자 입력) 테스트")
+    @DisplayName("로또 구입 금액 숫자 아닌 문자 입력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"O", "얼마샀더라", "흠"})
-    void create_not_number(String money) {
+    void of_not_number(String money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMoney.of(money))
+                .isThrownBy(() -> BuyCount.of(money))
                 .withMessage("숫자를 제대로 입력해주세요.");
     }
 
-    @DisplayName("로또 구매개수 확인 테스트")
+    @DisplayName("로또 구매 개수 - 구매 가능 여부 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"4000,4", "333000,333", "1000,1"})
-    void getBuyCount(String lottoMoney, int buyCount) {
-        assertThat(LottoMoney.of(lottoMoney).getBuyCount()).isEqualTo(buyCount);
+    @CsvSource(value = {"4000,true", "333000,true", "1000,true", "0,false"})
+    void getBuyCount(String lottoMoney, boolean canBuy) {
+        assertThat(BuyCount.of(lottoMoney).canBuy()).isEqualTo(canBuy);
     }
 }

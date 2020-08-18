@@ -28,7 +28,7 @@ public class WinningLotto {
     }
 
     private static void validLottoNumberCount(List<LottoNumber> winningLottoNumbers) {
-        if (winningLottoNumbers.size() != LottoTicket.DEFAULT_LOTTO_NUMBER_COUNT) {
+        if (winningLottoNumbers.size() != LottoTicketMaker.DEFAULT_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT);
         }
     }
