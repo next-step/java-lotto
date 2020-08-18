@@ -9,8 +9,6 @@ public class LottoResult {
     private final LottoResultNumber lottoResultNumber;
     private final WinningCountMap winningCountMap;
 
-    private final double earningsRate;
-
     public LottoResult(int money, List<LottoNumber> lottoNumberList, LottoResultNumber lottoResultNumber) {
 
         this.money = money;
@@ -19,7 +17,6 @@ public class LottoResult {
         this.lottoResultNumber = lottoResultNumber;
 
         matchNumbersCheck();
-        this.earningsRate = calculateEarningsRate();
     }
 
     private void matchNumbersCheck() {
@@ -41,13 +38,9 @@ public class LottoResult {
         return winningCountMap;
     }
 
-    private double calculateEarningsRate() {
+    public double calculateEarningsRate() {
 
         int earningMoney = winningCountMap.getAllWinningMoney();
         return (double)earningMoney / (double)money;
-    }
-
-    public double getEarningsRate() {
-        return earningsRate;
     }
 }

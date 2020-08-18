@@ -71,7 +71,6 @@ public class Ticket {
     public String toString() {
         return numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)
-                ) + " / " + bonus;
+                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)) + " / " + bonus;
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class WinningCountMap {
         map.put(Rank.THIRD, 0);
         map.put(Rank.SECOND, 0);
         map.put(Rank.FIRST, 0);
+        Collections.unmodifiableMap(map);
     }
 
     public void addCount(Rank rank) {

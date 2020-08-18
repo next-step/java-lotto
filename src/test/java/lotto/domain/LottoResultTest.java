@@ -31,27 +31,8 @@ class LottoResultTest {
         lottoResult = new LottoResult(10000, lottoNumberList, lottoResultNumber);
     }
 
-//    @Test
-//    void lottoResultTest() {
-//        assertEquals(lottoResult.getWinningCount(3), 0);
-//        assertEquals(lottoResult.getWinningCount(4), 1);
-//        assertEquals(lottoResult.getWinningCount(5), 1);
-//        assertEquals(lottoResult.getWinningCount(6), 1);
-//    }
-//
-//    @Test
-//    void wrongWinningCount() {
-//        assertThatIllegalArgumentException().isThrownBy(() ->
-//            lottoResult.getWinningCount(-1)
-//        ).withMessage(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);
-//
-//        assertThatIllegalArgumentException().isThrownBy(() ->
-//                lottoResult.getWinningCount(7)
-//        ).withMessage(StringResources.ERR_WRONG_RANGE_RESULT_NUMBER);
-//    }
-
     @Test
     public void earningsRateTest() {
-        assertEquals(200155, lottoResult.getEarningsRate());
+        assertEquals(200155, lottoResult.calculateEarningsRate());
     }
 }

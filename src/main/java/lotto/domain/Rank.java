@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import common.StringResources;
-
 import java.util.Arrays;
 import java.util.Optional;
 
