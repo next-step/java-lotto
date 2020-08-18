@@ -3,11 +3,8 @@ package step2.constants;
 import step2.LottoException;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public enum RateOfReturn {
 
@@ -18,9 +15,6 @@ public enum RateOfReturn {
 	private final String message;
 
 	private final Predicate<Double> getRateOfReturn;
-
-	private static final Map<Predicate<Double>, RateOfReturn> valuesMap = Arrays.stream(RateOfReturn.values())
-																			.collect(Collectors.toMap(rateOfReturn -> rateOfReturn.getRateOfReturn, Function.identity()));
 
 	RateOfReturn(String message, Predicate<Double> getRateOfReturn) {
 		this.message = message;
@@ -34,10 +28,8 @@ public enum RateOfReturn {
 
 	private static Optional<RateOfReturn> make(double rateOfReturn) {
 
-		return valuesMap.entrySet()
-				.stream()
-				.filter(entry -> entry.getKey().test(rateOfReturn))
-				.map(entry -> entry.getValue())
+		return Arrays.stream(RateOfReturn.values())
+				.filter(value -> value.getRateOfReturn.test(rateOfReturn))
 				.findFirst();
 	}
 
