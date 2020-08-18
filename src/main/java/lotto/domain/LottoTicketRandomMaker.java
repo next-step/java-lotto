@@ -23,6 +23,6 @@ public class LottoTicketRandomMaker implements LottoTicketMaker {
                 .limit(DEFAULT_LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
 
-        return LottoTicket.of(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
     }
 }
