@@ -10,8 +10,6 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    public static final int MIN_HIT_NUMBER = 3;
-
     private final int hitNumber;
     private final int money;
 
