@@ -35,7 +35,7 @@ public class ValidateUtilTest {
     }
 
 
-    static Stream<Arguments> generateData() {
+    private static Stream<Arguments> generateData() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3)),
                 Arguments.of(Arrays.asList(1, 1, 2, 3, 4, 5)),
