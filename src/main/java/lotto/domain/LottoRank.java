@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -19,7 +21,7 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchCount) {
-        return LottoRank.stream()
+        return Stream.of(LottoRank.values())
                 .filter(lottoRank -> lottoRank.matchCount == matchCount)
                 .findFirst()
                 .orElse(LottoRank.DROP);
@@ -33,9 +35,10 @@ public enum LottoRank {
         return prize;
     }
 
-    public static Stream<LottoRank> stream() {
+    public static List<LottoRank> getLowPrizeOrderedLottoRanks() {
         return Stream.of(LottoRank.values())
-                .sorted(Comparator.comparingInt(rank -> rank.matchCount));
+                .sorted(Comparator.comparingInt(rank -> rank.matchCount))
+                .collect(Collectors.toList());
     }
 
 }

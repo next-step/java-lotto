@@ -49,7 +49,8 @@ public class OutputView {
     }
 
     private static void printLottoResultByRank(WinningResult winningResult) {
-        LottoRank.stream()
+        LottoRank.getLowPrizeOrderedLottoRanks()
+                .stream()
                 .filter(rank -> rank.getMatchCount() > DEFAULT_SHOW_MATCH_COUNT)
                 .map(rank -> String.format(WINNING_RESULT_MESSAGE,
                         rank.getMatchCount(),
