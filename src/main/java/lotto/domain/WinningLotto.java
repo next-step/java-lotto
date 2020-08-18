@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
 
     private List<LottoNumber> winningLottoNumbers;
 
@@ -18,6 +18,7 @@ public class WinningLotto {
 
     public static WinningLotto of(String lottoNumbers) {
         List<LottoNumber> winningLottoNumbers = Arrays.stream(lottoNumbers.split(LOTTO_NUMBER_DELIMITER))
+                .map(String::trim)
                 .map(StringUtils::toNumber)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
