@@ -8,7 +8,7 @@ public class LottoKioskTest {
 
 	@Test
 	public void issueTest() {
-		Lottos lottos = LottoKiosk.issue("14000");
+		Lottos lottos = LottoKiosk.issue(LottoPayAmounts.of("14000"));
 		assertThat(lottos.getPurchaseLottoCount()).isEqualTo(14);
 	}
 }

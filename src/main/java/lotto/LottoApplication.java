@@ -8,7 +8,8 @@ import lotto.result.Statistics;
 public class LottoApplication {
 
 	public static void main(String[] args) {
-		Lottos lottosOfCustomer = LottoKiosk.issue(InputView.inputPurchase());
+		LottoPayAmounts lottoPayAmounts = LottoPayAmounts.of(InputView.inputPurchase());
+		Lottos lottosOfCustomer = LottoKiosk.issue(lottoPayAmounts);
 		OutputView.outputPurchaseLottos(lottosOfCustomer);
 
 		LottoNumbers winningNumbers = WinningFactory.create(InputView.inputWinning());

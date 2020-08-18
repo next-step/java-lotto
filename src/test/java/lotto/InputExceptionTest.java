@@ -22,11 +22,11 @@ public class InputExceptionTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호는 6개를 입력해주세요.");
 
-		assertThatThrownBy(() -> LottoKiosk.issue("asdf"))
+		assertThatThrownBy(() -> LottoKiosk.issue(LottoPayAmounts.of("asdf")))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("구입금액은 숫자로 입력해주세요.");
 
-		assertThatThrownBy(() -> LottoKiosk.issue("100"))
+		assertThatThrownBy(() -> LottoKiosk.issue(LottoPayAmounts.of("100")))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("구입금액은 최소 1000원 이상 입력해주세요.");
 
