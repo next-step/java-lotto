@@ -9,29 +9,29 @@ import java.util.stream.IntStream;
 
 import static step2.configuration.LottoConfig.PRICE_PER_GAME;
 
-public class PurchaseRequest {
+public class PurchaseStandBy {
 
 	private static final int ZERO = 0;
 
-	private static final String PRICE_PER_GAME_SHOULD_OVER_ZERO = "로또 게임당 가격은 0원보다 비싸야 합니다.";
+	private static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 
 	private final int purchasePrice;
 
 	private final int numberOfGames;
 
-	public PurchaseRequest(int purchasePrice) {
+	public PurchaseStandBy(int purchasePrice) {
 		this.purchasePrice = purchasePrice;
 		this.numberOfGames = computeNumberOfGames(purchasePrice, PRICE_PER_GAME);
 	}
 
-	public PurchaseRequest(int purchasePrice, int numberOfGames) {
+	public PurchaseStandBy(int purchasePrice, int numberOfGames) {
 		this.purchasePrice = purchasePrice;
 		this.numberOfGames = numberOfGames;
 	}
 
 	private int computeNumberOfGames(int purchasePrice, int pricePerGame) {
-		if(pricePerGame <= ZERO) {
-			throw new LottoException(PRICE_PER_GAME_SHOULD_OVER_ZERO);
+		if (purchasePrice < pricePerGame) {
+			throw new LottoException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, pricePerGame));
 		}
 		return purchasePrice / pricePerGame;
 	}
@@ -45,7 +45,7 @@ public class PurchaseRequest {
 	}
 
 	private List<LottoGame> generateLottoGames() {
-		return IntStream.range(ZERO,numberOfGames)
+		return IntStream.range(ZERO, numberOfGames)
 						.mapToObj(index -> LottoGameFactory.getNewLottoGame())
 						.collect(Collectors.toList());
 	}
@@ -54,7 +54,7 @@ public class PurchaseRequest {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		PurchaseRequest that = (PurchaseRequest) o;
+		PurchaseStandBy that = (PurchaseStandBy) o;
 		return purchasePrice == that.purchasePrice &&
 				numberOfGames == that.numberOfGames;
 	}
