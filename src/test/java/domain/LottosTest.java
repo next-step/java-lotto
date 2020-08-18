@@ -1,5 +1,7 @@
 package domain;
 
+import exception.InvalidRangeNumberException;
+import exception.InvalidWinningNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,5 +43,21 @@ public class LottosTest {
         );
 
         assertThatThrownBy(() -> lottos.getLottoResult(input, 1)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void getPrizes_invalidBonusNumber() {
+        Lottos lottos = Lottos.of(1, () -> Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))
+        );
+
+        assertThatThrownBy(() -> lottos.getLottoResult("1,2,3,4,5,6", 1))
+                .isInstanceOf(InvalidWinningNumberException.class);
+
     }
 }
