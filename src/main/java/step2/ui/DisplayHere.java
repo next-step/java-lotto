@@ -1,10 +1,14 @@
 package step2.ui;
 
-import step2.constants.RateOfReturn;
+import step2.constants.PrizeGrade;
 import step2.domain.ConfirmResults;
 import step2.domain.LottoGames;
-import step2.domain.PurchaseRequest;
+import step2.domain.PurchaseStandBy;
 import step2.ui.output.OutputChannel;
+
+import java.util.Comparator;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static step2.constants.MessageConstant.*;
 
@@ -13,7 +17,7 @@ public class DisplayHere {
 	private final OutputChannel outputChannel;
 
 	public DisplayHere() {
-		this.outputChannel = OutputChannel.getDefaultChannel();
+		this.outputChannel = OutputChannel.getSystemOutChannel();
 	}
 
 	public void printPurchasedGames(LottoGames lottoGames) {
@@ -23,15 +27,20 @@ public class DisplayHere {
 		outputChannel.printLine(NEW_LINE);
 	}
 
-	public void printPrizeStatistics(PurchaseRequest purchaseRequest, ConfirmResults confirmResults) {
+	public void printPrizeStatistics(PurchaseStandBy purchaseStandBy, ConfirmResults confirmResults) {
 		outputChannel.printLine(PRIZE_STATISTICS_HEADER);
-		outputChannel.printLine(confirmResults.getStatistics());
-		outputChannel.printLine(computeRateOfReturn(purchaseRequest, confirmResults));
+		outputChannel.printLine(getReportOfStatisticsEachGroup(confirmResults.getGroupedByPrizeGrade()));
+		outputChannel.printLine(confirmResults.computeRateOfReturn(purchaseStandBy));
 	}
 
-	private String computeRateOfReturn(PurchaseRequest purchaseRequest, ConfirmResults confirmResults) {
-		int prizeRewardSum = confirmResults.getPrizeRewardSum();
-		double rateOfReturn = (double) prizeRewardSum / (double) purchaseRequest.getPurchasePrice();
-		return String.format(RATE_OF_RETURN_FORMAT, rateOfReturn, RateOfReturn.of(rateOfReturn).getMessage());
+	private String getReportOfStatisticsEachGroup(Map<PrizeGrade, Integer> group) {
+		return group.entrySet()
+				.stream()
+				.sorted(Comparator.comparing(entry -> entry.getKey().getPrintOrder()))
+				.map(entry -> {
+					PrizeGrade prizeGrade = entry.getKey();
+					return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getReward(), entry.getValue());
+				})
+				.collect(Collectors.joining(NEW_LINE));
 	}
 }
