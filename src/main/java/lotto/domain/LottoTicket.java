@@ -55,4 +55,10 @@ public class LottoTicket {
         return lottoTicket.stream()
                 .count();
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoTicket);
+    }
+
 }
