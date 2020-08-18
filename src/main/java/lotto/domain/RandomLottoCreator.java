@@ -9,26 +9,27 @@ import java.util.stream.Stream;
 
 public class RandomLottoCreator {
 
-    private static final List<Integer> ORIGINAL_LOTTO_NUMBERS =
-            Stream.iterate(1, i -> i + 1)
-                    .limit(45)
-                    .collect(Collectors.toList());
-
+    public static final int LOTTO_PRICE = 1000;
     private static final Random RANDOM_INSTANCE = new Random();
+
+    private static final List<Integer> ORIGINAL_LOTTO_NUMBERS =
+            Stream.iterate(Ticket.LOTTO_MINIMUM_NUMBER, i -> i + 1)
+                    .limit(Ticket.LOTTO_MAXIMUM_NUMBER)
+                    .collect(Collectors.toList());
 
     public static Ticket createTicket() {
 
         Collections.shuffle(ORIGINAL_LOTTO_NUMBERS, RANDOM_INSTANCE);
         return new Ticket(
                 ORIGINAL_LOTTO_NUMBERS.subList(0, Ticket.LOTTO_NUMBERS_SIZE),
-                ORIGINAL_LOTTO_NUMBERS.get(6));
+                ORIGINAL_LOTTO_NUMBERS.get(Ticket.LOTTO_NUMBERS_SIZE));
     }
 
     public static List<LottoNumber> createLottoList(int money) {
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
-        for (int i = 0; i < money / 1000; i++) {
+        for (int i = 0; i < money / LOTTO_PRICE; i++) {
             Collections.shuffle(ORIGINAL_LOTTO_NUMBERS, RANDOM_INSTANCE);
             lottoNumberList.add(new LottoNumber(createTicket()));
         }

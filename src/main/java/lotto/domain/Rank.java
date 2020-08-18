@@ -12,6 +12,8 @@ public enum Rank {
     FIFTH(3, false, 5_000),
     MISS(0, false, 0);
 
+    private static final int SECOND_RANK_MATCH_COUNT = 5;
+
     private final int matchCount;
     private final boolean matchBonus;
     private final int winningMoney;
@@ -24,7 +26,7 @@ public enum Rank {
 
     public static Rank of(int matchCount, boolean matchBonus) {
 
-        if (matchCount == 5 && matchBonus) {
+        if (matchCount == SECOND_RANK_MATCH_COUNT && matchBonus) {
             return SECOND;
         }
 

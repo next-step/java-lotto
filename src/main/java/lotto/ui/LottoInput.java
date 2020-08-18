@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class LottoInput {
 
     private static final String DELIMITER = ", ";
+    private static final int ZERO = 0;
 
     public static final int LOTTO_PRICE = 1000;
 
@@ -31,13 +32,13 @@ public class LottoInput {
     }
 
     private void verifyPositiveMoney(int money) {
-        if (money <= 0) {
+        if (money <= ZERO) {
             throw new IllegalArgumentException(StringResources.ERR_MUST_BUY);
         }
     }
 
     private void verifyMoneyUnit(int money) {
-        if (money % LOTTO_PRICE != 0) {
+        if (money % LOTTO_PRICE != ZERO) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_UNIT);
         }
     }
@@ -67,7 +68,7 @@ public class LottoInput {
     }
 
     private void verifySplitArray(String[] split) {
-        if (split.length != 6) {
+        if (split.length != Ticket.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(StringResources.ERR_WRONG_RESULT_INPUT);
         }
     }

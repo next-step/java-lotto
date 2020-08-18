@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
 
 public class LottoGame {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final int money;
     private List<LottoNumber> lottoNumberList;
 
@@ -21,7 +23,7 @@ public class LottoGame {
 
     public void buy() {
 
-        ResultView.print((money / 1000) + StringResources.MSG_BUY_QUANTITY);
+        ResultView.print((money / LOTTO_PRICE) + StringResources.MSG_BUY_QUANTITY);
 
         this.lottoNumberList = RandomLottoCreator.createLottoList(money);
 

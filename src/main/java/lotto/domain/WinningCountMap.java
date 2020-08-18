@@ -6,15 +6,17 @@ import java.util.Map;
 
 public class WinningCountMap {
 
+    private final int COUNT_INITIAL_VALUE = 0;
+
     private final Map<Rank, Integer> map;
 
     public WinningCountMap() {
         map = new LinkedHashMap<>();
-        map.put(Rank.FIFTH, 0);
-        map.put(Rank.FOURTH, 0);
-        map.put(Rank.THIRD, 0);
-        map.put(Rank.SECOND, 0);
-        map.put(Rank.FIRST, 0);
+        map.put(Rank.FIFTH, COUNT_INITIAL_VALUE);
+        map.put(Rank.FOURTH, COUNT_INITIAL_VALUE);
+        map.put(Rank.THIRD, COUNT_INITIAL_VALUE);
+        map.put(Rank.SECOND, COUNT_INITIAL_VALUE);
+        map.put(Rank.FIRST, COUNT_INITIAL_VALUE);
         Collections.unmodifiableMap(map);
     }
 

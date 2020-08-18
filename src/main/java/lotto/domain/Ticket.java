@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 public class Ticket {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    public static final int LOTTO_MINIMUM_NUMBER = 1;
+    public static final int LOTTO_MAXIMUM_NUMBER = 45;
 
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String POSTFIX = "]";
+    public static final String SLASH = " / ";
 
     private final Set<Integer> numbers;
     private final int bonus;
@@ -71,6 +72,6 @@ public class Ticket {
     public String toString() {
         return numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)) + " / " + bonus;
+                .collect(Collectors.joining(DELIMITER, PREFIX, POSTFIX)) + SLASH + bonus;
     }
 }
