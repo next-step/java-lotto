@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 import static step2.constants.MessageConstant.INPUT_SHOULD_INTEGER;
 
-public class SystemIn implements InputChannel{
+public class SystemIn implements InputChannel {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	protected SystemIn() {};
+	public SystemIn() {}
 
 	@Override
 	public int getIntValue() {
@@ -24,10 +24,6 @@ public class SystemIn implements InputChannel{
 
 	@Override
 	public String getStringValue() {
-		try {
-			return SCANNER.next();
-		} finally {
-			SCANNER.nextLine();
-		}
+		return SCANNER.nextLine();
 	}
 }
