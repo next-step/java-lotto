@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_BASE_START_NUMBER = 1;
-    private static final int LOTTO_BASE_END_NUMBER = 45;
+    public static final int LOTTO_BASE_START_NUMBER = 1;
+    public static final int LOTTO_BASE_END_NUMBER = 45;
     public static final String INVALID_LOTTO_NUMBER = "유효하지 않은 번호입니다.";
 
     private List<Integer> lottoNumbers;
