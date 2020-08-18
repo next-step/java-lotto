@@ -1,6 +1,7 @@
 package com.hskim.lotto.model;
 
 import com.hskim.lotto.exception.LottoExceptionMessage;
+import com.hskim.lotto.exception.LottoTicketingExceptionMessage;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class PurchasePrice {
 
     private void validatePrice(int purchasePrice) {
         if (purchasePrice % LottoTicket.LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
+            throw new IllegalArgumentException(LottoTicketingExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
         }
     }
 

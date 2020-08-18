@@ -6,14 +6,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final String PURCHASE_PHRASE = "구입금액을 입력해 주세요.";
-    private static final String WIN_PHRASE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_DELIMITER = ",";
     private static final String NEW_LINE = System.lineSeparator();
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final String BLANK_STRING = "";
+    private static final String PURCHASE_PHRASE = "구입금액을 입력해 주세요.";
+    private static final String WIN_PHRASE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_PHRASE = "보너스 볼을 입력해 주세요.";
+    private static final String MANUAL_TICKETING_PHRASE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final Scanner scanner = new Scanner(System.in);
 
     public void printPurchasePhrase() {
         System.out.println(PURCHASE_PHRASE);
@@ -47,5 +48,16 @@ public class LottoInputView {
         scanner.nextLine();
 
         return bonusNumber;
+    }
+
+    public void printManualTicketingPhrase() {
+        System.out.println(MANUAL_TICKETING_PHRASE);
+    }
+
+    public int getManualTicketingNum() {
+        int ticketingNum = scanner.nextInt();
+        scanner.nextLine();
+
+        return ticketingNum;
     }
 }
