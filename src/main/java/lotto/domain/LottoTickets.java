@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
@@ -29,12 +28,12 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public Stream<LottoTicket> stream() {
-        return this.lottoTickets.stream();
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
     public WinningResult getWinningResult(WinningLotto winningLotto) {
-        return this.lottoTickets.stream()
+        return lottoTickets.stream()
                 .map(winningLotto::getWinningRank)
                 .collect(collectingAndThen(groupingBy(Function.identity(), counting()), WinningResult::of));
     }

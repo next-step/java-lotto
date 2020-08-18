@@ -28,7 +28,8 @@ public class OutputView {
     }
 
     private static List<String> getLottoNumberResult(LottoTickets lottoTickets) {
-        return lottoTickets.stream()
+        return lottoTickets.getLottoTickets()
+                .stream()
                 .map(LottoTicket::getNumbers)
                 .map(OutputView::makeNumbersToString)
                 .collect(Collectors.toList());
