@@ -1,10 +1,11 @@
 package step2.ui;
 
-import step2.domain.PurchaseRequest;
 import step2.domain.LottoGame;
+import step2.domain.PurchaseStandBy;
 import step2.ui.input.InputChannel;
 import step2.ui.output.OutputChannel;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static step2.constants.MessageConstant.*;
@@ -16,43 +17,43 @@ public class OrderHere {
 	private final OutputChannel outputChannel;
 
 	public OrderHere() {
-		this.inputChannel = InputChannel.getDefaultChannel();
-		this.outputChannel = OutputChannel.getDefaultChannel();
+		this.inputChannel = InputChannel.getSystemInChannel();
+		this.outputChannel = OutputChannel.getSystemOutChannel();
 	}
 
-	public PurchaseRequest purchaseLottoGame() {
-		return new PurchaseRequest(retryUntilGettingRightValue(getPurchasingPrice()));
+	public PurchaseStandBy orderNewPurchasing() {
+		return new PurchaseStandBy(retryUntilGettingRightValue(getPurchasingPrice()));
 	}
 
 	public LottoGame receiveLastWeekPrize() {
 		return new LottoGame(retryUntilGettingRightValue(getPrizeNumbers()));
 	}
 
-	private Supplier<Integer> getPurchasingPrice() {
-		return () -> sayQuestionAndGetInt(PLEASE_INPUT_PURCHASING_PRICE);
+	private Supplier<Optional<Integer>> getPurchasingPrice() {
+		return () -> Optional.ofNullable(sayQuestionAndGetInt(PLEASE_INPUT_PURCHASING_PRICE));
 
 	}
 
-	private Supplier<String[]> getPrizeNumbers() {
-		return () -> sayQuestionAndGetStringArray(PLEASE_INPUT_LAST_WEEK_PRIZE);
+	private Supplier<Optional<String[]>> getPrizeNumbers() {
+		return () -> Optional.ofNullable(sayQuestionAndGetStringArray(PLEASE_INPUT_LAST_WEEK_PRIZE));
 	}
 
-	private <T> T retryUntilGettingRightValue(Supplier<T> supplier) {
-		T result;
+	private <T> T retryUntilGettingRightValue(Supplier<Optional<T>> supplier) {
+		Optional<T> result;
 
 		do {
 			result =  getSupplierValueOrElseNull(supplier);
-		} while(result == null);
+		} while (result == Optional.empty());
 
-		return result;
+		return result.get();
 	}
 
-	private <T> T getSupplierValueOrElseNull(Supplier<T> supplier) {
+	private <T> Optional<T> getSupplierValueOrElseNull(Supplier<Optional<T>> supplier) {
 		try {
 			return supplier.get();
 		} catch (IllegalArgumentException e) {
-			outputChannel.printLine(e.getMessage()+NEW_LINE);
-			return null;
+			outputChannel.printLine(e.getMessage() + NEW_LINE);
+			return Optional.empty();
 		}
 	}
 
