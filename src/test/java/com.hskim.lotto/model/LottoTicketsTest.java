@@ -22,7 +22,7 @@ public class LottoTicketsTest {
         assertThat(lottoTickets).isEqualTo(new LottoTickets(purchasePrice, numberMaker));
     }
 
-    @DisplayName("getTotalTicketPrice() 테스트")
+    @DisplayName("getTotalTicketPrice() 테스트 - 티켓 총가격 로직 검증")
     @Test
     void getTotalTicketPrice() {
         // given
@@ -38,7 +38,7 @@ public class LottoTicketsTest {
         assertThat(result).isEqualTo(expense);
     }
 
-    @DisplayName("getWinTableList() 테스트")
+    @DisplayName("getWinTableList() 테스트 - 티켓들에 해당하는 당첨 등수 list를 구하는 로직 검증")
     @Test
     void getWinTableList() {
         // given

@@ -23,7 +23,7 @@ public class LottoWinningTicketTest {
         assertThat(lottoWinningTicket).isEqualTo(new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
     }
 
-    @DisplayName("getWinningCondition() 테스트")
+    @DisplayName("getWinningCondition() 테스트 - 로또 번호와 우승번호를 비교하여 몇 등에 당첨되었는지(WinningCondition) 구하는 로직 테스트")
     @ParameterizedTest
     @MethodSource("provideTicketAndWiningCondition")
     void getWinningCondition(LottoTicket lottoTicket, WinningCondition expected) {

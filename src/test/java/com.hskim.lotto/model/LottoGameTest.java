@@ -24,7 +24,7 @@ public class LottoGameTest {
         assertThat(lottoGame).isEqualTo(new LottoGame(lottoTickets, winningTicket));
     }
 
-    @DisplayName("drawLotteryTicket() 테스트")
+    @DisplayName("drawLotteryTicket() 테스트 - 로또 번호 추첨 동작 검증")
     @Test
     void drawLotteryTicket() {
         // given

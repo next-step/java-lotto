@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoWinTableTest {
 
-    @DisplayName("find() 테스트")
+    @DisplayName("find() 테스트 - 우승 조건 (WinningCondition)에 맞는 등수를 찾느 로직 검증")
     @ParameterizedTest
     @MethodSource("provideWinTableAndCondition")
     void find(WinningCondition winningCondition, Optional<LottoWinTable> expected) {
