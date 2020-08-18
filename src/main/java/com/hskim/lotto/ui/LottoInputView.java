@@ -13,13 +13,17 @@ public class LottoInputView {
     private static final String NEW_LINE = System.lineSeparator();
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final String BLANK_STRING = "";
+    private static final String BONUS_BALL_PHRASE = "보너스 볼을 입력해 주세요.";
 
     public void printPurchasePhrase() {
         System.out.println(PURCHASE_PHRASE);
     }
 
-    public String getPurchasePriceFromInput() {
-        return scanner.nextLine();
+    public int getPurchasePriceFromInput() {
+        int purchasePrice = scanner.nextInt();
+        scanner.nextLine();
+
+        return purchasePrice;
     }
 
     public void printWinPhrase() {
@@ -32,5 +36,16 @@ public class LottoInputView {
                 .split(INPUT_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public void printBonusBallPhrase() {
+        System.out.println(BONUS_BALL_PHRASE);
+    }
+
+    public int getBonusNumber() {
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        return bonusNumber;
     }
 }

@@ -17,9 +17,18 @@
 - [x] 음수가 들어오면 Runtime Exception
 - [x] 숫자가 1개면 그 숫자 return
 
+step01 pr : https://github.com/next-step/java-lotto/pull/708
+
 ## STEP02 로또(자동)
 ### Todo
 - [x] 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다. (로또 1장의 가격은 1000원 이다.)
 - [x] 로또번호를 생성한다. (로또 번호는 1~45의 중복되지않는 6개의 숫자이다.)
 - [x] 당첨 번호를 입력받아 당첨 통계를 구해 출력한다. 
 - [x] 수익률을 구해 출력한다.
+
+step02 pr : https://github.com/next-step/java-lotto/pull/724
+
+## STEP03 로또(2등)
+### Todo
+- [x] 2등을 위해 추가 번호를 하나 더 추첨한다.
+- [x] 당첨 통계에도 추가되어야 한다.

@@ -3,11 +3,11 @@ package com.hskim.lotto.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FixedNumberMaker implements NumberMaker {
+public class FixedLottoNumberMaker implements LottoNumberMaker {
     @Override
-    public List<Integer> makeNumbers(List<Integer> numberPool, int size) {
+    public List<Integer> makeNumbers(int size) {
 
-        return numberPool.stream()
+        return NUMBER_POOL.stream()
                 .limit(size)
                 .collect(Collectors.toList());
     }

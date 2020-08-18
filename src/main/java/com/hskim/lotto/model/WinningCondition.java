@@ -5,9 +5,11 @@ import java.util.Objects;
 public class WinningCondition {
 
     private int matchingNumbers;
+    private boolean isMatchBonusBall;
 
-    public WinningCondition(int matchingNumbers) {
+    public WinningCondition(int matchingNumbers, boolean isMatchBonusBall) {
         this.matchingNumbers = matchingNumbers;
+        this.isMatchBonusBall = isMatchBonusBall;
     }
 
     @Override
@@ -15,11 +17,12 @@ public class WinningCondition {
         if (this == o) return true;
         if (!(o instanceof WinningCondition)) return false;
         WinningCondition that = (WinningCondition) o;
-        return matchingNumbers == that.matchingNumbers;
+        return matchingNumbers == that.matchingNumbers &&
+                isMatchBonusBall == that.isMatchBonusBall;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchingNumbers);
+        return Objects.hash(matchingNumbers, isMatchBonusBall);
     }
 }

@@ -16,7 +16,7 @@ public class LottoResultView {
     private static final String LOSS_ALERT_MESSAGE = "(기준이 " + (int) EarningRate.STANDARD_RATE
             + "이기 때문에 결과적으로 손해라는 의미임)";
     private static final String STATISTIC_STRING_JOINING_DELIMITER = "\n";
-    private static final String HYPHEN = "-";
+    private static final String HYPHEN = " - ";
     private static final String NUM_PHRASE = "개";
 
     public void printEarningRate(String earningRate, boolean isProfit) {
@@ -39,8 +39,8 @@ public class LottoResultView {
     }
 
     public void printStatisticResult(Map<LottoWinTable, Integer> winnerMap) {
-        System.out.println();
-        System.out.println(STATISTIC_PHRASE
+        System.out.println(NEW_LINE
+                + STATISTIC_PHRASE
                 + NEW_LINE
                 + UNDER_LINE
                 + NEW_LINE

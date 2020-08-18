@@ -11,9 +11,9 @@ public class WinningConditionTest {
     @Test
     void create() {
         // given
-        WinningCondition winningCondition = new WinningCondition(5);
+        WinningCondition winningCondition = new WinningCondition(5, false);
 
         // when & then
-        assertThat(winningCondition).isEqualTo(new WinningCondition(5));
+        assertThat(winningCondition).isEqualTo(new WinningCondition(5, false));
     }
 }

@@ -6,31 +6,25 @@ public class LottoGame {
 
     private LottoTickets lottoTickets;
     private LottoWinningTicket winningTicket;
-    private WinnerStatistics winnerStatistics = new WinnerStatistics();
-    private EarningRate earningRate;
+    private LottoGameResult lottoGameResult = new LottoGameResult();
 
     public LottoGame(LottoTickets lottoTickets, LottoWinningTicket winningTicket) {
         this.lottoTickets = lottoTickets;
         this.winningTicket = winningTicket;
     }
 
-    public void drawLots() {
-        lottoTickets.getWinTableList(winningTicket)
-                .forEach(winnerStatistics::putData);
-
-        earningRate = new EarningRate(winnerStatistics.getTotalPrizeAmount(), lottoTickets.getTotalTicketPrice());
+    public LottoGameResult drawLotteryTicket() {
+        makeStatistic();
+        calculateEarningRate();
+        return lottoGameResult;
     }
 
-    public Map<LottoWinTable, Integer> getWinnerMap() {
-        return winnerStatistics.getWinnerMap();
+    private void makeStatistic() {
+        lottoGameResult.putWinnerStatisticsData(lottoTickets.getWinTableList(winningTicket));
     }
 
-    public String getEarningRate() {
-        return earningRate.getEarningRate();
-    }
-
-    public boolean isProfit() {
-        return earningRate.isProfit();
+    private void calculateEarningRate() {
+        lottoGameResult.calculateEarningRate(lottoTickets.getTotalTicketPrice());
     }
 
     @Override
@@ -40,11 +34,11 @@ public class LottoGame {
         LottoGame lottoGame = (LottoGame) o;
         return Objects.equals(lottoTickets, lottoGame.lottoTickets) &&
                 Objects.equals(winningTicket, lottoGame.winningTicket) &&
-                Objects.equals(winnerStatistics, lottoGame.winnerStatistics);
+                Objects.equals(lottoGameResult, lottoGame.lottoGameResult);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoTickets, winningTicket, winnerStatistics);
+        return Objects.hash(lottoTickets, winningTicket, lottoGameResult);
     }
 }

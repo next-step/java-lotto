@@ -19,6 +19,7 @@ public class WinnerStatistics {
 
     private void setDefaultData() {
         Arrays.stream(LottoWinTable.values())
+                .sorted(Comparator.reverseOrder())
                 .forEach(this::putDefaultData);
     }
 
@@ -30,8 +31,10 @@ public class WinnerStatistics {
         winnerMap.put(winTable, 0);
     }
 
-    public void putData(LottoWinTable lottoWinTable) {
-        winnerMap.put(lottoWinTable, winnerMap.getOrDefault(lottoWinTable, 0) + 1);
+    public void putData(List<LottoWinTable> lottoWinTables) {
+        lottoWinTables.forEach(lottoWinTable -> {
+            winnerMap.put(lottoWinTable, winnerMap.getOrDefault(lottoWinTable, 0) + 1);
+        });
     }
 
     public Map<LottoWinTable, Integer> getWinnerMap() {

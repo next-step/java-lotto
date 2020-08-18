@@ -8,22 +8,13 @@ public class PurchasePrice {
 
     private int purchasePrice;
 
-    public PurchasePrice(String purchasePrice) {
-        validateNumeric(purchasePrice);
+    public PurchasePrice(int purchasePrice) {
         validatePrice(purchasePrice);
-        this.purchasePrice = Integer.parseInt(purchasePrice);
+        this.purchasePrice = purchasePrice;
     }
 
-    private void validateNumeric(String purchasePrice) {
-        try {
-            Integer.parseInt(purchasePrice);
-        } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException(LottoExceptionMessage.NON_NUMERICAL_VALUE.getMessage());
-        }
-    }
-
-    private void validatePrice(String purchasePrice) {
-        if (Integer.parseInt(purchasePrice) % LottoTicket.LOTTO_PRICE != 0) {
+    private void validatePrice(int purchasePrice) {
+        if (purchasePrice % LottoTicket.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(LottoExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
         }
     }

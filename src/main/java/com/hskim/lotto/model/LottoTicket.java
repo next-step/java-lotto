@@ -11,12 +11,12 @@ public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_PRICE = 1000;
 
-    private final List<Integer> lottoNumberList;
+    private final List<LottoNumber> lottoNumberList;
 
     public LottoTicket(List<Integer> lottoNumberList) {
         validateSize(lottoNumberList);
         validateDuplicate(lottoNumberList);
-        this.lottoNumberList = lottoNumberList;
+        this.lottoNumberList = LottoNumber.convertToLottoNumberList(lottoNumberList);
     }
 
     private void validateSize(List<Integer> lottoNumberList) {
@@ -33,10 +33,8 @@ public class LottoTicket {
         }
     }
 
-    public WinningCondition getWinningCondition(List<Integer> winningNumbers) {
-        return new WinningCondition((int) lottoNumberList.stream()
-                .filter(winningNumbers::contains)
-                .count());
+    public List<LottoNumber> getLottoNumberList() {
+        return lottoNumberList;
     }
 
     @Override

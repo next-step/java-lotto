@@ -1,22 +1,17 @@
 package com.hskim.lotto.model;
 
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private static final int LOW_BOUND = 1;
-    private static final int UPPER_BOUND = 45;
     private static final String LOTTO_TICKET_JOINING_DELIMITER = "\n";
-    private static final List<Integer> NUMBER_POOL = makeNumberPool();
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(PurchasePrice purchasePrice, NumberMaker numberMaker) {
+    public LottoTickets(PurchasePrice purchasePrice, LottoNumberMaker numberMaker) {
         this.lottoTickets = makeLottoTickets(purchasePrice, numberMaker);
     }
 
@@ -24,23 +19,16 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    private List<LottoTicket> makeLottoTickets(PurchasePrice purchasePrice, NumberMaker numberMaker) {
+    private List<LottoTicket> makeLottoTickets(PurchasePrice purchasePrice, LottoNumberMaker numberMaker) {
         GameNumber gameNumber = purchasePrice.getGameNum();
         List<LottoTicket> result = new LinkedList<>();
         while (gameNumber.isPlayable()) {
-            List<Integer> lottoNumbers = numberMaker.makeNumbers(NUMBER_POOL, LottoTicket.LOTTO_NUMBERS_SIZE);
+            List<Integer> lottoNumbers = numberMaker.makeNumbers(LottoTicket.LOTTO_NUMBERS_SIZE);
             result.add(new LottoTicket(lottoNumbers));
             gameNumber.playGame();
         }
 
         return result;
-    }
-
-    private static List<Integer> makeNumberPool() {
-        return IntStream
-                .rangeClosed(LOW_BOUND, UPPER_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     public String makeLottoTicketsString() {
@@ -63,11 +51,11 @@ public class LottoTickets {
     }
 
     private Optional<LottoWinTable> mapToWinnerTable(LottoWinningTicket winningTicket, LottoTicket lottoTicket) {
-        return winningTicket.findWinnerTable(lottoTicket);
+        return LottoWinTable.find(winningTicket.getWinningCondition(lottoTicket.getLottoNumberList()));
     }
 
-    public BigDecimal getTotalTicketPrice() {
-        return BigDecimal.valueOf(lottoTickets.size() * LottoTicket.LOTTO_PRICE);
+    public int getTotalTicketPrice() {
+        return lottoTickets.size() * LottoTicket.LOTTO_PRICE;
     }
 
     @Override

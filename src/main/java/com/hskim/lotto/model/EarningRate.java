@@ -6,13 +6,14 @@ import java.util.Objects;
 
 public class EarningRate {
     public static final double STANDARD_RATE = 1.0;
+    public static final int RESULT_VALUE_SCALE = 2;
 
     private String earningRate;
     private boolean isProfit;
 
     public EarningRate(BigDecimal income, BigDecimal expense) {
         validateExpense(expense);
-        this.earningRate = income.divide(expense, 2, RoundingMode.HALF_UP).toString();
+        this.earningRate = income.divide(expense, RESULT_VALUE_SCALE, RoundingMode.HALF_UP).toString();
         setProfit();
     }
 

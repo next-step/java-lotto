@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,8 +14,8 @@ public class LottoTicketsTest {
     @Test
     void create() {
         // given
-        NumberMaker numberMaker = new FixedNumberMaker();
-        PurchasePrice purchasePrice = new PurchasePrice("14000");
+        LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
+        PurchasePrice purchasePrice = new PurchasePrice(14000);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
         // when & then
@@ -27,13 +26,13 @@ public class LottoTicketsTest {
     @Test
     void getTotalTicketPrice() {
         // given
-        String expense = "14000";
-        NumberMaker numberMaker = new FixedNumberMaker();
+        int expense = 14000;
+        LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(expense);
         LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
 
         // when
-        String result = lottoTickets.getTotalTicketPrice().toString();
+        int result = lottoTickets.getTotalTicketPrice();
 
         // then
         assertThat(result).isEqualTo(expense);
@@ -44,7 +43,7 @@ public class LottoTicketsTest {
     void getWinTableList() {
         // given
         LottoTickets lottoTickets = new LottoTickets(makeLottoTickets());
-        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         List<LottoWinTable> expected = makeWinTables();
 
         // when
@@ -70,11 +69,11 @@ public class LottoTicketsTest {
 
         return Arrays.asList(
                 LottoWinTable.FIRST_PLACE,
-                LottoWinTable.SECOND_PLACE,
                 LottoWinTable.THIRD_PLACE,
                 LottoWinTable.FOURTH_PLACE,
-                LottoWinTable.FOURTH_PLACE,
-                LottoWinTable.FOURTH_PLACE
+                LottoWinTable.FIFTH_PLACE,
+                LottoWinTable.FIFTH_PLACE,
+                LottoWinTable.FIFTH_PLACE
         );
     }
 }

@@ -12,23 +12,26 @@ public class LottoSimulator {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
         LottoResultView lottoResultView = new LottoResultView();
-        LottoGame lottoGame;
         LottoTickets lottoTickets;
+        LottoGame lottoGame;
+        LottoGameResult lottoGameResult;
 
         lottoInputView.printPurchasePhrase();
-        String purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomNumberMaker());
+        int purchasePrice = lottoInputView.getPurchasePriceFromInput();
+        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomLottoNumberMaker());
 
         lottoResultView.printPurchaseNum(lottoTickets.getTicketsSize());
         lottoResultView.printString(lottoTickets.makeLottoTicketsString());
 
         lottoInputView.printWinPhrase();
         List<Integer> winningTicketNumbers = lottoInputView.getWinningTicketNumbers();
+        lottoInputView.printBonusBallPhrase();
+        int bonusNumber = lottoInputView.getBonusNumber();
 
-        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers));
-        lottoGame.drawLots();
+        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers, bonusNumber));
+        lottoGameResult = lottoGame.drawLotteryTicket();
 
-        lottoResultView.printStatisticResult(lottoGame.getWinnerMap());
-        lottoResultView.printEarningRate(lottoGame.getEarningRate(), lottoGame.isProfit());
+        lottoResultView.printStatisticResult(lottoGameResult.getStatisticMap());
+        lottoResultView.printEarningRate(lottoGameResult.getEarningRate(), lottoGameResult.isProfit());
     }
 }
