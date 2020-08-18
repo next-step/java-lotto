@@ -35,7 +35,7 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
-    public static int valueOf(LottoNumber lottoNumber) {
-        return lottoNumber.number;
+    public int getNumber() {
+        return number;
     }
 }

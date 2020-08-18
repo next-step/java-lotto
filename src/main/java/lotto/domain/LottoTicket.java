@@ -38,9 +38,9 @@ public class LottoTicket {
         return lottoNumbers.size();
     }
 
-    public static List<Integer> getNumbers(LottoTicket lottoTicket) {
-        return lottoTicket.lottoNumbers.stream()
-                .map(LottoNumber::valueOf)
+    public List<Integer> getNumbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 }

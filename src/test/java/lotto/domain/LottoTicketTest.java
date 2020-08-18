@@ -20,7 +20,7 @@ public class LottoTicketTest {
     @Test
     void create() {
         LottoTicket lottoTicket = LottoTicket.create();
-        List<Integer> lottoNumbers = LottoTicket.getNumbers(lottoTicket);
+        List<Integer> lottoNumbers = lottoTicket.getNumbers();
 
         assertThat(lottoNumbers).hasSize(LottoTicket.DEFAULT_LOTTO_NUMBER_COUNT);
         assertThat(lottoNumbers.stream()
@@ -35,11 +35,11 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.create();
         int matchCount = lottoTicket.getMatchCountWith(winningLotto);
 
-        List<Integer> originLottoNumbers = LottoTicket.getNumbers(lottoTicket);
+        List<Integer> originLottoNumbers = lottoTicket.getNumbers();
         List<Integer> copiedLottoNumbers = new ArrayList<>(originLottoNumbers);
 
         copiedLottoNumbers.removeAll(winningLotto.stream()
-                .map(LottoNumber::valueOf)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList()));
 
         int expectedMatchCount = originLottoNumbers.size() - copiedLottoNumbers.size();
