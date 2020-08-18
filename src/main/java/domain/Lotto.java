@@ -40,7 +40,7 @@ public class Lotto {
                 .reduce(0, Integer::sum);
     }
 
-    public boolean hasBunosNumber(int bonusNumber) {
+    public boolean hasBonusNumber(int bonusNumber) {
         return numbers.contains(LottoNumber.of(bonusNumber));
     }
 }
