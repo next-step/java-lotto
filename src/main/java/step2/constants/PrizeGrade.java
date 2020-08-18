@@ -8,21 +8,22 @@ import java.util.stream.Collectors;
 
 public enum PrizeGrade {
 
-	FIRST(6, 2000000000, 4),
-	SECOND(5, 1500000, 3),
-	THIRD(4, 50000, 2),
-	FOURTH(3, 5000, 1),
+	FIRST(6, 2_000_000_000, 4),
+	SECOND(5, 1_500_000, 3),
+	THIRD(4, 50_000, 2),
+	FOURTH(3, 5_000, 1),
 	FAIL(-1, 0, 999999999);
 
 	private final int matchCount;
 
-	private final int reward;
+	private final long reward;
 
 	private final int printOrder;
 
-	private static final Map<Integer, PrizeGrade> valuesMap = Arrays.stream(PrizeGrade.values()).collect(Collectors.toMap(prizeGrade -> prizeGrade.matchCount, Function.identity()));
+	private static final Map<Integer, PrizeGrade> valuesMap = Arrays.stream(PrizeGrade.values())
+																.collect(Collectors.toMap(prizeGrade -> prizeGrade.matchCount, Function.identity()));
 
-	PrizeGrade(int matchCount, int reward, int printOrder) {
+	PrizeGrade(int matchCount, long reward, int printOrder) {
 		this.matchCount = matchCount;
 		this.reward = reward;
 		this.printOrder = printOrder;
@@ -37,7 +38,7 @@ public enum PrizeGrade {
 		return matchCount;
 	}
 
-	public int getReward() {
+	public long getReward() {
 		return reward;
 	}
 
