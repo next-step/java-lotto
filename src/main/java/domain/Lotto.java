@@ -6,7 +6,6 @@ import study.ValidateUtil;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
@@ -33,10 +32,15 @@ public class Lotto {
                 .collect(toList());
     }
 
-    public long hasWinningNumber(List<Integer> winningNumbers) {
+    public int hasWinningNumber(List<Integer> winningNumbers) {
         return winningNumbers.stream()
                 .map(LottoNumber::of)
                 .filter(numbers::contains)
-                .count();
+                .map(e -> 1)
+                .reduce(0, Integer::sum);
+    }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(LottoNumber.of(bonusNumber));
     }
 }

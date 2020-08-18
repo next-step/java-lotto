@@ -2,6 +2,7 @@ package domain;
 
 import strategy.LottoNumberGenerator;
 import study.ValidateUtil;
+import util.SplitUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
+    private static final String DELIMITER = ",";
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
@@ -27,12 +29,13 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public LottoResults getLottoResult(List<Integer> winningNumbers) {
-        ValidateUtil.validateLottoNumberCount(winningNumbers);
+    public LottoResults getLottoResult(String numbers, int bonusNumber) {
+        List<Integer> winningNumbers = SplitUtil.splitToNumber(numbers, DELIMITER);
+        ValidateUtil.validateLottoWinningNumber(winningNumbers, bonusNumber);
 
         LottoResults result = LottoResults.of();
         for (Lotto lotto : lottos) {
-            result.win(lotto.hasWinningNumber(winningNumbers));
+            result.win(lotto.hasWinningNumber(winningNumbers), lotto.hasBonusNumber(bonusNumber));
         }
 
         return result;

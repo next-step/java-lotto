@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResults {
-    public static final int MINIMUM_HIT_NUMBER = 3;
 
     private List<LottoResult> lottoResults;
 
@@ -14,17 +13,14 @@ public class LottoResults {
 
     public static LottoResults of() {
         return new LottoResults(Arrays.stream(Rank.values())
+                .filter(it -> it != Rank.MISS)
                 .map(LottoResult::of)
                 .collect(Collectors.toList()));
     }
 
-    public void win(long hitNumber) {
-        if (hitNumber < MINIMUM_HIT_NUMBER) {
-            return;
-        }
-
+    public void win(int hitNumber, boolean matchBonus) {
         for (LottoResult result : lottoResults) {
-            result.win(hitNumber);
+            result.win(hitNumber, matchBonus);
         }
     }
 

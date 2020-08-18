@@ -5,7 +5,8 @@ import util.CalculatorUtil;
 
 public class ResultView {
     public static final String BUY_AMOUNT_MESSAGE = "개를 구매했습니다.";
-    public static final String PRIZE_MESSAGE = "%d개 일치 (%d원) - %d";
+    public static final String PRIZE_MESSAGE = "%d개 일치 (%d원) - %d\n";
+    public static final String SECOND_PRIZE_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d\n";
     public static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String RESULT_VIEW_MESSAGE = "당첨 통계\n---------";
 
@@ -37,11 +38,10 @@ public class ResultView {
 
         for (LottoResult value : prizes.getLottoResults()) {
             sb.append(String.format(
-                    PRIZE_MESSAGE,
+                    value.getRank().equals(Rank.SECOND) ? SECOND_PRIZE_MESSAGE : PRIZE_MESSAGE,
                     value.getPrizeHitNumber(),
                     value.getPrizeMoney(),
                     value.getWinningCount()));
-            sb.append("\n");
         }
 
         return sb.toString();

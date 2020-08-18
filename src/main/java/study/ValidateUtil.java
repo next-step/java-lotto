@@ -1,5 +1,6 @@
 package study;
 
+import exception.InvalidWinningNumberException;
 import exception.LottoCountException;
 
 import java.util.HashSet;
@@ -25,6 +26,14 @@ public class ValidateUtil {
 
         if (distinctNumbers.size() != LOTTO_NUMBERS) {
             throw new LottoCountException();
+        }
+    }
+
+    public static void validateLottoWinningNumber(List<Integer> numbers, int bonusNumber) {
+        validateLottoNumberCount(numbers);
+
+        if (numbers.contains(bonusNumber)) {
+            throw new InvalidWinningNumberException();
         }
     }
 }
