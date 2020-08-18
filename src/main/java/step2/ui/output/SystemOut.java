@@ -2,7 +2,7 @@ package step2.ui.output;
 
 public class SystemOut implements OutputChannel{
 
-	protected SystemOut() {}
+	public SystemOut() {}
 
 	@Override
 	public void printLine(String input) {
