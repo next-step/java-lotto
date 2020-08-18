@@ -9,8 +9,9 @@ public class Application {
 
         LottoInput lottoInput = new LottoInput(new ScannerInput());
 
-        LottoGame lottoGame = new LottoGame(lottoInput.inputMoney());
-        lottoGame.buy();
+        LottoGame lottoGame = new LottoGame(lottoInput.inputPrincipal());
+        lottoGame.setManualLottoCount(lottoInput.inputManualLottoCount());
+        lottoGame.buyAuto();
 
         lottoGame.winning(lottoInput.inputLottoResult());
     }

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class LottoInput {
-
     private static final String DELIMITER = ", ";
     private static final int ZERO = 0;
 
@@ -20,15 +19,21 @@ public class LottoInput {
         this.input = input;
     }
 
-    public int inputMoney() {
+    public int inputPrincipal() {
 
         ResultView.print(StringResources.MSG_BUY_MONEY);
-        int money = input.nextInt();
+        int principal = input.nextInt();
 
-        verifyPositiveMoney(money);
-        verifyMoneyUnit(money);
+        verifyPositiveMoney(principal);
+        verifyMoneyUnit(principal);
 
-        return money;
+        return principal;
+    }
+
+    public int inputManualLottoCount() {
+
+        ResultView.print(StringResources.MSG_INPUT_MANUAL_LOTTO_COUNT);
+        return input.nextInt();
     }
 
     private void verifyPositiveMoney(int money) {

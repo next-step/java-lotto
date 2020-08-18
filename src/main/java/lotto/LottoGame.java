@@ -14,18 +14,28 @@ public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int money;
     private List<LottoNumber> lottoNumberList;
+    private final int principal;
+    private int balance;
 
-    public LottoGame(int money) {
-        this.money = money;
+    public LottoGame(int principal) {
+        this.principal = principal;
+        this.balance = principal;
     }
 
-    public void buy() {
+    public void setManualLottoCount(int manualLottoCount) {
 
-        ResultView.print((money / LOTTO_PRICE) + StringResources.MSG_BUY_QUANTITY);
+    }
 
-        this.lottoNumberList = RandomLottoCreator.createLottoList(money);
+    public void buyManual(int manualLottoCount) {
+
+    }
+
+    public void buyAuto() {
+
+        ResultView.print((balance / LOTTO_PRICE) + StringResources.MSG_BUY_QUANTITY);
+
+        this.lottoNumberList = RandomLottoCreator.createLottoList(balance);
 
         for (LottoNumber lottoNumber : lottoNumberList) {
             ResultView.print(lottoNumber.toString());
@@ -39,7 +49,7 @@ public class LottoGame {
         ResultView.print(StringResources.MSG_WINNING_STATUS);
         ResultView.print(StringResources.LINE_SEPARATOR);
 
-        LottoResult lottoResult = new LottoResult(money, lottoNumberList, lottoResultNumber);
+        LottoResult lottoResult = new LottoResult(principal, lottoNumberList, lottoResultNumber);
         ResultView.printLottoResult(lottoResult);
         ResultView.printLottoEarningsRate(lottoResult);
     }

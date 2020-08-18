@@ -40,4 +40,5 @@ public class StringResources {
     public static final String ERR_WRONG_RESULT_INPUT = "당첨번호는 ', '으로 구분하여 총 6개 입력해야 합니다.";
 
     public static final String LINE_SEPARATOR = "---------";
+    public static final String MSG_INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
 }
