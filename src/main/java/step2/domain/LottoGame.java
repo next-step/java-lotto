@@ -1,6 +1,7 @@
 package step2.domain;
 
 import step2.LottoException;
+import step2.constants.PrizeGrade;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,13 +32,13 @@ public class LottoGame {
 		this.lottoNumbers = createLottoNumbers(numbers);
 	}
 
-	public boolean contains(LottoNumber lottoNumber) {
+	boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
 
-	public ConfirmResult confirmPrize(LottoGame prize) {
-		return new ConfirmResult(getMatchCount(prize));
+	public PrizeGrade confirmPrize(LottoGame prize) {
+		return PrizeGrade.of(getMatchCount(prize));
 	}
 
 	private Set<LottoNumber> createLottoNumbers(String[] numbers) {
@@ -72,7 +73,10 @@ public class LottoGame {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		String collect = lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(DELIMITER));
+		String collect = lottoNumbers.stream()
+									.sorted()
+									.map(LottoNumber::toString)
+									.collect(Collectors.joining(DELIMITER));
 
 		stringBuilder.append(OPEN_PARENTHESIS)
 					.append(collect)

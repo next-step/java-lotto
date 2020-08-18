@@ -9,7 +9,7 @@ import static step2.configuration.LottoConfig.LOTTO_MIN_NUM;
 import static step2.constants.MessageConstant.OVER_NUMBER_RANGE;
 import static step2.constants.MessageConstant.INPUT_SHOULD_INTEGER;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private int number;
 
@@ -30,7 +30,7 @@ public class LottoNumber {
 	}
 
 	private int createValidLottoNumber(int number) {
-		if(!isValidRange(number)) {
+		if (!isValidRange(number)) {
 			throw new LottoException(OVER_NUMBER_RANGE);
 		}
 		return number;
@@ -38,6 +38,11 @@ public class LottoNumber {
 
 	private boolean isValidRange(int number) {
 		return number >= LOTTO_MIN_NUM && number <= LOTTO_MAX_NUM;
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return this.number - o.number;
 	}
 
 	@Override
