@@ -18,7 +18,7 @@ public class RankingStatisticsTest {
 
 	@ParameterizedTest
 	@MethodSource("rakingProvider")
-	public void announcerTest(LottoNumbers winBalls, Lottos lottos, Map<Ranking, Integer> expect, double rate) {
+	public void announcerTest(WinningBalls winBalls, Lottos lottos, Map<Ranking, Integer> expect, double rate) {
 		Statistics result = Statistics.from(lottos, winBalls);
 		Map<Ranking, Integer> rankingResultMap = result.getWinningResult();
 

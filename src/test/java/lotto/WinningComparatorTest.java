@@ -17,10 +17,10 @@ public class WinningComparatorTest {
 	@ParameterizedTest
 	@MethodSource("winCountProvider")
 	public void winCountTest(String winnerNumbers, List<Integer> myNumbers, int except) {
-		LottoNumbers winNumbers = WinningBallsFactory.create(winnerNumbers);
+		WinningBalls winningBalls = WinningBallsFactory.create(winnerNumbers);
 		LottoNumbers myLottoNumbers = LottoNumbers.of(myNumbers);
 
-		int winCount = winNumbers.getSameCountWith(myLottoNumbers);
+		int winCount = winningBalls.getWinningNumbers().getSameCountWith(myLottoNumbers);
 
 		assertThat(winCount).isEqualTo(except);
 	}
@@ -28,10 +28,10 @@ public class WinningComparatorTest {
 	@ParameterizedTest
 	@MethodSource("rakingProvider")
 	public void rankingTest(String winnerNumbers, List<Integer> myNumbers, Ranking except) {
-		LottoNumbers winNumbers = WinningBallsFactory.create(winnerNumbers);
+		WinningBalls winningBalls = WinningBallsFactory.create(winnerNumbers);
 		LottoNumbers myLottoNumbers = LottoNumbers.of(myNumbers);
 
-		int winCount = winNumbers.getSameCountWith(myLottoNumbers);
+		int winCount = winningBalls.getWinningNumbers().getSameCountWith(myLottoNumbers);
 		Ranking raking = Ranking.getRakingOf(winCount);
 
 		assertThat(raking).isEqualTo(except);
