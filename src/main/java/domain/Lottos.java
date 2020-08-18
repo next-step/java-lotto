@@ -35,7 +35,7 @@ public class Lottos {
 
         LottoResults result = LottoResults.of();
         for (Lotto lotto : lottos) {
-            result.win(lotto.hasWinningNumber(winningNumbers));
+            result.win(lotto.hasWinningNumber(winningNumbers), lotto.hasBunosNumber(bonusNumber));
         }
 
         return result;

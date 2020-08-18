@@ -1,5 +1,6 @@
 package study;
 
+import exception.InvalidWinningNumberException;
 import exception.LottoCountException;
 
 import java.util.HashSet;

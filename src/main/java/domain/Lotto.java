@@ -32,10 +32,15 @@ public class Lotto {
                 .collect(toList());
     }
 
-    public long hasWinningNumber(List<Integer> winningNumbers) {
+    public int hasWinningNumber(List<Integer> winningNumbers) {
         return winningNumbers.stream()
                 .map(LottoNumber::of)
                 .filter(numbers::contains)
-                .count();
+                .map(e -> 1)
+                .reduce(0, Integer::sum);
+    }
+
+    public boolean hasBunosNumber(int bonusNumber) {
+        return numbers.contains(LottoNumber.of(bonusNumber));
     }
 }
