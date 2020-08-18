@@ -11,7 +11,7 @@ public class ResultView {
     }
 
     public void printResult(Result result) {
-        writer.println(result.getVal());
+        writer.println(result);
     }
 
     public static ResultView of() {

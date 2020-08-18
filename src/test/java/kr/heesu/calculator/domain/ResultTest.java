@@ -15,11 +15,10 @@ class ResultTest {
 
     @Test
     void ResultTest() {
-        int operand = 3;
-        Operator operator = Operator.of();
+        Number operand = new Number(3);
 
-        result.next(operand, operator);
+        result.plus(operand);
 
-        assertThat(result.getVal()).isEqualTo(3);
+        assertThat(result.getVal().getVal()).isEqualTo(3);
     }
 }

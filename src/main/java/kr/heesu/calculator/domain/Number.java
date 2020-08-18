@@ -10,7 +10,20 @@ public class Number {
         this.val = number;
     }
 
+    public Number plus(Number operand) {
+        return new Number(this.val + operand.getVal());
+    }
+
+//    public void plus(Number operand) {
+//        this.val += operand.getVal();
+//    }
+
     public int getVal() {
         return this.val;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(val);
     }
 }

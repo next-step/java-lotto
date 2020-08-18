@@ -29,8 +29,8 @@ public class ExpressionTest {
     @Test
     void expressionTest() {
         assertThat(this.expression.hasNextArgument()).isTrue();
-        assertThat(this.expression.nextArgument()).isEqualTo(1);
-        assertThat(this.expression.nextArgument()).isEqualTo(2);
+        this.expression.nextOperation();
+        this.expression.nextOperation();
         assertThat(this.expression.hasNextArgument()).isFalse();
     }
 }

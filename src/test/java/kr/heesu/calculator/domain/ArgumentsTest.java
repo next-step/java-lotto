@@ -21,9 +21,9 @@ public class ArgumentsTest {
         Arguments args = Arguments.of(numbers);
 
         assertThat(args.hasNext()).isTrue();
-        assertThat(args.nextArgument()).isEqualTo(1);
+        assertThat(args.nextArgument().getVal()).isEqualTo(1);
         assertThat(args.hasNext()).isTrue();
-        assertThat(args.nextArgument()).isEqualTo(2);
+        assertThat(args.nextArgument().getVal()).isEqualTo(2);
         assertThat(args.hasNext()).isFalse();
     }
 }

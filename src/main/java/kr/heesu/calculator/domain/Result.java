@@ -1,18 +1,27 @@
 package kr.heesu.calculator.domain;
 
 public class Result {
-    private int result;
+    private Number val;
 
     private Result() {
-        this.result = 0;
+        this.val = new Number(0);
     }
 
-    public void next(int operand, Operator operator) {
-        this.result = operator.operate(this.result, operand);
+    public Number getVal() {
+        return this.val;
     }
 
-    public int getVal() {
-        return this.result;
+    public void plus(Number operand) {
+        this.val = this.val.plus(operand);
+    }
+
+//    public void plus(Number operand) {
+//      this.val.plus(operand);
+//    }
+
+    @Override
+    public String toString() {
+        return val.toString();
     }
 
     public static Result of() {
