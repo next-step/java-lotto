@@ -10,14 +10,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.factory.WinningFactory;
+import lotto.factory.WinningBallsFactory;
 
 public class WinningComparatorTest {
 
 	@ParameterizedTest
 	@MethodSource("winCountProvider")
 	public void winCountTest(String winnerNumbers, List<Integer> myNumbers, int except) {
-		LottoNumbers winNumbers = WinningFactory.create(winnerNumbers);
+		LottoNumbers winNumbers = WinningBallsFactory.create(winnerNumbers);
 		LottoNumbers myLottoNumbers = LottoNumbers.of(myNumbers);
 
 		int winCount = winNumbers.getSameCountWith(myLottoNumbers);
@@ -28,7 +28,7 @@ public class WinningComparatorTest {
 	@ParameterizedTest
 	@MethodSource("rakingProvider")
 	public void rankingTest(String winnerNumbers, List<Integer> myNumbers, Ranking except) {
-		LottoNumbers winNumbers = WinningFactory.create(winnerNumbers);
+		LottoNumbers winNumbers = WinningBallsFactory.create(winnerNumbers);
 		LottoNumbers myLottoNumbers = LottoNumbers.of(myNumbers);
 
 		int winCount = winNumbers.getSameCountWith(myLottoNumbers);

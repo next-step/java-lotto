@@ -23,7 +23,7 @@ public class OutputView {
 
 	public static void outputStatistics(Statistics statistics) {
 		System.out.println(WINNING_STATISTICS_FORMAT);
-		printRankingResult(statistics.getRankingResult());
+		printRankingResult(statistics.getWinningResult());
 		printEarningsRate(statistics.getEarningsRate());
 	}
 

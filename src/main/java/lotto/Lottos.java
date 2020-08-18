@@ -17,9 +17,9 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
-	public List<Ranking> getRankings(LottoNumbers winningNumbers) {
+	public List<Ranking> getRankings(WinningBalls winningBalls) {
 		return lottos.stream()
-					 .map(lottoOfUser -> lottoOfUser.getSameCountWith(winningNumbers))
+					 .map(lottoOfUser -> lottoOfUser.getSameCountWith(winningBalls.getWinningNumbers()))
 					 .map(sameCount -> Ranking.getRakingOf(sameCount))
 					 .collect(toList());
 	}

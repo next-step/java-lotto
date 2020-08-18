@@ -9,10 +9,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import lotto.LottoNumbers;
+import lotto.WinningBalls;
 import lotto.input.InputValidator;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class WinningFactory {
+public class WinningBallsFactory {
 
 	private static final String WINNING_NUMBER_DELIMITER = ",";
 
@@ -27,12 +28,12 @@ public class WinningFactory {
 		return LottoNumbers.of(numbers);
 	}
 
-	public static LottoNumbers create(String numbersString) {
+	public static WinningBalls create(String numbersString) {
 		InputValidator.validateWinningNumbers(numbersString);
-
-		return create(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
-							.mapToInt(number -> Integer.parseInt(number.trim()))
-							.boxed()
-							.collect(toList()));
+		LottoNumbers winningNumbers = create(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
+												   .mapToInt(number -> Integer.parseInt(number.trim()))
+												   .boxed()
+												   .collect(toList()));
+		return WinningBalls.of(winningNumbers);
 	}
 }

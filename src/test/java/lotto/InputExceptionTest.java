@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.factory.WinningFactory;
+import lotto.factory.WinningBallsFactory;
 
 public class InputExceptionTest {
 
@@ -14,11 +14,11 @@ public class InputExceptionTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨 개수는 6개를 넘을 수 없습니다.");
 
-		assertThatThrownBy(() -> WinningFactory.create(""))
+		assertThatThrownBy(() -> WinningBallsFactory.create(""))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호를 입력하셔야 합니다.");
 
-		assertThatThrownBy(() -> WinningFactory.create("1,2,3,4,5,6,7"))
+		assertThatThrownBy(() -> WinningBallsFactory.create("1,2,3,4,5,6,7"))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호는 6개를 입력해주세요.");
 

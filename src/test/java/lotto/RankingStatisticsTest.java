@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.factory.WinningFactory;
+import lotto.factory.WinningBallsFactory;
 import lotto.result.Statistics;
 
 public class RankingStatisticsTest {
@@ -20,7 +20,7 @@ public class RankingStatisticsTest {
 	@MethodSource("rakingProvider")
 	public void announcerTest(LottoNumbers winBalls, Lottos lottos, Map<Ranking, Integer> expect, double rate) {
 		Statistics result = Statistics.from(lottos, winBalls);
-		Map<Ranking, Integer> rankingResultMap = result.getRankingResult();
+		Map<Ranking, Integer> rankingResultMap = result.getWinningResult();
 
 		assertThat(rankingResultMap).isEqualTo(expect);
 		assertThat(result.getEarningsRate()).isEqualTo(rate);
@@ -48,11 +48,11 @@ public class RankingStatisticsTest {
 		expect2.put(Ranking.SECOND, 0);
 		expect2.put(Ranking.FIRST, 0);
 
-		return Stream.of(Arguments.arguments(WinningFactory.create("1, 2, 3, 4, 5, 6"),
+		return Stream.of(Arguments.arguments(WinningBallsFactory.create("1, 2, 3, 4, 5, 6"),
 											 lottos,
 											 expect1,
 											 new Double(285936.429)),
-						 Arguments.arguments(WinningFactory.create("1, 5, 10, 14, 25, 45"),
+						 Arguments.arguments(WinningBallsFactory.create("1, 5, 10, 14, 25, 45"),
 											 lottos,
 											 expect2,
 											 new Double(0.714)));

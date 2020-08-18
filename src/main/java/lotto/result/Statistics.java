@@ -9,9 +9,9 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import lotto.LottoKiosk;
-import lotto.LottoNumbers;
 import lotto.Lottos;
 import lotto.Ranking;
+import lotto.WinningBalls;
 
 public class Statistics {
 
@@ -20,33 +20,33 @@ public class Statistics {
 	private static final int DECIMAL = 3;
 
 	private final Map<Ranking, Integer> rankingMap;
-	private final int purchaseLottoCount;
+	private final int lottoPurchaseCount;
 
-	private Statistics(Map<Ranking, Integer> rankingMap, int purchaseLottoCount) {
+	private Statistics(Map<Ranking, Integer> rankingMap, int lottoPurchaseCount) {
 		this.rankingMap = rankingMap;
-		this.purchaseLottoCount = purchaseLottoCount;
+		this.lottoPurchaseCount = lottoPurchaseCount;
 	}
 
-	public static Statistics from(Lottos myLottos, LottoNumbers winningNumbers) {
-		Map<Ranking, Integer> rankingMap = myLottos.getRankings(winningNumbers)
-												   .stream()
-												   .collect(groupingBy(Function.identity(),
-																	   summingInt(count -> RANKING_MAP_INCREASE_VALUE)));
+	public static Statistics from(Lottos lottosOfUser, WinningBalls winningBalls) {
+		Map<Ranking, Integer> rankingMap = lottosOfUser.getRankings(winningBalls)
+													   .stream()
+													   .collect(groupingBy(Function.identity(),
+																		   summingInt(count -> RANKING_MAP_INCREASE_VALUE)));
 
-		return new Statistics(rankingMap, myLottos.getPurchaseLottoCount());
+		return new Statistics(rankingMap, lottosOfUser.getPurchaseLottoCount());
 	}
 
-	public Map<Ranking, Integer> getRankingResult() {
+	public Map<Ranking, Integer> getWinningResult() {
 		return Stream.of(Ranking.values())
 					 .collect(toMap(identity(),
 									ranking -> rankingMap.getOrDefault(ranking, RANKING_MAP_DEFAULT_VALUE)));
 	}
 
 	public double getEarningsRate() {
-		BigDecimal paidForPurchaseLotto = new BigDecimal(purchaseLottoCount * LottoKiosk.LOTTO_PRICE);
+		BigDecimal lottoPurchasePrice = new BigDecimal(lottoPurchaseCount * LottoKiosk.LOTTO_PRICE);
 		BigDecimal totalPrizeMoney = new BigDecimal(getTotalPrizeMoney());
 
-		return totalPrizeMoney.divide(paidForPurchaseLotto, DECIMAL, BigDecimal.ROUND_HALF_UP)
+		return totalPrizeMoney.divide(lottoPurchasePrice, DECIMAL, BigDecimal.ROUND_HALF_UP)
 							  .doubleValue();
 	}
 

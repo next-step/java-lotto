@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.factory.WinningFactory;
+import lotto.factory.WinningBallsFactory;
 import lotto.input.InputView;
 import lotto.output.OutputView;
 import lotto.result.Statistics;
@@ -12,7 +12,7 @@ public class LottoApplication {
 		Lottos lottosOfCustomer = LottoKiosk.issue(lottoPayAmounts);
 		OutputView.outputPurchaseLottos(lottosOfCustomer);
 
-		LottoNumbers winningNumbers = WinningFactory.create(InputView.inputWinning());
-		OutputView.outputStatistics(Statistics.from(lottosOfCustomer, winningNumbers));
+		WinningBalls winningBalls = WinningBallsFactory.create(InputView.inputWinning());
+		OutputView.outputStatistics(Statistics.from(lottosOfCustomer, winningBalls));
 	}
 }
