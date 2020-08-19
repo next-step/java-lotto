@@ -33,4 +33,13 @@ public class LottoTicketTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lotto = new LottoTicket(value));
     }
+
+    @Test
+    @DisplayName("입력된 값으로 생성된 티켓 중, 정답값 들어왔을 때 몇 개 일치하는지 확인")
+    public void check_inputString_and_HowManyNumbers_hit_between_input_and_expected(){
+        String value = "[4, 12, 32, 25, 11, 22]";
+        lotto = new LottoTicket(value);
+        String[] expected = {"4","13","15","22","13","5"};
+        assertThat(lotto.matchedNumber(expected)).isEqualTo(2);
+    }
 }
