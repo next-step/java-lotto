@@ -3,6 +3,7 @@ package step2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final String REGEX_THE_BRACKETS_AND_SPACE = "[\\[\\] ]";
@@ -48,4 +49,5 @@ public class LottoTicket {
     public List<String> numbers() {
         return lottoNumbers;
     }
+
 }
