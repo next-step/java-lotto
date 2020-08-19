@@ -35,14 +35,12 @@ public class RankingStatisticsTest {
 												new Lotto(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 30))),
 												new Lotto(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)))));
 		Map<Ranking, Integer> expect1 = new EnumMap<>(Ranking.class);
-		expect1.put(Ranking.FAILURE, 3);
 		expect1.put(Ranking.FOURTH, 1);
 		expect1.put(Ranking.THIRD, 1);
 		expect1.put(Ranking.SECOND, 1);
 		expect1.put(Ranking.FIRST, 1);
 
 		Map<Ranking, Integer> expect2 = new EnumMap<>(Ranking.class);
-		expect2.put(Ranking.FAILURE, 6);
 		expect2.put(Ranking.FOURTH, 1);
 		expect2.put(Ranking.THIRD, 0);
 		expect2.put(Ranking.SECOND, 0);

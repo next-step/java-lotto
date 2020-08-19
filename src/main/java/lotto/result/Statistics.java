@@ -4,6 +4,8 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -38,8 +40,12 @@ public class Statistics {
 
 	public Map<Ranking, Integer> getWinningResult() {
 		return Stream.of(Ranking.values())
+					 .filter(ranking -> ranking.isView())
+					 .sorted(Comparator.comparingInt(Ranking::getSameCount))
 					 .collect(toMap(identity(),
-									ranking -> rankingMap.getOrDefault(ranking, RANKING_MAP_DEFAULT_VALUE)));
+									ranking -> rankingMap.getOrDefault(ranking, RANKING_MAP_DEFAULT_VALUE),
+									(ranking, count) -> count,
+									LinkedHashMap::new));
 	}
 
 	public double getEarningsRate() {
