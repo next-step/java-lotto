@@ -1,5 +1,9 @@
-package cc.oakk.lotto;
+package cc.oakk.lotto.model;
 
+import cc.oakk.lotto.model.Lotto;
+import cc.oakk.lotto.model.LottoResults;
+import cc.oakk.lotto.model.Lottos;
+import cc.oakk.lotto.model.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

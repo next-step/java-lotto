@@ -1,5 +1,8 @@
-package cc.oakk.lotto;
+package cc.oakk.lotto.model;
 
+import cc.oakk.lotto.model.LottoPrizeProvider;
+import cc.oakk.lotto.model.Rank;
+import cc.oakk.lotto.model.SimpleLottoPrizeProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

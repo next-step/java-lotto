@@ -1,4 +1,4 @@
-package cc.oakk.lotto;
+package cc.oakk.lotto.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

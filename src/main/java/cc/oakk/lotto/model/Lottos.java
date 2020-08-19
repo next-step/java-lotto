@@ -1,4 +1,4 @@
-package cc.oakk.lotto;
+package cc.oakk.lotto.model;
 
 import cc.oakk.lotto.util.ValidationAdapters;
 

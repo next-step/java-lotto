@@ -1,5 +1,10 @@
 package cc.oakk.lotto;
 
+import cc.oakk.lotto.model.Lotto;
+import cc.oakk.lotto.model.LottoGenerator;
+import cc.oakk.lotto.model.LottoPrizeProvider;
+import cc.oakk.lotto.model.SimpleLottoPrizeProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 
