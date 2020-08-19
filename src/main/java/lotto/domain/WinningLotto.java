@@ -16,7 +16,7 @@ public class WinningLotto {
         this.winningLottoNumbers = winningLottoNumbers;
     }
 
-    public static WinningLotto of(String lottoNumbers) {
+    public static WinningLotto of(String lottoNumbers, String bonusNumber) {
         List<LottoNumber> winningLottoNumbers = Arrays.stream(lottoNumbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(String::trim)
                 .map(StringUtils::toNumber)
