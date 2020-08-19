@@ -41,7 +41,7 @@ public class DisplayHere {
 				.sorted(Comparator.comparing(entry -> entry.getKey().getPrintOrder()))
 				.map(entry -> {
 					PrizeGrade prizeGrade = entry.getKey();
-					return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getReward(), entry.getValue());
+					return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getStatisticsMessage(), entry.getValue());
 				})
 				.collect(Collectors.joining(NEW_LINE));
 	}

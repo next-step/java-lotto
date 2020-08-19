@@ -31,15 +31,16 @@ class LottoGamesTest {
 
 		String[] oneToSix = IntStream.range(1, 7).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 		String[] oneToFiveAndNine = IntStream.of(1,2,3,4,5,9).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
+		String[] oneToFiveAndEight = IntStream.of(1,2,3,4,5,8).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 		String[] sevenToTwelve = IntStream.range(7, 13).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 		String[] thirteenToEighteen = IntStream.range(13, 19).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 
 		LottoNumber bonus = new LottoNumber(9);
 
 		return Stream.of(
-				Arguments.of(new LottoGames(List.of(new LottoGame(oneToSix), new LottoGame(oneToFiveAndNine), new LottoGame(sevenToTwelve), new LottoGame(thirteenToEighteen))),
+				Arguments.of(new LottoGames(List.of(new LottoGame(oneToSix), new LottoGame(oneToFiveAndNine), new LottoGame(oneToFiveAndEight), new LottoGame(sevenToTwelve), new LottoGame(thirteenToEighteen))),
 						new PrizeInfo(new LottoGame(oneToSix), bonus),
-						List.of(FIRST, SECOND, FAIL, FAIL)
+						List.of(FIRST, SECOND, THIRD, FAIL, FAIL)
 						)
 		);
 	}

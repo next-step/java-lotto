@@ -1,9 +1,6 @@
 package step3.domain;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.LottoGame;
-import step3.domain.LottoGameFactory;
-import step3.domain.LottoNumber;
 
 import java.util.stream.IntStream;
 
@@ -15,7 +12,7 @@ class LottoGameFactoryTest {
 	@Test
 	void newGameTest() {
 		LottoGame newLottoGame = LottoGameFactory.getNewLottoGame();
-		long validRangeCount = IntStream.range(1, 46)
+		long validRangeCount = IntStream.rangeClosed(1, 45)
 										.mapToObj(num -> newLottoGame.contains(new LottoNumber(num)))
 										.filter(aBoolean -> aBoolean)
 										.count();

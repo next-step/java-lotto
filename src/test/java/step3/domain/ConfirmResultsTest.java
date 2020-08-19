@@ -6,9 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step3.constants.PrizeGrade;
-import step3.constants.RateOfReturn;
-import step3.domain.ConfirmResults;
-import step3.domain.PurchaseStandBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step3.constants.MessageConstant.RATE_OF_RETURN_FORMAT;
 import static step3.constants.PrizeGrade.THIRD;
 
 class ConfirmResultsTest {
@@ -24,7 +20,7 @@ class ConfirmResultsTest {
 	@DisplayName("수익률 확인 메소드 테스트")
 	@ParameterizedTest
 	@MethodSource("provideTestingComputeRateOfReturn")
-	void computeRateOfReturn(List<PrizeGrade> given, PurchaseStandBy request, String result) {
+	void computeRateOfReturn(List<PrizeGrade> given, PurchaseStandBy request, double result) {
 		assertThat(new ConfirmResults(given).computeRateOfReturn(request)).isEqualTo(result);
 	}
 
@@ -43,7 +39,7 @@ class ConfirmResultsTest {
 		double rateOfReturn = (double) THIRD.getReward() / (double) purchaseStandBy.getPurchasePrice();
 
 		return Stream.of(
-				Arguments.of(confirmResults, purchaseStandBy, String.format(RATE_OF_RETURN_FORMAT, rateOfReturn, RateOfReturn.of(rateOfReturn).getMessage()))
+				Arguments.of(confirmResults, purchaseStandBy, rateOfReturn)
 		);
 	}
 
@@ -54,7 +50,7 @@ class ConfirmResultsTest {
 
 
 		return Stream.of(
-				Arguments.of(confirmResults, 50000L)
+				Arguments.of(confirmResults, THIRD.getReward())
 		);
 	}
 }
