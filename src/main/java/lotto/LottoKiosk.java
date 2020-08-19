@@ -11,10 +11,10 @@ import lotto.factory.LottoNumbersFactory;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LottoKiosk {
 
-	public static final int LOTTO_PRICE = 1000;
+	public static final int LOTTO_PRICE = 1_000;
 
 	public static Lottos issue(LottoPayAmounts lottoPayAmounts) {
-		int countOfLotto = lottoPayAmounts.getPaidAmounts() / LOTTO_PRICE;
+		int countOfLotto = lottoPayAmounts.getCountOfLotto(LOTTO_PRICE);
 
 		return Lottos.of(IntStream.range(0, countOfLotto)
 								  .mapToObj(i -> new Lotto(LottoNumbersFactory.create()))
