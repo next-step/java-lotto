@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoExtractorMain {
+    public static final String DELIMITER = ",";
+
     public static void main(String[] args) {
         List<LottoTicket> ticketList = new ArrayList<>();
         int amount = InputView.askQuestion();
@@ -20,7 +22,7 @@ public class LottoExtractorMain {
             System.out.println(numberList);
         }
 
-        String answerNumber = InputView.checkWinNumber();
-        System.out.println(answerNumber);
+        String[] answerNumber = InputView.checkWinNumber().split(DELIMITER);
+        OutputView.checkStatistics(ticketList, answerNumber);
     }
 }
