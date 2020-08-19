@@ -26,6 +26,7 @@ public enum LottoRank {
     public static LottoRank of(long matchCount, boolean matchBonus) {
         return Stream.of(LottoRank.values())
                 .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                .filter(lottoRank -> !lottoRank.matchBonus || matchBonus)
                 .findFirst()
                 .orElse(LottoRank.DROP);
     }

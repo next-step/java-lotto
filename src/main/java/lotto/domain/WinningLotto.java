@@ -53,7 +53,7 @@ public class WinningLotto {
 
     public LottoRank getWinningRank(LottoTicket lottoTicket) {
         long matchCount = lottoTicket.getMatchCountWith(winningLottoNumbers);
-        boolean matchBonus = false;
+        boolean matchBonus = lottoTicket.getMatchWith(bonusNumber);
 
         return LottoRank.of(matchCount, matchBonus);
     }

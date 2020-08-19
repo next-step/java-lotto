@@ -25,4 +25,8 @@ public class LottoTicket {
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
+
+    public boolean getMatchWith(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

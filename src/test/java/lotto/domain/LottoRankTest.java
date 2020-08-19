@@ -17,7 +17,7 @@ public class LottoRankTest {
                 Arguments.of(1, false, LottoRank.DROP),
                 Arguments.of(2, false, LottoRank.DROP),
                 Arguments.of(5, false, LottoRank.SECOND),
-                Arguments.of(5, false, LottoRank.SECOND_BONUS),
+                Arguments.of(5, true, LottoRank.SECOND_BONUS),
                 Arguments.of(6, false, LottoRank.FIRST),
                 Arguments.of(7, false, LottoRank.DROP)
         );
