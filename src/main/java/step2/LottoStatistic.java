@@ -31,13 +31,13 @@ public class LottoStatistic {
 		}
 	}
 
-	public int calcWinningsSum() {
-		int sum = 0;
+	public double calcYield(int price) {
+		double sum = 0.0;
 		for (Integer winningCount : lottoStat.keySet()) {
 			LottoWinning winning = LottoWinning.of(winningCount);
 			sum += winning.calcReward(lottoStat.get(winningCount));
 		}
-		return sum;
+		return sum / price;
 	}
 
 }

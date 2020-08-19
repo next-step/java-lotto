@@ -6,9 +6,9 @@ import java.util.Collections;
 public class LottoNumber {
 	private static final int MAX_LOTTO_VALUE = 45;
 	private static final int MAX_LOTTO_NUMBER = 6;
-	private static Integer[] lottoValues;
+	private static final Integer[] lottoValues;
 
-	public LottoNumber() {
+	static {
 		lottoValues = new Integer[MAX_LOTTO_VALUE];
 		for (int i = 0; i < MAX_LOTTO_VALUE; i++) {
 			lottoValues[i] = i+1;

@@ -24,8 +24,8 @@ public class ResultView {
 		}
 	}
 
-	public static void printYield(int price, int rewardsSum) {
-		System.out.println("총 수익률은 "+ String.format("%.2f", (double)(rewardsSum / price)) + "입니다.");
+	public static void printYield(double yield) {
+		System.out.println("총 수익률은 "+ String.format("%.2f", yield) + "입니다.");
 	}
 
 }

@@ -28,9 +28,9 @@ public class LottoStatisticTest {
 		assertThat(result).hasEntrySatisfying(4, number -> assertThat(number).isEqualTo(1));
 	}
 
-	@DisplayName(value = "총 수익 계산 기능 테스트")
+	@DisplayName(value = "수익률 계산 기능 테스트")
 	@Test
 	void calcWinningsSum() {
-		assertThat(statistic.calcWinningsSum()).isEqualTo(50000);
+		assertThat(statistic.calcYield(10000)).isEqualTo(5);
 	}
 }

@@ -13,6 +13,6 @@ public class LottoController {
 		List<Integer> winningNumbers = InputView.inputWinningNumbers();
 		LottoStatistic statistic = new LottoStatistic(winningNumbers);
 		ResultView.printWinningResult(statistic.calcLottoResult(lottos));
-		ResultView.printYield(price, statistic.calcWinningsSum());
+		ResultView.printYield(statistic.calcYield(price));
 	}
 }
