@@ -3,7 +3,6 @@ package lotto;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -28,9 +27,9 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public String toStringFromLottoNumbers() {
+	public List<LottoNumbers> getLottoNumbers() {
 		return lottos.stream()
-					 .map(lotto -> lotto.getLottoNumbersOfUser().toString())
-					 .collect(Collectors.joining("\n"));
+					 .map(lotto -> lotto.getLottoNumbersOfUser())
+					 .collect(toList());
 	}
 }

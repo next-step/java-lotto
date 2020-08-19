@@ -1,5 +1,7 @@
 package lotto.output;
 
+import static java.util.stream.Collectors.joining;
+
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -18,7 +20,7 @@ public class OutputView {
 
 	public static void outputPurchaseLottos(Lottos lottos) {
 		System.out.println(String.format(PURCHASE_COUNT_FORMAT, lottos.getPurchaseLottoCount()));
-		System.out.println(lottos.toStringFromLottoNumbers() + "\n");
+		System.out.println(toStringFromLottoNumbers(lottos) + "\n");
 	}
 
 	public static void outputStatistics(Statistics statistics) {
@@ -37,5 +39,12 @@ public class OutputView {
 
 	private static void printEarningsRate(double earningsRate) {
 		System.out.println(String.format(EARNINGS_RATE_FORMAT, earningsRate));
+	}
+
+	private static String toStringFromLottoNumbers(Lottos lottos) {
+		return lottos.getLottoNumbers()
+					 .stream()
+					 .map(lottoNumbers -> lottoNumbers.toString())
+					 .collect(joining("\n"));
 	}
 }
