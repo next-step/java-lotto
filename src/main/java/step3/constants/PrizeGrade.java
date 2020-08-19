@@ -42,10 +42,6 @@ public enum PrizeGrade {
 						.orElseGet(() -> FAIL);
 	}
 
-	public int getMatchCount() {
-		return matchCount;
-	}
-
 	public long getReward() {
 		return reward;
 	}
