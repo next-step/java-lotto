@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Lottos implements Iterable<Lotto> {
 
@@ -19,16 +20,16 @@ public class Lottos implements Iterable<Lotto> {
     return lottos.size();
   }
 
-  public Stream<Lotto> stream() {
-    return lottos.stream();
-  }
-
   public static Lottos of(Lotto... lottos) {
     return new Lottos(Arrays.asList(lottos));
   }
 
   public static Lottos concat(Lottos a, Lottos b) {
-    return new Lottos(Stream.concat(a.stream(), b.stream()).collect(Collectors.toList()));
+    return new Lottos(Stream.concat(toStream(a), toStream(b)).collect(Collectors.toList()));
+  }
+
+  private static Stream<Lotto> toStream(Lottos lottos) {
+    return StreamSupport.stream(lottos.spliterator(), false);
   }
 
   @Override
@@ -50,9 +51,7 @@ public class Lottos implements Iterable<Lotto> {
 
   @Override
   public String toString() {
-    return "Lottos{" +
-        "lottos=" + lottos +
-        '}';
+    return "Lottos{" + "lottos=" + lottos + '}';
   }
 
   @Override
@@ -74,5 +73,4 @@ public class Lottos implements Iterable<Lotto> {
       return lottos.get(current++);
     }
   }
-
 }

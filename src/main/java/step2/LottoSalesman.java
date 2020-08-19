@@ -1,6 +1,5 @@
 package step2;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 

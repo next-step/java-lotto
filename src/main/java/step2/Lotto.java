@@ -27,9 +27,13 @@ public final class Lotto implements Iterable<Integer> {
   }
 
   private void validateRange(List<Integer> numbers) {
-    if (numbers.stream().anyMatch(n -> n < 0 || n > 45)) {
+    if (isLottoRange(numbers)) {
       throw new IllegalArgumentException("로또번호는 1부터 45번까지입니다.");
     }
+  }
+
+  private boolean isLottoRange(List<Integer> numbers) {
+    return numbers.stream().anyMatch(n -> n < 0 || n > 45);
   }
 
   private void validateDuplicate(List<Integer> numbers) {
@@ -42,11 +46,6 @@ public final class Lotto implements Iterable<Integer> {
   public boolean hasNumber(Integer number) {
     return numbers.contains(number);
   }
-
-  public Stream<Integer> stream() {
-    return numbers.stream();
-  }
-
 
   @Override
   public boolean equals(Object o) {

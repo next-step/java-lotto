@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class Winning {
 
@@ -17,7 +18,10 @@ public class Winning {
   }
 
   public int matchCount(Lotto lotto) {
-    return this.lotto.stream().filter(lotto::hasNumber).mapToInt(i -> 1).sum();
+    return StreamSupport.stream(this.lotto.spliterator(), false)
+        .filter(lotto::hasNumber)
+        .mapToInt(i -> 1)
+        .sum();
   }
 
   public boolean hasBonusNumber(Lotto lotto) {
