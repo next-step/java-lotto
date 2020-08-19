@@ -10,29 +10,36 @@ public class LottoSalesman {
   private static final String SCRIPT_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
   private static final String SCRIPT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
   private static final String SCRIPT_INFORM_WINNING = "\n당첨 통계";
+  private final Scanner scanner;
 
-  public static int purchaseAmount(Scanner scanner) {
+  public LottoSalesman(Scanner scanner) {
+    this.scanner = scanner;
+  }
+
+  public int purchaseAmount() {
     System.out.println(SCRIP_AMOUNT);
 
     return scanner.nextInt();
   }
 
-  public static int manualLottoCount(Scanner scanner) {
+  public int manualLottoCount() {
     System.out.println(SCRIP_MANUAL_LOTTO_COUNT);
     return scanner.nextInt();
   }
 
-  public static String[] inputManualLotto(Scanner scanner, int lottoCount) {
+  public String[] inputManualLotto(int lottoCount) {
     System.out.println(SCRIP_INPUT_LOTTO_NUMBERS);
     String lottoNumbers[] = new String[lottoCount];
     for (int i = 0; i < lottoCount; i++) {
       lottoNumbers[i] = scanner.next();
     }
+
     return lottoNumbers;
   }
 
-  public static void informPurchase(Lottos manualLottos, Lottos autoLottos) {
-    System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",manualLottos.count(), autoLottos.count()));
+  public void informPurchase(Lottos manualLottos, Lottos autoLottos) {
+    System.out.println(
+        String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.count(), autoLottos.count()));
     for (Lotto lotto : manualLottos) {
       System.out.println(lotto.numbers);
     }
@@ -42,17 +49,17 @@ public class LottoSalesman {
     }
   }
 
-  public static String winningNumber(Scanner scanner) {
+  public String winningNumber() {
     System.out.println(SCRIPT_WINNING_NUMBER);
     return scanner.next();
   }
 
-  public static int bonusNumber(Scanner scanner) {
+  public int bonusNumber() {
     System.out.println(SCRIPT_BONUS_NUMBER);
     return scanner.nextInt();
   }
 
-  public static void informWinning(Scanner scanner, LottoStats analyze, int payment) {
+  public void informWinning( LottoStats analyze, int payment) {
     System.out.println(SCRIPT_INFORM_WINNING);
     System.out.println("--------");
     System.out.print(analyze);
