@@ -8,7 +8,7 @@ public class StringAddCalculator {
         }
         NumericalExpression numericalExpression = new NumericalExpression(text);
         Numbers numbers = new Numbers(numericalExpression.split());
-        return numbers.sumNumbers();
+        return numbers.sum();
     }
 
 }

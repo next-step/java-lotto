@@ -34,7 +34,7 @@ public class Numbers {
         return numbers.get(0);
     }
 
-    public int sumNumbers() {
+    public int sum() {
         return hasOneNumber() ?
                 pickFirstValueIfHasOneNumber() :
                 numbers.stream()

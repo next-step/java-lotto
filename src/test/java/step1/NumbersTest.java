@@ -26,7 +26,7 @@ public class NumbersTest {
     @Test
     public void plusNumbers() {
         Numbers numbers = new Numbers(new String[] { "1", "2", "3" });
-        assertThat(numbers.sumNumbers()).isEqualTo(6);
+        assertThat(numbers.sum()).isEqualTo(6);
     }
 
 }
