@@ -3,23 +3,22 @@ package cc.oakk.lotto;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6),
-    SECOND(5),
-    THIRD(4),
+    FIRST(0),
+    SECOND(1),
+    THIRD(2),
     FOURTH(3),
-    FIFTH(2),
-    SIXTH(1),
-    SEVENTH(0);
+    FIFTH(4),
+    NONE(5);
 
-    private final int count;
-    Rank(int count) {
-        this.count = count;
+    private final int differentCount;
+    Rank(int differentCount) {
+        this.differentCount = differentCount;
     }
 
-    public static Rank getRankByMatchingCount(int count) {
+    public static Rank getRankByDifferentCount(int count) {
         return Arrays.stream(Rank.class.getEnumConstants())
-                .filter(v -> v.count == count)
+                .filter(v -> v.differentCount == count)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Count should be between 0 and 6"));
+                .orElse(NONE);
     }
 }

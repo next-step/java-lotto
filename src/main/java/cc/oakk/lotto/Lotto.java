@@ -37,7 +37,7 @@ public class Lotto {
         int matchingCount = (int) numbers.stream()
                 .filter(target.numbers::contains)
                 .count();
-        return Rank.getRankByMatchingCount(matchingCount);
+        return Rank.getRankByDifferentCount(NUMBER_COUNT - matchingCount);
     }
 
     @Override

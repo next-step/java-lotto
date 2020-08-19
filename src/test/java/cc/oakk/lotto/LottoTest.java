@@ -28,8 +28,8 @@ public class LottoTest {
     @Test
     public void compare() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.compare(Lotto.of(7, 8, 9, 10, 11,12))).isEqualTo(Rank.SEVENTH);
-        assertThat(lotto.compare(Lotto.of(6, 7, 8, 9, 10, 11))).isEqualTo(Rank.SIXTH);
+        assertThat(lotto.compare(Lotto.of(7, 8, 9, 10, 11,12))).isEqualTo(Rank.NONE);
+        assertThat(lotto.compare(Lotto.of(6, 7, 8, 9, 10, 11))).isEqualTo(Rank.NONE);
         assertThat(lotto.compare(Lotto.of(5, 6, 7, 8, 9, 10))).isEqualTo(Rank.FIFTH);
         assertThat(lotto.compare(Lotto.of(4, 5, 6, 7, 8, 9))).isEqualTo(Rank.FOURTH);
         assertThat(lotto.compare(Lotto.of(3, 4, 5, 6, 7, 8))).isEqualTo(Rank.THIRD);
