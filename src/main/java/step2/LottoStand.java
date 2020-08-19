@@ -4,16 +4,18 @@ import java.util.Scanner;
 
 public class LottoStand {
 
+  public static final int ONE_PRICE = 1000;
+
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
     LottoSalesman lottoSalesman = new LottoSalesman(scanner);
 
     // 구입금액 입력
-    int payment = lottoSalesman.purchaseAmount();
+    int payment = lottoSalesman.purchaseAmount(ONE_PRICE);
 
     // 수동 구매할 로또 개수
-    int lottoCount = lottoSalesman.manualLottoCount();
+    int lottoCount = lottoSalesman.manualLottoCount(ONE_PRICE, payment);
 
     // 수동 로또번호 입력
     String[] lottoNumbers = lottoSalesman.inputManualLotto(lottoCount);

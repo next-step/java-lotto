@@ -1,16 +1,26 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Lotto implements Iterable<Integer> {
 
   public static final int FIXED_COUNT = 6;
   protected List<Integer> numbers;
+
+  public Lotto(String numbers) {
+    this(
+        Arrays.stream(numbers.split(","))
+            .map(value -> Integer.parseInt(value.trim()))
+            .collect(Collectors.toList()));
+  }
+
 
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);

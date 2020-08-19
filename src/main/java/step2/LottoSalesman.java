@@ -3,9 +3,8 @@ package step2;
 import java.util.Scanner;
 
 public class LottoSalesman {
-
-  private static final String SCRIP_AMOUNT = "구입금액을 입력해 주세요.";
-  private static final String SCRIP_MANUAL_LOTTO_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+  private static String SCRIP_AMOUNT = "구입금액을 입력해 주세요.";
+  private static String SCRIP_MANUAL_LOTTO_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
   private static final String SCRIP_INPUT_LOTTO_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
   private static final String SCRIPT_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
   private static final String SCRIPT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
@@ -16,15 +15,55 @@ public class LottoSalesman {
     this.scanner = scanner;
   }
 
-  public int purchaseAmount() {
-    System.out.println(SCRIP_AMOUNT);
-
-    return scanner.nextInt();
+  public int purchaseAmount(int onePrice) {
+    return purchaseAmount(true, onePrice);
   }
 
-  public int manualLottoCount() {
-    System.out.println(SCRIP_MANUAL_LOTTO_COUNT);
-    return scanner.nextInt();
+  private int purchaseAmount(boolean first, int onePrice) {
+    System.out.println(printScriptAmount(first, onePrice));
+
+    int payment = scanner.nextInt();
+    if (isPossibleBuy(onePrice, payment)) {
+      return payment;
+    }
+
+    return purchaseAmount(false, onePrice);
+  }
+
+  private String printScriptAmount(boolean first, int onePrice) {
+    if (first) return SCRIP_AMOUNT;
+
+    return String.format("%s(%d원 이상)", SCRIP_AMOUNT, onePrice);
+  }
+
+  private boolean isPossibleBuy(int onePrice, int payment) {
+    return payment >= onePrice;
+  }
+
+  public int manualLottoCount(int onePrice, int payment) {
+    return manualLottoCount(true, onePrice, payment);
+  }
+
+  private int manualLottoCount(boolean first, int onePrice, int payment) {
+    int canBuyCount = onePrice / payment;
+    System.out.println(printScriptManualLottoCount(first, canBuyCount));
+
+    int count = scanner.nextInt();
+    if (isPossibleCount(canBuyCount, count)) {
+      return count;
+    }
+
+    return manualLottoCount(false, onePrice, payment);
+  }
+
+  private String printScriptManualLottoCount(boolean first, int canBuyCount) {
+    if (first) return SCRIP_MANUAL_LOTTO_COUNT;
+
+    return String.format("%s(%d까지 구입가능)", SCRIP_MANUAL_LOTTO_COUNT, canBuyCount);
+  }
+
+  private boolean isPossibleCount(int canBuyCount, int count) {
+    return canBuyCount >= count;
   }
 
   public String[] inputManualLotto(int lottoCount) {
@@ -49,6 +88,7 @@ public class LottoSalesman {
     }
   }
 
+
   public String winningNumber() {
     System.out.println(SCRIPT_WINNING_NUMBER);
     return scanner.next();
@@ -59,7 +99,7 @@ public class LottoSalesman {
     return scanner.nextInt();
   }
 
-  public void informWinning( LottoStats analyze, int payment) {
+  public void informWinning(LottoStats analyze, int payment) {
     System.out.println(SCRIPT_INFORM_WINNING);
     System.out.println("--------");
     System.out.print(analyze);
