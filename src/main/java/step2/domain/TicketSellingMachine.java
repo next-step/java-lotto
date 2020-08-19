@@ -21,31 +21,42 @@ public class TicketSellingMachine {
     /**
      * 장당 티켓의 가격
      */
-    private static final int TICKET_PRICE = 1000;
+    public static final int TICKET_PRICE = 1000;
 
-    private TicketSellingMachine() {}
+    private TicketSellingMachine() {
+    }
 
     /**
      * 금액을 기준으로 티켓을 발권한다.
      * 티켓 한장의 가격은 1000원이다.
      *
-     * @param money
+     * @param wallet
      * @return
      */
-    public static final List<Ticket> buy(final int money) {
-        return Stream.generate(TicketSellingMachine::ticketing)
-                .limit(getCount(money))
-                .collect(Collectors.toList());
+    public static final Receipt buy(final Wallet wallet) {
+        int ticketCount = wallet.getQuantityOfItems(TICKET_PRICE);
+
+        return new Receipt(
+                wallet.spend(ticketCount, TICKET_PRICE),
+                Stream.generate(TicketSellingMachine::ticketing)
+                        .limit(ticketCount)
+                        .collect(Collectors.toList()));
     }
 
     /**
-     * 금액을 기준으로 발권할 수 있는 티켓의 갯수를 반환한다.
+     * 금액과 입력 번호 목록을 기준으로 티켓을 발권한다.
+     * 티켓 한장의 가격은 1000원이다.
      *
-     * @param money
+     * @param wallet
+     * @param numbers
      * @return
      */
-    private static final int getCount(final int money) {
-        return money / TICKET_PRICE;
+    public static Receipt buy(final Wallet wallet, List<List<Integer>> numbers) {
+        List<Ticket> tickets = numbers.stream()
+                .map(TicketSellingMachine::ticketing)
+                .collect(Collectors.toList());
+
+        return new Receipt(wallet.spend(tickets.size(), TICKET_PRICE), tickets);
     }
 
     /**

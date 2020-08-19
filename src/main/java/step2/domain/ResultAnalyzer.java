@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
  */
 public class ResultAnalyzer {
 
-    private ResultAnalyzer() {}
+    private ResultAnalyzer() {
+    }
 
     /**
      * 당첨 된 로또 갯수를 반환한다.
@@ -22,17 +23,13 @@ public class ResultAnalyzer {
      */
     public static final int getMatchTicketCount(
             final List<Integer> winningNumbers,
+            final int hitCount,
             final int bonusNumber,
             final boolean bonusMatch,
             final List<Ticket> tickets) {
 
-        Predicate<Ticket> predicate = ticket -> ticket.checkPrize(winningNumbers);
-
-        if (bonusMatch)
-            predicate = predicate.and(ticket -> ticket.checkBonusNumber(bonusNumber));
-
         return tickets.stream()
-                .filter(predicate)
+                .filter(ticket -> ticket.matchCount(winningNumbers) >= hitCount && (!bonusMatch || ticket.checkBonusNumber(bonusNumber)))
                 .collect(Collectors.toList())
                 .size();
     }
