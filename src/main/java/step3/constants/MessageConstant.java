@@ -19,5 +19,9 @@ public class MessageConstant {
 	public static final String PRIZE_STATISTICS_HEADER = "당첨 통계"+NEW_LINE+"---------";
 	public static final String PRIZE_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
 	public static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f입니다. (%s)";
+	public static final String PLEASE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+	public static final String BONUS_NUMBER_SHOULD_NOT_CONTAINS_PRIZE_GAME = "보너스 번호는 당첨 번호에 포함되어 있지 않은 숫자여야 합니다.";
+
+	//PrizeInfo
 
 }

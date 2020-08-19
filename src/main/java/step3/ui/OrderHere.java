@@ -1,6 +1,8 @@
 package step3.ui;
 
 import step3.domain.LottoGame;
+import step3.domain.LottoNumber;
+import step3.domain.PrizeInfo;
 import step3.domain.PurchaseStandBy;
 import step3.ui.input.InputChannel;
 import step3.ui.output.OutputChannel;
@@ -25,8 +27,10 @@ public class OrderHere {
 		return new PurchaseStandBy(retryUntilGettingRightValue(getPurchasingPrice()));
 	}
 
-	public LottoGame receiveLastWeekPrize() {
-		return new LottoGame(retryUntilGettingRightValue(getPrizeNumbers()));
+	public PrizeInfo receiveLastWeekPrize() {
+		LottoGame prizeLottoGame = new LottoGame(retryUntilGettingRightValue(getPrizeNumbers()));
+		LottoNumber bonusNumber = new LottoNumber(retryUntilGettingRightValue(getBonusNumber()));
+		return new PrizeInfo(prizeLottoGame, bonusNumber);
 	}
 
 	private Supplier<Optional<Integer>> getPurchasingPrice() {
@@ -36,6 +40,10 @@ public class OrderHere {
 
 	private Supplier<Optional<String[]>> getPrizeNumbers() {
 		return () -> Optional.ofNullable(sayQuestionAndGetStringArray(PLEASE_INPUT_LAST_WEEK_PRIZE));
+	}
+
+	private Supplier<Optional<Integer>> getBonusNumber() {
+		return () -> Optional.ofNullable(sayQuestionAndGetInt(PLEASE_INPUT_BONUS_NUMBER));
 	}
 
 	private <T> T retryUntilGettingRightValue(Supplier<Optional<T>> supplier) {

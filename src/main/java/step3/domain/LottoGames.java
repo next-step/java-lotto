@@ -22,11 +22,11 @@ public class LottoGames {
 		return lottoGames.size();
 	}
 
-	public ConfirmResults confirmPrize(LottoGame lastWeekPrize) {
+	public ConfirmResults confirmPrize(PrizeInfo lastWeekPrize) {
 		return new ConfirmResults(getConfirmResults(lastWeekPrize));
 	}
 
-	private List<PrizeGrade> getConfirmResults(LottoGame lastWeekPrize) {
+	private List<PrizeGrade> getConfirmResults(PrizeInfo lastWeekPrize) {
 		return lottoGames.stream()
 				.map(lottoGame -> lottoGame.confirmPrize(lastWeekPrize))
 				.collect(Collectors.toList());

@@ -5,3 +5,4 @@
 
 ## feature list
 0. step2 복사 및 step2 마지막 리뷰사항 반영
+1. OrderHere에 보너스 번호 입력 로직 추가 및 당첨 번호와 보너스 번호를 멤버 변수로 갖는 PrizeInfo 작성

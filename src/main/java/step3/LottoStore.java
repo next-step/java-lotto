@@ -1,9 +1,6 @@
 package step3;
 
-import step3.domain.ConfirmResults;
-import step3.domain.LottoGame;
-import step3.domain.LottoGames;
-import step3.domain.PurchaseStandBy;
+import step3.domain.*;
 import step3.ui.DisplayHere;
 import step3.ui.OrderHere;
 
@@ -21,7 +18,7 @@ public class LottoStore {
 
 		displayHere.printPurchasedGames(purchasedGames);
 
-		LottoGame lastWeekPrize = orderHere.receiveLastWeekPrize();
+		PrizeInfo lastWeekPrize = orderHere.receiveLastWeekPrize();
 
 		ConfirmResults confirmResults = purchasedGames.confirmPrize(lastWeekPrize);
 
