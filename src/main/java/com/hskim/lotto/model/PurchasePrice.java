@@ -1,6 +1,5 @@
 package com.hskim.lotto.model;
 
-import com.hskim.lotto.exception.LottoExceptionMessage;
 import com.hskim.lotto.exception.LottoTicketingExceptionMessage;
 
 import java.util.Objects;

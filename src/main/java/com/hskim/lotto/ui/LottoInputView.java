@@ -69,7 +69,7 @@ public class LottoInputView {
 
     public List<List<Integer>> getManualLottoNumbersList(int manualTicketingNum) {
         List<List<Integer>> result = new LinkedList<>();
-        for(int index = 0 ; index < manualTicketingNum ; index ++) {
+        for (int index = 0; index < manualTicketingNum; index++) {
             result.add(getTicketNumbers());
         }
 

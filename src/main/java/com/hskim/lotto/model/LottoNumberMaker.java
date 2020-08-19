@@ -10,7 +10,7 @@ public interface LottoNumberMaker {
 
     static List<Integer> makeNumberPool() {
         return IntStream
-                .rangeClosed(LottoNumber.LOW_BOUND,  LottoNumber.UPPER_BOUND)
+                .rangeClosed(LottoNumber.LOW_BOUND, LottoNumber.UPPER_BOUND)
                 .boxed()
                 .collect(Collectors.toList());
     }

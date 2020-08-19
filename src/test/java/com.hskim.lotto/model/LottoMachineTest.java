@@ -48,9 +48,9 @@ public class LottoMachineTest {
 
     private List<List<Integer>> getLottoNumbers() {
         List<List<Integer>> lottoTickets = new LinkedList<>();
-        lottoTickets.add(Arrays.asList(1, 2, 3, 4 ,5 ,6));
-        lottoTickets.add(Arrays.asList(1, 2, 3, 4 ,5 ,6));
-        lottoTickets.add(Arrays.asList(1, 2, 3, 4 ,5 ,6));
+        lottoTickets.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoTickets.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoTickets.add(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         return lottoTickets;
     }

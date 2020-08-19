@@ -30,7 +30,7 @@ public class PurchasePriceTest {
     void create_나누어지지_않는수_실패(double purchasePrice) {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new PurchasePrice((int)purchasePrice);
+            new PurchasePrice((int) purchasePrice);
         }).withMessage(LottoTicketingExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
     }
 }
