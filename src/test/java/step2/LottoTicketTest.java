@@ -26,4 +26,11 @@ public class LottoTicketTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lotto = new LottoTicket(value));
     }
+    @Test
+    @DisplayName("input String에서 lottoNumber 크기를 벗어난 숫자가 오는지 체크")
+    public void inputString_checkTheMaximumAndMinimumValue_Of_Input() {
+        String value = "[4, 56, 32, 25, 11, 22]";
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lotto = new LottoTicket(value));
+    }
 }

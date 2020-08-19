@@ -24,6 +24,12 @@ public class LottoTicket {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException();
         }
+        if (lottoNumbers
+                .stream()
+                .anyMatch(member -> Integer.parseInt(member) > 45 || Integer.parseInt(member) < 0)) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     public List<String> numbers() {
