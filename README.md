@@ -41,7 +41,7 @@
 * 구입금액이 0이거나 음수면 IllegalArgumentException 예외 발생
 * 구입금액이 1000원으로 나눠지지 않으면 illegalArgumentException 예외 발생
 
-- [ ] 구입한 로또 티켓의 로또번 호를 출력한다.
+- [ ] 구입한 로또 티켓의 로또 번호를 출력한다.
 
 - [ ] 로또 게임에서 당첨 번호를 6개 입력 받는다.
 * 당첨번호를 6개 입력하지 않았을 경우 IllegalArgumentException 예외가 발생
