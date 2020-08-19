@@ -2,9 +2,14 @@ package lotto.domain;
 
 import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -71,4 +76,25 @@ public class WinningLottoTest {
                 .isThrownBy(() -> WinningLotto.of(winningLottoNumbers, bonusNumber))
                 .withMessage("숫자를 제대로 입력해주세요.");
     }
+
+    @DisplayName("당첨번호 일치 개수에 따른 LottoRank 생성 테스트")
+    @ParameterizedTest
+    @MethodSource("makeLottoNumbersForWinningRank")
+    void getWinningRank_with_bonus_number(String selectedLottoNumber, String winningNumber,
+                                          String bonusNumber, LottoRank lottoRank) {
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(selectedLottoNumber));
+
+        assertThat(WinningLotto.of(winningNumber, bonusNumber).getWinningRank(lottoTicket)).isEqualTo(lottoRank);
+    }
+
+    private static Stream<Arguments> makeLottoNumbersForWinningRank() {
+        return Stream.of(
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", "7", LottoRank.FIRST),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,10", "6", LottoRank.SECOND_BONUS),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,10", "11", LottoRank.SECOND),
+                Arguments.of("1,2,3,4,5,6", "11,12,13,14,15,16", "17", LottoRank.DROP)
+
+        );
+    }
+
 }
