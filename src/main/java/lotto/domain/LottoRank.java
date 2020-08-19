@@ -41,7 +41,7 @@ public enum LottoRank {
 
     public static List<LottoRank> getLowPrizeOrderedLottoRanks() {
         return Stream.of(LottoRank.values())
-                .sorted(Comparator.comparingInt(rank -> rank.matchCount))
+                .sorted(Comparator.comparingInt(rank -> rank.prize))
                 .collect(Collectors.toList());
     }
 
