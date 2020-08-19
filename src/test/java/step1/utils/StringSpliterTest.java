@@ -12,9 +12,7 @@ public class StringSpliterTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1,2,3", "", "null", " "})
     public void spliter(String strings) {
-        assertThatThrownBy(() -> StringSpliter.spliter(Delimeter.CUSTOM_DELIMETER , strings))
-                .isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> StringSpliter.spliter(Delimeter.DELIMETER , strings))
-                .isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> StringSpliter.spliter(Delimeter.CUSTOM_DELIMETER , strings)).isOfAnyClassIn(RuntimeException.class, NumberFormatException.class);
+        assertThatThrownBy(() -> StringSpliter.spliter(Delimeter.DELIMETER , strings)).isOfAnyClassIn(RuntimeException.class, NumberFormatException.class);
     }
 }
