@@ -1,16 +1,18 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 
 public class Numbers {
 
-    private final int[] numbers;
+    private final List<Integer> numbers;
 
     public Numbers(String[] numbers) {
         this.numbers = Arrays.stream(numbers)
-                .mapToInt(this::validateNumberIsPositiveAndReturnValue)
-                .toArray();
+                .map(this::validateNumberIsPositiveAndReturnValue)
+                .collect(Collectors.toList());
     }
 
     private int validateNumberIsPositiveAndReturnValue(String number) {
@@ -22,20 +24,20 @@ public class Numbers {
     }
 
     public boolean hasOneNumber() {
-        return numbers.length == 1;
+        return numbers.size() == 1;
     }
 
     public int pickFirstValueIfHasOneNumber() {
         if (!hasOneNumber()) {
             throw new RuntimeException("하나의 숫자만 가지고 있어야 합니다.");
         }
-        return numbers[0];
+        return numbers.get(0);
     }
 
     public int sumNumbers() {
         return hasOneNumber() ?
                 pickFirstValueIfHasOneNumber() :
-                Arrays.stream(numbers)
+                numbers.stream()
                         .reduce(0, Integer::sum);
     }
 
