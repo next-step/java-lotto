@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ public class LottoTicketsTest {
         // given
         LottoTickets lottoTickets = new LottoTickets(makeLottoTickets());
         List<LottoTicket> lottoTicketList = makeLottoTickets();
-        makeLottoTickets().addAll(makeLottoTickets());
+        lottoTicketList.addAll(makeLottoTickets());
         LottoTickets expected = new LottoTickets(lottoTicketList);
 
         // when
@@ -71,14 +72,14 @@ public class LottoTicketsTest {
 
     private List<LottoTicket> makeLottoTickets() {
 
-        return Arrays.asList(
+        return new LinkedList<>(Arrays.asList(
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45)),
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 44, 45)),
                 new LottoTicket(Arrays.asList(1, 2, 3, 43, 44, 45)),
                 new LottoTicket(Arrays.asList(1, 2, 3, 42, 44, 45)),
                 new LottoTicket(Arrays.asList(1, 2, 3, 41, 44, 45))
-        );
+        ));
     }
 
     private List<LottoWinTable> makeWinTables() {
