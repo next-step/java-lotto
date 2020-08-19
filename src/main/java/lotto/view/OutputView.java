@@ -14,6 +14,7 @@ public class OutputView {
     private static final String LOTTO_NUMBERS_MESSAGE = "[%s]";
     private static final String WINNING_INTRO_MESSAGE = "\n당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String BONUS_WINNING_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다. (%s)";
 
     private OutputView() {
@@ -53,11 +54,20 @@ public class OutputView {
         LottoRank.getLowPrizeOrderedLottoRanks()
                 .stream()
                 .filter(rank -> rank.getMatchCount() > DEFAULT_SHOW_MATCH_COUNT)
-                .map(rank -> String.format(WINNING_RESULT_MESSAGE,
-                        rank.getMatchCount(),
-                        rank.getPrize(),
-                        winningResult.getRankCount(rank)))
+                .map(rank -> makeRankResultString(rank, winningResult))
                 .forEach(System.out::println);
+    }
+
+    private static String makeRankResultString(LottoRank rank, WinningResult winningResult) {
+        String message = WINNING_RESULT_MESSAGE;
+        if(rank.equals(LottoRank.SECOND_BONUS)) {
+            message = BONUS_WINNING_RESULT_MESSAGE;
+        }
+
+        return String.format(message,
+                rank.getMatchCount(),
+                rank.getPrize(),
+                winningResult.getRankCount(rank));
     }
 
     private static void printLottoResultRate(WinningResult winningResult) {

@@ -13,19 +13,20 @@ public class LottoRankTest {
 
     private static Stream<Arguments> makeLottoRankData() {
         return Stream.of(
-                Arguments.of(0, LottoRank.DROP),
-                Arguments.of(1, LottoRank.DROP),
-                Arguments.of(2, LottoRank.DROP),
-                Arguments.of(3, LottoRank.FOURTH),
-                Arguments.of(6, LottoRank.FIRST),
-                Arguments.of(7, LottoRank.DROP)
+                Arguments.of(0, false, LottoRank.DROP),
+                Arguments.of(1, false, LottoRank.DROP),
+                Arguments.of(2, false, LottoRank.DROP),
+                Arguments.of(5, false, LottoRank.SECOND),
+                Arguments.of(5, true, LottoRank.SECOND_BONUS),
+                Arguments.of(6, false, LottoRank.FIRST),
+                Arguments.of(7, false, LottoRank.DROP)
         );
     }
 
     @DisplayName("LottoRank 생성(of 메소드) 테스트")
     @ParameterizedTest
     @MethodSource("makeLottoRankData")
-    void of_test(int matchCount, LottoRank lottoRank) {
-        assertThat(LottoRank.of(matchCount)).isEqualTo(lottoRank);
+    void of_test(int matchCount, boolean matchBonus, LottoRank lottoRank) {
+        assertThat(LottoRank.of(matchCount, matchBonus)).isEqualTo(lottoRank);
     }
 }
