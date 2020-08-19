@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import static step1.util.StringUtil.EMPTY_STRING;
 
-public class CustomDelimiterOperation implements Operation{
+public class CustomDelimiterOperation implements Operation {
 
 	private static final Pattern USELESS_STRING_REGEX = Pattern.compile("//(.)\\\\n");
 

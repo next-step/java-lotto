@@ -1,6 +1,7 @@
 package step1.domain;
 
-import com.sun.tools.javac.util.List;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step1.domain.collections.Numbers;
 import step1.exception.StringAdderException;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,18 +17,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DefaultOperationTest {
 
+	@DisplayName("객체 생성 테스트")
 	@ParameterizedTest
 	@MethodSource("provideConstructSource")
 	void testConstruction(String input, Numbers expect) {
 		assertThat(new DefaultOperation(input)).isEqualTo(new DefaultOperation(expect));
 	}
 
+	@DisplayName("객체 생성 실패 테스트")
 	@ParameterizedTest
 	@ValueSource(strings = {"1&2", "a,b,c"})
 	void testFailConstruction(String input) {
 		assertThrows(StringAdderException.class, () -> new DefaultOperation(input));
 	}
 
+	@DisplayName("문자열 합 검증 테스트")
 	@ParameterizedTest
 	@MethodSource("provideSumSource")
 	void testSum(String input, int expect) {

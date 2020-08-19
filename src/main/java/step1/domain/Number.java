@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Number {
 
+	private final int number;
+
 	public static final int ZERO = 0;
 
 	public static final Number ZERO_NUMBER = new Number(ZERO);
@@ -13,8 +15,6 @@ public class Number {
 	private static final String NEGATIVE_NOT_ALLOWED = "숫자는 양수로 입력해주세요.";
 
 	private static final String PLEASE_INPUT_POSITIVE_INT = "더할 숫자는 자연수로 입력해주세요.";
-
-	private final int number;
 
 	public Number(String input) {
 		try {

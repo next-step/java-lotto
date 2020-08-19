@@ -18,7 +18,7 @@ public class StringAdder {
 	private StringAdder() {}
 
 	public static int calculate(String input) {
-		if(isNullOrEmpty(input)) {
+		if (isNullOrEmpty(input)) {
 			return ZERO;
 		}
 
@@ -28,7 +28,7 @@ public class StringAdder {
 	}
 
 	private static Operation getOperation(String input) {
-		if(isCustomDelimiterPattern(input)) {
+		if (isCustomDelimiterPattern(input)) {
 			return new CustomDelimiterOperation(getCustomDelimiter(input), input);
 		}
 
