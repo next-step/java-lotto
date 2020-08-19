@@ -12,8 +12,8 @@ public class LottoController {
         LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
         OutputView.printLottoTickets(lottoTickets);
 
-        String bonusNumber = "";
-        WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningLottoNumber(), bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningLottoNumber(),
+                                                    InputView.scanBonusNumber());
         WinningResult winningResult = lottoTickets.getWinningResult(winningLotto);
         OutputView.printLottoResult(winningResult);
     }
