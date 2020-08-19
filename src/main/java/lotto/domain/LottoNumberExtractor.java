@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-public interface LottoNumberGenerator {
+public interface LottoNumberExtractor {
 
     List<LottoNumber> getNumbers(int size);
 }

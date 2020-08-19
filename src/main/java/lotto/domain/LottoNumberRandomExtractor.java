@@ -3,15 +3,16 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class LottoNumberRandomGenerator implements LottoNumberGenerator {
+public class LottoNumberRandomExtractor implements LottoNumberExtractor {
 
     private final List<LottoNumber> allLottoNumbers;
 
-    public LottoNumberRandomGenerator() {
+    public LottoNumberRandomExtractor() {
         allLottoNumbers = new ArrayList<>();
 
-        for (int i = LottoConstants.LOTTO_MIN; i <= LottoConstants.LOTTO_MAX; i++) {
+        for (int i = LottoNumber.LOTTO_MIN; i <= LottoNumber.LOTTO_MAX; i++) {
             allLottoNumbers.add(new LottoNumber(i));
         }
     }
@@ -19,7 +20,10 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator {
     @Override
     public List<LottoNumber> getNumbers(int size) {
         mixNumbers();
-        return allLottoNumbers.subList(0, LottoConstants.LOTTO_SIZE);
+        return allLottoNumbers.stream()
+                .limit(size)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private void mixNumbers() {
