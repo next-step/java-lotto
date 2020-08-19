@@ -9,14 +9,15 @@ import lombok.Getter;
 @Getter
 public enum Ranking {
 
-	FIRST(6, 2000000000),
-	SECOND(5, 1500000),
-	THIRD(4, 50000),
-	FOURTH(3, 5000),
-	FAILURE(2, 0);
+	FIRST(6, 2_000_000_000, true),
+	SECOND(5, 1_500_000, true),
+	THIRD(4, 50_000, true),
+	FOURTH(3, 5_000, true),
+	FAILURE(2, 0, false);
 
 	private final int sameCount;
 	private final long prizeMoney;
+	private final boolean view;
 
 	public static Ranking getRakingOf(int sameCount) {
 		if (FIRST.sameCount < sameCount) {
