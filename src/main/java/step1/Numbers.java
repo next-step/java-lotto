@@ -25,21 +25,8 @@ public class Numbers {
         return value;
     }
 
-    public boolean hasOneNumber() {
-        return numbers.size() == 1;
-    }
-
-    public int pickFirstValueIfHasOneNumber() {
-        if (!hasOneNumber()) {
-            throw new RuntimeException("하나의 숫자만 가지고 있어야 합니다.");
-        }
-        return numbers.get(0);
-    }
-
     public int sum() {
-        return hasOneNumber() ?
-                pickFirstValueIfHasOneNumber() :
-                numbers.stream()
+        return numbers.stream()
                         .reduce(0, Integer::sum);
     }
 
