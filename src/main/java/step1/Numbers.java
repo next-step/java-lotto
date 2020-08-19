@@ -8,7 +8,17 @@ public class Numbers {
     private final int[] numbers;
 
     public Numbers(String[] numbers) {
-        this.numbers = Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+        this.numbers = Arrays.stream(numbers)
+                .mapToInt(this::validateNumberIsPositiveAndReturnValue)
+                .toArray();
+    }
+
+    private int validateNumberIsPositiveAndReturnValue(String number) {
+        int value = Integer.parseInt(number);
+        if(value < 0) {
+            throw new RuntimeException("0 이상의 값만 입력 가능합니다.");
+        }
+        return value;
     }
 
     public boolean hasOneNumber() {
@@ -22,10 +32,11 @@ public class Numbers {
         return numbers[0];
     }
 
-    public int plusNumbers() {
+    public int sumNumbers() {
         return hasOneNumber() ?
                 pickFirstValueIfHasOneNumber() :
-                Arrays.stream(numbers).reduce(0, Integer::sum);
+                Arrays.stream(numbers)
+                        .reduce(0, Integer::sum);
     }
 
 }

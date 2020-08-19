@@ -1,8 +1,11 @@
 package step1;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NumericalExpression {
 
-    public static final String SEPARATOR = ",";
+    public static final String DELIMITER = ",|:";
 
     private final String text;
 
@@ -11,7 +14,12 @@ public class NumericalExpression {
     }
 
     public String[] split() {
-        return text.split(SEPARATOR);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
+        return text.split(DELIMITER);
     }
 
 }
