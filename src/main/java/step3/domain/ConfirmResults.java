@@ -28,7 +28,7 @@ public class ConfirmResults {
 		return groupedByPrizeGrade.entrySet()
 				.stream()
 				.filter(entry -> entry.getValue() > ZERO)
-				.mapToLong(entry -> entry.getKey().getReward())
+				.mapToLong(entry -> entry.getKey().getReward() * entry.getValue())
 				.reduce(ZERO, Long::sum);
 	}
 

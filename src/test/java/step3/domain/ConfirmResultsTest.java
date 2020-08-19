@@ -44,13 +44,11 @@ class ConfirmResultsTest {
 	}
 
 	static Stream<Arguments> provideTestingGetPrizeRewardSum() {
-		List<PrizeGrade> confirmResults = Arrays.stream(PrizeGrade.values())
-														.filter(prizeGrade -> prizeGrade == THIRD)
-														.collect(Collectors.toList());
+		List<PrizeGrade> confirmResults = List.of(THIRD, THIRD);
 
 
 		return Stream.of(
-				Arguments.of(confirmResults, THIRD.getReward())
+				Arguments.of(confirmResults, THIRD.getReward() * confirmResults.size())
 		);
 	}
 }
