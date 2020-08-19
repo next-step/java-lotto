@@ -18,13 +18,6 @@ public class WinningBallsFactory {
 	private static final String WINNING_NUMBER_DELIMITER = ",";
 
 	private static LottoNumbers create(List<Integer> numbers) {
-		if (numbers == null || numbers.isEmpty()) {
-			throw new IllegalArgumentException("당첨번호가 비어있습니다.");
-		}
-		if (numbers.size() != 6) {
-			throw new IllegalArgumentException("당첨번호는 6개를 입력해주세요.");
-		}
-
 		return LottoNumbers.of(numbers);
 	}
 
