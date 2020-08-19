@@ -5,64 +5,65 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private final static String DELIMITER = ",|:";
+    private final static int ZERO = 0;
+    private final static int MINUS_VALUE = -1;
+    private final static int LENGTH_ONE = 1;
 
-    public StringAddCalculator() {
-//        validate(input);
-        Validate validate = new Validate() {
-            @Override
-            public int validateInput_Null(String input) {
 
-                return 0;
-            }
+    static int splitAndSum(String input) {
+        if (validateInputNUll(input)) return 0;
+        if (validateInputOneNumber(input)) return Integer.parseInt(input);
 
-            @Override
-            public int validateInput_OneNumber(String input) {
-                return 0;
-            }
+        int returnValue = hasCustomDelimiter(input);
+        if (returnValue >= ZERO) return returnValue;
 
-            @Override
-            public int validateInput_NegativeNumber(String input) {
-                return 0;
-            }
-        };
+        String[] inputs = input.split(DELIMITER);
+        validateInputNegative(inputs);
+        return elementSum(inputs);
     }
 
-    public static int splitAndSum(String input) {
+    private static void validateInputNegative(String[] inputs) {
+        boolean isAllPostiveValue = Arrays.stream(inputs)
+                .map(Integer::parseInt)
+                .allMatch(element -> element >= ZERO);
 
-        if(input == null || input.trim().isEmpty()){
-            return 0;
+        if (!isAllPostiveValue) {
+            throw new RuntimeException("ERR!!!");
         }
-        if(input.length() == 1){
-            return Integer.parseInt(input);
-        }
-        String inputs[];
+    }
+
+    private static int hasCustomDelimiter(String input) {
+        System.out.println(input);
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
 
-        if(m.find()){
+        if (m.find()) {
             String customDelimiter = m.group(1);
-            System.out.println(customDelimiter);
-            inputs  =m.group(2).split(customDelimiter);
-
-        }else
-            inputs = input.split(",|:");
-
-        boolean isNegative = Arrays.stream(inputs)
-                .map(Integer::parseInt)
-                .allMatch(element -> element >=0);
-
-        if(!isNegative){
-           throw new RuntimeException("ERR!!!");
+            String inputs[] = m.group(2).split(customDelimiter);
+            return elementSum(inputs);
         }
 
-
-        return StringAddCalculator.elementSum(inputs);
+        return MINUS_VALUE;
     }
 
-    static int elementSum(String inputs[]){
+    private static boolean validateInputOneNumber(String input) {
+        if (input.length() == LENGTH_ONE) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean validateInputNUll(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static int elementSum(String inputs[]) {
         int sum = Arrays.stream(inputs)
                 .map(Integer::parseInt)
-                .reduce(0,Integer::sum);
-
+                .reduce(0, Integer::sum);
         return sum;
     }
 }
