@@ -2,17 +2,25 @@ package step2;
 
 import step2.model.LottoNumberGenerator;
 import step2.model.LottoTicket;
+import step2.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoExtractorMain {
     public static void main(String[] args) {
-        int trials = 10;
         List<LottoTicket> ticketList = new ArrayList<>();
+        int amount = InputView.askQuestion();
         LottoNumberGenerator generator = new LottoNumberGenerator();
+        int trials = InputView.printNumberOfTickets(amount);
+
         for (int i = 0; i < trials; i++) {
-            ticketList.add(new LottoTicket(generator.retrieveLottoNumberList()));
+            String numberList = generator.retrieveLottoNumberList();
+            ticketList.add(new LottoTicket(numberList));
+            System.out.println(numberList);
         }
+
+        String answerNumber = InputView.checkWinNumber();
+        System.out.println(answerNumber);
     }
 }
