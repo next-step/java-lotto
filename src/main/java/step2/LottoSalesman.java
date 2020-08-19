@@ -8,7 +8,6 @@ public class LottoSalesman {
   private static final String SCRIP_INPUT_LOTTO_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
   private static final String SCRIPT_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
   private static final String SCRIPT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-  private static final String SCRIPT_INFORM_WINNING = "\n당첨 통계";
   private final Scanner scanner;
 
   public LottoSalesman(Scanner scanner) {
@@ -45,7 +44,7 @@ public class LottoSalesman {
   }
 
   private int manualLottoCount(boolean first, int onePrice, int payment) {
-    int canBuyCount = onePrice / payment;
+    int canBuyCount = payment / onePrice ;
     System.out.println(printScriptManualLottoCount(first, canBuyCount));
 
     int count = scanner.nextInt();
@@ -99,10 +98,4 @@ public class LottoSalesman {
     return scanner.nextInt();
   }
 
-  public void informWinning(LottoStats analyze, int payment) {
-    System.out.println(SCRIPT_INFORM_WINNING);
-    System.out.println("--------");
-    System.out.print(analyze);
-    System.out.printf("총 수익률은 %.2f입니다.", analyze.rate(payment));
-  }
 }
