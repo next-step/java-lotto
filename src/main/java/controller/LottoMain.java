@@ -12,6 +12,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int buyPrice = InputView.inputBuyPrice();
+        int manualCount = InputView.inputManualCount();
 
         LottoGame lottoGame = LottoGame.of(buyPrice);
 
