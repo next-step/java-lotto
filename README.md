@@ -46,5 +46,5 @@ step03 pr : https://github.com/next-step/java-lotto/pull/741
 - [x] 이후 통계 및 수익률 출력은 기존(수동) + 자동 구매한 티켓까지 포함해 산출해야 한다.
 
 ### programing needs
-- [ ] 예외 처리를 보완하여 모든 입력에 에러가 발생하지 않도록 조치
-- [ ] java8+의 Optional을 통해 NPE처리
+- [x] 예외 처리
+- [x] java8+의 Optional을 통해 NPE처리

@@ -1,5 +1,6 @@
 package com.hskim.lotto.ui;
 
+import com.google.common.collect.ImmutableMap;
 import com.hskim.lotto.model.EarningRate;
 import com.hskim.lotto.model.LottoWinTable;
 
@@ -22,6 +23,17 @@ public class LottoResultView {
     private static final String NUM_PHRASE = "개";
     private static final String A_COMMA = ",";
     private static final String A_BLANK = " ";
+    private static final String OPENING_BRACKET = "(";
+    private static final String CLOSING_BRACKET = ")";
+    private static final String THE_WON = "원";
+
+    private static final Map<LottoWinTable, String> winMessageMap = ImmutableMap.of(
+            LottoWinTable.FIRST_PLACE, "6개 일치",
+            LottoWinTable.SECOND_PLACE, "5개 일치, 보너스 볼 일치",
+            LottoWinTable.THIRD_PLACE, "5개 일치",
+            LottoWinTable.FOURTH_PLACE, "4개 일치",
+            LottoWinTable.FIFTH_PLACE, "3개 일치"
+    );
 
     public void printEarningRate(String earningRate, boolean isProfit) {
         String phrase = EARNING_RATE_PHRASE + A_BLANK + earningRate + END_PHRASE;
@@ -66,7 +78,12 @@ public class LottoResultView {
     }
 
     private String makeDataString(LottoWinTable lottoWinTable, Map<LottoWinTable, Integer> winnerMap) {
-        return lottoWinTable.toString()
+        return winMessageMap.get(lottoWinTable)
+                + A_BLANK
+                + OPENING_BRACKET
+                + lottoWinTable.getPrizeAmount()
+                + THE_WON
+                + CLOSING_BRACKET
                 + HYPHEN
                 + winnerMap.get(lottoWinTable)
                 + NUM_PHRASE;
