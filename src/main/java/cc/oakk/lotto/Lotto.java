@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
+
 public class Lotto {
     public static final int NUMBER_COUNT = 6;
     public static final int MIN_NUMBER = 1;
@@ -15,6 +17,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        throwIfNull(numbers);
         if (numbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("Lotto's number size must be %d!", NUMBER_COUNT));
         }
@@ -34,6 +37,7 @@ public class Lotto {
     }
 
     public Rank compare(Lotto target) {
+        throwIfNull(target);
         int matchingCount = (int) numbers.stream()
                 .filter(target.numbers::contains)
                 .count();

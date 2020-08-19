@@ -3,6 +3,8 @@ package cc.oakk.lotto;
 import java.util.HashMap;
 import java.util.Map;
 
+import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
+
 public class SimpleLottoPrizeProvider implements LottoPrizeProvider<Long> {
     private static final Map<Rank, Long> prizes;
 
@@ -15,9 +17,6 @@ public class SimpleLottoPrizeProvider implements LottoPrizeProvider<Long> {
     }
 
     public Long getPrizeByRank(Rank rank) {
-        if (rank == null) {
-            throw new IllegalArgumentException("Rank is null!");
-        }
-        return prizes.getOrDefault(rank, 0L);
+        return prizes.getOrDefault(throwIfNull(rank), 0L);
     }
 }
