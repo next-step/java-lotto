@@ -16,10 +16,10 @@ public class LottoTicketsTest {
         // given
         LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(14000);
-        LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
+        LottoTickets lottoTickets = new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker));
 
         // when & then
-        assertThat(lottoTickets).isEqualTo(new LottoTickets(purchasePrice, numberMaker));
+        assertThat(lottoTickets).isEqualTo(new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker)));
     }
 
     @DisplayName("getTotalTicketPrice() 테스트 - 티켓 총가격 로직 검증")
@@ -29,13 +29,29 @@ public class LottoTicketsTest {
         int expense = 14000;
         LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(expense);
-        LottoTickets lottoTickets = new LottoTickets(purchasePrice, numberMaker);
+        LottoTickets lottoTickets = new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker));
 
         // when
         int result = lottoTickets.getTotalTicketPrice();
 
         // then
         assertThat(result).isEqualTo(expense);
+    }
+
+    @DisplayName("mergeTickets() 테스트 - 다른 LottoTickets객체를 받아 lottoTickets인스턴스가 합쳐진 객체 반환 테스트")
+    @Test
+    void mergeTickets() {
+        // given
+        LottoTickets lottoTickets = new LottoTickets(makeLottoTickets());
+        List<LottoTicket> lottoTicketList = makeLottoTickets();
+        makeLottoTickets().addAll(makeLottoTickets());
+        LottoTickets expected = new LottoTickets(lottoTicketList);
+
+        // when
+        LottoTickets result = lottoTickets.mergeTickets(new LottoTickets(makeLottoTickets()));
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 
     @DisplayName("getWinTableList() 테스트 - 티켓들에 해당하는 당첨 등수 list를 구하는 로직 검증")
