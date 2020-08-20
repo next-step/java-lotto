@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public final class Lotto implements Iterable<Integer> {
 
   public static final int FIXED_COUNT = 6;
-  protected List<Integer> numbers;
+  private final List<Integer> numbers;
 
   public Lotto(String numbers) {
     this(
@@ -21,13 +21,16 @@ public final class Lotto implements Iterable<Integer> {
             .collect(Collectors.toList()));
   }
 
-
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);
     validateRange(numbers);
     validateDuplicate(numbers);
     Collections.sort(numbers);
-    this.numbers = numbers;
+    this.numbers = Collections.unmodifiableList(numbers);
+  }
+
+  public List<Integer> getNumbers() {
+    return numbers;
   }
 
   private void validateLength(List<Integer> numbers) {
@@ -76,7 +79,7 @@ public final class Lotto implements Iterable<Integer> {
 
   @Override
   public String toString() {
-    return "[" + numbers + ']';
+    return  numbers.toString() ;
   }
 
   @Override

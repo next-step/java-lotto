@@ -79,11 +79,11 @@ public class LottoSalesman {
     System.out.println(
         String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.count(), autoLottos.count()));
     for (Lotto lotto : manualLottos) {
-      System.out.println(lotto.numbers);
+      System.out.println(lotto);
     }
 
     for (Lotto lotto : autoLottos) {
-      System.out.println(lotto.numbers);
+      System.out.println(lotto);
     }
   }
 
