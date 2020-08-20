@@ -7,6 +7,10 @@ public class InputUtil {
 
     public static String returnString(String question) {
         System.out.println(question);
-        return scanner.next().trim();
+        String result = scanner.next();
+        if (result.contains("\\n")) {
+            result = result.replace("\\n", "\n");
+        }
+        return result;
     }
 }

@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Step1Main {
     public static void main(String[] args) {
-//        String problem = InputUtil.returnString("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열");
-        String problem = "//;\\n1;2;3";
-        PrintResult.printResult(StringAddCalculator.splitAndSum(problem));
+        String problem = InputUtil.returnString("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열");
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(problem);
+        PrintResult.printResult(stringAddCalculator.splitAndSum());
     }
 }
