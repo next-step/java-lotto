@@ -18,6 +18,12 @@ public class LottoTest {
     }
 
     @Test
+    public void constructor_ShouldThrow_OnDuplicatedNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(1, 2, 3, 3, 5, 6));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(1, 2, 3, 1, 5, 6));
+    }
+
+    @Test
     public void constructor_ShouldThrow_OnInvalidNumberCount() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(IntStream.range(1, Lotto.NUMBER_COUNT).boxed().collect(Collectors.toList())));

@@ -3,7 +3,6 @@ package cc.oakk.lotto.model;
 import cc.oakk.lotto.view.printer.Printable;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,7 +26,7 @@ public class Lotto implements Printable<String> {
 
         List<Integer> validatedList = numbers.stream()
                 .map(Lotto::throwIfNotValidNumber)
-                .sorted(Comparator.comparingInt(n -> n))
+                .sorted(Lotto::compareAndThrowIfEquals)
                 .collect(Collectors.toList());
 
         this.numbers = Collections.unmodifiableList(validatedList);
@@ -70,6 +69,14 @@ public class Lotto implements Printable<String> {
             throw new IllegalArgumentException(String.format("%d is not between 0 and %d.", target, MAX_NUMBER));
         }
         return target;
+    }
+
+    private static int compareAndThrowIfEquals(int num1, int num2) {
+        int compared = Integer.compare(num1, num2);
+        if (compared == 0) {
+            throw new IllegalArgumentException(String.format("%d, %d are duplicated!", num1, num2));
+        }
+        return compared;
     }
 
     @Override
