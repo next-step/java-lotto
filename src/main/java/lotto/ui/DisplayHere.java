@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.constants.PrizeGrade;
+import lotto.domain.PrizeGrade;
 import lotto.constants.RateOfReturn;
 import lotto.domain.ConfirmResults;
 import lotto.domain.LottoGames;

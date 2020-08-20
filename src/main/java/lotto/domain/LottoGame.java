@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.LottoException;
-import lotto.constants.PrizeGrade;
 
 import java.util.Arrays;
 import java.util.List;

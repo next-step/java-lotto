@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import lotto.LottoException;
-import lotto.constants.PrizeGrade;
 
 import java.util.List;
 import java.util.stream.Stream;
