@@ -16,7 +16,7 @@ public class LottoTest {
     @Test
     public void findWinningNumbers() {
         Lotto lotto = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[] { 1, 2, 3, 4, 5 ,6 });
         assertThat(lotto.findWinningNumbers(winningNumbers)).hasSize(6);
         assertThat(lotto.findWinningNumbers(winningNumbers)).contains(1, 2, 3, 4, 5, 6);
     }
