@@ -14,4 +14,8 @@ public class Money {
         return money / UNIT_PRICE;
     }
 
+    public double calculateYelid(int winnings) {
+        return winnings / money;
+    }
+
 }
