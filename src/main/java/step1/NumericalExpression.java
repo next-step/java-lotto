@@ -5,8 +5,9 @@ import java.util.regex.Pattern;
 
 public class NumericalExpression {
 
-    public static final String DEFAULT_DELIMITER = ",|:";
-    public static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
 
     private final String text;
 
@@ -15,7 +16,7 @@ public class NumericalExpression {
     }
 
     public String[] split() {
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
+        Matcher m = DEFAULT_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
