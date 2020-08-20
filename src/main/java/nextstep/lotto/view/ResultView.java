@@ -1,8 +1,6 @@
 package nextstep.lotto.view;
 
-import nextstep.lotto.dto.LottoNumber;
-import nextstep.lotto.dto.LottoRank;
-import nextstep.lotto.dto.LottoTicket;
+import nextstep.lotto.dto.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,10 +27,10 @@ public class ResultView {
 
     private final int DEFAULT_TICKET_COUNT = 0;
 
-    public void showLottoTicket(List<LottoTicket> tickets) {
-        printTicketCount(tickets.size());
+    public void showLottoTicket(LottoTickets tickets) {
+        printTicketCount(tickets.count());
 
-        for(LottoTicket ticket : tickets) {
+        for(LottoTicket ticket : tickets.getAll()) {
             printTicket(ticket);
         }
     }
@@ -41,9 +39,7 @@ public class ResultView {
     }
 
     private void printTicket(LottoTicket ticket) {
-        List<LottoNumber> lottoNumber = ticket.getLottoNumber();
-        Collections.sort(lottoNumber);
-        System.out.println(lottoNumberToString(lottoNumber));
+        System.out.println(lottoNumberToString(ticket.getLottoNumber()));
     }
 
     private String lottoNumberToString(List<LottoNumber> lottoNumbers){
@@ -54,9 +50,11 @@ public class ResultView {
         return lottoTicketNumbers.toString();
     }
 
-    public void showLottoResultBoard(Map<LottoRank,Integer> lottoResult,float benefitRate) {
+    public void showLottoResultBoard(LottoResultBoard resultBoard) {
         System.out.println(LOTTO_RESULT_STAT);
         System.out.println(LOTTO_RESULT_LINE_SEPERATOR);
+
+        Map<LottoRank,Integer> lottoResult = resultBoard.getLottoResult();
         StringBuilder sb = new StringBuilder();
         sb.append(getMatchInfo(LottoRank.THREE, lottoResult.getOrDefault(LottoRank.THREE,DEFAULT_TICKET_COUNT)));
         sb.append(getMatchInfo(LottoRank.FOUR, lottoResult.getOrDefault(LottoRank.FOUR,DEFAULT_TICKET_COUNT)));
@@ -64,7 +62,7 @@ public class ResultView {
         sb.append(getMatchInfo(LottoRank.SIX, lottoResult.getOrDefault(LottoRank.SIX,DEFAULT_TICKET_COUNT)));
         System.out.println(sb.toString());
 
-        System.out.printf(BENEFIT_RATE_TEXT,benefitRate);
+        System.out.printf(BENEFIT_RATE_TEXT,resultBoard.getBenefitRate());
     }
 
     private String getMatchInfo(LottoRank rank, int matchCount){
