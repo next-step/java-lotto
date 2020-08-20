@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -17,4 +18,11 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return "[" + numbers.stream()
+                .map(Objects::toString)
+                .collect(Collectors.joining(", "))
+                + "]";
+    }
 }

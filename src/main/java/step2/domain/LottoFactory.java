@@ -8,16 +8,21 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
+    public static final int LAST_LOTTO_NUMBER = 45;
+    public static final int PICK_COUNT = 6;
+
     public static List<Lotto> create(int lottoPurchaseCount) {
-        List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i< lottoPurchaseCount; i++) {
-            List<Integer> lottoNumbers = IntStream.range(0, 45)
-                    .boxed()
-                    .collect(Collectors.toList());
-            Collections.shuffle(lottoNumbers);
-            result.add(new Lotto(lottoNumbers));
-        }
-        return result;
+        return IntStream.range(0, lottoPurchaseCount)
+                .mapToObj(i -> new Lotto(pickLottoNumbers()))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> pickLottoNumbers() {
+        List<Integer> lottoNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, PICK_COUNT);
     }
 
 }
