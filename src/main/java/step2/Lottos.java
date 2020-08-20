@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class Lottos implements Iterable<Lotto> {
   private final List<Lotto> lottos;
 
   public Lottos(List<Lotto> lottos) {
-    this.lottos = lottos;
+    this.lottos = Collections.unmodifiableList(lottos);
   }
 
   public int count() {
