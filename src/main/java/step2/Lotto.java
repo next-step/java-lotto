@@ -1,26 +1,52 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class Lotto {
+public final class Lotto implements Iterable<Integer> {
 
   public static final int FIXED_COUNT = 6;
-  protected List<Integer> numbers;
+  private final List<Integer> numbers;
+
+  public Lotto(String numbers) {
+    this(
+        Arrays.stream(numbers.split(","))
+            .map(value -> Integer.parseInt(value.trim()))
+            .collect(Collectors.toList()));
+  }
 
   public Lotto(List<Integer> numbers) {
     validateLength(numbers);
+    validateRange(numbers);
     validateDuplicate(numbers);
     Collections.sort(numbers);
-    this.numbers = numbers;
+    this.numbers = Collections.unmodifiableList(numbers);
+  }
+
+  public List<Integer> getNumbers() {
+    return numbers;
   }
 
   private void validateLength(List<Integer> numbers) {
     if (numbers.size() != FIXED_COUNT) {
       throw new IllegalArgumentException("로또번호는 6개입니다.");
     }
+  }
+
+  private void validateRange(List<Integer> numbers) {
+    if (isLottoRange(numbers)) {
+      throw new IllegalArgumentException("로또번호는 1부터 45번까지입니다.");
+    }
+  }
+
+  private boolean isLottoRange(List<Integer> numbers) {
+    return numbers.stream().anyMatch(n -> n < 0 || n > 45);
   }
 
   private void validateDuplicate(List<Integer> numbers) {
@@ -30,7 +56,7 @@ public class Lotto {
     }
   }
 
-  protected boolean hasNumber(Integer number) {
+  public boolean hasNumber(Integer number) {
     return numbers.contains(number);
   }
 
@@ -53,6 +79,23 @@ public class Lotto {
 
   @Override
   public String toString() {
-    return "[" + numbers + ']';
+    return  numbers.toString() ;
+  }
+
+  @Override
+  public Iterator<Integer> iterator() {
+    return new Iterator<Integer>() {
+      int current = 0;
+
+      @Override
+      public boolean hasNext() {
+        return current < numbers.size();
+      }
+
+      @Override
+      public Integer next() {
+        return numbers.get(current++);
+      }
+    };
   }
 }

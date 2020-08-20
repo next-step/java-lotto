@@ -1,6 +1,6 @@
 package step2;
 
-import static step2.LottoGenerator.ONE_PRICE;
+import static step2.LottosGenerator.ONE_PRICE;
 
 import java.util.Arrays;
 import java.util.List;
