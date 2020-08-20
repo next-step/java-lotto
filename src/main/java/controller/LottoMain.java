@@ -8,15 +8,18 @@ import strategy.RandomLottoNumberGenerator;
 import view.InputView;
 import view.ResultView;
 
+import java.util.List;
+
 public class LottoMain {
 
     public static void main(String[] args) {
         int buyPrice = InputView.inputBuyPrice();
-        int manualCount = InputView.inputManualCount();
+        int passivityCount = InputView.inputManualCount();
 
-        LottoGame lottoGame = LottoGame.of(buyPrice);
+        LottoGame lottoGame = LottoGame.of(buyPrice, passivityCount);
+        List<String> passivityLottos = InputView.inputPassivityCountLottos(passivityCount);
 
-        ResultView.viewBuyAmount(lottoGame.getBuyAmount());
+        ResultView.viewBuyAmount(lottoGame.getAutoCount());
         Lottos lottos = lottoGame.issue(new RandomLottoNumberGenerator());
         ResultView.viewIssuedLotto(lottos);
 
