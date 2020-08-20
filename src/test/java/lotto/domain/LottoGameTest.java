@@ -39,13 +39,6 @@ class LottoGameTest {
 		assertThat(new LottoGame(lottoNumbers).contains(lottoNumber)).isTrue();
 	}
 
-	@DisplayName("confirmPrize 테스트")
-	@ParameterizedTest
-	@MethodSource("provideTestingConfirmPrize")
-	void confirmPrize(List<LottoNumber> lottoNumbers, LottoGame prizeGame, LottoNumber bonusNumber, PrizeGrade expect) {
-		assertThat(new LottoGame(lottoNumbers).confirmPrize(new GameWinningCondition(prizeGame, bonusNumber))).isEqualTo(expect);
-	}
-
 	@DisplayName("toString 테스트")
 	@ParameterizedTest
 	@MethodSource("provideTestingToString")
@@ -69,18 +62,6 @@ class LottoGameTest {
 	static Stream<Arguments> provideTestingContains() {
 		return Stream.of(
 				Arguments.of(LOTTO_NUMBERS, new LottoNumber(5))
-		);
-	}
-
-	static Stream<Arguments> provideTestingConfirmPrize() {
-
-		List<LottoNumber> prize = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-											new LottoNumber(4), new LottoNumber(5), new LottoNumber(44));
-
-		LottoNumber bonusNumber = new LottoNumber(6);
-
-		return Stream.of(
-				Arguments.of(LOTTO_NUMBERS, new LottoGame(prize), bonusNumber, PrizeGrade.SECOND)
 		);
 	}
 	static Stream<Arguments> provideTestingToString() {

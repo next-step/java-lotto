@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.configuration.LottoConfig.LOTTO_MAX_NUM;
-import static lotto.configuration.LottoConfig.LOTTO_MIN_NUM;
+import static lotto.domain.LottoNumber.LOTTO_MAX_NUM;
+import static lotto.domain.LottoNumber.LOTTO_MIN_NUM;
+
 
 public class LottoNumberFactory {
 

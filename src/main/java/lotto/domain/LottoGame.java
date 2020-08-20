@@ -8,11 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.configuration.LottoConfig.NUMBER_COUNT_PER_GAME;
 import static lotto.constants.MessageConstant.NUMBER_COUNT_SHOULD_BE_N;
 
 public class LottoGame {
 
+	public static final int NUMBER_COUNT_PER_GAME = 6;
 	private static final String OPEN_PARENTHESIS = "[";
 	private static final String CLOSE_PARENTHESIS = "]";
 	private static final String DELIMITER = ", ";

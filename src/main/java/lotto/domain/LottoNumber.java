@@ -4,12 +4,13 @@ import lotto.LottoException;
 
 import java.util.Objects;
 
-import static lotto.configuration.LottoConfig.LOTTO_MAX_NUM;
-import static lotto.configuration.LottoConfig.LOTTO_MIN_NUM;
 import static lotto.constants.MessageConstant.INPUT_SHOULD_INTEGER;
 import static lotto.constants.MessageConstant.OVER_NUMBER_RANGE;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+	public static final int LOTTO_MIN_NUM = 1;
+	public static final int LOTTO_MAX_NUM = 45;
 
 	private int number;
 

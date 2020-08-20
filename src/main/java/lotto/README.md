@@ -16,3 +16,4 @@
 4. PrizeInfo 클래스명 변경 (PrizeInfo -> GameWinningCondition)
 5. LottoGame에서 PrizeGrade를 의존하던 관계 끊기! 당첨 등급의 확인은 GameWinningCondition에 있다.
 6. 코딩 컨벤션 위반 정리 및 일급 컬렉션 안의 컬렉션들 수정불가 적용
+7. GameWinningCondition 테스트코드 추가 및 LottoConfig 삭제

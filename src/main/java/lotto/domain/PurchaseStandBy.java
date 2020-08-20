@@ -7,10 +7,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.configuration.LottoConfig.PRICE_PER_GAME;
-
 public class PurchaseStandBy {
 
+	public static final int PRICE_PER_GAME = 1000;
 	private static final int ZERO = 0;
 	private static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 

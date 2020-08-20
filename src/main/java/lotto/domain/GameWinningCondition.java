@@ -19,17 +19,18 @@ public class GameWinningCondition {
 		this.bonusNumber = bonusNumber;
 	}
 
+	public List<PrizeGrade> getPrizeResult(List<LottoGame> lottoGames) {
+		return lottoGames.stream()
+				.map(this::confirmPrize)
+				.collect(Collectors.toList());
+	}
+
 	private void validateBonusNumber(LottoGame prizeLottoGame, LottoNumber bonusNumber) {
 		if (prizeLottoGame.contains(bonusNumber)) {
 			throw new LottoException(BONUS_NUMBER_SHOULD_NOT_CONTAINS_PRIZE_GAME);
 		}
 	}
 
-	public List<PrizeGrade> getPrizeResult(List<LottoGame> lottoGames) {
-		return lottoGames.stream()
-				.map(this::confirmPrize)
-				.collect(Collectors.toList());
-	}
 	private PrizeGrade confirmPrize(LottoGame lottoGame) {
 		return PrizeGrade.of(getMatchCount(lottoGame), containsBonusNumber(lottoGame));
 	}
