@@ -8,11 +8,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_null_또는_빈문자(){
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
+        boolean isBoolean= UserInput.validateInputNUll(null);
+        assertThat(isBoolean).isEqualTo(true);
 
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
+        isBoolean = UserInput.validateInputNUll("");
+        assertThat(isBoolean).isEqualTo(true);
     }
 
     @Test
@@ -31,7 +31,6 @@ public class StringAddCalculatorTest {
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("1,2:4");
         assertThat(result).isEqualTo(7);
-
     }
 
     @Test
@@ -42,11 +41,10 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_negative() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+        String[] inputs = {"-1","2","3"};
+        assertThatThrownBy(() -> UserInput.validateInputNegative(inputs))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("ERR");
     }
-
-
 
 }
