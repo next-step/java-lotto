@@ -12,7 +12,7 @@ public class LottoStatistics {
 
     public static Map<Integer, Integer> calculateWinningCountStatistics(LottoResults lottoResults) {
         Map<Integer, Integer> result = new HashMap<>();
-        IntStream.range(3, 7)
+        IntStream.range(LottoConfig.WINNING_COUNT_FROM, LottoConfig.WINNING_COUNT_TO + 1)
                 .forEach(winningCount -> result.put(winningCount, lottoResults.calculateWinningNumbersCount(winningCount)));
         return result;
     }

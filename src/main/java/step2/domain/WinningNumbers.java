@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public WinningNumbers(int[] winningNumbers) {
         this.winningNumbers = Arrays.stream(winningNumbers)

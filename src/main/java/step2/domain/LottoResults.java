@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class LottoResults {
 
-    private List<Integer> winningNumberCounts;
+    private final List<Integer> winningNumberCounts;
 
     public LottoResults(List<Integer> winningNumberCounts) {
         this.winningNumberCounts = winningNumberCounts;
@@ -18,7 +18,7 @@ public class LottoResults {
     }
 
     public int calculateWinnings() {
-        return IntStream.range(3, 7)
+        return IntStream.range(LottoConfig.WINNING_COUNT_FROM, LottoConfig.WINNING_COUNT_TO + 1)
                 .mapToObj(winningCount -> Winnings.calculateWinnings(winningCount) * calculateWinningNumbersCount(winningCount))
                 .reduce(0, Integer::sum);
     }

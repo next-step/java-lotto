@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -14,7 +14,7 @@ public class Lotto {
 
     public int findWinningNumbersCount(WinningNumbers winningNumbers) {
         return (int) numbers.stream()
-                .filter(number -> winningNumbers.isWinningNumber(number))
+                .filter(winningNumbers::isWinningNumber)
                 .count();
     }
 

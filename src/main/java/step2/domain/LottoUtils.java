@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class LottoUtils {
 
-    public static final String DELIMITER = ", ";
+    private static final String DELIMITER = ", ";
 
     private LottoUtils() {
 
     }
 
     public static int[] splitWinningNumberLineAndReturnLottoNumbers(String winningNumberLine) {
-        return Arrays.asList(winningNumberLine.split(DELIMITER)).stream()
+        return Arrays.stream(winningNumberLine.split(DELIMITER))
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }

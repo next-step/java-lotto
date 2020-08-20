@@ -4,7 +4,7 @@ public class Money {
 
     private static final int UNIT_PRICE = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(int money) {
         this.money = money;
