@@ -3,6 +3,8 @@ package nextstep.lotto.utils;
 import nextstep.lotto.dto.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberUtil {
 
@@ -13,11 +15,7 @@ public class LottoNumberUtil {
     private LottoNumberUtil() {}
 
     public static List<LottoNumber> generator() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for(int number : getSixNumbers()){
-            lottoNumbers.add(LottoNumber.create(number));
-        }
+        List<LottoNumber> lottoNumbers = getSixNumbers();
 
         return lottoNumbers;
     }
@@ -32,19 +30,18 @@ public class LottoNumberUtil {
         return lottoNumbers;
     }
 
-    private static List<Integer> getSixNumbers() {
-        List<Integer> lottoEntryNumbers = allLottoNumbers();
+    private static List<LottoNumber> getSixNumbers() {
+        List<LottoNumber> lottoEntryNumbers = allLottoNumbers();
         Collections.shuffle(lottoEntryNumbers);
 
         return lottoEntryNumbers.subList(0,LOTTO_NUMBER_COUNT);
     }
 
-    private static List<Integer> allLottoNumbers(){
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for(int i = LOTTO_MINIMUM_BOUND; i <= LOTTO_MAXIMUM_BOUND; i++){
-            lottoNumbers.add(i);
-        }
-        return lottoNumbers;
+    private static List<LottoNumber> allLottoNumbers(){
+        return IntStream.range(LOTTO_MINIMUM_BOUND, LOTTO_MAXIMUM_BOUND)
+                .boxed()
+                .map(LottoNumber::create)
+                .collect(Collectors.toList());
     }
 }
 
