@@ -1,13 +1,12 @@
 package lotto.ui;
 
-import lotto.domain.PrizeGrade;
 import lotto.constants.RateOfReturn;
 import lotto.domain.ConfirmResults;
 import lotto.domain.LottoGames;
+import lotto.domain.PrizeGrade;
 import lotto.domain.PurchaseStandBy;
 import lotto.ui.output.OutputChannel;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -38,11 +37,18 @@ public class DisplayHere {
 	private String getReportOfStatisticsEachGroup(Map<PrizeGrade, Integer> group) {
 		return group.entrySet()
 				.stream()
-				.sorted(Comparator.comparing(entry -> entry.getKey().getPrintOrder()))
+				.sorted((entry1, entry2) -> Integer.compare(entry2.getKey().ordinal(),entry1.getKey().ordinal()))
 				.map(entry -> {
 					PrizeGrade prizeGrade = entry.getKey();
-					return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getStatisticsMessage(), entry.getValue());
+					return String.format(PRIZE_STATISTICS_FORMAT, formatPrizeExplain(prizeGrade), entry.getValue());
 				})
 				.collect(Collectors.joining(NEW_LINE));
+	}
+
+	private String formatPrizeExplain(PrizeGrade prizeGrade) {
+		if(prizeGrade == PrizeGrade.SECOND) {
+			return String.format(SECOND_PRIZE_EXPLAIN_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getReward());
+		}
+		return String.format(PRIZE_EXPLAIN_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getReward());
 	}
 }
