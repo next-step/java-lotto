@@ -14,8 +14,9 @@ public class MoneyTest {
     @DisplayName("몇장 구매하는지 계산")
     @ParameterizedTest
     @CsvSource(value = {"10000,10", "14000,14", "5000,5"})
-    public void calculateLottoPurchaseCount(int money, int lottoPurchaseCount) {
-        assertThat(Money.calculateLottoPurchaseCount(money)).isEqualTo(lottoPurchaseCount);
+    public void calculateLottoPurchaseCount(int amount, int lottoPurchaseCount) {
+        Money money = new Money(amount);
+        assertThat(money.calculateLottoPurchaseCount()).isEqualTo(lottoPurchaseCount);
     }
 
 }
