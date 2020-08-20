@@ -30,7 +30,6 @@ class LottoResultBoardTest {
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
-        resultBoard.getBenefitRate();
         assertThat(resultBoard.getBenefitRate()).isEqualTo(0);
     }
 
@@ -43,7 +42,6 @@ class LottoResultBoardTest {
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
-        resultBoard.getBenefitRate();
         assertThat(resultBoard.getBenefitRate()).isEqualTo(1);
     }
 
@@ -56,7 +54,6 @@ class LottoResultBoardTest {
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
-        resultBoard.getBenefitRate();
         assertThat(resultBoard.getBenefitRate()).isEqualTo(10);
     }
 
@@ -69,7 +66,6 @@ class LottoResultBoardTest {
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
-        resultBoard.getBenefitRate();
         assertThat(resultBoard.getBenefitRate()).isEqualTo(300);
     }
 
@@ -82,7 +78,6 @@ class LottoResultBoardTest {
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
         resultBoard.addLottoResult(LottoRank.of(0));
-        resultBoard.getBenefitRate();
         assertThat(resultBoard.getBenefitRate()).isEqualTo(400000);
     }
 
