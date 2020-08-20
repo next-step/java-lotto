@@ -21,8 +21,8 @@ public class InputValidator {
 		}
 	}
 
-	private static boolean isNumber(String price) {
-		return NUMBER_PATTERN.matcher(price)
+	public static boolean isNumber(String value) {
+		return NUMBER_PATTERN.matcher(value)
 							 .matches();
 	}
 
@@ -32,4 +32,12 @@ public class InputValidator {
 		}
 	}
 
+	public static void validateBonusBall(String bonusBallString) {
+		if (StringUtils.isBlank(bonusBallString)) {
+			throw new IllegalArgumentException("보너스볼을 입력하셔야 합니다.");
+		}
+		if (!InputValidator.isNumber(bonusBallString)) {
+			throw new IllegalArgumentException("보너스볼은 숫자로 입력하셔야 합니다.");
+		}
+	}
 }
