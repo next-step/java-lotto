@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 public class ConfirmResults {
 
-	private final Map<PrizeGrade, Integer> groupedByPrizeGrade;
-
 	private static final int ZERO = 0;
 	private static final int INCREASE = 1;
 
+	private final Map<PrizeGrade, Integer> groupedByPrizeGrade;
+
 	public ConfirmResults(List<PrizeGrade> prizeGrades) {
-		this.groupedByPrizeGrade = getGroupByPrizeGrade(prizeGrades);
+		this.groupedByPrizeGrade = Collections.unmodifiableMap(getGroupByPrizeGrade(prizeGrades));
 	}
 
 	public Map<PrizeGrade, Integer> getGroupedByPrizeGrade() {

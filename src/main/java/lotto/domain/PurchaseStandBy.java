@@ -12,11 +12,9 @@ import static lotto.configuration.LottoConfig.PRICE_PER_GAME;
 public class PurchaseStandBy {
 
 	private static final int ZERO = 0;
-
 	private static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 
 	private final int purchasePrice;
-
 	private final int numberOfGames;
 
 	public PurchaseStandBy(int purchasePrice) {

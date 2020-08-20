@@ -13,11 +13,11 @@ import static lotto.constants.MessageConstant.NUMBER_COUNT_SHOULD_BE_N;
 
 public class LottoGame {
 
-	private final Set<LottoNumber> lottoNumbers;
-
 	private static final String OPEN_PARENTHESIS = "[";
 	private static final String CLOSE_PARENTHESIS = "]";
 	private static final String DELIMITER = ", ";
+
+	private final Set<LottoNumber> lottoNumbers;
 
 	public LottoGame(List<LottoNumber> lottoNumberPool) {
 		this.lottoNumbers = lottoNumberPool.stream().limit(NUMBER_COUNT_PER_GAME).collect(Collectors.toSet());

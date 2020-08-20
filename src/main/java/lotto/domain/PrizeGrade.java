@@ -14,9 +14,7 @@ public enum PrizeGrade {
 	private static final int MATCH_TEST_REQUIRED_COUNT = 5;
 
 	private final int matchCount;
-
 	private final boolean shouldMatchBonus;
-
 	private final long reward;
 
 	PrizeGrade(int matchCount, boolean shouldMatchBonus, long reward) {
@@ -26,7 +24,6 @@ public enum PrizeGrade {
 	}
 
 	public static PrizeGrade of(int matchCount, boolean matchBonusNumber) {
-
 		return Arrays.stream(PrizeGrade.values())
 						.filter(prizeGrade -> prizeGrade.matchCount == matchCount)
 						.filter(prizeGrade -> prizeGrade.matchCount != MATCH_TEST_REQUIRED_COUNT || (prizeGrade.shouldMatchBonus == matchBonusNumber))
