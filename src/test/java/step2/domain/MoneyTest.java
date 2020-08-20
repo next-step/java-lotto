@@ -19,4 +19,11 @@ public class MoneyTest {
         assertThat(money.calculateLottoPurchaseCount()).isEqualTo(lottoPurchaseCount);
     }
 
+    @DisplayName("수익률 계산")
+    @Test
+    public void calculateYeild() {
+        Money money = new Money(10000);
+        assertThat(money.calculateYelid(5000)).isEqualTo(0.5);
+    }
+
 }

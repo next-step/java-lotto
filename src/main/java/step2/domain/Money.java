@@ -15,7 +15,7 @@ public class Money {
     }
 
     public double calculateYelid(int winnings) {
-        return winnings / money;
+        return (double) winnings / money;
     }
 
 }
