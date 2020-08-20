@@ -12,9 +12,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> findWinningNumbers(List<Integer> winningNumbers) {
+    public List<Integer> findWinningNumbers(WinningNumbers winningNumbers) {
         return numbers.stream()
-                .filter(number -> winningNumbers.contains(number))
+                .filter(number -> winningNumbers.isWinningNumber(number))
                 .collect(Collectors.toList());
     }
 
@@ -25,4 +25,5 @@ public class Lotto {
                 .collect(Collectors.joining(", "))
                 + "]";
     }
+
 }
