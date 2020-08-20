@@ -18,7 +18,7 @@ public class Lottos {
 
 	public List<Ranking> getRankings(WinningBalls winningBalls) {
 		return lottos.stream()
-					 .map(lottoOfUser -> lottoOfUser.getSameCountWith(winningBalls.getWinningNumbers()))
+					 .map(lottoOfUser -> WinningArgument.of(lottoOfUser.getLottoNumbersDto(), winningBalls))
 					 .map(Ranking::getRakingOf)
 					 .collect(toList());
 	}
@@ -27,9 +27,9 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public List<LottoNumbers> getLottoNumbers() {
+	public List<LottoNumbersDto> getLottoNumbers() {
 		return lottos.stream()
-					 .map(lotto -> lotto.getLottoNumbersOfUser())
+					 .map(lotto -> lotto.getLottoNumbersDto())
 					 .collect(toList());
 	}
 }

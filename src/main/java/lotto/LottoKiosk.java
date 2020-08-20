@@ -17,7 +17,7 @@ public class LottoKiosk {
 		int countOfLotto = lottoPayAmounts.getCountOfLotto(LOTTO_PRICE);
 
 		return Lottos.of(IntStream.range(0, countOfLotto)
-								  .mapToObj(i -> new Lotto(LottoNumbersFactory.create()))
+								  .mapToObj(i -> Lotto.of(LottoNumbersFactory.create()))
 								  .collect(Collectors.toList()));
 	}
 }
