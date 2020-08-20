@@ -20,8 +20,8 @@ public class Validator {
 	public static Lotto validWinningNumbers(Lotto lotto) {
 		Set<Integer> duplicateNumber = new HashSet<>();
 		duplicateNumber.addAll(lotto.getNumbers());
-		if (duplicateNumber.size() != MAX_LOTTO_NUMBER) {
-			throw new IllegalArgumentException("로또 당첨 번호는 중복되지 않는 6개의 숫자로 이루어져야 합니다.");
+		if (duplicateNumber.size() != MAX_LOTTO_NUMBER || duplicateNumber.stream().anyMatch(n -> n > 45)) {
+			throw new IllegalArgumentException("로또 당첨 번호는 1~45 중 중복되지 않는 6개의 숫자로 이루어져야 합니다.");
 		}
 		return lotto;
 	}
