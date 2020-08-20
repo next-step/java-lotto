@@ -18,12 +18,12 @@ public class LottoGame {
     public void start() {
         resultView.printMoneyInputHeader();
         int lottoCount = inputView.readMoney() / Lotto.PRICE;
+        if (lottoCount <= 0) {
+            return;
+        }
         resultView.repeatPurchasedLottoCount(lottoCount);
 
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(generator.generate());
-        }
+        Lottos lottos = generateLottos(lottoCount);
         resultView.printLottos(lottos);
         resultView.printWinningNumberInputHeader();
         Lotto winningLotto = new Lotto(inputView.readWinningNumbers());
@@ -31,5 +31,13 @@ public class LottoGame {
 
         resultView.printResultHeader();
         resultView.printLottoResults(results);
+    }
+
+    public Lottos generateLottos(int count) {
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < count; i++) {
+            lottos.add(generator.generate());
+        }
+        return lottos;
     }
 }
