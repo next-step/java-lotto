@@ -49,7 +49,7 @@ public class LottoTicketTest {
 
     @DisplayName("로또 당첨 번호 일치 개수 테스트")
     @ParameterizedTest
-    @MethodSource("makeWinningLotto")
+    @MethodSource("makeWinningLottoData")
     void getMatchCountWith(List<LottoNumber> winningLotto) {
         LottoTicket lottoTicket = LottoTicket.create(LOTTO_TICKET_RANDOM_MAKER);
         long matchCount = lottoTicket.getMatchCountWith(winningLotto);
@@ -66,7 +66,7 @@ public class LottoTicketTest {
         assertThat(matchCount).isEqualTo(expectedMatchCount);
     }
 
-    private static Stream<Arguments> makeWinningLotto() {
+    private static Stream<Arguments> makeWinningLottoData() {
         return Stream.iterate(0, i -> i++)
                 .limit(5)
                 .map(i -> makeWinningLottoRandom());
@@ -81,5 +81,24 @@ public class LottoTicketTest {
                 .forEach(i -> winningLotto.add(LottoNumber.of(random.nextInt(45) + 1)));
 
         return Arguments.of(winningLotto);
+    }
+
+    @DisplayName("LottoTicket에 특정 로또 번호가 존재하는지 확인 테스트")
+    @ParameterizedTest
+    @MethodSource("makeGetMatchWithData")
+    void getMatchWith(String lottoNumberInput, int Number, boolean isMatch) {
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(lottoNumberInput));
+        LottoNumber lottoNumber = LottoNumber.of(Number);
+
+        assertThat(lottoTicket.getMatchWith(lottoNumber)).isEqualTo(isMatch);
+    }
+
+    private static Stream<Arguments> makeGetMatchWithData() {
+        return Stream.of(
+                Arguments.of("1,3,5,7,9,11", 3, true),
+                Arguments.of("21,10,25,41,9,33", 1, false),
+                Arguments.of("44,16,23,2,45", 45, true),
+                Arguments.of("2,4,8,16,32,1", 17, false)
+        );
     }
 }
