@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             number = Integer.parseInt(inputNumber);
         } catch(NumberFormatException e) {
-            throw new RuntimeException(INVALID_INPUT_ONLY_NUMBER);
+            throw new IllegalArgumentException (INVALID_INPUT_ONLY_NUMBER);
         }
         return new LottoNumber(number);
     }
