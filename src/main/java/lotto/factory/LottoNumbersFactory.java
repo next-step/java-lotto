@@ -1,5 +1,6 @@
 package lotto.factory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -14,6 +15,11 @@ import lotto.LottoNumbers;
 public class LottoNumbersFactory {
 
 	private static final int LOTTO_BALL_COUNT = 6;
+	private static final int TOTAL_COUNT_OF_LOTTO_BALL = 45;
+	private static final List<Integer> LOTTO_BALLS = IntStream.range(0, TOTAL_COUNT_OF_LOTTO_BALL)
+															  .mapToObj(order -> order + 1)
+															  .collect(Collectors.toList());
+
 	private static Random random = new Random();
 
 	public static LottoNumbers create() {
@@ -23,7 +29,7 @@ public class LottoNumbersFactory {
 	}
 
 	private static List<Integer> createNumbers() {
-		List<Integer> allLottoNumbers = LottoNumbers.getAllShuffled();
+		List<Integer> allLottoNumbers = getAllShuffled();
 
 		return IntStream.range(0, LOTTO_BALL_COUNT)
 						.mapToObj(order -> {
@@ -31,5 +37,13 @@ public class LottoNumbersFactory {
 							return allLottoNumbers.remove(orderToGet);
 						})
 						.collect(Collectors.toList());
+	}
+
+	private static List<Integer> getAllShuffled() {
+		List<Integer> copiedLottoBalls = LOTTO_BALLS.stream()
+													.collect(Collectors.toList());
+		Collections.shuffle(copiedLottoBalls);
+
+		return copiedLottoBalls;
 	}
 }
