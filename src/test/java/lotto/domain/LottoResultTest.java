@@ -33,8 +33,8 @@ class LottoResultTest {
         // given
         EnumMap<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
         winningResult.put(Rank.FIFTH, 10);
-        winningResult.put(Rank.FIRST, 1);
         winningResult.put(Rank.FOURTH, 2);
+        winningResult.put(Rank.FIRST, 1);
 
         // when
         LottoResult lottoResult = new LottoResult(winningResult);

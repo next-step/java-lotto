@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
     private final EnumMap<Rank, Integer> winningResult;
@@ -25,5 +27,18 @@ public class LottoResult {
 
     public int getRankCount(Rank rank) {
         return winningResult.getOrDefault(rank, 0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(winningResult, that.winningResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningResult);
     }
 }
