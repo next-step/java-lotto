@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoGames {
 
@@ -21,13 +20,7 @@ public class LottoGames {
 	}
 
 	public ConfirmResults confirmPrize(GameWinningCondition lastWeekPrize) {
-		return new ConfirmResults(getConfirmResults(lastWeekPrize));
-	}
-
-	private List<PrizeGrade> getConfirmResults(GameWinningCondition lastWeekPrize) {
-		return lottoGames.stream()
-				.map(lottoGame -> lottoGame.confirmPrize(lastWeekPrize))
-				.collect(Collectors.toList());
+		return new ConfirmResults(lastWeekPrize.getPrizeResult(lottoGames));
 	}
 
 	@Override

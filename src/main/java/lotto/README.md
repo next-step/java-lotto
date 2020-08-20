@@ -14,3 +14,4 @@
 2. PrizeGrade의 패키지 domain으로 변경
 3. PrizeGrade에 녹아있던 출력 관련 멤버 변수 제거
 4. PrizeInfo 클래스명 변경 (PrizeInfo -> GameWinningCondition)
+5. LottoGame에서 PrizeGrade를 의존하던 관계 끊기! 당첨 등급의 확인은 GameWinningCondition에 있다.

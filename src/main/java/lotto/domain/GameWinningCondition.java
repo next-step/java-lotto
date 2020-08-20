@@ -2,6 +2,9 @@ package lotto.domain;
 
 import lotto.LottoException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static lotto.constants.MessageConstant.BONUS_NUMBER_SHOULD_NOT_CONTAINS_PRIZE_GAME;
 
 public class GameWinningCondition {
@@ -16,17 +19,33 @@ public class GameWinningCondition {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public boolean contains(LottoNumber lottoNumber) {
-		return prizeLottoGame.contains(lottoNumber);
-	}
-
-	public boolean isMatchBonusNumber(LottoNumber lottoNumber) {
-		return bonusNumber.equals(lottoNumber);
-	}
-
 	private void validateBonusNumber(LottoGame prizeLottoGame, LottoNumber bonusNumber) {
-		if(prizeLottoGame.contains(bonusNumber)) {
+		if (prizeLottoGame.contains(bonusNumber)) {
 			throw new LottoException(BONUS_NUMBER_SHOULD_NOT_CONTAINS_PRIZE_GAME);
 		}
 	}
+
+	public List<PrizeGrade> getPrizeResult(List<LottoGame> lottoGames) {
+		return lottoGames.stream()
+				.map(this::confirmPrize)
+				.collect(Collectors.toList());
+	}
+	private PrizeGrade confirmPrize(LottoGame lottoGame) {
+		return PrizeGrade.of(getMatchCount(lottoGame), containsBonusNumber(lottoGame));
+	}
+
+	private int getMatchCount(LottoGame lottoGame) {
+		return (int) lottoGame.getLottoNumbers()
+						.stream()
+						.filter(prizeLottoGame::contains)
+						.count();
+
+	}
+
+	private boolean containsBonusNumber(LottoGame lottoGame) {
+		return lottoGame.getLottoNumbers()
+				.stream()
+				.anyMatch(bonusNumber::equals);
+	}
+
 }
