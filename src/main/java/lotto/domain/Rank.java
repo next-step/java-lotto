@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Rank {
 
     FIRST(6, 2_000_000_000),
@@ -23,6 +26,12 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public static Rank getRankByCountOfMatch(int count) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() == count)
+                .findAny().orElse(Rank.MISS);
     }
 
 }

@@ -18,4 +18,14 @@ public class LottoTicket {
 
         return new LottoTicket(lottoNumbers);
     }
+
+    public int getCountOfMatch(LottoTicket otherLottoTicket) {
+        return (int) lottoNumbers.stream()
+                .filter(otherLottoTicket::isContainNumber)
+                .count();
+    }
+
+    public boolean isContainNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
 }
