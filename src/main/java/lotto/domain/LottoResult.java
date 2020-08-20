@@ -29,6 +29,10 @@ public class LottoResult {
         return winningResult.getOrDefault(rank, 0);
     }
 
+    public EnumMap<Rank, Integer> getWinningResult() {
+        return winningResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -27,4 +27,10 @@ public class LottoTickets {
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
     }
+
+    public List<String> getLottoTicketStrings() {
+        return lottoTickets.stream()
+                .map(LottoTicket::toString)
+                .collect(Collectors.toList());
+    }
 }
