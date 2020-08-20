@@ -1,21 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Games {
-    List<Lotto> lottos;
+    private static List<Lotto> lottos= new ArrayList<>();
 
-    Games(){
-
+    Games( ){
     }
 
-    public static void start(int tries){
+    public static List<Lotto> makeLottoTicket(int tries){
         NumberGenerator generator = new NumberGenerator();
         generator.createLottoNumberCandidate();
 
         for (int i = 0; i < tries; i++) {
-            generator.generate();
+            lottos.add(new Lotto(generator.generate()));
         }
 
+        return lottos;
     }
 }

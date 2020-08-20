@@ -9,5 +9,7 @@ public class Lotto {
         this.sixNumber = list;
     }
 
-    
+    public List<Integer> getSixNumber() {
+        return sixNumber;
+    }
 }

@@ -16,10 +16,11 @@ public class UserInput {
         return price/1000;
     }
 
-    private static boolean validatePrice(int price){
+    private static void validatePrice(int price){
         if(price % 1000 != 0){
            throw new IllegalArgumentException("Price ERR!");
         }
+
     }
 
 }

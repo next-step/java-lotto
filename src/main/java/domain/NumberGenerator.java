@@ -23,6 +23,11 @@ public class NumberGenerator {
         }
     }
 
+    public void shuffleNumber(){
+        Collections.shuffle(lottoNumberCandidate);
+
+    }
+
     public List<Integer> generate() {
 
         Collections.shuffle(lottoNumberCandidate);
