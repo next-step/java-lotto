@@ -15,6 +15,10 @@ public enum Rank {
         this.differentCount = differentCount;
     }
 
+    public int getDifferentCount() {
+        return differentCount;
+    }
+
     public static Rank getRankByDifferentCount(int count) {
         return Arrays.stream(Rank.class.getEnumConstants())
                 .filter(v -> v.differentCount == count)
