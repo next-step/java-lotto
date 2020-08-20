@@ -12,7 +12,7 @@ public class LottoApplication {
 		Lottos lottosOfCustomer = LottoKiosk.issue(lottoPayAmounts);
 		OutputView.outputPurchaseLottos(lottosOfCustomer);
 
-		WinningBalls winningBalls = WinningBallsFactory.create(InputView.inputWinning());
+		WinningBalls winningBalls = WinningBallsFactory.create(InputView.inputWinning(), InputView.inputBonusBall());
 		OutputView.outputStatistics(Statistics.from(lottosOfCustomer, winningBalls));
 	}
 }

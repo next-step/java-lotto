@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import lotto.BonusBall;
 import lotto.LottoNumbers;
 import lotto.WinningBalls;
 import lotto.input.InputValidator;
@@ -21,12 +22,12 @@ public class WinningBallsFactory {
 		return LottoNumbers.of(numbers);
 	}
 
-	public static WinningBalls create(String numbersString) {
+	public static WinningBalls create(String numbersString, String bonusBallString) {
 		InputValidator.validateWinningNumbers(numbersString);
 		LottoNumbers winningNumbers = create(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
 												   .mapToInt(number -> Integer.parseInt(number.trim()))
 												   .boxed()
 												   .collect(toList()));
-		return WinningBalls.of(winningNumbers);
+		return WinningBalls.of(winningNumbers, BonusBall.of(bonusBallString));
 	}
 }
