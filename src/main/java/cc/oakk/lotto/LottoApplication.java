@@ -1,28 +1,25 @@
 package cc.oakk.lotto;
 
-import cc.oakk.lotto.model.Lotto;
-import cc.oakk.lotto.model.LottoGenerator;
-import cc.oakk.lotto.model.LottoPrizeProvider;
-import cc.oakk.lotto.model.SimpleLottoPrizeProvider;
-
-import java.util.ArrayList;
-import java.util.List;
+import cc.oakk.lotto.controller.LottoGame;
+import cc.oakk.lotto.model.*;
+import cc.oakk.lotto.view.InputView;
+import cc.oakk.lotto.view.InputViewImpl;
+import cc.oakk.lotto.view.ResultView;
+import cc.oakk.lotto.view.ResultViewImpl;
+import cc.oakk.lotto.view.printer.LottoResultsPrinter;
+import cc.oakk.lotto.view.printer.Printer;
+import cc.oakk.lotto.view.printer.StandardPrinter;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoGenerator generator = new LottoGenerator();
+        Printer<String> stringPrinter = StandardPrinter.getInstance();
         LottoPrizeProvider<Long> provider = new SimpleLottoPrizeProvider();
+        LottoResultsPrinter<Long> printer = new LottoResultsPrinter<>(provider);
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            lottos.add(generator.generate());
-        }
-        Lotto winningLotto = generator.generate();
-        System.out.println(winningLotto);
-        System.out.println();
-        lottos.forEach(l -> {
-            System.out.println(l);
-            System.out.println(provider.getPrizeByRank(l.compare(winningLotto)));
-        });
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        InputView inputView = new InputViewImpl();
+        ResultView resultView = new ResultViewImpl(stringPrinter, printer);
+
+        new LottoGame(lottoGenerator, inputView, resultView).start();
     }
 }
