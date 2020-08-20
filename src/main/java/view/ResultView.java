@@ -14,7 +14,7 @@ public class ResultView {
     }
 
     public static void viewBuyAmount(LottoGame lottoGame) {
-        System.out.println(String.format(BUY_AMOUNT_MESSAGE, lottoGame.getPassivityCount(), lottoGame.getPassivityCount()));
+        System.out.println(String.format(BUY_AMOUNT_MESSAGE, lottoGame.getPassivityCount(), lottoGame.getAutoCount()));
     }
 
     public static void viewIssuedLotto(Lottos lottos) {

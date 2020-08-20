@@ -22,7 +22,7 @@ public class WinningCountTest {
     void calculateWinningMoney() {
         WinningCount winningCount = WinningCount.of(10);
 
-        int result = winningCount.calculateWinningMoney(1000);
+        long result = winningCount.calculateWinningMoney(1000);
 
         assertThat(result).isEqualTo(10000);
     }

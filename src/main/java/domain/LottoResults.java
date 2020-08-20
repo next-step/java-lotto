@@ -24,10 +24,10 @@ public class LottoResults {
         }
     }
 
-    public int getTotalPrizeMoney() {
+    public long getTotalPrizeMoney() {
         return lottoResults.stream()
-                .map(LottoResult::calculateWinningMoney)
-                .reduce(0, Integer::sum);
+                .mapToLong(LottoResult::calculateWinningMoney)
+                .sum();
     }
 
     public List<LottoResult> getLottoResults() {

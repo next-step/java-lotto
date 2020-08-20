@@ -17,7 +17,7 @@ public class LottoResult {
         return new LottoResult(rank, WinningCount.of(winningCount));
     }
 
-    public int calculateWinningMoney() {
+    public long calculateWinningMoney() {
         return winningCount.calculateWinningMoney(rank.getMoney());
     }
 

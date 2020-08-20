@@ -19,8 +19,8 @@ public class WinningCount {
         this.winningNumber++;
     }
 
-    public int calculateWinningMoney(int money) {
-        return money * winningNumber;
+    public long calculateWinningMoney(int money) {
+        return (long) money * winningNumber;
     }
 
     public int getValue() {
