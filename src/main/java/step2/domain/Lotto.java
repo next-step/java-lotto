@@ -12,8 +12,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public long findWinningNumbersCount(WinningNumbers winningNumbers) {
-        return numbers.stream()
+    public int findWinningNumbersCount(WinningNumbers winningNumbers) {
+        return (int) numbers.stream()
                 .filter(number -> winningNumbers.isWinningNumber(number))
                 .count();
     }

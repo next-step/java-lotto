@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Winnings {
 
+    private static final int DEFAULT_WINNING = 0;
     private static final Map<Integer, Integer> WINNING;
 
     static {
@@ -20,6 +21,6 @@ public class Winnings {
     }
 
     public static int calculateWinnings(int winningNumbersCount) {
-        return WINNING.get(winningNumbersCount);
+        return WINNING.getOrDefault(winningNumbersCount, DEFAULT_WINNING);
     }
 }
