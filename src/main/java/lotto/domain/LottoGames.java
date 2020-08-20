@@ -20,11 +20,11 @@ public class LottoGames {
 		return lottoGames.size();
 	}
 
-	public ConfirmResults confirmPrize(PrizeInfo lastWeekPrize) {
+	public ConfirmResults confirmPrize(GameWinningCondition lastWeekPrize) {
 		return new ConfirmResults(getConfirmResults(lastWeekPrize));
 	}
 
-	private List<PrizeGrade> getConfirmResults(PrizeInfo lastWeekPrize) {
+	private List<PrizeGrade> getConfirmResults(GameWinningCondition lastWeekPrize) {
 		return lottoGames.stream()
 				.map(lottoGame -> lottoGame.confirmPrize(lastWeekPrize))
 				.collect(Collectors.toList());

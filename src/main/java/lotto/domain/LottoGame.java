@@ -36,7 +36,7 @@ public class LottoGame {
 	}
 
 
-	public PrizeGrade confirmPrize(PrizeInfo prize) {
+	public PrizeGrade confirmPrize(GameWinningCondition prize) {
 		return PrizeGrade.of(getMatchCount(prize), isMatchBonusNumber(prize));
 	}
 
@@ -56,11 +56,11 @@ public class LottoGame {
 		return lottoNumbers.size() == NUMBER_COUNT_PER_GAME;
 	}
 
-	private int getMatchCount(PrizeInfo prizeInfo) {
+	private int getMatchCount(GameWinningCondition gameWinningCondition) {
 		return this.lottoNumbers
 				.stream()
 				.map(lottoNumber -> {
-					if(prizeInfo.contains(lottoNumber)) {
+					if(gameWinningCondition.contains(lottoNumber)) {
 						return MATCH;
 					}
 					return NON_MATCH;
@@ -69,10 +69,10 @@ public class LottoGame {
 
 	}
 
-	private boolean isMatchBonusNumber(PrizeInfo prizeInfo) {
+	private boolean isMatchBonusNumber(GameWinningCondition gameWinningCondition) {
 		return this.lottoNumbers
 				.stream()
-				.anyMatch(lottoNumber -> prizeInfo.isMatchBonusNumber(lottoNumber));
+				.anyMatch(lottoNumber -> gameWinningCondition.isMatchBonusNumber(lottoNumber));
 	}
 
 	@Override

@@ -13,3 +13,4 @@
 1. 패키지명 변경 후 중복 소스인 step2 패키지 삭제
 2. PrizeGrade의 패키지 domain으로 변경
 3. PrizeGrade에 녹아있던 출력 관련 멤버 변수 제거
+4. PrizeInfo 클래스명 변경 (PrizeInfo -> GameWinningCondition)

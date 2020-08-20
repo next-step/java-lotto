@@ -18,7 +18,7 @@ public class LottoStore {
 
 		displayHere.printPurchasedGames(purchasedGames);
 
-		PrizeInfo lastWeekPrize = orderHere.receiveLastWeekPrize();
+		GameWinningCondition lastWeekPrize = orderHere.receiveLastWeekPrize();
 
 		ConfirmResults confirmResults = purchasedGames.confirmPrize(lastWeekPrize);
 

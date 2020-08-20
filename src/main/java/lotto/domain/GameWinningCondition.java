@@ -4,13 +4,13 @@ import lotto.LottoException;
 
 import static lotto.constants.MessageConstant.BONUS_NUMBER_SHOULD_NOT_CONTAINS_PRIZE_GAME;
 
-public class PrizeInfo {
+public class GameWinningCondition {
 
 	private final LottoGame prizeLottoGame;
 
 	private final LottoNumber bonusNumber;
 
-	public PrizeInfo(LottoGame prizeLottoGame, LottoNumber bonusNumber) {
+	public GameWinningCondition(LottoGame prizeLottoGame, LottoNumber bonusNumber) {
 		validateBonusNumber(prizeLottoGame, bonusNumber);
 		this.prizeLottoGame = prizeLottoGame;
 		this.bonusNumber = bonusNumber;

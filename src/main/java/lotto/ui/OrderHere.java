@@ -2,7 +2,7 @@ package lotto.ui;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
-import lotto.domain.PrizeInfo;
+import lotto.domain.GameWinningCondition;
 import lotto.domain.PurchaseStandBy;
 import lotto.ui.input.InputChannel;
 import lotto.ui.output.OutputChannel;
@@ -27,10 +27,10 @@ public class OrderHere {
 		return new PurchaseStandBy(retryUntilGettingRightValue(getPurchasingPrice()));
 	}
 
-	public PrizeInfo receiveLastWeekPrize() {
+	public GameWinningCondition receiveLastWeekPrize() {
 		LottoGame prizeLottoGame = new LottoGame(retryUntilGettingRightValue(getPrizeNumbers()));
 		LottoNumber bonusNumber = new LottoNumber(retryUntilGettingRightValue(getBonusNumber()));
-		return new PrizeInfo(prizeLottoGame, bonusNumber);
+		return new GameWinningCondition(prizeLottoGame, bonusNumber);
 	}
 
 	private Supplier<Optional<Integer>> getPurchasingPrice() {

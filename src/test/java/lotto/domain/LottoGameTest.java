@@ -43,7 +43,7 @@ class LottoGameTest {
 	@ParameterizedTest
 	@MethodSource("provideTestingConfirmPrize")
 	void confirmPrize(List<LottoNumber> lottoNumbers, LottoGame prizeGame, LottoNumber bonusNumber, PrizeGrade expect) {
-		assertThat(new LottoGame(lottoNumbers).confirmPrize(new PrizeInfo(prizeGame, bonusNumber))).isEqualTo(expect);
+		assertThat(new LottoGame(lottoNumbers).confirmPrize(new GameWinningCondition(prizeGame, bonusNumber))).isEqualTo(expect);
 	}
 
 	@DisplayName("toString 테스트")

@@ -19,7 +19,7 @@ class LottoGamesTest {
 	@DisplayName("로또 게임들 당첨 결과 확인")
 	@ParameterizedTest
 	@MethodSource("provideMethod")
-	void confirmPrize(LottoGames lottoGames, PrizeInfo prize, List<PrizeGrade> expect) {
+	void confirmPrize(LottoGames lottoGames, GameWinningCondition prize, List<PrizeGrade> expect) {
 		assertThat(lottoGames.confirmPrize(prize)).isEqualTo(new ConfirmResults(expect));
 	}
 
@@ -35,7 +35,7 @@ class LottoGamesTest {
 
 		return Stream.of(
 				Arguments.of(new LottoGames(List.of(new LottoGame(oneToSix), new LottoGame(oneToFiveAndNine), new LottoGame(oneToFiveAndEight), new LottoGame(sevenToTwelve), new LottoGame(thirteenToEighteen))),
-						new PrizeInfo(new LottoGame(oneToSix), bonus),
+						new GameWinningCondition(new LottoGame(oneToSix), bonus),
 						List.of(FIRST, SECOND, THIRD, FAIL, FAIL)
 						)
 		);
