@@ -1,6 +1,7 @@
 package cc.oakk.lotto.model;
 
 import cc.oakk.lotto.util.ValidationAdapters;
+import cc.oakk.lotto.view.printer.Printable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
-public class Lottos {
+public class Lottos implements Printable<String> {
     private final List<Lotto> lottoList;
 
     public Lottos() {
@@ -46,4 +47,8 @@ public class Lottos {
         return Objects.hash(lottoList);
     }
 
+    @Override
+    public String print() {
+        return lottoList.stream().map(Lotto::print).collect(Collectors.joining("\n"));
+    }
 }

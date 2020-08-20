@@ -1,5 +1,7 @@
 package cc.oakk.lotto.model;
 
+import cc.oakk.lotto.view.printer.Printable;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,7 +11,8 @@ import java.util.stream.Stream;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
-public class Lotto {
+public class Lotto implements Printable<String> {
+    public static final int PRICE = 1000;
     public static final int NUMBER_COUNT = 6;
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
@@ -67,5 +70,10 @@ public class Lotto {
             throw new IllegalArgumentException(String.format("%d is not between 0 and %d.", target, MAX_NUMBER));
         }
         return target;
+    }
+
+    @Override
+    public String print() {
+        return toString();
     }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
-public class LottoResults {
+public class LottoResults implements Printable<LottoResults> {
     private final Map<Rank, List<LottoResult>> rankMap;
 
     public LottoResults(List<LottoResult> lottoResultList) {
@@ -31,5 +31,10 @@ public class LottoResults {
 
     public int getRankCount(Rank rank) {
         return get(throwIfNull(rank)).size();
+    }
+
+    @Override
+    public LottoResults print() {
+        return this;
     }
 }
