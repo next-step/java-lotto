@@ -12,7 +12,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     public static final int LOTTO_NUMBER = 6;
 
     @Override
-    public List<LottoNumber> generator() {
+    public List<LottoNumber> generator(String input) {
         List<LottoNumber> numberBound = this.getNumberBound();
         Collections.shuffle(numberBound);
         return numberBound.subList(0, LOTTO_NUMBER);

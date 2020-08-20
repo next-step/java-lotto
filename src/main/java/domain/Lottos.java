@@ -1,6 +1,7 @@
 package domain;
 
-import strategy.LottoNumberGenerator;
+import strategy.PassivityLottoNumberGenerator;
+import strategy.RandomLottoNumberGenerator;
 import study.ValidateUtil;
 import util.SplitUtil;
 
@@ -17,12 +18,16 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int buyAmount, LottoNumberGenerator randomLottoNumberGenerator) {
-        List<Lotto> lottos = IntStream.range(0, buyAmount)
-                .mapToObj(i -> Lotto.of(randomLottoNumberGenerator))
-                .collect(Collectors.toList());
+    public static Lottos of(int autoCount, int passivityCount, List<String> passivityLottos) {
+        return new Lottos(issueLottos(autoCount, passivityCount, passivityLottos));
+    }
 
-        return new Lottos(lottos);
+    private static List<Lotto> issueLottos(int autoCount, int passivityCount, List<String> passivityLottos) {
+        return IntStream.range(0, autoCount + passivityCount)
+                .mapToObj(i -> i < passivityCount
+                        ? Lotto.of(passivityLottos.get(i), new PassivityLottoNumberGenerator())
+                        : Lotto.of(new RandomLottoNumberGenerator()))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {

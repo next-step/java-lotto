@@ -4,6 +4,8 @@ import exception.LottoGamePriceException;
 import strategy.RandomLottoNumberGenerator;
 import util.CalculatorUtil;
 
+import java.util.List;
+
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -34,8 +36,8 @@ public class LottoGame {
         }
     }
 
-    public Lottos issue(RandomLottoNumberGenerator randomNumberGenerator) {
-        return Lottos.of(autoCount, randomNumberGenerator);
+    public Lottos issue(List<String> passivityLottos) {
+        return Lottos.of(autoCount, passivityCount, passivityLottos);
     }
 
     public int getAutoCount() {

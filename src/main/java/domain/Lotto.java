@@ -15,9 +15,13 @@ public class Lotto {
         this.numbers = numbers;
     }
     
-    public static Lotto of(LottoNumberGenerator randomLottoNumberGenerator) {
-        List<LottoNumber> lottoNumbers = randomLottoNumberGenerator
-                .generator()
+    public static Lotto of(LottoNumberGenerator lottoNumberGenerator) {
+        return Lotto.of("", lottoNumberGenerator);
+    }
+
+    public static Lotto of(String numbers, LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator
+                .generator(numbers)
                 .stream()
                 .sorted(Comparator.comparingInt(LottoNumber::getValue))
                 .collect(toList());

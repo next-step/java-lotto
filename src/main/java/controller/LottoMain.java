@@ -19,8 +19,8 @@ public class LottoMain {
         LottoGame lottoGame = LottoGame.of(buyPrice, passivityCount);
         List<String> passivityLottos = InputView.inputPassivityCountLottos(passivityCount);
 
-        ResultView.viewBuyAmount(lottoGame.getAutoCount());
-        Lottos lottos = lottoGame.issue(new RandomLottoNumberGenerator());
+        ResultView.viewBuyAmount(lottoGame);
+        Lottos lottos = lottoGame.issue(passivityLottos);
         ResultView.viewIssuedLotto(lottos);
 
         LottoResults prizes = lottos.getLottoResult(InputView.inputWinningNumber(), InputView.inputBonusNumber());

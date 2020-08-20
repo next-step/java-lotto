@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import strategy.RandomLottoNumberGenerator;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -39,13 +41,14 @@ public class LottoGameTest {
     }
 
     @DisplayName("구매 수량에 맞추어 로또를 발행")
-    @Test
-    void issue() {
-        LottoGame lottoGame = LottoGame.of(10000, 0);
+    @ParameterizedTest
+    @CsvSource({"10000, 0, 10", "10000, 4, 10"})
+    void issue(int buyPrice, int passivityCount, int size) {
+        LottoGame lottoGame = LottoGame.of(buyPrice, passivityCount);
 
-        Lottos issuedLottos = lottoGame.issue(new RandomLottoNumberGenerator());
+        Lottos issuedLottos = lottoGame.issue(Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6"));
 
-        assertThat(issuedLottos.getLottos()).hasSize(10);
+        assertThat(issuedLottos.getLottos()).hasSize(size);
 
     }
 }
