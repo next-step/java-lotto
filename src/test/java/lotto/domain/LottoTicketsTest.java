@@ -29,7 +29,7 @@ public class LottoTicketsTest {
     void getWinningResult(BuyCount buyCount, String selectedLottoNumber,
                           String winningLottoNumbers, String bonusNumber,
                           LottoRank rank, long rankCount, double expectedWinningRate) {
-        LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketSelectMaker(selectedLottoNumber));
+        LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketOneSelectMaker(selectedLottoNumber));
 
         WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers, bonusNumber);
         WinningResult winningResult = lottoTickets.getWinningResult(winningLotto);

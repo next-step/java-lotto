@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /* 테스트용 Maker */
-public class LottoTicketSelectMaker implements LottoTicketMaker {
+public class LottoTicketOneSelectMaker implements LottoTicketMaker {
     private static final String DELIMITER = ",";
 
     private List<Integer> selectedNumber;
 
-    public LottoTicketSelectMaker(String selectedLottoNumber) {
+    public LottoTicketOneSelectMaker(String selectedLottoNumber) {
         this.selectedNumber = Arrays.stream(selectedLottoNumber.split(DELIMITER))
                 .map(String::trim)
                 .map(StringUtils::toNumber)

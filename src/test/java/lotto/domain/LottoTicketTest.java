@@ -34,7 +34,7 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("makeSelectNumber")
     void create_tickets_number_select(String selectedLottoNumber, List<Integer> lottoNumbers) {
-        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(selectedLottoNumber));
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketOneSelectMaker(selectedLottoNumber));
 
         assertThat(lottoTicket.getNumbers()).containsExactlyElementsOf(lottoNumbers);
     }
@@ -87,7 +87,7 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("makeGetMatchWithData")
     void getMatchWith(String lottoNumberInput, int Number, boolean isMatch) {
-        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(lottoNumberInput));
+        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketOneSelectMaker(lottoNumberInput));
         LottoNumber lottoNumber = LottoNumber.of(Number);
 
         assertThat(lottoTicket.getMatchWith(lottoNumber)).isEqualTo(isMatch);
