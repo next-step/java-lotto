@@ -4,12 +4,21 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
 
     public static void main(String[] args) {
         BuyCount buyCount = BuyCount.of(InputView.scanLottoMoney());
 
         BuyCount selectLottoBuyCount = BuyCount.of(InputView.scanSelectLottoBuyCount());
+
+        List<String> lottoNumbers = new ArrayList<>();
+        while (selectLottoBuyCount.canBuy()) {
+            lottoNumbers.add(InputView.scanLottoNumbers());
+        }
+
         LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
         OutputView.printLottoTickets(lottoTickets);
 
