@@ -19,7 +19,7 @@ public class LottoMachine {
             lottoTicketList.add(makeAutoLottoTicket());
         }
 
-        return new LottoTickets(lottoTicketList);
+        return new LottoTickets(lottoTicketList, price);
     }
 
     public LottoTicket makeAutoLottoTicket() {
