@@ -1,16 +1,21 @@
 package nextstep.lotto.dto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static nextstep.lotto.constant.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE;
 
 public class LottoTicket {
 
-    private List<LottoNumber> ticket;
+    private Set<LottoNumber> ticket;
 
     private LottoTicket(List<LottoNumber> numbers) {
-        this.ticket = new ArrayList<>();
-        for(LottoNumber number : numbers){
-            this.ticket.add(number);
+        this.ticket = numbers.stream().collect(Collectors.toSet());
+
+        if( ticket.size() != 6){
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
         }
     }
 
@@ -18,13 +23,17 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public int matchCount(List<LottoNumber> winnerLotto) {
-        return (int) ticket.stream()
+    public LottoRank matchCount(List<LottoNumber> winnerLotto) {
+        return LottoRank.of((int) ticket.stream()
                 .filter(winnerLotto::contains)
-                .count();
+                .count());
     }
 
     public List<LottoNumber> getLottoNumber(){
-        return ticket;
+        List<LottoNumber> lottoTicket = this.ticket.stream().collect(Collectors.toList());
+        Collections.sort(lottoTicket);
+        return Collections.unmodifiableList(
+                lottoTicket
+        );
     }
 }
