@@ -12,10 +12,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> findWinningNumbers(WinningNumbers winningNumbers) {
+    public long findWinningNumbersCount(WinningNumbers winningNumbers) {
         return numbers.stream()
                 .filter(number -> winningNumbers.isWinningNumber(number))
-                .collect(Collectors.toList());
+                .count();
     }
 
     @Override
