@@ -18,8 +18,10 @@ public class LottoController {
         while (selectLottoBuyCount.canBuy()) {
             lottoNumbers.add(InputView.scanLottoNumbers());
         }
+        LottoTickets selectLottoTickets
+                = LottoTickets.of(selectLottoBuyCount, new LottoTicketSelectMaker(lottoNumbers));
 
-        LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
+        LottoTickets autoLottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
         OutputView.printLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningLottoNumber(),
