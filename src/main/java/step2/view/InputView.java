@@ -1,6 +1,8 @@
-package step2;
+package step2.view;
 
-import java.util.ArrayList;
+import step2.domain.Lotto;
+import step2.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,14 +16,16 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static List<Integer> inputWinningNumbers() {
+	public static Lotto inputWinningNumbers() {
 		scanner.nextLine();
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String[] inputValue = scanner.nextLine().split(", ");
 		System.out.println();
 
-		return Arrays.stream(inputValue)
-				.map(Integer::new)
-				.collect(Collectors.toList());
+		return new Lotto(
+				Arrays.stream(inputValue)
+						.map(Integer::new)
+						.collect(Collectors.toList())
+		);
 	}
 }

@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.*;
 
@@ -8,25 +8,25 @@ public class LottoStatistic {
 	private static final int MIN_WINNING_COUNT = 3;
 	private static final int MAX_WINNING_COUNT = 6;
 
-	public LottoStatistic(List<Integer> winningNumbers) {
+	public LottoStatistic(Lotto winningLotto) {
 		for (int i = MIN_WINNING_COUNT; i <= MAX_WINNING_COUNT; i++) {
 			lottoStat.put(i, 0);
 		}
-		this.winningNumbers = winningNumbers;
+		this.winningNumbers = winningLotto.getNumbers();
 	}
 
-	public Map<Integer, Integer> calcLottoResult(List<Integer[]> lottoResult) {
-		for (Integer[] integers : lottoResult) {
+	public Map<Integer, Integer> calcLottoResult(List<Lotto> lottoResult) {
+		for (Lotto integers : lottoResult) {
 			calcWinningNumberCount(integers);
 		}
 		return lottoStat;
 	}
 
-	private void calcWinningNumberCount(Integer[] lotto) {
-		int count = (int) Arrays.stream(lotto).filter(winningNumbers::contains).count();
-		
+	private void calcWinningNumberCount(Lotto lotto) {
+		int count = (int) lotto.getNumbers().stream().filter(winningNumbers::contains).count();
+
 		LottoWinning winning = LottoWinning.of(count);
-		if (!Objects.isNull(winning)) {
+		if (!winning.equals(LottoWinning.NOTTING)) {
 			lottoStat.put(count, lottoStat.getOrDefault(count, 0)+1);
 		}
 	}

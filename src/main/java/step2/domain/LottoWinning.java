@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.Arrays;
 
@@ -6,7 +6,8 @@ public enum LottoWinning {
 	THREE(3, 5_000),
 	FOUR(4, 50_000),
 	FIVE(5, 1_500_000),
-	SIX(6, 2_000_000_000)
+	SIX(6, 2_000_000_000),
+	NOTTING(0, 0)
 	;
 
 	private final int matchingCount;
@@ -17,19 +18,15 @@ public enum LottoWinning {
 		this.reward = reward;
 	}
 
-	public int getMatchingCount() {
-		return matchingCount;
-	}
-
 	public int getReward() {
 		return reward;
 	}
 
-	public static LottoWinning of(int winningCount) {
+	public static LottoWinning of(int matchingCount) {
 		return Arrays.stream(values())
-				.filter(x -> x.matchingCount == winningCount)
+				.filter(x -> x.matchingCount == matchingCount)
 				.findFirst()
-				.orElseThrow(IllegalArgumentException::new);
+				.orElse(NOTTING);
 	}
 
 	public int calcReward(int count) {

@@ -1,4 +1,7 @@
-package step2;
+package step2.view;
+
+import step2.domain.Lotto;
+import step2.domain.LottoWinning;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,10 +9,10 @@ import java.util.Map;
 
 public class ResultView {
 
-	public static void printLottos(List<Integer[]> lottos) {
+	public static void printLottos(List<Lotto> lottos) {
 		System.out.println(lottos.size()+"개를 구매했습니다.");
-		for (Integer[] lotto : lottos) {
-			System.out.println(Arrays.toString(lotto));
+		for (Lotto lotto : lottos) {
+			System.out.println(Arrays.toString(lotto.getNumbers().toArray()));
 		}
 		System.out.println();
 	}
@@ -18,9 +21,8 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("----------");
 
-		LottoWinning[] winnings = LottoWinning.values();
-		for (LottoWinning winning : winnings) {
-			System.out.println(winning.getMatchingCount() + "개 일치 ("+winning.getReward()+")- " + result.get(winning.getMatchingCount()) + "개");
+		for (Integer matching : result.keySet()) {
+			System.out.println(matching + "개 일치 (" + LottoWinning.of(matching).getReward()+")-" + result.get(matching) + "개");
 		}
 	}
 
