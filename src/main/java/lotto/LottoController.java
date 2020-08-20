@@ -9,6 +9,7 @@ public class LottoController {
     public static void main(String[] args) {
         BuyCount buyCount = BuyCount.of(InputView.scanLottoMoney());
 
+        BuyCount selectLottoBuyCount = BuyCount.of(InputView.scanSelectLottoBuyCount());
         LottoTickets lottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
         OutputView.printLottoTickets(lottoTickets);
 
