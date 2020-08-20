@@ -38,7 +38,6 @@ class LottoTicketTest {
 
 
         LottoTicket ticket = LottoTicket.create(lottoNumbers);
-        int matchCount = ticket.matchCount(winnerLotto);
-        assertThat(matchCount).isEqualTo(6);
+        assertThat(ticket.matchCount(winnerLotto)).isEqualTo(LottoRank.SIX);
     }
 }
