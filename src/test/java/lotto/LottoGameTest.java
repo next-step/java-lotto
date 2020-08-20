@@ -1,6 +1,7 @@
 package lotto;
 
 import common.StringResources;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResultNumber;
 import lotto.domain.Ticket;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,11 @@ public class LottoGameTest {
     public void lottoGameSuccess() {
 
         LottoGame lottoGame = new LottoGame(10000);
-        lottoGame.buy();
+        lottoGame.setManualLottoCount(5);
+        lottoGame.buyManual(Arrays.asList(
+                new LottoNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6), 7))
+        ));
+        lottoGame.buyAuto();
 
         lottoGame.winning(new LottoResultNumber(
                 new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6), 7)));

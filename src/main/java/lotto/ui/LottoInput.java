@@ -1,13 +1,17 @@
 package lotto.ui;
 
 import common.StringResources;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResultNumber;
 import lotto.domain.Ticket;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoInput {
+
     private static final String DELIMITER = ", ";
     private static final int ZERO = 0;
 
@@ -32,7 +36,7 @@ public class LottoInput {
 
     public int inputManualLottoCount() {
 
-        ResultView.print(StringResources.MSG_INPUT_MANUAL_LOTTO_COUNT);
+        ResultView.print(StringResources.MSG_MANUAL_LOTTO_COUNT);
         return input.nextInt();
     }
 
@@ -48,9 +52,20 @@ public class LottoInput {
         }
     }
 
-    public LottoResultNumber inputLottoResult() {
+    public List<LottoNumber> inputManualLottoList(int manualLottoCount) {
 
-        ResultView.print(StringResources.MSG_WINNING_NUMBER);
+        ResultView.print(StringResources.MSG_MANUAL_LOTTO_NUMBER);
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoNumbers.add(new LottoNumber(makeTicket()));
+        }
+
+        return lottoNumbers;
+    }
+
+    private Ticket makeTicket() {
 
         String inputLine = input.nextLine();
         verifyResultInput(inputLine);
@@ -58,12 +73,17 @@ public class LottoInput {
         String[] split = inputLine.split(DELIMITER);
         verifySplitArray(split);
 
-        return new LottoResultNumber(new Ticket(
+        return new Ticket(
                 Arrays.stream(split)
                         .map(Integer::valueOf)
                         .collect(Collectors.toList()),
-                inputBonus())
-        );
+                inputBonus());
+    }
+
+    public LottoResultNumber inputLottoResult() {
+
+        ResultView.print(StringResources.MSG_WINNING_NUMBER);
+        return new LottoResultNumber(makeTicket());
     }
 
     private void verifyResultInput(String inputLine) {

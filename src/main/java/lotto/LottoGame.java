@@ -7,6 +7,7 @@ import lotto.domain.LottoResultNumber;
 import lotto.domain.RandomLottoCreator;
 import lotto.ui.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -14,8 +15,9 @@ public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private List<LottoNumber> lottoNumberList;
+    private final List<LottoNumber> lottoNumberList = new ArrayList<>();
     private final int principal;
+    private int manualLottoCount;
     private int balance;
 
     public LottoGame(int principal) {
@@ -24,20 +26,32 @@ public class LottoGame {
     }
 
     public void setManualLottoCount(int manualLottoCount) {
-
+        this.manualLottoCount = manualLottoCount;
+        verifyManualLotto();
     }
 
-    public void buyManual(int manualLottoCount) {
+    public void buyManual(List<LottoNumber> manualLottoNumber) {
+        lottoNumberList.addAll(manualLottoNumber);
+        balance -= LOTTO_PRICE * manualLottoCount;
+    }
 
+    private void verifyManualLotto() {
+        if (balance < 0) {
+            throw new IllegalArgumentException(StringResources.ERR_MANUAL_COUNT_OVER_PRINCIPAL);
+        }
     }
 
     public void buyAuto() {
 
-        ResultView.print((balance / LOTTO_PRICE) + StringResources.MSG_BUY_QUANTITY);
+        int manualCount = (principal - balance) / LOTTO_PRICE;
+        int autoCount = balance / LOTTO_PRICE;
 
-        this.lottoNumberList = RandomLottoCreator.createLottoList(balance);
+        ResultView.printLottoQuantity(manualCount, autoCount);
 
-        for (LottoNumber lottoNumber : lottoNumberList) {
+        List<LottoNumber> lottoNumbers = RandomLottoCreator.createLottoList(balance);
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            lottoNumberList.add(lottoNumber);
             ResultView.print(lottoNumber.toString());
         }
     }
@@ -55,7 +69,7 @@ public class LottoGame {
     }
 
     private void verifyLottoNumberListIsNull() {
-        if (lottoNumberList == null) {
+        if (lottoNumberList.size() == 0) {
             throw new NoSuchElementException(StringResources.ERR_NO_LOTTO_LIST);
         }
     }

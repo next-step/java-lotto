@@ -8,9 +8,12 @@ public class Application {
     public static void main(String[] args) {
 
         LottoInput lottoInput = new LottoInput(new ScannerInput());
-
         LottoGame lottoGame = new LottoGame(lottoInput.inputPrincipal());
-        lottoGame.setManualLottoCount(lottoInput.inputManualLottoCount());
+
+        int manualLottoCount = lottoInput.inputManualLottoCount();
+
+        lottoGame.setManualLottoCount(manualLottoCount);
+        lottoGame.buyManual(lottoInput.inputManualLottoList(manualLottoCount));
         lottoGame.buyAuto();
 
         lottoGame.winning(lottoInput.inputLottoResult());

@@ -16,7 +16,9 @@ public class StringResources {
 
     // Lotto
     public static final String MSG_BUY_MONEY = "구입금액을 입력해 주세요.";
-    public static final String MSG_BUY_QUANTITY = "개를 구매했습니다.";
+    public static final String MSG_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
+    public static final String MSG_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해주세요.";
+    public static final String MSG_BUY_QUANTITY = "수동으로 ##장, 자동으로 ##장을 구매했습니다.";
     public static final String MSG_WINNING_NUMBER = "지난 주 당첨번호를 입력해주세요.";
     public static final String MSG_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
     public static final String MSG_WINNING_STATUS = "당첨 통계";
@@ -35,10 +37,9 @@ public class StringResources {
     public static final String ERR_WRONG_UNIT = "1000원 단위로만 입력해주세요.";
     public static final String ERR_DUPLICATE_NUMBER = "중복되지 않은 6개의 번호로 구성해주세요.";
     public static final String ERR_WRONG_RANGE_NUMBER = "1 이상 45 이하의 수만 사용할 수 있습니다.";
-    public static final String ERR_WRONG_RANGE_RESULT_NUMBER = "0 이상 6 이하의 수만 사용할 수 있습니다.";
     public static final String ERR_NO_LOTTO_LIST = "로또를 구매하지 않았습니다.";
     public static final String ERR_WRONG_RESULT_INPUT = "당첨번호는 ', '으로 구분하여 총 6개 입력해야 합니다.";
+    public static final String ERR_MANUAL_COUNT_OVER_PRINCIPAL = "수동으로 구매하려는 로또의 개수가 너무 많습니다.";
 
     public static final String LINE_SEPARATOR = "---------";
-    public static final String MSG_INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
 }
