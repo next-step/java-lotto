@@ -19,4 +19,8 @@ public class LottoNumberFactory {
 	public static List<LottoNumber> getLottoNumberPool() {
 		return lottoNumberPool;
 	}
+
+	public static LottoNumber getNewLottoNumber(Integer number) {
+		return new LottoNumber(number);
+	}
 }

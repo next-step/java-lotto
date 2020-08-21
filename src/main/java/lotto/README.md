@@ -7,5 +7,6 @@
 1. OrderHere에 수동 구매 로직 추가
 2. LottoGameFactory에 수동 생성 추가
 3. PurchaseStandBy에 수동 관련 로직 추가
+    1. refactoring : LottoNumberFactory에 getNewLottoNumber추가 해서 외부 클래스에서 new LottoNumber 쓰던 부분 이 메소드로 대체
 4. 출력 멘트 변경
 5. 예외 처리를 통해 예외가 발생하면 처음 시작으로 돌아가게 유도

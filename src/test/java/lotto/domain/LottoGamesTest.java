@@ -31,11 +31,11 @@ class LottoGamesTest {
 		String[] sevenToTwelve = IntStream.range(7, 13).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 		String[] thirteenToEighteen = IntStream.range(13, 19).mapToObj(String::valueOf).collect(Collectors.toList()).toArray(new String[]{});
 
-		LottoNumber bonus = new LottoNumber(9);
+		int bonus = 9;
 
 		return Stream.of(
 				Arguments.of(new LottoGames(List.of(new LottoGame(oneToSix), new LottoGame(oneToFiveAndNine), new LottoGame(oneToFiveAndEight), new LottoGame(sevenToTwelve), new LottoGame(thirteenToEighteen))),
-						new GameWinningCondition(new LottoGame(oneToSix), bonus),
+						new GameWinningCondition(oneToSix, bonus),
 						List.of(FIRST, SECOND, THIRD, FAIL, FAIL)
 						)
 		);

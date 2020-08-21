@@ -14,27 +14,31 @@ public class PurchaseStandBy {
 	private static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 
 	private final int purchasePrice;
-	private final int numberOfGames;
+	private final List<String[]> manualGameNumbers;
+	private final int autoGameCount;
 
-	public PurchaseStandBy(int purchasePrice) {
+	public PurchaseStandBy(int purchasePrice, List<String[]> manualGameNumbers, int autoGameCount) {
 		this.purchasePrice = purchasePrice;
-		this.numberOfGames = computeNumberOfGames(purchasePrice, PRICE_PER_GAME);
+		this.manualGameNumbers = manualGameNumbers;
+		this.autoGameCount = autoGameCount;
 	}
 
-	public PurchaseStandBy(int purchasePrice, int numberOfGames) {
+	public PurchaseStandBy(int purchasePrice, List<String[]> manualGameNumbers) {
 		this.purchasePrice = purchasePrice;
-		this.numberOfGames = numberOfGames;
-	}
-
-	private int computeNumberOfGames(int purchasePrice, int pricePerGame) {
-		if (purchasePrice < pricePerGame) {
-			throw new LottoException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, pricePerGame));
-		}
-		return purchasePrice / pricePerGame;
+		this.manualGameNumbers = manualGameNumbers;
+		this.autoGameCount = computeAutoGameCount();
 	}
 
 	public int getPurchasePrice() {
 		return purchasePrice;
+	}
+
+	public int getManualGameCount() {
+		return manualGameNumbers.size();
+	}
+
+	public int getAutoGameCount() {
+		return autoGameCount;
 	}
 
 	public LottoGames purchase() {
@@ -42,9 +46,22 @@ public class PurchaseStandBy {
 	}
 
 	private List<LottoGame> generateLottoGames() {
-		return IntStream.range(ZERO, numberOfGames)
-						.mapToObj(index -> LottoGameFactory.getNewLottoGame())
-						.collect(Collectors.toList());
+		List<LottoGame> lottoGames = manualGameNumbers.stream()
+										.map(LottoGameFactory::getNewManualGame)
+										.collect(Collectors.toList());
+
+		List<LottoGame> autoGames = IntStream.range(ZERO, autoGameCount)
+										.mapToObj(index -> LottoGameFactory.getNewAutoGame())
+										.collect(Collectors.toList());
+		lottoGames.addAll(autoGames);
+		return lottoGames;
+	}
+
+	private int computeAutoGameCount() {
+		if (purchasePrice < PRICE_PER_GAME) {
+			throw new LottoException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, PRICE_PER_GAME));
+		}
+		return (purchasePrice / PRICE_PER_GAME) - manualGameNumbers.size();
 	}
 
 	@Override
@@ -53,11 +70,12 @@ public class PurchaseStandBy {
 		if (o == null || getClass() != o.getClass()) return false;
 		PurchaseStandBy that = (PurchaseStandBy) o;
 		return purchasePrice == that.purchasePrice &&
-				numberOfGames == that.numberOfGames;
+				autoGameCount == that.autoGameCount &&
+				manualGameNumbers.equals(that.manualGameNumbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(purchasePrice, numberOfGames);
+		return Objects.hash(purchasePrice, manualGameNumbers, autoGameCount);
 	}
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,7 +35,7 @@ class ConfirmResultsTest {
 		List<PrizeGrade> confirmResults = Arrays.stream(PrizeGrade.values())
 				.filter(prizeGrade -> prizeGrade == THIRD)
 				.collect(Collectors.toList());
-		PurchaseStandBy purchaseStandBy = new PurchaseStandBy(14_000);
+		PurchaseStandBy purchaseStandBy = new PurchaseStandBy(14_000, Collections.EMPTY_LIST);
 		double rateOfReturn = (double) THIRD.getReward() / (double) purchaseStandBy.getPurchasePrice();
 
 		return Stream.of(

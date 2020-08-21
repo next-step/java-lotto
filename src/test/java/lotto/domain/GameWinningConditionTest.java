@@ -22,12 +22,11 @@ class GameWinningConditionTest {
 
 	static Stream<Arguments> provideTestingGetPrizeResult() {
 
-		List<LottoNumber> prize = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-				new LottoNumber(4), new LottoNumber(5), new LottoNumber(44));
+		String[] prize = new String[]{"1", "2", "3", "4", "5", "44"};
 
-		LottoNumber bonusNumber = new LottoNumber(6);
+		int bonusNumber = 6;
 
-		GameWinningCondition gameWinningCondition = new GameWinningCondition(new LottoGame(prize), bonusNumber);
+		GameWinningCondition gameWinningCondition = new GameWinningCondition(prize, bonusNumber);
 
 		List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
 												new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
