@@ -37,8 +37,13 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
 
-    public Ranking findRankingByLotto(final Lotto winningLotto) {
-        return Ranking.valueOfRanking(matchNumber(winningLotto));
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
+    public Ranking findRankingByLotto(final WinningLotto winningLotto) {
+        return Ranking.valueOfRanking(matchNumber(winningLotto.getWinningLotto()),
+                hasBonusNumber(winningLotto.getBonusNumber()));
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {

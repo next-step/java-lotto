@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Rankings {
     private static final int ZERO = 0;
@@ -29,5 +30,18 @@ public class Rankings {
         return rankings.stream()
                 .mapToInt(Ranking::getPrizeMoney)
                 .reduce(ZERO, Integer::sum);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rankings rankings1 = (Rankings) o;
+        return Objects.equals(rankings, rankings1.rankings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankings);
     }
 }

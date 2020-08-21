@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoStore {
     public static final int LOTTO_PRICE = 1_000;
@@ -45,5 +46,19 @@ public class LottoStore {
         if (count < MINIMUM_ISSUE_COUNT) {
             throw new IllegalArgumentException(String.format(NOT_VALID_ISSUE_COUNT, MINIMUM_ISSUE_COUNT));
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoStore that = (LottoStore) o;
+        return Objects.equals(autoLottoGenerator, that.autoLottoGenerator) &&
+                Objects.equals(money, that.money);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(autoLottoGenerator, money);
     }
 }

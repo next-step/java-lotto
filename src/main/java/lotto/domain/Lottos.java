@@ -22,7 +22,7 @@ public class Lottos {
 
     public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.findRankingByLotto(winningLotto.getWinningLotto()))
+                .map(lotto -> lotto.findRankingByLotto(winningLotto))
                 .collect(toList());
     }
 
