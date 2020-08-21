@@ -20,3 +20,16 @@
 - [x] 커스텀 구분자를 지정
 - [x] 입력값이 숫자가 아닐경우 예외 처리
 - [x] 입력값이 음수인 경우 예외 처리
+
+## Step2 로또 - 자동 (기능요구사항)
+
+- [x] 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급
+- [x] 로또 1장의 가격은 1000원
+
+### 기능구현
+- [x] InputView - 구입금액을 입력하기위한 InputView
+- [x] InputView - 당첨번호를 입력하기위한 InputView
+- [x] ResultView - 구입후 당첨번호를 출력하기위한 ResultView
+- [x] ResultView - 당첨통계를 출력하기위한 ResultView
+- [x] 로또번호 자동생성기능 - Collections.shuffle() 이용
+- [x] 당첨된 로또의 등수별 갯수와 수익률을 관리하는 기능
