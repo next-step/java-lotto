@@ -1,19 +1,23 @@
 package lotto.ui;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
 import lotto.domain.GameWinningCondition;
 import lotto.domain.PurchaseStandBy;
 import lotto.ui.input.InputChannel;
 import lotto.ui.output.OutputChannel;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.constants.MessageConstant.*;
 import static lotto.utils.StringUtils.splitByDelimiter;
 
 public class OrderHere {
+
+	private static final int SEED = 0;
+	private static final int INCREASE = 1;
 
 	private final InputChannel inputChannel;
 	private final OutputChannel outputChannel;
@@ -24,13 +28,16 @@ public class OrderHere {
 	}
 
 	public PurchaseStandBy orderNewPurchasing() {
-		return new PurchaseStandBy(retryUntilGettingRightValue(getPurchasingPrice()));
+		Integer price = retryUntilGettingRightValue(getPurchasingPrice());
+		Integer manualGameCount = retryUntilGettingRightValue(getManualGameCount());
+		List<String[]> manualGameNumbers = retryUntilGettingRightValue(getManualGameNumbers(manualGameCount));
+		return new PurchaseStandBy(price, manualGameNumbers);
 	}
 
 	public GameWinningCondition receiveLastWeekPrize() {
-		LottoGame prizeLottoGame = new LottoGame(retryUntilGettingRightValue(getPrizeNumbers()));
-		LottoNumber bonusNumber = new LottoNumber(retryUntilGettingRightValue(getBonusNumber()));
-		return new GameWinningCondition(prizeLottoGame, bonusNumber);
+		String[] prizeNumbers = retryUntilGettingRightValue(getPrizeNumbers());
+		Integer bonus = retryUntilGettingRightValue(getBonusNumber());
+		return new GameWinningCondition(prizeNumbers, bonus);
 	}
 
 	private Supplier<Optional<Integer>> getPurchasingPrice() {
@@ -44,6 +51,14 @@ public class OrderHere {
 
 	private Supplier<Optional<Integer>> getBonusNumber() {
 		return () -> Optional.ofNullable(sayQuestionAndGetInt(PLEASE_INPUT_BONUS_NUMBER));
+	}
+
+	private Supplier<Optional<Integer>> getManualGameCount() {
+		return () -> Optional.ofNullable(sayQuestionAndGetInt(PLEASE_INPUT_MANUAL_GAME_COUNT));
+	}
+
+	private Supplier<Optional<List<String[]>>> getManualGameNumbers(Integer count) {
+		return () -> Optional.ofNullable(sayQuestionAndGetManualNumbersToLimit(PLEASE_INPUT_MANUAL_GAME_NUMBERS, count));
 	}
 
 	private <T> T retryUntilGettingRightValue(Supplier<Optional<T>> supplier) {
@@ -72,7 +87,19 @@ public class OrderHere {
 
 	private String[] sayQuestionAndGetStringArray(String question) {
 		outputChannel.printLine(question);
+		return getStringArray();
+	}
+
+	private String[] getStringArray() {
 		String input = inputChannel.getStringValue();
 		return splitByDelimiter(input);
+	}
+
+	private List<String[]> sayQuestionAndGetManualNumbersToLimit(String question, Integer limit) {
+		outputChannel.printLine(question);
+		return Stream.iterate(SEED, integer -> integer + INCREASE)
+				.limit(limit)
+				.map(integer -> getStringArray())
+				.collect(Collectors.toList());
 	}
 }
