@@ -23,23 +23,17 @@ public class NumberGenerator {
         }
     }
 
-    public void shuffleNumber(){
-        Collections.shuffle(lottoNumberCandidate);
-
-    }
-
     public List<Integer> generate() {
 
         Collections.shuffle(lottoNumberCandidate);
+        numList = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
             numList.add(lottoNumberCandidate.get(i));
+//            System.out.println(lottoNumberCandidate.get(i));
         }
 
         return numList;
     }
 
-    private void shuffleAndMakeLotto(){
-
-    }
 }

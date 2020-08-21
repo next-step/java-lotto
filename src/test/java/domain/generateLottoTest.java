@@ -78,4 +78,8 @@ public class generateLottoTest {
         assertThat(numbers.sixNumber.size()).isEqualTo(6);
     }
 
+    @Test
+    void makeLottoTicket(){
+
+    }
 }
