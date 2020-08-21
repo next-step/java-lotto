@@ -21,15 +21,12 @@ public class LottoController {
 
     private static LottoTickets getLottoTickets() {
         BuyCount buyCount = BuyCount.of(InputView.scanLottoMoney());
-        BuyCount selectLottoBuyCount = BuyCount.of(InputView.scanSelectLottoBuyCount());
+        int selectLottoBuyCount = InputView.scanSelectLottoBuyCount();
 
-        List<String> lottoNumbers = new ArrayList<>();
-        while (selectLottoBuyCount.canBuy()) {
-            lottoNumbers.add(InputView.scanLottoNumbers());
-        }
+        List<String> lottoNumbers = InputView.scanLottoNumbers(selectLottoBuyCount);
 
         LottoTickets selectLottoTickets
-                = LottoTickets.of(selectLottoBuyCount, new LottoTicketSelectMaker(lottoNumbers));
+                = LottoTickets.of(BuyCount.of(selectLottoBuyCount), new LottoTicketSelectMaker(lottoNumbers));
         LottoTickets autoLottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
 
         return LottoTickets.merge(selectLottoTickets, autoLottoTickets);

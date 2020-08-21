@@ -18,6 +18,10 @@ public class BuyCount {
         return new BuyCount(buyCount);
     }
 
+    public static BuyCount of(int buyCount) {
+        return new BuyCount(buyCount);
+    }
+
     private static int getValidLottoMoney(String money) {
         int lottoMoney = StringUtils.toNumber(money);
         validateMoneyUnit(lottoMoney);

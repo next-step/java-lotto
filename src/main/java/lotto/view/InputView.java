@@ -1,7 +1,10 @@
 package lotto.view;
 
 import lotto.domain.BuyCount;
+import utils.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -33,15 +36,20 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String scanSelectLottoBuyCount() {
+    public static int scanSelectLottoBuyCount() {
         System.out.println(SELECT_LOTTO_BUY_COUNT_MESSAGE);
 
-        return scanner.nextLine();
+        return StringUtils.toNumber(scanner.nextLine());
     }
 
-    public static String scanLottoNumbers() {
+    public static List<String> scanLottoNumbers(int selectLottoBuyCount) {
         System.out.println(SELECT_LOTTO_NUMBER_MESSAGE);
 
-        return scanner.nextLine();
+        List<String> scannedLottoNumber = new ArrayList<>();
+        for (int i = 0; i < selectLottoBuyCount; i++) {
+            scannedLottoNumber.add(scanner.nextLine());
+        }
+
+        return scannedLottoNumber;
     }
 }
