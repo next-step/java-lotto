@@ -1,4 +1,4 @@
-package step2.domain;
+package step2_3.domain;
 
 import java.util.*;
 
@@ -8,10 +8,6 @@ public class LottoStatistic {
 	private static final Map<LottoWinning, Integer> lottoStat = new HashMap<>();
 
 	public LottoStatistic(Lotto winningLotto, Integer winningBonus) {
-		for (LottoWinning matching : LottoWinning.values()) {
-			lottoStat.put(matching, 0);
-		}
-		lottoStat.remove(LottoWinning.NOTTING);
 		this.winningLotto = winningLotto;
 		this.winningBonus = winningBonus;
 	}

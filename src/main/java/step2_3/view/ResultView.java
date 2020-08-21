@@ -1,7 +1,7 @@
-package step2.view;
+package step2_3.view;
 
-import step2.domain.Lotto;
-import step2.domain.LottoWinning;
+import step2_3.domain.Lotto;
+import step2_3.domain.LottoWinning;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
-package step2.view;
+package step2_3.view;
 
-import step2.domain.Lotto;
+import step2_3.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.Scanner;

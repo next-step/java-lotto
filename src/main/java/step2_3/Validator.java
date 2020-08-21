@@ -1,6 +1,6 @@
-package step2;
+package step2_3;
 
-import step2.domain.Lotto;
+import step2_3.domain.Lotto;
 
 import java.util.HashSet;
 import java.util.Set;

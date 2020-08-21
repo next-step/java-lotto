@@ -1,10 +1,11 @@
-package step2;
+package step2_3;
 
-import step2.domain.Lotto;
-import step2.domain.LottoIssuer;
-import step2.domain.LottoStatistic;
-import step2.view.InputView;
-import step2.view.ResultView;
+
+import step2_3.domain.Lotto;
+import step2_3.domain.LottoIssuer;
+import step2_3.domain.LottoStatistic;
+import step2_3.view.InputView;
+import step2_3.view.ResultView;
 
 import java.util.List;
 
