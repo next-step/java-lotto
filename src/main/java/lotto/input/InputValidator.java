@@ -31,4 +31,10 @@ public class InputValidator {
 			throw new IllegalArgumentException("당첨번호를 입력하셔야 합니다.");
 		}
 	}
+
+	public static void validateLottoNumbers(String numbersString) {
+		if (StringUtils.isBlank(numbersString)) {
+			throw new IllegalArgumentException("생성할 번호를 입력해주세요.");
+		}
+	}
 }
