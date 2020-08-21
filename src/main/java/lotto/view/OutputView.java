@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 public class OutputView {
     private static final int DEFAULT_SHOW_MATCH_COUNT = 0;
     private static final double RESULT_REFERENCE_RATE = 1.00D;
-    private static final String LOTTO_BUY_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다. \n";
+    private static final String LOTTO_BUY_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다. \n";
     private static final String LOTTO_NUMBERS_MESSAGE = "[%s]";
     private static final String WINNING_INTRO_MESSAGE = "\n당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
