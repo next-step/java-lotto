@@ -42,4 +42,12 @@ public class BuyCount {
     public void subtract() {
         buyCount--;
     }
+
+    public BuyCount subtract(int targetBuyCount) {
+        return BuyCount.of(buyCount - targetBuyCount);
+    }
+
+    public int get() {
+        return buyCount;
+    }
 }

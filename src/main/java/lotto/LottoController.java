@@ -4,15 +4,12 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
 
     public static void main(String[] args) {
         LottoTickets lottoTickets = getLottoTickets();
-        OutputView.printLottoTickets(lottoTickets);
-
         WinningLotto winningLotto = WinningLotto.of(InputView.scanWinningLottoNumber(),
                                                     InputView.scanBonusNumber());
         WinningResult winningResult = lottoTickets.getWinningResult(winningLotto);
@@ -20,15 +17,20 @@ public class LottoController {
     }
 
     private static LottoTickets getLottoTickets() {
-        BuyCount buyCount = BuyCount.of(InputView.scanLottoMoney());
-        int selectLottoBuyCount = InputView.scanSelectLottoBuyCount();
+        BuyCount totalBuyCount = BuyCount.of(InputView.scanLottoMoney());
+        BuyCount selectBuyCount = BuyCount.of(InputView.scanSelectLottoBuyCount());
 
-        List<String> lottoNumbers = InputView.scanLottoNumbers(selectLottoBuyCount);
+        List<String> lottoNumbers = InputView.scanLottoNumbers(selectBuyCount.get());
 
         LottoTickets selectLottoTickets
-                = LottoTickets.of(BuyCount.of(selectLottoBuyCount), new LottoTicketSelectMaker(lottoNumbers));
-        LottoTickets autoLottoTickets = LottoTickets.of(buyCount, new LottoTicketRandomMaker());
+                = LottoTickets.of(selectBuyCount, new LottoTicketSelectMaker(lottoNumbers));
+        LottoTickets autoLottoTickets
+                = LottoTickets.of(totalBuyCount.subtract(selectLottoTickets.number()), new LottoTicketRandomMaker());
+        LottoTickets totalLottoTickets = LottoTickets.merge(selectLottoTickets, autoLottoTickets);
 
-        return LottoTickets.merge(selectLottoTickets, autoLottoTickets);
+        OutputView.printLottoTicketsCount(selectLottoTickets.number(), autoLottoTickets.number());
+        OutputView.printLottoTickets(totalLottoTickets);
+
+        return totalLottoTickets;
     }
 }
