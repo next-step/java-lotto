@@ -1,44 +1,23 @@
 package step2.ui;
 
 import step2.domain.Lotto;
+import step2.domain.MatchesResult;
 import step2.domain.Score;
-import step2.domain.WinningInformation;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ResultView {
     public static int totalWinnings = 0;
 
-    public static void outputOfWinningResults(List<WinningInformation> winningInformation, int moneyInput) {
+    public static void outputOfWinningResults(MatchesResult matchesResult, int moneyInput) {
         printEndingMsg();
-        Map<Integer, Long> counting = groupByMatchesCounting(winningInformation);
-        getBaseMap().forEach((k, v) -> counting.putIfAbsent(k, v));
-        counting.forEach((key, value) -> getResultMsg(value, Score.getScore(key)));
+        matchesResult.getResults().forEach((key, value) -> getResultMsg(value, Score.getScore(key)));
         printYields(moneyInput);
-    }
-
-    private static Map<Integer, Long> groupByMatchesCounting(List<WinningInformation> winningInformation) {
-        Map<Integer, Long> counting = winningInformation.stream()
-                .sorted()
-                .collect(Collectors.groupingBy(WinningInformation::getNumberOfMatches, Collectors.counting()));
-        return counting;
     }
 
     private static void printEndingMsg() {
         System.out.println("당첨 통계");
         System.out.println("--------");
-    }
-
-    private static HashMap<Integer, Long> getBaseMap() {
-        return new HashMap<Integer, Long>() {{
-            put(3, 0L);
-            put(4, 0L);
-            put(5, 0L);
-            put(6, 0L);
-        }};
     }
 
     static void getResultMsg(Long value, Score score) {

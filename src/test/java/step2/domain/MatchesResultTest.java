@@ -10,25 +10,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static step2.domain.Lotto.ofLottoByDesignatedRange;
 import static step2.domain.WinnerVerification.getWinnerVerified;
 
-class WinnerVerificationTest {
+class MatchesResultTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1:7:1,2,3"}, delimiter = ':')
-    public void 당첨_검증_기능(int start, int end, String result) {
+    @CsvSource(value = {"1:7:1,2,3:3:3"}, delimiter = ':')
+    public void 당첨_결과(int start, int end, String result, int key, int value) {
         WinnersNo winnersNo = new WinnersNo(result);
         List<Lotto> lottos = Arrays.asList(
                 ofLottoByDesignatedRange(start, end),
                 ofLottoByDesignatedRange(start, end),
                 ofLottoByDesignatedRange(start, end));
         List<WinningInformation> winningInformation = getWinnerVerified(winnersNo, lottos);
-        assertThat(winningInformation.size()).isEqualTo(3);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"1:7:1,2,3:3"}, delimiter = ':')
-    void hasNumber(int start, int end, String winningConditions, int result) {
-        WinnersNo winnersNo = new WinnersNo(winningConditions);
-        List<Integer> lotteryInfo = ofLottoByDesignatedRange(start, end).getLotteryInfo();
-        assertThat(WinnerVerification.hasNumber(winnersNo, lotteryInfo)).isEqualTo(result);
+        assertThat(MatchesResult.ofMatchesResults(winningInformation).getResults().get(3)).isEqualTo(3);
     }
 }

@@ -53,4 +53,8 @@ public class Lotto {
     public List<Integer> getLotteryInfo() {
         return lotteryInfo;
     }
+
+    public static List<Lotto> ofLottoGames(int games) {
+        return IntStream.range(0, games).mapToObj(i -> ofLotto()).collect(Collectors.toList());
+    }
 }
