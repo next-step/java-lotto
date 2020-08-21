@@ -40,7 +40,16 @@ class LottoStoreTest {
         final Lotto lotto = Lotto.of(Arrays.asList(7, 9, 11, 18, 24, 39));
         final WinningLotto winningLotto = WinningLotto.of(Arrays.asList(7, 9, 11, 18, 24, 39), 15);
 
-        assertThat(lotto.findRankingByLotto(winningLotto.getWinningLotto())).isEqualTo(Ranking.FIRST);
+        assertThat(lotto.findRankingByLotto(winningLotto)).isEqualTo(Ranking.FIRST);
+    }
+
+    @DisplayName("2등 당첨 확인 테스트")
+    @Test
+    void findWinningLottoSecondTest() {
+        final Lotto lotto = Lotto.of(Arrays.asList(7, 9, 11, 18, 24, 39));
+        final WinningLotto winningLotto = WinningLotto.of(Arrays.asList(7, 9, 11, 18, 24, 40), 39);
+
+        assertThat(lotto.findRankingByLotto(winningLotto)).isEqualTo(Ranking.SECOND);
     }
 
     @DisplayName("총 수익률 구하는 테스트")
