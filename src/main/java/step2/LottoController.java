@@ -17,7 +17,10 @@ public class LottoController {
 		ResultView.printLottos(lottos);
 
 		Lotto winningLotto = Validator.validWinningNumbers(InputView.inputWinningNumbers());
-		LottoStatistic statistic = new LottoStatistic(winningLotto);
+		int bonusNumber = Validator.validBonusBallNumber(winningLotto, InputView.inputBonusBall());
+
+		LottoStatistic statistic = new LottoStatistic(winningLotto, bonusNumber);
+
 		ResultView.printWinningResult(statistic.calcLottoResult(lottos));
 		ResultView.printYield(statistic.calcYield(price));
 	}

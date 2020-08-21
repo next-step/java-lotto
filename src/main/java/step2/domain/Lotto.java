@@ -3,10 +3,7 @@ package step2.domain;
 import java.util.List;
 
 public class Lotto {
-	private List<Integer> numbers;
-	private int matchingCount;
-	private LottoWinning winning;
-
+	private final List<Integer> numbers;
 	private static final int PRICE = 1000;
 
 	public Lotto(List<Integer> numbers) {

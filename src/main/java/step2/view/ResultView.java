@@ -6,8 +6,11 @@ import step2.domain.LottoWinning;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
+
+	private ResultView() {}
 
 	public static void printLottos(List<Lotto> lottos) {
 		System.out.println(lottos.size()+"개를 구매했습니다.");
@@ -17,12 +20,21 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void printWinningResult(Map<Integer, Integer> result) {
+	public static void printWinningResult(Map<LottoWinning, Integer> result) {
+		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("----------");
 
-		for (Integer matching : result.keySet()) {
-			System.out.println(matching + "개 일치 (" + LottoWinning.of(matching).getReward()+")-" + result.get(matching) + "개");
+		for (LottoWinning winning : Arrays.stream(LottoWinning.values()).filter(winning -> winning.getMatchingCount() != 0).collect(Collectors.toList())) {
+			System.out.print(winning.getMatchingCount()+ "개 일치");
+			printBonus(winning);
+			System.out.println("(" + winning.getReward()+"원)- " + result.getOrDefault(winning, 0) + "개");
+		}
+	}
+
+	private static void printBonus(LottoWinning winning) {
+		if (winning.isBonus()) {
+			System.out.print(", 보너스 볼 일치");
 		}
 	}
 
