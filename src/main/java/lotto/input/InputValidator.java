@@ -16,7 +16,7 @@ public class InputValidator {
 			throw new IllegalArgumentException("구입금액은 숫자로 입력해주세요.");
 		}
 
-		if (Integer.parseInt(price) <= 1000) {
+		if (Integer.parseInt(price) < 1000) {
 			throw new IllegalArgumentException("구입금액은 최소 1000원 이상 입력해주세요.");
 		}
 	}

@@ -36,5 +36,22 @@ public class InputExceptionTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("보너스볼은 숫자로 입력하셔야 합니다.");
 
+		assertThatThrownBy(() -> ManualLottoCount.of(null, "3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("로또 구매량이 없습니다.");
+
+		assertThatThrownBy(() -> ManualLottoCount.of(LottoPayAmounts.of("1000"), null))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("수동으로 구매할 수를 입력하셔야 합니다.");
+
+		assertThatThrownBy(() -> ManualLottoCount.of(LottoPayAmounts.of("1000"), "lotto"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("수동으로 구매할 수를 숫자로 입력하셔야 합니다.");
+
+		assertThatThrownBy(() -> ManualLottoCount.of(LottoPayAmounts.of("1000"), "3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("수동으로 구매할 수는 로또 구매한 전체 양보다 적어야 합니다.");
+
+
 	}
 }
