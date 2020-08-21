@@ -8,4 +8,9 @@ public class SystemOut implements OutputChannel {
 	public void printLine(String input) {
 		System.out.println(input);
 	}
+
+	@Override
+	public void printError(String errorMessage) {
+		System.err.println(errorMessage);
+	}
 }

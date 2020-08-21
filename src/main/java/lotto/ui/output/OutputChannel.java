@@ -15,4 +15,6 @@ public interface OutputChannel {
 	}
 
 	void printLine(String input);
+
+	void printError(String errorMessage);
 }

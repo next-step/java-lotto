@@ -16,10 +16,6 @@ public class LottoGames {
 		return lottoGames;
 	}
 
-	public int getGameSize() {
-		return lottoGames.size();
-	}
-
 	public ConfirmResults confirmPrize(GameWinningCondition lastWeekPrize) {
 		return new ConfirmResults(lastWeekPrize.getPrizeResult(lottoGames));
 	}

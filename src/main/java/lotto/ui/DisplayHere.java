@@ -20,8 +20,8 @@ public class DisplayHere {
 		this.outputChannel = OutputChannel.getSystemOutChannel();
 	}
 
-	public void printPurchasedGames(LottoGames lottoGames) {
-		outputChannel.printLine(String.format(PURCHASED_N_COUNT, lottoGames.getGameSize()));
+	public void printPurchasedGames(PurchaseStandBy purchaseStandBy, LottoGames lottoGames) {
+		outputChannel.printLine(String.format(PURCHASED_N_MANUAL_N_AUTO, purchaseStandBy.getManualGameCount(), purchaseStandBy.getAutoGameCount()));
 		lottoGames.getLottoGames()
 				.forEach(lottoGame -> outputChannel.printLine(lottoGame.toString()));
 		outputChannel.printLine(NEW_LINE);
@@ -32,6 +32,10 @@ public class DisplayHere {
 		outputChannel.printLine(getReportOfStatisticsEachGroup(confirmResults.getGroupedByPrizeGrade()));
 		double rateOfReturn = confirmResults.computeRateOfReturn(purchaseStandBy);
 		outputChannel.printLine(String.format(RATE_OF_RETURN_FORMAT, rateOfReturn, RateOfReturn.of(rateOfReturn).getMessage()));
+	}
+
+	public void printErrorMessage(String message) {
+		outputChannel.printError(message);
 	}
 
 	private String getReportOfStatisticsEachGroup(Map<PrizeGrade, Integer> group) {
