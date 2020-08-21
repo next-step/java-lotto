@@ -8,6 +8,10 @@ public class LottoTicketCount {
         this.lottoTicketCount = calculateLottoTicketCount(money);
     }
 
+    public static LottoTicketCount getInstance(int money){
+        return new LottoTicketCount(money);
+    }
+
     private int calculateLottoTicketCount(int money) {
         return money / LOTTO_PRICE;
     }

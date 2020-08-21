@@ -22,4 +22,5 @@ public class PublishedLottoTicket {
     public Set<LottoTicket> getPublishedLottoTicket() {
         return publishedLottoTicket;
     }
+
 }

@@ -10,15 +10,23 @@ public class LottoMachine {
     public static final int LOTTO_END_NUMBER = 45;
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private static List<Integer> lottoNumbers = new ArrayList<>();
+    private static final List<Integer> lottoNumbers;
+
+    static {
+        lottoNumbers = new ArrayList<>();
+        IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+                .boxed().forEach(lottoNumbers::add);
+    }
 
     private LottoMachine() {
-        lottoNumbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-                .boxed().collect(Collectors.toList());
+    }
+
+    private static class LottoMachineLazyHolder {
+        private static final LottoMachine instance = new LottoMachine();
     }
 
     public static LottoMachine getInstance() {
-        return new LottoMachine();
+        return LottoMachineLazyHolder.instance;
     }
 
     public static Set<LottoNumber> generateLottoNumber() {

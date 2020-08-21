@@ -6,16 +6,20 @@ public class LottoResult {
 
     private static final int RATE = 100;
 
-    private Map<WinningPrize, Integer> lottoResult = new LinkedHashMap<>();
+    private Map<WinningPrize, Integer> lottoPrizeResult = new LinkedHashMap<>();
 
     public LottoResult() {
         Arrays.stream(WinningPrize.values())
-                .forEach(winningPrize -> this.lottoResult.put(winningPrize, 0));
+                .forEach(winningPrize -> this.lottoPrizeResult.put(winningPrize, 0));
+    }
+
+    public static LottoResult getInstance() {
+        return new LottoResult();
     }
 
     public int calculatePrizeRate(int money) {
-        return this.lottoResult.entrySet().stream()
-                .mapToInt(result -> result.getKey().getPrize() * result.getValue()).sum() * RATE / money ;
+        return lottoPrizeResult.entrySet().stream()
+                .mapToInt(result -> result.getKey().getPrize() * result.getValue()).sum() / money * RATE;
     }
 
     public void analyzeLottoRank(Set<LottoTicket> lottoTickets, WinningLotto winningLotto) {
@@ -31,10 +35,10 @@ public class LottoResult {
     }
 
     private void recordWinningResult(WinningPrize winningValue) {
-        lottoResult.put(winningValue, lottoResult.get(winningValue) + 1);
+        lottoPrizeResult.put(winningValue, lottoPrizeResult.get(winningValue) + 1);
     }
 
     public Map<WinningPrize, Integer> getLottoResult() {
-        return Collections.unmodifiableMap(lottoResult);
+        return Collections.unmodifiableMap(lottoPrizeResult);
     }
 }
