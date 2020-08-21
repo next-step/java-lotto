@@ -37,6 +37,10 @@ public class BuyCount {
         }
     }
 
+    public int get() {
+        return buyCount;
+    }
+
     public boolean canBuy() {
         return buyCount > 0;
     }
@@ -47,10 +51,6 @@ public class BuyCount {
 
     public BuyCount subtract(int count) {
         return BuyCount.of(buyCount - count);
-    }
-
-    public int get() {
-        return buyCount;
     }
 
     @Override
