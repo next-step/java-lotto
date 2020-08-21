@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
 import utils.StringUtils;
 
 import java.util.Arrays;
@@ -34,6 +35,9 @@ public class LottoTicketSelectMaker implements LottoTicketMaker {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
+        if (lottoNumbers.size() != DEFAULT_LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT);
+        }
         buyCount--;
 
         return new LottoTicket(lottoNumbers);
