@@ -12,7 +12,7 @@ public class Validator {
 	private Validator() {}
 
 	public static int validPrice(int price) {
-		if (price % 1000 != 0) {
+		if (price == 0 || price % 1000 != 0) {
 			throw new IllegalArgumentException("로또 구입 금액은 1000원 단위만 가능합니다.");
 		}
 		return price;
