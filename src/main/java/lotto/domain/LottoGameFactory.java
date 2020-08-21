@@ -8,8 +8,12 @@ public class LottoGameFactory {
 
 	private LottoGameFactory() {}
 
-	public static LottoGame getNewLottoGame() {
+	public static LottoGame getNewAutoGame() {
 		Collections.shuffle(getLottoNumberPool());
 		return new LottoGame(getLottoNumberPool());
+	}
+
+	public static LottoGame getNewManualGame(String[] numbers) {
+		return new LottoGame(numbers);
 	}
 }
