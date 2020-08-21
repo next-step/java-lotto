@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -29,5 +32,22 @@ class LottoStoreTest {
     @ValueSource(ints = {1000, 10000, 13500, 30000})
     void divideMoneyToLottoPriceTest(int price) {
         assertThat(LottoStore.of(Money.of(price)).findLottoCount()).isEqualTo(price / LottoStore.LOTTO_PRICE);
+    }
+
+    @DisplayName("당첨 확인 테스트")
+    @Test
+    void findWinningLottoTest() {
+        final Lotto lotto = Lotto.of(Arrays.asList(7, 9, 11, 18, 24, 39));
+        final WinningLotto winningLotto = WinningLotto.of(Arrays.asList(7, 9, 11, 18, 24, 39), 15);
+
+        assertThat(lotto.findRankingByLotto(winningLotto.getWinningLotto())).isEqualTo(Ranking.FIRST);
+    }
+
+    @DisplayName("총 수익률 구하는 테스트")
+    @Test
+    void findProfitRateTest() {
+        LottoStore lottoStore = LottoStore.of(Money.of(5400));
+        assertThat(lottoStore.findProfitRate(Ranking.FIFTH.getPrizeMoney()))
+                .isEqualTo((double) Ranking.FIFTH.getPrizeMoney() / lottoStore.getPurchasePrice());
     }
 }

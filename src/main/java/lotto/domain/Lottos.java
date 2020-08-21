@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lottos {
     private final List<Lotto> lottos;
 
@@ -18,12 +20,10 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult getResult(final WinningLotto winningLotto) {
-        final LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos) {
-            lottoResult.updateCount(lotto.findRankingByLotto(winningLotto.getWinningLotto()));
-        }
-        return lottoResult;
+    public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> lotto.findRankingByLotto(winningLotto.getWinningLotto()))
+                .collect(toList());
     }
 
     @Override

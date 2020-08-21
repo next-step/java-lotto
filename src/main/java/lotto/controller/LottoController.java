@@ -12,8 +12,8 @@ public class LottoController {
         ResultView.displayLottoCount(lottoStore.findLottoCount());
         ResultView.displayLottos(lottos);
 
-        final WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningLotto()) ;
-        final LottoResult lottoResult = lottos.getResult(winningLotto);
-        ResultView.displayLottoResult(lottoResult, lottoStore.getPurchasePrice());
+        final WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningLotto(), InputView.inputBonusNumber());
+        final Rankings rankings = Rankings.of(lottos.matchesWinningLotto(winningLotto));
+        ResultView.displayLottoResult(rankings, lottoStore.findProfitRate(rankings.totalPrizeMoney()));
     }
 }

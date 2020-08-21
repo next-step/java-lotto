@@ -29,6 +29,10 @@ public class LottoStore {
         return Lottos.of(lottos);
     }
 
+    public double findProfitRate(int totalPrize) {
+        return (double) totalPrize / getPurchasePrice();
+    }
+
     public int getPurchasePrice() {
         return findLottoCount() * LOTTO_PRICE;
     }
