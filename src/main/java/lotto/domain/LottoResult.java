@@ -19,12 +19,12 @@ public class LottoResult {
         this.lottoResultMap.put(ranking, this.lottoResultMap.get(ranking) + MATCHES_COUNT);
     }
 
-    public double findProfitRate(Money money) {
+    public double findProfitRate(int price) {
         long totalMoney = 0;
         for (Ranking ranking : lottoResultMap.keySet()) {
             totalMoney += lottoResultMap.get(ranking) * ranking.getPrizeMoney();
         }
-        return (double) totalMoney / money.getPurchasePrice();
+        return (double) totalMoney / price;
     }
 
     @Override

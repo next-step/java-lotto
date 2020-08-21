@@ -32,8 +32,8 @@ class LottoResultTest {
     void findProfitRateTest() {
         Money money = Money.of(5000);
         lottoResult.updateCount(Ranking.FIFTH);
-        assertThat(lottoResult.findProfitRate(money))
-                .isEqualTo((double) Ranking.FIFTH.getPrizeMoney() / money.getPurchasePrice());
+        assertThat(lottoResult.findProfitRate(money.getPrice()))
+                .isEqualTo((double) Ranking.FIFTH.getPrizeMoney() / money.getPrice());
     }
 
     @DisplayName("당첨 확인 테스트")

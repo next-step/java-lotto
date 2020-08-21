@@ -12,8 +12,8 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void displayLottoCount(Money money) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, money.getLottoCount()));
+    public static void displayLottoCount(int lottoCount) {
+        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoCount));
     }
 
     public static void displayLottos(Lottos lottos) {
@@ -24,7 +24,7 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void displayLottoResult(LottoResult lottoResult, Money money) {
+    public static void displayLottoResult(LottoResult lottoResult, int price) {
         System.out.println(HEAD_STATISTICS_MESSAGE);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -33,7 +33,7 @@ public class ResultView {
                     ranking.getPrizeMoney(), lottoResult.getLottoResultMap().get(ranking)));
         }
 
-        double profitRate = lottoResult.findProfitRate(money);
+        double profitRate = lottoResult.findProfitRate(price);
         stringBuilder.append(String.format(TOTAL_PROFIT_MESSAGE, profitRate));
 
         if (profitRate < 1) {
