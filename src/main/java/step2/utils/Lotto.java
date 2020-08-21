@@ -3,23 +3,27 @@ package step2.utils;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoFactory {
+public class Lotto {
     List<Integer> lottoNumber;
 
-    public LottoFactory() {
+    public Lotto() {
         this.lottoNumber = RandomIntegerGenerator.getRandomInteger();
     }
 
-    public LottoFactory(List<Integer> lottoNumber) {
+    public Lotto(List<Integer> lottoNumber) {
         this.lottoNumber = lottoNumber;
+    }
+
+    public List<Integer> getLotto() {
+        return this.lottoNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoFactory that = (LottoFactory) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
     }
 
     @Override

@@ -9,12 +9,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoFactoryTest {
+public class LottoTest {
     @Test
     @DisplayName("로또 1장 생성기")
     public void create() {
         List<Integer> lottoNumbers = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6));
 
-        assertThat(new LottoFactory(lottoNumbers)).isEqualTo(new LottoFactory(lottoNumbers));
+        assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
     }
 }
