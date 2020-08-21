@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,4 +53,28 @@ public class LottoTicketsTest {
                         , LottoRank.DROP, 5, 0/5000.0)
         );
     }
+
+    @DisplayName("LottoTickets merge 테스트")
+    @ParameterizedTest
+    @MethodSource("makeLottoTicketsMergeData")
+    void merge(BuyCount buyCount1, BuyCount buyCount2, List<String> lottoNumbers1, List<String> lottoNumbers2) {
+        LottoTickets lottoTicket1 = LottoTickets.of(buyCount1, new LottoTicketSelectMaker(lottoNumbers1));
+        LottoTickets lottoTicket2 = LottoTickets.of(buyCount2, new LottoTicketSelectMaker(lottoNumbers2));
+
+        LottoTickets mergedLottoTickets = LottoTickets.merge(lottoTicket1, lottoTicket2);
+
+        assertThat(mergedLottoTickets.number()).isEqualTo(lottoNumbers1.size() + lottoNumbers2.size());
+        assertThat(mergedLottoTickets.getLottoTickets()).containsAll(lottoTicket1.getLottoTickets());
+        assertThat(mergedLottoTickets.getLottoTickets()).containsAll(lottoTicket2.getLottoTickets());
+    }
+
+    private static Stream<Arguments> makeLottoTicketsMergeData() {
+        return Stream.of(
+                Arguments.of(BuyCount.of(1), BuyCount.of(2)
+                        , Arrays.asList("9,10,17,2,31,33"), Arrays.asList("41,23,19,26,44,42", "1,2,3,4,5,6")),
+                Arguments.of(BuyCount.of(3), BuyCount.of(1)
+                        , Arrays.asList("1,2,3,4,5,6", "31,4,5,22,37,11", "18,33,41,45,6,7"), Arrays.asList("1,2,3,4,5,6"))
+        );
+    }
+
 }
