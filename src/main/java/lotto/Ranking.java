@@ -19,7 +19,7 @@ public enum Ranking {
 
 	private final int sameCount;
 	private final long prizeMoney;
-	private BiPredicate<Ranking, WinningArgument> rankingEqualsArgument;
+	private BiPredicate<Ranking, WinningArgument> argumentEqualsArgumentsOfRanking;
 
 	public static Ranking getRakingOf(WinningArgument argument) {
 		if (FAILURE.sameCount >= argument.getSameCount()) {
@@ -27,7 +27,7 @@ public enum Ranking {
 		}
 
 		return Stream.of(Ranking.values())
-					 .filter(ranking -> ranking.rankingEqualsArgument.test(ranking, argument))
+					 .filter(ranking -> ranking.argumentEqualsArgumentsOfRanking.test(ranking, argument))
 					 .findFirst()
 					 .get();
 	}
