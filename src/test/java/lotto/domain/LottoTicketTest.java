@@ -1,7 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,20 +14,46 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketTest {
     private static final LottoTicketMaker LOTTO_TICKET_RANDOM_MAKER = new LottoTicketRandomMaker();
 
-    @DisplayName("로또 번호 랜덤 생성 테스트")
-    @Test
-    void create() {
-        LottoTicket lottoTicket = LottoTicket.create(LOTTO_TICKET_RANDOM_MAKER);
+    @DisplayName("로또 생성 테스트")
+    @ParameterizedTest
+    @MethodSource("makeCreateTicketData")
+    void create(LottoTicketMaker lottoTicketMaker) {
+        LottoTicket lottoTicket = LottoTicket.create(lottoTicketMaker);
         List<Integer> lottoNumbers = lottoTicket.getNumbers();
 
         assertThat(lottoNumbers).hasSize(LottoTicketMaker.DEFAULT_LOTTO_NUMBER_COUNT);
         assertThat(lottoNumbers.stream()
                 .filter(number -> number > LottoNumber.MAX_VALUE || number < LottoNumber.MIN_VALUE)
                 .findAny()).isEmpty();
+    }
+
+    private static Stream<Arguments> makeCreateTicketData() {
+        return Stream.of(
+                Arguments.of(LOTTO_TICKET_RANDOM_MAKER),
+                Arguments.of(new LottoTicketSelectMaker(Arrays.asList("1,23,41,21,3,17", "1,2,3,4,5,6"))),
+                Arguments.of(new LottoTicketOneSelectMaker("1,23,41,21,3,17"))
+        );
+    }
+
+    @DisplayName("로또 수동 번호 오입력 테스트")
+    @ParameterizedTest
+    @MethodSource("makeCreateTicketInvalidData")
+    void create_ticket_invalid_input(List<String> lottoNumbers, String lottoExceptionMessage) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoTicket.create(new LottoTicketSelectMaker(lottoNumbers)))
+                .withMessage(lottoExceptionMessage);
+    }
+
+    private static Stream<Arguments> makeCreateTicketInvalidData() {
+        return Stream.of(
+                Arguments.of(Arrays.asList("100,1,2,3,4,5"), LottoExceptionMessage.INVALID_LOTTO_NUMBER_RANGE),
+                Arguments.of(Arrays.asList("1,2,3"), LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT)
+        );
     }
 
     @DisplayName("로또 번호 고정 생성 테스트")
