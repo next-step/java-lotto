@@ -24,6 +24,7 @@ public class Step2Main {
         lottoList = checkWinning.setWinningNumberLottoList();
 
         WinningStatistics winningStatistics = new WinningStatistics(lottoList);
+        PrintResult.printLottoMap(winningStatistics.makeWinningMap());
         PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.getBenefitOrNot());
 
     }

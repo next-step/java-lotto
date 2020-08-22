@@ -2,10 +2,15 @@ package step2.view;
 
 import step2.domain.Lotto;
 import step2.domain.MakeLottoFactory;
+import step2.domain.WinningPrice;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class PrintResult {
+
     public static void printBuyQuantity(int quantity) {
         System.out.println(quantity + "개를 구매했습니다.");
     }
@@ -20,6 +25,15 @@ public class PrintResult {
     public static void printResult(float result, String benefitOrNot) {
         System.out.println("총 수익률은 " + String.format("%.2f", result) + "입니다. " + benefitOrNot);
         System.out.println("결과는 " + result + "입니다.");
+    }
+
+    public static void printLottoMap(Map<WinningPrice,Integer> winningPriceIntegerMap) {
+        winningPriceIntegerMap.remove(WinningPrice.OTHER);
+        Iterator<WinningPrice> mapIter = winningPriceIntegerMap.keySet().iterator();
+        for(WinningPrice key : winningPriceIntegerMap.keySet()){
+            int value = winningPriceIntegerMap.get(key);
+            System.out.println(key.getWinningNumbers() + "개 일치(" + key.getPrice() + "원) - " + value +"개");
+        }
     }
 
 }

@@ -34,6 +34,6 @@ public class Lotto {
     }
 
     public int getPrice() {
-        return WinningPrice.getPrice(winningCount);
+        return WinningPrice.getPriceWithWinningNumbers(winningCount);
     }
 }
