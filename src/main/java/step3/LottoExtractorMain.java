@@ -18,10 +18,8 @@ public class LottoExtractorMain {
         int trials = InputView.printNumberOfTickets(amount);
 
         for (int i = 0; i < trials; i++) {
-            //String numberList = generator.retrieveLottoNumberList();
             ticketList.add(generator.generatedLottoTicketByRandom());
-            System.out.println(ticketList.get(i).toString());
-            //System.out.println(numberList);
+            System.out.println(ticketList.get(i).printListMemberWithTemplate());
         }
 
         String[] answerNumber = InputView.checkWinNumber().split(DELIMITER);

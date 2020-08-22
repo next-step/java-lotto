@@ -10,7 +10,7 @@
     - [x] 6개의 숫자 랜덤 산출
     - [x] 6개의 숫자 정렬
     - [x] step2의 문구처럼 정렬 후 출력
-    - [ ] Generator 최종 return 형태가 LottoTicket이 되도록 수정
+    - [x] Generator 최종 return 형태가 LottoTicket이 되도록 수정
 
 - Lotto 스코어 기록 Enum 이용 구현
     - [ ] 1-6등까지의 상수 구현

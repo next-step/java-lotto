@@ -49,4 +49,8 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public String printListMemberWithTemplate() {
+        return lottoNumbers.toString();
+    }
+
 }

@@ -43,4 +43,11 @@ public class LottoTicketTest {
         String[] expected = {"4", "13", "15", "22", "13", "5"};
         assertThat(lotto.matchedNumber(expected)).isEqualTo(2);
     }
+
+    @Test
+    void check_LottoTicket_for_Printing_Test() {
+        String value = "[4, 12, 32, 25, 11, 22]";
+        lotto = new LottoTicket(value);
+        assertThat(lotto.printListMemberWithTemplate()).isEqualTo(value);
+    }
 }
