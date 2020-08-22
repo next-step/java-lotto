@@ -26,9 +26,10 @@ public class WinningArgument {
 	}
 
 	private static int getSameCount(List<Integer> lottoNumbersOfUser, List<Integer> winningLottoNumbers) {
-		int sameCount = lottoNumbersOfUser.stream()
-										  .mapToInt(lottoNumber -> winningLottoNumbers.contains(lottoNumber) ? 1 : 0)
-										  .sum();
+		int sameCount = (int) lottoNumbersOfUser.stream()
+												.filter(winningLottoNumbers::contains)
+												.count();
+
 		validateSameCount(sameCount);
 
 		return sameCount;
