@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String LOTTO_TICKET_SIZE_PHRASE = "개를 구매했습니다.";
+    private static final String LOTTO_TICKET_SIZE_PHRASE = "%d개를 구매했습니다. \n";
     private static final String LOTTO_WINNING_RESULT_PHRASE = "당첨 통계";
     private static final String LINE = "---------";
     private static final String EQUALS_PHRASE = "개 일치 ";
@@ -18,7 +18,7 @@ public class ResultView {
     private final List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
 
     public void printLottoTicketSize(int size) {
-        System.out.println(size + LOTTO_TICKET_SIZE_PHRASE);
+        System.out.printf(LOTTO_TICKET_SIZE_PHRASE, size);
     }
 
     public void printLottoTickets(List<String> input) {

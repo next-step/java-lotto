@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 
 public class LottoNumberRandomExtractor implements LottoNumberExtractor {
 
-    private final List<LottoNumber> allLottoNumbers;
+    private final static List<LottoNumber> allLottoNumbers;
 
-    public LottoNumberRandomExtractor() {
+    static {
         allLottoNumbers = new ArrayList<>();
-
         for (int i = LottoNumber.LOTTO_MIN; i <= LottoNumber.LOTTO_MAX; i++) {
             allLottoNumbers.add(new LottoNumber(i));
         }
