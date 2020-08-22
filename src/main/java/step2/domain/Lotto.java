@@ -10,25 +10,23 @@ public class Lotto {
     private static final int RANDOM_NUMBER_ORIGIN = 1;
     private static final int RANDOM_NUMBER_BOUND = 46;
 
-    private String lotteryPaper;
     private List<Integer> lotteryInfo;
 
-    private Lotto(String lotteryPaper, List<Integer> lotteryInfo) {
-        this.lotteryPaper = lotteryPaper;
+    private Lotto(List<Integer> lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
     }
 
     public static Lotto ofLotto() {
         List<Integer> lottoNumbers = getRandomNos();
-        return new Lotto(getLottoIssuance(lottoNumbers), lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     public static Lotto ofLottoByDesignatedRange(int start, int end) {
-        List<Integer> lottoNumbers = getLoTToNos(start, end);
-        return new Lotto(getLottoIssuance(lottoNumbers), lottoNumbers);
+        List<Integer> lottoNumbers = getLottoNos(start, end);
+        return new Lotto(lottoNumbers);
     }
 
-    static List<Integer> getLoTToNos(int start, int end) {
+    static List<Integer> getLottoNos(int start, int end) {
         IntStream intStream = new Random().ints(start, end);
         return intStream.distinct()
                 .limit(MAX_SIZE)
@@ -38,23 +36,16 @@ public class Lotto {
     }
 
     static List<Integer> getRandomNos() {
-        return getLoTToNos(RANDOM_NUMBER_ORIGIN, RANDOM_NUMBER_BOUND);
-    }
-
-    static String getLottoIssuance(List<Integer> numbers) {
-        return numbers.stream().map(String::valueOf)
-                .collect(Collectors.joining(","));
-    }
-
-    public String getLotteryPaper() {
-        return lotteryPaper;
+        return getLottoNos(RANDOM_NUMBER_ORIGIN, RANDOM_NUMBER_BOUND);
     }
 
     public List<Integer> getLotteryInfo() {
         return lotteryInfo;
     }
 
-    public static List<Lotto> ofLottoGames(int games) {
-        return IntStream.range(0, games).mapToObj(i -> ofLotto()).collect(Collectors.toList());
+    @Override
+    public String toString() {
+        return this.lotteryInfo.stream().map(String::valueOf)
+                .collect(Collectors.joining(","));
     }
 }

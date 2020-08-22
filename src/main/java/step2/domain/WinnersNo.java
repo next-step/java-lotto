@@ -16,8 +16,8 @@ public class WinnersNo {
     }
 
     static List<Integer> getWinnersResultNo(String input) {
-        input = input.replaceAll(" ", "");
-        return Arrays.stream(input.split(","))
+        String removingSpacesWinnersNo = input.replaceAll(" ", "");
+        return Arrays.stream(removingSpacesWinnersNo.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

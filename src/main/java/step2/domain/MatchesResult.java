@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,37 @@ public class MatchesResult {
         this.results = results;
     }
 
-    public static MatchesResult ofMatchesResults(List<WinningInformation> winningInformation) {
-        return new MatchesResult(winningInformation.stream()
-                .collect(Collectors.groupingBy(WinningInformation::getNumberOfMatches, Collectors.counting())));
+    public static MatchesResult ofMatchesResults(WinnersNo winnersNo, Lottos lottos) {
+        return new MatchesResult(getWinningInfos(winnersNo, lottos).stream()
+                .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting())));
+    }
+
+    private static List<Integer> getWinningInfos(WinnersNo winnersNo, Lottos lottos) {
+        List<Integer> winningInformation = new ArrayList<>();
+        lottos.getLottos()
+                .stream()
+                .mapToInt(l -> hasNumber(winnersNo, l.getLotteryInfo()))
+                .forEach(hitNumber -> addWinningInfos(winningInformation, hitNumber));
+        return winningInformation;
+    }
+
+    private static int hasNumber(WinnersNo winnersNo, List<Integer> lotteryInfo) {
+        int hitNumbers = 0;
+        for (int number : winnersNo.getWinnersResultNos()) {
+            hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
+        }
+        return hitNumbers;
+    }
+
+    private static void addWinningInfos(List<Integer> winningInformation, int hitNumber) {
+        if (hitNumber > 2) {
+            winningInformation.add(hitNumber);
+        }
+    }
+
+    public Map<Integer, Long> getResults() {
+        getBaseMap().forEach((k, v) -> results.putIfAbsent(k, v));
+        return results;
     }
 
     private static HashMap<Integer, Long> getBaseMap() {
@@ -24,10 +53,5 @@ public class MatchesResult {
             put(5, 0L);
             put(6, 0L);
         }};
-    }
-
-    public Map<Integer, Long> getResults() {
-        getBaseMap().forEach((k, v) -> results.putIfAbsent(k, v));
-        return results;
     }
 }
