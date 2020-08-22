@@ -15,7 +15,7 @@ public class LottoMachine {
     static {
         lottoNumbers = new ArrayList<>();
         IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-                .boxed().forEach(lottoNumbers::add);
+                .boxed().distinct().forEach(lottoNumbers::add);
     }
 
     private LottoMachine() {
