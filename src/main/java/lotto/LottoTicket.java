@@ -36,4 +36,21 @@ public class LottoTicket {
             collector.add(number);
         });
     }
+
+    public int matchNumbers(List<Integer> lastWeekWinningNumbers) {
+        int matchCount = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            matchCount += matchNumber(lastWeekWinningNumbers, lottoNumber);
+        }
+
+        return matchCount;
+    }
+
+    private int matchNumber(List<Integer> lastWeekWinningNumbers, Integer lottoNumber) {
+        if (lastWeekWinningNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+
+        return 0;
+    }
 }

@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoTicketTest {
     @DisplayName("여섯개의 숫자를 받아 로또티켓 생성")
@@ -49,5 +51,22 @@ class LottoTicketTest {
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers))
                 .withMessage("중복된 번호가 존재합니다.");
+    }
+
+    @DisplayName("당첨번호와 일치하는 개수를 구한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "11,12,13,14,15,16:0"}, delimiter = ':')
+    void matchCount(String lottoNumbers, int expected) {
+        //given
+        List<Integer> lastWinningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> lottoNumberList = Arrays.stream(lottoNumbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        //when
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
+        int actual = lottoTicket.matchNumbers(lastWinningNumbers);
+
+        //then
+        assertEquals(expected, actual);
     }
 }
