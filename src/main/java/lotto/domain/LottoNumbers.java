@@ -7,10 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LottoNumbers {
+import static lotto.utils.CommonConstant.*;
 
-    public static final int LOTTO_START_NUMBER = 1;
-    public static final int LOTTO_END_NUMBER = 45;
+public class LottoNumbers {
 
     private List<Integer> lottoNumbers;
 
@@ -25,7 +24,7 @@ public class LottoNumbers {
     }
 
     private List<Integer> initLottoNumbers(List<Integer> lottoNumbers) {
-        for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
+        for (int i = NUMBER_ONE; i <= NUMBER_FORTY_FIVE; i++) {
             lottoNumbers.add(i);
         }
         return lottoNumbers;

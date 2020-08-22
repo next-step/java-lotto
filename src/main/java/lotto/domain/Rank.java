@@ -2,12 +2,14 @@ package lotto.domain;
 
 import java.util.stream.Stream;
 
+import static lotto.utils.CommonConstant.*;
+
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    LOSING(0, 0);
+    FIRST(NUMBER_SIX, NUMBER_TWO_BILLION_WON),
+    SECOND(NUMBER_FIVE, NUMBER_ONE_POINT_FIVE_MILLION_WON),
+    THIRD(NUMBER_FOUR, NUMBER_FIFTY_THOUSAND_WON),
+    FOURTH(NUMBER_THREE, NUMBER_FIVE_THOUSAND_WON),
+    LOSING(NUMBER_ZERO, NUMBER_ZERO);
 
     private int countOfMatch;
     private int winningMoney;
@@ -27,7 +29,7 @@ public enum Rank {
 
     public static Rank valudOf(int countOfMatch) {
         return Stream.of(Rank.values())
-                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(Rank.LOSING);
     }

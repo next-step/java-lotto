@@ -3,9 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.utils.CommonConstant.NUMBER_ZERO;
+
 public class LottoTickets {
 
-    public static final int NUMBER_ZERO = 0;
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<Integer> manualLottoNumbers, int lottoTicketQuantity) {

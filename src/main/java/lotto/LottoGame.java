@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoService;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumber;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,10 +11,10 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int lottoPrice = InputView.setPayPriceLotto(scanner);
+        int paymentAmount = InputView.setPayPriceLotto(scanner);
 
         LottoService lottoService = new LottoService();
-        int lottoTicketQuantity = lottoService.buyLottoTicket(lottoPrice);
+        int lottoTicketQuantity = lottoService.buyLottoTicket(paymentAmount);
         InputView.printLottoBuyQuantity(lottoTicketQuantity);
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketQuantity);
@@ -30,5 +27,11 @@ public class LottoGame {
         WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumber, winningNumbers, lottoTickets);
         ResultView.printWinningNumericalStatement();
         ResultView.printLottoResult(winningResult);
+
+        Profit profit = new Profit();
+        int result = profit.checkWinningAmount(winningResult);
+        String rateOfReturn = profit.getRateOfReturn(paymentAmount, result);
+        double baseValue = new Profit(rateOfReturn).getBaseValue();
+        ResultView.printRateOfReturn(rateOfReturn, baseValue);
     }
 }

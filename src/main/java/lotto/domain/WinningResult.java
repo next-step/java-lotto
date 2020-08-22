@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.utils.CommonConstant.NUMBER_ONE;
+import static lotto.utils.CommonConstant.NUMBER_ZERO;
+
 public class WinningResult {
 
     private Map<Rank, Integer> winningResult;
@@ -15,22 +18,22 @@ public class WinningResult {
 
     private Map<Rank, Integer> initMap(Map<Rank, Integer> winningResult) {
         for (Rank lotto : Rank.values()) {
-            winningResult.put(lotto, 0);
+            winningResult.put(lotto, NUMBER_ZERO);
         }
         return winningResult;
     }
 
     public Map<Rank, Integer> putRank(Rank rank) {
         if (winningResult.get(rank) != null) {
-            winningResult.put(rank, winningResult.get(rank) + 1);
+            winningResult.put(rank, winningResult.get(rank) + NUMBER_ONE);
         }
         return winningResult;
     }
 
     public WinningResult matchWinningNumber(WinningNumber winningNumber, List<Integer> winningNumbers, LottoTickets lottoTickets) {
         WinningResult winningResult = new WinningResult();
-        for (int i = 0; i < lottoTickets.count(); i++) {
-            int matchCount = 0;
+        for (int i = NUMBER_ZERO; i < lottoTickets.count(); i++) {
+            int matchCount = NUMBER_ZERO;
             LottoTicket lottoTicket = lottoTickets.getLottoTicket(i);
             matchCount = winningNumber.findLottoTicket(winningNumbers, lottoTicket, matchCount);
             Rank rank = Rank.valudOf(matchCount);

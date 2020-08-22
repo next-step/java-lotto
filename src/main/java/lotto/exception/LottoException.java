@@ -4,19 +4,17 @@ import lotto.utils.StringUtils;
 
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoNumbers.LOTTO_END_NUMBER;
-import static lotto.domain.LottoNumbers.LOTTO_START_NUMBER;
-import static lotto.domain.WinningNumber.INVALID_WINNING_NUMBER_SIZE;
+import static lotto.utils.CommonConstant.*;
 
 public class LottoException {
 
     public static final String INVALID_LOTTO_NUMBER = "유효하지 않은 번호입니다.";
     public static final String PRINT_INVALID_LOTTO_PRICE = "로또 복권은 1000원 단위로 구매할 수 있습니다.";
     public static final String INVALID_DUPLICATION_NUMBER = "중복된 번호는 입력할 수 없습니다.";
-
+    public static final String INVALID_WINNING_NUMBER_SIZE = "6개의 당첨번호를 입력해주세요.";
 
     public static void lottoNumberRangeCheck(int number) {
-        if (number < LOTTO_END_NUMBER || number < LOTTO_START_NUMBER) {
+        if (number < NUMBER_ONE || number < NUMBER_FORTY_FIVE) {
             throw new RuntimeException(INVALID_LOTTO_NUMBER);
         }
     }
@@ -28,8 +26,8 @@ public class LottoException {
     }
 
     public static void inputWinningNumberDuplicationException(String[] winningNumberArray) {
-        IntStream.range(0, winningNumberArray.length)
-            .filter(i -> IntStream.range(0, i)
+        IntStream.range(NUMBER_ZERO, winningNumberArray.length)
+            .filter(i -> IntStream.range(NUMBER_ZERO, i)
             .anyMatch(j -> winningNumberArray[i].equals(winningNumberArray[j])))
             .forEach(i -> {
                 throw new IllegalArgumentException(INVALID_DUPLICATION_NUMBER);
@@ -44,13 +42,13 @@ public class LottoException {
     }
 
     private static void winningNumberRangeCheck(int number) {
-        if (number > LOTTO_END_NUMBER || number < LOTTO_START_NUMBER) {
+        if (number > NUMBER_ONE || number < NUMBER_FORTY_FIVE) {
             throw new RuntimeException(INVALID_LOTTO_NUMBER);
         }
     }
 
     public static void invalidWinningNumberSizeException(String[] winningNumberArray) {
-        if (winningNumberArray.length != 6) {
+        if (winningNumberArray.length != NUMBER_SIX) {
             throw new RuntimeException(INVALID_WINNING_NUMBER_SIZE);
         }
     }

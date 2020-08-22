@@ -8,10 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.utils.CommonConstant.NUMBER_ZERO;
+
 public class WinningNumber {
 
     private static final String INPUT_WINNING_NUMBER_DELIMITER = ", ";
-    public static final String INVALID_WINNING_NUMBER_SIZE = "6개의 당첨번호를 입력해주세요.";
 
     List<Integer> winningNumbers;
 
@@ -34,7 +35,7 @@ public class WinningNumber {
     }
 
     public int findLottoTicket(List<Integer> winningNumbers, LottoTicket lottoTicket, int matchCount) {
-        for (int j = 0; j < lottoTicket.count(); j++) {
+        for (int j = NUMBER_ZERO; j < lottoTicket.count(); j++) {
             matchCount = containsLottoNumber(winningNumbers, matchCount, lottoTicket, j);
         }
         return matchCount;
@@ -45,10 +46,6 @@ public class WinningNumber {
             matchCount++;
         }
         return matchCount;
-    }
-
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
     }
 
 }

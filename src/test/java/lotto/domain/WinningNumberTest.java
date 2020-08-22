@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.exception.LottoException.INVALID_DUPLICATION_NUMBER;
-import static lotto.exception.LottoException.INVALID_LOTTO_NUMBER;
+import static lotto.exception.LottoException.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -50,7 +49,7 @@ class WinningNumberTest {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
                     LottoException.invalidWinningNumberSizeException(new String[]{"1", "2", "3"});
-                }).withMessageMatching(WinningNumber.INVALID_WINNING_NUMBER_SIZE);
+                }).withMessageMatching(INVALID_WINNING_NUMBER_SIZE);
     }
 
     @Test
