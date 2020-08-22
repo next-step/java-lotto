@@ -15,10 +15,10 @@ public class ManualTicketingNumTest {
     @Test
     void create() {
         // given
-        ManualTicketingNum manualTicketingNum = new ManualTicketingNum(5);
+        ManualTicketingNumber manualTicketingNum = new ManualTicketingNumber(5);
 
         // when & then
-        assertThat(manualTicketingNum).isEqualTo(new ManualTicketingNum(5));
+        assertThat(manualTicketingNum).isEqualTo(new ManualTicketingNumber(5));
     }
 
     @DisplayName("생성 실패 - 음수를 입력한 경우")
@@ -27,7 +27,7 @@ public class ManualTicketingNumTest {
     void create_유효하지않은수_실패(int ticketNum) {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new ManualTicketingNum(ticketNum);
+            new ManualTicketingNumber(ticketNum);
         }).withMessage(LottoTicketingExceptionMessage.NEGATIVE_TICKETING_NUMBER.getMessage());
     }
 }

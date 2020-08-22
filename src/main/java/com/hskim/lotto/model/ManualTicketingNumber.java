@@ -4,11 +4,11 @@ import com.hskim.lotto.exception.LottoTicketingExceptionMessage;
 
 import java.util.Objects;
 
-public class ManualTicketingNum {
+public class ManualTicketingNumber {
 
     private int ticketingNum;
 
-    public ManualTicketingNum(int ticketingNum) {
+    public ManualTicketingNumber(int ticketingNum) {
         validateNonNegative(ticketingNum);
         this.ticketingNum = ticketingNum;
     }
@@ -26,8 +26,8 @@ public class ManualTicketingNum {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ManualTicketingNum)) return false;
-        ManualTicketingNum that = (ManualTicketingNum) o;
+        if (!(o instanceof ManualTicketingNumber)) return false;
+        ManualTicketingNumber that = (ManualTicketingNumber) o;
         return ticketingNum == that.ticketingNum;
     }
 

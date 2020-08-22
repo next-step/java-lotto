@@ -53,11 +53,11 @@ public class LottoInputView {
     }
 
     public void printManualTicketingNumPhrase() {
-        System.out.println(MANUAL_TICKETING_NUM_PHRASE);
+        System.out.println(NEW_LINE + MANUAL_TICKETING_NUM_PHRASE);
     }
 
     public void printManualTicketingPhrase() {
-        System.out.println(MANUAL_TICKETING_PHRASE);
+        System.out.println(NEW_LINE + MANUAL_TICKETING_PHRASE);
     }
 
     public int getManualTicketingNum() {

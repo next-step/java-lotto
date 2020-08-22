@@ -20,6 +20,7 @@ public class LottoResultView {
             + "이기 때문에 결과적으로 손해라는 의미임)";
     private static final String STATISTIC_STRING_JOINING_DELIMITER = "\n";
     private static final String HYPHEN = " - ";
+    private static final String SHEET_PHRASE = "장";
     private static final String NUM_PHRASE = "개";
     private static final String A_COMMA = ",";
     private static final String A_BLANK = " ";
@@ -51,10 +52,11 @@ public class LottoResultView {
     }
 
     public void printPurchaseNum(int manualPurchaseNum, int autoPurchaseNum) {
-        System.out.println(MANUAL_PHRASE
+        System.out.println(NEW_LINE
+                + MANUAL_PHRASE
                 + A_BLANK
                 + manualPurchaseNum
-                + NUM_PHRASE
+                + SHEET_PHRASE
                 + A_COMMA
                 + A_BLANK
                 + AUTO_PHRASE

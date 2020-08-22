@@ -20,7 +20,7 @@ public class LottoSimulator {
         );
 
         lottoInputView.printManualTicketingNumPhrase();
-        ManualTicketingNum manualTicketingNum = new ManualTicketingNum(lottoInputView.getManualTicketingNum());
+        ManualTicketingNumber manualTicketingNum = new ManualTicketingNumber(lottoInputView.getManualTicketingNum());
 
         lottoInputView.printManualTicketingPhrase();
         LottoTickets lottoTicketsManual = LottoMachine.manualIssuance(
