@@ -1,6 +1,6 @@
 package kr.heesu.lotto.domain;
 
-import kr.heesu.lotto.enums.LottoPolicy;
+import kr.heesu.lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MatchResultTest {
-    private MatchResult result;
+class RankResultTest {
+    private RankResult result;
 
     @BeforeEach
     void setUp() {
@@ -36,16 +36,14 @@ class MatchResultTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
 
-        result = lottos.matches(win);
+        result = lottos.matches(win, LottoNumber.of(7));
     }
 
     @Test
     void creation_test() {
 
-        for (LottoPolicy policy : LottoPolicy.values()) {
-            Long match = policy.getCount();
-            Long frequency = result.getMatchFrequency(match);
-
+        for (Rank rank : Rank.values()) {
+            Long frequency = result.getRankFrequency(rank);
             assertThat(frequency).isGreaterThanOrEqualTo(0L);
         }
     }
@@ -53,7 +51,6 @@ class MatchResultTest {
     @Test
     void total_price_test() {
         Long totalWinningPrice = result.getTotalWinningPrice();
-
         assertThat(totalWinningPrice).isEqualTo(10000L);
     }
 }

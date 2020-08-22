@@ -1,20 +1,22 @@
 package kr.heesu.lotto.domain;
 
+import kr.heesu.lotto.enums.Rank;
+
 public class LottoStatistics {
-    private final MatchResult matches;
+    private final RankResult matches;
     private final PurchaseAmount amount;
 
-    private LottoStatistics(MatchResult matches, PurchaseAmount amount) {
+    private LottoStatistics(RankResult matches, PurchaseAmount amount) {
         this.matches = matches;
         this.amount = amount;
     }
 
-    public static LottoStatistics of(MatchResult matches, PurchaseAmount amount) {
+    public static LottoStatistics of(RankResult matches, PurchaseAmount amount) {
         return new LottoStatistics(matches, amount);
     }
 
-    public Long getMatchFrequency(Long match) {
-        return this.matches.getMatchFrequency(match);
+    public Long getRankFrequency(Rank rank) {
+        return this.matches.getRankFrequency(rank);
     }
 
     public Double getProfitRate() {

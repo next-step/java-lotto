@@ -1,5 +1,6 @@
 package kr.heesu.lotto.domain;
 
+import kr.heesu.lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +39,8 @@ class LottosTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
 
-        Long target = 3L;
-        MatchResult matches = lottos.matches(win);
+        RankResult matches = lottos.matches(win, LottoNumber.of(7));
 
-        assertThat(matches.getMatchFrequency(target)).isEqualTo(2);
+        assertThat(matches.getRankFrequency(Rank.FIFTH)).isEqualTo(2);
     }
 }

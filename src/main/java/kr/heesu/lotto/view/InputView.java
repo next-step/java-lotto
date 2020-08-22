@@ -9,11 +9,16 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String read() {
-        return this.scanner.nextLine();
+    private static class InnerHolder {
+        private static final InputView INSTANCE = new InputView();
+
     }
 
-    public static InputView of() {
-        return new InputView();
+    public static InputView getInstance() {
+        return InnerHolder.INSTANCE;
+    }
+
+    public String read() {
+        return this.scanner.nextLine();
     }
 }

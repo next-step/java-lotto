@@ -1,5 +1,6 @@
 package kr.heesu.lotto.domain;
 
+import kr.heesu.lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -32,6 +33,6 @@ public class LottoTest {
 
         Lotto lotto = Lotto.of(numbers);
 
-        assertThat(lotto.match(answer)).isEqualTo(3);
+        assertThat(lotto.match(answer, LottoNumber.of(45))).isEqualTo(Rank.FIFTH);
     }
 }

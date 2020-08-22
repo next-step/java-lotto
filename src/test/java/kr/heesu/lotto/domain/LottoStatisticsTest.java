@@ -1,6 +1,6 @@
 package kr.heesu.lotto.domain;
 
-import kr.heesu.lotto.enums.LottoPolicy;
+import kr.heesu.lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,7 @@ class LottoStatisticsTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
 
-        MatchResult result = lottos.matches(win);
+        RankResult result = lottos.matches(win, LottoNumber.of(7));
         PurchaseAmount amount = PurchaseAmount.of(3000);
 
         statistics = LottoStatistics.of(result, amount);
@@ -45,10 +45,8 @@ class LottoStatisticsTest {
 
     @Test
     void matches_test() {
-        for (LottoPolicy policy : LottoPolicy.values()) {
-            Long match = policy.getCount();
-            Long frequency = statistics.getMatchFrequency(match);
-
+        for (Rank rank : Rank.values()) {
+            Long frequency = statistics.getRankFrequency(rank);
             assertThat(frequency).isGreaterThanOrEqualTo(0L);
         }
     }

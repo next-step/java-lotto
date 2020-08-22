@@ -1,6 +1,7 @@
 package kr.heesu.lotto.domain;
 
 import kr.heesu.lotto.enums.ExceptionMessage;
+import kr.heesu.lotto.enums.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,12 @@ public class Lotto {
         return this.numbers.contains(number);
     }
 
-    public Long match(List<LottoNumber> winningNumbers) {
-        return winningNumbers.stream()
+    public Rank match(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+        Long count = winningNumbers.stream()
                 .filter(this::contain)
                 .count();
+
+        return Rank.valueOf(count, this.contain(bonusBall));
     }
 
     @Override

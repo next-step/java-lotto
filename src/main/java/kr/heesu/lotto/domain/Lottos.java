@@ -1,5 +1,7 @@
 package kr.heesu.lotto.domain;
 
+import kr.heesu.lotto.enums.Rank;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -19,12 +21,12 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public MatchResult matches(WinningNumbers winningNumbers) {
-        Map<Long, Long> matches = lottos.stream()
-                .map(lotto -> lotto.match(winningNumbers.getWinningNumbers()))
+    public RankResult matches(WinningNumbers winningNumbers, LottoNumber bonusBall) {
+        Map<Rank, Long> matches = lottos.stream()
+                .map(lotto -> lotto.match(winningNumbers.getWinningNumbers(), bonusBall))
                 .collect(Collectors.groupingBy(Function.identity(), counting()));
 
-        return MatchResult.of(matches);
+        return RankResult.of(matches);
     }
 
     @Override
