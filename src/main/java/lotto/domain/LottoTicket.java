@@ -1,11 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static lotto.domain.LottoNumbers.*;
 
 public class LottoTicket {
 
@@ -19,41 +18,36 @@ public class LottoTicket {
     }
 
     private List<Integer> buyingLottoTicket(LottoNumbers lottoNumbers, List<Integer> lottoTicket) {
-        getLottoNumber(lottoNumbers, lottoTicket);
+        isLottoNumberAdd(lottoNumbers, lottoTicket);
         return lottoTicket;
     }
 
-    private boolean getLottoNumber(LottoNumbers lottoNumbers, List<Integer> lottoTicket) {
-        if (lottoNumbers == null) {
-            lottoNumbers = new LottoNumbers();
-        }
+    private boolean isLottoNumberAdd(LottoNumbers lottoNumbers, List<Integer> lottoTicket) {
         return lottoTicket.addAll(
                 lottoNumbers.getLottoNumbers()
-                .distinct()
-                .limit(LOTTO_NUMBERS_SIZE)
-                .sorted()
-                .collect(Collectors.toList()));
+                        .distinct()
+                        .limit(LOTTO_NUMBERS_SIZE)
+                        .sorted()
+                        .collect(Collectors.toList()));
     }
 
     public void lottoNumberRangeException(LottoTicket lottoTicket) {
         for (int number : lottoTicket.lottoTicket) {
-            lottoNumberRangeCheck(number);
+            LottoException.lottoNumberRangeCheck(number);
         }
     }
 
-    private void lottoNumberRangeCheck(int number) {
-        if (number < LOTTO_BASE_END_NUMBER || number < LOTTO_BASE_START_NUMBER) {
-            throw new RuntimeException(INVALID_LOTTO_NUMBER);
-        }
-    }
-
-    public Stream<Integer> getLottoTicket() {
-        return lottoTicket.stream();
+    public List<Integer> getLottoTicket() {
+        return lottoTicket;
     }
 
     public long count() {
         return lottoTicket.stream()
                 .count();
+    }
+
+    public Integer getLottoTicketNumber(int index) {
+        return lottoTicket.get(index);
     }
 
     @Override

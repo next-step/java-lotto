@@ -2,8 +2,12 @@ package lotto;
 
 import lotto.domain.LottoService;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningNumber;
+import lotto.domain.WinningResult;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -20,5 +24,10 @@ public class LottoGame {
         InputView.printLottoTickets(lottoTickets);
 
         String inputWinningNumber = InputView.setWinningNumber(scanner);
+        WinningNumber winningNumber = new WinningNumber();
+        List<Integer> winningNumbers = winningNumber.setWinningNumber(inputWinningNumber);
+
+        WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumber, winningNumbers, lottoTickets);
+        System.out.println(winningResult);
     }
 }

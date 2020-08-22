@@ -5,16 +5,33 @@ import java.util.List;
 
 public class LottoTickets {
 
+    public static final int NUMBER_ZERO = 0;
     private List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int gameCount) {
+    public LottoTickets(List<Integer> manualLottoNumbers, int lottoTicketQuantity) {
         this.lottoTickets = new ArrayList<>();
-        this.lottoTickets = purchasedLottoTicket(gameCount);
+        this.lottoTickets = createManualLottoTicket(manualLottoNumbers, lottoTicketQuantity);
     }
 
-    public List<LottoTicket> purchasedLottoTicket(int gameCount) {
-        for (int i = 0; i < gameCount; i++) {
-            lottoTickets.add(new LottoTicket(new LottoNumbers()));
+    public LottoTickets(int lottoTicketQuantity) {
+        this.lottoTickets = new ArrayList<>();
+        this.lottoTickets = createAutomaticLottoTicket(lottoTicketQuantity);
+    }
+
+    public List<LottoTicket> createAutomaticLottoTicket(int lottoTicketQuantity) {
+        for (int i = NUMBER_ZERO; i < lottoTicketQuantity; i++) {
+            LottoNumbers lottoNumbers = new LottoNumbers();
+            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+            lottoTickets.add(lottoTicket);
+        }
+        return lottoTickets;
+    }
+
+    public List<LottoTicket> createManualLottoTicket(List<Integer> lottoTestList, int lottoTicketQuantity) {
+        for (int i = NUMBER_ZERO; i < lottoTicketQuantity; i++) {
+            LottoNumbers lottoNumbers = new LottoNumbers(lottoTestList);
+            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+            lottoTickets.add(lottoTicket);
         }
         return lottoTickets;
     }

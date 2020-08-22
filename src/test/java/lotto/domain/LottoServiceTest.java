@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static lotto.exception.LottoException.PRINT_INVALID_LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -31,8 +33,8 @@ class LottoServiceTest {
     void inputPriceValidation() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    lottoService.invalidLottoTicketInputPrice(11500);
-                }).withMessageMatching(LottoService.PRINT_INVALID_LOTTO_PRICE);
+                    LottoException.invalidLottoTicketInputPrice(11500, LottoService.LOTTO_TICKET_PRICE);
+                }).withMessageMatching(PRINT_INVALID_LOTTO_PRICE);
     }
 
 }
