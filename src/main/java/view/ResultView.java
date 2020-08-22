@@ -37,11 +37,8 @@ public class ResultView {
         StringBuilder sb = new StringBuilder();
 
         for (LottoResult value : prizes.getLottoResults()) {
-            sb.append(String.format(
-                    value.getRank().equals(Rank.SECOND) ? SECOND_PRIZE_MESSAGE : PRIZE_MESSAGE,
-                    value.getPrizeHitNumber(),
-                    value.getPrizeMoney(),
-                    value.getWinningCount()));
+            String message = value.isSameRank(Rank.SECOND) ? SECOND_PRIZE_MESSAGE : PRIZE_MESSAGE;
+            sb.append(String.format(message, value.getPrizeHitNumber(), value.getPrizeMoney(), value.getWinningCount()));
         }
 
         return sb.toString();

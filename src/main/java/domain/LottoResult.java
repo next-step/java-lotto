@@ -41,7 +41,7 @@ public class LottoResult {
         return rank.getMoney();
     }
 
-    public Rank getRank() {
-        return rank;
+    public boolean isSameRank(Rank target) {
+        return rank.equals(target);
     }
 }
