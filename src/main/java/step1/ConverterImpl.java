@@ -1,14 +1,17 @@
+package step1;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ConverterCustomDelimiterImpl implements Converter {
-
+public class ConverterImpl implements Converter {
     private final Matcher matcher;
+    private final String inputNumbers;
 
-    public ConverterCustomDelimiterImpl(String inputNumbers) {
-        this.matcher = Pattern.compile(Constant.CUSTOM).matcher(inputNumbers);
+    public ConverterImpl(String inputNumbers) {
+        this.matcher = Pattern.compile(Constant.NORMAL).matcher(inputNumbers);
+        this.inputNumbers = inputNumbers;
     }
 
     @Override
@@ -19,7 +22,7 @@ public class ConverterCustomDelimiterImpl implements Converter {
     @Override
     public CalculationNumber convertInputCalculationNumbers() {
         return new CalculationNumber(
-                Arrays.stream(matcher.group(2).split(matcher.group(1)))
+                Arrays.stream(inputNumbers.split(Constant.DEFAULT_DELIMITER))
                         .map(this::toInt)
                         .collect(Collectors.toList()));
     }
