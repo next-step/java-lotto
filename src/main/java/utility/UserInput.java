@@ -29,7 +29,7 @@ public class UserInput {
         }
     }
 
-    public static int[] getLastWinnerNumber() {
+    public static int[] getWinnerTicket() {
         System.out.println(AFTER_MESSEGE);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

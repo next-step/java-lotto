@@ -3,24 +3,22 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class NumberGenerator {
 
-    private final int startNumber = 1;
-    private final int finalNumber = 45;
     List<Integer> numList;
     List<Integer> lottoNumberCandidate;
 
     public NumberGenerator(){
         numList = new ArrayList<>();
         lottoNumberCandidate= new ArrayList<>();
-
     }
 
     public void createLottoNumberCandidate(){
-        for (int i = startNumber; i <= finalNumber; i++) {
-            lottoNumberCandidate.add(i);
-        }
+        lottoNumberCandidate = IntStream.rangeClosed(1,45)
+                .boxed().collect(Collectors.toList());
     }
 
     public List<Integer> generate() {

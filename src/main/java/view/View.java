@@ -1,6 +1,8 @@
 package view;
 
-public class ShowResult {
+import domain.Lotto;
+
+public class View {
     public static void result(int[] rankRecord, int sum,int tries) {
         System.out.println("당첨 통계");
         System.out.println("--------");
@@ -14,4 +16,14 @@ public class ShowResult {
         }
         System.out.println("총 수익률은 "+(double)sum/(tries*1000)+" 입니다.");
     }
+
+
+    public static void getLottoNumbers(Lotto lotto) {
+        System.out.print("[");
+        for (int j = 0; j < 6; j++) {
+            System.out.print(lotto.getSixNumber().get(j)+" ");
+        }
+        System.out.println("]");
+    }
+
 }

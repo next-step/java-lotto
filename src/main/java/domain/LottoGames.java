@@ -1,7 +1,7 @@
 package domain;
 
 import utility.UserInput;
-import view.ShowResult;
+import view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,20 @@ public class LottoGames {
     public void run() {
         int tries = UserInput.init();
         makeLottoTicket(tries);
-        winnerNumber = UserInput.getLastWinnerNumber();
-        calculateWinner();
-        ShowResult.result(rankRecord,sum,tries);
+        showLottoTickets();
+        winnerNumber = UserInput.getWinnerTicket();
+
+        calculateCount(tries);
+
+        View.result(rankRecord, sum, tries);
+    }
+
+    private void calculateCount(int tries) {
+        int count;
+        for (int i = 0; i < tries; i++) {
+            count = getCount(lottos.get(i));
+            calculateWinnerRank(count);
+        }
     }
 
     public void makeLottoTicket(int tries) {
@@ -35,40 +46,29 @@ public class LottoGames {
         }
     }
 
-    public void calculateWinner() {
-        Lotto lotto;
-
+    public void showLottoTickets() {
         for (int i = 0; i < lottos.size(); i++) {
-            lotto = lottos.get(i);
-
-            int count = getCount(lotto);
-//            System.out.println(" count is " + count);
-            if(count >=3 ){
-                calculateWinnerRank(count);
-            }
+            View.getLottoNumbers(lottos.get(i));
         }
     }
+
 
     private int getCount(Lotto lotto) {
         int count = 0;
         for (int j = 0; j < 6; j++) {
-            System.out.print(" " + lotto.getSixNumber().get(j));
             if (lotto.getSixNumber().contains((winnerNumber[j]))) {
                 count++;
             }
         }
-        System.out.println();
         return count;
     }
 
-
     public void calculateWinnerRank(int count) {
-        for (WinnerRanking rank: WinnerRanking.values()) {
-            if(rank.getCount() == count ){
+        for (WinnerRanking rank : WinnerRanking.values()) {
+            if (rank.getCount() == count) {
                 sum += rank.getWinnerPrice();
-                rankRecord[7-count]++;
+                rankRecord[7 - count]++;
             }
         }
-        System.out.println("Sum is "+  sum);
     }
 }
