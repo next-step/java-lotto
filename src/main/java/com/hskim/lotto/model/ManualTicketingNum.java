@@ -19,6 +19,10 @@ public class ManualTicketingNum {
         }
     }
 
+    public int getTicketingNum() {
+        return ticketingNum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
