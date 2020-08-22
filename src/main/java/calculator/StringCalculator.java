@@ -1,8 +1,8 @@
 package calculator;
 
-import delimiter.StringDelimiter;
-import util.StringUtil;
-import util.ValidationUtil;
+import calculator.delimiter.StringDelimiter;
+import calculator.util.StringUtil;
+import calculator.util.ValidationUtil;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package util;
+package calculator.util;
 
 public class ValidationUtil {
     private ValidationUtil() {
