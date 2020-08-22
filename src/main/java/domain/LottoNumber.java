@@ -14,7 +14,7 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
         return new LottoNumber(lottoNumber);
     }

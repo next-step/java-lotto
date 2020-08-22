@@ -8,14 +8,12 @@ import java.util.stream.Collectors;
 
 public class PassivityLottoNumberGenerator implements LottoNumberGenerator {
 
-    public static final String DELIMITER = ",";
-
     @Override
     public List<LottoNumber> generator(String numbers) {
-        List<Integer> lottoNumbers = SplitUtil.splitToNumber(numbers, DELIMITER);
+        List<Integer> lottoNumbers = SplitUtil.splitToNumber(numbers);
 
         return lottoNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

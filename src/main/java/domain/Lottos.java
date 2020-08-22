@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final String DELIMITER = ",";
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
@@ -35,7 +34,7 @@ public class Lottos {
     }
 
     public LottoResults getLottoResult(String numbers, int bonusNumber) {
-        List<Integer> winningNumbers = SplitUtil.splitToNumber(numbers, DELIMITER);
+        List<Integer> winningNumbers = SplitUtil.splitToNumber(numbers);
         ValidateUtil.validateLottoWinningNumber(winningNumbers, bonusNumber);
 
         LottoResults result = LottoResults.of();

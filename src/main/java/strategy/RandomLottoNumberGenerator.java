@@ -20,7 +20,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     private List<LottoNumber> getNumberBound() {
         return IntStream.rangeClosed(1, MAX_NUMBER_BOUND)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

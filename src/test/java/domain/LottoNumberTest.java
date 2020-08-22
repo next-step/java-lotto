@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("LottoNumber를 생성")
     @Test
     void of() {
-        LottoNumber number = LottoNumber.of(1);
+        LottoNumber number = LottoNumber.valueOf(1);
 
         assertThat(number.getValue()).isEqualTo(1);
     }
@@ -24,6 +24,6 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, -1, 46})
     void of_invalidNumbers(int number) {
 
-        assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(InvalidRangeNumberException.class);
+        assertThatThrownBy(() -> LottoNumber.valueOf(number)).isInstanceOf(InvalidRangeNumberException.class);
     }
 }

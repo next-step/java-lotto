@@ -1,7 +1,6 @@
 package domain;
 
 import exception.InvalidRangeNumberException;
-import exception.LottoCountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import strategy.PassivityLottoNumberGenerator;
 import strategy.RandomLottoNumberGenerator;
 
 import java.util.Arrays;
-import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,12 +23,12 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         lottoGenerator = it -> Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6));
     }
 
     @DisplayName("로또 생성")
@@ -42,9 +40,10 @@ public class LottoTest {
     }
 
     @DisplayName("수동 로또 생성")
-    @Test
-    void lotto_passivity() {
-        Lotto lotto = Lotto.of("1,3,5,7,9,45", new PassivityLottoNumberGenerator());
+    @ParameterizedTest
+    @ValueSource(strings = {"1,3,5,7,9,45", "45,9,7,5,3,1"})
+    void lotto_passivity(String input) {
+        Lotto lotto = Lotto.of(input, new PassivityLottoNumberGenerator());
 
         assertThat(lotto.getNumbers()).hasSize(6);
         assertThat(lotto.getNumbers()).containsExactly(1, 3, 5, 7, 9, 45);
@@ -52,11 +51,10 @@ public class LottoTest {
 
     @DisplayName("수동 로또 생성시에 수동으로 등록한 번호 유효하지 않으면 exception 발생")
     @ParameterizedTest
-    @CsvSource(value = {"1,3,5,7", "0,45,46,47,48,49", "test"})
+    @CsvSource(value = {"1,3,5,7", "0,45,46,47,48,49", "1,2,3,3,4,5", "test"})
     void lotto_invalidPassivity(String input) {
         assertThatThrownBy(() -> Lotto.of(input, new PassivityLottoNumberGenerator()))
                 .isInstanceOf(RuntimeException.class);
-
     }
 
     @DisplayName("당첨번호에 따른 상금을 계산")

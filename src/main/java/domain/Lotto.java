@@ -38,13 +38,13 @@ public class Lotto {
 
     public int hasWinningNumber(List<Integer> winningNumbers) {
         return winningNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::valueOf)
                 .filter(numbers::contains)
                 .map(e -> 1)
                 .reduce(0, Integer::sum);
     }
 
     public boolean hasBonusNumber(int bonusNumber) {
-        return numbers.contains(LottoNumber.of(bonusNumber));
+        return numbers.contains(LottoNumber.valueOf(bonusNumber));
     }
 }
