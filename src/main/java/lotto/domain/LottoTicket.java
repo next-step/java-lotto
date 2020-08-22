@@ -15,10 +15,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                                                .map(LottoNumber::new)
-                                                .collect(Collectors.toList());
-
+        List<LottoNumber> lottoNumbers = parseLottoNumbers(numbers);
         return new LottoTicket(lottoNumbers);
     }
 
@@ -36,6 +33,12 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않는 6개의 숫자여야 합니다.");
         }
+    }
+
+    protected static List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     @Override
