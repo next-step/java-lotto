@@ -2,8 +2,8 @@ package step3.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.model.LottoNumberGenerator;
-import step2.model.LottoTicket;
+import step3.model.LottoNumberGenerator;
+import step3.model.LottoTicket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,4 +24,9 @@ public class LottoNumberGeneratorTest {
         ).isBetween(1, 45);
     }
 
+    @Test
+    void generated_LottoTicket_object_Test() {
+        LottoNumberGenerator g1 = new LottoNumberGenerator();
+        LottoTicket a1 = g1.generatedLottoTicket();
+    }
 }

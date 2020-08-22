@@ -3,6 +3,7 @@ package step3;
 import step3.model.LottoNumberGenerator;
 import step3.model.LottoTicket;
 import step3.view.InputView;
+import step3.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
