@@ -14,4 +14,8 @@ public class LottoSeller {
             throw new IllegalArgumentException("구입금액이 부족합니다.");
         }
     }
+
+    public int getTicketCount() {
+        return ticketCount;
+    }
 }

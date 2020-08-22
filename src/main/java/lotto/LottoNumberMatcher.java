@@ -32,6 +32,13 @@ public class LottoNumberMatcher {
         this.matchResult = matchResult;
     }
 
+    public double calculateProfit(long money) {
+        long totalPrice = LottoPriceInfo.calculateTotalPrice(matchResult);
+        profit = Math.ceil(totalPrice * 100.0 / money) / 100.0;
+
+        return profit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,12 +50,5 @@ public class LottoNumberMatcher {
     @Override
     public int hashCode() {
         return Objects.hash(matchResult);
-    }
-
-    public double calculateProfit(long money) {
-        long totalPrice = LottoPriceInfo.calculateTotalPrice(matchResult);
-        profit = Math.ceil(totalPrice * 100.0 / money) / 100.0;
-
-        return profit;
     }
 }
