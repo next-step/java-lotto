@@ -28,6 +28,7 @@ public class LottoGame {
         List<Integer> winningNumbers = winningNumber.setWinningNumber(inputWinningNumber);
 
         WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumber, winningNumbers, lottoTickets);
-        System.out.println(winningResult);
+        ResultView.printWinningNumericalStatement();
+        ResultView.printLottoResult(winningResult);
     }
 }
