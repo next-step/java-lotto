@@ -15,16 +15,16 @@ public class LottoSimulator {
 
         lottoInputView.printPurchasePhrase();
         int purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        LottoTickets lottoTicketsAuto = new LottoTickets(
-                LottoMachine.automaticIssuance(new PurchasePrice(purchasePrice), new RandomLottoNumberMaker())
+        LottoTickets lottoTicketsAuto = LottoMachine.automaticIssuance(
+                new PurchasePrice(purchasePrice), new RandomLottoNumberMaker()
         );
 
         lottoInputView.printManualTicketingNumPhrase();
         int manualTicketingNum = lottoInputView.getManualTicketingNum();
 
         lottoInputView.printManualTicketingPhrase();
-        LottoTickets lottoTicketsManual = new LottoTickets(
-                LottoMachine.manualIssuance(lottoInputView.getManualLottoNumbersList(manualTicketingNum))
+        LottoTickets lottoTicketsManual = LottoMachine.manualIssuance(
+                lottoInputView.getManualLottoNumbersList(manualTicketingNum)
         );
 
         lottoResultView.printPurchaseNum(lottoTicketsManual.getTicketsSize(), lottoTicketsAuto.getTicketsSize());

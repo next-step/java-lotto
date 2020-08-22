@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    public static List<LottoTicket> automaticIssuance(PurchasePrice purchasePrice, LottoNumberMaker numberMaker) {
+    public static LottoTickets automaticIssuance(PurchasePrice purchasePrice, LottoNumberMaker numberMaker) {
         GameNumber gameNumber = purchasePrice.getGameNum();
         List<LottoTicket> result = new LinkedList<>();
         while (gameNumber.isPlayable()) {
@@ -15,12 +15,14 @@ public class LottoMachine {
             gameNumber.playGame();
         }
 
-        return result;
+        return new LottoTickets(result);
     }
 
-    public static List<LottoTicket> manualIssuance(List<List<Integer>> lottoNumbersList) {
-        return lottoNumbersList.stream()
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
+    public static LottoTickets manualIssuance(List<List<Integer>> lottoNumbersList) {
+        return new LottoTickets(
+                lottoNumbersList.stream()
+                        .map(LottoTicket::new)
+                        .collect(Collectors.toList())
+        );
     }
 }

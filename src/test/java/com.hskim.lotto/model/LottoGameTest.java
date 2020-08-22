@@ -16,9 +16,8 @@ public class LottoGameTest {
     @Test
     void create() {
         // given
-        LottoTickets lottoTickets = new LottoTickets(
-                LottoMachine.automaticIssuance(new PurchasePrice(10000),
-                        new FixedLottoNumberMaker())
+        LottoTickets lottoTickets = LottoMachine.automaticIssuance(
+                new PurchasePrice(10000), new FixedLottoNumberMaker()
         );
         LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 8, 9, 10, 17, 25), 5);
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);

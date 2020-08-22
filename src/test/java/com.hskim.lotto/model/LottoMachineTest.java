@@ -15,10 +15,10 @@ public class LottoMachineTest {
     @Test
     void automaticIssuance() {
         // given
-        List<LottoTicket> expected = getLottoTickets();
+        LottoTickets expected = new LottoTickets(getLottoTickets());
 
         // when
-        List<LottoTicket> lottoTickets = LottoMachine.automaticIssuance(new PurchasePrice(3000), new FixedLottoNumberMaker());
+        LottoTickets lottoTickets = LottoMachine.automaticIssuance(new PurchasePrice(3000), new FixedLottoNumberMaker());
 
         // then
         assertThat(lottoTickets).isEqualTo(expected);
@@ -28,10 +28,10 @@ public class LottoMachineTest {
     @Test
     void manualIssuance() {
         // given
-        List<LottoTicket> expected = getLottoTickets();
+        LottoTickets expected = new LottoTickets(getLottoTickets());
 
         // when
-        List<LottoTicket> lottoTickets = LottoMachine.manualIssuance(getLottoNumbers());
+        LottoTickets lottoTickets = LottoMachine.manualIssuance(getLottoNumbers());
 
         // then
         assertThat(lottoTickets).isEqualTo(expected);

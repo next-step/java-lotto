@@ -17,10 +17,10 @@ public class LottoTicketsTest {
         // given
         LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(14000);
-        LottoTickets lottoTickets = new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker));
+        LottoTickets lottoTickets = LottoMachine.automaticIssuance(purchasePrice, numberMaker);
 
         // when & then
-        assertThat(lottoTickets).isEqualTo(new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker)));
+        assertThat(lottoTickets).isEqualTo(LottoMachine.automaticIssuance(purchasePrice, numberMaker));
     }
 
     @DisplayName("getTotalTicketPrice() 테스트 - 티켓 총가격 로직 검증")
@@ -30,7 +30,7 @@ public class LottoTicketsTest {
         int expense = 14000;
         LottoNumberMaker numberMaker = new FixedLottoNumberMaker();
         PurchasePrice purchasePrice = new PurchasePrice(expense);
-        LottoTickets lottoTickets = new LottoTickets(LottoMachine.automaticIssuance(purchasePrice, numberMaker));
+        LottoTickets lottoTickets = LottoMachine.automaticIssuance(purchasePrice, numberMaker);
 
         // when
         int result = lottoTickets.getTotalTicketPrice();
