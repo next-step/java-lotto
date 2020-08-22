@@ -20,12 +20,6 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public List<Integer> getCountOfMatchList(LottoTicket lottoTicket) {
-        return lottoTickets.stream()
-                .map(l -> l.getCountOfMatch(lottoTicket))
-                .collect(Collectors.toList());
-    }
-
     public LottoResult getMatchResult(WinningTicket winningTicket) {
         Map<Rank, Integer> matchResult = new EnumMap<>(Rank.class);
         lottoTickets.forEach(ticket -> {
