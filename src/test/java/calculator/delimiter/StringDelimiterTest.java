@@ -1,4 +1,4 @@
-package delimiter;
+package calculator.delimiter;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
