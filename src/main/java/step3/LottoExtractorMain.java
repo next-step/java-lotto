@@ -17,12 +17,14 @@ public class LottoExtractorMain {
         LottoNumberGenerator generator = new LottoNumberGenerator();
         int trials = InputView.printNumberOfTickets(amount);
 
+
         for (int i = 0; i < trials; i++) {
             ticketList.add(generator.generatedLottoTicketByRandom());
             System.out.println(ticketList.get(i).printListMemberWithTemplate());
         }
 
         String[] answerNumber = InputView.checkWinNumber().split(DELIMITER);
-        OutputView.checkStatistics(ticketList, answerNumber);
+        int bonusBallNumber = InputView.checkBonusBallNumber();
+        OutputView.checkStatistics(ticketList, answerNumber, bonusBallNumber);
     }
 }

@@ -11,7 +11,7 @@ public class OutputView {
     private static final String WINNING_COMMENT = "(기준이 1이기 때문에 결과적으로 이득임)";
     private static final String LOSING_COMMENT = "(기준이 1이기 때문에 결과적으로 손해임)";
 
-    public static void checkStatistics(List<LottoTicket> ticketList, String[] answerNumber) {
+    public static void checkStatistics(List<LottoTicket> ticketList, String[] answerNumber, int bonusBallNumber) {
         int[] result = new int[]{0, 0, 0, 0, 0, 0, 0};
         printStatsIntro();
         for (LottoTicket ticket : ticketList) {
