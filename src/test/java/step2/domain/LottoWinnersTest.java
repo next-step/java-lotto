@@ -19,10 +19,11 @@ public class LottoWinnersTest {
         List<Lotto> testLotto = new ArrayList<>();
         testLotto.add(new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
         testLotto.add(new Lotto(new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15))));
+        testLotto.add(new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 40, 41, 15))));
         Lottos lottos = new Lottos(testLotto);
 
         LottoWinners lottoWinners = new LottoWinners(lottos, new ArrayList<>(Arrays.asList(1, 2, 3, 40, 41, 42)));
 
-        assertThat(lottoWinners.getWinner()).contains(3);
+        assertThat(lottoWinners.getWinner()).contains(3, 5);
     }
 }

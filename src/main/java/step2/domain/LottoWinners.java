@@ -16,6 +16,6 @@ public class LottoWinners {
         return lottos.getLottos().mapToInt(lotto -> {
             lotto.getLotto().retainAll(this.winningNumbers);
             return lotto.getLotto().size();
-        }).toArray();
+        }).sorted().toArray();
     }
 }
