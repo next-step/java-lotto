@@ -3,7 +3,7 @@
     - [x] input 부분에 대해 체크
     - [x] 6개의 숫자 입력부분에 대한 validation
     - [x] contains 구현 체크
-    - [ ] 일급 컬렉션 안에 List<String> -> List<Integer> 로 변경(Refactoring)
+    - [x] 일급 컬렉션 안에 List<String> -> List<Integer> 로 변경(Refactoring)
  
 - Lotto Number Generator 구현
     - [x] 로또 숫자 범위 1-45 까지의 리스트 구현

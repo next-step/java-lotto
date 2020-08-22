@@ -16,7 +16,7 @@ public class LottoTicketTest {
     public void inputString_parsingTest() {
         String value = "[4, 12, 32, 25, 11, 22]";
         lotto = new LottoTicket(value);
-        assertThat(lotto.numbers()).contains("4", "12", "32", "25", "11", "22");
+        assertThat(lotto.numbers()).contains(4, 12, 32, 25, 11, 22);
     }
 
     @Test

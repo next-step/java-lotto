@@ -3,11 +3,13 @@ package step3.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final String REGEX_THE_BRACKETS_AND_SPACE = "[\\[\\] ]";
     public static final String EMPTY_STRING = "";
-    private List<String> lottoNumbers;
+    public static final String STRING_DELIMITER = ",";
+    private List<Integer> lottoNumbers;
 
     public LottoTicket(String value) {
         lottoNumbers = new ArrayList<>();
@@ -21,7 +23,13 @@ public class LottoTicket {
 
     private void split(String value) {
         value = value.replaceAll(REGEX_THE_BRACKETS_AND_SPACE, EMPTY_STRING);
-        lottoNumbers.addAll(Arrays.asList(value.split(",")));
+        lottoNumbers.addAll(convertStringArrayToIntegerArray(value));
+    }
+
+    private List<Integer> convertStringArrayToIntegerArray(String value) {
+        return Arrays.stream(value.split(STRING_DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private void validate() {
@@ -30,7 +38,7 @@ public class LottoTicket {
         }
         if (lottoNumbers
                 .stream()
-                .anyMatch(member -> Integer.parseInt(member) > 45 || Integer.parseInt(member) < 0)) {
+                .anyMatch(member -> member > 45 || member < 0)) {
             throw new IllegalArgumentException();
         }
 
@@ -41,11 +49,12 @@ public class LottoTicket {
                 .stream()
                 .filter(member -> Arrays
                         .asList(expected)
-                        .contains(member))
+                        .contains(String.valueOf(member))
+                )
                 .count();
     }
 
-    public List<String> numbers() {
+    public List<Integer> numbers() {
         return lottoNumbers;
     }
 

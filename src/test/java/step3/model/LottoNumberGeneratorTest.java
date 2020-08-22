@@ -16,7 +16,7 @@ public class LottoNumberGeneratorTest {
 
         assertThat(a1.numbers()
                 .stream()
-                .mapToInt(Integer::parseInt)
+                .mapToInt(v -> v)
                 .max()
                 .getAsInt()
         ).isBetween(1, 45);
