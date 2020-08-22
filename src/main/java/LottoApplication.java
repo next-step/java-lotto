@@ -14,8 +14,9 @@ public class LottoApplication {
 
         int purchasePrice = inputView.getPurchasePrice();
         List<Integer> winningNumbers = inputView.getWinningNumbers();
+        int bonusNumber = inputView.getBonusNumber();
         LottoTickets lottoTickets = lottoMachine.makeLottoTickets(purchasePrice);
-        WinningTicket winningTicket = LottoTicket.of(winningNumbers);
+        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
 
         resultView.printLottoTicketSize(lottoTickets.size());
         List<String> lottoTicketStrings = lottoTickets.getLottoTicketStrings();
