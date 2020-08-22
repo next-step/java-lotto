@@ -31,13 +31,4 @@ public class InputValidator {
 			throw new IllegalArgumentException("당첨번호를 입력하셔야 합니다.");
 		}
 	}
-
-	public static void validateBonusBall(String bonusBallString) {
-		if (StringUtils.isBlank(bonusBallString)) {
-			throw new IllegalArgumentException("보너스볼을 입력하셔야 합니다.");
-		}
-		if (!InputValidator.isNumber(bonusBallString)) {
-			throw new IllegalArgumentException("보너스볼은 숫자로 입력하셔야 합니다.");
-		}
-	}
 }
