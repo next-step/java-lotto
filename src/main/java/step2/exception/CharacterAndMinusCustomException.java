@@ -1,4 +1,4 @@
-package step1.exception;
+package step2.exception;
 
 public class CharacterAndMinusCustomException extends RuntimeException {
     public CharacterAndMinusCustomException(String message) {

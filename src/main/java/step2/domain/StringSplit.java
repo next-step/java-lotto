@@ -1,4 +1,4 @@
-package step1.domain;
+package step2.domain;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
