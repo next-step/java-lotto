@@ -10,11 +10,11 @@ public class LottoNumberGenerator {
             .limit(45)
             .collect(Collectors.toList());
 
-    public LottoTicket generatedLottoTicket() {
+    public LottoTicket generatedLottoTicketByRandom() {
         return new LottoTicket(retrieveLottoNumberList());
     }
 
-    public String retrieveLottoNumberList() {
+    private String retrieveLottoNumberList() {
         return generateNumbersByRandom().toString();
     }
 
