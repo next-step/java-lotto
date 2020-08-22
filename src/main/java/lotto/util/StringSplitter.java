@@ -7,10 +7,17 @@ import java.util.stream.Stream;
 public class StringSplitter {
 
     public static final String COMMA = ",";
+    public static final String BLANK = "";
+    public static final String SPACE = " ";
 
     public static List<Integer> splitText(String text) {
+        text = removeBlank(text);
         String[] texts = text.split(COMMA);
         return textToInt(texts);
+    }
+
+    static String removeBlank(String input) {
+        return input.replace(SPACE, BLANK);
     }
 
     public static List<Integer> textToInt(String[] texts) {
