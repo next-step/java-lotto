@@ -5,6 +5,7 @@ import kr.heesu.lotto.domain.LottoNumber;
 import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.PurchaseAmount;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,11 +14,11 @@ import java.util.stream.Stream;
 
 public class LottoFactory {
     private static final int SIZE = 6;
-    private static final List<Integer> RANGE;
+    private static final List<LottoNumber> RANGE;
 
     static {
         RANGE = IntStream.range(1, 46)
-                .boxed()
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -26,10 +27,7 @@ public class LottoFactory {
     public static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(RANGE);
 
-        return RANGE.subList(0, SIZE)
-                .stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(RANGE.subList(0, SIZE));
     }
 
     public static Lotto createLotto(List<LottoNumber> numbers) {

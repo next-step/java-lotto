@@ -36,8 +36,8 @@ public class ViewResolver {
     }
 
     public void printLottoStatistics(LottoStatistics result) {
-        System.out.println(ViewMessage.OUTPUT_FOR_LOTTO_STATISTICS);
-        System.out.println(ViewMessage.OUTPUT_FOR_LINE);
+        System.out.println(ViewMessage.OUTPUT_FOR_LOTTO_STATISTICS.getMessage());
+        System.out.println(ViewMessage.OUTPUT_FOR_LINE.getMessage());
 
         resultView.printLottoStatistics(result);
     }
