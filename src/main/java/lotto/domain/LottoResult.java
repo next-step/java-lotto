@@ -30,7 +30,8 @@ public class LottoResult {
 
     private WinningPrize countMatchNumber(LottoTicket lottoTicket, WinningLotto winningLotto) {
         int matchCount = lottoTicket.countMatchNumbers(winningLotto.getWinningLottoNumber());
-        WinningPrize winningPrize = WinningPrize.valueOf(matchCount);
+        boolean matchBonus = winningLotto.isBonusBall(lottoTicket);
+        WinningPrize winningPrize = WinningPrize.valueOf(matchCount, matchBonus);
         return winningPrize;
     }
 
