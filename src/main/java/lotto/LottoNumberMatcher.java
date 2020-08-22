@@ -1,12 +1,10 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumberMatcher {
     private Map<Integer, Integer> matchResult;
+    private double profit;
 
     public LottoNumberMatcher(List<Integer> lastWeekWinningNumbers, List<LottoTicket> lottoTickets) {
         this.matchResult = new HashMap<>();
@@ -45,5 +43,12 @@ public class LottoNumberMatcher {
     @Override
     public int hashCode() {
         return Objects.hash(matchResult);
+    }
+
+    public double calculateProfit(long money) {
+        long totalPrice = LottoPriceInfo.calculateTotalPrice(matchResult);
+        profit = Math.ceil(totalPrice * 100.0 / money) / 100.0;
+
+        return profit;
     }
 }

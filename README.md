@@ -46,4 +46,5 @@
 * LottoSeller = 받은금액으로 구매가능한 로또 개수 판단.
 * LottoTicket = 6개의 숫자를 저장한 객체. 숫자범위 / 중복여부 판단.
 * LottoMachine = 입력받은 수량만큼 로또를 생성한다.
-* LottoNumberMatcher = 지난주 당첨번호와 구매한 로또티켓들을 받아서 당첨통계를 구한다.
+* LottoNumberMatcher = 지난주 당첨번호와 구매한 로또티켓들을 받아서 당첨통계를 구한다. 수익률을 구한다.
+* LottoPriceInfo = 일치개수별 상금 정보를 저장한 객체.
