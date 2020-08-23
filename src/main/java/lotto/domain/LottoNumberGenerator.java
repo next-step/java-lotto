@@ -23,7 +23,7 @@ public class LottoNumberGenerator {
         Collections.shuffle(lottoNumbers);
     }
 
-    public void lottoNumberRangeException(LottoNumberGenerator lottoNumberGenerator) {
+    public void validateLottoRange(LottoNumberGenerator lottoNumberGenerator) {
         for (int number : lottoNumberGenerator.lottoNumbers) {
             LottoException.lottoNumberRangeCheck(number);
         }
@@ -33,9 +33,8 @@ public class LottoNumberGenerator {
         return lottoNumbers;
     }
 
-    public long count() {
-        return lottoNumbers.stream()
-                .count();
+    public long size() {
+        return lottoNumbers.size();
     }
 
 }

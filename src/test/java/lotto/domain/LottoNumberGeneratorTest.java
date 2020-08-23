@@ -22,14 +22,14 @@ class LottoNumberGeneratorTest {
     @Test
     @DisplayName("로또 번호가 총 45개인지 확인")
     void lottoNumberSizeCheck() {
-        assertThat(lottoNumberGenerator.count()).isEqualTo(45);
+        assertThat(lottoNumberGenerator.size()).isEqualTo(45);
     }
 
     @ParameterizedTest
     @DisplayName("로또 번호 개수가 맞지 않은 번호 확인")
     @ValueSource(ints = {1, -1, 100, 50})
     void invalidLottoNumbersSize(int lottoNumberSize) {
-        assertThat(lottoNumberGenerator.count()).isNotEqualTo(lottoNumberSize);
+        assertThat(lottoNumberGenerator.size()).isNotEqualTo(lottoNumberSize);
     }
 
     @Test
@@ -37,7 +37,7 @@ class LottoNumberGeneratorTest {
     void lottoNumberCheck() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    lottoNumberGenerator.lottoNumberRangeException(lottoNumberGenerator);
+                    lottoNumberGenerator.validateLottoRange(lottoNumberGenerator);
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 
