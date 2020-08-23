@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -23,7 +22,7 @@ public class LottoTicketsTest {
         BuyCount buyCount = BuyCount.of(lottoMoney);
         LottoTickets lottoTickets = LottoTickets.of(buyCount, LOTTO_TICKET_RANDOM_MAKER);
 
-        assertThat(lottoTickets.number()).isEqualTo(expectedBuyCount);
+        assertThat(lottoTickets.getSize()).isEqualTo(expectedBuyCount);
     }
 
     @DisplayName("LottoTickets - WinningResult 생성 테스트")
@@ -63,7 +62,7 @@ public class LottoTicketsTest {
 
         LottoTickets mergedLottoTickets = LottoTickets.merge(lottoTicket1, lottoTicket2);
 
-        assertThat(mergedLottoTickets.number()).isEqualTo(lottoNumbers1.size() + lottoNumbers2.size());
+        assertThat(mergedLottoTickets.getSize()).isEqualTo(lottoNumbers1.size() + lottoNumbers2.size());
         assertThat(mergedLottoTickets.getLottoTickets()).containsAll(lottoTicket1.getLottoTickets());
         assertThat(mergedLottoTickets.getLottoTickets()).containsAll(lottoTicket2.getLottoTickets());
     }

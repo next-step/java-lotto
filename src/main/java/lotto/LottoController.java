@@ -25,10 +25,10 @@ public class LottoController {
         LottoTickets selectLottoTickets
                 = LottoTickets.of(selectBuyCount, new LottoTicketSelectMaker(lottoNumbers));
         LottoTickets autoLottoTickets
-                = LottoTickets.of(totalBuyCount.subtract(selectLottoTickets.number()), new LottoTicketRandomMaker());
+                = LottoTickets.of(totalBuyCount.subtract(selectLottoTickets.getSize()), new LottoTicketRandomMaker());
         LottoTickets totalLottoTickets = LottoTickets.merge(selectLottoTickets, autoLottoTickets);
 
-        OutputView.printLottoTicketsCount(selectLottoTickets.number(), autoLottoTickets.number());
+        OutputView.printLottoTicketsCount(selectLottoTickets.getSize(), autoLottoTickets.getSize());
         OutputView.printLottoTickets(totalLottoTickets);
 
         return totalLottoTickets;

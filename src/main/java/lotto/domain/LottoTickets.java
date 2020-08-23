@@ -33,7 +33,7 @@ public class LottoTickets {
                 .collect(collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
-    public int number() {
+    public int getSize() {
         return lottoTickets.size();
     }
 
