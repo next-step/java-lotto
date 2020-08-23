@@ -5,7 +5,15 @@ import java.util.regex.Pattern;
 
 public class CheckCustomDelimiter {
 
-    //matcherTest
+    public static boolean isNotCustomDelimiter(String delimiter, String customDelimiter) {
+        return delimiter != customDelimiter;
+    }
+
+    public static boolean isInvalidCustomDelimiter(String delimiter, String customDelimiter) {
+        return CheckCustomDelimiter.isNotCustomDelimiter(delimiter, customDelimiter) || CheckString.isNullOrBlank(delimiter);
+    }
+
+    //Test  matcherTest 용
     public static String returnCustomDelimiter(String expression) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
         if (m.find()) {
@@ -15,14 +23,5 @@ public class CheckCustomDelimiter {
         }
         return null;
     }
-
-    public static boolean isNotCustomDelimiter(String delimiter, String customDelimiter) {
-        return delimiter != customDelimiter;
-    }
-
-    public static boolean isInvalidCustomDelimiter(String delimiter, String customDelimiter) {
-        return CheckCustomDelimiter.isNotCustomDelimiter(delimiter, customDelimiter) || CheckString.isNullOrBlank(delimiter);
-    }
-
 
 }
