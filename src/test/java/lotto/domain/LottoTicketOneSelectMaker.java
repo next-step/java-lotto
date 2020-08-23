@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.collectingAndThen;
+
 /* 테스트용 Maker */
 public class LottoTicketOneSelectMaker implements LottoTicketMaker {
     private static final String DELIMITER = ",";
@@ -20,11 +22,11 @@ public class LottoTicketOneSelectMaker implements LottoTicketMaker {
     }
 
     @Override
-    public LottoTicket create() {
-        List<LottoNumber> lottoNumbers = selectedNumber.stream()
+    public List<LottoTicket> create(BuyCount buyCount) {
+        LottoTicket lottoTicket = selectedNumber.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(collectingAndThen(Collectors.toList(), LottoTicket::of));
 
-        return new LottoTicket(lottoNumbers);
+        return Arrays.asList(lottoTicket);
     }
 }

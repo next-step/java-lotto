@@ -25,6 +25,24 @@ public class LottoTicketsTest {
         assertThat(lottoTickets.getSize()).isEqualTo(expectedBuyCount);
     }
 
+    @DisplayName("로또 번호 고정 생성 테스트")
+    @ParameterizedTest
+    @MethodSource("makeSelectNumber")
+    void create_tickets_number_select(String selectedLottoNumber, List<Integer> lottoNumbers) {
+        LottoTickets lottoTickets = LottoTickets.of(BuyCount.of(1), new LottoTicketOneSelectMaker(selectedLottoNumber));
+
+        assertThat(lottoTickets.getSize()).isEqualTo(1);
+        assertThat(lottoTickets.getLottoTickets().get(0).getNumbers()).containsExactlyElementsOf(lottoNumbers);
+    }
+
+    private static Stream<Arguments> makeSelectNumber() {
+        return Stream.of(
+                Arguments.of("1,3,4,5,6,7", Arrays.asList(1, 3, 4, 5, 6, 7)),
+                Arguments.of("23,1,5,30,41,8", Arrays.asList(23, 1, 5, 30, 41, 8)),
+                Arguments.of("27,7,17,37,14,24", Arrays.asList(27, 7, 17, 37, 14, 24))
+        );
+    }
+
     @DisplayName("LottoTickets - WinningResult 생성 테스트")
     @ParameterizedTest
     @MethodSource("makeForGettingWinningResultData")
@@ -43,13 +61,13 @@ public class LottoTicketsTest {
     private static Stream<Arguments> makeForGettingWinningResultData() {
         return Stream.of(
                 Arguments.of(BuyCount.of("3000"), "1,2,3,4,11,12", "1,2,3,4,5,6", "7"
-                        , LottoRank.THIRD, 3, (50_000*3)/3000.0),
+                        , LottoRank.THIRD, 1, (50_000 * 3) / 3000.0),
                 Arguments.of(BuyCount.of("1000"), "1,2,3,4,11,12", "1,2,3,4,5,6", "7"
-                        , LottoRank.FIRST, 0, 50_000/1000.0),
+                        , LottoRank.FIRST, 0, 50_000 / 1000.0),
                 Arguments.of(BuyCount.of("1000"), "1,2,3,4,5,7", "1,2,3,4,5,6", "7"
-                        , LottoRank.SECOND_BONUS, 1, 30_000_000/1000.0),
+                        , LottoRank.SECOND_BONUS, 1, 30_000_000 / 1000.0),
                 Arguments.of(BuyCount.of("5000"), "1,2,10,11,12,13", "1,2,3,4,5,6", "7"
-                        , LottoRank.DROP, 5, 0/5000.0)
+                        , LottoRank.DROP, 1, 0 / 5000.0)
         );
     }
 

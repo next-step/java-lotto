@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.collectingAndThen;
 
 public class LottoTicketRandomMaker implements LottoTicketMaker {
     public static final List<LottoNumber> LOTTO_NUMBERS;
@@ -16,13 +19,20 @@ public class LottoTicketRandomMaker implements LottoTicketMaker {
     }
 
     @Override
-    public LottoTicket create() {
-        Collections.shuffle(LOTTO_NUMBERS);
+    public List<LottoTicket> create(BuyCount buyCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        List<LottoNumber> lottoNumbers = LOTTO_NUMBERS.stream()
-                .limit(DEFAULT_LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
+        while (buyCount.canBuy()) {
+            Collections.shuffle(LOTTO_NUMBERS);
 
-        return new LottoTicket(lottoNumbers);
+            LottoTicket lottoTicket = LOTTO_NUMBERS.stream()
+                    .limit(DEFAULT_LOTTO_NUMBER_COUNT)
+                    .collect(collectingAndThen(Collectors.toList(), LottoTicket::of));
+
+            lottoTickets.add(lottoTicket);
+            buyCount.subtract();
+        }
+
+        return lottoTickets;
     }
 }
