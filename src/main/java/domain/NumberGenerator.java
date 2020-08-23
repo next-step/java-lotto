@@ -8,16 +8,19 @@ import java.util.stream.IntStream;
 
 public class NumberGenerator {
 
+    public static final int FIRST_NUMBER = 1;
+    public static final int LAST_NUMBER = 45;
+
     List<Integer> numList;
     List<Integer> lottoNumberCandidate;
 
-    public NumberGenerator(){
+    public NumberGenerator() {
         numList = new ArrayList<>();
-        lottoNumberCandidate= new ArrayList<>();
+        lottoNumberCandidate = new ArrayList<>();
     }
 
-    public void createLottoNumberCandidate(){
-        lottoNumberCandidate = IntStream.rangeClosed(1,45)
+    public void createLottoNumberCandidate() {
+        lottoNumberCandidate = IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
                 .boxed().collect(Collectors.toList());
     }
 
@@ -26,12 +29,10 @@ public class NumberGenerator {
         Collections.shuffle(lottoNumberCandidate);
         numList = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LottoGames.LOTTO_NUMBER; i++) {
             numList.add(lottoNumberCandidate.get(i));
-//            System.out.println(lottoNumberCandidate.get(i));
         }
 
         return numList;
     }
-
 }

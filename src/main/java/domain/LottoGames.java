@@ -3,72 +3,60 @@ package domain;
 import utility.UserInput;
 import view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGames {
-    private List<Lotto> lottos;
-    private int[] winnerNumber;
+
+    public static final int LOTTO_NUMBER = 6;
+    private static final int MIN_WINNER_NUMBER = 3;
+
+    private Lottos lottos;
+    private WinnerNumber winnerNumber;
     private int sum;
-    private int[] rankRecord;
 
     public LottoGames() {
-        lottos = new ArrayList<>();
+        lottos = new Lottos();
         sum = 0;
-        rankRecord = new int[5];
     }
 
     public void run() {
         int tries = UserInput.init();
         makeLottoTicket(tries);
-        showLottoTickets();
+        View.showLottoTickets(lottos);
         winnerNumber = UserInput.getWinnerTicket();
 
         calculateCount(tries);
 
-        View.result(rankRecord, sum, tries);
+        View.result(winnerNumber, sum, tries);
     }
 
-    private void calculateCount(int tries) {
-        int count;
-        for (int i = 0; i < tries; i++) {
-            count = getCount(lottos.get(i));
-            calculateWinnerRank(count);
-        }
-    }
 
-    public void makeLottoTicket(int tries) {
+    private void makeLottoTicket(int tries) {
         NumberGenerator generator = new NumberGenerator();
         generator.createLottoNumberCandidate();
 
         for (int i = 0; i < tries; i++) {
-            this.lottos.add(new Lotto(generator.generate()));
+            lottos.addLotto(new Lotto(generator.generate()));
         }
     }
 
-    public void showLottoTickets() {
-        for (int i = 0; i < lottos.size(); i++) {
-            View.getLottoNumbers(lottos.get(i));
+    private void calculateCount(int tries) {
+        int count;
+
+        for (int i = 0; i < tries; i++) {
+            count = countNumber(lottos.getOneLotto(i));
+
+            if (count > MIN_WINNER_NUMBER) {
+                sum += winnerNumber.calculateWinnerRank(count);
+            }
         }
     }
 
-
-    private int getCount(Lotto lotto) {
+    private int countNumber(Lotto lotto) {
         int count = 0;
-        for (int j = 0; j < 6; j++) {
-            if (lotto.getSixNumber().contains((winnerNumber[j]))) {
+        for (int j = 0; j < LOTTO_NUMBER; j++) {
+            if (lotto.getSixNumber().contains((winnerNumber.getWinnerNumber()[j]))) {
                 count++;
             }
         }
         return count;
-    }
-
-    public void calculateWinnerRank(int count) {
-        for (WinnerRanking rank : WinnerRanking.values()) {
-            if (rank.getCount() == count) {
-                sum += rank.getWinnerPrice();
-                rankRecord[7 - count]++;
-            }
-        }
     }
 }

@@ -15,13 +15,14 @@ public class generateLottoTest {
     private NumberGenerator numberGenerator;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         numberGenerator = new NumberGenerator();
+        numberGenerator.createLottoNumberCandidate();
     }
 
     @DisplayName("번호 생성 테스트")
     @Test
-    void generateLottoTest(){
+    void generateLottoTest() {
         List<Integer> numList = numberGenerator.generate();
 
         assertThat(numList.size()).isEqualTo(6);
@@ -29,7 +30,7 @@ public class generateLottoTest {
 
     @DisplayName("번호 중복 여부 테스트")
     @Test
-    void hasDuplicateNumber(){
+    void generateTest() {
         Set<Integer> set = new HashSet<>();
 
         List<Integer> numList = numberGenerator.generate();
@@ -41,19 +42,18 @@ public class generateLottoTest {
 
     @DisplayName("정렬 테스트")
     @Test
-    void arrangeNumber(){
+    void arrangeNumber() {
         List<Integer> numList = numberGenerator.generate();
         Collections.sort(numList);
 
-        for (int i = 0; i <6 ; i++) {
+        for (int i = 0; i < 6; i++) {
             System.out.println(numList.get(i));
         }
-
     }
 
     @DisplayName("몇개나 일치하나 테스트")
     @Test
-    void checkCorrected(){
+    void checkCorrected() {
         List<Integer> numList = numberGenerator.generate();
         Collections.sort(numList);
 
@@ -63,23 +63,18 @@ public class generateLottoTest {
         int count = 0;
         for (int i = 0; i < 6; i++) {
             System.out.println(numList.get(i));
-            if(numList.contains(Integer.parseInt(input[i]))){
+            if (numList.contains(Integer.parseInt(input[i]))) {
                 count++;
             }
         }
-        System.out.println("cnt = "+count);
+        System.out.println("cnt = " + count);
     }
 
     @Test
-    void setLotto(){
+    void setLotto() {
         List<Integer> numList = numberGenerator.generate();
         Lotto numbers = new Lotto(numList);
 
         assertThat(numbers.sixNumber.size()).isEqualTo(6);
-    }
-
-    @Test
-    void makeLottoTicket(){
-
     }
 }
