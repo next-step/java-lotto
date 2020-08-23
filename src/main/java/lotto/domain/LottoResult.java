@@ -9,8 +9,8 @@ public class LottoResult {
     private final EnumMap<Rank, Integer> winningResult;
     private static final int ROUND_UP_SCALE = 2;
 
-    public LottoResult(EnumMap<Rank, Integer> winningResult) {
-        this.winningResult = winningResult;
+    public LottoResult(Map<Rank, Integer> winningResult) {
+        this.winningResult = new EnumMap<>(winningResult);
     }
 
     private BigDecimal calculateTotalWinning() {
