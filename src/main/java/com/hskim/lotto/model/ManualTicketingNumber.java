@@ -8,14 +8,21 @@ public class ManualTicketingNumber {
 
     private int ticketingNum;
 
-    public ManualTicketingNumber(int ticketingNum) {
+    public ManualTicketingNumber(int ticketingNum, GameNumber gameNumber) {
         validateNonNegative(ticketingNum);
         this.ticketingNum = ticketingNum;
+        validateExceedPurchasePrice(gameNumber);
     }
 
     private void validateNonNegative(int ticketingNum) {
         if (ticketingNum < 0) {
             throw new IllegalArgumentException(LottoTicketingExceptionMessage.NEGATIVE_TICKETING_NUMBER.getMessage());
+        }
+    }
+
+    private void validateExceedPurchasePrice(GameNumber gameNumber) {
+        if (gameNumber.getGameNum() < ticketingNum) {
+            throw new IllegalArgumentException(LottoTicketingExceptionMessage.EXCEED_PURCHASE_PRICE.getMessage());
         }
     }
 

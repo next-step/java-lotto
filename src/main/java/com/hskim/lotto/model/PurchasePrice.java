@@ -13,6 +13,12 @@ public class PurchasePrice {
         this.purchasePrice = purchasePrice;
     }
 
+    public PurchasePrice(PurchasePrice purchasePrice, ManualTicketingNumber exceptTickets) {
+        int realPrice = purchasePrice.purchasePrice - exceptTickets.getTicketingNum() * LottoTicket.LOTTO_PRICE;
+        validatePrice(realPrice);
+        this.purchasePrice = realPrice;
+    }
+
     private void validatePrice(int purchasePrice) {
         if (purchasePrice % LottoTicket.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(LottoTicketingExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());

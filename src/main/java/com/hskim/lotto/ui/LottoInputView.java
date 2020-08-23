@@ -1,5 +1,7 @@
 package com.hskim.lotto.ui;
 
+import com.hskim.lotto.model.ManualTicketingNumber;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,9 +69,9 @@ public class LottoInputView {
         return ticketingNum;
     }
 
-    public List<List<Integer>> getManualLottoNumbersList(int manualTicketingNum) {
+    public List<List<Integer>> getManualLottoNumbersList(ManualTicketingNumber manualTicketingNumber) {
         List<List<Integer>> result = new LinkedList<>();
-        for (int index = 0; index < manualTicketingNum; index++) {
+        for (int index = 0; index < manualTicketingNumber.getTicketingNum(); index++) {
             result.add(getTicketNumbers());
         }
 
