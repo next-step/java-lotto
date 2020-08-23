@@ -28,7 +28,7 @@ public class LottoResults {
 
     public long getTotalPrizeMoney() {
         return lottoResults.stream()
-                .mapToLong(LottoResult::calculateWinningMoney)
+                .mapToLong(LottoResult::getWinningMoney)
                 .sum();
     }
 

@@ -1,7 +1,9 @@
 package domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,5 +18,17 @@ public class LottoResultsTest {
 
         assertThat(results.getLottoResults()).extracting(LottoResult::getWinningCount)
                 .containsExactly(first, second, third, fourth, fifth);
+    }
+
+    @ParameterizedTest
+    @EnumSource(Rank.class)
+    void getTotalPrizeMoney(Rank rank) {
+        LottoResults results = LottoResults.of();
+
+        results.win(rank);
+        results.win(rank);
+
+        assertThat(results.getTotalPrizeMoney()).isEqualTo(rank.getMoney() * 2);
+
     }
 }

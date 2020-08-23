@@ -2,23 +2,19 @@ package domain;
 
 public class LottoResult {
     private final Rank rank;
-    private final WinningCount winningCount;
+    private final Prize prize;
 
-    private LottoResult(Rank rank, WinningCount winningCountr) {
+    private LottoResult(Rank rank, Prize winningCountr) {
         this.rank = rank;
-        this.winningCount = winningCountr;
+        this.prize = winningCountr;
     }
 
     public static LottoResult of(Rank rank) {
-        return new LottoResult(rank, WinningCount.of());
+        return new LottoResult(rank, Prize.of());
     }
 
-    public static LottoResult of(Rank rank, int winningCount) {
-        return new LottoResult(rank, WinningCount.of(winningCount));
-    }
-
-    public long calculateWinningMoney() {
-        return winningCount.calculateWinningMoney(rank.getMoney());
+    public long getWinningMoney() {
+        return prize.getWinningMoney();
     }
 
     public void win(Rank rank) {
@@ -26,11 +22,11 @@ public class LottoResult {
             return;
         }
 
-        this.winningCount.increase();
+        prize.increase(rank.getMoney());
     }
 
     public int getWinningCount() {
-        return winningCount.getValue();
+        return prize.getWinningCount();
     }
 
     public int getPrizeHitNumber() {

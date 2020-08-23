@@ -17,7 +17,7 @@ public class LottoResultTest {
         lottoResult.win(Rank.valueOf(hitNumber, matchBonus));
 
         assertThat(lottoResult.getWinningCount()).isEqualTo(expectCount);
-        assertThat(lottoResult.calculateWinningMoney()).isEqualTo(expectMoney);
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(expectMoney);
     }
 
     private static Stream<Arguments> generateData() {

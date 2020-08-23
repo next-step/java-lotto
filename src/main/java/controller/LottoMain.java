@@ -24,9 +24,9 @@ public class LottoMain {
         ResultView.viewIssuedLotto(lottos);
 
         WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumber(), InputView.inputBonusNumber());
-        LottoResults result = lottos.getLottoResult(winningLotto);
+        LottoResults prizes = lottos.getLottoResult(winningLotto);
 
-        ResultView.viewPrize(result);
-        ResultView.viewWinningRate(buyPrice, result);
+        ResultView.viewPrize(prizes);
+        ResultView.viewWinningRate(buyPrice, prizes);
     }
 }
