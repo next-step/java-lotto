@@ -24,7 +24,7 @@ class LottoServiceTest {
     @DisplayName("지불 가격에 따른 로또 장 수 확인")
     @CsvSource(value = {"14000:14", "10000:10", "5000:5"}, delimiter = ':')
     void buyLottoTicket(int price, int expected) {
-        int result = lottoService.buyLottoTicket(price);
+        int result = lottoService.getLottoBuyCount(price);
         assertThat(result).isEqualTo(expected);
     }
 

@@ -14,7 +14,7 @@ public class LottoGame {
         int paymentAmount = InputView.setPayPriceLotto(scanner);
 
         LottoService lottoService = new LottoService();
-        int lottoTicketQuantity = lottoService.buyLottoTicket(paymentAmount);
+        int lottoTicketQuantity = lottoService.getLottoBuyCount(paymentAmount);
         InputView.printLottoBuyQuantity(lottoTicketQuantity);
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketQuantity);
@@ -28,10 +28,10 @@ public class LottoGame {
         ResultView.printWinningNumericalStatement();
         ResultView.printLottoResult(winningResult);
 
-        Profit profit = new Profit();
-        int result = profit.checkWinningAmount(winningResult);
+        Profit profit = new Profit(winningResult);
+        int result = profit.getWinningAmount();
         String rateOfReturn = profit.getRateOfReturn(paymentAmount, result);
-        double baseValue = new Profit(rateOfReturn).getBaseValue();
+        double baseValue = profit.getBaseValue(rateOfReturn);
         ResultView.printRateOfReturn(rateOfReturn, baseValue);
     }
 }

@@ -25,7 +25,7 @@ public class ProfitTest {
     @Test
     @DisplayName("당첨 금액 확인")
     void checkTheWinningAmount() {
-        int result = profit.checkWinningAmount(winningResult);
+        int result = profit.getWinningAmount(winningResult);
         assertThat(result).isEqualTo(60000);
     }
 

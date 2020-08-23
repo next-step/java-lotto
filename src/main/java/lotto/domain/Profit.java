@@ -10,20 +10,17 @@ public class Profit {
     public static final String PATTERN = "0.00";
     public static final int SCALE_NUMBER = 2;
 
-    private String profitValue;
+    private WinningResult winningResult;
 
-    public Profit() {
+    public Profit(WinningResult winningResult) {
+        this.winningResult = winningResult;
     }
 
-    public Profit(String profitValue) {
-        this.profitValue = profitValue;
-    }
-
-    public int checkWinningAmount(WinningResult winningResult) {
+    public int getWinningAmount() {
         int winningAmount = NUMBER_ZERO;
 
         for (Rank rank : Rank.values()) {
-            int winningNumber = winningResult.getWinningResult(rank);
+            int winningNumber = this.winningResult.getWinningResult(rank);
             winningAmount += winningNumber * rank.getWinningMoney();
         }
         return winningAmount;
@@ -48,7 +45,7 @@ public class Profit {
         return Double.parseDouble(number);
     }
 
-    public double getBaseValue() {
-        return Double.parseDouble(this.profitValue);
+    public double getBaseValue(String profitValue) {
+        return Double.parseDouble(profitValue);
     }
 }
