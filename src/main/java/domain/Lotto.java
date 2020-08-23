@@ -36,14 +36,7 @@ public class Lotto {
                 .collect(toList());
     }
 
-    public int hasWinningNumber(List<LottoNumber> winningNumbers) {
-        return winningNumbers.stream()
-                .filter(numbers::contains)
-                .map(e -> 1)
-                .reduce(0, Integer::sum);
-    }
-
-    public boolean hasBonusNumber(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean contains(LottoNumber target) {
+        return numbers.contains(target);
     }
 }

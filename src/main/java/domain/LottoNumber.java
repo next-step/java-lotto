@@ -12,7 +12,7 @@ public class LottoNumber {
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
 
-    private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.range(MIN_NUMBER_BOUND, MAX_NUMBER_BOUND)
+    private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.rangeClosed(MIN_NUMBER_BOUND, MAX_NUMBER_BOUND)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toMap(LottoNumber::getValue, Function.identity()));
 

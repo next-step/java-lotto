@@ -32,7 +32,13 @@ public class WinningLotto {
     }
 
     public Rank getRank(Lotto lotto) {
-        return Rank.valueOf(lotto.hasWinningNumber(winningNumbers), lotto.hasBonusNumber(bonusNumber));
+        Integer winningCount = winningNumbers.stream()
+                .filter(lotto::contains)
+                .map(e -> 1)
+                .reduce(0, Integer::sum);
+        boolean matchBonus = lotto.contains(bonusNumber);
+
+        return Rank.valueOf(winningCount, matchBonus);
     }
 
     @Override

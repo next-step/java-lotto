@@ -66,25 +66,4 @@ public class LottoTest {
         assertThatThrownBy(() -> Lotto.of(input, new PassivityLottoNumberGenerator()))
                 .isInstanceOf(RuntimeException.class);
     }
-
-    @DisplayName("당첨번호에 따른 상금을 계산")
-    @Test
-    void hasWinningNumber() {
-        Lotto lotto = Lotto.of(lottoGenerator);
-
-        int prize = lotto.hasWinningNumber(winningNumbers);
-
-        assertThat(prize).isEqualTo(3);
-    }
-
-    @DisplayName("추가 당첨 번호 확인")
-    @ParameterizedTest
-    @CsvSource({"6, true", "7, false"})
-    void hasBonusNumber(int bonusNumber, boolean excpect) {
-        Lotto lotto = Lotto.of(lottoGenerator);
-
-        boolean result = lotto.hasBonusNumber(LottoNumber.valueOf(bonusNumber));
-
-        assertThat(result).isEqualTo(excpect);
-    }
 }
