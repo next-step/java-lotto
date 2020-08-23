@@ -10,6 +10,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    public static final int SECOND_THIRD_HIT_NUMBER = 5;
+
     private final int hitNumber;
     private final int money;
 
@@ -18,16 +20,8 @@ public enum Rank {
         this.money = money;
     }
 
-    public int getHitNumber() {
-        return hitNumber;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
     public static Rank valueOf(int hitNumber, boolean matchBonus) {
-        if (hitNumber == 5) {
+        if (hitNumber == SECOND_THIRD_HIT_NUMBER) {
             return matchBonus ? Rank.SECOND : Rank.THIRD;
         }
 
@@ -37,4 +31,11 @@ public enum Rank {
                 .orElse(MISS);
     }
 
+    public int getHitNumber() {
+        return hitNumber;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }
