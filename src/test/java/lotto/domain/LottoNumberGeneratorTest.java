@@ -10,26 +10,26 @@ import static lotto.exception.LottoException.INVALID_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class LottoNumbersTest {
+class LottoNumberGeneratorTest {
 
-    private LottoNumbers lottoNumbers;
+    private LottoNumberGenerator lottoNumberGenerator;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new LottoNumbers();
+        lottoNumberGenerator = new LottoNumberGenerator();
     }
 
     @Test
     @DisplayName("로또 번호가 총 45개인지 확인")
     void lottoNumberSizeCheck() {
-        assertThat(lottoNumbers.count()).isEqualTo(45);
+        assertThat(lottoNumberGenerator.count()).isEqualTo(45);
     }
 
     @ParameterizedTest
     @DisplayName("로또 번호 개수가 맞지 않은 번호 확인")
     @ValueSource(ints = {1, -1, 100, 50})
     void invalidLottoNumbersSize(int lottoNumberSize) {
-        assertThat(lottoNumbers.count()).isNotEqualTo(lottoNumberSize);
+        assertThat(lottoNumberGenerator.count()).isNotEqualTo(lottoNumberSize);
     }
 
     @Test
@@ -37,7 +37,7 @@ class LottoNumbersTest {
     void lottoNumberCheck() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    lottoNumbers.lottoNumberRangeException(lottoNumbers);
+                    lottoNumberGenerator.lottoNumberRangeException(lottoNumberGenerator);
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 

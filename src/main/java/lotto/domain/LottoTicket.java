@@ -12,19 +12,20 @@ public class LottoTicket {
 
     private List<Integer> lottoTicket;
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
+    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoTicket = new ArrayList<>();
-        buyingLottoTicket(lottoNumbers, lottoTicket);
+        buyingLottoTicket(lottoNumberGenerator, lottoTicket);
     }
 
-    private List<Integer> buyingLottoTicket(LottoNumbers lottoNumbers, List<Integer> lottoTicket) {
-        isLottoNumberAdd(lottoNumbers, lottoTicket);
+    private List<Integer> buyingLottoTicket(LottoNumberGenerator lottoNumberGenerator, List<Integer> lottoTicket) {
+        isLottoNumberAdd(lottoNumberGenerator, lottoTicket);
         return lottoTicket;
     }
 
-    private boolean isLottoNumberAdd(LottoNumbers lottoNumbers, List<Integer> lottoTicket) {
+    private boolean isLottoNumberAdd(LottoNumberGenerator lottoNumberGenerator, List<Integer> lottoTicket) {
         return lottoTicket.addAll(
-                lottoNumbers.getLottoNumbers()
+                lottoNumberGenerator.getLottoNumbers()
+                        .stream()
                         .distinct()
                         .limit(LOTTO_NUMBERS_SIZE)
                         .sorted()

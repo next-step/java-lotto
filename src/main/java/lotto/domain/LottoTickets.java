@@ -21,8 +21,8 @@ public class LottoTickets {
 
     public List<LottoTicket> createAutomaticLottoTicket(int lottoTicketQuantity) {
         for (int i = NUMBER_ZERO; i < lottoTicketQuantity; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers();
-            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
             lottoTickets.add(lottoTicket);
         }
         return lottoTickets;
@@ -30,8 +30,8 @@ public class LottoTickets {
 
     public List<LottoTicket> createManualLottoTicket(List<Integer> lottoTestList, int lottoTicketQuantity) {
         for (int i = NUMBER_ZERO; i < lottoTicketQuantity; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(lottoTestList);
-            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoTestList);
+            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
             lottoTickets.add(lottoTicket);
         }
         return lottoTickets;
