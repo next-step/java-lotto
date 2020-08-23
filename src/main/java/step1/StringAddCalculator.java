@@ -5,50 +5,47 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern DELIMITER = Pattern.compile("//(.)\\\\n(.*)");
 
     private String expression;
     private String delimiter;
-    private int result;
 
     public StringAddCalculator(String expression) {
-        validExpression(expression);
-        this.expression = expression;
+        this.expression = validExpression(expression);
     }
 
-    private void validExpression(String expression) {
-        switch (expression.length()) {
-            case 0: this.result = 0; break;
-            case 1: this.result = toInt(expression); break;
-            default: return;
+    private String validExpression(String expression) {
+        if(expression.isEmpty() || expression == null) {
+            return "0";
         }
+        return expression;
     }
 
     private int toInt(String expression) {
         try {
-            return Integer.parseInt(expression);
+            int toInt = Integer.parseInt(expression);
+            if(toInt < 0) {
+                throw new IllegalArgumentException("음수는 처리할 수 없습니다.");
+            }
+            return toInt;
         }catch (Exception e) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
     }
 
-    public int getResult() {
-        return result;
-    }
-
-    public void startAddCalculation() {
+    public int startAddCalculation() {
         delimiter = getDelimiter();
         String[] expressionToArray = getExpressionToArray(delimiter);
-        result = getAddResult(expressionToArray);
+        return getAddResult(expressionToArray);
     }
 
     private String getDelimiter() {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(expression);
-        String delimiter = "[/,:/g]";
+        Matcher matcher = DELIMITER.matcher(expression);
         if(matcher.find()) {
             this.expression = matcher.group(2);
             return matcher.group(1);
         }
-        return delimiter;
+        return "[/,:/g]";
     }
 
     private String[] getExpressionToArray(String delimiter) {
@@ -57,7 +54,7 @@ public class StringAddCalculator {
 
     private int getAddResult(String[] expressionToArray) {
         return Arrays.stream(expressionToArray)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(stringNumber -> toInt(stringNumber))
                 .sum();
 
     }
