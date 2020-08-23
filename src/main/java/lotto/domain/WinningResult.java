@@ -30,12 +30,11 @@ public class WinningResult {
         return winningResult;
     }
 
-    public WinningResult matchWinningNumber(WinningNumber winningNumber, List<Integer> winningNumbers, LottoTickets lottoTickets) {
+    public WinningResult matchWinningNumber(List<Integer> winningNumbers, LottoTickets lottoTickets) {
         WinningResult winningResult = new WinningResult();
         for (int i = NUMBER_ZERO; i < lottoTickets.count(); i++) {
-            int matchCount = NUMBER_ZERO;
             LottoTicket lottoTicket = lottoTickets.getLottoTicket(i);
-            matchCount = winningNumber.findLottoTicket(winningNumbers, lottoTicket, matchCount);
+            int matchCount = lottoTicket.getMatchCount(winningNumbers);
             Rank rank = Rank.valudOf(matchCount);
             winningResult.putRank(rank);
         }

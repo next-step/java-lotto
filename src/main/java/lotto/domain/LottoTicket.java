@@ -6,8 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static lotto.utils.CommonConstant.NUMBER_SIX;
-import static lotto.utils.CommonConstant.NUMBER_ZERO;
+import static lotto.utils.CommonConstant.*;
 import static lotto.utils.LottoValidationUtils.INVALID_DUPLICATION_NUMBER;
 import static lotto.utils.LottoValidationUtils.PRINT_LOTTO_NUMBER;
 
@@ -26,6 +25,16 @@ public class LottoTicket {
         return lottoNumberGenerator.getLottoNumbers();
     }
 
+    public int getMatchCount(List<Integer> winningNumbers) {
+        return IntStream.range(NUMBER_ZERO, lottoTicket.size())
+                .map(i -> getContainsLottoNumber(winningNumbers, i))
+                .sum();
+    }
+
+    private int getContainsLottoNumber(List<Integer> winningNumbers, int i) {
+        return winningNumbers.contains(getLottoTicketNumber(i)) ? NUMBER_ONE : NUMBER_ZERO;
+    }
+
     public void validateLottoRange(List<Integer> lottoTicket) {
         for (int number : lottoTicket) {
             LottoValidationUtils.lottoNumberRangeCheck(number);
@@ -41,7 +50,7 @@ public class LottoTicket {
     public void LottoNumberDuplication(List<Integer> lottoTicket) {
         IntStream.range(NUMBER_ZERO, lottoTicket.size())
                 .filter(i -> IntStream.range(NUMBER_ZERO, i)
-                        .anyMatch(j -> lottoTicket.get(i).equals(lottoTicket.get(j))))
+                .anyMatch(j -> lottoTicket.get(i).equals(lottoTicket.get(j))))
                 .forEach(i -> {
                     throw new IllegalArgumentException(INVALID_DUPLICATION_NUMBER);
                 });

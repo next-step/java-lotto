@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.utils.CommonConstant.NUMBER_ZERO;
-
 public class WinningNumber {
 
     private static final String INPUT_WINNING_NUMBER_DELIMITER = ", ";
@@ -32,20 +30,6 @@ public class WinningNumber {
                 .map(number -> new StringUtils(number).toInt())
                 .sorted()
                 .collect(Collectors.toList()));
-    }
-
-    public int findLottoTicket(List<Integer> winningNumbers, LottoTicket lottoTicket, int matchCount) {
-        for (int j = NUMBER_ZERO; j < lottoTicket.size(); j++) {
-            matchCount = containsLottoNumber(winningNumbers, matchCount, lottoTicket, j);
-        }
-        return matchCount;
-    }
-
-    private int containsLottoNumber(List<Integer> winningNumbers, int matchCount, LottoTicket lottoTicket, int j) {
-        if (winningNumbers.contains(lottoTicket.getLottoTicketNumber(j))) {
-            matchCount++;
-        }
-        return matchCount;
     }
 
 }

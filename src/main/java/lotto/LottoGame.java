@@ -24,7 +24,7 @@ public class LottoGame {
         WinningNumber winningNumber = new WinningNumber();
         List<Integer> winningNumbers = winningNumber.setWinningNumber(inputWinningNumber);
 
-        WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumber, winningNumbers, lottoTickets);
+        WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumbers, lottoTickets);
         ResultView.printWinningNumericalStatement();
         ResultView.printLottoResult(winningResult);
 
@@ -34,4 +34,5 @@ public class LottoGame {
         double baseValue = profit.getBaseValue(rateOfReturn);
         ResultView.printRateOfReturn(rateOfReturn, baseValue);
     }
+
 }
