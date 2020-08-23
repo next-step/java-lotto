@@ -20,14 +20,14 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
-    /*
+
     @Test
     void splitAndSum_쉼표_또는_콜론_구분자() {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
+        int result = StringAddCalculator.splitAndSum2("1,2:3");
         assertThat(result).isEqualTo(6);
     }
-    /*
 
+/*
 
             @Test
             public void splitAndSum_숫자하나() throws Exception {
