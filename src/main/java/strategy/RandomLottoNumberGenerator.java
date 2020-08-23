@@ -6,9 +6,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoNumber.MAX_NUMBER_BOUND;
+
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
-    public static final int MAX_NUMBER_BOUND = 45;
     public static final int LOTTO_NUMBER = 6;
 
     @Override

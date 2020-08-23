@@ -2,11 +2,19 @@ package domain;
 
 import exception.InvalidRangeNumberException;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
+
+    private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.range(MIN_NUMBER_BOUND, MAX_NUMBER_BOUND)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toMap(LottoNumber::getValue, Function.identity()));
 
     public int lottoNumber;
 
@@ -16,7 +24,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
-        return new LottoNumber(lottoNumber);
+        return lottoNumbers.get(lottoNumber);
     }
 
     private static void validate(int lottoNumber) {
