@@ -10,3 +10,8 @@
     1. refactoring : LottoNumberFactory에 getNewLottoNumber추가 해서 외부 클래스에서 new LottoNumber 쓰던 부분 이 메소드로 대체
 4. 출력 멘트 변경
 5. 예외 처리를 통해 예외가 발생하면 처음 시작으로 돌아가게 유도
+
+## refactoring list
+1. 1000원 미만 금액 입력시 바로 Exception
+2. 수동 구매 로또 수가 0일때는 수동 번호 입력 skip
+3. 자동,수동 구매 메서드 분리

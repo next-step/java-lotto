@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 public class PurchaseStandBy {
 
 	public static final int PRICE_PER_GAME = 1000;
+	public static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 	private static final int ZERO = 0;
-	private static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";
 
 	private final int purchasePrice;
 	private final List<String[]> manualGameNumbers;
@@ -42,19 +42,21 @@ public class PurchaseStandBy {
 	}
 
 	public LottoGames purchase() {
-		return new LottoGames(generateLottoGames());
+		List<LottoGame> lottoGames = purchaseManualGames();
+		lottoGames.addAll(purchaseAutoGames());
+		return new LottoGames(lottoGames);
 	}
 
-	private List<LottoGame> generateLottoGames() {
-		List<LottoGame> lottoGames = manualGameNumbers.stream()
-										.map(LottoGameFactory::getNewManualGame)
-										.collect(Collectors.toList());
+	private List<LottoGame> purchaseManualGames() {
+		return manualGameNumbers.stream()
+				.map(LottoGameFactory::getNewManualGame)
+				.collect(Collectors.toList());
+	}
 
-		List<LottoGame> autoGames = IntStream.range(ZERO, autoGameCount)
-										.mapToObj(index -> LottoGameFactory.getNewAutoGame())
-										.collect(Collectors.toList());
-		lottoGames.addAll(autoGames);
-		return lottoGames;
+	private List<LottoGame> purchaseAutoGames() {
+		return IntStream.range(ZERO, autoGameCount)
+				.mapToObj(index -> LottoGameFactory.getNewAutoGame())
+				.collect(Collectors.toList());
 	}
 
 	private int computeAutoGameCount() {

@@ -15,9 +15,7 @@ public class GameWinningCondition {
 
 	private final LottoNumber bonusNumber;
 
-	public GameWinningCondition(String[] prizeNumbers, Integer bonus) {
-		LottoGame prizeLottoGame = getNewManualGame(prizeNumbers);
-		LottoNumber bonusNumber = getNewLottoNumber(bonus);
+	public GameWinningCondition(LottoGame prizeLottoGame, LottoNumber bonusNumber) {
 		validateBonusNumber(prizeLottoGame, bonusNumber);
 		this.prizeLottoGame = prizeLottoGame;
 		this.bonusNumber = bonusNumber;

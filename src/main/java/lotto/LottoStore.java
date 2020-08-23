@@ -23,7 +23,7 @@ public class LottoStore {
 	}
 
 	private static boolean runProcess(OrderHere orderHere, DisplayHere displayHere) {
-		try{
+		try {
 			PurchaseStandBy purchaseStandBy = orderHere.orderNewPurchasing();
 			LottoGames purchasedGames = purchaseStandBy.purchase();
 			displayHere.printPurchasedGames(purchaseStandBy, purchasedGames);

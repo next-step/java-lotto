@@ -1,10 +1,14 @@
 package lotto.ui;
 
+import lotto.LottoException;
 import lotto.domain.GameWinningCondition;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseStandBy;
 import lotto.ui.input.InputChannel;
 import lotto.ui.output.OutputChannel;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -12,11 +16,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.constants.MessageConstant.*;
+import static lotto.domain.LottoGameFactory.getNewManualGame;
+import static lotto.domain.LottoNumberFactory.getNewLottoNumber;
+import static lotto.domain.PurchaseStandBy.INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME;
+import static lotto.domain.PurchaseStandBy.PRICE_PER_GAME;
 import static lotto.utils.StringUtils.splitByDelimiter;
 
 public class OrderHere {
 
-	private static final int SEED = 0;
+	private static final int ZERO = 0;
 	private static final int INCREASE = 1;
 
 	private final InputChannel inputChannel;
@@ -37,11 +45,13 @@ public class OrderHere {
 	public GameWinningCondition receiveLastWeekPrize() {
 		String[] prizeNumbers = retryUntilGettingRightValue(getPrizeNumbers());
 		Integer bonus = retryUntilGettingRightValue(getBonusNumber());
-		return new GameWinningCondition(prizeNumbers, bonus);
+		LottoGame prizeLottoGame = getNewManualGame(prizeNumbers);
+		LottoNumber bonusNumber = getNewLottoNumber(bonus);
+		return new GameWinningCondition(prizeLottoGame, bonusNumber);
 	}
 
 	private Supplier<Optional<Integer>> getPurchasingPrice() {
-		return () -> Optional.ofNullable(sayQuestionAndGetInt(PLEASE_INPUT_PURCHASING_PRICE));
+		return () -> Optional.ofNullable(sayQuestionAndGetValidatedInt(PLEASE_INPUT_PURCHASING_PRICE));
 
 	}
 
@@ -85,6 +95,15 @@ public class OrderHere {
 		return inputChannel.getIntValue();
 	}
 
+	private Integer sayQuestionAndGetValidatedInt(String question) {
+		outputChannel.printLine(question);
+		int value = inputChannel.getIntValue();
+		if(value < PRICE_PER_GAME) {
+			throw new LottoException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, PRICE_PER_GAME));
+		}
+		return value;
+	}
+
 	private String[] sayQuestionAndGetStringArray(String question) {
 		outputChannel.printLine(question);
 		return getStringArray();
@@ -96,8 +115,11 @@ public class OrderHere {
 	}
 
 	private List<String[]> sayQuestionAndGetManualNumbersToLimit(String question, Integer limit) {
+		if(!(limit > ZERO)) {
+			return Collections.EMPTY_LIST;
+		}
 		outputChannel.printLine(question);
-		return Stream.iterate(SEED, integer -> integer + INCREASE)
+		return Stream.iterate(ZERO, integer -> integer + INCREASE)
 				.limit(limit)
 				.map(integer -> getStringArray())
 				.collect(Collectors.toList());

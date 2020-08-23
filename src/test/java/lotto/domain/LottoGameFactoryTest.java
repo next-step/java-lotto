@@ -21,6 +21,4 @@ class LottoGameFactoryTest {
 										.count();
 		assertThat(validRangeCount).isEqualTo(NUMBER_COUNT_PER_GAME);
 	}
-
-
 }
