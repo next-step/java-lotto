@@ -8,16 +8,14 @@ public class InputView {
 
     public static int receiveMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
-    }
-
-    public static void skip() {
-        scanner.nextLine();
+        int money = scanner.nextInt();
+        return money;
     }
 
     public static String receiveWinningNumberLine() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        scanner.nextLine();
         return scanner.nextLine();
     }
 

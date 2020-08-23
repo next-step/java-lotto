@@ -14,12 +14,11 @@ public class LottoApp {
         ResultView.printLottoPurchaseCount(lottoPurchaseCount);
         List<Lotto> lottos = LottoFactory.create(lottoPurchaseCount);
         ResultView.printLottos(lottos);
-        InputView.skip();
         String winningNumberLine = InputView.receiveWinningNumberLine();
         WinningNumbers winningNumbers = new WinningNumbers(LottoUtils.splitWinningNumberLineAndReturnLottoNumbers(winningNumberLine));
-        LottoResults lottoResults = new LottoResults(LottoLotteryBroadcast.broadcast(lottos, winningNumbers));
-        ResultView.printWinningCountStatistics(LottoStatistics.calculateWinningCountStatistics(lottoResults));
-        ResultView.printYield(LottoStatistics.calculateYield(money, lottoResults));
+        LottoResults lottoResults = new LottoResults(LottoUtils.collectWinningNumberCount(lottos, winningNumbers));
+        ResultView.printWinningCountStatistics(lottoResults.calculateWinningCountStatistics());
+        ResultView.printYield(lottoResults.calculateYield(money));
     }
 
 }

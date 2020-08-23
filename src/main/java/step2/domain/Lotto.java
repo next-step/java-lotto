@@ -1,14 +1,17 @@
 package step2.domain;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
+        }
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 
@@ -20,10 +23,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "[" + numbers.stream()
-                .map(Objects::toString)
-                .collect(Collectors.joining(", "))
-                + "]";
+        return numbers.toString();
     }
 
 }

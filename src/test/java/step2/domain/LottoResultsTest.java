@@ -22,7 +22,7 @@ public class LottoResultsTest {
     @Test
     public void calculateWinnings() {
         LottoResults lottoResults = new LottoResults(Arrays.asList(1, 0, 0, 0, 0, 0, 6));
-        assertThat(lottoResults.calculateWinnings()).isEqualTo(2000000000);
+        assertThat(lottoResults.calculateTotalWinnings()).isEqualTo(2000000000);
     }
 
 }
