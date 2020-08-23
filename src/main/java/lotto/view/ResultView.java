@@ -20,13 +20,13 @@ public class ResultView {
 
     public static void displayLottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos) {
             stringBuilder.append(lotto.toString()).append(LINE_SEPARATOR);
         }
         System.out.println(stringBuilder.toString());
     }
 
-    public static void displayLottoResult(Rankings rankings, double profitRate) {
+    public static void displayLottoResult(Rankings rankings) {
         System.out.println(HEAD_STATISTICS_MESSAGE);
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -35,6 +35,7 @@ public class ResultView {
             stringBuilder.append(String.format(MATCHES_COUNT_MESSAGE, rankings.rankingCount(ranking)));
         }
 
+        double profitRate = rankings.findProfitRate();
         stringBuilder.append(String.format(TOTAL_PROFIT_MESSAGE, profitRate));
 
         if (profitRate < 1) {

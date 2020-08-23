@@ -9,11 +9,11 @@ public class LottoController {
         final Money money = Money.of(InputView.inputMoney());
         final LottoStore lottoStore = LottoStore.of(money);
         final Lottos lottos = lottoStore.issueLotto();
-        ResultView.displayLottoCount(lottoStore.findLottoCount());
+        ResultView.displayLottoCount(lottos.size());
         ResultView.displayLottos(lottos);
 
         final WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningLotto(), InputView.inputBonusNumber());
         final Rankings rankings = Rankings.of(lottos.matchesWinningLotto(winningLotto));
-        ResultView.displayLottoResult(rankings, lottoStore.findProfitRate(rankings.totalPrizeMoney()));
+        ResultView.displayLottoResult(rankings);
     }
 }

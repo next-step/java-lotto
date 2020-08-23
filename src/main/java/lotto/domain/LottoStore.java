@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoStore {
     public static final int LOTTO_PRICE = 1_000;
@@ -13,8 +15,8 @@ public class LottoStore {
     private final Money money;
 
     public LottoStore(Money money) {
-        this.autoLottoGenerator = new AutoLottoGenerator();
         this.money = money;
+        this.autoLottoGenerator = new AutoLottoGenerator();
     }
 
     public static LottoStore of(Money money) {
@@ -22,24 +24,15 @@ public class LottoStore {
     }
 
     public Lottos issueLotto() {
-        validate(findLottoCount());
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < findLottoCount(); i++) {
-            lottos.add(autoLottoGenerator.generate());
-        }
-        return Lottos.of(lottos);
+        return Stream.generate(autoLottoGenerator::generate)
+                .limit(calculateCount())
+                .collect(collectingAndThen(toList(), Lottos::of));
     }
 
-    public double findProfitRate(int totalPrize) {
-        return (double) totalPrize / getPurchasePrice();
-    }
-
-    public int getPurchasePrice() {
-        return findLottoCount() * LOTTO_PRICE;
-    }
-
-    public int findLottoCount() {
-        return money.getPrice() / LOTTO_PRICE;
+    public int calculateCount() {
+        int count = money.getPrice() / LOTTO_PRICE;
+        validate(count);
+        return count;
     }
 
     private void validate(int count) {
