@@ -15,8 +15,8 @@ public class ProfitTest {
 
     @BeforeEach
     void setUp() {
-        profit = new Profit();
         winningResult = new WinningResult();
+        profit = new Profit(winningResult);
         winningResult.putRank(Rank.FOURTH);
         winningResult.putRank(Rank.FOURTH);
         winningResult.putRank(Rank.THIRD);
@@ -25,7 +25,7 @@ public class ProfitTest {
     @Test
     @DisplayName("당첨 금액 확인")
     void checkTheWinningAmount() {
-        int result = profit.getWinningAmount(winningResult);
+        int result = profit.getWinningAmount();
         assertThat(result).isEqualTo(60000);
     }
 

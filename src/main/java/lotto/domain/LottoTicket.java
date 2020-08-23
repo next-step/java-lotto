@@ -14,6 +14,9 @@ public class LottoTicket {
 
     private List<Integer> lottoTicket;
 
+    public LottoTicket() {
+    }
+
     public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoTicket = generateLottoTicket(lottoNumberGenerator);
         validateLottoRange(lottoTicket);
@@ -60,7 +63,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.lottoTicket);
     }
 
-    public long size() {
+    public int size() {
         return lottoTicket.size();
     }
 

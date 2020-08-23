@@ -21,7 +21,7 @@ public class InputView {
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
-        for (int i = NUMBER_ZERO; i < lottoTickets.count(); i++) {
+        for (int i = NUMBER_ZERO; i < lottoTickets.size(); i++) {
             System.out.println(lottoTickets.getLottoTicket(i));
         }
         System.out.println();

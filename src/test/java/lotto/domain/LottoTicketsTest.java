@@ -13,7 +13,7 @@ class LottoTicketsTest {
     @DisplayName("구매한 로또 복권 개수 확인")
     void purchasedLottoTicket() {
         lottoTickets = new LottoTickets(5);
-        assertThat(lottoTickets.count()).isEqualTo(5);
+        assertThat(lottoTickets.size()).isEqualTo(5);
     }
 
 }

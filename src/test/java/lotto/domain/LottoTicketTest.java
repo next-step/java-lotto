@@ -37,7 +37,7 @@ class LottoTicketTest {
     void lottoNumberRangeCheck() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    lottoTicket.validateLottoRange(lottoNumberGenerator.getLottoNumbers());
+                    lottoTicket.validateLottoRange(Arrays.asList(-1, 46, 50));
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 

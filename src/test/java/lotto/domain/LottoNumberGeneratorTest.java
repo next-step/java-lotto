@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+
 import static lotto.utils.LottoValidationUtils.INVALID_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -37,7 +39,7 @@ class LottoNumberGeneratorTest {
     void lottoNumberCheck() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    lottoNumberGenerator.validateLottoRange(lottoNumberGenerator);
+                    lottoNumberGenerator.validateLottoRange(Arrays.asList(-1, 46, 50, 100));
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 

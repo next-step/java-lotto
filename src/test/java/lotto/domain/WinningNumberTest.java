@@ -69,9 +69,9 @@ class WinningNumberTest {
         LottoTickets lottoTickets3 = new LottoTickets(Arrays.asList(11,15,21,25,35,36), 1);
         winningNumbers = winningNumber.setWinningNumber("1, 2, 3, 4, 5, 6");
 
-        WinningResult result1 = winningResult.matchWinningNumber(winningNumber, winningNumbers, lottoTickets1);
-        WinningResult result2 = winningResult.matchWinningNumber(winningNumber, winningNumbers, lottoTickets2);
-        WinningResult result3 = winningResult.matchWinningNumber(winningNumber, winningNumbers, lottoTickets3);
+        WinningResult result1 = winningResult.matchWinningNumber(winningNumbers, lottoTickets1);
+        WinningResult result2 = winningResult.matchWinningNumber(winningNumbers, lottoTickets2);
+        WinningResult result3 = winningResult.matchWinningNumber(winningNumbers, lottoTickets3);
 
         assertThat(result1.getWinningResult(Rank.FIRST)).isEqualTo(1);
         assertThat(result2.getWinningResult(Rank.THIRD)).isEqualTo(1);

@@ -24,8 +24,8 @@ public class LottoNumberGenerator {
         Collections.shuffle(lottoNumbers);
     }
 
-    public void validateLottoRange(LottoNumberGenerator lottoNumberGenerator) {
-        for (int number : lottoNumberGenerator.lottoNumbers) {
+    public void validateLottoRange(List<Integer> lottoNumbers) {
+        for (int number : lottoNumbers) {
             LottoValidationUtils.lottoNumberRangeCheck(number);
         }
     }
@@ -38,7 +38,7 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    public long size() {
+    public int size() {
         return lottoNumbers.size();
     }
 

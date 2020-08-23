@@ -1,7 +1,5 @@
 package lotto.utils;
 
-import lotto.utils.StringUtils;
-
 import java.util.stream.IntStream;
 
 import static lotto.utils.CommonConstant.*;

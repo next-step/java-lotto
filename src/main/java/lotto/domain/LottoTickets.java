@@ -41,9 +41,8 @@ public class LottoTickets {
         return lottoTickets.get(index);
     }
 
-    public long count() {
-        return lottoTickets.stream()
-                .count();
+    public int size() {
+        return lottoTickets.size();
     }
 
 }

@@ -32,7 +32,7 @@ public class WinningResult {
 
     public WinningResult matchWinningNumber(List<Integer> winningNumbers, LottoTickets lottoTickets) {
         WinningResult winningResult = new WinningResult();
-        for (int i = NUMBER_ZERO; i < lottoTickets.count(); i++) {
+        for (int i = NUMBER_ZERO; i < lottoTickets.size(); i++) {
             LottoTicket lottoTicket = lottoTickets.getLottoTicket(i);
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
             Rank rank = Rank.valudOf(matchCount);
