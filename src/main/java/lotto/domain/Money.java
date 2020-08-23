@@ -12,7 +12,7 @@ public class Money {
 
     private void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
-        throw new IllegalArgumentException("금액이 부족합니다. 로또를 구매할 수 없습니다.");
+            throw new IllegalArgumentException("금액이 부족합니다. 로또를 구매할 수 없습니다.");
         }
     }
 

@@ -40,7 +40,7 @@ public class LottoController {
 
     private void drawLottoResult() {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), InputView.inputBonusBall());
         lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
     }
