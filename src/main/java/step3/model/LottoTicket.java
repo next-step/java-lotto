@@ -23,10 +23,10 @@ public class LottoTicket {
 
     private void split(String value) {
         value = value.replaceAll(REGEX_THE_BRACKETS_AND_SPACE, EMPTY_STRING);
-        lottoNumbers.addAll(convertStringArrayToIntegerArray(value));
+        lottoNumbers.addAll(convertStringArrayIntoIntegerArray(value));
     }
 
-    private List<Integer> convertStringArrayToIntegerArray(String value) {
+    private List<Integer> convertStringArrayIntoIntegerArray(String value) {
         return Arrays.stream(value.split(STRING_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
