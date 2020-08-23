@@ -5,6 +5,7 @@ import java.util.*;
 public class LottoResult {
 
     private static final int RATE = 100;
+    public static final int COUNT = 1;
 
     private Map<WinningPrize, Integer> lottoPrizeResult = new LinkedHashMap<>();
 
@@ -35,7 +36,7 @@ public class LottoResult {
     }
 
     private void recordWinningResult(WinningPrize winningValue) {
-        lottoPrizeResult.put(winningValue, lottoPrizeResult.get(winningValue) + 1);
+        lottoPrizeResult.put(winningValue, lottoPrizeResult.get(winningValue) + COUNT);
     }
 
     public Map<WinningPrize, Integer> getLottoResult() {
