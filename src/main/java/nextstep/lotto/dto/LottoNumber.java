@@ -7,10 +7,10 @@ import static nextstep.lotto.constant.ExceptionMessage.INVALID_INPUT_ONLY_NUMBER
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private int number;
+    private final int number;
 
-    private final int LOTTO_NUMBER_MIN = 1;
-    private final int LOTTO_NUMBER_MAX = 45;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
 
     private LottoNumber(int number) {
         this.number = number;

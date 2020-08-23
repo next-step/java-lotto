@@ -9,12 +9,9 @@ public class LottoResultBoard {
 
     public static final int LOTTO_VALUE = 1000;
 
-    private Map<LottoRank,Integer> lottoResult;
+    private Map<LottoRank,Integer> lottoResult = new HashMap();
 
-    public LottoResultBoard() {
-        this.lottoResult = new HashMap();
-    }
-
+    public LottoResultBoard() {}
     public LottoResultBoard(LottoTickets userLottoTickets,LottoTicket winnerTicket) {
         this.lottoResult = new HashMap();
 
@@ -41,11 +38,11 @@ public class LottoResultBoard {
     public float getBenefitRate(){
         Set<LottoRank> lottoRanks = lottoResult.keySet();
         double totalTicketCount = lottoRanks.stream()
-                .collect(Collectors.summingDouble(lottoResult::get));
+                .mapToDouble(lottoResult::get)
+                .sum();
         double totalReward = lottoRanks.stream()
-                .collect(Collectors.summingDouble(
-                        lottoRank -> (lottoResult.get(lottoRank) * lottoRank.getReward())
-                ));
+                .mapToDouble(lottoRank -> (lottoResult.get(lottoRank) * lottoRank.getReward()))
+                .sum();
 
         return (float) (totalReward / (totalTicketCount * LOTTO_VALUE));
     }
