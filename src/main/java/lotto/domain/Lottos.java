@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
@@ -20,18 +21,27 @@ public class Lottos {
         return lottos;
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.findRankingByLotto(winningLotto))
+                .map(winningLotto::match)
                 .collect(toList());
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottos.iterator();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottos lottos = (Lottos) o;
-        return Objects.equals(this.lottos, lottos.lottos);
+        Lottos that = (Lottos) o;
+        return Objects.equals(this.lottos, that.lottos);
     }
 
     @Override

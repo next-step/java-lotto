@@ -15,11 +15,7 @@ public class WinningLotto {
         return new WinningLotto(Lotto.of(numbers), LottoNumber.of(bonusNumber));
     }
 
-    public Lotto getWinningLotto() {
-        return lotto;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public Ranking match(Lotto lotto) {
+        return lotto.findRankingByLotto(this.lotto, this.bonusNumber);
     }
 }
