@@ -13,7 +13,7 @@ public class WinningLotto {
         this.bonusBall = new LottoNumber(bonusBall);
     }
 
-    public void validateBonusBallDuplication(int bonusBall) {
+    private void validateBonusBallDuplication(int bonusBall) {
         if (winningLottoTicket.matchLottoNumber(new LottoNumber(bonusBall))) {
             throw new IllegalArgumentException("보너스 볼이 당첨 번호에 포함되어 있습니다. 다른 값을 입력하세요.");
         }
