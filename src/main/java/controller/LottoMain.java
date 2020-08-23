@@ -4,7 +4,7 @@ package controller;
 import domain.LottoGame;
 import domain.LottoResults;
 import domain.Lottos;
-import strategy.RandomLottoNumberGenerator;
+import domain.WinningLotto;
 import view.InputView;
 import view.ResultView;
 
@@ -23,9 +23,10 @@ public class LottoMain {
         Lottos lottos = lottoGame.issue(passivityLottos);
         ResultView.viewIssuedLotto(lottos);
 
-        LottoResults prizes = lottos.getLottoResult(InputView.inputWinningNumber(), InputView.inputBonusNumber());
+        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumber(), InputView.inputBonusNumber());
+        LottoResults result = lottos.getLottoResult(winningLotto);
 
-        ResultView.viewPrize(prizes);
-        ResultView.viewWinningRate(buyPrice, prizes);
+        ResultView.viewPrize(result);
+        ResultView.viewWinningRate(buyPrice, result);
     }
 }

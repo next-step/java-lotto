@@ -31,6 +31,10 @@ public class WinningLotto {
                 .collect(Collectors.toList());
     }
 
+    public Rank getRank(Lotto lotto) {
+        return Rank.valueOf(lotto.hasWinningNumber(winningNumbers), lotto.hasBonusNumber(bonusNumber));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

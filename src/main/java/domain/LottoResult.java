@@ -21,8 +21,8 @@ public class LottoResult {
         return winningCount.calculateWinningMoney(rank.getMoney());
     }
 
-    public void win(int hitNumber, boolean matchBonus) {
-        if (rank != Rank.valueOf(hitNumber, matchBonus)) {
+    public void win(Rank rank) {
+        if (!isSameRank(rank)) {
             return;
         }
 

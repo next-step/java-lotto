@@ -2,8 +2,6 @@ package domain;
 
 import strategy.PassivityLottoNumberGenerator;
 import strategy.RandomLottoNumberGenerator;
-import study.ValidateUtil;
-import util.SplitUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,13 +31,11 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public LottoResults getLottoResult(String numbers, int bonusNumber) {
-        List<Integer> winningNumbers = SplitUtil.splitToNumber(numbers);
-        ValidateUtil.validateLottoWinningNumber(winningNumbers, bonusNumber);
-
+    public LottoResults getLottoResult(WinningLotto winningLotto) {
         LottoResults result = LottoResults.of();
+
         for (Lotto lotto : lottos) {
-            result.win(lotto.hasWinningNumber(winningNumbers), lotto.hasBonusNumber(bonusNumber));
+            result.win(winningLotto.getRank(lotto));
         }
 
         return result;

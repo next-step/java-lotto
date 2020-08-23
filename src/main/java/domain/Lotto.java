@@ -14,7 +14,7 @@ public class Lotto {
     private Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
-    
+
     public static Lotto of(LottoNumberGenerator lottoNumberGenerator) {
         return Lotto.of("", lottoNumberGenerator);
     }
@@ -36,15 +36,14 @@ public class Lotto {
                 .collect(toList());
     }
 
-    public int hasWinningNumber(List<Integer> winningNumbers) {
+    public int hasWinningNumber(List<LottoNumber> winningNumbers) {
         return winningNumbers.stream()
-                .map(LottoNumber::valueOf)
                 .filter(numbers::contains)
                 .map(e -> 1)
                 .reduce(0, Integer::sum);
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return numbers.contains(LottoNumber.valueOf(bonusNumber));
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }

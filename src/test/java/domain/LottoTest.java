@@ -12,6 +12,7 @@ import strategy.PassivityLottoNumberGenerator;
 import strategy.RandomLottoNumberGenerator;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
 
     private LottoNumberGenerator lottoGenerator;
+    private List<LottoNumber> winningNumbers;
 
     @BeforeEach
     void setUp() {
@@ -29,6 +31,14 @@ public class LottoTest {
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6));
+
+        winningNumbers = Arrays.asList(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(7),
+                LottoNumber.valueOf(9),
+                LottoNumber.valueOf(11));
     }
 
     @DisplayName("로또 생성")
@@ -62,21 +72,10 @@ public class LottoTest {
     void hasWinningNumber() {
         Lotto lotto = Lotto.of(lottoGenerator);
 
-        int prize = lotto.hasWinningNumber(Arrays.asList(1, 3, 5, 7, 9, 11));
+        int prize = lotto.hasWinningNumber(winningNumbers);
 
         assertThat(prize).isEqualTo(3);
     }
-
-    @DisplayName("지난주 당첨 번호가 유효하지 않으면 exception 발생")
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1, 110})
-    void hasWinningNumber_invalidNumber(int invalidNumber) {
-        Lotto lotto = Lotto.of(lottoGenerator);
-
-        assertThatThrownBy(() -> lotto.hasWinningNumber(Arrays.asList(1, 3, 5, 7, 9, invalidNumber)))
-                .isInstanceOf(InvalidRangeNumberException.class);
-    }
-
 
     @DisplayName("추가 당첨 번호 확인")
     @ParameterizedTest
@@ -84,18 +83,8 @@ public class LottoTest {
     void hasBonusNumber(int bonusNumber, boolean excpect) {
         Lotto lotto = Lotto.of(lottoGenerator);
 
-        boolean result = lotto.hasBonusNumber(bonusNumber);
+        boolean result = lotto.hasBonusNumber(LottoNumber.valueOf(bonusNumber));
 
         assertThat(result).isEqualTo(excpect);
-    }
-
-    @DisplayName("추가 당첨번호 유효하지 않으면 exception 발생")
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1, 110})
-    void hasBonusNumber_invalidBonusNumber(int invalidNumber) {
-        Lotto lotto = Lotto.of(lottoGenerator);
-
-        assertThatThrownBy(() -> lotto.hasBonusNumber(invalidNumber))
-                .isInstanceOf(InvalidRangeNumberException.class);
     }
 }

@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,7 +12,7 @@ public class LottoResultsTest {
     void win(int hitNumber, boolean matchBonus, int first, int second, int third, int fourth, int fifth) {
         LottoResults results = LottoResults.of();
 
-        results.win(hitNumber, matchBonus);
+        results.win(Rank.valueOf(hitNumber, matchBonus));
 
         assertThat(results.getLottoResults()).extracting(LottoResult::getWinningCount)
                 .containsExactly(first, second, third, fourth, fifth);
