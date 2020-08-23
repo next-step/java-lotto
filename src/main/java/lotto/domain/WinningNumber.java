@@ -35,7 +35,7 @@ public class WinningNumber {
     }
 
     public int findLottoTicket(List<Integer> winningNumbers, LottoTicket lottoTicket, int matchCount) {
-        for (int j = NUMBER_ZERO; j < lottoTicket.count(); j++) {
+        for (int j = NUMBER_ZERO; j < lottoTicket.size(); j++) {
             matchCount = containsLottoNumber(winningNumbers, matchCount, lottoTicket, j);
         }
         return matchCount;

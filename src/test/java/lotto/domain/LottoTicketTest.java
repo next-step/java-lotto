@@ -26,10 +26,10 @@ class LottoTicketTest {
     void lottoTicketSize() {
         lottoNumberGenerator = new LottoNumberGenerator();
         lottoTicket = new LottoTicket(lottoNumberGenerator);
-        assertThat(lottoTicket.count()).isEqualTo(6);
-        assertThat(lottoTicket.count()).isNotEqualTo(1);
-        assertThat(lottoTicket.count()).isNotEqualTo(-1);
-        assertThat(lottoTicket.count()).isNotEqualTo(50);
+        assertThat(lottoTicket.size()).isEqualTo(6);
+        assertThat(lottoTicket.size()).isNotEqualTo(1);
+        assertThat(lottoTicket.size()).isNotEqualTo(-1);
+        assertThat(lottoTicket.size()).isNotEqualTo(50);
     }
 
     @Test
@@ -37,7 +37,7 @@ class LottoTicketTest {
     void lottoNumberRangeCheck() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    lottoTicket.lottoNumberRangeException(lottoTicket);
+                    lottoTicket.validateLottoRange(lottoNumberGenerator.getLottoNumbers());
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.utils.CommonConstant.NUMBER_FORTY_FIVE;
-import static lotto.utils.CommonConstant.NUMBER_ONE;
+import static lotto.utils.CommonConstant.*;
 
 public class LottoNumberGenerator {
 
@@ -19,7 +18,9 @@ public class LottoNumberGenerator {
     }
 
     public LottoNumberGenerator() {
-        this.lottoNumbers = IntStream.range(NUMBER_ONE, NUMBER_FORTY_FIVE).boxed().collect(Collectors.toList());
+        this.lottoNumbers = IntStream.range(NUMBER_ONE, NUMBER_FORTY_SIX)
+                                    .boxed()
+                                    .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
     }
 
@@ -30,7 +31,11 @@ public class LottoNumberGenerator {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return lottoNumbers.stream()
+                .distinct()
+                .limit(NUMBER_SIX)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public long size() {

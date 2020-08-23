@@ -12,9 +12,10 @@ public class LottoValidationUtils {
     public static final String PRINT_INVALID_LOTTO_PRICE = "로또 복권은 1000원 단위로 구매할 수 있습니다.";
     public static final String INVALID_DUPLICATION_NUMBER = "중복된 번호는 입력할 수 없습니다.";
     public static final String INVALID_WINNING_NUMBER_SIZE = "6개의 당첨번호를 입력해주세요.";
+    public static final String PRINT_LOTTO_NUMBER = "로또 숫자는 6개 입니다.";
 
     public static void lottoNumberRangeCheck(int number) {
-        if (number < NUMBER_ONE || number < NUMBER_FORTY_FIVE) {
+        if (number < NUMBER_ONE || number > NUMBER_FORTY_FIVE) {
             throw new RuntimeException(INVALID_LOTTO_NUMBER);
         }
     }
