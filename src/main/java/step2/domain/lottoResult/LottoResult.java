@@ -21,7 +21,7 @@ public class LottoResult {
         return winCount.moneyCount(winNumber.getMoney());
     }
 
-    public void win(long hitNumber) {
+    public void win(int hitNumber) {
         if (winNumber.getHit() != hitNumber) {
             return;
         }

@@ -1,21 +1,15 @@
 package step2.domain.lotto;
 
-import step2.constant.LottoConstant;
+import step2.util.ValidateUtil;
 
 import java.util.Objects;
 
 public class LottoNumber {
-    public int lottoNumber;
+    private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        validate(lottoNumber);
+        ValidateUtil.validateLottoNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
-    }
-
-    private static void validate(int lottoNumber) {
-        if (lottoNumber < LottoConstant.MIN_LOTTO_NUMBER || lottoNumber > LottoConstant.MAX_LOTTO_NUMBER) {
-            throw new RuntimeException("범위에 벗어난 값입니다.");
-        }
     }
 
     public int getLottoNumber() {
