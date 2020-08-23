@@ -1,7 +1,7 @@
-package domain;
+package step1.domain;
 
-import view.InputView;
-import view.ResultView;
+import step1.view.InputView;
+import step1.view.ResultView;
 
 import java.util.List;
 

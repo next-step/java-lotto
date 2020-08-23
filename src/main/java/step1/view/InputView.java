@@ -1,6 +1,6 @@
-package view;
+package step1.view;
 
-import utils.StringSplitter;
+import step1.utils.StringSplitter;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package view;
+package step1.view;
 
 public class ResultView {
     private static final String ARROW = "=> ";

@@ -1,6 +1,6 @@
-package utils;
+package step1.utils;
 
-import exception.StringAdderExceptionHandler;
+import step1.exception.StringAdderExceptionHandler;
 
 import java.util.Arrays;
 import java.util.List;
