@@ -27,13 +27,13 @@ public class RankingStatisticsTest {
 	}
 
 	private static Stream<Arguments> rakingProvider() {
-		Lottos lottos = Lottos.of(Arrays.asList(Lotto.of(LottoNumbers.of(Arrays.asList(8, 10, 13, 14, 29, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 10, 13, 14, 29, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 13, 14, 29, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 14, 29, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 29, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 30))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)))));
+		Lottos lottos = Lottos.of(Arrays.asList(Lotto.of(Arrays.asList(8, 10, 13, 14, 29, 30)),
+												Lotto.of(Arrays.asList(1, 10, 13, 14, 29, 30)),
+												Lotto.of(Arrays.asList(1, 2, 13, 14, 29, 30)),
+												Lotto.of(Arrays.asList(1, 2, 3, 14, 29, 30)),
+												Lotto.of(Arrays.asList(1, 2, 3, 4, 29, 30)),
+												Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 30)),
+												Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6))));
 		Map<Ranking, Integer> expect1 = new EnumMap<>(Ranking.class);
 		expect1.put(Ranking.FIFTH, 1);
 		expect1.put(Ranking.FOURTH, 1);

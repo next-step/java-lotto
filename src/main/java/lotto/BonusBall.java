@@ -25,8 +25,8 @@ public class BonusBall {
 		return new BonusBall(Integer.parseInt(bonusBallString));
 	}
 
-	public boolean isSameNumberIncluded(List<Integer> lottoNumbers) {
-		return lottoNumbers.contains(this.bonusBall);
+	public boolean isSameNumberIncludedIn(Lotto lotto) {
+		return lotto.isSameNumberIncludedWith(this.bonusBall);
 	}
 
 	public void addInto(List<Integer> lottoNumbers) {

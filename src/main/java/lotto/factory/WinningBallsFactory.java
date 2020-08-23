@@ -9,7 +9,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import lotto.BonusBall;
-import lotto.LottoNumbers;
+import lotto.Lotto;
 import lotto.WinningBalls;
 import lotto.input.InputValidator;
 
@@ -18,16 +18,16 @@ public class WinningBallsFactory {
 
 	private static final String WINNING_NUMBER_DELIMITER = ",";
 
-	private static LottoNumbers create(List<Integer> numbers) {
-		return LottoNumbers.of(numbers);
+	private static Lotto create(List<Integer> numbers) {
+		return Lotto.of(numbers);
 	}
 
 	public static WinningBalls create(String numbersString, String bonusBallString) {
 		InputValidator.validateWinningNumbers(numbersString);
-		LottoNumbers winningNumbers = create(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
-												   .mapToInt(number -> Integer.parseInt(number.trim()))
-												   .boxed()
-												   .collect(toList()));
+		Lotto winningNumbers = create(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
+											.mapToInt(number -> Integer.parseInt(number.trim()))
+											.boxed()
+											.collect(toList()));
 		return WinningBalls.of(winningNumbers, BonusBall.of(bonusBallString));
 	}
 }

@@ -16,7 +16,7 @@ public class InputExceptionTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호를 입력하셔야 합니다.");
 
-		assertThatThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+		assertThatThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호는 6개를 입력해주세요.");
 

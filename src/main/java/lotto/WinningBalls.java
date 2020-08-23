@@ -4,27 +4,27 @@ import java.util.List;
 
 public class WinningBalls {
 
-	private final LottoNumbers winningNumbers;
+	private final Lotto winningNumbers;
 	private final BonusBall bonusBall;
 
-	private WinningBalls(LottoNumbers winningNumbers, BonusBall bonusBall) {
+	private WinningBalls(Lotto winningNumbers, BonusBall bonusBall) {
 		this.winningNumbers = winningNumbers;
 		this.bonusBall = bonusBall;
 	}
 
-	public static WinningBalls of(LottoNumbers winningNumbers, BonusBall bonusBall) {
+	public static WinningBalls of(Lotto winningNumbers, BonusBall bonusBall) {
 		return new WinningBalls(winningNumbers, bonusBall);
 	}
 
 	public List<Integer> getAllWinningNumbers() {
-		List<Integer> lottoNumbers = winningNumbers.toDto()
+		List<Integer> lottoNumbers = winningNumbers.toLottoNumbersDto()
 												   .getLottoNumbers();
 		bonusBall.addInto(lottoNumbers);
 		return lottoNumbers;
 	}
 
-	public boolean isSameNumberIncludedWithBonusBall(List<Integer> lottoNumbersOfUser) {
-		return bonusBall.isSameNumberIncluded(lottoNumbersOfUser);
+	public boolean isSameNumberIncludedWithBonusBall(Lotto lotto) {
+		return bonusBall.isSameNumberIncludedIn(lotto);
 	}
 
 }

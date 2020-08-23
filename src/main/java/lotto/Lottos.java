@@ -18,7 +18,7 @@ public class Lottos {
 
 	public List<Ranking> getRankings(WinningBalls winningBalls) {
 		return lottos.stream()
-					 .map(lottoOfUser -> WinningArgument.of(lottoOfUser.getLottoNumbersDto(), winningBalls))
+					 .map(lottoOfUser -> WinningArgument.of(lottoOfUser, winningBalls))
 					 .map(Ranking::getRakingOf)
 					 .collect(toList());
 	}
@@ -29,7 +29,7 @@ public class Lottos {
 
 	public List<LottoNumbersDto> getLottoNumbers() {
 		return lottos.stream()
-					 .map(lotto -> lotto.getLottoNumbersDto())
+					 .map(lotto -> lotto.toLottoNumbersDto())
 					 .collect(toList());
 	}
 }

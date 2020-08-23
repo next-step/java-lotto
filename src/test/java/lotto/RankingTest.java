@@ -13,14 +13,14 @@ public class RankingTest {
 
 	@Test
 	public void getRankingTest() {
-		Lottos lottos = Lottos.of(Arrays.asList(Lotto.of(LottoNumbers.of(Arrays.asList(1, 5, 11, 24, 35, 44))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 5, 11, 34, 35, 41))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(4, 6, 10, 24, 35, 41))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 5, 11, 34, 36, 42))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 5, 11, 34, 36, 41))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(3, 7, 11, 29, 30, 41))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(3, 5, 11, 29, 30, 41))),
-												Lotto.of(LottoNumbers.of(Arrays.asList(1, 5, 10, 11, 34, 41)))));
+		Lottos lottos = Lottos.of(Arrays.asList(Lotto.of(Arrays.asList(1, 5, 11, 24, 35, 44)),
+												Lotto.of(Arrays.asList(1, 5, 11, 34, 35, 41)),
+												Lotto.of(Arrays.asList(4, 6, 10, 24, 35, 41)),
+												Lotto.of(Arrays.asList(1, 5, 11, 34, 36, 42)),
+												Lotto.of(Arrays.asList(1, 5, 11, 34, 36, 41)),
+												Lotto.of(Arrays.asList(3, 7, 11, 29, 30, 41)),
+												Lotto.of(Arrays.asList(3, 5, 11, 29, 30, 41)),
+												Lotto.of(Arrays.asList(1, 5, 10, 11, 34, 41))));
 
 		WinningBalls winningBalls = WinningBallsFactory.create("1,5,11,34,36,42", "10");
 		List<Ranking> rankings = lottos.getRankings(winningBalls);
