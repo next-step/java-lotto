@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.domain.LottoStore.LOTTO_PRICE;
+
 public class Rankings {
     private static final int ZERO = 0;
 
@@ -32,12 +34,16 @@ public class Rankings {
                 .reduce(ZERO, Integer::sum);
     }
 
+    public double findProfitRate() {
+        return (double) totalPrizeMoney() / (LOTTO_PRICE * rankings.size());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Rankings rankings1 = (Rankings) o;
-        return Objects.equals(rankings, rankings1.rankings);
+        Rankings that = (Rankings) o;
+        return Objects.equals(rankings, that.rankings);
     }
 
     @Override
