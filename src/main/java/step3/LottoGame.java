@@ -11,6 +11,7 @@ public class LottoGame {
 	private final LottoIssuer issuer = new LottoIssuer();
 
 	private static final int LOTTO_PRICE = 1000;
+	private static final String LOTTO_PRICE_PHRASES = "로또 구입 금액은 1000원 단위만 가능합니다.";
 
 	public List<Lotto> startLottoGame() {
 		int price = InputView.inputPrice();
@@ -30,7 +31,7 @@ public class LottoGame {
 
 	private void validPrice(int price) {
 		if (price == 0 || price % LOTTO_PRICE != 0) {
-			throw new IllegalArgumentException("로또 구입 금액은 1000원 단위만 가능합니다.");
+			throw new IllegalArgumentException(LOTTO_PRICE_PHRASES);
 		}
 	}
 }

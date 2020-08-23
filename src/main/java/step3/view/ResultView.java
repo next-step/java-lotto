@@ -40,7 +40,7 @@ public class ResultView {
 	}
 
 	public static void printYield(BigDecimal yield) {
-		System.out.println("총 수익률은 "+ String.format("%.2f", yield) + "입니다.");
+		System.out.println("총 수익률은 "+ yield + "입니다.");
 	}
 
 }

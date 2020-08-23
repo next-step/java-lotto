@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 
 public class LottoIssuer {
 	private static final List<LottoNumber> LOTTO_VALUES = new ArrayList<>();
-	private static final int MAX_LOTTO_VALUE = 45;
 	private static final int LOTTO_NUMBER_LENGTH = 6;
 
 	static {
-		for (int i = 0; i < MAX_LOTTO_VALUE; i++) {
+		for (int i = 0; i < LottoNumber.MAX_LOTTO_VALUE; i++) {
 			LOTTO_VALUES.add(new LottoNumber(i+1));
 		}
 	}

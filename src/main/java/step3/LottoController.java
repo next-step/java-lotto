@@ -8,7 +8,6 @@ import java.util.List;
 public class LottoController {
 	public static void main(String[] args) {
 		LottoGame lottoGame = new LottoGame();
-
 		List<Lotto> issueLottos = lottoGame.startLottoGame();
 		ResultView.printLottos(issueLottos);
 

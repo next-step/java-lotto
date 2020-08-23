@@ -47,8 +47,4 @@ public enum LottoWinning {
 		return matchingCount == winningCount;
 	}
 
-	public int calcReward(int count) {
-		return count * this.reward;
-	}
-
 }

@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ public class LottoStatistic {
 	private final Lotto winningLotto;
 	private final int winningBonus;
 	private static final Map<LottoWinning, Integer> lottoStat = new HashMap<>();
+	private static final String INIT_SUM = "0";
+	private static final int SCALE = 2;
 
 	public LottoStatistic(Lotto winningLotto, int winningBonus) {
 		this.winningLotto = winningLotto;
@@ -34,11 +37,12 @@ public class LottoStatistic {
 	}
 
 	public BigDecimal calcYield(int price) {
-		BigDecimal sum = BigDecimal.ZERO;
+		BigDecimal sum = new BigDecimal(INIT_SUM);
 		for (LottoWinning winning : lottoStat.keySet()) {
-			sum.add(BigDecimal.valueOf(lottoStat.get(winning) * winning.getReward()));
+			int s = lottoStat.get(winning) * winning.getReward();
+			sum = sum.add(BigDecimal.valueOf(s));
 		}
-		return sum.divide(BigDecimal.valueOf(price));
+		return sum.divide(BigDecimal.valueOf(price), SCALE, RoundingMode.HALF_EVEN);
 	}
 
 }
