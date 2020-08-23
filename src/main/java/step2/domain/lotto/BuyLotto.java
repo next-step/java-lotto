@@ -23,6 +23,6 @@ public class BuyLotto {
     }
 
     public Lottos lottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        return Lottos.makeLottos(getLottoQuantity(), lottoNumberGenerator);
+        return Lottos.createLottos(getLottoQuantity(), lottoNumberGenerator);
     }
 }
