@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoTicketTest {
+class LottoTicketTest {
 
     @Test
     @DisplayName("로또 티켓 숫자가 6개인지 테스트")
