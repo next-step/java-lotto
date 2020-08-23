@@ -2,7 +2,6 @@ package step3.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.model.LottoTicket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -16,7 +15,7 @@ public class LottoTicketTest {
     public void inputString_parsingTest() {
         String value = "[4, 12, 32, 25, 11, 22]";
         lotto = new LottoTicket(value);
-        assertThat(lotto.numbers()).contains(4, 12, 32, 25, 11, 22);
+        assertThat(lotto.getNumbers()).contains(4, 12, 32, 25, 11, 22);
     }
 
     @Test

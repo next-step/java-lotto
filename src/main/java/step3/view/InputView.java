@@ -22,7 +22,6 @@ public class InputView {
     }
 
     public static int checkBonusBallNumber() {
-        scanner.skip("\\R");
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }

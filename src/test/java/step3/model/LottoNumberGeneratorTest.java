@@ -14,7 +14,7 @@ public class LottoNumberGeneratorTest {
         LottoNumberGenerator g1 = new LottoNumberGenerator();
         LottoTicket a1 = g1.generatedLottoTicketByRandom();
 
-        assertThat(a1.numbers()
+        assertThat(a1.getNumbers()
                 .stream()
                 .mapToInt(v -> v)
                 .max()
