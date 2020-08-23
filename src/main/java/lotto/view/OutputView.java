@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 public class OutputView {
     private static final int DEFAULT_SHOW_MATCH_COUNT = 0;
     private static final double RESULT_REFERENCE_RATE = 1.00D;
-    private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_BUY_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다. \n";
     private static final String LOTTO_NUMBERS_MESSAGE = "[%s]";
     private static final String WINNING_INTRO_MESSAGE = "\n당첨 통계 \n---------";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
@@ -20,9 +20,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.number() + LOTTO_BUY_COUNT_MESSAGE);
+    public static void printLottoTicketsCount(int selectBuyCount, int autoBuyCount) {
+        System.out.printf(LOTTO_BUY_COUNT_MESSAGE, selectBuyCount, autoBuyCount);
+    }
 
+    public static void printLottoTickets(LottoTickets lottoTickets) {
         List<String> lottoNumbers = getLottoNumberResult(lottoTickets);
         lottoNumbers.forEach(System.out::println);
         System.out.println();

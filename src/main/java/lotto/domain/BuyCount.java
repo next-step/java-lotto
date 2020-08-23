@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.LottoExceptionMessage;
 import utils.StringUtils;
 
+import java.util.Objects;
+
 public class BuyCount {
     public static final int DEFAULT_LOTTO_MONEY_UNIT = 1_000;
 
@@ -12,9 +14,13 @@ public class BuyCount {
         this.buyCount = buyCount;
     }
 
-    public static BuyCount of(String lottoMoney) {
+    public static BuyCount fromMoney(String lottoMoney) {
         int buyCount = getValidLottoMoney(lottoMoney) / DEFAULT_LOTTO_MONEY_UNIT;
 
+        return new BuyCount(buyCount);
+    }
+
+    public static BuyCount from(int buyCount) {
         return new BuyCount(buyCount);
     }
 
@@ -31,11 +37,32 @@ public class BuyCount {
         }
     }
 
+    public int get() {
+        return buyCount;
+    }
+
     public boolean canBuy() {
         return buyCount > 0;
     }
 
     public void subtract() {
         buyCount--;
+    }
+
+    public BuyCount subtract(int count) {
+        return BuyCount.from(buyCount - count);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BuyCount buyCount1 = (BuyCount) o;
+        return buyCount == buyCount1.buyCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(buyCount);
     }
 }

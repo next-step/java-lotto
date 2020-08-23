@@ -6,25 +6,31 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* 테스트용 Maker */
 public class LottoTicketSelectMaker implements LottoTicketMaker {
     private static final String DELIMITER = ",";
 
-    private List<Integer> selectedNumber;
+    private List<List<Integer>> selectLottoNumbers;
 
-    public LottoTicketSelectMaker(String selectedLottoNumber) {
-        this.selectedNumber = Arrays.stream(selectedLottoNumber.split(DELIMITER))
+    public LottoTicketSelectMaker(List<String> selectLottoNumbers) {
+        this.selectLottoNumbers = selectLottoNumbers.stream()
+                .map(this::makeIntegerList)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> makeIntegerList(String selectLottoNumber) {
+        return Arrays.stream(selectLottoNumber.split(DELIMITER))
                 .map(String::trim)
                 .map(StringUtils::toNumber)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public LottoTicket create() {
-        List<LottoNumber> lottoNumbers = selectedNumber.stream()
-                .map(LottoNumber::of)
+    public List<LottoTicket> create(BuyCount buyCount) {
+        return selectLottoNumbers.stream()
+                .map(list -> list.stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toList()))
+                .map(LottoTicket::of)
                 .collect(Collectors.toList());
-
-        return new LottoTicket(lottoNumbers);
     }
 }

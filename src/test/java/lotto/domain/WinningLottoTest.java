@@ -2,12 +2,10 @@ package lotto.domain;
 
 import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -82,7 +80,9 @@ public class WinningLottoTest {
     @MethodSource("makeLottoNumbersForWinningRank")
     void getWinningRank_with_bonus_number(String selectedLottoNumber, String winningNumber,
                                           String bonusNumber, LottoRank lottoRank) {
-        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(selectedLottoNumber));
+        LottoTicketMaker lottoTicketMaker = new LottoTicketOneSelectMaker(selectedLottoNumber);
+
+        LottoTicket lottoTicket = lottoTicketMaker.create(BuyCount.from(1)).get(0);
 
         assertThat(WinningLotto.of(winningNumber, bonusNumber).getWinningRank(lottoTicket)).isEqualTo(lottoRank);
     }

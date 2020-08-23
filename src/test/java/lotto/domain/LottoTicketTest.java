@@ -1,7 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,44 +14,56 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketTest {
     private static final LottoTicketMaker LOTTO_TICKET_RANDOM_MAKER = new LottoTicketRandomMaker();
 
-    @DisplayName("로또 번호 랜덤 생성 테스트")
-    @Test
-    void create() {
-        LottoTicket lottoTicket = LottoTicket.create(LOTTO_TICKET_RANDOM_MAKER);
-        List<Integer> lottoNumbers = lottoTicket.getNumbers();
+    @DisplayName("로또 생성 테스트")
+    @ParameterizedTest
+    @MethodSource("makeOfTicketValidData")
+    void of(List<LottoNumber> lottoNumbers) {
+        LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 
-        assertThat(lottoNumbers).hasSize(LottoTicketMaker.DEFAULT_LOTTO_NUMBER_COUNT);
-        assertThat(lottoNumbers.stream()
+        List<Integer> actualLottoNumbers = lottoTicket.getNumbers();
+
+        assertThat(actualLottoNumbers).hasSize(LottoTicketMaker.DEFAULT_LOTTO_NUMBER_COUNT);
+        assertThat(actualLottoNumbers.stream()
                 .filter(number -> number > LottoNumber.MAX_VALUE || number < LottoNumber.MIN_VALUE)
                 .findAny()).isEmpty();
     }
 
-    @DisplayName("로또 번호 고정 생성 테스트")
-    @ParameterizedTest
-    @MethodSource("makeSelectNumber")
-    void create_tickets_number_select(String selectedLottoNumber, List<Integer> lottoNumbers) {
-        LottoTicket lottoTicket = LottoTicket.create(new LottoTicketSelectMaker(selectedLottoNumber));
-
-        assertThat(lottoTicket.getNumbers()).containsExactlyElementsOf(lottoNumbers);
+    private static Stream<Arguments> makeOfTicketValidData() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(LottoNumber.of(1), LottoNumber.of(23), LottoNumber.of(41)
+                        , LottoNumber.of(21), LottoNumber.of(3), LottoNumber.of(17))),
+                Arguments.of(Arrays.asList(LottoNumber.of(7), LottoNumber.of(14), LottoNumber.of(15)
+                        , LottoNumber.of(9), LottoNumber.of(42), LottoNumber.of(38)))
+        );
     }
 
-    private static Stream<Arguments> makeSelectNumber() {
+    @DisplayName("로또 수동 번호 오입력 테스트")
+    @ParameterizedTest
+    @MethodSource("makeOfTicketInvalidData")
+    void of_ticket_invalid_input(List<LottoNumber> lottoNumbers) {
+        String expectedExceptionMessage = LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT;
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoTicket.of(lottoNumbers))
+                .withMessage(expectedExceptionMessage);
+    }
+
+    private static Stream<Arguments> makeOfTicketInvalidData() {
         return Stream.of(
-                Arguments.of("1,3,4,5,6", Arrays.asList(1, 3, 4, 5, 6)),
-                Arguments.of("23,1,5,30,41", Arrays.asList(23, 1, 5, 30, 41)),
-                Arguments.of("27,7,17,37,14,24", Arrays.asList(27, 7, 17, 37, 14, 24))
+                Arguments.of(Arrays.asList(LottoNumber.of(3), LottoNumber.of(3), LottoNumber.of(3)))
         );
     }
 
     @DisplayName("로또 당첨 번호 일치 개수 테스트")
     @ParameterizedTest
-    @MethodSource("makeWinningLotto")
-    void getMatchCountWith(List<LottoNumber> winningLotto) {
-        LottoTicket lottoTicket = LottoTicket.create(LOTTO_TICKET_RANDOM_MAKER);
+    @MethodSource("makeWinningLottoData")
+    void getMatchCountWith(List<LottoNumber> selectLottoNumber, List<LottoNumber> winningLotto) {
+        LottoTicket lottoTicket = LottoTicket.of(selectLottoNumber);
         long matchCount = lottoTicket.getMatchCountWith(winningLotto);
 
         List<Integer> originLottoNumbers = lottoTicket.getNumbers();
@@ -66,7 +78,7 @@ public class LottoTicketTest {
         assertThat(matchCount).isEqualTo(expectedMatchCount);
     }
 
-    private static Stream<Arguments> makeWinningLotto() {
+    private static Stream<Arguments> makeWinningLottoData() {
         return Stream.iterate(0, i -> i++)
                 .limit(5)
                 .map(i -> makeWinningLottoRandom());
@@ -80,6 +92,31 @@ public class LottoTicketTest {
                 .limit(6)
                 .forEach(i -> winningLotto.add(LottoNumber.of(random.nextInt(45) + 1)));
 
-        return Arguments.of(winningLotto);
+        return Arguments.of(
+                Arrays.asList(LottoNumber.of(1), LottoNumber.of(23), LottoNumber.of(41)
+                        , LottoNumber.of(21), LottoNumber.of(3), LottoNumber.of(17))
+                , winningLotto);
+    }
+
+    @DisplayName("LottoTicket에 특정 로또 번호가 존재하는지 확인 테스트")
+    @ParameterizedTest
+    @MethodSource("makeGetMatchWithData")
+    void getMatchWith(String lottoNumberInput, int Number, boolean isMatch) {
+        LottoTicketMaker lottoTicketMaker = new LottoTicketOneSelectMaker(lottoNumberInput);
+        List<LottoTicket> lottoTickets = lottoTicketMaker.create(BuyCount.from(1));
+
+        LottoTicket testLottoTicket = lottoTickets.get(0);
+        LottoNumber lottoNumber = LottoNumber.of(Number);
+
+        assertThat(testLottoTicket.getMatchWith(lottoNumber)).isEqualTo(isMatch);
+    }
+
+    private static Stream<Arguments> makeGetMatchWithData() {
+        return Stream.of(
+                Arguments.of("1,3,5,7,9,11", 3, true),
+                Arguments.of("21,10,25,41,9,33", 1, false),
+                Arguments.of("44,16,23,2,45,41", 45, true),
+                Arguments.of("2,4,8,16,32,1", 17, false)
+        );
     }
 }
