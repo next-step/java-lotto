@@ -8,10 +8,27 @@ public class LottoStat {
 
     public LottoStat() {
         rank = new HashMap<>();
+        initializeRank();
     }
 
-    public void enterLottoTicket(List<LottoTicket> ticketList) {
-
+    private void initializeRank() {
+        for (Rank r1 : Rank.values()) {
+            rank.putIfAbsent(r1, 0);
+        }
     }
 
+    public void enterLottoTicketScore(List<LottoTicket> ticketList, String[] winningTicket, int bonusBallNumber) {
+        for (LottoTicket value : ticketList) {
+            rank.put(Rank.valueOf(value.matchedNumber(winningTicket)
+                    , value.isBonusBallIncluded(bonusBallNumber)
+                    ), rank.get(Rank.valueOf(value.matchedNumber(winningTicket)
+                    , value.isBonusBallIncluded(bonusBallNumber)
+                    )) + 1
+            );
+        }
+    }
+
+    public int getNumberOfGrade(Rank value) {
+        return rank.get(value);
+    }
 }

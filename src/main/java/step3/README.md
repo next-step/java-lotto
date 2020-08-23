@@ -17,9 +17,10 @@
     - [x] 보너스볼 일치여부 분리하는 내용 필요
     
 - Lotto Stat 구현
-    - [ ] LottoTicket 입력 메소드로 받기
-    - [ ] LottoTicket 결과에 대한 내용을 내부 컬렉션에 저장
-    - [ ] 등수에 대한 입력이 들어올 때, 해당되는 인원수 return 구현
+    - [x] LottoTicket 입력 메소드로 받기
+    - [x] LottoTicket 결과에 대한 내용을 내부 컬렉션에 저장
+    - [x] 등수에 대한 입력이 들어올 때, 해당되는 인원수 return 구현
+    - [ ] 수익률에 대한 method 구현
     
 - InputView 구현
     - [x] 금액부 입력 출력 및 입력
