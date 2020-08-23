@@ -23,7 +23,7 @@ public class StringAddCalculatorTest {
 
     @Test
     void splitAndSum_쉼표_또는_콜론_구분자() {
-        int result = StringAddCalculator.splitAndSum2("1,2:3");
+        int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 

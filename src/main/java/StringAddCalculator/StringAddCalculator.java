@@ -15,8 +15,12 @@ public class StringAddCalculator {
             return ADD_NULL_OR_BLANK;
         }
         int result = toInt(toSplits(expression)[0]);
-        for (int i = 1; i < toSplits(expression).length; i++) {
-            int second = toInt(toSplits(expression)[i]);
+        for (int i = 1; i < toSplits(expression).length; i += 2) {
+            String delimiter = toSplits(expression)[i];
+            int second = toInt(toSplits(expression)[i + 1]);
+            if (!checkDelimiter.isRightDelimiter(delimiter)) {
+                return ADD_NULL_OR_BLANK;
+            }
             result = result + second;
         }
         return result;
@@ -30,31 +34,7 @@ public class StringAddCalculator {
         if (checkString.isNullOrBlank(expression)) {
             expression = "0";
         }
-        String[] expressions = expression.split(",");
+        String[] expressions = expression.split("");
         return expressions;
     }
-
-    public static int splitAndSum2(String expression) {
-        String[] initExpression = expression.split("");
-        int result = toInt(initExpression[0]);
-        for (int i = 1; i < initExpression.length; i += 2) {
-            String delimiter = initExpression[i];
-            int second = toInt(initExpression[i + 1]);
-            if (!checkDelimiter.isRightDelimiter(delimiter)) {
-                return ADD_NULL_OR_BLANK;
-            }
-            result = result + second;
-        }
-        return result;
-    }
-//
-//            for (int j = 0; j < delimiters.size(); j++) {
-//                if (delimiters.get(j) == Delimiter.of(delimiter).toString()) {
-//                    String[] expressions = expression.split(regex.toString());
-//
-//                    initExpressions = expressions;
-//                }
-//                return initExpressions;
-//            }
-
 }
