@@ -1,10 +1,17 @@
 package StringAddCalculator;
 
+import StringAddCalculator.utils.checkString;
+
 public class StringAddCalculator {
     public static int splitAndSum(String expression) {
-        int first = toInt(toSplits(expression)[0]);
-        int second = toInt(toSplits(expression)[1]) ;
-        int result = first + second;
+        if (checkString.isNullOrBlank(expression)) {
+            return 0;
+        }
+        int result = toInt(toSplits(expression)[0]);
+        for (int i = 1; i < toSplits(expression).length; i++) {
+            int second = toInt(toSplits(expression)[i]);
+            result = result + second;
+        }
         return result;
     }
 
@@ -26,11 +33,15 @@ public class StringAddCalculator {
     }
 
     private static String[] toSplits(String expression) {
+        if (checkString.isNullOrBlank(expression)) {
+            expression = "0";
+        }
         String[] expressions = expression.split(",");
+        return expressions;
+
        /* if (regex.isValid( )) {
             expressions = expression.split(regex);
         }
         */
-        return expressions;
     }
 }
