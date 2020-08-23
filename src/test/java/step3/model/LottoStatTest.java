@@ -2,7 +2,6 @@ package step3.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -14,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoStatTest {
 
     private LottoStat stat;
-    private LottoNumberGenerator generator;
 
     @BeforeEach
     @DisplayName("테스트 시작 전 테스트 데이터 미리 입력")
