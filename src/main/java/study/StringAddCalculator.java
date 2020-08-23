@@ -6,6 +6,9 @@ public class StringAddCalculator {
     private static final Integer INTEGER_ZERO = 0;
     private static final String VALIDATE_NUMBER_MESSAGE = "음수는 입력할 수 없습니다.";
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String str) {
         if (StringUtils.isBlank(str)) {
             return INTEGER_ZERO;
