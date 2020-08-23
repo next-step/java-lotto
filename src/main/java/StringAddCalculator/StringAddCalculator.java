@@ -6,9 +6,17 @@ public class StringAddCalculator {
         for (int i = 0; i < splitToExpression(expression).length; i += 2){
             String sumOperator = splitToExpression(expression)[i];
             int second = toInt(splitToExpression(expression)[i+1]);
-            first = calculate(expression);
+            first = calculate(first, sumOperator, second);
         }
         return first;
+    }
+
+    private static int calculate(int first, String sumOperator, int second) {
+        int result = 0;
+        if (sumOperator.isValid( )) {
+            result = first + second;
+        }
+        return result;
     }
 
     private static int toInt(String expression) {
