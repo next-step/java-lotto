@@ -14,13 +14,13 @@ public class BuyCount {
         this.buyCount = buyCount;
     }
 
-    public static BuyCount of(String lottoMoney) {
+    public static BuyCount fromMoney(String lottoMoney) {
         int buyCount = getValidLottoMoney(lottoMoney) / DEFAULT_LOTTO_MONEY_UNIT;
 
         return new BuyCount(buyCount);
     }
 
-    public static BuyCount of(int buyCount) {
+    public static BuyCount from(int buyCount) {
         return new BuyCount(buyCount);
     }
 
@@ -50,7 +50,7 @@ public class BuyCount {
     }
 
     public BuyCount subtract(int count) {
-        return BuyCount.of(buyCount - count);
+        return BuyCount.from(buyCount - count);
     }
 
     @Override

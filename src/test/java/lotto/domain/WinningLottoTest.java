@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,7 +82,7 @@ public class WinningLottoTest {
                                           String bonusNumber, LottoRank lottoRank) {
         LottoTicketMaker lottoTicketMaker = new LottoTicketOneSelectMaker(selectedLottoNumber);
 
-        LottoTicket lottoTicket = lottoTicketMaker.create(BuyCount.of(1)).get(0);
+        LottoTicket lottoTicket = lottoTicketMaker.create(BuyCount.from(1)).get(0);
 
         assertThat(WinningLotto.of(winningNumber, bonusNumber).getWinningRank(lottoTicket)).isEqualTo(lottoRank);
     }

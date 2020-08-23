@@ -17,8 +17,8 @@ public class LottoController {
     }
 
     private static LottoTickets getLottoTickets() {
-        BuyCount totalBuyCount = BuyCount.of(InputView.scanLottoMoney());
-        BuyCount selectBuyCount = BuyCount.of(InputView.scanSelectLottoBuyCount());
+        BuyCount totalBuyCount = BuyCount.fromMoney(InputView.scanLottoMoney());
+        BuyCount selectBuyCount = BuyCount.from(InputView.scanSelectLottoBuyCount());
 
         List<String> lottoNumbers = InputView.scanLottoNumbers(selectBuyCount.get());
 

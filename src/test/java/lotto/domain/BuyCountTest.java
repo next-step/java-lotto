@@ -14,7 +14,7 @@ public class BuyCountTest {
     @ParameterizedTest
     @ValueSource(strings = {"12000", "1000"})
     void of_money(String money) {
-        assertThatCode(() -> BuyCount.of(money))
+        assertThatCode(() -> BuyCount.fromMoney(money))
                 .doesNotThrowAnyException();
     }
 
@@ -22,10 +22,10 @@ public class BuyCountTest {
     @ParameterizedTest
     @ValueSource(strings = {"50", "-1"})
     void of_count(int count) {
-        assertThatCode(() -> BuyCount.of(count))
+        assertThatCode(() -> BuyCount.from(count))
                 .doesNotThrowAnyException();
 
-        assertThat(BuyCount.of(count).get()).isEqualTo(count);
+        assertThat(BuyCount.from(count).get()).isEqualTo(count);
     }
 
     @DisplayName("로또 구입 금액 1000단위 아닌 입력 테스트")
@@ -33,7 +33,7 @@ public class BuyCountTest {
     @ValueSource(strings = {"333", "10", "11001"})
     void of_invalid_money_unit(String money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> BuyCount.of(money))
+                .isThrownBy(() -> BuyCount.fromMoney(money))
                 .withMessage(LottoExceptionMessage.INVALID_MONEY_UNIT);
     }
 
@@ -42,7 +42,7 @@ public class BuyCountTest {
     @ValueSource(strings = {"O", "얼마샀더라", "흠"})
     void of_not_number(String money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> BuyCount.of(money))
+                .isThrownBy(() -> BuyCount.fromMoney(money))
                 .withMessage("숫자를 제대로 입력해주세요.");
     }
 
@@ -50,7 +50,7 @@ public class BuyCountTest {
     @ParameterizedTest
     @CsvSource(value = {"4000,true", "333000,true", "1000,true", "0,false"})
     void getBuyCount(String lottoMoney, boolean canBuy) {
-        BuyCount buyCount = BuyCount.of(lottoMoney);
+        BuyCount buyCount = BuyCount.fromMoney(lottoMoney);
 
         boolean actual = buyCount.canBuy();
 
@@ -61,10 +61,10 @@ public class BuyCountTest {
     @ParameterizedTest
     @CsvSource(value = {"4:1:3", "100:-1:101", "320:8:312"}, delimiter = ':')
     void subtract_number(int count, int subtractingCount, int expectedResult) {
-        BuyCount buyCount = BuyCount.of(count);
+        BuyCount buyCount = BuyCount.from(count);
 
         BuyCount actualBuyCount = buyCount.subtract(subtractingCount);
 
-        assertThat(actualBuyCount).isEqualTo(BuyCount.of(expectedResult));
+        assertThat(actualBuyCount).isEqualTo(BuyCount.from(expectedResult));
     }
 }

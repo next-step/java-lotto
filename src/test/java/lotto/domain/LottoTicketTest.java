@@ -103,7 +103,7 @@ public class LottoTicketTest {
     @MethodSource("makeGetMatchWithData")
     void getMatchWith(String lottoNumberInput, int Number, boolean isMatch) {
         LottoTicketMaker lottoTicketMaker = new LottoTicketOneSelectMaker(lottoNumberInput);
-        List<LottoTicket> lottoTickets = lottoTicketMaker.create(BuyCount.of(1));
+        List<LottoTicket> lottoTickets = lottoTicketMaker.create(BuyCount.from(1));
 
         LottoTicket testLottoTicket = lottoTickets.get(0);
         LottoNumber lottoNumber = LottoNumber.of(Number);
