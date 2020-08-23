@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
+import lotto.utils.LottoValidationUtils;
 import lotto.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class WinningNumber {
 
     public List<Integer> setWinningNumber(String winningNumber) {
         String[] winningNumberArray = new StringUtils(winningNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
-        LottoException.invalidWinningNumberSizeException(winningNumberArray);
+        LottoValidationUtils.invalidWinningNumberSizeException(winningNumberArray);
         isWinningNumberAdd(winningNumberArray);
         return winningNumbers;
     }

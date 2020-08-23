@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
+import lotto.utils.LottoValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class LottoTicket {
 
     public void lottoNumberRangeException(LottoTicket lottoTicket) {
         for (int number : lottoTicket.lottoTicket) {
-            LottoException.lottoNumberRangeCheck(number);
+            LottoValidationUtils.lottoNumberRangeCheck(number);
         }
     }
 

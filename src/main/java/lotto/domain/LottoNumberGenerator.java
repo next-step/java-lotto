@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
+import lotto.utils.LottoValidationUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +25,7 @@ public class LottoNumberGenerator {
 
     public void validateLottoRange(LottoNumberGenerator lottoNumberGenerator) {
         for (int number : lottoNumberGenerator.lottoNumbers) {
-            LottoException.lottoNumberRangeCheck(number);
+            LottoValidationUtils.lottoNumberRangeCheck(number);
         }
     }
 

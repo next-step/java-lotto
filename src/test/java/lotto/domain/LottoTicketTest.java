@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.exception.LottoException.INVALID_LOTTO_NUMBER;
+import static lotto.utils.LottoValidationUtils.INVALID_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 

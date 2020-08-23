@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
+import lotto.utils.LottoValidationUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.exception.LottoException.*;
+import static lotto.utils.LottoValidationUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -39,7 +39,7 @@ class WinningNumberTest {
     void inputWinningNumberDistint() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoException.inputWinningNumberDuplicationException(new String[]{"1", "2", "3", "3", "4", "10"});
+                    LottoValidationUtils.inputWinningNumberDuplicationException(new String[]{"1", "2", "3", "3", "4", "10"});
                 }).withMessage(INVALID_DUPLICATION_NUMBER);
     }
 
@@ -48,7 +48,7 @@ class WinningNumberTest {
     void invalidWinningNumber() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    LottoException.invalidWinningNumberSizeException(new String[]{"1", "2", "3"});
+                    LottoValidationUtils.invalidWinningNumberSizeException(new String[]{"1", "2", "3"});
                 }).withMessageMatching(INVALID_WINNING_NUMBER_SIZE);
     }
 
@@ -57,7 +57,7 @@ class WinningNumberTest {
     void invalidWinningNumbers() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    LottoException.winningNumberRangeException(new String[]{"-1", "50", "46"});
+                    LottoValidationUtils.winningNumberRangeException(new String[]{"-1", "50", "46"});
                 }).withMessageMatching(INVALID_LOTTO_NUMBER);
     }
 

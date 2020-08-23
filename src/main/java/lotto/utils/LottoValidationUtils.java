@@ -1,4 +1,4 @@
-package lotto.exception;
+package lotto.utils;
 
 import lotto.utils.StringUtils;
 
@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static lotto.utils.CommonConstant.*;
 
-public class LottoException {
+public class LottoValidationUtils {
 
     public static final String INVALID_LOTTO_NUMBER = "유효하지 않은 번호입니다.";
     public static final String PRINT_INVALID_LOTTO_PRICE = "로또 복권은 1000원 단위로 구매할 수 있습니다.";
