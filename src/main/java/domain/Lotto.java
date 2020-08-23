@@ -3,16 +3,14 @@ package domain;
 import strategy.LottoNumberGenerator;
 import study.ValidateUtil;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
-    private List<LottoNumber> numbers;
+    private Set<LottoNumber> numbers;
 
-    private Lotto(List<LottoNumber> numbers) {
+    private Lotto(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
@@ -21,11 +19,7 @@ public class Lotto {
     }
 
     public static Lotto of(String numbers, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator
-                .generator(numbers)
-                .stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getValue))
-                .collect(toList());
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(lottoNumberGenerator.generator(numbers));
         ValidateUtil.validateLottoNumberCount(lottoNumbers);
 
         return new Lotto(lottoNumbers);
@@ -41,7 +35,7 @@ public class Lotto {
         return numbers.contains(target);
     }
 
-    public Integer getWinningCount(Lotto winningNumbers) {
+    public Integer getMatchCount(Lotto winningNumbers) {
         return numbers.stream()
                 .filter(winningNumbers::contains)
                 .map(e -> 1)

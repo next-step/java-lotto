@@ -3,6 +3,7 @@ package study;
 import exception.InvalidWinningNumberException;
 import exception.LottoCountException;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class ValidateUtil {
         return expression == null || expression.isEmpty();
     }
 
-    public static <T> void validateLottoNumberCount(List<T> numbers) {
+    public static <T> void validateLottoNumberCount(Collection<T> numbers) {
         if (numbers.size() != LOTTO_NUMBERS) {
             throw new LottoCountException();
         }

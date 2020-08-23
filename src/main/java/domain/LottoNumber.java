@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
 
@@ -48,5 +48,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(lottoNumber, o.getValue());
     }
 }
