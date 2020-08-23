@@ -40,8 +40,8 @@ public class Statistics {
 
 	public Map<Ranking, Integer> getWinningResult() {
 		return Stream.of(Ranking.values())
-					 .filter(ranking -> ranking.isView())
-					 .sorted(Comparator.comparingInt(Ranking::getSameCount))
+					 .filter(ranking -> ranking != Ranking.FAILURE)
+					 .sorted(Comparator.comparingLong(Ranking::getPrizeMoney))
 					 .collect(toMap(identity(),
 									ranking -> rankingMap.getOrDefault(ranking, RANKING_MAP_DEFAULT_VALUE),
 									(ranking, count) -> count,

@@ -4,6 +4,8 @@ import static java.util.stream.Collectors.joining;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +17,8 @@ import lotto.result.Statistics;
 public class OutputView {
 	private static final String PURCHASE_COUNT_FORMAT = "%d개를 구매했습니다.";
 	private static final String WINNING_STATISTICS_FORMAT = "\n당첨 통계\n---------- \n";
-	private static final String RANKING_RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
+	private static final String RANKING_RESULT_FORMAT = "%d개 일치 %s(%d원) - %d개";
+	private static final String BONUS_BALL_CONTENT = "보너스 볼 일치";
 	private static final String EARNINGS_RATE_FORMAT = "총 수익률은 %.03f입니다.";
 
 	public static void outputPurchaseLottos(Lottos lottos) {
@@ -33,7 +36,9 @@ public class OutputView {
 		result.keySet()
 			  .stream()
 			  .forEach(ranking -> {
-				  System.out.println(String.format(RANKING_RESULT_FORMAT, ranking.getSameCount(), ranking.getPrizeMoney(), result.get(ranking)));
+				  String addContent = ranking == Ranking.SECOND ? BONUS_BALL_CONTENT : StringUtils.EMPTY;
+				  System.out.println(String.format(RANKING_RESULT_FORMAT, ranking.getSameCount(), addContent, ranking.getPrizeMoney(),
+												   result.get(ranking)));
 			  });
 	}
 

@@ -9,10 +9,10 @@ import java.util.stream.IntStream;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import lotto.LottoNumbers;
+import lotto.Lotto;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class LottoNumbersFactory {
+public class LottoFactory {
 
 	private static final int LOTTO_BALL_COUNT = 6;
 	private static final int TOTAL_COUNT_OF_LOTTO_BALL = 45;
@@ -22,10 +22,10 @@ public class LottoNumbersFactory {
 
 	private static Random random = new Random();
 
-	public static LottoNumbers create() {
+	public static Lotto create() {
 		List<Integer> lottoNumbers = createNumbers();
 
-		return LottoNumbers.of(lottoNumbers);
+		return Lotto.of(lottoNumbers);
 	}
 
 	private static List<Integer> createNumbers() {

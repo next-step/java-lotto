@@ -21,8 +21,8 @@ public class InputValidator {
 		}
 	}
 
-	private static boolean isNumber(String price) {
-		return NUMBER_PATTERN.matcher(price)
+	public static boolean isNumber(String value) {
+		return NUMBER_PATTERN.matcher(value)
 							 .matches();
 	}
 
@@ -31,5 +31,4 @@ public class InputValidator {
 			throw new IllegalArgumentException("당첨번호를 입력하셔야 합니다.");
 		}
 	}
-
 }
