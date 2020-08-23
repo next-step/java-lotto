@@ -6,5 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface LottoNumberGenerator {
-    List<LottoNumber> generator();
+    List<LottoNumber> generator(String numbers);
 }

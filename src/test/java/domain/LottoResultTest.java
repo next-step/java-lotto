@@ -14,10 +14,10 @@ public class LottoResultTest {
     void win(Rank rank, int hitNumber, boolean matchBonus, int expectCount, int expectMoney) {
         LottoResult lottoResult = LottoResult.of(rank);
 
-        lottoResult.win(hitNumber, matchBonus);
+        lottoResult.win(Rank.valueOf(hitNumber, matchBonus));
 
         assertThat(lottoResult.getWinningCount()).isEqualTo(expectCount);
-        assertThat(lottoResult.calculateWinningMoney()).isEqualTo(expectMoney);
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(expectMoney);
     }
 
     private static Stream<Arguments> generateData() {

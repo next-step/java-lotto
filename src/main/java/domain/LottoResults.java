@@ -1,6 +1,8 @@
 package domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResults {
@@ -18,16 +20,16 @@ public class LottoResults {
                 .collect(Collectors.toList()));
     }
 
-    public void win(int hitNumber, boolean matchBonus) {
+    public void win(Rank rank) {
         for (LottoResult result : lottoResults) {
-            result.win(hitNumber, matchBonus);
+            result.win(rank);
         }
     }
 
-    public int getTotalPrizeMoney() {
+    public long getTotalPrizeMoney() {
         return lottoResults.stream()
-                .map(LottoResult::calculateWinningMoney)
-                .reduce(0, Integer::sum);
+                .mapToLong(LottoResult::getWinningMoney)
+                .sum();
     }
 
     public List<LottoResult> getLottoResults() {
