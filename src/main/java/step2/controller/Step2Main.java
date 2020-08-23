@@ -15,7 +15,7 @@ public class Step2Main {
         int price = InputUtil.returnInteger("구입금액을 입력해 주세요.");
         MakeLottoFactory makeLotto = new MakeLottoFactory(price);
         PrintResult.printBuyQuantity(makeLotto.buyQuantity());
-        List<Lotto> lottoList = makeLotto.lottoRandomList();
+        List<Lotto> lottoList = makeLotto.makeLottoRandomList();
         PrintResult.printLottoList(lottoList);
         String winningNumbers = InputUtil.returnString("지난 주 당첨 번호를 입력해 주세요.");
         Lotto winningLotto = makeLotto.makeLottoWithString(winningNumbers);
@@ -25,7 +25,7 @@ public class Step2Main {
 
         WinningStatistics winningStatistics = new WinningStatistics(lottoList);
         PrintResult.printLottoMap(winningStatistics.makeWinningMap());
-        PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.getBenefitOrNot());
+        PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.isBenefit());
 
     }
 }

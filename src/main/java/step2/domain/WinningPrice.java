@@ -1,35 +1,21 @@
 package step2.domain;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 import java.util.Arrays;
 
 public enum WinningPrice {
-    FIRST_PRIZE(6,2000000000),
-    SECOND_PRIZE(5,1500000),
-    THIRD_PRIZE(4,50000),
-    FOURTH_PRIZE(3,5000),
-    OTHER(0,0);
+    FIRST_PRIZE(6, 2000_000_000),
+    SECOND_PRIZE(5, 1_500_000),
+    THIRD_PRIZE(4, 50_000),
+    FOURTH_PRIZE(3, 5_000),
+    OTHER(0, 0);
 
     private int winningNumbers;
     private int price;
 
 
-    WinningPrice( int winningNumbers,int price)  {
+    WinningPrice(int winningNumbers, int price) {
         this.winningNumbers = winningNumbers;
         this.price = price;
-    }
-
-    WinningPrice(int winningNumbers) {
-        this.winningNumbers = winningNumbers;
-        this.price = getPriceWithWinningNumbers(winningNumbers);
-    }
-
-   public static int getPriceWithWinningNumbers(int winningNumbers) {
-        return Arrays.stream(WinningPrice.values())
-                .filter(priceValue -> priceValue.checkCount(winningNumbers) )
-                .findAny()
-                .orElse(OTHER).price;
     }
 
     public boolean checkCount(int winningNumber) {
@@ -46,9 +32,8 @@ public enum WinningPrice {
 
     public static WinningPrice valueOf(int winningNumbers) {
         return Arrays.stream(WinningPrice.values())
-                .filter(priceValue -> priceValue.checkCount(winningNumbers) )
+                .filter(priceValue -> priceValue.checkCount(winningNumbers))
                 .findAny()
                 .orElse(OTHER);
     }
-
 }

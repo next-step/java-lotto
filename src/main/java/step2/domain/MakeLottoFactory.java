@@ -8,54 +8,49 @@ import java.util.List;
 
 public class MakeLottoFactory {
     public static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_START_NUMBER_VALUE = 1;
-    private static final int LOTTO_LAST_NUMBER_VALUE = 45;
     private static final int LOTTO_NUMBER = 6;
-
-    private List<Integer> allLottoNumber = makeAllLottoNumber();
-    int buyPrice;
+    private static final List<Integer> ALL_LOTTO_NUMBER = AllLotto.makeAllLottoNumber();
+    private int buyPrice;
 
     public MakeLottoFactory(int buyPrice) {
         this.buyPrice = buyPrice;
     }
 
-    public List<Integer> makeAllLottoNumber() {
-        List<Integer> lottoAllNumberList = new ArrayList<>();
-        for (int i = LOTTO_START_NUMBER_VALUE; i <= LOTTO_LAST_NUMBER_VALUE; i++) {
-            lottoAllNumberList.add(i);
-        }
-        return lottoAllNumberList;
-    }
-
-    public List<Lotto> lottoRandomList() {
+    public List<Lotto> makeLottoRandomList() {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < buyQuantity(); i++) {
-            lottoList.add(lottoRandom());
+            lottoList.add(makeLottoRandom());
         }
         return lottoList;
     }
 
-    public Lotto lottoRandom() {
-        Collections.shuffle(allLottoNumber);
-        ArrayList<Integer> getRandomNumberList = new ArrayList<>();
+    public Lotto makeLottoRandom() {
+        Collections.shuffle(ALL_LOTTO_NUMBER);
+        List getRandomNumberList = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER; i++) {
-            getRandomNumberList.add(allLottoNumber.get(i));
+            getRandomNumberList.add(ALL_LOTTO_NUMBER.get(i));
         }
-        Collections.sort(getRandomNumberList);
+        sortLotto(getRandomNumberList);
         return new Lotto(getRandomNumberList);
+    }
+
+    public void sortLotto(List lottoNumberList) {
+        Collections.sort(lottoNumberList);
     }
 
     public Lotto makeLottoWithString(String lottoNumbers) {
         ArrayList<Integer> lottoNumber = new ArrayList<>();
-        StringSplit stringSplit = new StringSplit(lottoNumbers);
-        String[] lottoNumberArray = stringSplit.splitWithDelimeter();
-        for (String numberValue:lottoNumberArray) {
+        String[] lottoNumberArray = StringSplit.splitWithDelimiter(lottoNumbers);
+        for (String numberValue : lottoNumberArray) {
             lottoNumber.add(StringUtil.stringToInt(numberValue));
         }
         return new Lotto(lottoNumber);
     }
 
     public int buyQuantity() {
-        return buyPrice / LOTTO_PRICE;
+        if (buyPrice / LOTTO_PRICE > 0) {
+            return buyPrice / LOTTO_PRICE;
+        }
+        throw new RuntimeException("구매금액은 1000원 이상으로 입력해주세요");
     }
 }

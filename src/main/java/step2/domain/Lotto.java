@@ -8,32 +8,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private ArrayList<Integer> lottoNumber;
-    private int winningCount;
+    private List<Integer> lottoNumber;
+    private WinningPrice winningPrice;
 
-    public Lotto(ArrayList<Integer> lottoNumber, int winningCount) {
+    public Lotto(List<Integer> lottoNumber, WinningPrice winningPrice) {
         this.lottoNumber = lottoNumber;
-        this.winningCount = winningCount;
-    }
-    public Lotto(ArrayList<Integer> lottoNumber) {
-        this(lottoNumber, 0);
+        this.winningPrice = winningPrice;
     }
 
-    public ArrayList<Integer> getLottoNumber() {
+    public Lotto(List<Integer> lottoNumber) {
+        this(lottoNumber, WinningPrice.OTHER);
+    }
+
+    public List<Integer> getLottoNumber() {
         return lottoNumber;
     }
 
     public String getLottoValue() {
         return lottoNumber.stream()
-                .map(i -> i.toString())
-                .collect(Collectors.joining(", ","[", "]"));
+                .map(numberValue -> numberValue.toString())
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public int getWinningCount() {
-        return winningCount;
-    }
-
-    public int getPrice() {
-        return WinningPrice.getPriceWithWinningNumbers(winningCount);
+    public WinningPrice getWinningPrice() {
+        return winningPrice;
     }
 }
