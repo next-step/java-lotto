@@ -5,6 +5,7 @@ import study.ValidateUtil;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,5 +39,25 @@ public class Lotto {
 
     public boolean contains(LottoNumber target) {
         return numbers.contains(target);
+    }
+
+    public Integer getWinningCount(Lotto winningNumbers) {
+        return numbers.stream()
+                .filter(winningNumbers::contains)
+                .map(e -> 1)
+                .reduce(0, Integer::sum);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
