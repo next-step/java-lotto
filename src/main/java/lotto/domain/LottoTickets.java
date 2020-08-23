@@ -28,9 +28,9 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<LottoTicket> createManualLottoTicket(List<Integer> lottoTestList, int lottoTicketQuantity) {
+    public List<LottoTicket> createManualLottoTicket(List<Integer> manualLottoNumbers, int lottoTicketQuantity) {
         for (int i = NUMBER_ZERO; i < lottoTicketQuantity; i++) {
-            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoTestList);
+            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(manualLottoNumbers);
             LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
             lottoTickets.add(lottoTicket);
         }
