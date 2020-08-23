@@ -24,7 +24,6 @@ public class WinningLotto {
     }
 
     public boolean isBonusBall(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicketNumbers()
-                .contains(this.bonusBall);
+        return lottoTicket.matchBonusBall(this.bonusBall);
     }
 }
