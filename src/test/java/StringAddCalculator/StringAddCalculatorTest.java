@@ -1,7 +1,9 @@
 package StringAddCalculator;
 
+import StringAddCalculator.utils.CheckCustomDelimiter;
 import org.junit.jupiter.api.Test;
 
+import static StringAddCalculator.utils.CheckCustomDelimiter.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
@@ -33,6 +35,25 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test
+    public void splitAndSum_custom_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void matcherTest() throws Exception {
+        assertThat(returnCustomDelimiter("//;\n1;2;3")).isEqualTo(";");
+        assertThat(returnCustomDelimiter("//:\n1:2:3")).isEqualTo(":");
+        // //와\n사이가 아닐 경우 ERROR
+        assertThat(returnCustomDelimiter("/;\n1;2;3")).isEqualTo(null);
+        assertThat(returnCustomDelimiter("//;1;2;3")).isEqualTo(null);
+        // 원래 구분자도 계속 가능함???
+//        assertThat(returnCustomDelimiter("//;\n1;2,3;4")).isEqualTo(";");
+//        assertThat(returnCustomDelimiter("//;\n1,2,3,4")).isEqualTo(";");
+//        assertThat(returnCustomDelimiter("//;\n1,2:3;4")).isEqualTo(";");
+//        assertThat(returnCustomDelimiter("/;\n1,2,3,4")).isEqualTo(null);
+    }
 /*
 
             @Test

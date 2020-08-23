@@ -5,7 +5,8 @@ import java.util.Optional;
 
 public enum Delimiter {
     COMMA(","),
-    COLON(":");
+    COLON(":"),
+    CUSTOM1("//;\n");
 
     private final String delimiter;
 
