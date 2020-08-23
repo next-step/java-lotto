@@ -34,4 +34,9 @@ public class LottoTicket {
     public Set<LottoNumber> getLottoTicketNumbers() {
         return lottoTicketNumbers;
     }
+
+    public boolean matchLottoNumber(LottoNumber lottoNumber) {
+        return lottoTicketNumbers.contains(lottoNumber) ? true : false;
+    }
+
 }

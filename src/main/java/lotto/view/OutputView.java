@@ -27,7 +27,8 @@ public class OutputView {
 
     private List<Integer> sortLottoNumber(Set<LottoNumber> lottoNumbers) {
         List<Integer> sortedLottoNumbers = new ArrayList<>();
-        lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getLottoNumber)).forEach(lottoNumber -> sortedLottoNumbers.add(lottoNumber.getLottoNumber()));
+        lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                .forEach(lottoNumber -> sortedLottoNumbers.add(lottoNumber.getLottoNumber()));
         return sortedLottoNumbers;
     }
 

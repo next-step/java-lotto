@@ -21,6 +21,11 @@ public class InputView {
         return inputLottoNumbers();
     }
 
+    public static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return inputNumber();
+    }
+
     private static List<Integer> inputLottoNumbers() {
         String text = SCANNER.nextLine();
         System.out.println();
@@ -32,7 +37,7 @@ public class InputView {
         try {
             number = Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력해주세요!");
+            throw new NumberFormatException("문자가 입력되었습니다. 숫자만 입력해주세요.");
         }
         System.out.println();
         return number;

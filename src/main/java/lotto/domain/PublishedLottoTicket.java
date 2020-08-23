@@ -12,7 +12,7 @@ public class PublishedLottoTicket {
         publishLottoTicket(lottoTicketCounts);
     }
 
-    public void publishLottoTicket(int lottoTicketCounts) {
+    private void publishLottoTicket(int lottoTicketCounts) {
         for (int i = 0; i < lottoTicketCounts; i++) {
             Set<LottoNumber> lottoNumbers = LottoMachine.generateLottoNumber();
             this.publishedLottoTicket.add(new LottoTicket(lottoNumbers));

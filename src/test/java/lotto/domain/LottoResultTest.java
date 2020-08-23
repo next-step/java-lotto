@@ -19,7 +19,6 @@ class LottoResultTest {
 
     List<Integer> winningLottoNumbers = new ArrayList<>();
     Set<LottoTicket> lottoTickets = new HashSet<>();
-    LottoResult lottoResult = new LottoResult();
 
     @BeforeEach
     void init() {
@@ -30,15 +29,17 @@ class LottoResultTest {
     void setLottoTicket() {
         lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
         lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
+        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7"))));
         lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
         lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH"})
+    @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH", "FIFTH"})
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
+        LottoResult lottoResult = new LottoResult();
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
         assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(1);
     }
@@ -46,8 +47,9 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
+        LottoResult lottoResult = new LottoResult();
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
-        assertThat(lottoResult.calculatePrizeRate(4000)).isEqualTo(50038800);
+        assertThat(lottoResult.calculatePrizeRate(5000)).isEqualTo(40631100);
     }
 }
