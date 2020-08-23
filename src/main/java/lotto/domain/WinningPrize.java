@@ -21,7 +21,7 @@ public enum WinningPrize {
         this.message = message;
     }
 
-    static WinningPrize valueOf(int matchCount, boolean matchBonus) {
+    public static WinningPrize valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == SECOND.matchCount && matchBonus) return SECOND;
         return Arrays.stream(WinningPrize.values())
                 .filter(winningPrize -> winningPrize.matchCount == matchCount)
