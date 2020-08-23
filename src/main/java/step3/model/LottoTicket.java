@@ -62,4 +62,10 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
+    public boolean isBonusBallIncluded(int ballNumber) {
+        if (lottoNumbers.contains(ballNumber)) {
+            return true;
+        }
+        return false;
+    }
 }
