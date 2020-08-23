@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-	private final LottoIssuer issuer = new LottoIssuer();
-
 	private static final int LOTTO_PRICE = 1000;
 	private static final String LOTTO_PRICE_PHRASES = "로또 구입 금액은 1000원 단위만 가능합니다.";
 
@@ -24,9 +22,13 @@ public class LottoGame {
 
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			lottos.add(new Lotto(issuer.issueAutoLotto()));
+			lottos.add(issueLotto());
 		}
 		return lottos;
+	}
+
+	private Lotto issueLotto() {
+		return new Lotto(new LottoIssuer().issueAutoLotto());
 	}
 
 	private void validPrice(int price) {
