@@ -1,4 +1,4 @@
-
+package StringAddCalculator
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +13,7 @@ public class StringAddCalculatorTest {
         result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
     }
-
+/*
     @Test
     public void splitAndSum_숫자하나() throws Exception {
         int result = StringAddCalculator.splitAndSum("1");
@@ -44,5 +44,7 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
     }
 }
+
+ */
 
 }
