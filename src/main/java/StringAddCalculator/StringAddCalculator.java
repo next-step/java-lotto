@@ -3,9 +3,6 @@ package StringAddCalculator;
 import StringAddCalculator.utils.checkDelimiter;
 import StringAddCalculator.utils.checkString;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StringAddCalculator {
 
     public static final int ADD_NULL_OR_BLANK = 0;
@@ -18,8 +15,8 @@ public class StringAddCalculator {
         for (int i = 1; i < toSplits(expression).length; i += 2) {
             String delimiter = toSplits(expression)[i];
             int second = toInt(toSplits(expression)[i + 1]);
-            if (!checkDelimiter.isRightDelimiter(delimiter)) {
-                return ADD_NULL_OR_BLANK;
+            if (!checkDelimiter.isRightDelimiter(delimiter) || checkString.isNullOrBlank(delimiter)) {
+                return result;
             }
             result = result + second;
         }
