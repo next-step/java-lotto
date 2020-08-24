@@ -2,7 +2,6 @@ package StringAddCalculator;
 
 import org.junit.jupiter.api.Test;
 
-import static StringAddCalculator.utils.CheckCustomDelimiter.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -51,26 +50,5 @@ public class StringAddCalculatorTest {
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    public void splitAndSum_negative2() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,2,-3"))
-                .isInstanceOf(RuntimeException.class);
-    }
-
-
-    @Test
-    public void matcherTest() throws Exception {
-        assertThat(returnCustomDelimiter("//;\n1;2;3")).isEqualTo(";");
-        assertThat(returnCustomDelimiter("//:\n1:2:3")).isEqualTo(":");
-        // //와\n사이가 아닐 경우 ERROR
-        assertThat(returnCustomDelimiter("/;\n1;2;3")).isEqualTo(null);
-        assertThat(returnCustomDelimiter("//;1;2;3")).isEqualTo(null);
-        // 원래 구분자, 커스텀 구분자 병행 가능함???
-//        assertThat(returnCustomDelimiter("//;\n1;2,3;4")).isEqualTo(";");
-//        assertThat(returnCustomDelimiter("//;\n1,2,3,4")).isEqualTo(";");
-//        assertThat(returnCustomDelimiter("//;\n1,2:3;4")).isEqualTo(";");
-//        assertThat(returnCustomDelimiter("/;\n1,2,3,4")).isEqualTo(null);
     }
 }
