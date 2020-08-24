@@ -1,5 +1,4 @@
-package AutoLotto.utils.lotto;
-
+package AutoLotto.utils;
 
 import java.math.BigDecimal;
 
