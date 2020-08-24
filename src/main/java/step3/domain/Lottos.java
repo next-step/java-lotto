@@ -11,9 +11,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Integer> collectWinningNumberCount(WinningNumbers winningNumbers) {
+    public List<Rank> collectRank(WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.findWinningNumbersCount(winningNumbers))
+                .map(lotto -> lotto.getRank(winningNumbers))
                 .collect(Collectors.toList());
     }
 

@@ -18,10 +18,4 @@ public class LottoUtils {
                 .toArray();
     }
 
-    public static List<Integer> collectWinningNumberCount(List<Lotto> lottos, WinningNumbers winningNumbers) {
-        return lottos.stream()
-                .map(lotto -> lotto.findWinningNumbersCount(winningNumbers))
-                .collect(Collectors.toList());
-    }
-
 }

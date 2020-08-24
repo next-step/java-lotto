@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,33 +8,33 @@ import java.util.stream.IntStream;
 
 public class LottoResults {
 
-    private final List<Integer> winningNumberCounts;
+    private final List<Rank> ranks;
 
-    public LottoResults(List<Integer> winningNumberCounts) {
-        this.winningNumberCounts = winningNumberCounts;
+    public LottoResults(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
-    public int calculateWinningNumbersCount(int winningCount) {
-        return (int) winningNumberCounts.stream()
-                .filter(winningNumberCount -> winningNumberCount == winningCount)
+    public int calculateWinningNumbersCount(Rank rank) {
+        return (int) ranks.stream()
+                .filter(rank::equals)
                 .count();
     }
 
     public int calculateTotalWinnings() {
-        return IntStream.rangeClosed(LottoConfig.WINNING_COUNT_FROM, LottoConfig.WINNING_COUNT_TO)
-                .mapToObj(winningCount -> Winnings.calculateWinnings(winningCount) * calculateWinningNumbersCount(winningCount))
+        return Arrays.stream(Rank.values())
+                .map(rank -> rank.getWinningMoney() * calculateWinningNumbersCount(rank))
                 .reduce(0, Integer::sum);
     }
 
-    public Map<Integer, Integer> calculateWinningCountStatistics() {
-        Map<Integer, Integer> result = new HashMap<>();
-        IntStream.rangeClosed(LottoConfig.WINNING_COUNT_FROM, LottoConfig.WINNING_COUNT_TO)
-                .forEach(winningCount -> result.put(winningCount, calculateWinningNumbersCount(winningCount)));
+    public Map<Rank, Integer> calculateWinningCountStatistics() {
+        Map<Rank, Integer> result = new HashMap<>();
+        Arrays.stream(Rank.values())
+                .forEach(rank -> result.put(rank, calculateWinningNumbersCount(rank)));
         return result;
     }
 
     public double calculateYield(Money money) {
-        return money.calculateYelid(calculateTotalWinnings());
+        return money.calculateYield(calculateTotalWinnings());
     }
 
 }
