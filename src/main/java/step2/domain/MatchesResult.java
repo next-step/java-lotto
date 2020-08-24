@@ -36,7 +36,7 @@ public class MatchesResult {
     }
 
     private static boolean hasBonusNumber(int hitNumbers, int BonusNumber, List<Integer> lotteryInfo) {
-        return hitNumbers == 5 ? lotteryInfo.contains(BonusNumber) : false;
+        return hitNumbers == 5 && lotteryInfo.contains(BonusNumber);
     }
 
     private static void addWinningInfos(List<Scores> winningInformation, int hitNumber, boolean hasBonusNumber) {
