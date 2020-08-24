@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private static String seperator = ",|:";
     private static List<String> tokens;
+    private int result;
 
 
     public static int splitAndSum(String formula) {
@@ -26,7 +27,11 @@ public class StringCalculator {
             tokens = Arrays.asList(m.group(2).split(seperator));
         }
 
+        // 일반 구분자
+        tokens = Arrays.asList(formula.split(seperator));
 
+        // 숫자 이외의 값이 있는지 검사
+        tokens.forEach(StringCalculator::isNumberCheck);
 
 
         return 1;
@@ -36,7 +41,7 @@ public class StringCalculator {
         return StringUtils.isBlank(formula);
     }
 
-    public void isNumberCheck(String value) {
+    public static void isNumberCheck(String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException ex) {
