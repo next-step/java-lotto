@@ -33,6 +33,10 @@ public class StringCalculator {
         // 숫자 이외의 값이 있는지 검사
         tokens.forEach(StringCalculator::isNumberCheck);
 
+        // 입력 숫자가 하나인지 체크
+        if(tokens.size() < 2) {
+            return Integer.parseInt(tokens.get(0));
+        }
 
         return 1;
     }
