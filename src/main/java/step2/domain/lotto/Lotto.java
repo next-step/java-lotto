@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     public static Lotto createLottoNumbers(NumberGenerator lottoNumberGenerator) {
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator()
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate()
                 .stream()
                 .sorted(Comparator.comparingInt(LottoNumber::getLottoNumber))
                 .collect(toList());
