@@ -17,15 +17,16 @@ public class InputView {
 
     public static void askManualLottoValue() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        scanner.skip("\\R");
     }
 
     public static int numberOfAutomaticLottoTrials(int amount, int numberOfManualLottoTrials) {
-        System.out.println(amount / 1000 + "개를 구매했습니다.");
-        return (amount / 1000) - numberOfManualLottoTrials;
+        int numberOfAutomaticLotto = (amount / 1000) - numberOfManualLottoTrials;
+        System.out.println("수동으로 " + numberOfManualLottoTrials + "장, 자동으로 " + numberOfAutomaticLotto + "개를 구매했습니다.");
+        return numberOfAutomaticLotto;
     }
 
     public static String checkWinNumber() {
-        scanner.skip("\\R");
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
