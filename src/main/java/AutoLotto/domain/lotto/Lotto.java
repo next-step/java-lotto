@@ -1,4 +1,4 @@
-package AutoLotto.domain;
+package AutoLotto.domain.lotto;
 
 public class Lotto {
 }
