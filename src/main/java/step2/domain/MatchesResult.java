@@ -1,29 +1,29 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class MatchesResult {
-    Map<Integer, Long> results;
+import static step2.domain.BaseScore.getBaseMap;
 
-    public MatchesResult(Map<Integer, Long> results) {
+public class MatchesResult {
+    Map<ScoreType, Long> results;
+
+    public MatchesResult(Map<ScoreType, Long> results) {
         this.results = results;
     }
 
     public static MatchesResult ofMatchesResults(WinnersNo winnersNo, Lottos lottos) {
-        return new MatchesResult(getWinningInfos(winnersNo, lottos).stream()
-                .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting())));
+        return new MatchesResult(getWinningInfos(winnersNo, lottos)
+                .stream()
+                .collect(Collectors.groupingBy(Scores::getScore, Collectors.counting())));
     }
 
-    private static List<Integer> getWinningInfos(WinnersNo winnersNo, Lottos lottos) {
-        List<Integer> winningInformation = new ArrayList<>();
-        lottos.getLottos()
-                .stream()
-                .mapToInt(l -> hasNumber(winnersNo, l.getLotteryInfo()))
-                .forEach(hitNumber -> addWinningInfos(winningInformation, hitNumber));
+    private static List<Scores> getWinningInfos(WinnersNo winnersNo, Lottos lottos) {
+        List<Scores> winningInformation = new ArrayList<>();
+        for (Lotto l : lottos.getLottos()) {
+            int hitNumber = hasNumber(winnersNo, l.getLotteryInfo());
+            addWinningInfos(winningInformation, hitNumber, hasBonusNumber(hitNumber, winnersNo.getBonusNumber(), l.getLotteryInfo()));
+        }
         return winningInformation;
     }
 
@@ -35,23 +35,26 @@ public class MatchesResult {
         return hitNumbers;
     }
 
-    private static void addWinningInfos(List<Integer> winningInformation, int hitNumber) {
+    private static boolean hasBonusNumber(int hitNumbers, int BonusNumber, List<Integer> lotteryInfo) {
+        return hitNumbers == 5 ? lotteryInfo.contains(BonusNumber) : false;
+    }
+
+    private static void addWinningInfos(List<Scores> winningInformation, int hitNumber, boolean hasBonusNumber) {
         if (hitNumber > 2) {
-            winningInformation.add(hitNumber);
+            winningInformation.add(new Scores(hitNumber, hasBonusNumber));
         }
     }
 
-    public Map<Integer, Long> getResults() {
-        getBaseMap().forEach((k, v) -> results.putIfAbsent(k, v));
-        return results;
+    public static LinkedHashMap<ScoreType, Long> sortMapByKey(Map<ScoreType, Long> map) {
+        List<Map.Entry<ScoreType, Long>> entries = new LinkedList<>(map.entrySet());
+        Collections.sort(entries, Comparator.comparing(Map.Entry::getKey));
+        return entries
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, LinkedHashMap::new));
     }
 
-    private static HashMap<Integer, Long> getBaseMap() {
-        return new HashMap<Integer, Long>() {{
-            put(3, 0L);
-            put(4, 0L);
-            put(5, 0L);
-            put(6, 0L);
-        }};
+    public Map<ScoreType, Long> getResults() {
+        getBaseMap().forEach((k, v) -> results.putIfAbsent(k, v));
+        return sortMapByKey(results);
     }
 }
