@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static nextstep.lotto.constant.ExceptionMessage.INVALID_INPUT_MINIMUM_AMOUNT_FOR_BUY;
-import static nextstep.lotto.constant.PrintMessage.QUESTION_TEXT_BUY_TOTAL_AMOUNT;
-import static nextstep.lotto.constant.PrintMessage.QUESTION_TEXT_LOTTO_WINNER_NUMBER;
+import static nextstep.lotto.constant.PrintMessage.*;
 
 public class InputView {
 
@@ -31,5 +30,12 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String winnerNumber = scanner.nextLine();
         return Arrays.asList(StringUtils.splitString(winnerNumber));
+    }
+
+    public int inputBonusNumber(){
+        System.out.println(QUESTION_TEXT_LOTTO_BONUS_NUMBER);
+        Scanner scanner = new Scanner(System.in);
+        int bonusNumber = scanner.nextInt();
+        return bonusNumber;
     }
 }
