@@ -1,4 +1,4 @@
-package AutoLotto.domain;
+package AutoLotto.domain.money;
 
 public class Budget {
 }

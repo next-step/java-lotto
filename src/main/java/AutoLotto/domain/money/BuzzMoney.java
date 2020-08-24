@@ -1,2 +1,4 @@
-package AutoLotto.domain.money;public enum BuzzMoney {
+package AutoLotto.domain.money;
+
+public enum BuzzMoney {
 }
