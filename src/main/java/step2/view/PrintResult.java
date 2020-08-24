@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class PrintResult {
 
@@ -17,7 +18,10 @@ public class PrintResult {
 
     public static void printLottoList(List<Lotto> lottoRandomList) {
         lottoRandomList.stream()
-                .map(lotto -> lotto.getLottoValue())
+                .map(lotto -> lotto.getLottoNumber().stream()
+                        .map(lottoNumber -> lottoNumber.getNumber())
+                        .map(number -> number.toString())
+                        .collect(Collectors.joining(", ", "[", "]")))
                 .forEach(System.out::println);
     }
 

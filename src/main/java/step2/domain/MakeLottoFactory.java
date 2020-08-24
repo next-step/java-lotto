@@ -9,8 +9,17 @@ import java.util.List;
 public class MakeLottoFactory {
     public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBER = 6;
-    private static final List<Integer> ALL_LOTTO_NUMBER = AllLotto.makeAllLottoNumber();
+    private static final List<LottoNumber> ALL_LOTTO_NUMBER = makeAllLottoNumber();
     private int buyPrice;
+
+    public static List<LottoNumber> makeAllLottoNumber() {
+        List<LottoNumber> lottoAllNumberList = new ArrayList<>();
+        for (int number = LottoNumber.LOTTO_START_NUMBER_VALUE; number <= LottoNumber.LOTTO_LAST_NUMBER_VALUE; number++) {
+            lottoAllNumberList.add(new LottoNumber(number));
+        }
+        return lottoAllNumberList;
+    }
+
 
     public MakeLottoFactory(int buyPrice) {
         this.buyPrice = buyPrice;
@@ -39,10 +48,10 @@ public class MakeLottoFactory {
     }
 
     public Lotto makeLottoWithString(String lottoNumbers) {
-        ArrayList<Integer> lottoNumber = new ArrayList<>();
+        List<LottoNumber> lottoNumber = new ArrayList<>();
         String[] lottoNumberArray = StringSplit.splitWithDelimiter(lottoNumbers);
         for (String numberValue : lottoNumberArray) {
-            lottoNumber.add(StringUtil.stringToInt(numberValue));
+            lottoNumber.add(new LottoNumber(StringUtil.stringToInt(numberValue)));
         }
         return new Lotto(lottoNumber);
     }

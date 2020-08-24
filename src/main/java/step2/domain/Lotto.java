@@ -5,32 +5,30 @@ import step2.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private List<Integer> lottoNumber;
-    private WinningPrice winningPrice;
+    private List<LottoNumber> lottoNumber;
 
-    public Lotto(List<Integer> lottoNumber, WinningPrice winningPrice) {
+    public Lotto(List<LottoNumber> lottoNumber) {
         this.lottoNumber = lottoNumber;
-        this.winningPrice = winningPrice;
     }
 
-    public Lotto(List<Integer> lottoNumber) {
-        this(lottoNumber, WinningPrice.OTHER);
-    }
-
-    public List<Integer> getLottoNumber() {
+    public List<LottoNumber> getLottoNumber() {
         return lottoNumber;
     }
 
-    public String getLottoValue() {
-        return lottoNumber.stream()
-                .map(numberValue -> numberValue.toString())
-                .collect(Collectors.joining(", ", "[", "]"));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
     }
 
-    public WinningPrice getWinningPrice() {
-        return winningPrice;
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

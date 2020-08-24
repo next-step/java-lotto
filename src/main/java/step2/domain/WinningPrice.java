@@ -3,7 +3,7 @@ package step2.domain;
 import java.util.Arrays;
 
 public enum WinningPrice {
-    FIRST_PRIZE(6, 2000_000_000),
+    FIRST_PRIZE(6, 2_000_000_000),
     SECOND_PRIZE(5, 1_500_000),
     THIRD_PRIZE(4, 50_000),
     FOURTH_PRIZE(3, 5_000),
@@ -19,7 +19,7 @@ public enum WinningPrice {
     }
 
     public boolean checkCount(int winningNumber) {
-        return (winningNumbers == winningNumber);
+        return winningNumbers == winningNumber;
     }
 
     public int getWinningNumbers() {

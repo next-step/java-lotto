@@ -1,7 +1,6 @@
 package step2.controller;
 
 
-import step2.domain.CheckWinning;
 import step2.domain.Lotto;
 import step2.domain.MakeLottoFactory;
 import step2.domain.WinningStatistics;
@@ -20,10 +19,12 @@ public class Step2Main {
         String winningNumbers = InputUtil.returnString("지난 주 당첨 번호를 입력해 주세요.");
         Lotto winningLotto = makeLotto.makeLottoWithString(winningNumbers);
 
-        CheckWinning checkWinning = new CheckWinning(winningLotto, lottoList);
-        lottoList = checkWinning.setWinningNumberLottoList();
+       // CheckWinning checkWinning = new CheckWinning(winningLotto, lottoList);
+       // lottoList = checkWinning.setWinningNumberLottoList();
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottoList);
+
+        //makeLotto.setLottoWinningNumber(lottoList, winningLotto);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoList,winningLotto);
         PrintResult.printLottoMap(winningStatistics.makeWinningMap());
         PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.isBenefit());
 
