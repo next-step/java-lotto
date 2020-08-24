@@ -1,2 +1,4 @@
-package AutoLotto.domain.play;public class playLotto {
+package AutoLotto.domain.play;
+
+public class playLotto {
 }
