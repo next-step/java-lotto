@@ -7,22 +7,31 @@ import static step1.UserInput.*;
 
 public class ValidateInput {
 
-    static String input;
-    static String inputs[];
+    private static String input;
+    private String inputs[];
 
     public ValidateInput(String input) {
+        validateSomeThing(input);
         this.input = input;
     }
 
-    String validateSomeThing() {
-        if (validateInputNUll()) {
+    public String getInput() {
+        return input;
+    }
+
+    String validateSomeThing(String input) {
+        if (validateInputNUll(input)) {
+            System.out.println("g");
+            input = STRING_ZERO;
             return input;
         }
-        if (validateInputOneNumber()) {
+        if (validateInputOneNumber(input)) {
+            System.out.println("gg");
             return input;
         }
 
-        if (isCustomDelimiter()) {
+        if (isCustomDelimiter(input)) {
+            System.out.println("ggg");
             input += LINE_FEED + new Scanner(System.in).nextLine();
             return input;
         }
@@ -31,7 +40,7 @@ public class ValidateInput {
         return input;
     }
 
-    boolean validateInputNUll() {
+    boolean validateInputNUll(String input) {
         if (input == null || input.trim().isEmpty()) {
             this.input = STRING_ZERO;
             return true;
@@ -39,7 +48,7 @@ public class ValidateInput {
         return false;
     }
 
-    private boolean validateInputOneNumber() {
+    private boolean validateInputOneNumber(String input) {
         if (input.length() == LENGTH_ONE) {
             return true;
         }
@@ -47,6 +56,7 @@ public class ValidateInput {
     }
 
     void validateInputNegative(String[] inputs) {
+        System.out.println("ggg");
         boolean isAllPositiveValue = Arrays.stream(inputs)
                 .map(Integer::parseInt)
                 .allMatch(element -> element >= ZERO);
@@ -56,7 +66,7 @@ public class ValidateInput {
         }
     }
 
-    private boolean isCustomDelimiter() {
+    private boolean isCustomDelimiter(String input) {
         if (input.substring(ZERO, TWO).equals("//")) {
             return true;
         }

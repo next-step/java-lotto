@@ -11,13 +11,15 @@ public class UserInput {
     static final String STRING_ZERO = "0";
     static final String LINE_FEED = "\n";
 
+    private UserInput() {
+    }
+
     static String getUserInput() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         ValidateInput validate = new ValidateInput(input);
-        String validateResult = validate.validateSomeThing();
 
-        return validateResult;
+        return validate.getInput();
     }
 }
