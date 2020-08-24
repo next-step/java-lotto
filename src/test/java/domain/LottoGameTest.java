@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoGameTest {
     private LottoGame lottoGame;
@@ -69,9 +70,14 @@ class LottoGameTest {
         WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoWinningNumbers, bonusNumber);
 
         Rank expectedWinningType = Rank.valueOf(countOfMatch, false);
-        lottoWinningInfos.getWinningInfos().stream()
+        WinningInfo winningInfo = lottoWinningInfos.getWinningInfos().stream()
                 .filter(e -> e.getRank().equals(expectedWinningType))
-                .forEach(e -> assertThat(e.getWinningNumber()).isEqualTo(expected));
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+        assertAll(
+                () -> assertThat(winningInfo.getWinningNumber()).isEqualTo(expected)
+        );
     }
 
     @Test
