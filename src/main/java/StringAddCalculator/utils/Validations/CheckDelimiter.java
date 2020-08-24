@@ -1,4 +1,4 @@
-package StringAddCalculator.utils;
+package StringAddCalculator.utils.Validations;
 
 import StringAddCalculator.Delimiter;
 
