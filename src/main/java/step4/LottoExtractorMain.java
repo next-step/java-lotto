@@ -24,7 +24,7 @@ public class LottoExtractorMain {
         }
         LottoNumberGenerator generator = new LottoNumberGenerator();
         // 시도할 횟수값 중간저장
-        int trials = InputView.printNumberOfTickets(amount);
+        int trials = InputView.numberOfAutomaticLottoTrials(amount, numberOfManualLottoTrials);
         // 로또 stat용 통계 일급 컬렉션 선언
         LottoStat stat = new LottoStat();
 
