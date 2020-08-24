@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoStat {
     private static final int SCALE = 2;
     private static final int INCREMENT = 1;
-    private final HashMap<Rank, Integer> rank;
+    private final Map<Rank, Integer> rank = new HashMap<>();
 
     public LottoStat() {
-        rank = new HashMap<>();
         initializeRank();
     }
 
@@ -43,10 +43,10 @@ public class LottoStat {
     }
 
     private long getWinnerPrizeAmount() {
-        return rank.get(Rank.FIRST) * Rank.FIRST.getWinningMoney() +
-                rank.get(Rank.SECOND) * Rank.SECOND.getWinningMoney() +
-                rank.get(Rank.THIRD) * Rank.THIRD.getWinningMoney() +
-                rank.get(Rank.FOURTH) * Rank.FOURTH.getWinningMoney() +
-                rank.get(Rank.FIFTH) * Rank.FIFTH.getWinningMoney();
+        long prizeAmount = 0;
+        for (Rank r1 : Rank.values()) {
+            prizeAmount += rank.get(r1) * r1.getWinningMoney();
+        }
+        return prizeAmount;
     }
 }
