@@ -15,12 +15,36 @@ public enum BuzzMoney {
         this.numOfHits = numOfHits;
         this.moneyPerHit = moneyPerHit;
     }
-/*
-    public int createOnceBuzzMoney(BuzzMoney buzzMoney,int hit) {
+
+    public static int createOnceBuzzMoney(BuzzMoney buzzMoney, int hit) {
         return hit * buzzMoney.moneyPerHit;
     }
 
-    public int createSumBuzzMoney(BuzzMoney buzzMoney, List<Integer> hitsList) {
+    public static int createBuzzMoney(BuzzMoney buzzMoney, List<Integer> hitsList) {
+        for (int i = 0; i <hitsList.size(); i++) {
+            if (buzzMoney.numOfHits == hitsList.get(i)) {
+                sum += createOnceBuzzMoney(buzzMoney, hitsList.get(i));
+            }
+            return sum;
+        }
+        return sum;
+    }
+
+    public static int createAllMoney(List<BuzzMoney> buzzMoneyList, List<Integer> hitsList) {
+        int sum = 0;
+        for (int i = 0; i < buzzMoneyList.size( ); i++) {
+            sum += createBuzzMoney(buzzMoneyList.get(i), hitsList);
+        }
+        return sum;
+    }
+//        int sum = buzzMoneyList
+//                .stream( )
+//                .filter(o -> o.of(buzzMoney))
+//                .map(o -> createBuzzMoney(o, hitList))
+//                .forEach(o -> buzzMoneyList.add(o));
+//       return sum;
+/*
+    public int createBuzzMoney2(BuzzMoney buzzMoney, List<Integer> hitsList) {
         int sum = hitsList
                 .stream( )
                 .filter(o -> o.equals(buzzMoney))
@@ -28,11 +52,6 @@ public enum BuzzMoney {
                 .orElseThrow(IllegalArgumentException::new);
         return sum;
     }
-
-    public int createSumBuzzMoney2(List<BuzzMoney> buzzMoneyList, List<Integer> hitsList) {
-        buzzMoneyList.stream().filter(o -> o.)
-    }
-
  */
 }
 
