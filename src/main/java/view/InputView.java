@@ -1,5 +1,7 @@
 package view;
 
+import domain.LottoGame;
+import domain.LottoNumbers;
 import domain.Number;
 
 import java.util.Arrays;
@@ -22,10 +24,15 @@ public class InputView {
         return getWinningListFromString(str);
     }
 
-    public static Number getBonusNumber() {
+    public static Number getBonusNumber(LottoNumbers lottoWinningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String s = scanner.nextLine();
-        return new Number(Integer.parseInt(s));
+        Number bonusNumber = new Number(Integer.parseInt(s));
+        boolean isExist = lottoWinningNumbers.isContainBonus(bonusNumber);
+        if (isExist) {
+            throw new IllegalArgumentException("보너스 번호는 로또 숫자와 중복되면 안 됩니다");
+        }
+        return bonusNumber;
     }
 
     private static List<Number> getWinningListFromString(String winningNumberStr) {

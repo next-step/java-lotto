@@ -14,7 +14,7 @@ public class LottoGameApp {
         OutputView.printLottoGames(lottoGame.getLottoNumbersList());
         List<Number> winningNumber = InputView.getWinningNumber();
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winningNumber);
-        Number bonusNumber = InputView.getBonusNumber();
+        Number bonusNumber = InputView.getBonusNumber(lottoWinningNumbers);
 
         WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame, lottoWinningNumbers, bonusNumber);
         OutputView.printBenefitRate(lottoGame, lottoMoney, winningInfos);
