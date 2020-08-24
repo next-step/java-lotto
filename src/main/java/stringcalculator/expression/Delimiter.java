@@ -1,7 +1,7 @@
 package stringcalculator.expression;
 
-import stringcalculator.common.ExceptionMessage;
 import org.apache.commons.lang3.StringUtils;
+import stringcalculator.common.ExpressionException;
 
 import java.util.Objects;
 
@@ -36,7 +36,7 @@ public class Delimiter {
 
     public ExpressionNumbers splitValue(String value) {
         if (StringUtils.isBlank(value)) {
-            throw new IllegalArgumentException(ExceptionMessage.WRONG_EXPRESSION.printMessage());
+            ExpressionException.wrongExpression();
         }
 
         String[] values = value.split(this.delimiter);

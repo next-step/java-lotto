@@ -1,6 +1,6 @@
 package stringcalculator.expression;
 
-import stringcalculator.common.ExceptionMessage;
+import stringcalculator.common.ExpressionException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ExpressionNumbers {
 
     private void validate(String[] values) {
         if (values == null || values.length == 0) {
-            throw new IllegalArgumentException(ExceptionMessage.WRONG_NUMBER.printMessage());
+            ExpressionException.wrongNumber();
         }
     }
 
