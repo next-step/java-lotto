@@ -1,4 +1,4 @@
-package step2.view;
+package step2;
 
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoMachine;

@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
@@ -11,7 +12,7 @@ public class LottoMachine {
     }
 
     private List<LottoNumber> getLottoNumberListByLottoCount(int lottoCount) {
-        List<LottoNumber> lottoNumberList = null;
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
         for(int i = 0; i < lottoCount; i++) {
             LottoNumber lottoNumber = new LottoNumber();
             lottoNumber.creatLottoNumber();

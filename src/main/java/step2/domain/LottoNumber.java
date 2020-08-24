@@ -16,7 +16,7 @@ public class LottoNumber {
     }
 
     private void initLottoNumbers() {
-        for(int i = 0; i < LOTTO_END_NUMBER; i++) {
+        for(int i = 1; i <= LOTTO_END_NUMBER; i++) {
             lottoNumbers.add(i);
         }
     }
