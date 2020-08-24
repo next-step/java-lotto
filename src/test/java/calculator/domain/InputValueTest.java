@@ -39,7 +39,7 @@ public class InputValueTest {
     @Test
     void 커스텀_구분자_체크() {
         assertThat(checkCustomDelimiter("//;\n1;2;3")).hasSize(3);
-        assertThat(checkCustomDelimiter("//;\n1;2;3")).containsExactly("1","2","3");
+        assertThat(checkCustomDelimiter("//;\n1;2;3")).containsExactly("1", "2", "3");
     }
 
     @Test

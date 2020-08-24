@@ -11,7 +11,7 @@ public class Numbers {
     }
 
     public void validateNumber() {
-        if(Arrays.stream(numbers)
+        if (Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .anyMatch(n -> n < 0)) {
             throw new RuntimeException("음수는 사용할 수 없습니다.");
