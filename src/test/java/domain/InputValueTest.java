@@ -22,4 +22,9 @@ public class InputValueTest {
     void 컴마로_구분() {
         assertThat(inputValueValidate("3,2")).isEqualTo(5);
     }
+
+    @Test
+    void 콜론으로_구분() {
+        assertThat(inputValueValidate("3:2")).isEqualTo(5);
+    }
 }

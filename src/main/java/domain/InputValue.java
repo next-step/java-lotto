@@ -9,7 +9,7 @@ public class InputValue {
         if(inputValue.isEmpty())
             return 0;
 
-        String[] numbers = inputValue.split(",");
+        String[] numbers = inputValue.split(",|:");
         return sum(numbers);
     }
 
