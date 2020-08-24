@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static domain.InputValue.checkCustomDelimiter;
 import static domain.InputValue.inputValueValidate;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputValueTest {
     @Test
@@ -39,5 +40,11 @@ public class InputValueTest {
     void 커스텀_구분자_체크() {
         assertThat(checkCustomDelimiter("//;\n1;2;3")).hasSize(3);
         assertThat(checkCustomDelimiter("//;\n1;2;3")).containsExactly("1","2","3");
+    }
+
+    @Test
+    void 음수가_들어올_때_테스트() {
+        assertThatThrownBy(() -> inputValueValidate("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }

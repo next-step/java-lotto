@@ -10,11 +10,11 @@ public class InputValue {
             return 0;
         if(inputValue.isEmpty())
             return 0;
-        if(inputValue.startsWith("//"))
-            return sum(checkCustomDelimiter(inputValue));
+        if(inputValue.startsWith("//")) {
+            return new Numbers(checkCustomDelimiter(inputValue)).sum();
+        }
 
-        String[] numbers = inputValue.split(",|:");
-        return sum(numbers);
+        return new Numbers(inputValue.split(",|:")).sum();
     }
 
     public static String[] checkCustomDelimiter(String inputValue) {
@@ -23,12 +23,8 @@ public class InputValue {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-
         return new String[0];
     }
 
-    private static int sum(String[] numbers) {
-        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
-    }
 
 }
