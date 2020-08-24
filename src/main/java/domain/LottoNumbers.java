@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final int LOTTO_NUMBER = 6;
+
     private final List<Number> numbers;
 
     public LottoNumbers(List<Number> numbers) {
@@ -13,7 +15,7 @@ public class LottoNumbers {
     }
 
     private void validate(List<Number> numbers) {
-        if (new HashSet<>(numbers).size() != 6) {
+        if (new HashSet<>(numbers).size() != LOTTO_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 6개의 다른 값 이여야 합니다.");
         }
     }
