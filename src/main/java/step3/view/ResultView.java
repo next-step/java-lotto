@@ -1,9 +1,6 @@
 package step3.view;
 
-import step3.domain.Lotto;
-import step3.domain.LottoConfig;
-import step3.domain.Lottos;
-import step3.domain.Winnings;
+import step3.domain.*;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -23,9 +20,15 @@ public class ResultView {
         System.out.println(lottos);
     }
 
-    public static void printWinningCountStatistics(Map<Integer, Integer> calculateWinningCountStatistics) {
-        IntStream.range(LottoConfig.WINNING_COUNT_FROM, LottoConfig.WINNING_COUNT_TO + 1)
-                .forEach(winningCount -> System.out.println(MessageFormat.format("{0}개 일치 ({1}원)- {2}개", winningCount, Winnings.calculateWinnings(winningCount), calculateWinningCountStatistics.get(winningCount))));
+    public static void printWinningCountStatistics(Map<Rank, Integer> calculateWinningCountStatistics) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        System.out.println(MessageFormat.format("3개 일치 (5000원)- {0}개", calculateWinningCountStatistics.get(Rank.FIFTH)));
+        System.out.println(MessageFormat.format("4개 일치 (50000원)- {0}개", calculateWinningCountStatistics.get(Rank.FOURTH)));
+        System.out.println(MessageFormat.format("5개 일치 (1500000원)- {0}개", calculateWinningCountStatistics.get(Rank.THIRD)));
+        System.out.println(MessageFormat.format("5개 일치, 보너스 볼 일치(30000000원) - {0}개", calculateWinningCountStatistics.get(Rank.SECOND)));
+        System.out.println(MessageFormat.format("6개 일치 (2000000000원)- {0}개", calculateWinningCountStatistics.get(Rank.FIRST)));
     }
 
     public static void printYield(double yield) {
