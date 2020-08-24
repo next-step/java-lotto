@@ -11,8 +11,8 @@ public class OutputView {
     public OutputView() {
     }
 
-    public OutputView printPurchaseTicketCount(int ticketCount) {
-        System.out.println(String.format("총 %d 장의 로또 티켓을 구매했습니다.", ticketCount));
+    public OutputView printPurchaseTicketCount(int autoTicketCount, int manualTicketCount) {
+        System.out.println(String.format("자동으로 %d장, 수동으로 %d장 로또 티켓을 구매했습니다.", autoTicketCount, manualTicketCount));
         return this;
     }
 
