@@ -17,4 +17,9 @@ public class InputValueTest {
         assertThat(inputValueValidate("3")).isEqualTo(3);
         assertThat(inputValueValidate("7")).isEqualTo(7);
     }
+
+    @Test
+    void 컴마로_구분() {
+        assertThat(inputValueValidate("3,2")).isEqualTo(5);
+    }
 }
