@@ -33,7 +33,7 @@
  9)총 수익률 계산하기
    = (Key.상금 * value)/ Budget -------------------소수 둘째자리 버림(CheckDivideBy)
    
- 10) 손해/이득 (기준 1) 계산하기   ---------------------1과 비교 (CheckMoney)
+ [V]    10) 손해/이득 (기준 1) 계산하기  1과 비교------- (CheckMoney)
 
  11) 수익률, 손해/이득 출력하기
     (ResultView.printProfit, printBoolean)

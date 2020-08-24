@@ -13,4 +13,12 @@ public class CheckDivideByTest {
         assertThat(CheckDivideBy.divideToInt("0","200")).isEqualTo(0);
 
     }
+
+    @Test
+    void canDivideToDecimal() {
+        assertThat(CheckDivideBy.divideToDecimal("5000","14000")).isEqualTo(0.35);
+        assertThat(CheckDivideBy.divideToDecimal("5","140")).isEqualTo(0.03);
+        assertThat(CheckDivideBy.divideToDecimal("0","200")).isEqualTo(0);
+
+    }
 }
