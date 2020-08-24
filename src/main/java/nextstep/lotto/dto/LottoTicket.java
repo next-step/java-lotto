@@ -23,12 +23,6 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public LottoRank matchCount(List<LottoNumber> winnerLotto) {
-        return LottoRank.of((int) ticket.stream()
-                .filter(winnerLotto::contains)
-                .count());
-    }
-
     public List<LottoNumber> getLottoNumber(){
         List<LottoNumber> lottoTicket = this.ticket.stream().collect(Collectors.toList());
         Collections.sort(lottoTicket);
