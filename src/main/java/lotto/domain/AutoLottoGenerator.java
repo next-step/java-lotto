@@ -9,7 +9,7 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generate() {
-        return new Lotto(generateAutoNumbers());
+        return Lotto.of(generateAutoNumbers());
     }
 
     private Set<LottoNumber> generateAutoNumbers() {

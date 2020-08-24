@@ -1,46 +1,47 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 public enum Ranking {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000, "6개 일치 (2,000,000,000원)"),
+    SECOND(5, 30_000_000, "5개 일치, 보너스 볼 일치(30,000,000원)"),
+    THIRD(5, 1_500_000, "5개 일치 (1,500,000원)"),
+    FOURTH(4, 50_000, "4개 일치 (50,000원)"),
+    FIFTH(3, 5_000, "3개 일치 (5,000원)"),
+    MISS(0, 0, "일치 번호 없음");
 
-    private static final int DEFAULT_COUNT = 0;
-    private final int countOfMatch;
+    private final int matchesCount;
     private final int prizeMoney;
+    private final String message;
 
-    Ranking(int countOfMatch, int prizeMoney) {
-        this.countOfMatch = countOfMatch;
+    Ranking(int matchesCount, int prizeMoney, String message) {
+        this.matchesCount = matchesCount;
         this.prizeMoney = prizeMoney;
-    }
-
-    public int getCountOfMatch() {
-        return countOfMatch;
+        this.message = message;
     }
 
     public int getPrizeMoney() {
         return prizeMoney;
     }
 
-    public static Ranking valueOfRanking(int countOfMatch) {
+    public String getMessage() {
+        return message;
+    }
+
+    public static Ranking valueOfRanking(int matchesCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
-                .filter(ranking -> ranking.countOfMatch == countOfMatch)
+                .filter(ranking -> ranking.matchesCount == matchesCount)
+                .filter(ranking -> !ranking.equals(SECOND) || hasBonusNumber)
                 .findFirst()
                 .orElse(MISS);
     }
 
-    public static Map<Ranking, Integer> valueMap() {
-        Map<Ranking, Integer> rankingMap = new TreeMap<>(Comparator.reverseOrder());
-        for (Ranking ranking : values()) {
-            rankingMap.put(ranking, DEFAULT_COUNT);
-        }
-        return rankingMap;
+    public static List<Ranking> findStatistics() {
+        return Arrays.stream(values())
+                .filter(ranking -> !Ranking.MISS.equals(ranking))
+                .sorted(Collections.reverseOrder())
+                .collect(toList());
     }
 }

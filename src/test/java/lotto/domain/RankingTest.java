@@ -7,16 +7,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankingTest {
 
-    @DisplayName("ranking value map 테스트")
-    @Test
-    void valueMapTest() {
-        assertThat(Ranking.valueMap().size()).isNotZero();
-        assertThat(Ranking.valueMap().get(Ranking.FOURTH)).isZero();
-    }
-
     @DisplayName("count 입력 결과 enum value 테스트")
     @Test
     void findRankingByCountTest() {
-        assertThat(Ranking.valueOfRanking(6)).isEqualTo(Ranking.FIRST);
+        assertThat(Ranking.valueOfRanking(6, false)).isEqualTo(Ranking.FIRST);
+    }
+
+    @DisplayName("당첨 통계 enum value 테스트")
+    @Test
+    void findStatisticsTest() {
+        assertThat(Ranking.findStatistics()).doesNotContain(Ranking.MISS);
     }
 }

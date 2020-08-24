@@ -1,41 +1,51 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Lottos {
-    private final List<Lotto> lottoList;
+import static java.util.stream.Collectors.toList;
 
-    private Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+public class Lottos implements Iterable<Lotto> {
+    private final List<Lotto> lottos;
+
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public static Lottos of(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
-    public LottoResult getResult(final WinningLotto winningLotto) {
-        final LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottoList) {
-            lottoResult.updateCount(lotto.findRankingByLotto(winningLotto.getWinningLotto()));
-        }
-        return lottoResult;
+    public int size() {
+        return lottos.size();
+    }
+
+    public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(winningLotto::match)
+                .collect(toList());
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottos.iterator();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottos lottos = (Lottos) o;
-        return Objects.equals(lottoList, lottos.lottoList);
+        Lottos that = (Lottos) o;
+        return Objects.equals(this.lottos, that.lottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoList);
+        return Objects.hash(lottos);
     }
 }

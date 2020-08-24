@@ -28,17 +28,17 @@ public class Lotto {
     }
 
     public int matchNumber(Lotto lotto) {
-        return this.lottoNumbers.stream()
-                .mapToInt(lotto::increase)
-                .sum();
+        return (int) lottoNumbers.stream()
+                .filter(lotto::hasNumber)
+                .count();
     }
 
-    public int increase(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public Ranking findRankingByLotto(final Lotto winningLotto) {
-        return Ranking.valueOfRanking(matchNumber(winningLotto));
+    public Ranking findRankingByLotto(Lotto lotto, LottoNumber lottoNumber) {
+        return Ranking.valueOfRanking(matchNumber(lotto), hasNumber(lottoNumber));
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
@@ -51,8 +51,8 @@ public class Lotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        Lotto that = (Lotto) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
