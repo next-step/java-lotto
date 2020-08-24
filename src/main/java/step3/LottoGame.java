@@ -1,8 +1,6 @@
 package step3;
 
 import step3.domain.Lotto;
-import step3.domain.LottoIssuer;
-import step3.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +8,6 @@ import java.util.List;
 public class LottoGame {
 	private static final int LOTTO_PRICE = 1000;
 	private static final String LOTTO_PRICE_PHRASES = "로또 구입 금액은 1000원 단위만 가능합니다.";
-
-	public List<Lotto> startLottoGame() {
-		int price = InputView.inputPrice();
-		return this.getLottos(price);
-	}
 
 	public List<Lotto> getLottos(int price) {
 		validPrice(price);
@@ -28,7 +21,7 @@ public class LottoGame {
 	}
 
 	private Lotto issueLotto() {
-		return new Lotto(new LottoIssuer().issueAutoLotto());
+		return new Lotto();
 	}
 
 	private void validPrice(int price) {
