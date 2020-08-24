@@ -14,7 +14,7 @@ public class Money {
         return money / UNIT_PRICE;
     }
 
-    public double calculateYelid(int winnings) {
+    public double calculateYield(int winnings) {
         return (double) winnings / money;
     }
 

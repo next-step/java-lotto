@@ -2,6 +2,7 @@ package step3.view;
 
 import step3.domain.Lotto;
 import step3.domain.LottoConfig;
+import step3.domain.Lottos;
 import step3.domain.Winnings;
 
 import java.text.MessageFormat;
@@ -18,8 +19,8 @@ public class ResultView {
         System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottoPurchaseCount));
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        lottos.forEach(System.out::println);
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos);
     }
 
     public static void printWinningCountStatistics(Map<Integer, Integer> calculateWinningCountStatistics) {

@@ -8,9 +8,10 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
+    public static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final int PICK_COUNT = 6;
-    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(0, LAST_LOTTO_NUMBER)
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
@@ -21,8 +22,8 @@ public class LottoFactory {
     }
 
     private static List<Integer> pickLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        return new ArrayList<>(lottoNumbers.subList(0, PICK_COUNT));
+        Collections.shuffle(LOTTO_NUMBERS);
+        return new ArrayList<>(LOTTO_NUMBERS.subList(0, PICK_COUNT));
     }
 
 }
