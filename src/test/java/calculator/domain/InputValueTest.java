@@ -1,9 +1,9 @@
-package domain;
+package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static domain.InputValue.checkCustomDelimiter;
-import static domain.InputValue.inputValueValidate;
+import static calculator.domain.InputValue.checkCustomDelimiter;
+import static calculator.domain.InputValue.inputValueValidate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
