@@ -1,2 +1,4 @@
-package AutoLotto.utils.lotto;public class CheckDivideBy {
+package AutoLotto.utils.lotto;
+
+public class CheckDivideBy {
 }

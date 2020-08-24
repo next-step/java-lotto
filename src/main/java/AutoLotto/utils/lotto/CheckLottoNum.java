@@ -1,4 +1,6 @@
-package AutoLotto.utils;
+package AutoLotto.utils.lotto;
 
-public interface CheckLottoNum {
+import AutoLotto.utils.MatchRegex;
+
+public interface CheckLottoNum extends MatchRegex {
 }
