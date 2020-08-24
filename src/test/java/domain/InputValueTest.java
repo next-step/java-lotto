@@ -47,4 +47,10 @@ public class InputValueTest {
         assertThatThrownBy(() -> inputValueValidate("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    void 숫자_이외의_값이_들어올_때_테스트() {
+        assertThatThrownBy(() -> inputValueValidate("가,1:2"))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
