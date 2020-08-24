@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import stringcalculator.TestInputUtils;
 import stringcalculator.expression.Delimiter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +26,7 @@ class ExpressionExtractorTest {
     @DisplayName("구분자 구하기 - 사용자 정의 구분자")
     @Test
     void extractCustomDelimiter() {
-        String expression = "//.\n1.2";
+        String expression = "//.\\n1.2";
         String delimiter = ".";
 
         //when
@@ -55,8 +54,6 @@ class ExpressionExtractorTest {
     @ParameterizedTest
     @CsvSource(value = {"//.\\n1.2:1.2", "1,2:1,2"}, delimiter = ':')
     void extractExpression(String values, String expected) {
-        values = TestInputUtils.replaceLinefeed(values);
-
         //when
         String actual = ExpressionExtractor.extractNumbers(values);
 

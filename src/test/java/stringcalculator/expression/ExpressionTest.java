@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.TestInputUtils;
 import stringcalculator.common.ExceptionMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,8 +15,6 @@ class ExpressionTest {
     @ParameterizedTest
     @ValueSource(strings = {"1:2:3", "//;\\n1;2;3"})
     void newInstance(String expressionValue) {
-        expressionValue = TestInputUtils.replaceLinefeed(expressionValue);
-
         //when
         Expression expression = Expression.newInstance(expressionValue);
 

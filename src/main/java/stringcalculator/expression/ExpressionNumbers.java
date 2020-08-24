@@ -14,7 +14,7 @@ public class ExpressionNumbers {
         validate(values);
 
         this.expressionNumbers = Arrays.stream(values)
-                .map(numberValue -> ExpressionNumber.newInstance(numberValue))
+                .map(ExpressionNumber::newInstance)
                 .collect(Collectors.toList());
     }
 
