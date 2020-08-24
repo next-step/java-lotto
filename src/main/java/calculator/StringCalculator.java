@@ -12,37 +12,39 @@ public class StringCalculator {
     private static List<String> tokens;
 
     public static int splitAndSum(String formula) {
-        if(validateFormulaEmpty(formula)) {
+        if(StringUtils.isBlank(formula)) {
             return 0;
         }
+        customSeperator(formula);
+        normalSeperator(formula);
+        isTokensNumber();
+        if(tokens.size() == 1) {
+            return Integer.parseInt(tokens.get(0));
+        }
+        return tokens.stream().mapToInt(Integer::parseInt).sum();
+    }
 
-        // 커스텀 구분자
+    // 숫자 이외의 값이 있는지 검사
+    private static void isTokensNumber() {
+        tokens.forEach(StringCalculator::isNumberCheck);
+    }
+
+    // 일반 구분자
+    private static void normalSeperator(String formula) {
+        tokens = Arrays.asList(formula.split(seperator));
+    }
+
+    // 커스텀 구분자
+    private static void customSeperator(String formula) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(formula);
 
         if (m.find()) {
             seperator = m.group(1);
-            tokens = Arrays.asList(m.group(2).split(seperator));
+            normalSeperator(m.group(2));
         }
-
-        // 일반 구분자
-        tokens = Arrays.asList(formula.split(seperator));
-
-        // 숫자 이외의 값이 있는지 검사
-        tokens.forEach(StringCalculator::isNumberCheck);
-
-        // 입력 숫자가 하나인지 체크
-        if(tokens.size() < 2) {
-            return Integer.parseInt(tokens.get(0));
-        }
-
-        // 더하기
-        return tokens.stream().mapToInt(Integer::parseInt).sum();
     }
 
-    private static boolean validateFormulaEmpty(String formula) {
-        return StringUtils.isBlank(formula);
-    }
-
+    // 숫자가 아닐 경우 RuntimeException
     public static void isNumberCheck(String value) {
         try {
             Integer.parseInt(value);
