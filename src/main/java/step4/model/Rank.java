@@ -1,5 +1,7 @@
 package step4.model;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -17,20 +19,15 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 6) {
-            return FIRST;
-        }
         if (countOfMatch == 5 && matchBonus) {
             return SECOND;
         }
-        if (countOfMatch == 5 && !matchBonus) {
-            return THIRD;
-        }
-        if (countOfMatch == 4) {
-            return FOURTH;
-        }
-        if (countOfMatch == 3) {
-            return FIFTH;
+        if (countOfMatch > 2 && countOfMatch < 7) {
+            return Arrays.stream(Rank.values())
+                    .filter(value -> value.getCountOfMatch() == countOfMatch && value.getWinningMoney() != 30_000_000)
+                    .findFirst()
+                    .get()
+                    ;
         }
         return MISS;
     }
