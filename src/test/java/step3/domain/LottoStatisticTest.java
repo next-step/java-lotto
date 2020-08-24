@@ -51,13 +51,13 @@ class LottoStatisticTest {
 	@DisplayName(value = "로또 당첨 통계 테스트")
 	@Test
 	void calcLottoResult() {
-		Map<LottoWinning, Integer> result = new LottoStatistic(winningLotto, winningBonus)
+		Map<Rank, Integer> result = new LottoStatistic(winningLotto, winningBonus)
 				.calcLottoResult(lottos);
 
-		assertThat(result).containsEntry(LottoWinning.BONUS, 1);
-		assertThat(result).containsEntry(LottoWinning.SIX, 1);
-		assertThat(result).containsEntry(LottoWinning.FOUR, 1);
-		assertThat(result).containsEntry(LottoWinning.NOTHING, 5);
+		assertThat(result).containsEntry(Rank.BONUS, 1);
+		assertThat(result).containsEntry(Rank.SIX, 1);
+		assertThat(result).containsEntry(Rank.FOUR, 1);
+		assertThat(result).containsEntry(Rank.NOTHING, 5);
 	}
 
 }

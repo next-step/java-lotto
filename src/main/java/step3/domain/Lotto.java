@@ -35,11 +35,6 @@ public class Lotto {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return Arrays.toString(numbers.toArray());
-	}
-
 	public int getMatchCount(Lotto otherLotto) {
 		return (int) numbers.stream()
 				.filter(otherLotto::containNumber)
@@ -48,5 +43,10 @@ public class Lotto {
 
 	public boolean containNumber(LottoNumber number) {
 		return numbers.contains(number);
+	}
+
+	@Override
+	public String toString() {
+		return Arrays.toString(numbers.toArray());
 	}
 }

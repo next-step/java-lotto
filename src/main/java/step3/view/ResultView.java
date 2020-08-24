@@ -1,7 +1,7 @@
 package step3.view;
 
 import step3.domain.Lotto;
-import step3.domain.LottoWinning;
+import step3.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -21,19 +21,19 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void printWinningResult(Map<LottoWinning, Integer> result) {
+	public static void printWinningResult(Map<Rank, Integer> result) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("----------");
 
-		for (LottoWinning winning : Arrays.stream(LottoWinning.values()).filter(winning -> winning.getMatchingCount() != 0).collect(Collectors.toList())) {
+		for (Rank winning : Arrays.stream(Rank.values()).filter(winning -> winning.getMatchingCount() != 0).collect(Collectors.toList())) {
 			System.out.print(winning.getMatchingCount()+ "개 일치");
 			printBonus(winning);
 			System.out.println("(" + winning.getReward()+"원)- " + result.getOrDefault(winning, 0) + "개");
 		}
 	}
 
-	private static void printBonus(LottoWinning winning) {
+	private static void printBonus(Rank winning) {
 		if (winning.isBonus()) {
 			System.out.print(", 보너스 볼 일치");
 		}

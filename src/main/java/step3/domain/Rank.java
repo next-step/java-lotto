@@ -2,7 +2,7 @@ package step3.domain;
 
 import java.util.Arrays;
 
-public enum LottoWinning {
+public enum Rank {
 	THREE(3, false, 5_000),
 	FOUR(4, false, 50_000),
 	FIVE(5, false, 1_500_000),
@@ -15,7 +15,7 @@ public enum LottoWinning {
 	private final boolean isBonus;
 	private final int reward;
 
-	LottoWinning(int matchingCount, boolean isBonus, int reward) {
+	Rank(int matchingCount, boolean isBonus, int reward) {
 		this.matchingCount = matchingCount;
 		this.isBonus = isBonus;
 		this.reward = reward;
@@ -33,9 +33,9 @@ public enum LottoWinning {
 		return reward;
 	}
 
-	public static LottoWinning valueOf(int matchingCount, boolean bonus) {
+	public static Rank valueOf(int matchingCount, boolean bonus) {
 		if (isEqualMatchCount(matchingCount, FIVE.matchingCount) && bonus) {
-			return LottoWinning.BONUS;
+			return Rank.BONUS;
 		}
 		return Arrays.stream(values())
 				.filter(winning -> isEqualMatchCount(matchingCount, winning.matchingCount))

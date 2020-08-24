@@ -1,4 +1,4 @@
-package step3;
+package step3.domain;
 
 import step3.domain.Lotto;
 
@@ -15,13 +15,9 @@ public class LottoGame {
 
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			lottos.add(issueLotto());
+			lottos.add(new Lotto());
 		}
 		return lottos;
-	}
-
-	private Lotto issueLotto() {
-		return new Lotto();
 	}
 
 	private void validPrice(int price) {
