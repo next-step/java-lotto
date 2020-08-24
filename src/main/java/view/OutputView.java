@@ -18,13 +18,18 @@ public class OutputView {
 
         List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();
         winningInfos.forEach(e -> {
-            String str = e.getRank().equals(Rank.SECOND)? ", 보너스 볼 일치" : "";
+            String str = getAdditionalStr(e);
             System.out.printf("%d개 일치%s (%d원) - %d개\n", e.getRank().getCountOfMatch(),
                     str,
                     e.getRank().getWinningMoney().intValue(),
                     e.getWinningNumber());
         });
         return lottoWinningInfos;
+    }
+
+    private static String getAdditionalStr(WinningInfo e) {
+        if (e.getRank().equals(Rank.SECOND)) return ", 보너스 볼 일치";
+        return "";
     }
 
     public static void printBenefitRate(LottoGame lottoGame, LottoMoney lottoMoney, WinningInfos winningInfos) {
