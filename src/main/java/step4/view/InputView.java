@@ -10,6 +10,15 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public static int askNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public static void askManualLottoValue() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static int printNumberOfTickets(int amount) {
         System.out.println(amount / 1000 + "개를 구매했습니다.");
         return amount / 1000;
@@ -24,5 +33,9 @@ public class InputView {
     public static int checkBonusBallNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
+    }
+
+    public static String enterManualLottoNumber() {
+        return scanner.nextLine();
     }
 }

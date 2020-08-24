@@ -16,6 +16,12 @@ public class LottoExtractorMain {
         List<LottoTicket> ticketList = new ArrayList<>();
         // 초기금액 입력
         int amount = InputView.askQuestion();
+        int numberOfManualLottoTrials = InputView.askNumberOfManualLotto();
+        InputView.askManualLottoValue();
+
+        for (int loop = 0; loop < numberOfManualLottoTrials; loop++) {
+            ticketList.add(new LottoTicket(InputView.enterManualLottoNumber()));
+        }
         LottoNumberGenerator generator = new LottoNumberGenerator();
         // 시도할 횟수값 중간저장
         int trials = InputView.printNumberOfTickets(amount);
