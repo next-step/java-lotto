@@ -17,7 +17,7 @@ public class Number {
         return result;
     }
 
-    public int is() {
+    public int getNumber() {
         return number;
     }
 
