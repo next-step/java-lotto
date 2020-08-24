@@ -3,18 +3,12 @@ package StringAddCalculator;
 import StringAddCalculator.utils.CheckNumber;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static StringAddCalculator.utils.CheckDelimiter.isInvalidDelimiter;
 import static StringAddCalculator.utils.CheckString.isNullOrBlank;
+import static StringAddCalculator.utils.Constants.*;
 
 public class StringAddCalculator {
-
-    public static final int ADD_NULL_OR_BLANK = 0;
-    public static final Pattern COMPILER_CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
-    public static final int CUSTOM_DELIMITER_INDEX = 1;
-    public static final int AFTER_CUSTOM_DELIMITER_INDEX = 2;
-
     // 음? 커스텀구분자로 m.group(2).split(cus)한 후에는 각 구분자 맞는지 확인할 필요는 없나? 확인하려고 하면 에러발생
     // if (isInvalidCustomDelimiter(nextExpressions[i], customDelimiter)) { return result2;}
 
@@ -32,12 +26,13 @@ public class StringAddCalculator {
     }
 
     private static int sumWhenOriginalDelimiter(String expression) {
-        int result = findNumber(expression, 0);
-        for (int i = 1; i < toSplits(expression).length; i += 2) {
-            if (isInvalidDelimiter(toSplits(expression)[i])) {
+        String[] expressions = toSplits(expression);
+        int result = findNumber(expressions, 0);
+        for (int i = 1; i < expressions.length; i += 2) {
+            if (isInvalidDelimiter(expressions[i])) {
                 return result;
             }
-            int nextNumber = findNumber(expression, i + 1);
+            int nextNumber = findNumber(expressions, i + 1);
             result = result + nextNumber;
         }
         return result;
@@ -56,16 +51,16 @@ public class StringAddCalculator {
         return Integer.parseInt(expressions[i]);
     }
 
-    private static int findNumber(String expression, int i) {
-        if (CheckNumber.isMinus(findNumber2(toSplits(expression), i))) {
+    private static int findNumber(String[] expressions, int i) {
+        if (CheckNumber.isMinus(findNumber2(expressions, i))) {
             throw new RuntimeException();
         }
-        return findNumber2(toSplits(expression), i);
+        return findNumber2(expressions, i);
     }
 
     private static String[] toSplits(String expression) {
         if (isNullOrBlank(expression)) {
-            expression = "0";
+            expression = RESULT_FOR_NONE_INPUT;
         }
         String[] expressions = expression.split("");
         return expressions;
