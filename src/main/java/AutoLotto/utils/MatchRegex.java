@@ -1,2 +1,4 @@
-package AutoLotto.utils;public interface MatchRegex {
+package AutoLotto.utils;
+
+public interface MatchRegex {
 }

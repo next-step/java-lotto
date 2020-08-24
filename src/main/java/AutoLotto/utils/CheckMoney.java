@@ -1,2 +1,4 @@
-package AutoLotto.utils;public class CheckMoney {
+package AutoLotto.utils;
+
+public class CheckMoney {
 }

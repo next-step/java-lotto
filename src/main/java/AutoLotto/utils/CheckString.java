@@ -1,2 +1,4 @@
-package AutoLotto.utils;public class CheckString {
+package AutoLotto.utils;
+
+public class CheckString {
 }

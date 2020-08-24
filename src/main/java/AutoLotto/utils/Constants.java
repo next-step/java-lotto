@@ -1,2 +1,4 @@
-package AutoLotto.utils;public class Constants {
+package AutoLotto.utils;
+
+public class Constants {
 }
