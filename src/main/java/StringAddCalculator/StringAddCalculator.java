@@ -19,8 +19,8 @@ public class StringAddCalculator {
         Matcher m = COMPILER_CUSTOM_DELIMITER.matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
-            String[] afterDelimiterExpressions = m.group(AFTER_CUSTOM_DELIMITER_INDEX).split(customDelimiter);
-            return sumWhenCustomDelimiter(afterDelimiterExpressions);
+            String[] afterCustomDelimiter = m.group(AFTER_CUSTOM_DELIMITER_INDEX).split(customDelimiter);
+            return sumWhenCustomDelimiter(afterCustomDelimiter);
         }
         return sumWhenOriginalDelimiter(expression);
     }
@@ -32,30 +32,29 @@ public class StringAddCalculator {
             if (isInvalidDelimiter(expressions[i])) {
                 return result;
             }
-            int nextNumber = findNumber(expressions, i + 1);
-            result = result + nextNumber;
+            result = result + findNumber(expressions, i + 1);
         }
         return result;
     }
 
-    private static int sumWhenCustomDelimiter(String[] nextExpressions) {
-        int result = findNumber2(nextExpressions, 0);
-        for (int i = 1; i < nextExpressions.length; i ++) {
-            int nextNumber2 = findNumber2(nextExpressions, i);
-            result = result + nextNumber2;
+    private static int sumWhenCustomDelimiter(String[] expressions) {
+        int result = findNumber(expressions, 0);
+        for (int i = 1; i < expressions.length; i ++) {
+            result = result + findNumber(expressions, i);;
         }
         return result;
-    }
-
-    private static int findNumber2(String[] expressions, int i) {
-        return Integer.parseInt(expressions[i]);
     }
 
     private static int findNumber(String[] expressions, int i) {
-        if (CheckNumber.isMinus(findNumber2(expressions, i))) {
+        if (CheckNumber.isMinus(toInt(expressions[i]))) {
             throw new RuntimeException();
         }
-        return findNumber2(expressions, i);
+        int result = toInt(expressions[i]);
+        return result;
+    }
+
+    private static int toInt(String expression) {
+        return Integer.parseInt(expression);
     }
 
     private static String[] toSplits(String expression) {
