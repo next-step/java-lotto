@@ -4,8 +4,8 @@ import kr.heesu.lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +17,7 @@ class LottoStatisticsTest {
 
     @BeforeEach
     void setUp() {
-        List<Lotto> lottoList = new ArrayList<>();
+        Set<Lotto> lottoList = new HashSet<>();
 
         lottoList.add(Lotto.of(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::of)

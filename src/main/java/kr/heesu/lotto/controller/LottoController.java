@@ -27,7 +27,7 @@ public class LottoController {
 
             viewResolver.printPurchaseAmount(amount);
 
-            Lottos multipleLotto = LottoFactory.createMultipleLottos(amount);
+            Lottos multipleLotto = LottoFactory.createLottosAutomatic(amount);
             viewResolver.printMultipleLotto(multipleLotto);
 
             String stringWinningNumbers = viewResolver.getWinningNumbers();

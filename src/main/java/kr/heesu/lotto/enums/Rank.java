@@ -10,8 +10,8 @@ public enum Rank {
     SECOND(5L, 30_000_000L),
     FIRST(6L, 2_000_000_000L);
 
-    private Long countOfMatch;
-    private Long winningMoney;
+    private final Long countOfMatch;
+    private final Long winningMoney;
 
     Rank(Long countOfMatch, Long winningMoney) {
         this.countOfMatch = countOfMatch;
