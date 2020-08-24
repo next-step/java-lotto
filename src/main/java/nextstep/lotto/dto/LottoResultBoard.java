@@ -1,6 +1,7 @@
 package nextstep.lotto.dto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,15 +13,17 @@ public class LottoResultBoard {
     private Map<LottoRank,Integer> lottoResult = new HashMap();
 
     public LottoResultBoard() {}
-    public LottoResultBoard(LottoTickets userLottoTickets,LottoTicket winnerTicket) {
+    public LottoResultBoard(LottoTickets userLottoTickets,LottoWinnerNumbers winnerTicket) {
         this.lottoResult = new HashMap();
 
         for(LottoTicket ticket : userLottoTickets.getAll()){
-            addLottoResult(ticket.matchCount(winnerTicket.getLottoNumber()));
+            addLottoResult(winnerTicket.matchCount(ticket.getLottoNumber()));
         }
+
     }
 
-    public static LottoResultBoard create(LottoTickets userLottoTickets,LottoTicket winnerTicket){
+    public static LottoResultBoard create(LottoTickets userLottoTickets,LottoWinnerNumbers winnerTicket){
+
         return new LottoResultBoard(userLottoTickets, winnerTicket);
     }
     public void addLottoResult(LottoRank lottoRank){
