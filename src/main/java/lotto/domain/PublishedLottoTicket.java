@@ -7,15 +7,19 @@ public class PublishedLottoTicket {
 
     private Set<LottoTicket> publishedLottoTicket;
 
-    public PublishedLottoTicket(int lottoTicketCounts) {
+    private PublishedLottoTicket(int lottoTicketCounts) {
         this.publishedLottoTicket = new HashSet<>();
         publishLottoTicket(lottoTicketCounts);
+    }
+
+    public static PublishedLottoTicket valueOf(int lottoTicketCounts) {
+        return new PublishedLottoTicket(lottoTicketCounts);
     }
 
     private void publishLottoTicket(int lottoTicketCounts) {
         for (int i = 0; i < lottoTicketCounts; i++) {
             Set<LottoNumber> lottoNumbers = LottoMachine.generateLottoNumber();
-            this.publishedLottoTicket.add(new LottoTicket(lottoNumbers));
+            this.publishedLottoTicket.add(LottoTicket.valueOf(lottoNumbers));
         }
     }
 

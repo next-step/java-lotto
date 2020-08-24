@@ -27,19 +27,19 @@ class LottoResultTest {
 
     @BeforeEach
     void setLottoTicket() {
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
+        lottoTickets.add(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
+        lottoTickets.add(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
+        lottoTickets.add(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7"))));
+        lottoTickets.add(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
+        lottoTickets.add(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH", "FIFTH"})
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
-        LottoResult lottoResult = new LottoResult();
+        WinningLotto winningLotto = WinningLotto.valueOf(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
+        LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
         assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(1);
     }
@@ -47,8 +47,8 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
-        LottoResult lottoResult = new LottoResult();
+        WinningLotto winningLotto = WinningLotto.valueOf(LottoMachine.createManualLottoNumbers(winningLottoNumbers), 7);
+        LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
         assertThat(lottoResult.calculatePrizeRate(5000)).isEqualTo(40631100);
     }

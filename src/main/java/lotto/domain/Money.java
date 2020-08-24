@@ -5,9 +5,13 @@ public class Money {
     private static final int LOTTO_PRICE = 1000;
     private int money;
 
-    public Money(int money) {
+    private Money(int money) {
         validateMoney(money);
         this.money = money;
+    }
+
+    public static Money valueOf(int money) {
+        return new Money(money);
     }
 
     private void validateMoney(int money) {

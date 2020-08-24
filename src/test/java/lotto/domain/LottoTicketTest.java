@@ -13,15 +13,15 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 숫자가 6개인지 테스트")
     void lotto_ticket_count() {
         LottoMachine.getInstance();
-        assertThatCode(() -> new LottoTicket(LottoMachine.generateLottoNumber()))
+        assertThatCode(() -> LottoTicket.valueOf(LottoMachine.generateLottoNumber()))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("두 로또 번호를 비교해 맞은 개수 반환 테스트")
     void count_match_numbers() {
-        LottoTicket winningLotto = new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
-        LottoTicket compareLotto = new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
+        LottoTicket winningLotto = LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
+        LottoTicket compareLotto = LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
         assertEquals(4, winningLotto.countMatchNumbers(compareLotto));
     }
 }

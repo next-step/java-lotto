@@ -10,9 +10,13 @@ public class LottoNumber {
 
     private int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber valueOf(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
     public int getLottoNumber() {

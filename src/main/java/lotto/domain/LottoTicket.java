@@ -7,10 +7,14 @@ public class LottoTicket {
     private static final int LOTTO_COUNT = 6;
     private Set<LottoNumber> lottoTicketNumbers;
 
-    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
         validateBlank(lottoNumbers);
         validateCount(lottoNumbers);
         lottoTicketNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket valueOf(Set<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public int countMatchNumbers(LottoTicket otherLottoTicket) {

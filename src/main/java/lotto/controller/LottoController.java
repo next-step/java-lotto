@@ -32,15 +32,15 @@ public class LottoController {
                   .printPrizeRate(lottoResult.calculatePrizeRate(lottoMoney.getMoney()));
     }
 
-    private void buyLottoTicket(){
-        lottoMoney = new Money(InputView.inputMoney());
+    private void buyLottoTicket() {
+        lottoMoney = Money.valueOf(InputView.inputMoney());
         publishedLottoTicket = lottoShop.buyLotto(lottoMoney.getMoney());
-        lottoTicketCount = LottoTicketCount.getInstance(lottoMoney.getMoney());
+        lottoTicketCount = LottoTicketCount.valueOf(lottoMoney.getMoney());
     }
 
     private void drawLottoResult() {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = new WinningLotto(LottoMachine.createManualLottoNumbers(winningLottoNumbers), InputView.inputBonusBall());
+        WinningLotto winningLotto = WinningLotto.valueOf(LottoMachine.createManualLottoNumbers(winningLottoNumbers), InputView.inputBonusBall());
         lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
     }

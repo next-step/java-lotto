@@ -9,7 +9,7 @@ public class LottoResult {
 
     private Map<WinningPrize, Integer> lottoPrizeResult = new LinkedHashMap<>();
 
-    public LottoResult() {
+    private LottoResult() {
         Arrays.stream(WinningPrize.values())
                 .forEach(winningPrize -> this.lottoPrizeResult.put(winningPrize, 0));
     }

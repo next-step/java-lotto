@@ -13,19 +13,18 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("유효 범위 내의 로또 번호 테스트")
     void valid_lotto_number_test(int number) {
-        assertThatCode(() -> new LottoNumber(number))
+        assertThatCode(() -> LottoNumber.valueOf(number))
                 .doesNotThrowAnyException();
-        assertThatCode(() -> new LottoNumber(number))
+        assertThatCode(() -> LottoNumber.valueOf(number))
                 .doesNotThrowAnyException();
     }
-
 
     @ParameterizedTest
     @ValueSource(ints = {0, 50})
     @DisplayName("유효 범위 밖의 로또 번호 테스트")
     void invalid_lotto_number_test(int number) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            LottoNumber lottoNumber = new LottoNumber(number);
+            LottoNumber lottoNumber = LottoNumber.valueOf(number);
         });
     }
 }

@@ -14,18 +14,16 @@ public class LottoShop {
         return LottoShop.LottoShopLazyHolder.instance;
     }
 
-
     public PublishedLottoTicket buyLotto(int money) {
         validatePriceIsEmpty(money);
         validatePriceIsDivide(money);
 
-        LottoTicketCount lottoTicketCount = new LottoTicketCount(money);
+        LottoTicketCount lottoTicketCount = LottoTicketCount.valueOf(money);
         LottoMachine.getInstance();
-        PublishedLottoTicket publishedLottoTicket = new PublishedLottoTicket(lottoTicketCount.getLottoTicketCount());
+        PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.valueOf(lottoTicketCount.getLottoTicketCount());
 
         return publishedLottoTicket;
     }
-
 
     private void validatePriceIsEmpty(int price) {
         if(price <= 0) {

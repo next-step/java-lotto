@@ -4,11 +4,11 @@ public class LottoTicketCount {
     private static final int LOTTO_PRICE = 1000;
     private int lottoTicketCount;
 
-    public LottoTicketCount(int money) {
+    private LottoTicketCount(int money) {
         this.lottoTicketCount = calculateLottoTicketCount(money);
     }
 
-    public static LottoTicketCount getInstance(int money){
+    public static LottoTicketCount valueOf(int money) {
         return new LottoTicketCount(money);
     }
 

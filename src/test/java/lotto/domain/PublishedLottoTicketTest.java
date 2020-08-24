@@ -13,7 +13,7 @@ class PublishedLottoTicketTest {
     @DisplayName("구매한 갯수 만큼 로또티켓 발행 테스트")
     void publish_lotto_ticket(int count) {
         LottoMachine.getInstance();
-        PublishedLottoTicket publishedLottoTicket = new PublishedLottoTicket(count);
+        PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.valueOf(count);
         assertThat(publishedLottoTicket.getPublishedLottoTicket().size()).isEqualTo(10);
     }
 

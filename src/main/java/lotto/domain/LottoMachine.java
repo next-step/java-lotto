@@ -32,7 +32,7 @@ public class LottoMachine {
     public static Set<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.valueOf(number))
                 .collect(Collectors.toSet());
     }
 
@@ -41,7 +41,7 @@ public class LottoMachine {
         Set<LottoNumber> lotto = new HashSet<>();
 
         for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {
-            lotto.add(new LottoNumber(deduplicatedManualLottoNumber));
+            lotto.add(LottoNumber.valueOf(deduplicatedManualLottoNumber));
         }
         return lotto;
     }
