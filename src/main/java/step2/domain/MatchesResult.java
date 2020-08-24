@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import static step2.domain.BaseScore.getBaseMap;
 
 public class MatchesResult {
-    Map<ScoreType, Long> results;
+    private Map<ScoreType, Long> results;
 
     public MatchesResult(Map<ScoreType, Long> results) {
         this.results = results;
