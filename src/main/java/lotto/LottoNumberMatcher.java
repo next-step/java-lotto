@@ -39,6 +39,10 @@ public class LottoNumberMatcher {
         return profit;
     }
 
+    public int getMatchTicketCount(int matchCount) {
+        return matchResult.getOrDefault(matchCount, 0);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

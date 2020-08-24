@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoPriceInfo {
-    MATCH_COUNT_6(6, 2_000_000_000),
-    MATCH_COUNT_5(5, 1_500_000),
+    MATCH_COUNT_3(3, 5_000),
     MATCH_COUNT_4(4, 50_000),
-    MATCH_COUNT_3(3, 5_000);
+    MATCH_COUNT_5(5, 1_500_000),
+    MATCH_COUNT_6(6, 2_000_000_000);
 
     private Integer matchCount;
     private Integer price;
@@ -26,5 +26,10 @@ public enum LottoPriceInfo {
 
     public int calculatePrice(int matchTicketCount) {
         return this.price * matchTicketCount;
+    }
+
+    public String getMatchResultMessage(LottoNumberMatcher lottoNumberMatcher) {
+        int matchTicketCount = lottoNumberMatcher.getMatchTicketCount(this.matchCount);
+        return this.matchCount + "개 일치(" + this.price + "원) - " + matchTicketCount + "개";
     }
 }
