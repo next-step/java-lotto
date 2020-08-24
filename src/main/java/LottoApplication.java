@@ -1,6 +1,7 @@
 import step2.domain.Lotto;
 import step2.domain.LottoMachine;
 import step2.domain.User;
+import step2.domain.WinningLotto;
 import step2.domain.view.InputView;
 import step2.domain.view.OutputView;
 
@@ -16,6 +17,9 @@ public class LottoApplication {
 
         user.setMyLotto(lotto);
         outputView.viewLottoNumbers(lotto);
+
+        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers());
+        winningLotto.getResult(lotto);
 
     }
 }
