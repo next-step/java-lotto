@@ -13,15 +13,17 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine(lottoNumberExtractor);
 
         int purchasePrice = inputView.getPurchasePrice();
-        List<Integer> winningNumbers = inputView.getWinningNumbers();
-        int bonusNumber = inputView.getBonusNumber();
-        LottoTickets lottoTickets = lottoMachine.makeLottoTickets(purchasePrice);
-        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
+        int manualSize = inputView.getManualSize();
+        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualSize);
 
-        resultView.printLottoTicketSize(lottoTickets.size());
+        LottoTickets lottoTickets = lottoMachine.makeLottoTickets(purchasePrice, manualLottoNumbers);
+        resultView.printLottoTicketSize(manualSize, lottoTickets.size() - manualSize);
         List<String> lottoTicketStrings = lottoTickets.getLottoTicketStrings();
         resultView.printLottoTickets(lottoTicketStrings);
 
+        List<Integer> winningNumbers = inputView.getWinningNumbers();
+        int bonusNumber = inputView.getBonusNumber();
+        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
         LottoResult lottoResult = lottoTickets.getMatchResult(winningTicket);
 
         resultView.printLottoStatistics(lottoResult.getWinningResult());
