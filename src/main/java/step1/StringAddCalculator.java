@@ -5,7 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final Pattern DELIMITER = Pattern.compile("//(.)\\\\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
+    private static final String MATCHER_DELIMITER = "1";
+    private static final String MATCHER_EXPRESSION = "2";
 
     private String expression;
     private String delimiter;
@@ -40,10 +42,10 @@ public class StringAddCalculator {
     }
 
     private String getDelimiter() {
-        Matcher matcher = DELIMITER.matcher(expression);
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(expression);
         if(matcher.find()) {
-            this.expression = matcher.group(2);
-            return matcher.group(1);
+            this.expression = matcher.group(MATCHER_EXPRESSION);
+            return matcher.group(MATCHER_DELIMITER);
         }
         return "[/,:/g]";
     }
