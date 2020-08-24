@@ -10,14 +10,11 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private static String seperator = ",|:";
     private static List<String> tokens;
-    private int result;
-
 
     public static int splitAndSum(String formula) {
         if(validateFormulaEmpty(formula)) {
             return 0;
         }
-
 
         // 커스텀 구분자
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(formula);
@@ -38,7 +35,8 @@ public class StringCalculator {
             return Integer.parseInt(tokens.get(0));
         }
 
-        return 1;
+        // 더하기
+        return tokens.stream().mapToInt(Integer::parseInt).sum();
     }
 
     private static boolean validateFormulaEmpty(String formula) {
