@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -33,13 +35,9 @@ public class LottoFactory {
 	}
 
 	public static Lotto create(String lottoNumbersString) {
-		return numbersStringToLotto(lottoNumbersString);
-	}
+		validateLottoNumbers(lottoNumbersString);
 
-	public static Lotto numbersStringToLotto(String numbersString) {
-		InputValidator.validateLottoNumbers(numbersString);
-
-		return Lotto.of(Stream.of(numbersString.split(WINNING_NUMBER_DELIMITER))
+		return Lotto.of(Stream.of(lottoNumbersString.split(WINNING_NUMBER_DELIMITER))
 							  .mapToInt(number -> stringToInt(number))
 							  .boxed()
 							  .collect(toList()));
@@ -64,15 +62,17 @@ public class LottoFactory {
 		return copiedLottoBalls;
 	}
 
-	private static Lotto toLotto(List<Integer> numbers) {
-		return Lotto.of(numbers);
-	}
-
 	private static int stringToInt(String value) {
 		String trimValue = value.trim();
 		if (!InputValidator.isNumber(trimValue)) {
 			throw new IllegalArgumentException("생성할 로또 번호는 숫자로 입력해주세요.");
 		}
 		return Integer.parseInt(trimValue);
+	}
+
+	public static void validateLottoNumbers(String numbersString) {
+		if (StringUtils.isBlank(numbersString)) {
+			throw new IllegalArgumentException("생성할 번호를 입력해주세요.");
+		}
 	}
 }

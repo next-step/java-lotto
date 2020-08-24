@@ -13,7 +13,7 @@ public class WinningBallsFactory {
 
 	public static WinningBalls create(String numbersString, String bonusBallString) {
 		InputValidator.validateWinningNumbers(numbersString);
-		Lotto winningNumbers = LottoFactory.numbersStringToLotto(numbersString);
+		Lotto winningNumbers = LottoFactory.create(numbersString);
 		return WinningBalls.of(winningNumbers, BonusBall.of(bonusBallString));
 	}
 }
