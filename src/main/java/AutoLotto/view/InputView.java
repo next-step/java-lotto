@@ -1,2 +1,4 @@
-package AutoLotto.view;public class InputView {
+package AutoLotto.view;
+
+public class InputView implements SystemInput {
 }

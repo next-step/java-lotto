@@ -1,4 +1,4 @@
 package AutoLotto.view;
 
-public interface SystemOut {
+public interface SystemOutput {
 }

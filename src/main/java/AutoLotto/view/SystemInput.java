@@ -1,2 +1,4 @@
-package AutoLotto.view;public interface SystemInput {
+package AutoLotto.view;
+
+public interface SystemInput {
 }
