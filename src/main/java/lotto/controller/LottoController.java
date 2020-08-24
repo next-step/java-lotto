@@ -23,7 +23,7 @@ public class LottoController {
     public void start() {
         buyLottoTicket();
 
-        outputView.printPurchaseTicketCount(lottoTicketCount.getLottoTicketCount())
+        outputView.printPurchaseTicketCount(lottoTicketCount.getAutoLottoTicketCount(), lottoTicketCount.getManualLottoTicketCount())
                   .printLottoNumbers(publishedLottoTicket.getPublishedLottoTicket());
 
         drawLottoResult();
@@ -34,8 +34,10 @@ public class LottoController {
 
     private void buyLottoTicket() {
         lottoMoney = Money.valueOf(InputView.inputMoney());
-        publishedLottoTicket = lottoShop.buyLotto(lottoMoney.getMoney());
-        lottoTicketCount = LottoTicketCount.valueOf(lottoMoney.getMoney());
+        int manualLottoCount = InputView.inputManualLottoCount();
+        lottoTicketCount = LottoTicketCount.valueOf(lottoMoney.getMoney(), manualLottoCount);
+        InputView.manualLottoNumberStart();
+        publishedLottoTicket = lottoShop.buyLotto(lottoMoney.getMoney(), manualLottoCount);
     }
 
     private void drawLottoResult() {
