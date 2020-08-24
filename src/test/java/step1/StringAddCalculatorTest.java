@@ -1,18 +1,18 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringAddCalculatorTest {
-    @Test
-    public void splitAndSum_null_또는_빈문자(){
-        boolean isBoolean= UserInput.validateInputNUll(null);
-        assertThat(isBoolean).isEqualTo(true);
-
-        isBoolean = UserInput.validateInputNUll("");
-        assertThat(isBoolean).isEqualTo(true);
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void splitAndSum_null_또는_빈문자(String input){
+        assertTrue(new ValidateInput(input).validateInputNUll());
     }
 
     @Test
@@ -23,14 +23,18 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+        String input = "1,2,3";
+        String[] inputs = input.split(":|,");
+        int result = StringAddCalculator.getElementSum(inputs);
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:4");
-        assertThat(result).isEqualTo(7);
+        String input = "1,5:3";
+        String[] inputs = input.split(":|,");
+        int result = StringAddCalculator.getElementSum(inputs);
+        assertThat(result).isEqualTo(9);
     }
 
     @Test
@@ -41,8 +45,9 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_negative() throws Exception {
-        String[] inputs = {"-1","2","3"};
-        assertThatThrownBy(() -> UserInput.validateInputNegative(inputs))
+        String input = "1,-2,3";
+        String[] inputs = input.split(":|,");
+        assertThatThrownBy(() -> new ValidateInput(input).validateInputNegative(inputs))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("ERR");
     }
