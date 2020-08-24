@@ -48,11 +48,11 @@ class LottoGameTest {
         lottoGame = new LottoGame(numbersList);
     }
 
-    private Set<Number> makeNumbers(List<Integer> integers) {
+    private List<Number> makeNumbers(List<Integer> integers) {
         return new ArrayList<>(integers)
                 .stream()
                 .map(Number::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Test
