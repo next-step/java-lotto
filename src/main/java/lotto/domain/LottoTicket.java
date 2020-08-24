@@ -17,15 +17,11 @@ public class LottoTicket {
     public LottoTicket() {
     }
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoTicket = generateLottoTicket(lottoNumberGenerator);
+    public LottoTicket(List<Integer> lottoTicket) {
+        this.lottoTicket = lottoTicket;
         validateLottoRange(lottoTicket);
         validateLottoSize(lottoTicket);
         LottoNumberDuplication(lottoTicket);
-    }
-
-    private List<Integer> generateLottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        return lottoNumberGenerator.getLottoNumbers();
     }
 
     public int getMatchCount(List<Integer> winningNumbers) {
