@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class StringCalculatorTest {
@@ -23,6 +24,18 @@ public class StringCalculatorTest {
     @Test
     void 커스텀_구분자로_계산() {
         String formula = "//]\n1]2]3]4";
-        StringCalculator.splitAndSum(formula);
+        assertThat(StringCalculator.splitAndSum(formula)).isEqualTo(10);
+    }
+
+    @Test
+    void 일반_구분자로_계산() {
+        String formula = "1,2,3,4";
+        assertThat(StringCalculator.splitAndSum(formula)).isEqualTo(10);
+    }
+
+    @Test
+    void 특수_기호가_있을경우_RuntimeException() {
+        assertThatThrownBy(() -> StringCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
