@@ -1,10 +1,7 @@
 package lotto;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 
-import lotto.factory.LottoFactory;
 import lotto.factory.WinningBallsFactory;
 import lotto.input.InputView;
 import lotto.output.OutputView;
@@ -25,8 +22,6 @@ public class LottoApplication {
 		LottoPayAmounts lottoPayAmounts = LottoPayAmounts.of(InputView.inputPurchase());
 		ManualLottoCount lottoCount = ManualLottoCount.of(lottoPayAmounts, InputView.inputManualLottoCount());
 		List<String> manualLottosString = InputView.inputManualLottos(lottoCount);
-		return LottoPurchaseArgument.of(lottoPayAmounts, manualLottosString.stream()
-																		   .map(LottoFactory::create)
-																		   .collect(toList()));
+		return LottoPurchaseArgument.of(lottoPayAmounts, manualLottosString);
 	}
 }

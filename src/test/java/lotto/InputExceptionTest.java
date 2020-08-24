@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.factory.ManualLottoFactory;
 import lotto.factory.WinningBallsFactory;
 
 public class InputExceptionTest {
@@ -21,14 +20,16 @@ public class InputExceptionTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("당첨번호는 6개를 입력해주세요.");
 
-		Lotto lotto1 = ManualLottoFactory.create("1,2,3,4,5,6");
-		Lotto lotto2 = ManualLottoFactory.create("10,11,12,13,14,15");
+		String lottoNumbersString1 = "1,2,3,4,5,6";
+		String lottoNumbersString2 = "10,11,12,13,14,15";
 
-		assertThatThrownBy(() -> LottoKiosk.issue(LottoPurchaseArgument.of(LottoPayAmounts.of("asdf"), Arrays.asList(lotto1, lotto2))))
+		assertThatThrownBy(
+				() -> LottoKiosk.issue(LottoPurchaseArgument.of(LottoPayAmounts.of("asdf"), Arrays.asList(lottoNumbersString1, lottoNumbersString2))))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("구입금액은 숫자로 입력해주세요.");
 
-		assertThatThrownBy(() -> LottoKiosk.issue(LottoPurchaseArgument.of(LottoPayAmounts.of("100"), Arrays.asList(lotto1, lotto2))))
+		assertThatThrownBy(
+				() -> LottoKiosk.issue(LottoPurchaseArgument.of(LottoPayAmounts.of("100"), Arrays.asList(lottoNumbersString1, lottoNumbersString2))))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("구입금액은 최소 1000원 이상 입력해주세요.");
 
