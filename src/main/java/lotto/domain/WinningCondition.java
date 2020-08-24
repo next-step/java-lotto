@@ -30,6 +30,7 @@ public class WinningCondition {
 
     private boolean checkMatchBonusBall(int countOfMatch) {
         return Arrays.stream(Rank.values())
+                .filter(Rank::isMatchBonusBall)
                 .anyMatch(rank -> rank.getCountOfMatch() == countOfMatch);
     }
 }
