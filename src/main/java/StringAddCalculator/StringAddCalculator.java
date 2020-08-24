@@ -1,10 +1,10 @@
 package StringAddCalculator;
 
-import StringAddCalculator.utils.CheckNumber;
-
 import java.util.regex.Matcher;
 
 import static StringAddCalculator.utils.CheckDelimiter.isInvalidDelimiter;
+import static StringAddCalculator.utils.CheckNumber.isANumber;
+import static StringAddCalculator.utils.CheckNumber.isMinus;
 import static StringAddCalculator.utils.CheckString.isNullOrBlank;
 import static StringAddCalculator.utils.Constants.*;
 
@@ -46,8 +46,11 @@ public class StringAddCalculator {
     }
 
     private static int findNumber(String[] expressions, int i) {
-        if (CheckNumber.isMinus(toInt(expressions[i]))) {
-            throw new RuntimeException();
+        if (!isANumber(toInt(expressions[i]))) {
+            throw new RuntimeException(ERROR_NOT_A_NUMBER);
+        }
+        if (isMinus(toInt(expressions[i]))) {
+            throw new RuntimeException(ERROR_NUMBER_MINUS);
         }
         int result = toInt(expressions[i]);
         return result;
