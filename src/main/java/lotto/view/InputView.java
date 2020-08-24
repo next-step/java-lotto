@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoStore;
 
 import java.util.Scanner;
 
@@ -20,9 +20,9 @@ public class InputView {
         System.out.println(quantity + BUY_LOTTO_QUANTITY);
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        for (int i = NUMBER_ZERO; i < lottoTickets.size(); i++) {
-            System.out.println(lottoTickets.getLottoTicket(i));
+    public static void printLottoTickets(LottoStore lottoStore) {
+        for (int i = NUMBER_ZERO; i < lottoStore.size(); i++) {
+            System.out.println(lottoStore.getLottoTicket(i));
         }
         System.out.println();
     }

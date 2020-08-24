@@ -64,14 +64,14 @@ class WinningNumberTest {
     @Test
     @DisplayName("구입한 로또의 당첨번호 확인")
     void lottoWinningNumberCheck() {
-        LottoTickets lottoTickets1 = new LottoTickets(Arrays.asList(1,2,3,4,5,6), 1);
-        LottoTickets lottoTickets2 = new LottoTickets(Arrays.asList(1,2,3,4,11,23), 1);
-        LottoTickets lottoTickets3 = new LottoTickets(Arrays.asList(11,15,21,25,35,36), 1);
+        LottoStore lottoStore1 = new LottoStore(Arrays.asList(1,2,3,4,5,6), 1);
+        LottoStore lottoStore2 = new LottoStore(Arrays.asList(1,2,3,4,11,23), 1);
+        LottoStore lottoStore3 = new LottoStore(Arrays.asList(11,15,21,25,35,36), 1);
         winningNumbers = winningNumber.setWinningNumber("1, 2, 3, 4, 5, 6");
 
-        WinningResult result1 = winningResult.matchWinningNumber(winningNumbers, lottoTickets1);
-        WinningResult result2 = winningResult.matchWinningNumber(winningNumbers, lottoTickets2);
-        WinningResult result3 = winningResult.matchWinningNumber(winningNumbers, lottoTickets3);
+        WinningResult result1 = winningResult.matchWinningNumber(winningNumbers, lottoStore1);
+        WinningResult result2 = winningResult.matchWinningNumber(winningNumbers, lottoStore2);
+        WinningResult result3 = winningResult.matchWinningNumber(winningNumbers, lottoStore3);
 
         assertThat(result1.getWinningResult(Rank.FIRST)).isEqualTo(1);
         assertThat(result2.getWinningResult(Rank.THIRD)).isEqualTo(1);

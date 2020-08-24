@@ -30,10 +30,10 @@ public class WinningResult {
         return winningResult;
     }
 
-    public WinningResult matchWinningNumber(List<Integer> winningNumbers, LottoTickets lottoTickets) {
+    public WinningResult matchWinningNumber(List<Integer> winningNumbers, LottoStore lottoStore) {
         WinningResult winningResult = new WinningResult();
-        for (int i = NUMBER_ZERO; i < lottoTickets.size(); i++) {
-            LottoTicket lottoTicket = lottoTickets.getLottoTicket(i);
+        for (int i = NUMBER_ZERO; i < lottoStore.size(); i++) {
+            LottoTicket lottoTicket = lottoStore.getLottoTicket(i);
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
             Rank rank = Rank.valudOf(matchCount);
             winningResult.putRank(rank);

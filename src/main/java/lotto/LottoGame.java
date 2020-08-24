@@ -17,14 +17,15 @@ public class LottoGame {
         int lottoTicketQuantity = lottoService.getLottoBuyCount(paymentAmount);
         InputView.printLottoBuyQuantity(lottoTicketQuantity);
 
-        LottoTickets lottoTickets = new LottoTickets(lottoTicketQuantity);
-        InputView.printLottoTickets(lottoTickets);
+        List<Integer> lottoAllNumbers = LottoNumberGenerator.create();
+        LottoStore lottoStore = new LottoStore(lottoTicketQuantity, lottoAllNumbers);
+        InputView.printLottoTickets(lottoStore);
 
         String inputWinningNumber = InputView.setWinningNumber(scanner);
         WinningNumber winningNumber = new WinningNumber();
         List<Integer> winningNumbers = winningNumber.setWinningNumber(inputWinningNumber);
 
-        WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumbers, lottoTickets);
+        WinningResult winningResult = new WinningResult().matchWinningNumber(winningNumbers, lottoStore);
         ResultView.printWinningNumericalStatement();
         ResultView.printLottoResult(winningResult);
 
