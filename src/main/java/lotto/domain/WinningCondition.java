@@ -1,17 +1,16 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class WinningCondition {
 
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
-    private final List<Rank> checkBonusRanks;
 
     public WinningCondition(LottoTicket winningTicket, LottoNumber bonusNumber) {
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
-        this.checkBonusRanks = Rank.getHasBonusBallRanks();
     }
 
     public static WinningCondition of(List<Integer> numbers, Integer bonusNumber) {
@@ -30,7 +29,7 @@ public class WinningCondition {
     }
 
     private boolean checkMatchBonusBall(int countOfMatch) {
-        return checkBonusRanks.stream()
+        return Arrays.stream(Rank.values())
                 .anyMatch(rank -> rank.getCountOfMatch() == countOfMatch);
     }
 }
