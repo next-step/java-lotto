@@ -23,8 +23,7 @@ public enum ScoreType {
     }
 
     public static ScoreType getScore(int inputNumber) {
-        return Arrays.asList(values())
-                .stream()
+        return Arrays.stream(values())
                 .filter(i -> i.getTargetNumber() == inputNumber)
                 .findFirst()
                 .orElse(NONE);
