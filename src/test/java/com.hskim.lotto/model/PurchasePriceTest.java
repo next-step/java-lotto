@@ -1,6 +1,6 @@
 package com.hskim.lotto.model;
 
-import com.hskim.lotto.exception.LottoExceptionMessage;
+import com.hskim.lotto.exception.LottoTicketingExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +30,7 @@ public class PurchasePriceTest {
     void create_나누어지지_않는수_실패(double purchasePrice) {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new PurchasePrice((int)purchasePrice);
-        }).withMessage(LottoExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
+            new PurchasePrice((int) purchasePrice);
+        }).withMessage(LottoTicketingExceptionMessage.INVALID_PURCHASE_PRICE.getMessage());
     }
 }

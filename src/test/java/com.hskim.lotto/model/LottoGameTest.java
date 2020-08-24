@@ -16,7 +16,9 @@ public class LottoGameTest {
     @Test
     void create() {
         // given
-        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(10000), new FixedLottoNumberMaker());
+        LottoTickets lottoTickets = LottoMachine.automaticIssuance(
+                new PurchasePrice(10000), new FixedLottoNumberMaker()
+        );
         LottoWinningTicket winningTicket = new LottoWinningTicket(Arrays.asList(1, 8, 9, 10, 17, 25), 5);
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
 
@@ -24,7 +26,7 @@ public class LottoGameTest {
         assertThat(lottoGame).isEqualTo(new LottoGame(lottoTickets, winningTicket));
     }
 
-    @DisplayName("drawLotteryTicket() 테스트")
+    @DisplayName("drawLotteryTicket() 테스트 - 로또 번호 추첨 동작 검증")
     @Test
     void drawLotteryTicket() {
         // given

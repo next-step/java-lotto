@@ -22,7 +22,7 @@ public class GameNumberTest {
         assertThat(gameNumber).isEqualTo(new GameNumber(5));
     }
 
-    @DisplayName("playGame() 테스트")
+    @DisplayName("playGame() 테스트 - gameNum 필드 감소 테스트")
     @Test
     void playGame() {
         // given
@@ -34,7 +34,7 @@ public class GameNumberTest {
         assertThat(gameNumber).isEqualTo(new GameNumber(3));
     }
 
-    @DisplayName("isPlayable() 테스트")
+    @DisplayName("isPlayable() 테스트 - 게임 가능한 상태(gameNum > 0) 검증 테스트")
     @ParameterizedTest
     @MethodSource("provideGameNum")
     void isPlayable(int num, boolean expected) {

@@ -18,7 +18,7 @@ public class LottoWinningTicket {
                 .filter(winningNumberList::contains)
                 .count();
 
-        boolean isMatchingBonusBall = lottoNumbers.contains(bonusNumber);
+        boolean isMatchingBonusBall = lottoNumbers.contains(bonusNumber.getBonusNumber());
         return new WinningCondition(matchingNumber, isMatchingBonusBall);
     }
 

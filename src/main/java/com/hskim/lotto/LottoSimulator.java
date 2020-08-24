@@ -12,24 +12,36 @@ public class LottoSimulator {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
         LottoResultView lottoResultView = new LottoResultView();
-        LottoTickets lottoTickets;
-        LottoGame lottoGame;
-        LottoGameResult lottoGameResult;
 
         lottoInputView.printPurchasePhrase();
-        int purchasePrice = lottoInputView.getPurchasePriceFromInput();
-        lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), new RandomLottoNumberMaker());
+        PurchasePrice purchasePrice = new PurchasePrice(lottoInputView.getPurchasePriceFromInput());
 
-        lottoResultView.printPurchaseNum(lottoTickets.getTicketsSize());
-        lottoResultView.printString(lottoTickets.makeLottoTicketsString());
+        lottoInputView.printManualTicketingNumPhrase();
+        ManualTicketingNumber manualTicketingNum = new ManualTicketingNumber(
+                lottoInputView.getManualTicketingNum(), purchasePrice.getGameNum()
+        );
+
+        lottoInputView.printManualTicketingPhrase();
+        LottoTickets lottoTicketsManual = LottoMachine.manualIssuance(
+                lottoInputView.getManualLottoNumbersList(manualTicketingNum)
+        );
+
+        LottoTickets lottoTicketsAuto = LottoMachine.automaticIssuance(
+                new PurchasePrice(purchasePrice, manualTicketingNum), new RandomLottoNumberMaker()
+        );
+
+        lottoResultView.printPurchaseNum(lottoTicketsManual.getTicketsSize(), lottoTicketsAuto.getTicketsSize());
+        lottoResultView.printString(lottoTicketsManual.makeLottoTicketsString());
+        lottoResultView.printString(lottoTicketsAuto.makeLottoTicketsString());
 
         lottoInputView.printWinPhrase();
-        List<Integer> winningTicketNumbers = lottoInputView.getWinningTicketNumbers();
+        List<Integer> winningTicketNumbers = lottoInputView.getTicketNumbers();
         lottoInputView.printBonusBallPhrase();
         int bonusNumber = lottoInputView.getBonusNumber();
 
-        lottoGame = new LottoGame(lottoTickets, new LottoWinningTicket(winningTicketNumbers, bonusNumber));
-        lottoGameResult = lottoGame.drawLotteryTicket();
+        LottoTickets mergedTickets = lottoTicketsAuto.mergeTickets(lottoTicketsManual);
+        LottoGame lottoGame = new LottoGame(mergedTickets, new LottoWinningTicket(winningTicketNumbers, bonusNumber));
+        LottoGameResult lottoGameResult = lottoGame.drawLotteryTicket();
 
         lottoResultView.printStatisticResult(lottoGameResult.getStatisticMap());
         lottoResultView.printEarningRate(lottoGameResult.getEarningRate(), lottoGameResult.isProfit());

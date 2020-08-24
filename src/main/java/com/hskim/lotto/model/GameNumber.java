@@ -18,6 +18,10 @@ public class GameNumber {
         return gameNum > 0;
     }
 
+    public int getGameNum() {
+        return gameNum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
