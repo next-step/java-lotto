@@ -19,7 +19,7 @@ public class Lottos {
     }
 
     public static List<Lotto> buyLottosWith(int budget) {
-        int numOfLottos = CheckDivideBy.divideForInt(Integer.toString(budget), "1000");
+        int numOfLottos = CheckDivideBy.divideToInt(Integer.toString(budget), "1000");
         List<Lotto> lottoList = new ArrayList<>(numOfLottos);
             for (int i = 0; i < numOfLottos ; i++) {
                 lottoList.add(new Lotto());
