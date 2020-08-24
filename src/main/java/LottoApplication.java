@@ -23,8 +23,8 @@ public class LottoApplication {
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();
         int bonusNumber = inputView.getBonusNumber();
-        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
-        LottoResult lottoResult = lottoTickets.getMatchResult(winningTicket);
+        WinningCondition winningCondition = WinningCondition.of(winningNumbers, bonusNumber);
+        LottoResult lottoResult = lottoTickets.getMatchResult(winningCondition);
 
         resultView.printLottoStatistics(lottoResult.getWinningResult());
         resultView.printRate(lottoResult.calculateRate(lottoTickets.getPurchasePrice()));

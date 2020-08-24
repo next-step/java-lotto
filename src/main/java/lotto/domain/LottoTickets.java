@@ -20,10 +20,10 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public LottoResult getMatchResult(WinningTicket winningTicket) {
+    public LottoResult getMatchResult(WinningCondition winningCondition) {
         Map<Rank, Integer> matchResult = new EnumMap<>(Rank.class);
         lottoTickets.forEach(ticket -> {
-            Rank rank = winningTicket.getRank(ticket);
+            Rank rank = winningCondition.getRank(ticket);
             matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
         });
 

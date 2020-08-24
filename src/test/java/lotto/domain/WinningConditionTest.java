@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,9 +10,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class WinningTicketTest {
+class WinningConditionTest {
 
     private static Stream<Arguments> provideListForIsMatchBonusBall() {
         return Stream.of(
@@ -30,11 +28,11 @@ class WinningTicketTest {
         // given
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 10, 15, 35);
         Integer bonusNumber = 40;
-        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
+        WinningCondition winningCondition = WinningCondition.of(winningNumbers, bonusNumber);
         LottoTicket lottoTicket = LottoTicket.of(numbers);
 
         // when
-        boolean result = winningTicket.isMatchBonusBall(lottoTicket);
+        boolean result = winningCondition.isMatchBonusBall(lottoTicket);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -56,11 +54,11 @@ class WinningTicketTest {
         // given
         List<Integer> winningNumbers = Arrays.asList(3, 10, 11, 21, 29, 35);
         Integer bonusNumber = 38;
-        WinningTicket winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
+        WinningCondition winningCondition = WinningCondition.of(winningNumbers, bonusNumber);
         LottoTicket lottoTicket = LottoTicket.of(numbers);
 
         // when
-        Rank result = winningTicket.getRank(lottoTicket);
+        Rank result = winningCondition.getRank(lottoTicket);
 
         // then
         assertThat(result).isEqualTo(expected);
