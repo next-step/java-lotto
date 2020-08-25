@@ -10,7 +10,7 @@ public class LottoNumbers {
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    List<Integer> lottoNumbers = new ArrayList<Integer>();
+    private List<Integer> lottoNumbers = new ArrayList<Integer>();
 
     public LottoNumbers() {
         init();
