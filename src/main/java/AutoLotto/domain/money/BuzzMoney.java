@@ -16,11 +16,11 @@ public enum BuzzMoney {
         this.moneyPerHit = moneyPerHit;
     }
 
-    public static int createOnceBuzzMoney(BuzzMoney buzzMoney, int hit) {
+    public int createOnceBuzzMoney(BuzzMoney buzzMoney, int hit) {
         return hit * buzzMoney.moneyPerHit;
     }
 
-    public static int createBuzzMoney(BuzzMoney buzzMoney, List<Integer> hitsList) {
+    public int createBuzzMoney(BuzzMoney buzzMoney, List<Integer> hitsList) {
         int sum = 0;
         for (int i = 0; i <hitsList.size(); i++) {
             if (buzzMoney.numOfHits == hitsList.get(i)) {
@@ -31,7 +31,7 @@ public enum BuzzMoney {
         return sum;
     }
 
-    public static int createAllMoney(List<BuzzMoney> buzzMoneyList, List<Integer> hitsList) {
+    public int createAllMoney(List<BuzzMoney> buzzMoneyList, List<Integer> hitsList) {
         int sum = 0;
         for (int i = 0; i < buzzMoneyList.size( ); i++) {
             sum += createBuzzMoney(buzzMoneyList.get(i), hitsList);
