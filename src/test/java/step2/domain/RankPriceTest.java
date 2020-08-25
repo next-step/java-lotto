@@ -3,7 +3,10 @@ package step2.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.rmi.UnexpectedException;
+import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.*;
 
 class RankPriceTest {
 
@@ -21,5 +24,13 @@ class RankPriceTest {
 
         assertThat(RankPrice.FIRST_PLACE.getMatchNumber()).isEqualTo(6);
         assertThat(RankPrice.FIRST_PLACE.getWinedMoney()).isEqualTo(2000000000);
+    }
+
+    @Test
+    @DisplayName("예외 테스트")
+    void valueOfTest() {
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
+            RankPrice.valueOf(7);
+        });
     }
 }
