@@ -16,7 +16,7 @@ public class LottoMachine {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
         for(int i = 0; i < lottoCount; i++) {
             LottoNumber lottoNumber = new LottoNumber();
-            lottoNumber.creatLottoNumber();
+            lottoNumber.create();
             lottoNumberList.add(lottoNumber);
         }
         return lottoNumberList;

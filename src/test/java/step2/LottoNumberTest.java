@@ -9,7 +9,7 @@ public class LottoNumberTest {
     @Test
     void lott_shuffle() {
         LottoNumber lottoNumber = new LottoNumber();
-        lottoNumber.creatLottoNumber();
+        lottoNumber.create();
         lottoNumber.getLottoNumbers().stream().collect(Collectors.toList()).forEach(System.out::println);
     }
 }
