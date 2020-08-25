@@ -7,9 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,11 +45,11 @@ class LottoGameTest {
         lottoGame = new LottoGame(numbersList);
     }
 
-    private List<Number> makeNumbers(List<Integer> integers) {
+    private Set<Number> makeNumbers(List<Integer> integers) {
         return new ArrayList<>(integers)
                 .stream()
                 .map(Number::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Test

@@ -22,7 +22,7 @@ public enum Rank {
     }
 
     public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers, Number bonusNumber) {
-        List<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
+        Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
         boolean matchBonus = lottoNumbers.isContainBonus(bonusNumber);
         return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);
     }

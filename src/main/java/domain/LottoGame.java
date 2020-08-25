@@ -1,8 +1,7 @@
 package domain;
 
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
 
@@ -23,7 +22,7 @@ public class LottoGame {
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumbers(LottoNumberPublisher.getShuffleSixLottoNumber()));
+            lottoNumbers.add(LottoNumbers.generatedAutoNumbers());
         }
 
         return lottoNumbers;
