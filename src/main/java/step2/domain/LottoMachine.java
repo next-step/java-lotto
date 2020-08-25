@@ -8,17 +8,17 @@ public class LottoMachine {
 
     public LottoTicket makeLotto(String money) {
         int lottoCount = moneyToCount(money);
-        List<LottoNumber> lottoNumberList = getLottoNumberListByLottoCount(lottoCount);
-        return new LottoTicket(lottoNumberList);
+        List<LottoNumbers> lottoNumbersList = getLottoNumberListByLottoCount(lottoCount);
+        return new LottoTicket(lottoNumbersList);
     }
 
-    private List<LottoNumber> getLottoNumberListByLottoCount(int lottoCount) {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
+    private List<LottoNumbers> getLottoNumberListByLottoCount(int lottoCount) {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         for(int i = 0; i < lottoCount; i++) {
-            LottoNumber lottoNumber = new LottoNumber();
-            lottoNumberList.add(lottoNumber);
+            LottoNumbers lottoNumbers = new LottoNumbers();
+            lottoNumbersList.add(lottoNumbers);
         }
-        return lottoNumberList;
+        return lottoNumbersList;
     }
 
     private int moneyToCount(String money) {

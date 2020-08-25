@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoNumber {
+public class WinningLottoNumbers {
     private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private List<Integer> winningNumbers;
 
-    public WinningLottoNumber(String inputWinningNumber) {
+    public WinningLottoNumbers(String inputWinningNumber) {
         this.winningNumbers = invalidAndToArray(inputWinningNumber);
     }
 

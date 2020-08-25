@@ -2,7 +2,7 @@ package step2.domain.view;
 
 import step2.domain.LottoMatchingCount;
 import step2.domain.LottoTicket;
-import step2.domain.LottoNumber;
+import step2.domain.LottoNumbers;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     public void viewLottoNumbers(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottoNumberList().size() + "개를 구매했습니다.");
-        lottoTicket.getLottoNumberList().stream()
-                .map(LottoNumber::getLottoNumbers)
+        System.out.println(lottoTicket.getLottoNumbersList().size() + "개를 구매했습니다.");
+        lottoTicket.getLottoNumbersList().stream()
+                .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
     }

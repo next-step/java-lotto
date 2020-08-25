@@ -11,6 +11,6 @@ public class LottoTicketTest {
         LottoMachine lottoMachine = new LottoMachine();
         LottoTicket lottoTicket = lottoMachine.makeLotto("3000");
 
-        assertThat(lottoTicket.getLottoNumberList().size()).isEqualTo(3);
+        assertThat(lottoTicket.getLottoNumbersList().size()).isEqualTo(3);
     }
 }

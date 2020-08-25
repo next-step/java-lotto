@@ -2,20 +2,20 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.WinningLottoNumber;
+import step2.domain.WinningLottoNumbers;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class WinningLottoNumberTest {
+public class WinningLottoNumbersTest {
 
     @DisplayName("당첨번호 입력 오류 체크")
     @Test
     void winningNumber_input_test() {
-        assertThatThrownBy(() -> new WinningLottoNumber("10, 20"))
+        assertThatThrownBy(() -> new WinningLottoNumbers("10, 20"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new WinningLottoNumber(""))
+        assertThatThrownBy(() -> new WinningLottoNumbers(""))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new WinningLottoNumber(null))
+        assertThatThrownBy(() -> new WinningLottoNumbers(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
