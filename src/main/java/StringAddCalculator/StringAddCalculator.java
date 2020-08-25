@@ -3,9 +3,7 @@ package StringAddCalculator;
 import java.util.regex.Matcher;
 
 import static StringAddCalculator.utils.Validations.CheckDelimiter.isInvalidDelimiter;
-import static StringAddCalculator.utils.Validations.CheckNumber.isANumber;
 import static StringAddCalculator.utils.Validations.CheckNumber.isMinus;
-import static StringAddCalculator.utils.Validations.CheckString.isNullOrBlank;
 import static StringAddCalculator.utils.Constants.*;
 
 public class StringAddCalculator {
@@ -13,13 +11,13 @@ public class StringAddCalculator {
     // if (isInvalidCustomDelimiter(nextExpressions[i], customDelimiter)) { return result2;}
 
     public static int splitAndSum(String expression) throws NotANumberException, NegativeNumberException {
-        if (isNullOrBlank(expression)) {
-            return ADD_NULL_OR_BLANK;
+        if (expression == null || expression.trim().isEmpty()) {
+            return 0;
         }
         Matcher m = COMPILER_CUSTOM_DELIMITER.matcher(expression);
         if (m.find()) {
-            String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
-            String[] afterCustomDelimiter = m.group(AFTER_CUSTOM_DELIMITER_INDEX).split(customDelimiter);
+            String customDelimiter = m.group(1);
+            String[] afterCustomDelimiter = m.group(2).split(customDelimiter);
             return sumWhenCustomDelimiter(afterCustomDelimiter);
         }
         return sumWhenOriginalDelimiter(expression);
@@ -46,23 +44,16 @@ public class StringAddCalculator {
     }
 
     public static int findNumber(String[] expressions, int i) throws NotANumberException, NegativeNumberException {
-        int result = toInt(expressions[i]);
-        if (!isANumber(result)) {
-            throw new NotANumberException(ERROR_NOT_A_NUMBER);
-        }
+        int result = Integer.parseInt(expressions[i]);
         if (isMinus(result)) {
             throw new NegativeNumberException(ERROR_NEGATIVE_NUMBER);
         }
         return result;
     }
 
-    public static int toInt(String expression) {
-        return Integer.parseInt(expression);
-    }
-
     public static String[] toSplits(String expression) {
-        if (isNullOrBlank(expression)) {
-            expression = RESULT_FOR_NONE_INPUT;
+        if (expression == null || expression.trim().isEmpty()) {
+            expression = "0";
         }
         String[] expressions = expression.split("");
         return expressions;
