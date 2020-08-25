@@ -42,7 +42,7 @@ public class LottoStore {
     }
 
     private List<Integer> howToBuyLotto(boolean automatics, List<Integer> lottoNumbers) {
-        return (automatics) ? LottoNumberGenerator.getLottoNumbers(lottoNumbers) : lottoNumbers;
+        return (automatics) ? LottoNumberGenerator.getAutoLottoNumber(lottoNumbers) : lottoNumbers;
     }
 
     public LottoTicket getLottoTicket(int index) {

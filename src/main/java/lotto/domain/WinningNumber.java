@@ -34,4 +34,8 @@ public class WinningNumber extends LottoTicket {
                 .collect(Collectors.toList()));
     }
 
+    public static boolean isContainsBonusNumber(List<Integer> lottoTicket, int bonusNumber) {
+        return (lottoTicket.contains(bonusNumber));
+    }
+
 }

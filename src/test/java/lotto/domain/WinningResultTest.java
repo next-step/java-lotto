@@ -19,12 +19,12 @@ class WinningResultTest {
     @DisplayName("당첨된 순위 확인")
     void winningResult() {
         winningResult.putRank(Rank.FIRST);
-        winningResult.putRank(Rank.FIRST);
-        winningResult.putRank(Rank.FIRST);
-        assertThat(winningResult.getWinningResult(Rank.FIRST)).isEqualTo(3);
+        winningResult.putRank(Rank.SECOND);
+        winningResult.putRank(Rank.MISS);
 
-        winningResult.putRank(Rank.LOSING);
-        assertThat(winningResult.getWinningResult(Rank.LOSING)).isEqualTo(1);
+        assertThat(winningResult.getWinningResult(Rank.FIRST)).isEqualTo(1);
+        assertThat(winningResult.getWinningResult(Rank.SECOND)).isEqualTo(1);
+        assertThat(winningResult.getWinningResult(Rank.MISS)).isEqualTo(1);
     }
 
 }

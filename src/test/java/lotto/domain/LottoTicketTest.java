@@ -19,13 +19,13 @@ class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        lottos = LottoNumberGenerator.create();
+        lottos = LottoNumberGenerator.generate();
     }
 
     @Test
     @DisplayName("로또 1번호 개수가 6개인지 확인")
     void lottoTicketSize() {
-        List<Integer> lottoNumber = LottoNumberGenerator.getLottoNumbers(lottos);
+        List<Integer> lottoNumber = LottoNumberGenerator.getAutoLottoNumber(lottos);
         lottoTicket = new LottoTicket(lottoNumber);
         assertThat(lottoTicket.size()).isEqualTo(6);
         assertThat(lottoTicket).isNotEqualTo(1);

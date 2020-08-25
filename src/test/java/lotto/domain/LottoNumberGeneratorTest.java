@@ -16,7 +16,7 @@ class LottoNumberGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        lottoAllNumbers = LottoNumberGenerator.create();
+        lottoAllNumbers = LottoNumberGenerator.generate();
     }
 
     @Test

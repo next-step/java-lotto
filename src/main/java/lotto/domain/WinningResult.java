@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.utils.CommonConstant.NUMBER_ONE;
-import static lotto.utils.CommonConstant.NUMBER_ZERO;
+import static lotto.utils.CommonConstant.*;
 
 public class WinningResult {
 
@@ -13,7 +12,7 @@ public class WinningResult {
 
     public WinningResult() {
         this.winningResult = new HashMap<>();
-        this.winningResult = initMap(winningResult);
+        initMap(winningResult);
     }
 
     private Map<Rank, Integer> initMap(Map<Rank, Integer> winningResult) {
@@ -30,15 +29,23 @@ public class WinningResult {
         return winningResult;
     }
 
-    public WinningResult matchWinningNumber(List<Integer> winningNumbers, LottoStore lottoStore) {
+    public WinningResult getWinningResult(List<Integer> winningNumbers, LottoStore lottoTickets, int bonusNumber) {
         WinningResult winningResult = new WinningResult();
-        for (int i = NUMBER_ZERO; i < lottoStore.size(); i++) {
-            LottoTicket lottoTicket = lottoStore.getLottoTicket(i);
+        for (int i = NUMBER_ZERO; i < lottoTickets.size(); i++) {
+            LottoTicket lottoTicket = lottoTickets.getLottoTicket(i);
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
-            Rank rank = Rank.valudOf(matchCount);
+            boolean checkBonusNumber = isBonusNumber(bonusNumber, matchCount, lottoTicket.getLottoTicket());
+            Rank rank = Rank.valudOf(matchCount, checkBonusNumber);
             winningResult.putRank(rank);
         }
         return winningResult;
+    }
+
+    private boolean isBonusNumber(int bonusNumber, int matchCount, List<Integer> lottoTicket) {
+        if (matchCount == NUMBER_FIVE) {
+            return WinningNumber.isContainsBonusNumber(lottoTicket, bonusNumber);
+        }
+        return false;
     }
 
     public Integer getWinningResult(Rank rank) {

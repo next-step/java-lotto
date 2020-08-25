@@ -9,7 +9,7 @@ import static lotto.utils.CommonConstant.*;
 
 public class LottoNumberGenerator {
 
-    public static List<Integer> create() {
+    public static List<Integer> generate() {
         return IntStream.range(NUMBER_ONE, NUMBER_FORTY_SIX)
                 .boxed()
                 .distinct()
@@ -17,7 +17,7 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> getLottoNumbers(List<Integer> lottoNumbers) {
+    public static List<Integer> getAutoLottoNumber(List<Integer> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.stream()
                 .distinct()

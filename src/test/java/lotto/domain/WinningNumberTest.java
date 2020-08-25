@@ -65,17 +65,17 @@ class WinningNumberTest {
     @DisplayName("구입한 로또의 당첨번호 확인")
     void lottoWinningNumberCheck() {
         LottoStore lottoStore1 = new LottoStore(Arrays.asList(1,2,3,4,5,6), 1);
-        LottoStore lottoStore2 = new LottoStore(Arrays.asList(1,2,3,4,11,23), 1);
+        LottoStore lottoStore2 = new LottoStore(Arrays.asList(1,2,3,4,5,7), 1);
         LottoStore lottoStore3 = new LottoStore(Arrays.asList(11,15,21,25,35,36), 1);
         winningNumbers = winningNumber.setWinningNumber("1, 2, 3, 4, 5, 6");
-
-        WinningResult result1 = winningResult.matchWinningNumber(winningNumbers, lottoStore1);
-        WinningResult result2 = winningResult.matchWinningNumber(winningNumbers, lottoStore2);
-        WinningResult result3 = winningResult.matchWinningNumber(winningNumbers, lottoStore3);
+        int bonusNumber = 7;
+        WinningResult result1 = winningResult.getWinningResult(winningNumbers, lottoStore1, bonusNumber);
+        WinningResult result2 = winningResult.getWinningResult(winningNumbers, lottoStore2, bonusNumber);
+        WinningResult result3 = winningResult.getWinningResult(winningNumbers, lottoStore3, bonusNumber);
 
         assertThat(result1.getWinningResult(Rank.FIRST)).isEqualTo(1);
-        assertThat(result2.getWinningResult(Rank.THIRD)).isEqualTo(1);
-        assertThat(result3.getWinningResult(Rank.LOSING)).isEqualTo(1);
+        assertThat(result2.getWinningResult(Rank.SECOND)).isEqualTo(1);
+        assertThat(result3.getWinningResult(Rank.MISS)).isEqualTo(1);
     }
 
 }

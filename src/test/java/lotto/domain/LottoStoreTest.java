@@ -16,13 +16,13 @@ class LottoStoreTest {
 
     @BeforeEach
     void setUp() {
-        lottos = LottoNumberGenerator.create();
+        lottos = LottoNumberGenerator.generate();
     }
 
     @Test
     @DisplayName("구매한 로또 복권 개수 확인")
     void purchasedLottoTicket() {
-        List<Integer> lottoNumber = LottoNumberGenerator.getLottoNumbers(lottos);
+        List<Integer> lottoNumber = LottoNumberGenerator.getAutoLottoNumber(lottos);
         lottoStore = new LottoStore(lottoNumber, 5);
         assertThat(lottoStore.size()).isEqualTo(5);
     }
