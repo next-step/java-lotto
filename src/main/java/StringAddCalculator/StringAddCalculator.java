@@ -23,7 +23,7 @@ public class StringAddCalculator {
         return sumWhenOriginalDelimiter(expression);
     }
 
-    public static int sumWhenOriginalDelimiter(String expression) throws NotANumberException, NegativeNumberException{
+    private static int sumWhenOriginalDelimiter(String expression) throws NotANumberException, NegativeNumberException{
         String[] expressions = toSplits(expression);
         int result = findNumber(expressions, 0);
         for (int i = 1; i < expressions.length; i += 2) {
@@ -35,7 +35,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    public static int sumWhenCustomDelimiter(String[] expressions) throws NotANumberException, NegativeNumberException{
+    private static int sumWhenCustomDelimiter(String[] expressions) throws NotANumberException, NegativeNumberException{
         int result = findNumber(expressions, 0);
         for (int i = 1; i < expressions.length; i ++) {
             result = result + findNumber(expressions, i);;
@@ -43,7 +43,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    public static int findNumber(String[] expressions, int i) throws NotANumberException, NegativeNumberException {
+    private static int findNumber(String[] expressions, int i) throws NotANumberException, NegativeNumberException {
         int result = Integer.parseInt(expressions[i]);
         if (isMinus(result)) {
             throw new NegativeNumberException(ERROR_NEGATIVE_NUMBER);
@@ -51,7 +51,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    public static String[] toSplits(String expression) {
+    private static String[] toSplits(String expression) {
         if (expression == null || expression.trim().isEmpty()) {
             expression = "0";
         }
