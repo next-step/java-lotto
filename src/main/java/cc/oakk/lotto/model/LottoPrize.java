@@ -2,6 +2,8 @@ package cc.oakk.lotto.model;
 
 import cc.oakk.lotto.view.printer.Printable;
 
+import java.util.Objects;
+
 public abstract class LottoPrize<T> implements Printable<String> {
     protected final T prize;
     protected final long value;
@@ -13,5 +15,18 @@ public abstract class LottoPrize<T> implements Printable<String> {
 
     public long getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoPrize<?> that = (LottoPrize<?>) o;
+        return Objects.equals(prize, that.prize);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prize);
     }
 }
