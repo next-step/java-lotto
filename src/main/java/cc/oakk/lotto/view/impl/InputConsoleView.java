@@ -1,30 +1,34 @@
-package cc.oakk.lotto.view;
+package cc.oakk.lotto.view.impl;
+
+import cc.oakk.lotto.view.InputView;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class InputViewImpl implements InputView {
+public class InputConsoleView implements InputView {
     private static final String NUMBER_DELIMITER = ", ";
     private final Scanner scanner;
 
-    public InputViewImpl() {
+    public InputConsoleView() {
         this.scanner = new Scanner(System.in);
     }
 
-    public InputViewImpl(Scanner scanner) {
+    public InputConsoleView(Scanner scanner) {
         this.scanner = scanner;
     }
 
     @Override
     public int readMoney() {
-        return scanner.nextInt();
+        int money = scanner.nextInt();
+        scanner.nextLine();
+        return money;
     }
 
     @Override
     public List<Integer> readWinningNumbers() {
-        String input = scanner.useDelimiter("\n").next();
+        String input = scanner.nextLine();
 
         return Arrays.stream(input.split(NUMBER_DELIMITER))
                 .map(Integer::parseInt)

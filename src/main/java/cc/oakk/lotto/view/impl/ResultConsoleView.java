@@ -1,14 +1,15 @@
-package cc.oakk.lotto.view;
+package cc.oakk.lotto.view.impl;
 
 import cc.oakk.lotto.model.LottoResults;
+import cc.oakk.lotto.view.ResultView;
 import cc.oakk.lotto.view.printer.Printable;
 import cc.oakk.lotto.view.printer.Printer;
 
-public class ResultViewImpl implements ResultView {
+public class ResultConsoleView implements ResultView {
     private final Printer<String> stringPrinter;
     private final Printer<LottoResults> lottoResultsPrinter;
 
-    public ResultViewImpl(Printer<String> stringPrinter, Printer<LottoResults> lottoResultsPrinter) {
+    public ResultConsoleView(Printer<String> stringPrinter, Printer<LottoResults> lottoResultsPrinter) {
         this.stringPrinter = stringPrinter;
         this.lottoResultsPrinter = lottoResultsPrinter;
     }
