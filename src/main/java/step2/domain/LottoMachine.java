@@ -6,10 +6,10 @@ import java.util.List;
 public class LottoMachine {
     final static int LOTTO_PRICE = 1000;
 
-    public Lotto makeLotto(String money) {
+    public LottoTicket makeLotto(String money) {
         int lottoCount = moneyToCount(money);
         List<LottoNumber> lottoNumberList = getLottoNumberListByLottoCount(lottoCount);
-        return new Lotto(lottoNumberList);
+        return new LottoTicket(lottoNumberList);
     }
 
     private List<LottoNumber> getLottoNumberListByLottoCount(int lottoCount) {

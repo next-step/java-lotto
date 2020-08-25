@@ -3,15 +3,15 @@ package step2.domain;
 import java.util.List;
 
 
-public class Lotto {
-    List<LottoNumber> lottoList;
+public class LottoTicket {
+    List<LottoNumber> lottoNumberList;
 
-    public Lotto(List<LottoNumber> lottoNumberList) {
-        lottoList = lottoNumberList;
+    public LottoTicket(List<LottoNumber> lottoNumberList) {
+        this.lottoNumberList = lottoNumberList;
     }
 
-    public List<LottoNumber> getLottoList() {
-        return lottoList;
+    public List<LottoNumber> getLottoNumberList() {
+        return lottoNumberList;
     }
 
 
