@@ -19,8 +19,8 @@ class WinnersNoTest {
 
     @DisplayName("숫자 검증")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:46", "null:43"}, delimiter = ':')
-    public void validate_bonus_number_fail_illegalArgumentException(@ConvertWith(NullableConverter.class) String input, int bonusNumber) {
+    @CsvSource(value = {"1,2,3,4,5,6:46", "null:43", "1,2,3,4,!!,6:43"}, delimiter = ':')
+    public void validate_winnerno_fail_illegalArgumentException(@ConvertWith(NullableConverter.class) String input, int bonusNumber) {
         assertThatIllegalArgumentException().isThrownBy(() -> WinnersNo.ofWinnersNo(bonusNumber, input));
     }
 }
