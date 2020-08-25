@@ -1,4 +1,9 @@
-package cc.oakk.lotto.model;
+package cc.oakk.lotto.model.prizeprovider.impl;
+
+import cc.oakk.lotto.model.LottoPrize;
+import cc.oakk.lotto.model.MoneyPrize;
+import cc.oakk.lotto.model.Rank;
+import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 
 import java.util.HashMap;
 import java.util.Map;
