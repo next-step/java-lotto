@@ -30,21 +30,22 @@ public class ResultView {
     public void showLottoTicket(LottoTickets tickets) {
         printTicketCount(tickets.count());
 
-        for(LottoTicket ticket : tickets.getAll()) {
+        for (LottoTicket ticket : tickets.getAll()) {
             printTicket(ticket);
         }
     }
+
     private void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount+RESULT_TEXT_BUY_TOTAL_AMOUNT);
+        System.out.println(ticketCount + RESULT_TEXT_BUY_TOTAL_AMOUNT);
     }
 
     private void printTicket(LottoTicket ticket) {
         System.out.println(lottoNumberToString(ticket.getLottoNumber()));
     }
 
-    private String lottoNumberToString(List<LottoNumber> lottoNumbers){
-        StringJoiner lottoTicketNumbers = new StringJoiner(LOTTO_TICKET_DELIMITER,LOTTO_TICKET_PREFIX,LOTTO_TICKET_SUFFIX);
-        for(LottoNumber lottoNumber : lottoNumbers) {
+    private String lottoNumberToString(List<LottoNumber> lottoNumbers) {
+        StringJoiner lottoTicketNumbers = new StringJoiner(LOTTO_TICKET_DELIMITER, LOTTO_TICKET_PREFIX, LOTTO_TICKET_SUFFIX);
+        for (LottoNumber lottoNumber : lottoNumbers) {
             lottoTicketNumbers.add(String.valueOf(lottoNumber.getNumber()));
         }
         return lottoTicketNumbers.toString();
@@ -54,21 +55,21 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_STAT);
         System.out.println(LOTTO_RESULT_LINE_SEPERATOR);
 
-        Map<LottoRank,Integer> lottoResult = resultBoard.getLottoResult();
+        Map<LottoRank, Integer> lottoResult = resultBoard.getLottoResult();
         StringBuilder sb = new StringBuilder();
-        sb.append(getMatchInfo(LottoRank.FIFTH, lottoResult.getOrDefault(LottoRank.FIFTH,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.FOURTH, lottoResult.getOrDefault(LottoRank.FOURTH,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.THIRD, lottoResult.getOrDefault(LottoRank.THIRD,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.SECOND, lottoResult.getOrDefault(LottoRank.SECOND,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.FIRST, lottoResult.getOrDefault(LottoRank.FIRST,DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FIFTH, lottoResult.getOrDefault(LottoRank.FIFTH, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FOURTH, lottoResult.getOrDefault(LottoRank.FOURTH, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.THIRD, lottoResult.getOrDefault(LottoRank.THIRD, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.SECOND, lottoResult.getOrDefault(LottoRank.SECOND, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FIRST, lottoResult.getOrDefault(LottoRank.FIRST, DEFAULT_TICKET_COUNT)));
         System.out.println(sb.toString());
 
-        System.out.printf(BENEFIT_RATE_TEXT,resultBoard.getBenefitRate());
+        System.out.printf(BENEFIT_RATE_TEXT, resultBoard.getBenefitRate());
     }
 
-    private String getMatchInfo(LottoRank rank, int matchCount){
+    private String getMatchInfo(LottoRank rank, int matchCount) {
         String matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT;
-        if(rank == LottoRank.SECOND){
+        if (rank == LottoRank.SECOND) {
             matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT_BONUS;
         }
         StringBuilder sb = new StringBuilder();

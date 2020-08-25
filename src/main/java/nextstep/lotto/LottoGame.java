@@ -28,12 +28,12 @@ public class LottoGame {
         LottoTickets userLottoTickets = buyTicket(howManyBuyLottoTicket(moneyAmount));
         resultView.showLottoTicket(userLottoTickets);
 
-        LottoWinnerNumbers winnerNumbers = castWinnerNumber(inputView.inputWinnerNumber(),inputView.inputBonusNumber());
+        LottoWinnerNumbers winnerNumbers = castWinnerNumber(inputView.inputWinnerNumber(), inputView.inputBonusNumber());
 
         resultView.showLottoResultBoard(LottoResultBoard.create(userLottoTickets, winnerNumbers));
     }
 
-    private LottoWinnerNumbers castWinnerNumber(List<String> winnerNumbers,int bonusNumber) {
+    private LottoWinnerNumbers castWinnerNumber(List<String> winnerNumbers, int bonusNumber) {
         return LottoWinnerNumbers.create(
                 LottoNumberUtil.transStringNumberToLottoNumber(winnerNumbers),
                 LottoNumber.create(bonusNumber)
@@ -48,6 +48,7 @@ public class LottoGame {
 
         return LottoTickets.create(tickets);
     }
+
     private int howManyBuyLottoTicket(int inputMoney) {
         return inputMoney / LOTTO_VALUE;
     }

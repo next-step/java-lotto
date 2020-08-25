@@ -7,8 +7,8 @@ public class ValidationUtils {
     private ValidationUtils() {
     }
 
-    public static boolean isNullAndEmpty(String inputValue){
-        if(inputValue == null){
+    public static boolean isNullAndEmpty(String inputValue) {
+        if (inputValue == null) {
             return true;
         }
 

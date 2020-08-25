@@ -15,11 +15,11 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public int count(){
+    public int count() {
         return tickets.size();
     }
 
-    public List<LottoTicket> getAll(){
+    public List<LottoTicket> getAll() {
         return Collections.unmodifiableList(tickets);
     }
 }
