@@ -10,9 +10,9 @@ public class LottoResult {
     private List<Integer> winningLottoNumbers;
     private Map<Integer, Long> lottoResult;
 
-    public LottoResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
+    public LottoResult(LottoTicket lottoTicket, WinningLottoNumber winningLottoNumber) {
         this.lottoNumberList = lottoTicket.getLottoNumberList();
-        this.winningLottoNumbers = winningLotto.getWinningNumbers();
+        this.winningLottoNumbers = winningLottoNumber.getWinningNumbers();
     }
 
     public Map<Integer, Long> getResultMap() {

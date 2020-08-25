@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLotto {
+public class WinningLottoNumber {
     private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private List<Integer> winningNumbers;
 
-    public WinningLotto(String inputWinningNumber) {
+    public WinningLottoNumber(String inputWinningNumber) {
         this.winningNumbers = invalidAndToArray(inputWinningNumber);
     }
 
@@ -21,7 +22,7 @@ public class WinningLotto {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
 
-        if (list.size() < 6) {
+        if (list.size() < LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호를 정확하게 입력해주세요");
         }
         return list;
