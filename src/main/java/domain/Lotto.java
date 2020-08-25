@@ -13,6 +13,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    private void validate(Set<Number> numbers) {
+        if (numbers.size() != LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 6개의 다른 값 이여야 합니다.");
+        }
+    }
+
     public static Lotto auto() {
         Set<Number> numbers = new TreeSet<>();
         while(numbers.size() != 6) {
@@ -21,23 +27,18 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    private void validate(Set<Number> numbers) {
-        if (numbers.size() != LOTTO_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 6개의 다른 값 이여야 합니다.");
-        }
-    }
-
-    public Set<Number> getContainNumbers(Lotto lottoWinningNumbers) {
-        return lottoWinningNumbers.numbers.stream()
-                .filter(this.numbers::contains)
-                .collect(Collectors.toSet());
-    }
-
-    public boolean isContainBonus(Number bonusNumber) {
-        return this.numbers.contains(bonusNumber);
-    }
-
     @Override public String toString() {
         return numbers.toString();
+    }
+
+    public boolean isContainBonus(WinningLotto winningLotto) {
+        return numbers.stream()
+                .anyMatch(winningLotto::isMatchBonusNumber);
+    }
+
+    public Set<Number> getWinningNumbers(WinningLotto lotto) {
+        return numbers.stream()
+                .filter(lotto::isContainInWinningNumber)
+                .collect(Collectors.toSet());
     }
 }

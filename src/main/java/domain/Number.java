@@ -25,7 +25,7 @@ public class Number implements Comparable<Number> {
 
     public static Number generateNumber() {
         int randomNumber = random.nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
-        return cached.get(randomNumber);
+        return cached.get(randomNumber - 1);
     }
 
     @Override

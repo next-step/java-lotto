@@ -20,21 +20,25 @@ public enum Rank {
         this.winningMoney = new BigDecimal(winningMoney);
     }
 
-    public static Rank getRank(Lotto lotto, Lotto lottoWinningNumbers, Number bonusNumber) {
-        Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lotto);
-        boolean matchBonus = lotto.isContainBonus(bonusNumber);
+    public static Rank getRank(Lotto lotto, WinningLotto winningLotto) {
+        Set<Number> numbersInWinningNumbers = lotto.getWinningNumbers(winningLotto);
+        boolean matchBonus = lotto.isContainBonus(winningLotto);
         return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);
     }
 
     protected static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 5) {
-            return matchBonus? SECOND : THIRD;
+        if (countOfMatch != 5) {
+            return Arrays.stream(Rank.values())
+                    .filter(rank -> rank.countOfMatch == countOfMatch)
+                    .findFirst()
+                    .orElse(MISS);
         }
 
-        return Arrays.stream(Rank.values())
-                .filter(e -> e.countOfMatch == countOfMatch)
-                .findFirst()
-                .orElse(MISS);
+        if (matchBonus) {
+            return SECOND;
+        }
+
+        return THIRD;
     }
 
     public BigDecimal getWinningMoney() {

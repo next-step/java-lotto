@@ -33,7 +33,7 @@ public class WinningInfos {
             return;
         }
         WinningInfo winningInfo = winningInfos.stream()
-                .filter(e -> e.getRank().equals(rank))
+                .filter(info -> info.getRank().equals(rank))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
         winningInfo.increaseWinningNumber();

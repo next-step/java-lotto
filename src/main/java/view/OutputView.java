@@ -12,17 +12,17 @@ public class OutputView {
         }
     }
 
-    public static WinningInfos printWinningInfo(LottoGame lottoGame, Lotto lotto, Number bonusNumber) {
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lotto, bonusNumber);
+    public static WinningInfos printWinningInfo(LottoGame lottoGame, WinningLotto lotto) {
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lotto);
         System.out.println();
 
         List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();
-        winningInfos.forEach(e -> {
-            String str = getAdditionalStr(e);
-            System.out.printf("%d개 일치%s (%d원) - %d개\n", e.getRank().getCountOfMatch(),
+        winningInfos.forEach(winningInfo -> {
+            String str = getAdditionalStr(winningInfo);
+            System.out.printf("%d개 일치%s (%d원) - %d개\n", winningInfo.getRank().getCountOfMatch(),
                     str,
-                    e.getRank().getWinningMoney().intValue(),
-                    e.getWinningNumber());
+                    winningInfo.getRank().getWinningMoney().intValue(),
+                    winningInfo.getWinningNumber());
         });
         return lottoWinningInfos;
     }

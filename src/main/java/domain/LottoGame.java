@@ -1,20 +1,19 @@
 package domain;
 
-import java.math.RoundingMode;
 import java.util.*;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
 
 public class LottoGame {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
     public static LottoGame of(int money) {
         List<Lotto> lottoList = generateLottoNumbersList(money);
         return new LottoGame(lottoList);
     }
 
-    public LottoGame(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    protected LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     private static List<Lotto> generateLottoNumbersList(int money) {
@@ -28,14 +27,14 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
-    public WinningInfos getWinningInfos(Lotto lottoWinningNumbers, Number bonusNumber) {
+    public WinningInfos getWinningInfos(WinningLotto winningLotto) {
         WinningInfos winningInfos = WinningInfos.of();
-        for (Lotto lotto : lottoList) {
-            Rank rank = Rank.getRank(lotto, lottoWinningNumbers, bonusNumber);
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.getRank(lotto, winningLotto);
             winningInfos.update(rank);
         }
         return winningInfos;

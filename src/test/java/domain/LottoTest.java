@@ -43,11 +43,12 @@ class LottoTest {
     void getContainNumbersTest(String input, String expectedInput) {
         Set<Number> numbers = makeInputToNumbers(input);
         Set<Number> winningNumbers = makeInputToNumbers("1,2,3,4,5,6");
+        Number bonusNumber = new Number(10);
 
         Lotto lotto = new Lotto(numbers);
-        Lotto winningLotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        Set<Number> actual = lotto.getContainNumbers(winningLotto);
+        Set<Number> actual = lotto.getWinningNumbers(winningLotto);
 
         Set<Number> expected = makeInputToNumbers(expectedInput);
 
@@ -67,9 +68,10 @@ class LottoTest {
     void isContainBonusTest() {
         Set<Number> numbers = makeInputToNumbers("1,2,3,4,5,6");
         Lotto lotto = new Lotto(numbers);
-        Number bonusNumber = new Number(6);
+        Number bonusNumber = new Number(7);
+        WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
-        assertThat(lotto.isContainBonus(bonusNumber)).isTrue();
+        assertThat(lotto.isContainBonus(winningLotto)).isFalse();
     }
 
 }
