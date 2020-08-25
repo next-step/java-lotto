@@ -43,6 +43,10 @@ public class LottoFactory {
 							  .collect(toList()));
 	}
 
+	public static Lotto createManualLotto(String lottoNumbersString) {
+		return create(lottoNumbersString);
+	}
+
 	private static List<Integer> createNumbers() {
 		List<Integer> allLottoNumbers = getAllShuffled();
 
