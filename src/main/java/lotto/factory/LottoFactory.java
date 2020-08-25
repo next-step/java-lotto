@@ -34,7 +34,7 @@ public class LottoFactory {
 		return Lotto.of(lottoNumbers);
 	}
 
-	public static Lotto create(String lottoNumbersString) {
+	public static Lotto createBy(String lottoNumbersString) {
 		validateLottoNumbers(lottoNumbersString);
 
 		return Lotto.of(Stream.of(lottoNumbersString.split(WINNING_NUMBER_DELIMITER))
@@ -44,7 +44,7 @@ public class LottoFactory {
 	}
 
 	public static Lotto createManualLotto(String lottoNumbersString) {
-		return create(lottoNumbersString);
+		return createBy(lottoNumbersString);
 	}
 
 	private static List<Integer> createNumbers() {
