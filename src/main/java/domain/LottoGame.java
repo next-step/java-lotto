@@ -22,7 +22,7 @@ public class LottoGame {
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(Lotto.generatedAutoNumbers());
+            lottoNumbers.add(Lotto.auto());
         }
 
         return lottoNumbers;
@@ -39,11 +39,5 @@ public class LottoGame {
             winningInfos.update(rank);
         }
         return winningInfos;
-    }
-
-    public double getBenefitRate(LottoMoney lottoMoney, WinningInfos winningInfos) {
-        return winningInfos.getTotalWinningMoney()
-                .divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN)
-                .doubleValue();
     }
 }

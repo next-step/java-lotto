@@ -1,6 +1,7 @@
 package domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +39,15 @@ public class WinningInfos {
         winningInfo.increaseWinningNumber();
     }
 
-    public BigDecimal getTotalWinningMoney() {
+    protected BigDecimal getTotalWinningMoney() {
         return winningInfos.stream()
                 .map(WinningInfo::getMultiplyWinningMoney)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public double getBenefitRate(LottoMoney lottoMoney) {
+        return getTotalWinningMoney()
+                .divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN)
+                .doubleValue();
     }
 }

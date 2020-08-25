@@ -13,7 +13,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto generatedAutoNumbers() {
+    public static Lotto auto() {
         Set<Number> numbers = new TreeSet<>();
         while(numbers.size() != 6) {
             numbers.add(Number.generateNumber());

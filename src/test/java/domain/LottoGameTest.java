@@ -79,7 +79,8 @@ class LottoGameTest {
     @DisplayName("당첨 정보에 따라 수익률을 반환한다.")
     void getBenefitRateTest() {
         Number notMatchBonusNumber = new Number(7);
-        double benefitRate = lottoGame.getBenefitRate(lottoMoney, lottoGame.getWinningInfos(lottoWinningNumbers, notMatchBonusNumber));
+        WinningInfos winningInfos = lottoGame.getWinningInfos(lottoWinningNumbers, notMatchBonusNumber);
+        double benefitRate = winningInfos.getBenefitRate(lottoMoney);
         assertThat(benefitRate).isEqualTo(0.35);
     }
 
@@ -88,7 +89,7 @@ class LottoGameTest {
     @DisplayName("보너스 번호 테스트")
     void bonusTest(int bonusNumberInput, int expectedWinningNumber) {
         List<Lotto> numbersList = new ArrayList<>();
-        numbersList.add(new Lotto(makeNumbers(Arrays.asList(1,2,3,4,5,10))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(1, 2, 3, 4, 5, 10))));
 
         LottoGame lottoGame = new LottoGame(numbersList);
 

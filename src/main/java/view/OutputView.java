@@ -27,13 +27,15 @@ public class OutputView {
         return lottoWinningInfos;
     }
 
-    private static String getAdditionalStr(WinningInfo e) {
-        if (e.getRank().equals(Rank.SECOND)) return ", 보너스 볼 일치";
+    private static String getAdditionalStr(WinningInfo winningInfo) {
+        if (winningInfo.getRank().equals(Rank.SECOND)) {
+            return ", 보너스 볼 일치";
+        }
         return "";
     }
 
     public static void printBenefitRate(LottoGame lottoGame, LottoMoney lottoMoney, WinningInfos winningInfos) {
-        double benefitRate = lottoGame.getBenefitRate(lottoMoney, winningInfos);
+        double benefitRate = winningInfos.getBenefitRate(lottoMoney);
         System.out.println("=========");
         System.out.printf("총 수익률 : %.2f\n", benefitRate);
     }
