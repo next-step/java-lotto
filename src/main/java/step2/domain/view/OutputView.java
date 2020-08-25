@@ -26,7 +26,7 @@ public class OutputView {
             System.out.println(i + "개 일치 (" + money + "원) - " + getCountAtResultMap + "개");
 
         }
-        double marginPercent = (double)Math.round((margin / Integer.parseInt(lottoMoney)*100))/100;
+        double marginPercent = Math.round( (double)margin / Double.parseDouble(lottoMoney) * 100) / 100.0 ;
         System.out.println("총 수익률은" + marginPercent + "입니다.");
 
     }
