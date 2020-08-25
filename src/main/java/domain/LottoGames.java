@@ -1,61 +1,37 @@
 package domain;
 
-import utility.UserInput;
-import view.View;
+import static utility.UserInput.WON;
 
 public class LottoGames {
 
     public static final int LOTTO_NUMBER = 6;
-    private static final int MIN_WINNER_NUMBER = 3;
+    static final int MIN_WINNER_NUMBER = 3;
 
     private Lottos lottos;
-    private WinnerNumber winnerNumber;
+    private int tries;
 
-    public LottoGames() {
+    public LottoGames(int input) {
+        validatePrice(input);
         lottos = new Lottos();
     }
 
-    public Lottos run(int tries) {
-        return lottos =  makeLottoTicket(tries);
-
-//        View.showLottoTickets(lottos);
-//        winnerNumber = UserInput.getWinnerTicket();
-
-        int sum = calculateCount(tries);
-
-        View.result(winnerNumber, sum, tries);
+    public int getTries() {
+        return tries;
     }
 
-
-    private Lottos makeLottoTicket(int tries) {
+    public Lottos makeLottoTicket() {
         NumberGenerator generator = new NumberGenerator();
 
         for (int i = 0; i < tries; i++) {
             lottos.addLotto(new Lotto(generator.generate()));
         }
+        return lottos;
     }
 
-    private int calculateCount(int tries) {
-        int count;
-        int sum = 0;
-
-        for (int i = 0; i < tries; i++) {
-            count = countNumber(lottos.getOneLotto(i));
-
-            if (count > MIN_WINNER_NUMBER) {
-                sum += winnerNumber.calculateWinnerRank(count);
-            }
+    private int validatePrice(int price) {
+        if (price % WON != 0) {
+            throw new IllegalArgumentException("Price ERR!");
         }
-        return sum;
-    }
-
-    private int countNumber(Lotto lotto) {
-        int count = 0;
-        for (int j = 0; j < LOTTO_NUMBER; j++) {
-            if (lotto.getLottoNumber().contains((winnerNumber.getWinnerNumber()[j]))) {
-                count++;
-            }
-        }
-        return count;
+        return this.tries = price / WON;
     }
 }

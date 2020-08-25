@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 import static utility.UserInput.validateNumberIsSix;
-import static utility.UserInput.validateNumberRange;
 
 public class UserInputTest {
 
@@ -23,12 +22,12 @@ public class UserInputTest {
 
     @DisplayName("로또숫자 범위 테스트")
     @Test
-    void validateNumberRangeTest() {
+    void INT_ZEROangeTest() {
         String input = "1,2,3,4,54,90";
         String inputs[] = input.split(",");
 
         assertThatThrownBy(() -> {
-            validateNumberRange(inputs);
+            INT_ZEROange(inputs);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("오류!!");
     }

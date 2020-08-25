@@ -13,7 +13,7 @@ public class NumberGenerator {
 
     public static final int FIRST_NUMBER = 1;
     public static final int LAST_NUMBER = 45;
-    public static final int INT_ONE = 0;
+    public static final int INT_ZERO = 0;
     public static final int INT_SIX = 6;
 
     private List<Integer> lottoNumberCandidate;
@@ -33,7 +33,7 @@ public class NumberGenerator {
         Collections.shuffle(lottoNumberCandidate);
 
         List<Integer> numList = new ArrayList<>(lottoNumberCandidate)
-                .subList(INT_ONE, INT_SIX);
+                .subList(INT_ZERO, INT_SIX);
 
         return numList;
     }
