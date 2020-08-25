@@ -1,56 +1,42 @@
 package domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
 
 public class LottoGame {
-    private final List<LottoNumbers> lottoNumbersList;
-    private final LottoWinningNumbers lottoWinningNumbers;
+    private final List<Lotto> lottos;
 
-    public static LottoGame of(int money, List<Number> winningNumbers) {
-        List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(money);
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
-        return new LottoGame(lottoNumbersList, lottoWinningNumbers);
+    public static LottoGame of(int money) {
+        List<Lotto> lottoList = generateLottoNumbersList(money);
+        return new LottoGame(lottoList);
     }
 
-    public LottoGame(List<LottoNumbers> lottoNumbersList, LottoWinningNumbers lottoWinningNumbers) {
-        this.lottoNumbersList = lottoNumbersList;
-        this.lottoWinningNumbers = lottoWinningNumbers;
+    protected LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private static List<LottoNumbers> generateLottoNumbersList(int money) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private static List<Lotto> generateLottoNumbersList(int money) {
+        List<Lotto> lottoNumbers = new ArrayList<>();
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumbers(LottoNumberPublisher.getShuffleSixLottoNumber()));
+            lottoNumbers.add(Lotto.auto());
         }
 
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
-    public WinningInfos getWinningInfos() {
+    public WinningInfos getWinningInfos(WinningLotto winningLotto) {
         WinningInfos winningInfos = WinningInfos.of();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            LottoWinningType winningType = lottoWinningNumbers.getWinningType(lottoNumbers);
-            winningInfos.add(winningType);
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.getRank(lotto, winningLotto);
+            winningInfos.update(rank);
         }
         return winningInfos;
-    }
-
-    public double getBenefitRate(LottoMoney lottoMoney, WinningInfos winningInfos) {
-        if (lottoMoney.getMoney().equals(BigDecimal.ZERO)) {
-            return 0.0;
-        }
-        return winningInfos.getTotalWinningMoney().divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN).doubleValue();
     }
 }

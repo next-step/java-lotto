@@ -1,18 +1,22 @@
 package domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WinningInfos {
     private final List<WinningInfo> winningInfos;
 
     public static WinningInfos of() {
-        List<WinningInfo> list = new ArrayList<>();
-        list.add(WinningInfo.of(LottoWinningType.FORTH_WINNING));
-        list.add(WinningInfo.of(LottoWinningType.THIRD_WINNING));
-        list.add(WinningInfo.of(LottoWinningType.SECOND_WINNING));
-        list.add(WinningInfo.of(LottoWinningType.FIRST_WINNING));
+        List<WinningInfo> list = new ArrayList<>(Arrays.asList(
+                WinningInfo.of(Rank.FIFTH),
+                WinningInfo.of(Rank.FORTH),
+                WinningInfo.of(Rank.THIRD),
+                WinningInfo.of(Rank.SECOND),
+                WinningInfo.of(Rank.FIRST)
+        ));
         return new WinningInfos(list);
     }
 
@@ -24,22 +28,26 @@ public class WinningInfos {
         return winningInfos;
     }
 
-    public void add(LottoWinningType winningType) {
-        if (winningType.equals(LottoWinningType.NOTHING)) {
+    public void update(Rank rank) {
+        if (rank.equals(Rank.MISS)) {
             return;
         }
         WinningInfo winningInfo = winningInfos.stream()
-                .filter(e -> e.getWinningType().equals(winningType))
+                .filter(info -> info.getRank().equals(rank))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
-        winningInfo.increaseHitNumber();
+        winningInfo.increaseWinningNumber();
     }
 
-    public BigDecimal getTotalWinningMoney() {
+    protected BigDecimal getTotalWinningMoney() {
         return winningInfos.stream()
-                .map(e -> e.getWinningType()
-                        .getLottoMoney()
-                        .multiply(e.getWinningNumber()))
+                .map(WinningInfo::getMultiplyWinningMoney)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public double getBenefitRate(LottoMoney lottoMoney) {
+        return getTotalWinningMoney()
+                .divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN)
+                .doubleValue();
     }
 }

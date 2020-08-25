@@ -1,23 +1,22 @@
-import domain.LottoGame;
-import domain.LottoMoney;
 import domain.Number;
-import domain.WinningInfos;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
+import java.util.Set;
 
 public class LottoGameApp {
     public static void main(String[] args) {
         int money = InputView.getMoney();
         LottoMoney lottoMoney = new LottoMoney(money);
-        List<Number> winningNumber = InputView.getWinningNumber();
-        LottoGame lottoGame = LottoGame.of(money, winningNumber);
+        LottoGame lottoGame = LottoGame.of(money);
+        OutputView.printLottoGames(lottoGame.getLottos());
+        Set<Number> winningNumber = InputView.getWinningNumber();
+        Lotto lottoWinningNumbers = new Lotto(winningNumber);
+        Number bonusNumber = InputView.getBonusNumber(lottoWinningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
-
-        OutputView.printLottoGames(lottoGame.getLottoNumbersList());
-
-        WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame);
+        WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame, winningLotto);
         OutputView.printBenefitRate(lottoGame, lottoMoney, winningInfos);
     }
 }

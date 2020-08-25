@@ -1,35 +1,42 @@
 package domain;
 
 
+import java.math.BigDecimal;
+
 public class WinningInfo {
-    private final LottoWinningType winningType;
+    private final Rank rank;
     private int winningNumber;
 
-    public static WinningInfo of(LottoWinningType winningType) {
-        return new WinningInfo(winningType, 0);
-    }
-
-    private WinningInfo(LottoWinningType winningType, int winningNumber) {
-        this.winningType = winningType;
+    private WinningInfo(Rank rank, int winningNumber) {
+        this.rank = rank;
         this.winningNumber = winningNumber;
     }
 
-    public LottoWinningType getWinningType() {
-        return winningType;
+    public static WinningInfo of(Rank winningType) {
+        return new WinningInfo(winningType, 0);
+    }
+
+    public BigDecimal getMultiplyWinningMoney() {
+        BigDecimal winningNumber = new BigDecimal(this.winningNumber);
+        return rank.getWinningMoney().multiply(winningNumber);
+    }
+
+    public void increaseWinningNumber() {
+        winningNumber++;
     }
 
     public int getWinningNumber() {
         return winningNumber;
     }
 
-    public void increaseHitNumber() {
-        winningNumber++;
+    public Rank getRank() {
+        return rank;
     }
 
     @Override
     public String toString() {
         return "WinningInfo{" +
-                "winningType=" + winningType +
+                "winningType=" + rank +
                 ", winningNumber=" + winningNumber +
                 '}';
     }
