@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinnersNo {
-    private int bonusNumber;
-    private List<Integer> winnersResultNos;
+    private final int bonusNumber;
+    private final List<Integer> winnersResultNos;
 
     public WinnersNo(int bonusNumber, String input) {
         this.bonusNumber = bonusNumber;

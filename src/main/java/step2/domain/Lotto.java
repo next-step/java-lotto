@@ -10,7 +10,7 @@ public class Lotto {
     private static final int RANDOM_NUMBER_ORIGIN = 1;
     private static final int RANDOM_NUMBER_BOUND = 46;
 
-    private List<Integer> lotteryInfo;
+    private static List<Integer> lotteryInfo;
 
     private Lotto(List<Integer> lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
@@ -46,6 +46,24 @@ public class Lotto {
     @Override
     public String toString() {
         return this.lotteryInfo.stream().map(String::valueOf)
-                .collect(Collectors.joining(","));
+                               .collect(Collectors.joining(","));
+    }
+
+    public static Scores addWinningInfos(WinnersNo winnersNo) {
+        int hitNumber = hasNumber(winnersNo);
+        boolean hasBonusNumber = hasBonusNumber(hitNumber, winnersNo.getBonusNumber());
+        return hitNumber > 2 ? new Scores(hitNumber, hasBonusNumber) : null;
+    }
+
+    private static int hasNumber(WinnersNo winnersNo) {
+        int hitNumbers = 0;
+        for (int number : winnersNo.getWinnersResultNos()) {
+            hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
+        }
+        return hitNumbers;
+    }
+
+    private static boolean hasBonusNumber(int hitNumbers, int BonusNumber) {
+        return hitNumbers == 5 && lotteryInfo.contains(BonusNumber);
     }
 }
