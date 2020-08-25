@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class InputValidator {
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("^[-+]?(0|[1-9][0-9]*)(\\\\.[0-9]+)?([eE][-+]?[0-9]+)?$");
+	private static final int MIN_PURCHASE_PRICE = 1000;
 
 	public static void validatePurchasePrice(String price) {
 		if (!isNumber(price)) {
 			throw new IllegalArgumentException("구입금액은 숫자로 입력해주세요.");
 		}
 
-		if (Integer.parseInt(price) < 1000) {
+		if (Integer.parseInt(price) < MIN_PURCHASE_PRICE) {
 			throw new IllegalArgumentException("구입금액은 최소 1000원 이상 입력해주세요.");
 		}
 	}
