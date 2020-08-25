@@ -10,7 +10,10 @@ class LottoTicketCountTest {
     @Test
     @DisplayName("구매한 자동/수동 로또 티켓 갯수 확인")
     void lotto_ticket_count_test() {
-        LottoTicketCount lottoTicketCount = LottoTicketCount.valueOf(10000, 4);
+        LottoTicketCount lottoTicketCount = new LottoTicketCount.LottoTicketCountBuilder()
+                .money(10000)
+                .manualLottoCount(4)
+                .build();
         assertEquals(6, lottoTicketCount.getAutoLottoTicketCount());
         assertEquals(4, lottoTicketCount.getManualLottoTicketCount());
     }

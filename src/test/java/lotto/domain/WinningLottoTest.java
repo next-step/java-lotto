@@ -12,14 +12,20 @@ class WinningLottoTest {
     @Test
     @DisplayName("보너스볼 중복 테스트")
     void bonus_ball_duplication_test() {
-        assertThatThrownBy(() -> WinningLotto.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")), 6))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto.WinningLottoBuilder()
+                .winningLottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")))
+                .bonusBall(6)
+                .build()).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("보너스볼 일치 확인 테스트")
     void bonus_ball_match_test() {
-        WinningLotto winningLotto = WinningLotto.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 45")), 7);
+        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+                .winningLottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 45")))
+                .bonusBall(7)
+                .build();
+
         assertEquals(Boolean.TRUE, winningLotto.isBonusBall(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 7")))));
         assertEquals(Boolean.FALSE, winningLotto.isBonusBall(LottoTicket.valueOf(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 8")))));
     }

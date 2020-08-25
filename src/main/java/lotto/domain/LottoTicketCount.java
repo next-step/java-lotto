@@ -13,10 +13,6 @@ public class LottoTicketCount {
         this.manualLottoTicketCount = manualLottoCount;
     }
 
-    public static LottoTicketCount valueOf(int money, int manualLottoCount) {
-        return new LottoTicketCount(money, manualLottoCount);
-    }
-
     private int calculateAutoLottoTicketCount(int money) {
         return money / LOTTO_PRICE;
     }
@@ -32,6 +28,25 @@ public class LottoTicketCount {
     private void validateCount(int manualLottoCount) {
         if (manualLottoCount < MIN_COUNT) {
             throw new IllegalArgumentException("0 이상의 숫자를 입력해주세요.");
+        }
+    }
+
+    public static class LottoTicketCountBuilder {
+        int money;
+        int manualLottoCount;
+
+        public LottoTicketCountBuilder money(int money) {
+            this.money = money;
+            return this;
+        }
+
+        public LottoTicketCountBuilder manualLottoCount(int manualLottoCount) {
+            this.manualLottoCount = manualLottoCount;
+            return this;
+        }
+
+        public LottoTicketCount build() {
+            return new LottoTicketCount(money, manualLottoCount);
         }
     }
 }

@@ -19,10 +19,16 @@ public class LottoShop {
         validatePriceIsEmpty(money);
         validatePriceIsDivide(money);
 
-        LottoTicketCount lottoTicketCount = LottoTicketCount.valueOf(money, manualLottoCount);
+        LottoTicketCount lottoTicketCount = new LottoTicketCount.LottoTicketCountBuilder()
+                .money(money)
+                .manualLottoCount(manualLottoCount)
+                .build();
+
         LottoMachine.getInstance();
-        PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket
-                .valueOf(lottoTicketCount.getAutoLottoTicketCount(), manualLottoCount);
+        PublishedLottoTicket publishedLottoTicket = new PublishedLottoTicket.PublishedLottoTicketBuilder()
+                .autoLottoTicketCounts(lottoTicketCount.getAutoLottoTicketCount())
+                .manualLottoCounts(manualLottoCount)
+                .build();
 
         return publishedLottoTicket;
     }

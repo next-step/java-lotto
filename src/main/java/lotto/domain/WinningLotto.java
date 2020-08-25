@@ -4,17 +4,13 @@ import java.util.Set;
 
 public class WinningLotto {
 
-    private LottoTicket winningLottoTicket;
+    private static LottoTicket winningLottoTicket;
     private LottoNumber bonusBall;
 
     private WinningLotto(Set<LottoNumber> lottoNumbers, int bonusBall) {
         this.winningLottoTicket = LottoTicket.valueOf(lottoNumbers);
         validateBonusBallDuplication(bonusBall);
         this.bonusBall = LottoNumber.valueOf(bonusBall);
-    }
-
-    public static WinningLotto valueOf(Set<LottoNumber> lottoNumbers, int bonusBall) {
-        return new WinningLotto(lottoNumbers, bonusBall);
     }
 
     private void validateBonusBallDuplication(int bonusBall) {
@@ -29,5 +25,24 @@ public class WinningLotto {
 
     public boolean isBonusBall(LottoTicket lottoTicket) {
         return lottoTicket.matchLottoNumber(this.bonusBall);
+    }
+
+    public static class WinningLottoBuilder {
+        private Set<LottoNumber> lottoNumbers;
+        private int bonusBall;
+
+        public WinningLottoBuilder winningLottoTicket(Set<LottoNumber> lottoNumbers) {
+            this.lottoNumbers = lottoNumbers;
+            return this;
+        }
+
+        public WinningLottoBuilder bonusBall(int bonusBall) {
+            this.bonusBall = bonusBall;
+            return this;
+        }
+
+        public WinningLotto build() {
+            return new WinningLotto(lottoNumbers, bonusBall);
+        }
     }
 }

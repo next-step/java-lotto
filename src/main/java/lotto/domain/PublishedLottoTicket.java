@@ -15,10 +15,6 @@ public class PublishedLottoTicket {
         publishManualLottoTicket(manualLottoCounts);
     }
 
-    public static PublishedLottoTicket valueOf(int autoLottoTicketCounts, int manualLottoCounts) {
-        return new PublishedLottoTicket(autoLottoTicketCounts, manualLottoCounts);
-    }
-
     private void publishAutoLottoTicket(int lottoTicketCounts) {
         for (int i = 0; i < lottoTicketCounts; i++) {
             Set<LottoNumber> lottoNumbers = LottoMachine.generateLottoNumber();
@@ -35,6 +31,25 @@ public class PublishedLottoTicket {
 
     public Set<LottoTicket> getPublishedLottoTicket() {
         return publishedLottoTicket;
+    }
+
+    public static class PublishedLottoTicketBuilder {
+        int autoLottoTicketCounts;
+        int manualLottoCounts;
+
+        public PublishedLottoTicketBuilder autoLottoTicketCounts(int autoLottoTicketCounts) {
+            this.autoLottoTicketCounts = autoLottoTicketCounts;
+            return this;
+        }
+
+        public PublishedLottoTicketBuilder manualLottoCounts(int manualLottoCounts) {
+            this.manualLottoCounts = manualLottoCounts;
+            return this;
+        }
+
+        public PublishedLottoTicket build() {
+            return new PublishedLottoTicket(autoLottoTicketCounts, manualLottoCounts);
+        }
     }
 
 }
