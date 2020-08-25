@@ -34,7 +34,7 @@ public class WinnersNo {
     }
 
     static void validateBonusNumber(int input) {
-        if (input > 45) {
+        if (!(input > 0 && input < 45)) {
             throw new IllegalArgumentException("보너스 입력 값이 잘못입력되었습니다.");
         }
     }
