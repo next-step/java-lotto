@@ -6,14 +6,14 @@ import domain.Number;
 import java.util.List;
 
 public class OutputView {
-    public static void printLottoGames(List<LottoNumbers> lottoGameList) {
-        for (LottoNumbers lottoNumbers : lottoGameList) {
-            System.out.println(lottoNumbers);
+    public static void printLottoGames(List<Lotto> lottoGameList) {
+        for (Lotto lotto : lottoGameList) {
+            System.out.println(lotto);
         }
     }
 
-    public static WinningInfos printWinningInfo(LottoGame lottoGame, LottoNumbers lottoNumbers, Number bonusNumber) {
-        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lottoNumbers, bonusNumber);
+    public static WinningInfos printWinningInfo(LottoGame lottoGame, Lotto lotto, Number bonusNumber) {
+        WinningInfos lottoWinningInfos = lottoGame.getWinningInfos(lotto, bonusNumber);
         System.out.println();
 
         List<WinningInfo> winningInfos = lottoWinningInfos.getWinningInfos();

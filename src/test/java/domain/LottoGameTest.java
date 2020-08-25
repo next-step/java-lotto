@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,31 +15,31 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class LottoGameTest {
     private LottoGame lottoGame;
     private LottoMoney lottoMoney;
-    private LottoNumbers lottoWinningNumbers;
+    private Lotto lottoWinningNumbers;
 
     @BeforeEach
     void setUp() {
-        List<LottoNumbers> numbersList = new ArrayList<>();
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(8, 21, 23, 41, 42, 43))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(3, 5, 11, 16, 32, 38))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(7, 11, 16, 35, 36, 44))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1, 8, 11, 31, 41, 42))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(13, 14, 16, 38, 42, 45))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(7, 11, 30, 40, 42, 43))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(2, 13, 22, 32, 38, 45))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(23, 25, 33, 36, 39, 41))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1, 3, 5, 14, 22, 45))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(5, 9, 38, 41, 43, 44))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(2, 8, 9, 18, 19, 21))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(13, 14, 18, 21, 23, 35))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(17, 21, 29, 37, 42, 45))));
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))));
+        List<Lotto> numbersList = new ArrayList<>();
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(8, 21, 23, 41, 42, 43))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(3, 5, 11, 16, 32, 38))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(7, 11, 16, 35, 36, 44))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(1, 8, 11, 31, 41, 42))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(13, 14, 16, 38, 42, 45))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(7, 11, 30, 40, 42, 43))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(2, 13, 22, 32, 38, 45))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(23, 25, 33, 36, 39, 41))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(1, 3, 5, 14, 22, 45))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(5, 9, 38, 41, 43, 44))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(2, 8, 9, 18, 19, 21))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(13, 14, 18, 21, 23, 35))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(17, 21, 29, 37, 42, 45))));
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))));
 
         int money = 14000;
         lottoMoney = new LottoMoney(money);
 
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoWinningNumbers = new LottoNumbers(makeNumbers(winningNumbers));
+        lottoWinningNumbers = new Lotto(makeNumbers(winningNumbers));
 
         lottoGame = new LottoGame(numbersList);
     }
@@ -55,7 +54,7 @@ class LottoGameTest {
     @Test
     @DisplayName("구입 금액에 따라 LottoNumbers를 여러 개 생성한다.")
     void makeLottoNumberListTest() {
-        assertThat(lottoGame.getLottoNumbersList().size()).isEqualTo(14);
+        assertThat(lottoGame.getLottoList().size()).isEqualTo(14);
     }
 
     @ParameterizedTest
@@ -88,8 +87,8 @@ class LottoGameTest {
     @CsvSource(value = {"10:1", "11:0"}, delimiter = ':')
     @DisplayName("보너스 번호 테스트")
     void bonusTest(int bonusNumberInput, int expectedWinningNumber) {
-        List<LottoNumbers> numbersList = new ArrayList<>();
-        numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1,2,3,4,5,10))));
+        List<Lotto> numbersList = new ArrayList<>();
+        numbersList.add(new Lotto(makeNumbers(Arrays.asList(1,2,3,4,5,10))));
 
         LottoGame lottoGame = new LottoGame(numbersList);
 

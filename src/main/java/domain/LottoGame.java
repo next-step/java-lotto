@@ -6,36 +6,36 @@ import java.util.*;
 import static domain.LottoMoney.MONEY_PER_GAME;
 
 public class LottoGame {
-    private final List<LottoNumbers> lottoNumbersList;
+    private final List<Lotto> lottoList;
 
     public static LottoGame of(int money) {
-        List<LottoNumbers> lottoNumbersList = generateLottoNumbersList(money);
-        return new LottoGame(lottoNumbersList);
+        List<Lotto> lottoList = generateLottoNumbersList(money);
+        return new LottoGame(lottoList);
     }
 
-    public LottoGame(List<LottoNumbers> lottoNumbersList) {
-        this.lottoNumbersList = lottoNumbersList;
+    public LottoGame(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
-    private static List<LottoNumbers> generateLottoNumbersList(int money) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private static List<Lotto> generateLottoNumbersList(int money) {
+        List<Lotto> lottoNumbers = new ArrayList<>();
         int gameCount = money / MONEY_PER_GAME;
 
         for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(LottoNumbers.generatedAutoNumbers());
+            lottoNumbers.add(Lotto.generatedAutoNumbers());
         }
 
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 
-    public WinningInfos getWinningInfos(LottoNumbers lottoWinningNumbers, Number bonusNumber) {
+    public WinningInfos getWinningInfos(Lotto lottoWinningNumbers, Number bonusNumber) {
         WinningInfos winningInfos = WinningInfos.of();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            Rank rank = Rank.getRank(lottoNumbers, lottoWinningNumbers, bonusNumber);
+        for (Lotto lotto : lottoList) {
+            Rank rank = Rank.getRank(lotto, lottoWinningNumbers, bonusNumber);
             winningInfos.update(rank);
         }
         return winningInfos;

@@ -10,9 +10,9 @@ public class LottoGameApp {
         int money = InputView.getMoney();
         LottoMoney lottoMoney = new LottoMoney(money);
         LottoGame lottoGame = LottoGame.of(money);
-        OutputView.printLottoGames(lottoGame.getLottoNumbersList());
+        OutputView.printLottoGames(lottoGame.getLottoList());
         Set<Number> winningNumber = InputView.getWinningNumber();
-        LottoNumbers lottoWinningNumbers = new LottoNumbers(winningNumber);
+        Lotto lottoWinningNumbers = new Lotto(winningNumber);
         Number bonusNumber = InputView.getBonusNumber(lottoWinningNumbers);
 
         WinningInfos winningInfos = OutputView.printWinningInfo(lottoGame, lottoWinningNumbers, bonusNumber);

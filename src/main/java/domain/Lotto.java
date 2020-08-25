@@ -3,22 +3,22 @@ package domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private static final int LOTTO_NUMBER = 6;
 
     private final Set<Number> numbers;
 
-    public LottoNumbers(Set<Number> numbers) {
+    public Lotto(Set<Number> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    public static LottoNumbers generatedAutoNumbers() {
+    public static Lotto generatedAutoNumbers() {
         Set<Number> numbers = new TreeSet<>();
         while(numbers.size() != 6) {
             numbers.add(Number.generateNumber());
         }
-        return new LottoNumbers(numbers);
+        return new Lotto(numbers);
     }
 
     private void validate(Set<Number> numbers) {
@@ -27,7 +27,7 @@ public class LottoNumbers {
         }
     }
 
-    public Set<Number> getContainNumbers(LottoNumbers lottoWinningNumbers) {
+    public Set<Number> getContainNumbers(Lotto lottoWinningNumbers) {
         return lottoWinningNumbers.numbers.stream()
                 .filter(this.numbers::contains)
                 .collect(Collectors.toSet());

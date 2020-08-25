@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+class LottoTest {
 
     private static Stream<Arguments> provideLottoNumbers() {
         return Stream.of(
@@ -34,7 +33,7 @@ class LottoNumbersTest {
                 .map(Integer::parseInt)
                 .map(Number::new)
                 .collect(Collectors.toCollection(TreeSet::new));
-        assertThatThrownBy(() -> new LottoNumbers(collect))
+        assertThatThrownBy(() -> new Lotto(collect))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -45,10 +44,10 @@ class LottoNumbersTest {
         Set<Number> numbers = makeInputToNumbers(input);
         Set<Number> winningNumbers = makeInputToNumbers("1,2,3,4,5,6");
 
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
+        Lotto lotto = new Lotto(numbers);
+        Lotto winningLotto = new Lotto(winningNumbers);
 
-        Set<Number> actual = lottoNumbers.getContainNumbers(winningLottoNumbers);
+        Set<Number> actual = lotto.getContainNumbers(winningLotto);
 
         Set<Number> expected = makeInputToNumbers(expectedInput);
 
@@ -67,10 +66,10 @@ class LottoNumbersTest {
     @DisplayName("자신이 가진 로또 번호가 보너스 숫자를 포함하는지 결과값 제공")
     void isContainBonusTest() {
         Set<Number> numbers = makeInputToNumbers("1,2,3,4,5,6");
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        Lotto lotto = new Lotto(numbers);
         Number bonusNumber = new Number(6);
 
-        assertThat(lottoNumbers.isContainBonus(bonusNumber)).isTrue();
+        assertThat(lotto.isContainBonus(bonusNumber)).isTrue();
     }
 
 }

@@ -1,7 +1,6 @@
 package view;
 
-import domain.LottoGame;
-import domain.LottoNumbers;
+import domain.Lotto;
 import domain.Number;
 
 import java.util.*;
@@ -21,7 +20,7 @@ public class InputView {
         return getWinningListFromString(str);
     }
 
-    public static Number getBonusNumber(LottoNumbers lottoWinningNumbers) {
+    public static Number getBonusNumber(Lotto lottoWinningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String s = scanner.nextLine();
         Number bonusNumber = new Number(Integer.parseInt(s));

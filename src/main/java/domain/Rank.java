@@ -2,7 +2,6 @@ package domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 public enum Rank {
@@ -21,9 +20,9 @@ public enum Rank {
         this.winningMoney = new BigDecimal(winningMoney);
     }
 
-    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers lottoWinningNumbers, Number bonusNumber) {
-        Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lottoNumbers);
-        boolean matchBonus = lottoNumbers.isContainBonus(bonusNumber);
+    public static Rank getRank(Lotto lotto, Lotto lottoWinningNumbers, Number bonusNumber) {
+        Set<Number> numbersInWinningNumbers = lottoWinningNumbers.getContainNumbers(lotto);
+        boolean matchBonus = lotto.isContainBonus(bonusNumber);
         return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);
     }
 
