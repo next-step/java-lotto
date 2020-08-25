@@ -28,7 +28,11 @@ public class WinningLottoNumbers {
         return list;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    protected int getMatchingCount(List<Integer> lottoNumbers) {
+        return (int)lottoNumbers
+                .stream()
+                .filter(winningNumbers::contains)
+                .count();
+
     }
 }

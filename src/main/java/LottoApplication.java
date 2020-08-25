@@ -16,7 +16,8 @@ public class LottoApplication {
         outputView.viewLottoNumbers(lottoTicket);
 
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningNumbers());
-        LottoResult lottoResult = new LottoResult(lottoTicket, winningLottoNumbers);
+        LottoResult lottoResult = LottoResult.of(lottoTicket, winningLottoNumbers);
+
         outputView.viewResult(lottoResult.getResultMap(), lottoMoney);
 
     }
