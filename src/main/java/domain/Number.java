@@ -1,12 +1,14 @@
 package domain;
 
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
     private static final Random random = new Random();
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
+    private static final List<Number> cached = IntStream.rangeClosed(1, 45).boxed().map(Number::new).collect(Collectors.toList());
 
     private final int number;
 
@@ -23,7 +25,7 @@ public class Number implements Comparable<Number> {
 
     public static Number generateNumber() {
         int randomNumber = random.nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
-        return new Number(randomNumber);
+        return cached.get(randomNumber);
     }
 
     @Override
