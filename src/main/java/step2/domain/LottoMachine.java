@@ -7,7 +7,8 @@ public class LottoMachine {
     final static int LOTTO_PRICE = 1000;
 
     public Lotto makeLotto(String money) {
-        List<LottoNumber> lottoNumberList = getLottoNumberListByLottoCount(moneyToCount(money));
+        int lottoCount = moneyToCount(money);
+        List<LottoNumber> lottoNumberList = getLottoNumberListByLottoCount(lottoCount);
         return new Lotto(lottoNumberList);
     }
 
@@ -22,7 +23,11 @@ public class LottoMachine {
     }
 
     private int moneyToCount(String money) {
-        return invalidAndToInt(money) / LOTTO_PRICE;
+        int moneyToInt = invalidAndToInt(money);
+        if(moneyToInt % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("천원 단위로 입력해주세요.");
+        }
+        return moneyToInt / LOTTO_PRICE;
     }
 
     private int invalidAndToInt(String money) {

@@ -1,7 +1,5 @@
 package step2.domain.view;
 
-import step2.domain.User;
-
 import java.util.Scanner;
 
 public class InputView {
