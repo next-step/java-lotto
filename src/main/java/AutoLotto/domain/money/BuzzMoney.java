@@ -21,6 +21,7 @@ public enum BuzzMoney {
     }
 
     public static int createBuzzMoney(BuzzMoney buzzMoney, List<Integer> hitsList) {
+        int sum = 0;
         for (int i = 0; i <hitsList.size(); i++) {
             if (buzzMoney.numOfHits == hitsList.get(i)) {
                 sum += createOnceBuzzMoney(buzzMoney, hitsList.get(i));
@@ -37,6 +38,7 @@ public enum BuzzMoney {
         }
         return sum;
     }
+    
 //        int sum = buzzMoneyList
 //                .stream( )
 //                .filter(o -> o.of(buzzMoney))
