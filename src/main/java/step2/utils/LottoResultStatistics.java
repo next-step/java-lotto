@@ -12,6 +12,7 @@ public class LottoResultStatistics {
 
     public LottoResultStatistics(int[] winnerInventory) {
         this.winnerInventory = winnerInventory;
+        filterWinnerInventory();
     }
 
     public Map<RankPrice, Long> getWinningPriceDetails() {
@@ -27,5 +28,11 @@ public class LottoResultStatistics {
                 .sum();
 
         return Math.round(winnedMoney / buyMoney * 100.0) / 100.0;
+    }
+
+    private void filterWinnerInventory() {
+        this.winnerInventory = Arrays.stream(this.winnerInventory)
+                .filter(number -> number > 2)
+                .toArray();
     }
 }

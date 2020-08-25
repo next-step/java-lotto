@@ -3,8 +3,8 @@ package step2.domain;
 import java.util.List;
 
 public class LottoWinners {
-    public final Lottos lottos;
-    public final List<Integer> winningNumbers;
+    private final Lottos lottos;
+    private final List<Integer> winningNumbers;
 
     public LottoWinners(Lottos lottos, List<Integer> winningNumbers) {
         this.lottos = lottos;

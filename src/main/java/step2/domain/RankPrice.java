@@ -7,8 +7,7 @@ public enum RankPrice {
     FIRST_PLACE(6, 2000000000),
     THIRD_PLACE(5, 1500000),
     FOURTH_PLACE(4, 50000),
-    FIFTH_PLACE(3, 5000),
-    LOSE(0, 0);
+    FIFTH_PLACE(3, 5000);
 
     final private int MATCH_NUMBER;
     final private int WINED_MONEY;
