@@ -2,6 +2,8 @@ package cc.oakk.lotto;
 
 import cc.oakk.lotto.controller.LottoGame;
 import cc.oakk.lotto.model.*;
+import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
+import cc.oakk.lotto.model.prizeprovider.impl.SimpleLottoPrizeProvider;
 import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.InputViewImpl;
 import cc.oakk.lotto.view.ResultView;
