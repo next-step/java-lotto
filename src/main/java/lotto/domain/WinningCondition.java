@@ -1,20 +1,20 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class WinningTicket extends LottoTicket {
+public class WinningCondition {
 
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
-    private final List<Rank> checkBonusRanks;
 
-    public WinningTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        super(lottoNumbers);
+    public WinningCondition(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
-        this.checkBonusRanks = Rank.getHasBonusBallRanks();
     }
 
-    public static WinningTicket of(List<Integer> numbers, Integer bonusNumber) {
-        return new WinningTicket(parseLottoNumbers(numbers), new LottoNumber(bonusNumber));
+    public static WinningCondition of(List<Integer> numbers, Integer bonusNumber) {
+        return new WinningCondition(LottoTicket.of(numbers), new LottoNumber(bonusNumber));
     }
 
     public boolean isMatchBonusBall(LottoTicket lottoTicket) {
@@ -22,14 +22,15 @@ public class WinningTicket extends LottoTicket {
     }
 
     public Rank getRank(LottoTicket lottoTicket) {
-        int countOfMatch = this.getCountOfMatch(lottoTicket);
+        int countOfMatch = winningTicket.getCountOfMatch(lottoTicket);
         boolean isMatchBonusBall = checkMatchBonusBall(countOfMatch) && isMatchBonusBall(lottoTicket);
 
         return Rank.getRankByCountOfMatchAndBonusBall(countOfMatch, isMatchBonusBall);
     }
 
     private boolean checkMatchBonusBall(int countOfMatch) {
-        return checkBonusRanks.stream()
+        return Arrays.stream(Rank.values())
+                .filter(Rank::isMatchBonusBall)
                 .anyMatch(rank -> rank.getCountOfMatch() == countOfMatch);
     }
 }

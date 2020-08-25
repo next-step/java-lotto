@@ -14,6 +14,7 @@ public class ResultView {
     private static final String EQUALS_PHRASE = "개 일치 ";
     private static final String BONUS_BALL_PHRASE = ",보너스 볼 일치 ";
     private static final String LOTTO_RATE = "총 수익률은 %s입니다. \n";
+    private static final String LOTTO_MANUAL_AUTO_COUNT_PHRASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String EMPTY_STRING = "";
     private final List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
 
@@ -43,6 +44,10 @@ public class ResultView {
 
     public void printRate(BigDecimal rate) {
         System.out.printf(LOTTO_RATE, rate.toString());
+    }
+
+    public void printLottoTicketSize(int manualTicketsSize,int autoTicketsSize) {
+        System.out.printf(LOTTO_MANUAL_AUTO_COUNT_PHRASE, manualTicketsSize, autoTicketsSize);
     }
 
 }
