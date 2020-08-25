@@ -15,5 +15,4 @@ public class NumberFactory {
         return inputNumbers;
     }
 
-    ;
 }
