@@ -3,7 +3,7 @@ package kr.heesu.lotto.view;
 import kr.heesu.lotto.domain.LottoStatistics;
 import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.PurchaseAmount;
-import kr.heesu.lotto.enums.LottoPolicy;
+import kr.heesu.lotto.enums.Rank;
 
 import java.io.PrintWriter;
 
@@ -15,6 +15,14 @@ public class ResultView {
         this.writer = new PrintWriter(System.out, true);
     }
 
+    private static class InnerHolder {
+        private static final ResultView INSTANCE = new ResultView();
+    }
+
+    public static ResultView getInstance() {
+        return InnerHolder.INSTANCE;
+    }
+
     public void printLottoStatistics(LottoStatistics result) {
         printMatchResult(result);
         printProfitRate(result);
@@ -22,13 +30,24 @@ public class ResultView {
 
     private void printMatchResult(LottoStatistics result) {
 
-        for (LottoPolicy policy : LottoPolicy.values()) {
-            Long count = policy.getCount();
-            Long price = policy.getPrice();
-            Long frequency = result.getMatchFrequency(count);
+        for (Rank rank : Rank.values()) {
+            Long count = rank.getCountOfMatch();
+            Long price = rank.getWinningMoney();
+            Long frequency = result.getRankFrequency(rank);
 
-            writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_MATCH_RESULT.getMessage(), count, price, frequency));
+            printFormatLine(getFormat(rank), count, price, frequency);
         }
+    }
+
+    private String getFormat(Rank rank) {
+        return rank.equals(Rank.SECOND) ? ViewMessage.OUTPUT_FORMAT_FOR_SECOND_RANK.getMessage() : ViewMessage.OUTPUT_FORMAT_FOR_MATCH_RESULT.getMessage();
+    }
+
+    private void printFormatLine(String format, Long count, Long price, Long frequency) {
+        if (count.equals(0L)) {
+            return;
+        }
+        writer.println(String.format(format, count, price, frequency));
     }
 
     private void printProfitRate(LottoStatistics result) {
@@ -49,9 +68,5 @@ public class ResultView {
     public void printPurchaseAmount(PurchaseAmount amount) {
         int size = amount.getSize();
         writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_PURCHASE_SIZE.getMessage(), size));
-    }
-
-    public static ResultView of() {
-        return new ResultView();
     }
 }

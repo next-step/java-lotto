@@ -27,13 +27,16 @@ public class LottoController {
 
             viewResolver.printPurchaseAmount(amount);
 
-            Lottos multipleLotto = LottoFactory.createMultipleLottos(amount);
+            Lottos multipleLotto = LottoFactory.createLottosAutomatic(amount);
             viewResolver.printMultipleLotto(multipleLotto);
 
             String stringWinningNumbers = viewResolver.getWinningNumbers();
             WinningNumbers winningNumbers = makeWinningNumbersFromUserInput(stringWinningNumbers);
 
-            MatchResult matches = multipleLotto.matches(winningNumbers);
+            String stringBonusNumber = viewResolver.getBonusNumbers();
+            LottoNumber bonusNumber = makeLottoNumber(stringBonusNumber);
+
+            RankResult matches = multipleLotto.matches(winningNumbers, bonusNumber);
 
             LottoStatistics statistics = makeLottoStatistics(matches, amount);
 
@@ -43,7 +46,11 @@ public class LottoController {
         }
     }
 
-    private LottoStatistics makeLottoStatistics(MatchResult matches, PurchaseAmount amount) {
+    private LottoNumber makeLottoNumber(String stringBonusNumber) {
+        return LottoNumber.of(Integer.parseInt(stringBonusNumber));
+    }
+
+    private LottoStatistics makeLottoStatistics(RankResult matches, PurchaseAmount amount) {
         return LottoStatistics.of(matches, amount);
     }
 

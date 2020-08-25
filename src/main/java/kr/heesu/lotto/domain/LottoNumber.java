@@ -19,6 +19,13 @@ public class LottoNumber {
         return new LottoNumber(number);
     }
 
+    public static LottoNumber of(String number) {
+        int lottoNumber = Integer.parseInt(number);
+
+        validationCheck(lottoNumber);
+        return new LottoNumber(lottoNumber);
+    }
+
     private static void validationCheck(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_LOTTO_NUMBER.getMessage());

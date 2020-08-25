@@ -8,13 +8,16 @@ public class ViewResolver {
     private final InputView inputView;
     private final ResultView resultView;
 
-    private ViewResolver() {
-        this.inputView = InputView.of();
-        this.resultView = ResultView.of();
+    private ViewResolver(InputView inputView, ResultView resultView) {
+        this.inputView = inputView;
+        this.resultView = resultView;
     }
 
     public static ViewResolver of() {
-        return new ViewResolver();
+        InputView inputView = InputView.getInstance();
+        ResultView resultView = ResultView.getInstance();
+
+        return new ViewResolver(inputView, resultView);
     }
 
     public String getPurchaseAmount() {
@@ -27,9 +30,14 @@ public class ViewResolver {
         return this.inputView.read();
     }
 
+    public String getBonusNumbers() {
+        System.out.println(ViewMessage.INPUT_FOR_BONUS_NUMBER.getMessage());
+        return this.inputView.read();
+    }
+
     public void printLottoStatistics(LottoStatistics result) {
-        System.out.println(ViewMessage.OUTPUT_FOR_LOTTO_STATISTICS);
-        System.out.println(ViewMessage.OUTPUT_FOR_LINE);
+        System.out.println(ViewMessage.OUTPUT_FOR_LOTTO_STATISTICS.getMessage());
+        System.out.println(ViewMessage.OUTPUT_FOR_LINE.getMessage());
 
         resultView.printLottoStatistics(result);
     }
