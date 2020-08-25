@@ -7,12 +7,11 @@ import static step1.UserInput.*;
 
 public class ValidateInput {
 
-    private static String input;
+    private String input;
     private String inputs[];
 
     public ValidateInput(String input) {
-        validateSomeThing(input);
-        this.input = input;
+        this.input = validateSomeThing(input);
     }
 
     public String getInput() {
@@ -20,18 +19,15 @@ public class ValidateInput {
     }
 
     String validateSomeThing(String input) {
-        if (validateInputNUll(input)) {
-            System.out.println("g");
+        if (validateInputNull(input)) {
             input = STRING_ZERO;
             return input;
         }
         if (validateInputOneNumber(input)) {
-            System.out.println("gg");
             return input;
         }
 
         if (isCustomDelimiter(input)) {
-            System.out.println("ggg");
             input += LINE_FEED + new Scanner(System.in).nextLine();
             return input;
         }
@@ -40,9 +36,8 @@ public class ValidateInput {
         return input;
     }
 
-    boolean validateInputNUll(String input) {
+    boolean validateInputNull(String input) {
         if (input == null || input.trim().isEmpty()) {
-            this.input = STRING_ZERO;
             return true;
         }
         return false;
@@ -56,7 +51,6 @@ public class ValidateInput {
     }
 
     void validateInputNegative(String[] inputs) {
-        System.out.println("ggg");
         boolean isAllPositiveValue = Arrays.stream(inputs)
                 .map(Integer::parseInt)
                 .allMatch(element -> element >= ZERO);
@@ -66,7 +60,7 @@ public class ValidateInput {
         }
     }
 
-    private boolean isCustomDelimiter(String input) {
+    boolean isCustomDelimiter(String input) {
         if (input.substring(ZERO, TWO).equals("//")) {
             return true;
         }

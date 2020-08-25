@@ -11,11 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringSpliterTest {
 
     @ParameterizedTest
-    @ValueSource(strings={"//=\n1=2=3","//;\n2;2;5"})
-    void findCustomDelimiterTest(String input){
+    @ValueSource(strings = {"//=\n1=2=3", "//;\n2;2;5"})
+    void findCustomDelimiterTest(String input) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
 
         assertThat(m.find()).isEqualTo(true);
-
     }
 }
