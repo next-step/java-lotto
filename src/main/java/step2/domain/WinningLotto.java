@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static  final String LOTTO_NUMBER_DELIMITER = ",";
-    private List<Integer> winningNumbers; // 지난주 당첨 번호
+    private List<Integer> winningNumbers;
 
     public WinningLotto(String inputWinningNumber) {
         this.winningNumbers = invalidAndToArray(inputWinningNumber);
@@ -21,7 +21,9 @@ public class WinningLotto {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        //TODO : list 에 대한 validation ( 6개인지)
+        if(list.size() < 6) {
+            throw new IllegalArgumentException("당첨 번호를 정확하게 입력해주세요");
+        }
         return list;
     }
 
