@@ -1,21 +1,10 @@
-package lotto;
+import lotto.view.LottoStore;
+import lotto.view.SummaryPrinter;
+import lotto.domain.Lottos;
 
 import java.util.Scanner;
 
-public class LottoStore {
-    public Lottos sold(int price){
-        Lottos lottos = new Lottos();
-        int amount = price / Lotto.PRICE;
-        for(int i = 0 ; i < amount ; i ++){
-            lottos.add(LottoFactory.create());
-        }
-
-        System.out.println(amount+"개를 구매 했습니다.");
-        System.out.println(lottos.toString());
-
-        return lottos;
-    }
-
+public class Main {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore();
 
