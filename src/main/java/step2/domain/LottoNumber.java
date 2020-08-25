@@ -14,6 +14,7 @@ public class LottoNumber {
 
     public LottoNumber() {
         init();
+        create();
     }
 
     private void init() {
@@ -22,7 +23,7 @@ public class LottoNumber {
         }
     }
 
-    public void create() {
+    private void create() {
         Collections.shuffle(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
