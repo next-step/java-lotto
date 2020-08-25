@@ -1,27 +1,17 @@
 package nextstep.lotto.dto;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoResultBoard {
 
     public static final int LOTTO_VALUE = 1000;
 
-    private Map<LottoRank, Integer> lottoResult = new HashMap();
+    private Map<LottoRank, Long> lottoResult = new HashMap();
 
-    public LottoResultBoard() {
-    }
-
-    public LottoResultBoard(LottoTickets userLottoTickets, LottoWinnerNumbers winnerTicket) {
-        this.lottoResult = new HashMap();
-
-        for (LottoTicket ticket : userLottoTickets.getAll()) {
-            addLottoResult(winnerTicket.matchCount(ticket.getLottoNumber()));
-        }
-
+    private LottoResultBoard(LottoTickets userLottoTickets, LottoWinnerNumbers winnerTicket) {
+        this.lottoResult = userLottoTickets.matchCount(winnerTicket);
     }
 
     public static LottoResultBoard create(LottoTickets userLottoTickets, LottoWinnerNumbers winnerTicket) {
@@ -29,15 +19,7 @@ public class LottoResultBoard {
         return new LottoResultBoard(userLottoTickets, winnerTicket);
     }
 
-    public void addLottoResult(LottoRank lottoRank) {
-        int count = 0;
-        if (lottoResult.containsKey(lottoRank)) {
-            count = lottoResult.get(lottoRank);
-        }
-        lottoResult.put(lottoRank, count + 1);
-    }
-
-    public Map<LottoRank, Integer> getLottoResult() {
+    public Map<LottoRank, Long> getLottoResult() {
         return lottoResult;
     }
 

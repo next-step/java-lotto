@@ -2,6 +2,9 @@ package nextstep.lotto.dto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -21,5 +24,11 @@ public class LottoTickets {
 
     public List<LottoTicket> getAll() {
         return Collections.unmodifiableList(tickets);
+    }
+
+    public Map<LottoRank, Long> matchCount(final LottoWinnerNumbers winnerTicket) {
+        return tickets.stream()
+                .map(lottoTicket -> winnerTicket.matchCount(lottoTicket.getLottoNumber()))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

@@ -25,7 +25,7 @@ public class ResultView {
 
     private final String MATCH_INFO_LINE_SPERATOR = "\n";
 
-    private final int DEFAULT_TICKET_COUNT = 0;
+    private final long DEFAULT_TICKET_COUNT = 0;
 
     public void showLottoTicket(LottoTickets tickets) {
         printTicketCount(tickets.count());
@@ -55,7 +55,7 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_STAT);
         System.out.println(LOTTO_RESULT_LINE_SEPERATOR);
 
-        Map<LottoRank, Integer> lottoResult = resultBoard.getLottoResult();
+        Map<LottoRank, Long> lottoResult = resultBoard.getLottoResult();
         StringBuilder sb = new StringBuilder();
         sb.append(getMatchInfo(LottoRank.FIFTH, lottoResult.getOrDefault(LottoRank.FIFTH, DEFAULT_TICKET_COUNT)));
         sb.append(getMatchInfo(LottoRank.FOURTH, lottoResult.getOrDefault(LottoRank.FOURTH, DEFAULT_TICKET_COUNT)));
@@ -67,7 +67,7 @@ public class ResultView {
         System.out.printf(BENEFIT_RATE_TEXT, resultBoard.getBenefitRate());
     }
 
-    private String getMatchInfo(LottoRank rank, int matchCount) {
+    private String getMatchInfo(LottoRank rank, long matchCount) {
         String matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT;
         if (rank == LottoRank.SECOND) {
             matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT_BONUS;
