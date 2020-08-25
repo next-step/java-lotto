@@ -1,4 +1,4 @@
-package step1;
+package calc;
 
 import java.util.Objects;
 

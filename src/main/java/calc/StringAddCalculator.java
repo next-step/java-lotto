@@ -1,9 +1,4 @@
-package step1;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package calc;
 
 public class StringAddCalculator {
 

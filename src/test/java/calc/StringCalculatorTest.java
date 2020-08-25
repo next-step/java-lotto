@@ -1,4 +1,4 @@
-package step1;
+package calc;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

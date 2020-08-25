@@ -1,4 +1,4 @@
-package step1;
+package calc;
 
 import org.apache.commons.lang3.StringUtils;
 
