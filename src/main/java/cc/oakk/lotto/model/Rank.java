@@ -1,6 +1,10 @@
 package cc.oakk.lotto.model;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(0),
@@ -19,10 +23,11 @@ public enum Rank {
         return differentCount;
     }
 
+    private static Map<Integer, Rank> ranks =
+            Collections.unmodifiableMap(Stream.of(values())
+                    .collect(Collectors.toMap(Rank::getDifferentCount, Function.identity())));
+
     public static Rank getRankByDifferentCount(int count) {
-        return Arrays.stream(Rank.class.getEnumConstants())
-                .filter(v -> v.differentCount == count)
-                .findFirst()
-                .orElse(NONE);
+        return ranks.getOrDefault(count, NONE);
     }
 }
