@@ -10,7 +10,7 @@ public class Lotto {
     private static final int RANDOM_NUMBER_ORIGIN = 1;
     private static final int RANDOM_NUMBER_BOUND = 46;
 
-    private static List<Integer> lotteryInfo;
+    private List<Integer> lotteryInfo;
 
     private Lotto(List<Integer> lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
@@ -49,13 +49,13 @@ public class Lotto {
                                .collect(Collectors.joining(","));
     }
 
-    public static Scores addWinningInfos(WinnersNo winnersNo) {
-        int hitNumber = hasNumber(winnersNo);
+    public ScoreType addWinningInfos(WinnersNo winnersNo) {
+        int hitNumber = this.hasNumber(winnersNo);
         boolean hasBonusNumber = hasBonusNumber(hitNumber, winnersNo.getBonusNumber());
-        return hitNumber > 2 ? new Scores(hitNumber, hasBonusNumber) : null;
+        return hitNumber > 2 ? ScoreType.getScore(hitNumber, hasBonusNumber) : ScoreType.NONE;
     }
 
-    private static int hasNumber(WinnersNo winnersNo) {
+    private int hasNumber(WinnersNo winnersNo) {
         int hitNumbers = 0;
         for (int number : winnersNo.getWinnersResultNos()) {
             hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
@@ -63,7 +63,7 @@ public class Lotto {
         return hitNumbers;
     }
 
-    private static boolean hasBonusNumber(int hitNumbers, int BonusNumber) {
+    private boolean hasBonusNumber(int hitNumbers, int BonusNumber) {
         return hitNumbers == 5 && lotteryInfo.contains(BonusNumber);
     }
 }

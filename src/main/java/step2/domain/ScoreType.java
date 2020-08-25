@@ -30,12 +30,11 @@ public enum ScoreType {
     }
 
     public static ScoreType getScore(int inputNumber, boolean hasBonusNum) {
-        return Arrays.asList(values())
-                .stream()
-                .filter(i -> i.getTargetNumber() == inputNumber)
-                .filter(i -> i.isHasBonus() == hasBonusNum)
-                .findFirst()
-                .orElse(NONE);
+        return Arrays.stream(values())
+                     .filter(i -> i.getTargetNumber() == inputNumber)
+                     .filter(i -> i.isHasBonus() == hasBonusNum)
+                     .findFirst()
+                     .orElse(NONE);
     }
 
     public int getPrize() {

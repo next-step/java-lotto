@@ -22,7 +22,7 @@ public class Lottos {
         return lottos;
     }
 
-    public List<Scores> getWinningInfos(WinnersNo winnersNo) {
+    public List<ScoreType> getWinningInfos(WinnersNo winnersNo) {
         return lottos.stream()
                      .filter(Objects::nonNull)
                      .map(l -> l.addWinningInfos(winnersNo))

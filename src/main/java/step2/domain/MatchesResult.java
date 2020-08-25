@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static step2.domain.BaseScore.getBaseMap;
@@ -20,7 +21,7 @@ public class MatchesResult {
     public static MatchesResult ofMatchesResults(WinnersNo winnersNo, Lottos lottos) {
         return new MatchesResult(lottos.getWinningInfos(winnersNo)
                                        .stream()
-                                       .collect(Collectors.groupingBy(Scores::getScore, Collectors.counting())));
+                                       .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 
     public static LinkedHashMap<ScoreType, Long> sortMapByKey(Map<ScoreType, Long> map) {
