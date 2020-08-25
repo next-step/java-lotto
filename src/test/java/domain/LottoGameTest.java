@@ -7,11 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,9 +87,9 @@ class LottoGameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10,11})
+    @CsvSource(value = {"10:1", "11:0"}, delimiter = ':')
     @DisplayName("보너스 번호 테스트")
-    void bonusNumberTest(int bonusNumberInput) {
+    void bonusTest(int bonusNumberInput, int expectedWinningNumber) {
         List<LottoNumbers> numbersList = new ArrayList<>();
         numbersList.add(new LottoNumbers(makeNumbers(Arrays.asList(1,2,3,4,5,10))));
 
@@ -101,11 +99,9 @@ class LottoGameTest {
 
         WinningInfos winningInfos = lottoGame.getWinningInfos(lottoWinningNumbers, bonusNumber);
 
-        BigDecimal expectedMoney = Rank.SECOND.getWinningMoney();
-        if (bonusNumberInput == 11) {
-            expectedMoney = Rank.THIRD.getWinningMoney();
-        }
+        int secondRankIndex = 3;
+        int winningNumber = winningInfos.getWinningInfos().get(secondRankIndex).getWinningNumber();
 
-        assertThat(winningInfos.getTotalWinningMoney()).isEqualTo(expectedMoney);
+        assertThat(winningNumber).isEqualTo(expectedWinningNumber);
     }
 }
