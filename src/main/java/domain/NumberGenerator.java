@@ -1,22 +1,26 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class NumberGenerator {
 
     public static final int FIRST_NUMBER = 1;
     public static final int LAST_NUMBER = 45;
+    public static final int INT_ONE = 0;
+    public static final int INT_SIX = 6;
 
-    List<Integer> numList;
-    List<Integer> lottoNumberCandidate;
+    private List<Integer> lottoNumberCandidate;
 
     public NumberGenerator() {
-        numList = new ArrayList<>();
         lottoNumberCandidate = new ArrayList<>();
+        createLottoNumberCandidate();
     }
 
     public void createLottoNumberCandidate() {
@@ -27,11 +31,9 @@ public class NumberGenerator {
     public List<Integer> generate() {
 
         Collections.shuffle(lottoNumberCandidate);
-        numList = new ArrayList<>();
 
-        for (int i = 0; i < LottoGames.LOTTO_NUMBER; i++) {
-            numList.add(lottoNumberCandidate.get(i));
-        }
+        List<Integer> numList = new ArrayList<>(lottoNumberCandidate)
+                .subList(INT_ONE, INT_SIX);
 
         return numList;
     }

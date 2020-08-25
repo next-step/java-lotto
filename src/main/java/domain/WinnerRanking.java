@@ -1,17 +1,17 @@
 package domain;
 
 public enum WinnerRanking {
-    RANK_ONE(2000000000,6 ),
-    RANK_TWO(1500000, 5),
-    RANK_THREE(50000, 4),
-    RANK_FOUR(5000, 3);
+    RANK_ONE(2_000_000_000, 6),
+    RANK_TWO(1_500_000, 5),
+    RANK_THREE(50_000, 4),
+    RANK_FOUR(5_000, 3);
 
     private int winnerPrice;
-    private int count ;
+    private int count;
 
     WinnerRanking(int winnerPrice, int count) {
         this.winnerPrice = winnerPrice;
-        this.count= count;
+        this.count = count;
     }
 
     public int getWinnerPrice() {

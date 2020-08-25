@@ -17,7 +17,6 @@ public class generateLottoTest {
     @BeforeEach
     void setUp() {
         numberGenerator = new NumberGenerator();
-        numberGenerator.createLottoNumberCandidate();
     }
 
     @DisplayName("번호 생성 테스트")
@@ -75,6 +74,6 @@ public class generateLottoTest {
         List<Integer> numList = numberGenerator.generate();
         Lotto numbers = new Lotto(numList);
 
-        assertThat(numbers.sixNumber.size()).isEqualTo(6);
+        assertThat(numbers.lottoNumber.size()).isEqualTo(6);
     }
 }

@@ -13,15 +13,15 @@ public class UserInput {
     private static final String PURCHASE_MESSEGE = "개를 구매했습니다.";
     private static final String AFTER_MESSEGE = "지난 당첨번호를 입력하세요.";
     public static final int WON = 1000;
+    public static final Scanner SC = new Scanner(System.in);
 
     private UserInput() {
     }
 
     public static int init() {
         System.out.println(INIT_MESSEGE);
-        Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-        sc.nextLine();
+        int input = SC.nextInt();
+        SC.nextLine();
 
         validatePrice(input);
         input /= WON;
@@ -37,7 +37,7 @@ public class UserInput {
     }
 
     public static WinnerNumber getWinnerTicket() {
-        String[] winnerNumber = getStrings();
+        String[] winnerNumber = inputWinnerNumber();
 
         int[] number = Arrays.stream(winnerNumber)
                 .mapToInt(Integer::parseInt).toArray();
@@ -45,10 +45,9 @@ public class UserInput {
         return new WinnerNumber(number);
     }
 
-    private static String[] getStrings() {
+    private static String[] inputWinnerNumber() {
         System.out.println(AFTER_MESSEGE);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = SC.nextLine();
         String[] inputs = input.split(",");
 
         validate(inputs);
