@@ -21,8 +21,7 @@
 
 
 
-# todo
-
+# todo 
 
 
 # done
@@ -37,3 +36,9 @@
 - 보너스볼을 받아서 WinnigBalls에 추가한다.(보너스볼을 Object로 만든다.)
 - 보너스볼에 대한 유효성 체크를 한다.
 - Ranking에서 보너스볼에 대한 연산도 한다.
+
+- 수동으로 구매할 로또 개수를 담당하는 ManualLottoCount 객체 추가
+- 사용자로부터 입력받은 로또번호를 이용하여 LottoNumbers를 만드는 로직이 WinningBallsFactory에 있던 것을 LottoNumbersFactory로 가져와서 외부에서 호출 가능하도록 처리
+- 수동으로 로또번호를 생성하는 역할을 담당하는 ManualLottoNumbersFactory 추가
+- 수동으로 생성되는 로또번호(LottoNumbers)와 로또금액(LottoPayAmounts)을 가지고 있는 LottoPurchaseArgument 추가
+- LottoKiosk가 발급할 때 받는 인자를 LottoPurchaseArgument로 변경한다.
