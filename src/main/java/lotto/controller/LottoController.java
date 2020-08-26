@@ -1,19 +1,21 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+
+import static lotto.view.InputView.*;
+import static lotto.view.ResultView.*;
 
 public class LottoController {
     public void start() {
-        final Money money = Money.of(InputView.inputMoney());
-        final LottoStore lottoStore = LottoStore.of(money);
-        final Lottos lottos = lottoStore.issueLotto();
-        ResultView.displayLottoCount(lottos.size());
-        ResultView.displayLottos(lottos);
+        final Money money = Money.of(inputMoney());
+        final LottoCount lottoCount = LottoCount.of(inputManualCount());
+        final LottoStore lottoStore = LottoStore.of(money, lottoCount);
+        final Lottos lottos = lottoStore.issueLotto(ManualLottoGenerator.of(inputManualNumber(lottoCount)));
+        displayLottoCount(lottoCount, money);
+        displayLottos(lottos);
 
-        final WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningLotto(), InputView.inputBonusNumber());
+        final WinningLotto winningLotto = WinningLotto.of(inputWinningLotto(), inputBonusNumber());
         final Rankings rankings = Rankings.of(lottos.matchesWinningLotto(winningLotto));
-        ResultView.displayLottoResult(rankings);
+        displayLottoResult(rankings);
     }
 }
