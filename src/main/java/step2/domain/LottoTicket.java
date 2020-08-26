@@ -17,12 +17,14 @@ public class LottoTicket {
         return lottoNumbersList;
     }
 
-    public Map<Integer, Long> getMatching(WinningLottoNumbers winningLottoNumbers) {
-        return lottoNumbersList
+    public LottoResult getMatching(WinningLottoNumbers winningLottoNumbers) {
+        Map<Integer, Long> map =
+                lottoNumbersList
                 .stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .map(winningLottoNumbers::getMatchingCount)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return new LottoResult(map);
     }
 
 
