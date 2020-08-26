@@ -8,14 +8,13 @@ public class LottoResultBoard {
 
     public static final int LOTTO_VALUE = 1000;
 
-    private Map<LottoRank, Long> lottoResult = new HashMap();
+    private Map<LottoRank, Long> lottoResult;
 
     private LottoResultBoard(LottoTickets userLottoTickets, LottoWinnerNumbers winnerTicket) {
-        this.lottoResult = userLottoTickets.matchCount(winnerTicket);
+        lottoResult = userLottoTickets.matchCount(winnerTicket);
     }
 
     public static LottoResultBoard create(LottoTickets userLottoTickets, LottoWinnerNumbers winnerTicket) {
-
         return new LottoResultBoard(userLottoTickets, winnerTicket);
     }
 
