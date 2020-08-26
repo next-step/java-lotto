@@ -34,7 +34,7 @@ public class Lotto implements Printable<String> {
         this.numbers = Collections.unmodifiableList(validatedList);
     }
 
-    public Rank compare(Lotto target) {
+    public Rank score(Lotto target) {
         throwIfNull(target);
         int matchingCount = (int) numbers.stream()
                 .filter(target.numbers::contains)
