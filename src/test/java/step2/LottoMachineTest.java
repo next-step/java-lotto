@@ -7,11 +7,9 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoMachineTest {
     @Test
     void lotto_machine() {
-        LottoMachine lottoMachine = new LottoMachine();
-
-        assertThatThrownBy(() -> lottoMachine.makeLotto("")).isInstanceOf(IllegalArgumentException.class); // 공백 입력
-        assertThatThrownBy(() -> lottoMachine.makeLotto("만원")).isInstanceOf(IllegalArgumentException.class); // 문자 입력
-        assertThatThrownBy(() -> lottoMachine.makeLotto("1001")).isInstanceOf(IllegalArgumentException.class); // 문자 입력
+        assertThatThrownBy(() -> LottoMachine.getCount("")).isInstanceOf(IllegalArgumentException.class); // 공백 입력
+        assertThatThrownBy(() -> LottoMachine.getCount("만원")).isInstanceOf(IllegalArgumentException.class); // 문자 입력
+        assertThatThrownBy(() -> LottoMachine.getCount("1001")).isInstanceOf(IllegalArgumentException.class); // 단위 오류 입력
 
     }
 }
