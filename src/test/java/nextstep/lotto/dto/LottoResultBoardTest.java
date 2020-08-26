@@ -31,16 +31,20 @@ class LottoResultBoardTest {
         List<String> lottoTicket2 = Arrays.asList("7", "8", "9", "10", "11", "12");
         List<String> lottoTicket3 = Arrays.asList("13", "14", "15", "16", "17", "18");
 
+        List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "40");
+
         tickets.add(LottoTicket.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket1)));
         tickets.add(LottoTicket.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket2)));
         tickets.add(LottoTicket.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket3)));
 
         lottoTickets = LottoTickets.create(tickets);
-        winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket1), LottoNumber.create(7));
+        winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
     }
 
     @Test
     void lottoBoard() {
+        List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "6");
+        LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
         LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets, winnerNumbers);
 
         Map<LottoRank, Long> lottoResult = lottoResultBoard.getLottoResult();
@@ -76,8 +80,6 @@ class LottoResultBoardTest {
     @EnumSource(value = LottoRank.class, names = {"THIRD"})
     @DisplayName("5천원구입으로 3등수익률")
     void lottoBenefit_3등_Test(LottoRank rank) {
-        List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "45");
-        LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
         LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets, winnerNumbers);
 
         float expectedRate = (float) rank.getReward() / 3000;
@@ -89,6 +91,7 @@ class LottoResultBoardTest {
     @DisplayName("5천원구입으로 2등수익률")
     void lottoBenefit_2등_Test(LottoRank rank) {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "45");
+
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(6));
         LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets, winnerNumbers);
 
