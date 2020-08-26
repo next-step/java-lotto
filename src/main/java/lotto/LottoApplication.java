@@ -1,4 +1,9 @@
 package lotto;
 
-public class LottoApp {
+import lotto.domain.LottoGame;
+
+public class LottoApplication {
+    public static void main(String[] args) {
+        LottoGame.start();
+    }
 }
