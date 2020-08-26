@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoNumber {
-    private final List<Integer> nums;
+public class LottoPaper {
+    private final List<Integer> lottoNumbers;
 
-    public LottoNumber(List<Integer> numberList) {
-        nums = numberList;
+    public LottoPaper(List<Integer> numberList) {
+        lottoNumbers = numberList;
     }
 
-    public List<Integer> getNums() {
-        return nums;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
