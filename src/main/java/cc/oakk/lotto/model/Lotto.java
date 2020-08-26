@@ -32,12 +32,6 @@ public class Lotto implements Printable<String> {
         this.numbers = Collections.unmodifiableList(validatedList);
     }
 
-    public static Lotto of(int first, int second, int third, int fourth, int fifth, int sixth) {
-        List<Integer> numbers = Stream.of(first, second, third, fourth, fifth, sixth)
-                .collect(Collectors.toList());
-        return new Lotto(numbers);
-    }
-
     public Rank compare(Lotto target) {
         throwIfNull(target);
         int matchingCount = (int) numbers.stream()

@@ -1,10 +1,7 @@
 package cc.oakk.lotto.model;
 
-import cc.oakk.lotto.model.Lotto;
-import cc.oakk.lotto.model.LottoResults;
-import cc.oakk.lotto.model.Lottos;
-import cc.oakk.lotto.model.Rank;
-import org.junit.jupiter.api.BeforeAll;
+import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
+import cc.oakk.lotto.model.prizeprovider.impl.SimpleLottoPrizeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +14,14 @@ public class LottoResultsTest {
 
     @BeforeEach
     public void beforeEach() {
-        Lotto winningLotto = Lotto.of(1, 3, 5, 7, 9, 11);
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 3, 5, 7, 9, 11));
         Lottos lottos = new Lottos(Arrays.asList(
-                Lotto.of(1, 2,3, 4, 5, 6),
-                Lotto.of(1, 3, 5, 7, 9,  11),
-                Lotto.of(1, 3, 5, 7, 9,  10),
-                Lotto.of(1, 3, 5, 7, 10,  11),
-                Lotto.of(1, 4, 8, 12, 16, 20),
-                Lotto.of(1, 14, 18, 22, 26, 30)));
+                new Lotto(Arrays.asList(1, 2,  3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 9,  11)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 9,  10)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 10,  11)),
+                new Lotto(Arrays.asList(1, 4, 8, 12, 16, 20)),
+                new Lotto(Arrays.asList(1, 14, 18, 22, 26, 30))));
 
         results = lottos.getResults(winningLotto);
     }
