@@ -36,8 +36,14 @@ public class WinningLottoNumbers {
     protected int getMatchingCount(List<Integer> lottoNumbers) {
         return (int) lottoNumbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(getWinningNumbers()::contains)
                 .count();
 
+    }
+
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 }

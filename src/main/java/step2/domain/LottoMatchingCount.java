@@ -7,7 +7,7 @@ public enum LottoMatchingCount {
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000),
-    DEFAULT(0, 0);
+    SIDE(0, 0);
 
     private final int count;
     private final int money;
@@ -29,6 +29,6 @@ public enum LottoMatchingCount {
         return Arrays.stream(LottoMatchingCount.values())
                 .filter(enumList -> enumList.getCount() == count)
                 .findFirst()
-                .orElse(LottoMatchingCount.DEFAULT);
+                .orElse(LottoMatchingCount.SIDE);
     }
 }
