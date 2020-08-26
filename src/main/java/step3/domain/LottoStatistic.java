@@ -2,47 +2,40 @@ package step3.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoStatistic {
-	private final Lotto winningLotto;
-	private final int winningBonus;
+	private final Map<Rank, Integer> lottoResultMap;
+	private BigDecimal yield;
 
-	private static final Map<Rank, Integer> lottoStat = new HashMap<>();
 	private static final String INIT_SUM = "0";
 	private static final int SCALE = 2;
 
-	public LottoStatistic(Lotto winningLotto, int winningBonus) {
-		this.winningLotto = winningLotto;
-		this.winningBonus = winningBonus;
+	public LottoStatistic() {
+		lottoResultMap = new EnumMap<>(Rank.class);
+		yield = new BigDecimal(INIT_SUM);
 	}
-	public Map<Rank, Integer> calcLottoResult(List<Lotto> lottos) {
-		for (Lotto lotto : lottos) {
-			calcWinningNumberCount(lotto);
+
+	public Map<Rank, Integer> calcLottoResult(List<Lotto> issueLottos, WinningLotto winningLotto) {
+		int count;
+		boolean isBonus;
+		Rank rank;
+		for (Lotto issueLotto : issueLottos) {
+			count = issueLotto.getMatchCount(winningLotto.getWinningNumbers());
+			isBonus = (count == Rank.FIVE.getMatchingCount() && issueLotto.containNumber(winningLotto.getBonusNumber()));
+			rank = Rank.valueOf(count, isBonus);
+			lottoResultMap.put(rank, lottoResultMap.getOrDefault(rank, 0)+1);
 		}
-		return lottoStat;
-	}
-
-	private void calcWinningNumberCount(Lotto lotto) {
-		int count = lotto.getMatchCount(winningLotto);
-		Rank winning = Rank.valueOf(count, checkBonus(lotto));
-		lottoStat.put(winning, lottoStat.getOrDefault(winning, 0)+1);
-	}
-
-	private boolean checkBonus(Lotto lotto) {
-		int count = lotto.getMatchCount(winningLotto);
-		return count == Rank.FIVE.getMatchingCount() && lotto.containNumber(new LottoNumber(winningBonus));
+		return lottoResultMap;
 	}
 
 	public BigDecimal calcYield(int price) {
-		BigDecimal sum = new BigDecimal(INIT_SUM);
-		for (Rank winning : lottoStat.keySet()) {
-			int s = lottoStat.get(winning) * winning.getReward();
-			sum = sum.add(BigDecimal.valueOf(s));
+		for (Rank winning : lottoResultMap.keySet()) {
+			yield = yield.add(BigDecimal.valueOf(lottoResultMap.get(winning) * winning.getReward()));
 		}
-		return sum.divide(BigDecimal.valueOf(price), SCALE, RoundingMode.HALF_EVEN);
+		return yield.divide(BigDecimal.valueOf(price), SCALE, RoundingMode.HALF_EVEN);
 	}
 
 }

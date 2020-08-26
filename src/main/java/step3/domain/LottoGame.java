@@ -1,7 +1,5 @@
 package step3.domain;
 
-import step3.domain.Lotto;
-
 import java.util.ArrayList;
 import java.util.List;
 

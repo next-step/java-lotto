@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticTest {
-	private static Lotto winningLotto;
-	private static int winningBonus;
+	private static WinningLotto winningLotto;
 	private static List<Lotto> lottos;
 
 	private static Lotto getLotto(Integer[] nums) {
@@ -44,15 +43,15 @@ class LottoStatisticTest {
 		List<LottoNumber> winningNumbers = Arrays.stream(winning)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
-		winningLotto = new Lotto(winningNumbers);
-		winningBonus = 24;
+		winningLotto = new WinningLotto(winningNumbers);
+		winningLotto.setBonusNumber(new LottoNumber(24));
 	}
+
 
 	@DisplayName(value = "로또 당첨 통계 테스트")
 	@Test
 	void calcLottoResult() {
-		Map<Rank, Integer> result = new LottoStatistic(winningLotto, winningBonus)
-				.calcLottoResult(lottos);
+		Map<Rank, Integer> result = new LottoStatistic().calcLottoResult(lottos, winningLotto);
 
 		assertThat(result).containsEntry(Rank.BONUS, 1);
 		assertThat(result).containsEntry(Rank.SIX, 1);

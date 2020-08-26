@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 	private static Lotto winningLotto;
+	private static List<LottoNumber> winningNumbers;
 
 	private static Stream<Arguments> provideLottoNumbers() {
 		return Stream.of(
@@ -31,7 +32,7 @@ class LottoTest {
 	@BeforeAll
 	static void setWinningLotto() {
 		int[] winning = new int[] {3, 6, 10, 14, 16, 40};
-		List<LottoNumber> winningNumbers = Arrays.stream(winning)
+		winningNumbers = Arrays.stream(winning)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
 		winningLotto = new Lotto(winningNumbers);
@@ -46,7 +47,7 @@ class LottoTest {
 				.collect(Collectors.toList());
 		Lotto lotto = new Lotto(lottoNumbers);
 
-		assertThat(lotto.getMatchCount(winningLotto)).isEqualTo(expected);
+		assertThat(lotto.getMatchCount(winningNumbers)).isEqualTo(expected);
 	}
 
 	@DisplayName(value = "전달 받은 번호와 일치하는 번호가 있는지 테스트")

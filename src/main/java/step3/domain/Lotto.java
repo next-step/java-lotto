@@ -35,9 +35,9 @@ public class Lotto {
 		}
 	}
 
-	public int getMatchCount(Lotto otherLotto) {
+	public int getMatchCount(List<LottoNumber> lottoNumbers) {
 		return (int) numbers.stream()
-				.filter(otherLotto::containNumber)
+				.filter(number -> new Lotto(lottoNumbers).containNumber(number))
 				.count();
 	}
 

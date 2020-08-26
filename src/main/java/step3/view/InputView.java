@@ -1,7 +1,7 @@
 package step3.view;
 
-import step3.domain.Lotto;
 import step3.domain.LottoNumber;
+import step3.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -21,12 +21,12 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static Lotto inputWinningNumbers() {
+	public static WinningLotto inputWinningNumbers() {
 		scanner.nextLine();
 		System.out.println(LAST_WINNING_NUMBER_PHRASES);
 		String[] inputValue = scanner.nextLine().split(", ");
 
-		return new Lotto(
+		return new WinningLotto(
 				Arrays.stream(inputValue)
 						.map(Integer::valueOf)
 						.map(LottoNumber::new)
