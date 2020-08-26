@@ -1,7 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static domain.LottoGames.LOTTO_NUMBER;
@@ -12,15 +14,17 @@ import static domain.NumberGenerator.INT_ZERO;
 public class WinnerNumberManager {
 
     private int[] winnerNumber;
+    private int bonusNumber;
     private RankRecord rankRecord;
 
     public RankRecord getRankRecord() {
         return rankRecord;
     }
 
-    public WinnerNumberManager(int[] number) {
+    public WinnerNumberManager(int[] number, int bonusNumber) {
         rankRecord = new RankRecord();
         this.winnerNumber = number;
+        this.bonusNumber = bonusNumber;
     }
 
     public int[] getWinnerNumber() {
@@ -38,8 +42,13 @@ public class WinnerNumberManager {
     }
 
     private int getSum(Lottos lottos, int i) {
-        int count = countNumber(lottos.getOneLotto(i));
+        Lotto lotto = lottos.getOneLotto(i);
+        int count = countNumber(lotto);
         int winnerPrice = 0;
+
+        if (count == 5 && bonusNumber == getLastNumber(lotto)) {
+            System.out.println("EE!!!!!!");
+        }
 
         if (count >= MIN_WINNER_NUMBER) {
             winnerPrice = calculateWinnerRank(count);
@@ -57,6 +66,20 @@ public class WinnerNumberManager {
         rankRecord.getRecordPool()[count]++;
 
         return price;
+    }
+
+    private int getLastNumber(Lotto lotto) {
+        List<Integer> list = lotto.getLottoNumber();
+
+        List<Integer> lastNumber = list.stream().filter(elm->list.contains(elm))
+                .collect(Collectors.toList());
+
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println("last numb is = "+lastNumber.get(i));
+
+        }
+
+        return lastNumber.get(INT_ZERO);
     }
 
     private int countNumber(Lotto lotto) {
