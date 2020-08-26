@@ -3,7 +3,6 @@ package cc.oakk.lotto.model.prizeprovider.impl;
 import cc.oakk.lotto.model.MoneyPrize;
 import cc.oakk.lotto.model.Rank;
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
-import cc.oakk.lotto.model.prizeprovider.impl.SimpleLottoPrizeProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
