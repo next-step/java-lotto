@@ -11,25 +11,25 @@ import java.util.stream.Collectors;
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
 public class Lottos implements Printable<String> {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
     public Lottos() {
-        this.lottoList = new ArrayList<>();
+        this.lottos = new ArrayList<>();
     }
 
-    public Lottos(List<Lotto> lottoList) {
-        lottoList.forEach(ValidationAdapters::throwIfNull);
-        this.lottoList = lottoList;
+    public Lottos(List<Lotto> lottos) {
+        lottos.forEach(ValidationAdapters::throwIfNull);
+        this.lottos = lottos;
     }
 
     public Lottos add(Lotto lotto) {
-        lottoList.add(throwIfNull(lotto));
+        lottos.add(throwIfNull(lotto));
         return this;
     }
 
     public LottoResults getResults(Lotto comparingLotto) {
         throwIfNull(comparingLotto);
-        return new LottoResults(lottoList.stream()
+        return new LottoResults(lottos.stream()
                 .map(l -> LottoResult.of(l, comparingLotto))
                 .collect(Collectors.toList()));
     }
@@ -39,16 +39,16 @@ public class Lottos implements Printable<String> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottos lottos = (Lottos) o;
-        return Objects.equals(lottoList, lottos.lottoList);
+        return Objects.equals(this.lottos, lottos.lottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoList);
+        return Objects.hash(lottos);
     }
 
     @Override
     public String print() {
-        return lottoList.stream().map(Lotto::print).collect(Collectors.joining("\n"));
+        return lottos.stream().map(Lotto::print).collect(Collectors.joining("\n"));
     }
 }
