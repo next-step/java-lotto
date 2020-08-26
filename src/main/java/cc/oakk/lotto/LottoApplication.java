@@ -5,9 +5,9 @@ import cc.oakk.lotto.model.*;
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.model.prizeprovider.impl.SimpleLottoPrizeProvider;
 import cc.oakk.lotto.view.InputView;
-import cc.oakk.lotto.view.InputViewImpl;
+import cc.oakk.lotto.view.impl.InputConsoleView;
 import cc.oakk.lotto.view.ResultView;
-import cc.oakk.lotto.view.ResultViewImpl;
+import cc.oakk.lotto.view.impl.ResultConsoleView;
 import cc.oakk.lotto.view.printer.LottoResultsPrinter;
 import cc.oakk.lotto.view.printer.Printer;
 import cc.oakk.lotto.view.printer.StandardPrinter;
@@ -19,8 +19,8 @@ public class LottoApplication {
         LottoResultsPrinter<Long> printer = new LottoResultsPrinter<>(provider);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        InputView inputView = new InputViewImpl();
-        ResultView resultView = new ResultViewImpl(stringPrinter, printer);
+        InputView inputView = new InputConsoleView();
+        ResultView resultView = new ResultConsoleView(stringPrinter, printer);
 
         new LottoGame(lottoGenerator, inputView, resultView).start();
     }
