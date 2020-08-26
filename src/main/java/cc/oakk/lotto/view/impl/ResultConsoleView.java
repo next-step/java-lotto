@@ -14,10 +14,6 @@ public class ResultConsoleView implements ResultView {
         this.lottoResultsPrinter = lottoResultsPrinter;
     }
 
-    @Override
-    public void printMoneyInputHeader() {
-        stringPrinter.print("구입금액을 입력해 주세요."::toString);
-    }
 
     @Override
     public void repeatPurchasedLottoCount(int count) {
@@ -27,11 +23,6 @@ public class ResultConsoleView implements ResultView {
     @Override
     public void printLottos(Printable<String> lottosPrintable) {
         stringPrinter.print(lottosPrintable);
-    }
-
-    @Override
-    public void printWinningNumberInputHeader() {
-        stringPrinter.print("\n지난 주 당첨 번호를 입력해 주세요."::toString);
     }
 
     @Override
