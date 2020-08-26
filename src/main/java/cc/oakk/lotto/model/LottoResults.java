@@ -3,20 +3,15 @@ package cc.oakk.lotto.model;
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.view.printer.Printable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
 public class LottoResults implements Printable<LottoResults> {
-    private final Map<Rank, List<LottoResult>> rankMap;
-    private final List<LottoResult> lottoResultList;
+    private final Map<Rank, List<LottoResult>> lottoResults;
 
     public LottoResults(List<LottoResult> lottoResultList) {
-        this.rankMap = new HashMap<>();
-        this.lottoResultList = lottoResultList;
+        this.lottoResults = new HashMap<>();
         throwIfNull(lottoResultList).forEach(this::put);
     }
 
@@ -25,22 +20,23 @@ public class LottoResults implements Printable<LottoResults> {
     }
 
     private List<LottoResult> get(Rank rank) {
-        if (rankMap.containsKey(throwIfNull(rank))) {
-            return rankMap.get(rank);
+        if (lottoResults.containsKey(throwIfNull(rank))) {
+            return lottoResults.get(rank);
         }
 
         List<LottoResult> results = new ArrayList<>();
-        rankMap.put(rank, results);
+        lottoResults.put(rank, results);
         return results;
     }
 
     public int size() {
-        return lottoResultList.size();
+        return lottoResults.size();
     }
 
     public long calculateRevenue(LottoPrizeProvider<?> provider) {
         throwIfNull(provider);
-        return lottoResultList.stream()
+        return lottoResults.values().stream()
+                .flatMap(Collection::stream)
                 .map(r -> provider.getPrizeByRank(r.getRank()).getValue())
                 .reduce(0L, (acc, cur) -> acc += cur);
     }
