@@ -9,9 +9,9 @@ import static nextstep.lotto.constant.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE
 
 public class LottoTicket {
 
-    private Set<LottoNumber> ticket;
+    protected Set<LottoNumber> ticket;
 
-    private LottoTicket(List<LottoNumber> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         this.ticket = numbers.stream().collect(Collectors.toSet());
 
         if (ticket.size() != 6) {

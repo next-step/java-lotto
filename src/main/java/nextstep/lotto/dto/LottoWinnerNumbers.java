@@ -2,27 +2,21 @@ package nextstep.lotto.dto;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static nextstep.lotto.constant.ExceptionMessage.INVALID_BONUS_NUMBER_CONTAINS_LOTTO_NUMBERS;
-import static nextstep.lotto.constant.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE;
 
-public class LottoWinnerNumbers {
-
-    private Set<LottoNumber> winnerNumbers;
+public class LottoWinnerNumbers extends LottoTicket {
 
     private LottoNumber bonusNumber;
 
     private LottoWinnerNumbers(List<LottoNumber> numbers, LottoNumber bonusNumber) {
-        this.winnerNumbers = numbers.stream().collect(Collectors.toSet());
+        super(numbers);
+
+        ticket = numbers.stream().collect(Collectors.toSet());
         this.bonusNumber = bonusNumber;
 
-        if (winnerNumbers.size() != 6) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
-        }
-
-        if (winnerNumbers.contains(bonusNumber)) {
+        if (ticket.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER_CONTAINS_LOTTO_NUMBERS);
         }
     }
@@ -32,13 +26,14 @@ public class LottoWinnerNumbers {
     }
 
     public LottoRank matchCount(List<LottoNumber> userLotto) {
-        return LottoRank.of((int) winnerNumbers.stream()
+
+        return LottoRank.of((int) ticket.stream()
                 .filter(userLotto::contains)
                 .count(), userLotto.contains(bonusNumber));
     }
 
     public List<LottoNumber> getLottoNumber() {
-        List<LottoNumber> lottoTicket = this.winnerNumbers.stream().collect(Collectors.toList());
+        List<LottoNumber> lottoTicket = this.ticket.stream().collect(Collectors.toList());
         Collections.sort(lottoTicket);
         return Collections.unmodifiableList(
                 lottoTicket
