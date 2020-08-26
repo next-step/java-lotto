@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class generateLottoTest {
+public class NumbergeneratorTest {
     private NumberGenerator numberGenerator;
 
     @BeforeEach
@@ -74,6 +74,6 @@ public class generateLottoTest {
         List<Integer> numList = numberGenerator.generate();
         Lotto numbers = new Lotto(numList);
 
-        assertThat(numbers.lottoNumber.size()).isEqualTo(6);
+        assertThat(numbers.getLottoNumber().size()).isEqualTo(6);
     }
 }

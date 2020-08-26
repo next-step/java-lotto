@@ -6,13 +6,16 @@ import java.util.Set;
 
 public class ValidateWinnerNumber {
 
+    private ValidateWinnerNumber() {
+    }
+
     public static void validate(String[] inputs) {
         validateNumberIsSix(inputs);
         validateStringsDuplicate(inputs);
         validateNumberRange(inputs);
     }
 
-    static void validateNumberRange(String[] inputs) {
+    public static void validateNumberRange(String[] inputs) {
         boolean rangeValidate = Arrays.stream(inputs)
                 .mapToInt(Integer::parseInt)
                 .allMatch(c -> c <= 45);
@@ -22,7 +25,7 @@ public class ValidateWinnerNumber {
         }
     }
 
-    static void validateStringsDuplicate(String[] inputs) {
+    public static void validateStringsDuplicate(String[] inputs) {
         Set<String> set = new HashSet<>(Arrays.asList(inputs));
 
         if (set.size() != inputs.length) {
@@ -30,7 +33,7 @@ public class ValidateWinnerNumber {
         }
     }
 
-    static void validateNumberIsSix(String[] inputs) {
+    public static void validateNumberIsSix(String[] inputs) {
         if (inputs.length != 6) {
             throw new IllegalArgumentException("숫자 개수 에러 ");
         }

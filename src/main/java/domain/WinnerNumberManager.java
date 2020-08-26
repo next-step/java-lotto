@@ -1,22 +1,26 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static domain.LottoGames.LOTTO_NUMBER;
 import static domain.LottoGames.MIN_WINNER_NUMBER;
 import static domain.NumberGenerator.FIRST_NUMBER;
 import static domain.NumberGenerator.INT_ZERO;
 
-public class WinnerNumber {
-    public static final int RECORD_SIZE = 7;
-    private int[] winnerNumber;
-    private int[] rankRecord;
+public class WinnerNumberManager {
 
-    public WinnerNumber(int[] number) {
-        rankRecord = new int[RECORD_SIZE];
-        this.winnerNumber = number;
+    private int[] winnerNumber;
+    private RankRecord rankRecord;
+
+    public RankRecord getRankRecord() {
+        return rankRecord;
     }
 
-    public int[] getRankRecord() {
-        return rankRecord;
+    public WinnerNumberManager(int[] number) {
+        rankRecord = new RankRecord();
+        this.winnerNumber = number;
     }
 
     public int[] getWinnerNumber() {
@@ -43,15 +47,14 @@ public class WinnerNumber {
         return winnerPrice;
     }
 
-    public int calculateWinnerRank(int count) {
-        int price = 0;
+    private int calculateWinnerRank(int count) {
 
-        for (WinnerRanking rank : WinnerRanking.values()) {
-            if (rank.getCount() == count) {
-                rankRecord[count]++;
-                price = rank.getWinnerPrice();
-            }
-        }
+        List<WinnerRanking> winrank = Arrays.stream(WinnerRanking.values())
+                .filter(rank -> rank.getCount() == count)
+                .collect(Collectors.toList());
+
+        int price = winrank.get(INT_ZERO).getWinnerPrice();
+        rankRecord.getRecordPool()[count]++;
 
         return price;
     }

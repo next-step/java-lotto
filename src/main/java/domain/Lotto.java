@@ -7,11 +7,15 @@ import java.util.Set;
 import static domain.NumberGenerator.INT_SIX;
 
 public class Lotto {
-    List<Integer> lottoNumber;
+    private List<Integer> lottoNumber;
 
-    public Lotto(List<Integer> list){
+    public Lotto() {
+
+    }
+
+    public Lotto(List<Integer> list) {
         validateLottoNumber(list);
-        this.lottoNumber= list;
+        this.lottoNumber = list;
     }
 
     private void validateLottoNumber(List<Integer> list) {
@@ -21,24 +25,24 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> list) {
-        if(list.size() != INT_SIX){
+        if (list.size() != INT_SIX) {
             throw new IllegalArgumentException("not 6 number");
         }
     }
 
-    private void validateEmpty(List<Integer> list) {
-        if(list.size() == 0){
+    void validateEmpty(List<Integer> list) {
+        if (list.size() == 0) {
             throw new IllegalArgumentException("empty!");
         }
     }
 
-    private void validateDuplicate(List<Integer> list) {
+    void validateDuplicate(List<Integer> list) {
         Set<Integer> set = new HashSet<>();
 
-        for (Integer number: list) {
+        for (Integer number : list) {
             set.add(number);
         }
-        if(set.size() != list.size()){
+        if (set.size() != list.size()) {
             throw new IllegalArgumentException("duplicated!!");
         }
     }

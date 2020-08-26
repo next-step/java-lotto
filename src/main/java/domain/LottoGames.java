@@ -5,10 +5,13 @@ import static utility.UserInput.WON;
 public class LottoGames {
 
     public static final int LOTTO_NUMBER = 6;
-    static final int MIN_WINNER_NUMBER = 3;
+    public static final int MIN_WINNER_NUMBER = 3;
 
     private Lottos lottos;
     private int tries;
+
+    public LottoGames() {
+    }
 
     public LottoGames(int input) {
         validatePrice(input);
@@ -28,7 +31,7 @@ public class LottoGames {
         return lottos;
     }
 
-    private int validatePrice(int price) {
+    int validatePrice(int price) {
         if (price % WON != 0) {
             throw new IllegalArgumentException("Price ERR!");
         }

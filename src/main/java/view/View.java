@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.LottoGames;
 import domain.Lottos;
-import domain.WinnerNumber;
+import domain.WinnerNumberManager;
 import utility.UserInput;
 
 public class View {
@@ -14,13 +14,13 @@ public class View {
     private static final int FIVE = 5;
     private static final int SIX = 6;
 
-    public static void result(WinnerNumber winnerNumber, int sum, int tries) {
+    public static void result(WinnerNumberManager winnerNumber, int sum, int tries) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println("3개 일치(5000원)- " + winnerNumber.getRankRecord()[THREE] + "개");
-        System.out.println("4개 일치(50000원)- " + winnerNumber.getRankRecord()[FOUR] + "개");
-        System.out.println("5개 일치(1500000원)- " + winnerNumber.getRankRecord()[FIVE] + "개");
-        System.out.println("6개 일치(2000000000원)- " + winnerNumber.getRankRecord()[SIX] + "개");
+        System.out.println("3개 일치(5000원)- " + winnerNumber.getRankRecord().getRecordPool()[THREE] + "개");
+        System.out.println("4개 일치(50000원)- " + winnerNumber.getRankRecord().getRecordPool()[FOUR] + "개");
+        System.out.println("5개 일치(1500000원)- " + winnerNumber.getRankRecord().getRecordPool()[FIVE] + "개");
+        System.out.println("6개 일치(2000000000원)- " + winnerNumber.getRankRecord().getRecordPool()[SIX] + "개");
         if (sum == ZERO) {
             System.out.println("총 수익률은 0 입니다.");
             return;

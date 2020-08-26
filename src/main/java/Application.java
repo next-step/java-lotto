@@ -1,6 +1,7 @@
 import domain.LottoGames;
 import domain.Lottos;
-import domain.WinnerNumber;
+import domain.RankRecord;
+import domain.WinnerNumberManager;
 import utility.UserInput;
 import view.View;
 
@@ -12,9 +13,9 @@ public class Application {
 
         View.showLottoTickets(lottos);
 
-        WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-        int sum = winnerNumber.calculateCount(game.getTries(),lottos);
+        WinnerNumberManager manager = UserInput.getWinnerTicket();
+        int sum = manager.calculateCount(game.getTries(),lottos);
 
-        View.result(winnerNumber,sum,game.getTries());
+        View.result(manager,sum,game.getTries());
     }
 }
