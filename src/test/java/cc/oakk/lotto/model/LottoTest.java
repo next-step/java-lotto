@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoTest {
     @Test
     public void constructor_ShouldThrow_OnInvalidNumber() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.MIN_NUMBER - 1)));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.MAX_NUMBER + 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.RANGE.getFrom() - 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.RANGE.getTo() + 1)));
     }
 
     @Test
