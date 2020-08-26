@@ -14,7 +14,7 @@ public class Lotto implements Printable<String> {
     public static final int NUMBER_COUNT = 6;
     public static final LottoNumberRange RANGE = LottoNumberRange.between(1, 45);
 
-    private final List<Integer> numbers;
+    protected final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         throwIfNull(numbers);
@@ -34,7 +34,7 @@ public class Lotto implements Printable<String> {
         this.numbers = Collections.unmodifiableList(validatedList);
     }
 
-    public Rank score(Lotto target) {
+    public Rank score(WinningLotto target) {
         throwIfNull(target);
         int matchingCount = (int) numbers.stream()
                 .filter(target.numbers::contains)

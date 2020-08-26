@@ -31,7 +31,7 @@ public class Lottos implements Printable<String> {
         return lottos.size();
     }
 
-    public LottoResults getResults(Lotto comparingLotto) {
+    public LottoResults getResults(WinningLotto comparingLotto) {
         throwIfNull(comparingLotto);
         return new LottoResults(lottos.stream()
                 .map(l -> LottoResult.of(l, comparingLotto))
