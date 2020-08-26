@@ -1,5 +1,6 @@
 package cc.oakk.lotto.model;
 
+import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.view.printer.Printable;
 
 import java.util.ArrayList;
