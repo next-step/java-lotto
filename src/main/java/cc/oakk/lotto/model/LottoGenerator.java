@@ -11,8 +11,17 @@ public class LottoGenerator {
         this.numbers = Lotto.RANGE.createRangeList();
     }
 
-    public Lotto generate() {
+    private Lotto generate() {
         Collections.shuffle(numbers);
         return new Lotto(numbers.subList(0, Lotto.NUMBER_COUNT));
+    }
+
+    public Lottos generateLottos(int money) {
+        Lottos lottos = new Lottos();
+        int count = money / LOTTO_PRICE;
+        for (int i = 0; i < count; i++) {
+            lottos.add(generate());
+        }
+        return lottos;
     }
 }
