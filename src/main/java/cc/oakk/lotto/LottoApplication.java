@@ -16,7 +16,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         Printer<String> stringPrinter = StandardPrinter.getInstance();
         LottoPrizeProvider<Long> provider = new SimpleLottoPrizeProvider();
-        LottoResultsPrinter<Long> printer = new LottoResultsPrinter<>(provider);
+        LottoResultsPrinter<Long> printer = new LottoResultsPrinter<>(provider, LottoGenerator.LOTTO_PRICE);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         InputView inputView = new InputConsoleView();

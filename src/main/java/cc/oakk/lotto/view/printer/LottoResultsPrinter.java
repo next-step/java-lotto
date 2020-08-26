@@ -1,6 +1,7 @@
 package cc.oakk.lotto.view.printer;
 
 import cc.oakk.lotto.model.Lotto;
+import cc.oakk.lotto.model.LottoGenerator;
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.model.LottoResults;
 import cc.oakk.lotto.model.Rank;
@@ -11,15 +12,18 @@ public class LottoResultsPrinter<T> extends StringPrinter<LottoResults> {
     private static final Rank[] printingRanks = new Rank[] { Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST };
 
     private final LottoPrizeProvider<T> provider;
+    private final int lottoPrice;
 
-    public LottoResultsPrinter(LottoPrizeProvider<T> provider) {
+    public LottoResultsPrinter(LottoPrizeProvider<T> provider, int lottoPrice) {
         super();
         this.provider = provider;
+        this.lottoPrice = lottoPrice;
     }
 
-    public LottoResultsPrinter(Printer<String> stringPrinter, LottoPrizeProvider<T> provider) {
+    public LottoResultsPrinter(Printer<String> stringPrinter, LottoPrizeProvider<T> provider, int lottoPrice) {
         super(stringPrinter);
         this.provider = provider;
+        this.lottoPrice = lottoPrice;
     }
 
     @Override
@@ -42,6 +46,6 @@ public class LottoResultsPrinter<T> extends StringPrinter<LottoResults> {
 
     private double calculateRevenueRate(LottoResults results) {
         throwIfNull(results);
-        return (double) results.calculateRevenue(provider) / (results.size() * Lotto.PRICE);
+        return (double) results.calculateRevenue(provider) / (results.size() * lottoPrice);
     }
 }
