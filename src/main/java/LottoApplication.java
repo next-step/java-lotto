@@ -1,16 +1,14 @@
-import step2.domain.LottoResult;
-import step2.domain.LottoTicket;
-import step2.domain.LottoMachine;
-import step2.domain.WinningLottoNumbers;
+import step2.domain.*;
 import step2.domain.view.InputView;
 import step2.domain.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        LottoMachine lottoMachine = new LottoMachine();
-        String lottoMoney = inputView.inputMoney();
-        LottoTicket lottoTicket = lottoMachine.makeLotto(lottoMoney);
+        String inputMoney = inputView.inputMoney();
+
+        int lottoCount = LottoMachine.getCount(inputMoney);
+        LottoTicket lottoTicket = LottoNumbers.create(lottoCount);
 
         OutputView outputView = new OutputView();
         outputView.viewLottoNumbers(lottoTicket);
@@ -18,7 +16,7 @@ public class LottoApplication {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningNumbers());
         LottoResult lottoResult = lottoTicket.getMatching(winningLottoNumbers);
 
-        outputView.viewResult(lottoResult.getResultMap(), lottoMoney);
+        outputView.viewResult(lottoResult.getResultMap(), inputMoney);
 
     }
 }
