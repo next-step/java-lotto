@@ -1,22 +1,35 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import lotto.util.LottoNumberUtil;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Papers {
-    private static final String PAPER
-    private List<Paper> papers;
+public class LottoPapers {
+    private static final Integer LOTTO_PRICE = 1000;
+    private static final String LOTTO_PAPER_JOINING_DELIMITER = "\n";
+    private final List<LottoPaper> papers;
 
-    public Papers(Integer gameCount) {
-        papers = IntStream.range(0, gameCount)
-                          .mapToObj(value -> new Paper())
-                          .collect(Collectors.toList());
+    public LottoPapers(Integer paperCount) {
+        papers = makeAutoLottoNums(paperCount);
     }
 
-    public List<Paper> getPapers() {
+    private List<LottoPaper> makeAutoLottoNums(Integer inputMoney) {
+        return IntStream.range(0, paperCount(inputMoney))
+                .mapToObj(value -> new LottoPaper(getAutoLottoNums()))
+                .collect(Collectors.toList());
+    }
+
+    private Integer paperCount(Integer inputMoney) {
+        return inputMoney / LOTTO_PRICE;
+    }
+
+    private List<Integer> getAutoLottoNums() {
+        return LottoNumberUtil.getAutoLottoNums();
+    }
+
+    public List<LottoPaper> getPapers() {
         return papers;
     }
 
@@ -25,7 +38,8 @@ public class Papers {
     }
 
     public String getPaperNumbersToString() {
-        return papers.stream().map(Objects::toString).collect(Collectors.joining("\n"));
+        return papers.stream()
+                .map(LottoPaper::getLottoNumbers).map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_PAPER_JOINING_DELIMITER));
     }
-
 }
