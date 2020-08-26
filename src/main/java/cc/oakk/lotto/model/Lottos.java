@@ -27,6 +27,10 @@ public class Lottos implements Printable<String> {
         return this;
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     public LottoResults getResults(Lotto comparingLotto) {
         throwIfNull(comparingLotto);
         return new LottoResults(lottos.stream()
