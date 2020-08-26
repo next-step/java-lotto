@@ -56,7 +56,7 @@ public class LottoTest {
     @Test
     public void of_문자열_isNull() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto.ofComma("1, 2, 3, 4, 5, 5");
+            Lotto.ofComma(null);
         });
     }
 }
