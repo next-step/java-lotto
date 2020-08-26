@@ -1,43 +1,33 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import lotto.context.Rank;
+
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class LottoGameResult {
-    private final static Integer ADD_COUNT = 1;
-    private List<Integer> winningNumbers;
-    private Map<Integer, Integer> matchCountResult = new HashMap<Integer, Integer>() {};
+public class WinningResult {
+    private final WinningPaper winningPaper;
+    private final WinningTable winningTable;
 
-    public LottoGameResult(String winningLottoNumbers) {
-        winningNumbers = Arrays.stream(winningLottoNumbers
-                .split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+
+    public WinningResult(String winningLottoNumbers) {
+        winningPaper = new WinningPaper(winningLottoNumbers);
+        winningTable = new WinningTable();
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public Map<Rank, Integer> getMatchCountResult() {
+        return winningTable.getMatchCountTable();
     }
 
-    public Map<Integer, Integer> getMatchCountResult() {
-        return matchCountResult;
+    public void setAutoIncrement(List<Integer> lottoNumbers) {
+        Integer matchCount = winningPaper.getMatchCount(lottoNumbers);
+        if (matchCount < 3) {
+            return;
+        }
+        winningTable.setAutoIncrementMatchCountResult(matchCount);
     }
 
-    public void setAutoIncrementMatchCountResult(Integer matchCount) {
-        matchCountResult.put(matchCount, matchCountResult.getOrDefault(matchCount, 0) + ADD_COUNT);
-    }
-
-    Integer getMatchCount(List<Integer> lottoNumber) {
-        return (int) lottoNumber.stream()
-                                .filter(winningNumbers::contains)
-                                .count();
-    }
-
-    public void makeMatchCountResult(List<Integer> lottoNumber) {
-        setAutoIncrementMatchCountResult(getMatchCount(lottoNumber));
+    public Double calculationEarningsRate(Integer inputMoney) {
+        return winningTable.calculationEarningsRate(inputMoney);
     }
 }
