@@ -2,14 +2,14 @@ package step2.ui;
 
 import step2.domain.Lottos;
 import step2.domain.MatchesResult;
-import step2.domain.Score;
+import step2.domain.ScoreType;
 
 public class ResultView {
     public static int totalWinnings = 0;
 
     public static void outputOfWinningResults(MatchesResult matchesResult, int moneyInput) {
         printEndingMsg();
-        matchesResult.getResults().forEach((key, value) -> getResultMsg(value, Score.getScore(key)));
+        matchesResult.getResults().forEach((key, value) -> getResultMsg(value, key));
         printYields(moneyInput);
     }
 
@@ -18,9 +18,9 @@ public class ResultView {
         System.out.println("--------");
     }
 
-    static void getResultMsg(Long value, Score score) {
-        totalWinnings += score.getPrize() * value;
-        System.out.println(score.getTargetNumber() + "개 일치 (" + score.getPrize() + "원)- " + value + "개");
+    static void getResultMsg(Long value, ScoreType scoreType) {
+        totalWinnings += scoreType.getPrize() * value;
+        System.out.println(scoreType.getTargetNumber() + "개 일치" + scoreType.getWinnerMsg() + "- " + value + "개");
     }
 
     public static void printMyGame(Lottos lottos) {

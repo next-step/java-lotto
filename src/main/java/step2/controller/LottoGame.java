@@ -8,7 +8,6 @@ import step2.ui.ResultView;
 
 import static step2.domain.Lottos.ofLottoGames;
 import static step2.domain.WinnersNo.ofWinnersNo;
-import static step2.ui.InputView.enterThePreviousNumberMsg;
 
 public class LottoGame {
     public static void main(String[] args) {
@@ -18,9 +17,12 @@ public class LottoGame {
         Lottos lottos = ofLottoGames(moneyInput);
 
         ResultView.printMyGame(lottos);
-        enterThePreviousNumberMsg();
 
-        WinnersNo winnersNo = ofWinnersNo(InputView.getPreviousNumber());
+        String input = InputView.getPreviousNumber();
+        int bonusNumber = InputView.getBonusNumber();
+
+
+        WinnersNo winnersNo = ofWinnersNo(bonusNumber, input);
         MatchesResult matchesResult = MatchesResult.ofMatchesResults(winnersNo, lottos);
 
         ResultView.outputOfWinningResults(matchesResult, moneyInput);

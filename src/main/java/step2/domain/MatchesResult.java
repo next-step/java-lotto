@@ -1,57 +1,39 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class MatchesResult {
-    Map<Integer, Long> results;
+import static step2.domain.BaseScore.getBaseMap;
 
-    public MatchesResult(Map<Integer, Long> results) {
+public class MatchesResult {
+    private Map<ScoreType, Long> results;
+
+    public MatchesResult(Map<ScoreType, Long> results) {
         this.results = results;
     }
 
     public static MatchesResult ofMatchesResults(WinnersNo winnersNo, Lottos lottos) {
-        return new MatchesResult(getWinningInfos(winnersNo, lottos).stream()
-                .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting())));
+        return new MatchesResult(lottos.getWinningInfos(winnersNo)
+                                       .stream()
+                                       .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 
-    private static List<Integer> getWinningInfos(WinnersNo winnersNo, Lottos lottos) {
-        List<Integer> winningInformation = new ArrayList<>();
-        lottos.getLottos()
+    public static LinkedHashMap<ScoreType, Long> sortMapByKey(Map<ScoreType, Long> map) {
+        List<Map.Entry<ScoreType, Long>> entries = new LinkedList<>(map.entrySet());
+        Collections.sort(entries, Comparator.comparing(Map.Entry::getKey));
+        return entries
                 .stream()
-                .mapToInt(l -> hasNumber(winnersNo, l.getLotteryInfo()))
-                .forEach(hitNumber -> addWinningInfos(winningInformation, hitNumber));
-        return winningInformation;
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, LinkedHashMap::new));
     }
 
-    private static int hasNumber(WinnersNo winnersNo, List<Integer> lotteryInfo) {
-        int hitNumbers = 0;
-        for (int number : winnersNo.getWinnersResultNos()) {
-            hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
-        }
-        return hitNumbers;
-    }
-
-    private static void addWinningInfos(List<Integer> winningInformation, int hitNumber) {
-        if (hitNumber > 2) {
-            winningInformation.add(hitNumber);
-        }
-    }
-
-    public Map<Integer, Long> getResults() {
+    public Map<ScoreType, Long> getResults() {
         getBaseMap().forEach((k, v) -> results.putIfAbsent(k, v));
-        return results;
-    }
-
-    private static HashMap<Integer, Long> getBaseMap() {
-        return new HashMap<Integer, Long>() {{
-            put(3, 0L);
-            put(4, 0L);
-            put(5, 0L);
-            put(6, 0L);
-        }};
+        return sortMapByKey(results);
     }
 }

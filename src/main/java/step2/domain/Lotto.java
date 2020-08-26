@@ -46,6 +46,24 @@ public class Lotto {
     @Override
     public String toString() {
         return this.lotteryInfo.stream().map(String::valueOf)
-                .collect(Collectors.joining(","));
+                               .collect(Collectors.joining(","));
+    }
+
+    public ScoreType addWinningInfos(WinnersNo winnersNo) {
+        int hitNumber = this.hasNumber(winnersNo);
+        boolean hasBonusNumber = hasBonusNumber(hitNumber, winnersNo.getBonusNumber());
+        return hitNumber > 2 ? ScoreType.getScore(hitNumber, hasBonusNumber) : ScoreType.NONE;
+    }
+
+    private int hasNumber(WinnersNo winnersNo) {
+        int hitNumbers = 0;
+        for (int number : winnersNo.getWinnersResultNos()) {
+            hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
+        }
+        return hitNumbers;
+    }
+
+    private boolean hasBonusNumber(int hitNumbers, int BonusNumber) {
+        return hitNumbers == 5 && lotteryInfo.contains(BonusNumber);
     }
 }
