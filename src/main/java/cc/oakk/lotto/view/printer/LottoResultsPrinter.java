@@ -1,7 +1,7 @@
 package cc.oakk.lotto.view.printer;
 
 import cc.oakk.lotto.model.Lotto;
-import cc.oakk.lotto.model.LottoPrizeProvider;
+import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.model.LottoResults;
 import cc.oakk.lotto.model.Rank;
 

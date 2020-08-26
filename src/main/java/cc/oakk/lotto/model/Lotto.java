@@ -11,10 +11,8 @@ import java.util.stream.Stream;
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
 public class Lotto implements Printable<String> {
-    public static final int PRICE = 1000;
     public static final int NUMBER_COUNT = 6;
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    public static final LottoNumberRange RANGE = LottoNumberRange.between(1, 45);
 
     private final List<Integer> numbers;
 
@@ -26,9 +24,13 @@ public class Lotto implements Printable<String> {
 
         List<Integer> validatedList = numbers.stream()
                 .map(Lotto::throwIfNotValidNumber)
-                .sorted(Lotto::compareAndThrowIfEquals)
+                .distinct()
+                .sorted()
                 .collect(Collectors.toList());
 
+        if (validatedList.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException("Lotto's number should not be duplicated.");
+        }
         this.numbers = Collections.unmodifiableList(validatedList);
     }
 
@@ -59,18 +61,10 @@ public class Lotto implements Printable<String> {
     }
 
     private static int throwIfNotValidNumber(int target) {
-        if (target < MIN_NUMBER || target > MAX_NUMBER) {
-            throw new IllegalArgumentException(String.format("%d is not between 0 and %d.", target, MAX_NUMBER));
+        if (!RANGE.isValidNumber(target)) {
+            throw new IllegalArgumentException(String.format("%d is out of range.", target));
         }
         return target;
-    }
-
-    private static int compareAndThrowIfEquals(int num1, int num2) {
-        int compared = Integer.compare(num1, num2);
-        if (compared == 0) {
-            throw new IllegalArgumentException(String.format("%d, %d are duplicated!", num1, num2));
-        }
-        return compared;
     }
 
     @Override
