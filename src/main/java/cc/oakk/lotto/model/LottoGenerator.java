@@ -2,16 +2,13 @@ package cc.oakk.lotto.model;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGenerator {
+    public static final int LOTTO_PRICE = 1000;
     private List<Integer> numbers;
 
     public LottoGenerator() {
-        this.numbers = IntStream.range(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+        this.numbers = Lotto.RANGE.createRangeList();
     }
 
     public Lotto generate() {
