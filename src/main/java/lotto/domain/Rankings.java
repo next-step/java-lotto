@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import static lotto.domain.LottoStore.LOTTO_PRICE;
+import static lotto.domain.LottoStore.ZERO;
 
 public class Rankings {
-    private static final int ZERO = 0;
-
     private final List<Ranking> rankings;
 
     public Rankings(List<Ranking> rankings) {

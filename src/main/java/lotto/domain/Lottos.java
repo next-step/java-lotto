@@ -3,7 +3,9 @@ package lotto.domain;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class Lottos implements Iterable<Lotto> {
@@ -21,14 +23,16 @@ public class Lottos implements Iterable<Lotto> {
         return lottos;
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
     public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
         return lottos.stream()
                 .map(winningLotto::match)
                 .collect(toList());
+    }
+
+    public Lottos concat(Lottos others) {
+        return Stream.of(lottos, others.lottos)
+                .flatMap(List::stream)
+                .collect(collectingAndThen(toList(), Lottos::of));
     }
 
     @Override
