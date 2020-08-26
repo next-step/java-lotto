@@ -1,20 +1,25 @@
-package calculator.util;
+package lotto.util;
 
-import calculator.context.Message;
+import lotto.context.Message;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MessageUtil {
-    public static void msgPrint(Message message) {
-        msgPrint(message, null);
+    public static String getMsg(Message message) {
+        return message.getMsg();
     }
 
-    public static void msgPrint(Message message, List<String> inputTexts) {
+    public static String getMsg(Message message, String inputText) {
+        return getMsg(message, Arrays.asList(inputText));
+    }
+
+    public static String getMsg(Message message, List<String> inputTexts) {
         String msg = message.getMsg();
-        if (inputTexts != null &&inputTexts.size() > 0) {
+        if (inputTexts != null && inputTexts.size() > 0) {
             msg = replaceMsg(msg, inputTexts);
         }
-        System.out.println(msg);
+        return msg;
     }
 
     private static String replaceMsg(String msg, List<String> inputTexts) {
