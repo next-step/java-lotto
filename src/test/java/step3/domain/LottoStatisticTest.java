@@ -43,8 +43,7 @@ class LottoStatisticTest {
 		List<LottoNumber> winningNumbers = Arrays.stream(winning)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
-		winningLotto = new WinningLotto(winningNumbers);
-		winningLotto.setBonusNumber(new LottoNumber(24));
+		winningLotto = new WinningLotto(winningNumbers, 24);
 	}
 
 

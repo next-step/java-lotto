@@ -13,6 +13,7 @@ public class WinningLotto {
 		this.winningNumbers = winningNumbers;
 		this.bonusNumber = new LottoNumber(bonusNumber) ;
 		lotto = new Lotto(winningNumbers);
+		validBonusNumber();
 	}
 
 	public List<LottoNumber> getWinningNumbers() {
