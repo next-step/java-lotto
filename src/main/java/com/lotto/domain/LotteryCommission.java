@@ -30,9 +30,7 @@ public class LotteryCommission {
         List<Rank> ranks = lotteries.stream()
                 .map(winningLottery::matchRank)
                 .collect(Collectors.toList());
-        return Arrays.stream(new Rank[]{Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST})
-                .map(rank -> new Statistic(rank, ranks))
-                .collect(Collectors.toList());
+        return Rank.makeStatistics(ranks);
     }
 
     public BigDecimal calculateYield(int lotteryCount, List<Statistic> statistics) {

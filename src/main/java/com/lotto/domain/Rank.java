@@ -2,6 +2,8 @@ package com.lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     LOSER(0, 0),
@@ -24,6 +26,13 @@ public enum Rank {
                 .filter(rank -> rank.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(LOSER);
+    }
+
+    public static List<Statistic> makeStatistics(List<Rank> ranks) {
+        return Arrays.stream(values())
+                .filter(rank -> rank != LOSER)
+                .map(rank -> new Statistic(rank, ranks))
+                .collect(Collectors.toList());
     }
 
     public BigDecimal calculateTotalWinnings(int lotteryCount) {
