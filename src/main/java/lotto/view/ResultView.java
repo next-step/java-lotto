@@ -6,7 +6,7 @@ import static lotto.domain.Ranking.findStatistics;
 
 public class ResultView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PURCHASE_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String HEAD_STATISTICS_MESSAGE = String.format("%s당첨 통계%s---------", LINE_SEPARATOR, LINE_SEPARATOR);
     private static final String MATCHES_COUNT_MESSAGE = String.format(" - %%s개%s", LINE_SEPARATOR);
     private static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %.2f 입니다.";
@@ -14,8 +14,8 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void displayLottoCount(int lottoCount) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoCount));
+    public static void displayLottoCount(int manualSize, int totalSize) {
+        System.out.printf((PURCHASE_COUNT_MESSAGE) + "%n", manualSize, totalSize - manualSize);
     }
 
     public static void displayLottos(Lottos lottos) {

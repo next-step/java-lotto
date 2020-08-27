@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
+    private static final String DELIMITER = ",";
     private static final String SEPARATOR = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
@@ -23,7 +24,15 @@ public class Lotto {
 
     public static Lotto of(List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
+    }
+
+    public static Lotto of(String input) {
+        return new Lotto(Arrays.stream(input.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 

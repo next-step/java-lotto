@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class Lottos implements Iterable<Lotto> {
@@ -25,10 +26,10 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.size();
     }
 
-    public List<Ranking> matchesWinningLotto(WinningLotto winningLotto) {
+    public Rankings matchesWinningLotto(WinningLotto winningLotto) {
         return lottos.stream()
                 .map(winningLotto::match)
-                .collect(toList());
+                .collect(collectingAndThen(toList(), Rankings::of));
     }
 
     @Override
