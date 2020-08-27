@@ -14,7 +14,8 @@ public class LottoNumber {
     private int lottoNumber;
 
     static {
-        LOTTO_NUMBER_POOL = Stream.iterate(LOTTO_START_NUMBER, number -> number + 1)
+        LOTTO_NUMBER_POOL =
+                Stream.iterate(LOTTO_START_NUMBER, number -> number + 1)
                 .limit(LOTTO_END_NUMBER)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

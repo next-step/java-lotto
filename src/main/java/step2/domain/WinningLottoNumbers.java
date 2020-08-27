@@ -37,6 +37,5 @@ public class WinningLottoNumbers {
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
-
     }
 }
