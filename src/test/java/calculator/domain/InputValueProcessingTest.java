@@ -45,7 +45,8 @@ public class InputValueProcessingTest {
     @Test
     void 음수가_들어올_때_테스트() {
         assertThatThrownBy(() -> calculateInputValue("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("음수는 사용할 수 없습니다.");
     }
 
     @Test
