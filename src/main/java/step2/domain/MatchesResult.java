@@ -21,6 +21,7 @@ public class MatchesResult {
     public static MatchesResult ofMatchesResults(WinnersNo winnersNo, Lottos lottos) {
         return new MatchesResult(lottos.getWinningInfos(winnersNo)
                                        .stream()
+                                       .filter(info -> ScoreType.NONE != info)
                                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 

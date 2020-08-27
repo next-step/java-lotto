@@ -6,16 +6,9 @@ import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
 import step1.NullableConverter;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinnersNoTest {
-
-    @ParameterizedTest
-    @CsvSource(value = {"1,7,3:3"}, delimiter = ':')
-    void getWinnersResultNo(String input, int result) {
-        assertThat(WinnersNo.getWinnersResultNo(input).size()).isEqualTo(result);
-    }
 
     @DisplayName("숫자 검증")
     @ParameterizedTest
