@@ -21,16 +21,20 @@ public class Lotto implements Printable<String> {
             throw new IllegalArgumentException(String.format("Lotto's number size must be %d!", NUMBER_COUNT));
         }
 
-        List<Integer> validatedList = numbers.stream()
-                .map(Lotto::throwIfNotValidNumber)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
+        List<Integer> validatedList = validateNumbers(numbers);
 
         if (validatedList.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("Lotto's number should not be duplicated.");
         }
         this.numbers = Collections.unmodifiableList(validatedList);
+    }
+
+    private List<Integer> validateNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(Lotto::throwIfNotValidNumber)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public Rank score(WinningLotto target) {
