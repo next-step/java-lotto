@@ -20,7 +20,7 @@ public class NumberGenerator {
         createLottoNumberCandidate();
     }
 
-    public void createLottoNumberCandidate() {
+    private void createLottoNumberCandidate() {
         lottoNumberCandidate = IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
                 .boxed().collect(Collectors.toList());
     }

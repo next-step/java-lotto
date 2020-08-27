@@ -2,7 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,18 +24,18 @@ public class LottoTest {
                 .hasMessageContaining("not 6");
     }
 
+
     @Test
-    void validateEmptyTest() {
-        assertThatThrownBy(() -> new Lotto()
-                .validateEmpty(new ArrayList<>()))
+    void validateEmptyTest2() {
+        assertThatThrownBy(() -> new Lotto(new ArrayList<>()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("empty");
     }
 
+
     @Test
-    void validateDuplicateTest() {
-        assertThatThrownBy(() -> new Lotto()
-                .validateDuplicate(Arrays.asList(1, 2, 2, 4, 5, 6)))
+    void validateDuplicateTest2() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 2, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

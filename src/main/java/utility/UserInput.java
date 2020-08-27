@@ -1,13 +1,14 @@
 package utility;
 
 import domain.ValidateWinnerNumber;
-import domain.WinnerNumberManager;
+import domain.WinnerNumber;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UserInput {
-
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_MESSEGE = "개를 구매했습니다.";
     private static final String AFTER_MESSEGE = "지난 당첨번호를 입력하세요.";
@@ -23,18 +24,19 @@ public class UserInput {
         int input = SC.nextInt();
         SC.nextLine();
 
-        System.out.println(input + PURCHASE_MESSEGE);
+        System.out.println(input/WON+ PURCHASE_MESSEGE);
 
-        return input;
+        return input/WON;
     }
 
-    public static WinnerNumberManager getWinnerTicket() {
+    public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
 
-        int[] number = Arrays.stream(winnerNumber)
-                .mapToInt(Integer::parseInt).toArray();
+        List<Integer> number = Arrays.stream(winnerNumber)
+                .mapToInt(Integer::parseInt)
+                .boxed().collect(Collectors.toList());
 
-        return new WinnerNumberManager(number);
+        return new WinnerNumber(number);
     }
 
     private static String[] inputWinnerNumber() {

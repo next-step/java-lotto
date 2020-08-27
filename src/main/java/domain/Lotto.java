@@ -9,10 +9,6 @@ import static domain.NumberGenerator.INT_SIX;
 public class Lotto {
     private List<Integer> lottoNumber;
 
-    public Lotto() {
-
-    }
-
     public Lotto(List<Integer> list) {
         validateLottoNumber(list);
         this.lottoNumber = list;
@@ -30,13 +26,13 @@ public class Lotto {
         }
     }
 
-    void validateEmpty(List<Integer> list) {
-        if (list.size() == 0) {
+    private void validateEmpty(List<Integer> list) {
+        if (list.size() == 0 || list == null) {
             throw new IllegalArgumentException("empty!");
         }
     }
 
-    void validateDuplicate(List<Integer> list) {
+    private void validateDuplicate(List<Integer> list) {
         Set<Integer> set = new HashSet<>();
 
         for (Integer number : list) {
