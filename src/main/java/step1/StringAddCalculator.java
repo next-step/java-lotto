@@ -19,7 +19,7 @@ public class StringAddCalculator {
             return 0;
         }
         Expression expression = createExpression(target);
-        return expression.stream().reduce(0, (acc, cur) -> acc += cur);
+        return expression.calculate();
     }
 
     private static Expression createExpression(String target) {
