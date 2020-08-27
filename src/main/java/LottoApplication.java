@@ -8,13 +8,13 @@ public class LottoApplication {
         String inputMoney = inputView.inputMoney();
 
         int lottoCount = LottoMachine.getCount(inputMoney);
-        LottoTicket lottoTicket = LottoNumbers.create(lottoCount);
+        Lottos lottos = Lotto.create(lottoCount);
 
         OutputView outputView = new OutputView();
-        outputView.viewLottoNumbers(lottoTicket);
+        outputView.viewLottoNumbers(lottos);
 
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningNumbers());
-        LottoResult lottoResult = lottoTicket.getMatching(winningLottoNumbers);
+        LottoResult lottoResult = lottos.getMatching(winningLottoNumbers);
 
         outputView.viewResult(lottoResult, inputMoney);
 

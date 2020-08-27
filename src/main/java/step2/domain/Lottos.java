@@ -6,22 +6,22 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
-public class LottoTicket {
-    private List<LottoNumbers> lottoNumbersList;
+public class Lottos {
+    private List<Lotto> lottoList;
 
-    public LottoTicket(List<LottoNumbers> lottoNumbersList) {
-        this.lottoNumbersList = lottoNumbersList;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 
     public LottoResult getMatching(WinningLottoNumbers winningLottoNumbers) {
         Map<Integer, Long> map =
-                lottoNumbersList
+                lottoList
                 .stream()
-                .map(LottoNumbers::getLottoNumbers)
+                .map(Lotto::getLottoNumbers)
                 .map(winningLottoNumbers::matchCount)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return new LottoResult(map);

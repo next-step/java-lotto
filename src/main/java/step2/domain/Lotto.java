@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoNumbers {
+public class Lotto {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -20,26 +20,26 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoTicket create(int count) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    public static Lottos create(int count) {
+        List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoNumbers.add(makeOneLine());
         }
-        return new LottoTicket(lottoNumbers);
+        return new Lottos(lottoNumbers);
     }
 
-    private static LottoNumbers makeOneLine() {
+    private static Lotto makeOneLine() {
         Collections.shuffle(LOTTO_NUMBER_POOL);
         List<LottoNumber> lottoNumbers =
                 LOTTO_NUMBER_POOL
                         .stream()
                         .limit(LOTTO_NUMBER_COUNT)
                         .collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     /*public List<Integer> getLottoNumbers() {

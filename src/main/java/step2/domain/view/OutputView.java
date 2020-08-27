@@ -2,20 +2,19 @@ package step2.domain.view;
 
 import step2.domain.LottoMatchingCount;
 import step2.domain.LottoResult;
-import step2.domain.LottoTicket;
-import step2.domain.LottoNumbers;
+import step2.domain.Lottos;
+import step2.domain.Lotto;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public void viewLottoNumbers(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottoNumbersList().size() + "개를 구매했습니다.");
-        lottoTicket.getLottoNumbersList()
+    public void viewLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.getLottoList().size() + "개를 구매했습니다.");
+        lottos.getLottoList()
                 .stream()
-                .map(LottoNumbers::getLottoNumbers)
+                .map(Lotto::getLottoNumbers)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
     }
