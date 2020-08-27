@@ -1,9 +1,11 @@
 package step3.view;
 
+import step3.domain.Lotto;
 import step3.domain.LottoNumber;
 import step3.domain.WinningLotto;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -21,19 +23,18 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static WinningLotto inputWinningNumbers() {
+	public static List<LottoNumber> inputWinningNumbers() {
 		scanner.nextLine();
 		System.out.println(LAST_WINNING_NUMBER_PHRASES);
 		String[] inputValue = scanner.nextLine().split(", ");
 
-		return new WinningLotto(
-				Arrays.stream(inputValue)
-						.map(Integer::valueOf)
-						.map(LottoNumber::new)
-						.sorted()
-						.collect(Collectors.toList())
-		);
+		return Arrays.stream(inputValue)
+				.map(Integer::valueOf)
+				.map(LottoNumber::new)
+				.sorted()
+				.collect(Collectors.toList());
 	}
+
 
 	public static int inputBonusBall() {
 		System.out.println(BONUS_NUMBER_PHRASES);
