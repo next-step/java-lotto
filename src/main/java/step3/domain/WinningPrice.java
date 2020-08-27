@@ -11,7 +11,6 @@ public enum WinningPrice {
     OTHER(0, 0);
 
 
-    private static final int SECOND_PRIZE_CONDITION = 5;
     private int winningNumbers;
     private int price;
 
@@ -33,19 +32,19 @@ public enum WinningPrice {
         return price;
     }
 
-    public static WinningPrice valueOf(int winningNumbers, boolean matchBonus) {
+    public static WinningPrice valueOf(int winningCount, boolean matchBonus) {
 
         WinningPrice[] winningPrices = values();
-        if(winningNumbers == SECOND_PRIZE_CONDITION && matchBonus) {
+        if(winningCount == SECOND_PRICE.winningNumbers && matchBonus) {
             return WinningPrice.SECOND_PRICE;
         }
 
-        if(winningNumbers == SECOND_PRIZE_CONDITION && !matchBonus) {
+        if(winningCount == SECOND_PRICE.winningNumbers && !matchBonus) {
             return WinningPrice.THIRD_PRICE;
         }
 
         return Arrays.stream(winningPrices)
-                .filter(priceValue -> priceValue.checkCount(winningNumbers))
+                .filter(priceValue -> priceValue.checkCount(winningCount))
                 .findAny()
                 .orElse(OTHER);
     }

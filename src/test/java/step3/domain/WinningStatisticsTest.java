@@ -17,6 +17,7 @@ public class WinningStatisticsTest {
     private List<Lotto> lottoList;
     private Lotto lotto2;
     private WinningStatistics winningStatistics;
+    private WinningLotto winningLottoNumbers;
 
     @BeforeEach
     void setUp() {
@@ -27,29 +28,26 @@ public class WinningStatisticsTest {
         lottoList.add(lotto);
         lotto2 = makeLotto.makeLottoWithString("1,2,3,8,9,13");
         lottoList.add(lotto2);
-        winningStatistics = new WinningStatistics(lottoList, winningLotto, new LottoNumber(13));
+        winningLottoNumbers = new WinningLotto(winningLotto, new LottoNumber(13));
+
+        winningStatistics = new WinningStatistics(lottoList, winningLottoNumbers);
     }
 
     @Test
     public void getLottoTotalPrice() {
-        WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLotto, new LottoNumber(1));
+        WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLottoNumbers);
         assertThat(winningStatistics.getTotalWinningPrice()).isEqualTo(55000);
     }
 
     @Test
     public void getBenefitOrNot() {
-        WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLotto, new LottoNumber(1));
+        WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLottoNumbers);
         assertThat(winningStatistics.getWinningStatic()).isEqualTo((float) 27.5);
     }
 
     @Test
     public void checkWinningCount() {
-        assertThat(winningStatistics.winningCount(lotto2)).isEqualTo(5);
-    }
-
-    @Test
-    public void matchBonusTest() {
-        assertThat(winningStatistics.matchBonus(lotto2)).isTrue();
+        assertThat(winningLottoNumbers.winningCount(lotto2)).isEqualTo(5);
     }
 
 }

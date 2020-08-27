@@ -37,13 +37,15 @@ public class PrintResult {
     public static void printLottoMap(Map<WinningPrice, Integer> winningPriceIntegerMap) {
         Iterator<WinningPrice> mapIter = winningPriceIntegerMap.keySet().iterator();
         for (WinningPrice key : winningPriceIntegerMap.keySet()) {
-            int value = winningPriceIntegerMap.get(key);
-            String secondPriceExplain ="";
-            if(key.getPrice() == 30000000) {
-                secondPriceExplain = ", 보너스볼 일치";
-            }
-            System.out.println(key.getWinningNumbers() + "개 일치"+secondPriceExplain+ " (" + key.getPrice() + "원) - " + value + "개");
+            System.out.println(key.getWinningNumbers() + "개 일치"+secondPriceExplain(key)+ " (" + key.getPrice() + "원) - " + winningPriceIntegerMap.get(key) + "개");
         }
+    }
+
+    private static String secondPriceExplain(WinningPrice winningPrice) {
+        if(WinningPrice.SECOND_PRICE.equals(winningPrice)) {
+            return ", 보너스볼 일치";
+        }
+        return "";
     }
 
 }

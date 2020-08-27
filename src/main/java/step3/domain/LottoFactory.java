@@ -5,19 +5,18 @@ import step2.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
     public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBER = 6;
-    private static final List<LottoNumber> ALL_LOTTO_NUMBER = makeAllLottoNumber();
 
-    public static List<LottoNumber> makeAllLottoNumber() {
-        List<LottoNumber> lottoAllNumberList = new ArrayList<>();
-        for (int number = LottoNumber.LOTTO_START_NUMBER_VALUE; number <= LottoNumber.LOTTO_LAST_NUMBER_VALUE; number++) {
-            lottoAllNumberList.add(new LottoNumber(number));
-        }
-        return lottoAllNumberList;
-    }
+    //다른 분의 리뷰를 살펴보던 중 final을 잘 쓸 수 있는 코드가 있어서 참고해서 사용해보았습니다.
+    private static final List<LottoNumber> ALL_LOTTO_NUMBER = IntStream.rangeClosed(LottoNumber.LOTTO_START_NUMBER_VALUE, LottoNumber.LOTTO_LAST_NUMBER_VALUE)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
     private int buyPrice;
 
