@@ -1,13 +1,16 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import static java.lang.Integer.compare;
 
-public class LottoNumber implements Comparable<LottoNumber>{
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private static final String NOT_VALID_RANGE = "번호의 범위에 해당하지 않습니다.";
+    private static final String ILLEGAL_NUMBER_FORMAT = "입력 형식이 올바르지 않습니다.";
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
     static {
@@ -25,14 +28,22 @@ public class LottoNumber implements Comparable<LottoNumber>{
         return LOTTO_NUMBER_CACHE.get(number);
     }
 
+    public static LottoNumber of(String input) {
+        return of(parseToInt(input));
+    }
+
     private static void initLottoNumberCaches() {
         for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
             LOTTO_NUMBER_CACHE.put(number, new LottoNumber(number));
         }
     }
 
-    public static List<LottoNumber> findLottoNumberValues() {
-        return new ArrayList<>(LOTTO_NUMBER_CACHE.values());
+    private static int parseToInt(String inputValue) {
+        try {
+            return Integer.parseInt(inputValue);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ILLEGAL_NUMBER_FORMAT);
+        }
     }
 
     private void validate(int number) {
