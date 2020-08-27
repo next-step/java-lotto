@@ -4,8 +4,8 @@ import lotto.domain.Lottos;
 import lotto.view.ResultView;
 
 import static lotto.view.InputView.getLottoPrice;
-import static lotto.view.ResultView.printLottoCount;
-import static lotto.view.ResultView.printLottoNumber;
+import static lotto.view.InputView.getWinningNumbers;
+import static lotto.view.ResultView.*;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -14,7 +14,11 @@ public class LottoMain {
         Lottos lottos = Lottos.of(lottoPrice);
         printLottoCount(lottos.getLottoCount());
 
+        /* 랜덤 생성 로또 번호 출력 */
         printLottoNumber(lottos.getLottoList());
+
+        /* 지난 주 당첨 번호 입출력 */
+        printWinningCount(lottos.getWinningCount(getWinningNumbers()), lottoPrice);
 
     }
 

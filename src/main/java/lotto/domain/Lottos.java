@@ -2,8 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;
 import java.util.function.LongPredicate;
@@ -24,6 +23,25 @@ public class Lottos {
                 Stream.generate(() -> Lotto.createLotto())
                 .limit(count)
                 .collect(Collectors.toList()), count);
+    }
+
+    public Map<Integer, Integer> getWinningCount(String[] winningNumbers) {
+        Map<Integer, Integer> winningCount= new HashMap<Integer, Integer>();
+        winningCount.put(3, 0);
+        winningCount.put(4, 0);
+        winningCount.put(5, 0);
+        winningCount.put(6, 0);
+
+        lottoList.stream()
+                .mapToInt(lotto -> lotto.findSameNumber(winningNumbers))
+                .forEach(count -> {
+                    if(count>=3) {
+                        Integer temp = winningCount.get(count) + 1;
+                        winningCount.replace(count, temp);
+                    }
+                });
+
+        return winningCount;
     }
 
     public int getLottoCount() {

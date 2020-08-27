@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -16,12 +17,20 @@ public class Lotto {
     public static Lotto createLotto() {
         List<Integer> lottoAllNum = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
         Collections.shuffle(lottoAllNum);
-        return new Lotto(
-                lottoAllNum.subList(0, 6));
+        List<Integer> temp = lottoAllNum.subList(0, 6);
+        Collections.sort(temp);
+        return new Lotto(temp);
     }
 
     public List<Integer> getLotto() {
         return lotto;
+    }
+
+    public int findSameNumber(String[] winningNumbers) {
+        return Arrays.stream(winningNumbers)
+                .filter(n -> lotto.contains(Integer.parseInt(n)))
+                .collect(Collectors.toList())
+                .size();
     }
 
     @Override
@@ -36,4 +45,6 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
+
 }

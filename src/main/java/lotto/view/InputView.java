@@ -11,4 +11,15 @@ public class InputView {
 
         return lottoPrice;
     }
+
+    public static String[] getWinningNumbers() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        String[] winningNumbers = scanner.nextLine().split(", |,");
+
+        return winningNumbers;
+    }
+
+
 }
