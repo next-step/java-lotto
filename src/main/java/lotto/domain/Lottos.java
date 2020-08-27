@@ -25,18 +25,16 @@ public class Lottos {
 
     public Map<Integer, Integer> getWinningCount(String[] winningNumbers) {
         Map<Integer, Integer> winningCount = new HashMap<Integer, Integer>();
-        winningCount.put(3, 0);
-        winningCount.put(4, 0);
-        winningCount.put(5, 0);
-        winningCount.put(6, 0);
+        for (int i = 3; i <= 6; i++) {
+            winningCount.put(i, 0);
+        }
 
         lottoList.stream()
                 .mapToInt(lotto -> lotto.findSameNumber(winningNumbers))
+                .filter(count -> count >= 3)
                 .forEach(count -> {
-                    if (count >= 3) {
-                        Integer temp = winningCount.get(count) + 1;
-                        winningCount.replace(count, temp);
-                    }
+                    Integer temp = winningCount.get(count) + 1;
+                    winningCount.replace(count, temp);
                 });
 
         return winningCount;
