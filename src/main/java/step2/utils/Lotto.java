@@ -1,21 +1,18 @@
 package step2.utils;
 
-import java.util.List;
+import step2.domain.LottoNumbers;
+
 import java.util.Objects;
 
 public class Lotto {
-    List<Integer> lottoNumber;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-        this.lottoNumber = RandomIntegerGenerator.getRandomInteger();
+        this.lottoNumbers = new LottoNumbers(RandomIntegerGenerator.getRandomInteger());
     }
 
-    public Lotto(List<Integer> lottoNumber) {
-        this.lottoNumber = lottoNumber;
-    }
-
-    public List<Integer> getLotto() {
-        return this.lottoNumber;
+    public LottoNumbers getLotto() {
+        return this.lottoNumbers;
     }
 
     @Override
@@ -23,11 +20,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumber, lotto.lottoNumber);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lottoNumbers);
     }
 }

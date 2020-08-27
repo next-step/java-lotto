@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RandomIntegerGenerator {
-
     private static final int RANDOM_LIMIT = 45;
     private static final int LENGTH = 6;
 

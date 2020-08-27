@@ -8,11 +8,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoResultStatistics {
-    int[] winnerInventory;
+    private final int[] winnerInventory;
 
-    public LottoResultStatistics(int[] winnerInventory) {
+    private LottoResultStatistics(int[] winnerInventory) {
         this.winnerInventory = winnerInventory;
-        filterWinnerInventory();
+    }
+
+    public static LottoResultStatistics newWinnerInventory(int[] winnerInventory) {
+        return new LottoResultStatistics(Arrays.stream(winnerInventory)
+                .filter(number -> number > 2)
+                .toArray());
     }
 
     public Map<RankPrice, Long> getWinningPriceDetails() {
@@ -28,11 +33,5 @@ public class LottoResultStatistics {
                 .sum();
 
         return Math.round(winnedMoney / buyMoney * 100.0) / 100.0;
-    }
-
-    private void filterWinnerInventory() {
-        this.winnerInventory = Arrays.stream(this.winnerInventory)
-                .filter(number -> number > 2)
-                .toArray();
     }
 }

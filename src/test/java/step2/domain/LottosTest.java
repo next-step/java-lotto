@@ -9,7 +9,7 @@ public class LottosTest {
 
     @Test
     @DisplayName("로또 대량 생성")
-    void generateLottos() {
+    public void generateLottos() {
         Lottos lottos = new Lottos(5);
 
         assertThat(lottos.getLottoSize()).isEqualTo(5);

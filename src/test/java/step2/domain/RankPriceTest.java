@@ -12,7 +12,7 @@ class RankPriceTest {
 
     @Test
     @DisplayName("우승 금액 및 맞춘 숫자수")
-    void getRankPrice() {
+    public void getRankPrice() {
         assertThat(RankPrice.FIFTH_PLACE.getMatchNumber()).isEqualTo(3);
         assertThat(RankPrice.FIFTH_PLACE.getWinedMoney()).isEqualTo(5000);
 
@@ -28,7 +28,7 @@ class RankPriceTest {
 
     @Test
     @DisplayName("예외 테스트")
-    void valueOfTest() {
+    public void valueOfTest() {
         assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
             RankPrice.valueOf(7);
         });

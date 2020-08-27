@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lottos {
-    List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public Lottos(int lottoCount) {
         this.lottos = Stream.generate(Lotto::new).limit(lottoCount).collect(Collectors.toList());
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public void lottoManual(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -21,7 +21,7 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public Stream<Lotto> getLottos() {
+    public Stream<Lotto> getStream() {
         return this.lottos.stream();
     }
 }
