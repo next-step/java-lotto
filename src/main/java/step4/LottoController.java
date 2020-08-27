@@ -20,9 +20,9 @@ public class LottoController {
 		List<Lotto> issueLottos = lottoGame.getLottos();
 		ResultView.printLottos(issueLottos, manualLottoCount);
 
-		WinningLotto winningLotto = InputView.inputWinningNumbers();
-		winningLotto.setBonusNumber(new LottoNumber(InputView.inputBonusBall()));
-		LottoResult result = new LottoResult(issueLottos, winningLotto);
+		List<LottoNumber> winningLotto = InputView.inputWinningNumbers();
+		int bonusNumber = InputView.inputBonusBall();
+		LottoResult result = new LottoResult(issueLottos, new WinningLotto(winningLotto, bonusNumber));
 
 		ResultView.printWinningResult(result.getLottoResult());
 		ResultView.printYield(result.getGameYield());

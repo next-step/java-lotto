@@ -26,9 +26,9 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static WinningLotto inputWinningNumbers() {
+	public static List<LottoNumber> inputWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBER_PHRASES);
-		return new WinningLotto(inputLottoNumbers());
+		return inputLottoNumbers();
 	}
 
 	public static int inputBonusBall() {
