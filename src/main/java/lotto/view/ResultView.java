@@ -14,9 +14,8 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void displayLottoCount(LottoCount lottoCount, Money money) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoCount.getCount(),
-                lottoCount.calculateCount(money.getPrice())));
+    public static void displayLottoCount(int manualSize, int totalSize) {
+        System.out.printf((PURCHASE_COUNT_MESSAGE) + "%n", manualSize, totalSize - manualSize);
     }
 
     public static void displayLottos(Lottos lottos) {

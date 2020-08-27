@@ -8,14 +8,14 @@ import static lotto.view.ResultView.*;
 public class LottoController {
     public void start() {
         final Money money = Money.of(inputMoney());
-        final LottoCount lottoCount = LottoCount.of(inputManualCount());
-        final LottoStore lottoStore = LottoStore.of(money, lottoCount);
-        final Lottos lottos = lottoStore.issueLotto(ManualLottoGenerator.of(inputManualNumber(lottoCount)));
-        displayLottoCount(lottoCount, money);
+        final ManualLotto manualLotto = ManualLotto.of(inputManualLotto());
+        final LottoStore lottoStore = LottoStore.of(money, manualLotto);
+        final Lottos lottos = lottoStore.issue();
+        displayLottoCount(manualLotto.size(), lottos.size());
         displayLottos(lottos);
 
         final WinningLotto winningLotto = WinningLotto.of(inputWinningLotto(), inputBonusNumber());
-        final Rankings rankings = Rankings.of(lottos.matchesWinningLotto(winningLotto));
+        final Rankings rankings = lottos.matchesWinningLotto(winningLotto);
         displayLottoResult(rankings);
     }
 }
