@@ -7,46 +7,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<LottoNumber> LOTTO_NUMBER_POOL;
     private List<LottoNumber> lottoNumbers;
-
-    static {
-        LOTTO_NUMBER_POOL = Stream.iterate(LOTTO_START_NUMBER, number -> number + 1)
-                .limit(LOTTO_END_NUMBER)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lottos create(int count) {
-        List<Lotto> lottoNumbers = new ArrayList<>();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoNumbers.add(makeOneLine());
+            lottoList.add(LottoNumber.createLotto());
         }
-        return new Lottos(lottoNumbers);
+        return new Lottos(lottoList);
     }
-
-    private static Lotto makeOneLine() {
-        Collections.shuffle(LOTTO_NUMBER_POOL);
-        List<LottoNumber> lottoNumbers =
-                LOTTO_NUMBER_POOL
-                        .stream()
-                        .limit(LOTTO_NUMBER_COUNT)
-                        .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
-    }
-
-    /*public List<Integer> getLottoNumbers() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
-    }*/
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
