@@ -15,9 +15,10 @@ public class LottoController {
 		lottoGame.checkLottoPurchase(price, manualLottoCount);
 
 		List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
+		lottoGame.setManualLottos(manualLottos);
 
-		List<Lotto> issueLottos = lottoGame.getLottos(manualLottos);
-		ResultView.printLottos(issueLottos);
+		List<Lotto> issueLottos = lottoGame.getLottos();
+		ResultView.printLottos(issueLottos, manualLottoCount);
 
 		WinningLotto winningLotto = InputView.inputWinningNumbers();
 		winningLotto.setBonusNumber(new LottoNumber(InputView.inputBonusBall()));

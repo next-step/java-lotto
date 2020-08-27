@@ -22,9 +22,12 @@ public class LottoGame {
 		this.price = price;
 	}
 
-	public List<Lotto> getLottos(List<Lotto> manualLottos) {
+	public void setManualLottos(List<Lotto> manualLottos) {
 		lottos.addAll(manualLottos);
-		int autoLottoCount = (price / LOTTO_PRICE) - manualLottos.size();
+	}
+
+	public List<Lotto> getLottos() {
+		int autoLottoCount = (price / LOTTO_PRICE) - lottos.size();
 		setAutoLottoss(autoLottoCount);
 		return lottos;
 	}
@@ -34,18 +37,6 @@ public class LottoGame {
 			lottos.add(new Lotto());
 		}
 	}
-
-	////////////////
-	public List<Lotto> getAutoLottos(int price) {
-		int count = price / LOTTO_PRICE;
-
-		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			lottos.add(new Lotto());
-		}
-		return lottos;
-	}
-	/////////////////
 
 	private void validPrice(int price) {
 		if (price == 0 || price % LOTTO_PRICE != 0) {
@@ -58,5 +49,4 @@ public class LottoGame {
 			throw new IllegalArgumentException(String.format(MANUAL_LOTTO_COUNT, (price / LOTTO_PRICE)));
 		}
 	}
-
 }
