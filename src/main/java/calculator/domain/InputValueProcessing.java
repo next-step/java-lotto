@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValueProcessing {
-    public static int inputValueValidate(String inputValue) {
+    private static Pattern pattern= Pattern.compile("//(.)\n(.*)");
+
+    public static int calculateInputValue(String inputValue) {
         if (inputValue == null)
             return 0;
         if (inputValue.isEmpty())
@@ -17,7 +19,7 @@ public class InputValueProcessing {
     }
 
     public static String[] checkCustomDelimiter(String inputValue) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputValue);
+        Matcher m = pattern.matcher(inputValue);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
