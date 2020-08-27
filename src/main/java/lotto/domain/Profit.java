@@ -20,7 +20,7 @@ public class Profit {
         int winningAmount = NUMBER_ZERO;
 
         for (Rank rank : Rank.values()) {
-            int winningNumber = this.winningResult.getWinningResult(rank);
+            long winningNumber = this.winningResult.getWinningResult(rank);
             winningAmount += winningNumber * rank.getWinningMoney();
         }
         return winningAmount;

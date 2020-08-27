@@ -34,7 +34,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-
     public static Rank valudOf(int countOfMatch, boolean bonusNumber) {
         return Stream.of(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)

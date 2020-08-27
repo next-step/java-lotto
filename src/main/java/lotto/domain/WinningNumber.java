@@ -1,41 +1,24 @@
 package lotto.domain;
 
-import lotto.utils.LottoValidationUtils;
-import lotto.utils.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class WinningNumber extends LottoTicket {
+public class WinningNumber {
 
-    private static final String INPUT_WINNING_NUMBER_DELIMITER = ", ";
+    private LottoTicket winningNumbers;
+    private int bonusNumber;
 
-    List<Integer> winningNumbers;
-
-    public WinningNumber() {
-        super();
-        this.winningNumbers = new ArrayList<>();
+    public WinningNumber(LottoTicket winningNumbers, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> setWinningNumber(String winningNumber) {
-        String[] winningNumberArray = new StringUtils(winningNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
-        LottoValidationUtils.invalidWinningNumberSizeException(winningNumberArray);
-        isWinningNumberAdd(winningNumberArray);
-        validateLottoRange(winningNumbers);
-        return winningNumbers;
+    public boolean isContainsBonusNumber() {
+        return winningNumbers.getLottoTicket().contains(bonusNumber);
     }
 
-    private boolean isWinningNumberAdd(String[] winningNumberArray) {
-        return this.winningNumbers.addAll(Arrays.stream(winningNumberArray)
-                .map(number -> new StringUtils(number).toInt())
-                .sorted()
-                .collect(Collectors.toList()));
-    }
-
-    public static boolean isContainsBonusNumber(List<Integer> lottoTicket, int bonusNumber) {
-        return (lottoTicket.contains(bonusNumber));
+    public List<Integer> getWinningNumber() {
+        return Collections.unmodifiableList(winningNumbers.getLottoTicket());
     }
 
 }
