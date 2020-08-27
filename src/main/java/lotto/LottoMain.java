@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.view.ResultView;
 
 import static lotto.view.InputView.getLottoPrice;
 import static lotto.view.InputView.getWinningNumbers;

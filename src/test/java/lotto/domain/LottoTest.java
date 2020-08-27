@@ -21,13 +21,13 @@ public class LottoTest {
     @Test
     void 로또_번호_비교() {
         Lotto lotto = Lotto.createLotto();
-        assertThat(lotto.findSameNumber(new String[]{"1","2","3","4","5","6"})).isEqualTo(lotto.getLotto());
+        assertThat(lotto.findSameNumber(new String[]{"1", "2", "3", "4", "5", "6"})).isEqualTo(lotto.getLotto());
     }
 
     @Test
     void 당첨_개수_가져오기() {
         Lottos lottos = Lottos.of(14000);
-        assertThat(lottos.getWinningCount(new String[]{"1","2","3","4","5","6"})).isEqualTo(lottos.getLottoCount());
+        assertThat(lottos.getWinningCount(new String[]{"1", "2", "3", "4", "5", "6"})).isEqualTo(lottos.getLottoCount());
     }
 
 }
