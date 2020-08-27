@@ -10,15 +10,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class ValidationUtilsTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"''=true","1=false"}, delimiter = '=')
+    @CsvSource(value = {"''=true", "1=false"}, delimiter = '=')
     @DisplayName("입력문자열의 empty 테스트")
-    void isEmptyTest(String inputValue, boolean result){
+    void isEmptyTest(String inputValue, boolean result) {
         assertThat(ValidationUtils.isNullAndEmpty(inputValue)).isEqualTo(result);
     }
 
     @Test
     @DisplayName("입력문자열의 null 테스트")
-    void isNullTest(){
+    void isNullTest() {
         assertThat(ValidationUtils.isNullAndEmpty(null)).isEqualTo(true);
     }
 }

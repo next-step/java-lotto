@@ -12,7 +12,8 @@ public class LottoNumberUtil {
     private static final int LOTTO_MAXIMUM_BOUND = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private LottoNumberUtil() {}
+    private LottoNumberUtil() {
+    }
 
     public static List<LottoNumber> generator() {
         List<LottoNumber> lottoNumbers = getSixNumbers();
@@ -23,7 +24,7 @@ public class LottoNumberUtil {
     public static List<LottoNumber> transStringNumberToLottoNumber(List<String> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for(String number : numbers){
+        for (String number : numbers) {
             lottoNumbers.add(LottoNumber.createByString(number.trim()));
         }
 
@@ -34,10 +35,10 @@ public class LottoNumberUtil {
         List<LottoNumber> lottoEntryNumbers = allLottoNumbers();
         Collections.shuffle(lottoEntryNumbers);
 
-        return lottoEntryNumbers.subList(0,LOTTO_NUMBER_COUNT);
+        return lottoEntryNumbers.subList(0, LOTTO_NUMBER_COUNT);
     }
 
-    private static List<LottoNumber> allLottoNumbers(){
+    private static List<LottoNumber> allLottoNumbers() {
         return IntStream.range(LOTTO_MINIMUM_BOUND, LOTTO_MAXIMUM_BOUND)
                 .boxed()
                 .map(LottoNumber::create)

@@ -2,7 +2,6 @@ package nextstep.lotto.view;
 
 import nextstep.lotto.dto.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -20,31 +19,33 @@ public class ResultView {
     private final String BENEFIT_RATE_TEXT = "총 수익률은 %.2f 입니다.";
 
     private final String MATCH_INFO_TEXT_MATCH_COUNT = "개 일치(";
+    private final String MATCH_INFO_TEXT_MATCH_COUNT_BONUS = "개 일치, 보너스 볼 일치(";
     private final String MATCH_INFO_TEXT_REWARD = "원)-";
     private final String MATCH_INFO_TEXT_TICKET_COUNT = "개";
 
     private final String MATCH_INFO_LINE_SPERATOR = "\n";
 
-    private final int DEFAULT_TICKET_COUNT = 0;
+    private final long DEFAULT_TICKET_COUNT = 0;
 
     public void showLottoTicket(LottoTickets tickets) {
         printTicketCount(tickets.count());
 
-        for(LottoTicket ticket : tickets.getAll()) {
+        for (LottoTicket ticket : tickets.getAll()) {
             printTicket(ticket);
         }
     }
+
     private void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount+RESULT_TEXT_BUY_TOTAL_AMOUNT);
+        System.out.println(ticketCount + RESULT_TEXT_BUY_TOTAL_AMOUNT);
     }
 
     private void printTicket(LottoTicket ticket) {
         System.out.println(lottoNumberToString(ticket.getLottoNumber()));
     }
 
-    private String lottoNumberToString(List<LottoNumber> lottoNumbers){
-        StringJoiner lottoTicketNumbers = new StringJoiner(LOTTO_TICKET_DELIMITER,LOTTO_TICKET_PREFIX,LOTTO_TICKET_SUFFIX);
-        for(LottoNumber lottoNumber : lottoNumbers) {
+    private String lottoNumberToString(List<LottoNumber> lottoNumbers) {
+        StringJoiner lottoTicketNumbers = new StringJoiner(LOTTO_TICKET_DELIMITER, LOTTO_TICKET_PREFIX, LOTTO_TICKET_SUFFIX);
+        for (LottoNumber lottoNumber : lottoNumbers) {
             lottoTicketNumbers.add(String.valueOf(lottoNumber.getNumber()));
         }
         return lottoTicketNumbers.toString();
@@ -54,21 +55,26 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_STAT);
         System.out.println(LOTTO_RESULT_LINE_SEPERATOR);
 
-        Map<LottoRank,Integer> lottoResult = resultBoard.getLottoResult();
+        Map<LottoRank, Long> lottoResult = resultBoard.getLottoResult();
         StringBuilder sb = new StringBuilder();
-        sb.append(getMatchInfo(LottoRank.THREE, lottoResult.getOrDefault(LottoRank.THREE,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.FOUR, lottoResult.getOrDefault(LottoRank.FOUR,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.FIVE, lottoResult.getOrDefault(LottoRank.FIVE,DEFAULT_TICKET_COUNT)));
-        sb.append(getMatchInfo(LottoRank.SIX, lottoResult.getOrDefault(LottoRank.SIX,DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FIFTH, lottoResult.getOrDefault(LottoRank.FIFTH, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FOURTH, lottoResult.getOrDefault(LottoRank.FOURTH, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.THIRD, lottoResult.getOrDefault(LottoRank.THIRD, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.SECOND, lottoResult.getOrDefault(LottoRank.SECOND, DEFAULT_TICKET_COUNT)));
+        sb.append(getMatchInfo(LottoRank.FIRST, lottoResult.getOrDefault(LottoRank.FIRST, DEFAULT_TICKET_COUNT)));
         System.out.println(sb.toString());
 
-        System.out.printf(BENEFIT_RATE_TEXT,resultBoard.getBenefitRate());
+        System.out.printf(BENEFIT_RATE_TEXT, resultBoard.getBenefitRate());
     }
 
-    private String getMatchInfo(LottoRank rank, int matchCount){
+    private String getMatchInfo(LottoRank rank, long matchCount) {
+        String matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT;
+        if (rank == LottoRank.SECOND) {
+            matchInfoText = MATCH_INFO_TEXT_MATCH_COUNT_BONUS;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getMatchCount())
-                .append(MATCH_INFO_TEXT_MATCH_COUNT)
+                .append(matchInfoText)
                 .append(rank.getReward())
                 .append(MATCH_INFO_TEXT_REWARD)
                 .append(matchCount)

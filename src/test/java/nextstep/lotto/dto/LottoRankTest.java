@@ -8,52 +8,59 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 class LottoRankTest {
 
     @Test
-    @DisplayName("6개일치")
-    void lottoRank_6개일치(){
-        LottoRank lottoRank = LottoRank.of(6);
-        assertThat(lottoRank).isEqualTo(LottoRank.SIX);
+    @DisplayName("1등 로또")
+    void lottoRank_1등_6개일치() {
+        LottoRank lottoRank = LottoRank.of(6, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
-    @DisplayName("5개일치")
-    void lottoRank_5개일치(){
-        LottoRank lottoRank = LottoRank.of(5);
-        assertThat(lottoRank).isEqualTo(LottoRank.FIVE);
+    @DisplayName("2등 로또 5개일치 + 보너스")
+    void lottoRank_2등_5개일치_보너스포함() {
+        LottoRank lottoRank = LottoRank.of(5, true);
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
     }
 
     @Test
-    @DisplayName("4개일치")
-    void lottoRank_4개일치(){
-        LottoRank lottoRank = LottoRank.of(4);
-        assertThat(lottoRank).isEqualTo(LottoRank.FOUR);
+    @DisplayName("3등로또 5개일치")
+    void lottoRank_3등_5개일치() {
+        LottoRank lottoRank = LottoRank.of(5, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
     }
 
     @Test
-    @DisplayName("3개일치")
-    void lottoRank_3개일치(){
-        LottoRank lottoRank = LottoRank.of(3);
-        assertThat(lottoRank).isEqualTo(LottoRank.THREE);
+    @DisplayName("4등 4개일치")
+    void lottoRank_4등_4개일치() {
+        LottoRank lottoRank = LottoRank.of(4, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
 
     @Test
-    @DisplayName("2개일치")
-    void lottoRank_2개일치(){
-        LottoRank lottoRank = LottoRank.of(2);
-        assertThat(lottoRank).isEqualTo(LottoRank.ETC);
+    @DisplayName("5등_3개일치")
+    void lottoRank_5등_3개일치() {
+        LottoRank lottoRank = LottoRank.of(3, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
-    @DisplayName("1개일치")
-    void lottoRank_1개일치(){
-        LottoRank lottoRank = LottoRank.of(1);
-        assertThat(lottoRank).isEqualTo(LottoRank.ETC);
+    @DisplayName("꽝_2개일치")
+    void lottoRank_꽝_2개일치() {
+        LottoRank lottoRank = LottoRank.of(2, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
     }
 
     @Test
-    @DisplayName("0개일치")
-    void lottoRank_0개일치(){
-        LottoRank lottoRank = LottoRank.of(0);
-        assertThat(lottoRank).isEqualTo(LottoRank.ETC);
+    @DisplayName("꽝_1개일치")
+    void lottoRank_꽝_1개일치() {
+        LottoRank lottoRank = LottoRank.of(1, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
+    @DisplayName("꽝_0개일치")
+    void lottoRank_꽝_0개일치() {
+        LottoRank lottoRank = LottoRank.of(0, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
     }
 
 }

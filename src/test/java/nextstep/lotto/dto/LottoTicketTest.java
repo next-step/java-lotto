@@ -13,13 +13,13 @@ class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호 생성 테스트")
-    void createLottoTicket(){
+    void createLottoTicket() {
         LottoTicket lottoTicket = LottoTicket.create(LottoNumberUtil.generator());
         assertThat(lottoTicket.getLottoNumber()).hasSize(6);
     }
 
     @Test
-    void 일치하는로또_티켓_갯수확인_TEST(){
+    void 일치하는로또_티켓_갯수확인_TEST() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(LottoNumber.create(1));
         lottoNumbers.add(LottoNumber.create(2));
@@ -38,6 +38,7 @@ class LottoTicketTest {
 
 
         LottoTicket ticket = LottoTicket.create(lottoNumbers);
-        assertThat(ticket.matchCount(winnerLotto)).isEqualTo(LottoRank.SIX);
+        LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(winnerLotto, LottoNumber.create(7));
+        assertThat(winnerNumbers.matchCount(ticket.getLottoNumber())).isEqualTo(LottoRank.FIRST);
     }
 }

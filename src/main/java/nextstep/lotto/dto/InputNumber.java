@@ -12,11 +12,11 @@ public class InputNumber {
     public InputNumber(String inputValue) {
         try {
             this.number = Integer.parseInt(inputValue);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new RuntimeException(INVALID_INPUT_ONLY_NUMBER);
         }
 
-        if(this.number < 0){
+        if (this.number < 0) {
             throw new RuntimeException(INVALID_INPUT_ONLY_POSITIVE_NUMBER);
         }
     }

@@ -10,24 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNumberTest {
 
     @Test
-    void 정상적인_로또번호_생성_Test(){
+    void 정상적인_로또번호_생성_Test() {
         assertThat(LottoNumber.create(5)).isEqualTo(LottoNumber.create(5));
     }
 
     @Test
-    void 정상적인_로또번호_생성_문자열_Test(){
+    void 정상적인_로또번호_생성_문자열_Test() {
         assertThat(LottoNumber.createByString("5")).isEqualTo(LottoNumber.create(5));
     }
 
     @Test
-    void 비정상적인_로또번호_생성_Test(){
+    void 비정상적인_로또번호_생성_Test() {
         assertThatThrownBy(() -> {
             LottoNumber.create(50);
         }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
-    void 비정상적인_로또번호_생성_문자열_Test(){
+    void 비정상적인_로또번호_생성_문자열_Test() {
         assertThatThrownBy(() -> {
             LottoNumber.createByString("one");
         }).isInstanceOf(RuntimeException.class);

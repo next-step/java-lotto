@@ -9,12 +9,12 @@ import static nextstep.lotto.constant.ExceptionMessage.INVALID_LOTTO_NUMBER_SIZE
 
 public class LottoTicket {
 
-    private Set<LottoNumber> ticket;
+    protected Set<LottoNumber> ticket;
 
-    private LottoTicket(List<LottoNumber> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         this.ticket = numbers.stream().collect(Collectors.toSet());
 
-        if( ticket.size() != 6){
+        if (ticket.size() != 6) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
         }
     }
@@ -23,13 +23,7 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public LottoRank matchCount(List<LottoNumber> winnerLotto) {
-        return LottoRank.of((int) ticket.stream()
-                .filter(winnerLotto::contains)
-                .count());
-    }
-
-    public List<LottoNumber> getLottoNumber(){
+    public List<LottoNumber> getLottoNumber() {
         List<LottoNumber> lottoTicket = this.ticket.stream().collect(Collectors.toList());
         Collections.sort(lottoTicket);
         return Collections.unmodifiableList(
