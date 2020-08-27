@@ -2,30 +2,32 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.*;
-import static lotto.domain.LottoStore.ZERO;
 
 public class AutoLottoGenerator implements LottoGenerator {
-    private final int issueCount;
+    private static final List<Integer> LOTTO_NUMBER_BOX = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+            .boxed()
+            .collect(toList());
 
-    public AutoLottoGenerator(int issueCount) {
-        this.issueCount = issueCount;
+    private final List<Integer> numbers;
+
+    public AutoLottoGenerator() {
+        this.numbers = LOTTO_NUMBER_BOX;
     }
 
     @Override
-    public Lottos generate() {
-        return IntStream.range(ZERO, issueCount)
-                .mapToObj(lotto -> this.generateAutoNumbers())
-                .collect(collectingAndThen(toList(), Lottos::of));
+    public Lotto generate() {
+        return Lotto.of(generateAutoNumbers());
     }
 
-    private Lotto generateAutoNumbers() {
-        List<LottoNumber> lottoNumbers = LottoNumber.findLottoNumberValues();
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream()
+    private Set<LottoNumber> generateAutoNumbers() {
+        Collections.shuffle(numbers);
+        return numbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
-                .collect(collectingAndThen(toSet(), Lotto::of));
+                .map(LottoNumber::of)
+                .collect(toSet());
     }
 }

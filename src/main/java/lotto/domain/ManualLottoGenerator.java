@@ -1,25 +1,18 @@
 package lotto.domain;
 
-import java.util.List;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
-
 public class ManualLottoGenerator implements LottoGenerator {
-    private final List<List<Integer>> manuals;
+    private final String rowLine;
 
-    public ManualLottoGenerator(List<List<Integer>> manuals) {
-        this.manuals = manuals;
+    public ManualLottoGenerator(String rowLine) {
+        this.rowLine = rowLine;
     }
 
-    public static ManualLottoGenerator of(List<List<Integer>> manuals) {
-        return new ManualLottoGenerator(manuals);
+    public static ManualLottoGenerator of(String rowLine) {
+        return new ManualLottoGenerator(rowLine);
     }
 
     @Override
-    public Lottos generate() {
-        return manuals.stream()
-                .map(Lotto::of)
-                .collect(collectingAndThen(toList(), Lottos::of));
+    public Lotto generate() {
+        return Lotto.of(rowLine);
     }
 }
