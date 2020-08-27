@@ -23,8 +23,7 @@ public class WinningLottoNumbers {
     private List<LottoNumber> changeToList(String inputWinningNumber) {
         List<LottoNumber> lottoNumbers =
                 Arrays.stream(inputWinningNumber.split(LOTTO_NUMBER_DELIMITER))
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toList());
 
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {

@@ -39,4 +39,7 @@ public class LottoNumber {
         return new Lotto(lottoNumberList);
     }
 
+    public static LottoNumber of(String number) {
+        return new LottoNumber(Integer.parseInt(number));
+    }
 }
