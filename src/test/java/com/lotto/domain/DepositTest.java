@@ -10,7 +10,7 @@ class DepositTest {
 
     @ParameterizedTest
     @DisplayName("금액에 따른 복권 구입 개수 확인")
-    @CsvSource(value = {"0:0", "1000:1", "2500:2", "14000:14"}, delimiter = ':')
+    @CsvSource(value = {"0,0", "500,0", "1000,1", "2500,2", "14000,14"})
     void purchaseLottery(int amount, int expected) {
         then(new Deposit(amount).purchaseLottery()).isEqualTo(expected);
     }

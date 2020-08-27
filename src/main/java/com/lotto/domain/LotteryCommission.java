@@ -1,21 +1,18 @@
 package com.lotto.domain;
 
-import java.util.Collections;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LotteryCommission {
 
-    private static final int DEFAULT_REVENUE = 0;
-    private static final int LOTTERY_PRICE = 1_000;
-    private static final int START_NUMBER = 1;
-    private static final int TOTAL_NUMBER_COUNT = 45;
-    private static final int NUMBER_COUNT = 6;
-    private static final List<Integer> TOTAL_NUMBERS = IntStream.range(START_NUMBER, START_NUMBER + TOTAL_NUMBER_COUNT)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final int SCALE = 2;
+    private static final BigDecimal LOTTERY_PRICE = new BigDecimal(1_000);
+    private static final BigDecimal DEFAULT_REVENUE = BigDecimal.ZERO;
 
     public List<Lottery> publishLotteries(Deposit deposit) {
         int lotteryCount = deposit.purchaseLottery();
@@ -25,28 +22,27 @@ public class LotteryCommission {
     }
 
     private Lottery publishLotteryAutomatically() {
-        Collections.shuffle(TOTAL_NUMBERS);
-        List<Integer> numbers = TOTAL_NUMBERS.stream()
-                .limit(NUMBER_COUNT)
+        Set<LotteryNumber> lotteryNumbers = LotteryNumber.getLotteryNumbersAutomatically();
+        return new Lottery(lotteryNumbers);
+    }
+
+    public List<Statistic> calculateWinningStatistics(List<Lottery> lotteries, WinningLottery winningLottery) {
+        List<Rank> ranks = lotteries.stream()
+                .map(winningLottery::matchRank)
                 .collect(Collectors.toList());
-        return new Lottery(numbers);
+        return Arrays.stream(new Rank[]{Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST})
+                .map(rank -> new Statistic(rank, ranks))
+                .collect(Collectors.toList());
     }
 
-    public List<Statistic> calculateWinningStatistics(List<Lottery> lotteries, Lottery winningLottery) {
-        return Stream.of(Rank.values()).map(rank -> {
-            int lotteryCount = (int) lotteries.stream()
-                    .filter(lottery -> rank.compareMatchingCount(lottery.compareMatchingNumbers(winningLottery)))
-                    .count();
-            return new Statistic(rank, lotteryCount);
-        }).collect(Collectors.toList());
-    }
-
-    public float calculateYield(List<Lottery> lotteries, Lottery winningLottery) {
-        List<Statistic> statistics = calculateWinningStatistics(lotteries, winningLottery);
-        float revenue = statistics.stream()
+    public BigDecimal calculateYield(int lotteryCount, List<Statistic> statistics) {
+        if (lotteryCount == 0) {
+            return DEFAULT_REVENUE;
+        }
+        BigDecimal revenue = statistics.stream()
                 .map(Statistic::calculateTotalWinnings)
-                .reduce(Integer::sum)
+                .reduce(BigDecimal::add)
                 .orElse(DEFAULT_REVENUE);
-        return revenue / (LOTTERY_PRICE * lotteries.size());
+        return revenue.divide(LOTTERY_PRICE.multiply(new BigDecimal(lotteryCount)), SCALE, RoundingMode.HALF_EVEN);
     }
 }

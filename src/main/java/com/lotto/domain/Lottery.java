@@ -1,40 +1,33 @@
 package com.lotto.domain;
 
-import java.util.*;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lottery {
 
-    private static final int START_NUMBER = 1;
-    private static final int TOTAL_NUMBER_COUNT = 45;
     private static final int NUMBER_COUNT = 6;
-    private final List<Integer> numbers;
+    private final Set<LotteryNumber> lotteryNumbers;
 
-    public Lottery(List<Integer> numbers) throws IllegalStateException {
-        validateNumbers(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers;
+    public Lottery(Set<LotteryNumber> lotteryNumbers) throws IllegalArgumentException {
+        validateLotteryNumbers(lotteryNumbers);
+        this.lotteryNumbers = lotteryNumbers;
     }
 
-    private void validateNumbers(List<Integer> numbers) throws IllegalStateException {
-        if (new HashSet<>(numbers).size() != NUMBER_COUNT
-                || numbers.stream().anyMatch(number -> number < START_NUMBER || number > TOTAL_NUMBER_COUNT)) {
-            throw new IllegalStateException();
+    private void validateLotteryNumbers(Set<LotteryNumber> lotteryNumbers) throws IllegalArgumentException {
+        if (lotteryNumbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException();
         }
     }
 
-    public int compareMatchingNumbers(Lottery lottery) {
-        List<Integer> totalNumbers = new ArrayList<>();
-        totalNumbers.addAll(numbers);
-        totalNumbers.addAll(lottery.numbers);
-        return NUMBER_COUNT * 2 - new HashSet<>(totalNumbers).size();
+    public boolean hasLotteryNumber(LotteryNumber lotteryNumber) {
+        return lotteryNumbers.contains(lotteryNumber);
     }
 
     @Override
     public String toString() {
-        String s = this.numbers.stream()
-                .map(number -> Integer.toString(number))
-                .reduce((prev, next) -> String.format("%2s, %2s", prev, next))
-                .orElseThrow(IllegalStateException::new);
-        return String.format("[%s]", s);
+        return this.lotteryNumbers.stream()
+                .sorted()
+                .map(LotteryNumber::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

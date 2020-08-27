@@ -1,6 +1,10 @@
 package com.lotto.domain;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
+
 public enum Rank {
+    LOSER(0, 0),
     FORTH(3, 5_000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
@@ -8,23 +12,25 @@ public enum Rank {
     ;
 
     final private int matchingCount;
-    final private int winnings;
+    final private BigDecimal winnings;
 
     Rank(int matchingCount, int winnings) {
         this.matchingCount = matchingCount;
-        this.winnings = winnings;
+        this.winnings = new BigDecimal(winnings);
     }
 
-    public boolean compareMatchingCount(int matchingCount) {
-        return this.matchingCount == matchingCount;
+    public static Rank matchRank(int matchingCount) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchingCount == matchingCount)
+                .findFirst()
+                .orElse(LOSER);
     }
 
-    public int calculateTotalWinnings(int lotteryCount) {
-        return winnings * lotteryCount;
+    public BigDecimal calculateTotalWinnings(int lotteryCount) {
+        return winnings.multiply(new BigDecimal(lotteryCount));
     }
 
-    @Override
-    public String toString() {
-        return String.format("%2d 개 일치 (%10d 원)", matchingCount, winnings);
+    public String toString(String format) {
+        return String.format(format, matchingCount, winnings);
     }
 }

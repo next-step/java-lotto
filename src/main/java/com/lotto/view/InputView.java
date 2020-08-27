@@ -2,10 +2,12 @@ package com.lotto.view;
 
 import com.lotto.domain.Deposit;
 import com.lotto.domain.Lottery;
+import com.lotto.domain.LotteryNumber;
+import com.lotto.domain.WinningLottery;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class InputView {
         } catch (NumberFormatException e) {
             System.out.println("숫자만 입력할 수 있어요.");
             return tryCatchInputExceptions(inputLogic);
-        } catch (IllegalStateException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력값 입니다.");
             return tryCatchInputExceptions(inputLogic);
         }
@@ -37,20 +39,19 @@ public class InputView {
         });
     }
 
-    private Lottery publishLotteryManually() throws NumberFormatException {
+    private Set<LotteryNumber> enterLotteryNumberManually() throws NumberFormatException {
         String input = SCANNER.nextLine();
         String[] tokens = input.replaceAll(SPACE_STRING, EMPTY_STRING)
                 .split(NUMBER_DELIMITER);
-        List<Integer> numbers = Arrays.stream(tokens)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        return new Lottery(numbers);
+         return Arrays.stream(tokens)
+                .map(LotteryNumber::getLotteryNumber)
+                .collect(Collectors.toSet());
     }
 
-    public Lottery setupWinningLottery() {
-        return (Lottery) tryCatchInputExceptions(() -> {
+    public WinningLottery setupWinningLottery() {
+        return (WinningLottery) tryCatchInputExceptions(() -> {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return publishLotteryManually();
+            return new WinningLottery(enterLotteryNumberManually());
         });
     }
 }
