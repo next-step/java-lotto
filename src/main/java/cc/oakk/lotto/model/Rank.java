@@ -14,7 +14,12 @@ public enum Rank {
     FIFTH(4),
     NONE(5);
 
+    private static final Map<Integer, Rank> ranks =
+            Collections.unmodifiableMap(Stream.of(values())
+                    .collect(Collectors.toMap(Rank::getDifferentCount, Function.identity())));
+
     private final int differentCount;
+
     Rank(int differentCount) {
         this.differentCount = differentCount;
     }
@@ -22,10 +27,6 @@ public enum Rank {
     public int getDifferentCount() {
         return differentCount;
     }
-
-    private static Map<Integer, Rank> ranks =
-            Collections.unmodifiableMap(Stream.of(values())
-                    .collect(Collectors.toMap(Rank::getDifferentCount, Function.identity())));
 
     public static Rank getRankByDifferentCount(int count) {
         return ranks.getOrDefault(count, NONE);
