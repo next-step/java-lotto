@@ -1,6 +1,6 @@
 package calculator;
 
-import static calculator.domain.InputValue.inputValueValidate;
+import static calculator.domain.InputValueProcessing.inputValueValidate;
 import static calculator.view.InputView.inputString;
 
 public class CalculatorMain {

@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputValue {
+public class InputValueProcessing {
     public static int inputValueValidate(String inputValue) {
         if (inputValue == null)
             return 0;

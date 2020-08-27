@@ -2,12 +2,12 @@ package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static calculator.domain.InputValue.checkCustomDelimiter;
-import static calculator.domain.InputValue.inputValueValidate;
+import static calculator.domain.InputValueProcessing.checkCustomDelimiter;
+import static calculator.domain.InputValueProcessing.inputValueValidate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class InputValueTest {
+public class InputValueProcessingTest {
     @Test
     void isNull() {
         assertThat(inputValueValidate("")).isEqualTo(0);
