@@ -21,7 +21,7 @@ public class Lottos {
     public static Lottos of(int lottoPrice) {
         int count = lottoPrice / 1000;
         return new Lottos(
-                Stream.generate(() -> new Lotto())
+                Stream.generate(() -> Lotto.createLotto())
                 .limit(count)
                 .collect(Collectors.toList()), count);
     }
@@ -30,5 +30,7 @@ public class Lottos {
         return lottoCount;
     }
 
-
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }

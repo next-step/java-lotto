@@ -5,6 +5,7 @@ import lotto.view.ResultView;
 
 import static lotto.view.InputView.getLottoPrice;
 import static lotto.view.ResultView.printLottoCount;
+import static lotto.view.ResultView.printLottoNumber;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -12,6 +13,8 @@ public class LottoMain {
         int lottoPrice = getLottoPrice();
         Lottos lottos = Lottos.of(lottoPrice);
         printLottoCount(lottos.getLottoCount());
+
+        printLottoNumber(lottos.getLottoList());
 
     }
 
