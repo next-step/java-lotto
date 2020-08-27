@@ -42,9 +42,13 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
+    /*public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
+    }*/
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

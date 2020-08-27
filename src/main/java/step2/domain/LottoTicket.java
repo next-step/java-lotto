@@ -22,7 +22,7 @@ public class LottoTicket {
                 lottoNumbersList
                 .stream()
                 .map(LottoNumbers::getLottoNumbers)
-                .map(winningLottoNumbers::getMatchingCount)
+                .map(winningLottoNumbers::matchCount)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return new LottoResult(map);
     }
