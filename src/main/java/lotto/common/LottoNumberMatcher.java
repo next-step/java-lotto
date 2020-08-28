@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoTicket;
 
 public class LottoNumberMatcher {
@@ -32,17 +33,14 @@ public class LottoNumberMatcher {
         matchResult.putIfAbsent(matchCount, 1);
     }
 
-    public LottoNumberMatcher(Map<Integer, Integer> matchResult) {
-        this.matchResult = matchResult;
+    public LottoMatchResult match(long money) {
+        double profit = calculateProfit(money);
+        return new LottoMatchResult(matchResult, profit);
     }
 
-    public double calculateProfit(long money) {
+    private double calculateProfit(long money) {
         long totalPrice = LottoPriceInfo.calculateTotalPrice(matchResult);
         return Math.ceil(totalPrice * 100.0 / money) / 100.0;
-    }
-
-    public int getMatchTicketCount(int matchCount) {
-        return matchResult.getOrDefault(matchCount, 0);
     }
 
     @Override

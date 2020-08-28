@@ -2,21 +2,16 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.common.LottoTicketMachine;
-import lotto.view.OutputView;
 
 public class LottoSeller {
 
     private static final int LOTTO_TICKET_PRICE = 1_000;
 
-    private LottoTicketMachine lottoTicketMachine;
     private int ticketCount;
 
     public LottoSeller(int money) {
         validate(money);
         this.ticketCount = money / LOTTO_TICKET_PRICE;
-        this.lottoTicketMachine = new LottoTicketMachine();
-
-        OutputView.printTicketCount(ticketCount);
     }
 
     private void validate(int money) {
@@ -26,11 +21,11 @@ public class LottoSeller {
     }
 
     public List<LottoTicket> sellTickets() {
-        return lottoTicketMachine.issueTickets(ticketCount);
+        return LottoTicketMachine.issueTickets(ticketCount);
     }
 
     public LottoTicket getWinningTicket(String winningNumbers) {
-        return lottoTicketMachine.issueTicket(winningNumbers);
+        return LottoTicketMachine.issueTicket(winningNumbers);
     }
 
     public int getTicketCount() {

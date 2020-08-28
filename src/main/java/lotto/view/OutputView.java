@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.common.LottoNumberMatcher;
 import lotto.common.LottoPriceInfo;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoSeller;
 import lotto.domain.LottoTicket;
 
@@ -17,26 +17,27 @@ public class OutputView {
         System.out.println(lottoSeller.getTicketCount() + "개를 구매했습니다.");
     }
 
-    public static void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + "개를 구매했습니다.");
-    }
-
     public static void printBuyingTickets(List<LottoTicket> lottoTickets) {
         lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.toString()));
     }
 
-    public static void printResult(LottoNumberMatcher lottoNumberMatcher) {
+    public static void printResult(LottoMatchResult lottoMatchResult) {
+        printMatchResult(lottoMatchResult);
+        printProfit(lottoMatchResult.getProfit());
+    }
+
+    private static void printMatchResult(LottoMatchResult lottoMatchResult) {
         System.out.println("당첨 통계\n---------");
         Arrays.stream(LottoPriceInfo.values())
               .forEach(info -> {
-                  int matchTicketCount = info.matchTicketCount(lottoNumberMatcher);
+                  int matchTicketCount = info.matchTicketCount(lottoMatchResult);
                   String message = info.getMatchCount() + "개 일치(" + info.getPrice() + "원) - "
                         + matchTicketCount + "개";
                   System.out.println(message);
               });
     }
 
-    public static void printProfit(double profit) {
+    private static void printProfit(double profit) {
         String message = "총 수익률은 " + profit + "입니다.";
 
         if (profit < 1) {

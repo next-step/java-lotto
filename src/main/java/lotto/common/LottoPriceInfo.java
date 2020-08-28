@@ -2,6 +2,7 @@ package lotto.common;
 
 import java.util.Arrays;
 import java.util.Map;
+import lotto.domain.LottoMatchResult;
 
 public enum LottoPriceInfo {
     LOTTO_RANK_4(3, 5_000),
@@ -29,8 +30,8 @@ public enum LottoPriceInfo {
         return this.price * matchTicketCount;
     }
 
-    public int matchTicketCount(LottoNumberMatcher lottoNumberMatcher) {
-        return lottoNumberMatcher.getMatchTicketCount(this.matchCount);
+    public int matchTicketCount(LottoMatchResult lottoMatchResult) {
+        return lottoMatchResult.getMatchTicketCount(this.matchCount);
     }
 
     public Integer getMatchCount() {

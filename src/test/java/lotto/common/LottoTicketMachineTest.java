@@ -1,6 +1,6 @@
 package lotto.common;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Set;
@@ -17,10 +17,8 @@ class LottoTicketMachineTest {
     @Test
     void issueTickets() {
         int ticketCount = 3;
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
-
         //when
-        List<LottoTicket> lottoTickets = lottoTicketMachine.issueTickets(ticketCount);
+        List<LottoTicket> lottoTickets = LottoTicketMachine.issueTickets(ticketCount);
 
         //then
         assertEquals(ticketCount, lottoTickets.size());
@@ -33,8 +31,7 @@ class LottoTicketMachineTest {
         String numberValues = "1, 2, 3, 4, 5, 6";
 
         //when
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
-        LottoTicket actual = lottoTicketMachine.issueTicket(numberValues);
+        LottoTicket actual = LottoTicketMachine.issueTicket(numberValues);
 
         //then
         Set<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)

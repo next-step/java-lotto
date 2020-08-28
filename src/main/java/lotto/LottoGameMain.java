@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.common.LottoNumberMatcher;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoSeller;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
@@ -23,8 +24,7 @@ public class LottoGameMain {
 
         LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lottoTickets,
               winningTicket);
-        double profit = lottoNumberMatcher.calculateProfit(money);
-        OutputView.printProfit(profit);
-        OutputView.printResult(lottoNumberMatcher);
+        LottoMatchResult matchResult = lottoNumberMatcher.match(money);
+        OutputView.printResult(matchResult);
     }
 }

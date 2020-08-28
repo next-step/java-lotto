@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoNumberMatcherTest {
 
+    private long money = 4_000_000_000L;
     private LottoNumberMatcher lottoNumberMatcher;
 
     @BeforeEach
@@ -41,26 +43,17 @@ class LottoNumberMatcherTest {
         lottoNumberMatcher = new LottoNumberMatcher(lottoTickets, winningTicket);
     }
 
-    @DisplayName("당첨통계를 구한다.")
+    @DisplayName("당첨결과를 구한다.")
     @Test
-    void calculateAverage() {
+    void match() {
         //then
         Map<Integer, Integer> matchResult = new HashMap<>();
         matchResult.put(5, 1);
         matchResult.put(6, 1);
-        LottoNumberMatcher expected = new LottoNumberMatcher(matchResult);
+        LottoMatchResult expected = new LottoMatchResult(matchResult, 0.51);
 
-        assertEquals(expected, lottoNumberMatcher);
-    }
+        LottoMatchResult actual = lottoNumberMatcher.match(money);
 
-    @DisplayName("총 수익률 계산")
-    @Test
-    void calculateProfit() {
-        long money = 4_000_000_000L;
-        double actual = lottoNumberMatcher.calculateProfit(money);
-
-        //then
-        double expected = 0.51;
         assertEquals(expected, actual);
     }
 }
