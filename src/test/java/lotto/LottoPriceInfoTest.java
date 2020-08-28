@@ -1,14 +1,14 @@
 package lotto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoPriceInfoTest {
+
     @DisplayName("티켓수에 따른 상금 계산")
     @Test
     void calculatePrice() {
@@ -16,7 +16,7 @@ class LottoPriceInfoTest {
         int expected = 5_000;
 
         //when
-        int actual = LottoPriceInfo.MATCH_COUNT_3.calculatePrice(1);
+        int actual = LottoPriceInfo.LOTTO_RANK_4.calculatePrice(1);
 
         //then
         assertEquals(expected, actual);

@@ -7,13 +7,13 @@ public class LottoSeller {
 
     private static int LOTTO_TICKET_PRICE = 1_000;
 
-    private LottoMachine lottoMachine;
+    private LottoTicketMachine lottoTicketMachine;
     private int ticketCount;
 
     public LottoSeller(int money) {
         validate(money);
         this.ticketCount = money / LOTTO_TICKET_PRICE;
-        this.lottoMachine = new LottoMachine();
+        this.lottoTicketMachine = new LottoTicketMachine();
 
         OutputView.printTicketCount(ticketCount);
     }
@@ -25,11 +25,11 @@ public class LottoSeller {
     }
 
     public List<LottoTicket> sellTickets() {
-        return lottoMachine.issueTickets(ticketCount);
+        return lottoTicketMachine.issueTickets(ticketCount);
     }
 
     public LottoTicket getWinningTicket(String winningNumbers) {
-        return lottoMachine.issueTicket(winningNumbers);
+        return lottoTicketMachine.issueTicket(winningNumbers);
     }
 
     public int getTicketCount() {

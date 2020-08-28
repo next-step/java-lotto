@@ -6,7 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoMachine {
+public class LottoTicketMachine {
+
     public List<LottoTicket> issueTickets(int ticketCount) {
         return Stream.generate(this::issueTicket)
               .limit(ticketCount)

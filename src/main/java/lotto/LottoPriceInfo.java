@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoPriceInfo {
-    MATCH_COUNT_3(3, 5_000),
-    MATCH_COUNT_4(4, 50_000),
-    MATCH_COUNT_5(5, 1_500_000),
-    MATCH_COUNT_6(6, 2_000_000_000);
+    LOTTO_RANK_4(3, 5_000),
+    LOTTO_RANK_3(4, 50_000),
+    LOTTO_RANK_2(5, 1_500_000),
+    LOTTO_RANK_1(6, 2_000_000_000);
 
     private Integer matchCount;
     private Integer price;
@@ -19,17 +19,25 @@ public enum LottoPriceInfo {
 
     public static int calculateTotalPrice(Map<Integer, Integer> matchResult) {
         return Arrays.stream(LottoPriceInfo.values())
-                .mapToInt(lottoPriceInfo
-                        -> matchResult.getOrDefault(lottoPriceInfo.matchCount, 0) * lottoPriceInfo.price)
-                .sum();
+              .mapToInt(lottoPriceInfo
+                    -> matchResult.getOrDefault(lottoPriceInfo.matchCount, 0)
+                    * lottoPriceInfo.price)
+              .sum();
     }
 
     public int calculatePrice(int matchTicketCount) {
         return this.price * matchTicketCount;
     }
 
-    public String getMatchResultMessage(LottoNumberMatcher lottoNumberMatcher) {
-        int matchTicketCount = lottoNumberMatcher.getMatchTicketCount(this.matchCount);
-        return this.matchCount + "개 일치(" + this.price + "원) - " + matchTicketCount + "개";
+    public int matchTicketCount(LottoNumberMatcher lottoNumberMatcher) {
+        return lottoNumberMatcher.getMatchTicketCount(this.matchCount);
+    }
+
+    public Integer getMatchCount() {
+        return matchCount;
+    }
+
+    public Integer getPrice() {
+        return price;
     }
 }

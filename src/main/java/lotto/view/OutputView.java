@@ -1,9 +1,11 @@
 package lotto.view;
 
-import lotto.*;
-
 import java.util.Arrays;
 import java.util.List;
+import lotto.LottoNumberMatcher;
+import lotto.LottoPriceInfo;
+import lotto.LottoSeller;
+import lotto.LottoTicket;
 
 public class OutputView {
 
@@ -26,10 +28,12 @@ public class OutputView {
     public static void printResult(LottoNumberMatcher lottoNumberMatcher) {
         System.out.println("당첨 통계\n---------");
         Arrays.stream(LottoPriceInfo.values())
-                .forEach(info -> {
-                    String matchResultMessage = info.getMatchResultMessage(lottoNumberMatcher);
-                    System.out.println(matchResultMessage);
-                });
+              .forEach(info -> {
+                  int matchTicketCount = info.matchTicketCount(lottoNumberMatcher);
+                  String message = info.getMatchCount() + "개 일치(" + info.getPrice() + "원) - "
+                        + matchTicketCount + "개";
+                  System.out.println(message);
+              });
     }
 
     public static void printProfit(double profit) {

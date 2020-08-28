@@ -3,6 +3,7 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
     private static final Integer MIN_LOTTO_NUMBER = 1;
     private static final Integer MAX_LOTTO_NUMBER = 45;
 
@@ -20,7 +21,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validate(Integer number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(MIN_LOTTO_NUMBER + " - " + MAX_LOTTO_NUMBER + " 사이 번호만 등록 가능합니다.");
+            throw new IllegalArgumentException(
+                  MIN_LOTTO_NUMBER + " - " + MAX_LOTTO_NUMBER + " 사이 번호만 등록 가능합니다.");
         }
     }
 
