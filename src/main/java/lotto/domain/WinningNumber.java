@@ -1,37 +1,21 @@
 package lotto.domain;
 
-import lotto.utils.LottoValidationUtils;
-import lotto.utils.StringUtils;
+public class WinningNumber {
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+    private LottoTicket winningNumbers;
+    private int bonusNumber;
 
-public class WinningNumber extends LottoTicket {
-
-    private static final String INPUT_WINNING_NUMBER_DELIMITER = ", ";
-
-    List<Integer> winningNumbers;
-
-    public WinningNumber() {
-        super();
-        this.winningNumbers = new ArrayList<>();
+    public WinningNumber(LottoTicket winningNumbers, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> setWinningNumber(String winningNumber) {
-        String[] winningNumberArray = new StringUtils(winningNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
-        LottoValidationUtils.invalidWinningNumberSizeException(winningNumberArray);
-        isWinningNumberAdd(winningNumberArray);
-        validateLottoRange(winningNumbers);
-        return winningNumbers;
+    public boolean isContainsLottoNumber(int lottoNumber) {
+        return winningNumbers.getLottoTicket().contains(lottoNumber);
     }
 
-    private boolean isWinningNumberAdd(String[] winningNumberArray) {
-        return this.winningNumbers.addAll(Arrays.stream(winningNumberArray)
-                .map(number -> new StringUtils(number).toInt())
-                .sorted()
-                .collect(Collectors.toList()));
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
 }

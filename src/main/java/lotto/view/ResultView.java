@@ -22,9 +22,10 @@ public class ResultView {
     }
 
     public static void printLottoResult(WinningResult winningResult) {
-        System.out.println("3개 일치 (" + Rank.FOURTH.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.FOURTH) + "개");
-        System.out.println("4개 일치 (" + Rank.THIRD.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.THIRD) + "개");
-        System.out.println("5개 일치 (" + Rank.SECOND.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.SECOND) + "개");
+        System.out.println("3개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.FIFTH) + "개");
+        System.out.println("4개 일치 (" + Rank.FOURTH.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.FOURTH) + "개");
+        System.out.println("5개 일치 (" + Rank.THIRD.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.THIRD) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(" + Rank.SECOND.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.SECOND) + "개");
         System.out.println("6개 일치 (" + Rank.FIRST.getWinningMoney() + "원)- " + winningResult.getWinningResult(Rank.FIRST) + "개");
     }
 

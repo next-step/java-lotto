@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static lotto.utils.LottoValidationUtils.PRINT_INVALID_LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -30,11 +29,20 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("천원 단위의 값을 지불하지 않았을 경우 Exception 발생")
-    void inputPriceValidation() {
+    void validateInputPrice() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoValidationUtils.invalidLottoTicketInputPrice(11500, LottoService.LOTTO_TICKET_PRICE);
-                }).withMessageMatching(PRINT_INVALID_LOTTO_PRICE);
+                    LottoValidationUtils.validateLottoTicketPrice(11500, LottoService.LOTTO_TICKET_PRICE);
+                });
+    }
+
+    @Test
+    @DisplayName("음수를 입력할 경우 Exceptino 발생")
+    void validateInputPriceToNumber() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    LottoValidationUtils.validateInputNegativeNumber(-1);
+                });
     }
 
 }

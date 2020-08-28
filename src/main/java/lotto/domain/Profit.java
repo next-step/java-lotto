@@ -7,8 +7,8 @@ import static lotto.utils.CommonConstant.NUMBER_ZERO;
 
 public class Profit {
 
-    public static final String PATTERN = "0.00";
-    public static final int SCALE_NUMBER = 2;
+    private static final String PATTERN = "0.00";
+    private static final int SCALE_NUMBER = 2;
 
     private WinningResult winningResult;
 
@@ -20,7 +20,7 @@ public class Profit {
         int winningAmount = NUMBER_ZERO;
 
         for (Rank rank : Rank.values()) {
-            int winningNumber = this.winningResult.getWinningResult(rank);
+            long winningNumber = winningResult.getWinningResult(rank);
             winningAmount += winningNumber * rank.getWinningMoney();
         }
         return winningAmount;
@@ -29,20 +29,26 @@ public class Profit {
     public String getRateOfReturn(int paymentAmount, int winningMoney) {
         String number = toString(paymentAmount, winningMoney);
         BigDecimal bigDecimal = new BigDecimal(number).setScale(SCALE_NUMBER, BigDecimal.ROUND_FLOOR);
-        String reteOfReturn = new DecimalFormat(PATTERN).format(bigDecimal);
-        return reteOfReturn;
+        return new DecimalFormat(PATTERN).format(bigDecimal);
     }
 
     public String toString(int paymentAmount, int winningMoney) {
         double lottoPaymentPrice = toDouble(paymentAmount);
         double lottoWinningMoney = toDouble(winningMoney);
-        double profit = lottoWinningMoney / lottoPaymentPrice;
-        return String.valueOf(profit);
+        return toString(getProfit(lottoPaymentPrice, lottoWinningMoney));
+    }
+
+    private double getProfit(double lottoPaymentPrice, double lottoWinningMoney) {
+        return lottoWinningMoney / lottoPaymentPrice;
     }
 
     private double toDouble(int value) {
         String number = String.valueOf(value);
         return Double.parseDouble(number);
+    }
+
+    private String toString(double value) {
+        return String.valueOf(value);
     }
 
     public double getBaseValue(String profitValue) {

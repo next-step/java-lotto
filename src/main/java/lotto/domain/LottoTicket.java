@@ -7,64 +7,53 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static lotto.utils.CommonConstant.*;
-import static lotto.utils.LottoValidationUtils.INVALID_DUPLICATION_NUMBER;
-import static lotto.utils.LottoValidationUtils.PRINT_LOTTO_NUMBER;
 
 public class LottoTicket {
 
     private List<Integer> lottoTicket;
 
-    public LottoTicket() {
-    }
-
     public LottoTicket(List<Integer> lottoTicket) {
         this.lottoTicket = lottoTicket;
-        validateLottoRange(lottoTicket);
-        validateLottoSize(lottoTicket);
-        LottoNumberDuplication(lottoTicket);
+        LottoValidationUtils.validateLottoNumberRange(lottoTicket);
+        LottoValidationUtils.validateLottoNumberSizeToSix(lottoTicket);
+        LottoValidationUtils.validateNumberDuplication(lottoTicket);
     }
 
-    public int getMatchCount(List<Integer> winningNumbers) {
+    public Rank matchRank(final WinningNumber winningNumber) {
+        int matchCount = getMatchCount(winningNumber);
+        boolean hasBonusNumber = isBonusNumber(winningNumber, matchCount);
+
+        return Rank.valudOf(matchCount, hasBonusNumber);
+    }
+
+    public int getMatchCount(final WinningNumber winningNumbers) {
         return IntStream.range(NUMBER_ZERO, lottoTicket.size())
-                .map(i -> getContainsLottoNumber(winningNumbers, i))
+                .map(number -> getContainsLottoNumber(winningNumbers, number))
                 .sum();
     }
 
-    private int getContainsLottoNumber(List<Integer> winningNumbers, int i) {
-        return winningNumbers.contains(getLottoTicketNumber(i)) ? NUMBER_ONE : NUMBER_ZERO;
+    private int getContainsLottoNumber(final WinningNumber winningNumbers, int number) {
+        return winningNumbers.isContainsLottoNumber(getLottoTicketNumber(number)) ? NUMBER_ONE : NUMBER_ZERO;
     }
 
-    public void validateLottoRange(List<Integer> lottoTicket) {
-        for (int number : lottoTicket) {
-            LottoValidationUtils.lottoNumberRangeCheck(number);
-        }
+    private boolean isBonusNumber(final WinningNumber winningNumber, int matchCount) {
+        return (matchCount == NUMBER_FIVE) && isContainsBonusNumber(winningNumber);
     }
 
-    private void validateLottoSize(List<Integer> lottoTicket) {
-        if (lottoTicket.size() != NUMBER_SIX) {
-            throw new RuntimeException(PRINT_LOTTO_NUMBER);
-        }
-    }
-
-    public void LottoNumberDuplication(List<Integer> lottoTicket) {
-        IntStream.range(NUMBER_ZERO, lottoTicket.size())
-                .filter(i -> IntStream.range(NUMBER_ZERO, i)
-                .anyMatch(j -> lottoTicket.get(i).equals(lottoTicket.get(j))))
-                .forEach(i -> {
-                    throw new IllegalArgumentException(INVALID_DUPLICATION_NUMBER);
-                });
+    public boolean isContainsBonusNumber(final WinningNumber winningNumber) {
+        return lottoTicket.contains(winningNumber.getBonusNumber());
     }
 
     public List<Integer> getLottoTicket() {
         return Collections.unmodifiableList(this.lottoTicket);
     }
 
-    public int size() {
-        return lottoTicket.size();
-    }
-
     public Integer getLottoTicketNumber(int index) {
         return lottoTicket.get(index);
+    }
+
+    public int size() {
+        return lottoTicket.size();
     }
 
     @Override
