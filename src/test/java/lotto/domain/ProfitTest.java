@@ -6,27 +6,46 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfitTest {
 
+    private List<LottoTicket> mockLottoTickets;
+    private LottoTicket winningNumber;
+    private int bonusNumber;
+    private WinningNumber winningNumbers;
     private Profit profit;
     private WinningResult winningResult;
 
     @BeforeEach
     void setUp() {
-        winningResult = new WinningResult();
+        mockLottoTickets = initMockLottoTickets();
+        winningNumber = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        bonusNumber = 7;
+        winningNumbers = new WinningNumber(winningNumber, bonusNumber);
+
+        LottoTickets lottoTickets = new LottoTickets(mockLottoTickets);
+        winningResult = lottoTickets.matchResult(winningNumbers);
         profit = new Profit(winningResult);
-        winningResult.putRank(Rank.FOURTH);
-        winningResult.putRank(Rank.FOURTH);
-        winningResult.putRank(Rank.THIRD);
+    }
+
+    private List<LottoTicket> initMockLottoTickets() {
+        mockLottoTickets = new ArrayList<>();
+        mockLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 20, 26)));
+        mockLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 11)));
+        mockLottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 15, 35, 37)));
+        return mockLottoTickets;
     }
 
     @Test
     @DisplayName("당첨 금액 확인")
     void checkTheWinningAmount() {
         int result = profit.getWinningAmount();
-        assertThat(result).isEqualTo(1_600_000);
+        assertThat(result).isEqualTo(105_000);
     }
 
     @ParameterizedTest
@@ -36,4 +55,5 @@ public class ProfitTest {
         String result = profit.getRateOfReturn(price, winningAmount);
         assertThat(result).isEqualTo(expected);
     }
+
 }
