@@ -11,8 +11,8 @@ public class LottoPapers {
     private static final String LOTTO_PAPER_JOINING_DELIMITER = "\n";
     private final List<LottoPaper> papers;
 
-    public LottoPapers(Integer paperCount) {
-        papers = makeAutoLottoNums(paperCount);
+    public LottoPapers(Integer inputMoney) {
+        papers = makeAutoLottoNums(inputMoney);
     }
 
     private List<LottoPaper> makeAutoLottoNums(Integer inputMoney) {

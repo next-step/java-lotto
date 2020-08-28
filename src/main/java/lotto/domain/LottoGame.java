@@ -7,9 +7,9 @@ public class LottoGame {
 
     public static void start() {
         ResultView.printInputMsg();
-        Integer inputMoney = Integer.parseInt(InputView.inputText());
+        InputMoney inputMoney = new InputMoney(InputView.inputText());
 
-        LottoPapers lottoPapers = new LottoPapers(inputMoney);
+        LottoPapers lottoPapers = new LottoPapers(inputMoney.getMoney());
         ResultView.printBuyCount(lottoPapers.getPapersCount());
 
         System.out.println(lottoPapers.getPaperNumbersToString());
@@ -24,6 +24,6 @@ public class LottoGame {
 
         ResultView.printResult(winningResult.getMatchCountResult());
         ResultView.printDelimiter();
-        ResultView.printEarningsRate(winningResult.calculationEarningsRate(inputMoney));
+        ResultView.printEarningsRate(winningResult.calculationEarningsRate(inputMoney.getMoney()));
     }
 }
