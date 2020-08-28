@@ -10,6 +10,13 @@ public class StringCalculator {
     private static final int GROUP_INDEX2 = 2;
     private static Pattern pattern = Pattern.compile(PATTERN_CRITERIA);
 
+    private StringCalculator() {
+        /**
+         * 클래스 내부에서도 호출이 안 되도록 접근 제어자를 private으로 변경하고 예외를 던진다.
+         */
+        throw new AssertionError();
+    }
+
     public static int calculateInputValue(String inputValue) {
         if (inputValue == null || inputValue.isEmpty())
             return 0;
