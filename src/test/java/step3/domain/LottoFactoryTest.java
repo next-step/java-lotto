@@ -31,24 +31,7 @@ public class LottoFactoryTest {
     @Test
     @DisplayName("로또번호 비교")
     public void makeLottoWithStringTest() {
-        lottoFactory = new LottoFactory(0);
+        lottoFactory = new LottoFactory();
         assertThat(lottoFactory.makeLottoWithString("1,2,3,4,5,6")).isEqualTo(checkLotto);
-    }
-
-    @Test
-    @DisplayName("로또 구매 개수 테스트")
-    public void buyPriceTest() {
-        lottoFactory = new LottoFactory(14000);
-        assertThat(lottoFactory.buyQuantity()).isEqualTo(14);
-    }
-
-    @Test
-    @DisplayName("로또 살 금액이 아닌 금액 테스트")
-    public void buyPriceTest2() {
-        assertThatThrownBy(() -> {
-            lottoFactory = new LottoFactory(900);
-            int quantity = lottoFactory.buyQuantity();
-        }).isInstanceOf(RuntimeException.class);
-
     }
 }

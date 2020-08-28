@@ -17,7 +17,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        makeLotto = new LottoFactory(0);
+        makeLotto = new LottoFactory();
         lotto = makeLotto.makeLottoWithString("1,2,3,4,5,6");
         winningLotto= makeLotto.makeLottoWithString("1,2,3,8,9,10");
 

@@ -20,7 +20,7 @@ public class WinningStatistics {
         if (lottoList.size() == 0) {
             return 0;
         }
-        return (float) totalWinningPrice / (LottoFactory.LOTTO_PRICE * lottoList.size());
+        return (float) totalWinningPrice / (LottoGame.LOTTO_PRICE * lottoList.size());
     }
 
     public int getTotalWinningPrice() {

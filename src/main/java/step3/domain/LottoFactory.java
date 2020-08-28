@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBER = 6;
 
     //다른 분의 리뷰를 살펴보던 중 final을 잘 쓸 수 있는 코드가 있어서 참고해서 사용해보았습니다.
@@ -18,15 +17,15 @@ public class LottoFactory {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private int buyPrice;
 
-    public LottoFactory(int buyPrice) {
-        this.buyPrice = buyPrice;
+
+    public LottoFactory() {
+
     }
 
-    public List<Lotto> makeLottoRandomList() {
+    public List<Lotto> makeLottoRandomList(int buyQuantity) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < buyQuantity(); i++) {
+        for (int i = 0; i < buyQuantity; i++) {
             lottoList.add(makeLottoRandom());
         }
         return lottoList;
@@ -57,12 +56,5 @@ public class LottoFactory {
             lottoNumber.add(new LottoNumber(StringUtil.stringToInt(numberValue)));
         }
         return new Lotto(lottoNumber);
-    }
-
-    public int buyQuantity() {
-        if (buyPrice / LOTTO_PRICE > 0) {
-            return buyPrice / LOTTO_PRICE;
-        }
-        throw new RuntimeException("구매금액은 1000원 이상으로 입력해주세요");
     }
 }

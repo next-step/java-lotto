@@ -22,7 +22,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        makeLotto = new LottoFactory(0);
+        makeLotto = new LottoFactory();
         lotto = makeLotto.makeLottoWithString("1,2,3,4,5,6");
 
         lottoList = new ArrayList<>();
