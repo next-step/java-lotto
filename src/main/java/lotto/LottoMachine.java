@@ -1,39 +1,31 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
-    private final List<Integer> lottoNumbers;
-    private int ticketCount;
-
-    public LottoMachine(int ticketCount) {
-        this.ticketCount = ticketCount;
-        this.lottoNumbers = new ArrayList<>();
-        initializeLottoNumbers();
+    public List<LottoTicket> issueTickets(int ticketCount) {
+        return Stream.generate(this::issueTicket)
+              .limit(ticketCount)
+              .collect(Collectors.toList());
     }
 
-    private void initializeLottoNumbers() {
-        int minimumLottoNumber = 1;
-        int maximumLottoNumber = 45;
-        IntStream.rangeClosed(minimumLottoNumber, maximumLottoNumber)
-                .forEach(lottoNumbers::add);
+    public LottoTicket issueTicket(String lottoNumberParam) {
+        Set<LottoNumber> lottoNumbers = convertToLottoNumbers(lottoNumberParam);
+        return new LottoTicket(lottoNumbers);
     }
 
-    public List<LottoTicket> issueTickets() {
-        return IntStream.range(0, ticketCount)
-                .mapToObj(number -> issueTicket())
-                .collect(Collectors.toList());
+    private Set<LottoNumber> convertToLottoNumbers(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(","))
+              .map(numberValue -> new LottoNumber(numberValue.trim()))
+              .collect(Collectors.toSet());
     }
 
     private LottoTicket issueTicket() {
-        Collections.shuffle(this.lottoNumbers);
-        List<Integer> sixNumbers = new ArrayList<>(this.lottoNumbers.subList(0, 6));
-        Collections.sort(sixNumbers);
-
+        Set<LottoNumber> sixNumbers = LottoShuffleMachine.getSixNumbers();
         return new LottoTicket(sixNumbers);
     }
 }

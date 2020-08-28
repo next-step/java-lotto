@@ -15,6 +15,10 @@ public class OutputView {
         System.out.println(lottoSeller.getTicketCount() + "개를 구매했습니다.");
     }
 
+    public static void printTicketCount(int ticketCount) {
+        System.out.println(ticketCount + "개를 구매했습니다.");
+    }
+
     public static void printBuyingTickets(List<LottoTicket> lottoTickets) {
         lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.toString()));
     }

@@ -17,11 +17,12 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Integer> inputLastweekWinningNumbers() {
+    public static String inputLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(scanner.nextLine().split(","))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
+        return scanner.nextLine();
+//        return Arrays.stream(scanner.nextLine().split(","))
+//                .map(number -> Integer.parseInt(number.trim()))
+//                .collect(Collectors.toList());
     }
 
 }

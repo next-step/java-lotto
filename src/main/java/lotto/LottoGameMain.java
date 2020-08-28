@@ -1,24 +1,27 @@
 package lotto;
 
+import java.util.List;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoGameMain {
+
     public static void main(String[] args) {
         int money = InputView.inputMoney();
+
         LottoSeller lottoSeller = new LottoSeller(money);
         OutputView.printTicketCount(lottoSeller);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoSeller.getTicketCount());
-        List<LottoTicket> lottoTickets = lottoMachine.issueTickets();
+        List<LottoTicket> lottoTickets = lottoSeller.sellTickets();
         OutputView.printBuyingTickets(lottoTickets);
 
-        List<Integer> lastWeekWinningNumbers = InputView.inputLastweekWinningNumbers();
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lastWeekWinningNumbers, lottoTickets);
+        String winningNumbers = InputView.inputLastWeekWinningNumbers();
+        LottoTicket winningTicket = lottoSeller.getWinningTicket(winningNumbers);
+
+        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lottoTickets,
+              winningTicket);
         double profit = lottoNumberMatcher.calculateProfit(money);
-        OutputView.printResult(lottoNumberMatcher);
         OutputView.printProfit(profit);
+        OutputView.printResult(lottoNumberMatcher);
     }
 }

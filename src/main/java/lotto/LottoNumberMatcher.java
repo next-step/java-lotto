@@ -5,11 +5,19 @@ import java.util.*;
 public class LottoNumberMatcher {
     private Map<Integer, Integer> matchResult;
 
-    public LottoNumberMatcher(List<Integer> lastWeekWinningNumbers, List<LottoTicket> lottoTickets) {
-        this.matchResult = new HashMap<>();
+//    public LottoNumberMatcher(List<Integer> lastWeekWinningNumbers, List<LottoTicket> lottoTickets) {
+//        this.matchResult = new HashMap<>();
+//
+//        lottoTickets.forEach(lottoTicket -> {
+//            int matchCount = lottoTicket.matchNumbers(lastWeekWinningNumbers);
+//            addMatchCount(matchCount);
+//        });
+//    }
 
+    public LottoNumberMatcher(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
+        this.matchResult = new HashMap<>();
         lottoTickets.forEach(lottoTicket -> {
-            int matchCount = lottoTicket.matchNumbers(lastWeekWinningNumbers);
+            int matchCount = lottoTicket.matchNumbers(winningTicket);
             addMatchCount(matchCount);
         });
     }
