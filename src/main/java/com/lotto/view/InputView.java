@@ -46,6 +46,7 @@ public class InputView {
                 .map(LotteryNumber::getLotteryNumber)
                 .collect(Collectors.toSet());
     }
+
     private LotteryNumber enterBonusLotteryNumber() throws NumberFormatException {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = SCANNER.nextLine();
