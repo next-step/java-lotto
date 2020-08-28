@@ -1,12 +1,14 @@
-package lotto;
+package lotto.common;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import lotto.domain.LottoTicket;
 
 public class LottoNumberMatcher {
 
+    public static final int MINIMUM_MATCH_COUNT = 3;
     private Map<Integer, Integer> matchResult;
 
     public LottoNumberMatcher(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
@@ -18,7 +20,7 @@ public class LottoNumberMatcher {
     }
 
     private void addMatchCount(int matchCount) {
-        if (matchCount < 3) {
+        if (matchCount < MINIMUM_MATCH_COUNT) {
             return;
         }
 

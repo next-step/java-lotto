@@ -1,11 +1,12 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
+import lotto.common.LottoTicketMachine;
 import lotto.view.OutputView;
 
 public class LottoSeller {
 
-    private static int LOTTO_TICKET_PRICE = 1_000;
+    private static final int LOTTO_TICKET_PRICE = 1_000;
 
     private LottoTicketMachine lottoTicketMachine;
     private int ticketCount;

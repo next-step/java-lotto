@@ -2,10 +2,10 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.LottoNumberMatcher;
-import lotto.LottoPriceInfo;
-import lotto.LottoSeller;
-import lotto.LottoTicket;
+import lotto.common.LottoNumberMatcher;
+import lotto.common.LottoPriceInfo;
+import lotto.domain.LottoSeller;
+import lotto.domain.LottoTicket;
 
 public class OutputView {
 

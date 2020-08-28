@@ -1,6 +1,9 @@
 package lotto;
 
 import java.util.List;
+import lotto.common.LottoNumberMatcher;
+import lotto.domain.LottoSeller;
+import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
