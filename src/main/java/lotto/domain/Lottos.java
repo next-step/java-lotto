@@ -17,8 +17,8 @@ public class Lottos {
         this.lottoCount = lottoCount;
     }
 
-    public static Lottos of(int lottoPrice) {
-        int count = lottoPrice / LOTTO_PRICE;
+    public static Lottos of(int paidMoney) {
+        int count = paidMoney / LOTTO_PRICE;
         return new Lottos(
                 Stream.generate(() -> Lotto.createLotto())
                         .limit(count)

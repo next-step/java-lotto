@@ -7,9 +7,9 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입금액을 입력해 주세요.");
-        int lottoPrice = Integer.parseInt(scanner.nextLine());
+        int paidMoney = Integer.parseInt(scanner.nextLine());
 
-        return lottoPrice;
+        return paidMoney;
     }
 
     public static String[] getWinningNumbers() {
