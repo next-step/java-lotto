@@ -9,7 +9,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
     private static final int NUMBER_COUNT = 6;
-    private static final List<LotteryNumber> LOTTERY_NUMBER_LIST = IntStream.range(START_NUMBER, START_NUMBER + END_NUMBER)
+    private static final List<LotteryNumber> LOTTERY_NUMBER_LIST = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
             .mapToObj(LotteryNumber::new)
             .collect(Collectors.toList());
     private static final List<LotteryNumber> SHUFFLED_LIST = new ArrayList<>(LOTTERY_NUMBER_LIST);

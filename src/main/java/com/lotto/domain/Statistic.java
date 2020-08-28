@@ -11,7 +11,7 @@ public class Statistic {
     public Statistic(Rank rank, List<Rank> ranks) {
         this.rank = rank;
         this.lotteryCount = (int) ranks.stream()
-                .filter(_rank -> this.rank == _rank)
+                .filter(item -> this.rank == item)
                 .count();
     }
 
