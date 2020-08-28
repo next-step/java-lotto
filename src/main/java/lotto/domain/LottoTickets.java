@@ -12,13 +12,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-//    public static LottoStore of(List<LottoTicket> autoLottoTickets, List<LottoTicket> manualLottoTickets) {
-//        return new LottoStore(Stream.of(autoLottoTickets, manualLottoTickets)
-//                .flatMap(Collection::stream)
-//                .collect(Collectors.toList()));
-//    }
-
-    public WinningResult match(final WinningNumber winningNumber) {
+    public WinningResult matchResult(final WinningNumber winningNumber) {
         return new WinningResult(lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.matchRank(winningNumber))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));

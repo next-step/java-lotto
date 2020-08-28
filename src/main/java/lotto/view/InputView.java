@@ -1,8 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoStore;
+import lotto.domain.LottoTickets;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import static lotto.utils.CommonConstant.NUMBER_ZERO;
 
@@ -21,10 +22,10 @@ public class InputView {
         System.out.println(quantity + BUY_LOTTO_QUANTITY);
     }
 
-    public static void printLottoTickets(LottoStore lottoStore) {
-        for (int i = NUMBER_ZERO; i < lottoStore.size(); i++) {
-            System.out.println(lottoStore.getLottoTicket(i));
-        }
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        IntStream.range(NUMBER_ZERO, lottoTickets.size())
+                .mapToObj(lottoTickets::getLottoTicket)
+                .forEach(System.out::println);
         System.out.println();
     }
 

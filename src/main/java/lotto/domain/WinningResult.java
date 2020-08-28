@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static lotto.utils.CommonConstant.NUMBER_ZERO;
@@ -7,7 +8,6 @@ import static lotto.utils.CommonConstant.NUMBER_ZERO;
 public class WinningResult {
 
     private Map<Rank, Long> winningResult;
-    // Count 만들기
 
     public WinningResult(Map<Rank, Long> winningResult) {
         this.winningResult = winningResult;
@@ -21,15 +21,18 @@ public class WinningResult {
         return winningResult;
     }
 
-//    public Map<Rank, Long> putRank(Rank rank) {
-//        if (winningResult.get(rank) != null) {
-//            winningResult.put(rank, winningResult.get(rank) + NUMBER_ONE);
-//        }
-//        return winningResult;
-//    }
-
     public Long getWinningResult(Rank rank) {
         return winningResult.get(rank);
     }
 
+    public Map<Rank, Long> getWinningResult() {
+        return Collections.unmodifiableMap(winningResult);
+    }
+
+    @Override
+    public String toString() {
+        return "WinningResult{" +
+                "winningResult=" + winningResult +
+                '}';
+    }
 }

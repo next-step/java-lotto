@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-
 public class WinningNumber {
 
     private LottoTicket winningNumbers;
@@ -13,12 +10,12 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isContainsBonusNumber() {
-        return winningNumbers.getLottoTicket().contains(bonusNumber);
+    public boolean isContainsLottoNumber(int lottoNumber) {
+        return winningNumbers.getLottoTicket().contains(lottoNumber);
     }
 
-    public List<Integer> getWinningNumber() {
-        return Collections.unmodifiableList(winningNumbers.getLottoTicket());
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
 }

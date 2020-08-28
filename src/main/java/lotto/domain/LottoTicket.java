@@ -16,31 +16,32 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
         LottoValidationUtils.validateLottoNumberRange(lottoTicket);
         LottoValidationUtils.validateLottoNumberSizeToSix(lottoTicket);
-        LottoValidationUtils.validateLottoNumberDuplication(lottoTicket);
+        LottoValidationUtils.validateNumberDuplication(lottoTicket);
     }
 
     public Rank matchRank(final WinningNumber winningNumber) {
-        int matchCount = getMatchCount(winningNumber.getWinningNumber());
+        int matchCount = getMatchCount(winningNumber);
         boolean hasBonusNumber = isBonusNumber(winningNumber, matchCount);
 
         return Rank.valudOf(matchCount, hasBonusNumber);
     }
 
-    public int getMatchCount(List<Integer> winningNumbers) {
+    public int getMatchCount(final WinningNumber winningNumbers) {
         return IntStream.range(NUMBER_ZERO, lottoTicket.size())
                 .map(number -> getContainsLottoNumber(winningNumbers, number))
                 .sum();
     }
 
-    private int getContainsLottoNumber(List<Integer> winningNumbers, int number) {
-        return winningNumbers.contains(getLottoTicketNumber(number)) ? NUMBER_ONE : NUMBER_ZERO;
+    private int getContainsLottoNumber(final WinningNumber winningNumbers, int number) {
+        return winningNumbers.isContainsLottoNumber(getLottoTicketNumber(number)) ? NUMBER_ONE : NUMBER_ZERO;
     }
 
-    private boolean isBonusNumber(WinningNumber winningNumber, int matchCount) {
-        if (matchCount == NUMBER_FIVE) {
-            return winningNumber.isContainsBonusNumber();
-        }
-        return false;
+    private boolean isBonusNumber(final WinningNumber winningNumber, int matchCount) {
+        return (matchCount == NUMBER_FIVE) && isContainsBonusNumber(winningNumber);
+    }
+
+    public boolean isContainsBonusNumber(final WinningNumber winningNumber) {
+        return lottoTicket.contains(winningNumber.getBonusNumber());
     }
 
     public List<Integer> getLottoTicket() {
