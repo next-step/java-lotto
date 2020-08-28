@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LottoNumberMatcher {
     private Map<Integer, Integer> matchResult;
-    private double profit;
 
     public LottoNumberMatcher(List<Integer> lastWeekWinningNumbers, List<LottoTicket> lottoTickets) {
         this.matchResult = new HashMap<>();
@@ -34,9 +33,7 @@ public class LottoNumberMatcher {
 
     public double calculateProfit(long money) {
         long totalPrice = LottoPriceInfo.calculateTotalPrice(matchResult);
-        profit = Math.ceil(totalPrice * 100.0 / money) / 100.0;
-
-        return profit;
+        return Math.ceil(totalPrice * 100.0 / money) / 100.0;
     }
 
     public int getMatchTicketCount(int matchCount) {
