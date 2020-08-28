@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPackage;
 import lotto.domain.LottoTicket;
 
 public class LottoNumberMatcher {
@@ -20,11 +21,16 @@ public class LottoNumberMatcher {
         });
     }
 
-    private void addMatchCount(int matchCount) {
-        if (matchCount < MINIMUM_MATCH_COUNT) {
-            return;
-        }
+    public LottoNumberMatcher(LottoPackage lottoPackage, LottoTicket winningTicket) {
+        this.matchResult = new HashMap<>();
+        List<Integer> matchCounts = lottoPackage.matchCount(winningTicket);
+        matchCounts.stream()
+              .filter(count -> MINIMUM_MATCH_COUNT <= count)
+              .forEach(this::addMatchCount);
 
+    }
+
+    private void addMatchCount(int matchCount) {
         if (matchResult.containsKey(matchCount)) {
             matchResult.put(matchCount, matchResult.get(matchCount) + 1);
             return;

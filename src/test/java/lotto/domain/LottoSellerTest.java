@@ -1,15 +1,12 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoSeller;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,9 +29,9 @@ class LottoSellerTest {
         int money = 1_000;
 
         LottoSeller lottoSeller = new LottoSeller(money);
-        List<LottoTicket> actual = lottoSeller.sellTickets();
+        LottoPackage actual = lottoSeller.sellTickets();
 
-        assertEquals(1, actual.size());
+        assertThat(actual).isNotNull();
     }
 
     @DisplayName("숫자로 이루어진 문자열을 받아서 로또 티켓을 생성한다.")

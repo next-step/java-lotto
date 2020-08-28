@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

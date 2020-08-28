@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPackage;
 import lotto.domain.LottoTicket;
 
 public class LottoTicketMachine {
@@ -13,10 +14,11 @@ public class LottoTicketMachine {
     private LottoTicketMachine() {
     }
 
-    public static List<LottoTicket> issueTickets(int ticketCount) {
-        return Stream.generate(() -> issueTicket())
+    public static LottoPackage issueTickets(int ticketCount) {
+        List<LottoTicket> lottoTickets = Stream.generate(() -> issueTicket())
               .limit(ticketCount)
               .collect(Collectors.toList());
+        return new LottoPackage(lottoTickets);
     }
 
     public static LottoTicket issueTicket(String lottoNumberParam) {

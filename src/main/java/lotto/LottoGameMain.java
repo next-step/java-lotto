@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.common.LottoNumberMatcher;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPackage;
 import lotto.domain.LottoSeller;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
@@ -16,13 +17,13 @@ public class LottoGameMain {
         LottoSeller lottoSeller = new LottoSeller(money);
         OutputView.printTicketCount(lottoSeller);
 
-        List<LottoTicket> lottoTickets = lottoSeller.sellTickets();
-        OutputView.printBuyingTickets(lottoTickets);
+        LottoPackage lottoPackage = lottoSeller.sellTickets();
+        OutputView.printBuyingTickets(lottoPackage);
 
         String winningNumbers = InputView.inputLastWeekWinningNumbers();
         LottoTicket winningTicket = lottoSeller.getWinningTicket(winningNumbers);
 
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lottoTickets,
+        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lottoPackage,
               winningTicket);
         LottoMatchResult matchResult = lottoNumberMatcher.match(money);
         OutputView.printResult(matchResult);

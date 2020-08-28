@@ -20,7 +20,7 @@ public class LottoSeller {
         }
     }
 
-    public List<LottoTicket> sellTickets() {
+    public LottoPackage sellTickets() {
         return LottoTicketMachine.issueTickets(ticketCount);
     }
 

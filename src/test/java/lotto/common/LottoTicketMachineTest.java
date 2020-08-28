@@ -1,12 +1,12 @@
 package lotto.common;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPackage;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ class LottoTicketMachineTest {
     void issueTickets() {
         int ticketCount = 3;
         //when
-        List<LottoTicket> lottoTickets = LottoTicketMachine.issueTickets(ticketCount);
+        LottoPackage lottoTickets = LottoTicketMachine.issueTickets(ticketCount);
 
         //then
-        assertEquals(ticketCount, lottoTickets.size());
+        assertEquals(ticketCount, lottoTickets.getLottoTickets().size());
     }
 
     @DisplayName("입력받은 문자열로 LottoTicket 생성")
