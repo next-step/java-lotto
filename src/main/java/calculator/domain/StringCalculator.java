@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputValueProcessing {
+public class StringCalculator {
     private static final String SPLIT_CRITERIA = ",|:";
     private static final String PATTERN_CRITERIA = "//(.)\n(.*)";
     private static final int GROUP_INDEX1 = 1;
