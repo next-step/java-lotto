@@ -52,6 +52,7 @@ public class StringCalculatorTest {
     @Test
     void 숫자_이외의_값이_들어올_때_테스트() {
         assertThatThrownBy(() -> calculateInputValue("가,1:2"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("숫자 이외의 값을 입력할 수 없습니다.");
     }
 }
