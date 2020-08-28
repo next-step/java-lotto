@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
+
+    // 유틸리티 성격을 가진 클래스이므로 묵시적인 생성자를 방지한다.
+    private OutputView() {
+    }
+
     public static void printTicketCount(LottoSeller lottoSeller) {
         System.out.println(lottoSeller.getTicketCount() + "개를 구매했습니다.");
     }
