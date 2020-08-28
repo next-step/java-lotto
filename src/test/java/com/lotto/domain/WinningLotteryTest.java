@@ -20,7 +20,7 @@ class WinningLotteryTest {
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 3, 4, 5, 7}, 6, Rank.SECOND),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 3, 4, 5, 7}, 45, Rank.THIRD),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 3, 4, 7, 8}, 45, Rank.FORTH),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 3, 7, 8, 9}, 45, Rank.Fifth),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 3, 7, 8, 9}, 45, Rank.FIFTH),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 2, 7, 8, 9, 10}, 45, Rank.LOSER)
         );
     }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public enum Rank {
     LOSER(0, false, 0),
-    Fifth(3, false, 5_000),
+    FIFTH(3, false, 5_000),
     FORTH(4, false, 50_000),
     THIRD(5, false, 1_500_000),
     SECOND(5, true, 30_000_000),
