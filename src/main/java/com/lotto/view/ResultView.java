@@ -32,7 +32,11 @@ public class ResultView {
         System.out.println("당첨 통계\n---------------------------------");
         List<Statistic> statistics = LOTTERY_COMMISSION.calculateWinningStatistics(lotteries, winningLottery);
         statistics.stream()
-                .map(statistic -> statistic.toString("%2d 개 일치 (%10s 원)", " - %2d 개"))
+                .map(statistic -> statistic.toString(
+                        "%2d 개 일치 (%10s 원)",
+                        "%2d 개 일치, 보너스 볼 일치 (%10s 원)",
+                        " - %2d 개")
+                )
                 .forEach(System.out::println);
         BigDecimal yield = LOTTERY_COMMISSION.calculateYield(lotteries.size(), statistics);
         System.out.printf("총 수익률은 %s 입니다.%n", YIELD_FORMAT.format(yield));

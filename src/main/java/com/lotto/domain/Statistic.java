@@ -19,7 +19,7 @@ public class Statistic {
         return rank.calculateTotalWinnings(lotteryCount);
     }
 
-    public String toString(String rankFormat, String lotteryCountFormat) {
-        return rank.toString(rankFormat) + String.format(lotteryCountFormat, lotteryCount);
+    public String toString(String rankFormat, String rankBonusFormat, String lotteryCountFormat) {
+        return rank.toString(rankFormat, rankBonusFormat) + String.format(lotteryCountFormat, lotteryCount);
     }
 }

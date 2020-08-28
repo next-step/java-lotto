@@ -1,7 +1,6 @@
 package com.lotto.view;
 
 import com.lotto.domain.Deposit;
-import com.lotto.domain.Lottery;
 import com.lotto.domain.LotteryNumber;
 import com.lotto.domain.WinningLottery;
 
@@ -47,11 +46,18 @@ public class InputView {
                 .map(LotteryNumber::getLotteryNumber)
                 .collect(Collectors.toSet());
     }
+    private LotteryNumber enterBonusLotteryNumber() throws NumberFormatException {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = SCANNER.nextLine();
+        return LotteryNumber.getLotteryNumber(bonusNumber);
+    }
 
     public WinningLottery setupWinningLottery() {
         return (WinningLottery) tryCatchInputExceptions(() -> {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return new WinningLottery(enterLotteryNumberManually());
+            Set<LotteryNumber> winningLotteryNumbers = enterLotteryNumberManually();
+            LotteryNumber bonusLotteryNumber = (LotteryNumber) tryCatchInputExceptions(this::enterBonusLotteryNumber);
+            return new WinningLottery(winningLotteryNumbers, bonusLotteryNumber);
         });
     }
 }

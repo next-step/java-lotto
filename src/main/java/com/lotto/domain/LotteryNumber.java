@@ -1,6 +1,9 @@
 package com.lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,7 +33,8 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         return LOTTERY_NUMBER_LIST.get(number - 1);
     }
 
-    public static LotteryNumber getLotteryNumber(String numberString) throws NumberFormatException, IllegalStateException {
+    public static LotteryNumber getLotteryNumber(String numberString)
+            throws NumberFormatException, IllegalStateException {
         int number = Integer.parseInt(numberString);
         return getLotteryNumber(number);
     }
