@@ -50,24 +50,6 @@ public class NumbergeneratorTest {
         }
     }
 
-    @DisplayName("몇개나 일치하나 테스트")
-    @Test
-    void checkCorrected() {
-        List<Integer> numList = numberGenerator.generate();
-        Collections.sort(numList);
-
-        String lastWinnerNumber = "1,2,3,4,5,6";
-        String[] input = lastWinnerNumber.split(",");
-
-        int count = 0;
-        for (int i = 0; i < 6; i++) {
-            System.out.println(numList.get(i));
-            if (numList.contains(Integer.parseInt(input[i]))) {
-                count++;
-            }
-        }
-        System.out.println("cnt = " + count);
-    }
 
     @Test
     void setLotto() {

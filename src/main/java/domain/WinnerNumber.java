@@ -1,31 +1,24 @@
 package domain;
 
 import java.util.List;
-
-import static domain.LottoGames.LOTTO_NUMBER;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WinnerNumber {
 
     private List<Integer> winnerNumber;
 
-    public WinnerNumber(List<Integer> number) {
+    public WinnerNumber(String[] number) {
+        new ValidateWinnerNumber(number);
 
-        winnerNumber = number;
+        winnerNumber = Stream.of(number).mapToInt(Integer::parseInt)
+                .boxed().collect(Collectors.toList());
     }
 
-    public List<Integer> getWinnerNumber() {
-        return winnerNumber;
-    }
+    int getCountingNumber(Lotto lotto) {
+        int count = lotto.getLottoNumber().stream().filter(winnerNumber::contains)
+                .collect(Collectors.toList()).size();
 
-    public int getCountingNumber(Lotto lotto) {
-        int count = 0;
-//        lotto.getLottoNumber().stream().
-
-        for (int j = 0; j < LOTTO_NUMBER; j++) {
-            if(lotto.getLottoNumber().contains(winnerNumber.get(j))){
-                count ++;
-            }
-        }
         return count;
     }
 }

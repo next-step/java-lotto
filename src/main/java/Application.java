@@ -11,14 +11,10 @@ public class Application {
 
         View.showLottoTickets(game.getLottos());
 
-//        WinnerNumberManager manager = UserInput.getWinnerTicket();
         WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-
-//        int sum = manager.calculateCount(game.getLottos());
         WinnerNumberManager manager = new WinnerNumberManager(winnerNumber);
-
         int sum = manager.calculateWinnerPrice(game.getLottos());
 
-        View.result(manager,sum,game.getLottos().getNumOfLottos());
+        View.result(manager, sum, game.getLottos().getNumOfLottos());
     }
 }

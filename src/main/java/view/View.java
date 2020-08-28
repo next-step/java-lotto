@@ -9,18 +9,18 @@ import utility.UserInput;
 public class View {
 
     private static final int ZERO = 0;
+    private static final int ONE= 1;
+    private static final int TWO= 2;
     private static final int THREE = 3;
     private static final int FOUR = 4;
-    private static final int FIVE = 5;
-    private static final int SIX = 6;
 
     public static void result(WinnerNumberManager winnerNumber, int sum, int tries) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println("3개 일치(5000원)- " + winnerNumber.getRankRecord().getRecordPool().get(4) + "개");
-        System.out.println("4개 일치(50000원)- " + winnerNumber.getRankRecord().getRecordPool().get(3) + "개");
-        System.out.println("5개 일치(1500000원)- " + winnerNumber.getRankRecord().getRecordPool().get(2) + "개");
-        System.out.println("6개 일치(2000000000원)- " + winnerNumber.getRankRecord().getRecordPool().get(1) + "개");
+        System.out.println("3개 일치(5000원)- " + winnerNumber.getRankRecord().getRecordPool().get(FOUR) + "개");
+        System.out.println("4개 일치(50000원)- " + winnerNumber.getRankRecord().getRecordPool().get(THREE) + "개");
+        System.out.println("5개 일치(1500000원)- " + winnerNumber.getRankRecord().getRecordPool().get(TWO) + "개");
+        System.out.println("6개 일치(2000000000원)- " + winnerNumber.getRankRecord().getRecordPool().get(ONE) + "개");
         if (sum == ZERO) {
             System.out.println("총 수익률은 0 입니다.");
             return;

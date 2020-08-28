@@ -15,7 +15,7 @@ public class ValidateWinnerNumberTest {
         String inputs[] = input.split(",");
 
         assertThatThrownBy(() -> {
-            ValidateWinnerNumber.validateStringsDuplicate(inputs);
+            new ValidateWinnerNumber(inputs);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,7 +27,7 @@ public class ValidateWinnerNumberTest {
         String inputs[] = input.split(",");
 
         assertThatThrownBy(() -> {
-            ValidateWinnerNumber.validateNumberRange(inputs);
+            new ValidateWinnerNumber(inputs);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("오류!!");
     }
@@ -39,7 +39,7 @@ public class ValidateWinnerNumberTest {
         String inputs[] = input.split(",");
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ValidateWinnerNumber.validateNumberIsSix(inputs);
+            new ValidateWinnerNumber(inputs);
         }).withMessageContaining("숫자 개수 에러");
     }
 }

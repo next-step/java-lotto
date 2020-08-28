@@ -8,7 +8,7 @@ public class LottoGamesTest {
 
     @Test
     void makeLottoTicketTest() {
-        assertThatThrownBy(() -> new LottoGames(13500))
+        assertThatThrownBy(() -> new LottoGames(-1000))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Price ERR");
     }

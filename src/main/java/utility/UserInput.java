@@ -1,12 +1,8 @@
 package utility;
 
-import domain.ValidateWinnerNumber;
 import domain.WinnerNumber;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
@@ -32,19 +28,13 @@ public class UserInput {
     public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
 
-        List<Integer> number = Arrays.stream(winnerNumber)
-                .mapToInt(Integer::parseInt)
-                .boxed().collect(Collectors.toList());
-
-        return new WinnerNumber(number);
+        return new WinnerNumber(winnerNumber);
     }
 
     private static String[] inputWinnerNumber() {
         System.out.println(AFTER_MESSEGE);
         String input = SC.nextLine();
         String[] inputs = input.split(DELIMTER);
-
-        ValidateWinnerNumber.validate(inputs);
 
         return inputs;
     }

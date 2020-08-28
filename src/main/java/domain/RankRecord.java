@@ -19,11 +19,10 @@ public class RankRecord {
         return recordPool;
     }
 
-    public void recordRankings(int count){
-        int rank = 6 - count+1 ;
+    public void recordOfRankings(int count) {
+        int rank = 6 - count + 1;
 
         int rankCount = recordPool.get(rank);
-        recordPool.set(rank,rankCount+1);
-
+        recordPool.set(rank, rankCount + 1);
     }
 }
