@@ -9,12 +9,11 @@ import java.util.stream.Stream;
 public class Lottos {
     public static final int LOTTO_PRICE = 1000;
     public static final int WINNING_STANDARD_NUMBER = 3;
-    private final List<Lotto> lottoList;
-    private final int lottoCount;
+    public static final int LOTTO_MAX_SIZE = 6;
+    private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottoList, int lottoCount) {
-        this.lottoList = lottoList;
-        this.lottoCount = lottoCount;
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public static Lottos of(int paidMoney) {
@@ -22,16 +21,16 @@ public class Lottos {
         return new Lottos(
                 Stream.generate(() -> Lotto.createLotto())
                         .limit(count)
-                        .collect(Collectors.toList()), count);
+                        .collect(Collectors.toList()));
     }
 
     public Map<Integer, Integer> getWinningCount(String[] winningNumbers) {
         Map<Integer, Integer> winningCount = new HashMap<>();
-        for (int i = 3; i <= 6; i++) {
+        for (int i = WINNING_STANDARD_NUMBER; i <= LOTTO_MAX_SIZE; i++) {
             winningCount.put(i, 0);
         }
 
-        lottoList.stream()
+        lottos.stream()
                 .mapToInt(lotto -> lotto.findSameNumber(winningNumbers))
                 .filter(count -> count >= WINNING_STANDARD_NUMBER)
                 .forEach(count -> {
@@ -42,11 +41,7 @@ public class Lottos {
         return winningCount;
     }
 
-    public int getLottoCount() {
-        return lottoCount;
-    }
-
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

@@ -14,7 +14,7 @@ public class LottoMain {
         printLottoCount(lottos.getLottoCount());
 
         /* 랜덤 생성 로또 번호 출력 */
-        printLottoNumber(lottos.getLottoList());
+        printLottoNumber(lottos.getLottos());
 
         /* 지난 주 당첨 번호 입출력 */
         printWinningCount(lottos.getWinningCount(getWinningNumbers()), paidMoney);
