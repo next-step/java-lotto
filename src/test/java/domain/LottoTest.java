@@ -29,9 +29,9 @@ class LottoTest {
     @DisplayName("번호(Number)가 6개의 다른 값이 아니면 예외를 반환한다.")
     void numbersExceptionTest(String input) {
         String[] split = input.split(",");
-        Set<Number> collect = Arrays.stream(split)
+        Set<LottoNumber> collect = Arrays.stream(split)
                 .map(Integer::parseInt)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
         assertThatThrownBy(() -> new Lotto(collect))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -41,35 +41,35 @@ class LottoTest {
     @MethodSource("provideLottoNumbers")
     @DisplayName("자신이 가진 로또 번호와 제공된 로또 번호에서 일치하는 번호 리스트를 제공한다.")
     void getContainNumbersTest(String input, String expectedInput) {
-        Set<Number> numbers = makeInputToNumbers(input);
-        Set<Number> winningNumbers = makeInputToNumbers("1,2,3,4,5,6");
-        Number bonusNumber = new Number(10);
+        Set<LottoNumber> lottoNumbers = makeInputToNumbers(input);
+        Set<LottoNumber> winningLottoNumbers = makeInputToNumbers("1,2,3,4,5,6");
+        LottoNumber bonusLottoNumber = new LottoNumber(10);
 
-        Lotto lotto = new Lotto(numbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusLottoNumber);
 
-        Set<Number> actual = lotto.getWinningNumbers(winningLotto);
+        Set<LottoNumber> actual = lotto.getWinningNumbers(winningLotto);
 
-        Set<Number> expected = makeInputToNumbers(expectedInput);
+        Set<LottoNumber> expected = makeInputToNumbers(expectedInput);
 
         assertThat(actual).isEqualTo(expected);
     }
 
-    private Set<Number> makeInputToNumbers(String input) {
+    private Set<LottoNumber> makeInputToNumbers(String input) {
         String[] split = input.split(",");
         return Arrays.stream(split)
                 .map(Integer::parseInt)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Test
     @DisplayName("자신이 가진 로또 번호가 보너스 숫자를 포함하는지 결과값 제공")
     void isContainBonusTest() {
-        Set<Number> numbers = makeInputToNumbers("1,2,3,4,5,6");
-        Lotto lotto = new Lotto(numbers);
-        Number bonusNumber = new Number(7);
-        WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
+        Set<LottoNumber> lottoNumbers = makeInputToNumbers("1,2,3,4,5,6");
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusLottoNumber);
 
         assertThat(lotto.isContainBonus(winningLotto)).isFalse();
     }

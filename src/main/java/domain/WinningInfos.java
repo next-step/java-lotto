@@ -39,15 +39,15 @@ public class WinningInfos {
         winningInfo.increaseWinningNumber();
     }
 
-    protected BigDecimal getTotalWinningMoney() {
-        return winningInfos.stream()
-                .map(WinningInfo::getMultiplyWinningMoney)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
     public double getBenefitRate(LottoMoney lottoMoney) {
         return getTotalWinningMoney()
                 .divide(lottoMoney.getMoney(), 2, RoundingMode.DOWN)
                 .doubleValue();
+    }
+
+    protected BigDecimal getTotalWinningMoney() {
+        return winningInfos.stream()
+                .map(WinningInfo::getMultiplyWinningMoney)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

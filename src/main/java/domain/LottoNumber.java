@@ -4,15 +4,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final Random random = new Random();
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
-    private static final List<Number> cached = IntStream.rangeClosed(1, 45).boxed().map(Number::new).collect(Collectors.toList());
+    private static final List<LottoNumber> cached = IntStream.rangeClosed(1, 45)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
@@ -23,17 +26,20 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public static Number generateNumber() {
-        int randomNumber = random.nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
-        return cached.get(randomNumber - 1);
+    public static LottoNumber getRandomLottoNumber() {
+        return getLottoNumber(random.nextInt(LOTTO_NUMBER_MAX));
+    }
+
+    public static LottoNumber getLottoNumber(int i) {
+        return cached.get(i);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
+        return number == lottoNumber1.number;
     }
 
     @Override
@@ -41,12 +47,13 @@ public class Number implements Comparable<Number> {
         return Objects.hash(number);
     }
 
-    @Override public String toString() {
-        return String.valueOf(number);
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 
-
-    @Override public int compareTo(Number o) {
-        return this.number - o.number;
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

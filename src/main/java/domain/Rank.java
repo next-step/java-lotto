@@ -21,9 +21,9 @@ public enum Rank {
     }
 
     public static Rank getRank(Lotto lotto, WinningLotto winningLotto) {
-        Set<Number> numbersInWinningNumbers = lotto.getWinningNumbers(winningLotto);
+        Set<LottoNumber> numbersInWinningLottoNumbers = lotto.getWinningNumbers(winningLotto);
         boolean matchBonus = lotto.isContainBonus(winningLotto);
-        return Rank.valueOf(numbersInWinningNumbers.size(), matchBonus);
+        return Rank.valueOf(numbersInWinningLottoNumbers.size(), matchBonus);
     }
 
     protected static Rank valueOf(int countOfMatch, boolean matchBonus) {
