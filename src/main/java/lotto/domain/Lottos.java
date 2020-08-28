@@ -24,18 +24,18 @@ public class Lottos {
                         .collect(Collectors.toList()));
     }
 
-    public Map<Integer, Integer> getWinningCount(String[] winningNumbers) {
-        Map<Integer, Integer> winningCount = new HashMap<>();
+    public Map<Integer, Long> getWinningCount(String[] winningNumbers) {
+        Map<Integer, Long> winningCount = new HashMap<>();
         for (int i = WINNING_STANDARD_NUMBER; i <= LOTTO_MAX_SIZE; i++) {
-            winningCount.put(i, 0);
+            winningCount.put(i, (long) 0);
         }
 
         lottos.stream()
-                .mapToInt(lotto -> lotto.findSameNumber(winningNumbers))
+                .mapToLong(lotto -> lotto.findSameNumber(winningNumbers))
                 .filter(count -> count >= WINNING_STANDARD_NUMBER)
                 .forEach(count -> {
-                    Integer temp = winningCount.get(count) + 1;
-                    winningCount.replace(count, temp);
+                    Long temp = winningCount.get(count) + 1;
+                    winningCount.replace((int) count, temp);
                 });
 
         return winningCount;

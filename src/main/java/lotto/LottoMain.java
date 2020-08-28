@@ -11,7 +11,7 @@ public class LottoMain {
         /* 로또 가격 입력 및 로또 장수 출력 */
         int paidMoney = getLottoPrice();
         Lottos lottos = Lottos.of(paidMoney);
-        printLottoCount(lottos.getLottoCount());
+        printLottoCount(lottos.getLottos().size());
 
         /* 랜덤 생성 로또 번호 출력 */
         printLottoNumber(lottos.getLottos());

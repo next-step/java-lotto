@@ -14,7 +14,7 @@ public class ResultView {
         lottoList.forEach(lotto -> System.out.println(lotto.getLotto()));
     }
 
-    public static void printWinningCount(Map<Integer, Integer> winningCount, int lottoPrice) {
+    public static void printWinningCount(Map<Integer, Long> winningCount, int lottoPrice) {
         System.out.println("\n당첨 통계\n--------");
         int[] winningMoney = {5000, 50000, 1500000, 2000000000};
 
