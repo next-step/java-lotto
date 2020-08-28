@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
+    public static final int LOTTO_TOTAL_COUNT = 45;
+    public static final int LOTTO_MIN_NUM = 0;
+    public static final int LOTTO_MAX_NUM = 6;
     private final List<Integer> lotto;
 
     public Lotto(List<Integer> lotto) {
@@ -15,9 +18,9 @@ public class Lotto {
     }
 
     public static Lotto createLotto() {
-        List<Integer> lottoAllNum = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
+        List<Integer> lottoAllNum = Stream.iterate(1, n -> n + 1).limit(LOTTO_TOTAL_COUNT).collect(Collectors.toList());
         Collections.shuffle(lottoAllNum);
-        List<Integer> temp = lottoAllNum.subList(0, 6);
+        List<Integer> temp = lottoAllNum.subList(LOTTO_MIN_NUM, LOTTO_MAX_NUM);
         Collections.sort(temp);
         return new Lotto(temp);
     }
