@@ -8,7 +8,7 @@ public class StringCalculator {
     private static final String PATTERN_CRITERIA = "//(.)\n(.*)";
     private static final int GROUP_INDEX1 = 1;
     private static final int GROUP_INDEX2 = 2;
-    private static Pattern pattern = Pattern.compile(PATTERN_CRITERIA);
+    private static final Pattern pattern = Pattern.compile(PATTERN_CRITERIA);
 
     private StringCalculator() {
         /**
