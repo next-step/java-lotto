@@ -9,10 +9,11 @@ public class LottoNumberUtil {
     private static final Integer GET_LIST_END = 6;
     private static List<Integer> lottoNums;
 
+    static {
+        setDefaultLottoNums();
+    }
+
     static List<Integer> getDefaultLottoNums() {
-        if (lottoNums == null) {
-            setDefaultLottoNums();
-        }
         return getCopyList();
     }
 
