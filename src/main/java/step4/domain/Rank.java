@@ -1,6 +1,11 @@
 package step4.domain;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
 
@@ -11,7 +16,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    public static final int MATCH_BONUS_COUNT_OF_MATCH = 5;
+    private static final Map<RankHashKey, Rank> RANKS = Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(RankHashKey::new, Function.identity())));
 
     private int countOfMatch;
     private int winningMoney;
@@ -25,18 +31,39 @@ public enum Rank {
         return winningMoney;
     }
 
-    public boolean isCountOfMatch(int countOfMatch) {
-        return this.countOfMatch == countOfMatch;
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        return RANKS.getOrDefault(new RankHashKey(countOfMatch, matchBonus), Rank.MISS);
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == MATCH_BONUS_COUNT_OF_MATCH) {
-            return matchBonus ? SECOND : THIRD;
+    private static class RankHashKey {
+
+        private final int countOfMatch;
+        private final boolean matchBonus;
+
+        RankHashKey(Rank rank) {
+            this.countOfMatch = rank.countOfMatch;
+            this.matchBonus = rank.equals(Rank.SECOND);
         }
-        return Arrays.stream(values())
-                .filter(rank -> rank.isCountOfMatch(countOfMatch))
-                .findAny()
-                .orElse(MISS);
+
+        RankHashKey(int countOfMatch, boolean matchBonus) {
+            this.countOfMatch = countOfMatch;
+            this.matchBonus = matchBonus;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            RankHashKey that = (RankHashKey) o;
+            return countOfMatch == that.countOfMatch &&
+                    matchBonus == that.matchBonus;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(countOfMatch, matchBonus);
+        }
+
     }
 
 }
