@@ -11,13 +11,6 @@ public class Lotto {
 
     private final List<LottoNo> numbers;
 
-    public Lotto(int ... nos) {
-        this(Arrays.stream(nos)
-                .boxed()
-                .map(LottoNo::new)
-                .collect(Collectors.toList()));
-    }
-
     public Lotto(List<LottoNo> numbers) {
         if (numbers.size() != MAX_NUMBER) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
