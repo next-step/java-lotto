@@ -1,13 +1,22 @@
 package step3.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int MAX_NUMBER = 6;
 
     private final List<LottoNo> numbers;
+
+    public Lotto(int ... nos) {
+        this(Arrays.stream(nos)
+                .boxed()
+                .map(LottoNo::new)
+                .collect(Collectors.toList()));
+    }
 
     public Lotto(List<LottoNo> numbers) {
         if (numbers.size() != MAX_NUMBER) {
@@ -17,7 +26,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int findWinningNumbersCount(WinningNumbers winningNumbers) {
+    private int findWinningNumbersCount(WinningNumbers winningNumbers) {
         return (int) numbers.stream()
                 .filter(winningNumbers::isWinningNumber)
                 .count();
@@ -25,9 +34,7 @@ public class Lotto {
 
     private boolean isMatchBonus(WinningNumbers winningNumbers) {
         return numbers.stream()
-                .filter(winningNumbers::isMatchBonus)
-                .findAny()
-                .isPresent();
+                .anyMatch(winningNumbers::isMatchBonus);
     }
 
     public Rank getRank(WinningNumbers winningNumbers) {
