@@ -7,7 +7,7 @@ public class LottoGame {
 
     private final int count;
 
-    public LottoGame(int count) {
+    private LottoGame(int count) {
         this.count = count;
     }
 
@@ -26,5 +26,9 @@ public class LottoGame {
 
     public int getCount() {
         return count;
+    }
+
+    public Lottos makeLottos(LottoNumberRandomGenerator lottoNumberRandomGenerator) {
+        return Lottos.of(count, lottoNumberRandomGenerator);
     }
 }
