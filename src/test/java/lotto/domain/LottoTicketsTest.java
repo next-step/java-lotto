@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,10 +38,10 @@ class LottoTicketsTest {
     @DisplayName("n개의 로또 복권 당첨 확인")
     void matchResult() {
         LottoTickets lottoTickets = new LottoTickets(mockLottoTickets);
-        WinningResult winningResult = lottoTickets.matchResult(winningNumbers);
-        assertThat(winningResult.getWinningResult(Rank.FIRST)).isEqualTo(1);
-        assertThat(winningResult.getWinningResult(Rank.SECOND)).isEqualTo(1);
-        assertThat(winningResult.getWinningResult(Rank.FOURTH)).isEqualTo(1);
+        Map<Rank, Long> winningResult = lottoTickets.matchResult(winningNumbers);
+        assertThat(winningResult.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(winningResult.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(winningResult.get(Rank.FOURTH)).isEqualTo(1);
     }
 
 }

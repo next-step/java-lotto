@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -27,7 +28,9 @@ public class LottoGame {
         LottoTicket winningNumbers = LottoNumberGenerator.generateWinningNumber(inputWinningNumber);
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusLottoNumber);
 
-        WinningResult winningResult = lottoStore.matchResult(winningNumber);
+        Map<Rank, Long> winningResultMap = lottoStore.matchResult(winningNumber);
+        WinningResult winningResult = new WinningResult(winningResultMap);
+
         ResultView.printWinningNumericalStatement();
         ResultView.printLottoResult(winningResult);
 

@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +20,7 @@ public class ProfitTest {
     private int bonusNumber;
     private WinningNumber winningNumbers;
     private Profit profit;
+    private Map<Rank, Long> winningResultMap;
     private WinningResult winningResult;
 
     @BeforeEach
@@ -29,7 +31,8 @@ public class ProfitTest {
         winningNumbers = new WinningNumber(winningNumber, bonusNumber);
 
         LottoTickets lottoTickets = new LottoTickets(mockLottoTickets);
-        winningResult = lottoTickets.matchResult(winningNumbers);
+        winningResultMap = lottoTickets.matchResult(winningNumbers);
+        winningResult = new WinningResult(winningResultMap);
         profit = new Profit(winningResult);
     }
 
