@@ -2,7 +2,7 @@ package step3.domain;
 
 import java.util.Objects;
 
-public class LottoNo implements Comparable {
+public class LottoNo implements Comparable<LottoNo> {
 
     private final int lottoNo;
     private final boolean matchBonus;
@@ -41,12 +41,13 @@ public class LottoNo implements Comparable {
     }
 
     @Override
-    public int compareTo(Object other) {
-        return this.lottoNo - ((LottoNo) other).lottoNo;
+    public int compareTo(LottoNo other) {
+        return this.lottoNo - other.lottoNo;
     }
 
     @Override
     public String toString() {
         return ((Integer) lottoNo).toString();
     }
+
 }
