@@ -1,22 +1,21 @@
 package step4.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private final int number;
-
 	private static final int MIN_LOTTO_VALUE = 1;
 	private static final int MAX_LOTTO_VALUE = 45;
-	private static final List<LottoNumber> LOTTO_VALUES = new ArrayList<>();
+	private static final List<LottoNumber> LOTTO_VALUES = IntStream.rangeClosed(MIN_LOTTO_VALUE, MAX_LOTTO_VALUE)
+			.boxed()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	private static final String LOTTO_NUMBER_PHRASES = "로또 당첨 번호는 1 이상 45 이하의 숫자여야 합니다.";
 
-	static {
-		for (int i = 0; i < LottoNumber.MAX_LOTTO_VALUE; i++) {
-			LOTTO_VALUES.add(new LottoNumber(i+1));
-		}
-	}
+	private final int number;
 
 	public LottoNumber(int number) {
 		validLottoNumber(number);
@@ -29,8 +28,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	public static List<LottoNumber> getLottoValues() {
-		return LOTTO_VALUES;
+	public static List<LottoNumber> getRandomNumbers(int numberCount) {
+		Collections.shuffle(LOTTO_VALUES);
+		return Collections.unmodifiableList(
+				LOTTO_VALUES.stream()
+						.limit(numberCount)
+						.sorted()
+						.collect(Collectors.toList())
+		);
 	}
 
 	@Override

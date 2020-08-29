@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoStatistic {
-	private final Map<Rank, Integer> lottoResultMap;
-	private BigDecimal yield;
-
 	private static final String INIT_SUM = "0";
 	private static final int SCALE = 2;
+	private static final int LOTTO_PRICE = 1000;
+
+	private final Map<Rank, Integer> lottoResultMap;
+	private BigDecimal yield;
 
 	public LottoStatistic() {
 		lottoResultMap = new EnumMap<>(Rank.class);
@@ -31,11 +32,11 @@ public class LottoStatistic {
 		return lottoResultMap;
 	}
 
-	public BigDecimal calcYield(int price) {
+	public BigDecimal calcYield(int size) {
 		for (Rank winning : lottoResultMap.keySet()) {
 			yield = yield.add(BigDecimal.valueOf(lottoResultMap.get(winning) * winning.getReward()));
 		}
-		return yield.divide(BigDecimal.valueOf(price), SCALE, RoundingMode.HALF_EVEN);
+		return yield.divide(BigDecimal.valueOf(size*LOTTO_PRICE), SCALE, RoundingMode.HALF_EVEN);
 	}
 
 }

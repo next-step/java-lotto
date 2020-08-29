@@ -22,9 +22,8 @@ public class LottoController {
 
 		List<LottoNumber> winningLotto = InputView.inputWinningNumbers();
 		int bonusNumber = InputView.inputBonusBall();
-		LottoResult result = new LottoResult(issueLottos, new WinningLotto(winningLotto, bonusNumber));
-
-		ResultView.printWinningResult(result.getLottoResult());
-		ResultView.printYield(result.getGameYield());
+		LottoStatistic statistic = new LottoStatistic();
+		ResultView.printWinningResult(statistic.calcLottoResult(issueLottos, new WinningLotto(winningLotto, bonusNumber)));
+		ResultView.printYield(statistic.calcYield(issueLottos.size()));
 	}
 }
