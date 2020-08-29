@@ -8,17 +8,13 @@ import java.util.List;
 
 public class LottoController {
 	public static void main(String[] args) {
-		LottoGame lottoGame = new LottoGame();
-
 		int price = InputView.inputPrice();
 		int manualLottoCount = InputView.inputManualLottoCount();
-		lottoGame.checkLottoPurchase(price, manualLottoCount);
+		LottoGame lottoGame = new LottoGame(price, manualLottoCount);
 
 		List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
-		lottoGame.setManualLottos(manualLottos);
-
-		List<Lotto> issueLottos = lottoGame.getLottos();
-		ResultView.printLottos(issueLottos, manualLottoCount);
+		Lottos issueLottos = lottoGame.getAllLottos(manualLottos);
+		ResultView.printLottos(issueLottos);
 
 		List<LottoNumber> winningLotto = InputView.inputWinningNumbers();
 		int bonusNumber = InputView.inputBonusBall();

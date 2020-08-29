@@ -1,11 +1,11 @@
 package step4.view;
 
 import step4.domain.Lotto;
+import step4.domain.Lottos;
 import step4.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,9 +13,10 @@ public class ResultView {
 
 	private ResultView() {}
 
-	public static void printLottos(List<Lotto> lottos, int manualLottoCount) {
-		System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + (lottos.size()-manualLottoCount) + "개를 구매했습니다.");
-		for (Lotto lotto : lottos) {
+	public static void printLottos(Lottos lottos) {
+		int manualLottoCount = lottos.getManualLottoCount();
+		System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + (lottos.size()-manualLottoCount) + "개를 구매했습니다.");
+		for (Lotto lotto : lottos.getLottos()) {
 			System.out.println(lotto.toString());
 		}
 		System.out.println();

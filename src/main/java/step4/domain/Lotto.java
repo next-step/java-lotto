@@ -7,10 +7,16 @@ public class Lotto {
 	private static final String LOTTO_PHRASES = "로또 번호는 중복되지 않는 6개의 숫자로 이루어져야 합니다.";
 
 	private final Set<LottoNumber> numbers;
+	private final boolean isManual;
 
 	public Lotto(List<LottoNumber> numbers) {
+		this(numbers, false);
+	}
+
+	public Lotto(List<LottoNumber> numbers, boolean isManual) {
 		validLotto(numbers);
 		this.numbers = new LinkedHashSet<>(numbers);
+		this.isManual = isManual;
 	}
 
 	public static Lotto auto() {
@@ -31,6 +37,10 @@ public class Lotto {
 
 	public boolean containNumber(LottoNumber number) {
 		return numbers.contains(number);
+	}
+
+	public boolean isManual() {
+		return isManual;
 	}
 
 	@Override

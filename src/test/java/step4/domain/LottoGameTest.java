@@ -1,11 +1,12 @@
 package step4.domain;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -13,17 +14,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoGameTest {
 	private static LottoGame lottoGame;
 
-	@BeforeAll
-	static void createLottoGame() {
-		lottoGame = new LottoGame();
-	}
-
 	@DisplayName(value = "로또 구입 금액에 오류가 있을 때 에러 처리 테스트")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 500, 1500, 3256})
 	void lottoPriceException(int price) {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> lottoGame.checkLottoPurchase(price, 0))
+				.isThrownBy(() -> new LottoGame(price, 0))
 				.withMessage("로또 구입 금액은 1000원 단위만 가능합니다.");
 	}
 
@@ -31,15 +27,15 @@ class LottoGameTest {
 	@Test
 	void manualLottoCountException() {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> lottoGame.checkLottoPurchase(4000, 5));
+				.isThrownBy(() -> new LottoGame(4000, 5));
 	}
 
 	@DisplayName(value = "로또 구입 금액만큼 발급한 로또 개수 테스트")
 	@ParameterizedTest
 	@CsvSource(value = {"3000:3", "14000:14"}, delimiter = ':')
 	void lottoCount(int price, int expected) {
-		lottoGame.checkLottoPurchase(price, 0);
-		assertThat(lottoGame.getLottos()).hasSize(expected);
+		lottoGame = new LottoGame(price, 0);
+		assertThat(lottoGame.getAllLottos(new ArrayList<>()).getLottos()).hasSize(expected);
 	}
 
 }

@@ -19,11 +19,11 @@ public class LottoStatistic {
 		yield = new BigDecimal(INIT_SUM);
 	}
 
-	public Map<Rank, Integer> calcLottoResult(List<Lotto> issueLottos, WinningLotto winningLotto) {
+	public Map<Rank, Integer> calcLottoResult(Lottos issueLottos, WinningLotto winningLotto) {
 		int count;
 		boolean isBonus;
 		Rank rank;
-		for (Lotto issueLotto : issueLottos) {
+		for (Lotto issueLotto : issueLottos.getLottos()) {
 			count = issueLotto.getMatchCount(winningLotto.getWinningNumbers());
 			isBonus = (count == Rank.FIVE.getMatchingCount() && issueLotto.containNumber(winningLotto.getBonusNumber()));
 			rank = Rank.valueOf(count, isBonus);

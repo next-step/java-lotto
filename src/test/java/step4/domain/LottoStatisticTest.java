@@ -14,15 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticTest {
 	private static WinningLotto winningLotto;
-	private static List<Lotto> lottos;
-
-	private static Lotto getLotto(Integer[] nums) {
-		return new Lotto(
-				Arrays.stream(nums)
-						.map(LottoNumber::new)
-						.collect(Collectors.toList())
-		);
-	}
+	private static Lottos lottos;
 
 	@BeforeAll
 	static void setWinningInfo() {
@@ -37,10 +29,13 @@ class LottoStatisticTest {
 				new Integer[] {2, 6, 9, 15, 32, 36}
 		);
 
-		lottos = new ArrayList<>();
-		for (Integer[] num : nums) {
-			lottos.add(getLotto(num));
-		}
+		List<Lotto> lottoList = nums.stream()
+				.map(num -> Arrays.stream(num).map(LottoNumber::new).collect(Collectors.toList()))
+				.map(lotto -> new Lotto(lotto, true))
+				.collect(Collectors.toList());
+
+		lottos = new Lottos();
+		lottos.getAllLottos(nums.size(), lottoList);
 
 		int[] winning = new int[] {3, 6, 10, 14, 16, 40};
 		List<LottoNumber> winningNumbers = Arrays.stream(winning)
