@@ -8,7 +8,7 @@ public class LottoTest {
     @Test
     void 로또_개수_구하기() {
         Lottos lottos = Lottos.of(14000);
-        assertThat(lottos.getLottoCount()).isEqualTo(14);
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     @Test

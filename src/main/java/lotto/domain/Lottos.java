@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,21 +24,13 @@ public class Lottos {
                         .collect(Collectors.toList()));
     }
 
-    public Map<Integer, Long> getWinningCount(String[] winningNumbers) {
-        Map<Integer, Long> winningCount = new HashMap<>();
-        for (int i = WINNING_STANDARD_NUMBER; i <= LOTTO_MAX_SIZE; i++) {
-            winningCount.put(i, (long) 0);
-        }
-
-        lottos.stream()
-                .mapToLong(lotto -> lotto.findSameNumber(winningNumbers))
+    public Map<Long, Long> getWinningCount(String[] winningNumbers) {
+        return lottos.stream()
+                .map(lotto -> lotto.findSameNumber(winningNumbers))
                 .filter(count -> count >= WINNING_STANDARD_NUMBER)
-                .forEach(count -> {
-                    Long temp = winningCount.get(count) + 1;
-                    winningCount.replace((int) count, temp);
-                });
+                .collect(Collectors.groupingBy(Function.identity(),
+                        Collectors.counting()));
 
-        return winningCount;
     }
 
     public List<Lotto> getLottos() {

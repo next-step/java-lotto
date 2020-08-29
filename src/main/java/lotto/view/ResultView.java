@@ -24,14 +24,18 @@ public class ResultView {
         lottoList.forEach(lotto -> System.out.println(lotto.getLotto()));
     }
 
-    public static void printWinningCount(Map<Integer, Long> winningCount, int lottoPrice) {
+    public static void printWinningCount(Map<Long, Long> winningCount, int lottoPrice) {
         System.out.println(GUIDELINE_FOR_WINNING);
         int[] winningMoney = {5000, 50000, 1500000, 2000000000};
 
         float sum = 0;
-        for (int i = 3; i < 7; i++) {
-            System.out.println(String.format(WINNING_COUNT_OUTPUT, i, winningMoney[i - 3], winningCount.get(i)));
-            sum += winningMoney[i - 3] * winningCount.get(i);
+        for (long i = 0; i < winningMoney.length; i++) {
+            Long count = Long.valueOf(0);
+            if(winningCount.containsKey(i+3)) {
+                count = winningCount.get(i+3);
+            }
+            System.out.println(String.format(WINNING_COUNT_OUTPUT, i, winningMoney[(int) i], count));
+            sum += winningMoney[(int) i] * count;
         }
 
         System.out.println(String.format(PROFIT_RATE_OUTPUT, sum / lottoPrice));
