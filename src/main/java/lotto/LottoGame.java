@@ -4,9 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoGame {
 
@@ -14,13 +12,21 @@ public class LottoGame {
         Scanner scanner = new Scanner(System.in);
         int paymentAmount = InputView.setPayPriceLotto(scanner);
 
-        LottoService lottoService = new LottoService();
-        int lottoTicketQuantity = lottoService.getLottoBuyCount(paymentAmount);
-        InputView.printLottoBuyQuantity(lottoTicketQuantity);
+        int manualLottoQuantity = InputView.setManualLottoQuantity(scanner);
+        InputView.printManualLottoNumber(scanner);
 
-        List<LottoTicket> lottoTickets = LottoNumberGenerator.generateLottoTickets(lottoTicketQuantity);
-        LottoTickets lottoStore = new LottoTickets(lottoTickets);
-        InputView.printLottoTickets(lottoStore);
+        LottoService lottoService = new LottoService();
+        List<String> manualLottoTicket = lottoService.setManualLottoNumbers(scanner, manualLottoQuantity);
+        List<LottoTicket> manualLottoTickets = LottoNumberGenerator.generateManualLottoTickets(manualLottoTicket, manualLottoQuantity);
+
+        int totalLottoQuantity = lottoService.getLottoBuyCount(paymentAmount);
+        int autoLottoQuantity = lottoService.getAutoLottoBuyCount(manualLottoQuantity, totalLottoQuantity);
+        InputView.printLottoBuyQuantity(manualLottoQuantity, autoLottoQuantity);
+
+        List<LottoTicket> autoLottoTickets = LottoNumberGenerator.generateAutoLottoTickets(autoLottoQuantity);
+
+        LottoTickets lottoTickets = LottoTickets.of(autoLottoTickets, manualLottoTickets);
+        ResultView.printLottoTickets(lottoTickets);
 
         String inputWinningNumber = InputView.setWinningNumber(scanner);
         int bonusLottoNumber = InputView.setBonusLottoNumber(scanner);
@@ -28,7 +34,7 @@ public class LottoGame {
         LottoTicket winningNumbers = LottoNumberGenerator.generateWinningNumber(inputWinningNumber);
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusLottoNumber);
 
-        Map<Rank, Long> winningResultMap = lottoStore.matchResult(winningNumber);
+        Map<Rank, Long> winningResultMap = lottoTickets.matchResult(winningNumber);
         WinningResult winningResult = new WinningResult(winningResultMap);
 
         ResultView.printWinningNumericalStatement();

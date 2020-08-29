@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.Map;
 
 import static lotto.utils.CommonConstant.NUMBER_ZERO;
@@ -25,14 +24,4 @@ public class WinningResult {
         return winningResult.get(rank);
     }
 
-    public Map<Rank, Long> getWinningResult() {
-        return Collections.unmodifiableMap(winningResult);
-    }
-
-    @Override
-    public String toString() {
-        return "WinningResult{" +
-                "winningResult=" + winningResult +
-                '}';
-    }
 }
