@@ -15,7 +15,8 @@ public class Lottery {
 
     private void validateLotteryNumbers(Set<LotteryNumber> lotteryNumbers) throws IllegalArgumentException {
         if (lotteryNumbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            String message = String.format("%d 개의 숫자만 입력해 주세요.", NUMBER_COUNT);
+            throw new IllegalArgumentException(message);
         }
     }
 

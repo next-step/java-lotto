@@ -24,7 +24,7 @@ public class InputView {
             System.out.println("숫자만 입력할 수 있어요.");
             return tryCatchInputExceptions(inputLogic);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력값 입니다.");
+            System.out.println(e.getMessage());
             return tryCatchInputExceptions(inputLogic);
         }
     }
