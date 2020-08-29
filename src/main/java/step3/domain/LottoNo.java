@@ -5,26 +5,12 @@ import java.util.Objects;
 public class LottoNo implements Comparable<LottoNo> {
 
     private final int lottoNo;
-    private final boolean matchBonus;
 
     public LottoNo(int lottoNo) {
-        this(lottoNo, false);
-    }
-
-    public LottoNo(int lottoNo, boolean matchBonus) {
         if (lottoNo < LottoConfig.FIRST_LOTTO_NUMBER || lottoNo > LottoConfig.LAST_LOTTO_NUMBER) {
             throw new IllegalArgumentException("1 ~ 45 사이의 값만 가능합니다.");
         }
         this.lottoNo = lottoNo;
-        this.matchBonus = matchBonus;
-    }
-
-    public boolean isMatchBonus() {
-        return matchBonus;
-    }
-
-    public boolean isWinningNumber() {
-        return !matchBonus;
     }
 
     @Override
