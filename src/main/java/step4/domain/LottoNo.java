@@ -10,6 +10,10 @@ public class LottoNo implements Comparable<LottoNo> {
         this.lottoNo = lottoNo;
     }
 
+    public boolean equalsLottoNo(int no) {
+        return lottoNo == no;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

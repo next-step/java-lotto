@@ -26,21 +26,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private int findWinningNumbersCount(WinningNumbers winningNumbers) {
+    public int findWinningNumbersCount(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(winningNumbers::isWinningNumber)
+                .filter(lotto::containsLottoNo)
                 .count();
     }
 
-    private boolean isMatchBonus(WinningNumbers winningNumbers) {
-        return numbers.stream()
-                .anyMatch(winningNumbers::isMatchBonus);
-    }
-
-    public Rank getRank(WinningNumbers winningNumbers) {
-        int winningNumbersCount = findWinningNumbersCount(winningNumbers);
-        boolean matchBonus = isMatchBonus(winningNumbers);
-        return Rank.valueOf(winningNumbersCount, matchBonus);
+    public boolean containsLottoNo(LottoNo lottoNo) {
+        return numbers.contains(lottoNo);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class LottoApp {
     private static Lottos getLottos(Money money) {
         int lottoPurchaseCount = money.calculateLottoPurchaseCount();
         ResultView.printLottoPurchaseCount(lottoPurchaseCount);
-        Lottos lottos = new Lottos(LottoFactory.create(lottoPurchaseCount));
+        Lottos lottos = new Lottos(LottoFactory.createsByLottoPurchaseCount(lottoPurchaseCount));
         ResultView.printLottos(lottos);
         return lottos;
     }

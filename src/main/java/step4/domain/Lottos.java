@@ -13,7 +13,7 @@ public class Lottos {
 
     public List<Rank> collectRank(WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.getRank(winningNumbers))
+                .map(lotto -> winningNumbers.getRank(lotto))
                 .collect(Collectors.toList());
     }
 
