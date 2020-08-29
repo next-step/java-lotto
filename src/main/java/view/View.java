@@ -15,6 +15,7 @@ public class View {
     private static final int FOUR = 4;
 
     public static void result(WinnerNumberManager winnerNumber, int sum, int tries) {
+        System.out.println(sum);
         System.out.println("당첨 통계");
         System.out.println("--------");
         System.out.println("3개 일치(5000원)- " + winnerNumber.getRankRecord().getRecordPool().get(FOUR) + "개");

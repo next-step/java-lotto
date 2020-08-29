@@ -5,6 +5,7 @@ import java.util.List;
 
 public class RankRecord {
     public static final int RECORD_SIZE = 6;
+    public static final int ONE = 1;
     private List<Integer> recordPool;
 
     public RankRecord() {
@@ -20,7 +21,7 @@ public class RankRecord {
     }
 
     public void recordOfRankings(int count) {
-        int rank = 6 - count + 1;
+        int rank = RECORD_SIZE - count + ONE;
 
         int rankCount = recordPool.get(rank);
         recordPool.set(rank, rankCount + 1);

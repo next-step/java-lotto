@@ -16,8 +16,10 @@ public class WinnerNumber {
     }
 
     int getCountingNumber(Lotto lotto) {
-        int count = lotto.getLottoNumber().stream().filter(winnerNumber::contains)
-                .collect(Collectors.toList()).size();
+        int count = (int) lotto.getLottoNumber()
+                .stream()
+                .filter(winnerNumber::contains)
+                .count();
 
         return count;
     }

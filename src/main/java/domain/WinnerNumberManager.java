@@ -24,7 +24,6 @@ public class WinnerNumberManager {
         for (int i = 0; i < lottos.getNumOfLottos(); i++) {
             sum += sumAndRecord(lottos, i);
         }
-        System.out.println(sum);
         return sum;
     }
 
@@ -47,7 +46,7 @@ public class WinnerNumberManager {
     }
 
     private int sumOfWinnerPrice(int count) {
-        Optional<WinnerRanking> winRank = Arrays.stream(WinnerRanking.values())
+        Optional<Rank> winRank = Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCount() == count).findFirst();
 
         return winRank.get().getWinnerPrice();

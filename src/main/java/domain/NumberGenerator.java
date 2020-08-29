@@ -16,12 +16,11 @@ public class NumberGenerator {
     private List<Integer> lottoNumberCandidate;
 
     public NumberGenerator() {
-        lottoNumberCandidate = new ArrayList<>();
-        createLottoNumberCandidate();
+        lottoNumberCandidate = createLottoNumberCandidate();
     }
 
-    private void createLottoNumberCandidate() {
-        lottoNumberCandidate = IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
+    private List<Integer> createLottoNumberCandidate() {
+        return IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
                 .boxed().collect(Collectors.toList());
     }
 

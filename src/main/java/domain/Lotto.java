@@ -33,11 +33,8 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<Integer> list) {
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set = new HashSet<>(list);
 
-        for (Integer number : list) {
-            set.add(number);
-        }
         if (set.size() != list.size()) {
             throw new IllegalArgumentException("duplicated!!");
         }
