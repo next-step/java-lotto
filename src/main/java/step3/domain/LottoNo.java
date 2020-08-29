@@ -7,9 +7,6 @@ public class LottoNo implements Comparable<LottoNo> {
     private final int lottoNo;
 
     public LottoNo(int lottoNo) {
-        if (lottoNo < LottoConfig.FIRST_LOTTO_NUMBER || lottoNo > LottoConfig.LAST_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("1 ~ 45 사이의 값만 가능합니다.");
-        }
         this.lottoNo = lottoNo;
     }
 

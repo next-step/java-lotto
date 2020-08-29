@@ -9,8 +9,8 @@ import java.util.stream.IntStream;
 public class LottoFactory {
 
     private static final int PICK_COUNT = 6;
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(LottoConfig.FIRST_LOTTO_NUMBER, LottoConfig.LAST_LOTTO_NUMBER)
-            .boxed()
+    private static final List<LottoNo> LOTTO_NOS = IntStream.rangeClosed(LottoConfig.FIRST_LOTTO_NUMBER, LottoConfig.LAST_LOTTO_NUMBER)
+            .mapToObj(LottoNo::new)
             .collect(Collectors.toList());
 
     private LottoFactory() {
@@ -24,10 +24,9 @@ public class LottoFactory {
     }
 
     private static List<LottoNo> pickLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.subList(0, PICK_COUNT)
+        Collections.shuffle(LOTTO_NOS);
+        return LOTTO_NOS.subList(0, PICK_COUNT)
                 .stream()
-                .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 
