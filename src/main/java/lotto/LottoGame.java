@@ -29,10 +29,10 @@ public class LottoGame {
         ResultView.printLottoTickets(lottoTickets);
 
         String inputWinningNumber = InputView.setWinningNumber(scanner);
-        int bonusLottoNumber = InputView.setBonusLottoNumber(scanner);
+        BonusNumber bonusNumber = new BonusNumber(InputView.setBonusLottoNumber(scanner));
 
         LottoTicket winningNumbers = LottoNumberGenerator.generateWinningNumber(inputWinningNumber);
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusLottoNumber);
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
 
         Map<Rank, Long> winningResultMap = lottoTickets.matchResult(winningNumber);
         WinningResult winningResult = new WinningResult(winningResultMap);

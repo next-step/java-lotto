@@ -15,7 +15,7 @@ public class WinningResult {
 
     private Map<Rank, Long> initMap(Map<Rank, Long> winningResult) {
         for (Rank rank : Rank.values()) {
-            winningResult.put(rank, winningResult.getOrDefault(rank, Long.valueOf(NUMBER_ZERO)));
+            winningResult.put(rank, winningResult.getOrDefault(rank, new Count(NUMBER_ZERO).getCount()));
         }
         return winningResult;
     }

@@ -12,11 +12,11 @@ public enum Rank {
     FIFTH(NUMBER_THREE, false, NUMBER_FIVE_THOUSAND_WON),
     MISS(NUMBER_ZERO, false, NUMBER_ZERO);
 
-    private int countOfMatch;
+    private long countOfMatch;
     private int winningMoney;
     private boolean bonusNumber;
 
-    public int getCountOfMatch() {
+    public long getCountOfMatch() {
         return countOfMatch;
     }
 
@@ -28,13 +28,13 @@ public enum Rank {
         return bonusNumber;
     }
 
-    Rank(int countOfMatch, boolean bonusNumber, int winningMoney) {
+    Rank(long countOfMatch, boolean bonusNumber, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.bonusNumber = bonusNumber;
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valudOf(int countOfMatch, boolean bonusNumber) {
+    public static Rank valudOf(long countOfMatch, boolean bonusNumber) {
         return Stream.of(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .filter(rank -> rank.getBonusNumber() == bonusNumber)

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,8 +22,8 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public static LottoTickets of(List<LottoTicket> autoLottoTickets, List<LottoTicket> manualLottoTickets) {
-        return new LottoTickets(Stream.of(autoLottoTickets, manualLottoTickets)
+    public static LottoTickets of(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+        return new LottoTickets(Stream.of(manualLottoTickets, autoLottoTickets)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
     }

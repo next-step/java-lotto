@@ -17,7 +17,7 @@ public class ProfitTest {
 
     private List<LottoTicket> mockLottoTickets;
     private LottoTicket winningNumber;
-    private int bonusNumber;
+    private BonusNumber bonusNumber;
     private WinningNumber winningNumbers;
     private Profit profit;
     private Map<Rank, Long> winningResultMap;
@@ -27,7 +27,7 @@ public class ProfitTest {
     void setUp() {
         mockLottoTickets = initMockLottoTickets();
         winningNumber = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        bonusNumber = 7;
+        bonusNumber = new BonusNumber(7);
         winningNumbers = new WinningNumber(winningNumber, bonusNumber);
 
         LottoTickets lottoTickets = new LottoTickets(mockLottoTickets);

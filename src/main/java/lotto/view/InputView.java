@@ -1,11 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTickets;
-
 import java.util.Scanner;
-import java.util.stream.IntStream;
-
-import static lotto.utils.CommonConstant.NUMBER_ZERO;
 
 public class InputView {
     private static final String PRINT_INPUT_BUY_PRICE = "구입금액을 입력해 주세요.";
