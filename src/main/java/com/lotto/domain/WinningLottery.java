@@ -6,14 +6,17 @@ public class WinningLottery {
 
     private static final int NUMBER_COUNT = 6;
     private final Set<LotteryNumber> winningLotteryNumbers;
+    private final LotteryNumber bonusLotteryNumber;
 
-    public WinningLottery(Set<LotteryNumber> winningLotteryNumbers) {
-        validateLotteryNumbers(winningLotteryNumbers);
+    public WinningLottery(Set<LotteryNumber> winningLotteryNumbers, LotteryNumber bonusLotteryNumber) {
+        validateLotteryNumbers(winningLotteryNumbers, bonusLotteryNumber);
         this.winningLotteryNumbers = winningLotteryNumbers;
+        this.bonusLotteryNumber = bonusLotteryNumber;
     }
 
-    private void validateLotteryNumbers(Set<LotteryNumber> lotteryNumbers) throws IllegalArgumentException {
-        if (lotteryNumbers.size() != NUMBER_COUNT) {
+    private void validateLotteryNumbers(Set<LotteryNumber> lotteryNumbers, LotteryNumber bonusLotteryNumber)
+            throws IllegalArgumentException {
+        if (lotteryNumbers.size() != NUMBER_COUNT || lotteryNumbers.contains(bonusLotteryNumber)) {
             throw new IllegalArgumentException();
         }
     }
@@ -22,6 +25,7 @@ public class WinningLottery {
         int matchingCount = (int) winningLotteryNumbers.stream()
                 .filter(lottery::hasLotteryNumber)
                 .count();
-        return Rank.matchRank(matchingCount);
+        boolean matchingBonus = lottery.hasLotteryNumber(bonusLotteryNumber);
+        return Rank.matchRank(matchingCount, matchingBonus);
     }
 }

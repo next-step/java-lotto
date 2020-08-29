@@ -11,7 +11,7 @@ public class Statistic {
     public Statistic(Rank rank, List<Rank> ranks) {
         this.rank = rank;
         this.lotteryCount = (int) ranks.stream()
-                .filter(_rank -> this.rank == _rank)
+                .filter(item -> this.rank == item)
                 .count();
     }
 
@@ -19,7 +19,7 @@ public class Statistic {
         return rank.calculateTotalWinnings(lotteryCount);
     }
 
-    public String toString(String rankFormat, String lotteryCountFormat) {
-        return rank.toString(rankFormat) + String.format(lotteryCountFormat, lotteryCount);
+    public String toString(String rankFormat, String rankBonusFormat, String lotteryCountFormat) {
+        return rank.toString(rankFormat, rankBonusFormat) + String.format(lotteryCountFormat, lotteryCount);
     }
 }

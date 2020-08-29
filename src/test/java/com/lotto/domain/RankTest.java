@@ -14,21 +14,25 @@ class RankTest {
 
     private static Stream<Arguments> provideMatchRankArguments() {
         return Stream.of(
-                Arguments.of(6, Rank.FIRST),
-                Arguments.of(5, Rank.SECOND),
-                Arguments.of(4, Rank.THIRD),
-                Arguments.of(3, Rank.FORTH),
-                Arguments.of(2, Rank.LOSER),
-                Arguments.of(1, Rank.LOSER),
-                Arguments.of(0, Rank.LOSER)
+                Arguments.of(6, false, Rank.FIRST),
+                Arguments.of(5, true, Rank.SECOND),
+                Arguments.of(5, false, Rank.THIRD),
+                Arguments.of(4, true, Rank.FORTH),
+                Arguments.of(4, false, Rank.FORTH),
+                Arguments.of(3, true, Rank.FIFTH),
+                Arguments.of(3, false, Rank.FIFTH),
+                Arguments.of(2, false, Rank.LOSER),
+                Arguments.of(1, false, Rank.LOSER),
+                Arguments.of(0, true, Rank.LOSER),
+                Arguments.of(0, false, Rank.LOSER)
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideMatchRankArguments")
     @DisplayName("일치하는 복권 숫자로 등수를 반환하는 메소드 검증")
-    void matchRank(int matchingCount, Rank expected) {
-        then(Rank.matchRank(matchingCount)).isEqualTo(expected);
+    void matchRank(int matchingCount, boolean matchingBonus, Rank expected) {
+        then(Rank.matchRank(matchingCount, matchingBonus)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideCalculateTotalWinningsArguments() {
