@@ -14,13 +14,13 @@ public class LottoResults {
         this.ranks = ranks;
     }
 
-    public int calculateWinningNumbersCount(Rank rank) {
+    int calculateWinningNumbersCount(Rank rank) {
         return (int) ranks.stream()
                 .filter(rank::equals)
                 .count();
     }
 
-    public int calculateTotalWinnings() {
+    int calculateTotalWinnings() {
         return Arrays.stream(Rank.values())
                 .map(rank -> rank.getWinningMoney() * calculateWinningNumbersCount(rank))
                 .reduce(0, Integer::sum);
