@@ -19,8 +19,8 @@ public class LottoNumberUtil {
 
     private static void setDefaultLottoNums() {
         lottoNums = new ArrayList<>(45);
-        for (int i=0; i < 45; i++) {
-            lottoNums.add(i+1);
+        for (int i = 0; i < 45; i++) {
+            lottoNums.add(i + 1);
         }
     }
 
