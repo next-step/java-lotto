@@ -13,6 +13,10 @@ public class LottoFactory {
             .boxed()
             .collect(Collectors.toList());
 
+    private LottoFactory() {
+
+    }
+
     public static List<Lotto> create(int lottoPurchaseCount) {
         return IntStream.range(0, lottoPurchaseCount)
                 .mapToObj(i -> new Lotto(pickLottoNumbers()))
@@ -21,9 +25,10 @@ public class LottoFactory {
 
     private static List<LottoNo> pickLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new ArrayList<>(LOTTO_NUMBERS.subList(0, PICK_COUNT).stream()
+        return LOTTO_NUMBERS.subList(0, PICK_COUNT)
+                .stream()
                 .map(LottoNo::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
 }
