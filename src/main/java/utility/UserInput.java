@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_MESSEGE = "개를 구매했습니다.";
-    private static final String AFTER_MESSEGE = "지난 당첨번호를 입력하세요.";
+    private static final String AFTER_MESSEGE = "지난 주 당첨 번호를 입력하세요.";
+    private static final String BONUS_BALL_MESSEGE = "보너스 볼을 입력하세요.";
     private static final String DELIMTER = ",";
     private static final String BONUS_MESSEGE = "보너스 볼을 입력해 주세요.";
 
@@ -46,5 +47,6 @@ public class UserInput {
         System.out.println(BONUS_MESSEGE);
 
         return SC.nextInt();
+
     }
 }
