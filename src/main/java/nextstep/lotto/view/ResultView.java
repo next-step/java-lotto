@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-import static nextstep.lotto.constant.PrintMessage.RESULT_TEXT_BUY_TOTAL_AMOUNT;
 
 public class ResultView {
 
@@ -16,6 +15,7 @@ public class ResultView {
     private final String LOTTO_TICKET_SUFFIX = "]";
     private final String LOTTO_TICKET_DELIMITER = ",";
 
+    private final String RESULT_TEXT_BUY_DETAIL = "수동으로 %s장, 자동으로 %s개 를 구매했습니다.\n";
     private final String BENEFIT_RATE_TEXT = "총 수익률은 %.2f 입니다.";
 
     private final String MATCH_INFO_TEXT_MATCH_COUNT = "개 일치(";
@@ -27,16 +27,16 @@ public class ResultView {
 
     private final long DEFAULT_TICKET_COUNT = 0;
 
-    public void showLottoTicket(LottoTickets tickets) {
-        printTicketCount(tickets.count());
+    public void showLottoTicket(LottoTickets tickets, LottoBuyManger lottoBuyManger) {
+        printTicketCount(lottoBuyManger);
 
         for (LottoTicket ticket : tickets.getAll()) {
             printTicket(ticket);
         }
     }
 
-    private void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + RESULT_TEXT_BUY_TOTAL_AMOUNT);
+    private void printTicketCount(LottoBuyManger lottoBuyManger) {
+        System.out.printf(RESULT_TEXT_BUY_DETAIL, lottoBuyManger.getManualLottoAmount(), lottoBuyManger.getAutoAmount());
     }
 
     private void printTicket(LottoTicket ticket) {
