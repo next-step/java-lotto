@@ -27,13 +27,13 @@ public class LottoMachineTest {
         assertThat(lottoMachine.issue()).hasSize(10);
     }
 
-    @DisplayName("발행")
+    @DisplayName("수동로또갯수")
     @Test
     public void getManualLottosSize() {
         assertThat(lottoMachine.getManualLottosSize()).isEqualTo(3);
     }
 
-    @DisplayName("발행")
+    @DisplayName("자동로또갯수")
     @Test
     public void getAutoLottosSize() {
         assertThat(lottoMachine.getAutoLottosSize()).isEqualTo(7);
