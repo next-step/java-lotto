@@ -1,15 +1,29 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoPaper {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNum> lottoNumbers;
 
-    public LottoPaper(List<Integer> numberList) {
+    public LottoPaper(List<LottoNum> numberList) {
         lottoNumbers = numberList;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNum> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public List<Integer> getLottoNumbersToIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
+    }
+
+    Integer getMatchCount(List<Integer> winningNumber) {
+        return (int) this.lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .filter(winningNumber::contains)
+                .count();
     }
 }

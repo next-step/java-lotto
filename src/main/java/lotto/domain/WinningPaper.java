@@ -1,19 +1,14 @@
 package lotto.domain;
 
-import lotto.context.Error;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningPaper {
-    private final Integer MIN_LOTTO_NUMBER = 1;
-    private final Integer MAX_LOTTO_NUMBER = 45;
-    private final List<Integer> winningNumbers;
+    private final List<LottoNum> winningNumbers;
 
     WinningPaper(String winningLottoNumbers) {
-        List<Integer> numberList = makeNmbersAsList(winningLottoNumbers);
-        vaildList(numberList);
+        List<LottoNum> numberList = makeNmbersAsList(winningLottoNumbers);
         this.winningNumbers = numberList;
     }
 
@@ -21,20 +16,17 @@ public class WinningPaper {
         return Arrays.stream(winningLottoNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(integer -> new LottoNum(integer))
                 .collect(Collectors.toList());
     }
 
-    private void vaildList(List<Integer> numberList) {
-        if (numberList.stream()
-                .filter(number -> number <  MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
-                .count() > 0) {
-            throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
-        }
+    public List<LottoNum> getWinningNumbers() {
+        return winningNumbers;
     }
 
-    Integer getMatchCount(List<Integer> lottoNumber) {
-        return (int) lottoNumber.stream()
-                .filter(winningNumbers::contains)
-                .count();
+    public List<Integer> getWinningNumbersToIntegerList() {
+        return winningNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
     }
 }

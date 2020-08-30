@@ -10,20 +10,17 @@ public class LottoGame {
         InputMoney inputMoney = new InputMoney(InputView.inputText());
 
         LottoPapers lottoPapers = new LottoPapers(inputMoney.getMoney());
-        ResultView.printBuyCount(lottoPapers.getPapersCount());
+        ResultView.showBuyCount(lottoPapers.getPapers().size());
+        ResultView.showLottoNumbersList(lottoPapers.getPapers());
 
-        System.out.println(lottoPapers.getPaperNumbersToString());
-        ResultView.printInputWinningNumber();
-
+        ResultView.showInputWinningNumber();
         WinningResult winningResult = new WinningResult(InputView.inputText());
-        lottoPapers.getPapers()
-                .stream()
-                .forEach(lottoPaper -> {
-                    winningResult.setAutoIncrement(lottoPaper.getLottoNumbers());
-                });
+        winningResult.setWinningTable(
+                lottoPapers.makeWinningTable(winningResult.getWinningPaper().getWinningNumbersToIntegerList())
+        );
 
-        ResultView.printResult(winningResult.getMatchCountResult());
-        ResultView.printDelimiter();
-        ResultView.printEarningsRate(winningResult.calculationEarningsRate(inputMoney.getMoney()));
+        ResultView.showResult(winningResult.getMatchCountResult());
+        ResultView.showDelimiter();
+        ResultView.showEarningsRate(winningResult.calculationEarningsRate(inputMoney.getMoney()));
     }
 }

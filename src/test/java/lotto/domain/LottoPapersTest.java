@@ -9,12 +9,11 @@ class LottoPapersTest {
 
     @BeforeEach
     void PapersCreate() {
-        lottoPapers = new LottoPapers(3);
+        lottoPapers = new LottoPapers(3000);
     }
 
     @Test
     void getPapersTest() {
         Assertions.assertThat(lottoPapers.getPapers().size()).isEqualTo(3);
-        Assertions.assertThat(lottoPapers.getPapersCount()).isEqualTo(3);
     }
 }

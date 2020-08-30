@@ -15,7 +15,7 @@ class WinningPaperTest {
     }
 
     @Test
-    void getMatchCount() {
-        Assertions.assertThat(winningPaper.getMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    void getWinningNumbers() {
+        Assertions.assertThat(winningPaper.getWinningNumbersToIntegerList()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.context.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -24,6 +25,7 @@ class WinningTableTest {
     }
 
     @Test
+    @DisplayName("일치하는 수의 담청자 수를 증가시킨다.")
     void setAutoIncrementMatchCountResult() {
         winningTable.setAutoIncrementMatchCountResult(3);
         winningTable.setAutoIncrementMatchCountResult(3);
@@ -33,7 +35,6 @@ class WinningTableTest {
     @Test
     void calculationEarningsRate() {
         winningTable.setAutoIncrementMatchCountResult(3);
-        System.out.println(winningTable.calculationEarningsRate(14000));
         Assertions.assertThat(winningTable.calculationEarningsRate(14000)).isEqualTo(0.35);
     }
 }

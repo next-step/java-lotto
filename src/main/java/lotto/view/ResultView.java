@@ -2,13 +2,18 @@ package lotto.view;
 
 import lotto.context.Message;
 import lotto.context.Rank;
+import lotto.domain.LottoPaper;
+import lotto.domain.LottoPapers;
 import lotto.util.MessageUtil;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final String LOTTO_PAPER_JOINING_DELIMITER = "\n";
+
     private ResultView() {
         throw new AssertionError();
     }
@@ -17,24 +22,27 @@ public class ResultView {
         System.out.println(text);
     }
 
-    public static void printNextLine() {
-        System.out.println("");
-    }
-
     public static void printInputMsg() {
         ResultView.print(MessageUtil.getMsg(Message.INPUT_MSG));
     }
 
-    public static void printBuyCount(Integer papersCount) {
+    public static void showLottoNumbersList(List<LottoPaper> papers) {
+        print(papers.stream()
+                .map(LottoPaper::getLottoNumbersToIntegerList)
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_PAPER_JOINING_DELIMITER)));
+    }
+
+    public static void showBuyCount(Integer papersCount) {
         print(MessageUtil.getMsg(Message.BUY_COUNT, papersCount.toString()));
     }
 
-    public static void printInputWinningNumber() {
-        printNextLine();
+    public static void showInputWinningNumber() {
+        print("");
         print(MessageUtil.getMsg(Message.INPUT_WINNING_NUMBER));
     }
 
-    public static void printResult(Map<Rank, Integer> matchCountResult) {
+    public static void showResult(Map<Rank, Integer> matchCountResult) {
         print("");
         print(MessageUtil.getMsg(Message.RESULT_HEAD));
         matchCountResult.entrySet().stream().forEach(entry -> {
@@ -45,11 +53,11 @@ public class ResultView {
         });
     }
 
-    public static void printDelimiter() {
+    public static void showDelimiter() {
         print(MessageUtil.getMsg(Message.RESULT_DELIMITER));
     }
 
-    public static void printEarningsRate(Double earningsRate) {
+    public static void showEarningsRate(Double earningsRate) {
         print(MessageUtil.getMsg(Message.RESULT_EARNING_RATE, earningsRate.toString()));
     }
 }

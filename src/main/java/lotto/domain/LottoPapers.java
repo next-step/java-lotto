@@ -2,13 +2,13 @@ package lotto.domain;
 
 import lotto.util.LottoNumberUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoPapers {
     private static final Integer LOTTO_PRICE = 1000;
-    private static final String LOTTO_PAPER_JOINING_DELIMITER = "\n";
     private final List<LottoPaper> papers;
 
     public LottoPapers(Integer inputMoney) {
@@ -25,21 +25,20 @@ public class LottoPapers {
         return inputMoney / LOTTO_PRICE;
     }
 
-    private List<Integer> getAutoLottoNums() {
+    private List<LottoNum> getAutoLottoNums() {
         return LottoNumberUtil.getAutoLottoNums();
     }
 
     public List<LottoPaper> getPapers() {
-        return papers;
+        return Collections.unmodifiableList(papers);
     }
 
-    public Integer getPapersCount() {
-        return papers.size();
-    }
-
-    public String getPaperNumbersToString() {
-        return papers.stream()
-                .map(LottoPaper::getLottoNumbers).map(String::valueOf)
-                .collect(Collectors.joining(LOTTO_PAPER_JOINING_DELIMITER));
+    public WinningTable makeWinningTable(List<Integer> winningNumbers) {
+        WinningTable winningTable = new WinningTable();
+        papers.stream()
+                .forEach(lottoPaper -> {
+                    winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers));
+        });
+        return winningTable;
     }
 }

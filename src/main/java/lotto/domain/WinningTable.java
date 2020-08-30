@@ -12,6 +12,7 @@ import java.util.Map;
 public class WinningTable {
     private final static Integer ADD_AUTO_INCREMENT = 1;
     private final static Integer DIVIDE_SCALE = 2;
+    private final static Integer MIN_MATCH_COUNT = 3;
     private final static RoundingMode DIVIDE_ROUND_MODE = RoundingMode.DOWN;
     private final Map<Rank, Integer> matchCountTable;
 
@@ -37,7 +38,10 @@ public class WinningTable {
         return matchCountTable;
     }
 
-    void setAutoIncrementMatchCountResult(Integer matchCount) {
+    public void setAutoIncrementMatchCountResult(Integer matchCount) {
+        if (matchCount < MIN_MATCH_COUNT) {
+            return;
+        }
         matchCountTable.put(Rank.getRank(matchCount), matchCountTable.get(Rank.getRank(matchCount)) + ADD_AUTO_INCREMENT);
     }
 
@@ -53,6 +57,5 @@ public class WinningTable {
         return BigDecimal.valueOf(getTotalWinningMoney())
                 .divide(BigDecimal.valueOf(inputMoney), DIVIDE_SCALE, DIVIDE_ROUND_MODE)
                 .doubleValue();
-
     }
 }
