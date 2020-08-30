@@ -1,50 +1,56 @@
 package lotto.util;
 
+import lotto.domain.LottoNum;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LottoNumberUtil {
     private static final Integer GET_LIST_START = 0;
     private static final Integer GET_LIST_END = 6;
-    private static List<Integer> lottoNums;
+    private static List<LottoNum> lottoNums;
+
+    private LottoNumberUtil() {
+        throw new AssertionError();
+    }
 
     static {
         setDefaultLottoNums();
     }
 
-    static List<Integer> getDefaultLottoNums() {
-        return getCopyList();
+    private static List<LottoNum> getDefaultLottoNums() {
+        return new ArrayList<>(lottoNums);
     }
 
     private static void setDefaultLottoNums() {
         lottoNums = new ArrayList<>(45);
         for (int i = 0; i < 45; i++) {
-            lottoNums.add(i + 1);
+            lottoNums.add(new LottoNum(i + 1));
         }
     }
 
-    public static List<Integer> getAutoLottoNums() {
+    public static List<LottoNum> getAutoLottoNums() {
         return getSortList(getSubList(getShuffleList(getDefaultLottoNums())));
     }
 
-    static List<Integer> getCopyList() {
-        List<Integer> copyLottoNum = new ArrayList<>();
-        copyLottoNum.addAll(lottoNums);
-        return copyLottoNum;
-    }
-
-    static List<Integer> getShuffleList(List<Integer> defaultNums) {
+    private static List<LottoNum> getShuffleList(List<LottoNum> defaultNums) {
         Collections.shuffle(defaultNums);
         return defaultNums;
     }
 
-    static List<Integer> getSortList(List<Integer> defaultNums) {
-        Collections.sort(defaultNums);
+    private static List<LottoNum> getSortList(List<LottoNum> defaultNums) {
+        Collections.sort(defaultNums, new Comparator<LottoNum>() {
+            @Override
+            public int compare(LottoNum o1, LottoNum o2) {
+                return o1.getLottoNum() > o2.getLottoNum() ? 1 : -1;
+            }
+        });
         return defaultNums;
     }
 
-    static List<Integer> getSubList(List<Integer> defaultNums) {
+    static List<LottoNum> getSubList(List<LottoNum> defaultNums) {
         return defaultNums.subList(GET_LIST_START, GET_LIST_END);
     }
 }
