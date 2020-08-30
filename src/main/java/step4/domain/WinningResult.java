@@ -4,18 +4,24 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningJudgement {
+public class WinningResult {
+
     private Map winningMap;
 
-    private void initWinningMap() {
-        winningMap = new EnumMap(WinningPrice.class);
+    public WinningResult() {
+        LottoMap lottoMap = new LottoMap(initWinningMap());
+        this.winningMap = lottoMap.getLottoMap();
+    }
+
+    private Map initWinningMap() {
+        Map winningMap = new EnumMap(WinningPrice.class);
         for (WinningPrice winningPrice : WinningPrice.values()) {
             winningMap.put(winningPrice, 0);
         }
+        return winningMap;
     }
 
     public Map<WinningPrice, Integer> makeWinningMap(List<Lotto> lottoList, WinningLotto winningLotto) {
-        initWinningMap();
         for (Lotto lotto : lottoList) {
             putWinningMap(lotto, winningLotto);
         }
