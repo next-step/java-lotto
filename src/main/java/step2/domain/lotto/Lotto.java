@@ -32,6 +32,11 @@ public class Lotto {
         return (int)winningLotto.stream()
                 .map(LottoNumber::new)
                 .filter(numbers::contains)
-                .count();
+                .map(e -> 1)
+                .reduce(0, Integer::sum);
+    }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(new LottoNumber(bonusNumber));
     }
 }

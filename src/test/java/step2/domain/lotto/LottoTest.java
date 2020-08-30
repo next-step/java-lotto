@@ -1,6 +1,5 @@
 package step2.domain.lotto;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +36,7 @@ class LottoTest {
                 new LottoNumber(5), new LottoNumber(6))
         );
 
-        int prize = lotto.getHitCount(Arrays.asList(1, 2, 30, 7, 9, 11));
+        int prize = lotto.getHitCount(Arrays.asList(1, 2, 33, 7, 9, 11));
 
         assertThat(prize).isEqualTo(3);
     }

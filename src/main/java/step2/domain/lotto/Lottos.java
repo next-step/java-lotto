@@ -36,7 +36,7 @@ public class Lottos {
         ValidateUtil.validate(winningNumbers, bonusNumber);
         LottoResults lottoResults = LottoResults.of();
         for (Lotto lotto : lottos) {
-            lottoResults.win(lotto.getHitCount(winningNumbers));
+            lottoResults.win(lotto.getHitCount(winningNumbers), lotto.hasBonusNumber(bonusNumber));
         }
         return lottoResults;
     }

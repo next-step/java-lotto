@@ -19,13 +19,9 @@ public class LottoResults {
                 .collect(Collectors.toList()));
     }
 
-    public void win(int hitCount) {
-        if (hitCount < MIN_MATCH_NUMBER) {
-            return;
-        }
-
+    public void win(int hitCount, boolean matchBonus) {
         for (LottoResult result : lottoResults) {
-            result.win(hitCount);
+            result.win(hitCount, matchBonus);
         }
     }
 
