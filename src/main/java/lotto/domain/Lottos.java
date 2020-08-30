@@ -27,6 +27,13 @@ public class Lottos {
         return lottos.size();
     }
 
+    public LottoResult match(List<Integer> winningNumbers) {
+        return lottos.stream()
+                .filter(lotto -> Rank.MISS != Rank.valueOf(lotto.getMatchCountByWinningNumber(winningNumbers)))
+                .map(lotto -> Rank.valueOf(lotto.getMatchCountByWinningNumber(winningNumbers)))
+                .collect(collectingAndThen(toList(), LottoResult::of));
+    }
+
     public List<String> toStringByLotto() {
         return lottos.stream()
                 .map(Lotto::toString)
