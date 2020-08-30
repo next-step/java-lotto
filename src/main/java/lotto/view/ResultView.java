@@ -31,8 +31,8 @@ public class ResultView {
         float sum = 0;
         for (long i = 0; i < winningMoney.length; i++) {
             Long count = Long.valueOf(0);
-            if(winningCount.containsKey(i+3)) {
-                count = winningCount.get(i+3);
+            if (winningCount.containsKey(i + 3)) {
+                count = winningCount.get(i + 3);
             }
             System.out.println(String.format(WINNING_COUNT_OUTPUT, i, winningMoney[(int) i], count));
             sum += winningMoney[(int) i] * count;

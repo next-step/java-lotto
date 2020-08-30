@@ -2,10 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +31,7 @@ public class LottoTest {
     void 당첨_개수_가져오기() {
         Lottos lottos = Lottos.of(14000, () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningNumbers winningNumbers = new WinningNumbers(new String[]{"1", "2", "3"});
-        assertThat(lottos.getWinningCount(winningNumbers).get((long)3)).isEqualTo(14);
+        assertThat(lottos.getWinningCount(winningNumbers).get((long) 3)).isEqualTo(14);
     }
 
 }

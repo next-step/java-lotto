@@ -19,7 +19,7 @@ public class Lottos {
     public static Lottos of(int paidMoney, LottoGeneratorStrategy lottoGeneratorStrategy) {
         int count = paidMoney / LOTTO_PRICE;
         return new Lottos(
-                Stream.generate(()->Lotto.createLotto(lottoGeneratorStrategy))
+                Stream.generate(() -> Lotto.createLotto(lottoGeneratorStrategy))
                         .limit(count)
                         .collect(Collectors.toList()));
     }
