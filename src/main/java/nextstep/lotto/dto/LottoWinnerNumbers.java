@@ -9,7 +9,7 @@ import static nextstep.lotto.constant.ExceptionMessage.INVALID_BONUS_NUMBER_CONT
 
 public class LottoWinnerNumbers extends LottoTicket {
 
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     private LottoWinnerNumbers(List<LottoNumber> numbers, LottoNumber bonusNumber) {
         super(numbers);
@@ -33,10 +33,6 @@ public class LottoWinnerNumbers extends LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumber() {
-        List<LottoNumber> lottoTicket = this.ticket.stream().collect(Collectors.toList());
-        Collections.sort(lottoTicket);
-        return Collections.unmodifiableList(
-                lottoTicket
-        );
+        return this.ticket.stream().sorted().collect(Collectors.toList());
     }
 }
