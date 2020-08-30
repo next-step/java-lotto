@@ -16,8 +16,13 @@ public class ResultView {
         YIELD_FORMAT.setRoundingMode(RoundingMode.HALF_EVEN);
     }
 
-    public void showPurchaseHistory(Lotteries lotteries) {
-        System.out.printf("%d 개를 구매 했어요.%n%s", lotteries.size(), lotteries);
+    public void showPurchaseHistory(Lotteries lotteries, Deposit deposit) {
+        System.out.printf(
+                "수동으로 %d 장, 자동으로 %d 장을 구매 했어요.%n%s%n",
+                deposit.getManualLotteryCount(),
+                deposit.getAutomaticLotteryCount(),
+                lotteries
+        );
     }
 
     public void showWinningStatistics(Statistics statistics) {

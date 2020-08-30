@@ -9,17 +9,21 @@ public class Controller {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-        LotteryCommission lotteryCommission = new LotteryCommission();
 
         Deposit deposit = inputView.payAmount();
-        Lotteries lotteries = lotteryCommission.publishLotteries(deposit);
-        resultView.showPurchaseHistory(lotteries);
+        System.out.println();
+
+        Lotteries lotteries = inputView.enterLotteriesManually(deposit);
+        lotteries.publishLotteryAutomatically(deposit.getAutomaticLotteryCount());
+        System.out.println();
+
+        resultView.showPurchaseHistory(lotteries, deposit);
         System.out.println();
 
         WinningLottery winningLottery = inputView.setupWinningLottery();
         System.out.println();
 
-        Statistics statistics = lotteryCommission.calculateStatistics(lotteries, winningLottery);
+        Statistics statistics = lotteries.calculateStatistics(winningLottery);
         resultView.showWinningStatistics(statistics);
     }
 }
