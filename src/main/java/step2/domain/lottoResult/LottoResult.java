@@ -21,8 +21,8 @@ public class LottoResult {
         return winCount.moneyCount(winNumber.getMoney());
     }
 
-    public void win(int hitNumber) {
-        if (winNumber.getHit() != hitNumber) {
+    public void win(int hitNumber, boolean matchBonus) {
+        if (winNumber != WinNumber.valueOf(hitNumber, matchBonus)) {
             return;
         }
         winCount.plus();
@@ -38,5 +38,9 @@ public class LottoResult {
 
     public int getMoney() {
         return winNumber.getMoney();
+    }
+
+    public WinNumber getWinNumber() {
+        return winNumber;
     }
 }

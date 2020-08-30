@@ -3,12 +3,14 @@ package step2.view;
 import step2.domain.lottoResult.LottoResult;
 import step2.domain.lottoResult.LottoResults;
 import step2.domain.lotto.Lottos;
+import step2.domain.lottoResult.WinNumber;
 
 public class ResultView {
     private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
     private static final String WININNG_STATISTICS_MESSAGE = "당첨 통계.\n---------";
-    private static final String  STATISTICS_STATUS= "%d개 일치 (%d원)- %d개";
-    private static final String  TOTAL_REVENUS= "총 수익률은 %.2f 입니다";
+    private static final String STATISTICS_STATUS= "%d개 일치 (%d원)- %d개";
+    private static final String SECOND_STATUS= "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+    private static final String TOTAL_REVENUS= "총 수익률은 %.2f 입니다";
 
 
     public static void printPurchaseLotto(int buyLottoAmount) {
@@ -31,7 +33,7 @@ public class ResultView {
 
         for (LottoResult value : prizes.getLottoResults()) {
             sb.append(String.format(
-                    STATISTICS_STATUS,
+                    value.getWinNumber().equals(WinNumber.SECOND) ? SECOND_STATUS : STATISTICS_STATUS,
                     value.getHitNumber(),
                     value.getMoney(),
                     value.getWinCount()));

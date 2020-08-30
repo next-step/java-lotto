@@ -10,16 +10,23 @@ public class ValidateUtil {
     private static final String OUT_OF_RANGE_EXCEPTION_MESSAGE = "로또 범위에 벗어난 값입니다.";
     private static final String INVALID_DIGIT_EXCEPTION_MESSAGE = "로또는 6자리 수가 입력되어야 합니다.";
     private static final String DUPLICATE_NUMBER_EXCEPTION_MESSAGE = "중복된 숫자가 존재합니다.";
+    private static final String DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스볼 숫자는 중복될 수 없습니다.";
 
     private ValidateUtil() {
     }
 
-    public static void validate(List<Integer> winningNumbers) {
-        validateWinningNumbers(winningNumbers);
+    public static void validate(List<Integer> winningNumbers, int bonusNumber) {
+        validateWinningNumbers(winningNumbers, bonusNumber);
         validateDuplicateNumbers(winningNumbers);
     }
 
-    private static void validateWinningNumbers(List<Integer> winningNumbers) {
+    private static void validateWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        validateLottoNumber(winningNumbers);
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE);
+        }
+    }
+    private static void validateLottoNumber(List<Integer> winningNumbers) {
         if (winningNumbers.size() != LottoConstant.END_LOTTO_NUMBER_RANGE) {
             throw new IllegalArgumentException(INVALID_DIGIT_EXCEPTION_MESSAGE);
         }
