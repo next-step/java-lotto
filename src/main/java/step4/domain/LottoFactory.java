@@ -8,13 +8,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    //다른 분의 리뷰를 살펴보던 중 final을 잘 쓸 수 있는 코드가 있어서 참고해서 사용해보았습니다.
     private static final List<LottoNumber> ALL_LOTTO_NUMBER = IntStream.rangeClosed(LottoNumber.LOTTO_START_NUMBER_VALUE, LottoNumber.LOTTO_LAST_NUMBER_VALUE)
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-    public static List<Lotto> makeLottoRandomList(int autoQuantity) {
+    public static List<Lotto> makeLottoAutoList(int autoQuantity) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoQuantity; i++) {
             lottoList.add(makeLottoRandom());
@@ -30,14 +29,12 @@ public class LottoFactory {
         return lottoList;
     }
 
-    public static List<Lotto> allLottoList(List makeLottoRandomList, List makeLottoManualList) {
+    public static List<Lotto> allLottoList(List makeLottoAutoList, List makeLottoManualList) {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.addAll(makeLottoManualList);
-        lottoList.addAll(makeLottoRandomList);
+        lottoList.addAll(makeLottoAutoList);
         return lottoList;
     }
-
-
 
     public static Lotto makeLottoRandom() {
         Collections.shuffle(ALL_LOTTO_NUMBER);
