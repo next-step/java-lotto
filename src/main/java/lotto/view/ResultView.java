@@ -10,7 +10,7 @@ public class ResultView {
     public static final String LOTTO_COUNT_OUTPUT = "%d개를 구매했습니다.";
     public static final String GUIDELINE_FOR_WINNING = "\n당첨 통계\n--------";
     public static final String WINNING_COUNT_OUTPUT = "%d개 일치 (%d원)- %d개";
-    public static final String PROFIT_RATE_OUTPUT = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String PROFIT_RATE_OUTPUT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private ResultView() {
         throw new AssertionError();
