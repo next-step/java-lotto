@@ -24,9 +24,9 @@ public class Lottos {
                         .collect(Collectors.toList()));
     }
 
-    public Map<Long, Long> getWinningCount(WinningNumbers winningNumbers) {
+    public Map<Long, Long> getWinningCounts(WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.findSameNumber(winningNumbers))
+                .map(lotto -> lotto.getWinningCount(winningNumbers))
                 .filter(count -> count >= WINNING_STANDARD_NUMBER)
                 .collect(Collectors.groupingBy(Function.identity(),
                         Collectors.counting()));

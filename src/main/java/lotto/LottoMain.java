@@ -20,7 +20,7 @@ public class LottoMain {
 
         /* 지난 주 당첨 번호 입출력 */
         WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers());
-        printWinningCount(lottos.getWinningCount(winningNumbers), paidMoney);
+        printWinningCount(lottos.getWinningCounts(winningNumbers), paidMoney);
 
     }
 

@@ -19,10 +19,8 @@ public class Lotto {
         return lotto;
     }
 
-    public long findSameNumber(WinningNumbers winningNumbers) {
-        return Arrays.stream(winningNumbers.getWinningNumbers())
-                .filter(n -> lotto.contains(Integer.parseInt(n)))
-                .count();
+    public long getWinningCount(WinningNumbers winningNumbers) {
+        return winningNumbers.findSameNumber(lotto);
     }
 
     @Override
@@ -37,6 +35,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
-
 
 }

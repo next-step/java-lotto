@@ -24,14 +24,14 @@ public class LottoTest {
     void 로또_번호_비교() {
         Lotto lotto = Lotto.createLotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningNumbers winningNumbers = new WinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"});
-        assertThat(lotto.findSameNumber(winningNumbers)).isEqualTo(6);
+        assertThat(lotto.getWinningCount(winningNumbers)).isEqualTo(6);
     }
 
     @Test
     void 당첨_개수_가져오기() {
         Lottos lottos = Lottos.of(14000, () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningNumbers winningNumbers = new WinningNumbers(new String[]{"1", "2", "3"});
-        assertThat(lottos.getWinningCount(winningNumbers).get((long) 3)).isEqualTo(14);
+        assertThat(lottos.getWinningCounts(winningNumbers).get((long) 3)).isEqualTo(14);
     }
 
 }
