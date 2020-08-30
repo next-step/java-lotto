@@ -46,7 +46,7 @@ class LottoResultBoardTest {
     void lottoBoard() {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
 
         Map<LottoRank, Long> lottoResult = lottoResultBoard.getLottoResult();
 
@@ -59,7 +59,7 @@ class LottoResultBoardTest {
     void lottoBenefit_5등_Test(LottoRank rank) {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "43", "44", "45");
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
         int buyAmount = lottoTickets.getAll().size();
         float expectedRate = (float) rank.getReward() / (buyAmount * LOTTO_VALUE);
         assertThat(lottoResultBoard.getBenefitRate()).isEqualTo(expectedRate);
@@ -71,7 +71,7 @@ class LottoResultBoardTest {
     void lottoBenefit_4등_Test(LottoRank rank) {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "44", "45");
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
 
         int buyAmount = lottoTickets.getAll().size();
         float expectedRate = (float) rank.getReward() / (buyAmount * LOTTO_VALUE);
@@ -82,7 +82,7 @@ class LottoResultBoardTest {
     @EnumSource(value = LottoRank.class, names = {"THIRD"})
     @DisplayName("5천원구입으로 3등수익률")
     void lottoBenefit_3등_Test(LottoRank rank) {
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
 
         int buyAmount = lottoTickets.getAll().size();
         float expectedRate = (float) rank.getReward() / (buyAmount * LOTTO_VALUE);
@@ -96,7 +96,7 @@ class LottoResultBoardTest {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "45");
 
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(6));
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
 
         int buyAmount = lottoTickets.getAll().size();
         float expectedRate = (float) rank.getReward() / (buyAmount * LOTTO_VALUE);
@@ -109,7 +109,7 @@ class LottoResultBoardTest {
     void lottoBenefit_1등_Test(LottoRank rank) {
         List<String> lottoTicket = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoWinnerNumbers winnerNumbers = LottoWinnerNumbers.create(LottoNumberUtil.transStringNumberToLottoNumber(lottoTicket), LottoNumber.create(7));
-        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.matchCount(winnerNumbers));
+        LottoResultBoard lottoResultBoard = LottoResultBoard.create(lottoTickets.resultRank(winnerNumbers));
 
         int buyAmount = lottoTickets.getAll().size();
         float expectedRate = (float) rank.getReward() / (buyAmount * LOTTO_VALUE);

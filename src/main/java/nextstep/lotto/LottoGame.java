@@ -6,8 +6,6 @@ import nextstep.lotto.view.InputView;
 import nextstep.lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class LottoGame {
@@ -27,7 +25,7 @@ public class LottoGame {
 
         LottoWinnerNumbers winnerNumbers = castWinnerNumber(inputView.inputWinnerNumber(), inputView.inputBonusNumber());
 
-        resultView.showLottoResultBoard(LottoResultBoard.create(userLottoTickets.matchCount(winnerNumbers)));
+        resultView.showLottoResultBoard(LottoResultBoard.create(userLottoTickets.resultRank(winnerNumbers)));
     }
 
 
@@ -41,20 +39,11 @@ public class LottoGame {
     private LottoTickets buyTicket(LottoBuyManger lottoBuyManger) {
         List<LottoTicket> lottoTickets = buyManualTicket(lottoBuyManger.getManualLottoAmount());
 
-        lottoTickets.addAll(buyAutoTicket(lottoBuyManger.getAutoAmount()));
-
-        return LottoTickets.create(lottoTickets);
+        return LottoTickets.create(lottoTickets, lottoBuyManger.getAutoAmount());
     }
 
     private List<LottoTicket> buyManualTicket(int buyManualTicketCount) {
         return inputView.inputManualNumber(buyManualTicketCount);
-    }
-
-    private List<LottoTicket> buyAutoTicket(int buyAutoTicketCount) {
-        return Stream.generate((LottoNumberUtil::generator))
-                .limit(buyAutoTicketCount)
-                .map(LottoTicket::create)
-                .collect(Collectors.toList());
     }
 
 }
