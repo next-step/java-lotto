@@ -1,12 +1,9 @@
 package step4.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -18,7 +15,7 @@ class LottoGameTest {
 	@ValueSource(ints = {0, 500, 1500, 3256})
 	void lottoPriceException(int price) {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> new LottoGame(price, new ArrayList<>()))
+				.isThrownBy(() -> new LottoGame(price, new String[0]))
 				.withMessage("로또 구입 금액은 1000원 단위만 가능합니다.");
 	}
 
@@ -35,7 +32,7 @@ class LottoGameTest {
 	@ParameterizedTest
 	@CsvSource(value = {"3000:3", "14000:14"}, delimiter = ':')
 	void lottoCount(int price, int expected) {
-		LottoGame lottoGame = new LottoGame(price, new ArrayList<>());
+		LottoGame lottoGame = new LottoGame(price, new String[0]);
 		assertThat(lottoGame.getAllLottos().getLottos()).hasSize(expected);
 	}
 

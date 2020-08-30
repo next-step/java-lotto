@@ -11,10 +11,10 @@ public class LottoGame {
 	private final int price;
 	private final Lottos lottos;
 
-	public LottoGame(int price, List<Lotto> manualLottos) {
+	public LottoGame(int price, String[] manualLottos) {
 		validPrice(price);
 		this.price = price;
-		this.lottos = new Lottos(manualLottos);
+		this.lottos = Lottos.convertInputLottos(manualLottos);
 	}
 
 	public Lottos getAllLottos() {

@@ -11,14 +11,9 @@ public class LottoController {
 	public static void main(String[] args) {
 		int price = InputView.inputPrice();
 		int manualLottoCount = InputView.inputManualLottoCount();
-		List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount)
-				.stream()
-				.map(lottoNumbers -> new Lotto(lottoNumbers.stream()
-						.map(LottoNumber::new)
-						.collect(Collectors.toList())))
-				.collect(Collectors.toList());
-
+		String[] manualLottos = InputView.inputManualLottos(manualLottoCount);
 		LottoGame lottoGame = new LottoGame(price, manualLottos);
+
 		Lottos issueLottos = lottoGame.getAllLottos();
 		ResultView.printLottos(manualLottoCount, issueLottos);
 
