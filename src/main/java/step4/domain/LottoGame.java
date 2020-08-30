@@ -12,21 +12,29 @@ public class LottoGame {
     private int manualQuantity;
 
     public LottoGame(int buyPrice, int manualQuantity) {
-        if (buyPrice < LOTTO_PRICE) {
+        priceValidation(buyPrice);
+        this.buyPrice = buyPrice;
+        manualQuantityValidation(manualQuantity);
+        this.manualQuantity = manualQuantity;
+    }
+
+    private void priceValidation(int price) {
+        if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException("구매금액은 1000원 이상으로 입력해주세요");
         }
-        this.buyPrice = buyPrice;
+    }
+
+    private void manualQuantityValidation(int manualQuantity) {
         if (buyQuantity() < manualQuantity) {
             throw new IllegalArgumentException("수동으로 구매할 수 있는 개수가 아닙니다." + buyQuantity() + "이하로 입력해주세요.");
         }
-        this.manualQuantity = manualQuantity;
     }
 
     public void playLottoGame() {
         PrintResult.pringString("수동으로 구매할 번호를 입력해 주세요.");
-        List manualLottoList = LottoFactory.makeLottoManualList(manualQuantity);
-        List autoLottoList = LottoFactory.makeLottoRandomList(autoQuantity());
-        List allLottoList = LottoFactory.allLottoList(autoLottoList, manualLottoList);
+        List<Lotto> manualLottoList = LottoFactory.makeLottoManualList(manualQuantity);
+        List<Lotto> autoLottoList = LottoFactory.makeLottoAutoList(autoQuantity());
+        List<Lotto> allLottoList = LottoFactory.allLottoList(autoLottoList, manualLottoList);
 
         PrintResult.printBuyQuantity(autoQuantity(), manualQuantity);
         PrintResult.printLottoList(allLottoList);
@@ -38,17 +46,17 @@ public class LottoGame {
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, new LottoNumber(bonusBallNumber));
         WinningStatistics winningStatistics = new WinningStatistics(allLottoList, winningLotto);
-        WinningJudgement winningJudgement = new WinningJudgement();
+        WinningResult winningJudgement = new WinningResult();
 
         PrintResult.printLottoMap(winningJudgement.makeWinningMap(allLottoList, winningLotto));
         PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.isBenefit());
     }
 
-    public int buyQuantity() {
+    private int buyQuantity() {
         return buyPrice / LOTTO_PRICE;
     }
 
-    public int autoQuantity() {
+    private int autoQuantity() {
         return buyQuantity() - manualQuantity;
     }
 }
