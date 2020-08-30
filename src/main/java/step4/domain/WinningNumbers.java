@@ -1,8 +1,6 @@
 package step4.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import step4.domain.LottoFactory.LottoNo;
 
 public class WinningNumbers {
 

@@ -1,9 +1,9 @@
 package step4.domain;
 
-import java.util.Arrays;
+import step4.domain.LottoFactory.LottoNo;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 

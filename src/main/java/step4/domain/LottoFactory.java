@@ -3,9 +3,9 @@ package step4.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoFactory {
 
@@ -46,6 +46,43 @@ public class LottoFactory {
         return LOTTO_NOS.subList(0, PICK_COUNT)
                 .stream()
                 .collect(Collectors.toList());
+    }
+
+    public static class LottoNo implements Comparable<LottoNo> {
+
+        private final int lottoNo;
+
+        private LottoNo(int lottoNo) {
+            this.lottoNo = lottoNo;
+        }
+
+        public boolean equalsLottoNo(int no) {
+            return lottoNo == no;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            LottoNo lottoNo1 = (LottoNo) o;
+            return lottoNo == lottoNo1.lottoNo;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(lottoNo);
+        }
+
+        @Override
+        public int compareTo(LottoNo other) {
+            return this.lottoNo - other.lottoNo;
+        }
+
+        @Override
+        public String toString() {
+            return ((Integer) lottoNo).toString();
+        }
+
     }
 
 }
