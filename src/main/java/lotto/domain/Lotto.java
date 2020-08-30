@@ -29,8 +29,8 @@ public class Lotto {
         return lotto;
     }
 
-    public long findSameNumber(String[] winningNumbers) {
-        return Arrays.stream(winningNumbers)
+    public long findSameNumber(WinningNumbers winningNumbers) {
+        return Arrays.stream(winningNumbers.getWinningNumbers())
                 .filter(n -> lotto.contains(Integer.parseInt(n)))
                 .count();
     }

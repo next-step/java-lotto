@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
 
 import static lotto.view.InputView.getLottoPrice;
 import static lotto.view.InputView.getWinningNumbers;
@@ -17,7 +18,8 @@ public class LottoMain {
         printLottoNumber(lottos.getLottos());
 
         /* 지난 주 당첨 번호 입출력 */
-        printWinningCount(lottos.getWinningCount(getWinningNumbers()), paidMoney);
+        WinningNumbers winningNumbers= new WinningNumbers(getWinningNumbers());
+        printWinningCount(lottos.getWinningCount(winningNumbers), paidMoney);
 
     }
 
