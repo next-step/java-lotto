@@ -1,19 +1,14 @@
 package com.lotto.view;
 
-import com.lotto.domain.Lottery;
-import com.lotto.domain.LotteryCommission;
-import com.lotto.domain.Statistic;
-import com.lotto.domain.WinningLottery;
+import com.lotto.domain.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
-import java.util.List;
 
 public class ResultView {
 
     private static final int SCALE = 2;
-    private static final LotteryCommission LOTTERY_COMMISSION = new LotteryCommission();
     private static final NumberFormat YIELD_FORMAT = NumberFormat.getInstance();
 
     static {
@@ -21,24 +16,18 @@ public class ResultView {
         YIELD_FORMAT.setRoundingMode(RoundingMode.HALF_EVEN);
     }
 
-    public void showPurchaseHistory(List<Lottery> lotteries) {
-        System.out.printf("%d 개를 구매 했어요.%n", lotteries.size());
-        lotteries.stream()
-                .map(Lottery::toString)
-                .forEach(System.out::println);
+    public void showPurchaseHistory(Lotteries lotteries) {
+        System.out.printf("%d 개를 구매 했어요.%n%s", lotteries.size(), lotteries);
     }
 
-    public void showWinningStatistics(List<Lottery> lotteries, WinningLottery winningLottery) {
+    public void showWinningStatistics(Statistics statistics) {
         System.out.println("당첨 통계\n---------------------------------");
-        List<Statistic> statistics = LOTTERY_COMMISSION.calculateWinningStatistics(lotteries, winningLottery);
-        statistics.stream()
-                .map(statistic -> statistic.toString(
-                        "%2d 개 일치 (%10s 원)",
-                        "%2d 개 일치, 보너스 볼 일치 (%10s 원)",
-                        " - %2d 개")
-                )
-                .forEach(System.out::println);
-        BigDecimal yield = LOTTERY_COMMISSION.calculateYield(lotteries.size(), statistics);
+        System.out.println(statistics.toStringFormatExceptLoser(
+                "%2d 개 일치 (%10s 원)",
+                "%2d 개 일치, 보너스 볼 일치 (%10s 원)",
+                " - %2d 개"
+        ));
+        BigDecimal yield = statistics.calculateYield();
         System.out.printf("총 수익률은 %s 입니다.%n", YIELD_FORMAT.format(yield));
     }
 }
