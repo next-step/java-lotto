@@ -12,7 +12,7 @@ class WinningNumberTest {
 
 
     private LottoTicket winningNumber;
-    private BonusNumber bonusNumber;
+    private int bonusNumber;
     private WinningNumber winningNumbers;
     private LottoTicket lottoTicket;
 
@@ -20,7 +20,7 @@ class WinningNumberTest {
     void setUp() {
         lottoTicket = new LottoTicket(Arrays.asList(11,2,31,41,25,36));
         winningNumber = new LottoTicket(Arrays.asList(1,2,3,4,5,6));
-        bonusNumber = new BonusNumber(7);
+        bonusNumber = 7;
         winningNumbers = new WinningNumber(winningNumber, bonusNumber);
     }
 

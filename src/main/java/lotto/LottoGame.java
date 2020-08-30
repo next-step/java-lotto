@@ -28,7 +28,7 @@ public class LottoGame {
         ResultView.printLottoTickets(lottoTickets);
 
         String inputWinningNumber = InputView.setWinningNumber();
-        BonusNumber bonusNumber = new BonusNumber(InputView.setBonusLottoNumber());
+        int bonusNumber = InputView.setBonusLottoNumber();
 
         LottoTicket winningNumbers = LottoNumberGenerator.generateWinningNumber(inputWinningNumber);
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);

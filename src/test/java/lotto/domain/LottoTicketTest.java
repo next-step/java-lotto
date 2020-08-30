@@ -14,14 +14,14 @@ class LottoTicketTest {
 
     private LottoTicket lottoTicket;
     private LottoTicket winningNumber;
-    private BonusNumber bonusNumber;
+    private int bonusNumber;
     private WinningNumber winningNumbers;
 
     @BeforeEach
     void setUp() {
         lottoTicket = new LottoTicket(Arrays.asList(1,2,3,4,5,7));
         winningNumber = new LottoTicket(Arrays.asList(1,2,3,4,5,6));
-        bonusNumber = new BonusNumber(7);
+        bonusNumber = 7;
         winningNumbers = new WinningNumber(winningNumber, bonusNumber);
     }
 
