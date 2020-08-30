@@ -1,5 +1,6 @@
 package step4.view;
 
+import step4.domain.LottoMachine;
 import step4.domain.Lottos;
 import step4.domain.Rank;
 
@@ -11,8 +12,9 @@ public class ResultView {
     public static final int BREAK_EVEN_POINT = 1;
     public static final String EMPTY = "";
 
-    public static void printLottoPurchaseCount(int lottoPurchaseCount) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottoPurchaseCount));
+    public static void printLottoPurchaseCount(LottoMachine lottoMachine) {
+        System.out.println();
+        System.out.println(MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", lottoMachine.getManualLottosSize(), lottoMachine.getAutoLottosSize()));
     }
 
     public static void printLottos(Lottos lottos) {

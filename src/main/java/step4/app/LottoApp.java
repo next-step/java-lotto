@@ -15,10 +15,11 @@ public class LottoApp {
     }
 
     private static Lottos getLottos() {
-        Money money = new Money(InputView.receiveMoney());
-        int lottoPurchaseCount = money.calculateLottoPurchaseCount();
-        ResultView.printLottoPurchaseCount(lottoPurchaseCount);
-        Lottos lottos = new Lottos(LottoFactory.createsByLottoPurchaseCount(lottoPurchaseCount));
+        int money = InputView.receiveMoney();
+        String manualLottoNosLines[] = InputView.receiveManualLottoNosLines();
+        LottoMachine lottoMachine = new LottoMachine(money, LottoUtils.parseManualLottoNosLines(manualLottoNosLines));
+        ResultView.printLottoPurchaseCount(lottoMachine);
+        Lottos lottos = new Lottos(lottoMachine.issue());
         ResultView.printLottos(lottos);
         return lottos;
     }

@@ -16,4 +16,17 @@ public class LottoUtils {
                 .toArray();
     }
 
+    public static int[][] parseManualLottoNosLines(String[] parseSplitManualLottoNosLines) {
+        return Arrays.stream(parseSplitManualLottoNosLines)
+                .map(parseSplitManualLottoNosLine -> parseSplitManualLottoNosLine.split(DELIMITER))
+                .map(LottoUtils::convert)
+                .toArray(int[][]::new);
+    }
+
+    private static int[] convert(String[] tmp) {
+        return Arrays.stream(tmp)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
+
 }
