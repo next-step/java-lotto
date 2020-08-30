@@ -32,8 +32,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResults getLottoResult(List<Integer> winningNumbers) {
-        ValidateUtil.validate(winningNumbers);
+    public LottoResults getLottoResult(List<Integer> winningNumbers, int bonusNumber) {
+        ValidateUtil.validate(winningNumbers, bonusNumber);
         LottoResults lottoResults = LottoResults.of();
         for (Lotto lotto : lottos) {
             lottoResults.win(lotto.getHitCount(winningNumbers));
