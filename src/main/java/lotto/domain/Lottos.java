@@ -3,6 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -21,6 +25,12 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<String> toStringByLotto() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.toList());
     }
 
     @Override

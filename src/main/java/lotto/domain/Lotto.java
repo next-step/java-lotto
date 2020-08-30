@@ -17,7 +17,7 @@ public class Lotto {
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() != LOTTO_SIZE) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(INVALID_LOTTO_SIZE);
         }
     }
@@ -42,6 +42,12 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public int getMatchCountByWinningNumber(List<Integer> winningNumber) {
+        return (int) winningNumber.stream()
+                .filter(it -> hasLottoNumber(LottoNumber.of(it)))
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,5 +59,14 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "["
+                + lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(","))
+                + "]";
     }
 }
