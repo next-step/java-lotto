@@ -9,14 +9,13 @@ import java.util.*;
 public class LottoGame {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int paymentAmount = InputView.setPayPriceLotto(scanner);
+        int paymentAmount = InputView.setPayPriceLotto();
 
-        int manualLottoQuantity = InputView.setManualLottoQuantity(scanner);
-        InputView.printManualLottoNumber(scanner);
+        int manualLottoQuantity = InputView.setManualLottoQuantity();
+        InputView.printManualLottoNumber();
 
         LottoService lottoService = new LottoService();
-        List<String> manualLottoTicket = lottoService.setManualLottoNumbers(scanner, manualLottoQuantity);
+        List<String> manualLottoTicket = lottoService.setManualLottoNumbers(manualLottoQuantity);
         List<LottoTicket> manualLottoTickets = LottoNumberGenerator.generateManualLottoTickets(manualLottoTicket, manualLottoQuantity);
 
         int totalLottoQuantity = lottoService.getLottoBuyCount(paymentAmount);
@@ -28,8 +27,8 @@ public class LottoGame {
         LottoTickets lottoTickets = LottoTickets.of(autoLottoTickets, manualLottoTickets);
         ResultView.printLottoTickets(lottoTickets);
 
-        String inputWinningNumber = InputView.setWinningNumber(scanner);
-        BonusNumber bonusNumber = new BonusNumber(InputView.setBonusLottoNumber(scanner));
+        String inputWinningNumber = InputView.setWinningNumber();
+        BonusNumber bonusNumber = new BonusNumber(InputView.setBonusLottoNumber());
 
         LottoTicket winningNumbers = LottoNumberGenerator.generateWinningNumber(inputWinningNumber);
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);

@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
+
     private static final String PRINT_INPUT_BUY_PRICE = "구입금액을 입력해 주세요.";
     private static final String PRINT_BUY_MANUAL_LOTTO = "수동으로 ";
     private static final String PRINT_BUY_AUTO_LOTTO = "장, 자동으로 ";
@@ -12,9 +13,11 @@ public class InputView {
     private static final String PRINT_INPUT_MANUAL_LOTO_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String PRINT_INPUT_MANUAL_LOTO_NUMBER = "수동으로 구매할 로또 번호를 입력해 주세요.";
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     private InputView() {}
 
-    public static int setPayPriceLotto(Scanner scanner) {
+    public static int setPayPriceLotto() {
         System.out.println(PRINT_INPUT_BUY_PRICE);
         return scanner.nextInt();
     }
@@ -29,27 +32,27 @@ public class InputView {
         System.out.println(stringBuffer.toString());
     }
 
-    public static String setWinningNumber(Scanner scanner) {
+    public static String setWinningNumber() {
         System.out.println(PRINT_WINNING_NUMBER);
         return scanner.nextLine();
     }
 
-    public static int setBonusLottoNumber(Scanner scanner) {
+    public static int setBonusLottoNumber() {
         System.out.println(PRINT_BONUS_LOTTONUMBER);
         return scanner.nextInt();
     }
 
-    public static int setManualLottoQuantity(Scanner scanner) {
+    public static int setManualLottoQuantity() {
         System.out.println(PRINT_INPUT_MANUAL_LOTO_QUANTITY);
         return scanner.nextInt();
     }
 
-    public static void printManualLottoNumber(Scanner scanner) {
+    public static void printManualLottoNumber() {
         scanner.nextLine();
         System.out.println(PRINT_INPUT_MANUAL_LOTO_NUMBER);
     }
 
-    public static String setManualLottoNumber(Scanner scanner) {
+    public static String inputManualLottoNumber() {
         return scanner.nextLine();
     }
 
