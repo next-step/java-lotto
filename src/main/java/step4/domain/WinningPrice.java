@@ -32,7 +32,6 @@ public enum WinningPrice {
 
     public static WinningPrice valueOf(int winningCount, boolean matchBonus) {
 
-        WinningPrice[] winningPrices = values();
         if (winningCount == SECOND_PRICE.winningNumbers && matchBonus) {
             return WinningPrice.SECOND_PRICE;
         }
@@ -41,7 +40,7 @@ public enum WinningPrice {
             return WinningPrice.THIRD_PRICE;
         }
 
-        return Arrays.stream(winningPrices)
+        return Arrays.stream(values())
                 .filter(priceValue -> priceValue.checkCount(winningCount))
                 .findAny()
                 .orElse(OTHER);
