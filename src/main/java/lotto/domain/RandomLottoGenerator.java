@@ -9,11 +9,11 @@ public class RandomLottoGenerator implements LottoGeneratorStrategy {
     private static final int LOTTO_TOTAL_COUNT = 45;
     private static final int LOTTO_MIN_SIZE = 0;
     private static final int LOTTO_MAX_SIZE = 6;
-    static List<Integer> lottoAllNum = Stream.iterate(1, n -> n + 1).limit(LOTTO_TOTAL_COUNT).collect(Collectors.toList());
-
 
     @Override
     public List<Integer> generateLotto() {
+        List<Integer> lottoAllNum = Stream.iterate(1, n -> n + 1).limit(LOTTO_TOTAL_COUNT).collect(Collectors.toList());
+
         Collections.shuffle(lottoAllNum);
         List<Integer> lottoNumbers = lottoAllNum.subList(LOTTO_MIN_SIZE, LOTTO_MAX_SIZE);
         Collections.sort(lottoNumbers);
