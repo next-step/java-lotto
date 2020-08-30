@@ -2,8 +2,10 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class ResultView {
 
@@ -29,15 +31,21 @@ public class ResultView {
         int[] winningMoney = {5000, 50000, 1500000, 2000000000};
 
         float sum = 0;
+        long count;
         for (long i = 0; i < winningMoney.length; i++) {
-            long count = 0;
-            if (winningCount.containsKey(i + 3)) {
-                count = winningCount.get(i + 3);
-            }
+            checkHashMap(winningCount, i+3);
+            count = winningCount.get(i + 3);
             System.out.println(String.format(WINNING_COUNT_OUTPUT, i+3, winningMoney[(int) i], count));
             sum += winningMoney[(int) i] * count;
         }
 
         System.out.println(String.format(PROFIT_RATE_OUTPUT, sum / lottoPrice));
     }
+
+    private static void checkHashMap(Map<Long, Long> winningCount, long index) {
+        if (!winningCount.containsKey(index)) {
+            winningCount.put(index, (long) 0);
+        }
+    }
+
 }
