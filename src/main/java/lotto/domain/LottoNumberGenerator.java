@@ -39,9 +39,9 @@ public class LottoNumberGenerator {
     }
 
     public static LottoTicket generateManualLottoTicket(String manualLottoNumber) {
-        String[] manualLottoNumbers = new StringUtils(manualLottoNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
+        String[] manualLottoNumbers = StringUtils.split(manualLottoNumber, INPUT_WINNING_NUMBER_DELIMITER);
         return new LottoTicket(Arrays.stream(manualLottoNumbers)
-                .map(number -> new StringUtils(number).toInt())
+                .map(StringUtils::toInt)
                 .limit(NUMBER_SIX)
                 .sorted()
                 .collect(Collectors.toList()));
@@ -55,9 +55,9 @@ public class LottoNumberGenerator {
     }
 
     public static LottoTicket generateWinningNumber(String winningNumber) {
-        String[] winningNumbers = new StringUtils(winningNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
+        String[] winningNumbers = StringUtils.split(winningNumber, INPUT_WINNING_NUMBER_DELIMITER);
         return new LottoTicket(Arrays.stream(winningNumbers)
-                .map(number -> new StringUtils(number).toInt())
+                .map(StringUtils::toInt)
                 .limit(NUMBER_SIX)
                 .sorted()
                 .collect(Collectors.toList()));
