@@ -5,18 +5,27 @@ import step4.view.InputView;
 import step4.view.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 	public static void main(String[] args) {
 		int price = InputView.inputPrice();
 		int manualLottoCount = InputView.inputManualLottoCount();
-		LottoGame lottoGame = new LottoGame(price, manualLottoCount);
+		List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount)
+				.stream()
+				.map(lottoNumbers -> new Lotto(lottoNumbers.stream()
+						.map(LottoNumber::new)
+						.collect(Collectors.toList())))
+				.collect(Collectors.toList());
 
-		List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
-		Lottos issueLottos = lottoGame.getAllLottos(manualLottos);
-		ResultView.printLottos(issueLottos);
+		LottoGame lottoGame = new LottoGame(price, manualLottos);
+		Lottos issueLottos = lottoGame.getAllLottos();
+		ResultView.printLottos(manualLottoCount, issueLottos);
 
-		List<LottoNumber> winningLotto = InputView.inputWinningNumbers();
+		List<LottoNumber> winningLotto = InputView.inputWinningNumbers()
+				.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toList());
 		int bonusNumber = InputView.inputBonusBall();
 		LottoStatistic statistic = new LottoStatistic();
 		ResultView.printWinningResult(statistic.calcLottoResult(issueLottos, new WinningLotto(winningLotto, bonusNumber)));

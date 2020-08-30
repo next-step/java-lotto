@@ -1,8 +1,5 @@
 package step4.view;
 
-import step4.domain.Lotto;
-import step4.domain.LottoNumber;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +22,7 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static List<LottoNumber> inputWinningNumbers() {
+	public static List<Integer> inputWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBER_PHRASES);
 		return inputLottoNumbers();
 	}
@@ -40,22 +37,35 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static List<Lotto> inputManualLottos(int manualLottoCount) {
-		List<Lotto> manualLottos = new ArrayList<>();
+	public static List<List<Integer>> inputManualLottos(int manualLottoCount) {
+		scanner.nextLine();
+/*
+
+		if(manualLottoCount == 0) {
+			return new ArrayList<>();
+		}
+
+		StringBuilder manuals = new StringBuilder();
+		for (int i = 0; i < manualLottoCount; i++) {
+			manuals.append(scanner.nextLine());
+		}
+		return manuals.toString();
+*/
+
+		List<List<Integer>> manualLottos = new ArrayList<>();
 		System.out.println(MANUAL_LOTTO_NUMBERS_PHRASES);
 
-		scanner.nextLine();
 		for (int i = 0; i < manualLottoCount; i++) {
-			manualLottos.add(new Lotto(inputLottoNumbers(), true));
+			manualLottos.add(inputLottoNumbers());
 		}
 		return manualLottos;
+
 	}
 
-	private static List<LottoNumber> inputLottoNumbers() {
+	private static List<Integer> inputLottoNumbers() {
 		String[] inputNumbers = scanner.nextLine().split(", ");
 		return Arrays.stream(inputNumbers)
 				.map(Integer::valueOf)
-				.map(LottoNumber::new)
 				.sorted()
 				.collect(Collectors.toList());
 	}

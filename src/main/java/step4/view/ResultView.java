@@ -13,8 +13,7 @@ public class ResultView {
 
 	private ResultView() {}
 
-	public static void printLottos(Lottos lottos) {
-		int manualLottoCount = lottos.getManualLottoCount();
+	public static void printLottos(int manualLottoCount, Lottos lottos) {
 		System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + (lottos.size()-manualLottoCount) + "개를 구매했습니다.");
 		for (Lotto lotto : lottos.getLottos()) {
 			System.out.println(lotto.toString());

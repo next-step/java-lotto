@@ -31,11 +31,10 @@ class LottoStatisticTest {
 
 		List<Lotto> lottoList = nums.stream()
 				.map(num -> Arrays.stream(num).map(LottoNumber::new).collect(Collectors.toList()))
-				.map(lotto -> new Lotto(lotto, true))
+				.map(Lotto::new)
 				.collect(Collectors.toList());
 
-		lottos = new Lottos();
-		lottos.getAllLottos(nums.size(), lottoList);
+		lottos = new Lottos(lottoList);
 
 		int[] winning = new int[] {3, 6, 10, 14, 16, 40};
 		List<LottoNumber> winningNumbers = Arrays.stream(winning)

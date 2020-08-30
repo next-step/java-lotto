@@ -12,30 +12,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoGameTest {
-	private static LottoGame lottoGame;
 
 	@DisplayName(value = "로또 구입 금액에 오류가 있을 때 에러 처리 테스트")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 500, 1500, 3256})
 	void lottoPriceException(int price) {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> new LottoGame(price, 0))
+				.isThrownBy(() -> new LottoGame(price, new ArrayList<>()))
 				.withMessage("로또 구입 금액은 1000원 단위만 가능합니다.");
 	}
 
+	/*
 	@DisplayName(value = "구입하려는 수동 로또 개수가 입력한 금액 초과 시 에러 처리 테스트")
 	@Test
 	void manualLottoCountException() {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> new LottoGame(4000, 5));
+				.isThrownBy(() -> new LottoGame(4000, new ArrayList<>()));
 	}
+	*/
 
 	@DisplayName(value = "로또 구입 금액만큼 발급한 로또 개수 테스트")
 	@ParameterizedTest
 	@CsvSource(value = {"3000:3", "14000:14"}, delimiter = ':')
 	void lottoCount(int price, int expected) {
-		lottoGame = new LottoGame(price, 0);
-		assertThat(lottoGame.getAllLottos(new ArrayList<>()).getLottos()).hasSize(expected);
+		LottoGame lottoGame = new LottoGame(price, new ArrayList<>());
+		assertThat(lottoGame.getAllLottos().getLottos()).hasSize(expected);
 	}
 
 }
