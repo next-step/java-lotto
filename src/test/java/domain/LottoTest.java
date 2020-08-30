@@ -24,7 +24,6 @@ public class LottoTest {
                 .hasMessageContaining("not 6");
     }
 
-
     @Test
     void validateEmptyTest2() {
         assertThatThrownBy(() -> new Lotto(new ArrayList<>()))

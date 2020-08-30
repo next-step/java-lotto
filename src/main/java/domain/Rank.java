@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Rank {
     RANK_ONE(2_000_000_000, 6),
     RANK_TWO(30_000_000, 5),
@@ -24,9 +27,19 @@ public enum Rank {
         return count;
     }
 
-    public static Rank valueOf(int winnerPrice,boolean matchBonus){
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
+    public static Rank valueOf(int winnerPrice, boolean matchBonus) {
+        // TODO 일치하는 수를 로또 등수로 변경한다.
+        //  enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
+        Rank[] ranks = values();
 
-        return null;
+        if (matchBonus) {
+            return Rank.RANK_TWO;
+        }
+
+        Optional<Rank> result = Arrays.stream(ranks)
+                .filter(c -> c.getWinnerPrice() == winnerPrice)
+                .findFirst();
+
+        return result.get();
     }
 }

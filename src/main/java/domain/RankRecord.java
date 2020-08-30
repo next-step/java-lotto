@@ -20,10 +20,10 @@ public class RankRecord {
         return recordPool;
     }
 
-    public void recordOfRankings(int count) {
-        int rank = RECORD_SIZE - count + ONE;
+    public void recordOfRankings(Rank ranking) {
+        int rank = ranking.ordinal()+ONE;
 
         int rankCount = recordPool.get(rank);
-        recordPool.set(rank, rankCount + 1);
+        recordPool.set(rank, rankCount + ONE);
     }
 }
