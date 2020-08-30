@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,6 +21,12 @@ public class Lottos {
         return new Lottos(
                 Stream.generate(() -> Lotto.createLotto(lottoGeneratorStrategy))
                         .limit(count)
+                        .collect(Collectors.toList()));
+    }
+    public static Lottos of(String lottoNumbers) {
+        return new Lottos(
+                Stream.generate(() -> Lotto.createLotto(lottoNumbers.split(" ")))
+                        .limit(1)
                         .collect(Collectors.toList()));
     }
 
