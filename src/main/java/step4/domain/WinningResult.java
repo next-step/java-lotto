@@ -37,5 +37,4 @@ public class WinningResult {
     private WinningPrice getWinnerPrice(Lotto lotto, WinningLotto winningLotto) {
         return WinningPrice.valueOf(winningLotto.winningCount(lotto), winningLotto.matchBonus(lotto));
     }
-
 }
