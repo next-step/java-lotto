@@ -23,7 +23,7 @@ public class LottoFactory {
 
     public static List<Lotto> makeLottoManualList(int manualQuantity) {
         List<Lotto> lottoList = new ArrayList<>();
-        for(int i = 0; i < manualQuantity; i++) {
+        for (int i = 0; i < manualQuantity; i++) {
             lottoList.add(makeLottoWithString(InputUtil.returnStringWithBlank()));
         }
         return lottoList;
