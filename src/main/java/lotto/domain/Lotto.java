@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public long findSameNumber(WinningNumbers winningNumbers) {
-        return Arrays.stream(WinningNumbers.getWinningNumbers())
+        return Arrays.stream(winningNumbers.getWinningNumbers())
                 .filter(n -> lotto.contains(Integer.parseInt(n)))
                 .count();
     }

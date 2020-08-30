@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public class WinningNumbers {
-    private static String[] winningNumbers;
+    private String[] winningNumbers;
 
     public WinningNumbers(String[] winningNumbers) {
-        WinningNumbers.winningNumbers = winningNumbers;
+        this.winningNumbers = winningNumbers;
     }
 
-    public static String[] getWinningNumbers() {
+    public String[] getWinningNumbers() {
         return winningNumbers;
     }
 }
