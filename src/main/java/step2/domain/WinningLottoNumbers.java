@@ -9,14 +9,31 @@ public class WinningLottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private List<LottoNumber> winningNumbers;
 
-    public WinningLottoNumbers(String inputWinningNumber) {
-        validation(inputWinningNumber);
+    public WinningLottoNumbers(String inputWinningNumber, String inputBonusNumber) {
+        validationWinningNumbers(inputWinningNumber);
+        validationBonusNumber(inputBonusNumber);
+        validationOverLapping(inputWinningNumber, inputBonusNumber);
         this.winningNumbers = changeToList(inputWinningNumber);
     }
 
-    private void validation(String inputWinningNumber) {
+    private void validationWinningNumbers(String inputWinningNumber) {
         if (inputWinningNumber == null || inputWinningNumber.trim().isEmpty()) {
             throw new IllegalArgumentException("입력하신 당첨번호가 올바르지 않습니다.");
+        }
+    }
+
+    private void validationBonusNumber(String inputBonusNumber) {
+        try {
+            int bonusNumber = Integer.parseInt(inputBonusNumber);
+
+        } catch (Exception e) {
+            throw new IllegalArgumentException("보너스 번호를 정확하게 입력해 주세요.");
+        }
+    }
+
+    private void validationOverLapping(String inputWinningNumber, String inputBonusNumber) {
+        if (inputWinningNumber.contains(inputBonusNumber)) {
+            throw new IllegalArgumentException("보너스번호가 중복되었습니다.");
         }
     }
 
