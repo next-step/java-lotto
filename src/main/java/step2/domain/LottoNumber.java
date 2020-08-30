@@ -35,12 +35,15 @@ public class LottoNumber {
     public static Lotto createLotto() {
         List<LottoNumber> lottoNumberList = LOTTO_NUMBER_POOL;
         Collections.shuffle(lottoNumberList);
-        lottoNumberList.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
 
-        return new Lotto(lottoNumberList);
+        return new Lotto(lottoNumberList.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList()));
     }
 
     public static LottoNumber of(String number) {
         return new LottoNumber(Integer.parseInt(number));
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 }

@@ -23,5 +23,13 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+
+    }
+
+    public List<Integer> toIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
+
     }
 }
