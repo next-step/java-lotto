@@ -32,8 +32,8 @@ public class LottoResults {
         return result;
     }
 
-    public double calculateYield(Money money) {
-        return money.calculateYield(calculateTotalWinnings());
+    public double calculateYield(Lottos lottos) {
+        return lottos.calculateYield(calculateTotalWinnings());
     }
 
 }

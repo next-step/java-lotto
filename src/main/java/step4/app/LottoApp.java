@@ -7,15 +7,15 @@ import step4.view.ResultView;
 public class LottoApp {
 
     public static void main(String[] args) {
-        Money money = new Money(InputView.receiveMoney());
-        Lottos lottos = getLottos(money);
+        Lottos lottos = getLottos();
         WinningNumbers winningNumbers = getWinningNumbers();
         LottoResults lottoResults = new LottoResults(lottos.collectRank(winningNumbers));
         ResultView.printWinningCountStatistics(lottoResults.calculateWinningCountStatistics());
-        ResultView.printYield(lottoResults.calculateYield(money));
+        ResultView.printYield(lottoResults.calculateYield(lottos));
     }
 
-    private static Lottos getLottos(Money money) {
+    private static Lottos getLottos() {
+        Money money = new Money(InputView.receiveMoney());
         int lottoPurchaseCount = money.calculateLottoPurchaseCount();
         ResultView.printLottoPurchaseCount(lottoPurchaseCount);
         Lottos lottos = new Lottos(LottoFactory.createsByLottoPurchaseCount(lottoPurchaseCount));

@@ -24,4 +24,8 @@ public class Lottos {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
 
+    public double calculateYield(int winnings) {
+        return (double) winnings / (lottos.size() * LottoConfig.UNIT_PRICE);
+    }
+
 }
