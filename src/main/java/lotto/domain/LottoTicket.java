@@ -4,10 +4,10 @@ import lotto.utils.LottoValidationUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static lotto.utils.CommonConstant.NUMBER_FIVE;
-import static lotto.utils.CommonConstant.NUMBER_ZERO;
+import static lotto.utils.CommonConstant.*;
 
 public class LottoTicket {
 
@@ -21,23 +21,23 @@ public class LottoTicket {
     }
 
     public Rank matchRank(final WinningNumber winningNumber) {
-        long matchCount = getMatchCount(winningNumber);
+        int matchCount = getMatchCount(winningNumber);
         boolean hasBonusNumber = isSecondRank(winningNumber, matchCount);
 
         return Rank.valudOf(matchCount, hasBonusNumber);
     }
 
-    public long getMatchCount(final WinningNumber winningNumbers) {
-        return LongStream.range(NUMBER_ZERO, lottoTicket.size())
+    public int getMatchCount(final WinningNumber winningNumbers) {
+        return IntStream.range(NUMBER_ZERO, lottoTicket.size())
                 .map(number -> getContainsLottoNumber(winningNumbers, number))
                 .sum();
     }
 
-    private long getContainsLottoNumber(final WinningNumber winningNumbers, long number) {
-        return winningNumbers.isContainsLottoNumber(getLottoTicketNumber((int) number)) ? new Count(NUMBER_ZERO).update() : new Count(NUMBER_ZERO).getCount();
+    private int getContainsLottoNumber(final WinningNumber winningNumbers, int number) {
+        return winningNumbers.isContainsLottoNumber(getLottoTicketNumber(number)) ? NUMBER_ONE : NUMBER_ZERO;
     }
 
-    private boolean isSecondRank(final WinningNumber winningNumber, long matchCount) {
+    private boolean isSecondRank(final WinningNumber winningNumber, int matchCount) {
         return (matchCount == NUMBER_FIVE) && isContainsBonusNumber(winningNumber);
     }
 
