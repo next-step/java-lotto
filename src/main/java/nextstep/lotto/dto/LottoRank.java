@@ -1,6 +1,9 @@
 package nextstep.lotto.dto;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoRank {
     FIRST(6, false, 2_000_000_000),
@@ -28,10 +31,19 @@ public enum LottoRank {
         return reward;
     }
 
+    public boolean isBonus() {
+        return bonus;
+    }
+
     public static LottoRank of(int matchCount, boolean matchBonus) {
 
+        if(matchCount != 5){
+            matchBonus = false;
+        }
+
+        boolean finalMatchBonus = matchBonus;
         return Arrays.stream(values())
-                .filter(lottoRank -> (lottoRank.matchCount == matchCount) && (lottoRank.bonus == matchBonus))
+                .filter(lottoRank -> (lottoRank.getMatchCount() == matchCount) && (lottoRank.isBonus() == finalMatchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
