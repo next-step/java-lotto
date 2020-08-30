@@ -38,4 +38,9 @@ public class ValidateWinnerNumber {
             throw new IllegalArgumentException("숫자 개수 에러 ");
         }
     }
+
+    public static void validateBonusNumber(int bonus) {
+        //null, 0, 45> , duplicate
+
+    }
 }

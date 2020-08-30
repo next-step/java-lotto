@@ -23,6 +23,7 @@ public class View {
         System.out.println("5개 일치(1500000원)- " + game.getRankRecord().getRecordPool().get(THREE) + "개");
         System.out.println("5개 일치,보너스 볼 일치(30000000원)- " + game.getRankRecord().getRecordPool().get(TWO) + "개");
         System.out.println("6개 일치(2000000000원)- " + game.getRankRecord().getRecordPool().get(ONE) + "개");
+
         if (sum == ZERO) {
             System.out.println("총 수익률은 0 입니다.");
             return;
