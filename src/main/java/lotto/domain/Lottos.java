@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 public class Lottos {
     public static final int LOTTO_PRICE = 1000;
     public static final int WINNING_STANDARD_NUMBER = 3;
-    public static final int LOTTO_MAX_SIZE = 6;
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
