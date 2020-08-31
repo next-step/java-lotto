@@ -36,13 +36,13 @@ public class WinningStatisticsTest {
     @Test
     public void getLottoTotalPrice() {
         WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLottoNumbers);
-        assertThat(winningStatistics.getTotalWinningPrice()).isEqualTo(55000);
+        assertThat(winningStatistics.getTotalWinningPrice()).isEqualTo(30005000);
     }
 
     @Test
     public void getBenefitOrNot() {
         WinningStatistics winningStatistics = new WinningStatistics(lottoList, winningLottoNumbers);
-        assertThat(winningStatistics.getWinningStatic()).isEqualTo((float) 27.5);
+        assertThat(winningStatistics.getWinningStatic()).isEqualTo((float) 15002.5);
     }
 
     @Test
