@@ -35,4 +35,9 @@ class LottoPaperTest {
     void getMatchCount() {
         Assertions.assertThat(lottoPaper.getMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
     }
+
+    @Test
+    void testGetMatchCount() {
+        Assertions.assertThat(lottoPaper.getMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,5 +26,11 @@ public class LottoPaper {
                 .map(LottoNum::getLottoNum)
                 .filter(winningNumber::contains)
                 .count();
+    }
+
+    public List<Integer> getWinningNumbersToIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
     }
 }

@@ -14,6 +14,7 @@ public class WinningTable {
     private final static Integer DIVIDE_SCALE = 2;
     private final static Integer MIN_MATCH_COUNT = 3;
     private final static RoundingMode DIVIDE_ROUND_MODE = RoundingMode.DOWN;
+
     private final Map<Rank, Integer> matchCountTable;
 
     public WinningTable() {

@@ -2,18 +2,24 @@ package lotto.domain;
 
 import lotto.context.Rank;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WinningResult {
-    private final WinningPaper winningPaper;
+    private LottoPaper winningPaper;
     private WinningTable winningTable;
 
     public WinningResult(String winningLottoNumbers) {
-        winningPaper = new WinningPaper(winningLottoNumbers);
+        winningPaper = new LottoPaper(Arrays.stream(winningLottoNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(integer -> new LottoNum(integer))
+                .collect(Collectors.toList()));
         winningTable = new WinningTable();
     }
 
-    public WinningPaper getWinningPaper() {
+    public LottoPaper getWinningPaper() {
         return winningPaper;
     }
 
