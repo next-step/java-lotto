@@ -7,8 +7,8 @@ public class LottoGenerator {
     public static final int LOTTO_PRICE = 1000;
     private List<Integer> numbers;
 
-    public LottoGenerator() {
-        this.numbers = Lotto.RANGE.createRangeList();
+    public LottoGenerator(LottoNumberRange range) {
+        this.numbers = range.createRangeList();
     }
 
     private Lotto generate() {
