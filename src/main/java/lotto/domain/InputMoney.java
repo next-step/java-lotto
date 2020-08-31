@@ -28,4 +28,8 @@ public class InputMoney {
     public int getPaperCount() {
         return this.money / LOTTO_PRICE;
     }
+
+    public WinningEarningsRate makeWinningEarningsRate() {
+        return new WinningEarningsRate(money);
+    }
 }

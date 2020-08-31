@@ -31,7 +31,7 @@ public class WinningResult {
         return winningTable.getMatchCountTable();
     }
 
-    public Double calculationEarningsRate(Integer inputMoney) {
-        return winningTable.calculationEarningsRate(inputMoney);
+    public int getTotalWinningMoney() {
+        return winningTable.getTotalWinningMoney();
     }
 }

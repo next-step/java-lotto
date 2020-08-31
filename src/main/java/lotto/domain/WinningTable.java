@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class WinningTable {
     private final static Integer ADD_AUTO_INCREMENT = 1;
-    private final static Integer DIVIDE_SCALE = 2;
     private final static Integer MIN_MATCH_COUNT = 3;
-    private final static RoundingMode DIVIDE_ROUND_MODE = RoundingMode.DOWN;
 
     private final Map<Rank, Integer> matchCountTable;
 
@@ -46,17 +44,11 @@ public class WinningTable {
         matchCountTable.put(Rank.getRank(matchCount), matchCountTable.get(Rank.getRank(matchCount)) + ADD_AUTO_INCREMENT);
     }
 
-    private Integer getTotalWinningMoney() {
+    Integer getTotalWinningMoney() {
         return matchCountTable.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getWinningMoney() * entry.getValue())
                 .reduce(Integer::sum)
                 .get();
-    }
-
-    double calculationEarningsRate(Integer inputMoney) {
-        return BigDecimal.valueOf(getTotalWinningMoney())
-                .divide(BigDecimal.valueOf(inputMoney), DIVIDE_SCALE, DIVIDE_ROUND_MODE)
-                .doubleValue();
     }
 }

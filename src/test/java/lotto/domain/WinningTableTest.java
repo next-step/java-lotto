@@ -33,8 +33,8 @@ class WinningTableTest {
     }
 
     @Test
-    void calculationEarningsRate() {
+    void getTotalWinningMoney() {
         winningTable.setAutoIncrementMatchCountResult(3);
-        Assertions.assertThat(winningTable.calculationEarningsRate(14000)).isEqualTo(0.35);
+        Assertions.assertThat(winningTable.getTotalWinningMoney()).isEqualTo(Rank.FOURTH.getWinningMoney());
     }
 }
