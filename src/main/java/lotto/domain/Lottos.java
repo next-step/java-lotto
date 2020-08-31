@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,16 +27,14 @@ public class Lottos {
                         .collect(Collectors.toList()));
     }
 
-    public Map<Long, Long> getWinningCounts(WinningNumbers winningNumbers) {
+    public List<Rank> getRanks(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.getWinningCount(winningNumbers))
-                .filter(count -> count >= WINNING_STANDARD_NUMBER)
-                .collect(Collectors.groupingBy(Function.identity(),
-                        Collectors.counting()));
-
+                .map(lotto -> Rank.valueOf(lotto.getWinningCount(winningNumbers), lotto.getBonusMatch(bonusNumber)))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
+
 }

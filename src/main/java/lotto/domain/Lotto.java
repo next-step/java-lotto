@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final long WINNING_CRITERIA = 3L;
     private final List<Integer> lotto;
 
     private Lotto(List<Integer> lotto) {
@@ -24,15 +25,18 @@ public class Lotto {
         );
     }
 
-
     public List<Integer> getLotto() {
         return lotto;
     }
 
     public long getWinningCount(WinningNumbers winningNumbers) {
-        return winningNumbers.findSameNumber(lotto);
+        long count = winningNumbers.findSameNumber(lotto);
+        if(count>= WINNING_CRITERIA)
+            return count;
+        return 0;
     }
 
+    public boolean getBonusMatch(BonusNumber bonusNumber) { return bonusNumber.getBonusMatch(lotto); }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

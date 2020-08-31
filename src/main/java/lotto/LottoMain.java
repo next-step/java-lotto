@@ -1,11 +1,8 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.RandomLottoGenerator;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 
-import static lotto.view.InputView.getLottoPrice;
-import static lotto.view.InputView.getWinningNumbers;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoMain {
@@ -20,7 +17,10 @@ public class LottoMain {
 
         // 지난 주 당첨 번호 입출력
         WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers());
-        printWinningCount(lottos.getWinningCounts(winningNumbers), paidMoney);
+        BonusNumber bonusNumber = new BonusNumber(getBonusNumber());
+        Ranks ranks = new Ranks(lottos.getRanks(winningNumbers, bonusNumber));
+
+        printWinningCount(ranks.getRanksCount(), paidMoney);
 
     }
 

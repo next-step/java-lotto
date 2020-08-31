@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Rank;
+import lotto.domain.Ranks;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,7 @@ public class ResultView {
 
     public static final String LOTTO_COUNT_OUTPUT = "%d개를 구매했습니다.";
     public static final String GUIDELINE_FOR_WINNING = "\n당첨 통계\n--------";
-    public static final String WINNING_COUNT_OUTPUT = "%d개 일치 (%d원)- %d개";
+    public static final String WINNING_COUNT_OUTPUT = "%d개 일치%s(%d원)- %d개";
     public static final String PROFIT_RATE_OUTPUT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private ResultView() {
@@ -26,25 +28,29 @@ public class ResultView {
         lottoList.forEach(lotto -> System.out.println(lotto.getLotto()));
     }
 
-    public static void printWinningCount(Map<Long, Long> winningCount, int lottoPrice) {
+    public static void printWinningCount(Map<Integer, Long> rankCount, int lottoPrice) {
         System.out.println(GUIDELINE_FOR_WINNING);
-        int[] winningMoney = {5000, 50000, 1500000, 2000000000};
 
         float sum = 0;
+        Rank rank;
         long count;
-        for (long i = 0; i < winningMoney.length; i++) {
-            checkHashMap(winningCount, i+3);
-            count = winningCount.get(i + 3);
-            System.out.println(String.format(WINNING_COUNT_OUTPUT, i+3, winningMoney[(int) i], count));
-            sum += winningMoney[(int) i] * count;
+        long money;
+        for (int i = 4; i >= 0; i--) {
+            checkHashMap(rankCount, i);
+            count = rankCount.get(i);
+            rank = Rank.valueOf(i);
+            money = rank.getWinningMoney();
+            System.out.println(String.format(WINNING_COUNT_OUTPUT, rank.getCountOfMatch(), rank.isBonusMatch(), money, count));
+            sum += money * count;
         }
 
         System.out.println(String.format(PROFIT_RATE_OUTPUT, sum / lottoPrice));
+
     }
 
-    private static void checkHashMap(Map<Long, Long> winningCount, long index) {
-        if (!winningCount.containsKey(index)) {
-            winningCount.put(index, (long) 0);
+    private static void checkHashMap(Map<Integer, Long> winningCount, long index) {
+        if (!winningCount.containsKey((int) index)) {
+            winningCount.put((int) index, 0L);
         }
     }
 
