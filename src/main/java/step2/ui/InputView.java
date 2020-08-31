@@ -1,10 +1,9 @@
 package step2.ui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static step2.domain.Validator.validateFormula;
 import static step2.domain.Validator.validateLottoRangeNumber;
@@ -55,9 +54,8 @@ public class InputView {
 
     public static List<String> getManualGame(int totalManualGameCount) {
         printAnnounceMsg(MANUAL_GAMES_MSG);
-        return Arrays.asList()
-                     .stream()
-                     .map(s -> getInputString())
-                     .collect(Collectors.toCollection(() -> new ArrayList<>(totalManualGameCount)));
+        return Stream.generate(InputView::getInputString)
+                     .limit(totalManualGameCount)
+                     .collect(Collectors.toList());
     }
 }

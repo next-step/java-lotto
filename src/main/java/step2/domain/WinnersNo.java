@@ -2,13 +2,13 @@ package step2.domain;
 
 import java.util.List;
 
-import static step2.domain.Numbers.convertStringToNo;
+import static step2.domain.LottoNumbers.convertStringToNo;
 import static step2.domain.Validator.validateFormula;
 import static step2.domain.Validator.validateLottoRangeNumber;
 
 public class WinnersNo {
     private final int bonusNumber;
-    private final Numbers winnersResultNos;
+    private final LottoNumbers winnersResultNos;
 
     public WinnersNo(int bonusNumber, String input) {
         this.bonusNumber = bonusNumber;

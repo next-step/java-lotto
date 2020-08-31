@@ -8,7 +8,10 @@ import step2.ui.ResultView;
 
 import static step2.domain.Lottos.ofAutoAndManualLottoGames;
 import static step2.domain.Lottos.ofAutoLottoGames;
+import static step2.domain.LottosGenerator.getAutoLottos;
+import static step2.domain.LottosGenerator.getManualLottos;
 import static step2.domain.WinnersNo.ofWinnersNo;
+import static step2.ui.InputView.getManualGame;
 
 public class LottoGame {
     public static void main(String[] args) {
@@ -17,8 +20,8 @@ public class LottoGame {
         int totalManualGameCount = InputView.getTotalManualGameCount();
 
         Lottos lottos = totalManualGameCount > 0
-            ? ofAutoAndManualLottoGames(totalAutoGameCount, InputView.getManualGame(totalManualGameCount))
-            : ofAutoLottoGames(totalAutoGameCount);
+            ? ofAutoAndManualLottoGames(getAutoLottos(totalAutoGameCount), getManualLottos(getManualGame(totalManualGameCount)))
+            : ofAutoLottoGames(getAutoLottos(totalAutoGameCount));
 
         ResultView.printMyGameList(totalManualGameCount, totalAutoGameCount);
         ResultView.printMyGame(lottos);

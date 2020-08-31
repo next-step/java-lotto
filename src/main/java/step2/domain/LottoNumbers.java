@@ -8,39 +8,39 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Numbers {
+public class LottoNumbers {
     private static final int MAX_SIZE = 6;
     private static final int RANDOM_NUMBER_ORIGIN = 1;
     private static final int RANDOM_NUMBER_BOUND = 46;
 
     private List<Integer> lotteryInfo;
 
-    private Numbers(List<Integer> lotteryInfo) {
+    private LottoNumbers(List<Integer> lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
     }
 
-    private static Numbers of(List<Integer> lotteryInfo) {
-        return new Numbers(lotteryInfo);
+    private static LottoNumbers of(List<Integer> lotteryInfo) {
+        return new LottoNumbers(lotteryInfo);
     }
 
-    static Numbers getRandomNos() {
+    static LottoNumbers getRandomNos() {
         return getLottoNos(RANDOM_NUMBER_ORIGIN, RANDOM_NUMBER_BOUND);
     }
 
-    static Numbers getLottoNos(int start, int end) {
+    static LottoNumbers getLottoNos(int start, int end) {
         IntStream intStream = new Random().ints(start, end);
-        return Numbers.of(intStream.distinct()
-                                   .limit(MAX_SIZE)
-                                   .sorted()
-                                   .boxed()
-                                   .collect(Collectors.toList()));
+        return LottoNumbers.of(intStream.distinct()
+                                        .limit(MAX_SIZE)
+                                        .sorted()
+                                        .boxed()
+                                        .collect(Collectors.toList()));
     }
 
-    static Numbers convertStringToNo(String input) {
+    static LottoNumbers convertStringToNo(String input) {
         String removingSpacesWinnersNo = input.replaceAll(" ", "");
-        return Numbers.of(Arrays.stream(removingSpacesWinnersNo.split(","))
-                                .map(Numbers::toInt)
-                                .collect(Collectors.toList()));
+        return LottoNumbers.of(Arrays.stream(removingSpacesWinnersNo.split(","))
+                                     .map(LottoNumbers::toInt)
+                                     .collect(Collectors.toList()));
     }
 
     static int toInt(String inputNumbers) {

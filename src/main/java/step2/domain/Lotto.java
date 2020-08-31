@@ -1,16 +1,16 @@
 package step2.domain;
 
-import static step2.domain.Numbers.getLottoNos;
-import static step2.domain.Numbers.getRandomNos;
+import static step2.domain.LottoNumbers.getLottoNos;
+import static step2.domain.LottoNumbers.getRandomNos;
 
 public class Lotto {
-    private Numbers lotteryInfo;
+    private final LottoNumbers lotteryInfo;
 
-    private Lotto(Numbers lotteryInfo) {
+    private Lotto(LottoNumbers lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
     }
 
-    public static Lotto ofLotto(Numbers lotteryInfo) {
+    public static Lotto ofLotto(LottoNumbers lotteryInfo) {
         return new Lotto(lotteryInfo);
     }
 

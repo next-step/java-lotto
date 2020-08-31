@@ -8,8 +8,7 @@ public class Validator {
     public static final String MISS_BOUNS_INPUT_MSG = "보너스 입력 값이 잘못입력되었습니다.";
 
     public static int validateProofOfAmount(int money) {
-        if (money > 1000
-            && money % 1000 != 0) {
+        if (money % 1000 != 0) {
             throw new IllegalArgumentException(MISS_AMOUNT_MSG);
         }
         return money;
