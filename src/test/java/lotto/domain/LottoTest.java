@@ -61,4 +61,10 @@ public class LottoTest {
         assertThat(actual).isEqualTo(14);
     }
 
+    @Test
+    void Enum_활용해서_랭크_등수_GET() {
+        assertThat(Rank.valueOf(3, false)).isEqualTo(5000);
+        assertThat(Rank.valueOf(5, true)).isEqualTo(30_000_000);
+        assertThat(Rank.valueOf(5, false)).isEqualTo(1_500_000);
+    }
 }
