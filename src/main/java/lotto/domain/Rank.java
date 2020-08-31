@@ -11,9 +11,9 @@ public enum Rank {
     MISS(0, 0);
 
     public static final String ERROR_MESSAGE = "일치하는 등수가 없습니다.";
-    private long countOfMatch;
-    private boolean bonusMatch;
-    private long winningMoney;
+    private final long countOfMatch;
+    private final boolean bonusMatch;
+    private final long winningMoney;
 
     Rank(long countOfMatch, long winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -59,7 +59,7 @@ public enum Rank {
     }
 
     public String isBonusMatch() {
-        if(bonusMatch)
+        if (bonusMatch)
             return ", 보너스 볼 일치";
         return " ";
     }

@@ -20,6 +20,7 @@ public class Lottos {
                         .limit(count)
                         .collect(Collectors.toList()));
     }
+
     public static Lottos of(String lottoNumbers) {
         return new Lottos(
                 Stream.generate(() -> Lotto.createLotto(lottoNumbers.split(" ")))

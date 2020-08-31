@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class RandomLottoGenerator implements LottoGeneratorStrategy {
@@ -15,7 +14,7 @@ public class RandomLottoGenerator implements LottoGeneratorStrategy {
     @Override
     public List<Integer> generateLotto() {
         Collections.shuffle(lottoAllNum);
-        List<Integer> lottoNumbers = Stream.iterate(LOTTO_MIN_SIZE, n -> n+1)
+        List<Integer> lottoNumbers = Stream.iterate(LOTTO_MIN_SIZE, n -> n + 1)
                 .limit(LOTTO_MAX_SIZE)
                 .map(n -> lottoAllNum.get(n))
                 .collect(Collectors.toList());

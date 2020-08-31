@@ -2,12 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
-import lotto.domain.Ranks;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class ResultView {
 

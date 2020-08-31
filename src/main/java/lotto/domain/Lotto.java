@@ -20,8 +20,8 @@ public class Lotto {
     public static Lotto createLotto(String[] lottoNumbers) {
         return new Lotto(
                 Arrays.stream(lottoNumbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList())
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -31,12 +31,15 @@ public class Lotto {
 
     public long getWinningCount(WinningNumbers winningNumbers) {
         long count = winningNumbers.findSameNumber(lotto);
-        if(count>= WINNING_CRITERIA)
+        if (count >= WINNING_CRITERIA)
             return count;
         return 0;
     }
 
-    public boolean getBonusMatch(BonusNumber bonusNumber) { return bonusNumber.getBonusMatch(lotto); }
+    public boolean getBonusMatch(BonusNumber bonusNumber) {
+        return bonusNumber.getBonusMatch(lotto);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

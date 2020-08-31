@@ -89,7 +89,7 @@ public class LottoTest {
     void RanksCount() {
         Lottos lottos = Lottos.of(14000, () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        WinningNumbers winningNumbers = new WinningNumbers(new String[]{"1", "2", "3","4","5"});
+        WinningNumbers winningNumbers = new WinningNumbers(new String[]{"1", "2", "3", "4", "5"});
         BonusNumber bonusNumber = new BonusNumber(1);
 
         Ranks ranks = new Ranks(lottos.getRanks(winningNumbers, bonusNumber));
