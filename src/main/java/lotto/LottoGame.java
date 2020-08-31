@@ -15,7 +15,7 @@ public class LottoGame {
         InputView.printManualLottoNumber();
 
         LottoService lottoService = new LottoService();
-        List<String> manualLottoTicket = lottoService.setManualLottoNumbers(manualLottoQuantity);
+        List<String> manualLottoTicket = InputView.inputManualLottoNumber(manualLottoQuantity);
         List<LottoTicket> manualLottoTickets = LottoNumberGenerator.generateManualLottoTickets(manualLottoTicket, manualLottoQuantity);
 
         int totalLottoQuantity = lottoService.getLottoBuyCount(paymentAmount);

@@ -1,12 +1,9 @@
 package lotto.domain;
 
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoTickets {
 
@@ -23,9 +20,9 @@ public class LottoTickets {
     }
 
     public static LottoTickets of(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
-        return new LottoTickets(Stream.of(manualLottoTickets, autoLottoTickets)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList()));
+        LottoTickets lottoTickets = new LottoTickets(autoLottoTickets);
+        lottoTickets.lottoTickets.addAll(manualLottoTickets);
+        return lottoTickets;
     }
 
     public LottoTicket getLottoTicket(int index) {

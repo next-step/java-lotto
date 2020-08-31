@@ -1,6 +1,11 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.utils.CommonConstant.NUMBER_ZERO;
 
 public class InputView {
 
@@ -52,8 +57,10 @@ public class InputView {
         System.out.println(PRINT_INPUT_MANUAL_LOTO_NUMBER);
     }
 
-    public static String inputManualLottoNumber() {
-        return scanner.nextLine();
+    public static List<String> inputManualLottoNumber(int manualLottoQuantity) {
+        return IntStream.range(NUMBER_ZERO, manualLottoQuantity)
+                .mapToObj(input -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 
 }

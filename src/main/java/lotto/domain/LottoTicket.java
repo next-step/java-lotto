@@ -5,7 +5,6 @@ import lotto.utils.LottoValidationUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 import static lotto.utils.CommonConstant.*;
 

@@ -1,11 +1,6 @@
 package lotto.domain;
 
 import lotto.utils.LottoValidationUtils;
-import lotto.view.InputView;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoService {
 
@@ -21,9 +16,4 @@ public class LottoService {
         return autoQuantity - manualQuantity;
     }
 
-    public List<String> setManualLottoNumbers(int manualLottoQuantity) {
-        return IntStream.range(0, manualLottoQuantity)
-                .mapToObj(i -> InputView.inputManualLottoNumber())
-                .collect(Collectors.toList());
-    }
 }
