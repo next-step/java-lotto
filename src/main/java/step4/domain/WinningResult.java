@@ -6,14 +6,9 @@ import java.util.Map;
 
 public class WinningResult {
 
-    private Map winningMap;
+   private Map winningMap = WinningResult.init();
 
-    public WinningResult() {
-        LottoMap lottoMap = new LottoMap(initWinningMap());
-        this.winningMap = lottoMap.getLottoMap();
-    }
-
-    private Map initWinningMap() {
+    public static Map init() {
         Map winningMap = new EnumMap(WinningPrice.class);
         for (WinningPrice winningPrice : WinningPrice.values()) {
             winningMap.put(winningPrice, 0);
