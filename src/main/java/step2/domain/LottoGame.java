@@ -10,6 +10,8 @@ import step2.view.ResultView;
 public class LottoGame {
     public void play() {
         int purchaseAmount = InputView.inputPurchase();
+        int manualLottoCount = InputView.inputManualLottoCount();
+
         BuyLotto buyLotto = new BuyLotto(purchaseAmount);
 
         ResultView.printPurchaseLotto(buyLotto.getLottoQuantity());
