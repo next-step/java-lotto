@@ -9,11 +9,11 @@ public class LottoNum {
     private final int lottoNum;
 
     public LottoNum(Integer lottoNum) {
-        vaildLottoNum(lottoNum);
+        validLottoNum(lottoNum);
         this.lottoNum = lottoNum;
     }
 
-    private void vaildLottoNum(Integer lottoNum) {
+    private void validLottoNum(Integer lottoNum) {
         if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
         }

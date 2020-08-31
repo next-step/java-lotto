@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,6 +17,22 @@ class LottoPaperTest {
     public void createLottoPaper() {
         lottoPaper = new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(2), new LottoNum(3)
                 , new LottoNum(4), new LottoNum(5), new LottoNum(6)));
+    }
+
+    @Test
+    @DisplayName("중복체크")
+    void testValidReduplication() {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(1), new LottoNum(3)
+                        , new LottoNum(4), new LottoNum(5), new LottoNum(6))));
+    }
+
+    @Test
+    @DisplayName("최대 6자리까지 생성 체크")
+    void testValidListSize() {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(2), new LottoNum(3)
+                        , new LottoNum(4), new LottoNum(5), new LottoNum(6), new LottoNum(7))));
     }
 
     @ParameterizedTest
