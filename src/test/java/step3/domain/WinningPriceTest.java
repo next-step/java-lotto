@@ -19,7 +19,7 @@ public class WinningPriceTest {
     @Test
     @DisplayName("2등 3등 비교 테스트")
     public void matchBonusTest() {
-        assertThat(WinningPrice.valueOf(5,false)).isEqualTo(WinningPrice.valueOf(5,true));
+        assertThat(WinningPrice.valueOf(5,false).equals(WinningPrice.valueOf(5,true))).isFalse();
     }
 
 }
