@@ -41,6 +41,13 @@ public class InputConsoleView implements InputView {
     }
 
     @Override
+    public int readBonusNumber() {
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        return number;
+    }
+
+    @Override
     public void printMoneyInputHeader() {
         stringPrinter.print("구입금액을 입력해 주세요.");
     }
@@ -48,5 +55,10 @@ public class InputConsoleView implements InputView {
     @Override
     public void printWinningNumberInputHeader() {
         stringPrinter.print("\n지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    @Override
+    public void printBonusNumberInputHeader() {
+        stringPrinter.print("보너스 볼을 입력해 주세요.");
     }
 }
