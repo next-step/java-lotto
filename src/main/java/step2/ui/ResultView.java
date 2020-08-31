@@ -23,6 +23,15 @@ public class ResultView {
         System.out.println(scoreType.getTargetNumber() + "개 일치" + scoreType.getWinnerMsg() + "- " + value + "개");
     }
 
+    public static void printMyGameList(int totalManualGameCount, int totalAutoGameCount) {
+        String gameListMsg = "";
+        if (totalManualGameCount > 0) {
+            gameListMsg += "수동으로 " + totalManualGameCount + "장,";
+        }
+        gameListMsg += "자동으로 " + totalAutoGameCount + "장을 구매했습니다.";
+        System.out.print(gameListMsg);
+    }
+
     public static void printMyGame(Lottos lottos) {
         lottos.getLottos().forEach((list) -> System.out.println("[" + list.toString() + "]"));
     }

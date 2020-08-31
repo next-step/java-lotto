@@ -1,52 +1,25 @@
 package step2.domain;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import static step2.domain.LottoNumbers.getLottoNos;
+import static step2.domain.LottoNumbers.getRandomNos;
 
 public class Lotto {
-    private static final int MAX_SIZE = 6;
-    private static final int RANDOM_NUMBER_ORIGIN = 1;
-    private static final int RANDOM_NUMBER_BOUND = 46;
+    private final LottoNumbers lotteryInfo;
 
-    private List<Integer> lotteryInfo;
-
-    private Lotto(List<Integer> lotteryInfo) {
+    private Lotto(LottoNumbers lotteryInfo) {
         this.lotteryInfo = lotteryInfo;
     }
 
-    public static Lotto ofLotto() {
-        List<Integer> lottoNumbers = getRandomNos();
-        return new Lotto(lottoNumbers);
+    public static Lotto ofLotto(LottoNumbers lotteryInfo) {
+        return new Lotto(lotteryInfo);
+    }
+
+    public static Lotto ofRandomLotto() {
+        return new Lotto(getRandomNos());
     }
 
     public static Lotto ofLottoByDesignatedRange(int start, int end) {
-        List<Integer> lottoNumbers = getLottoNos(start, end);
-        return new Lotto(lottoNumbers);
-    }
-
-    static List<Integer> getLottoNos(int start, int end) {
-        IntStream intStream = new Random().ints(start, end);
-        return intStream.distinct()
-                .limit(MAX_SIZE)
-                .sorted()
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    static List<Integer> getRandomNos() {
-        return getLottoNos(RANDOM_NUMBER_ORIGIN, RANDOM_NUMBER_BOUND);
-    }
-
-    public List<Integer> getLotteryInfo() {
-        return lotteryInfo;
-    }
-
-    @Override
-    public String toString() {
-        return this.lotteryInfo.stream().map(String::valueOf)
-                               .collect(Collectors.joining(","));
+        return new Lotto(getLottoNos(start, end));
     }
 
     public ScoreType addWinningInfos(WinnersNo winnersNo) {
@@ -55,15 +28,20 @@ public class Lotto {
         return hitNumber > 2 ? ScoreType.getScore(hitNumber, hasBonusNumber) : ScoreType.NONE;
     }
 
-    private int hasNumber(WinnersNo winnersNo) {
+    protected int hasNumber(WinnersNo winnersNo) {
         int hitNumbers = 0;
         for (int number : winnersNo.getWinnersResultNos()) {
-            hitNumbers = lotteryInfo.contains(number) ? ++hitNumbers : hitNumbers;
+            hitNumbers = lotteryInfo.getLotteryInfo().contains(number) ? ++hitNumbers : hitNumbers;
         }
         return hitNumbers;
     }
 
     private boolean hasBonusNumber(int hitNumbers, int BonusNumber) {
-        return hitNumbers == 5 && lotteryInfo.contains(BonusNumber);
+        return hitNumbers == 5 && lotteryInfo.getLotteryInfo().contains(BonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return this.lotteryInfo.toString();
     }
 }

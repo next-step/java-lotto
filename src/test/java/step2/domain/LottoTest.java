@@ -3,31 +3,16 @@ package step2.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.domain.Lotto.getLottoNos;
+import static step2.domain.Lotto.ofLottoByDesignatedRange;
 
 public class LottoTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1:7:6"}, delimiter = ':')
-    public void 로또_자동생성(int start, int end, int size) {
-        List<Integer> loTToNos = getLottoNos(start, end);
-        assertThat(loTToNos.size()).isEqualTo(size);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"1:7:6"}, delimiter = ':')
-    public void 로또_복수_게임_자동생성(int start, int end, int size) {
-        List<Integer> loTToNos = getLottoNos(start, end);
-        assertThat(loTToNos.size()).isEqualTo(size);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"1:7:1"}, delimiter = ':')
-    public void 당첨_번호_확인(int start, int end, int result) {
-        List<Integer> loTToNos = getLottoNos(start, end);
-        assertThat(loTToNos.contains(result)).isTrue();
+    @CsvSource(value = {"1:7:23:1,2,3"}, delimiter = ':')
+    public void 당첨_확인(int start, int end, int bonusNumber, String result) {
+        Lotto lotto = ofLottoByDesignatedRange(start, end);
+        WinnersNo winnersNo = new WinnersNo(bonusNumber, result);
+        assertThat(lotto.addWinningInfos(winnersNo)).isEqualTo(ScoreType.THREE);
     }
 }
