@@ -6,7 +6,7 @@ public class LottoNum {
     public static final Integer MIN_LOTTO_NUM = 1;
     public static final Integer MAX_LOTTO_NUM = 45;
 
-    private int lottoNum;
+    private final int lottoNum;
 
     public LottoNum(Integer lottoNum) {
         vaild(lottoNum);
