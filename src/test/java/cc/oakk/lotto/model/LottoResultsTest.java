@@ -14,12 +14,12 @@ public class LottoResultsTest {
 
     @BeforeEach
     public void beforeEach() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11), 10);
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2,  3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 3, 5, 7, 9,  11)),
-                new Lotto(Arrays.asList(1, 3, 5, 7, 9,  10)),
-                new Lotto(Arrays.asList(1, 3, 5, 7, 10,  11)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 9, 11)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)),
+                new Lotto(Arrays.asList(1, 3, 5, 7, 10, 11)),
                 new Lotto(Arrays.asList(1, 4, 8, 12, 16, 20)),
                 new Lotto(Arrays.asList(1, 14, 18, 22, 26, 30))));
 

@@ -38,12 +38,8 @@ public class Lotto implements Printable<Lotto> {
                 .collect(Collectors.toList());
     }
 
-    public Rank score(WinningLotto target) {
-        throwIfNull(target);
-        int matchingCount = (int) numbers.stream()
-                .filter(target.numbers::contains)
-                .count();
-        return Rank.getRankByDifferentCount(NUMBER_COUNT - matchingCount);
+    public List<Integer> get() {
+        return numbers;
     }
 
     @Override

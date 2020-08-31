@@ -30,16 +30,4 @@ public class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(IntStream.range(1, Lotto.NUMBER_COUNT + 2).boxed().collect(Collectors.toList())));
     }
-
-    @Test
-    public void compare() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(7, 8, 9, 10, 11,12)))).isEqualTo(Rank.NONE);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(6, 7, 8, 9, 10, 11)))).isEqualTo(Rank.NONE);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(5, 6, 7, 8, 9, 10)))).isEqualTo(Rank.FIFTH);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(4, 5, 6, 7, 8, 9)))).isEqualTo(Rank.FOURTH);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(3, 4, 5, 6, 7, 8)))).isEqualTo(Rank.THIRD);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(2, 3, 4, 5, 6, 7)))).isEqualTo(Rank.SECOND);
-        assertThat(lotto.score(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
-    }
 }

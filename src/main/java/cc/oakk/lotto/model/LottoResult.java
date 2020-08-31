@@ -16,7 +16,7 @@ public class LottoResult {
     public static LottoResult of(Lotto lotto, WinningLotto comparingLotto) {
         throwIfNull(lotto);
         throwIfNull(comparingLotto);
-        return new LottoResult(lotto, comparingLotto, lotto.score(comparingLotto));
+        return new LottoResult(lotto, comparingLotto, comparingLotto.score(lotto));
     }
 
     public Rank getRank() {
