@@ -17,7 +17,7 @@ public class WinningStatistics {
 
     public float getWinningStatic() {
         int totalWinningPrice = getTotalWinningPrice();
-        if (lottoList.size() == 0) {
+        if (lottoList.isEmpty()) {
             return 0;
         }
         return (float) totalWinningPrice / (LottoGame.LOTTO_PRICE * lottoList.size());
