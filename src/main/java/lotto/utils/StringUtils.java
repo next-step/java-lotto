@@ -2,18 +2,15 @@ package lotto.utils;
 
 public class StringUtils {
 
-    private String value;
-
-    public StringUtils(String value) {
-        this.value = value;
+    private StringUtils() {
     }
 
-    public int toInt() {
-        return Integer.parseInt(this.value);
+    public static int toInt(String value) {
+        return Integer.parseInt(value);
     }
 
-    public String[] split(String delimiter) {
-        return this.value.split(delimiter);
+    public static String[] split(String value, String delimiter) {
+        return value.split(delimiter);
     }
 
 }

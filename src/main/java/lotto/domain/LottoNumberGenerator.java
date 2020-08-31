@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.utils.LottoValidationUtils;
 import lotto.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -35,16 +32,32 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList()));
     }
 
-    public static List<LottoTicket> generateLottoTickets(int quantity) {
+    public static List<LottoTicket> generateAutoLottoTickets(int quantity) {
         return Stream.generate(LottoNumberGenerator::generateAutoLottoTicket)
                 .limit(quantity)
                 .collect(Collectors.toList());
     }
 
+    public static LottoTicket generateManualLottoTicket(String manualLottoNumber) {
+        String[] manualLottoNumbers = StringUtils.split(manualLottoNumber, INPUT_WINNING_NUMBER_DELIMITER);
+        return new LottoTicket(Arrays.stream(manualLottoNumbers)
+                .map(StringUtils::toInt)
+                .limit(NUMBER_SIX)
+                .sorted()
+                .collect(Collectors.toList()));
+    }
+
+    public static List<LottoTicket> generateManualLottoTickets(List<String> manutalLottoNumber, int quantity) {
+        return manutalLottoNumber.stream()
+                .map(LottoNumberGenerator::generateManualLottoTicket)
+                .limit(quantity)
+                .collect(Collectors.toList());
+    }
+
     public static LottoTicket generateWinningNumber(String winningNumber) {
-        String[] winningNumberArray = new StringUtils(winningNumber).split(INPUT_WINNING_NUMBER_DELIMITER);
-        return new LottoTicket(Arrays.stream(winningNumberArray)
-                .map(number -> new StringUtils(number).toInt())
+        String[] winningNumbers = StringUtils.split(winningNumber, INPUT_WINNING_NUMBER_DELIMITER);
+        return new LottoTicket(Arrays.stream(winningNumbers)
+                .map(StringUtils::toInt)
                 .limit(NUMBER_SIX)
                 .sorted()
                 .collect(Collectors.toList()));

@@ -12,4 +12,8 @@ public class LottoService {
         return price / LOTTO_TICKET_PRICE;
     }
 
+    public int getAutoLottoBuyCount(int manualQuantity, int autoQuantity) {
+        return autoQuantity - manualQuantity;
+    }
+
 }

@@ -45,4 +45,10 @@ class LottoServiceTest {
                 });
     }
 
+    @Test
+    @DisplayName("총 로또 장 수에서 수동 로또 장 수 제외")
+    void buyAutoLottoTicket() {
+        int result = lottoService.getAutoLottoBuyCount(3, 14);
+        assertThat(result).isEqualTo(11);
+    }
 }

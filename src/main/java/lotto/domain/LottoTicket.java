@@ -21,7 +21,7 @@ public class LottoTicket {
 
     public Rank matchRank(final WinningNumber winningNumber) {
         int matchCount = getMatchCount(winningNumber);
-        boolean hasBonusNumber = isBonusNumber(winningNumber, matchCount);
+        boolean hasBonusNumber = isSecondRank(winningNumber, matchCount);
 
         return Rank.valudOf(matchCount, hasBonusNumber);
     }
@@ -36,7 +36,7 @@ public class LottoTicket {
         return winningNumbers.isContainsLottoNumber(getLottoTicketNumber(number)) ? NUMBER_ONE : NUMBER_ZERO;
     }
 
-    private boolean isBonusNumber(final WinningNumber winningNumber, int matchCount) {
+    private boolean isSecondRank(final WinningNumber winningNumber, int matchCount) {
         return (matchCount == NUMBER_FIVE) && isContainsBonusNumber(winningNumber);
     }
 

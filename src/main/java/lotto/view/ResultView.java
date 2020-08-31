@@ -1,9 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinningResult;
 
+import java.util.stream.IntStream;
+
 import static lotto.utils.CommonConstant.NUMBER_ONE;
+import static lotto.utils.CommonConstant.NUMBER_ZERO;
 
 public class ResultView {
 
@@ -15,6 +19,16 @@ public class ResultView {
     private static final String PROFIT = "이익";
     private static final String PRINT_LOTTO_RESULT_START = "(기준이 1이기 때문에 결과적으로 ";
     private static final String PRINT_LOTTO_RESULT_END = "라는 의미임)";
+
+    private ResultView() {
+    }
+
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        IntStream.range(NUMBER_ZERO, lottoTickets.size())
+                .mapToObj(lottoTickets::getLottoTicket)
+                .forEach(System.out::println);
+        System.out.println();
+    }
 
     public static void printWinningNumericalStatement() {
         System.out.println(WINNUNG_NUMERICAL_SATATEMENT);
