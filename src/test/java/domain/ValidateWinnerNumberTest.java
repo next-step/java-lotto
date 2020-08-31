@@ -13,9 +13,10 @@ public class ValidateWinnerNumberTest {
     void validateStringsTest() {
         String input = "1,2,3,4,5,5";
         String inputs[] = input.split(",");
+        int bonus = 7;
 
         assertThatThrownBy(() -> {
-            new ValidateWinnerNumber(inputs);
+            new ValidateWinnerNumber(inputs, bonus);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -25,9 +26,10 @@ public class ValidateWinnerNumberTest {
     void validateNumberRangeTest() {
         String input = "1,2,3,4,54,90";
         String inputs[] = input.split(",");
+        int bonus = 7;
 
         assertThatThrownBy(() -> {
-            new ValidateWinnerNumber(inputs);
+            new ValidateWinnerNumber(inputs, bonus);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("오류!!");
     }
@@ -37,9 +39,10 @@ public class ValidateWinnerNumberTest {
     void validateNumberIsSixTest() {
         String input = "1,2,3,4,5";
         String inputs[] = input.split(",");
+        int bonus = 7;
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new ValidateWinnerNumber(inputs);
+            new ValidateWinnerNumber(inputs, bonus);
         }).withMessageContaining("숫자 개수 에러");
     }
 }

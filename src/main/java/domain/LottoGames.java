@@ -68,9 +68,10 @@ public class LottoGames {
         }
 
         if (count >= MIN_WINNER_NUMBER) {
-            //getPrice
+            //get Price
             winnerPrice = sumOfWinnerPrice(count, matchBonus);
 
+            //get Rank
             Rank ranking = Rank.valueOf(winnerPrice, matchBonus);
             //Record
             rankRecord.recordOfRankings(ranking);
@@ -82,11 +83,11 @@ public class LottoGames {
         return winnerNumber.getCountingNumber(lotto);
     }
 
-    private int sumOfWinnerPrice(int count, boolean flag) {
-        if (flag) {
+    private int sumOfWinnerPrice(int count, boolean matchBonus) {
+        if (matchBonus) {
             return RANK_TWO.getWinnerPrice();
         }
-        if (count == 5 && !flag) {
+        if (count == 5 && !matchBonus) {
             return RANK_THREE.getWinnerPrice();
         }
 
@@ -104,4 +105,7 @@ public class LottoGames {
         return (int) bonus.get();
     }
 
+    public void setWinnerNumber(WinnerNumber winnerNumber) {
+        this.winnerNumber = winnerNumber;
+    }
 }

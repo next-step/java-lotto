@@ -21,7 +21,7 @@ public class RankRecord {
     }
 
     public void recordOfRankings(Rank ranking) {
-        int rank = ranking.ordinal()+ONE;
+        int rank = ranking.ordinal() + ONE;
 
         int rankCount = recordPool.get(rank);
         recordPool.set(rank, rankCount + ONE);

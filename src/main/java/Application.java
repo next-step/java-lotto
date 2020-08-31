@@ -11,7 +11,6 @@ public class Application {
         View.showLottoTickets(game.getLottos());
 
         WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-
         int sum = game.calculateWinnerPrice(winnerNumber);
 
         View.result(game, sum);

@@ -47,6 +47,5 @@ public class UserInput {
         System.out.println(BONUS_MESSEGE);
 
         return SC.nextInt();
-
     }
 }

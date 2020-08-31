@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -24,13 +22,14 @@ public class NumberGenerator {
                 .boxed().collect(Collectors.toList());
     }
 
-    public List<Integer> generate() {
+    public Set<Integer> generate() {
 
         Collections.shuffle(lottoNumberCandidate);
 
         List<Integer> numList = new ArrayList<>(lottoNumberCandidate)
                 .subList(INT_ZERO, INT_SIX);
+        Set<Integer> set = new HashSet<>(numList);
 
-        return numList;
+        return set;
     }
 }
