@@ -66,7 +66,6 @@ public class LottoGamesTest {
     void findBonusTest() {
         String[] input = "1,2,3,4,5,6".split(",");
         int bonus = 7;
-//        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         LottoGames game = new LottoGames(0);
