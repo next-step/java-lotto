@@ -11,10 +11,14 @@ public class Numbers {
     }
 
     public void validateNumber() {
-        if (Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .anyMatch(n -> n < 0)) {
-            throw new RuntimeException("숫자 이외의 값 또는 음수는 사용할 수 없습니다.");
+        try {
+            if (Arrays.stream(numbers)
+                    .mapToInt(Integer::parseInt)
+                    .anyMatch(n -> n < 0)) {
+                throw new RuntimeException("음수는 사용할 수 없습니다.");
+            }
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 이외의 값을 입력할 수 없습니다.");
         }
     }
 
