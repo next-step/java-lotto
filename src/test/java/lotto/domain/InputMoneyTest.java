@@ -15,4 +15,9 @@ class InputMoneyTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new InputMoney("999"));
     }
+
+    @Test
+    void testGetPaperCount() {
+        Assertions.assertThat(new InputMoney("3000").getPaperCount()).isEqualTo(3);
+    }
 }

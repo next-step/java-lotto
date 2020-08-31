@@ -4,8 +4,9 @@ import lotto.context.Error;
 
 public class InputMoney {
     private static final int MIN_INPUT_MONEY = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
-    private int money;
+    private final int money;
 
     public InputMoney(String inputMoney) {
         validInputMoney(inputMoney);
@@ -24,7 +25,7 @@ public class InputMoney {
         }
     }
 
-    public int getMoney() {
-        return money;
+    public int getPaperCount() {
+        return this.money / LOTTO_PRICE;
     }
 }

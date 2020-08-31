@@ -9,7 +9,7 @@ public class LottoGame {
         ResultView.printInputMsg();
         InputMoney inputMoney = new InputMoney(InputView.inputText());
 
-        LottoPapers lottoPapers = new LottoPapers(inputMoney.getMoney());
+        LottoPapers lottoPapers = new LottoPapers(inputMoney.getPaperCount());
         ResultView.showBuyCount(lottoPapers.getPapers().size());
         ResultView.showLottoNumbersList(lottoPapers.getPapers());
 

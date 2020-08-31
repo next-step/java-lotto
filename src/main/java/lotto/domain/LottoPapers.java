@@ -8,21 +8,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoPapers {
-    private static final Integer LOTTO_PRICE = 1000;
     private final List<LottoPaper> papers;
 
-    public LottoPapers(Integer inputMoney) {
-        papers = makeAutoLottoNums(inputMoney);
+    public LottoPapers(int paperCount) {
+        papers = makeAutoLottoNums(paperCount);
     }
 
-    private List<LottoPaper> makeAutoLottoNums(Integer inputMoney) {
-        return IntStream.range(0, paperCount(inputMoney))
+    private List<LottoPaper> makeAutoLottoNums(Integer paperCount) {
+        return IntStream.range(0, paperCount)
                 .mapToObj(value -> new LottoPaper(getAutoLottoNums()))
                 .collect(Collectors.toList());
-    }
-
-    private Integer paperCount(Integer inputMoney) {
-        return inputMoney / LOTTO_PRICE;
     }
 
     private List<LottoNum> getAutoLottoNums() {

@@ -9,7 +9,7 @@ class LottoPapersTest {
 
     @BeforeEach
     void PapersCreate() {
-        lottoPapers = new LottoPapers(3000);
+        lottoPapers = new LottoPapers(3);
     }
 
     @Test
