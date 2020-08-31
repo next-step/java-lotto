@@ -7,16 +7,12 @@ class InputMoneyTest {
     @Test
     void cretateTypeCheck() {
         Assertions.assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(() -> {
-                    InputMoney inputMoney = new InputMoney("asd");
-                });
+                .isThrownBy(() -> new InputMoney("asd"));
     }
 
     @Test
     void cretateMinNumber() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    InputMoney inputMoney = new InputMoney("999");
-                });
+                .isThrownBy(() -> new InputMoney("999"));
     }
 }
