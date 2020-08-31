@@ -8,8 +8,8 @@ import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.impl.InputConsoleView;
 import cc.oakk.lotto.view.ResultView;
 import cc.oakk.lotto.view.impl.ResultConsoleView;
-import cc.oakk.lotto.view.printer.LottoResultsPrinter;
-import cc.oakk.lotto.view.printer.LottosPrinter;
+import cc.oakk.lotto.view.printer.impl.LottoResultsPrinter;
+import cc.oakk.lotto.view.printer.impl.LottosPrinter;
 import cc.oakk.lotto.view.printer.Printer;
 import cc.oakk.lotto.view.printer.StandardPrinter;
 

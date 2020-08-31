@@ -1,9 +1,11 @@
-package cc.oakk.lotto.view.printer;
+package cc.oakk.lotto.view.printer.impl;
 
 import cc.oakk.lotto.model.Lotto;
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.model.LottoResults;
 import cc.oakk.lotto.model.Rank;
+import cc.oakk.lotto.view.printer.Printer;
+import cc.oakk.lotto.view.printer.StringPrinter;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
