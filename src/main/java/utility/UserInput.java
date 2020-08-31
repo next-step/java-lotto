@@ -43,6 +43,7 @@ public class UserInput {
         return inputs;
     }
 
+
     public static int inputBonusNumber(){
         System.out.println(BONUS_MESSEGE);
 

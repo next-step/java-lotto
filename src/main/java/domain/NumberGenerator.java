@@ -1,5 +1,6 @@
 package domain;
 
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,10 +25,12 @@ public class NumberGenerator {
 
     public Set<Integer> generate() {
 
+
         Collections.shuffle(lottoNumberCandidate);
 
         List<Integer> numList = new ArrayList<>(lottoNumberCandidate)
                 .subList(INT_ZERO, INT_SIX);
+
         Set<Integer> set = new HashSet<>(numList);
 
         return set;

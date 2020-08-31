@@ -36,23 +36,12 @@ public class NumbergeneratorTest {
         assertThat(numList.size()).isEqualTo(6);
     }
 
-/*
-    @DisplayName("정렬 테스트")
-    @Test
-    void arrangeNumber() {
-        Set<Integer> numList = numberGenerator.generate();
-        Collections.sort(numList);
-
-        for (int i = 0; i < 6; i++) {
-            System.out.println(numList.get(i));
-        }
-    }
-*/
-
 
     @Test
     void setLotto() {
+
         Set<Integer> numList = numberGenerator.generate();
+
         Lotto numbers = new Lotto(numList);
 
         assertThat(numbers.getLottoNumber().size()).isEqualTo(6);
