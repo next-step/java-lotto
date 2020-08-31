@@ -17,9 +17,10 @@ public class SimpleLottoPrizeProvider implements LottoPrizeProvider<Long> {
     static {
         prizes = new HashMap<>();
         prizes.put(Rank.FIRST, new MoneyPrize(2_000_000_000L));
-        prizes.put(Rank.SECOND, new MoneyPrize(1_500_000L));
-        prizes.put(Rank.THIRD, new MoneyPrize(50_000L));
-        prizes.put(Rank.FOURTH, new MoneyPrize(5_000L));
+        prizes.put(Rank.SECOND, new MoneyPrize(30_000_000L));
+        prizes.put(Rank.THIRD, new MoneyPrize(1_500_000L));
+        prizes.put(Rank.FOURTH, new MoneyPrize(50_000L));
+        prizes.put(Rank.FIFTH, new MoneyPrize(5_000L));
     }
 
     public LottoPrize<Long> getPrizeByRank(Rank rank) {

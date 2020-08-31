@@ -31,14 +31,14 @@ public class LottoResultsTest {
         assertThat(results.getRankCount(Rank.FIRST)).isEqualTo(1);
         assertThat(results.getRankCount(Rank.SECOND)).isEqualTo(2);
         assertThat(results.getRankCount(Rank.THIRD)).isEqualTo(0);
-        assertThat(results.getRankCount(Rank.FOURTH)).isEqualTo(1);
-        assertThat(results.getRankCount(Rank.FIFTH)).isEqualTo(0);
+        assertThat(results.getRankCount(Rank.FOURTH)).isEqualTo(0);
+        assertThat(results.getRankCount(Rank.FIFTH)).isEqualTo(1);
         assertThat(results.getRankCount(Rank.NONE)).isEqualTo(2);
     }
 
     @Test
     public void calculateRevenue() {
         LottoPrizeProvider<?> provider = new SimpleLottoPrizeProvider();
-        assertThat(results.calculateRevenue(provider)).isEqualTo(2003005000L);
+        assertThat(results.calculateRevenue(provider)).isEqualTo(2060005000L);
     }
 }
