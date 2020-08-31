@@ -12,6 +12,9 @@ import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 public class LottoResultsPrinter<T> extends StringPrinter<LottoResults> {
     private static final Rank[] printingRanks = new Rank[] { Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST };
 
+    public static final String IS_BONUS = ", 보너스 볼 일치";
+    public static final String IS_NOT_BONUS = " ";
+
     private final LottoPrizeProvider<T> provider;
     private final int lottoPrice;
 
@@ -33,8 +36,9 @@ public class LottoResultsPrinter<T> extends StringPrinter<LottoResults> {
 
         for (Rank printingRank : printingRanks) {
             int matchingCount = Lotto.NUMBER_COUNT - printingRank.getDifferentCount();
-            builder.append(String.format("%d개 일치 (%s)- %d개\n",
+            builder.append(String.format("%d개 일치%s(%s)- %d개\n",
                     matchingCount,
+                    printingRank.isBonus() ? IS_BONUS : IS_NOT_BONUS,
                     provider.getPrizeByRank(printingRank),
                     results.getRankCount(printingRank)));
         }
