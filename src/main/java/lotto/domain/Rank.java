@@ -7,9 +7,9 @@ public enum Rank {
     SECOND(5, true, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIFTH(3, 5_000);
 
+    public static final String ERROR_MESSAGE = "일치하는 등수가 없습니다.";
     private int countOfMatch;
     private boolean bonusMatch;
     private int winningMoney;
@@ -30,20 +30,17 @@ public enum Rank {
     public static int valueOf(int matchCount, boolean bonus) {
         if(matchCount==5) {
             return Arrays.stream(Rank.values())
-                    .filter(rank ->
-                            rank.countOfMatch == matchCount && rank.bonusMatch==bonus
-                    )
+                    .filter(rank -> rank.countOfMatch == matchCount && rank.bonusMatch==bonus)
                     .findAny()
-                    .orElseThrow(() -> new IllegalArgumentException())
+                    .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE))
                     .winningMoney;
         }
 
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.countOfMatch == matchCount)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException())
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE))
                 .winningMoney;
-
     }
 
 }

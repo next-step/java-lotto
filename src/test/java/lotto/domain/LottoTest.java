@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import calculator.domain.Numbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
@@ -66,5 +68,8 @@ public class LottoTest {
         assertThat(Rank.valueOf(3, false)).isEqualTo(5000);
         assertThat(Rank.valueOf(5, true)).isEqualTo(30_000_000);
         assertThat(Rank.valueOf(5, false)).isEqualTo(1_500_000);
+        assertThatThrownBy(() -> Rank.valueOf(8, false))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("일치하는 등수가 없습니다.");
     }
 }
