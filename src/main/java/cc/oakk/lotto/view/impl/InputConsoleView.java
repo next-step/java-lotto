@@ -42,11 +42,11 @@ public class InputConsoleView implements InputView {
 
     @Override
     public void printMoneyInputHeader() {
-        stringPrinter.print("구입금액을 입력해 주세요."::toString);
+        stringPrinter.print("구입금액을 입력해 주세요.");
     }
 
     @Override
     public void printWinningNumberInputHeader() {
-        stringPrinter.print("\n지난 주 당첨 번호를 입력해 주세요."::toString);
+        stringPrinter.print("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 }

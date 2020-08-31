@@ -1,6 +1,7 @@
 package cc.oakk.lotto.model;
 
 import cc.oakk.lotto.view.printer.Printable;
+import cc.oakk.lotto.view.printer.Printer;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
-public class Lotto implements Printable<String> {
+public class Lotto implements Printable<Lotto> {
     public static final int NUMBER_COUNT = 6;
     public static final LottoNumberRange RANGE = LottoNumberRange.between(1, 45);
 
@@ -70,8 +71,9 @@ public class Lotto implements Printable<String> {
         return target;
     }
 
+
     @Override
-    public String print() {
-        return toString();
+    public void print(Printer<Lotto> printer) {
+        printer.print(this);
     }
 }

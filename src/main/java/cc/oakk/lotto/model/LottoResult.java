@@ -19,14 +19,6 @@ public class LottoResult {
         return new LottoResult(lotto, comparingLotto, lotto.score(comparingLotto));
     }
 
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public Lotto getComparedLotto() {
-        return comparedLotto;
-    }
-
     public Rank getRank() {
         return rank;
     }

@@ -1,7 +1,5 @@
 package cc.oakk.lotto.view.printer;
 
-import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
-
 public class StandardPrinter implements Printer<String> {
     private static StandardPrinter INSTANCE;
 
@@ -14,7 +12,7 @@ public class StandardPrinter implements Printer<String> {
         return INSTANCE;
     }
 
-    public void print(Printable<String> printable) {
-        System.out.println(throwIfNull(printable).print());
+    public void print(String target) {
+        System.out.println(target);
     }
 }

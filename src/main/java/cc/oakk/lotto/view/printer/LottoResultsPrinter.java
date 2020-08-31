@@ -26,21 +26,20 @@ public class LottoResultsPrinter<T> extends StringPrinter<LottoResults> {
     }
 
     @Override
-    public void print(Printable<LottoResults> printable) {
-        LottoResults results = throwIfNull(printable).print();
+    public void print(LottoResults results) {
         StringBuilder builder = new StringBuilder();
 
         for (Rank printingRank : printingRanks) {
             int matchingCount = Lotto.NUMBER_COUNT - printingRank.getDifferentCount();
             builder.append(String.format("%d개 일치 (%s)- %d개\n",
                     matchingCount,
-                    provider.getPrizeByRank(printingRank).print(),
+                    provider.getPrizeByRank(printingRank),
                     results.getRankCount(printingRank)));
         }
 
         builder.append(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n",
                 calculateRevenueRate(results)));
-        stringPrinter.print(builder::toString);
+        stringPrinter.print(builder.toString());
     }
 
     private double calculateRevenueRate(LottoResults results) {

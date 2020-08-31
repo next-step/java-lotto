@@ -2,6 +2,7 @@ package cc.oakk.lotto.model;
 
 import cc.oakk.lotto.model.prizeprovider.LottoPrizeProvider;
 import cc.oakk.lotto.view.printer.Printable;
+import cc.oakk.lotto.view.printer.Printer;
 
 import java.util.*;
 
@@ -46,7 +47,7 @@ public class LottoResults implements Printable<LottoResults> {
     }
 
     @Override
-    public LottoResults print() {
-        return this;
+    public void print(Printer<LottoResults> printer) {
+        printer.print(this);
     }
 }
