@@ -9,17 +9,17 @@ public class LottoNum {
     private final int lottoNum;
 
     public LottoNum(Integer lottoNum) {
-        vaild(lottoNum);
+        vaildLottoNum(lottoNum);
         this.lottoNum = lottoNum;
+    }
+
+    private void vaildLottoNum(Integer lottoNum) {
+        if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
+            throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
+        }
     }
 
     public int getLottoNum() {
         return lottoNum;
-    }
-
-    private void vaild(Integer lottoNum) {
-        if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
-            throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
-        }
     }
 }
