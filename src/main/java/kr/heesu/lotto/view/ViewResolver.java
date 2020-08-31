@@ -2,7 +2,11 @@ package kr.heesu.lotto.view;
 
 import kr.heesu.lotto.domain.LottoStatistics;
 import kr.heesu.lotto.domain.Lottos;
+import kr.heesu.lotto.domain.ManualCount;
 import kr.heesu.lotto.domain.PurchaseAmount;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewResolver {
     private final InputView inputView;
@@ -25,9 +29,25 @@ public class ViewResolver {
         return this.inputView.read();
     }
 
-    public String getWinningNumbers() {
+    public String getManualAmount() {
+        System.out.println(ViewMessage.INPUT_FOR_MANUAL_AMOUNT.getMessage());
+        return this.inputView.read();
+    }
+
+    public String getWinningLotto() {
         System.out.println(ViewMessage.INPUT_FOR_WINNING_NUMBERS.getMessage());
         return this.inputView.read();
+    }
+
+    public List<String> getInputForManualLottos(ManualCount manualAmount) {
+        System.out.println(ViewMessage.INPUT_FOR_MANUAL_LOTTO.getMessage());
+        List<String> stringList = new ArrayList<>();
+
+        while (stringList.size() < manualAmount.getSize()) {
+            stringList.add(inputView.read());
+        }
+
+        return stringList;
     }
 
     public String getBonusNumbers() {
@@ -46,7 +66,7 @@ public class ViewResolver {
         resultView.printMultipleLotto(multipleLotto);
     }
 
-    public void printPurchaseAmount(PurchaseAmount amount) {
-        resultView.printPurchaseAmount(amount);
+    public void printPurchaseAmount(PurchaseAmount amount, ManualCount count) {
+        resultView.printPurchaseAmount(amount, count);
     }
 }

@@ -35,7 +35,7 @@ public class LottoTest {
 
         Lotto lotto = Lotto.of(numbers);
 
-        assertThat(lotto.match(WinningNumbers.of(answer), LottoNumber.of(45))).isEqualTo(Rank.FIFTH);
+        assertThat(lotto.match(WinningLotto.of(Lotto.of(answer), LottoNumber.of(45)))).isEqualTo(Rank.FIFTH);
     }
 
     @Test

@@ -14,7 +14,7 @@ class LottoFactoryTest {
     void lottos_creation_test() {
         PurchaseAmount amount = PurchaseAmount.of(14000);
 
-        Lottos lottos = LottoFactory.createLottosAutomatic(amount);
+        Lottos lottos = LottoFactory.createAutoLottos(amount.getSize());
 
         assertThat(lottos.size()).isEqualTo(amount.getSize());
     }

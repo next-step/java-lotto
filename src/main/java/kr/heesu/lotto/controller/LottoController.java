@@ -5,8 +5,6 @@ import kr.heesu.lotto.utils.LottoFactory;
 import kr.heesu.lotto.view.ViewResolver;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -23,22 +21,33 @@ public class LottoController {
     public void main() {
         try {
             String stringAmount = viewResolver.getPurchaseAmount();
-            PurchaseAmount amount = makePurchaseAmountFromUserInput(stringAmount);
+            PurchaseAmount purchaseAmount = makePurchaseAmountFromUserInput(stringAmount);
 
-            viewResolver.printPurchaseAmount(amount);
+            stringAmount = viewResolver.getManualAmount();
+            ManualCount count = ManualCount.of(stringAmount, purchaseAmount);
 
-            Lottos multipleLotto = LottoFactory.createLottosAutomatic(amount);
+            List<String> inputs = viewResolver.getInputForManualLottos(count);
+            ManualLottoInputs lottoInputs = ManualLottoInputs.of(inputs);
+
+            viewResolver.printPurchaseAmount(purchaseAmount, count);
+
+            Lottos multipleLotto = LottoFactory.createManualLottos(lottoInputs);
+            Lottos autoLottos = LottoFactory.createAutoLottos(purchaseAmount.getSize() - count.getSize());
+            multipleLotto.add(autoLottos);
+
             viewResolver.printMultipleLotto(multipleLotto);
 
-            String stringWinningNumbers = viewResolver.getWinningNumbers();
-            WinningNumbers winningNumbers = makeWinningNumbersFromUserInput(stringWinningNumbers);
+            String stringWinningNumbers = viewResolver.getWinningLotto();
+            Lotto lotto = LottoFactory.createLottoFromUserInput(stringWinningNumbers);
 
             String stringBonusNumber = viewResolver.getBonusNumbers();
             LottoNumber bonusNumber = makeLottoNumber(stringBonusNumber);
 
-            RankResult matches = multipleLotto.matches(winningNumbers, bonusNumber);
+            WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
 
-            LottoStatistics statistics = makeLottoStatistics(matches, amount);
+            RankResult matches = multipleLotto.matches(winningLotto);
+
+            LottoStatistics statistics = makeLottoStatistics(matches, purchaseAmount);
 
             viewResolver.printLottoStatistics(statistics);
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -52,15 +61,6 @@ public class LottoController {
 
     private LottoStatistics makeLottoStatistics(RankResult matches, PurchaseAmount amount) {
         return LottoStatistics.of(matches, amount);
-    }
-
-    private WinningNumbers makeWinningNumbersFromUserInput(String input) {
-        List<LottoNumber> numbers = Stream.of(input.split(", "))
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return WinningNumbers.of(numbers);
     }
 
     private PurchaseAmount makePurchaseAmountFromUserInput(String input) {

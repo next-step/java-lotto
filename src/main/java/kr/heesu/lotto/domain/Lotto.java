@@ -28,17 +28,16 @@ public class Lotto {
         }
     }
 
-    private boolean contain(LottoNumber number) {
+    public boolean contain(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
-    public Rank match(WinningNumbers winningNumbers, LottoNumber bonusBall) {
-        Long count = winningNumbers.getWinningNumbers()
-                .stream()
-                .filter(this::contain)
+    public Rank match(WinningLotto winningLotto) {
+        Long count = this.numbers.stream()
+                .filter(winningLotto::contains)
                 .count();
 
-        return Rank.valueOf(count, this.contain(bonusBall));
+        return Rank.valueOf(count, this.contain(winningLotto.getBounusNumber()));
     }
 
     @Override
