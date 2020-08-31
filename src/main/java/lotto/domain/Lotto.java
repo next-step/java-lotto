@@ -44,7 +44,7 @@ public class Lotto {
 
     public int getMatchCountByWinningNumber(List<Integer> winningNumber) {
         return (int) winningNumber.stream()
-                .filter(it -> hasLottoNumber(LottoNumber.of(it)))
+                .filter(number -> hasLottoNumber(LottoNumber.of(number)))
                 .count();
     }
 
