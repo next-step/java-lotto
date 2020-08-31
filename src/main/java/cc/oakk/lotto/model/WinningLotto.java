@@ -7,11 +7,11 @@ import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 
 public class WinningLotto {
     private final Lotto lotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.lotto = new Lotto(numbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public Rank score(Lotto target) {

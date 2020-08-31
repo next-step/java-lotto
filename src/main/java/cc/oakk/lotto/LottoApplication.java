@@ -20,7 +20,7 @@ public class LottoApplication {
         LottosPrinter lottosPrinter = new LottosPrinter();
         LottoResultsPrinter<Long> lottoResultsPrinter = new LottoResultsPrinter<>(provider, LottoGenerator.LOTTO_PRICE);
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGenerator lottoGenerator = new LottoGenerator(LottoNumber.RANGE);
         InputView inputView = new InputConsoleView();
         ResultView resultView = new ResultConsoleView(stringPrinter, lottosPrinter, lottoResultsPrinter);
 

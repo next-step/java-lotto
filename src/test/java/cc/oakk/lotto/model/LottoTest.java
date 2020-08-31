@@ -6,14 +6,13 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
     @Test
     public void constructor_ShouldThrow_OnInvalidNumber() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.RANGE.getFrom() - 1)));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, Lotto.RANGE.getTo() + 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, LottoNumber.RANGE.getFrom() - 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, LottoNumber.RANGE.getTo() + 1)));
     }
 
     @Test
