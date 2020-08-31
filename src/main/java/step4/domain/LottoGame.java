@@ -1,9 +1,11 @@
 package step4.domain;
 
 import cmm.util.InputUtil;
+import com.sun.java.swing.plaf.windows.WindowsMenuBarUI;
 import step4.view.PrintResult;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
@@ -46,9 +48,10 @@ public class LottoGame {
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, new LottoNumber(bonusBallNumber));
         WinningStatistics winningStatistics = new WinningStatistics(allLottoList, winningLotto);
-        WinningResult winningJudgement = new WinningResult();
 
-        PrintResult.printLottoMap(winningJudgement.makeWinningMap(allLottoList, winningLotto));
+        WinningResult winningResult = new WinningResult();
+
+        PrintResult.printLottoMap(winningResult.makeWinningMap(allLottoList, winningLotto));
         PrintResult.printResult(winningStatistics.getWinningStatic(), winningStatistics.isBenefit());
     }
 
