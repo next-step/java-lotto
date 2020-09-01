@@ -24,8 +24,6 @@ public class NumberGenerator {
     }
 
     public Set<Integer> generate() {
-
-
         Collections.shuffle(lottoNumberCandidate);
 
         List<Integer> numList = new ArrayList<>(lottoNumberCandidate)

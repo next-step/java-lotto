@@ -27,4 +27,18 @@ public class RankRecord {
         int rankCount = recordPool.get(rank);
         recordPool.set(rank, rankCount + ONE);
     }
+
+    public int sumOfPrice() {
+        int sum = 0;
+        int ea = 0;
+        int price = 0;
+        Rank[] ranks = Rank.values();
+
+        for (int i = 1; i < RECORD_SIZE; i++) {
+            ea = recordPool.get(i);
+            price = ranks[i - 1].getWinnerPrice();
+            sum += ea * price;
+        }
+        return sum;
+    }
 }
