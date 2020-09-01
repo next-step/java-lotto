@@ -31,12 +31,6 @@ public class LottoPaper {
         return lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbersToIntegerList() {
-        return lottoNumbers.stream()
-                .map(LottoNum::getLottoNum)
-                .collect(Collectors.toList());
-    }
-
     Integer getMatchCount(List<Integer> winningNumber) {
         return (int) this.lottoNumbers.stream()
                 .map(LottoNum::getLottoNum)
@@ -44,9 +38,10 @@ public class LottoPaper {
                 .count();
     }
 
-    public List<Integer> getWinningNumbersToIntegerList() {
+    @Override
+    public String toString() {
         return lottoNumbers.stream()
                 .map(LottoNum::getLottoNum)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).toString();
     }
 }

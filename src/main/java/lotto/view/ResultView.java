@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.context.Message;
 import lotto.context.Rank;
 import lotto.domain.LottoPaper;
-import lotto.domain.LottoPapers;
 import lotto.util.MessageUtil;
 
 import java.util.Arrays;
@@ -28,8 +27,7 @@ public class ResultView {
 
     public static void showLottoNumbersList(List<LottoPaper> papers) {
         print(papers.stream()
-                .map(LottoPaper::getLottoNumbersToIntegerList)
-                .map(String::valueOf)
+                .map(LottoPaper::toString)
                 .collect(Collectors.joining(LOTTO_PAPER_JOINING_DELIMITER)));
     }
 
