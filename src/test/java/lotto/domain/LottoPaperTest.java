@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -42,12 +41,6 @@ class LottoPaperTest {
                 .isEqualTo(value);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    void getNumbers(int value) {
-        Assertions.assertThat(lottoPaper.getLottoNumbersToIntegerList()).contains(value);
-    }
-
     @Test
     void getMatchCount() {
         Assertions.assertThat(lottoPaper.getMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
@@ -56,5 +49,10 @@ class LottoPaperTest {
     @Test
     void testGetMatchCount() {
         Assertions.assertThat(lottoPaper.getMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println(lottoPaper);
     }
 }

@@ -21,16 +21,9 @@ class WinningResultTest {
         winningResult = new WinningResult("1, 2, 3, 4, 5, 6");
     }
 
-    @ParameterizedTest
-    @EnumSource(Rank.class)
-    void getMatchCountResult(Rank rank) {
-        Assertions.assertThat(winningResult.getMatchCountResult()).containsKeys(rank);
-    }
-
     @Test
-    @DisplayName("객체생성시 초기화되는 객체인 WinningPaper의 값 테스트")
-    void getWinningPaper() {
-        Assertions.assertThat(winningResult.getWinningPaper().getWinningNumbersToIntegerList())
+    void getWinninLottoNumberToIntegerList() {
+        Assertions.assertThat(winningResult.getWinninLottoNumberToIntegerList())
                 .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }

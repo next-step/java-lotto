@@ -13,7 +13,7 @@ public class WinningEarningsRate {
         this.money = money;
     }
 
-    public double calculationEarningsRate(Integer totalWinningMoney) {
+    public double calculationEarningsRate(double totalWinningMoney) {
         return BigDecimal.valueOf(totalWinningMoney)
                 .divide(BigDecimal.valueOf(money), DIVIDE_SCALE, DIVIDE_ROUND_MODE)
                 .doubleValue();

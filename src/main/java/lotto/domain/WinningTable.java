@@ -2,12 +2,7 @@ package lotto.domain;
 
 import lotto.context.Rank;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WinningTable {
     private final static Integer ADD_AUTO_INCREMENT = 1;
@@ -34,7 +29,7 @@ public class WinningTable {
     }
 
     public Map<Rank, Integer> getMatchCountTable() {
-        return matchCountTable;
+        return Collections.unmodifiableMap(matchCountTable);
     }
 
     public void setAutoIncrementMatchCountResult(Integer matchCount) {

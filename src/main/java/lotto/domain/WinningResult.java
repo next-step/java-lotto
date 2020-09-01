@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import lotto.context.Rank;
-
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningResult {
-    private LottoPaper winningPaper;
-    private WinningTable winningTable;
+    private final LottoPaper winningPaper;
 
     public WinningResult(String winningLottoNumbers) {
         winningPaper = new LottoPaper(Arrays.stream(winningLottoNumbers.split(","))
@@ -16,22 +13,11 @@ public class WinningResult {
                 .map(Integer::parseInt)
                 .map(integer -> new LottoNum(integer))
                 .collect(Collectors.toList()));
-        winningTable = new WinningTable();
     }
 
-    public LottoPaper getWinningPaper() {
-        return winningPaper;
-    }
-
-    public void setWinningTable(WinningTable winningTable) {
-        this.winningTable = winningTable;
-    }
-
-    public Map<Rank, Integer> getMatchCountResult() {
-        return winningTable.getMatchCountTable();
-    }
-
-    public int getTotalWinningMoney() {
-        return winningTable.getTotalWinningMoney();
+    public List<Integer> getWinninLottoNumberToIntegerList() {
+        return winningPaper.getLottoNumbers().stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
     }
 }

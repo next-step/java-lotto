@@ -28,11 +28,15 @@ public class LottoPapers {
         return Collections.unmodifiableList(papers);
     }
 
+    public int getPapersSize() {
+        return papers.size();
+    }
+
+
     public WinningTable makeWinningTable(List<Integer> winningNumbers) {
         WinningTable winningTable = new WinningTable();
-        papers.stream()
-                .forEach(lottoPaper -> {
-                    winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers));
+        papers.forEach(lottoPaper -> {
+            winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers));
         });
         return winningTable;
     }
