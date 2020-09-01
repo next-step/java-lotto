@@ -1,7 +1,9 @@
-import lotto.view.LottoStore;
+import lotto.domain.LottoStore;
+import lotto.domain.Winners;
 import lotto.view.SummaryPrinter;
 import lotto.domain.Lottos;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
@@ -11,13 +13,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입 금액을 입력 해 주세요.");
-        int price = Integer.parseInt(scanner.nextLine());
+        BigDecimal price = new BigDecimal(scanner.nextLine());
 
         Lottos lottos = lottoStore.sold(price);
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumber = scanner.nextLine();
+        System.out.println(lottos);
 
-        SummaryPrinter.summary(lottos, winningNumber.split(","));
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String winningNumbers = scanner.nextLine();
+
+        Winners winners = lottoStore.getWinner(lottos, winningNumbers.split(","));
+        SummaryPrinter.summary(winners);
     }
 }

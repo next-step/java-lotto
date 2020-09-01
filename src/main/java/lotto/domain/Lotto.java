@@ -1,14 +1,18 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int PRICE = 1000;
+    public static final BigDecimal PRICE = BigDecimal.valueOf(1000);
+    public static final int NUMBER_OF_LOTTO = 6;
+    public static final int LOTTO_START_NUM = 1;
+    public static final int LOTTO_END_NUM = 45;
+
     private Set<LottoNumber> lotto;
-    private int winningNumberCount;
 
     public Lotto(List<LottoNumber> lotto) {
         this.lotto = new HashSet<LottoNumber>(lotto);
@@ -16,37 +20,42 @@ public class Lotto {
         isValidSize();
     }
 
-    private void isValidLotto(List<String> lotto) {
-        Set<Integer> set = new HashSet<>();
-
-    }
-
     private void isValidSize(){
-        if(this.lotto.size() != 6) throw new IllegalArgumentException("Lotto must be contain unique 6 numbers");
+        if(this.lotto.size() != NUMBER_OF_LOTTO) {
+            throw new IllegalArgumentException("Lotto must be contain unique 6 numbers");
+        }
     }
 
     @Override
     public String toString() {
         String lottoStr = lotto.stream()
-                .map(i -> i.getNumberString())
-                .collect(Collectors.joining(", "));
+                .sorted()
+                .map(i -> i.toString())
+                .collect(Collectors.toList())
+                .toString();
 
-        return String.format("[%s]", lottoStr);
+        return String.format("%s", lottoStr);
     }
 
-    public int getSize(){
-        return this.lotto.size();
+    public boolean isContains(LottoNumber lottoNumber) {
+       return lotto.contains(lottoNumber);
     }
 
-    private boolean isContainWinningNumber(LottoNumber winningNumber) {
-       return lotto.contains(winningNumber);
-    }
+    public Count match(Lotto compareLotto){
+        Count count = Count.ZERO;
 
-    public int countWinningNumber(LottoNumber winningNumber){
-        if(isContainWinningNumber(winningNumber)){
-            winningNumberCount++;
+        for(LottoNumber num : lotto){
+            count = compareLotto.compareAndIncrease(num, count);
         }
 
-        return winningNumberCount;
+        return count;
+    }
+
+    private Count compareAndIncrease(LottoNumber num, Count count) {
+        if(isContains(num)){
+            count = count.increase();
+        }
+
+        return  count;
     }
 }

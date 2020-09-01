@@ -1,23 +1,21 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.Winners;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    private List<LottoNumber> LOTTO_NUMS1 = Arrays.asList(new LottoNumber[]{new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)});
-    private List<LottoNumber> LOTTO_NUMS2 = Arrays.asList(new LottoNumber[]{new LottoNumber(10), new LottoNumber(13), new LottoNumber(16), new LottoNumber(23), new LottoNumber(45), new LottoNumber(35)});
-    private List<LottoNumber> LOTTO_NUMS3 = Arrays.asList(new LottoNumber[]{new LottoNumber(1), new LottoNumber(3), new LottoNumber(17), new LottoNumber(24), new LottoNumber(35), new LottoNumber(44)});
+    private List<LottoNumber> LOTTO_NUMS1 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)});
+    private List<LottoNumber> LOTTO_NUMS2 = Arrays.asList(new LottoNumber[]{LottoNumber.of(10), LottoNumber.of(13), LottoNumber.of(16), LottoNumber.of(23), LottoNumber.of(45), LottoNumber.of(35)});
+    private List<LottoNumber> LOTTO_NUMS3 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(17), LottoNumber.of(24), LottoNumber.of(35), LottoNumber.of(44)});
 
     @Test
     @DisplayName("로또 세트 생성 테스트")
@@ -51,24 +49,20 @@ public class LottosTest {
         int expectedMatchedCount = Integer.parseInt(tokens[0]);
         String[] winningNumbers = tokens[1].split(",");
 
-        List<LottoNumber> winningNums = LottoNumber.makeLottoNums(winningNumbers);
-
         Lottos lottos = new Lottos();
         lottos.add(new Lotto(LOTTO_NUMS3));
 
         //when
-        Winners winners = lottos.getWinner(winningNums);
+        Winners winners = lottos.getWinner(new WinningLotto(winningNumbers));
 
-        assertThat(winners.getWinnersCount(expectedMatchedCount)).isEqualTo(1);
+        assertThat(winners.getWinnersCount(Rank.valueOf(Count.of(expectedMatchedCount)))).isEqualTo(Count.of(1));
     }
 
     @Test
-    @DisplayName("로또 당첨 갯수 테스트 (당첨갯수:당첨로또번호)")
+    @DisplayName("로또 당첨 갯수 테스트 ")
     public void countWinningNumberTest2(){
         //given
         String[] winningNumbers = new String[]{"1","2","3","4","5","6"};
-
-        List<LottoNumber> winningNums = LottoNumber.makeLottoNums(winningNumbers);
 
         Lottos lottos = new Lottos();
         lottos.add(new Lotto(LOTTO_NUMS1)); // 1,2,3,4,5,6   -> 당첨 6
@@ -76,14 +70,12 @@ public class LottosTest {
         lottos.add(new Lotto(LOTTO_NUMS2)); // 10,13,16,23,45,35 -> 당첨 0
         lottos.add(new Lotto(LOTTO_NUMS3)); // 1,3,17,24,35,44 -> 당첨 2
         //when
-        Winners winners = lottos.getWinner(winningNums);
+        Winners winners = lottos.getWinner(new WinningLotto(winningNumbers));
 
-        assertThat(winners.getWinnersCount(6)).isEqualTo(2);
-        assertThat(winners.getWinnersCount(5)).isEqualTo(0);
-        assertThat(winners.getWinnersCount(4)).isEqualTo(0);
-        assertThat(winners.getWinnersCount(3)).isEqualTo(0);
-        assertThat(winners.getWinnersCount(2)).isEqualTo(1);
-        assertThat(winners.getWinnersCount(1)).isEqualTo(0);
-        assertThat(winners.getWinnersCount(0)).isEqualTo(1);
+        assertThat(winners.getWinnersCount(Rank.FIRST)).isEqualTo(Count.of(2));
+        assertThat(winners.getWinnersCount(Rank.SECOND)).isEqualTo(Count.ZERO);
+        assertThat(winners.getWinnersCount(Rank.THIRD)).isEqualTo(Count.ZERO);
+        assertThat(winners.getWinnersCount(Rank.FOURTH)).isEqualTo(Count.ZERO);
+        assertThat(winners.getWinnersCount(Rank.MISS)).isEqualTo(Count.of(2));
     }
 }

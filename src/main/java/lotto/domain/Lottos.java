@@ -15,7 +15,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Winners getWinner(List<LottoNumber> winningNumbers){
+    public Winners getWinner(WinningLotto winningNumbers){
         Winners winners = new Winners(winningNumbers);
 
         for(Lotto lotto : lottos){

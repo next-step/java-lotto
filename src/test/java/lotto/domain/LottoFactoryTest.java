@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
@@ -13,6 +13,8 @@ public class LottoFactoryTest {
     public void create(){
         Lotto lotto = LottoFactory.create();
 
-        assertThat(lotto.getSize()).isEqualTo(6);
+        assertThat(lotto).isNotNull();
+        assertThat(lotto.toString()).isNotNull();
+        assertThat(lotto).isInstanceOf(Lotto.class);
     }
 }
