@@ -9,14 +9,20 @@ public class LottoGame {
 	//private static final String MANUAL_LOTTO_COUNT = "입력하신 금액으로 구입할 수 있는 최대 로또 개수는 %s개 입니다.";
 
 	private final int price;
-	private final Lottos lottos;
+	private Lottos lottos;
 
 	public LottoGame(int price, String[] manualLottos) {
 		validPrice(price);
 		this.price = price;
-		this.lottos = Lottos.convertInputLottos(manualLottos);
 	}
-
+	
+	public static Lottos autos() {
+		
+	}
+	public static Lottos manuals(String[] inputLottos) {
+		return Lottos.createInputLottos(inputLottos);
+	}
+	
 	public Lottos getAllLottos() {
 		int autoLottoCount = (price / LOTTO_PRICE) - this.lottos.size();
 		List<Lotto> autoLottos = new ArrayList<>();

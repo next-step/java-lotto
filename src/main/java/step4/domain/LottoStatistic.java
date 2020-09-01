@@ -3,6 +3,7 @@ package step4.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistic {
@@ -22,6 +23,9 @@ public class LottoStatistic {
 		int count;
 		boolean isBonus;
 		Rank rank;
+		
+		List<Integer> matchCounts = issueLottos.getMatchCounts(new Lotto(winningLotto.getWinningNumbers()));
+		
 		for (Lotto issueLotto : issueLottos.getLottos()) {
 			count = issueLotto.getMatchCount(winningLotto.getWinningNumbers());
 			isBonus = (count == Rank.FIVE.getMatchingCount() && issueLotto.containNumber(winningLotto.getBonusNumber()));

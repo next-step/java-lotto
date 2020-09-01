@@ -1,6 +1,5 @@
 package step4.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +9,7 @@ public class Lottos {
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> manualLottos) {
-		lottos = new ArrayList<>(manualLottos);
+		this.lottos = manualLottos;
 	}
 
 	public static Lottos convertInputLottos(String[] inputLottos) {
@@ -31,7 +30,14 @@ public class Lottos {
 		return Collections.unmodifiableList(lottos);
 	}
 
-	public void addLottos(Lottos lottos) {
+	public List<Integer> getMatchCounts(Lotto otherLotto) {
+		return this.lottos.stream()
+		.map(lotto -> otherLotto.getMatchCount(lotto))
+		.collect(Collectors.toList());
+	}
+
+	public Lottos addLottos(Lottos lottos) {
 		this.lottos.addAll(lottos.lottos);
+		return new Lottos(this.lottos);
 	}
 }

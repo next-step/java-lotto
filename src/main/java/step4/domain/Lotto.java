@@ -22,10 +22,16 @@ public class Lotto {
 			throw new IllegalArgumentException(LOTTO_PHRASES);
 		}
 	}
-
+/*
 	public int getMatchCount(List<LottoNumber> lottoNumbers) {
 		return (int) numbers.stream()
 				.filter(lottoNumbers::contains)
+				.count();
+	}
+	*/
+	public int getMatchCount(Lotto otherLotto) {
+		return (int) numbers.stream()
+				.filter(number -> otherLotto.containNumber(number))
 				.count();
 	}
 
