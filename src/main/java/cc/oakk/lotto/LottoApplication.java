@@ -8,7 +8,8 @@ import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.impl.InputConsoleView;
 import cc.oakk.lotto.view.ResultView;
 import cc.oakk.lotto.view.impl.ResultConsoleView;
-import cc.oakk.lotto.view.printer.LottoResultsPrinter;
+import cc.oakk.lotto.view.printer.impl.LottoResultsPrinter;
+import cc.oakk.lotto.view.printer.impl.LottosPrinter;
 import cc.oakk.lotto.view.printer.Printer;
 import cc.oakk.lotto.view.printer.StandardPrinter;
 
@@ -16,11 +17,12 @@ public class LottoApplication {
     public static void main(String[] args) {
         Printer<String> stringPrinter = StandardPrinter.getInstance();
         LottoPrizeProvider<Long> provider = new SimpleLottoPrizeProvider();
-        LottoResultsPrinter<Long> printer = new LottoResultsPrinter<>(provider, LottoGenerator.LOTTO_PRICE);
+        LottosPrinter lottosPrinter = new LottosPrinter();
+        LottoResultsPrinter<Long> lottoResultsPrinter = new LottoResultsPrinter<>(provider, LottoGenerator.LOTTO_PRICE);
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGenerator lottoGenerator = new LottoGenerator(LottoNumber.RANGE);
         InputView inputView = new InputConsoleView();
-        ResultView resultView = new ResultConsoleView(stringPrinter, printer);
+        ResultView resultView = new ResultConsoleView(stringPrinter, lottosPrinter, lottoResultsPrinter);
 
         new LottoGame(lottoGenerator, inputView, resultView).start();
     }

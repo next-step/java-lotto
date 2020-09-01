@@ -4,7 +4,7 @@ import cc.oakk.lotto.view.printer.Printable;
 
 import java.util.Objects;
 
-public abstract class LottoPrize<T> implements Printable<String> {
+public abstract class LottoPrize<T> implements Printable<LottoPrize<T>> {
     protected final T prize;
     protected final long value;
 

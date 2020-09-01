@@ -4,6 +4,8 @@ import cc.oakk.lotto.model.*;
 import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoGame {
     private final LottoGenerator generator;
     private final InputView inputView;
@@ -26,7 +28,11 @@ public class LottoGame {
         resultView.printLottos(lottos);
 
         inputView.printWinningNumberInputHeader();
-        WinningLotto winningLotto = new WinningLotto(inputView.readWinningNumbers());
+        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        inputView.printBonusNumberInputHeader();
+        int bonusNumber = inputView.readBonusNumber();
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResults results = lottos.getResults(winningLotto);
 
         resultView.printResultHeader();
