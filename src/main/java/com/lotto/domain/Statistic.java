@@ -16,10 +16,18 @@ public class Statistic {
     }
 
     public BigDecimal calculateTotalWinnings() {
-        return rank.calculateTotalWinnings(lotteryCount);
+        return this.rank.calculateTotalWinnings(this.lotteryCount);
+    }
+
+    public boolean hasWinnings() {
+        return this.rank.hasWinnings();
+    }
+
+    public int getLotteryCount() {
+        return this.lotteryCount;
     }
 
     public String toString(String rankFormat, String rankBonusFormat, String lotteryCountFormat) {
-        return rank.toString(rankFormat, rankBonusFormat) + String.format(lotteryCountFormat, lotteryCount);
+        return this.rank.toString(rankFormat, rankBonusFormat) + String.format(lotteryCountFormat, this.lotteryCount);
     }
 }

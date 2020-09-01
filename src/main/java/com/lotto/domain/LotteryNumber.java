@@ -24,17 +24,17 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     private static void validateNumber(int number) throws IllegalArgumentException {
         if (number < START_NUMBER || number > END_NUMBER) {
-            throw new IllegalArgumentException();
+            String message = String.format("%d 이상 %d 이하 숫자만 입력해 주세요.", START_NUMBER, END_NUMBER);
+            throw new IllegalArgumentException(message);
         }
     }
 
-    public static LotteryNumber getLotteryNumber(int number) throws IllegalStateException {
+    public static LotteryNumber getLotteryNumber(int number) throws IllegalArgumentException {
         validateNumber(number);
         return LOTTERY_NUMBER_LIST.get(number - 1);
     }
 
-    public static LotteryNumber getLotteryNumber(String numberString)
-            throws NumberFormatException, IllegalStateException {
+    public static LotteryNumber getLotteryNumber(String numberString) throws IllegalArgumentException {
         int number = Integer.parseInt(numberString);
         return getLotteryNumber(number);
     }

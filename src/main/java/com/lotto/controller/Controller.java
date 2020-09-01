@@ -1,13 +1,10 @@
 package com.lotto.controller;
 
-import com.lotto.domain.Deposit;
-import com.lotto.domain.Lottery;
-import com.lotto.domain.LotteryCommission;
-import com.lotto.domain.WinningLottery;
+import com.lotto.domain.*;
+import com.lotto.dto.DepositDTO;
+import com.lotto.dto.WinningLotteryDTO;
 import com.lotto.view.InputView;
 import com.lotto.view.ResultView;
-
-import java.util.List;
 
 public class Controller {
 
@@ -16,14 +13,21 @@ public class Controller {
         ResultView resultView = new ResultView();
         LotteryCommission lotteryCommission = new LotteryCommission();
 
-        Deposit deposit = inputView.payAmount();
-        List<Lottery> lotteries = lotteryCommission.publishLotteries(deposit);
-        resultView.showPurchaseHistory(lotteries);
+        DepositDTO depositDTO = inputView.payAmount();
+        Deposit deposit = depositDTO.of();
         System.out.println();
 
-        WinningLottery winningLottery = inputView.setupWinningLottery();
+        Lotteries lotteries = lotteryCommission.publishLotteries(inputView.enterLotteriesManually(deposit), deposit);
         System.out.println();
 
-        resultView.showWinningStatistics(lotteries, winningLottery);
+        resultView.showPurchaseHistory(lotteries, deposit);
+        System.out.println();
+
+        WinningLotteryDTO winningLotteryDTO = inputView.setupWinningLottery();
+        WinningLottery winningLottery = winningLotteryDTO.of();
+        System.out.println();
+
+        Statistics statistics = lotteryCommission.calculateStatistics(lotteries, winningLottery);
+        resultView.showWinningStatistics(statistics);
     }
 }
