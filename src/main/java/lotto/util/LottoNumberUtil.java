@@ -41,16 +41,11 @@ public class LottoNumberUtil {
     }
 
     private static List<LottoNum> getSortList(List<LottoNum> defaultNums) {
-        Collections.sort(defaultNums, new Comparator<LottoNum>() {
-            @Override
-            public int compare(LottoNum o1, LottoNum o2) {
-                return o1.getLottoNum() > o2.getLottoNum() ? 1 : -1;
-            }
-        });
+        Collections.sort(defaultNums);
         return defaultNums;
     }
 
-    static List<LottoNum> getSubList(List<LottoNum> defaultNums) {
+    private static List<LottoNum> getSubList(List<LottoNum> defaultNums) {
         return defaultNums.subList(GET_LIST_START, GET_LIST_END);
     }
 }
