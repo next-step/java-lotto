@@ -20,7 +20,10 @@ public class MainViewer {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         LottoNumbers winnerNumbers = new LottoNumbers(InputClass.getUserStringInput());
 
-        ResultView resultView = new ResultView(inputMoneyAmount, lottos, winnerNumbers);
+        System.out.println("보너스볼을 입력해 주세요.");
+        int inputBonusNumber = InputClass.getUserIntInput();
+
+        ResultView resultView = new ResultView(inputMoneyAmount, lottos, winnerNumbers, inputBonusNumber);
         resultView.getResult();
     }
 }

@@ -13,8 +13,8 @@ public class Lottos {
         this.lottos = Stream.generate(Lotto::new).limit(lottoCount).collect(Collectors.toList());
     }
 
-    public void lottoManual(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> testLotto) {
+        this.lottos = testLotto;
     }
 
     public int getLottoSize() {

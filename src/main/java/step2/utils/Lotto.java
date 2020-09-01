@@ -11,6 +11,11 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(RandomIntegerGenerator.getRandomInteger());
     }
 
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+
+    }
+
     public LottoNumbers getLotto() {
         return this.lottoNumbers;
     }

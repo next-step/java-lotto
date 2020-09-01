@@ -9,20 +9,22 @@ public class ResultView {
     private int inputMoneyAmount;
     private Lottos lottos;
     private LottoNumbers winnerNumbers;
+    private int bonusNumber;
 
-    public ResultView(int inputMoneyAmount, Lottos lottos, LottoNumbers winnerNumbers) {
+    public ResultView(int inputMoneyAmount, Lottos lottos, LottoNumbers winnerNumbers, int bonusNumber) {
         this.inputMoneyAmount = inputMoneyAmount;
         this.lottos = lottos;
         this.winnerNumbers = winnerNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public void getResult() {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
-        WiningLotto winingLotto = new WiningLotto(this.lottos, this.winnerNumbers);
+        WiningLotto winingLotto = new WiningLotto(this.lottos, this.winnerNumbers, this.bonusNumber);
 
-        LottoResultStatistics resultStatistics = LottoResultStatistics.newWinnerInventory(winingLotto.getWinner());
+        LottoResultStatistics resultStatistics = new LottoResultStatistics(winingLotto.getWinners());
         resultStatistics.getWinningPriceDetails().forEach((winner, count) -> {
             System.out.println(winner.getMatchNumber() + "개 일치" + winner.getWinedMoney() + "원-" + count + "명");
         });
