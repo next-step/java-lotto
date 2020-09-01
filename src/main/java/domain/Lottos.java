@@ -8,10 +8,8 @@ import static domain.LottoGames.MIN_WINNER_NUMBER;
 
 public class Lottos {
     private List<Lotto> lottos;
-    private WinnerNumber winnerNumber;
-
-    //todo  WinnerNumber to Lotto class
-//    private Lotto winnerNumber;
+    private Lotto winnerNumber;
+    private int bonusNumber;
 
     public Lottos() {
         lottos = new ArrayList<>();
@@ -29,8 +27,10 @@ public class Lottos {
         return lottos.get(index);
     }
 
-    public RankRecord calculateWinnerPrice(WinnerNumber winnerNumber) {
+    public RankRecord recordAllLottos(Lotto winnerNumber, int bonus) {
         this.winnerNumber = winnerNumber;
+        bonusNumber = bonus;
+
         RankRecord rankRecord = new RankRecord();
 
         for (int i = 0; i < getNumOfLottos(); i++) {
@@ -44,7 +44,7 @@ public class Lottos {
         boolean matchBonus = false;
 
         if (count == 5 &&
-                findBonus(getOneLotto(i)) == winnerNumber.getBonusNumber()) {
+                findBonus(getOneLotto(i)) == bonusNumber) {
             matchBonus = true;
         }
 
@@ -55,14 +55,27 @@ public class Lottos {
     }
 
     private int countNumber(Lotto lotto) {
-        return winnerNumber.getCountingNumber(lotto);
+        return getCountingNumber(lotto);
     }
 
     public int findBonus(Lotto lotto) {
         Optional<Integer> bonus = lotto.getLottoNumber().stream()
-                .filter(e -> !winnerNumber.getWinnerNumber().contains(e))
+                .filter(e -> !winnerNumber.getLottoNumber().contains(e))
                 .findFirst();
 
         return (int) bonus.get();
+    }
+
+    int getCountingNumber(Lotto lotto) {
+        int count = (int) lotto.getLottoNumber()
+                .stream()
+                .filter(winnerNumber.getLottoNumber()::contains)
+                .count();
+
+        return count;
+    }
+
+    public void setWinnerNumber(Lotto winnerNumber) {
+        this.winnerNumber = winnerNumber;
     }
 }

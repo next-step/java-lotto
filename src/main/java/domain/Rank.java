@@ -35,7 +35,7 @@ public enum Rank {
         if (matchBonus) {
             return Rank.RANK_TWO;
         }
-        if(count ==5 && !matchBonus){
+        if (count == 5 && !matchBonus) {
             return Rank.RANK_THREE;
         }
 

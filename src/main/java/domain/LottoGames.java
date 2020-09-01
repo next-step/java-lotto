@@ -1,28 +1,18 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Optional;
-import static domain.Rank.RANK_THREE;
-import static domain.Rank.RANK_TWO;
+import java.util.List;
+
 import static utility.UserInput.WON;
 
 public class LottoGames {
-
     public static final int LOTTO_NUMBER = 6;
     public static final int MIN_WINNER_NUMBER = 3;
 
     private Lottos lottos;
-//    private RankRecord rankRecord;
-//    private WinnerNumber winnerNumber;
-
-//    public RankRecord getRankRecord() {
-//        return rankRecord;
-//    }
 
     public LottoGames(int price) {
         int tries = validatePrice(price);
         lottos = new Lottos();
-//        rankRecord = new RankRecord();
 
         makeLottoTicket(tries);
     }
@@ -46,7 +36,13 @@ public class LottoGames {
         return price / WON;
     }
 
-    public void getGameResult(WinnerNumber winnerNumber) {
-//        calculateWinnerPrice(winnerNumber);
+    public void validateBonus(Lotto winner,int bonus){
+        List<Integer> list = winner.getLottoNumber();
+
+        boolean hasComponent =  list.contains(bonus);
+
+        if(hasComponent){
+            throw new IllegalArgumentException("Bonus number Err!");
+        }
     }
 }

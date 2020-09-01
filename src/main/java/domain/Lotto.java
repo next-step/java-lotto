@@ -1,39 +1,53 @@
 package domain;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static domain.NumberGenerator.INT_SIX;
-
 public class Lotto {
+    private static final int LAST_NUMBER = 45;
+    private static final int SIX = 6;
+    private static final int ONE = 1;
+
     private Set<Integer> lottoNumber;
 
-    public Lotto(Set<Integer> set) {
-        validateLottoNumber(set);
-        this.lottoNumber = set;
+    public Lotto(Set<Integer> lotto) {
+        validateLottoNumber(lotto);
+        this.lottoNumber = lotto;
     }
 
-    private void validateLottoNumber(Set<Integer> set) {
-        validateEmpty(set);
-        validateSize(set);
+    private void validateLottoNumber(Set<Integer> lotto) {
+        validateEmpty(lotto);
+        validateSize(lotto);
+        validateNumberRange(lotto);
     }
 
-    private void validateSize(Set<Integer> set) {
-        if (set.size() != INT_SIX) {
-            throw new IllegalArgumentException("not 6 number");
+    private void validateEmpty(Set<Integer> lotto) {
+        if (lotto.size() == 0 || lotto == null) {
+            throw new IllegalArgumentException("empty!");
         }
     }
 
-
-    private void validateEmpty(Set<Integer> set) {
-        if (set.size() == 0 || set == null) {
-            throw new IllegalArgumentException("empty!");
+    private void validateSize(Set<Integer> lotto) {
+        if (lotto.size() != SIX) {
+            throw new IllegalArgumentException("not 6 number");
         }
     }
 
     public List<Integer> getLottoNumber() {
         return new ArrayList<>(lottoNumber);
+    }
+
+    private void validateNumberRange(Set<Integer> lotto) {
+        boolean rangeValidate = lotto.stream()
+                .allMatch(c ->c<= LAST_NUMBER);
+
+//        if (bonus > LAST_NUMBER) {
+//            throw new IllegalArgumentException("보너스 숫자 범위 입력 오류!!");
+//        }
+
+        if (!rangeValidate) {
+            throw new IllegalArgumentException("숫자 45내 범위 입력 오류!!");
+        }
     }
 }
