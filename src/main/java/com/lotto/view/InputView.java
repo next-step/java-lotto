@@ -1,10 +1,10 @@
 package com.lotto.view;
 
 import com.lotto.domain.*;
+import com.lotto.dto.DepositDTO;
+import com.lotto.dto.WinningLotteryDTO;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,13 +29,13 @@ public class InputView {
         }
     }
 
-    public Deposit payAmount() {
-        return (Deposit) tryCatchInputExceptions(() -> {
+    public DepositDTO payAmount() {
+        return (DepositDTO) tryCatchInputExceptions(() -> {
             System.out.println("구입 금액을 입력해 주세요.");
             int amount = Integer.parseInt(SCANNER.nextLine());
             System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
             int manual = Integer.parseInt(SCANNER.nextLine());
-            return new Deposit(amount, manual);
+            return new DepositDTO(amount, manual);
         });
     }
 
@@ -54,25 +54,23 @@ public class InputView {
         return LotteryNumber.getLotteryNumber(bonusNumber);
     }
 
-    public WinningLottery setupWinningLottery() {
-        return (WinningLottery) tryCatchInputExceptions(() -> {
+    public WinningLotteryDTO setupWinningLottery() {
+        return (WinningLotteryDTO) tryCatchInputExceptions(() -> {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             Set<LotteryNumber> winningLotteryNumbers = enterLotteryNumberManually();
             LotteryNumber bonusLotteryNumber = (LotteryNumber) tryCatchInputExceptions(this::enterBonusLotteryNumber);
-            return new WinningLottery(winningLotteryNumbers, bonusLotteryNumber);
+            return new WinningLotteryDTO(winningLotteryNumbers, bonusLotteryNumber);
         });
     }
 
-    public Lotteries enterLotteriesManually(Deposit deposit) {
-        Lotteries lotteries = new Lotteries();
+    public List<Lottery> enterLotteriesManually(Deposit deposit) {
         int manual = deposit.getManualLotteryCount();
         if (manual == DEFAULT_MANUAL) {
-            return lotteries;
+            return new ArrayList<>();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        IntStream.range(DEFAULT_MANUAL, manual)
+        return IntStream.range(DEFAULT_MANUAL, manual)
                 .mapToObj(i -> (Lottery) tryCatchInputExceptions(() -> new Lottery(this.enterLotteryNumberManually())))
-                .forEach(lotteries::addLottery);
-        return lotteries;
+                .collect(Collectors.toList());
     }
 }
