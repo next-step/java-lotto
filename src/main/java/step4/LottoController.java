@@ -11,10 +11,11 @@ public class LottoController {
 	public static void main(String[] args) {
 		int price = InputView.inputPrice();
 		int manualLottoCount = InputView.inputManualLottoCount();
-		String[] manualLottos = InputView.inputManualLottos(manualLottoCount);
-		LottoGame lottoGame = new LottoGame(price, manualLottos);
 
-		Lottos issueLottos = lottoGame.getAllLottos();
+		LottoGame lottoGame = new LottoGame(price, manualLottoCount);
+
+		String[] manualLottos = InputView.inputManualLottos(manualLottoCount);
+		Lottos issueLottos = lottoGame.buyLotto(manualLottos);
 		ResultView.printLottos(manualLottoCount, issueLottos);
 
 		List<LottoNumber> winningLotto = InputView.inputWinningNumbers()
@@ -22,8 +23,12 @@ public class LottoController {
 				.map(LottoNumber::new)
 				.collect(Collectors.toList());
 		int bonusNumber = InputView.inputBonusBall();
+
 		LottoStatistic statistic = new LottoStatistic();
-		ResultView.printWinningResult(statistic.calcLottoResult(issueLottos, new WinningLotto(winningLotto, bonusNumber)));
-		ResultView.printYield(statistic.calcYield(issueLottos.size()));
+		ResultView.printWinningResult(
+				statistic.calculateLottoResult(
+						issueLottos,
+						new WinningLotto(new Lotto(winningLotto), bonusNumber)));
+		ResultView.printYield(statistic.calculateYield(issueLottos.size()));
 	}
 }

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -40,14 +39,14 @@ class LottoStatisticTest {
 		List<LottoNumber> winningNumbers = Arrays.stream(winning)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
-		winningLotto = new WinningLotto(winningNumbers, 24);
+		winningLotto = new WinningLotto(new Lotto(winningNumbers), 24);
 	}
 
 
 	@DisplayName(value = "로또 당첨 통계 테스트")
 	@Test
 	void calcLottoResult() {
-		Map<Rank, Integer> result = new LottoStatistic().calcLottoResult(lottos, winningLotto);
+		Map<Rank, Integer> result = new LottoStatistic().calculateLottoResult(lottos, winningLotto);
 
 		assertThat(result).containsEntry(Rank.BONUS, 1);
 		assertThat(result).containsEntry(Rank.SIX, 1);

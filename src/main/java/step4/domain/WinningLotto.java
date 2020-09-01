@@ -12,15 +12,15 @@ public class WinningLotto {
 		this.bonusNumber = new LottoNumber(bonusNumber);
 	}
 
-	public Rank getMatchRank(Lotto otherLotto) {
-		int count = otherLotto.getMatchCount(lotto);
-		boolean isBonus = otherLotto.containNumber(bonusNumber);
-		return Rank.valueOf(count, isBonus);
-	}
-
 	private void validBonusNumber(Lotto lotto, int bonusNumber) {
 		if (lotto.containNumber(new LottoNumber(bonusNumber))) {
 			throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_PHRASES);
 		}
+	}
+
+	public Rank getMatchRank(Lotto otherLotto) {
+		int count = otherLotto.getMatchCount(lotto);
+		boolean isBonus = otherLotto.containNumber(bonusNumber);
+		return Rank.valueOf(count, isBonus);
 	}
 }

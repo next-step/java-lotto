@@ -1,25 +1,28 @@
 package step4.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
 	private final List<Lotto> lottos;
 
-	public Lottos(List<Lotto> manualLottos) {
-		this.lottos = manualLottos;
+	public Lottos(List<Lotto> lottos) {
+		this.lottos = new ArrayList<>(lottos);
 	}
 
-	public static Lottos convertInputLottos(String[] inputLottos) {
+	public static Lottos createAutoLottos(int autoLottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < autoLottoCount; i++) {
+			lottos.add(Lotto.auto());
+		}
+		return new Lottos(lottos);
+	}
+
+	public static Lottos createManualLottos(String[] inputLottos) {
 		return new Lottos(Arrays.stream(inputLottos)
-				.map(lotto -> Arrays.stream(lotto.split(", "))
-						.map(Integer::new)
-						.map(LottoNumber::new)
-						.collect(Collectors.toList()))
-				.map(Lotto::new)
-				.collect(Collectors.toList()));
+				.map(Lotto::manual)
+				.collect(Collectors.toList())
+		);
 	}
 
 	public int size() {
@@ -30,10 +33,14 @@ public class Lottos {
 		return Collections.unmodifiableList(lottos);
 	}
 
-	public List<Integer> getMatchCounts(Lotto otherLotto) {
-		return this.lottos.stream()
-		.map(lotto -> otherLotto.getMatchCount(lotto))
-		.collect(Collectors.toList());
+	public Map<Rank, Integer> getLottosMap(WinningLotto winningLotto) {
+		Map<Rank, Integer> lottoResultMap = new EnumMap<>(Rank.class);
+		Rank rank;
+		for (Lotto lotto : this.lottos) {
+			rank = winningLotto.getMatchRank(lotto);
+			lottoResultMap.put(rank, lottoResultMap.getOrDefault(rank, 0)+1);
+		}
+		return lottoResultMap;
 	}
 
 	public Lottos addLottos(Lottos lottos) {
