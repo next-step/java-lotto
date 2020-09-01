@@ -1,6 +1,6 @@
+import domain.Lotto;
 import domain.LottoGames;
 import domain.RankRecord;
-import domain.WinnerNumber;
 import utility.UserInput;
 import view.View;
 
@@ -12,8 +12,11 @@ public class Application {
 
         View.showLottoTickets(game.getLottos());
 
-        WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-        RankRecord record = game.getLottos().calculateWinnerPrice(winnerNumber);
+        Lotto winnerNumber = UserInput.getWinnerTicket();
+        int bonusNumber = UserInput.inputBonusNumber();
+
+        game.validateBonus(winnerNumber,bonusNumber);
+        RankRecord record = game.getLottos().recordAllLottos(winnerNumber,bonusNumber);
         int sum = record.sumOfPrice();
 
         View.result(record, sum, buyInput);

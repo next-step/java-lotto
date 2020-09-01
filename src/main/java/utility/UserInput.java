@@ -1,14 +1,16 @@
 package utility;
 
-import domain.WinnerNumber;
+import domain.Lotto;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_MESSEGE = "개를 구매했습니다.";
     private static final String AFTER_MESSEGE = "지난 주 당첨 번호를 입력하세요.";
-    private static final String BONUS_BALL_MESSEGE = "보너스 볼을 입력하세요.";
     private static final String DELIMTER = ",";
     private static final String BONUS_MESSEGE = "보너스 볼을 입력해 주세요.";
 
@@ -28,11 +30,15 @@ public class UserInput {
         return input;
     }
 
-    public static WinnerNumber getWinnerTicket() {
+    public static Lotto getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
-        int bonusNumber = inputBonusNumber();
 
-        return new WinnerNumber(winnerNumber,bonusNumber);
+        Set<Integer> lotto = Arrays.stream(winnerNumber)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toSet());
+
+        return new Lotto(lotto);
     }
 
     private static String[] inputWinnerNumber() {
@@ -42,7 +48,6 @@ public class UserInput {
 
         return inputs;
     }
-
 
     public static int inputBonusNumber(){
         System.out.println(BONUS_MESSEGE);

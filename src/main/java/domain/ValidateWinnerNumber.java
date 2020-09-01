@@ -35,10 +35,10 @@ public class ValidateWinnerNumber {
     }
 
     private void validateStringsDuplicate(String[] inputs, int bonus) {
-        Set<String> set = new HashSet<>(Arrays.asList(inputs));
-        set.add(String.valueOf(bonus));
+        Set<String> lotto = new HashSet<>(Arrays.asList(inputs));
+        lotto.add(String.valueOf(bonus));
 
-        if (set.size() != inputs.length + ONE) {
+        if (lotto.size() != inputs.length + ONE) {
 
             throw new IllegalArgumentException("중복 값 입력 에러!");
         }
