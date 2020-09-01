@@ -28,6 +28,7 @@ public class View {
             System.out.println("총 수익률은 0 입니다.");
             return;
         }
+
         System.out.printf("총 수익률은 %.2f 입니다", (double) sum / (game.getLottos().getNumOfLottos()* UserInput.WON));
     }
 

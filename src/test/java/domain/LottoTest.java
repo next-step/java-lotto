@@ -1,12 +1,13 @@
 package domain;
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
+
 
     @Test
     void validateEmptyTest2() {
@@ -14,4 +15,5 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("empty");
     }
+
 }

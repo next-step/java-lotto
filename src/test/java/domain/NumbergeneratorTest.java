@@ -36,7 +36,9 @@ public class NumbergeneratorTest {
 
     @Test
     void setLotto() {
+
         Set<Integer> numList = numberGenerator.generate();
+
         Lotto numbers = new Lotto(numList);
 
         assertThat(numbers.getLottoNumber().size()).isEqualTo(6);

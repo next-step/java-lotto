@@ -1,5 +1,6 @@
 package domain;
 
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGamesTest {
@@ -66,6 +68,7 @@ public class LottoGamesTest {
     void findBonusTest() {
         String[] input = "1,2,3,4,5,6".split(",");
         int bonus = 7;
+
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         LottoGames game = new LottoGames(0);

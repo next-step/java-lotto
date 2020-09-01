@@ -1,5 +1,6 @@
 package domain;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class Lotto {
             throw new IllegalArgumentException("not 6 number");
         }
     }
+
 
     private void validateEmpty(Set<Integer> set) {
         if (set.size() == 0 || set == null) {

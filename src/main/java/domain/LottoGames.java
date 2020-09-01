@@ -2,7 +2,6 @@ package domain;
 
 import java.util.Arrays;
 import java.util.Optional;
-
 import static domain.Rank.RANK_THREE;
 import static domain.Rank.RANK_TWO;
 import static utility.UserInput.WON;

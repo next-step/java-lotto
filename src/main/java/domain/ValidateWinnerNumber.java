@@ -39,12 +39,14 @@ public class ValidateWinnerNumber {
         set.add(String.valueOf(bonus));
 
         if (set.size() != inputs.length + ONE) {
+
             throw new IllegalArgumentException("중복 값 입력 에러!");
         }
     }
 
     private void validateNumberIsSix(String[] inputs) {
         if (inputs.length != SIX) {
+
             throw new IllegalArgumentException("숫자 개수 에러 ");
         }
     }
