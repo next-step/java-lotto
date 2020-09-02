@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -45,6 +48,23 @@ public class StringCalculatorTest {
     public void split_Negative(){
         assertThatThrownBy(
                 () -> StringCalculator.splitAndSum("-1:2,3")
+        ).isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("Split")
+    @Test
+    public void splitTest(){
+        assertThat(StringCalculator.split("1:2:3").toArray()).isEqualTo(new Integer[]{1, 2, 3});
+        assertThat(StringCalculator.split("//;\n1;2;3").toArray()).isEqualTo(new Integer[]{1, 2, 3});
+    }
+
+    @DisplayName("is contains negative value?")
+    @Test
+    public void hasNegativeValueTest(){
+        String[] values = new String[]{"-1", "2", "3"};
+        IntStream inputStream = Arrays.stream(values).mapToInt(value -> Integer.parseInt(value));
+        assertThatThrownBy(
+                () -> StringCalculator.isValidate(inputStream)
         ).isInstanceOf(RuntimeException.class);
     }
 

@@ -8,8 +8,7 @@ import java.util.stream.IntStream;
 public class StringCalculator {
 
 
-    public static int splitAndSum(String val) throws RuntimeException {
-        int result = 0;
+    public static int splitAndSum(String val)  {
 
         if(val == null) {
             return 0;
@@ -19,32 +18,37 @@ public class StringCalculator {
             return 0;
         }
 
+        IntStream stream = split(val);
+        isValidate(stream);
+
+        return stream.sum();
+    }
+
+
+    public static IntStream split(String val) {
+        IntStream intOfInputStream = null;
+
         Matcher m = Pattern.compile("//(.)\\n(.*)").matcher(val);
 
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] inputs = m.group(2).split(customDelimiter);
 
+            intOfInputStream = Arrays.stream(inputs).mapToInt(value -> Integer.parseInt(value));
 
-            IntStream intOfInputStream = Arrays.stream(inputs).mapToInt(value -> Integer.parseInt(value));
-
-            intOfInputStream.filter( value -> value < 0)
-                            .findAny()
-                            .ifPresent( value -> new RuntimeException("음수는 입력할 수 없습니다.") );
-
-            result = intOfInputStream.sum();
-            return result;
+            return intOfInputStream;
         }
 
         String[] inputs = val.split(",|:");
-        IntStream intOfInputStream = Arrays.stream(inputs).mapToInt(value -> Integer.parseInt(value));
+        intOfInputStream = Arrays.stream(inputs).mapToInt(value -> Integer.parseInt(value));
 
-        intOfInputStream.filter( value -> value < 0)
+        return intOfInputStream;
+    }
+
+
+    public static void isValidate(IntStream stream) throws RuntimeException {
+        stream.filter( value -> value < 0)
                 .findAny()
-                .ifPresent( value -> new RuntimeException("음수는 입력할 수 없습니다.") );
-
-        result = intOfInputStream.sum();
-
-        return result;
+                .ifPresent( value -> new RuntimeException() );
     }
 }
