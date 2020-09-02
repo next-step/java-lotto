@@ -18,11 +18,10 @@ public class ManualCount {
         if (purchaseAmount.getSize() - manulSize < 0) {
             throw new IllegalArgumentException();
         }
-
         return manulSize;
     }
 
     public int getSize() {
-        return this.size;
+        return size;
     }
 }

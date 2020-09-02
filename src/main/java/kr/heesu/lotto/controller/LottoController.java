@@ -1,10 +1,7 @@
 package kr.heesu.lotto.controller;
 
 import kr.heesu.lotto.domain.*;
-import kr.heesu.lotto.utils.LottoFactory;
 import kr.heesu.lotto.view.ViewResolver;
-
-import java.util.List;
 
 public class LottoController {
 

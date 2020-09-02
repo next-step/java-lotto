@@ -34,6 +34,6 @@ public class PurchaseAmount {
     }
 
     public int getSize() {
-        return this.amount / PRICE_PER_LOTTO;
+        return amount / PRICE_PER_LOTTO;
     }
 }

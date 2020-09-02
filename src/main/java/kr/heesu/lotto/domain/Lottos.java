@@ -30,12 +30,12 @@ public class Lottos {
     }
 
     public boolean contains(Lotto lotto) {
-        return this.lottos.contains(lotto);
+        return lottos.contains(lotto);
     }
 
     @Override
     public String toString() {
-        return this.lottos.stream()
+        return lottos.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
     }

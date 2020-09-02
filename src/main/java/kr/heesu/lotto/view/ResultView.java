@@ -1,7 +1,6 @@
 package kr.heesu.lotto.view;
 
 import kr.heesu.lotto.domain.LottoStatistics;
-import kr.heesu.lotto.domain.Lottos;
 import kr.heesu.lotto.domain.ManualCount;
 import kr.heesu.lotto.domain.PurchaseAmount;
 import kr.heesu.lotto.enums.Rank;

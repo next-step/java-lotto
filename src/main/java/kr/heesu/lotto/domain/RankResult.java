@@ -39,6 +39,6 @@ public class RankResult {
     }
 
     public Long getRankFrequency(Rank rank) {
-        return this.result.get(rank);
+        return result.get(rank);
     }
 }

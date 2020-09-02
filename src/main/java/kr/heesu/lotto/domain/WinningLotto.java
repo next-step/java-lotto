@@ -24,16 +24,12 @@ public class WinningLotto {
     }
 
     public boolean contains(LottoNumber number) {
-        return this.winnningLotto.contain(number);
+        return winnningLotto.contain(number);
     }
 
     public Rank match(Lotto lotto) {
         Long count = winnningLotto.contains(lotto);
         return Rank.valueOf(count, lotto.contain(bonusNumber));
-    }
-
-    public LottoNumber getBounusNumber() {
-        return this.bonusNumber;
     }
 }
 
