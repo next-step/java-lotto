@@ -21,8 +21,8 @@ public class LottoGame {
         ResultView.showResult(winningTable.getMatchCountTable());
         ResultView.showDelimiter();
 
-        WinningEarningsRate winningEarningsRate = inputMoney.makeWinningEarningsRate();
+        WinningEarningsRate winningEarningsRate = inputMoney.makeWinningEarningsRate(winningTable.getTotalWinningMoney());
 
-        ResultView.showEarningsRate(winningEarningsRate.calculationEarningsRate(winningTable.getTotalWinningMoney()));
+        ResultView.showEarningsRate(winningEarningsRate.getEarningsRate());
     }
 }

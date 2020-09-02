@@ -29,7 +29,7 @@ public class InputMoney {
         return this.money / LOTTO_PRICE;
     }
 
-    public WinningEarningsRate makeWinningEarningsRate() {
-        return new WinningEarningsRate(money);
+    public WinningEarningsRate makeWinningEarningsRate(double totalWinningMoney) {
+        return new WinningEarningsRate(money, totalWinningMoney);
     }
 }

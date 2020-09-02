@@ -31,7 +31,7 @@ class InputMoneyTest {
 
     @Test
     void makeWinningEarningsRate() {
-        Assertions.assertThat(inputMoney.makeWinningEarningsRate())
-                .isEqualToComparingFieldByField(new WinningEarningsRate(3000));
+        Assertions.assertThat(inputMoney.makeWinningEarningsRate(0))
+                .isEqualToComparingFieldByField(new WinningEarningsRate(3000, 0));
     }
 }

@@ -9,16 +9,16 @@ class WinningEarningsRateTest {
 
     @BeforeEach
     void createWinningEarningsRate() {
-        winningEarningsRate = new WinningEarningsRate(14000);
+        winningEarningsRate = new WinningEarningsRate(14000, 5000);
     }
 
     @Test
     void createValue() {
-        Assertions.assertThat(winningEarningsRate).isEqualToComparingFieldByField(new WinningEarningsRate(14000));
+        Assertions.assertThat(winningEarningsRate).isEqualToComparingFieldByField(new WinningEarningsRate(14000, 5000));
     }
 
     @Test
-    void calculationEarningsRate() {
-        Assertions.assertThat(winningEarningsRate.calculationEarningsRate(5000)).isEqualTo(0.35);
+    void getEarningsRate() {
+        Assertions.assertThat(winningEarningsRate.getEarningsRate()).isEqualTo(0.35);
     }
 }
