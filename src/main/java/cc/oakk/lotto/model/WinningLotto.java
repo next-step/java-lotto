@@ -16,11 +16,8 @@ public class WinningLotto {
 
     public Rank score(Lotto target) {
         throwIfNull(target);
-        int matchingCount = (int) lotto.get().stream()
-                .filter(target.get()::contains)
-                .count();
-
-        boolean hasBonus = target.get().stream().anyMatch(v -> v.equals(bonusNumber));
-        return Rank.getRankByDifferentCount(NUMBER_COUNT - matchingCount, hasBonus);
+        long matchingCount = target.getMatchingCount(lotto);
+        boolean hasBonus = target.contains(bonusNumber);
+        return Rank.getRankByDifferentCount((int) (NUMBER_COUNT - matchingCount), hasBonus);
     }
 }

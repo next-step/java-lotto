@@ -13,7 +13,7 @@ import static cc.oakk.lotto.util.ValidationAdapters.throwIfNull;
 public class Lotto implements Printable<Lotto> {
     public static final int NUMBER_COUNT = 6;
 
-    protected final List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         throwIfNull(numbers);
@@ -37,8 +37,12 @@ public class Lotto implements Printable<Lotto> {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> get() {
-        return numbers;
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public long getMatchingCount(Lotto lotto) {
+        return lotto.numbers.stream().filter(numbers::contains).count();
     }
 
     @Override
