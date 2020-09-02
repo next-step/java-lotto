@@ -7,11 +7,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LottoTicket {
+public class TicketSelector {
 
     private List<Integer> lottoNumbers = new ArrayList<>();
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public LottoTicket(){
+    public TicketSelector(){
         createLottoNumbers();
     }
 
@@ -19,30 +20,32 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     public int calculateAvailableCount(int amount){
         return amount/1000;
     }
 
-    public List<Integer> buySingleLottoTicket(){
-        List<Integer> lottoTicket = new ArrayList<>();
+    public LottoTicket buySingleLottoTicket(){
+        List<Integer> numbers = new ArrayList<>();
 
         Collections.shuffle(lottoNumbers);
         for(int i = 0; i < Constant.LOTTO_PICK_COUNT; i++){
-            lottoTicket.add(lottoNumbers.get(i));
+            numbers.add(lottoNumbers.get(i));
         }
-        Collections.sort(lottoTicket);
+        Collections.sort(numbers);
 
-        return lottoTicket;
+        return new LottoTicket(numbers);
     }
 
-    public List<List<Integer>> buyAvailableLottoTickets(int ticketCount){
-        List<List<Integer>> lottoTickets = new ArrayList<>();
+    public void buyAvailableLottoTickets(int ticketCount){
 
         for(int i = 0; i < ticketCount; i++){
             lottoTickets.add(buySingleLottoTicket());
         }
 
-        return lottoTickets;
     }
 
     private void createLottoNumbers(){
