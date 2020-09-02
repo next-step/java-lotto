@@ -14,28 +14,12 @@ public class ManualCount {
     }
 
     private static int validationCheck(String input, PurchaseAmount purchaseAmount) {
-        if (!isNumeric(input)) {
-            throw new IllegalArgumentException();
-        }
-
         int manulSize = Integer.parseInt(input);
         if (purchaseAmount.getSize() - manulSize < 0) {
             throw new IllegalArgumentException();
         }
 
         return manulSize;
-    }
-
-    private static boolean isNumeric(String input) {
-        if (input == null) {
-            return false;
-        }
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-        return true;
     }
 
     public int getSize() {

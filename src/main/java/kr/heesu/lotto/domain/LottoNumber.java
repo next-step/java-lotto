@@ -2,11 +2,20 @@ package kr.heesu.lotto.domain;
 
 import kr.heesu.lotto.enums.ExceptionMessage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int MIN = 1;
     private static final int MAX = 45;
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+
+    static {
+        IntStream.rangeClosed(MIN, MAX)
+                .forEach(number -> LOTTO_NUMBER_CACHE.put(number, new LottoNumber(number)));
+    }
 
     private final int number;
 
@@ -16,14 +25,14 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         validationCheck(number);
-        return new LottoNumber(number);
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     public static LottoNumber of(String number) {
         int lottoNumber = Integer.parseInt(number);
 
         validationCheck(lottoNumber);
-        return new LottoNumber(lottoNumber);
+        return LOTTO_NUMBER_CACHE.get(lottoNumber);
     }
 
     private static void validationCheck(int number) {

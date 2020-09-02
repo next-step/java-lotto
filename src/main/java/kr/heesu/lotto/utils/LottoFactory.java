@@ -2,14 +2,8 @@ package kr.heesu.lotto.utils;
 
 import kr.heesu.lotto.domain.Lotto;
 import kr.heesu.lotto.domain.LottoNumber;
-import kr.heesu.lotto.domain.Lottos;
-import kr.heesu.lotto.domain.ManualLottoInputs;
-import kr.heesu.lotto.enums.ExceptionMessage;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -34,34 +28,29 @@ public class LottoFactory {
         return Collections.unmodifiableList(RANGE.subList(0, SIZE));
     }
 
-    private static Lotto createLotto(List<LottoNumber> numbers) {
-        return Lotto.of(numbers);
-    }
-
-    public static Lottos createAutoLottos(int size) {
+    public static Set<Lotto> createAutoLottoSet(int size) {
         Set<Lotto> lottoSet = new HashSet<>();
 
         while (lottoSet.size() < size) {
             List<LottoNumber> lottoNumbers = generateLottoNumbers();
-            lottoSet.add(createLotto(lottoNumbers));
+            lottoSet.add(Lotto.of(lottoNumbers));
         }
 
-        return Lottos.of(lottoSet);
+        return lottoSet;
     }
 
-    public static Lottos createManualLottos(ManualLottoInputs inputs) {
-        Set<Lotto> lottoList = new HashSet<>();
+    public static Set<Lotto> createManualLottoSet(String manualLottoInput) {
+        Set<Lotto> lottoSet = new HashSet<>();
+        String[] values = manualLottoInput.split("\n");
 
-        inputs.getLottoInputs()
-                .stream()
+        Arrays.stream(values)
                 .map(LottoFactory::createLottoFromUserInput)
-                .forEach(lottoList::add);
+                .forEach(lottoSet::add);
 
-        if (lottoList.size() != inputs.getSize()) {
-            throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_LOTTO_NUMBER.getMessage());
+        if (values.length != lottoSet.size()) {
+            throw new IllegalArgumentException();
         }
-
-        return Lottos.of(lottoList);
+        return lottoSet;
     }
 
     public static Lotto createLottoFromUserInput(String input) {

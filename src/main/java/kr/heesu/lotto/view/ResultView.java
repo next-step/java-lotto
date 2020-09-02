@@ -62,7 +62,7 @@ public class ResultView {
         writer.println(ViewMessage.OUTPUT_FOR_PROFIT_RATE_BENEFIT.getMessage());
     }
 
-    public void printMultipleLotto(Lottos multipleLotto) {
+    public void printMultipleLotto(String multipleLotto) {
         writer.println(multipleLotto);
     }
 

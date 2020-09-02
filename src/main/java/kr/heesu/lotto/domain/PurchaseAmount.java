@@ -16,6 +16,13 @@ public class PurchaseAmount {
         return new PurchaseAmount(amount);
     }
 
+    public static PurchaseAmount of(String inputAmount) {
+        int amount = Integer.parseInt(inputAmount);
+        validationCheck(amount);
+
+        return new PurchaseAmount(amount);
+    }
+
     private static void validationCheck(int amount) {
         if (amount < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_PURCHASE_AMOUNT.getMessage());

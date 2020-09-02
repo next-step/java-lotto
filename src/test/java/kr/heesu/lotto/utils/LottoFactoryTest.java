@@ -1,9 +1,11 @@
 package kr.heesu.lotto.utils;
 
-import kr.heesu.lotto.domain.Lottos;
+import kr.heesu.lotto.domain.Lotto;
 import kr.heesu.lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +16,8 @@ class LottoFactoryTest {
     void lottos_creation_test() {
         PurchaseAmount amount = PurchaseAmount.of(14000);
 
-        Lottos lottos = LottoFactory.createAutoLottos(amount.getSize());
+        Set<Lotto> autoLottos = LottoFactory.createAutoLottoSet(amount.getSize());
 
-        assertThat(lottos.size()).isEqualTo(amount.getSize());
+        assertThat(autoLottos.size()).isEqualTo(amount.getSize());
     }
 }

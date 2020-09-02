@@ -57,10 +57,5 @@ class LottosTest {
                 .collect(Collectors.toList()));
 
         assertThat(lottos.contains(lotto)).isTrue();
-
-        int expectedSize = lottos.size();
-        lottos.add(lotto);
-
-        assertThat(lottos.size()).isEqualTo(expectedSize);
     }
 }

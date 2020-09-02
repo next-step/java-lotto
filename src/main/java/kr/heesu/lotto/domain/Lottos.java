@@ -2,7 +2,6 @@ package kr.heesu.lotto.domain;
 
 import kr.heesu.lotto.enums.Rank;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -24,26 +23,10 @@ public class Lottos {
 
     public RankResult matches(WinningLotto winningLotto) {
         Map<Rank, Long> matches = lottos.stream()
-                .map(lotto -> lotto.match(winningLotto))
+                .map(winningLotto::match)
                 .collect(Collectors.groupingBy(Function.identity(), counting()));
 
         return RankResult.of(matches);
-    }
-
-    public int size() {
-        return this.lottos.size();
-    }
-
-    public Set<Lotto> getLottos() {
-        return Collections.unmodifiableSet(this.lottos);
-    }
-
-    public boolean add(Lotto lotto) {
-        return this.lottos.add(lotto);
-    }
-
-    public void add(Lottos lottos) {
-        this.lottos.addAll(lottos.getLottos());
     }
 
     public boolean contains(Lotto lotto) {

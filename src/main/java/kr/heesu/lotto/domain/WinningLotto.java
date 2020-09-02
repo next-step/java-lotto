@@ -1,5 +1,7 @@
 package kr.heesu.lotto.domain;
 
+import kr.heesu.lotto.enums.Rank;
+
 public class WinningLotto {
 
     private final Lotto winnningLotto;
@@ -14,8 +16,20 @@ public class WinningLotto {
         return new WinningLotto(winnningLotto, bonusNumber);
     }
 
+    public static WinningLotto of(String stringLotto, String stringLottoNumber) {
+        return new WinningLotto(
+                Lotto.of(stringLotto),
+                LottoNumber.of(stringLottoNumber)
+        );
+    }
+
     public boolean contains(LottoNumber number) {
         return this.winnningLotto.contain(number);
+    }
+
+    public Rank match(Lotto lotto) {
+        Long count = winnningLotto.contains(lotto);
+        return Rank.valueOf(count, lotto.contain(bonusNumber));
     }
 
     public LottoNumber getBounusNumber() {
