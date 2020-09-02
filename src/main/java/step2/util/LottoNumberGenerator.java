@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class LottoNumberGenerator implements NumberGenerator{
 
     @Override
-    public List<LottoNumber> generate() {
+    public List<LottoNumber> generate(String input) {
         final List<LottoNumber> numbers = getLottoNumbers();
         Collections.shuffle(numbers);
         return numbers.subList(LottoConstant.START_LOTTO_NUMBER_RANGE, LottoConstant.END_LOTTO_NUMBER_RANGE);

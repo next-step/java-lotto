@@ -40,7 +40,7 @@ public class LottoResult {
         return winNumber.getMoney();
     }
 
-    public WinNumber getWinNumber() {
-        return winNumber;
+    public boolean isWinNumber(WinNumber target) {
+        return winNumber.equals(target);
     }
 }

@@ -2,6 +2,7 @@ package step2.domain.lotto;
 
 import step2.domain.lottoResult.LottoResults;
 import step2.util.LottoNumberGenerator;
+import step2.util.ManualLottoNumberGenerator;
 import step2.util.ValidateUtil;
 
 import java.util.Collections;
@@ -21,11 +22,16 @@ public class Lottos {
         return lottos.stream();
     }
 
-    public static Lottos createLottos(int lottoQuantity, LottoNumberGenerator lottoNumberGenerator) {
-        List<Lotto> lottos = IntStream.range(0, lottoQuantity)
-                .mapToObj(i -> Lotto.createLottoNumbers(lottoNumberGenerator))
+    public static Lottos of(int lottoQuantity, int manualLottoCount, List<String> manualLottos) {
+        return new Lottos(createLottos(lottoQuantity, manualLottoCount, manualLottos));
+    }
+
+    private static List<Lotto> createLottos(int lottoQuantity, int manualLottoCount, List<String> manualLottos) {
+        return IntStream.range(0, lottoQuantity + manualLottoCount)
+                .mapToObj(i -> i < manualLottoCount
+                        ? Lotto.createLottoNumbers(manualLottos.get(i), new ManualLottoNumberGenerator())
+                        : Lotto.createLottoNumbers(new LottoNumberGenerator()))
                 .collect(Collectors.toList());
-        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
