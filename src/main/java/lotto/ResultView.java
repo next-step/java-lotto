@@ -33,7 +33,7 @@ public class ResultView {
     }
 
     private static void printMatchStatistics(Map<Integer, Integer> resultCounts){
-        Lotto.prize.entrySet().stream()
+        Lottery.prize.entrySet().stream()
             .map(entry ->
                 entry.getKey() + "개 일치(" + entry.getValue() + "원)- "
                     + resultCounts.getOrDefault(entry.getKey(), 0) + "개"
@@ -43,10 +43,10 @@ public class ResultView {
 
     private static double getProfitRatio(Map<Integer, Integer> resultCounts, int ticketCount) {
         int profit = resultCounts.entrySet().stream()
-            .map(entry -> entry.getValue() * Lotto.prize.get(entry.getKey()))
+            .map(entry -> entry.getValue() * Lottery.prize.get(entry.getKey()))
             .reduce(0, Integer::sum);
 
-        int cost = ticketCount * 1000;
+        int cost = ticketCount * Lottery.price;
 
         return Math.round(profit / cost * 100.0d) / 100.0d;
 

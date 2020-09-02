@@ -10,12 +10,11 @@ public class InputView {
     }
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int PRICE = 1000;
 
     public static int getPurchaseCount() {
         System.out.println("구입금액을 입력해 주세요");
         int amount = Integer.parseInt(scanner.nextLine());
-        int count = amount / PRICE;
+        int count = amount / Lottery.price;
         System.out.println(count + "개를 구매했습니다.");
 
         return count;
