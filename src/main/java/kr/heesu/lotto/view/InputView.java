@@ -11,7 +11,6 @@ public class InputView {
 
     private static class InnerHolder {
         private static final InputView INSTANCE = new InputView();
-
     }
 
     public static InputView getInstance() {

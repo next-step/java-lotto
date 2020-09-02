@@ -1,7 +1,7 @@
 package kr.heesu.lotto.view;
 
 import kr.heesu.lotto.domain.LottoStatistics;
-import kr.heesu.lotto.domain.Lottos;
+import kr.heesu.lotto.domain.ManualCount;
 import kr.heesu.lotto.domain.PurchaseAmount;
 import kr.heesu.lotto.enums.Rank;
 
@@ -61,12 +61,13 @@ public class ResultView {
         writer.println(ViewMessage.OUTPUT_FOR_PROFIT_RATE_BENEFIT.getMessage());
     }
 
-    public void printMultipleLotto(Lottos multipleLotto) {
+    public void printMultipleLotto(String multipleLotto) {
         writer.println(multipleLotto);
     }
 
-    public void printPurchaseAmount(PurchaseAmount amount) {
-        int size = amount.getSize();
-        writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_PURCHASE_SIZE.getMessage(), size));
+    public void printPurchaseAmount(PurchaseAmount amount, ManualCount count) {
+        int manualSize = count.getSize();
+        int autoSize = amount.getSize() - manualSize;
+        writer.println(String.format(ViewMessage.OUTPUT_FORMAT_FOR_PURCHASE_SIZE.getMessage(), manualSize, autoSize));
     }
 }

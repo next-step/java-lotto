@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,11 +33,13 @@ class RankResultTest {
 
         Lottos lottos = Lottos.of(lottoList);
 
-        WinningNumbers win = WinningNumbers.of(Stream.of(1, 2, 3, 45, 44, 43)
+        List<LottoNumber> numbers = Stream.of(1, 2, 3, 45, 44, 43)
                 .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
 
-        result = lottos.matches(win, LottoNumber.of(7));
+        WinningLotto win = WinningLotto.of(Lotto.of(numbers), LottoNumber.of(7));
+
+        result = lottos.matches(win);
     }
 
     @Test

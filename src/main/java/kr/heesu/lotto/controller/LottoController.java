@@ -1,12 +1,7 @@
 package kr.heesu.lotto.controller;
 
 import kr.heesu.lotto.domain.*;
-import kr.heesu.lotto.utils.LottoFactory;
 import kr.heesu.lotto.view.ViewResolver;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -22,48 +17,28 @@ public class LottoController {
 
     public void main() {
         try {
-            String stringAmount = viewResolver.getPurchaseAmount();
-            PurchaseAmount amount = makePurchaseAmountFromUserInput(stringAmount);
+            PurchaseAmount purchaseAmount = PurchaseAmount.of(
+                    viewResolver.getPurchaseAmount());
+            ManualCount count = ManualCount.of(
+                    viewResolver.getManualAmount(),
+                    purchaseAmount);
+            LottoGame lottoGame = LottoGame.of(
+                    purchaseAmount,
+                    viewResolver.getInputForManualStringLottos(count));
 
-            viewResolver.printPurchaseAmount(amount);
+            viewResolver.printPurchaseAmount(purchaseAmount, count);
+            viewResolver.printMultipleLotto(lottoGame.toString());
 
-            Lottos multipleLotto = LottoFactory.createLottosAutomatic(amount);
-            viewResolver.printMultipleLotto(multipleLotto);
+            WinningLotto winningLotto = WinningLotto.of(
+                    viewResolver.getWinningLotto(),
+                    viewResolver.getBonusNumbers());
 
-            String stringWinningNumbers = viewResolver.getWinningNumbers();
-            WinningNumbers winningNumbers = makeWinningNumbersFromUserInput(stringWinningNumbers);
-
-            String stringBonusNumber = viewResolver.getBonusNumbers();
-            LottoNumber bonusNumber = makeLottoNumber(stringBonusNumber);
-
-            RankResult matches = multipleLotto.matches(winningNumbers, bonusNumber);
-
-            LottoStatistics statistics = makeLottoStatistics(matches, amount);
-
+            LottoStatistics statistics = lottoGame.matches(winningLotto);
             viewResolver.printLottoStatistics(statistics);
-        } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(illegalArgumentException.getMessage());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         }
     }
 
-    private LottoNumber makeLottoNumber(String stringBonusNumber) {
-        return LottoNumber.of(Integer.parseInt(stringBonusNumber));
-    }
-
-    private LottoStatistics makeLottoStatistics(RankResult matches, PurchaseAmount amount) {
-        return LottoStatistics.of(matches, amount);
-    }
-
-    private WinningNumbers makeWinningNumbersFromUserInput(String input) {
-        List<LottoNumber> numbers = Stream.of(input.split(", "))
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return WinningNumbers.of(numbers);
-    }
-
-    private PurchaseAmount makePurchaseAmountFromUserInput(String input) {
-        return PurchaseAmount.of(Integer.parseInt(input));
-    }
 }

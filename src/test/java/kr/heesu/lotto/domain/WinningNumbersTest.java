@@ -18,12 +18,9 @@ class WinningNumbersTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        WinningNumbers winningNumbers = WinningNumbers.of(numbers);
+        WinningLotto winningNumbers = WinningLotto.of(Lotto.of(numbers), LottoNumber.of(45));
 
-        int actual = winningNumbers.getWinningNumbers().size();
-        int expected = numbers.size();
-
-        assertThat(actual).isEqualTo(expected);
+        assertThat(winningNumbers.contains(LottoNumber.of(2))).isTrue();
     }
 
     @Test
@@ -32,6 +29,6 @@ class WinningNumbersTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> WinningNumbers.of(numbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> WinningLotto.of(Lotto.of(numbers), LottoNumber.of(45))).isInstanceOf(IllegalArgumentException.class);
     }
 }

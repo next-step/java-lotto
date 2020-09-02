@@ -16,11 +16,11 @@ public class LottoStatistics {
     }
 
     public Long getRankFrequency(Rank rank) {
-        return this.matches.getRankFrequency(rank);
+        return matches.getRankFrequency(rank);
     }
 
     public Double getProfitRate() {
-        return this.matches.getTotalWinningPrice() / amount.getAmount() * 1.0;
+        return matches.getTotalWinningPrice() / amount.getAmount() * 1.0;
     }
 
 }

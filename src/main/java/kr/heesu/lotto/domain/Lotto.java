@@ -1,49 +1,57 @@
 package kr.heesu.lotto.domain;
 
 import kr.heesu.lotto.enums.ExceptionMessage;
-import kr.heesu.lotto.enums.Rank;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> numbers) {
-        this.numbers = new ArrayList<>(numbers);
+    private Lotto(Set<LottoNumber> numbers) {
+        this.lotto = numbers;
     }
 
     public static Lotto of(List<LottoNumber> numbers) {
-        validationCheck(numbers);
-        return new Lotto(numbers);
+        Set<LottoNumber> lotto = new HashSet<>(numbers);
+        validationCheck(lotto);
+
+        return new Lotto(lotto);
     }
 
-    private static void validationCheck(List<LottoNumber> numbers) {
+    public static Lotto of(String userInput) {
+        String[] values = userInput.split(", ");
+        Set<LottoNumber> lotto = Arrays.stream(values)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+
+        validationCheck(lotto);
+
+        return new Lotto(lotto);
+    }
+
+    private static void validationCheck(Set<LottoNumber> numbers) {
         if (numbers.size() != SIZE) {
+            numbers.forEach(System.out::println);
             throw new IllegalArgumentException(ExceptionMessage.EXCEPTION_FOR_LOTTO.getMessage());
         }
     }
 
-    private boolean contain(LottoNumber number) {
-        return this.numbers.contains(number);
+    public boolean contain(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
-    public Rank match(WinningNumbers winningNumbers, LottoNumber bonusBall) {
-        Long count = winningNumbers.getWinningNumbers()
-                .stream()
-                .filter(this::contain)
+    public Long contains(Lotto lotto) {
+        return this.lotto.stream()
+                .filter(lotto::contain)
                 .count();
-
-        return Rank.valueOf(count, this.contain(bonusBall));
     }
 
     @Override
     public String toString() {
-        return "[" + this.numbers.stream()
+        return "[" + lotto.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(", ")) + "]";
     }
@@ -52,14 +60,14 @@ public class Lotto {
     public boolean equals(Object obj) {
         if (obj instanceof Lotto) {
             Lotto other = (Lotto) obj;
-            return this.numbers.equals(other.numbers);
+            return this.lotto.equals(other.lotto);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int code = this.numbers.stream()
+        int code = lotto.stream()
                 .mapToInt(LottoNumber::hashCode)
                 .sum();
         return Objects.hash(code);
