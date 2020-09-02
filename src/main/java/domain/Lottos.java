@@ -21,4 +21,8 @@ public class Lottos {
     public Lotto getOneLotto(int index) {
         return lottos.get(index);
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

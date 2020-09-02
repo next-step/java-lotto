@@ -1,15 +1,17 @@
 package domain;
 
-public class LottoGames {
+import static utility.UserInput.WON;
 
+public class LottoGames {
     public static final int LOTTO_NUMBER = 6;
     public static final int MIN_WINNER_NUMBER = 3;
 
     private Lottos lottos;
 
-    public LottoGames(int input) {
-        int tries = validatePrice(input);
+    public LottoGames(int price) {
+        int tries = validatePrice(price);
         lottos = new Lottos();
+
         makeLottoTicket(tries);
     }
 
@@ -26,9 +28,9 @@ public class LottoGames {
     }
 
     private int validatePrice(int price) {
-        if (price <= 0) {
+        if (price < 0) {
             throw new IllegalArgumentException("Price ERR!");
         }
-        return price;
+        return price / WON;
     }
 }

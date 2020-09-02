@@ -1,28 +1,43 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RankRecord {
-    public static final int RECORD_SIZE = 6;
-    private List<Integer> recordPool;
+    public static final int ONE = 1;
+
+    private Map<Rank, Integer> recordPool;
 
     public RankRecord() {
-        recordPool = new ArrayList<>();
+        recordPool = new HashMap<>();
 
-        for (int i = 0; i < RECORD_SIZE; i++) {
-            recordPool.add(0);
+        Rank[] ranks = Rank.values();
+
+        for (Rank rank : ranks) {
+            recordPool.put(rank, 0);
         }
     }
 
-    public List<Integer> getRecordPool() {
+    public Map<Rank, Integer> getRecordPool() {
         return recordPool;
     }
 
-    public void recordOfRankings(int count) {
-        int rank = 6 - count + 1;
+    public void recordOfRankings(Rank ranking) {
+        int rankCount = recordPool.get(ranking);
+        recordPool.put(ranking, rankCount + ONE);
+    }
 
-        int rankCount = recordPool.get(rank);
-        recordPool.set(rank, rankCount + 1);
+    public int sumOfPrice() {
+        int sum = 0;
+        int ea = 0;
+        int price = 0;
+        Rank[] ranks = Rank.values();
+
+        for (Rank rank : ranks) {
+            ea = recordPool.get(rank);
+            price = rank.getWinnerPrice();
+            sum += ea * price;
+        }
+        return sum;
     }
 }
