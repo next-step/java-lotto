@@ -17,10 +17,6 @@ public class LottoResult {
         return new LottoResult(ranks);
     }
 
-    public List<Rank> getMatchRanks() {
-        return matchRanks;
-    }
-
     public int countOfMathRanks(Rank rank) {
         return (int) matchRanks.stream()
                 .filter(rank::equals)
@@ -33,8 +29,8 @@ public class LottoResult {
                 .reduce(INTEGER_ZERO,Integer::sum);
     }
 
-    public double rateOfTotalPrize(int purchaseAmount) {
-        return (double) totalPrizeOfMathRanks() / (purchaseAmount / DEFAULT_LOTTO_PRICE * DEFAULT_LOTTO_PRICE);
+    public double rateOfTotalPrize() {
+        return (double) totalPrizeOfMathRanks() / (matchRanks.size() * DEFAULT_LOTTO_PRICE);
     }
 
     @Override

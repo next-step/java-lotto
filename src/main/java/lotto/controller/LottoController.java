@@ -19,6 +19,5 @@ public class LottoController {
         LottoResult lottoResult = lottos.match(winningLotto);
 
         ResultView.printResultLottoGame(lottoResult);
-        ResultView.printRateOfLottoGame(lottoResult.rateOfTotalPrize(purchaseAmount));
     }
 }

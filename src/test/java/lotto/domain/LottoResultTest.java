@@ -36,6 +36,6 @@ public class LottoResultTest {
     @DisplayName("수익률 계산하기")
     @Test
     void getRateOfLottoGame() {
-        lottoResult.rateOfTotalPrize(14000);
+        assertThat(lottoResult.rateOfTotalPrize()).isEqualTo(5.0);
     }
 }
