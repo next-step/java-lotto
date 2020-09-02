@@ -19,12 +19,20 @@ public class LottoPaper {
         if (numberList.size() > MAX_LIST_SIZE) {
             throw new IllegalArgumentException(Error.ERROR_MAX_LIST_LOTTO_PAPER.getMsg());
         }
-        if (numberList.stream()
-                .map(LottoNum::getLottoNum)
-                .distinct()
-                .count() != numberList.size()) {
+        if (isReduplication(numberList)) {
             throw new IllegalArgumentException(Error.ERROR_REDUPLICATION_LOTTO_PAPER.getMsg());
         }
+    }
+
+    private int getDistinctCount(List<LottoNum> numberList) {
+        return (int) numberList.stream()
+                .map(LottoNum::getLottoNum)
+                .distinct()
+                .count();
+    }
+
+    private boolean isReduplication(List<LottoNum> numberList) {
+        return getDistinctCount(numberList) != numberList.size();
     }
 
     public List<LottoNum> getLottoNumbers() {
