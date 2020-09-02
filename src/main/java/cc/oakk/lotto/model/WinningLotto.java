@@ -11,7 +11,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.lotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public Rank score(Lotto target) {

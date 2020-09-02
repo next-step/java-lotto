@@ -31,7 +31,7 @@ public class Lotto implements Printable<Lotto> {
 
     private List<LottoNumber> validateNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
