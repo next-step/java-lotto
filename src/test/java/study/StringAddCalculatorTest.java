@@ -32,7 +32,8 @@ public class StringAddCalculatorTest {
     @ValueSource(strings = {"-1", "-1,2,3"})
     public void splitAndSum_negative(String str) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(str))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("음수는 입력할 수 없습니다.");
     }
 
     @DisplayName("쉼표 구분자 문자열 테스트")
