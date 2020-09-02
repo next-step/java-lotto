@@ -20,17 +20,4 @@ public class LottoGamesTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Price ERR");
     }
-
-    @DisplayName("보너스 번호 찾기 테스트")
-    @Test
-    void findBonusTest() {
-        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 9));
-        Set<Integer> nomallotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
-
-        Lottos lottos = new Lottos();
-        Lotto one = new Lotto(onelotto);
-        lottos.setWinnerNumber(new Lotto(nomallotto));
-
-        assertThat(lottos.findBonus(one)).isEqualTo(9);
-    }
 }

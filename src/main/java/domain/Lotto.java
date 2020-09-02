@@ -40,11 +40,7 @@ public class Lotto {
 
     private void validateNumberRange(Set<Integer> lotto) {
         boolean rangeValidate = lotto.stream()
-                .allMatch(c ->c<= LAST_NUMBER);
-
-//        if (bonus > LAST_NUMBER) {
-//            throw new IllegalArgumentException("보너스 숫자 범위 입력 오류!!");
-//        }
+                .allMatch(c -> c <= LAST_NUMBER && c >= ONE);
 
         if (!rangeValidate) {
             throw new IllegalArgumentException("숫자 45내 범위 입력 오류!!");

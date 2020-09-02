@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.List;
-
 import static utility.UserInput.WON;
 
 public class LottoGames {
@@ -34,15 +32,5 @@ public class LottoGames {
             throw new IllegalArgumentException("Price ERR!");
         }
         return price / WON;
-    }
-
-    public void validateBonus(Lotto winner,int bonus){
-        List<Integer> list = winner.getLottoNumber();
-
-        boolean hasComponent =  list.contains(bonus);
-
-        if(hasComponent){
-            throw new IllegalArgumentException("Bonus number Err!");
-        }
     }
 }

@@ -1,11 +1,8 @@
 package utility;
 
-import domain.Lotto;
+import domain.WinnerNumber;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
@@ -30,15 +27,10 @@ public class UserInput {
         return input;
     }
 
-    public static Lotto getWinnerTicket() {
+    public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
 
-        Set<Integer> lotto = Arrays.stream(winnerNumber)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        return new Lotto(lotto);
+        return new WinnerNumber(winnerNumber);
     }
 
     private static String[] inputWinnerNumber() {

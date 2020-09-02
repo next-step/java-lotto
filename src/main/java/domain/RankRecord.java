@@ -1,31 +1,30 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RankRecord {
-    public static final int RECORD_SIZE = 6;
     public static final int ONE = 1;
 
-    private List<Integer> recordPool;
+    private Map<Rank, Integer> recordPool;
 
     public RankRecord() {
-        recordPool = new ArrayList<>();
+        recordPool = new HashMap<>();
 
-        for (int i = 0; i < RECORD_SIZE; i++) {
-            recordPool.add(0);
+        Rank[] ranks = Rank.values();
+
+        for (Rank rank : ranks) {
+            recordPool.put(rank, 0);
         }
     }
 
-    public List<Integer> getRecordPool() {
+    public Map<Rank, Integer> getRecordPool() {
         return recordPool;
     }
 
     public void recordOfRankings(Rank ranking) {
-        int rank = ranking.ordinal() + ONE;
-
-        int rankCount = recordPool.get(rank);
-        recordPool.set(rank, rankCount + ONE);
+        int rankCount = recordPool.get(ranking);
+        recordPool.put(ranking, rankCount + ONE);
     }
 
     public int sumOfPrice() {
@@ -34,9 +33,9 @@ public class RankRecord {
         int price = 0;
         Rank[] ranks = Rank.values();
 
-        for (int i = 1; i < RECORD_SIZE; i++) {
-            ea = recordPool.get(i);
-            price = ranks[i - 1].getWinnerPrice();
+        for (Rank rank : ranks) {
+            ea = recordPool.get(rank);
+            price = rank.getWinnerPrice();
             sum += ea * price;
         }
         return sum;

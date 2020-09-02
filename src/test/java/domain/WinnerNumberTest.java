@@ -13,17 +13,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerNumberTest {
 
-    @DisplayName("getCountingNumber 테스트 ")
+    @DisplayName("당첨번호랑_몇개_일치하는지_테스트 ")
     @Test
     void 당첨번호랑_몇개_일치하는지_테스트() {
+        String lastWinnerNumber = "1,2,3,4,5,9";
+        String[] input = lastWinnerNumber.split(",");
+        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(new WinnerNumber(input).getCountingNumber(
+                new Lotto(onelotto))).isEqualTo(5);
+    }
+
+    @DisplayName("보너스 번호 찾기 테스트")
+    @Test
+    void findBonusTest() {
+        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 9));
         String lastWinnerNumber = "1,2,3,4,5,6";
         String[] input = lastWinnerNumber.split(",");
-        Set<Integer> winner = new HashSet<>(Arrays.asList(1, 2, 3, 4, 8, 9));
-        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 8, 6));
 
-        Lottos lottos = new Lottos();
-        lottos.setWinnerNumber(new Lotto(winner));
+        Lotto one = new Lotto(onelotto);
 
-        assertThat(lottos.getCountingNumber(new Lotto(onelotto))).isEqualTo(5);
+        assertThat(new WinnerNumber(input).findBonusNumber(one)).isEqualTo(9);
     }
 }
