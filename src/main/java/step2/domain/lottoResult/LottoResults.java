@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResults {
-    private static final int MIN_MATCH_NUMBER = 3;
     private List<LottoResult> lottoResults;
 
     private LottoResults(List<LottoResult> lottoResults) {
