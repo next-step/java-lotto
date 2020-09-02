@@ -15,4 +15,13 @@ public class RankTest {
         assertThat(Rank.valueOf(4)).isEqualTo(Rank.THIRD);
         assertThat(Rank.valueOf(3)).isEqualTo(Rank.FOURTH);
     }
+
+    @DisplayName("rank에 따른 개수 확인 테스트")
+    @Test
+    void countOfMatch() {
+        assertThat(Rank.countOfMatch(Rank.FIRST)).isEqualTo(6);
+        assertThat(Rank.countOfMatch(Rank.SECOND)).isEqualTo(5);
+        assertThat(Rank.countOfMatch(Rank.THIRD)).isEqualTo(4);
+        assertThat(Rank.countOfMatch(Rank.FOURTH)).isEqualTo(3);
+    }
 }
