@@ -15,6 +15,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     public static Lottos of(int count, LottoNumberGenerator lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i < count; i++) {
@@ -27,10 +31,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult match(List<Integer> winningNumbers) {
+    public LottoResult match(WinningLotto winningLotto) {
         return lottos.stream()
-                .filter(lotto -> Rank.MISS != Rank.valueOf(lotto.getMatchCountByWinningNumber(winningNumbers)))
-                .map(lotto -> Rank.valueOf(lotto.getMatchCountByWinningNumber(winningNumbers)))
+                .map(lotto -> Rank.valueOf(lotto.getMatchCountByWinningLotto(winningLotto)))
                 .collect(collectingAndThen(toList(), LottoResult::of));
     }
 

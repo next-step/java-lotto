@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.WinningLotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -19,17 +21,18 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputWinningNumberOfLastWeek() {
+    public static WinningLotto inputWinningNumberOfLastWeek() {
         System.out.println(QUESTION_WINNING_NUMBER_LAST_WEEK_MESSAGE);
         String input = scanner.next();
         System.out.println();
         return getWinningNumbersOfLastWeek(input);
     }
 
-    private static List<Integer> getWinningNumbersOfLastWeek(String input) {
-        return Arrays.stream(input.replaceAll(" ", "").split(LOTTO_NUMBER_DELIMITER))
+    private static WinningLotto getWinningNumbersOfLastWeek(String input) {
+        List<Integer> numbers = Arrays.stream(input.replaceAll(" ", "").split(LOTTO_NUMBER_DELIMITER))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
 
+        return WinningLotto.of(numbers);
     }
 }

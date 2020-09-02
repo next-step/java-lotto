@@ -21,13 +21,6 @@ public class LottoTest {
         lotto = Lotto.of(numbers);
     }
 
-    @DisplayName("로또 생성 테스트")
-    @Test
-    void create() {
-        lotto = Lotto.of(numbers);
-        assertThat(lotto.getMatchCount(lotto)).isEqualTo(6);
-    }
-
     @DisplayName("로또 개수 유효성 테스트")
     @Test
     void invalidLottoCount() {
@@ -42,19 +35,10 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 번호 매칭 테스트")
-    @Test
-    void hasLottoNumber() {
-        lotto = Lotto.of(numbers);
-        Lotto anotherLotto = Lotto.of(Arrays.asList(3, 21, 33, 7, 24, 19));
-        assertThat(lotto.getMatchCount(anotherLotto)).isEqualTo(1);
-    }
-
     @DisplayName("당첨 번호와 로또 번호 매칭 테스트")
     @Test
     void hasWinningNumber() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,8,11);
-        int count = lotto.getMatchCountByWinningNumber(winningNumbers);
-        assertThat(count).isEqualTo(4);
+        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1,2,3,4,8,11));
+        assertThat(lotto.getMatchCountByWinningLotto(winningLotto)).isEqualTo(4);
     }
 }

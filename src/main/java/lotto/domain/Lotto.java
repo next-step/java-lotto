@@ -32,19 +32,9 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public int getMatchCount(Lotto lotto) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto::hasLottoNumber)
-                .count();
-    }
-
-    private boolean hasLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
-    public int getMatchCountByWinningNumber(List<Integer> winningNumber) {
-        return (int) winningNumber.stream()
-                .filter(number -> hasLottoNumber(LottoNumber.of(number)))
+    public int getMatchCountByWinningLotto(WinningLotto winningLotto) {
+        return (int) winningLotto.getWinningNumbers().stream()
+                .filter(lottoNumbers::contains)
                 .count();
     }
 

@@ -1,13 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumberRandomGenerator;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
 
@@ -20,8 +15,8 @@ public class LottoController {
         Lottos lottos = lottoGame.makeLottos(new LottoNumberRandomGenerator());
         ResultView.printLottos(lottos.toStringByLotto());
 
-        List<Integer> winningNumbers = InputView.inputWinningNumberOfLastWeek();
-        LottoResult lottoResult = lottos.match(winningNumbers);
+        WinningLotto winningLotto = InputView.inputWinningNumberOfLastWeek();
+        LottoResult lottoResult = lottos.match(winningLotto);
 
         ResultView.printResultLottoGame(lottoResult);
         ResultView.printRateOfLottoGame(lottoResult.rateOfTotalPrize(purchaseAmount));
