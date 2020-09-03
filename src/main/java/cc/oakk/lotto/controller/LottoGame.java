@@ -79,12 +79,11 @@ public class LottoGame {
     }
 
     private <T> T tryUntilSuccess(Supplier<T> supplier, Consumer<Throwable> onError) {
-        while(true) {
-            try {
-                return supplier.get();
-            } catch (Exception e) {
-                onError.accept(e);
-            }
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            onError.accept(e);
+            return tryUntilSuccess(supplier, onError);
         }
     }
 }
