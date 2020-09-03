@@ -7,7 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -32,10 +33,11 @@ public class StringAddCalculatorTest {
     @DisplayName("숫자 하나인 경우 해당 숫자를 반환한다.")
     public void splitAndSum_one() {
         assertThat(StringAddCalculator.splitAndSum("1")).isEqualTo(1);
+        assertThat(StringAddCalculator.splitAndSum("0")).isEqualTo(0);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,a", "1,$:3", "-1,3", "1+3", "-1,-2"})
+    @ValueSource(strings = {"1,a", "1,$:3", "-1,3", "1+3", "-1,-2", "1 2", "//!\n1!2!3:4"})
     @DisplayName("숫자 이외의 값 또는 음수를 전달하는 경우 예외를 발생시킨다.")
     public void splitAndSum_IllegalArguments(String value) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(value)).isInstanceOf(RuntimeException.class);
@@ -43,7 +45,9 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("커스텀 구분자를 지정할 수 있다.")
-    public void splitByCustomDelimiter() {
-
+    public void splitAndSum_customDelimiter() {
+        assertThat(StringAddCalculator.splitAndSum("//;\n1;2")).isEqualTo(3);
+        assertThat(StringAddCalculator.splitAndSum("//!\n1!2!3")).isEqualTo(6);
+        assertThat(StringAddCalculator.splitAndSum("//!\n1!2!3!4")).isEqualTo(10);
     }
 }
