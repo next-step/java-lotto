@@ -46,4 +46,8 @@ public class Lotto {
             throw new IllegalArgumentException("숫자 45내 범위 입력 오류!!");
         }
     }
+
+    public boolean hasBonusNumber(int bonus){
+        return lottoNumber.contains(bonus);
+    }
 }

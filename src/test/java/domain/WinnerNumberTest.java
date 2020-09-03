@@ -19,20 +19,9 @@ public class WinnerNumberTest {
         String lastWinnerNumber = "1,2,3,4,5,9";
         String[] input = lastWinnerNumber.split(",");
         Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonus = 7;
 
-        assertThat(new WinnerNumber(input).getCountingNumber(
+        assertThat(new WinnerNumber(input,bonus).getCountingNumber(
                 new Lotto(onelotto))).isEqualTo(5);
-    }
-
-    @DisplayName("보너스 번호 찾기 테스트")
-    @Test
-    void findBonusTest() {
-        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 9));
-        String lastWinnerNumber = "1,2,3,4,5,6";
-        String[] input = lastWinnerNumber.split(",");
-
-        Lotto one = new Lotto(onelotto);
-
-        assertThat(new WinnerNumber(input).findBonusNumber(one)).isEqualTo(9);
     }
 }

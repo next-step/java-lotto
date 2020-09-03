@@ -13,8 +13,6 @@ public class Application {
         View.showLottoTickets(game.getLottos());
 
         WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-        int bonusNumber = UserInput.inputBonusNumber();
-        winnerNumber.validateBonus(bonusNumber);
         RankRecord record = winnerNumber.checkAllLottosWithWinnerLotto(game.getLottos());
 
         int sum = record.sumOfPrice();

@@ -25,17 +25,8 @@ public class NumbergeneratorTest {
         assertThat(numList.size()).isEqualTo(6);
     }
 
-    @DisplayName("번호 중복 여부 테스트")
     @Test
     void generateTest() {
-        Set<Integer> set = new HashSet<>();
-
-        Set<Integer> numList = numberGenerator.generate();
-        assertThat(numList.size()).isEqualTo(6);
-    }
-
-    @Test
-    void setLotto() {
 
         Set<Integer> numList = numberGenerator.generate();
 

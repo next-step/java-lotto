@@ -3,8 +3,6 @@ package domain;
 import static utility.UserInput.WON;
 
 public class LottoGames {
-    public static final int LOTTO_NUMBER = 6;
-    public static final int MIN_WINNER_NUMBER = 3;
 
     private Lottos lottos;
 

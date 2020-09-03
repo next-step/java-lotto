@@ -3,7 +3,7 @@ package view;
 import domain.*;
 
 public class View {
-
+    private static final int LOTTO_NUMBER = 6;
     private static final int ZERO = 0;
 
     public static void result(RankRecord record, int sum, int buyInput) {
@@ -26,7 +26,7 @@ public class View {
 
     public static void getLottoNumbers(Lotto lotto) {
         System.out.print("[");
-        for (int j = 0; j < LottoGames.LOTTO_NUMBER; j++) {
+        for (int j = 0; j < LOTTO_NUMBER; j++) {
             System.out.print(lotto.getLottoNumber().get(j) + " ");
         }
         System.out.println("]");

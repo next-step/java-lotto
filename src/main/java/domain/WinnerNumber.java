@@ -7,27 +7,26 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static domain.LottoGames.MIN_WINNER_NUMBER;
-
 public class WinnerNumber {
+    public static final int MIN_WINNER_NUMBER = 3;
 
     private Lotto winnerNumber;
     private int bonusNumber;
 
-    public WinnerNumber(String[] winnerNumber) {
+    public WinnerNumber(String[] winnerNumber, int bonusNumber) {
         Set<Integer> winnerLotto = Arrays.stream(winnerNumber)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toSet());
 
+        validateBonus(winnerLotto, bonusNumber);
+
+        this.bonusNumber = bonusNumber;
         this.winnerNumber = new Lotto(winnerLotto);
     }
 
-    public void validateBonus(int bonus) {
-        bonusNumber = bonus;
-        List<Integer> list = winnerNumber.getLottoNumber();
-
-        boolean hasComponent = list.contains(bonus);
+    public void validateBonus(Set<Integer>lotto, int bonus) {
+        boolean hasComponent = lotto.contains(bonus);
 
         if (hasComponent) {
             throw new IllegalArgumentException("Bonus number Err!");
@@ -44,10 +43,10 @@ public class WinnerNumber {
 
 
     private void doRecord(Lotto lotto, RankRecord rankRecord) {
-        int count = countNumber(lotto);
+        int count = getCountingNumber(lotto);
         boolean matchBonus = false;
 
-        if (count == 5 && findBonusNumber(lotto) == bonusNumber) {
+        if (count == 5 && lotto.hasBonusNumber(bonusNumber)) {
             matchBonus = true;
         }
 
@@ -56,11 +55,6 @@ public class WinnerNumber {
             rankRecord.recordOfRankings(ranking);
         }
     }
-
-    private int countNumber(Lotto lotto) {
-        return getCountingNumber(lotto);
-    }
-
 
     int getCountingNumber(Lotto lotto) {
         int count = (int) lotto.getLottoNumber()
@@ -71,11 +65,7 @@ public class WinnerNumber {
         return count;
     }
 
-    public int findBonusNumber(Lotto lotto) {
-        Optional<Integer> bonus = lotto.getLottoNumber().stream()
-                .filter(e -> !winnerNumber.getLottoNumber().contains(e))
-                .findFirst();
-
-        return (int) bonus.get();
+    public Lotto getWinnerNumber() {
+        return winnerNumber;
     }
 }

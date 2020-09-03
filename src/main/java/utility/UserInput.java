@@ -29,8 +29,9 @@ public class UserInput {
 
     public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
+        int bonusNumber = UserInput.inputBonusNumber();
 
-        return new WinnerNumber(winnerNumber);
+        return new WinnerNumber(winnerNumber,bonusNumber);
     }
 
     private static String[] inputWinnerNumber() {
