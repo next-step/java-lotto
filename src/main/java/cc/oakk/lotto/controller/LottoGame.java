@@ -1,6 +1,7 @@
 package cc.oakk.lotto.controller;
 
 import cc.oakk.lotto.model.*;
+import cc.oakk.lotto.util.ValidationAdapters;
 import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.ResultView;
 
@@ -66,9 +67,8 @@ public class LottoGame {
         inputView.printManualLottoCountInputHeader();
         return tryUntilSuccess(() -> {
             int count = inputView.readManualLottoCount();
-            if (count * lottoPrice > money) {
-                throw new IllegalArgumentException("입력하신 금액 보다 더 많이 구매하실 수 없습니다.");
-            }
+            int moneyAfterPurchase = money - count * lottoPrice;
+            ValidationAdapters.throwIfNegative(moneyAfterPurchase, "입력하신 금액 보다 더 많이 구매하실 수 없습니다.");
             return count;
         }, inputView::printError);
     }
