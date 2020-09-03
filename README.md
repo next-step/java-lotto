@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+### step2.
+* Lotto 클래스 구현
+    * shuffle를 이용하여 1~46개 중 6개 숫자 랜덤 배부
+* 입출력 UI InputView, ResultView 클래스 분리
+* Lotto의 당첨 갯수를 학인하는 TC 추가

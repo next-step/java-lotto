@@ -18,7 +18,7 @@ public class Lotto {
 
     private List<Integer> ticket = new ArrayList<>();
 
-    public Lotto(){
+    public Lotto() {
         shuffle();
     }
 
@@ -29,7 +29,11 @@ public class Lotto {
         ticket.sort(Comparator.naturalOrder());
     }
 
-    public int getResult(Integer[] winningNumbers){
+    public List<Integer> getTicket() {
+        return new ArrayList<>(this.ticket);
+    }
+
+    public int getResult(Integer[] winningNumbers) {
         return (int) Arrays.stream(winningNumbers)
             .filter(number -> ticket.contains(number))
             .count();

@@ -8,6 +8,7 @@ import java.util.Map;
 public class Lottery {
 
     public static final Map<Integer, Integer> prize = new LinkedHashMap<>();
+
     static {
         prize.put(3, 5_000);
         prize.put(4, 50_000);
@@ -19,8 +20,9 @@ public class Lottery {
 
     public static void main(String[] args) {
         int ticketCount = InputView.getPurchaseCount();
+
         List<Lotto> lottoList = new ArrayList<>();
-        for(int i=0; i<ticketCount; i++){
+        for (int i = 0; i < ticketCount; i++) {
             lottoList.add(new Lotto());
         }
         ResultView.printLotto(lottoList);
