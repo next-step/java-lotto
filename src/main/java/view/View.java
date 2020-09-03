@@ -5,6 +5,8 @@ import domain.Lottos;
 import domain.Rank;
 import domain.RankRecord;
 
+import java.util.Arrays;
+
 import static utility.UserInput.WON;
 
 public class View {
@@ -31,6 +33,10 @@ public class View {
 
     public static void getLottoNumbers(Lotto lotto) {
         System.out.print("[");
+/*
+        Arrays.stream(lotto.getLottoNumber().toArray())
+                .forEach(System.out::println);
+*/
         for (int j = 0; j < LOTTO_NUMBER; j++) {
             System.out.print(lotto.getLottoNumber().get(j).getNumber() + " ");
         }

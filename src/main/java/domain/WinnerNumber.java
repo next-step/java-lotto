@@ -50,6 +50,7 @@ public class WinnerNumber{
 
         if (count >= MIN_WINNER_NUMBER) {
             Rank ranking = Rank.valueOf(count, matchBonus);
+            System.out.println(ranking);
             rankRecord.recordOfRankings(ranking);
         }
     }
@@ -57,9 +58,9 @@ public class WinnerNumber{
     int getCountingNumber(Lotto lotto) {
         int count = (int) lotto.getLottoNumber()
                 .stream()
-                .filter(winnerNumber.getLottoNumber()::contains)
+                .filter(e->winnerNumber.getLottoNumber().contains(e))
                 .count();
-//todo
+
         System.out.println(count);
         return count;
     }

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +50,6 @@ public class Lotto {
     }
 
     public boolean hasBonusNumber(int bonus){
-        return lottoNumber.contains(bonus);
+        return lottoNumber.contains(new LottoNo(bonus));
     }
 }
