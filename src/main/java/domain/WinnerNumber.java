@@ -12,9 +12,9 @@ public class WinnerNumber{
     private int bonusNumber;
 
     public WinnerNumber(String[] winnerNumber, int bonusNumber) {
-        Set<Integer> winnerLotto = Arrays.stream(winnerNumber)
+        Set<LottoNo> winnerLotto = Arrays.stream(winnerNumber)
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(e->new LottoNo(e))
                 .collect(Collectors.toSet());
 
         validateBonus(winnerLotto, bonusNumber);
@@ -23,7 +23,7 @@ public class WinnerNumber{
         this.winnerNumber = new Lotto(winnerLotto);
     }
 
-    public void validateBonus(Set<Integer>lotto, int bonus) {
+    public void validateBonus(Set<LottoNo>lotto, int bonus) {
         boolean hasComponent = lotto.contains(bonus);
 
         if (hasComponent) {
@@ -59,7 +59,8 @@ public class WinnerNumber{
                 .stream()
                 .filter(winnerNumber.getLottoNumber()::contains)
                 .count();
-
+//todo
+        System.out.println(count);
         return count;
     }
 

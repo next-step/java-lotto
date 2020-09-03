@@ -9,38 +9,39 @@ public class Lotto {
     private static final int SIX = 6;
     private static final int ONE = 1;
 
-    private Set<Integer> lottoNumber;
+    private Set<LottoNo> lottoNumber;
+//    private Set<Integer> lottoNumber;
 
-    public Lotto(Set<Integer> lotto) {
+    public Lotto(Set<LottoNo> lotto) {
         validateLottoNumber(lotto);
         this.lottoNumber = lotto;
     }
 
-    private void validateLottoNumber(Set<Integer> lotto) {
+    private void validateLottoNumber(Set<LottoNo> lotto) {
         validateEmpty(lotto);
         validateSize(lotto);
         validateNumberRange(lotto);
     }
 
-    private void validateEmpty(Set<Integer> lotto) {
+    private void validateEmpty(Set<LottoNo> lotto) {
         if (lotto.size() == 0 || lotto == null) {
             throw new IllegalArgumentException("empty!");
         }
     }
 
-    private void validateSize(Set<Integer> lotto) {
+    private void validateSize(Set<LottoNo> lotto) {
         if (lotto.size() != SIX) {
             throw new IllegalArgumentException("not 6 number");
         }
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNo> getLottoNumber() {
         return new ArrayList<>(lottoNumber);
     }
 
-    private void validateNumberRange(Set<Integer> lotto) {
+    private void validateNumberRange(Set<LottoNo> lotto) {
         boolean rangeValidate = lotto.stream()
-                .allMatch(c -> c <= LAST_NUMBER && c >= ONE);
+                .allMatch(c -> c.getNumber() <= LAST_NUMBER && c.getNumber() >= ONE);
 
         if (!rangeValidate) {
             throw new IllegalArgumentException("숫자 45내 범위 입력 오류!!");

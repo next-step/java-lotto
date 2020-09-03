@@ -32,7 +32,7 @@ public class View {
     public static void getLottoNumbers(Lotto lotto) {
         System.out.print("[");
         for (int j = 0; j < LOTTO_NUMBER; j++) {
-            System.out.print(lotto.getLottoNumber().get(j) + " ");
+            System.out.print(lotto.getLottoNumber().get(j).getNumber() + " ");
         }
         System.out.println("]");
     }

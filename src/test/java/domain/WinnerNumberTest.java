@@ -18,7 +18,7 @@ public class WinnerNumberTest {
     void 당첨번호랑_몇개_일치하는지_테스트() {
         String lastWinnerNumber = "1,2,3,4,5,9";
         String[] input = lastWinnerNumber.split(",");
-        Set<Integer> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Set<LottoNo> onelotto = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonus = 7;
 
         assertThat(new WinnerNumber(input,bonus).getCountingNumber(

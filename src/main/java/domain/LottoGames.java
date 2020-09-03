@@ -21,14 +21,14 @@ public class LottoGames {
     }
 
     private void manualMakeLotto(int manualTries) {
-        Set<Integer> manualLotto;
+        Set<LottoNo> manualLotto;
         String[] inputs;
 
         for (int i = 0; i < manualTries; i++) {
             inputs = SC.nextLine().split(",");
             manualLotto = Arrays.stream(inputs)
                     .mapToInt(Integer::parseInt)
-                    .boxed()
+                    .mapToObj(e->new LottoNo(e))
                     .collect(Collectors.toSet());
 
             lottos.addLotto(new Lotto(manualLotto));
