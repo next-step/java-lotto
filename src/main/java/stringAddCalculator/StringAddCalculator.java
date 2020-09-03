@@ -5,21 +5,19 @@ import java.util.Objects;
 
 public class StringAddCalculator {
 
-    public static final String DELIMITER = ",|:";
-
     public static int splitAndSum(String value) {
         if (isNullOrEmpty(value)) {
             return 0;
         }
-        return sum(value.split(DELIMITER));
+        return sum(StringUtils.split(value));
     }
 
     private static boolean isNullOrEmpty(String value) {
         return Objects.isNull(value) || value.isEmpty();
     }
 
-    private static int sum(String[] values) {
-        return Arrays.stream(values)
+    private static int sum(String[] tokens) {
+        return Arrays.stream(tokens)
                 .mapToInt(StringAddCalculator::mapToPositiveInt)
                 .sum();
     }
