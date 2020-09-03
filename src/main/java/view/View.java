@@ -1,12 +1,17 @@
 package view;
 
-import domain.*;
+import domain.Lotto;
+import domain.Lottos;
+import domain.Rank;
+import domain.RankRecord;
+
+import static utility.UserInput.WON;
 
 public class View {
     private static final int LOTTO_NUMBER = 6;
     private static final int ZERO = 0;
 
-    public static void result(RankRecord record, int sum, int buyInput) {
+    public static void result(RankRecord record, long sum, int buyInput) {
         System.out.println(sum);
         System.out.println("당첨 통계");
         System.out.println("--------");
@@ -36,5 +41,11 @@ public class View {
         for (int i = 0; i < lottos.getNumOfLottos(); i++) {
             View.getLottoNumbers(lottos.getOneLotto(i));
         }
+    }
+
+    public static void showManualAndAutoNumber(int buyInput, int manual) {
+        int auto = buyInput / WON - manual;
+        System.out.printf("수동으로 %d장, 자동으로 %d", manual, auto);
+        System.out.println("개를 구매했습니다");
     }
 }

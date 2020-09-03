@@ -2,12 +2,10 @@ package domain;
 
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinnerNumber {
+public class WinnerNumber{
     public static final int MIN_WINNER_NUMBER = 3;
 
     private Lotto winnerNumber;

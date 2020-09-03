@@ -2,7 +2,10 @@ package utility;
 
 import domain.WinnerNumber;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
@@ -10,6 +13,8 @@ public class UserInput {
     private static final String AFTER_MESSEGE = "지난 주 당첨 번호를 입력하세요.";
     private static final String DELIMTER = ",";
     private static final String BONUS_MESSEGE = "보너스 볼을 입력해 주세요.";
+    private static final String MANUAL_MESSEGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_INPUT= "수동으로 구매할 번호를 입력해 주세요.";
 
     public static final int WON = 1000;
     public static final Scanner SC = new Scanner(System.in);
@@ -22,16 +27,25 @@ public class UserInput {
         int input = SC.nextInt();
         SC.nextLine();
 
-        System.out.println(input/WON+ PURCHASE_MESSEGE);
+//        System.out.println(input / WON + PURCHASE_MESSEGE);
 
         return input;
+    }
+
+    public static int tellHoWManyManualBuy() {
+        System.out.println(MANUAL_MESSEGE);
+        int manual = SC.nextInt();
+        SC.nextLine();
+        System.out.println(MANUAL_INPUT);
+
+        return manual;
     }
 
     public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
         int bonusNumber = UserInput.inputBonusNumber();
 
-        return new WinnerNumber(winnerNumber,bonusNumber);
+        return new WinnerNumber(winnerNumber, bonusNumber);
     }
 
     private static String[] inputWinnerNumber() {
@@ -42,7 +56,7 @@ public class UserInput {
         return inputs;
     }
 
-    public static int inputBonusNumber(){
+    public static int inputBonusNumber() {
         System.out.println(BONUS_MESSEGE);
 
         return SC.nextInt();

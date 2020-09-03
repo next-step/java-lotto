@@ -16,8 +16,14 @@ public class LottoGamesTest {
 
     @Test
     void makeLottoTicketTest() {
-        assertThatThrownBy(() -> new LottoGames(-1000))
+        assertThatThrownBy(() -> new LottoGames(-1000,0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Price ERR");
+    }
+
+    @Test
+    void manualMakeLottoTest(){
+        assertThat(new LottoGames(10000,3)
+                .getLottos().getNumOfLottos()).isEqualTo(10);
     }
 }
