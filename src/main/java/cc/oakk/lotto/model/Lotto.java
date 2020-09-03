@@ -18,13 +18,13 @@ public class Lotto implements Printable<Lotto> {
     public Lotto(List<Integer> numbers) {
         throwIfNull(numbers);
         if (numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format("Lotto's number size must be %d!", NUMBER_COUNT));
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야합니다.!", NUMBER_COUNT));
         }
 
         List<LottoNumber> validatedList = validateNumbers(numbers);
 
         if (validatedList.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException("Lotto's number should not be duplicated.");
+            throw new IllegalArgumentException("로또 번호가 겹쳐서는 안됩니다.");
         }
         this.numbers = Collections.unmodifiableList(validatedList);
     }
