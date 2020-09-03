@@ -11,7 +11,7 @@ public class WinningEarningsRate {
     }
 
     private double calculationEarningsRate(int money, double totalWinningMoney) {
-        return Math.round(totalWinningMoney / money * 100) / 100.0;
+        return Math.floor(totalWinningMoney / money * 100) / 100.0;
     }
 
     public double getEarningsRate() {
