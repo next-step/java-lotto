@@ -5,7 +5,7 @@ import cc.oakk.lotto.model.Lottos;
 import cc.oakk.lotto.view.printer.Printable;
 
 public interface ResultView {
-    void repeatPurchasedLottoCount(int count);
+    void repeatPurchasedLottoCount(int count, int manualCount);
     void printLottos(Printable<Lottos> lottosPrintable);
 
     void printResultHeader();

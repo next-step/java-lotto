@@ -4,11 +4,16 @@ import java.util.List;
 
 public interface InputView {
     int readMoney();
-    List<Integer> readWinningNumbers();
+    int readManualLottoCount();
+    List<Integer> readNumbers();
     int readBonusNumber();
 
     void printMoneyInputHeader();
+    void printManualLottoCountInputHeader();
+    void printManualLottoNumbersInputHeader();
     void printWinningNumberInputHeader();
 
     void printBonusNumberInputHeader();
+
+    void printError(Throwable throwable);
 }
