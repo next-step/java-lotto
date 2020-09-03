@@ -21,20 +21,21 @@ class WinningTableTest {
 
     @Test
     void getMatchCountTable() {
-        Assertions.assertThat(winningTable.getMatchCountTable()).containsKeys(Rank.values());
+        Assertions.assertThat(winningTable.getMatchCountTable())
+                .isEqualTo(new WinningTable().getMatchCountTable());
     }
 
     @Test
     @DisplayName("일치하는 수의 담청자 수를 증가시킨다.")
     void setAutoIncrementMatchCountResult() {
-        winningTable.setAutoIncrementMatchCountResult(3);
-        winningTable.setAutoIncrementMatchCountResult(3);
-        Assertions.assertThat(winningTable.getMatchCountTable().get(Rank.getRank(3))).isEqualTo(2);
+        winningTable.setAutoIncrementMatchCountResult(3, false);
+        winningTable.setAutoIncrementMatchCountResult(3, false);
+        Assertions.assertThat(winningTable.getMatchCountTable().get(Rank.getRank(3,false))).isEqualTo(2);
     }
 
     @Test
     void getTotalWinningMoney() {
-        winningTable.setAutoIncrementMatchCountResult(3);
+        winningTable.setAutoIncrementMatchCountResult(4, false);
         Assertions.assertThat(winningTable.getTotalWinningMoney()).isEqualTo(Rank.FOURTH.getWinningMoney());
     }
 }

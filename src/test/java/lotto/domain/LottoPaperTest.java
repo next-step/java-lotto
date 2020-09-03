@@ -52,7 +52,7 @@ class LottoPaperTest {
     }
 
     @Test
-    void testToString() {
-        System.out.println(lottoPaper);
+    void isContain() {
+        Assertions.assertThat(lottoPaper.isContain(6)).isTrue();
     }
 }

@@ -16,7 +16,11 @@ public class LottoGame {
         ResultView.showInputWinningNumber();
 
         WinningResult winningResult = new WinningResult(InputView.inputText());
-        WinningTable winningTable = lottoPapers.makeWinningTable(winningResult.getWinninLottoNumberToIntegerList());
+
+        ResultView.showInputBonusNumber();
+        BonusBall bonusBall = new BonusBall(InputView.inputText());
+
+        WinningTable winningTable = lottoPapers.makeWinningTable(winningResult.getWinninLottoNumberToIntegerList(), bonusBall.getBonusNumber());
 
         ResultView.showResult(winningTable.getMatchCountTable());
         ResultView.showDelimiter();

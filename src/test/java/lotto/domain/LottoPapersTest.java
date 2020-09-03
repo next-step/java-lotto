@@ -21,7 +21,7 @@ class LottoPapersTest {
 
     @Test
     void makeWinningTable() {
-        Assertions.assertThat(lottoPapers.makeWinningTable(Arrays.asList()))
+        Assertions.assertThat(lottoPapers.makeWinningTable(Arrays.asList(), 0))
                 .isEqualToComparingFieldByField(new WinningTable());
     }
 }

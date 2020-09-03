@@ -12,8 +12,6 @@ class LottoNumTest {
     @Test
     void getLottoNumVaild() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    LottoNum lottoNum = new LottoNum(46);
-                });
+                .isThrownBy(() -> new LottoNum(46));
     }
 }

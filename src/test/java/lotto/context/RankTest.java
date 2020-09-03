@@ -21,6 +21,11 @@ class RankTest {
 
     @Test
     void getRank() {
-        Assertions.assertThat(Rank.getRank(3)).isEqualTo(Rank.FOURTH);
+        Assertions.assertThat(Rank.getRank(4, false)).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    void getMatchRankCount() {
+        Assertions.assertThat(Rank.getMatchRankCount(5)).isEqualTo(2);
     }
 }

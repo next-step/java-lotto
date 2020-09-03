@@ -33,10 +33,10 @@ public class LottoPapers {
     }
 
 
-    public WinningTable makeWinningTable(List<Integer> winningNumbers) {
+    public WinningTable makeWinningTable(List<Integer> winningNumbers, int bonusNumber) {
         WinningTable winningTable = new WinningTable();
         papers.forEach(lottoPaper -> {
-            winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers));
+            winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers), lottoPaper.isContain(bonusNumber));
         });
         return winningTable;
     }

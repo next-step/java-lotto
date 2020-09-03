@@ -46,6 +46,12 @@ public class LottoPaper {
                 .count();
     }
 
+    public boolean isContain(int number) {
+        return lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .anyMatch(integer -> integer == number);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.stream()

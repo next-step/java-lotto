@@ -10,6 +10,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    private static final int MATCH_DUPLICATE = 1;
+
     private int countOfMatch;
     private int winningMoney;
 
@@ -26,10 +28,18 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank getRank(int countOfMatch) {
+    public static Rank getRank(int countOfMatch, boolean matchBonus) {
         // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
+        int skipIndex = getMatchRankCount(countOfMatch) > MATCH_DUPLICATE && !matchBonus ? 1 : 0;
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
+                .skip(skipIndex)
                 .findFirst().get();
+    }
+
+    static int getMatchRankCount(int countOfMatch) {
+        return (int) Arrays.stream(values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .count();
     }
 }
