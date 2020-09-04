@@ -46,6 +46,11 @@ public class LottoResults implements Printable<LottoResults> {
         return revenue;
     }
 
+    public double calculateRevenueRate(LottoPrizeProvider<?> provider, int lottoPrice) {
+        throwIfNull(provider);
+        return (double) calculateRevenue(provider) / (size() * lottoPrice);
+    }
+
     public int getRankCount(Rank rank) {
         return get(throwIfNull(rank)).size();
     }
