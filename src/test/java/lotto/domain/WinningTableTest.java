@@ -6,11 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class WinningTableTest {
     WinningTable winningTable;
 
@@ -26,7 +21,7 @@ class WinningTableTest {
     }
 
     @Test
-    @DisplayName("일치하는 수의 담청자 수를 증가시킨다.")
+    @DisplayName("일치하는 수의 당첨자 수를 증가시킨다.")
     void setAutoIncrementMatchCountResult() {
         winningTable.setAutoIncrementMatchCountResult(3, false);
         winningTable.setAutoIncrementMatchCountResult(3, false);
