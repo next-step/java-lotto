@@ -35,16 +35,10 @@ public class LottoGame {
         WinningLotto winningLotto = getWinningLotto(winningNumbers);
 
         LottoResults results = lottos.getResults(winningLotto);
-        printLottoResults(results);
-    }
-
-    private void printLottoResults(LottoResults results) {
-        resultView.printResultHeader();
         resultView.printLottoResults(results);
     }
 
     private WinningLotto getWinningLotto(List<Integer> winningNumbers) {
-        inputView.printBonusNumberInputHeader();
         return tryUntilSuccess(() -> new WinningLotto(winningNumbers, inputView.readBonusNumber()),
                 inputView::printError);
     }
@@ -63,7 +57,6 @@ public class LottoGame {
     }
 
     private int getManualLottoCount(Money money, int lottoPrice) {
-        inputView.printManualLottoCountInputHeader();
         return tryUntilSuccess(() -> {
             int count = inputView.readManualLottoCount();
             int moneyAfterPurchase = money.get() - count * lottoPrice;
@@ -74,7 +67,6 @@ public class LottoGame {
     }
 
     private Money getMoney() {
-        inputView.printMoneyInputHeader();
         return tryUntilSuccess(() -> new Money(inputView.readMoney()), inputView::printError);
     }
 

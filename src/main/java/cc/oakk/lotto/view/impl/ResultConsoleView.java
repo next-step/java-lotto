@@ -28,12 +28,8 @@ public class ResultConsoleView implements ResultView {
     }
 
     @Override
-    public void printResultHeader() {
-        stringPrinter.print("\n당첨 통계\n---------");
-    }
-
-    @Override
     public void printLottoResults(Printable<LottoResults> lottoResultsPrintable) {
+        stringPrinter.print("\n당첨 통계\n---------");
         lottoResultsPrintable.print(lottoResultsPrinter);
     }
 }

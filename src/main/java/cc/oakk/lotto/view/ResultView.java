@@ -8,6 +8,5 @@ public interface ResultView {
     void repeatPurchasedLottoCount(int count, int manualCount);
     void printLottos(Printable<Lottos> lottosPrintable);
 
-    void printResultHeader();
     void printLottoResults(Printable<LottoResults> lottoResultsPrintable);
 }
