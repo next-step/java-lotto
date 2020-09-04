@@ -19,7 +19,13 @@ public class LottoTest {
 
     @Test
     void validateEmptyTest() {
-        assertThatThrownBy(() -> new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5))))
+        assertThatThrownBy(() -> new Lotto(new HashSet<>(Arrays
+                .asList(new LottoNo(1)
+                        ,new LottoNo(2)
+                        ,new LottoNo(3)
+                        ,new LottoNo(4)
+                        ,new LottoNo(5)
+                        ,new LottoNo(6)))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("not 6");
     }

@@ -20,7 +20,7 @@ public class NumbergeneratorTest {
     @DisplayName("번호 생성 테스트")
     @Test
     void generateLottoTest() {
-        set<LottoNo> numList = numberGenerator.generate();
+        Set<LottoNo> numList = numberGenerator.generate();
 
         assertThat(numList.size()).isEqualTo(6);
     }
@@ -28,10 +28,10 @@ public class NumbergeneratorTest {
     @Test
     void generateTest() {
 
-        set<LottoNo> numList = numberGenerator.generate();
+        Set<LottoNo> numList = numberGenerator.generate();
 
         Lotto numbers = new Lotto(numList);
 
-        assertThat(numbers.set<LottoNo>().size()).isEqualTo(6);
+        assertThat(numbers.getLottoNumber().size()).isEqualTo(6);
     }
 }

@@ -1,11 +1,9 @@
 package utility;
 
+import domain.Money;
 import domain.WinnerNumber;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UserInput {
     private static final String BUY_MESSEGE = "구입금액을 입력해 주세요.";
@@ -22,14 +20,12 @@ public class UserInput {
     private UserInput() {
     }
 
-    public static int tellHowManyBuy() {
+    public static Money tellHowManyBuy() {
         System.out.println(BUY_MESSEGE);
         int input = SC.nextInt();
         SC.nextLine();
 
-//        System.out.println(input / WON + PURCHASE_MESSEGE);
-
-        return input;
+        return new Money(input);
     }
 
     public static int tellHoWManyManualBuy() {
@@ -43,7 +39,7 @@ public class UserInput {
 
     public static WinnerNumber getWinnerTicket() {
         String[] winnerNumber = inputWinnerNumber();
-        int bonusNumber = UserInput.inputBonusNumber();
+        int bonusNumber = inputBonusNumber();
 
         return new WinnerNumber(winnerNumber, bonusNumber);
     }

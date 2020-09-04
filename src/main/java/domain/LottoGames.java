@@ -5,22 +5,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static utility.UserInput.SC;
-import static utility.UserInput.WON;
 
 public class LottoGames {
 
     private Lottos lottos;
 
-    public LottoGames(int price, int manualTries) {
-        int tries = validatePrice(price);
-        int autoTries = tries - manualTries;
+    public LottoGames(int autoTries , int manualTries) {
         lottos = new Lottos();
 
-        manualMakeLotto(manualTries);
-        makeLottoTicket(autoTries);
+        makeLottoManual(manualTries);
+        makeLottoAuto(autoTries);
     }
 
-    private void manualMakeLotto(int manualTries) {
+    private void makeLottoManual(int manualTries) {
         Set<LottoNo> manualLotto;
         String[] inputs;
 
@@ -35,21 +32,13 @@ public class LottoGames {
         }
     }
 
-    private void makeLottoTicket(int autoTries) {
+    private void makeLottoAuto(int autoTries) {
         NumberGenerator generator = new NumberGenerator();
 
         for (int i = 0; i < autoTries; i++) {
             lottos.addLotto(new Lotto(generator.generate()));
         }
     }
-
-    private int validatePrice(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("Price ERR!");
-        }
-        return price / WON;
-    }
-
     public Lottos getLottos() {
         return lottos;
     }
