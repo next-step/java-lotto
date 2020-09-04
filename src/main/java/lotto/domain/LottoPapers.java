@@ -31,13 +31,4 @@ public class LottoPapers {
     public int getPapersSize() {
         return papers.size();
     }
-
-
-    public WinningTable makeWinningTable(List<Integer> winningNumbers, int bonusNumber) {
-        WinningTable winningTable = new WinningTable();
-        papers.forEach(lottoPaper -> {
-            winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(winningNumbers), lottoPaper.isContain(bonusNumber));
-        });
-        return winningTable;
-    }
 }

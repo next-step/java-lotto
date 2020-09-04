@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 class LottoPapersTest {
     private LottoPapers lottoPapers;
 
@@ -17,11 +15,5 @@ class LottoPapersTest {
     @Test
     void getPapersSize() {
         Assertions.assertThat(lottoPapers.getPapersSize()).isEqualTo(3);
-    }
-
-    @Test
-    void makeWinningTable() {
-        Assertions.assertThat(lottoPapers.makeWinningTable(Arrays.asList(), 0))
-                .isEqualToComparingFieldByField(new WinningTable());
     }
 }
