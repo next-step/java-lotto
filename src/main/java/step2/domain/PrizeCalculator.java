@@ -1,20 +1,22 @@
 package step2.domain;
 
+import java.util.List;
 import java.util.Map;
 
 public class PrizeCalculator {
 
-    public double calculateProfitRatio(Map<Integer, Integer> winningTicketCategories, int amount){
+    public double calculateProfitRatio(List<LottoTicket> tickets, int amount){
         double totalPrize = 0;
-        for(Map.Entry<Integer, Integer> entry : winningTicketCategories.entrySet()){
-            totalPrize = sumPrize(totalPrize, entry);
+
+        for(LottoTicket ticket : tickets){
+            totalPrize = sumPrize(totalPrize, ticket);
         }
 
         return amount == 0 ? 0 : totalPrize/amount;
     }
 
-    private double sumPrize(double totalPrize, Map.Entry<Integer, Integer> entry){
-        totalPrize = totalPrize + entry.getKey() * entry.getValue();
+    private double sumPrize(double totalPrize, LottoTicket lottoTicket){
+        totalPrize = totalPrize + lottoTicket.getPrizeResult();
         return totalPrize;
     }
 

@@ -6,61 +6,57 @@ import java.util.*;
 
 public class WinningTicketSelector {
 
-    private List<Integer> winningNumbers = new ArrayList<>();
-    private Map<Integer, Integer> winningTicketCategoriesByPrize = new LinkedHashMap<>();
+    private final List<Integer> winningNumbers = new ArrayList<>();
 
     public WinningTicketSelector(String inputWinningNumbers){
         Arrays.stream(inputWinningNumbers.split(Constant.WINNING_NUMBER_SEPERATOR)).forEach(e -> winningNumbers.add(Integer.parseInt(e)));
-        winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_FOURTH, Constant.ZERO);
-        winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_THIRD, Constant.ZERO);
-        winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_SECOND, Constant.ZERO);
-        winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_FIRST, Constant.ZERO);
     }
 
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
 
-    public Map<Integer, Integer> getWinningTicketCategoriesByPrize() {
-        return winningTicketCategoriesByPrize;
-    }
-
-    public void findWinningTicket(List<LottoTicket> tickets){
+    public List<LottoTicket> findWinningTicket(List<LottoTicket> tickets){
 
         for(LottoTicket ticket : tickets){
-            categorizeWinningTicketByPrize(checkWinningNumberCount(ticket));
+            ticket.checkWinningTicket(winningNumbers);
         }
 
+        return tickets;
     }
 
-    public int checkWinningNumberCount(LottoTicket ticket){
-        int count = 0;
-        for(int number : ticket.getNumbers()){
-            count = checkSameNumber(count, number);
+    public Map<Integer, List<LottoTicket>> categorizeWinningTicket(List<LottoTicket> tickets){
+        Map<Integer, List<LottoTicket>> winningTickets = new LinkedHashMap<>();
+        winningTickets.put(Constant.LOTTO_PRIZE_FOURTH, new ArrayList<>());
+        winningTickets.put(Constant.LOTTO_PRIZE_THIRD, new ArrayList<>());
+        winningTickets.put(Constant.LOTTO_PRIZE_SECOND, new ArrayList<>());
+        winningTickets.put(Constant.LOTTO_PRIZE_FIRST, new ArrayList<>());
+
+        for(LottoTicket ticket : tickets){
+            selectWinningTicketByPrize(winningTickets, ticket);
         }
-        return count;
+
+        return  winningTickets;
     }
 
-    private void categorizeWinningTicketByPrize(int count){
-        if(count == Constant.COUNT_THREE){
-            winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_FOURTH, winningTicketCategoriesByPrize.get(Constant.LOTTO_PRIZE_FOURTH) + Constant.COUNT_ONE);
+    private void selectWinningTicketByPrize(Map<Integer, List<LottoTicket>> winningTickets, LottoTicket ticket){
+
+        if(ticket.getPrizeResult() == Constant.LOTTO_PRIZE_FOURTH){
+            winningTickets.get(Constant.LOTTO_PRIZE_FOURTH).add(ticket);
         }
 
-        if(count == Constant.COUNT_FOUR){
-            winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_THIRD, winningTicketCategoriesByPrize.get(Constant.LOTTO_PRIZE_THIRD) + Constant.COUNT_ONE);
+        if(ticket.getPrizeResult() == Constant.LOTTO_PRIZE_THIRD){
+            winningTickets.get(Constant.LOTTO_PRIZE_THIRD).add(ticket);
         }
 
-        if(count == Constant.COUNT_FIVE){
-            winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_SECOND, winningTicketCategoriesByPrize.get(Constant.LOTTO_PRIZE_SECOND) + Constant.COUNT_ONE);
+        if(ticket.getPrizeResult() == Constant.LOTTO_PRIZE_SECOND){
+            winningTickets.get(Constant.LOTTO_PRIZE_SECOND).add(ticket);
         }
 
-        if(count == Constant.COUNT_SIX){
-            winningTicketCategoriesByPrize.put(Constant.LOTTO_PRIZE_FIRST, winningTicketCategoriesByPrize.get(Constant.LOTTO_PRIZE_FIRST) + Constant.COUNT_ONE);
+        if(ticket.getPrizeResult() == Constant.LOTTO_PRIZE_FIRST){
+            winningTickets.get(Constant.LOTTO_PRIZE_FIRST).add(ticket);
         }
-    }
 
-    private int checkSameNumber(int count, int number){
-        return winningNumbers.contains(number) ? count + Constant.COUNT_ONE : count;
     }
 
 }

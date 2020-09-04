@@ -7,21 +7,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class TicketSelector {
+public class LottoTicketMaker {
 
-    private List<Integer> lottoNumbers = new ArrayList<>();
-    private List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final List<Integer> lottoNumbers = new ArrayList<>();
 
-    public TicketSelector(){
-        createLottoNumbers();
+    public LottoTicketMaker(){
+        IntStream.rangeClosed(Constant.LOTTO_START_NUMBER, Constant.LOTTO_LAST_NUMBER).forEach(lottoNumbers::add);
     }
 
     public List<Integer> getLottoNumbers(){
         return lottoNumbers;
-    }
-
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
     }
 
     public int calculateAvailableCount(int amount){
@@ -40,16 +35,14 @@ public class TicketSelector {
         return new LottoTicket(numbers);
     }
 
-    public void buyAvailableLottoTickets(int ticketCount){
+    public List<LottoTicket> buyAvailableLottoTickets(int ticketCount){
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for(int i = 0; i < ticketCount; i++){
             lottoTickets.add(buySingleLottoTicket());
         }
 
-    }
-
-    private void createLottoNumbers(){
-        IntStream.rangeClosed(Constant.LOTTO_START_NUMBER, Constant.LOTTO_LAST_NUMBER).forEach(lottoNumbers::add);
+        return lottoTickets;
     }
 
 }

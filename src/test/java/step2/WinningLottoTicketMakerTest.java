@@ -3,22 +3,26 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoTicket;
-import step2.domain.PrizeCalculator;
+import step2.domain.WinningTicketSelector;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PrizeCalculatorTest {
+class WinningLottoTicketMakerTest {
 
-    private PrizeCalculator prizeCalculator = new PrizeCalculator();
+    private WinningTicketSelector winningTicketSelector = new WinningTicketSelector("1,2,3,4,5,6");
 
-    @DisplayName("수익률 계산 테스트")
+    @DisplayName("당첨 번호가 생성 되는지 테스트")
     @Test
-    void calculateProfitRatioTest(){
+    void winningNumbersTest(){
+        assertThat(winningTicketSelector.getWinningNumbers().size()).isEqualTo(6);
+    }
+
+    @DisplayName("티켓들 당첨 여부 판단로직 작동하는지 테스트")
+    @Test
+    void checkWinningNumberCountTest(){
         List<Integer> officialWinningNumbers = new ArrayList<>();
         officialWinningNumbers.add(1);
         officialWinningNumbers.add(2);
@@ -43,8 +47,8 @@ class PrizeCalculatorTest {
         tickets.add(firstTicket);
         tickets.add(secondTicket);
 
-        assertThat(prizeCalculator.calculateProfitRatio(tickets, 10000)).isEqualTo(1);
-
+        winningTicketSelector.findWinningTicket(tickets);
+        assertThat(tickets.get(0).getPrizeResult() + tickets.get(1).getPrizeResult()).isEqualTo(10000);
     }
 
 }
