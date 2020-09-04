@@ -18,6 +18,7 @@ public class WinningTable {
     private void setDefaultData() {
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
+                .skip(1)
                 .forEach(this::putDefaultData);
     }
 
@@ -32,11 +33,11 @@ public class WinningTable {
         return Collections.unmodifiableMap(matchCountTable);
     }
 
-    public void setAutoIncrementMatchCountResult(Integer matchCount) {
+    public void setAutoIncrementMatchCountResult(Integer matchCount, boolean isBonus) {
         if (matchCount < MIN_MATCH_COUNT) {
             return;
         }
-        matchCountTable.put(Rank.getRank(matchCount), matchCountTable.get(Rank.getRank(matchCount)) + ADD_AUTO_INCREMENT);
+        matchCountTable.put(Rank.getRank(matchCount, isBonus), matchCountTable.get(Rank.getRank(matchCount, isBonus)) + ADD_AUTO_INCREMENT);
     }
 
     Integer getTotalWinningMoney() {
