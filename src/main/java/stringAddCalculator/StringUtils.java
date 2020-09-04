@@ -10,6 +10,8 @@ public class StringUtils {
     private static final int DELIMITER_GROUP = 1;
     private static final int NUMBERS_GROUP = 2;
 
+    private StringUtils() {}
+
     public static String[] split(String value) {
         Matcher matcher = CUSTOM_PATTERN.matcher(value);
         if (matcher.find()) {

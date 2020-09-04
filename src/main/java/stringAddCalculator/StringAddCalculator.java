@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {}
+
     public static int splitAndSum(String value) {
         if (isNullOrEmpty(value)) {
             return 0;
