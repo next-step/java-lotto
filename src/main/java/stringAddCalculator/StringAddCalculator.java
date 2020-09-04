@@ -24,9 +24,13 @@ public class StringAddCalculator {
 
     private static int mapToPositiveInt(String value) {
         int number = Integer.parseInt(value);
-        if (number < 0) {
+        if (isNegative(number)) {
             throw new RuntimeException("인자로 음수가 올 수 없습니다.");
         }
         return number;
+    }
+
+    private static boolean isNegative(int number) {
+        return number < 0;
     }
 }
