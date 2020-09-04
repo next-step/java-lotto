@@ -1,6 +1,8 @@
 package cc.oakk.lotto.model;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -40,20 +42,11 @@ public class LottoTest {
         assertThat(lotto.getMatchingCount(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)))).isEqualTo(2);
     }
 
-    @Test
-    public void contains() {
+    @ParameterizedTest
+    @CsvSource(value = { "1:true", "2:true", "3:true", "4:true", "5:true", "6:true",
+        "7:false", "8:false", "9:false", "10:false", "11:false" }, delimiter = ':')
+    public void contains(int number, boolean result) {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(LottoNumber.of(1))).isEqualTo(true);
-        assertThat(lotto.contains(LottoNumber.of(2))).isEqualTo(true);
-        assertThat(lotto.contains(LottoNumber.of(3))).isEqualTo(true);
-        assertThat(lotto.contains(LottoNumber.of(4))).isEqualTo(true);
-        assertThat(lotto.contains(LottoNumber.of(5))).isEqualTo(true);
-        assertThat(lotto.contains(LottoNumber.of(6))).isEqualTo(true);
-
-        assertThat(lotto.contains(LottoNumber.of(7))).isEqualTo(false);
-        assertThat(lotto.contains(LottoNumber.of(8))).isEqualTo(false);
-        assertThat(lotto.contains(LottoNumber.of(9))).isEqualTo(false);
-        assertThat(lotto.contains(LottoNumber.of(10))).isEqualTo(false);
-        assertThat(lotto.contains(LottoNumber.of(11))).isEqualTo(false);
+        assertThat(lotto.contains(LottoNumber.of(number))).isEqualTo(result);
     }
 }
