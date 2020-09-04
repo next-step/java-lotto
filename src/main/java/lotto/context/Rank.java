@@ -30,11 +30,15 @@ public enum Rank {
 
     public static Rank getRank(int countOfMatch, boolean matchBonus) {
         // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        int skipIndex = getMatchRankCount(countOfMatch) > MATCH_DUPLICATE && !matchBonus ? 1 : 0;
+        int skipIndex = isBonus(countOfMatch, matchBonus) ? 1 : 0;
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .skip(skipIndex)
                 .findFirst().get();
+    }
+
+    static boolean isBonus(int countOfMatch, boolean matchBonus) {
+        return getMatchRankCount(countOfMatch) > MATCH_DUPLICATE && !matchBonus;
     }
 
     static int getMatchRankCount(int countOfMatch) {
