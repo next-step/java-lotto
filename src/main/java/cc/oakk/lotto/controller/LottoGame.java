@@ -31,21 +31,17 @@ public class LottoGame {
         resultView.repeatPurchasedLottoCount(lottos.size(), manualLottoCount);
         resultView.printLottos(lottos);
 
-        List<Integer> winningNumbers = getWinningNumbers();
-        WinningLotto winningLotto = getWinningLotto(winningNumbers);
+        WinningLotto winningLotto = getWinningLotto();
 
         LottoResults results = lottos.getResults(winningLotto);
         resultView.printLottoResults(results);
     }
 
-    private WinningLotto getWinningLotto(List<Integer> winningNumbers) {
-        return tryUntilSuccess(() -> new WinningLotto(winningNumbers, inputView.readBonusNumber()),
-                inputView::printError);
-    }
-
-    private List<Integer> getWinningNumbers() {
+    private WinningLotto getWinningLotto() {
         inputView.printWinningNumberInputHeader();
-        return tryUntilSuccess(inputView::readNumbers, inputView::printError);
+        List<Integer> numbers = tryUntilSuccess(inputView::readNumbers, inputView::printError);
+        return tryUntilSuccess(() -> new WinningLotto(numbers, inputView.readBonusNumber()),
+                inputView::printError);
     }
 
     private void readManualLottos(int manualLottoCount, Lottos lottos) {
@@ -59,8 +55,6 @@ public class LottoGame {
     private int getManualLottoCount(Money money, int lottoPrice) {
         return tryUntilSuccess(() -> {
             int count = inputView.readManualLottoCount();
-            int moneyAfterPurchase = money.get() - count * lottoPrice;
-            ValidationAdapters.throwIfNegative(moneyAfterPurchase, "입력하신 금액 보다 더 많이 구매하실 수 없습니다.");
             money.purchase(lottoPrice * count);
             return count;
         }, inputView::printError);
