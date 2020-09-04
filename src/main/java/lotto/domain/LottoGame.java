@@ -16,17 +16,14 @@ public class LottoGame {
         ResultView.showInputWinningNumber();
 
         WinningResult winningResult = new WinningResult(InputView.inputText());
-
         ResultView.showInputBonusNumber();
-        BonusBall bonusBall = new BonusBall(InputView.inputText());
-
-        WinningTable winningTable = lottoPapers.makeWinningTable(winningResult.getWinninLottoNumberToIntegerList(), bonusBall.getBonusNumber());
+        winningResult.setBonusNum(LottoNum.of(InputView.inputText()));
+        WinningTable winningTable = winningResult.makeWinningTable(lottoPapers.getPapers());
 
         ResultView.showResult(winningTable.getMatchCountTable());
         ResultView.showDelimiter();
 
         WinningEarningsRate winningEarningsRate = inputMoney.makeWinningEarningsRate(winningTable.getTotalWinningMoney());
-
         ResultView.showEarningsRate(winningEarningsRate.getEarningsRate());
     }
 }
