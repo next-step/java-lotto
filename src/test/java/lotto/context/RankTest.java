@@ -28,4 +28,10 @@ class RankTest {
     void getMatchRankCount() {
         Assertions.assertThat(Rank.getMatchRankCount(5)).isEqualTo(2);
     }
+
+    @Test
+    void isBonus() {
+        Assertions.assertThat(Rank.isBonus(2, true)).isTrue();
+        Assertions.assertThat(Rank.isBonus(2, false)).isTrue();
+    }
 }
