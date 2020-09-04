@@ -41,8 +41,13 @@ public class WinningResult {
 
         lottoPapers.forEach(lottoPaper -> {
             winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(getWinningLottoNumberToIntegerList()),
-                    lottoPaper.isContain(Optional.ofNullable(bonusNum.getLottoNum()).get()));
+                    isBonus(lottoPaper));
         });
         return winningTable;
+    }
+
+    private boolean isBonus(LottoPaper lottoPaper) {
+        return lottoPaper.isContain(Optional.ofNullable(bonusNum.getLottoNum())
+                .get());
     }
 }
