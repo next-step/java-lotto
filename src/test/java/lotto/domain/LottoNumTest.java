@@ -32,4 +32,10 @@ class LottoNumTest {
     void stringOf() {
         Assertions.assertThat(lottoNum).isEqualToComparingFieldByField(LottoNum.of(1));
     }
+
+    @Test
+    void validStringToInteger() {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> LottoNum.of(""));
+    }
 }

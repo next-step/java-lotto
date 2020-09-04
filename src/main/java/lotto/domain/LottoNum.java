@@ -9,11 +9,18 @@ public class LottoNum implements Comparable<LottoNum> {
     private final int lottoNum;
 
     public LottoNum(Integer lottoNum) {
-        validLottoNum(lottoNum);
+        validLottoNumNullCheck(lottoNum);
+        validLottoNumNumberCheck(lottoNum);
         this.lottoNum = lottoNum;
     }
 
-    private void validLottoNum(Integer lottoNum) {
+    private void validLottoNumNullCheck(Integer lottoNum) {
+        if (lottoNum == null || "".equals(lottoNum)) {
+            throw new IllegalArgumentException(Error.ERROR_INPUT_TYPE.getMsg());
+        }
+    }
+
+    private void validLottoNumNumberCheck(Integer lottoNum) {
         if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
         }
@@ -33,11 +40,20 @@ public class LottoNum implements Comparable<LottoNum> {
         return super.equals(obj);
     }
 
-    public static LottoNum of(int num) {
+    public static LottoNum of(Integer num) {
         return new LottoNum(num);
     }
 
     public static LottoNum of(String num) {
+        validStringToInteger(num);
         return of(Integer.parseInt(num));
+    }
+
+    private static void validStringToInteger(String num) {
+        try {
+            Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(Error.ERROR_INPUT_NULL.getMsg());
+        }
     }
 }
