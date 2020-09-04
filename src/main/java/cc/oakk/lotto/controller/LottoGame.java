@@ -6,8 +6,8 @@ import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.ResultView;
 
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+
+import static cc.oakk.lotto.util.ValidationAdapters.tryUntilSuccess;
 
 public class LottoGame {
     private final LottoGenerator generator;
@@ -68,14 +68,5 @@ public class LottoGame {
 
     private Money getMoney() {
         return tryUntilSuccess(() -> new Money(inputView.readMoney()), inputView::printError);
-    }
-
-    private <T> T tryUntilSuccess(Supplier<T> supplier, Consumer<Throwable> onError) {
-        try {
-            return supplier.get();
-        } catch (Exception e) {
-            onError.accept(e);
-            return tryUntilSuccess(supplier, onError);
-        }
     }
 }

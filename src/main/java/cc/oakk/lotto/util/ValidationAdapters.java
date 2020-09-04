@@ -1,6 +1,8 @@
 package cc.oakk.lotto.util;
 
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ValidationAdapters {
     private ValidationAdapters() {}
@@ -21,5 +23,14 @@ public class ValidationAdapters {
             throw new IllegalArgumentException("Given object is null.");
         }
         return obj;
+    }
+
+	public static<T> T tryUntilSuccess(Supplier<T> supplier, Consumer<Throwable> onError) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            onError.accept(e);
+            return tryUntilSuccess(supplier, onError);
+        }
     }
 }
