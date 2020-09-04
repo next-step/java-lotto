@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.context.Error;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
@@ -47,9 +48,9 @@ public class LottoPaper {
     }
 
     public boolean isContain(int number) {
-        return lottoNumbers.stream()
-                .map(LottoNum::getLottoNum)
-                .anyMatch(integer -> integer == number);
+        return Optional.ofNullable(number)
+                .map(lottoNumbers::equals)
+                .isPresent();
     }
 
     @Override

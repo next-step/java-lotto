@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.context.Error;
 
-import java.util.Comparator;
-
 public class LottoNum implements Comparable<LottoNum> {
     public static final Integer MIN_LOTTO_NUM = 1;
     public static final Integer MAX_LOTTO_NUM = 45;
@@ -28,5 +26,18 @@ public class LottoNum implements Comparable<LottoNum> {
     @Override
     public int compareTo(LottoNum o) {
         return o.getLottoNum() < getLottoNum() ? 1 : -1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    public static LottoNum of(int num) {
+        return new LottoNum(num);
+    }
+
+    public static LottoNum of(String num) {
+        return of(Integer.parseInt(num));
     }
 }
