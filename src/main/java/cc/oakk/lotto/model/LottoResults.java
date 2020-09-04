@@ -36,10 +36,19 @@ public class LottoResults implements Printable<LottoResults> {
 
     public long calculateRevenue(LottoPrizeProvider<?> provider) {
         throwIfNull(provider);
-        return lottoResults.values().stream()
-                .flatMap(Collection::stream)
-                .map(r -> provider.getPrizeByRank(r.getRank()).getValue())
-                .reduce(0L, (acc, cur) -> acc += cur);
+
+        long revenue = 0;
+        for (Rank rank : lottoResults.keySet()) {
+            List<LottoResult> list = lottoResults.get(rank);
+            long value = provider.getPrizeByRank(rank).getValue();
+            revenue += value * list.size();
+        }
+        return revenue;
+    }
+
+    public double calculateRevenueRate(LottoPrizeProvider<?> provider, int lottoPrice) {
+        throwIfNull(provider);
+        return (double) calculateRevenue(provider) / (size() * lottoPrice);
     }
 
     public int getRankCount(Rank rank) {

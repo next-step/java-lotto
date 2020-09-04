@@ -1,10 +1,13 @@
 package cc.oakk.lotto.controller;
 
 import cc.oakk.lotto.model.*;
+import cc.oakk.lotto.util.ValidationAdapters;
 import cc.oakk.lotto.view.InputView;
 import cc.oakk.lotto.view.ResultView;
 
 import java.util.List;
+
+import static cc.oakk.lotto.util.ValidationAdapters.tryUntilSuccess;
 
 public class LottoGame {
     private final LottoGenerator generator;
@@ -18,24 +21,46 @@ public class LottoGame {
     }
 
     public void start() {
-        inputView.printMoneyInputHeader();
-        int money = inputView.readMoney();
+        int lottoPrice = LottoGenerator.LOTTO_PRICE;
+        Money money = getMoney();
+        int manualLottoCount = getManualLottoCount(money, lottoPrice);
+
         Lottos lottos = generator.generateLottos(money);
-        if (lottos.size() < 0) {
-            return;
-        }
-        resultView.repeatPurchasedLottoCount(lottos.size());
+        readManualLottos(manualLottoCount, lottos);
+
+        resultView.repeatPurchasedLottoCount(lottos.size(), manualLottoCount);
         resultView.printLottos(lottos);
 
-        inputView.printWinningNumberInputHeader();
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
-        inputView.printBonusNumberInputHeader();
-        int bonusNumber = inputView.readBonusNumber();
+        WinningLotto winningLotto = getWinningLotto();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResults results = lottos.getResults(winningLotto);
-
-        resultView.printResultHeader();
         resultView.printLottoResults(results);
+    }
+
+    private WinningLotto getWinningLotto() {
+        inputView.printWinningNumberInputHeader();
+        List<Integer> numbers = tryUntilSuccess(inputView::readNumbers, inputView::printError);
+        return tryUntilSuccess(() -> new WinningLotto(numbers, inputView.readBonusNumber()),
+                inputView::printError);
+    }
+
+    private void readManualLottos(int manualLottoCount, Lottos lottos) {
+        inputView.printManualLottoNumbersInputHeader();
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto lotto = tryUntilSuccess(() -> new Lotto(inputView.readNumbers()), inputView::printError);
+            lottos.add(lotto);
+        }
+    }
+
+    private int getManualLottoCount(Money money, int lottoPrice) {
+        return tryUntilSuccess(() -> {
+            int count = inputView.readManualLottoCount();
+            money.purchase(lottoPrice * count);
+            return count;
+        }, inputView::printError);
+    }
+
+    private Money getMoney() {
+        return tryUntilSuccess(() -> new Money(inputView.readMoney()), inputView::printError);
     }
 }

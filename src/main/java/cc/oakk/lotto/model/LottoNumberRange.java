@@ -11,7 +11,7 @@ public class LottoNumberRange {
 
     public LottoNumberRange(int from, int to) {
         if (from > to) {
-            throw new IllegalArgumentException("from is greater than to.");
+            throw new IllegalArgumentException("to가 from보다 커야합니다.");
         }
         this.from = from;
         this.to = to;

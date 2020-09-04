@@ -18,8 +18,8 @@ public class ResultConsoleView implements ResultView {
     }
 
     @Override
-    public void repeatPurchasedLottoCount(int count) {
-        stringPrinter.print(String.format("%d개를 구매했습니다.", count));
+    public void repeatPurchasedLottoCount(int count, int manualCount) {
+        stringPrinter.print(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, count - manualCount));
     }
 
     @Override
@@ -28,12 +28,8 @@ public class ResultConsoleView implements ResultView {
     }
 
     @Override
-    public void printResultHeader() {
-        stringPrinter.print("\n당첨 통계\n---------");
-    }
-
-    @Override
     public void printLottoResults(Printable<LottoResults> lottoResultsPrintable) {
+        stringPrinter.print("\n당첨 통계\n---------");
         lottoResultsPrintable.print(lottoResultsPrinter);
     }
 }

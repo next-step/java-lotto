@@ -41,4 +41,12 @@ public class LottoResultsTest {
         LottoPrizeProvider<?> provider = new SimpleLottoPrizeProvider();
         assertThat(results.calculateRevenue(provider)).isEqualTo(2060005000L);
     }
+
+    @Test
+    public void calculateRevenueRate() {
+        LottoPrizeProvider<?> provider = new SimpleLottoPrizeProvider();
+        int lottoPrice = 1000;
+        double rate = (double) results.calculateRevenue(provider) / (results.size() * lottoPrice);
+        assertThat(results.calculateRevenueRate(provider, lottoPrice)).isEqualTo(rate);
+    }
 }
