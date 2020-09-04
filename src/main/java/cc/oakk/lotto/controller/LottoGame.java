@@ -22,9 +22,8 @@ public class LottoGame {
 
     public void start() {
         int lottoPrice = LottoGenerator.LOTTO_PRICE;
-        int money = getMoney();
+        Money money = getMoney();
         int manualLottoCount = getManualLottoCount(money, lottoPrice);
-        money -= lottoPrice * manualLottoCount;
 
         Lottos lottos = generator.generateLottos(money);
         readManualLottos(manualLottoCount, lottos);
@@ -63,19 +62,20 @@ public class LottoGame {
         }
     }
 
-    private int getManualLottoCount(int money, int lottoPrice) {
+    private int getManualLottoCount(Money money, int lottoPrice) {
         inputView.printManualLottoCountInputHeader();
         return tryUntilSuccess(() -> {
             int count = inputView.readManualLottoCount();
-            int moneyAfterPurchase = money - count * lottoPrice;
+            int moneyAfterPurchase = money.get() - count * lottoPrice;
             ValidationAdapters.throwIfNegative(moneyAfterPurchase, "입력하신 금액 보다 더 많이 구매하실 수 없습니다.");
+            money.purchase(lottoPrice * count);
             return count;
         }, inputView::printError);
     }
 
-    private int getMoney() {
+    private Money getMoney() {
         inputView.printMoneyInputHeader();
-        return tryUntilSuccess(inputView::readMoney, inputView::printError);
+        return tryUntilSuccess(() -> new Money(inputView.readMoney()), inputView::printError);
     }
 
     private <T> T tryUntilSuccess(Supplier<T> supplier, Consumer<Throwable> onError) {

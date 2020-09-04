@@ -16,11 +16,12 @@ public class LottoGenerator {
         return new Lotto(numbers.subList(0, Lotto.NUMBER_COUNT));
     }
 
-    public Lottos generateLottos(int money) {
+    public Lottos generateLottos(Money money) {
         Lottos lottos = new Lottos();
-        int count = money / LOTTO_PRICE;
+        int count = money.get() / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
             lottos.add(generate());
+            money.purchase(LOTTO_PRICE);
         }
         return lottos;
     }
