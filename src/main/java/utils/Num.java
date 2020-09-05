@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Num {
 
@@ -32,4 +33,16 @@ public class Num {
                 .sum();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass( ) != o.getClass( )) return false;
+        Num num1 = (Num) o;
+        return num == num1.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num);
+    }
 }

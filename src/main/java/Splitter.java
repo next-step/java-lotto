@@ -6,6 +6,8 @@ public class Splitter {
     public static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
     public static final String DEFAULT_DELIMITER = ",|:";
 
+    private Splitter() {}
+    
     public static String[] splitToTokens(String value) {
         Matcher m = CUSTOM_DELIMITER.matcher(value);
         if (m.find( )) {

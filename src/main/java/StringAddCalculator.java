@@ -9,6 +9,8 @@ import static utils.StringUtils.isNullOrBlank;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator () {}
+
     public static final int SUM_OF_NULL_OR_EMPTY = 0;
 
     public static int splitAndSum(String value) {
