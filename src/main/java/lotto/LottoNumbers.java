@@ -4,8 +4,8 @@ import java.util.*;
 
 public class LottoNumbers {
 
-    public static final int MIN_RANGE = 1;
-    public static final int MAX_RANGE = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     public static final int SIZE = 6;
 
     private final List<Integer> numbers;
@@ -37,7 +37,7 @@ public class LottoNumbers {
 
     private void validateRange(List<Integer> numbers) {
         numbers.stream()
-                .filter(n -> n < MIN_RANGE || n > MAX_RANGE)
+                .filter(n -> n < MIN_NUMBER || n > MAX_NUMBER)
                 .findAny()
                 .ifPresent(n -> {
                     throw new IllegalArgumentException("1 ~ 45 범위를 벗어나는 숫자를 포함하고 있습니다.");

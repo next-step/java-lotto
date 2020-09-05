@@ -10,7 +10,7 @@ public class LottoFactory {
     private static List<Integer> numbers;
 
     static {
-        numbers = IntStream.range(LottoNumbers.MIN_RANGE, LottoNumbers.MAX_RANGE)
+        numbers = IntStream.range(LottoNumbers.MIN_NUMBER, LottoNumbers.MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }
