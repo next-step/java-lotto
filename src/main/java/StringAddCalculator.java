@@ -1,3 +1,5 @@
+import utils.Num;
+
 import static java.util.Arrays.stream;
 import static utils.StringUtils.isNullOrBlank;
 
@@ -14,7 +16,8 @@ public class StringAddCalculator {
 
     private static int sum(String[] tokens) {
         return stream(tokens)
-                .mapToInt(token -> Integer.parseInt(token))
+                .map(Num::new)
+                .mapToInt(Num::getNum)
                 .sum();
     }
 }
