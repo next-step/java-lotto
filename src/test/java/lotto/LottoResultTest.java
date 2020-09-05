@@ -36,7 +36,7 @@ class LottoResultTest {
 
         return Stream.of(
                 Arguments.of(result1, 0.35),
-                Arguments.of(result2, 0.0),
+                Arguments.of(result2, 0.00),
                 Arguments.of(result3, 173.33)
         );
     }
