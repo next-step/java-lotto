@@ -3,24 +3,24 @@ package step2.domain;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<LottoMatchingCount, Long> resultMap;
+    private Map<LottoRank, Long> resultMap;
 
-    public LottoResult(Map<LottoMatchingCount, Long> map) {
+    public LottoResult(Map<LottoRank, Long> map) {
         this.resultMap = map;
     }
 
-    public static LottoResult of(Map<LottoMatchingCount, Long> lottoResultByRank) {
+    public static LottoResult of(Map<LottoRank, Long> lottoResultByRank) {
         if (lottoResultByRank == null) {
             throw new IllegalArgumentException("");
         }
         return new LottoResult(lottoResultByRank);
     }
 
-    public Map<LottoMatchingCount, Long> getResultMap() {
+    public Map<LottoRank, Long> getResultMap() {
         return resultMap;
     }
 
-    public Long getRankCount(LottoMatchingCount matchingCount) {
+    public Long getRankCount(LottoRank matchingCount) {
         return resultMap.getOrDefault(matchingCount, 0L);
     }
 

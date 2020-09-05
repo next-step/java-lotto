@@ -54,10 +54,10 @@ public class WinningLottoNumbers {
         return lottoNumbers;
     }
 
-    public LottoMatchingCount getWinningRank(Lotto lotto) {
+    public LottoRank getWinningRank(Lotto lotto) {
         long matchCount = lotto.getMatchCountWith(winningNumbers);
         boolean matchBonus = lotto.getMatchWith(bonusNumber);
 
-        return LottoMatchingCount.of(matchCount, matchBonus);
+        return LottoRank.of(matchCount, matchBonus);
     }
 }

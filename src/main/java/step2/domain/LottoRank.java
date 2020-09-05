@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum LottoMatchingCount {
+public enum LottoRank {
     FIRST(6, 2_000_000_000, false),
     SECOND_BONUS(5, 30_000_000, true),
     SECOND(5, 1_500_000, false),
@@ -17,18 +17,18 @@ public enum LottoMatchingCount {
     private int money;
     private boolean bonus;
 
-    LottoMatchingCount(int count, int money, boolean bonus) {
+    LottoRank(int count, int money, boolean bonus) {
         this.count = count;
         this.money = money;
         this.bonus = bonus;
     }
 
-    public static LottoMatchingCount of(long matchCount, boolean matchBonus) {
-        return Stream.of(LottoMatchingCount.values())
+    public static LottoRank of(long matchCount, boolean matchBonus) {
+        return Stream.of(LottoRank.values())
                 .filter(lottoRank -> lottoRank.count == matchCount)
                 .filter(lottoRank -> !lottoRank.bonus || matchBonus)
                 .findFirst()
-                .orElse(LottoMatchingCount.SIDE);
+                .orElse(LottoRank.SIDE);
     }
 
     public int getCount() {
@@ -39,8 +39,8 @@ public enum LottoMatchingCount {
         return money;
     }
 
-    public static List<LottoMatchingCount> getLottoMatchingList() {
-        return Stream.of(LottoMatchingCount.values())
+    public static List<LottoRank> getLottoMatchingList() {
+        return Stream.of(LottoRank.values())
                 .sorted(Comparator.comparingInt(rank -> rank.money))
                 .collect(Collectors.toList());
     }

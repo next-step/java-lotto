@@ -17,7 +17,7 @@ public class OutputView {
 
     public void viewResult(LottoResult lottoResult, String lottoMoney) {
 
-        LottoMatchingCount.getLottoMatchingList().stream()
+        LottoRank.getLottoMatchingList().stream()
                 .filter(count -> count.getCount() > 0)
                 .map(rank -> makeRankResultString(rank, lottoResult))
                 .forEach(System.out::println);
@@ -26,7 +26,7 @@ public class OutputView {
 
     }
 
-    private static String makeRankResultString(LottoMatchingCount matchingCount, LottoResult lottoResult) {
+    private static String makeRankResultString(LottoRank matchingCount, LottoResult lottoResult) {
         String message = "%d개 일치 (%d원) - %d개";
         if(matchingCount.equals(matchingCount.SECOND_BONUS)) {
             message = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
