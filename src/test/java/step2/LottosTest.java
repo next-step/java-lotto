@@ -12,8 +12,8 @@ public class LottosTest {
     @Test
     void ticketTest() {
         Lottos lottos = Lotto.create(1);
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("10,1,31,27,19,20");
-        LottoResult lottoResult = lottos.getMatching(winningLottoNumbers);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("10,1,31,27,19,20", "15");
+        LottoResult lottoResult = lottos.winningResult(winningLottoNumbers);
         assertThat(lottoResult.getResultMap().size() <= 4).isTrue();
     }
 }

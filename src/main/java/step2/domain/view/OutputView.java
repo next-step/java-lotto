@@ -2,7 +2,6 @@ package step2.domain.view;
 
 import step2.domain.*;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -17,10 +16,26 @@ public class OutputView {
     }
 
     public void viewResult(LottoResult lottoResult, String lottoMoney) {
-        Arrays.stream(LottoMatchingCount.values())
-                .limit(LottoMatchingCount.values().length - 1)
-                .forEach(enumList -> System.out.format("%d 개 일치 (%s)원 - %d개\n", enumList.getCount(), enumList.getMoney(), Math.toIntExact(lottoResult.getResultMap().getOrDefault(enumList.getCount(), 0L))));
 
-        System.out.println("총 수익률은" + lottoResult.getMargin(lottoMoney) + "입니다.");
+        LottoMatchingCount.getLottoMatchingList().stream()
+                .filter(count -> count.getCount() > 0)
+                .map(rank -> makeRankResultString(rank, lottoResult))
+                .forEach(System.out::println);
+        double winningRate = lottoResult.calculateWinningRate(lottoMoney);
+        System.out.format("총 수익률은 %.2f 입니다.", winningRate);
+
     }
+
+    private static String makeRankResultString(LottoMatchingCount matchingCount, LottoResult lottoResult) {
+        String message = "%d개 일치 (%d원) - %d개";
+        if(matchingCount.equals(matchingCount.SECOND_BONUS)) {
+            message = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+        }
+
+        return String.format(message,
+                matchingCount.getCount(),
+                matchingCount.getMoney(),
+                lottoResult.getRankCount(matchingCount));
+    }
+
 }

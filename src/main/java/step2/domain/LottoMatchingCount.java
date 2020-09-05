@@ -1,20 +1,34 @@
 package step2.domain;
 
-import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoMatchingCount {
-    TREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000),
-    SIDE(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND_BONUS(5, 30_000_000, true),
+    SECOND(5, 1_500_000, false),
+    THIRD(4, 50_000, false),
+    FOURTH(3, 5_000, false),
+    SIDE(0, 0, false);
 
-    private final int count;
-    private final int money;
+    private int count;
+    private int money;
+    private boolean bonus;
 
-    LottoMatchingCount(int count, int money) {
+    LottoMatchingCount(int count, int money, boolean bonus) {
         this.count = count;
         this.money = money;
+        this.bonus = bonus;
+    }
+
+    public static LottoMatchingCount of(long matchCount, boolean matchBonus) {
+        return Stream.of(LottoMatchingCount.values())
+                .filter(lottoRank -> lottoRank.count == matchCount)
+                .filter(lottoRank -> !lottoRank.bonus || matchBonus)
+                .findFirst()
+                .orElse(LottoMatchingCount.SIDE);
     }
 
     public int getCount() {
@@ -25,10 +39,9 @@ public enum LottoMatchingCount {
         return money;
     }
 
-    public static LottoMatchingCount toLottoMatchingCount(int count) {
-        return Arrays.stream(LottoMatchingCount.values())
-                .filter(enumList -> enumList.getCount() == count)
-                .findFirst()
-                .orElse(LottoMatchingCount.SIDE);
+    public static List<LottoMatchingCount> getLottoMatchingList() {
+        return Stream.of(LottoMatchingCount.values())
+                .sorted(Comparator.comparingInt(rank -> rank.money))
+                .collect(Collectors.toList());
     }
 }

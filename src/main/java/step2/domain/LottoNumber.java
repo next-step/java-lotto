@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public class LottoNumber {
         LOTTO_NUMBER_POOL =
                 Stream.iterate(LOTTO_START_NUMBER, number -> number + 1)
                 .limit(LOTTO_END_NUMBER)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -32,6 +33,19 @@ public class LottoNumber {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
     public static Lotto createLotto() {
         List<LottoNumber> lottoNumberList = LOTTO_NUMBER_POOL;
         Collections.shuffle(lottoNumberList);
@@ -39,8 +53,8 @@ public class LottoNumber {
         return new Lotto(lottoNumberList.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList()));
     }
 
-    public static LottoNumber of(String number) {
-        return new LottoNumber(Integer.parseInt(number));
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
     }
 
     public int getLottoNumber() {

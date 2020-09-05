@@ -8,12 +8,17 @@ public class WinningLottoNumbers {
     private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private List<LottoNumber> winningNumbers;
+    private LottoNumber bonusNumber;
 
     public WinningLottoNumbers(String inputWinningNumber, String inputBonusNumber) {
         validationWinningNumbers(inputWinningNumber);
-        validationBonusNumber(inputBonusNumber);
-        validationOverLapping(inputWinningNumber, inputBonusNumber);
+        int bonusNumber = validationBonusNumber(inputBonusNumber);
+
         this.winningNumbers = changeToList(inputWinningNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
+
+        validationOverLapping(winningNumbers, this.bonusNumber);
+
     }
 
     private void validationWinningNumbers(String inputWinningNumber) {
@@ -22,16 +27,15 @@ public class WinningLottoNumbers {
         }
     }
 
-    private void validationBonusNumber(String inputBonusNumber) {
+    private int validationBonusNumber(String inputBonusNumber) {
         try {
-            int bonusNumber = Integer.parseInt(inputBonusNumber);
-
+            return Integer.parseInt(inputBonusNumber);
         } catch (Exception e) {
             throw new IllegalArgumentException("보너스 번호를 정확하게 입력해 주세요.");
         }
     }
 
-    private void validationOverLapping(String inputWinningNumber, String inputBonusNumber) {
+    private void validationOverLapping(List<LottoNumber> inputWinningNumber, LottoNumber inputBonusNumber) {
         if (inputWinningNumber.contains(inputBonusNumber)) {
             throw new IllegalArgumentException("보너스번호가 중복되었습니다.");
         }
@@ -40,6 +44,7 @@ public class WinningLottoNumbers {
     private List<LottoNumber> changeToList(String inputWinningNumber) {
         List<LottoNumber> lottoNumbers =
                 Arrays.stream(inputWinningNumber.split(LOTTO_NUMBER_DELIMITER))
+                        .map(Integer::parseInt)
                         .map(LottoNumber::of)
                         .collect(Collectors.toList());
 
@@ -49,10 +54,10 @@ public class WinningLottoNumbers {
         return lottoNumbers;
     }
 
-    protected int matchCount(List<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers
-                .stream()
-                .filter(winningNumbers::contains)
-                .count();
+    public LottoMatchingCount getWinningRank(Lotto lotto) {
+        long matchCount = lotto.getMatchCountWith(winningNumbers);
+        boolean matchBonus = lotto.getMatchWith(bonusNumber);
+
+        return LottoMatchingCount.of(matchCount, matchBonus);
     }
 }
