@@ -8,7 +8,7 @@ public class LottoNumbers {
     public static final int MAX_RANGE = 45;
     public static final int SIZE = 6;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
         validateSize(numbers);
