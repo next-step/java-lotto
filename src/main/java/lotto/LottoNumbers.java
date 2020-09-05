@@ -44,11 +44,12 @@ public class LottoNumbers {
                 });
     }
 
-    public long matchNumbers(LottoNumbers winningNumbers) {
-        return winningNumbers.numbers
+    public Prize matchNumbers(LottoNumbers winningNumbers) {
+        long matchCount = winningNumbers.numbers
                 .stream()
                 .filter(this::containsWinningNumber)
                 .count();
+        return Prize.valueOfMatchCount(matchCount);
     }
 
     private boolean containsWinningNumber(int number) {
