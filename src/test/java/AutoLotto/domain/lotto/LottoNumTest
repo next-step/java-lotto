@@ -1,4 +1,5 @@
 package AutoLotto.domain.lotto;
 
-public class LottoNum {
+public class LottoNumTest {
+
 }
