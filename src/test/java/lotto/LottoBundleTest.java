@@ -25,6 +25,7 @@ public class LottoBundleTest {
     void drawing() {
         // given
         LottoNumbers winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+
         LottoBundle bundle = new LottoBundle(Arrays.asList(
                 LottoNumbers.of(1, 7, 8, 9, 10, 11),
                 LottoNumbers.of(1, 2, 8, 9, 10, 11),
@@ -35,7 +36,7 @@ public class LottoBundleTest {
         ));
 
         // when
-        Map<Prize, Integer> actual = bundle.drawing(winningNumbers);
+        LottoResult actual = bundle.drawing(winningNumbers);
 
         // then
         Map<Prize, Integer> expected = new HashMap<>();
@@ -44,6 +45,6 @@ public class LottoBundleTest {
         expected.put(Prize.FOURTH, 2);
         expected.put(Prize.ETC, 2);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(new LottoResult(expected));
     }
 }
