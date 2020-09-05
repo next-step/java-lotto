@@ -14,9 +14,26 @@ public class LottoNum implements Comparable<LottoNum> {
         this.lottoNum = lottoNum;
     }
 
-    private void validLottoNumNullCheck(Integer lottoNum) {
+    public static LottoNum of(Integer num) {
+        return new LottoNum(num);
+    }
+
+    public static LottoNum of(String num) {
+        validStringToInteger(num);
+        return of(Integer.parseInt(num));
+    }
+
+    private static void validLottoNumNullCheck(Integer lottoNum) {
         if (lottoNum == null || "".equals(lottoNum)) {
             throw new IllegalArgumentException(Error.ERROR_INPUT_TYPE.getMsg());
+        }
+    }
+
+    private static void validStringToInteger(String num) {
+        try {
+            Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(Error.ERROR_INPUT_NULL.getMsg());
         }
     }
 
@@ -38,22 +55,5 @@ public class LottoNum implements Comparable<LottoNum> {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
-    }
-
-    public static LottoNum of(Integer num) {
-        return new LottoNum(num);
-    }
-
-    public static LottoNum of(String num) {
-        validStringToInteger(num);
-        return of(Integer.parseInt(num));
-    }
-
-    private static void validStringToInteger(String num) {
-        try {
-            Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Error.ERROR_INPUT_NULL.getMsg());
-        }
     }
 }
