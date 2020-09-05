@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 public class Num {
 
     private int num;
@@ -22,6 +24,12 @@ public class Num {
         if (this.num < 0) {
             throw new RuntimeException(value + "is of negative value");
         }
+    }
+
+    public static int add(List<Num> numList) {
+        return numList.stream()
+                .mapToInt(Num::getNum)
+                .sum();
     }
 
 }
