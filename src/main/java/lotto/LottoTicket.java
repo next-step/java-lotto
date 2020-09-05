@@ -8,7 +8,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int drawing(LottoNumbers winningNumbers) {
+    public long drawing(LottoNumbers winningNumbers) {
         return lottoNumbers.matchNumbers(winningNumbers);
     }
 }

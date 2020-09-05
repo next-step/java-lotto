@@ -10,7 +10,7 @@ public class LottoNumbers {
 
     private List<Integer> numbers;
 
-    private LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicated(numbers);
         validateRange(numbers);
@@ -44,16 +44,14 @@ public class LottoNumbers {
                 });
     }
 
-    public int matchNumbers(LottoNumbers lottoNumbers) {
-        int count = 0;
-        for (Integer myNumber : numbers) {
-            for (Integer prizeNumber : lottoNumbers.numbers) {
-                if (myNumber == prizeNumber) {
-                    count++;
-                    break;
-                }
-            }
-        }
-        return count;
+    public long matchNumbers(LottoNumbers winningNumbers) {
+        return winningNumbers.numbers
+                .stream()
+                .filter(this::containsWinningNumber)
+                .count();
+    }
+
+    private boolean containsWinningNumber(int number) {
+        return this.numbers.contains(number);
     }
 }
