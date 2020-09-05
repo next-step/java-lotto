@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private static final int TICKET_PRICE = 1000;
+    public static final int TICKET_PRICE = 1000;
     private static List<Integer> numbers;
 
     static {
