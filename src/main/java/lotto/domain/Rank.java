@@ -12,11 +12,11 @@ public enum Rank {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-    private final int countOfMath;
+    private final int countOfMatch;
     private final int winningPrize;
 
     Rank(int countOfMath, int winningPrize) {
-        this.countOfMath = countOfMath;
+        this.countOfMatch = countOfMath;
         this.winningPrize = winningPrize;
     }
 
@@ -24,13 +24,17 @@ public enum Rank {
         return winningPrize;
     }
 
-    public static int countOfMatch(Rank rank) {
-        return rank.countOfMath;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public static Rank valueOf(int countOfMath) {
+    public static boolean equalsCountOfMatch(Rank rank, int count) {
+        return count == rank.countOfMatch;
+    }
+
+    public static Rank valueOf(int count) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> countOfMatch(rank) == countOfMath)
+                .filter(rank -> equalsCountOfMatch(rank, count))
                 .findFirst()
                 .orElse(Rank.MISS);
     }

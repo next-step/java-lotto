@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    private static final String INVALID_LOTTO_SIZE = "로또 개수는 6개 입니다.";
+    public static final String INVALID_LOTTO_SIZE = "로또 개수는 6개 입니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 

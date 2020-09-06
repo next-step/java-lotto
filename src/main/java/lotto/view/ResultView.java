@@ -40,7 +40,7 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Rank rank : Rank.ranks()) {
-            stringBuilder.append(String.format(WINNING_LOTTO_RESULT_MESSAGE, Rank.countOfMatch(rank),
+            stringBuilder.append(String.format(WINNING_LOTTO_RESULT_MESSAGE, rank.getCountOfMatch(),
                     rank.getWinningPrize(), lottoResult.countOfMathRanks(rank)));
         }
         return stringBuilder.toString();

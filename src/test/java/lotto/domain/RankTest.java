@@ -19,9 +19,9 @@ public class RankTest {
     @DisplayName("rank에 따른 개수 확인 테스트")
     @Test
     void countOfMatch() {
-        assertThat(Rank.countOfMatch(Rank.FIRST)).isEqualTo(6);
-        assertThat(Rank.countOfMatch(Rank.SECOND)).isEqualTo(5);
-        assertThat(Rank.countOfMatch(Rank.THIRD)).isEqualTo(4);
-        assertThat(Rank.countOfMatch(Rank.FOURTH)).isEqualTo(3);
+        assertThat(Rank.FIRST.getCountOfMatch()).isEqualTo(6);
+        assertThat(Rank.SECOND.getCountOfMatch()).isEqualTo(5);
+        assertThat(Rank.THIRD.getCountOfMatch()).isEqualTo(4);
+        assertThat(Rank.FOURTH.getCountOfMatch()).isEqualTo(3);
     }
 }
