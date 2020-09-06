@@ -10,8 +10,8 @@ public class UserLottoTest {
     void canCreateLotto() {
         UserLotto userLotto = new UserLotto();
 
-        assertThat(userLotto.getLotto().size()).isEqualTo(6);
-        assertThat(userLotto.getLotto().get(0).getLottoNumber()).isLessThanOrEqualTo(45);
-        assertThat(userLotto.getLotto().get(5).getLottoNumber()).isLessThanOrEqualTo(45);
+        assertThat(userLotto.getUserLotto().size()).isEqualTo(6);
+        assertThat(userLotto.getUserLotto().get(0).getLottoNumber()).isLessThanOrEqualTo(45);
+        assertThat(userLotto.getUserLotto().get(5).getLottoNumber()).isLessThanOrEqualTo(45);
     }
 }
