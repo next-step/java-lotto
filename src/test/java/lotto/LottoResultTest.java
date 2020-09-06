@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoResultTest {
 
@@ -17,7 +17,7 @@ class LottoResultTest {
     @MethodSource("provideResultAndProfitRate")
     @DisplayName("총 수익률")
     void profitRate(Map<Prize, Integer> result, double profitRate) {
-        assertThat(new LottoResult(result).profitRate()).isEqualTo(profitRate);
+        assertEquals(new LottoResult(result).profitRate(), profitRate);
     }
 
     private static Stream<Arguments> provideResultAndProfitRate() {

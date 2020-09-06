@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoBundleTest {
 
@@ -17,7 +17,7 @@ public class LottoBundleTest {
     @CsvSource({"14000, 14", "1000, 1", "0, 0", "-1000, 0"})
     @DisplayName("금액으로 구입 가능한 개수만큼 로또 번 생성")
     void buyTickets(int payment, int count) {
-        assertThat(LottoFactory.buyTickets(payment).count()).isEqualTo(count);
+        assertEquals(LottoFactory.buyTickets(payment).count(), count);
     }
 
     @Test
@@ -45,6 +45,6 @@ public class LottoBundleTest {
         expected.put(Prize.FOURTH, 2);
         expected.put(Prize.ETC, 2);
 
-        assertThat(actual).isEqualTo(new LottoResult(expected));
+        assertEquals(actual, new LottoResult(expected));
     }
 }
