@@ -17,7 +17,8 @@ class WinningResultTest {
     @Test
     @DisplayName("WinningTable 생성확인")
     void makeWinningTable() {
-        Assertions.assertThat(winningResult.makeWinningTable(new LottoPapers(3).getPapers()).getMatchCountTable())
+        Assertions.assertThat(winningResult.makeWinningTable(new LottoStore(null, 3)
+                .makeLottoPapers().getLottoPapers()).getMatchCountTable())
                 .isEqualTo(new WinningTable().getMatchCountTable());
     }
 
