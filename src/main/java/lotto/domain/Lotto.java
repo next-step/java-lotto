@@ -32,10 +32,14 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public int getMatchCountByWinningLotto(WinningLotto winningLotto) {
-        return (int) winningLotto.getWinningNumbers().stream()
-                .filter(lottoNumbers::contains)
+    public int getMatchCountByWinningLotto(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lotto::hasNumber)
                 .count();
+    }
+
+    private boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

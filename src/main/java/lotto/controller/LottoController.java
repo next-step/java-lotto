@@ -15,7 +15,7 @@ public class LottoController {
         Lottos lottos = lottoGame.makeLottos(new LottoNumberRandomGenerator());
         ResultView.printLottos(lottos.toStringByLotto());
 
-        WinningLotto winningLotto = InputView.inputWinningNumberOfLastWeek();
+        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumberOfLastWeek(), InputView.inputBonusNumber());
         LottoResult lottoResult = lottos.match(winningLotto);
 
         ResultView.printResultLottoGame(lottoResult);

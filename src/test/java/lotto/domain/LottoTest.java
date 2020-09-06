@@ -38,7 +38,7 @@ public class LottoTest {
     @DisplayName("당첨 번호와 로또 번호 매칭 테스트")
     @Test
     void hasWinningNumber() {
-        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1,2,3,4,8,11));
-        assertThat(lotto.getMatchCountByWinningLotto(winningLotto)).isEqualTo(4);
+        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1,2,3,4,8,11), 7);
+        assertThat(lotto.getMatchCountByWinningLotto(winningLotto.getWinningNumbers())).isEqualTo(4);
     }
 }
