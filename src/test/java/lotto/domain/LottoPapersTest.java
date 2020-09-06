@@ -10,7 +10,7 @@ class LottoPapersTest {
     private LottoPapers lottoPapers;
 
     @BeforeEach
-    void PapersCreate() {
+    void create() {
         lottoPapers = new LottoStore(null, 3).makeLottoPapers();
     }
 
