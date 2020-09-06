@@ -12,7 +12,7 @@ class LottoStoreTest {
     LottoStore lottoStore;
 
     @BeforeEach
-    void creat() {
+    void create() {
         List<String> list = new ArrayList<String>();
         list.add("10, 20, 30, 40, 41, 45");
         list.add("11, 22, 33, 40, 41, 45");
@@ -21,15 +21,11 @@ class LottoStoreTest {
 
     @Test
     @DisplayName("객체 생성")
-    void create() {
-        List<String> list = new ArrayList<String>();
-        list.add("10, 20, 30, 40, 41, 45");
-        list.add("11, 22, 33, 40, 41, 45");
-        LottoStore lottoStore2 = new LottoStore(list, 2);
+    void createLottoStore() {
         Assertions.assertThat(lottoStore.getManuaCount())
-                .isEqualToComparingFieldByField(lottoStore2.getManuaCount());
+                .isEqualToComparingFieldByField(2);
         Assertions.assertThat(lottoStore.getAutoCount())
-                .isEqualToComparingFieldByField(lottoStore2.getAutoCount());
+                .isEqualToComparingFieldByField(0);
     }
 
     @Test
