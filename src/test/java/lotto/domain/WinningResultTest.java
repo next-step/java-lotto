@@ -24,9 +24,9 @@ class WinningResultTest {
 
     @Test
     void hasBonus() {
-        Assertions.assertThat(winningResult.hasBonus(new LottoPaper(Arrays.asList(LottoNum.of(1)))))
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(1)))))
                 .isTrue();
-        Assertions.assertThat(winningResult.hasBonus(new LottoPaper(Arrays.asList(LottoNum.of(12)))))
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(12)))))
                 .isFalse();
     }
 

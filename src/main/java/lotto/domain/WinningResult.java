@@ -32,7 +32,7 @@ public class WinningResult {
         WinningTable winningTable = new WinningTable();
 
         lottoPapers.forEach(lottoPaper -> {
-            winningTable.incrementMatchCountResult(getMatchCount(lottoPaper), hasBonus(lottoPaper));
+            winningTable.incrementMatchCountResult(getMatchCount(lottoPaper), hasBonusBall(lottoPaper));
         });
         return winningTable;
     }
@@ -41,7 +41,7 @@ public class WinningResult {
         return lottoPaper.getMatchCount(winningPaper.getLottoNumberToIntegerList());
     }
 
-    boolean hasBonus(LottoPaper lottoPaper) {
+    boolean hasBonusBall(LottoPaper lottoPaper) {
         return lottoPaper.isContain(bonusPaper.getLottoNumbers().get(DEFAULT_BONUS_INDEX));
     }
 }
