@@ -5,11 +5,21 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.Lotto.INVALID_LOTTO_SIZE;
+import static lotto.domain.Lotto.LOTTO_SIZE;
+
 public class WinningLotto {
     private final Set<LottoNumber> winningNumbers;
 
     private WinningLotto(Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.winningNumbers = lottoNumbers;
+    }
+
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(INVALID_LOTTO_SIZE);
+        }
     }
 
     public static WinningLotto of(List<Integer> numbers) {
