@@ -5,6 +5,7 @@ import lotto.context.Error;
 public class LottoNum implements Comparable<LottoNum> {
     public static final Integer MIN_LOTTO_NUM = 1;
     public static final Integer MAX_LOTTO_NUM = 45;
+    private static final Integer PRIME = 31;
 
     private final int lottoNum;
 
@@ -64,10 +65,6 @@ public class LottoNum implements Comparable<LottoNum> {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int hashCode = 1;
-
-        hashCode = prime * hashCode + lottoNum;
-        return hashCode;
+        return PRIME + lottoNum;
     }
 }
