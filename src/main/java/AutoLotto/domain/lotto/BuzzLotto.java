@@ -17,6 +17,12 @@ public class BuzzLotto {
         return buzzLotto;
     }
 
+    public Rank findRankByMatch(UserLotto userLotto) {
+        int matchCount = getBuzzLotto().stream()
+                .mapToInt(buzzNumber -> buzzNumber.countMatch(userLotto))
+                .sum();
+        return Rank.matchOf(matchCount);
+    }
 
     @Override
     public boolean equals(Object o) {

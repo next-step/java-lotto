@@ -1,28 +1,27 @@
 package AutoLotto.domain.play;
 
-import AutoLotto.domain.lotto.Lotto;
-import AutoLotto.domain.lotto.LottoNum;
-import AutoLotto.domain.lotto.Lottos;
+import AutoLotto.domain.lotto.UserLotto;
+import AutoLotto.domain.lotto.LottoNumber;
+import AutoLotto.domain.lotto.UserLottos;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PlayLotto {
 
-    private final Lottos lottos;
-    private final List<LottoNum> buzzNumList;
+    private final UserLottos userLottos;
+    private final List<LottoNumber> buzzNumList;
 
-    PlayLotto(Lottos lottos, List<LottoNum> buzzNumList) {
-        this.lottos = lottos;
+    PlayLotto(UserLottos userLottos, List<LottoNumber> buzzNumList) {
+        this.userLottos = userLottos;
         this.buzzNumList = buzzNumList;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos.getLottos();
+    public List<UserLotto> getLottos() {
+        return userLottos.getLottos();
     }
 
-    public List<LottoNum> getBuzzNumList() {
+    public List<LottoNumber> getBuzzNumList() {
         return buzzNumList;
     }
 
@@ -32,16 +31,18 @@ public class PlayLotto {
         //Integer : counts of hitNumber
     }
 
-    public List<Integer> countHits() {
-        List<Integer> countHitsList = new ArrayList<>();
-        for (Lotto lotto : getLottos()) {
-            int countHit = buzzNumList.stream()
-                    .mapToInt(buzzNum -> buzzNum.countMatch(lotto))
-                    .sum();
-            countHitsList.add(countHit);
-        }
-        return countHitsList;
 
-    }
+
+    // 어차피 hits 수를 구하는 것은 Rank 등수 구하기 위해서임. 반환값 Rank로 다시 하기
+//    public List<Integer> countHits() {
+//        List<Integer> countHitsList = new ArrayList<>();
+//        for (UserLotto userLotto : getLottos()) {
+//            int countHit = buzzNumList.stream()
+//                    .mapToInt(buzzNum -> buzzNum.countMatch(userLotto))
+//                    .sum();
+//            countHitsList.add(countHit);
+//        }
+//        return countHitsList;
 
 }
+

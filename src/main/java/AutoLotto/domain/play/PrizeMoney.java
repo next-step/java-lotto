@@ -1,2 +1,6 @@
-package AutoLotto.domain.play;public interface PrizeMoney {
+package AutoLotto.domain.play;
+
+public interface PrizeMoney {
+
+
 }
