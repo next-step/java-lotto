@@ -18,4 +18,11 @@ class LottoPapersTest {
     void getPapersSize() {
         Assertions.assertThat(lottoPapers.getPapersSize()).isEqualTo(3);
     }
+
+    @Test
+    void makeAll() {
+        LottoPapers lottoPapers2 = new LottoStore(null, 3).makeLottoPapers();
+        Assertions.assertThat(LottoPapers.makeAll(lottoPapers, lottoPapers2).getPapersSize())
+                .isEqualTo(6);
+    }
 }
