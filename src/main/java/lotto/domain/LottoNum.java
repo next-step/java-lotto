@@ -36,7 +36,7 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     private static Integer getValidStringToInteger(String num) {
-        int conv;
+        int conv = 0;
         try {
             conv = Integer.parseInt(num);
         } catch (NumberFormatException e) {
