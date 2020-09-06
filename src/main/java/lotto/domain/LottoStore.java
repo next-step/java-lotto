@@ -48,7 +48,7 @@ public class LottoStore {
     }
 
     public LottoPapers makeLottoPapers() {
-        return LottoPapers.makeLottoPapers(new LottoPapers[]{manualPapers, autoPapers});
+        return LottoPapers.makeAll(new LottoPapers[]{manualPapers, autoPapers});
     }
 
     public int getManuaCount() {
