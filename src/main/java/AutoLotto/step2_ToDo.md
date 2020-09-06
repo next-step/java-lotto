@@ -5,7 +5,7 @@
 []      1) 구입금액 입력 받기 --------------------------Budget 0 or Null(CheckMoney)
             (InputView.getBudget() , int값)
     
-[]      2-1) <로또> 와 List<로또> 생성하기 -------------- Lotto .shuffle(1~45), regex, 유일 숫자 6개...
+[V]      2-1) <로또> 와 List<로또> 생성하기 -------------- Lotto .shuffle(1~45), regex, 유일 숫자 6개...
 [V]     2-2) List<로또> (numOfLottos = (구입금액 / 1000원) ) -------- 일의 자리 몫 반환 (CheckDivideBy)
             (new Lottos(int numOfLotto))   -------- 0일 경우
     

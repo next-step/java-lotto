@@ -15,6 +15,14 @@ public class PlayLotto {
         this.buzzNumList = buzzNumList;
     }
 
-
-
+    public int countHits() {
+        int sumHit = 0;
+        for (LottoNum buzzNum : buzzNumList) {
+            int countHit = lottos.getLottos().stream()
+                            .mapToInt(lotto -> buzzNum.countMatch(lotto))
+                            .sum();
+            sumHit += countHit;
+            }
+        return sumHit;
+    }
 }
