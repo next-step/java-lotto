@@ -11,7 +11,7 @@ class LottoPapersTest {
 
     @BeforeEach
     void PapersCreate() {
-        lottoPapers = new LottoPapers(3);
+        lottoPapers = new LottoStore(null, 3).makeLottoPapers();
     }
 
     @Test
