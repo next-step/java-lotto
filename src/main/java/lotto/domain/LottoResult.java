@@ -6,10 +6,14 @@ import java.util.Objects;
 public class LottoResult {
 
     private final int ROUNDING_PLACE = 100;
-    private final Map<Prize, Integer> result;
+    private final Map<Prize, Integer> prizeResult;
 
-    public LottoResult(Map<Prize, Integer> result) {
-        this.result = result;
+    public LottoResult(Map<Prize, Integer> prizeResult) {
+        this.prizeResult = prizeResult;
+    }
+
+    public int getMatchCountByPrize(Prize prize) {
+        return prizeResult.containsKey(prize) ? prizeResult.get(prize) : 0;
     }
 
     public double profitRate() {
@@ -22,21 +26,17 @@ public class LottoResult {
     }
 
     private int getCountOfTotalTickets() {
-        return result.keySet()
+        return prizeResult.keySet()
                 .stream()
-                .mapToInt(key -> result.get(key))
+                .mapToInt(key -> prizeResult.get(key))
                 .sum();
     }
 
     private int calculateTotalPrize() {
-        return result.keySet()
+        return prizeResult.keySet()
                 .stream()
-                .mapToInt(key -> result.get(key) * key.getPrize())
+                .mapToInt(key -> prizeResult.get(key) * key.getReward())
                 .sum();
-    }
-
-    public Map<Prize, Integer> getResult() {
-        return result;
     }
 
     @Override
@@ -44,11 +44,11 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return result.equals(that.result);
+        return prizeResult.equals(that.prizeResult);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(result);
+        return Objects.hash(prizeResult);
     }
 }
