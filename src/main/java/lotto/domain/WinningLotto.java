@@ -5,18 +5,17 @@ import java.util.List;
 
 public class WinningLotto {
     private final Lotto winningLotto;
+    private final LottoNumber bonumsNumber;
 
-    public WinningLotto(Lotto winningLotto) {
-        this.winningLotto = winningLotto;
-    }
-
-    public WinningLotto(String[] winningNumberArr){
+    public WinningLotto(String[] winningNumberArr, int bonumsNumber){
         this.winningLotto = getWinningLotto(winningNumberArr);
+        this.bonumsNumber = LottoNumber.of(bonumsNumber);
     }
+
     public Rank countWinningNumber(Lotto lotto){
         Count winningNumberCount = lotto.match(winningLotto);
-
-        return Rank.valueOf(winningNumberCount);
+        boolean isContainsBonumsNumber = lotto.isContains(bonumsNumber);
+        return Rank.valueOf(winningNumberCount, isContainsBonumsNumber);
     }
 
     private Lotto getWinningLotto(String[] winningNumberArr){

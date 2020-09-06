@@ -14,7 +14,7 @@ public class Winners {
 
     private void init(){
         for(Rank rank : Rank.values()){
-            winners.put(rank, new Count());
+            winners.put(rank, Count.ZERO);
         }
     }
 
@@ -26,9 +26,5 @@ public class Winners {
 
     public Count getWinnersCount(Rank rank){
         return winners.get(rank);
-    }
-
-    public int getSize(){
-        return winners.size();
     }
 }

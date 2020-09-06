@@ -4,11 +4,7 @@ import java.math.BigDecimal;
 
 public class PrizeCalculator {
 
-    public PrizeCalculator(){
-    }
-
-    private static BigDecimal calcRankPrize(Rank rank, Count count){
-        return rank.getWinningMoney().multiply(count.toBigDecimal());
+    private PrizeCalculator(){
     }
 
     public static BigDecimal rateOfPrize(Winners winners){

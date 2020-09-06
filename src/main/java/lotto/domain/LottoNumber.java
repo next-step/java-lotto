@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoNumber implements Comparable{
+public class LottoNumber implements Comparable<LottoNumber>{
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     static{
         for(int i = Lotto.LOTTO_START_NUM ; i <= Lotto.LOTTO_END_NUM ; i ++ ){
@@ -47,8 +47,8 @@ public class LottoNumber implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        LottoNumber compare = (LottoNumber) o;
+    public int compareTo(LottoNumber lottoNumber) {
+        LottoNumber compare = (LottoNumber) lottoNumber;
         return this.getNumber() - compare.getNumber();
     }
 }

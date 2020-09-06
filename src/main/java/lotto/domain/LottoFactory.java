@@ -16,8 +16,8 @@ public class LottoFactory {
 
         Collections.shuffle(lottoNumbers);
 
-        List<LottoNumber> subLottoNumbers = lottoNumbers.subList(0, 6);
-        subLottoNumbers.sort((a, b) -> a.compareTo(b));
+        List<LottoNumber> subLottoNumbers = lottoNumbers.subList(0, Lotto.NUMBER_OF_LOTTO);
+        subLottoNumbers.sort(LottoNumber::compareTo);
 
         return new Lotto(subLottoNumbers);
     }

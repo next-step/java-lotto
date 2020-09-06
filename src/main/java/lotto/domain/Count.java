@@ -3,7 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Count {
+public class Count implements Comparable<Count>{
     public static final Count ZERO = new Count();
 
     private final int count;
@@ -13,10 +13,6 @@ public class Count {
     }
     public Count(int count) {
         this.count = count;
-    }
-
-    public int getCount(){
-        return count;
     }
 
     public Count increase(){
@@ -50,5 +46,14 @@ public class Count {
     @Override
     public String toString() {
         return String.valueOf(count);
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    @Override
+    public int compareTo(Count o) {
+        return this.count - o.getCount();
     }
 }
