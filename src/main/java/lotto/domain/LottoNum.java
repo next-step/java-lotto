@@ -19,8 +19,7 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     public static LottoNum of(String num) {
-        validStringToInteger(num);
-        return of(Integer.parseInt(num));
+        return of(getValidStringToInteger(num));
     }
 
     private static void validLottoNumNullCheck(Integer lottoNum) {
@@ -29,12 +28,14 @@ public class LottoNum implements Comparable<LottoNum> {
         }
     }
 
-    private static void validStringToInteger(String num) {
+    private static Integer getValidStringToInteger(String num) {
+        int conv;
         try {
-            Integer.parseInt(num);
+            conv = Integer.parseInt(num);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Error.ERROR_INPUT_NULL.getMsg());
         }
+        return conv;
     }
 
     private void validLottoNumNumberCheck(Integer lottoNum) {
