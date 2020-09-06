@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public enum Prize {
 
@@ -11,7 +10,6 @@ public enum Prize {
     FOURTH(3, 5000),
     ETC(0, 0);
 
-    private static final int NOT_WON = 0;
     private static final Map<Long, Prize> BY_MATCH_COUNT = new HashMap<>();
 
     static {
@@ -21,22 +19,26 @@ public enum Prize {
     }
 
     private final long matchCount;
-    private final int prize;
+    private final int reward;
 
-    private Prize(long matchCount, int prize) {
+    private Prize(long matchCount, int reward) {
         this.matchCount = matchCount;
-        this.prize = prize;
+        this.reward = reward;
     }
 
     public static Prize valueOfMatchCount(long matchCount) {
-        return BY_MATCH_COUNT.get(matchCount >= Prize.FOURTH.matchCount ? matchCount : NOT_WON);
+        return BY_MATCH_COUNT.get(matchCount >= Prize.FOURTH.matchCount ? matchCount : 0);
+    }
+
+    public static List<Prize> valuesOfWin() {
+        return Arrays.asList(Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.FIRST);
     }
 
     public long getMatchCount() {
         return matchCount;
     }
 
-    public int getPrize() {
-        return prize;
+    public int getReward() {
+        return reward;
     }
 }
