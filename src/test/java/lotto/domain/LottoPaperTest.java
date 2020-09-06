@@ -17,24 +17,24 @@ class LottoPaperTest {
 
     @BeforeEach
     public void createLottoPaper() {
-        lottoPaper = new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(2), new LottoNum(3)
-                , new LottoNum(4), new LottoNum(5), new LottoNum(6)));
+        lottoPaper = new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2), LottoNum.of(3)
+                , LottoNum.of(4), LottoNum.of(5), LottoNum.of(6)));
     }
 
     @Test
     @DisplayName("중복체크")
     void testValidReduplication() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(1), new LottoNum(3)
-                        , new LottoNum(4), new LottoNum(5), new LottoNum(6))));
+                .isThrownBy(() -> new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(1), LottoNum.of(3)
+                        , LottoNum.of(4), LottoNum.of(5), LottoNum.of(6))));
     }
 
     @Test
     @DisplayName("최대 6자리까지 생성 체크")
     void testValidListSize() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPaper(Arrays.asList(new LottoNum(1), new LottoNum(2), new LottoNum(3)
-                        , new LottoNum(4), new LottoNum(5), new LottoNum(6), new LottoNum(7))));
+                .isThrownBy(() -> new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2), LottoNum.of(3)
+                        , LottoNum.of(4), LottoNum.of(5), LottoNum.of(6), LottoNum.of(7))));
     }
 
     @ParameterizedTest
