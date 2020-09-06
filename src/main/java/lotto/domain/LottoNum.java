@@ -54,6 +54,19 @@ public class LottoNum implements Comparable<LottoNum> {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (!(obj instanceof LottoNum)) {
+            return false;
+        }
+        LottoNum lottoNum = (LottoNum) obj;
+        return lottoNum.lottoNum == this.lottoNum;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+
+        hashCode = prime * hashCode + lottoNum;
+        return hashCode;
     }
 }
