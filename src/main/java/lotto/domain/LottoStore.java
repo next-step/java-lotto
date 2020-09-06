@@ -28,16 +28,6 @@ public class LottoStore {
         }
     }
 
-    private List<LottoPaper> makeAutoLottoNums(Integer paperCount) {
-        return IntStream.range(DEFAULT_RANGE_START, paperCount)
-                .mapToObj(value -> new LottoPaper(getAutoLottoNums()))
-                .collect(Collectors.toList());
-    }
-
-    private List<LottoNum> getAutoLottoNums() {
-        return LottoNumberUtil.getAutoLottoNums();
-    }
-
     private List<LottoPaper> makeManualLottoNums(List<String> autoTexts) {
         if (autoTexts == null) return new ArrayList<>();
         List<LottoPaper> lottoPapers = new ArrayList<>();
@@ -50,12 +40,14 @@ public class LottoStore {
         return lottoPapers;
     }
 
-    public int getManuaCount() {
-        return manualPapers.size();
+    private List<LottoPaper> makeAutoLottoNums(Integer paperCount) {
+        return IntStream.range(DEFAULT_RANGE_START, paperCount)
+                .mapToObj(value -> new LottoPaper(getAutoLottoNums()))
+                .collect(Collectors.toList());
     }
 
-    public int getAutoCount() {
-        return autoPapers.size();
+    private List<LottoNum> getAutoLottoNums() {
+        return LottoNumberUtil.getAutoLottoNums();
     }
 
     public LottoPapers makeLottoPapers() {
@@ -64,4 +56,14 @@ public class LottoStore {
         papers.addAll(autoPapers);
         return new LottoPapers(papers);
     }
+
+    public int getManuaCount() {
+        return manualPapers.size();
+    }
+
+    public int getAutoCount() {
+        return autoPapers.size();
+    }
+
+
 }
