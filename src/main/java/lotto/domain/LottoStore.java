@@ -4,21 +4,19 @@ import lotto.context.Error;
 import lotto.util.LottoNumberUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-    private static final String TEXT_SPLIT_DIVISION = ",";
     private static final int DEFAULT_RANGE_START = 0;
 
-    private final List<LottoPaper> manualPapers;
-    private final List<LottoPaper> autoPapers;
+    private final LottoPapers manualPapers;
+    private final LottoPapers autoPapers;
 
     public LottoStore(List<String> autoTexts, int paperCount) {
-        manualPapers = makeManualLottoNums(autoTexts);
-        autoPapers = makeAutoLottoNums(paperCount - manualPapers.size());
+        manualPapers = new LottoPapers(makeManualLottoNums(autoTexts));
+        autoPapers = new LottoPapers(makeAutoLottoNums(paperCount - manualPapers.getPapersSize()));
         validMaxLotto(paperCount);
     }
 
@@ -34,10 +32,7 @@ public class LottoStore {
         }
         List<LottoPaper> lottoPapers = new ArrayList<>();
         for (String text : autoTexts) {
-            lottoPapers.add(new LottoPaper(Arrays.stream(text.split(TEXT_SPLIT_DIVISION))
-                    .map(String::trim)
-                    .map(s -> LottoNum.of(s))
-                    .collect(Collectors.toList())));
+            lottoPapers.add(new LottoPaper(text));
         }
         return lottoPapers;
     }
@@ -53,18 +48,15 @@ public class LottoStore {
     }
 
     public LottoPapers makeLottoPapers() {
-        List<LottoPaper> papers = new ArrayList<>();
-        papers.addAll(manualPapers);
-        papers.addAll(autoPapers);
-        return new LottoPapers(papers);
+        return LottoPapers.makeLottoPapers(new LottoPapers[]{manualPapers, autoPapers});
     }
 
     public int getManuaCount() {
-        return manualPapers.size();
+        return manualPapers.getPapersSize();
     }
 
     public int getAutoCount() {
-        return autoPapers.size();
+        return autoPapers.getPapersSize();
     }
 
 

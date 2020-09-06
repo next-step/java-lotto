@@ -2,18 +2,27 @@ package lotto.domain;
 
 import lotto.context.Error;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
     private static final int MAX_LIST_SIZE = 6;
+    private static final String TEXT_SPLIT_DIVISION = ",";
 
     private final List<LottoNum> lottoNumbers;
 
     public LottoPaper(List<LottoNum> numberList) {
         validLottoPaper(numberList);
         lottoNumbers = numberList;
+    }
+
+    public LottoPaper(String textNumber) {
+        lottoNumbers = Arrays.stream(textNumber.split(TEXT_SPLIT_DIVISION))
+                .map(String::trim)
+                .map(s -> LottoNum.of(s))
+                .collect(Collectors.toList());
     }
 
     private void validLottoPaper(List<LottoNum> numberList) {
@@ -60,5 +69,4 @@ public class LottoPaper {
                 .map(LottoNum::getLottoNum)
                 .collect(Collectors.toList()).toString();
     }
-
 }
