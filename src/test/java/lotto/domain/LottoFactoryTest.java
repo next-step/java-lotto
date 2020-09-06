@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class LottoFactoryTest {
 
