@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.context.Error;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public class LottoPaper {
     }
 
     public List<LottoNum> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     Integer getMatchCount(List<Integer> lottoNumbers) {
