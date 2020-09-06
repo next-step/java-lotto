@@ -29,7 +29,9 @@ public class LottoStore {
     }
 
     private List<LottoPaper> makeManualLottoNums(List<String> autoTexts) {
-        if (autoTexts == null) return new ArrayList<>();
+        if (autoTexts == null) {
+            return new ArrayList<>();
+        }
         List<LottoPaper> lottoPapers = new ArrayList<>();
         for (String text : autoTexts) {
             lottoPapers.add(new LottoPaper(Arrays.stream(text.split(TEXT_SPLIT_DIVISION))
