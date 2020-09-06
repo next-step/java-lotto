@@ -29,14 +29,25 @@ public class ResultView {
         ResultView.print(MessageUtil.getMsg(Message.INPUT_MSG));
     }
 
+    public static void printManualCount() {
+        ResultView.print(MessageUtil.getMsg(Message.INPUT_MANUAL_COUNT));
+    }
+
+    public static void printManualNumber() {
+        ResultView.print(MessageUtil.getMsg(Message.INPUT_MANUAL_NUMBER));
+    }
+
+
     public static void showLottoNumbersList(List<LottoPaper> papers) {
         print(papers.stream()
                 .map(LottoPaper::toString)
                 .collect(Collectors.joining(LOTTO_PAPER_JOINING_DELIMITER)));
     }
 
-    public static void showBuyCount(Integer papersCount) {
-        print(MessageUtil.getMsg(Message.BUY_COUNT, papersCount.toString()));
+    public static void showBuyCount(int manualCount, int autoCount) {
+        print(MessageUtil.getMsg(Message.BUY_COUNT,
+                Arrays.asList(String.valueOf(manualCount),
+                        String.valueOf(autoCount))));
     }
 
     public static void showInputWinningNumber() {
