@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.context.Error;
 import lotto.util.LottoNumberUtil;
 
 import java.util.ArrayList;
@@ -18,6 +19,13 @@ public class LottoStore {
     public LottoStore(List<String> autoTexts, int paperCount) {
         manualPapers = makeManualLottoNums(autoTexts);
         autoPapers = makeAutoLottoNums(paperCount - manualPapers.size());
+        validMaxLotto(paperCount);
+    }
+
+    private void validMaxLotto(int paperCount) {
+        if ((getAutoCount() + getManuaCount()) > paperCount) {
+            throw new IllegalArgumentException(Error.ERROR_LOTTO_MAX_OVER.getMsg());
+        }
     }
 
     private List<LottoPaper> makeAutoLottoNums(Integer paperCount) {
