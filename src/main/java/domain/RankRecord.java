@@ -42,4 +42,5 @@ public class RankRecord {
 
         return new Money(totalSum);
     }
+
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinnerNumber{
+public class WinnerNumber {
     public static final int MIN_WINNER_NUMBER = 3;
 
     private Lotto winnerNumber;
@@ -14,7 +14,7 @@ public class WinnerNumber{
     public WinnerNumber(String[] winnerNumber, int bonusNumber) {
         Set<LottoNo> winnerLotto = Arrays.stream(winnerNumber)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(e->new LottoNo(e))
+                .mapToObj(e -> new LottoNo(e))
                 .collect(Collectors.toSet());
 
         validateBonus(winnerLotto, bonusNumber);
@@ -23,8 +23,8 @@ public class WinnerNumber{
         this.winnerNumber = new Lotto(winnerLotto);
     }
 
-    public void validateBonus(Set<LottoNo>lotto, int bonus) {
-        boolean hasComponent = lotto.contains(bonus);
+    public void validateBonus(Set<LottoNo> lotto, int bonus) {
+        boolean hasComponent = lotto.stream().anyMatch(e -> e.getNumber() == bonus);
 
         if (hasComponent) {
             throw new IllegalArgumentException("Bonus number Err!");
@@ -57,13 +57,9 @@ public class WinnerNumber{
     int getCountingNumber(Lotto lotto) {
         int count = (int) lotto.getLottoNumber()
                 .stream()
-                .filter(e->winnerNumber.getLottoNumber().contains(e))
+                .filter(e -> winnerNumber.getLottoNumber().contains(e))
                 .count();
 
         return count;
-    }
-
-    public Lotto getWinnerNumber() {
-        return winnerNumber;
     }
 }

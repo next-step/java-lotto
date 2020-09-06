@@ -47,7 +47,7 @@ public class Lotto {
         }
     }
 
-    public boolean hasBonusNumber(int bonus){
+    boolean hasBonusNumber(int bonus){
         return lottoNumber.contains(new LottoNo(bonus));
     }
 }
