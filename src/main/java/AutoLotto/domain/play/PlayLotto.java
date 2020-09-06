@@ -1,8 +1,11 @@
 package AutoLotto.domain.play;
 
+import AutoLotto.domain.lotto.Lotto;
 import AutoLotto.domain.lotto.LottoNum;
 import AutoLotto.domain.lotto.Lottos;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PlayLotto {
@@ -15,14 +18,30 @@ public class PlayLotto {
         this.buzzNumList = buzzNumList;
     }
 
-    public int countHits() {
-        int sumHit = 0;
-        for (LottoNum buzzNum : buzzNumList) {
-            int countHit = lottos.getLottos().stream()
-                            .mapToInt(lotto -> buzzNum.countMatch(lotto))
-                            .sum();
-            sumHit += countHit;
-            }
-        return sumHit;
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
+
+    public List<LottoNum> getBuzzNumList() {
+        return buzzNumList;
+    }
+
+    public void counts() {
+        //LinkedHashMap<Integer, Integer>
+        //Integer : hitNumber
+        //Integer : counts of hitNumber
+    }
+
+    public List<Integer> countHits() {
+        List<Integer> countHitsList = new ArrayList<>();
+        for (Lotto lotto : getLottos()) {
+            int countHit = buzzNumList.stream()
+                    .mapToInt(buzzNum -> buzzNum.countMatch(lotto))
+                    .sum();
+            countHitsList.add(countHit);
+        }
+        return countHitsList;
+
+    }
+
 }

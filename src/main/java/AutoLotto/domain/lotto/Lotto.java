@@ -8,7 +8,7 @@ public class Lotto {
 
     private final List<LottoNum> lotto;
 
-    Lotto() {
+    public Lotto() {
         this.lotto = createLotto();
     }
 
