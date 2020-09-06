@@ -19,10 +19,10 @@ public class LottoBundle {
     }
 
     public LottoResult drawing(LottoNumbers winningNumbers) {
-        return new LottoResult(groupinbByPrize(winningNumbers));
+        return new LottoResult(groupingByPrize(winningNumbers));
     }
 
-    private Map<Prize, Integer> groupinbByPrize(LottoNumbers winningNumbers) {
+    private Map<Prize, Integer> groupingByPrize(LottoNumbers winningNumbers) {
         Map<Prize, List<LottoNumbers>> ticketsPerPrize = tickets.stream()
                 .collect(groupingBy(lottoNumbers -> lottoNumbers.matchNumbers(winningNumbers)));
         return ticketsPerPrize.entrySet()
