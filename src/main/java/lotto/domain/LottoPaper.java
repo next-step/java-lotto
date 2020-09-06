@@ -16,11 +16,8 @@ public class LottoPaper {
     }
 
     private void validLottoPaper(List<LottoNum> numberList) {
-        if (numberList.size() > MAX_LIST_SIZE) {
+        if (numberList.size() > MAX_LIST_SIZE || isReduplication(numberList)) {
             throw new IllegalArgumentException(Error.ERROR_MAX_LIST_LOTTO_PAPER.getMsg());
-        }
-        if (isReduplication(numberList)) {
-            throw new IllegalArgumentException(Error.ERROR_REDUPLICATION_LOTTO_PAPER.getMsg());
         }
     }
 
