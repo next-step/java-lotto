@@ -1,12 +1,18 @@
 package AutoLotto.domain.play;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static AutoLotto.utils.Constants.*;
 
 public enum Rank {
-    FIRST(6,  2000000000),
-    SECOND(5,1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000);
+    FIRST(MATCH_COUNT_FIRST, RANK_MONEY_FIRST),
+    SECOND(MATCH_COUNT_SECOND,RANK_MONEY_SECOND),
+    THIRD(MATCH_COUNT_THIRD, RANK_MONEY_THIRD),
+    FOURTH(MATCH_COUNT_FOURTH, RANK_MONEY_FOURTH),
+    FIFTH(MATCH_COUNT_FIFTH, ZERO_MONEY_FIFTH),
+    SIXTH(MATCH_COUNT_SIXTH, ZERO_MONEY_SIXTH),
+    NO_MATCH(MATCH_COUNT_NO_MATCH, ZERO_MONEY_NO_MATCH);
 
     public final int matchCount;
     public final int rankMoney;
@@ -27,7 +33,7 @@ public enum Rank {
     public static Rank matchOf(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
-                .findFirst()
+                .findAny()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -35,34 +41,10 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-
-
-//    int createBuzzMoney(PlayLotto playLotto) {
-//        int sum = 0;
-//        int hits1 = playLotto.countHits()
-//                .stream()
-//                .filter(o -> o.equals(Rank.FIRST.hits))
-//                .mapToInt(o -> 1)
-//                .sum();
-//        sum += hits1 * Rank.FIRST.rankMoney;
-//        int hits2 = playLotto.countHits()
-//                .stream()
-//                .filter(o -> o.equals(Rank.SECOND.hits))
-//                .mapToInt(o -> 1)
-//                .sum();
-//        sum +=  hits2 * Rank.SECOND.rankMoney;
-//        int hits3 = playLotto.countHits()
-//                .stream()
-//                .filter(o -> o.equals(Rank.THIRD.hits))
-//                .mapToInt(o -> 1)
-//                .sum();
-//        sum += hits3 * Rank.THIRD.rankMoney;
-//        int hits4 = playLotto.countHits()
-//                .stream()
-//                .filter(o -> o.equals(Rank.FOURTH.hits))
-//                .mapToInt(o -> 1)
-//                .sum();
-//        sum += hits4 * Rank.FOURTH.rankMoney;
-//        return sum;
-//    }
+    public static int createBuzzMoney(List<Integer> matchCountList) {
+        return matchCountList.stream()
+                .map(matchCount -> Rank.matchOf(matchCount))
+                .mapToInt(rank -> rank.getRankMoney())
+                .sum();
+    }
 }

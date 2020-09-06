@@ -2,6 +2,7 @@ package AutoLotto.domain.lotto;
 
 import java.util.List;
 import java.util.Objects;
+import static AutoLotto.utils.Constants.*;
 
 public class LottoNumber {
 
@@ -16,7 +17,7 @@ public class LottoNumber {
     }
 
     private int checkLottoNumber(int lottoNumber) {
-        if (lottoNumber <= 45 && lottoNumber > 0) {
+        if (lottoNumber <= LOTTO_NUMBER_MAX && lottoNumber >= LOTTO_NUMBER_MIN) {
             return lottoNumber;
         }
         throw new RuntimeException();
