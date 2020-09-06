@@ -19,11 +19,18 @@ public class LottoBundle {
     }
 
     public LottoResult drawing(LottoNumbers winningNumbers) {
+        return new LottoResult(groupinbByPrize(winningNumbers));
+    }
+
+    private Map<Prize, Integer> groupinbByPrize(LottoNumbers winningNumbers) {
         Map<Prize, List<LottoNumbers>> ticketsPerPrize = tickets.stream()
                 .collect(groupingBy(lottoNumbers -> lottoNumbers.matchNumbers(winningNumbers)));
-
-        return new LottoResult(ticketsPerPrize.entrySet()
+        return ticketsPerPrize.entrySet()
                 .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size())));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
+    }
+
+    public List<LottoNumbers> getTickets() {
+        return tickets;
     }
 }
