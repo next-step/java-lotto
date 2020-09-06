@@ -32,6 +32,10 @@ public enum Prize {
         return BY_MATCH_COUNT.get(matchCount >= Prize.FOURTH.matchCount ? matchCount : NOT_WON);
     }
 
+    public long getMatchCount() {
+        return matchCount;
+    }
+
     public int getPrize() {
         return prize;
     }
