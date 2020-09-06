@@ -1,7 +1,7 @@
 package AutoLotto.domain.play;
 
 import AutoLotto.domain.lotto.Lotto;
-import AutoLotto.domain.lotto.LottoNum;
+import AutoLotto.domain.lotto.LottoNumber;
 import AutoLotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +15,8 @@ public class PlayLottoTest {
     @Test
     void canCountHitsForTest() {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(), new Lotto()));
-        List<LottoNum> buzzNumList = Arrays.asList(new LottoNum(45), new LottoNum(7), new LottoNum(3),
-                new LottoNum(4), new LottoNum(17), new LottoNum(31));
+        List<LottoNumber> buzzNumList = Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(17), new LottoNumber(31));
 
         PlayLotto playLotto = new PlayLotto(lottos, buzzNumList);
 
