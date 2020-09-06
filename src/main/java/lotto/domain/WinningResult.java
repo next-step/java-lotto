@@ -10,7 +10,7 @@ public class WinningResult {
     private static final int DEFAULT_BONUS_INDEX = 0;
 
     private final LottoPaper winningPaper;
-    private final LottoPaper bonusPaper;
+    private final LottoNum bonusNumber;
 
     public WinningResult(String winningLottoNumbers, String bonusNumber) {
         validWinningResult(winningLottoNumbers);
@@ -19,7 +19,7 @@ public class WinningResult {
                 .map(Integer::parseInt)
                 .map(LottoNum::of)
                 .collect(Collectors.toList()));
-        bonusPaper = new LottoPaper(Arrays.asList(LottoNum.of(bonusNumber)));
+        this.bonusNumber = LottoNum.of(bonusNumber);
     }
 
     private void validWinningResult(String winningLottoNumbers) {
@@ -42,6 +42,10 @@ public class WinningResult {
     }
 
     boolean hasBonusBall(LottoPaper lottoPaper) {
-        return lottoPaper.isContain(bonusPaper.getLottoNumbers().get(DEFAULT_BONUS_INDEX));
+        return lottoPaper.isContain(getBonusNumber());
+    }
+
+    public LottoNum getBonusNumber() {
+        return bonusNumber;
     }
 }
