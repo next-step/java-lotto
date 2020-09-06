@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public class WinningEarningsRate {
     private double earningsRate;
 
