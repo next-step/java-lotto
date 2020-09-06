@@ -14,17 +14,21 @@ public class UserLottos {
         this.userLottos = userLottos;
     }
 
-    public List<UserLotto> getLottos() {
+    public List<UserLotto> getUserLottos() {
         return userLottos;
     }
 
     public static List<UserLotto> buyLottosWith(int budget) {
-        int numOfLottos = CheckDivideBy.divideToInt(Integer.toString(budget), "1000");
-        List<UserLotto> userLottoList = new ArrayList<>(numOfLottos);
-            for (int i = 0; i < numOfLottos ; i++) {
+        int lottosCount = countLottosBy(budget);
+        List<UserLotto> userLottoList = new ArrayList<>(lottosCount);
+            for (int i = 0; i < lottosCount ; i++) {
                 userLottoList.add(new UserLotto());
             }
             return userLottoList;
+    }
+
+    public static int countLottosBy(int budget) {
+        return CheckDivideBy.divideToInt(Integer.toString(budget), "1000");
     }
 
     @Override

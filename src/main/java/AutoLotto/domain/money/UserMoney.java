@@ -26,10 +26,15 @@ public class UserMoney {
     }
 
     public boolean isPlusProfitBy(int buzzMoney) {
+        Double profitRate = makeProfitRateBy(buzzMoney);
+        return profitRate >= 1;
+    }
+
+    public Double makeProfitRateBy(int buzzMoney) {
         String left = Integer.toString(buzzMoney);
         String right = Integer.toString(budget);
         Double profitRate = divideToDecimal(left, right);
-        return profitRate >= 1;
+        return profitRate;
     }
 
     @Override

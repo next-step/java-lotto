@@ -2,6 +2,8 @@ package AutoLotto.domain.lotto;
 
 import AutoLotto.domain.play.Rank;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,11 +19,26 @@ public class BuzzLotto {
         return buzzLotto;
     }
 
+    // 명령(count) - 질의(DTO, List<Integer> result) 구분 필요
+    public List<Integer> countMatchAll(List<UserLotto> userLottos) {
+        List<Integer> matchCountList = new ArrayList<>( );
+        for (UserLotto userLotto : userLottos) {
+            int oneCount = countMatch(userLotto);
+            matchCountList.add(oneCount);
+        }
+        return matchCountList;
+    }
+
     public Rank findRankByMatch(UserLotto userLotto) {
+        int matchCount = countMatch(userLotto);
+        return Rank.matchOf(matchCount);
+    }
+
+    private int countMatch(UserLotto userLotto) {
         int matchCount = getBuzzLotto().stream()
                 .mapToInt(buzzNumber -> buzzNumber.countMatch(userLotto))
                 .sum();
-        return Rank.matchOf(matchCount);
+        return matchCount;
     }
 
     @Override
