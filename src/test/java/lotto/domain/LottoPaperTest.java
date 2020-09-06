@@ -52,7 +52,14 @@ class LottoPaperTest {
     }
 
     @Test
+    void getWinninLottoNumberToIntegerList() {
+        Assertions.assertThat(lottoPaper.getLottoNumberToIntegerList())
+                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
     void isContain() {
-        Assertions.assertThat(lottoPaper.isContain(6)).isTrue();
+        Assertions.assertThat(lottoPaper.isContain(LottoNum.of(6))).isTrue();
+        Assertions.assertThat(lottoPaper.isContain(LottoNum.of(7))).isFalse();
     }
 }

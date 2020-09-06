@@ -14,10 +14,11 @@ public class LottoGame {
         ResultView.showBuyCount(lottoPapers.getPapersSize());
         ResultView.showLottoNumbersList(lottoPapers.getPapers());
         ResultView.showInputWinningNumber();
-
-        WinningResult winningResult = new WinningResult(InputView.inputText());
+        String winningLottoNumbers = InputView.inputText();
         ResultView.showInputBonusNumber();
-        winningResult.setBonusNum(LottoNum.of(InputView.inputText()));
+        String bonusNumber = InputView.inputText();
+
+        WinningResult winningResult = new WinningResult(winningLottoNumbers, bonusNumber);
         WinningTable winningTable = winningResult.makeWinningTable(lottoPapers.getPapers());
 
         ResultView.showResult(winningTable.getMatchCountTable());

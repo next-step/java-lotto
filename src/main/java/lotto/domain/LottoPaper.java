@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.context.Error;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
@@ -40,17 +39,21 @@ public class LottoPaper {
         return lottoNumbers;
     }
 
-    Integer getMatchCount(List<Integer> winningNumber) {
+    Integer getMatchCount(List<Integer> lottoNumbers) {
         return (int) this.lottoNumbers.stream()
                 .map(LottoNum::getLottoNum)
-                .filter(winningNumber::contains)
+                .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public boolean isContain(int number) {
-        return Optional.ofNullable(number)
-                .map(lottoNumbers::equals)
-                .isPresent();
+    public boolean isContain(LottoNum bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
+    public List<Integer> getLottoNumberToIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -59,4 +62,5 @@ public class LottoPaper {
                 .map(LottoNum::getLottoNum)
                 .collect(Collectors.toList()).toString();
     }
+
 }
