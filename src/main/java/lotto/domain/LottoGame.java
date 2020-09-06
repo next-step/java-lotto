@@ -3,9 +3,6 @@ package lotto.domain;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
 
     public static void start() {
