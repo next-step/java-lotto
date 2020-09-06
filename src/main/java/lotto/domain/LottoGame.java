@@ -13,13 +13,9 @@ public class LottoGame {
         InputMoney inputMoney = new InputMoney(InputView.inputText());
         ResultView.printManualCount();
         int manualCount = InputView.inputInt();
-
         ResultView.printManualNumber();
-        List<String> autoText = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            autoText.add(InputView.inputText());
-        }
-        LottoStore lottoStore = new LottoStore(autoText, inputMoney.getPaperCount());
+
+        LottoStore lottoStore = new LottoStore(InputView.inputManualLotto(manualCount), inputMoney.getPaperCount());
         LottoPapers lottoPapers = lottoStore.makeLottoPapers();
 
         ResultView.showBuyCount(lottoStore.getManuaCount(), lottoStore.getAutoCount());
