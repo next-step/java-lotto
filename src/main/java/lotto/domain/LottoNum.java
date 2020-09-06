@@ -10,8 +10,8 @@ public class LottoNum implements Comparable<LottoNum> {
     private final int lottoNum;
 
     private LottoNum(Integer lottoNum) {
-        validLottoNumNullCheck(lottoNum);
-        validLottoNumNumberCheck(lottoNum);
+        validNull(lottoNum);
+        validNumber(lottoNum);
         this.lottoNum = lottoNum;
     }
 
@@ -23,13 +23,13 @@ public class LottoNum implements Comparable<LottoNum> {
         return of(getValidStringToInteger(num));
     }
 
-    private static void validLottoNumNullCheck(Integer lottoNum) {
+    private static void validNull(Integer lottoNum) {
         if (lottoNum == null || "".equals(lottoNum)) {
             throw new IllegalArgumentException(Error.ERROR_INPUT_TYPE.getMsg());
         }
     }
 
-    private static void validLottoNumNumberCheck(Integer lottoNum) {
+    private static void validNumber(Integer lottoNum) {
         if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException(Error.ERROR_WINNING_NUMBER.getMsg());
         }
