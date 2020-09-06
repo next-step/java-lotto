@@ -42,11 +42,11 @@ public class LottoStore {
 
     private List<LottoPaper> makeAutoLottoNums(Integer paperCount) {
         return IntStream.range(DEFAULT_RANGE_START, paperCount)
-                .mapToObj(value -> new LottoPaper(getAutoLottoNums()))
+                .mapToObj(value -> new LottoPaper(makeAutoLottoNums()))
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNum> getAutoLottoNums() {
+    private List<LottoNum> makeAutoLottoNums() {
         return LottoNumberUtil.getAutoLottoNums();
     }
 
