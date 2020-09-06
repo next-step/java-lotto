@@ -10,7 +10,7 @@ public class LottoFactory {
     private static List<Integer> numbers;
 
     static {
-        numbers = IntStream.range(LottoNumbers.MIN_NUMBER, LottoNumbers.MAX_NUMBER)
+        numbers = IntStream.range(LottoNumbers.MIN_NUMBER, LottoNumbers.MAX_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList());
     }
@@ -26,6 +26,6 @@ public class LottoFactory {
 
     private static LottoNumbers provideLottoNumbers() {
         Collections.shuffle(numbers);
-        return new LottoNumbers(numbers.subList(0, LottoNumbers.SIZE));
+        return new LottoNumbers(new ArrayList<>(numbers.subList(0, LottoNumbers.SIZE)));
     }
 }
