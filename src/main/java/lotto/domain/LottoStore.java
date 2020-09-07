@@ -14,10 +14,11 @@ public class LottoStore {
     private final LottoPapers manualPapers;
     private final LottoPapers autoPapers;
 
-    public LottoStore(List<String> autoTexts, int paperCount) {
-        validMaxLotto(autoTexts.size(), paperCount);
-        manualPapers = new LottoPapers(makeManualLottoNums(autoTexts));
-        autoPapers = new LottoPapers(makeAutoLottoNums(paperCount - manualPapers.getPapersSize()));
+    public LottoStore(List<String> manualTexts, int paperCount) {
+        int autoSize = manualTexts == null ? 0 :manualTexts.size();
+        validMaxLotto(autoSize, paperCount);
+        manualPapers = new LottoPapers(makeManualLottoNums(manualTexts));
+        autoPapers = new LottoPapers(makeAutoLottoNums(paperCount - autoSize));
 
     }
 
@@ -49,7 +50,7 @@ public class LottoStore {
     }
 
     public LottoPapers makeLottoPapers() {
-        return LottoPapers.makeAll(new LottoPapers[]{manualPapers, autoPapers});
+        return manualPapers.addAll(autoPapers);
     }
 
     public int getManuaCount() {
