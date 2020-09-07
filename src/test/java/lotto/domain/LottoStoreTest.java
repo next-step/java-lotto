@@ -22,10 +22,8 @@ class LottoStoreTest {
     @Test
     @DisplayName("객체 생성")
     void createLottoStore() {
-        Assertions.assertThat(lottoStore.getManuaCount())
-                .isEqualToComparingFieldByField(2);
-        Assertions.assertThat(lottoStore.getAutoCount())
-                .isEqualToComparingFieldByField(0);
+        Assertions.assertThat(lottoStore.getManuaCount()).isEqualTo(2);
+        Assertions.assertThat(lottoStore.getAutoCount()).isEqualTo(0);
     }
 
     @Test
