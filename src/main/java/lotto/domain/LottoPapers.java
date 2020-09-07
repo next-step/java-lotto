@@ -11,11 +11,10 @@ public class LottoPapers {
         this.lottoPapers = lottoPapers;
     }
 
-    public static LottoPapers makeAll(LottoPapers... lottoPapersArray) {
+    public LottoPapers addAll(LottoPapers lottoPapers) {
         List<LottoPaper> papers = new ArrayList<>();
-        for (int i = 0; i < lottoPapersArray.length; i++) {
-            papers.addAll(lottoPapersArray[i].getLottoPapers());
-        }
+        papers.addAll(this.getLottoPapers());
+        papers.addAll(lottoPapers.getLottoPapers());
         return new LottoPapers(papers);
     }
     
