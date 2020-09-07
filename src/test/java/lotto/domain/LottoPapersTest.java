@@ -22,7 +22,7 @@ class LottoPapersTest {
     @Test
     void makeAll() {
         LottoPapers lottoPapers2 = new LottoStore(null, 3).makeLottoPapers();
-        Assertions.assertThat(LottoPapers.makeAll(lottoPapers, lottoPapers2).getPapersSize())
+        Assertions.assertThat(lottoPapers.addAll(lottoPapers2).getPapersSize())
                 .isEqualTo(6);
     }
 }
