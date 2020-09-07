@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoFactory;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -13,7 +10,7 @@ public class LottoMachine {
         LottoBundle bundle = LottoFactory.buyTickets(InputView.howMuch());
         ResultView.showTickets(bundle);
 
-        LottoNumbers winningNumbers = LottoNumbers.of(InputView.getWinningNumbers());
+        WinningLotto winningNumbers = WinningLotto.of(InputView.getWinningNumbers());
 
         LottoResult result = bundle.drawing(winningNumbers);
         ResultView.showDrawingResult(result);

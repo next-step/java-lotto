@@ -56,7 +56,7 @@ public class LottoBundleTest {
     @DisplayName("등수별 당첨된 로또 장수")
     void drawing() {
         // given
-        LottoNumbers winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+        WinningLotto winningNumbers = new WinningLotto(LottoNumbers.of(1, 2, 3, 4, 5, 6));
 
         LottoBundle bundle = new LottoBundle(Arrays.asList(
                 LottoNumbers.of(1, 7, 8, 9, 10, 11),
