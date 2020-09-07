@@ -16,8 +16,9 @@ public class WinningLotto {
         return new WinningLotto(Lotto.of(numbers), LottoNumber.of(bonusNumber));
     }
 
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public Rank getRankByLotto(Lotto lotto) {
+        return Rank.valueOf(lotto.getMatchCountByWinningLotto(winningNumbers),
+                lotto.hasNumber(bonusNumber));
     }
 
     @Override
