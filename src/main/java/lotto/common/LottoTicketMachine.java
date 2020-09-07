@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toSet;
+
 public class LottoTicketMachine {
     private static final int LOTTO_TICKET_PRICE = 1_000;
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -37,8 +40,10 @@ public class LottoTicketMachine {
     }
 
     public static LottoTicket issueTicket(String lottoNumberParam) {
-        Set<LottoNumber> lottoNumbers = convertToLottoNumbers(lottoNumberParam);
-        return new LottoTicket(lottoNumbers);
+        return Arrays.stream(lottoNumberParam.split(","))
+                .map(String::trim)
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toSet(), LottoTicket::new));
     }
 
     private static void validate(int money) {
@@ -51,11 +56,5 @@ public class LottoTicketMachine {
         Collections.shuffle(lottoNumbers);
         Set<LottoNumber> sixNumbers = new HashSet<>(lottoNumbers.subList(0,6));
         return new LottoTicket(sixNumbers);
-    }
-
-    private static Set<LottoNumber> convertToLottoNumbers(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(","))
-                .map(numberValue -> new LottoNumber(numberValue.trim()))
-                .collect(Collectors.toSet());
     }
 }
