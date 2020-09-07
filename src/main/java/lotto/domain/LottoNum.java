@@ -36,13 +36,13 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     private static Integer getValidStringToInteger(String num) {
-        int conv = 0;
+        int convert = 0;
         try {
-            conv = Integer.parseInt(num);
+            convert = Integer.parseInt(num);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Error.ERROR_INPUT_NULL.getMsg());
         }
-        return conv;
+        return convert;
     }
 
     public int getLottoNum() {
