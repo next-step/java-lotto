@@ -18,8 +18,8 @@ public class UserLottos {
         return userLottos;
     }
 
-    public static List<UserLotto> buyLottosWith(int budget) {
-        int lottosCount = countLottosBy(budget);
+    public static List<UserLotto> buyLottosWith(int money) {
+        int lottosCount = countLottosBy(money);
         List<UserLotto> userLottoList = new ArrayList<>(lottosCount);
             for (int i = 0; i < lottosCount ; i++) {
                 userLottoList.add(new UserLotto());
@@ -27,8 +27,8 @@ public class UserLottos {
             return userLottoList;
     }
 
-    public static int countLottosBy(int budget) {
-        return CheckDivideBy.divideToInt(Integer.toString(budget), "1000");
+    public static int countLottosBy(int money) {
+        return CheckDivideBy.divideToInt(Integer.toString(money), "1000");
     }
 
     @Override

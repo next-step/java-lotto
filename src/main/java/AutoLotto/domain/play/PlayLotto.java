@@ -3,6 +3,7 @@ package AutoLotto.domain.play;
 import AutoLotto.domain.lotto.BuzzLotto;
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.LottoNumber;
+import AutoLotto.domain.lotto.UserLottos;
 import AutoLotto.domain.money.Money;
 
 import java.util.ArrayList;
@@ -11,16 +12,22 @@ import java.util.Objects;
 
 public class PlayLotto {
 
-    private final Money budget;
+    private final Money money;
     private final List<UserLotto> userLottos;
     private final List<LottoNumber> buzzLotto;
 
-//    PlayLotto(int budget, BuzzLotto buzzLotto) {
-      PlayLotto(int budget, List<UserLotto> userLottos, BuzzLotto buzzLotto) {
-        this.budget = new Money(budget);
-        //this.userLottos = UserLottos.buyLottosWith(budget);
+    public PlayLotto(int money, List<LottoNumber> buzzLotto) {
+        this(money, UserLottos.buyLottosWith(money), buzzLotto);
+    }
+
+     PlayLotto(int money, List<UserLotto> userLottos, List<LottoNumber> buzzLotto) { //테스트 위해 userLotto 직접
+        this.money = new Money(money);
         this.userLottos = userLottos;
-        this.buzzLotto = buzzLotto.getBuzzLotto();
+        this.buzzLotto = buzzLotto;
+    }
+
+    public int getMoney() {
+        return money.getMoney();
     }
 
     public List<UserLotto> getUserLottos() {
@@ -31,16 +38,20 @@ public class PlayLotto {
         return buzzLotto;
     }
 
+    public Double makePlayProfitRateBy() {return money.makeProfitRateBy(Rank.createBuzzMoney(countMatchAll()));}
+
     public boolean isPlayPlusProfit() {
-        return budget.isPlusProfitBy(Rank.createBuzzMoney(countPlayMatch()));
+        return money.isPlusProfitBy(Rank.createBuzzMoney(countMatchAll()));
     }
 
-    public List<Integer> countPlayMatch() {
-        return countMatchAll();
-    }
+//    public List<Integer> countRankAll() {
+//         return countMatchAll().stream()
+//                 .filter(count -> count == 3)
+////                 .map();
+//      }
 
     // 명령(count) - 질의(DTO, List<Integer> result) 구분 필요
-    private List<Integer> countMatchAll() {
+    public List<Integer> countMatchAll() {
         List<Integer> matchCountList = new ArrayList<>( );
         for (UserLotto userLotto : userLottos) {
             int oneCount = countMatch(userLotto);

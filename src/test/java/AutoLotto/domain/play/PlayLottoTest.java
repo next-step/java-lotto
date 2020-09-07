@@ -16,11 +16,10 @@ public class PlayLottoTest {
     @Test
     void canCreatePlay() {
         int budget = 4000;
-        List<UserLotto> userLottos = UserLottos.buyLottosWith(budget);
-        BuzzLotto buzzLotto = new BuzzLotto(Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(17), new LottoNumber(31)));
+        List<LottoNumber> buzzLotto = Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(17), new LottoNumber(31));
 
-        PlayLotto playLotto = new PlayLotto(budget, userLottos, buzzLotto);
+        PlayLotto playLotto = new PlayLotto(budget, buzzLotto);
 
         assertThat(playLotto.getUserLottos().size()).isEqualTo(4);
     }
@@ -34,8 +33,8 @@ public class PlayLottoTest {
         UserLotto userLotto3 = new UserLotto(Arrays.asList(new LottoNumber(4), new LottoNumber(6), new LottoNumber(8),
                 new LottoNumber(10), new LottoNumber(12), new LottoNumber(14))); //5
 
-        BuzzLotto buzzLotto = new BuzzLotto(Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
-                new LottoNumber(8), new LottoNumber(10), new LottoNumber(12)));
+        List<LottoNumber> buzzLotto = Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
+                new LottoNumber(8), new LottoNumber(10), new LottoNumber(12));
 
         int budget = 3000;
         List<UserLotto> userLottos = Arrays.asList(userLotto1, userLotto2, userLotto3);
@@ -59,13 +58,13 @@ public class PlayLottoTest {
 
         List<UserLotto> userLottos = Arrays.asList(userLotto1, userLotto2, userLotto3);
 
-        BuzzLotto buzzLotto = new BuzzLotto(Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
-                new LottoNumber(8), new LottoNumber(10), new LottoNumber(12)));
+        List<LottoNumber> buzzLotto = Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
+                new LottoNumber(8), new LottoNumber(10), new LottoNumber(12));
 
         int budget = 3000;
         PlayLotto playLotto = new PlayLotto(budget, userLottos, buzzLotto);
 
-        assertThat(playLotto.countPlayMatch()).hasSize(3).containsExactly(3,2,5);
+        assertThat(playLotto.countMatchAll()).hasSize(3).containsExactly(3,2,5);
     }
 
 }

@@ -30,7 +30,7 @@ public class Money {
         return profitRate >= 1;
     }
 
-    private Double makeProfitRateBy(int buzzMoney) {
+    public Double makeProfitRateBy(int buzzMoney) {
         String left = Integer.toString(buzzMoney);
         String right = Integer.toString(money);
         Double profitRate = divideToDecimal(left, right);

@@ -16,7 +16,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    private int checkLottoNumber(int lottoNumber) {
+    public static int checkLottoNumber(int lottoNumber) {
         if (lottoNumber <= LOTTO_NUMBER_MAX && lottoNumber >= LOTTO_NUMBER_MIN) {
             return lottoNumber;
         }
