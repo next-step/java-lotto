@@ -18,17 +18,20 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    // 우승 번호 생성 시 사용
+    // WinningLotto에서 사용
     public static LottoNumbers of(List<Integer> numbers) {
-        Set<LottoNumber> numberSet = numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-        return of(numberSet);
+        return of(boxedInSet(numbers));
     }
 
     // 테스트 코드에서 사용
     public static LottoNumbers of(Integer ... numbers) {
-        return of(Arrays.asList(numbers));
+        return of(boxedInSet(Arrays.asList(numbers)));
+    }
+
+    private static Set<LottoNumber> boxedInSet(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
     private static void validateSize(Set<LottoNumber> numbers) {
@@ -47,6 +50,19 @@ public class LottoNumbers {
 
     private boolean containsWinningNumber(LottoNumber number) {
         return this.numbers.contains(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return numbers.equals(that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
