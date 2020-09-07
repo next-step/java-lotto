@@ -20,7 +20,7 @@ public class PlayLotto {
         this(money, UserLottos.buyLottosWith(money), buzzLotto);
     }
 
-     PlayLotto(int money, List<UserLotto> userLottos, List<LottoNumber> buzzLotto) { //테스트 위해 userLotto 직접
+     public PlayLotto(int money, List<UserLotto> userLottos, List<LottoNumber> buzzLotto) { //테스트 위해 userLotto 직접
         this.money = new Money(money);
         this.userLottos = userLottos;
         this.buzzLotto = buzzLotto;

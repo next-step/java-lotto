@@ -2,54 +2,47 @@ package AutoLotto.view;
 
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.UserLottos;
+import AutoLotto.domain.play.PlayLotto;
 import AutoLotto.domain.play.Rank;
 
+import static AutoLotto.utils.Constants.*;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OutputView {
 
     private OutputView(){}
 
-    public static void printPlayResult(int budget, List<Integer> buzzLotto) {
-     printLottosCount(budget); //inputView
-     printUserLottos(UserLottos.buyLottosWith(budget));
-     printEmptyLine();
-     printBuzzLottoEach(buzzLotto);      //inputView
-     printEmptyLine();
-     printPlayLottoResult(budget, buzzLotto);
-    }
 
-    private static void printLottosCount(int budget) {
-        System.out.println(budget);
-        System.out.println(UserLottos.countLottosBy(budget) + "개를 구매했습니다.");
+    public static void printLottosCount(int money) {
+        System.out.printf(SAY_COUNT_USERLOTTOS, UserLottos.countLottosBy(money));
     }
 
     //UserLottos.buyLottosWith(budget) 생성된 Lotto의 list 가져와 돌면서 출력
-    private static void printUserLottos(List<UserLotto> userLottos) {
+    public static void printUserLottos(List<UserLotto> userLottos) {
+        System.out.println("lottos list");
 
     }
 
-    private static void printEmptyLine() {
+    public static void printEmptyLine() {
         System.out.println("");
     }
+//
+//    public static void printBuzzNumberEach(List<LottoNumber> buzzLotto) {
+//        System.out.println(buzzLotto.stream()
+//                .map(number -> number.toString())
+//                .collect(Collectors.joining(", ")));
+//    }
 
-    private static void printBuzzLottoEach(List<Integer> buzzLotto) {
-        System.out.println(buzzLotto.stream()
-                .map(number -> number.toString())
-                .collect(Collectors.joining(", ")));
-    }
-    //EmptyLine
 
-    private static void printPlayLottoResult(int budget, List<Integer> buzzLotto) {
-        System.out.println("당첨 통계\n---------");
+    public static void printPlayLottoResult(PlayLotto playLotto) {
+        System.out.println(SAY_PLAY_RESULT_START);
         //countMatchAll()로 나온  matchCountList에 3이 나온 횟수, 4가 나온 횟수.. %2f
-        System.out.printf( "3개 일치 (%d원)- %d개", Rank.FOURTH.rankMoney,0);
-        System.out.printf( "4개 일치 (%d원)- %d개", Rank.THIRD.rankMoney,0);
-        System.out.printf( "5개 일치 (%d원)- %d개", Rank.SECOND.rankMoney,0);
-        System.out.printf( "6개 일치 (%d원)- %d개", Rank.FIRST.rankMoney,0);
-        System.out.printf("총 수익률은 %d 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
-                0, "손해||이득");
+        System.out.printf( "3개 일치 (%d원)- %d개\n", Rank.FOURTH.rankMoney,0);
+        System.out.printf( "4개 일치 (%d원)- %d개\n", Rank.THIRD.rankMoney,0);
+        System.out.printf( "5개 일치 (%d원)- %d개\n", Rank.SECOND.rankMoney,0);
+        System.out.printf( "6개 일치 (%d원)- %d개\n", Rank.FIRST.rankMoney,0);
+        System.out.printf(SAY_PLAY_PROFIT, playLotto.makePlayProfitRateBy(), "손해||이득");
     }
 
 
