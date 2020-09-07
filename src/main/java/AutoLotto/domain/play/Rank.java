@@ -37,6 +37,7 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+
     private boolean isSameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
