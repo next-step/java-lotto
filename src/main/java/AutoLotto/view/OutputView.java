@@ -19,6 +19,7 @@ public class OutputView {
     }
 
     //UserLottos.buyLottosWith(budget) 생성된 Lotto의 list 가져와 돌면서 출력
+    //하나의 Lottto 안에서는 sorted 오름차순 필요
     public static void printUserLottos(List<UserLotto> userLottos) {
         System.out.println("lottos list");
 

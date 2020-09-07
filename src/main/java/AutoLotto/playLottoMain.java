@@ -1,5 +1,6 @@
 package AutoLotto;
 
+import AutoLotto.domain.lotto.LottoNumber;
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.UserLottos;
 import AutoLotto.domain.play.PlayLotto;
@@ -18,7 +19,8 @@ public class playLottoMain {
         List<UserLotto> userLottos = UserLottos.buyLottosWith(money);
         printUserLottos(userLottos);
         printEmptyLine();
-        PlayLotto playLotto = new PlayLotto(money, userLottos, getBuzzLotto());
+        List<LottoNumber> buzzLotto = getBuzzLotto();
+        PlayLotto playLotto = new PlayLotto(money, userLottos, buzzLotto);
         printPlayLottoResult(playLotto);
     }
 }

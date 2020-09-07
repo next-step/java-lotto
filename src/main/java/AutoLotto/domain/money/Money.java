@@ -3,7 +3,7 @@ package AutoLotto.domain.money;
 import java.util.Objects;
 
 import static AutoLotto.utils.CheckDivideBy.divideToDecimal;
-import static AutoLotto.utils.CheckMoney.isNullOrBlank;
+import static AutoLotto.utils.CheckString.isNullOrBlank;
 
 public class Money {
 

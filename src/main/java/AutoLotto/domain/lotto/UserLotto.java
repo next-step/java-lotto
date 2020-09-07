@@ -9,7 +9,7 @@ public class UserLotto {
     private final List<LottoNumber> userLotto;
 
     public UserLotto() {
-        this.userLotto = createLotto();  //테스트 후 다시 복구
+        this (createLotto());  //테스트 후 다시 복구
     }
 
     public UserLotto(List<LottoNumber> userLotto) {

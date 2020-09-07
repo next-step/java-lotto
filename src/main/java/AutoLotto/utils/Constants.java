@@ -4,6 +4,9 @@ public class Constants {
 
     public static final int LOTTO_NUMBER_MAX = 45;
     public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+
+    public static final String INPUT_NUMBERS_DELIMITER =",";
 
     public static final String ASK_MONEY = "구입금액을 입력해 주세요.";
     public static final String SAY_COUNT_USERLOTTOS = "%d개를 구매했습니다.\n";
