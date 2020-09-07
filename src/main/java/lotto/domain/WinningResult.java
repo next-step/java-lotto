@@ -4,20 +4,22 @@ import lotto.context.Error;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class WinningResult {
-    private final LottoPaper winningPaper;
-    private LottoNum bonusNum;
+    private static final int DEFAULT_BONUS_INDEX = 0;
 
-    public WinningResult(String winningLottoNumbers) {
+    private final LottoPaper winningPaper;
+    private final LottoNum bonusNumber;
+
+    public WinningResult(String winningLottoNumbers, String bonusNumber) {
         validWinningResult(winningLottoNumbers);
         winningPaper = new LottoPaper(Arrays.stream(winningLottoNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNum::of)
                 .collect(Collectors.toList()));
+        this.bonusNumber = LottoNum.of(bonusNumber);
     }
 
     private void validWinningResult(String winningLottoNumbers) {
@@ -26,28 +28,24 @@ public class WinningResult {
         }
     }
 
-    public List<Integer> getWinningLottoNumberToIntegerList() {
-        return winningPaper.getLottoNumbers().stream()
-                .map(LottoNum::getLottoNum)
-                .collect(Collectors.toList());
-    }
-
-    public void setBonusNum(LottoNum lottoNum) {
-        this.bonusNum = lottoNum;
-    }
-
     public WinningTable makeWinningTable(List<LottoPaper> lottoPapers) {
         WinningTable winningTable = new WinningTable();
 
         lottoPapers.forEach(lottoPaper -> {
-            winningTable.setAutoIncrementMatchCountResult(lottoPaper.getMatchCount(getWinningLottoNumberToIntegerList()),
-                    isBonus(lottoPaper));
+            winningTable.incrementMatchCountResult(getMatchCount(lottoPaper), hasBonusBall(lottoPaper));
         });
         return winningTable;
     }
 
-    private boolean isBonus(LottoPaper lottoPaper) {
-        return lottoPaper.isContain(Optional.ofNullable(bonusNum.getLottoNum())
-                .get());
+    int getMatchCount(LottoPaper lottoPaper) {
+        return lottoPaper.getMatchCount(winningPaper.getLottoNumberToIntegerList());
+    }
+
+    boolean hasBonusBall(LottoPaper lottoPaper) {
+        return lottoPaper.isContain(getBonusNumber());
+    }
+
+    public LottoNum getBonusNumber() {
+        return bonusNumber;
     }
 }

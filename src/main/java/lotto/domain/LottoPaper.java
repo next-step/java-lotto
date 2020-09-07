@@ -2,12 +2,14 @@ package lotto.domain;
 
 import lotto.context.Error;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
-    private static final int MAX_LIST_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
+    private static final String TEXT_SPLIT_DIVISION = ",";
 
     private final List<LottoNum> lottoNumbers;
 
@@ -16,12 +18,16 @@ public class LottoPaper {
         lottoNumbers = numberList;
     }
 
+    public LottoPaper(String textNumber) {
+        this(Arrays.stream(textNumber.split(TEXT_SPLIT_DIVISION))
+                .map(String::trim)
+                .map(s -> LottoNum.of(s))
+                .collect(Collectors.toList()));
+    }
+
     private void validLottoPaper(List<LottoNum> numberList) {
-        if (numberList.size() > MAX_LIST_SIZE) {
+        if (numberList.size() != LOTTO_SIZE || isReduplication(numberList)) {
             throw new IllegalArgumentException(Error.ERROR_MAX_LIST_LOTTO_PAPER.getMsg());
-        }
-        if (isReduplication(numberList)) {
-            throw new IllegalArgumentException(Error.ERROR_REDUPLICATION_LOTTO_PAPER.getMsg());
         }
     }
 
@@ -37,20 +43,24 @@ public class LottoPaper {
     }
 
     public List<LottoNum> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
-    Integer getMatchCount(List<Integer> winningNumber) {
+    Integer getMatchCount(List<Integer> lottoNumbers) {
         return (int) this.lottoNumbers.stream()
                 .map(LottoNum::getLottoNum)
-                .filter(winningNumber::contains)
+                .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public boolean isContain(int number) {
-        return Optional.ofNullable(number)
-                .map(lottoNumbers::equals)
-                .isPresent();
+    public boolean isContain(LottoNum bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
+    public List<Integer> getLottoNumberToIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNum::getLottoNum)
+                .collect(Collectors.toList());
     }
 
     @Override

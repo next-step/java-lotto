@@ -9,18 +9,18 @@ class LottoNumTest {
 
     @BeforeEach
     void create() {
-        lottoNum = new LottoNum(1);
+        lottoNum = LottoNum.of(1);
     }
 
     @Test
     void createLottoNum() {
-        Assertions.assertThat(lottoNum).isEqualToComparingFieldByField(new LottoNum(1));
+        Assertions.assertThat(lottoNum).isEqualToComparingFieldByField(LottoNum.of(1));
     }
 
     @Test
     void getLottoNumVaild() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNum(46));
+                .isThrownBy(() -> LottoNum.of(46));
     }
 
     @Test

@@ -7,18 +7,23 @@ public class LottoGame {
 
     public static void start() {
         ResultView.printInputMsg();
-
         InputMoney inputMoney = new InputMoney(InputView.inputText());
-        LottoPapers lottoPapers = new LottoPapers(inputMoney.getPaperCount());
+        ResultView.printManualCount();
+        int manualCount = InputView.inputInt();
+        ResultView.printManualNumber();
 
-        ResultView.showBuyCount(lottoPapers.getPapersSize());
-        ResultView.showLottoNumbersList(lottoPapers.getPapers());
+        LottoStore lottoStore = new LottoStore(InputView.inputManualLotto(manualCount), inputMoney.getPaperCount());
+        LottoPapers lottoPapers = lottoStore.makeLottoPapers();
+
+        ResultView.showBuyCount(lottoStore.getManuaCount(), lottoStore.getAutoCount());
+        ResultView.showLottoNumbersList(lottoPapers.getLottoPapers());
         ResultView.showInputWinningNumber();
-
-        WinningResult winningResult = new WinningResult(InputView.inputText());
+        String winningLottoNumbers = InputView.inputText();
         ResultView.showInputBonusNumber();
-        winningResult.setBonusNum(LottoNum.of(InputView.inputText()));
-        WinningTable winningTable = winningResult.makeWinningTable(lottoPapers.getPapers());
+        String bonusNumber = InputView.inputText();
+
+        WinningResult winningResult = new WinningResult(winningLottoNumbers, bonusNumber);
+        WinningTable winningTable = winningResult.makeWinningTable(lottoPapers.getLottoPapers());
 
         ResultView.showResult(winningTable.getMatchCountTable());
         ResultView.showDelimiter();

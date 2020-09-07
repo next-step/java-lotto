@@ -33,7 +33,7 @@ public class WinningTable {
         return Collections.unmodifiableMap(matchCountTable);
     }
 
-    public void setAutoIncrementMatchCountResult(Integer matchCount, boolean isBonus) {
+    public void incrementMatchCountResult(Integer matchCount, boolean isBonus) {
         if (matchCount < MIN_MATCH_COUNT) {
             return;
         }

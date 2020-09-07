@@ -4,7 +4,6 @@ import lotto.domain.LottoNum;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class LottoNumberUtil {
@@ -27,7 +26,7 @@ public class LottoNumberUtil {
     private static void setDefaultLottoNums() {
         lottoNums = new ArrayList<>(45);
         for (int i = 0; i < 45; i++) {
-            lottoNums.add(new LottoNum(i + 1));
+            lottoNums.add(LottoNum.of(i + 1));
         }
     }
 

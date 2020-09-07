@@ -23,14 +23,14 @@ class WinningTableTest {
     @Test
     @DisplayName("일치하는 수의 당첨자 수를 증가시킨다.")
     void setAutoIncrementMatchCountResult() {
-        winningTable.setAutoIncrementMatchCountResult(3, false);
-        winningTable.setAutoIncrementMatchCountResult(3, false);
+        winningTable.incrementMatchCountResult(3, false);
+        winningTable.incrementMatchCountResult(3, false);
         Assertions.assertThat(winningTable.getMatchCountTable().get(Rank.getRank(3,false))).isEqualTo(2);
     }
 
     @Test
     void getTotalWinningMoney() {
-        winningTable.setAutoIncrementMatchCountResult(4, false);
+        winningTable.incrementMatchCountResult(4, false);
         Assertions.assertThat(winningTable.getTotalWinningMoney()).isEqualTo(Rank.FOURTH.getWinningMoney());
     }
 }

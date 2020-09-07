@@ -11,20 +11,34 @@ class WinningResultTest {
     WinningResult winningResult;
     @BeforeEach
     void create() {
-        winningResult = new WinningResult("1, 2, 3, 4, 5, 6");
-    }
-
-    @Test
-    void getWinninLottoNumberToIntegerList() {
-        Assertions.assertThat(winningResult.getWinningLottoNumberToIntegerList())
-                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningResult = new WinningResult("1, 2, 3, 4, 5, 6", "1");
     }
 
     @Test
     @DisplayName("WinningTable 생성확인")
     void makeWinningTable() {
-        winningResult.setBonusNum(LottoNum.of(1));
-        Assertions.assertThat(winningResult.makeWinningTable(new LottoPapers(3).getPapers()).getMatchCountTable())
+        Assertions.assertThat(winningResult.makeWinningTable(new LottoStore(null, 3)
+                .makeLottoPapers().getLottoPapers()).getMatchCountTable())
                 .isEqualTo(new WinningTable().getMatchCountTable());
+    }
+
+    @Test
+    void hasBonus() {
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
+                .isTrue();
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(10), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
+                .isFalse();
+    }
+
+    @Test
+    void getMatchCount() {
+        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
+                .isEqualTo(6);
+        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(20) ,LottoNum.of(30) ,LottoNum.of(40)))))
+                .isEqualTo(3);
     }
 }
