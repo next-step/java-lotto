@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -13,11 +14,11 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
-    public static Lotto of(ArrayList<Integer> lottoNums) {
+    public static Lotto of(List<Integer> lottoNums) {
         return new Lotto(LottoNumbers.create(lottoNums));
     }
 
-    public void findLottoRank(ArrayList<Integer> winningLottoNumbers) {
+    public void findLottoRank(List<Integer> winningLottoNumbers) {
         this.rank = lottoNums.getLottoRank(winningLottoNumbers);
     }
 
