@@ -17,7 +17,31 @@ public class LottoNumbers {
 
     public static LottoNumbers create(ArrayList<Integer> lottoNums) {
 
-        return new LottoNumbers(lottoNums.stream().map( val -> LottoNumber.of(val))
-                                                  .collect(toCollection(ArrayList::new)));
+        return new LottoNumbers(lottoNums.stream().map(val -> LottoNumber.of(val))
+                .collect(toCollection(ArrayList::new)));
     }
+
+    public Rank getLottoRank(ArrayList<Integer> winningLottoNumbers) {
+        int matchCount = 0;
+
+        for(Integer winningLottoNumber : winningLottoNumbers) {
+            matchCount += getMactchCnt(winningLottoNumber);
+        }
+
+        return Rank.create(matchCount);
+    }
+
+    private int getMactchCnt(Integer winningLottoNumber) {
+
+        for(LottoNumber lottoNumber : lottoNumbers) {
+            if(lottoNumber.isMatchNumber(winningLottoNumber)) {
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    
+    
 }

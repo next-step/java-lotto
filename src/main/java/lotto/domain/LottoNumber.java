@@ -4,7 +4,7 @@ public class LottoNumber {
 
     private Integer number;
 
-    public LottoNumber(int number) { }
+    public LottoNumber(int number) { this.number = number; }
 
 
     public static LottoNumber of(int number) {
@@ -35,5 +35,13 @@ public class LottoNumber {
         if(obj == null || getClass() != obj.getClass()) return false;
         LottoNumber lotto = (LottoNumber) obj;
         return number == ((LottoNumber) obj).number;
+    }
+
+    public boolean isMatchNumber(int number) {
+        boolean result = false;
+        if(this.number == number) {
+            result = true;
+        }
+        return result;
     }
 }

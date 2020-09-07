@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
@@ -30,4 +31,52 @@ public class LottoNumbersTest {
         LottoNumbers expected = new LottoNumbers();
         assertThat(LottoNumbers.create(lottoNums)).isEqualTo(expected);
     }
+
+    @DisplayName("로또번호 1등 찾기")
+    @Test
+    public void 로또번호_1등찾기() {
+        ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
+                .limit(6)
+                .collect(toCollection(ArrayList::new));
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(lottoNums)).isEqualTo(Rank.FirstPlace);
+    }
+
+    @DisplayName("로또번호 2등 찾기")
+    @Test
+    public void 로또번호_2등찾기() {
+        ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
+                .limit(6)
+                .collect(toCollection(ArrayList::new));
+
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(Rank.SecondPlace);
+    }
+
+    @DisplayName("로또번호 3등 찾기")
+    @Test
+    public void 로또번호_3등찾기() {
+        ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
+                .limit(6)
+                .collect(toCollection(ArrayList::new));
+
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 7, 8));
+
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(3);
+    }
+
+    @DisplayName("로또번호 4등 찾기")
+    @Test
+    public void 로또번호_4등찾기() {
+        ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
+                .limit(6)
+                .collect(toCollection(ArrayList::new));
+
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 9, 7, 8));
+
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(4);
+    }
+
+
+
 }

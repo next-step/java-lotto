@@ -38,4 +38,12 @@ public class LottoNumberTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("당첨번호를 받아 로또 번호와 같은지 체크")
+    @Test
+    public void 당첨번호_맞는지_테스트() {
+        int number = 3;
+        assertThat(LottoNumber.of(number).isMatchNumber(number)).isTrue();
+        assertThat(LottoNumber.of(number).isMatchNumber(4)).isFalse();
+    }
+
 }
