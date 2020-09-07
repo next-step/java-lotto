@@ -3,18 +3,23 @@ package AutoLotto.domain.play;
 import AutoLotto.domain.lotto.BuzzLotto;
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.LottoNumber;
-import AutoLotto.domain.lotto.UserLottos;
+import AutoLotto.domain.money.Money;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class PlayLotto {
 
+    private final Money budget;
     private final List<UserLotto> userLottos;
     private final List<LottoNumber> buzzLotto;
 
-    PlayLotto(UserLottos userLottos, BuzzLotto buzzLotto) {
-        this.userLottos = userLottos.getUserLottos();
+//    PlayLotto(int budget, BuzzLotto buzzLotto) {
+      PlayLotto(int budget, List<UserLotto> userLottos, BuzzLotto buzzLotto) {
+        this.budget = new Money(budget);
+        //this.userLottos = UserLottos.buyLottosWith(budget);
+        this.userLottos = userLottos;
         this.buzzLotto = buzzLotto.getBuzzLotto();
     }
 
@@ -26,11 +31,36 @@ public class PlayLotto {
         return buzzLotto;
     }
 
-    public void start() {
-//        List<Integer> matchCountList = buzzLotto.countMatchAll(userLottos);
-//        Rank.createBuzzMoney(buzzLotto.countMatchAll(userLottos));
+    public boolean isPlayPlusProfit() {
+        return budget.isPlusProfitBy(Rank.createBuzzMoney(countPlayMatch()));
     }
 
+    public List<Integer> countPlayMatch() {
+        return countMatchAll();
+    }
+
+    // 명령(count) - 질의(DTO, List<Integer> result) 구분 필요
+    private List<Integer> countMatchAll() {
+        List<Integer> matchCountList = new ArrayList<>( );
+        for (UserLotto userLotto : userLottos) {
+            int oneCount = countMatch(userLotto);
+            matchCountList.add(oneCount);
+        }
+        return matchCountList;
+    }
+
+    private int countMatch(UserLotto userLotto) {
+        int matchCount = getBuzzLotto().stream()
+                .mapToInt(buzzNumber -> buzzNumber.countMatch(userLotto))
+                .sum();
+        return matchCount;
+    }
+
+
+    public Rank findRankByMatch(UserLotto userLotto) {
+        int matchCount = countMatch(userLotto);
+        return Rank.matchOf(matchCount);
+    }
 
     @Override
     public boolean equals(Object o) {

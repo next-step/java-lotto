@@ -1,13 +1,10 @@
 package AutoLotto.view;
 
-import AutoLotto.domain.lotto.BuzzLotto;
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.UserLottos;
-import AutoLotto.domain.money.UserMoney;
 import AutoLotto.domain.play.Rank;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class OutputView {
