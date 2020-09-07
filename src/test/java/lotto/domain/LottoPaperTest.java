@@ -35,6 +35,9 @@ class LottoPaperTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2), LottoNum.of(3)
                         , LottoNum.of(4), LottoNum.of(5), LottoNum.of(6), LottoNum.of(7))));
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2), LottoNum.of(3)
+                        , LottoNum.of(4), LottoNum.of(5))));
     }
 
     @ParameterizedTest

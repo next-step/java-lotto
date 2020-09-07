@@ -24,17 +24,21 @@ class WinningResultTest {
 
     @Test
     void hasBonus() {
-        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(1)))))
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
                 .isTrue();
-        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(12)))))
+        Assertions.assertThat(winningResult.hasBonusBall(new LottoPaper(Arrays.asList(LottoNum.of(10), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
                 .isFalse();
     }
 
     @Test
     void getMatchCount() {
-        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1)))))
-                .isEqualTo(1);
-        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2)))))
-                .isEqualTo(2);
+        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(4) ,LottoNum.of(5) ,LottoNum.of(6)))))
+                .isEqualTo(6);
+        Assertions.assertThat(winningResult.getMatchCount(new LottoPaper(Arrays.asList(LottoNum.of(1), LottoNum.of(2),
+                LottoNum.of(3) ,LottoNum.of(20) ,LottoNum.of(30) ,LottoNum.of(40)))))
+                .isEqualTo(3);
     }
 }
