@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static AutoLotto.utils.Constants.*;
+
 public class UserLotto {
 
     private final List<LottoNumber> userLotto;
@@ -21,9 +23,14 @@ public class UserLotto {
     }
 
     private static List<LottoNumber> createLotto() {
-            List<LottoNumber> lottoNumberList = IntStream.range(1, 45).mapToObj(LottoNumber::new).collect(Collectors.toList());
+            List<LottoNumber> lottoNumberList = IntStream
+                                                    .rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+                                                    .mapToObj(number -> new LottoNumber(number))
+                                                    .collect(Collectors.toList());
             Collections.shuffle(lottoNumberList);
-            return lottoNumberList.stream().limit(6).collect(Collectors.toList());
+            return lottoNumberList.stream()
+                        .limit(LOTTO_NUMBER_COUNT)
+                        .collect(Collectors.toList());
     }
 
     @Override

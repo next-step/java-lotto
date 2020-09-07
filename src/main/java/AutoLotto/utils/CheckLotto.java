@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static AutoLotto.utils.Constants.*;
 import static AutoLotto.utils.CheckString.isNullOrBlank;
 
-public class CheckRegex {
+public class CheckLotto {
 
     public static List<LottoNumber> makeBuzzLotto(String input) {
         if (isNullOrBlank(input)) {
@@ -19,10 +19,14 @@ public class CheckRegex {
     }
 
     private static List<LottoNumber> toLotto(List<LottoNumber> lottoNumberList) {
-        if (lottoNumberList.stream().distinct().collect(Collectors.toList()) != lottoNumberList) {
+        if (isNotDistinct(lottoNumberList)) {
             throw new RuntimeException();
         }
         return lottoNumberList;
+    }
+
+    private static boolean isNotDistinct(List<LottoNumber> lottoNumberList) {
+        return lottoNumberList.stream().distinct().collect(Collectors.toList()) != lottoNumberList;
     }
 
     private static String[] splitToTokens(String input) {

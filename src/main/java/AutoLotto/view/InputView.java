@@ -1,7 +1,7 @@
 package AutoLotto.view;
 
 import AutoLotto.domain.lotto.LottoNumber;
-import AutoLotto.utils.CheckRegex;
+import AutoLotto.utils.CheckLotto;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class InputView {
     public static List<LottoNumber> getBuzzLotto() {
         System.out.println(ASK_BUZZLOTTO_NUMBERS);
         String input = systemIn.getStringValue( );
-        List<LottoNumber> buzzLotto = CheckRegex.makeBuzzLotto(input);
+        List<LottoNumber> buzzLotto = CheckLotto.makeBuzzLotto(input);
         return buzzLotto;
     }
 }

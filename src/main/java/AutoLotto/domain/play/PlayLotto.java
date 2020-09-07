@@ -40,10 +40,6 @@ public class PlayLotto {
 
     public Double makePlayProfitRateBy() {return money.makeProfitRateBy(Rank.createBuzzMoney(countMatchAll()));}
 
-    public boolean isPlayPlusProfit() {
-        return money.isPlusProfitBy(Rank.createBuzzMoney(countMatchAll()));
-    }
-
 //    public List<Integer> countRankAll() {
 //         return countMatchAll().stream()
 //                 .filter(count -> count == 3)
