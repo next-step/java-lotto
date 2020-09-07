@@ -22,8 +22,9 @@ public class WinningLotto {
         return new WinningLotto(LottoNumbers.of(numbers));
     }
 
-    public Map<Prize, List<LottoNumbers>> matching(List<LottoNumbers> tickets) {
-        return tickets.stream()
+    public LottoResult drawing(List<LottoNumbers> tickets) {
+        Map<Prize, List<LottoNumbers>> ticketsPerPrize = tickets.stream()
                 .collect(groupingBy(ticket -> ticket.matchNumbers(winningNumbers)));
+        return LottoResult.of(ticketsPerPrize);
     }
 }

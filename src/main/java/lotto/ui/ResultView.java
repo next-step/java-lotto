@@ -1,16 +1,18 @@
 package lotto.ui;
 
-import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.Prize;
+
+import java.util.List;
 
 public class ResultView {
 
     private ResultView() {}
 
-    public static void showTickets(LottoBundle bundle) {
-        System.out.printf("%d개를 구매했습니다.\n", bundle.count());
-        bundle.getTickets()
+    public static void showTickets(List<LottoNumbers> tickets) {
+        System.out.printf("%d개를 구매했습니다.\n", tickets.size());
+        tickets.stream()
                 .forEach(System.out::println);
     }
 

@@ -17,11 +17,10 @@ public class LottoFactory {
 
     private LottoFactory() {}
 
-    public static LottoBundle buyTickets(int payment) {
-        List<LottoNumbers> tickets = IntStream.range(0, payment / TICKET_PRICE)
+    public static List<LottoNumbers> buyTickets(int payment) {
+        return IntStream.range(0, payment / TICKET_PRICE)
                 .mapToObj(n -> provideLottoNumbers())
                 .collect(Collectors.toList());
-        return new LottoBundle(tickets);
     }
 
     private static LottoNumbers provideLottoNumbers() {

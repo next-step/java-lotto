@@ -1,15 +1,28 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
     private final int ROUNDING_PLACE = 100;
     private final Map<Prize, Integer> prizeResult;
 
+    // 테스트 코드에서 사용
     public LottoResult(Map<Prize, Integer> prizeResult) {
         this.prizeResult = prizeResult;
+    }
+
+    public static LottoResult of(Map<Prize, List<LottoNumbers>> prizeResult) {
+        return new LottoResult(countByPrize(prizeResult));
+    }
+
+    private static Map<Prize, Integer> countByPrize(Map<Prize, List<LottoNumbers>> ticketsPerPrize) {
+        return ticketsPerPrize.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
     }
 
     public int getMatchCountByPrize(Prize prize) {

@@ -45,8 +45,9 @@ class WinningLottoTest {
         );
 
         // when
-        Map<Prize, List<LottoNumbers>> actual = winningNumbers.matching(myNumbers);
+        LottoResult actual = winningNumbers.drawing(myNumbers);
 
+        // then
         Map<Prize, List<LottoNumbers>> expected = new HashMap<>();
 
         expected.put(Prize.ETC, Arrays.asList(
@@ -57,7 +58,6 @@ class WinningLottoTest {
         expected.put(Prize.SECOND, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 9)));
         expected.put(Prize.FIRST, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 6)));
 
-        // then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(LottoResult.of(expected));
     }
 }
