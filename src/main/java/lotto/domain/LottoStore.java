@@ -15,13 +15,14 @@ public class LottoStore {
     private final LottoPapers autoPapers;
 
     public LottoStore(List<String> autoTexts, int paperCount) {
+        validMaxLotto(autoTexts.size(), paperCount);
         manualPapers = new LottoPapers(makeManualLottoNums(autoTexts));
         autoPapers = new LottoPapers(makeAutoLottoNums(paperCount - manualPapers.getPapersSize()));
-        validMaxLotto(paperCount);
+
     }
 
-    private void validMaxLotto(int paperCount) {
-        if ((getAutoCount() + getManuaCount()) > paperCount) {
+    private void validMaxLotto(int autoTextsCount, int paperCount) {
+        if (autoTextsCount > paperCount) {
             throw new IllegalArgumentException(Error.ERROR_LOTTO_MAX_OVER.getMsg());
         }
     }

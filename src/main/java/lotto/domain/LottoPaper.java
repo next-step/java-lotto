@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
-    private static final int MAX_LIST_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
     private static final String TEXT_SPLIT_DIVISION = ",";
 
     private final List<LottoNum> lottoNumbers;
@@ -26,7 +26,7 @@ public class LottoPaper {
     }
 
     private void validLottoPaper(List<LottoNum> numberList) {
-        if (numberList.size() > MAX_LIST_SIZE || isReduplication(numberList)) {
+        if (numberList.size() != LOTTO_SIZE || isReduplication(numberList)) {
             throw new IllegalArgumentException(Error.ERROR_MAX_LIST_LOTTO_PAPER.getMsg());
         }
     }
