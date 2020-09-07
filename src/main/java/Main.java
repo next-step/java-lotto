@@ -22,7 +22,10 @@ public class Main {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
 
-        Winners winners = lottoStore.getWinner(lottos, winningNumbers.split(","));
+        System.out.println("보너스 볼을 입력 해 주세요.");
+        int bonusNumber = Integer.parseInt(scanner.nextLine());
+
+        Winners winners = lottoStore.getWinner(lottos, winningNumbers.split(","), bonusNumber);
         SummaryPrinter.summary(winners);
     }
 }

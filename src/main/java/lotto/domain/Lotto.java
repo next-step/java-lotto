@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -15,9 +13,15 @@ public class Lotto {
     private Set<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        this.lotto = new HashSet<LottoNumber>(lotto);
+        this.lotto = new HashSet<>(lotto);
 
         isValidSize();
+    }
+
+    public Lotto(String[] lottoStrArr){
+        this(Arrays.stream(lottoStrArr)
+                .map(i -> LottoNumber.of(Integer.parseInt(i)))
+                .collect(Collectors.toList()));
     }
 
     private void isValidSize(){
@@ -30,11 +34,11 @@ public class Lotto {
     public String toString() {
         String lottoStr = lotto.stream()
                 .sorted()
-                .map(i -> i.toString())
+                .map(LottoNumber::toString)
                 .collect(Collectors.toList())
                 .toString();
 
-        return String.format("%s", lottoStr);
+        return lottoStr;
     }
 
     public boolean isContains(LottoNumber lottoNumber) {
@@ -45,13 +49,13 @@ public class Lotto {
         Count count = Count.ZERO;
 
         for(LottoNumber num : lotto){
-            count = compareLotto.compareAndIncrease(num, count);
+            count = compareLotto.updateCount(num, count);
         }
 
         return count;
     }
 
-    private Count compareAndIncrease(LottoNumber num, Count count) {
+    private Count updateCount(LottoNumber num, Count count) {
         if(isContains(num)){
             count = count.increase();
         }

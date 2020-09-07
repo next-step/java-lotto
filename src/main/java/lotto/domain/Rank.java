@@ -1,20 +1,20 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(Count.of(6), BigDecimal.valueOf(2_000_000_000)),
-    SECOND(Count.of(5), BigDecimal.valueOf(1_500_000)),
-    THIRD(Count.of(4), BigDecimal.valueOf(50_000)),
-    FOURTH(Count.of(3), BigDecimal.valueOf(5_000)),
+    SECOND(Count.of(5), BigDecimal.valueOf(30_000_000)),
+    THIRD(Count.of(5), BigDecimal.valueOf(1_500_000)),
+    FOURTH(Count.of(4), BigDecimal.valueOf(50_000)),
+    FIFTH(Count.of(3), BigDecimal.valueOf(5_000)),
     MISS(Count.ZERO, BigDecimal.valueOf(0));
+
+    private static final Count MIN_WINNING_COUNT = Count.of(3);
+//
+//    private static final Map<Count, Rank> RANKS =
+//            Collections.unmodifiableMap(Stream.of(values())
+//                    .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity())));
 
     private Count countOfMatch;
     private BigDecimal winningMoney;
@@ -32,18 +32,30 @@ public enum Rank {
         return winningMoney;
     }
 
-    private static final Map<Count, Rank> ranks =
-            Collections.unmodifiableMap(Stream.of(values())
-                    .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity())));
+    private static Rank valueOf(Count countOfMatch) {
+        for (Rank rank : values()) {
+            if(isMinWinningCount(countOfMatch)){
+                return MISS;
+            }
 
-    public static Rank valueOf(Count countOfMatch){
-        return Optional.ofNullable(ranks.get(countOfMatch)).orElse(MISS);
+            if (rank.getCountOfMatch().equals(countOfMatch)) {
+                return rank;
+            }
+        }
+        throw new IllegalArgumentException("Invalid match count");
     }
 
-//    private Rank valueOf(int countOfMatch){
-//        return Arrays.stream(values())
-//                .filter(v-> countOfMatch == v.getCountOfMatch())
-//                .findFirst()
-//                .orElseThrow(()-> new IllegalArgumentException("Invalid matching count"));
-//    }
+    public static Rank valueOf(Count countOfMatch, boolean matchBouns){
+        Rank rank = valueOf(countOfMatch);
+
+        if(rank == SECOND && !matchBouns){
+            rank = THIRD;
+        }
+
+        return rank;
+    }
+
+    private static boolean isMinWinningCount(Count count){
+        return count.compareTo(MIN_WINNING_COUNT) < 0;
+    }
 }
