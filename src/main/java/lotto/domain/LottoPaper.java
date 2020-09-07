@@ -19,10 +19,10 @@ public class LottoPaper {
     }
 
     public LottoPaper(String textNumber) {
-        lottoNumbers = Arrays.stream(textNumber.split(TEXT_SPLIT_DIVISION))
+        this(Arrays.stream(textNumber.split(TEXT_SPLIT_DIVISION))
                 .map(String::trim)
                 .map(s -> LottoNum.of(s))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private void validLottoPaper(List<LottoNum> numberList) {
