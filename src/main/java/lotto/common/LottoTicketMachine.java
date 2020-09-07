@@ -1,24 +1,39 @@
 package lotto.common;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPackage;
 import lotto.domain.LottoTicket;
 
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class LottoTicketMachine {
-    // 유틸리티 성격을 가진 클래스이므로 묵시적인 생성자를 방지한다.
-    private LottoTicketMachine() {
+    private static final int LOTTO_TICKET_PRICE = 1_000;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+
+    private static final List<LottoNumber> lottoNumbers;
+
+    static {
+        lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public static LottoPackage issueTickets(int ticketCount) {
+    public static LottoPackage issueTickets(int money) {
+        int ticketCount = calculateTicketCount(money);
+
         List<LottoTicket> lottoTickets = Stream.generate(() -> issueTicket())
-              .limit(ticketCount)
-              .collect(Collectors.toList());
+                .limit(ticketCount)
+                .collect(Collectors.toList());
         return new LottoPackage(lottoTickets);
+    }
+
+    private static int calculateTicketCount(int money) {
+        validate(money);
+        return money / LOTTO_TICKET_PRICE;
     }
 
     public static LottoTicket issueTicket(String lottoNumberParam) {
@@ -26,14 +41,21 @@ public class LottoTicketMachine {
         return new LottoTicket(lottoNumbers);
     }
 
-    private static Set<LottoNumber> convertToLottoNumbers(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(","))
-              .map(numberValue -> new LottoNumber(numberValue.trim()))
-              .collect(Collectors.toSet());
+    private static void validate(int money) {
+        if (money < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException("구입금액이 부족합니다.");
+        }
     }
 
     private static LottoTicket issueTicket() {
-        Set<LottoNumber> sixNumbers = LottoShuffleMachine.getSixNumbers();
+        Collections.shuffle(lottoNumbers);
+        Set<LottoNumber> sixNumbers = new HashSet<>(lottoNumbers.subList(0,6));
         return new LottoTicket(sixNumbers);
+    }
+
+    private static Set<LottoNumber> convertToLottoNumbers(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(","))
+                .map(numberValue -> new LottoNumber(numberValue.trim()))
+                .collect(Collectors.toSet());
     }
 }

@@ -1,13 +1,10 @@
 package lotto.view;
 
-import java.sql.SQLOutput;
 import java.util.Arrays;
-import java.util.List;
+
 import lotto.common.LottoPriceInfo;
 import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoPackage;
-import lotto.domain.LottoSeller;
-import lotto.domain.LottoTicket;
 
 public class OutputView {
 
@@ -15,18 +12,19 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printTicketCount(LottoSeller lottoSeller) {
-        System.out.println(lottoSeller.getTicketCount() + "개를 구매했습니다.");
-    }
-
     public static void printBuyingTickets(LottoPackage lottoPackage) {
-        lottoPackage.getLottoTickets().stream()
-              .forEach(lottoTicket -> System.out.println(lottoTicket));
+        printTicketCount(lottoPackage);
+        lottoPackage.getLottoTickets()
+              .forEach(System.out::println);
     }
 
     public static void printResult(LottoMatchResult lottoMatchResult) {
         printMatchResult(lottoMatchResult);
         printProfit(lottoMatchResult.getProfit());
+    }
+
+    private static void printTicketCount(LottoPackage lottoPack) {
+        System.out.println(lottoPack.getTicketCount() + "개를 구매했습니다.");
     }
 
     private static void printMatchResult(LottoMatchResult lottoMatchResult) {

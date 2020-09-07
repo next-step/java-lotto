@@ -18,6 +18,10 @@ public class LottoPackage {
               .collect(Collectors.toList());
     }
 
+    public int getTicketCount() {
+        return lottoTickets.size();
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }

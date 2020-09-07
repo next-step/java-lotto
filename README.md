@@ -48,3 +48,12 @@
 * LottoMachine = 입력받은 수량만큼 로또를 생성한다.
 * LottoNumberMatcher = 지난주 당첨번호와 구매한 로또티켓들을 받아서 당첨통계를 구한다. 수익률을 구한다.
 * LottoPriceInfo = 일치개수별 상금 정보를 저장한 객체.
+
+---
+### Refactoring
+* 과도하게 분리된 객체 정리 - 책임에 따라 통합
+  * LottoSeller : 돈을 받아서 티켓을 발행해주는 역할
+  * LottoShuffleMachine : 1-45의 번호를 보유하고 있고 6개의 번호를 랜덤으로 반환
+  
+  * LottoTicketMachine : 티켓수만큼 티켓을 발행해주는 역할 ( 티켓수 계산, 6개 번호 랜덤 추출, 티켓 생성)
+
