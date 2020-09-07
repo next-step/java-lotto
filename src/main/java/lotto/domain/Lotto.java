@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    private static final String INVALID_LOTTO_SIZE = "로또 개수는 6개 입니다.";
+    public static final String INVALID_LOTTO_SIZE = "로또 개수는 6개 입니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -32,10 +32,14 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public int getMatchCountByWinningLotto(WinningLotto winningLotto) {
-        return (int) winningLotto.getWinningNumbers().stream()
-                .filter(lottoNumbers::contains)
+    public int getMatchCountByWinningLotto(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lotto::hasNumber)
                 .count();
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

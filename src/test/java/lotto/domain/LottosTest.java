@@ -17,7 +17,7 @@ public class LottosTest {
         lottos = Lottos.of(Arrays.asList(
                 Lotto.of(Arrays.asList(1,2,3,4,5,6)),
                 Lotto.of(Arrays.asList(9,10,11,12,13,14))));
-        winningLotto = WinningLotto.of(Arrays.asList(4,5,6,7,8,9));
+        winningLotto = WinningLotto.of(Arrays.asList(4,5,6,7,8,9), 19);
     }
 
     @DisplayName("로또 개수에 따라 로또 발급 테스트")
@@ -33,6 +33,6 @@ public class LottosTest {
     void match() {
         LottoResult lottoResult = lottos.match(winningLotto);
         assertThat(lottoResult.totalPrizeOfMathRanks()).isEqualTo(5000);
-        assertThat(lottoResult.countOfMathRanks(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.countOfMathRanks(Rank.FIFTH)).isEqualTo(1);
     }
 }

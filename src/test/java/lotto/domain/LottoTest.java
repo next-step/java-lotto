@@ -38,7 +38,13 @@ public class LottoTest {
     @DisplayName("당첨 번호와 로또 번호 매칭 테스트")
     @Test
     void hasWinningNumber() {
-        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1,2,3,4,8,11));
-        assertThat(lotto.getMatchCountByWinningLotto(winningLotto)).isEqualTo(4);
+        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,8,11);
+        assertThat(lotto.getMatchCountByWinningLotto(Lotto.of(winningNumbers))).isEqualTo(4);
+    }
+
+    @DisplayName("로또에 해당 번호가 포함되어 있는지 테스트")
+    @Test
+    void hasNumber() {
+        assertThat(lotto.hasNumber(LottoNumber.of(6))).isTrue();
     }
 }

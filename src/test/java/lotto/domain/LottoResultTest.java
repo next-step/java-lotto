@@ -30,12 +30,12 @@ public class LottoResultTest {
     @DisplayName("총 당첨 금액 테스트")
     @Test
     void totalPrizeOfMathRanks() {
-        assertThat(lottoResult.totalPrizeOfMathRanks()).isEqualTo(5000);
+        assertThat(lottoResult.totalPrizeOfMathRanks()).isEqualTo(50000);
     }
 
     @DisplayName("수익률 계산하기")
     @Test
     void getRateOfLottoGame() {
-        assertThat(lottoResult.rateOfTotalPrize()).isEqualTo(5.0);
+        assertThat(lottoResult.rateOfTotalPrize()).isEqualTo(50.0);
     }
 }

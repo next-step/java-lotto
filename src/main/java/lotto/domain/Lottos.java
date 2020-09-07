@@ -33,7 +33,7 @@ public class Lottos {
 
     public LottoResult match(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> Rank.valueOf(lotto.getMatchCountByWinningLotto(winningLotto)))
+                .map(winningLotto::getRankByLotto)
                 .collect(collectingAndThen(toList(), LottoResult::of));
     }
 
