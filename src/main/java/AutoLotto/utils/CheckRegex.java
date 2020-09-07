@@ -18,11 +18,11 @@ public class CheckRegex {
         return toLotto(toLottoNumberList(splitToTokens(input)));
     }
 
-    private static List<LottoNumber> toLotto(List<LottoNumber> checkLottoNumberRegex) {
-        if (checkLottoNumberRegex.stream().distinct().collect(Collectors.toList()) != checkLottoNumberRegex) {
+    private static List<LottoNumber> toLotto(List<LottoNumber> lottoNumberList) {
+        if (lottoNumberList.stream().distinct().collect(Collectors.toList()) != lottoNumberList) {
             throw new RuntimeException();
         }
-        return checkLottoNumberRegex;
+        return lottoNumberList;
     }
 
     private static String[] splitToTokens(String input) {
@@ -33,14 +33,12 @@ public class CheckRegex {
         return tokens;
     }
 
-
     private static List<LottoNumber> toLottoNumberList(String[] tokens) {
         return Arrays.stream(tokens)
                 .map(token -> LottoNumber.checkLottoNumber(toInt(token)))
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
     }
-
 
     private static int toInt(String token) {
         int number = 0;
@@ -51,7 +49,6 @@ public class CheckRegex {
         }
         return number;
     }
-
 
 // token.matches("^[1-9]{1}$|^[1-3]{1}[0-9]{1}|^4{1}[0-5]{1}"))
 

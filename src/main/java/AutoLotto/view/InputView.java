@@ -24,9 +24,6 @@ public class InputView {
         System.out.println(ASK_BUZZLOTTO_NUMBERS);
         String input = systemIn.getStringValue( );
         List<LottoNumber> buzzLotto = CheckRegex.makeBuzzLotto(input);
-//        buzzLotto.stream()
-//                .mapToInt(lottoNumber -> lottoNumber.getLottoNumber())
-//                .forEach(buzzNumber -> System.out.print(buzzNumber+" "));
         return buzzLotto;
     }
 }

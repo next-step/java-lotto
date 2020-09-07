@@ -13,7 +13,6 @@ public class OutputView {
 
     private OutputView(){}
 
-
     public static void printLottosCount(int money) {
         System.out.printf(SAY_COUNT_USERLOTTOS, UserLottos.countLottosBy(money));
     }
@@ -28,13 +27,6 @@ public class OutputView {
     public static void printEmptyLine() {
         System.out.println("");
     }
-//
-//    public static void printBuzzNumberEach(List<LottoNumber> buzzLotto) {
-//        System.out.println(buzzLotto.stream()
-//                .map(number -> number.toString())
-//                .collect(Collectors.joining(", ")));
-//    }
-
 
     public static void printPlayLottoResult(PlayLotto playLotto) {
         System.out.println(SAY_PLAY_RESULT_START);
@@ -45,6 +37,5 @@ public class OutputView {
         System.out.printf( "6개 일치 (%d원)- %d개\n", Rank.FIRST.rankMoney,0);
         System.out.printf(SAY_PLAY_PROFIT, playLotto.makePlayProfitRateBy(), "손해||이득");
     }
-
 
 }
