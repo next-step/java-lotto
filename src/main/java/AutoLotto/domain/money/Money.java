@@ -5,20 +5,20 @@ import java.util.Objects;
 import static AutoLotto.utils.CheckDivideBy.divideToDecimal;
 import static AutoLotto.utils.CheckMoney.isNullOrBlank;
 
-public class UserMoney {
+public class Money {
 
-    private final int budget;
+    private final int money;
 
-    public UserMoney(int budget) {
-        this.budget = budget;
+    public Money(int money) {
+        this.money = money;
     }
 
-    public int getBudget() {
-        return budget;
+    public int getMoney() {
+        return money;
     }
 
-    public int makeBudget() {
-        String value = Integer.toString(budget);
+    public int makeMoney() {
+        String value = Integer.toString(money);
         if(isNullOrBlank(value)) {
             return 0;
         }
@@ -32,7 +32,7 @@ public class UserMoney {
 
     private Double makeProfitRateBy(int buzzMoney) {
         String left = Integer.toString(buzzMoney);
-        String right = Integer.toString(budget);
+        String right = Integer.toString(money);
         Double profitRate = divideToDecimal(left, right);
         return profitRate;
     }
@@ -40,13 +40,13 @@ public class UserMoney {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass( ) != o.getClass( )) return false;
-        UserMoney userMoney1 = (UserMoney) o;
-        return budget == userMoney1.budget;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(budget);
+        return Objects.hash(money);
     }
 }
