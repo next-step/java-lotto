@@ -33,7 +33,7 @@ public class LottoBundleTest {
     @DisplayName("생성자 예외 발생 테스트")
     void create_IllegalLottoNumbers(List<Integer> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoBundle bundle = new LottoBundle(Arrays.asList(new LottoNumbers(numbers)));
+            LottoBundle bundle = new LottoBundle(Arrays.asList(LottoNumbers.of(numbers)));
         });
     }
 

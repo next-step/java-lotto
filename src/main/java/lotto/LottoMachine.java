@@ -13,7 +13,7 @@ public class LottoMachine {
         LottoBundle bundle = LottoFactory.buyTickets(InputView.howMuch());
         ResultView.showTickets(bundle);
 
-        LottoNumbers winningNumbers = new LottoNumbers(InputView.getWinningNumbers());
+        LottoNumbers winningNumbers = LottoNumbers.of(InputView.getWinningNumbers());
 
         LottoResult result = bundle.drawing(winningNumbers);
         ResultView.showDrawingResult(result);

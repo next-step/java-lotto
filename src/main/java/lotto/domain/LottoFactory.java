@@ -26,6 +26,6 @@ public class LottoFactory {
 
     private static LottoNumbers provideLottoNumbers() {
         Collections.shuffle(numbers);
-        return new LottoNumbers(new ArrayList<>(numbers.subList(0, LottoNumbers.SIZE)));
+        return LottoNumbers.of(new ArrayList<>(numbers.subList(0, LottoNumbers.SIZE)));
     }
 }
