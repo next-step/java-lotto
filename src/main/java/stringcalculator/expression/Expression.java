@@ -1,6 +1,6 @@
 package stringcalculator.expression;
 
-import stringcalculator.common.ExceptionMessage;
+import stringcalculator.common.ExpressionException;
 import stringcalculator.common.ExpressionExtractor;
 import stringcalculator.common.ExpressionValidator;
 
@@ -25,7 +25,7 @@ public class Expression {
 
     private void validate(String expressionValue) {
         if (!ExpressionValidator.validExpression(expressionValue)) {
-            throw new IllegalArgumentException(ExceptionMessage.WRONG_EXPRESSION.printMessage());
+            ExpressionException.wrongExpression();
         }
     }
 

@@ -1,6 +1,6 @@
 package stringcalculator.expression;
 
-import stringcalculator.common.ExceptionMessage;
+import stringcalculator.common.ExpressionException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,13 +14,13 @@ public class ExpressionNumbers {
         validate(values);
 
         this.expressionNumbers = Arrays.stream(values)
-                .map(numberValue -> ExpressionNumber.newInstance(numberValue))
+                .map(ExpressionNumber::newInstance)
                 .collect(Collectors.toList());
     }
 
     private void validate(String[] values) {
         if (values == null || values.length == 0) {
-            throw new IllegalArgumentException(ExceptionMessage.WRONG_NUMBER.printMessage());
+            ExpressionException.wrongNumber();
         }
     }
 
