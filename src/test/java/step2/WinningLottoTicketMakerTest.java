@@ -12,7 +12,15 @@ import static org.assertj.core.api.Assertions.*;
 
 class WinningLottoTicketMakerTest {
 
-    private WinningTicketSelector winningTicketSelector = new WinningTicketSelector("1,2,3,4,5,6");
+    private WinningTicketSelector winningTicketSelector = new WinningTicketSelector("1,2,3,4,5,6" ,1);
+
+    @DisplayName("6개 아닌 갯수 입력시 오류 테스트")
+    @Test
+    void numberCountTest(){
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            WinningTicketSelector selector = new WinningTicketSelector("1,2,3,4,5,6,7", 1);
+        });
+    }
 
     @DisplayName("당첨 번호가 생성 되는지 테스트")
     @Test
@@ -23,6 +31,7 @@ class WinningLottoTicketMakerTest {
     @DisplayName("티켓들 당첨 여부 판단로직 작동하는지 테스트")
     @Test
     void checkWinningNumberCountTest(){
+        int testBonusNumber = 1;
         List<Integer> officialWinningNumbers = new ArrayList<>();
         officialWinningNumbers.add(1);
         officialWinningNumbers.add(2);
@@ -40,8 +49,8 @@ class WinningLottoTicketMakerTest {
         numbers.add(12);
         LottoTicket firstTicket = new LottoTicket(numbers);
         LottoTicket secondTicket = new LottoTicket(numbers);
-        firstTicket.checkWinningTicket(officialWinningNumbers);
-        secondTicket.checkWinningTicket(officialWinningNumbers);
+        firstTicket.checkWinningTicket(officialWinningNumbers , testBonusNumber);
+        secondTicket.checkWinningTicket(officialWinningNumbers, testBonusNumber);
 
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(firstTicket);

@@ -27,6 +27,7 @@ public class LottoTicketTest {
     @DisplayName("당첨 티켓 판별 및 상금 세팅 테스트")
     @Test
     void checkWinningTicketTest(){
+        int testBonusNumber = 45;
         List<Integer> officialWinningNumbers = new ArrayList<>();
         officialWinningNumbers.add(1);
         officialWinningNumbers.add(2);
@@ -43,9 +44,9 @@ public class LottoTicketTest {
         numbers.add(11);
         numbers.add(12);
         LottoTicket ticket = new LottoTicket(numbers);
-        ticket.checkWinningTicket(officialWinningNumbers);
+        ticket.checkWinningTicket(officialWinningNumbers, testBonusNumber);
 
-        assertThat(ticket.getPrizeResult()).isEqualTo(Constant.LOTTO_PRIZE_FOURTH);
+        assertThat(ticket.getPrizeResult()).isEqualTo(Constant.LOTTO_PRIZE_FIFTH);
 
     }
 

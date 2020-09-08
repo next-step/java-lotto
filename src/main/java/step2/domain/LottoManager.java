@@ -28,7 +28,7 @@ public class LottoManager {
     }
 
     private void drawLotto(List<LottoTicket> tickets){
-        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinningNumbers());
+        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinningNumbers(), inputView.askBonusNumber());
         resultView.showStatistics(winningTicketSelector.categorizeWinningTicket(winningTicketSelector.findWinningTicket(tickets)));
     }
 
