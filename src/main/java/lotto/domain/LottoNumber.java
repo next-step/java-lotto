@@ -24,6 +24,10 @@ public class LottoNumber {
         }
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

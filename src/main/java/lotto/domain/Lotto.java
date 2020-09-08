@@ -22,6 +22,10 @@ public class Lotto {
         this.rank = lottoNums.getLottoRank(winningLottoNumbers);
     }
 
+    public LottoNumbers getLottoNums() {
+        return this.lottoNums;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

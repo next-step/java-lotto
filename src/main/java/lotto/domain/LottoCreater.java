@@ -14,7 +14,7 @@ public class LottoCreater {
                                                                       .limit(45)
                                                                       .collect(toCollection(ArrayList::new));
 
-    public static Lottos  issueLottos(int purchaseAmount) {
+    public static Lottos issueLottos(int purchaseAmount) {
 
         int amountOfLotto = purchaseAmount/LOTTO_AMOUNT;
 

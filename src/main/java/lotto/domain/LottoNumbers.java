@@ -22,6 +22,10 @@ public class LottoNumbers {
                 .collect(toCollection(ArrayList::new)));
     }
 
+    public ArrayList<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
     public Rank getLottoRank(List<Integer> winningLottoNumbers) {
         int matchCount = 0;
 
@@ -43,6 +47,12 @@ public class LottoNumbers {
         return 0;
     }
 
-    
+    public String toString() {
+        ArrayList<String> numberList = lottoNumbers.stream().map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                                                             .collect(toCollection(ArrayList::new));
+        return numberList.stream().collect(Collectors.joining(",","[","]"));
+    }
+
+
     
 }
