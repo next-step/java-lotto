@@ -20,18 +20,15 @@ public class LottoNumbers {
 
     // WinningLotto에서 사용
     public static LottoNumbers of(List<Integer> numbers) {
-        return of(boxedInSet(numbers));
+        Set<LottoNumber> numberSet = numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+        return of(numberSet);
     }
 
     // 테스트 코드에서 사용
     public static LottoNumbers of(Integer ... numbers) {
-        return of(boxedInSet(Arrays.asList(numbers)));
-    }
-
-    private static Set<LottoNumber> boxedInSet(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toSet());
+        return of(Arrays.asList(numbers));
     }
 
     private static void validateSize(Set<LottoNumber> numbers) {
