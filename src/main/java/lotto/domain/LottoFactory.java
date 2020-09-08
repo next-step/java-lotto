@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 public class LottoFactory {
 
     public static final int TICKET_PRICE = 1000;
-    private static List<LottoNumber> numbers;
+    private static final List<LottoNumber> NUMBERS;
 
     static {
-        numbers = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1)
+        NUMBERS = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
@@ -24,7 +24,7 @@ public class LottoFactory {
     }
 
     private static LottoNumbers provideLottoNumbers() {
-        Collections.shuffle(numbers);
-        return LottoNumbers.of(new HashSet<>(numbers.subList(0, LottoNumbers.SIZE)));
+        Collections.shuffle(NUMBERS);
+        return LottoNumbers.of(new HashSet<>(NUMBERS.subList(0, LottoNumbers.SIZE)));
     }
 }
