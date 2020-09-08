@@ -2,12 +2,15 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoGameApp {
     public static void main(String[] args) {
 
         int money = InputView.getMoney();
+        List<Lotto> manualLotto = InputView.getManualLotto();
 
-        LottoGame lottoGame = LottoGame.of(money);
+        LottoGame lottoGame = LottoGame.of(money, manualLotto);
 
         OutputView.printLottoGames(lottoGame);
 

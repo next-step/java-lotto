@@ -12,16 +12,17 @@ public class LottoGame {
         this.lottos = lottos;
     }
 
-    public static LottoGame of(int money) {
-        List<Lotto> lottoList = generateLottoNumbersList(money);
+    public static LottoGame of(int money, List<Lotto> manualLottos) {
+        List<Lotto> lottoList = generateLottos(money, manualLottos);
         return new LottoGame(lottoList);
     }
 
-    private static List<Lotto> generateLottoNumbersList(int money) {
-        List<Lotto> lottoNumbers = new ArrayList<>();
+    private static List<Lotto> generateLottos(int money, List<Lotto> manualLottos) {
         int gameCount = money / MONEY_PER_GAME;
 
-        for (int i = 0; i < gameCount; i++) {
+        List<Lotto> lottoNumbers = new ArrayList<>(manualLottos);
+        int autoCount = gameCount - manualLottos.size();
+        for (int i = 0; i < autoCount; i++) {
             lottoNumbers.add(Lotto.auto());
         }
 
