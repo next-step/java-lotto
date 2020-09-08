@@ -15,7 +15,7 @@ public class CheckLotto {
         if (isNullOrBlank(input)) {
             throw new RuntimeException();
         }
-        return toLotto(toLottoNumberList(splitToTokens(input)));
+        return toLotto(toLottoNumberList(toIntegerList(splitToTokens(input))));
     }
 
     private static List<LottoNumber> toLotto(List<LottoNumber> lottoNumberList) {
@@ -37,10 +37,15 @@ public class CheckLotto {
         return tokens;
     }
 
-    private static List<LottoNumber> toLottoNumberList(String[] tokens) {
+    private static List<LottoNumber> toLottoNumberList(List<Integer> integerList) {
+        return integerList.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> toIntegerList(String[] tokens) {
         return Arrays.stream(tokens)
                 .map(token -> LottoNumber.checkLottoNumber(toInt(token)))
-                .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
     }
 

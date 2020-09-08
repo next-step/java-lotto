@@ -20,11 +20,12 @@
    
 [V]      6) Lotto -> List<matchCount> (List<Lotto> ) 리스트 만들기 
 
-[]      7) List<힛> 에서 3, 4, 5, 6 숫자 나온 횟수 각 더하기
+[]      7) List<힛> 에서 3, 4, 5, 6 숫자 나온 횟수 
+        => DTO <Rank, Integer:횟수>  쌓기 add Result, get Result
             Key(일치개수) : value(나온 횟수) 페어링?---------- 해당 변수형의 유효성? 힛 저장소
    
 []      8) 당첨 통계 출력하기
-           (ResultView.printKey, printValue)
+           (getInteger = 개수)
            Key(==3) +"개 일치 ("+ int 5000+"원)- "+(==3).value+"개"
            Key(==4) +"개 일치 ("+ int 50000+"원)- "+(==4).value+"개"
            Key(==5) +"개 일치 ("+ int 1500000+"원)- "+(==5).value+"개"
