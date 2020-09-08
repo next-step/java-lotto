@@ -23,24 +23,6 @@ public class LottoNumber {
         throw new RuntimeException();
     }
 
-    public int countMatch(UserLotto otherlotto) {
-        return otherlotto.getUserLotto()
-                .stream( ).filter(o -> isMatch(o))
-                .mapToInt(i -> 1)
-                .sum();
-    }
-
-    public int countMatchForTest(List<LottoNumber> otherLottoNumberList) {
-        return otherLottoNumberList
-                .stream( ).filter(o -> isMatch(o))
-                .mapToInt(i -> 1)
-                .sum();
-    }
-
-    private boolean isMatch(LottoNumber otherNumber) {
-        return getLottoNumber() == otherNumber.getLottoNumber();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

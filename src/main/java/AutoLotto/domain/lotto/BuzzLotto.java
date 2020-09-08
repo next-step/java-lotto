@@ -1,5 +1,7 @@
 package AutoLotto.domain.lotto;
 
+import AutoLotto.domain.play.Rank;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +15,18 @@ public class BuzzLotto {
 
     public List<LottoNumber> getBuzzLotto() {
         return buzzLotto;
+    }
+
+    public int countMatch(List<LottoNumber> userLotto) {
+        return userLotto
+                .stream( ).filter(lottoNumber -> buzzLotto.contains(lottoNumber))
+                .mapToInt(i -> 1)
+                .sum();
+    }
+
+    public Rank findRankByMatch(List<LottoNumber> userLotto) {
+        int matchCount = countMatch(userLotto);
+        return Rank.matchOf(matchCount);
     }
 
 
