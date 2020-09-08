@@ -30,7 +30,7 @@ public class LottoNumbers {
 
     private static Set<LottoNumber> boxedInSet(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
     }
 

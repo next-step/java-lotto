@@ -11,7 +11,7 @@ public class LottoFactory {
 
     static {
         numbers = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 

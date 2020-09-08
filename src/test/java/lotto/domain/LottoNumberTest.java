@@ -13,13 +13,13 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("로또 번호(원시값)의 포장 객체 생성")
     void create(int number) {
-        assertNotNull(LottoNumber.of(number));
+        assertNotNull(LottoNumber.valueOf(number));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     @DisplayName("로또 번호 유효성 검사")
     void create_validate(int number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(number));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(number));
     }
 }
