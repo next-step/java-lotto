@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {}
+
     public static int splitAndSum(String value) {
         if (isNullOrEmpty(value)) {
             return 0;
@@ -23,10 +25,13 @@ public class StringAddCalculator {
     }
 
     private static int mapToPositiveInt(String value) {
-        int number = Integer.parseInt(value);
-        if (number < 0) {
-            throw new RuntimeException("인자로 음수가 올 수 없습니다.");
+        return validatePositive(Integer.parseInt(value));
+    }
+
+    private static int validatePositive(int number) {
+        if (number >= 0) {
+            return number;
         }
-        return number;
+        throw new RuntimeException("인자로 음수가 올 수 없습니다.");
     }
 }
