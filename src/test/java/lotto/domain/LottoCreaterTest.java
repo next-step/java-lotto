@@ -13,13 +13,13 @@ public class LottoCreaterTest {
     @DisplayName("로또생성기_생성 테스트")
     @Test
     public void 로또_금액만큼_로또발행하기() {
-        assertThat(LottoCreater.issueLottos(1000)).hasSize(1);
+        assertThat(LottoCreater.issueLottos(1000).lottos.size()).isEqualTo(1);
     }
 
     @DisplayName("로또생성기_생성 테스트 여러개")
     @Test
     public void 로또_금액만큼_로또발행하기_여러개() {
-        assertThat(LottoCreater.issueLottos(14000)).hasSize(14);
+        assertThat(LottoCreater.issueLottos(14000).lottos.size()).isEqualTo(14);
     }
 
 

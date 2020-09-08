@@ -14,13 +14,16 @@ public class LottoCreater {
                                                                       .limit(45)
                                                                       .collect(toCollection(ArrayList::new));
 
-    public static ArrayList<Lotto> issueLottos(int purchaseAmount) {
+    public static Lottos  issueLottos(int purchaseAmount) {
 
         int amountOfLotto = purchaseAmount/LOTTO_AMOUNT;
 
-        return Stream.generate(() -> Lotto.of(getLottoNumbers()))
-                     .limit(amountOfLotto)
-                     .collect(toCollection(ArrayList::new));
+        return Lottos.create(
+                            Stream.generate(() -> Lotto.of(getLottoNumbers()))
+                                  .limit(amountOfLotto)
+                                  .collect(toCollection(ArrayList::new))
+                            );
+
     }
 
     public static List<Integer> issueWinningLottoNumbers() {
