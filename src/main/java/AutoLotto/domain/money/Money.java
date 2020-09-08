@@ -1,5 +1,8 @@
 package AutoLotto.domain.money;
 
+import AutoLotto.domain.play.PlayLottoResult;
+import AutoLotto.domain.play.Rank;
+
 import java.util.Objects;
 
 import static AutoLotto.utils.CheckDivideBy.divideToDecimal;
@@ -36,6 +39,11 @@ public class Money {
         Double profitRate = divideToDecimal(left, right);
         return profitRate;
     }
+
+    public Double makePlayProfitRateBy(PlayLottoResult playLottoResult) {
+        return makeProfitRateBy(Rank.createBuzzMoney2(playLottoResult));
+    }
+
 
     @Override
     public boolean equals(Object o) {
