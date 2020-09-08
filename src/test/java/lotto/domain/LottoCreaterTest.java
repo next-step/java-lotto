@@ -31,7 +31,11 @@ public class LottoCreaterTest {
         assertThat(LottoCreater.getLottoNumbers()).containsAnyOf(LottoCreater.getLottoNumbers().toArray(new Integer[0]));
     }
 
-
-
-
+    @DisplayName("로또 당첨번호 생성")
+    @Test
+    public void 당첨번호_생성() {
+        assertThat(LottoCreater.issueWinningLottoNumbers()).hasSize(6);
+        assertThat(LottoCreater.issueWinningLottoNumbers()).doesNotHaveDuplicates();
+        assertThat(LottoCreater.issueWinningLottoNumbers()).containsAnyOf(LottoCreater.getLottoNumbers().toArray(new Integer[0]));
+    }
 }

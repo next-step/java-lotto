@@ -11,17 +11,20 @@ public class LottoCreater {
 
     private static final int LOTTO_AMOUNT = 1000;
     private static final ArrayList<Integer> LOTTO_NUMBER_LIST = Stream.iterate(1, n -> n + 1)
-                                                         .limit(45)
-                                                         .collect(toCollection(ArrayList::new));
-
+                                                                      .limit(45)
+                                                                      .collect(toCollection(ArrayList::new));
 
     public static ArrayList<Lotto> issueLottos(int purchaseAmount) {
 
-        int amountOfLotto =purchaseAmount/LOTTO_AMOUNT;
+        int amountOfLotto = purchaseAmount/LOTTO_AMOUNT;
 
         return Stream.generate(() -> Lotto.of(getLottoNumbers()))
                      .limit(amountOfLotto)
                      .collect(toCollection(ArrayList::new));
+    }
+
+    public static List<Integer> issueWinningLottoNumbers() {
+        return getLottoNumbers();
     }
 
     public static List<Integer> getLottoNumbers() {
