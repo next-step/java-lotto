@@ -1,22 +1,32 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.HashMap;
-import java.util.Map;
+import lotto.common.LottoPriceInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMatchResultTest {
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class LottoMatchResultTest {
 
     @DisplayName("LottoMatch 결과 저장 객체 생성")
     @Test
     void newInstance() {
-        Map<Integer, Integer> matchResult = new HashMap<>();
-        double profit = 0.1;
+        //given
+        List<LottoPriceInfo> lottoPriceInfos = Arrays.asList(LottoPriceInfo.LOTTO_RANK_4, LottoPriceInfo.LOTTO_RANK_3);
+        int money = 3_000;
 
-        LottoMatchResult lottoMatchResult = new LottoMatchResult(matchResult, profit);
+        //when
+        LottoMatchResult lottoMatchResult = new LottoMatchResult(lottoPriceInfos, money);
 
-        assertThat(lottoMatchResult).isNotNull();
+        //then
+        long totalPrice = lottoPriceInfos.stream()
+                .mapToLong(LottoPriceInfo::getPrice)
+                .sum();
+
+        double expected = Math.ceil(totalPrice * 100.0 / money) / 100.0;
+        assertThat(lottoMatchResult.getProfit()).isEqualTo(expected);
     }
 }

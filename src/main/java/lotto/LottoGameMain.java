@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.common.LottoNumberMatcher;
 import lotto.common.LottoTicketMachine;
 import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoPackage;
@@ -19,9 +18,7 @@ public class LottoGameMain {
         String winningNumbers = InputView.inputLastWeekWinningNumbers();
         LottoTicket winningTicket = LottoTicketMachine.issueTicket(winningNumbers);
 
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lottoPackage,
-                winningTicket);
-        LottoMatchResult matchResult = lottoNumberMatcher.match(money);
-        OutputView.printResult(matchResult);
+        LottoMatchResult lottoMatchResult = lottoPackage.matchResult(winningTicket, money);
+        OutputView.printResult(lottoMatchResult);
     }
 }

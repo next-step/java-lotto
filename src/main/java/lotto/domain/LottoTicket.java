@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import lotto.common.LottoPriceInfo;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -17,17 +14,20 @@ public class LottoTicket {
     }
 
     public int matchNumbers(LottoTicket winningTicket) {
-        return lottoNumbers.stream()
-              .filter(lottoNumber -> findMatchNumber(winningTicket, lottoNumber))
-              .collect(Collectors.toList()).size();
+        HashSet<LottoNumber> matchNumbers = new HashSet<>(this.lottoNumbers);
+        matchNumbers.retainAll(winningTicket.lottoNumbers);
+        return matchNumbers.size();
     }
 
-    private boolean findMatchNumber(LottoTicket winningTicket, LottoNumber buyLottoNumber) {
-        Optional<LottoNumber> matchNumber = winningTicket.lottoNumbers.stream()
-              .filter(winningNumber -> buyLottoNumber.equals(winningNumber))
-              .findFirst();
+    public LottoPriceInfo matchNumbers2(LottoTicket winningTicket) {
+        int matchCount = matchCount(winningTicket);
+        return LottoPriceInfo.matchInfo(matchCount);
+    }
 
-        return matchNumber.isPresent();
+    private int matchCount(LottoTicket winningTicket) {
+        HashSet<LottoNumber> matchNumbers = new HashSet<>(this.lottoNumbers);
+        matchNumbers.retainAll(winningTicket.lottoNumbers);
+        return matchNumbers.size();
     }
 
     @Override

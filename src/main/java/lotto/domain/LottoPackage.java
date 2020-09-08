@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoPackage {
 
@@ -13,9 +15,15 @@ public class LottoPackage {
 
     public List<Integer> matchCount(LottoTicket winningTicket) {
         return lottoTickets.stream()
-              .map(lottoTicket -> lottoTicket.matchNumbers(winningTicket))
-              .sorted()
-              .collect(Collectors.toList());
+                .map(lottoTicket -> lottoTicket.matchNumbers(winningTicket))
+                .sorted()
+                .collect(toList());
+    }
+
+    public LottoMatchResult matchResult(LottoTicket winningTicket, int money) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.matchNumbers2(winningTicket))
+                .collect(collectingAndThen(toList(), list -> new LottoMatchResult(list, money)));
     }
 
     public int getTicketCount() {
