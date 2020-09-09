@@ -1,5 +1,6 @@
 package AutoLotto.view;
 
+import AutoLotto.domain.lotto.LottoNumber;
 import AutoLotto.domain.lotto.UserLotto;
 import AutoLotto.domain.lotto.UserLottos;
 import AutoLotto.domain.money.Money;
@@ -10,6 +11,7 @@ import AutoLotto.domain.play.Rank;
 import static AutoLotto.utils.Constants.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
@@ -22,8 +24,17 @@ public class OutputView {
     //UserLottos.buyLottosWith(budget) 생성된 Lotto의 list 가져와 돌면서 출력
     //하나의 Lottto 안에서는 sorted 오름차순 필요
     public static void printUserLottos(List<UserLotto> userLottos) {
-        System.out.println("lottos list");
+        userLottos.stream()
+                .forEach(userLotto -> printLottoAscending(userLotto));
+    }
 
+    private static void printLottoAscending(UserLotto userLotto) {
+        String lottoAscending  = userLotto.getUserLotto().stream()
+                            .map(LottoNumber::getLottoNumber)
+                            .sorted()
+                            .map(number -> number.toString())
+                            .collect(Collectors.joining(", ","[","]"));
+        System.out.println(lottoAscending);
     }
 
     public static void printEmptyLine() {
