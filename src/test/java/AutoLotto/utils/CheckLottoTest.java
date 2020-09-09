@@ -14,8 +14,8 @@ class CheckLottoTest {
     @Test
     void canMakeBuzzLotto() {
 
-//        assertThat(CheckLotto.makeBuzzLotto("1,3,4,15,5,44")).hasSize(6);
-//        assertThat(CheckLotto.makeBuzzLotto("1,3,4,15,5,44").get(0)).isEqualTo(new LottoNumber(1));
+       assertThat(CheckLotto.makeBuzzLotto("1,3,4,15,5,44")).hasSize(6);
+       assertThat(CheckLotto.makeBuzzLotto("1,3,4,15,5,44").get(0)).isEqualTo(new LottoNumber(1));
     }
 
     @Test
@@ -29,12 +29,9 @@ class CheckLottoTest {
                 .isInstanceOf(RuntimeException.class);
 
         //6 but over 45
-        assertThatThrownBy(() -> CheckLotto.makeBuzzLotto("1,3,4,15,5,100"))
+        assertThatThrownBy(() -> CheckLotto.makeBuzzLotto("1,3,4,15,100,5"))
                 .isInstanceOf(RuntimeException.class);
 
-        //6 but blank
-        assertThatThrownBy(() -> CheckLotto.makeBuzzLotto("1,,4,15,5,100"))
-                .isInstanceOf(RuntimeException.class);
 
         //6 but not number
         assertThatThrownBy(() -> CheckLotto.makeBuzzLotto("1,!,4,15,5,100"))

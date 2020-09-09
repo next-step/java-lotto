@@ -30,9 +30,9 @@ public class playLottoMain {
 
         printUserLottos(userLottos);
         printEmptyLine();
-        //List<LottoNumber> buzzLotto = getBuzzLotto();
-        List<LottoNumber> buzzLotto = Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
-                new LottoNumber(8), new LottoNumber(10), new LottoNumber(12));
+        List<LottoNumber> buzzLotto = getBuzzLotto();
+        System.out.print(buzzLotto);
+
         PlayLottoResult playLottoResult = new PlayLottoResult();
         PlayLotto playLotto = new PlayLotto(money, userLottos, buzzLotto);
 

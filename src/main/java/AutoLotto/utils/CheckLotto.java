@@ -13,40 +13,27 @@ public class CheckLotto {
 
     public static List<LottoNumber> makeBuzzLotto(String input) {
         if (isNullOrBlank(input)) {
+            return null;
+        }
+        if (collectLottoNumber(input).size() != LOTTO_NUMBER_COUNT) {
             throw new RuntimeException();
         }
-        return toLotto(toLottoNumberList(toIntegerList(splitToTokens(input))));
+        return collectLottoNumber(input);
     }
 
-    private static List<LottoNumber> toLotto(List<LottoNumber> lottoNumberList) {
-        if (isNotDistinct(lottoNumberList)) {
-            throw new RuntimeException();
-        }
-        return lottoNumberList;
-    }
-
-    private static boolean isNotDistinct(List<LottoNumber> lottoNumberList) {
-        return lottoNumberList.stream().distinct().collect(Collectors.toList()) != lottoNumberList;
+    private static List<LottoNumber> collectLottoNumber(String input) {
+        return Arrays.stream(splitToTokens(input))
+                .filter(token -> token.matches(LOTTO_NUMBER_PATTERN))
+                .map(token -> new LottoNumber(toInt(token)))
+                .collect(Collectors.toList())
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private static String[] splitToTokens(String input) {
         String[] tokens = input.split(INPUT_NUMBERS_DELIMITER);
-        if (tokens.length != LOTTO_NUMBER_COUNT) {
-            throw new RuntimeException();
-        }
         return tokens;
-    }
-
-    private static List<LottoNumber> toLottoNumberList(List<Integer> integerList) {
-        return integerList.stream()
-                .map(number -> new LottoNumber(number))
-                .collect(Collectors.toList());
-    }
-
-    private static List<Integer> toIntegerList(String[] tokens) {
-        return Arrays.stream(tokens)
-                .map(token -> LottoNumber.checkLottoNumber(toInt(token)))
-                .collect(Collectors.toList());
     }
 
     private static int toInt(String token) {
@@ -58,7 +45,4 @@ public class CheckLotto {
         }
         return number;
     }
-
-// token.matches("^[1-9]{1}$|^[1-3]{1}[0-9]{1}|^4{1}[0-5]{1}"))
-
 }

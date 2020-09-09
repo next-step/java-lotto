@@ -9,19 +9,19 @@ public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        this.lottoNumber = checkLottoNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
     public int getLottoNumber() {
         return lottoNumber;
     }
 
-    public static int checkLottoNumber(int lottoNumber) {
-        if (lottoNumber <= LOTTO_NUMBER_MAX && lottoNumber >= LOTTO_NUMBER_MIN) {
-            return lottoNumber;
-        }
-        throw new RuntimeException();
-    }
+//    public LottoNumber makeLottoNumber(int lottoNumber) {
+//        if (lottoNumber <= LOTTO_NUMBER_MAX && lottoNumber >= LOTTO_NUMBER_MIN) {
+//            return new LottoNumber(lottoNumber);
+//        }
+//        return new LottoNumber(0);
+//    }
 
     @Override
     public boolean equals(Object o) {
