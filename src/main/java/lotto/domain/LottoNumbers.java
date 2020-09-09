@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +49,15 @@ public class LottoNumbers {
     }
 
     public String toString() {
-        ArrayList<String> numberList = lottoNumbers.stream().map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+
+        ArrayList<Integer> numberList = lottoNumbers.stream().map(lottoNumber -> lottoNumber.getNumber())
                                                              .collect(toCollection(ArrayList::new));
-        return numberList.stream().collect(Collectors.joining(",","[","]"));
+        Collections.sort(numberList);
+
+        ArrayList<String> numberListStr = numberList.stream().map(value -> Integer.toString(value))
+                                                             .collect(toCollection(ArrayList::new));
+
+        return numberListStr.stream().collect(Collectors.joining(",","[","]"));
     }
 
 

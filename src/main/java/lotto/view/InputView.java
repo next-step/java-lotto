@@ -10,19 +10,22 @@ import static java.util.stream.Collectors.toCollection;
 
 public class InputView {
     private static final String DELIMITER = ",";
+    private static Scanner scan = new Scanner(System.in);
 
-    Scanner scan = new Scanner(System.in);
-    public int getPurchaseAmt() {
+    public static int getPurchaseAmt() {
         System.out.println("구입금액을 입력하세요.");
+
         int purchaseAmt = scan.nextInt();
         return purchaseAmt;
     }
 
-    public List<Integer> getWinningNumbers() {
+    public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        String inputStr = scan.nextLine();
-        return Arrays.stream(inputStr.split(DELIMITER))
-                     .map(Integer::new)
+        Scanner scan = new Scanner(System.in);
+        String[] inputStr = scan.nextLine().split(DELIMITER);
+
+        return Arrays.stream(inputStr)
+                     .map(input -> Integer.parseInt(input.trim()))
                      .collect(toCollection(ArrayList::new));
     }
 }

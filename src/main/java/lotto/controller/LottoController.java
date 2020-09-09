@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoCreater;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 import java.util.ArrayList;
@@ -21,8 +22,12 @@ public class LottoController {
         lottos.checkWinningNumbers(winningNumbers);
     }
 
-    public Lottos getLottosResult() {
+    public Lottos getLottos() {
         return this.lottos;
+    }
+
+    public LottoResult getLottoResult() {
+        return LottoResult.create(lottos);
     }
 
 }
