@@ -1,7 +1,6 @@
 package AutoLotto.domain.play;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static AutoLotto.utils.Constants.*;
 
@@ -22,14 +21,6 @@ public enum Rank {
         this.rankMoney = rankMoney;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public int getRankMoney() {
-        return rankMoney;
-    }
-
     public static Rank matchOf(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
@@ -37,24 +28,8 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-
     private boolean isSameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
 
-    public static int createBuzzMoney(List<Integer> matchCountList) {
-        return matchCountList.stream()
-                .map(matchCount -> Rank.matchOf(matchCount))
-                .mapToInt(rank -> rank.getRankMoney())
-                .sum();
-    }
-
-    public static int createBuzzMoney2(PlayLottoResult playLottoResult) {
-        int sum = 0;
-        for (Rank rank : values()) {
-            int prizeMoney = playLottoResult.getCountByRank(rank) * rank.rankMoney;
-            sum += prizeMoney;
-        }
-        return sum;
-    }
 }

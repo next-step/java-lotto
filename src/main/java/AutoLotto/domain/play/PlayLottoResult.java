@@ -2,6 +2,7 @@ package AutoLotto.domain.play;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class PlayLottoResult {
 
@@ -14,6 +15,10 @@ public class PlayLottoResult {
         }
     }
 
+    public Map<Rank, Integer> getResult() {
+        return result;
+    }
+
     public void addRank(Rank rank) {
         int count = result.get(rank);
         result.put(rank, count + 1);
@@ -23,5 +28,19 @@ public class PlayLottoResult {
         return result.get(rank);
     }
 
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayLottoResult that = (PlayLottoResult) o;
+        return Objects.equals(result, that.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
+    }
 }
 
