@@ -9,8 +9,7 @@ public class WinningLotto {
     private LottoNumbers winningNumbers;
     private LottoNumber bonusNumber;
 
-
-    public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    private WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
