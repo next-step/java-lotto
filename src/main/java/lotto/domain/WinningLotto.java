@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Map;
-
-import static java.util.stream.Collectors.groupingBy;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -18,13 +16,14 @@ public class WinningLotto {
     }
 
     // 테스트 코드에서 사용
-   public static WinningLotto of(Integer ... numbers) {
+    public static WinningLotto of(Integer... numbers) {
         return new WinningLotto(LottoNumbers.of(numbers));
     }
 
     public LottoResult drawing(List<LottoNumbers> tickets) {
-        Map<Prize, List<LottoNumbers>> ticketsPerPrize = tickets.stream()
-                .collect(groupingBy(ticket -> ticket.matchNumbers(winningNumbers)));
-        return LottoResult.of(ticketsPerPrize);
+        List<Prize> prizes = tickets.stream()
+                .map(ticket -> ticket.matchNumbers(winningNumbers))
+                .collect(Collectors.toList());
+        return new LottoResult(prizes);
     }
 }

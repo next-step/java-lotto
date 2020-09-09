@@ -3,10 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -48,16 +45,14 @@ class WinningLottoTest {
         LottoResult actual = winningNumbers.drawing(myNumbers);
 
         // then
-        Map<Prize, List<LottoNumbers>> expected = new HashMap<>();
+        List<Prize> expected = Arrays.asList(
+                Prize.ETC, Prize.ETC,
+                Prize.FOURTH,
+                Prize.THIRD,
+                Prize.SECOND,
+                Prize.FIRST
+        );
 
-        expected.put(Prize.ETC, Arrays.asList(
-                LottoNumbers.of(7, 8, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 9, 10, 11, 12)));
-        expected.put(Prize.FOURTH, Arrays.asList(LottoNumbers.of(1, 2, 3, 7, 8, 9)));
-        expected.put(Prize.THIRD, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 8, 9)));
-        expected.put(Prize.SECOND, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 9)));
-        expected.put(Prize.FIRST, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 6)));
-
-        assertThat(actual).isEqualTo(LottoResult.of(expected));
+        assertThat(actual).isEqualTo(new LottoResult(expected));
     }
 }

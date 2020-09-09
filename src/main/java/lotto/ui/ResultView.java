@@ -25,15 +25,15 @@ public class ResultView {
     private static String formatResultByPrize(LottoResult result) {
         return Prize.valuesOfWin()
                 .stream()
-                .map(prize -> mapToString(prize, result))
+                .map(prize -> mapToString(prize, result.getCountOfPrize(prize)))
                 .reduce("", String::concat);
     }
 
-    private static String mapToString(Prize key, LottoResult result) {
+    private static String mapToString(Prize key, long count) {
         return String.format("%d개 일치 (%d원) - %d개\n",
                 key.getMatchCount(),
                 key.getReward(),
-                result.getMatchCountByPrize(key)
+                count
         );
     }
 }
