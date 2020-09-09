@@ -26,8 +26,10 @@ public class LottoTest {
     @Test
     public void 로또_생성테스트_숫자확인(){
         ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
-                                             .limit(6)
+                                             .limit(5)
                                              .collect(toCollection(ArrayList::new));
+        //마지막 값은 음수로 ...
+        lottoNums.add(-1);
 
         assertThatThrownBy(
                 () -> Lotto.of(lottoNums)
