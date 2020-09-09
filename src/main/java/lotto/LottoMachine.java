@@ -12,7 +12,7 @@ public class LottoMachine {
         List<LottoNumbers> tickets = LottoFactory.buyTickets(InputView.howMuch());
         ResultView.showTickets(tickets);
 
-        WinningLotto winningNumbers = WinningLotto.of(InputView.getWinningNumbers());
+        WinningLotto winningNumbers = WinningLotto.of(InputView.getWinningNumbers(), InputView.getBonusNumber());
 
         LottoResult result = winningNumbers.drawing(tickets);
         ResultView.showDrawingResult(result);

@@ -24,22 +24,27 @@ class LottoResultTest {
 
     private static Stream<Arguments> provideResultAndProfitRate() {
         List<Prize> result1 = new ArrayList<>();
-        result1.addAll(getPrizeList(Prize.FOURTH, 1));
+        result1.addAll(getPrizeList(Prize.FIFTH, 1));
         result1.addAll(getPrizeList(Prize.ETC, 13));
 
         List<Prize> result2 = new ArrayList<>();
         result2.addAll(getPrizeList(Prize.ETC, 13));
 
         List<Prize> result3 = new ArrayList<>();
-        result3.addAll(getPrizeList(Prize.SECOND, 1));
         result3.addAll(getPrizeList(Prize.THIRD, 1));
-        result3.addAll(getPrizeList(Prize.FOURTH, 2));
+        result3.addAll(getPrizeList(Prize.FOURTH, 1));
+        result3.addAll(getPrizeList(Prize.FIFTH, 2));
         result3.addAll(getPrizeList(Prize.ETC, 5));
+
+        List<Prize> result4 = new ArrayList<>();
+        result4.addAll(getPrizeList(Prize.SECOND, 1));
+        result4.addAll(getPrizeList(Prize.ETC, 20));
 
         return Stream.of(
                 Arguments.of(result1, 0.35),
                 Arguments.of(result2, 0.00),
-                Arguments.of(result3, 173.33)
+                Arguments.of(result3, 173.33),
+                Arguments.of(result4, 1428.57)
         );
     }
 

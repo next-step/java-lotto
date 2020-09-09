@@ -49,22 +49,26 @@ public class LottoNumbersTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideLottoNumbers")
-    @DisplayName("일치하는 숫자 개수 확인")
-    void drawing(LottoNumbers myNumbers, Prize prize) {
+    @MethodSource("provideLottoNumbersAndPrize")
+    @DisplayName("등수 확인")
+    void drawing(LottoNumbers myNumbers, Prize prize, LottoNumber bonusNumber) {
         LottoNumbers winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
-        assertThat(myNumbers.matchNumbers(winningNumbers)).isEqualTo(prize);
+        assertThat(myNumbers.matchNumbers(winningNumbers, bonusNumber)).isEqualTo(prize);
     }
 
-    private static Stream<Arguments> provideLottoNumbers() {
+    private static Stream<Arguments> provideLottoNumbersAndPrize() {
+        LottoNumber neverBonus = LottoNumber.valueOf(45);
+        LottoNumber oneBonus = LottoNumber.valueOf(7);
+
         return Stream.of(
-                Arguments.of(LottoNumbers.of(7, 8, 9, 10, 11, 12), Prize.ETC),
-                Arguments.of(LottoNumbers.of(1, 8, 9, 10, 11, 12), Prize.ETC),
-                Arguments.of(LottoNumbers.of(1, 2, 9, 10, 11, 12), Prize.ETC),
-                Arguments.of(LottoNumbers.of(1, 2, 3, 7, 8, 9), Prize.FOURTH),
-                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 8, 9), Prize.THIRD),
-                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 9), Prize.SECOND),
-                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 6), Prize.FIRST)
+                Arguments.of(LottoNumbers.of(7, 8, 9, 10, 11, 12), Prize.ETC, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 8, 9, 10, 11, 12), Prize.ETC, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 9, 10, 11, 12), Prize.ETC, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 7, 8, 9), Prize.FIFTH, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 8, 9), Prize.FOURTH, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 9), Prize.THIRD, neverBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 7), Prize.SECOND, oneBonus),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 6), Prize.FIRST, neverBonus)
         );
     }
 }

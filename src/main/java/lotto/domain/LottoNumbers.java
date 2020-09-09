@@ -37,15 +37,15 @@ public class LottoNumbers {
         }
     }
 
-    public Prize matchNumbers(LottoNumbers winningNumbers) {
-        long matchCount = winningNumbers.numbers
+    public Prize matchNumbers(LottoNumbers winningLotto, LottoNumber bonusNumber) {
+        long matchCount = winningLotto.numbers
                 .stream()
-                .filter(this::containsWinningNumber)
+                .filter(this::containsNumber)
                 .count();
-        return Prize.valueOfMatchCount(matchCount);
+        return Prize.valueOfMatchCount(matchCount, containsNumber(bonusNumber));
     }
 
-    private boolean containsWinningNumber(LottoNumber number) {
+    public boolean containsNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
