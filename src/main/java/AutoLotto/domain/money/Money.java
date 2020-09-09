@@ -42,9 +42,9 @@ public class Money {
     }
 
     public Double makeProfitRateBy(int buzzMoney) {
-        String left = Integer.toString(buzzMoney);
-        String right = Integer.toString(money);
-        Double profitRate = divideToDecimal(left, right);
+        String divided = Integer.toString(buzzMoney);
+        String divider = Integer.toString(money);
+        Double profitRate = divideToDecimal(divided, divider);
         return profitRate;
     }
 
