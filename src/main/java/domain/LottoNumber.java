@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final Random random = new Random();
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
+
+    private static final Random random = new Random();
     private static final List<LottoNumber> cached = IntStream.rangeClosed(1, 45)
             .boxed()
             .map(LottoNumber::new)
@@ -27,11 +28,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getRandomLottoNumber() {
-        return getLottoNumber(random.nextInt(LOTTO_NUMBER_MAX));
+        int randomNumber = random.nextInt(LOTTO_NUMBER_MAX) + 1;
+        return getLottoNumber(randomNumber);
     }
 
-    public static LottoNumber getLottoNumber(int i) {
-        return cached.get(i);
+    public static LottoNumber getLottoNumber(int number) {
+        int index = number - 1;
+        return cached.get(index);
     }
 
     @Override

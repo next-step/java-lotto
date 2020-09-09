@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static domain.LottoMoney.MONEY_PER_GAME;
+import static java.util.stream.Collectors.toList;
 
 public class LottoGame {
     private final List<Lotto> lottos;
@@ -12,21 +13,30 @@ public class LottoGame {
         this.lottos = lottos;
     }
 
-    public static LottoGame of(int money, List<Lotto> manualLottos) {
-        List<Lotto> lottoList = generateLottos(money, manualLottos);
-        return new LottoGame(lottoList);
+    public static LottoGame of(int money, List<String> manualLottosRaw) {
+        List<Lotto> manualLottos = getManualLottos(manualLottosRaw);
+        List<Lotto> lottos = getLottosOfGame(money, manualLottos);
+        return new LottoGame(lottos);
     }
 
-    private static List<Lotto> generateLottos(int money, List<Lotto> manualLottos) {
+    private static List<Lotto> getManualLottos(List<String> manualLottosRaw) {
+        return manualLottosRaw.stream()
+                .map(Lotto::manualLotto)
+                .collect(toList());
+    }
+
+    private static List<Lotto> getLottosOfGame(int money, List<Lotto> manualLottos) {
         int gameCount = money / MONEY_PER_GAME;
-
-        List<Lotto> lottoNumbers = new ArrayList<>(manualLottos);
         int autoCount = gameCount - manualLottos.size();
-        for (int i = 0; i < autoCount; i++) {
-            lottoNumbers.add(Lotto.auto());
-        }
+        return getAutoLottos(manualLottos, autoCount);
+    }
 
-        return lottoNumbers;
+    public static List<Lotto> getAutoLottos(List<Lotto> manualLotto, int gameCount) {
+        List<Lotto> lottos = new ArrayList<>(manualLotto);
+        for (int i = 0; i < gameCount; i++) {
+            lottos.add(Lotto.auto());
+        }
+        return lottos;
     }
 
     protected List<Lotto> getLottos() {

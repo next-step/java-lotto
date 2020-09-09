@@ -33,10 +33,10 @@ public class WinningLotto {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    private void checkDuplicateBonusNumber(Set<LottoNumber> winningLottoNumbers, LottoNumber bonusLottoNumber) {
+    protected void checkDuplicateBonusNumber(Set<LottoNumber> winningLottoNumbers, LottoNumber bonusLottoNumber) {
         boolean isExist = winningLottoNumbers.contains(bonusLottoNumber);
         if (isExist) {
-            throw new IllegalArgumentException("보너스 번호는 로또 숫자와 중복되면 안 됩니다");
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호 숫자와 중복되면 안 됩니다");
         }
     }
 

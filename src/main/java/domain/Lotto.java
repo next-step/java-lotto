@@ -27,6 +27,16 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public static Lotto manualLotto(String manualLottoRaw) {
+        String[] split = manualLottoRaw.split(",");
+        TreeSet<LottoNumber> manualLottoNumbers = Arrays.stream(split)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+        return new Lotto(manualLottoNumbers);
+    }
+
     public boolean isContainBonus(WinningLotto winningLotto) {
         return lottoNumbers.stream()
                 .anyMatch(winningLotto::isMatchBonusNumber);
