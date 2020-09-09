@@ -10,7 +10,7 @@ public class BuzzLotto {
     private final List<LottoNumber> buzzLotto;
 
     public BuzzLotto(List<LottoNumber> buzzLotto) {
-        this.buzzLotto = buzzLotto; //이건 생성하는 것이 아니라 getter할 값으로 팩토리 불필요
+        this.buzzLotto = buzzLotto;
     }
 
     public List<LottoNumber> getBuzzLotto() {

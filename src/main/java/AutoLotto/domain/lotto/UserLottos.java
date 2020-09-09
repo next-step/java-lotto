@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static AutoLotto.utils.Constants.*;
+
 public class UserLottos {
 
     private final List<UserLotto> userLottos;
 
     public UserLottos(List<UserLotto> userLottos) {
         this.userLottos = userLottos;
+    }
+
+    public UserLottos(int money) {
+        this.userLottos = buyLottosWith(money);
     }
 
     public List<UserLotto> getUserLottos() {
@@ -28,7 +34,7 @@ public class UserLottos {
     }
 
     public static int countLottosBy(int money) {
-        return CheckDivideBy.divideToInt(Integer.toString(money), "1000");
+        return CheckDivideBy.divideToInt(Integer.toString(money), LOTTO_PRICE);
     }
 
     @Override

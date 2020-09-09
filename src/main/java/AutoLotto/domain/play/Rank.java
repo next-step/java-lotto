@@ -1,7 +1,5 @@
 package AutoLotto.domain.play;
 
-import AutoLotto.domain.money.Money;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,7 +52,8 @@ public enum Rank {
     public static int createBuzzMoney2(PlayLottoResult playLottoResult) {
         int sum = 0;
         for (Rank rank : values()) {
-            sum += playLottoResult.getCountByRank(rank) * rank.rankMoney;
+            int prizeMoney = playLottoResult.getCountByRank(rank) * rank.rankMoney;
+            sum += prizeMoney;
         }
         return sum;
     }

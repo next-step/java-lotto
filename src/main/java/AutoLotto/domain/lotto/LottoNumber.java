@@ -1,8 +1,6 @@
 package AutoLotto.domain.lotto;
 
-import java.util.List;
 import java.util.Objects;
-import static AutoLotto.utils.Constants.*;
 
 public class LottoNumber {
 
@@ -15,13 +13,6 @@ public class LottoNumber {
     public int getLottoNumber() {
         return lottoNumber;
     }
-
-//    public LottoNumber makeLottoNumber(int lottoNumber) {
-//        if (lottoNumber <= LOTTO_NUMBER_MAX && lottoNumber >= LOTTO_NUMBER_MIN) {
-//            return new LottoNumber(lottoNumber);
-//        }
-//        return new LottoNumber(0);
-//    }
 
     @Override
     public boolean equals(Object o) {

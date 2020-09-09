@@ -11,8 +11,7 @@ public class UserLotto {
     private final List<LottoNumber> userLotto;
 
     public UserLotto() {
-        this (createLotto());  //테스트 후 다시 복구
-    }
+        this (createLotto()); }
 
     public UserLotto(List<LottoNumber> userLotto) {
         this.userLotto = userLotto;
@@ -28,10 +27,14 @@ public class UserLotto {
                                                     .boxed()
                                                     .collect(Collectors.toList());
             Collections.shuffle(integersForLottoNumber);
-            return integersForLottoNumber.subList(0, 6)
-                    .stream()
-                    .map(number -> new LottoNumber(number))
-                    .collect(Collectors.toList());
+            return makeLottoAfterShuffle(integersForLottoNumber);
+    }
+
+    private static List<LottoNumber> makeLottoAfterShuffle(List<Integer> integersForLottoNumber) {
+        return integersForLottoNumber.subList(0, 6)
+                .stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
     }
 
     @Override

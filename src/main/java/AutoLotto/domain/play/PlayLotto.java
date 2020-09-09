@@ -6,7 +6,6 @@ import AutoLotto.domain.lotto.LottoNumber;
 import AutoLotto.domain.lotto.UserLottos;
 import AutoLotto.domain.money.Money;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
