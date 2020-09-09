@@ -51,7 +51,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbersAndPrize")
     @DisplayName("등수 확인")
-    void drawing(LottoNumbers myNumbers, Prize prize, LottoNumber bonusNumber) {
+    void matchNumbers(LottoNumbers myNumbers, Prize prize, LottoNumber bonusNumber) {
         LottoNumbers winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
         assertThat(myNumbers.matchNumbers(winningNumbers, bonusNumber)).isEqualTo(prize);
     }
