@@ -21,16 +21,6 @@ public class LottoNumbersTest {
 
         assertThat(LottoNumbers.create(lottoNums)).isInstanceOf(LottoNumbers.class);
     }
-    @DisplayName("로또번호 생성 테스트 isEqaulTo")
-    @Test
-    public void 로또번호_생성_테스트_isEqaulTo() {
-        ArrayList<Integer> lottoNums = Stream.iterate(1, n -> n + 1 )
-                .limit(6)
-                .collect(toCollection(ArrayList::new));
-
-        LottoNumbers expected = new LottoNumbers();
-        assertThat(LottoNumbers.create(lottoNums)).isEqualTo(expected);
-    }
 
     @DisplayName("로또번호 1등 찾기")
     @Test
@@ -62,7 +52,7 @@ public class LottoNumbersTest {
 
         ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 7, 8));
 
-        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(3);
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(Rank.ThirdPlace);
     }
 
     @DisplayName("로또번호 4등 찾기")
@@ -74,7 +64,7 @@ public class LottoNumbersTest {
 
         ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 9, 7, 8));
 
-        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(4);
+        assertThat(LottoNumbers.create(lottoNums).getLottoRank(expected)).isEqualTo(Rank.FourthPlace);
     }
 
 
