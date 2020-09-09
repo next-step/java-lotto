@@ -30,10 +30,10 @@ public class ResultView {
     }
 
     private static String mapToString(Prize key, long count) {
-        return String.format("%d개 일치 (%d원) - %d개\n",
-                key.getMatchCount(),
-                key.getReward(),
-                count
-        );
+        String format = "%d개 일치 (%d원) - %d개\n";
+        if (key.equals(Prize.SECOND)) {
+            format = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
+        }
+        return String.format(format, key.getMatchCount(), key.getReward(), count);
     }
 }
