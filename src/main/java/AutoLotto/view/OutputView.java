@@ -41,7 +41,7 @@ public class OutputView {
     }
 
 
-    public static void printPlayLottoResult(PlayLottoResult playLottoResult, PlayLotto playLotto) {
+    public static void printPlayLottoResult(PlayLottoResult playLottoResult) {
         System.out.println(SAY_PLAY_RESULT_START);
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount >= PRIZE_GET_MATCH_COUNT_MIN)
@@ -49,18 +49,18 @@ public class OutputView {
                 .forEach(rank ->
                         System.out.printf(rank.matchCount + SAY_PLAY_RESULT_BY_RANK,
                                 rank.rankMoney,
-                                getPlayMatchResult(playLottoResult, playLotto, rank)));
+                                getPlayMatchResult(playLottoResult, rank)));
     }
 
-    private static int getPlayMatchResult(PlayLottoResult playLottoResult, PlayLotto playLotto, Rank rank) {
-        playLotto.countMatchAll(playLottoResult);
+    private static int getPlayMatchResult(PlayLottoResult playLottoResult, Rank rank) {
         return playLottoResult.getCountByRank(rank);
     }
 
     public static void printPlayProfitResult(int money, PlayLottoResult playLottoResult) {
         Money budget = new Money(money);
-        System.out.printf(SAY_PLAY_PROFIT, budget.makePlayProfitRateBy(playLottoResult), "손해||이득");
+        System.out.printf(SAY_PLAY_PROFIT, budget.makePlayProfitRateBy(playLottoResult), budget.isPlayPlusProfitBy(playLottoResult));
     }
+
 
 
 }

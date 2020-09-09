@@ -16,10 +16,14 @@ class BuzzLottoTest {
         BuzzLotto buzzLotto = new BuzzLotto(Arrays.asList(new LottoNumber(2), new LottoNumber(4), new LottoNumber(6),
                 new LottoNumber(8), new LottoNumber(10), new LottoNumber(12)));
 
-        List<LottoNumber> userLotto = Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(3),
+        List<LottoNumber> userLotto1 = Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(17), new LottoNumber(31));
 
-        assertThat(buzzLotto.countMatch(userLotto)).isLessThanOrEqualTo(1);
+        List<LottoNumber> userLotto2 = Arrays.asList(new LottoNumber(45), new LottoNumber(7), new LottoNumber(12),
+                new LottoNumber(4), new LottoNumber(8), new LottoNumber(31));
+
+        assertThat(buzzLotto.countMatch(userLotto1)).isEqualTo(1);
+        assertThat(buzzLotto.countMatch(userLotto2)).isEqualTo(3);
     }
 
     @Test

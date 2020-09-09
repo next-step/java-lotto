@@ -3,6 +3,7 @@ package AutoLotto.domain.money;
 import AutoLotto.domain.play.PlayLottoResult;
 import AutoLotto.domain.play.Rank;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static AutoLotto.utils.CheckDivideBy.divideToDecimal;
@@ -33,6 +34,13 @@ public class Money {
         return profitRate >= 1;
     }
 
+    public String isPlayPlusProfitBy(PlayLottoResult playLottoResult) {
+        if (isPlusProfitBy(createBuzzMoneyAll(playLottoResult))) {
+            return "이득이";
+        }
+        return "손해";
+    }
+
     public Double makeProfitRateBy(int buzzMoney) {
         String left = Integer.toString(buzzMoney);
         String right = Integer.toString(money);
@@ -41,7 +49,31 @@ public class Money {
     }
 
     public Double makePlayProfitRateBy(PlayLottoResult playLottoResult) {
-        return makeProfitRateBy(Rank.createBuzzMoney2(playLottoResult));
+        return makeProfitRateBy(createBuzzMoneyAll(playLottoResult));
+    }
+
+    public int createBuzzMoneyAll(PlayLottoResult playLottoResult) {
+        int sum = 0;
+        for (Rank rank : Rank.values()) {
+            sum += createBuzzMoney2(playLottoResult, rank);
+        }
+        return sum;
+    }
+
+    public int createBuzzMoney2(PlayLottoResult playLottoResult, Rank rank) {
+        int sum = 0;
+        if (playLottoResult.getResult().containsKey(rank)) {
+            return sum += playLottoResult.getCountByRank(rank) * rank.rankMoney;
+        }
+        return sum;
+    }
+
+    public int createBuzzMoney2ForTest(Map<Rank,Integer> map, Rank rank) {
+        int sum = 0;
+        if (map.containsKey(rank)) {
+            return sum += map.get(rank) * rank.rankMoney;
+        }
+        return sum;
     }
 
 

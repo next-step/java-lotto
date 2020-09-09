@@ -25,8 +25,9 @@ public class playLottoMain {
 
         PlayLottoResult playLottoResult = new PlayLottoResult();
         PlayLotto playLotto = new PlayLotto(money, userLottos.getUserLottos(), buzzLotto);
+        playLotto.countMatchAll(playLottoResult);
 
-        printPlayLottoResult(playLottoResult, playLotto);
+        printPlayLottoResult(playLottoResult);
         printPlayProfitResult(money, playLottoResult);
     }
 }
