@@ -21,8 +21,6 @@ public class OutputView {
         System.out.printf(SAY_COUNT_USERLOTTOS, UserLottos.countLottosBy(money));
     }
 
-    //UserLottos.buyLottosWith(budget) 생성된 Lotto의 list 가져와 돌면서 출력
-    //하나의 Lottto 안에서는 sorted 오름차순 필요
     public static void printUserLottos(List<UserLotto> userLottos) {
         userLottos.stream()
                 .forEach(userLotto -> printLottoAscending(userLotto));
@@ -33,12 +31,12 @@ public class OutputView {
                             .map(LottoNumber::getLottoNumber)
                             .sorted()
                             .map(number -> number.toString())
-                            .collect(Collectors.joining(", ","[","]"));
+                            .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_PREFIX, LOTTO_SUFFIX));
         System.out.println(lottoAscending);
     }
 
     public static void printEmptyLine() {
-        System.out.println("");
+        System.out.println(EMPTY_LINE);
     }
 
 

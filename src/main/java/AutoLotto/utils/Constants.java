@@ -7,10 +7,14 @@ public class Constants {
     public static final String LOTTO_NUMBER_PATTERN = "^[1-9]{1}$|^[1-3]{1}[0-9]{1}|^4{1}[0-5]{1}";
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    public static final String INPUT_NUMBERS_DELIMITER =",";
+    public static final String INPUT_NUMBERS_DELIMITER =", ";
 
     public static final String ASK_MONEY = "구입금액을 입력해 주세요.";
     public static final String SAY_COUNT_USERLOTTOS = "%d개를 구매했습니다.\n";
+    public static final String LOTTO_NUMBER_DELIMITER = ", ";
+    public static final String LOTTO_PREFIX = "[";
+    public static final String LOTTO_SUFFIX = "]";
+    public static final String EMPTY_LINE = "";
     public static final String ASK_BUZZLOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String SAY_PLAY_RESULT_START = "\n당첨 통계\n---------";
     //ranks say

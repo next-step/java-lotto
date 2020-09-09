@@ -16,13 +16,12 @@ import static AutoLotto.view.OutputView.*;
 public class playLottoMain {
 
     public static void main(String[] args){
-        int money = getMoney(); //3000입력
+        int money = getMoney();
         printLottosCount(money);
         List<UserLotto> userLottos = UserLottos.buyLottosWith(money);
         printUserLottos(userLottos);
         printEmptyLine();
         List<LottoNumber> buzzLotto = getBuzzLotto();
-        System.out.print(buzzLotto);
 
         PlayLottoResult playLottoResult = new PlayLottoResult();
         PlayLotto playLotto = new PlayLotto(money, userLottos, buzzLotto);
