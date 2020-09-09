@@ -18,13 +18,15 @@ public class playLottoMain {
     public static void main(String[] args){
         int money = getMoney();
         printLottosCount(money);
-        UserLottos userLottos = new UserLottos(money);
-        printUserLottos(userLottos.getUserLottos());
-        printEmptyLine();
+
+        List<UserLotto> userLottos = new UserLottos(money).getUserLottos();
+        printUserLottos(userLottos);
+
         List<LottoNumber> buzzLotto = getBuzzLotto();
 
         PlayLottoResult playLottoResult = new PlayLottoResult();
-        PlayLotto playLotto = new PlayLotto(money, userLottos.getUserLottos(), buzzLotto);
+
+        PlayLotto playLotto = new PlayLotto(money, userLottos, buzzLotto);
         playLotto.countMatchAll(playLottoResult);
 
         printPlayLottoResult(playLottoResult);

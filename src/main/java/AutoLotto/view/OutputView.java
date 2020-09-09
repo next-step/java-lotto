@@ -25,6 +25,7 @@ public class OutputView {
     public static void printUserLottos(List<UserLotto> userLottos) {
         userLottos.stream()
                 .forEach(userLotto -> printLottoAscending(userLotto));
+        printEmptyLine();
     }
 
     private static void printLottoAscending(UserLotto userLotto) {
@@ -36,7 +37,7 @@ public class OutputView {
         System.out.println(lottoAscending);
     }
 
-    public static void printEmptyLine() {
+    private static void printEmptyLine() {
         System.out.println(EMPTY_LINE);
     }
 
