@@ -23,14 +23,15 @@ public class UserLotto {
     }
 
     private static List<LottoNumber> createLotto() {
-            List<LottoNumber> lottoNumberList = IntStream
+            List<Integer> integersForLottoNumber = IntStream
                                                     .rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
-                                                    .mapToObj(number -> new LottoNumber(number))
+                                                    .boxed()
                                                     .collect(Collectors.toList());
-            Collections.shuffle(lottoNumberList);
-            return lottoNumberList.stream()
-                        .limit(LOTTO_NUMBER_COUNT)
-                        .collect(Collectors.toList());
+            Collections.shuffle(integersForLottoNumber);
+            return integersForLottoNumber.subList(0, 6)
+                    .stream()
+                    .map(number -> new LottoNumber(number))
+                    .collect(Collectors.toList());
     }
 
     @Override
