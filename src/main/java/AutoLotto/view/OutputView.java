@@ -10,6 +10,7 @@ import AutoLotto.domain.play.Rank;
 
 import static AutoLotto.utils.Constants.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,11 +43,13 @@ public class OutputView {
 
     public static void printPlayLottoResult(PlayLottoResult playLottoResult, PlayLotto playLotto) {
         System.out.println(SAY_PLAY_RESULT_START);
-        //countMatchAll()로 나온  matchCountList에 3이 나온 횟수, 4가 나온 횟수.. %2f
-        System.out.printf( Rank.FOURTH.matchCount +"개 일치 (%d원)- %d개\n", Rank.FOURTH.rankMoney, getPlayMatchResult(playLottoResult, playLotto, Rank.FOURTH));
-        System.out.printf( Rank.THIRD.matchCount +"개 일치 (%d원)- %d개\n", Rank.THIRD.rankMoney, getPlayMatchResult(playLottoResult, playLotto, Rank.THIRD));
-        System.out.printf( Rank.SECOND.matchCount +"개 일치 (%d원)- %d개\n", Rank.SECOND.rankMoney, getPlayMatchResult(playLottoResult, playLotto, Rank.SECOND));
-        System.out.printf( Rank.FIRST.matchCount +"개 일치 (%d원)- %d개\n", Rank.FIRST.rankMoney,getPlayMatchResult(playLottoResult, playLotto, Rank.FIRST));
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount >= PRIZE_GET_MATCH_COUNT_MIN)
+                .collect(Collectors.toList())
+                .forEach(rank ->
+                        System.out.printf(rank.matchCount + SAY_PLAY_RESULT_BY_RANK,
+                                rank.rankMoney,
+                                getPlayMatchResult(playLottoResult, playLotto, rank)));
     }
 
     private static int getPlayMatchResult(PlayLottoResult playLottoResult, PlayLotto playLotto, Rank rank) {

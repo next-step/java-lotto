@@ -1,11 +1,15 @@
 package AutoLotto.utils;
 
+import AutoLotto.domain.play.Rank;
+
 public class Constants {
 
     public static final int LOTTO_NUMBER_MAX = 45;
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final String LOTTO_NUMBER_PATTERN = "^[1-9]{1}$|^[1-3]{1}[0-9]{1}|^4{1}[0-5]{1}";
     public static final int LOTTO_NUMBER_COUNT = 6;
+
+    public static final String LOTTO_PRICE = "1000";
 
     public static final String INPUT_NUMBERS_DELIMITER =", ";
 
@@ -17,7 +21,8 @@ public class Constants {
     public static final String EMPTY_LINE = "";
     public static final String ASK_BUZZLOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String SAY_PLAY_RESULT_START = "\n당첨 통계\n---------";
-    //ranks say
+    public static final String SAY_PLAY_RESULT_BY_RANK = "개 일치 (%d원)- %d개\n";
+    public static final int PRIZE_GET_MATCH_COUNT_MIN = 3;
     public static final String SAY_PLAY_PROFIT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     public static final int MATCH_COUNT_FIRST = 6;
