@@ -2,11 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -17,25 +18,37 @@ class WinningLottoTest {
     @Test
     @DisplayName("우승 번호 생성 테스트")
     void create() {
-        assertNotNull(WinningLotto.of(1, 2, 3, 4, 5, 6));
-        assertNotNull(WinningLotto.of(40, 41, 42, 43, 44, 45));
+        assertNotNull(WinningLotto.of(45,1, 2, 3, 4, 5, 6));
+        assertNotNull(WinningLotto.of(1, 40, 41, 42, 43, 44, 45));
     }
 
     @Test
     @DisplayName("우승 번호 유효성 검사")
     void create_validate() {
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(1, 2, 3, 4, 5));
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(0, 1, 2, 3, 4, 5));
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(1, 2, -3, 4, 5, 6));
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(41, 42, 43, 44, 45, 46));
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(45, 1, 2, 3, 4, 5)); // 5개
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(45, 0, 1, 2, 3, 4, 5)); // 범위
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(45, 1, 2, -3, 4, 5, 6)); // 범위
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(40, 41, 42, 43, 44, 45, 46)); // 범위
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(1, 1, 2, 3, 4, 5, 6)); // 보너스와 중
     }
 
-    @Test
-    @DisplayName("일치하는 숫자 개수 확인")
-    void matching() {
+    @ParameterizedTest
+    @MethodSource("provideNumbersAndResult")
+    @DisplayName("추첨 결과 확인(보너스 포함된 경우와 포함되지 않은 경우)")
+    void drawing(List<LottoNumbers> tickets, LottoResult expected) {
         // given
-        WinningLotto winningNumbers = WinningLotto.of(1, 2, 3, 4, 5, 6);
-        List<LottoNumbers> myNumbers = Arrays.asList(
+        WinningLotto winningNumbers = WinningLotto.of(45, 1, 2, 3, 4, 5, 6);
+
+        // when
+        LottoResult actual = winningNumbers.drawing(tickets);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideNumbersAndResult() {
+        // 보너스를 맞추지 못한 tickets
+        List<LottoNumbers> noBonusNumbers = Arrays.asList(
                 LottoNumbers.of(7, 8, 9, 10, 11, 12),
                 LottoNumbers.of(1, 2, 9, 10, 11, 12),
                 LottoNumbers.of(1, 2, 3, 7, 8, 9),
@@ -44,20 +57,35 @@ class WinningLottoTest {
                 LottoNumbers.of(1, 2, 3, 4, 5, 6)
         );
 
-        // when
-        LottoResult actual = winningNumbers.drawing(myNumbers);
+        List<Prize> noBonusResult = Arrays.asList(
+                Prize.ETC, Prize.ETC,
+                Prize.FIFTH,
+                Prize.FOURTH,
+                Prize.THIRD,
+                Prize.FIRST
+        );
 
-        // then
-        Map<Prize, List<LottoNumbers>> expected = new HashMap<>();
-
-        expected.put(Prize.ETC, Arrays.asList(
+        // 보너스를 맞춘 tickets
+        List<LottoNumbers> bonusNumbers = Arrays.asList(
                 LottoNumbers.of(7, 8, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 9, 10, 11, 12)));
-        expected.put(Prize.FOURTH, Arrays.asList(LottoNumbers.of(1, 2, 3, 7, 8, 9)));
-        expected.put(Prize.THIRD, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 8, 9)));
-        expected.put(Prize.SECOND, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 9)));
-        expected.put(Prize.FIRST, Arrays.asList(LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+                LottoNumbers.of(1, 2, 9, 10, 11, 12),
+                LottoNumbers.of(1, 2, 3, 7, 8, 9),
+                LottoNumbers.of(1, 2, 3, 4, 8, 9),
+                LottoNumbers.of(1, 2, 3, 4, 5, 45),
+                LottoNumbers.of(1, 2, 3, 4, 5, 6)
+        );
 
-        assertThat(actual).isEqualTo(LottoResult.of(expected));
+        List<Prize> bonusResult = Arrays.asList(
+                Prize.ETC, Prize.ETC,
+                Prize.FIFTH,
+                Prize.FOURTH,
+                Prize.SECOND,
+                Prize.FIRST
+        );
+
+        return Stream.of(
+                Arguments.of(noBonusNumbers, new LottoResult(noBonusResult)),
+                Arguments.of(bonusNumbers, new LottoResult(bonusResult))
+        );
     }
 }

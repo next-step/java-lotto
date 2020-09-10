@@ -1,20 +1,31 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
+    private static final List<LottoNumber> CACHED_NUMBERS;
+
     private Integer number;
+
+    static {
+        CACHED_NUMBERS = IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     private LottoNumber(int number) {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber valueOf(int number) {
         validateRange(number);
-        return new LottoNumber(number);
+        return CACHED_NUMBERS.get(number - 1);
     }
 
     private static void validateRange(int number) {

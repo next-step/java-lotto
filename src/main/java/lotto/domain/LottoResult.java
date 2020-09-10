@@ -1,55 +1,33 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final int ROUNDING_PLACE = 100;
-    private final Map<Prize, Integer> prizeResult;
+    private final int ROUNDING_DOWN_PLACE = 100;
+    private final List<Prize> prizeResult;
 
-    // 테스트 코드에서 사용
-    public LottoResult(Map<Prize, Integer> prizeResult) {
+    public LottoResult(List<Prize> prizeResult) {
         this.prizeResult = prizeResult;
     }
 
-    public static LottoResult of(Map<Prize, List<LottoNumbers>> prizeResult) {
-        return new LottoResult(countByPrize(prizeResult));
-    }
-
-    private static Map<Prize, Integer> countByPrize(Map<Prize, List<LottoNumbers>> ticketsPerPrize) {
-        return ticketsPerPrize.entrySet()
-                .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
-    }
-
-    public int getMatchCountByPrize(Prize prize) {
-        return prizeResult.containsKey(prize) ? prizeResult.get(prize) : 0;
+    public long getCountOfPrize(Prize prize) {
+        return prizeResult.stream()
+                .filter(p -> p.equals(prize))
+                .count();
     }
 
     public double profitRate() {
-        int totalCount = getCountOfTotalTickets();
-        int totalPrize = calculateTotalPrize();
-
-        double profitRate = (double) totalPrize / (totalCount * LottoFactory.TICKET_PRICE);
-
-        return Math.floor(profitRate * ROUNDING_PLACE) / ROUNDING_PLACE;
+        int payment = prizeResult.size() * LottoFactory.TICKET_PRICE;
+        int rewardTotal = prizeResult.stream()
+                .mapToInt(Prize::getReward)
+                .sum();
+        return roundingDown((double) rewardTotal / payment);
     }
 
-    private int getCountOfTotalTickets() {
-        return prizeResult.keySet()
-                .stream()
-                .mapToInt(key -> prizeResult.get(key))
-                .sum();
-    }
-
-    private int calculateTotalPrize() {
-        return prizeResult.keySet()
-                .stream()
-                .mapToInt(key -> prizeResult.get(key) * key.getReward())
-                .sum();
+    private double roundingDown(double value) {
+        return Math.floor(value * ROUNDING_DOWN_PLACE) / ROUNDING_DOWN_PLACE;
     }
 
     @Override

@@ -15,8 +15,7 @@ public class InputView {
     private InputView() {}
 
     public static int howMuch() {
-        System.out.println("구입 금액을 입력해 주세요.");
-        return Integer.parseInt(SCANNER.nextLine());
+        return getInteger("구입 금액을 입력해 주세요.");
     }
 
     public static List<Integer> getWinningNumbers() {
@@ -31,5 +30,14 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public static int getBonusNumber() {
+        return getInteger("보너스 볼을 입력해 주세요.");
+    }
+
+    private static int getInteger(String message) {
+        System.out.println(message);
+        return Integer.parseInt(SCANNER.nextLine());
     }
 }
