@@ -13,7 +13,7 @@ public class LottoMain {
 
         LottoController lottoController = new LottoController();
 
-        int purchaseAmt = InputView.getPurchaseAmt();
+        int purchaseAmt = InputView.getPurchaseAmount();
         lottoController.purchaseLotto(purchaseAmt);
 
         int purchaseLottoCount = lottoController.getLottoCount();
