@@ -17,8 +17,8 @@ public class LottoNumbers {
 
     public static LottoNumbers create(List<Integer> lottoNums) {
 
-        return new LottoNumbers(lottoNums.stream().map(val -> LottoNumber.of(val))
-                .collect(toCollection(ArrayList::new)));
+        return new LottoNumbers(lottoNums.stream().map(LottoNumber::of)
+                                                  .collect(toCollection(ArrayList::new)));
     }
 
     public Rank getLottoRank(List<Integer> winningLottoNumbers) {
@@ -39,19 +39,7 @@ public class LottoNumbers {
         return 0;
     }
 
-
-    public String toString() {
-
-        ArrayList<Integer> numberList = lottoNumbers.stream().map(lottoNumber -> lottoNumber.getNumber())
-                                                             .collect(toCollection(ArrayList::new));
-        Collections.sort(numberList);
-
-        ArrayList<String> numberListStr = numberList.stream().map(value -> Integer.toString(value))
-                                                             .collect(toCollection(ArrayList::new));
-
-        return numberListStr.stream().collect(Collectors.joining(",","[","]"));
+    public ArrayList<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
     }
-
-
-    
 }

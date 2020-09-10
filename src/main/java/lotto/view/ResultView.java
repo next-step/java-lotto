@@ -1,12 +1,21 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class ResultView {
+
+    private static final String DELIMITER = ",";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
 
     public static void viewPurchaseLottoCount(int purchaseLottoCount) {
         StringBuilder sb = new StringBuilder();
@@ -16,8 +25,19 @@ public class ResultView {
 
     public static void viewLottoNumber(Lottos lottos) {
         lottos.lottos.stream().forEach(lotto -> {
-            System.out.println(lotto.getLottoNums().toString());
+            viewLottoNumbers(lotto.getLottoNums());
         });
+    }
+
+    public static void viewLottoNumbers(LottoNumbers lottoNumbers) {
+        ArrayList<Integer> numberList = lottoNumbers.getLottoNumbers().stream().map(lottoNumber -> lottoNumber.getNumber())
+                                                                                .collect(toCollection(ArrayList::new));
+        Collections.sort(numberList);
+
+        ArrayList<String> numberListStr = numberList.stream().map(value -> Integer.toString(value))
+                                                            .collect(toCollection(ArrayList::new));
+
+        System.out.println(numberListStr.stream().collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX)));
     }
 
     public static void viewLottoResult(LottoResult lottoResult) {
