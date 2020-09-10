@@ -1,6 +1,7 @@
 package AutoLotto.view;
 
 import java.util.Scanner;
+import java.util.*;
 
 public class SystemInput {
 
@@ -9,8 +10,11 @@ public class SystemInput {
     public int getIntValue() {
         try {
             return scanner.nextInt();
-        } finally {
-            scanner.nextLine();
+        } catch (InputMismatchException e) {
+            String value = scanner.next();
+            throw new InputMismatchException();
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException();
         }
     }
 
