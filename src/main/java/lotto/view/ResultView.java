@@ -5,10 +5,6 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toCollection;
 
 public class ResultView {
 
