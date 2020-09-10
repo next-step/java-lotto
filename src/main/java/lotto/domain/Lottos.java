@@ -1,14 +1,15 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.stream.Collectors.toCollection;
 
 public class Lottos {
 
-    public ArrayList<Lotto> lottos;
+    public List<Lotto> lottos;
 
-    public Lottos(ArrayList<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
