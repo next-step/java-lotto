@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class WinningLotto {
 
@@ -36,9 +38,8 @@ public class WinningLotto {
     }
 
     public LottoResult drawing(List<LottoNumbers> tickets) {
-        List<Prize> prizes = tickets.stream()
+        return tickets.stream()
                 .map(ticket -> ticket.matchNumbers(winningNumbers, bonusNumber))
-                .collect(Collectors.toList());
-        return new LottoResult(prizes);
+                .collect(collectingAndThen(toList(), LottoResult::new));
     }
 }
