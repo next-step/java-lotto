@@ -43,6 +43,19 @@ public class LottoTest {
                         , new LottoNo(5)
                         , new LottoNo(55)))))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("45");
+                .hasMessageContaining("숫자 1~45");
+    }
+    @DisplayName("0이하 값 테스트")
+    @Test
+    void validateNumberRangeTest2() {
+        assertThatThrownBy(() -> new Lotto(new HashSet<>(Arrays
+                .asList(new LottoNo(-1)
+                        , new LottoNo(2)
+                        , new LottoNo(3)
+                        , new LottoNo(4)
+                        , new LottoNo(5)
+                        , new LottoNo(6)))))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자 1~45");
     }
 }

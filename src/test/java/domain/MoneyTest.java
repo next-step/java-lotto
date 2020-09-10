@@ -21,13 +21,6 @@ public class MoneyTest {
     }
 
     @Test
-    void sumTest() {
-        Money money = new Money(10000);
-        Money money2 = new Money(5000);
-        assertThat(money.sum(money2)).isEqualTo(new Money(15000));
-    }
-
-    @Test
     void 로또회수_테스트() {
         Money money = new Money(10000);
         assertThat(money.getLottoTries()).isEqualTo(10);

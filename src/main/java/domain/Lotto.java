@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int LAST_NUMBER = 45;
     private static final int SIX = 6;
-    private static final int ONE = 1;
 
     private Set<LottoNo> lottoNumber;
 
@@ -23,7 +21,7 @@ public class Lotto {
     }
 
     private void validateEmpty(Set<LottoNo> lotto) {
-        if (lotto.size() == 0 || lotto == null) {
+        if (lotto == null || lotto.size() == 0) {
             throw new IllegalArgumentException("empty!");
         }
     }
@@ -40,14 +38,14 @@ public class Lotto {
 
     private void validateNumberRange(Set<LottoNo> lotto) {
         boolean rangeValidate = lotto.stream()
-                .allMatch(c -> c.getNumber() <= LAST_NUMBER && c.getNumber() >= ONE);
+                .allMatch(c->c.validateNumber());
 
         if (!rangeValidate) {
-            throw new IllegalArgumentException("숫자 45내 범위 입력 오류!!");
+            throw new IllegalArgumentException("숫자 1~45내 범위 입력 오류!!");
         }
     }
 
-    boolean hasBonusNumber(int bonus){
+    boolean hasBonusNumber(int bonus) {
         return lottoNumber.contains(new LottoNo(bonus));
     }
 }

@@ -1,7 +1,4 @@
-import domain.LottoGames;
-import domain.Money;
-import domain.RankRecord;
-import domain.WinnerNumber;
+import domain.*;
 import utility.UserInput;
 import view.View;
 
@@ -11,9 +8,10 @@ public class Application {
         Money buyInput = UserInput.tellHowManyBuy();
         int totalTries = buyInput.getLottoTries();
         int manualTries = UserInput.tellHoWManyManualBuy();
+        Lottos manuallyCreated = UserInput.createManualLotto(manualTries);
         int autoTries = totalTries - manualTries;
 
-        LottoGames game = new LottoGames(autoTries, manualTries);
+        LottoGames game = new LottoGames(autoTries, manuallyCreated);
 
         View.showManualAndAutoNumber(autoTries, manualTries);
         View.showLottoTickets(game.getLottos());

@@ -18,10 +18,6 @@ public class Money {
         }
     }
 
-    Money sum(Money money){
-        return new Money(this.money+money.money);
-    }
-
     public int getLottoTries(){
        return money / WON;
     }

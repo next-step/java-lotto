@@ -10,7 +10,16 @@ public class RankRecord {
 
     public RankRecord() {
         recordPool = new HashMap<>();
+        initRecordPool();
+    }
 
+
+    public RankRecord(Map<Rank, Integer> pool) {
+        recordPool = pool;
+        initRecordPool();
+    }
+
+    public void initRecordPool() {
         Rank[] ranks = Rank.values();
 
         for (Rank rank : ranks) {

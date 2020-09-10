@@ -19,61 +19,44 @@ public class WinnerNumberTest {
 
         String[] input = winnerNumber.split(",");
         Set<LottoNo> onelotto = new HashSet<>(Arrays
-                .asList(new LottoNo(1),new LottoNo(2)
-                        ,new LottoNo(3),new LottoNo(4)
-                        ,new LottoNo(5),new LottoNo(6)));
+                .asList(new LottoNo(1), new LottoNo(2)
+                        , new LottoNo(3), new LottoNo(4)
+                        , new LottoNo(5), new LottoNo(6)));
 
-        assertThat(new WinnerNumber(input,bonus).getCountingNumber(
-                new Lotto(onelotto))).isEqualTo(5);
+        assertThat(new WinnerNumber(input, bonus).getMatchCount(
+                new Lotto(onelotto)).getCount()).isEqualTo(5);
     }
 
     @Test
-    void validateBonusTest(){
-        assertThatThrownBy(()-> {
+    void validateBonusTest() {
+        assertThatThrownBy(() -> {
             WinnerNumber winnerNumber = new WinnerNumber
                     ("1,2,3,4,5,6".split(","), 6);
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("Err!");
+                .hasMessageContaining("Err!");
     }
 
 
     @Test
-    void checkAllLottosWithWinnerLotto(){
+    void checkAllLottosWithWinnerLotto() {
 
         String lastWinnerNumber = "1,2,3,4,5,6";
         String[] input = lastWinnerNumber.split(",");
         int bonus = 7;
         Set<LottoNo> onelotto = new HashSet<>(Arrays
                 .asList(new LottoNo(1)
-                        ,new LottoNo(2)
-                        ,new LottoNo(3)
-                        ,new LottoNo(4)
-                        ,new LottoNo(8)
-                        ,new LottoNo(9)));
+                        , new LottoNo(2)
+                        , new LottoNo(3)
+                        , new LottoNo(4)
+                        , new LottoNo(8)
+                        , new LottoNo(9)));
 
         Lottos lottos = new Lottos();
         lottos.addLotto(new Lotto(onelotto));
 
-        RankRecord rankRecord = new WinnerNumber(input,bonus)
+        RankRecord rankRecord = new WinnerNumber(input, bonus)
                 .checkAllLottosWithWinnerLotto(lottos);
 
         assertThat(rankRecord.sumOfPrice().getMoney()).isEqualTo(50000);
-    }
-
-    @Test
-    void doRecordTest(){
-        String lastWinnerNumber = "1,2,3,4,5,9";
-        String[] input = lastWinnerNumber.split(",");
-        Set<LottoNo> onelotto = new HashSet<>(Arrays
-                .asList(new LottoNo(1)
-                        ,new LottoNo(2)
-                        ,new LottoNo(3)
-                        ,new LottoNo(4)
-                        ,new LottoNo(5)
-                        ,new LottoNo(6)));
-        int bonus = 7;
-
-        assertThat(new WinnerNumber(input,bonus).getCountingNumber(
-                new Lotto(onelotto)));
     }
 }

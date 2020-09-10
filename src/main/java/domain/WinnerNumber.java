@@ -54,12 +54,14 @@ public class WinnerNumber {
         }
     }
 
-    int getCountingNumber(Lotto lotto) {
-        int count = (int) lotto.getLottoNumber()
+    private int getCountingNumber(Lotto lotto) {
+        return getMatchCount(lotto).getCount();
+    }
+
+    public Count getMatchCount(Lotto lotto) {
+        return new Count((int) lotto.getLottoNumber()
                 .stream()
                 .filter(e -> winnerNumber.getLottoNumber().contains(e))
-                .count();
-
-        return count;
+                .count());
     }
 }
