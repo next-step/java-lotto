@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PrizeCalculatorTest {
+class ProfitCalculatorTest {
 
     private PrizeCalculator prizeCalculator = new PrizeCalculator();
 
