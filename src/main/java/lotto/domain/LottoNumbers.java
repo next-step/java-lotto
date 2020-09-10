@@ -11,8 +11,6 @@ public class LottoNumbers {
 
     ArrayList<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() { }
-
     public LottoNumbers(ArrayList<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
@@ -23,30 +21,24 @@ public class LottoNumbers {
                 .collect(toCollection(ArrayList::new)));
     }
 
-    public ArrayList<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
     public Rank getLottoRank(List<Integer> winningLottoNumbers) {
         int matchCount = 0;
 
         for(Integer winningLottoNumber : winningLottoNumbers) {
-            matchCount += getMactchCnt(winningLottoNumber);
+            matchCount += getMatchCount(winningLottoNumber);
         }
 
         return Rank.create(matchCount);
     }
 
-    private int getMactchCnt(Integer winningLottoNumber) {
-
-        for(LottoNumber lottoNumber : lottoNumbers) {
-            if(lottoNumber.isMatchNumber(winningLottoNumber)) {
-                return 1;
-            }
+    private int getMatchCount(Integer winningLottoNumber) {
+        if(lottoNumbers.stream().anyMatch(val -> val.isMatchNumber(winningLottoNumber))) {
+            return 1;
         }
 
         return 0;
     }
+
 
     public String toString() {
 
