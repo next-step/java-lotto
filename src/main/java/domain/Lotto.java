@@ -6,39 +6,52 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTO_NUMBER = 6;
 
-    private final Set<Number> numbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<Number> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validate(Set<Number> numbers) {
-        if (numbers.size() != LOTTO_NUMBER) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 6개의 다른 값 이여야 합니다.");
         }
     }
 
     public static Lotto auto() {
-        Set<Number> numbers = new TreeSet<>();
-        while(numbers.size() != 6) {
-            numbers.add(Number.generateNumber());
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+        while (lottoNumbers.size() != 6) {
+            lottoNumbers.add(LottoNumber.getRandomLottoNumber());
         }
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
     }
 
-    @Override public String toString() {
-        return numbers.toString();
+    public static Lotto manualLotto(String manualLottoRaw) {
+        String[] split = manualLottoRaw.split(",");
+        TreeSet<LottoNumber> manualLottoNumbers = Arrays.stream(split)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+        return new Lotto(manualLottoNumbers);
     }
 
     public boolean isContainBonus(WinningLotto winningLotto) {
-        return numbers.stream()
+        return lottoNumbers.stream()
                 .anyMatch(winningLotto::isMatchBonusNumber);
     }
 
-    public Set<Number> getWinningNumbers(WinningLotto lotto) {
-        return numbers.stream()
+    public Set<LottoNumber> getWinningNumbers(WinningLotto lotto) {
+        return lottoNumbers.stream()
                 .filter(lotto::isContainInWinningNumber)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public String toString() {
+        return "[" + lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(",")) + "]";
     }
 }

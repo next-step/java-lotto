@@ -1,39 +1,56 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static final int WINNING_LOTTO_NUMBER = 6;
 
-    private final Set<Number> winningNumbers;
-    private final Number bonusNumber;
+    private final Set<LottoNumber> winningLottoNumbers;
+    private final LottoNumber bonusLottoNumber;
 
-    public WinningLotto(Set<Number> winningNumbers, Number bonusNumber) {
-        validate(winningNumbers);
-        this.winningNumbers = winningNumbers;
-        checkExist(bonusNumber);
-        this.bonusNumber = bonusNumber;
+    public static WinningLotto of(String winningLottoNumberString, String bonusLottoNumberString) {
+        Set<LottoNumber> winningLottoNumbers = getWinningLottoNumberFromString(winningLottoNumberString);
+        LottoNumber bonusLottoNumber = LottoNumber.getLottoNumber(Integer.parseInt(bonusLottoNumberString));
+
+        return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
     }
 
-    private void checkExist(Number bonusNumber) {
-        boolean isExist = winningNumbers.contains(bonusNumber);
+    private static TreeSet<LottoNumber> getWinningLottoNumberFromString(String winningLottoNumberStringWithComma) {
+        return Arrays.stream(winningLottoNumberStringWithComma.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public WinningLotto(Set<LottoNumber> winningLottoNumbers, LottoNumber bonusLottoNumber) {
+        validateWinningLottoNumber(winningLottoNumbers);
+        checkDuplicateBonusNumber(winningLottoNumbers, bonusLottoNumber);
+        this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusLottoNumber = bonusLottoNumber;
+    }
+
+    protected void checkDuplicateBonusNumber(Set<LottoNumber> winningLottoNumbers, LottoNumber bonusLottoNumber) {
+        boolean isExist = winningLottoNumbers.contains(bonusLottoNumber);
         if (isExist) {
-            throw new IllegalArgumentException("보너스 번호는 로또 숫자와 중복되면 안 됩니다");
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호 숫자와 중복되면 안 됩니다");
         }
     }
 
-    private void validate(Set<Number> numbers) {
-        if (numbers.size() != WINNING_LOTTO_NUMBER) {
+    private void validateWinningLottoNumber(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != WINNING_LOTTO_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 6개의 다른 값 이여야 합니다.");
         }
     }
 
-    public boolean isMatchBonusNumber(Number number) {
-        return number.equals(bonusNumber);
+    public boolean isMatchBonusNumber(LottoNumber lottoNumber) {
+        return lottoNumber.equals(bonusLottoNumber);
     }
 
-    public boolean isContainInWinningNumber(Number number) {
-        return winningNumbers.contains(number);
+    public boolean isContainInWinningNumber(LottoNumber lottoNumber) {
+        return winningLottoNumbers.contains(lottoNumber);
     }
 }
