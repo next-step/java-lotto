@@ -14,13 +14,13 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(List<Integer> numbers, int bonus) {
-        LottoNumbers winningNumbers = LottoNumbers.of(numbers);
-        LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
-
+    public static WinningLotto of(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         validateDuplicated(winningNumbers, bonusNumber);
-
         return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    public static WinningLotto of(List<Integer> numbers, int bonus) {
+        return of(LottoNumbers.of(numbers), LottoNumber.valueOf(bonus));
     }
 
     // 테스트 코드에서 사용
