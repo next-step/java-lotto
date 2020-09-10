@@ -42,7 +42,7 @@ public class LottoNumbers {
                 .stream()
                 .filter(this::containsNumber)
                 .count();
-        return Prize.valueOfMatchCount(matchCount, containsNumber(bonusNumber));
+        return Prize.valueOf(matchCount, containsNumber(bonusNumber));
     }
 
     public boolean containsNumber(LottoNumber number) {
