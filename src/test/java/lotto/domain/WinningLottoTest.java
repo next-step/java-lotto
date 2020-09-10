@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class WinningLottoTest {
@@ -47,7 +46,10 @@ class WinningLottoTest {
     }
 
     private static Stream<Arguments> provideNumbersAndResult() {
-        // 보너스를 맞추지 못한 tickets
+        return Stream.of(provideNoBonusArguments(), provideBonusArguments());
+    }
+
+    private static Arguments provideNoBonusArguments() {
         List<LottoNumbers> noBonusNumbers = Arrays.asList(
                 LottoNumbers.of(7, 8, 9, 10, 11, 12),
                 LottoNumbers.of(1, 2, 9, 10, 11, 12),
@@ -56,7 +58,6 @@ class WinningLottoTest {
                 LottoNumbers.of(1, 2, 3, 4, 5, 9),
                 LottoNumbers.of(1, 2, 3, 4, 5, 6)
         );
-
         List<Prize> noBonusResult = Arrays.asList(
                 Prize.ETC, Prize.ETC,
                 Prize.FIFTH,
@@ -64,8 +65,10 @@ class WinningLottoTest {
                 Prize.THIRD,
                 Prize.FIRST
         );
+        return Arguments.of(noBonusNumbers, new LottoResult(noBonusResult));
+    }
 
-        // 보너스를 맞춘 tickets
+    private static Arguments provideBonusArguments() {
         List<LottoNumbers> bonusNumbers = Arrays.asList(
                 LottoNumbers.of(7, 8, 9, 10, 11, 12),
                 LottoNumbers.of(1, 2, 9, 10, 11, 12),
@@ -74,7 +77,6 @@ class WinningLottoTest {
                 LottoNumbers.of(1, 2, 3, 4, 5, 45),
                 LottoNumbers.of(1, 2, 3, 4, 5, 6)
         );
-
         List<Prize> bonusResult = Arrays.asList(
                 Prize.ETC, Prize.ETC,
                 Prize.FIFTH,
@@ -82,10 +84,6 @@ class WinningLottoTest {
                 Prize.SECOND,
                 Prize.FIRST
         );
-
-        return Stream.of(
-                Arguments.of(noBonusNumbers, new LottoResult(noBonusResult)),
-                Arguments.of(bonusNumbers, new LottoResult(bonusResult))
-        );
+        return Arguments.of(bonusNumbers, new LottoResult(bonusResult));
     }
 }

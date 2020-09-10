@@ -6,7 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -23,29 +24,32 @@ class LottoResultTest {
     }
 
     private static Stream<Arguments> provideResultAndProfitRate() {
-        List<Prize> result1 = new ArrayList<>();
-        result1.addAll(getPrizeList(Prize.FIFTH, 1));
-        result1.addAll(getPrizeList(Prize.ETC, 13));
-
-        List<Prize> result2 = new ArrayList<>();
-        result2.addAll(getPrizeList(Prize.ETC, 13));
-
-        List<Prize> result3 = new ArrayList<>();
-        result3.addAll(getPrizeList(Prize.THIRD, 1));
-        result3.addAll(getPrizeList(Prize.FOURTH, 1));
-        result3.addAll(getPrizeList(Prize.FIFTH, 2));
-        result3.addAll(getPrizeList(Prize.ETC, 5));
-
-        List<Prize> result4 = new ArrayList<>();
-        result4.addAll(getPrizeList(Prize.SECOND, 1));
-        result4.addAll(getPrizeList(Prize.ETC, 20));
-
         return Stream.of(
-                Arguments.of(result1, 0.35),
-                Arguments.of(result2, 0.00),
-                Arguments.of(result3, 173.33),
-                Arguments.of(result4, 1428.57)
+                Arguments.of(collectList(
+                        getPrizeList(Prize.FIFTH, 1),
+                        getPrizeList(Prize.ETC, 13)),
+                        0.35
+                ),
+                Arguments.of(getPrizeList(Prize.ETC, 13), 0.00),
+                Arguments.of(collectList(
+                        getPrizeList(Prize.THIRD, 1),
+                        getPrizeList(Prize.FOURTH, 1),
+                        getPrizeList(Prize.FIFTH, 2),
+                        getPrizeList(Prize.ETC, 5)),
+                        173.33
+                ),
+                Arguments.of(collectList(
+                        getPrizeList(Prize.SECOND, 1),
+                        getPrizeList(Prize.ETC, 20)),
+                        1428.57
+                )
         );
+    }
+
+    private static List<Prize> collectList(List<Prize> ... values) {
+        return Stream.of(values)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     private static List<Prize> getPrizeList(Prize type, int count) {
