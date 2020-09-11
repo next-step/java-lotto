@@ -9,7 +9,7 @@ public class InputView {
     private Scanner scanner = new Scanner(System.in);
     private int amount;
 
-    public void askAmount(){
+    public void askAmount() {
         System.out.println(Constant.AMOUNT_MESSAGE_QUESTION);
         amount = Integer.parseInt(scanner.nextLine());
     }
@@ -18,7 +18,12 @@ public class InputView {
         return amount;
     }
 
-    public String askWinningNumbers(){
+    public int askBonusNumber() {
+        System.out.println(Constant.BONUS_NUMBERS_QUESTION);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public String askWinningNumbers() {
         System.out.println(Constant.WINNING_NUMBERS_QUESTION);
         String winningNumbers = scanner.nextLine();
 

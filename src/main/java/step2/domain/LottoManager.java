@@ -8,15 +8,15 @@ import java.util.List;
 
 public class LottoManager {
 
-    InputView inputView = new InputView();
-    ResultView resultView = new ResultView();
+    private InputView inputView = new InputView();
+    private ResultView resultView = new ResultView();
+    private LottoTicketMaker lottoTicketMaker;
 
-    public LottoManager(){
-        startLotto();
+    public LottoManager(LottoTicketMaker lottoTicketMaker){
+        this.lottoTicketMaker = lottoTicketMaker;
     }
 
-    private void startLotto(){
-        LottoTicketMaker lottoTicketMaker = new LottoTicketMaker();
+    public void startLotto(){
         List<LottoTicket> tickets = new ArrayList<>();
 
         inputView.askAmount();
@@ -27,12 +27,8 @@ public class LottoManager {
         calculateLottoResult(tickets);
     }
 
-    private void readyLotto(LottoTicketMaker lottoTicketMaker, List<LottoTicket> tickets){
-
-    }
-
     private void drawLotto(List<LottoTicket> tickets){
-        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinningNumbers());
+        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinningNumbers(), inputView.askBonusNumber());
         resultView.showStatistics(winningTicketSelector.categorizeWinningTicket(winningTicketSelector.findWinningTicket(tickets)));
     }
 

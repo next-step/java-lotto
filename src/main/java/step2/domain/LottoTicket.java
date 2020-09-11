@@ -21,32 +21,40 @@ public class LottoTicket {
         return prizeResult;
     }
 
-    public void checkWinningTicket(List<Integer> officialWinningNumbers) {
+    public void checkWinningTicket(List<Integer> officialWinningNumbers, int bonusNumber) {
         List<Integer> sameNumbers = new ArrayList<>();
 
         officialWinningNumbers.forEach(winningNumber -> collectWinningNumbers(winningNumber, sameNumbers));
 
         if (sameNumbers.size() >= Constant.COUNT_THREE) {
-            setWinningPrize(sameNumbers.size());
+            setWinningPrize(sameNumbers.size(), bonusNumber);
         }
     }
 
-    private void setWinningPrize(int count) {
+    private void setWinningPrize(int count, int bonusNumber) {
         if (count == Constant.COUNT_THREE) {
-            prizeResult = Constant.LOTTO_PRIZE_FOURTH;
+            prizeResult = Constant.LOTTO_PRIZE_FIFTH;
         }
 
         if (count == Constant.COUNT_FOUR) {
-            prizeResult = Constant.LOTTO_PRIZE_THIRD;
+            prizeResult = Constant.LOTTO_PRIZE_FOURTH;
         }
 
         if (count == Constant.COUNT_FIVE) {
-            prizeResult = Constant.LOTTO_PRIZE_SECOND;
+            checkBonusNumber(bonusNumber);
         }
 
         if (count == Constant.COUNT_SIX) {
             prizeResult = Constant.LOTTO_PRIZE_FIRST;
         }
+    }
+
+    private void checkBonusNumber(int bonusNumber){
+        if(numbers.contains(bonusNumber)){
+            prizeResult = Constant.LOTTO_PRIZE_SECOND;
+            return;
+        }
+        prizeResult = Constant.LOTTO_PRIZE_THIRD;
     }
 
     private void collectWinningNumbers(int winningNumber, List<Integer> sameNumbers) {

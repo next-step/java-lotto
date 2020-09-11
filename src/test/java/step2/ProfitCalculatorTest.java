@@ -6,19 +6,18 @@ import step2.domain.LottoTicket;
 import step2.domain.PrizeCalculator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PrizeCalculatorTest {
+class ProfitCalculatorTest {
 
     private PrizeCalculator prizeCalculator = new PrizeCalculator();
 
     @DisplayName("수익률 계산 테스트")
     @Test
     void calculateProfitRatioTest(){
+        int testBonusNumber = 45;
         List<Integer> officialWinningNumbers = new ArrayList<>();
         officialWinningNumbers.add(1);
         officialWinningNumbers.add(2);
@@ -36,8 +35,8 @@ class PrizeCalculatorTest {
         numbers.add(12);
         LottoTicket firstTicket = new LottoTicket(numbers);
         LottoTicket secondTicket = new LottoTicket(numbers);
-        firstTicket.checkWinningTicket(officialWinningNumbers);
-        secondTicket.checkWinningTicket(officialWinningNumbers);
+        firstTicket.checkWinningTicket(officialWinningNumbers, testBonusNumber);
+        secondTicket.checkWinningTicket(officialWinningNumbers, testBonusNumber);
 
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(firstTicket);

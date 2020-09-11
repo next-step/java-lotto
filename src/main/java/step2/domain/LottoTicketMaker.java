@@ -9,14 +9,14 @@ import java.util.stream.IntStream;
 
 public class LottoTicketMaker {
 
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private static final List<Integer> LOTTO_NUMBER_POOL = new ArrayList<>();
 
     public LottoTicketMaker(){
-        IntStream.rangeClosed(Constant.LOTTO_START_NUMBER, Constant.LOTTO_LAST_NUMBER).forEach(lottoNumbers::add);
+        IntStream.rangeClosed(Constant.LOTTO_START_NUMBER, Constant.LOTTO_LAST_NUMBER).forEach(LOTTO_NUMBER_POOL::add);
     }
 
     public List<Integer> getLottoNumbers(){
-        return lottoNumbers;
+        return LOTTO_NUMBER_POOL;
     }
 
     public int calculateAvailableCount(int amount){
@@ -26,9 +26,9 @@ public class LottoTicketMaker {
     public LottoTicket buySingleLottoTicket(){
         List<Integer> numbers = new ArrayList<>();
 
-        Collections.shuffle(lottoNumbers);
+        Collections.shuffle(LOTTO_NUMBER_POOL);
         for(int i = 0; i < Constant.LOTTO_PICK_COUNT; i++){
-            numbers.add(lottoNumbers.get(i));
+            numbers.add(LOTTO_NUMBER_POOL.get(i));
         }
         Collections.sort(numbers);
 

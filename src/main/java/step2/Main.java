@@ -11,7 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LottoManager lottoManager = new LottoManager();
+        LottoManager lottoManager = new LottoManager(new LottoTicketMaker());
+        lottoManager.startLotto();
 
     }
 }
