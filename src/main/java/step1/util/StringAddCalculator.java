@@ -5,7 +5,10 @@ public class StringAddCalculator {
         if(StringUtils.isNotBlank(input)) {
             return 0;
         }
+        if(StringUtils.isNumeric(input)) {
+            return Integer.parseInt(input.toString());
+        }
         return Integer.parseInt(input.toString());
-        
+
     }
 }
