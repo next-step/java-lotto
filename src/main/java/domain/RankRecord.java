@@ -9,8 +9,15 @@ public class RankRecord {
     private Map<Rank, Integer> recordPool;
 
     public RankRecord() {
-        recordPool = new HashMap<>();
+        this(new HashMap<>());
+    }
 
+    public RankRecord(Map<Rank, Integer> pool) {
+        recordPool = pool;
+        initRecordPool();
+    }
+
+    public void initRecordPool() {
         Rank[] ranks = Rank.values();
 
         for (Rank rank : ranks) {
@@ -27,17 +34,23 @@ public class RankRecord {
         recordPool.put(ranking, rankCount + ONE);
     }
 
-    public int sumOfPrice() {
-        int sum = 0;
+    public Money sumOfPrice() {
+        int totalSum = 0;
         int ea = 0;
-        int price = 0;
+        Money price;
+
         Rank[] ranks = Rank.values();
 
         for (Rank rank : ranks) {
             ea = recordPool.get(rank);
-            price = rank.getWinnerPrice();
-            sum += ea * price;
+            price = new Money(rank.getWinnerPrice() * ea);
+            totalSum += price.getMoney();
         }
-        return sum;
+
+        return new Money(totalSum);
+    }
+
+    public int getRecord(Rank rank){
+        return recordPool.get(rank);
     }
 }

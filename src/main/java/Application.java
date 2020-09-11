@@ -1,24 +1,25 @@
-import domain.LottoGames;
-import domain.RankRecord;
-import domain.WinnerNumber;
+import domain.*;
 import utility.UserInput;
 import view.View;
 
 public class Application {
     public static void main(String[] args) {
 
-        int buyInput = UserInput.tellHowManyBuy();
-        LottoGames game = new LottoGames(buyInput);
+        Money buyInput = UserInput.tellHowManyBuy();
+        int totalTries = buyInput.getLottoTries();
+        int manualTries = UserInput.tellHoWManyManualBuy();
 
-        View.showLottoTickets(game.getLottos());
+        Lottos manuallyCreated = UserInput.createManualLotto(manualTries);
+        int autoTries = totalTries - manualTries;
+        Lottos game = new Lottos(autoTries, manuallyCreated);
+
+        View.showManualAndAutoNumber(autoTries, manualTries);
+        View.showLottoTickets(game);
 
         WinnerNumber winnerNumber = UserInput.getWinnerTicket();
-        int bonusNumber = UserInput.inputBonusNumber();
-        winnerNumber.validateBonus(bonusNumber);
-        RankRecord record = winnerNumber.checkAllLottosWithWinnerLotto(game.getLottos());
+        RankRecord record = winnerNumber.checkAllLottosWithWinnerLotto(game);
+        Money sum = record.sumOfPrice();
 
-        int sum = record.sumOfPrice();
-
-        View.result(record, sum, buyInput);
+        View.result(record, sum, totalTries);
     }
 }

@@ -2,32 +2,30 @@ package domain;
 
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static domain.LottoGames.MIN_WINNER_NUMBER;
-
 public class WinnerNumber {
+    public static final int MIN_WINNER_NUMBER = 3;
+    public static final int BONUS_COUNT = 5;
 
     private Lotto winnerNumber;
     private int bonusNumber;
 
-    public WinnerNumber(String[] winnerNumber) {
-        Set<Integer> winnerLotto = Arrays.stream(winnerNumber)
+    public WinnerNumber(String[] winnerNumber, int bonusNumber) {
+        Set<LottoNo> winnerLotto = Arrays.stream(winnerNumber)
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(e -> new LottoNo(e))
                 .collect(Collectors.toSet());
 
+        validateBonus(winnerLotto, bonusNumber);
+
+        this.bonusNumber = bonusNumber;
         this.winnerNumber = new Lotto(winnerLotto);
     }
 
-    public void validateBonus(int bonus) {
-        bonusNumber = bonus;
-        List<Integer> list = winnerNumber.getLottoNumber();
-
-        boolean hasComponent = list.contains(bonus);
+    public void validateBonus(Set<LottoNo> lotto, int bonus) {
+        boolean hasComponent = lotto.stream().anyMatch(e -> e.getNumber() == bonus);
 
         if (hasComponent) {
             throw new IllegalArgumentException("Bonus number Err!");
@@ -43,11 +41,15 @@ public class WinnerNumber {
     }
 
 
+    public Lotto getWinnerNumber() {
+        return winnerNumber;
+    }
+
     private void doRecord(Lotto lotto, RankRecord rankRecord) {
-        int count = countNumber(lotto);
+        int count = lotto.match(winnerNumber);
         boolean matchBonus = false;
 
-        if (count == 5 && findBonusNumber(lotto) == bonusNumber) {
+        if (count == BONUS_COUNT && lotto.contains(bonusNumber)) {
             matchBonus = true;
         }
 
@@ -55,27 +57,5 @@ public class WinnerNumber {
             Rank ranking = Rank.valueOf(count, matchBonus);
             rankRecord.recordOfRankings(ranking);
         }
-    }
-
-    private int countNumber(Lotto lotto) {
-        return getCountingNumber(lotto);
-    }
-
-
-    int getCountingNumber(Lotto lotto) {
-        int count = (int) lotto.getLottoNumber()
-                .stream()
-                .filter(winnerNumber.getLottoNumber()::contains)
-                .count();
-
-        return count;
-    }
-
-    public int findBonusNumber(Lotto lotto) {
-        Optional<Integer> bonus = lotto.getLottoNumber().stream()
-                .filter(e -> !winnerNumber.getLottoNumber().contains(e))
-                .findFirst();
-
-        return (int) bonus.get();
     }
 }

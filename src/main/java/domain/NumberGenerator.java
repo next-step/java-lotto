@@ -11,24 +11,25 @@ public class NumberGenerator {
     public static final int INT_ZERO = 0;
     public static final int INT_SIX = 6;
 
-    private List<Integer> lottoNumberCandidate;
+    private List<LottoNo> lottoNumberCandidate;
 
     public NumberGenerator() {
         lottoNumberCandidate = createLottoNumberCandidate();
     }
 
-    private List<Integer> createLottoNumberCandidate() {
+    private List<LottoNo> createLottoNumberCandidate() {
         return IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
-                .boxed().collect(Collectors.toList());
+                .mapToObj(e->new LottoNo(e))
+                .collect(Collectors.toList());
     }
 
-    public Set<Integer> generate() {
+    public Set<LottoNo> generate() {
         Collections.shuffle(lottoNumberCandidate);
 
-        List<Integer> numList = new ArrayList<>(lottoNumberCandidate)
+        List<LottoNo> numList = new ArrayList<>(lottoNumberCandidate)
                 .subList(INT_ZERO, INT_SIX);
 
-        Set<Integer> lotto = new HashSet<>(numList);
+        Set<LottoNo> lotto = new HashSet<>(numList);
 
         return lotto;
     }
