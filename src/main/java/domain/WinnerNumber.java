@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class WinnerNumber {
     public static final int MIN_WINNER_NUMBER = 3;
+    public static final int BONUS_COUNT = 5;
 
     private Lotto winnerNumber;
     private int bonusNumber;
@@ -40,11 +41,15 @@ public class WinnerNumber {
     }
 
 
+    public Lotto getWinnerNumber() {
+        return winnerNumber;
+    }
+
     private void doRecord(Lotto lotto, RankRecord rankRecord) {
-        int count = getCountingNumber(lotto);
+        int count = lotto.match(winnerNumber);
         boolean matchBonus = false;
 
-        if (count == 5 && lotto.hasBonusNumber(bonusNumber)) {
+        if (count == BONUS_COUNT && lotto.contains(bonusNumber)) {
             matchBonus = true;
         }
 
@@ -52,16 +57,5 @@ public class WinnerNumber {
             Rank ranking = Rank.valueOf(count, matchBonus);
             rankRecord.recordOfRankings(ranking);
         }
-    }
-
-    private int getCountingNumber(Lotto lotto) {
-        return getMatchCount(lotto).getCount();
-    }
-
-    public Count getMatchCount(Lotto lotto) {
-        return new Count((int) lotto.getLottoNumber()
-                .stream()
-                .filter(e -> winnerNumber.getLottoNumber().contains(e))
-                .count());
     }
 }

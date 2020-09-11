@@ -38,14 +38,21 @@ public class Lotto {
 
     private void validateNumberRange(Set<LottoNo> lotto) {
         boolean rangeValidate = lotto.stream()
-                .allMatch(c->c.validateNumber());
+                .allMatch(c -> c.validateNumber(c.getNumber()));
 
         if (!rangeValidate) {
             throw new IllegalArgumentException("숫자 1~45내 범위 입력 오류!!");
         }
     }
 
-    boolean hasBonusNumber(int bonus) {
+    boolean contains(int bonus) {
         return lottoNumber.contains(new LottoNo(bonus));
+    }
+
+    public int match(Lotto winner) {
+        return (int) winner.getLottoNumber()
+                .stream()
+                .filter(e -> lottoNumber.contains(e))
+                .count();
     }
 }

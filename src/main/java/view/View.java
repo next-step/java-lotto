@@ -11,11 +11,11 @@ public class View {
         System.out.println(sum.getMoney());
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println("3개 일치(5000원)- " + record.getRecordPool().get(Rank.RANK_FIVE) + "개");
-        System.out.println("4개 일치(50000원)- " + record.getRecordPool().get(Rank.RANK_FOUR) + "개");
-        System.out.println("5개 일치(1500000원)- " + record.getRecordPool().get(Rank.RANK_THREE) + "개");
-        System.out.println("5개 일치,보너스 볼 일치(30000000원)- " + record.getRecordPool().get(Rank.RANK_TWO) + "개");
-        System.out.println("6개 일치(2000000000원)- " + record.getRecordPool().get(Rank.RANK_ONE) + "개");
+        System.out.println("3개 일치(5000원)- " + record.getRecord(Rank.RANK_FIVE) + "개");
+        System.out.println("4개 일치(50000원)- " + record.getRecord(Rank.RANK_FOUR) + "개");
+        System.out.println("5개 일치(1500000원)- " + record.getRecord(Rank.RANK_THREE) + "개");
+        System.out.println("5개 일치,보너스 볼 일치(30000000원)- " + record.getRecord(Rank.RANK_TWO) + "개");
+        System.out.println("6개 일치(2000000000원)- " + record.getRecord(Rank.RANK_ONE) + "개");
 
         if (sum.getMoney() == ZERO) {
             System.out.println("총 수익률은 0 입니다.");

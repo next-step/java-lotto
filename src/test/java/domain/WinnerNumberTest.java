@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,22 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinnerNumberTest {
-    @DisplayName("당첨번호랑_몇개_일치하는지_테스트 ")
-    @Test
-    void 당첨번호랑_몇개_일치하는지_테스트() {
-        String winnerNumber = "1,2,3,4,5,9";
-        int bonus = 7;
-
-        String[] input = winnerNumber.split(",");
-        Set<LottoNo> onelotto = new HashSet<>(Arrays
-                .asList(new LottoNo(1), new LottoNo(2)
-                        , new LottoNo(3), new LottoNo(4)
-                        , new LottoNo(5), new LottoNo(6)));
-
-        assertThat(new WinnerNumber(input, bonus).getMatchCount(
-                new Lotto(onelotto)).getCount()).isEqualTo(5);
-    }
-
     @Test
     void validateBonusTest() {
         assertThatThrownBy(() -> {

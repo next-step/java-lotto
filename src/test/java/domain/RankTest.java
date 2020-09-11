@@ -17,5 +17,4 @@ public class RankTest {
         assertThat(Rank.valueOf(5,true).getWinnerPrice())
                 .isEqualTo(30_000_000);
     }
-
 }

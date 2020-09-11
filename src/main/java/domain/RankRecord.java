@@ -9,10 +9,8 @@ public class RankRecord {
     private Map<Rank, Integer> recordPool;
 
     public RankRecord() {
-        recordPool = new HashMap<>();
-        initRecordPool();
+        this(new HashMap<>());
     }
-
 
     public RankRecord(Map<Rank, Integer> pool) {
         recordPool = pool;
@@ -52,4 +50,7 @@ public class RankRecord {
         return new Money(totalSum);
     }
 
+    public int getRecord(Rank rank){
+        return recordPool.get(rank);
+    }
 }
