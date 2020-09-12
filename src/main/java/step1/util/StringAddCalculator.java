@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import static step1.util.StringUtils.makeNumberList;
 
 public class StringAddCalculator {
-    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}?<>\n]";
+    public static final String REGULAR_EXPRESSION = "[_.~!@#$%^&*()=+{}?<>\n]";
     public static int splitAndSum(String input) {
         // 1
         if(StringUtils.isNotBlank(input)) {

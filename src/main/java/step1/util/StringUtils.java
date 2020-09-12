@@ -27,6 +27,9 @@ public class StringUtils {
     public static int[] makeNumberList(String[] stringNo) {
         int[] numbers = new int[stringNo.length];
         for(int i = 0 ; i < stringNo.length ; i++) {
+            if(stringNo[i].contains("-")) {
+                throw new RuntimeException();
+            }
             numbers[i] = StringUtils.returnNumber(stringNo[i]);
         }
         return numbers;
