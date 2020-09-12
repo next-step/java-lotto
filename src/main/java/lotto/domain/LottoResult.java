@@ -6,7 +6,7 @@ import java.util.Objects;
 import static lotto.domain.LottoGame.DEFAULT_LOTTO_PRICE;
 
 public class LottoResult {
-    private static final Integer INTEGER_ZERO = 0;
+    public static final int INTEGER_ZERO = 0;
     private final List<Rank> matchRanks;
 
     public LottoResult(List<Rank> ranks) {
@@ -23,10 +23,10 @@ public class LottoResult {
                 .count();
     }
 
-    public int totalPrizeOfMathRanks(){
+    public int totalPrizeOfMathRanks() {
         return matchRanks.stream()
                 .mapToInt(Rank::getWinningPrize)
-                .reduce(INTEGER_ZERO,Integer::sum);
+                .reduce(INTEGER_ZERO, Integer::sum);
     }
 
     public double rateOfTotalPrize() {
