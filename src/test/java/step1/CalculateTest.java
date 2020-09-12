@@ -26,4 +26,10 @@ public class CalculateTest {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    void splitAndSum_쉼표_또는_콜론_구분자() {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }

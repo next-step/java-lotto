@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class StringAddCalculator {
 //    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}:?,<>]";
-    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}:?<>]";
+    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}?<>]";
     public static int splitAndSum(String input) {
         //1
         if(StringUtils.isNotBlank(input)) {
@@ -28,7 +28,7 @@ public class StringAddCalculator {
     }
 
     public static int[] splitNo(String input) {
-        String[] tempNo = input.split(",");
+        String[] tempNo = input.split(",|:");
         int[] numbers = new int[tempNo.length];
         for(int i = 0 ; i < tempNo.length ; i++) {
             numbers[i] = StringUtils.returnNumber(tempNo[i]);
