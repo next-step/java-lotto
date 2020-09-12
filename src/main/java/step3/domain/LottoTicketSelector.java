@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class LottoTicketSelector {
 
     private List<Integer> LOTTO_NUMBER_POOL = new ArrayList<>();
-    private List<LottoTicket> lottoTickets;
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
     private int amount;
 
     public LottoTicketSelector(int amount) {
@@ -31,24 +31,40 @@ public class LottoTicketSelector {
     }
 
     public int calculateAvailableTicketCount() {
-        return this.amount/1000;
+        return this.amount/1000 - lottoTickets.size();
     }
 
-    public LottoTicket buySingleLottoTicket(){
-        List<Integer> pickedNumbers = new ArrayList<>();
+    public LottoTicket buySingleAutoLottoTicket(){
+        List<Integer> autoPickedNumbers = new ArrayList<>();
 
         Collections.shuffle(LOTTO_NUMBER_POOL);
-        IntStream.range(Constant.ZERO, Constant.LOTTO_NUMBER_COUNT).forEach(i -> pickedNumbers.add(LOTTO_NUMBER_POOL.get(i)));
-        Collections.sort(pickedNumbers);
+        IntStream.range(Constant.ZERO, Constant.LOTTO_NUMBER_COUNT).forEach(i -> autoPickedNumbers.add(LOTTO_NUMBER_POOL.get(i)));
+        Collections.sort(autoPickedNumbers);
 
-        return new LottoTicket(pickedNumbers);
+        return new LottoTicket(autoPickedNumbers);
     }
 
-    public void buyAvailableLottoTickets(int ticketCount) {
-        lottoTickets = new ArrayList<>();
+    public void buyAvailableAutoLottoTickets(int ticketCount) {
 
         for (int i = 0; i < ticketCount; i++) {
-            lottoTickets.add(buySingleLottoTicket());
+            lottoTickets.add(buySingleAutoLottoTicket());
+        }
+
+    }
+
+    public void buySingleManualLottoTicket(String ticketNumbers){
+        List<Integer> manualPickedNumbers = new ArrayList<>();
+        for(String number : ticketNumbers.split(Constant.MANUAL_NUMBER_SEPERATOR)){
+            checkNumberRange(number);
+            manualPickedNumbers.add(Integer.parseInt(number));
+        }
+        Collections.sort(manualPickedNumbers);
+        lottoTickets.add(new LottoTicket(manualPickedNumbers));
+    }
+
+    private void checkNumberRange(String number){
+        if((Integer.parseInt(number) < Constant.LOTTO_START_NUMBER) || (Constant.LOTTO_LAST_NUMBER < Integer.parseInt(number))){
+            throw new IllegalArgumentException();
         }
     }
 

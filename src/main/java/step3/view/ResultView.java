@@ -8,8 +8,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void showLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + Constant.BOUGHT_N_LOTTO_TICKETS);
+    public static void showLottoTickets(int manualTicketCount, List<LottoTicket> lottoTickets) {
+        System.out.println(Constant.TOTAL_TICKET_COUNT_MESSAGE(manualTicketCount, lottoTickets.size()));
         lottoTickets.forEach(ticket -> System.out.println(ticket.getLottoNumbers()));
         System.out.println("");
     }
