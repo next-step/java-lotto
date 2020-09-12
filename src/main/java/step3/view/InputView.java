@@ -14,6 +14,19 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public static int askManualTicketCount(){
+        System.out.println(Constant.INPUT_MANUAL_LOTTO_TICKET_COUNT);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static void askManualTicketNumbers(){
+        System.out.println(Constant.INPUT_MANUAL_LOTTO_TICKET_NUMBERS);
+    }
+
+    public static String inputManualTicketNumbers(){
+        return scanner.nextLine();
+    }
+
     public static int askBonusNumber() {
         System.out.println(Constant.INPUT_BONUS_NUMBER);
         return Integer.parseInt(scanner.nextLine());

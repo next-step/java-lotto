@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ProfitCalculator {
 
-    public double calculateProfitRatio(List<WinningType> winningTypes, int amount){
+    public static double calculateProfitRatio(List<WinningType> winningTypes, int amount){
         if(amount == 0){
             return 0;
         }
@@ -19,7 +19,7 @@ public class ProfitCalculator {
         return totalPrize/amount;
     }
 
-    private int sumPrize(int totalPrize, WinningType winningType){
+    private static int sumPrize(int totalPrize, WinningType winningType){
         totalPrize += winningType.getPrize();
         return totalPrize;
     }

@@ -16,10 +16,17 @@ public class LottoManager {
 
     private void purchaseLottoTickets(){
         lottoTicketSelector = new LottoTicketSelector(InputView.askPurchaseAmount());
-        int ticketCount = lottoTicketSelector.calculateAvailableTicketCount();
 
-        lottoTicketSelector.buyAvailableLottoTickets(ticketCount);
-        ResultView.showLottoTickets(lottoTicketSelector.getLottoTickets());
+        int manualTicketCount = InputView.askManualTicketCount();
+        InputView.askManualTicketNumbers();
+        for(int i = 0; i < manualTicketCount; i++){
+            lottoTicketSelector.buySingleManualLottoTicket(InputView.inputManualTicketNumbers());
+        }
+
+        int totalTicketCount = lottoTicketSelector.calculateAvailableTicketCount();
+
+        lottoTicketSelector.buyAvailableAutoLottoTickets(totalTicketCount);
+        ResultView.showLottoTickets(manualTicketCount, lottoTicketSelector.getLottoTickets());
     }
 
     private void drawWinningTickets(){
@@ -31,8 +38,7 @@ public class LottoManager {
         ResultView.startStatistics();
         ResultView.showWinningResult(winningTicketSelector.getWinningTypes());
 
-        ProfitCalculator profitCalculator = new ProfitCalculator();
-        ResultView.showProfit(profitCalculator.calculateProfitRatio(winningTicketSelector.getWinningTypes(), lottoTicketSelector.getAmount()));
+        ResultView.showProfit(ProfitCalculator.calculateProfitRatio(winningTicketSelector.getWinningTypes(), lottoTicketSelector.getAmount()));
     }
 
 }

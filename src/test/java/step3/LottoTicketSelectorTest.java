@@ -35,7 +35,7 @@ public class LottoTicketSelectorTest {
         int testAmount = 14900;
         LottoTicketSelector lottoTicketSelector = new LottoTicketSelector(testAmount);
 
-        LottoTicket lottoTicket = lottoTicketSelector.buySingleLottoTicket();
+        LottoTicket lottoTicket = lottoTicketSelector.buySingleAutoLottoTicket();
         assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
     }
 
@@ -45,10 +45,22 @@ public class LottoTicketSelectorTest {
         int testAmount = 14900;
         LottoTicketSelector lottoTicketSelector = new LottoTicketSelector(testAmount);
 
-        LottoTicket firstLottoTicket = lottoTicketSelector.buySingleLottoTicket();
-        LottoTicket secondLottoTicket = lottoTicketSelector.buySingleLottoTicket();
+        LottoTicket firstLottoTicket = lottoTicketSelector.buySingleAutoLottoTicket();
+        LottoTicket secondLottoTicket = lottoTicketSelector.buySingleAutoLottoTicket();
 
         assertThat(firstLottoTicket.getLottoNumbers().equals(secondLottoTicket.getLottoNumbers())).isFalse();
+    }
+
+    @DisplayName("수동 로또 티켓 구매시 숫자 범위 체크")
+    @Test
+    void buySingleManualLottoTicket(){
+        int testAmount = 14900;
+        LottoTicketSelector lottoTicketSelector = new LottoTicketSelector(testAmount);
+
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            lottoTicketSelector.buySingleManualLottoTicket("1,2,3,4,5,46");
+        });
+
     }
 
 }
