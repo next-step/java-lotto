@@ -9,7 +9,7 @@ public class LottoResult {
     public static final int INTEGER_ZERO = 0;
     private final List<Rank> matchRanks;
 
-    public LottoResult(List<Rank> ranks) {
+    private LottoResult(List<Rank> ranks) {
         this.matchRanks = ranks;
     }
 
