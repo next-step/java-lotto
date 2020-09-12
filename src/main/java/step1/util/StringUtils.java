@@ -24,23 +24,12 @@ public class StringUtils {
         return Integer.parseInt(input);
     }
 
-    public static int[] makeNumberList(String input) {
-        String[] string = input.split(",");
-        int[] numbers = new int[string.length];
-        for(int i = 0 ; i < numbers.length ; i++) {
-            numbers[i] = StringUtils.returnNumber(input);
+    public static int[] makeNumberList(String[] stringNo) {
+        int[] numbers = new int[stringNo.length];
+        for(int i = 0 ; i < stringNo.length ; i++) {
+            numbers[i] = StringUtils.returnNumber(stringNo[i]);
         }
         return numbers;
     }
-//
-//    public static int conversionString(String input) {
-//        return Integer.parseInt(input);
-//    }
-//
-//    public static int beforeConversion(String input) {
-//        if(StringUtils.isNumeric(input)) {
-//            conversionString(input);
-//        }
-//        return 0;
-//    }
+
 }

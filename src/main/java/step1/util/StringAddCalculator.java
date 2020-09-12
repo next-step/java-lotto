@@ -1,38 +1,44 @@
 package step1.util;
 
+import java.util.Arrays;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import static step1.util.StringUtils.makeNumberList;
+
 public class StringAddCalculator {
-//    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}:?,<>]";
-    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}?<>]";
+    public static final String REGULAR_EXPRESSION = "[-_.~!@#$%^&*()=+{}?<>\n]";
     public static int splitAndSum(String input) {
-        //1
+        // 1
         if(StringUtils.isNotBlank(input)) {
-            System.out.println("inNotBlank");
             return 0;
         }
-        //2
+        // 2
         if(StringUtils.isNumeric(input)) {
-            System.out.println("isNumeric");
             return Integer.parseInt(input.toString());
         }
-        //3
+        //3 & 4
         Pattern pattern = Pattern.compile(REGULAR_EXPRESSION);
         boolean result = pattern.matcher(input).find();
         if(!result) {
             return IntStream.of(splitNo(input)).sum();
         }
-
+        // 5
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if(m.find()) {
+            return IntStream.of(splitDelimeter(m.group(1), m.group(2))).sum();
+        }
         return Integer.parseInt(input.toString());
     }
 
     public static int[] splitNo(String input) {
         String[] tempNo = input.split(",|:");
-        int[] numbers = new int[tempNo.length];
-        for(int i = 0 ; i < tempNo.length ; i++) {
-            numbers[i] = StringUtils.returnNumber(tempNo[i]);
-        }
-        return numbers;
+        return makeNumberList(tempNo);
+    }
+
+    public static int[] splitDelimeter(String delimeter, String data) {
+        String[] tempData = data.split(delimeter);
+        return makeNumberList(tempData);
     }
 }
