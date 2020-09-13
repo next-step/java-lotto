@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.LottoResult.INTEGER_ZERO;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -18,17 +16,16 @@ public class Lottos {
     }
 
     public static Lottos of(int autoCount, List<String> manualLottoNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> mergeLottos = new ArrayList<>();
 
-        manualLottoNumbers.stream()
-                .map(manualLottoNumber -> lottos.add(Lotto.from(manualLottoNumber)))
-                .collect(Collectors.toList());
+        for (String manualLottoNumber : manualLottoNumbers) {
+            mergeLottos.add(Lotto.from(manualLottoNumber));
+        }
 
-        IntStream.range(INTEGER_ZERO, autoCount)
-                .mapToObj(i -> lottos.add(Lotto.of(new LottoNumberRandomGenerator())))
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos);
+        for(int i = 0; i < autoCount; i++) {
+            mergeLottos.add(Lotto.of(new LottoNumberRandomGenerator()));
+        }
+        return new Lottos(mergeLottos);
     }
 
     public int size() {
