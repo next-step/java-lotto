@@ -29,12 +29,9 @@ public class LottoMachine {
         Payment payment = null;
         try {
             payment = new Payment(InputView.howMuch());
-        } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해주세요.");
-            payment = howMuch();
         } catch (IllegalArgumentException  e) {
             System.out.println(e.getMessage());
-            payment = howMuch();
+            return howMuch();
         }
         return payment;
     }
@@ -46,7 +43,7 @@ public class LottoMachine {
             payment.buyTickets(slipCount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            slipCount = buyTickets(payment);
+            return buyTickets(payment);
         }
         return slipCount;
     }
