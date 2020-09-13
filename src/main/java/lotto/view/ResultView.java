@@ -21,8 +21,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseLottoCount(int autoCount, int manualCount) {
-        System.out.println(String.format(ANSWER_COUNT_LOTTO_MESSAGE, autoCount, manualCount));
+    public static void printPurchaseLottoCount(int manualCount, int count) {
+        System.out.println(String.format(ANSWER_COUNT_LOTTO_MESSAGE, manualCount, count - manualCount));
     }
 
     public static void printLottos(List<String> toStringByLottos) {
