@@ -25,7 +25,7 @@ public class LottoMachine {
         ResultView.showDrawingResult(result);
     }
 
-    public static Payment howMuch() {
+    private static Payment howMuch() {
         Payment payment = null;
         try {
             payment = new Payment(InputView.howMuch());
@@ -36,7 +36,7 @@ public class LottoMachine {
         return payment;
     }
 
-    public static int buyTickets(Payment payment) {
+    private static int buyTickets(Payment payment) {
         int slipCount = 0;
         try {
             slipCount = InputView.howManySlips();
@@ -48,7 +48,7 @@ public class LottoMachine {
         return slipCount;
     }
 
-    public static void pickingNumbers(int slipCount, LottoBundle bundle) {
+    private static void pickingNumbers(int slipCount, LottoBundle bundle) {
         while (slipCount-- > 0) {
             List<Integer> pickedNumbers = InputView.getPickedNumbers();
             try {
