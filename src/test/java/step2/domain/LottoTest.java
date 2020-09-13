@@ -1,14 +1,17 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.Lotto;
+import step2.domain.LottoNumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class LottoTest {
@@ -34,19 +37,15 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("현재 로또에 해당 로또번호가 존재하는지 여부 체크")
-    public void containLottoNumberCheck() {
-        assertEquals(lotto.contains(new LottoNumber(1)), true);
-        assertEquals(lotto.contains(new LottoNumber(32)), false);
+    @DisplayName("로또 번호 갯수 체크")
+    public void checkLottoNumberCnt() {
+        assertThrows(IllegalArgumentException.class, () -> Lotto.create(1, 2, 3, 4, 5));
     }
 
     @Test
-    @DisplayName("로또 번호 오름차순 정렬 여부 체크")
-    public void sortLottoNumberCheck() {
-        Lotto lotto = Lotto.create(3, 1, 30, 7, 10, 6);
-        Lotto sortedlotto = Lotto.create(3, 1, 30, 7, 10, 6);
-
-        assertEquals(lotto.getLottoNumber(1), 1);
-        assertEquals(lotto.getLottoNumber(6), 30);
+    @DisplayName("로또 등수 체크")
+    public void containLottoNumberCheck() {
+        Lotto winningLotto = Lotto.create(1, 3, 4, 5, 6, 7);
+        assertEquals(lotto.match(winningLotto), Rank.SECOND);
     }
 }

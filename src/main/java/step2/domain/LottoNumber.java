@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.Objects;
 
@@ -18,6 +18,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
         }
 
         this.lottoNumber = lottoNumber;
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
