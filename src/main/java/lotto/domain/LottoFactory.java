@@ -1,12 +1,12 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    public static final int TICKET_PRICE = 1000;
     private static final List<LottoNumber> NUMBERS;
 
     static {
@@ -17,14 +17,23 @@ public class LottoFactory {
 
     private LottoFactory() {}
 
-    public static List<LottoNumbers> buyTickets(int payment) {
-        return IntStream.range(0, payment / TICKET_PRICE)
+    public static List<LottoNumbers> buyTickets(int ticketCount) {
+        return IntStream.range(0, ticketCount)
                 .mapToObj(n -> provideLottoNumbers())
                 .collect(Collectors.toList());
     }
 
     private static LottoNumbers provideLottoNumbers() {
         Collections.shuffle(NUMBERS);
-        return LottoNumbers.of(new HashSet<>(NUMBERS.subList(0, LottoNumbers.SIZE)));
+        return LottoNumbers.of(new TreeSet<>(NUMBERS.subList(0, LottoNumbers.SIZE)));
+    }
+
+    public static List<LottoNumbers> buyTickets(int ticketCount,
+                                                Supplier<List<Integer>> numberSupplier) {
+        List<LottoNumbers> numbers = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            numbers.add(LottoNumbers.of(numberSupplier.get()));
+        }
+        return numbers;
     }
 }
