@@ -17,7 +17,7 @@ public class LottoFactory {
 
     private LottoFactory() {}
 
-    public static List<LottoNumbers> buyTickets(int ticketCount) {
+    public static List<LottoNumbers> generateLotto(int ticketCount) {
         return IntStream.range(0, ticketCount)
                 .mapToObj(n -> provideLottoNumbers())
                 .collect(Collectors.toList());
@@ -26,14 +26,5 @@ public class LottoFactory {
     private static LottoNumbers provideLottoNumbers() {
         Collections.shuffle(NUMBERS);
         return LottoNumbers.of(new TreeSet<>(NUMBERS.subList(0, LottoNumbers.SIZE)));
-    }
-
-    public static List<LottoNumbers> buyTickets(int ticketCount,
-                                                Supplier<List<Integer>> numberSupplier) {
-        List<LottoNumbers> numbers = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            numbers.add(LottoNumbers.of(numberSupplier.get()));
-        }
-        return numbers;
     }
 }
