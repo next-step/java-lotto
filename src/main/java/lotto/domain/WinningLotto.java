@@ -37,9 +37,7 @@ public class WinningLotto {
         }
     }
 
-    public LottoResult drawing(List<LottoNumbers> tickets) {
-        return tickets.stream()
-                .map(ticket -> ticket.matchNumbers(winningNumbers, bonusNumber))
-                .collect(collectingAndThen(toList(), LottoResult::new));
+    public Prize matching(LottoNumbers ticket) {
+        return ticket.matchNumbers(winningNumbers, bonusNumber);
     }
 }
