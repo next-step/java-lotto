@@ -3,9 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
-
 public class WinningLotto {
 
     private LottoNumbers winningNumbers;

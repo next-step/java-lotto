@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.nio.channels.Pipe;
 import java.util.Arrays;
 import java.util.List;
 
