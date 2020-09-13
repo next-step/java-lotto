@@ -10,21 +10,21 @@ import static step1.util.StringUtils.makeNumberList;
 public class StringAddCalculator {
     public static final String REGULAR_EXPRESSION = "[_.~!@#$%^&*()=+{}?<>\n]";
     public static int splitAndSum(String input) {
-        // 1
+        // 빈 문자열 또는 null 체크
         if(StringUtils.isNotBlank(input)) {
             return 0;
         }
-        // 2
+        // 숫자 체크
         if(StringUtils.isNumeric(input)) {
             return Integer.parseInt(input.toString());
         }
-        //3 & 4
+        // ',' , ':' 를 구분자로 하여 숫자의 합을 반환
         Pattern pattern = Pattern.compile(REGULAR_EXPRESSION);
         boolean result = pattern.matcher(input).find();
         if(!result) {
             return IntStream.of(splitNo(input)).sum();
         }
-        // 5
+        // 커스텀 구분자로 숫자의 합을 반환
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if(m.find()) {
             return IntStream.of(splitDelimeter(m.group(1), m.group(2))).sum();

@@ -27,12 +27,15 @@ public class StringUtils {
     public static int[] makeNumberList(String[] stringNo) {
         int[] numbers = new int[stringNo.length];
         for(int i = 0 ; i < stringNo.length ; i++) {
-            if(stringNo[i].contains("-")) {
-                throw new RuntimeException();
-            }
+            exception(stringNo[i]);
             numbers[i] = StringUtils.returnNumber(stringNo[i]);
         }
         return numbers;
     }
 
+    public static void exception(String no) {
+        if(no.contains("-")) {
+            throw new RuntimeException();
+        }
+    }
 }
