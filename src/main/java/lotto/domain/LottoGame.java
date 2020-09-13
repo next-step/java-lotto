@@ -19,7 +19,7 @@ public class LottoGame {
         return new LottoGame(count);
     }
 
-    public static void validate(int amount, int manualCount) {
+    private static void validate(int amount, int manualCount) {
         if (amount < DEFAULT_LOTTO_PRICE) {
             throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_AMOUNT);
         }
