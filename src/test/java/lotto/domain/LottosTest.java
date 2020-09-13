@@ -17,9 +17,9 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        lottos = Lottos.of(Arrays.asList(
-                Lotto.of(Arrays.asList(1,2,3,4,5,6)),
-                Lotto.of(Arrays.asList(9,10,11,12,13,14))));
+        lottos = Lottos.of(0, Arrays.asList(
+                "1,2,3,4,5,6",
+                "9,10,11,12,13,14"));
         winningLotto = WinningLotto.of(Arrays.asList(4,5,6,7,8,9), 19);
     }
 

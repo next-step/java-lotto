@@ -17,10 +17,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(List<Lotto> lottos) {
-        return new Lottos(lottos);
-    }
-
     public static Lottos of(int autoCount, List<String> manualLottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
 
