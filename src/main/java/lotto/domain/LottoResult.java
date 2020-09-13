@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     public double profitRate() {
-        int payment = prizeResult.size() * LottoFactory.TICKET_PRICE;
+        int payment = prizeResult.size() * Payment.TICKET_PRICE;
         int rewardTotal = prizeResult.stream()
                 .mapToInt(Prize::getReward)
                 .sum();
