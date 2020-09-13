@@ -21,6 +21,10 @@ public class LottoBundle {
         this.tickets = tickets;
     }
 
+    public void addTicket(LottoNumbers numbers) {
+        tickets.add(numbers);
+    }
+
     public void addTickets(List<LottoNumbers> numbers) {
         tickets.addAll(numbers);
     }

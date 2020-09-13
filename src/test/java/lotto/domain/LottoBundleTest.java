@@ -16,22 +16,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LottoBundleTest {
 
     @Test
-    @DisplayName("개수만큼 수동으로 입력한 로또 생성")
+    @DisplayName("로또 추가(수동 로또 추가할 때 사용)")
+    void addTicket() {
+        // given
+        LottoBundle actual = new LottoBundle();
+
+        LottoNumbers pickedNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        actual.addTicket(pickedNumbers);
+
+        // then
+        assertEquals(actual, new LottoBundle(Arrays.asList(pickedNumbers)));
+    }
+
+    @Test
+    @DisplayName("로또 리스트 추가(자동 로또 추가할 때 사용)")
     void addTickets() {
         // given
         LottoBundle actual = new LottoBundle();
 
-        List<LottoNumbers> pickedNumbers = Arrays.asList(
+        List<LottoNumbers> autoNumbers = Arrays.asList(
                 LottoNumbers.of(1, 2, 3, 4, 5, 6),
                 LottoNumbers.of(7, 8, 9, 10, 11, 12),
                 LottoNumbers.of(13, 14, 15, 16, 17, 18)
         );
 
         // when
-        actual.addTickets(pickedNumbers);
+        actual.addTickets(autoNumbers);
 
         // then
-        assertEquals(actual, new LottoBundle(pickedNumbers));
+        assertEquals(actual, new LottoBundle(autoNumbers));
     }
 
     @ParameterizedTest
