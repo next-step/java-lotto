@@ -11,14 +11,12 @@ public class CalculatorUtil {
     private static final String DEFAULT_DELIMITER = ",|:";
 
     public static String[] getOperands(String expression) {
-        StringBuilder sb = new StringBuilder(DEFAULT_DELIMITER);
         String[] operands = expression.split(DEFAULT_DELIMITER);
 
         Matcher m = PatternCache.getCustomDelimiterPattern().matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_IDX);
-            sb.append(customDelimiter);
-            operands = m.group(OPERANDS_IDX).split(sb.toString());
+            operands = m.group(OPERANDS_IDX).split(customDelimiter);
         }
 
         return operands;
