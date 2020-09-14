@@ -1,6 +1,6 @@
 package step1;
 
-import step1.algorithm.CalculateAlgorithm;
+import step1.algorithm.Calculate;
 import step1.algorithm.CalculateUsingDelimiter;
 import step1.util.CalculatorUtil;
 
@@ -8,9 +8,7 @@ import java.util.Objects;
 
 public class StringAddCalculator {
 
-    private static final CalculateAlgorithm CALCULATE_ALGORITHM = new CalculateUsingDelimiter();
-
-    public static int splitAndSum(String expression) {
+    public static int splitAndSum(String expression, Calculate calculate) {
         if (Objects.isNull(expression)) {
             return 0;
         }
@@ -19,10 +17,9 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] delimiterRegex = CalculatorUtil.getOperands(expression)
-                .orElseThrow(() -> new RuntimeException("커스텀 구분자, 기본 구분자를 사용하지 않았습니다."));
+        String[] delimiterRegex = CalculatorUtil.getOperands(expression);
 
-        return CALCULATE_ALGORITHM.execute(delimiterRegex);
+        return calculate.execute(delimiterRegex);
     }
 }
 

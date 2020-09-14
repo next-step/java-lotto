@@ -6,19 +6,21 @@ import java.util.regex.Pattern;
 
 public class CalculatorUtil {
 
+    private static final int CUSTOM_DELIMITER_IDX = 1;
+    private static final int OPERANDS_IDX = 2;
     private static final String DEFAULT_DELIMITER = ",|:";
 
-    public static Optional<String[]> getOperands(String expression) {
+    public static String[] getOperands(String expression) {
         StringBuilder sb = new StringBuilder(DEFAULT_DELIMITER);
         String[] operands = expression.split(DEFAULT_DELIMITER);
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher m = PatternCache.getCustomDelimiterPattern().matcher(expression);
         if (m.find()) {
-            String customDelimiter = m.group(1);
+            String customDelimiter = m.group(CUSTOM_DELIMITER_IDX);
             sb.append("|" + customDelimiter);
-            operands = m.group(2).split(sb.toString());
+            operands = m.group(OPERANDS_IDX).split(sb.toString());
         }
 
-        return Optional.of(operands);
+        return operands;
     }
 }
