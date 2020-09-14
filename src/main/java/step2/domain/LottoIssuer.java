@@ -14,11 +14,10 @@ public class LottoIssuer {
         }
     }
 
-    public static List<Lotto> issue(int money) {
+    public static List<Lotto> issue(Money money) {
         List<Lotto> LottoList = new ArrayList<>();
-        int issueCnt = money / LOTTO_PRICE;
 
-        for (int i = 0; i < issueCnt; i++) {
+        for (int i = 0; i < money.getNumberOfPurchases(LOTTO_PRICE); i++) {
             LottoList.add(Lotto.create(getRandomLottoNumber()));
         }
 

@@ -24,13 +24,11 @@ public class PurChasedLotto {
         return rankInfo;
     }
 
-    public double totalYield(int PurchaseAmount) {
-        int totalPrize = rankInfo.keySet().stream()
+    public int getTotalPrize() {
+        return rankInfo.keySet().stream()
                 .mapToInt((rank) -> rank.getPrize() * rankInfo.get(rank))
                 .reduce((prize1, prize2) -> prize1 + prize2)
                 .getAsInt();
-
-        return (double) totalPrize / (double) PurchaseAmount;
     }
 
     private void updateRankInfo(Rank rank) {

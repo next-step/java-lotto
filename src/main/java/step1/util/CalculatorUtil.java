@@ -17,7 +17,7 @@ public class CalculatorUtil {
         Matcher m = PatternCache.getCustomDelimiterPattern().matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_IDX);
-            sb.append("|" + customDelimiter);
+            sb.append(customDelimiter);
             operands = m.group(OPERANDS_IDX).split(sb.toString());
         }
 
