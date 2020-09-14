@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,57 +34,27 @@ class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("provideNumbersAndResult")
     @DisplayName("추첨 결과 확인(보너스 포함된 경우와 포함되지 않은 경우)")
-    void drawing(List<LottoNumbers> tickets, LottoResult expected) {
+    void matching(LottoNumbers ticket, Prize expected) {
         // given
         WinningLotto winningNumbers = WinningLotto.of(45, 1, 2, 3, 4, 5, 6);
 
         // when
-        LottoResult actual = winningNumbers.drawing(tickets);
+        Prize actual = winningNumbers.matching(ticket);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideNumbersAndResult() {
-        // 보너스를 맞추지 못한 tickets
-        List<LottoNumbers> noBonusNumbers = Arrays.asList(
-                LottoNumbers.of(7, 8, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 3, 7, 8, 9),
-                LottoNumbers.of(1, 2, 3, 4, 8, 9),
-                LottoNumbers.of(1, 2, 3, 4, 5, 9),
-                LottoNumbers.of(1, 2, 3, 4, 5, 6)
-        );
-
-        List<Prize> noBonusResult = Arrays.asList(
-                Prize.ETC, Prize.ETC,
-                Prize.FIFTH,
-                Prize.FOURTH,
-                Prize.THIRD,
-                Prize.FIRST
-        );
-
-        // 보너스를 맞춘 tickets
-        List<LottoNumbers> bonusNumbers = Arrays.asList(
-                LottoNumbers.of(7, 8, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 9, 10, 11, 12),
-                LottoNumbers.of(1, 2, 3, 7, 8, 9),
-                LottoNumbers.of(1, 2, 3, 4, 8, 9),
-                LottoNumbers.of(1, 2, 3, 4, 5, 45),
-                LottoNumbers.of(1, 2, 3, 4, 5, 6)
-        );
-
-        List<Prize> bonusResult = Arrays.asList(
-                Prize.ETC, Prize.ETC,
-                Prize.FIFTH,
-                Prize.FOURTH,
-                Prize.SECOND,
-                Prize.FIRST
-        );
-
         return Stream.of(
-                Arguments.of(noBonusNumbers, new LottoResult(noBonusResult)),
-                Arguments.of(bonusNumbers, new LottoResult(bonusResult))
+                Arguments.of(LottoNumbers.of(7, 8, 9, 10, 11, 12), Prize.ETC),
+                Arguments.of(LottoNumbers.of(1, 8, 9, 10, 11, 12), Prize.ETC),
+                Arguments.of(LottoNumbers.of(1, 2, 9, 10, 11, 12), Prize.ETC),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 7, 8, 9), Prize.FIFTH),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 8, 9), Prize.FOURTH),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 9), Prize.THIRD),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 45), Prize.SECOND),
+                Arguments.of(LottoNumbers.of(1, 2, 3, 4, 5, 6), Prize.FIRST)
         );
     }
 }

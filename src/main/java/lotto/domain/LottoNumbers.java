@@ -22,7 +22,7 @@ public class LottoNumbers {
     public static LottoNumbers of(List<Integer> numbers) {
         Set<LottoNumber> numberSet = numbers.stream()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
         return of(numberSet);
     }
 
@@ -42,7 +42,7 @@ public class LottoNumbers {
                 .stream()
                 .filter(this::containsNumber)
                 .count();
-        return Prize.valueOfMatchCount(matchCount, containsNumber(bonusNumber));
+        return Prize.valueOf(matchCount, containsNumber(bonusNumber));
     }
 
     public boolean containsNumber(LottoNumber number) {

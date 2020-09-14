@@ -18,8 +18,29 @@ public class InputView {
         return getInteger("구입 금액을 입력해 주세요.");
     }
 
+    public static int howManySlips() {
+        return getInteger("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static List<Integer> getPickedNumbers() {
+        return getIntegers("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static List<Integer> getWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요.");
+       return getIntegers("지난 주 당첨 번호를 입력해주세요.");
+    }
+
+    public static int getBonusNumber() {
+        return getInteger("보너스 볼을 입력해 주세요.");
+    }
+
+    private static int getInteger(String message) {
+        System.out.println(message);
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    private static List<Integer> getIntegers(String message) {
+        System.out.println(message);
         String[] tokens = SCANNER.nextLine().split(DELIMITER);
         return parseTokensToIntegers(tokens);
     }
@@ -30,14 +51,5 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
-    }
-
-    public static int getBonusNumber() {
-        return getInteger("보너스 볼을 입력해 주세요.");
-    }
-
-    private static int getInteger(String message) {
-        System.out.println(message);
-        return Integer.parseInt(SCANNER.nextLine());
     }
 }

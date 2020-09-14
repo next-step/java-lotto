@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -14,13 +13,13 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(List<Integer> numbers, int bonus) {
-        LottoNumbers winningNumbers = LottoNumbers.of(numbers);
-        LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
-
+    public static WinningLotto of(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         validateDuplicated(winningNumbers, bonusNumber);
-
         return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    public static WinningLotto of(List<Integer> numbers, int bonus) {
+        return of(LottoNumbers.of(numbers), LottoNumber.valueOf(bonus));
     }
 
     // 테스트 코드에서 사용
@@ -35,10 +34,7 @@ public class WinningLotto {
         }
     }
 
-    public LottoResult drawing(List<LottoNumbers> tickets) {
-        List<Prize> prizes = tickets.stream()
-                .map(ticket -> ticket.matchNumbers(winningNumbers, bonusNumber))
-                .collect(Collectors.toList());
-        return new LottoResult(prizes);
+    public Prize matching(LottoNumbers ticket) {
+        return ticket.matchNumbers(winningNumbers, bonusNumber);
     }
 }
