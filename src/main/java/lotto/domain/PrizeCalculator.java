@@ -8,7 +8,7 @@ public class PrizeCalculator {
     }
 
     public static BigDecimal rateOfPrize(Winners winners){
-        return calcUsedMoney(winners.getSize()).divide(winners.calcWinnerPrize());
+        return winners.calcWinnerPrize().divide(calcUsedMoney(winners.getSize()), 2, BigDecimal.ROUND_CEILING);
     }
 
     private static BigDecimal calcUsedMoney(int lottoCount) {

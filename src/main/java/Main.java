@@ -13,8 +13,22 @@ public class Main {
         System.out.println("구입 금액을 입력 해 주세요.");
         BigDecimal price = new BigDecimal(scanner.nextLine());
 
-        Lottos lottos = LottoStore.sold(price);
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoAmount = Integer.parseInt(scanner.nextLine());
 
+        if(manualLottoAmount > 0 ){
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+
+        String[] manualLottoStrArr = new String[manualLottoAmount];
+        for(int i = 0 ; i < manualLottoAmount ; i ++){
+
+            manualLottoStrArr[i] = scanner.nextLine();
+        }
+
+        Lottos lottos = LottoStore.sold(price, manualLottoStrArr);
+
+        System.out.println("수동으로 "+manualLottoAmount+"장, 자동으로 "+(lottos.getSize()-manualLottoAmount)+"장을 구매했습니다.");
         System.out.println(lottos);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");

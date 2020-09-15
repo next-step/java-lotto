@@ -7,10 +7,14 @@ public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
 
-    public void add(Lotto lotto){
-        lottos.add(lotto);
+    public void add(Lotto lotto)
+    {
+        this.lottos.add(lotto);
     }
 
+    public void addAll(List<Lotto> lottos){
+        this.lottos.addAll(lottos);
+    }
     public int getSize(){
         return lottos.size();
     }
