@@ -53,7 +53,8 @@ public class Count implements Comparable<Count>{
     }
 
     @Override
-    public int compareTo(Count o) {
-        return this.count - o.getCount();
+    public int compareTo(Count o)
+    {
+        return this.count - o.count;
     }
 }

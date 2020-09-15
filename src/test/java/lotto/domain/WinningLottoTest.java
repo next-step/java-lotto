@@ -1,56 +1,20 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
+    @ParameterizedTest
+    @CsvSource(value={"1,2,3,4,5,6:7:6:true","1,2,3,4,5,7:6:5:true","1,2,3,4,5,7:8:5:false"}, delimiter = ':') // 당첨로또:보너스번호:당첨갯수:보너스일치여부
+    public void lottoTest(String winningLottoStr, int bonusNumber, int countOfMatch, boolean isBonusMatch){
+        String[] lottoNumbers = new String[]{"1","2","3","4","5","6"};
+        Lotto lotto = new Lotto(lottoNumbers);
 
-    @Test
-    @DisplayName("당첨 로또 생성 테스트")
-    public void test(){
-        List<LottoNumber> winningNumbers = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-        Lotto lotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningLottoStr.split(","), bonusNumber);
 
-        String[] winningNumberArr = {"1","2","3","4","5","6"};
-        WinningLotto winningLotto = new WinningLotto(winningNumberArr, 7);
-
-        assertThat(winningLotto.countWinningNumber(lotto)).isEqualTo(Rank.FIRST);
-        assertThat(winningLotto.countWinningNumber(lotto).getCountOfMatch()).isEqualTo(Count.of(6));
-    }
-
-    @Test
-    @DisplayName("당첨 로또 생성 테스트")
-    public void test2(){
-        List<LottoNumber> winningNumbers = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-        Lotto lotto = new Lotto(winningNumbers);
-
-        String[] winningNumberArr = {"1","2","3","4","5","7"};
-        WinningLotto winningLotto = new WinningLotto(winningNumberArr, 6);
-
-        assertThat(winningLotto.countWinningNumber(lotto)).isEqualTo(Rank.SECOND);
-        assertThat(winningLotto.countWinningNumber(lotto).getCountOfMatch()).isEqualTo(Count.of(5));
-    }
-
-    @Test
-    @DisplayName("당첨 로또 생성 테스트")
-    public void test3(){
-        List<LottoNumber> winningNumbers = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-        Lotto lotto = new Lotto(winningNumbers);
-
-        String[] winningNumberArr = {"1","2","3","4","5","7"};
-        WinningLotto winningLotto = new WinningLotto(winningNumberArr, 8);
-
-        assertThat(winningLotto.countWinningNumber(lotto)).isEqualTo(Rank.THIRD);
-        assertThat(winningLotto.countWinningNumber(lotto).getCountOfMatch()).isEqualTo(Count.of(5));
+        assertThat(winningLotto.countWinningNumber(lotto)).isEqualTo(Rank.valueOf(Count.of(countOfMatch), isBonusMatch));
+        assertThat(winningLotto.countWinningNumber(lotto).getCountOfMatch()).isEqualTo(Count.of(countOfMatch));
     }
 }

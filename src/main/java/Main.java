@@ -8,14 +8,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        LottoStore lottoStore = new LottoStore();
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입 금액을 입력 해 주세요.");
         BigDecimal price = new BigDecimal(scanner.nextLine());
 
-        Lottos lottos = lottoStore.sold(price);
+        Lottos lottos = LottoStore.sold(price);
 
         System.out.println(lottos);
 
@@ -25,7 +23,7 @@ public class Main {
         System.out.println("보너스 볼을 입력 해 주세요.");
         int bonusNumber = Integer.parseInt(scanner.nextLine());
 
-        Winners winners = lottoStore.getWinner(lottos, winningNumbers.split(","), bonusNumber);
+        Winners winners = LottoStore.getWinner(lottos, winningNumbers.split(","), bonusNumber);
         SummaryPrinter.summary(winners);
     }
 }

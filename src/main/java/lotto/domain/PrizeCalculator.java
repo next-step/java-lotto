@@ -8,21 +8,10 @@ public class PrizeCalculator {
     }
 
     public static BigDecimal rateOfPrize(Winners winners){
-        return calcTotalPrize(winners);
+        return calcUsedMoney(winners.getSize()).divide(winners.calcWinnerPrize());
     }
 
-    private static BigDecimal calcTotalPrize(Winners winners) {
-        BigDecimal usedMoney = BigDecimal.ZERO;
-        BigDecimal totalPrize = BigDecimal.ZERO;
-
-        for(Rank rank : Rank.values()){
-            BigDecimal winningMoeny = rank.getWinningMoney();
-            BigDecimal count = winners.getWinnersCount(rank).toBigDecimal();
-
-            totalPrize = totalPrize.add(winningMoeny.multiply(count));
-            usedMoney = usedMoney.add(Lotto.PRICE.multiply(count));
-        }
-
-        return totalPrize.divide(usedMoney);
+    private static BigDecimal calcUsedMoney(int lottoCount) {
+        return BigDecimal.valueOf(lottoCount).multiply(Lotto.PRICE);
     }
 }

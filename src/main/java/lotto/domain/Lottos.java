@@ -15,11 +15,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Winners getWinner(WinningLotto winningNumbers){
-        Winners winners = new Winners(winningNumbers);
+    public Winners getWinner(WinningLotto winningLotto){
+        Winners winners = new Winners();
 
         for(Lotto lotto : lottos){
-            winners.addLotto(lotto);
+            Rank rank = winningLotto.countWinningNumber(lotto);
+            winners.addRank(rank);
         }
 
         return winners;

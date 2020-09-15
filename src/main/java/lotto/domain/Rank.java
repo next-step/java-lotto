@@ -11,15 +11,11 @@ public enum Rank {
     MISS(Count.ZERO, BigDecimal.valueOf(0));
 
     private static final Count MIN_WINNING_COUNT = Count.of(3);
-//
-//    private static final Map<Count, Rank> RANKS =
-//            Collections.unmodifiableMap(Stream.of(values())
-//                    .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity())));
 
     private Count countOfMatch;
     private BigDecimal winningMoney;
 
-    private Rank(Count countOfMatch, BigDecimal winningMoney) {
+    Rank(Count countOfMatch, BigDecimal winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }

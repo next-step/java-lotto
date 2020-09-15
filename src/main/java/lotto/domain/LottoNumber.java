@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber>{
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
     static{
         for(int i = Lotto.LOTTO_START_NUM ; i <= Lotto.LOTTO_END_NUM ; i ++ ){
-            lottoNumbers.put(i, new LottoNumber(i));
+            LOTTO_NUMBERS.put(i, new LottoNumber(i));
         }
     }
 
@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static LottoNumber of(int num){
-        return Optional.ofNullable(lottoNumbers.get(num))
+        return Optional.ofNullable(LOTTO_NUMBERS.get(num))
                 .orElseThrow(() -> new IllegalArgumentException("LottoNumber is out of range[0-45]"));
     }
 
@@ -49,6 +49,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
     @Override
     public int compareTo(LottoNumber lottoNumber) {
         LottoNumber compare = (LottoNumber) lottoNumber;
-        return this.getNumber() - compare.getNumber();
+        return this.getNumber() - compare.number;
     }
 }
