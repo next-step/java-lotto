@@ -3,7 +3,7 @@ package step2.view;
 import java.util.List;
 
 public class ResultView {
-    public static void view(List<List> lottos) {
+    public static void view(List<List<int[]>> lottos) {
         StringBuilder sb = new StringBuilder();
         for(List lotto : lottos) {
             sb.append(lotto.toString() + "\n");

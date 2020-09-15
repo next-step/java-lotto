@@ -6,16 +6,24 @@ import java.util.List;
 
 public class IssueLotto {
 
-    public static int create(int money) {
-        return money/1000;
+    public int create(int money) {
+        return money / 1000;
     }
 
-    public static List<int[]> issueLotto() {
-        List<int[]> numbers = makeRandomNumber();
+    public List<List<int[]>> issueLottos(int count) {
+        List<List<int[]>> lottos = new ArrayList<>();
+        for(int i = 0; i < count; i++) {
+            lottos.add(new IssueLotto().issueLotto());
+        }
+        return lottos;
+    }
+
+    public List<int[]> issueLotto() {
+        List numbers = makeRandomNumber();
         return makeLottoNumber(numbers);
     }
 
-    public static List makeRandomNumber() {
+    public List makeRandomNumber() {
         List numbers = new ArrayList();
         for(int i = 0 ; i < 45 ; i++) {
             numbers.add(i + 1);
@@ -24,7 +32,7 @@ public class IssueLotto {
         return numbers;
     }
 
-    public static List makeLottoNumber(List numbers) {
+    public List makeLottoNumber(List numbers) {
         List result = new ArrayList();
         for(int i = 0; i < 6; i++) {
             result.add(numbers.get(i));
@@ -33,11 +41,4 @@ public class IssueLotto {
         return result;
     }
 
-    public static List<List> issueLottos(int count) {
-        List<List> lottos = new ArrayList<>();
-        for(int i = 0; i < count; i++) {
-            lottos.add(issueLotto());
-        }
-        return lottos;
-    }
 }
