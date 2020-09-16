@@ -1,7 +1,7 @@
 package step2.domain;
 
 public class Money {
-    private static final int MINUMUM_MONEY = 1000;
+    private static final int MINIMUM_MONEY = 1000;
 
     private int currentMoney = 0;
 
@@ -10,11 +10,11 @@ public class Money {
     }
 
     public static Money of(int money) {
-        if (money < MINUMUM_MONEY) {
+        if (money < MINIMUM_MONEY) {
             throw new IllegalArgumentException("로또를 하기 위해서는 최소 1000원 이상의 금액을 입력해야 합니다.");
         }
 
-        return new Money(money / MINUMUM_MONEY * MINUMUM_MONEY);
+        return new Money(money / MINIMUM_MONEY * MINIMUM_MONEY);
     }
 
     public int getNumberOfPurchases(int goodsPrice) {
