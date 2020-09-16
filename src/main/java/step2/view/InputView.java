@@ -1,7 +1,6 @@
 package step2.view;
 
-import step2.Dto.LottoDto;
-import step2.domain.Lotto;
+import step2.dto.LottoDto;
 
 import java.util.Scanner;
 

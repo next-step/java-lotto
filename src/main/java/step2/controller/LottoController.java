@@ -1,6 +1,6 @@
 package step2.controller;
 
-import step2.Dto.LottoDto;
+import step2.dto.LottoDto;
 import step2.domain.Lotto;
 import step2.domain.LottoIssuer;
 import step2.domain.Money;
@@ -8,7 +8,6 @@ import step2.domain.PurChasedLotto;
 import step2.view.InputView;
 import step2.view.RenderView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoController {

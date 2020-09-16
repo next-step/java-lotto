@@ -1,15 +1,11 @@
 package step1.algorithm;
 
-import step1.util.PatternCache;
-
-import java.util.regex.Pattern;
-
 public class CalculationCache {
     private static class SingletonHelper{
-        private static final Calculate CALCULATE_USING_DELIMITER = new CalculateUsingDelimiter();
+        private static final Calculable CALCULABLE_USING_DELIMITER = new calculableUsingDelimiter();
     }
 
-    public static Calculate getCalculateUsingDelimiter() {
-        return SingletonHelper.CALCULATE_USING_DELIMITER;
+    public static Calculable getCalculateUsingDelimiter() {
+        return SingletonHelper.CALCULABLE_USING_DELIMITER;
     }
 }

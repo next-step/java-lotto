@@ -1,4 +1,4 @@
-package step2.Dto;
+package step2.dto;
 
 public class LottoDto {
     private int purchaseMoney;
@@ -16,15 +16,7 @@ public class LottoDto {
         return purchaseMoney;
     }
 
-    public void setPurchaseMoney(int purchaseMoney) {
-        this.purchaseMoney = purchaseMoney;
-    }
-
     public String getWinningLottoNumber() {
         return winningLottoNumber;
-    }
-
-    public void setWinningLottoNumber(String winningLottoNumber) {
-        this.winningLottoNumber = winningLottoNumber;
     }
 }

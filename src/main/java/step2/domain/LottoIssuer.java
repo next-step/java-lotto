@@ -17,7 +17,7 @@ public class LottoIssuer {
     public static List<Lotto> issue(Money money) {
         List<Lotto> LottoList = new ArrayList<>();
 
-        for (int i = 0; i < money.getNumberOfPurchases(LOTTO_PRICE); i++) {
+        for (int i = 0, j = money.getNumberOfPurchases(LOTTO_PRICE); i < j; i++) {
             LottoList.add(Lotto.create(getRandomLottoNumber()));
         }
 

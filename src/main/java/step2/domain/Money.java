@@ -4,7 +4,6 @@ public class Money {
     private static final int MINUMUM_MONEY = 1000;
 
     private int currentMoney = 0;
-    private int consumptionMoney = 0;
 
     private Money(int money) {
         this.currentMoney = money;
@@ -15,7 +14,7 @@ public class Money {
             throw new IllegalArgumentException("로또를 하기 위해서는 최소 1000원 이상의 금액을 입력해야 합니다.");
         }
 
-        return new Money(money);
+        return new Money(money / MINUMUM_MONEY * MINUMUM_MONEY);
     }
 
     public int getNumberOfPurchases(int goodsPrice) {
@@ -24,20 +23,13 @@ public class Money {
         }
         int goodsCnt = currentMoney / goodsPrice;
 
-        updatePossessionMoney(goodsPrice);
-
         return goodsCnt;
     }
 
     public double totalYield(int revenue) {
-        double yield = (double)revenue / (double)consumptionMoney;
+        double yield = (double)revenue / (double)currentMoney;
         yield = Math.round(yield * 100);
         yield = yield / 100;
         return yield;
-    }
-
-    private void updatePossessionMoney(int goodsPirce) {
-        consumptionMoney = (currentMoney / goodsPirce) * goodsPirce;
-        currentMoney = currentMoney - consumptionMoney;
     }
 }

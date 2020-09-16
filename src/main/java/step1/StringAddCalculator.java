@@ -1,14 +1,13 @@
 package step1;
 
-import step1.algorithm.Calculate;
-import step1.algorithm.CalculateUsingDelimiter;
+import step1.algorithm.Calculable;
 import step1.util.CalculatorUtil;
 
 import java.util.Objects;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(String expression, Calculate calculate) {
+    public static int splitAndSum(String expression, Calculable calculable) {
         if (Objects.isNull(expression)) {
             return 0;
         }
@@ -19,7 +18,7 @@ public class StringAddCalculator {
 
         String[] delimiterRegex = CalculatorUtil.getOperands(expression);
 
-        return calculate.execute(delimiterRegex);
+        return calculable.execute(delimiterRegex);
     }
 }
 

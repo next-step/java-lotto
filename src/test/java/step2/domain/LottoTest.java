@@ -26,17 +26,6 @@ public class LottoTest {
     }
 
     @Test
-    public void create() {
-        assertEquals(lotto, Lotto.create(1, 2, 3, 4, 5, 6));
-    }
-
-    @Test
-    @DisplayName("리스트를 인자로 받아 로또 생성")
-    public void createUsingListArgs() {
-        assertEquals(lotto, Lotto.create(lottoNum));
-    }
-
-    @Test
     @DisplayName("로또 번호 갯수 체크")
     public void checkLottoNumberCnt() {
         assertThrows(IllegalArgumentException.class, () -> Lotto.create(1, 2, 3, 4, 5));

@@ -1,6 +1,6 @@
 package step1.algorithm;
 
-public class CalculateUsingDelimiter implements Calculate {
+public class calculableUsingDelimiter implements Calculable {
 
     @Override
     public int execute(String[] operands) {

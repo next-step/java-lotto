@@ -1,5 +1,5 @@
 package step1.algorithm;
 
-public interface Calculate {
+public interface Calculable {
     public int execute(String[] expression);
 }
