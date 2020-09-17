@@ -42,4 +42,22 @@ public class LottoNumbers {
     public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
+
+    public boolean isMatchBoundsNumber(int bounsNumber) {
+        if(getMatchCount(bounsNumber) == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Rank getLottoRank(List<Integer> winningLottoNumbers, int bounsNumber) {
+        int matchCount = 0;
+
+        for(Integer winningLottoNumber : winningLottoNumbers) {
+            matchCount += getMatchCount(winningLottoNumber);
+        }
+
+        return Rank.create(matchCount, isMatchBoundsNumber(bounsNumber));
+    }
 }

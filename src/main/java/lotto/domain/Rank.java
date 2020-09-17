@@ -30,7 +30,7 @@ public enum Rank {
 
     public static Rank create(int matchCount, boolean isMatchBonus) {
         if(matchCount == 5) {
-            createSecondOrThird(isMatchBonus);
+           return createSecondOrThird(isMatchBonus);
         }
         return create(matchCount);
     }
