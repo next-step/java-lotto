@@ -30,7 +30,21 @@ public class RankTest {
     @DisplayName("2 Rank 당첨 갯수")
     @Test
     public void Rank2_당첨갯수_테스트() {
-        assertThat(Rank.create(5).getWinnings()).isEqualTo(1500000);
+        assertThat(Rank.create(5).getWinnings()).isEqualTo(30000000);
     }
 
+    @DisplayName("2 Rank 당첨 갯수_보너스 당첨여부")
+    @Test
+    public void Rank2_당첨갯수_테스트_보너스_당첨여부() {
+
+        assertThat(Rank.create(5, true).getWinnings()).isEqualTo(30000000);
+    }
+
+
+    @DisplayName("3 Rank 당첨 갯수_보너스 당첨이 안되서")
+    @Test
+    public void Rank3_당첨갯수_테스트_보너스_당첨여부() {
+
+        assertThat(Rank.create(5, false).getWinnings()).isEqualTo(30000000);
+    }
 }
