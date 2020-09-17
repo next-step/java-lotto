@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +15,9 @@ public class LottoResultTest {
         ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
         lottoList.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5,6 )));
         Lottos lottos = Lottos.create(lottoList);
-        ArrayList<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5,6));
-        lottos.checkWinningNumbers(winningNumbers);
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5,6));
+        int bounsNumber = 7;
+        lottos.checkWinningNumbers(winningNumbers, bounsNumber);
 
         assertThat(LottoResult.create(lottos)).isInstanceOf(LottoResult.class);
     }

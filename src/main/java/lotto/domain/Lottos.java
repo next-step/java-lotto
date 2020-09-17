@@ -18,12 +18,13 @@ public class Lottos {
     }
 
 
-    public void checkWinningNumbers(List<Integer> winningNumbers) {
-        lottos.stream().forEach( value -> value.findLottoRank(winningNumbers));
-    }
-
     public ArrayList<Rank> getRankList() {
         return lottos.stream().map(lotto -> lotto.getRank())
                               .collect(toCollection(ArrayList::new));
+    }
+
+    public void checkWinningNumbers(List<Integer> winningNumbers, int bounsNumber) {
+        lottos.stream().forEach( value -> value.findLottoRank(winningNumbers, bounsNumber));
+
     }
 }

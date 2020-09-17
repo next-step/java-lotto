@@ -15,8 +15,8 @@ public class Lotto {
         return new Lotto(LottoNumbers.create(lottoNums));
     }
 
-    public void findLottoRank(List<Integer> winningLottoNumbers) {
-        this.rank = lottoNumbers.getLottoRank(winningLottoNumbers);
+    public void findLottoRank(List<Integer> winningLottoNumbers, int bounsNumber) {
+        this.rank = lottoNumbers.getLottoRank(winningLottoNumbers, bounsNumber);
     }
 
     public LottoNumbers getLottoNumbers() {

@@ -26,13 +26,15 @@ public class LottosTest {
     @Test
     public void 로또_당첨여부_확인하기_테스트() {
         ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
-        lottoList.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5,6 )));
+        lottoList.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7 )));
 
         Lottos lottos = Lottos.create(lottoList);
         ArrayList<Integer> winningNumbers = Stream.iterate(1, n -> n + 1 )
                                                   .limit(6)
                                                   .collect(toCollection(ArrayList::new));
-        lottos.checkWinningNumbers(winningNumbers);
+
+        int bounsNumber = 7;
+        lottos.checkWinningNumbers(winningNumbers, bounsNumber);
         assertThat(lottos.lottos.get(0).getRank().getMatchCount()).isEqualTo(6);
     }
 }
