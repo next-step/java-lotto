@@ -13,12 +13,21 @@ public class LottoService {
     }
 
     private List<Long> createNumbers() {
-        List numbers = new ArrayList();
+        List<Long> numbers = new ArrayList();
         for(int i = 0 ; i < 45 ; i++) {
-            numbers.add(i + 1);
+            numbers.add((long) (i + 1));
         }
         Collections.shuffle(numbers);
         numbers = numbers.subList( 0, 6 );
+        Collections.sort(numbers);
         return numbers;
+    }
+
+    public List<LottoTicket> createLottoTicket(int count) throws IllegalAccessException {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for(int i = 0 ; i < count ; i++) {
+            lottoTickets.add(createLottoNumber());
+        }
+        return lottoTickets;
     }
 }
