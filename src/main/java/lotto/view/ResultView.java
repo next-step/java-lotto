@@ -25,7 +25,7 @@ public class ResultView {
 
     public static void viewLottoNumber(Lottos lottos) {
         lottos.lottos.stream().forEach(lotto -> {
-            viewLottoNumbers(lotto.getLottoNums());
+            viewLottoNumbers(lotto.getLottoNumbers());
         });
     }
 

@@ -33,6 +33,6 @@ public class LottosTest {
                                                   .limit(6)
                                                   .collect(toCollection(ArrayList::new));
         lottos.checkWinningNumbers(winningNumbers);
-        assertThat(lottos.lottos.get(0).rank.getMatchCount()).isEqualTo(6);
+        assertThat(lottos.lottos.get(0).getRank().getMatchCount()).isEqualTo(6);
     }
 }

@@ -13,12 +13,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos create(ArrayList<Lotto> lottos) {
+    public static Lottos create(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
 
-    public void checkWinningNumbers(ArrayList<Integer> winningNumbers) {
+    public void checkWinningNumbers(List<Integer> winningNumbers) {
         lottos.stream().forEach( value -> value.findLottoRank(winningNumbers));
     }
 
