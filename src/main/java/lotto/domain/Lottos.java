@@ -13,17 +13,18 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos create(ArrayList<Lotto> lottos) {
+    public static Lottos create(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
 
-    public void checkWinningNumbers(ArrayList<Integer> winningNumbers) {
-        lottos.stream().forEach( value -> value.findLottoRank(winningNumbers));
-    }
-
     public ArrayList<Rank> getRankList() {
         return lottos.stream().map(lotto -> lotto.getRank())
                               .collect(toCollection(ArrayList::new));
+    }
+
+    public void checkWinningNumbers(List<Integer> winningNumbers, int bounsNumber) {
+        lottos.stream().forEach( value -> value.findLottoRank(winningNumbers, bounsNumber));
+
     }
 }

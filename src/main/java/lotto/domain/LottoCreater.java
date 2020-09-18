@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toCollection;
 public class LottoCreater {
 
     private static final int LOTTO_AMOUNT = 1000;
-    private static final ArrayList<Integer> LOTTO_NUMBER_LIST = Stream.iterate(1, n -> n + 1)
+    private static final List<Integer> LOTTO_NUMBER_LIST = Stream.iterate(1, n -> n + 1)
                                                                       .limit(45)
                                                                       .collect(toCollection(ArrayList::new));
 

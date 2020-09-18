@@ -25,7 +25,7 @@ public class ResultView {
 
     public static void viewLottoNumber(Lottos lottos) {
         lottos.lottos.stream().forEach(lotto -> {
-            viewLottoNumbers(lotto.getLottoNums());
+            viewLottoNumbers(lotto.getLottoNumbers());
         });
     }
 
@@ -44,6 +44,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("------------");
         ArrayList<Integer> placeCntList = lottoResult.getPlaceCnt();
+        viewLottoPlace(Rank.FifthPlace, placeCntList.get(4));
         viewLottoPlace(Rank.FourthPlace, placeCntList.get(3));
         viewLottoPlace(Rank.ThirdPlace, placeCntList.get(2));
         viewLottoPlace(Rank.SecondPlace, placeCntList.get(1));
@@ -57,7 +58,11 @@ public class ResultView {
     }
     private static void viewLottoPlace(Rank rank, Integer cnt) {
         StringBuilder sb = new StringBuilder();
-        sb.append(rank.getMatchCount()).append("개 일치").append(" (").append(rank.getWinnings()).append(")-").append(cnt).append("개");
+        sb.append(rank.getMatchCount()).append("개 일치");
+        if(Rank.SecondPlace == rank) {
+               sb.append(",").append(" 보너스 볼 일치");
+        }
+        sb.append(" (").append(rank.getWinnings()).append(")-").append(cnt).append("개");
         System.out.println(sb.toString());
         
     }
