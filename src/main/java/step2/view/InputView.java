@@ -12,14 +12,23 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         int purchaseMoney = scanner.nextInt();
 
-        return new LottoDto(purchaseMoney);
+        return new LottoDto.Builder()
+                .purchaseMoney(purchaseMoney)
+                .build();
     }
 
     public static LottoDto inputWinningLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningLottoNumber = scanner.next();
+        scanner.nextLine();
+        String winningLottoNumber = scanner.nextLine();
 
-        return new LottoDto(winningLottoNumber);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = scanner.next();
+
+        return new LottoDto.Builder()
+                .winningLottoNumber(winningLottoNumber)
+                .bonusNumber(bonusNumber)
+                .build();
     }
 
 }
