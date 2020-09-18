@@ -10,7 +10,7 @@ public class LottoIssuer {
 
     static {
         for (int i = 1; i <= 45; i++) {
-            LOTTO_NUM_STORE.add(new LottoNumber(i));
+            LOTTO_NUM_STORE.add(LottoNumber.of(i));
         }
     }
 
@@ -24,7 +24,7 @@ public class LottoIssuer {
         return LottoList;
     }
 
-    public static List<LottoNumber> getRandomLottoNumber() {
+    private static List<LottoNumber> getRandomLottoNumber() {
         Collections.shuffle(LOTTO_NUM_STORE);
         return LOTTO_NUM_STORE.subList(0, 6);
     }

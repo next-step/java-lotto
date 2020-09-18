@@ -12,42 +12,29 @@ public class Lotto implements Iterable<LottoNumber> {
         if (lottoNumbers.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("로또 번호는 총" + LOTTO_NUM_COUNT + "개 이어야 합니다.");
         }
-        ;
 
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto create(List<LottoNumber> nums) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        nums.forEach((lottoNumber) -> lottoNumbers.add(lottoNumber));
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(nums);
 
         return new Lotto(lottoNumbers);
     }
 
     public static Lotto create(String nums) {
-        List<Integer> lottoNumberList = Arrays.asList(nums.split(",")).stream()
+        Set<LottoNumber> lottoNumbers = Arrays.asList(nums.split(",")).stream()
                 .map(value -> Integer.parseInt(value.trim()))
-                .collect(Collectors.toList());
-
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        lottoNumberList.forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
+                .map(value -> LottoNumber.of(value))
+                .collect(Collectors.toCollection(TreeSet::new));
 
         return new Lotto(lottoNumbers);
     }
 
-    public Rank match(Lotto winningLotto) {
-        int matchCount = 0;
-
-        for (LottoNumber lottoNumber : winningLotto) {
-            if (lottoNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-
-        return Rank.getRank(matchCount);
+    public Rank match(WinningLotto winningLotto) {
+        return Rank.getRank(winningLotto.matchNumber(lottoNumbers), winningLotto.matchBonusNumber(lottoNumbers));
     }
+
 
     public String showLottoNumber() {
         return lottoNumbers.stream()

@@ -1,14 +1,25 @@
 package step2.domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber>{
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    private static final Map<Integer ,LottoNumber> LOTTO_NUM_CACHE = new HashMap<>();
+
+    static {
+        for (int i = 1; i <= 45; i++) {
+            LOTTO_NUM_CACHE.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 적어도" + MIN_LOTTO_NUMBER + "이상이어야 합니다.");
         }
@@ -17,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
             throw new IllegalArgumentException("로또 번호는 최대" + MAX_LOTTO_NUMBER + "초과해서는 안됩니다.");
         }
 
-        this.lottoNumber = lottoNumber;
+        return LOTTO_NUM_CACHE.get(lottoNumber);
     }
 
     public int getLottoNumber() {
@@ -39,6 +50,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public int compareTo(LottoNumber other) {
-        return this.lottoNumber - other.lottoNumber;
+        if (this.lottoNumber > other.lottoNumber) {
+            return 1;
+        }
+
+        if (this.lottoNumber < other.lottoNumber) {
+            return -1;
+        }
+
+        return 0;
     }
 }

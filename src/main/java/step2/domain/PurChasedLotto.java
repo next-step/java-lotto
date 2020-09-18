@@ -14,7 +14,7 @@ public class PurChasedLotto {
         this.purChasedLotto = purChasedLotto;
     }
 
-    public void matchNumber(Lotto winningLotto) {
+    public void matchNumber(WinningLotto winningLotto) {
         for (Lotto lotto : purChasedLotto) {
             updateRankInfo(lotto.match(winningLotto));
         }

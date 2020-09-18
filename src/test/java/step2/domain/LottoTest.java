@@ -32,7 +32,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 등수 체크")
     public void containLottoNumberCheck() {
-        Lotto winningLotto = Lotto.create("1, 3, 4, 5, 6, 7");
+        WinningLotto winningLotto = WinningLotto.create("1, 3, 4, 5, 6, 7", "45");
         assertEquals(lotto.match(winningLotto), Rank.SECOND);
     }
 }

@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PurChasedLottoTest {
 
     PurChasedLotto purChasedLotto;
-    Lotto winningLotto;
+    WinningLotto winningLotto;
 
     @BeforeEach
     void init() {
         List<Lotto> lottoList = Stream.of(Lotto.create("1, 2, 3, 4, 5, 6"), Lotto.create("1, 2, 3, 12, 30, 40"))
                 .collect(Collectors.toList());
-        winningLotto = Lotto.create("1, 2, 3, 4, 5, 6");
+        winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", "45");
         purChasedLotto = new PurChasedLotto(lottoList);
     }
 
