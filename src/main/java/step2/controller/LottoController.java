@@ -16,7 +16,7 @@ public class LottoController {
 
         Money myMoney = Money.of(lottoDto.getPurchaseMoney());
 
-        List<Lotto> lottoList = LottoIssuer.issue(myMoney);
+        List<Lotto> lottoList = LottoIssuer.issueLottos(myMoney);
         PurChasedLotto purChasedLotto = new PurChasedLotto(lottoList);
 
         RenderView.showLottoList(lottoList);

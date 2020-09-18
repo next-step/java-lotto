@@ -34,7 +34,6 @@ public class PurChasedLotto {
     private void updateRankInfo(Rank rank) {
         if (rankInfo.containsKey(rank)) {
             rankInfo.replace(rank, rankInfo.get(rank) + 1);
-            return;
         }
     }
 }

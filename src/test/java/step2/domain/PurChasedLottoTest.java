@@ -19,9 +19,9 @@ class PurChasedLottoTest {
 
     @BeforeEach
     void init() {
-        List<Lotto> lottoList = Stream.of(Lotto.create(1, 2, 3, 4, 5, 6), Lotto.create(1, 2, 3, 12, 30, 40))
+        List<Lotto> lottoList = Stream.of(Lotto.create("1, 2, 3, 4, 5, 6"), Lotto.create("1, 2, 3, 12, 30, 40"))
                 .collect(Collectors.toList());
-        winningLotto = Lotto.create(1, 2, 3, 4, 5, 6);
+        winningLotto = Lotto.create("1, 2, 3, 4, 5, 6");
         purChasedLotto = new PurChasedLotto(lottoList);
     }
 

@@ -17,30 +17,22 @@ public class Lotto implements Iterable<LottoNumber> {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create(List<Integer> nums) {
+    public static Lotto create(List<LottoNumber> nums) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
-        nums.forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
+        nums.forEach((lottoNumber) -> lottoNumbers.add(lottoNumber));
 
         return new Lotto(lottoNumbers);
     }
 
     public static Lotto create(String nums) {
         List<Integer> lottoNumberList = Arrays.asList(nums.split(",")).stream()
-                .map(value -> Integer.parseInt(value))
+                .map(value -> Integer.parseInt(value.trim()))
                 .collect(Collectors.toList());
 
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         lottoNumberList.forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
-
-        return new Lotto(lottoNumbers);
-    }
-
-    public static Lotto create(int... nums) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        Arrays.stream(nums).forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
 
         return new Lotto(lottoNumbers);
     }

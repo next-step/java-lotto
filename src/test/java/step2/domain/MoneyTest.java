@@ -16,15 +16,15 @@ class MoneyTest {
     @Test
     @DisplayName("로또 구매 갯수 체크")
     void getNumberOfPurchases() {
-        assertEquals(Money.of(1000).getNumberOfPurchases(1000), 1);
-        assertEquals(Money.of(1250).getNumberOfPurchases(1000), 1);
-        assertEquals(Money.of(12500).getNumberOfPurchases(1000), 12);
+        assertEquals(Money.of(1000).getNumberOfPurchases(), 1);
+        assertEquals(Money.of(1250).getNumberOfPurchases(), 1);
+        assertEquals(Money.of(12500).getNumberOfPurchases(), 12);
     }
 
     @Test
     void totalYield() {
         Money money = Money.of(14500);
-        money.getNumberOfPurchases(1000);
+        money.getNumberOfPurchases();
         assertEquals(money.totalYield(5000), 0.36);
     }
 }
