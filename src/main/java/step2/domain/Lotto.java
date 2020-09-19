@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto implements Iterable<LottoNumber> {
     private static final int LOTTO_NUM_COUNT = 6;
@@ -32,14 +33,15 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     public Rank match(WinningLotto winningLotto) {
-        return Rank.getRank(winningLotto.matchNumber(lottoNumbers), winningLotto.matchBonusNumber(lottoNumbers));
+        return Rank.getRank(winningLotto.matchNumber(this), winningLotto.matchBonusNumber(this));
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 
-    public String showLottoNumber() {
-        return lottoNumbers.stream()
-                .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
-                .collect(Collectors.joining(","));
+    public Stream<LottoNumber> strem() {
+        return lottoNumbers.stream();
     }
 
     @Override

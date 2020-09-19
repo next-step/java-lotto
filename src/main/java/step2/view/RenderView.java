@@ -6,6 +6,7 @@ import step2.domain.Rank;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RenderView {
 
@@ -13,7 +14,12 @@ public class RenderView {
         StringBuilder sb = new StringBuilder(purchasedLottoList.size() + "개를 구매했습니다.\n");
 
         for (Lotto lotto : purchasedLottoList) {
-            sb.append("[" + lotto.showLottoNumber() + "]");
+
+            String lottoNumbers = lotto.strem()
+                    .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
+                    .collect(Collectors.joining(","));
+
+            sb.append("[" + lottoNumbers + "]");
             sb.append("\n");
         }
 
