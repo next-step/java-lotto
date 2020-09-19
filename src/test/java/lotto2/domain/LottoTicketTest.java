@@ -1,12 +1,14 @@
 package lotto2.domain;
 
+import lotto2.common.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +22,7 @@ class LottoTicketTest {
         Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
                 .limit(6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(toSet());
 
         //when
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -36,7 +38,7 @@ class LottoTicketTest {
         Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
                 .limit(5)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(toSet());
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers))
@@ -50,14 +52,32 @@ class LottoTicketTest {
         Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
                 .limit(6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(toSet());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoTicket winningTicket = new LottoTicket(lottoNumbers);
 
         //when
-        int matchCount = lottoTicket.matchCount(winningTicket);
+        LottoRank lottoRank = lottoTicket.matchCount(winningTicket);
 
         //then
-        assertEquals(lottoNumbers.size(), matchCount);
+        assertEquals(LottoRank.FIRST, lottoRank);
+    }
+
+    @DisplayName("사용자 입력 번호로 로또 티켓 생성")
+    @Test
+    void newInstanceWithStringValues() {
+        //given
+        String userInputNumbers = "1, 2, 3, 4, 5, 6";
+
+        //when
+        LottoTicket lottoTicket = new LottoTicket(userInputNumbers);
+
+        //then
+        LottoTicket expected = Stream.iterate(1, n -> n + 1)
+                .limit(6)
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toSet(), LottoTicket::new));
+
+        assertEquals(expected, lottoTicket);
     }
 }

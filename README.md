@@ -84,12 +84,11 @@
         - 발행된 로또 1개 : LottoTicket
         - 로또모음 : LottoPack
 
-- 지난주 당첨번호를 받아 당첨통계와 수익률을 알려준다. : LottoPack
+- 지난주 당첨번호를 받아 당첨통계와 수익률을 알려준다. : LottoMatchResult
     - 각 로또마다 지난주 당첨번호와 일치하는 번호 개수를 구한다. : LottoTicket
     - 해당 결과를 모아서 당첨통계를 낸다. : LottoPack
     - 당첨통계를 바탕으로 수익률을 계산한다 : LottoPack
-    * LottoPack이 로또 발행 개수를 알고 있고, 지난주 당첨번호를 받으면 당첨통계와 수익률을 구할 수 있기 때문.
-
+    * LottoPack -> LottoMatchResult ( matchCountList, profit )
 
 4. 다른 객체의 도움이 필요한 경우 이를 책임질 적절한 객체 또는 역할을 찾는다.
 
