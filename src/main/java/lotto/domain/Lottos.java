@@ -7,19 +7,24 @@ public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
 
-    public void add(Lotto lotto){
-        lottos.add(lotto);
+    public void add(Lotto lotto)
+    {
+        this.lottos.add(lotto);
     }
 
+    public void addAll(List<Lotto> lottos){
+        this.lottos.addAll(lottos);
+    }
     public int getSize(){
         return lottos.size();
     }
 
-    public Winners getWinner(WinningLotto winningNumbers){
-        Winners winners = new Winners(winningNumbers);
+    public Winners getWinner(WinningLotto winningLotto){
+        Winners winners = new Winners();
 
         for(Lotto lotto : lottos){
-            winners.addLotto(lotto);
+            Rank rank = winningLotto.countWinningNumber(lotto);
+            winners.addRank(rank);
         }
 
         return winners;

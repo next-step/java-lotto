@@ -11,11 +11,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    private List<LottoNumber> LOTTO_NUMS1 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)});
-    private List<LottoNumber> LOTTO_NUMS2 = Arrays.asList(new LottoNumber[]{LottoNumber.of(10), LottoNumber.of(13), LottoNumber.of(16), LottoNumber.of(23), LottoNumber.of(45), LottoNumber.of(35)});
-    private List<LottoNumber> LOTTO_NUMS3 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(17), LottoNumber.of(24), LottoNumber.of(35), LottoNumber.of(44)});
-    private List<LottoNumber> LOTTO_NUMS4 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7)});
-    private List<LottoNumber> LOTTO_NUMS5 = Arrays.asList(new LottoNumber[]{LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(8)});
+    private List<LottoNumber> LOTTO_NUMS1 = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+    private List<LottoNumber> LOTTO_NUMS2 = Arrays.asList(LottoNumber.of(10), LottoNumber.of(13), LottoNumber.of(16), LottoNumber.of(23), LottoNumber.of(45), LottoNumber.of(35));
+    private List<LottoNumber> LOTTO_NUMS3 = Arrays.asList(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(17), LottoNumber.of(24), LottoNumber.of(35), LottoNumber.of(44));
+    private List<LottoNumber> LOTTO_NUMS4 = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7));
+    private List<LottoNumber> LOTTO_NUMS5 = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(8));
 
     @Test
     @DisplayName("로또 세트 생성 테스트")
@@ -38,25 +38,6 @@ public class LottosTest {
 
         assertThat(lottos.getSize()).isEqualTo(3);
     }
-
-//    @ParameterizedTest
-//    @DisplayName("로또 당첨 갯수 테스트 (당첨갯수:당첨로또번호)")
-//    @ValueSource(strings = {"6:1,3,17,24,35,44", "5:2,3,17,24,35,44", "4:2,4,17,24,35,44",
-//            "3:2,4,15,24,35,44","2:2,4,15,20,35,44","1:2,4,15,20,34,44","0:2,4,15,20,36,45"})
-//    public void countWinningNumberTest(String input){
-//        //given
-//        String[] tokens = input.split(":");
-//        int expectedMatchedCount = Integer.parseInt(tokens[0]);
-//        String[] winningNumbers = tokens[1].split(",");
-//
-//        Lottos lottos = new Lottos();
-//        lottos.add(new Lotto(LOTTO_NUMS3));
-//
-//        //when
-//        Winners winners = lottos.getWinner(new WinningLotto(winningNumbers));
-//
-//        assertThat(winners.getWinnersCount(Rank.valueOf(Count.of(expectedMatchedCount)))).isEqualTo(Count.of(1));
-//    }
 
     @Test
     @DisplayName("로또 당첨 갯수 테스트 ")

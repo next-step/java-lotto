@@ -24,6 +24,10 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public Lotto(String strArr){
+        this(strArr.split(","));
+    }
+
     private void isValidSize(){
         if(this.lotto.size() != NUMBER_OF_LOTTO) {
             throw new IllegalArgumentException("Lotto must be contain unique 6 numbers");
