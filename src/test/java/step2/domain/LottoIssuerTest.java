@@ -15,7 +15,7 @@ public class LottoIssuerTest {
     @DisplayName("로또 발급 횟수 체크")
     public void issue() {
         LottoIssuer lottoIssuer = new LottoIssuer();
-        List<Lotto> list = lottoIssuer.issue(Money.of(13500));
+        List<Lotto> list = lottoIssuer.issueLottos(Money.of(13500));
         assertEquals(list.size(), 13);
     }
 }

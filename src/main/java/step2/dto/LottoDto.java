@@ -3,13 +3,38 @@ package step2.dto;
 public class LottoDto {
     private int purchaseMoney;
     private String winningLottoNumber;
+    private String bonusNumber;
 
-    public LottoDto(int purchaseMoney) {
-        this.purchaseMoney = purchaseMoney;
+    private LottoDto(Builder builder) {
+        purchaseMoney = builder.purchaseMoney;
+        winningLottoNumber = builder.winningLottoNumber;
+        bonusNumber = builder.bonusNumber;
     }
 
-    public LottoDto(String winningLottoNumber) {
-        this.winningLottoNumber = winningLottoNumber;
+    public static class Builder {
+
+        private int purchaseMoney;
+        private String winningLottoNumber;
+        private String bonusNumber;
+
+        public Builder purchaseMoney(int val) {
+            purchaseMoney = val;
+            return this;
+        }
+
+        public Builder winningLottoNumber(String val) {
+            winningLottoNumber = val;
+            return this;
+        }
+
+        public Builder bonusNumber(String val) {
+            bonusNumber = val;
+            return this;
+        }
+
+        public LottoDto build() {
+            return new LottoDto(this);
+        }
     }
 
     public int getPurchaseMoney() {
@@ -18,5 +43,9 @@ public class LottoDto {
 
     public String getWinningLottoNumber() {
         return winningLottoNumber;
+    }
+
+    public String getBonusNumber() {
+        return bonusNumber;
     }
 }

@@ -14,7 +14,7 @@ public class PurChasedLotto {
         this.purChasedLotto = purChasedLotto;
     }
 
-    public void matchNumber(Lotto winningLotto) {
+    public void matchNumber(WinningLotto winningLotto) {
         for (Lotto lotto : purChasedLotto) {
             updateRankInfo(lotto.match(winningLotto));
         }
@@ -34,7 +34,6 @@ public class PurChasedLotto {
     private void updateRankInfo(Rank rank) {
         if (rankInfo.containsKey(rank)) {
             rankInfo.replace(rank, rankInfo.get(rank) + 1);
-            return;
         }
     }
 }

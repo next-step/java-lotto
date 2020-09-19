@@ -1,10 +1,7 @@
 package step2.controller;
 
+import step2.domain.*;
 import step2.dto.LottoDto;
-import step2.domain.Lotto;
-import step2.domain.LottoIssuer;
-import step2.domain.Money;
-import step2.domain.PurChasedLotto;
 import step2.view.InputView;
 import step2.view.RenderView;
 
@@ -16,16 +13,16 @@ public class LottoController {
 
         Money myMoney = Money.of(lottoDto.getPurchaseMoney());
 
-        List<Lotto> lottoList = LottoIssuer.issue(myMoney);
+        List<Lotto> lottoList = LottoIssuer.issueLottos(myMoney);
         PurChasedLotto purChasedLotto = new PurChasedLotto(lottoList);
 
         RenderView.showLottoList(lottoList);
 
-        LottoDto dto2 = InputView.inputWinningLottoNumber();
+        LottoDto lottoDto2 = InputView.inputWinningLottoNumber();
 
-        Lotto WinningLotto = Lotto.create(dto2.getWinningLottoNumber());
+        WinningLotto winningLotto = WinningLotto.create(lottoDto2.getWinningLottoNumber(), lottoDto2.getBonusNumber());
 
-        purChasedLotto.matchNumber(WinningLotto);
+        purChasedLotto.matchNumber(winningLotto);
 
         RenderView.showWinningStatic(purChasedLotto.getRankInfo());
         RenderView.showTotalYield(myMoney.totalYield(purChasedLotto.getTotalPrize()));

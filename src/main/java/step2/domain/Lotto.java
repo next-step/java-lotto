@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto implements Iterable<LottoNumber> {
     private static final int LOTTO_NUM_COUNT = 6;
@@ -12,55 +13,35 @@ public class Lotto implements Iterable<LottoNumber> {
         if (lottoNumbers.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("로또 번호는 총" + LOTTO_NUM_COUNT + "개 이어야 합니다.");
         }
-        ;
 
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create(List<Integer> nums) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        nums.forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
+    public static Lotto create(List<LottoNumber> nums) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(nums);
 
         return new Lotto(lottoNumbers);
     }
 
     public static Lotto create(String nums) {
-        List<Integer> lottoNumberList = Arrays.asList(nums.split(",")).stream()
-                .map(value -> Integer.parseInt(value))
-                .collect(Collectors.toList());
-
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        lottoNumberList.forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
+        Set<LottoNumber> lottoNumbers = Arrays.asList(nums.split(",")).stream()
+                .map(value -> Integer.parseInt(value.trim()))
+                .map(value -> LottoNumber.valueOf(value))
+                .collect(Collectors.toCollection(TreeSet::new));
 
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto create(int... nums) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        Arrays.stream(nums).forEach((num) -> lottoNumbers.add(new LottoNumber(num)));
-
-        return new Lotto(lottoNumbers);
+    public Rank match(WinningLotto winningLotto) {
+        return Rank.getRank(winningLotto.matchNumber(this), winningLotto.matchBonusNumber(this));
     }
 
-    public Rank match(Lotto winningLotto) {
-        int matchCount = 0;
-
-        for (LottoNumber lottoNumber : winningLotto) {
-            if (lottoNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-
-        return Rank.getRank(matchCount);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public String showLottoNumber() {
-        return lottoNumbers.stream()
-                .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
-                .collect(Collectors.joining(","));
+    public Stream<LottoNumber> strem() {
+        return lottoNumbers.stream();
     }
 
     @Override
