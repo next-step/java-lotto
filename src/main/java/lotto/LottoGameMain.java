@@ -1,10 +1,10 @@
-package lotto2;
+package lotto;
 
-import lotto2.domain.LottoMatchResult;
-import lotto2.domain.LottoPack;
-import lotto2.domain.LottoTicketMachine;
-import lotto2.view.InputView;
-import lotto2.view.OutputView;
+import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPack;
+import lotto.domain.LottoTicketMachine;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoGameMain {
 

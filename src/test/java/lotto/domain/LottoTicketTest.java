@@ -1,6 +1,6 @@
-package lotto2.domain;
+package lotto.domain;
 
-import lotto2.common.LottoRank;
+import lotto.common.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package lotto2.common;
+package lotto.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

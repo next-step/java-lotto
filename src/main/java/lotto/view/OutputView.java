@@ -1,8 +1,8 @@
-package lotto2.view;
+package lotto.view;
 
-import lotto2.common.LottoRank;
-import lotto2.domain.LottoMatchResult;
-import lotto2.domain.LottoPack;
+import lotto.common.LottoRank;
+import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPack;
 
 import java.util.Comparator;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package lotto2.domain;
+package lotto.domain;
 
-import lotto2.common.LottoRank;
+import lotto.common.LottoRank;
 
 import java.util.List;
 import java.util.Map;
