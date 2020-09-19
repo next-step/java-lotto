@@ -31,6 +31,10 @@ public enum LottoRank {
         return LOTTO_RANK_MAP.getOrDefault(matchCount, LottoRank.MISS);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getReward() {
         return reward;
     }

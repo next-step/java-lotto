@@ -5,6 +5,7 @@ import lotto2.common.LottoRank;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
@@ -56,8 +57,13 @@ public class LottoPack {
         Map<LottoRank, List<LottoRank>> lottoRankListMap = lottoRanks.stream()
                 .collect(groupingBy(Function.identity()));
 
-        return lottoRankListMap.keySet().stream()
+        Map<LottoRank, Integer> matchResult = lottoRankListMap.keySet().stream()
                 .collect(toMap(Function.identity(), lottoRank -> lottoRankListMap.get(lottoRank).size()));
+
+        Stream.of(LottoRank.values())
+                .forEach(lottoRank -> matchResult.putIfAbsent(lottoRank, 0));
+
+        return matchResult;
     }
 
     private double calculateProfit(Map<LottoRank, Integer> matchResult) {
@@ -66,5 +72,9 @@ public class LottoPack {
                 .sum();
 
         return Math.ceil(totalRewards * 100.0 / (lottoTickets.size() * lottoPrice) ) / 100.0;
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 역할 - 1~45 사이 숫자라는 것을 확인. 보장한다.
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -38,5 +38,15 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(this.number);
     }
 }

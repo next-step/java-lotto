@@ -2,10 +2,7 @@ package lotto2.domain;
 
 import lotto2.common.LottoRank;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -52,5 +49,13 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);
+        Collections.sort(lottoNumbers);
+
+        return lottoNumbers.toString();
     }
 }

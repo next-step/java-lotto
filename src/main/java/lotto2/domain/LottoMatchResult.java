@@ -17,6 +17,14 @@ public class LottoMatchResult {
         this.profit = profit;
     }
 
+    public Map<LottoRank, Integer> getMatchResult() {
+        return matchResult;
+    }
+
+    public double getProfit() {
+        return profit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
