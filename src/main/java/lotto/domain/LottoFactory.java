@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
+    private LottoFactory(){}
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(Lotto.LOTTO_START_NUM, Lotto.LOTTO_END_NUM)
                                                                     .boxed()
                                                                     .map(LottoNumber::of)

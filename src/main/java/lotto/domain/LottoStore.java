@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
+    private LottoStore(){}
+
     public static Lottos sold(BigDecimal price, String[] manualLottoStrArr){
         Lottos lottos = new Lottos();
         int amount = price.divide(Lotto.PRICE).intValue();
@@ -22,7 +24,7 @@ public class LottoStore {
     private static List<Lotto> makeManualLotto(String[] manualLottoStrArr){
         List<Lotto> lottos = new ArrayList<>();
         for(String manualLottoStr : manualLottoStrArr){
-            lottos.add(new Lotto(manualLottoStr.split(",")));
+            lottos.add(new Lotto(manualLottoStr));
         }
 
         return lottos;

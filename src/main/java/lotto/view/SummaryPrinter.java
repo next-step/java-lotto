@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.PrizeCalculator;
 import lotto.domain.Rank;
 import lotto.domain.Winners;
 
@@ -19,6 +18,6 @@ public class SummaryPrinter {
             System.out.println(printStr);
 
         }
-        System.out.println(String.format("총 수익률은 %s 입니다.", new DecimalFormat("0.00").format(PrizeCalculator.rateOfPrize(winners))));
+        System.out.println(String.format("총 수익률은 %s 입니다.", new DecimalFormat("0.00").format(winners.rateOfPrize())));
     }
 }

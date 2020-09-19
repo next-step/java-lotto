@@ -41,4 +41,12 @@ public class Winners {
     public int getSize(){
         return winners.size();
     }
+
+    public BigDecimal rateOfPrize(){
+        return calcWinnerPrize().divide(calcUsedMoney(), 2, BigDecimal.ROUND_CEILING);
+    }
+
+    private BigDecimal calcUsedMoney() {
+        return BigDecimal.valueOf(winners.size()).multiply(Lotto.PRICE);
+    }
 }

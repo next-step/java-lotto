@@ -8,10 +8,10 @@ public class Count implements Comparable<Count>{
 
     private final int count;
 
-    public Count(){
+    private Count(){
         this.count = 0;
     }
-    public Count(int count) {
+    private Count(int count) {
         this.count = count;
     }
 
@@ -46,10 +46,6 @@ public class Count implements Comparable<Count>{
     @Override
     public String toString() {
         return String.valueOf(count);
-    }
-
-    public int getCount() {
-        return count;
     }
 
     @Override
