@@ -4,27 +4,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-    MISS(0, 0),
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000);
+    MISS(0, 0, false),
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
     private static final int LOTTO_PRICE = 1000;
+    private final boolean matchBonus;
     public int countOfMatch;
     public int winningMoney;
 
-    Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.matchBonus = matchBonus;
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank[] ranks = values();
         Rank rank = Arrays.stream(ranks)
                 .filter(r -> r.countOfMatch == countOfMatch).findFirst().get();
-        if(matchBonus == true) {
+        if(rank.matchBonus == true) {
             rank = SECOND;
         }
         if(countOfMatch < 3) {

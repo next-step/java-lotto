@@ -1,6 +1,7 @@
 package step3.controller;
 
 import step3.domain.LottoTicket;
+import step3.domain.LottoTickets;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -10,7 +11,7 @@ public class Operation {
     public static void operation() throws IllegalAccessException {
         int count = InputView.input();
         LottoService lottoService = new LottoService();
-        List<LottoTicket> lottoTicketList = lottoService.createLottoTicket(count);
+        LottoTickets lottoTicketList =  lottoService.createLottoTicket(count);
         ResultView.view(lottoTicketList);
 
         String numbers = InputView.inputNumber();

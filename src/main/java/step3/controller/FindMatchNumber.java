@@ -1,18 +1,18 @@
 package step3.controller;
 
+import step3.domain.LottoTickets;
 import step3.util.Cast;
 import step3.domain.LottoTicket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindMatchNumber {
-    public static int[] result = {0, 0, 0, 0};
     private static List<Rank> ranks = new ArrayList<>();
 
-    public static List<Rank> find(List<LottoTicket> lottoTicketList, String numbers, Long bonusNo) {
+    public static List<Rank> find(LottoTickets lottoTicketList, String numbers, Long bonusNo) {
         Long[] winningNumber = Cast.castToNumber(numbers);
-        for(int i = 0; i < lottoTicketList.size(); i++) {
-            List<Long> lotto = lottoTicketList.get(i).getLottoNumbers();
+        for(int i = 0; i < lottoTicketList.getLottoTicket().size(); i++) {
+            List<Long> lotto = lottoTicketList.getLottoTicket().get(i).getLottoNumbers();
             int count = makeMatchCount(winningNumber, lotto);
             rankList(lotto, count, bonusNo);
         }
@@ -29,13 +29,13 @@ public class FindMatchNumber {
 
     public static void rankList(List<Long> lotto,int count, Long bonusNo){
         if(count == 5 && lotto.contains(bonusNo)) {
-            ranks.add(Rank.valueOf(count , lotto.contains(bonusNo)));
+            ranks.add(Rank.valueOf(count , true));
         }
         if(count >= 3) {
-            ranks.add(Rank.valueOf(count, lotto.contains(bonusNo)));
+            ranks.add(Rank.valueOf(count, false));
         }
         if(count < 3) {
-            ranks.add(Rank.valueOf(0, lotto.contains(bonusNo)));
+            ranks.add(Rank.valueOf(0, false));
         }
     }
 }

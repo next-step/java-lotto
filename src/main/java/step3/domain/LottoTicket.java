@@ -15,9 +15,9 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static int getLottoNumbersSize() {
-        return LOTTO_NUMBERS_SIZE;
-    }
+//    public static int getLottoNumbersSize() {
+//        return LOTTO_NUMBERS_SIZE;
+//    }
 
     public List<Long> getLottoNumbers() {
         return lottoNumbers;

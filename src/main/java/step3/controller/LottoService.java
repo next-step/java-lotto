@@ -1,6 +1,7 @@
 package step3.controller;
 
 import step3.domain.LottoTicket;
+import step3.domain.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,11 +24,12 @@ public class LottoService {
         return numbers;
     }
 
-    public List<LottoTicket> createLottoTicket(int count) throws IllegalAccessException {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    public LottoTickets createLottoTicket(int count) throws IllegalAccessException {
+        List<LottoTicket> lottoTicket = new ArrayList<>();
         for(int i = 0 ; i < count ; i++) {
-            lottoTickets.add(createLottoNumber());
+            lottoTicket.add(createLottoNumber());
         }
+        LottoTickets lottoTickets = new LottoTickets(lottoTicket);
         return lottoTickets;
     }
 }

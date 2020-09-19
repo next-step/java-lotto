@@ -1,13 +1,14 @@
 package step3.view;
 
 import step3.domain.LottoTicket;
+import step3.domain.LottoTickets;
 
 import java.util.List;
 
 public class ResultView {
-    public static void view(List<LottoTicket> lottos) {
+    public static void view(LottoTickets lottoTickets) {
         StringBuilder sb = new StringBuilder();
-        for(LottoTicket lotto : lottos) {
+        for(LottoTicket lotto : lottoTickets.getLottoTicket()) {
             sb.append(lotto.getLottoNumbers() + "\n");
         }
         System.out.println(sb.toString());

@@ -1,12 +1,14 @@
 package step2.view;
 
+import step2.domain.LottoNo;
+
 import java.util.List;
 
 public class ResultView {
-    public static void view(List<List<int[]>> lottos) {
+    public static void view(List<LottoNo> lottoNos) {
         StringBuilder sb = new StringBuilder();
-        for(List lotto : lottos) {
-            sb.append(lotto.toString() + "\n");
+        for(LottoNo lottoNo : lottoNos) {
+            sb.append(lottoNo.toString() + "\n");
         }
         System.out.println(sb.toString());
     }
