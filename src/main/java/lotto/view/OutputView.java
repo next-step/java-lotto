@@ -37,6 +37,14 @@ public class OutputView {
     }
 
     private static void printMatchResult(LottoRank rank, int matchTicketCount) {
+        if (LottoRank.SECOND.equals(rank)) {
+            String message = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getReward() + "원) - "
+                    + matchTicketCount + "개";
+            System.out.println(message);
+
+            return;
+        }
+
         String message = rank.getMatchCount() + "개 일치(" + rank.getReward() + "원) - "
                 + matchTicketCount + "개";
         System.out.println(message);

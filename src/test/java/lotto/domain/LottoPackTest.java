@@ -51,11 +51,17 @@ class LottoPackTest {
         LottoPack lottoPack = new LottoPack(lottoPrice, lottoTickets);
 
         //when
-        LottoMatchResult matchResult = lottoPack.matchResult(winningNumbers);
+        String bonusNumber = "45";
+        LottoMatchResult matchResult = lottoPack.matchResult(winningNumbers, bonusNumber);
 
         //then
         Map<LottoRank, Integer> matchResultMap = new HashMap<>();
-        matchResultMap.put(LottoRank.SECOND, 1);
+        matchResultMap.put(LottoRank.FIRST, 0);
+        matchResultMap.put(LottoRank.SECOND, 0);
+        matchResultMap.put(LottoRank.THIRD, 1);
+        matchResultMap.put(LottoRank.FOURTH, 0);
+        matchResultMap.put(LottoRank.FIFTH, 0);
+        matchResultMap.put(LottoRank.MISS, 0);
         LottoMatchResult expected = new LottoMatchResult(matchResultMap, 1_500);
 
         assertEquals(expected, matchResult);

@@ -15,10 +15,10 @@ class LottoRankTest {
         int matchCount = 3;
 
         //when
-        LottoRank rank = LottoRank.getRank(matchCount);
+        LottoRank rank = LottoRank.getRank(matchCount, false);
 
         //then
-        assertEquals(LottoRank.FOURTH, rank);
+        assertEquals(LottoRank.FIFTH, rank);
     }
 
     @DisplayName("일치하는 rank정보가 없을때 MISS rank정보 반환")
@@ -26,9 +26,19 @@ class LottoRankTest {
     @ValueSource(ints = {0, 1, 2, 7})
     void getRankWithWrongMatchCount(int matchCount) {
         //when
-        LottoRank rank = LottoRank.getRank(matchCount);
+        LottoRank rank = LottoRank.getRank(matchCount, false);
 
         //then
         assertEquals(LottoRank.MISS, rank);
+    }
+
+    @DisplayName("당첨개수 5 & 보너스 일치")
+    @Test
+    void getRankWithBonus() {
+        //when
+        LottoRank rank = LottoRank.getRank(5, true);
+
+        //then
+        assertEquals(LottoRank.SECOND, rank);
     }
 }

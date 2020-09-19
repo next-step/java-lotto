@@ -17,7 +17,8 @@ public class LottoGameMain {
         OutputView.printBuyingTickets(lottoPack);
 
         String winningNumbers = InputView.inputLastWeekWinningNumbers();
-        LottoMatchResult matchResult = lottoPack.matchResult(winningNumbers);
+        String bonusNumber = InputView.inputBonusNumber();
+        LottoMatchResult matchResult = lottoPack.matchResult(winningNumbers, bonusNumber);
 
         OutputView.printResult(matchResult);
     }

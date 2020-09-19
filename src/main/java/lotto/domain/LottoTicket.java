@@ -32,10 +32,13 @@ public class LottoTicket {
         throw new IllegalArgumentException("잘못된 개수의 로또번호를 입력하셨습니다.");
     }
 
-    public LottoRank matchCount(LottoTicket lottoTicket) {
+    public LottoRank matchCount(LottoTicket lottoTicket, LottoNumber bonus) {
         HashSet<LottoNumber> matchNumbers = new HashSet<>(this.lottoNumbers);
         matchNumbers.retainAll(lottoTicket.lottoNumbers);
-        return LottoRank.getRank(matchNumbers.size());
+
+        boolean matchBonus = this.lottoNumbers.contains(bonus);
+
+        return LottoRank.getRank(matchNumbers.size(), matchBonus);
     }
 
     @Override

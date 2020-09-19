@@ -55,9 +55,10 @@ class LottoTicketTest {
                 .collect(toSet());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoTicket winningTicket = new LottoTicket(lottoNumbers);
+        LottoNumber bonus = new LottoNumber("7");
 
         //when
-        LottoRank lottoRank = lottoTicket.matchCount(winningTicket);
+        LottoRank lottoRank = lottoTicket.matchCount(winningTicket, bonus);
 
         //then
         assertEquals(LottoRank.FIRST, lottoRank);

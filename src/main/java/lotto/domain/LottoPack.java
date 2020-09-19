@@ -36,11 +36,12 @@ public class LottoPack {
         return lottoTickets.size();
     }
 
-    public LottoMatchResult matchResult(String winningNumbers) {
+    public LottoMatchResult matchResult(String winningNumbers, String bonusNumber) {
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
+        LottoNumber bonus = new LottoNumber(bonusNumber);
 
         List<LottoRank> lottoRanks = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.matchCount(winningTicket))
+                .map(lottoTicket -> lottoTicket.matchCount(winningTicket, bonus))
                 .sorted()
                 .collect(toList());
 
