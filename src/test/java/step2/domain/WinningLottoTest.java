@@ -15,15 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class WinningLottoTest {
 
     WinningLotto winningLotto;
-    Set<LottoNumber> lottoNumbers;
+    Lotto  lotto;
 
     @BeforeEach
     void init() {
         winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", "45");
-        lottoNumbers = Stream.of("1, 2, 3, 4, 45, 6".split(","))
-                .map(value -> Integer.parseInt(value.trim()))
-                .map(value -> LottoNumber.of(value))
-                .collect(Collectors.toCollection(TreeSet::new));
+        lotto = Lotto.create("1, 2, 3, 4, 45, 6");
     }
 
     @Test
@@ -35,12 +32,12 @@ class WinningLottoTest {
     @Test
     @DisplayName("로또 번호 비교하기")
     void matchNumber() {
-        assertEquals(winningLotto.matchNumber(lottoNumbers), 5);
+        assertEquals(winningLotto.matchNumber(lotto), 5);
     }
 
     @Test
     @DisplayName("로또 보너스 넘버 비교하기")
     void matchBonusNumber() {
-        assertTrue(winningLotto.matchBonusNumber(lottoNumbers));
+        assertTrue(winningLotto.matchBonusNumber(lotto));
     }
 }
