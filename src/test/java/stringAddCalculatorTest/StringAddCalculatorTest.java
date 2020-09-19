@@ -3,6 +3,7 @@ package stringAddCalculatorTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringAddCalculator.StringAddCalculator;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,12 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("null 또는 빈 문자")
-    public void nullOrEmpty() {
-        int result = StringAddCalculator.sumString(null);
-        assertThat(result).isEqualTo(0);
-        result = StringAddCalculator.sumString("");
+    public void nullOrEmpty(String input) {
+        int result = StringAddCalculator.sumString(input);
         assertThat(result).isEqualTo(0);
     }
     

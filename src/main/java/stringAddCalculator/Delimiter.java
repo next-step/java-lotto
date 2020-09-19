@@ -1,11 +1,14 @@
 package stringAddCalculator;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class Delimiter {
-    private final static String BASIC_DELIMITER = ",|:";
-    private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String BASIC_DELIMITER = ",|:";
+    private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
+
     public static String[] isBasicOrCustom(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        Matcher matcher = CUSTOM_DELIMITER.matcher(input);
         if(matcher.find()) {
             return customDelimiter(matcher);
         }
