@@ -26,16 +26,21 @@ public enum Rank {
                 .findAny()
                 .orElse(NOT_MATCH);
 
-        if ((resultRank.equals(SECOND) || resultRank.equals(THIRD)) && isBonusNumberMatch) {
+        return getFinalDecisionRank(resultRank, isBonusNumberMatch);
+    }
+
+    private static Rank getFinalDecisionRank(Rank resultRank, boolean isBonusNumberMatch) {
+        if (isBonusNumberMatch && resultRank.equals(SECOND) || resultRank.equals(THIRD)) {
             return SECOND;
         }
 
-        if ((resultRank.equals(SECOND) || resultRank.equals(THIRD)) && !isBonusNumberMatch) {
+        if (resultRank.equals(SECOND) || resultRank.equals(THIRD)) {
             return THIRD;
         }
 
         return resultRank;
     }
+
 
     public static Map<Rank, Integer> getInitRankInfo() {
         return Arrays.stream(Rank.values())

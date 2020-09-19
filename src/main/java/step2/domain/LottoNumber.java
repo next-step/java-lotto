@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber>{
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -19,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber valueOf(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 적어도" + MIN_LOTTO_NUMBER + "이상이어야 합니다.");
         }
@@ -50,14 +51,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public int compareTo(LottoNumber other) {
-        if (this.lottoNumber > other.lottoNumber) {
-            return 1;
-        }
-
-        if (this.lottoNumber < other.lottoNumber) {
-            return -1;
-        }
-
-        return 0;
+        return Integer.compare(this.lottoNumber, other.lottoNumber);
     }
+
+    public static List<LottoNumber> getRandomLottoNumber() {
+        List<LottoNumber> lottoNumbers = LOTTO_NUM_CACHE.values().stream().collect(Collectors.toList());
+
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, 6);
+    }
+
 }

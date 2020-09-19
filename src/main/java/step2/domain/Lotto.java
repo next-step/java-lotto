@@ -26,7 +26,7 @@ public class Lotto implements Iterable<LottoNumber> {
     public static Lotto create(String nums) {
         Set<LottoNumber> lottoNumbers = Arrays.asList(nums.split(",")).stream()
                 .map(value -> Integer.parseInt(value.trim()))
-                .map(value -> LottoNumber.of(value))
+                .map(value -> LottoNumber.valueOf(value))
                 .collect(Collectors.toCollection(TreeSet::new));
 
         return new Lotto(lottoNumbers);
