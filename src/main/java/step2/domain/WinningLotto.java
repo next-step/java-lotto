@@ -28,14 +28,8 @@ public class WinningLotto {
     }
 
     private int matchNumber(Lotto lotto) {
-        int resultMatchNumberCount = 0;
-
-        for (LottoNumber lottoNumber : lotto) {
-            if (winningLottoNumbers.contains(lottoNumber)) {
-                resultMatchNumberCount += 1;
-            }
-        }
-
-        return resultMatchNumberCount;
+        return (int) lotto.stream()
+                .filter(winningLottoNumbers::contains)
+                .count();
     }
 }
