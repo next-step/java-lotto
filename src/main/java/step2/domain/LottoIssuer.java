@@ -6,6 +6,8 @@ import java.util.List;
 
 public class LottoIssuer {
 
+    private LottoIssuer(){}
+
     public static List<Lotto> issueAutoLottos(int issueCount) {
         List<Lotto> issuedAutoLottos = new ArrayList<>();
 
