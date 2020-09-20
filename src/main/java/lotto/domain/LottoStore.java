@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoStore {
-    private List<Lotto> purchasedLotto;
+    private Lottos purchasedLotto;
     private Map<Rank, Integer> rankInfo = Rank.getInitRankInfo();
 
-    public LottoStore(List<Lotto> lottoList) {
+    public LottoStore(Lottos lottoList) {
         this.purchasedLotto = lottoList;
     }
 
