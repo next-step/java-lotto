@@ -22,11 +22,8 @@ public class WinningLotto {
     private List<Integer> splitNumber(String winningNumber) {
         String[] strings = winningNumber.split(",");
 
-        int[] ints =  Arrays.stream(strings)
+        return Arrays.stream(strings)
                 .mapToInt(Integer::parseInt)
-                .toArray();
-
-        return Arrays.stream(ints)
                 .boxed()
                 .collect(Collectors.toList());
     }
