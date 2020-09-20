@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Money {
     public static final int LOTTO_DEFAULT_PRICE = 1000;
-    private int lottoPrice;
+    private final int lottoPrice;
 
     public Money(int price) {
         minimumPriceCheck(price);
