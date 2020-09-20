@@ -5,7 +5,10 @@ import step2.dto.LottoDto;
 import step2.view.InputView;
 import step2.view.RenderView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
     public static void run() {
@@ -13,14 +16,20 @@ public class LottoController {
 
         Money myMoney = Money.of(lottoDto.getPurchaseMoney());
 
-        List<Lotto> lottoList = LottoIssuer.issueLottos(myMoney);
-        PurChasedLotto purChasedLotto = new PurChasedLotto(lottoList);
+        LottoDto lottoDto2 = InputView.inputCustomLottoNumberList();
 
-        RenderView.showLottoList(lottoList);
+        List<Lotto> nonAutoLottoList = LottoIssuer.issueNonAutoLotto(lottoDto2.getNonAutoLottoNumberList());
+        List<Lotto> autoLottoList = LottoIssuer.issueAutoLottos(myMoney.getNumberOfPurchases() - nonAutoLottoList.size());
+        List<Lotto> totalLottoList = Stream.concat(nonAutoLottoList.stream(), autoLottoList.stream())
+                                            .collect(Collectors.toList());
 
-        LottoDto lottoDto2 = InputView.inputWinningLottoNumber();
+        PurChasedLotto purChasedLotto = new PurChasedLotto(totalLottoList);
 
-        WinningLotto winningLotto = WinningLotto.create(lottoDto2.getWinningLottoNumber(), lottoDto2.getBonusNumber());
+        RenderView.showLottoList(nonAutoLottoList, autoLottoList);
+
+        LottoDto lottoDto3 = InputView.inputWinningLottoNumber();
+
+        WinningLotto winningLotto = WinningLotto.create(lottoDto3.getWinningLottoNumber(), lottoDto3.getBonusNumber());
 
         purChasedLotto.matchNumber(winningLotto);
 
