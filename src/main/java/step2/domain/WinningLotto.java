@@ -1,7 +1,5 @@
 package step2.domain;
 
-import java.util.Iterator;
-
 public class WinningLotto {
 
     private final Lotto winningLottoNumbers;
