@@ -1,22 +1,33 @@
 package step2.controller;
 
+import step2.domain.LottoNo;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class IssueLotto {
 
-    public static int create(int money) {
-        return money/1000;
+    public int create(int money) {
+        return money / 1000;
     }
 
-    public static List<int[]> issueLotto() {
-        List<int[]> numbers = makeRandomNumber();
+    public List<LottoNo> issueLottos(int count) {
+//        List<List<int[]>> lottos = new ArrayList<>();
+        List<LottoNo> lottoNos = new ArrayList<>();
+        for(int i = 0; i < count; i++) {
+            lottoNos.add(new IssueLotto().issueLotto());
+        }
+        return lottoNos;
+    }
+
+    public LottoNo issueLotto() {
+        List<Integer> numbers = makeRandomNumber();
         return makeLottoNumber(numbers);
     }
 
-    public static List makeRandomNumber() {
-        List numbers = new ArrayList();
+    public List<Integer> makeRandomNumber() {
+        List<Integer> numbers = new ArrayList();
         for(int i = 0 ; i < 45 ; i++) {
             numbers.add(i + 1);
         }
@@ -24,20 +35,14 @@ public class IssueLotto {
         return numbers;
     }
 
-    public static List makeLottoNumber(List numbers) {
-        List result = new ArrayList();
+    public LottoNo makeLottoNumber(List<Integer> numbers) {
+        List<Integer> result = new ArrayList();
         for(int i = 0; i < 6; i++) {
             result.add(numbers.get(i));
         }
         Collections.sort(result);
-        return result;
+        LottoNo lottoNo = new LottoNo(result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), result.get(5));
+        return lottoNo;
     }
 
-    public static List<List> issueLottos(int count) {
-        List<List> lottos = new ArrayList<>();
-        for(int i = 0; i < count; i++) {
-            lottos.add(issueLotto());
-        }
-        return lottos;
-    }
 }

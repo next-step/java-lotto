@@ -3,7 +3,8 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.controller.FindMatchNumber;
 import step2.controller.IssueLotto;
-import step2.controller.WinnerStatistics;
+import step2.controller.Rank;
+import step2.domain.LottoNo;
 import step2.view.ResultView;
 
 import java.util.ArrayList;
@@ -16,25 +17,26 @@ public class LottoTest {
 
     @Test
     void 로또_개수() {
-        int result = IssueLotto.create(14000);
+        int result = new IssueLotto().create(14000);
         assertThat(result).isEqualTo(14);
     }
 
     @Test
     void 자동_로또번호() {
-        List lotto = IssueLotto.issueLotto();
-        assertThat(lotto.size()).isEqualTo(6);
+        LottoNo lottoNo = new IssueLotto().issueLotto();
+        System.out.println(lottoNo);
+//        assertThat(lottoNo.).isEqualTo(6);
     }
 
     @Test
     void 여러개_자동_로또번호() {
-        List<List> lottos = IssueLotto.issueLottos(7);
+        List<LottoNo> lottos = new IssueLotto().issueLottos(7);
         assertThat(lottos.size()).isEqualTo(7);
     }
 
     @Test
     void view() {
-        List<List> lottos = IssueLotto.issueLottos(7);
+        List<LottoNo> lottos = new IssueLotto().issueLottos(7);
         ResultView.view(lottos);
     }
 
@@ -60,17 +62,17 @@ public class LottoTest {
 
     @Test
     void 당첨_통계() {
-        List<List> lottos = new ArrayList<>();
+        List<LottoNo> lottos = new ArrayList<>();
 
-        lottos.add(Arrays.asList(8, 10, 23, 41, 44, 45)); // 3일치
-        lottos.add(Arrays.asList(8, 21, 22, 41, 44, 45)); // 3일치
-        lottos.add(Arrays.asList(8, 10, 23, 41, 44, 45)); // 3일치
-        lottos.add(Arrays.asList(8, 21, 23, 41, 42, 45)); // 5일치
-        lottos.add(Arrays.asList(8, 21, 23, 41, 42, 43)); // 6일치
+        lottos.add(new LottoNo(8, 10, 23, 41, 44, 45)); // 3일치
+        lottos.add(new LottoNo(8, 21, 22, 41, 44, 45)); // 3일치
+        lottos.add(new LottoNo(8, 10, 23, 41, 44, 45)); // 3일치
+        lottos.add(new LottoNo(8, 21, 23, 41, 42, 45)); // 5일치
+        lottos.add(new LottoNo(8, 21, 23, 41, 42, 43)); // 6일치
 
         String winningNumber = "8,21,23,41,42,43";
-        int[] result = WinnerStatistics.result(lottos, winningNumber);
-
+        int[] result = Rank.result(lottos, winningNumber);
+        System.out.println(result[0]);
         assertThat(result).containsExactly(3, 0, 1, 1);
 
     }
