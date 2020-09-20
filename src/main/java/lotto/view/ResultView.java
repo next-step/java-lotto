@@ -16,8 +16,15 @@ public class ResultView {
 
     public static void printLotto(List<Lotto> buyLotto) {
         for(Lotto lotto : buyLotto) {
-            System.out.println("[" + String.join(",", lotto.getLottoNumber()) + "]");
+            System.out.println("[" + makeLottoPrintFormat(lotto) + "]");
         }
+    }
+
+    public static String makeLottoPrintFormat(Lotto lotto) {
+        String numbers = lotto.getLotto().stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+                .collect(Collectors.joining(","));
+        return numbers;
     }
 
     public static void printWinningStatistics(Map<Rank, Integer> rank) {
