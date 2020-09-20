@@ -11,13 +11,15 @@ public class LottoStore {
         this.purchasedLotto = lottoList;
     }
 
-    public void matchNumber(Lotto winningLotto) {
-        for(Lotto lotto : purchasedLotto) {
-            Rank rank = lotto.matchLotto(winningLotto);
-            if (rankInfo.containsKey(rank)) {
-                rankInfo.replace(rank, rankInfo.get(rank) + 1);
-            }
-        }
+    public void matchNumber(WinningLotto winningLotto) {
+        purchasedLotto.getLottoList().stream()
+                .filter(lotto -> {
+                    Rank rank = lotto.matchLotto(winningLotto);
+                    return rankInfo.containsKey(rank);
+                }).forEach(lotto -> {
+                    Rank rank = lotto.matchLotto(winningLotto);
+                    rankInfo.replace(rank, rankInfo.get(rank) + 1);
+                });
     }
 
     public Map<Rank, Integer> getRankInfo() {
