@@ -1,33 +1,57 @@
 package lotto.domain;
 
-import lotto.common.LottoPriceInfo;
+import lotto.common.LottoRank;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toSet;
+
+/**
+ * 역할 - 지난주 당첨 번호와 일치하는 개수를 반환한다.
+ */
 public class LottoTicket {
-
+    private static final String DELIMITER_COMMA = ",";
     private Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchNumbers(LottoTicket winningTicket) {
-        HashSet<LottoNumber> matchNumbers = new HashSet<>(this.lottoNumbers);
-        matchNumbers.retainAll(winningTicket.lottoNumbers);
-        return matchNumbers.size();
+    public LottoTicket(String userInputNumbers) {
+        this.lottoNumbers = Arrays.stream(userInputNumbers.split(DELIMITER_COMMA))
+                .map(LottoNumber::new)
+                .collect(toSet());
     }
 
-    public LottoPriceInfo matchNumbers2(LottoTicket winningTicket) {
-        int matchCount = matchCount(winningTicket);
-        return LottoPriceInfo.matchInfo(matchCount);
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers != null && lottoNumbers.size() == 6) {
+            return;
+        }
+
+        throw new IllegalArgumentException("잘못된 개수의 로또번호를 입력하셨습니다.");
     }
 
-    private int matchCount(LottoTicket winningTicket) {
+    public LottoRank matchCount(LottoTicket lottoTicket, LottoNumber bonus) {
         HashSet<LottoNumber> matchNumbers = new HashSet<>(this.lottoNumbers);
-        matchNumbers.retainAll(winningTicket.lottoNumbers);
-        return matchNumbers.size();
+        matchNumbers.retainAll(lottoTicket.lottoNumbers);
+
+        boolean matchBonus = this.lottoNumbers.contains(bonus);
+
+        return LottoRank.getRank(matchNumbers.size(), matchBonus);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
@@ -36,22 +60,5 @@ public class LottoTicket {
         Collections.sort(lottoNumbers);
 
         return lottoNumbers.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
     }
 }

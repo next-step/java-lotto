@@ -1,62 +1,84 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import lotto.common.LottoPriceInfo;
-import lotto.common.LottoTicketMachine;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.common.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toSet;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class LottoTicketTest {
 
-    private LottoTicket lottoTicket;
-
-    @BeforeEach
-    void setUp() {
-        Set<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6)
-              .mapToObj(LottoNumber::new)
-              .collect(Collectors.toSet());
-
-        lottoTicket = new LottoTicket(lottoNumbers);
-    }
-
-    @DisplayName("로또번호들을 받아서 티켓 생성")
+    @DisplayName("로또티켓 생성 - 여섯개의 로또 번호를 입력")
     @Test
     void newInstance() {
+        //given
+        Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
+                .limit(6)
+                .map(LottoNumber::new)
+                .collect(toSet());
+
+        //when
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
         //then
         assertThat(lottoTicket).isNotNull();
     }
 
-    @DisplayName("일치하는 로또번호 갯수 반환")
+    @DisplayName("로또티켓 생성 - 잘못된 개수의 로또 번호를 입력")
     @Test
-    void matchNumbers() {
+    void newInstanceWithWrongLottoNumbers() {
         //given
-        LottoTicket winningNumber = LottoTicketMachine.issueTicket("2, 3, 4, 5, 6, 7");
+        Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
+                .limit(5)
+                .map(LottoNumber::new)
+                .collect(toSet());
 
-        //when
-        long matchCount = lottoTicket.matchNumbers(winningNumber);
-
-        //then
-        assertEquals(5, matchCount);
+        //when, then
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .withMessage("잘못된 개수의 로또번호를 입력하셨습니다.");
     }
 
-    @DisplayName("일치하는 로또번호 갯수 정보 반환")
+    @DisplayName("당첨번호 일치 개수 확인")
     @Test
-    void matchNumbers2() {
+    void matchCount() {
         //given
-        LottoTicket winningNumber = LottoTicketMachine.issueTicket("2, 3, 4, 5, 6, 7");
+        Set<LottoNumber> lottoNumbers = Stream.iterate(1, n -> n + 1)
+                .limit(6)
+                .map(LottoNumber::new)
+                .collect(toSet());
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket winningTicket = new LottoTicket(lottoNumbers);
+        LottoNumber bonus = new LottoNumber("7");
 
         //when
-        LottoPriceInfo lottoPriceInfo = lottoTicket.matchNumbers2(winningNumber);
+        LottoRank lottoRank = lottoTicket.matchCount(winningTicket, bonus);
 
         //then
-        LottoPriceInfo lottoRank2 = LottoPriceInfo.LOTTO_RANK_2;
-        assertEquals(lottoRank2, lottoPriceInfo);
+        assertEquals(LottoRank.FIRST, lottoRank);
+    }
+
+    @DisplayName("사용자 입력 번호로 로또 티켓 생성")
+    @Test
+    void newInstanceWithStringValues() {
+        //given
+        String userInputNumbers = "1, 2, 3, 4, 5, 6";
+
+        //when
+        LottoTicket lottoTicket = new LottoTicket(userInputNumbers);
+
+        //then
+        LottoTicket expected = Stream.iterate(1, n -> n + 1)
+                .limit(6)
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toSet(), LottoTicket::new));
+
+        assertEquals(expected, lottoTicket);
     }
 }

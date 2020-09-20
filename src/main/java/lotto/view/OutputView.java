@@ -1,10 +1,11 @@
 package lotto.view;
 
-import lotto.common.LottoPriceInfo;
+import lotto.common.LottoRank;
 import lotto.domain.LottoMatchResult;
-import lotto.domain.LottoPackage;
+import lotto.domain.LottoPack;
 
-import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Map;
 
 public class OutputView {
 
@@ -12,29 +13,41 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printBuyingTickets(LottoPackage lottoPackage) {
-        printTicketCount(lottoPackage);
-        lottoPackage.getLottoTickets()
+    public static void printBuyingTickets(LottoPack lottoPack) {
+        printTicketCount(lottoPack);
+        lottoPack.getLottoTickets()
                 .forEach(System.out::println);
     }
 
 
-    private static void printTicketCount(LottoPackage lottoPack) {
-        System.out.println(lottoPack.getTicketCount() + "개를 구매했습니다.");
+    private static void printTicketCount(LottoPack lottoPack) {
+        System.out.println(lottoPack.ticketCount() + "개를 구매했습니다.");
     }
 
     public static void printResult(LottoMatchResult lottoMatchResult) {
         System.out.println("당첨 통계\n---------");
-        Arrays.stream(LottoPriceInfo.values())
-                .filter(p1 -> !p1.equals(LottoPriceInfo.LOTTO_RANK_0))
-                .forEachOrdered(p1 -> {
-                    Long matchTicketCount = lottoMatchResult.matchCount(p1);
-                    String message = p1.getMatchCount() + "개 일치(" + p1.getPrice() + "원) - "
-                            + matchTicketCount + "개";
-                    System.out.println(message);
-                });
+        Map<LottoRank, Integer> matchResult = lottoMatchResult.getMatchResult();
+
+        matchResult.keySet().stream()
+                .filter(lottoRank -> !LottoRank.MISS.equals(lottoRank))
+                .sorted(Comparator.comparing(LottoRank::getMatchCount))
+                .forEachOrdered(rank -> printMatchResult(rank, matchResult.get(rank)));
 
         printProfit(lottoMatchResult.getProfit());
+    }
+
+    private static void printMatchResult(LottoRank rank, int matchTicketCount) {
+        if (LottoRank.SECOND.equals(rank)) {
+            String message = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getReward() + "원) - "
+                    + matchTicketCount + "개";
+            System.out.println(message);
+
+            return;
+        }
+
+        String message = rank.getMatchCount() + "개 일치(" + rank.getReward() + "원) - "
+                + matchTicketCount + "개";
+        System.out.println(message);
     }
 
     private static void printProfit(double profit) {

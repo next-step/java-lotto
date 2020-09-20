@@ -2,40 +2,41 @@ package lotto.domain;
 
 import java.util.Objects;
 
+/**
+ * 역할 - 1~45 사이 숫자라는 것을 확인. 보장한다.
+ */
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final Integer MIN_LOTTO_NUMBER = 1;
-    private static final Integer MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
-    private Integer number;
+    private int number;
 
-    public LottoNumber(Integer number) {
+    public LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
 
-    public LottoNumber(String numberValue) {
-
-        this(Integer.parseInt(numberValue));
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number.trim()));
     }
 
-    private void validate(Integer number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(
-                  MIN_LOTTO_NUMBER + " - " + MAX_LOTTO_NUMBER + " 사이 번호만 등록 가능합니다.");
+    private void validate(int number) {
+        if ( number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(number, that.number);
+        return number == that.number;
     }
 
     @Override
