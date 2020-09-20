@@ -20,10 +20,8 @@ public class LottoController {
 
         List<Lotto> nonAutoLottoList = LottoIssuer.issueNonAutoLotto(lottoDto2.getNonAutoLottoNumberList());
         List<Lotto> autoLottoList = LottoIssuer.issueAutoLottos(myMoney.getNumberOfPurchases() - nonAutoLottoList.size());
-        List<Lotto> totalLottoList = Stream.concat(nonAutoLottoList.stream(), autoLottoList.stream())
-                                            .collect(Collectors.toList());
 
-        PurChasedLotto purChasedLotto = new PurChasedLotto(totalLottoList);
+        PurChasedLotto purChasedLotto = new PurChasedLotto(nonAutoLottoList, autoLottoList);
 
         RenderView.showLottoList(nonAutoLottoList, autoLottoList);
 
