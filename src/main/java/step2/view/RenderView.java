@@ -10,10 +10,19 @@ import java.util.stream.Collectors;
 
 public class RenderView {
 
-    public static void showLottoList(List<Lotto> purchasedLottoList) {
-        StringBuilder sb = new StringBuilder(purchasedLottoList.size() + "개를 구매했습니다.\n");
+    public static void showLottoList(List<Lotto> nonAutoLottoList, List<Lotto> autoLottoList) {
+        StringBuilder sb = new StringBuilder();
 
-        for (Lotto lotto : purchasedLottoList) {
+        sb.append("수동으로 " + nonAutoLottoList.size() + "장,");
+        sb.append("자동으로 " + autoLottoList.size() + "개를");
+        sb.append("구매했습니다.\n");
+
+        for (Lotto lotto : nonAutoLottoList) {
+            sb.append("[" + lotto.toString() + "]");
+            sb.append("\n");
+        }
+
+        for (Lotto lotto : autoLottoList) {
             sb.append("[" + lotto.toString() + "]");
             sb.append("\n");
         }
