@@ -30,11 +30,11 @@ public enum Rank {
     }
 
     private static Rank getFinalDecisionRank(Rank resultRank, boolean isBonusNumberMatch) {
-        if (isBonusNumberMatch && resultRank.equals(SECOND) || resultRank.equals(THIRD)) {
+        if (isBonusNumberMatch && resultRank.equals(THIRD)) {
             return SECOND;
         }
 
-        if (resultRank.equals(SECOND) || resultRank.equals(THIRD)) {
+        if (!isBonusNumberMatch && resultRank.equals(SECOND)) {
             return THIRD;
         }
 
