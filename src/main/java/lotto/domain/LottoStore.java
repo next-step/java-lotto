@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 
 public class LottoStore {
@@ -34,9 +35,10 @@ public class LottoStore {
                 .getAsInt();
     }
 
-    public String statistics(Money money) {
+    public BigDecimal statistics(Money money) {
         int revenue = getTotalPrize();
         double yeild = (double) revenue / (double) money.getLottoPrice();
-        return String.format("%.2f", yeild);
+        BigDecimal yeildDecimal = new BigDecimal(yeild);
+        return yeildDecimal.setScale(2, RoundingMode.DOWN);
     }
 }

@@ -34,7 +34,7 @@ public class ResultView {
                 });
     }
 
-    public static void printTotalYield(String totalYield) {
+    public static void printTotalYield(BigDecimal totalYield) {
         System.out.println("총 수익률은 " + totalYield + "입니다.");
     }
 }
