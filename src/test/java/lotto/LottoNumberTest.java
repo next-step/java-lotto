@@ -26,4 +26,10 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(number);
         assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
     }
+
+    @Test
+    @DisplayName("로또 번호 생성하는지")
+    public void generateLottoNumber() {
+        assertThat(LottoNumber.generateLottoNumber().size()).isEqualTo(6);
+    }
 }

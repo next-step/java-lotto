@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ public class LottoTest {
             lottoNumbers.add(new LottoNumber(i));
         }
         lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.getLottoNumber()).isEqualTo("1,2,3,4,5,6");
+        assertThat(lotto.getLotto().get(0).getLottoNumber()).isEqualTo(1);
     }
 
     @Test
@@ -63,13 +64,27 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("당첨 번호 포함여부")
+    public void contains() {
+        LottoNumber winningNumberTrue = new LottoNumber(1);
+        LottoNumber winningNumberFalse = new LottoNumber(11);
+        for(int i = 1; i < 7; i++) {
+            numbers.add(i);
+        }
+        lotto = lotto.generateLotto(numbers);
+
+        assertThat(lotto.contains(winningNumberTrue)).isTrue();
+        assertThat(lotto.contains(winningNumberFalse)).isFalse();
+    }
+
+    @Test
     @DisplayName("당첨 번호 몇 개 포함 됐는지 테스트")
     public void matchLotto() {
         for(int i = 1; i < 7; i++) {
             numbers.add(i);
         }
         lotto = lotto.generateLotto(numbers);
-        Lotto winningLotto = lotto.generateLotto(numbers);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
 
         assertThat(lotto.matchLotto(winningLotto)).isEqualTo(Rank.FIRST);
     }
