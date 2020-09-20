@@ -32,16 +32,15 @@ public class Lotto implements Iterable<LottoNumber> {
         return new Lotto(lottoNumbers);
     }
 
-    public Rank match(WinningLotto winningLotto) {
-        return Rank.getRank(winningLotto.matchNumber(this), winningLotto.matchBonusNumber(this));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Stream<LottoNumber> strem() {
-        return lottoNumbers.stream();
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
+                .collect(Collectors.joining(","));
     }
 
     @Override
