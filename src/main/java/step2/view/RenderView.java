@@ -14,12 +14,7 @@ public class RenderView {
         StringBuilder sb = new StringBuilder(purchasedLottoList.size() + "개를 구매했습니다.\n");
 
         for (Lotto lotto : purchasedLottoList) {
-
-            String lottoNumbers = lotto.strem()
-                    .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
-                    .collect(Collectors.joining(","));
-
-            sb.append("[" + lottoNumbers + "]");
+            sb.append("[" + lotto.toString() + "]");
             sb.append("\n");
         }
 
