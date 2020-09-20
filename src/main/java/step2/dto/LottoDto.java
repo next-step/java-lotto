@@ -1,18 +1,23 @@
 package step2.dto;
 
+import java.util.List;
+
 public class LottoDto {
     private int purchaseMoney;
     private String winningLottoNumber;
     private String bonusNumber;
+    private List<String> nonAutoLottoNumberList;
 
     private LottoDto(Builder builder) {
         purchaseMoney = builder.purchaseMoney;
         winningLottoNumber = builder.winningLottoNumber;
         bonusNumber = builder.bonusNumber;
+        nonAutoLottoNumberList = builder.nonAutoLottoNumberList;
     }
 
     public static class Builder {
 
+        public List<String> nonAutoLottoNumberList;
         private int purchaseMoney;
         private String winningLottoNumber;
         private String bonusNumber;
@@ -32,6 +37,11 @@ public class LottoDto {
             return this;
         }
 
+        public Builder nonAutoLottoNumberList(List<String> val) {
+            nonAutoLottoNumberList = val;
+            return this;
+        }
+
         public LottoDto build() {
             return new LottoDto(this);
         }
@@ -47,5 +57,9 @@ public class LottoDto {
 
     public String getBonusNumber() {
         return bonusNumber;
+    }
+
+    public List<String> getNonAutoLottoNumberList() {
+        return nonAutoLottoNumberList;
     }
 }
