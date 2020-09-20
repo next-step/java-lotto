@@ -16,7 +16,7 @@ public class PurChasedLotto {
 
     public void matchNumber(WinningLotto winningLotto) {
         for (Lotto lotto : purChasedLotto) {
-            updateRankInfo(lotto.match(winningLotto));
+            updateRankInfo(winningLotto.match(lotto));
         }
     }
 

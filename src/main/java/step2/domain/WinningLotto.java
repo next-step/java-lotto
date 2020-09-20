@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Iterator;
+
 public class WinningLotto {
 
     private final Lotto winningLottoNumbers;
@@ -21,14 +23,19 @@ public class WinningLotto {
         return new WinningLotto(winningLotto, bonusLottoNumber);
     }
 
-
-    public int matchNumber(Lotto lotto) {
-        return (int) lotto.strem()
-                .filter(winningLottoNumbers::contains)
-                .count();
+    public Rank match(Lotto lotto) {
+        return Rank.getRank(matchNumber(lotto), lotto.contains(bonusNumber));
     }
 
-    public boolean matchBonusNumber(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    private int matchNumber(Lotto lotto) {
+        int resultMatchNumberCount = 0;
+
+        for (LottoNumber lottoNumber : lotto) {
+            if (winningLottoNumbers.contains(lottoNumber)) {
+                resultMatchNumberCount += 1;
+            }
+        }
+
+        return resultMatchNumberCount;
     }
 }
