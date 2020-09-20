@@ -3,8 +3,10 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -21,10 +23,15 @@ public class ResultView {
     public static void printWinningStatistics(Map<Rank, Integer> rank) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) - " + rank.get(Rank.FOURTH) + "개");
-        System.out.println("4개 일치 (50000원) - " + rank.get(Rank.THIRD) + "개");
-        System.out.println("5개 일치 (1500000원) - " + rank.get(Rank.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원) - " + rank.get(Rank.FIRST) + "개");
+        rank.keySet()
+                .stream()
+                .filter(rank1 -> rank1.getMatchCount() != 0)
+                .collect(Collectors.toList())
+                .stream()
+                .forEach(rank1 -> {
+                    System.out.print(rank1.getMatchCount() + "개 일치 (" + rank1.getPrize() + ") - ");
+                    System.out.println(rank.get(Rank.valueOf(rank1.name())) + "개");
+                });
     }
 
     public static void printTotalYield(String totalYield) {
