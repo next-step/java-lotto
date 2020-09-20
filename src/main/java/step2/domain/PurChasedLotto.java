@@ -1,9 +1,9 @@
 package step2.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PurChasedLotto {
 
@@ -14,9 +14,16 @@ public class PurChasedLotto {
         this.purChasedLotto = purChasedLotto;
     }
 
+    public PurChasedLotto(List<Lotto> nonAutoLottoList, List<Lotto> autoLottoList) {
+        List<Lotto> purChasedLotto = Stream.concat(nonAutoLottoList.stream(), autoLottoList.stream())
+                .collect(Collectors.toList());
+        this.purChasedLotto = purChasedLotto;
+    }
+
+
     public void matchNumber(WinningLotto winningLotto) {
         for (Lotto lotto : purChasedLotto) {
-            updateRankInfo(lotto.match(winningLotto));
+            updateRankInfo(winningLotto.match(lotto));
         }
     }
 

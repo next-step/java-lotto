@@ -1,20 +1,31 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+
 public class LottoIssuer {
-    private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> issueLottos(Money money) {
-        List<Lotto> LottoList = new ArrayList<>();
+    private LottoIssuer(){}
 
-        for (int i = 0, j = money.getNumberOfPurchases(); i < j; i++) {
-            LottoList.add(Lotto.create(LottoNumber.getRandomLottoNumber()));
+    public static List<Lotto> issueAutoLottos(int issueCount) {
+        List<Lotto> issuedAutoLottos = new ArrayList<>();
+
+        for (int i = 0; i < issueCount; i++) {
+            issuedAutoLottos.add(Lotto.create(LottoNumber.getRandomLottoNumber()));
         }
 
-        return LottoList;
+        return issuedAutoLottos;
+    }
+
+    public static List<Lotto> issueNonAutoLotto(List<String> customLottoNumberList) {
+        List<Lotto> issuedNonAutoLottos = new ArrayList<>();
+
+        for (int i = 0; i < customLottoNumberList.size(); i++) {
+            issuedNonAutoLottos.add(Lotto.create(customLottoNumberList.get(i)));
+        }
+
+        return issuedNonAutoLottos;
     }
 }
 

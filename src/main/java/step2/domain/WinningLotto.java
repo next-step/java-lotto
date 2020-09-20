@@ -21,14 +21,13 @@ public class WinningLotto {
         return new WinningLotto(winningLotto, bonusLottoNumber);
     }
 
-
-    public int matchNumber(Lotto lotto) {
-        return (int) lotto.strem()
-                .filter(winningLottoNumbers::contains)
-                .count();
+    public Rank match(Lotto lotto) {
+        return Rank.getRank(matchNumber(lotto), lotto.contains(bonusNumber));
     }
 
-    public boolean matchBonusNumber(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    private int matchNumber(Lotto lotto) {
+        return (int) lotto.stream()
+                .filter(winningLottoNumbers::contains)
+                .count();
     }
 }

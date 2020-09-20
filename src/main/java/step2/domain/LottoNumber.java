@@ -36,6 +36,15 @@ public class LottoNumber implements Comparable<LottoNumber>{
         return lottoNumber;
     }
 
+    public static List<LottoNumber> getRandomLottoNumber() {
+        List<LottoNumber> lottoNumbers = LOTTO_NUM_CACHE.values()
+                .stream()
+                .collect(Collectors.toList());
+
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, 6);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,12 +62,4 @@ public class LottoNumber implements Comparable<LottoNumber>{
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.lottoNumber, other.lottoNumber);
     }
-
-    public static List<LottoNumber> getRandomLottoNumber() {
-        List<LottoNumber> lottoNumbers = LOTTO_NUM_CACHE.values().stream().collect(Collectors.toList());
-
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 6);
-    }
-
 }
