@@ -5,10 +5,7 @@ import step2.dto.LottoDto;
 import step2.view.InputView;
 import step2.view.RenderView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoController {
     public static void run() {
@@ -18,10 +15,10 @@ public class LottoController {
 
         LottoDto lottoDto2 = InputView.inputCustomLottoNumberList();
 
+        List<Lotto> autoLottoList = LottoIssuer.issueAutoLottos(myMoney.getNumberOfPurchases() - lottoDto2.getNumberOfNonAutoLotto());
         List<Lotto> nonAutoLottoList = LottoIssuer.issueNonAutoLotto(lottoDto2.getNonAutoLottoNumberList());
-        List<Lotto> autoLottoList = LottoIssuer.issueAutoLottos(myMoney.getNumberOfPurchases() - nonAutoLottoList.size());
 
-        PurChasedLotto purChasedLotto = new PurChasedLotto(nonAutoLottoList, autoLottoList);
+        purchasedlotto purChasedLotto = new purchasedlotto(nonAutoLottoList, autoLottoList);
 
         RenderView.showLottoList(nonAutoLottoList, autoLottoList);
 
