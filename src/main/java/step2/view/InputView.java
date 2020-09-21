@@ -36,6 +36,7 @@ public class InputView {
 
         return new LottoDto.Builder()
                 .nonAutoLottoNumberList(nonLottoNumberList)
+                .numberOfNonAutoLotto(numberOfNonAutoLotto)
                 .build();
     }
 
