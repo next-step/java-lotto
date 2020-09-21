@@ -4,17 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PurChasedLottoTest {
+class purchasedlottoTest {
 
-    PurChasedLotto purChasedLotto;
+    purchasedlotto purChasedLotto;
     WinningLotto winningLotto;
 
     @BeforeEach
@@ -22,7 +20,7 @@ class PurChasedLottoTest {
         List<Lotto> lottoList = Stream.of(Lotto.create("1, 2, 3, 4, 5, 6"), Lotto.create("1, 2, 3, 12, 30, 40"))
                 .collect(Collectors.toList());
         winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", "45");
-        purChasedLotto = new PurChasedLotto(lottoList);
+        purChasedLotto = new purchasedlotto(lottoList);
     }
 
     @Test

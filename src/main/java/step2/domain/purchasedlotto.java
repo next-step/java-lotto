@@ -5,16 +5,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PurChasedLotto {
+public class purchasedlotto {
 
     private List<Lotto> purChasedLotto;
     private Map<Rank, Integer> rankInfo = Rank.getInitRankInfo();
 
-    public PurChasedLotto(List<Lotto> purChasedLotto) {
+    public purchasedlotto(List<Lotto> purChasedLotto) {
         this.purChasedLotto = purChasedLotto;
     }
 
-    public PurChasedLotto(List<Lotto> nonAutoLottoList, List<Lotto> autoLottoList) {
+    public purchasedlotto(List<Lotto> nonAutoLottoList, List<Lotto> autoLottoList) {
         List<Lotto> purChasedLotto = Stream.concat(nonAutoLottoList.stream(), autoLottoList.stream())
                 .collect(Collectors.toList());
         this.purChasedLotto = purChasedLotto;
