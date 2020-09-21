@@ -6,6 +6,7 @@ public class LottoDto {
     private int purchaseMoney;
     private String winningLottoNumber;
     private String bonusNumber;
+    private int numberOfNonAutoLotto;
     private List<String> nonAutoLottoNumberList;
 
     private LottoDto(Builder builder) {
@@ -13,11 +14,13 @@ public class LottoDto {
         winningLottoNumber = builder.winningLottoNumber;
         bonusNumber = builder.bonusNumber;
         nonAutoLottoNumberList = builder.nonAutoLottoNumberList;
+        numberOfNonAutoLotto = builder.numberOfNonAutoLotto;
     }
 
     public static class Builder {
 
         public List<String> nonAutoLottoNumberList;
+        public int numberOfNonAutoLotto;
         private int purchaseMoney;
         private String winningLottoNumber;
         private String bonusNumber;
@@ -42,6 +45,11 @@ public class LottoDto {
             return this;
         }
 
+        public Builder numberOfNonAutoLotto(int val) {
+            numberOfNonAutoLotto = val;
+            return this;
+        }
+
         public LottoDto build() {
             return new LottoDto(this);
         }
@@ -61,5 +69,9 @@ public class LottoDto {
 
     public List<String> getNonAutoLottoNumberList() {
         return nonAutoLottoNumberList;
+    }
+
+    public int getNumberOfNonAutoLotto() {
+        return numberOfNonAutoLotto;
     }
 }
