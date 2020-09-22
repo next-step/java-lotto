@@ -24,6 +24,10 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     public static Lotto create(String nums) {
+        if (Objects.isNull(nums) || nums.trim().equals("")) {
+            throw new IllegalArgumentException("로또 번호가 null이거나 빈 문자열일 경우 로또를 생성할 수 없습니다.");
+        }
+
         Set<LottoNumber> lottoNumbers = Arrays.asList(nums.split(",")).stream()
                 .map(value -> Integer.parseInt(value.trim()))
                 .map(value -> LottoNumber.valueOf(value))
@@ -32,16 +36,19 @@ public class Lotto implements Iterable<LottoNumber> {
         return new Lotto(lottoNumbers);
     }
 
-    public Rank match(WinningLotto winningLotto) {
-        return Rank.getRank(winningLotto.matchNumber(this), winningLotto.matchBonusNumber(this));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Stream<LottoNumber> strem() {
+    public Stream<LottoNumber> stream() {
         return lottoNumbers.stream();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map((lottoNumber) -> String.valueOf(lottoNumber.getLottoNumber()))
+                .collect(Collectors.joining(","));
     }
 
     @Override

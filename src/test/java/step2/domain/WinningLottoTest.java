@@ -30,14 +30,8 @@ class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("로또 번호 비교하기")
+    @DisplayName("로또 번호 비교후 등수 체크")
     void matchNumber() {
-        assertEquals(winningLotto.matchNumber(lotto), 5);
-    }
-
-    @Test
-    @DisplayName("로또 보너스 넘버 비교하기")
-    void matchBonusNumber() {
-        assertTrue(winningLotto.matchBonusNumber(lotto));
+        assertEquals(winningLotto.match(lotto), Rank.SECOND);
     }
 }

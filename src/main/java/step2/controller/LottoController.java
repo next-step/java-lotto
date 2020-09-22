@@ -13,14 +13,18 @@ public class LottoController {
 
         Money myMoney = Money.of(lottoDto.getPurchaseMoney());
 
-        List<Lotto> lottoList = LottoIssuer.issueLottos(myMoney);
-        PurChasedLotto purChasedLotto = new PurChasedLotto(lottoList);
+        LottoDto lottoDto2 = InputView.inputCustomLottoNumberList();
 
-        RenderView.showLottoList(lottoList);
+        List<Lotto> autoLottoList = LottoIssuer.issueAutoLottos(myMoney.getNumberOfPurchases() - lottoDto2.getNumberOfNonAutoLotto());
+        List<Lotto> nonAutoLottoList = LottoIssuer.issueNonAutoLotto(lottoDto2.getNonAutoLottoNumberList());
 
-        LottoDto lottoDto2 = InputView.inputWinningLottoNumber();
+        purchasedlotto purChasedLotto = new purchasedlotto(nonAutoLottoList, autoLottoList);
 
-        WinningLotto winningLotto = WinningLotto.create(lottoDto2.getWinningLottoNumber(), lottoDto2.getBonusNumber());
+        RenderView.showLottoList(nonAutoLottoList, autoLottoList);
+
+        LottoDto lottoDto3 = InputView.inputWinningLottoNumber();
+
+        WinningLotto winningLotto = WinningLotto.create(lottoDto3.getWinningLottoNumber(), lottoDto3.getBonusNumber());
 
         purChasedLotto.matchNumber(winningLotto);
 
