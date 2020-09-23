@@ -8,15 +8,18 @@ public class LottoGame {
     private static final String INVALID_MANUAL_LOTTO_COUNT = "수동 로또 구입 개수를 확인해 주세요.";
 
     private final int count;
+    private final Lottos lottos;
 
-    private LottoGame(int count) {
+    private LottoGame(int count, Lottos lottos) {
         this.count = count;
+        this.lottos = lottos;
     }
 
-    public static LottoGame of(int amount, int manualCount) {
+    public static LottoGame of(int amount, int manualCount, List<String> manualLottos) {
         validate(amount, manualCount);
         int count = amount / DEFAULT_LOTTO_PRICE;
-        return new LottoGame(count);
+        Lottos lottos = Lottos.of(count - manualCount, manualLottos);
+        return new LottoGame(count, lottos);
     }
 
     private static void validate(int amount, int manualCount) {
@@ -33,7 +36,11 @@ public class LottoGame {
         return count;
     }
 
-    public Lottos makeLottos(List<String> manualLottos) {
-        return Lottos.of(count - manualLottos.size(), manualLottos);
+    public Lottos getLottos() {
+        return lottos;
+    }
+
+    public LottoResult getLottoResult(WinningLotto winningLotto) {
+        return lottos.match(winningLotto);
     }
 }

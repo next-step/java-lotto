@@ -32,6 +32,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public LottoResult match(WinningLotto winningLotto) {
         return lottos.stream()
                 .map(winningLotto::getRankByLotto)

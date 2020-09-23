@@ -12,14 +12,14 @@ public class LottoController {
         int purchaseAmount = InputView.inputPurchaseAmount();
         List<String> manualLottos = InputView.inputManualLotto();
 
-        LottoGame lottoGame = LottoGame.of(purchaseAmount, manualLottos.size());
+        LottoGame lottoGame = LottoGame.of(purchaseAmount, manualLottos.size(), manualLottos);
         ResultView.printPurchaseLottoCount(manualLottos.size(), lottoGame.getCount());
 
-        Lottos lottos = lottoGame.makeLottos(manualLottos);
+        Lottos lottos = lottoGame.getLottos();
         ResultView.printLottos(lottos.toStringByLotto());
 
         WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumberOfLastWeek(), InputView.inputBonusNumber());
-        LottoResult lottoResult = lottos.match(winningLotto);
+        LottoResult lottoResult = lottoGame.getLottoResult(winningLotto);
 
         ResultView.printResultLottoGame(lottoResult);
     }
