@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
     public static final String INVALID_LOTTO_SIZE = "로또 개수는 6개 입니다.";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -20,6 +22,14 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(INVALID_LOTTO_SIZE);
         }
+    }
+
+    public static Lotto from(String manualLotto) {
+        return new Lotto(Arrays.stream(manualLotto.split(LOTTO_NUMBER_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
     }
 
     public static Lotto of(LottoNumberGenerator lottoNumberGenerator) {
@@ -60,7 +70,7 @@ public class Lotto {
         return "["
                 + lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(","))
+                .collect(Collectors.joining(" ,"))
                 + "]";
     }
 }

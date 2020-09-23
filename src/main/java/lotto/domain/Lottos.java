@@ -15,20 +15,25 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(List<Lotto> lottos) {
-        return new Lottos(lottos);
-    }
+    public static Lottos of(int autoCount, List<String> manualLottoNumbers) {
+        List<Lotto> mergeLottos = new ArrayList<>();
 
-    public static Lottos of(int count, LottoNumberGenerator lottoNumberGenerator) {
-        List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < count; i++) {
-            lottos.add(Lotto.of(lottoNumberGenerator));
+        for (String manualLottoNumber : manualLottoNumbers) {
+            mergeLottos.add(Lotto.from(manualLottoNumber));
         }
-        return new Lottos(lottos);
+
+        for(int i = 0; i < autoCount; i++) {
+            mergeLottos.add(Lotto.of(new LottoNumberRandomGenerator()));
+        }
+        return new Lottos(mergeLottos);
     }
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public LottoResult match(WinningLotto winningLotto) {

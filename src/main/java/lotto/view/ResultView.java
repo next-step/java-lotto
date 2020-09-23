@@ -9,7 +9,7 @@ import java.util.List;
 import static java.math.RoundingMode.FLOOR;
 
 public class ResultView {
-    private static final String ANSWER_COUNT_LOTTO_MESSAGE = "개 를 구입 했습니다.";
+    private static final String ANSWER_COUNT_LOTTO_MESSAGE = "\n수동으로 %s개, 자동으로 %s개를 구매 했습니다.";
     private static final String RESULT_OF_LOTTO_GAME_MESSAGE = "\n당첨 통계\n---------";
     private static final String RANK_COUNT_OF_MATCH_MESSAGE = "%s개 일치";
     private static final String BONUS_BALL_COUNT_MESSAGE = ", 보너스 볼 일치";
@@ -21,8 +21,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseLottoCount(int count) {
-        System.out.println(String.format(ANSWER_COUNT_LOTTO_MESSAGE, count));
+    public static void printPurchaseLottoCount(int manualCount, int count) {
+        System.out.println(String.format(ANSWER_COUNT_LOTTO_MESSAGE, manualCount, count - manualCount));
     }
 
     public static void printLottos(List<String> toStringByLottos) {
