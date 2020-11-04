@@ -47,4 +47,14 @@ public class StringCalculatorTest {
                 () -> assertThat(stringCalculator.sum("10,20:30")).isEqualTo(60)
         );
     }
+
+    @Test
+    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\\n1;2;3” => 6)")
+    void customDelimiterTest() {
+        assertAll(
+                () -> assertThat(stringCalculator.sum("//;\\n1;2;3")).isEqualTo(6),
+                () -> assertThat(stringCalculator.sum("//;\\n1,2;3")).isEqualTo(6),
+                () -> assertThat(stringCalculator.sum("//;\\n1,2:3;4")).isEqualTo(10)
+        );
+    }
 }
