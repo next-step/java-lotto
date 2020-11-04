@@ -25,7 +25,13 @@ public class StringCalculator {
         String[] inputSplits = input.split(getNumberDelimiterRegex(delimiters));
         int result = 0;
         for (String inputSplit : inputSplits) {
-            result += Integer.parseInt(inputSplit);
+            int number = Integer.parseInt(inputSplit);
+
+            if (number < 0) {
+                throw new RuntimeException();
+            }
+
+            result += number;
         }
 
         return result;
