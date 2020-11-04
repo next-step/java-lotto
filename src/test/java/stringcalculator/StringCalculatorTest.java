@@ -22,4 +22,10 @@ public class StringCalculatorTest {
     void nullAndEmptyTest(String input) {
         assertThat(stringCalculator.sum(input)).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)")
+    void unitNumberTest() {
+        assertThat(stringCalculator.sum("1")).isEqualTo(1);
+    }
 }
