@@ -3,9 +3,11 @@ package stringcalculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final List<String> DEFAULT_DELIMITERS = new ArrayList<>(Arrays.asList(",", ":"));
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//.\\\\n.*");
 
     public int sum(String input) {
         if (input == null || input.isEmpty()) {
@@ -31,7 +33,7 @@ public class StringCalculator {
     }
 
     private boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//;\\n");
+        return CUSTOM_DELIMITER_PATTERN.matcher(input).matches();
     }
 
     private String getNumberDelimiterRegex() {
