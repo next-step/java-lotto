@@ -38,4 +38,13 @@ public class StringCalculatorTest {
                 () -> assertThat(stringCalculator.sum("10,20")).isEqualTo(30)
         );
     }
+
+    @Test
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)")
+    void sumByCommaAndColonTest() {
+        assertAll(
+                () -> assertThat(stringCalculator.sum("1,2:3")).isEqualTo(6),
+                () -> assertThat(stringCalculator.sum("10,20:30")).isEqualTo(60)
+        );
+    }
 }
