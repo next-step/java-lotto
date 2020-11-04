@@ -14,12 +14,13 @@ public class StringCalculator {
             return 0;
         }
 
+        List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
         if (hasCustomDelimiter(input)) {
-            addDelimiter();
+            delimiters.add(String.valueOf(input.charAt(2)));
             input = input.substring(5);
         }
 
-        String[] inputSplits = input.split(getNumberDelimiterRegex());
+        String[] inputSplits = input.split(getNumberDelimiterRegex(delimiters));
         int result = 0;
         for (String inputSplit : inputSplits) {
             result += Integer.parseInt(inputSplit);
@@ -28,15 +29,11 @@ public class StringCalculator {
         return result;
     }
 
-    private void addDelimiter() {
-        DEFAULT_DELIMITERS.add(";");
-    }
-
     private boolean hasCustomDelimiter(String input) {
         return CUSTOM_DELIMITER_PATTERN.matcher(input).matches();
     }
 
-    private String getNumberDelimiterRegex() {
-        return "[" + String.join("", DEFAULT_DELIMITERS) + "]";
+    private String getNumberDelimiterRegex(List<String> delimiters) {
+        return "[" + String.join("", delimiters.toString()) + "]";
     }
 }
