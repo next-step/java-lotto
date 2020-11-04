@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class StringCalculatorTest {
@@ -56,5 +57,12 @@ public class StringCalculatorTest {
                 () -> assertThat(stringCalculator.sum("//;\\n1,2;3")).isEqualTo(6),
                 () -> assertThat(stringCalculator.sum("//;\\n1,2:3;4")).isEqualTo(10)
         );
+    }
+
+    @Test
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)")
+    void negativeNumberTest() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stringCalculator.sum("-1,2,3"));
     }
 }
