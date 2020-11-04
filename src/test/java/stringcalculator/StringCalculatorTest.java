@@ -63,6 +63,7 @@ public class StringCalculatorTest {
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)")
     void negativeNumberTest() {
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> stringCalculator.sum("-1,2,3"));
+                .isThrownBy(() -> stringCalculator.sum("-1,2,3"))
+                .withMessage(StringCalculator.NEGATIVE_NUMBER_CAN_NOT_BE_INCLUDED_ERR_MSG);
     }
 }
