@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
@@ -11,9 +13,14 @@ public class StringAddCalculator {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
-        String[] numberStrings = expression.split("[,:]");
-        
-        return getSum(numberStrings);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens = m.group(2).split(customDelimiter);
+            return getSum(tokens);
+        }
+
+        return getSum(expression.split("[,:]"));
     }
 
     private static int getSum(String[] numberStrings) {
