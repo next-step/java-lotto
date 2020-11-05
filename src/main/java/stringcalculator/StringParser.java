@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 class StringParser {
     private static final List<String> DEFAULT_DELIMITERS = new ArrayList<>(Arrays.asList(",", ":"));
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//.\\\\n.*");
-    public static final int INDEX_OF_CUSTOM_DELIMITER = 2;
-    public static final int LAST_INDEX_OF_CUSTOM_DELIMITER_PHRASE = 5;
+    private static final int INDEX_OF_CUSTOM_DELIMITER = 2;
+    private static final int LAST_INDEX_OF_CUSTOM_DELIMITER_PHRASE = 5;
 
-    public List<Integer> getNumbersFrom(String input) {
+    List<Integer> getNumbersFrom(String input) {
         List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
         if (hasCustomDelimiter(input)) {
             input = processCustomDelimiter(input, delimiters);
