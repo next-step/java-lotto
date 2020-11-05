@@ -21,6 +21,13 @@ public class StringAddCalculatorTest {
                 .hasMessage("문자열을 입력하시오.");
     }
 
+
+    @DisplayName("empty string 을 입력하면 0 을 반환한다.")
+    @Test
+    void emptyString() {
+        assertThat(new StringAddCalculator().calculate("")).isEqualTo(0);
+    }
+
     private static class StringAddCalculator {
         public void calculate(String formula) {
             throw new IllegalArgumentException("문자열을 입력하시오.");
