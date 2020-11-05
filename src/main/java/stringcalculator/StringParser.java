@@ -14,22 +14,29 @@ class StringParser {
     public List<Integer> getNumbersFrom(String input) {
         List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
         if (hasCustomDelimiter(input)) {
-            delimiters.add(String.valueOf(input.charAt(INDEX_OF_CUSTOM_DELIMITER)));
-            input = input.substring(LAST_INDEX_OF_CUSTOM_DELIMITER_PHRASE);
+            input = processCustomDelimiter(input, delimiters);
         }
 
-        String[] inputSplits = input.split(getNumberDelimiterRegex(delimiters));
-        List<Integer> integers = new ArrayList<>();
-
-        for (String inputSplit : inputSplits) {
-            integers.add(Integer.parseInt(inputSplit));
-        }
-
-        return integers;
+        return parseStringToNumber(input, delimiters);
     }
 
     private boolean hasCustomDelimiter(String input) {
         return CUSTOM_DELIMITER_PATTERN.matcher(input).matches();
+    }
+
+    private String processCustomDelimiter(String input, List<String> delimiters) {
+        delimiters.add(String.valueOf(input.charAt(INDEX_OF_CUSTOM_DELIMITER)));
+        input = input.substring(LAST_INDEX_OF_CUSTOM_DELIMITER_PHRASE);
+        return input;
+    }
+
+    private List<Integer> parseStringToNumber(String input, List<String> delimiters) {
+        String[] inputSplits = input.split(getNumberDelimiterRegex(delimiters));
+        List<Integer> integers = new ArrayList<>();
+        for (String inputSplit : inputSplits) {
+            integers.add(Integer.parseInt(inputSplit));
+        }
+        return integers;
     }
 
     private String getNumberDelimiterRegex(List<String> delimiters) {
