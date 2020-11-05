@@ -24,9 +24,9 @@ public class StringAddCalculator {
     }
 
     private static int sum(String expression) {
-        Matcher m = pattern.matcher(expression);
-        if (m.find()) {
-            return sum(tokenize(m.group(EXPRESSION_GROUP_ID), m.group(DELIMITER_GROUP_ID)));
+        Matcher customDelimiterMatcher = pattern.matcher(expression);
+        if (customDelimiterMatcher.find()) {
+            return sum(tokenize(customDelimiterMatcher.group(EXPRESSION_GROUP_ID), customDelimiterMatcher.group(DELIMITER_GROUP_ID)));
         }
         return sum(tokenize(expression, DEFAULT_DELIMITER_REGEX));
     }
