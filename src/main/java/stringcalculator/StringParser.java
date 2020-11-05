@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 class StringParser {
-    private static final List<String> DEFAULT_DELIMITERS = new ArrayList<>(Arrays.asList(",", ":"));
+    private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//.\\\\n.*");
     private static final int INDEX_OF_CUSTOM_DELIMITER = 2;
     private static final int LAST_INDEX_OF_CUSTOM_DELIMITER_PHRASE = 5;
