@@ -11,7 +11,13 @@ public class StringAddCalculator {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
-        return Arrays.stream(expression.split(",|:"))
+        String[] numberStrings = expression.split("[,:]");
+        
+        return getSum(numberStrings);
+    }
+
+    private static int getSum(String[] numberStrings) {
+        return Arrays.stream(numberStrings)
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
