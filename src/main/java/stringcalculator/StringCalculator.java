@@ -1,5 +1,7 @@
 package stringcalculator;
 
+import stringcalculator.exception.NegativeNumberIncludedException;
+
 import java.util.List;
 
 public class StringCalculator {
@@ -31,7 +33,7 @@ public class StringCalculator {
 
     private void validateNumber(Integer number) {
         if (number < 0) {
-            throw new RuntimeException(NEGATIVE_NUMBER_CAN_NOT_BE_INCLUDED_ERR_MSG);
+            throw new NegativeNumberIncludedException(NEGATIVE_NUMBER_CAN_NOT_BE_INCLUDED_ERR_MSG);
         }
     }
 }
