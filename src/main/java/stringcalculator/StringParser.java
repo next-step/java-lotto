@@ -2,6 +2,7 @@ package stringcalculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -36,7 +37,7 @@ class StringParser {
         for (String inputSplit : inputSplits) {
             integers.add(Integer.parseInt(inputSplit));
         }
-        return integers;
+        return Collections.unmodifiableList(integers);
     }
 
     private String getNumberDelimiterRegex(List<String> delimiters) {
