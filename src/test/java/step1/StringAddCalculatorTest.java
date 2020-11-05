@@ -48,7 +48,11 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            return 0L;
+            if (formula.isEmpty()) {
+                return 0L;
+            }
+
+            return Long.valueOf(formula);
         }
     }
 }
