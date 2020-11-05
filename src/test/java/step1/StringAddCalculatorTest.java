@@ -16,8 +16,7 @@ public class StringAddCalculatorTest {
     @DisplayName("널을 입력받으면 예외가 발생한다.")
     @Test
     void nullInput() {
-        StringAddCalculator calculator = new StringAddCalculator();
-        assertThatThrownBy(() -> calculator.calculate(null)) //
+        assertThatThrownBy(() -> new StringAddCalculator().calculate(null)) //
                 .isInstanceOf(IllegalArgumentException.class) //
                 .hasMessage("문자열을 입력하시오.");
     }
