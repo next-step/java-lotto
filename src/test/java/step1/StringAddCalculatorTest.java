@@ -1,5 +1,6 @@
 package step1;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +14,18 @@ import static org.assertj.core.api.Assertions.*;
  * </pre>
  */
 public class StringAddCalculatorTest {
+
+    private StringAddCalculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new StringAddCalculator();
+    }
+
     @DisplayName("널을 입력받으면 예외가 발생한다.")
     @Test
     void nullInput() {
-        assertThatThrownBy(() -> new StringAddCalculator().calculate(null)) //
+        assertThatThrownBy(() -> calculator.calculate(null)) //
                 .isInstanceOf(IllegalArgumentException.class) //
                 .hasMessage("문자열을 입력하시오.");
     }
@@ -24,7 +33,7 @@ public class StringAddCalculatorTest {
     @DisplayName("empty string 을 입력하면 0 을 반환한다.")
     @Test
     void emptyString() {
-        assertThat(new StringAddCalculator().calculate("")).isEqualTo(0);
+        assertThat(calculator.calculate("")).isEqualTo(0);
     }
 
     private static class StringAddCalculator {
