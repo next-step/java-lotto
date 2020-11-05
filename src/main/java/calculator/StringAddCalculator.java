@@ -20,28 +20,28 @@ public class StringAddCalculator {
         if (isNullOrEmpty(expression)) {
             return 0;
         }
-        return getSum(expression);
+        return sum(expression);
     }
 
-    private static int getSum(String expression) {
+    private static int sum(String expression) {
         Matcher m = pattern.matcher(expression);
         if (m.find()) {
-            return getSum(getTokens(m.group(EXPRESSION_GROUP_ID), m.group(DELIMITER_GROUP_ID)));
+            return sum(tokenize(m.group(EXPRESSION_GROUP_ID), m.group(DELIMITER_GROUP_ID)));
         }
-        return getSum(getTokens(expression, DEFAULT_DELIMITER_REGEX));
+        return sum(tokenize(expression, DEFAULT_DELIMITER_REGEX));
     }
 
-    private static String[] getTokens(String expression, String delimiter) {
+    private static String[] tokenize(String expression, String delimiter) {
         return expression.split(delimiter);
     }
 
-    private static int getSum(String[] numberStrings) {
+    private static int sum(String[] numberStrings) {
         return Arrays.stream(numberStrings)
-                .mapToInt(getNumberFromString())
+                .mapToInt(convertToUnsignedInteger())
                 .sum();
     }
 
-    private static ToIntFunction<String> getNumberFromString() {
+    private static ToIntFunction<String> convertToUnsignedInteger() {
         return string -> {
             int number = Integer.parseInt(string);
             validateUnsignedNumber(number);
