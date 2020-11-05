@@ -41,6 +41,6 @@ class StringParser {
     }
 
     private String getNumberDelimiterRegex(List<String> delimiters) {
-        return "[" + String.join("", delimiters.toString()) + "]";
+        return "[" + String.join("", delimiters) + "]";
     }
 }
