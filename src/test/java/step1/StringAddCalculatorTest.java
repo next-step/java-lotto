@@ -19,6 +19,12 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator = new StringAddCalculator();
         assertThatThrownBy(() -> calculator.calculate(null)) //
                 .isInstanceOf(IllegalArgumentException.class) //
-                .hasMessage("문자열을 입려하시오.");
+                .hasMessage("문자열을 입력하시오.");
+    }
+
+    private static class StringAddCalculator {
+        public void calculate(String formula) {
+            throw new IllegalArgumentException("문자열을 입력하시오.");
+        }
     }
 }
