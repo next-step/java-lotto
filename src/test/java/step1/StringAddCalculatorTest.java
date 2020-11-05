@@ -36,6 +36,12 @@ public class StringAddCalculatorTest {
         assertThat(calculator.calculate("")).isEqualTo(0);
     }
 
+    @DisplayName("숫자를 입력하면 그 숫자를 반환한다.")
+    @Test
+    void oneNumber() {
+        assertThat(calculator.calculate("1")).isEqualTo(1);
+    }
+
     private static class StringAddCalculator {
         public Long calculate(String formula) {
             if (formula == null) {
