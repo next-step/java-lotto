@@ -3,8 +3,11 @@ package step1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * <pre>
@@ -37,9 +40,10 @@ public class StringAddCalculatorTest {
     }
 
     @DisplayName("숫자를 입력하면 그 숫자를 반환한다.")
-    @Test
-    void oneNumber() {
-        assertThat(calculator.calculate("1")).isEqualTo(1);
+    @ParameterizedTest
+    @CsvSource({"0,0", "1,1", "2,2", "9999,9999"})
+    void oneNumber(String stringType, Long longType) {
+        assertThat(calculator.calculate(stringType)).isEqualTo(longType);
     }
 
     private static class StringAddCalculator {
