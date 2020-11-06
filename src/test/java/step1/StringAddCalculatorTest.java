@@ -74,11 +74,18 @@ public class StringAddCalculatorTest {
                 return 0L;
             }
 
+            Long number;
             try {
-                return Long.valueOf(formula);
+                number = Long.valueOf(formula);
             } catch (NumberFormatException e) {
                 throw new RuntimeException(String.format("숫자로 변환가능한 문자가 아닙니다. : %s", formula), e);
             }
+
+            if (number < 0) {
+                throw new RuntimeException(String.format("음수는 처리할 수 없습니다. : %s", formula));
+            }
+
+            return number;
         }
     }
 }
