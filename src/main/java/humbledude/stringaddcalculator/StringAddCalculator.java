@@ -1,8 +1,12 @@
 package humbledude.stringaddcalculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
-    private static final String DEAFAULT_SPLIT_TOKEN = ",|:";
+    private static final String DEFAULT_SPLIT_TOKEN = ",|:";
+    private static final String CUSTOM_SPLIT_TOKEN_PATTERN = "^//(.)\n(.*)$";
 
     public static int splitAndSum(String input) {
         int sum = 0;
@@ -10,7 +14,9 @@ public class StringAddCalculator {
             return sum;
         }
 
-        String[] strNumbers = input.split(DEAFAULT_SPLIT_TOKEN);
+        String splitToken = getSplitToken(input);
+        String body = getBody(input);
+        String[] strNumbers = body.split(splitToken);
 
         for (String strNumber : strNumbers) {
             int number = parseInt(strNumber);
@@ -30,6 +36,28 @@ public class StringAddCalculator {
         }
 
         return true;
+    }
+
+    private static String getSplitToken(String input) {
+        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TOKEN_PATTERN)
+                .matcher(input);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+
+        return DEFAULT_SPLIT_TOKEN;
+    }
+
+    private static String getBody(String input) {
+        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TOKEN_PATTERN)
+                .matcher(input);
+
+        if (matcher.find()) {
+            return matcher.group(2);
+        }
+
+        return input;
     }
 
     private static int parseInt(String strNumber) {
