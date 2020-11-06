@@ -82,7 +82,7 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            String[] split = formula.split(",");
+            String[] split = formula.split("[,:]");
 
             Long result = 0L;
             for (String string : split) {
