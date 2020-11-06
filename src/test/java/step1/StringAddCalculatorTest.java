@@ -70,6 +70,12 @@ public class StringAddCalculatorTest {
         assertThat(calculator.calculate("1,2")).isEqualTo(3L);
     }
 
+    @DisplayName("콜론을 기준으로 더한다.")
+    @Test
+    void addWithColon() {
+        assertThat(calculator.calculate("1:2:3")).isEqualTo(6L);
+    }
+
     private static class StringAddCalculator {
         public Long calculate(String formula) {
             if (formula == null) {
