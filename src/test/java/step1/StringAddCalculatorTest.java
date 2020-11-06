@@ -47,7 +47,6 @@ public class StringAddCalculatorTest {
         assertThat(calculator.calculate(stringType)).isEqualTo(longType);
     }
 
-
     @DisplayName("숫자 이외의 값을 입력하면 RuntimeException 을 발생한다")
     @ParameterizedTest
     @ValueSource(strings = {"A", "가"})
@@ -55,6 +54,14 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> calculator.calculate(noNumeric)) //
                 .isInstanceOf(RuntimeException.class) //
                 .hasMessage("숫자로 변환가능한 문자가 아닙니다. : %s", noNumeric);
+    }
+
+    @DisplayName("음수를 입력하면 RuntimeException 을 방샐한다.")
+    @Test
+    void negativeNumericString() {
+        assertThatThrownBy(() -> calculator.calculate("-1")) //
+                .isInstanceOf(RuntimeException.class) //
+                .hasMessage("음수는 처리할 수 없습니다. : -1");
     }
 
     private static class StringAddCalculator {
