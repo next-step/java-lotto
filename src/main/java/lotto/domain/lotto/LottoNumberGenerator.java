@@ -15,6 +15,8 @@ public class LottoNumberGenerator {
 
     public static List<Integer> getNumbers() {
         Collections.shuffle(numbers);
-        return numbers.stream().limit(Lotto.NUMBER_COUNT).collect(Collectors.toList());
+        return numbers.stream()
+                .limit(Lotto.NUMBER_COUNT)
+                .collect(Collectors.toList());
     }
 }

@@ -7,6 +7,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private static final String PHRASE_FOR_MONEY = "구입금액을 입력해 주세요.";
+    private static final String PHRASE_FOR_LAST_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+
     private final Scanner scanner;
     private final PrintWriter output;
 
@@ -16,12 +19,13 @@ public class InputView {
     }
 
     public int getMoney() {
-        output.println("구입금액을 입력해 주세요.");
+
+        output.println(PHRASE_FOR_MONEY);
         return Integer.parseInt(scanner.nextLine());
     }
 
     public List<Integer> getLastLottoNumbers() {
-        output.println("지난 주 당첨 번호를 입력해 주세요.");
+        output.println(PHRASE_FOR_LAST_LOTTO_NUMBER);
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(input -> Integer.parseInt(input.trim()))
                 .collect(Collectors.toList());

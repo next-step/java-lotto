@@ -1,7 +1,8 @@
 package lotto.domain.lotto;
 
-import lotto.domain.WinningStatistics;
 import lotto.domain.exception.InvalidMoneyException;
+import lotto.domain.winning.WinningReward;
+import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +11,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,12 +45,12 @@ public class LottosTest {
     @DisplayName("로또 당첨통게")
     @ParameterizedTest
     @MethodSource("getLottos")
-    public void getWinningStatistics(Lottos lottos, List<Integer> expectedLottoCount) {
+    public void getWinningStatistics(Lottos lottos, Map<Integer, Integer> expectedLottoCount) {
         WinningStatistics statistics = lottos.getWinningStatistics(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        for (int winningCount = 0; winningCount <= 6; winningCount++) {
-            assertThat(statistics.getWinningLottoCount(winningCount)).isEqualTo(expectedLottoCount.get(winningCount));
-        }
+        WinningReward.winningCountStream()
+                .forEach(winningCount -> assertThat(statistics.getWinningLottoCount(winningCount)).isEqualTo(expectedLottoCount.get(winningCount)));
+        ;
     }
 
     static Stream<Arguments> getLottos() {
@@ -70,7 +72,12 @@ public class LottosTest {
                                 Lotto.ofNumbers(Arrays.asList(17, 21, 29, 37, 42, 45)),
                                 Lotto.ofNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))
                         )),
-                        Arrays.asList(7, 5, 1, 1, 0, 0, 0)
+                        new HashMap<Integer, Integer>() {{
+                            put(3, 1);
+                            put(4, 0);
+                            put(5, 0);
+                            put(6, 0);
+                        }}
                 )
         );
     }

@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.WinningStatistics;
 import lotto.domain.exception.InvalidMoneyException;
+import lotto.domain.winning.WinningStatistics;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +41,7 @@ public class Lottos {
     }
 
     public WinningStatistics getWinningStatistics(List<Integer> lastLottoNumbers) {
-        WinningStatistics statistics = WinningStatistics.empty();
+        WinningStatistics statistics = WinningStatistics.zero();
         lottos.forEach(lotto -> {
             statistics.increaseWinningLottoCount(lotto.getWinningCount(lastLottoNumbers));
         });

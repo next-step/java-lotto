@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.domain.winning;
 
 import lotto.domain.exception.InvalidWinningCountException;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public enum WinningReward {
     THREE(3, 5_000),
@@ -14,12 +15,16 @@ public enum WinningReward {
     private static final int MIN_WINNING_COUNT = 3;
     private static final int MAX_WINNING_COUNT = 6;
 
-    int count;
-    int winningPrice;
+    private final int count;
+    private final int winningPrice;
 
     WinningReward(int count, int winningPrice) {
         this.count = count;
         this.winningPrice = winningPrice;
+    }
+
+    public static Stream<Integer> winningCountStream() {
+        return Arrays.stream(values()).map(winningReward -> winningReward.count);
     }
 
     public int getCount() {

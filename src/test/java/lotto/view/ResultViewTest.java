@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.WinningStatistics;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ public class ResultViewTest {
 
         resultView.showResult(WinningStatistics.of(new HashMap<Integer, Integer>() {{
             put(3, 1);
-        }}), 0.35);
+        }}), 10_000);
 
         assertThat(output.toString()).isEqualTo("\n당첨 통계\n" +
                 "---------\n" +
@@ -47,7 +47,7 @@ public class ResultViewTest {
                 "4개 일치 (50000원)- 0개\n" +
                 "5개 일치 (1500000원)- 0개\n" +
                 "6개 일치 (2000000000원)- 0개\n" +
-                "총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n");
+                "총 수익률은 0.50입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n");
     }
 
     @DisplayName("1이상인 수익률 결과 출력")
@@ -57,7 +57,7 @@ public class ResultViewTest {
 
         resultView.showResult(WinningStatistics.of(new HashMap<Integer, Integer>() {{
             put(3, 1);
-        }}), 1.1);
+        }}), 1_000);
 
         assertThat(output.toString()).isEqualTo("\n당첨 통계\n" +
                 "---------\n" +
@@ -65,6 +65,6 @@ public class ResultViewTest {
                 "4개 일치 (50000원)- 0개\n" +
                 "5개 일치 (1500000원)- 0개\n" +
                 "6개 일치 (2000000000원)- 0개\n" +
-                "총 수익률은 1.10입니다.\n");
+                "총 수익률은 5.00입니다.\n");
     }
 }

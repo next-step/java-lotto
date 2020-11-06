@@ -1,21 +1,18 @@
 package lotto.domain;
 
-import lotto.domain.exception.InvalidWinningCountException;
+import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("당첨 통계 테스트")
 public class WinningStatisticsTest {
-    WinningStatistics statistics = WinningStatistics.empty();
+    WinningStatistics statistics = WinningStatistics.zero();
 
     @DisplayName("당첨 통계 초기값")
     @Test
@@ -29,42 +26,15 @@ public class WinningStatisticsTest {
 
     @DisplayName("당첨 통계 누적")
     @ParameterizedTest
-    @MethodSource("getWinningCounts")
-    public void accumulateStatistics(int winningCount) {
+    @CsvSource(value = {"0:0", "1:0", "2:0", "3:1", "4:1", "5:1", "6:1", "7:0"}, delimiter = ':')
+    public void accumulateStatistics(int winningCount, int expectedLottoCount) {
         statistics.increaseWinningLottoCount(winningCount);
 
         int lottoCount = statistics.getWinningLottoCount(winningCount);
 
-        assertThat(lottoCount).isEqualTo(1);
+        assertThat(lottoCount).isEqualTo(expectedLottoCount);
     }
 
-    static Stream<Integer> getWinningCounts() {
-        return IntStream.range(0, 7).boxed();
-    }
-
-    @DisplayName("0보다 작거나 6보다 큰 당첨 숫자 개수로 누적")
-    @ParameterizedTest
-    @MethodSource("getInvalidWinningCounts")
-    public void accumulateInvalidStatistics(int winningCount) {
-        assertThatThrownBy(() -> {
-            statistics.increaseWinningLottoCount(winningCount);
-        }).isInstanceOf(InvalidWinningCountException.class)
-                .hasMessageContaining("잘못된 당첨 숫자 개수입니다.");
-    }
-
-    static Stream<Integer> getInvalidWinningCounts() {
-        return Stream.of(-1, 7, 8);
-    }
-
-    @DisplayName("0보다 작거나 6보다 큰 당첨 숫자 개수로 조회")
-    @ParameterizedTest
-    @MethodSource("getInvalidWinningCounts")
-    public void getInvalidStatistics(int winningCount) {
-        assertThatThrownBy(() -> {
-            statistics.getWinningLottoCount(winningCount);
-        }).isInstanceOf(InvalidWinningCountException.class)
-                .hasMessageContaining("잘못된 당첨 숫자 개수입니다.");
-    }
 
     @DisplayName("당첨 통계를 기준으로 당첨 금액 계산")
     @Test
