@@ -73,12 +73,12 @@ public class StringAddCalculatorTest {
             return toNumber(formula);
         }
 
-        private Long toNumber(String formula) {
-            if (formula.isEmpty()) {
+        private Long toNumber(String numericString) {
+            if (numericString.isEmpty()) {
                 return 0L;
             }
 
-            Long number = toLong(formula);
+            Long number = toLong(numericString);
 
             ensurePositiveNumber(number);
 
