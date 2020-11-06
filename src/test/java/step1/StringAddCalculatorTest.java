@@ -112,20 +112,28 @@ public class StringAddCalculatorTest {
         }
 
         private String[] parse(String formulaInput) {
-            StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
+            String splitRegex = makeSplitRegex(formulaInput);
+
+            String formula = makeResultFormula(formulaInput);
+
+            return formula.split(splitRegex);
+        }
+
+        private String makeResultFormula(String formulaInput) {
             String formula = formulaInput;
+            if (startWithCustomDelimiterIndicator(formulaInput)) {
+                formula = formulaInput.substring(formulaInput.indexOf("\n") + 1);
+            }
+            return formula;
+        }
+
+        private String makeSplitRegex(String formulaInput) {
+            StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
             if (startWithCustomDelimiterIndicator(formulaInput)) {
                 String customDelimiter = formulaInput.substring(2, formulaInput.indexOf("\n"));
                 delimiterString.append(customDelimiter);
             }
-
-            if (startWithCustomDelimiterIndicator(formulaInput)) {
-                formula = formulaInput.substring(formulaInput.indexOf("\n") + 1);
-            }
-
-            String splitRegex = delimiterString.insert(0, '[').append(']').toString();
-
-            return formula.split(splitRegex);
+            return delimiterString.insert(0, '[').append(']').toString();
         }
 
         private boolean startWithCustomDelimiterIndicator(String formulaInput) {
