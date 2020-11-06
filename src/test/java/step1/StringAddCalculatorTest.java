@@ -76,7 +76,14 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            return toNumber(formula);
+            String[] split = formula.split(",");
+
+            Long result = 0L;
+            for (String string : split) {
+                result += toNumber(string);
+            }
+
+            return result;
         }
 
         private Long toNumber(String numericString) {
