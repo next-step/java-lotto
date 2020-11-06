@@ -100,19 +100,7 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            return sum(parse(formula));
-        }
-
-        private Long sum(String[] numericStrings) {
-            Long result = 0L;
-            for (String numericString : numericStrings) {
-                result += toNumber(numericString);
-            }
-            return result;
-        }
-
-        private String[] parse(String formulaInput) {
-            return makeResultFormula(formulaInput).split(makeSplitRegex(formulaInput));
+            return sum(new FormulaParser(formula).invoke());
         }
 
         private String makeResultFormula(String formulaInput) {
@@ -129,10 +117,13 @@ public class StringAddCalculatorTest {
         private String makeSplitRegex(String formulaInput) {
             StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
             if (startWithCustomDelimiterIndicator(formulaInput)) {
-                String customDelimiter = formulaInput.substring(2, formulaInput.indexOf("\n"));
-                delimiterString.append(customDelimiter);
+                delimiterString.append(extractCustomDelimiter(formulaInput));
             }
             return makeRegexString(delimiterString);
+        }
+
+        private String extractCustomDelimiter(String formulaInput) {
+            return formulaInput.substring(2, formulaInput.indexOf("\n"));
         }
 
         private String makeRegexString(StringBuilder delimiterString) {
@@ -141,6 +132,14 @@ public class StringAddCalculatorTest {
 
         private boolean startWithCustomDelimiterIndicator(String formulaInput) {
             return formulaInput.startsWith("//");
+        }
+
+        private Long sum(String[] numericStrings) {
+            Long result = 0L;
+            for (String numericString : numericStrings) {
+                result += toNumber(numericString);
+            }
+            return result;
         }
 
         private Long toNumber(String numericString) {
@@ -166,6 +165,22 @@ public class StringAddCalculatorTest {
         private void ensurePositiveNumber(Long number) {
             if (number < 0L) {
                 throw new RuntimeException(String.format("음수는 처리할 수 없습니다. : %d", number));
+            }
+        }
+
+        private class FormulaParser {
+            private String formula;
+
+            public FormulaParser(String formula) {
+                this.formula = formula;
+            }
+
+            public String[] invoke() {
+                return parse(formula);
+            }
+
+            private String[] parse(String formulaInput) {
+                return makeResultFormula(formulaInput).split(makeSplitRegex(formulaInput));
             }
         }
     }
