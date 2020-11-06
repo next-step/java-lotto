@@ -138,6 +138,10 @@ public class StringAddCalculatorTest {
         }
 
         private class FormulaParser {
+            public static final String CUSTOM_DELIMITER_START = "//";
+            public static final String CUSTOM_DELIMITER_END = "\n";
+            public static final char REGEX_CHARACTER_SET_START = '[';
+            public static final char REGEX_CHARACTER_SET_END = ']';
             private final String formula;
 
             public FormulaParser(String formula) {
@@ -156,7 +160,7 @@ public class StringAddCalculatorTest {
             }
 
             private String subtractCustomDelimiterIndicator() {
-                return formula.substring(formula.indexOf("\n") + 1);
+                return formula.substring(formula.indexOf(CUSTOM_DELIMITER_END) + 1);
             }
 
             private String makeSplitRegex() {
@@ -168,15 +172,15 @@ public class StringAddCalculatorTest {
             }
 
             private String extractCustomDelimiter(String formulaInput) {
-                return formulaInput.substring(2, formulaInput.indexOf("\n"));
+                return formulaInput.substring(2, formulaInput.indexOf(CUSTOM_DELIMITER_END));
             }
 
             private String makeRegexString(StringBuilder delimiterString) {
-                return delimiterString.insert(0, '[').append(']').toString();
+                return delimiterString.insert(0, REGEX_CHARACTER_SET_START).append(REGEX_CHARACTER_SET_END).toString();
             }
 
             private boolean startWithCustomDelimiterIndicator() {
-                return formula.startsWith("//");
+                return formula.startsWith(CUSTOM_DELIMITER_START);
             }
         }
     }
