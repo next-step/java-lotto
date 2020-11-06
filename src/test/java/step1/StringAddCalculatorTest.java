@@ -100,12 +100,15 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
+            StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
             String formula = formulaInput;
             if (formulaInput.startsWith("//")) {
+                String customDelimiter = formulaInput.substring(2, formulaInput.indexOf("\n"));
+                delimiterString.append(customDelimiter);
                 formula = formulaInput.substring(formulaInput.indexOf("\n") + 1);
             }
 
-            String splitRegex = "[" + defaultDelimiterString + "]";
+            String splitRegex = delimiterString.insert(0, '[').append(']').toString();
 
             String[] split = formula.split(splitRegex);
 
@@ -113,7 +116,6 @@ public class StringAddCalculatorTest {
             for (String string : split) {
                 result += toNumber(string);
             }
-
             return result;
         }
 
