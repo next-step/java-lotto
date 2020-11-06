@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("사용자 입력 뷰 테스트")
 public class InputViewTest {
@@ -55,8 +56,8 @@ public class InputViewTest {
 
     static Stream<Arguments> getLastLottoNumbers() {
         return Stream.of(
-                Arguments.arguments("1, 2, 3, 4, 5, 6", new Integer[]{1, 2, 3, 4, 5, 6}),
-                Arguments.arguments("3, 4, 5, 6, 7, 8", new Integer[]{3, 4, 5, 6, 7, 8})
+                arguments("1, 2, 3, 4, 5, 6", new Integer[]{1, 2, 3, 4, 5, 6}),
+                arguments("3, 4, 5, 6, 7, 8", new Integer[]{3, 4, 5, 6, 7, 8})
         );
     }
 
