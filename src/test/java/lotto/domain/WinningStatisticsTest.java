@@ -73,11 +73,11 @@ public class WinningStatisticsTest {
             put(3, 1);
             put(4, 1);
             put(5, 1);
-            put(6, 1);
+            put(6, 0);
         }});
 
         int revenue = statistics.calculateRevenue();
 
-        assertThat(revenue).isEqualTo(2001555000);
+        assertThat(revenue).isEqualTo(1555000);
     }
 }

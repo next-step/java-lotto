@@ -47,4 +47,10 @@ public class Lottos {
         });
         return statistics;
     }
+
+    public List<List<Integer>> getLottoNumbers() {
+        return lottos.stream()
+                .map(Lotto::getNumbers)
+                .collect(Collectors.toList());
+    }
 }

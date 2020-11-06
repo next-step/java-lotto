@@ -17,17 +17,25 @@ public class WinningStatistics {
     }
 
     public static WinningStatistics empty() {
+        Map<Integer, Integer> statistics = getEmptyMap();
+        return new WinningStatistics(statistics);
+    }
+
+    private static Map<Integer, Integer> getEmptyMap() {
         Map<Integer, Integer> statistics = new HashMap<>();
         for (int winningCount = 0; winningCount <= MAX_WINNING_COUNT; winningCount++) {
             statistics.put(winningCount, 0);
         }
-        return new WinningStatistics(statistics);
+        return statistics;
     }
 
     public static WinningStatistics of(Map<Integer, Integer> statistics) {
-        statistics.keySet()
-                .forEach(WinningStatistics::validateWinningCount);
-        return new WinningStatistics(statistics);
+        Map<Integer, Integer> newStatistics = getEmptyMap();
+        for (Integer winningCount : statistics.keySet()) {
+            validateWinningCount(winningCount);
+            newStatistics.put(winningCount, statistics.get(winningCount));
+        }
+        return new WinningStatistics(newStatistics);
     }
 
 
@@ -50,7 +58,7 @@ public class WinningStatistics {
     public int calculateRevenue() {
         return IntStream.range(MIN_WINNING_COUNT, MAX_WINNING_COUNT + 1)
                 .filter(WinningReward::hasWinningPrice)
-                .map(WinningReward::getWinningPrice)
+                .map(winningCount -> WinningReward.getWinningPrice(winningCount) * getWinningLottoCount(winningCount))
                 .sum();
     }
 }

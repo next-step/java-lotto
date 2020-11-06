@@ -22,6 +22,14 @@ public enum WinningReward {
         this.winningPrice = winningPrice;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public int getWinningPrice() {
+        return winningPrice;
+    }
+
     public static Integer getWinningPrice(int winningCount) {
         return findWinningCount(winningCount)
                 .map(rule -> rule.winningPrice)
