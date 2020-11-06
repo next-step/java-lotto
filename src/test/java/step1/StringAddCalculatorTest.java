@@ -77,6 +77,12 @@ public class StringAddCalculatorTest {
         assertThat(calculator.calculate("//;\n1,1")).isEqualTo(2L);
     }
 
+    @DisplayName("커스텀 구분자를 통해 덧셈이 가능하다")
+    @Test
+    void addWithCustomDelimiter() {
+        assertThat(calculator.calculate("//;\n1;1")).isEqualTo(2L);
+    }
+
     private static class StringAddCalculator {
 
         private final String defaultDelimiterString;
