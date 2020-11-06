@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -49,4 +50,28 @@ public class LottoTest {
                 arguments(Arrays.asList(1, 2, 3, 4, 5, 46))
         );
     }
+
+    @DisplayName("당첨된 숫자 개수")
+    @ParameterizedTest
+    @MethodSource("getLastLottoNumbers")
+    public void getWinningCount(List<Integer> lastLottoNumbers, Integer expectedWinningCount) {
+        Lotto lotto = Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Integer winningCount = lotto.getWinningCount(lastLottoNumbers);
+
+        assertThat(winningCount).isEqualTo(expectedWinningCount);
+    }
+
+    static Stream<Arguments> getLastLottoNumbers() {
+        return Stream.of(
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 45), 5),
+                arguments(Arrays.asList(1, 2, 3, 4, 44, 45), 4),
+                arguments(Arrays.asList(1, 2, 3, 43, 44, 45), 3),
+                arguments(Arrays.asList(1, 2, 42, 43, 44, 45), 2),
+                arguments(Arrays.asList(1, 41, 42, 43, 44, 45), 1),
+                arguments(Arrays.asList(40, 41, 42, 43, 44, 45), 0)
+        );
+    }
+
 }

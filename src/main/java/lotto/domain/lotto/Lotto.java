@@ -40,4 +40,14 @@ public class Lotto {
             }
         };
     }
+
+    public Integer getWinningCount(List<Integer> lastLottoNumbers) {
+        return (int) lastLottoNumbers.stream()
+                .filter(this::hasNumber)
+                .count();
+    }
+
+    private boolean hasNumber(Integer number) {
+        return numbers.contains(number);
+    }
 }
