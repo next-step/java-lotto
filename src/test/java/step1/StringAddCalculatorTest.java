@@ -112,19 +112,14 @@ public class StringAddCalculatorTest {
         }
 
         private String[] parse(String formulaInput) {
-            String splitRegex = makeSplitRegex(formulaInput);
-
-            String formula = makeResultFormula(formulaInput);
-
-            return formula.split(splitRegex);
+            return makeResultFormula(formulaInput).split(makeSplitRegex(formulaInput));
         }
 
         private String makeResultFormula(String formulaInput) {
-            String formula = formulaInput;
             if (startWithCustomDelimiterIndicator(formulaInput)) {
-                formula = formulaInput.substring(formulaInput.indexOf("\n") + 1);
+                return formulaInput.substring(formulaInput.indexOf("\n") + 1);
             }
-            return formula;
+            return formulaInput;
         }
 
         private String makeSplitRegex(String formulaInput) {
