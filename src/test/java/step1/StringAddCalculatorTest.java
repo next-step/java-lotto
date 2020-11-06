@@ -67,7 +67,11 @@ public class StringAddCalculatorTest {
                 return 0L;
             }
 
-            return Long.valueOf(formula);
+            try {
+                return Long.valueOf(formula);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(String.format("숫자로 변환가능한 문자가 아닙니다. : %s", formula), e);
+            }
         }
     }
 }
