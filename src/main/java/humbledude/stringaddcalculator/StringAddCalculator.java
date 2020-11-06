@@ -13,7 +13,9 @@ public class StringAddCalculator {
         String[] strNumbers = input.split(DEAFAULT_SPLIT_TOKEN);
 
         for (String strNumber : strNumbers) {
-            sum += parseInt(strNumber);
+            int number = parseInt(strNumber);
+            validateNumber(number);
+            sum += number;
         }
 
         return sum;
@@ -31,12 +33,19 @@ public class StringAddCalculator {
     }
 
     private static int parseInt(String strNumber) {
-        int number = Integer.parseInt(strNumber);
-
-        if (number < 0) {
-            throw new RuntimeException("음수는 지원하지 않습니다");
+        int number;
+        try {
+            number = Integer.parseInt(strNumber);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 이외의 문자가 입력됨");
         }
 
         return number;
+    }
+
+    private static void validateNumber(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 지원하지 않습니다");
+        }
     }
 }
