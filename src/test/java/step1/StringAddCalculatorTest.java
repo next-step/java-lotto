@@ -64,16 +64,11 @@ public class StringAddCalculatorTest {
                 .hasMessage("음수는 처리할 수 없습니다. : -1");
     }
 
-    @DisplayName("콤마를 기준으로 더한다.")
-    @Test
-    void addWithComma() {
-        assertThat(calculator.calculate("1,2")).isEqualTo(3L);
-    }
-
-    @DisplayName("콜론을 기준으로 더한다.")
-    @Test
-    void addWithColon() {
-        assertThat(calculator.calculate("1:2:3")).isEqualTo(6L);
+    @DisplayName("콤마와 콜론을 기준으로 더한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2=3", "1:2:3=6"}, delimiter = '=')
+    void addWithCommaOrColon(String formula, Long result) {
+        assertThat(calculator.calculate(formula)).isEqualTo(result);
     }
 
     private static class StringAddCalculator {
