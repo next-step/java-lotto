@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -44,6 +45,16 @@ public class StringAddCalculatorTest {
     @CsvSource({"0,0", "1,1", "2,2", "9999,9999"})
     void oneNumber(String stringType, Long longType) {
         assertThat(calculator.calculate(stringType)).isEqualTo(longType);
+    }
+
+
+    @DisplayName("숫자 이외의 값을 입력하면 RuntimeException 을 발생한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"A", "가"})
+    void noNumericStrings(String noNumeric) {
+        assertThatThrownBy(() -> calculator.calculate(noNumeric)) //
+                .isInstanceOf(RuntimeException.class) //
+                .hasMessage("숫자로 변환가능한 문자가 아닙니다. : %s", noNumeric);
     }
 
     private static class StringAddCalculator {
