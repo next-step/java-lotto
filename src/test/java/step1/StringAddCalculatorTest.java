@@ -70,22 +70,33 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
+            return toNumber(formula);
+        }
+
+        private Long toNumber(String formula) {
             if (formula.isEmpty()) {
                 return 0L;
             }
 
-            Long number;
+            Long number = toLong(formula);
+
+            ensurePositiveNumber(number);
+
+            return number;
+        }
+
+        private Long toLong(String formula) {
             try {
-                number = Long.valueOf(formula);
+                return Long.valueOf(formula);
             } catch (NumberFormatException e) {
                 throw new RuntimeException(String.format("숫자로 변환가능한 문자가 아닙니다. : %s", formula), e);
             }
+        }
 
-            if (number < 0) {
-                throw new RuntimeException(String.format("음수는 처리할 수 없습니다. : %s", formula));
+        private void ensurePositiveNumber(Long number) {
+            if (number < 0L) {
+                throw new RuntimeException(String.format("음수는 처리할 수 없습니다. : %d", number));
             }
-
-            return number;
         }
     }
 }
