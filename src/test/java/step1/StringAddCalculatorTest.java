@@ -72,12 +72,23 @@ public class StringAddCalculatorTest {
     }
 
     private static class StringAddCalculator {
+
+        private final String delimiterString;
+
+        public StringAddCalculator() {
+            this(",:");
+        }
+
+        public StringAddCalculator(String delimiterString) {
+            this.delimiterString = delimiterString;
+        }
+
         public Long calculate(String formula) {
             if (formula == null) {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            String[] split = formula.split("[,:]");
+            String[] split = formula.split("[" + delimiterString + "]");
 
             Long result = 0L;
             for (String string : split) {
