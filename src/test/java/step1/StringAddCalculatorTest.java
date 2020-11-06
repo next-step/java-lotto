@@ -103,37 +103,6 @@ public class StringAddCalculatorTest {
             return sum(new FormulaParser(formula).invoke());
         }
 
-        private String makeResultFormula(String formulaInput) {
-            if (startWithCustomDelimiterIndicator(formulaInput)) {
-                return subtractCustomDelimiterIndicator(formulaInput);
-            }
-            return formulaInput;
-        }
-
-        private String subtractCustomDelimiterIndicator(String formulaInput) {
-            return formulaInput.substring(formulaInput.indexOf("\n") + 1);
-        }
-
-        private String makeSplitRegex(String formulaInput) {
-            StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
-            if (startWithCustomDelimiterIndicator(formulaInput)) {
-                delimiterString.append(extractCustomDelimiter(formulaInput));
-            }
-            return makeRegexString(delimiterString);
-        }
-
-        private String extractCustomDelimiter(String formulaInput) {
-            return formulaInput.substring(2, formulaInput.indexOf("\n"));
-        }
-
-        private String makeRegexString(StringBuilder delimiterString) {
-            return delimiterString.insert(0, '[').append(']').toString();
-        }
-
-        private boolean startWithCustomDelimiterIndicator(String formulaInput) {
-            return formulaInput.startsWith("//");
-        }
-
         private Long sum(String[] numericStrings) {
             Long result = 0L;
             for (String numericString : numericStrings) {
@@ -181,6 +150,37 @@ public class StringAddCalculatorTest {
 
             private String[] parse(String formulaInput) {
                 return makeResultFormula(formulaInput).split(makeSplitRegex(formulaInput));
+            }
+
+            private String makeResultFormula(String formulaInput) {
+                if (startWithCustomDelimiterIndicator(formulaInput)) {
+                    return subtractCustomDelimiterIndicator(formulaInput);
+                }
+                return formulaInput;
+            }
+
+            private String subtractCustomDelimiterIndicator(String formulaInput) {
+                return formulaInput.substring(formulaInput.indexOf("\n") + 1);
+            }
+
+            private String makeSplitRegex(String formulaInput) {
+                StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
+                if (startWithCustomDelimiterIndicator(formulaInput)) {
+                    delimiterString.append(extractCustomDelimiter(formulaInput));
+                }
+                return makeRegexString(delimiterString);
+            }
+
+            private String extractCustomDelimiter(String formulaInput) {
+                return formulaInput.substring(2, formulaInput.indexOf("\n"));
+            }
+
+            private String makeRegexString(StringBuilder delimiterString) {
+                return delimiterString.insert(0, '[').append(']').toString();
+            }
+
+            private boolean startWithCustomDelimiterIndicator(String formulaInput) {
+                return formulaInput.startsWith("//");
             }
         }
     }
