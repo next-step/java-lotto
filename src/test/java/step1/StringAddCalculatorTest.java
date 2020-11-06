@@ -71,6 +71,12 @@ public class StringAddCalculatorTest {
         assertThat(calculator.calculate(formula)).isEqualTo(result);
     }
 
+    @DisplayName("커스텀 구분자를 입력 받을 수 있다")
+    @Test
+    void acceptCustomDelimiter() {
+        assertThat(calculator.calculate("//;\n1,1")).isEqualTo(2L);
+    }
+
     private static class StringAddCalculator {
 
         private final String delimiterString;
