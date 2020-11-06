@@ -100,7 +100,7 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            return sum(new FormulaParser(formula).invoke());
+            return sum(new FormulaParser(formula).parse());
         }
 
         private Long sum(String[] numericStrings) {
@@ -138,35 +138,31 @@ public class StringAddCalculatorTest {
         }
 
         private class FormulaParser {
-            private String formula;
+            private final String formula;
 
             public FormulaParser(String formula) {
                 this.formula = formula;
             }
 
-            public String[] invoke() {
-                return parse(formula);
+            public String[] parse() {
+                return makeResultFormula().split(makeSplitRegex());
             }
 
-            private String[] parse(String formulaInput) {
-                return makeResultFormula(formulaInput).split(makeSplitRegex(formulaInput));
-            }
-
-            private String makeResultFormula(String formulaInput) {
-                if (startWithCustomDelimiterIndicator(formulaInput)) {
-                    return subtractCustomDelimiterIndicator(formulaInput);
+            private String makeResultFormula() {
+                if (startWithCustomDelimiterIndicator()) {
+                    return subtractCustomDelimiterIndicator();
                 }
-                return formulaInput;
+                return formula;
             }
 
-            private String subtractCustomDelimiterIndicator(String formulaInput) {
-                return formulaInput.substring(formulaInput.indexOf("\n") + 1);
+            private String subtractCustomDelimiterIndicator() {
+                return formula.substring(formula.indexOf("\n") + 1);
             }
 
-            private String makeSplitRegex(String formulaInput) {
+            private String makeSplitRegex() {
                 StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
-                if (startWithCustomDelimiterIndicator(formulaInput)) {
-                    delimiterString.append(extractCustomDelimiter(formulaInput));
+                if (startWithCustomDelimiterIndicator()) {
+                    delimiterString.append(extractCustomDelimiter(formula));
                 }
                 return makeRegexString(delimiterString);
             }
@@ -179,8 +175,8 @@ public class StringAddCalculatorTest {
                 return delimiterString.insert(0, '[').append(']').toString();
             }
 
-            private boolean startWithCustomDelimiterIndicator(String formulaInput) {
-                return formulaInput.startsWith("//");
+            private boolean startWithCustomDelimiterIndicator() {
+                return formula.startsWith("//");
             }
         }
     }
