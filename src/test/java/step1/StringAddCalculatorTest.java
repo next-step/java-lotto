@@ -154,12 +154,12 @@ public class StringAddCalculatorTest {
 
             private String makeResultFormula() {
                 if (startWithCustomDelimiterIndicator()) {
-                    return subtractCustomDelimiterIndicator();
+                    return subtractCustomDelimiterIndicatorFromFormula();
                 }
                 return formula;
             }
 
-            private String subtractCustomDelimiterIndicator() {
+            private String subtractCustomDelimiterIndicatorFromFormula() {
                 return formula.substring(formula.indexOf(CUSTOM_DELIMITER_END) + 1);
             }
 
@@ -171,8 +171,8 @@ public class StringAddCalculatorTest {
                 return makeRegexString(delimiterString);
             }
 
-            private String extractCustomDelimiter(String formulaInput) {
-                return formulaInput.substring(2, formulaInput.indexOf(CUSTOM_DELIMITER_END));
+            private String extractCustomDelimiter(String formula) {
+                return formula.substring(2, formula.indexOf(CUSTOM_DELIMITER_END));
             }
 
             private String makeRegexString(StringBuilder delimiterString) {
