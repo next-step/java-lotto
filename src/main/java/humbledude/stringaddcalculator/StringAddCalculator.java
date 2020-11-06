@@ -1,7 +1,10 @@
 package humbledude.stringaddcalculator;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringAddCalculator {
 
@@ -9,25 +12,16 @@ public class StringAddCalculator {
     private static final String CUSTOM_SPLIT_TOKEN_PATTERN = "^//(.)\n(.*)$";
 
     public static int splitAndSum(String input) {
-        int sum = 0;
-        if (!isValidInput(input)) {
-            return sum;
+        if (!isEmptyInput(input)) {
+            return 0;
         }
 
-        String splitToken = getSplitToken(input);
-        String body = getBody(input);
-        String[] strNumbers = body.split(splitToken);
-
-        for (String strNumber : strNumbers) {
-            int number = parseInt(strNumber);
-            validateNumber(number);
-            sum += number;
-        }
-
-        return sum;
+        List<Integer> numbers = parseInputToNumbers(input);
+        return numbers.stream().mapToInt(Integer::intValue)
+                .sum();
     }
 
-    private static boolean isValidInput(String input) {
+    private static boolean isEmptyInput(String input) {
         if (input == null) {
             return false;
         }
@@ -38,37 +32,34 @@ public class StringAddCalculator {
         return true;
     }
 
-    private static String getSplitToken(String input) {
+    private static List<Integer> parseInputToNumbers(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TOKEN_PATTERN)
                 .matcher(input);
 
-        if (matcher.find()) {
-            return matcher.group(1);
+        if (!matcher.find()) {
+            return splitInputToNumbers(DEFAULT_SPLIT_TOKEN, input);
         }
 
-        return DEFAULT_SPLIT_TOKEN;
+        String splitToken = matcher.group(1);
+        String inputBody = matcher.group(2);
+        return splitInputToNumbers(splitToken, inputBody);
     }
 
-    private static String getBody(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TOKEN_PATTERN)
-                .matcher(input);
+    private static List<Integer> splitInputToNumbers(String splitToken, String inputBody) {
+        String[] strNumbers = inputBody.split(splitToken);
 
-        if (matcher.find()) {
-            return matcher.group(2);
-        }
-
-        return input;
+        return Stream.of(strNumbers)
+                .map(StringAddCalculator::parseToInteger)
+                .peek(StringAddCalculator::validateNumber)
+                .collect(Collectors.toList());
     }
 
-    private static int parseInt(String strNumber) {
-        int number;
+    private static Integer parseToInteger(String strNumber) {
         try {
-            number = Integer.parseInt(strNumber);
+            return Integer.valueOf(strNumber);
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자 이외의 문자가 입력됨");
         }
-
-        return number;
     }
 
     private static void validateNumber(int number) {
