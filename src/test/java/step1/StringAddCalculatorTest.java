@@ -79,22 +79,29 @@ public class StringAddCalculatorTest {
 
     private static class StringAddCalculator {
 
-        private final String delimiterString;
+        private final String defaultDelimiterString;
 
         public StringAddCalculator() {
             this(",:");
         }
 
-        public StringAddCalculator(String delimiterString) {
-            this.delimiterString = delimiterString;
+        public StringAddCalculator(String defaultDelimiterString) {
+            this.defaultDelimiterString = defaultDelimiterString;
         }
 
-        public Long calculate(String formula) {
-            if (formula == null) {
+        public Long calculate(String formulaInput) {
+            if (formulaInput == null) {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            String[] split = formula.split("[" + delimiterString + "]");
+            String formula = formulaInput;
+            if (formulaInput.startsWith("//")) {
+                formula = formulaInput.substring(formulaInput.indexOf("\n") + 1);
+            }
+
+            String splitRegex = "[" + defaultDelimiterString + "]";
+
+            String[] split = formula.split(splitRegex);
 
             Long result = 0L;
             for (String string : split) {
