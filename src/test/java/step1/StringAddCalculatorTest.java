@@ -95,11 +95,23 @@ public class StringAddCalculatorTest {
             this.defaultDelimiterString = defaultDelimiterString;
         }
 
-        public Long calculate(String formulaInput) {
-            if (formulaInput == null) {
+        public Long calculate(String formula) {
+            if (formula == null) {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
+            return sum(parse(formula));
+        }
+
+        private Long sum(String[] numericStrings) {
+            Long result = 0L;
+            for (String numericString : numericStrings) {
+                result += toNumber(numericString);
+            }
+            return result;
+        }
+
+        private String[] parse(String formulaInput) {
             StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
             String formula = formulaInput;
             if (formulaInput.startsWith("//")) {
@@ -110,13 +122,7 @@ public class StringAddCalculatorTest {
 
             String splitRegex = delimiterString.insert(0, '[').append(']').toString();
 
-            String[] split = formula.split(splitRegex);
-
-            Long result = 0L;
-            for (String string : split) {
-                result += toNumber(string);
-            }
-            return result;
+            return formula.split(splitRegex);
         }
 
         private Long toNumber(String numericString) {
