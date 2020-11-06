@@ -166,12 +166,12 @@ public class StringAddCalculatorTest {
             private String makeSplitRegex(String defaultDelimiterString) {
                 StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
                 if (startWithCustomDelimiterIndicator()) {
-                    delimiterString.append(extractCustomDelimiter(formula));
+                    delimiterString.append(extractCustomDelimiter());
                 }
                 return makeRegexString(delimiterString);
             }
 
-            private String extractCustomDelimiter(String formula) {
+            private String extractCustomDelimiter() {
                 return formula.substring(2, formula.indexOf(CUSTOM_DELIMITER_END));
             }
 
