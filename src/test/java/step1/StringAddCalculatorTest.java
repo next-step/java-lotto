@@ -64,6 +64,12 @@ public class StringAddCalculatorTest {
                 .hasMessage("음수는 처리할 수 없습니다. : -1");
     }
 
+    @DisplayName("콤마를 기준으로 더한다.")
+    @Test
+    void addWithComma() {
+        assertThat(calculator.calculate("1,2")).isEqualTo(3L);
+    }
+
     private static class StringAddCalculator {
         public Long calculate(String formula) {
             if (formula == null) {
