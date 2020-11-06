@@ -100,7 +100,7 @@ public class StringAddCalculatorTest {
                 throw new IllegalArgumentException("문자열을 입력하시오.");
             }
 
-            return sum(new FormulaParser(formula).parse());
+            return sum(new FormulaParser(formula).parse(defaultDelimiterString));
         }
 
         private Long sum(String[] numericStrings) {
@@ -137,7 +137,7 @@ public class StringAddCalculatorTest {
             }
         }
 
-        private class FormulaParser {
+        private static class FormulaParser {
             public static final String CUSTOM_DELIMITER_START = "//";
             public static final String CUSTOM_DELIMITER_END = "\n";
             public static final char REGEX_CHARACTER_SET_START = '[';
@@ -148,8 +148,8 @@ public class StringAddCalculatorTest {
                 this.formula = formula;
             }
 
-            public String[] parse() {
-                return makeResultFormula().split(makeSplitRegex());
+            public String[] parse(String delimiterString) {
+                return makeResultFormula().split(makeSplitRegex(delimiterString));
             }
 
             private String makeResultFormula() {
@@ -163,7 +163,7 @@ public class StringAddCalculatorTest {
                 return formula.substring(formula.indexOf(CUSTOM_DELIMITER_END) + 1);
             }
 
-            private String makeSplitRegex() {
+            private String makeSplitRegex(String defaultDelimiterString) {
                 StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
                 if (startWithCustomDelimiterIndicator()) {
                     delimiterString.append(extractCustomDelimiter(formula));
