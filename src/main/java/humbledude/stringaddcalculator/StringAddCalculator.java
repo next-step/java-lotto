@@ -2,7 +2,7 @@ package humbledude.stringaddcalculator;
 
 public class StringAddCalculator {
 
-    private static final String DEAFAULT_SPLIT_TOKEN = ",|;";
+    private static final String DEAFAULT_SPLIT_TOKEN = ",|:";
 
     public static int splitAndSum(String input) {
         int sum = 0;
