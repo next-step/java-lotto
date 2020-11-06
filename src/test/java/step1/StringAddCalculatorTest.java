@@ -117,9 +117,13 @@ public class StringAddCalculatorTest {
 
         private String makeResultFormula(String formulaInput) {
             if (startWithCustomDelimiterIndicator(formulaInput)) {
-                return formulaInput.substring(formulaInput.indexOf("\n") + 1);
+                return subtractCustomDelimiterIndicator(formulaInput);
             }
             return formulaInput;
+        }
+
+        private String subtractCustomDelimiterIndicator(String formulaInput) {
+            return formulaInput.substring(formulaInput.indexOf("\n") + 1);
         }
 
         private String makeSplitRegex(String formulaInput) {
@@ -128,6 +132,10 @@ public class StringAddCalculatorTest {
                 String customDelimiter = formulaInput.substring(2, formulaInput.indexOf("\n"));
                 delimiterString.append(customDelimiter);
             }
+            return makeRegexString(delimiterString);
+        }
+
+        private String makeRegexString(StringBuilder delimiterString) {
             return delimiterString.insert(0, '[').append(']').toString();
         }
 
