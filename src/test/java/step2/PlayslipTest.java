@@ -14,6 +14,13 @@ public class PlayslipTest {
         assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(2);
     }
 
+    @DisplayName("로또용지는 선택 하지 않으면 번호갯수가 0 이다.")
+    @Test
+    void zeroSizeOfNominatedNumbers() {
+        Playslip playslip = new Playslip();
+        assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(0);
+    }
+
     private static class Playslip {
         public void selectNumbers(int size) {
 
