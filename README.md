@@ -59,3 +59,21 @@
 ### 기능 목록 및 commit 로그 요구사항
 * 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 * git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
+
+### 시나리오
+> 시나리오 1. Playslip 에 NaturalSelection 으로 번호를 적어 LotteryAgent 에서 Money 를 주고 LottoTickets 을 받는다
+
+* Lottery Agent: 로또파는곳
+* Playslip: 로또 용지
+* Natural Selection: 지동선택
+* LottoTickets: 돈으로 교환한 로또 티켓
+* Money: 돈
+
+> 시나리오 2. WinningNumber 에게 LottoTickets 을 Drow 하여 LottoResult 를 생성한다.
+
+* Winning Number: 당첨번호
+* Lottery Draw: 추첨
+* Lotto Result : 번호 일치수 + 금액
+
+> 시나리오 3. Lotto Result 는 케이스별 번호 일치 횟수와 금액을 계산할 수 있다.   
+> Lotto Result 는 이익률을 계산할 수 있다.
