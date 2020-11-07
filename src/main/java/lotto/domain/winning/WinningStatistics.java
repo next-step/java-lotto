@@ -45,7 +45,7 @@ public class WinningStatistics {
     }
 
     public void increaseWinningLottoCount(int winningCount, boolean matchBonusNumber) {
-        WinningReward winningReward = WinningReward.findWinningCount(winningCount, matchBonusNumber);
+        WinningReward winningReward = WinningReward.valueOf(winningCount, matchBonusNumber);
         if (!winningReward.equals(ZERO)) {
             statistics.put(winningReward, getWinningLottoCount(winningReward) + 1);
         }

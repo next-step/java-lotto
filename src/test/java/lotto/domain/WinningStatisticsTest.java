@@ -31,7 +31,7 @@ public class WinningStatisticsTest {
     public void accumulateStatistics(int winningCount, boolean matchBonusNumber, int expectedLottoCount) {
         statistics.increaseWinningLottoCount(winningCount, matchBonusNumber);
 
-        int lottoCount = statistics.getWinningLottoCount(WinningReward.findWinningCount(winningCount, matchBonusNumber));
+        int lottoCount = statistics.getWinningLottoCount(WinningReward.valueOf(winningCount, matchBonusNumber));
 
         assertThat(lottoCount).isEqualTo(expectedLottoCount);
     }

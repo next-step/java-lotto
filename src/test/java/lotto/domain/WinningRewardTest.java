@@ -23,7 +23,7 @@ public class WinningRewardTest {
     @ParameterizedTest
     @MethodSource("getWinningCount")
     public void getWinningReward(int winningCount, boolean matchBonusNumber, WinningReward expetedWinningReward) {
-        WinningReward winningReward = WinningReward.findWinningCount(winningCount, matchBonusNumber);
+        WinningReward winningReward = WinningReward.valueOf(winningCount, matchBonusNumber);
 
         assertThat(winningReward).isEqualTo(expetedWinningReward);
     }
