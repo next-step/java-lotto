@@ -7,7 +7,6 @@ import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -17,6 +16,7 @@ public class ResultView {
     private static final String HEADER_WINNING = "당첨 통계";
     private static final String LINE_SEPARATION = "---------";
     private static final String FORMAT_FOR_WINNING = "%d개 일치 (%d원)- %d개";
+    private static final String FORMAT_FOR_WINNING_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String FORMAT_FOR_YIELD = "총 수익률은 %.2f입니다.";
     private static final String PHRASE_FOR_FACT_HITTING = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -46,17 +46,24 @@ public class ResultView {
         output.println();
         output.println(HEADER_WINNING);
         output.println(LINE_SEPARATION);
-        Arrays.stream(WinningReward.values())
+        WinningReward.valuesStreamWithoutZero()
                 .map(winningReward -> convertRewardAndStatisticsToString(winningReward, winningStatistics))
                 .forEach(output::println);
         output.println(convertYieldToString(yield));
     }
 
     private String convertRewardAndStatisticsToString(WinningReward winningReward, WinningStatistics winningStatistics) {
-        return String.format(FORMAT_FOR_WINNING,
+        if (winningReward.matchBonusNumber()) {
+            return formatWinning(winningReward, winningStatistics, FORMAT_FOR_WINNING_WITH_BONUS);
+        }
+        return formatWinning(winningReward, winningStatistics, FORMAT_FOR_WINNING);
+    }
+
+    private String formatWinning(WinningReward winningReward, WinningStatistics winningStatistics, String formatForWinning) {
+        return String.format(formatForWinning,
                 winningReward.getCount(),
                 winningReward.getWinningPrice(),
-                winningStatistics.getWinningLottoCount(winningReward.getCount()));
+                winningStatistics.getWinningLottoCount(winningReward));
     }
 
     private String convertYieldToString(double yield) {

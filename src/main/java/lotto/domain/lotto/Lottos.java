@@ -41,10 +41,10 @@ public class Lottos {
         return lottosCount;
     }
 
-    public WinningStatistics getWinningStatistics(Lotto lastWonLotto) {
+    public WinningStatistics getWinningStatistics(WinningLotto lastWonLotto) {
         WinningStatistics statistics = WinningStatistics.zero();
         lottos.forEach(lotto -> {
-            statistics.increaseWinningLottoCount(lotto.getWinningCount(lastWonLotto));
+            statistics.increaseWinningLottoCount(lotto.getWinningCount(lastWonLotto.getLotto()), lotto.hasNumber(lastWonLotto.getBonusLottoNumber()));
         });
         return statistics;
     }

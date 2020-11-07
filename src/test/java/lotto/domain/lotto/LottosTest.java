@@ -14,6 +14,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static lotto.domain.winning.WinningReward.FIVE;
+import static lotto.domain.winning.WinningReward.FIVE_WITH_BONUS;
+import static lotto.domain.winning.WinningReward.FOUR;
+import static lotto.domain.winning.WinningReward.SIX;
+import static lotto.domain.winning.WinningReward.THREE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -45,12 +50,11 @@ public class LottosTest {
     @DisplayName("로또 당첨통게")
     @ParameterizedTest
     @MethodSource("getLottos")
-    public void getWinningStatistics(Lottos lottos, Map<Integer, Integer> expectedLottoCount) {
-        WinningStatistics statistics = lottos.getWinningStatistics(Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    public void getWinningStatistics(Lottos lottos, Map<WinningReward, Integer> expectedLottoCount) {
+        WinningStatistics statistics = lottos.getWinningStatistics(WinningLotto.of(Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)));
 
-        WinningReward.winningCountStream()
-                .forEach(winningCount -> assertThat(statistics.getWinningLottoCount(winningCount)).isEqualTo(expectedLottoCount.get(winningCount)));
-        ;
+        WinningReward.valuesStreamWithoutZero()
+                .forEach(winningReward -> assertThat(statistics.getWinningLottoCount(winningReward)).isEqualTo(expectedLottoCount.get(winningReward)));
     }
 
     static Stream<Arguments> getLottos() {
@@ -72,11 +76,12 @@ public class LottosTest {
                                 Lotto.ofNumbers(Arrays.asList(17, 21, 29, 37, 42, 45)),
                                 Lotto.ofNumbers(Arrays.asList(3, 8, 27, 30, 35, 44))
                         )),
-                        new HashMap<Integer, Integer>() {{
-                            put(3, 1);
-                            put(4, 0);
-                            put(5, 0);
-                            put(6, 0);
+                        new HashMap<WinningReward, Integer>() {{
+                            put(THREE, 1);
+                            put(FOUR, 0);
+                            put(FIVE, 0);
+                            put(FIVE_WITH_BONUS, 0);
+                            put(SIX, 0);
                         }}
                 )
         );
