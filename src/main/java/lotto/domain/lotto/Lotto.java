@@ -52,7 +52,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean hasNumber(LottoNumber number) {
+    public boolean hasNumber(LottoNumber number) {
         return numbers.contains(number);
     }
 
