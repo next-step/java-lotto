@@ -1,5 +1,6 @@
 package step2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,10 +10,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PlayslipTest {
+
+    private Playslip playslip;
+
+    @BeforeEach
+    void setUp() {
+        playslip = new Playslip();
+    }
+
     @DisplayName("로또용지는 선택한 번호들을 제공한다.")
     @Test
     void selectNumbers() {
-        Playslip playslip = new Playslip();
         playslip.selectNumbers(2);
         assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(2);
     }
@@ -20,7 +28,6 @@ public class PlayslipTest {
     @DisplayName("로또용지는 선택 하지 않으면 번호갯수가 0 이다.")
     @Test
     void zeroSizeOfNominatedNumbers() {
-        Playslip playslip = new Playslip();
         assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(0);
     }
 
@@ -28,7 +35,6 @@ public class PlayslipTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
     void noPositiveNumberSelection(int selection) {
-        Playslip playslip = new Playslip();
         assertThatThrownBy(() -> playslip.selectNumbers(selection)) //
                 .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
