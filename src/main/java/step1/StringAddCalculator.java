@@ -20,7 +20,15 @@ public class StringAddCalculator {
         return str.split(delimiter);
     }
 
+    private static void validateNum(int num) {
+        if (num < 0) {
+            throw new RuntimeException();
+        }
+    }
+
     private static int parseStr(String str) {
+        int num = Integer.parseInt(str);
+        validateNum(num);
         return Integer.parseInt(str);
     }
 
