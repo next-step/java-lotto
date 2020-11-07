@@ -30,15 +30,16 @@ public class PlayslipTest {
     void noPositiveNumberSelection(int selection) {
         Playslip playslip = new Playslip();
         assertThatThrownBy(() -> playslip.selectNumbers(selection)) //
-                .hasMessage("선택은 1개 이상만 가능합니다.");
+                .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
 
     private static class Playslip {
+        public static final String ONLY_POSITIVE_NUMBERS = "선택은 1개 이상만 가능합니다.";
         private int size;
 
         public void selectNumbers(int size) {
             if (size < 1) {
-                throw new IllegalArgumentException("선택은 1개 이상만 가능합니다.");
+                throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
             }
             this.size = size;
         }
