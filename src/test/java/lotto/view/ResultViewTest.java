@@ -17,13 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultViewTest {
     StringWriter output = new StringWriter();
 
-    @DisplayName("구입한 로또 출력")
+    @DisplayName("구입한 로또 정렬해서 출력")
     @Test
     public void showLotto() {
         ResultView resultView = new ResultView(new PrintWriter(output));
         Lottos lottos = Lottos.of(Arrays.asList(
                 Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                Lotto.ofNumbers(Arrays.asList(2, 3, 4, 5, 6, 7))));
+                Lotto.ofNumbers(Arrays.asList(7, 3, 4, 5, 6, 2))));
 
         resultView.showLottos(lottos);
 
@@ -39,7 +39,7 @@ public class ResultViewTest {
 
         resultView.showResult(WinningStatistics.of(new HashMap<Integer, Integer>() {{
             put(3, 1);
-        }}), 10_000);
+        }}), 0.5);
 
         assertThat(output.toString()).isEqualTo("\n당첨 통계\n" +
                 "---------\n" +
@@ -57,7 +57,7 @@ public class ResultViewTest {
 
         resultView.showResult(WinningStatistics.of(new HashMap<Integer, Integer>() {{
             put(3, 1);
-        }}), 1_000);
+        }}), 5.0);
 
         assertThat(output.toString()).isEqualTo("\n당첨 통계\n" +
                 "---------\n" +

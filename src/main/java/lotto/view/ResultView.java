@@ -1,12 +1,13 @@
 package lotto.view;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -33,20 +34,22 @@ public class ResultView {
         output.println();
     }
 
-    private String convertLottoNumbersToString(List<Integer> numbers) {
-        return String.format(FORMAT_FOR_LOTTO_NUMBERS, numbers.stream()
+    private String convertLottoNumbersToString(Lotto lotto) {
+        return String.format(FORMAT_FOR_LOTTO_NUMBERS, lotto.getNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER)));
     }
 
-    public void showResult(WinningStatistics winningStatistics, int money) {
+    public void showResult(WinningStatistics winningStatistics, double yield) {
         output.println();
         output.println(HEADER_WINNING);
         output.println(LINE_SEPARATION);
         Arrays.stream(WinningReward.values())
                 .map(winningReward -> convertRewardAndStatisticsToString(winningReward, winningStatistics))
                 .forEach(output::println);
-        output.println(convertYieldToString(winningStatistics.calculateYield(money)));
+        output.println(convertYieldToString(yield));
     }
 
     private String convertRewardAndStatisticsToString(WinningReward winningReward, WinningStatistics winningStatistics) {

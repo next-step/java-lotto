@@ -54,10 +54,4 @@ public class WinningStatistics {
                 .sum();
     }
 
-    public double calculateYield(int money) {
-        if (money == 0) {
-            return 0;
-        }
-        return calculateRevenue() / (double) money;
-    }
 }

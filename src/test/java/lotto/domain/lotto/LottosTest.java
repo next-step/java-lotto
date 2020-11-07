@@ -4,7 +4,6 @@ import lotto.domain.exception.InvalidMoneyException;
 import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -33,11 +32,12 @@ public class LottosTest {
         assertThat(lottoCount).isEqualTo(expectedLottoCount);
     }
 
-    @DisplayName("로또 구입시 0보다 작은 숫자 입력되면 에러")
-    @Test
-    public void invalidMoney() {
+    @DisplayName("로또 구입시 0이하 숫자 입력되면 에러")
+    @ParameterizedTest
+    @CsvSource(value = {"-1", "0"})
+    public void invalidMoney(int money) {
         assertThatThrownBy(() -> {
-            Lottos.withMoney(-1);
+            Lottos.withMoney(money);
         }).isInstanceOf(InvalidMoneyException.class)
                 .hasMessageContaining("금액은 0보다 커야합니다.");
     }
@@ -46,7 +46,7 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("getLottos")
     public void getWinningStatistics(Lottos lottos, Map<Integer, Integer> expectedLottoCount) {
-        WinningStatistics statistics = lottos.getWinningStatistics(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningStatistics statistics = lottos.getWinningStatistics(Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         WinningReward.winningCountStream()
                 .forEach(winningCount -> assertThat(statistics.getWinningLottoCount(winningCount)).isEqualTo(expectedLottoCount.get(winningCount)));

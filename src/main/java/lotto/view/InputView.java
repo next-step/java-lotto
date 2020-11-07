@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class InputView {
         output.println(PHRASE_FOR_LAST_LOTTO_NUMBER);
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(input -> Integer.parseInt(input.trim()))
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 
     }
 }

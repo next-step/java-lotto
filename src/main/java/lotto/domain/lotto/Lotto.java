@@ -1,25 +1,43 @@
 package lotto.domain.lotto;
 
 import lotto.domain.exception.InvalidCountLottoNumbersException;
-import lotto.domain.exception.InvalidRangeLottoNumbersException;
+import lotto.domain.exception.InvalidDuplicatedLottoNumbersException;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_COUNT = 6;
-    public static final Integer MIN_NUMBER = 1;
-    public static final Integer MAX_NUMBER = 45;
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static Lotto ofNumbers(List<Integer> numbers) {
         validateNumbersCount(numbers.size());
-        validateNumbersRange(numbers);
-        return new Lotto(numbers);
+        validateDuplication(numbers);
+        return new Lotto(convertToLottoNumber(numbers));
+    }
+
+    private static List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    private static void validateDuplication(List<Integer> numbers) {
+        if (getDistinctNumberCount(numbers) != NUMBER_COUNT) {
+            throw new InvalidDuplicatedLottoNumbersException();
+        }
+    }
+
+    private static long getDistinctNumberCount(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .count();
     }
 
     private static void validateNumbersCount(int size) {
@@ -28,27 +46,17 @@ public class Lotto {
         }
     }
 
-    private static void validateNumbersRange(List<Integer> numbers) {
-        numbers.forEach(Lotto::validateLottoNumber);
-    }
-
-    private static void validateLottoNumber(Integer number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new InvalidRangeLottoNumbersException();
-        }
-    }
-
-    public Integer getWinningCount(List<Integer> lastLottoNumbers) {
-        return (int) lastLottoNumbers.stream()
+    public Integer getWinningCount(Lotto lastWonLotto) {
+        return (int) lastWonLotto.getNumbers().stream()
                 .filter(this::hasNumber)
                 .count();
     }
 
-    private boolean hasNumber(Integer number) {
+    private boolean hasNumber(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 }

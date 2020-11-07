@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoYieldCalculator;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.winning.WinningStatistics;
 import lotto.view.InputView;
@@ -20,8 +22,9 @@ public class LottoController {
         int money = inputView.getMoney();
         Lottos lottos = Lottos.withMoney(money);
         resultView.showLottos(lottos);
-        WinningStatistics winningStatistics = lottos.getWinningStatistics(inputView.getLastLottoNumbers());
-        resultView.showResult(winningStatistics, money);
+        WinningStatistics winningStatistics = lottos.getWinningStatistics(Lotto.ofNumbers(inputView.getLastLottoNumbers()));
+        ;
+        resultView.showResult(winningStatistics, LottoYieldCalculator.calculateYield(winningStatistics.calculateRevenue(), money));
 
         output.close();
     }
