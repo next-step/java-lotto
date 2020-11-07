@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String PHRASE_FOR_MONEY = "구입금액을 입력해 주세요.";
     private static final String PHRASE_FOR_LAST_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String PHRASE_FOR_BONUS_LOTTO_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private final Scanner scanner;
     private final PrintWriter output;
@@ -29,5 +30,10 @@ public class InputView {
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(input -> Integer.parseInt(input.trim()))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    public int getBonusLottoNumber() {
+        output.println(PHRASE_FOR_BONUS_LOTTO_NUMBER);
+        return Integer.parseInt(scanner.nextLine());
     }
 }
