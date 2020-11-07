@@ -37,6 +37,9 @@ public class PlayslipTest {
         private int size;
 
         public void selectNumbers(int size) {
+            if (size < 1) {
+                throw new IllegalArgumentException("선택은 1개 이상만 가능합니다.");
+            }
             this.size = size;
         }
 
