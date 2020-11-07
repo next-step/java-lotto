@@ -19,4 +19,11 @@ public class LottoTest {
                         .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
         );
     }
+
+    @Test
+    @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalStateException")
+    void createTest_duplicatedNumbers() {
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 1, 1, 1, 1)));
+    }
 }
