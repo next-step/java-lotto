@@ -2,8 +2,11 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PlayslipTest {
     @DisplayName("로또용지는 선택한 번호들을 제공한다.")
@@ -19,6 +22,15 @@ public class PlayslipTest {
     void zeroSizeOfNominatedNumbers() {
         Playslip playslip = new Playslip();
         assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(0);
+    }
+
+    @DisplayName("로또용지는 0개 이하를 선택한 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void noPositiveNumberSelection(int selection) {
+        Playslip playslip = new Playslip();
+        assertThatThrownBy(() -> playslip.selectNumbers(selection)) //
+                .hasMessage("선택은 1개 이상만 가능합니다.");
     }
 
     private static class Playslip {
