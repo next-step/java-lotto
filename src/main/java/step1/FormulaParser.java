@@ -16,7 +16,7 @@ class FormulaParser {
     }
 
     private String makeResultFormula() {
-        if (startWithCustomDelimiterIndicator()) {
+        if (isStartWithCustomDelimiterIndicator()) {
             return subtractCustomDelimiterIndicatorFromFormula();
         }
         return formula;
@@ -28,7 +28,7 @@ class FormulaParser {
 
     private String makeSplitRegex(String defaultDelimiterString) {
         StringBuilder delimiterString = new StringBuilder(defaultDelimiterString);
-        if (startWithCustomDelimiterIndicator()) {
+        if (isStartWithCustomDelimiterIndicator()) {
             delimiterString.append(extractCustomDelimiter());
         }
         return makeRegexString(delimiterString);
@@ -42,7 +42,7 @@ class FormulaParser {
         return delimiterString.insert(0, REGEX_CHARACTER_SET_START).append(REGEX_CHARACTER_SET_END).toString();
     }
 
-    private boolean startWithCustomDelimiterIndicator() {
+    private boolean isStartWithCustomDelimiterIndicator() {
         return formula.startsWith(CUSTOM_DELIMITER_START);
     }
 }
