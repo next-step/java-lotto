@@ -2,7 +2,7 @@ package step1;
 
 public class StringAddCalculator {
 
-    private static final String delimiter = ",";
+    private static final String defaultRegex = "\\,|\\:";
 
     private static boolean checkNull(String str) {
         return str == null;
@@ -16,8 +16,8 @@ public class StringAddCalculator {
         return checkNull(str) || checkEmpty(str);
     }
 
-    private static String[] splitStr(String str) {
-        return str.split(delimiter);
+    private static String[] splitStr(String str, String regex) {
+        return str.split(regex);
     }
 
     private static void validateNum(int num) {
@@ -32,8 +32,8 @@ public class StringAddCalculator {
         return Integer.parseInt(str);
     }
 
-    private static boolean checkSingle(String str) {
-        return splitStr(str).length < 1;
+    private static boolean checkSingle(String str, String regex) {
+        return splitStr(str, regex).length < 1;
     }
 
     private static int[] parseStrArr(String[] strArr) {
@@ -53,8 +53,8 @@ public class StringAddCalculator {
         return sum;
     }
 
-    private static int calcSum(String str) {
-        String[] strArr = splitStr(str);
+    private static int calcSum(String str, String regex) {
+        String[] strArr = splitStr(str, regex);
         int[] intArr = parseStrArr(strArr);
         return calcSum(intArr);
     }
@@ -63,9 +63,9 @@ public class StringAddCalculator {
         if (checkZero(str)) {
             return 0;
         }
-        if (checkSingle(str)) {
+        if (checkSingle(str, defaultRegex)) {
             return parseStr(str);
         }
-        return calcSum(str);
+        return calcSum(str, defaultRegex);
     }
 }
