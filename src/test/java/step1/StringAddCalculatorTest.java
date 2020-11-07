@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step1.StringAddCalculator.*;
 
 /**
  * <pre>
@@ -31,7 +32,7 @@ public class StringAddCalculatorTest {
     void nullInput() {
         assertThatThrownBy(() -> calculator.calculate(null)) //
                 .isInstanceOf(IllegalArgumentException.class) //
-                .hasMessage("문자열을 입력하시오.");
+                .hasMessage(PLEASE_ENTER_A_STRING);
     }
 
     @DisplayName("empty string 을 입력하면 0 을 반환한다.")
@@ -53,7 +54,7 @@ public class StringAddCalculatorTest {
     void noNumericStrings(String noNumeric) {
         assertThatThrownBy(() -> calculator.calculate(noNumeric)) //
                 .isInstanceOf(RuntimeException.class) //
-                .hasMessage("숫자로 변환가능한 문자가 아닙니다. : %s", noNumeric);
+                .hasMessage(NOT_A_STRING_OF_NUMERIC, noNumeric);
     }
 
     @DisplayName("음수를 입력하면 RuntimeException 을 방샐한다.")
@@ -61,7 +62,7 @@ public class StringAddCalculatorTest {
     void negativeNumericString() {
         assertThatThrownBy(() -> calculator.calculate("-1")) //
                 .isInstanceOf(RuntimeException.class) //
-                .hasMessage("음수는 처리할 수 없습니다. : -1");
+                .hasMessage(String.format(CANNOT_ACCEPT_A_NEGATIVE_NUMBER, -1));
     }
 
     @DisplayName("콤마와 콜론을 기준으로 더한다.")
