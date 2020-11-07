@@ -22,12 +22,14 @@ public class PlayslipTest {
     }
 
     private static class Playslip {
-        public void selectNumbers(int size) {
+        private int size;
 
+        public void selectNumbers(int size) {
+            this.size = size;
         }
 
         public int sizeOfNominatedNumbers() {
-            return 2;
+            return this.size;
         }
     }
 }
