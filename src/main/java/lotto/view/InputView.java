@@ -20,7 +20,6 @@ public class InputView {
     }
 
     public int getMoney() {
-
         output.println(PHRASE_FOR_MONEY);
         return Integer.parseInt(scanner.nextLine());
     }
@@ -30,6 +29,5 @@ public class InputView {
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(input -> Integer.parseInt(input.trim()))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-
     }
 }

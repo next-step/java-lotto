@@ -22,7 +22,7 @@ public class Lottos {
         validateMoney(money);
         int lottosCount = money / Lotto.PRICE;
         List<Lotto> lottos = IntStream.range(0, lottosCount)
-                .mapToObj(i -> Lotto.ofNumbers(LottoNumberGenerator.getNumbers()))
+                .mapToObj(i -> LottoGenerator.getRandomLotto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
         return new Lottos(lottos);
     }
