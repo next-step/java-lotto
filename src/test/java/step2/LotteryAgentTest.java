@@ -3,6 +3,8 @@ package step2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,6 +32,13 @@ public class LotteryAgentTest {
     void notEnoughMoney() {
         assertThatThrownBy(() -> lotteryAgent.exchange(500)) //
                 .isInstanceOf(NotEnoughMoneyException.class);
+    }
+
+    @DisplayName("티캣을 구매하고 남은 돈은 거슬러준다.")
+    @ParameterizedTest
+    @CsvSource({"1000,0", "1234,234", "2000,0"})
+    void changes(int money, int change) {
+        assertThat(lotteryAgent.exchange(money)[1]).isEqualTo(change);
     }
 
     private static class LotteryAgent {
