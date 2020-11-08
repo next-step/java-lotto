@@ -1,5 +1,7 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -10,7 +12,7 @@ public class WinningChecker {
     public WinningStatistic getResult(Collection<Integer> winningNumbers, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = getWinningRanks(winningNumbers, boughtLottos);
         Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
-        int earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
+        String earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
 
         return new WinningStatistic(countOfWinningRanks, earningsRate);
     }
@@ -31,9 +33,9 @@ public class WinningChecker {
         return countOfWinningRanks;
     }
 
-    private int getEarningsRate(List<WinningRank> winningRanks, int boughtLottosSize) {
-        int totalWinningAmount = WinningRank.getTotalWinningAmount(winningRanks);
-
-        return totalWinningAmount / (LottoFactory.PRICE_OF_ONE_LOTTO * boughtLottosSize);
+    private String getEarningsRate(List<WinningRank> winningRanks, int boughtLottosSize) {
+        BigDecimal totalWinningAmount = BigDecimal.valueOf(WinningRank.getTotalWinningAmount(winningRanks));
+        BigDecimal totalPurchaseAmount = BigDecimal.valueOf(LottoFactory.PRICE_OF_ONE_LOTTO * boughtLottosSize);
+        return totalWinningAmount.divide(totalPurchaseAmount, MathContext.DECIMAL32).toString();
     }
 }
