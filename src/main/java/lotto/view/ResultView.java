@@ -73,4 +73,12 @@ public class ResultView {
         }
         return String.format(builder.toString(), yield);
     }
+
+    public void showErrorMessage(String message) {
+        output.println(message);
+        output.println("처음부터 시작해주세요.");
+        output.println(LINE_SEPARATION);
+        output.println("");
+        output.println("");
+    }
 }

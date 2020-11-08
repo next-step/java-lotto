@@ -13,6 +13,9 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class LottoController {
+
+    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "숫자를 입력해야 합니다.주세요.";
+
     private LottoController() {
     }
 
@@ -20,16 +23,31 @@ public class LottoController {
         PrintWriter output = new PrintWriter(System.out, true);
         InputView inputView = new InputView(new Scanner(System.in), output);
         ResultView resultView = new ResultView(output);
+        while (true) {
+            if (executeAndCheckException(inputView, resultView)) break;
+        }
+        output.close();
+    }
 
+    private static boolean executeAndCheckException(InputView inputView, ResultView resultView) {
+        try {
+            execute(inputView, resultView);
+            return true;
+        } catch (NumberFormatException exception) {
+            resultView.showErrorMessage(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+        } catch (Exception exception) {
+            resultView.showErrorMessage(exception.getMessage());
+        }
+        return false;
+    }
+
+    private static void execute(InputView inputView, ResultView resultView) {
         Money money = Money.of(inputView.getMoney());
         int manualLottoCount = inputView.getManualLottoCount();
         Lottos lottos = Lottos.withMoneyAndManualLottoNumbers(money, inputView.getManualLottoNumbers(manualLottoCount));
-
         resultView.showLottos(lottos, manualLottoCount);
         WinningStatistics winningStatistics = lottos.getWinningStatistics(
                 WinningLotto.of(Lotto.ofNumbers(inputView.getLastLottoNumbers()), LottoNumber.of(inputView.getBonusLottoNumber())));
         resultView.showResult(winningStatistics, winningStatistics.calculateYield(money));
-
-        output.close();
     }
 }
