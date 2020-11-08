@@ -75,7 +75,8 @@ public class PlayslipTest {
         }
 
         public List<Set<Integer>> listNumbers() {
-            return Collections.singletonList(new HashSet<>());
+            Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+            return Collections.singletonList(numbers);
         }
     }
 }
