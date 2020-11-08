@@ -26,4 +26,15 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 1, 1, 1, 1)));
     }
+
+    @Test
+    @DisplayName("로또 숫자는 지정된 범위 만족하지 않으면 throw IllegalStateException (ex 1~45 사이의 숫자만).")
+    void createTest_numberRange() {
+        assertAll(
+                () -> assertThatExceptionOfType(IllegalStateException.class)
+                        .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 100))),
+                () -> assertThatExceptionOfType(IllegalStateException.class)
+                        .isThrownBy(() -> new Lotto(Arrays.asList(0, 1, 2, 3, 4, 5)))
+        );
+    }
 }
