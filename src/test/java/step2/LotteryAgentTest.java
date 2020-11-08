@@ -24,7 +24,7 @@ public class LotteryAgentTest {
         Object[] ticketAndChange = lotteryAgent.exchange(1500);
         assertThat(ticketAndChange).isNotNull() //
                 .hasSize(2) //
-                .hasOnlyElementsOfTypes(LottoTickets.class, Integer.class);
+                .hasOnlyElementsOfTypes(LotteryTickets.class, Integer.class);
     }
 
     @DisplayName("돈이 최소 구입금액에 못미치면 예외가 발생한다.")
@@ -46,8 +46,8 @@ public class LotteryAgentTest {
     @ParameterizedTest
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
-        LottoTickets lottoTickets = (LottoTickets) lotteryAgent.exchange(money)[0];
-        assertThat(lottoTickets.size()).isEqualTo(size);
+        LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(money)[0];
+        assertThat(lotteryTickets.size()).isEqualTo(size);
     }
 
     private static class LotteryAgent {
@@ -58,14 +58,14 @@ public class LotteryAgentTest {
                 throw new NotEnoughMoneyException();
             }
 
-            return new Object[]{new LottoTickets(money / PRICE_LOTTERY), money % PRICE_LOTTERY};
+            return new Object[]{new LotteryTickets(money / PRICE_LOTTERY), money % PRICE_LOTTERY};
         }
     }
 
-    private static class LottoTickets {
+    private static class LotteryTickets {
         private final int tickets;
 
-        public LottoTickets(int tickets) {
+        public LotteryTickets(int tickets) {
             this.tickets = tickets;
         }
 
