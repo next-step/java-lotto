@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.exception.InvalidMoneyException;
 import lotto.domain.winning.WinningStatistics;
 
 import java.util.Collections;
@@ -9,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int MINIMUM_MONEY = 0;
     private int lottosCount;
     private List<Lotto> lottos;
 
@@ -19,7 +17,6 @@ public class Lottos {
     }
 
     public static Lottos withMoney(int money) {
-        validateMoney(money);
         int lottosCount = money / Lotto.PRICE;
         List<Lotto> lottos = IntStream.range(0, lottosCount)
                 .mapToObj(i -> LottoGenerator.getRandomLotto())
@@ -29,12 +26,6 @@ public class Lottos {
 
     public static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
-    }
-
-    private static void validateMoney(int money) {
-        if (money <= MINIMUM_MONEY) {
-            throw new InvalidMoneyException();
-        }
     }
 
     public int getCount() {

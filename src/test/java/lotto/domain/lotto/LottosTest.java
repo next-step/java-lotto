@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.exception.InvalidMoneyException;
 import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,6 @@ import static lotto.domain.winning.WinningReward.FOUR;
 import static lotto.domain.winning.WinningReward.SIX;
 import static lotto.domain.winning.WinningReward.THREE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("로또 일급컬렉션 테스트")
@@ -35,16 +33,6 @@ public class LottosTest {
         int lottoCount = lottos.getCount();
 
         assertThat(lottoCount).isEqualTo(expectedLottoCount);
-    }
-
-    @DisplayName("로또 구입시 0이하 숫자 입력되면 에러")
-    @ParameterizedTest
-    @CsvSource(value = {"-1", "0"})
-    public void invalidMoney(int money) {
-        assertThatThrownBy(() -> {
-            Lottos.withMoney(money);
-        }).isInstanceOf(InvalidMoneyException.class)
-                .hasMessageContaining("금액은 0보다 커야합니다.");
     }
 
     @DisplayName("로또 당첨통게")
