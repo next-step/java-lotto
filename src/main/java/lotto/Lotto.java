@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +16,7 @@ public class Lotto {
     private final Set<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new TreeSet<>(numbers);
+        this.numbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
         validateState(numbers);
     }
 
@@ -40,6 +41,10 @@ public class Lotto {
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public Set<Integer> getNumbers() {
+        return numbers;
     }
 
     @Override
