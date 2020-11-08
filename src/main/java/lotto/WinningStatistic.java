@@ -3,11 +3,11 @@ package lotto;
 import java.util.Map;
 
 public class WinningStatistic {
-    private final Map<WinningRank, Integer> numberOfWinningRanks;
+    private final Map<WinningRank, Integer> countOfWinningRanks;
     private final double earningsRate;
 
-    public WinningStatistic(Map<WinningRank, Integer> numberOfWinningRanks, int earningsRate) {
-        this.numberOfWinningRanks = numberOfWinningRanks;
+    public WinningStatistic(Map<WinningRank, Integer> countOfWinningRanks, int earningsRate) {
+        this.countOfWinningRanks = countOfWinningRanks;
         this.earningsRate = earningsRate;
     }
 
@@ -15,8 +15,8 @@ public class WinningStatistic {
         return earningsRate;
     }
 
-    public Integer getNumberOfWinningRank(WinningRank winningRank) {
-        Integer number = numberOfWinningRanks.get(winningRank);
+    public Integer getCountOfWinningRank(WinningRank winningRank) {
+        Integer number = countOfWinningRanks.get(winningRank);
         return number != null ? number : 0;
     }
 }

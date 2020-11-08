@@ -24,15 +24,15 @@ public class WinningCheckerTest {
 
     @ParameterizedTest
     @MethodSource("boughtLottos")
-    @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 등수별 당첨 여부와 수익이 얼마나 되는지 계산한다.")
-    void winningAndStatisticTest(List<Lotto> boughtLottos, double expectedEarningRate, int expectedNumberOfMatchesSix) {
+    @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 당첨 횟수와 수익이 얼마나 되는지 계산한다.")
+    void winningAndStatisticTest(List<Lotto> boughtLottos, double expectedEarningRate, int expectedCountOfMatchesSix) {
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         WinningStatistic winningStatistic = winningChecker.getResult(winningNumbers, boughtLottos);
 
         assertAll(
                 () -> assertThat(winningStatistic.getEarningsRate()).isEqualTo(expectedEarningRate),
-                () -> assertThat(winningStatistic.getNumberOfWinningRank(WinningRank.MATCHES_SIX)).isEqualTo(expectedNumberOfMatchesSix)
+                () -> assertThat(winningStatistic.getCountOfWinningRank(WinningRank.MATCHES_SIX)).isEqualTo(expectedCountOfMatchesSix)
         );
     }
 
