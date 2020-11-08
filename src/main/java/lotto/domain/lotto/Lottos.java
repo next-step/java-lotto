@@ -16,8 +16,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos withMoney(int money) {
-        int lottosCount = money / Lotto.PRICE;
+    public static Lottos withMoney(Money money) {
+        int lottosCount = money.getAmount() / Lotto.PRICE;
         List<Lotto> lottos = IntStream.range(0, lottosCount)
                 .mapToObj(i -> LottoGenerator.getRandomLotto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));

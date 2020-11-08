@@ -28,7 +28,7 @@ public class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {"10000:10", "14000:14", "100:0"}, delimiter = ':')
     public void makeLottosFromMoney(int money, int expectedLottoCount) {
-        Lottos lottos = Lottos.withMoney(money);
+        Lottos lottos = Lottos.withMoney(Money.of(money));
 
         int lottoCount = lottos.getCount();
 

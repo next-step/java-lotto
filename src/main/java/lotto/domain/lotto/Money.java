@@ -21,4 +21,20 @@ public class Money {
         }
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Money)) {
+            return false;
+        }
+        return amount == ((Money) o).amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return amount;
+    }
 }
