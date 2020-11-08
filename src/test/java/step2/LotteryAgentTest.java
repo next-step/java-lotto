@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoAgentTest {
+public class LotteryAgentTest {
 
-    private LottoAgent lottoAgent;
+    private LotteryAgent lotteryAgent;
 
     @BeforeEach
     void setUp() {
-        lottoAgent = new LottoAgent();
+        lotteryAgent = new LotteryAgent();
     }
 
     @DisplayName("돈을 받고 티켓과 거스름돈을 반환한다.")
     @Test
     void exchange() {
-        Object[] ticketAndChange = lottoAgent.exchange(1500);
+        Object[] ticketAndChange = lotteryAgent.exchange(1500);
         assertThat(ticketAndChange).isNotNull() //
                 .hasSize(2) //
                 .hasOnlyElementsOfTypes(LottoTickets.class, Integer.class);
@@ -28,11 +28,11 @@ public class LottoAgentTest {
     @DisplayName("돈이 최소 구입금액에 못미치면 예외가 발생한다.")
     @Test
     void notEnoughMoney() {
-        assertThatThrownBy(() -> lottoAgent.exchange(500)) //
+        assertThatThrownBy(() -> lotteryAgent.exchange(500)) //
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 
-    private static class LottoAgent {
+    private static class LotteryAgent {
         public Object[] exchange(int money) {
             if (money < 1000) {
                 throw new NotEnoughMoneyException();
