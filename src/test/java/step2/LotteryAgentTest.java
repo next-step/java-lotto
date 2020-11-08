@@ -41,6 +41,14 @@ public class LotteryAgentTest {
         assertThat(lotteryAgent.exchange(money)[1]).isEqualTo(change);
     }
 
+
+    @DisplayName("구매액수에 맞는 티캣을 교환해준다.")
+    @ParameterizedTest
+    @CsvSource({"1000,1", "1234,1", "2000,2"})
+    void tickets(int money, int size) {
+        assertThat(lotteryAgent.exchange(money)[0].size()).isEqualTo(size);
+    }
+
     private static class LotteryAgent {
         private static final int PRICE_LOTTERY = 1000;
 
