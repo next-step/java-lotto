@@ -27,16 +27,14 @@ public enum WinningRank {
         this.winningCondition = winningCondition;
     }
 
-    public static WinningRank getWinningRank(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
-        WinningCondition winningCondition = getWinningConditionOf(winningNumbers, boughtLottoNumbers);
+    public static WinningRank getWinningRank(Collection<Integer> winningNumbers, Lotto boughtLotto) {
+        WinningCondition winningCondition = getWinningConditionOf(winningNumbers, boughtLotto);
         WinningRank winningRank = RANK_BY_CONDITION.get(winningCondition);
         return winningRank != null ? winningRank : NONE;
     }
 
-    private static WinningCondition getWinningConditionOf(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
-        int matchedCount = (int) boughtLottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
+    private static WinningCondition getWinningConditionOf(Collection<Integer> winningNumbers, Lotto boughtLotto) {
+        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningNumbers);
 
         return WinningCondition.builder()
                 .matchedCount(matchedCount)

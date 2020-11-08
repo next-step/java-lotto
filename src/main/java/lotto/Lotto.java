@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,6 +34,12 @@ public class Lotto {
         if (number < VALID_MIN_NUMBER || number > VALID_MAX_NUMBER) {
             throw new IllegalStateException(INVALID_NUMBER_RANGE_ERR_MSG);
         }
+    }
+
+    public int getMatchedCountCompareTo(Collection<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     @Override
