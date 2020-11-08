@@ -2,8 +2,20 @@ package lotto;
 
 import java.util.Set;
 
-public class LottoWinningRank {
-    public static String getWinningRank(Set<Integer> winningNumbers, Set<Integer> boughtLottoNumbers) {
+public enum LottoWinningRank {
+    NONE(0),
+    MATCHES_THREE(5_000),
+    MATCHES_FOUR(50_000),
+    MATCHES_FIVE(1_500_000),
+    MATCHES_SIX(2_000_000_000);
+
+    private final int winningAmount;
+
+    LottoWinningRank(int winningAmount) {
+        this.winningAmount = winningAmount;
+    }
+
+    public static LottoWinningRank getWinningRank(Set<Integer> winningNumbers, Set<Integer> boughtLottoNumbers) {
         int matchCount = 0;
 
         for (Integer boughtLottoNumber : boughtLottoNumbers) {
@@ -13,15 +25,15 @@ public class LottoWinningRank {
         }
 
         if (matchCount == 6) {
-            return "6개 일치";
+            return MATCHES_SIX;
         } else if (matchCount == 5) {
-            return "5개 일치";
+            return MATCHES_FIVE;
         } else if (matchCount == 4) {
-            return "4개 일치";
+            return MATCHES_FOUR;
         } else if (matchCount == 3) {
-            return "3개 일치";
+            return MATCHES_THREE;
         } else {
-            return "꽝";
+            return NONE;
         }
     }
 }

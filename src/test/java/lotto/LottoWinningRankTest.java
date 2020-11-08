@@ -18,15 +18,15 @@ public class LottoWinningRankTest {
 
         assertAll(
                 () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))))
-                        .isEqualTo("6개 일치"),
+                        .isEqualTo(LottoWinningRank.MATCHES_SIX),
                 () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 7))))
-                        .isEqualTo("5개 일치"),
+                        .isEqualTo(LottoWinningRank.MATCHES_FIVE),
                 () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 7, 8))))
-                        .isEqualTo("4개 일치"),
+                        .isEqualTo(LottoWinningRank.MATCHES_FOUR),
                 () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 7, 8, 9))))
-                        .isEqualTo("3개 일치"),
+                        .isEqualTo(LottoWinningRank.MATCHES_THREE),
                 () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 7, 8, 9, 10))))
-                        .isEqualTo("꽝")
+                        .isEqualTo(LottoWinningRank.NONE)
         );
     }
 }
