@@ -22,8 +22,10 @@ public class LottoController {
         ResultView resultView = new ResultView(output);
 
         Money money = Money.of(inputView.getMoney());
-        Lottos lottos = Lottos.withMoney(money);
-        resultView.showLottos(lottos);
+        int manualLottoCount = inputView.getManualLottoCount();
+        Lottos lottos = Lottos.withMoneyAndManualLottoNumbers(money, inputView.getManualLottoNumbers(manualLottoCount));
+
+        resultView.showLottos(lottos, manualLottoCount);
         WinningStatistics winningStatistics = lottos.getWinningStatistics(
                 WinningLotto.of(Lotto.ofNumbers(inputView.getLastLottoNumbers()), LottoNumber.of(inputView.getBonusLottoNumber())));
         resultView.showResult(winningStatistics, winningStatistics.calculateYield(money));

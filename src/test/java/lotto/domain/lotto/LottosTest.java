@@ -1,8 +1,10 @@
 package lotto.domain.lotto;
 
+import lotto.domain.exception.ManualLottoCountOverMoneyException;
 import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,6 +21,7 @@ import static lotto.domain.winning.WinningReward.FOUR;
 import static lotto.domain.winning.WinningReward.SIX;
 import static lotto.domain.winning.WinningReward.THREE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("로또 일급컬렉션 테스트")
@@ -75,4 +78,14 @@ public class LottosTest {
         );
     }
 
+    @DisplayName("수동 구매 숫자가 구입금액으로 불가할 때")
+    @Test
+    public void tooMuchManualLotto() {
+        assertThatThrownBy(() -> {
+            Lottos.withMoneyAndManualLottoNumbers(Money.of(1000),
+                    Arrays.asList(Arrays.asList(8, 21, 23, 41, 42, 43), Arrays.asList(1, 2, 23, 41, 42, 43)));
+        }).isInstanceOf(ManualLottoCountOverMoneyException.class)
+                .hasMessageContaining("수동 구매 로또수가 구입금액을 초과합니다.");
+
+    }
 }
