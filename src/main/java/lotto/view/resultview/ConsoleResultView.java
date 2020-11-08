@@ -25,12 +25,29 @@ public class ConsoleResultView implements ResultView {
 
     @Override
     public void printWinningStatistic(WinningStatistic winningStatistic) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        StringBuilder sb = new StringBuilder();
+
+        appendHeader(sb);
+        appendStatistics(winningStatistic, sb);
+        appendEarningRate(winningStatistic, sb);
+
+        System.out.println(sb.toString());
+    }
+
+    private void appendHeader(StringBuilder sb) {
+        sb.append("당첨 통계").append(System.lineSeparator());
+        sb.append("---------").append(System.lineSeparator());
+    }
+
+    private void appendStatistics(WinningStatistic winningStatistic, StringBuilder sb) {
         EnumSet<WinningRank> winningRanks = EnumSet.allOf(WinningRank.class);
-        for (WinningRank winningRank : winningRanks) {
-            System.out.println(winningRank.winningAmount + " - " + winningStatistic.getCountOfWinningRank(winningRank));
-        }
-        System.out.println("총 수익률은 " + winningStatistic.getEarningsRate() + "입니다." + " (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        winningRanks.stream()
+                .filter(r -> r.getWinningAmount() > 0)
+                .map(r -> String.format("%s (%d원) - %d개", r.getDescription(), r.getWinningAmount(), winningStatistic.getCountOfWinningRank(r)))
+                .forEach(s -> sb.append(s).append(System.lineSeparator()));
+    }
+
+    private void appendEarningRate(WinningStatistic winningStatistic, StringBuilder sb) {
+        sb.append("총 수익률은 ").append(winningStatistic.getEarningsRate()).append("입니다.");
     }
 }
