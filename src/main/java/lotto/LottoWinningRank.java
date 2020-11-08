@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.Set;
+import java.util.Collection;
 
 public enum LottoWinningRank {
     NONE(0),
@@ -15,7 +15,7 @@ public enum LottoWinningRank {
         this.winningAmount = winningAmount;
     }
 
-    public static LottoWinningRank getWinningRank(Set<Integer> winningNumbers, Set<Integer> boughtLottoNumbers) {
+    public static LottoWinningRank getWinningRank(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
         int matchCount = 0;
 
         for (Integer boughtLottoNumber : boughtLottoNumbers) {
