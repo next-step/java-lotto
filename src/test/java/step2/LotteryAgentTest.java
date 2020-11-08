@@ -49,7 +49,7 @@ public class LotteryAgentTest {
                 throw new NotEnoughMoneyException();
             }
 
-            return new Object[]{new LottoTickets(), 0};
+            return new Object[]{new LottoTickets(), money % PRICE_LOTTERY};
         }
     }
 
