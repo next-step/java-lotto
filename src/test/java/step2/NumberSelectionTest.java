@@ -27,7 +27,7 @@ public class NumberSelectionTest {
         }
     }
 
-    private static class NaturalSelection {
+    public static class NaturalSelection {
 
         public Set<Integer> select(List<Integer> numberPool) {
             List<Integer> modifiableNumberPool = new ArrayList<>(numberPool);

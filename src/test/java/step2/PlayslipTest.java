@@ -10,6 +10,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step2.NumberSelectionTest.*;
 
 public class PlayslipTest {
 
@@ -65,6 +66,7 @@ public class PlayslipTest {
         public static final List<Integer> NUMBER_POOL = makeNumberPool();
         private static final int MAX_SELECT_NUMBER = 45;
 
+        private final NaturalSelection selection = new NaturalSelection();
         private int size;
 
         public void selectNumbers(int size) {
@@ -77,7 +79,7 @@ public class PlayslipTest {
         public List<Set<Integer>> listNumbers() {
             List<Set<Integer>> result = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                result.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                result.add(new HashSet<>(selection.select(NUMBER_POOL)));
             }
             return result;
         }
