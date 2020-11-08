@@ -76,8 +76,11 @@ public class PlayslipTest {
         }
 
         public List<Set<Integer>> listNumbers() {
-            Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-            return Collections.singletonList(numbers);
+            List<Set<Integer>> result = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                result.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+            }
+            return result;
         }
     }
 }
