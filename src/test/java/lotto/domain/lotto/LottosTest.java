@@ -86,6 +86,16 @@ public class LottosTest {
                     Arrays.asList(Arrays.asList(8, 21, 23, 41, 42, 43), Arrays.asList(1, 2, 23, 41, 42, 43)));
         }).isInstanceOf(ManualLottoCountOverMoneyException.class)
                 .hasMessageContaining("수동 구매 로또수가 구입금액을 초과합니다.");
+    }
 
+    @DisplayName("수동, 자동 구매")
+    @Test
+    public void autoAndManualLotto() {
+        Lottos lottos = Lottos.withMoneyAndManualLottoNumbers(Money.of(3000),
+                Arrays.asList(Arrays.asList(8, 21, 23, 41, 42, 43), Arrays.asList(1, 2, 23, 41, 42, 43)));
+        
+        int result = lottos.getCount();
+
+        assertThat(result).isEqualTo(3);
     }
 }
