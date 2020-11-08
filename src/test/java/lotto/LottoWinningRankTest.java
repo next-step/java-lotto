@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.LottoWinningRank.MATCHES_FIVE;
+import static lotto.LottoWinningRank.MATCHES_FOUR;
+import static lotto.LottoWinningRank.MATCHES_SIX;
+import static lotto.LottoWinningRank.MATCHES_THREE;
+import static lotto.LottoWinningRank.NONE;
+import static lotto.LottoWinningRank.getWinningRank;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -16,16 +22,16 @@ public class LottoWinningRankTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertAll(
-                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 6)))
-                        .isEqualTo(LottoWinningRank.MATCHES_SIX),
-                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 7)))
-                        .isEqualTo(LottoWinningRank.MATCHES_FIVE),
-                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 7, 8)))
-                        .isEqualTo(LottoWinningRank.MATCHES_FOUR),
-                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 7, 8, 9)))
-                        .isEqualTo(LottoWinningRank.MATCHES_THREE),
-                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, Arrays.asList(1, 2, 7, 8, 9, 10)))
-                        .isEqualTo(LottoWinningRank.NONE)
+                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 6)))
+                        .isEqualTo(MATCHES_SIX),
+                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 7)))
+                        .isEqualTo(MATCHES_FIVE),
+                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 7, 8)))
+                        .isEqualTo(MATCHES_FOUR),
+                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 7, 8, 9)))
+                        .isEqualTo(MATCHES_THREE),
+                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 7, 8, 9, 10)))
+                        .isEqualTo(NONE)
         );
     }
 }
