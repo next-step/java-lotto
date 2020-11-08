@@ -51,15 +51,16 @@ public enum LottoWinningRank {
     }
 
     public static LottoWinningRank getWinningRank(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
-        int matchCount = 0;
-        for (Integer boughtLottoNumber : boughtLottoNumbers) {
-            if (winningNumbers.contains(boughtLottoNumber)) {
-                matchCount++;
-            }
-        }
-
-        WinningCondition winningCondition = new WinningCondition(matchCount);
+        WinningCondition winningCondition = getWinningConditionOf(winningNumbers, boughtLottoNumbers);
         LottoWinningRank lottoWinningRank = WINNING_CONDITION_LOTTO_WINNING_RANK_MAP.get(winningCondition);
         return lottoWinningRank != null ? lottoWinningRank : NONE;
+    }
+
+    private static WinningCondition getWinningConditionOf(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
+        int matchedCount = (int) boughtLottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+
+        return new WinningCondition(matchedCount);
     }
 }
