@@ -7,6 +7,6 @@ public class LottoFactoryTest {
 
     @BeforeEach
     void init() {
-        LottoFacotry = lottoFactory;
+        lottoFactory = new LottoFactory();
     }
 }
