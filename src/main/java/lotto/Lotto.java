@@ -34,4 +34,11 @@ public class Lotto {
             throw new IllegalStateException(INVALID_NUMBER_RANGE_ERR_MSG);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }
