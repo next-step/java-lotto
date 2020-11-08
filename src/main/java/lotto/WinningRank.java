@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum WinningRank {
@@ -21,7 +22,7 @@ public enum WinningRank {
     }
 
     private final String description;
-    public final int winningAmount;
+    private final int winningAmount;
     private final WinningCondition winningCondition;
 
     WinningRank(String description, int winningAmount, WinningCondition winningCondition) {
@@ -44,7 +45,17 @@ public enum WinningRank {
                 .build();
     }
 
+    public static int getTotalWinningAmount(List<WinningRank> winningRanks) {
+        return winningRanks.stream()
+                .mapToInt(r -> r.winningAmount)
+                .sum();
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public int getWinningAmount() {
+        return winningAmount;
     }
 }

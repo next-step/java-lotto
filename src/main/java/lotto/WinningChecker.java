@@ -32,9 +32,7 @@ public class WinningChecker {
     }
 
     private int getEarningsRate(List<WinningRank> winningRanks, int boughtLottosSize) {
-        int totalWinningAmount = winningRanks.stream()
-                .mapToInt(r -> r.winningAmount)
-                .sum();
+        int totalWinningAmount = WinningRank.getTotalWinningAmount(winningRanks);
 
         return totalWinningAmount / (LottoFactory.PRICE_OF_ONE_LOTTO * boughtLottosSize);
     }
