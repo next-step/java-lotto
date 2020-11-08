@@ -16,7 +16,7 @@ public class LottoFactory {
         }
     }
 
-    public List<Lotto> buyLotto(int amount) {
+    public List<Lotto> buyLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {
             Collections.shuffle(numbers);
