@@ -60,8 +60,11 @@ public class PlayslipTest {
         }
     }
 
-    private static class Playslip {
+    public static class Playslip {
         public static final String ONLY_POSITIVE_NUMBERS = "선택은 1개 이상만 가능합니다.";
+        public static final List<Integer> NUMBER_POOL = makeNumberPool();
+        private static final int MAX_SELECT_NUMBER = 45;
+
         private int size;
 
         public void selectNumbers(int size) {
@@ -77,6 +80,14 @@ public class PlayslipTest {
                 result.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
             }
             return result;
+        }
+
+        private static List<Integer> makeNumberPool() {
+            List<Integer> selectableNumberSource = new ArrayList<>();
+            for (int i = 0; i < MAX_SELECT_NUMBER; i++) {
+                selectableNumberSource.add(i);
+            }
+            return Collections.unmodifiableList(selectableNumberSource);
         }
     }
 }
