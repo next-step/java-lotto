@@ -29,8 +29,10 @@ public class NumberSelectionTest {
 
     private static class NaturalSelection {
 
-        public Set<Integer> select(List<Integer> selectableNumbers) {
-            return new HashSet<>(selectableNumbers.subList(0, 6));
+        public Set<Integer> select(List<Integer> numberPool) {
+            List<Integer> modifiableNumberPool = new ArrayList<>(numberPool);
+            Collections.shuffle(modifiableNumberPool);
+            return new HashSet<>(modifiableNumberPool.subList(0, 6));
         }
 
     }
