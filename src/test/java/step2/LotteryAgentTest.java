@@ -10,6 +10,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step2.PlayslipTest.*;
 
 public class LotteryAgentTest {
 
@@ -68,24 +69,25 @@ public class LotteryAgentTest {
                 throw new NotEnoughMoneyException();
             }
 
-            return new Object[]{new LotteryTickets(money / PRICE_LOTTERY), money % PRICE_LOTTERY};
+            Playslip playslip = new Playslip();
+            playslip.selectNumbers(money / PRICE_LOTTERY);
+
+            return new Object[]{new LotteryTickets(playslip.listNumbers()), money % PRICE_LOTTERY};
         }
     }
 
     private static class LotteryTickets {
-        private final int tickets;
+        private final List<Set<Integer>> numbers;
 
-        public LotteryTickets(int tickets) {
-            this.tickets = tickets;
+        public LotteryTickets(List<Set<Integer>> numbers) {
+            this.numbers = numbers;
         }
 
         public int size() {
-            return tickets;
+            return numbers.size();
         }
 
         public List<Set<Integer>> getNumbers() {
-            List<Set<Integer>> numbers = new ArrayList<>();
-            numbers.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
             return numbers;
         }
     }
