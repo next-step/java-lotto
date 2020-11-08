@@ -8,10 +8,10 @@ import java.util.Map;
 public class WinningChecker {
     public WinningStatistic getResult(List<Integer> winningNumbers, List<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = getWinningRanks(winningNumbers, boughtLottos);
-        Map<WinningRank, Integer> numberOfWinningRanks = getNumberOfWinningRanks(winningRanks);
+        Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
         int earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
 
-        return new WinningStatistic(numberOfWinningRanks, earningsRate);
+        return new WinningStatistic(countOfWinningRanks, earningsRate);
     }
 
     private List<WinningRank> getWinningRanks(List<Integer> winningNumbers, List<Lotto> boughtLottos) {
@@ -22,7 +22,7 @@ public class WinningChecker {
         return winningRanks;
     }
 
-    private Map<WinningRank, Integer> getNumberOfWinningRanks(List<WinningRank> winningRanks) {
+    private Map<WinningRank, Integer> getCountOfWinningRanks(List<WinningRank> winningRanks) {
         EnumMap<WinningRank, Integer> numberOfWinningRanks = new EnumMap<>(WinningRank.class);
         for (WinningRank winningRank : winningRanks) {
             numberOfWinningRanks.put(winningRank, numberOfWinningRanks.getOrDefault(winningRank, 0) + 1);
