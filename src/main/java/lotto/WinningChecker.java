@@ -1,12 +1,13 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinningChecker {
-    public WinningStatistic getResult(List<Integer> winningNumbers, List<Lotto> boughtLottos) {
+    public WinningStatistic getResult(Collection<Integer> winningNumbers, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = getWinningRanks(winningNumbers, boughtLottos);
         Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
         int earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
@@ -14,7 +15,7 @@ public class WinningChecker {
         return new WinningStatistic(countOfWinningRanks, earningsRate);
     }
 
-    private List<WinningRank> getWinningRanks(List<Integer> winningNumbers, List<Lotto> boughtLottos) {
+    private List<WinningRank> getWinningRanks(Collection<Integer> winningNumbers, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto boughtLotto : boughtLottos) {
             winningRanks.add(WinningRank.getWinningRank(winningNumbers, boughtLotto));
