@@ -33,8 +33,10 @@ public class LotteryAgentTest {
     }
 
     private static class LotteryAgent {
+        private static final int PRICE_LOTTERY = 1000;
+
         public Object[] exchange(int money) {
-            if (money < 1000) {
+            if (money < PRICE_LOTTERY) {
                 throw new NotEnoughMoneyException();
             }
 
