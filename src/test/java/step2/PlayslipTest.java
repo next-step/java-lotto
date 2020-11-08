@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -64,6 +63,10 @@ public class PlayslipTest {
 
         public int sizeOfNominatedNumbers() {
             return this.size;
+        }
+
+        public List<Set<Integer>> listNumbers() {
+            return Collections.singletonList(new HashSet<>());
         }
     }
 }
