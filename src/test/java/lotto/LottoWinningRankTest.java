@@ -8,15 +8,25 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoWinningRankTest {
     @Test
     @DisplayName("당첨번호와 구입한 로또번호로 당첨타입을 확인한다.")
     void winningRank_test() {
         Set<Integer> winningNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Set<Integer> boughtLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        String winningType = LottoWinningRank.getWinningRank(winningNumbers, boughtLottoNumbers);
-        assertThat(winningType).isEqualTo("6개 일치");
+        assertAll(
+                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                        .isEqualTo("6개 일치"),
+                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 7))))
+                        .isEqualTo("5개 일치"),
+                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 4, 7, 8))))
+                        .isEqualTo("4개 일치"),
+                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 3, 7, 8, 9))))
+                        .isEqualTo("3개 일치"),
+                () -> assertThat(LottoWinningRank.getWinningRank(winningNumbers, new TreeSet<>(Arrays.asList(1, 2, 7, 8, 9, 10))))
+                        .isEqualTo("꽝")
+        );
     }
 }
