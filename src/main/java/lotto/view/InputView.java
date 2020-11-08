@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String PHRASE_FOR_MONEY = "구입금액을 입력해 주세요.";
     private static final String PHRASE_FOR_LAST_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String PHRASE_FOR_BONUS_LOTTO_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private final Scanner scanner;
     private final PrintWriter output;
@@ -19,7 +21,6 @@ public class InputView {
     }
 
     public int getMoney() {
-
         output.println(PHRASE_FOR_MONEY);
         return Integer.parseInt(scanner.nextLine());
     }
@@ -28,7 +29,11 @@ public class InputView {
         output.println(PHRASE_FOR_LAST_LOTTO_NUMBER);
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(input -> Integer.parseInt(input.trim()))
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
 
+    public int getBonusLottoNumber() {
+        output.println(PHRASE_FOR_BONUS_LOTTO_NUMBER);
+        return Integer.parseInt(scanner.nextLine());
     }
 }

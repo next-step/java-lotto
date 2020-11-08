@@ -4,11 +4,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static lotto.domain.winning.WinningReward.ZERO;
+
 public class WinningStatistics {
 
-    private final Map<Integer, Integer> statistics;
+    private final Map<WinningReward, Integer> statistics;
 
-    private WinningStatistics(Map<Integer, Integer> statistics) {
+    private WinningStatistics(Map<WinningReward, Integer> statistics) {
         this.statistics = statistics;
     }
 
@@ -16,48 +18,43 @@ public class WinningStatistics {
         return new WinningStatistics(getZeroStatistics());
     }
 
-    private static Map<Integer, Integer> getZeroStatistics() {
-        return WinningReward.winningCountStream()
+    private static Map<WinningReward, Integer> getZeroStatistics() {
+        return WinningReward.valuesStreamWithoutZero()
                 .collect(Collectors.toMap(Function.identity(), winningCount -> 0));
     }
 
-    public static WinningStatistics of(Map<Integer, Integer> statistics) {
-        return new WinningStatistics(WinningReward.winningCountStream()
+    public static WinningStatistics of(Map<WinningReward, Integer> statistics) {
+        return new WinningStatistics(WinningReward.valuesStreamWithoutZero()
                 .collect(Collectors.toMap(Function.identity(), getWinningLottoCount(statistics))));
     }
 
-    private static Function<Integer, Integer> getWinningLottoCount(Map<Integer, Integer> statistics) {
-        return winningCount -> {
-            if (statistics.containsKey(winningCount)) {
-                return statistics.get(winningCount);
+    private static Function<WinningReward, Integer> getWinningLottoCount(Map<WinningReward, Integer> statistics) {
+        return winningReward -> {
+            if (statistics.containsKey(winningReward)) {
+                return statistics.get(winningReward);
             }
             return 0;
         };
     }
 
-    public int getWinningLottoCount(int winningCount) {
-        if (WinningReward.hasWinningPrice(winningCount)) {
-            return statistics.get(winningCount);
+    public int getWinningLottoCount(WinningReward winningReward) {
+        if (winningReward.equals(ZERO)) {
+            return 0;
         }
-        return 0;
+        return statistics.get(winningReward);
     }
 
-    public void increaseWinningLottoCount(int winningCount) {
-        if (WinningReward.hasWinningPrice(winningCount)) {
-            statistics.put(winningCount, getWinningLottoCount(winningCount) + 1);
+    public void increaseWinningLottoCount(int winningCount, boolean matchBonusNumber) {
+        WinningReward winningReward = WinningReward.valueOf(winningCount, matchBonusNumber);
+        if (!winningReward.equals(ZERO)) {
+            statistics.put(winningReward, getWinningLottoCount(winningReward) + 1);
         }
     }
 
     public int calculateRevenue() {
-        return WinningReward.winningCountStream()
-                .mapToInt(winningCount -> WinningReward.getWinningPrice(winningCount) * getWinningLottoCount(winningCount))
+        return WinningReward.valuesStreamWithoutZero()
+                .mapToInt(winningReward -> winningReward.getWinningPrice() * getWinningLottoCount(winningReward))
                 .sum();
     }
 
-    public double calculateYield(int money) {
-        if (money == 0) {
-            return 0;
-        }
-        return calculateRevenue() / (double) money;
-    }
 }

@@ -70,4 +70,25 @@ public class InputViewTest {
 
         assertThat(stringWriter.toString()).isEqualTo("지난 주 당첨 번호를 입력해 주세요.\n");
     }
+
+    @DisplayName("보너스 볼 입력")
+    @ParameterizedTest
+    @CsvSource(value = {"10:10", "15:15"}, delimiter = ':')
+    public void enterBonusBall(String input, int expectedNumber) {
+        InputView inputView = new InputView(new Scanner(input), systemWriter);
+
+        int number = inputView.getBonusLottoNumber();
+
+        assertThat(number).isEqualTo(expectedNumber);
+    }
+
+    @DisplayName("보너스 볼 입력시 문구")
+    @Test
+    public void showPhraseForBonusBall() {
+        InputView inputView = new InputView(new Scanner("9"), new PrintWriter(stringWriter));
+
+        inputView.getBonusLottoNumber();
+
+        assertThat(stringWriter.toString()).isEqualTo("보너스 볼을 입력해 주세요.\n");
+    }
 }

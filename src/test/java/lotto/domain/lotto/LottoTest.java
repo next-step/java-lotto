@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.exception.InvalidCountLottoNumbersException;
-import lotto.domain.exception.InvalidRangeLottoNumbersException;
+import lotto.domain.exception.InvalidDuplicatedLottoNumbersException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -34,22 +34,6 @@ public class LottoTest {
         );
     }
 
-    @DisplayName("로또 생성시 숫자가 0이하이거나 45보다 큰 경우")
-    @ParameterizedTest
-    @MethodSource("getInvalidRangeNumbers")
-    public void makeLottoWithInvalidRangeNumber(List<Integer> invalidRangeNumbers) {
-        assertThatThrownBy(() -> {
-            Lotto.ofNumbers(invalidRangeNumbers);
-        }).isInstanceOf(InvalidRangeLottoNumbersException.class)
-                .hasMessageContaining("로또 숫자는 1이상 45이하여야 합니다.");
-    }
-
-    static Stream<Arguments> getInvalidRangeNumbers() {
-        return Stream.of(
-                arguments(Arrays.asList(0, 2, 3, 4, 5, 45)),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 46))
-        );
-    }
 
     @DisplayName("당첨된 숫자 개수")
     @ParameterizedTest
@@ -57,7 +41,7 @@ public class LottoTest {
     public void getWinningCount(List<Integer> lastLottoNumbers, Integer expectedWinningCount) {
         Lotto lotto = Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Integer winningCount = lotto.getWinningCount(lastLottoNumbers);
+        Integer winningCount = lotto.getWinningCount(Lotto.ofNumbers(lastLottoNumbers));
 
         assertThat(winningCount).isEqualTo(expectedWinningCount);
     }
@@ -74,4 +58,20 @@ public class LottoTest {
         );
     }
 
+    @DisplayName("중복된 로또 숫자")
+    @ParameterizedTest
+    @MethodSource("getDuplicatedLottoNumbers")
+    public void duplicatedLottoNumber(List<Integer> duplicatedNumbers) {
+        assertThatThrownBy(() -> {
+            Lotto.ofNumbers(duplicatedNumbers);
+        }).isInstanceOf(InvalidDuplicatedLottoNumbersException.class)
+                .hasMessageContaining("로또 숫자는 6개 모두 중복이 없여야 합니다.");
+    }
+
+    static Stream<Arguments> getDuplicatedLottoNumbers() {
+        return Stream.of(
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 1)),
+                arguments(Arrays.asList(1, 1, 1, 1, 1, 1))
+        );
+    }
 }
