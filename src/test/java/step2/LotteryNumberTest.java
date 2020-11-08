@@ -12,7 +12,7 @@ public class LotteryNumberTest {
     @DisplayName("6개의 번호를 제공해야 한다")
     @Test
     void satisfyConstructor() {
-        Assertions.assertThatThrownBy(() -> new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3)))) //
+        Assertions.assertThatThrownBy(() -> new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 2, 3, 4, 5)))) //
                 .isInstanceOf(NotEnoughNumberException.class);
     }
 
