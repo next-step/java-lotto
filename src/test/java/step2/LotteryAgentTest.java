@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -41,13 +44,21 @@ public class LotteryAgentTest {
         assertThat(lotteryAgent.exchange(money)[1]).isEqualTo(change);
     }
 
-
     @DisplayName("구매액수에 맞는 티캣을 교환해준다.")
     @ParameterizedTest
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
         LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(money)[0];
         assertThat(lotteryTickets.size()).isEqualTo(size);
+    }
+
+
+    @DisplayName("티캣은 선택한 번호들을 가진다.")
+    @Test
+    void ticketHasNumbers() {
+        LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(1000)[0];
+        List<Set<Integer>> numbers = lotteryTickets.getNumbers();
+        assertThat(numbers.get(0)).hasSize(6);
     }
 
     private static class LotteryAgent {
