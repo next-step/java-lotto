@@ -14,4 +14,9 @@ public class WinningStatistic {
     public double getEarningsRate() {
         return earningsRate;
     }
+
+    public Integer getNumberOfWinningRank(WinningRank winningRank) {
+        Integer number = numberOfWinningRanks.get(winningRank);
+        return number != null ? number : 0;
+    }
 }
