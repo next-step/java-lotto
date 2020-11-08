@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -82,6 +81,12 @@ public class LotteryAgentTest {
 
         public int size() {
             return tickets;
+        }
+
+        public List<Set<Integer>> getNumbers() {
+            List<Set<Integer>> numbers = new ArrayList<>();
+            numbers.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+            return numbers;
         }
     }
 
