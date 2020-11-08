@@ -1,7 +1,7 @@
 package lotto.view.resultview;
 
-import lotto.Lotto;
-import lotto.WinningStatistic;
+import lotto.domain.Lotto;
+import lotto.dto.WinningStatistic;
 
 import java.util.List;
 

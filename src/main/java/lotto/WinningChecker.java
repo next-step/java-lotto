@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.WinningRank;
+import lotto.dto.WinningStatistic;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;

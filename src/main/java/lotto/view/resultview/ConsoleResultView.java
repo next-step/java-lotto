@@ -1,8 +1,8 @@
 package lotto.view.resultview;
 
-import lotto.Lotto;
-import lotto.WinningRank;
-import lotto.WinningStatistic;
+import lotto.domain.Lotto;
+import lotto.domain.WinningRank;
+import lotto.dto.WinningStatistic;
 
 import java.util.EnumSet;
 import java.util.List;

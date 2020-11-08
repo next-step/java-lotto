@@ -1,17 +1,18 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.WinningRank.MATCHES_FIVE;
-import static lotto.WinningRank.MATCHES_FOUR;
-import static lotto.WinningRank.MATCHES_SIX;
-import static lotto.WinningRank.MATCHES_THREE;
-import static lotto.WinningRank.NONE;
-import static lotto.WinningRank.getWinningRank;
+import static lotto.domain.WinningRank.MATCHES_FIVE;
+import static lotto.domain.WinningRank.MATCHES_FOUR;
+import static lotto.domain.WinningRank.MATCHES_SIX;
+import static lotto.domain.WinningRank.MATCHES_THREE;
+import static lotto.domain.WinningRank.NONE;
+import static lotto.domain.WinningRank.getWinningRank;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 

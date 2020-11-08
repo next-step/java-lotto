@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.dto.WinningStatistic;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
 
