@@ -11,10 +11,11 @@ public class NumberSelectionTest {
     @DisplayName("입력받은 번호 중 6개의 번호를 선택할 수 있다.")
     @Test
     void sixNumberSelection() {
-        List<Integer> selectableNumbers = new ArrayList<>();
+        List<Integer> selectableNumberSource = new ArrayList<>();
         for (int i = 0; i < 45; i++) {
-            selectableNumbers.add(i);
+            selectableNumberSource.add(i);
         }
+        List<Integer> selectableNumbers = Collections.unmodifiableList(selectableNumberSource);
 
         NaturalSelection selection = new NaturalSelection();
         Set<Integer> numberSet = selection.select(selectableNumbers);
