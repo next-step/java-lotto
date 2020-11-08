@@ -17,6 +17,16 @@ public class NumberSelectionTest {
         assertThat(numberSet.size()).isEqualTo(6);
     }
 
+    @DisplayName("선택된 번호는 매번 다르다.")
+    @Test
+    void naturalSelection() {
+        NaturalSelection selection = new NaturalSelection();
+        Set<Integer> firstSelection = selection.select(NUMBER_POOL);
+        for (int i = 0; i < 1000; i++) {
+            assertThat(firstSelection).isNotEqualTo(selection.select(NUMBER_POOL));
+        }
+    }
+
     private static class NaturalSelection {
 
         public Set<Integer> select(List<Integer> selectableNumbers) {
