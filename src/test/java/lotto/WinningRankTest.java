@@ -22,15 +22,15 @@ public class WinningRankTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertAll(
-                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 6)))
+                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
                         .isEqualTo(MATCHES_SIX),
-                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 5, 7)))
+                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))))
                         .isEqualTo(MATCHES_FIVE),
-                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 4, 7, 8)))
+                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8))))
                         .isEqualTo(MATCHES_FOUR),
-                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 3, 7, 8, 9)))
+                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9))))
                         .isEqualTo(MATCHES_THREE),
-                () -> assertThat(getWinningRank(winningNumbers, Arrays.asList(1, 2, 7, 8, 9, 10)))
+                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10))))
                         .isEqualTo(NONE)
         );
     }
