@@ -19,7 +19,7 @@ public enum WinningRank {
         }
     }
 
-    private final int winningAmount;
+    public final int winningAmount;
     private final WinningCondition winningCondition;
 
     WinningRank(int winningAmount, WinningCondition winningCondition) {

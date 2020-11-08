@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoFactory {
-    private static final int PRICE_OF_ONE_LOTTO = 1_000;
+    public static final int PRICE_OF_ONE_LOTTO = 1_000;
 
     private final List<Integer> numbers;
 
