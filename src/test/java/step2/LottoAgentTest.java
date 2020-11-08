@@ -11,8 +11,17 @@ public class LottoAgentTest {
     void exchange() {
         LottoAgent lottoAgent = new LottoAgent();
         Object[] ticketAndChange = lottoAgent.exchange(1500);
-        assertThat(ticketAndChange).isNotNull()
-                .hasSize(2)
+        assertThat(ticketAndChange).isNotNull() //
+                .hasSize(2) //
                 .hasOnlyElementsOfTypes(LottoTickets.class, Integer.class);
+    }
+
+    private static class LottoAgent {
+        public Object[] exchange(int money) {
+            return new Object[]{new LottoTickets(), 0};
+        }
+    }
+
+    private static class LottoTickets {
     }
 }
