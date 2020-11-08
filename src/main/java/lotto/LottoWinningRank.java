@@ -1,30 +1,53 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.HashMap;
+import java.util.Map;
 
-public enum LottoWinningRank implements Comparable<LottoWinningRank>{
-    NONE(0, matchedCount -> true),
-    MATCHES_THREE(5_000, matchedCount -> matchedCount == 3),
-    MATCHES_FOUR(50_000, matchedCount -> matchedCount == 4),
-    MATCHES_FIVE(1_500_000, matchedCount -> matchedCount == 5),
-    MATCHES_SIX(2_000_000_000, matchedCount -> matchedCount == 6);
+public enum LottoWinningRank {
+    NONE(0, null),
+    MATCHES_THREE(5_000, new WinningCondition(3)),
+    MATCHES_FOUR(50_000, new WinningCondition(4)),
+    MATCHES_FIVE(1_500_000, new WinningCondition(5)),
+    MATCHES_SIX(2_000_000_000, new WinningCondition(6));
 
-    public static final String THERE_IS_NO_VALID_TYPE_ERR_MSG = "유효한 LottoWinningRank가 존재하지 않습니다.";
-    private static final List<LottoWinningRank> LOTTO_WINNING_RANKS;
+    private static class WinningCondition {
+        private final int matchedCount;
+
+        public WinningCondition(int matchedCount) {
+            this.matchedCount = matchedCount;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof WinningCondition)) return false;
+
+            WinningCondition that = (WinningCondition) o;
+
+            return matchedCount == that.matchedCount;
+        }
+
+        @Override
+        public int hashCode() {
+            return matchedCount;
+        }
+    }
+
+    private static final Map<WinningCondition, LottoWinningRank> WINNING_CONDITION_LOTTO_WINNING_RANK_MAP;
     static {
-        LOTTO_WINNING_RANKS = Arrays.asList(LottoWinningRank.values());
-        LOTTO_WINNING_RANKS.sort((r1, r2) -> Integer.compare(r2.winningAmount, r1.winningAmount));
+        WINNING_CONDITION_LOTTO_WINNING_RANK_MAP = new HashMap<>();
+        for (LottoWinningRank rank : LottoWinningRank.values()) {
+            WINNING_CONDITION_LOTTO_WINNING_RANK_MAP.put(rank.winningCondition, rank);
+        }
     }
 
     private final int winningAmount;
-    private final Predicate<Integer> checkWinning;
+    private final WinningCondition winningCondition;
 
-    LottoWinningRank(int winningAmount, Predicate<Integer> checkWinning) {
+    LottoWinningRank(int winningAmount, WinningCondition winningCondition) {
         this.winningAmount = winningAmount;
-        this.checkWinning = checkWinning;
+        this.winningCondition = winningCondition;
     }
 
     public static LottoWinningRank getWinningRank(Collection<Integer> winningNumbers, Collection<Integer> boughtLottoNumbers) {
@@ -35,12 +58,8 @@ public enum LottoWinningRank implements Comparable<LottoWinningRank>{
             }
         }
 
-        for (LottoWinningRank lottoWinningRank : LOTTO_WINNING_RANKS) {
-            if (lottoWinningRank.checkWinning.test(matchCount)) {
-                return lottoWinningRank;
-            }
-        }
-
-        throw new IllegalStateException(THERE_IS_NO_VALID_TYPE_ERR_MSG);
+        WinningCondition winningCondition = new WinningCondition(matchCount);
+        LottoWinningRank lottoWinningRank = WINNING_CONDITION_LOTTO_WINNING_RANK_MAP.get(winningCondition);
+        return lottoWinningRank != null ? lottoWinningRank : NONE;
     }
 }
