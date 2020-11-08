@@ -24,11 +24,11 @@ public class WinningChecker {
     }
 
     private Map<WinningRank, Integer> getCountOfWinningRanks(List<WinningRank> winningRanks) {
-        EnumMap<WinningRank, Integer> numberOfWinningRanks = new EnumMap<>(WinningRank.class);
+        EnumMap<WinningRank, Integer> countOfWinningRanks = new EnumMap<>(WinningRank.class);
         for (WinningRank winningRank : winningRanks) {
-            numberOfWinningRanks.put(winningRank, numberOfWinningRanks.getOrDefault(winningRank, 0) + 1);
+            countOfWinningRanks.put(winningRank, countOfWinningRanks.getOrDefault(winningRank, 0) + 1);
         }
-        return numberOfWinningRanks;
+        return countOfWinningRanks;
     }
 
     private int getEarningsRate(List<WinningRank> winningRanks, int boughtLottosSize) {
