@@ -10,11 +10,16 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberSelectionTest {
-    @DisplayName("6개의 번호를 선택할 수 있다.")
+    @DisplayName("입력받은 번호 중 6개의 번호를 선택할 수 있다.")
     @Test
     void sixNumberSelection() {
+        int[] selectableNumbers = new int[45];
+        for (int i = 0; i < 45; i++) {
+            selectableNumbers[i] = i;
+        }
+
         NaturalSelection selection = new NaturalSelection();
-        Set<Integer> numberSet = selection.select();
+        Set<Integer> numberSet = selection.select(selectableNumbers);
         assertThat(numberSet.size()).isEqualTo(6);
     }
 
