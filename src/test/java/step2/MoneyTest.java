@@ -24,4 +24,9 @@ public class MoneyTest {
     void subtract() {
         assertThat(Money.of(1000).subtract(Money.of(100))).isEqualTo(Money.of(900));
     }
+
+    @Test
+    void equals() {
+        assertThat(Money.of(1000).equals(Money.of(1000))).isTrue();
+    }
 }

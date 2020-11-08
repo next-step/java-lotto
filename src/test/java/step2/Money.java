@@ -3,14 +3,14 @@ package step2;
 import java.util.Objects;
 
 public class Money {
+    public static Money of(int amount) {
+        return new Money(amount);
+    }
+
     private final int amount;
 
     public Money(int amount) {
         this.amount = amount;
-    }
-
-    public static Money of(int amount) {
-        return new Money(amount);
     }
 
     public boolean lessThan(Money money) {
