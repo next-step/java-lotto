@@ -6,33 +6,10 @@ import java.util.Map;
 
 public enum LottoWinningRank {
     NONE(0, null),
-    MATCHES_THREE(5_000, new WinningCondition(3)),
-    MATCHES_FOUR(50_000, new WinningCondition(4)),
-    MATCHES_FIVE(1_500_000, new WinningCondition(5)),
-    MATCHES_SIX(2_000_000_000, new WinningCondition(6));
-
-    private static class WinningCondition {
-        private final int matchedCount;
-
-        public WinningCondition(int matchedCount) {
-            this.matchedCount = matchedCount;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof WinningCondition)) return false;
-
-            WinningCondition that = (WinningCondition) o;
-
-            return matchedCount == that.matchedCount;
-        }
-
-        @Override
-        public int hashCode() {
-            return matchedCount;
-        }
-    }
+    MATCHES_THREE(5_000, WinningCondition.builder().matchedCount(3).build()),
+    MATCHES_FOUR(50_000, WinningCondition.builder().matchedCount(4).build()),
+    MATCHES_FIVE(1_500_000, WinningCondition.builder().matchedCount(5).build()),
+    MATCHES_SIX(2_000_000_000, WinningCondition.builder().matchedCount(6).build());
 
     private static final Map<WinningCondition, LottoWinningRank> WINNING_CONDITION_LOTTO_WINNING_RANK_MAP;
     static {
@@ -61,6 +38,8 @@ public enum LottoWinningRank {
                 .filter(winningNumbers::contains)
                 .count();
 
-        return new WinningCondition(matchedCount);
+        return WinningCondition.builder()
+                .matchedCount(matchedCount)
+                .build();
     }
 }
