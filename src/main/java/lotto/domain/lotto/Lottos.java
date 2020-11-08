@@ -47,15 +47,12 @@ public class Lottos {
     }
 
     public static Lottos withMoneyAndManualLottoNumbers(Money money, List<List<Integer>> manualLottoNumbers) {
-        int lottosCount = getLottoCount(money);
-        int autoLottoCount = lottosCount - manualLottoNumbers.size();
-        List<Lotto> lottos = manualLottoNumbers.stream()
+        return manualLottoNumbers.stream()
                 .map(Lotto::ofNumbers)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), manualLottos -> {
-                    manualLottos.addAll(getLottosByAuto(autoLottoCount));
-                    return Collections.unmodifiableList(manualLottos);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), lottos -> {
+                    lottos.addAll(getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()));
+                    return new Lottos(Collections.unmodifiableList(lottos));
                 }));
-        return new Lottos(lottos);
     }
 
     public int getCount() {
