@@ -24,13 +24,13 @@ public class PlayslipTest {
     @Test
     void selectNumbers() {
         playslip.selectNumbers(2);
-        assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(2);
+        assertThat(playslip.listNumbers().size()).isEqualTo(2);
     }
 
     @DisplayName("로또용지는 선택 하지 않으면 번호갯수가 0 이다.")
     @Test
     void zeroSizeOfNominatedNumbers() {
-        assertThat(playslip.sizeOfNominatedNumbers()).isEqualTo(0);
+        assertThat(playslip.listNumbers().size()).isEqualTo(0);
     }
 
     @DisplayName("로또용지는 0개 이하를 선택한 경우 예외가 발생한다.")
@@ -69,10 +69,6 @@ public class PlayslipTest {
                 throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
             }
             this.size = size;
-        }
-
-        public int sizeOfNominatedNumbers() {
-            return this.size;
         }
 
         public List<Set<Integer>> listNumbers() {
