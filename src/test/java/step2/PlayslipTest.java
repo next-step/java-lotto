@@ -85,7 +85,7 @@ public class PlayslipTest {
         private static List<Integer> makeNumberPool() {
             List<Integer> selectableNumberSource = new ArrayList<>();
             for (int i = 0; i < MAX_SELECT_NUMBER; i++) {
-                selectableNumberSource.add(i);
+                selectableNumberSource.add(i + 1);
             }
             return Collections.unmodifiableList(selectableNumberSource);
         }
