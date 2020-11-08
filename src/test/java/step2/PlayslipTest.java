@@ -41,13 +41,22 @@ public class PlayslipTest {
                 .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
 
-
     @DisplayName("로또용지는 선택번호셋을 제공한다.")
     @Test
     void listNumbers() {
         playslip.selectNumbers(1);
         List<Set<Integer>> nominatedNumbers = playslip.listNumbers();
         assertThat(nominatedNumbers.size()).isEqualTo(1);
+    }
+
+    @DisplayName("번호셋은 6개의 번호를 가지고 있다.")
+    @Test
+    void sixNumbers() {
+        playslip.selectNumbers(1);
+        List<Set<Integer>> nominatedNumbers = playslip.listNumbers();
+        for (Set<Integer> nominatedNumber : nominatedNumbers) {
+            assertThat(nominatedNumber.size()).isEqualTo(6);
+        }
     }
 
     private static class Playslip {
