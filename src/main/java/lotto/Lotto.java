@@ -7,10 +7,9 @@ import java.util.TreeSet;
 public class Lotto {
     public static final String INVALID_NUMBERS_SIZE_ERR_MSG = "로또 숫자의 개수가 유효하지 않습니다.";
     public static final String INVALID_NUMBER_RANGE_ERR_MSG = "로또 숫자가 유효범위를 벗어났습니다.";
-
-    private static final int VALID_MIN_NUMBER = 1;
-    private static final int VALID_MAX_NUMBER = 45;
-    private static final int VALID_NUMBERS_SIZE = 6;
+    public static final int VALID_MIN_NUMBER = 1;
+    public static final int VALID_MAX_NUMBER = 45;
+    public static final int VALID_NUMBERS_SIZE = 6;
 
     private final Set<Integer> numbers;
 
