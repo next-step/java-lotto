@@ -6,14 +6,21 @@ import lotto.WinningStatistic;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class ConsoleResultView implements ResultView {
     @Override
     public void printBoughtLottos(List<Lotto> boughtLottos) {
-        System.out.println(boughtLottos.size() + "개를 구매했습니다.");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(boughtLottos.size()).append("개를 구매했습니다.").append(System.lineSeparator());
+
         for (Lotto boughtLotto : boughtLottos) {
-            System.out.println("boughtLotto.toString() = " + boughtLotto.toString());
+            Set<Integer> numbers = boughtLotto.getNumbers();
+            sb.append(numbers.toString()).append(System.lineSeparator());
         }
+
+        System.out.println(sb.toString());
     }
 
     @Override
