@@ -41,12 +41,13 @@ public class PlayslipTest {
                 .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
 
-    @DisplayName("로또용지는 선택번호셋을 제공한다.")
-    @Test
-    void listNumbers() {
-        playslip.selectNumbers(1);
+    @DisplayName("로또용지는 선택번호셋을 여러개 제공한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2})
+    void listNumbers(int selection) {
+        playslip.selectNumbers(selection);
         List<Set<Integer>> nominatedNumbers = playslip.listNumbers();
-        assertThat(nominatedNumbers.size()).isEqualTo(1);
+        assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
 
     @DisplayName("번호셋은 6개의 번호를 가지고 있다.")
