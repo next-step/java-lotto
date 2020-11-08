@@ -46,7 +46,8 @@ public class LotteryAgentTest {
     @ParameterizedTest
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
-        assertThat(lotteryAgent.exchange(money)[0].size()).isEqualTo(size);
+        LottoTickets lottoTickets = (LottoTickets) lotteryAgent.exchange(money)[0];
+        assertThat(lottoTickets.size()).isEqualTo(size);
     }
 
     private static class LotteryAgent {
@@ -57,11 +58,20 @@ public class LotteryAgentTest {
                 throw new NotEnoughMoneyException();
             }
 
-            return new Object[]{new LottoTickets(), money % PRICE_LOTTERY};
+            return new Object[]{new LottoTickets(money / PRICE_LOTTERY), money % PRICE_LOTTERY};
         }
     }
 
     private static class LottoTickets {
+        private final int tickets;
+
+        public LottoTickets(int tickets) {
+            this.tickets = tickets;
+        }
+
+        public int size() {
+            return tickets;
+        }
     }
 
     private static class NotEnoughMoneyException extends IllegalArgumentException {
