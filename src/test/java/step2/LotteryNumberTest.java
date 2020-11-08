@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,11 +17,18 @@ public class LotteryNumberTest {
                 .isInstanceOf(NotEnoughNumberException.class);
     }
 
-    private static class LotteryNumber {
+    static class LotteryNumber {
+        private final Set<Integer> numbers;
+
         public LotteryNumber(Set<Integer> numbers) {
+            this.numbers = Collections.unmodifiableSet(numbers);
             if (numbers.size() != 6) {
                 throw new NotEnoughNumberException();
             }
+        }
+
+        public Set<Integer> getNumbers() {
+            return numbers;
         }
     }
 

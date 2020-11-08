@@ -6,11 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.NumberSelectionTest.*;
+import static step2.LotteryNumberTest.LotteryNumber;
+import static step2.NumberSelectionTest.NaturalSelection;
 
 public class PlayslipTest {
 
@@ -47,7 +50,7 @@ public class PlayslipTest {
     @ValueSource(ints = {1, 2})
     void listNumbers(int selection) {
         playslip.selectNumbers(selection);
-        List<Set<Integer>> nominatedNumbers = playslip.listNumbers();
+        List<LotteryNumber> nominatedNumbers = playslip.listNumbers();
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
 
@@ -55,11 +58,12 @@ public class PlayslipTest {
     @Test
     void sixNumbers() {
         playslip.selectNumbers(1);
-        List<Set<Integer>> nominatedNumbers = playslip.listNumbers();
-        for (Set<Integer> nominatedNumber : nominatedNumbers) {
-            assertThat(nominatedNumber.size()).isEqualTo(6);
+        List<LotteryNumber> nominatedNumbers = playslip.listNumbers();
+        for (LotteryNumber nominatedNumber : nominatedNumbers) {
+            assertThat(nominatedNumber.getNumbers().size()).isEqualTo(6);
         }
     }
+
 
     public static class Playslip {
         public static final String ONLY_POSITIVE_NUMBERS = "선택은 1개 이상만 가능합니다.";
@@ -76,10 +80,10 @@ public class PlayslipTest {
             this.size = size;
         }
 
-        public List<Set<Integer>> listNumbers() {
-            List<Set<Integer>> result = new ArrayList<>();
+        public List<LotteryNumber> listNumbers() {
+            List<LotteryNumber> result = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                result.add(new HashSet<>(selection.select(NUMBER_POOL)));
+                result.add(new LotteryNumber(selection.select(NUMBER_POOL)));
             }
             return result;
         }

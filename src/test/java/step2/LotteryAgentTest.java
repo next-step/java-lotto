@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.*;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.PlayslipTest.*;
+import static step2.LotteryNumberTest.*;
+import static step2.PlayslipTest.Playslip;
 
 public class LotteryAgentTest {
 
@@ -57,8 +58,8 @@ public class LotteryAgentTest {
     @Test
     void ticketHasNumbers() {
         LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(1000)[0];
-        List<Set<Integer>> numbers = lotteryTickets.getNumbers();
-        assertThat(numbers.get(0)).hasSize(6);
+        List<LotteryNumber> numbers = lotteryTickets.getNumbers();
+        assertThat(numbers.get(0)).isInstanceOf(LotteryNumber.class);
     }
 
     private static class LotteryAgent {
@@ -77,9 +78,9 @@ public class LotteryAgentTest {
     }
 
     private static class LotteryTickets {
-        private final List<Set<Integer>> numbers;
+        private final List<LotteryNumber> numbers;
 
-        public LotteryTickets(List<Set<Integer>> numbers) {
+        public LotteryTickets(List<LotteryNumber> numbers) {
             this.numbers = numbers;
         }
 
@@ -87,7 +88,7 @@ public class LotteryAgentTest {
             return numbers.size();
         }
 
-        public List<Set<Integer>> getNumbers() {
+        public List<LotteryNumber> getNumbers() {
             return numbers;
         }
     }
