@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.exception.ManualLottoCountOverMoneyException;
 import lotto.domain.winning.WinningStatistics;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,10 +50,15 @@ public class Lottos {
     public static Lottos withMoneyAndManualLottoNumbers(Money money, List<List<Integer>> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(Lotto::ofNumbers)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), lottos -> {
-                    lottos.addAll(getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()));
-                    return new Lottos(Collections.unmodifiableList(lottos));
-                }));
+                .collect(Collectors.collectingAndThen(Collectors.toList(),
+                        manualLottos -> merge(manualLottos, getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()))));
+    }
+
+    private static Lottos merge(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(autoLottos);
+        return new Lottos(Collections.unmodifiableList(lottos));
     }
 
     public int getCount() {
