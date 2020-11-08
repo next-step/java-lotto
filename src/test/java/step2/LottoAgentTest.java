@@ -27,10 +27,17 @@ public class LottoAgentTest {
 
     private static class LottoAgent {
         public Object[] exchange(int money) {
+            if (money < 1000) {
+                throw new NotEnoughMoneyException();
+            }
+
             return new Object[]{new LottoTickets(), 0};
         }
     }
 
     private static class LottoTickets {
+    }
+
+    private static class NotEnoughMoneyException extends IllegalArgumentException {
     }
 }
