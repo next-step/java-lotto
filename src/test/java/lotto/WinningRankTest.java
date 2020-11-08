@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.LottoWinningRank.MATCHES_FIVE;
-import static lotto.LottoWinningRank.MATCHES_FOUR;
-import static lotto.LottoWinningRank.MATCHES_SIX;
-import static lotto.LottoWinningRank.MATCHES_THREE;
-import static lotto.LottoWinningRank.NONE;
-import static lotto.LottoWinningRank.getWinningRank;
+import static lotto.WinningRank.MATCHES_FIVE;
+import static lotto.WinningRank.MATCHES_FOUR;
+import static lotto.WinningRank.MATCHES_SIX;
+import static lotto.WinningRank.MATCHES_THREE;
+import static lotto.WinningRank.NONE;
+import static lotto.WinningRank.getWinningRank;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class LottoWinningRankTest {
+public class WinningRankTest {
     @Test
     @DisplayName("당첨번호와 구입한 로또번호로 당첨타입을 확인한다.")
     void winningRank_test() {
