@@ -48,10 +48,14 @@ public class Lottos {
     }
 
     public static Lottos withMoneyAndManualLottoNumbers(Money money, List<List<Integer>> manualLottoNumbers) {
+        return merge(getLottosByManual(manualLottoNumbers),
+                getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()));
+    }
+
+    private static List<Lotto> getLottosByManual(List<List<Integer>> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(Lotto::ofNumbers)
-                .collect(Collectors.collectingAndThen(Collectors.toList(),
-                        manualLottos -> merge(manualLottos, getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()))));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
     private static Lottos merge(List<Lotto> manualLottos, List<Lotto> autoLottos) {
