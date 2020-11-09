@@ -54,3 +54,17 @@
         - [x] LottoWinningRank는 당첨금액과, 당첨을 확인하는 로직을 갖는다.
         - [x] 당첨번호와 구입한 로또을 입력값으로 주면 어떤 당첨 타입인지 반환한다.
 - [x] 당첨 통계를 출력한다.
+
+### 2단계 피드백 사항
+- [ ] Lotto의 numbers 타입을 Integer -> LottoNumber로 warpping
+- [ ] LottoFactory 1~45 숫자들 상수처리
+- [ ] 멤버변수 최대 3개로 (LottoGame)
+- [ ] Main과 LottoGame 통합 (LottoGame이 main의 역할)
+- [ ] WinningCondition Builder패턴 적절한가 고민해보기
+- [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
+- [ ] ConsoleInputView 상수와 멤버변수를 개행
+- [ ] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
+- [ ] 구입금액이 음수로 입력된 경우 예외
+- [ ] 1000 -> 1_000으로 통일 
+- [ ] 테스트 메서드명 카멜케이스로
+- [ ] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
