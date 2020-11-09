@@ -30,7 +30,8 @@ public class LotteryResultTest {
             public static Matched valueBy(Supplier<Integer> matched) {
                 return Arrays.stream(values()) //
                         .filter(value -> value.matchingCount == matched.get()) //
-                        .findFirst().orElseThrow(IllegalArgumentException::new);
+                        .findFirst() //
+                        .orElseThrow(OutOfMatchingBoundaryException::new);
             }
         }
 
@@ -40,7 +41,8 @@ public class LotteryResultTest {
             Matched matchedEnum = Matched.valueBy(() -> {
                 if (matched < 3) {
                     return 0;
-                } return matched;
+                }
+                return matched;
             });
 
             result.compute(matchedEnum, (key, value) -> value == null ? 1 : value + 1);
@@ -49,5 +51,8 @@ public class LotteryResultTest {
         public int getMatchResult(Matched matched) {
             return result.getOrDefault(matched, 0);
         }
+    }
+
+    private static class OutOfMatchingBoundaryException extends RuntimeException {
     }
 }
