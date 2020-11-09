@@ -1,10 +1,9 @@
 package step1;
 
 public class Validator {
+    private Validator() {}
 
     private static final String CHECK_CUSTOM_REGEX = "^//.*\\n.*$";
-
-    private Validator() {}
 
     public static boolean checkCustomDelimiter(String input) {
         return input.matches(CHECK_CUSTOM_REGEX);

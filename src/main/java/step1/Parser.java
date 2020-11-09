@@ -1,7 +1,6 @@
 package step1;
 
 public class Parser {
-
     private Parser() {}
 
     public static int parseNumStr(String numStr) {

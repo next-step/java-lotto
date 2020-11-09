@@ -1,10 +1,9 @@
 package step1;
 
 public class Splitter {
+    private Splitter() {}
 
     private static final String SPLIT_REGEX = ",|:";
-
-    private Splitter() {}
 
     public static String[] splitInput(String input) {
         if (Validator.checkCustomDelimiter(input)) {
