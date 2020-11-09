@@ -118,9 +118,6 @@ public class WinningNumberTest {
     }
 
     static class LotteryResult {
-        private int miss;
-        private int threeMatched;
-
         enum Matched {
             miss(0), three(3), four(4), five(5), six(6);
 
@@ -139,10 +136,6 @@ public class WinningNumberTest {
 
         private final Map<Matched, Integer> result = new HashMap<>();
 
-        public int getMiss() {
-            return miss;
-        }
-
         public void add(int matched) {
             Matched matchedEnum = Matched.valueBy(() -> {
                 if (matched < 3) {
@@ -151,10 +144,6 @@ public class WinningNumberTest {
             });
 
             result.compute(matchedEnum, (key, value) -> value == null ? 1 : value + 1);
-        }
-
-        public int getThreeMatched() {
-            return threeMatched;
         }
 
         public int getMatchResult(Matched matched) {
