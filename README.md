@@ -57,7 +57,8 @@
 
 ### 2단계 피드백 사항
 - [x] Lotto의 numbers 타입을 Integer -> LottoNumber로 warpping
-- [ ] LottoFactory 1~45 숫자들 상수처리
+- [x] LottoFactory 1~45 숫자들 상수처리
+    - 상수처리는 하되 LottoNumber.VALID_MIN_NUMBER, LottoNumber.VALID_MAX_NUMBER를 기준으로 초기화 하도록 했습니다. 1~45라는 범위가 변경될 때 LottoFactory의 NUNBERS도 같이 변경되면 좋겠다고 생각했어요! :)
 - [ ] 멤버변수 최대 3개로 (LottoGame)
 - [ ] Main과 LottoGame 통합 (LottoGame이 main의 역할)
 - [ ] WinningCondition Builder패턴 적절한가 고민해보기
