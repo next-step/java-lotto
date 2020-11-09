@@ -54,6 +54,17 @@ public class WinningNumberTest {
         assertThat(lotteryResult.getMiss()).isEqualTo(miss);
     }
 
+    @DisplayName("3개 일치 테스트")
+    @Test
+    void threeMatched() {
+        winningNumber.draw();
+
+        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets( //
+                Arrays.asList(LotteryNumber.of(1, 2, 3, 14, 15, 16), LotteryNumber.of(11, 12, 13, 4, 5, 6))));
+
+        assertThat(lotteryResult.getThreeMatchd()).isEqualTo(2);
+    }
+
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
         return new LotteryTickets(singletonList(LotteryNumber.of(numbers)));
     }
