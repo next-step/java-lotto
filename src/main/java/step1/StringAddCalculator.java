@@ -10,7 +10,7 @@ public class StringAddCalculator {
             return expression.toNumber();
         }
 
-        final List<String> numbers = expression.toNumbers();
+        final List<String> numbers = expression.toTokens();
 
         return sum(numbers);
     }

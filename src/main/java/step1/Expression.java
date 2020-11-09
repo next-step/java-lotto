@@ -1,23 +1,32 @@
 package step1;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static step1.ExpressionSeparator.DEFAULT_DELIMITER;
 
 public class Expression {
-    public static final Expression EMPTY_EXPRESSION = new Expression("0");
+    public static final Expression EMPTY_EXPRESSION = new Expression("0", DEFAULT_DELIMITER);
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private final String text;
+    private final String delimiter;
 
-    private Expression(final String text) {
+    private Expression(final String text, final String delimiter) {
+        this.delimiter = delimiter;
         this.text = text;
     }
 
-    public static Expression of(final String text) {
-        if (StringUtils.isBlank(text)) {
+    public static Expression of(final String expression) {
+        if (StringUtils.isBlank(expression)) {
             return EMPTY_EXPRESSION;
         }
-
-        return new Expression(text);
+        
+        final Matcher matcher = PATTERN.matcher(expression);
+        if (matcher.find()) {
+            return new Expression(matcher.group(2), matcher.group(1));
+        }
+        return new Expression(expression, DEFAULT_DELIMITER);
     }
 
     public String getText() {
@@ -43,7 +52,7 @@ public class Expression {
         return Integer.parseInt(text);
     }
 
-    public List<String> toNumbers() {
-        return ExpressionSeparator.split(this, DEFAULT_DELIMITER);
+    public List<String> toTokens() {
+        return ExpressionSeparator.split(this, delimiter);
     }
 }
