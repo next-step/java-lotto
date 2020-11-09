@@ -4,10 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
 import static step2.PlayslipTest.Playslip.NUMBER_POOL;
-import static step2.WinningNumberTest.LotteryResult.*;
+import static step2.WinningNumberTest.LotteryResult.Matched;
 import static step2.WinningNumberTest.LotteryResult.Matched.*;
 
 
@@ -55,18 +61,30 @@ public class WinningNumberTest {
         assertThat(lotteryResult.getMatchResult(Matched.miss)).isEqualTo(miss);
     }
 
-    @DisplayName("3개 일치 테스트")
-    @Test
-    void threeMatched() {
+    @DisplayName("3개 ~ 6개 일치 테스트")
+    @ParameterizedTest
+    @MethodSource("matchingCountProvider")
+    void matched(LotteryNumber lotteryNumber, Matched matched) {
         //@formatter:off
         LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
                 Arrays.asList(
-                        LotteryNumber.of(1, 2, 3, 14, 15, 16), // 3개 일치
-                        LotteryNumber.of(1, 2, 3, 14, 15, 16), // 3개 일치
+                        lotteryNumber,
+                        lotteryNumber,
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
-        assertThat(lotteryResult.getMatchResult(three)).isEqualTo(2);
+        assertThat(lotteryResult.getMatchResult(matched)).isEqualTo(2);
+    }
+
+    private static Stream<Arguments> matchingCountProvider() {
+        //@formatter:off
+        return Stream.of(
+                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), three),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), four),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), five),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 6), six)
+        );
+        //@formatter:on
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
