@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.WinningNumberTest.WinningNumber.LotteryResult;
 
 import java.util.List;
 
@@ -35,6 +36,14 @@ public class WinningNumberTest {
     void matchResult() {
         winningNumber.draw();
         assertThat(winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))).isNotNull();
+    }
+
+    @DisplayName("하나도 일치하지 않은 경우")
+    @Test
+    void zeroMatch() {
+        winningNumber.draw();
+        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(11, 12, 13, 14, 15, 16));
+        assertThat(lotteryResult.getMiss()).isEqualTo(1);
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
