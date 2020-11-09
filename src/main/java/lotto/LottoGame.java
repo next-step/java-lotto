@@ -25,6 +25,10 @@ public class LottoGame {
         int amount = inputView.getAmount();
         List<Lotto> boughtLottos = lottoFactory.buyLottos(amount);
         resultView.printBoughtLottos(boughtLottos);
+        if (boughtLottos.size() == 0) {
+            return;
+        }
+
         Set<Integer> winningNumbers = inputView.getWinningNumbers();
         WinningStatistic winningStatistic = winningChecker.getResult(winningNumbers, boughtLottos);
         resultView.printWinningStatistic(winningStatistic);
