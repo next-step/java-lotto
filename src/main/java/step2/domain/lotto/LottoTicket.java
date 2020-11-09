@@ -1,6 +1,7 @@
-package step2.domain;
+package step2.domain.lotto;
 
 import step2.strategy.NumberMakeStrategy;
+import step2.type.WinningType;
 
 import java.util.List;
 
@@ -25,11 +26,15 @@ public class LottoTicket {
         return markingNumbers.contains(number);
     }
 
-    public WinningMatchCount compareWinningNumber(final List<Integer> winningNumber) {
-        winningNumber.forEach(number -> winningMatchCount.match(markingNumbers, number));
-        //TODO enum 타입의 최종 당첨 등수를 반환하는 로직 추가 필요
-        return winningMatchCount;
+    public WinningType compareWinningNumber(final WinningNumber winningNumber) {
+        winningMatchCount.clear();
+        winningNumber.getList()
+                .forEach(number -> winningMatchCount.match(markingNumbers, number));
+        return winningMatchCount.getWinningType();
     }
 
-
+    @Override
+    public String toString() {
+        return markingNumbers.toString();
+    }
 }
