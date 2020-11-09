@@ -1,11 +1,22 @@
 package step2;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class LotteryResultTest {
+    @DisplayName("6개를 초과하는 입력은 예외를 발생한다.")
+    @Test
+    void upper7() {
+        Assertions.assertThatThrownBy(() -> new LotteryResult().add(7)) //
+                .isInstanceOf(OutOfMatchingBoundaryException.class);
+    }
+
     static class LotteryResult {
         enum Matched {
             miss(0), three(3), four(4), five(5), six(6);
