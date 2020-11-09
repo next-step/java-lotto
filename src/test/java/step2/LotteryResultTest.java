@@ -12,8 +12,15 @@ import java.util.function.Supplier;
 public class LotteryResultTest {
     @DisplayName("6개를 초과하는 입력은 예외를 발생한다.")
     @Test
-    void upper7() {
+    void moreThen_7() {
         Assertions.assertThatThrownBy(() -> new LotteryResult().add(7)) //
+                .isInstanceOf(OutOfMatchingBoundaryException.class);
+    }
+
+    @DisplayName("0개를 미만 입력은 예외를 발생한다.")
+    @Test
+    void lessThen_0() {
+        Assertions.assertThatThrownBy(() -> new LotteryResult().add(-1)) //
                 .isInstanceOf(OutOfMatchingBoundaryException.class);
     }
 
