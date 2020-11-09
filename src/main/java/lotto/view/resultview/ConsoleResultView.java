@@ -1,6 +1,7 @@
 package lotto.view.resultview;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningStatistic;
 
@@ -16,7 +17,7 @@ public class ConsoleResultView implements ResultView {
         sb.append(boughtLottos.size()).append("개를 구매했습니다.").append(System.lineSeparator());
 
         for (Lotto boughtLotto : boughtLottos) {
-            Set<Integer> numbers = boughtLotto.getNumbers();
+            Set<LottoNumber> numbers = boughtLotto.getNumbers();
             sb.append(numbers.toString()).append(System.lineSeparator());
         }
 

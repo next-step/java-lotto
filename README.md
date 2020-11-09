@@ -56,7 +56,7 @@
 - [x] 당첨 통계를 출력한다.
 
 ### 2단계 피드백 사항
-- [ ] Lotto의 numbers 타입을 Integer -> LottoNumber로 warpping
+- [x] Lotto의 numbers 타입을 Integer -> LottoNumber로 warpping
 - [ ] LottoFactory 1~45 숫자들 상수처리
 - [ ] 멤버변수 최대 3개로 (LottoGame)
 - [ ] Main과 LottoGame 통합 (LottoGame이 main의 역할)

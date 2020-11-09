@@ -13,18 +13,18 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningChecker {
-    public WinningStatistic getResult(Collection<Integer> winningNumbers, Collection<Lotto> boughtLottos) {
-        List<WinningRank> winningRanks = getWinningRanks(winningNumbers, boughtLottos);
+    public WinningStatistic getResult(Lotto winningLotto, Collection<Lotto> boughtLottos) {
+        List<WinningRank> winningRanks = getWinningRanks(winningLotto, boughtLottos);
         Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
         String earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
 
         return new WinningStatistic(countOfWinningRanks, earningsRate);
     }
 
-    private List<WinningRank> getWinningRanks(Collection<Integer> winningNumbers, Collection<Lotto> boughtLottos) {
+    private List<WinningRank> getWinningRanks(Lotto winningLotto, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto boughtLotto : boughtLottos) {
-            winningRanks.add(WinningRank.getWinningRank(winningNumbers, boughtLotto));
+            winningRanks.add(WinningRank.getWinningRank(winningLotto, boughtLotto));
         }
         return winningRanks;
     }

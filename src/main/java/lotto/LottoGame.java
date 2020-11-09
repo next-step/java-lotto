@@ -6,7 +6,6 @@ import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoGame {
     private final InputView inputView;
@@ -29,8 +28,8 @@ public class LottoGame {
             return;
         }
 
-        Set<Integer> winningNumbers = inputView.getWinningNumbers();
-        WinningStatistic winningStatistic = winningChecker.getResult(winningNumbers, boughtLottos);
+        Lotto winningLotto = new Lotto(inputView.getWinningNumbers());
+        WinningStatistic winningStatistic = winningChecker.getResult(winningLotto, boughtLottos);
         resultView.printWinningStatistic(winningStatistic);
     }
 }

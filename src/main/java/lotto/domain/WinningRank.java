@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +30,14 @@ public enum WinningRank {
         this.winningCondition = winningCondition;
     }
 
-    public static WinningRank getWinningRank(Collection<Integer> winningNumbers, Lotto boughtLotto) {
-        WinningCondition winningCondition = getWinningConditionOf(winningNumbers, boughtLotto);
+    public static WinningRank getWinningRank(Lotto winningLotto, Lotto boughtLotto) {
+        WinningCondition winningCondition = getWinningConditionOf(winningLotto, boughtLotto);
         WinningRank winningRank = RANK_BY_CONDITION.get(winningCondition);
         return winningRank != null ? winningRank : NONE;
     }
 
-    private static WinningCondition getWinningConditionOf(Collection<Integer> winningNumbers, Lotto boughtLotto) {
-        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningNumbers);
+    private static WinningCondition getWinningConditionOf(Lotto winningLotto, Lotto boughtLotto) {
+        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningLotto);
 
         return WinningCondition.builder()
                 .matchedCount(matchedCount)
