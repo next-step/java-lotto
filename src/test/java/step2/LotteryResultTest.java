@@ -45,6 +45,10 @@ public class LotteryResultTest {
         private final Map<Matched, Integer> result = new HashMap<>();
 
         public void add(int matched) {
+            if (matched < 0) {
+                throw new OutOfMatchingBoundaryException();
+            }
+
             Matched matchedEnum = Matched.valueBy(() -> {
                 if (matched < 3) {
                     return 0;
