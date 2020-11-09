@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,10 +36,10 @@ public class LottoTest {
         assertAll(
                 () -> assertThatExceptionOfType(IllegalStateException.class)
                         .isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46))
-                        .withMessage(Lotto.INVALID_NUMBER_RANGE_ERR_MSG),
+                        .withMessage(LottoNumber.INVALID_NUMBER_RANGE_ERR_MSG),
                 () -> assertThatExceptionOfType(IllegalStateException.class)
                         .isThrownBy(() -> new Lotto(0, 1, 2, 3, 4, 5))
-                        .withMessage(Lotto.INVALID_NUMBER_RANGE_ERR_MSG)
+                        .withMessage(LottoNumber.INVALID_NUMBER_RANGE_ERR_MSG)
         );
     }
 }

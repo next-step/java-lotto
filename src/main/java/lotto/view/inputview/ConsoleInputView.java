@@ -1,6 +1,7 @@
 package lotto.view.inputview;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -49,8 +50,8 @@ public class ConsoleInputView implements InputView {
     }
 
     private void validateNumberRange(Integer number) {
-        if (number < Lotto.VALID_MIN_NUMBER || number > Lotto.VALID_MAX_NUMBER) {
-            throw new IllegalStateException(Lotto.INVALID_NUMBER_RANGE_ERR_MSG);
+        if (number < LottoNumber.VALID_MIN_NUMBER || number > LottoNumber.VALID_MAX_NUMBER) {
+            throw new IllegalStateException(LottoNumber.INVALID_NUMBER_RANGE_ERR_MSG);
         }
     }
 }
