@@ -8,13 +8,13 @@ public class Extractor {
 
     private static final String BAD_DELIMITER_EXCEPTION_MSG = "잘못된 구분자를 입력하셨습습니다.";
     private static final String BAD_NUM_EXCEPTION_MSG = "잘못된 숫자를 입력하셨습니다.";
-    private static RuntimeException badDelimiterException = new RuntimeException(BAD_DELIMITER_EXCEPTION_MSG);
-    private static RuntimeException badNumsException = new RuntimeException(BAD_NUM_EXCEPTION_MSG);
+    private static final RuntimeException badDelimiterException = new RuntimeException(BAD_DELIMITER_EXCEPTION_MSG);
+    private static final RuntimeException badNumsException = new RuntimeException(BAD_NUM_EXCEPTION_MSG);
 
     private static final String EXTRACT_DELIMITER_REGEX = "^//(.*?)\\n.*$";
     private static final String EXTRACT_NUMS_REGEX = "^//.*\\n(.*?)$";
-    private static Pattern delimiterPattern  = Pattern.compile(EXTRACT_DELIMITER_REGEX);
-    private static Pattern numsPattern = Pattern.compile(EXTRACT_NUMS_REGEX);
+    private static final Pattern delimiterPattern  = Pattern.compile(EXTRACT_DELIMITER_REGEX);
+    private static final Pattern numsPattern = Pattern.compile(EXTRACT_NUMS_REGEX);
 
     public static String extractCustomDelimiter(String input) {
         return extract(
