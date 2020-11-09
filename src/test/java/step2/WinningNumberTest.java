@@ -60,21 +60,27 @@ public class WinningNumberTest {
 
     static class WinningNumber {
         private final NumberSelection numberSelection;
-        private LotteryNumber lotteryNumber;
+        private LotteryNumber winningNumber;
 
         public WinningNumber(NumberSelection numberSelection) {
             this.numberSelection = numberSelection;
         }
 
-        public WinningNumberTest.LotteryResult match(LotteryTickets tickets) {
-            if (lotteryNumber == null) {
+        public LotteryResult match(LotteryTickets tickets) {
+            if (winningNumber == null) {
                 throw new IllegalStateException();
             }
-            return new WinningNumberTest.LotteryResult();
+
+            LotteryResult lotteryResult = new LotteryResult();
+            for (LotteryNumber ticketNumber : tickets.getNumbers()) {
+                lotteryResult.add(ticketNumber.getMatched(winningNumber));
+            }
+
+            return lotteryResult;
         }
 
         public void draw() {
-            lotteryNumber = numberSelection.select(NUMBER_POOL);
+            winningNumber = numberSelection.select(NUMBER_POOL);
         }
 
     }
@@ -97,8 +103,16 @@ public class WinningNumberTest {
     }
 
     static class LotteryResult {
+        private int miss;
+
         public int getMiss() {
-            return 1;
+            return miss;
+        }
+
+        public void add(int matched) {
+            if (matched < 3) {
+                miss++;
+            }
         }
     }
 }
