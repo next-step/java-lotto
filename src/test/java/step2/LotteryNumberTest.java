@@ -9,12 +9,21 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LotteryNumberTest {
     @DisplayName("6개의 번호를 제공해야 한다")
     @Test
     void satisfyConstructor() {
-        Assertions.assertThatThrownBy(() -> LotteryNumber.of(1, 2, 2, 3, 4, 5)) //
+        assertThatThrownBy(() -> LotteryNumber.of(1, 2, 2, 3, 4, 5)) //
                 .isInstanceOf(NotEnoughNumberException.class);
+    }
+
+    @DisplayName("주어진 숫자셋과 교집합의 갯수를 구할 수 있다.")
+    @Test
+    void intersection() {
+        assertThat(LotteryNumber.of(1, 2, 3, 4, 5, 6).getIntersection(LotteryNumber.of(1, 2, 3, 4, 5, 6))).isEqualTo(0);
     }
 
     static class LotteryNumber {
