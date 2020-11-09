@@ -1,10 +1,16 @@
 package step2;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import java.util.HashSet;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step2.LotteryAgentTest.LotteryTickets;
+import static step2.LotteryNumberTest.LotteryNumber;
 
 
 public class WinningNumberTest {
@@ -21,11 +27,19 @@ public class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(new TestingNumberSelection(1, 2, 3, 4, 5, 6));
 
         assertThatThrownBy(() -> winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))) //
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    private LotteryTickets makeLotteryTickets(Integer... numbers) {
+        return new LotteryTickets(singletonList(new LotteryNumber(new HashSet<>(asList(numbers)))));
     }
 
     private static class WinningNumber {
         public WinningNumber(NumberSelection numberSelection) {
+        }
+
+        public void match(LotteryTickets tickets) {
+            throw new IllegalStateException();
         }
     }
 

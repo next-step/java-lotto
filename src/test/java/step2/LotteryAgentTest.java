@@ -78,7 +78,7 @@ public class LotteryAgentTest {
         }
     }
 
-    private static class LotteryTickets {
+    static class LotteryTickets {
         private final List<LotteryNumber> numbers;
 
         public LotteryTickets(List<LotteryNumber> numbers) {
