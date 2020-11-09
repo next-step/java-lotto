@@ -4,30 +4,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
     private static final String CHECK_CUSTOM_REGEX = "^//.*\\n.*$";
     private static final String EXTRACT_DELIMITER_REGEX = "^//(.*?)\\n.*$";
     private static final String EXTRACT_NUMS_REGEX = "^//.*\\n(.*?)$";
     private static final String SPLIT_REGEX = ",|:";
 
-    private static String extract(String str, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
-        if (matcher.find()) {
-            return matcher.group(1);
+    public static int splitAndSum(String str) {
+        if (checkZero(str)) {
+            return 0;
         }
-        return null;
+        if (checkSingle(str)) {
+            return parseStr(str);
+        }
+        return calcSum(str);
     }
 
-    private static String extractCustomDelimiter(String str) {
-        return extract(str, EXTRACT_DELIMITER_REGEX);
-    }
-
-    private static String extractNums(String str) {
-        return extract(str, EXTRACT_NUMS_REGEX);
-    }
-
-    private static boolean checkCustomDelimiter(String str) {
-        return str.matches(CHECK_CUSTOM_REGEX);
+    private static boolean checkZero(String str) {
+        return checkNull(str) || checkEmpty(str);
     }
 
     private static boolean checkNull(String str) {
@@ -38,43 +32,14 @@ public class StringAddCalculator {
         return str.isEmpty();
     }
 
-    private static boolean checkZero(String str) {
-        return checkNull(str) || checkEmpty(str);
-    }
-
-    private static String addDelimiter(String regex, String delimiter) {
-        String or = "|";
-        return regex + or + delimiter;
-    }
-
-    private static String[] splitCustomStr(String str) {
-        String delimiter = extractCustomDelimiter(str);
-        String customRegex = addDelimiter(SPLIT_REGEX, delimiter);
-        str = extractNums(str);
-        return str.split(customRegex);
-    }
-
-    private static String[] splitStr(String str) {
-        if (checkCustomDelimiter(str)) {
-            return splitCustomStr(str);
-        }
-        return str.split(SPLIT_REGEX);
-    }
-
-    private static void validateNum(int num) {
-        if (num < 0) {
-            throw new RuntimeException();
-        }
+    private static boolean checkSingle(String str) {
+        return splitStr(str).length < 1;
     }
 
     private static int parseStr(String str) {
         int num = Integer.parseInt(str);
         validateNum(num);
         return Integer.parseInt(str);
-    }
-
-    private static boolean checkSingle(String str) {
-        return splitStr(str).length < 1;
     }
 
     private static int[] parseStrArr(String[] strArr) {
@@ -100,13 +65,49 @@ public class StringAddCalculator {
         return calcSum(intArr);
     }
 
-    public static int splitAndSum(String str) {
-        if (checkZero(str)) {
-            return 0;
+    private static String extract(String str, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group(1);
         }
-        if (checkSingle(str)) {
-            return parseStr(str);
+        return null;
+    }
+
+    private static String extractCustomDelimiter(String str) {
+        return extract(str, EXTRACT_DELIMITER_REGEX);
+    }
+
+    private static String extractNums(String str) {
+        return extract(str, EXTRACT_NUMS_REGEX);
+    }
+
+    private static boolean checkCustomDelimiter(String str) {
+        return str.matches(CHECK_CUSTOM_REGEX);
+    }
+
+    private static String addDelimiter(String regex, String delimiter) {
+        String or = "|";
+        return regex + or + delimiter;
+    }
+
+    private static String[] splitCustomStr(String str) {
+        String delimiter = extractCustomDelimiter(str);
+        String customRegex = addDelimiter(SPLIT_REGEX, delimiter);
+        str = extractNums(str);
+        return str.split(customRegex);
+    }
+
+    private static String[] splitStr(String str) {
+        if (checkCustomDelimiter(str)) {
+            return splitCustomStr(str);
         }
-        return calcSum(str);
+        return str.split(SPLIT_REGEX);
+    }
+
+    private static void validateNum(int num) {
+        if (num < 0) {
+            throw new RuntimeException();
+        }
     }
 }
