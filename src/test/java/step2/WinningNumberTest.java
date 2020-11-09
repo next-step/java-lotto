@@ -4,11 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -41,7 +38,7 @@ public class WinningNumberTest {
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
-        return new LotteryTickets(singletonList(new LotteryNumber(new HashSet<>(asList(numbers)))));
+        return new LotteryTickets(singletonList(LotteryNumber.of(numbers)));
     }
 
     private static class WinningNumber {
@@ -80,7 +77,7 @@ public class WinningNumberTest {
 
         @Override
         public LotteryNumber select(List<Integer> numberPool) {
-            return new LotteryNumber(new HashSet<>(Arrays.asList(numbers)));
+            return LotteryNumber.of(numbers);
         }
     }
 }
