@@ -2,7 +2,7 @@ package step1;
 
 public class Expression {
     public static final Expression EMPTY_EXPRESSION = new Expression(null); 
-    public final String text;
+    private final String text;
 
     private Expression(final String text) {
         this.text = text;
@@ -14,5 +14,17 @@ public class Expression {
         }
         
         return new Expression(text);
+    }
+    
+    public boolean isEmpty() {
+        return this == EMPTY_EXPRESSION;
+    }
+
+    public boolean hasSingleNumber() {
+        return text.length() == 1;
+    }
+    
+    public int toInteger() {
+        return Integer.parseInt(text);
     }
 }
