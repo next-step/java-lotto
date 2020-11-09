@@ -16,24 +16,25 @@ public class SplitStringTest {
     @ParameterizedTest
     @NullAndEmptySource
     public void splitAndSum_null_또는_빈문자(String input) {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
+        SummoryValue result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isInstanceOf(SummoryValue.class)
+                .isEqualTo(new SummoryValue(0));
     }
 
     @DisplayName("하나의 숫자 입력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3", "5", "6"})
     public void splitAndSum_숫자하나(String input) throws Exception {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(Integer.parseInt(input));
+        SummoryValue result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(new SummoryValue(Integer.parseInt(input)));
     }
 
     @DisplayName("쉼표구분자 테스트")
     @ParameterizedTest
     @MethodSource("provideCommaAndResult")
     public void splitAndSum_쉼표구분자(String input, int resultValue) throws Exception {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(resultValue);
+        SummoryValue result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(new SummoryValue(resultValue));
     }
 
     private static Stream<Arguments> provideCommaAndResult() {
@@ -47,8 +48,8 @@ public class SplitStringTest {
     @ParameterizedTest
     @MethodSource("provideCommaWithColonAndResult")
     public void splitAndSum_쉼표_또는_콜론_구분자(String input, int resultValue) throws Exception {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(resultValue);
+        SummoryValue result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(new SummoryValue(resultValue));
     }
 
     private static Stream<Arguments> provideCommaWithColonAndResult() {
@@ -61,8 +62,8 @@ public class SplitStringTest {
     @ParameterizedTest
     @MethodSource("provideCustomSeparatorAndResult")
     public void splitAndSum_custom_구분자(String input, int resultValue) throws Exception {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(resultValue);
+        SummoryValue result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(new SummoryValue(resultValue));
     }
 
     private static Stream<Arguments> provideCustomSeparatorAndResult() {
