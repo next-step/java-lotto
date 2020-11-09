@@ -10,59 +10,59 @@ public class StringAddCalculator {
     private static final String EXTRACT_NUMS_REGEX = "^//.*\\n(.*?)$";
     private static final String SPLIT_REGEX = ",|:";
 
-    public static int splitAndSum(String str) {
-        if (checkZero(str)) {
+    public static int splitAndSum(String input) {
+        if (checkZero(input)) {
             return 0;
         }
-        if (checkSingle(str)) {
-            return parseStr(str);
+        if (checkSingle(input)) {
+            return parseNumStr(input);
         }
-        return calcSum(str);
+        return calcSum(input);
     }
 
-    private static boolean checkZero(String str) {
-        return checkNull(str) || checkEmpty(str);
+    private static boolean checkZero(String input) {
+        return checkNull(input) || checkEmpty(input);
     }
 
-    private static boolean checkNull(String str) {
-        return str == null;
+    private static boolean checkNull(String input) {
+        return input == null;
     }
 
-    private static boolean checkEmpty(String str) {
-        return str.isEmpty();
+    private static boolean checkEmpty(String input) {
+        return input.isEmpty();
     }
 
-    private static boolean checkSingle(String str) {
-        return splitStr(str).length < 1;
+    private static boolean checkSingle(String input) {
+        return splitInput(input).length < 1;
     }
 
-    private static int parseStr(String str) {
-        int num = Integer.parseInt(str);
+    private static int parseNumStr(String numStr) {
+        int num = Integer.parseInt(numStr);
         validateNum(num);
-        return Integer.parseInt(str);
+        return num;
     }
 
-    private static int[] parseStrArr(String[] strArr) {
-        int length = strArr.length;
-        int[] arr = new int[length];
+    private static int[] parseNumStrArr(String[] numStrArr) {
+        int length = numStrArr.length;
+        int[] numArr = new int[length];
         for (int i = 0; i < length; i++) {
-            arr[i] = parseStr(strArr[i]);
+            numArr[i] = parseNumStr(numStrArr[i]);
         }
-        return arr;
+        return numArr;
     }
 
-    private static int calcSum(int[] arr) {
+    private static int calcSum(int[] numArrr) {
         int sum = 0;
-        for (int num: arr) {
+        for (int num: numArrr) {
             sum += num;
         }
         return sum;
     }
 
-    private static int calcSum(String str) {
-        String[] strArr = splitStr(str);
-        int[] intArr = parseStrArr(strArr);
-        return calcSum(intArr);
+    private static int calcSum(String input) {
+        String[] numStrArr = splitInput(input);
+        int[] numArr = parseNumStrArr(numStrArr);
+        return calcSum(numArr);
     }
 
     private static String extract(String str, String regex) {
@@ -74,35 +74,35 @@ public class StringAddCalculator {
         return null;
     }
 
-    private static String extractCustomDelimiter(String str) {
-        return extract(str, EXTRACT_DELIMITER_REGEX);
+    private static String extractCustomDelimiter(String input) {
+        return extract(input, EXTRACT_DELIMITER_REGEX);
     }
 
-    private static String extractNums(String str) {
-        return extract(str, EXTRACT_NUMS_REGEX);
+    private static String extractNums(String input) {
+        return extract(input, EXTRACT_NUMS_REGEX);
     }
 
-    private static boolean checkCustomDelimiter(String str) {
-        return str.matches(CHECK_CUSTOM_REGEX);
+    private static boolean checkCustomDelimiter(String input) {
+        return input.matches(CHECK_CUSTOM_REGEX);
     }
 
-    private static String addDelimiter(String regex, String delimiter) {
+    private static String addDelimiter(String splitRegex, String delimiter) {
         String or = "|";
-        return regex + or + delimiter;
+        return splitRegex + or + delimiter;
     }
 
-    private static String[] splitCustomStr(String str) {
-        String delimiter = extractCustomDelimiter(str);
+    private static String[] splitCustomInput(String input) {
+        String delimiter = extractCustomDelimiter(input);
         String customRegex = addDelimiter(SPLIT_REGEX, delimiter);
-        str = extractNums(str);
-        return str.split(customRegex);
+        input = extractNums(input);
+        return input.split(customRegex);
     }
 
-    private static String[] splitStr(String str) {
-        if (checkCustomDelimiter(str)) {
-            return splitCustomStr(str);
+    private static String[] splitInput(String input) {
+        if (checkCustomDelimiter(input)) {
+            return splitCustomInput(input);
         }
-        return str.split(SPLIT_REGEX);
+        return input.split(SPLIT_REGEX);
     }
 
     private static void validateNum(int num) {
