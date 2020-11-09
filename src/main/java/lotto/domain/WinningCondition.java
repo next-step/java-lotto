@@ -26,17 +26,17 @@ class WinningCondition {
         return matchedCount;
     }
 
-    public static class Builder{
+    static class Builder{
         private int matchedCount;
 
         private Builder(){}
 
-        public Builder matchedCount(int matchedCount) {
+        Builder matchedCount(int matchedCount) {
             this.matchedCount = matchedCount;
             return this;
         }
 
-        public WinningCondition build() {
+        WinningCondition build() {
             return new WinningCondition(this.matchedCount);
         }
     }
