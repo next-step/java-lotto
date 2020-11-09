@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +15,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
 import static step2.PlayslipTest.Playslip.NUMBER_POOL;
+import static step2.WinningNumberTest.LotteryResult.*;
+import static step2.WinningNumberTest.LotteryResult.Matched.*;
 
 
 public class WinningNumberTest {
@@ -50,7 +52,7 @@ public class WinningNumberTest {
                 .toArray(Integer[]::new);
         LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
 
-        assertThat(lotteryResult.getMiss()).isEqualTo(miss);
+        assertThat(lotteryResult.getMatchResult(Matched.miss)).isEqualTo(miss);
     }
 
     @DisplayName("3개 일치 테스트")
@@ -64,7 +66,7 @@ public class WinningNumberTest {
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
-        assertThat(lotteryResult.getThreeMatched()).isEqualTo(2);
+        assertThat(lotteryResult.getMatchResult(three)).isEqualTo(2);
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
@@ -119,21 +121,44 @@ public class WinningNumberTest {
         private int miss;
         private int threeMatched;
 
+        enum Matched {
+            miss(0), three(3), four(4), five(5), six(6);
+
+            private final int matchingCount;
+
+            Matched(int matchingCount) {
+                this.matchingCount = matchingCount;
+            }
+
+            public static Matched valueBy(Supplier<Integer> matched) {
+                return Arrays.stream(values()) //
+                        .filter(value -> value.matchingCount == matched.get()) //
+                        .findFirst().orElseThrow(IllegalArgumentException::new);
+            }
+        }
+
+        private final Map<Matched, Integer> result = new HashMap<>();
+
         public int getMiss() {
             return miss;
         }
 
         public void add(int matched) {
-            if (matched < 3) {
-                miss++;
-            }
-            if (matched == 3) {
-                threeMatched++;
-            }
+            Matched matchedEnum = Matched.valueBy(() -> {
+                if (matched < 3) {
+                    return 0;
+                } return matched;
+            });
+
+            result.compute(matchedEnum, (key, value) -> value == null ? 1 : value + 1);
         }
 
         public int getThreeMatched() {
             return threeMatched;
+        }
+
+        public int getMatchResult(Matched matched) {
+            return result.getOrDefault(matched, 0);
         }
     }
 }
