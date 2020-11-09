@@ -38,8 +38,19 @@ public class ConsoleInputView implements InputView {
     }
 
     private void validate(Set<Integer> winningNumbers) {
+        validateNumberSize(winningNumbers);
+        winningNumbers.forEach(this::validateNumberRange);
+    }
+
+    private void validateNumberSize(Set<Integer> winningNumbers) {
         if (winningNumbers.size() != Lotto.VALID_NUMBERS_SIZE) {
             throw new IllegalArgumentException(INVALID_NUMBERS_SIZE_ERR_MSG);
+        }
+    }
+
+    private void validateNumberRange(Integer number) {
+        if (number < Lotto.VALID_MIN_NUMBER || number > Lotto.VALID_MAX_NUMBER) {
+            throw new IllegalStateException(Lotto.INVALID_NUMBER_RANGE_ERR_MSG);
         }
     }
 }
