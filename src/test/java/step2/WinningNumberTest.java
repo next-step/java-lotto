@@ -24,11 +24,13 @@ public class WinningNumberTest {
     @BeforeEach
     void setUp() {
         winningNumber = new WinningNumber(new TestingNumberSelection(1, 2, 3, 4, 5, 6));
+        winningNumber.draw();
     }
 
     @DisplayName("draw 하기 전에 match 할 수 없다.")
     @Test
     void cannotMatchWithoutDraw() {
+        WinningNumber winningNumber = new WinningNumber(new TestingNumberSelection(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))) //
                 .isInstanceOf(IllegalStateException.class);
     }
@@ -36,7 +38,6 @@ public class WinningNumberTest {
     @DisplayName("match 결과를 받을 수 있다.")
     @Test
     void matchResult() {
-        winningNumber.draw();
         assertThat(winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))).isNotNull();
     }
 
@@ -44,8 +45,6 @@ public class WinningNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"11,12,13,14,15,16|1", "1,12,13,14,15,16|1", "1,2,13,14,15,16|1", "1,2,3,14,15,16|0"}, delimiter = '|')
     void miss(String stringNumbers, int miss) {
-        winningNumber.draw();
-
         Integer[] numbers = Arrays.stream(stringNumbers.split(",")) //
                 .map(Integer::valueOf) //
                 .toArray(Integer[]::new);
@@ -57,8 +56,6 @@ public class WinningNumberTest {
     @DisplayName("3개 일치 테스트")
     @Test
     void threeMatched() {
-        winningNumber.draw();
-
         //@formatter:off
         LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
                 Arrays.asList(
