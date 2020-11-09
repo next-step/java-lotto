@@ -2,6 +2,8 @@ package step1;
 
 import java.util.List;
 
+import static step1.ExpressionSeparator.DEFAULT_DELIMITER;
+
 public class Expression {
     public static final Expression EMPTY_EXPRESSION = new Expression("0");
     private final String text;
@@ -41,7 +43,7 @@ public class Expression {
         return Integer.parseInt(text);
     }
 
-    public List<String> separate(final String delimiter) {
-        return ExpressionSeparator.split(this, delimiter);
+    public List<String> toNumbers() {
+        return ExpressionSeparator.split(this, DEFAULT_DELIMITER);
     }
 }

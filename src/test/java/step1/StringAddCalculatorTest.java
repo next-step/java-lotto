@@ -68,6 +68,7 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_not_number() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("홍,성,민"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("구현중");
     }
 }

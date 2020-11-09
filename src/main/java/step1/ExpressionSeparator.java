@@ -7,7 +7,7 @@ import java.util.List;
 public class ExpressionSeparator {
     private static final String COMMA_DELIMITER = ",";
     private static final String COLON_DELIMITER = ":";
-    private static final String DEFAULT_DELIMITER = COLON_DELIMITER + "|" + COMMA_DELIMITER;
+    public static final String DEFAULT_DELIMITER = COLON_DELIMITER + "|" + COMMA_DELIMITER;
 
     private ExpressionSeparator() {
         throw new AssertionError();
