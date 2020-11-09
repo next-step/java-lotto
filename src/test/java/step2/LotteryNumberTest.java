@@ -27,7 +27,7 @@ public class LotteryNumberTest {
     @ParameterizedTest
     @MethodSource("provideIntersectionTest")
     void intersection(LotteryNumber source, LotteryNumber target, int matched) {
-        assertThat(source.getIntersection(target)).isEqualTo(matched);
+        assertThat(source.getMatched(target)).isEqualTo(matched);
     }
 
     private static Stream<Arguments> provideIntersectionTest() {
@@ -62,7 +62,7 @@ public class LotteryNumberTest {
             return numbers;
         }
 
-        public int getIntersection(LotteryNumber other) {
+        public int getMatched(LotteryNumber other) {
             Set<Integer> intersection = new HashSet<>(numbers);
             intersection.retainAll(other.numbers);
             return intersection.size();
