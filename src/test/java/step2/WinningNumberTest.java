@@ -59,10 +59,15 @@ public class WinningNumberTest {
     void threeMatched() {
         winningNumber.draw();
 
-        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets( //
-                Arrays.asList(LotteryNumber.of(1, 2, 3, 14, 15, 16), LotteryNumber.of(11, 12, 13, 4, 5, 6))));
+        //@formatter:off
+        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
+                Arrays.asList(
+                        LotteryNumber.of(1, 2, 3, 14, 15, 16), // 3개 일치
+                        LotteryNumber.of(1, 2, 3, 14, 15, 16), // 3개 일치
+                        LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
+        //@formatter:on
 
-        assertThat(lotteryResult.getThreeMatchd()).isEqualTo(2);
+        assertThat(lotteryResult.getThreeMatched()).isEqualTo(2);
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
@@ -115,6 +120,7 @@ public class WinningNumberTest {
 
     static class LotteryResult {
         private int miss;
+        private int threeMatched;
 
         public int getMiss() {
             return miss;
@@ -124,6 +130,13 @@ public class WinningNumberTest {
             if (matched < 3) {
                 miss++;
             }
+            if (matched == 3) {
+                threeMatched++;
+            }
+        }
+
+        public int getThreeMatched() {
+            return threeMatched;
         }
     }
 }
