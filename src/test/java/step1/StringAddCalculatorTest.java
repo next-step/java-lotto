@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static step1.Expression.TOKEN_MUST_BE_NUMBER;
 
 public class StringAddCalculatorTest {
     @DisplayName("문자열이 null인 경우")
@@ -69,6 +70,6 @@ public class StringAddCalculatorTest {
     public void splitAndSum_not_number() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("홍,성,민"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("구현중");
+                .hasMessageContaining(TOKEN_MUST_BE_NUMBER);
     }
 }

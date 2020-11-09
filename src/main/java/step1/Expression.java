@@ -5,8 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static step1.ExpressionSeparator.DEFAULT_DELIMITER;
+import static util.Preconditions.checkArgument;
 
 public class Expression {
+    public static final String TOKEN_MUST_BE_NUMBER = "token must be number";
     public static final Expression EMPTY_EXPRESSION = new Expression("0", DEFAULT_DELIMITER);
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private final String text;
@@ -21,7 +23,7 @@ public class Expression {
         if (StringUtils.isBlank(expression)) {
             return EMPTY_EXPRESSION;
         }
-        
+
         final Matcher matcher = PATTERN.matcher(expression);
         if (matcher.find()) {
             return new Expression(matcher.group(2), matcher.group(1));
@@ -53,6 +55,8 @@ public class Expression {
     }
 
     public List<String> toTokens() {
-        return ExpressionSeparator.split(this, delimiter);
+        final List<String> tokens = ExpressionSeparator.split(this, delimiter);
+        checkArgument(tokens.stream().allMatch(NumberFormatValidator::isValid), TOKEN_MUST_BE_NUMBER);
+        return tokens;
     }
 }
