@@ -62,7 +62,11 @@
 - [x] 멤버변수 최대 3개로 (LottoGame)
     - 멤버변수에 갯수에 대한 고민을 많이 해본적이 없어서 이런식으로 하는게 맞는지 잘 모르겠네요. LottoFactory와 WinningChecker를 하나의 추상화된 이름으로 짓는 네이밍도 어려웠구요. 방법은 올바르게 했는지 혹시 해당 규칙을 지키기 위한 팁이나 방법론이 있는지 궁금합니다!
     - LottoFactory와 WinningChecker는 인스턴스 멤버 변수도 없고 기능이 확장될것 같지 않다고 판단해서 정적타입으로 변경했습니다. 어떤 것 같나요?
-- [ ] Main과 LottoGame 통합 (LottoGame이 main의 역할)
+- [x] Main과 LottoGame 통합 (LottoGame이 main의 역할)
+    - 이 부분은 제가 리뷰를 제대로 이해하고 요약한게 맞을까요?ㅎㅎ
+    - LottoGame은 일종의 Controller나 Handler의 역할을 하고 외부에서 의존객체를 주입해주면 좋겠다고 생각했어요. 
+    - Main은 어플리케이션의 실행과 의존관계 설정을 하는 역할을 주고 싶었습니다.
+    - 위와 같은 이유로 2개의 클래스를 분리하고 싶었어요. :)
 - [ ] WinningCondition Builder패턴 적절한가 고민해보기
 - [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
 - [ ] ConsoleInputView 상수와 멤버변수를 개행
