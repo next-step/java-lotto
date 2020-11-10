@@ -31,4 +31,10 @@ public class ConsoleInputView implements InputView {
                 .map(Integer::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
+
+    @Override
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }

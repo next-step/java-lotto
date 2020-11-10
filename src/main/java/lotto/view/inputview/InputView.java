@@ -6,4 +6,6 @@ public interface InputView {
     int getAmount();
 
     Set<Integer> getWinningNumbers();
+
+    int getBonusNumber();
 }
