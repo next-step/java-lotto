@@ -46,18 +46,28 @@ public class NumberSelectionTest {
     public static class NaturalSelection {
 
         public Set<Integer> select(List<Integer> numberPool) {
+            return this.select(numberPool, 6);
+        }
+
+        public Set<Integer> select(List<Integer> numberPool, int count) {
             Set<Integer> numberPoolSet = new HashSet<>(numberPool);
             if (numberPoolSet.size() != numberPool.size()) {
                 throw new DuplicateNumberPoolException();
             }
+            if (numberPoolSet.size() < count) {
+                throw new NotEnoughNumberPoolSizeException();
+            }
 
             List<Integer> modifiableNumberPool = new ArrayList<>(numberPool);
             Collections.shuffle(modifiableNumberPool);
-            return new HashSet<>(modifiableNumberPool.subList(0, 6));
+            return new HashSet<>(modifiableNumberPool.subList(0, count));
         }
 
     }
 
     private static class DuplicateNumberPoolException extends IllegalArgumentException {
+    }
+
+    private static class NotEnoughNumberPoolSizeException extends IllegalArgumentException {
     }
 }
