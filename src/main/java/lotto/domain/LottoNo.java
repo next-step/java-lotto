@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.asset.LottoNoConst;
 import lotto.exception.LottoNoException;
 
 public class LottoNo {
@@ -11,17 +12,37 @@ public class LottoNo {
     Integer lottoNo;
 
     public LottoNo(int lottoNo) {
+        validateLottoNo(lottoNo);
         this.lottoNo = lottoNo;
     }
 
     public LottoNo(String lottoNo) {
+        validateLottoNo(lottoNo);
+        this.lottoNo = Integer.parseInt(lottoNo);
+    }
+
+    public int getLottoNo() {
+        return lottoNo;
+    }
+
+    private void validateLottoNo(int lottoNo) {
+        boolean badRange = lottoNo > LottoNoConst.LOTTO_NO_MAX
+                || lottoNo < LottoNoConst.LOTTO_NO_MIN;
+        if (badRange) {
+            throw LottoNoException.getRangeException();
+        }
+    }
+
+    private void validateLottoNo(String lottoNo) {
         if (lottoNo == null) {
             throw LottoNoException.getNpeException();
         }
+        int num;
         try {
-            this.lottoNo = Integer.parseInt(lottoNo);
+            num = Integer.parseInt(lottoNo);
         } catch (Exception e) {
             throw LottoNoException.getNanException();
         }
+        validateLottoNo(num);
     }
 }

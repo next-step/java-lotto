@@ -25,6 +25,6 @@
 - Collections.sort() 메소드를 활용해 정렬
 - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단
 - UI 로직을 InputView, ResultView와 같은 클래스를 추가해 분리
-- 로또 숫자 하나는 int 타입이다. 이 숫자 하나를 추상화한 LottoNo 객체를 추가해 구현
+- [t] [f] 로또 숫자 하나는 int 타입이다. 이 숫자 하나를 추상화한 LottoNo 객체를 추가해 구현
 - 당첨번호 객체 안에 6 사이즈 LottoNo arr를 넣고, 당첨번호 객체들을 일급 컬렉션으로 관리
 - Optional을 적용해 NullPointerException이 발생하지 않도록 함
