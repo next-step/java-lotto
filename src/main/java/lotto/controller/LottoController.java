@@ -11,6 +11,7 @@ import lotto.view.ResultView;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class LottoController {
 
@@ -23,31 +24,29 @@ public class LottoController {
         PrintWriter output = new PrintWriter(System.out, true);
         InputView inputView = new InputView(new Scanner(System.in), output);
         ResultView resultView = new ResultView(output);
-        while (true) {
-            if (executeAndCheckException(inputView, resultView)) break;
-        }
+        buyLottAndCalculateYield(inputView, resultView);
         output.close();
     }
 
-    private static boolean executeAndCheckException(InputView inputView, ResultView resultView) {
-        try {
-            execute(inputView, resultView);
-            return true;
-        } catch (NumberFormatException exception) {
-            resultView.showErrorMessage(NUMBER_FORMAT_EXCEPTION_MESSAGE);
-        } catch (Exception exception) {
-            resultView.showErrorMessage(exception.getMessage());
-        }
-        return false;
-    }
-
-    private static void execute(InputView inputView, ResultView resultView) {
-        Money money = Money.of(inputView.getMoney());
-        int manualLottoCount = inputView.getManualLottoCount();
-        Lottos lottos = Lottos.withMoneyAndManualLottoNumbers(money, inputView.getManualLottoNumbers(manualLottoCount));
+    private static void buyLottAndCalculateYield(InputView inputView, ResultView resultView) {
+        Money money = input(() -> Money.of(inputView.getMoney()), resultView);
+        int manualLottoCount = input(inputView::getManualLottoCount, resultView);
+        Lottos lottos = Lottos.buy(money, input(() -> inputView.getManualLottoNumbers(manualLottoCount), resultView));
         resultView.showLottos(lottos, manualLottoCount);
         WinningStatistics winningStatistics = lottos.getWinningStatistics(
-                WinningLotto.of(Lotto.ofNumbers(inputView.getLastLottoNumbers()), LottoNumber.of(inputView.getBonusLottoNumber())));
+                WinningLotto.of(Lotto.ofNumbers(inputView.getLastLottoNumbers()), LottoNumber.of(input(inputView::getBonusLottoNumber, resultView))));
         resultView.showResult(winningStatistics, winningStatistics.calculateYield(money));
+    }
+
+    private static <T> T input(Supplier<T> inputValueSupplier, ResultView resultView) {
+        try {
+            return inputValueSupplier.get();
+        } catch (NumberFormatException exception) {
+            resultView.showErrorMessage(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+            return input(inputValueSupplier, resultView);
+        } catch (Exception e) {
+            resultView.showErrorMessage(e.getMessage());
+            return input(inputValueSupplier, resultView);
+        }
     }
 }

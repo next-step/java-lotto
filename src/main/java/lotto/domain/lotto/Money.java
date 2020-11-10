@@ -2,9 +2,9 @@ package lotto.domain.lotto;
 
 import lotto.domain.exception.InvalidMoneyException;
 
-public class Money {
+public final class Money {
     private static final int MINIMUM_AMOUNT = 1;
-    private int amount;
+    private final int amount;
 
     private Money(int amount) {
         this.amount = amount;

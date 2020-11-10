@@ -47,7 +47,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos withMoneyAndManualLottoNumbers(Money money, List<List<Integer>> manualLottoNumbers) {
+    public static Lottos buy(Money money, List<List<Integer>> manualLottoNumbers) {
         return merge(getLottosByManual(manualLottoNumbers),
                 getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()));
     }
