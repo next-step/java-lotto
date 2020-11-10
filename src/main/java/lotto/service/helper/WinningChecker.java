@@ -31,7 +31,7 @@ public class WinningChecker {
     }
 
     private static Map<WinningRank, Integer> getCountOfWinningRanks(List<WinningRank> winningRanks) {
-        EnumMap<WinningRank, Integer> countOfWinningRanks = new EnumMap<>(WinningRank.class);
+        Map<WinningRank, Integer> countOfWinningRanks = new EnumMap<>(WinningRank.class);
         for (WinningRank winningRank : winningRanks) {
             countOfWinningRanks.put(winningRank, countOfWinningRanks.getOrDefault(winningRank, 0) + 1);
         }

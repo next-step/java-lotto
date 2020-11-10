@@ -41,7 +41,7 @@ public class ConsoleResultView implements ResultView {
     }
 
     private void appendStatistics(WinningStatistic winningStatistic, StringBuilder sb) {
-        EnumSet<WinningRank> winningRanks = EnumSet.allOf(WinningRank.class);
+        Set<WinningRank> winningRanks = EnumSet.allOf(WinningRank.class);
         winningRanks.stream()
                 .filter(r -> r.getWinningAmount() > 0)
                 .map(r -> getStatisticFrom(winningStatistic, r))
