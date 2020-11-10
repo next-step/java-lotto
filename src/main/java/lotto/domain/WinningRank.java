@@ -6,10 +6,11 @@ import java.util.Map;
 
 public enum WinningRank {
     NONE("꽝", 0, null),
-    MATCHES_THREE("3개 일치", 5_000, WinningCondition.builder().matchedCount(3).build()),
-    MATCHES_FOUR("4개 일치", 50_000, WinningCondition.builder().matchedCount(4).build()),
-    MATCHES_FIVE("5개 일치", 1_500_000, WinningCondition.builder().matchedCount(5).build()),
-    MATCHES_SIX("6개 일치", 2_000_000_000, WinningCondition.builder().matchedCount(6).build());
+    MATCHES_THREE("3개 일치", 5_000, WinningCondition.of(3, false)),
+    MATCHES_FOUR("4개 일치", 50_000, WinningCondition.of(4, false)),
+    MATCHES_FIVE("5개 일치", 1_500_000, WinningCondition.of(5, false)),
+    MATCHES_FIVE_AND_BONUS_NUMBER("5개 일치, 보너스 볼 일치", 30_000_000, WinningCondition.of(5, true)),
+    MATCHES_SIX("6개 일치", 2_000_000_000, WinningCondition.of(6, false));
 
     private static final Map<WinningCondition, WinningRank> RANK_BY_CONDITION;
 
@@ -30,18 +31,17 @@ public enum WinningRank {
         this.winningCondition = winningCondition;
     }
 
-    public static WinningRank getWinningRank(Lotto winningLotto, Lotto boughtLotto) {
-        WinningCondition winningCondition = getWinningConditionOf(winningLotto, boughtLotto);
+    public static WinningRank getWinningRank(Lotto winningLotto, LottoNumber bonusNumber, Lotto boughtLotto) {
+        WinningCondition winningCondition = getWinningConditionOf(winningLotto, bonusNumber, boughtLotto);
         WinningRank winningRank = RANK_BY_CONDITION.get(winningCondition);
         return winningRank != null ? winningRank : NONE;
     }
 
-    private static WinningCondition getWinningConditionOf(Lotto winningLotto, Lotto boughtLotto) {
+    private static WinningCondition getWinningConditionOf(Lotto winningLotto, LottoNumber bonusNumber, Lotto boughtLotto) {
         int matchedCount = boughtLotto.getMatchedCountCompareTo(winningLotto);
+        boolean bonusNumMatched = boughtLotto.contains(bonusNumber);
 
-        return WinningCondition.builder()
-                .matchedCount(matchedCount)
-                .build();
+        return WinningCondition.of(matchedCount, bonusNumMatched);
     }
 
     public static int getTotalWinningAmount(List<WinningRank> winningRanks) {

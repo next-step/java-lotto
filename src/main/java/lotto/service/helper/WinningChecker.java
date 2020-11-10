@@ -1,6 +1,7 @@
 package lotto.service.helper;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningStatistic;
 
@@ -24,7 +25,7 @@ public class WinningChecker {
     private static List<WinningRank> getWinningRanks(Lotto winningLotto, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto boughtLotto : boughtLottos) {
-            winningRanks.add(WinningRank.getWinningRank(winningLotto, boughtLotto));
+            winningRanks.add(WinningRank.getWinningRank(winningLotto, LottoNumber.from(45), boughtLotto));
         }
         return winningRanks;
     }
