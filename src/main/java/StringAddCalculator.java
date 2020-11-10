@@ -3,7 +3,8 @@ public class StringAddCalculator {
         if (validateInput(input))
             return 0;
 
-        return Integer.parseInt(input);
+        Numbers numbers = Numbers.from(input);
+        return numbers.sum();
     }
 
     private static boolean validateInput(String input) {
