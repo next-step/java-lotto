@@ -18,6 +18,9 @@ public class Money {
     }
 
     public int divide(Money money) {
+        if (money.amount == 0) {
+            throw new MoneyArithmeticException("/ by zero");
+        }
         return amount / money.amount;
     }
 
