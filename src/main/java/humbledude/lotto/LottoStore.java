@@ -2,7 +2,6 @@ package humbledude.lotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class LottoStore {
@@ -25,14 +24,13 @@ public class LottoStore {
                 LOTTO_FOURTH_PRIZE);
     }
 
-
     public LottoStore() {}
 
     public void setWinningNumbers(LottoWinningNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public List<LottoTicket> buyAutoTickets(int budget) {
+    public List<LottoTicket> buyAutoTickets(long budget) {
         long howMany = budget / LOTTO_TICKET_PRICE;
 
         return LongStream.range(0, howMany)

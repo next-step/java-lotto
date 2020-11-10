@@ -15,7 +15,7 @@ public class LottoStoreTest {
 
     @Test
     public void buyAutoTickets() {
-        int budget = 14_023;
+        long budget = 14_023;
         LottoStore store = new LottoStore();
         List<LottoTicket> lottoTicketList = store.buyAutoTickets(budget);
 
