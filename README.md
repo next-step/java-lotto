@@ -68,6 +68,6 @@
 - [ ] ConsoleInputView 상수와 멤버변수를 개행
 - [ ] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
 - [ ] 구입금액이 음수로 입력된 경우 예외
-- [ ] 1000 -> 1_000으로 통일 
-- [ ] 테스트 메서드명 카멜케이스로
+- [x] 1000 -> 1_000으로 통일 
+- [x] 테스트 메서드명 카멜케이스로
 - [ ] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
