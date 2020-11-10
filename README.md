@@ -67,8 +67,8 @@
     - LottoGame은 일종의 Controller나 Handler의 역할을 하고 외부에서 의존객체를 주입해주면 좋겠다고 생각했어요. 
     - Main은 어플리케이션의 실행과 의존관계 설정을 하는 역할을 주고 싶었습니다.
     - 위와 같은 이유로 2개의 클래스를 분리하고 싶었어요. :)
-- [ ] WinningCondition Builder패턴 적절한가 고민해보기
-- [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
+- [x] WinningCondition Builder패턴 적절한가 고민해보기
+- [x] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
 - [x] ConsoleInputView 상수와 멤버변수를 개행
 - [x] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
     - 확실히 Input에서 검증을 하는건 별로 안좋아 보이네요.
