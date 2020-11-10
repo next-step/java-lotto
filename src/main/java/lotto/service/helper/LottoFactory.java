@@ -17,6 +17,9 @@ public class LottoFactory {
         }
     }
 
+    private LottoFactory() {
+    }
+
     public static List<Lotto> buyLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {

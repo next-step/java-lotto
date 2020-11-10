@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningChecker {
+    private WinningChecker() {
+
+    }
+
     public static WinningStatistic getResult(WinningNumber winningNumber, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = getWinningRanks(winningNumber, boughtLottos);
         Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
