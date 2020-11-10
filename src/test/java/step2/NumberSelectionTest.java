@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.PlayslipTest.Playslip.NUMBER_POOL;
 
 public class NumberSelectionTest {
@@ -25,6 +26,14 @@ public class NumberSelectionTest {
         for (int i = 0; i < 1000; i++) {
             assertThat(firstSelection).isNotEqualTo(selection.select(NUMBER_POOL));
         }
+    }
+
+
+    @DisplayName("입력값은 중복을 허용하지 않는다.")
+    @Test
+    void notAllowedDuplicateNumberPool() {
+        assertThatThrownBy(() -> new NaturalSelection().select(Arrays.asList(1, 2, 2, 3))) //
+                .isInstanceOf(DuplicateNumberPoolException.class);
     }
 
     public static class NaturalSelection {
