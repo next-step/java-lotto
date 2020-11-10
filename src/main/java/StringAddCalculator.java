@@ -1,6 +1,6 @@
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        if (validateInput(input))
+        if (!validateInput(input))
             return 0;
 
         Numbers numbers = Numbers.from(input);
