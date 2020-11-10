@@ -21,7 +21,7 @@ public class LottoFactory {
         List<Lotto> lottos = new ArrayList<>();
         for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {
             Collections.shuffle(NUMBERS);
-            lottos.add(new Lotto(NUMBERS.subList(0, Lotto.VALID_NUMBERS_SIZE)));
+            lottos.add(Lotto.of(NUMBERS.subList(0, Lotto.VALID_NUMBERS_SIZE)));
         }
 
         return lottos;

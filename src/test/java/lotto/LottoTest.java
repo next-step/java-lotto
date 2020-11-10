@@ -20,7 +20,7 @@ public class LottoTest {
     @DisplayName("로또 생성시 number size가 유효하지 않으면 throw IllegalStateException")
     void createTestInvalidNumberSize(List<Integer> numbers) {
         assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> new Lotto(numbers))
+                .isThrownBy(() -> Lotto.of(numbers))
                 .withMessage(Lotto.INVALID_NUMBERS_SIZE_ERR_MSG);
     }
 
@@ -35,7 +35,7 @@ public class LottoTest {
     @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalStateException")
     void createTestDuplicatedNumbers() {
         assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> new Lotto(1, 1, 1, 1, 1, 1))
+                .isThrownBy(() -> Lotto.of(1, 1, 1, 1, 1, 1))
                 .withMessage(Lotto.INVALID_NUMBERS_SIZE_ERR_MSG);
     }
 
@@ -44,7 +44,7 @@ public class LottoTest {
     @DisplayName("로또 숫자가 지정된 범위 만족하지 않으면 throw IllegalStateException (ex 1~45 사이의 숫자만).")
     void createTestNumberRange(List<Integer> numbers) {
         assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> new Lotto(numbers))
+                .isThrownBy(() -> Lotto.of(numbers))
                 .withMessage(LottoNumber.INVALID_NUMBER_RANGE_ERR_MSG);
     }
 

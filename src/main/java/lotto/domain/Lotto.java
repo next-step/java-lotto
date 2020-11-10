@@ -15,13 +15,17 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(Collection<Integer> numbers) {
+    private Lotto(Collection<Integer> numbers) {
         this.numbers = Collections.unmodifiableSet(getLottoNumbersFrom(numbers));
         validateNumbersSize();
     }
 
-    public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
+    public static Lotto of(Collection<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto of(Integer... numbers) {
+        return new Lotto(Arrays.asList(numbers));
     }
 
     private Set<LottoNumber> getLottoNumbersFrom(Collection<Integer> numbers) {

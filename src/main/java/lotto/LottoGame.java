@@ -57,7 +57,7 @@ public class LottoGame {
     }
 
     private Lotto getWinningLotto() {
-        return new Lotto(view.getWinningNumbers());
+        return Lotto.of(view.getWinningNumbers());
     }
 
     private void validate(Lotto winningLotto, LottoNumber bonusNumber) {

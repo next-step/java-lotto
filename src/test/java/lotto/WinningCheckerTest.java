@@ -24,7 +24,7 @@ public class WinningCheckerTest {
     @MethodSource("boughtLottos")
     @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 당첨 횟수와 수익이 얼마나 되는지 계산한다.")
     void winningAndStatisticTest(List<Lotto> boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.from(45);
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
@@ -45,13 +45,13 @@ public class WinningCheckerTest {
 
     private static List<Lotto> lottosEarningZero() {
         List<Lotto> boughtLottos = new ArrayList<>();
-        boughtLottos.add(new Lotto(1, 2, 7, 8, 9, 10));
+        boughtLottos.add(Lotto.of(1, 2, 7, 8, 9, 10));
         return boughtLottos;
     }
 
     private static List<Lotto> lottosEarningMax() {
         List<Lotto> boughtLottos = new ArrayList<>();
-        boughtLottos.add(new Lotto(1, 2, 3, 4, 5, 6));
+        boughtLottos.add(Lotto.of(1, 2, 3, 4, 5, 6));
         return boughtLottos;
     }
 }
