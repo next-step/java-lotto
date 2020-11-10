@@ -19,6 +19,11 @@ public class Numbers {
         return new Numbers(numbers);
     }
 
+    public int sum() {
+        return numbers.stream()
+                .reduce(0, Integer::sum);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
