@@ -7,3 +7,16 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## TODO
+* 문자열 계산기는 다음과 같은 기능이 있다.
+* 구분자를 기준으로 문자열을 분리할 수 있다.
+        * 구분자1: 쉼표(,)
+        * 구분자2: 콜론(:)
+        * 커스텀 구분자: “//”와 “\n” 문자열 사이에 위치하는 문자를 사용한다.
+* 구분자를 기준으로 분리된 각 숫자의 합을 반환한다.
+* 예외 처리
+    * null: 0을 반환
+    * 공백문자: 0을 반환
+    * 숫자 이외의 문자: RuntimeException throw
+    * 음수 값: RuntimeException throw
