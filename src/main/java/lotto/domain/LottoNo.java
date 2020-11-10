@@ -1,9 +1,5 @@
 package lotto.domain;
-
-import lotto.exception.LottoNoException;
-import lotto.lib.Validator;
-
-import java.util.Optional;
+import lotto.lib.LottoNoValidator;
 
 public class LottoNo {
 
@@ -14,36 +10,16 @@ public class LottoNo {
     Integer lottoNo;
 
     public LottoNo(int lottoNo) {
-        if (!validateLottoNo(lottoNo)) {
-            throw LottoNoException.getSomeException();
-        }
+        LottoNoValidator.validateLottoNo(lottoNo);
         this.lottoNo = lottoNo;
     }
 
     public LottoNo(String lottoNo) {
-        if (!validateLottoNo(lottoNo)) {
-            throw LottoNoException.getSomeException();
-        }
+        LottoNoValidator.validateLottoNo(lottoNo);
         this.lottoNo = Integer.parseInt(lottoNo);
     }
 
-    public int getLottoNo() {
+    public int getNo() {
         return lottoNo;
-    }
-
-    private boolean validateLottoNo(int lottoNo) {
-        if (Validator.validateLottoRange(lottoNo)) {
-            return true;
-        }
-        throw LottoNoException.getRangeException();
-    }
-
-    private boolean validateLottoNo(String lottoStr) {
-        return Optional.ofNullable(lottoStr).map(lotto -> {
-            if (Validator.validateNan(lotto)) {
-                throw LottoNoException.getNanException();
-            }
-            return validateLottoNo(Integer.parseInt(lotto));
-        }).orElseThrow(() -> LottoNoException.getNpeException());
     }
 }
