@@ -7,7 +7,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class ConsoleInputView implements InputView {
-    public static final String INVALID_NUMBERS_SIZE_ERR_MSG = "입력된 당첨 번호 숫자의 개수가 유효하지 않습니다.";
     private static final String DELIMITER = ",";
 
     private final Scanner scanner;
