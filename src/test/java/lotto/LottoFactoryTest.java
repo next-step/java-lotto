@@ -12,7 +12,6 @@ public class LottoFactoryTest {
     @DisplayName("주어진 금액으로 구매 할 수 있는 만큼 로또를 구입한다.")
     void buyLottoTest() {
         assertAll(
-                () -> assertThat(LottoFactory.buyLottos(-1).size()).isEqualTo(0),
                 () -> assertThat(LottoFactory.buyLottos(0).size()).isEqualTo(0),
                 () -> assertThat(LottoFactory.buyLottos(999).size()).isEqualTo(0),
                 () -> assertThat(LottoFactory.buyLottos(1_000).size()).isEqualTo(1),
