@@ -62,6 +62,9 @@ public class NumberSelectionTest {
             if (numberPoolSet.size() < count) {
                 throw new NotEnoughNumberPoolSizeException();
             }
+            if (count < 1) {
+                throw new IllegalCountException();
+            }
 
             List<Integer> modifiableNumberPool = new ArrayList<>(numberPool);
             Collections.shuffle(modifiableNumberPool);
