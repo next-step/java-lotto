@@ -36,4 +36,9 @@ public class ConsoleView implements View {
     public void printWinningStatistic(WinningStatistic winningStatistic) {
         resultView.printWinningStatistic(winningStatistic);
     }
+
+    @Override
+    public int getBonusNumber() {
+        return inputView.getBonusNumber();
+    }
 }
