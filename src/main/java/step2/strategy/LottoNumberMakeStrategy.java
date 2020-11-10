@@ -1,23 +1,26 @@
 package step2.strategy;
 
-import step2.Constant;
+import step2.domain.lotto.LottoNumber;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberMakeStrategy implements NumberMakeStrategy{
-    public static final int START_INCLUSIVE = 1;
-    public static final int LOTTO_START_INDEX = 0;
-    public static final int LOTTO_END_INDEX = 6;
+import static step2.Constant.*;
+
+public class LottoNumberMakeStrategy implements NumberMakeStrategy {
+    private static final List<LottoNumber> lottoNumbers = new ArrayList<>(IntStream.range(START_INCLUSIVE, LOTTO_RANGE_MAX)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList()));
+
 
     @Override
-    public List<Integer> create() {
-        List<Integer> lottoRange = IntStream.range(START_INCLUSIVE, Constant.LOTTO_RANGE_MAX)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoRange);
-        return lottoRange.subList(LOTTO_START_INDEX, LOTTO_END_INDEX);
+    public Set<LottoNumber> create() {
+        shuffle();
+        return new HashSet<>(lottoNumbers.subList(LOTTO_START_INDEX, LOTTO_END_INDEX));
+    }
+
+    private void shuffle() {
+        Collections.shuffle(lottoNumbers);
     }
 }

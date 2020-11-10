@@ -1,8 +1,10 @@
 package step2.strategy;
 
-import java.util.List;
+import step2.domain.lotto.LottoNumber;
+
+import java.util.Set;
 
 @FunctionalInterface
 public interface NumberMakeStrategy {
-    List<Integer> create();
+    Set<LottoNumber> create();
 }
