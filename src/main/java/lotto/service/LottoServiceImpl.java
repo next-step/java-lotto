@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.LottoFactory;
 import lotto.service.helper.WinningChecker;
@@ -16,7 +16,7 @@ public class LottoServiceImpl implements LottoService {
     }
 
     @Override
-    public WinningStatistic getResult(Lotto winningLotto, LottoNumber bonusNumber, Collection<Lotto> boughtLottos) {
-        return WinningChecker.getResult(winningLotto, bonusNumber, boughtLottos);
+    public WinningStatistic getResult(WinningNumber winningNumber, Collection<Lotto> boughtLottos) {
+        return WinningChecker.getResult(winningNumber, boughtLottos);
     }
 }

@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
+import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.LottoFactory;
 import lotto.service.helper.WinningChecker;
@@ -25,8 +26,9 @@ public class WinningCheckerTest {
     void winningAndStatisticTest(List<Lotto> boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.from(45);
+        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
-        WinningStatistic winningStatistic = WinningChecker.getResult(winningLotto, bonusNumber, boughtLottos);
+        WinningStatistic winningStatistic = WinningChecker.getResult(winningNumber, boughtLottos);
 
         assertAll(
                 () -> assertThat(winningStatistic.getEarningsRate()).isEqualTo(expectedEarningRate),

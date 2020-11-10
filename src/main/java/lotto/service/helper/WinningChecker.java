@@ -1,8 +1,8 @@
 package lotto.service.helper;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
+import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 
 import java.math.BigDecimal;
@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningChecker {
-    public static WinningStatistic getResult(Lotto winningLotto, LottoNumber bonusNumber, Collection<Lotto> boughtLottos) {
-        List<WinningRank> winningRanks = getWinningRanks(winningLotto, bonusNumber, boughtLottos);
+    public static WinningStatistic getResult(WinningNumber winningNumber, Collection<Lotto> boughtLottos) {
+        List<WinningRank> winningRanks = getWinningRanks(winningNumber, boughtLottos);
         Map<WinningRank, Integer> countOfWinningRanks = getCountOfWinningRanks(winningRanks);
         String earningsRate = getEarningsRate(winningRanks, boughtLottos.size());
 
         return new WinningStatistic(countOfWinningRanks, earningsRate);
     }
 
-    private static List<WinningRank> getWinningRanks(Lotto winningLotto, LottoNumber bonusNumber, Collection<Lotto> boughtLottos) {
+    private static List<WinningRank> getWinningRanks(WinningNumber winningNumber, Collection<Lotto> boughtLottos) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto boughtLotto : boughtLottos) {
-            winningRanks.add(WinningRank.getWinningRank(winningLotto, bonusNumber, boughtLotto));
+            winningRanks.add(WinningRank.getWinningRank(winningNumber, boughtLotto));
         }
         return winningRanks;
     }

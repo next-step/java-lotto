@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.LottoService;
 import lotto.view.View;
@@ -26,12 +27,8 @@ public class LottoGame {
         if (boughtLottos.size() == 0) {
             return;
         }
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = LottoNumber.from(view.getBonusNumber());
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalStateException(INVALID_BONUS_NUMBER_ERR_MSG);
-        }
-        printStatistic(winningLotto, bonusNumber, boughtLottos);
+        WinningNumber winningNumber = getWinningNumber();
+        printStatistic(winningNumber, boughtLottos);
     }
 
     private int getAmount() {
@@ -52,12 +49,25 @@ public class LottoGame {
         return boughtLottos;
     }
 
+    private WinningNumber getWinningNumber() {
+        Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = LottoNumber.from(view.getBonusNumber());
+        validate(winningLotto, bonusNumber);
+        return new WinningNumber(winningLotto, bonusNumber);
+    }
+
     private Lotto getWinningLotto() {
         return new Lotto(view.getWinningNumbers());
     }
 
-    private void printStatistic(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> boughtLottos) {
-        WinningStatistic winningStatistic = lottoService.getResult(winningLotto, bonusNumber, boughtLottos);
+    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalStateException(INVALID_BONUS_NUMBER_ERR_MSG);
+        }
+    }
+
+    private void printStatistic(WinningNumber winningNumber, List<Lotto> boughtLottos) {
+        WinningStatistic winningStatistic = lottoService.getResult(winningNumber, boughtLottos);
         view.printWinningStatistic(winningStatistic);
     }
 }

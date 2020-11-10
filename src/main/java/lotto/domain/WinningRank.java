@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.WinningNumber;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +33,15 @@ public enum WinningRank {
         this.winningCondition = winningCondition;
     }
 
-    public static WinningRank getWinningRank(Lotto winningLotto, LottoNumber bonusNumber, Lotto boughtLotto) {
-        WinningCondition winningCondition = getWinningConditionOf(winningLotto, bonusNumber, boughtLotto);
+    public static WinningRank getWinningRank(WinningNumber winningNumber, Lotto boughtLotto) {
+        WinningCondition winningCondition = getWinningConditionOf(winningNumber, boughtLotto);
         WinningRank winningRank = RANK_BY_CONDITION.get(winningCondition);
         return winningRank != null ? winningRank : NONE;
     }
 
-    private static WinningCondition getWinningConditionOf(Lotto winningLotto, LottoNumber bonusNumber, Lotto boughtLotto) {
-        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningLotto);
-        boolean bonusNumMatched = boughtLotto.contains(bonusNumber);
+    private static WinningCondition getWinningConditionOf(WinningNumber winningNumber, Lotto boughtLotto) {
+        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningNumber);
+        boolean bonusNumMatched = boughtLotto.contains(winningNumber);
 
         return WinningCondition.of(matchedCount, bonusNumMatched);
     }

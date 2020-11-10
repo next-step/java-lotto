@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.WinningNumber;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +36,8 @@ public class Lotto {
         }
     }
 
-    public int getMatchedCountCompareTo(Lotto winningLotto) {
+    public int getMatchedCountCompareTo(WinningNumber winningNumber) {
+        Lotto winningLotto = winningNumber.getWinningLotto();
         return (int) numbers.stream()
                 .filter(winningLotto.numbers::contains)
                 .count();
@@ -42,6 +45,11 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public boolean contains(WinningNumber winningNumber) {
+        LottoNumber bonusNumber = winningNumber.getBonusNumber();
+        return contains(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

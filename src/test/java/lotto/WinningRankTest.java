@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.dto.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,19 +22,20 @@ public class WinningRankTest {
     void winningRankTest() {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.from(45);
+        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         assertAll(
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 4, 5, 6)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 3, 4, 5, 6)))
                         .isEqualTo(MATCHES_SIX),
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 4, 5, 45)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 3, 4, 5, 45)))
                         .isEqualTo(MATCHES_FIVE_AND_BONUS_NUMBER),
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 4, 5, 7)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 3, 4, 5, 7)))
                         .isEqualTo(MATCHES_FIVE),
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 4, 7, 8)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 3, 4, 7, 8)))
                         .isEqualTo(MATCHES_FOUR),
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 7, 8, 9)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 3, 7, 8, 9)))
                         .isEqualTo(MATCHES_THREE),
-                () -> assertThat(getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 7, 8, 9, 10)))
+                () -> assertThat(getWinningRank(winningNumber, new Lotto(1, 2, 7, 8, 9, 10)))
                         .isEqualTo(NONE)
         );
     }
