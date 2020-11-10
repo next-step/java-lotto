@@ -6,15 +6,16 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTicketTest {
+public class AutoLottoTest {
 
     @Test
-    public void newLotto() {
-        LottoTicket ticket = new LottoTicket();
+    public void autoLotto() {
+        LottoTicket ticket = AutoLotto.buildTicket();
 
         assertThat(ticket.getNumbers())
                 .isInstanceOf(Set.class)
                 .hasSize(6)
                 .allSatisfy(n -> assertThat(n).isBetween(1, 45));
     }
+
 }
