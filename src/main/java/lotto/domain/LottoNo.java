@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import lotto.asset.LottoNoConst;
 import lotto.exception.LottoNoException;
+import lotto.lib.Validator;
+
+import java.util.Optional;
 
 public class LottoNo {
 
@@ -12,12 +14,16 @@ public class LottoNo {
     Integer lottoNo;
 
     public LottoNo(int lottoNo) {
-        validateLottoNo(lottoNo);
+        if (!validateLottoNo(lottoNo)) {
+            throw LottoNoException.getSomeException();
+        }
         this.lottoNo = lottoNo;
     }
 
     public LottoNo(String lottoNo) {
-        validateLottoNo(lottoNo);
+        if (!validateLottoNo(lottoNo)) {
+            throw LottoNoException.getSomeException();
+        }
         this.lottoNo = Integer.parseInt(lottoNo);
     }
 
@@ -25,24 +31,19 @@ public class LottoNo {
         return lottoNo;
     }
 
-    private void validateLottoNo(int lottoNo) {
-        boolean badRange = lottoNo > LottoNoConst.LOTTO_NO_MAX
-                || lottoNo < LottoNoConst.LOTTO_NO_MIN;
-        if (badRange) {
-            throw LottoNoException.getRangeException();
+    private boolean validateLottoNo(int lottoNo) {
+        if (Validator.validateLottoRange(lottoNo)) {
+            return true;
         }
+        throw LottoNoException.getRangeException();
     }
 
-    private void validateLottoNo(String lottoNo) {
-        if (lottoNo == null) {
-            throw LottoNoException.getNpeException();
-        }
-        int num;
-        try {
-            num = Integer.parseInt(lottoNo);
-        } catch (Exception e) {
-            throw LottoNoException.getNanException();
-        }
-        validateLottoNo(num);
+    private boolean validateLottoNo(String lottoStr) {
+        return Optional.ofNullable(lottoStr).map(lotto -> {
+            if (Validator.validateNan(lotto)) {
+                throw LottoNoException.getNanException();
+            }
+            return validateLottoNo(Integer.parseInt(lotto));
+        }).orElseThrow(() -> LottoNoException.getNpeException());
     }
 }

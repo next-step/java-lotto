@@ -7,6 +7,7 @@ public class LottoNoException extends RuntimeException {
     private static final LottoNoException npeException = new LottoNoException(ExceptionConst.NPE_MSG);
     private static final LottoNoException nanException = new LottoNoException(ExceptionConst.NAN_MSG);
     private static final LottoNoException rangeException = new LottoNoException(ExceptionConst.LOTTO_RANGE_MSG);
+    private static final LottoNoException someException = new LottoNoException(ExceptionConst.SOMETHING_WENT_WRONG_MSG);
 
     private LottoNoException(String msg) {
         super(msg);
@@ -22,5 +23,9 @@ public class LottoNoException extends RuntimeException {
 
     public static LottoNoException getRangeException() {
         return rangeException;
+    }
+
+    public static LottoNoException getSomeException() {
+        return someException;
     }
 }
