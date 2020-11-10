@@ -5,14 +5,11 @@ import step2.strategy.NumberMakeStrategy;
 import step2.type.WinningType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private static final int NOT_EXISTS_INDEX = -1;
-    private static final int INIT_WINNING_COUNT = 0;
     private static final int REVENUE_ANCHOR_POINT = 1;
     private final List<LottoTicket> tickets;
 
@@ -30,8 +27,8 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public double getRevenueRate(WinningNumber winningNumber) {
-        Map<WinningType, Integer> winningStatistics = getWinningStatistics(winningNumber);
+    public double getRevenueRate(WinningNumbers winningNumbers) {
+        Map<WinningType, Integer> winningStatistics = winningNumbers.getWinningStatistics(this);
         double totalAmount = getTotalAmount(winningStatistics);
 
         return calculateRateAndFixedTwo(totalAmount);
@@ -54,37 +51,10 @@ public class LottoTickets {
         return tickets.size() * Constant.LOTTO_PRICE;
     }
 
-    public Map<WinningType, Integer> getWinningStatistics(WinningNumber winningNumber) {
-        Map<WinningType, Integer> winningStatistics = getInitWinningStatisticsMap();
-        tickets.forEach(ticket -> {
-            WinningType winningType = ticket.compareWinningNumber(winningNumber);
-            appendWinningCount(winningStatistics, winningType);
-        });
-        return winningStatistics;
+    public List<LottoTicket> getTickets() {
+        return tickets;
     }
 
-    private Map<WinningType, Integer> getInitWinningStatisticsMap() {
-        return new HashMap<WinningType, Integer>() {{
-            put(WinningType.RANK_ONE, INIT_WINNING_COUNT);
-            put(WinningType.RANK_TWO, INIT_WINNING_COUNT);
-            put(WinningType.RANK_THREE, INIT_WINNING_COUNT);
-            put(WinningType.RANK_FOUR, INIT_WINNING_COUNT);
-        }};
-    }
-
-    private void appendWinningCount(Map<WinningType, Integer> map, WinningType type) {
-        if (!WinningType.RANK_ETC.equals(type)) {
-            Integer findInteger = map.getOrDefault(type, NOT_EXISTS_INDEX);
-            map.put(type, increaseWinningCount(findInteger));
-        }
-    }
-
-    private int increaseWinningCount(Integer findInteger) {
-        if (findInteger <= 0) {
-            findInteger = INIT_WINNING_COUNT;
-        }
-        return ++findInteger;
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();

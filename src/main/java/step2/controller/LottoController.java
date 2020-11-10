@@ -2,7 +2,7 @@ package step2.controller;
 
 import step2.domain.lotto.LottoTicketMachine;
 import step2.domain.lotto.LottoTickets;
-import step2.domain.lotto.WinningNumber;
+import step2.domain.lotto.WinningNumbers;
 import step2.strategy.LottoNumberMakeStrategy;
 import step2.view.InputView;
 import step2.view.LottoInputView;
@@ -33,8 +33,8 @@ public class LottoController {
 
         resultView.drawTicket(tickets);
 
-        WinningNumber winningNumber = inputView.getWinningNumber(scanner);
-        resultView.drawWinningStatistics(tickets, winningNumber);
-        resultView.drawRevenueRate(tickets, winningNumber);
+        WinningNumbers winningNumbers = inputView.getWinningNumber(scanner);
+        resultView.drawWinningStatistics(tickets, winningNumbers);
+        resultView.drawRevenueRate(tickets, winningNumbers);
     }
 }

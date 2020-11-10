@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.lotto.LottoTickets;
-import step2.domain.lotto.WinningNumber;
+import step2.domain.lotto.WinningNumbers;
 import step2.type.WinningType;
 
 import java.util.Map;
@@ -24,20 +24,28 @@ public class LottoResultView implements ResultView {
     }
 
     @Override
-    public void drawWinningStatistics(LottoTickets tickets, WinningNumber winningNumber) {
+    public void drawWinningStatistics(LottoTickets tickets, WinningNumbers winningNumbers) {
         clearStringBuilder();
+
+        Map<WinningType, Integer> winningStatistics = winningNumbers.getWinningStatistics(tickets);
+
         append(WINNING_STATISTICS, HORIZONTAL_DELIMITER);
-        Map<WinningType, Integer> winningStatistics = tickets.getWinningStatistics(winningNumber);
-        winningStatistics.forEach((type, count) ->
-                append(String.format(MATCHED_WINNING_COUNT, WinningType.getMatchCount(type),
-                        WinningType.getWinningAmount(type), count)));
+        winningStatistics.forEach(this::appendWinningRow);
+
         System.out.println(sb.toString());
     }
 
+    private void appendWinningRow(WinningType type, int count) {
+        append(String.format(MATCHED_WINNING_COUNT,
+                WinningType.getMatchCount(type),
+                WinningType.getWinningAmount(type),
+                count));
+    }
+
     @Override
-    public void drawRevenueRate(LottoTickets tickets, WinningNumber winningNumber) {
+    public void drawRevenueRate(LottoTickets tickets, WinningNumbers winningNumbers) {
         clearStringBuilder();
-        double revenueRate = tickets.getRevenueRate(winningNumber);
+        double revenueRate = tickets.getRevenueRate(winningNumbers);
         append(String.format(ALERT_REVENUE_RATE, revenueRate, tickets.isRevenue(revenueRate) ? REVENUE : DAMAGES));
         System.out.println(sb.toString());
     }

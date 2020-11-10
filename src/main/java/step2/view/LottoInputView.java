@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.lotto.WinningNumber;
+import step2.domain.lotto.WinningNumbers;
 
 import java.util.Scanner;
 
@@ -18,10 +18,10 @@ public class LottoInputView implements InputView {
     }
 
     @Override
-    public WinningNumber getWinningNumber(Scanner scanner) {
+    public WinningNumbers getWinningNumber(Scanner scanner) {
 
         System.out.println(QUESTION_LAST_WEEK_WINNING_NUMBER);
         String insertedWinningNumber = scanner.nextLine();
-        return WinningNumber.of(insertedWinningNumber);
+        return WinningNumbers.of(insertedWinningNumber);
     }
 }

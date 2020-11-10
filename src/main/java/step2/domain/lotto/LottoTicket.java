@@ -4,18 +4,17 @@ import step2.strategy.NumberMakeStrategy;
 import step2.type.WinningType;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
     private final MarkingNumbers markingNumbers;
-    private final WinningMatchCount winningMatchCount;
 
     public LottoTicket(NumberMakeStrategy strategy) {
         this(strategy.create());
     }
 
-    public LottoTicket(List<Integer> markingNumber) {
+    public LottoTicket(Set<LottoNumber> markingNumber) {
         this.markingNumbers = new MarkingNumbers(markingNumber);
-        winningMatchCount = new WinningMatchCount();
     }
 
     public String getMarkingNumbers() {
@@ -26,15 +25,13 @@ public class LottoTicket {
         return markingNumbers.contains(number);
     }
 
-    public WinningType compareWinningNumber(final WinningNumber winningNumber) {
-        winningMatchCount.clear();
-        winningNumber.getList()
-                .forEach(number -> winningMatchCount.match(markingNumbers, number));
-        return winningMatchCount.getWinningType();
-    }
 
     @Override
     public String toString() {
         return markingNumbers.toString();
+    }
+
+    public boolean contains(int number) {
+        return markingNumbers.contains(number);
     }
 }
