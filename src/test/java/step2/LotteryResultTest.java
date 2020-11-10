@@ -24,43 +24,48 @@ public class LotteryResultTest {
                 .isInstanceOf(OutOfMatchingBoundaryException.class);
     }
 
-    static class LotteryResult {
-        enum Matched {
-            miss(0), three(3), four(4), five(5), six(6);
+    enum Rank {
+        FIRST(6), //
+        SECOND(5), //
+        THIRD(4),  //
+        FORTH(3),  //
+        MISS(0);
 
-            private final int matchingCount;
+        private final int matchingCount;
 
-            Matched(int matchingCount) {
-                this.matchingCount = matchingCount;
-            }
-
-            public static Matched valueBy(Supplier<Integer> matched) {
-                return Arrays.stream(values()) //
-                        .filter(value -> value.matchingCount == matched.get()) //
-                        .findFirst() //
-                        .orElseThrow(OutOfMatchingBoundaryException::new);
-            }
+        Rank(int matchingCount) {
+            this.matchingCount = matchingCount;
         }
 
-        private final Map<Matched, Integer> result = new HashMap<>();
+        public static Rank valueBy(Supplier<Integer> matched) {
+            return Arrays.stream(values()) //
+                    .filter(value -> value.matchingCount == matched.get()) //
+                    .findFirst() //
+                    .orElseThrow(OutOfMatchingBoundaryException::new);
+        }
+    }
+
+    static class LotteryResult {
+
+        private final Map<Rank, Integer> result = new HashMap<>();
 
         public void add(int matched) {
             if (matched < 0) {
                 throw new OutOfMatchingBoundaryException();
             }
 
-            Matched matchedEnum = Matched.valueBy(() -> {
+            Rank rankEnum = Rank.valueBy(() -> {
                 if (matched < 3) {
                     return 0;
                 }
                 return matched;
             });
 
-            result.compute(matchedEnum, (key, value) -> value == null ? 1 : value + 1);
+            result.compute(rankEnum, (key, value) -> value == null ? 1 : value + 1);
         }
 
-        public int getMatchResult(Matched matched) {
-            return result.getOrDefault(matched, 0);
+        public int getMatchResult(Rank rank) {
+            return result.getOrDefault(rank, 0);
         }
     }
 

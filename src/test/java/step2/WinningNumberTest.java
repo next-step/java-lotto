@@ -18,8 +18,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
 import static step2.PlayslipTest.Playslip.NUMBER_POOL;
-import static step2.LotteryResultTest.LotteryResult.Matched;
-import static step2.LotteryResultTest.LotteryResult.Matched.*;
+import static step2.LotteryResultTest.Rank;
+import static step2.LotteryResultTest.Rank.*;
 
 
 public class WinningNumberTest {
@@ -55,13 +55,13 @@ public class WinningNumberTest {
                 .toArray(Integer[]::new);
         LotteryResultTest.LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
 
-        assertThat(lotteryResult.getMatchResult(Matched.miss)).isEqualTo(miss);
+        assertThat(lotteryResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
     }
 
     @DisplayName("3개 ~ 6개 일치 테스트")
     @ParameterizedTest
     @MethodSource("matchingCountProvider")
-    void matched(LotteryNumber lotteryNumber, Matched matched) {
+    void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
         LotteryResultTest.LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
                 Arrays.asList(
@@ -70,16 +70,16 @@ public class WinningNumberTest {
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
-        assertThat(lotteryResult.getMatchResult(matched)).isEqualTo(2);
+        assertThat(lotteryResult.getMatchResult(rank)).isEqualTo(2);
     }
 
     private static Stream<Arguments> matchingCountProvider() {
         //@formatter:off
         return Stream.of(
-                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), three),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), four),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), five),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 6), six)
+                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), FORTH),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), THIRD),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), SECOND),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 6), FIRST)
         );
         //@formatter:on
     }
