@@ -29,6 +29,9 @@ public class Money {
     }
 
     public Money subtract(Money money) {
+        if (amount < money.amount) {
+            throw new MoneyArithmeticException("subtracted is in negative");
+        }
         return of(amount - money.amount);
     }
 

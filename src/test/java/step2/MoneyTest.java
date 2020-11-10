@@ -39,7 +39,7 @@ public class MoneyTest {
 
     @Test
     void minusMoney() {
-        assertThatThrownBy(() -> Money.of(1000).subtract(Money.of(0))) //
+        assertThatThrownBy(() -> Money.of(1000).subtract(Money.of(2000))) //
                 .isInstanceOf(MoneyArithmeticException.class);
     }
 }
