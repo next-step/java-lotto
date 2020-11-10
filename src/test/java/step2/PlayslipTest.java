@@ -27,14 +27,14 @@ public class PlayslipTest {
     @DisplayName("로또용지는 선택한 번호들을 제공한다.")
     @Test
     void selectNumbers() {
-        assertThat(playslip.listNumbers(2).size()).isEqualTo(2);
+        assertThat(playslip.selectNumbers(2).size()).isEqualTo(2);
     }
 
     @DisplayName("로또용지는 0개 이하를 선택한 경우 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
     void noPositiveNumberSelection(int selection) {
-        assertThatThrownBy(() -> playslip.listNumbers(selection)) //
+        assertThatThrownBy(() -> playslip.selectNumbers(selection)) //
                 .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
 
@@ -42,14 +42,14 @@ public class PlayslipTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2})
     void listNumbers(int selection) {
-        List<LotteryNumber> nominatedNumbers = playslip.listNumbers(selection);
+        List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
 
     @DisplayName("번호셋은 6개의 번호를 가지고 있다.")
     @Test
     void sixNumbers() {
-        List<LotteryNumber> nominatedNumbers = playslip.listNumbers(1);
+        List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(1);
         for (LotteryNumber nominatedNumber : nominatedNumbers) {
             assertThat(nominatedNumber.getNumbers().size()).isEqualTo(6);
         }
@@ -63,7 +63,7 @@ public class PlayslipTest {
 
         private final NaturalSelection selection = new NaturalSelection();
 
-        public List<LotteryNumber> listNumbers(int numberSet) {
+        public List<LotteryNumber> selectNumbers(int numberSet) {
             if (numberSet < 1) {
                 throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
             }
