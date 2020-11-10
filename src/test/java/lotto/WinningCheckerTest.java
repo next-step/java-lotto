@@ -3,7 +3,8 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningStatistic;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.service.helper.LottoFactory;
+import lotto.service.helper.WinningChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,20 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningCheckerTest {
-    private WinningChecker winningChecker;
-
-    @BeforeEach
-    void init() {
-        winningChecker = new WinningChecker();
-    }
-
     @ParameterizedTest
     @MethodSource("boughtLottos")
     @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 당첨 횟수와 수익이 얼마나 되는지 계산한다.")
     void winningAndStatisticTest(List<Lotto> boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        WinningStatistic winningStatistic = winningChecker.getResult(winningLotto, boughtLottos);
+        WinningStatistic winningStatistic = WinningChecker.getResult(winningLotto, boughtLottos);
 
         assertAll(
                 () -> assertThat(winningStatistic.getEarningsRate()).isEqualTo(expectedEarningRate),

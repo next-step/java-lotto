@@ -1,4 +1,4 @@
-package lotto;
+package lotto.service.helper;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -17,7 +17,7 @@ public class LottoFactory {
         }
     }
 
-    public List<Lotto> buyLottos(int amount) {
+    public static List<Lotto> buyLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {
             Collections.shuffle(NUMBERS);
