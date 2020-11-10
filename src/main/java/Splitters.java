@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class Splitters {
+    public static final String DELIMITER = "|";
     private final List<String> splitters;
 
     public Splitters(List<String> splitters) {
@@ -8,6 +9,6 @@ public class Splitters {
     }
 
     public String getRegex() {
-        return String.join("|", splitters);
+        return String.join(DELIMITER, splitters);
     }
 }

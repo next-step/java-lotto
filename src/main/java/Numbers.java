@@ -4,15 +4,15 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    public static final String SPLIT_UNIT = ",";
-    List<Integer> numbers;
+    public static final Splitters splitters = new Splitters(Arrays.asList(",", ":"));
+    private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
     public static Numbers from(String input) {
-        List<Integer> numbers = Arrays.stream(input.split(SPLIT_UNIT))
+        List<Integer> numbers = Arrays.stream(input.split(splitters.getRegex()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
