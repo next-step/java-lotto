@@ -3,8 +3,8 @@ package step2.type;
 import java.util.stream.Stream;
 
 public enum WinningType {
-    RANK_ONE(6, 2000000000),
-    RANK_TWO(5, 1500000),
+    RANK_ONE(6, 2_000_000_000),
+    RANK_TWO(5, 1_500_000),
     RANK_THREE(4, 50000),
     RANK_FOUR(3, 5000),
     RANK_ETC(2, 0);
