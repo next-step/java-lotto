@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class LottoTest {
     @Test
     @DisplayName("로또 생성시 number size가 유효하지 않으면 throw IllegalStateException")
-    void createTest_invalidNumberSize() {
+    void createTestInvalidNumberSize() {
         assertAll(
                 () -> assertThatExceptionOfType(IllegalStateException.class)
                         .isThrownBy(() -> new Lotto(1, 2, 3, 4, 5))
@@ -24,7 +24,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalStateException")
-    void createTest_duplicatedNumbers() {
+    void createTestDuplicatedNumbers() {
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> new Lotto(1, 1, 1, 1, 1, 1))
                 .withMessage(Lotto.INVALID_NUMBERS_SIZE_ERR_MSG);
@@ -32,7 +32,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 숫자가 지정된 범위 만족하지 않으면 throw IllegalStateException (ex 1~45 사이의 숫자만).")
-    void createTest_numberRange() {
+    void createTestNumberRange() {
         assertAll(
                 () -> assertThatExceptionOfType(IllegalStateException.class)
                         .isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46))

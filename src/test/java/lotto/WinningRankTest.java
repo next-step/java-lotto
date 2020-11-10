@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class WinningRankTest {
     @Test
     @DisplayName("당첨번호와 구입한 로또번호로 당첨타입을 확인한다.")
-    void winningRank_test() {
+    void winningRankTest() {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         assertAll(
