@@ -24,7 +24,7 @@ public class LottoGame {
     public void start() {
         int amount = getAmount();
         List<Lotto> boughtLottos = buyLottos(amount);
-        if (boughtLottos.size() == 0) {
+        if (boughtLottos.isEmpty()) {
             return;
         }
         WinningNumber winningNumber = getWinningNumber();
