@@ -60,6 +60,7 @@ public class PlayslipTest {
         public static final String ONLY_POSITIVE_NUMBERS = "선택은 1개 이상만 가능합니다.";
         public static final List<Integer> NUMBER_POOL = makeNumberPool();
         private static final int MAX_SELECT_NUMBER = 45;
+        public static final int SELECTION_COUNT = 6;
 
         private final NaturalSelection selection = new NaturalSelection();
 
@@ -70,7 +71,7 @@ public class PlayslipTest {
 
             List<LotteryNumber> result = new ArrayList<>();
             for (int i = 0; i < numberSet; i++) {
-                result.add(new LotteryNumber(selection.select(NUMBER_POOL, 6)));
+                result.add(new LotteryNumber(selection.select(NUMBER_POOL, SELECTION_COUNT)));
             }
             return result;
         }
