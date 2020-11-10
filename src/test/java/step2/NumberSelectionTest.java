@@ -28,7 +28,6 @@ public class NumberSelectionTest {
         }
     }
 
-
     @DisplayName("입력값은 중복을 허용하지 않는다.")
     @Test
     void notAllowedDuplicateNumberPool() {
@@ -39,10 +38,18 @@ public class NumberSelectionTest {
     public static class NaturalSelection {
 
         public Set<Integer> select(List<Integer> numberPool) {
+            Set<Integer> numberPoolSet = new HashSet<>(numberPool);
+            if (numberPoolSet.size() != numberPool.size()) {
+                throw new DuplicateNumberPoolException();
+            }
+
             List<Integer> modifiableNumberPool = new ArrayList<>(numberPool);
             Collections.shuffle(modifiableNumberPool);
             return new HashSet<>(modifiableNumberPool.subList(0, 6));
         }
 
+    }
+
+    private static class DuplicateNumberPoolException extends IllegalArgumentException {
     }
 }
