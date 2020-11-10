@@ -61,7 +61,7 @@
     - 상수처리는 하되 LottoNumber.VALID_MIN_NUMBER, LottoNumber.VALID_MAX_NUMBER를 기준으로 초기화 하도록 했습니다. 1~45라는 범위가 변경될 때 LottoFactory의 NUNBERS도 같이 변경되면 좋겠다고 생각했어요! :)
 - [x] 멤버변수 최대 3개로 (LottoGame)
     - 멤버변수에 갯수에 대한 고민을 많이 해본적이 없어서 이런식으로 하는게 맞는지 잘 모르겠네요. LottoFactory와 WinningChecker를 하나의 추상화된 이름으로 짓는 네이밍도 어려웠구요. 방법은 올바르게 했는지 혹시 해당 규칙을 지키기 위한 팁이나 방법론이 있는지 궁금합니다!
-    - LottoFactory와 WinningChecker는 인스턴스 멤버 변수도 없고 정적타입으로 변경했습니다. InputView와 ResultView는 인터페이스를 구현한 형태로 두고 싶어서 그대로 사용했습니다.  
+    - LottoFactory와 WinningChecker는 인스턴스 멤버 변수도 없고 기능이 확장될것 같지 않다고 판단해서 정적타입으로 변경했습니다. 어떤 것 같나요?
 - [ ] Main과 LottoGame 통합 (LottoGame이 main의 역할)
 - [ ] WinningCondition Builder패턴 적절한가 고민해보기
 - [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
