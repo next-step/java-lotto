@@ -26,6 +26,7 @@
 |        |  └── LottoController.java 
 |        ├── domain
 |        |  └── lotto
+|        |     ├── LottoNumber.java //로또 번호 일급 객체
 |        |     ├── LottoTicket.java //로또 티켓 일급 객체
 |        |     ├── LottoTicketMachine.java //로또 발권기 클래스
 |        |     ├── LottoTickets.java//로또 티켓 일급 콜렉션
@@ -53,3 +54,4 @@
          └── streategy
             └── TestNumberMakeStrategy.java //테스트용 로또 번호 생성기
 ```
+
