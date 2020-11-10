@@ -1,6 +1,6 @@
 package lotto.domain;
 
-class WinningCondition {
+public class WinningCondition {
     private final int matchedCount;
     private final boolean bonusNumMatched;
 
@@ -11,6 +11,14 @@ class WinningCondition {
 
     public static WinningCondition of(int matchedCount, boolean bonusNumMatched) {
         return new WinningCondition(matchedCount, bonusNumMatched);
+    }
+
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public boolean isBonusNumMatched() {
+        return bonusNumMatched;
     }
 
     @Override

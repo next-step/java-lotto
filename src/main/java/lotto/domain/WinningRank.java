@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public enum WinningRank {
-    NONE("꽝", 0, null),
-    MATCHES_THREE("3개 일치", 5_000, WinningCondition.of(3, false)),
-    MATCHES_FOUR("4개 일치", 50_000, WinningCondition.of(4, false)),
-    MATCHES_FIVE("5개 일치", 1_500_000, WinningCondition.of(5, false)),
-    MATCHES_FIVE_AND_BONUS_NUMBER("5개 일치, 보너스 볼 일치", 30_000_000, WinningCondition.of(5, true)),
-    MATCHES_SIX("6개 일치", 2_000_000_000, WinningCondition.of(6, false));
+    NONE(0, null),
+    MATCHES_THREE(5_000, WinningCondition.of(3, false)),
+    MATCHES_FOUR(50_000, WinningCondition.of(4, false)),
+    MATCHES_FIVE(1_500_000, WinningCondition.of(5, false)),
+    MATCHES_FIVE_AND_BONUS_NUMBER(30_000_000, WinningCondition.of(5, true)),
+    MATCHES_SIX(2_000_000_000, WinningCondition.of(6, false));
 
     private static final Map<WinningCondition, WinningRank> RANK_BY_CONDITION;
 
@@ -23,12 +23,10 @@ public enum WinningRank {
         }
     }
 
-    private final String description;
     private final int winningAmount;
     private final WinningCondition winningCondition;
 
-    WinningRank(String description, int winningAmount, WinningCondition winningCondition) {
-        this.description = description;
+    WinningRank(int winningAmount, WinningCondition winningCondition) {
         this.winningAmount = winningAmount;
         this.winningCondition = winningCondition;
     }
@@ -52,11 +50,11 @@ public enum WinningRank {
                 .sum();
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public int getWinningAmount() {
         return winningAmount;
+    }
+
+    public WinningCondition getWinningCondition() {
+        return winningCondition;
     }
 }
