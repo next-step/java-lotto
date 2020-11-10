@@ -52,7 +52,7 @@ public class LottoGame {
     private WinningNumber getWinningNumber() {
         Lotto winningLotto = getWinningLotto();
         LottoNumber bonusNumber = LottoNumber.from(view.getBonusNumber());
-        validate(winningLotto, bonusNumber);
+        validateBonusNumber(winningLotto, bonusNumber);
         return new WinningNumber(winningLotto, bonusNumber);
     }
 
@@ -60,7 +60,7 @@ public class LottoGame {
         return Lotto.of(view.getWinningNumbers());
     }
 
-    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+    private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalStateException(INVALID_BONUS_NUMBER_ERR_MSG);
         }
