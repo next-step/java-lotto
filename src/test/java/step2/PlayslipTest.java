@@ -82,7 +82,7 @@ public class PlayslipTest {
 
         public List<LotteryNumber> listNumbers(int numberSet) {
             List<LotteryNumber> result = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < numberSet; i++) {
                 result.add(new LotteryNumber(selection.select(NUMBER_POOL)));
             }
             return result;
