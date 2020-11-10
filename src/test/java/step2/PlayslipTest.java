@@ -27,7 +27,6 @@ public class PlayslipTest {
     @DisplayName("로또용지는 선택한 번호들을 제공한다.")
     @Test
     void selectNumbers() {
-        playslip.selectNumbers(2);
         assertThat(playslip.listNumbers(2).size()).isEqualTo(2);
     }
 
@@ -41,7 +40,7 @@ public class PlayslipTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
     void noPositiveNumberSelection(int selection) {
-        assertThatThrownBy(() -> playslip.selectNumbers(selection)) //
+        assertThatThrownBy(() -> playslip.listNumbers(selection)) //
                 .hasMessage(Playslip.ONLY_POSITIVE_NUMBERS);
     }
 
@@ -49,7 +48,6 @@ public class PlayslipTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2})
     void listNumbers(int selection) {
-        playslip.selectNumbers(selection);
         List<LotteryNumber> nominatedNumbers = playslip.listNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
@@ -57,7 +55,6 @@ public class PlayslipTest {
     @DisplayName("번호셋은 6개의 번호를 가지고 있다.")
     @Test
     void sixNumbers() {
-        playslip.selectNumbers(1);
         List<LotteryNumber> nominatedNumbers = playslip.listNumbers(1);
         for (LotteryNumber nominatedNumber : nominatedNumbers) {
             assertThat(nominatedNumber.getNumbers().size()).isEqualTo(6);
