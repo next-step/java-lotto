@@ -1,14 +1,14 @@
 package lotto.lib;
 
-import lotto.asset.LottoNoConst;
+import lotto.asset.LottoConst;
 import lotto.exception.LottoRangeException;
 
 public class LottoNoValidator {
     private LottoNoValidator() {}
 
     protected static boolean checkLottoRange(int lottoNo) {
-        boolean lessThanMax = lottoNo <= LottoNoConst.LOTTO_NO_MAX;
-        boolean biggerThanMin = lottoNo >= LottoNoConst.LOTTO_NO_MIN;
+        boolean lessThanMax = lottoNo <= LottoConst.NO_MAX;
+        boolean biggerThanMin = lottoNo >= LottoConst.NO_MIN;
         return lessThanMax && biggerThanMin;
     }
 

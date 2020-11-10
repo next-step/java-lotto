@@ -1,6 +1,6 @@
 package lotto.lib;
 
-import lotto.exception.NegativeMoneyException;
+import lotto.exception.BadMoneyException;
 
 public class MoneyValidator {
     private MoneyValidator() {}
@@ -8,7 +8,7 @@ public class MoneyValidator {
     public static void validateMoney(int money) {
         int zero = 0;
         if (money <= zero) {
-            throw NegativeMoneyException.getInstance();
+            throw BadMoneyException.getInstance();
         }
 
     }
