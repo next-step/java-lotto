@@ -24,7 +24,7 @@ public class LottoStoreTest {
 
     @ParameterizedTest
     @CsvSource({"1;2;3;4;5;6,2000000000", "1;2;3;4;5;45,1500000", "1;2;3;4;44;45,50000", "1;2;3;43;44;45,5000", "1;2;42;43;44;45,0"})
-    public void claimReward(String numbers, int expetedPrize) {
+    public void claimPrize(String numbers, int expetedPrize) {
         Set<Integer> testcaseNumbers = Stream.of(numbers.split(";"))
                 .map(Integer::valueOf)
                 .collect(Collectors.toSet());
@@ -36,5 +36,27 @@ public class LottoStoreTest {
         store.setWinningNumbers(winningNumbers);
 
         assertThat(store.claimPrize(myTicket)).isEqualTo(expetedPrize);
+    }
+
+    @Test
+    public void claimPrize_multipleTickets() {
+        // 1등 + 2등 + 3등 + 꽝
+        List<LottoTicket> tickets = Stream.of(
+                LottoNumbers.of(1, 2, 3, 4, 5, 6),
+                LottoNumbers.of(1, 2, 3, 4, 5, 45),
+                LottoNumbers.of(1, 2, 3, 4, 44, 45),
+                LottoNumbers.of(40, 41, 42, 43, 44, 45))
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        long expetedPrize = LottoStore.LOTTO_FIRST_PRIZE
+                + LottoStore.LOTTO_SECOND_PRIZE
+                + LottoStore.LOTTO_THIRD_PRIZE;
+
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+
+        LottoStore store = new LottoStore();
+        store.setWinningNumbers(winningNumbers);
+
+        assertThat(store.claimPrize(tickets)).isEqualTo(expetedPrize);
     }
 }

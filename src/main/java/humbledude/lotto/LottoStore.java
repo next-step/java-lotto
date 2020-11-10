@@ -3,18 +3,19 @@ package humbledude.lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class LottoStore {
 
-    public static final int LOTTO_TICKET_PRICE = 1000;
+    public static final long LOTTO_TICKET_PRICE = 1000;
 
-    public static final int LOTTO_FIRST_PRIZE = 2_000_000_000;
-    public static final int LOTTO_SECOND_PRIZE = 1_500_000;
-    public static final int LOTTO_THIRD_PRIZE = 50_000;
-    public static final int LOTTO_FOURTH_PRIZE = 5_000;
+    public static final long LOTTO_FIRST_PRIZE = 2_000_000_000;
+    public static final long LOTTO_SECOND_PRIZE = 1_500_000;
+    public static final long LOTTO_THIRD_PRIZE = 50_000;
+    public static final long LOTTO_FOURTH_PRIZE = 5_000;
 
     private LottoWinningNumbers winningNumbers;
-    private static final List<Integer> prizeList;
+    private static final List<Long> prizeList;
 
     static {
         prizeList = Arrays.asList(
@@ -32,14 +33,20 @@ public class LottoStore {
     }
 
     public List<LottoTicket> buyAutoTickets(int budget) {
-        int howMany = budget / LOTTO_TICKET_PRICE;
+        long howMany = budget / LOTTO_TICKET_PRICE;
 
-        return IntStream.range(0, howMany)
+        return LongStream.range(0, howMany)
                 .mapToObj(i -> AutoLotto.buildTicket())
                 .collect(Collectors.toList());
     }
 
-    public int claimPrize(LottoTicket ticket) {
+    public long claimPrize(List<LottoTicket> tickets) {
+        return tickets.stream().map(this::claimPrize)
+                .mapToLong(Long::longValue)
+                .sum();
+    }
+
+    public long claimPrize(LottoTicket ticket) {
         if (winningNumbers == null) {
             throw new IllegalStateException("당첨번호가 입력되지 않았습니다.");
         }
