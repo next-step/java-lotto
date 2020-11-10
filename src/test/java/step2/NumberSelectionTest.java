@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 
@@ -35,12 +37,19 @@ public class NumberSelectionTest {
                 .isInstanceOf(DuplicateNumberPoolException.class);
     }
 
-
     @DisplayName("NumberPool 은 최소 선택갯수 이상 존재해야 한다")
     @Test
     void minimumSelection() {
         assertThatThrownBy(() -> new NaturalSelection().select(Arrays.asList(1, 2, 3), 6)) //
                 .isInstanceOf(NotEnoughNumberPoolSizeException.class);
+    }
+
+    @DisplayName("선택은 1개 이상이어야 함.")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    void selectionMoreThen_0(int count) {
+        assertThatThrownBy(() -> new NaturalSelection().select(NUMBER_POOL, count)) //
+                .isInstanceOf(IllegalCountException.class);
     }
 
     public static class NaturalSelection {
@@ -65,5 +74,8 @@ public class NumberSelectionTest {
     }
 
     private static class NotEnoughNumberPoolSizeException extends IllegalArgumentException {
+    }
+
+    private static class IllegalCountException extends IllegalArgumentException {
     }
 }
