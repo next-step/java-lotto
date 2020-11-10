@@ -28,13 +28,13 @@ public class PlayslipTest {
     @Test
     void selectNumbers() {
         playslip.selectNumbers(2);
-        assertThat(playslip.listNumbers().size()).isEqualTo(2);
+        assertThat(playslip.listNumbers(2).size()).isEqualTo(2);
     }
 
     @DisplayName("로또용지는 선택 하지 않으면 번호갯수가 0 이다.")
     @Test
     void zeroSizeOfNominatedNumbers() {
-        assertThat(playslip.listNumbers().size()).isEqualTo(0);
+        assertThat(playslip.listNumbers(0).size()).isEqualTo(0);
     }
 
     @DisplayName("로또용지는 0개 이하를 선택한 경우 예외가 발생한다.")
@@ -50,7 +50,7 @@ public class PlayslipTest {
     @ValueSource(ints = {1, 2})
     void listNumbers(int selection) {
         playslip.selectNumbers(selection);
-        List<LotteryNumber> nominatedNumbers = playslip.listNumbers();
+        List<LotteryNumber> nominatedNumbers = playslip.listNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
 
@@ -58,7 +58,7 @@ public class PlayslipTest {
     @Test
     void sixNumbers() {
         playslip.selectNumbers(1);
-        List<LotteryNumber> nominatedNumbers = playslip.listNumbers();
+        List<LotteryNumber> nominatedNumbers = playslip.listNumbers(1);
         for (LotteryNumber nominatedNumber : nominatedNumbers) {
             assertThat(nominatedNumber.getNumbers().size()).isEqualTo(6);
         }
@@ -80,7 +80,7 @@ public class PlayslipTest {
             this.size = size;
         }
 
-        public List<LotteryNumber> listNumbers() {
+        public List<LotteryNumber> listNumbers(int numberSet) {
             List<LotteryNumber> result = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 result.add(new LotteryNumber(selection.select(NUMBER_POOL)));

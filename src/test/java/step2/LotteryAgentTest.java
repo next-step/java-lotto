@@ -74,7 +74,7 @@ public class LotteryAgentTest {
             int ticketCount = money.divide(PRICE_LOTTERY);
             playslip.selectNumbers(ticketCount);
 
-            return new Object[]{new LotteryTickets(playslip.listNumbers()), money.subtract(PRICE_LOTTERY.multiply(ticketCount))};
+            return new Object[]{new LotteryTickets(playslip.listNumbers(ticketCount)), money.subtract(PRICE_LOTTERY.multiply(ticketCount))};
         }
     }
 
