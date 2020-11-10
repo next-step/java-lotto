@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @Test
@@ -28,5 +29,11 @@ public class MoneyTest {
     @Test
     void equals() {
         assertThat(Money.of(1000).equals(Money.of(1000))).isTrue();
+    }
+
+    @Test
+    void divideByZero() {
+        assertThatThrownBy(() -> Money.of(1000).divide(Money.of(0))) //
+                .isInstanceOf(MoneyArithmeticException.class);
     }
 }
