@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +33,16 @@ public class WinningRankTest {
                 () -> assertThat(getWinningRank(winningLotto, new Lotto(1, 2, 7, 8, 9, 10)))
                         .isEqualTo(NONE)
         );
+    }
+
+    @Test
+    @DisplayName("숫자 5개가 일치하고, 보너스 번호를 맞춘경우 당첨타입")
+    void bonusNumberRankTest() {
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.from(7);
+
+        WinningRank winningRank = getWinningRank(winningLotto, bonusNumber, new Lotto(1, 2, 3, 4, 5, 6));
+
+        assertThat(winningRank).isEqualTo(MATCHES_FIVE_AND_BONUS_NUMBER);
     }
 }
