@@ -70,8 +70,11 @@
 - [ ] WinningCondition Builder패턴 적절한가 고민해보기
 - [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
 - [x] ConsoleInputView 상수와 멤버변수를 개행
-- [ ] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
-- [ ] 구입금액이 음수로 입력된 경우 예외
+- [x] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
+    - 확실히 Input에서 검증을 하는건 별로 안좋아 보이네요.
+    - `input이 무언가의 자료구조를 만들어서 반환하는건 유연하지 못하다고 생각합니다.` 라고 하셨는데, Set<Integer>가 아닌 String을 넘기는게 좋다는 말씀이신가요?
+        - 입력된 String을 숫자들로 만드는건 Input이 가져도 되지 않을까요? 특히 ','로 split하는 경우가 Input에 있어야 하는 로직이라고 생각이 들었어요. InputView를 확장한 다른 구현체가 생겨서 다른 입력방식이 생겨도 숫자만 건내주면 되니까요 :)  
+- [x] 구입금액이 음수로 입력된 경우 예외
 - [x] 1000 -> 1_000으로 통일 
 - [x] 테스트 메서드명 카멜케이스로
 - [x] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
