@@ -14,7 +14,7 @@ public class NumberSelectionTest {
     @Test
     void sixNumberSelection() {
         NaturalSelection selection = new NaturalSelection();
-        Set<Integer> numberSet = selection.select(NUMBER_POOL);
+        Set<Integer> numberSet = selection.select(NUMBER_POOL, 6);
         assertThat(numberSet.size()).isEqualTo(6);
     }
 
@@ -22,16 +22,16 @@ public class NumberSelectionTest {
     @Test
     void naturalSelection() {
         NaturalSelection selection = new NaturalSelection();
-        Set<Integer> firstSelection = selection.select(NUMBER_POOL);
+        Set<Integer> firstSelection = selection.select(NUMBER_POOL, 6);
         for (int i = 0; i < 1000; i++) {
-            assertThat(firstSelection).isNotEqualTo(selection.select(NUMBER_POOL));
+            assertThat(firstSelection).isNotEqualTo(selection.select(NUMBER_POOL, 6));
         }
     }
 
     @DisplayName("입력값은 중복을 허용하지 않는다.")
     @Test
     void notAllowedDuplicateNumberPool() {
-        assertThatThrownBy(() -> new NaturalSelection().select(Arrays.asList(1, 2, 2, 3))) //
+        assertThatThrownBy(() -> new NaturalSelection().select(Arrays.asList(1, 2, 2, 3), 6)) //
                 .isInstanceOf(DuplicateNumberPoolException.class);
     }
 
@@ -44,10 +44,6 @@ public class NumberSelectionTest {
     }
 
     public static class NaturalSelection {
-
-        public Set<Integer> select(List<Integer> numberPool) {
-            return this.select(numberPool, 6);
-        }
 
         public Set<Integer> select(List<Integer> numberPool, int count) {
             Set<Integer> numberPoolSet = new HashSet<>(numberPool);
