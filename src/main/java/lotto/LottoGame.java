@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.LottoService;
 import lotto.view.View;
@@ -25,7 +26,11 @@ public class LottoGame {
             return;
         }
         Lotto winningLotto = getWinningLotto();
-        printStatistic(boughtLottos, winningLotto);
+        LottoNumber bonusNumber = LottoNumber.from(view.getBonusNumber());
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalStateException("보너스번호는 당첨번호와 같을 수 없습니다.");
+        }
+        printStatistic(winningLotto, bonusNumber, boughtLottos);
     }
 
     private int getAmount() {
@@ -50,8 +55,8 @@ public class LottoGame {
         return new Lotto(view.getWinningNumbers());
     }
 
-    private void printStatistic(List<Lotto> boughtLottos, Lotto winningLotto) {
-        WinningStatistic winningStatistic = lottoService.getResult(winningLotto, boughtLottos);
+    private void printStatistic(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> boughtLottos) {
+        WinningStatistic winningStatistic = lottoService.getResult(winningLotto, bonusNumber, boughtLottos);
         view.printWinningStatistic(winningStatistic);
     }
 }
