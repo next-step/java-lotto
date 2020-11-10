@@ -69,9 +69,9 @@
     - 위와 같은 이유로 2개의 클래스를 분리하고 싶었어요. :)
 - [ ] WinningCondition Builder패턴 적절한가 고민해보기
 - [ ] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
-- [ ] ConsoleInputView 상수와 멤버변수를 개행
+- [x] ConsoleInputView 상수와 멤버변수를 개행
 - [ ] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
 - [ ] 구입금액이 음수로 입력된 경우 예외
 - [x] 1000 -> 1_000으로 통일 
 - [x] 테스트 메서드명 카멜케이스로
-- [ ] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
+- [x] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
