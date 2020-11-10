@@ -26,9 +26,9 @@ public class ResultViewTest {
                 Lotto.ofNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 Lotto.ofNumbers(Arrays.asList(7, 3, 4, 5, 6, 2))));
 
-        resultView.showLottos(lottos);
+        resultView.showLottos(lottos, 1);
 
-        assertThat(output.toString()).isEqualTo("2개를 구매했습니다.\n" +
+        assertThat(output.toString()).isEqualTo("수동으로 1장, 자동으로 1개를 구매했습니다.\n" +
                 "[1, 2, 3, 4, 5, 6]\n" +
                 "[2, 3, 4, 5, 6, 7]\n\n");
     }

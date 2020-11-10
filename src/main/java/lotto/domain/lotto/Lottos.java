@@ -1,15 +1,16 @@
 package lotto.domain.lotto;
 
-import lotto.domain.exception.InvalidMoneyException;
+import lotto.domain.exception.ManualLottoCountOverMoneyException;
 import lotto.domain.winning.WinningStatistics;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int MINIMUM_MONEY = 0;
+    private static final int MINIMUM_AUTO_LOTTO_COUNT = 0;
     private int lottosCount;
     private List<Lotto> lottos;
 
@@ -18,23 +19,50 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos withMoney(int money) {
-        validateMoney(money);
-        int lottosCount = money / Lotto.PRICE;
+    public static Lottos withMoney(Money money) {
+        int lottosCount = getLottoCount(money);
+        List<Lotto> lottos = getLottosByAuto(lottosCount);
+        return new Lottos(lottos);
+    }
+
+    private static List<Lotto> getLottosByAuto(int lottosCount) {
+        validateAutoLottoCount(lottosCount);
         List<Lotto> lottos = IntStream.range(0, lottosCount)
                 .mapToObj(i -> LottoGenerator.getRandomLotto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-        return new Lottos(lottos);
+        return lottos;
+    }
+
+    private static void validateAutoLottoCount(int lottosCount) {
+        if (lottosCount < MINIMUM_AUTO_LOTTO_COUNT) {
+            throw new ManualLottoCountOverMoneyException();
+        }
+    }
+
+    private static int getLottoCount(Money money) {
+        return money.getAmount() / Lotto.PRICE;
     }
 
     public static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
-    private static void validateMoney(int money) {
-        if (money <= MINIMUM_MONEY) {
-            throw new InvalidMoneyException();
-        }
+    public static Lottos buy(Money money, List<List<Integer>> manualLottoNumbers) {
+        return merge(getLottosByManual(manualLottoNumbers),
+                getLottosByAuto(getLottoCount(money) - manualLottoNumbers.size()));
+    }
+
+    private static List<Lotto> getLottosByManual(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(Lotto::ofNumbers)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    private static Lottos merge(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(autoLottos);
+        return new Lottos(Collections.unmodifiableList(lottos));
     }
 
     public int getCount() {

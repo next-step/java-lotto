@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String FORMAT_FOR_LOTTO_COUNT = "%d개를 구매했습니다.";
+    private static final String FORMAT_FOR_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String FORMAT_FOR_LOTTO_NUMBERS = "[%s]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String HEADER_WINNING = "당첨 통계";
@@ -26,8 +26,8 @@ public class ResultView {
         this.output = output;
     }
 
-    public void showLottos(Lottos lottos) {
-        output.println(String.format(FORMAT_FOR_LOTTO_COUNT, lottos.getCount()));
+    public void showLottos(Lottos lottos, int manualLottoCount) {
+        output.println(String.format(FORMAT_FOR_LOTTO_COUNT, manualLottoCount, lottos.getCount() - manualLottoCount));
         lottos.getLottoNumbers().stream()
                 .map(this::convertLottoNumbersToString)
                 .forEach(output::println);
@@ -72,5 +72,13 @@ public class ResultView {
             builder.append(PHRASE_FOR_FACT_HITTING);
         }
         return String.format(builder.toString(), yield);
+    }
+
+    public void showErrorMessage(String message) {
+        output.println(message);
+        output.println("처음부터 시작해주세요.");
+        output.println(LINE_SEPARATION);
+        output.println("");
+        output.println("");
     }
 }

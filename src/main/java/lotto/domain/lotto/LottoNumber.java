@@ -30,6 +30,11 @@ public class LottoNumber {
         return number == ((LottoNumber) o).number;
     }
 
+    @Override
+    public int hashCode() {
+        return number;
+    }
+
     public int getNumber() {
         return number;
     }

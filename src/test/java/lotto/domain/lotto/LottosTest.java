@@ -1,9 +1,10 @@
 package lotto.domain.lotto;
 
-import lotto.domain.exception.InvalidMoneyException;
+import lotto.domain.exception.ManualLottoCountOverMoneyException;
 import lotto.domain.winning.WinningReward;
 import lotto.domain.winning.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -30,21 +31,11 @@ public class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {"10000:10", "14000:14", "100:0"}, delimiter = ':')
     public void makeLottosFromMoney(int money, int expectedLottoCount) {
-        Lottos lottos = Lottos.withMoney(money);
+        Lottos lottos = Lottos.withMoney(Money.of(money));
 
         int lottoCount = lottos.getCount();
 
         assertThat(lottoCount).isEqualTo(expectedLottoCount);
-    }
-
-    @DisplayName("로또 구입시 0이하 숫자 입력되면 에러")
-    @ParameterizedTest
-    @CsvSource(value = {"-1", "0"})
-    public void invalidMoney(int money) {
-        assertThatThrownBy(() -> {
-            Lottos.withMoney(money);
-        }).isInstanceOf(InvalidMoneyException.class)
-                .hasMessageContaining("금액은 0보다 커야합니다.");
     }
 
     @DisplayName("로또 당첨통게")
@@ -87,4 +78,24 @@ public class LottosTest {
         );
     }
 
+    @DisplayName("수동 구매 숫자가 구입금액으로 불가할 때")
+    @Test
+    public void tooMuchManualLotto() {
+        assertThatThrownBy(() -> {
+            Lottos.buy(Money.of(1000),
+                    Arrays.asList(Arrays.asList(8, 21, 23, 41, 42, 43), Arrays.asList(1, 2, 23, 41, 42, 43)));
+        }).isInstanceOf(ManualLottoCountOverMoneyException.class)
+                .hasMessageContaining("수동 구매 로또수가 구입금액을 초과합니다.");
+    }
+
+    @DisplayName("수동, 자동 구매")
+    @Test
+    public void autoAndManualLotto() {
+        Lottos lottos = Lottos.buy(Money.of(3000),
+                Arrays.asList(Arrays.asList(8, 21, 23, 41, 42, 43), Arrays.asList(1, 2, 23, 41, 42, 43)));
+
+        int result = lottos.getCount();
+
+        assertThat(result).isEqualTo(3);
+    }
 }
