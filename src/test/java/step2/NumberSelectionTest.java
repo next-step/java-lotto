@@ -35,6 +35,14 @@ public class NumberSelectionTest {
                 .isInstanceOf(DuplicateNumberPoolException.class);
     }
 
+
+    @DisplayName("NumberPool 은 최소 선택갯수 이상 존재해야 한다")
+    @Test
+    void minimumSelection() {
+        assertThatThrownBy(() -> new NaturalSelection().select(Arrays.asList(1, 2, 3), 6)) //
+                .isInstanceOf(NotEnoughNumberPoolSizeException.class);
+    }
+
     public static class NaturalSelection {
 
         public Set<Integer> select(List<Integer> numberPool) {
