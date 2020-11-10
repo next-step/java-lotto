@@ -30,12 +30,6 @@ public class PlayslipTest {
         assertThat(playslip.listNumbers(2).size()).isEqualTo(2);
     }
 
-    @DisplayName("로또용지는 선택 하지 않으면 번호갯수가 0 이다.")
-    @Test
-    void zeroSizeOfNominatedNumbers() {
-        assertThat(playslip.listNumbers(0).size()).isEqualTo(0);
-    }
-
     @DisplayName("로또용지는 0개 이하를 선택한 경우 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
@@ -68,16 +62,12 @@ public class PlayslipTest {
         private static final int MAX_SELECT_NUMBER = 45;
 
         private final NaturalSelection selection = new NaturalSelection();
-        private int size;
-
-        public void selectNumbers(int size) {
-            if (size < 1) {
-                throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
-            }
-            this.size = size;
-        }
 
         public List<LotteryNumber> listNumbers(int numberSet) {
+            if (numberSet < 1) {
+                throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
+            }
+
             List<LotteryNumber> result = new ArrayList<>();
             for (int i = 0; i < numberSet; i++) {
                 result.add(new LotteryNumber(selection.select(NUMBER_POOL)));
