@@ -5,6 +5,13 @@ public class Number {
 
     public Number(String numStr) {
         this.number = Integer.parseInt(numStr);
+
+        if (isNegative(number))
+            throw new RuntimeException("숫자가 음수입니다.");
+    }
+
+    private static boolean isNegative(int number) {
+        return number < 0;
     }
 
     @Override
