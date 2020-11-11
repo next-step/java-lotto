@@ -5,12 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.LotteryAgentTest.LotteryAgent.ExchangeResult;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.LotteryNumberTest.*;
+import static step2.LotteryNumberTest.LotteryNumber;
 import static step2.PlayslipTest.Playslip;
 
 public class LotteryAgentTest {
@@ -25,10 +26,8 @@ public class LotteryAgentTest {
     @DisplayName("돈을 받고 티켓과 거스름돈을 반환한다.")
     @Test
     void exchange() {
-        Object[] ticketAndChange = lotteryAgent.exchange(Money.of(1500));
-        assertThat(ticketAndChange).isNotNull() //
-                .hasSize(2) //
-                .hasOnlyElementsOfTypes(LotteryTickets.class, Money.class);
+        ExchangeResult ticketAndChange = lotteryAgent.exchange(Money.of(1500));
+        assertThat(ticketAndChange).isNotNull();
     }
 
     @DisplayName("돈이 최소 구입금액에 못미치면 예외가 발생한다.")
@@ -42,14 +41,14 @@ public class LotteryAgentTest {
     @ParameterizedTest
     @CsvSource({"1000,0", "1234,234", "2000,0"})
     void changes(int money, int change) {
-        assertThat(lotteryAgent.exchange(Money.of(money))[1]).isEqualTo(Money.of(change));
+        assertThat(lotteryAgent.exchange(Money.of(money)).getChange()).isEqualTo(Money.of(change));
     }
 
     @DisplayName("구매액수에 맞는 티캣을 교환해준다.")
     @ParameterizedTest
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
-        LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(Money.of(money))[0];
+        LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(money)).getLotteryTickets();
         assertThat(lotteryTickets.size()).isEqualTo(size);
     }
 
@@ -57,15 +56,15 @@ public class LotteryAgentTest {
     @DisplayName("티캣은 선택한 번호들을 가진다.")
     @Test
     void ticketHasNumbers() {
-        LotteryTickets lotteryTickets = (LotteryTickets) lotteryAgent.exchange(Money.of(1000))[0];
+        LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(1000)).getLotteryTickets();
         List<LotteryNumber> numbers = lotteryTickets.getNumbers();
         assertThat(numbers.get(0)).isInstanceOf(LotteryNumber.class);
     }
 
-    private static class LotteryAgent {
+    static class LotteryAgent {
         private static final Money PRICE_LOTTERY = Money.of(1000);
 
-        public Object[] exchange(Money money) {
+        public ExchangeResult exchange(Money money) {
             if (money.lessThan(PRICE_LOTTERY)) {
                 throw new NotEnoughMoneyException();
             }
@@ -73,7 +72,26 @@ public class LotteryAgentTest {
             Playslip playslip = new Playslip();
             int ticketCount = money.divide(PRICE_LOTTERY);
 
-            return new Object[]{new LotteryTickets(playslip.selectNumbers(ticketCount)), money.subtract(PRICE_LOTTERY.multiply(ticketCount))};
+            return new ExchangeResult(new LotteryTickets(playslip.selectNumbers(ticketCount)),
+                    money.subtract(PRICE_LOTTERY.multiply(ticketCount)));
+        }
+
+        public static class ExchangeResult {
+            private final LotteryTickets lotteryTickets;
+            private final Money change;
+
+            public ExchangeResult(LotteryTickets lotteryTickets, Money change) {
+                this.lotteryTickets = lotteryTickets;
+                this.change = change;
+            }
+
+            public LotteryTickets getLotteryTickets() {
+                return lotteryTickets;
+            }
+
+            public Money getChange() {
+                return change;
+            }
         }
     }
 
