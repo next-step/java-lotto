@@ -20,8 +20,24 @@ public class CustomSplitterExtractorTest {
 
     @Test
     void extractInput() {
-        String expression = CustomSplitterDivider.extractExpression(input);
+        String expression = CustomSplitterDivider.extractExpressionString(input);
 
         assertThat(expression).isEqualTo("1;2;3");
+    }
+
+    @Test
+    void isCustomExpression_true() {
+        boolean isCustomExpression = CustomSplitterDivider.isCustomExpression(input);
+
+        assertThat(isCustomExpression).isTrue();
+    }
+
+    @Test
+    void isCustomExpression_false() {
+        String input = "1,2,3";
+
+        boolean isCustomExpression = CustomSplitterDivider.isCustomExpression(input);
+
+        assertThat(isCustomExpression).isFalse();
     }
 }

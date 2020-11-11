@@ -11,9 +11,14 @@ public class CustomSplitterDivider {
         return matcher.group(1);
     }
 
-    public static String extractExpression(String input) {
+    public static String extractExpressionString(String input) {
         Matcher matcher = PATTERN.matcher(input);
         matcher.find();
         return matcher.group(2);
+    }
+
+    public static boolean isCustomExpression(String input) {
+        Matcher matcher = PATTERN.matcher(input);
+        return matcher.find();
     }
 }
