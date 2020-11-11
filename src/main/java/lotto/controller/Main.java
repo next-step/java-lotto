@@ -9,5 +9,8 @@ public class Main {
         int money = InputView.askPurchaseMoney();
         int numOfLottos = PurchaseCalculator.getNumOfLottos(money);
         ResultView.printNumOfLottos(numOfLottos);
+
+        String winningLotto = InputView.askWinningLotto();
+        System.out.println(winningLotto);
     }
 }

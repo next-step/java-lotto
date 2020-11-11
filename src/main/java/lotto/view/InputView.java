@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.asset.InputViewConst;
+import lotto.lib.LottoValidator;
 import lotto.lib.MoneyValidator;
 
 import java.util.Scanner;
@@ -17,5 +18,11 @@ public class InputView {
         return Integer.parseInt(money);
     }
 
+    public static String askWinningLotto() {
+        System.out.println(InputViewConst.ASK_WINNING_LOTTO);
+        String winningLotto = scanner.nextLine();
+        LottoValidator.validateLottoStr(winningLotto);
+        return winningLotto;
+    }
 
 }
