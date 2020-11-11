@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberSizeException;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +36,7 @@ public class Lotto {
 
     private void validateNumbersSize() {
         if (numbers.size() != VALID_NUMBERS_SIZE) {
-            throw new IllegalStateException(INVALID_NUMBERS_SIZE_ERR_MSG);
+            throw new IllegalLottoNumberSizeException(INVALID_NUMBERS_SIZE_ERR_MSG);
         }
     }
 

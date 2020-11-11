@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
+import lotto.exception.IllegalBonusNumberException;
+import lotto.exception.IllegalInputAmountException;
 import lotto.service.LottoService;
 import lotto.view.View;
 
@@ -39,7 +41,7 @@ public class LottoGame {
 
     private void validateAmount(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException(INVALID_AMOUNT_ERR_MSG);
+            throw new IllegalInputAmountException(INVALID_AMOUNT_ERR_MSG);
         }
     }
 
@@ -62,7 +64,7 @@ public class LottoGame {
 
     private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalStateException(INVALID_BONUS_NUMBER_ERR_MSG);
+            throw new IllegalBonusNumberException(INVALID_BONUS_NUMBER_ERR_MSG);
         }
     }
 

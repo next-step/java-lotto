@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.exception.IllegalLottoNumberRangeException;
+import lotto.exception.IllegalLottoNumberSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +21,7 @@ public class LottoTest {
     @MethodSource("invalidNumberSize")
     @DisplayName("로또 생성시 number size가 유효하지 않으면 throw IllegalStateException")
     void createTestInvalidNumberSize(List<Integer> numbers) {
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(IllegalLottoNumberSizeException.class)
                 .isThrownBy(() -> Lotto.of(numbers))
                 .withMessage(Lotto.INVALID_NUMBERS_SIZE_ERR_MSG);
     }
@@ -34,7 +36,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalStateException")
     void createTestDuplicatedNumbers() {
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(IllegalLottoNumberSizeException.class)
                 .isThrownBy(() -> Lotto.of(1, 1, 1, 1, 1, 1))
                 .withMessage(Lotto.INVALID_NUMBERS_SIZE_ERR_MSG);
     }
@@ -43,7 +45,7 @@ public class LottoTest {
     @MethodSource("invalidNumberRange")
     @DisplayName("로또 숫자가 지정된 범위 만족하지 않으면 throw IllegalStateException (ex 1~45 사이의 숫자만).")
     void createTestNumberRange(List<Integer> numbers) {
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(IllegalLottoNumberRangeException.class)
                 .isThrownBy(() -> Lotto.of(numbers))
                 .withMessage(LottoNumber.INVALID_NUMBER_RANGE_ERR_MSG);
     }

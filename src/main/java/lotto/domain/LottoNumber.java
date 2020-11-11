@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberRangeException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateNumberRange(int number) {
         if (number < VALID_MIN_NUMBER || number > VALID_MAX_NUMBER) {
-            throw new IllegalStateException(INVALID_NUMBER_RANGE_ERR_MSG);
+            throw new IllegalLottoNumberRangeException(INVALID_NUMBER_RANGE_ERR_MSG);
         }
     }
 
