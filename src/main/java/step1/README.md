@@ -38,4 +38,4 @@ if (m.find()) {
 }
 
 6. 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)
-구글에서 “junit4 expected exception”으로 검색해 해결책을 찾는다.
+구글에서 “junit4 expected step1.exception”으로 검색해 해결책을 찾는다.
