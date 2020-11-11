@@ -16,8 +16,8 @@ class ExpressionTest {
     }
 
     @Test
-    @DisplayName(",를 기준으로 string sentence을 숫자로 나누기")
-    void from() {
+    @DisplayName(",를 기준으로 sentence를 숫자로 나누기")
+    void createExpression() {
         Expression expression = new Expression(sentence, new Splitters());
 
         Numbers expected = new Numbers(Arrays.asList(new Number(1), new Number(2)));
