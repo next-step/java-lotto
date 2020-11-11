@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    public static final Splitters splitters = new Splitters(Arrays.asList(",", ":"));
+    public static final Splitters splitters = new Splitters();
     private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {

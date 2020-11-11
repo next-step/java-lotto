@@ -1,12 +1,10 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Splitters {
     public static final String DELIMITER = "|";
-    private final List<String> splitters;
+    private final List<String> splitters = Arrays.asList(",", ":");
 
-    public Splitters(List<String> splitters) {
-        this.splitters = splitters;
-    }
 
     public String getRegex() {
         return String.join(DELIMITER, splitters);

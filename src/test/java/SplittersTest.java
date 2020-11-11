@@ -1,14 +1,12 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SplittersTest {
 
     @Test
     void getRegex() {
-        Splitters splitters = new Splitters(Arrays.asList(",", ":"));
+        Splitters splitters = new Splitters();
 
         String regex = splitters.getRegex();
 
