@@ -28,7 +28,7 @@ public class LottoBuyerTest {
 
     @DisplayName("생성")
     @Nested
-    class create {
+    class Create {
         @DisplayName("실패")
         @Test
         void fail_when_receive_null() {
