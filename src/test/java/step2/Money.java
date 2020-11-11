@@ -39,6 +39,10 @@ public class Money {
         return Money.of(amount + added.amount);
     }
 
+    public int toInt() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

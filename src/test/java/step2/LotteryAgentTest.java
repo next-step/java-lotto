@@ -62,7 +62,7 @@ public class LotteryAgentTest {
     }
 
     static class LotteryAgent {
-        private static final Money PRICE_LOTTERY = Money.of(1000);
+        public static final Money PRICE_LOTTERY = Money.of(1000);
 
         public ExchangeResult exchange(Money money) {
             if (money.lessThan(PRICE_LOTTERY)) {
