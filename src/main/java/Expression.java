@@ -1,22 +1,18 @@
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Expression {
-    public static final Splitters splitters = new Splitters();
     private final Numbers numbers;
+    private final Splitters splitters;
 
-    public Expression(Numbers numbers) {
-        this.numbers = numbers;
-    }
+    public Expression(String input, Splitters splitters) {
+        this.numbers = new Numbers(
+                Arrays.stream(input.split(splitters.getRegex()))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList()));
+        this.splitters = splitters;
 
-    public static Expression from(String input) {
-        List<Integer> numbers = Arrays.stream(input.split(splitters.getRegex()))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        return new Expression(new Numbers(numbers));
     }
 
     public int sum() {
@@ -27,12 +23,17 @@ public class Expression {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Expression expression1 = (Expression) o;
-        return Objects.equals(numbers, expression1.numbers);
+        Expression that = (Expression) o;
+        return Objects.equals(numbers, that.numbers) &&
+                Objects.equals(splitters, that.splitters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(numbers, splitters);
+    }
+
+    public Numbers getNumbers() {
+        return numbers;
     }
 }
