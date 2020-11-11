@@ -11,6 +11,12 @@ public class StringAddCalculator {
         if(input.isEmpty()){
             return 0;
         }
-        return parseInt(input);
+        String[] split = input.split(",");
+
+        int sum = 0;
+        for (String s : split) {
+            sum += parseInt(s);
+        }
+        return sum;
     }
 }
