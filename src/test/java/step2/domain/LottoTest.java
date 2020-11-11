@@ -12,8 +12,8 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 한장을 만듭니다.")
-    void create(){
+    void create() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getLottoNumbers).has(6);
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 }
