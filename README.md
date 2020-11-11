@@ -89,7 +89,7 @@
 
 ### 3단계 피드백 사항
 - [ ] Main과 LottoGame 통합에 대한 고민
-- [ ] LottoNumber는 원시값 포장 객체입니다. 1 == 1 은 true인데, LottoNumber.from(1) == LottoNumber.from(1)이 되게 하려면 어떻게 해야할까요? 
+- [x] LottoNumber는 원시값 포장 객체입니다. 1 == 1 은 true인데, LottoNumber.from(1) == LottoNumber.from(1)이 되게 하려면 어떻게 해야할까요? 
 - [ ] Exception class 생성
 - [ ] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
 - [ ] 보통 원시값 포장 객체는 valueOf 라는 이름의 메소드로 사용합니다.

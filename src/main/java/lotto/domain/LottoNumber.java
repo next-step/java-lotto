@@ -23,8 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber from(int number) {
         validateNumberRange(number);
-        LottoNumber lottoNumber = LOTTO_NUMBER_BY_INTEGER.get(number);
-        return lottoNumber;
+        return LOTTO_NUMBER_BY_INTEGER.get(number);
     }
 
     private static void validateNumberRange(int number) {
