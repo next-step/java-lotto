@@ -51,7 +51,7 @@ public class LottoGame {
 
     private WinningNumber getWinningNumber() {
         Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = LottoNumber.from(view.getBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.valueOf(view.getBonusNumber());
         validateBonusNumber(winningLotto, bonusNumber);
         return new WinningNumber(winningLotto, bonusNumber);
     }

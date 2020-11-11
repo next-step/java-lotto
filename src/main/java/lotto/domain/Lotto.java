@@ -28,7 +28,7 @@ public class Lotto {
 
     private Set<LottoNumber> getLottoNumbersFrom(Collection<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 

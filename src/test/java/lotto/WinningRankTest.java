@@ -21,7 +21,7 @@ public class WinningRankTest {
     @DisplayName("당첨번호와 구입한 로또번호로 당첨타입을 확인한다.")
     void winningRankTest() {
         Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = LottoNumber.from(45);
+        LottoNumber bonusNumber = LottoNumber.valueOf(45);
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         assertAll(
