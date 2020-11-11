@@ -1,41 +1,41 @@
 import java.util.Arrays;
 
 public class StringAddCalculator {
-    public static Number splitAndSum(String input) {
-        if (!validateInput(input))
+    public static Number splitAndSum(String sentence) {
+        if (!validateSentence(sentence))
             return new Number(0);
 
-        return calculate(input);
+        return calculate(sentence);
     }
 
-    private static Number calculate(String input) {
-        CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
-        if (customSplitterDivider.isCustomExpression()) {
-            return getCustomSplitterDividerSum(customSplitterDivider);
+    private static Number calculate(String sentence) {
+        CustomSentenceDivider customSentenceDivider = new CustomSentenceDivider(sentence);
+        if (customSentenceDivider.isCustomExpression()) {
+            Expression expression = getExpFromCustomSplitterDivider(customSentenceDivider);
+            return expression.sum();
         }
 
-        Expression expression = new Expression(input, new Splitters());
+        Expression expression = new Expression(sentence, new Splitters());
         return expression.sum();
     }
 
-    private static Number getCustomSplitterDividerSum(CustomSplitterDivider customSplitterDivider) {
-        Splitters splitters = new Splitters(Arrays.asList(customSplitterDivider.getSplitter()));
-        Expression expression = new Expression(customSplitterDivider.getExpressionString(), splitters);
-        return expression.sum();
+    private static Expression getExpFromCustomSplitterDivider(CustomSentenceDivider customSentenceDivider) {
+        Splitters splitters = new Splitters(Arrays.asList(customSentenceDivider.getSplitter()));
+        return new Expression(customSentenceDivider.getExpressionString(), splitters);
     }
 
-    private static boolean validateInput(String input) {
-        if (checkNull(input))
+    private static boolean validateSentence(String sentence) {
+        if (checkNull(sentence))
             return false;
 
-        return !checkEmptyString(input);
+        return !checkEmptyString(sentence);
     }
 
-    private static boolean checkEmptyString(String input) {
-        return input.isEmpty();
+    private static boolean checkEmptyString(String sentence) {
+        return sentence.isEmpty();
     }
 
-    private static boolean checkNull(String input) {
-        return input == null;
+    private static boolean checkNull(String sentence) {
+        return sentence == null;
     }
 }

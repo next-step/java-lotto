@@ -6,9 +6,9 @@ public class Expression {
     private final Numbers numbers;
     private final Splitters splitters;
 
-    public Expression(String input, Splitters splitters) {
+    public Expression(String sentence, Splitters splitters) {
         this.numbers = new Numbers(
-                Arrays.stream(input.split(splitters.getRegex()))
+                Arrays.stream(sentence.split(splitters.getRegex()))
                         .map(Number::new)
                         .collect(Collectors.toList()));
         this.splitters = splitters;

@@ -1,13 +1,13 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomSplitterDivider {
+public class CustomSentenceDivider {
 
     public static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private final Matcher matcher;
 
-    public CustomSplitterDivider(String input) {
-        matcher = PATTERN.matcher(input);
+    public CustomSentenceDivider(String sentence) {
+        matcher = PATTERN.matcher(sentence);
     }
 
     public String getSplitter() {

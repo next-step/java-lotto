@@ -9,7 +9,7 @@ public class Numbers {
     }
 
     public Number sum() {
-        return numbers.stream().reduce(new Number("0"), Number::sum);
+        return numbers.stream().reduce(new Number(0), Number::sum);
     }
 
     @Override
