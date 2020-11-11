@@ -3,20 +3,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Numbers {
+public class Expression {
     public static final Splitters splitters = new Splitters();
     private final List<Integer> numbers;
 
-    public Numbers(List<Integer> numbers) {
+    public Expression(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public static Numbers from(String input) {
+    public static Expression from(String input) {
         List<Integer> numbers = Arrays.stream(input.split(splitters.getRegex()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return new Numbers(numbers);
+        return new Expression(numbers);
     }
 
     public int sum() {
@@ -28,8 +28,8 @@ public class Numbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Numbers numbers1 = (Numbers) o;
-        return Objects.equals(numbers, numbers1.numbers);
+        Expression expression1 = (Expression) o;
+        return Objects.equals(numbers, expression1.numbers);
     }
 
     @Override

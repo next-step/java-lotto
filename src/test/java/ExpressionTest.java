@@ -6,15 +6,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NumbersTest {
+class ExpressionTest {
     @Test
     @DisplayName(",를 기준으로 string input을 숫자로 나누기")
     void from() {
         String input = "1,2";
 
-        Numbers from = Numbers.from(input);
+        Expression from = Expression.from(input);
 
-        assertThat(from).isEqualTo(new Numbers(Arrays.asList(1, 2)));
+        assertThat(from).isEqualTo(new Expression(Arrays.asList(1, 2)));
     }
 
     @Test
@@ -22,8 +22,8 @@ class NumbersTest {
     void sum() {
         List<Integer> numberList = Arrays.asList(1, 2);
 
-        Numbers numbers = new Numbers(numberList);
-        int sum = numbers.sum();
+        Expression expression = new Expression(numberList);
+        int sum = expression.sum();
 
         assertThat(sum).isEqualTo(3);
     }
