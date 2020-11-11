@@ -86,3 +86,13 @@
 
 ### 프로그래밍 요구사항
 - 규칙 8: 일급 콜렉션을 쓴다.
+
+### 3단계 피드백 사항
+- [ ] Main과 LottoGame 통합에 대한 고민
+- [ ] LottoNumber는 원시값 포장 객체입니다. 1 == 1 은 true인데, LottoNumber.from(1) == LottoNumber.from(1)이 되게 하려면 어떻게 해야할까요? 
+- [ ] Exception class 생성
+- [ ] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
+- [ ] 보통 원시값 포장 객체는 valueOf 라는 이름의 메소드로 사용합니다.
+- [ ] 이 부분은 from 메소드에 위임하는게 좋을 것 같아요~
+- [ ] WinningNumber getter는 불필요할 것 같습니다.
+- [ ] LottoService 굳이 인터페이스와 구현부로 분류할 필요는 없지 않을까요?이 
