@@ -1,6 +1,11 @@
 package step2;
 
+import java.util.Objects;
+
+import static util.Preconditions.checkArgument;
+
 public class LottoBuyer {
+    public static final String MONEY_MUST_NOT_BE_NULL = "money must not be null";
     private final Money money;
     private Lottos lottos;
     
@@ -9,6 +14,7 @@ public class LottoBuyer {
     }
     
     public static LottoBuyer of(final Money money) {
+        checkArgument(Objects.nonNull(money), MONEY_MUST_NOT_BE_NULL);
         return new LottoBuyer(money);
     }
     
