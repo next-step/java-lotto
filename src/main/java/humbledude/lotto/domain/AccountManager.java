@@ -1,4 +1,4 @@
-package humbledude.lotto;
+package humbledude.lotto.domain;
 
 public class AccountManager {
 

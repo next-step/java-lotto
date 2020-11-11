@@ -1,6 +1,7 @@
-package humbledude.lotto;
+package humbledude.lotto.domain;
 
 import java.util.Set;
+
 public class LottoTicket {
 
     private final LottoNumbers numbers;

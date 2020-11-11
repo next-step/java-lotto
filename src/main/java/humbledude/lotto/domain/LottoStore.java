@@ -1,4 +1,4 @@
-package humbledude.lotto;
+package humbledude.lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
