@@ -1,8 +1,8 @@
-package lotto.lib;
+package lotto.lib.validator;
 
 import lotto.asset.ExceptionConst;
 import lotto.exception.NanException;
-import lotto.exception.BadPriceException;
+import lotto.exception.BadMoneyException;
 import lotto.exception.NpeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,43 +12,43 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class PriceValidatorTest {
+class MoneyValidatorTest {
 
     @ParameterizedTest
     @DisplayName("0보다 작거나 같으면, Exception 이 발생한다.")
     @CsvSource(value = {"-1$true", "0$true", "1$false"}, delimiter = '$')
-    public void intValidatePrice(int price, boolean negative) {
+    public void intValidateMoney(int money, boolean negative) {
         if (negative) {
-            assertThatExceptionOfType(BadPriceException.class)
-                    .isThrownBy(() -> PriceValidator.validatePrice(price))
-                    .withMessage(ExceptionConst.BAD_PRICE_MSG);
+            assertThatExceptionOfType(BadMoneyException.class)
+                    .isThrownBy(() -> MoneyValidator.validateMoney(money))
+                    .withMessage(ExceptionConst.BAD_MONEY_MSG);
             return;
         }
-        Assertions.assertDoesNotThrow(() -> PriceValidator.validatePrice(price));
+        Assertions.assertDoesNotThrow(() -> MoneyValidator.validateMoney(money));
     }
 
     @ParameterizedTest
     @DisplayName("0보다 작은 문자이면, Exception 이 발생한다.")
     @CsvSource(value = {"-1$true", "1$false"}, delimiter = '$')
-    public void strValidatePrice(String price, boolean negative) {
+    public void strValidateMoney(String money, boolean negative) {
         if (negative) {
-            assertThatExceptionOfType(BadPriceException.class)
-                    .isThrownBy(() -> PriceValidator.validatePrice(price))
-                    .withMessage(ExceptionConst.BAD_PRICE_MSG);
+            assertThatExceptionOfType(BadMoneyException.class)
+                    .isThrownBy(() -> MoneyValidator.validateMoney(money))
+                    .withMessage(ExceptionConst.BAD_MONEY_MSG);
             return;
         }
-        Assertions.assertDoesNotThrow(() -> PriceValidator.validatePrice(price));
+        Assertions.assertDoesNotThrow(() -> MoneyValidator.validateMoney(money));
     }
 
     @Test
     @DisplayName("숫자가 아니면, Exception 이 발생한다.")
-    public void strValidatePrice() {
+    public void strValidateMoney() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NpeException.class)
-                        .isThrownBy(() -> PriceValidator.validatePrice(null))
+                        .isThrownBy(() -> MoneyValidator.validateMoney(null))
                         .withMessage(ExceptionConst.NPE_MSG),
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> PriceValidator.validatePrice("NAN"))
+                        .isThrownBy(() -> MoneyValidator.validateMoney("NAN"))
                         .withMessage(ExceptionConst.NAN_MSG)
         );
     }

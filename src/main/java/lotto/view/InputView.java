@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.asset.InputViewConst;
-import lotto.lib.LottoValidator;
-import lotto.lib.MoneyValidator;
+import lotto.lib.validator.LottoValidator;
+import lotto.lib.validator.MoneyValidator;
 
 import java.util.Scanner;
 

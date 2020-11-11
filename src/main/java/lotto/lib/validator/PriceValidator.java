@@ -1,4 +1,4 @@
-package lotto.lib;
+package lotto.lib.validator;
 
 import lotto.exception.BadPriceException;
 
