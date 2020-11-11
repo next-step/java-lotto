@@ -88,12 +88,20 @@
 - 규칙 8: 일급 콜렉션을 쓴다.
 
 ### 3단계 피드백 사항
-- [ ] Main과 LottoGame 통합에 대한 고민
+- [x] Main과 LottoGame 통합에 대한 고민
 - [x] LottoNumber는 원시값 포장 객체입니다. 1 == 1 은 true인데, LottoNumber.from(1) == LottoNumber.from(1)이 되게 하려면 어떻게 해야할까요? 
-- [ ] Exception class 생성
-- [ ] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
+    - 캐시처리 했습니다! :)
+- [x] ConsoleInputView 책임과 역할에 대한 고민
+    - 해당 의견은 링크로 달아두겠습니다! https://github.com/next-step/java-lotto/pull/867 (링크 하단 comment 참고)  
+- [x] Exception class 생성
+- [x] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
 - [x] 보통 원시값 포장 객체는 valueOf 라는 이름의 메소드로 사용합니다.
 - [x] 이 부분은 from 메소드에 위임하는게 좋을 것 같아요~
     - 생성자보다 정적메서드가 더 좋아보이는 이유는 어떤건가요? :)
 - [x] WinningNumber getter는 불필요할 것 같습니다.
-- [ ] LottoService 굳이 인터페이스와 구현부로 분류할 필요는 없지 않을까요?이 
+- [x] LottoService 굳이 인터페이스와 구현부로 분류할 필요는 없지 않을까요?
+    - 제가 하나의 구현부라도 인터페이스를 만든 이유는 보통 세가지 이유가 됩니다.
+        1. 첫 설계시에 인터페이스만으로 객체들의 의존관계를 그려보기 위해서
+        2. 추후에 LottoService를 의존하는 객체의 유닛테스트를 용이하게 하기 위해서
+        3. 기능이 확장될때 의존객체들에게 영향을 주지 않기 위해서
+    - 그러나 이후에 다른 하나의 인터페이와 구현체만 매핑되는 경우도 많이 있습니다. 혹시 이런 사항이 안좋은걸까요? 그리고 이후에 인터페이스와 구현체가 하나라면 인터페이스를 삭제하는게 좋을까요? :) 
