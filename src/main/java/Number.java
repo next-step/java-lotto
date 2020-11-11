@@ -3,6 +3,10 @@ import java.util.Objects;
 public class Number {
     private final int number;
 
+    public Number(int number) {
+        this.number = number;
+    }
+
     public Number(String numStr) {
         this.number = Integer.parseInt(numStr);
 
@@ -12,6 +16,10 @@ public class Number {
 
     private static boolean isNegative(int number) {
         return number < 0;
+    }
+
+    public static Number sum(Number number1, Number number2) {
+        return new Number(number1.number + number2.number);
     }
 
     @Override

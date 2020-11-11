@@ -20,15 +20,17 @@ class ExpressionTest {
     void from() {
         Expression expression = new Expression(input, new Splitters());
 
-        assertThat(expression.getNumbers()).isEqualTo(new Numbers(Arrays.asList(1, 2)));
+        Numbers expected = new Numbers(Arrays.asList(new Number(1), new Number(2)));
+        assertThat(expression.getNumbers()).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("sum 구하기")
     void sum() {
         Expression expression = new Expression(input, new Splitters());
-        int sum = expression.sum();
 
-        assertThat(sum).isEqualTo(3);
+        Number sum = expression.sum();
+
+        assertThat(sum).isEqualTo(new Number(3));
     }
 }

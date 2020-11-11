@@ -2,14 +2,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
-    public Numbers(List<Integer> numbers) {
+    public Numbers(List<Number> numbers) {
         this.numbers = numbers;
     }
 
-    public int sum() {
-        return numbers.stream().reduce(0, Integer::sum);
+    public Number sum() {
+        return numbers.stream().reduce(new Number("0"), Number::sum);
     }
 
     @Override

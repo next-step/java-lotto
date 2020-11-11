@@ -9,13 +9,13 @@ public class Expression {
     public Expression(String input, Splitters splitters) {
         this.numbers = new Numbers(
                 Arrays.stream(input.split(splitters.getRegex()))
-                        .map(Integer::parseInt)
+                        .map(Number::new)
                         .collect(Collectors.toList()));
         this.splitters = splitters;
 
     }
 
-    public int sum() {
+    public Number sum() {
         return numbers.sum();
     }
 

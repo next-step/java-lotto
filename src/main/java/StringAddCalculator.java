@@ -1,14 +1,14 @@
 import java.util.Arrays;
 
 public class StringAddCalculator {
-    public static int splitAndSum(String input) {
+    public static Number splitAndSum(String input) {
         if (!validateInput(input))
-            return 0;
+            return new Number(0);
 
         return calculate(input);
     }
 
-    private static int calculate(String input) {
+    private static Number calculate(String input) {
         CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
         if (customSplitterDivider.isCustomExpression()) {
             return getCustomSplitterDividerSum(customSplitterDivider);
@@ -18,7 +18,7 @@ public class StringAddCalculator {
         return expression.sum();
     }
 
-    private static int getCustomSplitterDividerSum(CustomSplitterDivider customSplitterDivider) {
+    private static Number getCustomSplitterDividerSum(CustomSplitterDivider customSplitterDivider) {
         Splitters splitters = new Splitters(Arrays.asList(customSplitterDivider.getSplitter()));
         Expression expression = new Expression(customSplitterDivider.getExpressionString(), splitters);
         return expression.sum();
