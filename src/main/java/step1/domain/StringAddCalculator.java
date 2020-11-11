@@ -1,5 +1,7 @@
 package step1.domain;
 
+import step1.exception.MinNumZeroException;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +43,7 @@ public class StringAddCalculator {
     }
 
     private static int getIntValue(Integer input) {
-        validNumZero(input);
+        validNumUnderZero(input);
         return input;
     }
 
@@ -55,9 +57,9 @@ public class StringAddCalculator {
     }
 
 
-    private static void validNumZero(int i) {
-        if (i < 0) {
-            throw new RuntimeException("익셉션");
+    private static void validNumUnderZero(int input) {
+        if (input < 0) {
+            throw new MinNumZeroException();
         }
     }
 }
