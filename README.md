@@ -94,5 +94,5 @@
 - [ ] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
 - [ ] 보통 원시값 포장 객체는 valueOf 라는 이름의 메소드로 사용합니다.
 - [ ] 이 부분은 from 메소드에 위임하는게 좋을 것 같아요~
-- [ ] WinningNumber getter는 불필요할 것 같습니다.
+- [x] WinningNumber getter는 불필요할 것 같습니다.
 - [ ] LottoService 굳이 인터페이스와 구현부로 분류할 필요는 없지 않을까요?이 

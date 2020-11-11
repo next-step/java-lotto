@@ -38,8 +38,8 @@ public enum WinningRank {
     }
 
     private static WinningCondition getWinningConditionOf(WinningNumber winningNumber, Lotto boughtLotto) {
-        int matchedCount = boughtLotto.getMatchedCountCompareTo(winningNumber);
-        boolean bonusNumMatched = boughtLotto.contains(winningNumber);
+        int matchedCount = winningNumber.getMatchedCountCompareTo(boughtLotto);
+        boolean bonusNumMatched = winningNumber.isBonusNumMatchedTo(boughtLotto);
 
         return WinningCondition.of(matchedCount, bonusNumMatched);
     }

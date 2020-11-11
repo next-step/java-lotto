@@ -12,11 +12,11 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public Lotto getWinningLotto() {
-        return winningLotto;
+    public int getMatchedCountCompareTo(Lotto boughtLotto) {
+        return winningLotto.getMatchedCountCompareTo(boughtLotto);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public boolean isBonusNumMatchedTo(Lotto boughtLotto) {
+        return boughtLotto.contains(bonusNumber);
     }
 }
