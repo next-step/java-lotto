@@ -11,10 +11,16 @@ public class CustomSplitterDivider {
     }
 
     public String extractSplitter() {
+        if (!isCustomExpression())
+            return null;
+
         return matcher.group(1);
     }
 
     public String extractExpressionString() {
+        if (!isCustomExpression())
+            return null;
+
         return matcher.group(2);
     }
 
