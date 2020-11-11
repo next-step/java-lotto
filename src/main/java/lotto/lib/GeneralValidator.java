@@ -17,10 +17,18 @@ public class GeneralValidator {
         return false;
     }
 
-    protected static void validateStrNum(String strNum) {
-        Optional.ofNullable(strNum).orElseThrow(NpeException::getInstance);
-        if (checkNan(strNum)) {
+    protected static void validateNpe(String nullable) {
+        Optional.ofNullable(nullable).orElseThrow(NpeException::getInstance);
+    }
+
+    protected static void validateNan(String number) {
+        if (checkNan(number)) {
             throw NanException.getInstance();
         }
+    }
+
+    protected static void validateStrNum(String strNum) {
+        validateNpe(strNum);
+        validateNan(strNum);
     }
 }

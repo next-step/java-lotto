@@ -16,4 +16,6 @@ public class InputView {
         MoneyValidator.validateMoney(money);
         return Integer.parseInt(money);
     }
+
+
 }

@@ -22,4 +22,9 @@ public class LottoNo {
     public int getNo() {
         return lottoNo;
     }
+
+    @Override
+    public String toString() {
+        return lottoNo.toString();
+    }
 }
