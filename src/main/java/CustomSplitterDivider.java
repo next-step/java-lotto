@@ -10,14 +10,14 @@ public class CustomSplitterDivider {
         matcher = PATTERN.matcher(input);
     }
 
-    public String extractSplitter() {
+    public String getSplitter() {
         if (!isCustomExpression())
             return null;
 
         return matcher.group(1);
     }
 
-    public String extractExpressionString() {
+    public String getExpressionString() {
         if (!isCustomExpression())
             return null;
 

@@ -15,7 +15,7 @@ public class CustomSplitterExtractorTest {
     void extractSplitter() {
         CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
 
-        String customSplitter = customSplitterDivider.extractSplitter();
+        String customSplitter = customSplitterDivider.getSplitter();
 
         assertThat(customSplitter).isEqualTo(";");
     }
@@ -24,7 +24,7 @@ public class CustomSplitterExtractorTest {
     void extractInput() {
         CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
 
-        String expression = customSplitterDivider.extractExpressionString();
+        String expression = customSplitterDivider.getExpressionString();
 
         assertThat(expression).isEqualTo("1;2;3");
     }
