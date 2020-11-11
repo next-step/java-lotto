@@ -78,9 +78,14 @@ public class LotteryResultTest {
                 throw new OutOfMatchingBoundaryException();
             }
 
-            Rank rankEnum = Rank.valueFrom(matchCount);
+            result.compute(Rank.valueFrom(matchCount), this::addOrDefault);
+        }
 
-            result.compute(rankEnum, (key, value) -> value == null ? 1 : value + 1);
+        private Integer addOrDefault(Rank rank, Integer value) {
+            if (value == null) {
+                return 1;
+            }
+            return value + 1;
         }
 
         public int getMatchResult(Rank rank) {
