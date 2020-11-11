@@ -1,9 +1,7 @@
 package lotto;
 
 import lotto.service.LottoService;
-import lotto.service.LottoServiceImpl;
 import lotto.view.ConsoleView;
-import lotto.view.View;
 import lotto.view.inputview.ConsoleInputView;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ConsoleResultView;
@@ -16,15 +14,7 @@ public class Main {
     }
 
     private static LottoGame lottoGame() {
-        return new LottoGame(view(), lottoService());
-    }
-
-    private static View view() {
-        return new ConsoleView(inputView(), resultView());
-    }
-
-    private static LottoService lottoService() {
-        return new LottoServiceImpl();
+        return new LottoGame(new ConsoleView(inputView(), resultView()), new LottoService());
     }
 
     private static InputView inputView() {
