@@ -32,7 +32,7 @@ public class LotteryResultTest {
         LotteryResult lotteryResult = new LotteryResult();
         lotteryResult.add(3);
         for (int i = 0; i < 13; i++) {
-            lotteryResult.add(0);
+            lotteryResult.add(i % 3);
         }
         assertThat(lotteryResult.getRateOfReturn()) //
                 .isEqualTo(0.35714287f);
