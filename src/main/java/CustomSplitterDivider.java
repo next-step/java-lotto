@@ -25,6 +25,6 @@ public class CustomSplitterDivider {
     }
 
     public boolean isCustomExpression() {
-        return matcher.find();
+        return matcher.matches();
     }
 }
