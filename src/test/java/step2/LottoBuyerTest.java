@@ -20,9 +20,9 @@ public class LottoBuyerTest {
 
         // when
         lottoBuyer.buy(lottoStore);
-        final Lottos lottos = lottoBuyer.getLottos();
 
         // then
+        final Lottos lottos = lottoBuyer.getLottos();
         assertThat(lottos.size()).isEqualTo(2);
     }
 
@@ -54,5 +54,20 @@ public class LottoBuyerTest {
             // then
             assertThat(lottoBuyer).isNotNull();
         }
+    }
+    
+    @DisplayName("로또 조회 요청시 null을 반환하지 않는다.")
+    @Test
+    void getLottos_not_return_null() {
+        // given
+        final Money money = Money.of(1000);
+        final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+        
+        // when
+        final Lottos lottos = lottoBuyer.getLottos();
+        
+        // then
+        assertThat(lottos).isNotNull();
+        assertThat(lottos.size()).isZero();
     }
 }
