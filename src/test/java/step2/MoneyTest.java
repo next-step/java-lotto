@@ -42,4 +42,9 @@ public class MoneyTest {
         assertThatThrownBy(() -> Money.of(1000).subtract(Money.of(2000))) //
                 .isInstanceOf(MoneyArithmeticException.class);
     }
+
+    @Test
+    void add() {
+        assertThat(Money.of(1000).add(Money.of(2000))).isEqualTo(Money.of(3000));
+    }
 }
