@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ExpressionTest {
 
-    public static String input = "1,2";
+    String input;
 
     @BeforeEach
     void setUp() {
