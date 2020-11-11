@@ -13,21 +13,27 @@ public class CustomSplitterExtractorTest {
 
     @Test
     void extractSplitter() {
-        String customSplitter = CustomSplitterDivider.extractSplitter(input);
+        CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
+
+        String customSplitter = customSplitterDivider.extractSplitter();
 
         assertThat(customSplitter).isEqualTo(";");
     }
 
     @Test
     void extractInput() {
-        String expression = CustomSplitterDivider.extractExpressionString(input);
+        CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
+
+        String expression = customSplitterDivider.extractExpressionString();
 
         assertThat(expression).isEqualTo("1;2;3");
     }
 
     @Test
     void isCustomExpression_true() {
-        boolean isCustomExpression = CustomSplitterDivider.isCustomExpression(input);
+        CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
+
+        boolean isCustomExpression = customSplitterDivider.isCustomExpression();
 
         assertThat(isCustomExpression).isTrue();
     }
@@ -35,8 +41,9 @@ public class CustomSplitterExtractorTest {
     @Test
     void isCustomExpression_false() {
         String input = "1,2,3";
+        CustomSplitterDivider customSplitterDivider = new CustomSplitterDivider(input);
 
-        boolean isCustomExpression = CustomSplitterDivider.isCustomExpression(input);
+        boolean isCustomExpression = customSplitterDivider.isCustomExpression();
 
         assertThat(isCustomExpression).isFalse();
     }
