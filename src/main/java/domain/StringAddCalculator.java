@@ -11,7 +11,7 @@ public class StringAddCalculator {
         if(input.isEmpty()){
             return 0;
         }
-        String[] split = input.split(",");
+        String[] split = input.split(",|:");
 
         int sum = 0;
         for (String s : split) {
