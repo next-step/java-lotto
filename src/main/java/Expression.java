@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 public class Expression {
     public static final Splitters splitters = new Splitters();
-    private final List<Integer> numbers;
+    private final Numbers numbers;
 
-    public Expression(List<Integer> numbers) {
+    public Expression(Numbers numbers) {
         this.numbers = numbers;
     }
 
@@ -16,12 +16,11 @@ public class Expression {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return new Expression(numbers);
+        return new Expression(new Numbers(numbers));
     }
 
     public int sum() {
-        return numbers.stream()
-                .reduce(0, Integer::sum);
+        return numbers.sum();
     }
 
     @Override
