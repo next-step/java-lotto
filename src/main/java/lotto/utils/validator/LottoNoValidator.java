@@ -1,4 +1,4 @@
-package lotto.lib.validator;
+package lotto.utils.validator;
 
 import lotto.asset.LottoConst;
 import lotto.exception.LottoRangeException;

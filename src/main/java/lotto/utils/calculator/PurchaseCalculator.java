@@ -1,8 +1,8 @@
-package lotto.lib.calculator;
+package lotto.utils.calculator;
 
 import lotto.asset.LottoConst;
-import lotto.lib.validator.MoneyValidator;
-import lotto.lib.validator.PriceValidator;
+import lotto.utils.validator.MoneyValidator;
+import lotto.utils.validator.PriceValidator;
 
 public class PurchaseCalculator {
     private PurchaseCalculator() {}

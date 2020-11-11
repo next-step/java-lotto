@@ -1,5 +1,5 @@
 package lotto.domain;
-import lotto.lib.validator.LottoNoValidator;
+import lotto.utils.validator.LottoNoValidator;
 
 public class LottoNo {
 

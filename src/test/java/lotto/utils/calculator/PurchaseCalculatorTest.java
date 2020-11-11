@@ -1,4 +1,4 @@
-package lotto.lib.calculator;
+package lotto.utils.calculator;
 
 import lotto.asset.ExceptionConst;
 import lotto.exception.BadMoneyException;
