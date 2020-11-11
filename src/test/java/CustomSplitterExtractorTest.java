@@ -18,4 +18,10 @@ public class CustomSplitterExtractorTest {
         assertThat(customSplitter).isEqualTo(";");
     }
 
+    @Test
+    void extractInput() {
+        String expression = CustomSplitterDivider.extractExpression(input);
+
+        assertThat(expression).isEqualTo("1;2;3");
+    }
 }
