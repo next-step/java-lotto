@@ -1,9 +1,8 @@
 package step1.domain;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.lang.Integer.parseInt;
 
 public class StringAddCalculator {
     private static final int CALCULATOR_OBJECT = 2;
@@ -17,6 +16,7 @@ public class StringAddCalculator {
         }
         return sumStringArray(getNumbers(input));
     }
+
 
     private static String[] getNumbers(String input) {
         Matcher m = getMatcher(input);
@@ -32,6 +32,20 @@ public class StringAddCalculator {
         return pattern.matcher(input);
     }
 
+
+    private static int sumStringArray(String[] split) {
+        return Arrays.stream(split)
+                .map(Integer::parseInt)
+                .mapToInt(StringAddCalculator::getIntValue)
+                .sum();
+    }
+
+    private static int getIntValue(Integer input) {
+        validNumZero(input);
+        return input;
+    }
+
+
     private static boolean isEmpty(String input) {
         return input.isEmpty();
     }
@@ -40,15 +54,6 @@ public class StringAddCalculator {
         return input == null;
     }
 
-    private static int sumStringArray(String[] split) {
-        int sum = 0;
-        for (String s : split) {
-            int i = parseInt(s);
-            validNumZero(i);
-            sum += i;
-        }
-        return sum;
-    }
 
     private static void validNumZero(int i) {
         if (i < 0) {
