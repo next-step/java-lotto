@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class LotteryResultTest {
     @DisplayName("6개를 초과하는 입력은 예외를 발생한다.")
@@ -37,11 +36,19 @@ public class LotteryResultTest {
             this.matchingCount = matchingCount;
         }
 
-        public static Rank valueBy(Supplier<Integer> matched) {
+        public static Rank valueFrom(int matchCount) {
+            int availableMatchCount = getAvailableMatchCount(matchCount);
             return Arrays.stream(values()) //
-                    .filter(value -> value.matchingCount == matched.get()) //
+                    .filter(value -> value.matchingCount == availableMatchCount) //
                     .findFirst() //
                     .orElseThrow(OutOfMatchingBoundaryException::new);
+        }
+
+        private static int getAvailableMatchCount(int matchCount) {
+            if (matchCount < 3) {
+                return 0;
+            }
+            return matchCount;
         }
     }
 
@@ -49,17 +56,12 @@ public class LotteryResultTest {
 
         private final Map<Rank, Integer> result = new HashMap<>();
 
-        public void add(int matched) {
-            if (matched < 0) {
+        public void add(int matchCount) {
+            if (matchCount < 0) {
                 throw new OutOfMatchingBoundaryException();
             }
 
-            Rank rankEnum = Rank.valueBy(() -> {
-                if (matched < 3) {
-                    return 0;
-                }
-                return matched;
-            });
+            Rank rankEnum = Rank.valueFrom(matchCount);
 
             result.compute(rankEnum, (key, value) -> value == null ? 1 : value + 1);
         }

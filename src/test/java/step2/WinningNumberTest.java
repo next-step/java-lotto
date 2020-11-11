@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
+import static step2.LotteryResultTest.*;
 import static step2.PlayslipTest.Playslip.NUMBER_POOL;
 import static step2.LotteryResultTest.Rank;
 import static step2.LotteryResultTest.Rank.*;
@@ -53,7 +54,7 @@ public class WinningNumberTest {
         Integer[] numbers = Arrays.stream(stringNumbers.split(",")) //
                 .map(Integer::valueOf) //
                 .toArray(Integer[]::new);
-        LotteryResultTest.LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
+        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
 
         assertThat(lotteryResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
     }
@@ -63,7 +64,7 @@ public class WinningNumberTest {
     @MethodSource("matchingCountProvider")
     void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
-        LotteryResultTest.LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
+        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
                 Arrays.asList(
                         lotteryNumber,
                         lotteryNumber,
@@ -96,12 +97,12 @@ public class WinningNumberTest {
             this.numberSelection = numberSelection;
         }
 
-        public LotteryResultTest.LotteryResult match(LotteryTickets tickets) {
+        public LotteryResult match(LotteryTickets tickets) {
             if (winningNumber == null) {
                 throw new IllegalStateException();
             }
 
-            LotteryResultTest.LotteryResult lotteryResult = new LotteryResultTest.LotteryResult();
+            LotteryResult lotteryResult = new LotteryResult();
             for (LotteryNumber ticketNumber : tickets.getNumbers()) {
                 lotteryResult.add(ticketNumber.getMatched(winningNumber));
             }
