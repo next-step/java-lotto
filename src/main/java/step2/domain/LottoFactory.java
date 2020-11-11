@@ -1,11 +1,11 @@
 package step2.domain;
 
-public class LottoTicket {
+public class LottoFactory {
 
 
     private final int lottoTickets;
 
-    public LottoTicket(int money) {
+    public LottoFactory(int money) {
         this.lottoTickets = money/1000;
     }
 
