@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static step2.LotteryAgentTest.LotteryAgent;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
+import static step2.LotteryResultTest.*;
 import static step2.LotteryResultTest.LotteryResult;
 import static step2.WinningNumberTest.WinningNumber;
 
@@ -33,6 +34,15 @@ public class LotteryControllerTest {
     void splitAndConvertToIntArray() {
         assertThat(InputView.splitAndConvertToIntArray("1, 2, 3, 4, 5, 6")) //
                 .containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @DisplayName("랭킹정보를 문자열로 반환한다.")
+    @Test
+    void toStringRank() {
+        LotteryResult lotteryResult = new LotteryResult();
+        lotteryResult.add(3);
+        assertThat(ResultView.toStringRank(Rank.FIRST, lotteryResult)) //
+                .isEqualTo("3개 일치 (5000원)- 1개");
     }
 
     private void verifyInteractionSequence() {
