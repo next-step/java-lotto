@@ -42,7 +42,7 @@ public class Lotto {
 
     public int getMatchedCountCompareTo(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(lotto.numbers::contains)
+                .filter(lotto::contains)
                 .count();
     }
 
