@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.LotteryAgentTest.LotteryAgent.PRICE_LOTTERY;
+import static step2.LotteryAgent.PRICE_LOTTERY;
 
 public class LotteryResultTest {
     @DisplayName("6개를 초과하는 입력은 예외를 발생한다.")

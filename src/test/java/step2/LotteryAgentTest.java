@@ -5,14 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.LotteryAgentTest.LotteryAgent.ExchangeResult;
+import step2.LotteryAgent.ExchangeResult;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.LotteryNumberTest.LotteryNumber;
-import static step2.PlayslipTest.Playslip;
 
 public class LotteryAgentTest {
 
@@ -61,56 +59,4 @@ public class LotteryAgentTest {
         assertThat(numbers.get(0)).isInstanceOf(LotteryNumber.class);
     }
 
-    static class LotteryAgent {
-        public static final Money PRICE_LOTTERY = Money.of(1000);
-
-        public ExchangeResult exchange(Money money) {
-            if (money.lessThan(PRICE_LOTTERY)) {
-                throw new NotEnoughMoneyException();
-            }
-
-            Playslip playslip = new Playslip();
-            int ticketCount = money.divide(PRICE_LOTTERY);
-
-            return new ExchangeResult(new LotteryTickets(playslip.selectNumbers(ticketCount)),
-                    money.subtract(PRICE_LOTTERY.multiply(ticketCount)));
-        }
-
-        public static class ExchangeResult {
-            private final LotteryTickets lotteryTickets;
-            private final Money change;
-
-            public ExchangeResult(LotteryTickets lotteryTickets, Money change) {
-                this.lotteryTickets = lotteryTickets;
-                this.change = change;
-            }
-
-            public LotteryTickets getLotteryTickets() {
-                return lotteryTickets;
-            }
-
-            public Money getChange() {
-                return change;
-            }
-        }
-    }
-
-    static class LotteryTickets {
-        private final List<LotteryNumber> numbers;
-
-        public LotteryTickets(List<LotteryNumber> numbers) {
-            this.numbers = numbers;
-        }
-
-        public int size() {
-            return numbers.size();
-        }
-
-        public List<LotteryNumber> getNumbers() {
-            return numbers;
-        }
-    }
-
-    private static class NotEnoughMoneyException extends IllegalArgumentException {
-    }
 }
