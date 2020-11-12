@@ -1,11 +1,11 @@
-package step2;
+package step2.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static step2.LotteryAgent.PRICE_LOTTERY;
+import static step2.domain.LotteryAgent.PRICE_LOTTERY;
 
-class LotteryResult {
+public class LotteryResult {
 
     private final Map<Rank, Integer> result = new HashMap<>();
 

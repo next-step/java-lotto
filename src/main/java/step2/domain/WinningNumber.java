@@ -1,6 +1,6 @@
-package step2;
+package step2.domain;
 
-class WinningNumber {
+public class WinningNumber {
     private final LotteryNumber winningNumber;
 
     public WinningNumber(LotteryNumber lotteryNumber) {

@@ -1,5 +1,7 @@
 package step2;
 
+import step2.domain.*;
+
 class LotteryController {
     private final InputView inputView;
     private final ResultView resultView;

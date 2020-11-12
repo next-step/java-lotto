@@ -1,5 +1,8 @@
 package step2;
 
+import step2.domain.LotteryNumber;
+import step2.domain.Money;
+
 import java.util.Arrays;
 import java.util.Scanner;
 

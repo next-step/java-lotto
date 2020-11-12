@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

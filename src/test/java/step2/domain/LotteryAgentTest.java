@@ -1,11 +1,10 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.LotteryAgent.ExchangeResult;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class LotteryAgentTest {
     @DisplayName("돈을 받고 티켓과 거스름돈을 반환한다.")
     @Test
     void exchange() {
-        ExchangeResult ticketAndChange = lotteryAgent.exchange(Money.of(1500));
+        LotteryAgent.ExchangeResult ticketAndChange = lotteryAgent.exchange(Money.of(1500));
         assertThat(ticketAndChange).isNotNull();
     }
 

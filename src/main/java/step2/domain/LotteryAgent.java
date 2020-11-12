@@ -1,6 +1,6 @@
-package step2;
+package step2.domain;
 
-class LotteryAgent {
+public class LotteryAgent {
     public static final Money PRICE_LOTTERY = Money.of(1000);
 
     public ExchangeResult exchange(Money money) {

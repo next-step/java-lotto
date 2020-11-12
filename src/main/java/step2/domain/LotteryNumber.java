@@ -1,11 +1,11 @@
-package step2;
+package step2.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-class LotteryNumber {
+public class LotteryNumber {
     public static LotteryNumber of(Integer... numbers) {
         return new LotteryNumber(new HashSet<>(Arrays.asList(numbers)));
     }

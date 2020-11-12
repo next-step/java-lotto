@@ -1,8 +1,8 @@
-package step2;
+package step2.domain;
 
 import java.util.Arrays;
 
-enum Rank {
+public enum Rank {
     FIRST(6, Money.of(2_000_000_000)), //
     SECOND(5, Money.of(1_500_000)), //
     THIRD(4, Money.of(50_000)),  //

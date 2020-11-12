@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 class DuplicateNumberPoolException extends IllegalArgumentException {
 }

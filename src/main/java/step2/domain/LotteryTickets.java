@@ -1,8 +1,8 @@
-package step2;
+package step2.domain;
 
 import java.util.List;
 
-class LotteryTickets {
+public class LotteryTickets {
     private final List<LotteryNumber> numbers;
 
     public LotteryTickets(List<LotteryNumber> numbers) {

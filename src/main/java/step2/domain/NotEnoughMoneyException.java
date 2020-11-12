@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 class NotEnoughMoneyException extends IllegalArgumentException {
 }

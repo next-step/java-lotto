@@ -1,5 +1,6 @@
-package step2;
+package step2.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class MoneyTest {
     @Test
     void lessThen() {
-        assertThat(Money.of(100).lessThan(Money.of(200))).isTrue();
+        Assertions.assertThat(Money.of(100).lessThan(Money.of(200))).isTrue();
     }
 
     @Test

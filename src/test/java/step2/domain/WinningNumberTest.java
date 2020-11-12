@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +13,7 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static step2.Rank.*;
+import static step2.domain.Rank.*;
 
 
 public class WinningNumberTest {

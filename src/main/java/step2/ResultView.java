@@ -1,5 +1,10 @@
 package step2;
 
+
+import step2.domain.LotteryResult;
+import step2.domain.LotteryTickets;
+import step2.domain.Rank;
+
 class ResultView {
     public void responseTicketAndCount(LotteryTickets lotteryTickets) {
         responseTicketCount(lotteryTickets);

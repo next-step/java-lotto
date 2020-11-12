@@ -2,6 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
