@@ -1,5 +1,8 @@
 package humbledude.lotto.domain;
 
+import java.util.List;
+import java.util.Map;
+
 public class AccountManager {
 
     private long totalSpent = 0;
@@ -11,6 +14,12 @@ public class AccountManager {
 
     public void addPrize(long prize) {
         totalPrize += prize;
+    }
+
+    public void addPrize(Map<LottoPrize, List<LottoTicket>> result) {
+        result.forEach((prize, tickets) ->
+                totalPrize += prize.getPrize() * tickets.size());
+
     }
 
     public double getProfitRate() {

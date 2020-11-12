@@ -27,11 +27,15 @@ public class LottoStore {
     }
 
     public List<LottoTicket> buyAutoTickets(long budget) {
-        long howMany = budget / LOTTO_TICKET_PRICE;
+        long howMany = howManyCanIBuy(budget);
 
         return LongStream.range(0, howMany)
                 .mapToObj(i -> AutoLotto.buildTicket())
                 .collect(Collectors.toList());
+    }
+
+    public long howManyCanIBuy(long budget) {
+        return budget / LOTTO_TICKET_PRICE;
     }
 
     public Map<LottoPrize, List<LottoTicket>> claimPrizeForMultipleTickets(List<LottoTicket> tickets) {

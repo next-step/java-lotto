@@ -23,6 +23,14 @@ public class LottoStoreTest {
         assertThat(lottoTicketList).hasSize(14);
     }
 
+    @Test
+    public void howManyCanIBuy() {
+        long budget = 14_023;
+        LottoStore store = new LottoStore();
+
+        assertThat(store.howManyCanIBuy(budget)).isEqualTo(14);
+    }
+
     @ParameterizedTest
     @CsvSource({"1;2;3;4;5;6,2000000000", "1;2;3;4;5;45,1500000", "1;2;3;4;44;45,50000", "1;2;3;43;44;45,5000", "1;2;42;43;44;45,0"})
     public void claimPrize(String numbers, int expetedPrize) {
