@@ -9,7 +9,7 @@ public enum Jackpot {
     private int numOfCorrected;
     private int prizeMoney;
 
-    private Jackpot(int numOfCorrected, int prizeMoney) {
+    Jackpot(int numOfCorrected, int prizeMoney) {
         this.numOfCorrected = numOfCorrected;
         this.prizeMoney = prizeMoney;
     }

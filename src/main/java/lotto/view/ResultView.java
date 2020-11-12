@@ -20,11 +20,12 @@ public class ResultView {
         println(lottos);
     }
 
-    public static void printResult(Result result, double rateOfReturn) {
+    public static void printStatistics(Result result, int purchaseMoney) {
         println(ResultViewConst.JACKPOT_STATISTICS_MSG);
         for (Jackpot jackpot : Jackpot.values()) {
-            println(ResultViewConst.JACKPOT_MSG(jackpot, result.getNumOfCorrected(jackpot)));
+            println(ResultViewConst.JACKPOT_MSG(jackpot, result.getNumOfLotto(jackpot)));
         }
+        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
         println(ResultViewConst.RATE_OF_RETURN_MSG(rateOfReturn));
     }
 }

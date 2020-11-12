@@ -4,8 +4,8 @@ import lotto.asset.LottoConst;
 import lotto.utils.validator.MoneyValidator;
 import lotto.utils.validator.PriceValidator;
 
-public class PurchaseCalculator {
-    private PurchaseCalculator() {}
+public class LottoCalculator {
+    private LottoCalculator() {}
 
     protected static int getNumOfLottos(int money, int price) {
         MoneyValidator.validateMoney(money);

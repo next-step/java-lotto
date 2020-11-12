@@ -22,6 +22,16 @@ public class Lotto {
         lottoNos = new LinkedList<>();
     }
 
+    protected int countSameNo(Lotto lotto) {
+        int count = 0;
+        for (LottoNo lottoNo : lotto.lottoNos) {
+            if (lottoNos.contains(lottoNo)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     protected int getSize() {
         return lottoNos.size();
     }

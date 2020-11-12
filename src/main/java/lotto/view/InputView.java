@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.asset.InputViewConst;
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.utils.validator.LottoValidator;
 import lotto.utils.validator.MoneyValidator;
 
@@ -11,8 +13,12 @@ public class InputView {
 
     private InputView() {}
 
+    private static void println(String str) {
+        System.out.println(str);
+    }
+
     public static int askPurchaseMoney() {
-        System.out.println(InputViewConst.ASK_PURCHASE_MONEY);
+        println(InputViewConst.ASK_PURCHASE_MONEY);
         String money = scanner.nextLine();
         MoneyValidator.validateMoney(money);
         return Integer.parseInt(money);
@@ -24,9 +30,11 @@ public class InputView {
         return lottoStr;
     }
 
-    public static String askWinningLotto() {
-        System.out.println(InputViewConst.ASK_WINNING_LOTTO);
-        return askLottoStr();
+    public static Lotto askWinningLotto() {
+        println(InputViewConst.ASK_WINNING_LOTTO);
+        return LottoFactory.createLotto(
+                askLottoStr()
+        );
     }
 
 }

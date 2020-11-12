@@ -17,6 +17,25 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LottoTest {
 
     @ParameterizedTest
+    @DisplayName("같은 LottoNo 개수 만큼 countSameNo 값이 나와야한다.")
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
+    void countSameNo(int count) {
+        int size = LottoConst.NUM_OF_LOTTO_NO;
+        Integer[] lottoNos1 = new Integer[size];
+        Integer[] lottoNos2 = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            lottoNos1[i] = i + 1;
+            lottoNos2[i] = i + 1 + size - count;
+        }
+
+        Lotto lotto1 = LottoFactory.createLotto(lottoNos1);
+        Lotto lotto2 = LottoFactory.createLotto(lottoNos2);
+
+        assertThat(lotto1.countSameNo(lotto2))
+                .isEqualTo(count);
+    }
+
+    @ParameterizedTest
     @DisplayName("숫자를 add 한 만큼 사이즈가 증가해야한다.")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
     void getSize_int(int loop) {

@@ -11,13 +11,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class PurchaseCalculatorTest {
+class LottoCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("money 를 price 로 나눈 값을 반환한다.")
     @CsvSource(value = {"9$2$4", "8$2$4", "2$8$0"}, delimiter = '$')
     public void getNumOfLottos(int money, int price, int expected) {
-        assertThat(PurchaseCalculator.getNumOfLottos(money, price))
+        assertThat(LottoCalculator.getNumOfLottos(money, price))
                 .isEqualTo(expected);
     }
 
@@ -28,11 +28,11 @@ class PurchaseCalculatorTest {
         int price = 1000;
         if (negative) {
             assertThatExceptionOfType(BadMoneyException.class)
-                    .isThrownBy(() -> PurchaseCalculator.getNumOfLottos(money, price))
+                    .isThrownBy(() -> LottoCalculator.getNumOfLottos(money, price))
                     .withMessage(ExceptionConst.BAD_MONEY_MSG);
             return;
         }
-        Assertions.assertDoesNotThrow(() -> PurchaseCalculator.getNumOfLottos(money, price));
+        Assertions.assertDoesNotThrow(() -> LottoCalculator.getNumOfLottos(money, price));
     }
 
     @ParameterizedTest
@@ -41,11 +41,11 @@ class PurchaseCalculatorTest {
     public void getNumOfLottosMoney2(int money, boolean negative) {
         if (negative) {
             assertThatExceptionOfType(BadMoneyException.class)
-                    .isThrownBy(() -> PurchaseCalculator.getNumOfLottos(money))
+                    .isThrownBy(() -> LottoCalculator.getNumOfLottos(money))
                     .withMessage(ExceptionConst.BAD_MONEY_MSG);
             return;
         }
-        Assertions.assertDoesNotThrow(() -> PurchaseCalculator.getNumOfLottos(money));
+        Assertions.assertDoesNotThrow(() -> LottoCalculator.getNumOfLottos(money));
     }
 
     @ParameterizedTest
@@ -55,10 +55,10 @@ class PurchaseCalculatorTest {
         int money = 1000;
         if (negative) {
             assertThatExceptionOfType(BadPriceException.class)
-                    .isThrownBy(() -> PurchaseCalculator.getNumOfLottos(money, price))
+                    .isThrownBy(() -> LottoCalculator.getNumOfLottos(money, price))
                     .withMessage(ExceptionConst.BAD_PRICE_MSG);
             return;
         }
-        Assertions.assertDoesNotThrow(() -> PurchaseCalculator.getNumOfLottos(money, price));
+        Assertions.assertDoesNotThrow(() -> LottoCalculator.getNumOfLottos(money, price));
     }
 }

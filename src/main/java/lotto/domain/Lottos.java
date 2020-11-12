@@ -16,6 +16,24 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    private void increaseNumOfLotto(Result result, int count) {
+        for (Jackpot jackpot : Jackpot.values()) {
+            if (count == jackpot.getNumOfCorrected()) {
+                result.increaseNumOfLotto(jackpot);
+                break;
+            }
+        }
+    }
+
+    public Result getResult(Lotto winningLotto) {
+        Result result = new Result();
+        for (Lotto lotto : lottos) {
+            int count = lotto.countSameNo(winningLotto);
+            increaseNumOfLotto(result, count);
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
