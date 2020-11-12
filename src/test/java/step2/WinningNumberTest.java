@@ -9,16 +9,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step2.LotteryAgentTest.LotteryTickets;
 import static step2.LotteryNumberTest.LotteryNumber;
-import static step2.LotteryResultTest.*;
-import static step2.PlayslipTest.Playslip.NUMBER_POOL;
+import static step2.LotteryResultTest.LotteryResult;
 import static step2.LotteryResultTest.Rank;
 import static step2.LotteryResultTest.Rank.*;
 
@@ -30,15 +27,6 @@ public class WinningNumberTest {
     @BeforeEach
     void setUp() {
         winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
-        winningNumber.draw();
-    }
-
-    @DisplayName("draw 하기 전에 match 할 수 없다.")
-    @Test
-    void cannotMatchWithoutDraw() {
-        WinningNumber winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
-        assertThatThrownBy(() -> winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))) //
-                .isInstanceOf(IllegalStateException.class);
     }
 
     @DisplayName("match 결과를 받을 수 있다.")
@@ -90,21 +78,16 @@ public class WinningNumberTest {
     }
 
     static class WinningNumber {
-        private NumberSelection numberSelection;
-        private LotteryNumber winningNumber;
+        private final LotteryNumber winningNumber;
 
-        public WinningNumber(NumberSelection numberSelection) {
-            this.numberSelection = numberSelection;
-        }
         public WinningNumber(LotteryNumber lotteryNumber) {
+            if (lotteryNumber == null) {
+                throw new IllegalStateException();
+            }
             this.winningNumber = lotteryNumber;
         }
 
         public LotteryResult match(LotteryTickets tickets) {
-            if (winningNumber == null) {
-                throw new IllegalStateException();
-            }
-
             LotteryResult lotteryResult = new LotteryResult();
             for (LotteryNumber ticketNumber : tickets.getNumbers()) {
                 lotteryResult.add(ticketNumber.getMatched(winningNumber));
@@ -112,30 +95,5 @@ public class WinningNumberTest {
 
             return lotteryResult;
         }
-
-        public void draw() {
-            if (winningNumber == null) {
-                winningNumber = numberSelection.select(NUMBER_POOL);
-            }
-        }
-
     }
-
-    interface NumberSelection {
-        LotteryNumber select(List<Integer> numberPool);
-    }
-
-    private static class TestingNumberSelection implements NumberSelection {
-        private final Integer[] numbers;
-
-        public TestingNumberSelection(Integer... numbers) {
-            this.numbers = numbers;
-        }
-
-        @Override
-        public LotteryNumber select(List<Integer> numberPool) {
-            return LotteryNumber.of(numbers);
-        }
-    }
-
 }
