@@ -18,14 +18,12 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoIssueTest {
-    private LottoTicketMachine lottoTicketMachine;
     private TestNumberMakeStrategy testLottoNumberMakeStrategy;
     private TestNumberMakeStrategy testWinningNumberMakeStrategy;
 
 
     @BeforeEach
     void setup() {
-        lottoTicketMachine = new LottoTicketMachine();
         testLottoNumberMakeStrategy = new TestNumberMakeStrategy();
         testWinningNumberMakeStrategy = new TestNumberMakeStrategy();
     }
@@ -35,7 +33,7 @@ public class LottoIssueTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "7000:7", "14000:14"}, delimiter = ':')
     void issuanceLotto(int inputPrice, int resultLottoCount) {
-        int allowCount = lottoTicketMachine.countAllowTicket(inputPrice);
+        int allowCount = LottoTicketMachine.countAllowTicket(inputPrice);
         assertThat(allowCount).isEqualTo(resultLottoCount);
     }
 
@@ -47,7 +45,7 @@ public class LottoIssueTest {
         LottoTicket lottoTicket = new LottoTicket(testLottoNumberMakeStrategy);
         assertThat(lottoTicket.getMarkingNumbers()).isEqualTo(resultValue);
         for (Integer value : input) {
-            assertThat(lottoTicket.isMarked(value)).isTrue();
+            assertThat(lottoTicket.isMarked(new LottoNumber(value))).isTrue();
         }
 
     }
@@ -62,7 +60,7 @@ public class LottoIssueTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "7000:7", "14000:14"}, delimiter = ':')
     void ticketing(int money, int resultValue) {
-        LottoTickets ticketing = lottoTicketMachine.ticketing(money, new LottoNumberMakeStrategy());
+        LottoTickets ticketing = LottoTicketMachine.ticketing(money, new LottoNumberMakeStrategy());
         assertThat(ticketing.countTicket()).isEqualTo(resultValue);
     }
 

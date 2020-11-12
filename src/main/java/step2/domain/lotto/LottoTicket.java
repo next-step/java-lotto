@@ -21,10 +21,9 @@ public class LottoTicket {
         return markingNumbers.toString();
     }
 
-    public boolean isMarked(int number) {
+    public boolean isMarked(LottoNumber number) {
         return markingNumbers.contains(number);
     }
-
 
     @Override
     public String toString() {

@@ -14,22 +14,20 @@ import java.util.Scanner;
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoTicketMachine lottoTicketMachine;
 
     public LottoController() {
-        this(new LottoInputView(), new LottoResultView(), new LottoTicketMachine());
+        this(new LottoInputView(), new LottoResultView());
     }
 
-    public LottoController(InputView inputView, ResultView resultView, LottoTicketMachine lottoTicketMachine) {
+    public LottoController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoTicketMachine = lottoTicketMachine;
     }
 
     public void ticketing() {
         Scanner scanner = new Scanner(System.in);
         int useAmount = inputView.getUseAmount(scanner);
-        LottoTickets tickets = lottoTicketMachine.ticketing(useAmount, new LottoNumberMakeStrategy());
+        LottoTickets tickets = LottoTicketMachine.ticketing(useAmount, new LottoNumberMakeStrategy());
 
         resultView.drawTicket(tickets);
 

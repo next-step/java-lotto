@@ -18,10 +18,6 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public String getString() {
         return String.valueOf(number);
     }
