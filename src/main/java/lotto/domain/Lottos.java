@@ -16,21 +16,6 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public void add(Integer[] lottoNos) {
-        Lotto lotto = LottoFactory.createLotto(lottoNos);
-        add(lotto);
-    }
-
-    public void add(String[] lottoNos) {
-        Lotto lotto = LottoFactory.createLotto(lottoNos);
-        add(lotto);
-    }
-
-    public void add(String lottoStr) {
-        Lotto lotto = LottoFactory.createLotto(lottoStr);
-        add(lotto);
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
