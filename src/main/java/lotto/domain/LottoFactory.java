@@ -26,7 +26,7 @@ public class LottoFactory {
 
     public static Lotto createLotto(String lottoStr) {
         LottoValidator.validateLottoStr(lottoStr);
-        String[] lottoNoArr = lottoStr.split(LottoConst.splitRegex);
+        String[] lottoNoArr = lottoStr.split(LottoConst.SPLIT_REGEX);
         return createLotto(lottoNoArr);
     }
 }

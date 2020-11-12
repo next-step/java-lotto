@@ -29,7 +29,7 @@ public class LottoValidator {
     }
 
     private static String[] getLottoNoArr(String lottoStr) {
-        return lottoStr.split(LottoConst.splitRegex);
+        return lottoStr.split(LottoConst.SPLIT_REGEX);
     }
 
     private static boolean checkNumOfLottoNo(int numOfLottoNo) {
