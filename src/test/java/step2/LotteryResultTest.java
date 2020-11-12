@@ -61,6 +61,14 @@ public class LotteryResultTest {
                     .orElseThrow(OutOfMatchingBoundaryException::new);
         }
 
+        public int getMatchingCount() {
+            return matchingCount;
+        }
+
+        public Money getPrizeAmount() {
+            return prizeAmount;
+        }
+
         private static int getAvailableMatchCount(int matchCount) {
             if (matchCount < 3) {
                 return 0;
@@ -104,7 +112,7 @@ public class LotteryResultTest {
                     .map(entry -> { //
                         Rank rank = entry.getKey();
                         Integer count = entry.getValue();
-                        return rank.prizeAmount.multiply(count);
+                        return rank.getPrizeAmount().multiply(count);
                     }).reduce(Money::add) //
                     .orElse(Money.of(0));
 

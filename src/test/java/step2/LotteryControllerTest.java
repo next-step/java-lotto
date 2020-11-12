@@ -41,7 +41,7 @@ public class LotteryControllerTest {
     void toStringRank() {
         LotteryResult lotteryResult = new LotteryResult();
         lotteryResult.add(3);
-        assertThat(ResultView.toStringRank(Rank.FIRST, lotteryResult)) //
+        assertThat(ResultView.toStringRank(Rank.FORTH, lotteryResult)) //
                 .isEqualTo("3개 일치 (5000원)- 1개");
     }
 
@@ -124,6 +124,13 @@ public class LotteryControllerTest {
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
+        }
+
+        public static String toStringRank(Rank rank, LotteryResult lotteryResult) {
+            return String.format("%d개 일치 (%d원)- %d개", //
+                    rank.getMatchingCount(),  //
+                    rank.getPrizeAmount().toInt(), //
+                    lotteryResult.getMatchResult(rank));
         }
 
         public void responseRateOfReturn(LotteryResult lotteryResult) {
