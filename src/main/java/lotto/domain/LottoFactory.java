@@ -1,6 +1,4 @@
-package lotto.domain.factory;
-
-import lotto.domain.model.Lotto;
+package lotto.domain;
 
 // NOTE: NumberLottoFactory 와 StringLottoFactory 의 Facade
 public class LottoFactory {

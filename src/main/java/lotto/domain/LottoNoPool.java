@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain;
 
 import lotto.utils.validator.LottoNoValidator;
 

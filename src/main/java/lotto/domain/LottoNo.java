@@ -1,4 +1,5 @@
-package lotto.domain.model;
+package lotto.domain;
+
 import lotto.utils.validator.LottoNoValidator;
 
 import java.util.Objects;
@@ -32,8 +33,12 @@ public class LottoNo implements Comparable<LottoNo> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNo lottoNo1 = (LottoNo) o;
         return Objects.equals(lottoNo, lottoNo1.lottoNo);
     }
