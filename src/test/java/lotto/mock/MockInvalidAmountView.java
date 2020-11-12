@@ -32,4 +32,14 @@ public class MockInvalidAmountView implements View {
     public int getBonusNumber() {
         return 0;
     }
+
+    @Override
+    public int getNumberOfManualLotto() {
+        return 0;
+    }
+
+    @Override
+    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+        return null;
+    }
 }
