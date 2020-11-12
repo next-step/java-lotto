@@ -3,6 +3,7 @@ package lotto.domain.model;
 import lotto.asset.ExceptionConst;
 import lotto.asset.LottoConst;
 import lotto.exception.LottoRangeException;
+import lotto.exception.NpeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,19 +48,27 @@ class LottoNoTest {
         Assertions.assertAll(executables);
     }
 
+    @Test
+    @DisplayName("null 로 lottoNo을 만들면, NpeException 이 발생한다.")
+    public void constructor_null() {
+        assertThatExceptionOfType(NpeException.class)
+                .isThrownBy(() -> new LottoNo(null))
+                .withMessage(ExceptionConst.NPE_MSG);
+    }
+
     @ParameterizedTest
-    @DisplayName("1부터 45가 아닌 숫자로 LottoNo을 만들면, Exception 이 발생한다.")
+    @DisplayName("1부터 45가 아닌 숫자로 LottoNo을 만들면, LottoRangeException 이 발생한다.")
     @ValueSource(ints = {-1, 0, 46})
-    public void intConstructor(int lottoNo) {
+    public void constructor_int_fail(int lottoNo) {
         assertThatExceptionOfType(LottoRangeException.class)
                 .isThrownBy(() -> new LottoNo(lottoNo))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
     }
 
     @ParameterizedTest
-    @DisplayName("1부터 45가 아닌 숫자 문자로 LottoNo을 만들면, Exception 이 발생한다.")
+    @DisplayName("1부터 45가 아닌 숫자 문자로 LottoNo을 만들면, LottoRangeException 이 발생한다.")
     @ValueSource(strings = {"-1", "0", "46"})
-    public void strConstructor(String lottoNo) {
+    public void constructor_str_fail(String lottoNo) {
         assertThatExceptionOfType(LottoRangeException.class)
                 .isThrownBy(() -> new LottoNo(lottoNo))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
@@ -73,7 +82,7 @@ class LottoNoTest {
 
     @Test
     @DisplayName("Collections.sort 를 하면, 로또 번호의 크기 순서대로 정렬이 된다.")
-    public void strConstructor() {
+    public void sort() {
         int[] lottoNos = new int[]{45, 5, 2, 8, 3, 9, 15, 1};
         List<LottoNo> lottoNoList = convertToList(lottoNos);
         Arrays.sort(lottoNos);

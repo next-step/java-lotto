@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoNoPoolTest {
 
-    LottoNoPool lottoNoPool;
+    private LottoNoPool lottoNoPool;
 
     @BeforeEach
     void setUp() {
@@ -54,7 +54,7 @@ class LottoNoPoolTest {
     }
 
     @ParameterizedTest
-    @DisplayName("1부터 45가 아닌 숫자로 LottoNo을 만들면, Exception 이 발생한다.")
+    @DisplayName("1부터 45가 아닌 숫자로 LottoNo을 만들면, LottoRangeException 이 발생한다.")
     @ValueSource(ints = {-1, 0, 46})
     public void getLottoNo_bad_num(int lottoNo) {
         assertThatExceptionOfType(LottoRangeException.class)
@@ -63,7 +63,7 @@ class LottoNoPoolTest {
     }
 
     @ParameterizedTest
-    @DisplayName("1부터 45가 아닌 숫자 문자로 LottoNo을 만들면, Exception 이 발생한다.")
+    @DisplayName("1부터 45가 아닌 숫자 문자로 LottoNo을 만들면, LottoRangeException 이 발생한다.")
     @ValueSource(strings = {"-1", "0", "46"})
     public void getLottoNo_bad_str(String lottoNo) {
         assertThatExceptionOfType(LottoRangeException.class)
