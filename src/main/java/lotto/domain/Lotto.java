@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.asset.LottoConst;
 import lotto.exception.BadNumOfLottoNoException;
+import lotto.exception.DuplicatedLottoException;
 import lotto.utils.validator.LottoNoValidator;
 
 import java.util.Collections;
@@ -31,6 +32,12 @@ public class Lotto {
         }
     }
 
+    private void throwIfDuplicated(LottoNo lottoNo) {
+        if (lottoNos.contains(lottoNo)) {
+            throw DuplicatedLottoException.getInstance();
+        }
+    }
+
     /**
      * FIXME: 타입으로 인한 중복된 로직 제거
      * int 와 String 타입이 다름으로 인해 발생하는
@@ -47,6 +54,7 @@ public class Lotto {
     }
 
     private void add(LottoNo lottoNo) {
+        throwIfDuplicated(lottoNo);
         lottoNos.add(lottoNo);
         validateSize();
     }

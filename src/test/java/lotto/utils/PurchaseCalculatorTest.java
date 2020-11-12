@@ -1,4 +1,4 @@
-package lotto.utils.calculator;
+package lotto.utils;
 
 import lotto.asset.ExceptionConst;
 import lotto.exception.BadMoneyException;
@@ -17,7 +17,7 @@ class PurchaseCalculatorTest {
     @DisplayName("money 를 price 로 나눈 값을 반환한다.")
     @CsvSource(value = {"9$2$4", "8$2$4", "2$8$0"}, delimiter = '$')
     public void getNumOfLottos(int money, int price, int expected) {
-        assertThat(PurchaseCalculator.getNumOfLottos(money,price))
+        assertThat(PurchaseCalculator.getNumOfLottos(money, price))
                 .isEqualTo(expected);
     }
 

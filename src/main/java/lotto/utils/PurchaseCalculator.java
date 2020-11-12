@@ -1,4 +1,4 @@
-package lotto.utils.calculator;
+package lotto.utils;
 
 import lotto.asset.LottoConst;
 import lotto.utils.validator.MoneyValidator;

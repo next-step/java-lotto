@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.asset.ExceptionConst;
 import lotto.asset.LottoConst;
 import lotto.exception.BadNumOfLottoNoException;
+import lotto.exception.DuplicatedLottoException;
 import lotto.exception.LottoRangeException;
 import lotto.exception.NpeException;
 import org.junit.jupiter.api.DisplayName;
@@ -37,6 +38,30 @@ class LottoTest {
         }
         assertThat(lotto.getSize())
                 .isEqualTo(loop);
+    }
+
+    @Test
+    @DisplayName("같은 숫자를 add 하면, DuplicatedLottoException 이 발생한다.")
+    void add_duplicated_int() {
+        Lotto lotto = new Lotto();
+        assertThatExceptionOfType(DuplicatedLottoException.class)
+                .isThrownBy(() -> {
+                    lotto.add(1);
+                    lotto.add(1);
+                })
+                .withMessage(ExceptionConst.DUPLICATED_LOTTO_MSG);
+    }
+
+    @Test
+    @DisplayName("같은 문자를 add 하면, DuplicatedLottoException 이 발생한다.")
+    void add_duplicated_str() {
+        Lotto lotto = new Lotto();
+        assertThatExceptionOfType(DuplicatedLottoException.class)
+                .isThrownBy(() -> {
+                    lotto.add("1");
+                    lotto.add("1");
+                })
+                .withMessage(ExceptionConst.DUPLICATED_LOTTO_MSG);
     }
 
     @Test

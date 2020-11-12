@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.utils.calculator.PurchaseCalculator;
+import lotto.utils.PurchaseCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
