@@ -31,7 +31,4 @@ public class LottoTicket {
         return markingNumbers.toString();
     }
 
-    public boolean contains(int number) {
-        return markingNumbers.contains(number);
-    }
 }

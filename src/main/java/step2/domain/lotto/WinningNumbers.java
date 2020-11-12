@@ -57,7 +57,7 @@ public class WinningNumbers {
     }
 
     private int match(LottoTicket ticket, int number) {
-        return ticket.contains(number)
+        return ticket.isMarked(number)
                 ? MATCHED_TRUE
                 : MATCHED_FALSE;
     }
