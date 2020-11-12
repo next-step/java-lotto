@@ -1,6 +1,8 @@
 package lotto.view.inputview;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -24,9 +26,13 @@ public class ConsoleInputView implements InputView {
     @Override
     public Set<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbersInput = scanner.next();
+        return getLottoNumbers();
+    }
 
-        return Arrays.stream(winningNumbersInput.split(DELIMITER))
+    private Set<Integer> getLottoNumbers() {
+        String lottoNumbers = scanner.next();
+
+        return Arrays.stream(lottoNumbers.split(DELIMITER))
                 .map(Integer::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
@@ -35,5 +41,21 @@ public class ConsoleInputView implements InputView {
     public int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
+    }
+
+    @Override
+    public int getNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    @Override
+    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < numberOfManualLotto; i++) {
+            manualLottoNumbers.add(getLottoNumbers());
+        }
+        return manualLottoNumbers;
     }
 }

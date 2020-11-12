@@ -41,4 +41,14 @@ public class ConsoleView implements View {
     public int getBonusNumber() {
         return inputView.getBonusNumber();
     }
+
+    @Override
+    public int getNumberOfManualLotto() {
+        return inputView.getNumberOfManualLotto();
+    }
+
+    @Override
+    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+        return inputView.getManualLottoNumbers(numberOfManualLotto);
+    }
 }

@@ -7,9 +7,11 @@ import lotto.dto.WinningStatistic;
 import lotto.exception.IllegalBonusNumberException;
 import lotto.exception.IllegalInputAmountException;
 import lotto.service.LottoService;
+import lotto.service.helper.LottoFactory;
 import lotto.view.View;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
     public static final String INVALID_AMOUNT_ERR_MSG = "amount의 값은 음수가 될 수 없습니다.";
@@ -25,7 +27,12 @@ public class LottoGame {
 
     public void start() {
         int amount = getAmount();
-        List<Lotto> boughtLottos = buyLottos(amount);
+        int numberOfManualLotto = view.getNumberOfManualLotto();
+        if (amount / LottoFactory.PRICE_OF_ONE_LOTTO < numberOfManualLotto) {
+            throw new IllegalArgumentException("수동 로또 갯수가 너무 많음");
+        }
+        List<Set<Integer>> manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
+        List<Lotto> boughtLottos = buyLottos(manualLottoNumbers, amount);
         if (boughtLottos.isEmpty()) {
             return;
         }
@@ -45,8 +52,8 @@ public class LottoGame {
         }
     }
 
-    private List<Lotto> buyLottos(int amount) {
-        List<Lotto> boughtLottos = lottoService.buyLottos(amount);
+    private List<Lotto> buyLottos(List<Set<Integer>> manualLottoNumbers, int amount) {
+        List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
         view.printBoughtLottos(boughtLottos);
         return boughtLottos;
     }
