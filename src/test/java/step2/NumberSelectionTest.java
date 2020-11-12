@@ -9,8 +9,8 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.PlayslipTest.Playslip.NUMBER_POOL;
-import static step2.PlayslipTest.Playslip.SELECTION_COUNT;
+import static step2.Playslip.NUMBER_POOL;
+import static step2.Playslip.SELECTION_COUNT;
 
 public class NumberSelectionTest {
     @DisplayName("입력받은 번호 중 6개의 번호를 선택할 수 있다.")
