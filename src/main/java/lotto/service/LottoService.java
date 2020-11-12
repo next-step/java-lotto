@@ -18,4 +18,14 @@ public class LottoService {
     public WinningStatistic getResult(WinningNumber winningNumber, Collection<Lotto> boughtLottos) {
         return WinningChecker.getResult(winningNumber, boughtLottos);
     }
+
+    public void validateInput(int amount, int numberOfManualLotto) {
+        if (isInvalidAmountAndNumberOfManualLotto(amount, numberOfManualLotto)) {
+            throw new IllegalArgumentException("입력된 금액보다 더 많은 로또를 구입 할 수 없습니다.");
+        }
+    }
+
+    private boolean isInvalidAmountAndNumberOfManualLotto(int amount, int numberOfManualLotto) {
+        return amount / LottoFactory.PRICE_OF_ONE_LOTTO < numberOfManualLotto;
+    }
 }

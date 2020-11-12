@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class ConsoleResultView implements ResultView {
     @Override
-    public void printBoughtLottos(List<Lotto> boughtLottos) {
+    public void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos) {
         StringBuilder sb = new StringBuilder();
         //수동으로 3장, 자동으로 11개를 구매했습니다.
         sb.append(boughtLottos.size()).append("개를 구매했습니다.").append(System.lineSeparator());

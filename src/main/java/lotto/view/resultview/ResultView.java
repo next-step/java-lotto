@@ -6,7 +6,7 @@ import lotto.dto.WinningStatistic;
 import java.util.List;
 
 public interface ResultView {
-    void printBoughtLottos(List<Lotto> boughtLottos);
+    void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos);
 
     void printWinningStatistic(WinningStatistic winningStatistic);
 }

@@ -7,7 +7,6 @@ import lotto.dto.WinningStatistic;
 import lotto.exception.IllegalBonusNumberException;
 import lotto.exception.IllegalInputAmountException;
 import lotto.service.LottoService;
-import lotto.service.helper.LottoFactory;
 import lotto.view.View;
 
 import java.util.ArrayList;
@@ -27,21 +26,18 @@ public class LottoGame {
     }
 
     public void start() {
-        int amount = getAmount();
-        int numberOfManualLotto = view.getNumberOfManualLotto();
-        if (amount / LottoFactory.PRICE_OF_ONE_LOTTO < numberOfManualLotto) {
-            throw new IllegalArgumentException("수동 로또 갯수가 너무 많음");
-        }
-        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
-        if (numberOfManualLotto > 0) {
-            manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
-        }
-        List<Lotto> boughtLottos = buyLottos(manualLottoNumbers, amount);
+        List<Lotto> boughtLottos = buyLottos();
         if (boughtLottos.isEmpty()) {
             return;
         }
-        WinningNumber winningNumber = getWinningNumber();
-        printStatistic(winningNumber, boughtLottos);
+        printStatistic(boughtLottos);
+    }
+
+    private List<Lotto> buyLottos() {
+        int amount = getAmount();
+        int numberOfManualLotto = getNumberOfManualLotto(amount);
+        List<Set<Integer>> manualLottoNumbers = getManualLottoNumbers(numberOfManualLotto);
+        return getLottos(amount, numberOfManualLotto, manualLottoNumbers);
     }
 
     private int getAmount() {
@@ -56,9 +52,23 @@ public class LottoGame {
         }
     }
 
-    private List<Lotto> buyLottos(List<Set<Integer>> manualLottoNumbers, int amount) {
+    private int getNumberOfManualLotto(int amount) {
+        int numberOfManualLotto = view.getNumberOfManualLotto();
+        lottoService.validateInput(amount, numberOfManualLotto);
+        return numberOfManualLotto;
+    }
+
+    private List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
+        if (numberOfManualLotto > 0) {
+            manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
+        }
+        return manualLottoNumbers;
+    }
+
+    private List<Lotto> getLottos(int amount, int numberOfManualLotto, List<Set<Integer>> manualLottoNumbers) {
         List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
-        view.printBoughtLottos(boughtLottos);
+        view.printBoughtLottos(numberOfManualLotto, boughtLottos);
         return boughtLottos;
     }
 
@@ -79,7 +89,8 @@ public class LottoGame {
         }
     }
 
-    private void printStatistic(WinningNumber winningNumber, List<Lotto> boughtLottos) {
+    private void printStatistic(List<Lotto> boughtLottos) {
+        WinningNumber winningNumber = getWinningNumber();
         WinningStatistic winningStatistic = lottoService.getResult(winningNumber, boughtLottos);
         view.printWinningStatistic(winningStatistic);
     }

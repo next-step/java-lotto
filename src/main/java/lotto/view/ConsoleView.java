@@ -28,8 +28,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void printBoughtLottos(List<Lotto> boughtLottos) {
-        resultView.printBoughtLottos(boughtLottos);
+    public void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos) {
+        resultView.printBoughtLottos(numberOfManualLotto, boughtLottos);
     }
 
     @Override

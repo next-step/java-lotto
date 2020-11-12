@@ -19,7 +19,7 @@ public class MockInvalidAmountView implements View {
     }
 
     @Override
-    public void printBoughtLottos(List<Lotto> boughtLottos) {
+    public void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos) {
 
     }
 
