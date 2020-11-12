@@ -11,7 +11,7 @@ public class AccountManagerTest {
         AccountManager accountManager = new AccountManager();
 
         accountManager.addSpent(10_000);
-        accountManager.addPrize(LottoStore.LOTTO_FOURTH_PRIZE);
+        accountManager.addPrize(LottoPrize.FOURTH.getPrize());
 
         assertThat(accountManager.getProfitRate()).isEqualTo(0.5);
     }
