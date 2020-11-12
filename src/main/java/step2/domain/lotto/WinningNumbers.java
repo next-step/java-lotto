@@ -9,33 +9,33 @@ import java.util.stream.Stream;
 public class WinningNumbers {
     private static final int INIT_WINNING_COUNT = 0;
     private static final int NOT_EXISTS_INDEX = -1;
-    private static final int MATCHED_FALSE = 0;
-    private static final int MATCHED_TRUE = 1;
     private static final String DELIMITER = ",";
-    private final Set<LottoNumber> winningNumber;
+    private final MarkingNumbers markingNumbers;
 
-    private WinningNumbers(Set<LottoNumber> winningNumber) {
-        this.winningNumber = winningNumber;
+    private WinningNumbers(MarkingNumbers markingNumbers) {
+        this.markingNumbers = markingNumbers;
     }
 
     public static WinningNumbers of(String string) {
         isValid(string);
-        Set<LottoNumber> splits = split(string);
+        MarkingNumbers splits = split(string);
         return new WinningNumbers(splits);
     }
 
     public static WinningNumbers of(Set<LottoNumber> list) {
         isValid(list);
-        return new WinningNumbers(list);
+        MarkingNumbers markingNumbers = new MarkingNumbers(list);
+        return new WinningNumbers(markingNumbers);
     }
 
-    private static Set<LottoNumber> split(String string) {
-        return Stream.of(string.split(DELIMITER))
+    private static MarkingNumbers split(String string) {
+        Set<LottoNumber> collect = Stream.of(string.split(DELIMITER))
                 .map(value -> {
                     String trim = value.trim();
                     return new LottoNumber(Integer.parseInt(trim));
                 })
                 .collect(Collectors.toSet());
+        return new MarkingNumbers(collect);
     }
 
     public Map<WinningType, Integer> getWinningStatistics(LottoTickets tickets) {
@@ -49,17 +49,8 @@ public class WinningNumbers {
     }
 
     public WinningType compareWinningNumber(LottoTicket ticket) {
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : winningNumber) {
-            matchCount += match(ticket, lottoNumber.getNumber());
-        }
+        int matchCount = markingNumbers.countEquals(ticket);
         return WinningType.getType(matchCount);
-    }
-
-    private int match(LottoTicket ticket, int number) {
-        return ticket.isMarked(number)
-                ? MATCHED_TRUE
-                : MATCHED_FALSE;
     }
 
     private Map<WinningType, Integer> getInitWinningStatisticsMap() {

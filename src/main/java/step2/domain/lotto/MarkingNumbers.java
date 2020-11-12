@@ -26,11 +26,13 @@ public class MarkingNumbers {
                 .collect(Collectors.toList());
     }
 
-    public boolean contains(Integer number) {
-        return this.contains(new LottoNumber(number));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return markingNumbers.contains(lottoNumber);
+    }
+
+    public int countEquals(LottoTicket ticket) {
+        return Math.toIntExact(markingNumbers.stream()
+                .filter(ticket::isMarked)
+                .count());
     }
 }
