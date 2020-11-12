@@ -37,7 +37,7 @@ public class LottoGame {
         int amount = getAmount();
         int numberOfManualLotto = getNumberOfManualLotto(amount);
         List<Set<Integer>> manualLottoNumbers = getManualLottoNumbers(numberOfManualLotto);
-        return getLottos(amount, numberOfManualLotto, manualLottoNumbers);
+        return getLottos(amount, manualLottoNumbers);
     }
 
     private int getAmount() {
@@ -66,9 +66,9 @@ public class LottoGame {
         return manualLottoNumbers;
     }
 
-    private List<Lotto> getLottos(int amount, int numberOfManualLotto, List<Set<Integer>> manualLottoNumbers) {
+    private List<Lotto> getLottos(int amount, List<Set<Integer>> manualLottoNumbers) {
         List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
-        view.printBoughtLottos(numberOfManualLotto, boughtLottos);
+        view.printBoughtLottos(manualLottoNumbers.size(), boughtLottos);
         return boughtLottos;
     }
 
