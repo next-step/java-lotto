@@ -1,15 +1,24 @@
 package step2.domain;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class LottoFactory {
 
 
-    private final int lottoTickets;
+    private final Lottos lottos;
 
     public LottoFactory(int money) {
-        this.lottoTickets = money/1000;
+        int lottoTickets = money / 1000;
+
+        lottos = new Lottos(Arrays.stream(new Integer[lottoTickets])
+                .map(integer -> new Lotto(RandomLottoGenerator.generateLottoNumbers()))
+                .collect(Collectors.toList()));
     }
 
-    public int getLottoTicketCount() {
-        return lottoTickets;
+
+    public boolean isLottoTicketsCount(int size) {
+        return lottos.isLottoTicketsCount(size);
     }
+
 }

@@ -12,4 +12,5 @@ public class Lottos {
     public boolean isLottoTicketsCount(int size) {
         return lottos.size() == size;
     }
+
 }
