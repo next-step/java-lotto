@@ -57,7 +57,7 @@ public class LotteryControllerTest {
         //@formatter:on
     }
 
-    private static class LotteryController {
+    static class LotteryController {
         private final InputView inputView;
         private final ResultView resultView;
         private LotteryAgent lotteryAgent;
@@ -139,9 +139,11 @@ public class LotteryControllerTest {
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
-            System.out.println( //
-                    "당첨 통계\n" + //
-                    "---------\n");
+            //@formatter:off
+            System.out.println(
+                    "\n당첨 통계\n" +
+                    "---------");
+            //@formatter:on
             System.out.println(toStringRank(Rank.FORTH, lotteryResult));
             System.out.println(toStringRank(Rank.THIRD, lotteryResult));
             System.out.println(toStringRank(Rank.SECOND, lotteryResult));

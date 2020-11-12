@@ -67,6 +67,11 @@ public class LotteryNumberTest {
             intersection.retainAll(other.numbers);
             return intersection.size();
         }
+
+        @Override
+        public String toString() {
+            return numbers.toString();
+        }
     }
 
     private static class NotEnoughNumberException extends IllegalArgumentException {
