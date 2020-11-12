@@ -29,14 +29,14 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = new WinningNumber(new TestingNumberSelection(1, 2, 3, 4, 5, 6));
+        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
         winningNumber.draw();
     }
 
     @DisplayName("draw 하기 전에 match 할 수 없다.")
     @Test
     void cannotMatchWithoutDraw() {
-        WinningNumber winningNumber = new WinningNumber(new TestingNumberSelection(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 6))) //
                 .isInstanceOf(IllegalStateException.class);
     }
@@ -90,11 +90,14 @@ public class WinningNumberTest {
     }
 
     static class WinningNumber {
-        private final NumberSelection numberSelection;
+        private NumberSelection numberSelection;
         private LotteryNumber winningNumber;
 
         public WinningNumber(NumberSelection numberSelection) {
             this.numberSelection = numberSelection;
+        }
+        public WinningNumber(LotteryNumber lotteryNumber) {
+            this.winningNumber = lotteryNumber;
         }
 
         public LotteryResult match(LotteryTickets tickets) {
@@ -111,12 +114,14 @@ public class WinningNumberTest {
         }
 
         public void draw() {
-            winningNumber = numberSelection.select(NUMBER_POOL);
+            if (winningNumber == null) {
+                winningNumber = numberSelection.select(NUMBER_POOL);
+            }
         }
 
     }
 
-    private interface NumberSelection {
+    interface NumberSelection {
         LotteryNumber select(List<Integer> numberPool);
     }
 
