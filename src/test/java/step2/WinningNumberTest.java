@@ -13,11 +13,8 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.LotteryAgentTest.LotteryTickets;
-import static step2.LotteryNumberTest.LotteryNumber;
-import static step2.LotteryResultTest.LotteryResult;
-import static step2.LotteryResultTest.Rank;
-import static step2.LotteryResultTest.Rank.*;
+
+import static step2.Rank.*;
 
 
 public class WinningNumberTest {
@@ -77,23 +74,4 @@ public class WinningNumberTest {
         return new LotteryTickets(singletonList(LotteryNumber.of(numbers)));
     }
 
-    static class WinningNumber {
-        private final LotteryNumber winningNumber;
-
-        public WinningNumber(LotteryNumber lotteryNumber) {
-            if (lotteryNumber == null) {
-                throw new IllegalStateException();
-            }
-            this.winningNumber = lotteryNumber;
-        }
-
-        public LotteryResult match(LotteryTickets tickets) {
-            LotteryResult lotteryResult = new LotteryResult();
-            for (LotteryNumber ticketNumber : tickets.getNumbers()) {
-                lotteryResult.add(ticketNumber.getMatched(winningNumber));
-            }
-
-            return lotteryResult;
-        }
-    }
 }
