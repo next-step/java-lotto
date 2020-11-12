@@ -5,31 +5,43 @@ import humbledude.lotto.view.InputView;
 import humbledude.lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoApplication {
 
-    public static void main(String args[]) {
-        LottoStore store = new LottoStore();
-        AccountManager accountManager = new AccountManager();
+    private static final LottoStore store = new LottoStore();
+    private static final AccountManager accountManager = new AccountManager();
 
+    public static void main(String[] args) {
+        long budget = getBudgetFromUserInput();
+
+        buyAutoTicketAndPrintNumbers(budget);
+
+        getWinningNumbersFromUserInput();
+
+        claimPrizeAndPrintStatistics();
+    }
+
+    private static long getBudgetFromUserInput() {
         long budget = InputView.getBudget();
         long howMany = store.howManyCanIBuy(budget);
         ResultView.printNumberOfPurchased(howMany);
 
+        return budget;
+    }
+
+    private static void buyAutoTicketAndPrintNumbers(long budget) {
         List<LottoTicket> tickets = store.buyAutoTickets(budget);
-        accountManager.addSpent(howMany * LottoStore.LOTTO_TICKET_PRICE);
-        for (LottoTicket ticket : tickets) {
-            ResultView.printLottoNumber(ticket);
-        }
+        accountManager.addTickets(tickets);
+        ResultView.printLottoNumber(accountManager.getTickets());
+    }
 
-        LottoNumbers numbers = LottoNumbers.of(InputView.getWinningNumbers());
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(numbers);
+    private static void getWinningNumbersFromUserInput() {
+        LottoWinningNumbers winningNumbers = InputView.getWinningNumbers();
         store.setWinningNumbers(winningNumbers);
+    }
 
-        Map<LottoPrize, List<LottoTicket>> result = store.claimPrizeForMultipleTickets(tickets);
-        accountManager.addPrize(result);
-        ResultView.printStatistics(result);
-        ResultView.printProfitRate(accountManager);
+    private static void claimPrizeAndPrintStatistics() {
+        accountManager.claimPrize(store);
+        ResultView.printStatistics(accountManager);
     }
 }

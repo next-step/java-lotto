@@ -1,5 +1,8 @@
 package humbledude.lotto.view;
 
+import humbledude.lotto.domain.LottoNumbers;
+import humbledude.lotto.domain.LottoWinningNumbers;
+
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,12 +16,15 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public static Set<Integer> getWinningNumbers() {
+    public static LottoWinningNumbers getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
-        return Stream.of(scanner.nextLine().split(","))
+        Set<Integer> numbers = Stream.of(scanner.nextLine().split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toSet());
+
+        return new LottoWinningNumbers(LottoNumbers.of(numbers));
+
     }
 
 }

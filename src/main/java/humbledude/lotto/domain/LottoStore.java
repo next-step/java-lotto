@@ -38,11 +38,6 @@ public class LottoStore {
         return budget / LOTTO_TICKET_PRICE;
     }
 
-    public Map<LottoPrize, List<LottoTicket>> claimPrizeForMultipleTickets(List<LottoTicket> tickets) {
-        return tickets.stream().collect(
-                Collectors.groupingBy(this::claimPrize));
-    }
-
     public LottoPrize claimPrize(LottoTicket ticket) {
         if (winningNumbers == null) {
             throw new IllegalStateException("당첨번호가 입력되지 않았습니다.");

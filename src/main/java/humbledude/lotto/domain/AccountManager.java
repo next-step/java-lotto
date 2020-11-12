@@ -1,28 +1,47 @@
 package humbledude.lotto.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 public class AccountManager {
 
-    private long totalSpent = 0;
-    private long totalPrize = 0;
+    private final List<LottoTicket> tickets = new ArrayList<>();
+    private final Map<LottoPrize, List<LottoTicket>> resultMap = new HashMap<>();
 
-    public void addSpent(long spent) {
-        totalSpent += spent;
+    public void addTickets(List<LottoTicket> tickets) {
+        this.tickets.addAll(tickets);
     }
 
-    public void addPrize(long prize) {
-        totalPrize += prize;
-    }
-
-    public void addPrize(Map<LottoPrize, List<LottoTicket>> result) {
-        result.forEach((prize, tickets) ->
-                totalPrize += prize.getPrize() * tickets.size());
-
+    public void claimPrize(LottoStore store) {
+        resultMap.putAll(tickets.stream()
+                .collect(Collectors.groupingBy(store::claimPrize)));
     }
 
     public double getProfitRate() {
-        return (double) totalPrize / (double) totalSpent;
+        return (double) getTotalPrize() / (double) getTotalSpent();
     }
+
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
+    public Map<LottoPrize, List<LottoTicket>> getResultMap() {
+        return resultMap;
+    }
+
+    private long getTotalPrize() {
+        AtomicLong totalPrize = new AtomicLong(0L);
+        resultMap.forEach((prize, tickets) -> totalPrize.addAndGet(prize.getPrize() * tickets.size()));
+
+        return totalPrize.get();
+    }
+
+    private long getTotalSpent() {
+        return tickets.size() * LottoStore.LOTTO_TICKET_PRICE;
+    }
+
 }

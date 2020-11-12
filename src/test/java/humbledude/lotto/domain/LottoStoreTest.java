@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,29 +44,5 @@ public class LottoStoreTest {
         store.setWinningNumbers(winningNumbers);
 
         assertThat(store.claimPrize(myTicket).getPrize()).isEqualTo(expetedPrize);
-    }
-
-    @Test
-    public void claimPrizeForMultipleTickets() {
-        // 1등 + 2등 + 3등 + 꽝
-        List<LottoTicket> tickets = Stream.of(
-                LottoNumbers.of(1, 2, 3, 4, 5, 6),
-                LottoNumbers.of(1, 2, 3, 4, 5, 45),
-                LottoNumbers.of(1, 2, 3, 4, 44, 45),
-                LottoNumbers.of(40, 41, 42, 43, 44, 45))
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
-
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6));
-
-        LottoStore store = new LottoStore();
-        store.setWinningNumbers(winningNumbers);
-
-        Map<LottoPrize, List<LottoTicket>> result = store.claimPrizeForMultipleTickets(tickets);
-
-        assertThat(result.get(LottoPrize.FIRST)).hasSize(1);
-        assertThat(result.get(LottoPrize.SECOND)).hasSize(1);
-        assertThat(result.get(LottoPrize.THIRD)).hasSize(1);
-        assertThat(result.get(LottoPrize.BLANK)).hasSize(1);
     }
 }

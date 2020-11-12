@@ -14,22 +14,27 @@ public class ResultView {
         System.out.println(howMany + " 개를 구매했습니다.");
     }
 
+    public static void printLottoNumber(List<LottoTicket> tickets) {
+        for (LottoTicket ticket : tickets) {
+            ResultView.printLottoNumber(ticket);
+        }
+    }
+
     public static void printLottoNumber(LottoTicket ticket) {
         String stringNumbers = ticket.getNumbers().stream()
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         System.out.println("[" + stringNumbers + "]");
+
     }
 
-    public static void printStatistics(Map<LottoPrize, List<LottoTicket>> result) {
+    public static void printStatistics(AccountManager accountManager) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-
         Stream.of(LottoPrize.FOURTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST)
-                .forEachOrdered(prize -> printResultMessageForEachPrize(prize, result));
-    }
+                .forEachOrdered(prize -> printResultMessageForEachPrize(prize, accountManager.getResultMap()));
 
-    public static void printProfitRate(AccountManager accountManager) {
         String profitOrLossMessage = getMessageProfitOrLoss(accountManager.getProfitRate());
         String msg = String.format("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)",
                 accountManager.getProfitRate(),
