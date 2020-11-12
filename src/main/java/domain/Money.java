@@ -9,6 +9,7 @@ public class Money {
         if(value < 0) {
             throw new Exception();
         }
+
         this.value = value;
     }
 
