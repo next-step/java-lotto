@@ -21,7 +21,7 @@ public class LotteryControllerTest {
     @DisplayName("컨트롤러는 객체들과 상호작용 순서가 있다")
     @Test
     void interactionSequence() {
-        LotteryController lotteryController = new LotteryController(new TestingInputView(), new ResultView());
+        LotteryController lotteryController = new LotteryController(new TestingInputView(), new TestingResultView());
 
         lotteryController.request();
 
@@ -107,6 +107,20 @@ public class LotteryControllerTest {
     }
 
     static class ResultView {
+        public void responseTicketCount(LotteryTickets lotteryTickets) {
+        }
+
+        public void responseTickets(LotteryTickets lotteryTickets) {
+        }
+
+        public void responseWinningStat(LotteryResult lotteryResult) {
+        }
+
+        public void responseRateOfReturn(LotteryResult lotteryResult) {
+        }
+    }
+
+    static class TestingResultView extends ResultView {
         public void responseTicketCount(LotteryTickets lotteryTickets) {
             record.add("responseTicketCount");
         }
