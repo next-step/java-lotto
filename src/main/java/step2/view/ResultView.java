@@ -1,11 +1,11 @@
-package step2;
+package step2.view;
 
 
 import step2.domain.LotteryResult;
 import step2.domain.LotteryTickets;
 import step2.domain.Rank;
 
-class ResultView {
+public class ResultView {
     public void responseTicketAndCount(LotteryTickets lotteryTickets) {
         responseTicketCount(lotteryTickets);
         responseTickets(lotteryTickets);
