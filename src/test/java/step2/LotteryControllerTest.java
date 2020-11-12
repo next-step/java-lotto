@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static step2.LotteryAgentTest.LotteryAgent;
@@ -19,7 +21,7 @@ public class LotteryControllerTest {
     @DisplayName("컨트롤러는 객체들과 상호작용 순서가 있다")
     @Test
     void interactionSequence() {
-        LotteryController lotteryController = new LotteryController(new InputView(), new ResultView());
+        LotteryController lotteryController = new LotteryController(new TestingInputView(), new ResultView());
 
         lotteryController.request();
 
@@ -66,6 +68,27 @@ public class LotteryControllerTest {
     }
 
     static class InputView {
+        public Money requestMoney() {
+            Scanner scanner = new Scanner(System.in);
+            return Money.of(scanner.nextInt());
+        }
+
+        public LotteryNumber requestLastWeekLotteryNumber() {
+            Scanner scanner = new Scanner(System.in);
+            String line = scanner.nextLine();
+            Integer[] lastWeekLotteryNumber = splitAndConvertToIntArray(line);
+            return LotteryNumber.of(lastWeekLotteryNumber);
+        }
+
+        public static Integer[] splitAndConvertToIntArray(String line) {
+            return Arrays.stream(line.split(",")) //
+                    .map(String::trim) //
+                    .map(Integer::valueOf) //
+                    .toArray(Integer[]::new);
+        }
+    }
+
+    static class TestingInputView extends InputView {
         public Money requestMoney() {
             record.add("requestMoney");
             return Money.of(1000);
