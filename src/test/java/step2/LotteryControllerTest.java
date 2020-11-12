@@ -85,11 +85,13 @@ public class LotteryControllerTest {
 
     static class InputView {
         public Money requestMoney() {
+            System.out.println("구입금액을 입력해 주세요.");
             Scanner scanner = new Scanner(System.in);
             return Money.of(scanner.nextInt());
         }
 
         public LotteryNumber requestLastWeekLotteryNumber() {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
             Integer[] lastWeekLotteryNumber = splitAndConvertToIntArray(line);
@@ -118,12 +120,23 @@ public class LotteryControllerTest {
 
     static class ResultView {
         public void responseTicketCount(LotteryTickets lotteryTickets) {
+            System.out.printf("%d개를 구매했습니다.%n", lotteryTickets.size());
         }
 
         public void responseTickets(LotteryTickets lotteryTickets) {
+            lotteryTickets.getNumbers().forEach(System.out::println);
+            System.out.println();
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
+            System.out.println( //
+                    "당첨 통계\n" + //
+                    "---------\n");
+            System.out.println(toStringRank(Rank.FORTH, lotteryResult));
+            System.out.println(toStringRank(Rank.THIRD, lotteryResult));
+            System.out.println(toStringRank(Rank.SECOND, lotteryResult));
+            System.out.println(toStringRank(Rank.FIRST, lotteryResult));
+            System.out.println(toStringRank(Rank.FIRST, lotteryResult));
         }
 
         public static String toStringRank(Rank rank, LotteryResult lotteryResult) {
@@ -134,6 +147,7 @@ public class LotteryControllerTest {
         }
 
         public void responseRateOfReturn(LotteryResult lotteryResult) {
+            System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", lotteryResult.getRateOfReturn());
         }
     }
 
