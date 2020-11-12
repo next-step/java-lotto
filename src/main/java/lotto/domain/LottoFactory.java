@@ -1,23 +1,32 @@
 package lotto.domain;
 
-// NOTE: NumberLottoFactory 와 StringLottoFactory 의 Facade
+import lotto.asset.LottoConst;
+import lotto.utils.validator.LottoValidator;
+
 public class LottoFactory {
-    private LottoFactory() {
+    private LottoFactory() {}
+
+    public static Lotto createLotto(int[] lottoNoArr) {
+        LottoValidator.validateLottoNoArr(lottoNoArr);
+        Lotto lotto = new Lotto();
+        for (int no : lottoNoArr) {
+            lotto.add(no);
+        }
+        return lotto;
     }
 
-    public static LottoFactory getInstance() {
-        return SingletonHelper.instance;
+    public static Lotto createLotto(String[] lottoNoArr) {
+        LottoValidator.validateLottoNoArr(lottoNoArr);
+        Lotto lotto = new Lotto();
+        for (String no : lottoNoArr) {
+            lotto.add(no);
+        }
+        return lotto;
     }
 
-    public Lotto createLotto(int[] lottoNos) {
-        return new Lotto();
-    }
-
-    public Lotto createLotto(String lottoStr) {
-        return new Lotto();
-    }
-
-    private static class SingletonHelper {
-        private static final LottoFactory instance = new LottoFactory();
+    public static Lotto createLotto(String lottoStr) {
+        LottoValidator.validateLottoStr(lottoStr);
+        String[] lottoNoArr = lottoStr.split(LottoConst.splitRegex);
+        return createLotto(lottoNoArr);
     }
 }

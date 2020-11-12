@@ -12,10 +12,18 @@ public class LottoValidator {
         validateLottoNoArr(lottoNoArr);
     }
 
-    private static void validateLottoNoArr(String[] lottoNoArr) {
+    public static void validateLottoNoArr(int[] lottoNoArr) {
         int numOfLottoNo = lottoNoArr.length;
         validateNumOfLottoNo(numOfLottoNo);
-        for (String lottoNo: lottoNoArr) {
+        for (int lottoNo : lottoNoArr) {
+            LottoNoValidator.validateLottoNo(lottoNo);
+        }
+    }
+
+    public static void validateLottoNoArr(String[] lottoNoArr) {
+        int numOfLottoNo = lottoNoArr.length;
+        validateNumOfLottoNo(numOfLottoNo);
+        for (String lottoNo : lottoNoArr) {
             LottoNoValidator.validateLottoNo(lottoNo);
         }
     }
