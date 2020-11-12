@@ -3,6 +3,8 @@ package step2.domain.lotto;
 import java.util.Objects;
 
 public class LottoNumber {
+    public static final int MINIMUM_ANCHOR_POINT = 0;
+    public static final int MAXIMUM_ANCHOR_POINT = 45;
     private final int number;
 
     public LottoNumber(int number) {
@@ -11,7 +13,7 @@ public class LottoNumber {
     }
 
     private void isValid(int number) {
-        if (number <= 0 || number > 45) {
+        if (number <= MINIMUM_ANCHOR_POINT || number > MAXIMUM_ANCHOR_POINT) {
             throw new IllegalArgumentException();
         }
     }
