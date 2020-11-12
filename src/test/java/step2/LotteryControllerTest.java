@@ -71,11 +71,11 @@ public class LotteryControllerTest {
         public void request() {
             Money money = inputView.requestMoney();
             LotteryTickets lotteryTickets = lotteryAgent.exchange(money).getLotteryTickets();
-            resultView.responseTickets(lotteryTickets);
+            resultView.responseTicketAndCount(lotteryTickets);
 
             LotteryNumber lastWeekLotteryNumber = inputView.requestLastWeekLotteryNumber();
             LotteryResult lotteryResult = newWinningNumber(lastWeekLotteryNumber).match(lotteryTickets);
-            resultView.responseWinningStat(lotteryResult);
+            resultView.responseLotteryResult(lotteryResult);
         }
 
         private WinningNumber newWinningNumber(LotteryNumber lotteryNumber) {
@@ -119,6 +119,11 @@ public class LotteryControllerTest {
     }
 
     static class ResultView {
+        public void responseTicketAndCount(LotteryTickets lotteryTickets) {
+            responseTicketCount(lotteryTickets);
+            responseTickets(lotteryTickets);
+        }
+
         public void responseTicketCount(LotteryTickets lotteryTickets) {
             System.out.printf("%d개를 구매했습니다.%n", lotteryTickets.size());
         }
@@ -126,6 +131,11 @@ public class LotteryControllerTest {
         public void responseTickets(LotteryTickets lotteryTickets) {
             lotteryTickets.getNumbers().forEach(System.out::println);
             System.out.println();
+        }
+
+        public void responseLotteryResult(LotteryResult lotteryResult) {
+            responseWinningStat(lotteryResult);
+            responseRateOfReturn(lotteryResult);
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
@@ -157,13 +167,11 @@ public class LotteryControllerTest {
         }
 
         public void responseTickets(LotteryTickets lotteryTickets) {
-            responseTicketCount(lotteryTickets);
             record.add("responseTickets");
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
             record.add("responseWinningStat");
-            responseRateOfReturn(lotteryResult);
         }
 
         public void responseRateOfReturn(LotteryResult lotteryResult) {
