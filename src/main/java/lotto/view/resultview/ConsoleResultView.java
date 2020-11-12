@@ -1,6 +1,7 @@
 package lotto.view.resultview;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningStatistic;
 
@@ -16,7 +17,7 @@ public class ConsoleResultView implements ResultView {
         sb.append(boughtLottos.size()).append("개를 구매했습니다.").append(System.lineSeparator());
 
         for (Lotto boughtLotto : boughtLottos) {
-            Set<Integer> numbers = boughtLotto.getNumbers();
+            Set<LottoNumber> numbers = boughtLotto.getNumbers();
             sb.append(numbers.toString()).append(System.lineSeparator());
         }
 
@@ -40,11 +41,19 @@ public class ConsoleResultView implements ResultView {
     }
 
     private void appendStatistics(WinningStatistic winningStatistic, StringBuilder sb) {
-        EnumSet<WinningRank> winningRanks = EnumSet.allOf(WinningRank.class);
+        Set<WinningRank> winningRanks = EnumSet.allOf(WinningRank.class);
         winningRanks.stream()
                 .filter(r -> r.getWinningAmount() > 0)
-                .map(r -> String.format("%s (%d원) - %d개", r.getDescription(), r.getWinningAmount(), winningStatistic.getCountOfWinningRank(r)))
+                .map(r -> getStatisticFrom(winningStatistic, r))
                 .forEach(s -> sb.append(s).append(System.lineSeparator()));
+    }
+
+    private String getStatisticFrom(WinningStatistic winningStatistic, WinningRank winningRank) {
+        return String.format("%s개 일치%s (%d원) - %d개",
+                winningRank.getWinningCondition().getMatchedCount(),
+                winningRank.getWinningCondition().isBonusNumMatched() ? ", 보너스 볼 일치" : "",
+                winningRank.getWinningAmount(),
+                winningStatistic.getCountOfWinningRank(winningRank));
     }
 
     private void appendEarningRate(WinningStatistic winningStatistic, StringBuilder sb) {

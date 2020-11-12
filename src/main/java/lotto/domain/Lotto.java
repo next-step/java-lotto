@@ -1,50 +1,57 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberSizeException;
+
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final String INVALID_NUMBERS_SIZE_ERR_MSG = "로또 숫자의 개수가 유효하지 않습니다.";
-    public static final String INVALID_NUMBER_RANGE_ERR_MSG = "로또 숫자가 유효범위를 벗어났습니다.";
-    public static final int VALID_MIN_NUMBER = 1;
-    public static final int VALID_MAX_NUMBER = 45;
     public static final int VALID_NUMBERS_SIZE = 6;
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
-        validateState(numbers);
+    private Lotto(Collection<Integer> numbers) {
+        this.numbers = Collections.unmodifiableSet(getLottoNumbersFrom(numbers));
+        validateNumbersSize();
     }
 
-    private void validateState(List<Integer> numbers) {
-        validateNumbersSize();
-        numbers.forEach(this::validateNumberRange);
+    public static Lotto of(Collection<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto of(Integer... numbers) {
+        return new Lotto(Arrays.asList(numbers));
+    }
+
+    private Set<LottoNumber> getLottoNumbersFrom(Collection<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private void validateNumbersSize() {
         if (numbers.size() != VALID_NUMBERS_SIZE) {
-            throw new IllegalStateException(INVALID_NUMBERS_SIZE_ERR_MSG);
+            throw new IllegalLottoNumberSizeException(INVALID_NUMBERS_SIZE_ERR_MSG);
         }
     }
 
-    private void validateNumberRange(Integer number) {
-        if (number < VALID_MIN_NUMBER || number > VALID_MAX_NUMBER) {
-            throw new IllegalStateException(INVALID_NUMBER_RANGE_ERR_MSG);
-        }
-    }
-
-    public int getMatchedCountCompareTo(Collection<Integer> winningNumbers) {
+    public int getMatchedCountCompareTo(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(lotto.numbers::contains)
                 .count();
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override

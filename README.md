@@ -54,3 +54,54 @@
         - [x] LottoWinningRank는 당첨금액과, 당첨을 확인하는 로직을 갖는다.
         - [x] 당첨번호와 구입한 로또을 입력값으로 주면 어떤 당첨 타입인지 반환한다.
 - [x] 당첨 통계를 출력한다.
+
+### 2단계 피드백 사항
+- [x] Lotto의 numbers 타입을 Integer -> LottoNumber로 warpping
+- [x] LottoFactory 1~45 숫자들 상수처리
+    - 상수처리는 하되 LottoNumber.VALID_MIN_NUMBER, LottoNumber.VALID_MAX_NUMBER를 기준으로 초기화 하도록 했습니다. 1~45라는 범위가 변경될 때 LottoFactory의 NUNBERS도 같이 변경되면 좋겠다고 생각했어요! :)
+- [x] 멤버변수 최대 3개로 (LottoGame)
+    - 멤버변수에 갯수에 대한 고민을 많이 해본적이 없어서 이런식으로 하는게 맞는지 잘 모르겠네요. LottoFactory와 WinningChecker를 하나의 추상화된 이름으로 짓는 네이밍도 어려웠구요. 방법은 올바르게 했는지 혹시 해당 규칙을 지키기 위한 팁이나 방법론이 있는지 궁금합니다!
+    - LottoFactory와 WinningChecker는 인스턴스 멤버 변수도 없고 기능이 확장될것 같지 않다고 판단해서 정적타입으로 변경했습니다. 어떤 것 같나요?
+- [x] Main과 LottoGame 통합 (LottoGame이 main의 역할)
+    - 이 부분은 제가 리뷰를 제대로 이해하고 요약한게 맞을까요?ㅎㅎ
+    - LottoGame은 일종의 Controller나 Handler의 역할을 하고 외부에서 의존객체를 주입해주면 좋겠다고 생각했어요. 
+    - Main은 어플리케이션의 실행과 의존관계 설정을 하는 역할을 주고 싶었습니다.
+    - 위와 같은 이유로 2개의 클래스를 분리하고 싶었어요. :)
+- [x] WinningCondition Builder패턴 적절한가 고민해보기
+- [x] WinningRank의 description을 view에게 위임하는건 어떨지 고민해보기
+- [x] ConsoleInputView 상수와 멤버변수를 개행
+- [x] ConsoleInputView getWinningNumbers()의 행동이 적절한가? (view가 검증과 정제를 담당하고 있음)
+    - 확실히 Input에서 검증을 하는건 별로 안좋아 보이네요.
+    - `input이 무언가의 자료구조를 만들어서 반환하는건 유연하지 못하다고 생각합니다.` 라고 하셨는데, Set<Integer>가 아닌 String을 넘기는게 좋다는 말씀이신가요?
+        - 입력된 String을 숫자들로 만드는건 Input이 가져도 되지 않을까요? 특히 ','로 split하는 경우가 Input에 있어야 하는 로직이라고 생각이 들었어요. InputView를 확장한 다른 구현체가 생겨서 다른 입력방식이 생겨도 숫자만 건내주면 되니까요 :)  
+- [x] 구입금액이 음수로 입력된 경우 예외
+- [x] 1000 -> 1_000으로 통일 
+- [x] 테스트 메서드명 카멜케이스로
+- [x] createTest_invalidNumberSize()의 @MethodSource를 사용 고민
+
+## 3단계 로또(2등) 요구사항
+### 기능 요구사항
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
+
+### 프로그래밍 요구사항
+- 규칙 8: 일급 콜렉션을 쓴다.
+
+### 3단계 피드백 사항
+- [x] Main과 LottoGame 통합에 대한 고민
+- [x] LottoNumber는 원시값 포장 객체입니다. 1 == 1 은 true인데, LottoNumber.from(1) == LottoNumber.from(1)이 되게 하려면 어떻게 해야할까요? 
+    - 캐시처리 했습니다! :)
+- [x] ConsoleInputView 책임과 역할에 대한 고민
+    - 해당 의견은 링크로 달아두겠습니다! https://github.com/next-step/java-lotto/pull/867 (링크 하단 comment 참고)  
+- [x] Exception class 생성
+- [x] view와 lottoService는 메소드로 분류하지 않아도 될 것 같아요!
+- [x] 보통 원시값 포장 객체는 valueOf 라는 이름의 메소드로 사용합니다.
+- [x] 이 부분은 from 메소드에 위임하는게 좋을 것 같아요~
+    - 생성자보다 정적메서드가 더 좋아보이는 이유는 어떤건가요? :)
+- [x] WinningNumber getter는 불필요할 것 같습니다.
+- [x] LottoService 굳이 인터페이스와 구현부로 분류할 필요는 없지 않을까요?
+    - 제가 하나의 구현부라도 인터페이스를 만든 이유는 보통 세가지 이유가 됩니다.
+        1. 첫 설계시에 인터페이스만으로 객체들의 의존관계를 그려보기 위해서
+        2. 추후에 LottoService를 의존하는 객체의 유닛테스트를 용이하게 하기 위해서
+        3. 기능이 확장될때 의존객체들에게 영향을 주지 않기 위해서
+    - 그러나 이후에 다른 하나의 인터페이와 구현체만 매핑되는 경우도 많이 있습니다. 혹시 이런 사항이 안좋은걸까요? 그리고 이후에 인터페이스와 구현체가 하나라면 인터페이스를 삭제하는게 좋을까요? :) 

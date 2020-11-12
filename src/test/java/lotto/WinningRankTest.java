@@ -1,13 +1,13 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.dto.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static lotto.domain.WinningRank.MATCHES_FIVE;
+import static lotto.domain.WinningRank.MATCHES_FIVE_AND_BONUS_NUMBER;
 import static lotto.domain.WinningRank.MATCHES_FOUR;
 import static lotto.domain.WinningRank.MATCHES_SIX;
 import static lotto.domain.WinningRank.MATCHES_THREE;
@@ -19,19 +19,23 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class WinningRankTest {
     @Test
     @DisplayName("당첨번호와 구입한 로또번호로 당첨타입을 확인한다.")
-    void winningRank_test() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    void winningRankTest() {
+        Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(45);
+        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         assertAll(
-                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 3, 4, 5, 6)))
                         .isEqualTo(MATCHES_SIX),
-                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))))
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 3, 4, 5, 45)))
+                        .isEqualTo(MATCHES_FIVE_AND_BONUS_NUMBER),
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 3, 4, 5, 7)))
                         .isEqualTo(MATCHES_FIVE),
-                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8))))
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 3, 4, 7, 8)))
                         .isEqualTo(MATCHES_FOUR),
-                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9))))
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 3, 7, 8, 9)))
                         .isEqualTo(MATCHES_THREE),
-                () -> assertThat(getWinningRank(winningNumbers, new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10))))
+                () -> assertThat(getWinningRank(winningNumber, Lotto.of(1, 2, 7, 8, 9, 10)))
                         .isEqualTo(NONE)
         );
     }

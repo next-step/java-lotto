@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.service.LottoService;
+import lotto.view.ConsoleView;
 import lotto.view.inputview.ConsoleInputView;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ConsoleResultView;
@@ -12,7 +14,7 @@ public class Main {
     }
 
     private static LottoGame lottoGame() {
-        return new LottoGame(inputView(), resultView(), lottoFactory(), winningChecker());
+        return new LottoGame(new ConsoleView(inputView(), resultView()), new LottoService());
     }
 
     private static InputView inputView() {
@@ -23,11 +25,4 @@ public class Main {
         return new ConsoleResultView();
     }
 
-    private static LottoFactory lottoFactory() {
-        return new LottoFactory();
-    }
-
-    private static WinningChecker winningChecker() {
-        return new WinningChecker();
-    }
 }
