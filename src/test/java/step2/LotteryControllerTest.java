@@ -52,13 +52,12 @@ public class LotteryControllerTest {
 
         public void request() {
             Money money = inputView.requestMoney();
-            LotteryAgent.ExchangeResult exchangeResult = lotteryAgent.exchange(money);
-            resultView.responseTicketCount(exchangeResult.getLotteryTickets());
-            resultView.responseTickets(exchangeResult.getLotteryTickets());
+            LotteryTickets lotteryTickets = lotteryAgent.exchange(money).getLotteryTickets();
+            resultView.responseTickets(lotteryTickets);
+
             LotteryNumber lastWeekLotteryNumber = inputView.requestLastWeekLotteryNumber();
-            LotteryResult lotteryResult = newWinningNumber(lastWeekLotteryNumber).match(exchangeResult.getLotteryTickets());
+            LotteryResult lotteryResult = newWinningNumber(lastWeekLotteryNumber).match(lotteryTickets);
             resultView.responseWinningStat(lotteryResult);
-            resultView.responseRateOfReturn(lotteryResult);
         }
 
         private WinningNumber newWinningNumber(LotteryNumber lotteryNumber) {
@@ -84,11 +83,13 @@ public class LotteryControllerTest {
         }
 
         public void responseTickets(LotteryTickets lotteryTickets) {
+            responseTicketCount(lotteryTickets);
             record.add("responseTickets");
         }
 
         public void responseWinningStat(LotteryResult lotteryResult) {
             record.add("responseWinningStat");
+            responseRateOfReturn(lotteryResult);
         }
 
         public void responseRateOfReturn(LotteryResult lotteryResult) {
