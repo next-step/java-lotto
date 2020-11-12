@@ -6,7 +6,7 @@ import lotto.utils.validator.LottoValidator;
 public class LottoFactory {
     private LottoFactory() {}
 
-    public static Lotto createLotto(int[] lottoNoArr) {
+    public static Lotto createLotto(Integer[] lottoNoArr) {
         LottoValidator.validateLottoNoArr(lottoNoArr);
         Lotto lotto = new Lotto();
         for (int no : lottoNoArr) {

@@ -74,16 +74,16 @@ class LottoNoTest {
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
     }
 
-    private List<LottoNo> convertToList(int[] lottoNos) {
+    private List<LottoNo> convertToList(Integer[] lottoNos) {
         return Arrays.stream(lottoNos)
-                .mapToObj((int no) -> new LottoNo(no))
+                .map((Integer no) -> new LottoNo(no))
                 .collect(Collectors.toList());
     }
 
     @Test
     @DisplayName("Collections.sort 를 하면, 로또 번호의 크기 순서대로 정렬이 된다.")
     public void sort() {
-        int[] lottoNos = new int[]{45, 5, 2, 8, 3, 9, 15, 1};
+        Integer[] lottoNos = new Integer[]{45, 5, 2, 8, 3, 9, 15, 1};
         List<LottoNo> lottoNoList = convertToList(lottoNos);
         Arrays.sort(lottoNos);
         List<LottoNo> sortedList = convertToList(lottoNos);

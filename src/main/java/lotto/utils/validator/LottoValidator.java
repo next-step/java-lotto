@@ -12,7 +12,7 @@ public class LottoValidator {
         validateLottoNoArr(lottoNoArr);
     }
 
-    public static void validateLottoNoArr(int[] lottoNoArr) {
+    public static void validateLottoNoArr(Integer[] lottoNoArr) {
         int numOfLottoNo = lottoNoArr.length;
         validateNumOfLottoNo(numOfLottoNo);
         for (int lottoNo : lottoNoArr) {

@@ -6,10 +6,6 @@ import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
 
-    /**
-     * NOTE: Integer 클래스의 기능을 미래에 활용할지 모르므로,
-     * primitive int 보다는, 클래스로 선언한다.
-     */
     Integer lottoNo;
 
     /**

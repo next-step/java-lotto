@@ -7,7 +7,7 @@ import lotto.utils.validator.MoneyValidator;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);;
+    private static Scanner scanner = new Scanner(System.in);
 
     private InputView() {}
 
@@ -18,11 +18,15 @@ public class InputView {
         return Integer.parseInt(money);
     }
 
+    public static String askLottoStr() {
+        String lottoStr = scanner.nextLine();
+        LottoValidator.validateLottoStr(lottoStr);
+        return lottoStr;
+    }
+
     public static String askWinningLotto() {
         System.out.println(InputViewConst.ASK_WINNING_LOTTO);
-        String winningLotto = scanner.nextLine();
-        LottoValidator.validateLottoStr(winningLotto);
-        return winningLotto;
+        return askLottoStr();
     }
 
 }

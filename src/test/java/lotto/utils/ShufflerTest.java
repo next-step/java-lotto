@@ -31,7 +31,7 @@ class ShufflerTest {
 
     private boolean checkLottoNo(int no) {
         return no >= LottoConst.NO_MIN
-                && no < +LottoConst.NO_MAX;
+                && no <= LottoConst.NO_MAX;
     }
 
     @Test

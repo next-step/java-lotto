@@ -18,11 +18,11 @@ import java.util.Objects;
 public class Lotto {
     private List<LottoNo> lottoNos;
 
-    public Lotto() {
+    protected Lotto() {
         lottoNos = new LinkedList<>();
     }
 
-    public int getSize() {
+    protected int getSize() {
         return lottoNos.size();
     }
 

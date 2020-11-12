@@ -16,11 +16,11 @@ public class LottoNoPool {
         lottoNoPool = new HashMap<>();
     }
 
-    public static LottoNoPool getInstance() {
+    protected static LottoNoPool getInstance() {
         return SingletonHelper.instance;
     }
 
-    public LottoNo getLottoNo(int no) {
+    protected LottoNo getLottoNo(int no) {
         LottoNoValidator.validateLottoNo(no);
         return Optional.ofNullable(
                 lottoNoPool.get(no)
@@ -31,7 +31,7 @@ public class LottoNoPool {
         });
     }
 
-    public LottoNo getLottoNo(String no) {
+    protected LottoNo getLottoNo(String no) {
         LottoNoValidator.validateLottoNo(no);
         return Optional.ofNullable(
                 lottoNoPool.get(no)
