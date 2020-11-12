@@ -10,6 +10,7 @@ import lotto.service.LottoService;
 import lotto.service.helper.LottoFactory;
 import lotto.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,10 @@ public class LottoGame {
         if (amount / LottoFactory.PRICE_OF_ONE_LOTTO < numberOfManualLotto) {
             throw new IllegalArgumentException("수동 로또 갯수가 너무 많음");
         }
-        List<Set<Integer>> manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
+        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
+        if (numberOfManualLotto > 0) {
+            manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
+        }
         List<Lotto> boughtLottos = buyLottos(manualLottoNumbers, amount);
         if (boughtLottos.isEmpty()) {
             return;
