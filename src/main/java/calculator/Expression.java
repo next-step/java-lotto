@@ -1,7 +1,5 @@
 package calculator;
 
-import sun.tools.jstat.Operator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -33,7 +31,7 @@ public class Expression {
         List<Integer> operands = Arrays.stream(this.mathExpression.split(delimiter))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
-        if( operands.stream().anyMatch(this::lessThanZero) )
+        if (operands.stream().anyMatch(this::lessThanZero))
             throw new RuntimeException("0 또는 양수만 입력 가능합니다.");
         return operands;
     }
@@ -42,7 +40,7 @@ public class Expression {
         return value < 0;
     }
 
-    public int execute(BinaryOperator<Integer> operator){
+    public int execute(BinaryOperator<Integer> operator) {
         return operands.stream().reduce(0, operator);
     }
 
@@ -52,7 +50,7 @@ public class Expression {
 
     private String getCustomDelimiterOrDefault(String expression, String defaultValue) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_EXP).matcher(expression);
-        if( matcher.find() ){
+        if (matcher.find()) {
             return matcher.group(1);
         }
         return defaultValue;

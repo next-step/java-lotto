@@ -20,7 +20,7 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2=3","1,2,3=6", "1,2:3=6"}, delimiterString = "=")
+    @CsvSource(value = {"1=1","1,2=3","1,2,3=6", "1,2:3=6"}, delimiterString = "=")
     void sum(String expression, int expected){
         assertThat(calculator.sum(expression)).isEqualTo(expected);
     }
