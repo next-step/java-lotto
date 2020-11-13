@@ -19,8 +19,8 @@ public class Number {
         return number < 0;
     }
 
-    public static Number sum(Number number1, Number number2) {
-        return new Number(number1.number + number2.number);
+    public Number sum(Number number) {
+        return new Number(this.number + number.number);
     }
 
     @Override
