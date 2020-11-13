@@ -1,44 +1,31 @@
 package step2.domain;
 
-import step2.exception.ValidEmptyException;
-import step2.exception.ValidNullException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class LottoMatcher {
-    private static final String DELIMITER_LOTTO = ",";
-    private final List<Integer> lottoNumbers;
+    private Map<LottoRank, Integer> result = new HashMap<>();
 
-    public LottoMatcher(String input) {
-
-        validNull(input);
-        validEmpty(input);
-
-        lottoNumbers = Arrays.stream(separateLottoNumber(input))
-                .map(s -> Integer.parseInt(s.trim()))
-                .collect(Collectors.toList());
-    }
-
-    private String[] separateLottoNumber(String input) {
-        return input.split(DELIMITER_LOTTO);
-    }
-
-    private void validNull(String input) {
-        if (input == null) {
-            throw new ValidNullException();
+    public LottoMatcher() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            result.put(lottoRank, 0);
         }
     }
 
-    private void validEmpty(String input) {
-        if (input.trim().isEmpty()) {
-            throw new ValidEmptyException();
-        }
+    public void increaseMatchLottoCount(int match) {
+        result.put(getLottoRank(match), getLottoCount(getLottoRank(match)));
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    private LottoRank getLottoRank(int match) {
+        return LottoRank.valueOf(match);
     }
 
+    private int getLottoCount(LottoRank lottoRank) {
+        return Optional.of(result.get(lottoRank) + 1).orElse(0);
+    }
+
+    public Map<LottoRank, Integer> getResult() {
+        return result;
+    }
 }
