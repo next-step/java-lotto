@@ -47,7 +47,7 @@ public class Lotto {
             throw DuplicatedLottoException.getInstance();
         }
     }
-    
+
     private LottoNo getLottoNo(int no) {
         LottoNoPool pool = LottoNoPool.getInstance();
         return pool.getLottoNo(no);
@@ -70,7 +70,7 @@ public class Lotto {
         return lottoNos.toString();
     }
 
-    private String hashString(List<LottoNo> original) {
+    private String getSorted(List<LottoNo> original) {
         List<LottoNo> cloned = new LinkedList<>(original);
         Collections.copy(cloned, original);
         Collections.sort(cloned);
@@ -86,14 +86,14 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) o;
-        return hashString(lottoNos)
-                .equals(hashString(lotto.lottoNos));
+        return getSorted(lottoNos)
+                .equals(getSorted(lotto.lottoNos));
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                hashString(lottoNos)
+                getSorted(lottoNos)
         );
     }
 }
