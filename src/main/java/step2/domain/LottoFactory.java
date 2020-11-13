@@ -13,15 +13,18 @@ public class LottoFactory {
 
     public LottoFactory(int money) {
         validMoney(money);
-        int lottoTickets = money / LOTTO_PRICE;
 
-        lottos = new Lottos(Arrays.stream(new Integer[lottoTickets])
+        lottos = new Lottos(Arrays.stream(new Integer[getLottoTicketCount(money)])
                 .map(integer -> new Lotto(RandomLottoGenerator.generateLottoNumbers()))
                 .collect(Collectors.toList()));
     }
 
+    private int getLottoTicketCount(int money) {
+        return money / LOTTO_PRICE;
+    }
+
     private void validMoney(int money) {
-        if(money < 1000){
+        if (money < 1000) {
             throw new LottoMoneyException();
         }
     }
