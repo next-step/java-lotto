@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import lotto.asset.LottoConst;
 import lotto.utils.validator.LottoNoValidator;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * NOTE: Flyweight 패턴을 적용하여,
@@ -14,6 +14,9 @@ public class LottoNoPool {
 
     private LottoNoPool() {
         lottoNoPool = new HashMap<>();
+        for (int no = LottoConst.NO_MIN; no <= LottoConst.NO_MAX; no++) {
+            lottoNoPool.put(no, new LottoNo(no));
+        }
     }
 
     protected static LottoNoPool getInstance() {
@@ -22,13 +25,7 @@ public class LottoNoPool {
 
     protected LottoNo getLottoNo(int no) {
         LottoNoValidator.validateLottoNo(no);
-        return Optional.ofNullable(
-                lottoNoPool.get(no)
-        ).orElseGet(() -> {
-            LottoNo lottoNo = new LottoNo(no);
-            lottoNoPool.put(no, lottoNo);
-            return lottoNo;
-        });
+        return lottoNoPool.get(no);
     }
 
     private static class SingletonHelper {
