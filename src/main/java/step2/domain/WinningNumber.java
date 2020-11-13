@@ -12,10 +12,6 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningNumber(LotteryNumber lotteryNumber) {
-        this(lotteryNumber, null);
-    }
-
     public LotteryResult match(LotteryTickets tickets) {
         LotteryResult lotteryResult = new LotteryResult();
         for (LotteryNumber ticketNumber : tickets.listTicketNumbers()) {
