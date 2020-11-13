@@ -29,13 +29,15 @@ public class LotteryResult {
     }
 
     public float getRateOfReturn() {
-        Money totalAmount = result.values() //
-                .stream() //
-                .map(PRICE_LOTTERY::multiply) //
-                .reduce(Money::add) //
-                .orElse(Money.of(0));
+        Money totalAmount = getTotalAmount();
 
-        Money returnAmount = result.entrySet() //
+        Money returnAmount = getReturnAmount();
+
+        return (float) returnAmount.toInt() / totalAmount.toInt();
+    }
+
+    private Money getReturnAmount() {
+        return result.entrySet() //
                 .stream() //
                 .map(entry -> { //
                     Rank rank = entry.getKey();
@@ -43,7 +45,13 @@ public class LotteryResult {
                     return rank.getPrizeAmount().multiply(count);
                 }).reduce(Money::add) //
                 .orElse(Money.of(0));
+    }
 
-        return (float) returnAmount.toInt() / totalAmount.toInt();
+    private Money getTotalAmount() {
+        return result.values() //
+                .stream() //
+                .map(PRICE_LOTTERY::multiply) //
+                .reduce(Money::add) //
+                .orElse(Money.of(0));
     }
 }
