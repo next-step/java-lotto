@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -32,12 +34,18 @@ public class LotteryControllerTest {
     }
 
     @DisplayName("랭킹정보를 문자열로 반환한다.")
-    @Test
-    void toStringRank() {
+    @ParameterizedTest
+    @CsvSource(value = { //
+            "FIRST|6개 일치 (2000000000원)- 1개", //
+            "SECOND|5개 일치, 보너스 볼 일치(30000000원) - 1개", //
+            "THIRD|5개 일치 (1500000원)- 1개", //
+            "FORTH|4개 일치 (50000원)- 1개", //
+            "FIFTH|3개 일치 (5000원)- 1개"}, delimiter = '|')
+    void toStringRank(String rankName, String expected) {
         LotteryResult lotteryResult = new LotteryResult();
-        lotteryResult.add(3);
-        assertThat(ResultView.toStringRank(Rank.FORTH, lotteryResult)) //
-                .isEqualTo("3개 일치 (5000원)- 1개");
+        lotteryResult.add(Rank.valueOf(rankName));
+        assertThat(ResultView.toStringRank(Rank.valueOf(rankName), lotteryResult)) //
+                .isEqualTo(expected);
     }
 
     private void verifyInteractionSequence() {
