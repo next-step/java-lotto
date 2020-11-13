@@ -14,7 +14,11 @@ public class LotteryResult {
             throw new OutOfMatchingBoundaryException();
         }
 
-        result.compute(Rank.valueFrom(matchCount), this::addOrDefault);
+        add(Rank.valueFrom(matchCount));
+    }
+
+    public void add(Rank rank) {
+        result.compute(rank, this::addOrDefault);
     }
 
     private Integer addOrDefault(Rank rank, Integer value) {
