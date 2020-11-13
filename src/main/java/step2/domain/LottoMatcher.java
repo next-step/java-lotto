@@ -13,8 +13,8 @@ public class LottoMatcher {
 
     public LottoMatcher(String input) {
 
-        validEmpty(input);
         validNull(input);
+        validEmpty(input);
 
         lottoNumbers = Arrays.stream(separateLottoNumber(input))
                 .map(s -> Integer.parseInt(s.trim()))
