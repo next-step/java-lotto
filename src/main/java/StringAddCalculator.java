@@ -2,8 +2,9 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
     public static Number splitAndSum(String sentence) {
-        if (!validateSentence(sentence))
+        if (!validateSentence(sentence)) {
             return new Number(0);
+        }
 
         return calculate(sentence);
     }
@@ -25,8 +26,9 @@ public class StringAddCalculator {
     }
 
     private static boolean validateSentence(String sentence) {
-        if (checkNull(sentence))
+        if (checkNull(sentence)) {
             return false;
+        }
 
         return !checkEmptyString(sentence);
     }

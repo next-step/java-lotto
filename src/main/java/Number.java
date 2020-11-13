@@ -10,8 +10,9 @@ public class Number {
     public Number(String numStr) {
         this.number = Integer.parseInt(numStr);
 
-        if (isNegative(number))
+        if (isNegative(number)) {
             throw new RuntimeException("숫자가 음수입니다.");
+        }
     }
 
     private static boolean isNegative(int number) {
@@ -24,8 +25,12 @@ public class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Number number1 = (Number) o;
         return number == number1.number;
     }

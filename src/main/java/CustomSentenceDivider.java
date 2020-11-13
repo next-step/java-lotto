@@ -11,15 +11,17 @@ public class CustomSentenceDivider {
     }
 
     public String getSplitter() {
-        if (!isCustomExpression())
+        if (!isCustomExpression()) {
             return null;
+        }
 
         return matcher.group(1);
     }
 
     public String getExpressionString() {
-        if (!isCustomExpression())
+        if (!isCustomExpression()) {
             return null;
+        }
 
         return matcher.group(2);
     }

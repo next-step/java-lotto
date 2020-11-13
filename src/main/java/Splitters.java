@@ -21,8 +21,12 @@ public class Splitters {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Splitters splitters1 = (Splitters) o;
         return Objects.equals(splitters, splitters1.splitters);
     }
