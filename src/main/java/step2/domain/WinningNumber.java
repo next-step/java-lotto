@@ -19,13 +19,23 @@ public class WinningNumber {
     public LotteryResult match(LotteryTickets tickets) {
         LotteryResult lotteryResult = new LotteryResult();
         for (LotteryNumber ticketNumber : tickets.listTicketNumbers()) {
-            lotteryResult.add(toRank(ticketNumber.getMatched(winningNumber)));
+            lotteryResult.add(toRank(ticketNumber.getMatched(winningNumber), ticketNumber));
         }
 
         return lotteryResult;
     }
 
-    private Rank toRank(int matched) {
+    private Rank toRank(int matched, LotteryNumber lotteryNumber) {
+        if (matched == 5 && hasBonusNumber(lotteryNumber)) {
+            return Rank.SECOND;
+        }
+        if (matched == 5) {
+            return Rank.THIRD;
+        }
         return Rank.valueFrom(matched);
+    }
+
+    private boolean hasBonusNumber(LotteryNumber lotteryNumber) {
+        return lotteryNumber.contains(bonusNumber);
     }
 }

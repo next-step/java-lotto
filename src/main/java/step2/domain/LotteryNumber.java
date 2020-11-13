@@ -31,4 +31,8 @@ public class LotteryNumber {
     public String toString() {
         return numbers.toString();
     }
+
+    public boolean contains(Integer bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }
