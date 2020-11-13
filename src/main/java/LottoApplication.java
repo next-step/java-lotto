@@ -31,5 +31,6 @@ public class LottoApplication {
         LottoCalculator lottoCalculator= new LottoCalculator(lottoNumbers);
         LottoResult lottoResult = lottoCalculator.calculate(winningNumbers);
 
+        ResultView.printLottoResult(lottoResult);
     }
 }
