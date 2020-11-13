@@ -9,14 +9,6 @@ public class LotteryResult {
 
     private final Map<Rank, Integer> result = new HashMap<>();
 
-    public void add(int matchCount) {
-        if (matchCount < 0) {
-            throw new OutOfMatchingBoundaryException();
-        }
-
-        add(Rank.valueFrom(matchCount));
-    }
-
     public void add(Rank rank) {
         result.compute(rank, this::addOrDefault);
     }
