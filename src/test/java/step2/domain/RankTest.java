@@ -10,7 +10,14 @@ class RankTest {
     @DisplayName("보너스 넘버가 있는경우 랭킹 변환한다")
     @ParameterizedTest
     @CsvSource({"6,FIRST", "5,SECOND", "4,FORTH", "3,FIFTH"})
-    void valueWithBonusNumberFrom(int matchCount, String rankName) {
+    void valueWithBonusNumber(int matchCount, String rankName) {
         assertThat(Rank.valueWithBonusNumberFrom(matchCount)).isEqualTo(Rank.valueOf(rankName));
+    }
+
+    @DisplayName("보너스 넘버가 없는경우 랭킹 변환한다")
+    @ParameterizedTest
+    @CsvSource({"6,FIRST", "5,THIRD", "4,FORTH", "3,FIFTH"})
+    void valueWithoutBonusNumber(int matchCount, String rankName) {
+        assertThat(Rank.valueFrom(matchCount)).isEqualTo(Rank.valueOf(rankName));
     }
 }
