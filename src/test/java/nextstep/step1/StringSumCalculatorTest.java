@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 public class StringSumCalculatorTest {
 	private StringSumCalculator underTest = new StringSumCalculator();
@@ -42,10 +43,12 @@ public class StringSumCalculatorTest {
 				.withMessage("input값은 양수만 가능합니다.");
 	}
 
-	@ParameterizedTest
+	@Test
 	@DisplayName("커스텀 구분자를 지정하여 합을 구할수 있다.")
-	@CsvSource(value = {"//;\\n1;2;3=6","//@\\n1@2@3", "//$\\n1$2$3=6", "//%\\n1%2%3%4%5%6=21"}, delimiter = '=')
-	public void customDelimiterTest(String input, int expected) {
-		assertThat(underTest.sum(input)).isEqualTo(expected);
+	public void customDelimiterTest() {
+		assertThat(underTest.sum("//;\n1;2;3")).isEqualTo(6);
+		assertThat(underTest.sum("//&\n1&2&3&4")).isEqualTo(10);
+		assertThat(underTest.sum("//%\n1%2%3%4%5")).isEqualTo(15);
+		assertThat(underTest.sum("//@\n1@2@3@4@5@6")).isEqualTo(21);
 	}
 }
