@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.asset.ResultViewConst;
-import lotto.domain.Jackpot;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
@@ -14,7 +12,9 @@ public class ResultView {
     }
 
     public static void printNumOfLottos(int numOfLottos) {
-        println(numOfLottos + ResultViewConst.NUM_OF_LOTTOS_MSG);
+        println(
+                ResultMessage.getNumOfLottosMsg(numOfLottos)
+        );
     }
 
     public static void printLottos(Lottos lottos) {
@@ -22,11 +22,8 @@ public class ResultView {
     }
 
     public static void printStatistics(Result result, Money purchaseMoney) {
-        println(ResultViewConst.JACKPOT_STATISTICS_MSG);
-        for (Jackpot jackpot : Jackpot.values()) {
-            println(ResultViewConst.JACKPOT_MSG(jackpot, result.getNumOfLotto(jackpot)));
-        }
-        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
-        println(ResultViewConst.RATE_OF_RETURN_MSG(rateOfReturn));
+        println(
+                ResultMessage.getJackpotStatistics(result, purchaseMoney)
+        );
     }
 }

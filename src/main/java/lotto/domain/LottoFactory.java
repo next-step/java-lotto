@@ -28,6 +28,7 @@ public class LottoFactory {
     }
 
     public static Lotto createLotto(String lottoStr) {
+        LottoValidator.validateLottoStr(lottoStr);
         return createLottoFromStrList(
                 Splitter.splitLottoStr(lottoStr)
         );
