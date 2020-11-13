@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class StringSumCalculator {
+	private static final String ERROR_MESSGAE = "input값은 양수만 가능합니다.";
+
 	public int sum(String inputString) {
 		if (inputString == null || inputString.isEmpty()) {
 			return 0;
@@ -33,7 +35,7 @@ public class StringSumCalculator {
 
 	private void validate(String[] inputStrings) {
 		if (inputStrings.length == 0) {
-			throw new RuntimeException("input값은 양수만 가능합니다.");
+			throw new RuntimeException(ERROR_MESSGAE);
 		}
 	}
 
@@ -41,11 +43,11 @@ public class StringSumCalculator {
 		try {
 			int positiveNumber = Integer.parseInt(input);
 			if (positiveNumber < 0) {
-				throw new RuntimeException("input값은 양수만 가능합니다.");
+				throw new RuntimeException(ERROR_MESSGAE);
 			}
 			return positiveNumber;
 		} catch (NumberFormatException ex) {
-			throw new RuntimeException("input값은 양수만 가능합니다.");
+			throw new RuntimeException(ERROR_MESSGAE);
 		}
 	}
 
