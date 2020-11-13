@@ -10,7 +10,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
 
     }
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public int lottoNumbersSize() {
+        return lottoNumbers.size();
     }
 }

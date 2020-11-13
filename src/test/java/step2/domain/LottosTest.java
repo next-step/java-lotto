@@ -21,11 +21,11 @@ class LottosTest {
     }
 
     private static Stream<Arguments> createLotto() {
-        return Stream.of(Arguments.of(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))
-                ),
+        return Stream.of(
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))),
                 Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
