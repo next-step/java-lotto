@@ -16,7 +16,7 @@ import java.util.Objects;
  * LottoNo 과 LottoNoPool 에 직접 접근하는 일이 없어야 한다.
  */
 public class Lotto {
-    private List<LottoNo> lottoNos;
+    private final List<LottoNo> lottoNos;
 
     protected Lotto() {
         lottoNos = new LinkedList<>();

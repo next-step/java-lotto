@@ -6,7 +6,7 @@ import lotto.utils.validator.MoneyValidator;
 import java.util.Objects;
 
 public class Money {
-    private int money;
+    private final int money;
 
     public Money(int money) {
         MoneyValidator.validateMoney(money);

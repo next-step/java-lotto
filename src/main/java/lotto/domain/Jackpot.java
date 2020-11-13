@@ -6,8 +6,8 @@ public enum Jackpot {
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
-    private int numOfCorrected;
-    private int prizeMoney;
+    private final int numOfCorrected;
+    private final int prizeMoney;
 
     Jackpot(int numOfCorrected, int prizeMoney) {
         this.numOfCorrected = numOfCorrected;

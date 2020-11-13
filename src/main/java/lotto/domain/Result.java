@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class Result {
-    private HashMap<Jackpot, Integer> result;
+    private final HashMap<Jackpot, Integer> result;
 
     protected Result() {
         result = new HashMap<>();
@@ -28,7 +28,7 @@ public class Result {
         }
         return new Money(profit);
     }
-    
+
     public double getRateOfReturn(Money purchaseMoney) {
         return getProfit().divide(purchaseMoney);
     }

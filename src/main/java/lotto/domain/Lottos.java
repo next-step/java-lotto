@@ -6,7 +6,7 @@ import java.util.Objects;
 
 // NOTE: Lotto 의 일급 컬렉션
 public class Lottos {
-    List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos() {
         lottos = new LinkedList<>();

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
 
-    Integer lottoNo;
+    private final int lottoNo;
 
     /**
      * NOTE: domain 바깥에서 LottoNo 객체가 생성되기를 원치 않으므로,
@@ -19,7 +19,7 @@ public class LottoNo implements Comparable<LottoNo> {
 
     @Override
     public String toString() {
-        return lottoNo.toString();
+        return Integer.toString(lottoNo);
     }
 
     @Override

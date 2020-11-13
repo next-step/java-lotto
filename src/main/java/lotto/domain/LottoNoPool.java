@@ -11,7 +11,7 @@ import java.util.Map;
  * 불필요한 LottoNo 생성을 막는다.
  */
 public class LottoNoPool {
-    private Map<Integer, LottoNo> lottoNoPool;
+    private final Map<Integer, LottoNo> lottoNoPool;
 
     private LottoNoPool() {
         lottoNoPool = new HashMap<>();
