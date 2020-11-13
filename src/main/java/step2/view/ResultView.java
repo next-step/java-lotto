@@ -16,7 +16,7 @@ public class ResultView {
     }
 
     public void responseTickets(LotteryTickets lotteryTickets) {
-        lotteryTickets.getNumbers().forEach(System.out::println);
+        lotteryTickets.listTicketNumbers().forEach(System.out::println);
         System.out.println();
     }
 

@@ -12,7 +12,7 @@ public class WinningNumber {
 
     public LotteryResult match(LotteryTickets tickets) {
         LotteryResult lotteryResult = new LotteryResult();
-        for (LotteryNumber ticketNumber : tickets.getNumbers()) {
+        for (LotteryNumber ticketNumber : tickets.listTicketNumbers()) {
             lotteryResult.add(ticketNumber.getMatched(winningNumber));
         }
 
