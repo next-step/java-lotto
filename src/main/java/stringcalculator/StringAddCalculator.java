@@ -5,6 +5,9 @@ public class StringAddCalculator {
   private static final int DEFAULT_RETURN_VALUE = 0;
   private static final String DELIMITER_REGEX = "[,:]";
 
+  private StringAddCalculator(){
+  }
+
   public static int splitAndSum(String input) {
 
     int result = 0;
