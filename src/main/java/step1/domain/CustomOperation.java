@@ -3,6 +3,7 @@ package step1.domain;
 import static step1.constans.Message.NOT_FOUND_PATTEN;
 import static step1.constans.RxPattern.CUSTOM_DELIMITER_INPUT_FINDER_PATTERN;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import step1.domain.model.Numbers;
@@ -25,12 +26,11 @@ public class CustomOperation implements Operation {
   }
 
   private String extractSpecificGroup(Matcher patternMatcher, int groupNumber) {
-
-    if (patternMatcher.find()) {
-      return patternMatcher.group(groupNumber);
-    } else {
-      throw new AdderException(NOT_FOUND_PATTEN);
+    Optional<String> value = Optional.empty();
+    while (patternMatcher.find()) {
+      value = Optional.of(patternMatcher.group(groupNumber));
     }
+    return value.orElseThrow(() -> new AdderException(NOT_FOUND_PATTEN));
   }
 
   @Override
