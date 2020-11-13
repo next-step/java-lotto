@@ -16,8 +16,8 @@ class LottoRankingTest {
     @DisplayName("로또 랭킹을 테스트 합니다.")
     @ParameterizedTest
     @MethodSource
-    void createLottoRank(LottoRank lottoRank ){
-        assertThat(lottoRank);
+    void createLottoRank( ){
+        assertThat(new LottoRank().matchLottoRank());
     }
 
     private static Stream<Arguments> provideLottoRank(){
