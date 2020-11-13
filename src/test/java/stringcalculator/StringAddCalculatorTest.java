@@ -37,8 +37,9 @@ class StringAddCalculatorTest {
           "3,3:6", // 1자릿수 일반 케이스
           "0,10:10", "10,0:10", // 2자릿수 엣지 케이스
           "12,34:46", // 2자릿수 일반 케이스
+          "0,0,0:0", "1,0,0:1", "0,1,0:1", "0,0,1:1", // 3자릿수 케이스
       }, delimiter = ':')
-  @DisplayName(",(comma) 를 delimiter 로 할 때의 결괏값")
+  @DisplayName(",(콤) 를 delimiter 로 할 때의 결괏값")
   public void commaDelimiter(String input, int expected) {
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
@@ -49,9 +50,20 @@ class StringAddCalculatorTest {
       "3:5,8",
       "0:10,10", "10:0,10",
       "12:34,46",
+      "0:0:0,0", "1:0:0,1", "0:1:0,1", "0:0:1,1",
   }, delimiter = ',')
   @DisplayName(":(콜론) 을 delimiter 로 할 때의 결괏값")
   public void colonDelimiter(String input, int expected) {
+    int result = StringAddCalculator.splitAndSum(input);
+    assertThat(result).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"0,0:0=0", "0:0,0=0",
+  "0:1,1=2", "0,1:0=1", "1:0,0=1",
+  "12,34:56:78=180"}, delimiter='=')
+  @DisplayName("콤마(,), 콜론(:) 복합 케이스")
+  public void complexDelimiterCase(String input, int expected){
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
   }
