@@ -19,20 +19,17 @@ public class WinningNumber {
     public LotteryResult match(LotteryTickets tickets) {
         LotteryResult lotteryResult = new LotteryResult();
         for (LotteryNumber ticketNumber : tickets.listTicketNumbers()) {
-            lotteryResult.add(toRank(ticketNumber.getMatched(winningNumber), ticketNumber));
+            lotteryResult.add(toRank(ticketNumber));
         }
 
         return lotteryResult;
     }
 
-    private Rank toRank(int matched, LotteryNumber lotteryNumber) {
-        if (matched == 5 && hasBonusNumber(lotteryNumber)) {
-            return Rank.SECOND;
+    private Rank toRank(LotteryNumber lotteryNumber) {
+        if (hasBonusNumber(lotteryNumber)) {
+            return Rank.valueWithBonusNumberFrom(lotteryNumber.getMatched(winningNumber));
         }
-        if (matched == 5) {
-            return Rank.THIRD;
-        }
-        return Rank.valueFrom(matched);
+        return Rank.valueFrom(lotteryNumber.getMatched(winningNumber));
     }
 
     private boolean hasBonusNumber(LotteryNumber lotteryNumber) {
