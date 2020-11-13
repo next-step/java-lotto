@@ -39,10 +39,18 @@ public class ResultView {
     }
 
     public static String toStringRank(Rank rank, LotteryResult lotteryResult) {
-        return String.format("%d개 일치 (%d원)- %d개", //
+
+        return String.format(toFormat(rank), //
                 rank.getMatchingCount(),  //
                 rank.getPrizeAmount().toInt(), //
                 lotteryResult.getMatchResult(rank));
+    }
+
+    private static String toFormat(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+        }
+        return "%d개 일치 (%d원)- %d개";
     }
 
     public void responseRateOfReturn(LotteryResult lotteryResult) {
