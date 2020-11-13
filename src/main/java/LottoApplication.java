@@ -1,4 +1,5 @@
 import domain.LottoCalculator;
+import domain.LottoResult;
 import domain.Money;
 import ui.InputView;
 import ui.ResultView;
@@ -11,10 +12,10 @@ import java.util.stream.IntStream;
 
 public class LottoApplication {
 
-
     public static void main(String[] args) throws Exception {
-        Money buyingAmount = new Money(InputView.askMoneyAmount());
-        Money lottoPrice = new Money(1000);
+        Money buyingAmount = Money.of(InputView.askMoneyAmount());
+        Money lottoPrice = Money.of(1000L);
+
         List<List<Integer>> lottoNumbers = new ArrayList<>();
         List<Integer> oneToFortyFive = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
 
@@ -23,13 +24,12 @@ public class LottoApplication {
             lottoNumbers.add(oneToFortyFive.stream().limit(6).sorted().collect(Collectors.toList()));
         }
 
+        ResultView.printBuyingLottos(lottoNumbers);
+
+        List<Integer> winningNumbers = InputView.askWinningNumbers();
+
         LottoCalculator lottoCalculator= new LottoCalculator(lottoNumbers);
+        LottoResult lottoResult = lottoCalculator.calculate(winningNumbers);
 
-        ResultView.print(lottoCalculator.getLottos());
-
-        List<Integer> winningNumbers = InputView.askWinningNumbers().stream()
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
     }
 }

@@ -1,8 +1,6 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -11,11 +9,14 @@ public class Lotto {
     public Lotto(List<Integer> sixNumbers) {
         Objects.requireNonNull(sixNumbers);
         this.sixNumbers = sixNumbers;
-
     }
 
     @Override
     public String toString() {
         return sixNumbers.toString();
+    }
+
+    public Long countMatching(List<Integer> winningNumbers) {
+        return winningNumbers.stream().filter(sixNumbers::contains).count();
     }
 }

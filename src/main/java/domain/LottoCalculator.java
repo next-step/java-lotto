@@ -9,12 +9,8 @@ public class LottoCalculator {
         lottos = new Lottos(lottoNumbers);
     }
 
-    public Lottos getLottos(){
-        return lottos;
+    public LottoResult calculate(List<Integer> winningNumbers) throws Exception {
+        return lottos.makeStatistics(winningNumbers);
     }
-
-    public LottoResult calculate() {
-      return new LottoResult();//  lottos.countMatchingNumber();
-    };
 
 }

@@ -3,9 +3,13 @@ package domain;
 import java.util.Objects;
 
 public class Money {
-    private int value;
+    private Long value;
 
-    public Money(int value) throws Exception {
+    public static Money of(Long value) throws Exception {
+        return new Money(value);
+    }
+
+    private Money(Long value) throws Exception {
         if(value < 0) {
             throw new Exception();
         }
@@ -13,20 +17,24 @@ public class Money {
         this.value = value;
     }
 
-    public int dividedBy(Money price) throws Exception {
-        if(price.isLessThanOrEqualsZero()) {
+    public Money plus(Money money) throws Exception {
+        return Money.of(value + money.value);
+    }
+
+    public Money multiply(Long number) throws Exception{
+        return new Money(value * number);
+    }
+
+    public Double dividedBy(Money money) throws Exception {
+        if(money.isLessThanOrEqualsZero()) {
             throw new Exception();
         }
 
-        return value / price.value;
+        return Double.valueOf(value) / Double.valueOf(money.value);
     }
 
     private boolean isLessThanOrEqualsZero() {
-        return this.value <= 0;
-    }
-
-    public boolean isGreaterThan(Money money){
-        return this.value > money.value;
+        return this.value <= 0L;
     }
 
     @Override
