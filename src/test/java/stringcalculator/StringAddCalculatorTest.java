@@ -60,10 +60,10 @@ class StringAddCalculatorTest {
 
   @ParameterizedTest
   @CsvSource(value = {"0,0:0=0", "0:0,0=0",
-  "0:1,1=2", "0,1:0=1", "1:0,0=1",
-  "12,34:56:78=180"}, delimiter='=')
+      "0:1,1=2", "0,1:0=1", "1:0,0=1",
+      "12,34:56:78=180"}, delimiter = '=')
   @DisplayName("콤마(,), 콜론(:) 복합 케이스")
-  public void complexDelimiterCase(String input, int expected){
+  public void complexDelimiterCase(String input, int expected) {
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
   }
