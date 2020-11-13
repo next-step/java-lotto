@@ -38,7 +38,14 @@ public class StringSumCalculatorTest {
 	@DisplayName("더할 값이 음수 경우 예외를 던진다.")
 	public void invalidatePositiveNumberTest() {
 		Assertions.assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> underTest.sum("-2,3"))
+				.isThrownBy(() -> underTest.sum("-1,2,3"))
 				.withMessage("input값은 양수만 가능합니다.");
+	}
+
+	@ParameterizedTest
+	@DisplayName("커스텀 구분자를 지정하여 합을 구할수 있다.")
+	@CsvSource(value = {"//;\\n1;2;3=6","//@\\n1@2@3", "//$\\n1$2$3=6", "//%\\n1%2%3%4%5%6=21"}, delimiter = '=')
+	public void customDelimiterTest(String input, int expected) {
+		assertThat(underTest.sum(input)).isEqualTo(expected);
 	}
 }
