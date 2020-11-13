@@ -47,12 +47,7 @@ public class Lotto {
             throw DuplicatedLottoException.getInstance();
         }
     }
-
-    /**
-     * FIXME: 타입으로 인한 중복된 로직 제거
-     * int 와 String 타입이 다름으로 인해 발생하는
-     * 중복되는 로직을 제거할 방법은 없을까?
-     */
+    
     private LottoNo getLottoNo(int no) {
         LottoNoPool pool = LottoNoPool.getInstance();
         return pool.getLottoNo(no);
