@@ -24,17 +24,25 @@ import static step3.Constant.ERROR_OUT_RANGE_NUMBER;
 public class LottoBonusNumberTest {
 
 
-    @DisplayName("2등 보너스 볼당첨 테스트")
+    @DisplayName("2등 보너스 볼 당첨 테스트")
     @ParameterizedTest
     @MethodSource("provideLottoTicketAndWinningNumbers")
-    public void matchBonusNumber(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+    public void matchBonusNumber(LottoTicket lottoTicket, WinningNumbers winningNumbers, WinningType resultType) {
         WinningType winningStatistics = winningNumbers.getWinningStatistics(lottoTicket);
-        assertThat(winningStatistics).isEqualTo(WinningType.RANK_TWO_BONUS);
+        assertThat(winningStatistics).isEqualTo(resultType);
     }
 
     private static Stream<Arguments> provideLottoTicketAndWinningNumbers() {
         return Stream.of(
-                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7)), WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 7))
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7)),
+                        WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 7),
+                        WinningType.RANK_TWO_BONUS),
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 7)),
+                        WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 7),
+                        WinningType.RANK_THREE),
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 10)),
+                        WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 8),
+                        WinningType.RANK_TWO)
         );
     }
 
