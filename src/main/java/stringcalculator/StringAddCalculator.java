@@ -3,7 +3,7 @@ package stringcalculator;
 public class StringAddCalculator {
 
   private static final int DEFAULT_RETURN_VALUE = 0;
-  private static final String DELIMITER = ",";
+  private static final String DELIMITER_REGEX = "[,:]";
 
   public static int splitAndSum(String input) {
 
@@ -13,7 +13,7 @@ public class StringAddCalculator {
       return DEFAULT_RETURN_VALUE;
     }
 
-    String[] tokenizedInputs = input.split(DELIMITER);
+    String[] tokenizedInputs = input.split(DELIMITER_REGEX);
 
     for (String tokenizedInput : tokenizedInputs) {
       result += castToInteger(tokenizedInput);

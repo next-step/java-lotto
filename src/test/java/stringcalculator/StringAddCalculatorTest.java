@@ -32,9 +32,26 @@ class StringAddCalculatorTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"1,2:3", "0,1:1", "0,10:10", "1,10:11"}, delimiter = ':')
+  @CsvSource(
+      value = {"0,0:0", "0,1:1", "1,0:1", // 1자릿수 엣지 케이스
+          "3,3:6", // 1자릿수 일반 케이스
+          "0,10:10", "10,0:10", // 2자릿수 엣지 케이스
+          "12,34:46", // 2자릿수 일반 케이스
+      }, delimiter = ':')
   @DisplayName(",(comma) 를 delimiter 로 할 때의 결괏값")
   public void commaDelimiter(String input, int expected) {
+    int result = StringAddCalculator.splitAndSum(input);
+    assertThat(result).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"0:0,0", "0:1,1", "1:0,1",
+      "3:5,8",
+      "0:10,10", "10:0,10",
+      "12:34,46",
+  }, delimiter = ',')
+  @DisplayName(":(콜론) 을 delimiter 로 할 때의 결괏값")
+  public void colonDelimiter(String input, int expected) {
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
   }
