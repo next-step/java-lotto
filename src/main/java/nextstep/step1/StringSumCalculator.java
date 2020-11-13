@@ -9,28 +9,25 @@ public class StringSumCalculator {
 		if (inputString == null || inputString.isEmpty()) {
 			return 0;
 		}
-		int sumResult = getSumByCustomDelimeter(inputString);
-		if (sumResult > 0) {
-			return sumResult;
-		}
-		String[] inputStrings = inputString.split(",|:");
-		return getSum(inputStrings);
+		return getSumByDelimeter(inputString);
 	}
 
-	private int getSumByCustomDelimeter(String inputString) {
+	private int getSumByDelimeter(String inputString) {
 		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
 			String[] inputStrings = matcher.group(2).split(customDelimiter);
 			return getSum(inputStrings);
 		}
-		return 0;
+		String[] inputStrings = inputString.split(",|:");
+		return getSum(inputStrings);
 	}
 
 	private int getSum(String[] inputStrings) {
 		return Stream.of(inputStrings)
-				.mapToInt(input -> getPositiveNumber(input))
-				.sum();
+				.map(this::getPositiveNumber)
+				.reduce(Integer::sum)
+				.orElse(0);
 	}
 
 	private int getPositiveNumber(String input) {
