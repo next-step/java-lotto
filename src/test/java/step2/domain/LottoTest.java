@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2.exception.LottoCountBoundException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +34,8 @@ class LottoTest {
     private static Stream<Arguments> createExceptionLotto() {
         return Stream.of(
                 Arguments.of(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5))),
+                        Arrays.asList(1, 2, 3, 4, 5)),
                 Arguments.of(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7))));
+                        Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
     }
 }
