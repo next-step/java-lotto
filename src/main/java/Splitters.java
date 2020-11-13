@@ -4,11 +4,13 @@ import java.util.Objects;
 
 public class Splitters {
     public static final String DELIMITER = "|";
+    public static final String DEFAULT_SPLITTER_REST = ",";
+    public static final String DEFAULT_SPLITTER_COLON = ":";
     private List<String> splitters;
 
 
     public Splitters() {
-        splitters = Arrays.asList(",", ":");
+        splitters = Arrays.asList(DEFAULT_SPLITTER_REST, DEFAULT_SPLITTER_COLON);
     }
 
     public Splitters(List<String> splitters) {
