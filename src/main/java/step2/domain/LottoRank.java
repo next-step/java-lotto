@@ -21,10 +21,10 @@ public enum LottoRank {
     }
 
     public static int matchLottoRankPrice(int match) {
-        return Stream.of(MISS, FORTH, THIRD, SECOND, FIRST)
+        return Stream.of(FORTH, THIRD, SECOND, FIRST)
                 .filter(ranking -> ranking.match == match)
                 .findFirst()
-                .orElseThrow(NotMatchRankException::new)
+                .orElse(MISS)
                 .getMatchPrice();
     }
 
