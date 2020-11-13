@@ -8,7 +8,7 @@ import java.util.Map;
 public class Lotto {
     private Integer price;
     private Integer[] winningNumber;
-    private final Map<Rank, Integer> prizeMap = new HashMap<>();
+    private final Map<Rank, Long> prizeMap = new HashMap<>();
     private LottoConstraint constraint;
 
     public void setPrice(Integer price) {
@@ -27,11 +27,11 @@ public class Lotto {
         return winningNumber;
     }
 
-    public Map<Rank, Integer> getPrizeMap() {
+    public Map<Rank, Long> getPrizeMap() {
         return prizeMap;
     }
 
-    public void addToPrizeMap(Rank rank, Integer prize) {
+    public void addToPrizeMap(Rank rank, Long prize) {
         prizeMap.put(rank, prize);
     }
 

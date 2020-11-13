@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     void testGetPrizeMap(){
         Lotto lotto = new Lotto();
-        int first_prize = 2000000000;
+        Long first_prize = 2000000000L;
         lotto.addToPrizeMap(Rank.FIRST, first_prize);
         assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(first_prize);
     }
