@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, Money.of(2_000_000_000)), //
-    SECOND(5, Money.of(1_500_000)), //
-    THIRD(4, Money.of(50_000)),  //
-    FORTH(3, Money.of(5_000)),  //
+    SECOND(5, Money.of(30_000_000)), //
+    THIRD(5, Money.of(1_500_000)), //
+    FORTH(4, Money.of(50_000)),  //
+    FIFTH(3, Money.of(5_000)),  //
     MISS(0, Money.of(0));
 
     private final int matchingCount;

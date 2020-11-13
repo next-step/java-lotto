@@ -22,7 +22,7 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
+        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
     }
 
     @DisplayName("match 결과를 받을 수 있다.")
@@ -69,9 +69,9 @@ public class WinningNumberTest {
     private static Stream<Arguments> matchingCountProvider() {
         //@formatter:off
         return Stream.of(
-                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), FORTH),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), THIRD),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), SECOND),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), FIFTH),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), FORTH),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), THIRD),
                 Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 6), FIRST)
         );
         //@formatter:on
