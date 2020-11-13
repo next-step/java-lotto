@@ -30,8 +30,8 @@ class LottoTest {
             lottoNos2[i] = i + 1 + size - count;
         }
 
-        Lotto lotto1 = LottoFactory.createLottoFromIntList(Arrays.asList(lottoNos1));
-        Lotto lotto2 = LottoFactory.createLottoFromIntList(Arrays.asList(lottoNos2));
+        Lotto lotto1 = LottoFactory.createLotto(Arrays.asList(lottoNos1));
+        Lotto lotto2 = LottoFactory.createLotto(Arrays.asList(lottoNos2));
 
         assertThat(lotto1.countSameNo(lotto2))
                 .isEqualTo(count);

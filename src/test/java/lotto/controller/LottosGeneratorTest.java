@@ -25,12 +25,12 @@ class LottosGeneratorTest {
     void setUp() {
         dummyLottoNos1 = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
         dummyLottoNos2 = Arrays.asList(new Integer[]{45, 40, 35, 30, 25, 20});
-        dummyStrategy1 = () -> LottoFactory.createLottoFromIntList(dummyLottoNos1);
-        dummyStrategy2 = () -> LottoFactory.createLottoFromIntList(dummyLottoNos2);
+        dummyStrategy1 = () -> LottoFactory.createLotto(dummyLottoNos1);
+        dummyStrategy2 = () -> LottoFactory.createLotto(dummyLottoNos2);
     }
 
     private Lottos generateExpectedLottos(List<Integer> dummyLottoNos, int numOfLottos) {
-        Lotto dummyLotto = LottoFactory.createLottoFromIntList(dummyLottoNos);
+        Lotto dummyLotto = LottoFactory.createLotto(dummyLottoNos);
         Lottos expectedLottos = new Lottos();
         for (int i = 0; i < numOfLottos; i++) {
             expectedLottos.add(dummyLotto);

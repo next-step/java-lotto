@@ -15,7 +15,7 @@ public class LottoValidator {
         validateLottoNoStrList(lottoNos);
     }
 
-    public static void validateLottoNoIntList(List<Integer> lottoNos) {
+    public static void validateLottoNos(List<Integer> lottoNos) {
         int numOfLottoNo = lottoNos.size();
         validateNumOfLottoNo(numOfLottoNo);
         for (int lottoNo : lottoNos) {
@@ -23,6 +23,7 @@ public class LottoValidator {
         }
     }
 
+    // FIXME: validateLottoNos 오버로딩
     public static void validateLottoNoStrList(List<String> lottoNos) {
         int numOfLottoNo = lottoNos.size();
         validateNumOfLottoNo(numOfLottoNo);

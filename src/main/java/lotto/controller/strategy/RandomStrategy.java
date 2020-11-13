@@ -25,7 +25,7 @@ public class RandomStrategy implements GenerateStrategy {
     @Override
     public Lotto generateLotto() {
         List<Integer> lottoNos = shuffler.getLottoNos();
-        return LottoFactory.createLottoFromIntList(lottoNos);
+        return LottoFactory.createLotto(lottoNos);
     }
 
     private static class SingletonHelper {

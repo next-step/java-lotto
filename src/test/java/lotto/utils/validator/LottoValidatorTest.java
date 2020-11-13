@@ -112,7 +112,7 @@ class LottoValidatorTest {
     @Test
     @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
     void validateLottoNoIntList_success() {
-        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
+        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNos(Arrays.asList(new Integer[]{
                 1, 2, 3, 4, 5, 6
         })));
     }
@@ -121,7 +121,7 @@ class LottoValidatorTest {
     @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
     void validateLottoNoIntList_range() {
         assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNos(Arrays.asList(new Integer[]{
                         -1, -2, -3, 46, 47, 48
                 })))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
@@ -131,7 +131,7 @@ class LottoValidatorTest {
     @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
     void validateLottoNoIntList_badNumOfLottoNo() {
         assertThatExceptionOfType(BadNumOfLottoNoException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNos(Arrays.asList(new Integer[]{
                         46, 0, -1
                 })))
                 .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
