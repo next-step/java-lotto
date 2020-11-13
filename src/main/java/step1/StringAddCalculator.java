@@ -2,6 +2,9 @@ package step1;
 
 class StringAddCalculator {
 
+    public static final String PLEASE_ENTER_A_STRING = "문자열을 입력하시오.";
+    public static final String NOT_A_STRING_OF_NUMERIC = "숫자로 변환가능한 문자가 아닙니다. : %s";
+    public static final String CANNOT_ACCEPT_A_NEGATIVE_NUMBER = "음수는 처리할 수 없습니다. : %d";
     private final String defaultDelimiterString;
 
     public StringAddCalculator() {
@@ -14,7 +17,7 @@ class StringAddCalculator {
 
     public Long calculate(String formula) {
         if (formula == null) {
-            throw new IllegalArgumentException("문자열을 입력하시오.");
+            throw new IllegalArgumentException(PLEASE_ENTER_A_STRING);
         }
 
         return sum(new FormulaParser(formula).parse(defaultDelimiterString));
@@ -44,13 +47,13 @@ class StringAddCalculator {
         try {
             return Long.valueOf(formula);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(String.format("숫자로 변환가능한 문자가 아닙니다. : %s", formula), e);
+            throw new RuntimeException(String.format(NOT_A_STRING_OF_NUMERIC, formula), e);
         }
     }
 
     private void ensurePositiveNumber(Long number) {
         if (number < 0L) {
-            throw new RuntimeException(String.format("음수는 처리할 수 없습니다. : %d", number));
+            throw new RuntimeException(String.format(CANNOT_ACCEPT_A_NEGATIVE_NUMBER, number));
         }
     }
 
