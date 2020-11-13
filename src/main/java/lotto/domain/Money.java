@@ -24,7 +24,7 @@ public class Money {
     }
 
     public double divide(Money divider) {
-        return money / divider.money;
+        return divide(divider.money);
     }
 
     @Override
