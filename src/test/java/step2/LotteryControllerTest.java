@@ -47,6 +47,7 @@ public class LotteryControllerTest {
                         "responseTicketCount->" +
                         "responseTickets->" +
                         "requestLastWeekLotteryNumber->" +
+                        "requestBonusNumber->" +
                         "responseWinningStat->" +
                         "responseRateOfReturn");
         //@formatter:on
