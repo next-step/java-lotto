@@ -21,10 +21,6 @@ public class LotteryNumber {
         }
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers;
-    }
-
     public int getMatched(LotteryNumber other) {
         Set<Integer> intersection = new HashSet<>(numbers);
         intersection.retainAll(other.numbers);

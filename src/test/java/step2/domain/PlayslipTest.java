@@ -41,15 +41,4 @@ public class PlayslipTest {
         List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
-
-    @DisplayName("번호셋은 6개의 번호를 가지고 있다.")
-    @Test
-    void sixNumbers() {
-        List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(1);
-        for (LotteryNumber nominatedNumber : nominatedNumbers) {
-            assertThat(nominatedNumber.getNumbers().size()).isEqualTo(6);
-        }
-    }
-
-
 }
