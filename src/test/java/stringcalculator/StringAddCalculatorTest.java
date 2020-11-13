@@ -30,4 +30,12 @@ class StringAddCalculatorTest {
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
   }
+
+  @ParameterizedTest
+  @CsvSource(value = {"1,2:3", "0,1:1", "0,10:10", "1,10:11"}, delimiter = ':')
+  @DisplayName(",(comma) 를 delimiter 로 할 때의 결괏값")
+  public void commaDelimiter(String input, int expected) {
+    int result = StringAddCalculator.splitAndSum(input);
+    assertThat(result).isEqualTo(expected);
+  }
 }
