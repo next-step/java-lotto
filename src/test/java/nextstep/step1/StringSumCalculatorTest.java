@@ -49,4 +49,12 @@ public class StringSumCalculatorTest {
 		assertThat(underTest.sum("//%\n1%2%3%4%5")).isEqualTo(15);
 		assertThat(underTest.sum("//@\n1@2@3@4@5@6")).isEqualTo(21);
 	}
+
+	@Test
+	@DisplayName("구분자로 나눈 값은 숫자여야 한다.")
+	public void invalidateInputValuesTest() {
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> underTest.sum(",,,,"))
+				.withMessage("input값은 양수만 가능합니다.");
+	}
 }

@@ -24,10 +24,17 @@ public class StringSumCalculator {
 	}
 
 	private int getSum(String[] inputStrings) {
+		validate(inputStrings);
 		return Stream.of(inputStrings)
 				.map(this::getPositiveNumber)
 				.reduce(Integer::sum)
 				.orElse(0);
+	}
+
+	private void validate(String[] inputStrings) {
+		if (inputStrings.length == 0) {
+			throw new RuntimeException("input값은 양수만 가능합니다.");
+		}
 	}
 
 	private int getPositiveNumber(String input) {
