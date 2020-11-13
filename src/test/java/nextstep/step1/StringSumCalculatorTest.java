@@ -26,4 +26,19 @@ public class StringSumCalculatorTest {
 		assertThat(underTest.sum(",:,:")).isEqualTo(0);
 	}
 
+	@Test
+	@DisplayName("더할 값이 문자열인 경우 예외를 던진다.")
+	public void invalidateInputStringTest() {
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> underTest.sum("a,b"))
+				.withMessage("input값은 양수만 가능합니다.");
+	}
+
+	@Test
+	@DisplayName("더할 값이 음수 경우 예외를 던진다.")
+	public void invalidatePositiveNumberTest() {
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> underTest.sum("-2,3"))
+				.withMessage("input값은 양수만 가능합니다.");
+	}
 }
