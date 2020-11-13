@@ -23,7 +23,6 @@ public enum LottoRank {
     public static int matchLottoRankPrice(int match) {
         validMatch(match);
 
-
         return Stream.of(FORTH, THIRD, SECOND, FIRST)
                 .filter(ranking -> ranking.match == match)
                 .findFirst()
@@ -31,8 +30,18 @@ public enum LottoRank {
                 .getMatchPrice();
     }
 
+    public static LottoRank valueOf(int match) {
+        validMatch(match);
+
+        return Stream.of(FORTH, THIRD, SECOND, FIRST)
+                .filter(ranking -> ranking.match == match)
+                .findFirst()
+                .orElse(MISS);
+
+    }
+
     private static void validMatch(int match) {
-        if(match > 6 || match < 0){
+        if (match > 6 || match < 0) {
             throw new NotMatchRankException();
         }
     }
@@ -40,7 +49,8 @@ public enum LottoRank {
     private int getMatchPrice() {
         return price;
     }
-    public int getPrice(){
+
+    public int getPrice() {
         return price;
     }
 
