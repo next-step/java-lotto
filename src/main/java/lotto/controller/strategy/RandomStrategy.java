@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.utils.Shuffler;
 
+import java.util.List;
+
 /**
  * FIXME: 이런건 테스트를 어떻게 해야할지 감이 안잡힌다.
  * 도와주세요!!
@@ -22,8 +24,8 @@ public class RandomStrategy implements GenerateStrategy {
 
     @Override
     public Lotto generateLotto() {
-        Integer[] lottoNos = shuffler.getLottoNos();
-        return LottoFactory.createLotto(lottoNos);
+        List<Integer> lottoNos = shuffler.getLottoNos();
+        return LottoFactory.createLottoFromIntList(lottoNos);
     }
 
     private static class SingletonHelper {

@@ -25,7 +25,7 @@ class ShufflerTest {
     @Test
     @DisplayName("6개의 번호들을 반환해야 한다.")
     void getLottoNos_size() {
-        assertThat(shuffler.getLottoNos().length)
+        assertThat(shuffler.getLottoNos().size())
                 .isEqualTo(LottoConst.NUM_OF_LOTTO_NO);
     }
 

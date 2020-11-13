@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -28,8 +30,8 @@ class LottoTest {
             lottoNos2[i] = i + 1 + size - count;
         }
 
-        Lotto lotto1 = LottoFactory.createLotto(lottoNos1);
-        Lotto lotto2 = LottoFactory.createLotto(lottoNos2);
+        Lotto lotto1 = LottoFactory.createLottoFromIntList(Arrays.asList(lottoNos1));
+        Lotto lotto2 = LottoFactory.createLottoFromIntList(Arrays.asList(lottoNos2));
 
         assertThat(lotto1.countSameNo(lotto2))
                 .isEqualTo(count);

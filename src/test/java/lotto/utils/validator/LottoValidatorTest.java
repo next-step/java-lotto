@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoValidatorTest {
@@ -61,18 +63,18 @@ class LottoValidatorTest {
     @Test
     @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
     void validateLottoArr_str_success() {
-        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoArr(new String[]{
+        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
                 "1", "2", "3", "4", "5", "6"
-        }));
+        })));
     }
 
     @Test
     @DisplayName("null 이 들어오면 NpeException 이 발생한다.")
     void validateLottoArr_str_npe() {
         assertThatExceptionOfType(NpeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new String[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
                         null, null, null, null, null, null
-                }))
+                })))
                 .withMessage(ExceptionConst.NPE_MSG);
     }
 
@@ -80,9 +82,9 @@ class LottoValidatorTest {
     @DisplayName("숫자가 아닌 로또 번호가 입력되면 NanException 이 발생한다.")
     void validateLottoArr_str_nan() {
         assertThatExceptionOfType(NanException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new String[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
                         "a", "2", "c", "4", "e", "6"
-                }))
+                })))
                 .withMessage(ExceptionConst.NAN_MSG);
     }
 
@@ -90,9 +92,9 @@ class LottoValidatorTest {
     @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
     void validateLottoArr_str_range() {
         assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new String[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
                         "1", "2", "3", "4", "5", "46"
-                }))
+                })))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
     }
 
@@ -100,9 +102,9 @@ class LottoValidatorTest {
     @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
     void validateLottoArr_str_badNumOfLottoNo() {
         assertThatExceptionOfType(BadNumOfLottoNoException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new String[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
                         "a", "b", "c"
-                }))
+                })))
                 .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
     }
 
@@ -110,18 +112,18 @@ class LottoValidatorTest {
     @Test
     @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
     void validateLottoArr_int_success() {
-        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoArr(new Integer[]{
+        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
                 1, 2, 3, 4, 5, 6
-        }));
+        })));
     }
 
     @Test
     @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
     void validateLottoArr_int_range() {
         assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new Integer[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
                         -1, -2, -3, 46, 47, 48
-                }))
+                })))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
     }
 
@@ -129,9 +131,9 @@ class LottoValidatorTest {
     @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
     void validateLottoArr_int_badNumOfLottoNo() {
         assertThatExceptionOfType(BadNumOfLottoNoException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoArr(new Integer[]{
+                .isThrownBy(() -> LottoValidator.validateLottoNoIntList(Arrays.asList(new Integer[]{
                         46, 0, -1
-                }))
+                })))
                 .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
     }
 }

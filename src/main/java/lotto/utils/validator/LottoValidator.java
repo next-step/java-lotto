@@ -3,33 +3,38 @@ package lotto.utils.validator;
 import lotto.asset.LottoConst;
 import lotto.exception.BadNumOfLottoNoException;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LottoValidator {
     private LottoValidator() {}
 
     public static void validateLottoStr(String lottoStr) {
         GeneralValidator.validateNpe(lottoStr);
-        String[] lottoNoArr = getLottoNoArr(lottoStr);
-        validateLottoNoArr(lottoNoArr);
+        List<String> lottoNos = getLottoNos(lottoStr);
+        validateLottoNoStrList(lottoNos);
     }
 
-    public static void validateLottoNoArr(Integer[] lottoNoArr) {
-        int numOfLottoNo = lottoNoArr.length;
+    public static void validateLottoNoIntList(List<Integer> lottoNos) {
+        int numOfLottoNo = lottoNos.size();
         validateNumOfLottoNo(numOfLottoNo);
-        for (int lottoNo : lottoNoArr) {
+        for (int lottoNo : lottoNos) {
             LottoNoValidator.validateLottoNo(lottoNo);
         }
     }
 
-    public static void validateLottoNoArr(String[] lottoNoArr) {
-        int numOfLottoNo = lottoNoArr.length;
+    public static void validateLottoNoStrList(List<String> lottoNos) {
+        int numOfLottoNo = lottoNos.size();
         validateNumOfLottoNo(numOfLottoNo);
-        for (String lottoNo : lottoNoArr) {
+        for (String lottoNo : lottoNos) {
             LottoNoValidator.validateLottoNo(lottoNo);
         }
     }
 
-    private static String[] getLottoNoArr(String lottoStr) {
-        return lottoStr.split(LottoConst.SPLIT_REGEX);
+    private static List<String> getLottoNos(String lottoStr) {
+        return Arrays.asList(
+                lottoStr.split(LottoConst.SPLIT_REGEX)
+        );
     }
 
     private static boolean checkNumOfLottoNo(int numOfLottoNo) {

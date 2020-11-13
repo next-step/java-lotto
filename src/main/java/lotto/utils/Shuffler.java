@@ -26,11 +26,9 @@ public class Shuffler {
         Collections.shuffle(lottoNos);
     }
 
-    public Integer[] getLottoNos() {
+    public List<Integer> getLottoNos() {
         shuffle();
-        List<Integer> subList = lottoNos.subList(0, LottoConst.NUM_OF_LOTTO_NO);
-        int size = subList.size();
-        return subList.toArray(new Integer[size]);
+        return lottoNos.subList(0, LottoConst.NUM_OF_LOTTO_NO);
     }
 
     private static class SingletonHelper {

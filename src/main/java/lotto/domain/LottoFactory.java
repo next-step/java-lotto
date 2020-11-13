@@ -1,13 +1,15 @@
 package lotto.domain;
 
-import lotto.asset.LottoConst;
+import lotto.utils.Splitter;
 import lotto.utils.validator.LottoValidator;
+
+import java.util.List;
 
 public class LottoFactory {
     private LottoFactory() {}
 
-    public static Lotto createLotto(Integer[] lottoNoArr) {
-        LottoValidator.validateLottoNoArr(lottoNoArr);
+    public static Lotto createLottoFromIntList(List<Integer> lottoNoArr) {
+        LottoValidator.validateLottoNoIntList(lottoNoArr);
         Lotto lotto = new Lotto();
         for (int no : lottoNoArr) {
             lotto.add(no);
@@ -15,8 +17,8 @@ public class LottoFactory {
         return lotto;
     }
 
-    public static Lotto createLotto(String[] lottoNoArr) {
-        LottoValidator.validateLottoNoArr(lottoNoArr);
+    public static Lotto createLottoFromStrList(List<String> lottoNoArr) {
+        LottoValidator.validateLottoNoStrList(lottoNoArr);
         Lotto lotto = new Lotto();
         for (String no : lottoNoArr) {
             lotto.add(no);
@@ -26,7 +28,6 @@ public class LottoFactory {
 
     public static Lotto createLotto(String lottoStr) {
         LottoValidator.validateLottoStr(lottoStr);
-        String[] lottoNoArr = lottoStr.split(LottoConst.SPLIT_REGEX);
-        return createLotto(lottoNoArr);
+        return createLottoFromStrList(Splitter.splitLottoStr(lottoStr));
     }
 }

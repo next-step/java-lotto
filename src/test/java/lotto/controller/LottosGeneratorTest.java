@@ -9,25 +9,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosGeneratorTest {
     int numOfLottos = 3;
-    Integer[] dummyLottoNos1;
-    Integer[] dummyLottoNos2;
+    List<Integer> dummyLottoNos1;
+    List<Integer> dummyLottoNos2;
     GenerateStrategy dummyStrategy1;
     GenerateStrategy dummyStrategy2;
 
     @BeforeEach
     void setUp() {
-        dummyLottoNos1 = new Integer[]{1, 2, 3, 4, 5, 6};
-        dummyLottoNos2 = new Integer[]{45, 40, 35, 30, 25, 20};
-        dummyStrategy1 = () -> LottoFactory.createLotto(dummyLottoNos1);
-        dummyStrategy2 = () -> LottoFactory.createLotto(dummyLottoNos2);
+        dummyLottoNos1 = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
+        dummyLottoNos2 = Arrays.asList(new Integer[]{45, 40, 35, 30, 25, 20});
+        dummyStrategy1 = () -> LottoFactory.createLottoFromIntList(dummyLottoNos1);
+        dummyStrategy2 = () -> LottoFactory.createLottoFromIntList(dummyLottoNos2);
     }
 
-    private Lottos generateExpectedLottos(Integer[] dummyLottoNos, int numOfLottos) {
-        Lotto dummyLotto = LottoFactory.createLotto(dummyLottoNos);
+    private Lottos generateExpectedLottos(List<Integer> dummyLottoNos, int numOfLottos) {
+        Lotto dummyLotto = LottoFactory.createLottoFromIntList(dummyLottoNos);
         Lottos expectedLottos = new Lottos();
         for (int i = 0; i < numOfLottos; i++) {
             expectedLottos.add(dummyLotto);

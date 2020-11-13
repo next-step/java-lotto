@@ -17,7 +17,7 @@ public class GeneralValidator {
         return false;
     }
 
-    protected static void validateNpe(String nullable) {
+    public static void validateNpe(String nullable) {
         Optional.ofNullable(nullable).orElseThrow(NpeException::getInstance);
     }
 
