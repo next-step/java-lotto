@@ -20,9 +20,26 @@ public class Expression {
     private List<Integer> operands;
 
     public Expression(String expression) {
+        parse(expression);
+    }
+
+    private void parse(String expression) {
         this.delimiter = getCustomDelimiterOrDefault(expression, DEFAULT_DELIMITER_REGEX);
         this.mathExpression = getMathExpression(expression);
-        this.operands = Arrays.stream(this.mathExpression.split(delimiter)).map(Integer::valueOf).collect(Collectors.toList());
+        this.operands = getOperands();
+    }
+
+    private List<Integer> getOperands() {
+        List<Integer> operands = Arrays.stream(this.mathExpression.split(delimiter))
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+        if( operands.stream().anyMatch(this::lessThanZero) )
+            throw new RuntimeException("0 또는 양수만 입력 가능합니다.");
+        return operands;
+    }
+
+    private boolean lessThanZero(Integer value) {
+        return value < 0;
     }
 
     public int execute(BinaryOperator<Integer> operator){
