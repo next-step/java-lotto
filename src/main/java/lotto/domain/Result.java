@@ -28,8 +28,7 @@ public class Result {
         }
         return new Money(profit);
     }
-
-    // TODO: 0 과 관련된 예외처리
+    
     public double getRateOfReturn(Money purchaseMoney) {
         return getProfit().divide(purchaseMoney);
     }
