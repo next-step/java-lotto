@@ -22,7 +22,7 @@ public class StringAddCalculator {
     }
 
     private static Expression getExpFromCustomSplitterDivider(CustomSentenceDivider customSentenceDivider) {
-        Splitters splitters = new Splitters(Arrays.asList(customSentenceDivider.getSplitter()));
+        Splitters splitters = new Splitters(Collections.singletonList(customSentenceDivider.getSplitter()));
         return new Expression(customSentenceDivider.getExpressionString(), splitters);
     }
 
