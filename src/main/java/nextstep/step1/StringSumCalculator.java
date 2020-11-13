@@ -14,9 +14,7 @@ public class StringSumCalculator {
 			return sumResult;
 		}
 		String[] inputStrings = inputString.split(",|:");
-		return Stream.of(inputStrings)
-				.mapToInt(input -> getPositiveNumber(input))
-				.sum();
+		return getSum(inputStrings);
 	}
 
 	private int getSumByCustomDelimeter(String inputString) {
@@ -24,11 +22,15 @@ public class StringSumCalculator {
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
 			String[] inputStrings = matcher.group(2).split(customDelimiter);
-			return Stream.of(inputStrings)
-					.mapToInt(input -> getPositiveNumber(input))
-					.sum();
+			return getSum(inputStrings);
 		}
 		return 0;
+	}
+
+	private int getSum(String[] inputStrings) {
+		return Stream.of(inputStrings)
+				.mapToInt(input -> getPositiveNumber(input))
+				.sum();
 	}
 
 	private int getPositiveNumber(String input) {
