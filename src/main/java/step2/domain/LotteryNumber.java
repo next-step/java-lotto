@@ -15,10 +15,10 @@ public class LotteryNumber {
     private final Set<Integer> numbers;
 
     public LotteryNumber(Set<Integer> numbers) {
-        this.numbers = Collections.unmodifiableSet(numbers);
         if (numbers.size() != SELECTION_COUNT) {
             throw new NotEnoughNumberException();
         }
+        this.numbers = Collections.unmodifiableSet(numbers);
     }
 
     public int getMatched(LotteryNumber other) {
