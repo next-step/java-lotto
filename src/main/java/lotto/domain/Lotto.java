@@ -9,6 +9,7 @@ public class Lotto {
     private Integer price;
     private Integer[] winningNumber;
     private final Map<Rank, Integer> prizeMap = new HashMap<>();
+    private LottoConstraint constraint;
 
     public void setPrice(Integer price) {
         this.price = price;
@@ -32,5 +33,13 @@ public class Lotto {
 
     public void addToPrizeMap(Rank rank, Integer prize) {
         prizeMap.put(rank, prize);
+    }
+
+    public void setConstraint(LottoConstraint constraint) {
+        this.constraint = constraint;
+    }
+
+    public LottoConstraint getConstraint() {
+        return constraint;
     }
 }

@@ -29,4 +29,14 @@ public class LottoTest {
         lotto.addToPrizeMap(Rank.FIRST, first_prize);
         assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(first_prize);
     }
+
+    @Test
+    void testGetConstraint(){
+        Lotto lotto = new Lotto();
+        lotto.setConstraint(new LottoConstraint(6, 45));
+        LottoConstraint lottoConstraint = lotto.getConstraint();
+        assertThat(lottoConstraint).isNotNull();
+        assertThat(lottoConstraint.getCountOfNumber()).isEqualTo(6);
+        assertThat(lottoConstraint.getRange()).isEqualTo(45);
+    }
 }
