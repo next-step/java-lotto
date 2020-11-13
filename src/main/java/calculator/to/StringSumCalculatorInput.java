@@ -1,8 +1,8 @@
 package calculator.to;
 
 public class StringSumCalculatorInput {
-    private String delimiter;
-    private String parameters;
+    private final String delimiter;
+    private final String parameters;
 
     private StringSumCalculatorInput(String delimiter, String parameters) {
         this.delimiter = delimiter;

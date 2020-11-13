@@ -1,6 +1,9 @@
 package utils;
 
 public class StringUtils {
+    private StringUtils() {
+    }
+
     public static String[] splitWith(String source, String regExpDelimiter) {
         if(source == null){
             return null;

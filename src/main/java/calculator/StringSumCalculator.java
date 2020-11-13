@@ -9,8 +9,11 @@ public class StringSumCalculator {
 
     private static final String DEFAULT_DELIMITER_REGEX = ",|:";
 
+    private StringSumCalculator() {
+    }
+
     public static int sum(String source) {
-        StringSumCalculatorInput stringSumCalculatorInput = InputParser.parse(source);
+        StringSumCalculatorInput stringSumCalculatorInput = StringCalculatorInputParser.parse(source);
         return Stream.of(StringUtils.splitWith(stringSumCalculatorInput.getParameters(), getDelimiter(stringSumCalculatorInput.getDelimiter())))
                 .mapToInt(OperandCollector::collect)
                 .sum();

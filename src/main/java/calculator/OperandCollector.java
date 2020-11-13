@@ -3,6 +3,10 @@ package calculator;
 import utils.StringUtils;
 
 public class OperandCollector {
+
+    private OperandCollector() {
+    }
+
     public static int collect(String value) {
         int result = StringUtils.isEmpty(value) ? 0 : Integer.parseInt(value);
         validate(result);
