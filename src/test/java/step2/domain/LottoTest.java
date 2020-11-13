@@ -16,11 +16,36 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
+    @ParameterizedTest
+    @MethodSource("createLottoMatchNumbers")
+    @DisplayName("로또 티켓 맞는 갯수에 따라 맞는 숫자를 반환합니다.")
+    void matchLotto(Lotto lotto, List<Integer> matchLotto, int expected) {
+        assertThat(lotto.matchLottoNumbers(matchLotto)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> createLottoMatchNumbers() {
+        return Stream.of(
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(6, 5, 4, 3, 2, 1), 6),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 2, 3, 4, 5, 6), 5),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 3, 4, 5, 6), 4),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 9, 4, 5, 6), 3),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 9, 10, 5, 6), 2),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 9, 10, 11, 6), 1),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 9, 10, 11, 12), 0));
+    }
+
     @Test
     @DisplayName("로또 한장을 만듭니다.")
     void create() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.lottoNumbersSize()).isEqualTo(6);
+        assertThat(lotto.lottoNumbersSize(6)).isTrue();
     }
 
     @ParameterizedTest
