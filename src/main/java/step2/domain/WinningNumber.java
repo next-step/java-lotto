@@ -2,14 +2,14 @@ package step2.domain;
 
 public class WinningNumber {
     private final LotteryNumber winningNumber;
-    private Integer bonusNumber;
+    private final Integer bonusNumber;
 
     public WinningNumber(LotteryNumber lotteryNumber, Integer bonusNumber) {
-        if (lotteryNumber == null) {
+        if (lotteryNumber == null || bonusNumber == null) {
             throw new IllegalStateException();
         }
         this.winningNumber = lotteryNumber;
-        this.bonusNumber = bonusNumber; // TODO not null
+        this.bonusNumber = bonusNumber;
     }
 
     public WinningNumber(LotteryNumber lotteryNumber) {
