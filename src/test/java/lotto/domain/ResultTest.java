@@ -41,11 +41,15 @@ class ResultTest {
         result.increaseNumOfLotto(Jackpot.FOUR);
         result.increaseNumOfLotto(Jackpot.FIVE);
 
+        int expectedProfit = 1615000;
+        int purchase = 161500;
+        int expectedRateOfReturn = 10;
+        Money purchaseMoney = new Money(purchase);
         Assertions.assertAll(
                 () -> assertThat(result.getProfit())
-                        .isEqualTo(1615000),
-                () -> assertThat(result.getRateOfReturn(161500))
-                        .isEqualTo(10)
+                        .isEqualTo(new Money(expectedProfit)),
+                () -> assertThat(result.getRateOfReturn(purchaseMoney))
+                        .isEqualTo(expectedRateOfReturn)
         );
     }
 }

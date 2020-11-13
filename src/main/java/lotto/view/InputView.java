@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.asset.InputViewConst;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
+import lotto.domain.Money;
 import lotto.utils.validator.LottoValidator;
 import lotto.utils.validator.MoneyValidator;
 
@@ -17,11 +18,11 @@ public class InputView {
         System.out.println(str);
     }
 
-    public static int askPurchaseMoney() {
+    public static Money askPurchaseMoney() {
         println(InputViewConst.ASK_PURCHASE_MONEY);
         String money = scanner.nextLine();
         MoneyValidator.validateMoney(money);
-        return Integer.parseInt(money);
+        return new Money(money);
     }
 
     public static String askLottoStr() {

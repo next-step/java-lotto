@@ -21,15 +21,16 @@ public class Result {
         );
     }
 
-    protected int getProfit() {
+    protected Money getProfit() {
         int profit = 0;
         for (Jackpot jackpot : Jackpot.values()) {
             profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);
         }
-        return profit;
+        return new Money(profit);
     }
 
-    public double getRateOfReturn(int purchaseMoney) {
-        return getProfit() / purchaseMoney;
+    // TODO: 0 과 관련된 예외처리
+    public double getRateOfReturn(Money purchaseMoney) {
+        return getProfit().divide(purchaseMoney);
     }
 }

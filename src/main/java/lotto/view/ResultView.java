@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.asset.ResultViewConst;
 import lotto.domain.Jackpot;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Result;
 
 public class ResultView {
@@ -20,7 +21,7 @@ public class ResultView {
         println(lottos);
     }
 
-    public static void printStatistics(Result result, int purchaseMoney) {
+    public static void printStatistics(Result result, Money purchaseMoney) {
         println(ResultViewConst.JACKPOT_STATISTICS_MSG);
         for (Jackpot jackpot : Jackpot.values()) {
             println(ResultViewConst.JACKPOT_MSG(jackpot, result.getNumOfLotto(jackpot)));

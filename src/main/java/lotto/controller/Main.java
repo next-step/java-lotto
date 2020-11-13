@@ -1,18 +1,19 @@
 package lotto.controller;
 
+import lotto.asset.LottoConst;
 import lotto.controller.strategy.GenerateStrategy;
 import lotto.controller.strategy.RandomStrategy;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Result;
-import lotto.utils.LottoCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Main {
     public static void main(String[] args) {
-        int purchaseMoney = InputView.askPurchaseMoney();
-        int numOfLottos = LottoCalculator.getNumOfLottos(purchaseMoney);
+        Money purchaseMoney = InputView.askPurchaseMoney();
+        int numOfLottos = (int) purchaseMoney.divide(LottoConst.PRICE);
         ResultView.printNumOfLottos(numOfLottos);
 
         GenerateStrategy randomStrategy = RandomStrategy.getInstance();
