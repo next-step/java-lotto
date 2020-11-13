@@ -58,6 +58,14 @@ public class WinningNumberTest {
         assertThat(lotteryResult.getMatchResult(rank)).isEqualTo(2);
     }
 
+    @DisplayName("2등은 보너스 넘버가 같을때이다")
+    @Test
+    void secondaryPrize() {
+        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
+        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
+        assertThat(lotteryResult.getMatchResult(SECOND)).isEqualTo(1);
+    }
+
     private static Stream<Arguments> matchingCountProvider() {
         //@formatter:off
         return Stream.of(
