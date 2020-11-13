@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<Integer> lottoNumbers = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
-    private final List<Integer> sixNumbers;
 
-    public Lotto() {
-        Collections.shuffle(lottoNumbers);
-        sixNumbers = lottoNumbers.subList(0,6);
-        Collections.sort(sixNumbers);
+    private List<Integer> sixNumbers;
+
+    public Lotto(List<Integer> sixNumbers) {
+        Objects.requireNonNull(sixNumbers);
+        this.sixNumbers = sixNumbers;
+
     }
 
     @Override

@@ -4,21 +4,17 @@ import java.util.List;
 
 public class LottoCalculator {
     private Lottos lottos;
-    private final Money price = new Money(1000);
 
-    public LottoCalculator(Money money) throws Exception {
-        if(!hasEnoughMoney(money)){
-            throw new Exception();
-        }
-        lottos = new Lottos(money.dividedBy(price));
-    }
-
-    private boolean hasEnoughMoney(Money money) {
-        return money.isGreaterThan(price);
+    public LottoCalculator(List<List<Integer>> lottoNumbers) {
+        lottos = new Lottos(lottoNumbers);
     }
 
     public Lottos getLottos(){
         return lottos;
     }
+
+    public LottoResult calculate() {
+      return new LottoResult();//  lottos.countMatchingNumber();
+    };
 
 }
