@@ -33,16 +33,9 @@ public class LottoNoPool {
 
     protected LottoNo getLottoNo(String no) {
         LottoNoValidator.validateLottoNo(no);
-        return Optional.ofNullable(
-                lottoNoPool.get(no)
-        ).orElseGet(() -> {
-            LottoNo lottoNo = new LottoNo(no);
-            lottoNoPool.put(
-                    Integer.parseInt(no),
-                    lottoNo
-            );
-            return lottoNo;
-        });
+        return getLottoNo(
+                Integer.parseInt(no)
+        );
     }
 
     private static class SingletonHelper {
