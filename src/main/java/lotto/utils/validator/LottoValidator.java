@@ -3,7 +3,6 @@ package lotto.utils.validator;
 import lotto.asset.LottoConst;
 import lotto.exception.BadNumOfLottoNoException;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoValidator {
@@ -11,8 +10,14 @@ public class LottoValidator {
 
     public static void validateLottoStr(String lottoStr) {
         GeneralValidator.validateNpe(lottoStr);
-        List<String> lottoNos = getLottoNos(lottoStr);
-        validateLottoNoStrList(lottoNos);
+        String[] lottoNos = lottoStr.split(LottoConst.SPLIT_REGEX);
+        validateNumOfLottoNo(lottoNos.length);
+        for (String lottoNo : lottoNos) {
+            GeneralValidator.validateNan(lottoNo);
+            LottoNoValidator.validateLottoNo(
+                    Integer.parseInt(lottoNo)
+            );
+        }
     }
 
     public static void validateLottoNos(List<Integer> lottoNos) {
@@ -21,21 +26,6 @@ public class LottoValidator {
         for (int lottoNo : lottoNos) {
             LottoNoValidator.validateLottoNo(lottoNo);
         }
-    }
-
-    // FIXME: validateLottoNos 오버로딩
-    public static void validateLottoNoStrList(List<String> lottoNos) {
-        int numOfLottoNo = lottoNos.size();
-        validateNumOfLottoNo(numOfLottoNo);
-        for (String lottoNo : lottoNos) {
-            LottoNoValidator.validateLottoNo(lottoNo);
-        }
-    }
-
-    private static List<String> getLottoNos(String lottoStr) {
-        return Arrays.asList(
-                lottoStr.split(LottoConst.SPLIT_REGEX)
-        );
     }
 
     private static boolean checkNumOfLottoNo(int numOfLottoNo) {

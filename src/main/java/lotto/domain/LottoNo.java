@@ -17,11 +17,6 @@ public class LottoNo implements Comparable<LottoNo> {
         this.lottoNo = lottoNo;
     }
 
-    protected LottoNo(String lottoNo) {
-        LottoNoValidator.validateLottoNo(lottoNo);
-        this.lottoNo = Integer.parseInt(lottoNo);
-    }
-
     @Override
     public String toString() {
         return lottoNo.toString();

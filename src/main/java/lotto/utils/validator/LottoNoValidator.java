@@ -18,9 +18,4 @@ public class LottoNoValidator {
             throw LottoRangeException.getInstance();
         }
     }
-
-    public static void validateLottoNo(String lottoNoStr) {
-        GeneralValidator.validateStrNum(lottoNoStr);
-        validateLottoNo(Integer.parseInt(lottoNoStr));
-    }
 }

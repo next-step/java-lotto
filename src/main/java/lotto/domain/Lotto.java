@@ -58,11 +58,6 @@ public class Lotto {
         return pool.getLottoNo(no);
     }
 
-    private LottoNo getLottoNo(String no) {
-        LottoNoPool pool = LottoNoPool.getInstance();
-        return pool.getLottoNo(no);
-    }
-
     private void add(LottoNo lottoNo) {
         throwIfDuplicated(lottoNo);
         lottoNos.add(lottoNo);
@@ -71,12 +66,6 @@ public class Lotto {
 
     // NOTE: domain 바깥에서 add 를 막기 위해 protected 로 선언
     protected void add(int lottoNo) {
-        LottoNoValidator.validateLottoNo(lottoNo);
-        add(getLottoNo(lottoNo));
-    }
-
-    // NOTE: domain 바깥에서 add 를 막기 위해 protected 로 선언
-    protected void add(String lottoNo) {
         LottoNoValidator.validateLottoNo(lottoNo);
         add(getLottoNo(lottoNo));
     }

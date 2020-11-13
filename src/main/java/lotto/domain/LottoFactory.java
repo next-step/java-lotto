@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.Splitter;
+import lotto.utils.LottoParser;
 import lotto.utils.validator.LottoValidator;
 
 import java.util.List;
@@ -17,20 +17,10 @@ public class LottoFactory {
         return lotto;
     }
 
-    // FIXME: createLotto 오버로딩
-    public static Lotto createLottoFromStrList(List<String> lottoNos) {
-        LottoValidator.validateLottoNoStrList(lottoNos);
-        Lotto lotto = new Lotto();
-        for (String no : lottoNos) {
-            lotto.add(no);
-        }
-        return lotto;
-    }
-
     public static Lotto createLotto(String lottoStr) {
         LottoValidator.validateLottoStr(lottoStr);
-        return createLottoFromStrList(
-                Splitter.splitLottoStr(lottoStr)
+        return createLotto(
+                LottoParser.parseLottoStr(lottoStr)
         );
     }
 }

@@ -4,7 +4,6 @@ import lotto.asset.ExceptionConst;
 import lotto.exception.BadNumOfLottoNoException;
 import lotto.exception.LottoRangeException;
 import lotto.exception.NanException;
-import lotto.exception.NpeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,56 +50,6 @@ class LottoFactoryTest {
     void createLotto_badNumOfLottoNo(String lottoStr) {
         assertThatExceptionOfType(BadNumOfLottoNoException.class)
                 .isThrownBy(() -> LottoFactory.createLotto(lottoStr))
-                .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
-    }
-
-
-    @Test
-    @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
-    void createLotto_str_success() {
-        assertThat(LottoFactory.createLottoFromStrList(Arrays.asList(new String[]{
-                        "1", "2", "3", "4", "5", "6"
-                })).toString()
-        ).isEqualTo("[1, 2, 3, 4, 5, 6]");
-    }
-
-    @Test
-    @DisplayName("null 이 들어오면 NpeException 이 발생한다.")
-    void createLotto_str_npe() {
-        assertThatExceptionOfType(NpeException.class)
-                .isThrownBy(() -> LottoFactory.createLottoFromStrList(Arrays.asList(new String[]{
-                        null, null, null, null, null, null
-                })))
-                .withMessage(ExceptionConst.NPE_MSG);
-    }
-
-    @Test
-    @DisplayName("숫자가 아닌 로또 번호가 입력되면 NanException 이 발생한다.")
-    void createLotto_str_nan() {
-        assertThatExceptionOfType(NanException.class)
-                .isThrownBy(() -> LottoFactory.createLottoFromStrList(Arrays.asList(new String[]{
-                        "a", "2", "c", "4", "e", "6"
-                })))
-                .withMessage(ExceptionConst.NAN_MSG);
-    }
-
-    @Test
-    @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
-    void createLotto_str_range() {
-        assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> LottoFactory.createLottoFromStrList(Arrays.asList(new String[]{
-                        "1", "2", "3", "4", "5", "46"
-                })))
-                .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
-    }
-
-    @Test
-    @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
-    void createLotto_str_badNumOfLottoNo() {
-        assertThatExceptionOfType(BadNumOfLottoNoException.class)
-                .isThrownBy(() -> LottoFactory.createLottoFromStrList(Arrays.asList(new String[]{
-                        "a", "b", "c"
-                })))
                 .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
     }
 

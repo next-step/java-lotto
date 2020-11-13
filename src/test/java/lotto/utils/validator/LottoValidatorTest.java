@@ -62,55 +62,6 @@ class LottoValidatorTest {
 
     @Test
     @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
-    void validateLottoNoStrList_success() {
-        Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
-                "1", "2", "3", "4", "5", "6"
-        })));
-    }
-
-    @Test
-    @DisplayName("null 이 들어오면 NpeException 이 발생한다.")
-    void validateLottoNoStrList_npe() {
-        assertThatExceptionOfType(NpeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
-                        null, null, null, null, null, null
-                })))
-                .withMessage(ExceptionConst.NPE_MSG);
-    }
-
-    @Test
-    @DisplayName("숫자가 아닌 로또 번호가 입력되면 NanException 이 발생한다.")
-    void validateLottoNoStrList_nan() {
-        assertThatExceptionOfType(NanException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
-                        "a", "2", "c", "4", "e", "6"
-                })))
-                .withMessage(ExceptionConst.NAN_MSG);
-    }
-
-    @Test
-    @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
-    void validateLottoNoStrList_range() {
-        assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
-                        "1", "2", "3", "4", "5", "46"
-                })))
-                .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
-    }
-
-    @Test
-    @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
-    void validateLottoNoStrList_badNumOfLottoNo() {
-        assertThatExceptionOfType(BadNumOfLottoNoException.class)
-                .isThrownBy(() -> LottoValidator.validateLottoNoStrList(Arrays.asList(new String[]{
-                        "a", "b", "c"
-                })))
-                .withMessage(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
-    }
-
-
-    @Test
-    @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
     void validateLottoNoIntList_success() {
         Assertions.assertDoesNotThrow(() -> LottoValidator.validateLottoNos(Arrays.asList(new Integer[]{
                 1, 2, 3, 4, 5, 6

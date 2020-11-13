@@ -31,13 +31,6 @@ public class LottoNoPool {
         });
     }
 
-    protected LottoNo getLottoNo(String no) {
-        LottoNoValidator.validateLottoNo(no);
-        return getLottoNo(
-                Integer.parseInt(no)
-        );
-    }
-
     private static class SingletonHelper {
         private static final LottoNoPool instance = new LottoNoPool();
     }
