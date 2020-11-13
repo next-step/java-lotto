@@ -63,6 +63,11 @@ public class LotteryControllerTest {
             record.add("requestLastWeekLotteryNumber");
             return LotteryNumber.of(1, 2, 3, 4, 5, 6);
         }
+
+        public Integer requestBonusNumber() {
+            record.add("requestBonusNumber");
+            return 7;
+        }
     }
 
     static class TestingResultView extends ResultView {
