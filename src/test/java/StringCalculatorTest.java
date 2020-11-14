@@ -25,4 +25,11 @@ class StringCalculatorTest {
         assertThat(stringCalculator.sum(null)).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("문자열에 숫자가 하나인 경우 해당 숫자 리턴")
+    void returnOneNumberTest() {
+        String text = "3";
+        assertThat(stringCalculator.sum(text)).isEqualTo(3);
+    }
+
 }
