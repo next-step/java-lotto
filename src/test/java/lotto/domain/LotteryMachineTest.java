@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LotteryMachineTest {
-    static Stream<Arguments> checkWinning() {
+    static Stream<Arguments> checkWinningRank() {
         return Stream.of(
                 arguments(makeRangeNumbers(1, 7), WinningRank.FIRST),
                 arguments(makeRangeNumbers(2, 8), WinningRank.SECOND),
@@ -25,7 +25,7 @@ public class LotteryMachineTest {
     @ParameterizedTest
     @DisplayName("당첨 번호와 로또 숫자 비교하여 몇 등 인지 확인")
     @MethodSource
-    void checkWinning(Numbers numbers, WinningRank expectedWinningRank) {
+    void checkWinningRank(Numbers numbers, WinningRank expectedWinningRank) {
         LotteryMachine lotteryMachine = new LotteryMachine(makeRangeNumbers(1, 7));
 
         WinningRank winningRank = lotteryMachine.checkWinningRank(numbers);
