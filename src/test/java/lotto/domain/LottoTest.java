@@ -15,14 +15,6 @@ public class LottoTest {
     }
 
     @Test
-    void testGetWinningNumber(){
-        Integer[] winningNumber = {3,4,20,21,34,43};
-        Lotto lotto = new Lotto();
-        lotto.setWinningNumber(winningNumber);
-        assertThat(lotto.getWinningNumber()).containsExactly(winningNumber);
-    }
-
-    @Test
     void testGetPrizeMap(){
         Lotto lotto = new Lotto();
         Long first_prize = 2000000000L;

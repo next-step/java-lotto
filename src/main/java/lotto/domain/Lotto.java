@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Lotto {
     private Integer price;
-    private Integer[] winningNumber;
     private final Map<Rank, Long> prizeMap = new HashMap<>();
     private LottoConstraint constraint;
 
@@ -17,14 +16,6 @@ public class Lotto {
 
     public Integer getPrice() {
         return price;
-    }
-
-    public void setWinningNumber(Integer[] winningNumber) {
-        this.winningNumber = winningNumber;
-    }
-
-    public Integer[] getWinningNumber() {
-        return winningNumber;
     }
 
     public Map<Rank, Long> getPrizeMap() {
