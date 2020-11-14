@@ -1,4 +1,7 @@
-package step2;
+package step2.domain;
+
+import step2.dto.LottoStatisticsResult;
+import step2.dto.WinLotteryResult;
 
 import java.util.Objects;
 
@@ -18,8 +21,13 @@ public class LottoBuyer {
         return new LottoBuyer(money);
     }
 
-    public void buy(final LottoStore lottoStore) {
-        this.lottos = lottoStore.sell(money);
+    public static LottoBuyer of(final int money) {
+        return of(Money.of(money));
+    }
+
+    public Lottos buy() {
+        this.lottos = LottoStore.sell(money);
+        return getLottos();
     }
 
     public Lottos getLottos() {

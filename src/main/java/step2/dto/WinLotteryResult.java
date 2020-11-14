@@ -1,4 +1,6 @@
-package step2;
+package step2.dto;
+
+import step2.domain.Money;
 
 public class WinLotteryResult {
     private final RewardCountAndPrizeMoney hitThreeTimes;

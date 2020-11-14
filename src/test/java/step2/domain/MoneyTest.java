@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static step2.Money.MONEY_MUST_BE_DIVIDED;
-import static step2.Money.MONEY_MUST_NOT_BE_NEGATIVE;
+import static step2.domain.Money.MONEY_MUST_BE_DIVIDED;
+import static step2.domain.Money.MONEY_MUST_NOT_BE_NEGATIVE;
 
 class MoneyTest {
     @DisplayName("생성")

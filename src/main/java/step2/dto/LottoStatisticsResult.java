@@ -1,4 +1,4 @@
-package step2;
+package step2.dto;
 
 public class LottoStatisticsResult {
     private final WinLotteryResult winLotteryResult;

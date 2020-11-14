@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ public class LottoMockFactory {
                 .collect(Collectors.toList());
 
         List<Lotto> lottos = new ArrayList<>();
-        
+
         final int partitionSize = 6;
         int i = 0;
         while (i < lottoNumbers.size()) {

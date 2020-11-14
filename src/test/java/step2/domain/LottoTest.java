@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,7 @@ class LottoTest {
     void countHitNumber() {
         // given
         final CreateLottoNumbersStrategy strategy = () -> lottoNumberOneToSix;
-        
+
         // when 
         final Lotto lotto = Lotto.of(strategy);
 

@@ -1,11 +1,10 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoStoreTest {
 
@@ -16,12 +15,11 @@ class LottoStoreTest {
         @Test
         void return_lottos() {
             // given
-            final LottoStore lottoStore = new LottoStore();
             final Money money = Lotto.getPrice();
-            
+
             // when
-            final Lottos lottos = lottoStore.sell(money);
-            
+            final Lottos lottos = LottoStore.sell(money);
+
             // then
             assertThat(lottos).isNotNull();
             assertThat(lottos.size()).isOne();
@@ -30,16 +28,13 @@ class LottoStoreTest {
         @DisplayName("빈 lottos 반환")
         @Test
         void return_empty_lottos() {
-            // given
-            final LottoStore lottoStore = new LottoStore();
-
             // when
-            final Lottos lottos = lottoStore.sell(null);
+            final Lottos lottos = LottoStore.sell(null);
 
             // then
             assertThat(lottos).isNotNull();
             assertThat(lottos).isEqualTo(Lottos.EMPTY);
         }
     }
-    
+
 }

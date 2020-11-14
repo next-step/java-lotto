@@ -1,9 +1,9 @@
-package step2;
+package step2.domain;
 
 import java.util.Objects;
 
 public class LottoStore {
-    public Lottos sell(final Money money) {
+    public static Lottos sell(final Money money) {
         if (Objects.isNull(money)) {
             return Lottos.EMPTY;
         }
@@ -12,7 +12,7 @@ public class LottoStore {
         return createLottos(money, lottoPrice);
     }
 
-    private Lottos createLottos(final Money money, final Money lottoPrice) {
+    private static Lottos createLottos(final Money money, final Money lottoPrice) {
         final int lottoCount = money.divideWithoutRemainder(lottoPrice);
         return LottosFactory.create(lottoCount);
     }

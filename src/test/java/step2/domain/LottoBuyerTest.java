@@ -1,16 +1,17 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import step2.dto.LottoStatisticsResult;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static step2.LottoBuyer.MONEY_MUST_NOT_BE_NULL;
+import static step2.domain.LottoBuyer.MONEY_MUST_NOT_BE_NULL;
 
 public class LottoBuyerTest {
     @DisplayName("구매자가 로또를 구매")
@@ -19,13 +20,11 @@ public class LottoBuyerTest {
         // given
         final Money money = Lotto.getPrice().multiply(2);
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
-        final LottoStore lottoStore = new LottoStore();
 
         // when
-        lottoBuyer.buy(lottoStore);
+        final Lottos lottos = lottoBuyer.buy();
 
         // then
-        final Lottos lottos = lottoBuyer.getLottos();
         assertThat(lottos.size()).isEqualTo(2);
     }
 

@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static step2.LottosFactory.COUNT_MUST_NOT_BE_NEGATIVE;
+import static step2.domain.LottosFactory.COUNT_MUST_NOT_BE_NEGATIVE;
 
 
 class LottosFactoryTest {

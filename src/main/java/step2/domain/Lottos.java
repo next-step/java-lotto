@@ -1,4 +1,6 @@
-package step2;
+package step2.domain;
+
+import step2.dto.WinLotteryResult;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 public class RewardCount {
     private final Reward reward;

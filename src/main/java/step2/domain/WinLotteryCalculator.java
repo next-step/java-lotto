@@ -1,4 +1,7 @@
-package step2;
+package step2.domain;
+
+import step2.dto.RewardCountAndPrizeMoney;
+import step2.dto.WinLotteryResult;
 
 import java.util.Arrays;
 import java.util.List;

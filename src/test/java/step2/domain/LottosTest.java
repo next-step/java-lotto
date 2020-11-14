@@ -1,6 +1,7 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Test;
+import step2.dto.WinLotteryResult;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,16 +10,16 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottosTest {
-    
+
     @Test
     void size() {
         // given
         final List<Lotto> lottoList = LottoMockFactory.createFourTeenLotto();
         final Lottos lottos = Lottos.of(lottoList);
-        
+
         // when
         final int result = lottos.size();
-        
+
         // then
         assertThat(result).isEqualTo(lottoList.size());
     }
@@ -40,7 +41,7 @@ class LottosTest {
         );
         // when
         final WinLotteryResult result = lottos.countHitNumber(answer);
-        
+
         // then
         assertAll(
                 () -> assertThat(result.getHitThreeTimes().getCount()).isEqualTo(1),
@@ -50,6 +51,6 @@ class LottosTest {
                 () -> assertThat(result.getTotalPrizeMoney()).isEqualTo(Reward.HIT_THREE_TIMES.getMoney())
         );
     }
-    
+
 
 }

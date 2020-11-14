@@ -1,6 +1,8 @@
-package step2;
+package step2.dto;
 
-class RewardCountAndPrizeMoney {
+import step2.domain.Money;
+
+public class RewardCountAndPrizeMoney {
     private final int count;
     private final int prizeMoney;
 

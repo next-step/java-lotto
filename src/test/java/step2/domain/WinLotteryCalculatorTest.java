@@ -1,13 +1,14 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
+import step2.dto.WinLotteryResult;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static step2.WinLotteryCalculator.REWARD_MUST_BE_NOT_NULL;
+import static step2.domain.WinLotteryCalculator.REWARD_MUST_BE_NOT_NULL;
 
 class WinLotteryCalculatorTest {
     @Test
