@@ -8,7 +8,7 @@ public class Money {
     public static final String MONEY_MUST_NOT_BE_NEGATIVE = "money must not be negative";
     public static final String MONEY_MUST_BE_DIVIDED = "money must be divided";
     public static final Money EMPTY = of(0);
-    private int value;
+    private final int value;
 
     private Money(final int money) {
         this.value = money;
