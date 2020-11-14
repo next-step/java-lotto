@@ -6,12 +6,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import step2.dto.LottoStatisticsResult;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static step2.domain.LottoBuyer.MONEY_MUST_NOT_BE_NULL;
+import static step2.domain.LottoBuyer.*;
 
 public class LottoBuyerTest {
     @DisplayName("구매자가 로또를 구매")
@@ -57,42 +54,74 @@ public class LottoBuyerTest {
             assertThat(lottoBuyer).isNotNull();
         }
     }
-    
+
     @DisplayName("로또 조회 요청시 null을 반환하지 않는다.")
     @Test
     void getLottos_not_return_null() {
         // given
         final Money money = Lotto.getPrice();
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
-        
+
         // when
         final Lottos lottos = lottoBuyer.getLottos();
-        
+
         // then
         assertThat(lottos).isNotNull();
         assertThat(lottos.size()).isZero();
     }
-    
-    @DisplayName("로또 통계 정보를 가져온다")
-    @Test
-    void get_win_lottery() {
-        // given
-        final Money money = Lotto.getPrice().multiply(10);
-        final LottoBuyer lottoBuyer = LottoBuyer.of(money);
-        final List<LottoNumber> lottoNumberOneToSix = Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        );
-        final Lotto winningLottery = Lotto.of(lottoNumberOneToSix);
 
-        // when
-        final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningLottery);
-        
-        // then
-        assertThat(lottoStatisticsResult).isNotNull();
+    @DisplayName("getWinLotteryStatistics")
+    @Nested
+    class GetWinLotteryStatistics {
+        @DisplayName("로또 통계 정보를 가져온다")
+        @Test
+        void get_win_lottery() {
+            // given
+            final Money money = Lotto.getPrice().multiply(10);
+            final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+            final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
+
+            // when
+            final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+
+            // then
+            assertThat(lottoStatisticsResult).isNotNull();
+        }
+
+        @DisplayName("로또 번호로 빈 문자열을 받은 경우")
+        @Test
+        void lotto_number_is_empty() {
+            // given
+            final Money money = Lotto.getPrice().multiply(10);
+            final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+            final String winningNumberExpression = " ";
+
+            // when
+            final Throwable thrown = catchThrowable(() -> {
+                lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+            });
+
+            // then
+            Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining(WINNING_NUMBER_MUST_NOT_BE_BLANK);
+        }
+
+        @DisplayName("로또 번호 개수가 유효 하지 못한 경우")
+        @Test
+        void not_valid_lotto_number_size() {
+            // given
+            final Money money = Lotto.getPrice().multiply(10);
+            final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+            final String winningNumberExpression = "1, 2, 3, 4, 5, 6, 7";
+
+            // when
+            final Throwable thrown = catchThrowable(() -> {
+                lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+            });
+
+            // then
+            Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining(WINNING_NUMBER_SIZE_NOT_VALID);
+        }
     }
 }

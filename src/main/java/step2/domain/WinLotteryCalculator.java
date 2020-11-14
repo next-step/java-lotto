@@ -44,7 +44,7 @@ public class WinLotteryCalculator {
     }
 
     private RewardCountAndPrizeMoney createRewardCountAndPrizeMoney(final Reward reward) {
-        return new RewardCountAndPrizeMoney(getCount(reward), reward.getMoney());
+        return new RewardCountAndPrizeMoney(reward.getHitTimes(), getCount(reward), reward.getMoney());
     }
 
     private Money calculateTotalPrizeMoney() {

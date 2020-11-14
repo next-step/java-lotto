@@ -8,4 +8,12 @@ public class LottoStatisticsResult {
         this.winLotteryResult = winLotteryResult;
         this.profitRate = profitRate;
     }
+
+    public WinLotteryResult getWinLotteryResult() {
+        return winLotteryResult;
+    }
+
+    public double getProfitRate() {
+        return profitRate;
+    }
 }

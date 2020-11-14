@@ -5,6 +5,7 @@ import step2.dto.WinLotteryResult;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Lottos {
     public static Lottos EMPTY = Lottos.of(Collections.emptyList());
@@ -15,7 +16,7 @@ public class Lottos {
     }
 
     public static Lottos of(final List<Lotto> lottos) {
-        if(lottos == null) {
+        if (lottos == null) {
             return new Lottos(Collections.emptyList());
         }
         return new Lottos(lottos);
@@ -33,5 +34,9 @@ public class Lottos {
             rewardOptional.ifPresent(calculator::increaseHitCount);
         }
         return calculator.toWinLotteryResult();
+    }
+
+    public List<List<Integer>> getAllLottoNumber() {
+        return lottoList.stream().map(Lotto::getLottoNumber).collect(Collectors.toList());
     }
 }

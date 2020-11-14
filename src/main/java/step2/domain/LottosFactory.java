@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static util.Preconditions.checkArgument;
@@ -18,7 +17,7 @@ public class LottosFactory {
 
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            final Lotto lotto = Lotto.of(() -> Collections.emptyList());
+            final Lotto lotto = Lotto.of();
             lottos.add(lotto);
         }
         return Lottos.of(lottos);

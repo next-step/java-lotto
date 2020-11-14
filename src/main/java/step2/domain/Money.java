@@ -25,7 +25,10 @@ public class Money {
     }
 
     public double divide(final Money money) {
-        return (double)value / money.value;
+        if (money.value == 0) {
+            return 0;
+        }
+        return (double) value / money.value;
     }
 
     public Money multiply(final int x) {

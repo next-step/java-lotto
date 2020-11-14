@@ -21,6 +21,10 @@ public enum Reward {
         return this.hitTimes == hitTimes;
     }
 
+    public int getHitTimes() {
+        return hitTimes;
+    }
+
     public Money getMoney() {
         return money;
     }

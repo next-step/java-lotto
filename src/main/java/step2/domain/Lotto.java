@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Money PRICE = Money.of(1000);
@@ -35,5 +36,9 @@ public class Lotto {
 
     public static int getLottoNumbersLength() {
         return LOTTO_NUMBERS_LENGTH;
+    }
+    
+    public List<Integer> getLottoNumber() {
+        return numbers.stream().map(LottoNumber::getValue).collect(Collectors.toList());
     }
 }
