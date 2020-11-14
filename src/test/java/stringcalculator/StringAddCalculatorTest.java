@@ -75,4 +75,13 @@ class StringAddCalculatorTest {
     int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
     assertThat(result).isEqualTo(6);
   }
+
+  @Test
+  @DisplayName("추가 구분자 및 기본 구분자 복합 케이스")
+  void mixedDefaultAndExtra() {
+    String input = "//;\n1;2:3";
+    int expected = 6;
+
+    assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(expected);
+  }
 }
