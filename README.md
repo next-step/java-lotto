@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## Feature List
-- [ ] 구입 금액 입력 받기
+- [x] 구입 금액 입력 받기
 - [x] 로또 1장 자동 생성
 - [x] 로또 구입 개수만큼 로또 생성
 - [ ] 당첨 번호 입력받기
