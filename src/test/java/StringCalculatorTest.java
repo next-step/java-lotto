@@ -39,4 +39,11 @@ class StringCalculatorTest {
         assertThat(stringCalculator.calculate(text)).isEqualTo(8);
     }
 
+    @Test
+    @DisplayName("문자열에 콤마와 콜론 구분자가 섞여있을 경우 문자열 합 리턴")
+    void commaAndColonDelimiterTest() {
+        String text = "3,5:6";
+        assertThat(stringCalculator.calculate(text)).isEqualTo(14);
+    }
+
 }
