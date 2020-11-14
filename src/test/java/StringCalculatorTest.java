@@ -62,4 +62,12 @@ class StringCalculatorTest {
                 () -> stringCalculator.calculate(text));
     }
 
+    @Test
+    @DisplayName("숫자인 문자열이 아닌 경우 예외 처리")
+    void notNumberExceptionTest() {
+        String text = "1,2,b";
+        Assertions.assertThrows(RuntimeException.class,
+                () -> stringCalculator.calculate(text));
+    }
+
 }

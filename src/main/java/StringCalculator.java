@@ -13,6 +13,7 @@ public class StringCalculator {
         CalculatorException.validateMinus(text);
 
         if(checkOnlyOneText(text)) {
+            CalculatorException.validateNumbers(text);
             return Integer.parseInt(text);
         }
 
@@ -39,8 +40,12 @@ public class StringCalculator {
 
     private int sum(String[] texts) {
         return Arrays.stream(texts)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(text -> {
+                    CalculatorException.validateNumbers(text);
+                    return Integer.parseInt(text);
+                })
                 .sum();
+
     }
 
     private boolean checkOnlyOneText(String text) {
