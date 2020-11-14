@@ -1,18 +1,22 @@
 package step3.domain.lotto;
 
+import step3.domain.lotto.firstcollection.LottoNumber;
+import step3.domain.lotto.firstcollection.LottoTickets;
+import step3.domain.lotto.firstcollection.MarkingNumbers;
+import step3.domain.lotto.firstcollection.WinningResults;
 import step3.type.WinningType;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static step3.Constant.ERROR_DUPLICATE_NUMBER;
+
 public class WinningNumbers {
-    private static final int INIT_WINNING_COUNT = 0;
-    private static final int NOT_EXISTS_INDEX = -1;
     private static final String DELIMITER = ",";
+    private static final int REVENUE_ANCHOR_POINT = 1;
+
     private final MarkingNumbers winningNumbers;
     private final LottoNumber bonusBall;
 
@@ -23,14 +27,9 @@ public class WinningNumbers {
 
     public static WinningNumbers of(String string, int bonusBall) {
         isValid(string);
-        MarkingNumbers splits = stringToObj(string);
-        return new WinningNumbers(splits, LottoNumber.ofBonus(bonusBall, splits));
-    }
-
-    public static WinningNumbers of(Set<LottoNumber> list, int bonusBall) {
-        isValid(list);
-        MarkingNumbers markingNumbers = new MarkingNumbers(list);
-        return new WinningNumbers(markingNumbers, LottoNumber.ofBonus(bonusBall, markingNumbers));
+        MarkingNumbers winningNumbers = stringToObj(string);
+        isDuplicate(bonusBall, winningNumbers);
+        return new WinningNumbers(winningNumbers, new LottoNumber(bonusBall));
     }
 
     private static MarkingNumbers stringToObj(String string) {
@@ -43,47 +42,46 @@ public class WinningNumbers {
         return new MarkingNumbers(collect);
     }
 
+    public static WinningNumbers of(Set<LottoNumber> list, int bonusBall) {
+        isValid(list);
+        MarkingNumbers winningNumbers = new MarkingNumbers(list);
+        isDuplicate(bonusBall, winningNumbers);
+        return new WinningNumbers(winningNumbers, new LottoNumber(bonusBall));
+    }
+
+    private static void isDuplicate(int number, MarkingNumbers markingNumbers) {
+        if (markingNumbers.contains(new LottoNumber(number))) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
+        }
+    }
+
+    public double getRevenueRate(LottoTickets tickets) {
+        WinningResults winningResults = getWinningStatistics(tickets);
+        return winningResults.getRevenue(tickets.countTicket());
+    }
+
     public WinningType getWinningStatistics(LottoTicket ticket) {
-        return compareWinningNumber(ticket);
+        return WinningResults.compareWinningNumber(ticket, this);
     }
 
-    public Map<WinningType, Integer> getWinningStatistics(LottoTickets tickets) {
-        Map<WinningType, Integer> winningStatistics = getInitWinningStatisticsMap();
-        tickets.getTickets()
-                .forEach(ticket -> {
-                    WinningType winningType = compareWinningNumber(ticket);
-                    appendWinningCount(winningStatistics, winningType);
-                });
-        return winningStatistics;
+    public WinningResults getWinningStatistics(LottoTickets tickets) {
+        return WinningResults.of(tickets, this);
     }
 
-    public WinningType compareWinningNumber(LottoTicket ticket) {
-        int matchCount = winningNumbers.countEquals(ticket);
-        return WinningType.getType(matchCount, ticket.isMarked(bonusBall));
+    public LottoNumber getBonusBall() {
+        return bonusBall;
     }
 
-    private Map<WinningType, Integer> getInitWinningStatisticsMap() {
-        return new HashMap<WinningType, Integer>() {{
-            put(WinningType.RANK_ONE, INIT_WINNING_COUNT);
-            put(WinningType.RANK_TWO, INIT_WINNING_COUNT);
-            put(WinningType.RANK_TWO_BONUS, INIT_WINNING_COUNT);
-            put(WinningType.RANK_THREE, INIT_WINNING_COUNT);
-            put(WinningType.RANK_FOUR, INIT_WINNING_COUNT);
-        }};
+    public int countEquals(LottoTicket ticket) {
+        return winningNumbers.countEquals(ticket);
     }
 
-    private void appendWinningCount(Map<WinningType, Integer> map, WinningType type) {
-        if (!WinningType.RANK_ETC.equals(type)) {
-            Integer findInteger = map.getOrDefault(type, NOT_EXISTS_INDEX);
-            map.put(type, increaseWinningCount(findInteger));
-        }
+    public boolean isRevenue(double revenueRate) {
+        return revenueRate > REVENUE_ANCHOR_POINT;
     }
 
-    private int increaseWinningCount(Integer count) {
-        if (count <= 0) {
-            count = INIT_WINNING_COUNT;
-        }
-        return ++count;
+    public boolean isMarkedBonusBall(LottoTicket ticket) {
+        return ticket.isMarked(bonusBall);
     }
 
     private static void isValid(String string) {
@@ -91,10 +89,10 @@ public class WinningNumbers {
             throw new IllegalArgumentException();
         }
     }
-
     private static void isValid(Set<LottoNumber> list) {
         if (list.isEmpty() || list.size() < 6) {
             throw new IllegalArgumentException();
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package step3.domain.lotto;
 
 import step3.Constant;
+import step3.domain.lotto.firstcollection.LottoTickets;
 import step3.strategy.NumberMakeStrategy;
 
 import java.util.function.BiFunction;
@@ -9,7 +10,9 @@ public class LottoTicketMachine {
 
     private static final BiFunction<Double, Integer, Integer> division = (i, j) -> (int) (i / j);
 
-    public static step3.domain.lotto.LottoTickets ticketing(int inputPrice, NumberMakeStrategy strategy) {
+    private LottoTicketMachine() { }
+
+    public static LottoTickets ticketing(int inputPrice, NumberMakeStrategy strategy) {
         int count = countAllowTicket(inputPrice);
         return new LottoTickets(count, strategy);
     }

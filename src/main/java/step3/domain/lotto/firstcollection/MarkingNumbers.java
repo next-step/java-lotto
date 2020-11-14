@@ -1,13 +1,15 @@
-package step3.domain.lotto;
+package step3.domain.lotto.firstcollection;
+
+import step3.domain.lotto.LottoTicket;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MarkingNumbers {
-
     public static final String DELIMITER = ", ";
     public static final String STRING_FORM = "[%s]";
+
     private final Set<LottoNumber> markingNumbers;
 
     public MarkingNumbers(Set<LottoNumber> markingNumbers) {

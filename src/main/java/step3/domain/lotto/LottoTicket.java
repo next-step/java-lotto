@@ -1,5 +1,7 @@
 package step3.domain.lotto;
 
+import step3.domain.lotto.firstcollection.LottoNumber;
+import step3.domain.lotto.firstcollection.MarkingNumbers;
 import step3.strategy.NumberMakeStrategy;
 
 import java.util.Set;

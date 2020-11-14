@@ -1,12 +1,9 @@
 package step3.view;
 
-import step3.domain.lotto.LottoTickets;
 import step3.domain.lotto.WinningNumbers;
+import step3.domain.lotto.firstcollection.LottoTickets;
+import step3.domain.lotto.firstcollection.WinningResults;
 import step3.type.WinningType;
-
-import java.util.Map;
-
-import static step3.Constant.LOTTO_BONUS_MATCH_NUMBER;
 
 public class LottoResultView implements ResultView {
     private static final String PURCHASED_COUNT = "%d개를 구매했습니다.";
@@ -18,6 +15,7 @@ public class LottoResultView implements ResultView {
     private static final String REVENUE = "이득";
     private static final String DAMAGES = "손해";
     private static final String HORIZONTAL_DELIMITER = "---------";
+    private static final int LOTTO_BONUS_MATCH_NUMBER = 5;
     private static final StringBuilder sb = new StringBuilder();
 
     @Override
@@ -31,10 +29,10 @@ public class LottoResultView implements ResultView {
     public void drawWinningStatistics(LottoTickets tickets, WinningNumbers winningNumbers) {
         clearStringBuilder();
 
-        Map<WinningType, Integer> winningStatistics = winningNumbers.getWinningStatistics(tickets);
+        WinningResults winningResults = winningNumbers.getWinningStatistics(tickets);
 
         append(WINNING_STATISTICS, HORIZONTAL_DELIMITER);
-        winningStatistics.forEach(this::appendWinningRow);
+        winningResults.forEach(this::appendWinningRow);
 
         System.out.println(sb.toString());
     }
@@ -63,8 +61,8 @@ public class LottoResultView implements ResultView {
     @Override
     public void drawRevenueRate(LottoTickets tickets, WinningNumbers winningNumbers) {
         clearStringBuilder();
-        double revenueRate = tickets.getRevenueRate(winningNumbers);
-        append(String.format(ALERT_REVENUE_RATE, revenueRate, tickets.isRevenue(revenueRate) ? REVENUE : DAMAGES));
+        double revenueRate = winningNumbers.getRevenueRate(tickets);
+        append(String.format(ALERT_REVENUE_RATE, revenueRate, winningNumbers.isRevenue(revenueRate) ? REVENUE : DAMAGES));
         System.out.println(sb.toString());
     }
 

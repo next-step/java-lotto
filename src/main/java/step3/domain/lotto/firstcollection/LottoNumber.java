@@ -1,8 +1,7 @@
-package step3.domain.lotto;
+package step3.domain.lotto.firstcollection;
 
 import java.util.Objects;
 
-import static step3.Constant.ERROR_DUPLICATE_NUMBER;
 import static step3.Constant.ERROR_OUT_RANGE_NUMBER;
 
 public class LottoNumber {
@@ -26,16 +25,6 @@ public class LottoNumber {
         return String.valueOf(number);
     }
 
-    public static LottoNumber ofBonus(int number, MarkingNumbers markingNumbers) {
-        isDuplicate(number, markingNumbers);
-        return new LottoNumber(number);
-    }
-
-    private static void isDuplicate(int number, MarkingNumbers markingNumbers) {
-        if (markingNumbers.contains(new LottoNumber(number))) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
-        }
-    }
 
     @Override
     public boolean equals(Object o) {
