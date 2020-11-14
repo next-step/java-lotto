@@ -10,6 +10,10 @@ public class Lotto {
         this.numbers = numberSelectionStrategy.collectNumbers();
     }
 
+    public WinningRank checkWinningRank(Numbers numbers) {
+        return WinningRank.getWinningRank(this.numbers.countSameNumber(numbers));
+    }
+
     public Numbers getNumbers() {
         return this.numbers;
     }

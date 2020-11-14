@@ -1,35 +1,32 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 import static lotto.domain.Utils.makeRangeNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class LotteryMachineTest {
-    static Stream<Arguments> checkWinningRank() {
-        return Stream.of(
-                arguments(makeRangeNumbers(1, 7), WinningRank.FIRST),
-                arguments(makeRangeNumbers(2, 8), WinningRank.SECOND),
-                arguments(makeRangeNumbers(3, 9), WinningRank.THIRD),
-                arguments(makeRangeNumbers(4, 10), WinningRank.FOURTH),
-                arguments(makeRangeNumbers(7, 13), WinningRank.FAIL)
-        );
+class LotteryMachineTest {
+    private LotteryMachine lotteryMachine;
+
+    @BeforeEach
+    void setUp() {
+        lotteryMachine = new LotteryMachine(makeRangeNumbers(1, 7));
     }
 
-    @ParameterizedTest
-    @DisplayName("당첨 번호와 로또 숫자 비교하여 몇 등 인지 확인")
-    @MethodSource
-    void checkWinningRank(Numbers numbers, WinningRank expectedWinningRank) {
-        LotteryMachine lotteryMachine = new LotteryMachine(makeRangeNumbers(1, 7));
+    @Test
+    @DisplayName("다수의 로또 당첨 결과 확인")
+    void checkLottos() {
+        Lotto lotto1 = new Lotto(() -> makeRangeNumbers(1, 7));
+        Lotto lotto2 = new Lotto(() -> makeRangeNumbers(2, 8));
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-        WinningRank winningRank = lotteryMachine.checkWinningRank(numbers);
+        WinningRanks winningRanks = lotteryMachine.checkLottos(lottos);
 
-        assertThat(winningRank).isEqualTo(expectedWinningRank);
+        WinningRanks expectedWinningRanks = new WinningRanks(Arrays.asList(WinningRank.FIRST, WinningRank.SECOND));
+        assertThat(winningRanks).isEqualTo(expectedWinningRanks);
     }
 }
