@@ -26,6 +26,19 @@ public class Numbers {
         return numbers;
     }
 
+    public int countSameNumber(Numbers numbers) {
+        return this.numbers.stream()
+                .reduce(0, (count, num) -> {
+                    if (numbers.contains(num))
+                        return count + 1;
+                    return count;
+                });
+    }
+
+    public boolean contains(int num) {
+        return this.numbers.contains(num);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
