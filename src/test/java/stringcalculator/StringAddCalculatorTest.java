@@ -67,4 +67,14 @@ class StringAddCalculatorTest {
     int result = StringAddCalculator.splitAndSum(input);
     assertThat(result).isEqualTo(expected);
   }
+
+  // Caution: 테스트 케이스 추가 시 \n -> \\n 로 작성
+  @ParameterizedTest
+  @CsvSource(value = {"//;\\n1;2;3=6", "//a\\n1a2=3"}, delimiter = '=')
+  @DisplayName("추가 구분자를 가지고 있는 케이스")
+  public void ExtraDelimiterCase(String input, int expected) {
+    int result = StringAddCalculator.splitAndSum(input);
+    assertThat(result).isEqualTo(expected);
+  }
+
 }

@@ -1,25 +1,28 @@
 package stringcalculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
   private static final int DEFAULT_RETURN_VALUE = 0;
-  private static final String DELIMITER_REGEX = "[,:]";
+  private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
 
-  private StringAddCalculator(){
+  private StringAddCalculator() {
   }
 
-  public static int splitAndSum(String input) {
+  public static int splitAndSum(String rawInput) {
 
     int result = 0;
 
-    if (isInvalidInput(input)) {
+    if (isInvalidInput(rawInput)) {
       return DEFAULT_RETURN_VALUE;
     }
 
-    String[] tokenizedInputs = input.split(DELIMITER_REGEX);
+    String[] splitInputs = splitInput(rawInput);
 
-    for (String tokenizedInput : tokenizedInputs) {
-      result += castToInteger(tokenizedInput);
+    for (String splitInput : splitInputs) {
+      result += castToInteger(splitInput);
     }
 
     return result;
@@ -31,5 +34,16 @@ public class StringAddCalculator {
 
   private static int castToInteger(String tokenizedInput) {
     return Integer.parseInt(tokenizedInput);
+  }
+
+  private static String[] splitInput(String input) {
+    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+    if (m.find()) {
+      String customDelimiter = m.group(1);
+      return m.group(2).split(customDelimiter);
+    }
+
+    return input.split(DEFAULT_DELIMITER_REGEX);
   }
 }
