@@ -14,16 +14,15 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("빈 문자열 확인")
-    void emptyStringTest() {
-        assertThat(stringCalculator.checkEmptyString("")).isTrue();
+    @DisplayName("문자열이 비어있는 경우 0 리턴")
+    void returnZeroEmptyTest() {
+        assertThat(stringCalculator.sum("")).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("문자열 Null 확인")
-    void nullCheckTest() {
-        assertThat(stringCalculator.checkNullString(null)).isTrue();
+    @DisplayName("문자열이 Null인 경우 0 리턴")
+    void returnZeroNullTest() {
+        assertThat(stringCalculator.sum(null)).isEqualTo(0);
     }
-
 
 }

@@ -1,9 +1,17 @@
 public class StringCalculator {
-    public boolean checkEmptyString(String text) {
+    public int sum(String text) {
+        if(checkNullString(text) || checkEmptyString(text)) {
+            return 0;
+        }
+        return 0;
+    }
+
+    private boolean checkEmptyString(String text) {
         return text.isEmpty();
     }
 
-    public boolean checkNullString(String text) {
+    private boolean checkNullString(String text) {
         return text == null;
     }
+
 }
