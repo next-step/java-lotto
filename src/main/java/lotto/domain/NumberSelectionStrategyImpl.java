@@ -8,9 +8,10 @@ public class NumberSelectionStrategyImpl implements NumberSelectionStrategy {
 
     @Override
     public Numbers collectNumbers() {
-        return new Numbers.Builder(START_INCLUSIVE, END_EXCLUSIVE)
+        return Numbers.builder()
+                .range(START_INCLUSIVE, END_EXCLUSIVE)
                 .shuffle()
-                .range(FROM_IDX, TO_IDX)
+                .subNumbers(FROM_IDX, TO_IDX)
                 .sort()
                 .build();
     }
