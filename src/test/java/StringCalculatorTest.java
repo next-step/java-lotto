@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,5 +54,12 @@ class StringCalculatorTest {
         assertThat(stringCalculator.calculate(text)).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("문자열이 음수인 경우 예외 처리")
+    void minusExceptionTest() {
+        String text = "-1";
+        Assertions.assertThrows(RuntimeException.class,
+                () -> stringCalculator.calculate(text));
+    }
 
 }

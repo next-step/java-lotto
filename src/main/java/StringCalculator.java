@@ -1,3 +1,5 @@
+import util.CalculatorException;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,6 +9,8 @@ public class StringCalculator {
         if(checkNullString(text) || checkEmptyString(text)) {
             return 0;
         }
+
+        CalculatorException.validateMinus(text);
 
         if(checkOnlyOneText(text)) {
             return Integer.parseInt(text);
