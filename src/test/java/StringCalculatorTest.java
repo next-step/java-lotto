@@ -19,4 +19,11 @@ class StringCalculatorTest {
         assertThat(stringCalculator.checkEmptyString("")).isTrue();
     }
 
+    @Test
+    @DisplayName("문자열 Null 확인")
+    void nullCheckTest() {
+        assertThat(stringCalculator.checkNullString(null)).isTrue();
+    }
+
+
 }
