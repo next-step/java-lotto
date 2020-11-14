@@ -13,6 +13,6 @@ public class LottosTest {
 
         Lottos lottos = new Lottos(lottoNum, new NumberSelectionStrategyImpl());
 
-        assertThat(lottos.getLottos()).hasSize(lottoNum);
+        assertThat(lottos.getLottoList()).hasSize(lottoNum);
     }
 }

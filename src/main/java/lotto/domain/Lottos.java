@@ -5,15 +5,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    List<Lotto> lottos;
+    private final List<Lotto> lottoList;
 
     public Lottos(int lottoNum, NumberSelectionStrategy numberSelectionStrategy) {
-        lottos = IntStream.range(0, lottoNum)
+        lottoList = IntStream.range(0, lottoNum)
                 .mapToObj(idx -> new Lotto(numberSelectionStrategy))
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 }
