@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
 
@@ -88,15 +86,13 @@ public class StringAddCalculatorTest {
     }
 
 
-    @DisplayName("음수 또는 정수형 문자가 아닌 문자열을 입력한 경우 Exception 테스트")
+    @DisplayName("음수 또는 정수형 문자가 아닌 문자열을 입력한 경우 RuntimeException 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"1;2;-7", "A;2;*"})
     void illegalInputExceptionTest(String inputValue){
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            //when
+        assertThatThrownBy(() -> {
             StringAddCalculator stringAddCalculator = new StringAddCalculator(new CommaColonStrategy());
             int sum = stringAddCalculator.calculate(inputValue);
-        }).withMessageContaining("피연산자는 정수형 숫자로 입력하세요.");
+        }).isInstanceOf(RuntimeException.class);
     }
 }
