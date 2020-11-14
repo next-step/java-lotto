@@ -24,7 +24,7 @@
 2. 보너스 번호 중복 테스트
     - 보너스 번호는 마킹된 로또넘버와 중복되서는 안된다.
 3. 2등 보너스 당첨 수익률 테스트
-
+4. 당첨결과 일급 콜렉션 테스트
 
 ## 구조(tree)
 ```
@@ -35,14 +35,15 @@
 |        ├── controller
 |        |  └── LottoController.java
 |        ├── domain
-|        |  ├── lotto
-|        |  |  ├── LottoNumber.java
-|        |  |  ├── LottoTicket.java
-|        |  |  ├── LottoTicketMachine.java
-|        |  |  ├── LottoTickets.java
-|        |  |  ├── MarkingNumbers.java
-|        |  |  └── WinningNumbers.java
-|        |  └── model
+|        |  └── lotto
+|        |     ├── firstcollection
+|        |     |  ├── LottoNumber.java
+|        |     |  ├── LottoTickets.java
+|        |     |  ├── MarkingNumbers.java
+|        |     |  └── WinningResults.java
+|        |     ├── LottoTicket.java
+|        |     ├── LottoTicketMachine.java
+|        |     └── WinningNumbers.java
 |        ├── Main.java
 |        ├── README.md
 |        ├── service
@@ -60,5 +61,7 @@
    └── java
       └── step3
          └── LottoBonusNumberTest.java
+
+
 ```
 
