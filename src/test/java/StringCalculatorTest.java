@@ -46,4 +46,12 @@ class StringCalculatorTest {
         assertThat(stringCalculator.calculate(text)).isEqualTo(14);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자를 지정하는 경우 문자열의 합 리턴")
+    void customDelimiterTest() {
+        String text = "//;\n1;2;3";
+        assertThat(stringCalculator.calculate(text)).isEqualTo(6);
+    }
+
+
 }

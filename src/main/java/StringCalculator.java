@@ -12,7 +12,25 @@ public class StringCalculator {
             return Integer.parseInt(text);
         }
 
+        if(checkCustomDelimiter(text)) {
+            return sumCustomDelimiter(text);
+        }
+
         return sum(text.split(",|:"));
+    }
+
+    private int sumCustomDelimiter(String text) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        String[] tokens = {""};
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            tokens = m.group(2).split(customDelimiter);
+        }
+        return sum(tokens);
+    }
+
+    private boolean checkCustomDelimiter(String text) {
+        return text.startsWith("//");
     }
 
     private int sum(String[] texts) {
