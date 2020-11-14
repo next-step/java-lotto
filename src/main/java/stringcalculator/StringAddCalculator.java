@@ -2,6 +2,7 @@ package stringcalculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import stringcalculator.calculatorexception.NegativeNumberException;
 
 public class StringAddCalculator {
 
@@ -33,6 +34,10 @@ public class StringAddCalculator {
   }
 
   private static int castToInteger(String tokenizedInput) {
-    return Integer.parseInt(tokenizedInput);
+    int castedInput = Integer.parseInt(tokenizedInput);
+    if (castedInput < 0) {
+      throw new NegativeNumberException();
+    }
+    return castedInput;
   }
 }
