@@ -14,7 +14,7 @@ public class Round {
         return myPicks;
     }
 
-    public void setMyPicks(Collection<Pick> myPicks) {
+    public void addPicks(Collection<Pick> myPicks) {
         this.myPicks.addAll(myPicks);
     }
 

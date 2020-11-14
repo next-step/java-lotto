@@ -14,7 +14,7 @@ public class RoundTest {
     void testGetPicks(){
         Round round = new Round();
         Pick pick = new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6));
-        round.setMyPicks(Arrays.asList(pick));
+        round.addPicks(Arrays.asList(pick));
         Set<Pick> pickSet = round.getMyPicks();
         assertThat(pickSet).isNotEmpty();
     }

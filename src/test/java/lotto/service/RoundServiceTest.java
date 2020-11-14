@@ -14,12 +14,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RoundServiceTest {
     @Test
     void testBuy(){
-        RoundService roundService = new RoundService();
+        RoundService roundService = new RoundService(new AutoPickService());
         Set<Pick> myPicks = new HashSet<>();
         myPicks.add(new Pick(PickType.AUTO, Arrays.asList(3,5,6,7,8,9)));
         Round round = roundService.buy(myPicks);
 
         assertThat(round).isNotNull();
         assertThat(round.getMyPicks()).containsAll(myPicks);
+    }
+
+    @Test
+    void testAutoBuy(){
+        RoundService roundService = new RoundService(new AutoPickService());
+        Round round = roundService.autoBuy(14);
+
+        assertThat(round).isNotNull();
+        assertThat(round.getMyPicks()).hasSize(14);
     }
 }
