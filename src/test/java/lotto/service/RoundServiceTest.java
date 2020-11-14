@@ -1,8 +1,11 @@
 package lotto.service;
 
+import lotto.domain.LottoConstraint;
 import lotto.domain.Pick;
 import lotto.domain.Round;
 import lotto.domain.enums.PickType;
+import lotto.message.ErrorMessage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,11 +13,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RoundServiceTest {
+
+    private RoundService roundService;
+    private LottoService lottoService;
+
+    @BeforeEach
+    void makeTestRoundService(){
+        lottoService = new LottoService(1000, new LottoConstraint(6, 45));
+        roundService = new RoundService(new AutoPickService(lottoService), lottoService);
+    }
+
     @Test
     void testBuy(){
-        RoundService roundService = new RoundService(new AutoPickService());
         Set<Pick> myPicks = new HashSet<>();
         myPicks.add(new Pick(PickType.AUTO, Arrays.asList(3,5,6,7,8,9)));
         Round round = roundService.buy(myPicks);
@@ -24,8 +37,27 @@ public class RoundServiceTest {
     }
 
     @Test
+    void testBuyInvalidBallCount(){
+        Set<Pick> myPicks = new HashSet<>();
+        myPicks.add(new Pick(PickType.AUTO, Arrays.asList(3,5,6,7,8)));
+        assertThatThrownBy(() -> {
+            roundService.buy(myPicks);
+        }).isInstanceOf(RuntimeException.class)
+        .hasMessageContaining(String.format(ErrorMessage.INVALID_BALL_COUNT_FORMAT, lottoService.getConstraint().getCountOfNumber()));
+    }
+
+    @Test
+    void testBuyInvalidBallRange(){
+        Set<Pick> myPicks = new HashSet<>();
+        myPicks.add(new Pick(PickType.AUTO, Arrays.asList(3,5,6,7,8,50)));
+        assertThatThrownBy(() -> {
+            roundService.buy(myPicks);
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessageContaining(ErrorMessage.INVALID_BALL_NUMBER_RANGE);
+    }
+
+    @Test
     void testAutoBuy(){
-        RoundService roundService = new RoundService(new AutoPickService());
         Round round = roundService.autoBuy(14);
 
         assertThat(round).isNotNull();

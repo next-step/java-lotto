@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Lotto {
     private Integer price;
-    private final Map<Rank, Long> prizeMap = new HashMap<>();
     private LottoConstraint constraint;
+    private final Map<Rank, Long> prizeMap = new HashMap<>();
 
     public void setPrice(Integer price) {
         this.price = price;

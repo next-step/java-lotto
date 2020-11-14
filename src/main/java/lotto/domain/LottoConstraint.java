@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.message.ErrorMessage;
+
+import java.util.Set;
+
+
 public class LottoConstraint {
     private final int countOfNumber;
     private final int range;
@@ -15,5 +20,16 @@ public class LottoConstraint {
 
     public int getRange() {
         return range;
+    }
+
+    public void validate(Pick pick) {
+        Set<Integer> balls = pick.getBalls();
+        if(countOfNumber != balls.size()){
+            throw new RuntimeException(String.format(ErrorMessage.INVALID_BALL_COUNT_FORMAT, countOfNumber));
+        }
+        boolean rangeInvalid = balls.stream().anyMatch(ball -> range < ball);
+        if(rangeInvalid){
+            throw new RuntimeException(ErrorMessage.INVALID_BALL_NUMBER_RANGE);
+        }
     }
 }
