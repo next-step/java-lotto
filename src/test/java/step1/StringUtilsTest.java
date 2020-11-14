@@ -31,4 +31,17 @@ class StringUtilsTest {
         // then
         assertThat(result).isTrue();
     }
+
+    @DisplayName("비지 않은 문자열이 들어온 경우")
+    @Test
+    void isBlank_when_receive_not_blank_str() {
+        // given
+        final String Str = "str ";
+
+        // when
+        final boolean result = StringUtils.isBlank(Str);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
