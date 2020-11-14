@@ -9,11 +9,9 @@ public class LottoTest {
     @Test
     @DisplayName("로또 1장 생성")
     void createLotto() {
-        Numbers numbers = Numbers.builder()
-                .range(0, 6)
-                .build();
+        Numbers numbers = makeRangeNumbers(0, 7);
 
-        Lotto lotto = new Lotto(() -> numbers);
+        lotto = new Lotto(() -> numbers);
 
         assertThat(lotto.getNumbers()).isEqualTo(numbers);
     }
