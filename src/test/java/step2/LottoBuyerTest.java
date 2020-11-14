@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static step2.LottoBuyer.MONEY_MUST_NOT_BE_NULL;
@@ -14,7 +17,7 @@ public class LottoBuyerTest {
     @Test
     void buy_lotto() {
         // given
-        final Money money = Money.of(2000);
+        final Money money = Lotto.getPrice().multiply(2);
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
         final LottoStore lottoStore = new LottoStore();
 
@@ -46,7 +49,7 @@ public class LottoBuyerTest {
         @Test
         void success() {
             // given
-            final Money money = Money.of(1000);
+            final Money money = Lotto.getPrice();
 
             // when
             final LottoBuyer lottoBuyer = LottoBuyer.of(money);
@@ -60,7 +63,7 @@ public class LottoBuyerTest {
     @Test
     void getLottos_not_return_null() {
         // given
-        final Money money = Money.of(1000);
+        final Money money = Lotto.getPrice();
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
         
         // when
@@ -69,5 +72,28 @@ public class LottoBuyerTest {
         // then
         assertThat(lottos).isNotNull();
         assertThat(lottos.size()).isZero();
+    }
+    
+    @DisplayName("로또 통계 정보를 가져온다")
+    @Test
+    void get_win_lottery() {
+        // given
+        final Money money = Lotto.getPrice().multiply(10);
+        final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+        final List<LottoNumber> lottoNumberOneToSix = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+        final Lotto winningLottery = Lotto.of(lottoNumberOneToSix);
+
+        // when
+        final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningLottery);
+        
+        // then
+        assertThat(lottoStatisticsResult).isNotNull();
     }
 }

@@ -25,4 +25,14 @@ public class LottoBuyer {
     public Lottos getLottos() {
         return lottos;
     }
+
+    public LottoStatisticsResult getWinLotteryStatistics(final Lotto winningLottery) {
+        final WinLotteryResult result = lottos.countHitNumber(winningLottery);
+        return new LottoStatisticsResult(result, getProfit(result));
+    }
+
+    private double getProfit(WinLotteryResult result) {
+        final Money prize = result.getTotalPrizeMoney();
+        return prize.divide(money);
+    }
 }

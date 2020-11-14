@@ -49,7 +49,7 @@ class MoneyTest {
             final Money lottoPrice = Lotto.getPrice();
 
             // when
-            final int lottoCount = money.divide(lottoPrice);
+            final int lottoCount = money.divideWithoutRemainder(lottoPrice);
 
             // then
             assertThat(lottoCount).isEqualTo(2);
@@ -64,7 +64,7 @@ class MoneyTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                money.divide(lottoPrice);
+                money.divideWithoutRemainder(lottoPrice);
             });
 
             // then

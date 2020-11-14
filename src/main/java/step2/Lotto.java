@@ -16,17 +16,21 @@ public class Lotto {
         return new Lotto(strategy.create());
     }
 
+    public static Lotto of(final List<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
+
     public static Lotto of() {
         return of(DEFAULT_CREATE_NUMBER_STRATEGY);
     }
 
-    public static Money getPrice() {
-        return PRICE;
+    public int countHitNumber(final Lotto lotto) {
+        return (int) this.numbers.stream()
+                .filter(lotto.numbers::contains).count();
     }
 
-    public int countHitNumber(final List<LottoNumber> numbers) {
-        return (int) this.numbers.stream()
-                .filter(numbers::contains).count();
+    public static Money getPrice() {
+        return PRICE;
     }
 
     public static int getLottoNumbersLength() {

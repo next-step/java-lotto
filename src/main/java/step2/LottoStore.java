@@ -13,7 +13,7 @@ public class LottoStore {
     }
 
     private Lottos createLottos(final Money money, final Money lottoPrice) {
-        final int lottoCount = money.divide(lottoPrice);
+        final int lottoCount = money.divideWithoutRemainder(lottoPrice);
         return LottosFactory.create(lottoCount);
     }
 }

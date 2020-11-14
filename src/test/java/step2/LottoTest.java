@@ -30,14 +30,23 @@ class LottoTest {
     }
 
     @Test
+    void of_without_strategy() {
+        // when 
+        final Lotto lotto = Lotto.of();
+
+        // then
+        assertThat(lotto).isNotNull();
+    }
+
+    @Test
     void countHitNumber() {
         // given
         final CreateLottoNumbersStrategy strategy = () -> lottoNumberOneToSix;
-
+        
         // when 
         final Lotto lotto = Lotto.of(strategy);
 
         // then
-        assertThat(lotto.countHitNumber(lottoNumberOneToSix)).isEqualTo(6);
+        assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix))).isEqualTo(6);
     }
 }
