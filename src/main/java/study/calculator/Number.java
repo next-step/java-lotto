@@ -1,5 +1,7 @@
 package study.calculator;
 
+import java.util.Objects;
+
 public class Number {
 
     private final int value;
@@ -26,5 +28,12 @@ public class Number {
         return new Number(this.value + number.value);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number = (Number) o;
+        return value == number.value;
+    }
 
 }
