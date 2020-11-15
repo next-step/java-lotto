@@ -26,10 +26,8 @@ public class LottoResultView implements ResultView {
     }
 
     @Override
-    public void drawWinningStatistics(LottoTickets tickets, WinningNumbers winningNumbers) {
+    public void drawWinningStatistics(WinningResults winningResults) {
         clearStringBuilder();
-
-        WinningResults winningResults = winningNumbers.getWinningStatistics(tickets);
 
         append(WINNING_STATISTICS, HORIZONTAL_DELIMITER);
         winningResults.forEach(this::appendWinningRow);
@@ -59,10 +57,11 @@ public class LottoResultView implements ResultView {
     }
 
     @Override
-    public void drawRevenueRate(LottoTickets tickets, WinningNumbers winningNumbers) {
+    public void drawRevenueRate(double revenueRate, boolean isRevenue) {
         clearStringBuilder();
-        double revenueRate = winningNumbers.getRevenueRate(tickets);
-        append(String.format(ALERT_REVENUE_RATE, revenueRate, winningNumbers.isRevenue(revenueRate) ? REVENUE : DAMAGES));
+
+        append(String.format(ALERT_REVENUE_RATE, revenueRate, isRevenue ? REVENUE : DAMAGES));
+
         System.out.println(sb.toString());
     }
 
