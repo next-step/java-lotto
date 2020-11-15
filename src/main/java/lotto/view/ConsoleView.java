@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.dto.ManualLottoNumbers;
 import lotto.dto.WinningStatistic;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
@@ -28,8 +29,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos) {
-        resultView.printBoughtLottos(numberOfManualLotto, boughtLottos);
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
+        resultView.printBoughtLottos(manualLottoNumbers, boughtLottos);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+    public ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
         return inputView.getManualLottoNumbers(numberOfManualLotto);
     }
 

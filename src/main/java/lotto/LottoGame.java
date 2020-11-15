@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.dto.ManualLottoNumbers;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.exception.IllegalBonusNumberException;
@@ -9,9 +10,7 @@ import lotto.exception.IllegalInputAmountException;
 import lotto.service.LottoService;
 import lotto.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class LottoGame {
@@ -67,22 +66,22 @@ public class LottoGame {
         return numberOfManualLotto;
     }
 
-    private List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
-        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
-        if (numberOfManualLotto > 0) {
-            manualLottoNumbers = view.getManualLottoNumbers(numberOfManualLotto);
+    private ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
+        if (numberOfManualLotto <= 0) {
+            return ManualLottoNumbers.empty();
         }
-        return manualLottoNumbers;
+
+        return view.getManualLottoNumbers(numberOfManualLotto);
     }
 
     private List<Lotto> getLotto(int amount, int numberOfManualLotto) {
-        List<Set<Integer>> manualLottoNumbers = getValidInput(() -> getManualLottoNumbers(numberOfManualLotto));
+        ManualLottoNumbers manualLottoNumbers = getValidInput(() -> getManualLottoNumbers(numberOfManualLotto));
         return getLottosWithManualNumbers(amount, manualLottoNumbers);
     }
 
-    private List<Lotto> getLottosWithManualNumbers(int amount, List<Set<Integer>> manualLottoNumbers) {
+    private List<Lotto> getLottosWithManualNumbers(int amount, ManualLottoNumbers manualLottoNumbers) {
         List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
-        view.printBoughtLottos(manualLottoNumbers.size(), boughtLottos);
+        view.printBoughtLottos(manualLottoNumbers, boughtLottos);
         return boughtLottos;
     }
 

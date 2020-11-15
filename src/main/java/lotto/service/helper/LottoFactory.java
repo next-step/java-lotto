@@ -2,11 +2,11 @@ package lotto.service.helper;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.dto.ManualLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class LottoFactory {
     public static final int PRICE_OF_ONE_LOTTO = 1_000;
@@ -22,13 +22,10 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> buyLottos(List<Set<Integer>> manualLottoNumbers, int amount) {
+    public static List<Lotto> buyLottos(ManualLottoNumbers manualLottoNumbers, int amount) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (Set<Integer> manualLottoNumber : manualLottoNumbers) {
-            lottos.add(Lotto.of(manualLottoNumber));
-            amount -= PRICE_OF_ONE_LOTTO;
-        }
+        amount = manualLottoNumbers.addManualLottos(lottos, amount);
 
         for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {
             Collections.shuffle(NUMBERS);

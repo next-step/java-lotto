@@ -1,6 +1,7 @@
 package lotto.view.inputview;
 
-import java.util.List;
+import lotto.dto.ManualLottoNumbers;
+
 import java.util.Set;
 
 public interface InputView {
@@ -12,7 +13,7 @@ public interface InputView {
 
     int getNumberOfManualLotto();
 
-    List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto);
+    ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto);
 
     void printInputError(Exception e);
 }

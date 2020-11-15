@@ -1,5 +1,7 @@
 package lotto.view.inputview;
 
+import lotto.dto.ManualLottoNumbers;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,13 +52,13 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+    public ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < numberOfManualLotto; i++) {
             manualLottoNumbers.add(getLottoNumbers());
         }
-        return manualLottoNumbers;
+        return new ManualLottoNumbers(manualLottoNumbers);
     }
 
     @Override
