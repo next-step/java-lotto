@@ -26,7 +26,7 @@ class WinningRankStatisticsTest {
     @Test
     @DisplayName("수익률 계산하기")
     void getYield() {
-        float expectedYield = ((float) WinningRank.FIRST.getPrice() * 2 + WinningRank.SECOND.getPrice() * 1) / (LOTTO_PRICE * 3);
+        float expectedYield = (WinningRank.FIRST.getPrice() * 2 + WinningRank.SECOND.getPrice() * 1) / (LOTTO_PRICE * 3);
         assertThat(winningRankStatistics.getYield()).isCloseTo(expectedYield, Percentage.withPercentage(1));
     }
 
