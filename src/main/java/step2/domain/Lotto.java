@@ -3,6 +3,7 @@ package step2.domain;
 import util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +29,13 @@ public class Lotto {
         checkArgument(numbers.size() == LOTTO_NUMBERS_LENGTH, LOTTO_NUMBER_SIZE_NOT_VALID);
         return new Lotto(numbers);
     }
-    
+
     public static Lotto of(final CreateLottoNumbersStrategy strategy) {
-        return of(strategy.create());
+        final List<LottoNumber> lottoNumbers = strategy.create();
+        lottoNumbers.sort(Comparator.comparing(LottoNumber::getValue));
+        return of(lottoNumbers);
     }
-    
+
     public static Lotto of(final String lottoNumberExpression) {
         checkArgument(StringUtils.isNotBlank(lottoNumberExpression), LOTTO_NUMBER_MUST_NOT_BE_BLANK);
         final List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberExpression.split(SEPARATOR))
