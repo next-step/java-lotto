@@ -8,11 +8,12 @@ public class LottoPurchase {
 	public LottoPurchase(int money) {
 		this.money = money;
 	}
-	public String getPurchaseMessage() {
-		return String.format(LOTTO_PURCHASE_MESSAGE, getBuying(money));
+	public int getLottoCount() {
+		System.out.println(String.format(LOTTO_PURCHASE_MESSAGE, getBuying(money)));
+		return getBuying(money);
 	}
 
-	protected int getBuying(int money) {
+	public int getBuying(int money) {
 		return money / LOTTO_PRICE;
 	}
 }
