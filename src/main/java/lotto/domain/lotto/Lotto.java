@@ -4,6 +4,7 @@ import lotto.domain.Money;
 import util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,6 +77,8 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumber() {
-        return numbers.stream().map(LottoNumber::getValue).collect(Collectors.toList());
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 }
