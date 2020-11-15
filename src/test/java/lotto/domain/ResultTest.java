@@ -10,8 +10,8 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultTest {
-    Lotto winningLotto;
-    Result result;
+    private Lotto winningLotto;
+    private Result result;
 
     @BeforeEach
     void setUp() {
@@ -41,10 +41,15 @@ class ResultTest {
     }
 
     @Test
-    @DisplayName("profit 을 정상적으로 계산해야한다.")
+    @DisplayName("profit 과 rateOfReturn 을 정상적으로 계산해야한다.")
     void getProfit() {
         int expectedProfit = 2003055000;
-        assertThat(result.getProfit())
-                .isEqualTo(new Money(expectedProfit));
+        double expectedRateOfReturn = 2806.0;
+        Assertions.assertAll(
+                () -> assertThat(result.getProfit())
+                        .isEqualTo(new Money(expectedProfit)),
+                () -> assertThat(result.getRateOfReturn(new Money(713793)))
+                        .isEqualTo(expectedRateOfReturn)
+        );
     }
 }

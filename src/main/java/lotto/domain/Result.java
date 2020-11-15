@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class Result {
     private final Map<Integer, Integer> result;
@@ -16,6 +15,10 @@ public class Result {
         }
     }
 
+    public double getRateOfReturn(Money purchaseMoney) {
+        return getProfit().divide(purchaseMoney);
+    }
+
     public Money getProfit() {
         int profit = 0;
         for (Jackpot jackpot : Jackpot.values()) {
@@ -25,21 +28,16 @@ public class Result {
     }
 
     public int getNumOfLotto(Jackpot jackpot) {
-        return getNumOfLotto(
-                jackpot.getNumOfCorrected()
+        return result.getOrDefault(
+                jackpot.getNumOfCorrected(),
+                0
         );
     }
 
-    private int getNumOfLotto(int numOfCorrected) {
-        return Optional.ofNullable(
-                result.get(numOfCorrected)
-        ).orElseGet(() -> 0);
-    }
-
-    void increaseNumOfLotto(int numOfCorrected) {
+    private void increaseNumOfLotto(int numOfCorrected) {
         result.put(
                 numOfCorrected,
-                getNumOfLotto(numOfCorrected) + 1
+                result.getOrDefault(numOfCorrected, 0) + 1
         );
     }
 }

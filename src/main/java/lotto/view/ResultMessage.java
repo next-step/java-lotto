@@ -4,7 +4,7 @@ import lotto.domain.Jackpot;
 import lotto.domain.Money;
 import lotto.domain.Result;
 
-public class ResultMessage {
+class ResultMessage {
     private ResultMessage() {}
 
     static String getJackpotStatistics(Result result, Money purchaseMoney) {
@@ -13,9 +13,7 @@ public class ResultMessage {
         for (Jackpot jackpot : Jackpot.values()) {
             sb.append(getJackpotMsg(jackpot, result.getNumOfLotto(jackpot)));
         }
-        double rateOfReturn = result
-                .getProfit()
-                .divide(purchaseMoney);
+        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
         sb.append(getRateOfReturnMsg(rateOfReturn));
         return sb.toString();
     }
