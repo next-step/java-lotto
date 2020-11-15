@@ -40,6 +40,6 @@ public class InputViewTest {
 		InputView underTest = new InputView(new Scanner(""));
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> underTest.getInputLottoNumbers())
-				.withMessage("지난주 로또 당번호는 필수입니다.");
+				.withMessage("지난주 로또 당첨 번호는 필수입니다.");
 	}
 }
