@@ -1,9 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.CreateLottoNumbersStrategy;
-import lotto.domain.lotto.CreateRandomNumbersStrategy;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

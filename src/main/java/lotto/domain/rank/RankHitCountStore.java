@@ -56,6 +56,6 @@ public class RankHitCountStore {
                     return money.multiply(count);
                 })
                 .reduce(Money::plus)
-                .orElse(Money.EMPTY);
+                .orElse(Money.ZERO);
     }
 }
