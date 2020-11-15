@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 public class StringSumCalculator {
 	private static final String ERROR_MESSGAE = "input값은 양수만 가능합니다.";
+	private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
+	private static final String DELEMITER_PATTERN = ",|:";
 
 	public int sum(String inputString) {
 		if (inputString == null || inputString.isEmpty()) {
@@ -15,13 +17,13 @@ public class StringSumCalculator {
 	}
 
 	private int getSumByDelimeter(String inputString) {
-		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
+		Matcher matcher = Pattern.compile(CUSTOM_PATTERN).matcher(inputString);
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
 			String[] inputStrings = matcher.group(2).split(customDelimiter);
 			return getSum(inputStrings);
 		}
-		String[] inputStrings = inputString.split(",|:");
+		String[] inputStrings = inputString.split(DELEMITER_PATTERN);
 		return getSum(inputStrings);
 	}
 
