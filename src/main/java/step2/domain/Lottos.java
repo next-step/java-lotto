@@ -22,7 +22,6 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-
     public LottoMatcher matchLastWeekLotto(List<Integer> lastWeekLottoNums) {
         LottoMatcher lottoMatcher = new LottoMatcher();
         lottos.stream()
