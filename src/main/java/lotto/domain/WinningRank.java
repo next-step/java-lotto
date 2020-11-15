@@ -37,4 +37,8 @@ public enum WinningRank {
     public boolean isFail() {
         return this == WinningRank.FAIL;
     }
+
+    public int getTotalPrice(int num) {
+        return price * num;
+    }
 }
