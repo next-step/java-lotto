@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class Result {
-    private final HashMap<Integer, Integer> result;
+    private final Map<Integer, Integer> result;
 
     public Result(List<Lotto> lottos, Lotto winningLotto) {
         result = new HashMap<>();
