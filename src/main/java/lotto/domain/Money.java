@@ -19,7 +19,6 @@ public class Money {
 
     }
 
-    // TODO: divde 함수 없애기
     public double divide(Money divider) {
         return money / divider.money;
     }

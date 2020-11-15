@@ -89,28 +89,4 @@ class LottoTest {
         assertThat(lotto.toString())
                 .isEqualTo(expected);
     }
-
-    @Test
-    void testEquals() {
-        Lotto lotto1 = new Lotto(
-                Arrays.asList(1, 2, 3, 4, 5, 6)
-        );
-        Lotto lotto2 = new Lotto(
-                Arrays.asList(6, 5, 4, 3, 2, 1)
-        );
-        assertThat(lotto1)
-                .isEqualTo(lotto2);
-    }
-
-    @Test
-    void testHashCode() {
-        Lotto lotto1 = new Lotto(
-                Arrays.asList(1, 2, 3, 4, 5, 6)
-        );
-        Lotto lotto2 = new Lotto(
-                Arrays.asList(6, 5, 4, 3, 2, 1)
-        );
-        assertThat(lotto1.hashCode())
-                .isEqualTo(lotto2.hashCode());
-    }
 }

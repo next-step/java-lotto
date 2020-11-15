@@ -6,7 +6,7 @@ import lotto.exception.DuplicatedLottoException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class Lotto {
     public static final int SIZE = 6;
@@ -18,6 +18,7 @@ public class Lotto {
         validateLottoNos(lottoNos);
         this.lottoNos = new LinkedList<>();
         lottoNoPool = LottoNoPool.getInstance();
+        Collections.sort(lottoNos);
         for (int no : lottoNos) {
             add(no);
         }
@@ -26,9 +27,7 @@ public class Lotto {
     int countSameNo(Lotto lotto) {
         int count = 0;
         for (LottoNo lottoNo : lotto.lottoNos) {
-            if (lottoNos.contains(lottoNo)) {
-                count++;
-            }
+            count += lottoNos.contains(lottoNo) ? 1 : 0;
         }
         return count;
     }
@@ -54,32 +53,5 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNos.toString();
-    }
-
-    private String getSorted(List<LottoNo> original) {
-        List<LottoNo> cloned = new LinkedList<>(original);
-        Collections.copy(cloned, original);
-        Collections.sort(cloned);
-        return cloned.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lotto lotto = (Lotto) o;
-        return getSorted(lottoNos)
-                .equals(getSorted(lotto.lottoNos));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                getSorted(lottoNos)
-        );
     }
 }
