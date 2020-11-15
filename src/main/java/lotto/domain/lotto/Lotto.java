@@ -70,6 +70,10 @@ public class Lotto {
         return (int) this.numbers.stream()
                 .filter(lotto.numbers::contains).count();
     }
+    
+    public boolean isMatchBonus(final Lotto lotto) {
+        return this.bonusNumber.equals(lotto.bonusNumber);
+    }
 
     public static Money getPrice() {
         return PRICE;

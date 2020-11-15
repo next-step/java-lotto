@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class RankHitCountStore {
     private final List<RankHitCount> rankHitCounts = Arrays.stream(Rank.values()).map(RankHitCount::of).collect(Collectors.toList());
 
-    public int increaseHitCount(final int hitCount) {
-        final Rank rank = Rank.valueOf(hitCount, false);
+    public int increaseHitCount(final int hitCount, final boolean matchBonus) {
+        final Rank rank = Rank.valueOf(hitCount, matchBonus);
         final RankHitCount selectedRankHitCount = rankHitCounts.stream()
                 .filter(rewardCount -> rewardCount.isMatch(rank))
                 .findAny()

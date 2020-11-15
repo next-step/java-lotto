@@ -7,7 +7,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class CreateRandomNumbersStrategyTest {
-
     @Test
     void create() {
         // given

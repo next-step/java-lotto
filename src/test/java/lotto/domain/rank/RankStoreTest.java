@@ -16,9 +16,9 @@ class RankStoreTest {
         final int hitThreeTimes = Rank.FOURTH.getCountOfMatch();
 
         // then
-        assertThat(calculator.increaseHitCount(hitThreeTimes)).isEqualTo(1);
-        assertThat(calculator.increaseHitCount(hitThreeTimes)).isEqualTo(2);
-        assertThat(calculator.increaseHitCount(hitThreeTimes)).isEqualTo(3);
+        assertThat(calculator.increaseHitCount(hitThreeTimes, true)).isEqualTo(1);
+        assertThat(calculator.increaseHitCount(hitThreeTimes, true)).isEqualTo(2);
+        assertThat(calculator.increaseHitCount(hitThreeTimes, true)).isEqualTo(3);
     }
 
     @Test
@@ -28,7 +28,7 @@ class RankStoreTest {
         final int hitThreeTimes = Rank.FOURTH.getCountOfMatch();
 
         // when
-        calculator.increaseHitCount(hitThreeTimes);
+        calculator.increaseHitCount(hitThreeTimes, true);
 
         // then
         assertAll(
@@ -60,8 +60,8 @@ class RankStoreTest {
         final int hitSixTimes = Rank.FIRST.getCountOfMatch();
 
         // when
-        calculator.increaseHitCount(hitThreeTimes);
-        calculator.increaseHitCount(hitSixTimes);
+        calculator.increaseHitCount(hitThreeTimes, false);
+        calculator.increaseHitCount(hitSixTimes, false);
         final WinLotteryResult result = calculator.toWinLotteryResult();
 
         // then

@@ -30,7 +30,8 @@ public class Lottos {
         final RankHitCountStore rankHitCountStore = new RankHitCountStore();
         for (final Lotto lotto : lottoList) {
             final int hitCount = lotto.countHitNumber(winningLottery);
-            rankHitCountStore.increaseHitCount(hitCount);
+            final boolean matchBonus = lotto.isMatchBonus(winningLottery);
+            rankHitCountStore.increaseHitCount(hitCount, matchBonus);
         }
         return rankHitCountStore.toWinLotteryResult();
     }
