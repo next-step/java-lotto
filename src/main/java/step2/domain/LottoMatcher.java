@@ -28,4 +28,11 @@ public class LottoMatcher {
     public Map<LottoRank, Integer> getResult() {
         return result;
     }
+    public GameMoney getGamePrize(){
+        GameMoney gameMoney = new GameMoney(0);
+        for( LottoRank lottoRank : result.keySet()){
+            gameMoney = gameMoney.sum(lottoRank.prize(result.get(lottoRank)));
+        }
+        return gameMoney;
+    }
 }
