@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+import lotto.domain.Money;
+import lotto.domain.Result;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,9 +13,8 @@ import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        Money lottoPrice = LottoPriceMoney.getInstance();
         Money purchaseMoney = InputView.askPurchaseMoney();
-        int numOfLottos = (int) purchaseMoney.divide(lottoPrice);
+        int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
         ResultView.printNumOfLottos(numOfLottos);
 
         Shuffler shuffler = new Shuffler(LottoNo.MIN, LottoNo.MAX);

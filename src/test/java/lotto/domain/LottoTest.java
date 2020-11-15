@@ -79,6 +79,16 @@ class LottoTest {
                 .isThrownBy(() -> new Lotto(lottoNoList));
     }
 
+    @ParameterizedTest
+    @DisplayName("정상적으로 NumOfLottos 가 계산되어야 한다.")
+    @ValueSource(ints = {0, 500, 1000, 1500, 2000})
+    public void getNumOfLottos(int money) {
+        int price = 1000;
+        Money purchaseMoney = new Money(money);
+        assertThat(Lotto.getNumOfLottos(purchaseMoney))
+                .isEqualTo(money / price);
+    }
+
 
     @Test
     void testToString() {
