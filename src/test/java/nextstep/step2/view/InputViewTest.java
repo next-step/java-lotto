@@ -36,10 +36,19 @@ public class InputViewTest {
 
 	@Test
 	@DisplayName("지난주 로또 당첨번호 비어있으면 안된다.")
-	public void inputWrongLastLottoNumberTest() {
+	public void inputWrongLastLottoTest() {
 		InputView underTest = new InputView(new Scanner(""));
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> underTest.getInputLottoNumbers())
 				.withMessage("지난주 로또 당첨 번호는 필수입니다.");
+	}
+
+	@Test
+	@DisplayName("지난주 로또 당첨번호는 숫자여야 한다")
+	public void inputWrongLastLottoNumberTest() {
+		InputView underTest = new InputView(new Scanner("1,2,3,a,b,c"));
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> underTest.validateLastWinnerNumbers("1,2,3,a,b,c"))
+				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
 	}
 }
