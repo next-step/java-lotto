@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dto.Amount;
 import lotto.dto.ManualLottoNumbers;
 import lotto.service.helper.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -14,11 +15,10 @@ public class LottoFactoryTest {
     void buyLottoTest() {
         ManualLottoNumbers manualLottoNumbers = ManualLottoNumbers.empty();
         assertAll(
-                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, 0).size()).isEqualTo(0),
-                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, 999).size()).isEqualTo(0),
-                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, 1_000).size()).isEqualTo(1),
-                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, 10_000).size()).isEqualTo(10),
-                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, 10_100).size()).isEqualTo(10)
+                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, Amount.valueOf(999)).size()).isEqualTo(0),
+                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, Amount.valueOf(1_000)).size()).isEqualTo(1),
+                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, Amount.valueOf(10_000)).size()).isEqualTo(10),
+                () -> assertThat(LottoFactory.buyLottos(manualLottoNumbers, Amount.valueOf(10_100)).size()).isEqualTo(10)
         );
     }
 }

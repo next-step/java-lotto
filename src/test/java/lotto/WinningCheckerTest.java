@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
-import lotto.service.helper.LottoFactory;
 import lotto.service.helper.WinningChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,7 +38,7 @@ public class WinningCheckerTest {
     private static Stream<Arguments> boughtLottos() {
         return Stream.of(
                 Arguments.of(lottosEarningZero(), "0", 0),
-                Arguments.of(lottosEarningMax(), String.valueOf(WinningRank.MATCHES_SIX.getWinningAmount() / LottoFactory.PRICE_OF_ONE_LOTTO), 1)
+                Arguments.of(lottosEarningMax(), String.valueOf(WinningRank.MATCHES_SIX.getWinningAmount() / Lotto.PRICE_OF_ONE_LOTTO), 1)
         );
     }
 
