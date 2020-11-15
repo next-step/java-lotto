@@ -30,11 +30,7 @@ public class LottoBuyer {
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression) {
         final Lotto lotto = Lotto.of(winningNumberExpression);
-        return getWinLotteryStatistics(lotto);
-    }
-
-    public LottoStatisticsResult getWinLotteryStatistics(final Lotto winningLottery) {
-        final WinLotteryResult result = lottos.getWinLotteryResult(winningLottery);
+        final WinLotteryResult result = lottos.getWinLotteryResult(lotto);
         return new LottoStatisticsResult(result, getProfit(result));
     }
 
