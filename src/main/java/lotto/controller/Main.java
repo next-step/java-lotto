@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import lotto.controller.strategy.GenerateStrategy;
-import lotto.controller.strategy.RandomStrategy;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.view.Shuffler;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,10 +12,10 @@ public class Main {
         int numOfLottos = (int) purchaseMoney.divide(lottoPrice);
         ResultView.printNumOfLottos(numOfLottos);
 
-        GenerateStrategy randomStrategy = RandomStrategy.getInstance();
-        LottosGenerator generator = new LottosGenerator(numOfLottos, randomStrategy);
-
-        Lottos lottos = generator.generateLottos();
+        Shuffler shuffler = new Shuffler(LottoNo.MIN, LottoNo.MAX);
+        Lottos lottos = Lottos.create(numOfLottos, () -> new Lotto(
+                shuffler.getIntegers(Lotto.SIZE)
+        ));
         ResultView.printLottos(lottos);
 
         Lotto winningLotto = InputView.askWinningLotto();

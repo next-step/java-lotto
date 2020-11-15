@@ -3,15 +3,24 @@ package lotto.domain;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos() {
+    private Lottos() {
         lottos = new LinkedList<>();
     }
 
-    public void add(Lotto lotto) {
+    public static Lottos create(int size, Supplier<Lotto> supplier) {
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < size; i++) {
+            lottos.add(supplier.get());
+        }
+        return lottos;
+    }
+
+    void add(Lotto lotto) {
         lottos.add(lotto);
     }
 
