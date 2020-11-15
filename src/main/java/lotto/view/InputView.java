@@ -9,8 +9,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    public static final String GET_MONEY_MESSAGE = "구입금액을 입력해 주세요.\n";
-    public static final String GET_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.\n";
+    private static final String GET_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String GET_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String SPLITTER = ",";
     private static final Scanner scanner = new Scanner(System.in);
     private static final PrintStream out = System.out;
 
@@ -20,7 +21,7 @@ public class InputView {
     public static Numbers getWinningNumbers() {
         out.println(GET_WINNING_NUMBERS_MESSAGE);
 
-        String[] numStrings = scanner.nextLine().split(",");
+        String[] numStrings = scanner.nextLine().split(SPLITTER);
         List<Integer> numbers = Arrays.stream(numStrings)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -29,6 +30,6 @@ public class InputView {
 
     public static int getMoney() {
         out.println(GET_MONEY_MESSAGE);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 }
