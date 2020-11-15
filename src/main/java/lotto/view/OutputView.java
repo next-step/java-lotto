@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     public static final String LINE = "---------";
+    public static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String WINNING_RANK_COUNT = "%s개 일치 (%d원)- %d개";
     private static final String LOTTO_NUMBER_SPLITTER = ",";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
@@ -73,5 +74,13 @@ public class OutputView {
                 .stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(LOTTO_NUMBER_SPLITTER));
+    }
+
+    public static void showYield(float yield) {
+        out.println(getYieldString(yield));
+    }
+
+    private static String getYieldString(float yield) {
+        return String.format(YIELD_MESSAGE, yield);
     }
 }
