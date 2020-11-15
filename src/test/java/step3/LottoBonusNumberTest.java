@@ -27,7 +27,7 @@ public class LottoBonusNumberTest {
     @ParameterizedTest
     @MethodSource("provideLottoTicketAndWinningNumbers")
     public void matchBonusNumber(LottoTicket lottoTicket, WinningNumbers winningNumbers, WinningType resultType) {
-        WinningType winningStatistics = winningNumbers.getWinningStatistics(lottoTicket);
+        WinningType winningStatistics = lottoTicket.compareWinningNumber(winningNumbers);
         assertThat(winningStatistics).isEqualTo(resultType);
     }
 
