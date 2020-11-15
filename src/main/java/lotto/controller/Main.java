@@ -24,6 +24,8 @@ public class Main {
         ResultView.printLottos(lottos);
 
         Lotto winningLotto = InputView.askWinningLotto();
+        int bonus = InputView.askBonusBall();
+
         Result result = new Result(lottos, winningLotto);
         ResultView.printStatistics(result, purchaseMoney);
     }

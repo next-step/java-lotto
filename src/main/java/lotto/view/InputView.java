@@ -24,7 +24,7 @@ public class InputView {
         );
     }
 
-    public static Lotto askLotto() {
+    private static Lotto askLotto() {
         String lotto = scanner.nextLine();
         InputValidator.validateNpe(lotto);
         return new Lotto(
@@ -35,6 +35,13 @@ public class InputView {
     public static Lotto askWinningLotto() {
         println("지난 주 당첨 번호를 입력해 주세요.");
         return askLotto();
+    }
+
+    public static int askBonusBall() {
+        println("보너스 볼을 입력해 주세요.");
+        String bonus = scanner.nextLine();
+        InputValidator.validateNumber(bonus);
+        return Integer.parseInt(bonus);
     }
 
 }
