@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottosFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -7,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.LottosFactory.COUNT_MUST_NOT_BE_NEGATIVE;
+import static lotto.domain.lotto.LottosFactory.COUNT_MUST_NOT_BE_NEGATIVE;
 
 
 class LottosFactoryTest {

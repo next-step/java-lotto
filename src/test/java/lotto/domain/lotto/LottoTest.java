@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.lotto.CreateLottoNumbersStrategy;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -12,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.Lotto.*;
+import static lotto.domain.lotto.Lotto.*;
 
 class LottoTest {
     private final List<LottoNumber> lottoNumberOneToSix = Arrays.asList(

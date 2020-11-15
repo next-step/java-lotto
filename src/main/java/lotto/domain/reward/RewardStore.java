@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.reward;
 
+import lotto.domain.Money;
 import lotto.dto.RewardCountAndPrizeMoney;
 import lotto.dto.WinLotteryResult;
 

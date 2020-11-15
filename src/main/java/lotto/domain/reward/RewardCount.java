@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.reward;
 
 public class RewardCount {
     private final Reward reward;

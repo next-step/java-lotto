@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static lotto.domain.LottoNumberDuplicateChecker.hasDuplicates;
+import static lotto.domain.lotto.LottoNumberDuplicateChecker.hasDuplicates;
 
 public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private static final Random RANDOM = new Random(System.currentTimeMillis());

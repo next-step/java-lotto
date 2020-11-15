@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.reward.Reward;
 import org.junit.jupiter.api.Test;
 import lotto.dto.WinLotteryResult;
 

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.dto.LottoStatisticsResult;
 import lotto.dto.WinLotteryResult;
 

@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.Money;
 import util.StringUtils;
 
 import java.util.Arrays;
@@ -7,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumberDuplicateChecker.hasNotDuplicates;
+import static lotto.domain.lotto.LottoNumberDuplicateChecker.hasNotDuplicates;
 import static util.Preconditions.checkArgument;
 
 public class Lotto {

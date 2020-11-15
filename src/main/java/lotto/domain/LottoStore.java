@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottosFactory;
+
 import java.util.Objects;
 
 public class LottoStore {

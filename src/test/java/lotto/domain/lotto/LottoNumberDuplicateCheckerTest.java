@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumberDuplicateChecker;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

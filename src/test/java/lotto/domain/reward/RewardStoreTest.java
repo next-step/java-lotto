@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.reward;
 
+import lotto.domain.Money;
+import lotto.domain.reward.Reward;
+import lotto.domain.reward.RewardStore;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import lotto.dto.WinLotteryResult;

@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.reward.RewardStore;
 import lotto.dto.WinLotteryResult;
 
 import java.util.Collections;
