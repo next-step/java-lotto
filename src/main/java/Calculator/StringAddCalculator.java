@@ -27,7 +27,7 @@ public class StringAddCalculator {
         return Objects.isNull(input) || input.equals(EMPTY_VALUE);
     }
 
-    private static int sum(String[] list) {
+    public static int sum(String[] list) {
         return Arrays.stream(list)
                 .mapToInt(StringAddCalculator::parseInt)
                 .sum();
