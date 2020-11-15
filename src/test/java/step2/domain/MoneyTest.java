@@ -38,12 +38,12 @@ class MoneyTest {
         }
     }
 
-    @DisplayName("돈 나누기")
+    @DisplayName("나머지 없이 돈 나누기")
     @Nested
-    class Divide {
+    class DivideWithoutRemainder {
         @DisplayName("나누어 떨어짐")
         @Test
-        void divide() {
+        void success() {
             // given
             final Money money = Money.of(2000);
             final Money lottoPrice = Lotto.getPrice();
@@ -57,7 +57,7 @@ class MoneyTest {
 
         @DisplayName("나누어 떨어지지 않음")
         @Test
-        void does_not_divide() {
+        void exist_remainder() {
             // given
             final Money money = Money.of(2001);
             final Money lottoPrice = Lotto.getPrice();
@@ -70,6 +70,38 @@ class MoneyTest {
             // then
             Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(MONEY_MUST_BE_DIVIDED);
+        }
+    }
+
+    @DisplayName("돈 나누기")
+    @Nested
+    class Divide {
+        @DisplayName("성공")
+        @Test
+        void success() {
+            // given
+            final Money money = Money.of(1000);
+            final Money zeroMoney = Money.of(1000);
+
+            // when
+            final double result = money.divide(zeroMoney);
+
+            // then
+            assertThat(result).isOne();
+        }
+
+        @DisplayName("0으로 나누는 경우")
+        @Test
+        void by_zero() {
+            // given
+            final Money money = Money.of(1000);
+            final Money zeroMoney = Money.of(0);
+
+            // when
+            final double result = money.divide(zeroMoney);
+
+            // then
+            assertThat(result).isZero();
         }
     }
 }
