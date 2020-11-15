@@ -1,13 +1,14 @@
 package Calculator;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     private static final String REGEX_DELIMITER_DEFAULT = "[,:]";
-    private static final String REGEX_DELIMITER_PATTERN = "//(.)\\n(.*)";
+    private static final Pattern REGEX_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
 
     private static final int ZERO = 0;
     private static final String EMPTY_VALUE = "";
@@ -31,11 +32,11 @@ public class StringAddCalculator {
     }
 
     private static boolean isValidInput(String input) {
-        return input == null || input.equals(EMPTY_VALUE);
+        return Objects.isNull(input) || input.equals(EMPTY_VALUE);
     }
 
     private static String[] split(String input) {
-        Matcher matcher = Pattern.compile(REGEX_DELIMITER_PATTERN).matcher(input);
+        Matcher matcher = REGEX_DELIMITER_PATTERN.matcher(input);
 
         if (matcher.find()) {
             return split(matcher.group(MATCHER_DELIMITER_GROUP), matcher.group(MATCHER_EXPRESSION_GROUP));
