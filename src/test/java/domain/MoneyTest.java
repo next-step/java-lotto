@@ -8,8 +8,18 @@ public class MoneyTest {
 
     @Test
     void dividedByTest() throws Exception {
-        Money numerator = new Money(10000);
-        Money denominator = new Money(1000);
+        Money numerator = Money.of(10000L);
+        Money denominator = Money.of(1000L);
         assertThat(numerator.dividedBy(denominator)).isEqualTo(10);
+    }
+
+    @Test
+    void multiplyTest() throws Exception {
+        assertThat(Money.of(100L).multiply(3L)).isEqualTo(Money.of(300L));
+    }
+
+    @Test
+    void plusTest() throws Exception {
+        assertThat(Money.of(100L).plus(Money.of(100L))).isEqualTo(Money.of(200L));
     }
 }

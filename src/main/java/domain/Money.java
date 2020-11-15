@@ -42,7 +42,7 @@ public class Money {
         if (this == o) return true;
         if (!(o instanceof Money)) return false;
         Money money = (Money) o;
-        return value == money.value;
+        return value.equals(money.value);
     }
 
     @Override

@@ -27,6 +27,7 @@ public class LottoCalculatorTest {
         List<Integer> winningNumbers = Arrays.stream(new int[]{4,5,6,11,12,13}).boxed().collect(Collectors.toList());
         LottoResult lottoResult = lottoCalculator.calculate(winningNumbers);
         assertThat(lottoResult.getFourthPrize()).isEqualTo(2);
+        assertThat(lottoResult.getProfitRates()).isEqualTo(5);
     }
 
 }
