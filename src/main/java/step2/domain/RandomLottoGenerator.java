@@ -7,14 +7,19 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class RandomLottoGenerator {
+public class RandomLottoGenerator implements LottoGeneratorStrategy {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
 
     private RandomLottoGenerator() {}
 
-    public static List<Integer> generateLottoNumbers() {
+    public static RandomLottoGenerator of(){
+        return new RandomLottoGenerator();
+    }
+
+
+    public List<Integer> generateLottoNumbers() {
         return generateLottoNumbers(generateRandomNumbers());
     }
 
@@ -26,19 +31,19 @@ public class RandomLottoGenerator {
         return lottoNumbers;
     }
 
-    private static List<Integer> generateRandomNumbers() {
+    private List<Integer> generateRandomNumbers() {
         List<Integer> numbers = generateNumbers();
         shuffleNumbers(numbers);
         return numbers;
     }
 
-    private static List<Integer> generateNumbers() {
+    private List<Integer> generateNumbers() {
         return Stream.iterate(MINIMUM_LOTTO_NUMBER, integer -> integer+1)
                 .limit(MAX_LOTTO_NUMBER)
                 .collect(toList());
     }
 
-    private static void shuffleNumbers(List<Integer> numbers) {
+    private void shuffleNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
     }
 

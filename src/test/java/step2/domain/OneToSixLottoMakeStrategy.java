@@ -3,7 +3,7 @@ package step2.domain;
 import java.util.Arrays;
 import java.util.List;
 
-public class OneToSixLottoMakeStrategy implements LottoMakeStrategy {
+public class OneToSixLottoMakeStrategy implements LottoGeneratorStrategy {
 
 
 
