@@ -14,13 +14,15 @@ class LottoMatcherTest {
     @Test
     @DisplayName("지난주 당첨번호를 입력합니다.")
     void create() {
-        LastWeekLotto lottoMatcher = new LastWeekLotto("1 ,2 ,3 ,4 ,5 , 6");
+        assertThat(LastWeekLotto.separateLottoToList("1 ,2 ,3 ,4 ,5 , 6"))
+                .containsExactly(1,2,3,4,5,6);
+
     }
 
     @DisplayName("널값을 넣었을때 익셉션 발생")
     @Test
     void validNull() {
-        assertThatThrownBy(() -> new LastWeekLotto(null))
+        assertThatThrownBy(() -> LastWeekLotto.separateLottoToList(null))
                 .isInstanceOf(ValidNullException.class);
     }
 
@@ -28,7 +30,7 @@ class LottoMatcherTest {
     @DisplayName("빈 문자열을 넣었을때 익셉션 발생")
     @Test
     void validEmpty() {
-        assertThatThrownBy(() -> new LastWeekLotto(" "))
+        assertThatThrownBy(() -> LastWeekLotto.separateLottoToList(" "))
                 .isInstanceOf(ValidEmptyException.class);
     }
 
