@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-// NOTE: Lotto 의 일급 컬렉션
 public class Lottos {
     private final List<Lotto> lottos;
 

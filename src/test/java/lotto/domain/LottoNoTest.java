@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -40,6 +41,20 @@ class LottoNoTest {
         assertThatExceptionOfType(LottoRangeException.class)
                 .isThrownBy(() -> new LottoNo(lottoNo))
                 .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
+    }
+
+
+    @ParameterizedTest
+    @DisplayName("1부터 45가 아니면, LottoRangeException 이 발생한다.")
+    @CsvSource(value = {"0$true", "1$false", "45$false", "46$true"}, delimiter = '$')
+    public void validate(int lottoNo, boolean badRange) {
+        if (badRange) {
+            assertThatExceptionOfType(LottoRangeException.class)
+                    .isThrownBy(() -> LottoNo.validate(lottoNo))
+                    .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
+            return;
+        }
+        Assertions.assertDoesNotThrow(() -> LottoNo.validate(lottoNo));
     }
 
 

@@ -6,7 +6,7 @@ import java.util.Optional;
 public class Result {
     private final HashMap<Jackpot, Integer> result;
 
-    protected Result() {
+    Result() {
         result = new HashMap<>();
     }
 
@@ -14,14 +14,14 @@ public class Result {
         return Optional.ofNullable(result.get(jackpot)).orElseGet(() -> 0);
     }
 
-    protected void increaseNumOfLotto(Jackpot jackpot) {
+    void increaseNumOfLotto(Jackpot jackpot) {
         result.put(
                 jackpot,
                 getNumOfLotto(jackpot) + 1
         );
     }
 
-    protected Money getProfit() {
+    Money getProfit() {
         int profit = 0;
         for (Jackpot jackpot : Jackpot.values()) {
             profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);

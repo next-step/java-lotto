@@ -7,7 +7,7 @@ import lotto.domain.Result;
 public class ResultMessage {
     private ResultMessage() {}
 
-    protected static String getJackpotStatistics(Result result, Money purchaseMoney) {
+    static String getJackpotStatistics(Result result, Money purchaseMoney) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n---------\n");
         for (Jackpot jackpot : Jackpot.values()) {
@@ -18,7 +18,7 @@ public class ResultMessage {
         return sb.toString();
     }
 
-    protected static String getNumOfLottosMsg(int numOfLottos) {
+    static String getNumOfLottosMsg(int numOfLottos) {
         return numOfLottos + "개를 구매했습니다.";
     }
 

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.utils.validator.LottoNoValidator;
+import lotto.asset.LottoConst;
+import lotto.exception.LottoRangeException;
 
 import java.util.Objects;
 
@@ -8,13 +9,20 @@ public class LottoNo implements Comparable<LottoNo> {
 
     private final int lottoNo;
 
-    /**
-     * NOTE: domain 바깥에서 LottoNo 객체가 생성되기를 원치 않으므로,
-     * LottoNo 의 생성자를 전부 protected 로 한다.
-     */
-    protected LottoNo(int lottoNo) {
-        LottoNoValidator.validateLottoNo(lottoNo);
+    LottoNo(int lottoNo) {
+        validate(lottoNo);
         this.lottoNo = lottoNo;
+    }
+
+    private static boolean checkLottoNoRange(int lottoNo) {
+        return lottoNo <= LottoConst.NO_MAX
+                && lottoNo >= LottoConst.NO_MIN;
+    }
+
+    static void validate(int lottoNo) {
+        if (!checkLottoNoRange(lottoNo)) {
+            throw LottoRangeException.getInstance();
+        }
     }
 
     @Override

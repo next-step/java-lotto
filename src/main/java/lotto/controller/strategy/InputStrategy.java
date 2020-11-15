@@ -1,7 +1,6 @@
 package lotto.controller.strategy;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
 import lotto.view.InputView;
 
 /**
@@ -17,8 +16,7 @@ public class InputStrategy implements GenerateStrategy {
 
     @Override
     public Lotto generateLotto() {
-        String lottoStr = InputView.askLottoStr();
-        return LottoFactory.createLotto(lottoStr);
+        return InputView.askLotto();
     }
 
     private static class SingletonHelper {

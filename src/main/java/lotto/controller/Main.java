@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.asset.LottoConst;
 import lotto.controller.strategy.GenerateStrategy;
 import lotto.controller.strategy.RandomStrategy;
 import lotto.domain.Lotto;
@@ -13,7 +12,7 @@ import lotto.view.ResultView;
 public class Main {
     public static void main(String[] args) {
         Money purchaseMoney = InputView.askPurchaseMoney();
-        int numOfLottos = (int) purchaseMoney.divide(LottoConst.PRICE);
+        int numOfLottos = purchaseMoney.getNumOfLottos();
         ResultView.printNumOfLottos(numOfLottos);
 
         GenerateStrategy randomStrategy = RandomStrategy.getInstance();

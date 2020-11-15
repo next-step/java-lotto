@@ -1,30 +1,32 @@
 package lotto.domain;
 
-import lotto.utils.validator.DividerValidator;
-import lotto.utils.validator.MoneyValidator;
+import lotto.exception.BadMoneyException;
 
 import java.util.Objects;
 
+// TODO: ProfitMoney 와 PurchaseMoney 분리하
 public class Money {
+    public static final int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
-        MoneyValidator.validateMoney(money);
+        validateMoney(money);
         this.money = money;
     }
 
-    public Money(String money) {
-        MoneyValidator.validateMoney(money);
-        this.money = Integer.parseInt(money);
+    public static void validateMoney(int money) {
+        if (money <= 0) {
+            throw BadMoneyException.getInstance();
+        }
+
     }
 
-    public double divide(int divider) {
-        DividerValidator.validateDivider(divider);
-        return money / divider;
+    public int getNumOfLottos() {
+        return money / LOTTO_PRICE;
     }
 
     public double divide(Money divider) {
-        return divide(divider.money);
+        return money / divider.money;
     }
 
     @Override
