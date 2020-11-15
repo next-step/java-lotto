@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
+import lotto.dto.BonusNumber;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.WinningChecker;
@@ -24,7 +24,7 @@ public class WinningCheckerTest {
     @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 당첨 횟수와 수익이 얼마나 되는지 계산한다.")
     void winningAndStatisticTest(List<Lotto> boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
         Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = LottoNumber.valueOf(45);
+        BonusNumber bonusNumber = BonusNumber.valueOf(45);
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
 
         WinningStatistic winningStatistic = WinningChecker.getResult(winningNumber, boughtLottos);

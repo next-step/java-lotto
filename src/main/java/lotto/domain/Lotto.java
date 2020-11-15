@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.BonusNumber;
 import lotto.exception.IllegalLottoNumberSizeException;
 
 import java.util.Arrays;
@@ -53,6 +54,10 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return bonusNumber.included(numbers);
     }
 
     @Override

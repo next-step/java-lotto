@@ -24,7 +24,7 @@ public class LottoService {
     }
 
     private NumberOfManualLotto getNumberOfManualLotto(Amount amount) {
-        NumberOfManualLotto numberOfManualLotto = NumberOfManualLotto.valueOf(view.getNumberOfManualLotto());
+        NumberOfManualLotto numberOfManualLotto = ValidInputHelper.get(() -> NumberOfManualLotto.valueOf(view.getNumberOfManualLotto()), view::printInputError);
         numberOfManualLotto.validateSize(amount);
         return numberOfManualLotto;
     }
