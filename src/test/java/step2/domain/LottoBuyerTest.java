@@ -10,22 +10,43 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static step2.domain.Lotto.LOTTO_NUMBER_MUST_NOT_BE_BLANK;
 import static step2.domain.Lotto.LOTTO_NUMBER_SIZE_NOT_VALID;
+import static step2.domain.LottoBuyer.MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO;
 import static step2.domain.Money.MONEY_MUST_NOT_BE_NEGATIVE;
 
 public class LottoBuyerTest {
     @DisplayName("구매자가 로또를 구매")
-    @Test
-    void buy_lotto() {
-        // given
-        final int money = Lotto.getPrice().multiply(2).getValue();
-        final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+    @Nested
+    class BuyLotto {
+        @DisplayName("성공")
+        @Test
+        void success() {
+            // given
+            final int money = Lotto.getPrice().multiply(2).getValue();
+            final LottoBuyer lottoBuyer = LottoBuyer.of(money);
 
-        // when
-        final Lottos lottos = lottoBuyer.buy();
+            // when
+            final Lottos lottos = lottoBuyer.buy();
 
-        // then
-        assertThat(lottos.size()).isEqualTo(2);
+            // then
+            assertThat(lottos.size()).isEqualTo(2);
+        }
+
+        @DisplayName("성공")
+        @Test
+        void buyer_do_not_have_money() {
+            // given
+            final int money = 0;
+            final LottoBuyer lottoBuyer = LottoBuyer.of(money);
+            
+            // when
+            final Throwable thrown = catchThrowable(lottoBuyer::buy);
+
+            // then
+            Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining(MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO);
+        }
     }
+    
 
     @DisplayName("생성")
     @Nested

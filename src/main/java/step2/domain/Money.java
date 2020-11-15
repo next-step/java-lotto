@@ -43,6 +43,14 @@ public class Money {
         return value % money.value == 0;
     }
 
+    public boolean isNotZero() {
+        return !isZero();
+    }
+    
+    public boolean isZero() {
+        return value == 0;
+    }
+
     public int getValue() {
         return value;
     }

@@ -3,7 +3,10 @@ package step2.domain;
 import step2.dto.LottoStatisticsResult;
 import step2.dto.WinLotteryResult;
 
+import static util.Preconditions.checkArgument;
+
 public class LottoBuyer {
+    public static final String MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO = "money must grate then zero to buy lotto";
     private final Money money;
     private Lottos lottos = Lottos.EMPTY;
 
@@ -16,6 +19,7 @@ public class LottoBuyer {
     }
 
     public Lottos buy() {
+        checkArgument(money.isNotZero(), MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO);
         this.lottos = LottoStore.sell(money);
         return getLottos();
     }
