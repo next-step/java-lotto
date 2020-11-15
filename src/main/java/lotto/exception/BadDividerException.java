@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class BadDividerException extends RuntimeException {
     private BadDividerException() {
-        super(ExceptionConst.BAD_DIVIDER_MSG);
+        super("0보다 큰 양수로만 나눌 수 있습니다.");
     }
 
     public static BadDividerException getInstance() {

@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class NpeException extends RuntimeException {
     private NpeException() {
-        super(ExceptionConst.NPE_MSG);
+        super("null 객체가 발생했습니다.");
     }
 
     public static NpeException getInstance() {

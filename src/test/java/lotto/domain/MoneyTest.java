@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.asset.ExceptionConst;
 import lotto.exception.BadMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +16,7 @@ class MoneyTest {
     @ValueSource(ints = {-379, -1, 0})
     public void constructor(int money) {
         assertThatExceptionOfType(BadMoneyException.class)
-                .isThrownBy(() -> new Money(money))
-                .withMessage(ExceptionConst.BAD_MONEY_MSG);
+                .isThrownBy(() -> new Money(money));
     }
 
 

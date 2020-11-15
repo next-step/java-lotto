@@ -1,11 +1,13 @@
 package lotto.domain;
 
-import lotto.asset.LottoConst;
 import lotto.exception.LottoRangeException;
 
 import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
+
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private final int lottoNo;
 
@@ -15,8 +17,8 @@ public class LottoNo implements Comparable<LottoNo> {
     }
 
     private static boolean checkLottoNoRange(int lottoNo) {
-        return lottoNo <= LottoConst.NO_MAX
-                && lottoNo >= LottoConst.NO_MIN;
+        return lottoNo <= MAX
+                && lottoNo >= MIN;
     }
 
     static void validate(int lottoNo) {

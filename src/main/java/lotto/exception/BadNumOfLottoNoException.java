@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class BadNumOfLottoNoException extends RuntimeException {
     private BadNumOfLottoNoException() {
-        super(ExceptionConst.BAD_NUM_OF_LOTTO_NO_MSG);
+        super("로또는 6개의 번호여야 합니다.");
     }
 
     public static BadNumOfLottoNoException getInstance() {

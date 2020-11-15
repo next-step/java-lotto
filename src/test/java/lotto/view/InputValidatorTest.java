@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.asset.ExceptionConst;
 import lotto.exception.NanException;
 import lotto.exception.NpeException;
 import org.junit.jupiter.api.Assertions;
@@ -16,11 +15,9 @@ class InputValidatorTest {
     public void validateStrNan() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> InputValidator.validateNan(null))
-                        .withMessage(ExceptionConst.NAN_MSG),
+                        .isThrownBy(() -> InputValidator.validateNan(null)),
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> InputValidator.validateNan("NAN"))
-                        .withMessage(ExceptionConst.NAN_MSG),
+                        .isThrownBy(() -> InputValidator.validateNan("NAN")),
                 () -> Assertions.assertDoesNotThrow(() -> InputValidator.validateNan("123"))
         );
     }
@@ -30,8 +27,7 @@ class InputValidatorTest {
     public void validateNpe() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NpeException.class)
-                        .isThrownBy(() -> InputValidator.validateNpe(null))
-                        .withMessage(ExceptionConst.NPE_MSG),
+                        .isThrownBy(() -> InputValidator.validateNpe(null)),
                 () -> Assertions.assertDoesNotThrow(() -> InputValidator.validateNpe("NAN"))
         );
     }
@@ -41,11 +37,9 @@ class InputValidatorTest {
     public void validateNumber() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NpeException.class)
-                        .isThrownBy(() -> InputValidator.validateNumber(null))
-                        .withMessage(ExceptionConst.NPE_MSG),
+                        .isThrownBy(() -> InputValidator.validateNumber(null)),
                 () -> assertThatExceptionOfType(NanException.class)
                         .isThrownBy(() -> InputValidator.validateNumber("NAN"))
-                        .withMessage(ExceptionConst.NAN_MSG)
         );
     }
 }

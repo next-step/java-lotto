@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class BadMoneyException extends RuntimeException {
     private BadMoneyException() {
-        super(ExceptionConst.BAD_MONEY_MSG);
+        super("money 는 0보다 큰 양수여야 합니다.");
     }
 
     public static BadMoneyException getInstance() {

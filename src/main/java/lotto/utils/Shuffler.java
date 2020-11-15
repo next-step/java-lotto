@@ -1,37 +1,25 @@
 package lotto.utils;
 
-import lotto.asset.LottoConst;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Shuffler {
-    List<Integer> lottoNos;
+    List<Integer> list;
 
-    private Shuffler() {
-        lottoNos = new LinkedList<>();
-        int max = LottoConst.NO_MAX;
-        int min = LottoConst.NO_MIN;
+    public Shuffler(int min, int max) {
+        list = new LinkedList<>();
         for (int i = min; i <= max; i++) {
-            lottoNos.add(i);
+            list.add(i);
         }
     }
 
-    public static Shuffler getInstance() {
-        return SingletonHelper.instance;
-    }
-
     private void shuffle() {
-        Collections.shuffle(lottoNos);
+        Collections.shuffle(list);
     }
 
-    public List<Integer> getLottoNos() {
+    public List<Integer> getIntegers(int size) {
         shuffle();
-        return lottoNos.subList(0, LottoConst.NUM_OF_LOTTO_NO);
-    }
-
-    private static class SingletonHelper {
-        private static final Shuffler instance = new Shuffler();
+        return list.subList(0, size);
     }
 }

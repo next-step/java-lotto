@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.asset.ExceptionConst;
-import lotto.asset.LottoConst;
 import lotto.exception.LottoRangeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +28,8 @@ class LottoNoPoolTest {
     @DisplayName("숫자 로또 번호의 성공 케이스")
     void getLottoNo_num_success() {
         Stream<Executable> executables = IntStream.rangeClosed(
-                LottoConst.NO_MIN,
-                LottoConst.NO_MAX
+                LottoNo.MIN,
+                LottoNo.MAX
         ).mapToObj((int no) -> (Executable) () -> assertThat(
                 lottoNoPool.getLottoNo(no)
         ).isEqualTo(new LottoNo(no)));
@@ -44,8 +42,7 @@ class LottoNoPoolTest {
     @ValueSource(ints = {-1, 0, 46})
     public void getLottoNo_bad_num(int lottoNo) {
         assertThatExceptionOfType(LottoRangeException.class)
-                .isThrownBy(() -> lottoNoPool.getLottoNo(lottoNo))
-                .withMessage(ExceptionConst.LOTTO_RANGE_MSG);
+                .isThrownBy(() -> lottoNoPool.getLottoNo(lottoNo));
     }
 
 }

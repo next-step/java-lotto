@@ -1,7 +1,7 @@
 package lotto.controller.strategy;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
+import lotto.domain.LottoNo;
 import lotto.utils.Shuffler;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class RandomStrategy implements GenerateStrategy {
     Shuffler shuffler;
 
     private RandomStrategy() {
-        shuffler = Shuffler.getInstance();
+        shuffler = new Shuffler(LottoNo.MAX, LottoNo.MIN);
     }
 
     public static RandomStrategy getInstance() {
@@ -24,8 +24,8 @@ public class RandomStrategy implements GenerateStrategy {
 
     @Override
     public Lotto generateLotto() {
-        List<Integer> lottoNos = shuffler.getLottoNos();
-        return LottoFactory.createLotto(lottoNos);
+        List<Integer> lottoNos = shuffler.getIntegers(Lotto.SIZE);
+        return new Lotto(lottoNos);
     }
 
     private static class SingletonHelper {

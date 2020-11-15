@@ -1,9 +1,8 @@
 package lotto.view;
 
-import lotto.asset.InputViewConst;
 import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
 import lotto.domain.Money;
+import lotto.utils.Parser;
 
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class InputView {
     }
 
     public static Money askPurchaseMoney() {
-        println(InputViewConst.ASK_PURCHASE_MONEY);
+        println("구입금액을 입력해 주세요.");
         String money = scanner.nextLine();
         InputValidator.validateNumber(money);
         return new Money(
@@ -28,11 +27,13 @@ public class InputView {
     public static Lotto askLotto() {
         String lotto = scanner.nextLine();
         InputValidator.validateNpe(lotto);
-        return LottoFactory.createLotto(lotto);
+        return new Lotto(
+                Parser.parseLottoStr(lotto)
+        );
     }
 
     public static Lotto askWinningLotto() {
-        println(InputViewConst.ASK_WINNING_LOTTO);
+        println("지난 주 당첨 번호를 입력해 주세요.");
         return askLotto();
     }
 

@@ -1,19 +1,18 @@
-package lotto.domain;
+package lotto.utils;
 
-import lotto.asset.LottoConst;
 import lotto.exception.NanException;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoParser {
-    private LottoParser() {}
+public class Parser {
+    private Parser() {}
 
     public static List<Integer> parseLottoStr(String lottoStr) {
         return splitLottoStr(lottoStr)
                 .stream()
-                .map(LottoParser::parseInt)
+                .map(Parser::parseInt)
                 .collect(Collectors.toList());
     }
 
@@ -31,7 +30,7 @@ public class LottoParser {
         );
     }
 
-    static List<String> splitLottoStr(String lottoStr) {
-        return split(lottoStr, LottoConst.SPLIT_REGEX);
+    private static List<String> splitLottoStr(String lottoStr) {
+        return split(lottoStr, "[ ,]+");
     }
 }

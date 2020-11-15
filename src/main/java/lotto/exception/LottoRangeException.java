@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class LottoRangeException extends RuntimeException {
     private LottoRangeException() {
-        super(ExceptionConst.LOTTO_RANGE_MSG);
+        super("로또 번호는 1부터 45까지 입니다.");
     }
 
     public static LottoRangeException getInstance() {

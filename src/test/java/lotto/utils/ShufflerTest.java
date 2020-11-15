@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.asset.LottoConst;
+import lotto.domain.LottoNo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,32 +15,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ShufflerTest {
 
-    Shuffler shuffler;
+    private static final int min = 1;
+    private static final int max = 45;
+    private Shuffler shuffler;
 
     @BeforeEach
     void setUp() {
-        shuffler = Shuffler.getInstance();
-    }
-
-    @Test
-    @DisplayName("6개의 번호들을 반환해야 한다.")
-    void getLottoNos_size() {
-        assertThat(shuffler.getLottoNos().size())
-                .isEqualTo(LottoConst.NUM_OF_LOTTO_NO);
+        shuffler = new Shuffler(min, max);
     }
 
     private boolean checkLottoNo(int no) {
-        return no >= LottoConst.NO_MIN
-                && no <= LottoConst.NO_MAX;
+        return no >= LottoNo.MIN
+                && no <= LottoNo.MAX;
     }
 
     @Test
-    @DisplayName("1과 45 사이의 번호들을 반환해야 한다.")
+    @DisplayName("min 과 max 사이의 번호들을 반환해야 한다.")
     void getLottoNos_range() {
         List<Executable> executables = new LinkedList<>();
-        for (int no : shuffler.getLottoNos()) {
+        for (int num : shuffler.getIntegers(100)) {
             executables.add(() -> {
-                assertThat(checkLottoNo(no))
+                assertThat(checkLottoNo(num))
                         .isTrue();
             });
         }
@@ -52,11 +47,11 @@ class ShufflerTest {
     void getLottoNos_contains() {
         List<Executable> executables = new LinkedList<>();
         HashSet<Integer> set = new HashSet<>();
-        for (int no : shuffler.getLottoNos()) {
+        for (int num : shuffler.getIntegers(100)) {
             executables.add(() -> {
-                assertThat(set.contains(no))
+                assertThat(set.contains(num))
                         .isFalse();
-                set.add(no);
+                set.add(num);
             });
         }
         Assertions.assertAll(executables);

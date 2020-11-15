@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.asset.LottoConst;
 import lotto.exception.BadNumOfLottoNoException;
 import lotto.exception.DuplicatedLottoException;
 
@@ -10,12 +9,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    public static final int SIZE = 6;
+
     private final List<LottoNo> lottoNos;
     private final LottoNoPool lottoNoPool;
 
-    Lotto() {
-        lottoNos = new LinkedList<>();
+    public Lotto(List<Integer> lottoNos) {
+        validateLottoNos(lottoNos);
+        this.lottoNos = new LinkedList<>();
         lottoNoPool = LottoNoPool.getInstance();
+        for (int no : lottoNos) {
+            add(no);
+        }
     }
 
     int countSameNo(Lotto lotto) {
@@ -28,19 +33,14 @@ public class Lotto {
         return count;
     }
 
-    void add(int lottoNo) {
+    private void add(int lottoNo) {
         LottoNo lottoNoObj = lottoNoPool.getLottoNo(lottoNo);
         throwIfDuplicated(lottoNoObj);
         lottoNos.add(lottoNoObj);
-        validateSize();
     }
 
-    int getSize() {
-        return lottoNos.size();
-    }
-
-    private void validateSize() {
-        if (getSize() > LottoConst.NUM_OF_LOTTO_NO) {
+    private void validateLottoNos(List<Integer> lottoNos) {
+        if (lottoNos.size() != SIZE) {
             throw BadNumOfLottoNoException.getInstance();
         }
     }

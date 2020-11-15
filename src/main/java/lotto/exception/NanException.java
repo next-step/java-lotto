@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class NanException extends RuntimeException {
     private NanException() {
-        super(ExceptionConst.NAN_MSG);
+        super("숫자가 아닙니다.");
     }
 
     public static NanException getInstance() {

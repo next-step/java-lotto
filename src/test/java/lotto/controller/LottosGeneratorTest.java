@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.controller.strategy.GenerateStrategy;
 import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +22,14 @@ class LottosGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        dummyLottoNos1 = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
-        dummyLottoNos2 = Arrays.asList(new Integer[]{45, 40, 35, 30, 25, 20});
-        dummyStrategy1 = () -> LottoFactory.createLotto(dummyLottoNos1);
-        dummyStrategy2 = () -> LottoFactory.createLotto(dummyLottoNos2);
+        dummyLottoNos1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+        dummyLottoNos2 = Arrays.asList(45, 40, 35, 30, 25, 20);
+        dummyStrategy1 = () -> new Lotto(dummyLottoNos1);
+        dummyStrategy2 = () -> new Lotto(dummyLottoNos2);
     }
 
     private Lottos generateExpectedLottos(List<Integer> dummyLottoNos, int numOfLottos) {
-        Lotto dummyLotto = LottoFactory.createLotto(dummyLottoNos);
+        Lotto dummyLotto = new Lotto(dummyLottoNos);
         Lottos expectedLottos = new Lottos();
         for (int i = 0; i < numOfLottos; i++) {
             expectedLottos.add(dummyLotto);

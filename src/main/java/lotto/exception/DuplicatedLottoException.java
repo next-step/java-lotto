@@ -1,10 +1,8 @@
 package lotto.exception;
 
-import lotto.asset.ExceptionConst;
-
 public class DuplicatedLottoException extends RuntimeException {
     private DuplicatedLottoException() {
-        super(ExceptionConst.DUPLICATED_LOTTO_MSG);
+        super("로또 번호는 중복될 수 없습니다.");
     }
 
     public static DuplicatedLottoException getInstance() {

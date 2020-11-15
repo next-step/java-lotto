@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.asset.LottoConst;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +8,7 @@ public class LottoNoPool {
 
     private LottoNoPool() {
         lottoNoPool = new HashMap<>();
-        for (int no = LottoConst.NO_MIN; no <= LottoConst.NO_MAX; no++) {
+        for (int no = LottoNo.MIN; no <= LottoNo.MAX; no++) {
             lottoNoPool.put(no, new LottoNo(no));
         }
     }
