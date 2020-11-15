@@ -12,7 +12,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("숫자가 아닌 String 이면, NpeException 이 발생한다.")
-    public void validateStrNan() {
+    public void validateNan() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NanException.class)
                         .isThrownBy(() -> InputValidator.validateNan(null)),

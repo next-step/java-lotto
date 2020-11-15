@@ -23,7 +23,7 @@ class MoneyTest {
     @ParameterizedTest
     @DisplayName("money 를 divider 로 나눈 값을 반환한다.")
     @CsvSource(value = {"9$2", "8$2", "2$8"}, delimiter = '$')
-    public void divide_money(int money, int divider) {
+    public void divide(int money, int divider) {
         Money moneyObj = new Money(money);
         Money dividerObj = new Money(divider);
         assertThat(moneyObj.divide(dividerObj))
