@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.reward.Reward;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.Test;
 import lotto.dto.WinLotteryResult;
 
@@ -45,11 +45,12 @@ class LottosTest {
 
         // then
         assertAll(
-                () -> assertThat(result.getHitThreeTimes().getCount()).isEqualTo(1),
-                () -> assertThat(result.getHitFourTimes().getCount()).isEqualTo(0),
-                () -> assertThat(result.getHitFiveTimes().getCount()).isEqualTo(0),
-                () -> assertThat(result.getHitSixTimes().getCount()).isEqualTo(0),
-                () -> assertThat(result.getTotalPrizeMoney()).isEqualTo(Reward.HIT_THREE_TIMES.getMoney())
+                () -> assertThat(result.getFirstRank().getCount()).isEqualTo(0),
+                () -> assertThat(result.getSecondRank().getCount()).isEqualTo(0),
+                () -> assertThat(result.getThirdRank().getCount()).isEqualTo(0),
+                () -> assertThat(result.getFourthRank().getCount()).isEqualTo(0),
+                () -> assertThat(result.getFifthRank().getCount()).isEqualTo(1),
+                () -> assertThat(result.getTotalPrizeMoney()).isEqualTo(Rank.FIFTH.getWinningMoney())
         );
     }
 

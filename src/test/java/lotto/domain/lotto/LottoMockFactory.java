@@ -1,9 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +22,7 @@ public class LottoMockFactory {
             {17, 21, 29, 37, 42, 45},
             {3, 8, 27, 30, 35, 44}
     };
-
-    @Test
+    
     public static List<Lotto> createFourTeenLotto() {
         List<LottoNumber> lottoNumbers = Arrays.stream(fourTeenLottoNumbers)
                 .flatMapToInt(Arrays::stream)

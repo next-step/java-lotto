@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.reward.RewardStore;
+import lotto.domain.rank.RankHitCountStore;
 import lotto.dto.WinLotteryResult;
 
 import java.util.Collections;
@@ -27,12 +27,12 @@ public class Lottos {
     }
 
     public WinLotteryResult getWinLotteryResult(final Lotto winningLottery) {
-        final RewardStore rewardStore = new RewardStore();
+        final RankHitCountStore rankHitCountStore = new RankHitCountStore();
         for (final Lotto lotto : lottoList) {
             final int hitCount = lotto.countHitNumber(winningLottery);
-            rewardStore.increaseHitCount(hitCount);
+            rankHitCountStore.increaseHitCount(hitCount);
         }
-        return rewardStore.toWinLotteryResult();
+        return rankHitCountStore.toWinLotteryResult();
     }
 
     public List<List<Integer>> getAllLottoNumber() {

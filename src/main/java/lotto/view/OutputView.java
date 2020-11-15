@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String DELIMITER = "," + ViewString.SPACE;
-    
+
     public static void printLottoCount(final Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
     }
@@ -38,21 +38,30 @@ public class OutputView {
     }
 
     public static void printWinLottery(final WinLotteryResult winLotteryResult) {
-        printRewardCountAndPrizeMoney(winLotteryResult.getHitThreeTimes());
-        printRewardCountAndPrizeMoney(winLotteryResult.getHitFourTimes());
-        printRewardCountAndPrizeMoney(winLotteryResult.getHitFiveTimes());
-        printRewardCountAndPrizeMoney(winLotteryResult.getHitSixTimes());
+        printRewardCountAndPrizeMoney(winLotteryResult.getFifthRank());
+        printRewardCountAndPrizeMoney(winLotteryResult.getFourthRank());
+        printRewardCountAndPrizeMoney(winLotteryResult.getThirdRank());
+        printRewardCountAndPrizeMoney(winLotteryResult.getSecondRank(), true);
+        printRewardCountAndPrizeMoney(winLotteryResult.getFirstRank());
     }
 
     public static void printRewardCountAndPrizeMoney(final RewardCountAndPrizeMoney rewardCountAndPrizeMoney) {
-        final String view = rewardCountAndPrizeMoney.getHitTimes() +
-                "개 일치" +
-                "(" +
+        printRewardCountAndPrizeMoney(rewardCountAndPrizeMoney, false);
+    }
+
+    public static void printRewardCountAndPrizeMoney(final RewardCountAndPrizeMoney rewardCountAndPrizeMoney, final boolean announceBonus) {
+        final StringBuilder builder = new StringBuilder(rewardCountAndPrizeMoney.getHitTimes() + "개 일치");
+
+        if (announceBonus) {
+            builder.append(DELIMITER + "보너스 볼 일치");
+        }
+
+        builder.append("(" +
                 rewardCountAndPrizeMoney.getPrizeMoney() + "원" +
                 ")" +
                 "- " +
-                rewardCountAndPrizeMoney.getCount() + "개" + ViewString.NEWLINE;
-        Printer.print(view);
+                rewardCountAndPrizeMoney.getCount() + "개" + ViewString.NEWLINE);
+        Printer.print(builder.toString());
     }
 
     public static void printProfit(final LottoStatisticsResult lottoStatisticsResult) {
