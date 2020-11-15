@@ -27,7 +27,11 @@ public enum LottoRank {
                 .filter(ranking -> ranking.match == match)
                 .findFirst()
                 .orElse(MISS)
-                .getMatchPrice();
+                .getPrice();
+    }
+
+    public GameMoney prize(int countOfMatchLotto) {
+        return new GameMoney(countOfMatchLotto * price);
     }
 
     public static LottoRank valueOf(int match) {
@@ -46,13 +50,12 @@ public enum LottoRank {
         }
     }
 
-    private int getMatchPrice() {
-        return price;
-    }
-
     public int getPrice() {
         return price;
     }
 
 
+    public int getMatch() {
+        return match;
+    }
 }
