@@ -2,11 +2,12 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.dto.Amount;
 import lotto.dto.ManualLottoNumbers;
+import lotto.dto.NumberOfManualLotto;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.exception.IllegalBonusNumberException;
-import lotto.exception.IllegalInputAmountException;
 import lotto.service.LottoService;
 import lotto.view.View;
 
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class LottoGame {
-    public static final String INVALID_AMOUNT_ERR_MSG = "amount의 값은 음수가 될 수 없습니다.";
     public static final String INVALID_BONUS_NUMBER_ERR_MSG = "보너스번호는 당첨번호와 같을 수 없습니다.";
 
     private final View view;
@@ -34,8 +34,8 @@ public class LottoGame {
     }
 
     private List<Lotto> buyLottos() {
-        int amount = getValidInput(() -> getAmount());
-        int numberOfManualLotto = getValidInput(() -> getNumberOfManualLotto(amount));
+        Amount amount = getValidInput(() -> Amount.valueOf(view.getAmount()));
+        NumberOfManualLotto numberOfManualLotto = getValidInput(() -> getNumberOfManualLotto(amount));
         return getValidInput(() -> getLotto(amount, numberOfManualLotto));
     }
 
@@ -48,38 +48,26 @@ public class LottoGame {
         }
     }
 
-    private int getAmount() {
-        int amount = view.getAmount();
-        validateAmount(amount);
-        return amount;
-    }
-
-    private void validateAmount(int amount) {
-        if (amount < 0) {
-            throw new IllegalInputAmountException(INVALID_AMOUNT_ERR_MSG);
-        }
-    }
-
-    private int getNumberOfManualLotto(int amount) {
-        int numberOfManualLotto = view.getNumberOfManualLotto();
-        lottoService.validateInput(amount, numberOfManualLotto);
+    private NumberOfManualLotto getNumberOfManualLotto(Amount amount) {
+        NumberOfManualLotto numberOfManualLotto = NumberOfManualLotto.valueOf(view.getNumberOfManualLotto());
+        numberOfManualLotto.validateSize(amount);
         return numberOfManualLotto;
     }
 
-    private ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
-        if (numberOfManualLotto <= 0) {
+    private ManualLottoNumbers getManualLottoNumbers(NumberOfManualLotto numberOfManualLotto) {
+        if (numberOfManualLotto.isZero()) {
             return ManualLottoNumbers.empty();
         }
 
         return view.getManualLottoNumbers(numberOfManualLotto);
     }
 
-    private List<Lotto> getLotto(int amount, int numberOfManualLotto) {
+    private List<Lotto> getLotto(Amount amount, NumberOfManualLotto numberOfManualLotto) {
         ManualLottoNumbers manualLottoNumbers = getValidInput(() -> getManualLottoNumbers(numberOfManualLotto));
         return getLottosWithManualNumbers(amount, manualLottoNumbers);
     }
 
-    private List<Lotto> getLottosWithManualNumbers(int amount, ManualLottoNumbers manualLottoNumbers) {
+    private List<Lotto> getLottosWithManualNumbers(Amount amount, ManualLottoNumbers manualLottoNumbers) {
         List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
         view.printBoughtLottos(manualLottoNumbers, boughtLottos);
         return boughtLottos;

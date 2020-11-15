@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final String INVALID_NUMBERS_SIZE_ERR_MSG = "로또 숫자의 개수가 유효하지 않습니다.";
     public static final int VALID_NUMBERS_SIZE = 6;
+    public static final int PRICE_OF_ONE_LOTTO = 1_000;
 
     private final Set<LottoNumber> numbers;
 

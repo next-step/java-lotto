@@ -44,7 +44,7 @@ public class WinningChecker {
 
     private static String getEarningsRate(List<WinningRank> winningRanks, int boughtLottosSize) {
         BigDecimal totalWinningAmount = BigDecimal.valueOf(WinningRank.getTotalWinningAmount(winningRanks));
-        BigDecimal totalPurchaseAmount = BigDecimal.valueOf(LottoFactory.PRICE_OF_ONE_LOTTO * boughtLottosSize);
+        BigDecimal totalPurchaseAmount = BigDecimal.valueOf(Lotto.PRICE_OF_ONE_LOTTO * boughtLottosSize);
         return totalWinningAmount.divide(totalPurchaseAmount, MathContext.DECIMAL32).toString();
     }
 }

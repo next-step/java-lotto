@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.dto.ManualLottoNumbers;
+import lotto.dto.NumberOfManualLotto;
 import lotto.dto.WinningStatistic;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
@@ -49,7 +50,7 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
+    public ManualLottoNumbers getManualLottoNumbers(NumberOfManualLotto numberOfManualLotto) {
         return inputView.getManualLottoNumbers(numberOfManualLotto);
     }
 
