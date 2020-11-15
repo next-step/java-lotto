@@ -28,9 +28,12 @@ public class OutputView {
   private String reportOfStatisticsEachGroup(Map<PrizeGrade, Integer> group) {
     return group.entrySet().stream()
         .sorted(Comparator.comparing(entry -> entry.getKey().getPrintOrder()))
-        .map(entry -> {
-          PrizeGrade prizeGrade = entry.getKey();
-          return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getPrizeMoney(), entry.getValue());
-        }).collect(Collectors.joining(NEW_LINE));
+        .map(this::formatPrizeExplain)
+        .collect(Collectors.joining(NEW_LINE));
+  }
+
+  private String formatPrizeExplain(Map.Entry<PrizeGrade, Integer> entry) {
+    PrizeGrade prizeGrade = entry.getKey();
+    return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getPrizeMoney(), entry.getValue());
   }
 }

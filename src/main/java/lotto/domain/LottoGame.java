@@ -16,16 +16,14 @@ import static lotto.constants.Message.NUMBER_COUNT_SHOULD_N;
 public class LottoGame {
   private final Set<LottoNumber> lottoNumbers;
 
-  private static final int ZERO = 0;
-  private static final int MATCH = 1;
-  private static final int NON_MATCH = ZERO;
-
   private static final String OPEN_PARENTHESIS = "[";
   private static final String CLOSE_PARENTHESIS = "]";
   private static final String DELIMITER = ", ";
 
   public LottoGame(List<LottoNumber> lottoNumberPool) {
-    this.lottoNumbers = lottoNumberPool.stream().limit(NUMBER_COUNT_PER_GAME).collect(Collectors.toSet());
+    this.lottoNumbers = lottoNumberPool.stream()
+        .limit(NUMBER_COUNT_PER_GAME)
+        .collect(Collectors.toSet());
   }
 
   public LottoGame(String[] numbers) {
@@ -53,14 +51,9 @@ public class LottoGame {
   }
 
   private int getMatchCount(LottoGame lottoGame) {
-    return this.lottoNumbers.stream()
-        .map(lottoNumber -> {
-          if (lottoGame.contains(lottoNumber)) {
-            return MATCH;
-          }
-          return NON_MATCH;
-        })
-        .reduce(ZERO, Integer::sum);
+    return Math.toIntExact(lottoNumbers.stream()
+        .filter(lottoGame::contains)
+        .count());
   }
 
   protected boolean contains(LottoNumber lottoNumber) {

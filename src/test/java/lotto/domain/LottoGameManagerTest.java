@@ -13,8 +13,7 @@ class LottoGameManagerTest {
   void 새게임생성_테스트() {
     LottoGame newLottoGame = LottoGameManager.newLottoGame();
     long validRangeCount = IntStream.range(1, 46)
-        .mapToObj(num -> newLottoGame.contains(new LottoNumber(num)))
-        .filter(aBoolean -> aBoolean)
+        .filter(num -> newLottoGame.contains(new LottoNumber(num)))
         .count();
 
     assertThat(validRangeCount).isEqualTo(NUMBER_COUNT_PER_GAME);
