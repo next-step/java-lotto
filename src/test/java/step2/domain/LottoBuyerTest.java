@@ -10,14 +10,14 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static step2.domain.Lotto.LOTTO_NUMBER_MUST_NOT_BE_BLANK;
 import static step2.domain.Lotto.LOTTO_NUMBER_SIZE_NOT_VALID;
-import static step2.domain.LottoBuyer.*;
+import static step2.domain.Money.MONEY_MUST_NOT_BE_NEGATIVE;
 
 public class LottoBuyerTest {
     @DisplayName("구매자가 로또를 구매")
     @Test
     void buy_lotto() {
         // given
-        final Money money = Lotto.getPrice().multiply(2);
+        final int money = Lotto.getPrice().multiply(2).getValue();
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
 
         // when
@@ -32,22 +32,25 @@ public class LottoBuyerTest {
     class Create {
         @DisplayName("실패")
         @Test
-        void fail_when_receive_null() {
+        void fail_when_receive_negative() {
+            // given
+            final int negative = -1;
+            
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottoBuyer.of(null);
+                LottoBuyer.of(negative);
             });
 
             // then
             Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(MONEY_MUST_NOT_BE_NULL);
+                    .hasMessageContaining(MONEY_MUST_NOT_BE_NEGATIVE);
         }
 
         @DisplayName("성공")
         @Test
         void success() {
             // given
-            final Money money = Lotto.getPrice();
+            final int money = Lotto.getPrice().getValue();
 
             // when
             final LottoBuyer lottoBuyer = LottoBuyer.of(money);
@@ -61,7 +64,7 @@ public class LottoBuyerTest {
     @Test
     void getLottos_not_return_null() {
         // given
-        final Money money = Lotto.getPrice();
+        final int money = Lotto.getPrice().getValue();
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
 
         // when
@@ -79,7 +82,7 @@ public class LottoBuyerTest {
         @Test
         void get_win_lottery() {
             // given
-            final Money money = Lotto.getPrice().multiply(10);
+            final int money = Lotto.getPrice().multiply(10).getValue();
             final LottoBuyer lottoBuyer = LottoBuyer.of(money);
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
 
@@ -94,7 +97,7 @@ public class LottoBuyerTest {
         @Test
         void lotto_number_is_empty() {
             // given
-            final Money money = Lotto.getPrice().multiply(10);
+            final int money = Lotto.getPrice().multiply(10).getValue();
             final LottoBuyer lottoBuyer = LottoBuyer.of(money);
             final String winningNumberExpression = " ";
 
@@ -112,7 +115,7 @@ public class LottoBuyerTest {
         @Test
         void not_valid_lotto_number_size() {
             // given
-            final Money money = Lotto.getPrice().multiply(10);
+            final int money = Lotto.getPrice().multiply(10).getValue();
             final LottoBuyer lottoBuyer = LottoBuyer.of(money);
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6, 7";
 

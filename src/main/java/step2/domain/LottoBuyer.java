@@ -3,12 +3,7 @@ package step2.domain;
 import step2.dto.LottoStatisticsResult;
 import step2.dto.WinLotteryResult;
 
-import java.util.Objects;
-
-import static util.Preconditions.checkArgument;
-
 public class LottoBuyer {
-    public static final String MONEY_MUST_NOT_BE_NULL = "money must not be null";
     private final Money money;
     private Lottos lottos = Lottos.EMPTY;
 
@@ -16,13 +11,8 @@ public class LottoBuyer {
         this.money = money;
     }
 
-    public static LottoBuyer of(final Money money) {
-        checkArgument(Objects.nonNull(money), MONEY_MUST_NOT_BE_NULL);
-        return new LottoBuyer(money);
-    }
-
     public static LottoBuyer of(final int money) {
-        return of(Money.of(money));
+        return new LottoBuyer(Money.of(money));
     }
 
     public Lottos buy() {
