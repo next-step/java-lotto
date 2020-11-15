@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static lotto.domain.lotto.LottoNumberDuplicateChecker.hasDuplicates;
-
 public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private static final Random RANDOM = new Random(System.currentTimeMillis());
 
@@ -13,7 +11,7 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     public List<LottoNumber> create() {
         final int lottoNumberLength = Lotto.getLottoNumbersLength();
         List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
-        while (lottoNumbers.isEmpty() || hasDuplicates(lottoNumbers)) {
+        while (lottoNumbers.isEmpty() || Lotto.hasDuplicates(lottoNumbers)) {
             lottoNumbers = createRandomNumbers(lottoNumberLength);
         }
         return lottoNumbers;

@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.CreateLottoNumbersStrategy;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -188,7 +185,7 @@ class LottoTest {
             void lotto_number_is_empty() {
                 // given
                 final String nullExpression = null;
-                
+
                 // when
                 final Throwable thrown = catchThrowable(() -> {
                     Lotto.of(nullExpression);
@@ -211,5 +208,59 @@ class LottoTest {
 
         // then
         assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix))).isEqualTo(6);
+    }
+
+    private static final List<LottoNumber> notDuplicatedLottoNumbers = Arrays.asList(
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
+    );
+
+    private static final List<LottoNumber> duplicatedLottoNumbers = Arrays.asList(
+            LottoNumber.of(1),
+            LottoNumber.of(1),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
+    );
+
+    @Test
+    void hasNotDuplicates_when_receive_not_duplicated_lotto_number() {
+        // when
+        final boolean result = Lotto.hasNotDuplicates(notDuplicatedLottoNumbers);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void hasNotDuplicates_when_receive_duplicated_lotto_number() {
+        // when
+        final boolean result = Lotto.hasNotDuplicates(duplicatedLottoNumbers);
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void hasDuplicates_when_receive_not_duplicated_lotto_number() {
+        // when
+        final boolean result = Lotto.hasDuplicates(notDuplicatedLottoNumbers);
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void hasDuplicates_when_receive_duplicated_lotto_number() {
+        // when
+        final boolean result = Lotto.hasDuplicates(duplicatedLottoNumbers);
+
+        // then
+        assertThat(result).isTrue();
     }
 }

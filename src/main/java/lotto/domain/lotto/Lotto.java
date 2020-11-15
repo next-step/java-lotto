@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.lotto.LottoNumberDuplicateChecker.hasNotDuplicates;
 import static util.Preconditions.checkArgument;
 
 public class Lotto {
@@ -50,6 +49,17 @@ public class Lotto {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return of(lottoNumbers);
+    }
+
+    public static boolean hasNotDuplicates(final List<LottoNumber> numbers) {
+        return !hasDuplicates(numbers);
+    }
+
+    public static boolean hasDuplicates(final List<LottoNumber> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .distinct()
+                .count() != numbers.size();
     }
 
     public int countHitNumber(final Lotto lotto) {
