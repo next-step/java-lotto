@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step1.StringUtils;
+import util.StringUtils;
 import step2.dto.LottoStatisticsResult;
 import step2.dto.WinLotteryResult;
 
