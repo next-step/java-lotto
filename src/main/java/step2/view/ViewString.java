@@ -2,7 +2,6 @@ package step2.view;
 
 public enum ViewString {
     NEWLINE(System.lineSeparator()),
-    DELIMITER(","),
     SPACE(" "),
     ;
 

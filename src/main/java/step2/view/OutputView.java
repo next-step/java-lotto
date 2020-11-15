@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final String DELIMITER = "," + ViewString.SPACE;
+    
     public static void printLottoCount(final Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
     }
@@ -22,7 +24,7 @@ public class OutputView {
         final String view = "["
                 + lottoNumbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "))
+                .collect(Collectors.joining(DELIMITER))
                 + "]"
                 + ViewString.NEWLINE;
         Printer.print(view);
