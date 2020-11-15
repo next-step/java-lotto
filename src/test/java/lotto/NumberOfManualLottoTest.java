@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.dto.Amount;
 import lotto.dto.NumberOfManualLotto;
+import lotto.exception.OverAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +17,7 @@ public class NumberOfManualLottoTest {
         Amount amount = Amount.valueOf(inputAmount);
         NumberOfManualLotto numberOfManualLotto = NumberOfManualLotto.valueOf(inputNumberOfManualLotto);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(OverAmountException.class)
                 .isThrownBy(() -> numberOfManualLotto.validateSize(amount))
                 .withMessage(NumberOfManualLotto.INVALID_SIZE_ERR_MSG);
     }
