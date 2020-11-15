@@ -28,8 +28,4 @@ public class WinningRankStatistics {
     public Map<WinningRank, Integer> getCounter() {
         return counter;
     }
-
-    public int getWinningRankCount(WinningRank winningRank) {
-        return counter.get(winningRank);
-    }
 }
