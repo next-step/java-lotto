@@ -24,6 +24,15 @@ class LottoTest {
             LottoNumber.of(6)
     );
 
+    private static final List<LottoNumber> duplicatedLottoNumbers = Arrays.asList(
+            LottoNumber.of(1),
+            LottoNumber.of(1),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
+    );
+
     @DisplayName("of")
     @Nested
     class Of {
@@ -210,28 +219,10 @@ class LottoTest {
         assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix))).isEqualTo(6);
     }
 
-    private static final List<LottoNumber> notDuplicatedLottoNumbers = Arrays.asList(
-            LottoNumber.of(1),
-            LottoNumber.of(2),
-            LottoNumber.of(3),
-            LottoNumber.of(4),
-            LottoNumber.of(5),
-            LottoNumber.of(6)
-    );
-
-    private static final List<LottoNumber> duplicatedLottoNumbers = Arrays.asList(
-            LottoNumber.of(1),
-            LottoNumber.of(1),
-            LottoNumber.of(3),
-            LottoNumber.of(4),
-            LottoNumber.of(5),
-            LottoNumber.of(6)
-    );
-
     @Test
     void hasNotDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasNotDuplicates(notDuplicatedLottoNumbers);
+        final boolean result = Lotto.hasNotDuplicates(lottoNumberOneToSix);
 
         // then
         assertThat(result).isTrue();
@@ -249,7 +240,7 @@ class LottoTest {
     @Test
     void hasDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasDuplicates(notDuplicatedLottoNumbers);
+        final boolean result = Lotto.hasDuplicates(lottoNumberOneToSix);
 
         // then
         assertThat(result).isFalse();
