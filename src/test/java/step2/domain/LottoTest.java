@@ -5,6 +5,8 @@ import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import step2.dto.LottoStatisticsResult;
 
 import java.util.Arrays;
@@ -81,7 +83,8 @@ class LottoTest {
                         LottoNumber.of(5),
                         LottoNumber.of(6),
                         LottoNumber.of(7)
-                );;
+                );
+                ;
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
@@ -103,7 +106,8 @@ class LottoTest {
                         LottoNumber.of(3),
                         LottoNumber.of(4),
                         LottoNumber.of(5)
-                );;
+                );
+                ;
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
@@ -143,14 +147,28 @@ class LottoTest {
             }
 
             @DisplayName("로또 번호로 빈 문자열을 받은 경우")
-            @Test
-            void lotto_number_is_empty() {
-                // given
-                final String blankExpression = " ";
-
+            @ParameterizedTest
+            @ValueSource(strings = {"", " ", "         "})
+            void lotto_number_is_empty(final String blankExpression) {
                 // when
                 final Throwable thrown = catchThrowable(() -> {
                     Lotto.of(blankExpression);
+                });
+
+                // then
+                Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(LOTTO_NUMBER_MUST_NOT_BE_BLANK);
+            }
+
+            @DisplayName("로또 번호로 null 문자열을 받은 경우")
+            @Test
+            void lotto_number_is_empty() {
+                // given
+                final String nullExpression = null;
+                
+                // when
+                final Throwable thrown = catchThrowable(() -> {
+                    Lotto.of(nullExpression);
                 });
 
                 // then
