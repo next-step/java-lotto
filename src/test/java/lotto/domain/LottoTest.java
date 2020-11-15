@@ -19,21 +19,21 @@ class LottoTest {
 
     @Test
     @DisplayName("6개의 로또 번호가 성공적으로 입력됨")
-    void createLotto_int_success() {
+    void constructor_success() {
         assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).toString()
         ).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @Test
     @DisplayName("1 부터 45가 아닌 로또 번호가 입력되면 LottoRangeException 이 발생한다.")
-    void createLotto_int_range() {
+    void constructor_range() {
         assertThatExceptionOfType(LottoRangeException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(-1, -2, -3, 46, 47, 48)));
     }
 
     @Test
     @DisplayName("로또 번호가 6개 입력되지 않으면, BadNumOfLottoNoException 이 발생한다.")
-    void createLotto_int_badNumOfLottoNo() {
+    void constructor_badNumOfLottoNo() {
         assertThatExceptionOfType(BadNumOfLottoNoException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(46, 0, -1)));
     }
@@ -59,7 +59,7 @@ class LottoTest {
 
     @Test
     @DisplayName("같은 숫자가 있으면, DuplicatedLottoException 이 발생한다.")
-    void add_duplicated_int() {
+    void constructor_duplicated() {
         assertThatExceptionOfType(DuplicatedLottoException.class)
                 .isThrownBy(() -> {
                     new Lotto(Arrays.asList(1, 1, 1, 1, 1, 1));
@@ -69,7 +69,7 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("1부터 45가 아닌 숫자를 add 하면, LottoRangeException 이 발생한다.")
     @ValueSource(ints = {-1, 0, 46})
-    public void constructor_int_fail(int lottoNo) {
+    public void add_fail(int lottoNo) {
         List<Integer> lottoNoList = new LinkedList<>();
         lottoNoList.add(lottoNo);
         for (int i = 1; i <= 5; i++) {
