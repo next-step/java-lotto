@@ -2,11 +2,11 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.utils.Parser;
 
 import java.util.Scanner;
 
 public class InputView {
+    private static final String SPLIT_REGEX = "[ ,]+";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {}
@@ -28,7 +28,7 @@ public class InputView {
         String lotto = scanner.nextLine();
         InputValidator.validateNpe(lotto);
         return new Lotto(
-                Parser.parseLottoStr(lotto)
+                Splitter.splitIntegers(lotto, SPLIT_REGEX)
         );
     }
 

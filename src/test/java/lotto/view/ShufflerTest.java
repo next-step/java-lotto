@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.view;
 
 import lotto.domain.LottoNo;
 import org.junit.jupiter.api.Assertions;
@@ -33,7 +33,7 @@ class ShufflerTest {
     @DisplayName("min 과 max 사이의 번호들을 반환해야 한다.")
     void getLottoNos_range() {
         List<Executable> executables = new LinkedList<>();
-        for (int num : shuffler.getIntegers(100)) {
+        for (int num : shuffler.getIntegers(max)) {
             executables.add(() -> {
                 assertThat(checkLottoNo(num))
                         .isTrue();
@@ -47,7 +47,7 @@ class ShufflerTest {
     void getLottoNos_contains() {
         List<Executable> executables = new LinkedList<>();
         HashSet<Integer> set = new HashSet<>();
-        for (int num : shuffler.getIntegers(100)) {
+        for (int num : shuffler.getIntegers(max)) {
             executables.add(() -> {
                 assertThat(set.contains(num))
                         .isFalse();

@@ -2,7 +2,7 @@ package lotto.controller.strategy;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
-import lotto.utils.Shuffler;
+import lotto.view.Shuffler;
 
 import java.util.List;
 

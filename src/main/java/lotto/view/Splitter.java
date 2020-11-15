@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.view;
 
 import lotto.exception.NanException;
 
@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Parser {
-    private Parser() {}
+public class Splitter {
+    private Splitter() {}
 
-    public static List<Integer> parseLottoStr(String lottoStr) {
-        return splitLottoStr(lottoStr)
+    public static List<Integer> splitIntegers(String integers, String regex) {
+        return split(integers, regex)
                 .stream()
-                .map(Parser::parseInt)
+                .map(Splitter::parseInt)
                 .collect(Collectors.toList());
     }
 
@@ -28,9 +28,5 @@ public class Parser {
         return Arrays.asList(
                 str.split(regex)
         );
-    }
-
-    private static List<String> splitLottoStr(String lottoStr) {
-        return split(lottoStr, "[ ,]+");
     }
 }
