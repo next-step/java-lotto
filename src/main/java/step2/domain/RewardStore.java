@@ -5,17 +5,13 @@ import step2.dto.WinLotteryResult;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static util.Preconditions.checkArgument;
-
-public class WinLotteryCalculator {
-    public static final String REWARD_MUST_BE_NOT_NULL = "reward must be not null";
+public class RewardStore {
     private final List<RewardCount> rewardCounts = Arrays.stream(Reward.values()).map(RewardCount::of).collect(Collectors.toList());
 
-    public int increaseHitCount(final Reward reward) {
-        checkArgument(Objects.nonNull(reward), REWARD_MUST_BE_NOT_NULL);
+    public int increaseHitCount(final int hitCount) {
+        final Reward reward = Reward.find(hitCount);
         final RewardCount selectedRewardCount = rewardCounts.stream()
                 .filter(rewardCount -> rewardCount.isMatch(reward))
                 .findAny()
@@ -25,7 +21,10 @@ public class WinLotteryCalculator {
     }
 
     public int getCount(final Reward reward) {
-        checkArgument(Objects.nonNull(reward), REWARD_MUST_BE_NOT_NULL);
+        if (reward == null) {
+            return 0;
+        }
+        
         return rewardCounts.stream()
                 .filter(rewardCount -> rewardCount.isMatch(reward))
                 .findAny()

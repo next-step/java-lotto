@@ -1,9 +1,9 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Reward {
+    NONE(2, Money.of(0)),
     HIT_THREE_TIMES(3, Money.of(5_000)),
     HIT_FOUR_TIMES(4, Money.of(50_000)),
     HIT_FIVE_TIMES(5, Money.of(1_500_000)),
@@ -18,6 +18,9 @@ public enum Reward {
     }
 
     public boolean isMatch(final int hitTimes) {
+        if (hitTimes <= NONE.hitTimes) {
+            return false;
+        }
         return this.hitTimes == hitTimes;
     }
 
@@ -29,9 +32,10 @@ public enum Reward {
         return money;
     }
 
-    public static Optional<Reward> find(final int hitTimes) {
+    public static Reward find(final int hitTimes) {
         return Arrays.stream(Reward.values())
                 .filter(reward -> reward.isMatch(hitTimes))
-                .findAny();
+                .findAny()
+                .orElse(NONE);
     }
 }
