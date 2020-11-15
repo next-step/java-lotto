@@ -16,6 +16,7 @@ public class LastWeekLotto {
     public static List<Integer> separateLottoToList(String input) {
         validNull(input);
         validEmpty(input);
+
         return Arrays.stream(separateLottoNumber(input))
                 .map(s -> Integer.parseInt(s.trim()))
                 .collect(Collectors.toList());
