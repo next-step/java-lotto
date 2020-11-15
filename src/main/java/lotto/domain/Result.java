@@ -21,15 +21,11 @@ public class Result {
         );
     }
 
-    Money getProfit() {
+    public Money getProfit() {
         int profit = 0;
         for (Jackpot jackpot : Jackpot.values()) {
             profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);
         }
         return new Money(profit);
-    }
-
-    public double getRateOfReturn(Money purchaseMoney) {
-        return getProfit().divide(purchaseMoney);
     }
 }

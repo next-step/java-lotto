@@ -13,7 +13,9 @@ public class ResultMessage {
         for (Jackpot jackpot : Jackpot.values()) {
             sb.append(getJackpotMsg(jackpot, result.getNumOfLotto(jackpot)));
         }
-        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
+        double rateOfReturn = result
+                .getProfit()
+                .divide(purchaseMoney);
         sb.append(getRateOfReturnMsg(rateOfReturn));
         return sb.toString();
     }

@@ -4,9 +4,7 @@ import lotto.exception.BadMoneyException;
 
 import java.util.Objects;
 
-// TODO: ProfitMoney 와 PurchaseMoney 분리하
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -14,17 +12,14 @@ public class Money {
         this.money = money;
     }
 
-    public static void validateMoney(int money) {
+    private void validateMoney(int money) {
         if (money <= 0) {
             throw BadMoneyException.getInstance();
         }
 
     }
 
-    public int getNumOfLottos() {
-        return money / LOTTO_PRICE;
-    }
-
+    // TODO: divde 함수 없애기
     public double divide(Money divider) {
         return money / divider.money;
     }

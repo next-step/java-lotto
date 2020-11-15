@@ -31,8 +31,8 @@ class ResultTest {
     }
 
     @Test
-    @DisplayName("profit 과 rateOfReturn 을 정상적으로 계산해야한다.")
-    void getRateOfReturn() {
+    @DisplayName("profit 을 정상적으로 계산해야한다.")
+    void getProfit() {
         Result result = new Result();
         result.increaseNumOfLotto(Jackpot.THREE);
         result.increaseNumOfLotto(Jackpot.THREE);
@@ -42,14 +42,7 @@ class ResultTest {
         result.increaseNumOfLotto(Jackpot.FIVE);
 
         int expectedProfit = 1615000;
-        int purchase = 161500;
-        int expectedRateOfReturn = 10;
-        Money purchaseMoney = new Money(purchase);
-        Assertions.assertAll(
-                () -> assertThat(result.getProfit())
-                        .isEqualTo(new Money(expectedProfit)),
-                () -> assertThat(result.getRateOfReturn(purchaseMoney))
-                        .isEqualTo(expectedRateOfReturn)
-        );
+        assertThat(result.getProfit())
+                .isEqualTo(new Money(expectedProfit));
     }
 }
