@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -110,7 +111,7 @@ public class LottoBuyerTest {
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
 
             // when
-            final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+            final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
 
             // then
             assertThat(lottoStatisticsResult).isNotNull();
@@ -126,7 +127,7 @@ public class LottoBuyerTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+                lottoBuyer.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
             });
 
             // then
@@ -144,7 +145,7 @@ public class LottoBuyerTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+                lottoBuyer.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
             });
 
             // then

@@ -40,10 +40,11 @@ class LottoTest {
         @Test
         void with_strategy() {
             // given
-            final CreateLottoNumbersStrategy strategy = () -> lottoNumberOneToSix;
+            final CreateLottoNumbersStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
+            final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MIN;
 
             // when 
-            final Lotto lotto = Lotto.of(strategy);
+            final Lotto lotto = Lotto.of(lottoNumbersStrategy, bonusNumberStrategy);
 
             // then
             assertThat(lotto).isNotNull();
@@ -56,7 +57,7 @@ class LottoTest {
             @Test
             void success() {
                 // when 
-                final Lotto lotto = Lotto.of(lottoNumberOneToSix);
+                final Lotto lotto = Lotto.of(lottoNumberOneToSix, LottoNumber.MIN);
 
                 // then
                 assertThat(lotto).isNotNull();
@@ -70,7 +71,7 @@ class LottoTest {
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(nullList);
+                    Lotto.of(nullList, LottoNumber.MIN);
                 });
 
                 // then
@@ -95,7 +96,7 @@ class LottoTest {
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(lottoNumberOneToSeven);
+                    Lotto.of(lottoNumberOneToSeven, LottoNumber.MIN);
                 });
 
                 // then
@@ -117,7 +118,7 @@ class LottoTest {
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(lottoNumberOneToFive);
+                    Lotto.of(lottoNumberOneToFive, LottoNumber.MIN);
                 });
 
                 // then
@@ -140,7 +141,7 @@ class LottoTest {
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(duplicatedNumber);
+                    Lotto.of(duplicatedNumber, LottoNumber.MIN);
                 });
 
                 // then
@@ -169,7 +170,7 @@ class LottoTest {
                 final String lottoNumberExpression = "1, 2, 3, 4, 5, 6";
 
                 // when
-                final Lotto lotto = Lotto.of(lottoNumberExpression);
+                final Lotto lotto = Lotto.of(lottoNumberExpression, LottoNumber.MIN.getValue());
 
                 // then
                 assertThat(lotto).isNotNull();
@@ -181,7 +182,7 @@ class LottoTest {
             void lotto_number_is_empty(final String blankExpression) {
                 // when
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(blankExpression);
+                    Lotto.of(blankExpression, LottoNumber.MIN.getValue());
                 });
 
                 // then
@@ -197,7 +198,7 @@ class LottoTest {
 
                 // when
                 final Throwable thrown = catchThrowable(() -> {
-                    Lotto.of(nullExpression);
+                    Lotto.of(nullExpression, LottoNumber.MIN.getValue());
                 });
 
                 // then
@@ -210,13 +211,14 @@ class LottoTest {
     @Test
     void countHitNumber() {
         // given
-        final CreateLottoNumbersStrategy strategy = () -> lottoNumberOneToSix;
+        final CreateLottoNumbersStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
+        final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MIN;
 
         // when 
-        final Lotto lotto = Lotto.of(strategy);
+        final Lotto lotto = Lotto.of(lottoNumbersStrategy, bonusNumberStrategy);
 
         // then
-        assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix))).isEqualTo(6);
+        assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix, LottoNumber.MIN))).isEqualTo(6);
     }
 
     @Test

@@ -38,7 +38,8 @@ class LottosTest {
                         LottoNumber.of(4),
                         LottoNumber.of(5),
                         LottoNumber.of(6)
-                )
+                ),
+                LottoNumber.MIN
         );
         // when
         final WinLotteryResult result = lottos.getWinLotteryResult(answer);

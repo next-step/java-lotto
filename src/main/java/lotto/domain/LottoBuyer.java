@@ -30,8 +30,8 @@ public class LottoBuyer {
         return lottos;
     }
 
-    public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression) {
-        final Lotto lotto = Lotto.of(winningNumberExpression);
+    public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
+        final Lotto lotto = Lotto.of(winningNumberExpression, bonusNumber);
         final WinLotteryResult result = lottos.getWinLotteryResult(lotto);
         return new LottoStatisticsResult(result, getProfit(result));
     }

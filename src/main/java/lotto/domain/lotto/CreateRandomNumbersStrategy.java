@@ -2,10 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
-    private static final Random RANDOM = new Random(System.currentTimeMillis());
+    private static final CreateRandomNumberStrategy createRandomNumberStrategy = new CreateRandomNumberStrategy();
 
     @Override
     public List<LottoNumber> create() {
@@ -20,15 +19,8 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private List<LottoNumber> createRandomNumbers(final int lottoNumberLength) {
         final List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
         for (int i = 0; i < lottoNumberLength; i++) {
-            final int randomNumber = createRandomNumber();
-            lottoNumbers.add(LottoNumber.of(randomNumber));
+            lottoNumbers.add(createRandomNumberStrategy.create());
         }
         return lottoNumbers;
-    }
-
-    private int createRandomNumber() {
-        final int max = LottoNumber.MAX.getValue();
-        final int min = LottoNumber.MIN.getValue();
-        return RANDOM.nextInt(max) + min;
     }
 }

@@ -15,7 +15,8 @@ public class LottoMain {
         OutputView.printAllLotto(lottoBuyer.getLottos());
         
         final String winningNumberExpression = InputView.plzEnterLastWeekWinningNumber();
-        final LottoStatisticsResult statisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression);
+        final int bonusNumber = InputView.plzEnterBonusNumber();
+        final LottoStatisticsResult statisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression, bonusNumber);
         OutputView.printStatistics(statisticsResult);
     }
 }

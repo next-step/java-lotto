@@ -36,7 +36,7 @@ public class LottoMockFactory {
         while (i < lottoNumbers.size()) {
             List<LottoNumber> partition = lottoNumbers.subList(i, i + partitionSize);
             i += partitionSize;
-            lottos.add(Lotto.of(partition));
+            lottos.add(Lotto.of(partition, LottoNumber.MIN));
         }
         return lottos;
     }
