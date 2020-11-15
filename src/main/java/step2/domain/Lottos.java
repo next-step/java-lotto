@@ -26,12 +26,12 @@ public class Lottos {
     }
 
     public WinLotteryResult countHitNumber(final Lotto winningLottery) {
-        final RewardStore calculator = new RewardStore();
+        final RewardStore rewardStore = new RewardStore();
         for (final Lotto lotto : lottoList) {
             final int hitCount = lotto.countHitNumber(winningLottery);
-            calculator.increaseHitCount(hitCount);
+            rewardStore.increaseHitCount(hitCount);
         }
-        return calculator.toWinLotteryResult();
+        return rewardStore.toWinLotteryResult();
     }
 
     public List<List<Integer>> getAllLottoNumber() {
