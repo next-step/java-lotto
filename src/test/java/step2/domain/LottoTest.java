@@ -107,7 +107,6 @@ class LottoTest {
                         LottoNumber.of(4),
                         LottoNumber.of(5)
                 );
-                ;
 
                 // when 
                 final Throwable thrown = catchThrowable(() -> {
