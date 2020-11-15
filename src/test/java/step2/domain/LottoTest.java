@@ -1,7 +1,6 @@
 package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,12 +40,6 @@ class LottoTest {
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(7, 8, 9, 10, 11, 12), 0));
     }
 
-    @Test
-    @DisplayName("로또 한장을 만듭니다.")
-    void create() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.lottoNumbersSize(6)).isTrue();
-    }
 
     @ParameterizedTest
     @MethodSource("createExceptionLotto")

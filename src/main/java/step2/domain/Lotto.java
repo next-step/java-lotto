@@ -26,10 +26,6 @@ public class Lotto {
         }
     }
 
-    public boolean lottoNumbersSize(int size) {
-        return lottoNumbers.size() == size;
-    }
-
     public int matchLottoNumbers(List<Integer> matchLottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(matchLottoNumbers::contains)
