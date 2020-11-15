@@ -1,24 +1,18 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class Result {
-    private final HashMap<Jackpot, Integer> result;
+    private final HashMap<Integer, Integer> result;
 
-    Result() {
+    public Result(List<Lotto> lottos, Lotto winningLotto) {
         result = new HashMap<>();
-    }
-
-    public int getNumOfLotto(Jackpot jackpot) {
-        return Optional.ofNullable(result.get(jackpot)).orElseGet(() -> 0);
-    }
-
-    void increaseNumOfLotto(Jackpot jackpot) {
-        result.put(
-                jackpot,
-                getNumOfLotto(jackpot) + 1
-        );
+        for (Lotto lotto : lottos) {
+            int count = lotto.countSameNo(winningLotto);
+            increaseNumOfLotto(count);
+        }
     }
 
     public Money getProfit() {
@@ -27,5 +21,24 @@ public class Result {
             profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);
         }
         return new Money(profit);
+    }
+
+    public int getNumOfLotto(Jackpot jackpot) {
+        return getNumOfLotto(
+                jackpot.getNumOfCorrected()
+        );
+    }
+
+    private int getNumOfLotto(int numOfCorrected) {
+        return Optional.ofNullable(
+                result.get(numOfCorrected)
+        ).orElseGet(() -> 0);
+    }
+
+    void increaseNumOfLotto(int numOfCorrected) {
+        result.put(
+                numOfCorrected,
+                getNumOfLotto(numOfCorrected) + 1
+        );
     }
 }

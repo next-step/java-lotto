@@ -13,7 +13,7 @@ public class Main {
         ResultView.printNumOfLottos(numOfLottos);
 
         Shuffler shuffler = new Shuffler(LottoNo.MIN, LottoNo.MAX);
-        Lottos lottos = Lottos.create(numOfLottos, () -> new Lotto(
+        Lottos lottos = new Lottos(numOfLottos, () -> new Lotto(
                 shuffler.getIntegers(Lotto.SIZE)
         ));
         ResultView.printLottos(lottos);
