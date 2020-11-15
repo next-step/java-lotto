@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.view.Shuffler;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.controller;
 
 import lotto.domain.LottoNo;
 import lotto.exception.BadMinMaxException;

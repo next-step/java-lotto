@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.controller;
 
 import lotto.exception.BadMinMaxException;
 import lotto.exception.BadShuffleException;
