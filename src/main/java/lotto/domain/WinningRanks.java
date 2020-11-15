@@ -22,4 +22,8 @@ public class WinningRanks {
     public int hashCode() {
         return Objects.hash(winningRankList);
     }
+
+    public List<WinningRank> getWinningRankList() {
+        return winningRankList;
+    }
 }
