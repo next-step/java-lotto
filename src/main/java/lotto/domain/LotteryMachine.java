@@ -2,14 +2,14 @@ package lotto.domain;
 
 public class LotteryMachine {
 
-    private final Numbers numbers;
+    private final Numbers winningNumbers;
 
-    public LotteryMachine(Numbers numbers) {
-        this.numbers = numbers;
+    public LotteryMachine(Numbers winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
 
     public WinningRanks checkLottos(Lottos lottos) {
-        return lottos.checkWinningRanks(numbers);
+        return lottos.checkWinningRanks(winningNumbers);
     }
 }
