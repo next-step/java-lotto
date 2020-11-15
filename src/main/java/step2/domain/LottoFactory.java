@@ -7,19 +7,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoFactory {
-
-
     private static final int LOTTO_PRICE = 1000;
     private final Lottos lottos;
-    public LottoFactory(int money) {
+
+    public LottoFactory(final int money ,final LottoGeneratorStrategy lottoMakeStrategy){
         validMoney(money);
 
-
         lottos = new Lottos(Arrays.stream(new Integer[getLottoTicketCount(money)])
-                .map(integer -> new Lotto(RandomLottoGenerator.generateLottoNumbers()))
+                .map(integer -> new Lotto(lottoMakeStrategy.generateLottoNumbers()))
                 .collect(Collectors.toList()));
-
-
     }
 
     public LottoMatcher matchNumbers(List<Integer> lastWeekLottoNums) {
@@ -31,19 +27,22 @@ public class LottoFactory {
     }
 
     private void validMoney(int money) {
-        if (money < 1000) {
+        if (money < LOTTO_PRICE) {
             throw new LottoMoneyException();
         }
     }
 
-    public int getLottoCount(){
+    public int getLottoCount() {
         return lottos.getLottoCount();
     }
-    public boolean isLottoTicketsCount(int size) {
-        return lottos.isLottoTicketsCount(size);
-    }
-    public List<String> getLottoNumbersListToString(){
+
+
+    public List<String> getLottoNumbersListToString() {
         return lottos.lottoNumbersToStringList();
     }
 
+    public double getLottoRatio(LottoMatcher lottoMatcher, int lottoInvestMoney) {
+        return lottoMatcher.getGamePrize()
+                .splitRate(new GameMoney(lottoInvestMoney));
+    }
 }
