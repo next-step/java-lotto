@@ -29,8 +29,7 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private int createRandomNumber() {
         final int max = LottoNumber.MAX.getValue();
         final int min = LottoNumber.MIN.getValue();
-        final int randomNumber = RANDOM.nextInt(max) + min;
-        return randomNumber;
+        return RANDOM.nextInt(max) + min;
     }
 
     private boolean hasDuplicates(final List<LottoNumber> lottoNumbers) {
