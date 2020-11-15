@@ -22,6 +22,10 @@ public class Numbers {
         return new Builder();
     }
 
+    public List<Integer> getNumberList() {
+        return numberList;
+    }
+
     public int countSameNumber(Numbers numbers) {
         return this.numberList.stream()
                 .reduce(0, (count, num) -> {
