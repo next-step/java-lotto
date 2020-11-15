@@ -3,6 +3,7 @@ package step3.domain.lotto;
 import step3.domain.lotto.firstcollection.LottoNumber;
 import step3.domain.lotto.firstcollection.MarkingNumbers;
 import step3.strategy.NumberMakeStrategy;
+import step3.type.WinningType;
 
 import java.util.Set;
 
@@ -30,4 +31,8 @@ public class LottoTicket {
         return markingNumbers.toString();
     }
 
+    public WinningType compareWinningNumber(WinningNumbers winningNumbers) {
+        int matchCount = winningNumbers.countEquals(this);
+        return WinningType.getType(matchCount, winningNumbers.isMarkedBonusBall(this));
+    }
 }
