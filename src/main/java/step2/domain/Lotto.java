@@ -27,13 +27,16 @@ public class Lotto {
     public static Lotto of(final List<LottoNumber> numbers) {
         checkArgument(numbers != null, LOTTO_NUMBER_MUST_NOT_BE_NULL);
         checkArgument(numbers.size() == LOTTO_NUMBERS_LENGTH, LOTTO_NUMBER_SIZE_NOT_VALID);
+        numbers.sort(Comparator.comparing(LottoNumber::getValue));
         return new Lotto(numbers);
     }
 
     public static Lotto of(final CreateLottoNumbersStrategy strategy) {
-        final List<LottoNumber> lottoNumbers = strategy.create();
-        lottoNumbers.sort(Comparator.comparing(LottoNumber::getValue));
-        return of(lottoNumbers);
+        return of(strategy.create());
+    }
+
+    public static Lotto of() {
+        return of(DEFAULT_CREATE_NUMBER_STRATEGY);
     }
 
     public static Lotto of(final String lottoNumberExpression) {
@@ -43,10 +46,6 @@ public class Lotto {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return of(lottoNumbers);
-    }
-
-    public static Lotto of() {
-        return of(DEFAULT_CREATE_NUMBER_STRATEGY);
     }
 
     public int countHitNumber(final Lotto lotto) {
