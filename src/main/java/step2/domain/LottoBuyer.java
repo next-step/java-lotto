@@ -34,7 +34,7 @@ public class LottoBuyer {
     }
 
     public LottoStatisticsResult getWinLotteryStatistics(final Lotto winningLottery) {
-        final WinLotteryResult result = lottos.countHitNumber(winningLottery);
+        final WinLotteryResult result = lottos.getWinLotteryResult(winningLottery);
         return new LottoStatisticsResult(result, getProfit(result));
     }
 

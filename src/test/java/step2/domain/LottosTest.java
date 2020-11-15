@@ -40,7 +40,7 @@ class LottosTest {
                 )
         );
         // when
-        final WinLotteryResult result = lottos.countHitNumber(answer);
+        final WinLotteryResult result = lottos.getWinLotteryResult(answer);
 
         // then
         assertAll(

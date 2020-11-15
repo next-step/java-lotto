@@ -25,7 +25,7 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public WinLotteryResult countHitNumber(final Lotto winningLottery) {
+    public WinLotteryResult getWinLotteryResult(final Lotto winningLottery) {
         final RewardStore rewardStore = new RewardStore();
         for (final Lotto lotto : lottoList) {
             final int hitCount = lotto.countHitNumber(winningLottery);
