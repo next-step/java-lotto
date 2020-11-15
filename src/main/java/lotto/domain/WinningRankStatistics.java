@@ -25,6 +25,10 @@ public class WinningRankStatistics {
         Arrays.stream(WinningRank.values()).forEach(winningRank -> counter.put(winningRank, 0));
     }
 
+    public Map<WinningRank, Integer> getCounter() {
+        return counter;
+    }
+
     public int getWinningRankCount(WinningRank winningRank) {
         return counter.get(winningRank);
     }
