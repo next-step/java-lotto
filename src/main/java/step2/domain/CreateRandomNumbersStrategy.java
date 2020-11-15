@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static step2.domain.LottoNumberDuplicateChecker.hasDuplicates;
+
 public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private static final Random RANDOM = new Random(System.currentTimeMillis());
 
@@ -30,12 +32,5 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
         final int max = LottoNumber.MAX.getValue();
         final int min = LottoNumber.MIN.getValue();
         return RANDOM.nextInt(max) + min;
-    }
-
-    private boolean hasDuplicates(final List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .distinct()
-                .count() != lottoNumbers.size();
     }
 }

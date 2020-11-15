@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static step2.domain.LottoNumberDuplicateChecker.hasNotDuplicates;
 import static util.Preconditions.checkArgument;
 
 public class Lotto {
@@ -15,7 +16,8 @@ public class Lotto {
     private static final CreateLottoNumbersStrategy DEFAULT_CREATE_NUMBER_STRATEGY = new CreateRandomNumbersStrategy();
     public static final String LOTTO_NUMBER_MUST_NOT_BE_NULL = "lotto number must not be null";
     public static final String LOTTO_NUMBER_SIZE_NOT_VALID = "lotto number size must be " + LOTTO_NUMBERS_LENGTH;
-    public static final String LOTTO_NUMBER_MUST_NOT_BE_BLANK = "winning number must not be blank";
+    public static final String LOTTO_NUMBER_MUST_NOT_BE_BLANK = "lotto number must not be blank";
+    public static final String LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED = "lotto number must not be duplicated";
     private static final String SEPARATOR = ", ";
 
     private final List<LottoNumber> numbers;
@@ -27,6 +29,7 @@ public class Lotto {
     public static Lotto of(final List<LottoNumber> numbers) {
         checkArgument(numbers != null, LOTTO_NUMBER_MUST_NOT_BE_NULL);
         checkArgument(numbers.size() == LOTTO_NUMBERS_LENGTH, LOTTO_NUMBER_SIZE_NOT_VALID);
+        checkArgument(hasNotDuplicates(numbers), LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED);
         numbers.sort(Comparator.comparing(LottoNumber::getValue));
         return new Lotto(numbers);
     }

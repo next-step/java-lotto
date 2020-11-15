@@ -115,6 +115,29 @@ class LottoTest {
                 Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining(LOTTO_NUMBER_SIZE_NOT_VALID);
             }
+
+            @DisplayName("로또 번호가 정해진 개수 보다 많은 경우")
+            @Test
+            void throw_exception_when_receive_lotto_number_duplicated() {
+                // given
+                final List<LottoNumber> duplicatedNumber = Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5)
+                );
+
+                // when 
+                final Throwable thrown = catchThrowable(() -> {
+                    Lotto.of(duplicatedNumber);
+                });
+
+                // then
+                Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED);
+            }
         }
 
         @DisplayName("아무 전달인자가 없는 경우")
