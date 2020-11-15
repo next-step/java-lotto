@@ -31,8 +31,7 @@ public class StringSumCalculator {
 		validate(inputStrings);
 		return Stream.of(inputStrings)
 				.map(this::getPositiveNumber)
-				.reduce(Integer::sum)
-				.orElse(0);
+				.reduce(0, Integer::sum);
 	}
 
 	private void validate(String[] inputStrings) {
