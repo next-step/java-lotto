@@ -58,4 +58,9 @@ public class ConsoleInputView implements InputView {
         }
         return manualLottoNumbers;
     }
+
+    @Override
+    public void printInputError(Exception e) {
+        System.out.println(e.getMessage());
+    }
 }

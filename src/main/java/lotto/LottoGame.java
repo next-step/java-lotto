@@ -12,6 +12,7 @@ import lotto.view.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class LottoGame {
     public static final String INVALID_AMOUNT_ERR_MSG = "amount의 값은 음수가 될 수 없습니다.";
@@ -34,10 +35,18 @@ public class LottoGame {
     }
 
     private List<Lotto> buyLottos() {
-        int amount = getAmount();
-        int numberOfManualLotto = getNumberOfManualLotto(amount);
-        List<Set<Integer>> manualLottoNumbers = getManualLottoNumbers(numberOfManualLotto);
-        return getLottos(amount, manualLottoNumbers);
+        int amount = getValidInput(() -> getAmount());
+        int numberOfManualLotto = getValidInput(() -> getNumberOfManualLotto(amount));
+        return getValidInput(() -> getLotto(amount, numberOfManualLotto));
+    }
+
+    public <T> T getValidInput(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (RuntimeException e) {
+            view.printInputError(e);
+            return getValidInput(supplier);
+        }
     }
 
     private int getAmount() {
@@ -66,17 +75,27 @@ public class LottoGame {
         return manualLottoNumbers;
     }
 
-    private List<Lotto> getLottos(int amount, List<Set<Integer>> manualLottoNumbers) {
+    private List<Lotto> getLotto(int amount, int numberOfManualLotto) {
+        List<Set<Integer>> manualLottoNumbers = getValidInput(() -> getManualLottoNumbers(numberOfManualLotto));
+        return getLottosWithManualNumbers(amount, manualLottoNumbers);
+    }
+
+    private List<Lotto> getLottosWithManualNumbers(int amount, List<Set<Integer>> manualLottoNumbers) {
         List<Lotto> boughtLottos = lottoService.buyLottos(manualLottoNumbers, amount);
         view.printBoughtLottos(manualLottoNumbers.size(), boughtLottos);
         return boughtLottos;
     }
 
     private WinningNumber getWinningNumber() {
-        Lotto winningLotto = getWinningLotto();
+        Lotto winningLotto = getValidInput(() -> getWinningLotto());
+        LottoNumber bonusNumber = getValidInput(() -> getBonusLottoNumber(winningLotto));
+        return new WinningNumber(winningLotto, bonusNumber);
+    }
+
+    private LottoNumber getBonusLottoNumber(Lotto winningLotto) {
         LottoNumber bonusNumber = LottoNumber.valueOf(view.getBonusNumber());
         validateBonusNumber(winningLotto, bonusNumber);
-        return new WinningNumber(winningLotto, bonusNumber);
+        return bonusNumber;
     }
 
     private Lotto getWinningLotto() {

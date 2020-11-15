@@ -51,4 +51,9 @@ public class ConsoleView implements View {
     public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
         return inputView.getManualLottoNumbers(numberOfManualLotto);
     }
+
+    @Override
+    public void printInputError(Exception e) {
+        inputView.printInputError(e);
+    }
 }

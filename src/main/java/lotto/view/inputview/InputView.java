@@ -13,4 +13,6 @@ public interface InputView {
     int getNumberOfManualLotto();
 
     List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto);
+
+    void printInputError(Exception e);
 }
