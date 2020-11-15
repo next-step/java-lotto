@@ -1,5 +1,8 @@
 package step2.domain;
 
+import util.StringUtils;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +14,8 @@ public class Lotto {
     private static final CreateLottoNumbersStrategy DEFAULT_CREATE_NUMBER_STRATEGY = new CreateRandomNumbersStrategy();
     public static final String LOTTO_NUMBER_MUST_NOT_BE_NULL = "lotto number must not be null";
     public static final String LOTTO_NUMBER_SIZE_NOT_VALID = "lotto number size must be " + LOTTO_NUMBERS_LENGTH;
+    public static final String LOTTO_NUMBER_MUST_NOT_BE_BLANK = "winning number must not be blank";
+    private static final String SEPARATOR = ", ";
 
     private final List<LottoNumber> numbers;
 
@@ -26,6 +31,15 @@ public class Lotto {
     
     public static Lotto of(final CreateLottoNumbersStrategy strategy) {
         return of(strategy.create());
+    }
+    
+    public static Lotto of(final String lottoNumberExpression) {
+        checkArgument(StringUtils.isNotBlank(lottoNumberExpression), LOTTO_NUMBER_MUST_NOT_BE_BLANK);
+        final List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberExpression.split(SEPARATOR))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        return of(lottoNumbers);
     }
 
     public static Lotto of() {

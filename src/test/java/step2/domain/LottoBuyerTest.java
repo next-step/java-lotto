@@ -8,6 +8,8 @@ import step2.dto.LottoStatisticsResult;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static step2.domain.Lotto.LOTTO_NUMBER_MUST_NOT_BE_BLANK;
+import static step2.domain.Lotto.LOTTO_NUMBER_SIZE_NOT_VALID;
 import static step2.domain.LottoBuyer.*;
 
 public class LottoBuyerTest {
@@ -103,7 +105,7 @@ public class LottoBuyerTest {
 
             // then
             Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(WINNING_NUMBER_MUST_NOT_BE_BLANK);
+                    .hasMessageContaining(LOTTO_NUMBER_MUST_NOT_BE_BLANK);
         }
 
         @DisplayName("로또 번호 개수가 유효 하지 못한 경우")
@@ -121,7 +123,7 @@ public class LottoBuyerTest {
 
             // then
             Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(WINNING_NUMBER_SIZE_NOT_VALID);
+                    .hasMessageContaining(LOTTO_NUMBER_SIZE_NOT_VALID);
         }
     }
 }

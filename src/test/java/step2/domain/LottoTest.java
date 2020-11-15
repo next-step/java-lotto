@@ -1,17 +1,18 @@
 package step2.domain;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import step2.dto.LottoStatisticsResult;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static step2.domain.Lotto.LOTTO_NUMBER_MUST_NOT_BE_NULL;
-import static step2.domain.Lotto.LOTTO_NUMBER_SIZE_NOT_VALID;
+import static step2.domain.Lotto.*;
 
 class LottoTest {
     private final List<LottoNumber> lottoNumberOneToSix = Arrays.asList(
@@ -123,6 +124,39 @@ class LottoTest {
 
             // then
             assertThat(lotto).isNotNull();
+        }
+
+        @DisplayName("문자열로 생성")
+        @Nested
+        class with_string {
+            @DisplayName("성공")
+            @Test
+            void success() {
+                // given
+                final String lottoNumberExpression = "1, 2, 3, 4, 5, 6";
+
+                // when
+                final Lotto lotto = Lotto.of(lottoNumberExpression);
+
+                // then
+                assertThat(lotto).isNotNull();
+            }
+
+            @DisplayName("로또 번호로 빈 문자열을 받은 경우")
+            @Test
+            void lotto_number_is_empty() {
+                // given
+                final String blankExpression = " ";
+
+                // when
+                final Throwable thrown = catchThrowable(() -> {
+                    Lotto.of(blankExpression);
+                });
+
+                // then
+                Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(LOTTO_NUMBER_MUST_NOT_BE_BLANK);
+            }
         }
     }
 
