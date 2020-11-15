@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 public class LastWeekLotto {
     private static final String DELIMITER_LOTTO = ",";
 
-    private LastWeekLotto() {
-    }
+    private LastWeekLotto() {}
 
     public static List<Integer> separateLottoToList(String input) {
         validNull(input);
@@ -47,6 +46,5 @@ public class LastWeekLotto {
             throw new ValidEmptyException();
         }
     }
-
 
 }
