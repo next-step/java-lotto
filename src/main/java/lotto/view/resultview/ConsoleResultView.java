@@ -14,8 +14,9 @@ public class ConsoleResultView implements ResultView {
     @Override
     public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
         StringBuilder sb = new StringBuilder();
-        //수동으로 3장, 자동으로 11개를 구매했습니다.
-        sb.append(boughtLottos.size()).append("개를 구매했습니다.").append(System.lineSeparator());
+
+        String purchaseMsg = String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoNumbers.size(), boughtLottos.size() - manualLottoNumbers.size());
+        sb.append(purchaseMsg).append(System.lineSeparator());
 
         for (Lotto boughtLotto : boughtLottos) {
             Set<LottoNumber> numbers = boughtLotto.getNumbers();
