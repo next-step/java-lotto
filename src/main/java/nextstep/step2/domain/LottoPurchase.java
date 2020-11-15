@@ -1,11 +1,11 @@
-package nextstep.step2.view;
+package nextstep.step2.domain;
 
-public class LottoResultView {
+public class LottoPurchase {
 	private static final String LOTTO_PURCHASE_MESSAGE = "%d개를 구매했습니다.";
 	private static int LOTTO_PRICE = 1000;
 	private int money;
 
-	public LottoResultView(int money) {
+	public LottoPurchase(int money) {
 		this.money = money;
 	}
 	public String getPurchaseMessage() {
