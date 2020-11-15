@@ -4,7 +4,6 @@ import step3.domain.lotto.firstcollection.LottoNumber;
 import step3.domain.lotto.firstcollection.LottoTickets;
 import step3.domain.lotto.firstcollection.MarkingNumbers;
 import step3.domain.lotto.firstcollection.WinningResults;
-import step3.type.WinningType;
 
 import java.util.Objects;
 import java.util.Set;
@@ -60,10 +59,6 @@ public class WinningNumbers {
         return winningResults.getRevenue(tickets.countTicket());
     }
 
-    public WinningType getWinningStatistics(LottoTicket ticket) {
-        return WinningResults.compareWinningNumber(ticket, this);
-    }
-
     public WinningResults getWinningStatistics(LottoTickets tickets) {
         return WinningResults.of(tickets, this);
     }
@@ -83,16 +78,15 @@ public class WinningNumbers {
     public boolean isMarkedBonusBall(LottoTicket ticket) {
         return ticket.isMarked(bonusBall);
     }
-
     private static void isValid(String string) {
         if (Objects.isNull(string) || string.isEmpty()) {
             throw new IllegalArgumentException();
         }
     }
+
     private static void isValid(Set<LottoNumber> list) {
         if (list.isEmpty() || list.size() < 6) {
             throw new IllegalArgumentException();
         }
     }
-
 }

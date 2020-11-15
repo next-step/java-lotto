@@ -33,10 +33,6 @@ public class WinningResults {
         return new WinningResults(aggregate(tickets, winningNumbers));
     }
 
-    public Integer countByWinningType(WinningType type) {
-        return Optional.ofNullable(winningResults.get(type)).orElse(DEFAULT_COUNT_INTEGER);
-    }
-
     private static Map<WinningType, Integer> aggregate(LottoTickets tickets, WinningNumbers winningNumbers) {
 
         return Arrays.stream(WinningType.values())
@@ -49,15 +45,11 @@ public class WinningResults {
     }
 
     private static Map<WinningType, Long> countByWinningType(LottoTickets tickets, WinningNumbers winningNumbers) {
-        return tickets.getTickets()
-                .stream()
-                .map(ticket -> compareWinningNumber(ticket, winningNumbers))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return tickets.countByWinningType(winningNumbers);
     }
 
-    public static WinningType compareWinningNumber(LottoTicket ticket, WinningNumbers winningNumbers) {
-        int matchCount = winningNumbers.countEquals(ticket);
-        return WinningType.getType(matchCount, winningNumbers.isMarkedBonusBall(ticket));
+    public Integer countByWinningType(WinningType type) {
+        return Optional.ofNullable(winningResults.get(type)).orElse(DEFAULT_COUNT_INTEGER);
     }
 
 
