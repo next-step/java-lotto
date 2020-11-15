@@ -1,6 +1,7 @@
 package lotto.mock;
 
 import lotto.domain.Lotto;
+import lotto.dto.ManualLottoNumbers;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.LottoFactory;
 import lotto.view.View;
@@ -32,17 +33,22 @@ public class MockInvalidManualLottoView implements View {
     }
 
     @Override
-    public List<Set<Integer>> getManualLottoNumbers(int numberOfManualLotto) {
+    public ManualLottoNumbers getManualLottoNumbers(int numberOfManualLotto) {
         return null;
     }
 
     @Override
-    public void printBoughtLottos(int numberOfManualLotto, List<Lotto> boughtLottos) {
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
 
     }
 
     @Override
     public void printWinningStatistic(WinningStatistic winningStatistic) {
+
+    }
+
+    @Override
+    public void printInputError(Exception e) {
 
     }
 }
