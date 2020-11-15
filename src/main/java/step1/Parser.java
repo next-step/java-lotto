@@ -3,7 +3,7 @@ package step1;
 public class Parser {
     private Parser() {}
 
-    protected static final String LESS_THAN_ZERO_EXCEPTION_MSG = "숫자는 0보다 커야 합니다.";
+    static final String LESS_THAN_ZERO_EXCEPTION_MSG = "숫자는 0보다 커야 합니다.";
 
     public static int parseNumStr(String numStr) {
         int num = Integer.parseInt(numStr);
