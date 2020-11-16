@@ -17,7 +17,7 @@ public class LottoWinningNumbersTest {
     public void getMatchedCount(String numbers, int count) {
         Set<LottoNumber> testcaseNumbers = Stream.of(numbers.split(";"))
                 .map(Integer::valueOf)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
         LottoWinningNumbers winningNumbers = new LottoWinningNumbers(TestHelper.setOf(1, 2, 3, 4, 5, 6));

@@ -35,7 +35,7 @@ public class LottoStoreTest {
     public void claimPrize(String numbers, int expetedPrize) {
         Set<LottoNumber> testcaseNumbers = Stream.of(numbers.split(";"))
                 .map(Integer::valueOf)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
         LottoTicket myTicket = new LottoTicket(testcaseNumbers);

@@ -1,23 +1,37 @@
 package humbledude.lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
+    private static final Map<Integer, LottoNumber> NUMBER_MAP = new HashMap<>();
 
     private final int number;
 
-    public LottoNumber(int number) {
+    static {
+        IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX)
+                .forEach(number -> NUMBER_MAP.put(number, new LottoNumber(number)));
+    }
+
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        validateNumber(number);
+        return NUMBER_MAP.get(number);
     }
 
     public int getNumber() {
         return number;
     }
 
-    private void validateNumber(Integer number) {
+    private static void validateNumber(int number) {
         if (number < LOTTO_MIN || number > LOTTO_MAX) {
             throw new IllegalArgumentException("로또는 " + LOTTO_MIN + "부터 " + LOTTO_MAX + "까지의 숫자만 쓸 수 있어요");
         }

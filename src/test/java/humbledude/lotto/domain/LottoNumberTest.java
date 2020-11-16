@@ -8,7 +8,7 @@ public class LottoNumberTest {
 
     @Test
     public void outOfBounds() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(0));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(46));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(0));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(46));
     }
 }

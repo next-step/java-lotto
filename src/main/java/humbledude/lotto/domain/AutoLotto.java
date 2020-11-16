@@ -12,7 +12,7 @@ public class AutoLotto {
     static {
         totalLottoNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_MIN, LottoNumber.LOTTO_MAX)
                 .boxed()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

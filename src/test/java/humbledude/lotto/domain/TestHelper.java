@@ -8,7 +8,7 @@ public class TestHelper {
     public static Set<LottoNumber> setOf(int ... numbers) {
         return IntStream.of(numbers)
                 .boxed()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 }

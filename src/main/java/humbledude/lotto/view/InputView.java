@@ -25,7 +25,7 @@ public class InputView {
         Set<LottoNumber> numbers = Stream.of(scanner.nextLine().split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
         return new LottoWinningNumbers(numbers);
