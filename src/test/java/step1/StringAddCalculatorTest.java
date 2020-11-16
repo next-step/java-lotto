@@ -1,5 +1,7 @@
 package step1;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -139,4 +141,29 @@ public class StringAddCalculatorTest {
         assertThat(calculator.sumAll()).isEqualTo(NumberUtils.toInt(expected));
     }
 
+    @Test
+    @DisplayName("커스텀 구분자가 존재한다")
+    void is_custom_splitter_exist() {
+        // given
+        InputValue inputValue = InputValue.of("//;\n1;2;3");
+
+        // when
+        boolean result = StringSplitter.hasCustomSplitter(inputValue.getInput());
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 없다")
+    void is_custom_splitter_not_exist() {
+        // given
+        InputValue inputValue = InputValue.of("1:2,3");
+
+        // when
+        boolean result = StringSplitter.hasCustomSplitter(inputValue.getInput());
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
