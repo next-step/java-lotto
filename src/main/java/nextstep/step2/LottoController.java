@@ -2,27 +2,24 @@ package nextstep.step2;
 
 import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoAutoGenerator;
-import nextstep.step2.domain.LottoStaticstic;
 import nextstep.step2.domain.LottoPurchase;
-import nextstep.step2.view.InputView;
+import nextstep.step2.domain.LottoStaticstic;
 import nextstep.step2.view.LottoResultView;
 import nextstep.step2.view.LottoTicketView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoController {
-	public void startLottoGame() {
-		InputView inputMoney = new InputView(new Scanner(System.in));
-		LottoPurchase purchase = new LottoPurchase(inputMoney.getInputMessage());
+	public List<Lotto> startLottoGameGetLottos(int money) {
+		LottoPurchase purchase = new LottoPurchase(money);
+		return printAutoLottoTicketsAndLottos(purchase);
+	}
 
-		List<Lotto> lottoList = printAutoLottoTicketsAndLottos(purchase);
-		InputView inputWinningNumbers = new InputView(new Scanner(System.in));
-		LottoStaticstic lottoPercentage = new LottoStaticstic(inputWinningNumbers.getInputLottoWinningNumbers());
-
+	public void printLottoStaticsic(String winnerNumbers, List<Lotto> lottoList) {
+		LottoStaticstic lottoPercentage = new LottoStaticstic(winnerNumbers);
 		LottoResultView resultView = new LottoResultView();
-		resultView.printLottoPercentage(lottoPercentage.getLottoRewardMap(lottoList));
+		resultView.printLottoStaticsic(lottoPercentage.getLottoRewardMap(lottoList));
 	}
 
 	private List<Lotto> printAutoLottoTicketsAndLottos(LottoPurchase purchase) {
