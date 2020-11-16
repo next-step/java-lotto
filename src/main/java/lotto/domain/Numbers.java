@@ -54,7 +54,7 @@ public class Numbers {
     }
 
 
-    public static final class Builder implements javafx.util.Builder<Numbers> {
+    public static final class Builder {
         private List<Integer> numbers;
 
         public Builder range(int startInclusive, int endExclusive) {
@@ -83,7 +83,6 @@ public class Numbers {
             return this;
         }
 
-        @Override
         public Numbers build() {
             return new Numbers(this);
         }
