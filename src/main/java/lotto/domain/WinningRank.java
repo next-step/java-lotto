@@ -1,20 +1,22 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static lotto.domain.Utils.makeRangeNumbers;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 public enum WinningRank {
-    FAIL(makeRangeNumbers(0, 3), 0),
-    FOURTH(makeRangeNumbers(3, 4), 5_000),
-    THIRD(makeRangeNumbers(4, 5), 50_000),
-    SECOND(makeRangeNumbers(5, 6), 1_500_000),
-    FIRST(makeRangeNumbers(6, 7), 2_000_000_000);
+    FAIL(asList(0, 1, 2), 0),
+    FOURTH(singletonList(3), 5_000),
+    THIRD(singletonList(4), 50_000),
+    SECOND(singletonList(5), 1_500_000),
+    FIRST(singletonList(6), 2_000_000_000);
 
-    private final Numbers sameNumberNums;
+    private final List<Integer> sameNumberNums;
     private final int price;
 
-    WinningRank(Numbers sameNumberNums, int price) {
+    WinningRank(List<Integer> sameNumberNums, int price) {
         this.sameNumberNums = sameNumberNums;
         this.price = price;
     }
@@ -30,7 +32,7 @@ public enum WinningRank {
         return price;
     }
 
-    public Numbers getSameNumberNums() {
+    public List<Integer> getSameNumberNums() {
         return sameNumberNums;
     }
 
