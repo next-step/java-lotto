@@ -8,6 +8,8 @@ public class StringAddCalculator {
     private static String TOKENS = ",|:";
     private static String PATTERN = "//(.)\n(.*)";
     private static String NEGATIVE_EXCEPTION_MESSAGE = "음수는 계산할 수 없습니다.";
+    private static int DELIMITER = 1;
+    private static int CONTENTS = 2;
 
     private static boolean isBlank(String input) {
         return input == null || input.trim() == "";
@@ -32,8 +34,8 @@ public class StringAddCalculator {
 
     private static String[] tokenize(String input, Matcher matcher) {
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return tokenize(matcher.group(2), customDelimiter);
+            String customDelimiter = matcher.group(DELIMITER);
+            return tokenize(matcher.group(CONTENTS), customDelimiter);
         }
         return tokenize(input, TOKENS);
     }
