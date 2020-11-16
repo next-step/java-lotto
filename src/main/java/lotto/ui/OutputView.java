@@ -1,7 +1,7 @@
 package lotto.ui;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.LottoResults;
+import lotto.domain.PrizeGrade;
 import lotto.domain.PurchaseAction;
 import lotto.domain.model.LottoGames;
 
@@ -27,12 +27,12 @@ public class OutputView {
 
   private String reportOfStatisticsEachGroup(Map<PrizeGrade, Integer> group) {
     return group.entrySet().stream()
-        .sorted(Comparator.comparing(entry -> entry.getKey().getPrintOrder()))
-        .map(this::formatPrizeExplain)
+        .sorted(Comparator.comparing(entry -> entry.getKey().getPrizeMoney()))
+        .map(this::formatPrizeStatistics)
         .collect(Collectors.joining(NEW_LINE));
   }
 
-  private String formatPrizeExplain(Map.Entry<PrizeGrade, Integer> entry) {
+  private String formatPrizeStatistics(Map.Entry<PrizeGrade, Integer> entry) {
     PrizeGrade prizeGrade = entry.getKey();
     return String.format(PRIZE_STATISTICS_FORMAT, prizeGrade.getMatchCount(), prizeGrade.getPrizeMoney(), entry.getValue());
   }

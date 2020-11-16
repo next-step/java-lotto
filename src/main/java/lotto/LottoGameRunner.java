@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoGameCondition;
 import lotto.domain.LottoResults;
 import lotto.domain.PurchaseAction;
 import lotto.domain.model.LottoGames;
@@ -16,8 +16,8 @@ public class LottoGameRunner {
     LottoGames lottoGames = purchaseAction.purchase();
     outputView.printEntryGames(lottoGames);
 
-    LottoGame lastWeekWinGame = inputView.inputLastWeekWinNumber();
-    LottoResults lottoResults = lottoGames.confirmPrize(lastWeekWinGame);
+    LottoGameCondition lottoGameCondition = inputView.inputLastWeekWinNumber();
+    LottoResults lottoResults = lottoGames.confirmPrize(lottoGameCondition);
 
     outputView.printPrizeStatistics(purchaseAction, lottoResults);
   }

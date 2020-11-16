@@ -5,6 +5,8 @@ public class Message {
   public static final String INPUT_SHOULD_INTEGER = "자연수로 입력 해 주세요.";
   public static final String OVER_NUMBER_RANGE = "로또입력 범위안의 자연수로 입력 해 주세요.";
   public static final String INPUT_VALUE = "입력값을 입력해주세요.";
+  public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+  public static final String BONUS_NUMBER_IS_NOT_UNIQUE = "보너스 숫자는 유일해야 합니다.";
 
   public static final String NUMBER_COUNT_SHOULD_N = "로또 게임은 %d개의 숫자를 입력해야합니다.";
   public static final String INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME = "최소 구입 금액은 %d원 이상입니다.";

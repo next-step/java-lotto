@@ -1,12 +1,11 @@
 package lotto.domain.model;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoGameCondition;
 import lotto.domain.LottoResults;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoGames {
 
@@ -24,14 +23,8 @@ public class LottoGames {
     return lottoGames.size();
   }
 
-  public LottoResults confirmPrize(LottoGame lastWeekWinGame) {
-    return new LottoResults(getConfirmResults(lastWeekWinGame));
-  }
-
-  private List<PrizeGrade> getConfirmResults(LottoGame lastWeekWinGame) {
-    return lottoGames.stream()
-        .map(lottoGame -> lottoGame.confirmPrize(lastWeekWinGame))
-        .collect(Collectors.toList());
+  public LottoResults confirmPrize(LottoGameCondition lottoGameCondition) {
+    return new LottoResults(lottoGameCondition.prizeResult(lottoGames));
   }
 
   @Override

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.constants.RateOfReturn;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.constants.Message.RATE_OF_RETURN_FORMAT;
-import static lotto.constants.PrizeGrade.THIRD_CLASS;
+import static lotto.domain.PrizeGrade.THIRD_CLASS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultsTest {

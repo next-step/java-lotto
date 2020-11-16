@@ -1,7 +1,9 @@
 package lotto.ui;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoGameCondition;
 import lotto.domain.PurchaseAction;
+import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 
 import java.util.InputMismatchException;
@@ -19,8 +21,10 @@ public class InputView {
     return new PurchaseAction(validatePrice(purchasingPrice()));
   }
 
-  public LottoGame inputLastWeekWinNumber() {
-    return new LottoGame(validatePrice(lastWeekWinNumber()));
+  public LottoGameCondition inputLastWeekWinNumber() {
+    LottoGame prizeLottoGame = new LottoGame(validatePrice(lastWeekWinNumber()));
+    LottoNumber bonusNumber = new LottoNumber(validatePrice(bonusNumber()));
+    return new LottoGameCondition(prizeLottoGame, bonusNumber);
   }
 
   private Optional<Integer> purchasingPrice() {
@@ -29,6 +33,10 @@ public class InputView {
 
   private Optional<String[]> lastWeekWinNumber() {
     return Optional.of(queryAndGetArray(PLEASE_INPUT_LAST_WEEK_PRIZE));
+  }
+
+  private Optional<Integer> bonusNumber() {
+    return Optional.of(queryAndGetInt(INPUT_BONUS_NUMBER));
   }
 
   private <T> T validatePrice(Optional<T> purchasingPrice) {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 import org.junit.jupiter.api.DisplayName;
@@ -33,13 +32,6 @@ class LottoGameTest {
         .isInstanceOf(LottoGameException.class);
   }
 
-  @ParameterizedTest
-  @MethodSource("provideConfirmPrizeMaterial")
-  void confirmPrize_테스트(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers, int matchCount) {
-    assertThat(new LottoGame(lottoNumbers).confirmPrize(new LottoGame(winNumbers)))
-        .isEqualTo(PrizeGrade.of(matchCount));
-  }
-
   @DisplayName("toString 테스트")
   @ParameterizedTest
   @MethodSource("provideToStringMaterial")
@@ -62,14 +54,6 @@ class LottoGameTest {
         Arguments.of((Object) new String[]{"a", "b", "1", "23", "44", "21"}),
         Arguments.of((Object) new String[]{"100", "2", "3", "3", "44", "21"}),
         Arguments.of((Object) new String[]{"-1", "1", "2", "23", "44", "21"})
-    );
-  }
-
-  static Stream<Arguments> provideConfirmPrizeMaterial() {
-    List<LottoNumber> prize = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-        new LottoNumber(12), new LottoNumber(23), new LottoNumber(34));
-    return Stream.of(
-        Arguments.of(LOTTO_NUMBERS, prize, 3)
     );
   }
 

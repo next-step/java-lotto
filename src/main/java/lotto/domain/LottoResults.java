@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.constants.RateOfReturn;
 
 import java.util.Arrays;
@@ -41,17 +40,17 @@ public class LottoResults {
   }
 
   private Map<PrizeGrade, Integer> groupByPrizeGrade(List<PrizeGrade> prizeGrades) {
-    return resolveGroupByPrizeGrade(prizeGrades.stream()
+    return Arrays.stream(PrizeGrade.values())
         .filter(prizeGrade -> prizeGrade != PrizeGrade.FAIL)
-        .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(confirmResult -> INCREASE))));
+        .collect(Collectors.toMap(Function.identity(),
+            prizeGrade -> resolveGroupByPrizeGrade(prizeGrades, prizeGrade)));
   }
 
-  private Map<PrizeGrade, Integer> resolveGroupByPrizeGrade(Map<PrizeGrade, Integer> groupedByPrizeGrade) {
-    Arrays.stream(PrizeGrade.values())
-        .filter(prizeGrade -> !groupedByPrizeGrade.containsKey(prizeGrade))
-        .filter(prizeGrade -> prizeGrade != PrizeGrade.FAIL)
-        .forEach(prizeGrade -> groupedByPrizeGrade.put(prizeGrade, 0));
-    return groupedByPrizeGrade;
+  private Integer resolveGroupByPrizeGrade(List<PrizeGrade> prizeGrades, PrizeGrade prizeGrade) {
+    return prizeGrades.stream()
+        .filter(result -> result == prizeGrade)
+        .map(result -> INCREASE)
+        .reduce(ZERO, Integer::sum);
   }
 
   @Override

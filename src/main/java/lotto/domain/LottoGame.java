@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 
@@ -30,8 +29,8 @@ public class LottoGame {
     this.lottoNumbers = createLottoNumbers(numbers);
   }
 
-  public PrizeGrade confirmPrize(LottoGame prize) {
-    return PrizeGrade.of(getMatchCount(prize));
+  public Set<LottoNumber> getLottoNumbers() {
+    return lottoNumbers;
   }
 
   private Set<LottoNumber> createLottoNumbers(String[] numbers) {
@@ -48,12 +47,6 @@ public class LottoGame {
 
   private boolean isValidNumberCount(Set<LottoNumber> lottoNumbers) {
     return lottoNumbers.size() == NUMBER_COUNT_PER_GAME;
-  }
-
-  private int getMatchCount(LottoGame lottoGame) {
-    return Math.toIntExact(lottoNumbers.stream()
-        .filter(lottoGame::contains)
-        .count());
   }
 
   protected boolean contains(LottoNumber lottoNumber) {
