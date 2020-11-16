@@ -6,10 +6,10 @@ import static lotto.domain.Utils.makeRangeNumbers;
 
 public enum WinningRank {
     FAIL(makeRangeNumbers(0, 3), 0),
-    FOURTH(makeRangeNumbers(3, 4), 5000),
-    THIRD(makeRangeNumbers(4, 5), 50000),
-    SECOND(makeRangeNumbers(5, 6), 1500000),
-    FIRST(makeRangeNumbers(6, 7), 2000000000);
+    FOURTH(makeRangeNumbers(3, 4), 5_000),
+    THIRD(makeRangeNumbers(4, 5), 50_000),
+    SECOND(makeRangeNumbers(5, 6), 1_500_000),
+    FIRST(makeRangeNumbers(6, 7), 2_000_000_000);
 
     private final Numbers sameNumberNums;
     private final int price;
