@@ -33,13 +33,13 @@ public class LottoStoreTest {
     @ParameterizedTest
     @CsvSource({"1;2;3;4;5;6,2000000000", "1;2;3;4;5;45,1500000", "1;2;3;4;44;45,50000", "1;2;3;43;44;45,5000", "1;2;42;43;44;45,0"})
     public void claimPrize(String numbers, int expetedPrize) {
-        Set<Integer> testcaseNumbers = Stream.of(numbers.split(";"))
+        Set<LottoNumber> testcaseNumbers = Stream.of(numbers.split(";"))
                 .map(Integer::valueOf)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        LottoTicket myTicket = new LottoTicket(LottoNumbers.of(testcaseNumbers));
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(
-                LottoNumbers.of(TestHelper.setOf(1, 2, 3, 4, 5, 6)));
+        LottoTicket myTicket = new LottoTicket(testcaseNumbers);
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(TestHelper.setOf(1, 2, 3, 4, 5, 6));
 
         LottoStore store = new LottoStore();
         store.setWinningNumbers(winningNumbers);

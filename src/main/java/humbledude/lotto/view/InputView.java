@@ -1,6 +1,6 @@
 package humbledude.lotto.view;
 
-import humbledude.lotto.domain.LottoNumbers;
+import humbledude.lotto.domain.LottoNumber;
 import humbledude.lotto.domain.LottoWinningNumbers;
 
 import java.util.Scanner;
@@ -22,12 +22,13 @@ public class InputView {
 
     public static LottoWinningNumbers getWinningNumbers() {
         System.out.println(MSG_INPUT_WINNING_NUMBER);
-        Set<Integer> numbers = Stream.of(scanner.nextLine().split(","))
+        Set<LottoNumber> numbers = Stream.of(scanner.nextLine().split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        return new LottoWinningNumbers(LottoNumbers.of(numbers));
+        return new LottoWinningNumbers(numbers);
 
     }
 
