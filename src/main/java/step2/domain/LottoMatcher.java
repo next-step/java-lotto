@@ -1,17 +1,24 @@
 package step2.domain;
 
-import java.util.HashMap;
+import step2.dto.LottoResultDto;
+
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoMatcher {
     private static final int INCREASE_COUNT = 1;
-    private Map<LottoRank, Integer> result = new HashMap<>();
+    private final EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
 
-    public LottoMatcher(List<Lotto> lottos , List<Integer> lastWeekLottoNums) {
+    private LottoMatcher(List<Lotto> lottos , List<Integer> lastWeekLottoNums) {
         initDefaultMap();
 
         matchLastWeekLottoNumbers(lottos, lastWeekLottoNums);
+    }
+
+    public static LottoMatcher matchLottoNumbers(List<Lotto> lottos , List<Integer> lastWeekLottoNums){
+        return new LottoMatcher(lottos , lastWeekLottoNums);
     }
 
     private void matchLastWeekLottoNumbers(List<Lotto> lottos, List<Integer> lastWeekLottoNums) {
@@ -39,8 +46,10 @@ public class LottoMatcher {
     }
 
 
-    public Map<LottoRank, Integer> getResult() {
-        return result;
+    public List<LottoResultDto> getResult() {
+        return Stream.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FORTH)
+                .map(lottoRank -> new LottoResultDto(lottoRank , result.get(lottoRank)))
+                .collect(Collectors.toList());
     }
 
     public GameMoney getGamePrize() {

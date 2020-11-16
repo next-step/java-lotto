@@ -18,7 +18,7 @@ public class Lottos {
     }
 
     public LottoMatcher matchLastWeekLotto(List<Integer> lastWeekLottoNums) {
-        return new LottoMatcher(lottos , lastWeekLottoNums);
+        return LottoMatcher.matchLottoNumbers(lottos , lastWeekLottoNums);
     }
 
     public int getLottoCount() {

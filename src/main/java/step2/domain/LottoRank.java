@@ -50,4 +50,7 @@ public enum LottoRank {
     public int getMatch() {
         return match;
     }
+
+
+
 }
