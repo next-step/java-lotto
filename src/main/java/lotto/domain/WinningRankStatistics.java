@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -31,8 +32,10 @@ public class WinningRankStatistics {
         return counter;
     }
 
-    public float getYield() {
-        return getMoneyEarned() / (float) getMoneyPayed();
+    public BigDecimal calculateYield() {
+        BigDecimal totalMoney = new BigDecimal(getMoneyPayed());
+        BigDecimal moneyEarned = new BigDecimal(getMoneyEarned());
+        return moneyEarned.divide(totalMoney);
     }
 
     private int getMoneyEarned() {

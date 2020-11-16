@@ -6,6 +6,7 @@ import lotto.domain.WinningRank;
 import lotto.domain.WinningRankStatistics;
 
 import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -76,11 +77,11 @@ public class OutputView {
                 .collect(Collectors.joining(LOTTO_NUMBER_SPLITTER));
     }
 
-    public static void showYield(float yield) {
+    public static void showYield(BigDecimal yield) {
         out.println(getYieldString(yield));
     }
 
-    private static String getYieldString(float yield) {
+    private static String getYieldString(BigDecimal yield) {
         return String.format(YIELD_MESSAGE, yield);
     }
 }

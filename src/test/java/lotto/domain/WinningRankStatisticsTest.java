@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +26,10 @@ class WinningRankStatisticsTest {
     @Test
     @DisplayName("수익률 계산하기")
     void getYield() {
-        float expectedYield = (WinningRank.FIRST.getPrice() * 2 + WinningRank.SECOND.getPrice() * 1) / (LOTTO_PRICE * 3);
-        assertThat(winningRankStatistics.getYield()).isCloseTo(expectedYield, Percentage.withPercentage(1));
+        BigDecimal totalLottoPrice = new BigDecimal(LOTTO_PRICE * 3);
+        BigDecimal priceEarned = new BigDecimal(WinningRank.FIRST.getPrice() * 2 + WinningRank.SECOND.getPrice() * 1);
+        BigDecimal expectedYield = priceEarned.divide(totalLottoPrice);
+        assertThat(winningRankStatistics.calculateYield()).isEqualTo(expectedYield);
     }
 
     @Test

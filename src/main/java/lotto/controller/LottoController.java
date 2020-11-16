@@ -30,7 +30,7 @@ public class LottoController {
 
     public void showResult(WinningRankStatistics winningRankStatistics) {
         OutputView.showWinningRanks(winningRankStatistics);
-        OutputView.showYield(winningRankStatistics.getYield());
+        OutputView.showYield(winningRankStatistics.calculateYield());
     }
 
     public LotteryMachine getWinningNumbers() {
