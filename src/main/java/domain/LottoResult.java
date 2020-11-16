@@ -2,78 +2,75 @@ package domain;
 
 public class LottoResult {
 
-    private Long firstPrize = Long.valueOf(0L);
-    private Long secondPrize = Long.valueOf(0L);
-    private Long thirdPrize = Long.valueOf(0L);
-    private Long fourthPrize = Long.valueOf(0L);
+    private Long firstPrizeCount = Long.valueOf(0L);
+    private Long secondPrizeCount = Long.valueOf(0L);
+    private Long thirdPrizeCount = Long.valueOf(0L);
+    private Long fourthPrizeCount = Long.valueOf(0L);
+
+    private Long totalPrizeValue = Long.valueOf(0L);
     private Double profitRates = Double.valueOf(0);
 
     public void checkWhetherToWin(Long countMatching) {
-        if(countMatching.equals(3L)) {
+        if(LottoPrize.FOURTH_PRIZE.isWon(countMatching)) {
             incrementFourth();
         }
 
-        if(countMatching.equals(4L)) {
+        if(LottoPrize.THIRD_PRIZE.isWon(countMatching)) {
             incrementThird();
         }
 
-        if(countMatching.equals(5L)) {
+        if(LottoPrize.SECOND_PRIZE.isWon(countMatching)) {
             incrementSecond();
         }
 
-        if(countMatching.equals(6L)) {
+        if(LottoPrize.FIRST_PRIZE.isWon(countMatching)) {
             incrementFirst();
         }
     }
 
     private void incrementFirst() {
-        this.firstPrize = Long.valueOf(firstPrize + 1);
+        this.firstPrizeCount = Long.valueOf(firstPrizeCount + 1);
+        totalPrizeValue += LottoPrize.FIRST_PRIZE.getPrizeValue();
     }
 
     private void incrementSecond() {
-        this.secondPrize = Long.valueOf(secondPrize + 1);
+        this.secondPrizeCount = Long.valueOf(secondPrizeCount + 1);
+        totalPrizeValue += LottoPrize.SECOND_PRIZE.getPrizeValue();
     }
 
     private void incrementThird() {
-        this.thirdPrize = Long.valueOf(thirdPrize + 1);
+        this.thirdPrizeCount = Long.valueOf(thirdPrizeCount + 1);
+        totalPrizeValue += LottoPrize.THIRD_PRIZE.getPrizeValue();
     }
 
     private void incrementFourth() {
-        this.fourthPrize = Long.valueOf(fourthPrize + 1);
+        this.fourthPrizeCount = Long.valueOf(fourthPrizeCount + 1);
+        totalPrizeValue = LottoPrize.FOURTH_PRIZE.getPrizeValue();
     }
 
-    public Long getFirstPrize() {
-        return firstPrize;
+    public Long getFirstPrizeCount() {
+        return firstPrizeCount;
     }
 
-    public Long getSecondPrize() {
-        return secondPrize;
+    public Long getSecondPrizeCount() {
+        return secondPrizeCount;
     }
 
-    public Long getThirdPrize() {
-        return thirdPrize;
+    public Long getThirdPrizeCount() {
+        return thirdPrizeCount;
     }
 
-    public Long getFourthPrize() {
-        return fourthPrize;
+    public Long getFourthPrizeCount() {
+        return fourthPrizeCount;
     }
 
     public Double getProfitRates() {
         return profitRates;
     }
 
-
     public void calculateProfitRates(int numberOfLottos) throws Exception {
         Money lottoPrice = Money.of(1000L);
-        Money firstPrizeMoney = Money.of(2000000000L);
-        Money secondPrizeMoney = Money.of(1500000L);
-        Money thirdPrizeMoney = Money.of(50000L);
-        Money fourthPrizeMoney = Money.of(5000L);
-
-        Money totalPrizeMoney = firstPrizeMoney.multiply(firstPrize)
-                                    .plus(secondPrizeMoney.multiply(secondPrize)
-                                    .plus(thirdPrizeMoney.multiply(thirdPrize)
-                                    .plus(fourthPrizeMoney.multiply(fourthPrize))));
+        Money totalPrizeMoney = Money.of(totalPrizeValue);
 
         profitRates = totalPrizeMoney.dividedBy(lottoPrice.multiply((long) numberOfLottos));
     }
