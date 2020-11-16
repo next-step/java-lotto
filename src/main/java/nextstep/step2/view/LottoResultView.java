@@ -1,7 +1,6 @@
 package nextstep.step2.view;
 
 import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoPurchase;
 import nextstep.step2.domain.LottoReward;
 
 import java.util.ArrayList;

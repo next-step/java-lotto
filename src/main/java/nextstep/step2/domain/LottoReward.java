@@ -7,7 +7,7 @@ public enum LottoReward {
 	SECOND(5, 1_500_000),
 	THIRD(4, 50_000),
 	FOURTH(3, 5_000),
-	LOST(0, 0);
+	LOST(0, 0); //2개 이하로 맞으면 0원
 
 	private final int count;
 	private final int price;
