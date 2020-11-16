@@ -19,7 +19,8 @@ public class LottoWinningNumbersTest {
                 .map(Integer::valueOf)
                 .collect(Collectors.toSet());
 
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(
+                LottoNumbers.of(TestHelper.setOf(1, 2, 3, 4, 5, 6)));
         LottoTicket ticket = new LottoTicket(LottoNumbers.of(testcaseNumbers));
 
         assertThat(winningNumbers.getMatchedCountWith(ticket)).isEqualTo(count);
@@ -27,7 +28,8 @@ public class LottoWinningNumbersTest {
 
     @Test
     public void validWinningNumbers() {
-       assertThat(new LottoWinningNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6)))
+       assertThat(new LottoWinningNumbers(
+               LottoNumbers.of(TestHelper.setOf(1, 2, 3, 4, 5, 6))))
                .isInstanceOf(LottoWinningNumbers.class);
     }
 }

@@ -9,22 +9,13 @@ public class LottoNumbersTest {
 
     @Test
     public void validNumbers() {
-        assertThat(LottoNumbers.of(1, 2, 3 ,4 ,5, 6))
+        assertThat(LottoNumbers.of(TestHelper.setOf(1, 2, 3 ,4 ,5, 6)))
                 .isInstanceOf(LottoNumbers.class);
     }
 
     @Test
     public void duplicatedNumbers() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoTicket(LottoNumbers.of(1, 2, 3 ,4 ,6, 6)));
-    }
-
-    @Test
-    public void outOfBoundNumbers() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoTicket(LottoNumbers.of(0, 2, 3 ,4 ,5, 6)));
-
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoTicket(LottoNumbers.of(1, 2, 3 ,4 ,5, 46)));
+                () -> LottoNumbers.of(TestHelper.setOf(1, 2, 3 ,4 ,6, 6)));
     }
 }

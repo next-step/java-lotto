@@ -38,7 +38,8 @@ public class LottoStoreTest {
                 .collect(Collectors.toSet());
 
         LottoTicket myTicket = new LottoTicket(LottoNumbers.of(testcaseNumbers));
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(
+                LottoNumbers.of(TestHelper.setOf(1, 2, 3, 4, 5, 6)));
 
         LottoStore store = new LottoStore();
         store.setWinningNumbers(winningNumbers);
