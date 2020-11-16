@@ -33,7 +33,7 @@ public class LottoController {
 
         WinningNumbers winningNumbers = inputView.getWinningNumber();
         WinningResults winningResults = winningNumbers.getWinningStatistics(tickets);
-        double revenueRate = winningNumbers.getRevenueRate(tickets);
+        double revenueRate = winningResults.getRevenue(tickets.countTicket());
 
         resultView.drawWinningStatistics(winningResults);
         resultView.drawRevenueRate(revenueRate, winningNumbers.isRevenue(revenueRate));
