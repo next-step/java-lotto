@@ -48,9 +48,16 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자를 지정하는 경우 문자열의 합 리턴")
-    void customDelimiterTest() {
+    @DisplayName("커스텀 구분자를 지정하는 경우 문자열의 합 리턴 - 구분자(;)")
+    void customDelimiterSemicolonTest() {
         String text = "//;\n1;2;3";
+        assertThat(stringCalculator.calculate(text)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 지정하는 경우 문자열의 합 리턴 - 구분자(-)")
+    void customDelimiterDashTest() {
+        String text = "//-\n1-2-3";
         assertThat(stringCalculator.calculate(text)).isEqualTo(6);
     }
 
