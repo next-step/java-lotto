@@ -2,13 +2,12 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.dto.BonusNumber;
+import lotto.dto.Lottos;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.ValidInputHelper;
 import lotto.service.helper.WinningChecker;
 import lotto.view.View;
-
-import java.util.List;
 
 public class StatisticPrinter {
     private final View view;
@@ -17,7 +16,7 @@ public class StatisticPrinter {
         this.view = view;
     }
 
-    public void printStatistic(List<Lotto> boughtLottos) {
+    public void printStatistic(Lottos boughtLottos) {
         WinningNumber winningNumber = getWinningNumber();
         WinningStatistic winningStatistic = WinningChecker.getResult(winningNumber, boughtLottos);
         view.printWinningStatistic(winningStatistic);

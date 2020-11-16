@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.WinningRank;
 import lotto.dto.BonusNumber;
+import lotto.dto.Lottos;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 import lotto.service.helper.WinningChecker;
@@ -22,7 +23,7 @@ public class WinningCheckerTest {
     @ParameterizedTest
     @MethodSource("boughtLottos")
     @DisplayName("구매한 로또들과 지난 주 당첨 번호로, 당첨 횟수와 수익이 얼마나 되는지 계산한다.")
-    void winningAndStatisticTest(List<Lotto> boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
+    void winningAndStatisticTest(Lottos boughtLottos, String expectedEarningRate, int expectedCountOfMatchesSix) {
         Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
         BonusNumber bonusNumber = BonusNumber.valueOf(45);
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
@@ -42,15 +43,15 @@ public class WinningCheckerTest {
         );
     }
 
-    private static List<Lotto> lottosEarningZero() {
+    private static Lottos lottosEarningZero() {
         List<Lotto> boughtLottos = new ArrayList<>();
         boughtLottos.add(Lotto.of(1, 2, 7, 8, 9, 10));
-        return boughtLottos;
+        return Lottos.of(boughtLottos);
     }
 
-    private static List<Lotto> lottosEarningMax() {
+    private static Lottos lottosEarningMax() {
         List<Lotto> boughtLottos = new ArrayList<>();
         boughtLottos.add(Lotto.of(1, 2, 3, 4, 5, 6));
-        return boughtLottos;
+        return Lottos.of(boughtLottos);
     }
 }

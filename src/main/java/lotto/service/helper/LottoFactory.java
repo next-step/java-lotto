@@ -3,6 +3,7 @@ package lotto.service.helper;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.dto.Amount;
+import lotto.dto.Lottos;
 import lotto.dto.ManualLottoNumbers;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> buyLottos(ManualLottoNumbers manualLottoNumbers, Amount amount) {
+    public static Lottos buyLottos(ManualLottoNumbers manualLottoNumbers, Amount amount) {
         List<Lotto> lottos = new ArrayList<>();
 
         manualLottoNumbers.addManualLottos(lottos, amount);
@@ -33,6 +34,6 @@ public class LottoFactory {
             amount.subtractOneLottoPrice();
         }
 
-        return lottos;
+        return Lottos.of(lottos);
     }
 }

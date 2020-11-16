@@ -1,12 +1,11 @@
 package lotto.mock;
 
-import lotto.domain.Lotto;
+import lotto.dto.Lottos;
 import lotto.dto.ManualLottoNumbers;
 import lotto.dto.NumberOfManualLotto;
 import lotto.dto.WinningStatistic;
 import lotto.view.View;
 
-import java.util.List;
 import java.util.Set;
 
 public class MockInvalidAmountView implements View {
@@ -18,11 +17,6 @@ public class MockInvalidAmountView implements View {
     @Override
     public Set<Integer> getWinningNumbers() {
         return null;
-    }
-
-    @Override
-    public void printWinningStatistic(WinningStatistic winningStatistic) {
-
     }
 
     @Override
@@ -46,7 +40,12 @@ public class MockInvalidAmountView implements View {
     }
 
     @Override
-    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, Lottos boughtLottos) {
+
+    }
+
+    @Override
+    public void printWinningStatistic(WinningStatistic winningStatistic) {
 
     }
 }

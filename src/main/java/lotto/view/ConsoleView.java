@@ -1,13 +1,12 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.dto.Lottos;
 import lotto.dto.ManualLottoNumbers;
 import lotto.dto.NumberOfManualLotto;
 import lotto.dto.WinningStatistic;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
 
-import java.util.List;
 import java.util.Set;
 
 public class ConsoleView implements View {
@@ -30,7 +29,7 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, Lottos boughtLottos) {
         resultView.printBoughtLottos(manualLottoNumbers, boughtLottos);
     }
 

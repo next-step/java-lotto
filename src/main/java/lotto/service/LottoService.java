@@ -1,14 +1,12 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
 import lotto.dto.Amount;
+import lotto.dto.Lottos;
 import lotto.dto.ManualLottoNumbers;
 import lotto.dto.NumberOfManualLotto;
 import lotto.service.helper.LottoFactory;
 import lotto.service.helper.ValidInputHelper;
 import lotto.view.View;
-
-import java.util.List;
 
 public class LottoService {
     private final View view;
@@ -17,7 +15,7 @@ public class LottoService {
         this.view = view;
     }
 
-    public List<Lotto> buyLottos() {
+    public Lottos buyLottos() {
         Amount amount = ValidInputHelper.get(() -> Amount.valueOf(view.getAmount()), view::printInputError);
         NumberOfManualLotto numberOfManualLotto = ValidInputHelper.get(() -> getNumberOfManualLotto(amount), view::printInputError);
         return ValidInputHelper.get(() -> getLotto(amount, numberOfManualLotto), view::printInputError);
@@ -29,7 +27,7 @@ public class LottoService {
         return numberOfManualLotto;
     }
 
-    private List<Lotto> getLotto(Amount amount, NumberOfManualLotto numberOfManualLotto) {
+    private Lottos getLotto(Amount amount, NumberOfManualLotto numberOfManualLotto) {
         ManualLottoNumbers manualLottoNumbers = ValidInputHelper.get(() -> getManualLottoNumbers(numberOfManualLotto), view::printInputError);
         return getLottosWithManualNumbers(amount, manualLottoNumbers);
     }
@@ -42,8 +40,8 @@ public class LottoService {
         return view.getManualLottoNumbers(numberOfManualLotto);
     }
 
-    private List<Lotto> getLottosWithManualNumbers(Amount amount, ManualLottoNumbers manualLottoNumbers) {
-        List<Lotto> boughtLottos = LottoFactory.buyLottos(manualLottoNumbers, amount);
+    private Lottos getLottosWithManualNumbers(Amount amount, ManualLottoNumbers manualLottoNumbers) {
+        Lottos boughtLottos = LottoFactory.buyLottos(manualLottoNumbers, amount);
         view.printBoughtLottos(manualLottoNumbers, boughtLottos);
         return boughtLottos;
     }

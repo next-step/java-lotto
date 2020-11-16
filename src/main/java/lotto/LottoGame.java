@@ -1,10 +1,8 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.dto.Lottos;
 import lotto.service.LottoService;
 import lotto.service.StatisticPrinter;
-
-import java.util.List;
 
 public class LottoGame {
     private final LottoService lottoService;
@@ -16,7 +14,7 @@ public class LottoGame {
     }
 
     public void start() {
-        List<Lotto> boughtLottos = lottoService.buyLottos();
+        Lottos boughtLottos = lottoService.buyLottos();
         if (boughtLottos.isEmpty()) {
             return;
         }

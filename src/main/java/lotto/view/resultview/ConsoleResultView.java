@@ -1,27 +1,22 @@
 package lotto.view.resultview;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningRank;
+import lotto.dto.Lottos;
 import lotto.dto.ManualLottoNumbers;
 import lotto.dto.WinningStatistic;
 
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Set;
 
 public class ConsoleResultView implements ResultView {
     @Override
-    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, List<Lotto> boughtLottos) {
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, Lottos boughtLottos) {
         StringBuilder sb = new StringBuilder();
 
         String purchaseMsg = String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoNumbers.size(), boughtLottos.size() - manualLottoNumbers.size());
         sb.append(purchaseMsg).append(System.lineSeparator());
 
-        for (Lotto boughtLotto : boughtLottos) {
-            Set<LottoNumber> numbers = boughtLotto.getNumbers();
-            sb.append(numbers.toString()).append(System.lineSeparator());
-        }
+        boughtLottos.labelNumbers((numbers) -> sb.append(numbers).append(System.lineSeparator()));
 
         System.out.println(sb.toString());
     }
