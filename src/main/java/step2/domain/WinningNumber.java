@@ -14,7 +14,7 @@ public class WinningNumber {
 
     public LotteryResult match(LotteryTickets tickets) {
         LotteryResult lotteryResult = new LotteryResult();
-        for (LotteryNumber ticketNumber : tickets.listTicketNumbers()) {
+        for (LotteryNumber ticketNumber : tickets.getTicketNumbers()) {
             lotteryResult.add(toRank(ticketNumber));
         }
 

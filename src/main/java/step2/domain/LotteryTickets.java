@@ -13,7 +13,7 @@ public class LotteryTickets {
         return numbers.size();
     }
 
-    public List<LotteryNumber> listTicketNumbers() {
+    public List<LotteryNumber> getTicketNumbers() {
         return numbers;
     }
 }
