@@ -11,14 +11,6 @@ public class StringAddCalculator {
     private static int DELIMITER = 1;
     private static int CONTENTS = 2;
 
-    private static boolean isANumber(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
-    }
 
     private static Matcher matchPattern(String input) {
         return Pattern.compile(PATTERN).matcher(input);
@@ -55,7 +47,7 @@ public class StringAddCalculator {
         if (Blank.validate(input))
             return 0;
 
-        if (isANumber(input))
+        if (Int.isParsed(input))
             return Integer.parseInt(input);
 
         String[] numbers = tokenize(input, matchPattern(input));
