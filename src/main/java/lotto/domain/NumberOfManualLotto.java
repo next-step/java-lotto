@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.domain;
 
 import lotto.exception.IllegalNumberOfManualLottoInputException;
 import lotto.exception.OverAmountException;

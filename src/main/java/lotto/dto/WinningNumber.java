@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 
 public class WinningNumber {

@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.dto.Amount;
-import lotto.dto.ManualLottoNumbers;
+import lotto.domain.Amount;
+import lotto.domain.ManualLottoNumbers;
 import lotto.service.helper.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

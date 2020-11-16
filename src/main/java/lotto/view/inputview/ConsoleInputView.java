@@ -1,7 +1,7 @@
 package lotto.view.inputview;
 
-import lotto.dto.ManualLottoNumbers;
-import lotto.dto.NumberOfManualLotto;
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.NumberOfManualLotto;
 
 import java.util.Arrays;
 import java.util.Scanner;

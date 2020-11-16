@@ -1,10 +1,10 @@
 package lotto.service.helper;
 
+import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.dto.Amount;
-import lotto.dto.Lottos;
-import lotto.dto.ManualLottoNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;

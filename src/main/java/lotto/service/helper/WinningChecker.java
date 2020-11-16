@@ -1,8 +1,8 @@
 package lotto.service.helper;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.WinningRank;
-import lotto.dto.Lottos;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
 

@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.dto.Lottos;
+import lotto.domain.Lottos;
 import lotto.service.LottoService;
 import lotto.service.StatisticPrinter;
 import lotto.view.ConsoleView;

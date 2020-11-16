@@ -1,9 +1,9 @@
 package lotto.service;
 
-import lotto.dto.Amount;
-import lotto.dto.Lottos;
-import lotto.dto.ManualLottoNumbers;
-import lotto.dto.NumberOfManualLotto;
+import lotto.domain.Amount;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.NumberOfManualLotto;
 import lotto.service.helper.LottoFactory;
 import lotto.service.helper.ValidInputHelper;
 import lotto.view.View;

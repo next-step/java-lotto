@@ -1,6 +1,5 @@
-package lotto.dto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
 import lotto.exception.IllegalInputAmountException;
 
 public class Amount {

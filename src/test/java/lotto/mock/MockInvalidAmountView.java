@@ -1,8 +1,8 @@
 package lotto.mock;
 
-import lotto.dto.Lottos;
-import lotto.dto.ManualLottoNumbers;
-import lotto.dto.NumberOfManualLotto;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.NumberOfManualLotto;
 import lotto.dto.WinningStatistic;
 import lotto.view.View;
 

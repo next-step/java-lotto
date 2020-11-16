@@ -1,7 +1,7 @@
 package lotto.view.resultview;
 
-import lotto.dto.Lottos;
-import lotto.dto.ManualLottoNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
 import lotto.dto.WinningStatistic;
 
 public interface ResultView {

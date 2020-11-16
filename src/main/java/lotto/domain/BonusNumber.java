@@ -1,7 +1,5 @@
-package lotto.dto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.exception.IllegalBonusNumberException;
 
 import java.util.Set;

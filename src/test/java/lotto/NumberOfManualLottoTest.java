@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.dto.Amount;
-import lotto.dto.NumberOfManualLotto;
+import lotto.domain.Amount;
+import lotto.domain.NumberOfManualLotto;
 import lotto.exception.OverAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

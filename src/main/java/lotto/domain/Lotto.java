@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.BonusNumber;
 import lotto.exception.IllegalLottoNumberSizeException;
 
 import java.util.Arrays;
