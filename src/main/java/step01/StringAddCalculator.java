@@ -1,5 +1,7 @@
 package step01;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
         if (input == null || input.trim() == "") {
@@ -9,8 +11,14 @@ public class StringAddCalculator {
         try {
             return Integer.parseInt(input);
         } catch (Exception exception) {
+
         }
 
-        return 1;
+        return Arrays.stream(input.split(","))
+                .mapToInt(Integer::parseInt)
+                .reduce(0, (a, b) -> a + b);
+
+
+
     }
 }
