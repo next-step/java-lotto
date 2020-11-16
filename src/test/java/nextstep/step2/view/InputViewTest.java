@@ -51,4 +51,11 @@ public class InputViewTest {
 				.isThrownBy(() -> underTest.validateLastWinnerNumbers("1,2,3,a,b,c"))
 				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
 	}
+
+	@Test
+	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
+	public void inpuLastLottoNumberTest() {
+		InputView underTest = new InputView(new Scanner("1,2,3,4, 5,  6"));
+		underTest.validateLastWinnerNumbers("1,2,3,4, 5,  6");
+	}
 }

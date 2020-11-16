@@ -46,7 +46,7 @@ public class InputView {
 	}
 
 	protected void validateLastWinnerNumbers(String winnerNumbers) {
-		String[] numbers = winnerNumbers.trim().split(",");
+		String[] numbers = winnerNumbers.replaceAll(" ","").split(",");
 		boolean isDigit = Arrays.stream(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
 		if (!isDigit) {
 			throw new IllegalArgumentException(WRONG_WINNER_NUMBERS);
