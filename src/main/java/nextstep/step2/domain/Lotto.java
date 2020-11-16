@@ -5,8 +5,13 @@ import java.util.List;
 public class Lotto {
 	private List<Integer> numbers;
 	private LottoReward lottoReward;
+
 	public Lotto(LottoAutoGenerator lottoAutoGenerator) {
 		this.numbers = lottoAutoGenerator.getAutoNumbers();
+	}
+
+	public Lotto(List<Integer> numbers) {
+		this.numbers = numbers;
 	}
 
 	public List<Integer> getNumbers() {
