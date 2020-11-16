@@ -5,7 +5,9 @@ import step2.exception.NotDivideZeroException;
 import java.util.Objects;
 
 public class GameMoney {
+
     private final int price;
+    
     public GameMoney(int price) {
         this.price = price;
     }
