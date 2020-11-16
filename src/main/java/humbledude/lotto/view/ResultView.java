@@ -9,9 +9,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ResultView {
+    private static final String MSG_NUMBER_OF_PURCHASED = "%d개를 구매했습니다.";
+    private static final String MSG_STATISTICS_TITLE = "당첨 통계\n--------------";
+    private static final String MSG_STATISTICS_FOR_EACH_PRIZE = "%d개 일치 (%d원) - %d개%n";
+    private static final String MSG_STATISTICS_FOOTER = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String MSG_STATISTICS_FOOTER_PROFIT = "이익이";
+    private static final String MSG_STATISTICS_FOOTER_LOSS = "손해";
+    private static final String MSG_STATISTICS_FOOTER_SAME = "쌤쌤이";
 
     public static void printNumberOfPurchased(long howMany) {
-        System.out.println(howMany + " 개를 구매했습니다.");
+        System.out.printf(MSG_NUMBER_OF_PURCHASED, howMany);
     }
 
     public static void printLottoNumber(List<LottoTicket> tickets) {
@@ -30,20 +37,19 @@ public class ResultView {
     }
 
     public static void printStatistics(AccountManager accountManager) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(MSG_STATISTICS_TITLE);
         Stream.of(LottoPrize.FOURTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST)
                 .forEachOrdered(prize -> printResultMessageForEachPrize(prize, accountManager.getResultMap()));
 
         String profitOrLossMessage = getMessageProfitOrLoss(accountManager.getProfitRate());
-        String msg = String.format("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)",
+        String msg = String.format(MSG_STATISTICS_FOOTER,
                 accountManager.getProfitRate(),
                 profitOrLossMessage);
         System.out.println(msg);
     }
 
     private static void printResultMessageForEachPrize(LottoPrize prize, Map<LottoPrize, List<LottoTicket>> result) {
-        System.out.printf("%d개 일치 (%d원) - %d개%n",
+        System.out.printf(MSG_STATISTICS_FOR_EACH_PRIZE,
                 prize.getMatchedCount(),
                 prize.getPrize(),
                 result.getOrDefault(prize, Collections.EMPTY_LIST).size());
@@ -51,11 +57,11 @@ public class ResultView {
 
     private static String getMessageProfitOrLoss(double profitRate) {
         if (profitRate == 1) {
-            return "쌤쌤이";
+            return MSG_STATISTICS_FOOTER_SAME;
         }
         if (profitRate < 1) {
-            return "손해";
+            return MSG_STATISTICS_FOOTER_LOSS;
         }
-        return "이익이";
+        return MSG_STATISTICS_FOOTER_PROFIT;
     }
 }
