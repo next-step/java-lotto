@@ -11,8 +11,8 @@ public class LottoWinningNumbers {
     }
 
     public int getMatchedCountWith(LottoTicket ticket) {
-        HashSet<Integer> intersection = new HashSet<>(winningNumbers.getNumbers());
-        intersection.retainAll(ticket.getNumbers());
+        HashSet<LottoNumber> intersection = new HashSet<>(winningNumbers.getNumbers());
+        intersection.retainAll(ticket.getLottoNumbers().getNumbers());
 
         return intersection.size();
     }

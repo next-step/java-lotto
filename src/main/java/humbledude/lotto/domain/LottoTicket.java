@@ -1,16 +1,14 @@
 package humbledude.lotto.domain;
 
-import java.util.Set;
-
 public class LottoTicket {
 
-    private final LottoNumbers numbers;
+    private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(LottoNumbers numbers) {
-        this.numbers = numbers;
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers.getNumbers();
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 }

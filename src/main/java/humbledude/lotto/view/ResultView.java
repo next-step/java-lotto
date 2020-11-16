@@ -28,7 +28,7 @@ public class ResultView {
     }
 
     public static void printLottoNumber(LottoTicket ticket) {
-        String stringNumbers = ticket.getNumbers().stream()
+        String stringNumbers = ticket.getLottoNumbers().getNumbers().stream()
                 .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));

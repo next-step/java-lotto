@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLotto {
-
     private AutoLotto() {}
 
     public static LottoTicket buildTicket() {
@@ -17,7 +16,7 @@ public class AutoLotto {
     }
 
     private static List<Integer> getLottoTotalNumbers() {
-        return IntStream.rangeClosed(LottoNumbers.LOTTO_MIN, LottoNumbers.LOTTO_MAX)
+        return IntStream.rangeClosed(LottoNumber.LOTTO_MIN, LottoNumber.LOTTO_MAX)
                 .boxed()
                 .collect(Collectors.toList());
     }
