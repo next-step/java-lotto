@@ -1,43 +1,48 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Result {
-    private final Map<Integer, Integer> result;
+    private final Map<Rank, Integer> result;
 
-    public Result(List<Lotto> lottos, Lotto winningLotto) {
-        result = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int count = lotto.countSameNo(winningLotto);
-            increaseNumOfLotto(count);
-        }
+    Result(Map<Rank, Integer> result) {
+        this.result = result;
     }
 
     public double getRateOfReturn(Money purchaseMoney) {
         return getProfit().divide(purchaseMoney);
     }
 
-    public Money getProfit() {
+    Money getProfit() {
         int profit = 0;
-        for (Jackpot jackpot : Jackpot.values()) {
-            profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);
+        for (Rank rank : Rank.values()) {
+            profit += rank.getWinningMoney() * getNumOfLotto(rank);
         }
         return new Money(profit);
     }
 
-    public int getNumOfLotto(Jackpot jackpot) {
+    public int getNumOfLotto(Rank rank) {
         return result.getOrDefault(
-                jackpot.getNumOfCorrected(),
+                rank,
                 0
         );
     }
 
-    private void increaseNumOfLotto(int numOfCorrected) {
-        result.put(
-                numOfCorrected,
-                result.getOrDefault(numOfCorrected, 0) + 1
-        );
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Result result1 = (Result) o;
+        return Objects.equals(result, result1.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
     }
 }

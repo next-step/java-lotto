@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
-
-import java.util.List;
 
 public class ResultView {
     private ResultView() {}
@@ -19,12 +17,8 @@ public class ResultView {
         );
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto + "\n");
-        }
-        println(sb);
+    public static void printLottos(Lottos lottos) {
+        println(lottos);
     }
 
     public static void printStatistics(Result result, Money purchaseMoney) {

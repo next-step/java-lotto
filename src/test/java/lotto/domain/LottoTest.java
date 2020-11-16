@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.BadNumOfLottoNoException;
 import lotto.exception.DuplicatedLottoException;
 import lotto.exception.LottoRangeException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,20 +42,45 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("같은 LottoNo 개수 만큼 countSameNo 값이 나와야한다.")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
-    void countSameNo(int count) {
+    void getCountOfMatch(int countOfMatch) {
         int size = 6;
         Integer[] lottoNos1 = new Integer[size];
         Integer[] lottoNos2 = new Integer[size];
         for (int i = 0; i < size; i++) {
             lottoNos1[i] = i + 1;
-            lottoNos2[i] = i + 1 + size - count;
+            lottoNos2[i] = i + 1 + size - countOfMatch;
         }
 
         Lotto lotto1 = new Lotto(Arrays.asList(lottoNos1));
         Lotto lotto2 = new Lotto(Arrays.asList(lottoNos2));
 
-        assertThat(lotto1.countSameNo(lotto2))
-                .isEqualTo(count);
+        assertThat(lotto1.getCountOfMatch(lotto2))
+                .isEqualTo(countOfMatch);
+    }
+
+    @ParameterizedTest
+    @DisplayName("getRank 가 제대로 계산되어야한다.")
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
+    void getRank(int countOfMatch) {
+        int size = 6;
+        Integer[] winningLotoNos = new Integer[size];
+        Integer[] lottoNos = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            winningLotoNos[i] = i + 1;
+            lottoNos[i] = i + 1 + size - countOfMatch;
+        }
+
+        Lotto winningLotto = new Lotto(Arrays.asList(winningLotoNos));
+        Lotto lotto = new Lotto(Arrays.asList(lottoNos));
+        LottoNo goodBonus = new LottoNo(6);
+        LottoNo badBonus = new LottoNo(45);
+
+        Assertions.assertAll(
+                () -> assertThat(winningLotto.getRank(lotto, goodBonus))
+                        .isEqualTo(Rank.valueOf(countOfMatch, true)),
+                () -> assertThat(winningLotto.getRank(lotto, badBonus))
+                        .isEqualTo(Rank.valueOf(countOfMatch, false))
+        );
     }
 
     @Test

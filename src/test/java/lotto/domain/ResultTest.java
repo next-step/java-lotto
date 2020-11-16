@@ -5,37 +5,35 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultTest {
-    private Lotto winningLotto;
+    private final Map<Rank, Integer> map = new HashMap<>();
     private Result result;
 
     @BeforeEach
     void setUp() {
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        result = new Result(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)),
-                new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9))
-        ), winningLotto);
+        map.put(Rank.FIFTH, 1);
+        map.put(Rank.FOURTH, 1);
+        map.put(Rank.THIRD, 2);
+        map.put(Rank.FIRST, 1);
+        result = new Result(map);
     }
 
     @Test
-    @DisplayName("winningLotto 의 번호와 얼마나 일치하는지 결과를 보여줘야 한다.")
+    @DisplayName("getNumOfLotto 확인")
     void getNumOfLotto() {
         Assertions.assertAll(
-                () -> assertThat(result.getNumOfLotto(Jackpot.THREE))
+                () -> assertThat(result.getNumOfLotto(Rank.FIFTH))
                         .isEqualTo(1),
-                () -> assertThat(result.getNumOfLotto(Jackpot.FOUR))
+                () -> assertThat(result.getNumOfLotto(Rank.FOURTH))
                         .isEqualTo(1),
-                () -> assertThat(result.getNumOfLotto(Jackpot.FIVE))
+                () -> assertThat(result.getNumOfLotto(Rank.THIRD))
                         .isEqualTo(2),
-                () -> assertThat(result.getNumOfLotto(Jackpot.SIX))
+                () -> assertThat(result.getNumOfLotto(Rank.FIRST))
                         .isEqualTo(1)
         );
     }

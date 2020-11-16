@@ -11,7 +11,7 @@ public class LottoNo implements Comparable<LottoNo> {
 
     private final int lottoNo;
 
-    LottoNo(int lottoNo) {
+    public LottoNo(int lottoNo) {
         validate(lottoNo);
         this.lottoNo = lottoNo;
     }
