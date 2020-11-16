@@ -1,25 +1,26 @@
 package nextstep.step2;
 
-import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoAutoGenerator;
-import nextstep.step2.domain.LottoPurchase;
-import nextstep.step2.domain.LottoStaticstic;
+import nextstep.step2.domain.*;
 import nextstep.step2.view.LottoResultView;
 import nextstep.step2.view.LottoTicketView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
-	public List<Lotto> startLottoGameGetLottos(int money) {
-		LottoPurchase purchase = new LottoPurchase(money);
+
+	public List<Lotto> startLottoGameGetLottos(LottoPurchase purchase) {
+		purchase.printLottoPurchase();
 		return printAutoLottoTicketsAndLottos(purchase);
 	}
 
-	public void printLottoStaticsic(String winnerNumbers, List<Lotto> lottoList) {
-		LottoStaticstic lottoPercentage = new LottoStaticstic(winnerNumbers);
+	public void printLottoStaticsic(String winnerNumbers, LottoPurchase purchase, List<Lotto> lottoList) {
+		LottoStaticstic lottoStaticstic = new LottoStaticstic(winnerNumbers, purchase);
 		LottoResultView resultView = new LottoResultView();
-		resultView.printLottoStaticsic(lottoPercentage.getLottoRewardMap(lottoList));
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
+		resultView.printLottoStaticsic(lottoRewardListMap);
+		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
 	}
 
 	private List<Lotto> printAutoLottoTicketsAndLottos(LottoPurchase purchase) {
