@@ -29,8 +29,9 @@ public class Numbers {
     public int countSameNumber(Numbers numbers) {
         return this.numberList.stream()
                 .reduce(0, (count, num) -> {
-                    if (numbers.contains(num))
+                    if (numbers.contains(num)) {
                         return count + 1;
+                    }
                     return count;
                 });
     }
