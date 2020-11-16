@@ -10,23 +10,19 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public boolean isLottoTicketsCount(int size) {
-        return lottos.size() == size;
-    }
-    public int getLottoCount(){
-        return lottos.size();
-    }
-    public List<String> lottoNumbersToStringList(){
+
+    public List<String> lottoNumbersToStringList() {
         return lottos.stream()
                 .map(Lotto::getLottoNumbersToStringList)
                 .collect(Collectors.toList());
     }
 
     public LottoMatcher matchLastWeekLotto(List<Integer> lastWeekLottoNums) {
-        LottoMatcher lottoMatcher = new LottoMatcher();
-        lottos.stream()
-                    .map(lotto -> lotto.matchLottoNumbers(lastWeekLottoNums))
-                    .forEach(lottoMatcher::increaseMatchLottoCount);
-        return lottoMatcher;
+        return new LottoMatcher(lottos , lastWeekLottoNums);
     }
+
+    public int getLottoCount() {
+        return lottos.size();
+    }
+
 }

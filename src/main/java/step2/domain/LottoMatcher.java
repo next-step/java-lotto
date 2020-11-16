@@ -1,19 +1,32 @@
 package step2.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoMatcher {
     private static final int INCREASE_COUNT = 1;
     private Map<LottoRank, Integer> result = new HashMap<>();
 
-    public LottoMatcher() {
+    public LottoMatcher(List<Lotto> lottos , List<Integer> lastWeekLottoNums) {
+        initDefaultMap();
+
+        matchLastWeekLottoNumbers(lottos, lastWeekLottoNums);
+    }
+
+    private void matchLastWeekLottoNumbers(List<Lotto> lottos, List<Integer> lastWeekLottoNums) {
+        lottos.stream()
+                .map(lotto -> lotto.matchLottoNumbers(lastWeekLottoNums))
+                .forEach(this::increaseMatchLottoCount);
+    }
+
+    private void initDefaultMap() {
         for (LottoRank lottoRank : LottoRank.values()) {
             result.put(lottoRank, 0);
         }
     }
 
-    public void increaseMatchLottoCount(int match) {
+    private void increaseMatchLottoCount(int match) {
         result.put(getLottoRank(match), getLottoCount(getLottoRank(match)) + INCREASE_COUNT);
     }
 
