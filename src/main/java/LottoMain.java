@@ -1,3 +1,4 @@
+import controller.LottoController;
 import view.InputView;
 
 public class LottoMain {
@@ -5,6 +6,10 @@ public class LottoMain {
         InputView inputView = new InputView();
 
         int price = inputView.inputPrice();
+
+        LottoController controller = new LottoController(price);
+        int lottoQuantity = controller.getLottoQuantity();
+
 
     }
 }
