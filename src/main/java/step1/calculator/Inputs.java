@@ -5,6 +5,7 @@ import step1.InputValue;
 import step1.StringSplitter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -46,7 +47,7 @@ public class Inputs {
     }
 
     public List<Integer> value() {
-        return this.inputs;
+        return Collections.unmodifiableList(this.inputs);
     }
 
     @Override

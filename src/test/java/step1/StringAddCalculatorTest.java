@@ -125,4 +125,18 @@ public class StringAddCalculatorTest {
                 .hasMessage("입력한 값은 0 이상의 정수여야 합니다.");
     }
 
+    @ParameterizedTest
+    @DisplayName("정해진 구분자만 있고 총 합을 구한다")
+    @CsvSource(value = {"1,2,3=6", "1:3:4=8", "2:1,3=6"}, delimiter = '=')
+    void sum_all_inputs_with_basic_splitters(String input, String expected) {
+        // given
+        InputValue inputValue = InputValue.of(input);
+
+        // when
+        Calculator calculator = Calculator.of(inputValue);
+
+        // then
+        assertThat(calculator.sumAll()).isEqualTo(NumberUtils.toInt(expected));
+    }
+
 }
