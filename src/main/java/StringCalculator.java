@@ -1,4 +1,4 @@
-import util.CalculatorException;
+import util.CalculatorValidator;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -15,10 +15,10 @@ public class StringCalculator {
             return 0;
         }
 
-        CalculatorException.validateMinus(text);
+        CalculatorValidator.validateMinus(text);
 
         if(checkOnlyOneText(text)) {
-            CalculatorException.validateNumbers(text);
+            CalculatorValidator.validateNumbers(text);
             return Integer.parseInt(text);
         }
 
@@ -46,7 +46,7 @@ public class StringCalculator {
     private int sum(String[] texts) {
         return Arrays.stream(texts)
                 .mapToInt(text -> {
-                    CalculatorException.validateNumbers(text);
+                    CalculatorValidator.validateNumbers(text);
                     return Integer.parseInt(text);
                 })
                 .sum();
