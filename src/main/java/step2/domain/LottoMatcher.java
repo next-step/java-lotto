@@ -2,9 +2,9 @@ package step2.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class LottoMatcher {
+    private static final int INCREASE_COUNT = 1;
     private Map<LottoRank, Integer> result = new HashMap<>();
 
     public LottoMatcher() {
@@ -14,7 +14,7 @@ public class LottoMatcher {
     }
 
     public void increaseMatchLottoCount(int match) {
-        result.put(getLottoRank(match), getLottoCount(getLottoRank(match)));
+        result.put(getLottoRank(match), getLottoCount(getLottoRank(match)) + INCREASE_COUNT);
     }
 
     private LottoRank getLottoRank(int match) {
@@ -22,15 +22,17 @@ public class LottoMatcher {
     }
 
     private int getLottoCount(LottoRank lottoRank) {
-        return Optional.of(result.get(lottoRank) + 1).orElse(0);
+        return result.getOrDefault(lottoRank, 0);
     }
+
 
     public Map<LottoRank, Integer> getResult() {
         return result;
     }
-    public GameMoney getGamePrize(){
+
+    public GameMoney getGamePrize() {
         GameMoney gameMoney = new GameMoney(0);
-        for( LottoRank lottoRank : result.keySet()){
+        for (LottoRank lottoRank : result.keySet()) {
             gameMoney = gameMoney.sum(lottoRank.prize(result.get(lottoRank)));
         }
         return gameMoney;
