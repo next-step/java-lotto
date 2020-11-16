@@ -9,6 +9,7 @@ public class StringPlusCalculator {
 
     private static final String EXPRESSION_RULE = ",|:";
     private static final String NUMBER = "^[0-9]*$";
+
     private static final Pattern CUSTOM_EXPRESSION_RULE = Pattern.compile("//(.)\n(.*)");
 
     private StringPlusCalculator() {
@@ -28,6 +29,7 @@ public class StringPlusCalculator {
     }
 
     private static String[] inputSplit(final String inputData) {
+
         Matcher matcher = CUSTOM_EXPRESSION_RULE.matcher(inputData);
 
         if (matcher.find()) {

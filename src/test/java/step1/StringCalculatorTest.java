@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 public class StringCalculatorTest {
 
     @DisplayName("쉼표 덧셈 테스트 ")
