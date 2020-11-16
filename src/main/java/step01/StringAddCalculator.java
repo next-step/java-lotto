@@ -30,7 +30,12 @@ public class StringAddCalculator {
         }
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
-                .reduce(0, (a, b) -> a + b);
+                .reduce(0, (a, b) -> {
+                    if (a < 0) {
+                        throw new RuntimeException("음수는 계산할 수 없습니다.");
+                    }
+                    return a + b;
+                });
 
     }
 }
