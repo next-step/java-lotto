@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -22,6 +23,41 @@ class LottosTest {
         assertThat(lottos.getLottoCount()).isEqualTo(3);
     }
 
+    @DisplayName("로또 생성뒤 반환되는 문자열이 맞는지 확인을 한다.")
+    @ParameterizedTest
+    @MethodSource("createSingleLotto")
+    void createLottosToString(Lotto lotto1, Lotto lotto2, Lotto lotto3) {
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        assertThat(lottos.lottoNumbersToStringList()).containsExactly(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7",
+                "1, 2, 3, 4, 5, 8");
+    }
+
+    @DisplayName("로또들이 생성될때 맞게 생성되는지 확인한다..")
+    @ParameterizedTest
+    @MethodSource("createLotto")
+    void createLottoInstance(Lotto lotto1, Lotto lotto2, Lotto lotto3) {
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        assertThat(lottos).isEqualTo(new Lottos(Arrays.asList(lotto1, lotto2, lotto3)));
+    }
+
+    @DisplayName("지난주에 맞췄던 로또들의 맞춘 갯수들을 검증한다.")
+    @ParameterizedTest
+    @MethodSource("createMatchLotto")
+    void validateMatchLottos(Lotto lotto, List<Integer> lastWeekLotto, List<Integer> expected) {
+        Lottos lottos = new Lottos(Collections.singletonList(lotto));
+        assertThat(lottos.matchLastWeekLotto(lastWeekLotto)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> createSingleLotto() {
+        return Stream.of(
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))));
+    }
+
     private static Stream<Arguments> createLotto() {
         return Stream.of(
                 Arguments.of(
@@ -29,31 +65,32 @@ class LottosTest {
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))),
                 Arguments.of(
+                        new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                        new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)),
+                        new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11))));
+    }
+
+
+    private static Stream<Arguments> createMatchLotto() {
+        return Stream.of(
+                Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))));
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        Collections.singletonList(6)),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Arrays.asList(1, 2, 3, 4, 5, 7),
+                        Collections.singletonList(5)),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Arrays.asList(1, 2, 3, 4, 7, 8),
+                        Collections.singletonList(4)),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Arrays.asList(1, 2, 3, 7, 8, 9),
+                        Collections.singletonList(3))
+
+        );
     }
 
-    @DisplayName("로또의 갯수들이 로또티켓들의 갯수에 맞게 생성되는지 확인한다.")
-    @ParameterizedTest
-    @MethodSource("createLotto")
-    void create2(Lotto lotto1, Lotto lotto2, Lotto lotto3) {
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
-        assertThat(lottos.lottoNumbersToStringList()).containsExactly(
-                "1, 2, 3, 4, 5, 6",
-                "1, 2, 3, 4, 5, 7",
-                "1, 2, 3, 4, 5, 8");
-    }
-
-/*    @DisplayName("로또의 갯수들이 로또티켓들의 갯수에 맞게 생성되는지 확인한다.")
-    @ParameterizedTest
-    @MethodSource("createLotto")
-    void create3(Lotto lotto1, Lotto lotto2, Lotto lotto3) {
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
-        lottos.matchLastWeekLotto();
-        assertThat(lottos.lottoNumbersToStringList()).containsExactly(
-                "1, 2, 3, 4, 5, 6",
-                "1, 2, 3, 4, 5, 7",
-                "1, 2, 3, 4, 5, 8");
-    }*/
 }
