@@ -10,19 +10,14 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class LottoResultView {
-	private static final String LOTTO_STATISTICTS = "\n당첨통계\n---------";
+	private static final String LOTTO_STATISTICTS = "당첨통계\n---------";
 
-	public void printLottoPercentage(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
+	public void printLottoStaticsic(Map<LottoReward, List<Lotto>> lottoMap) {
 		System.out.println(LOTTO_STATISTICTS);
-		//groupby ------------>
-		printLottoPersentage(lottoRewardListMap);
-	}
-
-	private void printLottoPersentage(Map<LottoReward, List<Lotto>> lottoMap) {
 		addLottoEmptyReward(lottoMap);
 		lottoMap.keySet().stream().sorted(Comparator.reverseOrder()).forEach(lottoReward -> {
 			if (lottoReward.getCount() > 0) {
-				System.out.println(String.format("%d개 일치 (%s)- %d개", lottoReward.getCount(), lottoReward.getPrice(), lottoMap.get(lottoReward).size()));
+				System.out.println(String.format("%d개 일치 (%d원)- %d개", lottoReward.getCount(), lottoReward.getPrice(), lottoMap.get(lottoReward).size()));
 			}
 		});
 	}
