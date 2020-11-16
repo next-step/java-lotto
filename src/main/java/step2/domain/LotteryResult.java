@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static step2.domain.LotteryAgent.PRICE_LOTTERY;
 
@@ -25,11 +26,8 @@ public class LotteryResult {
     }
 
     public float getRateOfReturn() {
-        Money totalAmount = getTotalAmount();
-
-        Money returnAmount = getReturnAmount();
-
-        return (float) returnAmount.toInt() / totalAmount.toInt();
+        return getTotalAmount().map(this::calculateRate) //
+                .orElse(0f);
     }
 
     private Money getReturnAmount() {
@@ -43,11 +41,14 @@ public class LotteryResult {
                 .orElse(Money.of(0));
     }
 
-    private Money getTotalAmount() {
+    private Optional<Money> getTotalAmount() {
         return result.values() //
                 .stream() //
                 .map(PRICE_LOTTERY::multiply) //
-                .reduce(Money::add) //
-                .orElse(Money.of(0));
+                .reduce(Money::add);
+    }
+
+    private float calculateRate(Money totalAmount) {
+        return (float) getReturnAmount().toInt() / totalAmount.toInt();
     }
 }
