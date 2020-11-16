@@ -21,7 +21,7 @@ public class ConsoleInputView implements InputView {
     @Override
     public int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ConsoleInputView implements InputView {
     }
 
     private Set<Integer> getLottoNumbers() {
-        String lottoNumbers = scanner.next();
+        String lottoNumbers = scanner.nextLine();
 
         return Arrays.stream(lottoNumbers.split(DELIMITER))
                 .map(Integer::valueOf)
@@ -41,13 +41,13 @@ public class ConsoleInputView implements InputView {
     @Override
     public int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     @Override
     public int getNumberOfManualLotto() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     @Override
