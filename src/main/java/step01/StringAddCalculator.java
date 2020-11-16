@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static String tokens = ",|:";
-    private static String pattern = "//(.)\n(.*)";
+    private static String TOKENS = ",|:";
+    private static String PATTERN = "//(.)\n(.*)";
     private static String NEGATIVE_EXCEPTION_MESSAGE = "음수는 계산할 수 없습니다.";
 
     private static boolean isBlank(String input) {
@@ -23,7 +23,7 @@ public class StringAddCalculator {
     }
 
     private static Matcher matchPattern(String input) {
-        return Pattern.compile(pattern).matcher(input);
+        return Pattern.compile(PATTERN).matcher(input);
     }
 
     private static String[] tokenize(String input, String delimiter) {
@@ -35,7 +35,7 @@ public class StringAddCalculator {
             String customDelimiter = matcher.group(1);
             return tokenize(matcher.group(2), customDelimiter);
         }
-        return tokenize(input, tokens);
+        return tokenize(input, TOKENS);
     }
 
     private static void validateNotNegative(int input) {
