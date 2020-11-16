@@ -13,8 +13,7 @@ import step1.calculator.Inputs;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created By mand2 on 2020-11-16.
@@ -165,5 +164,19 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(result).isFalse();
+    }
+
+    @ParameterizedTest
+    @DisplayName("커스텀 구분자가 있고, 기본 구분자 포함해서 더한다.")
+    @ValueSource(strings = {"//;\n1;2;3", "//;\n1;2,3", "//;\n1:2;3"})
+    void sum_all_inputs_with_custom_n_basic_splitters(String input) {
+        // given
+        InputValue inputValue = InputValue.of(input);
+
+        // when
+        Calculator calculator = Calculator.of(inputValue);
+
+        // then
+        assertThat(calculator.sumAll()).isEqualTo(6);
     }
 }
