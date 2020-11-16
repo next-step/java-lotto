@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static String TOKENS = ",|:";
     private static String PATTERN = "//(.)\n(.*)";
-    private static String NEGATIVE_EXCEPTION_MESSAGE = "음수는 계산할 수 없습니다.";
     private static int DELIMITER = 1;
     private static int CONTENTS = 2;
 
@@ -28,17 +27,13 @@ public class StringAddCalculator {
         return tokenize(input, TOKENS);
     }
 
-    private static void validateNotNegative(int input) {
-        if (input < 0) {
-            throw new RuntimeException(NEGATIVE_EXCEPTION_MESSAGE);
-        }
-    }
+
 
     public static int calculate(String[] numbers) {
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .reduce(0, (a, b) -> {
-                    validateNotNegative(a);
+                    Int.validateNotNegative(a);
                     return a + b;
                 });
     }
