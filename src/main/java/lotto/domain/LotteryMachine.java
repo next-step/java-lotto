@@ -8,8 +8,7 @@ public class LotteryMachine {
         this.winningNumbers = winningNumbers;
     }
 
-
     public WinningRanks checkLottos(Lottos lottos) {
-        return lottos.checkWinningRanks(winningNumbers);
+        return WinningChecker.checkWinningRanks(lottos, winningNumbers);
     }
 }

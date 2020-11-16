@@ -17,11 +17,11 @@ class LottoTest {
     static Stream<Arguments> checkWinningRank() {
         Numbers.Builder builder = Numbers.builder();
         return Stream.of(
-                arguments(builder.range(1, 7).build(), WinningRank.FIRST),
-                arguments(builder.range(2, 8).build(), WinningRank.SECOND),
-                arguments(builder.range(3, 9).build(), WinningRank.THIRD),
-                arguments(builder.range(4, 10).build(), WinningRank.FOURTH),
-                arguments(builder.range(5, 11).build(), WinningRank.FAIL)
+                arguments(builder.range(1, 7).build(), 6),
+                arguments(builder.range(2, 8).build(), 5),
+                arguments(builder.range(3, 9).build(), 4),
+                arguments(builder.range(4, 10).build(), 3),
+                arguments(builder.range(5, 11).build(), 2)
         );
     }
 
@@ -38,13 +38,13 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("당첨 번호와 로또 숫자 비교하여 몇 등 인지 확인")
     @MethodSource
-    void checkWinningRank(Numbers numbers, WinningRank expectedWinningRank) {
+    void checkWinningRank(Numbers numbers, int expectedSameNumberCount) {
         Numbers winningNumbers = Numbers.builder().range(1, 7).build();
         Lotto lotto = new Lotto(() -> numbers);
 
-        WinningRank winningRank = lotto.checkWinningRank(winningNumbers);
+        int sameNumberCount = lotto.countSameNumber(winningNumbers);
 
-        assertThat(winningRank).isEqualTo(expectedWinningRank);
+        assertThat(sameNumberCount).isEqualTo(expectedSameNumberCount);
     }
 
 }

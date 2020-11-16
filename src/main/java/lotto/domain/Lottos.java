@@ -17,10 +17,10 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public WinningRanks checkWinningRanks(Numbers numbers) {
-        return new WinningRanks(this.lottoList.stream()
-                .map(lotto -> lotto.checkWinningRank(numbers))
-                .collect(Collectors.toList()));
+    public List<Integer> getSameNumberList(Numbers numbers) {
+        return this.lottoList.stream()
+                .map(lotto -> lotto.countSameNumber(numbers))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottoList() {
