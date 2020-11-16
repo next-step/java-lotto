@@ -13,6 +13,8 @@ public enum Rank {
     FIFTH(3, Money.of(5_000)),  //
     MISS(0, Money.of(0));
 
+    private static final int MINIMUM_RANK_MATCH = FIFTH.matchingCount;
+
     private final int matchingCount;
     private final Money prizeAmount;
 
@@ -38,8 +40,8 @@ public enum Rank {
     }
 
     public static Rank valueWithBonusNumberFrom(int matchCount) {
-        if (matchCount == 5) {
-            return Rank.SECOND;
+        if (matchCount == SECOND.matchingCount) {
+            return SECOND;
         }
         return valueFrom(matchCount);
     }
@@ -57,7 +59,7 @@ public enum Rank {
     }
 
     private static int getAvailableMatchCount(int matchCount) {
-        if (matchCount < 3) {
+        if (matchCount < MINIMUM_RANK_MATCH) {
             return 0;
         }
         return matchCount;
