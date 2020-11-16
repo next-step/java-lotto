@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import static step3.Constant.ERROR_DUPLICATE_NUMBER;
 
 public class WinningNumbers {
-    private static final String DELIMITER = ",";
 
     private final MarkingNumbers winningNumbers;
     private final LottoNumber bonusBall;
@@ -25,19 +24,9 @@ public class WinningNumbers {
 
     public static WinningNumbers of(String string, int bonusBall) {
         isValid(string);
-        MarkingNumbers winningNumbers = stringToObj(string);
+        MarkingNumbers winningNumbers = MarkingNumbers.of(string);
         isDuplicate(bonusBall, winningNumbers);
         return new WinningNumbers(winningNumbers, new LottoNumber(bonusBall));
-    }
-
-    private static MarkingNumbers stringToObj(String string) {
-        Set<LottoNumber> collect = Stream.of(string.split(DELIMITER))
-                .map(value -> {
-                    String trim = value.trim();
-                    return new LottoNumber(Integer.parseInt(trim));
-                })
-                .collect(Collectors.toSet());
-        return new MarkingNumbers(collect);
     }
 
     public static WinningNumbers of(Set<LottoNumber> list, int bonusBall) {
