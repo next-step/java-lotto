@@ -16,4 +16,11 @@ public class LotteryResultTest {
                 .isEqualTo(0.35714287f);
     }
 
+    @DisplayName("투자 없이 이익률만 계산하는 경우")
+    @Test
+    void zeroInput() {
+        assertThat(new LotteryResult().getRateOfReturn()) //
+                .isEqualTo(0);
+    }
+
 }
