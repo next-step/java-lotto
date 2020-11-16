@@ -1,6 +1,8 @@
 package step01;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     public static String tokens = ",|:";
@@ -16,11 +18,19 @@ public class StringAddCalculator {
 
         }
 
-        return Arrays.stream(input.split(tokens))
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+        String[] numbers;
+
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            numbers = m.group(2).split(customDelimiter);
+        } else {
+            numbers = input.split(tokens);
+        }
+        return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .reduce(0, (a, b) -> a + b);
-
-
 
     }
 }
