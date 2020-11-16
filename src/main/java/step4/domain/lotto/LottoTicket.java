@@ -1,7 +1,7 @@
-package step4.lotto;
+package step4.domain.lotto;
 
-import step4.lotto.firstcollection.LottoNumber;
-import step4.lotto.firstcollection.MarkingNumbers;
+import step4.domain.lotto.firstcollection.LottoNumber;
+import step4.domain.lotto.firstcollection.MarkingNumbers;
 import step4.strategy.NumberMakeStrategy;
 import step4.type.WinningType;
 
@@ -18,8 +18,8 @@ public class LottoTicket {
         this.markingNumbers = new MarkingNumbers(markingNumber);
     }
 
-    public String getMarkingNumbers() {
-        return markingNumbers.toString();
+    public LottoTicket(String string) {
+        this.markingNumbers = MarkingNumbers.of(string);
     }
 
     public boolean isMarked(LottoNumber number) {
