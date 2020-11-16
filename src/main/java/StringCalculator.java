@@ -15,10 +15,8 @@ public class StringCalculator {
             return 0;
         }
 
-        CalculatorValidator.validateMinus(text);
-
         if(checkOnlyOneText(text)) {
-            CalculatorValidator.validateNumbers(text);
+            CalculatorValidator.validate(text);
             return Integer.parseInt(text);
         }
 
@@ -46,7 +44,7 @@ public class StringCalculator {
     private int sum(String[] texts) {
         return Arrays.stream(texts)
                 .mapToInt(text -> {
-                    CalculatorValidator.validateNumbers(text);
+                    CalculatorValidator.validate(text);
                     return Integer.parseInt(text);
                 })
                 .sum();
