@@ -6,5 +6,11 @@ public class StringAddCalculator {
             return 0;
         }
 
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception exception) {
+        }
+
+        return 1;
     }
 }
