@@ -62,9 +62,17 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("문자열이 음수인 경우 예외 처리")
-    void minusExceptionTest() {
+    @DisplayName("문자열이 음수인 경우 예외 처리 - 단일 문자열인 경우")
+    void minusOnlyOneStringExceptionTest() {
         String text = "-1";
+        Assertions.assertThrows(RuntimeException.class,
+                () -> stringCalculator.calculate(text));
+    }
+
+    @Test
+    @DisplayName("문자열이 음수인 경우 예외 처리 - 여러 문자열 중 음수인 경우")
+    void minusMultipleStringExceptionTest() {
+        String text = "1;2;-3";
         Assertions.assertThrows(RuntimeException.class,
                 () -> stringCalculator.calculate(text));
     }
