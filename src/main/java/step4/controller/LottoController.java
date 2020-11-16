@@ -36,6 +36,6 @@ public class LottoController {
         double revenueRate = winningResults.getRevenue(tickets.countTicket());
 
         resultView.drawWinningStatistics(winningResults);
-        resultView.drawRevenueRate(revenueRate, winningNumbers.isRevenue(revenueRate));
+        resultView.drawRevenueRate(revenueRate, winningResults.isRevenue(revenueRate));
     }
 }

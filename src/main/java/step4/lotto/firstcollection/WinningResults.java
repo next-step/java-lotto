@@ -16,6 +16,7 @@ public class WinningResults {
     public static final long DEFAULT_COUNT_LONG = 0L;
     public static final Integer DEFAULT_COUNT_INTEGER = 0;
     public static final double DECIMAL_POINT_TWO_FIXED = 100D;
+    private static final int REVENUE_ANCHOR_POINT = 1;
 
     private final Map<WinningType, Integer> winningResults;
 
@@ -58,12 +59,9 @@ public class WinningResults {
     }
 
     public double getRevenue(int ticketSize) {
-        Long totalAmount = winningResults.keySet()
+        Long totalAmount = winningResults.entrySet()
                 .stream()
-                .map(type -> {
-                    Integer matchCount = winningResults.get(type);
-                    return WinningType.getWinningAmount(type) * matchCount;
-                })
+                .map(entry -> WinningType.getWinningAmount(entry.getKey()) * entry.getValue())
                 .reduce(Long::sum)
                 .orElseThrow(IllegalArgumentException::new);
 
@@ -77,4 +75,9 @@ public class WinningResults {
     private double getExpenses(int ticketSize) {
         return ticketSize * Constant.LOTTO_PRICE;
     }
+
+    public boolean isRevenue(double revenueRate) {
+        return revenueRate > REVENUE_ANCHOR_POINT;
+    }
+
 }

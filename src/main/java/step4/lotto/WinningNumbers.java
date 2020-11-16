@@ -14,7 +14,6 @@ import static step3.Constant.ERROR_DUPLICATE_NUMBER;
 
 public class WinningNumbers {
     private static final String DELIMITER = ",";
-    private static final int REVENUE_ANCHOR_POINT = 1;
 
     private final MarkingNumbers winningNumbers;
     private final LottoNumber bonusBall;
@@ -54,26 +53,14 @@ public class WinningNumbers {
         }
     }
 
-    public double getRevenueRate(LottoTickets tickets) {
-        WinningResults winningResults = getWinningStatistics(tickets);
-        return winningResults.getRevenue(tickets.countTicket());
-    }
-
     public WinningResults getWinningStatistics(LottoTickets tickets) {
         return WinningResults.of(tickets, this);
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
     }
 
     public int countEquals(LottoTicket ticket) {
         return winningNumbers.countEquals(ticket);
     }
 
-    public boolean isRevenue(double revenueRate) {
-        return revenueRate > REVENUE_ANCHOR_POINT;
-    }
 
     public boolean isMarkedBonusBall(LottoTicket ticket) {
         return ticket.isMarked(bonusBall);
