@@ -10,9 +10,10 @@ public class StringAddCalculator {
     private static String NEGATIVE_EXCEPTION_MESSAGE = "음수는 계산할 수 없습니다.";
     private static int DELIMITER = 1;
     private static int CONTENTS = 2;
+    private static String EMPTY = "";
 
     private static boolean isBlank(String input) {
-        return input == null || input.trim() == "";
+        return input == null || input.trim() == EMPTY;
     }
 
     private static boolean isANumber(String input) {
