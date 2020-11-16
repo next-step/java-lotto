@@ -8,10 +8,10 @@ import lotto.helper.LottoFactory;
 import lotto.helper.ValidInputHelper;
 import lotto.view.View;
 
-public class LottoService {
+public class LottoPurchaseProcessor {
     private final View view;
 
-    public LottoService(View view) {
+    public LottoPurchaseProcessor(View view) {
         this.view = view;
     }
 

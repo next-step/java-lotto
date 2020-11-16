@@ -13,9 +13,9 @@ public class LottoGame {
         InputView inputView = new ConsoleInputView();
         ResultView resultView = new ConsoleResultView();
         View view = new ConsoleView(inputView, resultView);
-        LottoService lottoService = new LottoService(view);
+        LottoPurchaseProcessor lottoPurchaseProcessor = new LottoPurchaseProcessor(view);
         StatisticPrinter statisticPrinter = new StatisticPrinter(view);
-        Lottos boughtLottos = lottoService.buyLottos();
+        Lottos boughtLottos = lottoPurchaseProcessor.buyLottos();
         if (boughtLottos.isEmpty()) {
            return;
         }
