@@ -10,6 +10,7 @@ import static java.util.stream.Collectors.toList;
 public class RandomLottoGenerator implements LottoGeneratorStrategy {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
 
     private RandomLottoGenerator() {}
@@ -25,7 +26,7 @@ public class RandomLottoGenerator implements LottoGeneratorStrategy {
 
     private static List<Integer> generateLottoNumbers(List<Integer> numbers) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_MAX_COUNT; i++) {
             lottoNumbers.add(numbers.get(i));
         }
         return lottoNumbers;
