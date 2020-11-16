@@ -64,6 +64,8 @@ public enum Rank {
     }
 
     private static List<Rank> valuesOnlyExactMatch() {
-        return Arrays.stream(values()).filter(Rank::isExactMatch).collect(toList());
+        return Arrays.stream(values()) //
+                .filter(Rank::isExactMatch) //
+                .collect(toList());
     }
 }
