@@ -14,11 +14,11 @@ class NumbersTest {
 
     static Stream<Arguments> countSameNumber() {
         Numbers.Builder builder = Numbers.builder();
-        Numbers numbers = builder.range(0, 3).build();
+        Numbers numbers = builder.range(1, 4).build();
         return Stream.of(
-                arguments(numbers, builder.range(0, 1).build(), 1),
-                arguments(numbers, builder.range(0, 2).build(), 2),
-                arguments(numbers, builder.range(0, 3).build(), 3)
+                arguments(numbers, builder.range(1, 2).build(), 1),
+                arguments(numbers, builder.range(1, 3).build(), 2),
+                arguments(numbers, builder.range(1, 4).build(), 3)
         );
     }
 

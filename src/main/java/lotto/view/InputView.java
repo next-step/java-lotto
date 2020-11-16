@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Numbers;
-
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
@@ -18,14 +16,13 @@ public class InputView {
     private InputView() {
     }
 
-    public static Numbers getWinningNumbers() {
+    public static List<Integer> getWinningNumbers() {
         out.println(GET_WINNING_NUMBERS_MESSAGE);
 
         String[] numStrings = scanner.nextLine().split(SPLITTER);
-        List<Integer> numbers = Arrays.stream(numStrings)
+        return Arrays.stream(numStrings)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        return new Numbers(numbers);
     }
 
     public static int getMoney() {

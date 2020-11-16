@@ -34,7 +34,11 @@ public class LottoController {
     }
 
     public LotteryMachine getWinningNumbers() {
-        Numbers winningNumbers = InputView.getWinningNumbers();
+        Numbers.Builder builder = new Numbers.Builder();
+
+        InputView.getWinningNumbers().forEach(builder::add);
+        Numbers winningNumbers = builder.build();
+
         return new LotteryMachine(winningNumbers);
     }
 }
