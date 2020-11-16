@@ -5,6 +5,7 @@ import java.util.List;
 public class LottoNumbers {
 
     private static final String OVER_SIZE_NUMBERS = "오류:: 로또번호 6개를 초과하여 뽑았습니다";
+    private static final int MAX_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -12,7 +13,7 @@ public class LottoNumbers {
     }
 
     private static void throwIllegalArgumentException(List<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() > 6) {
+        if(lottoNumbers.size() > MAX_SIZE) {
             throw new IllegalArgumentException(OVER_SIZE_NUMBERS);
         }
     }

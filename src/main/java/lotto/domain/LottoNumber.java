@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final Integer MIN_LOTTO_NUMBER = 1;
-    private static final Integer MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private static final Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
     private final int lottoNumber;
 
@@ -28,7 +28,7 @@ public class LottoNumber {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static Set<LottoNumber> getLottoNumbers() {
+    public static Set<LottoNumber> toSet() {
         return lottoNumbers;
     }
 
