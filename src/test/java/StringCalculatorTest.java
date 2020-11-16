@@ -78,8 +78,16 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("숫자인 문자열이 아닌 경우 예외 처리")
-    void notNumberExceptionTest() {
+    @DisplayName("숫자인 문자열이 아닌 경우 예외 처리 - 단일 문자열인 경우")
+    void notNumberOnlyOneExceptionTest() {
+        String text = "a";
+        Assertions.assertThrows(RuntimeException.class,
+                () -> stringCalculator.calculate(text));
+    }
+
+    @Test
+    @DisplayName("숫자인 문자열이 아닌 경우 예외 처리 - 여러 문자열 중 숫자가 아닌 경우")
+    void notNumberMultipleExceptionTest() {
         String text = "1,2,b";
         Assertions.assertThrows(RuntimeException.class,
                 () -> stringCalculator.calculate(text));
