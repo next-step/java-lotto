@@ -45,8 +45,8 @@ public class OutputView {
     private static String printLottoPrice(List<LottoResultDto> lottoResultDtoList) {
         return lottoResultDtoList.stream()
                 .map(lottoResultDto -> String.format(LOTTO_PRICE_MESSAGE,
-                        lottoResultDto.getLottoRank().getMatch(),
-                        lottoResultDto.getLottoRank().getPrice(),
+                        lottoResultDto.getLottoRankMatchCount(),
+                        lottoResultDto.getLottoRankPrice(),
                         lottoResultDto.getPrize()))
                 .collect(Collectors.joining(System.lineSeparator()));
 

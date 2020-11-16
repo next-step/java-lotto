@@ -11,20 +11,20 @@ public class LottoMatcher {
     private static final int INCREASE_COUNT = 1;
     private final EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
 
-    private LottoMatcher(List<Lotto> lottos , List<Integer> lastWeekLottoNums) {
+    private LottoMatcher(Lottos lottos, List<Integer> lastWeekLottoNums) {
         initDefaultMap();
 
         matchLastWeekLottoNumbers(lottos, lastWeekLottoNums);
     }
 
-    public static LottoMatcher matchLottoNumbers(List<Lotto> lottos , List<Integer> lastWeekLottoNums){
+    public static LottoMatcher matchLottoNumbers(Lottos lottos, List<Integer> lastWeekLottoNums){
         return new LottoMatcher(lottos , lastWeekLottoNums);
     }
 
-    private void matchLastWeekLottoNumbers(List<Lotto> lottos, List<Integer> lastWeekLottoNums) {
-        lottos.stream()
-                .map(lotto -> lotto.matchLottoNumbers(lastWeekLottoNums))
-                .forEach(this::increaseMatchLottoCount);
+    private void matchLastWeekLottoNumbers(Lottos lottos, List<Integer> lastWeekLottoNums) {
+        for (Integer integer : lottos.matchLastWeekLotto(lastWeekLottoNums)) {
+            increaseMatchLottoCount(integer);
+        }
     }
 
     private void initDefaultMap() {

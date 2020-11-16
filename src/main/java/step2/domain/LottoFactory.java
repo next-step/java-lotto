@@ -19,7 +19,7 @@ public class LottoFactory {
     }
 
     public LottoMatcher matchNumbers(List<Integer> lastWeekLottoNums) {
-        return lottos.matchLastWeekLotto(lastWeekLottoNums);
+        return LottoMatcher.matchLottoNumbers(lottos , lastWeekLottoNums);
     }
 
     private int getLottoTicketCount(int money) {

@@ -12,10 +12,12 @@ public class LottoResultDto {
         this.prize = prize;
     }
 
-    public LottoRank getLottoRank() {
-        return lottoRank;
+    public int getLottoRankMatchCount() {
+        return lottoRank.getMatch();
     }
-
+    public int getLottoRankPrice() {
+        return lottoRank.getPrice();
+    }
     public int getPrize() {
         return prize;
     }
