@@ -1,4 +1,6 @@
-package step4.lotto.firstcollection;
+package step4.domain.lotto.firstcollection;
+
+import step4.Constant;
 
 import java.util.Objects;
 
@@ -13,6 +15,20 @@ public class LottoNumber {
     public LottoNumber(int number) {
         isValid(number);
         this.number = number;
+    }
+
+    public LottoNumber(String numberStr) {
+        this.number = toNumeric(numberStr);
+    }
+
+    private int toNumeric(String numberStr) {
+        try{
+            int parsedInt = Integer.parseInt(numberStr.trim());
+            isValid(parsedInt);
+            return parsedInt;
+        }catch(NumberFormatException error){
+            throw new NumberFormatException(Constant.ERROR_REQUIRED_NUMERIC);
+        }
     }
 
     private void isValid(int number) {
