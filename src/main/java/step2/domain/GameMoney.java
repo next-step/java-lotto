@@ -6,8 +6,9 @@ import java.util.Objects;
 
 public class GameMoney {
 
+    public static final int ZERO_PRICE = 0;
     private final int price;
-    
+
     public GameMoney(int price) {
         this.price = price;
     }
@@ -23,7 +24,7 @@ public class GameMoney {
     }
 
     private void validPrice(int price) {
-        if(price == 0){
+        if(price == ZERO_PRICE){
             throw new NotDivideZeroException();
         }
     }
