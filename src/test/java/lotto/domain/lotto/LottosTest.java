@@ -13,6 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottosTest {
 
     @Test
+    void of_return_empty_obj_when_receive_null() {
+        // when
+        final Lottos result = Lottos.of(null);
+        
+        // then
+        assertThat(result).isEqualTo(Lottos.EMPTY);
+    }
+    
+    @Test
     void size() {
         // given
         final List<Lotto> lottoList = LottoMockFactory.createFourTeenLotto();
