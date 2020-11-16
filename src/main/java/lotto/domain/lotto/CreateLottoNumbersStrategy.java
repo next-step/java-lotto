@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface CreateLottoNumbersStrategy {
-    List<LottoNumber> create();
+    List<LottoNumber> create(LottoNumber bonusNumber);
 }

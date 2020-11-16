@@ -111,7 +111,7 @@ public class LottoBuyerTest {
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
 
             // when
-            final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
+            final LottoStatisticsResult lottoStatisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MAX.getValue());
 
             // then
             assertThat(lottoStatisticsResult).isNotNull();

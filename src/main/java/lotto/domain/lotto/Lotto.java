@@ -3,10 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.Money;
 import util.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static util.Preconditions.checkArgument;
@@ -26,20 +23,21 @@ public class Lotto {
     private final LottoNumber bonusNumber;
 
     private Lotto(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
         this.bonusNumber = bonusNumber;
     }
 
     public static Lotto of(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
         checkArgument(numbers != null, LOTTO_NUMBER_MUST_NOT_BE_NULL);
         checkArgument(numbers.size() == LOTTO_NUMBERS_LENGTH, LOTTO_NUMBER_SIZE_NOT_VALID);
-        checkArgument(hasNotDuplicates(numbers), LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED);
+        checkArgument(hasNotDuplicates(numbers, bonusNumber), LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED);
         numbers.sort(Comparator.comparing(LottoNumber::getValue));
         return new Lotto(numbers, bonusNumber);
     }
 
     public static Lotto of(final CreateLottoNumbersStrategy lottoNumbersStrategy, final CreateLottoNumberStrategy bonusNumberStrategy) {
-        return of(lottoNumbersStrategy.create(), bonusNumberStrategy.create());
+        final LottoNumber bonusNumber = bonusNumberStrategy.create();
+        return of(lottoNumbersStrategy.create(bonusNumber), bonusNumber);
     }
 
     public static Lotto of() {
@@ -55,22 +53,21 @@ public class Lotto {
         return of(lottoNumbers, LottoNumber.of(bonusNumber));
     }
 
-    public static boolean hasNotDuplicates(final List<LottoNumber> numbers) {
-        return !hasDuplicates(numbers);
+    public static boolean hasNotDuplicates(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
+        return !hasDuplicates(numbers, bonusNumber);
     }
 
-    public static boolean hasDuplicates(final List<LottoNumber> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getValue)
-                .distinct()
-                .count() != numbers.size();
+    public static boolean hasDuplicates(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
+        final Set<LottoNumber> lottoNumberSet = new HashSet<>(numbers);
+        lottoNumberSet.add(bonusNumber);
+        return lottoNumberSet.size() < numbers.size() + 1;
     }
 
     public int countHitNumber(final Lotto lotto) {
         return (int) this.numbers.stream()
                 .filter(lotto.numbers::contains).count();
     }
-    
+
     public boolean isMatchBonus(final Lotto lotto) {
         return this.bonusNumber.equals(lotto.bonusNumber);
     }

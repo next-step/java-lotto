@@ -39,7 +39,7 @@ class LottosTest {
                         LottoNumber.of(5),
                         LottoNumber.of(6)
                 ),
-                LottoNumber.MIN
+                LottoNumber.MAX
         );
         // when
         final WinLotteryResult result = lottos.getWinLotteryResult(answer);

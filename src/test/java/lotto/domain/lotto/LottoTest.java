@@ -40,8 +40,8 @@ class LottoTest {
         @Test
         void with_strategy() {
             // given
-            final CreateLottoNumbersStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
-            final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MIN;
+            final CreateLottoNumbersStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
+            final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
 
             // when 
             final Lotto lotto = Lotto.of(lottoNumbersStrategy, bonusNumberStrategy);
@@ -57,7 +57,7 @@ class LottoTest {
             @Test
             void success() {
                 // when 
-                final Lotto lotto = Lotto.of(lottoNumberOneToSix, LottoNumber.MIN);
+                final Lotto lotto = Lotto.of(lottoNumberOneToSix, LottoNumber.MAX);
 
                 // then
                 assertThat(lotto).isNotNull();
@@ -170,7 +170,7 @@ class LottoTest {
                 final String lottoNumberExpression = "1, 2, 3, 4, 5, 6";
 
                 // when
-                final Lotto lotto = Lotto.of(lottoNumberExpression, LottoNumber.MIN.getValue());
+                final Lotto lotto = Lotto.of(lottoNumberExpression, LottoNumber.MAX.getValue());
 
                 // then
                 assertThat(lotto).isNotNull();
@@ -211,20 +211,20 @@ class LottoTest {
     @Test
     void countHitNumber() {
         // given
-        final CreateLottoNumbersStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
-        final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MIN;
+        final CreateLottoNumbersStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
+        final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
 
         // when 
         final Lotto lotto = Lotto.of(lottoNumbersStrategy, bonusNumberStrategy);
 
         // then
-        assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix, LottoNumber.MIN))).isEqualTo(6);
+        assertThat(lotto.countHitNumber(Lotto.of(lottoNumberOneToSix, LottoNumber.MAX))).isEqualTo(6);
     }
 
     @Test
     void hasNotDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasNotDuplicates(lottoNumberOneToSix);
+        final boolean result = Lotto.hasNotDuplicates(lottoNumberOneToSix, LottoNumber.MAX);
 
         // then
         assertThat(result).isTrue();
@@ -233,7 +233,7 @@ class LottoTest {
     @Test
     void hasNotDuplicates_when_receive_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasNotDuplicates(duplicatedLottoNumbers);
+        final boolean result = Lotto.hasNotDuplicates(duplicatedLottoNumbers, LottoNumber.MAX);
 
         // then
         assertThat(result).isFalse();
@@ -242,7 +242,7 @@ class LottoTest {
     @Test
     void hasDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasDuplicates(lottoNumberOneToSix);
+        final boolean result = Lotto.hasDuplicates(lottoNumberOneToSix, LottoNumber.MAX);
 
         // then
         assertThat(result).isFalse();
@@ -251,7 +251,7 @@ class LottoTest {
     @Test
     void hasDuplicates_when_receive_duplicated_lotto_number() {
         // when
-        final boolean result = Lotto.hasDuplicates(duplicatedLottoNumbers);
+        final boolean result = Lotto.hasDuplicates(duplicatedLottoNumbers, LottoNumber.MAX);
 
         // then
         assertThat(result).isTrue();
@@ -260,8 +260,8 @@ class LottoTest {
     @Test
     void isMatchBonus_matched() {
         // given
-        final Lotto lotto = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
-        final Lotto winningLottery = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
+        final Lotto lotto = Lotto.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
+        final Lotto winningLottery = Lotto.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
         
         // when
         final boolean result = lotto.isMatchBonus(winningLottery);
@@ -273,8 +273,8 @@ class LottoTest {
     @Test
     void isMatchBonus_not_matched() {
         // given
-        final Lotto lotto = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
-        final Lotto winningLottery = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(2));
+        final Lotto lotto = Lotto.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
+        final Lotto winningLottery = Lotto.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.of(7));
 
         // when
         final boolean result = lotto.isMatchBonus(winningLottery);

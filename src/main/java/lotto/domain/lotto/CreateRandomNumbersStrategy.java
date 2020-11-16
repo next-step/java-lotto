@@ -7,10 +7,10 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
     private static final CreateRandomNumberStrategy createRandomNumberStrategy = new CreateRandomNumberStrategy();
 
     @Override
-    public List<LottoNumber> create() {
+    public List<LottoNumber> create(final LottoNumber bonusNumber) {
         final int lottoNumberLength = Lotto.getLottoNumbersLength();
         List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
-        while (lottoNumbers.isEmpty() || Lotto.hasDuplicates(lottoNumbers)) {
+        while (lottoNumbers.isEmpty() || Lotto.hasDuplicates(lottoNumbers, bonusNumber)) {
             lottoNumbers = createRandomNumbers(lottoNumberLength);
         }
         return lottoNumbers;
