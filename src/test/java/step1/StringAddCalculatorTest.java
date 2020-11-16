@@ -1,6 +1,5 @@
 package step1;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +36,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("입력값이 음수일때 예외처리")
     public void 입력값_음수일때_예외처리() {
-        assertThatThrownBy(() -> addCalculator.isNegative("-1,2,3"))
+        assertThatThrownBy(() -> addCalculator.isNegative("1,-2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
 
