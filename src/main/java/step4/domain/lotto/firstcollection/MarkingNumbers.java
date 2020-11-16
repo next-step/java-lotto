@@ -1,6 +1,7 @@
-package step4.lotto.firstcollection;
+package step4.domain.lotto.firstcollection;
 
-import step4.lotto.LottoTicket;
+import step4.Constant;
+import step4.domain.lotto.LottoTicket;
 
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class MarkingNumbers {
     private static final String DELIMITER_NO_SPACE = ",";
 
     public static final String STRING_FORM = "[%s]";
+    private static final int MARKING_ANCHOR_POINT = 6;
 
     private final Set<LottoNumber> markingNumbers;
 
@@ -24,12 +26,17 @@ public class MarkingNumbers {
     }
 
     private static Set<LottoNumber> stringToObj(String string) {
-        return Stream.of(string.split(DELIMITER_NO_SPACE))
-                .map(value -> {
-                    String trim = value.trim();
-                    return new LottoNumber(Integer.parseInt(trim));
-                })
+        Set<LottoNumber> lottoNumbers = Stream.of(string.split(DELIMITER_NO_SPACE))
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+        isValidLottoNumbers(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private static void isValidLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != MARKING_ANCHOR_POINT) {
+            throw new IllegalArgumentException(Constant.ERROR_INVALID_MARKING_NUMBER);
+        }
     }
 
     @Override
