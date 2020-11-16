@@ -1,14 +1,12 @@
-package step4.lotto;
+package step4.domain.lotto;
 
-import step4.lotto.firstcollection.LottoNumber;
-import step4.lotto.firstcollection.LottoTickets;
-import step4.lotto.firstcollection.MarkingNumbers;
-import step4.lotto.firstcollection.WinningResults;
+import step4.domain.lotto.firstcollection.LottoNumber;
+import step4.domain.lotto.firstcollection.LottoTickets;
+import step4.domain.lotto.firstcollection.MarkingNumbers;
+import step4.domain.lotto.firstcollection.WinningResults;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static step3.Constant.ERROR_DUPLICATE_NUMBER;
 

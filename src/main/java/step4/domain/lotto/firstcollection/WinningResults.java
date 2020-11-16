@@ -1,7 +1,7 @@
-package step4.lotto.firstcollection;
+package step4.domain.lotto.firstcollection;
 
 import step4.Constant;
-import step4.lotto.WinningNumbers;
+import step4.domain.lotto.WinningNumbers;
 import step4.type.WinningType;
 
 import java.util.Arrays;
@@ -16,6 +16,7 @@ public class WinningResults {
     public static final long DEFAULT_COUNT_LONG = 0L;
     public static final double DECIMAL_POINT_TWO_FIXED = 100D;
     private static final int REVENUE_ANCHOR_POINT = 1;
+    private static final Integer DEFAULT_COUNT_INTEGER = 0;
 
     private final Map<WinningType, Integer> winningResults;
 
@@ -45,6 +46,10 @@ public class WinningResults {
 
     private static Map<WinningType, Long> countByWinningType(LottoTickets tickets, WinningNumbers winningNumbers) {
         return tickets.countByWinningType(winningNumbers);
+    }
+
+    public Integer countByWinningType(WinningType type) {
+        return Optional.ofNullable(winningResults.get(type)).orElse(DEFAULT_COUNT_INTEGER);
     }
 
 
