@@ -63,7 +63,7 @@ class LottoTest {
                 assertThat(lotto).isNotNull();
             }
 
-            @DisplayName("null 리스타가 전달된 경우")
+            @DisplayName("null 리스트가 전달된 경우")
             @Test
             void throw_exception_when_receive_null() {
                 // given
