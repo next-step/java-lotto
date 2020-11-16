@@ -13,7 +13,7 @@ public class LottoTicketView {
 
 	public void printLottoTickets() {
 		StringBuilder sb = new StringBuilder();
-		lottos.forEach(lotto -> sb.append(lotto.getLottoNumbers().toString()).append("\n"));
+		lottos.forEach(lotto -> sb.append(lotto.getNumbers().toString()).append("\n"));
 		System.out.println(sb.toString());
 	}
 }
