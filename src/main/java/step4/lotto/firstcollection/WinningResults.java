@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class WinningResults {
     public static final long DEFAULT_COUNT_LONG = 0L;
-    public static final Integer DEFAULT_COUNT_INTEGER = 0;
     public static final double DECIMAL_POINT_TWO_FIXED = 100D;
     private static final int REVENUE_ANCHOR_POINT = 1;
 
@@ -46,10 +45,6 @@ public class WinningResults {
 
     private static Map<WinningType, Long> countByWinningType(LottoTickets tickets, WinningNumbers winningNumbers) {
         return tickets.countByWinningType(winningNumbers);
-    }
-
-    public Integer countByWinningType(WinningType type) {
-        return Optional.ofNullable(winningResults.get(type)).orElse(DEFAULT_COUNT_INTEGER);
     }
 
 
