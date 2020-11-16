@@ -29,10 +29,8 @@ public class LottoStaticstic {
 	public float calculateWinningProbability(Map<LottoReward, List<Lotto>> lottoResultMap) {
 		int totalAmount = lottoResultMap.keySet()
 				.stream()
-				.map(reward -> { //
-					int lottoCount = lottoResultMap.get(reward).size();
-					return reward.getPrice() * lottoCount;
-				}).reduce(0, Integer::sum);
+				.map(reward -> reward.getPrice() * lottoResultMap.get(reward).size())
+				.reduce(0, Integer::sum);
 		return (float) totalAmount / (purchase.getLottoCount() * purchase.LOTTO_PRICE);
 	}
 }
