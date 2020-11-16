@@ -17,7 +17,7 @@ class LottoRankingTest {
     @ParameterizedTest
     @MethodSource("provideLottoRank")
     void createLottoRank(int match, LottoRank lottoRank) {
-        assertThat(LottoRank.matchLottoRankPrice(match)).isEqualTo(lottoRank.getPrice());
+        assertThat(LottoRank.valueOf(match)).isEqualTo(lottoRank);
     }
 
     private static Stream<Arguments> provideLottoRank() {
@@ -35,7 +35,7 @@ class LottoRankingTest {
     @ParameterizedTest
     @ValueSource(ints = {-1 , 7})
     void createLottoRank(int match) {
-        assertThatThrownBy(() -> LottoRank.matchLottoRankPrice(match))
+        assertThatThrownBy(() -> LottoRank.valueOf(match))
                 .isInstanceOf(NotMatchRankException.class);
     }
 
