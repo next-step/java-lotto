@@ -1,6 +1,6 @@
 package step4.strategy;
 
-import step4.lotto.firstcollection.LottoNumber;
+import step4.domain.lotto.firstcollection.LottoNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
