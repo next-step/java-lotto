@@ -4,6 +4,7 @@ import step2.dto.LottoResultDto;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public class LottoMatcher {
         matchLastWeekLottoNumbers(lottos, lastWeekLottoNums);
     }
 
-    public static LottoMatcher matchLottoNumbers(Lottos lottos, List<Integer> lastWeekLottoNums){
+    public static LottoMatcher ofMatch(Lottos lottos, List<Integer> lastWeekLottoNums){
         return new LottoMatcher(lottos , lastWeekLottoNums);
     }
 
@@ -58,5 +59,18 @@ public class LottoMatcher {
             gameMoney = gameMoney.sum(lottoRank.prize(result.get(lottoRank)));
         }
         return gameMoney;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoMatcher that = (LottoMatcher) o;
+        return Objects.equals(result, that.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
     }
 }
