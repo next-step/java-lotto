@@ -5,9 +5,7 @@ public class WinningNumber {
     private final Integer bonusNumber;
 
     public WinningNumber(LotteryNumber lotteryNumber, Integer bonusNumber) {
-        if (lotteryNumber == null || bonusNumber == null) {
-            throw new IllegalStateException();
-        }
+        ensureNotNull(lotteryNumber, bonusNumber);
         this.winningNumber = lotteryNumber;
         this.bonusNumber = bonusNumber;
     }
@@ -19,6 +17,12 @@ public class WinningNumber {
         }
 
         return lotteryResult;
+    }
+
+    private void ensureNotNull(LotteryNumber lotteryNumber, Integer bonusNumber) {
+        if (lotteryNumber == null || bonusNumber == null) {
+            throw new IllegalStateException();
+        }
     }
 
     private Rank toRank(LotteryNumber lotteryNumber) {
