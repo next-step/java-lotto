@@ -21,5 +21,4 @@ public class Lottos {
 
         return lottoResult;
     }
-
 }
