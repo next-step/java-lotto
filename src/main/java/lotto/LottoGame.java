@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.service.LottoService;
-import lotto.service.StatisticPrinter;
 import lotto.view.ConsoleView;
 import lotto.view.View;
 import lotto.view.inputview.ConsoleInputView;
@@ -19,7 +17,7 @@ public class LottoGame {
         StatisticPrinter statisticPrinter = new StatisticPrinter(view);
         Lottos boughtLottos = lottoService.buyLottos();
         if (boughtLottos.isEmpty()) {
-            return;
+           return;
         }
         statisticPrinter.printStatistic(boughtLottos);
     }

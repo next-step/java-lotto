@@ -1,4 +1,4 @@
-package lotto.service.helper;
+package lotto.helper;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;

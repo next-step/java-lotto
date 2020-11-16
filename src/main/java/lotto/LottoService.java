@@ -1,11 +1,11 @@
-package lotto.service;
+package lotto;
 
 import lotto.domain.Amount;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottoNumbers;
 import lotto.domain.NumberOfManualLotto;
-import lotto.service.helper.LottoFactory;
-import lotto.service.helper.ValidInputHelper;
+import lotto.helper.LottoFactory;
+import lotto.helper.ValidInputHelper;
 import lotto.view.View;
 
 public class LottoService {

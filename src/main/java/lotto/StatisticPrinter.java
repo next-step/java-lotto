@@ -1,12 +1,12 @@
-package lotto.service;
+package lotto;
 
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
-import lotto.service.helper.ValidInputHelper;
-import lotto.service.helper.WinningChecker;
+import lotto.helper.ValidInputHelper;
+import lotto.helper.WinningChecker;
 import lotto.view.View;
 
 public class StatisticPrinter {

@@ -6,7 +6,7 @@ import lotto.domain.Lottos;
 import lotto.domain.WinningRank;
 import lotto.dto.WinningNumber;
 import lotto.dto.WinningStatistic;
-import lotto.service.helper.WinningChecker;
+import lotto.helper.WinningChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
