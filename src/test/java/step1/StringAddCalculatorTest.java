@@ -82,7 +82,7 @@ public class StringAddCalculatorTest {
 
         assertThatThrownBy(() -> Inputs.of(inputValue.getInput()))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("입력한 값이 음수가 될 수 없습니다.");
+                .hasMessage("입력한 값은 0 이상의 정수여야 합니다.");
     }
 
     @ParameterizedTest
@@ -111,7 +111,18 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(inputs.value().toString()).isEqualTo(expected);
-
-
     }
+
+    @ParameterizedTest
+    @DisplayName("입력값에 숫자가 아닌 값이 포함되었을 때 예외를 던진다")
+    @ValueSource(strings = {"안녕", "hello", "12:가", "h123", "1,a", "a,1324:4f"})
+    void none_int_type_inputs_throws_runtime_exception(String input) {
+        // given
+        InputValue inputValue = InputValue.of(input);
+
+        assertThatThrownBy(() -> Inputs.of(inputValue.getInput()))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("입력한 값은 0 이상의 정수여야 합니다.");
+    }
+
 }

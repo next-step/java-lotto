@@ -38,9 +38,9 @@ public class Inputs {
     }
 
     private static int isUnderZero(String input) {
-        int number = NumberUtils.toInt(input);
+        int number = NumberUtils.toInt(input, -1);
         if (number < NumberUtils.INTEGER_ZERO) {
-            throw new RuntimeException("입력한 값이 음수가 될 수 없습니다.");
+            throw new RuntimeException("입력한 값은 0 이상의 정수여야 합니다.");
         }
         return number;
     }
