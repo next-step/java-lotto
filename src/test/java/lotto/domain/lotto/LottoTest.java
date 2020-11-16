@@ -256,4 +256,30 @@ class LottoTest {
         // then
         assertThat(result).isTrue();
     }
+    
+    @Test
+    void isMatchBonus_matched() {
+        // given
+        final Lotto lotto = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
+        final Lotto winningLottery = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
+        
+        // when
+        final boolean result = lotto.isMatchBonus(winningLottery);
+        
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void isMatchBonus_not_matched() {
+        // given
+        final Lotto lotto = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(1));
+        final Lotto winningLottery = Lotto.of(() -> lottoNumberOneToSix, () -> LottoNumber.of(2));
+
+        // when
+        final boolean result = lotto.isMatchBonus(winningLottery);
+
+        // then
+        assertThat(result).isFalse();
+    }
 }
