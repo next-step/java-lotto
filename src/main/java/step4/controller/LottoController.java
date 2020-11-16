@@ -1,15 +1,17 @@
 package step4.controller;
 
-import step4.lotto.LottoTicketMachine;
-import step4.lotto.WinningNumbers;
-import step4.lotto.firstcollection.LottoTickets;
-import step4.lotto.firstcollection.WinningResults;
+import step4.domain.lotto.LottoTicketMachine;
+import step4.domain.lotto.WinningNumbers;
+import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
+import step4.domain.lotto.firstcollection.LottoTickets;
+import step4.domain.lotto.firstcollection.WinningResults;
 import step4.strategy.LottoNumberMakeStrategy;
 import step4.view.InputView;
 import step4.view.LottoInputView;
 import step4.view.LottoResultView;
 import step4.view.ResultView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -27,13 +29,22 @@ public class LottoController {
 
     public void ticketing() {
         int useAmount = inputView.getUseAmount();
-        LottoTickets tickets = LottoTicketMachine.ticketing(useAmount, new LottoNumberMakeStrategy());
 
+        int manualSize = inputView.getManualTicketSize();
+        List<String> manualNumbers = inputView.getManualNumbers(manualSize);
+
+        LottoPurchaseInfoDTO infoDTO = new LottoPurchaseInfoDTO.Builder(useAmount)
+                .numberMakeStrategy(new LottoNumberMakeStrategy())
+                .inputManualNumbers(manualNumbers)
+                .manualSize(manualSize)
+                .build();
+
+        LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO);
         resultView.drawTicket(tickets);
 
-        WinningNumbers winningNumbers = inputView.getWinningNumber();
-        WinningResults winningResults = winningNumbers.getWinningStatistics(tickets);
-        double revenueRate = winningResults.getRevenue(tickets.countTicket());
+        WinningNumbers winningNumber = inputView.getWinningNumber();
+        WinningResults winningResults = winningNumber.getWinningStatistics(tickets);
+        double revenueRate = winningResults.getRevenue(tickets.countTickets());
 
         resultView.drawWinningStatistics(winningResults);
         resultView.drawRevenueRate(revenueRate, winningResults.isRevenue(revenueRate));
