@@ -1,6 +1,6 @@
 package step01;
 
-public class Blank {
+public class BlankValidator {
     private static String EMPTY = "";
 
     public static boolean isNull(String input) {

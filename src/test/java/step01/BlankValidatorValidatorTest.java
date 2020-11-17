@@ -7,24 +7,24 @@ import org.junit.jupiter.params.provider.NullSource;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class BlankTest {
+public class BlankValidatorValidatorTest {
 
     @ParameterizedTest
     @NullSource
     public void test_isNull(String input) {
-        assertThat(Blank.isNull(input)).isTrue();
+        assertThat(BlankValidator.isNull(input)).isTrue();
     }
 
     @ParameterizedTest
     @EmptySource
     public void test_isEmpty(String input) {
-        assertThat(Blank.isEmpty(input)).isTrue();
+        assertThat(BlankValidator.isEmpty(input)).isTrue();
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     public void test_validate(String input) {
-        assertThat(Blank.validate(input)).isTrue();
+        assertThat(BlankValidator.validate(input)).isTrue();
     }
 
 }
