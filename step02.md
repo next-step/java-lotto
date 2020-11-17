@@ -7,7 +7,7 @@
     - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
     - public static void showWinningStatistics(List<WinningStatistic> WinningStatistics) 당첨 통계를 보여주는 기능
     - public static void showYield(float yield) 수익률을 보여주는 기능
-- Lotto 로또 판매기
+- LottoSeller 로또 판매기 
     - 생성자 (로또판매 금액, 한회차 당 생성하는 번호 갯수)
     - ${지불한 돈}만큼 로또를 생성해주는 기능
         (로또 가격 조)
@@ -16,9 +16,10 @@
     - 생성자 (금주의 당첨 번호)
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
     - 수익률을 계산해 주는 기능
-    
 
-
+## 진행 사항
+- racing car 마지막 리팩토링에서는, 작은 단위에서 부터 큰단위로 발전해가며 Test code 를 작성하고 프로덕션 코드를 작성하였습니다
+- 이번 계획은, input output view 를 먼저 작성하고, 사용자 시나리오흐름으로 test code 작성 -> production code 작성 할 예정입니다.
 
 ## 기능 요구사항
 - 입력: ${로또 구입 금액} 
