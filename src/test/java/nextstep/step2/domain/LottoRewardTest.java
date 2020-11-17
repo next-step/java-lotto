@@ -1,17 +1,30 @@
 package nextstep.step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRewardTest {
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("로또 리워드를 얻을 수 있다.")
-	public void getRewordTest() {
-		LottoReward lottoReward = LottoReward.getReword(6);
-		assertThat(lottoReward.getPrice()).isEqualTo(2_000_000_000);
-		assertThat(lottoReward).isEqualTo(LottoReward.FIRST);
+	@MethodSource("provideReward")
+	public void getRewordTest(LottoReward lottoReward, LottoReward expected) {
+		assertThat(lottoReward).isEqualTo(expected);
+	}
+
+	private static Stream<Arguments> provideReward() {
+		return Stream.of(
+				Arguments.of(LottoReward.getReword(6), LottoReward.FIRST),
+				Arguments.of(LottoReward.getReword(5), LottoReward.SECOND),
+				Arguments.of(LottoReward.getReword(4), LottoReward.THIRD),
+				Arguments.of(LottoReward.getReword(3), LottoReward.FOURTH),
+				Arguments.of(LottoReward.getReword(0), LottoReward.LOST)
+		);
 	}
 }

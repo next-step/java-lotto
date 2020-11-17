@@ -4,9 +4,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,13 +52,13 @@ public class LottoStaticsticTest {
 				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
 	}
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
-	public void inpuLastLottoNumberTest() {
-		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4, 5,  6", new LottoPurchase(1_000));
+	@MethodSource("provideLottoStaticstic")
+	public void inpuLastLottoNumberTest(LottoStaticstic lottoStaticstic, int expected) {
 		Lotto lastWeekWinningLotto = lottoStaticstic.getLastWeekWinningLotto();
-		assertTrue(lastWeekWinningLotto.getNumbers().contains(5));
-		assertTrue(lastWeekWinningLotto.getNumbers().contains(6));
+		assertTrue(lastWeekWinningLotto.getNumbers().contains(expected));
+		assertTrue(lastWeekWinningLotto.getNumbers().contains(expected));
 	}
 
 	private List<Lotto> mockLottoList(int lottoCount, Set<Integer> numbers) {
@@ -62,5 +66,12 @@ public class LottoStaticsticTest {
 		IntStream.range(0, lottoCount)
 				.forEach(i -> lottos.add(new Lotto(numbers)));
 		return lottos;
+	}
+
+	private static Stream<Arguments> provideLottoStaticstic() {
+		return Stream.of(
+				Arguments.of(new LottoStaticstic("1,2,3,4, 5,  6", new LottoPurchase(1_000)), 5),
+				Arguments.of(new LottoStaticstic("1,2,3,4,  40,  45", new LottoPurchase(1_000)), 45)
+		);
 	}
 }
