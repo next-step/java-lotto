@@ -1,13 +1,8 @@
 package humbledude.lotto.domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +11,7 @@ public class LottoStoreTest {
     @Test
     public void buyAutoTickets() {
         long budget = 14_023;
-        LottoStore store = new LottoStore();
-        List<LottoTicket> lottoTicketList = store.buyAutoTickets(budget);
+        List<LottoTicket> lottoTicketList = LottoStore.buyAutoTickets(budget);
 
         assertThat(lottoTicketList).hasSize(14);
     }
@@ -25,25 +19,7 @@ public class LottoStoreTest {
     @Test
     public void howManyCanIBuy() {
         long budget = 14_023;
-        LottoStore store = new LottoStore();
 
-        assertThat(store.howManyCanIBuy(budget)).isEqualTo(14);
-    }
-
-    @ParameterizedTest
-    @CsvSource({"1;2;3;4;5;6,2000000000", "1;2;3;4;5;45,1500000", "1;2;3;4;44;45,50000", "1;2;3;43;44;45,5000", "1;2;42;43;44;45,0"})
-    public void claimPrize(String numbers, int expetedPrize) {
-        Set<LottoNumber> testcaseNumbers = Stream.of(numbers.split(";"))
-                .map(Integer::valueOf)
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-
-        LottoTicket myTicket = new LottoTicket(testcaseNumbers);
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(TestHelper.setOf(1, 2, 3, 4, 5, 6));
-
-        LottoStore store = new LottoStore();
-        store.setWinningNumbers(winningNumbers);
-
-        assertThat(store.claimPrize(myTicket).getPrize()).isEqualTo(expetedPrize);
+        assertThat(LottoStore.howManyCanIBuy(budget)).isEqualTo(14);
     }
 }
