@@ -1,15 +1,14 @@
 package study.lotto;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoNumber;
-import study.lotto.core.WinLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
@@ -27,15 +26,15 @@ class LottoTest {
 
     @Test
     void test_create_fail() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    // Given
+                    List<LottoNumber> lottoNumbers = new ArrayList<>();
+                    lottoNumbers.add(new LottoNumber(1));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            // Given
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-            lottoNumbers.add(new LottoNumber(1));
-
-            // When
-            Lotto lotto = new Lotto(lottoNumbers);
-        });
+                    // When
+                    Lotto lotto = new Lotto(lottoNumbers);
+                }).withMessageMatching("로또 번호는 6개를 입력해주세요.");
     }
 
     private List<LottoNumber> createLottoNumbers() {

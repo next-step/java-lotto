@@ -14,12 +14,13 @@ class LottoDispenserTest {
     @DisplayName("로또(자동) 판매 테스트")
     void test_auto() {
         // Given
-        LottoDispenser lottoDispenser = new LottoDispenser();
+        LottoDispenser lottoDispenser = LottoDispenser.getInstance();
 
         // When
         List<Lotto> lottos = lottoDispenser.auto(10);
 
         // Then
         assertEquals(lottos.size(), 10);
+        lottos.stream().forEach(System.out::println);
     }
 }
