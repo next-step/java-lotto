@@ -5,10 +5,10 @@ import java.util.List;
 
 public class DelimiterList {
 
-    private List<String> delimiter;
     private final static String COMMA = ",";
     private final static String COLON = ":";
     private final static String VERTICAL_BAR = "|";
+    private List<String> delimiter;
 
     public DelimiterList() {
         this.delimiter = new ArrayList<>();
