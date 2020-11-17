@@ -12,20 +12,19 @@ public class LottoMatcher {
     private static final int INCREASE_COUNT = 1;
     private final EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
 
-    private LottoMatcher(Lottos lottos, List<Integer> lastWeekLottoNums) {
+    private LottoMatcher(Lottos lottos, LastWeekLotto lastWeekLottoNums) {
         initDefaultMap();
 
         matchLastWeekLottoNumbers(lottos, lastWeekLottoNums);
     }
 
-    public static LottoMatcher ofMatch(Lottos lottos, List<Integer> lastWeekLottoNums){
-        return new LottoMatcher(lottos , lastWeekLottoNums);
+    public static LottoMatcher ofMatch(Lottos lottos, LastWeekLotto lastWeekLotto) {
+        return new LottoMatcher(lottos, lastWeekLotto);
     }
 
-    private void matchLastWeekLottoNumbers(Lottos lottos, List<Integer> lastWeekLottoNums) {
-        for (Integer integer : lottos.matchLastWeekLotto(lastWeekLottoNums)) {
-            increaseMatchLottoCount(integer);
-        }
+    private void matchLastWeekLottoNumbers(Lottos lottos, LastWeekLotto lastWeekLottoNums) {
+        lottos.matchLastWeekLotto(lastWeekLottoNums)
+                .forEach(this::increaseMatchLottoCount);
     }
 
     private void initDefaultMap() {
@@ -34,12 +33,8 @@ public class LottoMatcher {
         }
     }
 
-    private void increaseMatchLottoCount(int match) {
-        result.put(getLottoRank(match), getLottoCount(getLottoRank(match)) + INCREASE_COUNT);
-    }
-
-    private LottoRank getLottoRank(int match) {
-        return LottoRank.valueOf(match);
+    private void increaseMatchLottoCount(LottoRank lottoRank) {
+        result.put(lottoRank, getLottoCount(lottoRank) + INCREASE_COUNT);
     }
 
     private int getLottoCount(LottoRank lottoRank) {
@@ -48,8 +43,8 @@ public class LottoMatcher {
 
 
     public List<LottoResultDto> getResult() {
-        return Stream.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FORTH)
-                .map(lottoRank -> new LottoResultDto(lottoRank , result.get(lottoRank)))
+        return Stream.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FORTH , LottoRank.FIFTH)
+                .map(lottoRank -> new LottoResultDto(lottoRank, result.get(lottoRank)))
                 .collect(Collectors.toList());
     }
 
