@@ -17,10 +17,10 @@ public class Lottos {
         }
     }
 
-    public Result getResult(Lotto winningLotto, LottoNo bonus) {
+    public Result getResult(WinningCondition condition) {
         Map<Rank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.getRank(winningLotto, bonus);
+            Rank rank = condition.getRank(lotto);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
         return new Result(result);

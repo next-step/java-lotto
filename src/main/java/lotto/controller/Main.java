@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+// TODO: DTO 만들어서 inputView 와 도메인 연결하기
 public class Main {
     public static void main(String[] args) {
         Money purchaseMoney = InputView.askPurchaseMoney();
@@ -16,10 +17,12 @@ public class Main {
         ));
         ResultView.printLottos(lottos);
 
-        Lotto winningLotto = InputView.askWinningLotto();
-        LottoNo bonus = InputView.askBonusBall();
+        WinningCondition condition = new WinningCondition(
+                InputView.askWinningLotto(),
+                InputView.askBonusBall()
+        );
 
-        Result result = lottos.getResult(winningLotto, bonus);
+        Result result = lottos.getResult(condition);
         ResultView.printStatistics(result, purchaseMoney);
     }
 }

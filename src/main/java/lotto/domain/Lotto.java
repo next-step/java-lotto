@@ -27,18 +27,14 @@ public class Lotto {
         return (int) purchaseMoney.divide(price);
     }
 
-    Rank getRank(Lotto winningLotto, LottoNo bonus) {
-        return Rank.valueOf(
-                getCountOfMatch(winningLotto)
-                , lottoNos.contains(bonus)
-        );
-    }
-
     int getCountOfMatch(Lotto lotto) {
         return (int) lotto.lottoNos.stream()
-                .filter(
-                        (lottoNo) -> lottoNos.contains(lottoNo)
-                ).count();
+                .filter((lottoNo) -> contains(lottoNo))
+                .count();
+    }
+
+    boolean contains(LottoNo lottoNo) {
+        return lottoNos.contains(lottoNo);
     }
 
     private void add(int lottoNo) {

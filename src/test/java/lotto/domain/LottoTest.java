@@ -3,10 +3,10 @@ package lotto.domain;
 import lotto.exception.BadNumOfLottoNoException;
 import lotto.exception.DuplicatedLottoException;
 import lotto.exception.LottoRangeException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -59,28 +59,15 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("getRank 가 제대로 계산되어야한다.")
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
-    void getRank(int countOfMatch) {
-        int size = 6;
-        Integer[] winningLotoNos = new Integer[size];
-        Integer[] lottoNos = new Integer[size];
-        for (int i = 0; i < size; i++) {
-            winningLotoNos[i] = i + 1;
-            lottoNos[i] = i + 1 + size - countOfMatch;
-        }
+    @DisplayName("lottoNo를 포함하고 있다면 true이다.")
+    @CsvSource(value = {"1$true", "5$true", "6$true", "7$false", "45$false"}, delimiter = '$')
+    void contains(int lottoNo, boolean expected) {
 
-        Lotto winningLotto = new Lotto(Arrays.asList(winningLotoNos));
-        Lotto lotto = new Lotto(Arrays.asList(lottoNos));
-        LottoNo goodBonus = LottoNoPool.getLottoNo(6);
-        LottoNo badBonus = LottoNoPool.getLottoNo(45);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNo lottoNoObj = LottoNoPool.getLottoNo(lottoNo);
 
-        Assertions.assertAll(
-                () -> assertThat(winningLotto.getRank(lotto, goodBonus))
-                        .isEqualTo(Rank.valueOf(countOfMatch, true)),
-                () -> assertThat(winningLotto.getRank(lotto, badBonus))
-                        .isEqualTo(Rank.valueOf(countOfMatch, false))
-        );
+        assertThat(lotto.contains(lottoNoObj))
+                .isEqualTo(expected);
     }
 
     @Test

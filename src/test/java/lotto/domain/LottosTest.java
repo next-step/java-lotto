@@ -37,8 +37,9 @@ class LottosTest {
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.FIFTH, numOfLottos);
+        WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
-        assertThat(lottos.getResult(winningLotto, bonus))
+        assertThat(lottos.getResult(condition))
                 .isEqualTo(new Result(result));
     }
 
@@ -54,8 +55,9 @@ class LottosTest {
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.THIRD, numOfLottos);
+        WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
-        assertThat(lottos.getResult(winningLotto, bonus))
+        assertThat(lottos.getResult(condition))
                 .isEqualTo(new Result(result));
     }
 
@@ -71,8 +73,9 @@ class LottosTest {
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.SECOND, numOfLottos);
+        WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
-        assertThat(lottos.getResult(winningLotto, bonus))
+        assertThat(lottos.getResult(condition))
                 .isEqualTo(new Result(result));
     }
 }
