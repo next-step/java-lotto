@@ -1,6 +1,7 @@
 package lotto.domain.lotto.strategy;
 
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoTicket;
 
 import java.util.ArrayList;
@@ -10,18 +11,21 @@ public class RandomNumbersCreateStrategy implements LottoNumbersCreateStrategy {
     private static final RandomNumberCreateStrategy createRandomNumberStrategy = new RandomNumberCreateStrategy();
 
     @Override
-    public List<LottoNumber> create(final LottoNumber bonusNumber) {
-        final int lottoNumberLength = LottoTicket.getLottoNumbersLength();
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
-        while (lottoNumbers.isEmpty() || LottoTicket.hasDuplicates(lottoNumbers, bonusNumber)) {
-            lottoNumbers = createRandomNumbers(lottoNumberLength);
+    public LottoNumbers create(final LottoNumber bonusNumber) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        while (lottoNumbers.isEmpty() || hasDuplicates(lottoNumbers, bonusNumber)) {
+            lottoNumbers = createRandomNumbers();
         }
-        return lottoNumbers;
+        return LottoNumbers.of(lottoNumbers);
     }
 
-    private List<LottoNumber> createRandomNumbers(final int lottoNumberLength) {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
-        for (int i = 0; i < lottoNumberLength; i++) {
+    private boolean hasDuplicates(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
+        return LottoNumbers.hasDuplicates(lottoNumbers) || LottoTicket.hasDuplicates(LottoNumbers.of(lottoNumbers), bonusNumber);
+    }
+
+    private List<LottoNumber> createRandomNumbers() {
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LottoNumbers.LOTTO_NUMBERS_LENGTH; i++) {
             lottoNumbers.add(createRandomNumberStrategy.create());
         }
         return lottoNumbers;

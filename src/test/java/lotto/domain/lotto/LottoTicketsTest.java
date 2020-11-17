@@ -8,6 +8,7 @@ import lotto.dto.WinLotteryResult;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.lotto.LottoTicketMockFactory.createLottoNumberOneToSix;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,11 +17,11 @@ class LottoTicketsTest {
     void of_return_empty_obj_when_receive_null() {
         // when
         final LottoTickets result = LottoTickets.of(null);
-        
+
         // then
         assertThat(result).isEqualTo(LottoTickets.EMPTY);
     }
-    
+
     @Test
     void size() {
         // given
@@ -39,19 +40,9 @@ class LottoTicketsTest {
     void countHitNumber() {
         // given
         final LottoTickets lottoTickets = LottoTickets.of(LottoTicketMockFactory.createFourTeenLotto());
-        final LottoTicket winningLottery = LottoTicket.of(
-                Arrays.asList(
-                        LottoNumber.of(1),
-                        LottoNumber.of(2),
-                        LottoNumber.of(3),
-                        LottoNumber.of(4),
-                        LottoNumber.of(5),
-                        LottoNumber.of(6)
-                ),
-                LottoNumber.MAX
-        );
+        final LottoTicket winningLottery = LottoTicket.of(createLottoNumberOneToSix(), LottoNumber.MAX);
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
-        
+
         // when
         final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery);
 

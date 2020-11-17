@@ -14,7 +14,7 @@ class LottoTicketsFactoryTest {
     @DisplayName("Lottos 생성")
     @Nested
     class Create {
-        @DisplayName("한 개 생성")
+        @DisplayName("0 개 생성")
         @Test
         void zero() {
             // given

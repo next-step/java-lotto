@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import lotto.dto.LottoStatisticsResult;
 
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_MUST_NOT_BE_BLANK;
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_SIZE_NOT_VALID;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.lotto.LottoTicket.LOTTO_NUMBER_MUST_NOT_BE_BLANK;
-import static lotto.domain.lotto.LottoTicket.LOTTO_NUMBER_SIZE_NOT_VALID;
 import static lotto.domain.LottoBuyer.MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO;
 import static lotto.domain.Money.MONEY_MUST_NOT_BE_NEGATIVE;
 

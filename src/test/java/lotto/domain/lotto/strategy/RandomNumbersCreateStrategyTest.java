@@ -1,10 +1,8 @@
 package lotto.domain.lotto.strategy;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoNumbers;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -13,14 +11,13 @@ class RandomNumbersCreateStrategyTest {
     void create() {
         // given
         final LottoNumbersCreateStrategy strategy = new RandomNumbersCreateStrategy();
-        final int lottoNumberLength = LottoTicket.getLottoNumbersLength();
+        final int lottoNumberLength = LottoNumbers.LOTTO_NUMBERS_LENGTH;
 
         // when
-        final List<LottoNumber> lottoNumbers = strategy.create(LottoNumber.MAX);
+        final LottoNumbers lottoNumbers = strategy.create(LottoNumber.MAX);
 
         // then
-        assertThat(lottoNumbers).isNotEmpty();
+        assertThat(lottoNumbers).isNotNull();
         assertThat(lottoNumbers.size()).isEqualTo(lottoNumberLength);
-        assertThat(lottoNumbers).doesNotHaveDuplicates();
     }
 }
