@@ -52,6 +52,10 @@ public class Lotto {
         return new WinningLotto(winLottoNumbers.match(this));
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
 
