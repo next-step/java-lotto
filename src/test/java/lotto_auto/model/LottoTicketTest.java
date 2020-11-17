@@ -93,4 +93,29 @@ class LottoTicketTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("정답 수 반환 테스트")
+    @Test
+    public void matchNumberCountTest(){
+        List<Integer> lottoNumber = new ArrayList<>();
+        lottoNumber.add(1);
+        lottoNumber.add(2);
+        lottoNumber.add(3);
+        lottoNumber.add(4);
+        lottoNumber.add(5);
+        lottoNumber.add(6);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumber);
+
+        List<Integer> winningNumber = new ArrayList<>();
+        lottoNumber.add(4);
+        lottoNumber.add(5);
+        lottoNumber.add(6);
+        lottoNumber.add(7);
+        lottoNumber.add(8);
+        lottoNumber.add(9);
+        LottoTicket winningTicket = new LottoTicket(winningNumber);
+
+        assertThat(lottoTicket.matchNumberCount(winningTicket)).isEqualTo(3);
+    }
+
+
 }

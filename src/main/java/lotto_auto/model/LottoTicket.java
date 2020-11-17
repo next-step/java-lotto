@@ -19,7 +19,7 @@ public class LottoTicket {
         return null;
     }
 
-    public int matchNumberCount() {
+    public int matchNumberCount(LottoTicket lottoTicket) {
         return -1;
     }
 }
