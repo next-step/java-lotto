@@ -1,7 +1,12 @@
 ## 기능 정리
 - InputView
-    - 로또 구입 금액을 입력하는 기능
-    - 금주의 당첨 번호를 입력하는 기능
+    - public static int payLotto() 로또 구입 금액을 지불하는 기능
+    - public static String createWinningNumber() 금주의 당첨 번호를 입력하는 기능
+- ResultView
+    - public static void showLottoCount(int lottoCount) 사용자가 lotto 를 몇개 구매하였는지 보여주는 기능
+    - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
+    - public static void showWinningStatistics(List<WinningStatistic> WinningStatistics) 당첨 통계를 보여주는 기능
+    - public static void showYield(float yield) 수익률을 보여주는 기능
 - Lotto 로또 판매기
     - 생성자 (로또판매 금액, 한회차 당 생성하는 번호 갯수)
     - ${지불한 돈}만큼 로또를 생성해주는 기능
@@ -12,10 +17,7 @@
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
     - 수익률을 계산해 주는 기능
     
-- ResultView
-    - 사용자가 구매한 로또번호들을 보여주는 기능 
-    - 당첨 통계를 보여주는 기능
-    - 수익률을 보여주는 기능
+
 
 
 ## 기능 요구사항
