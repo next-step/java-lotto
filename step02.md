@@ -8,7 +8,8 @@
     - public static void showWinningStatistics(List<WinningStatistic> WinningStatistics) 당첨 통계를 보여주는 기능
     - public static void showYield(float yield) 수익률을 보여주는 기능
 - LottoPrice 로또 장당 가격
-    - 장당 가격이 1원 이상인지 검사
+    - public static LottoPrice of(int price) 생성자
+    - private static void validate(int price) 장당 가격이 1원 이하이면 예외처리
 - LottoSeller 로또 판매기 
     - 생성자 (로또판매 금액, 한회차 당 생성하는 번호 갯수)
     - ${지불한 돈}만큼 로또를 생성해주는 기능

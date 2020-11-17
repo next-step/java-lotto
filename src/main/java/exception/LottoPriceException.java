@@ -1,7 +1,7 @@
 package exception;
 
 public class LottoPriceException extends IllegalArgumentException {
-    LottoPriceException() {
+    public LottoPriceException() {
         super(ExceptionMessage.LESS_THEN_1_EXCEPTION_MESSAGE);
     }
 }
