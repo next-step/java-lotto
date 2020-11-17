@@ -1,4 +1,5 @@
 import controller.LottoController;
+import domain.LottoNumbers;
 import view.InputView;
 
 public class LottoMain {
@@ -8,8 +9,7 @@ public class LottoMain {
         int price = inputView.inputPrice();
 
         LottoController controller = new LottoController(price);
-        int lottoQuantity = controller.getLottoQuantity();
 
-
+        LottoNumbers lottoNumbers = inputView.inputLastWinningNumber();
     }
 }
