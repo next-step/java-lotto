@@ -35,13 +35,11 @@ public class LotteryResultView extends AbstractView {
     private void printLotteryStatistic(LotteryResult lotteryResult) {
         for (LottoRank lottoRank : lottoRanks) {
 
-            List<Lotto> lottos = lotteryResult.getLottoRankOf(lottoRank);
-
             stringBuilder.append(lottoRank.getMatchingNumberCount());
             stringBuilder.append("개 일치 (");
             stringBuilder.append(lottoRank.getPrizeAmount());
             stringBuilder.append(")- ");
-            stringBuilder.append(lottos.size());
+            stringBuilder.append(lotteryResult.getNumberOfLottoRank(lottoRank));
             stringBuilder.append("개");
 
             printAndClear();

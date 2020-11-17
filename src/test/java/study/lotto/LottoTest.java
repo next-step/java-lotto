@@ -1,27 +1,41 @@
 package study.lotto;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoNumber;
+import study.lotto.core.LottoStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
+    private List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    public void init() {
+        this.lottoNumbers = Arrays.asList(new LottoNumber(1)
+                , new LottoNumber(2)
+                , new LottoNumber(3)
+                , new LottoNumber(4)
+                , new LottoNumber(5)
+                , new LottoNumber(6));
+    }
+
     @Test
     void test_create_success() {
-        // Given
-        List<LottoNumber> lottoNumbers = createLottoNumbers();
-
-        // When
+        // Given & When
         Lotto lotto = new Lotto(lottoNumbers);
 
         // Then
-        // do nothing
+        assertThat(lotto.getLottoStatus()).isEqualTo(LottoStatus.BEFORE_LOTTERY);
+        assertThat(lotto.getLottoRank()).isNull();
     }
 
     @Test
@@ -37,12 +51,4 @@ class LottoTest {
                 }).withMessageMatching("로또 번호는 6개를 입력해주세요.");
     }
 
-    private List<LottoNumber> createLottoNumbers() {
-        return Arrays.asList(new LottoNumber(1)
-                , new LottoNumber(2)
-                , new LottoNumber(3)
-                , new LottoNumber(4)
-                , new LottoNumber(5)
-                , new LottoNumber(6));
-    }
 }

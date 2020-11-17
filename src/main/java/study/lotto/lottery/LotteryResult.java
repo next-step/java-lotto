@@ -3,37 +3,38 @@ package study.lotto.lottery;
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoRank;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class LotteryResult {
 
-    private final Map<LottoRank, List<Lotto>> groupByLottoRank;
+    private final Map<LottoRank, Integer> reduceByLottoRank;
     private final double totalReturnRatio;
 
     public LotteryResult(Map<LottoRank, List<Lotto>> groupByLottoRank, double totalReturnRatio) {
-        this.groupByLottoRank = groupByLottoRank;
+        this.reduceByLottoRank = reduceByLottoRank(groupByLottoRank);
         this.totalReturnRatio = totalReturnRatio;
     }
 
-    public Map<LottoRank, List<Lotto>> getGroupByLottoRank() {
-        return groupByLottoRank;
+    private Map<LottoRank, Integer> reduceByLottoRank(Map<LottoRank, List<Lotto>> groupByLottoRank) {
+        Map<LottoRank, Integer> reduceByLottoRank = new HashMap<>();
+        for (Entry<LottoRank, List<Lotto>> entry : groupByLottoRank.entrySet()) {
+            reduceByLottoRank.put(entry.getKey(), entry.getValue().size());
+        }
+        return reduceByLottoRank;
+    }
+
+    public Map<LottoRank, Integer> reduceByLottoRank() {
+        return reduceByLottoRank;
     }
 
     public double getTotalReturnRatio() {
         return totalReturnRatio;
     }
 
-    public List<Lotto> getLottoRankOf(LottoRank lottoRank) {
-
-        List<Lotto> lottos = groupByLottoRank.get(lottoRank);
-
-        if (Objects.isNull(lottos)) {
-            return new ArrayList<>();
-        }
-
-        return lottos;
+    public Integer getNumberOfLottoRank(LottoRank lottoRank) {
+        Integer numerOfLottoRank = reduceByLottoRank.get(lottoRank);
+        return Objects.nonNull(numerOfLottoRank) ? numerOfLottoRank : 0;
     }
+
 }
