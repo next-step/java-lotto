@@ -19,11 +19,11 @@ class PrizeGradeTest {
 
   static Stream<Arguments> providePrizeGradeMaterial() {
     return Stream.of(
-        Arguments.of(3, false, FIRST_CLASS),
+        Arguments.of(3, false, FIFTH_CLASS),
         Arguments.of(4, false, FOURTH_CLASS),
         Arguments.of(5, false, THIRD_CLASS),
         Arguments.of(5, true, SECOND_CLASS),
-        Arguments.of(6, true, FIRST_CLASS)
+        Arguments.of(6, false, FIRST_CLASS)
     );
   }
 }

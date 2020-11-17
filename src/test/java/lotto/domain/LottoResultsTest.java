@@ -36,7 +36,7 @@ class LottoResultsTest {
         .collect(Collectors.toList());
 
     return Stream.of(
-        Arguments.of(confirmResults, 50000L)
+        Arguments.of(confirmResults, 1500000L)
     );
   }
 
