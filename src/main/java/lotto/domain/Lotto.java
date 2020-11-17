@@ -6,6 +6,7 @@ import lotto.exception.DuplicatedLottoException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Lotto {
@@ -58,5 +59,22 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNos.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNos, lotto.lottoNos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNos);
     }
 }

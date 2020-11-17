@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNo;
-import lotto.domain.LottoNoPool;
-import lotto.domain.Money;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -17,35 +13,29 @@ public class InputView {
         System.out.println(str);
     }
 
-    public static Money askPurchaseMoney() {
-        println("구입금액을 입력해 주세요.");
-        String money = scanner.nextLine();
-        InputValidator.validateNumber(money);
-        return new Money(
-                Integer.parseInt(money)
-        );
-    }
-
-    private static Lotto askLotto() {
+    private static List<Integer> askLotto() {
         String lotto = scanner.nextLine();
         InputValidator.validateNpe(lotto);
-        return new Lotto(
-                Splitter.splitIntegers(lotto, SPLIT_REGEX)
-        );
+        return Splitter.splitIntegers(lotto, SPLIT_REGEX);
     }
 
-    public static Lotto askWinningLotto() {
+    public static List<Integer> askWinningLotto() {
         println("지난 주 당첨 번호를 입력해 주세요.");
         return askLotto();
     }
 
-    public static LottoNo askBonusBall() {
+    public static int askBonusBall() {
         println("보너스 볼을 입력해 주세요.");
         String bonus = scanner.nextLine();
         InputValidator.validateNumber(bonus);
-        return LottoNoPool.getLottoNo(
-                Integer.parseInt(bonus)
-        );
+        return Integer.parseInt(bonus);
+    }
+
+    public static int askPurchaseMoney() {
+        println("구입금액을 입력해 주세요.");
+        String money = scanner.nextLine();
+        InputValidator.validateNumber(money);
+        return Integer.parseInt(money);
     }
 
 }

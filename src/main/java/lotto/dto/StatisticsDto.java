@@ -1,28 +1,29 @@
-package lotto.view;
+package lotto.dto;
 
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 
-class ResultMessage {
-    private ResultMessage() {}
+public class StatisticsDto {
+    private final Result result;
+    private final Money purchaseMoney;
 
-    static String getJackpotStatistics(Result result, Money purchaseMoney) {
+    public StatisticsDto(Result result, Money purchaseMoney) {
+        this.result = result;
+        this.purchaseMoney = purchaseMoney;
+    }
+
+    public String toStatistics() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n---------\n");
         for (Rank rank : Rank.values()) {
             sb.append(getJackpotMsg(rank, result.getNumOfLotto(rank)));
         }
-        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
-        sb.append(getRateOfReturnMsg(rateOfReturn));
+        sb.append("총 수익률은 " + result.getRateOfReturn(purchaseMoney) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         return sb.toString();
     }
 
-    static String getNumOfLottosMsg(int numOfLottos) {
-        return numOfLottos + "개를 구매했습니다.";
-    }
-
-    private static String getJackpotMsg(Rank rank, int numOfCorrected) {
+    private String getJackpotMsg(Rank rank, int numOfCorrected) {
         if (rank == Rank.MISS) {
             return "";
         }
@@ -40,9 +41,5 @@ class ResultMessage {
                 + "원)- "
                 + numOfCorrected
                 + "개\n";
-    }
-
-    private static String getRateOfReturnMsg(double rateOfReturn) {
-        return "총 수익률은 " + rateOfReturn + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
 }
