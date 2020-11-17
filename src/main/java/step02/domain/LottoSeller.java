@@ -3,14 +3,14 @@ package step02.domain;
 import java.util.Objects;
 
 public class LottoSeller {
-    private final int perLottoPrice;
+    private final LottoPrice lottoPrice;
 
-    private LottoSeller(int perLottoPrice) {
-        this.perLottoPrice = perLottoPrice;
+    private LottoSeller(LottoPrice lottoPrice) {
+        this.lottoPrice = lottoPrice;
     }
 
-    public static LottoSeller of(int perLottoPrice) {
-        return new LottoSeller(perLottoPrice);
+    public static LottoSeller of(int lottoPrice) {
+        return new LottoSeller(LottoPrice.of(lottoPrice));
     }
 
     @Override
@@ -18,11 +18,11 @@ public class LottoSeller {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoSeller that = (LottoSeller) o;
-        return perLottoPrice == that.perLottoPrice;
+        return Objects.equals(lottoPrice, that.lottoPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(perLottoPrice);
+        return Objects.hash(lottoPrice);
     }
 }
