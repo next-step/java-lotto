@@ -85,7 +85,9 @@ public class LottoTicket {
     }
 
     public List<Integer> getLottoNumber() {
-        return numbers.stream()
+        final List<LottoNumber> lottoNumbersContainBonusNo = new ArrayList<>(numbers);
+        lottoNumbersContainBonusNo.add(bonusNumber);
+        return lottoNumbersContainBonusNo.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
