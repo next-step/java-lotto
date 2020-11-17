@@ -1,9 +1,6 @@
 package study.lotto.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -11,8 +8,8 @@ public class Lotto {
     public static final int PRICE_PER_LOTTO = 1000;
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    protected final List<LottoNumber> lottoNumbers;
-    protected LottoStatus lottoStatus;
+    private final List<LottoNumber> lottoNumbers;
+    private LottoStatus lottoStatus;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
 
@@ -21,10 +18,17 @@ public class Lotto {
 
         this.lottoStatus = LottoStatus.BEFORE_LOTTERY;
 
+        throwIfNumbersNull();
         throwIfNumberCountNotMatch();
     }
 
-    protected void throwIfNumberCountNotMatch() {
+    private void throwIfNumbersNull() {
+        if (Objects.isNull(lottoNumbers)) {
+            throw new IllegalArgumentException("로또 번호를 입력해주세요.");
+        }
+    }
+
+    private void throwIfNumberCountNotMatch() {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개를 입력해주세요.");
         }
@@ -34,7 +38,7 @@ public class Lotto {
         Collections.sort(lottoNumbers);
     }
 
-    protected boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
@@ -63,5 +67,6 @@ public class Lotto {
 
         return stringBuilder.toString();
     }
+
 
 }
