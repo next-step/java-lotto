@@ -2,6 +2,7 @@ package nextstep.step2.view;
 
 import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoReward;
+import nextstep.step2.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +17,9 @@ public class LottoResultViewTest {
 	@Test
 	@DisplayName("4등 이상을 그룹핑하여 로또개수를 출력한다.")
 	public void printLottoStaticsicTest() {
-		Map<LottoReward, List<Lotto>> lottoRewardListMap = new HashMap<>();
-		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6))));
+		List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = new HashMap<>();
+		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(Arrays.asList(1,2,3,14,15,16)), winningNumbers)));
 		underTest.printLottoStaticsic(lottoRewardListMap);
 	}
 

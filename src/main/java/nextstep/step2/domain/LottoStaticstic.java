@@ -1,6 +1,8 @@
 package nextstep.step2.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,11 +15,13 @@ public class LottoStaticstic {
 		this.purchase = purchase;
 	}
 
-	public Map<LottoReward, List<Lotto>> getLottoRewardMap(List<Lotto> lottoList) {
+	public Map<LottoReward, List<WinningLotto>> getLottoRewardMap(List<Lotto> lottoList) {
 		List<Integer> winnerNumbers = getWinnerNumbers();
-		lottoList.forEach(lotto -> lotto.setLottoReward(winnerNumbers));
-		return lottoList.stream()
-				.collect(Collectors.groupingBy(Lotto::getLottoReward));
+		List<WinningLotto> winningLottos = lottoList.stream()
+				.map(lotto -> new WinningLotto(lotto, winnerNumbers))
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+		return winningLottos.stream()
+				.collect(Collectors.groupingBy(WinningLotto::getLottoReward));
 	}
 
 	protected List<Integer> getWinnerNumbers() {
@@ -26,7 +30,7 @@ public class LottoStaticstic {
 				.collect(Collectors.toList());
 	}
 
-	public float calculateWinningProbability(Map<LottoReward, List<Lotto>> lottoResultMap) {
+	public float calculateWinningProbability(Map<LottoReward, List<WinningLotto>> lottoResultMap) {
 		int totalAmount = lottoResultMap.keySet()
 				.stream()
 				.map(reward -> reward.getPrice() * lottoResultMap.get(reward).size())
