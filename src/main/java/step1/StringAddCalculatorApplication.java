@@ -1,10 +1,13 @@
 package step1;
 
+import step1.controller.StringAddCalculatorController;
+import step1.view.StringAddCalculatorUi;
+
 public class StringAddCalculatorApplication {
 
     public static void main(String[] args) {
-        StringAddCalculator addCalculator = new StringAddCalculator();
-        int result = addCalculator.splitAndSum("1,2,3");
-        System.out.println(result);
+        String expression = StringAddCalculatorUi.inputExpression();
+        StringAddCalculatorController addCalculator = StringAddCalculatorController.of(expression);
+        StringAddCalculatorUi.resultPrint(addCalculator.getSum());
     }
 }
