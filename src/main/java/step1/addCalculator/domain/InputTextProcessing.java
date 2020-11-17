@@ -1,5 +1,6 @@
 package step1.addCalculator.domain;
 
+import step1.addCalculator.util.CommonValueCheck;
 import step1.addCalculator.util.ErrorMessage;
 
 import java.util.ArrayList;
@@ -61,38 +62,12 @@ public class InputTextProcessing {
     private List<Integer> changeStrToint(List<String> paramList) {
         List<Integer> returnList = new ArrayList<>();
 
-        try {
-            for (String str : paramList) {
-                returnList.add(valueCheck(str));
-            }
-
-            return returnList;
-        } catch (NumberFormatException e) {
-            System.out.println(e.toString() + " : " + ErrorMessage.getNUMBERFORMATEXCEPTION());
+        for (String str : paramList) {
+            returnList.add(CommonValueCheck.valueCheck(str));
         }
 
         return returnList;
     }
 
-    private Integer valueCheck(String paramValue) {
-        return isNegative(isNumber(paramValue));
-    }
 
-    private Integer isNegative(Integer paramValue) {
-        if (paramValue < 0) {
-            throw new RuntimeException(ErrorMessage.getNEGATIVEEXCEPTION());
-        }
-
-        return paramValue;
-    }
-
-    private Integer isNumber(String paramValue) {
-        try {
-            return Integer.parseInt(paramValue);
-        } catch (NumberFormatException e) {
-            System.out.println(e.toString() + " : " + ErrorMessage.getNUMBERFORMATEXCEPTION());
-        }
-
-        return Integer.parseInt(paramValue);
-    }
 }
