@@ -25,8 +25,8 @@ public class LottoController {
 	private List<Lotto> printAutoLottoTicketsAndLottos(LottoPurchase purchase) {
 		int lottoCount = purchase.getLottoCount();
 		List<Lotto> lottoList = purchaseLottos(lottoCount);
-		LottoTicketView lottoTicketView = new LottoTicketView(lottoList);
-		lottoTicketView.printLottoTickets();
+		LottoTicketView lottoTicketView = new LottoTicketView();
+		lottoTicketView.printLottoTickets(lottoList);
 		return lottoList;
 	}
 
