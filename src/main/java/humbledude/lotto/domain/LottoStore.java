@@ -9,16 +9,6 @@ public class LottoStore {
     public static final long LOTTO_TICKET_PRICE = 1000;
 
     private LottoWinningNumbers winningNumbers;
-    private static final Map<Integer, LottoPrize> prizeMap;
-
-    static {
-        prizeMap = new HashMap<Integer, LottoPrize>() {{
-            put(LottoPrize.FIRST.getMatchedCount(), LottoPrize.FIRST);
-            put(LottoPrize.SECOND.getMatchedCount(), LottoPrize.SECOND);
-            put(LottoPrize.THIRD.getMatchedCount(), LottoPrize.THIRD);
-            put(LottoPrize.FOURTH.getMatchedCount(), LottoPrize.FOURTH);
-        }};
-    }
 
     public LottoStore() {}
 
@@ -44,9 +34,6 @@ public class LottoStore {
         }
 
         int matchedCount = winningNumbers.getMatchedCountWith(ticket);
-        if (prizeMap.containsKey(matchedCount)) {
-            return prizeMap.get(matchedCount);
-        }
-        return LottoPrize.BLANK;
+        return LottoPrize.of(matchedCount);
     }
 }
