@@ -16,14 +16,14 @@ public class LottoSeller {
         return new LottoSeller(LottoPrice.of(lottoPrice));
     }
 
-
-    public List<Lotto> generateLottos(int payment, LottoNumbers lottoNumbers) {
+    public Lottos generateLottos(int payment, LottoNumbers lottoNumbers) {
         int lottoCount = lottoPrice.calculateLottoCount(payment);
-
-        return Stream.iterate(0, n -> n + 1)
+        List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
                 .limit(lottoCount)
                 .map(key -> lottoNumbers.generateLotto())
                 .collect(Collectors.toList());
+
+        return Lottos.of(lottos);
     }
 
     @Override

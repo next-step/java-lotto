@@ -16,12 +16,12 @@
 - Lotto 
     - public static Lotto of(List<Integer> lotto)
 - Lottos
-    
+    - public static Lottos of(List<Lotto> lottos)
 - LottoSeller 로또 판매기 
-    - 생성자 (int lottoPrice)
-    - 6개의 랜덤번호 로또를 생성하는 기능 [8, 21, 23, 41, 42, 43]
-    - 지불받은 만큼 로또를 생성해주는 기능
-- Lotto 정산기
+    - private LottoSeller(LottoPrice lottoPrice)
+    - public static LottoSeller of(int lottoPrice)
+    - public Lottos generateLottos(int payment, LottoNumbers lottoNumbers)
+- WinningStatistic 정산기
     - 생성자 (금주의 당첨 번호)
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
     - 수익률을 계산해 주는 기능

@@ -13,7 +13,7 @@ public class LottosTest {
     @DisplayName("생성자 테스트")
     @Test
     public void test_Lottos_Constructor() {
-        List<Lotto> lottos = new ArrayList<Lotto>(
+        List<Lotto> lottos = new ArrayList<>(
                 Arrays.asList(
                         Lotto.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
                         Lotto.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
@@ -22,4 +22,6 @@ public class LottosTest {
         );
         assertThat(Lottos.of(lottos)).isEqualTo(Lottos.of(lottos));
     }
+
+
 }
