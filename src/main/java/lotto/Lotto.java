@@ -1,6 +1,13 @@
 package lotto;
 
-import java.util.function.IntFunction;
+import java.util.List;
 
 public class Lotto {
+
+    private LottoNumber numbers;
+
+    public Lotto(LottoNumber number){
+        this.numbers = numbers;
+    }
+
 }

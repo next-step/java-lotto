@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
+    private LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.simple();
+
     public List<Lotto> issue(int money) {
 
         int howManyLottosCanIBuy = money / 1000;
@@ -16,7 +18,8 @@ public class LottoMachine {
     }
 
     private Lotto generateLotto(){
-        return new Lotto();
+        return new Lotto(lottoNumberGenerator.generate());
     }
+
 
 }
