@@ -1,7 +1,7 @@
 package lotto;
 
-import static lotto.LottoConstant.MAXIMUM_LOTTO_NUMBER;
-import static lotto.LottoConstant.MINIMUM_LOTTO_NUMBER;
+import static lotto.LottoGameConstant.MAXIMUM_LOTTO_NUMBER;
+import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 
 import java.util.Objects;
 import lotto.lottoexception.IllegalLottoNumberRange;
