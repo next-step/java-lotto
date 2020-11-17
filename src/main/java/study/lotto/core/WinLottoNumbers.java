@@ -1,29 +1,27 @@
 package study.lotto.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 로또 당첨 번호
  */
-public class WinLottoNumbers extends Lotto {
+public class WinLottoNumbers {
 
-    public WinLottoNumbers(List<LottoNumber> lottoNumbers) {
-        super(lottoNumbers);
+    private List<LottoNumber> winLottoNumbers = new ArrayList<>();
+
+    public WinLottoNumbers(List<LottoNumber> winLottoNumbers) {
+        this.winLottoNumbers = winLottoNumbers;
     }
 
-    public void match(Lotto lotto) {
-
-        if (lotto.lottoStatus == LottoStatus.HAS_BEEN_LOTTERY) {
-            throw new IllegalArgumentException("이미 추첨한 로또입니다.");
-        }
-        
+    public List<LottoNumber> match(Lotto lotto) {
+        List<LottoNumber> matchingLottoNumbers = new ArrayList<>();
         // 일치하는 번호 추가
-        this.lottoNumbers.stream()
+        this.winLottoNumbers.stream()
                 .filter(lotto::contains)
-                .forEach(lotto::addMatchingNumber);
+                .forEach(matchingLottoNumbers::add);
 
-        // 로또 상태 변경
-        lotto.lottery();
+        return matchingLottoNumbers;
     }
 
 }

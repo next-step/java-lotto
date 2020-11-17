@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import study.lotto.dispenser.Lottos;
 import study.lotto.lottery.Lottery;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,11 +30,10 @@ class LottoRankTest {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers);
-        Lottery lottery = new Lottery(winLottoNumbers, new Lottos(Arrays.asList(lotto)));
-        lottery.checkLotto();
+        WinningLotto lottery = lotto.lottery(winLottoNumbers);
 
         // When
-        LottoRank lottoRank = LottoRank.of(lotto);
+        LottoRank lottoRank = LottoRank.of(lottery);
 
         // Then
         assertEquals(lottoRank, LottoRank.FIRST);
@@ -42,10 +42,10 @@ class LottoRankTest {
     @Test
     void test_of_none() {
         // Given
-        Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(new ArrayList<>());
 
         // When
-        LottoRank lottoRank = LottoRank.of(lotto);
+        LottoRank lottoRank = LottoRank.of(winningLotto);
 
         // Then
         assertEquals(lottoRank, LottoRank.NONE);

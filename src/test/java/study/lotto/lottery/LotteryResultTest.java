@@ -41,9 +41,9 @@ class LotteryResultTest {
         LotteryResult lotteryResult = lottery.checkLotto();
 
         // Then
-        Integer numberOfLottoRank = lotteryResult.getNumberOfLottoRank(LottoRank.FIRST);
+        Long numberOfLottoRank = lotteryResult.getNumberOfLottoRank(LottoRank.FIRST);
         double totalReturnRatio = lotteryResult.getTotalReturnRatio();
-        assertThat(numberOfLottoRank).isEqualTo(1);
+        assertThat(numberOfLottoRank).isEqualTo(1L);
         assertThat(totalReturnRatio > 1.0).isTrue();
     }
 

@@ -35,7 +35,6 @@ class LottoTest {
 
         // Then
         assertThat(lotto.getLottoStatus()).isEqualTo(LottoStatus.BEFORE_LOTTERY);
-        assertThat(lotto.getLottoRank()).isNull();
     }
 
     @Test

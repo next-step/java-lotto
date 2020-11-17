@@ -29,16 +29,4 @@ public class Lottos implements Iterable<Lotto> {
         return this.getTotalCount() * Lotto.PRICE_PER_LOTTO;
     }
 
-    public int getTotalPrizeAmount() {
-        return lottos.stream()
-                .map(Lotto::getLottoRank)
-                .mapToInt(LottoRank::getPrizeAmount)
-                .sum();
-    }
-
-    public Map<LottoRank, List<Lotto>> groupByLottoRank() {
-        return lottos.stream()
-                .collect(Collectors.groupingBy(Lotto::getLottoRank));
-    }
-
 }

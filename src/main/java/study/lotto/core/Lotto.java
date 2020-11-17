@@ -3,6 +3,7 @@ package study.lotto.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,8 +13,6 @@ public class Lotto {
 
     protected final List<LottoNumber> lottoNumbers;
     protected LottoStatus lottoStatus;
-    protected List<LottoNumber> matchingNumbers = new ArrayList<>();
-    protected LottoRank lottoRank;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
 
@@ -35,33 +34,18 @@ public class Lotto {
         Collections.sort(lottoNumbers);
     }
 
-    public LottoStatus getLottoStatus() {
-        return lottoStatus;
-    }
-
-    public LottoRank getLottoRank() {
-        return lottoRank;
-    }
-
     protected boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    protected void addMatchingNumber(LottoNumber lottoNumber) {
-        matchingNumbers.add(lottoNumber);
-    }
+    public WinningLotto lottery(WinLottoNumbers winLottoNumbers) {
 
-    public int getMatchingNumberCount() {
-        return this.matchingNumbers.size();
-    }
+        if (this.lottoStatus == LottoStatus.HAS_BEEN_LOTTERY) {
+            throw new IllegalArgumentException("이미 추첨한 로또입니다.");
+        }
 
-    protected void lottery() {
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
-        checkRank();
-    }
-
-    private void checkRank() {
-        this.lottoRank = LottoRank.of(this);
+        return new WinningLotto(winLottoNumbers.match(this));
     }
 
     @Override
@@ -79,4 +63,5 @@ public class Lotto {
 
         return stringBuilder.toString();
     }
+
 }

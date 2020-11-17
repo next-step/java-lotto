@@ -31,16 +31,15 @@ class LotteryTest {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers);
-        Lottery lottery = new Lottery(winLottoNumbers, new Lottos(Arrays.asList(lotto)));
 
         // When
-        lottery.checkLotto();
+        WinningLotto lottery = lotto.lottery(winLottoNumbers);
 
         // Then
-        int matchingNumberCount = lotto.getMatchingNumberCount();
+        int matchingNumberCount = lottery.getMatchingNumberCount();
 
         assertEquals(matchingNumberCount, 6);
-        assertEquals(lotto.getLottoRank(), LottoRank.FIRST);
+        assertEquals(lottery.getLottoRank(), LottoRank.FIRST);
         assertEquals(lotto.getLottoStatus(), LottoStatus.HAS_BEEN_LOTTERY);
     }
 
