@@ -1,5 +1,6 @@
 package study.lotto.core;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -19,7 +20,7 @@ public enum LottoRank {
     }
 
     public Integer getMatchingNumberCount() {
-        return matchingNumberCount;
+        return Objects.nonNull(matchingNumberCount) ? matchingNumberCount : 0;
     }
 
     public Integer getPrizeAmount() {

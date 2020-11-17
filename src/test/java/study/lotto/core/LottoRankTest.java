@@ -1,17 +1,16 @@
-package study.lotto.lottery;
+package study.lotto.core;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.core.*;
 import study.lotto.dispenser.Lottos;
+import study.lotto.lottery.Lottery;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LotteryTest {
+class LottoRankTest {
 
     private List<LottoNumber> lottoNumbers;
 
@@ -26,22 +25,30 @@ class LotteryTest {
     }
 
     @Test
-    @DisplayName("1등 당첨")
-    void test_lottery_first() {
+    void test_of_first() {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers);
         Lottery lottery = new Lottery(winLottoNumbers, new Lottos(Arrays.asList(lotto)));
-
-        // When
         lottery.checkLotto();
 
-        // Then
-        int matchingNumberCount = lotto.getMatchingNumberCount();
+        // When
+        LottoRank lottoRank = LottoRank.of(lotto);
 
-        assertEquals(matchingNumberCount, 6);
-        assertEquals(lotto.getLottoRank(), LottoRank.FIRST);
-        assertEquals(lotto.getLottoStatus(), LottoStatus.HAS_BEEN_LOTTERY);
+        // Then
+        assertEquals(lottoRank, LottoRank.FIRST);
+    }
+
+    @Test
+    void test_of_none() {
+        // Given
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // When
+        LottoRank lottoRank = LottoRank.of(lotto);
+
+        // Then
+        assertEquals(lottoRank, LottoRank.NONE);
     }
 
 }
