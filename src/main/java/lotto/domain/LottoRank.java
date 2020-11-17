@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.MessageUtils;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -14,8 +12,6 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
     NONE(0, 0);
 
     private static final Map<Integer, LottoRank> RANK_MATCH_COUNT_MAP = Collections.unmodifiableMap(
@@ -32,7 +28,7 @@ public enum LottoRank {
 
     public static LottoRank of(int count) {
         if (Objects.isNull(RANK_MATCH_COUNT_MAP.get(count))) {
-            throw new IllegalArgumentException(MessageUtils.LOTTO_RANK_ILLEGAL_MATCH_COUNT);
+            return LottoRank.NONE;
         }
         return RANK_MATCH_COUNT_MAP.get(count);
     }
