@@ -5,15 +5,15 @@ import lotto.domain.Lotto;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoResult {
+public class MyLotto {
     private final Set<Integer> lotto;
 
-    private LottoResult(Set<Integer> lotto) {
+    private MyLotto(Set<Integer> lotto) {
         this.lotto = lotto;
     }
 
-    public static LottoResult of(Lotto lotto) {
-        return new LottoResult(lotto.getLotto());
+    public static MyLotto of(Lotto lotto) {
+        return new MyLotto(lotto.getLotto());
     }
 
     @Override

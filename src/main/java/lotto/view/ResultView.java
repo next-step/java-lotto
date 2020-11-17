@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.dto.LottoResult;
+import lotto.dto.MyLotto;
 import lotto.dto.LottoStatistics;
-import lotto.dto.LottosResult;
+import lotto.dto.MyLottos;
 
 public class ResultView {
 
@@ -12,11 +12,11 @@ public class ResultView {
     private static final String OUTPUT_FORMAT_STATISTICS_PROFIT = "총 수익률은 %.2f입니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계";
 
-    public static void outputBuyLotto(OuputChannel outputChnnel, LottosResult lottosResult) {
-        outputChnnel.out(String.format(OUTPUT_FORMAT_BUY_LOTTO_COUNT, lottosResult.size()));
+    public static void outputBuyLotto(OuputChannel outputChnnel, MyLottos myLottos) {
+        outputChnnel.out(String.format(OUTPUT_FORMAT_BUY_LOTTO_COUNT, myLottos.size()));
 
-        for (LottoResult lottoResult : lottosResult.getLottosResult()) {
-            outputChnnel.out(lottoResult.toString());
+        for (MyLotto myLotto : myLottos.getLottosResult()) {
+            outputChnnel.out(myLotto.toString());
         }
         outputChnnel.out(LOTTO_TREM);
     }
