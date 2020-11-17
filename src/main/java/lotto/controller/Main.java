@@ -1,19 +1,13 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LottosDto;
-import lotto.dto.MoneyDto;
-import lotto.dto.StatisticsDto;
-import lotto.dto.WinningConditionDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+// TODO: DTO 만들어서 inputView 와 도메인 연결하기
 public class Main {
     public static void main(String[] args) {
-
-        Money purchaseMoney = MoneyDto.of(
-                InputView.askPurchaseMoney()
-        ).toEntity();
+        Money purchaseMoney = InputView.askPurchaseMoney();
         int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
         ResultView.printNumOfLottos(numOfLottos);
 
@@ -21,17 +15,14 @@ public class Main {
         Lottos lottos = new Lottos(numOfLottos, () -> new Lotto(
                 shuffler.getIntegers(Lotto.SIZE)
         ));
-        ResultView.printLottos(new LottosDto(lottos));
+        ResultView.printLottos(lottos);
 
-        WinningCondition condition = new WinningConditionDto.Builder()
-                .winningLotto(InputView.askWinningLotto())
-                .bonus(InputView.askBonusBall())
-                .build()
-                .toEntity();
-
-        ResultView.printStatistics(
-                new StatisticsDto(lottos.getResult(condition),
-                        purchaseMoney)
+        WinningCondition condition = new WinningCondition(
+                InputView.askWinningLotto(),
+                InputView.askBonusBall()
         );
+
+        Result result = lottos.getResult(condition);
+        ResultView.printStatistics(result, purchaseMoney);
     }
 }
