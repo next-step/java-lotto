@@ -28,15 +28,7 @@ public class LottoController {
     }
 
     public void ticketing() {
-        int useAmount = inputView.getUseAmount();
-
-        int manualSize = inputView.getManualTicketSize();
-        List<String> manualNumbers = inputView.getManualNumbers(manualSize);
-
-        LottoPurchaseInfoDTO infoDTO = new LottoPurchaseInfoDTO.Builder(useAmount)
-                .inputManualNumbers(manualNumbers)
-                .manualSize(manualSize)
-                .build();
+        LottoPurchaseInfoDTO infoDTO = inputView.getPurchaseInfo();
 
         LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO, new LottoNumberMakeStrategy());
         resultView.drawTicket(tickets);

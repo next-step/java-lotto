@@ -1,6 +1,7 @@
 package step4.view;
 
 import step4.domain.lotto.WinningNumbers;
+import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +60,22 @@ public class LottoInputView implements InputView {
 
         return IntStream.range(0, manualSize)
                 .mapToObj(index -> {
-                    System.out.printf((ALERT_MANUAL_PROGRESS) + "%n", (index+1), manualSize);
+                    System.out.printf((ALERT_MANUAL_PROGRESS) + "%n", (index + 1), manualSize);
                     return scanner.nextLine();
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public LottoPurchaseInfoDTO getPurchaseInfo() {
+        int useAmount = getUseAmount();
+        int manualSize = getManualTicketSize();
+        List<String> manualNumbers = getManualNumbers(manualSize);
+
+        return new LottoPurchaseInfoDTO.Builder(useAmount)
+                .inputManualNumbers(manualNumbers)
+                .manualSize(manualSize)
+                .build();
     }
 
     private void clearScanner() {
