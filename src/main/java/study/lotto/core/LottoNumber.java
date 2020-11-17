@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
 
-    private final Integer value;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private final int value;
 
     public LottoNumber(int value) {
-        if (value < 1 || value > 45) {
+        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 - 45사이의 숫자만 가능합니다.");
         }
 
@@ -29,11 +31,11 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return this.value.compareTo(lottoNumber.value);
+        return value - lottoNumber.value;
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return String.valueOf(value);
     }
 }

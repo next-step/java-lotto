@@ -12,11 +12,11 @@ class LottoNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1", "2", "3", "45"}, delimiter = ',')
     void test_create_success(int source) {
-        // When
+        // Given
         LottoNumber lottoNumber = new LottoNumber(source);
 
-        // Then
-        // nothing happens..
+        // When & Then
+        assertEquals(lottoNumber, new LottoNumber(source));
     }
 
     @ParameterizedTest
