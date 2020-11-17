@@ -1,13 +1,14 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class Result {
     private final Map<Rank, Integer> result;
 
-    Result(Map<Rank, Integer> result) {
-        this.result = result;
+    Result() {
+        result = new HashMap<>();
     }
 
     public double getRateOfReturn(Money purchaseMoney) {
@@ -26,6 +27,14 @@ public class Result {
         return result.getOrDefault(
                 rank,
                 0
+        );
+    }
+
+    public void increaseNumOfLotto(WinningCondition condition, Lotto lotto) {
+        Rank rank = condition.getRank(lotto);
+        result.put(
+                rank,
+                getNumOfLotto(rank) + 1
         );
     }
 

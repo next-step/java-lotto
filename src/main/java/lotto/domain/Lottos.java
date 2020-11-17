@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 // NOTE: Lotto 의 일급 컬렉션
@@ -18,12 +16,11 @@ public class Lottos {
     }
 
     public Result getResult(WinningCondition condition) {
-        Map<Rank, Integer> result = new HashMap<>();
+        Result result = new Result();
         for (Lotto lotto : lottos) {
-            Rank rank = condition.getRank(lotto);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
+            result.increaseNumOfLotto(condition, lotto);
         }
-        return new Result(result);
+        return result;
     }
 
     @Override

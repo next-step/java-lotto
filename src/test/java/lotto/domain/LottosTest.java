@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-    private final Supplier<Lotto> dummySupplier = () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private final Lotto dummyLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private final Supplier<Lotto> dummySupplier = () -> dummyLotto;
 
     @Test
     void testToString() {
@@ -39,8 +40,12 @@ class LottosTest {
         result.put(Rank.FIFTH, numOfLottos);
         WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
+        Result expected = new Result();
+        for (int i = 0; i < numOfLottos; i++) {
+            expected.increaseNumOfLotto(condition, dummyLotto);
+        }
         assertThat(lottos.getResult(condition))
-                .isEqualTo(new Result(result));
+                .isEqualTo(expected);
     }
 
     @Test
@@ -57,8 +62,12 @@ class LottosTest {
         result.put(Rank.THIRD, numOfLottos);
         WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
+        Result expected = new Result();
+        for (int i = 0; i < numOfLottos; i++) {
+            expected.increaseNumOfLotto(condition, dummyLotto);
+        }
         assertThat(lottos.getResult(condition))
-                .isEqualTo(new Result(result));
+                .isEqualTo(expected);
     }
 
     @Test
@@ -75,7 +84,11 @@ class LottosTest {
         result.put(Rank.SECOND, numOfLottos);
         WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
+        Result expected = new Result();
+        for (int i = 0; i < numOfLottos; i++) {
+            expected.increaseNumOfLotto(condition, dummyLotto);
+        }
         assertThat(lottos.getResult(condition))
-                .isEqualTo(new Result(result));
+                .isEqualTo(expected);
     }
 }
