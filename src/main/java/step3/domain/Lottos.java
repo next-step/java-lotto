@@ -18,9 +18,9 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> matchLastWeekLotto(List<Integer> lastWeekLottoNums) {
+    public List<LottoRank> matchLastWeekLotto(LastWeekLotto lastWeekLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.matchLottoNumbers(lastWeekLottoNums))
+                .map(lastWeekLotto::getRanking)
                 .collect(Collectors.toList());
     }
 
