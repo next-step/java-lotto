@@ -20,7 +20,7 @@ public class LottoStaticsticTest {
 
 	@BeforeEach
 	public void before() {
-		lottoPurchase = new LottoPurchase(10000);
+		lottoPurchase = new LottoPurchase(10_000);
 		winnerNumbers = "1,2,3,4,5,6";
 		lottoStaticstic = new LottoStaticstic(winnerNumbers, lottoPurchase);
 	}

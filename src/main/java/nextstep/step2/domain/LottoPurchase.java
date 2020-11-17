@@ -1,7 +1,7 @@
 package nextstep.step2.domain;
 
 public class LottoPurchase {
-	public static int LOTTO_PRICE = 1000;
+	public static int LOTTO_PRICE = 1_000;
 	private int money;
 
 	public LottoPurchase(int money) {

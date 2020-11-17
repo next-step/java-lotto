@@ -15,7 +15,7 @@ public class LottoControllerTest {
 	@Test
 	@DisplayName("로또를 사고 지난주 당첨번호로 당첨통계를 구한다.")
 	public void startLottoGameTest() {
-		LottoPurchase lottoPurchase = new LottoPurchase(10000);
+		LottoPurchase lottoPurchase = new LottoPurchase(1_000);
 		LottoResultView resultView = new LottoResultView();
 		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoPurchase, resultView);
 		underTest.printLottoStaticsic("1,2,3,4,5,6", lottoPurchase, autoLottos, resultView);
