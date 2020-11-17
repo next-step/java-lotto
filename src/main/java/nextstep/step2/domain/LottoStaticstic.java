@@ -28,15 +28,15 @@ public class LottoStaticstic {
 
 
 	protected List<Integer> getWinnerNumbers() {
-		validateLastWinnerNumbers(winnerNumbers);
-		return Stream.of(winnerNumbers.replaceAll(" ", "").split(","))
+		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
+		validateLastWinnerNumbers(winningNumberSplit);
+		return Stream.of(winningNumberSplit)
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 	}
 
-	protected void validateLastWinnerNumbers(String winnerNumbers) {
-		String[] numbers = winnerNumbers.replaceAll(" ","").split(",");
-		boolean isDigit = Arrays.stream(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
+	protected void validateLastWinnerNumbers(String[] numbers) {
+		boolean isDigit = Stream.of(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
 		if (!isDigit) {
 			throw new IllegalArgumentException(WRONG_WINNER_NUMBERS);
 		}

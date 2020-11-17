@@ -44,14 +44,17 @@ public class LottoStaticsticTest {
 	@DisplayName("지난주 로또 당첨번호는 숫자여야 한다")
 	public void inputWrongLastLottoNumberTest() {
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> lottoStaticstic.validateLastWinnerNumbers("1,2,3,a,b,c"))
+				.isThrownBy(() -> lottoStaticstic.validateLastWinnerNumbers("1,2,3,a,b,c".split(",")))
 				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
 	}
 
 	@Test
 	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
 	public void inpuLastLottoNumberTest() {
-		lottoStaticstic.validateLastWinnerNumbers("1,2,3,4, 5,  6");
+		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4, 5,  6", new LottoPurchase(1_000));
+		List<Integer> numbers = lottoStaticstic.getWinnerNumbers();
+		assertTrue(numbers.contains(5));
+		assertTrue(numbers.contains(6));
 	}
 
 	private List<Lotto> mockLottoList(int lottoCount, Set<Integer> numbers) {
