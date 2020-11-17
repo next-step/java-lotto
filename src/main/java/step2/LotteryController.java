@@ -21,11 +21,8 @@ class LotteryController {
         resultView.responseTicketAndCount(lotteryTickets);
 
         LotteryNumber lastWeekLotteryNumber = inputView.requestLastWeekLotteryNumber();
-        LotteryResult lotteryResult = newWinningNumber(lastWeekLotteryNumber).match(lotteryTickets);
+        Integer bonusNumber = inputView.requestBonusNumber();
+        LotteryResult lotteryResult = new WinningNumber(lastWeekLotteryNumber, bonusNumber).match(lotteryTickets);
         resultView.responseLotteryResult(lotteryResult);
-    }
-
-    private WinningNumber newWinningNumber(LotteryNumber lotteryNumber) {
-        return new WinningNumber(lotteryNumber);
     }
 }

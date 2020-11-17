@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static step2.domain.Playslip.SELECTION_COUNT;
+
 public class LotteryNumber {
     public static LotteryNumber of(Integer... numbers) {
         return new LotteryNumber(new HashSet<>(Arrays.asList(numbers)));
@@ -13,14 +15,10 @@ public class LotteryNumber {
     private final Set<Integer> numbers;
 
     public LotteryNumber(Set<Integer> numbers) {
-        this.numbers = Collections.unmodifiableSet(numbers);
-        if (numbers.size() != 6) {
+        if (numbers.size() != SELECTION_COUNT) {
             throw new NotEnoughNumberException();
         }
-    }
-
-    public Set<Integer> getNumbers() {
-        return numbers;
+        this.numbers = Collections.unmodifiableSet(numbers);
     }
 
     public int getMatched(LotteryNumber other) {
@@ -32,5 +30,9 @@ public class LotteryNumber {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public boolean contains(Integer bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }

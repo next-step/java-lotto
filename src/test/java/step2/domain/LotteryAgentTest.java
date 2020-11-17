@@ -54,7 +54,7 @@ public class LotteryAgentTest {
     @Test
     void ticketHasNumbers() {
         LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(1000)).getLotteryTickets();
-        List<LotteryNumber> numbers = lotteryTickets.getNumbers();
+        List<LotteryNumber> numbers = lotteryTickets.getTicketNumbers();
         assertThat(numbers.get(0)).isInstanceOf(LotteryNumber.class);
     }
 

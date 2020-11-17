@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static step2.domain.LotteryAgent.PRICE_LOTTERY;
 
@@ -9,12 +10,8 @@ public class LotteryResult {
 
     private final Map<Rank, Integer> result = new HashMap<>();
 
-    public void add(int matchCount) {
-        if (matchCount < 0) {
-            throw new OutOfMatchingBoundaryException();
-        }
-
-        result.compute(Rank.valueFrom(matchCount), this::addOrDefault);
+    public void add(Rank rank) {
+        result.compute(rank, this::addOrDefault);
     }
 
     private Integer addOrDefault(Rank rank, Integer value) {
@@ -29,13 +26,12 @@ public class LotteryResult {
     }
 
     public float getRateOfReturn() {
-        Money totalAmount = result.values() //
-                .stream() //
-                .map(PRICE_LOTTERY::multiply) //
-                .reduce(Money::add) //
-                .orElse(Money.of(0));
+        return getTotalAmount().map(this::calculateRate) //
+                .orElse(0f);
+    }
 
-        Money returnAmount = result.entrySet() //
+    private Money getReturnAmount() {
+        return result.entrySet() //
                 .stream() //
                 .map(entry -> { //
                     Rank rank = entry.getKey();
@@ -43,7 +39,16 @@ public class LotteryResult {
                     return rank.getPrizeAmount().multiply(count);
                 }).reduce(Money::add) //
                 .orElse(Money.of(0));
+    }
 
-        return (float) returnAmount.toInt() / totalAmount.toInt();
+    private Optional<Money> getTotalAmount() {
+        return result.values() //
+                .stream() //
+                .map(PRICE_LOTTERY::multiply) //
+                .reduce(Money::add);
+    }
+
+    private float calculateRate(Money totalAmount) {
+        return (float) getReturnAmount().toInt() / totalAmount.toInt();
     }
 }

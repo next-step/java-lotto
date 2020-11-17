@@ -21,6 +21,12 @@ public class InputView {
         return LotteryNumber.of(lastWeekLotteryNumber);
     }
 
+    public Integer requestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
     public static Integer[] splitAndConvertToIntArray(String line) {
         return Arrays.stream(line.split(",")) //
                 .map(String::trim) //

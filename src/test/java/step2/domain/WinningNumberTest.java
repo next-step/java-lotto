@@ -22,7 +22,7 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6));
+        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
     }
 
     @DisplayName("match 결과를 받을 수 있다.")
@@ -58,12 +58,20 @@ public class WinningNumberTest {
         assertThat(lotteryResult.getMatchResult(rank)).isEqualTo(2);
     }
 
+    @DisplayName("2등은 보너스 넘버가 같을때이다")
+    @Test
+    void secondaryPrize() {
+        winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
+        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
+        assertThat(lotteryResult.getMatchResult(SECOND)).isEqualTo(1);
+    }
+
     private static Stream<Arguments> matchingCountProvider() {
         //@formatter:off
         return Stream.of(
-                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), FORTH),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), THIRD),
-                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), SECOND),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 14, 15, 16), FIFTH),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 15, 16), FORTH),
+                Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 16), THIRD),
                 Arguments.of(LotteryNumber.of(1, 2, 3, 4, 5, 6), FIRST)
         );
         //@formatter:on
