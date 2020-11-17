@@ -2,6 +2,8 @@ package study.lotto;
 
 import study.lotto.core.Lotto;
 import study.lotto.core.WinLottoNumbers;
+import study.lotto.dispenser.LottoDispenser;
+import study.lotto.dispenser.Lottos;
 import study.lotto.lottery.Lottery;
 import study.lotto.lottery.LotteryResult;
 import study.lotto.view.input.PurchaseInputView;
@@ -24,7 +26,7 @@ public class LottoController {
 
         // 구매
         PurchaseAmount purchaseAmount = purchaseInputView.display();
-        List<Lotto> lottos = lottoDispenser.auto(purchaseAmount.numberOfPurchases());
+        Lottos lottos = lottoDispenser.auto(purchaseAmount.numberOfPurchases());
         
         // 구매한 로또 출력 
         lottoPurchaseResultView.display(lottos);

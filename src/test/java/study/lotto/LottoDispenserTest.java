@@ -3,6 +3,8 @@ package study.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.Lotto;
+import study.lotto.dispenser.LottoDispenser;
+import study.lotto.dispenser.Lottos;
 
 import java.util.List;
 
@@ -17,10 +19,9 @@ class LottoDispenserTest {
         LottoDispenser lottoDispenser = LottoDispenser.getInstance();
 
         // When
-        List<Lotto> lottos = lottoDispenser.auto(10);
+        Lottos lottos = lottoDispenser.auto(10);
 
         // Then
-        assertEquals(lottos.size(), 10);
-        lottos.stream().forEach(System.out::println);
+        assertEquals(lottos.getTotalCount(), 10);
     }
 }

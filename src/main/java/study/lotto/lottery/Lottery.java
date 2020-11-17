@@ -4,6 +4,7 @@ import study.lotto.core.Lotto;
 import study.lotto.core.LottoNumber;
 import study.lotto.core.LottoRank;
 import study.lotto.core.WinLottoNumbers;
+import study.lotto.dispenser.Lottos;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +15,9 @@ import java.util.stream.Collectors;
 public class Lottery {
 
     private final WinLottoNumbers winLottoNumbers;
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
 
-    public Lottery(WinLottoNumbers winLottoNumbers, List<Lotto> lottos) {
+    public Lottery(WinLottoNumbers winLottoNumbers, Lottos lottos) {
         this.winLottoNumbers = winLottoNumbers;
         this.lottos = lottos;
     }
@@ -31,22 +32,14 @@ public class Lottery {
     }
 
     private Map<LottoRank, List<Lotto>> groupByLottoRank() {
-        Map<LottoRank, List<Lotto>> groupByLottoRank = lottos.stream()
-                .collect(Collectors.groupingBy(Lotto::getLottoRank));
-
+        Map<LottoRank, List<Lotto>> groupByLottoRank = lottos.groupByLottoRank();
         groupByLottoRank.remove(LottoRank.NONE);
-
         return groupByLottoRank;
     }
 
     private double calcTotalReturnRatio() {
-        int totalPrizeAmount = lottos.stream()
-                .map(Lotto::getLottoRank)
-                .mapToInt(LottoRank::getPrizeAmount)
-                .sum();
-
-        int totalPurchaseAmount = lottos.size() * Lotto.PRICE_PER_LOTTO;
-
+        int totalPrizeAmount = lottos.getTotalPrizeAmount();
+        int totalPurchaseAmount = lottos.getTotalPurchaseAmount();
         double totalReturnRatio = (double)totalPrizeAmount / totalPurchaseAmount;
         return totalReturnRatio;
     }

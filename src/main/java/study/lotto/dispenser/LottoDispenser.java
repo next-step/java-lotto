@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.dispenser;
 
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoNumber;
@@ -6,8 +6,6 @@ import study.lotto.core.LottoNumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoDispenser {
 
@@ -26,12 +24,12 @@ public class LottoDispenser {
         return instance;
     }
 
-    public List<Lotto> auto(int numberOfPurchases) {
+    public Lottos auto(int numberOfPurchases) {
         List<Lotto> lottos = new ArrayList<>();
         for (int count = 0; count < numberOfPurchases; count++) {
             lottos.add(new Lotto(getLottoNumbers()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private List<LottoNumber> getLottoNumbers() {
