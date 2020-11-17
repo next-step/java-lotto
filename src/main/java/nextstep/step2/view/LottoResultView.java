@@ -3,11 +3,9 @@ package nextstep.step2.view;
 import nextstep.step2.domain.LottoReward;
 import nextstep.step2.domain.WinningLotto;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class LottoResultView {
 	private static final String LOTTO_PURCHASE_MESSAGE = "%d개를 구매했습니다.";
@@ -21,7 +19,6 @@ public class LottoResultView {
 
 	public void printLottoStaticsic(Map<LottoReward, List<WinningLotto>> lottoRewardListMap) {
 		System.out.println(LOTTO_STATISTICTS);
-		addLottoEmptyReward(lottoRewardListMap); //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
 		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
 				.filter(reward -> reward.getCount() > 0)
@@ -33,14 +30,6 @@ public class LottoResultView {
 								lottoRewardListMap.get(reward).size()
 						)
 				));
-	}
-
-	private void addLottoEmptyReward(Map<LottoReward, List<WinningLotto>> lottoMap) {
-		Stream.of(LottoReward.values()).forEach(lottoReward -> {
-			if (!lottoMap.keySet().contains(lottoReward)) {
-				lottoMap.put(lottoReward, new ArrayList<>());
-			}
-		});
 	}
 
 	public void printWinningProbability(float probability) {

@@ -17,6 +17,9 @@ public class LottoResultViewTest {
 		Lotto lastWeekLotto = new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
 		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = new HashMap<>();
 		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16))), lastWeekLotto)));
+		lottoRewardListMap.put(LottoReward.THIRD, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,16))), lastWeekLotto)));
+		lottoRewardListMap.put(LottoReward.SECOND, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,15,16))), lastWeekLotto)));
+		lottoRewardListMap.put(LottoReward.FIRST, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6))), lastWeekLotto)));
 		underTest.printLottoStaticsic(lottoRewardListMap);
 	}
 

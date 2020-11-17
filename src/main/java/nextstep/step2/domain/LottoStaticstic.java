@@ -1,9 +1,6 @@
 package nextstep.step2.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,6 +15,12 @@ public class LottoStaticstic {
 	}
 
 	public Map<LottoReward, List<WinningLotto>> getLottoRewardMap(List<Lotto> lottoList) {
+		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList);
+		addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
+		return lottoRewardListMap;
+	}
+
+	private Map<LottoReward, List<WinningLotto>> getLottoRewardGroupingMap(List<Lotto> lottoList) {
 		Lotto winnerNumbers = getLastWeekWinningLotto();
 		List<WinningLotto> winningLottos = lottoList.stream()
 				.map(lotto -> new WinningLotto(lotto, winnerNumbers))
@@ -49,5 +52,13 @@ public class LottoStaticstic {
 				.map(reward -> reward.getPrice() * lottoResultMap.get(reward).size())
 				.reduce(0, Integer::sum);
 		return (float) totalAmount / (purchase.getLottoCount() * purchase.LOTTO_PRICE);
+	}
+
+	private void addLottoEmptyReward(Map<LottoReward, List<WinningLotto>> lottoRewardListMap) {
+		Stream.of(LottoReward.values()).forEach(lottoReward -> {
+			if (!lottoRewardListMap.keySet().contains(lottoReward)) {
+				lottoRewardListMap.put(lottoReward, new ArrayList<>());
+			}
+		});
 	}
 }
