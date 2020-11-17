@@ -11,7 +11,6 @@ import step4.view.LottoInputView;
 import step4.view.LottoResultView;
 import step4.view.ResultView;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -33,11 +32,10 @@ public class LottoController {
         LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO, new LottoNumberMakeStrategy());
         resultView.drawTicket(tickets);
 
-        WinningNumbers winningNumber = inputView.getWinningNumber();
+        WinningNumbers winningNumber = inputView.getWinningNumbers();
         WinningResults winningResults = winningNumber.getWinningStatistics(tickets);
-        double revenueRate = winningResults.getRevenue(tickets.countTickets());
 
         resultView.drawWinningStatistics(winningResults);
-        resultView.drawRevenueRate(revenueRate, winningResults.isRevenue(revenueRate));
+        resultView.drawRevenueRate(tickets, winningResults);
     }
 }
