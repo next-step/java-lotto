@@ -1,9 +1,6 @@
 package step3.controller;
 
-import step3.domain.LastWeekLotto;
-import step3.domain.LottoFactory;
-import step3.domain.LottoMatcher;
-import step3.domain.RandomLottoGenerator;
+import step3.domain.*;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -14,12 +11,14 @@ public class LottoController {
     public static void runLotto() {
         int lottoPurchaseMoney = InputView.purchaseLotto();
 
-        LottoFactory lottoFactory = new LottoFactory(lottoPurchaseMoney , RandomLottoGenerator.of());
+        LottoFactory lottoFactory = new LottoFactory(lottoPurchaseMoney, RandomLottoGenerator.of());
 
         OutputView.purchaseLotto(lottoFactory.getLottoCount());
         OutputView.printLottoTickets(lottoFactory.getLottoNumbersListToString());
 
-        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LastWeekLotto.separateLottoToList(InputView.lastWeekLotto()));
+        String lastWeekLotto = InputView.lastWeekLotto();
+        int bonusBall = InputView.initBonusBall();
+        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LastWeekLottoGenerator.separateLottoToList(lastWeekLotto), bonusBall);
 
         OutputView.printStatics(lottoMatcher.getResult());
 
