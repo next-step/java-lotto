@@ -1,6 +1,9 @@
 package step02.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoSeller {
     private final LottoPrice lottoPrice;
@@ -11,6 +14,16 @@ public class LottoSeller {
 
     public static LottoSeller of(int lottoPrice) {
         return new LottoSeller(LottoPrice.of(lottoPrice));
+    }
+
+
+    public List<Lotto> generateLottos(int payment, LottoNumbers lottoNumbers) {
+        int lottoCount = lottoPrice.calculateLottoCount(payment);
+
+        return Stream.iterate(0, n -> n + 1)
+                .limit(lottoCount)
+                .map(key -> lottoNumbers.generateLotto())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -25,4 +38,5 @@ public class LottoSeller {
     public int hashCode() {
         return Objects.hash(lottoPrice);
     }
+
 }

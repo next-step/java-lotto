@@ -25,11 +25,14 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> generateLotto() {
+    public Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream()
+
+        List<Integer> lotto = lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
+
+        return Lotto.of(lotto);
     }
 
     @Override
