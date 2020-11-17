@@ -32,7 +32,7 @@ public class LottoNumbers {
 
     }
 
-    public LottoNumbers makeLotto() {
+    public LottoNumbers shuffleNumbers() {
         Collections.shuffle(setDefaultLottoNumbers());
         List<Integer> newNumbers = IntStream
                 .range(0, 6)
@@ -46,6 +46,10 @@ public class LottoNumbers {
         for(int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
             numbers.add(number);
         }
+        return numbers;
+    }
+
+    public List<Integer> getNumbers() {
         return numbers;
     }
 
