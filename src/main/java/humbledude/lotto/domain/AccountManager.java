@@ -22,7 +22,14 @@ public class AccountManager {
     }
 
     public double getProfitRate() {
-        return (double) getTotalPrize() / (double) getTotalSpent();
+        double totalSpent = getTotalSpent();
+        double totalPrize = getTotalPrize();
+
+        if (totalSpent == 0) {
+            throw new IllegalStateException("돈을 하나도 안썼어요. 돈을 쓰고 수익률을 계산합시다");
+        }
+
+        return totalPrize / totalSpent;
     }
 
     public List<LottoTicket> getTickets() {
