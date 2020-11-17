@@ -3,6 +3,7 @@ package nextstep.step2.domain;
 public class WinningLotto {
 	private LottoReward lottoReward;
 	public WinningLotto(Lotto lotto, Lotto lastWeekLotto) {
+		lastWeekLotto.validate();
 		long matchCount = getMatchCount(lotto, lastWeekLotto);
 		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount));
 	}
