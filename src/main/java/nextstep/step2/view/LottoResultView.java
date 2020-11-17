@@ -25,7 +25,14 @@ public class LottoResultView {
 		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
 				.filter(reward -> reward.getCount() > 0)
-				.forEach(reward -> System.out.println(String.format(LOTTO_STATISTICTS_RESULT, reward.getCount(), reward.getPrice(), lottoRewardListMap.get(reward).size())));
+				.forEach(reward -> System.out.println(
+						String.format(
+								LOTTO_STATISTICTS_RESULT,
+								reward.getCount(),
+								reward.getPrice(),
+								lottoRewardListMap.get(reward).size()
+						)
+				));
 	}
 
 	private void addLottoEmptyReward(Map<LottoReward, List<WinningLotto>> lottoMap) {
