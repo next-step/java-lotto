@@ -2,6 +2,7 @@ package step3.domain;
 
 import step3.exception.NotMatchRankException;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -10,7 +11,6 @@ public enum LottoRank {
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FORTH(4, 50_000),
-
     FIFTH(3, 5_000),
     MISS(0, 0);
 
@@ -23,13 +23,23 @@ public enum LottoRank {
     }
 
 
-    public static LottoRank valueOf(int match) {
-        validMatch(match);
+    public static LottoRank valueOf(int countOfMatch, boolean matchBonusNumber) {
+        validMatch(countOfMatch);
 
-        return Stream.of(FIFTH , FORTH, THIRD, SECOND, FIRST)
-                .filter(ranking -> ranking.match == match)
-                .findFirst()
+        if (findSecond(countOfMatch, matchBonusNumber)) return THIRD;
+
+
+        return Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank.match == countOfMatch)
+                .findAny()
                 .orElse(MISS);
+    }
+
+    private static boolean findSecond(int countOfMatch, boolean matchBonusNumber) {
+        if (countOfMatch == 5 && !matchBonusNumber) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -52,7 +62,6 @@ public enum LottoRank {
     public int getMatch() {
         return match;
     }
-
 
 
 }
