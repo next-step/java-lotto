@@ -38,11 +38,16 @@ public class Result {
             return false;
         }
         Result result1 = (Result) o;
-        return Objects.equals(result, result1.result);
+        return result.equals(result1.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(result);
+        return Objects.hash(result.toString());
+    }
+
+    @Override
+    public String toString() {
+        return result.toString();
     }
 }
