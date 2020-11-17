@@ -52,9 +52,9 @@ public class LottoStaticsticTest {
 	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
 	public void inpuLastLottoNumberTest() {
 		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4, 5,  6", new LottoPurchase(1_000));
-		List<Integer> numbers = lottoStaticstic.getWinnerNumbers();
-		assertTrue(numbers.contains(5));
-		assertTrue(numbers.contains(6));
+		Lotto lastWeekWinningLotto = lottoStaticstic.getLastWeekWinningLotto();
+		assertTrue(lastWeekWinningLotto.getNumbers().contains(5));
+		assertTrue(lastWeekWinningLotto.getNumbers().contains(6));
 	}
 
 	private List<Lotto> mockLottoList(int lottoCount, Set<Integer> numbers) {

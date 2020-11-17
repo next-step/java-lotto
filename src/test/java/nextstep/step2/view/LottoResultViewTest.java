@@ -14,9 +14,9 @@ public class LottoResultViewTest {
 	@Test
 	@DisplayName("4등 이상을 그룹핑하여 로또개수를 출력한다.")
 	public void printLottoStaticsicTest() {
-		List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+		Lotto lastWeekLotto = new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
 		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = new HashMap<>();
-		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16))), winningNumbers)));
+		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16))), lastWeekLotto)));
 		underTest.printLottoStaticsic(lottoRewardListMap);
 	}
 

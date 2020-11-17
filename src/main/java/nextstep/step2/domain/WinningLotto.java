@@ -1,17 +1,15 @@
 package nextstep.step2.domain;
 
-import java.util.List;
-
 public class WinningLotto {
 	private LottoReward lottoReward;
-	public WinningLotto(Lotto lotto, List<Integer> winnerNumbers) {
-		long matchCount = getMatchCount(lotto, winnerNumbers);
+	public WinningLotto(Lotto lotto, Lotto lastWeekLotto) {
+		long matchCount = getMatchCount(lotto, lastWeekLotto);
 		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount));
 	}
 
-	private long getMatchCount(Lotto lotto, List<Integer> winnerNumbers) {
+	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
 		return lotto.getNumbers().stream()
-					.filter(number -> winnerNumbers.contains(number))
+					.filter(number -> lastWeekLotto.getNumbers().contains(number))
 					.count();
 	}
 
