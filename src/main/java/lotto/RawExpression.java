@@ -5,11 +5,12 @@ import java.util.regex.Pattern;
 
 public class RawExpression {
 
-    private String customDelimiter;
-    private String expression;
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
     private static final Integer MATCH_GROUP_DELIMITER = 1;
     private static final Integer MATCH_GROUP_EXPRESSION = 2;
+    private String customDelimiter;
+    private String expression;
+
 
     public RawExpression(String rawExpression) {
         if (rawExpression == null || rawExpression.isEmpty()) {
