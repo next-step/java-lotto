@@ -14,6 +14,8 @@ public class LottoApplication {
     public static void main(String[] args) {
         long budget = getBudgetFromUserInput();
 
+        printNumberOfPurchased(budget);
+
         buyAutoTicketAndPrintNumbers(budget);
 
         getWinningNumbersFromUserInput();
@@ -22,11 +24,12 @@ public class LottoApplication {
     }
 
     private static long getBudgetFromUserInput() {
-        long budget = InputView.getBudget();
+        return InputView.getBudget();
+    }
+
+    private static void printNumberOfPurchased(long budget) {
         long howMany = store.howManyCanIBuy(budget);
         ResultView.printNumberOfPurchased(howMany);
-
-        return budget;
     }
 
     private static void buyAutoTicketAndPrintNumbers(long budget) {
