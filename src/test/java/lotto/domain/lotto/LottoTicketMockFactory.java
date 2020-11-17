@@ -55,4 +55,12 @@ public class LottoTicketMockFactory {
     public static LottoTicket createLottoHasNumberOneToSix() {
         return LottoTicket.of(createLottoNumberOneToSix(), LottoNumber.MAX);
     }
+
+    public static LottoTicket createLottoTicket(final List<Integer> lottoNumbers, final Integer bonusNumber) {
+        return LottoTicket.of(createLottoNumbers(lottoNumbers), LottoNumber.of(bonusNumber));
+    }
+    
+    public static List<LottoNumber> createLottoNumbers(final List<Integer> lottoNumbers) {
+        return lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
+    }
 }
