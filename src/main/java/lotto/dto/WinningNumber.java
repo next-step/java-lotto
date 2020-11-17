@@ -1,13 +1,13 @@
 package lotto.dto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 public class WinningNumber {
     private final Lotto winningLotto;
-    private final LottoNumber bonusNumber;
+    private final BonusNumber bonusNumber;
 
-    public WinningNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+    public WinningNumber(Lotto winningLotto, BonusNumber bonusNumber) {
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }

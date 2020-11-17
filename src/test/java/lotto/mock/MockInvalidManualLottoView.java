@@ -1,5 +1,6 @@
 package lotto.mock;
 
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottoNumbers;
 import lotto.domain.NumberOfManualLotto;
@@ -8,10 +9,12 @@ import lotto.view.View;
 
 import java.util.Set;
 
-public class MockInvalidAmountView implements View {
+public class MockInvalidManualLottoView implements View {
+    private static final int LOTTO_SIZE = 5;
+
     @Override
     public int getAmount() {
-        return -1;
+        return Lotto.PRICE_OF_ONE_LOTTO * LOTTO_SIZE;
     }
 
     @Override
@@ -26,17 +29,12 @@ public class MockInvalidAmountView implements View {
 
     @Override
     public int getNumberOfManualLotto() {
-        return 0;
+        return LOTTO_SIZE + 1;
     }
 
     @Override
     public ManualLottoNumbers getManualLottoNumbers(NumberOfManualLotto numberOfManualLotto) {
         return null;
-    }
-
-    @Override
-    public void printInputError(Exception e) {
-
     }
 
     @Override
@@ -46,6 +44,11 @@ public class MockInvalidAmountView implements View {
 
     @Override
     public void printWinningStatistic(WinningStatistic winningStatistic) {
+
+    }
+
+    @Override
+    public void printInputError(Exception e) {
 
     }
 }

@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final String INVALID_NUMBERS_SIZE_ERR_MSG = "로또 숫자의 개수가 유효하지 않습니다.";
     public static final int VALID_NUMBERS_SIZE = 6;
+    public static final int PRICE_OF_ONE_LOTTO = 1_000;
 
     private final Set<LottoNumber> numbers;
 
@@ -42,7 +43,7 @@ public class Lotto {
 
     public int getMatchedCountCompareTo(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(lotto.numbers::contains)
+                .filter(lotto::contains)
                 .count();
     }
 
@@ -52,6 +53,10 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return bonusNumber.included(numbers);
     }
 
     @Override

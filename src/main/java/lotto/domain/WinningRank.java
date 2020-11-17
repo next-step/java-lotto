@@ -2,9 +2,12 @@ package lotto.domain;
 
 import lotto.dto.WinningNumber;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public enum WinningRank {
     NONE(0, null),
@@ -15,6 +18,7 @@ public enum WinningRank {
     MATCHES_SIX(2_000_000_000, WinningCondition.of(6, false));
 
     private static final Map<WinningCondition, WinningRank> RANK_BY_CONDITION;
+    private static final Set<Integer> BONUS_NUMBER_USE_CASE_MATCHED_COUNT = new HashSet<>(Arrays.asList(5));
 
     static {
         RANK_BY_CONDITION = new HashMap<>();
@@ -39,9 +43,15 @@ public enum WinningRank {
 
     private static WinningCondition getWinningConditionOf(WinningNumber winningNumber, Lotto boughtLotto) {
         int matchedCount = winningNumber.getMatchedCountCompareTo(boughtLotto);
-        boolean bonusNumMatched = winningNumber.isBonusNumMatchedTo(boughtLotto);
-
+        boolean bonusNumMatched = false;
+        if (isBonusNumberUseCase(matchedCount)) {
+            bonusNumMatched = winningNumber.isBonusNumMatchedTo(boughtLotto);
+        }
         return WinningCondition.of(matchedCount, bonusNumMatched);
+    }
+
+    private static boolean isBonusNumberUseCase(int matchedCount) {
+        return BONUS_NUMBER_USE_CASE_MATCHED_COUNT.contains(matchedCount);
     }
 
     public static int getTotalWinningAmount(List<WinningRank> winningRanks) {

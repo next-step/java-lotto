@@ -1,15 +1,18 @@
-package lotto.service.helper;
+package lotto.helper;
 
+import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoFactory {
-    public static final int PRICE_OF_ONE_LOTTO = 1_000;
     private static final List<Integer> NUMBERS;
+
     static {
         NUMBERS = new ArrayList<>();
         for (int i = LottoNumber.VALID_MIN_NUMBER; i <= LottoNumber.VALID_MAX_NUMBER; i++) {
@@ -20,13 +23,17 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> buyLottos(int amount) {
+    public static Lottos buyLottos(ManualLottoNumbers manualLottoNumbers, Amount amount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (; amount >= PRICE_OF_ONE_LOTTO; amount -= PRICE_OF_ONE_LOTTO) {
+
+        manualLottoNumbers.addManualLottos(lottos, amount);
+
+        while (amount.isOverLottoPrice()) {
             Collections.shuffle(NUMBERS);
             lottos.add(Lotto.of(NUMBERS.subList(0, Lotto.VALID_NUMBERS_SIZE)));
+            amount.subtractOneLottoPrice();
         }
 
-        return lottos;
+        return Lottos.of(lottos);
     }
 }

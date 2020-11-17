@@ -1,5 +1,8 @@
 package lotto.view.inputview;
 
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.NumberOfManualLotto;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
@@ -18,15 +21,19 @@ public class ConsoleInputView implements InputView {
     @Override
     public int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     @Override
     public Set<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbersInput = scanner.next();
+        return getLottoNumbers();
+    }
 
-        return Arrays.stream(winningNumbersInput.split(DELIMITER))
+    private Set<Integer> getLottoNumbers() {
+        String lottoNumbers = scanner.nextLine();
+
+        return Arrays.stream(lottoNumbers.split(DELIMITER))
                 .map(Integer::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
@@ -34,6 +41,23 @@ public class ConsoleInputView implements InputView {
     @Override
     public int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    @Override
+    public int getNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    @Override
+    public ManualLottoNumbers getManualLottoNumbers(NumberOfManualLotto numberOfManualLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return ManualLottoNumbers.as(numberOfManualLotto, this::getLottoNumbers);
+    }
+
+    @Override
+    public void printInputError(Exception e) {
+        System.out.println(e.getMessage());
     }
 }

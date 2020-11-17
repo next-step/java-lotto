@@ -1,12 +1,11 @@
 package lotto.view.resultview;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
 import lotto.dto.WinningStatistic;
 
-import java.util.List;
-
 public interface ResultView {
-    void printBoughtLottos(List<Lotto> boughtLottos);
+    void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, Lottos boughtLottos);
 
     void printWinningStatistic(WinningStatistic winningStatistic);
 }

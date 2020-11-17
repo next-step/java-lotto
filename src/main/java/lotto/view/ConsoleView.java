@@ -1,11 +1,12 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.NumberOfManualLotto;
 import lotto.dto.WinningStatistic;
 import lotto.view.inputview.InputView;
 import lotto.view.resultview.ResultView;
 
-import java.util.List;
 import java.util.Set;
 
 public class ConsoleView implements View {
@@ -28,8 +29,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void printBoughtLottos(List<Lotto> boughtLottos) {
-        resultView.printBoughtLottos(boughtLottos);
+    public void printBoughtLottos(ManualLottoNumbers manualLottoNumbers, Lottos boughtLottos) {
+        resultView.printBoughtLottos(manualLottoNumbers, boughtLottos);
     }
 
     @Override
@@ -40,5 +41,20 @@ public class ConsoleView implements View {
     @Override
     public int getBonusNumber() {
         return inputView.getBonusNumber();
+    }
+
+    @Override
+    public int getNumberOfManualLotto() {
+        return inputView.getNumberOfManualLotto();
+    }
+
+    @Override
+    public ManualLottoNumbers getManualLottoNumbers(NumberOfManualLotto numberOfManualLotto) {
+        return inputView.getManualLottoNumbers(numberOfManualLotto);
+    }
+
+    @Override
+    public void printInputError(Exception e) {
+        inputView.printInputError(e);
     }
 }

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class LottoTest {
     @ParameterizedTest
     @MethodSource("invalidNumberSize")
-    @DisplayName("로또 생성시 number size가 유효하지 않으면 throw IllegalStateException")
+    @DisplayName("로또 생성시 number size가 유효하지 않으면 throw IllegalLottoNumberSizeException")
     void createTestInvalidNumberSize(List<Integer> numbers) {
         assertThatExceptionOfType(IllegalLottoNumberSizeException.class)
                 .isThrownBy(() -> Lotto.of(numbers))
@@ -34,7 +34,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalStateException")
+    @DisplayName("로또 숫자가 중복되어 number size가 유효하지 않으면 throw IllegalLottoNumberSizeException")
     void createTestDuplicatedNumbers() {
         assertThatExceptionOfType(IllegalLottoNumberSizeException.class)
                 .isThrownBy(() -> Lotto.of(1, 1, 1, 1, 1, 1))
@@ -43,7 +43,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("invalidNumberRange")
-    @DisplayName("로또 숫자가 지정된 범위 만족하지 않으면 throw IllegalStateException (ex 1~45 사이의 숫자만).")
+    @DisplayName("로또 숫자가 지정된 범위 만족하지 않으면 throw IllegalLottoNumberRangeException (ex 1~45 사이의 숫자만).")
     void createTestNumberRange(List<Integer> numbers) {
         assertThatExceptionOfType(IllegalLottoNumberRangeException.class)
                 .isThrownBy(() -> Lotto.of(numbers))
