@@ -8,9 +8,9 @@ import java.util.List;
 public interface InputView {
     int getUseAmount();
 
-    WinningNumbers getWinningNumber();
+    WinningNumbers getWinningNumbers();
 
-    int getManualTicketSize();
+    int getManualTicketSize(int useAmount);
 
     List<String> getManualNumbers(int manualSize);
 
