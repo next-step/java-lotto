@@ -10,17 +10,15 @@ import static util.Preconditions.checkArgument;
 
 public class LottoBuyer {
     public static final String MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO = "money must grate then zero to buy lotto";
-    private final LottoRankCalculator lottoRankCalculator; 
     private final Money money;
     private LottoTickets lottoTickets = LottoTickets.EMPTY;
 
-    private LottoBuyer(final Money money, final LottoRankCalculator lottoRankCalculator) {
+    private LottoBuyer(final Money money) {
         this.money = money;
-        this.lottoRankCalculator = lottoRankCalculator;
     }
 
     public static LottoBuyer of(final int money) {
-        return new LottoBuyer(Money.of(money), new LottoRankCalculator());
+        return new LottoBuyer(Money.of(money));
     }
 
     public LottoTickets buy() {
@@ -34,6 +32,7 @@ public class LottoBuyer {
     }
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
+        final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
         final LottoTicket winningLottery = LottoTicket.of(winningNumberExpression, bonusNumber);
         final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery);
         return new LottoStatisticsResult(result, getProfit(result));
