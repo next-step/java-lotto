@@ -1,5 +1,6 @@
 package nextstep.step2.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,11 +43,24 @@ public class LottoStaticsticTest {
 		assertThat(stat).isEqualTo(0.0f);
 	}
 
+	@Test
+	@DisplayName("지난주 로또 당첨번호는 숫자여야 한다")
+	public void inputWrongLastLottoNumberTest() {
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> lottoStaticstic.validateLastWinnerNumbers("1,2,3,a,b,c"))
+				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
+	}
+
+	@Test
+	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
+	public void inpuLastLottoNumberTest() {
+		lottoStaticstic.validateLastWinnerNumbers("1,2,3,4, 5,  6");
+	}
+
 	private List<Lotto> mockLottoList(int lottoCount, List<Integer> numbers) {
 		List<Lotto> lottos = new ArrayList<>();
 		IntStream.range(0, lottoCount)
 				.forEach(i -> lottos.add(new Lotto(numbers)));
 		return lottos;
 	}
-
 }

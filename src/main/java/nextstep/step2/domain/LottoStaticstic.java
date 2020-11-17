@@ -1,5 +1,6 @@
 package nextstep.step2.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStaticstic {
+	private static final String WRONG_WINNER_NUMBERS = "지난주 로또 당첨번호는 모두 숫자여야 합니다.";
 	private String winnerNumbers;
 	private LottoPurchase purchase;
 
@@ -24,10 +26,20 @@ public class LottoStaticstic {
 				.collect(Collectors.groupingBy(WinningLotto::getLottoReward));
 	}
 
+
 	protected List<Integer> getWinnerNumbers() {
+		validateLastWinnerNumbers(winnerNumbers);
 		return Stream.of(winnerNumbers.replaceAll(" ", "").split(","))
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
+	}
+
+	protected void validateLastWinnerNumbers(String winnerNumbers) {
+		String[] numbers = winnerNumbers.replaceAll(" ","").split(",");
+		boolean isDigit = Arrays.stream(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
+		if (!isDigit) {
+			throw new IllegalArgumentException(WRONG_WINNER_NUMBERS);
+		}
 	}
 
 	public float calculateWinningProbability(Map<LottoReward, List<WinningLotto>> lottoResultMap) {
