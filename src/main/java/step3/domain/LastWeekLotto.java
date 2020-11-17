@@ -1,51 +1,34 @@
 package step3.domain;
 
-import step3.exception.LottoCountBoundException;
-import step3.exception.ValidEmptyException;
-import step3.exception.ValidNullException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import step3.exception.BonusNumberDuplicateNumber;
 
 public class LastWeekLotto {
-    private static final String DELIMITER_LOTTO = ",";
 
-    private LastWeekLotto() {}
+    private final Lotto lastWeekLotto;
+    private final int bonusNumber;
 
-    public static List<Integer> separateLottoToList(String input) {
-        validNull(input);
-        validEmpty(input);
+    private LastWeekLotto(Lotto lastWeekLotto, int bonusNumber) {
 
-        return Arrays.stream(separateLottoNumber(input))
-                .map(s -> Integer.parseInt(s.trim()))
-                .collect(Collectors.toList());
+        validBonusNumber(lastWeekLotto , bonusNumber);
+
+        this.lastWeekLotto = lastWeekLotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    private static String[] separateLottoNumber(String input) {
-        String[] split = input.split(DELIMITER_LOTTO);
-
-        validLottoNumberCount(split);
-
-        return split;
-    }
-
-    private static void validLottoNumberCount(String[] split) {
-        if (split.length != 6) {
-            throw new LottoCountBoundException();
+    private void validBonusNumber(Lotto lastWeekLotto , int bonusNumber) {
+        if(lastWeekLotto.has(bonusNumber)){
+            throw new BonusNumberDuplicateNumber();
         }
     }
 
-    private static void validNull(String input) {
-        if (input == null) {
-            throw new ValidNullException();
-        }
+    public static LastWeekLotto of(Lotto lotto, int bonusNumber) {
+        return new LastWeekLotto(lotto, bonusNumber);
     }
 
-    private static void validEmpty(String input) {
-        if (input.trim().isEmpty()) {
-            throw new ValidEmptyException();
-        }
+
+    public LottoRank getRanking(Lotto lotto) {
+        return LottoRank.valueOf(lastWeekLotto.matchLottoNumbers(lotto), lotto.has(bonusNumber));
     }
+
 
 }
