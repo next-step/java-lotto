@@ -1,19 +1,19 @@
 package lotto.domain.rank;
 
 import lotto.domain.Money;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.dto.WinLotteryResult;
 
 import java.util.Arrays;
 
 public class LottoRankCalculator {
-    public WinLotteryResult calculateWinLotteryResult(final Lottos lottos, final Lotto winningLottery) {
+    public WinLotteryResult calculateWinLotteryResult(final LottoTickets lottoTickets, final LottoTicket winningLottery) {
         final RankCounts rankCounts = RankCounts.of();
         
-        for (final Lotto lotto : lottos.get()) {
-            final int hitCount = lotto.countHitNumber(winningLottery);
-            final boolean matchBonus = lotto.isMatchBonus(winningLottery);
+        for (final LottoTicket lottoTicket : lottoTickets.get()) {
+            final int hitCount = lottoTicket.countHitNumber(winningLottery);
+            final boolean matchBonus = lottoTicket.isMatchBonus(winningLottery);
             rankCounts.increaseCount(hitCount, matchBonus);
         }
 

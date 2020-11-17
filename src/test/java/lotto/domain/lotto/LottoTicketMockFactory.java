@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoMockFactory {
+public class LottoTicketMockFactory {
     private static int fourTeenLottoNumbers[][] = {
             {8, 21, 23, 41, 42, 43},
             {3, 5, 11, 16, 32, 38},
@@ -23,22 +23,22 @@ public class LottoMockFactory {
             {3, 8, 27, 30, 35, 44}
     };
 
-    public static List<Lotto> createFourTeenLotto() {
+    public static List<LottoTicket> createFourTeenLotto() {
         List<LottoNumber> lottoNumbers = Arrays.stream(fourTeenLottoNumbers)
                 .flatMapToInt(Arrays::stream)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
         final int partitionSize = 6;
         int i = 0;
         while (i < lottoNumbers.size()) {
             List<LottoNumber> partition = lottoNumbers.subList(i, i + partitionSize);
             i += partitionSize;
-            lottos.add(Lotto.of(partition, LottoNumber.MAX));
+            lottoTickets.add(LottoTicket.of(partition, LottoNumber.MAX));
         }
-        return lottos;
+        return lottoTickets;
     }
 
     public static List<LottoNumber> createLottoNumberOneToSix() {
@@ -52,7 +52,7 @@ public class LottoMockFactory {
         );
     }
 
-    public static Lotto createLottoHasNumberOneToSix() {
-        return Lotto.of(createLottoNumberOneToSix(), LottoNumber.MAX);
+    public static LottoTicket createLottoHasNumberOneToSix() {
+        return LottoTicket.of(createLottoNumberOneToSix(), LottoNumber.MAX);
     }
 }

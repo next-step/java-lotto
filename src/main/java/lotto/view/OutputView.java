@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottoTickets;
 import lotto.dto.LottoStatisticsResult;
 import lotto.dto.RewardCountAndPrizeMoney;
 import lotto.dto.WinLotteryResult;
@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String DELIMITER = "," + ViewString.SPACE;
 
-    public static void printLottoCount(final Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottoCount(final LottoTickets lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
     }
 
-    public static void printAllLotto(final Lottos lottos) {
-        lottos.getAllLottoNumber().forEach(OutputView::printLottoNumber);
+    public static void printAllLotto(final LottoTickets lottoTickets) {
+        lottoTickets.getAllLottoNumber().forEach(OutputView::printLottoNumber);
         Printer.print(ViewString.NEWLINE);
     }
 

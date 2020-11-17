@@ -11,35 +11,35 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottosTest {
+class LottoTicketsTest {
     @Test
     void of_return_empty_obj_when_receive_null() {
         // when
-        final Lottos result = Lottos.of(null);
+        final LottoTickets result = LottoTickets.of(null);
         
         // then
-        assertThat(result).isEqualTo(Lottos.EMPTY);
+        assertThat(result).isEqualTo(LottoTickets.EMPTY);
     }
     
     @Test
     void size() {
         // given
-        final List<Lotto> lottoList = LottoMockFactory.createFourTeenLotto();
-        final Lottos lottos = Lottos.of(lottoList);
+        final List<LottoTicket> lottoTicketList = LottoTicketMockFactory.createFourTeenLotto();
+        final LottoTickets lottoTickets = LottoTickets.of(lottoTicketList);
 
         // when
-        final int result = lottos.size();
+        final int result = lottoTickets.size();
 
         // then
-        assertThat(result).isEqualTo(lottoList.size());
+        assertThat(result).isEqualTo(lottoTicketList.size());
     }
 
 
     @Test
     void countHitNumber() {
         // given
-        final Lottos lottos = Lottos.of(LottoMockFactory.createFourTeenLotto());
-        final Lotto winningLottery = Lotto.of(
+        final LottoTickets lottoTickets = LottoTickets.of(LottoTicketMockFactory.createFourTeenLotto());
+        final LottoTicket winningLottery = LottoTicket.of(
                 Arrays.asList(
                         LottoNumber.of(1),
                         LottoNumber.of(2),
@@ -53,7 +53,7 @@ class LottosTest {
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
         
         // when
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottos, winningLottery);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery);
 
         // then
         assertAll(

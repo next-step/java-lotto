@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.LottosFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.lotto.LottosFactory.COUNT_MUST_NOT_BE_NEGATIVE;
+import static lotto.domain.lotto.LottoTicketsFactory.COUNT_MUST_NOT_BE_NEGATIVE;
 
 
-class LottosFactoryTest {
+class LottoTicketsFactoryTest {
     @DisplayName("Lottos 생성")
     @Nested
     class Create {
@@ -23,11 +21,11 @@ class LottosFactoryTest {
             final int count = 0;
 
             // when
-            final Lottos lottos = LottosFactory.create(count);
+            final LottoTickets lottoTickets = LottoTicketsFactory.create(count);
 
             // then
-            assertThat(lottos).isEqualTo(Lottos.EMPTY);
-            assertThat(lottos.size()).isZero();
+            assertThat(lottoTickets).isEqualTo(LottoTickets.EMPTY);
+            assertThat(lottoTickets.size()).isZero();
         }
 
         @DisplayName("1 개 생성")
@@ -37,11 +35,11 @@ class LottosFactoryTest {
             final int count = 1;
 
             // when
-            final Lottos lottos = LottosFactory.create(count);
+            final LottoTickets lottoTickets = LottoTicketsFactory.create(count);
 
             // then
-            assertThat(lottos).isNotNull();
-            assertThat(lottos.size()).isOne();
+            assertThat(lottoTickets).isNotNull();
+            assertThat(lottoTickets.size()).isOne();
         }
 
         @DisplayName("음수의 경우 예외 throw")
@@ -52,7 +50,7 @@ class LottosFactoryTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottosFactory.create(count);
+                LottoTicketsFactory.create(count);
             });
 
             // then

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static util.Preconditions.checkArgument;
 
-public class Lotto {
+public class LottoTicket {
     private static final int LOTTO_NUMBERS_LENGTH = 6;
     private static final Money PRICE = Money.of(1000);
     private static final CreateLottoNumbersStrategy DEFAULT_CREATE_NUMBER_STRATEGY = new CreateRandomNumbersStrategy();
@@ -22,29 +22,29 @@ public class Lotto {
     private final List<LottoNumber> numbers;
     private final LottoNumber bonusNumber;
 
-    private Lotto(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
+    private LottoTicket(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
         this.numbers = Collections.unmodifiableList(numbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public static Lotto of(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
+    public static LottoTicket of(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
         checkArgument(numbers != null, LOTTO_NUMBER_MUST_NOT_BE_NULL);
         checkArgument(numbers.size() == LOTTO_NUMBERS_LENGTH, LOTTO_NUMBER_SIZE_NOT_VALID);
         checkArgument(hasNotDuplicates(numbers, bonusNumber), LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED);
         numbers.sort(Comparator.comparing(LottoNumber::getValue));
-        return new Lotto(numbers, bonusNumber);
+        return new LottoTicket(numbers, bonusNumber);
     }
 
-    public static Lotto of(final CreateLottoNumbersStrategy lottoNumbersStrategy, final CreateLottoNumberStrategy bonusNumberStrategy) {
+    public static LottoTicket of(final CreateLottoNumbersStrategy lottoNumbersStrategy, final CreateLottoNumberStrategy bonusNumberStrategy) {
         final LottoNumber bonusNumber = bonusNumberStrategy.create();
         return of(lottoNumbersStrategy.create(bonusNumber), bonusNumber);
     }
 
-    public static Lotto of() {
+    public static LottoTicket of() {
         return of(DEFAULT_CREATE_NUMBER_STRATEGY, DEFAULT_CREATE_BONUS_NUMBER_STRATEGY);
     }
 
-    public static Lotto of(final String lottoNumberExpression, final int bonusNumber) {
+    public static LottoTicket of(final String lottoNumberExpression, final int bonusNumber) {
         checkArgument(StringUtils.isNotBlank(lottoNumberExpression), LOTTO_NUMBER_MUST_NOT_BE_BLANK);
         final List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberExpression.split(SEPARATOR))
                 .map(Integer::parseInt)
@@ -63,13 +63,13 @@ public class Lotto {
         return lottoNumberSet.size() < numbers.size() + 1;
     }
 
-    public int countHitNumber(final Lotto lotto) {
+    public int countHitNumber(final LottoTicket lottoTicket) {
         return (int) this.numbers.stream()
-                .filter(lotto.numbers::contains).count();
+                .filter(lottoTicket.numbers::contains).count();
     }
 
-    public boolean isMatchBonus(final Lotto lotto) {
-        return this.bonusNumber.equals(lotto.bonusNumber);
+    public boolean isMatchBonus(final LottoTicket lottoTicket) {
+        return this.bonusNumber.equals(lottoTicket.bonusNumber);
     }
 
     public static Money getPrice() {

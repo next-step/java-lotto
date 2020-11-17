@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,25 +17,25 @@ class LottoStoreTest {
         @Test
         void return_lottos() {
             // given
-            final Money money = Lotto.getPrice();
+            final Money money = LottoTicket.getPrice();
 
             // when
-            final Lottos lottos = LottoStore.sell(money);
+            final LottoTickets lottoTickets = LottoStore.sell(money);
 
             // then
-            assertThat(lottos).isNotNull();
-            assertThat(lottos.size()).isOne();
+            assertThat(lottoTickets).isNotNull();
+            assertThat(lottoTickets.size()).isOne();
         }
 
         @DisplayName("빈 lottos 반환")
         @Test
         void return_empty_lottos() {
             // when
-            final Lottos lottos = LottoStore.sell(null);
+            final LottoTickets lottoTickets = LottoStore.sell(null);
 
             // then
-            assertThat(lottos).isNotNull();
-            assertThat(lottos).isEqualTo(Lottos.EMPTY);
+            assertThat(lottoTickets).isNotNull();
+            assertThat(lottoTickets).isEqualTo(LottoTickets.EMPTY);
         }
     }
 

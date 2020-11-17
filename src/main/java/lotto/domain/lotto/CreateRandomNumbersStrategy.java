@@ -8,9 +8,9 @@ public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
 
     @Override
     public List<LottoNumber> create(final LottoNumber bonusNumber) {
-        final int lottoNumberLength = Lotto.getLottoNumbersLength();
+        final int lottoNumberLength = LottoTicket.getLottoNumbersLength();
         List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberLength);
-        while (lottoNumbers.isEmpty() || Lotto.hasDuplicates(lottoNumbers, bonusNumber)) {
+        while (lottoNumbers.isEmpty() || LottoTicket.hasDuplicates(lottoNumbers, bonusNumber)) {
             lottoNumbers = createRandomNumbers(lottoNumberLength);
         }
         return lottoNumbers;

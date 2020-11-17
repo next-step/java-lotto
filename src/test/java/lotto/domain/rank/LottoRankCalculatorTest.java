@@ -1,14 +1,14 @@
 package lotto.domain.rank;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.dto.WinLotteryResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static lotto.domain.lotto.LottoMockFactory.createLottoHasNumberOneToSix;
+import static lotto.domain.lotto.LottoTicketMockFactory.createLottoHasNumberOneToSix;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,11 +19,11 @@ class LottoRankCalculatorTest {
     void calculateWinLotteryResult_when_hit_all_lotto_number() {
         // given
         final LottoRankCalculator calculator = new LottoRankCalculator();
-        final Lottos lottos = Lottos.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-        final Lotto winningLottery = createLottoHasNumberOneToSix();
+        final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
+        final LottoTicket winningLottery = createLottoHasNumberOneToSix();
 
         // when
-        final WinLotteryResult result = calculator.calculateWinLotteryResult(lottos, winningLottery);
+        final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLottery);
 
         // then
         assertAll(

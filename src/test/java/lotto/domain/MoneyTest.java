@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoTicket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -47,7 +47,7 @@ class MoneyTest {
         void success() {
             // given
             final Money money = Money.of(2000);
-            final Money lottoPrice = Lotto.getPrice();
+            final Money lottoPrice = LottoTicket.getPrice();
 
             // when
             final int lottoCount = money.divideWithoutRemainder(lottoPrice);
@@ -61,7 +61,7 @@ class MoneyTest {
         void exist_remainder() {
             // given
             final Money money = Money.of(2001);
-            final Money lottoPrice = Lotto.getPrice();
+            final Money lottoPrice = LottoTicket.getPrice();
 
             // when
             final Throwable thrown = catchThrowable(() -> {

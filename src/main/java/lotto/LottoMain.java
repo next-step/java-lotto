@@ -11,8 +11,8 @@ public class LottoMain {
         final LottoBuyer lottoBuyer = LottoBuyer.of(money);
         lottoBuyer.buy();
         
-        OutputView.printLottoCount(lottoBuyer.getLottos());
-        OutputView.printAllLotto(lottoBuyer.getLottos());
+        OutputView.printLottoCount(lottoBuyer.getLottoTickets());
+        OutputView.printAllLotto(lottoBuyer.getLottoTickets());
         
         final String winningNumberExpression = InputView.plzEnterLastWeekWinningNumber();
         final int bonusNumber = InputView.plzEnterBonusNumber();

@@ -11,7 +11,7 @@ class CreateRandomNumbersStrategyTest {
     void create() {
         // given
         final CreateLottoNumbersStrategy strategy = new CreateRandomNumbersStrategy();
-        final int lottoNumberLength = Lotto.getLottoNumbersLength();
+        final int lottoNumberLength = LottoTicket.getLottoNumbersLength();
 
         // when
         final List<LottoNumber> lottoNumbers = strategy.create(LottoNumber.MAX);

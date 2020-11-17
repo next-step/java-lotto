@@ -5,21 +5,21 @@ import java.util.List;
 
 import static util.Preconditions.checkArgument;
 
-public class LottosFactory {
+public class LottoTicketsFactory {
     public static final String COUNT_MUST_NOT_BE_NEGATIVE = "count must not be negative";
     
-    public static Lottos create(final int count) {
+    public static LottoTickets create(final int count) {
         checkArgument(count >= 0, COUNT_MUST_NOT_BE_NEGATIVE);
         
         if (count == 0) {
-            return Lottos.EMPTY;
+            return LottoTickets.EMPTY;
         }
 
-        final List<Lotto> lottos = new ArrayList<>();
+        final List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            final Lotto lotto = Lotto.of();
-            lottos.add(lotto);
+            final LottoTicket lottoTicket = LottoTicket.of();
+            lottoTickets.add(lottoTicket);
         }
-        return Lottos.of(lottos);
+        return LottoTickets.of(lottoTickets);
     }
 }
