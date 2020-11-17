@@ -11,6 +11,7 @@ public class LottoController {
 
     private InputView inputView = new InputView();
     private Amount amount;
+
     public void run() {
         inputAmount();
     }
