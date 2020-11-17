@@ -26,7 +26,10 @@
 ## 진행 사항
 - racing car 마지막 리팩토링에서는, 작은 단위에서 부터 큰단위로 발전해가며 Test code 를 작성하고 프로덕션 코드를 작성하였습니다
 - 이번 계획은, input output view 를 먼저 작성하고, 사용자 시나리오흐름으로 test code 작성 -> production code 작성 할 예정입니다.
+- 역시 작은 단계부터 설계한 다음에 코드를 작성하는 것이 효율적인 것 같아요
+- Integer[] 보다, List<Integer> 그리고 int 보다 Integer 을 사용해야겠다고 느낀 것이, Collections 나 stream 에 메서드를 쓸때 매개변수의 형식호환때문
 
+    
 ## 기능 요구사항
 - 입력: ${로또 구입 금액} 
 - 출력: ${구입 금액에 해당하는 로또들}
