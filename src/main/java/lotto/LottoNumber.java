@@ -6,7 +6,7 @@ import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import java.util.Objects;
 import lotto.lottoexception.IllegalLottoNumberRange;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable {
 
   private final int number;
 
@@ -45,5 +45,19 @@ public class LottoNumber {
   @Override
   public String toString() {
     return String.valueOf(this.number);
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (this == o) {
+      return 0;
+    }
+
+    if (o == null) {
+      throw new NullPointerException();
+    }
+    LottoNumber that = (LottoNumber) o;
+
+    return this.number - that.number;
   }
 }
