@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class WinningResults {
     public static final long DEFAULT_COUNT_LONG = 0L;
     public static final double DECIMAL_POINT_TWO_FIXED = 100D;
-    private static final int REVENUE_ANCHOR_POINT = 1;
+    public static final int REVENUE_ANCHOR_POINT = 1;
     private static final Integer DEFAULT_COUNT_INTEGER = 0;
 
     private final Map<WinningType, Integer> winningResults;
@@ -59,13 +59,16 @@ public class WinningResults {
     }
 
     public double getRevenue(int ticketSize) {
-        Long totalAmount = winningResults.entrySet()
+        Long totalAmount = getWinningAmount();
+        return calculateRateAndFixedTwo(totalAmount, ticketSize);
+    }
+
+    public Long getWinningAmount() {
+        return winningResults.entrySet()
                 .stream()
                 .map(entry -> WinningType.getWinningAmount(entry.getKey()) * entry.getValue())
                 .reduce(Long::sum)
                 .orElseThrow(IllegalArgumentException::new);
-
-        return calculateRateAndFixedTwo(totalAmount, ticketSize);
     }
 
     private double calculateRateAndFixedTwo(double totalAmount, int ticketSize) {

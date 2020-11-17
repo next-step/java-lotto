@@ -10,6 +10,8 @@ public class Constant {
     public static final String ERROR_INVALID_MANUALLY_SIZE = "티켓 수보다 많은 번호를 입력 할 수 없습니다.";
     public static final String ERROR_INVALID_MARKING_NUMBER = "로또 번호는 6개이며 중복이 없어야 합니다..";
     public static final String ERROR_REQUIRED_NUMERIC = "숫자만 입력 가능합니다.";
+    public static final String ERROR_NOT_NUMERIC = "숫자외의 값은 입력하실 수 없습니다.";
+    public static final String ERROR_LOTTO_MINIMUM_PRICE = "로또의 최소금액은 1000원 입니다.";
 
     private Constant(){}
 }
