@@ -1,11 +1,11 @@
 package nextstep.step2.view;
 
 import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoAutoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class LottoTicketViewTest {
 	@Test
@@ -16,8 +16,8 @@ public class LottoTicketViewTest {
 	}
 
 	private List<Lotto> getMockLottos() {
-		Lotto lotto1 = new Lotto(new LottoAutoGenerator());
-		Lotto lotto2 = new Lotto(new LottoAutoGenerator());
+		Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
+		Lotto lotto2 = new Lotto(Arrays.asList(7,8,9,10,11,12));
 		return Arrays.asList(lotto1,lotto2);
 	}
 }

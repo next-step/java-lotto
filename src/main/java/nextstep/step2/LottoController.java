@@ -31,9 +31,10 @@ public class LottoController {
 	}
 
 	private List<Lotto> purchaseLottos(int lottoCount) {
+		LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
 		List<Lotto> lottos = new ArrayList<>(lottoCount);
 		for(int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto(new LottoAutoGenerator()));
+			lottos.add(new Lotto(lottoAutoGenerator.getAutoNumbers()));
 		}
 		return lottos;
 	}
