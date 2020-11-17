@@ -1,15 +1,18 @@
 package lotto;
 
+import lotto.controller.LottoController;
 import lotto.model.Lotto;
-import lotto.strategy.AutoDrawing;
 import lotto.strategy.DrawingStrategy;
 import lotto.strategy.ManualDrawing;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,19 +22,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
     @Test
     public void 중복된_로또_번호_체크() throws Exception {
+
         DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
+        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
 
-        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", List.class, int.class);
-        isInvalid.setAccessible(true);
+        int numberCount = getNumberCount();
 
-        Field field = Lotto.class.getDeclaredField("NUMBER_COUNT");
-        field.setAccessible(true);
-
-        int numberCount = field.getInt(Lotto.class);
-
-        List<Integer> testNumbers = IntStream.range(0, numberCount)
-                .map(e -> 1)
-                .boxed().collect(Collectors.toList());
+        List<Integer> testNumbers = testNumbers(numberCount, e -> 1);
 
         assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(true);
     }
@@ -40,21 +37,12 @@ public class LottoTest {
     public void 임계치를_벗어난_로또_체크() throws Exception {
 
         DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
+        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
 
-        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", List.class, int.class);
-        isInvalid.setAccessible(true);
+        int numberCount = getNumberCount();
+        int threshold = getThreshold();
 
-        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
-        drawingField.setAccessible(true);
-
-        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
-        lottoField.setAccessible(true);
-
-        int numberCount = lottoField.getInt(Lotto.class);
-        int threshold = drawingField.getInt(DrawingStrategy.class);
-
-        List<Integer> testNumbers = IntStream.range(0, numberCount).map(e -> threshold + e)
-                .boxed().collect(Collectors.toList());
+        List<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
 
         assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(true);
     }
@@ -63,21 +51,12 @@ public class LottoTest {
     public void 정상_로또_체크() throws Exception {
 
         DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
+        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
 
-        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", List.class, int.class);
-        isInvalid.setAccessible(true);
+        int numberCount = getNumberCount();
+        int threshold = getThreshold();
 
-        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
-        drawingField.setAccessible(true);
-
-        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
-        lottoField.setAccessible(true);
-
-        int numberCount = lottoField.getInt(Lotto.class);
-        int threshold = drawingField.getInt(DrawingStrategy.class);
-
-        List<Integer> testNumbers = IntStream.range(0, numberCount).map(e -> threshold - e)
-                .boxed().collect(Collectors.toList());
+        List<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
 
         assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(false);
     }
@@ -85,17 +64,10 @@ public class LottoTest {
     @Test
     public void 일등_로또_매칭_결과() throws Exception {
 
-        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
-        drawingField.setAccessible(true);
+        int numberCount = getNumberCount();
+        int threshold = getThreshold();
 
-        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
-        lottoField.setAccessible(true);
-
-        int numberCount = lottoField.getInt(Lotto.class);
-        int threshold = drawingField.getInt(DrawingStrategy.class);
-
-        List<Integer> manualNumbers = IntStream.range(0, numberCount).map(e -> threshold - e)
-                .boxed().collect(Collectors.toList());
+        List<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
 
         Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
 
@@ -106,20 +78,11 @@ public class LottoTest {
     @Test
     public void 부분_로또_매칭_결과() throws Exception {
 
-        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
-        drawingField.setAccessible(true);
+        int numberCount = getNumberCount();
+        int threshold = getThreshold();
 
-        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
-        lottoField.setAccessible(true);
-
-        int numberCount = lottoField.getInt(Lotto.class);
-        int threshold = drawingField.getInt(DrawingStrategy.class);
-
-        List<Integer> manualNumbers = IntStream.range(0, numberCount).map(e -> e + 1)
-                .boxed().collect(Collectors.toList());
-
-        List<Integer> winnerNumbers = IntStream.range(0, numberCount).map(e -> e + 1)
-                .boxed().collect(Collectors.toList());
+        List<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
+        List<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
 
         winnerNumbers.set(0, threshold);
 
@@ -128,4 +91,36 @@ public class LottoTest {
         assertThat(testLotto.getMatchingNumbers(winnerNumbers).size()).isEqualTo(numberCount - 1);
 
     }
+
+
+    private List<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
+        return IntStream.range(0, numberCount)
+                .map(mapper)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+
+    private int getNumberCount() throws Exception {
+        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
+        lottoField.setAccessible(true);
+
+        return lottoField.getInt(Lotto.class);
+    }
+
+    private int getThreshold() throws Exception {
+        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
+        drawingField.setAccessible(true);
+
+        return drawingField.getInt(DrawingStrategy.class);
+    }
+
+    private Method getIsInvalidOfDrawingStrategy(DrawingStrategy drawingStrategy) throws Exception {
+        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", List.class, int.class);
+        isInvalid.setAccessible(true);
+
+        return isInvalid;
+    }
+
+
 }

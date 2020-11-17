@@ -11,13 +11,17 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    public Lotto(DrawingStrategy drawingStrategy){
+    public Lotto(DrawingStrategy drawingStrategy) {
         numbers = drawingStrategy.drawNumbers(NUMBER_COUNT);
     }
 
-    public List<Integer> getMatchingNumbers(List<Integer> winnerNumbers){
+    public List<Integer> getMatchingNumbers(List<Integer> winnerNumbers) {
         return numbers.stream()
                 .filter(winnerNumbers::contains)
                 .collect(Collectors.toList());
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

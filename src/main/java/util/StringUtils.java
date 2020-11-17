@@ -8,4 +8,5 @@ public class StringUtils {
                 .reduce((x, y) -> x && y)
                 .orElse(false);
     }
+
 }
