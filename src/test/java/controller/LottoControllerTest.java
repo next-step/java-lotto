@@ -1,8 +1,11 @@
 package controller;
 
-import org.assertj.core.api.Assertions;
+import domain.LottoInfo;
+import domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoControllerTest {
 
@@ -13,7 +16,19 @@ class LottoControllerTest {
     void calculateLottoQuantity() {
         int price = 14000;
         controller = new LottoController(price);
-        Assertions.assertThat(controller.getLottoQuantity()).isEqualTo(14);
+        assertThat(controller.getLottoQuantity()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("로또 구매 개수대로 로또 자동 생성 기능")
+    void makeAutoLottos() {
+        int price = 5000;
+        int quantity = 5;
+        LottoInfo lottoInfo = LottoInfo.of(price, quantity);
+        controller = new LottoController(lottoInfo);
+
+        Lottos lottos = controller.initLottos();
+        assertThat(lottos.getLottos().size()).isEqualTo(quantity);
     }
 
 }
