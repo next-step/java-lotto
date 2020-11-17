@@ -9,19 +9,11 @@ public class TokenizerTest {
 
     @Test
     void tokenizerTest(){
-        String inputValue = "1~2~3~4";
+        String inputValue = "//;\n1;2;3";
         Tokenizer tokenizer = new Tokenizer();
-        tokenizer.changeSplitValue("~");
-        assertThat(tokenizer.splitValue(inputValue).length).isEqualTo(4);
+        assertThat(tokenizer.splitValue(inputValue).length).isEqualTo(3);
+
+        inputValue = "1,2,3;4;5";
+        assertThat(tokenizer.splitValue(inputValue).length).isEqualTo(5);
     }
-
-    @Test
-    void defaultTokenizerTest(){
-        String inputValue = "1,2,3;4;5";
-        Tokenizer tokenizer = new Tokenizer();
-
-        AssertionsForClassTypes.assertThat(tokenizer.splitValue(inputValue).length).isEqualTo(5);
-    }
-
-
 }

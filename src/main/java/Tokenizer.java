@@ -1,28 +1,20 @@
+import sun.tools.jstat.Token;
+
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Tokenizer {
-    private String newSplitValue = "";
+    private final String newSplitValue = "";
     private final String defaultSplitValue = ",|;";
-    private Boolean splitValueChangedFlag = false;
 
-    public void changeSplitValue(String splitValue){
-        newSplitValue = splitValue;
-
-        splitValueChangedFlag = true;
-    }
-
-    public String[] splitValue(String inputValue) {
-        if (splitValueChangedFlag) {
-            return splitWithNewSplitValue(inputValue);
+    public String[] splitValue(String inputValue){
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputValue);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
         }
-        return splitWithDefaultValue(inputValue);
-    }
-
-    public String[] splitWithNewSplitValue(String inputValue){
-        return inputValue.split(newSplitValue);
-    }
-
-    public String[] splitWithDefaultValue(String inputValue){
         return inputValue.split(defaultSplitValue);
     }
+
 }
