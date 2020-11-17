@@ -13,14 +13,15 @@ import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
 import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.LottoTickets;
 import step4.domain.lotto.firstcollection.WinningResults;
+import step4.exception.DuplicateNumberException;
 import step4.strategy.LottoNumberMakeStrategy;
+import step4.type.LottoType;
 import step4.type.WinningType;
 
 import java.util.*;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 import static step4.Constant.*;
 
 public class ManualLottoTest {
@@ -35,13 +36,13 @@ public class ManualLottoTest {
 
     private static Stream<Arguments> provideLottoTicketAndWinningNumbers() {
         return Stream.of(
-                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7)),
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7), LottoType.AUTO),
                         WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 7),
                         WinningType.RANK_TWO_BONUS),
-                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 7)),
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 7), LottoType.AUTO),
                         WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 7),
                         WinningType.RANK_THREE),
-                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 10)),
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 9, 10), LottoType.AUTO),
                         WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 10), 8),
                         WinningType.RANK_TWO)
         );
@@ -51,9 +52,9 @@ public class ManualLottoTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void bonusNumberDuplicate(int bonusNumber) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 6), bonusNumber))
-                .withMessage(ERROR_DUPLICATE_NUMBER);
+        assertThatThrownBy(()-> WinningNumbers.of(createHashSet(1, 2, 3, 4, 5, 6), bonusNumber))
+                .isInstanceOf(DuplicateNumberException.class)
+                .hasMessage(ERROR_DUPLICATE_NUMBER);
     }
 
     @DisplayName("2등 보너스 번호 범위 유효성 테스트")
@@ -81,7 +82,7 @@ public class ManualLottoTest {
 
     private static Stream<Arguments> provideWinningTicketAndWinningNumber() {
         return Stream.of(
-                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 6)), WinningNumbers.of("1,2,3,4,5,7", 6))
+                Arguments.of(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 6), LottoType.AUTO), WinningNumbers.of("1,2,3,4,5,7", 6))
         );
     }
 
@@ -97,10 +98,10 @@ public class ManualLottoTest {
 
     private static Stream<Arguments> provideWinningResults() {
         List<LottoTicket> tickets = new ArrayList<LottoTicket>() {{
-            add(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7)));
-            add(new LottoTicket(createHashSet(6, 5, 4, 3, 2, 1)));
-            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10)));
-            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10)));
+            add(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7), LottoType.AUTO));
+            add(new LottoTicket(createHashSet(6, 5, 4, 3, 2, 1),  LottoType.AUTO));
+            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10), LottoType.AUTO));
+            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10), LottoType.AUTO));
         }};
 
         return Stream.of(
@@ -149,26 +150,25 @@ public class ManualLottoTest {
     @DisplayName("수동 구매 로또 번호 입력 테스트")
     @ParameterizedTest
     @MethodSource("provideManualLottoInfoAndNumbers")
-    void writeManualLottoNumber(int money, int wantedTicketCount, List<String> inputNumbers, int autoSize) {
+    void writeManualLottoNumber(int money, int wantedTicketCount, List<String> inputNumbers, long autoSize) {
         int allowCount = LottoTicketMachine.countAllowTicket(money, wantedTicketCount);
         LottoPurchaseInfoDTO lottoPurchaseInfo = new LottoPurchaseInfoDTO.Builder(money)
                 .manualSize(allowCount)
                 .inputManualNumbers(inputNumbers)
-                .numberMakeStrategy(new LottoNumberMakeStrategy())
                 .build();
 
-        LottoTickets tickets = LottoTicketMachine.ticketing(lottoPurchaseInfo);
+        LottoTickets tickets = LottoTicketMachine.ticketing(lottoPurchaseInfo, new LottoNumberMakeStrategy());
 
-        assertThat(tickets.countAutoTicket()).isEqualTo(autoSize);
-        assertThat(tickets.countAutoTicket() + tickets.countManualTicket()).isEqualTo(LottoTicketMachine.countAllowTicket(money));
+        assertThat(tickets.countTicketByLottoType(LottoType.AUTO)).isEqualTo(autoSize);
+        assertThat(tickets.countTickets()).isEqualTo(LottoTicketMachine.countAllowTicket(money));
     }
 
     private static Stream<Arguments> provideManualLottoInfoAndNumbers() {
         return Stream.of(
                 //5000원을 사용해 2장의 수동 구매를 하면 자동 로또는 3장이다.
-                Arguments.of(5000, 2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"), 3),
+                Arguments.of(5000, 2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"), 3L),
                 //2000원을 사용해 2장의 수동 구매를 하면 자동 로또는 0장이다.
-                Arguments.of(2000, 2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"), 0),
+                Arguments.of(2000, 2, Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"), 0L),
                 //5000원을 사용해 수동 구매를 하지 않으면 전부 로또 구매를 해 5장이다.
                 Arguments.of(5000, 0, Collections.emptyList(), 5)
 

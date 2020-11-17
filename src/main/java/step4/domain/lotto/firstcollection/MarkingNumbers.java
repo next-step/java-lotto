@@ -2,6 +2,7 @@ package step4.domain.lotto.firstcollection;
 
 import step4.Constant;
 import step4.domain.lotto.LottoTicket;
+import step4.exception.InvalidMarkingNumberException;
 
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class MarkingNumbers {
         return new MarkingNumbers(stringToObj(string));
     }
 
-    private static Set<LottoNumber> stringToObj(String string) {
+    public static Set<LottoNumber> stringToObj(String string) {
         Set<LottoNumber> lottoNumbers = Stream.of(string.split(DELIMITER_NO_SPACE))
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
@@ -35,7 +36,7 @@ public class MarkingNumbers {
 
     private static void isValidLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MARKING_ANCHOR_POINT) {
-            throw new IllegalArgumentException(Constant.ERROR_INVALID_MARKING_NUMBER);
+            throw new InvalidMarkingNumberException(Constant.ERROR_INVALID_MARKING_NUMBER);
         }
     }
 
@@ -59,5 +60,11 @@ public class MarkingNumbers {
         return Math.toIntExact(markingNumbers.stream()
                 .filter(ticket::isMarked)
                 .count());
+    }
+
+    public static void isValid(String string) {
+        if (stringToObj(string).size() < 6) {
+            throw new InvalidMarkingNumberException(Constant.ERROR_INVALID_MARKING_NUMBER);
+        }
     }
 }

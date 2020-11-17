@@ -1,9 +1,11 @@
 package step4.domain.lotto;
 
+import step4.Constant;
 import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.LottoTickets;
 import step4.domain.lotto.firstcollection.MarkingNumbers;
 import step4.domain.lotto.firstcollection.WinningResults;
+import step4.exception.DuplicateNumberException;
 
 import java.util.Objects;
 import java.util.Set;
@@ -36,7 +38,7 @@ public class WinningNumbers {
 
     private static void isDuplicate(int number, MarkingNumbers markingNumbers) {
         if (markingNumbers.contains(new LottoNumber(number))) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
+            throw new DuplicateNumberException(ERROR_DUPLICATE_NUMBER);
         }
     }
 
@@ -60,7 +62,7 @@ public class WinningNumbers {
 
     private static void isValid(Set<LottoNumber> list) {
         if (list.isEmpty() || list.size() < 6) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Constant.ERROR_INVALID_PARAMETER);
         }
     }
 }
