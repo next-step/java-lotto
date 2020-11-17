@@ -1,7 +1,6 @@
 package step4.domain.lotto.dto;
 
 import step4.Constant;
-import step4.strategy.NumberMakeStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
