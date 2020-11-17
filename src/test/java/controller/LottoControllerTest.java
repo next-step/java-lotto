@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoControllerTest {
@@ -59,6 +63,46 @@ class LottoControllerTest {
 
         assertThat(controller.matchLottoNumbers(winningLotto, testLotto))
                 .isEqualTo(match);
+    }
+
+    @Test
+    @DisplayName("당첨 통계 계산 기능")
+    void lottoStatistic() {
+        String winning = "1, 2, 3, 4, 5, 6";
+        LottoNumbers winningNumbers = new LottoNumbers()
+                .createWinningNumbers(winning);
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+
+        String test1 = "1, 2, 3, 4, 5, 6";
+        LottoNumbers testNumber1 = new LottoNumbers()
+                .createWinningNumbers(test1);
+        Lotto testLotto1 = new Lotto(testNumber1);
+
+        String test2 = "1, 7, 8, 9, 10, 11";
+        LottoNumbers testNumber2 = new LottoNumbers()
+                .createWinningNumbers(test2);
+        Lotto testLotto2 = new Lotto(testNumber2);
+
+        String test3 = "1, 2, 3, 9, 10, 11";
+        LottoNumbers testNumber3 = new LottoNumbers()
+                .createWinningNumbers(test3);
+        Lotto testLotto3 = new Lotto(testNumber3);
+
+        String test4 = "1, 2, 3, 9, 10, 11";
+        LottoNumbers testNumber4 = new LottoNumbers()
+                .createWinningNumbers(test4);
+        Lotto testLotto4 = new Lotto(testNumber4);
+
+
+        Lottos lottos = Lottos.from(Arrays.asList(testLotto1, testLotto2, testLotto3, testLotto4));
+
+        Map<Integer, Integer> result = new HashMap<>();
+        result.put(3, 2);
+        result.put(6, 1);
+
+        controller = new LottoController();
+        assertThat(controller.compileLottoStatistics(winningLotto, lottos)).isEqualTo(result);
     }
 
 }

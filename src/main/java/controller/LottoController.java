@@ -4,7 +4,9 @@ import domain.Lotto;
 import domain.LottoInfo;
 import domain.Lottos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,9 +40,21 @@ public class LottoController {
         List<Integer> winningNumbers = winningLotto.getLottoNumbers().getNumbers();
         List<Integer> lottoNumbers = lotto.getLottoNumbers().getNumbers();
 
-        return (int) lottoNumbers.
-                stream()
+        return (int) lottoNumbers
+                .stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public Map<Integer, Integer> compileLottoStatistics(Lotto winningLotto, Lottos lottos) {
+        List<Integer> matches = lottos.getLottos()
+                .stream()
+                .map(lotto -> matchLottoNumbers(winningLotto, lotto))
+                .filter(match -> match >= 3)
+                .collect(Collectors.toList());
+
+        Map<Integer, Integer> matchMap = new HashMap<>();
+        matches.forEach(match -> matchMap.merge(match, 1, Integer::sum));
+        return matchMap;
     }
 }
