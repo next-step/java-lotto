@@ -22,11 +22,8 @@ public class LottoResultView {
 		addLottoEmptyReward(lottoMap); //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
 		lottoMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
-				.forEach(lottoReward -> {
-					if (lottoReward.getCount() > 0) { //2개 이하 맞았을 경우는 제외하고 출력하기
-						System.out.println(String.format("%d개 일치 (%d원)- %d개", lottoReward.getCount(), lottoReward.getPrice(), lottoMap.get(lottoReward).size()));
-					}
-				});
+				.filter(reward -> reward.getCount() > 0)
+				.forEach(reward -> System.out.println(String.format("%d개 일치 (%d원)- %d개", reward.getCount(), reward.getPrice(), lottoMap.get(reward).size())));
 	}
 
 	private void addLottoEmptyReward(Map<LottoReward, List<WinningLotto>> lottoMap) {
