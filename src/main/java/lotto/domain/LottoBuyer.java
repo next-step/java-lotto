@@ -35,7 +35,7 @@ public class LottoBuyer {
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
         final Lotto winningLottery = Lotto.of(winningNumberExpression, bonusNumber);
-        final WinLotteryResult result = lottoRankCalculator.calculate(lottos, winningLottery);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottos, winningLottery);
         return new LottoStatisticsResult(result, getProfit(result));
     }
 

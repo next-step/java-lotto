@@ -22,7 +22,7 @@ public class LottoMockFactory {
             {17, 21, 29, 37, 42, 44},
             {3, 8, 27, 30, 35, 44}
     };
-    
+
     public static List<Lotto> createFourTeenLotto() {
         List<LottoNumber> lottoNumbers = Arrays.stream(fourTeenLottoNumbers)
                 .flatMapToInt(Arrays::stream)
@@ -39,5 +39,20 @@ public class LottoMockFactory {
             lottos.add(Lotto.of(partition, LottoNumber.MAX));
         }
         return lottos;
+    }
+
+    public static List<LottoNumber> createLottoNumberOneToSix() {
+        return Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+    }
+
+    public static Lotto createLottoHasNumberOneToSix() {
+        return Lotto.of(createLottoNumberOneToSix(), LottoNumber.MAX);
     }
 }

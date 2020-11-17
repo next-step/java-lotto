@@ -53,7 +53,7 @@ class LottosTest {
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
         
         // when
-        final WinLotteryResult result = lottoRankCalculator.calculate(lottos, winningLottery);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottos, winningLottery);
 
         // then
         assertAll(

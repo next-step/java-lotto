@@ -10,19 +10,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.lotto.LottoMockFactory.createLottoNumberOneToSix;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static lotto.domain.lotto.Lotto.*;
 
 class LottoTest {
-    private final List<LottoNumber> lottoNumberOneToSix = Arrays.asList(
-            LottoNumber.of(1),
-            LottoNumber.of(2),
-            LottoNumber.of(3),
-            LottoNumber.of(4),
-            LottoNumber.of(5),
-            LottoNumber.of(6)
-    );
+    private final List<LottoNumber> lottoNumberOneToSix = createLottoNumberOneToSix();
 
     private static final List<LottoNumber> duplicatedLottoNumbers = Arrays.asList(
             LottoNumber.of(1),
