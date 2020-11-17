@@ -4,25 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoNoPool {
-    private final Map<Integer, LottoNo> lottoNoPool;
+    private static final Map<Integer, LottoNo> pool = new HashMap<>();
 
-    private LottoNoPool() {
-        lottoNoPool = new HashMap<>();
-        for (int no = LottoNo.MIN; no <= LottoNo.MAX; no++) {
-            lottoNoPool.put(no, new LottoNo(no));
-        }
-    }
+    private LottoNoPool() {}
 
-    static LottoNoPool getInstance() {
-        return SingletonHelper.instance;
-    }
-
-    LottoNo getLottoNo(int no) {
+    public static LottoNo getLottoNo(int no) {
         LottoNo.validate(no);
-        return lottoNoPool.get(no);
+        return pool.getOrDefault(no, cache(no));
     }
 
-    private static class SingletonHelper {
-        private static final LottoNoPool instance = new LottoNoPool();
+    private static LottoNo cache(int no) {
+        LottoNo lottoNo = new LottoNo(no);
+        pool.put(no, lottoNo);
+        return lottoNo;
     }
 }

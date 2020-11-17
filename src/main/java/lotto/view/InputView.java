@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
+import lotto.domain.LottoNoPool;
 import lotto.domain.Money;
 
 import java.util.Scanner;
@@ -42,7 +43,7 @@ public class InputView {
         println("보너스 볼을 입력해 주세요.");
         String bonus = scanner.nextLine();
         InputValidator.validateNumber(bonus);
-        return new LottoNo(
+        return LottoNoPool.getLottoNo(
                 Integer.parseInt(bonus)
         );
     }

@@ -72,8 +72,8 @@ class LottoTest {
 
         Lotto winningLotto = new Lotto(Arrays.asList(winningLotoNos));
         Lotto lotto = new Lotto(Arrays.asList(lottoNos));
-        LottoNo goodBonus = new LottoNo(6);
-        LottoNo badBonus = new LottoNo(45);
+        LottoNo goodBonus = LottoNoPool.getLottoNo(6);
+        LottoNo badBonus = LottoNoPool.getLottoNo(45);
 
         Assertions.assertAll(
                 () -> assertThat(winningLotto.getRank(lotto, goodBonus))

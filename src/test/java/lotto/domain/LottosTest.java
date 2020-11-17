@@ -30,7 +30,7 @@ class LottosTest {
     void getResult_fifth() {
 
         Lotto winningLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        LottoNo bonus = new LottoNo(3);
+        LottoNo bonus = LottoNoPool.getLottoNo(3);
 
         int numOfLottos = 3;
         Lottos lottos = new Lottos(numOfLottos, dummySupplier);
@@ -47,7 +47,7 @@ class LottosTest {
     void getResult_third() {
 
         Lotto winningLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
-        LottoNo bonus = new LottoNo(8);
+        LottoNo bonus = LottoNoPool.getLottoNo(8);
 
         int numOfLottos = 3;
         Lottos lottos = new Lottos(numOfLottos, dummySupplier);
@@ -64,7 +64,7 @@ class LottosTest {
     void getResult_second() {
 
         Lotto winningLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
-        LottoNo bonus = new LottoNo(7);
+        LottoNo bonus = LottoNoPool.getLottoNo(1);
 
         int numOfLottos = 3;
         Lottos lottos = new Lottos(numOfLottos, dummySupplier);

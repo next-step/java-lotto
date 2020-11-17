@@ -13,12 +13,10 @@ public class Lotto {
     private static final Money price = new Money(1000);
 
     private final List<LottoNo> lottoNos;
-    private final LottoNoPool lottoNoPool;
 
     public Lotto(List<Integer> lottoNos) {
         validateLottoNos(lottoNos);
         this.lottoNos = new LinkedList<>();
-        lottoNoPool = LottoNoPool.getInstance();
         Collections.sort(lottoNos);
         for (int no : lottoNos) {
             add(no);
@@ -44,7 +42,7 @@ public class Lotto {
     }
 
     private void add(int lottoNo) {
-        LottoNo lottoNoObj = lottoNoPool.getLottoNo(lottoNo);
+        LottoNo lottoNoObj = LottoNoPool.getLottoNo(lottoNo);
         throwIfDuplicated(lottoNoObj);
         lottoNos.add(lottoNoObj);
     }
