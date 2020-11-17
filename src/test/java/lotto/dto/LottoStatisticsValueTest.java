@@ -11,7 +11,7 @@ public class LottoStatisticsValueTest {
     @DisplayName("LottoStatisticsValue 생성 테스트")
     @Test
     void of() {
-        assertThat(LottoStatisticsValue.of(LottoRank.FIFTH, 1L))
-                .isEqualToComparingFieldByField(LottoStatisticsValue.of(LottoRank.FIFTH, 1L));
+        assertThat(LottoStatisticsValue.of(LottoRank.SECOND, 1L))
+                .isEqualToComparingFieldByField(LottoStatisticsValue.of(LottoRank.SECOND, 1L));
     }
 }
