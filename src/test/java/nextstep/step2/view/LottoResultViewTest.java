@@ -6,10 +6,7 @@ import nextstep.step2.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResultViewTest {
 	private LottoResultView underTest = new LottoResultView();
@@ -19,7 +16,7 @@ public class LottoResultViewTest {
 	public void printLottoStaticsicTest() {
 		List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
 		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = new HashMap<>();
-		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(Arrays.asList(1,2,3,14,15,16)), winningNumbers)));
+		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16))), winningNumbers)));
 		underTest.printLottoStaticsic(lottoRewardListMap);
 	}
 

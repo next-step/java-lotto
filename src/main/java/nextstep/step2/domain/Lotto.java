@@ -1,15 +1,15 @@
 package nextstep.step2.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public class Lotto {
-	private List<Integer> numbers;
+	private Set<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(Set<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
-	public List<Integer> getNumbers() {
+	public Set<Integer> getNumbers() {
 		return numbers;
 	}
 }
