@@ -13,6 +13,9 @@
     - public int calculateLottoCount(int payment) 지불한 돈으로 로또를 몇 개 살 수 있는지 계산해 주는 기능
 - LottoNumbers 로또에서 나올 수 있는 숫자들
     - private static Integer[] generate(Integer from, Integer to)
+- Lotto 
+    - public static Lotto of(List<Integer> lotto)
+- Lottos
     
 - LottoSeller 로또 판매기 
     - 생성자 (int lottoPrice)
