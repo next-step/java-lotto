@@ -2,12 +2,15 @@ package step4.view;
 
 import step4.domain.lotto.firstcollection.LottoTickets;
 import step4.domain.lotto.firstcollection.WinningResults;
+import step4.type.LottoType;
 import step4.type.WinningType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
+import static step4.domain.lotto.firstcollection.WinningResults.DECIMAL_POINT_TWO_FIXED;
+import static step4.domain.lotto.firstcollection.WinningResults.REVENUE_ANCHOR_POINT;
 
 public class LottoResultView implements ResultView {
     private static final String PURCHASED_COUNT = "%s을 구매했습니다.";
@@ -39,8 +42,8 @@ public class LottoResultView implements ResultView {
 
     private String makePurchasedAlertMessage(LottoTickets tickets) {
         List<String> countStrings = new ArrayList<>();
-        int manualSize = tickets.countManualTicket();
-        int autoSize = tickets.countAutoTicket();
+        long manualSize = tickets.countTicketByLottoType(LottoType.MANUAL);
+        long autoSize = tickets.countTicketByLottoType(LottoType.AUTO);
         if (manualSize > TICKET_MINIMUM_LIMIT) {
             countStrings.add(format(PURCHASED_MANUAL_COUNT, manualSize));
         }
@@ -84,10 +87,14 @@ public class LottoResultView implements ResultView {
     }
 
     @Override
-    public void drawRevenueRate(double revenueRate, boolean isRevenue) {
+    public void drawRevenueRate(LottoTickets tickets, WinningResults winningResults) {
         clearStringBuilder();
 
-        append(format(ALERT_REVENUE_RATE, revenueRate, isRevenue ? REVENUE : DAMAGES));
+        Long winningAmount = winningResults.getWinningAmount();
+        double expenses = tickets.getExpenses();
+        double revenueRate = Math.round((winningAmount / expenses) * DECIMAL_POINT_TWO_FIXED / DECIMAL_POINT_TWO_FIXED);
+
+        append(format(ALERT_REVENUE_RATE, revenueRate, revenueRate > REVENUE_ANCHOR_POINT ? REVENUE : DAMAGES));
 
         System.out.println(sb.toString());
     }
