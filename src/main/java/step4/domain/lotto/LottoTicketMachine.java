@@ -3,6 +3,7 @@ package step4.domain.lotto;
 import step4.Constant;
 import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
 import step4.domain.lotto.firstcollection.LottoTickets;
+import step4.strategy.NumberMakeStrategy;
 
 import java.util.function.BiFunction;
 
@@ -12,8 +13,8 @@ public class LottoTicketMachine {
 
     private LottoTicketMachine() { }
 
-    public static LottoTickets ticketing(LottoPurchaseInfoDTO lottoPurchaseInfo) {
-        return new LottoTickets(lottoPurchaseInfo);
+    public static LottoTickets ticketing(LottoPurchaseInfoDTO lottoPurchaseInfo, NumberMakeStrategy strategy) {
+        return new LottoTickets(lottoPurchaseInfo, strategy);
     }
 
     public static int countAllowTicket(long inputPrice) {

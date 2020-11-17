@@ -34,12 +34,11 @@ public class LottoController {
         List<String> manualNumbers = inputView.getManualNumbers(manualSize);
 
         LottoPurchaseInfoDTO infoDTO = new LottoPurchaseInfoDTO.Builder(useAmount)
-                .numberMakeStrategy(new LottoNumberMakeStrategy())
                 .inputManualNumbers(manualNumbers)
                 .manualSize(manualSize)
                 .build();
 
-        LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO);
+        LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO, new LottoNumberMakeStrategy());
         resultView.drawTicket(tickets);
 
         WinningNumbers winningNumber = inputView.getWinningNumber();

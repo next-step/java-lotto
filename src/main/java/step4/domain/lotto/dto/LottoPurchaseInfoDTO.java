@@ -10,14 +10,9 @@ public class LottoPurchaseInfoDTO {
     private final int money;
     private final int manualSize;
     private final List<String> manualNumbers;
-    private final NumberMakeStrategy strategy;
 
     public int getAutoTicketsSize() {
         return money/Constant.LOTTO_PRICE - manualSize;
-    }
-
-    public NumberMakeStrategy getStrategy() {
-        return strategy;
     }
 
     public int getMoney() {
@@ -36,7 +31,6 @@ public class LottoPurchaseInfoDTO {
         private final int money;
         private final List<String> manualNumbers = new ArrayList<>();
         private int manualSize;
-        private NumberMakeStrategy strategy;
 
         public Builder(int money) {
             this.money = money;
@@ -49,11 +43,6 @@ public class LottoPurchaseInfoDTO {
 
         public Builder inputManualNumbers(List<String> value) {
             this.manualNumbers.addAll(value);
-            return this;
-        }
-
-        public Builder numberMakeStrategy(NumberMakeStrategy strategy) {
-            this.strategy = strategy;
             return this;
         }
 
@@ -73,7 +62,6 @@ public class LottoPurchaseInfoDTO {
         money = builder.money;
         manualSize = builder.manualSize;
         manualNumbers = builder.manualNumbers;
-        strategy = builder.strategy;
     }
 
 }

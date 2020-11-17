@@ -29,9 +29,9 @@ public class LottoTickets {
         this.manualTickets = manualTickets;
     }
 
-    public LottoTickets(LottoPurchaseInfoDTO info) {
+    public LottoTickets(LottoPurchaseInfoDTO info, NumberMakeStrategy strategy) {
         this.manualTickets = makeManualTickets(info.getManualNumbers());
-        this.autoTickets = makeAutoTickets(info.getAutoTicketsSize(), info.getStrategy());
+        this.autoTickets = makeAutoTickets(info.getAutoTicketsSize(), strategy);
     }
 
     private List<LottoTicket> makeAutoTickets(int count, NumberMakeStrategy strategy) {
