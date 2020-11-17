@@ -28,7 +28,7 @@ public class Lotto {
     public static int getNumOfLottos(Money purchaseMoney) {
         return (int) purchaseMoney.divide(price);
     }
-    
+
     Rank getRank(Lotto winningLotto, LottoNo bonus) {
         return Rank.valueOf(
                 getCountOfMatch(winningLotto)
@@ -37,11 +37,10 @@ public class Lotto {
     }
 
     int getCountOfMatch(Lotto lotto) {
-        int count = 0;
-        for (LottoNo lottoNo : lotto.lottoNos) {
-            count += lottoNos.contains(lottoNo) ? 1 : 0;
-        }
-        return count;
+        return (int) lotto.lottoNos.stream()
+                .filter(
+                        (lottoNo) -> lottoNos.contains(lottoNo)
+                ).count();
     }
 
     private void add(int lottoNo) {

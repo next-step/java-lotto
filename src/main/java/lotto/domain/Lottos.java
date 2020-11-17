@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 // NOTE: Lotto 의 일급 컬렉션
 public class Lottos {
@@ -19,19 +18,11 @@ public class Lottos {
     }
 
     public Result getResult(Lotto winningLotto, LottoNo bonus) {
-        // FIXME: forEach 를 사용하지 않고, 단번에 mapping 하는 방법은 없을까?
         Map<Rank, Integer> result = new HashMap<>();
-        lottos.stream()
-                .collect(
-                        Collectors.groupingBy((Lotto lotto) -> lotto.getRank(winningLotto, bonus))
-                ).entrySet()
-                .stream()
-                .forEach((entry) -> {
-                    result.put(
-                            entry.getKey(),
-                            entry.getValue().size()
-                    );
-                });
+        for (Lotto lotto : lottos) {
+            Rank rank = lotto.getRank(winningLotto, bonus);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        }
         return new Result(result);
     }
 
@@ -39,7 +30,8 @@ public class Lottos {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
-            sb.append(lotto + "\n");
+            sb.append(lotto);
+            sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
