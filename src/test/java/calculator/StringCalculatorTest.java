@@ -20,12 +20,14 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName(", 또는 : 을 구분자로 가지는 문자열을 전달하면 숫자의 합을 계산해준다")
     @CsvSource(value = {"1=1","1,2=3","1,2,3=6", "1,2:3=6"}, delimiterString = "=")
     void sum(String expression, int expected){
         assertThat(calculator.sum(expression)).isEqualTo(expected);
     }
 
     @ParameterizedTest
+    @DisplayName("Null 또는 빈물자열을 입력하면 0 을 return 한다")
     @NullAndEmptySource
     void sumNullAndEmpty(String expression){
         assertThat(calculator.sum(expression)).isEqualTo(0);
