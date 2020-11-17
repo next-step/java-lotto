@@ -35,8 +35,7 @@ public class InputView {
 
 	protected String getInputLottoNumbers() {
 		try {
-			String winnerNumbers = scanner.nextLine();
-			return winnerNumbers;
+			return scanner.nextLine();
 		} catch (NoSuchElementException ex) {
 			throw new IllegalArgumentException(WRONG_INPUT_LAST_LOTTO);
 		}
