@@ -22,7 +22,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         return random();
     }
 
-    public static Set<Integer> random() {
+    private static Set<Integer> random() {
         Collections.shuffle(LOTTO_RANGE);
         return new HashSet<>(LOTTO_RANGE.subList(RANGE_FIRST_INDEX, RANGE_LAST_INDEX));
     }
