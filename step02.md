@@ -10,11 +10,14 @@
 - LottoPrice 로또 장당 가격
     - public static LottoPrice of(int price) 생성자
     - private static void validate(int price) 장당 가격이 1원 이하이면 예외처리
+    - public int calculateLottoCount(int payment) 지불한 돈으로 로또를 몇 개 살 수 있는지 계산해 주는 기능
+- LottoNumbers 로또에서 나올 수 있는 숫자들
+    - private static Integer[] generate(Integer from, Integer to)
+    
 - LottoSeller 로또 판매기 
-    - 생성자 (로또판매 금액, 한회차 당 생성하는 번호 갯수)
-    - ${지불한 돈}만큼 로또를 생성해주는 기능
-        (로또 가격 조)
-    - 한 회마다 ${6개 default}의 번호를 생성하는 기능 [8, 21, 23, 41, 42, 43]
+    - 생성자 (int lottoPrice)
+    - 6개의 랜덤번호 로또를 생성하는 기능 [8, 21, 23, 41, 42, 43]
+    - 지불받은 만큼 로또를 생성해주는 기능
 - Lotto 정산기
     - 생성자 (금주의 당첨 번호)
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
