@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
     public static LottoTickets EMPTY = LottoTickets.of(Collections.emptyList());
-    private final List<LottoTicket> lottoTicketList;
+    private final List<LottoTicket> lottoTickets;
 
-    private LottoTickets(final List<LottoTicket> lottoTicketList) {
-        this.lottoTicketList = Collections.unmodifiableList(lottoTicketList);
+    private LottoTickets(final List<LottoTicket> lottoTickets) {
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
     public static LottoTickets of(final List<LottoTicket> lottoTickets) {
@@ -20,14 +20,14 @@ public class LottoTickets {
     }
 
     public int size() {
-        return lottoTicketList.size();
+        return lottoTickets.size();
     }
 
     public List<LottoTicket> get() {
-        return lottoTicketList;
+        return lottoTickets;
     }
 
     public List<List<Integer>> getAllLottoNumber() {
-        return lottoTicketList.stream().map(LottoTicket::getLottoNumber).collect(Collectors.toList());
+        return lottoTickets.stream().map(LottoTicket::getLottoNumber).collect(Collectors.toList());
     }
 }
