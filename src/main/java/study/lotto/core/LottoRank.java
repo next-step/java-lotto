@@ -1,12 +1,14 @@
 package study.lotto.core;
 
+import java.util.stream.Stream;
+
 public enum LottoRank {
 
     NONE(null,0),
-    FOURTH(3,5000),
-    THIRD(4,50000),
-    SECOND(5,1500000),
-    FIRST(6,2000000000);
+    FOURTH(3,5_000),
+    THIRD(4,50_000),
+    SECOND(5,1_500_000),
+    FIRST(6,2_000_000_000);
 
     private final Integer matchingNumberCount;
     private final Integer prizeAmount;
@@ -25,26 +27,10 @@ public enum LottoRank {
     }
 
     public static LottoRank of(Lotto lotto) {
-
-        int matchingNumberCount = lotto.getMatchingNumberCount();
-
-        if (matchingNumberCount == 6) {
-            return LottoRank.FIRST;
-        }
-
-        if (matchingNumberCount == 5) {
-            return LottoRank.SECOND;
-        }
-
-        if (matchingNumberCount == 4) {
-            return LottoRank.THIRD;
-        }
-
-        if (matchingNumberCount == 3) {
-            return LottoRank.FOURTH;
-        }
-
-        return LottoRank.NONE;
+        return Stream.of(LottoRank.values())
+                .filter(lottoRank -> lottoRank.getMatchingNumberCount() == lotto.getMatchingNumberCount())
+                .findFirst()
+                .orElse(LottoRank.NONE);
     }
 
 }
