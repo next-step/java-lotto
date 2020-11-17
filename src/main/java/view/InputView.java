@@ -17,14 +17,9 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public LottoNumbers inputLastWinningNumber() {
+    public String inputLastWinningNumber() {
         System.out.println(LAST_LOTTO_NUMBER);
-        String[] split = scanner.nextLine().split(", ");
-        return new LottoNumbers().from(
-                Arrays.stream(split)
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList())
-        );
+        return scanner.nextLine();
     }
 
 }

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,15 @@ public class LottoNumbers {
 
     public LottoNumbers from(List<Integer> numbers) {
         return new LottoNumbers(numbers);
+    }
+
+    public LottoNumbers createWinningNumbers(String winningNumbers) {
+        return new LottoNumbers().from(
+                Arrays.stream(winningNumbers.split(", "))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList())
+        );
+
     }
 
     public LottoNumbers makeLotto() {
