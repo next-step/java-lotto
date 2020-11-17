@@ -1,14 +1,15 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.strategy;
 
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class CreateRandomNumberStrategyTest {
+class RandomNumberCreateStrategyTest {
     @Test
     void create() {
         // given
-        final CreateRandomNumberStrategy strategy = new CreateRandomNumberStrategy();
+        final RandomNumberCreateStrategy strategy = new RandomNumberCreateStrategy();
 
         // when
         final LottoNumber lottoNumber = strategy.create();

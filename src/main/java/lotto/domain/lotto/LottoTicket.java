@@ -1,6 +1,10 @@
 package lotto.domain.lotto;
 
 import lotto.domain.Money;
+import lotto.domain.lotto.strategy.LottoNumberCreateStrategy;
+import lotto.domain.lotto.strategy.LottoNumbersCreateStrategy;
+import lotto.domain.lotto.strategy.RandomNumberCreateStrategy;
+import lotto.domain.lotto.strategy.RandomNumbersCreateStrategy;
 import util.StringUtils;
 
 import java.util.*;
@@ -11,8 +15,8 @@ import static util.Preconditions.checkArgument;
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_LENGTH = 6;
     private static final Money PRICE = Money.of(1000);
-    private static final CreateLottoNumbersStrategy DEFAULT_CREATE_NUMBER_STRATEGY = new CreateRandomNumbersStrategy();
-    private static final CreateLottoNumberStrategy DEFAULT_CREATE_BONUS_NUMBER_STRATEGY = new CreateRandomNumberStrategy();
+    private static final LottoNumbersCreateStrategy DEFAULT_CREATE_NUMBER_STRATEGY = new RandomNumbersCreateStrategy();
+    private static final LottoNumberCreateStrategy DEFAULT_CREATE_BONUS_NUMBER_STRATEGY = new RandomNumberCreateStrategy();
     public static final String LOTTO_NUMBER_MUST_NOT_BE_NULL = "lotto number must not be null";
     public static final String LOTTO_NUMBER_SIZE_NOT_VALID = "lotto number size must be " + LOTTO_NUMBERS_LENGTH;
     public static final String LOTTO_NUMBER_MUST_NOT_BE_BLANK = "lotto number must not be blank";
@@ -35,7 +39,7 @@ public class LottoTicket {
         return new LottoTicket(numbers, bonusNumber);
     }
 
-    public static LottoTicket of(final CreateLottoNumbersStrategy lottoNumbersStrategy, final CreateLottoNumberStrategy bonusNumberStrategy) {
+    public static LottoTicket of(final LottoNumbersCreateStrategy lottoNumbersStrategy, final LottoNumberCreateStrategy bonusNumberStrategy) {
         final LottoNumber bonusNumber = bonusNumberStrategy.create();
         return of(lottoNumbersStrategy.create(bonusNumber), bonusNumber);
     }

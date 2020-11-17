@@ -1,10 +1,13 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.strategy;
+
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateRandomNumbersStrategy implements CreateLottoNumbersStrategy {
-    private static final CreateRandomNumberStrategy createRandomNumberStrategy = new CreateRandomNumberStrategy();
+public class RandomNumbersCreateStrategy implements LottoNumbersCreateStrategy {
+    private static final RandomNumberCreateStrategy createRandomNumberStrategy = new RandomNumberCreateStrategy();
 
     @Override
     public List<LottoNumber> create(final LottoNumber bonusNumber) {

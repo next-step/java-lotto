@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.strategy.LottoNumberCreateStrategy;
+import lotto.domain.lotto.strategy.LottoNumbersCreateStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -34,8 +36,8 @@ class LottoTicketTest {
         @Test
         void with_strategy() {
             // given
-            final CreateLottoNumbersStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
-            final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
+            final LottoNumbersCreateStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
+            final LottoNumberCreateStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
 
             // when 
             final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy, bonusNumberStrategy);
@@ -205,8 +207,8 @@ class LottoTicketTest {
     @Test
     void countHitNumber() {
         // given
-        final CreateLottoNumbersStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
-        final CreateLottoNumberStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
+        final LottoNumbersCreateStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
+        final LottoNumberCreateStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
 
         // when 
         final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy, bonusNumberStrategy);

@@ -1,8 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.strategy;
+
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.strategy.LottoNumberCreateStrategy;
 
 import java.util.Random;
 
-public class CreateRandomNumberStrategy implements CreateLottoNumberStrategy {
+public class RandomNumberCreateStrategy implements LottoNumberCreateStrategy {
     private static final Random RANDOM = new Random(System.currentTimeMillis());
 
     @Override
