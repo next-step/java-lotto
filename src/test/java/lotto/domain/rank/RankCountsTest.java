@@ -1,12 +1,14 @@
 package lotto.domain.rank;
 
 import org.assertj.core.api.AssertionsForClassTypes;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RankCountsTest {
+    @DisplayName("4등의 카운트를 증가")
     @Test
     void increaseCount() {
         // given
@@ -19,6 +21,7 @@ class RankCountsTest {
         assertThat(rankCounts.increaseCount(hitThreeTimes, true)).isEqualTo(3);
     }
 
+    @DisplayName("4등의 카운트를 조회")
     @Test
     void getCount() {
         // given
@@ -37,6 +40,7 @@ class RankCountsTest {
         );
     }
 
+    @DisplayName("등수(Rank)가 null로 전달된 경우 0을 반환")
     @Test
     void getCount_return_0() {
         // given
