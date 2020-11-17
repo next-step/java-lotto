@@ -1,12 +1,13 @@
 package step4.domain.lotto.firstcollection;
 
+import step4.Constant;
 import step4.domain.lotto.LottoTicket;
 import step4.domain.lotto.WinningNumbers;
 import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
 import step4.strategy.NumberMakeStrategy;
+import step4.type.LottoType;
 import step4.type.WinningType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -16,26 +17,28 @@ import java.util.stream.Stream;
 
 public class LottoTickets {
     public static final int START_INDEX = 0;
-    private final List<LottoTicket> autoTickets;
-    private final List<LottoTicket> manualTickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(int count, NumberMakeStrategy strategy) {
-        autoTickets = makeAutoTickets(count, strategy);
-        manualTickets = new ArrayList<>();
+        tickets = makeAutoTickets(count, strategy);
     }
 
-    public LottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
-        this.autoTickets = autoTickets;
-        this.manualTickets = manualTickets;
+    public LottoTickets(List<LottoTicket> tickets, List<LottoTicket> manualTickets) {
+        this.tickets = Stream.of(tickets, manualTickets)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     public LottoTickets(LottoPurchaseInfoDTO info, NumberMakeStrategy strategy) {
-        this.manualTickets = makeManualTickets(info.getManualNumbers());
-        this.autoTickets = makeAutoTickets(info.getAutoTicketsSize(), strategy);
+        List<LottoTicket> manuals = makeManualTickets(info.getManualNumbers());
+        List<LottoTicket> autos = makeAutoTickets(info.getAutoTicketsSize(), strategy);
+        tickets = Stream.of(manuals, autos)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     private List<LottoTicket> makeAutoTickets(int count, NumberMakeStrategy strategy) {
-        return  IntStream.range(START_INDEX, count)
+        return IntStream.range(START_INDEX, count)
                 .mapToObj(index -> new LottoTicket(strategy))
                 .collect(Collectors.toList());
     }
@@ -47,34 +50,33 @@ public class LottoTickets {
     }
 
     public int countTickets() {
-        return Integer.sum(countAutoTicket(), countManualTicket());
-    }
-
-    public int countAutoTicket() {
-        return autoTickets.size();
-    }
-    public int countManualTicket() {
-        return manualTickets.size();
+        return tickets.size();
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        Stream.of(manualTickets, autoTickets)
-                .flatMap(List::stream)
-                .forEach(ticket -> sb.append(ticket.toString())
-                        .append(System.lineSeparator())
-                );
+        tickets.forEach(ticket -> sb.append(ticket.toString())
+                .append(System.lineSeparator())
+        );
 
         return sb.toString();
     }
 
     public Map<WinningType, Long> countByWinningType(WinningNumbers winningNumbers) {
-        return Stream.of(autoTickets, manualTickets)
-                .flatMap(List::stream)
+        return tickets.stream()
                 .map(ticket -> ticket.compareWinningNumber(winningNumbers))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
     }
 
+    public long countTicketByLottoType(LottoType type) {
+        return tickets.stream()
+                .filter(ticket-> ticket.equalsType(type))
+                .count();
+    }
+
+    public double getExpenses() {
+        return tickets.size() * Constant.LOTTO_PRICE;
+    }
 }

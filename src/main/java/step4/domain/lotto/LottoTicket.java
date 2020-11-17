@@ -2,8 +2,8 @@ package step4.domain.lotto;
 
 import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.MarkingNumbers;
-import step4.type.LottoType;
 import step4.strategy.NumberMakeStrategy;
+import step4.type.LottoType;
 import step4.type.WinningType;
 
 import java.util.Set;
