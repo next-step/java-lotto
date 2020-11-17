@@ -19,13 +19,13 @@ public class LottoResultView {
 		System.out.println(String.format(LOTTO_PURCHASE_MESSAGE, lottoCount));
 	}
 
-	public void printLottoStaticsic(Map<LottoReward, List<WinningLotto>> lottoMap) {
+	public void printLottoStaticsic(Map<LottoReward, List<WinningLotto>> lottoRewardListMap) {
 		System.out.println(LOTTO_STATISTICTS);
-		addLottoEmptyReward(lottoMap); //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
-		lottoMap.keySet().stream()
+		addLottoEmptyReward(lottoRewardListMap); //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
+		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
 				.filter(reward -> reward.getCount() > 0)
-				.forEach(reward -> System.out.println(String.format(LOTTO_STATISTICTS_RESULT, reward.getCount(), reward.getPrice(), lottoMap.get(reward).size())));
+				.forEach(reward -> System.out.println(String.format(LOTTO_STATISTICTS_RESULT, reward.getCount(), reward.getPrice(), lottoRewardListMap.get(reward).size())));
 	}
 
 	private void addLottoEmptyReward(Map<LottoReward, List<WinningLotto>> lottoMap) {
