@@ -19,6 +19,10 @@ public class LottoPrice {
         if (price < 1) throw new LottoPriceException();
     }
 
+    public int calculateLottoCount(int payment) {
+        return payment / price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
