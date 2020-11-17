@@ -5,10 +5,12 @@ import step3.exception.LottoCountBoundException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumbers;
+
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
 
@@ -26,9 +28,9 @@ public class Lotto {
         }
     }
 
-    public int matchLottoNumbers(List<Integer> matchLottoNumbers) {
+    public int matchLottoNumbers(Lotto lotto) {
         return (int) lottoNumbers.stream()
-                .filter(matchLottoNumbers::contains)
+                .filter(lotto::has)
                 .count();
     }
 
@@ -36,6 +38,22 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
+    }
+    public boolean has(int number){
+        return lottoNumbers.contains(number);
+    }
+    public Stream<Integer> stream(){
+        return lottoNumbers.stream();
+    }
+
+    private void add(int lottoNumber){
+
+    }
+
+    private void validDuplicatedNumber(int lottoNumber){
+        if(lottoNumbers.contains(lottoNumber)){
+            throw new
+        }
     }
 
     @Override
