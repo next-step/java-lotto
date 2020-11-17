@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.rank.Rank;
+import lotto.domain.rank.LottoRankCalculator;
 import org.junit.jupiter.api.Test;
 import lotto.dto.WinLotteryResult;
 
@@ -11,7 +12,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottosTest {
-
     @Test
     void of_return_empty_obj_when_receive_null() {
         // when
@@ -39,7 +39,7 @@ class LottosTest {
     void countHitNumber() {
         // given
         final Lottos lottos = Lottos.of(LottoMockFactory.createFourTeenLotto());
-        final Lotto answer = Lotto.of(
+        final Lotto winningLottery = Lotto.of(
                 Arrays.asList(
                         LottoNumber.of(1),
                         LottoNumber.of(2),
@@ -50,8 +50,10 @@ class LottosTest {
                 ),
                 LottoNumber.MAX
         );
+        final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
+        
         // when
-        final WinLotteryResult result = lottos.getWinLotteryResult(answer);
+        final WinLotteryResult result = lottoRankCalculator.calculate(lottos, winningLottery);
 
         // then
         assertAll(
@@ -63,6 +65,4 @@ class LottosTest {
                 () -> assertThat(result.getTotalPrizeMoney()).isEqualTo(Rank.FIFTH.getWinningMoney())
         );
     }
-
-
 }

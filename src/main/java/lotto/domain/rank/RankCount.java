@@ -1,19 +1,19 @@
 package lotto.domain.rank;
 
-public class RankHitCount {
+public class RankCount {
     private final Rank rank;
     private int count;
 
-    private RankHitCount(final Rank rank, final int count) {
+    private RankCount(final Rank rank, final int count) {
         this.rank = rank;
         this.count = count;
     }
 
-    public static RankHitCount of(final Rank rank, final int count) {
-        return new RankHitCount(rank, count);
+    public static RankCount of(final Rank rank, final int count) {
+        return new RankCount(rank, count);
     }
 
-    public static RankHitCount of(final Rank rank) {
+    public static RankCount of(final Rank rank) {
         return of(rank, 0);
     }
     
