@@ -26,7 +26,6 @@ public class CustomArgument implements Argument{
             return false;
         }
 
-        // return source.startsWith("//") && source.charAt(3) == '\n';
         return CUSTOM_DELIMITER_PATTERN.matcher(source)
                 .find();
     }
