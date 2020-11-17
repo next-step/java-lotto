@@ -10,7 +10,12 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class LottoResultView {
+	private static final String LOTTO_PURCHASE_MESSAGE = "%d개를 구매했습니다.";
 	private static final String LOTTO_STATISTICTS = "당첨통계\n---------";
+
+	public void printLottoPurchase(int lottoCount) {
+		System.out.println(String.format(LOTTO_PURCHASE_MESSAGE, lottoCount));
+	}
 
 	public void printLottoStaticsic(Map<LottoReward, List<Lotto>> lottoMap) {
 		System.out.println(LOTTO_STATISTICTS);

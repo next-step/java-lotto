@@ -10,14 +10,13 @@ import java.util.Map;
 
 public class LottoController {
 
-	public List<Lotto> startLottoGameGetLottos(LottoPurchase purchase) {
-		purchase.printLottoPurchase();
+	public List<Lotto> startLottoGameGetLottos(LottoPurchase purchase, LottoResultView resultView) {
+		resultView.printLottoPurchase(purchase.getLottoCount());
 		return printAutoLottoTicketsAndLottos(purchase);
 	}
 
-	public void printLottoStaticsic(String winnerNumbers, LottoPurchase purchase, List<Lotto> lottoList) {
+	public void printLottoStaticsic(String winnerNumbers, LottoPurchase purchase, List<Lotto> lottoList, LottoResultView resultView) {
 		LottoStaticstic lottoStaticstic = new LottoStaticstic(winnerNumbers, purchase);
-		LottoResultView resultView = new LottoResultView();
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
 		resultView.printLottoStaticsic(lottoRewardListMap);
 		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));

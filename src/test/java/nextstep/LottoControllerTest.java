@@ -3,6 +3,7 @@ package nextstep;
 import nextstep.step2.LottoController;
 import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoPurchase;
+import nextstep.step2.view.LottoResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,8 @@ public class LottoControllerTest {
 	@DisplayName("로또를 사고 지난주 당첨번호로 당첨통계를 구한다.")
 	public void startLottoGameTest() {
 		LottoPurchase lottoPurchase = new LottoPurchase(10000);
-		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoPurchase);
-		underTest.printLottoStaticsic("1,2,3,4,5,6", lottoPurchase, autoLottos);
+		LottoResultView resultView = new LottoResultView();
+		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoPurchase, resultView);
+		underTest.printLottoStaticsic("1,2,3,4,5,6", lottoPurchase, autoLottos, resultView);
 	}
 }
