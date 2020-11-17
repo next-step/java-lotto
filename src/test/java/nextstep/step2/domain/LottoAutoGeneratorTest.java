@@ -1,5 +1,6 @@
 package nextstep.step2.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,5 +19,13 @@ public class LottoAutoGeneratorTest {
 			assertAll(() -> assertTrue(number <= 45),
 					() -> assertTrue(number > 0));
 		});
+	}
+
+	@Test
+	@DisplayName("로또 자동번호는 불변객체이다.")
+	public void getLottoNumberImmutableTest() {
+		List<Integer> autoNumbers = new LottoAutoGenerator().getAutoNumbers();
+		Assertions.assertThatExceptionOfType(UnsupportedOperationException.class)
+				.isThrownBy(() -> autoNumbers.add(1));
 	}
 }

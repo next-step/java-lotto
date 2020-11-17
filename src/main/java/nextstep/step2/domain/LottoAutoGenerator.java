@@ -14,6 +14,6 @@ public class LottoAutoGenerator {
 		return rangeLottoNumbers.stream()
 				.limit(RANDOM_COUNT)
 				.sorted()
-				.collect(Collectors.toList());
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 	}
 }
