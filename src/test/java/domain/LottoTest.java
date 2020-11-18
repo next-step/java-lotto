@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private Lotto lotto = new Lotto(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+    private Lotto lotto = Lotto.of(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
             .boxed()
             .collect(Collectors.toList()));
 

@@ -29,7 +29,7 @@ public class LottoResult {
     }
 
     private void incrementFirst() {
-        lottoPrizeCount.incrementFirst();
+        lottoPrizeCount = lottoPrizeCount.incrementFirst();
         totalPrizeValue += LottoPrize.FIRST_PRIZE.getPrizeValue();
     }
 

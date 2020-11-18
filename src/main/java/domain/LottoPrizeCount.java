@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,20 +12,30 @@ public class LottoPrizeCount {
 
     private Map<String, Long> lottoPrizeCount = new HashMap<>();
 
-    public void incrementFirst() {
+    public LottoPrizeCount() {}
+
+    public LottoPrizeCount(Map<String, Long> lottoPrizeCount) {
+        this.lottoPrizeCount = lottoPrizeCount;
+    }
+
+    public LottoPrizeCount incrementFirst() {
         lottoPrizeCount.put(FIRST_PRIZE_COUNT, lottoPrizeCount.getOrDefault(FIRST_PRIZE_COUNT, 0L) + 1);
+        return new LottoPrizeCount(new HashMap<>(lottoPrizeCount));
     }
 
-    public void incrementSecond() {
+    public LottoPrizeCount incrementSecond() {
         lottoPrizeCount.put(SECOND_PRIZE_COUNT, lottoPrizeCount.getOrDefault(SECOND_PRIZE_COUNT, 0L) + 1);
+        return new LottoPrizeCount(new HashMap<>(lottoPrizeCount));
     }
 
-    public void incrementThird() {
+    public LottoPrizeCount incrementThird() {
         lottoPrizeCount.put(THIRD_PRIZE_COUNT, lottoPrizeCount.getOrDefault(THIRD_PRIZE_COUNT, 0L) + 1);
+        return new LottoPrizeCount(new HashMap<>(lottoPrizeCount));
     }
 
-    public void incrementFourth() {
+    public LottoPrizeCount incrementFourth() {
         lottoPrizeCount.put(FOURTH_PRIZE_COUNT, lottoPrizeCount.getOrDefault(FOURTH_PRIZE_COUNT, 0L) + 1);
+        return new LottoPrizeCount(new HashMap<>(lottoPrizeCount));
     }
 
     public Long getFirstPrizeCount() {
