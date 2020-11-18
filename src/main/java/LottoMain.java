@@ -1,5 +1,6 @@
 import controller.LottoController;
 import domain.LottoNumbers;
+import domain.Lottos;
 import view.InputView;
 
 public class LottoMain {
@@ -8,8 +9,13 @@ public class LottoMain {
         int price = inputView.inputPrice();
 
         LottoController controller = new LottoController(price);
+        Lottos lottos = controller.initLottos();
 
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(inputView.inputLastWinningNumber());
+
+//        Lotto.createLotto(winningNumbers);
+
+//        controller.compileLottoStatistics(winningNumbers, lottos);
     }
 }

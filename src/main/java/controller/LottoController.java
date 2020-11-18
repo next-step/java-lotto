@@ -2,6 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoInfo;
+import domain.LottoNumbers;
 import domain.Lottos;
 
 import java.util.HashMap;
@@ -36,8 +37,8 @@ public class LottoController {
         return lottoInfo.getPrice() / 1000;
     }
 
-    public int matchLottoNumbers(Lotto winningLotto, Lotto lotto) {
-        List<Integer> winningNumbers = winningLotto.getLottoNumbers().getNumbers();
+    public int matchLottoNumbers(LottoNumbers winningLotto, Lotto lotto) {
+        List<Integer> winningNumbers = winningLotto.getNumbers();
         List<Integer> lottoNumbers = lotto.getLottoNumbers().getNumbers();
 
         return (int) lottoNumbers
@@ -46,7 +47,7 @@ public class LottoController {
                 .count();
     }
 
-    public Map<Integer, Integer> compileLottoStatistics(Lotto winningLotto, Lottos lottos) {
+    public Map<Integer, Integer> compileLottoStatistics(LottoNumbers winningLotto, Lottos lottos) {
         List<Integer> matches = lottos.getLottos()
                 .stream()
                 .map(lotto -> matchLottoNumbers(winningLotto, lotto))

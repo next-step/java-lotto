@@ -53,7 +53,6 @@ class LottoControllerTest {
     void matchLottoNumbersDynamic(String winning, String test, int match) {
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
-        Lotto winningLotto = new Lotto(winningNumbers);
 
         LottoNumbers testNumbers = new LottoNumbers()
                 .createWinningNumbers(test);
@@ -61,7 +60,7 @@ class LottoControllerTest {
 
         controller = new LottoController();
 
-        assertThat(controller.matchLottoNumbers(winningLotto, testLotto))
+        assertThat(controller.matchLottoNumbers(winningNumbers, testLotto))
                 .isEqualTo(match);
     }
 
@@ -71,8 +70,6 @@ class LottoControllerTest {
         String winning = "1, 2, 3, 4, 5, 6";
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
-        Lotto winningLotto = new Lotto(winningNumbers);
-
 
         String test1 = "1, 2, 3, 4, 5, 6";
         LottoNumbers testNumber1 = new LottoNumbers()
@@ -102,7 +99,7 @@ class LottoControllerTest {
         result.put(6, 1);
 
         controller = new LottoController();
-        assertThat(controller.compileLottoStatistics(winningLotto, lottos)).isEqualTo(result);
+        assertThat(controller.compileLottoStatistics(winningNumbers, lottos)).isEqualTo(result);
     }
 
 }
