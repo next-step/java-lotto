@@ -37,29 +37,29 @@ public class PrizeWinningResult {
         return fourthPrizeCount;
     }
 
-    public int getFirstPrizeMoney(){
+    public int getFirstPrizeMoney() {
         return prizeMoneys.get(0);
     }
 
-    public int getSecondPrizeMoney(){
+    public int getSecondPrizeMoney() {
         return prizeMoneys.get(1);
     }
 
-    public int getThirdPrizeMoney(){
+    public int getThirdPrizeMoney() {
         return prizeMoneys.get(2);
     }
 
-    public int getFourthPrizeMoney(){
+    public int getFourthPrizeMoney() {
         return prizeMoneys.get(3);
     }
 
-    public double getRateOfReturn(){
+    public double getRateOfReturn() {
         int total = ((this.firstPrizeCount * this.prizeMoneys.get(0))
-        + (this.secondPrizeCount * this.prizeMoneys.get(1))
-        + (this.thirdPrizeCount * this.prizeMoneys.get(2))
-        + (this.fourthPrizeCount * this.prizeMoneys.get(3)));
+                + (this.secondPrizeCount * this.prizeMoneys.get(1))
+                + (this.thirdPrizeCount * this.prizeMoneys.get(2))
+                + (this.fourthPrizeCount * this.prizeMoneys.get(3)));
 
-        if( total == 0 ) return 0;
+        if (total == 0) return 0;
         return (double) total / this.paidMoney;
     }
 

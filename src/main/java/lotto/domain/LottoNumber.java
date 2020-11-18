@@ -12,7 +12,7 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public int getMatchedNumberCount(NumberMatcher numberMatcher){
+    public int getMatchedNumberCount(NumberMatcher numberMatcher) {
         return (int) numbers.stream().filter(it -> numberMatcher.match(it)).count();
     }
 
