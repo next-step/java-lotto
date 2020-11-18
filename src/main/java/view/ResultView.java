@@ -11,6 +11,8 @@ public class ResultView {
     private final String RESULT_STATISTIC = "당첨 통계";
     private final String HORIZONTAL = "---------";
     private final String STATISTIC_MENTION = "%d개 일치 (%d원)- %d개";
+    private final String PROFIT_MENTION = "총 수익률은 %.2f입니다.";
+    private final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private final int PRIZE_BEGINNING = 3;
     private final int PRIZE_ENDING = 7;
@@ -39,5 +41,12 @@ public class ResultView {
                                 LottoPrize.valueOf(key),
                                 lottoStatistics.get(key)
                         )));
+    }
+
+    public void displayProfit(double profit) {
+        System.out.print(String.format(PROFIT_MENTION, profit));
+        if(profit < 1) {
+            System.out.println(LOSS);
+        }
     }
 }

@@ -119,7 +119,11 @@ class LottoControllerTest {
         Map<Integer, Integer> lottoStatistics = controller.compileLottoStatistics(winningNumbers, lottos);
 
         assertThat(controller.calculateProfit(lottoStatistics, lottoInfo.getPrice()))
-                .isEqualTo((LottoPrize.valueOf(3)*2 + LottoPrize.valueOf(6)) / lottoInfo.getPrice());
+                .isEqualTo(
+                        (double) (LottoPrize.valueOf(3)*2
+                                + LottoPrize.valueOf(6))
+                                / (double) lottoInfo.getPrice()
+                );
     }
 
 }

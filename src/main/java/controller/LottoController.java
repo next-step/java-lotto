@@ -74,6 +74,6 @@ public class LottoController {
                 .map(key -> lottoStatistics.get(key) * LottoPrize.valueOf(key))
                 .sum();
 
-        return prizeSum / price;
+        return (double) prizeSum / (double) price;
     }
 }

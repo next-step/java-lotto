@@ -28,5 +28,8 @@ public class LottoMain {
 
         Map<Integer, Integer> lottoStatistics = controller.compileLottoStatistics(winningNumbers, lottos);
         resultView.displayStatistic(lottoStatistics);
+
+        double profit = controller.calculateProfit(lottoStatistics, price);
+        resultView.displayProfit(profit);
     }
 }
