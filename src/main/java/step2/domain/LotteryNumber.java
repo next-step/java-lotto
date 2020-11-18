@@ -4,6 +4,7 @@ import step2.utils.Sets;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import static step2.domain.Playslip.SELECTION_COUNT;
@@ -35,6 +36,21 @@ public class LotteryNumber {
 
     public boolean contains(Integer bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        LotteryNumber that = (LotteryNumber) o;
+        return numbers.equals(that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     /**
