@@ -1,25 +1,27 @@
 package lotto.view.printable;
 
-import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.dto.StatisticsDto;
 
 public class StatisticsPrintable extends Printable {
-    private final Result result;
-    private final Money purchaseMoney;
+    private final StatisticsDto dto;
 
-    public StatisticsPrintable(Result result, Money purchaseMoney) {
-        this.result = result;
-        this.purchaseMoney = purchaseMoney;
+    public StatisticsPrintable(StatisticsDto statisticsDto) {
+        dto = statisticsDto;
+    }
+
+    @Override
+    public void print() {
+        println(getStatisticsMsg());
     }
 
     private String getStatisticsMsg() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n---------\n");
         for (Rank rank : Rank.values()) {
-            sb.append(getJackpotMsg(rank, result.getNumOfLotto(rank)));
+            sb.append(getJackpotMsg(rank, dto.getResult().getNumOfLotto(rank)));
         }
-        double rateOfReturn = result.getRateOfReturn(purchaseMoney);
+        double rateOfReturn = dto.getResult().getRateOfReturn(dto.getPurchaseMoney());
         sb.append(getRateOfReturnMsg(rateOfReturn));
         return sb.toString();
     }
@@ -46,10 +48,5 @@ public class StatisticsPrintable extends Printable {
 
     private String getRateOfReturnMsg(double rateOfReturn) {
         return "총 수익률은 " + rateOfReturn + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    }
-
-    @Override
-    public void print() {
-        println(getStatisticsMsg());
     }
 }

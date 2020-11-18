@@ -28,27 +28,17 @@ public class InputView {
 
     private static int askPurchaseMoney() {
         printQuestion("구입금액을 입력해 주세요.");
-        String money = scanner.nextLine();
-        Validator.validateNumber(money);
-        return Integer.parseInt(money);
-    }
-
-    private static String askLotto() {
-        String lotto = scanner.nextLine();
-        Validator.validateNpe(lotto);
-        return lotto;
+        return scanner.nextInt();
     }
 
     private static String askWinningLotto() {
         printQuestion("지난 주 당첨 번호를 입력해 주세요.");
-        return askLotto();
+        return scanner.nextLine();
     }
 
     private static int askBonusBall() {
         printQuestion("보너스 볼을 입력해 주세요.");
-        String bonus = scanner.nextLine();
-        Validator.validateNumber(bonus);
-        return Integer.parseInt(bonus);
+        return scanner.nextInt();
     }
 
 }

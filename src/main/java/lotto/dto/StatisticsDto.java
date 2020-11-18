@@ -4,19 +4,19 @@ import lotto.domain.Money;
 import lotto.domain.Result;
 
 public class StatisticsDto {
-    private Result result;
-    private Money purchaseMoney;
+    private final Result result;
+    private final Money purchaseMoney;
 
     public StatisticsDto(Result result, Money purchaseMoney) {
         this.result = result;
         this.purchaseMoney = purchaseMoney;
     }
 
-    Result getResult() {
+    public Result getResult() {
         return result;
     }
 
-    Money getPurchaseMoney() {
+    public Money getPurchaseMoney() {
         return purchaseMoney;
     }
 }

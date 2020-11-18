@@ -1,26 +1,24 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Result;
+import lotto.dto.LottosDto;
+import lotto.dto.NumOfLottosDto;
+import lotto.dto.StatisticsDto;
+import lotto.view.printable.LottosPrintable;
+import lotto.view.printable.NumOfLottosPrintable;
 import lotto.view.printable.StatisticsPrintable;
 
 public class ResultView {
     private ResultView() {}
 
-    private static void println(Object str) {
-        System.out.println(str);
+    public static void printNumOfLottos(NumOfLottosDto numOfLottosDto) {
+        new NumOfLottosPrintable(numOfLottosDto).print();
     }
 
-    public static void printNumOfLottos(int numOfLottos) {
-        println(numOfLottos + "개를 구매했습니다.");
+    public static void printLottos(LottosDto lottosDto) {
+        new LottosPrintable(lottosDto).print();
     }
 
-    public static void printLottos(Lottos lottos) {
-        println(lottos);
-    }
-
-    public static void printStatistics(Result result, Money purchaseMoney) {
-        new StatisticsPrintable(result, purchaseMoney).print();
+    public static void printStatistics(StatisticsDto statisticsDto) {
+        new StatisticsPrintable(statisticsDto).print();
     }
 }
