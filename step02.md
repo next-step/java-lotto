@@ -31,8 +31,10 @@
     - public static LottoSeller of(int lottoPrice)
     - public Lottos generateLottos(int payment, LottoNumbers lottoBalls)
 - LottoReward
-     
+     - public static LottoReward of(int number, int reward, int count) 
+     - public LottoReward increaseCount() 
 - LottoRewardCollections
+    
 
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {

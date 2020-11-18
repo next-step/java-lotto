@@ -17,6 +17,10 @@ public class LottoReward {
         return new LottoReward(number, reward, count);
     }
 
+    public LottoReward increaseCount() {
+        return of(number, reward, count + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,7 +36,4 @@ public class LottoReward {
         return Objects.hash(number, reward, count);
     }
 
-    public LottoReward increaseCount() {
-        return of(number, reward, count + 1);
-    }
 }
