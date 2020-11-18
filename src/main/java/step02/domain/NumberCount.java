@@ -28,4 +28,8 @@ public class NumberCount {
     public int hashCode() {
         return Objects.hash(number, count);
     }
+
+    public boolean filter(int from, int to) {
+        return from <= number && number <= to;
+    }
 }
