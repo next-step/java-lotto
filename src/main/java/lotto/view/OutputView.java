@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.WinningRank;
-import lotto.domain.WinningRankStatistics;
+import lotto.domain.Number;
+import lotto.domain.*;
 
 import java.io.PrintStream;
 import java.math.BigDecimal;
@@ -71,8 +69,9 @@ public class OutputView {
     }
 
     private static String getLottoString(Lotto lotto) {
-        return lotto.getNumbers().getNumberList()
+        return lotto.getNumbers().getNumbers()
                 .stream()
+                .map(Number::getNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(LOTTO_NUMBER_SPLITTER));
     }
