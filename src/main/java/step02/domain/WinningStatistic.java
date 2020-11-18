@@ -1,5 +1,6 @@
 package step02.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WinningStatistic {
@@ -22,22 +23,14 @@ public class WinningStatistic {
         return WinningStatistic.of(winningNumbers, userLottos, lottoRewards.updateCounts(winningCounters));
     }
 
-    public int getMatchCount() {
-        return 0;
+    public List<LottoReward> getLottoRewards() {
+        return lottoRewards.getLottoRewards();
     }
 
-    public int getReward() {
-        return 0;
-    }
-
-    public int getTarget() {
-        return 0;
-    }
-
-    public double calculate(int lottoPrice) {
+    public double calculateGainRate(int lottoPrice) {
         double spent = lottoPrice * userLottos.getCount();
         double reward = lottoRewards.getReward();
-        return Math.floor(reward / spent * 100) / 100;
+        return reward / spent;
     }
 
     @Override

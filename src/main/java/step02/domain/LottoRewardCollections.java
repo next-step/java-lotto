@@ -32,6 +32,10 @@ public class LottoRewardCollections {
         return sum;
     }
 
+    public List<LottoReward> getLottoRewards() {
+        return lottoRewards;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

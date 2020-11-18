@@ -40,6 +40,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public List<Lotto> print() {
+        return lottos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

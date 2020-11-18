@@ -1,5 +1,10 @@
 package step02.view;
 
+import step02.domain.DoubleParser;
+import step02.domain.Lotto;
+import step02.domain.LottoReward;
+import step02.domain.WinningStatistic;
+
 import java.util.List;
 
 public class ResultView {
@@ -7,7 +12,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String HORIZON = "---------";
     private static final String WINNING_STATISTICS_MESSAGE = "%d 개 일치 (%d원)- %d개";
-    private static final String YIELD_MESSAGE = "총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String YIELD_MESSAGE = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String LOSS = "손해";
     private static final String GAIN = "이득";
 
@@ -17,28 +22,29 @@ public class ResultView {
     }
 
     public static void showLottos(List<Lotto> lottos) {
-        lottos.forEach((lotto) -> System.out.println(lotto.toString()));
+        lottos.forEach((lotto) -> System.out.println(lotto.print()));
     }
 
-    //    - 당첨 통계를 보여주는 기능
-    public static void showWinningStatistics(List<WinningStatistic> WinningStatistics) {
+    public static void showWinningStatistics(List<LottoReward> winningStatistics) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(HORIZON);
 
-        WinningStatistics.forEach(statistic ->
-            System.out.printf(
-                    WINNING_STATISTICS_MESSAGE,
-                    statistic.getTarget(),
-                    statistic.getReward(),
-                    statistic.getMatchCount()
-            )
+        winningStatistics.forEach(statistic -> {
+                    System.out.printf(
+                            WINNING_STATISTICS_MESSAGE,
+                            statistic.getCount(),
+                            statistic.getReward(),
+                            statistic.getNumber()
+                    );
+                    System.out.println();
+                }
         );
 
     }
 
-    public static void showYield(float yield) {
+    public static void showYield(double yield) {
         String result = yield < 1 ? LOSS : GAIN;
-        System.out.printf(YIELD_MESSAGE, yield, result);
+        System.out.printf(YIELD_MESSAGE, DoubleParser.getTwoDecimalPoint(yield), result);
     }
 
 }

@@ -17,13 +17,17 @@ public class LottoSeller {
     }
 
     public Lottos generateLottos(int payment, LottoNumbers lottoNumbers) {
-        int lottoCount = lottoPrice.calculateLottoCount(payment);
+        int lottoCount = calculateLottoCount(payment);
         List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
                 .limit(lottoCount)
                 .map(key -> lottoNumbers.generateLotto())
                 .collect(Collectors.toList());
 
         return Lottos.of(lottos);
+    }
+
+    private int calculateLottoCount(int payment) {
+        return lottoPrice.calculateLottoCount(payment);
     }
 
     @Override

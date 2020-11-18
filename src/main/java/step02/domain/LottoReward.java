@@ -29,6 +29,16 @@ public class LottoReward {
         return reward * count;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

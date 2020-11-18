@@ -35,4 +35,8 @@ public class Lotto {
             return total;
         });
     }
+
+    public List<Integer> print() {
+        return lotto;
+    }
 }

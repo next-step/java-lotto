@@ -75,7 +75,7 @@ public class WinningStatisticTest {
     public void test_calculateGainRate() {
         int LOTTO_PRICE = 1000;
         WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, statisticLottoRewards);
-        assertThat(winningStatistic.calculate(LOTTO_PRICE))
-                .isEqualTo(0.35);
+        assertThat(winningStatistic.calculateGainRate(LOTTO_PRICE))
+                .isEqualTo(0.35714285714285715);
     }
 }
