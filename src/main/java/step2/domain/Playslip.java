@@ -10,7 +10,8 @@ public class Playslip {
     private static final int MAX_SELECT_NUMBER = 45;
     public static final int SELECTION_COUNT = 6;
 
-    private final NaturalSelection selection = new NaturalSelection();
+    private final NaturalSelection naturalSelection = new NaturalSelection();
+    private ManualSelection manualSelection;
 
     public List<LotteryNumber> selectNumbers(int numberSet) {
         if (numberSet < 1) {
@@ -18,8 +19,11 @@ public class Playslip {
         }
 
         List<LotteryNumber> result = new ArrayList<>();
+        if (manualSelection != null) {
+            result.addAll(manualSelection.getLotteryNumbers());
+        }
         for (int i = 0; i < numberSet; i++) {
-            result.add(new LotteryNumber(selection.select(NUMBER_POOL, SELECTION_COUNT)));
+            result.add(new LotteryNumber(naturalSelection.select(NUMBER_POOL, SELECTION_COUNT)));
         }
         return result;
     }
