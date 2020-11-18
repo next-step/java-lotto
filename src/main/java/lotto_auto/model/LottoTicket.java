@@ -20,7 +20,7 @@ public class LottoTicket {
                         .boxed()
                         .collect(Collectors.toList());
         Collections.shuffle(ret);
-        lottoNumberList = Collections.unmodifiableList(ret.subList(0, 6));
+        this.lottoNumberList = ret.subList(0, 6);
     }
 
     public LottoTicket(List<Integer> numbers) {
@@ -28,7 +28,7 @@ public class LottoTicket {
         ThrowIfInValidLottoNumberCount(numbers);
         ThrowIfInvalidLottoNumberRange(numbers);
         ThrowIfDuplicate(numbers);
-        this.lottoNumberList = Collections.unmodifiableList(numbers);
+        this.lottoNumberList = numbers;
     }
 
     private void ThrowIfNull(List<Integer> numbers) {
@@ -64,6 +64,7 @@ public class LottoTicket {
     }
 
     public List<Integer> export() {
+        Collections.sort(this.lottoNumberList);
         return this.lottoNumberList;
     }
 

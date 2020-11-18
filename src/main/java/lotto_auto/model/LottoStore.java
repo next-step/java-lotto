@@ -4,12 +4,12 @@ public class LottoStore {
 
     private final static int LOTTO_TICKET_PRICE = 1000;
 
-    public LottoBundle buy(int money) {
+    public static LottoBundle buy(int money) {
         throwIfNegativeMoney(money);
         return new LottoBundle(money / LOTTO_TICKET_PRICE);
     }
 
-    private void throwIfNegativeMoney(int money) {
+    private static void throwIfNegativeMoney(int money) {
         if (money <= 0) {
             throw new IllegalArgumentException();
         }
