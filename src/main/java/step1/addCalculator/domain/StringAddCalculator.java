@@ -16,12 +16,12 @@ public class StringAddCalculator {
     }
 
     private static int runAddition(List<Integer> paramList){
-        int retrunValue = 0;
+        int returnValue = 0;
 
         for(Integer intValue : paramList){
-            retrunValue = intValue + retrunValue;
+            returnValue = intValue + returnValue;
         }
 
-        return retrunValue;
+        return returnValue;
     }
 }
