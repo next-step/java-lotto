@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.service;
+
+import lotto.domain.repository.Numbers;
 
 public class NumberSelectionStrategyImpl implements NumberSelectionStrategy {
 

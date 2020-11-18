@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.service;
+
+import lotto.domain.repository.WinningRank;
+import lotto.domain.repository.WinningRanks;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,7 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static lotto.domain.MoneyLottoMapper.LOTTO_PRICE;
+import static lotto.domain.util.MoneyLottoMapper.LOTTO_PRICE;
 
 public class WinningRankStatistics {
     public static final int SCALE = 2;

@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.repository;
+
+import lotto.domain.service.NumberSelectionStrategy;
 
 public class Lotto {
 

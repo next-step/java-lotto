@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.domain.service;
+
+import lotto.domain.repository.Lottos;
+import lotto.domain.repository.Numbers;
+import lotto.domain.repository.WinningRanks;
 
 public class LotteryMachine {
 

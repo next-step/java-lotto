@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.repository.*;
+import lotto.domain.service.LotteryMachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

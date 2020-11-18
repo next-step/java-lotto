@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.LotteryMachine;
-import lotto.domain.Lottos;
-import lotto.domain.WinningRankStatistics;
+import lotto.domain.repository.Lottos;
+import lotto.domain.service.LotteryMachine;
+import lotto.domain.service.WinningRankStatistics;
 
 public class Main {
     public static void main(String[] args) {

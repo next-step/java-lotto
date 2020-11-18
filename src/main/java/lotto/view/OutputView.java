@@ -1,7 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Number;
-import lotto.domain.*;
+import lotto.domain.repository.Lotto;
+import lotto.domain.repository.Lottos;
+import lotto.domain.repository.Number;
+import lotto.domain.repository.WinningRank;
+import lotto.domain.service.WinningRankStatistics;
 
 import java.io.PrintStream;
 import java.math.BigDecimal;

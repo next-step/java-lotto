@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.repository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public enum WinningRank {
         this.price = price;
     }
 
-    static WinningRank getWinningRank(int sameNumberNum) {
+    public static WinningRank getWinningRank(int sameNumberNum) {
         return Arrays.stream(WinningRank.values())
                 .filter(winningRank -> winningRank.sameNumberNums.contains(sameNumberNum))
                 .findAny()

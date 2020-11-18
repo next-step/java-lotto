@@ -1,4 +1,9 @@
-package lotto.domain;
+package lotto.domain.service;
+
+import lotto.domain.repository.Lottos;
+import lotto.domain.repository.Numbers;
+import lotto.domain.repository.WinningRank;
+import lotto.domain.repository.WinningRanks;
 
 import java.util.List;
 import java.util.stream.Collectors;
