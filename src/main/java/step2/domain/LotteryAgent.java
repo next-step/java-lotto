@@ -4,11 +4,14 @@ public class LotteryAgent {
     public static final Money PRICE_LOTTERY = Money.of(1000);
 
     public ExchangeResult exchange(Money money) {
+        return exchange(money, new Playslip());
+    }
+
+    public ExchangeResult exchange(Money money, Playslip playslip) {
         if (money.lessThan(PRICE_LOTTERY)) {
             throw new NotEnoughMoneyException();
         }
 
-        Playslip playslip = new Playslip();
         int ticketCount = money.divide(PRICE_LOTTERY);
 
         return new ExchangeResult(new LotteryTickets(playslip.selectNumbers(ticketCount)),

@@ -23,7 +23,7 @@ class LotteryController {
         Playslip playslip = new Playslip();
         playslip.setManualSelection(new ManualSelection(manualSelectionNumbers));
         // TODO Exchanges with playslip
-        LotteryTickets lotteryTickets = lotteryAgent.exchange(money).getLotteryTickets();
+        LotteryTickets lotteryTickets = lotteryAgent.exchange(money, playslip).getLotteryTickets();
         // TODO Responses with ExchangeResult
         resultView.responseTicketAndCount(lotteryTickets);
 
