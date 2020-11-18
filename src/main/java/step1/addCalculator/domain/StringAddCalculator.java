@@ -4,7 +4,6 @@ import java.util.List;
 
 public class StringAddCalculator {
 
-
     public static int splitAndSum(String paramValue){
         InputTextProcessing inputTextProcessing = new InputTextProcessing(paramValue);
 
