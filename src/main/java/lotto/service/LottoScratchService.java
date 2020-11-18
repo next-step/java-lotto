@@ -17,7 +17,7 @@ public class LottoScratchService {
                 .collect(Collectors.toList());
     }
 
-    public int calculateMatchCount(Lotto lotto, Winning winning) {
+    private int calculateMatchCount(Lotto lotto, Winning winning) {
         return (int) winning.getWinning().stream()
                 .filter(num -> lotto.getLotto().contains(num))
                 .count();
