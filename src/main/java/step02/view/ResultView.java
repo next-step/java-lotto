@@ -1,9 +1,8 @@
 package step02.view;
 
-import step02.domain.DoubleParser;
+import utils.DoubleParser;
 import step02.domain.Lotto;
 import step02.domain.LottoReward;
-import step02.domain.WinningStatistic;
 
 import java.util.List;
 

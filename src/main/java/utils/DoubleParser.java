@@ -1,4 +1,4 @@
-package step02.domain;
+package utils;
 
 public class DoubleParser {
     public static double getTwoDecimalPoint(double value) {
