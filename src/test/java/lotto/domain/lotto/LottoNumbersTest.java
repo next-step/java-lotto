@@ -136,7 +136,7 @@ class LottoNumbersTest {
             final String lottoNumberExpression = "1, 2, 3, 4, 5, 6";
 
             // when
-            final LottoTicket lottoTicket = LottoTicket.of(lottoNumberExpression, LottoNumber.MAX.getValue());
+            final LottoTicket lottoTicket = LottoTicket.of(lottoNumberExpression);
 
             // then
             assertThat(lottoTicket).isNotNull();
@@ -148,7 +148,7 @@ class LottoNumbersTest {
         void lotto_number_is_empty(final String blankExpression) {
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottoTicket.of(blankExpression, LottoNumber.MIN.getValue());
+                LottoTicket.of(blankExpression);
             });
 
             // then
@@ -164,7 +164,7 @@ class LottoNumbersTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottoTicket.of(nullExpression, LottoNumber.MIN.getValue());
+                LottoTicket.of(nullExpression);
             });
 
             // then

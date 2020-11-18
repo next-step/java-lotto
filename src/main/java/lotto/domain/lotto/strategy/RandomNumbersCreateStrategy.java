@@ -11,16 +11,12 @@ public class RandomNumbersCreateStrategy implements LottoNumbersCreateStrategy {
     private static final RandomNumberCreateStrategy createRandomNumberStrategy = new RandomNumberCreateStrategy();
 
     @Override
-    public LottoNumbers create(final LottoNumber bonusNumber) {
+    public LottoNumbers create() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        while (lottoNumbers.isEmpty() || hasDuplicates(lottoNumbers, bonusNumber)) {
+        while (lottoNumbers.isEmpty() || LottoNumbers.hasDuplicates(lottoNumbers)) {
             lottoNumbers = createRandomNumbers();
         }
         return LottoNumbers.of(lottoNumbers);
-    }
-
-    private boolean hasDuplicates(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
-        return LottoNumbers.hasDuplicates(lottoNumbers) || LottoTicket.hasDuplicates(LottoNumbers.of(lottoNumbers), bonusNumber);
     }
 
     private List<LottoNumber> createRandomNumbers() {

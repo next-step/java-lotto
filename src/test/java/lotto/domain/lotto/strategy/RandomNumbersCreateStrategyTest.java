@@ -14,7 +14,7 @@ class RandomNumbersCreateStrategyTest {
         final int lottoNumberLength = LottoNumbers.LOTTO_NUMBERS_LENGTH;
 
         // when
-        final LottoNumbers lottoNumbers = strategy.create(LottoNumber.MAX);
+        final LottoNumbers lottoNumbers = strategy.create();
 
         // then
         assertThat(lottoNumbers).isNotNull();

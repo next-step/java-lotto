@@ -40,11 +40,12 @@ class LottoTicketsTest {
     void countHitNumber() {
         // given
         final LottoTickets lottoTickets = LottoTickets.of(LottoTicketMockFactory.createFourTeenLotto());
-        final LottoTicket winningLottery = LottoTicket.of(createLottoNumberOneToSix(), LottoNumber.MAX);
+        final LottoTicket winningLottery = LottoTicket.of(createLottoNumberOneToSix());
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
+        final LottoNumber bonusNumber = LottoNumber.MAX;
 
         // when
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery, bonusNumber);
 
         // then
         assertAll(

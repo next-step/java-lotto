@@ -1,9 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.strategy.LottoNumberCreateStrategy;
 import lotto.domain.lotto.strategy.LottoNumbersCreateStrategy;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,27 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static lotto.domain.lotto.LottoTicket.LOTTO_NUMBER_MUST_NOT_BE_DUPLICATED;
-import static lotto.domain.lotto.LottoTicketMockFactory.createLottoNumberOneToSix;
+import static lotto.domain.lotto.LottoTicketMockFactory.*;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoTicketTest {
     private final LottoNumbers lottoNumberOneToSix = createLottoNumberOneToSix();
-
-    private static LottoNumbers duplicatedLottoNumbers;
-
-    @BeforeEach
-    void setUp() {
-        List<LottoNumber> duplicatedLottoNumberList = Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.MAX
-        );
-        duplicatedLottoNumbers = LottoNumbers.of(duplicatedLottoNumberList);
-    }
 
     @DisplayName("of")
     @Nested
@@ -41,11 +24,10 @@ class LottoTicketTest {
         @Test
         void with_strategy() {
             // given
-            final LottoNumbersCreateStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
-            final LottoNumberCreateStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
+            final LottoNumbersCreateStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
 
             // when 
-            final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy, bonusNumberStrategy);
+            final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy);
 
             // then
             assertThat(lottoTicket).isNotNull();
@@ -76,7 +58,7 @@ class LottoTicketTest {
 
             // when 
             final Throwable thrown = catchThrowable(() -> {
-                LottoTicket.of(LottoNumbers.of(duplicatedNumber), LottoNumber.MIN);
+                LottoTicket.of(LottoNumbers.of(duplicatedNumber));
             });
 
             // then
@@ -88,60 +70,41 @@ class LottoTicketTest {
     @Test
     void countHitNumber() {
         // given
-        final LottoNumbersCreateStrategy lottoNumbersStrategy = (LottoNumber lottoNumber) -> lottoNumberOneToSix;
-        final LottoNumberCreateStrategy bonusNumberStrategy = () -> LottoNumber.MAX;
+        final LottoNumbersCreateStrategy lottoNumbersStrategy = () -> lottoNumberOneToSix;
 
         // when 
-        final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy, bonusNumberStrategy);
+        final LottoTicket lottoTicket = LottoTicket.of(lottoNumbersStrategy);
 
         // then
-        assertThat(lottoTicket.countHitNumber(LottoTicket.of(lottoNumberOneToSix, LottoNumber.MAX))).isEqualTo(6);
+        assertThat(lottoTicket.countHitNumber(LottoTicket.of(lottoNumberOneToSix))).isEqualTo(6);
     }
 
     @Test
     void hasNotDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = LottoTicket.hasNotDuplicates(lottoNumberOneToSix, LottoNumber.MAX);
+        final boolean result = LottoTicket.hasNotDuplicates(lottoNumberOneToSix);
 
         // then
         assertThat(result).isTrue();
-    }
-
-    @Test
-    void hasNotDuplicates_when_receive_duplicated_lotto_number() {
-        // when
-        final boolean result = LottoTicket.hasNotDuplicates(duplicatedLottoNumbers, LottoNumber.MAX);
-
-        // then
-        assertThat(result).isFalse();
     }
 
     @Test
     void hasDuplicates_when_receive_not_duplicated_lotto_number() {
         // when
-        final boolean result = LottoTicket.hasDuplicates(lottoNumberOneToSix, LottoNumber.MAX);
+        final boolean result = LottoTicket.hasDuplicates(lottoNumberOneToSix);
 
         // then
         assertThat(result).isFalse();
     }
 
     @Test
-    void hasDuplicates_when_receive_duplicated_lotto_number() {
-        // when
-        final boolean result = LottoTicket.hasDuplicates(duplicatedLottoNumbers, LottoNumber.MAX);
-
-        // then
-        assertThat(result).isTrue();
-    }
-
-    @Test
     void isMatchBonus_matched() {
         // given
-        final LottoTicket lottoTicket = LottoTicket.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
-        final LottoTicket winningLottery = LottoTicket.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
+        final LottoTicket lottoTicket = LottoTicket.of(() -> lottoNumberOneToSix);
+        final LottoNumber bonusNumber = LottoNumber.of(6);
 
         // when
-        final boolean result = lottoTicket.isMatchBonus(winningLottery);
+        final boolean result = lottoTicket.isMatchBonus(bonusNumber);
 
         // then
         assertThat(result).isTrue();
@@ -150,11 +113,11 @@ class LottoTicketTest {
     @Test
     void isMatchBonus_not_matched() {
         // given
-        final LottoTicket lottoTicket = LottoTicket.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.MAX);
-        final LottoTicket winningLottery = LottoTicket.of((LottoNumber lottoNumber) -> lottoNumberOneToSix, () -> LottoNumber.of(7));
+        final LottoTicket lottoTicket = LottoTicket.of(() -> lottoNumberOneToSix);
+        final LottoNumber bonusNumber = LottoNumber.of(7);
 
         // when
-        final boolean result = lottoTicket.isMatchBonus(winningLottery);
+        final boolean result = lottoTicket.isMatchBonus(bonusNumber);
 
         // then
         assertThat(result).isFalse();

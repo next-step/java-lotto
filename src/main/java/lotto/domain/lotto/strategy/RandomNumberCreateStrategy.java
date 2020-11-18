@@ -1,7 +1,6 @@
 package lotto.domain.lotto.strategy;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.strategy.LottoNumberCreateStrategy;
 
 import java.util.Random;
 

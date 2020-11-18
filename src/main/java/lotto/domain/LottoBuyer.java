@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.rank.LottoRankCalculator;
@@ -33,8 +34,8 @@ public class LottoBuyer {
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
-        final LottoTicket winningLottery = LottoTicket.of(winningNumberExpression, bonusNumber);
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery);
+        final LottoTicket winningLottery = LottoTicket.of(winningNumberExpression);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery, LottoNumber.of(bonusNumber));
         return new LottoStatisticsResult(result, getProfit(result));
     }
 
