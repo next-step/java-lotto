@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,19 @@ public class LottoNumber {
         return (int) numbers.stream().filter(it -> numberMatcher.match(it)).count();
     }
 
+    public void print(PrintWriter writer) {
+        writer.print(toString());
+    }
+
+    @Override
+    public String toString() {
+        return String.join(
+                ",",
+                numbers.stream()
+                        .map(String::valueOf)
+                        .toArray(CharSequence[]::new));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,5 +41,6 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(this.numbers);
     }
+
 
 }

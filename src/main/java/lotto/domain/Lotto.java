@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.io.PrintWriter;
+
 public class Lotto {
 
     public static final int PRICE = 1000;
@@ -11,6 +13,10 @@ public class Lotto {
     }
 
     public int getMatchedNumberCount(NumberMatcher numberMatcher) {
-        return number.getMatchedNumberCount(numberMatcher);
+        return this.number.getMatchedNumberCount(numberMatcher);
+    }
+
+    public void printNumber(PrintWriter writer) {
+        this.number.print(writer);
     }
 }

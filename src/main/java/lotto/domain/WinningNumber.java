@@ -6,8 +6,22 @@ public class WinningNumber {
 
     private List<Integer> numbers;
 
+    private LottoNumberParser lottoNumberParser = new LottoNumberParser();
+
     public WinningNumber(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public WinningNumber(String expression){
+        parse(expression);
+    }
+
+    private void parse(String expression) {
+        try {
+            this.numbers = lottoNumberParser.parse(expression);
+        } catch ( RuntimeException e ){
+            throw new InvalidWinningNumberException(expression, e.getCause() != null ? e.getCause() : e );
+        }
     }
 
     public int getMatchedNumberCount(Lotto lotto){

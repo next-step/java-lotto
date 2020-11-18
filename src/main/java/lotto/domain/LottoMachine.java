@@ -18,8 +18,8 @@ public class LottoMachine {
         this.prizeMoneys = prizeMoneys;
     }
 
-    public List<Lotto> issue(int money) {
-        int howManyLottosCanIBuy = money / Lotto.PRICE;
+    public List<Lotto> issue(int purchaseAmount) {
+        int howManyLottosCanIBuy = purchaseAmount / Lotto.PRICE;
 
         return IntStream.range(0, howManyLottosCanIBuy)
                 .mapToObj(it -> generateLotto())
