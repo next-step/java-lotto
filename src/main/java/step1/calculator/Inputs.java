@@ -1,6 +1,5 @@
 package step1.calculator;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import step1.InputValue;
 import step1.StringSplitter;
 
@@ -15,10 +14,10 @@ import java.util.stream.Collectors;
  */
 public class Inputs {
 
-    private final List<Integer> inputs;
+    private final List<PositiveNumber> positiveNumbers;
 
-    private Inputs(List<Integer> inputs) {
-        this.inputs = inputs;
+    private Inputs(List<PositiveNumber> positiveNumbers) {
+        this.positiveNumbers = positiveNumbers;
     }
 
     public static Inputs of(InputValue inputValue) {
@@ -29,37 +28,27 @@ public class Inputs {
         // String to [] 로..!
         String[] strInputs = StringSplitter.split(input);
 
-        // [] -> List Integer 로 변환
-        // validation.. 음수면 안됨.
-        List<Integer> inputs = Arrays.stream(strInputs)
-                .map(s -> isUnderZero(s))
+        List<PositiveNumber> inputs = Arrays.stream(strInputs)
+                .map(s -> PositiveNumber.of(s))
                 .collect(Collectors.toList());
 
         return new Inputs(inputs);
     }
 
-    private static int isUnderZero(String input) {
-        int number = NumberUtils.toInt(input, -1);
-        if (number < NumberUtils.INTEGER_ZERO) {
-            throw new RuntimeException("입력한 값은 0 이상의 정수여야 합니다.");
-        }
-        return number;
-    }
-
-    public List<Integer> value() {
-        return Collections.unmodifiableList(this.inputs);
+    public List<PositiveNumber> value() {
+        return Collections.unmodifiableList(this.positiveNumbers);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Inputs inputs1 = (Inputs) o;
-        return Objects.equals(inputs, inputs1.inputs);
+        Inputs inputs = (Inputs) o;
+        return Objects.equals(positiveNumbers, inputs.positiveNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inputs);
+        return Objects.hash(positiveNumbers);
     }
 }

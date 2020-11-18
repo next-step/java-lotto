@@ -8,6 +8,7 @@ import java.util.Objects;
 public class InputValue {
 
     private final String input;
+    private static final String ZERO = "0";
 
     private InputValue(String input) {
         this.input = input;
@@ -24,8 +25,8 @@ public class InputValue {
     }
 
     private static String checkInput(String input) {
-        if (Objects.isNull(input) || "".equals(input)) {
-            return "0";
+        if (Objects.isNull(input) || input.isEmpty()) {
+            return ZERO;
         }
         return input;
     }
