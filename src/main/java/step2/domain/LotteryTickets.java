@@ -4,18 +4,18 @@ import java.util.Objects;
 import java.util.Set;
 
 public class LotteryTickets {
-    private final Set<LotteryNumber> numbers;
+    private final Set<LotteryNumber> selectNumbers;
     private final int manualSelectionCount;
     private final int naturalSelectionCount;
 
-    public LotteryTickets(Set<LotteryNumber> numbers) {
-        this(0, 0, numbers);
+    public LotteryTickets(Set<LotteryNumber> selectNumbers) {
+        this(0, 0, selectNumbers);
     }
 
     public LotteryTickets(int manualSelectionCount, int naturalSelectionCount, Set<LotteryNumber> selectNumbers) {
         this.manualSelectionCount = manualSelectionCount;
         this.naturalSelectionCount = naturalSelectionCount;
-        numbers = selectNumbers;
+        this.selectNumbers = selectNumbers;
     }
 
     public static LotteryTickets of(Playslip playslip) {
@@ -23,11 +23,11 @@ public class LotteryTickets {
     }
 
     public int size() {
-        return numbers.size();
+        return selectNumbers.size();
     }
 
     public Set<LotteryNumber> getTicketNumbers() {
-        return numbers;
+        return selectNumbers;
     }
 
     @Override
@@ -37,16 +37,16 @@ public class LotteryTickets {
         if (o == null || getClass() != o.getClass())
             return false;
         LotteryTickets that = (LotteryTickets) o;
-        return manualSelectionCount == that.manualSelectionCount && naturalSelectionCount == that.naturalSelectionCount && numbers.equals(that.numbers);
+        return manualSelectionCount == that.manualSelectionCount && naturalSelectionCount == that.naturalSelectionCount && selectNumbers.equals(that.selectNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers, manualSelectionCount, naturalSelectionCount);
+        return Objects.hash(selectNumbers, manualSelectionCount, naturalSelectionCount);
     }
 
     @Override
     public String toString() {
-        return "LotteryTickets{" + "numbers=" + numbers + ", manualSelectionCount=" + manualSelectionCount + ", naturalSelectionCount=" + naturalSelectionCount + '}';
+        return "LotteryTickets{" + "numbers=" + selectNumbers + ", manualSelectionCount=" + manualSelectionCount + ", naturalSelectionCount=" + naturalSelectionCount + '}';
     }
 }
