@@ -1,5 +1,6 @@
 package step2.domain;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,4 +42,13 @@ public class PlayslipTest {
         List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
+
+    @DisplayName("로또용지는 수동선택한 번호를 입력받을 수 있다.")
+    @Test
+    void acceptManualSelection() {
+        ManualSelection manualSelection = new ManualSelection(Sets.of(LotteryNumber.of(1, 2, 3, 4, 5, 6)));
+        playslip.setManualSelection(manualSelection);
+        assertThat(playslip.selectNumbers(2).size()).isEqualTo(2);
+    }
+
 }
