@@ -5,20 +5,23 @@
 - ResultView
     - public static void showLottoCount(int lottoCount) 사용자가 lotto 를 몇개 구매하였는지 보여주는 기능
     - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
-    - public static void showWinningStatistics(List<WinningStatistic> WinningStatistics) 당첨 통계를 보여주는 기능
-    - public static void showYield(float yield) 수익률을 보여주는 기능
+    - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능
+    - public static void showYield(double yield) 수익률을 보여주는 기능
 - LottoPrice 로또 장당 가격
     - public static LottoPrice of(int price) 생성자
     - private static void validate(int price) 장당 가격이 1원 이하이면 예외처리
     - public int calculateLottoCount(int payment) 지불한 돈으로 로또를 몇 개 살 수 있는지 계산해 주는 기능
 - LottoNumbers 로또에서 나올 수 있는 숫자들
+    - public static LottoNumbers of(Integer from, Integer to)
     - private static Integer[] generate(Integer from, Integer to)
+    - public Lotto generateLotto()
 - Lotto 
     - public static Lotto of(List<Integer> lotto)
-    - public int matchCount(Lotto winningNumbers)
+    - public int matchCount(Lotto winningNumbers) 
+    - public List<Integer> print()
 - WinningCounter 특정 수가 몇개 있는지를 가지는 클래스
     - public static WinningCounter of(int number, int count)
-    - public boolean filter(int from, int to)
+    - public boolean isSame(int winningNumber)
     - public int getCount()
 - WinningCounterCollections
     - public static WinningCounterCollections of(List<NumberCount> winningCounters)
@@ -32,17 +35,24 @@
     - private LottoSeller(LottoPrice lottoPrice)
     - public static LottoSeller of(int lottoPrice)
     - public Lottos generateLottos(int payment, LottoNumbers winningCounters)
+    - private int calculateLottoCount(int payment)
 - LottoReward
      - public static LottoReward of(int number, int reward, int count) 
      - public LottoReward updateCount(int count) 
      - public int getNumber() 
+     - public int calculate()
+     - public int getCount()
+     - public int getReward()
 - LottoRewardCollections
     - public static LottoRewardCollections of(List<LottoReward> lottoRewards) 
-    - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections) 
+    - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections)
+    - public int getReward() 
+    - public List<LottoReward> getLottoRewards()
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - public WinningStatistic execute()
-    - 수익률을 계산해 주는 기능
+    - public List<LottoReward> getLottoRewards()
+    - public double calculateGainRate(int lottoPrice)
 
 ## 진행 사항
 - racing car 마지막 리팩토링에서는, 작은 단위에서 부터 큰단위로 발전해가며 Test code 를 작성하고 프로덕션 코드를 작성하였습니다
