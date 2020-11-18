@@ -22,6 +22,12 @@ public class LottosTest {
 
     @Test
     void makeStatisticsTest() throws Exception {
-        assertThat(lottos.makeStatistics(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList()))).isInstanceOf(LottoResult.class);
+        LottoResult lottoResult = lottos.makeStatistics(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                                                            .boxed()
+                                                            .collect(Collectors.toList()));
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
+        assertThat(lottoPrizeCount.getFirstPrizeCount().equals(1L));
+        assertThat(lottoResult.getProfitRates()).isEqualTo(2_000_000L);
     }
 }

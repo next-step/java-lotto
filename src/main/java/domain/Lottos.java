@@ -6,11 +6,11 @@ import java.util.Objects;
 
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<List<Integer>> lottoNumbers){
         Objects.requireNonNull(lottoNumbers);
-        lottoNumbers.forEach( lottoNumber -> lottos.add(new Lotto(lottoNumber)) );
+        lottoNumbers.forEach( lottoNumber -> lottos.add(Lotto.of(lottoNumber)) );
     }
 
     public LottoResult makeStatistics(List<Integer> winningNumbers) throws Exception {

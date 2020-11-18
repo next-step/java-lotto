@@ -1,10 +1,10 @@
 package domain;
 
 public enum LottoPrize {
-    FIRST_PRIZE(6L, 2000000000L),
-    SECOND_PRIZE(5L, 1500000L),
-    THIRD_PRIZE(4L, 50000L),
-    FOURTH_PRIZE(3L, 5000L);
+    FIRST_PRIZE(6L, 2_000_000_000L),
+    SECOND_PRIZE(5L, 1_500_000L),
+    THIRD_PRIZE(4L, 50_000L),
+    FOURTH_PRIZE(3L, 5_000L);
 
     private final Long matchingNumber;
     private final Long prizeValue;

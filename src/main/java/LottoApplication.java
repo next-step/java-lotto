@@ -14,7 +14,7 @@ public class LottoApplication {
 
     public static void main(String[] args) throws Exception {
         Money buyingAmount = Money.of(InputView.askMoneyAmount());
-        Money lottoPrice = Money.of(1000L);
+        Money lottoPrice = Money.of(1_000L);
 
         List<List<Integer>> lottoNumbers = new ArrayList<>();
         List<Integer> oneToFortyFive = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());

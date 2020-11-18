@@ -12,33 +12,41 @@ public class LottoResultTest {
 
     @Test
     void checkWhetherToWinTest_4등() {
-        Long before = lottoResult.getFourthPrizeCount();
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
+        Long before = lottoPrizeCount.getFourthPrizeCount();
         lottoResult.checkWhetherToWin(3l);
-        Long after = lottoResult.getFourthPrizeCount();
+        Long after = lottoPrizeCount.getFourthPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void checkWhetherToWinTest_3등() {
-        Long before = lottoResult.getThirdPrizeCount();
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
+        Long before = lottoPrizeCount.getThirdPrizeCount();
         lottoResult.checkWhetherToWin(4l);
-        Long after = lottoResult.getThirdPrizeCount();
+        Long after = lottoPrizeCount.getThirdPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void checkWhetherToWinTest_2등() {
-        Long before = lottoResult.getSecondPrizeCount();
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
+        Long before = lottoPrizeCount.getSecondPrizeCount();
         lottoResult.checkWhetherToWin(5l);
-        Long after = lottoResult.getSecondPrizeCount();
+        Long after = lottoPrizeCount.getSecondPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void checkWhetherToWinTest_1등() {
-        Long before = lottoResult.getFirstPrizeCount();
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
+        Long before = lottoPrizeCount.getFirstPrizeCount();
         lottoResult.checkWhetherToWin(6l);
-        Long after = lottoResult.getFirstPrizeCount();
+        Long after = lottoPrizeCount.getFirstPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
 

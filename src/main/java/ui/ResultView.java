@@ -2,6 +2,7 @@ package ui;
 
 import domain.Lotto;
 import domain.LottoPrize;
+import domain.LottoPrizeCount;
 import domain.LottoResult;
 
 import java.util.List;
@@ -23,15 +24,17 @@ public class ResultView {
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
+        LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
+
         System.out.println(LOTTO_STATISTICS_IS);
         System.out.printf(FOURTH_PRIZE_IS, LottoPrize.FOURTH_PRIZE.getPrizeValue());
-        System.out.println(lottoResult.getFourthPrizeCount());
+        System.out.println(lottoPrizeCount.getFourthPrizeCount());
         System.out.printf(THIRD_PRIZE_IS, LottoPrize.THIRD_PRIZE.getPrizeValue());
-        System.out.println(lottoResult.getThirdPrizeCount());
+        System.out.println(lottoPrizeCount.getThirdPrizeCount());
         System.out.printf(SECOND_PRIZE_IS, LottoPrize.SECOND_PRIZE.getPrizeValue());
-        System.out.println(lottoResult.getSecondPrizeCount());
+        System.out.println(lottoPrizeCount.getSecondPrizeCount());
         System.out.printf(FIRST_PRIZE_IS, LottoPrize.FIRST_PRIZE.getPrizeValue());
-        System.out.println(lottoResult.getFirstPrizeCount());
+        System.out.println(lottoPrizeCount.getFirstPrizeCount());
         System.out.printf(TOTAL_MARGIN_RATES_ARE, lottoResult.getProfitRates());
     }
 }
