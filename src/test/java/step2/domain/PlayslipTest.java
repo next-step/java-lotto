@@ -1,6 +1,5 @@
 package step2.domain;
 
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -49,6 +51,13 @@ public class PlayslipTest {
         ManualSelection manualSelection = new ManualSelection(Sets.of(LotteryNumber.of(1, 2, 3, 4, 5, 6)));
         playslip.setManualSelection(manualSelection);
         assertThat(playslip.selectNumbers(2).size()).isEqualTo(2);
+    }
+
+    private abstract static class Sets {
+        static <T> Set<T> of(T... elements) {
+            return Stream.of(elements).collect(toSet());
+        }
+
     }
 
 }

@@ -24,6 +24,11 @@ public class Playslip {
         return result;
     }
 
+
+    public void setManualSelection(ManualSelection manualSelection) {
+
+    }
+
     private static List<Integer> makeNumberPool() {
         List<Integer> selectableNumberSource = new ArrayList<>();
         for (int i = 0; i < MAX_SELECT_NUMBER; i++) {
