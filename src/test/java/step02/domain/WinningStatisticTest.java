@@ -12,6 +12,7 @@ public class WinningStatisticTest {
     Lotto winningNumbers;
     Lottos userLottos;
     LottoRewardCollections lottoRewards;
+    LottoRewardCollections statisticLottoRewards;
 
     @BeforeEach
     void setup() {
@@ -42,6 +43,14 @@ public class WinningStatisticTest {
                         LottoReward.of(6, 2000000000, 0)
                 )
         );
+        statisticLottoRewards = LottoRewardCollections.of(
+                Arrays.asList(
+                        LottoReward.of(3, 5000, 1),
+                        LottoReward.of(4, 50000, 0),
+                        LottoReward.of(5, 1500000, 0),
+                        LottoReward.of(6, 2000000000, 0)
+                )
+        );
     }
 
     @DisplayName("생성자(금주의 당첨 번호)")
@@ -57,18 +66,16 @@ public class WinningStatisticTest {
         Lotto winningNumbers = Lotto.of(Arrays.asList(1, 2, 3, 4, 5));
         WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, lottoRewards);
 
-        LottoRewardCollections expect =
-                LottoRewardCollections.of(
-                        Arrays.asList(
-                                LottoReward.of(3, 5000, 1),
-                                LottoReward.of(4, 50000, 0),
-                                LottoReward.of(5, 1500000, 0),
-                                LottoReward.of(6, 2000000000, 0)
-                        )
-                );
         assertThat(winningStatistic.execute())
-                .isEqualTo(WinningStatistic.of(winningNumbers, userLottos, expect));
+                .isEqualTo(WinningStatistic.of(winningNumbers, userLottos, statisticLottoRewards));
     }
 
-//    - 수익률을 계산해 주는 기능
+    @DisplayName("수익률을 계산해 주는 기능")
+    @Test
+    public void test_calculateGainRate() {
+        int LOTTO_PRICE = 1000;
+        WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, statisticLottoRewards);
+        assertThat(winningStatistic.calculate(LOTTO_PRICE))
+                .isEqualTo(0.35);
+    }
 }

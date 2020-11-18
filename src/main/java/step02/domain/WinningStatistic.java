@@ -1,6 +1,5 @@
 package step02.domain;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class WinningStatistic {
@@ -35,6 +34,12 @@ public class WinningStatistic {
         return 0;
     }
 
+    public double calculate(int lottoPrice) {
+        double spent = lottoPrice * userLottos.getCount();
+        double reward = lottoRewards.getReward();
+        return Math.floor(reward / spent * 100) / 100;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +52,5 @@ public class WinningStatistic {
     public int hashCode() {
         return Objects.hash(winningNumbers);
     }
+
 }
