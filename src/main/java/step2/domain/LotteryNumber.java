@@ -1,6 +1,7 @@
 package step2.domain;
 
-import java.util.Arrays;
+import step2.utils.Sets;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,7 @@ import static step2.domain.Playslip.SELECTION_COUNT;
 
 public class LotteryNumber {
     public static LotteryNumber of(Integer... numbers) {
-        return new LotteryNumber(new HashSet<>(Arrays.asList(numbers)));
+        return new LotteryNumber(Sets.of(numbers));
     }
 
     private final Set<Integer> numbers;
