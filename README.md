@@ -7,3 +7,22 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+### step 1
+- [x] 입력한 값이 null 혹은 빈 문자열 일 때 0 반환  
+    InputValue 구현
+- [x] 구분자가 없고, 숫자 하나만 있을 때
+    StringSplitter 구현      
+  - [x] 👉 해당 숫자 반환  
+    
+- 정해진 구분자(, :)인 경우 
+    - [x] 문자열 분리
+    - [x] 분리한 각 숫자의 합 반환
+    - [x] 분리한 값이 숫자가 아닐 때 예외처리(RuntimeException)
+    - [x] 분리한 값이 음수일 때 예외처리(RuntimeException)
+
+- 커스텀 구분자 인 경우
+    - [x] 구분자 파악 (// \n 사이의 문자)
+    - [x] 위의 **정해진 구분자**와 같은 로직으로 개발
+    - 커스텀 지정인 경우 정해진 구분자(, :) 에 추가된 경우인듯??
+
