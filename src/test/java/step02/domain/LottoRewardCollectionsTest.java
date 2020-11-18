@@ -21,7 +21,7 @@ public class LottoRewardCollectionsTest {
                 LottoReward.of(5, 1500000, 0),
                 LottoReward.of(6, 2000000000, 0)
         );
-        initialLottoRewards = Arrays.asList(
+        statisticLottoRewards = Arrays.asList(
                 LottoReward.of(3, 5000, 1),
                 LottoReward.of(4, 50000, 0),
                 LottoReward.of(5, 1500000, 0),
