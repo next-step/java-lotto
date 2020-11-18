@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public class Splitter {
     private Splitter() {}
 
-    public static List<Integer> splitIntegers(String integers, String regex) {
-        return split(integers, regex)
+    static List<Integer> splitStringToIntegers(String string, String regex) {
+        return split(string, regex)
                 .stream()
                 .map(Splitter::parseInt)
                 .collect(Collectors.toList());

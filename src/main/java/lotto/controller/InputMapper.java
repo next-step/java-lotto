@@ -8,8 +8,8 @@ import lotto.dto.input.PurchaseMoneyDto;
 import lotto.dto.input.WinningConditionDto;
 import lotto.view.InputView;
 
-class InputFacade {
-    private InputFacade() {}
+class InputMapper {
+    private InputMapper() {}
 
     static Money getPurchaseMoney() {
         PurchaseMoneyDto dto = InputView.getPurchaseMoneyDto();
@@ -26,6 +26,6 @@ class InputFacade {
 
     private static Lotto parseLotto(String lotto) {
         String splitRegex = "[ ,]+";
-        return new Lotto(Splitter.splitIntegers(lotto, splitRegex));
+        return new Lotto(Splitter.splitStringToIntegers(lotto, splitRegex));
     }
 }
