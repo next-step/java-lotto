@@ -107,12 +107,12 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumber);
 
         List<Integer> winningNumber = new ArrayList<>();
-        lottoNumber.add(4);
-        lottoNumber.add(5);
-        lottoNumber.add(6);
-        lottoNumber.add(7);
-        lottoNumber.add(8);
-        lottoNumber.add(9);
+        winningNumber.add(4);
+        winningNumber.add(5);
+        winningNumber.add(6);
+        winningNumber.add(7);
+        winningNumber.add(8);
+        winningNumber.add(9);
         LottoTicket winningTicket = new LottoTicket(winningNumber);
 
         assertThat(lottoTicket.matchNumberCount(winningTicket)).isEqualTo(3);
