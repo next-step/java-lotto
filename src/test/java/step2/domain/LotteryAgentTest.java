@@ -46,7 +46,7 @@ public class LotteryAgentTest {
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
         LotteryTickets lotteryTickets = exchange(money).getLotteryTickets();
-        assertThat(lotteryTickets.size()).isEqualTo(size);
+        assertThat(lotteryTickets.getNaturalSelectionCount()).isEqualTo(size);
     }
 
     @DisplayName("티캣은 선택한 번호들을 가진다.")

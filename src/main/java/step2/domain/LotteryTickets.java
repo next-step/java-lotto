@@ -24,8 +24,12 @@ public class LotteryTickets {
         this.selectNumbers = selectNumbers;
     }
 
-    public int size() {
-        return selectNumbers.size();
+    public int getNaturalSelectionCount() {
+        return naturalSelectionCount;
+    }
+
+    public int getManualSelectionCount() {
+        return manualSelectionCount;
     }
 
     public Set<LotteryNumber> getTicketNumbers() {
