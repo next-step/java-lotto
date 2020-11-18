@@ -16,10 +16,12 @@
 - Lotto 
     - public static Lotto of(List<Integer> lotto)
     - public int matchCount(Lotto winningNumbers)
-- NumberCount 특정 수가 몇개 있는지를 가지는 클래스
-    - public static NumberCount of(int number, int count)
-- NumberCountCollections
-    - public static NumberCountCollections of(List<NumberCount> numberCounts)
+- LottoBall 특정 수가 몇개 있는지를 가지는 클래스
+    - public static LottoBall of(int number, int count)
+    - public boolean filter(int from, int to)
+- LottoBallCollections
+    - public static LottoBallCollections of(List<NumberCount> lottoBalls)
+    - public List<NumberCount> filter(int from, int to)
 - Lottos
     - public static Lottos of(List<Lotto> lottos)
     - private Map<Integer, Integer> calculateCountNumber(Lotto winningNumbers) 
@@ -27,7 +29,7 @@
 - LottoSeller 로또 판매기 
     - private LottoSeller(LottoPrice lottoPrice)
     - public static LottoSeller of(int lottoPrice)
-    - public Lottos generateLottos(int payment, LottoNumbers lottoNumbers)
+    - public Lottos generateLottos(int payment, LottoNumbers lottoBalls)
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능

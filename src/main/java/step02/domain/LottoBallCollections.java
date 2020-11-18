@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class NumberCountCollections {
-    private final List<NumberCount> numbersCount;
+public class LottoBallCollections {
+    private final List<LottoBall> numbersCount;
 
-    private NumberCountCollections(List<NumberCount> numberCounts) {
-        this.numbersCount = numberCounts;
+    private LottoBallCollections(List<LottoBall> lottoBalls) {
+        this.numbersCount = lottoBalls;
     }
 
-    public static NumberCountCollections of(List<NumberCount> numberCounts) {
-        return new NumberCountCollections(numberCounts);
+    public static LottoBallCollections of(List<LottoBall> lottoBalls) {
+        return new LottoBallCollections(lottoBalls);
     }
 
-    public List<NumberCount> filter(int from, int to) {
+    public List<LottoBall> filter(int from, int to) {
         return numbersCount.stream()
                 .filter(numberCount -> numberCount.filter(from, to))
                 .collect(Collectors.toList());
@@ -25,7 +25,7 @@ public class NumberCountCollections {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NumberCountCollections that = (NumberCountCollections) o;
+        LottoBallCollections that = (LottoBallCollections) o;
         return Objects.equals(numbersCount, that.numbersCount);
     }
 
