@@ -1,10 +1,7 @@
 package lotto.domain;
 
-import lotto.LottoErrorMessage;
-
 import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public enum PrizeUnit {
 

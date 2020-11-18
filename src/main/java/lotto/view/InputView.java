@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.LottoErrorMessage;
+import lotto.domain.LottoErrorMessage;
 
 import java.util.Scanner;
 

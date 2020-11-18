@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoErrorMessage;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

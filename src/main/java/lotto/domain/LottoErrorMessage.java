@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum LottoErrorMessage {
     UNDER_MIN_INPUT_MONEY(0, "로또 최소 구매 금액은 1000원입니다."),
