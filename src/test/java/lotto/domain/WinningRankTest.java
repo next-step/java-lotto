@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class WinningRankTest {
+class WinningRankTest {
 
     static Stream<Arguments> getWinningRank() {
         return Stream.of(
@@ -37,7 +37,7 @@ public class WinningRankTest {
 
     @Test
     @DisplayName("일치하는 숫자가 0~6이 아닌 다른 숫자가 들어올 때")
-    void getWinningRank_not_0_to_6() {
+    void getWinningRank_not0to6() {
         assertThatThrownBy(() -> WinningRank.getWinningRank(7))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Wrong Same Number Count");
