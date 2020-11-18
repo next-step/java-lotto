@@ -41,7 +41,7 @@
     - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections) 
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
-    - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
+    - public WinningStatistic execute()
     - 수익률을 계산해 주는 기능
 
 ## 진행 사항

@@ -36,6 +36,10 @@ public class Lottos {
         return WinningCounterCollections.of(winningCounters);
     }
 
+    public int getCount() {
+        return lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
