@@ -2,7 +2,7 @@ package lotto.exception;
 
 public class BadMoneyException extends RuntimeException {
     private BadMoneyException() {
-        super("money 는 0보다 큰 양수여야 합니다.");
+        super("money 는 양수여야 합니다.");
     }
 
     public static BadMoneyException getInstance() {

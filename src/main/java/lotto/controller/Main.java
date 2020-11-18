@@ -1,36 +1,25 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.view.InputView;
+import lotto.dto.result.LottosDto;
+import lotto.dto.result.NumOfLottosDto;
+import lotto.dto.result.StatisticsDto;
 import lotto.view.ResultView;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        Money lottoPrice = LottoPriceMoney.getInstance();
-        Money purchaseMoney = InputView.askPurchaseMoney();
-        int numOfLottos = (int) purchaseMoney.divide(lottoPrice);
-        ResultView.printNumOfLottos(numOfLottos);
+        Money purchaseMoney = InputFacade.getPurchaseMoney();
+        int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
+        NumOfLottosDto numOfLottosDto = new NumOfLottosDto(numOfLottos);
+        ResultView.printNumOfLottos(numOfLottosDto);
 
-        Shuffler shuffler = new Shuffler(LottoNo.MIN, LottoNo.MAX);
-        List<Lotto> lottos = createLottos(numOfLottos, () -> new Lotto(
-                shuffler.getIntegers(Lotto.SIZE)
-        ));
-        ResultView.printLottos(lottos);
+        Lottos lottos = new Lottos(numOfLottos, Strategy::random);
+        LottosDto lottosDto = new LottosDto(lottos);
+        ResultView.printLottos(lottosDto);
 
-        Lotto winningLotto = InputView.askWinningLotto();
-        Result result = new Result(lottos, winningLotto);
-        ResultView.printStatistics(result, purchaseMoney);
-    }
-
-    private static List<Lotto> createLottos(int size, Supplier<Lotto> supplier) {
-        List<Lotto> lottos = new LinkedList<>();
-        for (int i = 0; i < size; i++) {
-            lottos.add(supplier.get());
-        }
-        return lottos;
+        WinningCondition condition = InputFacade.getWinningCondition();
+        Result result = lottos.getResult(condition);
+        StatisticsDto statisticsDto = new StatisticsDto(result, purchaseMoney);
+        ResultView.printStatistics(statisticsDto);
     }
 }

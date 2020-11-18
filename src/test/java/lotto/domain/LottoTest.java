@@ -6,6 +6,7 @@ import lotto.exception.LottoRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -41,20 +42,32 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("같은 LottoNo 개수 만큼 countSameNo 값이 나와야한다.")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
-    void countSameNo(int count) {
+    void getCountOfMatch(int countOfMatch) {
         int size = 6;
         Integer[] lottoNos1 = new Integer[size];
         Integer[] lottoNos2 = new Integer[size];
         for (int i = 0; i < size; i++) {
             lottoNos1[i] = i + 1;
-            lottoNos2[i] = i + 1 + size - count;
+            lottoNos2[i] = i + 1 + size - countOfMatch;
         }
 
         Lotto lotto1 = new Lotto(Arrays.asList(lottoNos1));
         Lotto lotto2 = new Lotto(Arrays.asList(lottoNos2));
 
-        assertThat(lotto1.countSameNo(lotto2))
-                .isEqualTo(count);
+        assertThat(lotto1.getCountOfMatch(lotto2))
+                .isEqualTo(countOfMatch);
+    }
+
+    @ParameterizedTest
+    @DisplayName("lottoNo를 포함하고 있다면 true이다.")
+    @CsvSource(value = {"1$true", "5$true", "6$true", "7$false", "45$false"}, delimiter = '$')
+    void contains(int lottoNo, boolean expected) {
+
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNo lottoNoObj = LottoNoPool.getLottoNo(lottoNo);
+
+        assertThat(lotto.contains(lottoNoObj))
+                .isEqualTo(expected);
     }
 
     @Test
@@ -79,6 +92,16 @@ class LottoTest {
                 .isThrownBy(() -> new Lotto(lottoNoList));
     }
 
+    @ParameterizedTest
+    @DisplayName("정상적으로 NumOfLottos 가 계산되어야 한다.")
+    @ValueSource(ints = {0, 500, 1000, 1500, 2000})
+    public void getNumOfLottos(int money) {
+        int price = 1000;
+        Money purchaseMoney = new Money(money);
+        assertThat(Lotto.getNumOfLottos(purchaseMoney))
+                .isEqualTo(money / price);
+    }
+
 
     @Test
     void testToString() {
@@ -88,29 +111,5 @@ class LottoTest {
         String expected = "[1, 2, 3, 4, 5, 6]";
         assertThat(lotto.toString())
                 .isEqualTo(expected);
-    }
-
-    @Test
-    void testEquals() {
-        Lotto lotto1 = new Lotto(
-                Arrays.asList(1, 2, 3, 4, 5, 6)
-        );
-        Lotto lotto2 = new Lotto(
-                Arrays.asList(6, 5, 4, 3, 2, 1)
-        );
-        assertThat(lotto1)
-                .isEqualTo(lotto2);
-    }
-
-    @Test
-    void testHashCode() {
-        Lotto lotto1 = new Lotto(
-                Arrays.asList(1, 2, 3, 4, 5, 6)
-        );
-        Lotto lotto2 = new Lotto(
-                Arrays.asList(6, 5, 4, 3, 2, 1)
-        );
-        assertThat(lotto1.hashCode())
-                .isEqualTo(lotto2.hashCode());
     }
 }

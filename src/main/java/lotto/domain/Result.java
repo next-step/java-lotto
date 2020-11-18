@@ -1,45 +1,62 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
 public class Result {
-    private final Map<Integer, Integer> result;
+    private final Map<Rank, Integer> result;
 
-    public Result(List<Lotto> lottos, Lotto winningLotto) {
+    Result() {
         result = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int count = lotto.countSameNo(winningLotto);
-            increaseNumOfLotto(count);
-        }
     }
 
-    public Money getProfit() {
+    public double getRateOfReturn(Money purchaseMoney) {
+        return getProfit().divide(purchaseMoney);
+    }
+
+    Money getProfit() {
         int profit = 0;
-        for (Jackpot jackpot : Jackpot.values()) {
-            profit += jackpot.getPrizeMoney() * getNumOfLotto(jackpot);
+        for (Rank rank : Rank.values()) {
+            profit += rank.getWinningMoney() * getNumOfLotto(rank);
         }
         return new Money(profit);
     }
 
-    public int getNumOfLotto(Jackpot jackpot) {
-        return getNumOfLotto(
-                jackpot.getNumOfCorrected()
+    public int getNumOfLotto(Rank rank) {
+        return result.getOrDefault(
+                rank,
+                0
         );
     }
 
-    private int getNumOfLotto(int numOfCorrected) {
-        return Optional.ofNullable(
-                result.get(numOfCorrected)
-        ).orElseGet(() -> 0);
-    }
-
-    void increaseNumOfLotto(int numOfCorrected) {
+    public void increaseNumOfLotto(WinningCondition condition, Lotto lotto) {
+        Rank rank = condition.getRank(lotto);
         result.put(
-                numOfCorrected,
-                getNumOfLotto(numOfCorrected) + 1
+                rank,
+                getNumOfLotto(rank) + 1
         );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Result result1 = (Result) o;
+        return result.equals(result1.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result.toString());
+    }
+
+    @Override
+    public String toString() {
+        return result.toString();
     }
 }

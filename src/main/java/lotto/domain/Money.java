@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.BadDividerException;
 import lotto.exception.BadMoneyException;
 
 import java.util.Objects;
@@ -13,14 +14,16 @@ public class Money {
     }
 
     private void validateMoney(int money) {
-        if (money <= 0) {
+        if (money < 0) {
             throw BadMoneyException.getInstance();
         }
 
     }
 
-    // TODO: divde 함수 없애기
     public double divide(Money divider) {
+        if (divider.money <= 0) {
+            throw BadDividerException.getInstance();
+        }
         return money / divider.money;
     }
 

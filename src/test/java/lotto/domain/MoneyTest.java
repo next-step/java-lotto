@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import lotto.exception.BadDividerException;
 import lotto.exception.BadMoneyException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class MoneyTest {
 
     @ParameterizedTest
-    @DisplayName("money 가 0보다 작거나 같으면, BadMoneyException 이 발생한다.")
-    @ValueSource(ints = {-379, -1, 0})
+    @DisplayName("money 가 0보다 작으면, BadMoneyException 이 발생한다.")
+    @ValueSource(ints = {-379, -1})
     public void constructor(int money) {
         assertThatExceptionOfType(BadMoneyException.class)
                 .isThrownBy(() -> new Money(money));
@@ -28,5 +30,12 @@ class MoneyTest {
         Money dividerObj = new Money(divider);
         assertThat(moneyObj.divide(dividerObj))
                 .isEqualTo(money / divider);
+    }
+
+    @Test
+    @DisplayName("0으로 나누면 BadDividerException 이 발생한다.")
+    public void divide_by_zero() {
+        assertThatExceptionOfType(BadDividerException.class)
+                .isThrownBy(() -> new Money(1).divide(new Money(0)));
     }
 }
