@@ -52,6 +52,8 @@ public class LotteryControllerTest {
         //@formatter:off
         assertThat(String.join("->", record))
                 .isEqualTo("requestMoney->" +
+                        "requestManualSelectionCount->" +
+                        "requestManualSelectionNumbers->" +
                         "responseTicketCount->" +
                         "responseTickets->" +
                         "requestLastWeekLotteryNumber->" +
