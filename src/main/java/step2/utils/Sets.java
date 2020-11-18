@@ -10,5 +10,4 @@ public abstract class Sets {
     public static <T> Set<T> of(T... elements) {
         return Stream.of(elements).collect(toSet());
     }
-
 }

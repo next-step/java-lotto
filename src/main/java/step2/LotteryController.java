@@ -20,11 +20,10 @@ class LotteryController {
     public void request() {
         Money money = inputView.requestMoney();
         Set<LotteryNumber> manualSelectionNumbers = inputView.requestManualSelectionNumbers();
+
         Playslip playslip = new Playslip();
         playslip.setManualSelection(new ManualSelection(manualSelectionNumbers));
-        // TODO Exchanges with playslip
         LotteryTickets lotteryTickets = lotteryAgent.exchange(money, playslip).getLotteryTickets();
-        // TODO Responses with ExchangeResult
         resultView.responseTicketAndCount(lotteryTickets);
 
         LotteryNumber lastWeekLotteryNumber = inputView.requestLastWeekLotteryNumber();

@@ -11,7 +11,6 @@ public class LotteryTickets {
 
     private final List<LotteryNumber> selectNumbers;
     private final int manualSelectionCount;
-
     private final int naturalSelectionCount;
 
     public LotteryTickets(List<LotteryNumber> selectNumbers) {
@@ -38,12 +37,16 @@ public class LotteryTickets {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
         LotteryTickets that = (LotteryTickets) o;
-        return manualSelectionCount == that.manualSelectionCount && naturalSelectionCount == that.naturalSelectionCount && selectNumbers.equals(that.selectNumbers);
+        return manualSelectionCount == that.manualSelectionCount //
+                && naturalSelectionCount == that.naturalSelectionCount //
+                && selectNumbers.equals(that.selectNumbers);
     }
 
     @Override
@@ -53,6 +56,8 @@ public class LotteryTickets {
 
     @Override
     public String toString() {
-        return "LotteryTickets{" + "numbers=" + selectNumbers + ", manualSelectionCount=" + manualSelectionCount + ", naturalSelectionCount=" + naturalSelectionCount + '}';
+        return "LotteryTickets{numbers=" + selectNumbers //
+                + ", manualSelectionCount=" + manualSelectionCount //
+                + ", naturalSelectionCount=" + naturalSelectionCount + '}';
     }
 }
