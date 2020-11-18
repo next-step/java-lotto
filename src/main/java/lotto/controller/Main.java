@@ -7,7 +7,7 @@ import lotto.view.ResultView;
 // TODO: DTO 만들어서 inputView 와 도메인 연결하기
 public class Main {
     public static void main(String[] args) {
-        Money purchaseMoney = InputView.askPurchaseMoney();
+        Money purchaseMoney = new Money(InputView.askPurchaseMoney());
         int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
         ResultView.printNumOfLottos(numOfLottos);
 
@@ -18,11 +18,16 @@ public class Main {
         ResultView.printLottos(lottos);
 
         WinningCondition condition = new WinningCondition(
-                InputView.askWinningLotto(),
-                InputView.askBonusBall()
+                createLotto(InputView.askWinningLotto()),
+                LottoNoPool.getLottoNo(InputView.askBonusBall())
         );
 
         Result result = lottos.getResult(condition);
         ResultView.printStatistics(result, purchaseMoney);
+    }
+
+    private static Lotto createLotto(String lotto) {
+        String splitRegex = "[ ,]+";
+        return new Lotto(Splitter.splitIntegers(lotto, splitRegex));
     }
 }

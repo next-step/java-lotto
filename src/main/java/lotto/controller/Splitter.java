@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.controller;
 
 import lotto.exception.NanException;
 
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Splitter {
     private Splitter() {}
 
-    public static List<Integer> splitIntegers(String integers, String regex) {
+    static List<Integer> splitIntegers(String integers, String regex) {
         return split(integers, regex)
                 .stream()
                 .map(Splitter::parseInt)

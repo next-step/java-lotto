@@ -5,8 +5,8 @@ import lotto.exception.NpeException;
 
 import java.util.Optional;
 
-public class InputValidator {
-    private InputValidator() {}
+class Validator {
+    private Validator() {}
 
     static void validateNpe(String nullable) {
         Optional.ofNullable(nullable).orElseThrow(NpeException::getInstance);

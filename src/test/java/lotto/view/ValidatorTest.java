@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class InputValidatorTest {
+class ValidatorTest {
 
     @Test
     @DisplayName("숫자가 아닌 String 이면, NpeException 이 발생한다.")
     public void validateNan() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> InputValidator.validateNan(null)),
+                        .isThrownBy(() -> Validator.validateNan(null)),
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> InputValidator.validateNan("NAN")),
-                () -> Assertions.assertDoesNotThrow(() -> InputValidator.validateNan("123"))
+                        .isThrownBy(() -> Validator.validateNan("NAN")),
+                () -> Assertions.assertDoesNotThrow(() -> Validator.validateNan("123"))
         );
     }
 
@@ -27,8 +27,8 @@ class InputValidatorTest {
     public void validateNpe() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NpeException.class)
-                        .isThrownBy(() -> InputValidator.validateNpe(null)),
-                () -> Assertions.assertDoesNotThrow(() -> InputValidator.validateNpe("NAN"))
+                        .isThrownBy(() -> Validator.validateNpe(null)),
+                () -> Assertions.assertDoesNotThrow(() -> Validator.validateNpe("NAN"))
         );
     }
 
@@ -37,9 +37,9 @@ class InputValidatorTest {
     public void validateNumber() {
         Assertions.assertAll(
                 () -> assertThatExceptionOfType(NpeException.class)
-                        .isThrownBy(() -> InputValidator.validateNumber(null)),
+                        .isThrownBy(() -> Validator.validateNumber(null)),
                 () -> assertThatExceptionOfType(NanException.class)
-                        .isThrownBy(() -> InputValidator.validateNumber("NAN"))
+                        .isThrownBy(() -> Validator.validateNumber("NAN"))
         );
     }
 }

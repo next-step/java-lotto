@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
+import lotto.view.printable.StatisticsPrintable;
 
 public class ResultView {
     private ResultView() {}
@@ -12,9 +13,7 @@ public class ResultView {
     }
 
     public static void printNumOfLottos(int numOfLottos) {
-        println(
-                ResultMessage.getNumOfLottosMsg(numOfLottos)
-        );
+        println(numOfLottos + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {
@@ -22,8 +21,6 @@ public class ResultView {
     }
 
     public static void printStatistics(Result result, Money purchaseMoney) {
-        println(
-                ResultMessage.getJackpotStatistics(result, purchaseMoney)
-        );
+        new StatisticsPrintable(result, purchaseMoney).print();
     }
 }
