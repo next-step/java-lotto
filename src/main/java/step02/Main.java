@@ -8,12 +8,10 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        final int LOTTO_PRICE = 1000;
-
         int payment = InputView.payLotto();
 
-        LottoSeller lottoSeller = LottoSeller.of(LOTTO_PRICE);
-        LottoNumbers lottoNumbers = LottoNumbers.of(1, 46);
+        LottoSeller lottoSeller = LottoSeller.of(Mock.LOTTO_PRICE);
+        LottoNumbers lottoNumbers = LottoNumbers.of(Mock.LOTTO_START_NUMBER, Mock.LOTTO_END_NUMBER);
 
         Lottos userLottos = lottoSeller.generateLottos(payment, lottoNumbers);
         ResultView.showLottoCount(userLottos.getCount());
@@ -21,17 +19,10 @@ public class Main {
         ResultView.showLottos(userLottos.print());
 
         Lotto winningNumbers = Lotto.of(Tokenizer.execute(InputView.createWinningNumber()));
-        LottoRewardCollections lottoRewardCollections = LottoRewardCollections.of(
-                Arrays.asList(
-                        LottoReward.of(3, 5000, 0),
-                        LottoReward.of(4, 50000, 0),
-                        LottoReward.of(5, 1500000, 0),
-                        LottoReward.of(6, 2000000000, 0)
-                )
-        );
+        LottoRewardCollections lottoRewardCollections = LottoRewardCollections.of(Mock.LOTTO_REWARDS);
         WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, lottoRewardCollections).execute();
         ResultView.showWinningStatistics(winningStatistic.getLottoRewards());
 
-        ResultView.showYield(winningStatistic.calculateGainRate(LOTTO_PRICE));
+        ResultView.showYield(winningStatistic.calculateGainRate(Mock.LOTTO_PRICE));
     }
 }
