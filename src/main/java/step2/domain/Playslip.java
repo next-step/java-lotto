@@ -12,13 +12,6 @@ public class Playslip {
     private ManualSelection manualSelection = new ManualSelection();
     private int selectNumberCount;
 
-    public Playslip() {
-    }
-
-    public Playslip(int selectNumberCount) {
-        this.selectNumberCount = selectNumberCount;
-    }
-
     public Set<LotteryNumber> selectNumbers(int numberSet) {
         if (numberSet < 1) {
             throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
@@ -36,10 +29,6 @@ public class Playslip {
 
     public int getManualSelectionCount() {
         return manualSelection.size();
-    }
-
-    public int getNaturalSelectionCount() {
-        return selectNumberCount - getManualSelectionCount();
     }
 
     private Set<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {

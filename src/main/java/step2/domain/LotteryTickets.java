@@ -18,8 +18,9 @@ public class LotteryTickets {
         this.selectNumbers = selectNumbers;
     }
 
-    public static LotteryTickets of(Playslip playslip) {
-        return new LotteryTickets(playslip.getManualSelectionCount(), playslip.getNaturalSelectionCount(), playslip.selectNumbers(0));
+    public static LotteryTickets of(Set<LotteryNumber> selectNumbers, int manualSelectionCount) {
+        int naturalSelectionCount = selectNumbers.size() - manualSelectionCount;
+        return new LotteryTickets(manualSelectionCount, naturalSelectionCount, selectNumbers);
     }
 
     public int size() {
