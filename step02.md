@@ -15,6 +15,8 @@
     - private static Integer[] generate(Integer from, Integer to)
 - Lotto 
     - public static Lotto of(List<Integer> lotto)
+    - public int matchCount(Lotto winningNumbers)
+- NumberCount 특정 수가 몇개 있는지를 가지는 클래스
 - Lottos
     - public static Lottos of(List<Lotto> lottos)
 - LottoSeller 로또 판매기 
@@ -22,7 +24,7 @@
     - public static LottoSeller of(int lottoPrice)
     - public Lottos generateLottos(int payment, LottoNumbers lottoNumbers)
 - WinningStatistic 정산기
-    - 생성자 (금주의 당첨 번호)
+    - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
     - 수익률을 계산해 주는 기능
 
