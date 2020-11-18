@@ -1,12 +1,9 @@
 package lotto;
 
-import lotto.controller.LottoController;
 import lotto.model.Lotto;
 import lotto.strategy.DrawingStrategy;
 import lotto.strategy.ManualDrawing;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
@@ -71,7 +68,7 @@ public class LottoTest {
 
         Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
 
-        assertThat(testLotto.getMatchingNumbers(manualNumbers).size()).isEqualTo(numberCount);
+        assertThat(testLotto.getMatchingNumberCount(manualNumbers)).isEqualTo(numberCount);
 
     }
 
@@ -88,7 +85,7 @@ public class LottoTest {
 
         Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
 
-        assertThat(testLotto.getMatchingNumbers(winnerNumbers).size()).isEqualTo(numberCount - 1);
+        assertThat(testLotto.getMatchingNumberCount(winnerNumbers)).isEqualTo(numberCount - 1);
 
     }
 

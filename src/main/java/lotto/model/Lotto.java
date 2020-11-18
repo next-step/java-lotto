@@ -3,7 +3,7 @@ package lotto.model;
 import lotto.strategy.DrawingStrategy;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class Lotto {
     private final static int NUMBER_COUNT = 6;
@@ -15,10 +15,12 @@ public class Lotto {
         numbers = drawingStrategy.drawNumbers(NUMBER_COUNT);
     }
 
-    public List<Integer> getMatchingNumbers(List<Integer> winnerNumbers) {
+    public int getMatchingNumberCount(List<Integer> winnerNumbers) {
         return numbers.stream()
                 .filter(winnerNumbers::contains)
-                .collect(Collectors.toList());
+                .toArray()
+                .length;
+
     }
 
     public List<Integer> getNumbers() {

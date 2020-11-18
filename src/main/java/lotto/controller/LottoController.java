@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Amount;
+import lotto.model.Hit;
 import lotto.model.Lotto;
 import lotto.model.Lottoes;
 import lotto.strategy.ManualDrawing;
@@ -9,6 +10,7 @@ import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +29,7 @@ public class LottoController {
         inputAmount();
         buyLottoes();
         inputWinnerNumbers();
+        lottery();
     }
 
     private void inputAmount() {
@@ -47,6 +50,12 @@ public class LottoController {
         winnerLotto = getWinnerNumbers(scanner.nextLine());
     }
 
+    private void lottery() {
+        Map<Hit, Integer> winnerNumbers = lottoes.getResult(winnerLotto.getNumbers());
+        double earningRate = lottoes.getEarningRate(winnerLotto.getNumbers());
+        resultView.printResult(winnerNumbers);
+        resultView.printEarningRate(earningRate);
+    }
 
     private Lotto getWinnerNumbers(String stringNumbers) {
         Matcher matcher = WINNER_NUMBER_PATTERN.matcher(stringNumbers);
