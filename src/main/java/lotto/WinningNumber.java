@@ -13,7 +13,6 @@ public class WinningNumber {
     public int getMatchedNumberCount(Lotto lotto){
         return lotto.getMatchedNumberCount(new WinningNumberMatcher(numbers));
     }
-
 }
 
 class WinningNumberMatcher implements NumberMatcher {
