@@ -14,7 +14,6 @@ public class StringDelimiterParser {
     public static String[] parseText(String text) {
 
         if (!doesHaveDelimiter(text)) {
-
             return new String[]{text};
         }
 
