@@ -1,13 +1,14 @@
 package lotto;
 
-import java.util.List;
-
 public class Lotto {
 
-    private LottoNumber numbers;
+    private LottoNumber number;
 
     public Lotto(LottoNumber number){
-        this.numbers = numbers;
+        this.number = number;
     }
 
+    public int getMatchedNumberCount(NumberMatcher numberMatcher) {
+        return number.getMatchedNumberCount(numberMatcher);
+    }
 }

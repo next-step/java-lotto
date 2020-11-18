@@ -10,12 +10,6 @@ abstract class LottoNumberGeneratorTest {
 
     LottoNumberGenerator lottoNumberGenerator;
 
-//    @DisplayName("로또번호를 발급하면 6개의 숫자를 발급합니다")
-//    @Test
-//    void generateNumber(){
-//        assertThat(lottoNumberGenerator.generate()).hasSize(6);
-//    }
-
     @DisplayName("발급할때 마다 다른 로또번호를 발급해야 한다")
     @Test
     void generateNumber2(){
