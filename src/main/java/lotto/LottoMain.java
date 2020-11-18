@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -16,8 +17,9 @@ public class LottoMain {
         LottoGame lottoGame = new LottoGame(gameMoney);
         LottoGameResults lottoGameResults = lottoGame.start();
 
-        lottoGameResults.getLottoGameResults()
-                .stream().forEach(lottoGameResult -> System.out.println(Arrays.toString(lottoGameResult.getLottoGameResult().toArray())));
+        ResultView.getLottoTickets(lottoGameResults);
+
+
 
         String lastWinningNumbers = InputView.getInputWinningNumbers();
 
@@ -25,13 +27,14 @@ public class LottoMain {
 
         Map<Integer, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
-        System.out.println("3개맞음:"+resultsMap.get(3));
-        System.out.println("4개맞음:"+resultsMap.get(4));
-        System.out.println("5개맞음:"+resultsMap.get(5));
-        System.out.println("6개맞음:"+resultsMap.get(6));
+        ResultView.getPrizeResult(resultsMap);
+
+
 
         double profit = lottoGameResults.getProfit(resultsMap);
-        System.out.println("수익률:"+profit);
+
+        ResultView.getProfitResult(profit);
+
 
     }
 }

@@ -18,7 +18,7 @@ public class LottoGameResults {
     private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
     private static final int MIN_COUNT_TO_PRIZE = 3;
     private static final String WINNING_NUMBER_DELIMITER = ",";
-    private static final String WINNING_NUMBER_PATTERN = "([,\\d\\s])+";
+    private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
 
 
     public LottoGameResults(int gameMoney){

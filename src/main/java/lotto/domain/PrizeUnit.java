@@ -3,20 +3,23 @@ package lotto.domain;
 import lotto.LottoErrorMessage;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public enum PrizeUnit {
 
-    FOURTH_GRADE(3, value -> Long.valueOf(value * 5000)),
-    THIRD_GRADE(4, value -> Long.valueOf(value * 50000)),
-    SECOND_GRADE(5, value -> Long.valueOf(value * 1500000)),
-    FIRST_GRADE(6, value -> Long.valueOf(value * 2000000000));
+    FOURTH_GRADE(3, 5000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
+    THIRD_GRADE(4, 50000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
+    SECOND_GRADE(5, 1500000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
+    FIRST_GRADE(6, 2000000000, (value, unitMoney) -> Long.valueOf(value * unitMoney));
 
     public int prizeUnitCount;
-    private Function<Integer, Long> expression;
+    public int prizeUnitMoney;
+    private BiFunction<Integer, Integer, Long> expression;
 
-    PrizeUnit(int prizeUnitCount, Function<Integer, Long> expression){
+    PrizeUnit(int prizeUnitCount, int prizeUnitMoney, BiFunction<Integer, Integer, Long> expression){
         this.prizeUnitCount = prizeUnitCount;
+        this.prizeUnitMoney = prizeUnitMoney;
         this.expression = expression;
     }
 
@@ -29,7 +32,8 @@ public enum PrizeUnit {
 
 
     public static Long calculate(int unitCount, int winningTicketCount){
-        return findPrizeFieldByUnitCount(unitCount).expression.apply(winningTicketCount);
+        PrizeUnit unit = findPrizeFieldByUnitCount(unitCount);
+        return unit.expression.apply(winningTicketCount, unit.prizeUnitMoney);
     }
 
 }
