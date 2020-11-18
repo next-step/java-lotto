@@ -2,6 +2,7 @@ package step02.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoRewardCollections {
     private List<LottoReward> lottoRewards;
@@ -12,6 +13,15 @@ public class LottoRewardCollections {
 
     public static LottoRewardCollections of(List<LottoReward> lottoRewards) {
         return new LottoRewardCollections(lottoRewards);
+    }
+
+    public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections) {
+        return LottoRewardCollections.of(
+                lottoRewards.stream().map(lottoReward -> {
+                    int count = winningCounterCollections.getCount(lottoReward.getNumber());
+                    return lottoReward.updateCount(count);
+                }).collect(Collectors.toList())
+        );
     }
 
     @Override
@@ -26,4 +36,5 @@ public class LottoRewardCollections {
     public int hashCode() {
         return Objects.hash(lottoRewards);
     }
+
 }

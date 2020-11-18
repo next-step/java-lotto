@@ -9,14 +9,15 @@ public class LottoRewardTest {
     @DisplayName("생성자 테스트")
     @Test
     public void test_LottoReward_Contructor() {
-        assertThat(LottoReward.of(3, 5000, 0)).isEqualTo(LottoReward.of(3, 5000, 0));
+        assertThat(LottoReward.of(3, 5000, 0))
+                .isEqualTo(LottoReward.of(3, 5000, 0));
     }
 
-    @DisplayName("LottoReward count 증가")
+    @DisplayName("LottoReward update")
     @Test
-    public void test_increaseCount() {
+    public void test_updateCount() {
         LottoReward lottoReward = LottoReward.of(3, 5000, 0);
-        assertThat(lottoReward.increaseCount())
-                .isEqualTo(LottoReward.of(3, 5000, 1));
+        assertThat(lottoReward.updateCount(3))
+                .isEqualTo(LottoReward.of(3, 5000, 3));
     }
 }

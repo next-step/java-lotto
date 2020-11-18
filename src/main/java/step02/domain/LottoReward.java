@@ -17,8 +17,12 @@ public class LottoReward {
         return new LottoReward(number, reward, count);
     }
 
-    public LottoReward increaseCount() {
-        return of(number, reward, count + 1);
+    public LottoReward updateCount(int count) {
+        return of(number, reward, count);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
