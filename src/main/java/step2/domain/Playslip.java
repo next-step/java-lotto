@@ -12,12 +12,12 @@ public class Playslip {
     private ManualSelection manualSelection = new ManualSelection();
     private int selectNumberCount;
 
-    public Set<LotteryNumber> selectNumbers(int numberSet) {
+    public List<LotteryNumber> selectNumbers(int numberSet) {
         if (numberSet < 1) {
             throw new IllegalArgumentException(ONLY_POSITIVE_NUMBERS);
         }
 
-        Set<LotteryNumber> result = new HashSet<>();
+        List<LotteryNumber> result = new ArrayList<>();
         result.addAll(manualSelection.getLotteryNumbers());
         result.addAll(getNaturalSelectionNumbers(numberSet));
         return result;
@@ -31,12 +31,13 @@ public class Playslip {
         return manualSelection.size();
     }
 
-    private Set<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {
-        Set<LotteryNumber> result = new HashSet<>();
+    private List<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {
         if (selectNumberCount == 0) {
             selectNumberCount = numberSet;
         }
         int naturalSelectionCount = selectNumberCount - getManualSelectionCount();
+
+        List<LotteryNumber> result = new ArrayList<>();
         for (int i = 0; i < naturalSelectionCount; i++) {
             result.add(new LotteryNumber(naturalSelection.select(NUMBER_POOL, SELECTION_COUNT)));
         }

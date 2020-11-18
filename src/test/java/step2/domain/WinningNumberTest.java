@@ -1,19 +1,18 @@
 package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import step2.utils.Sets;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.list;
 import static step2.domain.Rank.*;
 
 
@@ -47,11 +46,10 @@ public class WinningNumberTest {
     @DisplayName("3개 ~ 6개 일치 테스트")
     @ParameterizedTest
     @MethodSource("matchingCountProvider")
-    @Disabled("lotteryNumber 동등성 때문에 발생하는 문제, 추후 수정")
     void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
         LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
-                Sets.of(
+                list(
                         lotteryNumber.copy(),
                         lotteryNumber.copy(),
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
@@ -80,7 +78,7 @@ public class WinningNumberTest {
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
-        return new LotteryTickets(Sets.of(LotteryNumber.of(numbers)));
+        return new LotteryTickets(list(LotteryNumber.of(numbers)));
     }
 
 }

@@ -1,24 +1,24 @@
 package step2.domain;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class LotteryTickets {
-    public static LotteryTickets of(Set<LotteryNumber> selectNumbers, int manualSelectionCount) {
+    public static LotteryTickets of(List<LotteryNumber> selectNumbers, int manualSelectionCount) {
         int naturalSelectionCount = selectNumbers.size() - manualSelectionCount;
         return new LotteryTickets(manualSelectionCount, naturalSelectionCount, selectNumbers);
     }
 
-    private final Set<LotteryNumber> selectNumbers;
+    private final List<LotteryNumber> selectNumbers;
     private final int manualSelectionCount;
 
     private final int naturalSelectionCount;
 
-    public LotteryTickets(Set<LotteryNumber> selectNumbers) {
+    public LotteryTickets(List<LotteryNumber> selectNumbers) {
         this(0, selectNumbers.size(), selectNumbers);
     }
 
-    public LotteryTickets(int manualSelectionCount, int naturalSelectionCount, Set<LotteryNumber> selectNumbers) {
+    public LotteryTickets(int manualSelectionCount, int naturalSelectionCount, List<LotteryNumber> selectNumbers) {
         this.manualSelectionCount = manualSelectionCount;
         this.naturalSelectionCount = naturalSelectionCount;
         this.selectNumbers = selectNumbers;
@@ -32,7 +32,7 @@ public class LotteryTickets {
         return manualSelectionCount;
     }
 
-    public Set<LotteryNumber> getTicketNumbers() {
+    public List<LotteryNumber> getTicketNumbers() {
         return selectNumbers;
     }
 
