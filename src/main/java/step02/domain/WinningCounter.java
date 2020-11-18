@@ -29,7 +29,7 @@ public class WinningCounter {
         return Objects.hash(number, count);
     }
 
-    public boolean filter(int from, int to) {
-        return from <= number && number <= to;
+    public boolean isSame(int winningNumber) {
+        return number == winningNumber;
     }
 }

@@ -18,7 +18,7 @@ public class WinningCounterTest {
         assertThat(WinningCounter.of(0, 10)).isEqualTo(WinningCounter.of(0, 10));
     }
 
-    private static Stream<Arguments> provideNumberCountRangeResult() {
+    private static Stream<Arguments> provideWinningNumberIsSameResult() {
         return Stream.of(
                 Arguments.of(WinningCounter.of(0, 7), false),
                 Arguments.of(WinningCounter.of(1, 5), false),
@@ -27,10 +27,11 @@ public class WinningCounterTest {
         );
     }
 
-    @DisplayName("number 가 범위 이내에 있는지 boolean 반환")
+    @DisplayName("입력된 정수와 winningCounter 의 number 가 같은지 비교")
     @ParameterizedTest
-    @MethodSource("provideNumberCountRangeResult")
-    public void test_isInRange(WinningCounter winningCounter, boolean expect) {
-        assertThat(winningCounter.filter(3, 6)).isEqualTo(expect);
+    @MethodSource("provideWinningNumberIsSameResult")
+    public void test_isSame(WinningCounter winningCounter, boolean expect) {
+        assertThat(winningCounter.isSame(3))
+                .isEqualTo(expect);
     }
 }
