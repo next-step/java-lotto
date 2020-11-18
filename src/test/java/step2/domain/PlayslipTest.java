@@ -51,4 +51,13 @@ public class PlayslipTest {
         assertThat(playslip.selectNumbers(2).size()).isEqualTo(2);
     }
 
+    @DisplayName("선택결과에는 수동선택한 내용이 포함되어 있다.")
+    @Test
+    void shouldContainsManualSelectionNumbers() {
+        LotteryNumber lotteryNumber = LotteryNumber.of(1, 2, 3, 4, 5, 6);
+        playslip.setManualSelection(new ManualSelection(Sets.of(lotteryNumber)));
+
+        assertThat(playslip.selectNumbers(1)).contains(lotteryNumber);
+    }
+
 }
