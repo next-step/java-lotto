@@ -7,8 +7,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.Utils.boolToInt;
-
 public class Numbers {
     private List<Number> numberList;
 
@@ -26,9 +24,9 @@ public class Numbers {
     }
 
     public int countSameNumber(Numbers numbers) {
-        return this.numberList.stream()
-                .mapToInt(number -> boolToInt(numbers.contains(number)))
-                .sum();
+        return (int) this.numberList.stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     public boolean contains(Number number) {
