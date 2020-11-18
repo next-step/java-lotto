@@ -15,13 +15,8 @@ public class LottoTicketTest {
     @DisplayName("LottoTicket 랜덤 번호 생성 테스트")
     @Test
     void lottoTicketRandomNumberCreateTest(){
-        //given
-        List<Integer> lottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+        LottoTicket lottoTicket = new LottoTicket();
 
-        //when
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        // then
         assertThat(lottoTicket.getSortedLottoNumbers().size()).isEqualTo(6);
     }
 
@@ -32,7 +27,7 @@ public class LottoTicketTest {
         List<Integer> lottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
 
         //when
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new LottoTicket();
 
         int min = lottoTicket.getSortedLottoNumbers()
                 .stream()

@@ -6,14 +6,12 @@ import java.util.stream.IntStream;
 
 public class LottoTickets {
     List<LottoTicket> lottoTickets;
-    List<Integer> lotteNumbers;
 
-    public LottoTickets(int gameMoney, List<Integer> lotteNumbers) {
+    public LottoTickets(int gameMoney) {
         int ticketCount = gameMoney/1000;
         this.lottoTickets = IntStream.range(0, ticketCount)
-                .mapToObj(ticket -> new LottoTicket(lotteNumbers))
+                .mapToObj(ticket -> new LottoTicket())
                 .collect(Collectors.toList());
-        this.lotteNumbers = lotteNumbers;
     }
 
     public List<LottoTicket> getLottoTickets() {

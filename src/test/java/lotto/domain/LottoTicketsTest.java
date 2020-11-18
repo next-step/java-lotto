@@ -16,7 +16,7 @@ public class LottoTicketsTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(inputMoneyAmount, new ArrayList<Integer>());
+        LottoTickets lottoTickets = new LottoTickets(inputMoneyAmount);
 
         // then
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
