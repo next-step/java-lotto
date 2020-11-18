@@ -30,6 +30,10 @@
     - private LottoSeller(LottoPrice lottoPrice)
     - public static LottoSeller of(int lottoPrice)
     - public Lottos generateLottos(int payment, LottoNumbers lottoBalls)
+- LottoReward
+     
+- LottoRewardCollections
+
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능
