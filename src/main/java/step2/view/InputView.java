@@ -16,8 +16,8 @@ public class InputView {
     }
 
     public Set<LotteryNumber> requestManualSelectionNumbers() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         int manualSelectionCount = requestManualSelectionCount();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         Set<LotteryNumber> lotteryNumbers = new HashSet<>();
         for (int i = 0; i < manualSelectionCount; i++) {

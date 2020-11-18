@@ -32,10 +32,10 @@ public class ResultView {
                 "\n당첨 통계\n" +
                 "---------");
         //@formatter:on
+        System.out.println(toStringRank(Rank.FIFTH, lotteryResult));
         System.out.println(toStringRank(Rank.FORTH, lotteryResult));
         System.out.println(toStringRank(Rank.THIRD, lotteryResult));
         System.out.println(toStringRank(Rank.SECOND, lotteryResult));
-        System.out.println(toStringRank(Rank.FIRST, lotteryResult));
         System.out.println(toStringRank(Rank.FIRST, lotteryResult));
     }
 
