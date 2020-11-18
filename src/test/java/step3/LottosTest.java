@@ -4,7 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.domain.LottoRank;
+import step3.domain.LastWeekLotto;
 import step3.domain.Lotto;
+import step3.domain.LottoNumber;
 import step3.domain.Lottos;
 
 import java.util.Arrays;
@@ -47,9 +50,9 @@ class LottosTest {
     @DisplayName("지난주에 맞췄던 로또들의 맞춘 갯수들을 검증한다.")
     @ParameterizedTest
     @MethodSource("createMatchLotto")
-    void validateMatchLottos(Lotto lotto, List<Integer> lastWeekLotto, List<Integer> expected) {
+    void validateMatchLottos(Lotto lotto, LastWeekLotto lastWeekLotto, LottoRank expected) {
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
-        assertThat(lottos.matchLastWeekLotto(lastWeekLotto)).isEqualTo(expected);
+        assertThat(lottos.matchLastWeekLotto(lastWeekLotto)).contains(expected);
     }
 
     private static Stream<Arguments> createSingleLotto() {
@@ -77,20 +80,24 @@ class LottosTest {
         return Stream.of(
                 Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Arrays.asList(1, 2, 3, 4, 5, 6),
-                        Collections.singletonList(6)),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45)),
+                        LottoRank.FIRST),
                 Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Arrays.asList(1, 2, 3, 4, 5, 7),
-                        Collections.singletonList(5)),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), new LottoNumber(6)),
+                        LottoRank.SECOND),
                 Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Arrays.asList(1, 2, 3, 4, 7, 8),
-                        Collections.singletonList(4)),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)), new LottoNumber(45)),
+                        LottoRank.THIRD),
                 Arguments.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Arrays.asList(1, 2, 3, 7, 8, 9),
-                        Collections.singletonList(3))
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)), new LottoNumber(45)),
+                        LottoRank.FORTH),
+                Arguments.of(
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)), new LottoNumber(45)),
+                        LottoRank.FIFTH)
 
         );
     }

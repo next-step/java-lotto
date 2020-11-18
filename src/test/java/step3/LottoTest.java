@@ -20,7 +20,7 @@ class LottoTest {
     @MethodSource("createLottoMatchNumbers")
     @DisplayName("로또 티켓 맞는 갯수에 따라 맞는 숫자를 반환합니다.")
     void matchLotto(Lotto lotto, List<Integer> matchLotto, int expected) {
-        assertThat(lotto.matchLottoNumbers(matchLotto)).isEqualTo(expected);
+        assertThat(lotto.matchLottoNumbers(new Lotto(matchLotto))).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createLottoMatchNumbers() {
