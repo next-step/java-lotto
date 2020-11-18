@@ -16,6 +16,7 @@ public class ResultView {
 
     private final int PRIZE_BEGINNING = 3;
     private final int PRIZE_ENDING = 7;
+    private final int PROFIT_STANDARD = 1;
 
     public void displayLottoQuantity(int quantity) {
         System.out.println(String.format(DISPLAY_QUANTITY, quantity));
@@ -45,7 +46,7 @@ public class ResultView {
 
     public void displayProfit(double profit) {
         System.out.print(String.format(PROFIT_MENTION, profit));
-        if(profit < 1) {
+        if(profit < PROFIT_STANDARD) {
             System.out.println(LOSS);
         }
     }

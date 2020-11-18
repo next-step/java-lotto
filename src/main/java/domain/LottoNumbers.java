@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private int LOTTO_START_NUMBER = 1;
-    private int LOTTO_END_NUMBER = 45;
+    private final int LOTTO_START_NUMBER = 1;
+    private final int LOTTO_END_NUMBER = 45;
+    private final int ZERO = 0;
+    private final int LOTTO_RANGE = 6;
+    private final String NUMBER_DELIMITER = ", ";
 
     private List<Integer> numbers;
 
@@ -25,7 +28,7 @@ public class LottoNumbers {
 
     public LottoNumbers createWinningNumbers(String winningNumbers) {
         return new LottoNumbers().from(
-                Arrays.stream(winningNumbers.split(", "))
+                Arrays.stream(winningNumbers.split(NUMBER_DELIMITER))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );
@@ -35,7 +38,7 @@ public class LottoNumbers {
     public LottoNumbers shuffleNumbers() {
         Collections.shuffle(setDefaultLottoNumbers());
         List<Integer> newNumbers = IntStream
-                .range(0, 6)
+                .range(ZERO, LOTTO_RANGE)
                 .mapToObj(index -> numbers.get(index))
                 .collect(Collectors.toList());
         return from(newNumbers);
