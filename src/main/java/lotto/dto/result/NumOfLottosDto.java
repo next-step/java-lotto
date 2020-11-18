@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.result;
 
 public class NumOfLottosDto {
     private final int numOfLottos;

@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.input;
 
 public class PurchaseMoneyDto {
     private final int purchaseMoney;

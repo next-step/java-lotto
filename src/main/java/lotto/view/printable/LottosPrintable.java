@@ -1,6 +1,6 @@
 package lotto.view.printable;
 
-import lotto.dto.LottosDto;
+import lotto.dto.result.LottosDto;
 
 public class LottosPrintable extends Printable {
     private final LottosDto dto;

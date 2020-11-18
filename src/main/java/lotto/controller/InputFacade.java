@@ -4,8 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNoPool;
 import lotto.domain.Money;
 import lotto.domain.WinningCondition;
-import lotto.dto.PurchaseMoneyDto;
-import lotto.dto.WinningConditionDto;
+import lotto.dto.input.PurchaseMoneyDto;
+import lotto.dto.input.WinningConditionDto;
 import lotto.view.InputView;
 
 class InputFacade {

@@ -1,7 +1,7 @@
 package lotto.view.printable;
 
 import lotto.domain.Rank;
-import lotto.dto.StatisticsDto;
+import lotto.dto.result.StatisticsDto;
 
 public class StatisticsPrintable extends Printable {
     private final StatisticsDto dto;

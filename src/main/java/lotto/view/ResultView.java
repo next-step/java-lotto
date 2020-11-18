@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.dto.LottosDto;
-import lotto.dto.NumOfLottosDto;
-import lotto.dto.StatisticsDto;
+import lotto.dto.result.LottosDto;
+import lotto.dto.result.NumOfLottosDto;
+import lotto.dto.result.StatisticsDto;
 import lotto.view.printable.LottosPrintable;
 import lotto.view.printable.NumOfLottosPrintable;
 import lotto.view.printable.StatisticsPrintable;

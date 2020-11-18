@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LottosDto;
-import lotto.dto.NumOfLottosDto;
-import lotto.dto.StatisticsDto;
+import lotto.dto.result.LottosDto;
+import lotto.dto.result.NumOfLottosDto;
+import lotto.dto.result.StatisticsDto;
 import lotto.view.ResultView;
 
 public class Main {
