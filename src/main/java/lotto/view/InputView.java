@@ -17,7 +17,7 @@ public class InputView {
         do {
             System.out.print(INPUT_PRICE_MESSAGE);
         } while((result = priceCheck(scanner.nextInt())) == 0);
-        System.out.println(result);
+        scanner.nextLine();
         return result;
     }
 
@@ -27,7 +27,6 @@ public class InputView {
             System.out.print(INPUT_LOTTO_NUMBER_MESSAGE);
             result = scanner.nextLine();
         } while(stringValidationCheck(result));
-        System.out.println(result);
         return result;
     }
 
@@ -47,14 +46,6 @@ public class InputView {
         return numberFormatCheck(number);
     }
 
-    private static boolean lottoNumberSizeCheck(int number) {
-        if(number != MAX_LOTTO_BALL_COUNT) {
-            System.out.print(INPUT_ARRAY_SIZE_ERROR_MESSAGE);
-            return true;
-        }
-        return false;
-    }
-
     private static boolean numberFormatCheck(String number) {
         int parseInt = numberFormatRegexMatches(number);
         return lottoNumberSizeCheck(parseInt);
@@ -62,7 +53,14 @@ public class InputView {
 
     private static int numberFormatRegexMatches(String number) {
         return (int) Arrays.stream(number.split(LOTTO_NUMBER_SEPARATOR))
-                .filter(n -> n.matches(NUMBER_REGEX)).count();
+                .filter(n -> n.trim().matches(NUMBER_REGEX)).count();
     }
 
+    private static boolean lottoNumberSizeCheck(int number) {
+        if(number != MAX_LOTTO_BALL_COUNT) {
+            System.out.print(INPUT_ARRAY_SIZE_ERROR_MESSAGE);
+            return true;
+        }
+        return false;
+    }
 }

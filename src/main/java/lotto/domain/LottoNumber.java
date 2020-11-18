@@ -25,10 +25,6 @@ public class LottoNumber {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static List<LottoNumber> toList() {
-        return new ArrayList<>(lottoNumbers);
-    }
-
     public int getLottoNumber() {
         return lottoNumber;
     }
