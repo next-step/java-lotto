@@ -16,6 +16,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
         this.value = value;
     }
 
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

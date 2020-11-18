@@ -10,9 +10,11 @@ import java.util.Objects;
 public class WinLottoNumbers {
 
     private final List<LottoNumber> winLottoNumbers;
+    private final LottoNumber bonusLottoNumber;
 
-    public WinLottoNumbers(List<LottoNumber> winLottoNumbers) {
+    public WinLottoNumbers(List<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
         this.winLottoNumbers = winLottoNumbers;
+        this.bonusLottoNumber = bonusLottoNumber;
 
         throwIfNumbersNull();
         throwIfNumberCountNotMatch();
@@ -21,6 +23,10 @@ public class WinLottoNumbers {
     private void throwIfNumberCountNotMatch() {
         if (winLottoNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호는 6개를 입력해주세요.");
+        }
+
+        if (Objects.isNull(bonusLottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호를 입력해주세요");
         }
     }
 

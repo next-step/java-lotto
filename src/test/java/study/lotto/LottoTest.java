@@ -34,7 +34,12 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // Then
-        assertThat(lotto.getLottoStatus()).isEqualTo(LottoStatus.BEFORE_LOTTERY);
+        assertThat(lotto.contains(new LottoNumber(1))).isTrue();
+        assertThat(lotto.contains(new LottoNumber(2))).isTrue();
+        assertThat(lotto.contains(new LottoNumber(3))).isTrue();
+        assertThat(lotto.contains(new LottoNumber(4))).isTrue();
+        assertThat(lotto.contains(new LottoNumber(5))).isTrue();
+        assertThat(lotto.contains(new LottoNumber(6))).isTrue();
     }
 
     @Test

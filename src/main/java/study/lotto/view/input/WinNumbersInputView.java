@@ -18,21 +18,29 @@ public class WinNumbersInputView extends AbstractView {
     }
 
     public WinLottoNumbers display() {
+        return new WinLottoNumbers(winningLottoNumbersView(), bonusLottoNumberView());
+    }
+
+    private List<LottoNumber> winningLottoNumbersView() {
         stringBuilder.append("지난 주 당첨 번호를 입력해 주세요.");
         printAndClear();
 
         String winLottoNumbers = scanner.nextLine();
 
-        List<LottoNumber> lottoNumbers =
-                Arrays.asList(winLottoNumbers.split(DELIMITER))
-                    .stream()
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+        return Arrays.asList(winLottoNumbers.split(DELIMITER))
+                        .stream()
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList());
+    }
 
-        return new WinLottoNumbers(lottoNumbers);
+    private LottoNumber bonusLottoNumberView() {
+        stringBuilder.append("보너스 볼을 입력해 주세요.");
+        printAndClear();
 
+        String bonusLottoNumber = scanner.nextLine();
+        return new LottoNumber(bonusLottoNumber);
     }
 
 }

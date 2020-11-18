@@ -1,6 +1,5 @@
 package study.lotto.lottery;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.Lotto;
@@ -13,10 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LotteryResultTest {
 
+    private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
     private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
@@ -33,7 +32,7 @@ class LotteryResultTest {
     void test_LotteryResult() {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers);
+        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
         Lottos lottos = new Lottos(Arrays.asList(lotto));
         Lottery lottery = new Lottery(winLottoNumbers, lottos);
 
