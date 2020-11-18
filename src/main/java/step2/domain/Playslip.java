@@ -9,7 +9,7 @@ public class Playslip {
     public static final int SELECTION_COUNT = 6;
 
     private final NaturalSelection naturalSelection = new NaturalSelection();
-    private ManualSelection manualSelection;
+    private ManualSelection manualSelection = new ManualSelection();
 
     public List<LotteryNumber> selectNumbers(int numberSet) {
         if (numberSet < 1) {
@@ -17,7 +17,7 @@ public class Playslip {
         }
 
         List<LotteryNumber> result = new ArrayList<>();
-        result.addAll(getManualSelectionNumbers());
+        result.addAll(manualSelection.getLotteryNumbers());
         result.addAll(getNaturalSelectionNumbers(numberSet));
         return result;
     }
@@ -28,17 +28,11 @@ public class Playslip {
 
     private Set<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {
         Set<LotteryNumber> result = new HashSet<>();
-        for (int i = 0; i < numberSet; i++) {
+        int naturalSelectionCount = numberSet - manualSelection.size();
+        for (int i = 0; i < naturalSelectionCount; i++) {
             result.add(new LotteryNumber(naturalSelection.select(NUMBER_POOL, SELECTION_COUNT)));
         }
         return result;
-    }
-
-    private Set<LotteryNumber> getManualSelectionNumbers() {
-        if (manualSelection == null) {
-            return Collections.emptySet();
-        }
-        return manualSelection.getLotteryNumbers();
     }
 
     private static List<Integer> makeNumberPool() {
