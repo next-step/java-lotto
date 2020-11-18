@@ -36,7 +36,7 @@ public class WinLottoNumbers {
         }
     }
 
-    public List<LottoNumber> match(Lotto lotto) {
+    public List<LottoNumber> matchWithWinLottoNumbers(Lotto lotto) {
         List<LottoNumber> matchingLottoNumbers = new ArrayList<>();
         // 일치하는 번호 추가
         this.winLottoNumbers.stream()
@@ -44,6 +44,10 @@ public class WinLottoNumbers {
                 .forEach(matchingLottoNumbers::add);
 
         return matchingLottoNumbers;
+    }
+
+    public boolean matchWithBonusLottoNumber(Lotto lotto) {
+        return lotto.contains(bonusLottoNumber);
     }
 
 }

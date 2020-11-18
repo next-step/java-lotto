@@ -14,42 +14,68 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoRankTest {
 
     private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
-    private List<LottoNumber> lottoNumbers;
-
-    @BeforeEach
-    public void init() {
-        this.lottoNumbers = Arrays.asList(new LottoNumber(1)
-                , new LottoNumber(2)
-                , new LottoNumber(3)
-                , new LottoNumber(4)
-                , new LottoNumber(5)
-                , new LottoNumber(6));
-    }
 
     @Test
     void test_of_first() {
         // Given
+        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
-        WinningLotto lottery = lotto.lottery(winLottoNumbers);
 
         // When
-        LottoRank lottoRank = LottoRank.of(lottery);
+        WinningLotto winningLotto = lotto.lottery(winLottoNumbers);
 
         // Then
-        assertEquals(lottoRank, LottoRank.FIRST);
+        assertEquals(winningLotto.getLottoRank(), LottoRank.FIRST);
     }
 
     @Test
     void test_of_none() {
         // Given
-        WinningLotto winningLotto = new WinningLotto(new ArrayList<>());
+        WinningLotto winningLotto = new WinningLotto(new ArrayList<>(), false);
 
         // When
-        LottoRank lottoRank = LottoRank.of(winningLotto);
+        LottoRank lottoRank = LottoRank.of(winningLotto, false);
 
         // Then
         assertEquals(lottoRank, LottoRank.NONE);
     }
 
+    @Test
+    void test_of_second() {
+        // Given
+        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
+        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+
+        // When
+        WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
+
+        // Then
+        assertEquals(winningLotto.getLottoRank(), LottoRank.SECOND);
+    }
+
+    @Test
+    void test_of_third() {
+        // Given
+        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+
+        // When
+        WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
+
+        // Then
+        assertEquals(winningLotto.getLottoRank(), LottoRank.THIRD);
+    }
+
+    private List<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
+        List<LottoNumber> toLottoNumbers = new ArrayList<>();
+        for (int value : lottoNumbers) {
+            toLottoNumbers.add(new LottoNumber(value));
+        }
+        return toLottoNumbers;
+    }
 }
