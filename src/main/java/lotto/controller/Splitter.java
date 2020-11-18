@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Splitter {
     private Splitter() {}
 
-    static List<Integer> splitIntegers(String integers, String regex) {
+    public static List<Integer> splitIntegers(String integers, String regex) {
         return split(integers, regex)
                 .stream()
                 .map(Splitter::parseInt)

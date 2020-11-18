@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.dto.PurchaseMoneyDto;
+import lotto.dto.WinningConditionDto;
 import lotto.view.printable.QuestionPrintable;
 
 import java.util.Scanner;
@@ -13,7 +15,18 @@ public class InputView {
         new QuestionPrintable(question).print();
     }
 
-    public static int askPurchaseMoney() {
+    public static PurchaseMoneyDto getPurchaseMoneyDto() {
+        int purchaseMoney = askPurchaseMoney();
+        return new PurchaseMoneyDto(purchaseMoney);
+    }
+
+    public static WinningConditionDto getWinningConditionDto() {
+        String winningLotto = askWinningLotto();
+        int bonus = askBonusBall();
+        return new WinningConditionDto(winningLotto, bonus);
+    }
+
+    private static int askPurchaseMoney() {
         printQuestion("구입금액을 입력해 주세요.");
         String money = scanner.nextLine();
         Validator.validateNumber(money);
@@ -26,12 +39,12 @@ public class InputView {
         return lotto;
     }
 
-    public static String askWinningLotto() {
+    private static String askWinningLotto() {
         printQuestion("지난 주 당첨 번호를 입력해 주세요.");
         return askLotto();
     }
 
-    public static int askBonusBall() {
+    private static int askBonusBall() {
         printQuestion("보너스 볼을 입력해 주세요.");
         String bonus = scanner.nextLine();
         Validator.validateNumber(bonus);
