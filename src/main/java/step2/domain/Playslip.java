@@ -1,8 +1,6 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Playslip {
     public static final String ONLY_POSITIVE_NUMBERS = "선택은 1개 이상만 가능합니다.";
@@ -19,18 +17,28 @@ public class Playslip {
         }
 
         List<LotteryNumber> result = new ArrayList<>();
-        if (manualSelection != null) {
-            result.addAll(manualSelection.getLotteryNumbers());
-        }
+        result.addAll(getManualSelectionNumbers());
+        result.addAll(getNaturalSelectionNumbers(numberSet));
+        return result;
+    }
+
+    public void setManualSelection(ManualSelection manualSelection) {
+        this.manualSelection = manualSelection;
+    }
+
+    private Set<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {
+        Set<LotteryNumber> result = new HashSet<>();
         for (int i = 0; i < numberSet; i++) {
             result.add(new LotteryNumber(naturalSelection.select(NUMBER_POOL, SELECTION_COUNT)));
         }
         return result;
     }
 
-
-    public void setManualSelection(ManualSelection manualSelection) {
-
+    private Set<LotteryNumber> getManualSelectionNumbers() {
+        if (manualSelection == null) {
+            return Collections.emptySet();
+        }
+        return manualSelection.getLotteryNumbers();
     }
 
     private static List<Integer> makeNumberPool() {
