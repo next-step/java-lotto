@@ -8,30 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.list;
 
-class TestingPlayslip extends Playslip {
-    public static Playslip from(int manualSelection, List<LotteryNumber> selectedNumbers) {
-        return new TestingPlayslip(manualSelection, selectedNumbers);
-    }
-
-    private final int manualSelection;
-    private final List<LotteryNumber> selectedNumbers;
-
-    public TestingPlayslip(int manualSelection, List<LotteryNumber> selectedNumbers) {
-        this.manualSelection = manualSelection;
-        this.selectedNumbers = selectedNumbers;
-    }
-
-    @Override
-    public List<LotteryNumber> selectNumbers(int numberSet) {
-        return selectedNumbers;
-    }
-
-    @Override
-    public int getManualSelectionCount() {
-        return manualSelection;
-    }
-}
-
 class LotteryTicketsTest {
 
     public static final int MANUAL_SELECTION = 1;
