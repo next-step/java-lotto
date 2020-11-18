@@ -4,10 +4,13 @@ import study.calculator.Delimiter;
 import study.calculator.Number;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomArgument implements Argument{
 
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//[^0-9]{1}(\\n)$");
     private static final int MIN_LENGTH = 4;
 
     private final Delimiter delimiter;
@@ -23,7 +26,8 @@ public class CustomArgument implements Argument{
             return false;
         }
 
-        return source.startsWith("//") && source.charAt(3) == '\n';
+        return CUSTOM_DELIMITER_PATTERN.matcher(source)
+                .find();
     }
 
     private Delimiter getCustomDelimiter(String source) {
