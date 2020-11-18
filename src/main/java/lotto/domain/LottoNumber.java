@@ -25,6 +25,10 @@ public class LottoNumber {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    public static List<LottoNumber> toList() {
+        return new LinkedList<>(lottoNumbers);
+    }
+
     public int getLottoNumber() {
         return lottoNumber;
     }
