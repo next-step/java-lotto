@@ -9,6 +9,7 @@ import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -78,7 +79,7 @@ public class LotteryControllerTest {
         public Set<LotteryNumber> requestManualSelectionNumbers() {
             super.requestManualSelectionNumbers();
             record.add("requestManualSelectionNumbers");
-            return null;
+            return Collections.emptySet();
         }
 
         public LotteryNumber requestLastWeekLotteryNumber() {
