@@ -25,4 +25,8 @@ public class Lottos {
                 .filter(it -> winningNumber.getMatchedNumberCount(it) == matchedCount )
                 .collect(Collectors.toList());
     }
+
+    public int getPaidMoney() {
+        return lottos.size() * Lotto.PRICE;
+    }
 }
