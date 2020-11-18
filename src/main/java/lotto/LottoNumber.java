@@ -11,6 +11,10 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
+    public int getMatchedNumberCount(NumberMatcher numberMatcher){
+        return (int) numbers.stream().filter(it -> numberMatcher.match(it)).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,6 +25,7 @@ public class LottoNumber {
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(this.numbers);
     }
+
 }
