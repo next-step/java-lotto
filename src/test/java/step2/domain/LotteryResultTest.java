@@ -11,7 +11,10 @@ public class LotteryResultTest {
     void rateOfReturn() {
         LotteryResult lotteryResult = new LotteryResult();
         lotteryResult.add(Rank.FIFTH);
-        lotteryResult.add(Rank.MISS);
+        for (int i = 0; i < 13; i++) {
+            lotteryResult.add(Rank.MISS);
+        }
+
         assertThat(lotteryResult.getRateOfReturn()) //
                 .isEqualTo(0.35714287f);
     }
