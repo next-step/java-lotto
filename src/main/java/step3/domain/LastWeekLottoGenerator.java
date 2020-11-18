@@ -12,6 +12,7 @@ public class LastWeekLottoGenerator {
 
     private static final String DELIMITER_LOTTO = ",";
 
+    private LastWeekLottoGenerator() {}
 
     public static Lotto separateLottoToList(String input) {
         validNull(input);

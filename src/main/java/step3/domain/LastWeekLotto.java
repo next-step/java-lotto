@@ -2,6 +2,8 @@ package step3.domain;
 
 import step3.exception.BonusNumberDuplicateNumber;
 
+import java.util.Objects;
+
 public class LastWeekLotto {
 
     private final Lotto lastWeekLotto;
@@ -30,5 +32,17 @@ public class LastWeekLotto {
         return LottoRank.valueOf(lastWeekLotto.matchLottoNumbers(lotto), lotto.has(bonusNumber));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LastWeekLotto that = (LastWeekLotto) o;
+        return Objects.equals(lastWeekLotto, that.lastWeekLotto) &&
+                Objects.equals(bonusNumber, that.bonusNumber);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lastWeekLotto, bonusNumber);
+    }
 }

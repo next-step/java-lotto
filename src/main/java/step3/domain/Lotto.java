@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> lottoNumbers) {
 
