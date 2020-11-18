@@ -6,7 +6,8 @@ import step3.view.OutputView;
 
 public class LottoController {
 
-    private LottoController() {}
+    private LottoController() {
+    }
 
     public static void runLotto() {
         int lottoPurchaseMoney = InputView.purchaseLotto();
@@ -18,7 +19,7 @@ public class LottoController {
 
         String lastWeekLotto = InputView.lastWeekLotto();
         int bonusBall = InputView.initBonusBall();
-        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LastWeekLottoGenerator.separateLottoToList(lastWeekLotto), bonusBall);
+        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LastWeekLottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
 
         OutputView.printStatics(lottoMatcher.getResult());
 

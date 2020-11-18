@@ -18,8 +18,8 @@ public class LottoFactory {
                 .collect(Collectors.toList()));
     }
 
-    public LottoMatcher matchNumbers(Lotto lastWeekLottoNums , int bonusCount) {
-        return LottoMatcher.ofMatch(lottos , LastWeekLotto.of(lastWeekLottoNums ,bonusCount));
+    public LottoMatcher matchNumbers(Lotto lastWeekLottoNums , LottoNumber bonusCount) {
+        return LottoMatcher.ofMatch(lottos , LastWeekLotto.of(lastWeekLottoNums , bonusCount));
     }
 
     private int getLottoTicketCount(int money) {

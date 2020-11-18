@@ -1,7 +1,9 @@
 package step3.domain;
 
 import step3.exception.LottoCountBoundException;
+import step3.exception.LottoNumberDuplicateException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,17 +11,17 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-
-    private final List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
 
         validLottoCount(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers
-                .stream()
+        this.lottoNumbers = lottoNumbers.stream()
                 .sorted()
+                .map(this::init)
                 .collect(Collectors.toList());
+
     }
 
     private void validLottoCount(List<Integer> lottoNumbers) {
@@ -36,23 +38,29 @@ public class Lotto {
 
     public String getLottoNumbersToStringList() {
         return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
     }
-    public boolean has(int number){
-        return lottoNumbers.contains(number);
+
+    public boolean has(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
-    public Stream<Integer> stream(){
+
+    public Stream<LottoNumber> stream() {
         return lottoNumbers.stream();
     }
 
-    private void add(int lottoNumber){
+    private LottoNumber init(int lottoNum) {
+        LottoNumber lottoNumber = new LottoNumber(lottoNum);
+        validDuplicatedNumber(lottoNumber);
 
+        return lottoNumber;
     }
 
-    private void validDuplicatedNumber(int lottoNumber){
-        if(lottoNumbers.contains(lottoNumber)){
-            throw new
+    private void validDuplicatedNumber(LottoNumber lottoNumber) {
+        if (lottoNumbers.contains(lottoNumber)) {
+            throw new LottoNumberDuplicateException();
         }
     }
 

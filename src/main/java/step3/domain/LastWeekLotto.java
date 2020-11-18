@@ -5,9 +5,9 @@ import step3.exception.BonusNumberDuplicateNumber;
 public class LastWeekLotto {
 
     private final Lotto lastWeekLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private LastWeekLotto(Lotto lastWeekLotto, int bonusNumber) {
+    private LastWeekLotto(Lotto lastWeekLotto, LottoNumber bonusNumber) {
 
         validBonusNumber(lastWeekLotto , bonusNumber);
 
@@ -15,13 +15,13 @@ public class LastWeekLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validBonusNumber(Lotto lastWeekLotto , int bonusNumber) {
+    private void validBonusNumber(Lotto lastWeekLotto , LottoNumber bonusNumber) {
         if(lastWeekLotto.has(bonusNumber)){
             throw new BonusNumberDuplicateNumber();
         }
     }
 
-    public static LastWeekLotto of(Lotto lotto, int bonusNumber) {
+    public static LastWeekLotto of(Lotto lotto, LottoNumber bonusNumber) {
         return new LastWeekLotto(lotto, bonusNumber);
     }
 
