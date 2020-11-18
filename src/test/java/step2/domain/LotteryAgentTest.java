@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -54,8 +54,8 @@ public class LotteryAgentTest {
     @Test
     void ticketHasNumbers() {
         LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(1000)).getLotteryTickets();
-        List<LotteryNumber> numbers = lotteryTickets.getTicketNumbers();
-        assertThat(numbers.get(0)).isInstanceOf(LotteryNumber.class);
+        Set<LotteryNumber> numbers = lotteryTickets.getTicketNumbers();
+        assertThat(numbers).isNotEmpty().first().isInstanceOf(LotteryNumber.class);
     }
 
 }

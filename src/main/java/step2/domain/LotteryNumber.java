@@ -36,4 +36,11 @@ public class LotteryNumber {
     public boolean contains(Integer bonusNumber) {
         return numbers.contains(bonusNumber);
     }
+
+    /**
+     * Visible for tests
+     */
+    LotteryNumber copy() {
+        return new LotteryNumber(numbers);
+    }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.utils.Sets;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -39,7 +39,7 @@ public class PlayslipTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2})
     void listNumbers(int selection) {
-        List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
+        Set<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
 

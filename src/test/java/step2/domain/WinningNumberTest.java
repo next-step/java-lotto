@@ -7,11 +7,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2.utils.Sets;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static step2.domain.Rank.*;
 
@@ -49,9 +49,9 @@ public class WinningNumberTest {
     void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
         LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
-                Arrays.asList(
-                        lotteryNumber,
-                        lotteryNumber,
+                Sets.of(
+                        lotteryNumber.copy(),
+                        lotteryNumber.copy(),
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
@@ -78,7 +78,7 @@ public class WinningNumberTest {
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
-        return new LotteryTickets(singletonList(LotteryNumber.of(numbers)));
+        return new LotteryTickets(Sets.of(LotteryNumber.of(numbers)));
     }
 
 }
