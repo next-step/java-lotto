@@ -19,9 +19,11 @@
 - WinningCounter 특정 수가 몇개 있는지를 가지는 클래스
     - public static WinningCounter of(int number, int count)
     - public boolean filter(int from, int to)
+    - public int getCount()
 - WinningCounterCollections
     - public static WinningCounterCollections of(List<NumberCount> winningCounters)
     - public List<WinningCounter> filter(int from, int to)
+    - public int getCount(int winningNumber)
 - Lottos
     - public static Lottos of(List<Lotto> lottos)
     - private Map<Integer, Integer> calculateCountNumber(Lotto winningNumbers) 
@@ -32,10 +34,11 @@
     - public Lottos generateLottos(int payment, LottoNumbers winningCounters)
 - LottoReward
      - public static LottoReward of(int number, int reward, int count) 
-     - public LottoReward increaseCount() 
+     - public LottoReward updateCount(int count) 
+     - public int getNumber() 
 - LottoRewardCollections
-    
-
+    - public static LottoRewardCollections of(List<LottoReward> lottoRewards) 
+    - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections) 
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - 사용자의 로또 번호들과 금주의 당첨번호를 비교해주는 기능

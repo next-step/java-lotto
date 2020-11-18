@@ -1,15 +1,26 @@
 package step02.domain;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class WinningStatistic {
+    private final LottoRewardCollections lottoRewards;
     private final Lotto winningNumbers;
+    private final Lottos userLottos;
 
-    private WinningStatistic(Lotto winningNumbers) {
+    private WinningStatistic(Lotto winningNumbers, Lottos userLottos, LottoRewardCollections lottoRewards) {
         this.winningNumbers = winningNumbers;
+        this.userLottos = userLottos;
+        this.lottoRewards = lottoRewards;
     }
-    public static WinningStatistic of(Lotto winningNumbers) {
-        return new WinningStatistic(winningNumbers);
+
+    public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos, LottoRewardCollections lottoRewards) {
+        return new WinningStatistic(winningNumbers, userLottos, lottoRewards);
+    }
+
+    public WinningStatistic execute() {
+        WinningCounterCollections winningCounters = userLottos.statisticWinning(winningNumbers);
+        return WinningStatistic.of(winningNumbers, userLottos, lottoRewards.updateCounts(winningCounters));
     }
 
     public int getMatchCount() {
