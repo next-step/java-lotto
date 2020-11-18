@@ -1,37 +1,30 @@
 package lotto.domain.model;
 
-import lotto.constants.PrizeGrade;
-import lotto.domain.LottoGame;
+import lotto.domain.Lotto;
 import lotto.domain.LottoResults;
+import lotto.domain.WinnerLotto;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoGames {
 
-  private final List<LottoGame> lottoGames;
+  private final List<Lotto> lottos;
 
-  public LottoGames(List<LottoGame> lottoGames) {
-    this.lottoGames = lottoGames;
+  public LottoGames(List<Lotto> lottos) {
+    this.lottos = lottos;
   }
 
-  public List<LottoGame> getLottoGames() {
-    return lottoGames;
+  public List<Lotto> getLottoGames() {
+    return lottos;
   }
 
   public int getGameSize() {
-    return lottoGames.size();
+    return lottos.size();
   }
 
-  public LottoResults confirmPrize(LottoGame lastWeekWinGame) {
-    return new LottoResults(getConfirmResults(lastWeekWinGame));
-  }
-
-  private List<PrizeGrade> getConfirmResults(LottoGame lastWeekWinGame) {
-    return lottoGames.stream()
-        .map(lottoGame -> lottoGame.confirmPrize(lastWeekWinGame))
-        .collect(Collectors.toList());
+  public LottoResults confirmPrize(WinnerLotto winnerLotto) {
+    return new LottoResults(winnerLotto.prizeResult(lottos));
   }
 
   @Override
@@ -39,11 +32,11 @@ public class LottoGames {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoGames that = (LottoGames) o;
-    return lottoGames.equals(that.lottoGames);
+    return lottos.equals(that.lottos);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoGames);
+    return Objects.hash(lottos);
   }
 }

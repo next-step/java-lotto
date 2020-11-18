@@ -3,7 +3,6 @@ package lotto.constants;
 import lotto.exception.LottoGameException;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import static lotto.constants.Message.RATE_OF_RETURN_IS_NOT_NEGATIVE_NUMBER;
@@ -24,15 +23,12 @@ public enum RateOfReturn {
   }
 
   public static RateOfReturn of(double rateOfReturn) {
-    return make(rateOfReturn)
+    return Arrays.stream(RateOfReturn.values())
+        .filter(value -> value.getRateOfReturn.test(rateOfReturn))
+        .findFirst()
         .orElseThrow(() -> new LottoGameException(RATE_OF_RETURN_IS_NOT_NEGATIVE_NUMBER));
   }
 
-  private static Optional<RateOfReturn> make(double rateOfReturn) {
-    return Arrays.stream(RateOfReturn.values())
-        .filter(value -> value.getRateOfReturn.test(rateOfReturn))
-        .findFirst();
-  }
 
   public String getMessage() {
     return message;

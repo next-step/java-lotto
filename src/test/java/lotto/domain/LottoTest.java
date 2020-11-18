@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoGameTest {
+class LottoTest {
 
   private static final List<LottoNumber> LOTTO_NUMBERS = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
       new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
@@ -23,28 +22,21 @@ class LottoGameTest {
   @ParameterizedTest
   @MethodSource("provideConstructorMaterial")
   void 객체생성_테스트(List<LottoNumber> lottoNumbers, String[] expect) {
-    assertThat(new LottoGame(lottoNumbers)).isEqualTo(new LottoGame(expect));
+    assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(expect));
   }
 
   @ParameterizedTest
   @MethodSource("provideConstructorFailMaterial")
   void 객체생성_실패_테스트(String[] input) {
-    assertThatThrownBy(() -> new LottoGame(input))
+    assertThatThrownBy(() -> new Lotto(input))
         .isInstanceOf(LottoGameException.class);
-  }
-
-  @ParameterizedTest
-  @MethodSource("provideConfirmPrizeMaterial")
-  void confirmPrize_테스트(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers, int matchCount) {
-    assertThat(new LottoGame(lottoNumbers).confirmPrize(new LottoGame(winNumbers)))
-        .isEqualTo(PrizeGrade.of(matchCount));
   }
 
   @DisplayName("toString 테스트")
   @ParameterizedTest
   @MethodSource("provideToStringMaterial")
   void toString_테스트(List<LottoNumber> lottoNumbers, String expect) {
-    assertThat(new LottoGame(lottoNumbers).toString()).isEqualTo(expect);
+    assertThat(new Lotto(lottoNumbers).toString()).isEqualTo(expect);
   }
 
   static Stream<Arguments> provideConstructorMaterial() {
@@ -62,14 +54,6 @@ class LottoGameTest {
         Arguments.of((Object) new String[]{"a", "b", "1", "23", "44", "21"}),
         Arguments.of((Object) new String[]{"100", "2", "3", "3", "44", "21"}),
         Arguments.of((Object) new String[]{"-1", "1", "2", "23", "44", "21"})
-    );
-  }
-
-  static Stream<Arguments> provideConfirmPrizeMaterial() {
-    List<LottoNumber> prize = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-        new LottoNumber(12), new LottoNumber(23), new LottoNumber(34));
-    return Stream.of(
-        Arguments.of(LOTTO_NUMBERS, prize, 3)
     );
   }
 

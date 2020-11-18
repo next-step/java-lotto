@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.PrizeGrade;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 
@@ -13,27 +12,25 @@ import java.util.stream.Collectors;
 import static lotto.config.LottoGameConfig.NUMBER_COUNT_PER_GAME;
 import static lotto.constants.Message.NUMBER_COUNT_SHOULD_N;
 
-public class LottoGame {
+public class Lotto {
   private final Set<LottoNumber> lottoNumbers;
-
-  private static final int ZERO = 0;
-  private static final int MATCH = 1;
-  private static final int NON_MATCH = ZERO;
 
   private static final String OPEN_PARENTHESIS = "[";
   private static final String CLOSE_PARENTHESIS = "]";
   private static final String DELIMITER = ", ";
 
-  public LottoGame(List<LottoNumber> lottoNumberPool) {
-    this.lottoNumbers = lottoNumberPool.stream().limit(NUMBER_COUNT_PER_GAME).collect(Collectors.toSet());
+  public Lotto(List<LottoNumber> lottoNumberPool) {
+    this.lottoNumbers = lottoNumberPool.stream()
+        .limit(NUMBER_COUNT_PER_GAME)
+        .collect(Collectors.toSet());
   }
 
-  public LottoGame(String[] numbers) {
+  public Lotto(String[] numbers) {
     this.lottoNumbers = createLottoNumbers(numbers);
   }
 
-  public PrizeGrade confirmPrize(LottoGame prize) {
-    return PrizeGrade.of(getMatchCount(prize));
+  public Set<LottoNumber> getLottoNumbers() {
+    return lottoNumbers;
   }
 
   private Set<LottoNumber> createLottoNumbers(String[] numbers) {
@@ -50,17 +47,6 @@ public class LottoGame {
 
   private boolean isValidNumberCount(Set<LottoNumber> lottoNumbers) {
     return lottoNumbers.size() == NUMBER_COUNT_PER_GAME;
-  }
-
-  private int getMatchCount(LottoGame lottoGame) {
-    return this.lottoNumbers.stream()
-        .map(lottoNumber -> {
-          if (lottoGame.contains(lottoNumber)) {
-            return MATCH;
-          }
-          return NON_MATCH;
-        })
-        .reduce(ZERO, Integer::sum);
   }
 
   protected boolean contains(LottoNumber lottoNumber) {
@@ -86,8 +72,8 @@ public class LottoGame {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoGame lottoGame = (LottoGame) o;
-    return lottoNumbers.equals(lottoGame.lottoNumbers);
+    Lotto lotto = (Lotto) o;
+    return lottoNumbers.equals(lotto.lottoNumbers);
   }
 
   @Override

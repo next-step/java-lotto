@@ -8,13 +8,12 @@ import java.util.stream.IntStream;
 import static lotto.config.LottoGameConfig.NUMBER_COUNT_PER_GAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGameManagerTest {
+class LottoManagerTest {
   @Test
   void 새게임생성_테스트() {
-    LottoGame newLottoGame = LottoGameManager.newLottoGame();
+    Lotto newLotto = LottoGameManager.newLottoGame();
     long validRangeCount = IntStream.range(1, 46)
-        .mapToObj(num -> newLottoGame.contains(new LottoNumber(num)))
-        .filter(aBoolean -> aBoolean)
+        .filter(num -> newLotto.contains(new LottoNumber(num)))
         .count();
 
     assertThat(validRangeCount).isEqualTo(NUMBER_COUNT_PER_GAME);
