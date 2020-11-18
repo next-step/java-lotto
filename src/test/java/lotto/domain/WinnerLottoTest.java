@@ -13,12 +13,12 @@ import static lotto.domain.PrizeGrade.FIRST_CLASS;
 import static lotto.domain.PrizeGrade.SECOND_CLASS;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGameConditionTest {
+class WinnerLottoTest {
 
   @ParameterizedTest
   @MethodSource("provideTestingGetPrizeResult")
-  void prizeResult_테스(LottoGameCondition winningCondition, List<LottoGame> lottoGames, List<PrizeGrade> expect) {
-    assertThat(winningCondition.prizeResult(lottoGames)).isEqualTo(expect);
+  void prizeResult_테스(WinnerLotto winningCondition, List<Lotto> lottos, List<PrizeGrade> expect) {
+    assertThat(winningCondition.prizeResult(lottos)).isEqualTo(expect);
   }
 
   static Stream<Arguments> provideTestingGetPrizeResult() {
@@ -29,7 +29,7 @@ class LottoGameConditionTest {
 
     LottoNumber bonusNumber = new LottoNumber(6);
 
-    LottoGameCondition lottoGameCondition = new LottoGameCondition(new LottoGame(lastWeekWinGame), bonusNumber);
+    WinnerLotto winnerLotto = new WinnerLotto(new Lotto(lastWeekWinGame), bonusNumber);
 
     List<LottoNumber> lottoNumbers = Arrays.asList(
         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -40,13 +40,13 @@ class LottoGameConditionTest {
 
     return Stream.of(
         Arguments.of(
-            lottoGameCondition,
-            Arrays.asList(new LottoGame(lottoNumbers)),
+            winnerLotto,
+            Arrays.asList(new Lotto(lottoNumbers)),
             Arrays.asList(SECOND_CLASS)
         ),
         Arguments.of(
-            lottoGameCondition,
-            Arrays.asList(new LottoGame(lottoNumbers2)),
+            winnerLotto,
+            Arrays.asList(new Lotto(lottoNumbers2)),
             Arrays.asList(FIRST_CLASS)
         )
     );

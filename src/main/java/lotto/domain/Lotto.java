@@ -12,20 +12,20 @@ import java.util.stream.Collectors;
 import static lotto.config.LottoGameConfig.NUMBER_COUNT_PER_GAME;
 import static lotto.constants.Message.NUMBER_COUNT_SHOULD_N;
 
-public class LottoGame {
+public class Lotto {
   private final Set<LottoNumber> lottoNumbers;
 
   private static final String OPEN_PARENTHESIS = "[";
   private static final String CLOSE_PARENTHESIS = "]";
   private static final String DELIMITER = ", ";
 
-  public LottoGame(List<LottoNumber> lottoNumberPool) {
+  public Lotto(List<LottoNumber> lottoNumberPool) {
     this.lottoNumbers = lottoNumberPool.stream()
         .limit(NUMBER_COUNT_PER_GAME)
         .collect(Collectors.toSet());
   }
 
-  public LottoGame(String[] numbers) {
+  public Lotto(String[] numbers) {
     this.lottoNumbers = createLottoNumbers(numbers);
   }
 
@@ -72,8 +72,8 @@ public class LottoGame {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoGame lottoGame = (LottoGame) o;
-    return lottoNumbers.equals(lottoGame.lottoNumbers);
+    Lotto lotto = (Lotto) o;
+    return lottoNumbers.equals(lotto.lottoNumbers);
   }
 
   @Override

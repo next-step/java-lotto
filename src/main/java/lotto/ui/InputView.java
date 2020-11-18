@@ -1,8 +1,8 @@
 package lotto.ui;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGameCondition;
+import lotto.domain.Lotto;
 import lotto.domain.PurchaseAction;
+import lotto.domain.WinnerLotto;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 
@@ -21,10 +21,10 @@ public class InputView {
     return new PurchaseAction(validatePrice(purchasingPrice()));
   }
 
-  public LottoGameCondition inputLastWeekWinNumber() {
-    LottoGame prizeLottoGame = new LottoGame(validatePrice(lastWeekWinNumber()));
+  public WinnerLotto inputLastWeekWinNumber() {
+    Lotto prizeLotto = new Lotto(validatePrice(lastWeekWinNumber()));
     LottoNumber bonusNumber = new LottoNumber(validatePrice(bonusNumber()));
-    return new LottoGameCondition(prizeLottoGame, bonusNumber);
+    return new WinnerLotto(prizeLotto, bonusNumber);
   }
 
   private Optional<Integer> purchasingPrice() {

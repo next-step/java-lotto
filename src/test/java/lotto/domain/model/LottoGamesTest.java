@@ -1,9 +1,9 @@
 package lotto.domain.model;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGameCondition;
+import lotto.domain.Lotto;
 import lotto.domain.LottoResults;
 import lotto.domain.PrizeGrade;
+import lotto.domain.WinnerLotto;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,8 +21,8 @@ class LottoGamesTest {
 
   @ParameterizedTest
   @MethodSource("provideLottoResultMaterial")
-  void 로또_당첨결과_확인_테스트(LottoGames lottoGames, LottoGameCondition lottoGameCondition, List<PrizeGrade> expect) {
-    assertThat(lottoGames.confirmPrize(lottoGameCondition)).isEqualTo(new LottoResults(expect));
+  void 로또_당첨결과_확인_테스트(LottoGames lottoGames, WinnerLotto winnerLotto, List<PrizeGrade> expect) {
+    assertThat(lottoGames.confirmPrize(winnerLotto)).isEqualTo(new LottoResults(expect));
   }
 
   static Stream<Arguments> provideLottoResultMaterial() {
@@ -37,13 +37,13 @@ class LottoGamesTest {
     return Stream.of(
         Arguments.of(
             new LottoGames(Arrays.asList(
-                new LottoGame(_1To6),
-                new LottoGame(_1To5And10),
-                new LottoGame(_1To5And9),
-                new LottoGame(_1To4And7_8),
-                new LottoGame(_20To4And25)
+                new Lotto(_1To6),
+                new Lotto(_1To5And10),
+                new Lotto(_1To5And9),
+                new Lotto(_1To4And7_8),
+                new Lotto(_20To4And25)
             )),
-            new LottoGameCondition(new LottoGame(_1To6), bonusNumber),
+            new WinnerLotto(new Lotto(_1To6), bonusNumber),
             Arrays.asList(FIRST_CLASS, SECOND_CLASS, THIRD_CLASS, FOURTH_CLASS, FAIL)
         )
     );

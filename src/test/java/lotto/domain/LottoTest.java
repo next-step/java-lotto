@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoGameTest {
+class LottoTest {
 
   private static final List<LottoNumber> LOTTO_NUMBERS = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
       new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
@@ -22,13 +22,13 @@ class LottoGameTest {
   @ParameterizedTest
   @MethodSource("provideConstructorMaterial")
   void 객체생성_테스트(List<LottoNumber> lottoNumbers, String[] expect) {
-    assertThat(new LottoGame(lottoNumbers)).isEqualTo(new LottoGame(expect));
+    assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(expect));
   }
 
   @ParameterizedTest
   @MethodSource("provideConstructorFailMaterial")
   void 객체생성_실패_테스트(String[] input) {
-    assertThatThrownBy(() -> new LottoGame(input))
+    assertThatThrownBy(() -> new Lotto(input))
         .isInstanceOf(LottoGameException.class);
   }
 
@@ -36,7 +36,7 @@ class LottoGameTest {
   @ParameterizedTest
   @MethodSource("provideToStringMaterial")
   void toString_테스트(List<LottoNumber> lottoNumbers, String expect) {
-    assertThat(new LottoGame(lottoNumbers).toString()).isEqualTo(expect);
+    assertThat(new Lotto(lottoNumbers).toString()).isEqualTo(expect);
   }
 
   static Stream<Arguments> provideConstructorMaterial() {

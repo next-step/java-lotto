@@ -44,7 +44,7 @@ public class PurchaseAction {
     return new LottoGames(generateLottoGames());
   }
 
-  private List<LottoGame> generateLottoGames() {
+  private List<Lotto> generateLottoGames() {
     return IntStream.range(ZERO, numberOfGames)
         .mapToObj(index -> LottoGameManager.newLottoGame())
         .collect(Collectors.toList());
