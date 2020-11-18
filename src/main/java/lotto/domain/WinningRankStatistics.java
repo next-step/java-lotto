@@ -16,7 +16,7 @@ public class WinningRankStatistics {
     }
 
     private void count(WinningRanks winningRanks) {
-        winningRanks.getWinningRankList()
+        winningRanks.getWinningRanks()
                 .forEach(this::add);
     }
 

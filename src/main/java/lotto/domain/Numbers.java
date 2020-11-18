@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    private List<Number> numberList;
+    private List<Number> numbers;
 
     public Numbers(Builder builder) {
-        this.numberList = new ArrayList<>(builder.numbers);
+        this.numbers = new ArrayList<>(builder.numbers);
         builder.numbers.clear();
     }
 
@@ -19,18 +19,18 @@ public class Numbers {
         return new Builder();
     }
 
-    public List<Number> getNumberList() {
-        return numberList;
+    public List<Number> getNumbers() {
+        return numbers;
     }
 
     public int countSameNumber(Numbers numbers) {
-        return (int) this.numberList.stream()
+        return (int) this.numbers.stream()
                 .filter(numbers::contains)
                 .count();
     }
 
     public boolean contains(Number number) {
-        return this.numberList.contains(number);
+        return this.numbers.contains(number);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class Numbers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Numbers numbers1 = (Numbers) o;
-        return Objects.equals(numberList, numbers1.numberList);
+        return Objects.equals(numbers, numbers1.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 
 
