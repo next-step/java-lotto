@@ -49,10 +49,10 @@ public class LottosTest {
                                 )
                         ), new ArrayList<>(
                                 Arrays.asList(
-                                    LottoBall.of(0, 7),
-                                    LottoBall.of(1, 5),
-                                    LottoBall.of(2, 1),
-                                    LottoBall.of(3, 1)
+                                    WinningCounter.of(0, 7),
+                                    WinningCounter.of(1, 5),
+                                    WinningCounter.of(2, 1),
+                                    WinningCounter.of(3, 1)
                                 )
                         )
                 )
@@ -62,10 +62,10 @@ public class LottosTest {
     @DisplayName("Lottos 의 통계결과를 리턴")
     @ParameterizedTest
     @MethodSource("provideLottosStatisticResult")
-    public void test_statisticWinning(Lottos lottos, List<LottoBall> numbersCount) {
+    public void test_statisticWinning(Lottos lottos, List<WinningCounter> numbersCount) {
         Lotto winningNumbers = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottos.statisticWinning(winningNumbers))
-                .isEqualTo(LottoBallCollections.of(numbersCount));
+                .isEqualTo(WinningCounterCollections.of(numbersCount));
     }
 
 

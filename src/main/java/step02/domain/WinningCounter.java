@@ -2,24 +2,24 @@ package step02.domain;
 
 import java.util.Objects;
 
-public class LottoBall {
+public class WinningCounter {
     private final int number;
     private final int count;
 
-    private LottoBall(int number, int count) {
+    private WinningCounter(int number, int count) {
         this.number = number;
         this.count = count;
     }
 
-    public static LottoBall of(int number, int count) {
-        return new LottoBall(number, count);
+    public static WinningCounter of(int number, int count) {
+        return new WinningCounter(number, count);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoBall that = (LottoBall) o;
+        WinningCounter that = (WinningCounter) o;
         return number == that.number &&
                 count == that.count;
     }
