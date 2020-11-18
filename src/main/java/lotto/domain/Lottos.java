@@ -8,11 +8,11 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(Lotto... lottos){
+    public Lottos(Lotto... lottos) {
         this(Arrays.asList(lottos));
     }
 
-    public Lottos(List<Lotto> lottos){
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -22,7 +22,7 @@ public class Lottos {
 
     private List<Lotto> findPrize(List<Lotto> lottos, WinningNumber winningNumber, int matchedCount) {
         return lottos.stream()
-                .filter(it -> winningNumber.getMatchedNumberCount(it) == matchedCount )
+                .filter(it -> winningNumber.getMatchedNumberCount(it) == matchedCount)
                 .collect(Collectors.toList());
     }
 

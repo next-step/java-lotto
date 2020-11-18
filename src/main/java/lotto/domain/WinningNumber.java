@@ -12,19 +12,19 @@ public class WinningNumber {
         this.numbers = numbers;
     }
 
-    public WinningNumber(String expression){
+    public WinningNumber(String expression) {
         parse(expression);
     }
 
     private void parse(String expression) {
         try {
             this.numbers = lottoNumberParser.parse(expression);
-        } catch ( RuntimeException e ){
-            throw new InvalidWinningNumberException(expression, e.getCause() != null ? e.getCause() : e );
+        } catch (RuntimeException e) {
+            throw new InvalidWinningNumberException(expression, e.getCause() != null ? e.getCause() : e);
         }
     }
 
-    public int getMatchedNumberCount(Lotto lotto){
+    public int getMatchedNumberCount(Lotto lotto) {
         return lotto.getMatchedNumberCount(new WinningNumberMatcher(numbers));
     }
 }
@@ -32,6 +32,7 @@ public class WinningNumber {
 class WinningNumberMatcher implements NumberMatcher {
 
     private List<Integer> numbers;
+
     public WinningNumberMatcher(List<Integer> numbers) {
         this.numbers = numbers;
     }

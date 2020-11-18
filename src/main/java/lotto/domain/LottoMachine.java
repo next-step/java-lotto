@@ -14,7 +14,7 @@ public class LottoMachine {
     private final List<Integer> prizeMoneys;
     private LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.simple();
 
-    public LottoMachine(List<Integer> prizeMoneys){
+    public LottoMachine(List<Integer> prizeMoneys) {
         this.prizeMoneys = prizeMoneys;
     }
 
@@ -26,11 +26,11 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public PrizeWinningResult checkPrizeWinning(Lottos lottos, WinningNumber winningNumber){
+    public PrizeWinningResult checkPrizeWinning(Lottos lottos, WinningNumber winningNumber) {
         return PrizeWinningResult
                 .builder()
                 .paidMoney(lottos.getPaidMoney())
-                .prizeMoneys(this.prizeMoneys.get(0), this.prizeMoneys.get(1), this.prizeMoneys.get(2), this.prizeMoneys.get(3) )
+                .prizeMoneys(this.prizeMoneys.get(0), this.prizeMoneys.get(1), this.prizeMoneys.get(2), this.prizeMoneys.get(3))
                 .firstPrize(lottos.findMatched(winningNumber, FIRST_PRIZE_MATCH_COUNT))
                 .secondPrize(lottos.findMatched(winningNumber, SECOND_PRIZE_MATCH_COUNT))
                 .thirdPrize(lottos.findMatched(winningNumber, THIRD_PRIZE_MATCH_COUNT))
@@ -38,7 +38,7 @@ public class LottoMachine {
                 .build();
     }
 
-    private Lotto generateLotto(){
+    private Lotto generateLotto() {
         return new Lotto(lottoNumberGenerator.generate());
     }
 
