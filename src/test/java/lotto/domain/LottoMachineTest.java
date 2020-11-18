@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ public class LottoMachineTest {
 
     @BeforeEach
     void setUp() {
-        this.prizeMoneys = Arrays.asList(10000, 5000, 3000, 1000);
+        this.prizeMoneys = Arrays.asList(2000000000, 1500000, 50000, 2000);
         this.lottoMachine = new LottoMachine(this.prizeMoneys);
     }
 
@@ -38,7 +37,7 @@ public class LottoMachineTest {
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(secondPrizeLotto), winningNumber);
 
-        assertThat(result.getRateOfReturn()).isEqualTo(5);
+        assertThat(result.getRateOfReturn()).isEqualTo(1500);
     }
 
 
@@ -52,7 +51,7 @@ public class LottoMachineTest {
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(firstPrizeLotto, fouthPrizeLotto), winningNumber);
 
-        assertThat(result.getRateOfReturn()).isEqualTo(5.5);
+        assertThat(result.getRateOfReturn()).isEqualTo(1000001.0);
     }
 
     @DisplayName("당첨이 되지 않으면 수익률은 0 이다")
@@ -69,10 +68,12 @@ public class LottoMachineTest {
     @DisplayName("당첨금과 로또구입금액이 같으면 수익률은 1 이다")
     @Test
     void rateOfReturn4() {
-        Lotto fourthPrizeLott = myLotto(1, 2, 3, 10, 20, 30);
+        Lotto fourthPrizeLotto = myLotto(1, 2, 3, 10, 20, 30);
+        Lotto noPrizeLotto = myLotto(11, 12, 13, 10, 20, 30);
+
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(fourthPrizeLott), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(fourthPrizeLotto, noPrizeLotto), winningNumber);
 
         assertThat(result.getRateOfReturn()).isEqualTo(1);
     }

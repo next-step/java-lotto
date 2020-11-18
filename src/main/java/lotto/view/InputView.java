@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static final String PURCHASE_AMOUNT_INPUT_MSG = "구입금액을 입력해 주세요.";
-    public static final String WINNING_NUMBER_INPUT_MSG = "지난 주 당첨 번호를 입력해 주세요.";
-
     private Scanner scanner;
 
     public InputView() {
@@ -14,11 +11,11 @@ public class InputView {
     }
 
     public int readPurchaseAmount() {
-        return getNumberFromStdin(PURCHASE_AMOUNT_INPUT_MSG);
+        return getNumberFromStdin("구입금액을 입력해 주세요.");
     }
 
     public String readWinningNumber() {
-        return getStringFromStdin(WINNING_NUMBER_INPUT_MSG);
+        return getStringFromStdin("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     private String getStringFromStdin(String displayText) {
