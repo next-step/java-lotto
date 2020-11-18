@@ -8,13 +8,12 @@ import lotto.view.ResultView;
 
 public class Main {
     public static void main(String[] args) {
-        Money purchaseMoney = InputMapper.getPurchaseMoney();
-        int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
-        NumOfLottosDto numOfLottosDto = new NumOfLottosDto(numOfLottos);
+        PurchaseInfo purchaseInfo = InputMapper.getPurchaseInfo();
+        NumOfLottosDto numOfLottosDto = new NumOfLottosDto(purchaseInfo.getNumOfManualLottos(), purchaseInfo.getNumOfAutoLottos());
         ResultView.printNumOfLottos(numOfLottosDto);
 
         Shuffler shuffler = new Shuffler(LottoNo.MIN, LottoNo.MAX);
-        Lottos lottos = new Lottos(numOfLottos, () -> new Lotto(
+        Lottos lottos = new Lottos(purchaseInfo, () -> new Lotto(
                 shuffler.getIntegers(Lotto.SIZE)
         ));
         LottosDto lottosDto = new LottosDto(lottos);
@@ -22,7 +21,7 @@ public class Main {
 
         WinningCondition condition = InputMapper.getWinningCondition();
         Result result = lottos.getResult(condition);
-        StatisticsDto statisticsDto = new StatisticsDto(result, purchaseMoney);
+        StatisticsDto statisticsDto = new StatisticsDto(result, purchaseInfo.getPurchaseMoney());
         ResultView.printStatistics(statisticsDto);
     }
 }

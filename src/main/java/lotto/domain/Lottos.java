@@ -4,14 +4,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
-// NOTE: Lotto 의 일급 컬렉션
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int size, Supplier<Lotto> supplier) {
+    public Lottos(PurchaseInfo info, Supplier<Lotto> autoSupplier) {
         lottos = new LinkedList<>();
-        for (int i = 0; i < size; i++) {
-            lottos.add(supplier.get());
+        for (Lotto manualLotto : info.getManualLottos()) {
+            lottos.add(manualLotto);
+        }
+        for (int i = 0; i < info.getNumOfAutoLottos(); i++) {
+            lottos.add(autoSupplier.get());
         }
     }
 

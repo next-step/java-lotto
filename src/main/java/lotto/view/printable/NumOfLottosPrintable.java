@@ -11,6 +11,6 @@ public class NumOfLottosPrintable extends Printable {
 
     @Override
     public void print() {
-        println(dto.getNumOfLottos() + "개를 구매했습니다.");
+        println("수동으로 " + dto.getNumOfManualLottos() + "장, 자동으로 " + dto.getNumOfAutoLottos() + "개를 구매했습니다.");
     }
 }

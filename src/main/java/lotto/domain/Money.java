@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Money {
     private final int money;
 
-    public Money(int money) {
+    Money(int money) {
         validateMoney(money);
         this.money = money;
     }
@@ -20,11 +20,11 @@ public class Money {
 
     }
 
-    public double divide(Money divider) {
+    double divide(Money divider) {
         if (divider.money <= 0) {
             throw BadDividerException.getInstance();
         }
-        return money / divider.money;
+        return ((double) money) / ((double) divider.money);
     }
 
     @Override

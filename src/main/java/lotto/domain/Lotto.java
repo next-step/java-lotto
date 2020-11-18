@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Lotto {
     public static final int SIZE = 6;
-    private static final Money price = new Money(1000);
 
     private final List<LottoNo> lottoNos;
 
@@ -21,10 +20,6 @@ public class Lotto {
         for (int no : lottoNos) {
             add(no);
         }
-    }
-
-    public static int getNumOfLottos(Money purchaseMoney) {
-        return (int) purchaseMoney.divide(price);
     }
 
     int getCountOfMatch(Lotto lotto) {
