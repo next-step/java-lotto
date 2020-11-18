@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.IntStream;
+import static lotto.domain.LottoRuleConfig.*;
 
 public class LottoNumber {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
     private final int lottoNumber;
 
@@ -21,15 +18,19 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber get(int number) {
+    public static LottoNumber of(int number) {
         return lottoNumbers.stream()
                 .filter(num -> num.lottoNumber == number)
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static Set<LottoNumber> toSet() {
-        return lottoNumbers;
+    public static List<LottoNumber> toList() {
+        return new ArrayList<>(lottoNumbers);
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
