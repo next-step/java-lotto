@@ -1,9 +1,15 @@
 package lotto;
 
-class LottoGameConstant {
+public class LottoGameConstant {
 
-  static final int MINIMUM_LOTTO_NUMBER = 1;
-  static final int MAXIMUM_LOTTO_NUMBER = 45;
+  public static final int MINIMUM_LOTTO_NUMBER = 1;
+  public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-  static final int NUMBERS_PER_TICKET = 6;
+  public static final int NUMBERS_PER_TICKET = 6;
+  public static final int PRICE_PER_TICKET = 1000;
+
+  public static final String PURCHASE_MESSAGE = "구매금액을 입력해 주세요.";
+  public static final String NUM_LOTTO_MESSAGE = "개를 구매했습니다.";
+
+  public static final String SCORING_MESSAGE = "당첨 통계";
 }
