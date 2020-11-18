@@ -11,7 +11,7 @@ public class Mock {
 
     static final int LOTTO_PRICE = 1000;
     static final int LOTTO_START_NUMBER = 1;
-    static final int LOTTO_END_NUMBER = 2;
+    static final int LOTTO_END_NUMBER = 46;
     static final List<LottoReward> LOTTO_REWARDS = generateLottoRewards();
 
     static final List<LottoReward> generateLottoRewards() {
