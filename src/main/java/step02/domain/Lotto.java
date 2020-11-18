@@ -26,4 +26,13 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
+    public int matchCount(Lotto winningNumbers) {
+        return lotto.stream().reduce(0, (total, number) -> {
+            if (winningNumbers.lotto.contains(number)) {
+                total += 1;
+            }
+            return total;
+        });
+    }
 }

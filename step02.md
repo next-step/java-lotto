@@ -17,8 +17,13 @@
     - public static Lotto of(List<Integer> lotto)
     - public int matchCount(Lotto winningNumbers)
 - NumberCount 특정 수가 몇개 있는지를 가지는 클래스
+    - public static NumberCount of(int number, int count)
+- NumberCountCollections
+    - public static NumberCountCollections of(List<NumberCount> numberCounts)
 - Lottos
     - public static Lottos of(List<Lotto> lottos)
+    - private Map<Integer, Integer> calculateCountNumber(Lotto winningNumbers) 
+    - public NumberCountCollections statisticWinning(Lotto winningNumbers) 
 - LottoSeller 로또 판매기 
     - private LottoSeller(LottoPrice lottoPrice)
     - public static LottoSeller of(int lottoPrice)
