@@ -5,7 +5,9 @@ import step2.domain.Money;
 import step2.domain.Playslip;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
     public Money requestMoney() {
@@ -15,13 +17,22 @@ public class InputView {
     }
 
     public Playslip requestManualSelectionNumbers() {
-        Integer manualSelectionCount = requestManualSelectionCount();
-        // TODO Creates Playslip with manual selection.
-        return null;
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        int manualSelectionCount = requestManualSelectionCount();
+        Scanner scanner = new Scanner(System.in);
+        Set<LotteryNumber> lotteryNumbers = new HashSet<>();
+        for (int i = 0; i < manualSelectionCount; i++) {
+            String line = scanner.nextLine();
+            lotteryNumbers.add(LotteryNumber.of(splitAndConvertToIntArray(line)));
+        }
+
+        return new Playslip(); // TODO Creates Playslip with manual selection.
     }
 
-    protected Integer requestManualSelectionCount() {
-        return null;
+    protected int requestManualSelectionCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public LotteryNumber requestLastWeekLotteryNumber() {

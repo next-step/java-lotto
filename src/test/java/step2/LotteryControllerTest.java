@@ -69,7 +69,7 @@ public class LotteryControllerTest {
             return Money.of(1000);
         }
 
-        protected Integer requestManualSelectionCount() {
+        protected int requestManualSelectionCount() {
             record.add("requestManualSelectionCount");
             return 0;
         }
