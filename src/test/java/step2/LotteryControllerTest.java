@@ -10,6 +10,7 @@ import step2.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -74,7 +75,7 @@ public class LotteryControllerTest {
             return 0;
         }
 
-        public Playslip requestManualSelectionNumbers() {
+        public Set<LotteryNumber> requestManualSelectionNumbers() {
             super.requestManualSelectionNumbers();
             record.add("requestManualSelectionNumbers");
             return null;

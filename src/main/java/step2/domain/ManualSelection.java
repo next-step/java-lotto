@@ -3,7 +3,7 @@ package step2.domain;
 import java.util.Collections;
 import java.util.Set;
 
-class ManualSelection {
+public class ManualSelection {
     private final Set<LotteryNumber> lotteryNumbers;
 
     public ManualSelection(Set<LotteryNumber> lotteryNumbers) {

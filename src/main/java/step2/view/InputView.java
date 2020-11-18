@@ -2,7 +2,6 @@ package step2.view;
 
 import step2.domain.LotteryNumber;
 import step2.domain.Money;
-import step2.domain.Playslip;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ public class InputView {
         return Money.of(scanner.nextInt());
     }
 
-    public Playslip requestManualSelectionNumbers() {
+    public Set<LotteryNumber> requestManualSelectionNumbers() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         int manualSelectionCount = requestManualSelectionCount();
         Scanner scanner = new Scanner(System.in);
@@ -26,7 +25,7 @@ public class InputView {
             lotteryNumbers.add(LotteryNumber.of(splitAndConvertToIntArray(line)));
         }
 
-        return new Playslip(); // TODO Creates Playslip with manual selection.
+        return lotteryNumbers;
     }
 
     protected int requestManualSelectionCount() {

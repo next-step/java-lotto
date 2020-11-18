@@ -4,6 +4,8 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.Set;
+
 class LotteryController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -17,7 +19,9 @@ class LotteryController {
 
     public void request() {
         Money money = inputView.requestMoney();
-        Playslip playslip = inputView.requestManualSelectionNumbers();
+        Set<LotteryNumber> manualSelectionNumbers = inputView.requestManualSelectionNumbers();
+        Playslip playslip = new Playslip();
+        playslip.setManualSelection(new ManualSelection(manualSelectionNumbers));
         // TODO Exchanges with playslip
         LotteryTickets lotteryTickets = lotteryAgent.exchange(money).getLotteryTickets();
         // TODO Responses with ExchangeResult
