@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoInfo;
-import domain.LottoNumbers;
-import domain.Lottos;
+import domain.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,9 +61,19 @@ public class LottoController {
         matches.forEach(match -> matchMap.merge(match, FIRST_COUNT, Integer::sum));
 
         IntStream.range(PRIZE_BEGINNING, PRIZE_ENDING)
-                .filter(i -> !matchMap.containsKey(i))
-                .forEach(i -> matchMap.put(i, ZERO));
+                .filter(key -> !matchMap.containsKey(key))
+                .forEach(key -> matchMap.put(key, ZERO));
 
         return matchMap;
+    }
+
+    public double calculateProfit(Map<Integer, Integer> lottoStatistics, int price) {
+        int prizeSum = lottoStatistics.keySet()
+                .stream()
+                .mapToInt(key -> key)
+                .map(key -> lottoStatistics.get(key) * LottoPrize.valueOf(key))
+                .sum();
+
+        return prizeSum / price;
     }
 }

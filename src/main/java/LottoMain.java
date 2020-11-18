@@ -4,6 +4,8 @@ import domain.Lottos;
 import view.InputView;
 import view.ResultView;
 
+import java.util.Map;
+
 public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -23,6 +25,8 @@ public class LottoMain {
                 .createWinningNumbers(inputView.inputLastWinningNumber());
 
         resultView.displayResultMention();
-        resultView.displayStatistic(controller.compileLottoStatistics(winningNumbers, lottos));
+
+        Map<Integer, Integer> lottoStatistics = controller.compileLottoStatistics(winningNumbers, lottos);
+        resultView.displayStatistic(lottoStatistics);
     }
 }

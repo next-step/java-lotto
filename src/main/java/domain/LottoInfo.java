@@ -25,7 +25,4 @@ public class LottoInfo {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 }

@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoInfo;
-import domain.LottoNumbers;
-import domain.Lottos;
+import domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -71,6 +68,19 @@ class LottoControllerTest {
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
 
+        Lottos lottos = initTestLottos();
+
+        Map<Integer, Integer> result = new HashMap<>();
+        result.put(3, 2);
+        result.put(4, 0);
+        result.put(5, 0);
+        result.put(6, 1);
+
+        controller = new LottoController();
+        assertThat(controller.compileLottoStatistics(winningNumbers, lottos)).isEqualTo(result);
+    }
+
+    private Lottos initTestLottos() {
         String test1 = "1, 2, 3, 4, 5, 6";
         LottoNumbers testNumber1 = new LottoNumbers()
                 .createWinningNumbers(test1);
@@ -92,16 +102,24 @@ class LottoControllerTest {
         Lotto testLotto4 = new Lotto(testNumber4);
 
 
-        Lottos lottos = Lottos.from(Arrays.asList(testLotto1, testLotto2, testLotto3, testLotto4));
+        return Lottos.from(Arrays.asList(testLotto1, testLotto2, testLotto3, testLotto4));
+    }
 
-        Map<Integer, Integer> result = new HashMap<>();
-        result.put(3, 2);
-        result.put(4, 0);
-        result.put(5, 0);
-        result.put(6, 1);
+    @Test
+    @DisplayName("수익률 계산 기능")
+    void calculateProfit() {
+        LottoInfo lottoInfo = LottoInfo.of(4000, 4);
 
+        String winning = "1, 2, 3, 4, 5, 6";
+        LottoNumbers winningNumbers = new LottoNumbers()
+                .createWinningNumbers(winning);
+
+        Lottos lottos = initTestLottos();
         controller = new LottoController();
-        assertThat(controller.compileLottoStatistics(winningNumbers, lottos)).isEqualTo(result);
+        Map<Integer, Integer> lottoStatistics = controller.compileLottoStatistics(winningNumbers, lottos);
+
+        assertThat(controller.calculateProfit(lottoStatistics, lottoInfo.getPrice()))
+                .isEqualTo((LottoPrize.valueOf(3)*2 + LottoPrize.valueOf(6)) / lottoInfo.getPrice());
     }
 
 }
