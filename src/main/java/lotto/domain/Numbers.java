@@ -1,17 +1,21 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    private List<Number> numbers;
+    public static final int SIZE = 6;
+    public static final int START_NUM = 1;
+    public static final int END_NUM = 46;
+    private Set<Number> numbers;
 
     public Numbers(Builder builder) {
-        this.numbers = new ArrayList<>(builder.numbers);
+        this.numbers = new HashSet<>(builder.numbers);
+
+        checkDuplication(builder.numbers);
+        checkSize(builder.numbers);
+
         builder.numbers.clear();
     }
 
@@ -19,7 +23,17 @@ public class Numbers {
         return new Builder();
     }
 
-    public List<Number> getNumbers() {
+    private void checkSize(List<Number> numbers) {
+        if (numbers.size() != SIZE)
+            throw new IllegalArgumentException("Numbers size wrong: " + SIZE);
+    }
+
+    private void checkDuplication(List<Number> numbers) {
+        if (this.numbers.size() != numbers.size())
+            throw new IllegalArgumentException("Duplicate numbers in list to make set");
+    }
+
+    public Set<Number> getNumbers() {
         return numbers;
     }
 
@@ -48,19 +62,17 @@ public class Numbers {
 
 
     public static final class Builder {
-        public static final int LOTTO_START_NUM = 1;
-        public static final int LOTTO_END_NUM = 46;
         private static final List<Number> lottoNumbers = getLottoNumbers();
         private List<Number> numbers = new ArrayList<>();
 
         private static List<Number> getLottoNumbers() {
-            return IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
+            return IntStream.range(START_NUM, END_NUM)
                     .mapToObj(Number::new)
                     .collect(Collectors.toList());
         }
 
-        public Builder subNumbers(int fromIdx, int toIdx) {
-            numbers = numbers.subList(fromIdx, toIdx);
+        public Builder limit(int size) {
+            numbers = numbers.stream().limit(size).collect(Collectors.toList());
 
             return this;
         }
