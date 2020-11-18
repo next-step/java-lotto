@@ -33,7 +33,7 @@ public class LottoController {
 
     public Lottos initLottos() {
         List<Lotto> lottoList = IntStream
-                .range(ZERO, lottoInfo.getQuantity())
+                .range(ZERO, getLottoQuantity())
                 .mapToObj(quantity -> Lotto.createLotto())
                 .collect(Collectors.toList());
         return Lottos.from(lottoList);

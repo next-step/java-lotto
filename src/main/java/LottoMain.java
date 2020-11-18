@@ -12,7 +12,12 @@ public class LottoMain {
         int price = inputView.inputPrice();
 
         LottoController controller = new LottoController(price);
+
+        resultView.displayLottoQuantity(controller.getLottoQuantity());
+
         Lottos lottos = controller.initLottos();
+
+        resultView.displayLottos(lottos);
 
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(inputView.inputLastWinningNumber());
