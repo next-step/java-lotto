@@ -8,7 +8,7 @@ import lotto.view.ResultView;
 
 public class Main {
     public static void main(String[] args) {
-        Money purchaseMoney = InputAdapter.getPurchaseMoney();
+        Money purchaseMoney = InputMapper.getPurchaseMoney();
         int numOfLottos = Lotto.getNumOfLottos(purchaseMoney);
         NumOfLottosDto numOfLottosDto = new NumOfLottosDto(numOfLottos);
         ResultView.printNumOfLottos(numOfLottosDto);
@@ -20,7 +20,7 @@ public class Main {
         LottosDto lottosDto = new LottosDto(lottos);
         ResultView.printLottos(lottosDto);
 
-        WinningCondition condition = InputAdapter.getWinningCondition();
+        WinningCondition condition = InputMapper.getWinningCondition();
         Result result = lottos.getResult(condition);
         StatisticsDto statisticsDto = new StatisticsDto(result, purchaseMoney);
         ResultView.printStatistics(statisticsDto);

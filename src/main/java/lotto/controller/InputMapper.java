@@ -8,8 +8,8 @@ import lotto.dto.PurchaseMoneyDto;
 import lotto.dto.WinningConditionDto;
 import lotto.view.InputView;
 
-class InputAdapter {
-    private InputAdapter() {}
+class InputMapper {
+    private InputMapper() {}
 
     static Money getPurchaseMoney() {
         PurchaseMoneyDto dto = InputView.getPurchaseMoneyDto();
