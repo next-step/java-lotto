@@ -27,7 +27,7 @@ public class LottosTest {
                 myLotto(1,2,3,20,30,44),
                 myLotto(1,2,3,20,30,43)
         );
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6));
 
         // When
         // Then

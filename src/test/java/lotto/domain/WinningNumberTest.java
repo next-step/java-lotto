@@ -2,39 +2,29 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumberTest {
 
-    @DisplayName("당첨번호에 1~45 에 포함되지 않는 값을 넣으면 exception 이 발생한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,50", "1,2,3,4,5,-1"})
-    void invalidNumber(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
-                .isInstanceOf(InvalidWinningNumberException.class);
+    @DisplayName("구입한 로또가 당첨번호 몇개와 일치하는지 알 수 있다")
+    @Test
+    void matchedNumberCount(){
+        Lotto lotto = issueLotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,10,11,12,13,14)))).isEqualTo(1);
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,11,12,13,14)))).isEqualTo(2);
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,12,13,14)))).isEqualTo(3);
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,13,14)))).isEqualTo(4);
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,5,14)))).isEqualTo(5);
+        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,5,6)))).isEqualTo(6);
+
     }
 
-    @DisplayName("당첨번호에 null 이나 빈값을 넣으면 exception 이 발생한다")
-    @ParameterizedTest
-    @NullAndEmptySource
-    void invalidNumber2(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
-                .isInstanceOf(InvalidWinningNumberException.class);
+    private Lotto issueLotto(List<Integer> numbers) {
+        return new Lotto(new LottoNumber(numbers));
     }
 
-    @DisplayName("당첨번호에 숫자아 아닌 문자를 넣으면 exception 이 발생한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,a,4,5,6", "@,3,4,5,2,6"})
-    void invalidNumber3(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
-                .isInstanceOf(InvalidWinningNumberException.class);
-    }
 }

@@ -6,21 +6,11 @@ public class WinningNumber {
 
     private List<Integer> numbers;
 
-    private WinningNumberParser parser = new WinningNumberParser();
-
-    public WinningNumber(String numberString) {
-        parse(numberString);
+    public WinningNumber(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    private void parse(String numberString) {
-        try {
-            this.numbers = parser.parse(numberString);
-        } catch (LottoNumberParseException e) {
-            throw new InvalidWinningNumberException(numberString, e);
-        }
-    }
-
-    public long getMatchedNumberCount(Lotto lotto) {
+    public int getMatchedNumberCount(Lotto lotto){
         return lotto.getMatchedNumberCount(new WinningNumberMatcher(numbers));
     }
 }
@@ -28,7 +18,6 @@ public class WinningNumber {
 class WinningNumberMatcher implements NumberMatcher {
 
     private List<Integer> numbers;
-
     public WinningNumberMatcher(List<Integer> numbers) {
         this.numbers = numbers;
     }

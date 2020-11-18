@@ -21,46 +21,14 @@ public class PrizeWinningResult {
         this.fourthPrizeCount = fourthPrizeCount;
     }
 
-    public int getFirstPrizeCount() {
-        return firstPrizeCount;
-    }
-
-    public int getSecondPrizeCount() {
-        return secondPrizeCount;
-    }
-
-    public int getThirdPrizeCount() {
-        return thirdPrizeCount;
-    }
-
-    public int getFourthPrizeCount() {
-        return fourthPrizeCount;
-    }
-
-    public int getFirstPrizeMoney() {
-        return prizeMoneys.get(0);
-    }
-
-    public int getSecondPrizeMoney() {
-        return prizeMoneys.get(1);
-    }
-
-    public int getThirdPrizeMoney() {
-        return prizeMoneys.get(2);
-    }
-
-    public int getFourthPrizeMoney() {
-        return prizeMoneys.get(3);
-    }
-
-    public double getRateOfReturn() {
+    public double getRateOfReturn(){
         int total = ((this.firstPrizeCount * this.prizeMoneys.get(0))
-                + (this.secondPrizeCount * this.prizeMoneys.get(1))
-                + (this.thirdPrizeCount * this.prizeMoneys.get(2))
-                + (this.fourthPrizeCount * this.prizeMoneys.get(3)));
+        + (this.secondPrizeCount * this.prizeMoneys.get(1))
+        + (this.thirdPrizeCount * this.prizeMoneys.get(2))
+        + (this.fourthPrizeCount * this.prizeMoneys.get(3)));
 
-        if (total == 0) return 0;
-        return (double) total / this.paidMoney;
+        if( total == 0 ) return 0;
+        return (double) total / paidMoney;
     }
 
     public static PrizeWinningResult.Builder builder() {
@@ -106,7 +74,6 @@ public class PrizeWinningResult {
         }
 
         public Builder paidMoney(int paidMoney) {
-            if( paidMoney <= 0 ) throw new PrizeWinningResultBulderException("로또 구입가격은 0 보다 커야 합니다.");
             this.paidMoney = paidMoney;
             return this;
         }
