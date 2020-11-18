@@ -96,6 +96,8 @@ class LottoControllerTest {
 
         Map<Integer, Integer> result = new HashMap<>();
         result.put(3, 2);
+        result.put(4, 0);
+        result.put(5, 0);
         result.put(6, 1);
 
         controller = new LottoController();
