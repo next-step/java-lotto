@@ -24,6 +24,14 @@ public class LottoRewardCollections {
         );
     }
 
+    public int getReward() {
+        int sum = 0;
+        for (LottoReward lottoReward : lottoRewards) {
+            sum += lottoReward.calcaulte();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
