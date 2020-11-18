@@ -31,4 +31,5 @@ class LottoStoreTest {
         LottoBundle lottoBundle = lottoStore.buy(1000);
         assertThat(lottoBundle).isNotNull();
     }
+
 }
