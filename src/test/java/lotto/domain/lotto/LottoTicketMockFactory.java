@@ -36,7 +36,7 @@ public class LottoTicketMockFactory {
         while (i < lottoNumbers.size()) {
             List<LottoNumber> partition = lottoNumbers.subList(i, i + partitionSize);
             i += partitionSize;
-            lottoTickets.add(LottoTicket.of(LottoNumbers.of(partition)));
+            lottoTickets.add(LottoTicket.of(partition));
         }
         return lottoTickets;
     }
@@ -51,21 +51,16 @@ public class LottoTicketMockFactory {
                 LottoNumber.of(6)
         );
     }
-    
-    public static LottoNumbers createLottoNumberOneToSix() {
-        return LottoNumbers.of(createLottoNumberListOneToSix());
-    }
 
     public static LottoTicket createLottoHasNumberOneToSix() {
-        return LottoTicket.of(createLottoNumberOneToSix());
+        return LottoTicket.of(createLottoNumberListOneToSix());
     }
 
     public static LottoTicket createLottoTicket(final List<Integer> lottoNumbers) {
         return LottoTicket.of(createLottoNumbers(lottoNumbers));
     }
 
-    public static LottoNumbers createLottoNumbers(final List<Integer> lottoNumbers) {
-        final List<LottoNumber> lottoNumberList = lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
-        return LottoNumbers.of(lottoNumberList);
+    public static List<LottoNumber> createLottoNumbers(final List<Integer> lottoNumbers) {
+        return lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
     }
 }

@@ -5,10 +5,9 @@ import lotto.domain.rank.LottoRankCalculator;
 import org.junit.jupiter.api.Test;
 import lotto.dto.WinLotteryResult;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.lotto.LottoTicketMockFactory.createLottoNumberOneToSix;
+import static lotto.domain.lotto.LottoTicketMockFactory.createLottoHasNumberOneToSix;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +39,7 @@ class LottoTicketsTest {
     void countHitNumber() {
         // given
         final LottoTickets lottoTickets = LottoTickets.of(LottoTicketMockFactory.createFourTeenLotto());
-        final LottoTicket winningLottery = LottoTicket.of(createLottoNumberOneToSix());
+        final LottoTicket winningLottery = createLottoHasNumberOneToSix();
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
         final LottoNumber bonusNumber = LottoNumber.MAX;
 
