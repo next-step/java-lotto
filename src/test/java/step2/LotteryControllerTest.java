@@ -69,6 +69,17 @@ public class LotteryControllerTest {
             return Money.of(1000);
         }
 
+        protected Integer requestManualSelectionCount() {
+            record.add("requestManualSelectionCount");
+            return 0;
+        }
+
+        public Playslip requestManualSelectionNumbers() {
+            super.requestManualSelectionNumbers();
+            record.add("requestManualSelectionNumbers");
+            return null;
+        }
+
         public LotteryNumber requestLastWeekLotteryNumber() {
             record.add("requestLastWeekLotteryNumber");
             return LotteryNumber.of(1, 2, 3, 4, 5, 6);

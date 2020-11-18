@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.LotteryNumber;
 import step2.domain.Money;
+import step2.domain.Playslip;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,6 +12,16 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         return Money.of(scanner.nextInt());
+    }
+
+    public Playslip requestManualSelectionNumbers() {
+        Integer manualSelectionCount = requestManualSelectionCount();
+        // TODO Creates Playslip with manual selection.
+        return null;
+    }
+
+    protected Integer requestManualSelectionCount() {
+        return null;
     }
 
     public LotteryNumber requestLastWeekLotteryNumber() {
