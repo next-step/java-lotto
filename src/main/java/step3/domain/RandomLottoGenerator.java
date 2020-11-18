@@ -12,15 +12,15 @@ public class RandomLottoGenerator implements LottoGeneratorStrategy {
     private static final int MAX_LOTTO_NUMBER = 45;
     public static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
-    private final List<Integer> numbers ;
+    private final List<Integer> numbers;
 
-    private RandomLottoGenerator() {
-        numbers = generateNumbers();
+    private RandomLottoGenerator(List<Integer> numbers) {
+        this.numbers = numbers;
 
     }
 
-    public static RandomLottoGenerator of(){
-        return new RandomLottoGenerator();
+    public static RandomLottoGenerator of() {
+        return new RandomLottoGenerator(generateNumbers());
     }
 
 
@@ -39,9 +39,8 @@ public class RandomLottoGenerator implements LottoGeneratorStrategy {
     }
 
 
-
-    private List<Integer> generateNumbers() {
-        return Stream.iterate(MINIMUM_LOTTO_NUMBER, integer -> integer+1)
+    private static List<Integer> generateNumbers() {
+        return Stream.iterate(MINIMUM_LOTTO_NUMBER, integer -> integer + 1)
                 .limit(MAX_LOTTO_NUMBER)
                 .collect(toList());
     }
