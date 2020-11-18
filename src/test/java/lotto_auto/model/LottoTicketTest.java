@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoTicketTest {
 
     @DisplayName("로또 번호가 null 이 아닌지 테스트")
+    @Test
     public void lottoTicketNumberIsNotNullTest() {
         LottoTicket lottoTicket = new LottoTicket();
         List<Integer> export = lottoTicket.export();
@@ -116,6 +117,5 @@ class LottoTicketTest {
 
         assertThat(lottoTicket.matchNumberCount(winningTicket)).isEqualTo(3);
     }
-
 
 }
