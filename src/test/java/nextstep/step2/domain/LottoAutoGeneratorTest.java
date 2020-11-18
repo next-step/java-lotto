@@ -16,8 +16,8 @@ public class LottoAutoGeneratorTest {
 	public void getLottoRandomNumberTest() {
 		Set<Integer> autoNumbers = underTest.getAutoNumbers();
 		autoNumbers.forEach(number -> {
-			assertAll(() -> assertTrue(number <= 45),
-					() -> assertTrue(number > 0));
+			assertAll(() -> assertTrue(number <= Lotto.LOTTO_MAX_NUMBER),
+					() -> assertTrue(number >= Lotto.LOTTO_MIN_NUMBER));
 		});
 	}
 
