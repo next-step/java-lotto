@@ -3,9 +3,13 @@ package step02.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -22,20 +26,29 @@ public class WinningCounterCollectionsTest {
         );
     }
 
-    @DisplayName("NumberCountCollections 생성자 테스트")
+    @DisplayName("winningCounterCollections 생성자 테스트")
     @Test
-    public void test_NumberCountCollections_Constructor() {
+    public void test_winningCounterCollections_Constructor() {
         assertThat(WinningCounterCollections.of(numbersCount))
                 .isEqualTo(WinningCounterCollections.of(numbersCount));
     }
 
-    @DisplayName("NumberCountCollections 필터링 테스트")
-    @Test
-    public void test_filter() {
-        WinningCounterCollections winningCounterCollections = WinningCounterCollections.of(numbersCount);
-        assertThat(winningCounterCollections.filter(3, 6))
-                .isEqualTo(
-                    Arrays.asList(WinningCounter.of(3, 1))
-                );
+    private static Stream<Arguments> provideLottoRewardContainResult() {
+        return Stream.of(
+                Arguments.of(3, 1),
+                Arguments.of(4, 0),
+                Arguments.of(5, 0),
+                Arguments.of(6, 0)
+        );
     }
+
+    @DisplayName("lottoReward winning 수에 대응하는 count 를 리턴한다.")
+    @ParameterizedTest
+    @MethodSource("provideLottoRewardContainResult")
+    public void test_getCount(int winningNumber, int expect) {
+        WinningCounterCollections winningCounterCollections = WinningCounterCollections.of(numbersCount);
+        assertThat(winningCounterCollections.getCount(winningNumber))
+                .isEqualTo(expect);
+    }
+
 }
