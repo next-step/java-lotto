@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,6 +9,8 @@ import java.util.Map;
 import static lotto.domain.MoneyLottoMapper.LOTTO_PRICE;
 
 public class WinningRankStatistics {
+    public static final int SCALE = 2;
+    public static final RoundingMode ROUNDING_MODE = RoundingMode.HALF_UP;
     private Map<WinningRank, Integer> counter = new LinkedHashMap<>();
 
     public WinningRankStatistics(WinningRanks winningRanks) {
@@ -35,7 +38,7 @@ public class WinningRankStatistics {
     public BigDecimal calculateYield() {
         BigDecimal totalMoney = new BigDecimal(getMoneyPayed());
         BigDecimal moneyEarned = new BigDecimal(getMoneyEarned());
-        return moneyEarned.divide(totalMoney);
+        return moneyEarned.divide(totalMoney, SCALE, ROUNDING_MODE);
     }
 
     private int getMoneyEarned() {

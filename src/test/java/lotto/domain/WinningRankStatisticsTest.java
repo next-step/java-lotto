@@ -28,7 +28,7 @@ class WinningRankStatisticsTest {
     void getYield() {
         BigDecimal totalLottoPrice = new BigDecimal(LOTTO_PRICE * 3);
         BigDecimal priceEarned = new BigDecimal(WinningRank.FIRST.getPrice() * 2 + WinningRank.SECOND.getPrice() * 1);
-        BigDecimal expectedYield = priceEarned.divide(totalLottoPrice);
+        BigDecimal expectedYield = priceEarned.divide(totalLottoPrice, winningRankStatistics.SCALE, winningRankStatistics.ROUNDING_MODE);
         assertThat(winningRankStatistics.calculateYield()).isEqualTo(expectedYield);
     }
 
