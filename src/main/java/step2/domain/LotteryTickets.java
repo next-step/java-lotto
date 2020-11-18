@@ -9,7 +9,7 @@ public class LotteryTickets {
     private final int naturalSelectionCount;
 
     public LotteryTickets(Set<LotteryNumber> selectNumbers) {
-        this(0, 0, selectNumbers);
+        this(0, selectNumbers.size(), selectNumbers);
     }
 
     public LotteryTickets(int manualSelectionCount, int naturalSelectionCount, Set<LotteryNumber> selectNumbers) {
