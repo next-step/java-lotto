@@ -22,9 +22,9 @@ public class LottoController {
         return lottoNum;
     }
 
-    public WinningRankStatistics analyze(LotteryMachine lotteryMachine, Lottos lottos) {
-        WinningRanks winningRanks = lotteryMachine.checkLottos(lottos);
-
+    public WinningRankStatistics analyze(Lottos lottos, Numbers winningNumbers) {
+        LotteryMachine lotteryMachine = new LotteryMachine(lottos, winningNumbers);
+        WinningRanks winningRanks = lotteryMachine.getWinningRanks();
         return new WinningRankStatistics(winningRanks);
     }
 
@@ -39,12 +39,10 @@ public class LottoController {
         OutputView.showYield(winningRankStatistics.calculateYield());
     }
 
-    public LotteryMachine getWinningNumbers() {
+    public Numbers getWinningNumbers() {
         Numbers.Builder builder = new Numbers.Builder();
 
         InputView.getWinningNumbers().forEach(builder::add);
-        Numbers winningNumbers = builder.build();
-
-        return new LotteryMachine(winningNumbers);
+        return builder.build();
     }
 }

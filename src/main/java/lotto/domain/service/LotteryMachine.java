@@ -6,13 +6,14 @@ import lotto.domain.repository.WinningRanks;
 
 public class LotteryMachine {
 
-    private final Numbers winningNumbers;
+    private final WinningChecker winningChecker;
 
-    public LotteryMachine(Numbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public LotteryMachine(Lottos lottos, Numbers winningNumbers) {
+        this.winningChecker = new WinningChecker(lottos, winningNumbers);
     }
 
-    public WinningRanks checkLottos(Lottos lottos) {
-        return WinningChecker.checkWinningRanks(lottos, winningNumbers);
+
+    public WinningRanks getWinningRanks() {
+        return new WinningRanks(this.winningChecker.getWinningRanks());
     }
 }

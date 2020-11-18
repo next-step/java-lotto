@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.repository.Lottos;
-import lotto.domain.service.LotteryMachine;
+import lotto.domain.repository.Numbers;
 import lotto.domain.service.WinningRankStatistics;
 
 public class Main {
@@ -13,8 +13,9 @@ public class Main {
         int lottoNum = lottoController.getLottoNum(money);
 
         Lottos lottos = lottoController.createLottos(lottoNum);
-        LotteryMachine lotteryMachine = lottoController.getWinningNumbers();
-        WinningRankStatistics statistics = lottoController.analyze(lotteryMachine, lottos);
+        Numbers winningNumbers = lottoController.getWinningNumbers();
+
+        WinningRankStatistics statistics = lottoController.analyze(lottos, winningNumbers);
 
         lottoController.showResult(statistics);
     }
