@@ -27,7 +27,7 @@ public class LottoRewardCollections {
     public int getReward() {
         int sum = 0;
         for (LottoReward lottoReward : lottoRewards) {
-            sum += lottoReward.calcaulte();
+            sum += lottoReward.calculate();
         }
         return sum;
     }

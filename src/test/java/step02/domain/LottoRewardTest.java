@@ -39,7 +39,7 @@ public class LottoRewardTest {
     @DisplayName("리워드 계산")
     @ParameterizedTest
     @MethodSource("provideCalculateLottoRewardResult")
-    public void test_calcalate(LottoReward lottoReward, int reward) {
-        assertThat(lottoReward.calcaulte()).isEqualTo(reward);
+    public void test_calculate(LottoReward lottoReward, int reward) {
+        assertThat(lottoReward.calculate()).isEqualTo(reward);
     }
 }

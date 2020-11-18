@@ -25,7 +25,7 @@ public class LottoReward {
         return number;
     }
 
-    public int calcaulte() {
+    public int calculate() {
         return reward * count;
     }
 
@@ -36,8 +36,6 @@ public class LottoReward {
     public int getReward() {
         return reward;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
