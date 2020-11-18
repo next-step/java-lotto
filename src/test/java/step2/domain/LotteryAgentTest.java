@@ -23,14 +23,14 @@ public class LotteryAgentTest {
     @DisplayName("돈을 받고 티켓과 거스름돈을 반환한다.")
     @Test
     void exchange() {
-        LotteryAgent.ExchangeResult ticketAndChange = lotteryAgent.exchange(Money.of(1500));
+        LotteryAgent.ExchangeResult ticketAndChange = exchange(1500);
         assertThat(ticketAndChange).isNotNull();
     }
 
     @DisplayName("돈이 최소 구입금액에 못미치면 예외가 발생한다.")
     @Test
     void notEnoughMoney() {
-        assertThatThrownBy(() -> lotteryAgent.exchange(Money.of(500))) //
+        assertThatThrownBy(() -> exchange(500)) //
                 .isInstanceOf(NotEnoughMoneyException.class);
     }
 
@@ -38,24 +38,26 @@ public class LotteryAgentTest {
     @ParameterizedTest
     @CsvSource({"1000,0", "1234,234", "2000,0"})
     void changes(int money, int change) {
-        assertThat(lotteryAgent.exchange(Money.of(money)).getChange()).isEqualTo(Money.of(change));
+        assertThat(exchange(money).getChange()).isEqualTo(Money.of(change));
     }
 
     @DisplayName("구매액수에 맞는 티캣을 교환해준다.")
     @ParameterizedTest
     @CsvSource({"1000,1", "1234,1", "2000,2"})
     void tickets(int money, int size) {
-        LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(money)).getLotteryTickets();
+        LotteryTickets lotteryTickets = exchange(money).getLotteryTickets();
         assertThat(lotteryTickets.size()).isEqualTo(size);
     }
-
 
     @DisplayName("티캣은 선택한 번호들을 가진다.")
     @Test
     void ticketHasNumbers() {
-        LotteryTickets lotteryTickets = lotteryAgent.exchange(Money.of(1000)).getLotteryTickets();
+        LotteryTickets lotteryTickets = exchange(1000).getLotteryTickets();
         Set<LotteryNumber> numbers = lotteryTickets.getTicketNumbers();
         assertThat(numbers).isNotEmpty().first().isInstanceOf(LotteryNumber.class);
     }
 
+    private LotteryAgent.ExchangeResult exchange(int money) {
+        return lotteryAgent.exchange(Money.of(money), new Playslip());
+    }
 }
