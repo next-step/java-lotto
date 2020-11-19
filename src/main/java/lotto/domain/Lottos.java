@@ -42,6 +42,10 @@ public class Lottos {
         return manualLottos.size();
     }
 
+    List<Lotto> getManualLottos() {
+        return manualLottos;
+    }
+
     int getNumOfTotalLottos() {
         return (int) purchaseMoney.divide(lottoPrice);
     }
