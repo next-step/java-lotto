@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoResultViewTest {
 	private LottoResultView underTest = new LottoResultView();
 
@@ -31,5 +33,13 @@ public class LottoResultViewTest {
 		underTest.printWinningProbability(0.23456f);
 		underTest.printWinningProbability(0.01111111f);
 		underTest.printWinningProbability(0.523456f);
+	}
+
+	@Test
+	@DisplayName("로또 2등은 메시지가 다르다.")
+	public void getPrintLottoStatisticsMessageTest() {
+		assertThat(underTest.getPrintLottoStatisticsMessage(LottoReward.FIRST)).isEqualTo("%d개 일치 (%d원)- %d개");
+		assertThat(underTest.getPrintLottoStatisticsMessage(LottoReward.SECOND)).isEqualTo("%d개 일치, 보너스 볼 일치(%d원)- %d개");
+		assertThat(underTest.getPrintLottoStatisticsMessage(LottoReward.THIRD)).isEqualTo("%d개 일치 (%d원)- %d개");
 	}
 }

@@ -25,12 +25,19 @@ public class LottoResultView {
 				.filter(reward -> reward.getCountOfMatch() > 0)
 				.forEach(reward -> System.out.println(
 						String.format(
-								LOTTO_STATISTICTS_RESULT,
+								getPrintLottoStatisticsMessage(reward),
 								reward.getCountOfMatch(),
 								reward.getWinningMoney(),
 								lottoRewardListMap.get(reward).size()
 						)
 				));
+	}
+
+	protected String getPrintLottoStatisticsMessage(LottoReward lottoReward) {
+		if (lottoReward == LottoReward.SECOND) {
+			return LOTTO_STATISTICTS_BONUS_RESULT;
+		}
+		return LOTTO_STATISTICTS_RESULT;
 	}
 
 	public void printWinningProbability(float probability) {
