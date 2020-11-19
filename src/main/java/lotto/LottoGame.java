@@ -23,6 +23,5 @@ public class LottoGame {
         ResultView.outputPrizeStatistics(lottos.getReward());
         ResultView.outputTotalEarningRate(lottos.getReward(), purchasePrice);
 
-
     }
 }
