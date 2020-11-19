@@ -13,12 +13,12 @@ public class LottoUtil {
     }
 
     public static void lottoNumberSizeValidate(String lastWeekNumber) {
-        if (lastWeekNumber == null) {
-            throw new IllegalArgumentException("번호를 입력해 주세요.");
+        if (lastWeekNumber == null || lastWeekNumber.isEmpty()) {
+            throw new IllegalArgumentException("지난 로또 번호를 입력해 주세요.");
         }
         String[] lottoNumbers = lastWeekNumber.split(",");
         if(lottoNumbers.length != 6) {
-            throw new IllegalArgumentException("로또 번호는 6보다 클 수 없습니다.");
+            throw new IllegalArgumentException("로또 번호는 6보다 작거나 클 수 없습니다.");
         }
 
     }
