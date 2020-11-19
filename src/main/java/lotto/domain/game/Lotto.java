@@ -2,6 +2,7 @@ package lotto.domain.game;
 
 import lotto.domain.winning.WinningChecker;
 import lotto.domain.winning.WinningNumber;
+import lotto.domain.winning.WinningRank;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +28,8 @@ public class Lotto {
         this.result = winningChecker.compare(this);
     }
 
-    public int winningResult() {
-        return (int) this.result;
+    public WinningRank winningResult() {
+        return WinningRank.getWinningRank((int) this.result);
     }
 
     // 로또번호 가져오기

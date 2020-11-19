@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.game.Lotto;
 import lotto.domain.winning.WinningChecker;
 import lotto.domain.winning.WinningNumber;
+import lotto.domain.winning.WinningStatistics;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,11 +23,24 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public void checkWinningResult(WinningNumber winningNumber) {
+    public WinningStatistics winningStatistics(WinningNumber winningNumber) {
+        checkWinningResult(winningNumber);
+        return accumulateStatistics();
+    }
+
+    private void checkWinningResult(WinningNumber winningNumber) {
         WinningChecker winningChecker = WinningChecker.of(winningNumber);
         for (Lotto lotto : this.lottos) {
             lotto.lottoResult(winningChecker);
         }
+    }
+
+    private WinningStatistics accumulateStatistics() {
+        WinningStatistics winningStatistics = new WinningStatistics();
+        this.lottos.forEach(lotto -> {
+                    winningStatistics.add(lotto.winningResult());
+                });
+        return winningStatistics;
     }
 
     public List<Lotto> list() {
@@ -45,4 +59,5 @@ public class Lottos {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
 }

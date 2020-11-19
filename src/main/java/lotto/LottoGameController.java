@@ -4,6 +4,7 @@ import lotto.domain.LottoNumberMaker;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
 import lotto.domain.winning.WinningNumber;
+import lotto.domain.winning.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,9 +25,9 @@ public class LottoGameController {
 
         WinningNumber winningNumber = ResultView.askWinningNumber();
 
-        lottos.checkWinningResult(winningNumber);
+        WinningStatistics statistics = lottos.winningStatistics(winningNumber);
 
-
+        ResultView.showResults(statistics, seedMoney.amount());
 
         SCANNER.close();
     }
