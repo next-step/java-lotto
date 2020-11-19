@@ -28,4 +28,11 @@ public class StringAddCalculatorTest {
     void single_number_test(String input, int result) {
         assertThat(calculator.add(input)).isEqualTo(result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3", "2,5:7", "3,6:9"}, delimiter = ':')
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)")
+    void split_by_comma_test(String input, int result) {
+        assertThat(calculator.add(input)).isEqualTo(result);
+    }
 }
