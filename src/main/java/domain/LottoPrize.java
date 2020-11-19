@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoPrize {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
     private final int matchNumber;
     private final int prizeMoney;
