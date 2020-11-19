@@ -37,18 +37,6 @@ public class LottoTicket {
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-
-    builder.append('[');
-    builder.append(lottoNumbers.get(0));
-
-    for (int i = 1; i < lottoNumbers.size(); i++) {
-      builder.append(", ");
-      builder.append(lottoNumbers.get(i).toString());
-    }
-
-    builder.append(']');
-
-    return builder.toString();
+    return this.lottoNumbers.toString();
   }
 }
