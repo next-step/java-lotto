@@ -21,17 +21,13 @@ public class LotteryResult {
                 .collect(Collectors.groupingBy(WinningLotto::getLottoRank, Collectors.counting()));
     }
 
-    public Map<LottoRank, Long> getCountByLottoRank() {
-        return countByLottoRank;
-    }
-
     public double getTotalReturnRatio() {
         return totalReturnRatio;
     }
 
     public Long getNumberOfLottoRank(LottoRank lottoRank) {
-        Long numerOfLottoRank = countByLottoRank.get(lottoRank);
-        return Objects.nonNull(numerOfLottoRank) ? numerOfLottoRank : 0L;
+        Long numberOfLottoRank = countByLottoRank.get(lottoRank);
+        return Objects.nonNull(numberOfLottoRank) ? numberOfLottoRank : 0L;
     }
 
 }

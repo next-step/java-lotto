@@ -11,9 +11,9 @@ public class WinningLotto {
     private final LottoRank lottoRank;
     private List<LottoNumber> matchingNumbers = new ArrayList<>();
 
-    public WinningLotto(List<LottoNumber> matchingNumbers) {
+    public WinningLotto(List<LottoNumber> matchingNumbers, boolean matchBonusLottoNumber) {
         this.matchingNumbers = matchingNumbers;
-        this.lottoRank = LottoRank.of(this);
+        this.lottoRank = LottoRank.of(this, matchBonusLottoNumber);
     }
 
     public int getMatchingNumberCount() {

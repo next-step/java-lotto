@@ -13,7 +13,12 @@ public class LotteryResultView extends AbstractView {
     private static final LotteryResultView instance = new LotteryResultView();
 
     private static final List<LottoRank> lottoRanks
-            = Arrays.asList(LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
+            = Arrays.asList(
+                    LottoRank.FIFTH
+                    , LottoRank.FOURTH
+                    , LottoRank.THIRD
+                    , LottoRank.SECOND
+                    , LottoRank.FIRST);
 
     public static LotteryResultView getInstance() {
         return instance;
@@ -35,8 +40,8 @@ public class LotteryResultView extends AbstractView {
     private void printLotteryStatistic(LotteryResult lotteryResult) {
         for (LottoRank lottoRank : lottoRanks) {
 
-            stringBuilder.append(lottoRank.getMatchingNumberCount());
-            stringBuilder.append("개 일치 (");
+            stringBuilder.append(lottoRank.getDescription());
+            stringBuilder.append(" (");
             stringBuilder.append(lottoRank.getPrizeAmount());
             stringBuilder.append(")- ");
             stringBuilder.append(lotteryResult.getNumberOfLottoRank(lottoRank));

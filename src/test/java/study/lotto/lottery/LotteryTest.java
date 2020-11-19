@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LotteryTest {
 
+    private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
     private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
@@ -30,7 +31,7 @@ class LotteryTest {
     void test_lottery_first() {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers);
+        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
 
         // When
         WinningLotto lottery = lotto.lottery(winLottoNumbers);
@@ -40,7 +41,6 @@ class LotteryTest {
 
         assertEquals(matchingNumberCount, 6);
         assertEquals(lottery.getLottoRank(), LottoRank.FIRST);
-        assertEquals(lotto.getLottoStatus(), LottoStatus.HAS_BEEN_LOTTERY);
     }
 
 }

@@ -49,7 +49,9 @@ public class Lotto {
         }
 
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
-        return new WinningLotto(winLottoNumbers.match(this));
+        return new WinningLotto(
+                winLottoNumbers.matchWithWinLottoNumbers(this)
+                , winLottoNumbers.matchWithBonusLottoNumber(this));
     }
 
     public List<LottoNumber> getLottoNumbers() {
