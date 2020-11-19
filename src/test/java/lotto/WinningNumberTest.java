@@ -10,18 +10,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 class WinningNumberTest {
 
   @Test
-  @DisplayName("일반적인 케이스 테스트")
-  void testOf() {
-    String input = "1, 2, 3, 4, 5, 6";
-    WinningNumber.of(input);
-  }
-
-  @Test
   @DisplayName("범위를 벗어난 입력")
   void testOutOfRange() {
     String input = "1, 2, 3, 4, 5, 46";
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-        () -> WinningNumber.of(input)
+        () -> NumberPool.publishWinningNumber(input)
     );
   }
 
@@ -30,7 +23,7 @@ class WinningNumberTest {
   void testDuplicatedInput() {
     String input = "1, 2, 3, 4, 5, 5";
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-        () -> WinningNumber.of(input)
+        () -> NumberPool.publishWinningNumber(input)
     );
   }
 
@@ -39,7 +32,7 @@ class WinningNumberTest {
   @DisplayName("길이가 맞지 않는 입력")
   void testInvalidLength(String input) {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-        () -> WinningNumber.of(input)
+        () -> NumberPool.publishWinningNumber(input)
     );
   }
 }
