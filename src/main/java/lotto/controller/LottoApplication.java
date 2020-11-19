@@ -1,14 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-import lotto.domain.RandomLottoGenerator;
+import lotto.domain.*;
 import lotto.dto.BuyLotto;
 import lotto.dto.LottoStatistics;
 import lotto.dto.MyLottos;
-import lotto.dto.AnnounceWinning;
-import lotto.service.LottoScratchService;
 import lotto.service.LottoService;
 import lotto.service.LottoStatisticsService;
 import lotto.view.InputChannel;
@@ -23,7 +18,6 @@ public class LottoApplication {
     private static final OuputChannel outputChannel = new OuputChannel();
 
     private static final LottoService lottoService = new LottoService();
-    private static final LottoScratchService LOTTO_SCRATCH_SERVICE = new LottoScratchService();
     private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
 
     private static final LottoGenerator lottoGenerator = new RandomLottoGenerator();
@@ -37,8 +31,8 @@ public class LottoApplication {
         ResultView.outputBuyLotto(outputChannel, myLottos);
 
         // 당첨 번호 입력 및 확인
-        AnnounceWinning announceWinning = InputView.inputWinning(inputChannel);
-        List<LottoRank> lottoRanks = LOTTO_SCRATCH_SERVICE.scratch(lottos, announceWinning);
+        Winning winning = Winning.of(InputView.inputWinning(inputChannel));
+        List<LottoRank> lottoRanks = winning.scratch(lottos);
 
         // 로또 당첨 통계
         LottoStatistics statistics = lottoStatisticsService.create(lottoRanks);

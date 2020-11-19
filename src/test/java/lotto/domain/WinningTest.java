@@ -1,9 +1,9 @@
-package lotto.service;
+package lotto.domain;
 
-import lotto.domain.*;
 import lotto.dto.AnnounceWinning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,15 +12,21 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoScratchServiceTest {
+public class WinningTest {
 
-    private LottoScratchService lottoScratchService;
     private LottoGenerator lottoGenerator;
 
     @BeforeEach
     void setup() {
-        lottoScratchService = new LottoScratchService();
         lottoGenerator = new TesterLottoGenerator();
+    }
+
+    @DisplayName("Winning 생성 테스트")
+    @Test
+    void of() {
+        AnnounceWinning announceWinning = AnnounceWinning.of("1,2,3,4,5,6");
+        assertThat(Winning.of(announceWinning))
+                .isEqualToComparingFieldByField(Winning.of(announceWinning));
     }
 
     @DisplayName("로또 긁기 테스트 : 당첨 번호에 따른 LottoRank 확인")
@@ -36,11 +42,11 @@ public class LottoScratchServiceTest {
     }, delimiter = '|')
     void scratch1(String input, LottoRank containsLottoRank) {
         Lotto lotto = Lotto.of(lottoGenerator); // 1,2,3,4,5,6
-        AnnounceWinning announceWinning = AnnounceWinning.of(input);
+        Winning winning = Winning.of(AnnounceWinning.of(input));
 
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-        List<LottoRank> lottoRanks = lottoScratchService.scratch(lottos, announceWinning);
+        List<LottoRank> lottoRanks = winning.scratch(lottos);
 
         assertThat(lottoRanks).contains(containsLottoRank);
     }

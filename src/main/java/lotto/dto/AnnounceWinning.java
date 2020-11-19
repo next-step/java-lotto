@@ -16,7 +16,7 @@ public class AnnounceWinning {
         this.numbers = winning;
     }
 
-    public Set<Integer> getWinning() {
+    public Set<Integer> getAnnounceWinning() {
         return this.numbers;
     }
 
