@@ -17,18 +17,17 @@ class ResultTest {
         result = new Result();
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNo bonus = LottoNoPool.getLottoNo(7);
-        WinningCondition condition = new WinningCondition(winningLotto, bonus);
 
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(2, 3, 4, 5, 6, 8)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)));
-        result.increaseNumOfLotto(condition, new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)));
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 8)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)), winningLotto, bonus);
+        result.increaseNumOfLotto(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)), winningLotto, bonus);
     }
 
     @Test

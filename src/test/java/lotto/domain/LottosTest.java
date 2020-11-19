@@ -7,7 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,14 +20,16 @@ class LottosTest {
     private static final int LOTTO_PRICE = 1000;
     private final Lotto autoLotto = new Lotto(Arrays.asList(2, 3, 6, 5, 4, 1));
     private final Supplier<Lotto> autoSupplier = () -> autoLotto;
-    private final int purchaseMoney = 3000;
-    private final List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(45, 44, 43, 42, 41, 40)));
+    private final int purchaseMoney = 5000;
+    private final List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(45, 44, 43, 42, 41, 40)), new Lotto(Arrays.asList(39, 37, 35, 34, 36, 38)));
     private final Lottos lottos = new Lottos(purchaseMoney, manualLottos, autoSupplier);
 
     @Test
     void testToString() {
         assertThat(lottos.toString())
                 .isEqualTo("[40, 41, 42, 43, 44, 45]\n"
+                        + "[34, 35, 36, 37, 38, 39]\n"
+                        + "[1, 2, 3, 4, 5, 6]\n"
                         + "[1, 2, 3, 4, 5, 6]\n"
                         + "[1, 2, 3, 4, 5, 6]\n"
                 );
@@ -39,18 +43,14 @@ class LottosTest {
         LottoNo bonus = LottoNoPool.getLottoNo(3);
         int numOfAutoLottos = lottos.getNumOfAutoLottos();
 
-        Map<Rank, Integer> result = new HashMap<>();
-        result.put(Rank.FIFTH, numOfAutoLottos);
-        WinningCondition condition = new WinningCondition(winningLotto, bonus);
-
         Result expected = new Result();
         for (Lotto manualLotto : manualLottos) {
-            expected.increaseNumOfLotto(condition, manualLotto);
+            expected.increaseNumOfLotto(manualLotto, winningLotto, bonus);
         }
         for (int i = 0; i < numOfAutoLottos; i++) {
-            expected.increaseNumOfLotto(condition, autoLotto);
+            expected.increaseNumOfLotto(autoLotto, winningLotto, bonus);
         }
-        assertThat(lottos.getResult(condition))
+        assertThat(lottos.getResult(winningLotto, bonus))
                 .isEqualTo(expected);
     }
 
@@ -62,18 +62,14 @@ class LottosTest {
         LottoNo bonus = LottoNoPool.getLottoNo(8);
         int numOfAutoLottos = lottos.getNumOfAutoLottos();
 
-        Map<Rank, Integer> result = new HashMap<>();
-        result.put(Rank.THIRD, numOfAutoLottos);
-        WinningCondition condition = new WinningCondition(winningLotto, bonus);
-
         Result expected = new Result();
         for (Lotto manualLotto : manualLottos) {
-            expected.increaseNumOfLotto(condition, manualLotto);
+            expected.increaseNumOfLotto(manualLotto, winningLotto, bonus);
         }
         for (int i = 0; i < numOfAutoLottos; i++) {
-            expected.increaseNumOfLotto(condition, autoLotto);
+            expected.increaseNumOfLotto(autoLotto, winningLotto, bonus);
         }
-        assertThat(lottos.getResult(condition))
+        assertThat(lottos.getResult(winningLotto, bonus))
                 .isEqualTo(expected);
     }
 
@@ -85,18 +81,14 @@ class LottosTest {
         LottoNo bonus = LottoNoPool.getLottoNo(1);
         int numOfAutoLottos = lottos.getNumOfAutoLottos();
 
-        Map<Rank, Integer> result = new HashMap<>();
-        result.put(Rank.SECOND, numOfAutoLottos);
-        WinningCondition condition = new WinningCondition(winningLotto, bonus);
-
         Result expected = new Result();
         for (Lotto manualLotto : manualLottos) {
-            expected.increaseNumOfLotto(condition, manualLotto);
+            expected.increaseNumOfLotto(manualLotto, winningLotto, bonus);
         }
         for (int i = 0; i < numOfAutoLottos; i++) {
-            expected.increaseNumOfLotto(condition, autoLotto);
+            expected.increaseNumOfLotto(autoLotto, winningLotto, bonus);
         }
-        assertThat(lottos.getResult(condition))
+        assertThat(lottos.getResult(winningLotto, bonus))
                 .isEqualTo(expected);
     }
 
@@ -142,7 +134,6 @@ class LottosTest {
     @ValueSource(ints = {2000, 3500, 11500})
     void getNumOfTotalLottos(int purchaseMoney) {
         int expected = purchaseMoney / LOTTO_PRICE;
-        int numOfManualLottos = 1;
         List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(new Lottos(purchaseMoney, manualLottos, autoSupplier).getNumOfTotalLottos())
                 .isEqualTo(expected);

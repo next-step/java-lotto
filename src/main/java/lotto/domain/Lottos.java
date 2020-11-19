@@ -23,13 +23,13 @@ public class Lottos {
         }
     }
 
-    public Result getResult(WinningCondition condition) {
+    public Result getResult(Lotto winningLotto, LottoNo bonus) {
         Result result = new Result();
         for (Lotto lotto : manualLottos) {
-            result.increaseNumOfLotto(condition, lotto);
+            result.increaseNumOfLotto(lotto, winningLotto, bonus);
         }
         for (Lotto lotto : autoLottos) {
-            result.increaseNumOfLotto(condition, lotto);
+            result.increaseNumOfLotto(lotto, winningLotto, bonus);
         }
         return result;
     }
