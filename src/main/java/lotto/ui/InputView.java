@@ -6,9 +6,9 @@ import lotto.domain.WinnerLotto;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
 
-import java.util.InputMismatchException;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.constants.Message.*;
 import static lotto.utils.StringUtils.splitByComa;
@@ -16,9 +16,22 @@ import static lotto.utils.StringUtils.splitByComa;
 public class InputView {
 
   private static final Scanner SCANNER = new Scanner(System.in);
+  private static final int ZERO = 0;
+  private static final int INC = 1;
 
   public PurchaseAction orderLottoGame() {
-    return new PurchaseAction(validatePrice(purchasingPrice()));
+    Integer price = validatePrice(purchasingPrice());
+    Integer manualLottoGameCount = validatePrice(manualLottoGameCount());
+    List<String[]> manualLottoGameNumbers = validatePrice(manualLottoGameNumbers(manualLottoGameCount));
+    return new PurchaseAction(price, manualLottoGameNumbers);
+  }
+
+  private Optional<List<String[]>> manualLottoGameNumbers(Integer manualLottoGameCount) {
+    return Optional.of(queryAndManualNumberToLimit(PLEASE_INPUT_MANUAL_NUMBER, manualLottoGameCount));
+  }
+
+  private Optional<Integer> manualLottoGameCount() {
+    return Optional.of(queryAndGetInt(PLEASE_INPUT_MANUAL_PURCHASE_COUNT));
   }
 
   public WinnerLotto inputLastWeekWinNumber() {
@@ -58,5 +71,17 @@ public class InputView {
     System.out.println(query);
     String lastWinNumberInput = SCANNER.nextLine();
     return splitByComa(lastWinNumberInput);
+  }
+
+
+  private List<String[]> queryAndManualNumberToLimit(String query, Integer limit) {
+    if (limit <= ZERO) {
+      return Collections.EMPTY_LIST;
+    }
+    System.out.println(query);
+    return Stream.iterate(ZERO, integer -> integer + INC)
+        .limit(limit)
+        .map(integer -> splitByComa(SCANNER.nextLine()))
+        .collect(Collectors.toList());
   }
 }

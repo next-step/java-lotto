@@ -17,8 +17,12 @@ public class LottoGameManager {
 
   private LottoGameManager() {}
 
-  public static Lotto newLottoGame() {
+  public static Lotto newAutoLotto() {
     Collections.shuffle(lottoNumberPool);
     return new Lotto(lottoNumberPool);
+  }
+
+  public static Lotto newManualLotto(String[] numbers) {
+    return new Lotto(numbers);
   }
 }

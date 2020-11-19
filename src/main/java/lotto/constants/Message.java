@@ -13,11 +13,14 @@ public class Message {
 
   public static final String RATE_OF_RETURN_IS_NOT_NEGATIVE_NUMBER = "손익 비율은 음수가 될 수 없습니다.";
   public static final String PLEASE_INPUT_PURCHASING_PRICE = "구입금액을 입력해 주세요.";
-  public static final String PURCHASED_N_COUNT = "%d개를 구매했습니다.";
+  public static final String PLEASE_INPUT_MANUAL_PURCHASE_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+  public static final String PLEASE_INPUT_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+  public static final String PURCHASED_MANUAL_N_AUTO_N_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
   public static final String PLEASE_INPUT_LAST_WEEK_PRIZE = "지난 주 당첨 번호를 입력해 주세요.";
-  public static final String PRIZE_STATISTICS_HEADER = "당첨 통계"+NEW_LINE+"---------";
+  public static final String PRIZE_STATISTICS_HEADER = "당첨 통계" + NEW_LINE + "---------";
   public static final String PRIZE_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
   public static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f입니다. (%s)";
 
-  private Message() {}
+  private Message() {
+  }
 }

@@ -13,8 +13,8 @@ import static lotto.constants.Message.*;
 
 public class OutputView {
 
-  public void printEntryGames(LottoGames lottoGames) {
-    System.out.println(String.format(PURCHASED_N_COUNT, lottoGames.getGameSize()));
+  public void printEntryGames(PurchaseAction purchaseAction, LottoGames lottoGames) {
+    System.out.println(String.format(PURCHASED_MANUAL_N_AUTO_N_COUNT, purchaseAction.manualLottoGameCount(), purchaseAction.autoLottoGameCount()));
     lottoGames.getLottoGames().forEach(lottoGame -> System.out.println(lottoGame.toString()));
     System.out.println(NEW_LINE);
   }

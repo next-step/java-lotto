@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoManagerTest {
   @Test
   void 새게임생성_테스트() {
-    Lotto newLotto = LottoGameManager.newLottoGame();
+    Lotto newLotto = LottoGameManager.newAutoLotto();
     long validRangeCount = IntStream.range(1, 46)
         .filter(num -> newLotto.contains(new LottoNumber(num)))
         .count();

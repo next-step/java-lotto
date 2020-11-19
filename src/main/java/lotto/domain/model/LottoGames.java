@@ -19,10 +19,6 @@ public class LottoGames {
     return lottos;
   }
 
-  public int getGameSize() {
-    return lottos.size();
-  }
-
   public LottoResults confirmPrize(WinnerLotto winnerLotto) {
     return new LottoResults(winnerLotto.prizeResult(lottos));
   }
