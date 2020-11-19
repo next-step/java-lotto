@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.dto.Winning;
+import lotto.dto.AnnounceWinning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,11 +36,11 @@ public class LottoScratchServiceTest {
     }, delimiter = '|')
     void scratch1(String input, LottoRank containsLottoRank) {
         Lotto lotto = Lotto.of(lottoGenerator); // 1,2,3,4,5,6
-        Winning winning = Winning.of(input);
+        AnnounceWinning announceWinning = AnnounceWinning.of(input);
 
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-        List<LottoRank> lottoRanks = lottoScratchService.scratch(lottos, winning);
+        List<LottoRank> lottoRanks = lottoScratchService.scratch(lottos, announceWinning);
 
         assertThat(lottoRanks).contains(containsLottoRank);
     }

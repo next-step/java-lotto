@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.BuyLotto;
-import lotto.dto.Winning;
+import lotto.dto.AnnounceWinning;
 import lotto.validator.InputValidator;
 
 public class InputView {
@@ -16,11 +16,11 @@ public class InputView {
         return BuyLotto.of(amount);
     }
 
-    public static Winning inputWinning(InputChannel inputChannel) {
+    public static AnnounceWinning inputWinning(InputChannel inputChannel) {
         String input = inputChannel.input(INPUT_LOTTO_WINNING);
         InputValidator.validateWinning(input);
 
-        return Winning.of(input);
+        return AnnounceWinning.of(input);
     }
 }
 

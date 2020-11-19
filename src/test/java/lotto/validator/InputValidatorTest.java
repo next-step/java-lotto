@@ -63,7 +63,7 @@ public class InputValidatorTest {
 
     @Nested
     @DisplayName("로또 당첨번호 입력값 validate 테스트")
-    class ValidateWinningInputTest {
+    class ValidateAnnounceWinningInputTest {
 
         @DisplayName("빈값이거나 null이면 에러")
         @ParameterizedTest

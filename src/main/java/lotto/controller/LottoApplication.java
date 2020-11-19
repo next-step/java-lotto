@@ -7,7 +7,7 @@ import lotto.domain.RandomLottoGenerator;
 import lotto.dto.BuyLotto;
 import lotto.dto.LottoStatistics;
 import lotto.dto.MyLottos;
-import lotto.dto.Winning;
+import lotto.dto.AnnounceWinning;
 import lotto.service.LottoScratchService;
 import lotto.service.LottoService;
 import lotto.service.LottoStatisticsService;
@@ -37,8 +37,8 @@ public class LottoApplication {
         ResultView.outputBuyLotto(outputChannel, myLottos);
 
         // 당첨 번호 입력 및 확인
-        Winning winning = InputView.inputWinning(inputChannel);
-        List<LottoRank> lottoRanks = LOTTO_SCRATCH_SERVICE.scratch(lottos, winning);
+        AnnounceWinning announceWinning = InputView.inputWinning(inputChannel);
+        List<LottoRank> lottoRanks = LOTTO_SCRATCH_SERVICE.scratch(lottos, announceWinning);
 
         // 로또 당첨 통계
         LottoStatistics statistics = lottoStatisticsService.create(lottoRanks);
