@@ -14,8 +14,8 @@ public class ResultView {
         System.out.println(quantity + "개를 구매했습니다.");
     }
 
-    public static void outputExchangeLottos(Lottos lottos) {
-        IntStream.range(0, lottos.hasLottoSize())
+    public static void outputLottos(Lottos lottos) {
+        IntStream.range(0, lottos.quantity())
                 .forEach(i -> System.out.println(lottos.getLottoNumber(i)));
     }
 
@@ -23,7 +23,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         reward.getRewardResult()
-                .forEach((prize, count) -> System.out.println(prize.getPrizeStatus().getPrizeNumberCount()+"개 일치 ("+prize.getPrizePrice()+")-"+count+"개"));
+                .forEach((prize, count) -> System.out.println(prize.getMatchNumberCount()+"개 일치 ("+prize.getPrizePrice()+")-"+count+"개"));
     }
 
     public static void outputTotalEarningRate(Reward reward, int purchasePrice) {
