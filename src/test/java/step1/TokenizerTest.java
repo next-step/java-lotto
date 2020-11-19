@@ -1,3 +1,5 @@
+package step1;
+
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 

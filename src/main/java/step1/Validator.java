@@ -1,3 +1,5 @@
+package step1;
+
 public class Validator {
 
     public static String inputValueTest(String inputValue) {

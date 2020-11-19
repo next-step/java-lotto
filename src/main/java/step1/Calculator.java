@@ -1,3 +1,5 @@
+package step1;
+
 public class Calculator {
 
     public int calculate(String[] inputValue) {
