@@ -1,34 +1,73 @@
 package lotto.domain;
 
+import lotto.exception.BadNumOfManualLottosException;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private static final Money lottoPrice = new Money(1000);
 
-    public Lottos(PurchaseInfo info, Supplier<Lotto> autoSupplier) {
-        lottos = new LinkedList<>();
-        for (Lotto manualLotto : info.getManualLottos()) {
-            lottos.add(manualLotto);
-        }
-        for (int i = 0; i < info.getNumOfAutoLottos(); i++) {
-            lottos.add(autoSupplier.get());
+    private final Money purchaseMoney;
+    private final List<Lotto> manualLottos;
+    private final List<Lotto> autoLottos;
+
+    public Lottos(int purchaseMoney, List<Lotto> manualLottos, Supplier<Lotto> autoSupplier) {
+        this.purchaseMoney = new Money(purchaseMoney);
+        this.manualLottos = manualLottos;
+        validate();
+        autoLottos = new LinkedList<>();
+        for (int i = 0; i < getNumOfAutoLottos(); i++) {
+            autoLottos.add(autoSupplier.get());
         }
     }
 
     public Result getResult(WinningCondition condition) {
         Result result = new Result();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : manualLottos) {
+            result.increaseNumOfLotto(condition, lotto);
+        }
+        for (Lotto lotto : autoLottos) {
             result.increaseNumOfLotto(condition, lotto);
         }
         return result;
     }
 
+    public Money getPurchaseMoney() {
+        return purchaseMoney;
+    }
+
+    public int getNumOfManualLottos() {
+        return manualLottos.size();
+    }
+
+    List<Lotto> getManualLottos() {
+        return manualLottos;
+    }
+
+    int getNumOfTotalLottos() {
+        return (int) purchaseMoney.divide(lottoPrice);
+    }
+
+    public int getNumOfAutoLottos() {
+        return getNumOfTotalLottos() - getNumOfManualLottos();
+    }
+
+    private void validate() {
+        if (getNumOfTotalLottos() < getNumOfManualLottos()) {
+            throw BadNumOfManualLottosException.getInstance();
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : manualLottos) {
+            sb.append(lotto);
+            sb.append(System.lineSeparator());
+        }
+        for (Lotto lotto : autoLottos) {
             sb.append(lotto);
             sb.append(System.lineSeparator());
         }
