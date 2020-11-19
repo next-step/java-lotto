@@ -2,10 +2,9 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.dto.BuyLotto;
-import lotto.dto.LottoStatistics;
 import lotto.dto.MyLottos;
+import lotto.dto.PrintLottoResult;
 import lotto.service.LottoService;
-import lotto.service.LottoStatisticsService;
 import lotto.view.InputChannel;
 import lotto.view.InputView;
 import lotto.view.OuputChannel;
@@ -18,7 +17,6 @@ public class LottoApplication {
     private static final OuputChannel outputChannel = new OuputChannel();
 
     private static final LottoService lottoService = new LottoService();
-    private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
 
     private static final LottoGenerator lottoGenerator = new RandomLottoGenerator();
 
@@ -35,7 +33,7 @@ public class LottoApplication {
         List<LottoRank> lottoRanks = winning.scratch(lottos);
 
         // 로또 당첨 통계
-        LottoStatistics statistics = lottoStatisticsService.create(lottoRanks);
+        PrintLottoResult statistics = PrintLottoResult.of(new LottoStatistics(lottoRanks));
         ResultView.outputStatistics(outputChannel, statistics);
     }
 }
