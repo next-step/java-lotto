@@ -11,7 +11,9 @@ public class AnnounceWinningTest {
     @Test
     void of() {
         String input = "1,2,3,4,5,6";
-        assertThat(AnnounceWinning.of(input))
-                .isEqualToComparingFieldByField(AnnounceWinning.of(input));
+        String bonus = "7";
+
+        assertThat(AnnounceWinning.of(input, bonus))
+                .isEqualToComparingFieldByField(AnnounceWinning.of(input, bonus));
     }
 }
