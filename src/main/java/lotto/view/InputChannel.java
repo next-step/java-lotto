@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputChannel implements Input {
-    Scanner scanner;
+    private static Scanner scanner;
 
     public InputChannel() {
         scanner = new Scanner(System.in);
