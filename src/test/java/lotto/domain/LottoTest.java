@@ -20,7 +20,7 @@ public class LottoTest {
         Long first_prize = 2000000000L;
         PrizeInfo prizeInfo = new PrizeInfo();
         prizeInfo.add(Rank.FIRST, first_prize);
-        lotto.setPrize(prizeInfo);
+        lotto.setPrizeInfo(prizeInfo);
         assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize));
     }
 

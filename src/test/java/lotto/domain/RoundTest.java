@@ -22,9 +22,6 @@ public class RoundTest {
     @Test
     void testGetReports(){
         Round round = new Round();
-        LottoReport lottoReport = new LottoReport();
-        round.setReport(lottoReport);
-
         assertThat(round.getReport()).isNotNull();
     }
 

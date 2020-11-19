@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PrizePackagerTest {
     @Test
     void testAlwaysLose(){
-        PrizePackager prizePackager = new DefaultPrizePackager();
+        AbstractPrizePackager prizePackager = new DefaultPrizePackager();
         PrizeInfo prizeInfo = prizePackager.pack();
         Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(1,2,3,4,5,6));
 
@@ -26,7 +26,7 @@ public class PrizePackagerTest {
 
     @Test
     void testAlwaysJackPot(){
-        PrizePackager prizePackager = new JackPotPrizePackager();
+        AbstractPrizePackager prizePackager = new JackPotPrizePackager();
         PrizeInfo prizeInfo = prizePackager.pack();
         Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(1,2,3,4,5,6));
 

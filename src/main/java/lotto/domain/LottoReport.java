@@ -39,4 +39,9 @@ public class LottoReport {
     public BigDecimal getEarningRate() {
         return BigDecimal.valueOf(totalEarnings).divide(BigDecimal.valueOf(cost),  RoundingMode.HALF_UP);
     }
+
+    public void addPrize(Prize prize) {
+        addRanks(prize.getRank());
+        addEarnings(prize.getCash());
+    }
 }

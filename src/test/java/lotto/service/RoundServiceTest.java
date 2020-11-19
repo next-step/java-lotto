@@ -23,7 +23,7 @@ public class RoundServiceTest {
 
     @BeforeEach
     void makeTestRoundService(){
-        PrizePackager prizePackager = new DefaultPrizePackager();
+        AbstractPrizePackager prizePackager = new DefaultPrizePackager();
         lottoService = new LottoService(1000, new LottoConstraint(6, 45), prizePackager);
         roundService = new RoundService(new AutoPickService(lottoService), lottoService);
     }

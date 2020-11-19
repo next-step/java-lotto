@@ -11,11 +11,11 @@ import java.util.Collection;
 public class LottoService {
     private final Lotto lotto;
 
-    public LottoService(int price, LottoConstraint lottoConstraint, PrizePackager prizePackager) {
+    public LottoService(int price, LottoConstraint lottoConstraint, AbstractPrizePackager prizePackager) {
         lotto = new Lotto();
         lotto.setPrice(price);
         lotto.setConstraint(lottoConstraint);
-        lotto.setPrize(prizePackager.pack());
+        lotto.setPrizeInfo(prizePackager.pack());
     }
 
     public Integer getPrice() {

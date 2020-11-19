@@ -11,7 +11,7 @@
 + 당첨 체크 로직 추가
 + 통계 service 설계  
 + 로또 구매 controller
-+ 로또 메타 controller (지난주 당첨번호)
++ 당첨 번호 check controller
 + 통계 controller
 + 입력 view
 + 출력 view

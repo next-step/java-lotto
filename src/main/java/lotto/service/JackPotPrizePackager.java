@@ -1,14 +1,20 @@
 package lotto.service;
 
+import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
 import lotto.domain.enums.Rank;
 
-public class JackPotPrizePackager implements PrizePackager {
+import java.util.Collection;
+
+public class JackPotPrizePackager extends AbstractPrizePackager {
+
     @Override
-    public PrizeInfo pack() {
-        PrizeInfo prizeInfo = new PrizeInfo();
+    protected Rank makePrizeChecker(Pick pick, Collection<Integer> winningBalls) {
+        return Rank.FIRST;
+    }
+
+    @Override
+    protected void addPrize(PrizeInfo prizeInfo) {
         prizeInfo.add(Rank.FIRST, 20000000000L);
-        prizeInfo.setPrizeChecker((pick, winningBalls) -> Rank.FIRST);
-        return prizeInfo;
     }
 }

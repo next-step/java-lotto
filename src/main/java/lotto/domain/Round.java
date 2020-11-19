@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public class Round {
     private final Set<Pick> myPicks = new HashSet<>();
-    private LottoReport report = new LottoReport();
+    private final LottoReport report = new LottoReport();
     private final Set<Integer> winningBalls = new TreeSet<>();
 
     public Set<Pick> getMyPicks() {
@@ -16,10 +16,6 @@ public class Round {
 
     public void addPicks(Collection<Pick> myPicks) {
         this.myPicks.addAll(myPicks);
-    }
-
-    public void setReport(LottoReport report) {
-        this.report = report;
     }
 
     public LottoReport getReport() {

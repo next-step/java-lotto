@@ -10,7 +10,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoServiceTest {
-    private final PrizePackager prizePackager = new DefaultPrizePackager();
+    private final AbstractPrizePackager prizePackager = new DefaultPrizePackager();
     private final LottoService lottoService = new LottoService(1000, new LottoConstraint(6, 45), prizePackager);
     @Test
     void testGetPrice(){

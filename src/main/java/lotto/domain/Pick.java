@@ -43,4 +43,8 @@ public class Pick {
     public Rank getRank() {
         return this.rank;
     }
+
+    public int checkWinningBallCount(Collection<Integer> winningBalls) {
+        return (int) balls.stream().filter(winningBalls::contains).count();
+    }
 }

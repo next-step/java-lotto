@@ -26,7 +26,7 @@ public class Lotto {
         return constraint;
     }
 
-    public void setPrize(PrizeInfo prizeInfo) {
+    public void setPrizeInfo(PrizeInfo prizeInfo) {
         this.prizeInfo = prizeInfo;
     }
 
