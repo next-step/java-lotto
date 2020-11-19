@@ -8,14 +8,16 @@ import java.util.stream.Collectors;
 
 public class Winning {
 
-    private final Set<Integer> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
 
-    private Winning(Set<Integer> winningNumbers) {
+    private Winning(Set<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
     public static Winning of(AnnounceWinning announceWinning) {
-        return new Winning(announceWinning.getAnnounceWinning());
+        return new Winning(announceWinning.getAnnounceWinning().stream()
+                                   .map(LottoNumber::of)
+                                   .collect(Collectors.toSet()));
     }
 
     public List<LottoRank> scratch(Lottos lottos) {

@@ -26,7 +26,7 @@ public class WinningTest {
     void of() {
         AnnounceWinning announceWinning = AnnounceWinning.of("1,2,3,4,5,6");
         assertThat(Winning.of(announceWinning))
-                .isEqualToComparingFieldByField(Winning.of(announceWinning));
+                .isEqualToComparingOnlyGivenFields(Winning.of(announceWinning));
     }
 
     @DisplayName("로또 긁기 테스트 : 당첨 번호에 따른 LottoRank 확인")
