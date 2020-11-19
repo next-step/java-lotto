@@ -1,5 +1,8 @@
 package lotto.domain.game;
 
+import lotto.domain.winning.WinningChecker;
+import lotto.domain.winning.WinningNumber;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +13,7 @@ import java.util.Objects;
 public class Lotto {
 
     private final LottoNumber lottoNumber;
+    private long result;
 
     private Lotto(LottoNumber lottoNumber) {
         this.lottoNumber = lottoNumber;
@@ -17,6 +21,14 @@ public class Lotto {
 
     public static Lotto of(LottoNumber lottoNumber) {
         return new Lotto(lottoNumber);
+    }
+
+    public void lottoResult(WinningChecker winningChecker) {
+        this.result = winningChecker.compare(this);
+    }
+
+    public int winningResult() {
+        return (int) this.result;
     }
 
     // 로또번호 가져오기

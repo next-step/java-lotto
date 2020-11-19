@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.game.Lotto;
+import lotto.domain.winning.WinningChecker;
+import lotto.domain.winning.WinningNumber;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,13 @@ public class Lottos {
 
     public static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
+    }
+
+    public void checkWinningResult(WinningNumber winningNumber) {
+        WinningChecker winningChecker = WinningChecker.of(winningNumber);
+        for (Lotto lotto : this.lottos) {
+            lotto.lottoResult(winningChecker);
+        }
     }
 
     public List<Lotto> list() {
