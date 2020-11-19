@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class TokenizerTest {
+public class WinningNumberTokenizerTest {
 
     private static Stream<Arguments> provideDefaultDelimiterResult() {
         return Stream.of(
