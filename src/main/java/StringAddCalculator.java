@@ -37,9 +37,15 @@ public class StringAddCalculator {
     private int getSum(String[] split) {
         int result = 0;
         for (String s : split) {
-            result += Integer.parseInt(s);
+            int i = Integer.parseInt(s);
+            validate(i);
+            result += i;
         }
         return result;
+    }
+
+    private void validate(int i) {
+        if (i < 0) throw new RuntimeException("양수만 입력 가능합니다 :)");
     }
 
     private boolean isSingleNumber(String input) {
