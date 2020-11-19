@@ -26,13 +26,18 @@ public class Main {
         LottosDto lottosDto = new LottosDto(lottos);
         ResultView.printLottos(lottosDto);
 
-        WinningConditionDto dto = InputView.getWinningConditionDto();
-        Result result = lottos.getResult(parseLotto(
-                dto.getWinningLotto()),
-                LottoNoPool.getLottoNo(dto.getBonus())
-        );
+        WinningCondition condition = getWinningCondition();
+        Result result = lottos.getResult(condition);
         StatisticsDto statisticsDto = new StatisticsDto(result, lottos.getPurchaseMoney());
         ResultView.printStatistics(statisticsDto);
+    }
+
+    private static WinningCondition getWinningCondition() {
+        WinningConditionDto dto = InputView.getWinningConditionDto();
+        return new WinningCondition(
+                parseLotto(dto.getWinningLotto()),
+                LottoNoPool.getLottoNo(dto.getBonus())
+        );
     }
 
     private static Lotto parseLotto(String lotto) {

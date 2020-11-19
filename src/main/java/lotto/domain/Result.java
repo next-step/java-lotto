@@ -30,11 +30,8 @@ public class Result {
         );
     }
 
-    void increaseNumOfLotto(Lotto lotto, Lotto winningLotto, LottoNo bonus) {
-        Rank rank = Rank.valueOf(
-                lotto.getCountOfMatch(winningLotto)
-                , lotto.contains(bonus)
-        );
+    public void increaseNumOfLotto(WinningCondition condition, Lotto lotto) {
+        Rank rank = condition.getRank(lotto);
         result.put(
                 rank,
                 getNumOfLotto(rank) + 1
