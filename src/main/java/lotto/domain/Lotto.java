@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -8,26 +7,22 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private Integer lottoSequence;
-    private List<Integer> lottoPickNumber = new ArrayList<>();
-    private PrizeInformation prizeInformation;
+    private List<Integer> lottoPickNumber;
 
-    public Lotto (Integer lottoSequence,LottoMachine lottoMachine) {
+    public Lotto (Integer lottoSequence, LottoMachine lottoMachine) {
         this.lottoSequence = lottoSequence;
-        this.lottoPickNumber = lottoMachine.createLottoNumber(lottoPickNumber);
+        this.lottoPickNumber = lottoMachine.createLottoNumber();
     }
 
-    public void matchPrizeNumber(List<Integer> prizeNumber) {
+    public PrizeInformation matchPrizeNumber(List<Integer> prizeNumber) {
         int prizeCount =(int) IntStream.range(0, prizeNumber.size())
                 .filter(i -> lottoPickNumber.contains(prizeNumber.get(i)))
                 .count();
-       this.prizeInformation = PrizeInformation.findByPrizePrice(prizeCount);
-    }
-    public List<Integer> getLottoPickNumber() {
-        return lottoPickNumber;
+       return PrizeInformation.findByPrizePrice(prizeCount);
     }
 
-    public PrizeInformation getPrizeInformation() {
-        return prizeInformation;
+    public List<Integer> getLottoPickNumber() {
+        return lottoPickNumber;
     }
 
     @Override

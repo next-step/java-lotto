@@ -3,10 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +24,7 @@ public class LottoTest {
         //Given & When
         Lotto lotto = new Lotto(sequence, new LottoMachine() {
             @Override
-            public List<Integer> createLottoNumber(List<Integer> lotto) {
+            public List<Integer> createLottoNumber() {
                 return Arrays.asList(element2, element3, element4);
             }
         });
@@ -56,52 +59,35 @@ public class LottoTest {
         assertThat(lotto).isNotEqualTo(lotto2).isNotEqualTo(lotto3);
     }
 
-    @DisplayName("matchPrizeNumber 메서드 실행 후 PrizeInformation 필드 생성여부 확인 테스트")
-    @Test
-    public void matchPrizeNumberTest(){
+    @DisplayName("matchPrizeNumber 메서드 테스트")
+    @ParameterizedTest
+    @MethodSource("createLottoNumber")
+    public void matchPrizeNumberTest(List<Integer> expected){
         //Given
         Lotto lotto = new Lotto(1, new LottoMachine() {
             @Override
-            public List<Integer> createLottoNumber(List<Integer> lotto) {
-                return Arrays.asList(1,3,5,6,7,8);
+            public List<Integer> createLottoNumber() {
+                return expected;
             }
         });
 
         //When
-        lotto.matchPrizeNumber(Arrays.asList(1,3,5,6,7,8));
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(expected);
 
         //That
-        assertThat(lotto.getPrizeInformation()).isEqualTo(PrizeInformation.ALL_MATCH);
+        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(prizeInformation.getMatchNumberCount()));
 
     }
+
+    static Stream<Arguments> createLottoNumber() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 3, 5)),
+                Arguments.of(Arrays.asList(2, 3, 5, 6)),
+                Arguments.of(Arrays.asList(2, 3, 5, 6, 8)),
+                Arguments.of(Arrays.asList(2, 3, 5, 6, 8, 12))
+        );
+    }
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
