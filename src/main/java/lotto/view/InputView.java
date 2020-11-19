@@ -22,7 +22,7 @@ public class InputView {
         int purchaseMoney = askPurchaseMoney();
         int numOfManualLottos = askNumOfManualLottos();
         List<String> manualLottos = askManualLotto(numOfManualLottos);
-        return new PurchaseDto(purchaseMoney, manualLottos);
+        return new PurchaseDto(purchaseMoney, numOfManualLottos, manualLottos);
     }
 
     public static WinningConditionDto getWinningConditionDto() {
