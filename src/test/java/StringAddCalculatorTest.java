@@ -42,4 +42,11 @@ public class StringAddCalculatorTest {
     void split_by_comma_or_colon_test(String input, int result) {
         assertThat(calculator.add(input)).isEqualTo(result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"//;\n1;2;3=6", "//#\n1#2#3=6", "//%\n1%2%6=9"}, delimiter = '=')
+    @DisplayName("“//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)")
+    void custom_delimiter_test(String input, int result) {
+        assertThat(calculator.add(input)).isEqualTo(result);
+    }
 }
