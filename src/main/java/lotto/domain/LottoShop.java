@@ -5,29 +5,31 @@ import lotto.domain.exception.NotValidLottoPriceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class LottoShop {
 
     private static final int LOTTO_PRICE = 1000;
     private static final Random lottoSequence = new Random();
 
-    private LottoShop() {
-    }
+    private LottoMachine machine;
 
-    public static LottoTicket purchase(int purchasePrice) {
+    public Lottos purchase(int purchasePrice, LottoMachine machine) {
         if (purchasePrice < LOTTO_PRICE) {
             throw new NotValidLottoPriceException(LOTTO_PRICE - purchasePrice);
         }
-        return new LottoTicket(purchasePrice / LOTTO_PRICE);
+        this.machine = machine;
+
+        return createLotto(purchasePrice / LOTTO_PRICE );
     }
 
-    public static Lottos exchangeToLotto(LottoTicket lottoTicket, LottoMachine machine) {
+    private Lottos createLotto(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoTicket.getTicketQuantity(); i++) {
+        for (int i = 0; i < quantity; i++) {
             lottos.add(new Lotto(lottoSequence.nextInt() + i, machine));
         }
+
         return new Lottos(lottos);
     }
-
 
 }

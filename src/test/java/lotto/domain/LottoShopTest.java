@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -15,29 +18,28 @@ public class LottoShopTest {
     @CsvSource(value = {"800:200", "500:500", "150:850"}, delimiter = ':')
     public void notValidLottoPriceTest(int purchasePrice, int insufficientAmount) {
 
-        assertThatThrownBy(() -> LottoShop.purchase(purchasePrice))
+        assertThatThrownBy(() -> {
+                        LottoShop shop = new LottoShop();
+                        shop.purchase(purchasePrice, new LottoAutoMachine());
+                })
                 .isInstanceOf(NotValidLottoPriceException.class)
                 .hasMessage(insufficientAmount + "원 만큼 더 필요합니다");
 
     }
 
-    @DisplayName("로또 구매금엑에 따른 로또 생성 테스트")
+    @DisplayName("로또 구매 테스트")
     @ParameterizedTest
     @CsvSource(value = {"2000:2", "15000:15", "5000:5"}, delimiter = ':')
-    public void exchangeToLottosTest(int purchasePrice, int expected) {
+    public void purchaseLottoTest(int purchasePrice, int expected) {
 
-        //Given
-        LottoTicket ticket = LottoShop.purchase(purchasePrice);
-
-        //When
-        Lottos lottos = LottoShop.exchangeToLotto(ticket, new LottoAutoMachine());
+        //Given & When
+        LottoShop shop = new LottoShop();
+        Lottos lottos = shop.purchase(purchasePrice, () -> Arrays.asList(1, 3, 5, 8, 6));
 
         //Then
-        assertThat(lottos.hasLottoSize()).isEqualTo(expected);
+        assertThat(lottos.quantity()).isEqualTo(expected);
 
     }
-
-
 
 
 }
