@@ -16,7 +16,5 @@ public class MessageUtils {
     public static final String INPUT_WINNING_SIZE = "당첨번호는 중복 없는 6자리여야 합니다.";
     public static final String INPUT_WINNING_MAXIMUM_NUM = "당첨번호 45이하의 수여야 합니다.";
 
-    public static final String LOTTO_BEFORE_PRESENT_WINNING = "아직 로또 당첨 발표 전입니다.";
-
-    public static final String LOTTO_RANK_ILLEGAL_MATCH_COUNT = "유효하지 않은 matchCount 값입니다.";
+    public static final String LOTTO_NUMBER_INVALID_NUM = "로또 숫자는 1이상 45이하의 수여야 합니다.";
 }

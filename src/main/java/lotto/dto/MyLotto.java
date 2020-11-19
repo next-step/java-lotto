@@ -13,7 +13,7 @@ public class MyLotto {
     }
 
     public static MyLotto of(Lotto lotto) {
-        return new MyLotto(lotto.getLotto());
+        return new MyLotto(lotto.parseInteger());
     }
 
     @Override
