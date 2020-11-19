@@ -12,7 +12,7 @@ public class LottoSimulation {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LottoMachine lottoMachine = new LottoMachine(Arrays.asList(2000000000, 1500000, 50000, 5000));
+        LottoMachine lottoMachine = new LottoMachine(Arrays.asList(2000000000, 30000000, 1500000, 50000, 5000));
 
         int purchaseAmount = inputView.readPurchaseAmount();
         List<Lotto> myLottos = lottoMachine.issue(purchaseAmount);
@@ -20,7 +20,8 @@ public class LottoSimulation {
         outputView.showPurchasedLottos(myLottos);
 
         String winningNumber = inputView.readWinningNumber();
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(myLottos), new WinningNumber(winningNumber));
+        int bonusNumber = inputView.readBonusNumber();
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(myLottos), new WinningNumber(winningNumber, bonusNumber));
 
         outputView.showResult(result);
     }
