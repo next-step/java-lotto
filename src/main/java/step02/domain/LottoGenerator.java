@@ -25,7 +25,7 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public Lotto generateLotto() {
+    public Lotto generate() {
         Collections.shuffle(lottoNumbers);
 
         List<Integer> lotto = lottoNumbers.stream()
