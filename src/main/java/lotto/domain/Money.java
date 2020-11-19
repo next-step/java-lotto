@@ -24,7 +24,7 @@ public class Money {
         if (divider.money <= 0) {
             throw BadDividerException.getInstance();
         }
-        return ((double) money) / ((double) divider.money);
+        return (double) money / divider.money;
     }
 
     @Override
