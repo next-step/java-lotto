@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class PrizeInfoTest {
         expected.putIfAbsent(Rank.FIFTH, 5000L);
 
         PrizeInfo prizeInfo = new PrizeInfo();
-        expected.forEach(prizeInfo::add);
+        expected.forEach((rank, cash) -> prizeInfo.add(rank, cash, Currency.WON));
 
         assertThat(prizeInfo.getPrizeMap()).isNotEmpty();
         assertThat(prizeInfo.getPrizeMap()).allSatisfy((rank, prize) -> {

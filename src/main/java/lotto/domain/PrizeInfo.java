@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 
 import java.util.Collection;
@@ -23,8 +24,8 @@ public class PrizeInfo {
         return this.rankChecker.apply(pick, winningBalls);
     }
 
-    public void add(Rank rank, Long cash) {
-        prizeMap.putIfAbsent(rank, new Prize(rank, cash));
+    public void add(Rank rank, Long cash, Currency currency) {
+        prizeMap.putIfAbsent(rank, new Prize(rank, cash, currency));
     }
 
     public Prize getPrize(Rank rank) {

@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 
 import java.util.Collection;
@@ -28,9 +29,9 @@ public class LottoPrizePackager extends AbstractPrizePackager {
 
     @Override
     protected void addPrize(PrizeInfo prizeInfo) {
-        prizeInfo.add(Rank.FIRST, 2000000000L);
-        prizeInfo.add(Rank.THIRD, 1500000L);
-        prizeInfo.add(Rank.FOURTH, 50000L);
-        prizeInfo.add(Rank.FIFTH, 5000L);
+        prizeInfo.add(Rank.FIRST, 2000000000L, Currency.WON);
+        prizeInfo.add(Rank.THIRD, 1500000L, Currency.WON);
+        prizeInfo.add(Rank.FOURTH, 50000L, Currency.WON);
+        prizeInfo.add(Rank.FIFTH, 5000L, Currency.WON);
     }
 }

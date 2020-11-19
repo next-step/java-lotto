@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +20,9 @@ public class LottoTest {
         Lotto lotto = new Lotto();
         Long first_prize = 2000000000L;
         PrizeInfo prizeInfo = new PrizeInfo();
-        prizeInfo.add(Rank.FIRST, first_prize);
+        prizeInfo.add(Rank.FIRST, first_prize, Currency.WON);
         lotto.setPrizeInfo(prizeInfo);
-        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize));
+        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON));
     }
 
     @Test
