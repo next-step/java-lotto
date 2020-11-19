@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.PickType;
+import lotto.domain.enums.Rank;
 
 import java.util.Collection;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.TreeSet;
 public class Pick {
     private PickType type;
     private final Set<Integer> balls = new TreeSet<>();
+    private Rank rank;
 
     public Pick() {
     }
@@ -32,5 +34,13 @@ public class Pick {
 
     public PickType getType() {
         return type;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    public Rank getRank() {
+        return this.rank;
     }
 }

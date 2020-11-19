@@ -2,13 +2,12 @@ package lotto.domain;
 
 import lotto.domain.enums.Rank;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
 public class Lotto {
     private Integer price;
     private LottoConstraint constraint;
-    private final Map<Rank, Long> prizeMap = new HashMap<>();
+    private PrizeInfo prizeInfo;
 
     public void setPrice(Integer price) {
         this.price = price;
@@ -18,13 +17,6 @@ public class Lotto {
         return price;
     }
 
-    public Map<Rank, Long> getPrizeMap() {
-        return prizeMap;
-    }
-
-    public void addToPrizeMap(Rank rank, Long prize) {
-        prizeMap.put(rank, prize);
-    }
 
     public void setConstraint(LottoConstraint constraint) {
         this.constraint = constraint;
@@ -32,5 +24,17 @@ public class Lotto {
 
     public LottoConstraint getConstraint() {
         return constraint;
+    }
+
+    public void setPrize(PrizeInfo prizeInfo) {
+        this.prizeInfo = prizeInfo;
+    }
+
+    public Prize getPrize(Rank rank) {
+        return this.prizeInfo.getPrize(rank);
+    }
+
+    public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {
+        return this.prizeInfo.checkRank(pick, winningBalls);
     }
 }

@@ -11,7 +11,7 @@ public class AutoPickServiceTest {
 
     @Test
     void autoPick(){
-        LottoService lottoService = new LottoService(1000, new LottoConstraint(5, 30));
+        LottoService lottoService = new LottoService(1000, new LottoConstraint(5, 30), new DefaultPrizePackager());
         AutoPickService autoPickService = new AutoPickService(lottoService);
         Pick pick = autoPickService.pick();
         assertThat(pick.getType()).isEqualTo(PickType.AUTO);

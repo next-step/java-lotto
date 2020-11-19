@@ -18,8 +18,10 @@ public class LottoTest {
     void testGetPrizeMap(){
         Lotto lotto = new Lotto();
         Long first_prize = 2000000000L;
-        lotto.addToPrizeMap(Rank.FIRST, first_prize);
-        assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(first_prize);
+        PrizeInfo prizeInfo = new PrizeInfo();
+        prizeInfo.add(Rank.FIRST, first_prize);
+        lotto.setPrize(prizeInfo);
+        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize));
     }
 
     @Test

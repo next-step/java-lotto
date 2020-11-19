@@ -31,7 +31,7 @@ public class RoundTest {
     @Test
     void testGetWinningNumber(){
         Round round = new Round();
-        round.setWinningNumbers(Arrays.asList(1,2,3,4,5,6));
-        assertThat(round.getWinningNumbers()).containsExactly(1,2,3,4,5,6);
+        round.setWinningBalls(Arrays.asList(1,2,3,4,5,6));
+        assertThat(round.getWinningBalls()).containsExactly(1,2,3,4,5,6);
     }
 }

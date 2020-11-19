@@ -4,6 +4,7 @@ import lotto.domain.LottoConstraint;
 import lotto.domain.Pick;
 import lotto.domain.Round;
 import lotto.domain.enums.PickType;
+import lotto.domain.enums.Rank;
 import lotto.message.ErrorMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,8 @@ public class RoundServiceTest {
 
     @BeforeEach
     void makeTestRoundService(){
-        lottoService = new LottoService(1000, new LottoConstraint(6, 45));
+        PrizePackager prizePackager = new DefaultPrizePackager();
+        lottoService = new LottoService(1000, new LottoConstraint(6, 45), prizePackager);
         roundService = new RoundService(new AutoPickService(lottoService), lottoService);
     }
 
@@ -62,5 +64,15 @@ public class RoundServiceTest {
 
         assertThat(round).isNotNull();
         assertThat(round.getMyPicks()).hasSize(14);
+    }
+
+    @Test
+    void checkWinning(){
+        Round round = roundService.autoBuy(14);
+        Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
+        roundService.checkWinning(winningBallPick.getBalls());
+        assertThat(round.getMyPicks()).allSatisfy(pick -> {
+            assertThat(pick.getRank()).isEqualTo(Rank.LOSE);
+        });
     }
 }

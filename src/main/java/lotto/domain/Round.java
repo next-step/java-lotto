@@ -7,8 +7,8 @@ import java.util.TreeSet;
 
 public class Round {
     private final Set<Pick> myPicks = new HashSet<>();
-    private final Set<Integer> winningNumbers = new TreeSet<>();
-    private LottoReport report;
+    private LottoReport report = new LottoReport();
+    private final Set<Integer> winningBalls = new TreeSet<>();
 
     public Set<Pick> getMyPicks() {
         return myPicks;
@@ -26,11 +26,11 @@ public class Round {
         return report;
     }
 
-    public void setWinningNumbers(Collection<Integer> winningNumbers) {
-        this.winningNumbers.addAll(winningNumbers);
+    public <T> void setWinningBalls(Collection<Integer> winningBalls) {
+        this.winningBalls.addAll(winningBalls);
     }
 
-    public Set<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public Set<Integer> getWinningBalls() {
+        return winningBalls;
     }
 }

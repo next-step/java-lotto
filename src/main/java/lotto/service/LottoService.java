@@ -2,15 +2,20 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoConstraint;
+import lotto.domain.Pick;
+import lotto.domain.Prize;
 import lotto.domain.enums.Rank;
+
+import java.util.Collection;
 
 public class LottoService {
     private final Lotto lotto;
 
-    public LottoService(int price, LottoConstraint lottoConstraint) {
+    public LottoService(int price, LottoConstraint lottoConstraint, PrizePackager prizePackager) {
         lotto = new Lotto();
         lotto.setPrice(price);
         lotto.setConstraint(lottoConstraint);
+        lotto.setPrize(prizePackager.pack());
     }
 
     public Integer getPrice() {
@@ -21,11 +26,11 @@ public class LottoService {
         return lotto.getConstraint();
     }
 
-    public void addPrize(Rank rank, Long prize) {
-        lotto.addToPrizeMap(rank, prize);
+    public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {
+        return this.lotto.checkRank(pick, winningBalls);
     }
 
-    public Long getPrize(Rank rank) {
-        return lotto.getPrizeMap().get(rank);
+    public Prize getPrize(Rank rank) {
+        return lotto.getPrize(rank);
     }
 }
