@@ -14,7 +14,7 @@ public class StringAddCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        calculator = new StringAddCalculator();
+        calculator = new StringAddCalculator(new StringSeparator());
     }
 
     @ParameterizedTest

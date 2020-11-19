@@ -7,6 +7,12 @@ public class StringAddCalculator {
     private final static String DELIMITER = ",|:";
     private final static String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
 
+    private final StringSeparator stringSeparator;
+
+    public StringAddCalculator(StringSeparator stringSeparator) {
+        this.stringSeparator = stringSeparator;
+    }
+
     public Integer add(String input) {
         if (isEmptyValue(input)) {
             return 0;
