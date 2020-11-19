@@ -43,7 +43,7 @@ class LottoMatcherTest {
     @DisplayName("로또 매칭할때 맞는 갯수만큼 돈이 잘 합산되는지 확인을 한다.")
     @ParameterizedTest
     @MethodSource("createLottoMatcherRank")
-    void createLottosToString(Lottos lottos, LastWeekLotto lastWeekLotto, GameMoney gameMoney) {
+    void sumLottoMatchPrize(Lottos lottos, LastWeekLotto lastWeekLotto, GameMoney gameMoney) {
         //given
         LottoMatcher lottoMatcher = LottoMatcher.ofMatch(lottos, lastWeekLotto);
         //when
