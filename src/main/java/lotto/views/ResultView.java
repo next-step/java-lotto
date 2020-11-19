@@ -1,8 +1,10 @@
 package lotto.views;
 
-import static lotto.LottoGameConstant.NUM_LOTTO_MESSAGE;
-
 public class ResultView {
+
+  private static final String NUM_LOTTO_MESSAGE = "개를 구매했습니다.";
+  private static final String SCORING_OPENING_MESSAGE = "당첨 통계";
+  private static final String SPLIT_LINE_MESSAGE = "----------------";
 
   private ResultView() {
   }
