@@ -3,7 +3,6 @@ package step3.domain;
 import step3.exception.NotMatchRankException;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum LottoRank {
 
@@ -26,7 +25,7 @@ public enum LottoRank {
     public static LottoRank valueOf(int countOfMatch, boolean matchBonusNumber) {
         validMatch(countOfMatch);
 
-        if (findSecond(countOfMatch, matchBonusNumber)) return THIRD;
+        if (isThirdPrize(countOfMatch, matchBonusNumber)) return THIRD;
 
 
         return Arrays.stream(LottoRank.values())
@@ -35,7 +34,7 @@ public enum LottoRank {
                 .orElse(MISS);
     }
 
-    private static boolean findSecond(int countOfMatch, boolean matchBonusNumber) {
+    private static boolean isThirdPrize(int countOfMatch, boolean matchBonusNumber) {
         if (countOfMatch == 5 && !matchBonusNumber) {
             return true;
         }
