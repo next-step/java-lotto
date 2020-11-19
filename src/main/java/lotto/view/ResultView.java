@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.MyLotto;
-import lotto.dto.LottoStatistics;
+import lotto.dto.PrintLottoResult;
 import lotto.dto.MyLottos;
 
 public class ResultView {
@@ -21,7 +21,7 @@ public class ResultView {
         outputChnnel.out(LOTTO_TREM);
     }
 
-    public static void outputStatistics(OuputChannel outputChnnel, LottoStatistics statistics) {
+    public static void outputStatistics(OuputChannel outputChnnel, PrintLottoResult statistics) {
 
         outputChnnel.out(LOTTO_TREM);
         outputChnnel.out(OUTPUT_STATISTICS_TITLE);
