@@ -1,9 +1,8 @@
 package step02.domain;
 
-import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final Integer number;
 
     private LottoNumber(Integer number) {
@@ -12,6 +11,10 @@ public class LottoNumber {
 
     public static LottoNumber of(Integer number) {
         return new LottoNumber(number);
+    }
+
+    public int valueOf() {
+        return number;
     }
 
     @Override
@@ -27,4 +30,8 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return number - lottoNumber.number;
+    }
 }

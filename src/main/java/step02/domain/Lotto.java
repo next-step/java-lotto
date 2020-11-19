@@ -2,12 +2,14 @@ package step02.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Lotto {
-    private final List<LottoNumber> lotto;
+    private final SortedSet<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        this.lotto = lotto;
+        this.lotto = new TreeSet(lotto);
     }
 
     public static Lotto of(List<LottoNumber> lotto) {
@@ -37,7 +39,7 @@ public class Lotto {
         return total;
     }
 
-    public List<LottoNumber> print() {
+    public SortedSet<LottoNumber> print() {
         return lotto;
     }
 }

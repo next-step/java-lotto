@@ -1,5 +1,6 @@
 package step02.view;
 
+import step02.domain.LottoNumber;
 import utils.DoubleParser;
 import step02.domain.Lotto;
 import step02.domain.LottoReward;
@@ -22,7 +23,14 @@ public class ResultView {
     }
 
     public static void showLottos(List<Lotto> lottos) {
-        lottos.forEach(lotto -> System.out.println(lotto.print()));
+        lottos.forEach(lotto ->
+                System.out.println(
+                        lotto.print()
+                                .stream()
+                                .map(LottoNumber::valueOf)
+                                .collect(Collectors.toList())
+                )
+        );
     }
 
     public static void showWinningStatistics(List<LottoReward> winningStatistics) {
