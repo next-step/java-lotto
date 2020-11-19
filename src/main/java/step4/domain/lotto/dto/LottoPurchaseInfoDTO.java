@@ -51,7 +51,7 @@ public class LottoPurchaseInfoDTO {
 
         public void isValid() {
             if (manualSize != manualNumbers.size()) {
-                throw new IllegalArgumentException(Constant.ERROR_INVALID_MANUALLY_SIZE);
+                throw new IllegalArgumentException(Constant.ERROR_INVALID_PARAMETER);
             }
         }
     }

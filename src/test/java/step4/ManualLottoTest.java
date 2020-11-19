@@ -14,7 +14,6 @@ import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.LottoTickets;
 import step4.domain.lotto.firstcollection.WinningResults;
 import step4.exception.DuplicateNumberException;
-import step4.strategy.LottoNumberMakeStrategy;
 import step4.type.LottoType;
 import step4.type.WinningType;
 
@@ -23,6 +22,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 import static step4.Constant.*;
+import static step4.domain.lotto.firstcollection.WinningResults.DECIMAL_POINT_TWO_FIXED;
 
 public class ManualLottoTest {
 
@@ -72,9 +72,9 @@ public class ManualLottoTest {
     void bonusWinningTicketRevenue(LottoTicket ticket, WinningNumbers winningNumbers) {
         final int BONUS_REVENUE_PERCENT = 30000;
 
-        LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(ticket), Collections.emptyList());
+        LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(ticket));
         WinningResults results = winningNumbers.getWinningStatistics(lottoTickets);
-        double revenueRate = results.getRevenue(lottoTickets.countTickets());
+        double revenueRate = Math.round((results.getWinningAmount() / 1000) * DECIMAL_POINT_TWO_FIXED / DECIMAL_POINT_TWO_FIXED);
 
         //로또 한장으로 보너스 당첨이 되면 수익율은 30000이다.
         assertThat(revenueRate).isEqualTo(BONUS_REVENUE_PERCENT);
@@ -86,32 +86,6 @@ public class ManualLottoTest {
         );
     }
 
-    @DisplayName("당첨결과 테스트")
-    @ParameterizedTest
-    @MethodSource("provideWinningResults")
-    void winningResultTest(LottoTickets tickets, WinningNumbers winningNumbers, int resultCount) {
-        WinningResults winningResults = WinningResults.of(tickets, winningNumbers);
-        Integer count = winningResults.countByWinningType(WinningType.RANK_TWO_BONUS);
-
-        assertThat(count).isEqualTo(resultCount);
-    }
-
-    private static Stream<Arguments> provideWinningResults() {
-        List<LottoTicket> tickets = new ArrayList<LottoTicket>() {{
-            add(new LottoTicket(createHashSet(1, 2, 3, 4, 5, 7), LottoType.AUTO));
-            add(new LottoTicket(createHashSet(6, 5, 4, 3, 2, 1),  LottoType.AUTO));
-            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10), LottoType.AUTO));
-            add(new LottoTicket(createHashSet(2, 4, 6, 8, 11, 10), LottoType.AUTO));
-        }};
-
-        return Stream.of(
-                Arguments.of(new LottoTickets(tickets, Collections.emptyList()), WinningNumbers.of("1,2,3,4,5,6", 7), 1),
-                Arguments.of(new LottoTickets(tickets, Collections.emptyList()), WinningNumbers.of("2,4,6,8,11,22", 10), 2)
-        );
-    }
-
-
-
     private static Set<LottoNumber> createHashSet(int... args) {
         Set<LottoNumber> set = new HashSet<>();
         for (int arg : args) {
@@ -121,29 +95,24 @@ public class ManualLottoTest {
     }
 
 
-    @DisplayName("수동 로또 구매 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"1000:1", "1000:0", "2000:2"}, delimiter = ':')
-    void purchaseManualLotto(int money, int wantedTicketCount) {
-        int result = LottoTicketMachine.countAllowTicket(money, wantedTicketCount);
-
-        assertThat(result).isEqualTo(wantedTicketCount);
-    }
-
     @DisplayName("수동 로또 구매 예외 테스트")
     @ParameterizedTest
     @MethodSource("provideManualLottoCountAndResultForException")
     void purchaseManualLottoForException(int money, int wantedTicketCount, String errorMessage) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
-                    int manualTicketCount = LottoTicketMachine.countAllowTicket(money, wantedTicketCount);
+                    LottoPurchaseInfoDTO dto = new LottoPurchaseInfoDTO.Builder(money)
+                            .manualSize(wantedTicketCount)
+                            .inputManualNumbers(Collections.emptyList()).build();
+
+                    LottoTicketMachine.ticketing(dto);
                 }).withMessage(errorMessage);
     }
 
     private static Stream<Arguments> provideManualLottoCountAndResultForException() {
         return Stream.of(
                 Arguments.of(2000, -1, ERROR_INVALID_PARAMETER),
-                Arguments.of(2000, 3, ERROR_NOT_ENOUGH_MONEY)
+                Arguments.of(2000, 3, ERROR_INVALID_PARAMETER)
         );
     }
 
@@ -151,13 +120,12 @@ public class ManualLottoTest {
     @ParameterizedTest
     @MethodSource("provideManualLottoInfoAndNumbers")
     void writeManualLottoNumber(int money, int wantedTicketCount, List<String> inputNumbers, long autoSize) {
-        int allowCount = LottoTicketMachine.countAllowTicket(money, wantedTicketCount);
         LottoPurchaseInfoDTO lottoPurchaseInfo = new LottoPurchaseInfoDTO.Builder(money)
-                .manualSize(allowCount)
+                .manualSize(wantedTicketCount)
                 .inputManualNumbers(inputNumbers)
                 .build();
 
-        LottoTickets tickets = LottoTicketMachine.ticketing(lottoPurchaseInfo, new LottoNumberMakeStrategy());
+        LottoTickets tickets = LottoTicketMachine.ticketing(lottoPurchaseInfo);
 
         assertThat(tickets.countTicketByLottoType(LottoType.AUTO)).isEqualTo(autoSize);
         assertThat(tickets.countTickets()).isEqualTo(LottoTicketMachine.countAllowTicket(money));

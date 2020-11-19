@@ -5,7 +5,6 @@ import step4.domain.lotto.WinningNumbers;
 import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
 import step4.domain.lotto.firstcollection.LottoTickets;
 import step4.domain.lotto.firstcollection.WinningResults;
-import step4.strategy.LottoNumberMakeStrategy;
 import step4.view.InputView;
 import step4.view.LottoInputView;
 import step4.view.LottoResultView;
@@ -29,7 +28,7 @@ public class LottoController {
     public void ticketing() {
         LottoPurchaseInfoDTO infoDTO = inputView.getPurchaseInfo();
 
-        LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO, new LottoNumberMakeStrategy());
+        LottoTickets tickets = LottoTicketMachine.ticketing(infoDTO);
         resultView.drawTicket(tickets);
 
         WinningNumbers winningNumber = inputView.getWinningNumbers();

@@ -2,6 +2,7 @@ package step4.view;
 
 import step4.domain.lotto.WinningNumbers;
 import step4.domain.lotto.dto.LottoPurchaseInfoDTO;
+import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.MarkingNumbers;
 import step4.exception.DuplicateNumberException;
 import step4.exception.InvalidMarkingNumberException;
@@ -10,6 +11,7 @@ import step4.exception.NotEnoughMoneyException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -57,7 +59,8 @@ public class LottoInputView implements InputView {
     @Override
     public WinningNumbers getWinningNumbers() {
         String winningNumbers = getMarkingNumbers();
-        int bonusBall = getBonusBall(winningNumbers);
+        Set<LottoNumber> lottoNumbers = MarkingNumbers.stringToObj(winningNumbers);
+        int bonusBall = getBonusBall(lottoNumbers);
 
         return WinningNumbers.of(winningNumbers, bonusBall);
     }
@@ -78,7 +81,7 @@ public class LottoInputView implements InputView {
         return numbers;
     }
 
-    private int getBonusBall(String winningNumbers) {
+    private int getBonusBall(Set<LottoNumber> winningNumbers) {
         try {
             return tryGetBonusBall(winningNumbers);
         } catch (NumberFormatException error) {
@@ -90,14 +93,17 @@ public class LottoInputView implements InputView {
         }
     }
 
-    private int tryGetBonusBall(String winningNumbers) {
+    private int tryGetBonusBall(Set<LottoNumber> winningNumbers) {
         System.out.println(QUESTION_BONUS_BALL);
-        String bonusBall = scanner.nextLine();
-        if (winningNumbers.contains(bonusBall)) {
+        String bonusBallStr = scanner.nextLine();
+
+        int bonusBallInt = Integer.parseInt(bonusBallStr);
+
+        if (winningNumbers.contains(new LottoNumber(bonusBallInt))) {
             throw new DuplicateNumberException(ERROR_DUPLICATE_NUMBER);
         }
 
-        return Integer.parseInt(bonusBall);
+        return bonusBallInt;
     }
 
 

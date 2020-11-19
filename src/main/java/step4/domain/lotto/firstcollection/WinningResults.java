@@ -1,6 +1,5 @@
 package step4.domain.lotto.firstcollection;
 
-import step4.Constant;
 import step4.domain.lotto.WinningNumbers;
 import step4.type.WinningType;
 
@@ -16,7 +15,6 @@ public class WinningResults {
     public static final long DEFAULT_COUNT_LONG = 0L;
     public static final double DECIMAL_POINT_TWO_FIXED = 100D;
     public static final int REVENUE_ANCHOR_POINT = 1;
-    private static final Integer DEFAULT_COUNT_INTEGER = 0;
 
     private final Map<WinningType, Integer> winningResults;
 
@@ -48,19 +46,9 @@ public class WinningResults {
         return tickets.countByWinningType(winningNumbers);
     }
 
-    public Integer countByWinningType(WinningType type) {
-        return Optional.ofNullable(winningResults.get(type)).orElse(DEFAULT_COUNT_INTEGER);
-    }
-
-
     public void forEach(BiConsumer<WinningType, Integer> consumer) {
         Objects.requireNonNull(consumer);
         winningResults.forEach(consumer);
-    }
-
-    public double getRevenue(int ticketSize) {
-        Long totalAmount = getWinningAmount();
-        return calculateRateAndFixedTwo(totalAmount, ticketSize);
     }
 
     public Long getWinningAmount() {
@@ -71,16 +59,5 @@ public class WinningResults {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    private double calculateRateAndFixedTwo(double totalAmount, int ticketSize) {
-        return Math.round((totalAmount / getExpenses(ticketSize)) * DECIMAL_POINT_TWO_FIXED / DECIMAL_POINT_TWO_FIXED);
-    }
-
-    private double getExpenses(int ticketSize) {
-        return ticketSize * Constant.LOTTO_PRICE;
-    }
-
-    public boolean isRevenue(double revenueRate) {
-        return revenueRate > REVENUE_ANCHOR_POINT;
-    }
 
 }
