@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.LottoPrice;
 import lotto.domain.Lottos;
 import lotto.domain.Reward;
 
@@ -26,7 +27,7 @@ public class ResultView {
                 .forEach((prize, count) -> System.out.println(prize.getMatchNumberCount()+"개 일치 ("+prize.getPrizePrice()+")-"+count+"개"));
     }
 
-    public static void outputTotalEarningRate(Reward reward, int purchasePrice) {
-        System.out.println("총 수익률은 "+FORMAT.format(reward.earningRate(purchasePrice))+"입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    public static void outputTotalEarningRate(Reward reward, LottoPrice purchasePrice) {
+        System.out.println("총 수익률은 "+FORMAT.format(reward.earningRate(purchasePrice.getPurchasePrice()))+"입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import lotto.domain.exception.NotValidLottoPriceException;
+import lotto.LottoPrice;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class LottoShop {
 
@@ -14,13 +13,10 @@ public class LottoShop {
 
     private LottoMachine machine;
 
-    public Lottos purchase(int purchasePrice, LottoMachine machine) {
-        if (purchasePrice < LOTTO_PRICE) {
-            throw new NotValidLottoPriceException(LOTTO_PRICE - purchasePrice);
-        }
+    public Lottos purchase(LottoPrice lottoPrice, LottoMachine machine) {
         this.machine = machine;
 
-        return createLotto(purchasePrice / LOTTO_PRICE );
+        return createLotto(lottoPrice.getPurchasePrice() / LOTTO_PRICE );
     }
 
     private Lottos createLotto(int quantity) {

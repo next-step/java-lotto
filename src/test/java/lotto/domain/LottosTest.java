@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +37,7 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(5000, new LottoMachine() {
+        Lottos lottos = lottoShop.purchase(new LottoPrice(5000), new LottoMachine() {
             @Override
             List<Integer> createLottoNumber() {
                 return Arrays.asList(1, 3, 5, 6, 7, 8);
@@ -59,7 +60,7 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(10000, new LottoMachine() {
+        Lottos lottos = lottoShop.purchase(new LottoPrice(10000), new LottoMachine() {
             @Override
             List<Integer> createLottoNumber() {
                 return Arrays.asList(12, 33, 35, 45);

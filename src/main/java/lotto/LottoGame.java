@@ -10,10 +10,10 @@ public class LottoGame {
 
     public static void main(String[] args) {
 
-        int purchasePrice = InputView.inputPurchasePrice();
+        LottoPrice lottoPrice = new LottoPrice(InputView.inputPurchasePrice());
 
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(purchasePrice, new LottoAutoMachine());
+        Lottos lottos = lottoShop.purchase(lottoPrice, new LottoAutoMachine());
 
         ResultView.outputPurchaseQuantity(lottos.quantity());
 
@@ -23,7 +23,7 @@ public class LottoGame {
         Reward reward = lottos.matchPrizeNumber(prizeNumbers);
 
         ResultView.outputPrizeStatistics(reward);
-        ResultView.outputTotalEarningRate(reward, purchasePrice);
+        ResultView.outputTotalEarningRate(reward, lottoPrice);
 
     }
 }
