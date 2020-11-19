@@ -16,11 +16,11 @@ public class LottoSeller {
         return new LottoSeller(LottoPrice.of(lottoPrice));
     }
 
-    public Lottos generateLottos(int payment, LottoNumbers lottoNumbers) {
+    public Lottos generateLottos(int payment, LottoGenerator lottoGenerator) {
         int lottoCount = calculateLottoCount(payment);
         List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
                 .limit(lottoCount)
-                .map(key -> lottoNumbers.generateLotto())
+                .map(key -> lottoGenerator.generateLotto())
                 .collect(Collectors.toList());
 
         return Lottos.of(lottos);

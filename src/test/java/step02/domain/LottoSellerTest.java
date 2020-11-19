@@ -18,8 +18,8 @@ public class LottoSellerTest {
     @Test
     public void test_generateLottos() {
         LottoSeller lottoSeller = LottoSeller.of(1000);
-        LottoNumbers lottoNumbers  = LottoNumbers.of(1, 46);
-        assertThatCode(() -> lottoSeller.generateLottos(10100, lottoNumbers))
+        LottoGenerator lottoGenerator = LottoGenerator.of(1, 46);
+        assertThatCode(() -> lottoSeller.generateLottos(10100, lottoGenerator))
                 .doesNotThrowAnyException();
     }
 

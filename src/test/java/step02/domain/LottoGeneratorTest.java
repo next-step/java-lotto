@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class LottoNumbersTest {
+public class LottoGeneratorTest {
 
     private static Stream<Arguments> provideLottoNumbersRangeResult() {
         return Stream.of(
@@ -23,6 +23,6 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbersRangeResult")
     public void test_LottoNumbers_Constructor(int from, int to) {
-        assertThat(LottoNumbers.of(from, to)).isEqualTo(LottoNumbers.of(from, to));
+        assertThat(LottoGenerator.of(from, to)).isEqualTo(LottoGenerator.of(from, to));
     }
 }

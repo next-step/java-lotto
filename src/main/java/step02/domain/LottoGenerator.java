@@ -6,17 +6,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoNumbers {
-    private final int LOTTO_NUMBER_COUNT = 6;
+public class LottoGenerator {
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<Integer> lottoNumbers;
 
-    private LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoGenerator(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers of(Integer from, Integer to) {
-        return new LottoNumbers(generate(from, to));
+    public static LottoGenerator of(Integer from, Integer to) {
+        return new LottoGenerator(generate(from, to));
     }
 
     private static List<Integer> generate(Integer from, Integer to) {
@@ -39,7 +39,7 @@ public class LottoNumbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoGenerator that = (LottoGenerator) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

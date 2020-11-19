@@ -4,16 +4,14 @@ import step02.domain.*;
 import step02.view.InputView;
 import step02.view.ResultView;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         int payment = InputView.payLotto();
 
         LottoSeller lottoSeller = LottoSeller.of(Mock.LOTTO_PRICE);
-        LottoNumbers lottoNumbers = LottoNumbers.of(Mock.LOTTO_START_NUMBER, Mock.LOTTO_END_NUMBER);
+        LottoGenerator lottoGenerator = LottoGenerator.of(Mock.LOTTO_START_NUMBER, Mock.LOTTO_END_NUMBER);
 
-        Lottos userLottos = lottoSeller.generateLottos(payment, lottoNumbers);
+        Lottos userLottos = lottoSeller.generateLottos(payment, lottoGenerator);
         ResultView.showLottoCount(userLottos.getCount());
 
         ResultView.showLottos(userLottos.print());
