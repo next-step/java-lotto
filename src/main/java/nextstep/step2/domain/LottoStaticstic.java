@@ -5,45 +5,30 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStaticstic {
-	private static final String WRONG_WINNER_NUMBERS = "지난주 로또 당첨번호는 모두 숫자여야 합니다.";
 	private String winnerNumbers;
 	private LottoPurchase purchase;
+	private LottoNumber bonusNumber;
 
-	public LottoStaticstic(String winnerNumbers, LottoPurchase purchase) {
+	public LottoStaticstic(String winnerNumbers, LottoPurchase purchase, LottoNumber bonusNumber) {
 		this.winnerNumbers = winnerNumbers;
 		this.purchase = purchase;
+		this.bonusNumber = bonusNumber;
 	}
 
 	public Map<LottoReward, List<WinningLotto>> getLottoRewardMap(List<Lotto> lottoList) {
-		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList);
+		Lotto lastWeekLotto = new LastWeekLotto().getLastWeekLotto(winnerNumbers);
+		bonusNumber.validateBonusNumber(lastWeekLotto);
+		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList, lastWeekLotto);
 		addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
 		return lottoRewardListMap;
 	}
 
-	private Map<LottoReward, List<WinningLotto>> getLottoRewardGroupingMap(List<Lotto> lottoList) {
-		Lotto winnerNumbers = getLastWeekWinningLotto();
+	private Map<LottoReward, List<WinningLotto>> getLottoRewardGroupingMap(List<Lotto> lottoList, Lotto lastWeekLotto) {
 		List<WinningLotto> winningLottos = lottoList.stream()
-				.map(lotto -> new WinningLotto(lotto, winnerNumbers))
+				.map(lotto -> new WinningLotto(lotto, lastWeekLotto, bonusNumber))
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 		return winningLottos.stream()
 				.collect(Collectors.groupingBy(WinningLotto::getLottoReward));
-	}
-
-
-	protected Lotto getLastWeekWinningLotto() {
-		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
-		validateLastWinnerNumbers(winningNumberSplit);
-		Set<Integer> winningNumbers =  Stream.of(winningNumberSplit)
-				.map(Integer::parseInt)
-				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
-		return new Lotto(winningNumbers);
-	}
-
-	protected void validateLastWinnerNumbers(String[] numbers) {
-		boolean isDigit = Stream.of(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
-		if (!isDigit) {
-			throw new IllegalArgumentException(WRONG_WINNER_NUMBERS);
-		}
 	}
 
 	public float calculateWinningProbability(Map<LottoReward, List<WinningLotto>> lottoResultMap) {

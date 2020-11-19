@@ -2,7 +2,8 @@ package nextstep.step2.domain;
 
 public class WinningLotto {
 	private LottoReward lottoReward;
-	public WinningLotto(Lotto lotto, Lotto lastWeekLotto) {
+
+	public WinningLotto(Lotto lotto, Lotto lastWeekLotto, LottoNumber bonusNumber) {
 		lastWeekLotto.validate();
 		long matchCount = getMatchCount(lotto, lastWeekLotto);
 		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount));
@@ -10,8 +11,8 @@ public class WinningLotto {
 
 	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
 		return lotto.getNumbers().stream()
-					.filter(number -> lastWeekLotto.getNumbers().contains(number))
-					.count();
+				.filter(number -> lastWeekLotto.getNumbers().contains(number))
+				.count();
 	}
 
 	public LottoReward getLottoReward() {

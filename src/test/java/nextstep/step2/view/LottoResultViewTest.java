@@ -1,12 +1,13 @@
 package nextstep.step2.view;
 
-import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoReward;
-import nextstep.step2.domain.WinningLotto;
+import nextstep.step2.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LottoResultViewTest {
 	private LottoResultView underTest = new LottoResultView();
@@ -14,12 +15,12 @@ public class LottoResultViewTest {
 	@Test
 	@DisplayName("4등 이상을 그룹핑하여 로또개수를 출력한다.")
 	public void printLottoStaticsicTest() {
-		Lotto lastWeekLotto = new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
+		Lotto lastWeekLotto = MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6));
 		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = new HashMap<>();
-		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16))), lastWeekLotto)));
-		lottoRewardListMap.put(LottoReward.THIRD, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,16))), lastWeekLotto)));
-		lottoRewardListMap.put(LottoReward.SECOND, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,15,16))), lastWeekLotto)));
-		lottoRewardListMap.put(LottoReward.FIRST, Arrays.asList(new WinningLotto(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6))), lastWeekLotto)));
+		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(new WinningLotto(MockLotto.mockLotto(Arrays.asList(1,2,3,14,15,16)), lastWeekLotto, new LottoNumber(7))));
+		lottoRewardListMap.put(LottoReward.THIRD, Arrays.asList(new WinningLotto(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,16)), lastWeekLotto, new LottoNumber(7))));
+		lottoRewardListMap.put(LottoReward.SECOND, Arrays.asList(new WinningLotto(MockLotto.mockLotto(Arrays.asList(1,2,3,4,15,16)), lastWeekLotto, new LottoNumber(7))));
+		lottoRewardListMap.put(LottoReward.FIRST, Arrays.asList(new WinningLotto(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), lastWeekLotto, new LottoNumber(7))));
 		underTest.printLottoStaticsic(lottoRewardListMap);
 	}
 

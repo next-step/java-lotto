@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,8 +24,8 @@ public class LottoTest {
 
 	private static Stream<Arguments> provideLottos() {
 		return Stream.of(
-				Arguments.of(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6))), 0),
-				Arguments.of(new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6))), 46)
+				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), 0),
+				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), 46)
 		);
 	}
 }

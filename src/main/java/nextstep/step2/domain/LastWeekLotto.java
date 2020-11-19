@@ -7,12 +7,13 @@ import java.util.stream.Stream;
 
 public class LastWeekLotto {
 	private static final String WRONG_WINNER_NUMBERS = "지난주 로또 당첨번호는 모두 숫자여야 합니다.";
-	
+
 	public Lotto getLastWeekLotto(String winnerNumbers) {
 		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
 		validateLastWinnerNumbers(winningNumberSplit);
-		Set<Integer> winningNumbers =  Stream.of(winningNumberSplit)
+		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
 				.map(Integer::parseInt)
+				.map(LottoNumber::new)
 				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
 		return new Lotto(winningNumbers);
 	}

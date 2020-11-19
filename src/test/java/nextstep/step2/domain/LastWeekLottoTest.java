@@ -1,7 +1,6 @@
 package nextstep.step2.domain;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,15 +23,15 @@ public class LastWeekLottoTest {
 	@ParameterizedTest
 	@DisplayName("로또 당첨번호에서 공백을 제거한다.")
 	@MethodSource("provideLastWeekLotto")
-	public void inpuLastLottoNumberTest(Lotto lotto, int expected) {
+	public void inpuLastLottoNumberTest(Lotto lotto, LottoNumber expected) {
 		assertTrue(lotto.getNumbers().contains(expected));
 		assertTrue(lotto.getNumbers().contains(expected));
 	}
 
 	private static Stream<Arguments> provideLastWeekLotto() {
 		return Stream.of(
-				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4, 5,  6"), 5),
-				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4,  40,  45"), 45)
+				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4, 5,  6"), new LottoNumber(5)),
+				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4,  40,  45"), new LottoNumber(45))
 		);
 	}
 }

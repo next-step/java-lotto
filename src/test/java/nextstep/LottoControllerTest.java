@@ -1,6 +1,7 @@
 package nextstep;
 
 import nextstep.step2.LottoController;
+import nextstep.step2.domain.LottoNumber;
 import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoPurchase;
 import nextstep.step2.view.LottoResultView;
@@ -17,7 +18,8 @@ public class LottoControllerTest {
 	public void startLottoGameTest() {
 		LottoPurchase lottoPurchase = new LottoPurchase(1_000);
 		LottoResultView resultView = new LottoResultView();
+		LottoNumber bonusNumber = new LottoNumber(7);
 		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoPurchase, resultView);
-		underTest.printLottoStaticsic("1,2,3,4,5,6", lottoPurchase, autoLottos, resultView);
+		underTest.printLottoStaticsic("1,2,3,4,5,6", bonusNumber, lottoPurchase, autoLottos, resultView);
 	}
 }
