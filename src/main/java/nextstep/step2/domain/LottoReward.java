@@ -9,25 +9,25 @@ public enum LottoReward {
 	FOURTH(3, 5_000),
 	LOST(0, 0); //2개 이하로 맞으면 0원
 
-	private final int count;
-	private final int price;
+	private final int countOfMatch;
+	private final int winningMoney;
 
-	LottoReward(int count, int price) {
-		this.count = count;
-		this.price = price;
+	LottoReward(int countOfMatch, int winningMoney) {
+		this.countOfMatch = countOfMatch;
+		this.winningMoney = winningMoney;
 	}
 
-	public int getCount() {
-		return count;
+	public int getCountOfMatch() {
+		return countOfMatch;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getWinningMoney() {
+		return winningMoney;
 	}
 
-	public static LottoReward getReword(int count) {
+	public static LottoReward getReword(int countOfMatch) {
 		return Stream.of(values())
-				.filter(reward -> reward.count == count)
+				.filter(reward -> reward.countOfMatch == countOfMatch)
 				.findFirst()
 				.orElse(LOST);
 	}

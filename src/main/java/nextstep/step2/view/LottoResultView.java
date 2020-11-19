@@ -21,12 +21,12 @@ public class LottoResultView {
 		System.out.println(LOTTO_STATISTICTS);
 		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
-				.filter(reward -> reward.getCount() > 0)
+				.filter(reward -> reward.getCountOfMatch() > 0)
 				.forEach(reward -> System.out.println(
 						String.format(
 								LOTTO_STATISTICTS_RESULT,
-								reward.getCount(),
-								reward.getPrice(),
+								reward.getCountOfMatch(),
+								reward.getWinningMoney(),
 								lottoRewardListMap.get(reward).size()
 						)
 				));
