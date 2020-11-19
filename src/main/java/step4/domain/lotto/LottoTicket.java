@@ -2,7 +2,6 @@ package step4.domain.lotto;
 
 import step4.domain.lotto.firstcollection.LottoNumber;
 import step4.domain.lotto.firstcollection.MarkingNumbers;
-import step4.strategy.NumberMakeStrategy;
 import step4.type.LottoType;
 import step4.type.WinningType;
 
@@ -12,8 +11,8 @@ public class LottoTicket {
     private final MarkingNumbers markingNumbers;
     private final LottoType lottoType;
 
-    public LottoTicket(NumberMakeStrategy strategy) {
-        this(strategy.create(), LottoType.AUTO);
+    public LottoTicket(Set<LottoNumber> markingNumbers) {
+        this(markingNumbers, LottoType.AUTO);
     }
 
     public LottoTicket(Set<LottoNumber> markingNumber, LottoType lottoType) {
