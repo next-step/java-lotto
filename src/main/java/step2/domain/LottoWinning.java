@@ -3,6 +3,7 @@ package step2.domain;
 import step2.constant.LottoWinningPrizes;
 import step2.util.LottoUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,11 +45,9 @@ public class LottoWinning {
     }
 
     private static void resultLottoWinning(int rightNumberCount) {
-        for (LottoWinningPrizes lottoWinningPrizes : values()) {
-            if (lottoWinningPrizes.getMatch() == rightNumberCount) {
-                winningAmount += lottoWinningPrizes.getAmount();
-            }
-        }
+        Arrays.stream(values())
+                .filter(lottoWinningPrizes -> lottoWinningPrizes.getMatch() == rightNumberCount)
+                .forEach(lottoWinningPrizes -> winningAmount += lottoWinningPrizes.getAmount());
         setLottoWinning(rightNumberCount);
     }
 
@@ -61,17 +60,15 @@ public class LottoWinning {
     }
 
     private static void setLottoWinning(int rightNumberCount) {
-        if (THIRD_MATCHES.getMatch() == rightNumberCount) {
-            lottoWinningMap.put(THIRD_MATCHES, lottoWinningMap.get(THIRD_MATCHES) + 1);
-        }
-        if (FOUR_MATCHES.getMatch() == rightNumberCount) {
-            lottoWinningMap.put(FOUR_MATCHES, lottoWinningMap.get(FOUR_MATCHES) + 1);
-        }
-        if (FIVE_MATCHES.getMatch() == rightNumberCount) {
-            lottoWinningMap.put(FIVE_MATCHES, lottoWinningMap.get(FIVE_MATCHES) + 1);
-        }
-        if (SIX_MATCHES.getMatch() == rightNumberCount) {
-            lottoWinningMap.put(SIX_MATCHES, lottoWinningMap.get(SIX_MATCHES) + 1);
+        Arrays.stream(values())
+                .filter(winningPrizes -> winningPrizes.getMatch() == rightNumberCount)
+                .forEach(LottoWinning::setLottoWinning);
+    }
+
+    private static void setLottoWinning(LottoWinningPrizes winningPrizes) {
+        if (lottoWinningMap.containsKey(winningPrizes)) {
+            Integer value = lottoWinningMap.get(winningPrizes);
+            lottoWinningMap.put(winningPrizes, ++value);
         }
     }
 
