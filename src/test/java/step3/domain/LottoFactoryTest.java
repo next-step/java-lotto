@@ -1,8 +1,7 @@
-package step3;
+package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.LottoFactory;
 import step3.exception.LottoMoneyException;
 
 import static org.assertj.core.api.Assertions.assertThat;
