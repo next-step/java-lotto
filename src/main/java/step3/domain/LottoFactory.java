@@ -5,21 +5,22 @@ import step3.exception.LottoMoneyException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
     private static final int LOTTO_PRICE = 1000;
     private final Lottos lottos;
 
-    public LottoFactory(final int money ,final LottoGeneratorStrategy lottoMakeStrategy){
+    public LottoFactory(final int money, final LottoGeneratorStrategy lottoMakeStrategy) {
         validMoney(money);
 
-        lottos = new Lottos(Arrays.stream(new Integer[getLottoTicketCount(money)])
-                .map(integer -> new Lotto(lottoMakeStrategy.generateLottoNumbers()))
-                .collect(Collectors.toList()));
+        lottos = new Lottos(IntStream.range(0 , getLottoTicketCount(money))
+                        .mapToObj(i -> new Lotto(lottoMakeStrategy.generateLottoNumbers()))
+                        .collect(Collectors.toList()));
     }
 
-    public LottoMatcher matchNumbers(Lotto lastWeekLottoNums , LottoNumber bonusCount) {
-        return LottoMatcher.ofMatch(lottos , LastWeekLotto.of(lastWeekLottoNums , bonusCount));
+    public LottoMatcher matchNumbers(Lotto lastWeekLottoNums, LottoNumber bonusCount) {
+        return LottoMatcher.ofMatch(lottos, LastWeekLotto.of(lastWeekLottoNums, bonusCount));
     }
 
     private int getLottoTicketCount(int money) {
