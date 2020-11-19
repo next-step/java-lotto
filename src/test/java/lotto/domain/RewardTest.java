@@ -28,13 +28,13 @@ public class RewardTest {
     public void earningTest(){
         //Given
         int totalReward = PrizeInformation.THREE_MATCH.getPrizePrice();
-        int purchasePrice = 14000;
+        int purchasePrice = 14_000;
         float expectRate = (float) totalReward / purchasePrice;
 
         //When
         Reward reward = new Reward(Arrays.asList(PrizeInformation.THREE_MATCH));
         reward.getRewardResult();
-        float rate = reward.earningRate(14000);
+        float rate = reward.earningRate(14_000);
 
         //Then
         assertThat(rate).isEqualTo(expectRate);

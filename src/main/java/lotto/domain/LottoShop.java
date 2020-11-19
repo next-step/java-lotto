@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class LottoShop {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
     private static final Random lottoSequence = new Random();
 
     private LottoMachine machine;
@@ -31,5 +31,4 @@ public class LottoShop {
 
         return new Lottos(lottos);
     }
-
 }

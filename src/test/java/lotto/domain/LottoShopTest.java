@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoShopTest {
 
+    private static final String NOT_VALID_PRICE_MESSAGE = "원 만큼 더 필요합니다";
+
     @DisplayName("로또 금액보다 더 낮은 금액으로 구매할 경우 예외 테스트")
     @ParameterizedTest
     @CsvSource(value = {"800:200", "500:500", "150:850"}, delimiter = ':')
@@ -23,7 +25,7 @@ public class LottoShopTest {
                         shop.purchase(purchasePrice, new LottoAutoMachine());
                 })
                 .isInstanceOf(NotValidLottoPriceException.class)
-                .hasMessage(insufficientAmount + "원 만큼 더 필요합니다");
+                .hasMessage(insufficientAmount + NOT_VALID_PRICE_MESSAGE);
 
     }
 
@@ -34,7 +36,12 @@ public class LottoShopTest {
 
         //Given & When
         LottoShop shop = new LottoShop();
-        Lottos lottos = shop.purchase(purchasePrice, () -> Arrays.asList(1, 3, 5, 8, 6));
+        Lottos lottos = shop.purchase(purchasePrice, new LottoMachine() {
+            @Override
+            List<Integer> createLottoNumber() {
+                return Arrays.asList(1, 3, 5, 8, 6);
+            }
+        });
 
         //Then
         assertThat(lottos.quantity()).isEqualTo(expected);
