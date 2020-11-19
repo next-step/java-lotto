@@ -5,14 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LottoAutoMachine implements LottoMachine {
-
-    private static final int MAX_BOUND = 6;
-    private static final List<Integer> numbers = new ArrayList<>();
-
-    static {
-        IntStream.range(1, 45).forEach(numbers::add);
-    }
+public class LottoAutoMachine extends LottoMachine {
 
     @Override
     public List<Integer> createLottoNumber() {
