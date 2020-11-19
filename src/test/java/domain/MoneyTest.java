@@ -17,9 +17,4 @@ public class MoneyTest {
     void multiplyTest() throws Exception {
         assertThat(Money.of(100L).multiply(3L)).isEqualTo(Money.of(300L));
     }
-
-    @Test
-    void plusTest() throws Exception {
-        assertThat(Money.of(100L).plus(Money.of(100L))).isEqualTo(Money.of(200L));
-    }
 }

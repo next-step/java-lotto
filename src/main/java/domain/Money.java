@@ -3,25 +3,21 @@ package domain;
 import java.util.Objects;
 
 public class Money {
-    private Long value;
+    private long value;
 
-    public static Money of(Long value) throws Exception {
-        return new Money(value);
-    }
-
-    private Money(Long value) throws Exception {
+    public static Money of(long value) throws Exception {
         if(value < 0) {
             throw new Exception();
         }
 
+        return new Money(value);
+    }
+
+    private Money(long value){
         this.value = value;
     }
 
-    public Money plus(Money money) throws Exception {
-        return Money.of(value + money.value);
-    }
-
-    public Money multiply(Long number) throws Exception{
+    public Money multiply(long number){
         return new Money(value * number);
     }
 
@@ -30,7 +26,7 @@ public class Money {
             throw new Exception();
         }
 
-        return Double.valueOf(value) / Double.valueOf(money.value);
+        return (double) value / (double) money.value;
     }
 
     private boolean isLessThanOrEqualsZero() {
@@ -42,7 +38,7 @@ public class Money {
         if (this == o) return true;
         if (!(o instanceof Money)) return false;
         Money money = (Money) o;
-        return value.equals(money.value);
+        return value == money.value;
     }
 
     @Override

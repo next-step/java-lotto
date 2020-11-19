@@ -11,19 +11,27 @@ public class InputView {
     private static final String COMMA = ",";
     private static final String SKIP_LINE = "[\\r\\n]+";
     private static final Scanner scanner = new Scanner(System.in);
+    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     public static Long askMoneyAmount(){
         System.out.println(INSERT_MONEY_AMOUNT);
         return scanner.nextLong();
     }
 
-    public static List<Integer> askWinningNumbers() {
+    public static List<Integer> askWinningNumbers() throws Exception {
         System.out.println(INSERT_WINNING_NUMBERS);
         scanner.skip(SKIP_LINE);
-        return Arrays.stream(scanner.nextLine().split(COMMA))
+
+        List<Integer> winningNumbers = Arrays.stream(scanner.nextLine().split(COMMA))
                 .map(s -> s.trim())
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
+
+        if(winningNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new Exception();
+        }
+
+        return winningNumbers;
     }
 }

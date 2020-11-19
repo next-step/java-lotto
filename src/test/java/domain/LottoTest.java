@@ -14,11 +14,11 @@ public class LottoTest {
             .collect(Collectors.toList()));
 
     @Test
-    void countMatchingTest() {
+    void checkWhetherToWinTest() {
         List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
                 .boxed()
                 .collect(Collectors.toList());
 
-        assertThat(lotto.countMatching(winningNumbers)).isEqualTo(6L);
+        assertThat(lotto.checkWhetherToWin(winningNumbers)).isEqualTo(LottoPrize.FIRST_PRIZE);
     }
 }

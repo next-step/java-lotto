@@ -15,19 +15,21 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        List<List<Integer>> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList()));
+        List<Lotto> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(Lotto.of(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                                    .boxed()
+                                    .collect(Collectors.toList())));
         lottos = new Lottos(lottoNumbers);
     }
 
     @Test
     void makeStatisticsTest() throws Exception {
-        LottoResult lottoResult = lottos.makeStatistics(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+        LottoResult lottoResult = lottos.calculate(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
                                                             .boxed()
                                                             .collect(Collectors.toList()));
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
         assertThat(lottoPrizeCount.getFirstPrizeCount().equals(1L));
-        assertThat(lottoResult.getProfitRates()).isEqualTo(2_000_000L);
+        assertThat(lottoResult.getProfitRates()).isEqualTo(2_000_000);
     }
 }

@@ -8,12 +8,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeTest {
 
-    @Test
-    void isWonTest() {
-        assertThat(LottoPrize.FIRST_PRIZE.isWon(6L)).isTrue();
-        assertThat(LottoPrize.SECOND_PRIZE.isWon(5L)).isTrue();
-        assertThat(LottoPrize.THIRD_PRIZE.isWon(4L)).isTrue();
-        assertThat(LottoPrize.FOURTH_PRIZE.isWon(3L)).isTrue();
+    @ParameterizedTest
+    @CsvSource(value = {"3:FOURTH_PRIZE", "4:THIRD_PRIZE", "5:SECOND_PRIZE", "6:FIRST_PRIZE"}, delimiter = ':')
+    void ofTest(int number, LottoPrize lottoPrize) {
+        assertThat(LottoPrize.of(number)).isEqualTo(lottoPrize);
     }
 
     @Test

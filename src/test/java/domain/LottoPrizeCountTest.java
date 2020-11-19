@@ -16,7 +16,7 @@ public class LottoPrizeCountTest {
     @Test
     void incrementFirstTest(){
         Long before = lottoPrizeCount.getFirstPrizeCount();
-        lottoPrizeCount.incrementFirst();
+        lottoPrizeCount.incrementLottoPrize(LottoPrize.FIRST_PRIZE);
         Long after = lottoPrizeCount.getFirstPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
@@ -24,7 +24,7 @@ public class LottoPrizeCountTest {
     @Test
     void incrementSecondTest(){
         Long before = lottoPrizeCount.getSecondPrizeCount();
-        lottoPrizeCount.incrementSecond();
+        lottoPrizeCount.incrementLottoPrize(LottoPrize.SECOND_PRIZE);
         Long after = lottoPrizeCount.getSecondPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
@@ -32,15 +32,15 @@ public class LottoPrizeCountTest {
     @Test
     void incrementThirdTest(){
         Long before = lottoPrizeCount.getThirdPrizeCount();
-        lottoPrizeCount.incrementThird();
+        lottoPrizeCount.incrementLottoPrize(LottoPrize.THIRD_PRIZE);
         Long after = lottoPrizeCount.getThirdPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
-    void incrementFistTest(){
+    void incrementFourthTest(){
         Long before = lottoPrizeCount.getFourthPrizeCount();
-        lottoPrizeCount.incrementFourth();
+        lottoPrizeCount.incrementLottoPrize(LottoPrize.FOURTH_PRIZE);
         Long after = lottoPrizeCount.getFourthPrizeCount();
         assertThat(before + 1).isEqualTo(after);
     }

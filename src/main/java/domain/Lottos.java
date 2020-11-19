@@ -1,24 +1,32 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos(List<List<Integer>> lottoNumbers){
-        Objects.requireNonNull(lottoNumbers);
-        lottoNumbers.forEach( lottoNumber -> lottos.add(Lotto.of(lottoNumber)) );
+    public Lottos(List<Lotto> lottos){
+        Objects.requireNonNull(lottos);
+        this.lottos = lottos;
     }
 
-    public LottoResult makeStatistics(List<Integer> winningNumbers) throws Exception {
+    public LottoResult calculate(List<Integer> winningNumbers) throws Exception {
         LottoResult lottoResult = new LottoResult();
 
-        lottos.stream().forEach(lotto -> lottoResult.checkWhetherToWin(lotto.countMatching(winningNumbers)));
+        lottos.stream().forEach(lotto -> lottoResult.addPrizeResult(lotto.checkWhetherToWin(winningNumbers)));
         lottoResult.calculateProfitRates(lottos.size());
 
         return lottoResult;
+    }
+
+    public Stream stream(){
+        return lottos.stream();
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }

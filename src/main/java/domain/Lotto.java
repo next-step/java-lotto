@@ -14,10 +14,12 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public Long countMatching(List<Integer> winningNumbers) {
-        return winningNumbers.stream()
+    public LottoPrize checkWhetherToWin(List<Integer> winningNumbers) {
+        int count = (int) winningNumbers.stream()
                 .filter(numbers::contains)
                 .count();
+
+        return LottoPrize.of(count);
     }
 
     @Override

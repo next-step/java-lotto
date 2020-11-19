@@ -1,9 +1,6 @@
 package ui;
 
-import domain.Lotto;
-import domain.LottoPrize;
-import domain.LottoPrizeCount;
-import domain.LottoResult;
+import domain.*;
 
 import java.util.List;
 
@@ -16,11 +13,11 @@ public class ResultView {
     private static final String FIRST_PRIZE_IS = "6개 일치 (%d원)- ";
     private static final String TOTAL_MARGIN_RATES_ARE = "총 수익률은 %.2f입니다.";
 
-    public static void printBuyingLottos(List<List<Integer>> lottoNumbers) {
-        System.out.print(lottoNumbers.size());
+    public static void printBuyingLottos(Lottos lottos) {
+        System.out.print(lottos.size());
         System.out.println(BUYING_AMOUNT_IS);
 
-        lottoNumbers.stream().forEach(System.out::println);
+        lottos.stream().forEach(System.out::println);
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
