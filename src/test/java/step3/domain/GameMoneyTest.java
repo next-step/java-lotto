@@ -2,7 +2,6 @@ package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.GameMoney;
 import step3.exception.NotDivideZeroException;
 
 import static org.assertj.core.api.Assertions.assertThat;

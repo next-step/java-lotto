@@ -1,7 +1,5 @@
 package step3.domain;
 
-import step3.domain.LottoGeneratorStrategy;
-
 import java.util.Arrays;
 import java.util.List;
 

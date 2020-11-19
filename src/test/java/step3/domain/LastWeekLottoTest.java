@@ -2,10 +2,6 @@ package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.LastWeekLotto;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.LottoRank;
 import step3.exception.LottoCountBoundException;
 
 import java.util.Arrays;
