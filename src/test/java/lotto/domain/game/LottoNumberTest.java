@@ -1,55 +1,21 @@
 package lotto.domain.game;
 
 import lotto.domain.LottoNumberBoard;
-import lotto.domain.LottoNumberMaker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created By mand2 on 2020-11-19.
  */
 class LottoNumberTest {
-
-    @Test
-    @DisplayName("자동으로 생성된 로또 게임 두개의 로또번호가 같을까")
-    void is_automated_lotto_number_same() {
-        // given
-        List<Integer> automatedLotto ;
-        List<Integer> automatedLotto2 ;
-
-        // when
-        automatedLotto = LottoNumberMaker.shuffle();
-        automatedLotto2 = LottoNumberMaker.shuffle();
-
-        // then
-        assertThat(false).isEqualTo(automatedLotto.containsAll(automatedLotto2));
-    }
-
-    @Test
-    @DisplayName("한 세트의 로또번호-리스트-가 같으면 같다")
-    void is_same_lotto_number_in_a_round() {
-        // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-        // when
-        LottoNumber lottoNumber = LottoNumber.of(numbers);
-
-        // then
-        assertThat(lottoNumber.value()).isEqualTo(numbers);
-        assertThat(lottoNumber.value()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
-    }
 
     @Test
     @DisplayName("로또번호는 오름차순으로 정렬이 된다.")

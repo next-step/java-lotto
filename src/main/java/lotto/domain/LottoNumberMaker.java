@@ -1,9 +1,14 @@
 package lotto.domain;
 
+import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoNumber;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created By mand2 on 2020-11-19.
@@ -13,19 +18,19 @@ public class LottoNumberMaker {
 
     private LottoNumberMaker() {}
 
-
-    // TODO 로또객체로 반환.
-    public static List<Integer> shuffle() {
+    private static LottoNumber shuffle() {
         List<Integer> board = new LottoNumberBoard().lottoNumberBoard();
         Collections.shuffle(board);
 
-        return board.subList(0, LottoNumber.VALID_LOTTO_SIZE);
+        return LottoNumber.of(board.subList(0, LottoNumber.VALID_LOTTO_SIZE));
     }
 
-    public static void shuffle(int round) {
-        for (int i = round; i > 0; i--) {
-            shuffle();
-        }
+    public static Lottos generate(int round) {
+        List<Lotto> lottos = Stream.generate(() -> Lotto.of(shuffle()))
+                .limit(round)
+                .collect(Collectors.toList());
+
+        return Lottos.of(lottos);
     }
 
 }
