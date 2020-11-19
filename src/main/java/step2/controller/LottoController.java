@@ -1,57 +1,51 @@
 package step2.controller;
 
+import step2.domain.Lotto;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.IntStream;
 
 public class LottoController {
 
     private static final int LOTTO_TOTAL_COUNT = 6;
     private final int lottoAmount;
     private int qty;
-    private List<List<Integer>> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoController(int lottoAmount) {
         this.lottoAmount = lottoAmount;
-        lottoTicketCreateStart();
+        lottoCreateStart();
     }
 
     public static LottoController of(int lottoAmount) {
         return new LottoController(lottoAmount);
     }
 
-    private int lottoQty() {
+    public int lottoPurchaseQty() {
         return this.lottoAmount / 1000;
     }
 
-    public void lottoTicketCreateStart() {
-        this.qty = lottoQty();
-        for (int i = 0; i < this.qty; i++) {
-            this.lottos.add(lottoTicketCreate());
-        }
+    public void lottoCreateStart() {
+        this.qty = lottoPurchaseQty();
+        IntStream.range(0, this.qty)
+                .mapToObj(i -> lottoTicketCreate())
+                .forEach(this.lottos::add);
     }
 
-    private List<Integer> lottoTicketCreate() {
-        List<Integer> ticket = new ArrayList<>();
-        for (int j = 0; j < LOTTO_TOTAL_COUNT; j++) {
-            ticket.add(random());
-        }
-        Collections.shuffle(ticket, new Random());
-        Collections.sort(ticket);
-        return ticket;
+    private Lotto lottoTicketCreate() {
+        Lotto lotto = new Lotto();
+        IntStream.range(0, LOTTO_TOTAL_COUNT)
+                .forEach(j -> lotto.addNumber());
+        return lotto;
     }
 
-    private int random() {
-        return (int) (Math.random() * 45) + 1;
-    }
-
-    public List<List<Integer>> getLottos() {
+    public List<Lotto> getLottos() {
         return this.lottos;
     }
 
-    public List<Integer> getLottoTicket(int i) {
-        return this.lottos.get(i);
+    public double getTotalYield(double winningAmount) {
+        double totalYield = winningAmount / this.lottoAmount;
+        return Double.parseDouble(String.format("%.2f", totalYield));
     }
-//    public int totalSta
 }
