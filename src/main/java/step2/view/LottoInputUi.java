@@ -5,21 +5,17 @@ import java.util.Scanner;
 public class LottoInputUi {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public int inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int lottoPurchaseAmount = scanner.nextInt();
-        System.out.println(lottoPurchaseAmount);
-        return lottoPurchaseAmount;
+        return scanner.nextInt();
     }
 
-    public String[] inputLastWeekNumber() {
+    public static String inputLastWeekNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        String lastWeekNumber = scanner.next();
-        return lastWeekNumber.split(",");
+        return scanner.next();
     }
 
-    public void close() {
+    public static void close() {
         scanner.close();
     }
 
