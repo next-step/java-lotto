@@ -18,6 +18,9 @@ public class LottoGame {
 		List<Lotto> autoLottos = controller.startLottoGameGetLottos(purchase, resultView);
 
 		InputView inputWinningNumbers = new InputView(new Scanner(System.in));
-		controller.printLottoStaticsic(inputWinningNumbers.getInputLottoWinningNumbers(), purchase, autoLottos, resultView);
+		final String winningNumber = inputWinningNumbers.getInputLottoWinningNumbers();
+		InputView inputBonusNumber = new InputView(new Scanner(System.in));
+		final int bonusNumber = inputBonusNumber.getInputLottoBonusNumber();
+		controller.printLottoStaticsic(winningNumber, purchase, autoLottos, resultView);
 	}
 }
