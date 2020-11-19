@@ -1,9 +1,6 @@
 package step02.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -41,7 +38,7 @@ public class Lottos {
     }
 
     public List<Lotto> print() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     @Override
