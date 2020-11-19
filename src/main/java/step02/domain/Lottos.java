@@ -27,13 +27,13 @@ public class Lottos {
         return map;
     }
 
-    public WinningCounterCollections statisticWinning(Lotto winningNumbers) {
+    public WinningCounters statisticWinning(Lotto winningNumbers) {
         List<WinningCounter> winningCounters = calculateCountNumber(winningNumbers).entrySet()
                 .stream()
                 .map(entry -> WinningCounter.of(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
 
-        return WinningCounterCollections.of(winningCounters);
+        return WinningCounters.of(winningCounters);
     }
 
     public int getCount() {

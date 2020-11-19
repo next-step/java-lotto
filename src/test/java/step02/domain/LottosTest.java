@@ -51,7 +51,7 @@ public class LottosTest {
     public void test_statisticWinning(Lottos lottos, List<WinningCounter> numbersCount) {
         Lotto winningNumbers = Lotto.of(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lottos.statisticWinning(winningNumbers))
-                .isEqualTo(WinningCounterCollections.of(numbersCount));
+                .isEqualTo(WinningCounters.of(numbersCount));
     }
 
     @DisplayName("로또의 개수를 리턴")

@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class WinningCounterCollections {
+public class WinningCounters {
     private final int FIRST = 0;
     private final List<WinningCounter> winningCounters;
 
-    private WinningCounterCollections(List<WinningCounter> winningCounters) {
+    private WinningCounters(List<WinningCounter> winningCounters) {
         this.winningCounters = winningCounters;
     }
 
-    public static WinningCounterCollections of(List<WinningCounter> winningCounters) {
-        return new WinningCounterCollections(winningCounters);
+    public static WinningCounters of(List<WinningCounter> winningCounters) {
+        return new WinningCounters(winningCounters);
     }
 
     public int getCount(int winningNumber) {
@@ -30,7 +30,7 @@ public class WinningCounterCollections {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinningCounterCollections that = (WinningCounterCollections) o;
+        WinningCounters that = (WinningCounters) o;
         return Objects.equals(winningCounters, that.winningCounters);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoRewardCollectionsTest {
+public class LottoRewardsTest {
     List<LottoReward> initialLottoRewards;
     List<LottoReward> statisticLottoRewards;
 
@@ -32,8 +32,8 @@ public class LottoRewardCollectionsTest {
     @DisplayName("생성자 테스트")
     @Test
     public void test_LottoRewardCollections_Constructor() {
-        assertThat(LottoRewardCollections.of(initialLottoRewards))
-                .isEqualTo(LottoRewardCollections.of(initialLottoRewards));
+        assertThat(LottoRewards.of(initialLottoRewards))
+                .isEqualTo(LottoRewards.of(initialLottoRewards));
     }
 
     @DisplayName("winningCounterCollections 의 내용을 반영하는 기능 테스트")
@@ -46,18 +46,18 @@ public class LottoRewardCollectionsTest {
                 WinningCounter.of(3, 1)
         );
 
-        WinningCounterCollections winningCounterCollections = WinningCounterCollections.of(winningCounters);
-        LottoRewardCollections lottoRewardCollections = LottoRewardCollections.of(initialLottoRewards);
+        WinningCounters winningCounterCollections = WinningCounters.of(winningCounters);
+        LottoRewards lottoRewards = LottoRewards.of(initialLottoRewards);
 
-        assertThat(lottoRewardCollections.updateCounts(winningCounterCollections))
-                .isEqualTo(LottoRewardCollections.of(statisticLottoRewards));
+        assertThat(lottoRewards.updateCounts(winningCounterCollections))
+                .isEqualTo(LottoRewards.of(statisticLottoRewards));
     }
 
     @DisplayName("총 보상을 계산")
     @Test
     public void test_getReward() {
         int REWARD = 5000;
-        assertThat(LottoRewardCollections.of(statisticLottoRewards).getReward())
+        assertThat(LottoRewards.of(statisticLottoRewards).getReward())
                 .isEqualTo(REWARD);
     }
 }

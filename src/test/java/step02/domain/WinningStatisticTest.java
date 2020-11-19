@@ -12,14 +12,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class WinningStatisticTest {
     Lotto winningNumbers;
     Lottos userLottos;
-    LottoRewardCollections lottoRewards;
-    LottoRewardCollections statisticLottoRewards;
+    LottoRewards lottoRewards;
+    LottoRewards statisticLottoRewards;
 
     @BeforeEach
     void setup() {
         winningNumbers = Lotto.of(Mock.makeWinningNumbers());
         userLottos = Lottos.of(Mock.makeLottos());
-        lottoRewards = LottoRewardCollections.of(
+        lottoRewards = LottoRewards.of(
                 Arrays.asList(
                         LottoReward.of(3, 5000, 0),
                         LottoReward.of(4, 50000, 0),
@@ -27,7 +27,7 @@ public class WinningStatisticTest {
                         LottoReward.of(6, 2000000000, 0)
                 )
         );
-        statisticLottoRewards = LottoRewardCollections.of(
+        statisticLottoRewards = LottoRewards.of(
                 Arrays.asList(
                         LottoReward.of(3, 5000, 1),
                         LottoReward.of(4, 50000, 0),

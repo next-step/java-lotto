@@ -4,22 +4,22 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningStatistic {
-    private final LottoRewardCollections lottoRewards;
+    private final LottoRewards lottoRewards;
     private final Lotto winningNumbers;
     private final Lottos userLottos;
 
-    private WinningStatistic(Lotto winningNumbers, Lottos userLottos, LottoRewardCollections lottoRewards) {
+    private WinningStatistic(Lotto winningNumbers, Lottos userLottos, LottoRewards lottoRewards) {
         this.winningNumbers = winningNumbers;
         this.userLottos = userLottos;
         this.lottoRewards = lottoRewards;
     }
 
-    public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos, LottoRewardCollections lottoRewards) {
+    public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos, LottoRewards lottoRewards) {
         return new WinningStatistic(winningNumbers, userLottos, lottoRewards);
     }
 
     public WinningStatistic execute() {
-        WinningCounterCollections winningCounters = userLottos.statisticWinning(winningNumbers);
+        WinningCounters winningCounters = userLottos.statisticWinning(winningNumbers);
         return WinningStatistic.of(winningNumbers, userLottos, lottoRewards.updateCounts(winningCounters));
     }
 

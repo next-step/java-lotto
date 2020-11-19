@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class WinningCounterCollectionsTest {
+public class WinningCountersTest {
     List<WinningCounter> numbersCount;
 
     @BeforeEach
@@ -29,8 +29,8 @@ public class WinningCounterCollectionsTest {
     @DisplayName("winningCounterCollections 생성자 테스트")
     @Test
     public void test_winningCounterCollections_Constructor() {
-        assertThat(WinningCounterCollections.of(numbersCount))
-                .isEqualTo(WinningCounterCollections.of(numbersCount));
+        assertThat(WinningCounters.of(numbersCount))
+                .isEqualTo(WinningCounters.of(numbersCount));
     }
 
     private static Stream<Arguments> provideLottoRewardContainResult() {
@@ -46,8 +46,8 @@ public class WinningCounterCollectionsTest {
     @ParameterizedTest
     @MethodSource("provideLottoRewardContainResult")
     public void test_getCount(int winningNumber, int expect) {
-        WinningCounterCollections winningCounterCollections = WinningCounterCollections.of(numbersCount);
-        assertThat(winningCounterCollections.getCount(winningNumber))
+        WinningCounters winningCounters = WinningCounters.of(numbersCount);
+        assertThat(winningCounters.getCount(winningNumber))
                 .isEqualTo(expect);
     }
 

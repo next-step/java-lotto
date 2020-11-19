@@ -5,6 +5,7 @@ import exception.LottoPriceException;
 import java.util.Objects;
 
 public class LottoPrice {
+    private static final Integer MIN_PRICE = 1;
     private final int price;
 
     private LottoPrice(int price) {
@@ -16,7 +17,7 @@ public class LottoPrice {
     }
 
     private static void validate(int price) {
-        if (price < 1) throw new LottoPriceException();
+        if (price < MIN_PRICE) throw new LottoPriceException();
     }
 
     public int calculateLottoCount(int payment) {

@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoRewardCollections {
+public class LottoRewards {
     private List<LottoReward> lottoRewards;
 
-    private LottoRewardCollections(List<LottoReward> lottoRewards) {
+    private LottoRewards(List<LottoReward> lottoRewards) {
         this.lottoRewards = lottoRewards;
     }
 
-    public static LottoRewardCollections of(List<LottoReward> lottoRewards) {
-        return new LottoRewardCollections(lottoRewards);
+    public static LottoRewards of(List<LottoReward> lottoRewards) {
+        return new LottoRewards(lottoRewards);
     }
 
-    public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections) {
-        return LottoRewardCollections.of(
+    public LottoRewards updateCounts(WinningCounters winningCounters) {
+        return LottoRewards.of(
                 lottoRewards.stream().map(lottoReward -> {
-                    int count = winningCounterCollections.getCount(lottoReward.getNumber());
+                    int count = winningCounters.getCount(lottoReward.getNumber());
                     return lottoReward.updateCount(count);
                 }).collect(Collectors.toList())
         );
@@ -40,7 +40,7 @@ public class LottoRewardCollections {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoRewardCollections that = (LottoRewardCollections) o;
+        LottoRewards that = (LottoRewards) o;
         return Objects.equals(lottoRewards, that.lottoRewards);
     }
 

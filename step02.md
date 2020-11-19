@@ -46,7 +46,7 @@
      - public int getReward()
 - LottoRewardCollections
     - public static LottoRewardCollections of(List<LottoReward> lottoRewards) 
-    - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounterCollections)
+    - public LottoRewardCollections updateCounts(WinningCounterCollections winningCounters)
     - public int getReward() 
     - public List<LottoReward> getLottoRewards()
 - WinningStatistic 정산기

@@ -17,8 +17,8 @@ public class Main {
         ResultView.showLottos(userLottos.print());
 
         Lotto winningNumbers = Lotto.of(WinningNumberTokenizer.execute(InputView.createWinningNumber(), lottoGenerator));
-        LottoRewardCollections lottoRewardCollections = LottoRewardCollections.of(Mock.LOTTO_REWARDS);
-        WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, lottoRewardCollections).execute();
+        LottoRewards lottoRewards = LottoRewards.of(Mock.LOTTO_REWARDS);
+        WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, lottoRewards).execute();
         ResultView.showWinningStatistics(winningStatistic.getLottoRewards());
 
         ResultView.showYield(winningStatistic.calculateGainRate(Mock.LOTTO_PRICE));
