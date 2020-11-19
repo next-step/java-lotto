@@ -17,7 +17,7 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoAutoMachine();
 
         //When
-        List<Integer> result = lottoMachine.createLottoNumber(new ArrayList<>());
+        List<Integer> result = lottoMachine.createLottoNumber();
 
         //Then
         assertThat(result).hasSize(6);

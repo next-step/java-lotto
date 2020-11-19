@@ -11,16 +11,17 @@ public class LottoAutoMachine implements LottoMachine {
     private static final List<Integer> numbers = new ArrayList<>();
 
     static {
-        IntStream.range(1, 51).forEach(i -> numbers.add(i));
+        IntStream.range(1, 45).forEach(numbers::add);
     }
 
-
     @Override
-    public List<Integer> createLottoNumber(List<Integer> lottoPickNumber) {
+    public List<Integer> createLottoNumber() {
         Collections.shuffle(numbers);
 
+        List<Integer> lottoPickNumber = new ArrayList<>();
         IntStream.range(0, MAX_BOUND)
                 .forEach(i -> lottoPickNumber.add(numbers.get(i)));
+
         Collections.sort(lottoPickNumber);
         return lottoPickNumber;
     }
