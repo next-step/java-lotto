@@ -26,10 +26,18 @@ public enum LottoReward {
 		return winningMoney;
 	}
 
-	public static LottoReward getReword(int countOfMatch) {
-		return Stream.of(values())
+	public static LottoReward getReword(int countOfMatch, boolean hasBonusNumber) {
+		LottoReward lottoReward = Stream.of(values())
 				.filter(reward -> reward.countOfMatch == countOfMatch)
 				.findFirst()
 				.orElse(LOST);
+		return findLottoRewardByBonus(lottoReward, hasBonusNumber);
+	}
+
+	protected static LottoReward findLottoRewardByBonus(LottoReward lottoReward, boolean hasBonusNumber) {
+		if ((lottoReward == LottoReward.SECOND) && !hasBonusNumber) {
+			return LottoReward.THIRD;
+		}
+		return lottoReward;
 	}
 }
