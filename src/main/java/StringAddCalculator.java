@@ -1,4 +1,5 @@
 public class StringAddCalculator {
+    private final static String COMMA = ",";
 
     public Integer add(String input) {
         if (isEmptyValue(input)) {
@@ -9,7 +10,19 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
+        if (input.contains(COMMA)) {
+            String[] numbers = input.split(COMMA);
+            return getSum(numbers);
+        }
         return null;
+    }
+
+    private int getSum(String[] split) {
+        int result = 0;
+        for (String s: split) {
+            result += Integer.parseInt(s);
+        }
+        return result;
     }
 
     private boolean isSingleNumber(String input) {
