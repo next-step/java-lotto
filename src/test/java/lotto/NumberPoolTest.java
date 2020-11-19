@@ -31,4 +31,12 @@ class NumberPoolTest {
     LottoTicket ticket = NumberPool.publishTicket(this.strategy);
     assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
   }
+
+  @Test
+  @DisplayName("지정한 번호 가져오는 기능 테스트")
+  void getNumber() {
+    LottoNumber number = LottoNumber.of(1);
+
+    assertThat(number).isEqualTo(NumberPool.getNumber(1));
+  }
 }
