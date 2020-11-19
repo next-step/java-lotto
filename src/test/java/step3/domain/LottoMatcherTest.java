@@ -19,7 +19,11 @@ class LottoMatcherTest {
     @ParameterizedTest
     @MethodSource("createLottoMatcher")
     void createInstance(Lottos lottos, LastWeekLotto lastWeekLotto) {
-        assertThat(LottoMatcher.ofMatch(lottos, lastWeekLotto)).isEqualTo(LottoMatcher.ofMatch(lottos, lastWeekLotto));
+        //given
+        LottoMatcher lottoMatcher = LottoMatcher.ofMatch(lottos, lastWeekLotto);
+
+        //then
+        assertThat(lottoMatcher).isEqualTo(LottoMatcher.ofMatch(lottos, lastWeekLotto));
     }
 
     private static Stream<Arguments> createLottoMatcher() {
@@ -40,7 +44,12 @@ class LottoMatcherTest {
     @ParameterizedTest
     @MethodSource("createLottoMatcherRank")
     void createLottosToString(Lottos lottos, LastWeekLotto lastWeekLotto, GameMoney gameMoney) {
-        assertThat(LottoMatcher.ofMatch(lottos, lastWeekLotto).getGamePrize()).isEqualTo(gameMoney);
+        //given
+        LottoMatcher lottoMatcher = LottoMatcher.ofMatch(lottos, lastWeekLotto);
+        //when
+        GameMoney gamePrize = lottoMatcher.getGamePrize();
+        //then
+        assertThat(gamePrize).isEqualTo(gameMoney);
     }
 
     private static Stream<Arguments> createLottoMatcherRank() {
