@@ -1,6 +1,7 @@
 package step2.domain;
 
 import step2.constant.LottoWinningPrizes;
+import step2.util.LottoUtil;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,6 +20,7 @@ public class LottoWinning {
     }
 
     public static LottoWinning of(String lastLottoWinningNumbers, List<Lotto> lottos) {
+        LottoUtil.lottoNumberSizeValidate(lastLottoWinningNumbers);
         return new LottoWinning(lastLottoWinningNumbers, lottos);
     }
 

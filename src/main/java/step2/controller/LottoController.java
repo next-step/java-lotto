@@ -1,6 +1,7 @@
 package step2.controller;
 
 import step2.domain.Lotto;
+import step2.util.LottoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class LottoController {
     }
 
     public static LottoController of(int lottoAmount) {
+        LottoUtil.purchaseAmountValidate(lottoAmount);
         return new LottoController(lottoAmount);
     }
 
