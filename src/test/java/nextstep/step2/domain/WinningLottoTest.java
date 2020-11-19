@@ -16,7 +16,7 @@ public class WinningLottoTest {
 		Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
 		Lotto lastWinningLotto = new Lotto(new HashSet<>(Arrays.asList(1,2,3,14,15,16)));
 		WinningLotto winningLotto = new WinningLotto(lotto, lastWinningLotto);
-		assertThat(winningLotto.getLottoReward()).isEqualTo(LottoReward.FOURTH);
+		assertThat(winningLotto.getLottoReward()).isEqualTo(LottoReward.FIFTH);
 	}
 
 	@Test

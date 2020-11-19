@@ -22,8 +22,8 @@ public class LottoRewardTest {
 		return Stream.of(
 				Arguments.of(LottoReward.getReword(6), LottoReward.FIRST),
 				Arguments.of(LottoReward.getReword(5), LottoReward.SECOND),
-				Arguments.of(LottoReward.getReword(4), LottoReward.THIRD),
-				Arguments.of(LottoReward.getReword(3), LottoReward.FOURTH),
+				Arguments.of(LottoReward.getReword(4), LottoReward.FOURTH),
+				Arguments.of(LottoReward.getReword(3), LottoReward.FIFTH),
 				Arguments.of(LottoReward.getReword(0), LottoReward.LOST)
 		);
 	}
