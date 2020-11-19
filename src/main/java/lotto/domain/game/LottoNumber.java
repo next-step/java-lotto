@@ -41,8 +41,8 @@ public class LottoNumber {
     }
 
     private static void checkNumber(int lottoNumber) {
-        int min = LottoNumberBoard.VALID_MIN_NUMBER;
-        int max = LottoNumberBoard.VALID_MAX_NUMBER;
+        final int min = LottoNumberBoard.VALID_MIN_NUMBER;
+        final int max = LottoNumberBoard.VALID_MAX_NUMBER;
 
         if ( lottoNumber < min || lottoNumber > max) {
             throw new IllegalArgumentException(String.format(MESSAGE_VALID_NUMBER, min, max));
@@ -62,8 +62,4 @@ public class LottoNumber {
         return Objects.hash(lottoNumbers);
     }
 
-//    @Override
-//    public String toString() {
-//        return Stream.generate(this::value).map(num -> )
-//    }
 }
