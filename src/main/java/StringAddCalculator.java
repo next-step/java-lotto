@@ -1,5 +1,7 @@
 public class StringAddCalculator {
     private final static String COMMA = ",";
+    private final static String COLON = ":";
+    private final static String DELIMITER = ",|:";
 
     public Integer add(String input) {
         if (isEmptyValue(input)) {
@@ -10,16 +12,20 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
-        if (input.contains(COMMA)) {
-            String[] numbers = input.split(COMMA);
+        if (containsDelimiter(input)) {
+            String[] numbers = input.split(DELIMITER);
             return getSum(numbers);
         }
         return null;
     }
 
+    private boolean containsDelimiter(String input) {
+        return input.contains(COMMA) || input.contains(COLON);
+    }
+
     private int getSum(String[] split) {
         int result = 0;
-        for (String s: split) {
+        for (String s : split) {
             result += Integer.parseInt(s);
         }
         return result;
