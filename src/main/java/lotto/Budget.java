@@ -4,10 +4,12 @@ import static lotto.LottoGameConstant.PRICE_PER_TICKET;
 
 public class Budget {
 
-  int amounts;
+  private final int amounts;
+  private int remains;
 
   private Budget(int amounts) {
     this.amounts = amounts;
+    this.remains = this.amounts;
   }
 
   public static Budget of(int amounts) {
@@ -19,15 +21,19 @@ public class Budget {
   }
 
   public int getNumPossibleLotto() {
-    return this.amounts / PRICE_PER_TICKET;
+    return this.remains / PRICE_PER_TICKET;
   }
 
   public LottoTickets purchaseLotto(int numTicket) {
-    if (amounts < PRICE_PER_TICKET) {
+    if (remains < PRICE_PER_TICKET) {
       throw new IllegalArgumentException();
     }
 
-    amounts -= numTicket * PRICE_PER_TICKET;
+    remains -= numTicket * PRICE_PER_TICKET;
     return NumberPool.purchaseTickets(numTicket);
+  }
+
+  public double calculateRatio(int benefit) {
+    return (double) benefit / this.amounts;
   }
 }

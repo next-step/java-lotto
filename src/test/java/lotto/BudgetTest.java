@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,5 +24,12 @@ class BudgetTest {
   @DisplayName("Lotto 구입 가능 숫자 확인")
   void testPurchaseLotto(int input, int expected) {
     assertThat(Budget.of(input).getNumPossibleLotto()).isEqualTo(expected);
+  }
+
+  @DisplayName("이율 테스트")
+  void test() {
+    Budget budget = Budget.of(10000);
+    assertThat(budget.calculateRatio(11000))
+        .isCloseTo(1.1, Percentage.withPercentage(0.01));
   }
 }
