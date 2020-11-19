@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class LottoNumberExceptionTest {
+public class LottoNumberOutOfRangeExceptionTest {
 
     @Test
     public void test() {
