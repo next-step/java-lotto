@@ -12,17 +12,18 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final int RANGE_FIRST_INDEX = 0;
     private static final int RANGE_LAST_INDEX = 6;
 
-    private static List<Integer> LOTTO_RANGE = IntStream
+    private static List<LottoNumber> LOTTO_RANGE = IntStream
             .range(1, 45)
             .boxed()
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
 
     @Override
-    public Set<Integer> create() {
+    public Set<LottoNumber> create() {
         return random();
     }
 
-    private static Set<Integer> random() {
+    private static Set<LottoNumber> random() {
         Collections.shuffle(LOTTO_RANGE);
         return new HashSet<>(LOTTO_RANGE.subList(RANGE_FIRST_INDEX, RANGE_LAST_INDEX));
     }
