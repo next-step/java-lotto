@@ -34,8 +34,8 @@ public class LottoBuyer {
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
-        final LottoTicket winningLottery = LottoTicket.of(winningNumberExpression);
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLottery, LottoNumber.of(bonusNumber));
+        final LottoTicket winningLotto = LottoTicket.of(winningNumberExpression);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTickets, winningLotto, LottoNumber.of(bonusNumber));
         return new LottoStatisticsResult(result, getProfit(result));
     }
 

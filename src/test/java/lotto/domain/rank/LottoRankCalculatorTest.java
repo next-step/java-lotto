@@ -27,11 +27,11 @@ class LottoRankCalculatorTest {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLottery = createLottoHasNumberOneToSix();
+            final LottoTicket winningLotto = createLottoHasNumberOneToSix();
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLottery, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
 
             // then
             assertAll(
@@ -50,11 +50,11 @@ class LottoRankCalculatorTest {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLottery = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber bonusNumber = LottoNumber.of(6);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLottery, bonusNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, bonusNumber);
 
             // then
             assertAll(
@@ -73,11 +73,11 @@ class LottoRankCalculatorTest {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLottery = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLottery, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
 
             // then
             assertAll(
@@ -96,11 +96,11 @@ class LottoRankCalculatorTest {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLottery = createLottoTicket(Arrays.asList(1, 2, 3, 8, 9, 10));
+            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 8, 9, 10));
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLottery, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
 
             // then
             assertAll(
