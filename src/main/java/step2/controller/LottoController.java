@@ -26,7 +26,7 @@ public class LottoController {
         return this.lottoAmount / 1000;
     }
 
-    public void lottoCreateStart() {
+    private void lottoCreateStart() {
         this.qty = lottoPurchaseQty();
         IntStream.range(0, this.qty)
                 .mapToObj(i -> lottoTicketCreate())

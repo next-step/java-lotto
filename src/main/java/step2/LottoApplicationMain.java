@@ -15,10 +15,11 @@ public class LottoApplicationMain {
         LottoOuputUi.printLottos(lottoController.getLottos());
 
         String lastWeekWinningNumbers = LottoInputUi.inputLastWeekNumber();
-
         LottoWinning lottoWinning = LottoWinning.of(lastWeekWinningNumbers, lottoController.getLottos());
+
         LottoOuputUi.printWinningStatistics(lottoWinning.getLottoWinningMap());
         LottoOuputUi.printTotalReturn(lottoController.getTotalYield(lottoWinning.getWinningAmount()));
+
         LottoInputUi.close();
     }
 }
