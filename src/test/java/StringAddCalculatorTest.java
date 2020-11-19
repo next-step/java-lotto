@@ -35,4 +35,11 @@ public class StringAddCalculatorTest {
     void split_by_comma_test(String input, int result) {
         assertThat(calculator.add(input)).isEqualTo(result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3=6", "2,5:7=14", "3,6:9=18"}, delimiter = '=')
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)")
+    void split_by_comma_or_colon_test(String input, int result) {
+        assertThat(calculator.add(input)).isEqualTo(result);
+    }
 }
