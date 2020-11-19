@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class PurchaseInfoTest {
+class ReceiptTest {
 
     private static final int LOTTO_PRICE = 1000;
 
@@ -24,7 +24,7 @@ class PurchaseInfoTest {
     void constructor_BadNumOfManualLottosException(int purchaseMoney, int numOfManualLottos) {
         List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThatExceptionOfType(BadNumOfManualLottosException.class)
-                .isThrownBy(() -> new PurchaseInfo(purchaseMoney, numOfManualLottos, manualLottos));
+                .isThrownBy(() -> new Receipt(purchaseMoney, numOfManualLottos, manualLottos));
     }
 
     @Test
@@ -32,7 +32,7 @@ class PurchaseInfoTest {
     void constructor_BadManualLottosException() {
         List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThatExceptionOfType(BadManualLottosException.class)
-                .isThrownBy(() -> new PurchaseInfo(100000, 2, manualLottos));
+                .isThrownBy(() -> new Receipt(100000, 2, manualLottos));
     }
 
     @ParameterizedTest
@@ -41,7 +41,7 @@ class PurchaseInfoTest {
     void getPurchaseMoney(int purchaseMoney) {
         int numOfManualLottos = 1;
         List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(new PurchaseInfo(purchaseMoney, numOfManualLottos, manualLottos).getPurchaseMoney())
+        assertThat(new Receipt(purchaseMoney, numOfManualLottos, manualLottos).getPurchaseMoney())
                 .isEqualTo(new Money(purchaseMoney));
     }
 
@@ -56,7 +56,7 @@ class PurchaseInfoTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
-        assertThat(new PurchaseInfo(9000, numOfManualLottos, manualLottos).getNumOfManualLottos())
+        assertThat(new Receipt(9000, numOfManualLottos, manualLottos).getNumOfManualLottos())
                 .isEqualTo(numOfManualLottos);
     }
 
@@ -67,7 +67,7 @@ class PurchaseInfoTest {
         int expected = purchaseMoney / LOTTO_PRICE;
         int numOfManualLottos = 1;
         List<Lotto> manualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(new PurchaseInfo(purchaseMoney, numOfManualLottos, manualLottos).getNumOfTotalLottos())
+        assertThat(new Receipt(purchaseMoney, numOfManualLottos, manualLottos).getNumOfTotalLottos())
                 .isEqualTo(expected);
     }
 
@@ -84,7 +84,7 @@ class PurchaseInfoTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
         int expected = (purchaseMoney / LOTTO_PRICE) - numOfManualLottos;
-        assertThat(new PurchaseInfo(purchaseMoney, numOfManualLottos, manualLottos).getNumOfAutoLottos())
+        assertThat(new Receipt(purchaseMoney, numOfManualLottos, manualLottos).getNumOfAutoLottos())
                 .isEqualTo(expected);
     }
 }

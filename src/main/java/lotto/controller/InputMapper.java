@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNoPool;
-import lotto.domain.PurchaseInfo;
+import lotto.domain.Receipt;
 import lotto.domain.WinningCondition;
 import lotto.dto.input.PurchaseDto;
 import lotto.dto.input.WinningConditionDto;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 class InputMapper {
     private InputMapper() {}
 
-    static PurchaseInfo getPurchaseInfo() {
+    static Receipt getReceipt() {
         PurchaseDto dto = InputView.getPurchaseDto();
-        return new PurchaseInfo(
+        return new Receipt(
                 dto.getPurchaseMoney(),
                 dto.getNumOfManualLottos(),
                 dto.getManualLottos().stream().map((lotto) -> parseLotto(lotto)).collect(Collectors.toList())

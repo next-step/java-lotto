@@ -5,14 +5,14 @@ import lotto.exception.BadNumOfManualLottosException;
 
 import java.util.List;
 
-public class PurchaseInfo {
+public class Receipt {
     private static final Money lottoPrice = new Money(1000);
 
     private final Money purchaseMoney;
     private final int numOfManualLottos;
     private final List<Lotto> manualLottos;
 
-    public PurchaseInfo(int purchaseMoney, int numOfManualLottos, List<Lotto> manualLottos) {
+    public Receipt(int purchaseMoney, int numOfManualLottos, List<Lotto> manualLottos) {
         this.purchaseMoney = new Money(purchaseMoney);
         this.numOfManualLottos = numOfManualLottos;
         this.manualLottos = manualLottos;

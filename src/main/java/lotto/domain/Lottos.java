@@ -7,12 +7,12 @@ import java.util.function.Supplier;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(PurchaseInfo info, Supplier<Lotto> autoSupplier) {
+    public Lottos(Receipt receipt, Supplier<Lotto> autoSupplier) {
         lottos = new LinkedList<>();
-        for (Lotto manualLotto : info.getManualLottos()) {
+        for (Lotto manualLotto : receipt.getManualLottos()) {
             lottos.add(manualLotto);
         }
-        for (int i = 0; i < info.getNumOfAutoLottos(); i++) {
+        for (int i = 0; i < receipt.getNumOfAutoLottos(); i++) {
             lottos.add(autoSupplier.get());
         }
     }

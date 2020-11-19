@@ -15,7 +15,7 @@ class LottosTest {
 
     private final Lotto dummyLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     private final Supplier<Lotto> dummySupplier = () -> dummyLotto;
-    private final PurchaseInfo info = new PurchaseInfo(
+    private final Receipt receipt = new Receipt(
             3000,
             0,
             Collections.emptyList()
@@ -23,7 +23,7 @@ class LottosTest {
 
     @Test
     void testToString() {
-        assertThat(new Lottos(info, dummySupplier).toString())
+        assertThat(new Lottos(receipt, dummySupplier).toString())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]\n"
                         + "[1, 2, 3, 4, 5, 6]\n"
                         + "[1, 2, 3, 4, 5, 6]\n"
@@ -38,8 +38,8 @@ class LottosTest {
         Lotto winningLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
         LottoNo bonus = LottoNoPool.getLottoNo(3);
 
-        int numOfAutoLottos = info.getNumOfAutoLottos();
-        Lottos lottos = new Lottos(info, dummySupplier);
+        int numOfAutoLottos = receipt.getNumOfAutoLottos();
+        Lottos lottos = new Lottos(receipt, dummySupplier);
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.FIFTH, numOfAutoLottos);
@@ -60,8 +60,8 @@ class LottosTest {
         Lotto winningLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
         LottoNo bonus = LottoNoPool.getLottoNo(8);
 
-        int numOfAutoLottos = info.getNumOfAutoLottos();
-        Lottos lottos = new Lottos(info, dummySupplier);
+        int numOfAutoLottos = receipt.getNumOfAutoLottos();
+        Lottos lottos = new Lottos(receipt, dummySupplier);
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.THIRD, numOfAutoLottos);
@@ -82,8 +82,8 @@ class LottosTest {
         Lotto winningLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
         LottoNo bonus = LottoNoPool.getLottoNo(1);
 
-        int numOfAutoLottos = info.getNumOfAutoLottos();
-        Lottos lottos = new Lottos(info, dummySupplier);
+        int numOfAutoLottos = receipt.getNumOfAutoLottos();
+        Lottos lottos = new Lottos(receipt, dummySupplier);
 
         Map<Rank, Integer> result = new HashMap<>();
         result.put(Rank.SECOND, numOfAutoLottos);
