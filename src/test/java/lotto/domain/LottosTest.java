@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.repository.Lottos;
-import lotto.domain.service.NumberSelectionStrategyImpl;
+import lotto.service.NumberSelectionStrategyImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

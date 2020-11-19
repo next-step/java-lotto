@@ -1,12 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.repository.Lottos;
-import lotto.domain.repository.Numbers;
-import lotto.domain.repository.WinningRanks;
-import lotto.domain.service.LotteryMachine;
-import lotto.domain.service.NumberSelectionStrategyImpl;
-import lotto.domain.service.WinningRankStatistics;
-import lotto.domain.util.MoneyLottoMapper;
+import lotto.domain.Lottos;
+import lotto.domain.Numbers;
+import lotto.domain.WinningRanks;
+import lotto.service.LotteryMachine;
+import lotto.service.NumberSelectionStrategyImpl;
+import lotto.service.WinningRankStatistics;
+import lotto.util.MoneyLottoMapper;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

@@ -1,6 +1,6 @@
-package lotto.domain.repository;
+package lotto.domain;
 
-import lotto.domain.service.NumberSelectionStrategy;
+import lotto.service.NumberSelectionStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;

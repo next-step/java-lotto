@@ -1,4 +1,4 @@
-package lotto.domain.repository;
+package lotto.domain;
 
 public class Number implements Comparable<Number> {
     private final int number;

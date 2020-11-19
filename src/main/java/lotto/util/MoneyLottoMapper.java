@@ -1,4 +1,4 @@
-package lotto.domain.util;
+package lotto.util;
 
 public class MoneyLottoMapper {
 

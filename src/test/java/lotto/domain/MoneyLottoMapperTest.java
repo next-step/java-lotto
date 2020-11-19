@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.util.MoneyLottoMapper;
+import lotto.util.MoneyLottoMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
