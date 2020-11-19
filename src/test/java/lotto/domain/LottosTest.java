@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.exception.NotMatchLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,11 +7,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
 
@@ -28,23 +27,30 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //Then
-        assertThat(lottos.hasLottoSize()).isEqualTo(size);
+        assertThat(lottos.quantity()).isEqualTo(size);
     }
 
-    @DisplayName("특정 index에 해당하는 Lotto를 반환하는 테스트")
+    @DisplayName("특정 index에 해당하는 Lotto 숫자를 반환하는 테스트")
     @Test
-    public void indexGetLotto(){
+    public void indexGetLotto() {
 
         //Given
-        LottoTicket ticket = LottoShop.purchase(10000);
-        Lottos lottos = LottoShop.exchangeToLotto(ticket, new LottoAutoMachine());
+        LottoShop lottoShop = new LottoShop();
+        Lottos lottos = lottoShop.purchase(5000, new LottoMachine() {
+            @Override
+            List<Integer> createLottoNumber() {
+                return Arrays.asList(1, 3, 5, 6, 7, 8);
+            }
+        });
 
         //When
-        List<Integer> result = lottos.getLottoNumber(9);
+        List<Integer> result = lottos.getLottoNumber(3);
 
         //Then
         assertThat(result).isNotNull();
+        assertThat(new HashSet(result)).hasSize(result.size());
     }
+
 
 
     @DisplayName("당첨번호 확인 후 Reward 인스턴스 생성 여부 테스트")
@@ -52,23 +58,19 @@ public class LottosTest {
     public void matchPrizeNumberTest() {
 
         //Given
-        LottoTicket ticket = LottoShop.purchase(10000);
-        Lottos lottos = LottoShop.exchangeToLotto(ticket, new LottoAutoMachine());
-        List<Integer> prizeNumbers = Arrays.asList(12, 35, 33, 22);
+        LottoShop lottoShop = new LottoShop();
+        Lottos lottos = lottoShop.purchase(10000, new LottoMachine() {
+            @Override
+            List<Integer> createLottoNumber() {
+                return Arrays.asList(12, 33, 35, 45);
+            }
+        });
 
         //When
-        lottos.matchPrizeNumber(prizeNumbers);
+        Reward reward = lottos.matchPrizeNumber(Arrays.asList(12, 35, 33, 22));
 
         //Then
-        assertThat(lottos.getReward()).isNotNull();
-    }
+        assertThat(reward).isNotNull();
 
-    @DisplayName("당첨번호를 확인하지 않은채 Reward 호출 시 Exception 테스트")
-    @Test
-    public void beforeGetRewardExceptionText() {
-        assertThatThrownBy(() -> {
-            Lottos lottos = LottoShop.exchangeToLotto(LottoShop.purchase(5000), new LottoAutoMachine());
-            lottos.getReward();
-        }).isInstanceOf(NotMatchLottoNumberException.class);
     }
 }
