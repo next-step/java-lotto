@@ -11,14 +11,16 @@ public class PrizeWinningResult {
     private final int secondPrizeCount;
     private final int thirdPrizeCount;
     private final int fourthPrizeCount;
+    private final int fifthPrizeCount;
 
-    public PrizeWinningResult(int paidMoney, List<Integer> prizeMoney, int firstPrizeCount, int secondPrizeCount, int thirdPrizeCount, int fourthPrizeCount) {
+    public PrizeWinningResult(int paidMoney, List<Integer> prizeMoney, int firstPrizeCount, int secondPrizeCount, int thirdPrizeCount, int fourthPrizeCount, int fifthPrizeCount) {
         this.paidMoney = paidMoney;
         this.prizeMoneys = prizeMoney;
         this.firstPrizeCount = firstPrizeCount;
         this.secondPrizeCount = secondPrizeCount;
         this.thirdPrizeCount = thirdPrizeCount;
         this.fourthPrizeCount = fourthPrizeCount;
+        this.fifthPrizeCount = fifthPrizeCount;
     }
 
     public int getFirstPrizeCount() {
@@ -37,6 +39,11 @@ public class PrizeWinningResult {
         return fourthPrizeCount;
     }
 
+    public int getFifthPrizeCount() {
+        return fifthPrizeCount;
+    }
+
+
     public int getFirstPrizeMoney() {
         return prizeMoneys.get(0);
     }
@@ -51,6 +58,10 @@ public class PrizeWinningResult {
 
     public int getFourthPrizeMoney() {
         return prizeMoneys.get(3);
+    }
+
+    public int getFifthPrizeMoney() {
+        return prizeMoneys.get(4);
     }
 
     public double getRateOfReturn() {
@@ -74,10 +85,12 @@ public class PrizeWinningResult {
         private List<Lotto> secondPrize;
         private List<Lotto> thirdPrize;
         private List<Lotto> fourthPrize;
+        private List<Lotto> fifthPrize;
         private int paidMoney;
 
-        public Builder prizeMoneys(int firstPrizeMoney, int secondPrizeMoney, int thirdPrizeMoney, int fourPrizeMoney) {
-            prizeMoneys = Arrays.asList(firstPrizeMoney, secondPrizeMoney, thirdPrizeMoney, fourPrizeMoney);
+
+        public Builder prizeMoneys(int firstPrizeMoney, int secondPrizeMoney, int thirdPrizeMoney, int fourPrizeMoney, int fifthMoney) {
+            prizeMoneys = Arrays.asList(firstPrizeMoney, secondPrizeMoney, thirdPrizeMoney, fourPrizeMoney, fifthMoney);
             return this;
         }
 
@@ -102,7 +115,7 @@ public class PrizeWinningResult {
         }
 
         public PrizeWinningResult build() {
-            return new PrizeWinningResult(paidMoney, prizeMoneys, firstPrize.size(), secondPrize.size(), thirdPrize.size(), fourthPrize.size());
+            return new PrizeWinningResult(paidMoney, prizeMoneys, firstPrize.size(), secondPrize.size(), thirdPrize.size(), fourthPrize.size(), fifthPrize.size());
         }
 
         public Builder paidMoney(int paidMoney) {
@@ -110,6 +123,10 @@ public class PrizeWinningResult {
             return this;
         }
 
+        public Builder fifthPrize(List<Lotto> lottos) {
+            this.fifthPrize = lottos;
+            return this;
+        }
     }
 }
 

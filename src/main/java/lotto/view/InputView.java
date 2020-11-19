@@ -18,6 +18,10 @@ public class InputView {
         return getStringFromStdin("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public int readBonusNumber() {
+        return getNumberFromStdin("보너스 볼을 입력해 주세요.");
+    }
+
     private String getStringFromStdin(String displayText) {
         return getFromStdin(displayText);
     }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.WinningNumberMatcher;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,14 +7,14 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningNumberMatcherTest {
+class ListNumberMatcherTest {
 
-    WinningNumberMatcher matcher;
+    ListNumberMatcher matcher;
 
     @DisplayName("번호가 당첨번호중 하나면 true 를 return 한다")
     @Test
     void match(){
-        this.matcher = new WinningNumberMatcher(Arrays.asList(1,2,3,4,5,6));
+        this.matcher = new ListNumberMatcher(Arrays.asList(1,2,3,4,5,6));
         assertThat(this.matcher.match(1)).isTrue();
         assertThat(this.matcher.match(2)).isTrue();
         assertThat(this.matcher.match(3)).isTrue();

@@ -14,12 +14,12 @@ class LottoTest {
     @Test
     void matchedNumberCount(){
         Lotto lotto = issueLotto(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,10,11,12,13,14)))).isEqualTo(1);
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,11,12,13,14)))).isEqualTo(2);
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,12,13,14)))).isEqualTo(3);
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,13,14)))).isEqualTo(4);
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,5,14)))).isEqualTo(5);
-        assertThat(lotto.getMatchedNumberCount(new WinningNumberMatcher(Arrays.asList(1,2,3,4,5,6)))).isEqualTo(6);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,10,11,12,13,14)))).isEqualTo(1);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,11,12,13,14)))).isEqualTo(2);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,3,12,13,14)))).isEqualTo(3);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,3,4,13,14)))).isEqualTo(4);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,3,4,5,14)))).isEqualTo(5);
+        assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,3,4,5,6)))).isEqualTo(6);
     }
 
 
