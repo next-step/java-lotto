@@ -19,6 +19,7 @@ public class InputView {
 
   public static String askWinningNumber() {
     System.out.println(WINNING_NUMBER_MESSAGE);
-    return scanner.next();
+    scanner.nextLine();
+    return scanner.nextLine();
   }
 }
