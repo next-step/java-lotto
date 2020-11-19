@@ -26,10 +26,10 @@ public class Main {
         LottosDto lottosDto = new LottosDto(lottos);
         ResultView.printLottos(lottosDto);
 
-        WinningConditionDto winningConditionDto = InputView.getWinningConditionDto();
+        WinningConditionDto dto = InputView.getWinningConditionDto();
         Result result = lottos.getResult(parseLotto(
-                winningConditionDto.getWinningLotto()),
-                LottoNoPool.getLottoNo(winningConditionDto.getBonus())
+                dto.getWinningLotto()),
+                LottoNoPool.getLottoNo(dto.getBonus())
         );
         StatisticsDto statisticsDto = new StatisticsDto(result, lottos.getPurchaseMoney());
         ResultView.printStatistics(statisticsDto);
