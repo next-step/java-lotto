@@ -1,9 +1,12 @@
 package step02.domain;
 
+import exception.LottoNumberDuplicatedException;
 import exception.LottoNumberException;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumberTokenizer {
@@ -13,18 +16,23 @@ public class WinningNumberTokenizer {
         List<LottoNumber> lottoNumbers = Arrays.stream(winningNumbers.split(TOKEN))
                 .map(inputNumber -> {
                     Integer number = Integer.parseInt(inputNumber);
-                    validateNumber(lottoGenerator, number);
+                    validateNumberRange(lottoGenerator, number);
                     return LottoNumber.of(number);
                 })
                 .collect(Collectors.toList());
+                validateUniqueNumber(lottoNumbers);
         return lottoNumbers;
     }
 
-    private static void validateNumber(LottoGenerator lottoGenerator, Integer number) {
-        if (!lottoGenerator.isValidNumber(number)) {
+    private static void validateNumberRange(LottoGenerator lottoGenerator, Integer number) {
+        if (!lottoGenerator.isValidNumberRange(number)) {
             throw new LottoNumberException();
         }
     }
 
-
+    private static void validateUniqueNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+            throw new LottoNumberDuplicatedException();
+        };
+    }
 }

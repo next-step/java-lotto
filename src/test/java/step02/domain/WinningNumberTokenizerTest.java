@@ -1,5 +1,6 @@
 package step02.domain;
 
+import exception.LottoNumberDuplicatedException;
 import exception.LottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,16 @@ public class WinningNumberTokenizerTest {
         assertThatExceptionOfType(LottoNumberException.class)
                 .isThrownBy(() -> {
                    WinningNumberTokenizer.execute(inValidInput, lottoGenerator);
+                });
+    }
+
+    @DisplayName("중복값이 존재하면 예외 던짐 테스트")
+    @Test
+    public void test_validateUniqueNumber_ThrowException(){
+        LottoGenerator lottoGenerator = LottoGenerator.of(1, 10);
+        assertThatExceptionOfType(LottoNumberDuplicatedException.class)
+                .isThrownBy(() -> {
+                    WinningNumberTokenizer.execute("1, 1, 1, 2, 3", lottoGenerator);
                 });
     }
 }

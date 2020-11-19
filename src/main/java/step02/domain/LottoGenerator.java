@@ -41,7 +41,7 @@ public class LottoGenerator {
         return Lotto.of(lotto);
     }
 
-    public boolean isValidNumber(Integer number) {
+    public boolean isValidNumberRange(Integer number) {
         return number >= startNumber && number <= endNumber;
     }
 
