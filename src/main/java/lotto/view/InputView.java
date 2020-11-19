@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.LottoGameController;
+import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
 
 /**
@@ -16,6 +17,11 @@ public class InputView {
         showGameRound(seedMoney.round());
 
         return seedMoney;
+    }
+
+    public static void showBoughtLottos(Lottos lottos) {
+        lottos.list().forEach(lotto -> System.out.println(lotto.number()));
+        System.out.println();
     }
 
     private static SeedMoney askSeedMoney() {

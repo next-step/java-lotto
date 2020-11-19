@@ -31,6 +31,7 @@ public class ResultView {
     }
 
     private static void simpleResultMessage() {
+        System.out.println();
         System.out.println(MESSAGE_STATISTICS);
         System.out.println(DASH);
     }

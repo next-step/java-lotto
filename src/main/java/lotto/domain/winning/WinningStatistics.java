@@ -10,7 +10,7 @@ public class WinningStatistics {
     private Map<WinningRank, Integer> stats;
 
     public WinningStatistics() {
-        this.stats = new HashMap<>();
+        this.stats = new TreeMap<>();
 
         stats.put(WinningRank.FIRST, 0);
         stats.put(WinningRank.THIRD, 0);
