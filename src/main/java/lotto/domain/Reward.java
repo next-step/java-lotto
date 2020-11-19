@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Reward {
 
@@ -23,7 +24,7 @@ public class Reward {
 
     public Map<PrizeInformation, Integer> getRewardResult() {
         prizeInformations.stream()
-                .filter(prize -> prize != null)
+                .filter(Objects::nonNull)
                 .forEach(prize -> rewardResult.put(prize, rewardResult.get(prize) + 1));
         return rewardResult;
     }
@@ -34,6 +35,5 @@ public class Reward {
                 .mapToInt(prize -> prize.getKey().getPrizePrice())
                 .sum();
         return totalRewardPrice == 0 ? 0 : (float) totalRewardPrice / purchasePrice;
-
     }
 }
