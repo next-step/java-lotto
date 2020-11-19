@@ -29,7 +29,7 @@ class MoneyTest {
         Money moneyObj = new Money(money);
         Money dividerObj = new Money(divider);
         assertThat(moneyObj.divide(dividerObj))
-                .isEqualTo(money / divider);
+                .isEqualTo((double) money / divider);
     }
 
     @Test

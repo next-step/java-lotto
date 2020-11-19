@@ -52,7 +52,7 @@ class ResultTest {
     @DisplayName("profit 과 rateOfReturn 을 정상적으로 계산해야한다.")
     void getProfit() {
         int expectedProfit = 2031615000;
-        double expectedRateOfReturn = 2846.0;
+        double expectedRateOfReturn = 2846.2243255397575;
         Assertions.assertAll(
                 () -> assertThat(result.getProfit())
                         .isEqualTo(new Money(expectedProfit)),

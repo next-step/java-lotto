@@ -17,7 +17,7 @@ class SplitterTest {
     @DisplayName("정상적으로 lottoStr 가 parse 되어야 한다.")
     @CsvSource(value = {"1, 2, 3, 4, 5, 6$[1, 2, 3, 4, 5, 6]", "8, 21, 23, 41, 42, 43$[8, 21, 23, 41, 42, 43]", "3, 5, 11, 16, 32, 38$[3, 5, 11, 16, 32, 38]", "7, 11, 16, 35, 36, 44$[7, 11, 16, 35, 36, 44]"}, delimiter = '$')
     void splitIntegers(String lottoStr, String expected) {
-        assertThat(Splitter.splitIntegers(lottoStr, SPLIT_REGEX).toString())
+        assertThat(Splitter.splitStringToIntegers(lottoStr, SPLIT_REGEX).toString())
                 .isEqualTo(expected);
     }
 
@@ -27,6 +27,6 @@ class SplitterTest {
     @ValueSource(strings = {"a, b, 3, 4, 5, 6", "8, 21, 2c, 4d, 42, 43", "3, 5, 11, 16, e2, f8", "7, g1, 16, 35, h6, 44"})
     void splitIntegers_nan(String lottoStr) {
         assertThatExceptionOfType(NanException.class)
-                .isThrownBy(() -> Splitter.splitIntegers(lottoStr, SPLIT_REGEX));
+                .isThrownBy(() -> Splitter.splitStringToIntegers(lottoStr, SPLIT_REGEX));
     }
 }
