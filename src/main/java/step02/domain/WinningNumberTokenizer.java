@@ -1,11 +1,8 @@
 package step02.domain;
 
-import exception.LottoNumberDuplicatedException;
 import exception.LottoNumberException;
-import exception.LottoSizeException;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +17,6 @@ public class WinningNumberTokenizer {
                     return LottoNumber.of(number);
                 })
                 .collect(Collectors.toList());
-                validateLottoSize(lottoNumbers);
-                validateUniqueNumber(lottoNumbers);
         return lottoNumbers;
     }
 
@@ -31,15 +26,5 @@ public class WinningNumberTokenizer {
         }
     }
 
-    private static void validateUniqueNumber(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new LottoNumberDuplicatedException();
-        };
-    }
 
-    private static void validateLottoSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
-            throw new LottoSizeException();
-        }
-    }
 }

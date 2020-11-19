@@ -47,7 +47,7 @@ public class WinningStatisticTest {
     @DisplayName("사용자의 로또 번호들과 금주의 당첨번호를 비교해 로또의 결과를 리턴")
     @Test
     public void test_compare() {
-        Lotto winningNumbers = Lotto.of(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5)));
+        Lotto winningNumbers = Lotto.of(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningStatistic winningStatistic = WinningStatistic.of(winningNumbers, userLottos, lottoRewards);
 
         assertThat(winningStatistic.execute())

@@ -39,23 +39,4 @@ public class WinningNumberTokenizerTest {
                 });
     }
 
-    @DisplayName("중복값이 존재하면 예외 던짐 테스트")
-    @Test
-    public void test_validateUniqueNumber_ThrowException(){
-        LottoGenerator lottoGenerator = LottoGenerator.of(1, 10);
-        assertThatExceptionOfType(LottoNumberDuplicatedException.class)
-                .isThrownBy(() -> {
-                    WinningNumberTokenizer.execute("1, 1, 1, 2, 3, 5", lottoGenerator);
-                });
-    }
-
-    @DisplayName("로또 사이즈가 6이 아니면 예외 던짐 테스트")
-    @Test
-    public void test_validateLottoSize_ThrowException(){
-        LottoGenerator lottoGenerator = LottoGenerator.of(1, 10);
-        assertThatExceptionOfType(LottoSizeException.class)
-                .isThrownBy(() -> {
-                    WinningNumberTokenizer.execute("1, 1, 1, 2, 3", lottoGenerator);
-                });
-    }
 }

@@ -1,19 +1,35 @@
 package step02.domain;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import exception.LottoNumberDuplicatedException;
+import exception.LottoSizeException;
+
+import java.util.*;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
     private final SortedSet<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
+        validateLottoSize(lotto);
+        validateUniqueNumber(lotto);
         this.lotto = new TreeSet(lotto);
     }
 
     public static Lotto of(List<LottoNumber> lotto) {
         return new Lotto(lotto);
+    }
+
+    private void validateUniqueNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+            throw new LottoNumberDuplicatedException();
+        };
+    }
+
+    private static void validateLottoSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new LottoSizeException();
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package step02.domain;
 
+import exception.LottoNumberDuplicatedException;
+import exception.LottoSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoTest {
@@ -48,6 +51,24 @@ public class LottoTest {
     public void test_compareWithWinner(Lotto lotto, int expect) {
         Lotto winningNumbers = Lotto.of(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lotto.matchCount(winningNumbers)).isEqualTo(expect);
+    }
+
+    @DisplayName("중복값이 존재하면 예외 던짐 테스트")
+    @Test
+    public void test_validateUniqueNumber_ThrowException(){
+        assertThatExceptionOfType(LottoNumberDuplicatedException.class)
+                .isThrownBy(() -> {
+                    Lotto.of(Mock.makeLotto(Arrays.asList(1, 1, 1, 2, 3, 5)));
+                });
+    }
+
+    @DisplayName("로또 사이즈가 6이 아니면 예외 던짐 테스트")
+    @Test
+    public void test_validateLottoSize_ThrowException(){
+        assertThatExceptionOfType(LottoSizeException.class)
+                .isThrownBy(() -> {
+                    Lotto.of(Mock.makeLotto(Arrays.asList(1, 1, 1, 2, 3)));
+                });
     }
 
 }
