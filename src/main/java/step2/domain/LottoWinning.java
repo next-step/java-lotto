@@ -42,7 +42,6 @@ public class LottoWinning {
     }
 
     private static void resultLottoWinning(int rightNumberCount) {
-        System.out.println(rightNumberCount);
         for (LottoWinningPrizes lottoWinningPrizes : values()) {
             if (lottoWinningPrizes.getMatch() == rightNumberCount) {
                 winningAmount += lottoWinningPrizes.getAmount();
@@ -60,7 +59,7 @@ public class LottoWinning {
     }
 
     private static void setLottoWinning(int rightNumberCount) {
-        if (lottoWinningMap.get(THIRD_MATCHES) == rightNumberCount) {
+        if (THIRD_MATCHES.getMatch() == rightNumberCount) {
             lottoWinningMap.put(THIRD_MATCHES, lottoWinningMap.get(THIRD_MATCHES) + 1);
         }
         if (FOUR_MATCHES.getMatch() == rightNumberCount) {
