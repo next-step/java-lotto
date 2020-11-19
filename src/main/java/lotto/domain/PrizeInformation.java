@@ -5,32 +5,32 @@ import java.util.Map;
 
 public enum PrizeInformation {
 
-    THREE_MATCH(new PrizeStatus(3), 5000),
-    FOUR_MATCH(new PrizeStatus(4), 50000),
-    FIVE_MATCH(new PrizeStatus(5), 1500000),
-    ALL_MATCH(new PrizeStatus(6), 2000000000);
+    THREE_MATCH(3, 5_000),
+    FOUR_MATCH(4, 50_000),
+    FIVE_MATCH(5, 1_500_000),
+    ALL_MATCH(6, 2_000_000_000);
 
-    private static final Map<PrizeStatus, PrizeInformation> matchByPrice = new HashMap<>();
+    private static final Map<Integer, PrizeInformation> matchByPrice = new HashMap<>();
     static{
         for(PrizeInformation prize : PrizeInformation.values()){
-            matchByPrice.put(prize.getPrizeStatus(), prize);
+            matchByPrice.put(prize.getMatchNumberCount(), prize);
         }
     }
 
-    private final PrizeStatus prizeStatus;
+    private final int matchNumberCount;
     private final int prizePrice;
 
-    PrizeInformation(PrizeStatus prizeStatus, int prizePrice){
-        this.prizeStatus = prizeStatus;
+    PrizeInformation(int matchNumberCount, int prizePrice){
+        this.matchNumberCount = matchNumberCount;
         this.prizePrice = prizePrice;
     }
 
     public static PrizeInformation findByPrizePrice(int matchCount){
-       return matchByPrice.get(new PrizeStatus(matchCount));
+       return matchByPrice.get(matchCount);
     }
 
-    public PrizeStatus getPrizeStatus() {
-        return prizeStatus;
+    public int getMatchNumberCount() {
+        return matchNumberCount;
     }
 
     public int getPrizePrice(){
