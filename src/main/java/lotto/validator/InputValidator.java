@@ -10,6 +10,7 @@ public class InputValidator {
 
     private static final int LOTTO_PRICE = 1_000;
     private static final int LOTTO_WINNING_SIZE = 6;
+    private static final int LOTTO_WINNING_MINIMUM_NUM = 1;
     private static final int LOTTO_WINNING_MAXIMUM_NUM = 45;
     private static final String EMPTY_VALUE = "";
     private static final String REGEX_DELIMITER_DEFAULT = ",";
@@ -46,12 +47,16 @@ public class InputValidator {
         }
     }
 
-    public static void validateWinning(String winning) {
+    public static void validateWinning(String winning, String bonus) {
         validateNotEmpty(winning);
+        validateNotEmpty(bonus);
 
         String[] winningsNum = winning.split(REGEX_DELIMITER_DEFAULT);
         validateSize(winningsNum);
         validateOverMaxNum(winningsNum);
+
+        validNumberRange(bonus);
+        validateBonusNotInWinning(winningsNum, bonus);
     }
 
     public static void validateNotEmpty(String winning) {
@@ -70,10 +75,29 @@ public class InputValidator {
     public static void validateOverMaxNum(String[] winning) {
         Arrays.stream(winning)
                 .map(Integer::parseInt)
-                .filter(num -> num > LOTTO_WINNING_MAXIMUM_NUM)
+                .filter(InputValidator::isNotValidRange)
                 .findAny()
                 .ifPresent(v -> {
-                    throw new IllegalArgumentException(MessageUtils.INPUT_WINNING_MAXIMUM_NUM);
+                    throw new IllegalArgumentException(MessageUtils.INPUT_WINNING_INVALID_NUM);
+                });
+    }
+
+    private static boolean isNotValidRange(int num) {
+        return num < LOTTO_WINNING_MINIMUM_NUM || num > LOTTO_WINNING_MAXIMUM_NUM;
+    }
+
+    public static void validNumberRange(String bonus) {
+        if (isNotValidRange(Integer.parseInt(bonus))) {
+            throw new IllegalArgumentException(MessageUtils.INPUT_WINNING_INVALID_NUM);
+        }
+    }
+
+    public static void validateBonusNotInWinning(String[] winning, String bonus) {
+        Arrays.stream(winning)
+                .map(Integer::parseInt).filter(v -> v == Integer.parseInt(bonus))
+                .findAny()
+                .ifPresent(v -> {
+                    throw new IllegalArgumentException(MessageUtils.INPUT_WINNING_BONUS_DUPLICATED);
                 });
     }
 }

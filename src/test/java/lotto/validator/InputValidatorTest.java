@@ -3,6 +3,7 @@ package lotto.validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -96,11 +97,35 @@ public class InputValidatorTest {
             });
         }
 
+        @DisplayName("보너스값 유효한지 체크")
+        @ParameterizedTest
+        @ValueSource(strings = {"-1", "0", "46", "60"})
+        void validate5(String bonus) {
+            assertThatIllegalArgumentException().isThrownBy(() -> {
+                InputValidator.validNumberRange(bonus);
+            });
+        }
+
+        @DisplayName("보너스값이 당첨번호에 속한다면 에러")
+        @ParameterizedTest
+        @CsvSource(value = {
+                "1,2,3,4,5,6 | 6"
+        }, delimiter = '|')
+        void validate6(String input, String bonus) {
+            String[] inputs = input.split(REGEX_DELIMITER_DEFAULT);
+
+            assertThatIllegalArgumentException().isThrownBy(() -> {
+                InputValidator.validateBonusNotInWinning(inputs, bonus);
+            });
+        }
+
         @DisplayName("테스트 성공")
         @ParameterizedTest
-        @ValueSource(strings = {"1,2,3,4,5,6"})
-        void validate5(String input) {
-            InputValidator.validateWinning(input);
+        @CsvSource(value = {
+                "1,2,3,4,5,6 | 7"
+        }, delimiter = '|')
+        void validate7(String input, String bonus) {
+            InputValidator.validateWinning(input, bonus);
         }
     }
 }
