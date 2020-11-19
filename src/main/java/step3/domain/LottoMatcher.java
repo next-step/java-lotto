@@ -10,35 +10,37 @@ import java.util.stream.Stream;
 
 public class LottoMatcher {
     private static final int INCREASE_COUNT = 1;
-    private static EnumMap<LottoRank, Integer> result = new EnumMap<LottoRank, Integer>(LottoRank.class);
+    private final EnumMap<LottoRank, Integer> result;
 
-    private LottoMatcher() {
+    private LottoMatcher(EnumMap<LottoRank, Integer> result) {
+        this.result = result;
     }
 
     public static LottoMatcher ofMatch(Lottos lottos, LastWeekLotto lastWeekLotto) {
-        initDefaultMap();
+        EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
+        initDefaultMap(result);
 
-        matchLastWeekLottoNumbers(lottos, lastWeekLotto);
-        return new LottoMatcher();
+        matchLottoRank(getLottoRanks(lottos , lastWeekLotto), result);
+        return new LottoMatcher(result);
     }
 
-    private static void matchLastWeekLottoNumbers(Lottos lottos, LastWeekLotto lastWeekLottoNums) {
-        lottos.matchLastWeekLotto(lastWeekLottoNums)
-                .forEach(LottoMatcher::increaseMatchLottoCount);
+    private static void matchLottoRank(List<LottoRank> lottoRanks, EnumMap<LottoRank, Integer> result) {
+        lottoRanks.forEach(
+                lottoRank -> result.put(lottoRank, getLottoCount(result, lottoRank) + INCREASE_COUNT));
     }
 
-    private static void initDefaultMap() {
+    private static List<LottoRank> getLottoRanks(Lottos lottos, LastWeekLotto lastWeekLotto) {
+        return lottos.matchLastWeekLotto(lastWeekLotto);
+    }
+
+    private static void initDefaultMap(EnumMap<LottoRank, Integer> lottoResult) {
         for (LottoRank lottoRank : LottoRank.values()) {
-            result.put(lottoRank, 0);
+            lottoResult.put(lottoRank, 0);
         }
     }
 
-    private static void increaseMatchLottoCount(LottoRank lottoRank) {
-        result.put(lottoRank, getLottoCount(lottoRank) + INCREASE_COUNT);
-    }
-
-    private static int getLottoCount(LottoRank lottoRank) {
-        return result.getOrDefault(lottoRank, 0);
+    private static int getLottoCount(EnumMap<LottoRank, Integer> lottoResult, LottoRank lottoRank) {
+        return lottoResult.getOrDefault(lottoRank, 0);
     }
 
 
