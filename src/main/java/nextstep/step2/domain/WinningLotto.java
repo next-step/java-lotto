@@ -6,7 +6,12 @@ public class WinningLotto {
 	public WinningLotto(Lotto lotto, Lotto lastWeekLotto, LottoNumber bonusNumber) {
 		lastWeekLotto.validate();
 		long matchCount = getMatchCount(lotto, lastWeekLotto);
-		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount));
+		boolean hasBonusNumber = hasBonusNumber(lotto, bonusNumber);
+		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount), hasBonusNumber);
+	}
+
+	protected boolean hasBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+		return lotto.getNumbers().contains(bonusNumber);
 	}
 
 	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
