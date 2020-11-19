@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private LottoGenerator(List<Integer> lottoNumbers) {
+    private LottoGenerator(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -19,16 +19,17 @@ public class LottoGenerator {
         return new LottoGenerator(generate(from, to));
     }
 
-    private static List<Integer> generate(Integer from, Integer to) {
+    private static List<LottoNumber> generate(Integer from, Integer to) {
         return Stream.iterate(from, n -> n + 1)
                 .limit(to)
+                .map(number -> LottoNumber.of(number))
                 .collect(Collectors.toList());
     }
 
     public Lotto generate() {
         Collections.shuffle(lottoNumbers);
 
-        List<Integer> lotto = lottoNumbers.stream()
+        List<LottoNumber> lotto = lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
 

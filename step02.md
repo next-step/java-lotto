@@ -11,14 +11,15 @@
     - public static LottoPrice of(int price) 생성자
     - private static void validate(int price) 장당 가격이 1원 이하이면 예외처리
     - public int calculateLottoCount(int payment) 지불한 돈으로 로또를 몇 개 살 수 있는지 계산해 주는 기능
-- LottoNumbers 로또에서 나올 수 있는 숫자들
-    - public static LottoNumbers of(Integer from, Integer to)
+- LottoGenerator 로또에서 나올 수 있는 숫자들
+    - public static LottoGenerator of(Integer from, Integer to)
     - private static Integer[] generate(Integer from, Integer to)
-    - public Lotto generateLotto()
+    - public Lotto generate()
+- LottoNumber
 - Lotto 
-    - public static Lotto of(List<Integer> lotto)
+    - public static Lotto of(List<LottoNumber> lotto)
     - public int matchCount(Lotto winningNumbers) 
-    - public List<Integer> print()
+    - public List<LottoNumber> print()
 - WinningCounter 특정 수가 몇개 있는지를 가지는 클래스
     - public static WinningCounter of(int number, int count)
     - public boolean isSame(int winningNumber)
@@ -34,7 +35,7 @@
 - LottoSeller 로또 판매기 
     - private LottoSeller(LottoPrice lottoPrice)
     - public static LottoSeller of(int lottoPrice)
-    - public Lottos generateLottos(int payment, LottoNumbers winningCounters)
+    - public Lottos generateLottos(int payment, LottoGenerator winningCounters)
     - private int calculateLottoCount(int payment)
 - LottoReward
      - public static LottoReward of(int number, int reward, int count) 
@@ -58,7 +59,7 @@
 - racing car 마지막 리팩토링에서는, 작은 단위에서 부터 큰단위로 발전해가며 Test code 를 작성하고 프로덕션 코드를 작성하였습니다
 - 이번 계획은, input output view 를 먼저 작성하고, 사용자 시나리오흐름으로 test code 작성 -> production code 작성 할 예정입니다.
 - 역시 작은 단계부터 설계한 다음에 코드를 작성하는 것이 효율적인 것 같아요
-- Integer[] 보다, List<Integer> 그리고 int 보다 Integer 을 사용해야겠다고 느낀 것이, Collections 나 stream 에 메서드를 쓸때 매개변수의 형식호환때문
+- Integer[] 보다, List<LottoNumber> 그리고 int 보다 Integer 을 사용해야겠다고 느낀 것이, Collections 나 stream 에 메서드를 쓸때 매개변수의 형식호환때문
 
     
 ## 기능 요구사항

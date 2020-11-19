@@ -2,6 +2,7 @@ package step02.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step02.Mock;
 
 import java.util.Arrays;
 
@@ -13,6 +14,6 @@ public class TokenizerTest {
     public void test_execute() {
         assertThat(
                 Tokenizer.execute("1, 2, 3, 4, 5")
-        ).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+        ).isEqualTo(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5)));
     }
 }

@@ -5,6 +5,7 @@ import step02.domain.Lotto;
 import step02.domain.LottoReward;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -21,7 +22,7 @@ public class ResultView {
     }
 
     public static void showLottos(List<Lotto> lottos) {
-        lottos.forEach((lotto) -> System.out.println(lotto.print()));
+        lottos.forEach(lotto -> System.out.println(lotto.print()));
     }
 
     public static void showWinningStatistics(List<LottoReward> winningStatistics) {

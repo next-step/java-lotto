@@ -20,7 +20,7 @@ public class LottoSeller {
         int lottoCount = calculateLottoCount(payment);
         List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
                 .limit(lottoCount)
-                .map(key -> lottoGenerator.generateLotto())
+                .map(key -> lottoGenerator.generate())
                 .collect(Collectors.toList());
 
         return Lottos.of(lottos);

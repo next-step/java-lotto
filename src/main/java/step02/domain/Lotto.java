@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
-    private Lotto(List<Integer> lotto) {
+    private Lotto(List<LottoNumber> lotto) {
         this.lotto = lotto;
     }
 
-    public static Lotto of(List<Integer> lotto) {
+    public static Lotto of(List<LottoNumber> lotto) {
         return new Lotto(lotto);
     }
 
@@ -28,15 +28,16 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningNumbers) {
-        return lotto.stream().reduce(0, (total, number) -> {
-            if (winningNumbers.lotto.contains(number)) {
+        int total = 0;
+        for(LottoNumber lottoNumber : lotto) {
+            if (winningNumbers.lotto.contains(lottoNumber)) {
                 total += 1;
             }
-            return total;
-        });
+        }
+        return total;
     }
 
-    public List<Integer> print() {
+    public List<LottoNumber> print() {
         return lotto;
     }
 }

@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 public class Tokenizer {
     private static String TOKEN = ", ";
-    public static List<Integer> execute(String winningNumbers) {
+    public static List<LottoNumber> execute(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(TOKEN))
-                .map(Integer::new)
+                .map(number -> LottoNumber.of(Integer.parseInt(number)))
                 .collect(Collectors.toList());
     }
 }
