@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,17 +13,21 @@ public class CustomSentenceDivider {
     }
 
     public String getSplitter() {
-        if (!isCustomExpression())
-            return null;
+        checkCustomExpression();
 
         return matcher.group(1);
     }
 
     public String getExpressionString() {
-        if (!isCustomExpression())
-            return null;
+        checkCustomExpression();
 
         return matcher.group(2);
+    }
+
+    private void checkCustomExpression() {
+        if (!isCustomExpression()) {
+            throw new RuntimeException("커스텀 구분자 문자열이 아닙니다.");
+        }
     }
 
     public boolean isCustomExpression() {

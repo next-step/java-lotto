@@ -1,9 +1,13 @@
-import java.util.Arrays;
+package stringaddcalculator;
+
+import java.util.Collections;
+import java.util.Objects;
 
 public class StringAddCalculator {
     public static Number splitAndSum(String sentence) {
-        if (!validateSentence(sentence))
+        if (!validateSentence(sentence)) {
             return new Number(0);
+        }
 
         return calculate(sentence);
     }
@@ -20,22 +24,19 @@ public class StringAddCalculator {
     }
 
     private static Expression getExpFromCustomSplitterDivider(CustomSentenceDivider customSentenceDivider) {
-        Splitters splitters = new Splitters(Arrays.asList(customSentenceDivider.getSplitter()));
+        Splitters splitters = new Splitters(Collections.singletonList(customSentenceDivider.getSplitter()));
         return new Expression(customSentenceDivider.getExpressionString(), splitters);
     }
 
     private static boolean validateSentence(String sentence) {
-        if (checkNull(sentence))
+        if (Objects.isNull(sentence)) {
             return false;
+        }
 
         return !checkEmptyString(sentence);
     }
 
     private static boolean checkEmptyString(String sentence) {
         return sentence.isEmpty();
-    }
-
-    private static boolean checkNull(String sentence) {
-        return sentence == null;
     }
 }
