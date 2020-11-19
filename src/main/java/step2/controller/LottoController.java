@@ -33,7 +33,7 @@ public class LottoController {
                 .forEach(this.lottos::add);
     }
 
-    private Lotto lottoTicketCreate() {
+    public Lotto lottoTicketCreate() {
         Lotto lotto = new Lotto();
         IntStream.range(0, LOTTO_TOTAL_COUNT)
                 .forEach(j -> lotto.addNumber());

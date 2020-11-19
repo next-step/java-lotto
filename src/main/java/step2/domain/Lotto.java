@@ -5,7 +5,7 @@ import java.util.*;
 public class Lotto {
     private static final int QTY = 6;
     private static final int LOTTO_VALUE = 45;
-    private List<Integer> lottos;
+    private List<Integer> lottos = new ArrayList<>();
 
     public void addNumber() {
         autoLottoNumber();
