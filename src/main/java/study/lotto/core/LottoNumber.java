@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     public static final int MAX_LOTTO_NUMBER = 45;
     private final int value;
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 - 45사이의 숫자만 가능합니다.");
         }
@@ -16,8 +16,16 @@ public class LottoNumber implements Comparable<LottoNumber>{
         this.value = value;
     }
 
-    public LottoNumber(String value) {
+    private LottoNumber(String value) {
         this(Integer.parseInt(value));
+    }
+
+    public static LottoNumber of(int value) {
+        return new LottoNumber(value);
+    }
+
+    public static LottoNumber of(String value) {
+        return new LottoNumber(value);
     }
 
     @Override

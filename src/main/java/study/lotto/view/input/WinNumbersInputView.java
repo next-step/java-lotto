@@ -31,7 +31,7 @@ public class WinNumbersInputView extends AbstractView {
                         .stream()
                         .map(String::trim)
                         .map(Integer::parseInt)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class WinNumbersInputView extends AbstractView {
         printAndClear();
 
         String bonusLottoNumber = scanner.nextLine();
-        return new LottoNumber(bonusLottoNumber);
+        return LottoNumber.of(bonusLottoNumber);
     }
 
 }

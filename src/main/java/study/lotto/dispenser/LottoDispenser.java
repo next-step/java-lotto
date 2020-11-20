@@ -16,7 +16,7 @@ public class LottoDispenser {
         for (int lottoNumber = LottoNumber.MIN_LOTTO_NUMBER
                  ; lottoNumber < LottoNumber.MAX_LOTTO_NUMBER
                  ; lottoNumber++) {
-            this.lottoNumbers.add(new LottoNumber(lottoNumber));
+            this.lottoNumbers.add(LottoNumber.of(lottoNumber));
         }
     }
 
