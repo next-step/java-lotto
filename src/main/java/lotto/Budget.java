@@ -4,12 +4,12 @@ import static lotto.LottoGameConstant.PRICE_PER_TICKET;
 
 public class Budget {
 
-  private final int amounts;
+  private final int initialBudget;
   private int remains;
 
-  private Budget(int amounts) {
-    this.amounts = amounts;
-    this.remains = this.amounts;
+  private Budget(int initialBudget) {
+    this.initialBudget = initialBudget;
+    this.remains = this.initialBudget;
   }
 
   public static Budget of(int amounts) {
@@ -33,7 +33,7 @@ public class Budget {
     return NumberPool.purchaseTickets(numTicket);
   }
 
-  public double calculateRatio(int benefit) {
-    return (double) benefit / this.amounts;
+  public double calculateRatio(int incomes) {
+    return (double) incomes / this.initialBudget;
   }
 }
