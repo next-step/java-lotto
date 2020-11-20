@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.exception.ErrorMessage;
 import lotto.domain.exception.NotValidLottoPriceException;

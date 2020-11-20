@@ -1,6 +1,7 @@
 package lotto.view;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,13 +31,13 @@ public class InputView {
         }
     }
 
-    public static List<Integer> lastWeekLottoPrizeNumber() {
+    public static HashSet<Integer> lastWeekLottoPrizeNumber() {
         System.out.println();
         System.out.println(LASTWEEK_LOTTO_PRIZE_NUMBER_COMMENT);
         String[] splitPrizeNumber = scanner.next().split(WINNING_NUMBER_SPLIT_EXPRESSION);
         return Stream.of(splitPrizeNumber)
                         .map(Integer::parseInt)
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
 }

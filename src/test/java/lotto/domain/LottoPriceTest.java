@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoPrice;
 import lotto.domain.exception.ErrorMessage;
 import lotto.domain.exception.NotValidLottoPriceException;
 import org.junit.jupiter.api.DisplayName;
