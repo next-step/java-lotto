@@ -2,14 +2,9 @@ package step2.domain;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoNumberMatcher {
     private static final int TWO_DECIMAL_PLACES = 2;
@@ -25,7 +20,6 @@ public class LottoNumberMatcher {
     private static final int FIRST_PRIZE = 2000000000;
     private static final int INIT_SUM = 0;
 
-
     static HashMap<Integer, Integer> hashMap = new HashMap<>();
 
     private static void initHashMap() {
@@ -33,23 +27,6 @@ public class LottoNumberMatcher {
             hashMap.put(i, DEFAULT_COUNT_NUMBER);
         }
     }
-
-//    public static HashMap<Integer, Integer> getNumberMatch(String[] winningLottoNumbers, List<List<Integer>> lottoNumbers) {
-//        initHashMap();
-//        //List<Integer> myLottoNumber = getEachMyLottoNumber(lottoNumbers);
-//        for(int i=0; i<lottoNumbers.size(); i++){
-//            int count = 0;
-//            List<Integer> test = lottoNumbers.get(i);
-//            for (String number : winningLottoNumbers) {
-//                if (test.contains(Integer.parseInt(number))) {
-//                   ++count;
-//                }
-//            }
-//            setNumberMatch(count);
-//        }
-//        return hashMap;
-//    }
-
 
     public static HashMap<Integer, Integer> getNumberMatch(String[] winningLottoNumbers, List<List<Integer>> lottoNumbers) {
         initHashMap();
@@ -66,25 +43,6 @@ public class LottoNumberMatcher {
         }
         return hashMap;
     }
-
-
-//    private static List<Integer> getEachMyLottoNumber(List<List<Integer>> lottoNumbers) {
-//        return lottoNumbers.stream()
-//                .flatMap(List::stream)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private static int getEachNumberMatch(List<List<Integer>> lottoNumbers, String number, int count){
-//        List<Integer> myLottoNumber = getEachMyLottoNumber(lottoNumbers);
-//        for(int i=0; i<myLottoNumber.size(); i++){
-//            if((myLottoNumber.get(i).equals(Integer.parseInt(number)))){
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
-
-
 
     private static void setNumberMatch(int count) {
         Integer value = hashMap.getOrDefault(count, DEFAULT_COUNT_NUMBER);
@@ -108,7 +66,6 @@ public class LottoNumberMatcher {
         allPrizeMoney.put(FIRST_PRIZE, hashMap.get(MAX_MATCH_NUMBER));
         return allPrizeMoney;
     }
-
 
     static int sumOfTotalPrizeMoney() {
         int sum = INIT_SUM;
