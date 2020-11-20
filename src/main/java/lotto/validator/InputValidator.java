@@ -19,12 +19,14 @@ public class InputValidator {
         throw new IllegalStateException(MessageUtils.UTILITY_CLASS);
     }
 
-    public static void validateBuyLotto(String amount) {
+    public static void validateBuyLotto(String amount, String manualCount) {
         validateParseInt(amount);
 
         int num = Integer.parseInt(amount);
         validateMoreThanZero(num);
         validateMultiple1000(num);
+
+        validateParseInt(manualCount);
     }
 
     public static void validateParseInt(String amount) {
@@ -45,6 +47,14 @@ public class InputValidator {
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(MessageUtils.INPUT_MULTIPLE_1000);
         }
+    }
+
+    public static void validateManualNumber(String manualNumber) {
+        validateNotEmpty(manualNumber);
+        String[] manualNumbers = manualNumber.split(REGEX_DELIMITER_DEFAULT);
+
+        validateSize(manualNumbers);
+        validateOverMaxNum(manualNumbers);
     }
 
     public static void validateWinning(String winning, String bonus) {

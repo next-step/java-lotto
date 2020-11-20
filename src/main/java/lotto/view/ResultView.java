@@ -12,7 +12,7 @@ public class ResultView {
     private static final String OUTPUT_FORMAT_STATISTICS_PROFIT = "총 수익률은 %.2f입니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계";
 
-    public static void outputBuyLotto(OuputChannel outputChnnel, MyLottos myLottos) {
+    public static void outputBuyLotto(Output outputChnnel, MyLottos myLottos) {
         outputChnnel.out(String.format(OUTPUT_FORMAT_BUY_LOTTO_COUNT, myLottos.size()));
 
         for (MyLotto myLotto : myLottos.getLottosResult()) {
@@ -21,7 +21,7 @@ public class ResultView {
         outputChnnel.out(LOTTO_TREM);
     }
 
-    public static void outputStatistics(OuputChannel outputChnnel, PrintLottoResult statistics) {
+    public static void outputStatistics(Output outputChnnel, PrintLottoResult statistics) {
 
         outputChnnel.out(LOTTO_TREM);
         outputChnnel.out(OUTPUT_STATISTICS_TITLE);
