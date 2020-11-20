@@ -19,10 +19,10 @@ public class LottoResult {
         Money lottoPrice = Money.of(Lotto.LOTTO_PRICE);
 
         int totalPrizeMoney = lottoPrizeCount.entryStream()
-                                .mapToInt(e -> (int) (e.getKey().getPrizeValue() * e.getValue()))
+                                .mapToInt(e -> e.getKey().getPrizeValue() * e.getValue())
                                 .sum();
         int numberOfLottos = lottoPrizeCount.entryStream()
-                                .mapToInt(e -> (int) e.getValue())
+                                .mapToInt(e -> e.getValue())
                                 .sum();
 
         return Money.of(totalPrizeMoney).dividedBy(lottoPrice.multiply(numberOfLottos));
