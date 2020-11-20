@@ -39,9 +39,9 @@ public class WinningNumberTest {
         Integer[] numbers = Arrays.stream(stringNumbers.split(",")) //
                 .map(Integer::valueOf) //
                 .toArray(Integer[]::new);
-        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
+        MatchResult matchResult = winningNumber.match(makeLotteryTickets(numbers));
 
-        assertThat(lotteryResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
+        assertThat(matchResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
     }
 
     @DisplayName("3개 ~ 6개 일치 테스트")
@@ -49,22 +49,22 @@ public class WinningNumberTest {
     @MethodSource("matchingCountProvider")
     void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
-        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
+        MatchResult matchResult = winningNumber.match(new LotteryTickets(
                 list(
                         lotteryNumber.copy(),
                         lotteryNumber.copy(),
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
-        assertThat(lotteryResult.getMatchResult(rank)).isEqualTo(2);
+        assertThat(matchResult.getMatchResult(rank)).isEqualTo(2);
     }
 
     @DisplayName("2등은 보너스 넘버가 같을때이다")
     @Test
     void secondaryPrize() {
         winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
-        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
-        assertThat(lotteryResult.getMatchResult(SECOND)).isEqualTo(1);
+        MatchResult matchResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
+        assertThat(matchResult.getMatchResult(SECOND)).isEqualTo(1);
     }
 
     private static Stream<Arguments> matchingCountProvider() {

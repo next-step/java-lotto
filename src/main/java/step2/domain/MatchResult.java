@@ -2,13 +2,14 @@ package step2.domain;
 
 import step2.Rank;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import static step2.domain.LotteryAgent.PRICE_LOTTERY;
 
-public class LotteryResult {
+public class MatchResult {
 
     private final Map<Rank, Integer> result = new HashMap<>();
 
@@ -21,6 +22,10 @@ public class LotteryResult {
             return 1;
         }
         return value + 1;
+    }
+
+    public Map<Rank, Integer> getAllResult() {
+        return Collections.unmodifiableMap(result);
     }
 
     public int getMatchResult(Rank rank) {

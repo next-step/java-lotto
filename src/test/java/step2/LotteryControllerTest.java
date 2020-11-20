@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -14,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Maps.newHashMap;
+import static step2.view.ResultView.*;
 
 public class LotteryControllerTest {
     private static final List<String> record = new ArrayList<>();
@@ -44,9 +45,8 @@ public class LotteryControllerTest {
             "FORTH|4개 일치 (50000원)- 1개", //
             "FIFTH|3개 일치 (5000원)- 1개"}, delimiter = '|')
     void toStringRank(String rankName, String expected) {
-        LotteryResult lotteryResult = new LotteryResult();
-        lotteryResult.add(Rank.valueOf(rankName));
-        assertThat(ResultView.toStringRank(Rank.valueOf(rankName), lotteryResult)) //
+        LotteryResult matchResult = new LotteryResult(0, newHashMap(Rank.valueOf(rankName), 1));
+        assertThat(ResultView.toStringRank(Rank.valueOf(rankName), matchResult)) //
                 .isEqualTo(expected);
     }
 

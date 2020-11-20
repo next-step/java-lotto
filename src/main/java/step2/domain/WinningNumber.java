@@ -12,13 +12,13 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public LotteryResult match(LotteryTickets tickets) {
-        LotteryResult lotteryResult = new LotteryResult();
+    public MatchResult match(LotteryTickets tickets) {
+        MatchResult matchResult = new MatchResult();
         for (LotteryNumber ticketNumber : tickets.getTicketNumbers()) {
-            lotteryResult.add(toRank(ticketNumber));
+            matchResult.add(toRank(ticketNumber));
         }
 
-        return lotteryResult;
+        return matchResult;
     }
 
     private void ensureNotNull(LotteryNumber lotteryNumber, Integer bonusNumber) {
