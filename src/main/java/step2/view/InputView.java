@@ -62,7 +62,7 @@ public class InputView {
     }
 
     static boolean isValidateWinningLottoNumberSize(String[] winningLottoNumbers) {
-        return winningLottoNumbers.length > LOTTO_NUMBER_SIZE;
+        return winningLottoNumbers.length != LOTTO_NUMBER_SIZE;
     }
 
 
