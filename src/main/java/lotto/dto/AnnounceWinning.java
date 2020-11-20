@@ -18,19 +18,19 @@ public class AnnounceWinning {
         this.bonusNumber = bonusNumber;
     }
 
-    public Set<Integer> getAnnounceWinning() {
-        return this.numbers;
-    }
-
-    public int getBonusNumber() {
-        return this.bonusNumber;
-    }
-
     public static AnnounceWinning of(String input, String bonus) {
         InputValidator.validateWinning(input, bonus);
 
         return new AnnounceWinning(Arrays.stream(input.split(REGEX_DELIMITER_DEFAULT))
                                            .map(Integer::parseInt)
                                            .collect(Collectors.toSet()), Integer.parseInt(bonus));
+    }
+
+    public Set<Integer> getAnnounceWinning() {
+        return this.numbers;
+    }
+
+    public int getBonusNumber() {
+        return this.bonusNumber;
     }
 }
