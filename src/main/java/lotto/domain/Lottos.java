@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -26,42 +24,9 @@ public class Lottos {
         return lottos.size() * Lotto.PRICE;
     }
 
-    public LottoFinder finder(WinningNumber winningNumber){
-        return new LottoFinder(lottos, winningNumber);
-    }
-
-    class LottoFinder {
-
-        private final WinningNumber winningNumber;
-        private Stream<Lotto> lottoStream;
-
-        public LottoFinder(List<Lotto> lottos, WinningNumber winningNumber) {
-            this.lottoStream = lottos.stream();
-            this.winningNumber = winningNumber;
-        }
-
-        public List<Lotto> lottos(){
-            return lottoStream.collect(Collectors.toList());
-        }
-
-        public LottoFinder findMatched(int matchedCount){
-            lottoStream = find(it -> winningNumber.getMatchedWinningNumberCount(it) == matchedCount);
-            return this;
-        }
-
-        public LottoFinder findMatchBonus(){
-            lottoStream = find(it -> winningNumber.matchBonusNumber(it));
-            return this;
-        }
-
-        public LottoFinder excludeMatchBonus() {
-            lottoStream = find(it -> !winningNumber.matchBonusNumber(it));
-            return this;
-        }
-
-        private Stream<Lotto> find(Predicate<Lotto> condition){
-            return lottoStream.filter(condition);
-        }
-
+    public List<RankedLotto> checkRanking(WinningNumber winningNumber) {
+        return lottos.stream()
+                .map(it -> new RankedLotto(LottoRanking.valueOf(it, winningNumber), it))
+                .collect(Collectors.toList());
     }
 }

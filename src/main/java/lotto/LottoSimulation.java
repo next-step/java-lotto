@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoSimulation {
@@ -12,7 +11,7 @@ public class LottoSimulation {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LottoMachine lottoMachine = new LottoMachine(Arrays.asList(2000000000, 30000000, 1500000, 50000, 5000));
+        LottoMachine lottoMachine = new LottoMachine();
 
         int purchaseAmount = inputView.readPurchaseAmount();
         List<Lotto> myLottos = lottoMachine.issue(purchaseAmount);
