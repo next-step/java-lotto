@@ -39,7 +39,9 @@ public class Lottery {
     }
 
     private double calcTotalReturnRatio() {
-        int totalPrizeAmount = winningLottos.stream().mapToInt(WinningLotto::getPrize).sum();
+        int totalPrizeAmount = winningLottos.stream()
+                .mapToInt(WinningLotto::getPrize)
+                .sum();
         int totalPurchaseAmount = lottos.getTotalPurchaseAmount();
         return (double)totalPrizeAmount / totalPurchaseAmount;
     }
