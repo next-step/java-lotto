@@ -19,8 +19,8 @@ public class WinningNumber {
     private void parse(String expression) {
         try {
             this.numbers = lottoNumberParser.parse(expression);
-        } catch (RuntimeException e) {
-            throw new InvalidWinningNumberException(expression, e.getCause() != null ? e.getCause() : e);
+        } catch (LottoNumberParseException e) {
+            throw new InvalidWinningNumberException(expression, e);
         }
     }
 
