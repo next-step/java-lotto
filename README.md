@@ -29,6 +29,15 @@
 * [X] InputView
 * [X] ResultView
 
+### Step2 1차 피드백
+* [ ] NumberPool 리팩토링
+   * AS-IS: LottoNumber 및 LottoNumber 배열 만드는 모든 곳에 관여 중
+   * TO-BE: 중복되지 않은 LottoNumber 배열 생성, 로또 번호 생성, 티켓 생성, 당첨 번호 생성으로 분리
+* [ ] 예외처리 메시징
+* [ ] LottoResult 에서 ResultView 에 결과 전달하는 방식 변경(AS-IS: toString()) [참고 자료](https://javacan.tistory.com/entry/methods-about-exporting-domain-object-to-view)
+* [ ] 객체지향체조 'getter/setter 금지' 부분 공부 [참고 자료](https://velog.io/@ybg7955/Clean-Code-10%EC%9E%A5-%ED%81%B4%EB%9E%98%EC%8A%A4)
+* [ ] Enum 도입하여 LottoResult, Rank 로 분리 [참고 자료](https://woowabros.github.io/tools/2017/07/10/java-enum-uses.html)
+
 ## 진행 방법
 * 로또 요구사항을 파악한다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
