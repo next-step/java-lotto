@@ -41,7 +41,7 @@ public class LottoNumberMatcherTest {
 
     @DisplayName("Rank에 따른 개수 가져오기 테스트")
     @Test
-    void countOfEachRanks() {
+    void countOfEachRanksTest() {
         LottoNumberMatcher.getNumberMatch(winningLottoNumbers, lottoNumbers);
         HashMap<Integer, Integer> ranks = LottoNumberMatcher.getEachPrizeMoney();
         assertThat(ranks.get(FOURTH_PRIZE)).isEqualTo(1);
@@ -52,7 +52,7 @@ public class LottoNumberMatcherTest {
 
     @DisplayName("총 당첨 금액 테스트")
     @Test
-    void getLottoRateOfReturn() {
+    void getLottoRateOfReturnTest() {
         LottoNumberMatcher.getNumberMatch(winningLottoNumbers, lottoNumbers);
         LottoNumberMatcher.getEachPrizeMoney();
         int sum = LottoNumberMatcher.sumOfTotalPrizeMoney();
@@ -63,7 +63,7 @@ public class LottoNumberMatcherTest {
     @DisplayName("수익률 계산")
     @ParameterizedTest
     @ValueSource(ints = 14000)
-    void countOfMathRanks(int money) {
+    void countOfMathRanksTest(int money) {
         LottoNumberMatcher.getNumberMatch(winningLottoNumbers, lottoNumbers);
         assertThat(LottoNumberMatcher.getLottoRateOfReturn(money)).isEqualTo("0.35");
     }

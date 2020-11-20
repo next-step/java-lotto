@@ -42,7 +42,7 @@ public class InputViewTest {
         );
     }
 
-    @DisplayName("지난 주 당첨 번호 유효성 검사 : 6개 이상")
+    @DisplayName("지난 주 당첨 번호 유효성 검사 : 6개가 아닐 경우")
     @ParameterizedTest
     @MethodSource("inputWinningNumbersSize")
     void validInputWinningNumbersSize(boolean expect, String number) {
@@ -60,7 +60,7 @@ public class InputViewTest {
     @DisplayName("지난 주 당첨 번호 유효성 검사 : 6개 이상")
     @ParameterizedTest
     @ValueSource(strings = "1,2,3,4,5,6")
-    void splitLottoNumber(String lottoNumber) {
+    void splitLottoNumberTest(String lottoNumber) {
         String[] splitLottoNumbers = InputView.splitWinningLottoNumber(lottoNumber);
         assertThat(splitLottoNumbers).isEqualTo(new String[]{"1", "2", "3", "4", "5", "6"});
     }
