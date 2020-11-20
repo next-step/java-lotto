@@ -31,13 +31,11 @@ public class LottoNumberMatcher {
     public static HashMap<Integer, Integer> getNumberMatch(String[] winningLottoNumbers, List<List<Integer>> lottoNumbers) {
         initHashMap();
 
-        for(int i=0; i<lottoNumbers.size(); i++){
-            List<Integer> eachMyLottoNumber = lottoNumbers.get(i);
-
-           long countTest = Arrays.stream(winningLottoNumbers)
-                   .map(Integer::valueOf)
-                   .filter(eachMyLottoNumber::contains)
-                   .count();
+        for (List<Integer> eachMyLottoNumber : lottoNumbers) {
+            long countTest = Arrays.stream(winningLottoNumbers)
+                    .map(Integer::valueOf)
+                    .filter(eachMyLottoNumber::contains)
+                    .count();
 
             setNumberMatch((int) countTest);
         }
