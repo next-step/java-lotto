@@ -2,6 +2,8 @@ package lotto;
 
 import static lotto.LottoGameConstant.PRICE_PER_TICKET;
 
+import lotto.lottoexception.RemainBudgetException;
+
 public class Budget {
 
   private final String WINNING_MESSAGE = "(축하합니다.)";
@@ -29,7 +31,7 @@ public class Budget {
 
   public LottoTickets purchaseLotto(int numTicket) {
     if (this.remains < PRICE_PER_TICKET) {
-      throw new IllegalArgumentException();
+      throw new RemainBudgetException();
     }
 
     this.remains -= numTicket * PRICE_PER_TICKET;

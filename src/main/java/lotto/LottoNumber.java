@@ -4,7 +4,7 @@ import static lotto.LottoGameConstant.MAXIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 
 import java.util.Objects;
-import lotto.lottoexception.IllegalLottoNumberRange;
+import lotto.lottoexception.IllegalLottoNumberRangeException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private static void validateNumber(int number) {
     if (!(MINIMUM_LOTTO_NUMBER <= number && number <= MAXIMUM_LOTTO_NUMBER)) {
-      throw new IllegalLottoNumberRange();
+      throw new IllegalLottoNumberRangeException();
     }
   }
 

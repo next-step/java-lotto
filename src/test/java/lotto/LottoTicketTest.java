@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.lottoexception.InvalidLottoFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class LottoTicketTest {
       numbers.add(LottoNumber.of(number));
     }
 
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
+    assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
         () -> LottoTicket.of(numbers)
     );
   }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.lottoexception.IllegalLottoNumberRangeException;
 
 public class NumberPool {
 
@@ -70,7 +71,7 @@ public class NumberPool {
 
   private static void validateValue(int number) {
     if (!(MINIMUM_LOTTO_NUMBER <= number && number <= MAXIMUM_LOTTO_NUMBER)) {
-      throw new IllegalArgumentException();
+      throw new IllegalLottoNumberRangeException();
     }
   }
 }

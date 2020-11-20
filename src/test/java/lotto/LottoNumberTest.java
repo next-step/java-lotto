@@ -3,7 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import lotto.lottoexception.IllegalLottoNumberRange;
+import lotto.lottoexception.IllegalLottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +22,7 @@ class LottoNumberTest {
   @ValueSource(ints = {0, 46})
   @DisplayName("허용되지 않은 범위에서의 생성 테스트")
   void outOfRangeInstance(int input) {
-    assertThatExceptionOfType(IllegalLottoNumberRange.class)
+    assertThatExceptionOfType(IllegalLottoNumberRangeException.class)
         .isThrownBy(
             () -> LottoNumber.of(input)
         );

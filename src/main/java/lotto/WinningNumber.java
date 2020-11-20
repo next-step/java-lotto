@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import lotto.lottoexception.InvalidLottoFormatException;
 
 public class WinningNumber implements Iterable<LottoNumber> {
 
@@ -19,7 +20,7 @@ public class WinningNumber implements Iterable<LottoNumber> {
   public static WinningNumber of(List<LottoNumber> lottoNumbers) {
 
     if (lottoNumbers.size() != NUMBERS_PER_WINNING_NUMBER) {
-      throw new IllegalArgumentException();
+      throw new InvalidLottoFormatException();
     }
 
     Collections.sort(lottoNumbers);
@@ -33,7 +34,7 @@ public class WinningNumber implements Iterable<LottoNumber> {
 
   private static void checkEquality(LottoNumber number1, LottoNumber number2) {
     if (number1.equals(number2)) {
-      throw new IllegalArgumentException();
+      throw new InvalidLottoFormatException();
     }
   }
 
