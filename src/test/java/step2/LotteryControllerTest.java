@@ -66,9 +66,9 @@ public class LotteryControllerTest {
     }
 
     static class TestingInputView extends InputView {
-        public Money requestMoney() {
+        public int requestMoney() {
             record.add("requestMoney");
-            return Money.of(1000);
+            return 1000;
         }
 
         protected int requestManualSelectionCount() {
@@ -76,15 +76,15 @@ public class LotteryControllerTest {
             return 0;
         }
 
-        public Set<LotteryNumber> requestManualSelectionNumbers() {
+        public Set<Set<Integer>> requestManualSelectionNumbers() {
             super.requestManualSelectionNumbers();
             record.add("requestManualSelectionNumbers");
             return Collections.emptySet();
         }
 
-        public LotteryNumber requestLastWeekLotteryNumber() {
+        public Integer[] requestLastWeekLotteryNumber() {
             record.add("requestLastWeekLotteryNumber");
-            return LotteryNumber.of(1, 2, 3, 4, 5, 6);
+            return new Integer[]{1, 2, 3, 4, 5, 6};
         }
 
         public Integer requestBonusNumber() {
@@ -94,11 +94,11 @@ public class LotteryControllerTest {
     }
 
     static class TestingResultView extends ResultView {
-        public void responseTicketCount(LotteryTickets lotteryTickets) {
+        public void responseTicketCount(TicketAndCount ticketAndCount) {
             record.add("responseTicketCount");
         }
 
-        public void responseTickets(LotteryTickets lotteryTickets) {
+        public void responseTickets(TicketAndCount ticketAndCount) {
             record.add("responseTickets");
         }
 
