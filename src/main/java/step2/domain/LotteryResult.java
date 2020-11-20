@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.Rank;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

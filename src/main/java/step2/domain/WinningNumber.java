@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.Rank;
+
 public class WinningNumber {
     private final LotteryNumber winningNumber;
     private final Integer bonusNumber;
@@ -27,9 +29,9 @@ public class WinningNumber {
 
     private Rank toRank(LotteryNumber lotteryNumber) {
         if (hasBonusNumber(lotteryNumber)) {
-            return Rank.valueWithBonusNumberFrom(lotteryNumber.getMatched(winningNumber));
+            return RankFactory.valueWithBonusNumberFrom(lotteryNumber.getMatched(winningNumber));
         }
-        return Rank.valueFrom(lotteryNumber.getMatched(winningNumber));
+        return RankFactory.valueFrom(lotteryNumber.getMatched(winningNumber));
     }
 
     private boolean hasBonusNumber(LotteryNumber lotteryNumber) {

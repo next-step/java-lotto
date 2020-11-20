@@ -7,13 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2.Rank;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.list;
-import static step2.domain.Rank.*;
+import static step2.Rank.*;
 
 
 public class WinningNumberTest {
