@@ -1,5 +1,7 @@
 package domain;
 
+import util.LottoValidator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +21,7 @@ public class LottoNumbers {
     public LottoNumbers() {}
 
     private LottoNumbers(List<Integer> numbers) {
+        LottoValidator.checkDuplicateNumber(numbers);
         this.numbers = numbers;
     }
 
