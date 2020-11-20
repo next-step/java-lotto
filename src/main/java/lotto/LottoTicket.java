@@ -39,4 +39,12 @@ public class LottoTicket {
   public String toString() {
     return this.lottoNumbers.toString();
   }
+
+  public int getNumHit(WinningNumber winningNumber) {
+    int result = 0;
+    for (LottoNumber lottoNumber : winningNumber) {
+      result += this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    }
+    return result;
+  }
 }
