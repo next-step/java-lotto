@@ -9,7 +9,9 @@ public class LottoNumberParser {
 
     public List<Integer> parse(String expression) {
         if (StringUtils.isNullOrBlank(expression)) throw new LottoNumberParseException("로또번호에 빈값이 입력되어습니다");
-        List<String> parts = Arrays.asList(expression.split(DELIMITER));
+        List<String> parts = Arrays.asList(expression.split(DELIMITER)).stream()
+                .map(it -> it.trim())
+                .collect(Collectors.toList());
 
         shouldNumber(parts);
         shouldRangeOfLottoNumber(parts);

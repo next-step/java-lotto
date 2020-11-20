@@ -33,7 +33,7 @@ public class LottoMachineTest {
     @Test
     void rateOfReturn() {
         Lotto secondPrizeLotto = myLotto(1, 2, 3, 4, 5, 10);
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(secondPrizeLotto), winningNumber);
 
@@ -47,7 +47,7 @@ public class LottoMachineTest {
         Lotto firstPrizeLotto = myLotto(1, 2, 3, 4, 5, 6);
         Lotto fouthPrizeLotto = myLotto(1, 2, 3, 10, 20, 30);
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(firstPrizeLotto, fouthPrizeLotto), winningNumber);
 
@@ -58,7 +58,7 @@ public class LottoMachineTest {
     @Test
     void rateOfReturn3() {
         Lotto noPrizeLotto = myLotto(30, 31, 32, 33, 34, 35);
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(noPrizeLotto), winningNumber);
 
@@ -71,7 +71,7 @@ public class LottoMachineTest {
         Lotto fourthPrizeLotto = myLotto(1, 2, 3, 10, 20, 30);
         Lotto noPrizeLotto = myLotto(11, 12, 13, 10, 20, 30);
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(fourthPrizeLotto, noPrizeLotto), winningNumber);
 

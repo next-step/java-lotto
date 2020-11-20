@@ -12,7 +12,7 @@ public class Lotto {
         this.number = number;
     }
 
-    public int getMatchedNumberCount(NumberMatcher numberMatcher) {
+    public long getMatchedNumberCount(NumberMatcher numberMatcher) {
         return this.number.getMatchedNumberCount(numberMatcher);
     }
 

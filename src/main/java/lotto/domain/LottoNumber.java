@@ -12,8 +12,8 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public int getMatchedNumberCount(NumberMatcher numberMatcher) {
-        return (int) numbers.stream().filter(it -> numberMatcher.match(it)).count();
+    public long getMatchedNumberCount(NumberMatcher numberMatcher) {
+        return numbers.stream().filter(it -> numberMatcher.match(it)).count();
     }
 
     public void print(PrintWriter writer) {
