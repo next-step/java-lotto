@@ -20,12 +20,12 @@ class LottoTest {
 
     @BeforeEach
     public void init() {
-        this.lottoNumbers = Arrays.asList(new LottoNumber(1)
-                , new LottoNumber(2)
-                , new LottoNumber(3)
-                , new LottoNumber(4)
-                , new LottoNumber(5)
-                , new LottoNumber(6));
+        this.lottoNumbers = Arrays.asList(LottoNumber.of(1)
+                , LottoNumber.of(2)
+                , LottoNumber.of(3)
+                , LottoNumber.of(4)
+                , LottoNumber.of(5)
+                , LottoNumber.of(6));
     }
 
     @Test
@@ -34,12 +34,12 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // Then
-        assertThat(lotto.contains(new LottoNumber(1))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(2))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(3))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(4))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(5))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(6))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(1))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(2))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(3))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(4))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(5))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(6))).isTrue();
     }
 
     @Test
@@ -48,7 +48,7 @@ class LottoTest {
                 .isThrownBy(() -> {
                     // Given
                     List<LottoNumber> lottoNumbers = new ArrayList<>();
-                    lottoNumbers.add(new LottoNumber(1));
+                    lottoNumbers.add(LottoNumber.of(1));
 
                     // When
                     Lotto lotto = new Lotto(lottoNumbers);

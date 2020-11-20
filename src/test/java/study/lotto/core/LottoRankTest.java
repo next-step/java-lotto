@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoRankTest {
 
-    private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
+    private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
 
     @Test
     void test_of_first() {
@@ -74,7 +74,7 @@ class LottoRankTest {
     private List<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
         List<LottoNumber> toLottoNumbers = new ArrayList<>();
         for (int value : lottoNumbers) {
-            toLottoNumbers.add(new LottoNumber(value));
+            toLottoNumbers.add(LottoNumber.of(value));
         }
         return toLottoNumbers;
     }
