@@ -18,17 +18,17 @@ public class StringAddCalculator {
         return Objects.isNull(text) || text.trim().isEmpty();
     }
 
-    private static int convertStringToInteger(String test){
+    private static int convertStringToInteger(String test) {
         int number = Integer.parseInt(test);
-        if(number<ZERO){
+        if (number < ZERO) {
             throw new RuntimeException("음수값은 입력이 불가능 합니다.");
         }
         return number;
     }
 
-    private static int addSum(String[] stringNumbers){
+    private static int addSum(String[] stringNumbers) {
         return Arrays.stream(stringNumbers)
                 .mapToInt(StringAddCalculator::convertStringToInteger)
-                .reduce(INIT_NUMBER,Integer::sum);
+                .reduce(INIT_NUMBER, Integer::sum);
     }
 }
