@@ -20,7 +20,7 @@ public class MyLottoNumberTest {
 
     @DisplayName("내 로또 번호 갯수 유효성")
     @Test
-    void validSizeOfMyNumber() {
+    void validSizeOfMyNumberTest() {
         assertThat(MyLottoNumber.setShuffleNumber(myNumbers)).size().isEqualTo(6);
     }
 }
