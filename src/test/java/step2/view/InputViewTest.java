@@ -53,6 +53,7 @@ public class InputViewTest {
     private static Stream<Arguments> inputWinningNumbersSize() {
         return Stream.of(
                 Arguments.of(true, "1,2,3,4,5,6,7"),
+                Arguments.of(true, "1,2,3,4,5"),
                 Arguments.of(false, "40,41,42,43,44,45")
         );
     }

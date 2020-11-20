@@ -26,11 +26,4 @@ public class MyLottoNumberTest {
     void validSizeOfMyNumber() {
         assertThat(MyLottoNumber.setShuffleNumber(myNumbers)).size().isEqualTo(6);
     }
-
-    @DisplayName("로또 중복 값 테스트")
-    @Test
-    void validDuplicatedNumber() {
-        Throwable throwable = catchThrowable(() -> MyLottoNumber.setShuffleNumber(duplicatedNumber));
-        assertThat(throwable).isInstanceOf(ArrayIndexOutOfBoundsException.class);
-    }
 }
