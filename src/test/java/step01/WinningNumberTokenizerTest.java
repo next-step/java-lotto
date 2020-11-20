@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class TokenizerTest {
+public class WinningNumberTokenizerTest {
 
     private static Stream<Arguments> provideDefaultDelimiterResult() {
         return Stream.of(
@@ -26,14 +26,14 @@ public class TokenizerTest {
 
     private static Stream<Arguments> provideMatcherResult() {
         return Stream.of(
-                Arguments.of("//,\n1,2,3", "//(.)\n(.*)", new String[]{"1", "2", "3"}),
-                Arguments.of("//;\n1;2;3", "//(.)\n(.*)", new String[]{"1", "2", "3"})
+                Arguments.of("//,\n1,2,3", new String[]{"1", "2", "3"}),
+                Arguments.of("//;\n1;2;3", new String[]{"1", "2", "3"})
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideMatcherResult")
     public void test_execute_byMatcher(String text, String pattern, String[] expect) {
-        assertThat(Tokenizer.executeByPattern(text, pattern)).isEqualTo(expect);
+        assertThat(Tokenizer.execute(text)).isEqualTo(expect);
     }
 }
