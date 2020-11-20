@@ -2,6 +2,9 @@ package step1.addCalculator.domain;
 
 import step1.addCalculator.util.CommonValueCheck;
 
+import step1.addCalculator.util.ErrorMessage;
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,14 +13,24 @@ import java.util.regex.Pattern;
 
 
 
+
 /**
  * inputText의 값을 컨트롤하는 객체
  */
 public class InputTextProcessing {
 
+
     private static final Pattern CUSTOM_STRING_LIST = Pattern.compile("//(.)\n(.*)");
     private static String inputText;
     private static String splitValue = ",|:";
+
+
+    private static final String CUSTOM_STRING_LIST = "//(.)\n(.*)";
+
+    private static String inputText;
+    private static String splitValue = ",|:";
+
+
 
     public InputTextProcessing(String inputText) {
         this.inputText = inputText;
@@ -28,6 +41,7 @@ public class InputTextProcessing {
     }
 
     public boolean isNullOrEmptyCheck() {
+
         if (inputText == null || "".isEmpty()) {
             return false;
         }
@@ -36,6 +50,7 @@ public class InputTextProcessing {
     }
 
     private List<Integer> changeStrToIntList() {
+
         Matcher m = CUSTOM_STRING_LIST.matcher(inputText);
 
         if (m.find()) {
@@ -44,6 +59,23 @@ public class InputTextProcessing {
         }
 
         return changeStrToInt(makeStringArr(inputText));
+
+        List<Integer> returnList = new ArrayList<>();
+        List<String> beforeList = new ArrayList<>();
+
+        Matcher m = Pattern.compile(CUSTOM_STRING_LIST).matcher(inputText);
+
+        if (m.find()) {
+            splitValue = splitValue + "|" + m.group(1);
+            beforeList = makeStringArr(m.group(2));
+
+            return changeStrToint(beforeList);
+        }
+
+        beforeList = makeStringArr(inputText);
+
+        return changeStrToint(beforeList);
+
     }
 
     private List<String> makeStringArr(String paramValue) {
@@ -51,7 +83,8 @@ public class InputTextProcessing {
         return Arrays.asList(returnArr);
     }
 
-    private List<Integer> changeStrToInt(List<String> paramList) {
+    private List<Integer> changeStrToint(List<String> paramList) {
+
         List<Integer> returnList = new ArrayList<>();
 
         for (String str : paramList) {
@@ -60,4 +93,8 @@ public class InputTextProcessing {
 
         return returnList;
     }
+
+
+
+
 }

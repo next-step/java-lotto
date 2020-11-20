@@ -15,6 +15,7 @@ public class StringAddCalculator {
     }
 
     private static int runAddition(List<Integer> paramList){
+
         int returnValue = 0;
 
         for(Integer intValue : paramList){
