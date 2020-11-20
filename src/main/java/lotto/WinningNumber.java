@@ -3,9 +3,12 @@ package lotto;
 import static lotto.LottoGameConstant.NUMBERS_PER_WINNING_NUMBER;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-public class WinningNumber {
+public class WinningNumber implements Iterable<LottoNumber> {
 
   private final List<LottoNumber> numbers;
 
@@ -32,5 +35,20 @@ public class WinningNumber {
     if (number1.equals(number2)) {
       throw new IllegalArgumentException();
     }
+  }
+
+  @Override
+  public Iterator<LottoNumber> iterator() {
+    return this.numbers.iterator();
+  }
+
+  @Override
+  public void forEach(Consumer<? super LottoNumber> action) {
+    this.numbers.forEach(action);
+  }
+
+  @Override
+  public Spliterator<LottoNumber> spliterator() {
+    return this.numbers.spliterator();
   }
 }
