@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.exception.ErrorMessage;
 import lotto.domain.exception.NotValidLottoPriceException;
 
 public class LottoPrice {
@@ -14,7 +15,8 @@ public class LottoPrice {
 
     private void validatePurchasePrice(int purchasePrice) {
         if (purchasePrice < LOTTO_PRICE) {
-            throw new NotValidLottoPriceException(LOTTO_PRICE - purchasePrice);
+            int insufficientPrice = LOTTO_PRICE - purchasePrice;
+            throw new NotValidLottoPriceException(insufficientPrice + ErrorMessage.NOT_VALID_PRICE.getMessage());
         }
     }
 
