@@ -21,11 +21,19 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static LottoNumber of(int value) {
-        return new LottoNumber(value);
+        try {
+            return new LottoNumber(value);
+        } catch (Exception e) {
+            throw new LottoNumberFormatException(value);
+        }
     }
 
     public static LottoNumber of(String value) {
-        return new LottoNumber(value);
+        try {
+            return new LottoNumber(value);
+        } catch (Exception e) {
+            throw new LottoNumberFormatException(value);
+        }
     }
 
     @Override
@@ -50,4 +58,5 @@ public class LottoNumber implements Comparable<LottoNumber>{
     public String toString() {
         return String.valueOf(value);
     }
+
 }
