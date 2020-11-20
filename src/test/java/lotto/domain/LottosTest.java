@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,7 +50,6 @@ public class LottosTest {
     }
 
 
-
     @DisplayName("당첨번호 확인 후 Reward 인스턴스 생성 여부 테스트")
     @Test
     public void matchPrizeNumberTest() {
@@ -68,7 +64,7 @@ public class LottosTest {
         });
 
         //When
-        Reward reward = lottos.matchPrizeNumber(Arrays.asList(12, 35, 33, 22));
+        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LinkedHashSet<>(Arrays.asList(1, 3, 5, 7, 8, 9))));
 
         //Then
         assertThat(reward).isNotNull();

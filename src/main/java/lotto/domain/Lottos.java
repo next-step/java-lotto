@@ -11,9 +11,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Reward matchPrizeNumber(List<Integer> prizeNumber) {
+    public Reward matchPrizeNumber(PrizeLotto prizeLotto) {
         List<PrizeInformation> prizeInformations = new ArrayList<>();
-        lottos.forEach(lotto ->  prizeInformations.add(lotto.matchPrizeNumber(prizeNumber)));
+        lottos.forEach(lotto ->  prizeInformations.add(lotto.matchPrizeNumber(prizeLotto)));
 
         return new Reward(prizeInformations);
     }

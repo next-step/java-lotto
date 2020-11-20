@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -35,8 +36,8 @@ public class LottoTest {
 
     @DisplayName("로또 인스턴스 equals 동일 성공 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1:1:1","6:6:6"}, delimiter = ':')
-    public void lottoInstanceEqualsSuccessTest(Integer sequence, Integer sequence2, Integer sequence3){
+    @CsvSource(value = {"1:1:1", "6:6:6"}, delimiter = ':')
+    public void lottoInstanceEqualsSuccessTest(Integer sequence, Integer sequence2, Integer sequence3) {
         //Given & When
         Lotto lotto = new Lotto(sequence, new LottoAutoMachine());
         Lotto lotto2 = new Lotto(sequence2, new LottoAutoMachine());
@@ -48,8 +49,8 @@ public class LottoTest {
 
     @DisplayName("로또 인스턴스 equals 실패 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1:2:3","6:3:5"}, delimiter = ':')
-    public void lottoInstanceEqualsFailTest(Integer sequence, Integer sequence2, Integer sequence3){
+    @CsvSource(value = {"1:2:3", "6:3:5"}, delimiter = ':')
+    public void lottoInstanceEqualsFailTest(Integer sequence, Integer sequence2, Integer sequence3) {
         //Given & When
         Lotto lotto = new Lotto(sequence, new LottoAutoMachine());
         Lotto lotto2 = new Lotto(sequence2, new LottoAutoMachine());
@@ -62,7 +63,7 @@ public class LottoTest {
     @DisplayName("matchPrizeNumber 메서드 테스트")
     @ParameterizedTest
     @MethodSource("createLottoNumber")
-    public void matchPrizeNumberTest(List<Integer> expected){
+    public void matchPrizeNumberTest(List<Integer> expected) {
         //Given
         Lotto lotto = new Lotto(1, new LottoMachine() {
             @Override
@@ -72,7 +73,7 @@ public class LottoTest {
         });
 
         //When
-        PrizeInformation prizeInformation = lotto.matchPrizeNumber(expected);
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(new LinkedHashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))));
 
         //That
         assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(prizeInformation.getMatchNumberCount()));
@@ -87,7 +88,4 @@ public class LottoTest {
                 Arguments.of(Arrays.asList(2, 3, 5, 6, 8, 12))
         );
     }
-
-
-
 }

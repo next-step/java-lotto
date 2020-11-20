@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -14,9 +13,9 @@ public class Lotto {
         this.lottoPickNumber = lottoMachine.createLottoNumber();
     }
 
-    public PrizeInformation matchPrizeNumber(List<Integer> prizeNumber) {
-        int prizeCount =(int) IntStream.range(0, prizeNumber.size())
-                .filter(i -> lottoPickNumber.contains(prizeNumber.get(i)))
+    public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
+        int prizeCount = (int) lottoPickNumber.stream()
+                .filter(lottoNumber -> prizeLotto.findByIndexNumber(lottoNumber))
                 .count();
        return PrizeInformation.findByPrizePrice(prizeCount);
     }
