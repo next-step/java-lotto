@@ -19,8 +19,17 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public PrizeWinningResult checkPrizeWinning(Lottos lottos, WinningNumber winningNumber) {
-        return PrizeWinningResult.builder()
+    public PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, List<Lotto> lottos) {
+        return checkPrizeWinning(winningNumber, new Lottos(lottos));
+    }
+
+    public PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, Lotto... lottos) {
+        return checkPrizeWinning(winningNumber, new Lottos(lottos));
+    }
+
+    public PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, Lottos lottos) {
+        return PrizeWinningResult
+                .builder()
                 .paidMoney(lottos.getPaidMoney())
                 .rankedLottos(lottos.checkRanking(winningNumber))
                 .build();

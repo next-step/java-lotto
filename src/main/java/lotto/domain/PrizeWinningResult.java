@@ -47,6 +47,7 @@ public class PrizeWinningResult {
         }
 
         public Builder paidMoney(int paidMoney) {
+            if( paidMoney <= 0 ) throw new PrizeWinningResultBulderException("로또 구입가격은 0 보다 커야 합니다.");
             this.paidMoney = paidMoney;
             return this;
         }

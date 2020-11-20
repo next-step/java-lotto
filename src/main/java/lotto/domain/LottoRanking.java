@@ -33,7 +33,7 @@ public enum LottoRanking {
     }
 
     public static LottoRanking valueOf(Lotto lotto, WinningNumber winningNumber){
-        int matchedCount = winningNumber.getMatchedWinningNumberCount(lotto);
+        long matchedCount = winningNumber.getMatchedWinningNumberCount(lotto);
         boolean matchedBonus = winningNumber.matchBonusNumber(lotto);
 
         return Arrays.stream(LottoRanking.values())

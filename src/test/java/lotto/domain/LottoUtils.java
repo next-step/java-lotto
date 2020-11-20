@@ -8,6 +8,7 @@ public class LottoUtils {
 
     public static Lotto lotto(String numbers) {
         List<Integer> inumbers = Arrays.asList(numbers.split(",")).stream()
+                .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
         return new Lotto(new LottoNumber(inumbers));

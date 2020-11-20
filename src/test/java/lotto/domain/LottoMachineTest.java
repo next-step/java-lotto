@@ -30,9 +30,9 @@ public class LottoMachineTest {
     @Test
     void rateOfReturn() {
         Lotto secondPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 10");
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(Lottos.as(secondPrizeLotto), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, secondPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(1500);
     }
@@ -44,20 +44,20 @@ public class LottoMachineTest {
         Lotto firstPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 6");
         Lotto fouthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6",7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(Lottos.as(firstPrizeLotto, fouthPrizeLotto), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, firstPrizeLotto, fouthPrizeLotto);
 
-        assertThat(result.getRateOfReturn()).isEqualTo(1000001.0);
+        assertThat(result.getRateOfReturn()).isEqualTo(1000002.5);
     }
 
     @DisplayName("당첨이 되지 않으면 수익률은 0 이다")
     @Test
     void rateOfReturn3() {
         Lotto noPrizeLotto = LottoUtils.lotto("30, 31, 32, 33, 34, 35");
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(Lottos.as(noPrizeLotto), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, noPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(0);
     }
@@ -68,11 +68,11 @@ public class LottoMachineTest {
         Lotto fourthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
         Lotto noPrizeLotto = LottoUtils.lotto("11, 12, 13, 10, 20, 30");
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6),7);
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6",7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(Lottos.as(fourthPrizeLotto, noPrizeLotto), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, fourthPrizeLotto, noPrizeLotto);
 
-        assertThat(result.getRateOfReturn()).isEqualTo(1);
+        assertThat(result.getRateOfReturn()).isEqualTo(2.5);
     }
 
     @DisplayName("2등 당첨된 로또는 3등에서 제외된다")
@@ -82,9 +82,9 @@ public class LottoMachineTest {
         Lotto thirdPrizeLotto = LottoUtils.lotto("1,2,3,4,5,8");
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6), 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(Lottos.as(secondPrizeLotto, thirdPrizeLotto), winningNumber);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, secondPrizeLotto, thirdPrizeLotto);
 
-        assertThat(result.getSecondPrizeCount()).isEqualTo(1);
-        assertThat(result.getThirdPrizeCount()).isEqualTo(1);
+        assertThat(result.getRankedLottoCount(LottoRanking.SECOND)).isEqualTo(1);
+        assertThat(result.getRankedLottoCount(LottoRanking.THIRD)).isEqualTo(1);
     }
 }
