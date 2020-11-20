@@ -29,4 +29,13 @@ public class LottoTickets {
 
     return new LottoTickets(tickets);
   }
+
+  public LottoResult settle(WinningNumber winningNumber) {
+    LottoResult lottoResult = new LottoResult();
+    for (LottoTicket ticket : this.tickets) {
+      lottoResult.recordHit(ticket.getNumHit(winningNumber));
+    }
+
+    return lottoResult;
+  }
 }
