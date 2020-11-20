@@ -44,9 +44,13 @@ public class NumberPool {
   }
 
   public static LottoTickets purchaseTickets(int numTicket) {
+    return purchaseTickets(numTicket, NumberPool::publishTicket);
+  }
+
+  public static LottoTickets purchaseTickets(int numTicket, PublishStrategy publishStrategy) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < numTicket; i++) {
-      tickets.add(NumberPool.publishTicket());
+      tickets.add(publishTicket(publishStrategy));
     }
     return LottoTickets.of(tickets);
   }
