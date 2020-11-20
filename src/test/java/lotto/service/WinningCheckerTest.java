@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.service;
 
-import lotto.service.WinningChecker;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
