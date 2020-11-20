@@ -13,19 +13,13 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
 
-        this.lottoNumbers = lottoNumbers;
-        sortLottoNumbers();
+        this.lottoNumbers = Optional.ofNullable(lottoNumbers)
+                .orElse(new ArrayList<>());
+        throwIfNumberCountNotMatch();
 
         this.lottoStatus = LottoStatus.BEFORE_LOTTERY;
 
-        throwIfNumbersNull();
-        throwIfNumberCountNotMatch();
-    }
-
-    private void throwIfNumbersNull() {
-        if (Objects.isNull(lottoNumbers)) {
-            throw new IllegalArgumentException("로또 번호를 입력해주세요.");
-        }
+        sortLottoNumbers();
     }
 
     private void throwIfNumberCountNotMatch() {
@@ -49,9 +43,16 @@ public class Lotto {
         }
 
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
-        return new WinningLotto(
-                winLottoNumbers.matchWithWinLottoNumbers(this)
-                , winLottoNumbers.matchWithBonusLottoNumber(this));
+
+        List<LottoNumber> lottoNumbers = Optional.ofNullable(winLottoNumbers)
+                .map(w -> w.matchWithWinLottoNumbers(this))
+                .orElse(new ArrayList<>());
+
+        boolean matchWithBonusLottoNumber = Optional.ofNullable(winLottoNumbers)
+                .map(w -> w.matchWithBonusLottoNumber(this))
+                .orElse(false);
+
+        return new WinningLotto(lottoNumbers, matchWithBonusLottoNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {
