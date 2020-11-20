@@ -1,12 +1,10 @@
 package step2.domain;
 
 import step2.constant.LottoWinningPrizes;
-import step2.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static step2.constant.LottoWinningPrizes.values;
 
@@ -28,7 +26,6 @@ public class LottoWinning {
     }
 
     public static LottoWinning of(String lastLottoWinningNumbers, List<Lotto> lottos) {
-        lottoNumberSizeValidate(lastLottoWinningNumbers);
         return new LottoWinning(lastLottoWinningNumbers, lottos);
     }
 
@@ -77,22 +74,5 @@ public class LottoWinning {
     public double getTotalYield(int lottoAmount) {
         double totalYield = (double) LottoWinningPrizes.getWinningAmount() / lottoAmount;
         return Double.parseDouble(String.format("%.2f", totalYield));
-    }
-
-    public static void lottoNumberSizeValidate(String lastWeekNumber) {
-        if (StringUtil.isEmpty(lastWeekNumber)) {
-            throw new IllegalArgumentException("지난 로또 번호를 입력해 주세요.");
-        }
-
-        String[] lottoNumbers = lastWeekNumber.split(",");
-        if (lottoNumbers.length != 6) {
-            throw new IllegalArgumentException("로또 번호는 6보다 작거나 클 수 없습니다.");
-        }
-
-        IntStream.range(0, lottoNumbers.length)
-                .filter(i -> Integer.parseInt(lottoNumbers[i]) > 45)
-                .forEach(i -> {
-                    throw new IllegalArgumentException("로또 번호는 1 ~ 45사이의 숫자여야 합니다.");
-                });
     }
 }
