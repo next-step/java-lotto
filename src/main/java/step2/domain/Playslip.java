@@ -10,7 +10,6 @@ public class Playslip {
 
     private final NumberSelector numberSelector = new NumberSelector();
     private ManualSelection manualSelection = new ManualSelection();
-    private int selectNumberCount;
 
     public List<LotteryNumber> selectNumbers(int numberSet) {
         if (numberSet < 1) {
@@ -32,10 +31,7 @@ public class Playslip {
     }
 
     private List<LotteryNumber> getNaturalSelectionNumbers(int numberSet) {
-        if (selectNumberCount == 0) {
-            selectNumberCount = numberSet;
-        }
-        int naturalSelectionCount = selectNumberCount - getManualSelectionCount();
+        int naturalSelectionCount = numberSet - getManualSelectionCount();
 
         List<LotteryNumber> result = new ArrayList<>();
         for (int i = 0; i < naturalSelectionCount; i++) {
