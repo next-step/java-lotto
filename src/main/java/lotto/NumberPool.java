@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.lottoexception.IllegalLottoNumberRangeException;
 
 public class NumberPool {
 
@@ -62,16 +61,9 @@ public class NumberPool {
 
     for (String tokenizedInput : tokenizedInputs) {
       int castedInput = Integer.parseInt(tokenizedInput);
-      validateValue(castedInput);
       numbers.add(integerLottoNumberMapper.get(castedInput));
     }
 
     return WinningNumber.of(numbers);
-  }
-
-  private static void validateValue(int number) {
-    if (!(MINIMUM_LOTTO_NUMBER <= number && number <= MAXIMUM_LOTTO_NUMBER)) {
-      throw new IllegalLottoNumberRangeException();
-    }
   }
 }
