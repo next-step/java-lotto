@@ -9,9 +9,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class InputView {
+
+    private final Scanner scanner = new Scanner(System.in);
+
     public Money requestMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         return Money.of(scanner.nextInt());
     }
 
@@ -19,7 +21,6 @@ public class InputView {
         int manualSelectionCount = requestManualSelectionCount();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         Set<LotteryNumber> lotteryNumbers = new HashSet<>();
         for (int i = 0; i < manualSelectionCount; i++) {
             String line = scanner.nextLine();
@@ -31,13 +32,11 @@ public class InputView {
 
     protected int requestManualSelectionCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
     public LotteryNumber requestLastWeekLotteryNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         Integer[] lastWeekLotteryNumber = splitAndConvertToIntArray(line);
         return LotteryNumber.of(lastWeekLotteryNumber);
@@ -45,7 +44,6 @@ public class InputView {
 
     public Integer requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
