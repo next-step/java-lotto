@@ -19,13 +19,6 @@ public class PurchaseAction {
   private final List<String[]> manualLottoNumbers;
   private final int autoLottoGameCount;
 
-  //for test
-  public PurchaseAction(int purchasePrice, List<String[]> manualLottoNumbers, int autoLottoGameCount) {
-    this.purchasePrice = purchasePrice;
-    this.manualLottoNumbers = manualLottoNumbers;
-    this.autoLottoGameCount = autoLottoGameCount;
-  }
-
   public PurchaseAction(int purchasePrice, List<String[]> manualLottoNumbers) {
     this.purchasePrice = purchasePrice;
     this.manualLottoNumbers = manualLottoNumbers;
