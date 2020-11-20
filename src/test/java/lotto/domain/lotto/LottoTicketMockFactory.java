@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,10 @@ public class LottoTicketMockFactory {
         );
     }
 
+    public static LottoTicketGroup createLottoTicketGroup(final List<Integer> lottoNumbers) {
+        return LottoTicketGroup.of(Collections.singletonList(createLottoTicket(lottoNumbers)));
+    }
+    
     public static LottoTicket createLottoHasNumberOneToSix() {
         return LottoTicket.of(createLottoNumberListOneToSix());
     }

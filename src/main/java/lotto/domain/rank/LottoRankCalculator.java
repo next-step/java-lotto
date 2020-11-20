@@ -3,16 +3,16 @@ package lotto.domain.rank;
 import lotto.domain.Money;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.LottoTicketGroup;
 import lotto.dto.WinLotteryResult;
 
 import java.util.Arrays;
 
 public class LottoRankCalculator {
-    public WinLotteryResult calculateWinLotteryResult(final LottoTickets lottoTickets, final LottoTicket winningLotto, final LottoNumber bonusNumber) {
+    public WinLotteryResult calculateWinLotteryResult(final LottoTicketGroup lottoTicketGroup, final LottoTicket winningLotto, final LottoNumber bonusNumber) {
         final RankCounts rankCounts = RankCounts.of();
         
-        for (final LottoTicket lottoTicket : lottoTickets.get()) {
+        for (final LottoTicket lottoTicket : lottoTicketGroup.get()) {
             final int hitCount = lottoTicket.countHitNumber(winningLotto);
             final boolean matchBonus = lottoTicket.isMatchBonus(bonusNumber);
             rankCounts.increaseCount(hitCount, matchBonus);

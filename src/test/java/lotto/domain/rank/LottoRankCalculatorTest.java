@@ -2,7 +2,7 @@ package lotto.domain.rank;
 
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.LottoTicketGroup;
 import lotto.dto.WinLotteryResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -26,12 +26,12 @@ class LottoRankCalculatorTest {
         void return_first_result_when_hit_all_lotto_number() {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
-            final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
             final LottoTicket winningLotto = createLottoHasNumberOneToSix();
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, lottoNumber);
 
             // then
             assertAll(
@@ -49,12 +49,12 @@ class LottoRankCalculatorTest {
         void return_second_result_when_hit_five_lotto_number_and_bonus_number() {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
-            final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
             final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber bonusNumber = LottoNumber.of(6);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, bonusNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, bonusNumber);
 
             // then
             assertAll(
@@ -72,12 +72,12 @@ class LottoRankCalculatorTest {
         void return_third_result_when_hit_five_lotto_number() {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
-            final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
             final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, lottoNumber);
 
             // then
             assertAll(
@@ -95,12 +95,12 @@ class LottoRankCalculatorTest {
         void return_fifth_result_when_hit_three_lotto_number() {
             // given
             final LottoRankCalculator calculator = new LottoRankCalculator();
-            final LottoTickets lottoTickets = LottoTickets.of(Collections.singletonList(createLottoHasNumberOneToSix()));
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
             final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 8, 9, 10));
             final LottoNumber lottoNumber = LottoNumber.MAX;
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTickets, winningLotto, lottoNumber);
+            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, lottoNumber);
 
             // then
             assertAll(
