@@ -5,11 +5,11 @@ import lotto.domain.Numbers;
 public class NumberSelectionStrategyImpl implements NumberSelectionStrategy {
 
     @Override
-    public Numbers collectNumbers() {
+    public Numbers collectNumbers(int size) {
         return Numbers.builder()
                 .range(Numbers.START_NUM, Numbers.END_NUM)
                 .shuffle()
-                .limit(Numbers.SIZE)
+                .limit(size)
                 .sort()
                 .build();
     }

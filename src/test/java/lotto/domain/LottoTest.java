@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoTest {
@@ -30,9 +31,19 @@ class LottoTest {
     void createLotto() {
         Numbers numbers = Numbers.builder().range(1, 7).build();
 
-        lotto = new Lotto(() -> numbers);
+        lotto = new Lotto(size -> numbers);
 
         assertThat(lotto.getNumbers()).isEqualTo(numbers);
+    }
+
+    @Test
+    @DisplayName("로또 생성 시, 숫자가 6개 아니면 에러")
+    void createLotto_sizeIsNot6() {
+        Numbers numbers = Numbers.builder().range(1, 8).build();
+        assertThatThrownBy(() ->
+                new Lotto(size -> numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Numbers size wrong");
     }
 
     @ParameterizedTest
@@ -40,7 +51,7 @@ class LottoTest {
     @MethodSource
     void checkWinningRank(Numbers numbers, int expectedSameNumberCount) {
         Numbers winningNumbers = Numbers.builder().range(1, 7).build();
-        Lotto lotto = new Lotto(() -> numbers);
+        Lotto lotto = new Lotto(size -> numbers);
 
         int sameNumberCount = lotto.countSameNumber(winningNumbers);
 
