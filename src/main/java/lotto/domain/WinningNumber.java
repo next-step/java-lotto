@@ -8,10 +8,6 @@ public class WinningNumber {
 
     private LottoNumberParser lottoNumberParser = new LottoNumberParser();
 
-    public WinningNumber(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
     public WinningNumber(String expression) {
         parse(expression);
     }
@@ -24,7 +20,7 @@ public class WinningNumber {
         }
     }
 
-    public int getMatchedNumberCount(Lotto lotto) {
+    public long getMatchedNumberCount(Lotto lotto) {
         return lotto.getMatchedNumberCount(new WinningNumberMatcher(numbers));
     }
 }
