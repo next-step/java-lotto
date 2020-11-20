@@ -1,8 +1,6 @@
 package domain;
 
 public class LottoResult {
-    private int totalPrizeValue = 0;
-    private double profitRates = 0;
     private LottoPrizeCount lottoPrizeCount;
 
     public LottoResult() {
@@ -11,21 +9,22 @@ public class LottoResult {
 
     public void addPrizeResult(LottoPrize lottoPrize) {
         lottoPrizeCount.incrementLottoPrize(lottoPrize);
-        totalPrizeValue += lottoPrize.getPrizeValue();
-    }
-
-    public Double getProfitRates() {
-        return profitRates;
     }
 
     public LottoPrizeCount getLottoPrizeCount() {
         return lottoPrizeCount;
     }
 
-    public void calculateProfitRates(int numberOfLottos) throws Exception {
-        Money lottoPrice = Money.of(1_000L);
-        Money totalPrizeMoney = Money.of(totalPrizeValue);
+    public double calculateProfitRates() throws Exception {
+        Money lottoPrice = Money.of(Lotto.LOTTO_PRICE);
 
-        profitRates = totalPrizeMoney.dividedBy(lottoPrice.multiply((long) numberOfLottos));
+        int totalPrizeMoney = lottoPrizeCount.entryStream()
+                                .mapToInt(e -> (int) (e.getKey().getPrizeValue() * e.getValue()))
+                                .sum();
+        int numberOfLottos = lottoPrizeCount.entryStream()
+                                .mapToInt(e -> (int) e.getValue())
+                                .sum();
+
+        return Money.of(totalPrizeMoney).dividedBy(lottoPrice.multiply(numberOfLottos));
     }
 }

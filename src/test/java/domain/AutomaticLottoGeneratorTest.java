@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AutomaticLottoGeneratorTest {
 
     @Test
-    void generateTest() {
+    void generateTest() throws Exception {
         assertThat(AutomaticLottoGenerator.generate(5).size()).isEqualTo(5);
     }
 }

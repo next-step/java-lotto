@@ -2,21 +2,21 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import static domain.LottoPrize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     private LottoResult lottoResult = new LottoResult();
 
-    public LottoResultTest() throws Exception {
-    }
+    public LottoResultTest() {}
 
     @Test
     void checkWhetherToWinTest_4등() {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
-        Long before = lottoPrizeCount.getFourthPrizeCount();
-        lottoResult.addPrizeResult(LottoPrize.FOURTH_PRIZE);
-        Long after = lottoPrizeCount.getFourthPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(FOURTH_PRIZE);
+        lottoResult.addPrizeResult(FOURTH_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(FOURTH_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
@@ -24,9 +24,9 @@ public class LottoResultTest {
     void checkWhetherToWinTest_3등() {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
-        Long before = lottoPrizeCount.getThirdPrizeCount();
-        lottoResult.addPrizeResult(LottoPrize.THIRD_PRIZE);
-        Long after = lottoPrizeCount.getThirdPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(THIRD_PRIZE);
+        lottoResult.addPrizeResult(THIRD_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(THIRD_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
@@ -34,9 +34,9 @@ public class LottoResultTest {
     void checkWhetherToWinTest_2등() {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
-        Long before = lottoPrizeCount.getSecondPrizeCount();
-        lottoResult.addPrizeResult(LottoPrize.SECOND_PRIZE);
-        Long after = lottoPrizeCount.getSecondPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(SECOND_PRIZE);
+        lottoResult.addPrizeResult(SECOND_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(SECOND_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
@@ -44,16 +44,16 @@ public class LottoResultTest {
     void checkWhetherToWinTest_1등() {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
-        Long before = lottoPrizeCount.getFirstPrizeCount();
-        lottoResult.addPrizeResult(LottoPrize.FIRST_PRIZE);
-        Long after = lottoPrizeCount.getFirstPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(FIRST_PRIZE);
+        lottoResult.addPrizeResult(FIRST_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(FIRST_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void calculateProfitRatesTest() throws Exception {
-        lottoResult.addPrizeResult(LottoPrize.THIRD_PRIZE);
-        lottoResult.calculateProfitRates(5);
-        assertThat(lottoResult.getProfitRates()).isEqualTo(10);
+        lottoResult.addPrizeResult(THIRD_PRIZE);
+        lottoResult.calculateProfitRates();
+        assertThat(lottoResult.calculateProfitRates()).isEqualTo(50);
     }
 }

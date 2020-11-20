@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-
 public class Lottos {
     private final List<Lotto> lottos;
 
@@ -13,11 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public LottoResult calculate(List<Integer> winningNumbers) throws Exception {
+    public LottoResult calculate(Lotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
 
-        lottos.stream().forEach(lotto -> lottoResult.addPrizeResult(lotto.checkWhetherToWin(winningNumbers)));
-        lottoResult.calculateProfitRates(lottos.size());
+        lottos.forEach(lotto -> lottoResult.addPrizeResult(lotto.checkWhetherToWin(winningLotto)));
 
         return lottoResult;
     }

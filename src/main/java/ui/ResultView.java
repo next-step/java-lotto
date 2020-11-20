@@ -2,8 +2,6 @@ package ui;
 
 import domain.*;
 
-import java.util.List;
-
 public class ResultView {
     private static final String BUYING_AMOUNT_IS = "개를 구매했습니다.";
     private static final String LOTTO_STATISTICS_IS = "당첨 통계\n---------";
@@ -20,18 +18,18 @@ public class ResultView {
         lottos.stream().forEach(System.out::println);
     }
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(LottoResult lottoResult) throws Exception {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
         System.out.println(LOTTO_STATISTICS_IS);
         System.out.printf(FOURTH_PRIZE_IS, LottoPrize.FOURTH_PRIZE.getPrizeValue());
-        System.out.println(lottoPrizeCount.getFourthPrizeCount());
+        System.out.println(lottoPrizeCount.getPrizeCount(LottoPrize.FOURTH_PRIZE));
         System.out.printf(THIRD_PRIZE_IS, LottoPrize.THIRD_PRIZE.getPrizeValue());
-        System.out.println(lottoPrizeCount.getThirdPrizeCount());
+        System.out.println(lottoPrizeCount.getPrizeCount(LottoPrize.THIRD_PRIZE));
         System.out.printf(SECOND_PRIZE_IS, LottoPrize.SECOND_PRIZE.getPrizeValue());
-        System.out.println(lottoPrizeCount.getSecondPrizeCount());
+        System.out.println(lottoPrizeCount.getPrizeCount(LottoPrize.SECOND_PRIZE));
         System.out.printf(FIRST_PRIZE_IS, LottoPrize.FIRST_PRIZE.getPrizeValue());
-        System.out.println(lottoPrizeCount.getFirstPrizeCount());
-        System.out.printf(TOTAL_MARGIN_RATES_ARE, lottoResult.getProfitRates());
+        System.out.println(lottoPrizeCount.getPrizeCount(LottoPrize.FIRST_PRIZE));
+        System.out.printf(TOTAL_MARGIN_RATES_ARE, lottoResult.calculateProfitRates());
     }
 }

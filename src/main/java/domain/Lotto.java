@@ -1,8 +1,13 @@
 package domain;
 
+import exception.InvalidLottoNumbersException;
+
 import java.util.*;
 
 public class Lotto {
+    public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_PRICE = 1_000;
+
     private List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
@@ -10,13 +15,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public static Lotto of(List<Integer> numbers) throws Exception {
+        if(numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
+            throw new InvalidLottoNumbersException();
+        }
+
         return new Lotto(numbers);
     }
 
-    public LottoPrize checkWhetherToWin(List<Integer> winningNumbers) {
-        int count = (int) winningNumbers.stream()
-                .filter(numbers::contains)
+    public LottoPrize checkWhetherToWin(Lotto winningLotto) {
+        int count = (int) winningLotto.numbers.stream()
+                .filter(this.numbers::contains)
                 .count();
 
         return LottoPrize.of(count);

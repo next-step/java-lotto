@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static domain.LottoPrize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeTest {
@@ -16,9 +17,9 @@ public class LottoPrizeTest {
 
     @Test
     void getPrizeValueTest() {
-        assertThat(LottoPrize.FIRST_PRIZE.getPrizeValue()).isEqualTo(2000000000L);
-        assertThat(LottoPrize.SECOND_PRIZE.getPrizeValue()).isEqualTo(1500000L);
-        assertThat(LottoPrize.THIRD_PRIZE.getPrizeValue()).isEqualTo(50000L);
-        assertThat(LottoPrize.FOURTH_PRIZE.getPrizeValue()).isEqualTo(5000L);
+        assertThat(FIRST_PRIZE.getPrizeValue()).isEqualTo(2_000_000_000L);
+        assertThat(SECOND_PRIZE.getPrizeValue()).isEqualTo(1_500_000L);
+        assertThat(THIRD_PRIZE.getPrizeValue()).isEqualTo(50_000L);
+        assertThat(FOURTH_PRIZE.getPrizeValue()).isEqualTo(5_000L);
     }
 }

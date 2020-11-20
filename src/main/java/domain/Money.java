@@ -1,5 +1,8 @@
 package domain;
 
+import exception.DevidedByInvalidMoneyException;
+import exception.NegativeMoneyNotAllowedException;
+
 import java.util.Objects;
 
 public class Money {
@@ -7,7 +10,7 @@ public class Money {
 
     public static Money of(long value) throws Exception {
         if(value < 0) {
-            throw new Exception();
+            throw new NegativeMoneyNotAllowedException();
         }
 
         return new Money(value);
@@ -21,9 +24,9 @@ public class Money {
         return new Money(value * number);
     }
 
-    public Double dividedBy(Money money) throws Exception {
+    public double dividedBy(Money money) throws Exception {
         if(money.isLessThanOrEqualsZero()) {
-            throw new Exception();
+            throw new DevidedByInvalidMoneyException();
         }
 
         return (double) value / (double) money.value;

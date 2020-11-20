@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static domain.LottoPrize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeCountTest {
@@ -15,33 +16,33 @@ public class LottoPrizeCountTest {
 
     @Test
     void incrementFirstTest(){
-        Long before = lottoPrizeCount.getFirstPrizeCount();
-        lottoPrizeCount.incrementLottoPrize(LottoPrize.FIRST_PRIZE);
-        Long after = lottoPrizeCount.getFirstPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(FIRST_PRIZE);
+        lottoPrizeCount.incrementLottoPrize(FIRST_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(FIRST_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void incrementSecondTest(){
-        Long before = lottoPrizeCount.getSecondPrizeCount();
-        lottoPrizeCount.incrementLottoPrize(LottoPrize.SECOND_PRIZE);
-        Long after = lottoPrizeCount.getSecondPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(SECOND_PRIZE);
+        lottoPrizeCount.incrementLottoPrize(SECOND_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(SECOND_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void incrementThirdTest(){
-        Long before = lottoPrizeCount.getThirdPrizeCount();
-        lottoPrizeCount.incrementLottoPrize(LottoPrize.THIRD_PRIZE);
-        Long after = lottoPrizeCount.getThirdPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(THIRD_PRIZE);
+        lottoPrizeCount.incrementLottoPrize(THIRD_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(THIRD_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
     @Test
     void incrementFourthTest(){
-        Long before = lottoPrizeCount.getFourthPrizeCount();
-        lottoPrizeCount.incrementLottoPrize(LottoPrize.FOURTH_PRIZE);
-        Long after = lottoPrizeCount.getFourthPrizeCount();
+        Integer before = lottoPrizeCount.getPrizeCount(FOURTH_PRIZE);
+        lottoPrizeCount.incrementLottoPrize(FOURTH_PRIZE);
+        Integer after = lottoPrizeCount.getPrizeCount(FOURTH_PRIZE);
         assertThat(before + 1).isEqualTo(after);
     }
 
