@@ -17,4 +17,9 @@ public class ResultView {
   public static void printLottoInfo(String lotto) {
     System.out.print(lotto);
   }
+
+  public static void printStatisticsOpening() {
+    System.out.println(SCORING_OPENING_MESSAGE);
+    System.out.println(SPLIT_LINE_MESSAGE);
+  }
 }

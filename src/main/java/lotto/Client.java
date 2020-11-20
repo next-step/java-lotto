@@ -11,5 +11,8 @@ public class Client {
 
     LottoTickets purchasedTickets = budget.purchaseLotto(budget.getNumPossibleLotto());
     ResultView.printLottoInfo(purchasedTickets.toString());
+
+    ResultView.printStatisticsOpening();
+
   }
 }
