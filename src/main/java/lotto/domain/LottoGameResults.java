@@ -5,23 +5,23 @@ import java.util.stream.Collectors;
 
 public class LottoGameResults {
 
-    private Map<Integer, Integer> prizeUnitCountMap = new HashMap<Integer, Integer>();
-
-    private LinkedList<LottoGameResult> lottoGameResults;
-
-    private List<Long> prizeMoney = new ArrayList<Long>();
-
-    private int gameMoney;
-
     private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
     private static final int MIN_COUNT_TO_PRIZE = 3;
     private static final String WINNING_NUMBER_DELIMITER = ",";
     private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
 
+    private Map<Integer, Integer> prizeUnitCountMap = new HashMap<>();
+
+    private LinkedList<LottoGameResult> lottoGameResults;
+
+    private List<Long> prizeMoney = new ArrayList<>();
+
+    private int gameMoney;
+
 
     public LottoGameResults(int gameMoney){
         this.gameMoney = gameMoney;
-        this.lottoGameResults = new LinkedList<LottoGameResult>();
+        this.lottoGameResults = new LinkedList<>();
 
         initializePrizeUnit();
 
