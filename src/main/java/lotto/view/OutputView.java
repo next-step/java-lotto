@@ -47,9 +47,7 @@ public class OutputView {
     }
 
     private static String getWinningRankSameNumberString(WinningRank winningRank) {
-        return winningRank.getSameNumberNums().stream()
-                .map(Object::toString)
-                .collect(Collectors.joining());
+        return String.valueOf(winningRank.getSameNumberNum());
     }
 
     public static void showLottoNum(int lottoNum) {

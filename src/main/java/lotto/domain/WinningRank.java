@@ -1,39 +1,35 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 
 public enum WinningRank {
-    FAIL(asList(0, 1, 2), 0),
-    FOURTH(singletonList(3), 5_000),
-    THIRD(singletonList(4), 50_000),
-    SECOND(singletonList(5), 1_500_000),
-    FIRST(singletonList(6), 2_000_000_000);
+    FAIL(0, 0),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
-    private final List<Integer> sameNumberNums;
+    private final int sameNumberNum;
     private final int price;
 
-    WinningRank(List<Integer> sameNumberNums, int price) {
-        this.sameNumberNums = sameNumberNums;
+    WinningRank(int sameNumberNum, int price) {
+        this.sameNumberNum = sameNumberNum;
         this.price = price;
     }
 
     public static WinningRank getWinningRank(int sameNumberNum) {
         return Arrays.stream(WinningRank.values())
-                .filter(winningRank -> winningRank.sameNumberNums.contains(sameNumberNum))
+                .filter(winningRank -> winningRank.sameNumberNum == sameNumberNum)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Wrong Same Number Count:" + sameNumberNum));
+                .orElse(WinningRank.FAIL);
     }
 
     public int getPrice() {
         return price;
     }
 
-    public List<Integer> getSameNumberNums() {
-        return sameNumberNums;
+    public int getSameNumberNum() {
+        return sameNumberNum;
     }
 
     public boolean isFail() {

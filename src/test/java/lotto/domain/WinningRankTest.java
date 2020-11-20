@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningRankTest {
@@ -33,13 +31,5 @@ class WinningRankTest {
         WinningRank winningRank = WinningRank.getWinningRank(sameNumberCount);
 
         assertThat(winningRank).isEqualTo(expectedWinningRank);
-    }
-
-    @Test
-    @DisplayName("일치하는 숫자가 0~6이 아닌 다른 숫자가 들어올 때")
-    void getWinningRank_not0to6() {
-        assertThatThrownBy(() -> WinningRank.getWinningRank(7))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Wrong Same Number Count");
     }
 }
