@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class LottoRuleConfig {
 
+    public static final int IGNORE_LOTTO_RESULT_ZERO_RANK = 0;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MAX_LOTTO_BALL_COUNT = 6;
