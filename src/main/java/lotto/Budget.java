@@ -28,11 +28,11 @@ public class Budget {
   }
 
   public LottoTickets purchaseLotto(int numTicket) {
-    if (remains < PRICE_PER_TICKET) {
+    if (this.remains < PRICE_PER_TICKET) {
       throw new IllegalArgumentException();
     }
 
-    remains -= numTicket * PRICE_PER_TICKET;
+    this.remains -= numTicket * PRICE_PER_TICKET;
     return NumberPool.purchaseTickets(numTicket);
   }
 
