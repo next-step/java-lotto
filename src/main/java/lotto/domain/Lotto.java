@@ -22,7 +22,7 @@ public class Lotto {
 
     public boolean contains(LottoNumber num) {
         for (LottoNumber lottoNumber : this.lotto) {
-            if (lottoNumber.getNumber() == num.getNumber()) return true;
+            if (lottoNumber.equals(num)) return true;
         }
         return false;
     }
