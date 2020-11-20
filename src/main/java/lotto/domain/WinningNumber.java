@@ -6,7 +6,7 @@ public class WinningNumber {
 
     private List<Integer> numbers;
 
-    private LottoNumberParser lottoNumberParser = new LottoNumberParser();
+    private WinningNumberParser parser = new WinningNumberParser();
 
     public WinningNumber(String numberString) {
         parse(numberString);
@@ -14,7 +14,7 @@ public class WinningNumber {
 
     private void parse(String numberString) {
         try {
-            this.numbers = lottoNumberParser.parse(numberString);
+            this.numbers = parser.parse(numberString);
         } catch (LottoNumberParseException e) {
             throw new InvalidWinningNumberException(numberString, e);
         }

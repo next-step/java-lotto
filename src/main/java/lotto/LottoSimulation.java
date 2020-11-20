@@ -20,7 +20,7 @@ public class LottoSimulation {
         outputView.showPurchasedLottos(myLottos);
 
         String winningNumber = inputView.readWinningNumber();
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new Lottos(myLottos), new WinningNumber(winningNumber));
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new WinningNumber(winningNumber), myLottos);
 
         outputView.showResult(result);
     }

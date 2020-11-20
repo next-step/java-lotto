@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberParser {
+public class WinningNumberParser {
     public static final String DELIMITER = ",";
 
     public List<Integer> parse(String expression) {
