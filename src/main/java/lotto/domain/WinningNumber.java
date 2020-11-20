@@ -8,15 +8,15 @@ public class WinningNumber {
 
     private LottoNumberParser lottoNumberParser = new LottoNumberParser();
 
-    public WinningNumber(String expression) {
-        parse(expression);
+    public WinningNumber(String numberString) {
+        parse(numberString);
     }
 
-    private void parse(String expression) {
+    private void parse(String numberString) {
         try {
-            this.numbers = lottoNumberParser.parse(expression);
+            this.numbers = lottoNumberParser.parse(numberString);
         } catch (LottoNumberParseException e) {
-            throw new InvalidWinningNumberException(expression, e);
+            throw new InvalidWinningNumberException(numberString, e);
         }
     }
 
