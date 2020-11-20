@@ -16,6 +16,10 @@ public class InputView {
     public Set<Set<Integer>> requestManualSelectionNumbers() {
         int manualSelectionCount = requestManualSelectionCount();
 
+        if (manualSelectionCount == 0) {
+            return Collections.emptySet();
+        }
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Set<Set<Integer>> lotteryNumbers = new HashSet<>();
         for (int i = 0; i < manualSelectionCount; i++) {
