@@ -6,6 +6,10 @@ public class Lotto {
     public static final int SIZE = 6;
     private final Numbers numbers;
 
+    public Lotto(Numbers numbers) {
+        this.numbers = numbers;
+    }
+
     public Lotto(NumberSelectionStrategy numberSelectionStrategy) {
         Numbers numbers = numberSelectionStrategy.collectNumbers(SIZE);
 

@@ -2,8 +2,6 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Numbers;
-import lotto.domain.WinningRanks;
-import lotto.service.LotteryMachine;
 import lotto.service.NumberSelectionStrategyImpl;
 import lotto.service.WinningRankStatistics;
 import lotto.util.MoneyLottoMapper;
@@ -20,12 +18,6 @@ public class LottoController {
         int lottoNum = MoneyLottoMapper.calculateLottoNum(money);
         OutputView.showLottoNum(lottoNum);
         return lottoNum;
-    }
-
-    public WinningRankStatistics analyze(Lottos lottos, Numbers winningNumbers) {
-        LotteryMachine lotteryMachine = new LotteryMachine(lottos, winningNumbers);
-        WinningRanks winningRanks = lotteryMachine.getWinningRanks();
-        return new WinningRankStatistics(winningRanks);
     }
 
     public Lottos createLottos(int lottoNum) {

@@ -1,22 +1,23 @@
 package lotto.service;
 
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningRank;
+import lotto.domain.WinningRanks;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningChecker {
-    private List<WinningRank> winningRanks;
 
-    public WinningChecker(Lottos lottos, Numbers winningNumbers) {
-        winningRanks = lottos.getSameNumberList(winningNumbers).stream()
-                .map(WinningRank::getWinningRank)
-                .collect(Collectors.toList());
+    private WinningLotto winningLotto;
+
+    public WinningChecker(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
-    public List<WinningRank> getWinningRanks() {
-        return winningRanks;
+    public WinningRanks checkRanks(Lottos lottos) {
+        return new WinningRanks(lottos.getSameNumberList(this.winningLotto.getNumbers()).stream()
+                .map(WinningRank::getWinningRank)
+                .collect(Collectors.toList()));
     }
 }

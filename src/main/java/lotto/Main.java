@@ -2,7 +2,9 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
+import lotto.domain.WinningLotto;
+import lotto.domain.WinningRanks;
+import lotto.service.WinningChecker;
 import lotto.service.WinningRankStatistics;
 
 public class Main {
@@ -13,10 +15,15 @@ public class Main {
         int lottoNum = lottoController.getLottoNum(money);
 
         Lottos lottos = lottoController.createLottos(lottoNum);
-        Numbers winningNumbers = lottoController.getWinningNumbers();
 
-        WinningRankStatistics statistics = lottoController.analyze(lottos, winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(lottoController.getWinningNumbers());
 
-        lottoController.showResult(statistics);
+        WinningChecker winningChecker = new WinningChecker(winningLotto);
+
+        WinningRanks winningRanks = winningChecker.checkRanks(lottos);
+
+        WinningRankStatistics winningRankStatistics = new WinningRankStatistics(winningRanks);
+
+        lottoController.showResult(winningRankStatistics);
     }
 }
