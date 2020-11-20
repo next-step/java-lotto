@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -56,5 +57,20 @@ public class LottoWinningStatisticsTest {
                 () -> assertThat(first).isEqualTo(1),
                 () -> assertThat(fourth).isEqualTo(1)
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = "1,2,3,4,5,6")
+    @DisplayName("로또 상금금액 일치 확인")
+    void lotto_winningStatistics_profit(String winningNumber) {
+        //given
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber);
+
+        //when
+        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
+        BigInteger profit =  LottoWinningStatistics.getProfit(resultMap);
+
+        //then
+        assertThat(profit.intValue()).isEqualTo(2000005000);
     }
 }
