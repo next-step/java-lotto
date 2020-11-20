@@ -31,11 +31,12 @@ public class ResultView {
     }
 
     private static void printProfit(int price, BigInteger profit) {
-        String result = profit.divide(BigInteger.valueOf(price)).toString();
-        boolean isProfit = Integer.parseInt(result) >= 1;
+        BigInteger priceInteger = new BigInteger(String.valueOf(price));
+        double result = profit.doubleValue() / priceInteger.doubleValue();
+        boolean isProfit = result >= 1;
         System.out.printf(
                 WINNING_STATISTICS_RESULT,
-                result,
+                Math.round(result * 100) / 100.0,
                 isProfit ?SURPLUS:DEFICIT
         );
     }

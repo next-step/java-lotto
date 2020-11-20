@@ -25,9 +25,13 @@ public class LottoWinningStatistics {
     public static BigInteger getProfit(Map<LottoResult, AtomicInteger> statistics) {
         List<BigInteger> numbers = statistics.entrySet().stream()
                 .filter(e -> e.getValue().intValue() > 0)
-                .map(k -> BigInteger.valueOf(k.getKey().getPrize()))
+                .map(k -> getSumPrize(k.getKey(),k.getValue()))
                 .collect(Collectors.toList());
         return numbers.stream().reduce(BigInteger.ZERO, BigInteger::add);
+    }
+
+    private static BigInteger getSumPrize(LottoResult lottoResult, AtomicInteger integer) {
+        return BigInteger.valueOf(lottoResult.getPrize() * integer.intValue());
     }
 
     private static Map<LottoResult, AtomicInteger> initResultMap() {
