@@ -13,11 +13,24 @@ public class StringAddCalculator {
         this.ResultView = resultView;
     }
 
+    //RuntimeException (음수)
     public void operator(){
         String input = inputView.input();
 
     }
 
+    public void sortValue(String value){
+        
+    }
+
+    public void selector(){
+
+
+    }
+
+    public void add(){
+
+    }
 
     
 }
