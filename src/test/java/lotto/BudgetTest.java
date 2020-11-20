@@ -26,6 +26,7 @@ class BudgetTest {
     assertThat(Budget.of(input).getNumPossibleLotto()).isEqualTo(expected);
   }
 
+  @Test
   @DisplayName("이율 테스트")
   void test() {
     Budget budget = Budget.of(10000);
