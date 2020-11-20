@@ -7,11 +7,15 @@ public class StringAddCalculator {
     private static final int INIT_NUMBER = 0;
     private static final int ZERO = 0;
 
-    public static int splitAndSum(String text){
-        if(Objects.isNull(text) || text.trim().isEmpty()){
+    public static int splitAndSum(String text) {
+        if (isNullOrEmpty(text)) {
             return ZERO;
         }
         return addSum(StringSplitter.splitStringByDelimiter(text));
+    }
+
+    private static boolean isNullOrEmpty(String text) {
+        return Objects.isNull(text) || text.trim().isEmpty();
     }
 
     private static int convertStringToInteger(String test){
