@@ -2,6 +2,7 @@ package lotto;
 
 import static lotto.LottoGameConstant.NUMBERS_PER_WINNING_NUMBER;
 
+import java.util.Collections;
 import java.util.List;
 
 public class WinningNumber {
@@ -17,6 +18,8 @@ public class WinningNumber {
     if (lottoNumbers.size() != NUMBERS_PER_WINNING_NUMBER) {
       throw new IllegalArgumentException();
     }
+
+    Collections.sort(lottoNumbers);
 
     for (int i = 0; i < NUMBERS_PER_WINNING_NUMBER - 1; i++) {
       checkEquality(lottoNumbers.get(i), lottoNumbers.get(i + 1));
