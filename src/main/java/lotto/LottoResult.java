@@ -23,12 +23,13 @@ public class LottoResult {
     this.hitRecorder = new HashMap<>();
 
     for (int hit = MINIMUM_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
-      hitRecorder.put(hit, 0);
+      this.hitRecorder.put(hit, 0);
+      this.rewards.put(hit, 0);
     }
-    rewards.put(3, HIT_THREE);
-    rewards.put(4, HIT_FOUR);
-    rewards.put(5, HIT_FIVE);
-    rewards.put(6, HIT_SIX);
+    this.rewards.put(3, HIT_THREE);
+    this.rewards.put(4, HIT_FOUR);
+    this.rewards.put(5, HIT_FIVE);
+    this.rewards.put(6, HIT_SIX);
   }
 
   public int calculateIncome() {
@@ -40,6 +41,14 @@ public class LottoResult {
   }
 
   public void recordHit(int numHit) {
-    hitRecorder.put(numHit, hitRecorder.get(numHit) + 1);
+    this.hitRecorder.put(numHit, this.hitRecorder.get(numHit) + 1);
+  }
+
+  public int getReward(int numHit) {
+    return this.rewards.get(numHit);
+  }
+
+  public int getRecordedNumberOfHit(int numHit) {
+    return this.hitRecorder.get(numHit);
   }
 }
