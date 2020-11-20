@@ -8,7 +8,7 @@ public class Playslip {
     private static final int MAX_SELECT_NUMBER = 45;
     public static final int SELECTION_COUNT = 6;
 
-    private final NaturalSelection naturalSelection = new NaturalSelection();
+    private final NumberSelector numberSelector = new NumberSelector();
     private ManualSelection manualSelection = new ManualSelection();
     private int selectNumberCount;
 
@@ -39,7 +39,7 @@ public class Playslip {
 
         List<LotteryNumber> result = new ArrayList<>();
         for (int i = 0; i < naturalSelectionCount; i++) {
-            result.add(new LotteryNumber(naturalSelection.select(NUMBER_POOL, SELECTION_COUNT)));
+            result.add(new LotteryNumber(numberSelector.select(NUMBER_POOL, SELECTION_COUNT)));
         }
         return result;
     }
