@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.util.Lists.list;
 import static step2.Rank.*;
 
@@ -65,6 +66,13 @@ public class WinningNumberTest {
         winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
         MatchResult matchResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
         assertThat(matchResult.getMatchResult(SECOND)).isEqualTo(1);
+    }
+
+    @DisplayName("보너스 번호는 당첨번호과 중복될 수 없다")
+    @Test
+    void shouldNotContainsBonusNumberInWinningNumber() {
+        assertThatThrownBy(() -> new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 1)) //
+                .isInstanceOf(IllegalBonusNumberException.class);
     }
 
     private static Stream<Arguments> matchingCountProvider() {
