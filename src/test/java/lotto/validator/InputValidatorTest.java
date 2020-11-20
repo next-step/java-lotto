@@ -55,9 +55,13 @@ public class InputValidatorTest {
 
         @DisplayName("테스트 성공")
         @ParameterizedTest
-        @ValueSource(strings = {"1000", "5000", "18000"})
-        void validate5(String input) {
-            InputValidator.validateBuyLotto(input);
+        @CsvSource(value = {
+                "1000, 0",
+                "5000, 2",
+                "18000, 1"
+        })
+        void validate5(String amount, String matchCount) {
+            InputValidator.validateBuyLotto(amount, matchCount);
         }
     }
 

@@ -10,7 +10,7 @@ public class BuyLottoTest {
     @DisplayName("BuyLotto 생성 테스트")
     @Test
     void of() {
-        assertThat(BuyLotto.of("10000"))
-                .isEqualToComparingFieldByField(BuyLotto.of("10000"));
+        assertThat(BuyLotto.of("10000", "2"))
+                .isEqualToComparingFieldByField(BuyLotto.of("10000", "2"));
     }
 }
