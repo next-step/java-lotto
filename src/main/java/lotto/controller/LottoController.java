@@ -37,4 +37,8 @@ public class LottoController {
         InputView.getWinningNumbers().forEach(builder::add);
         return builder.build();
     }
+
+    public int getBonusNumber() {
+        return InputView.getBonusNumber();
+    }
 }

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String GET_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String GET_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String GET_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String SPLITTER = ",";
     private static final Scanner scanner = new Scanner(System.in);
     private static final PrintStream out = System.out;
@@ -27,6 +28,11 @@ public class InputView {
 
     public static int getMoney() {
         out.println(GET_MONEY_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static int getBonusNumber() {
+        out.println(GET_BONUS_NUMBER_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
 }

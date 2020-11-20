@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.Lottos;
+import lotto.domain.Numbers;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningRanks;
 import lotto.service.WinningChecker;
@@ -16,7 +17,11 @@ public class Main {
 
         Lottos lottos = lottoController.createLottos(lottoNum);
 
-        WinningLotto winningLotto = new WinningLotto(lottoController.getWinningNumbers());
+        Numbers winningNumbers = lottoController.getWinningNumbers();
+
+        int bonusNumber = lottoController.getBonusNumber();
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         WinningChecker winningChecker = new WinningChecker(winningLotto);
 

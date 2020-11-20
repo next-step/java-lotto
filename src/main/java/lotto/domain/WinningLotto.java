@@ -1,7 +1,10 @@
 package lotto.domain;
 
 public class WinningLotto extends Lotto {
-    public WinningLotto(Numbers numbers) {
+    private int bonusNumber;
+
+    public WinningLotto(Numbers numbers, int bonusNumber) {
         super(numbers);
+        this.bonusNumber = bonusNumber;
     }
 }
