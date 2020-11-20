@@ -57,22 +57,4 @@ public class LottoWinningTest {
         double totalYield = 0.38;
         assertEquals(totalYield, lottoWinning.getTotalYield(13000));
     }
-
-    @ParameterizedTest
-    @DisplayName("지난 당첨번호 빈 값인 경우 ")
-    @ValueSource(strings = {"",})
-    public void 로또_지난_당첨번호_null(String lottoNumbers) {
-        assertThatThrownBy(() -> LottoWinning.lottoNumberSizeValidate(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("지난 로또 번호를 입력해 주세요.");
-    }
-
-    @ParameterizedTest
-    @DisplayName("지난 당첨번호 갯수 6개 이하 또는 이상인 경우 예외처리")
-    @ValueSource(strings = {"1,2,3,", "5,6,7,8,9"})
-    public void 로또_지난_당첨번호_갯수_유효체크(String lottoNumbers) {
-        assertThatThrownBy(() -> LottoWinning.lottoNumberSizeValidate(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 6보다 작거나 클 수 없습니다.");
-    }
 }
