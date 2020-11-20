@@ -6,8 +6,10 @@ public class WinningNumber {
     private final LotteryNumber winningNumber;
     private final Integer bonusNumber;
 
-    public WinningNumber(LotteryNumber lotteryNumber, Integer bonusNumber) {
+    public
+    WinningNumber(LotteryNumber lotteryNumber, Integer bonusNumber) {
         ensureNotNull(lotteryNumber, bonusNumber);
+        ensureValidBonusNumber(lotteryNumber, bonusNumber);
         this.winningNumber = lotteryNumber;
         this.bonusNumber = bonusNumber;
     }
@@ -19,6 +21,12 @@ public class WinningNumber {
         }
 
         return matchResult;
+    }
+
+    private void ensureValidBonusNumber(LotteryNumber lotteryNumber, Integer bonusNumber) {
+        if (lotteryNumber.contains(bonusNumber)) {
+            throw new IllegalBonusNumberException();
+        }
     }
 
     private void ensureNotNull(LotteryNumber lotteryNumber, Integer bonusNumber) {
