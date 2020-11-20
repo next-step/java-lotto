@@ -7,6 +7,7 @@ import lotto.domain.Prize;
 import lotto.domain.enums.Rank;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class LottoService {
     private final Lotto lotto;
@@ -32,5 +33,9 @@ public class LottoService {
 
     public Prize getPrize(Rank rank) {
         return lotto.getPrize(rank);
+    }
+
+    public Map<Rank, Prize> getPrizeMap() {
+        return lotto.getPrizeMap();
     }
 }

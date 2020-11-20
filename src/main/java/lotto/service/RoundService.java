@@ -30,7 +30,9 @@ public class RoundService {
 
     private void validate() {
         LottoConstraint constraint = lottoService.getConstraint();
-        round.getMyPicks().forEach(constraint::validate);
+        round.getMyPicks().stream()
+                .map(Pick::getBalls)
+                .forEach(constraint::validate);
     }
 
     public Round autoBuy(int count) {
@@ -44,5 +46,9 @@ public class RoundService {
             Rank rank = lottoService.checkRank(pick, winningBalls);
             pick.setRank(rank);
         });
+    }
+
+    public Round get() {
+        return round;
     }
 }

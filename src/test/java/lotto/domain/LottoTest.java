@@ -16,13 +16,13 @@ public class LottoTest {
     }
 
     @Test
-    void testGetPrizeMap(){
+    void testGetPrizeInfo(){
         Lotto lotto = new Lotto();
         Long first_prize = 2000000000L;
         PrizeInfo prizeInfo = new PrizeInfo();
-        prizeInfo.add(Rank.FIRST, first_prize, Currency.WON);
+        prizeInfo.add(Rank.FIRST, first_prize, Currency.WON, "test");
         lotto.setPrizeInfo(prizeInfo);
-        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON));
+        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON, "test"));
     }
 
     @Test
@@ -33,5 +33,14 @@ public class LottoTest {
         assertThat(lottoConstraint).isNotNull();
         assertThat(lottoConstraint.getCountOfNumber()).isEqualTo(6);
         assertThat(lottoConstraint.getRange()).isEqualTo(45);
+    }
+    @Test
+    void testGetPrizeMap(){
+        Lotto lotto = new Lotto();
+        Long first_prize = 2000000000L;
+        PrizeInfo prizeInfo = new PrizeInfo();
+        prizeInfo.add(Rank.FIRST, first_prize, Currency.WON, "test");
+        lotto.setPrizeInfo(prizeInfo);
+        assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON, "test"));
     }
 }

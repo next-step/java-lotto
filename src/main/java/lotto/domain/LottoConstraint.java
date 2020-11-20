@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.message.ErrorMessage;
 
-import java.util.Set;
+import java.util.Collection;
 
 
 public class LottoConstraint {
@@ -22,8 +22,7 @@ public class LottoConstraint {
         return range;
     }
 
-    public void validate(Pick pick) {
-        Set<Integer> balls = pick.getBalls();
+    public void validate(Collection<Integer> balls) {
         if(countOfNumber != balls.size()){
             throw new RuntimeException(String.format(ErrorMessage.INVALID_BALL_COUNT_FORMAT, countOfNumber));
         }

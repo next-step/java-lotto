@@ -24,8 +24,8 @@ public class PrizeInfo {
         return this.rankChecker.apply(pick, winningBalls);
     }
 
-    public void add(Rank rank, Long cash, Currency currency) {
-        prizeMap.putIfAbsent(rank, new Prize(rank, cash, currency));
+    public void add(Rank rank, Long cash, Currency currency, String ruleDescription) {
+        prizeMap.putIfAbsent(rank, new Prize(rank, cash, currency, ruleDescription));
     }
 
     public Prize getPrize(Rank rank) {

@@ -22,4 +22,11 @@ public class PickTest {
         pick.setType(PickType.AUTO);
         assertThat(pick.getType()).isEqualTo(PickType.AUTO);
     }
+
+    @Test
+    void testGetBallString(){
+        Pick pick = new Pick();
+        pick.setBalls(Arrays.asList(40, 30, 20, 10, 1));
+        assertThat(pick.getBallsString()).isEqualTo("1, 10, 20, 30, 40");
+    }
 }

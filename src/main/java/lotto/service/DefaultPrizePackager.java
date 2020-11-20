@@ -15,6 +15,6 @@ public class DefaultPrizePackager extends AbstractPrizePackager {
 
     @Override
     protected void addPrize(PrizeInfo prizeInfo) {
-        prizeInfo.add(Rank.LOSE,0L, Currency.WON);
+        prizeInfo.add(Rank.LOSE,0L, Currency.WON,"꽝 다음기회에");
     }
 }

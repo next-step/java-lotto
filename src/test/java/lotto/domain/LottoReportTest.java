@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.enums.Rank;
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -44,6 +47,17 @@ public class LottoReportTest {
         lottoReport.addEarnings(5000L);
 
         BigDecimal earningRate = lottoReport.getEarningRate();
-        assertThat(earningRate).isEqualTo(BigDecimal.valueOf(3));
+        assertThat(earningRate).isCloseTo(BigDecimal.valueOf(3), Percentage.withPercentage(100));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2000,이득","6000,본전","8000,손해"})
+    void testGetEarningDescription(Long cost, String result){
+        LottoReport lottoReport = new LottoReport();
+        lottoReport.setCost(cost);
+        lottoReport.addEarnings(1000L);
+        lottoReport.addEarnings(5000L);
+
+        assertThat(lottoReport.getEarningRateDescription()).isEqualTo(result);
     }
 }

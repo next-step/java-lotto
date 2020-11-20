@@ -16,6 +16,6 @@ public class JackPotPrizePackager extends AbstractPrizePackager {
 
     @Override
     protected void addPrize(PrizeInfo prizeInfo) {
-        prizeInfo.add(Rank.FIRST, 20000000000L, Currency.WON);
+        prizeInfo.add(Rank.FIRST, 20000000000L, Currency.WON, "Jack Pot!");
     }
 }

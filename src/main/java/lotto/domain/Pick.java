@@ -6,6 +6,7 @@ import lotto.domain.enums.Rank;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Pick {
     private PickType type;
@@ -46,5 +47,11 @@ public class Pick {
 
     public int checkWinningBallCount(Collection<Integer> winningBalls) {
         return (int) balls.stream().filter(winningBalls::contains).count();
+    }
+
+    public String getBallsString() {
+        return balls.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }

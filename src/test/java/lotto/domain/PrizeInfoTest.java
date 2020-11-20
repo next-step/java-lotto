@@ -20,7 +20,7 @@ public class PrizeInfoTest {
         expected.putIfAbsent(Rank.FIFTH, 5000L);
 
         PrizeInfo prizeInfo = new PrizeInfo();
-        expected.forEach((rank, cash) -> prizeInfo.add(rank, cash, Currency.WON));
+        expected.forEach((rank, cash) -> prizeInfo.add(rank, cash, Currency.WON, rank.name()));
 
         assertThat(prizeInfo.getPrizeMap()).isNotEmpty();
         assertThat(prizeInfo.getPrizeMap()).allSatisfy((rank, prize) -> {

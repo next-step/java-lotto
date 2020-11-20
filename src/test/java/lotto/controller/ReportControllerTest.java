@@ -25,11 +25,11 @@ public class ReportControllerTest {
         RoundService roundService = new RoundService(new AutoPickService(lottoService), lottoService);
         round = roundService.autoBuy(100);
         roundService.checkWinning(round.getMyPicks().stream().map(Pick::getBalls).findFirst().get());
-        reportController = new ReportController(new ReportService(lottoService));
+        reportController = new ReportController(new ReportService(lottoService), roundService, lottoService);
     }
 
     @Test
-    void testGetReport(){
+    void testGenerateReport(){
         reportController.generate(round);
         assertThat(round.getReport()).isNotNull();
         assertThat(round.getReport().getCost()).isEqualTo(1000 * 100);
