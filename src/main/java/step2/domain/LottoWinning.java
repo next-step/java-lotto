@@ -1,27 +1,34 @@
 package step2.domain;
 
 import step2.constant.LottoWinningPrizes;
-import step2.util.LottoUtil;
+import step2.util.StringUtil;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
-import static step2.constant.LottoWinningPrizes.*;
+import static step2.constant.LottoWinningPrizes.values;
 
 public class LottoWinning {
 
-    private static HashMap<LottoWinningPrizes, Integer> lottoWinningMap = new LinkedHashMap<>();
-    private static int winningAmount = 0;
+    private static final int LOTTO_NUMBER_CONTAINS_TRUE = 1;
+    private static final int LOTTO_NUMBER_CONTAINS_FALSE = 0;
+    private static final EnumMap<LottoWinningPrizes, Integer> lottoWinningMap;
+
+    static {
+        EnumMap<LottoWinningPrizes, Integer> map = new EnumMap<>(LottoWinningPrizes.class);
+        Arrays.stream(values())
+                .forEach(lottoWinningPrizes -> map.put(lottoWinningPrizes, 0));
+        lottoWinningMap = map;
+    }
 
     public LottoWinning(String lastLottoWinningNumbers, List<Lotto> lottos) {
-        setLottoWinningMap();
         lottoWinningPrizes(lastLottoWinningNumbers, lottos);
     }
 
     public static LottoWinning of(String lastLottoWinningNumbers, List<Lotto> lottos) {
-        LottoUtil.lottoNumberSizeValidate(lastLottoWinningNumbers);
+        lottoNumberSizeValidate(lastLottoWinningNumbers);
         return new LottoWinning(lastLottoWinningNumbers, lottos);
     }
 
@@ -34,28 +41,23 @@ public class LottoWinning {
                 .stream()
                 .mapToInt(number -> numberContain(number, lastLottoWinningNumbers))
                 .sum();
-        resultLottoWinning(rightNumberCount);
+        LottoWinningPrizes.resultLottoWinning(rightNumberCount);
+        setLottoWinning(rightNumberCount);
+
     }
 
     private static int numberContain(int number, String lastLottoWinningNumbers) {
         if (lastLottoWinningNumbers.contains(String.valueOf(number))) {
-            return 1;
+            return LOTTO_NUMBER_CONTAINS_TRUE;
         }
-        return 0;
-    }
-
-    private static void resultLottoWinning(int rightNumberCount) {
-        Arrays.stream(values())
-                .filter(lottoWinningPrizes -> lottoWinningPrizes.getMatch() == rightNumberCount)
-                .forEach(lottoWinningPrizes -> winningAmount += lottoWinningPrizes.getAmount());
-        setLottoWinning(rightNumberCount);
+        return LOTTO_NUMBER_CONTAINS_FALSE;
     }
 
     public double getWinningAmount() {
-        return winningAmount;
+        return LottoWinningPrizes.getWinningAmount();
     }
 
-    public HashMap<LottoWinningPrizes, Integer> getLottoWinningMap() {
+    public EnumMap<LottoWinningPrizes, Integer> getLottoWinningMap() {
         return lottoWinningMap;
     }
 
@@ -72,10 +74,25 @@ public class LottoWinning {
         }
     }
 
-    private static void setLottoWinningMap() {
-        lottoWinningMap.put(THIRD_MATCHES, 0);
-        lottoWinningMap.put(FOUR_MATCHES, 0);
-        lottoWinningMap.put(FIVE_MATCHES, 0);
-        lottoWinningMap.put(SIX_MATCHES, 0);
+    public double getTotalYield(int lottoAmount) {
+        double totalYield = (double) LottoWinningPrizes.getWinningAmount() / lottoAmount;
+        return Double.parseDouble(String.format("%.2f", totalYield));
+    }
+
+    public static void lottoNumberSizeValidate(String lastWeekNumber) {
+        if (StringUtil.isEmpty(lastWeekNumber)) {
+            throw new IllegalArgumentException("지난 로또 번호를 입력해 주세요.");
+        }
+
+        String[] lottoNumbers = lastWeekNumber.split(",");
+        if (lottoNumbers.length != 6) {
+            throw new IllegalArgumentException("로또 번호는 6보다 작거나 클 수 없습니다.");
+        }
+
+        IntStream.range(0, lottoNumbers.length)
+                .filter(i -> Integer.parseInt(lottoNumbers[i]) > 45)
+                .forEach(i -> {
+                    throw new IllegalArgumentException("로또 번호는 1 ~ 45사이의 숫자여야 합니다.");
+                });
     }
 }
