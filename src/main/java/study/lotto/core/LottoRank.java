@@ -1,6 +1,7 @@
 package study.lotto.core;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -35,8 +36,13 @@ public enum LottoRank {
     }
 
     public static LottoRank of(WinningLotto winningLotto, boolean matchBonusLottoNumber) {
+
+        Integer matchingNumberCount = Optional.ofNullable(winningLotto)
+                .map(w -> w.getMatchingNumberCount())
+                .orElse(0);
+
         LottoRank findLottoRank = Stream.of(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchingNumberCount() == winningLotto.getMatchingNumberCount())
+                .filter(lottoRank -> lottoRank.getMatchingNumberCount() == matchingNumberCount)
                 .findFirst()
                 .orElse(LottoRank.NONE);
 
