@@ -1,8 +1,6 @@
 package lotto.domain;
 
 
-import lotto.utils.Pair;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -18,9 +16,10 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    private static final Map<Pair<Integer, Boolean>, LottoRank> RANK_MATCH_COUNT_MAP = Collections.unmodifiableMap(
+    private static final Map<LottoMatchKey, LottoRank> RANK_MATCH_COUNT_MAP = Collections.unmodifiableMap(
             Arrays.stream(LottoRank.values()).collect(
-                    Collectors.toMap(value -> new Pair<>(value.matchCount, value.matchBonus), Function.identity())));
+                    Collectors.toMap(value -> new LottoMatchKey(value.matchCount, value.matchBonus),
+                                     Function.identity())));
 
     private static final int ONLY_INCLUDE_BONUS_MATCH_COUNT = 5;
 
@@ -41,18 +40,18 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchCount, boolean matchBonus) {
-        Pair<Integer, Boolean> matchKey = buildMatchKey(matchCount, matchBonus);
+        LottoMatchKey matchKey = buildMatchKey(matchCount, matchBonus);
         if (Objects.isNull(RANK_MATCH_COUNT_MAP.get(matchKey))) {
             return LottoRank.NONE;
         }
         return RANK_MATCH_COUNT_MAP.get(matchKey);
     }
 
-    public static Pair<Integer, Boolean> buildMatchKey(int matchCount, boolean matchBonus) {
+    public static LottoMatchKey buildMatchKey(int matchCount, boolean matchBonus) {
         if (matchCount == ONLY_INCLUDE_BONUS_MATCH_COUNT) {
-            return new Pair<>(matchCount, matchBonus);
+            return new LottoMatchKey(matchCount, matchBonus);
         }
-        return new Pair<>(matchCount, false);
+        return new LottoMatchKey(matchCount, false);
     }
 
     public int getMatchCount() {
@@ -61,5 +60,28 @@ public enum LottoRank {
 
     public int getReward() {
         return this.reward;
+    }
+
+    private static class LottoMatchKey {
+        private final int count;
+        private final boolean bonus;
+
+        public LottoMatchKey(int count, boolean bonus) {
+            this.count = count;
+            this.bonus = bonus;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            LottoMatchKey that = (LottoMatchKey) o;
+            return count == that.count && bonus == that.bonus;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(count, bonus);
+        }
     }
 }
