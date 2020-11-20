@@ -1,12 +1,8 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -24,6 +20,45 @@ public class LottoVendingMachine {
 
     public static Lottos buyAutoLottery(int price) {
         return new Lottos(getLottoList(price));
+    }
+
+    public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumbers) {
+        List<Integer> winningNumberList = parseIntNumbers(winningNumbers);
+        return getLottoResultList(lottos,winningNumberList);
+    }
+
+    private static List<LottoResult> getLottoResultList(Lottos lottos, List<Integer> winningNumberList) {
+        List<LottoResult> results = new LinkedList<>();
+        for(Lotto lotto : lottos.getLottos()) {
+            int winningCount = getWinningCount(lotto.getLottoNumbers(),winningNumberList);
+            results.add(addLottoResult(winningCount));
+        }
+        return results;
+    }
+
+    private static LottoResult addLottoResult(int winningCount) {
+        return Arrays.stream(LottoResult.values())
+                .filter(e -> e.getWinningCount() == winningCount)
+                .findFirst()
+                .orElse(LottoResult.NONE);
+    }
+
+    private static int getWinningCount(List<LottoNumber> lottoNumbers,List<Integer> winningNumbers) {
+        return (int)lottoNumbers.stream()
+                    .mapToInt(i -> numberMatchResult(winningNumbers,i.getLottoNumber()))
+                    .filter(i -> i == 1)
+                    .count();
+    }
+
+    private static int numberMatchResult(List<Integer> winningNumbers, int number) {
+        return Collections.frequency(winningNumbers,number);
+    }
+
+    private static List<Integer> parseIntNumbers(String winningNumbers) {
+        return Arrays.stream(winningNumbers.split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private static List<Lotto> getLottoList(int price) {
