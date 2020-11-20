@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class WinNumbersInputView extends AbstractView {
 
     private static final WinNumbersInputView instance = new WinNumbersInputView();
-    private static final String DELIMITER = ",";
 
     public static WinNumbersInputView getInstance() {
         return instance;
@@ -27,12 +26,7 @@ public class WinNumbersInputView extends AbstractView {
 
         String winLottoNumbers = scanner.nextLine();
 
-        return Arrays.asList(winLottoNumbers.split(DELIMITER))
-                        .stream()
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toList());
+        return createLottoNumber(winLottoNumbers);
     }
 
     private LottoNumber bonusLottoNumberView() {

@@ -14,20 +14,29 @@ public class PurchaseInputView extends AbstractView {
     }
 
     public PurchaseAmount display() {
+        return new PurchaseAmount(purchaseAmountView(), numberOfManualLottoView());
+    }
 
+    private int purchaseAmountView() {
         stringBuilder.append("구매 금액을 입력해주세요.");
         printAndClear();
 
-        int amount = scanner.nextInt();
-
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-
-        stringBuilder.append(purchaseAmount.numberOfPurchases());
-        stringBuilder.append("개를 구매했습니다.");
-
-        printAndClear();
-
-        return purchaseAmount;
+        return scanner.nextInt();
     }
 
+    private int numberOfManualLottoView() {
+        stringBuilder.append("수동으로 구매할 로또 수를 입력해 주세요.");
+        printAndClear();
+
+        return scanner.nextInt();
+    }
+
+    public void displayPurchaseAmount(PurchaseAmount purchaseAmount) {
+        stringBuilder.append("수동으로 ");
+        stringBuilder.append(purchaseAmount.getNumberOfManualLotto());
+        stringBuilder.append("장, 자동으로 ");
+        stringBuilder.append(purchaseAmount.getNumberOfAutoLotto());
+        stringBuilder.append("개를 구매했습니다");
+        printAndClear();
+    }
 }
