@@ -36,6 +36,6 @@ public class LottoTest {
         // 1,2,3,4,5,6
         Lotto lotto = Lotto.of(lottoGenerator);
 
-        assertThat(lotto.contains(num)).isEqualTo(expectedResult);
+        assertThat(lotto.contains(LottoNumber.of(num))).isEqualTo(expectedResult);
     }
 }

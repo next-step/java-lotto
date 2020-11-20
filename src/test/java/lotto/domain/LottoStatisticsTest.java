@@ -30,11 +30,11 @@ public class LottoStatisticsTest {
     @DisplayName("로또 당첨금액과 당첨금액율 계산 테스트")
     @ParameterizedTest(name = "[{index}] {0}의 당첨금은 {1}원 ({2})")
     @CsvSource(value = {
-            "           FIRST,SECOND | 2001500000 | 1000750",
-            "     SECOND,FOURTH,NONE |    1505000 | 501.66",
-            "     FOURTH,FOURTH,NONE |      10000 | 3.33",
-            "    NONE,NONE,NONE,NONE |          0 | 0 ",
-            " FOURTH,NONE,NONE,NONE,NONE,NONE,NONE,NONE | 5000 | 0.62",
+            "           FIRST,SECOND | 2030000000 |  1015000",
+            "     SECOND,FOURTH,NONE |   30050000 | 10016.66",
+            "     FOURTH,FOURTH,NONE |     100000 |    33.33",
+            "    NONE,NONE,NONE,NONE |          0 |       0 ",
+            " FIFTH,NONE,NONE,NONE,NONE,NONE,NONE,NONE | 5000 | 0.62",
     }, delimiter = '|')
     void calculateProfit(String lottoRank, long expectedProfit, String expectedProfitRateString) {
         BigDecimal expectedProfitRate = new BigDecimal(expectedProfitRateString);

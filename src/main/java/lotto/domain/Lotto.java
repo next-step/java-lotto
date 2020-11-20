@@ -20,9 +20,9 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public boolean contains(int num) {
+    public boolean contains(LottoNumber num) {
         for (LottoNumber lottoNumber : this.lotto) {
-            if (lottoNumber.getNumber() == num) return true;
+            if (lottoNumber.getNumber() == num.getNumber()) return true;
         }
         return false;
     }
