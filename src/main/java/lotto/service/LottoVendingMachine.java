@@ -10,6 +10,7 @@ import static lotto.domain.LottoRuleConfig.*;
 
 public class LottoVendingMachine {
 
+    private static final String STRING_SPACE_REGEX = "\\s";
     private static final List<LottoNumber> lottoNumbers;
 
     static {
@@ -23,8 +24,12 @@ public class LottoVendingMachine {
     }
 
     public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumbers) {
-        List<Integer> winningNumberList = parseIntNumbers(winningNumbers);
+        List<Integer> winningNumberList = parseIntNumbers(noneSpaceStrings(winningNumbers));
         return getLottoResultList(lottos,winningNumberList);
+    }
+
+    private static String noneSpaceStrings(String winningNumbers) {
+        return winningNumbers.replaceAll(STRING_SPACE_REGEX,"");
     }
 
     private static List<LottoResult> getLottoResultList(Lottos lottos, List<Integer> winningNumberList) {
@@ -55,7 +60,7 @@ public class LottoVendingMachine {
     }
 
     private static List<Integer> parseIntNumbers(String winningNumbers) {
-        return Arrays.stream(winningNumbers.split(","))
+        return Arrays.stream(winningNumbers.split(LOTTO_NUMBER_SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
