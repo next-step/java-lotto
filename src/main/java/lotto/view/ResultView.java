@@ -1,15 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import static lotto.view.ResultViewConfig.*;
 
 public class ResultView {
-
-    private static final String OUTPUT_BUY_LOTTO_COUNT = "%d개를 구매했습니다.\n";
 
     private ResultView() {}
 
@@ -17,6 +15,29 @@ public class ResultView {
         printBuyLottoCount(lottos);
         lottoResult(lottos.getLottos());
         System.out.println();
+    }
+
+    public static void printLottoWinningStatistics(Map<LottoResult, AtomicInteger> resultMap,int price, BigInteger profit) {
+        System.out.print(WINNING_STATISTICS);
+        for(LottoResult result : resultMap.keySet()) {
+            System.out.printf(
+                    WINNING_STATISTICS_GRID,
+                    result.getWinningCount(),
+                    result.getPrize(),
+                    resultMap.get(result).get()
+            );
+        }
+        printProfit(price,profit);
+    }
+
+    private static void printProfit(int price, BigInteger profit) {
+        String result = profit.divide(BigInteger.valueOf(price)).toString();
+        boolean isProfit = Integer.parseInt(result) >= 1;
+        System.out.printf(
+                WINNING_STATISTICS_RESULT,
+                result,
+                isProfit ?SURPLUS:DEFICIT
+        );
     }
 
     private static void printBuyLottoCount(Lottos lottos) {
