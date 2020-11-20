@@ -2,10 +2,7 @@ package step2.view;
 
 import step2.utils.Sets;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class InputView {
 
@@ -13,7 +10,7 @@ public class InputView {
 
     public int requestMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return nextInt();
     }
 
     public Set<Set<Integer>> requestManualSelectionNumbers() {
@@ -22,7 +19,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Set<Set<Integer>> lotteryNumbers = new HashSet<>();
         for (int i = 0; i < manualSelectionCount; i++) {
-            String line = scanner.nextLine();
+            String line = nextLine();
             lotteryNumbers.add(Sets.of(splitAndConvertToIntArray(line)));
         }
 
@@ -31,18 +28,18 @@ public class InputView {
 
     protected int requestManualSelectionCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return nextInt();
     }
 
     public Integer[] requestLastWeekLotteryNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String line = scanner.nextLine();
+        String line = nextLine();
         return splitAndConvertToIntArray(line);
     }
 
     public Integer requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return nextInt();
     }
 
     public static Integer[] splitAndConvertToIntArray(String line) {
@@ -50,5 +47,21 @@ public class InputView {
                 .map(String::trim) //
                 .map(Integer::valueOf) //
                 .toArray(Integer[]::new);
+    }
+
+    private String nextLine() {
+        String line = scanner.nextLine();
+        while (line.isEmpty()) {
+            line = scanner.nextLine();
+        }
+        return line;
+    }
+
+    private int nextInt() {
+        String line = scanner.nextLine();
+        while (line.isEmpty()) {
+            line = scanner.nextLine();
+        }
+        return Integer.parseInt(line);
     }
 }
