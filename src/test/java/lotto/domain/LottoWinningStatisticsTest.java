@@ -47,7 +47,7 @@ public class LottoWinningStatisticsTest {
         List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber);
 
         //when
-        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getResults(lottoResults);
+        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
         int first = resultMap.get(LottoResult.FIRST).get();
         int fourth = resultMap.get(LottoResult.FOURTH).get();
 
