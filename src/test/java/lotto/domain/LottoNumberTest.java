@@ -29,6 +29,23 @@ class LottoNumberTest {
                 .isEqualTo(6);
     }
 
+    @DisplayName("순서와 관계없이 번호가 동일하면 같은 로또번호다")
+    @Test
+    void equals(){
+        LottoNumber num1 = LottoUtils.lottoNumber("1,2,3,4,5,6");
+        LottoNumber num2 = LottoUtils.lottoNumber("2,6,4,5,3,1");
+
+        assertThat(num1.equals(num2)).isTrue();
+    }
+
+    @DisplayName("로또번호를 String 으로 바꿀 수 있다")
+    @Test
+    void to_string(){
+        LottoNumber num = LottoUtils.lottoNumber("1,2,3,4,5,6");
+
+        assertThat(num.toString()).isEqualTo("1,2,3,4,5,6");
+    }
+
     private NumberMatcher testMatcher(List<Integer> source) {
         return new ListNumberMatcher(source);
     }

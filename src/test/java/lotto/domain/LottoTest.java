@@ -22,6 +22,15 @@ class LottoTest {
         assertThat(lotto.getMatchedNumberCount(new ListNumberMatcher(Arrays.asList(1,2,3,4,5,6)))).isEqualTo(6);
     }
 
+    @DisplayName("순서와 관계없이 번호가 동일하면 같은 로또다")
+    @Test
+    void equals(){
+        Lotto lotto1 = LottoUtils.lotto("1,2,3,4,5,6");
+        Lotto lotto2 = LottoUtils.lotto("2,6,4,5,3,1");
+
+        assertThat(lotto1.equals(lotto2)).isTrue();
+    }
+
 
     private Lotto issueLotto(List<Integer> numbers) {
         return new Lotto(new LottoNumber(numbers));

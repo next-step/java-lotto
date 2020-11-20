@@ -6,12 +6,17 @@ import java.util.stream.Collectors;
 
 public class LottoUtils {
 
-    public static Lotto lotto(String numbers) {
+    public static LottoNumber lottoNumber(String numbers) {
         List<Integer> inumbers = Arrays.asList(numbers.split(",")).stream()
                 .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
-        return new Lotto(new LottoNumber(inumbers));
+        return new LottoNumber(inumbers);
     }
+
+    public static Lotto lotto(String numbers) {
+        return new Lotto(lottoNumber(numbers));
+    }
+
 
 }
