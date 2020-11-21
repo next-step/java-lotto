@@ -32,5 +32,9 @@ public class MainTest {
         testInput = "";
         expectAnswer = 0;
         assertThat(testLogic(testInput)).isEqualTo(expectAnswer);
+
+        testInput = "6";
+        expectAnswer = 6;
+        assertThat(testLogic(testInput)).isEqualTo(expectAnswer);
     }
 }
