@@ -56,6 +56,14 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()
+    
+- 'BonusLottoBall'
+    - winningLotto 에 포함되지 않은 숫자인지 검사한다.
+    
+- `Lottos`
+    - public static Lottos of(List<Lotto> lottos)
+    - public NumberCountCollections statisticWinning(Lotto winningNumbers, LottoBall bonusBall)
+     
          
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
@@ -70,10 +78,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     
 
     
-- Lottos
-    - public static Lottos of(List<Lotto> lottos)
-    - public NumberCountCollections statisticWinning(Lotto winningNumbers, LottoBall bonusBall)
-     
+
 - LottoSeller 로또 판매기 
     - static final int priceOfLotto;
     - public static Lottos generateLottos(int payment)
