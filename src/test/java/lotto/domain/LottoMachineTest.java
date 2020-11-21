@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +16,9 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoAutoMachine();
 
         //When
-        List<Integer> result = lottoMachine.createLottoNumber();
+        Set<Integer> result = lottoMachine.createLottoNumber();
 
         //Then
-        assertThat(new HashSet(result)).hasSize(result.size());
+        assertThat(result).hasSize(6);
     }
 }

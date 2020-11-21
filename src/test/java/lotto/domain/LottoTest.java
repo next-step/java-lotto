@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,8 +24,8 @@ public class LottoTest {
         //Given & When
         Lotto lotto = new Lotto(sequence, new LottoMachine() {
             @Override
-            public List<Integer> createLottoNumber() {
-                return Arrays.asList(element2, element3, element4);
+            public Set<Integer> createLottoNumber() {
+                return new LinkedHashSet<>(Arrays.asList(element2, element3, element4));
             }
         });
 
@@ -63,11 +62,11 @@ public class LottoTest {
     @DisplayName("matchPrizeNumber 메서드 테스트")
     @ParameterizedTest
     @MethodSource("createLottoNumber")
-    public void matchPrizeNumberTest(List<Integer> expected) {
+    public void matchPrizeNumberTest(LinkedHashSet<Integer> expected) {
         //Given
         Lotto lotto = new Lotto(1, new LottoMachine() {
             @Override
-            public List<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber() {
                 return expected;
             }
         });
@@ -82,10 +81,10 @@ public class LottoTest {
 
     static Stream<Arguments> createLottoNumber() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 3, 5)),
-                Arguments.of(Arrays.asList(2, 3, 5, 6)),
-                Arguments.of(Arrays.asList(2, 3, 5, 6, 8)),
-                Arguments.of(Arrays.asList(2, 3, 5, 6, 8, 12))
+                Arguments.of(new LinkedHashSet<>(Arrays.asList(1, 3, 5))),
+                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6))),
+                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6, 8))),
+                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6, 8, 12)))
         );
     }
 }

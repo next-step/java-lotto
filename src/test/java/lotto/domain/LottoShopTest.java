@@ -5,7 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +22,8 @@ public class LottoShopTest {
         LottoShop shop = new LottoShop();
         Lottos lottos = shop.purchase(new LottoPrice(purchasePrice), new LottoMachine() {
             @Override
-            List<Integer> createLottoNumber() {
-                return Arrays.asList(1, 3, 5, 8, 6);
+            Set<Integer> createLottoNumber() {
+                return new LinkedHashSet<>(Arrays.asList(1, 3, 5, 8, 6));
             }
         });
 

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public abstract class LottoMachine {
@@ -14,5 +15,5 @@ public abstract class LottoMachine {
         IntStream.rangeClosed(1, MAX_LOTTO_NUMBER_RANGE).forEach(numbers::add);
     }
 
-    abstract List<Integer> createLottoNumber();
+    abstract Set<Integer> createLottoNumber();
 }

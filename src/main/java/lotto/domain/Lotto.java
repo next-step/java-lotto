@@ -2,11 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
     private Integer lottoSequence;
-    private List<Integer> lottoPickNumber;
+    private Set<Integer> lottoPickNumber;
 
     public Lotto (Integer lottoSequence, LottoMachine lottoMachine) {
         this.lottoSequence = lottoSequence;
@@ -20,7 +21,7 @@ public class Lotto {
        return PrizeInformation.findByPrizePrice(prizeCount);
     }
 
-    public List<Integer> getLottoPickNumber() {
+    public Set<Integer> getLottoPickNumber() {
         return lottoPickNumber;
     }
 

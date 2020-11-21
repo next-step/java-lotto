@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Lottos {
 
@@ -22,7 +23,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> getLottoNumber(int index) {
+    public Set<Integer> getLottoNumber(int index) {
         return lottos.get(index).getLottoPickNumber();
     }
 
