@@ -1,4 +1,4 @@
-package study.lotto.core;
+package study.lotto.core.exception;
 
 public class LottoNumberFormatException extends RuntimeException{
 

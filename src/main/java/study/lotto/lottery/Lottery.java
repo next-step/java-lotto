@@ -3,10 +3,7 @@ package study.lotto.lottery;
 import study.lotto.core.*;
 import study.lotto.dispenser.Lottos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,8 +16,10 @@ public class Lottery {
     private List<WinningLotto> winningLottos = new ArrayList<>();
 
     public Lottery(WinLottoNumbers winLottoNumbers, Lottos lottos) {
-        this.winLottoNumbers = winLottoNumbers;
-        this.lottos = lottos;
+        this.winLottoNumbers = Optional.ofNullable(winLottoNumbers)
+                .orElse(WinLottoNumbers.empty());
+        this.lottos = Optional.ofNullable(lottos)
+                .orElse(new Lottos(new ArrayList<>()));
     }
 
     public LotteryResult checkLotto() {

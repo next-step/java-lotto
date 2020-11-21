@@ -37,7 +37,7 @@ public enum LottoRank {
 
     public static LottoRank of(WinningLotto winningLotto, boolean matchBonusLottoNumber) {
 
-        Integer matchingNumberCount = Optional.ofNullable(winningLotto)
+        int matchingNumberCount = Optional.ofNullable(winningLotto)
                 .map(w -> w.getMatchingNumberCount())
                 .orElse(0);
 

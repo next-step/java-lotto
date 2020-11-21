@@ -15,7 +15,9 @@ public class LotteryResult {
     private final double totalReturnRatio;
 
     public LotteryResult(List<WinningLotto> winningLottos, double totalReturnRatio) {
-        this.countByLottoRank = countByLottoRank(winningLottos);
+        this.countByLottoRank = Optional.ofNullable(winningLottos)
+                .map(this::countByLottoRank)
+                .orElse(new HashMap<>());
         this.totalReturnRatio = totalReturnRatio;
     }
 
@@ -29,8 +31,8 @@ public class LotteryResult {
     }
 
     public Long getNumberOfLottoRank(LottoRank lottoRank) {
-        Long numberOfLottoRank = countByLottoRank.get(lottoRank);
-        return Objects.nonNull(numberOfLottoRank) ? numberOfLottoRank : 0L;
+        return Optional.ofNullable(countByLottoRank.get(lottoRank))
+                .orElse(0L);
     }
 
 }

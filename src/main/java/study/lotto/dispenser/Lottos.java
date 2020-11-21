@@ -3,10 +3,8 @@ package study.lotto.dispenser;
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoRank;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import javax.swing.text.html.Option;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos implements Iterable<Lotto> {
@@ -14,7 +12,8 @@ public class Lottos implements Iterable<Lotto> {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Optional.ofNullable(lottos)
+                .orElse(new ArrayList<>());
     }
 
     public static Lottos merge(Lottos a, Lottos b) {
