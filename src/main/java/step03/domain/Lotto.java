@@ -1,15 +1,18 @@
 package step03.domain;
 
 import exception.DuplicatedLottoNumberException;
+import exception.InValidSizeOfLottoException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
     private final SortedSet<LottoBall> lotto;
 
     private Lotto (List<LottoBall> lottoBalls) {
-        validateUnique(lottoBalls);
+        validate(lottoBalls);
         this.lotto = new TreeSet(lottoBalls);
     }
 
@@ -34,10 +37,21 @@ public class Lotto {
         return total;
     }
 
+    private static void validate(List<LottoBall> lottoBalls) {
+        validateUnique(lottoBalls);
+        validateSize(lottoBalls);
+    }
+
     private static void validateUnique(List<LottoBall> lottoBalls) {
         if (lottoBalls.size() != new HashSet<>(lottoBalls).size()) {
             throw new DuplicatedLottoNumberException();
         };
+    }
+
+    private static void validateSize(List<LottoBall> lottoBalls) {
+        if (lottoBalls.size() != LOTTO_NUMBER_COUNT) {
+            throw new InValidSizeOfLottoException();
+        }
     }
 
     @Override

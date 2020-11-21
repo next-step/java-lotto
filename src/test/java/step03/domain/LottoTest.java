@@ -1,6 +1,7 @@
 package step03.domain;
 
 import exception.DuplicatedLottoNumberException;
+import exception.InValidSizeOfLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -77,35 +78,58 @@ public class LottoTest {
     @DisplayName("로또 번호의 정렬")
     @Test
     void test_arrange() {
-        assertThat(Lotto.of(
-                Arrays.asList(
-                        LottoBall.valueOf(21),
-                        LottoBall.valueOf(8),
-                        LottoBall.valueOf(43),
-                        LottoBall.valueOf(23),
-                        LottoBall.valueOf(42),
-                        LottoBall.valueOf(41)
-                ))
-        ).isEqualTo(Lotto.of(lottoBalls));
+        assertThat(Lotto.of(Arrays.asList(
+                LottoBall.valueOf(21),
+                LottoBall.valueOf(8),
+                LottoBall.valueOf(43),
+                LottoBall.valueOf(23),
+                LottoBall.valueOf(42),
+                LottoBall.valueOf(41)
+        ))).isEqualTo(Lotto.of(lottoBalls));
     }
 
     @DisplayName("중복값 예외 처리")
     @Test
     void test_validateUnique() {
         assertThatExceptionOfType(DuplicatedLottoNumberException.class)
-                .isThrownBy(() ->
-                        Lotto.of(Arrays.asList(
-                                LottoBall.valueOf(8),
-                                LottoBall.valueOf(8),
-                                LottoBall.valueOf(43),
-                                LottoBall.valueOf(23),
-                                LottoBall.valueOf(42),
-                                LottoBall.valueOf(41)
-                        ))
-                );
+                .isThrownBy(() -> Lotto.of(Arrays.asList(
+                        LottoBall.valueOf(8),
+                        LottoBall.valueOf(8),
+                        LottoBall.valueOf(43),
+                        LottoBall.valueOf(23),
+                        LottoBall.valueOf(42),
+                        LottoBall.valueOf(41)
+                )));
     }
 
-//    @DisplayName("lotto size가 6이 아니면 예외 처리")
+    private static Stream<List<LottoBall>> provideInvalidSizeOfLottoResult() {
+        return Stream.of(
+                Arrays.asList(
+                        LottoBall.valueOf(8),
+                        LottoBall.valueOf(43),
+                        LottoBall.valueOf(23),
+                        LottoBall.valueOf(42),
+                        LottoBall.valueOf(41)
+                ),
+                Arrays.asList(
+                        LottoBall.valueOf(8),
+                        LottoBall.valueOf(43),
+                        LottoBall.valueOf(23),
+                        LottoBall.valueOf(42),
+                        LottoBall.valueOf(41),
+                        LottoBall.valueOf(45),
+                        LottoBall.valueOf(1)
+                )
+        );
+    }
+
+    @DisplayName("lotto size가 6이 아니면 예외 처리")
+    @ParameterizedTest
+    @MethodSource("provideInvalidSizeOfLottoResult")
+    void test_validateSize(List<LottoBall> lotto) {
+        assertThatExceptionOfType(InValidSizeOfLottoException.class)
+                .isThrownBy(() -> Lotto.of(lotto));
+    }
 
 
 //    - public List<LottoNumber> getLotto()
