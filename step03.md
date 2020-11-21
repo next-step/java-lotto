@@ -49,7 +49,14 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static LottoBall valueOf(int number)
     - private static void validate(int number) 
         - 1 ~ 45 사이 범위를 초과하면 에러를 던지는 기능
-        
+- `Lotto` 
+    - public static Lotto of(List<LottoBall> lotto)
+    - public int matchCount(Lotto targetLotto)
+    // - public List<LottoNumber> getLotto()
+    
+- `LottoGenerator` lotto 번호들을 생성하는 기능
+    - public static Lotto generate()
+         
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
@@ -61,13 +68,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능
     - public static void showYield(double yield) 수익률을 보여주는 기능
     
-- LottoGenerator lotto 번호들을 생성하는 기능
-    - public static Lotto generate()
-    
-- Lotto 
-    - public static Lotto of(List<LottoBall> lotto)
-    - public int matchCount(Lotto targetLotto)
-    - public List<LottoNumber> getLotto()
+
     
 - Lottos
     - public static Lottos of(List<Lotto> lottos)
