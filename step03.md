@@ -58,6 +58,9 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public int matchCount(Lotto targetLotto)
     - public boolean isContaining(LottoBall lottoBall)
     // - public List<LottoNumber> getLotto()
+    - 정렬되어있어야 한다.
+    - 중복값 예외
+    - size 는 6개
     
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()

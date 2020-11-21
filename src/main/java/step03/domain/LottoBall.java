@@ -2,8 +2,7 @@ package step03.domain;
 
 import exception.OutOfLottoNumberRangeException;
 
-
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall>{
     private static final int START = 1;
     private static final int END = 46;
     public static LottoBall[] lottoNumbers = new LottoBall[END];
@@ -30,4 +29,8 @@ public class LottoBall {
         }
     }
 
+    @Override
+    public int compareTo(LottoBall lottoBall) {
+        return number - lottoBall.number;
+    }
 }

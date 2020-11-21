@@ -2,13 +2,15 @@ package step03.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoBall> lotto;
+    private final SortedSet<LottoBall> lotto;
 
     private Lotto (List<LottoBall> lottoBalls) {
-        this.lotto = lottoBalls;
+        this.lotto = new TreeSet(lottoBalls);
     }
 
     public static Lotto of(List<LottoBall> lottoBalls) {

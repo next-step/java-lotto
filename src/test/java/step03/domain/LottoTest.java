@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step01.Int;
+import step02.domain.WinningCounter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,12 +21,12 @@ public class LottoTest {
     @BeforeEach
     void setup() {
         lottoBalls = Arrays.asList(
-            LottoBall.valueOf(8),
-            LottoBall.valueOf(21),
-            LottoBall.valueOf(23),
-            LottoBall.valueOf(41),
-            LottoBall.valueOf(42),
-            LottoBall.valueOf(43)
+                LottoBall.valueOf(8),
+                LottoBall.valueOf(21),
+                LottoBall.valueOf(23),
+                LottoBall.valueOf(41),
+                LottoBall.valueOf(42),
+                LottoBall.valueOf(43)
         );
     }
 
@@ -69,6 +71,23 @@ public class LottoTest {
         assertThat(Lotto.of(lottoBalls).isContaining(lottoBall))
                 .isEqualTo(expect);
     }
+
+    @DisplayName("로또 번호의 정렬")
+    @Test
+    void test_arrange() {
+        assertThat(Lotto.of(
+                Arrays.asList(
+                        LottoBall.valueOf(21),
+                        LottoBall.valueOf(8),
+                        LottoBall.valueOf(43),
+                        LottoBall.valueOf(23),
+                        LottoBall.valueOf(42),
+                        LottoBall.valueOf(41)
+                ))
+        ).isEqualTo(Lotto.of(lottoBalls));
+    }
+//            - 중복값 예외
+//    - size 는 6개
 
 
 //    - public List<LottoNumber> getLotto()
