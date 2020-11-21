@@ -34,7 +34,6 @@ public class StringAddCalculator {
     private static int sum(List<String> numbers) {
         return numbers.stream()
                 .map(Integer::parseUnsignedInt)  // throws NumberFormatException(is a RuntimeException) when negative integer
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 }
