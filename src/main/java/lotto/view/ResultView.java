@@ -23,6 +23,7 @@ public class ResultView {
             System.out.printf(
                     WINNING_STATISTICS_GRID,
                     result.getWinningCount(),
+                    result == LottoResult.SECOND?WINNING_STATISTICS_BONUS_GRID:"",
                     result.getPrize(),
                     resultMap.get(result).get()
             );
