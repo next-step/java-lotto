@@ -38,4 +38,9 @@ public class TestStringAdderCalculator {
     }
 
     //TODO : user define delimiter
+
+    @Test
+    void addWithPersonalDelimiter() {
+        assertThat(stringAdderCalculator.sum("//;\n1;2;3")).isEqualTo(6);
+    }
 }
