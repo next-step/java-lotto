@@ -1,7 +1,13 @@
+package domain;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TestStringAdderCalculator {
     private StringAdderCalculator stringAdderCalculator;
@@ -37,10 +43,26 @@ public class TestStringAdderCalculator {
         assertThat(stringAdderCalculator.sum("1,2:3")).isEqualTo(6);
     }
 
-    //TODO : user define delimiter
-
     @Test
     void addWithPersonalDelimiter() {
         assertThat(stringAdderCalculator.sum("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @Test
+    void addWithPersonalDelimiterCrosshatch() {
+        assertThat(stringAdderCalculator.sum("//#\n1#2#3")).isEqualTo(6);
+    }
+
+    @Test
+    void addWithPersonalDelimiterAlphabet() {
+        assertThat(stringAdderCalculator.sum("//a\n1a2a3")).isEqualTo(6);
+    }
+
+    @Test
+    void addWithNegativeOperand() {
+        assertThatThrownBy(() -> {
+            stringAdderCalculator.sum("-1,2,3");
+        }).isInstanceOf(RuntimeException.class);
+
     }
 }
