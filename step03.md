@@ -62,9 +62,10 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()
     
-- `WinningLotto`
-    - public static WinningLotto of(Lotto winningLotto)
-    - 보너스 볼이 당첨로또에 포함되지 않는지 검사
+- `WinningComposer`
+    - private WinningComposer(Lotto winningLotto, LottoBall bonusBall)
+    - public static WinningComposer of(Lotto winningLotto, LottoBall bonusBall)
+    - private static void validateBonusBall(Lotto winningLotto, LottoBall bonusBall)
     
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
@@ -77,8 +78,13 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static Lottos generateLottos(int payment)
     - private static int calculateCountOfLotto(int payment)
     - private static void validatePayment(int payment);
-    
-        
+
+- `WinningStatistic` 정산기
+    - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
+    - public WinningStatistic execute()
+    - public List<LottoReward> getLottoRewards()
+    - public double calculateGainRate(int lottoPrice)
+     
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
@@ -91,11 +97,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static void showYield(double yield) 수익률을 보여주는 기능
     
 
-- WinningStatistic 정산기
-    - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
-    - public WinningStatistic execute()
-    - public List<LottoReward> getLottoRewards()
-    - public double calculateGainRate(int lottoPrice)
+
 
 ## 기능 요구사항
 2등을 위해 추가 번호를 하나 더 추첨한다.

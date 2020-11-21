@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class WinningLottoTest {
+public class WinningComposerTest {
     Lotto winningLotto;
 
     @BeforeEach
@@ -25,8 +25,8 @@ public class WinningLottoTest {
     @Test
     void test_constructor() {
         LottoBall bonusBall = LottoBall.valueOf(7);
-        assertThat(WinningLotto.of(winningLotto, bonusBall))
-                .isEqualTo(WinningLotto.of(winningLotto, bonusBall));
+        assertThat(WinningComposer.of(winningLotto, bonusBall))
+                .isEqualTo(WinningComposer.of(winningLotto, bonusBall));
     }
 
     private static Stream<LottoBall> provideInvalidBonusBallResult() {
@@ -46,7 +46,7 @@ public class WinningLottoTest {
     void test_validateBonusBall(LottoBall bonusBall) {
         assertThatExceptionOfType(ExistedInWinningLottoException.class)
                 .isThrownBy(() -> {
-                    WinningLotto.of(winningLotto, bonusBall);
+                    WinningComposer.of(winningLotto, bonusBall);
                 });
     }
 
