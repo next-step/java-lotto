@@ -2,7 +2,6 @@ package step03.domain;
 
 import exception.OutOfLottoNumberRangeException;
 
-import java.util.Objects;
 
 public class LottoBall {
     private static final int START = 1;
