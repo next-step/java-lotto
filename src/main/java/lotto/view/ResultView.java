@@ -9,9 +9,11 @@ import java.util.Map;
 public class ResultView {
 
     public static void getLottoTickets(LottoGameResults lottoGameResults) {
-        System.out.println(lottoGameResults.getLottoGameResults().size() +"개를 구매했습니다.");
-        lottoGameResults.getLottoGameResults()
-                .stream().forEach(lottoGameResult -> System.out.println(Arrays.toString(lottoGameResult.getLottoGameResult().toArray())));
+        System.out.println(lottoGameResults.getLottoIssueResult().getTicketCount() +"개를 구매했습니다.");
+
+        lottoGameResults.getLottoIssueResult().getLottoTickets()
+                .stream().forEach(lottoTicket -> System.out.println(Arrays.toString(lottoTicket.getSortedLottoNumbers().toArray())));
+
     }
 
     public static void getPrizeResult(Map<Integer, Integer> resultsMap) {

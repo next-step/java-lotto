@@ -19,7 +19,7 @@ public class LottoGameController {
 
     public static LottoGameResults execute(int gameMoney) {
         LottoGame lottoGame = new LottoGame(gameMoney);
-        return lottoGame.start();
+        return lottoGame.issueLottoTicket();
     }
 
     public static String getLastWinningNumbers() {
@@ -47,4 +47,5 @@ public class LottoGameController {
     private static void getPrizeResult(Map<Integer, Integer> resultsMap) {
         ResultView.getPrizeResult(resultsMap);
     }
+
 }

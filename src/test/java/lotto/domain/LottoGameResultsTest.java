@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoMain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,21 +17,20 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoGameResultsTest {
     private LottoGameResults lottoGameResults;
     private List<Integer> winningNumbers;
+    private LottoTickets lottoTickets;
 
     @BeforeEach
     void setUp(){
         // given
         int inputMoneyAmount = 14000;
 
-        this.lottoGameResults = new LottoGameResults(inputMoneyAmount);
+        this.lottoTickets = new LottoTickets(inputMoneyAmount);
+
+        this.lottoGameResults = new LottoGameResults(lottoTickets);
 
         int[] numbers = {1,2,3,4,5,6};
+
         this.winningNumbers = IntStream.of(numbers).boxed().collect(Collectors.toList());
-
-        LottoTickets lottoTickets = new LottoTickets(inputMoneyAmount);
-
-        lottoTickets.getLottoTickets()
-                .stream().forEach(lottoTicket -> lottoGameResults.addResult(new LottoGameResult(lottoTicket.getSortedLottoNumbers())));
 
     }
 
@@ -43,29 +43,7 @@ public class LottoGameResultsTest {
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
     }
 
-    @DisplayName("일치하는 당첨번호 갯수 계산 테스트")
-    @Test
-    void countWinningNumbersTest(){
-        int[] numbers = {1,2,3,7,8,9};
-        List<Integer> gameResult = IntStream.of(numbers).boxed().collect(Collectors.toList());
 
-        int winningNumberCount = lottoGameResults.countWinningNumbers(gameResult, winningNumbers);
-
-        assertThat(winningNumberCount).isEqualTo(3);
-
-    }
-
-    @DisplayName("최소 당첨번호 갯수 미만인 경우 0리턴 테스트")
-    @Test
-    void countWinningNumbersUnderMinToPrizeTest(){
-        int[] numbers = {1,2,44,55,66,77};
-        List<Integer> gameResult = IntStream.of(numbers).boxed().collect(Collectors.toList());
-
-        int winningNumberCount = lottoGameResults.countWinningNumbers(gameResult, winningNumbers);
-
-        assertThat(winningNumberCount).isEqualTo(0);
-
-    }
 
 
 

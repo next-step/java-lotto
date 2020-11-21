@@ -29,13 +29,13 @@ public class LottoGameTest {
 
         // when
         LottoGame lottoGame = new LottoGame(inputMoneyAmount);
-        LottoGameResults lottoGameResults = lottoGame.start();
+        LottoGameResults lottoGameResults = lottoGame.issueLottoTicket();
 
-        lottoGameResults.getLottoGameResults()
-                .stream().forEach(lottoGameResult -> System.out.println(Arrays.toString(lottoGameResult.getLottoGameResult().toArray())));
+        /*lottoGameResults.getLottoIssueResult().getLottoTickets()
+                .stream().forEach(lottoTicket -> System.out.println(Arrays.toString(lottoTicket.getSortedLottoNumbers().toArray())));*/
 
         // then
-        assertThat(lottoGameResults.getLottoGameResults().size()).isEqualTo(inputMoneyAmount/1000);
+        assertThat(lottoGameResults.getLottoIssueResult().getTicketCount()).isEqualTo(inputMoneyAmount/1000);
     }
 
 }

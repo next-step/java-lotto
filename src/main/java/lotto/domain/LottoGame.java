@@ -12,13 +12,11 @@ public class LottoGame {
         return this.gameMoney;
     }
 
-    public LottoGameResults start() {
-        LottoGameResults lottoGameResults = new LottoGameResults(gameMoney);
+    public LottoGameResults issueLottoTicket() {
 
         LottoTickets lottoTickets = new LottoTickets(gameMoney);
 
-        lottoTickets.getLottoTickets()
-                .stream().forEach(lottoTicket -> lottoGameResults.addResult(new LottoGameResult(lottoTicket.getSortedLottoNumbers())));
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoTickets);
 
         return lottoGameResults;
     }
