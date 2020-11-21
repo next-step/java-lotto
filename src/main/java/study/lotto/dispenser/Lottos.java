@@ -16,7 +16,7 @@ public class Lottos implements Iterable<Lotto> {
                 .orElse(new ArrayList<>());
     }
 
-    public static Lottos merge(Lottos a, Lottos b) {
+    public static Lottos mergeLottos(Lottos a, Lottos b) {
         List<Lotto> mergedLottos = new ArrayList<>();
         mergedLottos.addAll(a.lottos);
         mergedLottos.addAll(b.lottos);

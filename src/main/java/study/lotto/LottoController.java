@@ -43,7 +43,7 @@ public class LottoController {
         // 자동로또 출력
         LottoPurchaseResultView.display(autoLottos);
         // 병합
-        return Lottos.merge(manualLottos, autoLottos);
+        return Lottos.mergeLottos(manualLottos, autoLottos);
     }
 
 }
