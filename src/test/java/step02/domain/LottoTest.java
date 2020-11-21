@@ -1,7 +1,7 @@
 package step02.domain;
 
-import exception.LottoNumberDuplicatedException;
-import exception.LottoSizeException;
+import exception.DuplicatedLottoNumberException;
+import exception.InValidSizeOfLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step02.Mock;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -56,7 +55,7 @@ public class LottoTest {
     @DisplayName("중복값이 존재하면 예외 던짐 테스트")
     @Test
     public void test_validateUniqueNumber_ThrowException(){
-        assertThatExceptionOfType(LottoNumberDuplicatedException.class)
+        assertThatExceptionOfType(DuplicatedLottoNumberException.class)
                 .isThrownBy(() -> {
                     Lotto.of(Mock.makeLotto(Arrays.asList(1, 1, 1, 2, 3, 5)));
                 });
@@ -65,7 +64,7 @@ public class LottoTest {
     @DisplayName("로또 사이즈가 6이 아니면 예외 던짐 테스트")
     @Test
     public void test_validateLottoSize_ThrowException(){
-        assertThatExceptionOfType(LottoSizeException.class)
+        assertThatExceptionOfType(InValidSizeOfLottoException.class)
                 .isThrownBy(() -> {
                     Lotto.of(Mock.makeLotto(Arrays.asList(1, 1, 1, 2, 3)));
                 });

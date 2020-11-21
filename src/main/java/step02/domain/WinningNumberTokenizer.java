@@ -1,6 +1,6 @@
 package step02.domain;
 
-import exception.LottoNumberException;
+import exception.OutOfLottoNumberRangeException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class WinningNumberTokenizer {
 
     private static void validateNumberRange(LottoGenerator lottoGenerator, Integer number) {
         if (!lottoGenerator.isValidNumberRange(number)) {
-            throw new LottoNumberException();
+            throw new OutOfLottoNumberRangeException();
         }
     }
 

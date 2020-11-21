@@ -1,8 +1,6 @@
 package step02.domain;
 
-import exception.LottoNumberDuplicatedException;
-import exception.LottoNumberException;
-import exception.LottoSizeException;
+import exception.OutOfLottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,7 +31,7 @@ public class WinningNumberTokenizerTest {
     @MethodSource("provideInvalidInputResult")
     public void test_validateNumber_ThrowException(String inValidInput) {
         LottoGenerator lottoGenerator = LottoGenerator.of(1, 10);
-        assertThatExceptionOfType(LottoNumberException.class)
+        assertThatExceptionOfType(OutOfLottoNumberRangeException.class)
                 .isThrownBy(() -> {
                    WinningNumberTokenizer.execute(inValidInput, lottoGenerator);
                 });

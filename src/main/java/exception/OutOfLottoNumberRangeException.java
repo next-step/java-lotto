@@ -1,7 +1,8 @@
 package exception;
 
-public class OutOfLottoNumberRangeException extends IllegalArgumentException{
-    final static String MESSAGE = "로또의 번호는 1 이상 45 이하여야 합니다.";
+public class OutOfLottoNumberRangeException extends IllegalArgumentException {
+    public static final String MESSAGE = "유효한 로또 숫자 범위가 아닙니다.";
+
     public OutOfLottoNumberRangeException() {
         super(MESSAGE);
     }

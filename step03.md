@@ -53,13 +53,18 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
     - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능
     - public static void showYield(double yield) 수익률을 보여주는 기능
+
+- `LottoBall` ball 의 숫자를 가지고 있는 클래스
+    - private LottoBall(int number)
+    - public static LottoBall of(int number)
+    - private void validate(int number) 
+        - 1 ~ 45 사이 범위를 초과하면 에러를 던지는 기능
     
 - LottoBalls
     - 1 ~ 46까지 ball 을 캐시하고 있는 클래스
     - ball 을 요구하면 캐시된 ball 을 주는 기능
     
-- LottoBall
-    - ball 의 숫자를 가지고 있는 클래스
+
     
 - LottoGenerator lotto 번호들을 생성하는 기능
     - public static Lotto generate()

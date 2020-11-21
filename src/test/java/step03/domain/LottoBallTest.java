@@ -1,7 +1,6 @@
 package step03.domain;
 
 import exception.OutOfLottoNumberRangeException;
-import exception.OutOfLottoNumberRangeExceptionTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
