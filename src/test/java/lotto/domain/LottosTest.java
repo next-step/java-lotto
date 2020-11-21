@@ -20,7 +20,7 @@ public class LottosTest {
         List<Lotto> lottoNumbers = new ArrayList<>();
 
         //When
-        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(1, new LottoAutoMachine())));
+        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(new LottoNumbers(new LottoAutoMachine()))));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //Then
@@ -32,20 +32,20 @@ public class LottosTest {
     public void indexGetLotto() {
 
         //Given
-        LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(new LottoPrice(5000), new LottoMachine() {
-            @Override
-            public Set<Integer> createLottoNumber(int capacity) {
-                return new LinkedHashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8));
-            }
-        });
+        List<Lotto> expected = new ArrayList<>();
+        expected.add(0, new Lotto(new LottoNumbers(new LottoAutoMachine())));
+        expected.add(1, new Lotto(new LottoNumbers(new LottoAutoMachine())));
+        expected.add(2, new Lotto(new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20)))));
+
+        Lottos lottos = new Lottos(expected);
 
         //When
-        Set<Integer> result = lottos.getLottoNumber(3);
+        LottoNumbers result = lottos.getLotto(expected.size() - 1);
 
         //Then
         assertThat(result).isNotNull();
-        assertThat(new HashSet(result)).hasSize(result.size());
+        assertThat(result.getLottoNumbers()).contains(10, 15, 16, 17, 18, 20);
+
     }
 
 
@@ -55,15 +55,10 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(new LottoPrice(10000), new LottoMachine() {
-            @Override
-            public Set<Integer> createLottoNumber(int capacity) {
-                return new LinkedHashSet<>(Arrays.asList(12, 33, 35, 45));
-            }
-        });
+        Lottos lottos = lottoShop.purchase(new LottoPrice(10000), (capacity -> new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
 
         //When
-        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LinkedHashSet<>(Arrays.asList(1, 3, 5, 7, 8, 9))));
+        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9))));
 
         //Then
         assertThat(reward).isNotNull();
