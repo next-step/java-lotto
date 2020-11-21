@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LotteryResultView extends AbstractView {
 
-    private static final LotteryResultView instance = new LotteryResultView();
+    private LotteryResultView() {}
 
     private static final List<LottoRank> lottoRanks
             = Arrays.asList(
@@ -20,11 +20,8 @@ public class LotteryResultView extends AbstractView {
                     , LottoRank.SECOND
                     , LottoRank.FIRST);
 
-    public static LotteryResultView getInstance() {
-        return instance;
-    }
 
-    public void display(LotteryResult lotteryResult) {
+    public static void display(LotteryResult lotteryResult) {
 
         stringBuilder.append("당첨 통계");
         printAndClear();
@@ -37,7 +34,7 @@ public class LotteryResultView extends AbstractView {
         printTotalReturnRatio(lotteryResult);
     }
 
-    private void printLotteryStatistic(LotteryResult lotteryResult) {
+    private static void printLotteryStatistic(LotteryResult lotteryResult) {
         for (LottoRank lottoRank : lottoRanks) {
 
             stringBuilder.append(lottoRank.getDescription());
@@ -51,7 +48,7 @@ public class LotteryResultView extends AbstractView {
         }
     }
 
-    private void printTotalReturnRatio(LotteryResult lotteryResult) {
+    private static void printTotalReturnRatio(LotteryResult lotteryResult) {
         stringBuilder.append("총 수익률은 ");
         stringBuilder.append(lotteryResult.getTotalReturnRatio());
         stringBuilder.append("입니다.");

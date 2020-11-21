@@ -1,7 +1,6 @@
 package study.lotto.view.input;
 
 import study.lotto.core.Lotto;
-import study.lotto.core.LottoNumber;
 import study.lotto.dispenser.LottoDispenser;
 import study.lotto.dispenser.Lottos;
 import study.lotto.view.AbstractView;
@@ -15,11 +14,13 @@ public class ManualLottoInputView extends AbstractView {
 
     private static final ManualLottoInputView instance = new ManualLottoInputView();
 
+    private ManualLottoInputView() {}
+
     public static ManualLottoInputView getInstance() {
         return instance;
     }
 
-    public Lottos display(int numberOfManualLotto) {
+    public static Lottos display(int numberOfManualLotto) {
 
         stringBuilder.append("수동으로 구매할 번호를 입력해 주세요.");
         printAndClear();
@@ -35,11 +36,5 @@ public class ManualLottoInputView extends AbstractView {
         return new Lottos(lottos);
     }
 
-    private List<String> parseForLottoNumber(String lottoNumbersDelimitedByComma) {
-        return Arrays.asList(lottoNumbersDelimitedByComma.split(DELIMITER))
-                .stream()
-                .map(String::trim)
-                .collect(Collectors.toList());
-    }
 }
 

@@ -16,38 +16,32 @@ import java.util.List;
 
 public class LottoController {
 
-    private PurchaseInputView purchaseInputView = PurchaseInputView.getInstance();
-    private ManualLottoInputView manualLottoInputView = ManualLottoInputView.getInstance();
-    private WinNumbersInputView winNumbersInputView = WinNumbersInputView.getInstance();
-    private LottoPurchaseResultView lottoPurchaseResultView = LottoPurchaseResultView.getInstance();
-    private LotteryResultView lotteryResultView = LotteryResultView.getInstance();
-
     public void purchaseByAuto() {
 
         // 구매
         Lottos lottos = purchaseLottos();
 
         // 당첨 번호 및 추첨
-        WinLottoNumbers winLottoNumbers = winNumbersInputView.display();
+        WinLottoNumbers winLottoNumbers = WinNumbersInputView.display();
         Lottery lottery = new Lottery(winLottoNumbers, lottos);
         LotteryResult lotteryResult = lottery.checkLotto();
         
         // 결과 출력
-        lotteryResultView.display(lotteryResult);
+        LotteryResultView.display(lotteryResult);
 
     }
 
     private Lottos purchaseLottos() {
         // 구매 수량 입력
-        PurchaseAmount purchaseAmount = purchaseInputView.display();
+        PurchaseAmount purchaseAmount = PurchaseInputView.display();
         // 구매 - 수동
-        Lottos manualLottos = manualLottoInputView.display(purchaseAmount.getNumberOfManualLotto());
+        Lottos manualLottos = ManualLottoInputView.display(purchaseAmount.getNumberOfManualLotto());
         // 구매결과 출력
-        purchaseInputView.displayPurchaseAmount(purchaseAmount);
+        PurchaseInputView.displayPurchaseAmount(purchaseAmount);
         // 구매 - 자동
         Lottos autoLottos = LottoDispenser.auto(purchaseAmount.getNumberOfAutoLotto());
         // 자동로또 출력
-        lottoPurchaseResultView.display(autoLottos);
+        LottoPurchaseResultView.display(autoLottos);
         // 병합
         return Lottos.merge(manualLottos, autoLottos);
     }

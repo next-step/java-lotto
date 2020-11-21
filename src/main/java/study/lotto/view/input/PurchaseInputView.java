@@ -7,31 +7,27 @@ import java.util.Scanner;
 
 public class PurchaseInputView extends AbstractView {
 
-    private static final PurchaseInputView instance = new PurchaseInputView();
+    private PurchaseInputView() {}
 
-    public static PurchaseInputView getInstance() {
-        return instance;
-    }
-
-    public PurchaseAmount display() {
+    public static PurchaseAmount display() {
         return new PurchaseAmount(purchaseAmountView(), numberOfManualLottoView());
     }
 
-    private int purchaseAmountView() {
+    private static int purchaseAmountView() {
         stringBuilder.append("구매 금액을 입력해주세요.");
         printAndClear();
 
         return scanner.nextInt();
     }
 
-    private int numberOfManualLottoView() {
+    private static int numberOfManualLottoView() {
         stringBuilder.append("수동으로 구매할 로또 수를 입력해 주세요.");
         printAndClear();
 
         return scanner.nextInt();
     }
 
-    public void displayPurchaseAmount(PurchaseAmount purchaseAmount) {
+    public static void displayPurchaseAmount(PurchaseAmount purchaseAmount) {
         stringBuilder.append("수동으로 ");
         stringBuilder.append(purchaseAmount.getNumberOfManualLotto());
         stringBuilder.append("장, 자동으로 ");

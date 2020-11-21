@@ -42,11 +42,14 @@ public class LottoDispenser {
     }
 
     public static Lotto manual(List<String> parsedLottoNumbers) {
-        List<LottoNumber> lottoNumbers = parsedLottoNumbers.stream()
+        return new Lotto(toLottoNumbers(parsedLottoNumbers));
+    }
+
+    public static List<LottoNumber> toLottoNumbers(List<String> parsedLottoNumbers) {
+        return parsedLottoNumbers.stream()
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
     }
 
 }
