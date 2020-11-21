@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.model.CandidateLotto;
 import lotto.strategy.DrawingStrategy;
-import lotto.strategy.ManualDrawing;
+import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -66,7 +66,7 @@ public class LottoTest {
 
         Set<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
 
-        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualDrawing(manualNumbers));
+        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
         assertThat(testCandidateLotto.getMatchingNumberCount(manualNumbers)).isEqualTo(numberCount);
 
@@ -84,7 +84,7 @@ public class LottoTest {
         winnerNumbers.remove(1);
         winnerNumbers.add(threshold);
 
-        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualDrawing(manualNumbers));
+        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
         assertThat(testCandidateLotto.getMatchingNumberCount(winnerNumbers)).isEqualTo(numberCount - 1);
 

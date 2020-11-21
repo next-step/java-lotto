@@ -32,12 +32,16 @@ public class ResultView {
         System.out.println(RESULT_MESSAGE);
         System.out.println(LINE_SEPARATOR);
         result.entrySet().stream()
-                .map(e -> String.format(RESULT_FORMAT, e.getKey().toString(), e.getValue()))
+                .map(this::convertResultFormat)
                 .forEach(System.out::println);
     }
 
     public void printEarningRate(double earningRate) {
         System.out.println(String.format(EARNING_RATE_FORMAT, earningRate));
+    }
+
+    private String convertResultFormat(Map.Entry<Hit, Integer> e){
+        return String.format(RESULT_FORMAT, e.getKey().toString(), e.getValue());
     }
 
     private String convertNumbersFormat(String[] strings) {

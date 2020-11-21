@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.strategy.AutoDrawing;
+import lotto.strategy.AutoStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,7 +38,7 @@ public class Lottoes {
 
     private List<CandidateLotto> buyLottoes() {
         return IntStream.range(0, lottoCount)
-                .mapToObj(e -> new CandidateLotto(new AutoDrawing()))
+                .mapToObj(e -> new CandidateLotto(new AutoStrategy()))
                 .collect(Collectors.toList());
     }
 
