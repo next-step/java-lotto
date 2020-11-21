@@ -14,8 +14,8 @@ public class LottoTest {
 
     @Test
     void checkWhetherToWinTest() throws Exception {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLotto = Lotto.of(Arrays.asList(1,2,3,4,5,7));
 
-        assertThat(lotto.checkWhetherToWin(winningLotto)).isEqualTo(LottoPrize.FIRST_PRIZE);
+        assertThat(lotto.checkWhetherToWin(winningLotto,6)).isEqualTo(LottoPrize.SECOND_PRIZE);
     }
 }

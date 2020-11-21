@@ -12,12 +12,10 @@ public class LottoApplication {
         Lottos lottos = AutomaticLottoGenerator.generate(numberOfLottos);
         ResultView.printBuyingLottos(lottos);
 
-
-
         Lotto winningLotto = Lotto.of(InputView.askWinningNumbers());
         int bonusNumber = InputView.askBonusNumber();
 
-        LottoResult lottoResult = lottos.calculate(winningLotto);
+        LottoResult lottoResult = lottos.calculate(winningLotto, bonusNumber);
         ResultView.printLottoResult(lottoResult);
     }
 }
