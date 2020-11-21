@@ -11,7 +11,7 @@ public class LottoSeller {
 
     public static Lottos generateLottos(Integer payment) {
         validatePayment(payment);
-        Integer countOfLottos = calculateCountOfLottos(payment);
+        int countOfLottos = calculateCountOfLottos(payment);
 
         List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
                 .limit(countOfLottos)

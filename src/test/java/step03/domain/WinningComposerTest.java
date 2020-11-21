@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import step03.Rank;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,9 +64,7 @@ public class WinningComposerTest {
     @MethodSource("provideInvalidBonusBallResult")
     void test_validateBonusBall() {
         assertThatExceptionOfType(ExistedInWinningLottoException.class)
-                .isThrownBy(() -> {
-                    WinningComposer.of(winningLotto, bonusBall);
-                });
+                .isThrownBy(() -> WinningComposer.of(winningLotto, LottoBall.valueOf(1)));
     }
 
     @DisplayName("matching Count 계산")

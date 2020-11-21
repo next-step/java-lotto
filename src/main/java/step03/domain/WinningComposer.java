@@ -1,9 +1,7 @@
 package step03.domain;
 
 import exception.ExistedInWinningLottoException;
-import step03.Rank;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class WinningComposer {
@@ -26,7 +24,7 @@ public class WinningComposer {
         }
     }
 
-    public Map<Rank, Integer> calculateMatchOfCount(Lottos lottos) {
+    public RankCounter calculateMatchOfCount(Lottos lottos) {
          return lottos.calculateCountOfMatch(winningLotto, bonusBall);
     }
 

@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import step03.Rank;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,10 +52,10 @@ public class LottosTest {
     @DisplayName("matching Count 계산")
     @Test
     void test_calculateCountOfMatch() {
-        Map<Rank, Integer> expect = new HashMap<Rank, Integer>(){{
-            put(Rank.valueOf(3, false), 1);
-            put(Rank.valueOf(0, false), 13);
-        }};
+        RankCounter expect = RankCounter.of();
+
+        expect.put(Rank.valueOf(3, false), 1);
+        expect.put(Rank.valueOf(0, false), 13);
 
         assertThat(Lottos.of(lottos).calculateCountOfMatch(winningLotto, bonusBall))
                 .isEqualTo(expect);

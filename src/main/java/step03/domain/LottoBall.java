@@ -3,9 +3,9 @@ package step03.domain;
 import exception.OutOfLottoNumberRangeException;
 
 public class LottoBall implements Comparable<LottoBall>{
-    private static final int START = 1;
-    private static final int END = 46;
-    public static LottoBall[] lottoNumbers = new LottoBall[END];
+    public static final int START = 1;
+    public static final int END = 46;
+    private static LottoBall[] lottoNumbers = new LottoBall[END];
 
     static {
         for (int i = START; i < END; i++)

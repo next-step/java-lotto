@@ -1,22 +1,26 @@
 package step03.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static List<Integer> RANGE =
+        IntStream.range(LottoBall.START, LottoBall.END)
+                 .boxed()
+                 .collect(Collectors.toList());
 
     private LottoGenerator() { }
 
     public static Lotto generate() {
-        List<LottoBall> lottoBalls = Arrays.asList(LottoBall.lottoNumbers);
-        Collections.shuffle(lottoBalls);
+        Collections.shuffle(RANGE);
 
         return Lotto.of(
-                lottoBalls.stream()
+                RANGE.stream()
                 .limit(LOTTO_NUMBER_COUNT)
+                .map(LottoBall::valueOf)
                 .collect(Collectors.toList())
         );
     }
