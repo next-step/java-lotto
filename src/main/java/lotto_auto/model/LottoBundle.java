@@ -1,9 +1,9 @@
 package lotto_auto.model;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 
 public class LottoBundle {
 
@@ -31,4 +31,14 @@ public class LottoBundle {
     public List<LottoTicket> export() {
         return lottoTicketList;
     }
+
+    public List<LottoResult> statistic(LottoTicket winningLottoTicket) {
+        List<LottoResult> ret = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            LottoResult result = lottoTicket.getResult(winningLottoTicket);
+            ret.add(result);
+        }
+        return ret;
+    }
+
 }

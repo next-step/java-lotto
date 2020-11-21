@@ -115,7 +115,7 @@ class LottoTicketTest {
         winningNumber.add(9);
         LottoTicket winningTicket = new LottoTicket(winningNumber);
 
-        assertThat(lottoTicket.matchNumberCount(winningTicket)).isEqualTo(3);
+        assertThat(lottoTicket.getMatchNumberCount(winningTicket)).isEqualTo(3);
     }
 
 }
