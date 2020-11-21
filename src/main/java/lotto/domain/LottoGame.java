@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
+import lotto.domain.lotto.WinningLotto;
 import lotto.domain.rank.LottoRankCalculator;
 import lotto.dto.LottoStatisticsResult;
 import lotto.dto.WinLotteryResult;
@@ -34,7 +35,7 @@ public class LottoGame {
             this.lottoTicketGroup = LottoStore.sell(money);
             return getLottoTicketGroup();
         }
-        
+
         return buyLottoWithManualMode(lottoNumberExpressionList);
     }
 
@@ -54,7 +55,7 @@ public class LottoGame {
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
         final LottoTicket winningLotto = LottoTicket.of(winningNumberExpression);
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, LottoNumber.of(bonusNumber));
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, LottoNumber.of(bonusNumber)));
         return new LottoStatisticsResult(result, getProfit(result));
     }
 

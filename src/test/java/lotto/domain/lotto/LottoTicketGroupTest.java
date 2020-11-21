@@ -47,7 +47,7 @@ class LottoTicketGroupTest {
         final LottoNumber bonusNumber = LottoNumber.MAX;
 
         // when
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, winningLotto, bonusNumber);
+        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));
 
         // then
         assertAll(
