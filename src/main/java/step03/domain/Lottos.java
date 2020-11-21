@@ -37,13 +37,13 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
-    public Map<Rank, Integer> calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
-        Map<Rank, Integer> rank = new HashMap<>();
+    public RankCounter calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
+        RankCounter rankCounter = RankCounter.of();
         lottos.forEach(lotto -> {
             Integer matchOfCount = lotto.matchCount(targetLotto);
             Rank target = Rank.valueOf(matchOfCount, lotto.isContaining(bonusBall));
-            rank.put(target, rank.getOrDefault(target, 0) + 1);
+            rankCounter.increase(target);
         });
-        return rank;
+        return rankCounter;
     }
 }

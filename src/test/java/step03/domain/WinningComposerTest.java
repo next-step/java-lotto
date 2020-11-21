@@ -74,10 +74,9 @@ public class WinningComposerTest {
     @DisplayName("matching Count 계산")
     @Test
     void test_calculateCountOfMatch() {
-        Map<Rank, Integer> expect = new HashMap<Rank, Integer>(){{
-            put(Rank.valueOf(3, false), 1);
-            put(Rank.valueOf(0, false), 13);
-        }};
+        RankCounter expect = RankCounter.of();
+        expect.put(Rank.valueOf(3, false), 1);
+        expect.put(Rank.valueOf(0, false), 13);
 
         assertThat(WinningComposer.of(winningLotto, bonusBall).calculateMatchOfCount(lottos))
                 .isEqualTo(expect);
