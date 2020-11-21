@@ -80,6 +80,9 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - private static int calculateCountOfLotto(int payment)
     - private static void validatePayment(int payment);
 
+- `RewardCalculator`
+    - 총 수익률을 계산
+    
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
