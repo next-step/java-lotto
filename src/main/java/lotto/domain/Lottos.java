@@ -19,9 +19,9 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public List<Integer> getSameNumberList(Numbers numbers) {
+    public List<RankMatcher> getRankMatchers(WinningLotto winningLotto) {
         return this.lottoList.stream()
-                .map(lotto -> lotto.countSameNumber(numbers))
+                .map(lotto -> lotto.getRankMatcher(winningLotto))
                 .collect(Collectors.toList());
     }
 

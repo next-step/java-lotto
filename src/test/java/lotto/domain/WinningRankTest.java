@@ -14,21 +14,22 @@ class WinningRankTest {
 
     static Stream<Arguments> getWinningRank() {
         return Stream.of(
-                arguments(6, WinningRank.FIRST),
-                arguments(5, WinningRank.SECOND),
-                arguments(4, WinningRank.THIRD),
-                arguments(3, WinningRank.FOURTH),
-                arguments(2, WinningRank.FAIL),
-                arguments(1, WinningRank.FAIL),
-                arguments(0, WinningRank.FAIL)
+                arguments(new RankMatcher(6, false), WinningRank.FIRST),
+                arguments(new RankMatcher(5, true), WinningRank.SECOND),
+                arguments(new RankMatcher(5, false), WinningRank.THIRD),
+                arguments(new RankMatcher(4, false), WinningRank.FOURTH),
+                arguments(new RankMatcher(3, false), WinningRank.FIFTH),
+                arguments(new RankMatcher(2, false), WinningRank.FAIL),
+                arguments(new RankMatcher(1, false), WinningRank.FAIL),
+                arguments(new RankMatcher(0, false), WinningRank.FAIL)
         );
     }
 
     @ParameterizedTest
     @DisplayName("당첨 번호와 로또 숫자 비교하여 몇 등 인지 확인")
     @MethodSource
-    void getWinningRank(int sameNumberCount, WinningRank expectedWinningRank) {
-        WinningRank winningRank = WinningRank.getWinningRank(sameNumberCount);
+    void getWinningRank(RankMatcher rankMatcher, WinningRank expectedWinningRank) {
+        WinningRank winningRank = WinningRank.getWinningRank(rankMatcher);
 
         assertThat(winningRank).isEqualTo(expectedWinningRank);
     }

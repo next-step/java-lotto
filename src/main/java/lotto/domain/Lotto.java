@@ -23,8 +23,10 @@ public class Lotto {
             throw new IllegalArgumentException("Numbers size wrong: " + SIZE);
     }
 
-    public int countSameNumber(Numbers numbers) {
-        return this.numbers.countSameNumber(numbers);
+    public RankMatcher getRankMatcher(WinningLotto winningLotto) {
+        int sameNumberCount = winningLotto.countSameNumber(numbers);
+        boolean matchBonusNumber = winningLotto.checkBonus(numbers);
+        return new RankMatcher(sameNumberCount, matchBonusNumber);
     }
 
     public Numbers getNumbers() {

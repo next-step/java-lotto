@@ -13,16 +13,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoTest {
-    private Lotto lotto;
-
-    static Stream<Arguments> checkWinningRank() {
+    static Stream<Arguments> getRankMatcher() {
         Numbers.Builder builder = Numbers.builder();
         return Stream.of(
-                arguments(builder.range(1, 7).build(), 6),
-                arguments(builder.range(2, 8).build(), 5),
-                arguments(builder.range(3, 9).build(), 4),
-                arguments(builder.range(4, 10).build(), 3),
-                arguments(builder.range(5, 11).build(), 2)
+                arguments(new WinningLotto(builder.range(2, 8).build(), new Number(1)), new RankMatcher(5, true)),
+                arguments(new WinningLotto(builder.range(2, 8).build(), new Number(9)), new RankMatcher(5, false))
         );
     }
 
@@ -31,7 +26,7 @@ class LottoTest {
     void createLotto() {
         Numbers numbers = Numbers.builder().range(1, 7).build();
 
-        lotto = new Lotto(size -> numbers);
+        Lotto lotto = new Lotto(size -> numbers);
 
         assertThat(lotto.getNumbers()).isEqualTo(numbers);
     }
@@ -47,15 +42,14 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("당첨 번호와 로또 숫자 비교하여 몇 등 인지 확인")
+    @DisplayName("당첨 번호와 로또 숫자 비교하여 같은 숫자 개수, 보너스 숫자 match 여부 확인")
     @MethodSource
-    void checkWinningRank(Numbers numbers, int expectedSameNumberCount) {
-        Numbers winningNumbers = Numbers.builder().range(1, 7).build();
+    void getRankMatcher(WinningLotto winningLotto, RankMatcher expectedRankMatcher) {
+        Numbers numbers = Numbers.builder().range(1, 7).build();
         Lotto lotto = new Lotto(size -> numbers);
 
-        int sameNumberCount = lotto.countSameNumber(winningNumbers);
+        RankMatcher rankMatcher = lotto.getRankMatcher(winningLotto);
 
-        assertThat(sameNumberCount).isEqualTo(expectedSameNumberCount);
+        assertThat(rankMatcher).isEqualTo(expectedRankMatcher);
     }
-
 }

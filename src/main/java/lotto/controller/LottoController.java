@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.domain.Numbers;
 import lotto.service.NumberSelectionStrategyImpl;
 import lotto.service.WinningRankStatistics;
@@ -38,7 +39,7 @@ public class LottoController {
         return builder.build();
     }
 
-    public int getBonusNumber() {
-        return InputView.getBonusNumber();
+    public Number getBonusNumber() {
+        return new Number(InputView.getBonusNumber());
     }
 }

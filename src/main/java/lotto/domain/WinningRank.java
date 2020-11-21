@@ -3,23 +3,24 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum WinningRank {
-    FAIL(0, 0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    FAIL(new RankMatcher(0, false), 0),
+    FIFTH(new RankMatcher(3, false), 5_000),
+    FOURTH(new RankMatcher(4, false), 50_000),
+    THIRD(new RankMatcher(5, false), 1_500_000),
+    SECOND(new RankMatcher(5, true), 30_000_000),
+    FIRST(new RankMatcher(6, false), 2_000_000_000);
 
-    private final int sameNumberNum;
     private final int price;
+    private RankMatcher rankMatcher;
 
-    WinningRank(int sameNumberNum, int price) {
-        this.sameNumberNum = sameNumberNum;
+    WinningRank(RankMatcher rankMatcher, int price) {
+        this.rankMatcher = rankMatcher;
         this.price = price;
     }
 
-    public static WinningRank getWinningRank(int sameNumberNum) {
+    public static WinningRank getWinningRank(RankMatcher rankMatcher) {
         return Arrays.stream(WinningRank.values())
-                .filter(winningRank -> winningRank.sameNumberNum == sameNumberNum)
+                .filter(winningRank -> winningRank.getRankMatcher().equals(rankMatcher))
                 .findAny()
                 .orElse(WinningRank.FAIL);
     }
@@ -28,15 +29,19 @@ public enum WinningRank {
         return price;
     }
 
-    public int getSameNumberNum() {
-        return sameNumberNum;
-    }
-
     public boolean isFail() {
         return this == WinningRank.FAIL;
     }
 
     public int getTotalPrice(int num) {
         return price * num;
+    }
+
+    public RankMatcher getRankMatcher() {
+        return rankMatcher;
+    }
+
+    public int getSameNumberNum() {
+        return rankMatcher.getSameNumberCount();
     }
 }
