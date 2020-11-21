@@ -3,8 +3,6 @@ import java.util.regex.Pattern;
 
 public class StringSeparator {
 
-    private final static String COMMA = ",";
-    private final static String COLON = ":";
     private final static String DELIMITER = ",|:";
     private final static String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
 
@@ -24,7 +22,7 @@ public class StringSeparator {
     }
 
     private boolean containsDelimiter(String input) {
-        return input.contains(COMMA) || input.contains(COLON);
+        return input.contains(Delimiter.COMMA.getDelimiter()) || input.contains(Delimiter.COLON.getDelimiter());
     }
 
 }
