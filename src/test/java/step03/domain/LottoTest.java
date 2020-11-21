@@ -1,5 +1,6 @@
 package step03.domain;
 
+import exception.DuplicatedLottoNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
     List<LottoBall> lottoBalls;
@@ -86,8 +88,24 @@ public class LottoTest {
                 ))
         ).isEqualTo(Lotto.of(lottoBalls));
     }
-//            - 중복값 예외
-//    - size 는 6개
+
+    @DisplayName("중복값 예외 처리")
+    @Test
+    void test_validateUnique() {
+        assertThatExceptionOfType(DuplicatedLottoNumberException.class)
+                .isThrownBy(() ->
+                        Lotto.of(Arrays.asList(
+                                LottoBall.valueOf(8),
+                                LottoBall.valueOf(8),
+                                LottoBall.valueOf(43),
+                                LottoBall.valueOf(23),
+                                LottoBall.valueOf(42),
+                                LottoBall.valueOf(41)
+                        ))
+                );
+    }
+
+//    @DisplayName("lotto size가 6이 아니면 예외 처리")
 
 
 //    - public List<LottoNumber> getLotto()

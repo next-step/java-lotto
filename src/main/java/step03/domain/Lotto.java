@@ -1,15 +1,15 @@
 package step03.domain;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import exception.DuplicatedLottoNumberException;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private final SortedSet<LottoBall> lotto;
 
     private Lotto (List<LottoBall> lottoBalls) {
+        validateUnique(lottoBalls);
         this.lotto = new TreeSet(lottoBalls);
     }
 
@@ -32,6 +32,12 @@ public class Lotto {
                 total += 1;
 
         return total;
+    }
+
+    private static void validateUnique(List<LottoBall> lottoBalls) {
+        if (lottoBalls.size() != new HashSet<>(lottoBalls).size()) {
+            throw new DuplicatedLottoNumberException();
+        };
     }
 
     @Override
