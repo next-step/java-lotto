@@ -3,12 +3,12 @@ package step03;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
+    MISS(0, 0),
     FIFTH(3, 5_000),
-    MISS(0, 0);
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private int countOfMatch;
     private int winningMoney;
@@ -27,13 +27,13 @@ public enum Rank {
     }
 
     public static Stream<Rank> stream() {
-        return Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST);
+        return Stream.of(values());
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        return stream()
-                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
-                .filter(rank -> rank.getCountOfMatch() != 5 || matchBonus)
+        if (countOfMatch == 5) return matchBonus ? SECOND : THIRD;
+
+        return stream().filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
     }
