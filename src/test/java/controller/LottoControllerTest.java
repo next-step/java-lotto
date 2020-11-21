@@ -32,7 +32,7 @@ class LottoControllerTest {
         LottoInfo lottoInfo = LottoInfo.of(price, quantity);
         controller = new LottoController(lottoInfo);
 
-        Lottos lottos = controller.initLottos();
+        Lottos lottos = controller.initLottos(quantity);
         assertThat(lottos.getLottos().size()).isEqualTo(quantity);
     }
 

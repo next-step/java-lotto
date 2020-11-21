@@ -1,6 +1,8 @@
 package controller;
 
 import domain.*;
+import view.InputView;
+import view.ResultView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +30,35 @@ public class LottoController {
         lottoInfo = LottoInfo.from(price);
     }
 
-    public Lottos initLottos() {
+    public void lottoStart() {
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+
+        int priceTotal = inputView.inputPrice();
+        lottoInfo = LottoInfo.from(priceTotal);
+
+        int lottoQuantity = getLottoQuantity();
+        resultView.displayLottoQuantity(lottoQuantity);
+
+        Lottos lottos = initLottos(lottoQuantity);
+        resultView.displayLottos(lottos);
+
+        LottoNumbers winningNumbers = new LottoNumbers()
+                .createWinningNumbers(inputView.inputLastWinningNumber());
+
+        resultView.displayResultMention();
+
+        Map<Integer, Integer> lottoStatistics = compileLottoStatistics(winningNumbers, lottos);
+        resultView.displayStatistic(lottoStatistics);
+
+        double profit = calculateProfit(lottoStatistics, priceTotal);
+        resultView.displayProfit(profit);
+
+    }
+
+    public Lottos initLottos(int lottoQuantity) {
         List<Lotto> lottoList = IntStream
-                .range(ZERO, getLottoQuantity())
+                .range(ZERO, lottoQuantity)
                 .mapToObj(quantity -> Lotto.createLotto())
                 .collect(Collectors.toList());
         return Lottos.from(lottoList);
