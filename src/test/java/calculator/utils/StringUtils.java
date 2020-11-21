@@ -14,6 +14,9 @@ public class StringUtils {
     private static final String REGEX_SEPARATOR = "//(.)\n(.*)";
     private static final String DEFAULT_SEPARATOR = ",|:";
 
+    private StringUtils() {
+    }
+
     public static List<String> splitString(String value) {
         Matcher matcher = Pattern.compile(REGEX_SEPARATOR).matcher(value);
         if (matcher.find()) {
@@ -21,5 +24,9 @@ public class StringUtils {
             return Arrays.asList(matcher.group(2).split(separator));
         }
         return Arrays.asList(value.split(DEFAULT_SEPARATOR));
+    }
+
+    public static boolean isEmpty(String value) {
+        return value == null || value.isEmpty() || value.equals(" ");
     }
 }
