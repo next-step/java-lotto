@@ -42,6 +42,10 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 ### 객체인 멤버 변수의 getter 메서드
 만일 객체 멤버를 getter 를 해야되는 상황이 있으면, 불변성을 꼭 지켜주어야 한다.
 
+## 저번 미션 회고
+준일님이 피드백을 해주셨는데, 내 코드도 기억이 잘 안나서 무슨소리인가 어리둥절 했었지만.
+이번 미션을 다시 정리하면서, 객체가 해야할 일이 잘 분리가 안되있는 것 같은게 느껴지면서 준일님의 말씀이 이해되었다.
+
 ## 기능 정의
 - `LottoBall` 1 -45 LottoBall 의 숫자를 가지고 있는 클래스
     - public static LottoBall[] lottoNumbers
@@ -64,9 +68,17 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
-    - public NumberCountCollections statisticWinning(Lotto WinningLotto, LottoBall bonusBall)
-     
-         
+    - public Integer size()
+
+    // - public NumberCountCollections statisticWinning(Lotto WinningLotto, LottoBall bonusBall)
+ 
+- `LottoSeller` 로또 판매기 
+    - static final int priceOfLotto;
+    - public static Lottos generateLottos(int payment)
+    - private static int calculateCountOfLotto(int payment)
+    - private static void validatePayment(int payment);
+    
+        
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
@@ -79,13 +91,6 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static void showYield(double yield) 수익률을 보여주는 기능
     
 
-    
-
-- LottoSeller 로또 판매기 
-    - static final int priceOfLotto;
-    - public static Lottos generateLottos(int payment)
-    - private static int calculateCountOfLotto(int payment)
-    
 - WinningStatistic 정산기
     - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
     - public WinningStatistic execute()

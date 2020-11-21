@@ -38,4 +38,10 @@ public class LottosTest {
         assertThat(Lottos.of(lottos)).isEqualTo(Lottos.of(lottos));
     }
 
+    @DisplayName("사이즈 리턴")
+    @Test
+    void test_size() {
+        assertThat(Lottos.of(lottos).size()).isEqualTo(14);
+    }
+
 }

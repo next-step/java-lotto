@@ -27,4 +27,8 @@ public class Lottos {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
+    public Integer size() {
+        return lottos.size();
+    }
 }
