@@ -9,7 +9,9 @@ public class AmountTest {
 
     @Test
     public void null_또는_빈문자() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Amount(""));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Amount(""))
+                .withMessageMatching("입력 값이 잘못됐습니다.");
     }
 
     @Test

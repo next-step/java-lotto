@@ -5,25 +5,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoDrawing extends DrawingStrategy {
-    private final static Random random = new Random();
+    private final static List<Integer> candidates = IntStream.rangeClosed(1, THRESHOLD)
+            .boxed()
+            .collect(Collectors.toList());
 
     @Override
-    public List<Integer> drawNumbers(int numberCount) {
-        List<Integer> numbers;
+    public Set<Integer> drawNumbers() {
+        Collections.shuffle(candidates);
 
-        do {
-            numbers = IntStream.range(0, numberCount)
-                    .map(e -> getLottoNumber())
-                    .boxed()
-                    .collect(Collectors.toList());
-        } while (isInvalid(numbers, numberCount));
-
-        Collections.sort(numbers);
-
-        return numbers;
+        return new HashSet<>(candidates.subList(0, NUMBER_COUNT));
     }
 
-    private int getLottoNumber() {
-        return random.nextInt(THRESHOLD) + 1;
-    }
 }

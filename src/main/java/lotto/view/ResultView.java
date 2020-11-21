@@ -5,6 +5,7 @@ import util.CommonUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ResultView {
     private final static String NUMBERS_DELIMITER = ", ";
@@ -20,9 +21,9 @@ public class ResultView {
         System.out.println(count + BUY_MESSAGE);
     }
 
-    public void printLottoes(List<List<Integer>> lottos) {
+    public void printLottoes(List<Set<Integer>> lottos) {
         lottos.stream()
-                .map(CommonUtils::listToArray)
+                .map(CommonUtils::setToArray)
                 .map(this::convertNumbersFormat)
                 .forEach(System.out::println);
     }

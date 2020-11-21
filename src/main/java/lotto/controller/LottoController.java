@@ -8,16 +8,12 @@ import lotto.strategy.ManualDrawing;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LottoController {
     private final Pattern WINNER_NUMBER_PATTERN = Pattern.compile("\\d+");
-    private Scanner scanner = new Scanner(System.in);
 
     private InputView inputView = new InputView();
     private ResultView resultView = new ResultView();
@@ -26,28 +22,22 @@ public class LottoController {
     private Lotto winnerLotto;
 
     public void run() {
-        inputAmount();
+
+        String inputAmont = inputView.printInputMessageNGetAmount();
+        amount = new Amount(inputAmont);
+
         buyLottoes();
-        inputWinnerNumbers();
+
+        String inputWinnerNumber = inputView.printInputMessageNGetWinnerNumbers();
+        winnerLotto = getWinnerNumbers(inputWinnerNumber);
+
         lottery();
     }
-
-    private void inputAmount() {
-        inputView.printInputAmountMessage();
-        amount = new Amount(scanner.nextLine());
-    }
-
 
     private void buyLottoes() {
         lottoes = new Lottoes(amount.pay(0));
         resultView.printBuyMessage(lottoes.getLottoCount());
         resultView.printLottoes(lottoes.getLottoes());
-    }
-
-
-    private void inputWinnerNumbers() {
-        inputView.printInputWinnerNumbersMessage();
-        winnerLotto = getWinnerNumbers(scanner.nextLine());
     }
 
     private void lottery() {
@@ -59,7 +49,7 @@ public class LottoController {
 
     private Lotto getWinnerNumbers(String stringNumbers) {
         Matcher matcher = WINNER_NUMBER_PATTERN.matcher(stringNumbers);
-        List<Integer> winnerNumbers = new ArrayList<>();
+        Set<Integer> winnerNumbers = new HashSet<>();
 
         while (matcher.find()) {
             int winnerNumber = Integer.parseInt(matcher.group());

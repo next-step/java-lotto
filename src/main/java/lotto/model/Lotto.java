@@ -2,20 +2,20 @@ package lotto.model;
 
 import lotto.strategy.DrawingStrategy;
 
-import java.util.List;
+import java.util.Set;
 
 
 public class Lotto {
-    private final static int NUMBER_COUNT = 6;
+
     public final static int PRICE = 1000;
 
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
 
     public Lotto(DrawingStrategy drawingStrategy) {
-        numbers = drawingStrategy.drawNumbers(NUMBER_COUNT);
+        numbers = drawingStrategy.drawNumbers();
     }
 
-    public int getMatchingNumberCount(List<Integer> winnerNumbers) {
+    public int getMatchingNumberCount(Set<Integer> winnerNumbers) {
         return numbers.stream()
                 .filter(winnerNumbers::contains)
                 .toArray()
@@ -23,7 +23,7 @@ public class Lotto {
 
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 }

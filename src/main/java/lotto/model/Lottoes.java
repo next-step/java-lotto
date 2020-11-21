@@ -32,14 +32,14 @@ public class Lottoes {
     }
 
 
-    public List<List<Integer>> getLottoes() {
+    public List<Set<Integer>> getLottoes() {
         return lottoes.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
 
 
-    public Map<Hit, Integer> getResult(List<Integer> winnerNumbers) {
+    public Map<Hit, Integer> getResult(Set<Integer> winnerNumbers) {
         Map<Hit, Integer> hits = Hit.getHits();
         lottoes.stream()
                 .map(lotto -> lotto.getMatchingNumberCount(winnerNumbers))
@@ -49,7 +49,7 @@ public class Lottoes {
     }
 
 
-    public double getEarningRate(List<Integer> winnerNumbers) {
+    public double getEarningRate(Set<Integer> winnerNumbers) {
         int totalReword = getResult(winnerNumbers).entrySet().stream()
                 .mapToInt(this::calculateReword)
                 .sum();

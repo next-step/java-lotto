@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Set;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,9 +25,9 @@ public class LottoTest {
 
         int numberCount = getNumberCount();
 
-        List<Integer> testNumbers = testNumbers(numberCount, e -> 1);
+        Set<Integer> testNumbers = testNumbers(numberCount, e -> 1);
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(true);
+        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(true);
     }
 
     @Test
@@ -39,9 +39,9 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        List<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
+        Set<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(true);
+        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(true);
     }
 
     @Test
@@ -53,9 +53,9 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        List<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
+        Set<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers, numberCount)).isEqualTo(false);
+        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(false);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        List<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
+        Set<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
 
         Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
 
@@ -78,10 +78,11 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        List<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
-        List<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
+        Set<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
+        Set<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
 
-        winnerNumbers.set(0, threshold);
+        winnerNumbers.remove(1);
+        winnerNumbers.add(threshold);
 
         Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
 
@@ -90,16 +91,16 @@ public class LottoTest {
     }
 
 
-    private List<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
+    private Set<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
         return IntStream.range(0, numberCount)
                 .map(mapper)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
 
     private int getNumberCount() throws Exception {
-        Field lottoField = Lotto.class.getDeclaredField("NUMBER_COUNT");
+        Field lottoField =  DrawingStrategy.class.getDeclaredField("NUMBER_COUNT");
         lottoField.setAccessible(true);
 
         return lottoField.getInt(Lotto.class);
@@ -113,7 +114,7 @@ public class LottoTest {
     }
 
     private Method getIsInvalidOfDrawingStrategy(DrawingStrategy drawingStrategy) throws Exception {
-        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", List.class, int.class);
+        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", Set.class);
         isInvalid.setAccessible(true);
 
         return isInvalid;

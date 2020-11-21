@@ -1,21 +1,21 @@
 package lotto.strategy;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class DrawingStrategy {
+    protected final static int NUMBER_COUNT = 6;
     protected final static int THRESHOLD = 45;
 
-    public abstract List<Integer> drawNumbers(int numbersCount);
+    public abstract Set<Integer> drawNumbers();
 
-    protected boolean isInvalid(List<Integer> numbers, int numberCount) {
+    protected boolean isInvalid(Set<Integer> numbers) {
 
-        List<Integer> filteredNumbers = numbers.stream()
+        Set<Integer> filteredNumbers = numbers.stream()
                 .filter(this::isValidRange)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        return (new HashSet<>(filteredNumbers).size()) != numberCount;
+        return filteredNumbers.size() != NUMBER_COUNT;
 
     }
 
