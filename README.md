@@ -16,7 +16,6 @@ StringUtils
 IntegerUtils
 3. 나뉜 문자를 숫자로 바꾼다.
     - 숫자가 음수이면 Excption을 throw한다.
-        - junit4 expected exception
 
 Calculator
 4. 빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.
