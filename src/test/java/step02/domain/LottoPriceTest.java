@@ -1,6 +1,6 @@
 package step02.domain;
 
-import exception.LottoPriceException;
+import exception.InValidLottoPriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +28,7 @@ public class LottoPriceTest {
     @ParameterizedTest
     @MethodSource("provideInvalidLottoPriceResult")
     public void test_validate(int lottoPrice) {
-        assertThatExceptionOfType(LottoPriceException.class)
+        assertThatExceptionOfType(InValidLottoPriceException.class)
                 .isThrownBy(() -> LottoPrice.of(lottoPrice));
     }
 

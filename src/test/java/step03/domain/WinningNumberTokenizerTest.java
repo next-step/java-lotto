@@ -1,11 +1,10 @@
-package step02.domain;
+package step03.domain;
 
 import exception.OutOfLottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import step02.Mock;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -18,8 +17,8 @@ public class WinningNumberTokenizerTest {
     @Test
     public void test_execute() {
         assertThat(
-                WinningNumberTokenizer.execute("1, 2, 3, 4, 5, 6", LottoGenerator.of(1, 45))
-        ).isEqualTo(Mock.makeLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                WinningNumberTokenizer.execute("1, 2, 3, 4, 5, 6")
+        ).isEqualTo(Lotto.intOf(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     private static Stream<String> provideInvalidInputResult() {
@@ -30,10 +29,9 @@ public class WinningNumberTokenizerTest {
     @ParameterizedTest
     @MethodSource("provideInvalidInputResult")
     public void test_validateNumber_ThrowException(String inValidInput) {
-        LottoGenerator lottoGenerator = LottoGenerator.of(1, 10);
         assertThatExceptionOfType(OutOfLottoNumberRangeException.class)
                 .isThrownBy(() -> {
-                   WinningNumberTokenizer.execute(inValidInput, lottoGenerator);
+                   WinningNumberTokenizer.execute(inValidInput);
                 });
     }
 
