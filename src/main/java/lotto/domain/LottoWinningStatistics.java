@@ -13,12 +13,9 @@ public class LottoWinningStatistics {
 
     public static Map<LottoResult, AtomicInteger> getStatistics(List<LottoResult> lottoResults) {
         Map<LottoResult, AtomicInteger> map = initResultMap();
-        for(LottoResult lottoResult : lottoResults) {
-            if(lottoResult.getWinningCount() == IGNORE_LOTTO_RESULT_ZERO_RANK)
-                continue;
-
-            map.get(lottoResult).incrementAndGet();
-        }
+        lottoResults.stream()
+                .filter(e -> e.getWinningCount() != IGNORE_LOTTO_RESULT_ZERO_RANK)
+                .forEach(result -> map.get(result).incrementAndGet());
         return map;
     }
 
@@ -36,12 +33,9 @@ public class LottoWinningStatistics {
 
     private static Map<LottoResult, AtomicInteger> initResultMap() {
         Map<LottoResult, AtomicInteger> map = new LinkedHashMap<>();
-        for(LottoResult lottoResult : reverseLottoResultValues()) {
-            if(lottoResult.getWinningCount() == IGNORE_LOTTO_RESULT_ZERO_RANK)
-                continue;
-
-            map.put(lottoResult,new AtomicInteger());
-        }
+        reverseLottoResultValues().stream()
+                .filter(e -> e.getWinningCount() != IGNORE_LOTTO_RESULT_ZERO_RANK)
+                .forEach(result -> map.put(result,new AtomicInteger()));
         return map;
     }
 
