@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -45,11 +46,10 @@ public class StringAddCalculatorTest {
         assertThat(calculator.add(input)).isEqualTo(result);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3=6", "//#\\n1#2#3=6", "//&\\n1&2&6=9"}, delimiter = '=')
+    @Test
     @DisplayName("“//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)")
-    void custom_delimiter_test(String input, int result) {
-        assertThat(calculator.add(input)).isEqualTo(result);
+    void custom_delimiter_test() {
+        assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
     }
 
     @ParameterizedTest
