@@ -34,7 +34,7 @@
    * AS-IS: LottoNumber 및 LottoNumber 배열 만드는 모든 곳에 관여 중
    * TO-BE: 중복되지 않은 LottoNumber 6개 묶음 생성, 로또 번호 생성, 티켓 생성, 당첨 번호 생성으로 분리
       * [X] 전체 로또 번호(1 ~ 45) 관리 기능(LottoNumber)
-      * [ ] 당첨번호 생성 및 관리 기능(WinningNumber)
+      * [X] 당첨번호 생성 및 관리 기능(WinningNumber)
       * [ ] 티켓 발급 기능(TicketPublisher)
       * [ ] 중복되지 않은 LottoNumber 6개 묶음 생성 기능(NumberPool)
 * [X] 예외처리 메시징

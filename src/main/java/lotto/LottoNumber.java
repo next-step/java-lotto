@@ -3,10 +3,18 @@ package lotto;
 import static lotto.LottoGameConstant.MAXIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.lottoexception.IllegalLottoNumberRangeException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+  private static final List<LottoNumber> numbers
+      = IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
+      .mapToObj(LottoNumber::new)
+      .collect(Collectors.toList());
 
   private final int number;
 
@@ -15,8 +23,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
   }
 
   public static LottoNumber of(int number) {
+    return get(number);
+  }
+
+  public static LottoNumber get(int number) {
     validateNumber(number);
-    return new LottoNumber(number);
+    return numbers.get(number - 1);
   }
 
   private static void validateNumber(int number) {

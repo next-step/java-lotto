@@ -6,22 +6,16 @@ import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class NumberPool {
 
-  private static final List<LottoNumber> numberPool = new ArrayList<>();
-  private static final Map<Integer, LottoNumber> integerLottoNumberMapper = new HashMap<>();
-
-  static {
-    for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-      LottoNumber number = LottoNumber.of(i);
-      numberPool.add(number);
-      integerLottoNumberMapper.put(i, number);
-    }
-  }
+  private static final List<LottoNumber> randomBox = IntStream
+      .range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
+      .mapToObj(LottoNumber::get)
+      .collect(Collectors.toList());
 
   private NumberPool() {
   }
@@ -29,9 +23,9 @@ public class NumberPool {
   public static LottoTicket publishTicket() {
     PublishStrategy strategy = () -> {
       List<LottoNumber> numbers = new ArrayList<>();
-      Collections.shuffle(numberPool);
+      Collections.shuffle(randomBox);
       for (int i = 0; i < NUMBERS_PER_TICKET; i++) {
-        numbers.add(numberPool.get(i));
+        numbers.add(randomBox.get(i));
       }
       return LottoTicket.of(numbers);
     };
