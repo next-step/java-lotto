@@ -35,7 +35,7 @@ public class Budget {
     }
 
     this.remains -= numTicket * PRICE_PER_TICKET;
-    return NumberPool.purchaseTickets(numTicket);
+    return TicketPublisher.publishTickets(numTicket);
   }
 
   public double calculateRatio(int incomes) {

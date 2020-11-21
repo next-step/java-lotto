@@ -4,31 +4,28 @@ import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NumberPoolTest {
 
-  private PublishStrategy strategy;
-
-  @BeforeEach
-  void setUp() {
-    strategy = () -> {
-      List<LottoNumber> lottoNumbers = new ArrayList<>();
-      for (int i = MINIMUM_LOTTO_NUMBER; i <= NUMBERS_PER_TICKET; i++) {
-        lottoNumbers.add(LottoNumber.of(i));
-      }
-      return LottoTicket.of(lottoNumbers);
-    };
-  }
+  PublishStrategy strategy = () -> IntStream
+      .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_TICKET)
+      .mapToObj(LottoNumber::get)
+      .collect(Collectors.toList());
 
   @Test
-  @DisplayName("로또 발급 기능 테스트")
+  @DisplayName("abc")
   void publishTicket() {
-    LottoTicket ticket = NumberPool.publishTicket(this.strategy);
-    assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    List<LottoNumber> expected = IntStream
+        .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_TICKET)
+        .mapToObj(LottoNumber::get)
+        .collect(Collectors.toList());
+
+    assertThat(NumberPool.generateNumberBundle(strategy))
+        .isEqualTo(expected);
   }
 }

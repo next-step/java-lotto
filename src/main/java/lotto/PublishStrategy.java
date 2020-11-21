@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.List;
+
 public interface PublishStrategy {
-  LottoTicket publish();
+
+  List<LottoNumber> publish();
 }

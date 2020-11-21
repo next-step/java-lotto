@@ -4,7 +4,6 @@ import static lotto.LottoGameConstant.MAXIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,32 +19,20 @@ public class NumberPool {
   private NumberPool() {
   }
 
-  public static LottoTicket publishTicket() {
-    PublishStrategy strategy = () -> {
-      List<LottoNumber> numbers = new ArrayList<>();
-      Collections.shuffle(randomBox);
-      for (int i = 0; i < NUMBERS_PER_TICKET; i++) {
-        numbers.add(randomBox.get(i));
-      }
-      return LottoTicket.of(numbers);
-    };
-
-    return publishTicket(strategy);
-  }
-
-  public static LottoTicket publishTicket(PublishStrategy publishStrategy) {
+  public static List<LottoNumber> generateNumberBundle(PublishStrategy publishStrategy) {
     return publishStrategy.publish();
   }
 
-  public static LottoTickets purchaseTickets(int numTicket) {
-    return purchaseTickets(numTicket, NumberPool::publishTicket);
-  }
+  public static List<LottoNumber> generateNumberBundle() {
+    PublishStrategy strategy = () -> {
+      Collections.shuffle(randomBox);
 
-  public static LottoTickets purchaseTickets(int numTicket, PublishStrategy publishStrategy) {
-    List<LottoTicket> tickets = new ArrayList<>();
-    for (int i = 0; i < numTicket; i++) {
-      tickets.add(publishTicket(publishStrategy));
-    }
-    return LottoTickets.of(tickets);
+      return randomBox.stream()
+          .limit(NUMBERS_PER_TICKET)
+          .sorted()
+          .collect(Collectors.toList());
+    };
+
+    return generateNumberBundle(strategy);
   }
 }
