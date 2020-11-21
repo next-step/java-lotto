@@ -14,13 +14,16 @@ import java.util.stream.Collectors;
 public class OutputView {
     public static final String LINE = "---------";
     public static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
-    private static final String WINNING_RANK_COUNT = "%s개 일치 (%d원)- %d개";
+    private static final String SAME_NUMBER_COUNT_MESSAGE = "%s개 일치";
+    private static final String PRICE_MESSAGE = " (%d원)";
+    private static final String LOTTO_COUNT_MESSAGE = " - %d개";
     private static final String LOTTO_NUMBER_SPLITTER = ",";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String LOTTO_PREFIX = "[";
     private static final String LOTTO_SUFFIX = "]";
     private static final String LOTTO_DELIMITER = LOTTO_SUFFIX + "\n" + LOTTO_PREFIX;
     private static final String LOTTO_NUM_MESSAGE = "%s개를 구매했습니다.";
+    private static final String MATCH_BONUS_MESSAGE = ", 보너스 볼 일치";
     private static final PrintStream out = System.out;
 
     private OutputView() {
@@ -38,17 +41,22 @@ public class OutputView {
 
         return counter.keySet().stream()
                 .filter(winningRank -> !winningRank.isFail())
-                .map(winningRank -> getWinningRankCountString(winningRank, counter.get(winningRank)))
+                .map(winningRank -> getWinningRankString(winningRank) + getWinningRankCountString(counter.get(winningRank)))
                 .collect(Collectors.joining("\n"));
     }
 
-    private static String getWinningRankCountString(WinningRank winningRank, int count) {
-        return String.format(WINNING_RANK_COUNT, getWinningRankSameNumberString(winningRank), winningRank.getPrice(), count);
+    private static String getWinningRankCountString(int count) {
+        return String.format(LOTTO_COUNT_MESSAGE, count);
     }
 
-    private static String getWinningRankSameNumberString(WinningRank winningRank) {
-        return String.valueOf(winningRank.getSameNumberNum());
+    private static String getWinningRankString(WinningRank winningRank) {
+        String winningRankString = String.format(SAME_NUMBER_COUNT_MESSAGE, winningRank.getSameNumberNum());
+        if (winningRank.haveBonus()) {
+            winningRankString += MATCH_BONUS_MESSAGE;
+        }
+        return winningRankString + String.format(PRICE_MESSAGE, winningRank.getPrice());
     }
+
 
     public static void showLottoNum(int lottoNum) {
         out.println(getLottoNumString(lottoNum));

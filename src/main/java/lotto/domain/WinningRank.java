@@ -44,4 +44,8 @@ public enum WinningRank {
     public int getSameNumberNum() {
         return rankMatcher.getSameNumberCount();
     }
+
+    public boolean haveBonus() {
+        return rankMatcher.haveBonus();
+    }
 }
