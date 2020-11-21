@@ -9,10 +9,10 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 요구 사항
-1.',' ':'을 구분자로 가지는 문자열을 나눈다.
-2. // \n 사이의 문자를 구분자로 사용하여 문자열을 나눈다.
-3. 나누어진 문자가 음수이면 Excption을 throw한다.
-    - junit4 expected exception
-4. 빈문자열 또는 null값을 입력하면, 0을 반환한다.
+1. 문자열을 구분자에 맞게 나눈다(, or : or //''\n)
+2. 나뉜 문자를 숫자로 바꾼다.
+    - 문자가 음수이면 Excption을 throw한다.
+        - junit4 expected exception
+    - 빈문자열 또는 null값을 입력하면, 0을 반환한다.
 5. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다 
 4. 나누어진 문자를 더한 결과를 출력한다.
