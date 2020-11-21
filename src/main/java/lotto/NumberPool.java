@@ -54,16 +54,4 @@ public class NumberPool {
     }
     return LottoTickets.of(tickets);
   }
-
-  public static WinningNumber publishWinningNumber(String input) {
-    String[] tokenizedInputs = input.split(", ");
-    List<LottoNumber> numbers = new ArrayList<>();
-
-    for (String tokenizedInput : tokenizedInputs) {
-      int castedInput = Integer.parseInt(tokenizedInput);
-      numbers.add(integerLottoNumberMapper.get(castedInput));
-    }
-
-    return WinningNumber.of(numbers);
-  }
 }

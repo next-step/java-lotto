@@ -18,7 +18,7 @@ class WinningNumberTest {
   @BeforeEach
   void setUp() {
     String rawInput = "2, 1, 3, 6, 5, 4";
-    sampleWinningNumber = NumberPool.publishWinningNumber(rawInput);
+    sampleWinningNumber = WinningNumber.of(rawInput);
   }
 
   @Test
@@ -26,7 +26,7 @@ class WinningNumberTest {
   void testOutOfRange() {
     String input = "1, 2, 3, 4, 5, 46";
     assertThatExceptionOfType(IllegalLottoNumberRangeException.class).isThrownBy(
-        () -> NumberPool.publishWinningNumber(input)
+        () -> WinningNumber.of(input)
     );
   }
 
@@ -35,7 +35,7 @@ class WinningNumberTest {
   void testDuplicatedInput() {
     String input = "1, 2, 3, 4, 5, 5";
     assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
-        () -> NumberPool.publishWinningNumber(input)
+        () -> WinningNumber.of(input)
     );
   }
 
@@ -44,7 +44,7 @@ class WinningNumberTest {
   @DisplayName("길이가 맞지 않는 입력")
   void testInvalidLength(String input) {
     assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
-        () -> NumberPool.publishWinningNumber(input)
+        () -> WinningNumber.of(input)
     );
   }
 

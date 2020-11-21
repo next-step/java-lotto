@@ -43,7 +43,7 @@ class LottoTicketsTest {
     };
 
     LottoTickets tickets = NumberPool.purchaseTickets(2, publishStrategy);
-    WinningNumber winningNumber = NumberPool.publishWinningNumber("1, 2, 3, 4, 5, 6");
+    WinningNumber winningNumber = WinningNumber.of("1, 2, 3, 4, 5, 6");
 
     LottoResult result = tickets.settle(winningNumber);
 

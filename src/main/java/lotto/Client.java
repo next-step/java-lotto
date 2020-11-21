@@ -15,7 +15,7 @@ public class Client {
     LottoTickets purchasedTickets = budget.purchaseLotto(budget.getNumPossibleLotto());
     ResultView.printLottoInfo(purchasedTickets.toString());
 
-    WinningNumber winningNumber = NumberPool.publishWinningNumber(InputView.askWinningNumber());
+    WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
     LottoResult lottoResult = purchasedTickets.settle(winningNumber);
 
     ResultView.printStatisticsOpening();
