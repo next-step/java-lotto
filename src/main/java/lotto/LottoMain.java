@@ -16,13 +16,17 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int price = InputView.inputPrice();
-
         Lottos lottos = LottoVendingMachine.buyAutoLottery(price);
 
         ResultView.printLottoResult(lottos);
 
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,InputView.inputLottoNumber());
+        String lottoNumber = InputView.inputLottoNumber();
+        int bonusNumber = InputView.inputBonusLottoNumber();
+
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoNumber,bonusNumber);
+
         Map<LottoResult, AtomicInteger> statistics = LottoWinningStatistics.getStatistics(lottoResults);
+
         BigInteger profit =  LottoWinningStatistics.getProfit(statistics);
 
         ResultView.printLottoWinningStatistics(statistics,price,profit);

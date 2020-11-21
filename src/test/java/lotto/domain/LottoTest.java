@@ -82,16 +82,18 @@ public class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6:6",
-            "1,3,5,6,7,8:4",
-            "1,2,3,32,42,45:3"
+            "1,2,3,4,5,6,10:FIRST",
+            "1,2,3,4,5,9,5:SECOND",
+            "1,2,3,4,5,9,10:THIRD",
+            "1,2,3,4,8,9,10:FOURTH",
+            "1,2,3,7,8,9,10:FIFTH"
     }, delimiter = ':')
-    @DisplayName("Lotto 당첨번호 개수 확인")
-    void lotto_winningNumber_matchOfCount(String lottoNumber, int count) {
+    @DisplayName("Lotto 당첨번호+보너스번호 등수 확인")
+    void lotto_winningNumber_matchOfCount(String lottoNumber, String rank) {
         List<Integer> numbers = Arrays.stream(lottoNumber.split(","))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
 
-        assertThat(lotto.sameNumberOfCount(numbers)).isEqualTo(count);
+        assertThat(lotto.lottoResult(numbers)).isEqualTo(LottoResult.valueOf(rank));
     }
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -45,7 +46,7 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 6개일치 3개일치 건수 검증")
     void lotto_winningStatistics_matchCount(String winningNumber) {
         //given
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
         //when
         Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
@@ -64,7 +65,7 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 상금금액 일치 확인")
     void lotto_winningStatistics_profit(String winningNumber) {
         //given
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
         //when
         Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
@@ -72,5 +73,21 @@ public class LottoWinningStatisticsTest {
 
         //then
         assertThat(profit.intValue()).isEqualTo(2000005000);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = "1,2,3,4,5,7")
+    @DisplayName("로또 2등 당첨금 확인")
+    void lotto_secondResult_profit(String winningNumber) {
+        //given
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,6);
+
+        //when
+        List<LottoResult> secondResult = Collections.singletonList(lottoResults.get(0));
+        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(secondResult);
+        BigInteger profit =  LottoWinningStatistics.getProfit(resultMap);
+
+        //then
+        assertThat(profit.intValue()).isEqualTo(30000000);
     }
 }

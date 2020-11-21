@@ -33,10 +33,27 @@ public class LottoVendingMachineTest {
     @ValueSource(strings = "1,2,3,4,5,6")
     @DisplayName("로또번호 6개 일치할시에 결과가 1등인지 테스트")
     void lotto_winning_number (String winningNumber) {
-        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,winningNumber);
+        //given
+        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
+        //when
         LottoResult lottoResult = results.get(0);
 
+        //then
         assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = "1,2,3,4,5,7")
+    @DisplayName("로또번호 5개 + 보너스 번호 일치할시에 결과가 2등인지 테스트")
+    void lotto_secondWinning_number (String winningNumber) {
+        //given
+        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,6);
+
+        //when
+        LottoResult lottoResult = results.get(0);
+
+        //then
+        assertThat(lottoResult).isEqualTo(LottoResult.SECOND);
     }
 }
