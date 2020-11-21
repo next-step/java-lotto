@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
         // 널, 빈 문자열 체크
@@ -11,7 +14,16 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String input) {
-        return input.split(",|:");
+        String regex = ",|:";
+        // 커스텀 구분자 확인
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            regex = m.group(1);
+            // 기존 input에서 커스텀 구분자 문자열 제거
+            input = input.replaceAll("//(.)\n", "");
+        }
+
+        return input.split(regex);
     }
 
     private static int sum(String[] numbers) {
