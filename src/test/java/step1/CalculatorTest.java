@@ -32,6 +32,7 @@ public class CalculatorTest {
 
         Calculator calculator = new Calculator();
 
-        assertThat(calculator.calculate(inputValue)).isEqualTo(5);
+        assertThatThrownBy(() -> calculator.calculate(inputValue))
+                .isInstanceOf(RuntimeException.class);
     }
 }

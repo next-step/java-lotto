@@ -24,7 +24,7 @@ public class Calculator {
         try{
             return Integer.parseInt(number);
         }catch (Exception e){
-            return 1;
+            throw new RuntimeException("숫자만 가능합니다..");
         }
     }
 }
