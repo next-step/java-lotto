@@ -16,6 +16,6 @@ class RandomNumberCreateStrategyTest {
 
         // then
         assertThat(lottoNumber).isNotNull();
-        assertThat(lottoNumber.getValue()).isBetween(LottoNumber.MIN.getValue(), LottoNumber.MAX.getValue());
+        assertThat(lottoNumber.getValue()).isBetween(LottoNumber.MIN_NO, LottoNumber.MAX_NO);
     }
 }

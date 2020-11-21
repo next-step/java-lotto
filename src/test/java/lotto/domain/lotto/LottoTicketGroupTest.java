@@ -44,7 +44,7 @@ class LottoTicketGroupTest {
         final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(LottoTicketMockFactory.createFourTeenLotto());
         final LottoTicket winningLotto = createLottoHasNumberOneToSix();
         final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
-        final LottoNumber bonusNumber = LottoNumber.MAX;
+        final LottoNumber bonusNumber = LottoNumber.of(LottoNumber.MAX_NO);
 
         // when
         final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));

@@ -9,9 +9,7 @@ public class RandomNumberCreateStrategy implements LottoNumberCreateStrategy {
 
     @Override
     public LottoNumber create() {
-        final int max = LottoNumber.MAX.getValue();
-        final int min = LottoNumber.MIN.getValue();
-        final int randomNumber = RANDOM.nextInt(max) + min;
+        final int randomNumber = RANDOM.nextInt(LottoNumber.MAX_NO) + LottoNumber.MIN_NO;
         return LottoNumber.of(randomNumber);
     }
 }

@@ -117,7 +117,7 @@ public class LottoGameTest {
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
 
             // when
-            final LottoStatisticsResult lottoStatisticsResult = lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MAX.getValue());
+            final LottoStatisticsResult lottoStatisticsResult = lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MAX_NO);
 
             // then
             assertThat(lottoStatisticsResult).isNotNull();
@@ -133,7 +133,7 @@ public class LottoGameTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
+                lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN_NO);
             });
 
             // then
@@ -151,7 +151,7 @@ public class LottoGameTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN.getValue());
+                lottoGame.getWinLotteryStatistics(winningNumberExpression, LottoNumber.MIN_NO);
             });
 
             // then
