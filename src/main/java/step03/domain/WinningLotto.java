@@ -19,7 +19,7 @@ public class WinningLotto {
     }
 
     private static void validateBonusBall(Lotto winningLotto, LottoBall bonusBall) {
-        if (!winningLotto.isContaining(bonusBall)) {
+        if (winningLotto.isContaining(bonusBall)) {
             throw new ExistedInWinningLottoException();
         }
     }
