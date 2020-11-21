@@ -40,7 +40,7 @@ public class InputView {
     }
 
     private static int priceCheck(int price) {
-        if(price < LOTTO_PRICE) {
+        if(price < LOTTO_PRICE || price % 1000 != 0) {
             System.out.print(PRICE_CHECK_ERROR_MESSAGE);
             return 0;
         }
