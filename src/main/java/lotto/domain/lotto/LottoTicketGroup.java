@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketGroup {
-    public static LottoTicketGroup EMPTY = LottoTicketGroup.of(Collections.emptyList());
+    public static final LottoTicketGroup EMPTY = LottoTicketGroup.of(Collections.emptyList());
     private final List<LottoTicket> lottoTickets;
 
     private LottoTicketGroup(final List<LottoTicket> lottoTickets) {
