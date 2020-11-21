@@ -12,11 +12,11 @@ public class LottoNumber {
     private final int value;
 
     private LottoNumber(final int number) {
-        checkArgument(number >= 0 && number <= 45, LOTTO_NUMBER_INVALID_RANGE);
         this.value = number;
     }
 
     public static LottoNumber of(final int number) {
+        checkArgument(number >= 1 && number <= 45, LOTTO_NUMBER_INVALID_RANGE);
         return new LottoNumber(number);
     }
 
