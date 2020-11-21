@@ -14,5 +14,4 @@ public class BonusBallTest {
                 .isEqualTo(BonusBall.of(LottoBall.valueOf(1)));
     }
 
-    @DisplayName("보너스볼이 winningBalls 에 이미 포함되어 있으면 에러 던짐")
 }

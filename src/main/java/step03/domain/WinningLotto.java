@@ -1,5 +1,7 @@
 package step03.domain;
 
+import exception.ExistedInWinningLottoException;
+
 import java.util.Objects;
 
 public class WinningLotto {
@@ -7,12 +9,19 @@ public class WinningLotto {
     private final BonusBall bonusBall;
 
     private WinningLotto(Lotto winningLotto, BonusBall bonusBall) {
+        validateBonusBall(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }
 
     public static WinningLotto of(Lotto winningLotto, BonusBall bonusBall) {
         return new WinningLotto(winningLotto, bonusBall);
+    }
+
+    private static void validateBonusBall(Lotto winningLotto, BonusBall bonusBall) {
+//        if (!winningLotto.isContaining(bonusBall)) {
+//            throw new ExistedInWinningLottoException();
+//        }
     }
 
     @Override

@@ -61,7 +61,6 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 
 - `WinningLotto`
     - public static WinningLotto of(Lotto winningLotto)
-    - 당첨로또에 보너스 볼 번호를 추가하는 기능
     - 보너스 볼이 당첨로또에 포함되지 않는지 검사
     
 - `Lottos`
