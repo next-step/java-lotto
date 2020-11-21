@@ -1,11 +1,10 @@
 package lotto.constants;
 
-import lotto.exception.LottoGameException;
+import static lotto.constants.Message.RATE_OF_RETURN_IS_NOT_NEGATIVE_NUMBER;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
-
-import static lotto.constants.Message.RATE_OF_RETURN_IS_NOT_NEGATIVE_NUMBER;
+import lotto.exception.LottoGameException;
 
 public enum RateOfReturn {
 

@@ -1,52 +1,49 @@
 package lotto.domain;
 
-import lotto.domain.model.LottoGames;
-import lotto.exception.LottoGameException;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static lotto.config.LottoGameConfig.PRICE_PER_GAME;
-import static lotto.constants.Message.INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME;
+import lotto.domain.model.LottoGames;
+import lotto.domain.model.LottoSupplier;
 
 public class PurchaseAction {
 
   private static final int ZERO = 0;
 
   private final int purchasePrice;
-  private final int numberOfGames;
+  private LottoSupplier lottoSupplier;
 
-  public PurchaseAction(int purchasePrice) {
+  public PurchaseAction(int purchasePrice, List<String[]> manualLottoNumbers) {
     this.purchasePrice = purchasePrice;
-    this.numberOfGames = computeNumberOfGames(purchasePrice, PRICE_PER_GAME);
-  }
-
-  //for test
-  public PurchaseAction(int purchasePrice, int numberOfGames) {
-    this.purchasePrice = purchasePrice;
-    this.numberOfGames = numberOfGames;
-  }
-
-  private int computeNumberOfGames(int purchasePrice, int pricePerGame) {
-    if (purchasePrice < pricePerGame) {
-      throw new LottoGameException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, pricePerGame));
-    }
-    return purchasePrice / pricePerGame;
+    this.lottoSupplier = new LottoSupplier(manualLottoNumbers, purchasePrice);
   }
 
   public int getPurchasePrice() {
     return purchasePrice;
   }
 
-  public LottoGames purchase() {
-    return new LottoGames(generateLottoGames());
+  public int manualLottoGameCount() {
+    return lottoSupplier.manualLottoNumbers().size();
   }
 
-  private List<Lotto> generateLottoGames() {
-    return IntStream.range(ZERO, numberOfGames)
-        .mapToObj(index -> LottoGameManager.newLottoGame())
+  public int autoLottoGameCount() {
+    return lottoSupplier.autoLottoGameCount();
+  }
+
+  public LottoGames purchase() {
+    List<Lotto> lottoGames = purchaseManualLottoGames();
+    lottoGames.addAll(purchaseAutoLottoGames());
+    return new LottoGames(lottoGames);
+  }
+
+  private List<Lotto> purchaseManualLottoGames() {
+    return lottoSupplier.manualLottoNumbers().getLottoNumbers();
+  }
+
+  private List<Lotto> purchaseAutoLottoGames() {
+    return IntStream.range(ZERO, lottoSupplier.autoLottoGameCount())
+        .mapToObj(index -> LottoGameManager.newAutoLotto())
         .collect(Collectors.toList());
   }
 
@@ -56,11 +53,11 @@ public class PurchaseAction {
     if (o == null || getClass() != o.getClass()) return false;
     PurchaseAction that = (PurchaseAction) o;
     return purchasePrice == that.purchasePrice &&
-        numberOfGames == that.numberOfGames;
+        Objects.equals(lottoSupplier, that.lottoSupplier);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(purchasePrice, numberOfGames);
+    return Objects.hash(purchasePrice, lottoSupplier);
   }
 }

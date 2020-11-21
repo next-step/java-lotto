@@ -1,13 +1,12 @@
 package lotto.domain.model;
 
-import lotto.exception.LottoGameException;
-
-import java.util.Objects;
-
 import static lotto.config.LottoGameConfig.LOTTO_MAX_NUMBER;
 import static lotto.config.LottoGameConfig.LOTTO_MIN_NUMBER;
 import static lotto.constants.Message.INPUT_SHOULD_INTEGER;
 import static lotto.constants.Message.OVER_NUMBER_RANGE;
+
+import java.util.Objects;
+import lotto.exception.LottoGameException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 

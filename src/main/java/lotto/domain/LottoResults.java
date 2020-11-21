@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constants.RateOfReturn;
+import static lotto.constants.Message.RATE_OF_RETURN_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static lotto.constants.Message.RATE_OF_RETURN_FORMAT;
+import lotto.constants.RateOfReturn;
 
 public class LottoResults {
 

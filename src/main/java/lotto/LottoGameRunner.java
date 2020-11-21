@@ -14,7 +14,7 @@ public class LottoGameRunner {
 
     PurchaseAction purchaseAction = inputView.orderLottoGame();
     LottoGames lottoGames = purchaseAction.purchase();
-    outputView.printEntryGames(lottoGames);
+    outputView.printEntryGames(purchaseAction, lottoGames);
 
     WinnerLotto winnerLotto = inputView.inputLastWeekWinNumber();
     LottoResults lottoResults = lottoGames.confirmPrize(winnerLotto);

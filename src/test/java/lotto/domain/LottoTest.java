@@ -62,5 +62,4 @@ class LottoTest {
         Arguments.of(LOTTO_NUMBERS, "[1, 2, 3, 4, 5, 6]")
     );
   }
-
 }

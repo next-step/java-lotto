@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,7 +45,7 @@ class LottoResultsTest {
     List<PrizeGrade> confirmResults = Arrays.stream(PrizeGrade.values())
         .filter(prizeGrade -> prizeGrade == THIRD_CLASS)
         .collect(Collectors.toList());
-    PurchaseAction purchaseAction = new PurchaseAction(14_000);
+    PurchaseAction purchaseAction = new PurchaseAction(14_000, Collections.EMPTY_LIST);
     double rateOfReturn = (double) THIRD_CLASS.getPrizeMoney() / (double) purchaseAction.getPurchasePrice();
 
     return Stream.of(

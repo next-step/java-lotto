@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.model.LottoNumber;
-import lotto.exception.LottoGameException;
+import static lotto.constants.Message.BONUS_NUMBER_IS_NOT_UNIQUE;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.constants.Message.BONUS_NUMBER_IS_NOT_UNIQUE;
+import lotto.domain.model.LottoNumber;
+import lotto.exception.LottoGameException;
 
 public class WinnerLotto {
 

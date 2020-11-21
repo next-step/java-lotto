@@ -1,11 +1,10 @@
 package lotto.domain.model;
 
+import java.util.List;
+import java.util.Objects;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResults;
 import lotto.domain.WinnerLotto;
-
-import java.util.List;
-import java.util.Objects;
 
 public class LottoGames {
 
@@ -17,10 +16,6 @@ public class LottoGames {
 
   public List<Lotto> getLottoGames() {
     return lottos;
-  }
-
-  public int getGameSize() {
-    return lottos.size();
   }
 
   public LottoResults confirmPrize(WinnerLotto winnerLotto) {
