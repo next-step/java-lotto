@@ -1,17 +1,26 @@
 package lotto.ui;
 
+import static lotto.constants.Message.INPUT_BONUS_NUMBER;
+import static lotto.constants.Message.INPUT_SHOULD_INTEGER;
+import static lotto.constants.Message.INPUT_VALUE;
+import static lotto.constants.Message.PLEASE_INPUT_LAST_WEEK_PRIZE;
+import static lotto.constants.Message.PLEASE_INPUT_MANUAL_NUMBER;
+import static lotto.constants.Message.PLEASE_INPUT_MANUAL_PURCHASE_COUNT;
+import static lotto.constants.Message.PLEASE_INPUT_PURCHASING_PRICE;
+import static lotto.utils.StringUtils.splitByComa;
+
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.PurchaseAction;
 import lotto.domain.WinnerLotto;
 import lotto.domain.model.LottoNumber;
 import lotto.exception.LottoGameException;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static lotto.constants.Message.*;
-import static lotto.utils.StringUtils.splitByComa;
 
 public class InputView {
 

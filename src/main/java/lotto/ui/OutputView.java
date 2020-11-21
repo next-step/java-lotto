@@ -1,15 +1,17 @@
 package lotto.ui;
 
-import lotto.domain.LottoResults;
-import lotto.domain.PrizeGrade;
-import lotto.domain.PurchaseAction;
-import lotto.domain.model.LottoGames;
+import static lotto.constants.Message.NEW_LINE;
+import static lotto.constants.Message.PRIZE_STATISTICS_FORMAT;
+import static lotto.constants.Message.PRIZE_STATISTICS_HEADER;
+import static lotto.constants.Message.PURCHASED_MANUAL_N_AUTO_N_COUNT;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static lotto.constants.Message.*;
+import lotto.domain.LottoResults;
+import lotto.domain.PrizeGrade;
+import lotto.domain.PurchaseAction;
+import lotto.domain.model.LottoGames;
 
 public class OutputView {
 

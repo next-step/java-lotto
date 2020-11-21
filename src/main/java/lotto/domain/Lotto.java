@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import lotto.domain.model.LottoNumber;
-import lotto.exception.LottoGameException;
+import static lotto.config.LottoGameConfig.NUMBER_COUNT_PER_GAME;
+import static lotto.constants.Message.NUMBER_COUNT_SHOULD_N;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static lotto.config.LottoGameConfig.NUMBER_COUNT_PER_GAME;
-import static lotto.constants.Message.NUMBER_COUNT_SHOULD_N;
+import lotto.domain.model.LottoNumber;
+import lotto.exception.LottoGameException;
 
 public class Lotto {
   private final Set<LottoNumber> lottoNumbers;

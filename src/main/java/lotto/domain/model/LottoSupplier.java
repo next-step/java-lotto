@@ -8,11 +8,11 @@ import java.util.Objects;
 import lotto.exception.LottoGameException;
 
 public class LottoSupplier {
-  private final List<String[]> manualLottoNumbers;
+  private final Lotteries manualLotteries;
   private final int autoLottoGameCount;
 
   public LottoSupplier(List<String[]> manualLottoNumbers, int purchasePrice) {
-    this.manualLottoNumbers = manualLottoNumbers;
+    this.manualLotteries = new Lotteries(manualLottoNumbers);
     this.autoLottoGameCount = computeAutoLottoGameCount(purchasePrice);
   }
 
@@ -20,11 +20,11 @@ public class LottoSupplier {
     if (purchasePrice < PRICE_PER_GAME) {
       throw new LottoGameException(String.format(INPUT_SHOULD_NOT_LESS_THAN_PRICE_PER_GAME, PRICE_PER_GAME));
     }
-    return (purchasePrice / PRICE_PER_GAME) - manualLottoNumbers.size();
+    return (purchasePrice / PRICE_PER_GAME) - manualLotteries.size();
   }
 
-  public List<String[]> manualLottoNumbers() {
-    return manualLottoNumbers;
+  public Lotteries manualLottoNumbers() {
+    return manualLotteries;
   }
 
   public int autoLottoGameCount() {
@@ -37,11 +37,11 @@ public class LottoSupplier {
     if (o == null || getClass() != o.getClass()) return false;
     LottoSupplier that = (LottoSupplier) o;
     return autoLottoGameCount == that.autoLottoGameCount &&
-        Objects.equals(manualLottoNumbers, that.manualLottoNumbers);
+        Objects.equals(manualLotteries, that.manualLotteries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(manualLottoNumbers, autoLottoGameCount);
+    return Objects.hash(manualLotteries, autoLottoGameCount);
   }
 }

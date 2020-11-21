@@ -38,9 +38,7 @@ public class PurchaseAction {
   }
 
   private List<Lotto> purchaseManualLottoGames() {
-    return lottoSupplier.manualLottoNumbers().stream()
-        .map(LottoGameManager::newManualLotto)
-        .collect(Collectors.toList());
+    return lottoSupplier.manualLottoNumbers().getLottoNumbers();
   }
 
   private List<Lotto> purchaseAutoLottoGames() {
