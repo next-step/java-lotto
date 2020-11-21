@@ -22,7 +22,7 @@
     * 숫자 이외의 문자: RuntimeException throw
     * 음수 값: RuntimeException throw
     
-## STEP2 로또 자동
+## 로또
 ### 기능 정의
 * 로또의 특성은 다음과 같다.
     * 1장의 가격은 1000원이다.
