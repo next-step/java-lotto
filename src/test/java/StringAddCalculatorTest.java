@@ -26,4 +26,11 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
+
+    // 4. 구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)
+    @Test
+    public void splitAnd_쉼표_또는_콜론_구분자() {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }
