@@ -1,12 +1,14 @@
-package calculator.utils;
+package calculator;
+
+import calculator.utils.IntegerUtils;
+import calculator.utils.StringUtils;
 
 import java.util.List;
-import java.util.function.ToIntFunction;
-import java.util.stream.IntStream;
 
 public class AddCalculator {
 
     public int calculate(String value) {
+
         if (StringUtils.isEmpty(value)) {
             return 0;
         }

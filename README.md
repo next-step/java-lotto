@@ -17,7 +17,7 @@ IntegerUtils
 3. 나뉜 문자를 숫자로 바꾼다.
     - 숫자가 음수이면 Excption을 throw한다.
 
-Calculator
+AddCalculator
 4. 빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.
 5. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다
 6. 나누어진 문자를 더한 결과를 출력한다.
