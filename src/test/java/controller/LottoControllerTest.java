@@ -95,4 +95,20 @@ class LottoControllerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkWinningNumberValidate(wrongValue));
     }
+
+    @ParameterizedTest
+    @DisplayName("단위 금액보다 구매 금액이 작을 경우 구매 불가 체크 기능")
+    @CsvSource(value = {"0", "500", "999"})
+    void checkLottoLowerPrice(String wrongValue) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+    }
+
+    @ParameterizedTest
+    @DisplayName("구매 금액이 단위 금액이 아닌 경우 체크 기능")
+    @CsvSource(value = {"1100", "1111", "11001"})
+    void checkLottoWrongPrice(String wrongValue) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+    }
 }

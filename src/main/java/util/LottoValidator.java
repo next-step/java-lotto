@@ -43,4 +43,9 @@ public class LottoValidator {
         }
     }
 
+    public static void checkUnitPrice(int priceTotal, int unitPrice) {
+        if(priceTotal < unitPrice || priceTotal % unitPrice != 0) {
+            throw new IllegalArgumentException("로또 금액 단위로 구매 가능합니다.");
+        }
+    }
 }

@@ -37,6 +37,7 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         int priceTotal = inputView.inputPrice();
+        LottoValidator.checkUnitPrice(priceTotal, LOTTO_UNIT_PRICE);
         lottoInfo = LottoInfo.from(priceTotal);
 
         int lottoQuantity = getLottoQuantity();
