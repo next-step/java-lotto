@@ -1,16 +1,27 @@
 package step03.domain;
 
+import exception.OutOfLottoNumberRangeException;
+
 import java.util.Objects;
 
 public class LottoBall {
     private final int number;
+    private static final int START = 1;
+    private static final int END = 45;
 
     private LottoBall(int number) {
+        validate(number);
         this.number = number;
     }
 
     public static LottoBall of(int number) {
         return new LottoBall(number);
+    }
+
+    private void validate(int number) {
+        if (number < START || number > END) {
+            throw new OutOfLottoNumberRangeException();
+        }
     }
 
     @Override
