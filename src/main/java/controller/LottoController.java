@@ -1,6 +1,7 @@
 package controller;
 
 import domain.*;
+import util.LottoValidator;
 import view.InputView;
 import view.ResultView;
 
@@ -45,8 +46,10 @@ public class LottoController {
         Lottos lottos = initLottos(lottoQuantity, basicLottoNumbers);
         resultView.displayLottos(lottos);
 
+        String inputWinningNumber = inputView.inputLastWinningNumber();
+        LottoValidator.checkWinningNumberValidate(inputWinningNumber);
         LottoNumbers winningNumbers = new LottoNumbers()
-                .createWinningNumbers(inputView.inputLastWinningNumber());
+                .createWinningNumbers(inputWinningNumber);
 
         resultView.displayResultMention();
 

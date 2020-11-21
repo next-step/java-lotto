@@ -6,12 +6,16 @@ import domain.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import util.LottoValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LottoControllerTest {
 
@@ -61,5 +65,34 @@ class LottoControllerTest {
         LottoNumbers lottoNumbers = controller.shuffleNumbers(basicLottoNumbers);
 
         Assertions.assertThat(lottoNumbers.getNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("빈 값 입력 검증 기능")
+    void checkEmptyString() {
+        String emptyString = "";
+
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkWinningNumberValidate(emptyString));
+    }
+
+    @Test
+    @DisplayName("정답 로또 번호 숫자 검증 기능(6개)")
+    void checkNumberLength() {
+        String wrongLength = "1, 2, 3, 4";
+
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkWinningNumberValidate(wrongLength));
+    }
+
+    @ParameterizedTest
+    @DisplayName("정답 로또 범위 체크 기능")
+    @CsvSource(value = {
+            "0, 2, 3, 4, 5, 6",
+            "1, 2, 3, 4, 5, 46",
+    }, delimiter = ':')
+    void checkLottoRange(String wrongValue) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
     }
 }
