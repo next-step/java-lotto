@@ -29,8 +29,16 @@ public class StringAddCalculator {
     private static int sum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int parseIntNumber = Integer.parseInt(number);
+            checkNegative(parseIntNumber);
+            sum += parseIntNumber;
         }
         return sum;
+    }
+
+    private static void checkNegative(int number) {
+        if (number < 0) {
+            throw new RuntimeException();
+        }
     }
 }
