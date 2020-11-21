@@ -12,4 +12,11 @@ public class StringAddCalculatorTest {
         result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
     }
+
+    // 2. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)
+    @Test
+    public void splitAndSum_숫자하나() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
 }
