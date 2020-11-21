@@ -5,7 +5,7 @@ import java.util.List;
 
 import static util.Preconditions.checkArgument;
 
-public class LottoTicketsFactory {
+public class LottoTicketGroupFactory {
     public static final String COUNT_MUST_NOT_BE_NEGATIVE = "count must not be negative";
     
     public static LottoTicketGroup create(final int count) {

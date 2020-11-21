@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.lotto.LottoTicketsFactory.COUNT_MUST_NOT_BE_NEGATIVE;
+import static lotto.domain.lotto.LottoTicketGroupFactory.COUNT_MUST_NOT_BE_NEGATIVE;
 
 
 class LottoTicketGroupFactoryTest {
@@ -21,7 +21,7 @@ class LottoTicketGroupFactoryTest {
             final int count = 0;
 
             // when
-            final LottoTicketGroup lottoTicketGroup = LottoTicketsFactory.create(count);
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroupFactory.create(count);
 
             // then
             assertThat(lottoTicketGroup).isEqualTo(LottoTicketGroup.EMPTY);
@@ -35,7 +35,7 @@ class LottoTicketGroupFactoryTest {
             final int count = 1;
 
             // when
-            final LottoTicketGroup lottoTicketGroup = LottoTicketsFactory.create(count);
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroupFactory.create(count);
 
             // then
             assertThat(lottoTicketGroup).isNotNull();
@@ -50,7 +50,7 @@ class LottoTicketGroupFactoryTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottoTicketsFactory.create(count);
+                LottoTicketGroupFactory.create(count);
             });
 
             // then

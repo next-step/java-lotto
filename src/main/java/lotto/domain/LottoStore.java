@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
-import lotto.domain.lotto.LottoTicketsFactory;
+import lotto.domain.lotto.LottoTicketGroupFactory;
 
 import java.util.Objects;
 
@@ -41,7 +41,7 @@ public class LottoStore {
         checkArgument(lottoTotalCount >= slipLottoCount, "");
 
         final int quickPicksLottoCount = lottoTotalCount - slipLottoCount;
-        return LottoTicketsFactory.create(quickPicksLottoCount);
+        return LottoTicketGroupFactory.create(quickPicksLottoCount);
     }
 
 }

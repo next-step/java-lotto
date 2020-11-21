@@ -12,6 +12,7 @@ public class InputView {
     }
 
     private static int plzEnterManuallyBuyLottoCount() {
+        Printer.printNewLine();
         Printer.println("수동으로 구매할 로또 수를 입력해 주세요.");
         final Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -19,6 +20,7 @@ public class InputView {
 
     public static List<String> plzEnterManuallyBuyLottoNo() {
         final int manuallyBuyLottoCount = plzEnterManuallyBuyLottoCount();
+        Printer.printNewLine();
         Printer.println("수동으로 구매할 번호를 입력해 주세요.");
         final Scanner scanner = new Scanner(System.in);
         final List<String> lottoNoList = new ArrayList<>();

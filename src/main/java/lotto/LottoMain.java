@@ -15,7 +15,7 @@ public class LottoMain {
         final LottoGame lottoGame = LottoGame.of(money);
         lottoGame.buyLotto(lottoNoList);
 
-        OutputView.printLottoCount(lottoGame.getLottoTicketGroup());
+        OutputView.printLottoCount(lottoNoList.size(), lottoGame.getLottoTicketGroup());
         OutputView.printAllLotto(lottoGame.getLottoTicketGroup());
 
         final String winningNumberExpression = InputView.plzEnterLastWeekWinningNumber();
