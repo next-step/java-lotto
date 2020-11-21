@@ -27,6 +27,14 @@ public class RankCounter {
         rankCounter.put(key, rankCounter.getOrDefault(key, 0) + 1);
     }
 
+    public Integer calculateRewardAll() {
+        int sum = 0;
+        for(Map.Entry<Rank, Integer> elem : rankCounter.entrySet() ){
+            sum += elem.getKey().getWinningMoney() * elem.getValue();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

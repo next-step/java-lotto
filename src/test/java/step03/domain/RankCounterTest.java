@@ -31,9 +31,17 @@ public class RankCounterTest {
     }
 
     @Test
-    public void increase() {
+    public void test_increase() {
         Rank rank = Rank.valueOf(3, false);
         rankCounter.increase(rank);
         assertThat(rankCounter.getCount(rank)).isEqualTo(1);
+    }
+
+    @Test
+    public void test_calculateRewardAll() {
+        rankCounter.put(Rank.valueOf(3, false), 1);
+        rankCounter.put(Rank.valueOf(0, false), 13);
+
+        assertThat(rankCounter.calculateRewardAll()).isEqualTo(5000);
     }
 }
