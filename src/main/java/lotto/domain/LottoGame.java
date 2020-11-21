@@ -35,15 +35,15 @@ public class LottoGame {
             return getLottoTicketGroup();
         }
         
-        return buyLottoWithSlipMode(lottoNumberExpressionList);
+        return buyLottoWithManualMode(lottoNumberExpressionList);
     }
 
-    private LottoTicketGroup buyLottoWithSlipMode(final List<String> lottoNumberExpressionList) {
-        final LottoTicketGroup slipLottoTicketGroup = LottoTicketGroup.of(lottoNumberExpressionList.stream()
+    private LottoTicketGroup buyLottoWithManualMode(final List<String> lottoNumberExpressionList) {
+        final LottoTicketGroup manualLottoTicketGroup = LottoTicketGroup.of(lottoNumberExpressionList.stream()
                 .map(LottoTicket::of)
                 .collect(Collectors.toList()));
 
-        this.lottoTicketGroup = LottoStore.sell(money, slipLottoTicketGroup);
+        this.lottoTicketGroup = LottoStore.sell(money, manualLottoTicketGroup);
         return getLottoTicketGroup();
     }
 

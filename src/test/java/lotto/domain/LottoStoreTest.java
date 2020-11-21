@@ -21,7 +21,7 @@ class LottoStoreTest {
     class Sell {
         @DisplayName("자동 선택과 수동 선택을 혼합해서 판매")
         @Test
-        void return_lottos_when_quick_pick_and_slip_buying() {
+        void return_lottos_when_quick_pick_and_manual_buying() {
             // given
             final Money money = LottoTicket.getPrice().multiply(2);
             final LottoTicket lottoTicket = LottoTicketMockFactory.createLottoHasNumberOneToSix();

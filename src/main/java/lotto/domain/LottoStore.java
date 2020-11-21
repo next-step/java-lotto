@@ -19,29 +19,29 @@ public class LottoStore {
      * 로또 판매
      *
      * @param money                지불 금액
-     * @param slipLottoTicketGroup 수동으로 구매하기 원하는 로또
+     * @param manualLottoTicketGroup 수동으로 구매하기 원하는 로또
      * @return
      */
-    public static LottoTicketGroup sell(final Money money, final LottoTicketGroup slipLottoTicketGroup) {
-        if (Objects.isNull(slipLottoTicketGroup)) {
+    public static LottoTicketGroup sell(final Money money, final LottoTicketGroup manualLottoTicketGroup) {
+        if (Objects.isNull(manualLottoTicketGroup)) {
             return sellByQuickPicks(money, 0);
         }
 
-        final int slipLottoCount = slipLottoTicketGroup.size();
-        final LottoTicketGroup quickPickLottoTicketGroup = sellByQuickPicks(money, slipLottoCount);
+        final int manualLottoCount = manualLottoTicketGroup.size();
+        final LottoTicketGroup quickPickLottoTicketGroup = sellByQuickPicks(money, manualLottoCount);
 
-        return LottoTicketGroup.combine(slipLottoTicketGroup, quickPickLottoTicketGroup);
+        return LottoTicketGroup.combine(manualLottoTicketGroup, quickPickLottoTicketGroup);
     }
 
-    private static LottoTicketGroup sellByQuickPicks(final Money money, final int slipLottoCount) {
+    private static LottoTicketGroup sellByQuickPicks(final Money money, final int manualLottoCount) {
         if (Objects.isNull(money)) {
             return LottoTicketGroup.EMPTY;
         }
 
         final long lottoTotalCount = money.divideWithoutRemainder(LottoTicket.getPrice());
-        checkArgument(lottoTotalCount >= slipLottoCount, NOT_ENOUGH_MONEY_TO_BUY_LOTTO);
+        checkArgument(lottoTotalCount >= manualLottoCount, NOT_ENOUGH_MONEY_TO_BUY_LOTTO);
 
-        final long quickPicksLottoCount = lottoTotalCount - slipLottoCount;
+        final long quickPicksLottoCount = lottoTotalCount - manualLottoCount;
         return LottoTicketGroupFactory.create(quickPicksLottoCount);
     }
 
