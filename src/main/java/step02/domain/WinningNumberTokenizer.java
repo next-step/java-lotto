@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumberTokenizer {
-    private static String TOKEN = ", ";
+    private static final String TOKEN = ", ";
 
     public static List<LottoNumber> execute(String winningNumbers, LottoGenerator lottoGenerator) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(winningNumbers.split(TOKEN))
+        return Arrays.stream(winningNumbers.split(TOKEN))
                 .map(inputNumber -> {
                     Integer number = Integer.parseInt(inputNumber);
                     validateNumberRange(lottoGenerator, number);
                     return LottoNumber.of(number);
                 })
                 .collect(Collectors.toList());
-        return lottoNumbers;
     }
 
     private static void validateNumberRange(LottoGenerator lottoGenerator, Integer number) {
@@ -25,6 +24,5 @@ public class WinningNumberTokenizer {
             throw new OutOfLottoNumberRangeException();
         }
     }
-
 
 }
