@@ -26,11 +26,11 @@ public class WinningNumber {
         return bonusNumber;
     }
 
-    private void parse(String expression) {
+    private void parse(String numberString) {
         try {
-            numbers = parser.parse(expression);
-        } catch (RuntimeException e) {
-            throw new InvalidWinningNumberException(expression, e.getCause() != null ? e.getCause() : e);
+            this.numbers = parser.parse(numberString);
+        } catch (LottoNumberParseException e) {
+            throw new InvalidWinningNumberException(numberString, e);
         }
     }
 

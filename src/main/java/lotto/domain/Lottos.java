@@ -12,7 +12,7 @@ public class Lottos {
         this(Arrays.asList(lottos));
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos){
         this.lottos = lottos;
     }
 
