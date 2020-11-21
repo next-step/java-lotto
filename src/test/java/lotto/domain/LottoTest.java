@@ -26,7 +26,7 @@ class LottoTest {
     void createLotto() {
         Numbers numbers = Numbers.builder().range(1, 7).build();
 
-        Lotto lotto = new Lotto(size -> numbers);
+        Lotto lotto = new Lotto(() -> numbers);
 
         assertThat(lotto.getNumbers()).isEqualTo(numbers);
     }
@@ -36,7 +36,7 @@ class LottoTest {
     void createLotto_sizeIsNot6() {
         Numbers numbers = Numbers.builder().range(1, 8).build();
         assertThatThrownBy(() ->
-                new Lotto(size -> numbers))
+                new Lotto(() -> numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Numbers size wrong");
     }
@@ -46,7 +46,7 @@ class LottoTest {
     @MethodSource
     void getRankMatcher(WinningLotto winningLotto, RankMatcher expectedRankMatcher) {
         Numbers numbers = Numbers.builder().range(1, 7).build();
-        Lotto lotto = new Lotto(size -> numbers);
+        Lotto lotto = new Lotto(() -> numbers);
 
         RankMatcher rankMatcher = lotto.getRankMatcher(winningLotto);
 

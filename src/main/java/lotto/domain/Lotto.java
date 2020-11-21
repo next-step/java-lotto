@@ -11,7 +11,7 @@ public class Lotto {
     }
 
     public Lotto(NumberSelectionStrategy numberSelectionStrategy) {
-        Numbers numbers = numberSelectionStrategy.collectNumbers(SIZE);
+        Numbers numbers = numberSelectionStrategy.collectNumbers();
 
         checkSize(numbers);
 

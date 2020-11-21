@@ -4,5 +4,5 @@ import lotto.domain.Numbers;
 
 @FunctionalInterface
 public interface NumberSelectionStrategy {
-    Numbers collectNumbers(int size);
+    Numbers collectNumbers();
 }
