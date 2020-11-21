@@ -57,12 +57,16 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()
     
-- 'BonusLottoBall'
-    - winningLotto 에 포함되지 않은 숫자인지 검사한다.
+- `BonusBall`
+
+- `WinningLotto`
+    - public static WinningLotto of(Lotto winningLotto)
+    - 당첨로또에 보너스 볼 번호를 추가하는 기능
+    - 보너스 볼이 당첨로또에 포함되지 않는지 검사
     
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
-    - public NumberCountCollections statisticWinning(Lotto winningNumbers, LottoBall bonusBall)
+    - public NumberCountCollections statisticWinning(Lotto WinningLotto, LottoBall bonusBall)
      
          
 - InputView
