@@ -17,10 +17,6 @@ public class Amount {
 
     public int pay(int price) {
         if (isInValidPrice(price)) {
-            throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
-        }
-
-        if (this.amount < price) {
             throw new IllegalArgumentException(ILLEGAL_PAY_MESSAGE);
         }
 
@@ -32,8 +28,9 @@ public class Amount {
         return lottoCount * price + amount;
     }
 
+    //price 로 음수값이 들어오는 경우
     private boolean isInValidPrice(int price) {
-        return price < 0;
+        return this.amount < price || price < 0;
     }
 
 

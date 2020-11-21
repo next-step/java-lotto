@@ -6,7 +6,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.*;
-import java.util.regex.Matcher;
 
 public class LottoController {
 
@@ -31,6 +30,7 @@ public class LottoController {
 
     private void buyLottoes() {
         lottoes = new Lottoes(amount.getPrePurchaseAmount(0, Lotto.PRICE));
+        amount.pay(lottoes.getLottoCount() * Lotto.PRICE);
         resultView.printBuyMessage(lottoes.getLottoCount());
         resultView.printLottoes(lottoes.getLottoes());
     }
@@ -39,7 +39,7 @@ public class LottoController {
         int lottoCount = lottoes.getLottoCount();
         int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount, Lotto.PRICE);
 
-        List<Set<Integer>> lottoesNumbers = lottoes.getLottoes();
+        List<SortedSet<Integer>> lottoesNumbers = lottoes.getLottoes();
         Map<Hit, Integer> winnerNumbers = ((WinningLotto) winningLotto).getResult(lottoesNumbers);
         double earningRate = ((WinningLotto) winningLotto).getEarningRate(prePurchaseAmount, lottoesNumbers);
 

@@ -30,7 +30,7 @@ public class Lottoes {
     }
 
 
-    public List<Set<Integer>> getLottoes() {
+    public List<SortedSet<Integer>> getLottoes() {
         return lottoes.stream()
                 .map(CandidateLotto::getNumbers)
                 .collect(Collectors.toList());

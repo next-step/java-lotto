@@ -4,7 +4,7 @@ import lotto.strategy.DrawingStrategy;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.SortedSet;
 
 public class WinningLotto extends Lotto {
 
@@ -12,7 +12,7 @@ public class WinningLotto extends Lotto {
         super(drawingStrategy);
     }
 
-    public Map<Hit, Integer> getResult(List<Set<Integer>> numbers) {
+    public Map<Hit, Integer> getResult(List<SortedSet<Integer>> numbers) {
         Map<Hit, Integer> hits = Hit.getHits();
         numbers.stream()
                 .map(this::getMatchingNumberCount)
@@ -22,7 +22,7 @@ public class WinningLotto extends Lotto {
     }
 
 
-    public double getEarningRate(int amount, List<Set<Integer>> numbers) {
+    public double getEarningRate(int amount, List<SortedSet<Integer>> numbers) {
         int totalReword = getResult(numbers).entrySet().stream()
                 .mapToInt(this::calculateReword)
                 .sum();
@@ -36,7 +36,7 @@ public class WinningLotto extends Lotto {
     }
 
     @Override
-    public Set<Integer> getNumbers() {
+    public SortedSet<Integer> getNumbers() {
         return null;
     }
 }

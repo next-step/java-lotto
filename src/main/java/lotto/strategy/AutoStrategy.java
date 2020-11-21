@@ -10,10 +10,10 @@ public class AutoStrategy extends DrawingStrategy {
             .collect(Collectors.toList());
 
     @Override
-    public Set<Integer> drawNumbers() {
+    public SortedSet<Integer> drawNumbers() {
         Collections.shuffle(candidates);
 
-        return new HashSet<>(candidates.subList(0, NUMBER_COUNT));
+        return new TreeSet<>(candidates.subList(0, NUMBER_COUNT));
     }
 
 }

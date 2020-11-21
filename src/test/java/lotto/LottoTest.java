@@ -4,58 +4,48 @@ import lotto.model.CandidateLotto;
 import lotto.strategy.DrawingStrategy;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 
 public class LottoTest {
     @Test
     public void 중복된_로또_번호_체크() throws Exception {
 
-        DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
-        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
-
         int numberCount = getNumberCount();
 
-        Set<Integer> testNumbers = testNumbers(numberCount, e -> 1);
+        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> 1);
+        assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(true);
     }
 
     @Test
     public void 임계치를_벗어난_로또_체크() throws Exception {
-
-        DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
-        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
-
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        Set<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
+        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(true);
+        assertThat(new ManualStrategy(testNumbers)).isNotNull();
     }
 
     @Test
     public void 정상_로또_체크() throws Exception {
 
-        DrawingStrategy drawingStrategy = Mockito.mock(DrawingStrategy.class, Mockito.CALLS_REAL_METHODS);
-        Method isInvalid = getIsInvalidOfDrawingStrategy(drawingStrategy);
-
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        Set<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
+        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
 
-        assertThat(isInvalid.invoke(drawingStrategy, testNumbers)).isEqualTo(false);
+        assertThat(new CandidateLotto(new ManualStrategy(testNumbers))).isNotNull();
     }
 
     @Test
@@ -64,7 +54,7 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        Set<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
+        SortedSet<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
 
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
@@ -78,8 +68,8 @@ public class LottoTest {
         int numberCount = getNumberCount();
         int threshold = getThreshold();
 
-        Set<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
-        Set<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
+        SortedSet<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
+        SortedSet<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
 
         winnerNumbers.remove(1);
         winnerNumbers.add(threshold);
@@ -91,11 +81,11 @@ public class LottoTest {
     }
 
 
-    private Set<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
+    private SortedSet<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
         return IntStream.range(0, numberCount)
                 .map(mapper)
                 .boxed()
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
 
@@ -112,13 +102,5 @@ public class LottoTest {
 
         return drawingField.getInt(DrawingStrategy.class);
     }
-
-    private Method getIsInvalidOfDrawingStrategy(DrawingStrategy drawingStrategy) throws Exception {
-        Method isInvalid = drawingStrategy.getClass().getDeclaredMethod("isInvalid", Set.class);
-        isInvalid.setAccessible(true);
-
-        return isInvalid;
-    }
-
 
 }

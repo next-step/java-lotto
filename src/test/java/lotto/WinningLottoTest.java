@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningLottoTest {
     @Test
     public void 추첨_결과_테스트() {
-        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,4,5,6})));
+        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,6})));
 
-        CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,45,35,36})));
-        CandidateLotto testHit32 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,45,35,36})));
-        CandidateLotto testHit4 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,4,35,36})));
-        CandidateLotto testHit5 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,4,5,36})));
-        CandidateLotto testHit6 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,4,5,6})));
+        CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
+        CandidateLotto testHit32 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
+        CandidateLotto testHit4 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,35,36})));
+        CandidateLotto testHit5 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,36})));
+        CandidateLotto testHit6 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,6})));
 
         Lottoes lottoes = new Lottoes(CandidateLotto.PRICE * 5, Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6));
 
@@ -36,10 +36,10 @@ public class WinningLottoTest {
 
     @Test
     public void 수익률_테스트() {
-        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,4,5,6})));
+        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,6})));
 
-        CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{1,2,3,45,35,36})));
-        CandidateLotto testHitNone = new CandidateLotto(new ManualStrategy(CommonUtils.arrayToset(new int[]{21,22,23,24,35,36})));
+        CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
+        CandidateLotto testHitNone = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{21,22,23,24,35,36})));
 
         Lottoes lottoes = new Lottoes(14000, Arrays.asList(testHit3, testHitNone));
 
