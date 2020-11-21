@@ -20,12 +20,7 @@ public class LottoShopTest {
 
         //Given & When
         LottoShop shop = new LottoShop();
-        Lottos lottos = shop.purchase(new LottoPrice(purchasePrice), new LottoMachine() {
-            @Override
-            public Set<Integer> createLottoNumber(int capacity) {
-                return new LinkedHashSet<>(Arrays.asList(1, 3, 5, 8, 6));
-            }
-        });
+        Lottos lottos = shop.purchase(new LottoPrice(purchasePrice), new LottoAutoMachine());
 
         //Then
         assertThat(lottos.quantity()).isEqualTo(expected);
