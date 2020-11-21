@@ -6,9 +6,9 @@ import lotto.domain.lotto.LottoTicketGroup;
 import lotto.domain.rank.LottoRankCalculator;
 import lotto.dto.LottoStatisticsResult;
 import lotto.dto.WinLotteryResult;
+import util.CollectionUtil;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static util.Preconditions.checkArgument;
@@ -30,10 +30,11 @@ public class LottoGame {
     public LottoTicketGroup buyLotto(final List<String> lottoNumberExpressionList) {
         checkArgument(money.isNotZero(), MONEY_MUST_GRATE_THEN_ZERO_TO_BUY_LOTTO);
 
-        if (Objects.isNull(lottoNumberExpressionList) || lottoNumberExpressionList.size() == 0) {
+        if (CollectionUtil.isEmpty(lottoNumberExpressionList)) {
             this.lottoTicketGroup = LottoStore.sell(money);
             return getLottoTicketGroup();
         }
+        
         return buyLottoWithSlipMode(lottoNumberExpressionList);
     }
 
