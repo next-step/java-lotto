@@ -32,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static LottoNumber zero() {
-        return new LottoNumber(0);
+        return findOrElseAdd(0);
     }
 
     private static int parseToInt(String value) {
