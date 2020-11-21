@@ -2,9 +2,8 @@ package step03.domain;
 
 import step03.Rank;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class Lottos {
@@ -23,6 +22,20 @@ public class Lottos {
         return lottos.size();
     }
 
+    public RankCounter calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
+        RankCounter rankCounter = RankCounter.of();
+        lottos.forEach(lotto -> {
+            Integer matchOfCount = lotto.matchCount(targetLotto);
+            Rank target = Rank.valueOf(matchOfCount, lotto.isContaining(bonusBall));
+            rankCounter.increase(target);
+        });
+        return rankCounter;
+    }
+
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -37,13 +50,4 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
-    public RankCounter calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
-        RankCounter rankCounter = RankCounter.of();
-        lottos.forEach(lotto -> {
-            Integer matchOfCount = lotto.matchCount(targetLotto);
-            Rank target = Rank.valueOf(matchOfCount, lotto.isContaining(bonusBall));
-            rankCounter.increase(target);
-        });
-        return rankCounter;
-    }
 }

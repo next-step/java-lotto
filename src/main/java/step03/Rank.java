@@ -26,14 +26,16 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Stream<Rank> stream () {
-        return Stream.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
+    public static Stream<Rank> stream() {
+        return Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 
-    public static Rank valueOf (int countOfMatch, boolean matchBonus) {
-        return stream().filter(rank -> rank.getCountOfMatch() == countOfMatch)
-                .filter(rank -> !rank.equals(SECOND) || matchBonus)
-                .findAny().orElse(MISS);
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        return stream()
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .filter(rank -> rank.getCountOfMatch() != 5 || matchBonus)
+                .findFirst()
+                .orElse(MISS);
     }
 
 }

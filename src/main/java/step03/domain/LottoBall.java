@@ -33,4 +33,9 @@ public class LottoBall implements Comparable<LottoBall>{
     public int compareTo(LottoBall lottoBall) {
         return number - lottoBall.number;
     }
+
+    @Override
+    public String toString() {
+        return number + "";
+    }
 }

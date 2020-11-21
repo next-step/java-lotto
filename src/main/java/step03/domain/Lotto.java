@@ -67,4 +67,13 @@ public class Lotto {
     public boolean isContaining(LottoBall lottoBall) {
         return lotto.contains(lottoBall);
     }
+
+    @Override
+    public String toString() {
+        return "["
+                + lotto.stream()
+                .map(lottoBall -> lottoBall.toString())
+                .collect(Collectors.joining(", "))
+                + "]";
+    }
 }
