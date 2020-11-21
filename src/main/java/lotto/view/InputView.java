@@ -30,12 +30,29 @@ public class InputView {
         return result;
     }
 
+    public static int inputBonusLottoNumber() {
+        int result;
+        do {
+            System.out.print(INPUT_BONUS_BALL_NUMBER_MESSAGE);
+        } while((result = bonusNumberCheck(scanner.nextInt())) == 0);
+        scanner.nextLine();
+        return result;
+    }
+
     private static int priceCheck(int price) {
         if(price < LOTTO_PRICE) {
             System.out.print(PRICE_CHECK_ERROR_MESSAGE);
             return 0;
         }
         return price;
+    }
+
+    private static int bonusNumberCheck(int number) {
+        if(number > 0 && number <= MAX_LOTTO_NUMBER) {
+            return number;
+        }
+        System.out.print(BONUS_NUMBER_CHECK_ERROR_MESSAGE);
+        return 0;
     }
 
     private static boolean stringValidationCheck(String number) {
