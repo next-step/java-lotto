@@ -1,7 +1,6 @@
-package step1.addCalulator.domain;
+package step1.addCalculator.domain;
 
 import org.junit.jupiter.api.Test;
-import step1.addCalculator.domain.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StringAddCalculator {
 
+
     public static int splitAndSum(String paramValue){
         InputTextProcessing inputTextProcessing = new InputTextProcessing(paramValue);
 
@@ -15,12 +16,12 @@ public class StringAddCalculator {
     }
 
     private static int runAddition(List<Integer> paramList){
-        int returnValue = 0;
+        int retrunValue = 0;
 
         for(Integer intValue : paramList){
-            returnValue = intValue + returnValue;
+            retrunValue = intValue + retrunValue;
         }
 
-        return returnValue;
+        return retrunValue;
     }
 }
