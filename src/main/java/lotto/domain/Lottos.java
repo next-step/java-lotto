@@ -8,16 +8,12 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    private Lottos(Lotto... lottos) {
+    public Lottos(Lotto... lottos) {
         this(Arrays.asList(lottos));
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public static Lottos as(Lotto... lottos) {
-        return new Lottos(lottos);
     }
 
     public int getPaidMoney() {
