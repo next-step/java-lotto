@@ -3,6 +3,7 @@ package study.lotto.lottery;
 import study.lotto.core.LottoRank;
 import study.lotto.core.WinningLotto;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,9 +13,9 @@ public class LotteryResult {
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
 
     private final Map<LottoRank, Long> countByLottoRank;
-    private final double totalReturnRatio;
+    private final BigDecimal totalReturnRatio;
 
-    public LotteryResult(List<WinningLotto> winningLottos, double totalReturnRatio) {
+    public LotteryResult(List<WinningLotto> winningLottos, BigDecimal totalReturnRatio) {
         this.countByLottoRank = Optional.ofNullable(winningLottos)
                 .map(this::countByLottoRank)
                 .orElse(new HashMap<>());

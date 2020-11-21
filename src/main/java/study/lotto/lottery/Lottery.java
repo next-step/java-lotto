@@ -3,6 +3,7 @@ package study.lotto.lottery;
 import study.lotto.core.*;
 import study.lotto.dispenser.Lottos;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,12 +38,15 @@ public class Lottery {
                 .collect(Collectors.toList());
     }
 
-    private double calcTotalReturnRatio() {
-        int totalPrizeAmount = winningLottos.stream()
-                .mapToInt(WinningLotto::getPrize)
-                .sum();
-        int totalPurchaseAmount = lottos.getTotalPurchaseAmount();
-        return (double)totalPrizeAmount / totalPurchaseAmount;
+    private BigDecimal calcTotalReturnRatio() {
+        BigDecimal totalPrizeAmount = winningLottos.stream()
+                .map(WinningLotto::getPrize)
+                .map(BigDecimal::new)
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+
+        BigDecimal totalPurchaseAmount = BigDecimal.valueOf(lottos.getTotalPurchaseAmount());
+
+        return totalPrizeAmount.divide(totalPurchaseAmount);
     }
 
 }
