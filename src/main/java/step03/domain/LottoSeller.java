@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoSeller {
-    static final int priceOfLotto = 1000;
+    public static final int PRICE_OF_LOTTO = 1000;
 
     public static Lottos generateLottos(Integer payment) {
         validatePayment(payment);
@@ -22,11 +22,11 @@ public class LottoSeller {
     }
 
     private static int calculateCountOfLottos(int payment) {
-        return payment / priceOfLotto;
+        return payment / PRICE_OF_LOTTO;
     }
 
     private static void validatePayment(Integer payment) {
-        if (payment < priceOfLotto) {
+        if (payment < PRICE_OF_LOTTO) {
             throw new LackOfMoneyException();
         }
     }

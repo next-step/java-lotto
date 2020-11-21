@@ -1,6 +1,7 @@
 package step03.domain;
 
 import step03.Rank;
+import utils.DoubleParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,20 @@ public class RankCounter {
         return sum;
     }
 
+    public Integer getTotalCount() {
+        int sum = 0;
+        for(Map.Entry<Rank, Integer> elem : rankCounter.entrySet() ){
+            sum += elem.getValue();
+        }
+        return sum;
+    }
+
+    public double calculateGainRate() {
+        double spent = LottoSeller.PRICE_OF_LOTTO * getTotalCount();
+        double reward = calculateRewardAll();
+        return DoubleParser.getTwoDecimalPoint(reward / spent);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +62,5 @@ public class RankCounter {
     public int hashCode() {
         return Objects.hash(rankCounter);
     }
+
 }
