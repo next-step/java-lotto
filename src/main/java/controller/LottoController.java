@@ -47,9 +47,8 @@ public class LottoController {
         Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers);
         resultView.displayStatistic(lottoStatistics);
 
-        double profit = calculateProfit(lottoStatistics, priceTotal);
+        double profit = LottoProfit.calculateProfit(lottoStatistics, priceTotal).getProfit();
         resultView.displayProfit(profit);
-
     }
 
     public Lottos initLottos(int lottoQuantity) {
@@ -62,15 +61,5 @@ public class LottoController {
 
     public int getLottoQuantity() {
         return lottoInfo.getPrice() / LOTTO_UNIT_PRICE;
-    }
-
-    public double calculateProfit(Map<Integer, Integer> lottoStatistics, int price) {
-        int prizeSum = lottoStatistics.keySet()
-                .stream()
-                .mapToInt(key -> key)
-                .map(key -> lottoStatistics.get(key) * LottoPrize.valueOf(key))
-                .sum();
-
-        return (double) prizeSum / (double) price;
     }
 }
