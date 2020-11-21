@@ -28,7 +28,7 @@ public class LottoGameTest {
         @Test
         void success() {
             // given
-            final int money = LottoTicket.getPrice().multiply(2).getValue();
+            final long money = LottoTicket.getPrice().multiply(2).getValue();
             final LottoGame lottoGame = LottoGame.of(money);
 
             // when
@@ -80,7 +80,7 @@ public class LottoGameTest {
         @Test
         void success() {
             // given
-            final int money = LottoTicket.getPrice().getValue();
+            final long money = LottoTicket.getPrice().getValue();
 
             // when
             final LottoGame lottoGame = LottoGame.of(money);
@@ -94,7 +94,7 @@ public class LottoGameTest {
     @Test
     void getLottos_not_return_null() {
         // given
-        final int money = LottoTicket.getPrice().getValue();
+        final long money = LottoTicket.getPrice().getValue();
         final LottoGame lottoGame = LottoGame.of(money);
 
         // when
@@ -112,7 +112,7 @@ public class LottoGameTest {
         @Test
         void get_win_lottery() {
             // given
-            final int money = LottoTicket.getPrice().multiply(10).getValue();
+            final long money = LottoTicket.getPrice().multiply(10).getValue();
             final LottoGame lottoGame = LottoGame.of(money);
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6";
 
@@ -127,7 +127,7 @@ public class LottoGameTest {
         @Test
         void lotto_number_is_empty() {
             // given
-            final int money = LottoTicket.getPrice().multiply(10).getValue();
+            final long money = LottoTicket.getPrice().multiply(10).getValue();
             final LottoGame lottoGame = LottoGame.of(money);
             final String winningNumberExpression = " ";
 
@@ -145,7 +145,7 @@ public class LottoGameTest {
         @Test
         void not_valid_lotto_number_size() {
             // given
-            final int money = LottoTicket.getPrice().multiply(10).getValue();
+            final long money = LottoTicket.getPrice().multiply(10).getValue();
             final LottoGame lottoGame = LottoGame.of(money);
             final String winningNumberExpression = "1, 2, 3, 4, 5, 6, 7";
 
@@ -164,7 +164,7 @@ public class LottoGameTest {
     @Test
     void buyLotto() {
         // given
-        final int money = LottoTicket.getPrice().multiply(10).getValue();
+        final long money = LottoTicket.getPrice().multiply(10).getValue();
         final LottoGame lottoGame = LottoGame.of(money);
         final List<String> lottoNumberExpressionList = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
 

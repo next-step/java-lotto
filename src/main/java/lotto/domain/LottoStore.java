@@ -37,10 +37,10 @@ public class LottoStore {
             return LottoTicketGroup.EMPTY;
         }
 
-        final int lottoTotalCount = money.divideWithoutRemainder(LottoTicket.getPrice());
+        final long lottoTotalCount = money.divideWithoutRemainder(LottoTicket.getPrice());
         checkArgument(lottoTotalCount >= slipLottoCount, "");
 
-        final int quickPicksLottoCount = lottoTotalCount - slipLottoCount;
+        final long quickPicksLottoCount = lottoTotalCount - slipLottoCount;
         return LottoTicketGroupFactory.create(quickPicksLottoCount);
     }
 

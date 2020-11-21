@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.rank.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -50,7 +51,7 @@ class MoneyTest {
             final Money lottoPrice = LottoTicket.getPrice();
 
             // when
-            final int lottoCount = money.divideWithoutRemainder(lottoPrice);
+            final long lottoCount = money.divideWithoutRemainder(lottoPrice);
 
             // then
             assertThat(lottoCount).isEqualTo(2);
@@ -104,5 +105,15 @@ class MoneyTest {
             // then
             assertThat(result).isZero();
         }
+    }
+
+    @DisplayName("1등 10번 당첨시 금액 테스트")
+    @Test
+    void multiply_win_first_10_times() {
+        // when
+        final Money result = Rank.FIRST.getWinningMoney().multiply(10);
+
+        // then
+        assertThat(result).isNotNull();
     }
 }

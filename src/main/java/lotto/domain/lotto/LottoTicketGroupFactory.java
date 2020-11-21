@@ -8,7 +8,7 @@ import static util.Preconditions.checkArgument;
 public class LottoTicketGroupFactory {
     public static final String COUNT_MUST_NOT_BE_NEGATIVE = "count must not be negative";
     
-    public static LottoTicketGroup create(final int count) {
+    public static LottoTicketGroup create(final long count) {
         checkArgument(count >= 0, COUNT_MUST_NOT_BE_NEGATIVE);
         
         if (count == 0) {

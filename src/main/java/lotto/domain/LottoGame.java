@@ -22,7 +22,7 @@ public class LottoGame {
         this.money = money;
     }
 
-    public static LottoGame of(final int money) {
+    public static LottoGame of(final long money) {
 
         return new LottoGame(Money.of(money));
     }
