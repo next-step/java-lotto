@@ -23,8 +23,10 @@ public class LottoVendingMachine {
         return new Lottos(getLottoList(price));
     }
 
-    public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumbers) {
+    public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumbers, int bonusNumber) {
         List<Integer> winningNumberList = parseIntNumbers(noneSpaceStrings(winningNumbers));
+        winningNumberList.add(bonusNumber);
+
         return getLottoResultList(lottos,winningNumberList);
     }
 
@@ -33,19 +35,9 @@ public class LottoVendingMachine {
     }
 
     private static List<LottoResult> getLottoResultList(Lottos lottos, List<Integer> winningNumberList) {
-        List<LottoResult> results = new LinkedList<>();
-        for(Lotto lotto : lottos.getLottos()) {
-            int winningCount = lotto.sameNumberOfCount(winningNumberList);
-            results.add(addLottoResult(winningCount));
-        }
-        return results;
-    }
-
-    private static LottoResult addLottoResult(int winningCount) {
-        return Arrays.stream(LottoResult.values())
-                .filter(e -> e.getWinningCount() == winningCount)
-                .findFirst()
-                .orElse(LottoResult.NONE);
+        return lottos.getLottos().stream()
+                .map(e -> e.lottoResult(winningNumberList))
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> parseIntNumbers(String winningNumbers) {
