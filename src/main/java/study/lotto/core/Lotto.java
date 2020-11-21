@@ -1,7 +1,9 @@
 package study.lotto.core;
 
+import study.lotto.core.exception.AlreadyLotteryLottoException;
+import study.lotto.core.exception.LottoNumberCountNotMatchingException;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -24,7 +26,7 @@ public class Lotto {
 
     private void throwIfNumberCountNotMatch() {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개를 입력해주세요.");
+            throw new LottoNumberCountNotMatchingException();
         }
     }
 
@@ -39,7 +41,7 @@ public class Lotto {
     public WinningLotto lottery(WinLottoNumbers winLottoNumbers) {
 
         if (this.lottoStatus == LottoStatus.HAS_BEEN_LOTTERY) {
-            throw new IllegalArgumentException("이미 추첨한 로또입니다.");
+            throw new AlreadyLotteryLottoException();
         }
 
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
