@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import static lotto.domain.LottoGameConfig.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGameResults {
 
-    private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
     private static final String WINNING_NUMBER_DELIMITER = ",";
     private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
 
@@ -62,6 +62,10 @@ public class LottoGameResults {
             throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
         }
 
+        if(Arrays.stream(lastWinningNumbers).anyMatch(number -> Integer.parseInt(number) > MAX_LOTTO_NUMBER)){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
+
         return lastWinningNumbers;
     }
 
@@ -69,13 +73,9 @@ public class LottoGameResults {
         return lastWinningNumbersInput.split(WINNING_NUMBER_DELIMITER);
     }
 
-
-
-
     public Map<Integer, Integer> getWinningResultRecord() {
         return prizeUnitCountMap;
     }
-
 
     public double getProfit(Map<Integer, Integer> winningResults) {
         winningResults.entrySet().stream().forEach(set -> prizeMoney.add(PrizeUnit.calculate(set.getKey(), set.getValue())));

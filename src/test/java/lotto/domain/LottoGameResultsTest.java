@@ -36,14 +36,12 @@ public class LottoGameResultsTest {
 
     @DisplayName("지난 당첨 번호 유효성 검증")
     @ParameterizedTest
-    @ValueSource(strings = {"3%4%6%7%8%9", "q,w,e,r,t,y", "1,2,3"})
+    @ValueSource(strings = {"3%4%6%7%8%9", "q,w,e,r,t,y", "1,2,3", "1,2,3,4,5,66"})
     void illegalLastWinningNumberExceptionTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             lottoGameResults.addLastWinningNumber(input);
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
     }
-
-
 
 
 

@@ -37,9 +37,10 @@ public class LottoTicketTest {
     @DisplayName("LottoTicket 번호 오름차순으로 조회되는지 테스트")
     @Test
     void getLottoTicketSortedNumberTest(){
-        //when
+        //given
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
+        //when
         int min = lottoTicket.getSortedLottoNumbers()
                 .stream()
                 .mapToInt(v -> v)

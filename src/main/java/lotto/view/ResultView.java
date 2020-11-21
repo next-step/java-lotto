@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class ResultView {
 
+    private static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
+
     public static void getLottoTickets(LottoGameResults lottoGameResults) {
         System.out.println(lottoGameResults.getLottoIssueResult().getTicketCount() +"개를 구매했습니다.");
 
@@ -17,7 +19,7 @@ public class ResultView {
     }
 
     public static void getPrizeResult(Map<Integer, Integer> resultsMap) {
-        System.out.println("\n당첨 통계\n---------");
+        System.out.println(WINNING_RESULT_MESSAGE);
 
         resultsMap.entrySet()
                 .stream().forEach(set -> { PrizeUnit unit = PrizeUnit.findPrizeFieldByUnitCount(set.getKey());
