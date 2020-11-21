@@ -12,14 +12,12 @@ public class LottoTickets {
 
     private List<LottoTicket> lottoTickets;
 
-    private int ticketCount;
     private int gameMoney;
 
     public LottoTickets(int gameMoney) {
 
         this.gameMoney = gameMoney;
-        this.ticketCount = gameMoney/LOTTO_GAME_MONEY_UNIT;
-        this.lottoTickets = IntStream.range(0, ticketCount)
+        this.lottoTickets = IntStream.range(0, gameMoney/LOTTO_GAME_MONEY_UNIT)
                 .mapToObj(ticket -> new LottoTicket(makeLottoNumber()))
                 .collect(Collectors.toList());
     }
@@ -29,7 +27,7 @@ public class LottoTickets {
     }
 
     public int getTicketCount() {
-        return this.ticketCount;
+        return lottoTickets.size();
     }
 
     private List<Integer> makeLottoNumber() {
