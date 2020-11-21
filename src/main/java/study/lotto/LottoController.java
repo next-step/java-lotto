@@ -29,9 +29,6 @@ public class LottoController {
         // 구매
         Lottos lottos = purchaseLottos();
 
-        // 구매한 로또 출력 
-        lottoPurchaseResultView.display(lottos);
-        
         // 당첨 번호 및 추첨
         WinLottoNumbers winLottoNumbers = winNumbersInputView.display();
         Lottery lottery = new Lottery(winLottoNumbers, lottos);
