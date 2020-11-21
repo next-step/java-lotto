@@ -9,6 +9,7 @@ public class InputView {
 
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER= "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER = "\n보너스 볼을 입력해 주세요.";
     private static final String INPUT_MONEY_PATTERN = "(\\d+)";
 
     private static Scanner scanner = new Scanner(System.in);
@@ -48,5 +49,13 @@ public class InputView {
 
         return winningNumbers;
 
+    }
+
+    public static String getInputBonusNumber(){
+        System.out.println(INPUT_BONUS_NUMBER);
+
+        String bonusNumber = scanner.next();
+
+        return bonusNumber;
     }
 }
