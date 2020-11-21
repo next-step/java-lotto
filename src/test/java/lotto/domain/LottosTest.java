@@ -35,7 +35,7 @@ public class LottosTest {
         LottoShop lottoShop = new LottoShop();
         Lottos lottos = lottoShop.purchase(new LottoPrice(5000), new LottoMachine() {
             @Override
-            Set<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber(int capacity) {
                 return new LinkedHashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8));
             }
         });
@@ -57,7 +57,7 @@ public class LottosTest {
         LottoShop lottoShop = new LottoShop();
         Lottos lottos = lottoShop.purchase(new LottoPrice(10000), new LottoMachine() {
             @Override
-            Set<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber(int capacity) {
                 return new LinkedHashSet<>(Arrays.asList(12, 33, 35, 45));
             }
         });

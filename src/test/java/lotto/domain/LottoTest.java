@@ -24,7 +24,7 @@ public class LottoTest {
         //Given & When
         Lotto lotto = new Lotto(sequence, new LottoMachine() {
             @Override
-            public Set<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber(int capacity) {
                 return new LinkedHashSet<>(Arrays.asList(element2, element3, element4));
             }
         });
@@ -66,7 +66,7 @@ public class LottoTest {
         //Given
         Lotto lotto = new Lotto(1, new LottoMachine() {
             @Override
-            public Set<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber(int capacity) {
                 return expected;
             }
         });

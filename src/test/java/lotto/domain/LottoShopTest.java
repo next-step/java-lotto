@@ -22,7 +22,7 @@ public class LottoShopTest {
         LottoShop shop = new LottoShop();
         Lottos lottos = shop.purchase(new LottoPrice(purchasePrice), new LottoMachine() {
             @Override
-            Set<Integer> createLottoNumber() {
+            public Set<Integer> createLottoNumber(int capacity) {
                 return new LinkedHashSet<>(Arrays.asList(1, 3, 5, 8, 6));
             }
         });
