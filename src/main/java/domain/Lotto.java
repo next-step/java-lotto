@@ -9,8 +9,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto createLotto() {
-        return new Lotto(new LottoNumbers().shuffleNumbers());
+    public static Lotto createLotto(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     public int matchLottoNumbers(LottoNumbers winningLotto) {

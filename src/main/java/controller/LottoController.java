@@ -4,6 +4,8 @@ import domain.*;
 import view.InputView;
 import view.ResultView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,6 +14,9 @@ import java.util.stream.IntStream;
 public class LottoController {
     private final int ZERO = 0;
     private final int LOTTO_UNIT_PRICE = 1000;
+    private final int LOTTO_START_NUMBER = 1;
+    private final int LOTTO_END_NUMBER = 45;
+    private final int LOTTO_RANGE = 6;
 
     private LottoInfo lottoInfo;
 
@@ -36,7 +41,8 @@ public class LottoController {
         int lottoQuantity = getLottoQuantity();
         resultView.displayLottoQuantity(lottoQuantity);
 
-        Lottos lottos = initLottos(lottoQuantity);
+        List<Integer> basicLottoNumbers = createBasicLottoNumbers();
+        Lottos lottos = initLottos(lottoQuantity, basicLottoNumbers);
         resultView.displayLottos(lottos);
 
         LottoNumbers winningNumbers = new LottoNumbers()
@@ -51,15 +57,32 @@ public class LottoController {
         resultView.displayProfit(profit);
     }
 
-    public Lottos initLottos(int lottoQuantity) {
+    public Lottos initLottos(int lottoQuantity, List<Integer> basicLottoNumbers) {
         List<Lotto> lottoList = IntStream
                 .range(ZERO, lottoQuantity)
-                .mapToObj(quantity -> Lotto.createLotto())
+                .mapToObj(quantity -> Lotto.createLotto(shuffleNumbers(basicLottoNumbers)))
                 .collect(Collectors.toList());
         return Lottos.from(lottoList);
     }
 
     public int getLottoQuantity() {
         return lottoInfo.getPrice() / LOTTO_UNIT_PRICE;
+    }
+
+    public List<Integer> createBasicLottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for(int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            numbers.add(number);
+        }
+        return numbers;
+    }
+
+    public LottoNumbers shuffleNumbers(List<Integer> basicLottoNumbers) {
+        Collections.shuffle(basicLottoNumbers);
+        List<Integer> newNumbers = IntStream
+                .range(ZERO, LOTTO_RANGE)
+                .mapToObj(basicLottoNumbers::get)
+                .collect(Collectors.toList());
+        return new LottoNumbers().from(newNumbers);
     }
 }
