@@ -1,9 +1,9 @@
 package lotto.domain.util;
 
-import lotto.domain.exception.NotValidLottoNumberException;
 import lotto.domain.exception.ErrorMessage;
+import lotto.domain.exception.NotValidLottoNumberException;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public class PrizeNumberValidator {
 
@@ -12,13 +12,13 @@ public class PrizeNumberValidator {
     private PrizeNumberValidator() {
     }
 
-    public static void validate(HashSet<Integer> prizeNumbers) {
+    public static void validate(Set<Integer> prizeNumbers) {
         if(!validatePrizeNumberSize(prizeNumbers)){
             throw new NotValidLottoNumberException(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
         }
     }
 
-    private static boolean validatePrizeNumberSize(HashSet<Integer> prizeNumbers) {
+    private static boolean validatePrizeNumberSize(Set<Integer> prizeNumbers) {
         return prizeNumbers.size() == 6;
     }
 }

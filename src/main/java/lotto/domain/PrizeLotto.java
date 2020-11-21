@@ -2,13 +2,13 @@ package lotto.domain;
 
 import lotto.domain.util.PrizeNumberValidator;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public class PrizeLotto  {
 
-    private HashSet<Integer> prizeNumbers;
+    private Set<Integer> prizeNumbers;
 
-    public PrizeLotto(HashSet<Integer> prizeNumbers) {
+    public PrizeLotto(Set<Integer> prizeNumbers) {
         PrizeNumberValidator.validate(prizeNumbers);
         this.prizeNumbers = prizeNumbers;
     }
