@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.util.PrizeNumberValidator;
-
 import java.util.Set;
 
 public class PrizeLotto  {
@@ -9,7 +7,6 @@ public class PrizeLotto  {
     private Set<Integer> prizeNumbers;
 
     public PrizeLotto(Set<Integer> prizeNumbers) {
-        PrizeNumberValidator.validate(prizeNumbers);
         this.prizeNumbers = prizeNumbers;
     }
 
@@ -19,5 +16,9 @@ public class PrizeLotto  {
 
     public boolean findByIndexNumber(int lottoNumber) {
         return prizeNumbers.contains(lottoNumber);
+    }
+
+    public Set<Integer> getPrizeNumbers() {
+        return prizeNumbers;
     }
 }
