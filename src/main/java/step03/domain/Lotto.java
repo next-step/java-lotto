@@ -45,4 +45,7 @@ public class Lotto {
         return Objects.hash(lotto);
     }
 
+    public boolean isContaining(LottoBall lottoBall) {
+        return lotto.contains(lottoBall);
+    }
 }

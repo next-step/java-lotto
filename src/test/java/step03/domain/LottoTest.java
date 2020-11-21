@@ -53,5 +53,23 @@ public class LottoTest {
         assertThat(Lotto.of(lottoBalls).matchCount(targetLotto)).isEqualTo(expect);
     }
 
+    private static Stream<Arguments> provideLottoBallContainingResult() {
+        return Stream.of(
+                Arguments.of(LottoBall.valueOf(8), true),
+                Arguments.of(LottoBall.valueOf(2), false),
+                Arguments.of(LottoBall.valueOf(21), true),
+                Arguments.of(LottoBall.valueOf(4), false)
+        );
+    }
+
+    @DisplayName("로또에 특정 번호가 있는지 검사")
+    @ParameterizedTest
+    @MethodSource("provideLottoBallContainingResult")
+    void test_isContaining(LottoBall lottoBall, boolean expect) {
+        assertThat(Lotto.of(lottoBalls).isContaining(lottoBall))
+                .isEqualTo(expect);
+    }
+
+
 //    - public List<LottoNumber> getLotto()
 }

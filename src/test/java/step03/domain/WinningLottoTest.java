@@ -24,26 +24,26 @@ public class WinningLottoTest {
     @DisplayName("생성자")
     @Test
     void test_constructor() {
-        BonusBall bonusBall = BonusBall.of(LottoBall.valueOf(7));
+        LottoBall bonusBall = LottoBall.valueOf(7);
         assertThat(WinningLotto.of(winningLotto, bonusBall))
                 .isEqualTo(WinningLotto.of(winningLotto, bonusBall));
     }
 
-    private static Stream<BonusBall> provideInvalidBonusBallResult() {
+    private static Stream<LottoBall> provideInvalidBonusBallResult() {
         return Stream.of(
-                BonusBall.of(LottoBall.valueOf(1)),
-                BonusBall.of(LottoBall.valueOf(2)),
-                BonusBall.of(LottoBall.valueOf(3)),
-                BonusBall.of(LottoBall.valueOf(4)),
-                BonusBall.of(LottoBall.valueOf(5)),
-                BonusBall.of(LottoBall.valueOf(6))
+                LottoBall.valueOf(1),
+                LottoBall.valueOf(2),
+                LottoBall.valueOf(3),
+                LottoBall.valueOf(4),
+                LottoBall.valueOf(5),
+                LottoBall.valueOf(6)
         );
     }
 
     @DisplayName("보너스 볼이 당첨로또에 포함되면 예외 던짐")
     @ParameterizedTest
     @MethodSource("provideInvalidBonusBallResult")
-    void test_validateBonusBall(BonusBall bonusBall) {
+    void test_validateBonusBall(LottoBall bonusBall) {
         assertThatExceptionOfType(ExistedInWinningLottoException.class)
                 .isThrownBy(() -> {
                     WinningLotto.of(winningLotto, bonusBall);

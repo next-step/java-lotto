@@ -52,13 +52,12 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 - `Lotto` 
     - public static Lotto of(List<LottoBall> lotto)
     - public int matchCount(Lotto targetLotto)
+    - public boolean isContaining(LottoBall lottoBall)
     // - public List<LottoNumber> getLotto()
     
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()
     
-- `BonusBall`
-
 - `WinningLotto`
     - public static WinningLotto of(Lotto winningLotto)
     - 보너스 볼이 당첨로또에 포함되지 않는지 검사

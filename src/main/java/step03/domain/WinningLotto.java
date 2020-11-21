@@ -6,22 +6,22 @@ import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final BonusBall bonusBall;
+    private final LottoBall bonusBall;
 
-    private WinningLotto(Lotto winningLotto, BonusBall bonusBall) {
+    private WinningLotto(Lotto winningLotto, LottoBall bonusBall) {
         validateBonusBall(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }
 
-    public static WinningLotto of(Lotto winningLotto, BonusBall bonusBall) {
+    public static WinningLotto of(Lotto winningLotto, LottoBall bonusBall) {
         return new WinningLotto(winningLotto, bonusBall);
     }
 
-    private static void validateBonusBall(Lotto winningLotto, BonusBall bonusBall) {
-//        if (!winningLotto.isContaining(bonusBall)) {
-//            throw new ExistedInWinningLottoException();
-//        }
+    private static void validateBonusBall(Lotto winningLotto, LottoBall bonusBall) {
+        if (!winningLotto.isContaining(bonusBall)) {
+            throw new ExistedInWinningLottoException();
+        }
     }
 
     @Override
