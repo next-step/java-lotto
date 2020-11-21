@@ -2,11 +2,14 @@ package study.lotto.view.input;
 
 import study.lotto.core.Lotto;
 import study.lotto.core.LottoNumber;
+import study.lotto.dispenser.LottoDispenser;
 import study.lotto.dispenser.Lottos;
 import study.lotto.view.AbstractView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualLottoInputView extends AbstractView {
 
@@ -24,13 +27,19 @@ public class ManualLottoInputView extends AbstractView {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int count = 0; count < numberOfManualLotto; count++) {
-            String lottoNumbersDelimitedByComma = scanner.nextLine();
-            List<LottoNumber> lottoNumbers = createLottoNumber(lottoNumbersDelimitedByComma);
-            lottos.add(new Lotto(lottoNumbers));
+            List<String> parsedLottoNumbers = parseForLottoNumber(scanner.nextLine());
+            Lotto manualLotto = LottoDispenser.manual(parsedLottoNumbers);
+            lottos.add(manualLotto);
         }
 
         return new Lottos(lottos);
     }
 
+    private List<String> parseForLottoNumber(String lottoNumbersDelimitedByComma) {
+        return Arrays.asList(lottoNumbersDelimitedByComma.split(DELIMITER))
+                .stream()
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
 }
 

@@ -22,8 +22,6 @@ public class LottoController {
     private LottoPurchaseResultView lottoPurchaseResultView = LottoPurchaseResultView.getInstance();
     private LotteryResultView lotteryResultView = LotteryResultView.getInstance();
 
-    private LottoDispenser lottoDispenser = LottoDispenser.getInstance();
-
     public void purchaseByAuto() {
 
         // 구매
@@ -47,7 +45,7 @@ public class LottoController {
         // 구매결과 출력
         purchaseInputView.displayPurchaseAmount(purchaseAmount);
         // 구매 - 자동
-        Lottos autoLottos = lottoDispenser.auto(purchaseAmount.getNumberOfAutoLotto());
+        Lottos autoLottos = LottoDispenser.auto(purchaseAmount.getNumberOfAutoLotto());
         // 자동로또 출력
         lottoPurchaseResultView.display(autoLottos);
         // 병합
