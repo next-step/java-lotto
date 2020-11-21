@@ -9,7 +9,8 @@ import java.util.Objects;
 import static util.Preconditions.checkArgument;
 
 public class LottoStore {
-
+    public static final String NOT_ENOUGH_MONEY_TO_BUY_LOTTO = "not enough money to buy lotto";
+    
     public static LottoTicketGroup sell(final Money money) {
         return sell(money, LottoTicketGroup.EMPTY);
     }
@@ -38,7 +39,7 @@ public class LottoStore {
         }
 
         final long lottoTotalCount = money.divideWithoutRemainder(LottoTicket.getPrice());
-        checkArgument(lottoTotalCount >= slipLottoCount, "");
+        checkArgument(lottoTotalCount >= slipLottoCount, NOT_ENOUGH_MONEY_TO_BUY_LOTTO);
 
         final long quickPicksLottoCount = lottoTotalCount - slipLottoCount;
         return LottoTicketGroupFactory.create(quickPicksLottoCount);
