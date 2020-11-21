@@ -1,7 +1,9 @@
 package step03.domain;
 
 import exception.ExistedInWinningLottoException;
+import step03.Rank;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class WinningComposer {
@@ -24,8 +26,9 @@ public class WinningComposer {
         }
     }
 
-    // 일치하는 수 먼저 검사하고, 보너스볼 당첨 결과를 검사한다. 메서드 분리 /.. 보너스볼은 winningNumbers에 포함되면 안된다.
-//    - public NumberCountCollections statisticWinning(Lotto winningNumbers, LottoBall bonusBall)
+    public Map<Rank, Integer> calculateMatchOfCount(Lottos lottos) {
+         return lottos.calculateCountOfMatch(winningLotto, bonusBall);
+    }
 
     @Override
     public boolean equals(Object o) {

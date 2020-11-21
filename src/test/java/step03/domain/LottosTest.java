@@ -3,14 +3,19 @@ package step03.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step03.Rank;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     List<Lotto> lottos;
+    LottoBall bonusBall;
+    Lotto winningLotto;
 
     @BeforeEach
     void setup() {
@@ -30,6 +35,8 @@ public class LottosTest {
                 Lotto.intOf(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 Lotto.intOf(Arrays.asList(3, 8, 27, 30, 35, 44))
         );
+        winningLotto = Lotto.intOf(Arrays.asList(1, 2, 3, 4, 5, 6));
+        bonusBall = LottoBall.valueOf(7);
     }
 
     @DisplayName("생성자")
@@ -44,4 +51,15 @@ public class LottosTest {
         assertThat(Lottos.of(lottos).size()).isEqualTo(14);
     }
 
+    @DisplayName("matching Count 계산")
+    @Test
+    void test_calculateCountOfMatch() {
+        Map<Rank, Integer> expect = new HashMap<Rank, Integer>(){{
+            put(Rank.valueOf(3, false), 1);
+            put(Rank.valueOf(0, false), 13);
+        }};
+
+        assertThat(Lottos.of(lottos).calculateCountOfMatch(winningLotto, bonusBall))
+                .isEqualTo(expect);
+    }
 }

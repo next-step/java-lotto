@@ -57,10 +57,9 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static Lotto of(List<LottoBall> lotto)
     - public int matchCount(Lotto targetLotto)
     - public boolean isContaining(LottoBall lottoBall)
-    // - public List<LottoNumber> getLotto()
-    - 정렬되어있어야 한다.
-    - 중복값 예외
-    - size 는 6개
+    - SortedSet
+    - private static void validateUnique(List<LottoBall> lottoBalls)
+    - private static void validateSize(List<LottoBall> lottoBalls)
     
 - `LottoGenerator` lotto 번호들을 생성하는 기능
     - public static Lotto generate()
@@ -69,25 +68,18 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - private WinningComposer(Lotto winningLotto, LottoBall bonusBall)
     - public static WinningComposer of(Lotto winningLotto, LottoBall bonusBall)
     - private static void validateBonusBall(Lotto winningLotto, LottoBall bonusBall)
+    - public Map<Rank, Integer> calculateMatchOfCount(Lottos lottos)
     
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
     - public Integer size()
 
-    // - public NumberCountCollections statisticWinning(Lotto WinningLotto, LottoBall bonusBall)
- 
 - `LottoSeller` 로또 판매기 
     - static final int priceOfLotto;
     - public static Lottos generateLottos(int payment)
     - private static int calculateCountOfLotto(int payment)
     - private static void validatePayment(int payment);
 
-- `WinningStatistic` 정산기
-    - public static WinningStatistic of(Lotto winningNumbers, Lottos userLottos) {
-    - public WinningStatistic execute()
-    - public List<LottoReward> getLottoRewards()
-    - public double calculateGainRate(int lottoPrice)
-     
 - InputView
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능

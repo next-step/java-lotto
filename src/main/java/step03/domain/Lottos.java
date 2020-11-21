@@ -1,6 +1,10 @@
 package step03.domain;
 
+import step03.Rank;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Lottos {
@@ -15,6 +19,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public Integer size() {
+        return lottos.size();
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,7 +37,13 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
-    public Integer size() {
-        return lottos.size();
+    public Map<Rank, Integer> calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
+        Map<Rank, Integer> rank = new HashMap<>();
+        lottos.forEach(lotto -> {
+            Integer matchOfCount = lotto.matchCount(targetLotto);
+            Rank target = Rank.valueOf(matchOfCount, lotto.isContaining(bonusBall));
+            rank.put(target, rank.getOrDefault(target, 0) + 1);
+        });
+        return rank;
     }
 }
