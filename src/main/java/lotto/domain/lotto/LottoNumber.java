@@ -6,9 +6,11 @@ import static util.Preconditions.checkArgument;
 
 public class LottoNumber {
     public static final String LOTTO_NUMBER_INVALID_RANGE = "lotto number must between 1 and 45";
-    public static final LottoNumber MAX = LottoNumber.of(45);
-    public static final LottoNumber MIN = LottoNumber.of(1);
-    
+    private static final int MIN_NO = 1;
+    private static final int MAX_NO = 45;
+    public static final LottoNumber MIN = LottoNumber.of(MIN_NO);
+    public static final LottoNumber MAX = LottoNumber.of(MAX_NO);
+
     private final int value;
 
     private LottoNumber(final int number) {
@@ -16,7 +18,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(final int number) {
-        checkArgument(number >= 1 && number <= 45, LOTTO_NUMBER_INVALID_RANGE);
+        checkArgument(number >= MIN_NO && number <= MAX_NO, LOTTO_NUMBER_INVALID_RANGE);
         return new LottoNumber(number);
     }
 
