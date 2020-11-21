@@ -8,9 +8,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class RankCounter {
-    Map<Rank, Integer> rankCounter = new HashMap<>();
+    Map<Rank, Integer> rankCounter;
 
-    private RankCounter() { }
+    private RankCounter() {
+        Map<Rank, Integer> temp = new HashMap<>();
+        Rank.stream().forEach(rank -> temp.put(rank, 0));
+        rankCounter = temp;
+    }
 
     public static RankCounter of() {
         return new RankCounter();

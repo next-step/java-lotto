@@ -94,7 +94,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
 - `WinningNumberTokenizer`
     - public static Lotto execute(String winningNumbers)
 
-- InputView
+- `InputView`
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
     - public static String pickBonusBall() 보너스 볼을 입력하는 기능
