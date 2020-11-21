@@ -32,9 +32,9 @@ public class LottoTickets {
 
   public LottoResult settle(WinningNumber winningNumber) {
     LottoResult lottoResult = new LottoResult();
-    for (LottoTicket ticket : this.tickets) {
-      lottoResult.recordHit(ticket.getNumHit(winningNumber));
-    }
+    this.tickets.stream()
+        .map(lottoTicket -> lottoTicket.getNumHit(winningNumber))
+        .forEach(lottoResult::recordHit);
 
     return lottoResult;
   }
