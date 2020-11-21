@@ -29,12 +29,9 @@ public class Lotto {
     }
 
     public int matchCount(Lotto targetLotto) {
-        int total = 0;
-        for(LottoBall lottoBall : lotto)
-            if (targetLotto.lotto.contains(lottoBall))
-                total += 1;
-
-        return total;
+        SortedSet<LottoBall> temp = new TreeSet<>(targetLotto.lotto);
+        temp.retainAll(lotto);
+        return temp.size();
     }
 
     private static void validate(List<LottoBall> lottoBalls) {
