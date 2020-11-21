@@ -5,7 +5,7 @@ import exception.OutOfLottoNumberRangeException;
 public class LottoBall implements Comparable<LottoBall>{
     public static final int START = 1;
     public static final int END = 46;
-    private static LottoBall[] lottoNumbers = new LottoBall[END];
+    private static final LottoBall[] lottoNumbers = new LottoBall[END];
 
     static {
         for (int i = START; i < END; i++)

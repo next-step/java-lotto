@@ -11,7 +11,7 @@ public class Lotto {
 
     private final SortedSet<LottoBall> lotto;
 
-    private Lotto (List<LottoBall> lottoBalls) {
+    private Lotto(List<LottoBall> lottoBalls) {
         validate(lottoBalls);
         this.lotto = new TreeSet(lottoBalls);
     }
@@ -23,7 +23,7 @@ public class Lotto {
     public static Lotto intOf(List<Integer> lottoBalls) {
         return of(
                 lottoBalls.stream()
-                        .map(number -> LottoBall.valueOf(number))
+                        .map(LottoBall::valueOf)
                         .collect(Collectors.toList())
         );
     }
@@ -42,7 +42,8 @@ public class Lotto {
     private static void validateUnique(List<LottoBall> lottoBalls) {
         if (lottoBalls.size() != new HashSet<>(lottoBalls).size()) {
             throw new DuplicatedLottoNumberException();
-        };
+        }
+        ;
     }
 
     private static void validateSize(List<LottoBall> lottoBalls) {
@@ -72,7 +73,7 @@ public class Lotto {
     public String toString() {
         return "["
                 + lotto.stream()
-                .map(lottoBall -> lottoBall.toString())
+                .map(LottoBall::toString)
                 .collect(Collectors.joining(", "))
                 + "]";
     }

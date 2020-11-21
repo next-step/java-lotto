@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static List<Integer> RANGE =
+    private static final List<Integer> RANGE =
         IntStream.range(LottoBall.START, LottoBall.END)
                  .boxed()
                  .collect(Collectors.toList());

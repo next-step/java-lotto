@@ -25,7 +25,7 @@ public class Lottos {
     public RankCounter calculateCountOfMatch(Lotto targetLotto, LottoBall bonusBall) {
         RankCounter rankCounter = RankCounter.of();
         lottos.forEach(lotto -> {
-            Integer matchOfCount = lotto.matchCount(targetLotto);
+            int matchOfCount = lotto.matchCount(targetLotto);
             Rank target = Rank.valueOf(matchOfCount, lotto.isContaining(bonusBall));
             rankCounter.increase(target);
         });

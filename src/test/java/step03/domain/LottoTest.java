@@ -33,7 +33,6 @@ public class LottoTest {
         );
     }
 
-
     @DisplayName("생성자")
     @Test
     void test_constructor() {
@@ -131,6 +130,4 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.of(lotto));
     }
 
-
-//    - public List<LottoNumber> getLotto()
 }
