@@ -8,18 +8,16 @@ import java.util.stream.IntStream;
 
 public class Lottoes {
 
-    private List<Lotto> lottoes;
+    private List<CandidateLotto> lottoes;
     private int lottoCount;
-    private int amount;
+
 
     public Lottoes(int amount) {
-        this.amount = amount;
         this.lottoCount = getLottoCount(amount);
         this.lottoes = buyLottoes();
     }
 
-    public Lottoes(int amount, List<Lotto> lottoes){
-        this.amount = amount;
+    public Lottoes(int amount, List<CandidateLotto> lottoes){
         this.lottoCount = getLottoCount(amount);
         if(isInvalid(lottoes)){
             throw new IllegalArgumentException("가지고 있는 액수보다 구입한 로또가 많습니다.");
@@ -34,47 +32,22 @@ public class Lottoes {
 
     public List<Set<Integer>> getLottoes() {
         return lottoes.stream()
-                .map(Lotto::getNumbers)
+                .map(CandidateLotto::getNumbers)
                 .collect(Collectors.toList());
     }
 
-
-    public Map<Hit, Integer> getResult(Set<Integer> winnerNumbers) {
-        Map<Hit, Integer> hits = Hit.getHits();
-        lottoes.stream()
-                .map(lotto -> lotto.getMatchingNumberCount(winnerNumbers))
-                .map(Hit::findByHitCount)
-                .forEach(hit -> hits.computeIfPresent(hit, (Hit key, Integer value) -> ++value));
-        return hits;
-    }
-
-
-    public double getEarningRate(Set<Integer> winnerNumbers) {
-        int totalReword = getResult(winnerNumbers).entrySet().stream()
-                .mapToInt(this::calculateReword)
-                .sum();
-
-        return Math.floor(((double) totalReword / amount) * 100) / 100;
-    }
-
-
-    private int calculateReword(Map.Entry<Hit, Integer> e) {
-        return e.getKey().calculateReword(e.getValue());
-    }
-
-
-    private List<Lotto> buyLottoes() {
+    private List<CandidateLotto> buyLottoes() {
         return IntStream.range(0, lottoCount)
-                .mapToObj(e -> new Lotto(new AutoDrawing()))
+                .mapToObj(e -> new CandidateLotto(new AutoDrawing()))
                 .collect(Collectors.toList());
     }
 
 
     private int getLottoCount(int amount) {
-        return amount / Lotto.PRICE;
+        return amount / CandidateLotto.PRICE;
     }
 
-    private boolean isInvalid(List<Lotto> lottoes){
+    private boolean isInvalid(List<CandidateLotto> lottoes){
         return this.lottoCount < lottoes.size();
     }
 }

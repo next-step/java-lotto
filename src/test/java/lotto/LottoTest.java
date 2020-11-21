@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
+import lotto.model.CandidateLotto;
 import lotto.strategy.DrawingStrategy;
 import lotto.strategy.ManualDrawing;
 import org.junit.jupiter.api.Test;
@@ -66,9 +66,9 @@ public class LottoTest {
 
         Set<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
 
-        Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
+        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualDrawing(manualNumbers));
 
-        assertThat(testLotto.getMatchingNumberCount(manualNumbers)).isEqualTo(numberCount);
+        assertThat(testCandidateLotto.getMatchingNumberCount(manualNumbers)).isEqualTo(numberCount);
 
     }
 
@@ -84,9 +84,9 @@ public class LottoTest {
         winnerNumbers.remove(1);
         winnerNumbers.add(threshold);
 
-        Lotto testLotto = new Lotto(new ManualDrawing(manualNumbers));
+        CandidateLotto testCandidateLotto = new CandidateLotto(new ManualDrawing(manualNumbers));
 
-        assertThat(testLotto.getMatchingNumberCount(winnerNumbers)).isEqualTo(numberCount - 1);
+        assertThat(testCandidateLotto.getMatchingNumberCount(winnerNumbers)).isEqualTo(numberCount - 1);
 
     }
 
@@ -103,7 +103,7 @@ public class LottoTest {
         Field lottoField =  DrawingStrategy.class.getDeclaredField("NUMBER_COUNT");
         lottoField.setAccessible(true);
 
-        return lottoField.getInt(Lotto.class);
+        return lottoField.getInt(CandidateLotto.class);
     }
 
     private int getThreshold() throws Exception {

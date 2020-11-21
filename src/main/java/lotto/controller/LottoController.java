@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Amount;
-import lotto.model.Hit;
-import lotto.model.Lotto;
-import lotto.model.Lottoes;
+import lotto.model.*;
 import lotto.strategy.ManualDrawing;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,30 +16,35 @@ public class LottoController {
     private ResultView resultView = new ResultView();
     private Amount amount;
     private Lottoes lottoes;
-    private Lotto winnerLotto;
+    private Lotto winningLotto;
 
     public void run() {
 
-        String inputAmont = inputView.printInputMessageNGetAmount();
-        amount = new Amount(inputAmont);
+        String inputAmount = inputView.printInputMessageNGetAmount();
+        amount = new Amount(inputAmount);
 
         buyLottoes();
 
         String inputWinnerNumber = inputView.printInputMessageNGetWinnerNumbers();
-        winnerLotto = getWinnerNumbers(inputWinnerNumber);
+        winningLotto = getWinnerNumbers(inputWinnerNumber);
 
         lottery();
     }
 
     private void buyLottoes() {
-        lottoes = new Lottoes(amount.pay(0));
+        lottoes = new Lottoes(amount.getPrePurchaseAmount(0, Lotto.PRICE));
         resultView.printBuyMessage(lottoes.getLottoCount());
         resultView.printLottoes(lottoes.getLottoes());
     }
 
     private void lottery() {
-        Map<Hit, Integer> winnerNumbers = lottoes.getResult(winnerLotto.getNumbers());
-        double earningRate = lottoes.getEarningRate(winnerLotto.getNumbers());
+        int lottoCount = lottoes.getLottoCount();
+        int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount, Lotto.PRICE);
+
+        List<Set<Integer>> lottoesNumbers = lottoes.getLottoes();
+        Map<Hit, Integer> winnerNumbers = ((WinningLotto) winningLotto).getResult(lottoesNumbers);
+        double earningRate = ((WinningLotto) winningLotto).getEarningRate(prePurchaseAmount, lottoesNumbers);
+
         resultView.printResult(winnerNumbers);
         resultView.printEarningRate(earningRate);
     }
@@ -56,7 +58,7 @@ public class LottoController {
             winnerNumbers.add(winnerNumber);
         }
 
-        return new Lotto(new ManualDrawing(winnerNumbers));
+        return new WinningLotto(new ManualDrawing(winnerNumbers));
     }
 
 }

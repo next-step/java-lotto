@@ -27,6 +27,10 @@ public class Amount {
         return this.amount -= price;
     }
 
+    //로또 구입 전 가격을 리턴
+    public int getPrePurchaseAmount(int lottoCount, int price){
+        return lottoCount * price + amount;
+    }
 
     private boolean isInValidPrice(int price) {
         return price < 0;

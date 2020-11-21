@@ -4,26 +4,23 @@ import lotto.strategy.DrawingStrategy;
 
 import java.util.Set;
 
-
-public class Lotto {
-
+public abstract class Lotto {
     public final static int PRICE = 1000;
-
-    private Set<Integer> numbers;
+    protected Set<Integer> numbers;
 
     public Lotto(DrawingStrategy drawingStrategy) {
         numbers = drawingStrategy.drawNumbers();
     }
 
-    public int getMatchingNumberCount(Set<Integer> winnerNumbers) {
+    public int getMatchingNumberCount(Set<Integer> inputNumbers) {
         return numbers.stream()
-                .filter(winnerNumbers::contains)
+                .filter(inputNumbers::contains)
                 .toArray()
                 .length;
-
     }
 
     public Set<Integer> getNumbers() {
         return numbers;
     }
+
 }

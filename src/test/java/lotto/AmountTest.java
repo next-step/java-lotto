@@ -43,5 +43,11 @@ public class AmountTest {
         assertThat(amount.pay(100)).isEqualTo(900);
     }
 
+    @Test
+    public void 구매_전_가격_계산(){
+        Amount amount = new Amount("1000");
+        amount.pay(100);
+        assertThat(amount.getPrePurchaseAmount(1,100)).isEqualTo(1000);
+    }
 
 }
