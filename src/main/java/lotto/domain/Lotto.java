@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +34,17 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int sameNumberOfCount(List<Integer> winningNumbers) {
+        return (int)lottoNumbers.stream()
+                .mapToInt(i -> numberMatchResult(winningNumbers,i.getLottoNumber()))
+                .filter(i -> i == 1)
+                .count();
+    }
+
+    private static int numberMatchResult(List<Integer> winningNumbers, int number) {
+        return Collections.frequency(winningNumbers,number);
     }
 
     @Override

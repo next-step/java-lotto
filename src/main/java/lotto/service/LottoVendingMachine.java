@@ -35,7 +35,7 @@ public class LottoVendingMachine {
     private static List<LottoResult> getLottoResultList(Lottos lottos, List<Integer> winningNumberList) {
         List<LottoResult> results = new LinkedList<>();
         for(Lotto lotto : lottos.getLottos()) {
-            int winningCount = getWinningCount(lotto.getLottoNumbers(),winningNumberList);
+            int winningCount = lotto.sameNumberOfCount(winningNumberList);
             results.add(addLottoResult(winningCount));
         }
         return results;
@@ -46,17 +46,6 @@ public class LottoVendingMachine {
                 .filter(e -> e.getWinningCount() == winningCount)
                 .findFirst()
                 .orElse(LottoResult.NONE);
-    }
-
-    private static int getWinningCount(List<LottoNumber> lottoNumbers,List<Integer> winningNumbers) {
-        return (int)lottoNumbers.stream()
-                    .mapToInt(i -> numberMatchResult(winningNumbers,i.getLottoNumber()))
-                    .filter(i -> i == 1)
-                    .count();
-    }
-
-    private static int numberMatchResult(List<Integer> winningNumbers, int number) {
-        return Collections.frequency(winningNumbers,number);
     }
 
     private static List<Integer> parseIntNumbers(String winningNumbers) {
