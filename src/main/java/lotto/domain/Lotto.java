@@ -1,40 +1,20 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
 public class Lotto {
 
-    private Integer lottoSequence;
-    private Set<Integer> lottoPickNumber;
+    private LottoNumbers lottoPickNumber;
 
-    public Lotto (Integer lottoSequence, LottoMachine lottoMachine) {
-        this.lottoSequence = lottoSequence;
-        this.lottoPickNumber = lottoMachine.createLottoNumber();
+    public Lotto(LottoNumbers lottoPickNumber) {
+        this.lottoPickNumber = lottoPickNumber;
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoPickNumber.stream()
-                .filter(lottoNumber -> prizeLotto.findByIndexNumber(lottoNumber))
-                .count();
-       return PrizeInformation.findByPrizePrice(prizeCount);
+        int prizeCount = lottoPickNumber.countPrizeMatchLottoNumber(prizeLotto);
+        return PrizeInformation.findByPrizePrice(prizeCount);
     }
 
-    public Set<Integer> getLottoPickNumber() {
+    public LottoNumbers getLottoPickNumber() {
         return lottoPickNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoSequence, lotto.lottoSequence);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoSequence);
-    }
 }
