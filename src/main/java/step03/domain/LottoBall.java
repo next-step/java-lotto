@@ -5,35 +5,30 @@ import exception.OutOfLottoNumberRangeException;
 import java.util.Objects;
 
 public class LottoBall {
-    private final int number;
     private static final int START = 1;
-    private static final int END = 45;
+    private static final int END = 46;
+    public static LottoBall[] lottoNumbers = new LottoBall[END];
+
+    static {
+        for (int i = START; i < END; i++)
+            lottoNumbers[i] = new LottoBall(i);
+    }
+
+    private final int number;
 
     private LottoBall(int number) {
-        validate(number);
         this.number = number;
     }
 
-    public static LottoBall of(int number) {
-        return new LottoBall(number);
+    public static LottoBall valueOf(int number) {
+        validate(number);
+        return lottoNumbers[number];
     }
 
-    private void validate(int number) {
-        if (number < START || number > END) {
+    private static void validate(int number) {
+        if (number < START || number >= END) {
             throw new OutOfLottoNumberRangeException();
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoBall lottoBall = (LottoBall) o;
-        return number == lottoBall.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
 }
