@@ -4,14 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Maps.newHashMap;
+import static step2.view.ResultView.*;
 
 public class LotteryControllerTest {
     private static final List<String> record = new ArrayList<>();
@@ -42,9 +45,8 @@ public class LotteryControllerTest {
             "FORTH|4개 일치 (50000원)- 1개", //
             "FIFTH|3개 일치 (5000원)- 1개"}, delimiter = '|')
     void toStringRank(String rankName, String expected) {
-        LotteryResult lotteryResult = new LotteryResult();
-        lotteryResult.add(Rank.valueOf(rankName));
-        assertThat(ResultView.toStringRank(Rank.valueOf(rankName), lotteryResult)) //
+        LotteryResult matchResult = new LotteryResult(0, newHashMap(Rank.valueOf(rankName), 1));
+        assertThat(ResultView.toStringRank(Rank.valueOf(rankName), matchResult)) //
                 .isEqualTo(expected);
     }
 
@@ -52,6 +54,8 @@ public class LotteryControllerTest {
         //@formatter:off
         assertThat(String.join("->", record))
                 .isEqualTo("requestMoney->" +
+                        "requestManualSelectionCount->" +
+                        "requestManualSelectionNumbers->" +
                         "responseTicketCount->" +
                         "responseTickets->" +
                         "requestLastWeekLotteryNumber->" +
@@ -62,14 +66,25 @@ public class LotteryControllerTest {
     }
 
     static class TestingInputView extends InputView {
-        public Money requestMoney() {
+        public int requestMoney() {
             record.add("requestMoney");
-            return Money.of(1000);
+            return 1000;
         }
 
-        public LotteryNumber requestLastWeekLotteryNumber() {
+        protected int requestManualSelectionCount() {
+            record.add("requestManualSelectionCount");
+            return 0;
+        }
+
+        public Set<Set<Integer>> requestManualSelectionNumbers() {
+            super.requestManualSelectionNumbers();
+            record.add("requestManualSelectionNumbers");
+            return Collections.emptySet();
+        }
+
+        public Integer[] requestLastWeekLotteryNumber() {
             record.add("requestLastWeekLotteryNumber");
-            return LotteryNumber.of(1, 2, 3, 4, 5, 6);
+            return new Integer[]{1, 2, 3, 4, 5, 6};
         }
 
         public Integer requestBonusNumber() {
@@ -79,11 +94,11 @@ public class LotteryControllerTest {
     }
 
     static class TestingResultView extends ResultView {
-        public void responseTicketCount(LotteryTickets lotteryTickets) {
+        public void responseTicketCount(TicketAndCount ticketAndCount) {
             record.add("responseTicketCount");
         }
 
-        public void responseTickets(LotteryTickets lotteryTickets) {
+        public void responseTickets(TicketAndCount ticketAndCount) {
             record.add("responseTickets");
         }
 

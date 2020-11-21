@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.utils.Sets;
 
 import java.util.List;
 
@@ -41,4 +42,22 @@ public class PlayslipTest {
         List<LotteryNumber> nominatedNumbers = playslip.selectNumbers(selection);
         assertThat(nominatedNumbers.size()).isEqualTo(selection);
     }
+
+    @DisplayName("로또용지는 수동선택한 번호를 입력받을 수 있다.")
+    @Test
+    void acceptManualSelection() {
+        ManualSelection manualSelection = new ManualSelection(Sets.of(LotteryNumber.of(1, 2, 3, 4, 5, 6)));
+        playslip.setManualSelection(manualSelection);
+        assertThat(playslip.selectNumbers(2).size()).isEqualTo(2);
+    }
+
+    @DisplayName("선택결과에는 수동선택한 내용이 포함되어 있다.")
+    @Test
+    void shouldContainsManualSelectionNumbers() {
+        LotteryNumber lotteryNumber = LotteryNumber.of(1, 2, 3, 4, 5, 6);
+        playslip.setManualSelection(new ManualSelection(Sets.of(lotteryNumber)));
+
+        assertThat(playslip.selectNumbers(1)).contains(lotteryNumber);
+    }
+
 }

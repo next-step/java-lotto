@@ -38,7 +38,21 @@
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 * 로또 1장의 가격은 1000원이다.
 
+## 3단계 - 로또(2등)
+### 기능 요구사항
+* 2등을 위해 추가 번호를 하나 더 추첨한다.
+* 당첨 통계에 2등도 추가해야 한다.
+
+## 4단계 - 로또(수동)
+### 기능 요구사항
+* 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+* 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
 ### 프로그래밍 요구사항
+* 규칙 3: 모든 원시값과 문자열을 포장한다.
+* 규칙 5: 줄여쓰지 않는다(축약 금지).
+* 규칙 8: 일급 콜렉션을 쓴다.
+* 예외 처리를 통해 에러가 발생하지 않도록 한다.
 * 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
     * 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
     * UI 로직을 InputView, ResultView와 같은 클래스를 추가해 분리한다.
@@ -61,11 +75,13 @@
 * git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
 
 ### 시나리오
-> 시나리오 1. Playslip 에 NaturalSelection 으로 번호를 적어 LotteryAgent 에서 Money 를 주고 LottoTickets 을 받는다
+> 시나리오 1. LotteryAgent 에 Money 를 주면 액수만큼 자동선택으로 LottoTickets 을 받는다
+> ㄴ 시나리오 추가. Playslip 에 번호를 적어(ManualSelection) LotteryAgent 에 Money 와 함께 주면 자동 + 수동 선택으로 LotteryTickets 를 받는다 
 
 * Lottery Agent: 로또파는곳
 * Playslip: 로또 용지
 * Natural Selection: 지동선택
+* Manual Selection: 수동선택
 * LottoTickets: 돈으로 교환한 로또 티켓
 * Money: 돈
 

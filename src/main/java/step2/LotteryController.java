@@ -4,6 +4,13 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+import static step2.view.ResultView.TicketAndCount;
+
 class LotteryController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -16,13 +23,28 @@ class LotteryController {
     }
 
     public void request() {
-        Money money = inputView.requestMoney();
-        LotteryTickets lotteryTickets = lotteryAgent.exchange(money).getLotteryTickets();
-        resultView.responseTicketAndCount(lotteryTickets);
+        Money money = Money.of(inputView.requestMoney());
+        Set<LotteryNumber> manualSelectionNumbers = inputView.requestManualSelectionNumbers() //
+                .stream() //
+                .map(LotteryNumber::new) //
+                .collect(toSet());
 
-        LotteryNumber lastWeekLotteryNumber = inputView.requestLastWeekLotteryNumber();
+        Playslip playslip = new Playslip();
+        playslip.setManualSelection(new ManualSelection(manualSelectionNumbers));
+        LotteryTickets lotteryTickets = lotteryAgent.exchange(money, playslip).getLotteryTickets();
+
+        List<String> ticketNumbers = lotteryTickets.getTicketNumbers()
+                .stream()
+                .map(LotteryNumber::toString)
+                .collect(toList());
+        resultView.responseTicketAndCount(new TicketAndCount.Builder()
+                .manualSelectionCount(lotteryTickets.getManualSelectionCount())
+                .naturalSelectionCount(lotteryTickets.getNaturalSelectionCount())
+                .ticketNumbers(ticketNumbers).build());
+
+        LotteryNumber lastWeekLotteryNumber = LotteryNumber.of(inputView.requestLastWeekLotteryNumber());
         Integer bonusNumber = inputView.requestBonusNumber();
-        LotteryResult lotteryResult = new WinningNumber(lastWeekLotteryNumber, bonusNumber).match(lotteryTickets);
-        resultView.responseLotteryResult(lotteryResult);
+        MatchResult matchResult = new WinningNumber(lastWeekLotteryNumber, bonusNumber).match(lotteryTickets);
+        resultView.responseLotteryResult(new ResultView.LotteryResult(matchResult.getRateOfReturn(), matchResult.getAllResult()));
     }
 }

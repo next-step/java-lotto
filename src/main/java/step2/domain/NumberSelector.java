@@ -2,7 +2,7 @@ package step2.domain;
 
 import java.util.*;
 
-public class NaturalSelection {
+public class NumberSelector {
 
     public Set<Integer> select(List<Integer> numberPool, int count) {
         Set<Integer> numberPoolSet = new HashSet<>(numberPool);

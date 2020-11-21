@@ -7,13 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2.Rank;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.domain.Rank.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.util.Lists.list;
+import static step2.Rank.*;
 
 
 public class WinningNumberTest {
@@ -38,9 +40,9 @@ public class WinningNumberTest {
         Integer[] numbers = Arrays.stream(stringNumbers.split(",")) //
                 .map(Integer::valueOf) //
                 .toArray(Integer[]::new);
-        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(numbers));
+        MatchResult matchResult = winningNumber.match(makeLotteryTickets(numbers));
 
-        assertThat(lotteryResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
+        assertThat(matchResult.getMatchResult(Rank.MISS)).isEqualTo(miss);
     }
 
     @DisplayName("3개 ~ 6개 일치 테스트")
@@ -48,22 +50,29 @@ public class WinningNumberTest {
     @MethodSource("matchingCountProvider")
     void matched(LotteryNumber lotteryNumber, Rank rank) {
         //@formatter:off
-        LotteryResult lotteryResult = winningNumber.match(new LotteryTickets(
-                Arrays.asList(
-                        lotteryNumber,
-                        lotteryNumber,
+        MatchResult matchResult = winningNumber.match(new LotteryTickets(
+                list(
+                        lotteryNumber.copy(),
+                        lotteryNumber.copy(),
                         LotteryNumber.of(11, 12, 13, 14, 15, 16)))); // 불일치
         //@formatter:on
 
-        assertThat(lotteryResult.getMatchResult(rank)).isEqualTo(2);
+        assertThat(matchResult.getMatchResult(rank)).isEqualTo(2);
     }
 
     @DisplayName("2등은 보너스 넘버가 같을때이다")
     @Test
     void secondaryPrize() {
         winningNumber = new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 7);
-        LotteryResult lotteryResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
-        assertThat(lotteryResult.getMatchResult(SECOND)).isEqualTo(1);
+        MatchResult matchResult = winningNumber.match(makeLotteryTickets(1, 2, 3, 4, 5, 7));
+        assertThat(matchResult.getMatchResult(SECOND)).isEqualTo(1);
+    }
+
+    @DisplayName("보너스 번호는 당첨번호과 중복될 수 없다")
+    @Test
+    void shouldNotContainsBonusNumberInWinningNumber() {
+        assertThatThrownBy(() -> new WinningNumber(LotteryNumber.of(1, 2, 3, 4, 5, 6), 1)) //
+                .isInstanceOf(IllegalBonusNumberException.class);
     }
 
     private static Stream<Arguments> matchingCountProvider() {
@@ -78,7 +87,7 @@ public class WinningNumberTest {
     }
 
     private LotteryTickets makeLotteryTickets(Integer... numbers) {
-        return new LotteryTickets(singletonList(LotteryNumber.of(numbers)));
+        return new LotteryTickets(list(LotteryNumber.of(numbers)));
     }
 
 }
