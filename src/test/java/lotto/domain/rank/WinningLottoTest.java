@@ -3,8 +3,9 @@ package lotto.domain.rank;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
-import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lotto.LottoTicketMockFactory;
 import lotto.dto.WinLotteryResult;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,42 @@ import java.util.Collections;
 
 import static lotto.domain.lotto.LottoTicketMockFactory.createLottoHasNumberOneToSix;
 import static lotto.domain.lotto.LottoTicketMockFactory.createLottoTicket;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static lotto.domain.rank.WinningLotto.WINNING_LOTTO_NO_BONUS_NO_MUST_BE_NOT_DUPLICATED;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-class LottoRankCalculatorTest {
+class WinningLottoTest {
+    @DisplayName("생성")
+    @Test
+    void of() {
+        // given
+        final LottoTicket lottoTicket = LottoTicketMockFactory.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumber bonusNumber = LottoNumber.of(7);
+
+        // when
+        final WinningLotto result = WinningLotto.of(lottoTicket, bonusNumber);
+
+        // then
+        assertThat(result).isNotNull();
+    }
+
+    @DisplayName("당첨 로또 번호와 보너스 번호 중복 시 예외 반환")
+    @Test
+    void of_throw_exception_when_lotto_no_and_bonus_no_duplicated() {
+        // given
+        final LottoTicket lottoTicket = LottoTicketMockFactory.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumber bonusNumber = LottoNumber.of(6);
+
+        // when
+        final Throwable thrown = catchThrowable(() -> {
+            WinningLotto.of(lottoTicket, bonusNumber);
+        });
+
+        // then
+        Assertions.assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(WINNING_LOTTO_NO_BONUS_NO_MUST_BE_NOT_DUPLICATED);
+    }
 
     @DisplayName("calculateWinLotteryResult")
     @Nested
@@ -26,13 +59,14 @@ class LottoRankCalculatorTest {
         @Test
         void return_first_result_when_hit_all_lotto_number() {
             // given
-            final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLotto = createLottoHasNumberOneToSix();
-            final LottoNumber bonusNumber = LottoNumber.of(LottoNumber.MAX_NO);;
+            final LottoTicket lottoTicket = createLottoHasNumberOneToSix();
+            final LottoNumber bonusNumber = LottoNumber.of(LottoNumber.MAX_NO);
+            ;
+            final WinningLotto winningLotto = WinningLotto.of(lottoTicket, bonusNumber);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));
+            final WinLotteryResult result = winningLotto.calculateWinLotteryResult(lottoTicketGroup);
 
             // then
             assertAll(
@@ -49,13 +83,13 @@ class LottoRankCalculatorTest {
         @Test
         void return_second_result_when_hit_five_lotto_number_and_bonus_number() {
             // given
-            final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+            final LottoTicket lottoTicket = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber bonusNumber = LottoNumber.of(6);
+            final WinningLotto winningLotto = WinningLotto.of(lottoTicket, bonusNumber);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));
+            final WinLotteryResult result = winningLotto.calculateWinLotteryResult(lottoTicketGroup);
 
             // then
             assertAll(
@@ -72,13 +106,13 @@ class LottoRankCalculatorTest {
         @Test
         void return_third_result_when_hit_five_lotto_number() {
             // given
-            final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+            final LottoTicket lottoTicket = createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
             final LottoNumber bonusNumber = LottoNumber.of(LottoNumber.MAX_NO);
+            final WinningLotto winningLotto = WinningLotto.of(lottoTicket, bonusNumber);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));
+            final WinLotteryResult result = winningLotto.calculateWinLotteryResult(lottoTicketGroup);
 
             // then
             assertAll(
@@ -95,13 +129,13 @@ class LottoRankCalculatorTest {
         @Test
         void return_fifth_result_when_hit_three_lotto_number() {
             // given
-            final LottoRankCalculator calculator = new LottoRankCalculator();
             final LottoTicketGroup lottoTicketGroup = LottoTicketGroup.of(Collections.singletonList(createLottoHasNumberOneToSix()));
-            final LottoTicket winningLotto = createLottoTicket(Arrays.asList(1, 2, 3, 8, 9, 10));
+            final LottoTicket lottoTicket = createLottoTicket(Arrays.asList(1, 2, 3, 8, 9, 10));
             final LottoNumber bonusNumber = LottoNumber.of(LottoNumber.MAX_NO);
+            final WinningLotto winningLotto = WinningLotto.of(lottoTicket, bonusNumber);
 
             // when
-            final WinLotteryResult result = calculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, bonusNumber));
+            final WinLotteryResult result = winningLotto.calculateWinLotteryResult(lottoTicketGroup);
 
             // then
             assertAll(
@@ -114,6 +148,4 @@ class LottoRankCalculatorTest {
             );
         }
     }
-
-
 }

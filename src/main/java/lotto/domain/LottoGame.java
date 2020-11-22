@@ -3,8 +3,7 @@ package lotto.domain;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTicketGroup;
-import lotto.domain.lotto.WinningLotto;
-import lotto.domain.rank.LottoRankCalculator;
+import lotto.domain.rank.WinningLotto;
 import lotto.dto.LottoStatisticsResult;
 import lotto.dto.WinLotteryResult;
 import util.CollectionUtil;
@@ -53,9 +52,8 @@ public class LottoGame {
     }
 
     public LottoStatisticsResult getWinLotteryStatistics(final String winningNumberExpression, final int bonusNumber) {
-        final LottoRankCalculator lottoRankCalculator = new LottoRankCalculator();
-        final LottoTicket winningLotto = LottoTicket.of(winningNumberExpression);
-        final WinLotteryResult result = lottoRankCalculator.calculateWinLotteryResult(lottoTicketGroup, WinningLotto.of(winningLotto, LottoNumber.of(bonusNumber)));
+        final WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(winningNumberExpression), LottoNumber.of(bonusNumber));
+        final WinLotteryResult result = winningLotto.calculateWinLotteryResult(lottoTicketGroup);
         return new LottoStatisticsResult(result, getProfit(result));
     }
 
