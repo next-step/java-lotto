@@ -18,8 +18,10 @@ public class LottoVendingMachine {
 
     private LottoVendingMachine() {}
 
-    public static Lottos buyAutoLottery(int price) {
-        return new Lottos(getLottoList(price));
+    public static Lottos buyLottery(List<Lotto> manualLotto,int lottoPurchaseCost) {
+        List<Lotto> lottoList = getLottoList(lottoPurchaseCost);
+        lottoList.addAll(manualLotto);
+        return new Lottos(lottoList);
     }
 
     public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumber, int bonusNumber) {

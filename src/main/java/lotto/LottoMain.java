@@ -11,8 +11,10 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        int price = InputView.inputPrice();
-        Lottos lottos = LottoVendingMachine.buyAutoLottery(price);
+        int lottoPurchaseCost = InputView.inputPrice();
+        List<Lotto> manualLotto = InputView.inputManualLottoNumber();
+
+        Lottos lottos = LottoVendingMachine.buyLottery(manualLotto,lottoPurchaseCost);
 
         ResultView.printLottoResult(lottos);
 
@@ -25,6 +27,6 @@ public class LottoMain {
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
         BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);
 
-        ResultView.printLottoWinningStatistics(winningResults,price,profit);
+        ResultView.printLottoWinningStatistics(winningResults,lottoPurchaseCost,profit);
     }
 }
