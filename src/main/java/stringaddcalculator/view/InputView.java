@@ -9,9 +9,10 @@ public class InputView {
         System.out.println("수식을 입력하세요");
 
         //(예: “” => 0, "1,2" => 3, "1,2,3" => 6, “1,2:3” => 6)
-        // String value = sc.nextLine();
+        String value = sc.nextLine();
 
-        String value = "1,2,3";
+        // String value = "//;\n1;2;3";
+        sc.close();
         return value;
     }
 }
