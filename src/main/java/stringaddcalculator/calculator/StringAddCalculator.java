@@ -10,6 +10,9 @@ import stringaddcalculator.view.InputView;
 import stringaddcalculator.view.ResultView;
 
 public class StringAddCalculator {
+
+    public static final int COUNT_START = 0;
+
     List<String> selector = new ArrayList<>();
 
     private InputView inputView;
@@ -98,7 +101,7 @@ public class StringAddCalculator {
     }
 
     public int selector(int num1, int num2, int result, int count){
-        if(count == 0){
+        if(count == COUNT_START){
             return add(num1, num2);
         }
         return add(result, num2);
