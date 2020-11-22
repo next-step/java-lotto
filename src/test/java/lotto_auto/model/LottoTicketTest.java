@@ -96,7 +96,7 @@ class LottoTicketTest {
 
     @DisplayName("정답 수 반환 테스트")
     @Test
-    public void matchNumberCountTest(){
+    public void matchNumberCountTest() {
         List<Integer> lottoNumber = new ArrayList<>();
         lottoNumber.add(1);
         lottoNumber.add(2);
@@ -121,6 +121,16 @@ class LottoTicketTest {
                 () -> assertThat(draw).isNotNull(),
                 () -> assertThat(draw.getMatchNum()).isEqualTo(3)
         );
+    }
+
+    @DisplayName("로또 추첨 번호를 넣지 않았을때 예외 발생 테스트")
+    @Test
+    public void drawLottoExceptionTest() {
+        assertThatThrownBy(
+                () -> {
+                    LottoTicket winningTicket = new LottoTicket(null);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
