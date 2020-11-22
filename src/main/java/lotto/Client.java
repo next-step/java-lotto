@@ -21,7 +21,8 @@ public class Client {
     ResultView.printStatisticsOpening();
     for (int hit = MINIMUM_REWARD_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
       ResultView
-          .printRewards(hit, lottoResult.getReward(hit), lottoResult.getRecordedNumberOfHit(hit));
+          .printRewards(hit, Rank.getRewardFromNumHit(hit),
+              lottoResult.getRecordedNumberOfHit(hit));
     }
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
