@@ -4,7 +4,6 @@ import lotto.domain.*;
 
 import java.math.BigInteger;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import static lotto.view.ResultViewConfig.*;
 
 public class ResultView {
@@ -17,14 +16,16 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoWinningStatistics(Map<LottoResult, AtomicInteger> resultMap,int price, BigInteger profit) {
+    public static void printLottoWinningStatistics(LottoWinningResults lottoWinningResults,int price, BigInteger profit) {
         System.out.print(WINNING_STATISTICS);
-        for(LottoResult result : resultMap.keySet()) {
+        for(LottoWinningResult winningResult : lottoWinningResults.getLottoWinningResults()) {
+            LottoResult result = winningResult.getLottoResult();
             System.out.printf(
                     WINNING_STATISTICS_GRID,
                     result.getWinningCount(),
+                    result == LottoResult.SECOND?WINNING_STATISTICS_BONUS_GRID:"",
                     result.getPrize(),
-                    resultMap.get(result).get()
+                    winningResult.getCount()
             );
         }
         printProfit(price,profit);
