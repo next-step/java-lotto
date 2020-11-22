@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class TokenizerTest {
 
     @Test
-    void tokenizerTest(){
+    void tokenizerTest() {
         String inputValue = "//;\n1;2;3";
         Tokenizer tokenizer = new Tokenizer();
         assertThat(tokenizer.splitValue(inputValue).length).isEqualTo(3);

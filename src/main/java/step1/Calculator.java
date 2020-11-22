@@ -2,7 +2,7 @@ package step1;
 
 public class Calculator {
 
-    public int calculate(String inputValue){
+    public int calculate(String inputValue) {
         inputValue = Validator.inputValueTest(inputValue);
 
         Tokenizer tokenizer = new Tokenizer();
@@ -13,7 +13,7 @@ public class Calculator {
 
     public int calculateFunction(String[] inputValue) {
         int result = 0;
-        for(String number: inputValue){
+        for (String number: inputValue) {
             result += Validator.validateNumber(number);
         }
         return result;

@@ -11,7 +11,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("기본 구분자 테스트")
-    void defaultCalculateTest(){
+    void defaultCalculateTest() {
         String testInput = "1,2,3;4;5,6";
         int expectAnswer = 21;
         Calculator calculator = new Calculator();
@@ -20,7 +20,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("변경 구분자 테스트")
-    void changedSplitValueTest(){
+    void changedSplitValueTest() {
         String changeValue = "~";
 
         String testInput = "//" + changeValue +"\n1~2~3~4";
@@ -32,7 +32,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("빈값 테스트")
-    void blankInputTest(){
+    void blankInputTest() {
         String testInput = "";
         int expectAnswer = 0;
         Calculator calculator = new Calculator();
@@ -41,7 +41,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("싱글 텍스트 테스트")
-    void SingleValueTest(){
+    void SingleValueTest() {
         String testInput = "6";
         int expectAnswer = 6;
         Calculator calculator = new Calculator();
@@ -50,7 +50,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("계산 로직 기본 테스트")
-    void calculateFunctionTest(){
+    void calculateFunctionTest() {
         String[] inputValue = {"1", "2", "3", "4"};
 
         Calculator calculator = new Calculator();
@@ -60,7 +60,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("계산 로직 음수 테스트")
-    void validateTest(){
+    void validateTest() {
         String[] inputValue = {"1", "-2", "3", "4", "5"};
 
         Calculator calculator = new Calculator();
@@ -71,7 +71,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("계산 로직 문자 입력 테스트")
-    void textCalculateTest(){
+    void textCalculateTest() {
         String[] inputValue = {"a", "B", "2", "d"};
 
         Calculator calculator = new Calculator();

@@ -9,7 +9,7 @@ public class Tokenizer {
     private static final String defaultSplitValue = ",|;";
     private static final  Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
-    public String[] splitValue(String inputValue){
+    public String[] splitValue(String inputValue) {
         Matcher m = pattern.matcher(inputValue);
         if (m.find()) {
             String newSplitValue = m.group(splitValueIndex);
