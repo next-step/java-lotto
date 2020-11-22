@@ -41,6 +41,20 @@ public class LottoStaticsticTest {
 		assertThat(stat).isEqualTo(0.0f);
 	}
 
+	@Test
+	@DisplayName("구입한 로또 중에 1등이 없어도 결과맵에 추가한다.")
+	public void addLottoEmptyRewardTest() {
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = new HashMap<>();
+		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(MockLotto.mockLotto(Arrays.asList(1,2,3,4,15,16))));
+		//이미 리워드맵에 있던 로또
+		assertThat(lottoRewardListMap.containsKey(LottoReward.FOURTH));
+		assertThat(lottoRewardListMap.get(LottoReward.FOURTH)).hasSize(1);
+		//당첨통계에 없지만 출력하기 위해 추가해줌
+		lottoStaticstic.addLottoEmptyReward(lottoRewardListMap);
+		assertThat(lottoRewardListMap.containsKey(LottoReward.FIRST));
+		assertThat(lottoRewardListMap.get(LottoReward.FIRST)).hasSize(0);
+	}
+
 	private List<Lotto> mockLottoList(int lottoCount, Lotto lotto) {
 		List<Lotto> lottos = new ArrayList<>();
 		IntStream.range(0, lottoCount)

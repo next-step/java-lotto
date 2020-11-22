@@ -19,11 +19,9 @@ public class LottoStaticstic {
 
 	public Map<LottoReward, List<Lotto>> getLottoRewardMap(List<Lotto> lottoList) {
 		Lotto lastWeekLotto = new Lotto().getLastWeekLotto(winnerNumbers);
-		lastWeekLotto.validate();
 		bonusNumber.validateBonusNumber(lastWeekLotto);
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList, lastWeekLotto);
-		addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
-		return lottoRewardListMap;
+		return addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
 	}
 
 	private Map<LottoReward, List<Lotto>> getLottoRewardGroupingMap(List<Lotto> lottoList, Lotto lastWeekLotto) {
@@ -41,11 +39,12 @@ public class LottoStaticstic {
 		return (float) totalAmount / (purchase.getLottoCount() * purchase.LOTTO_PRICE);
 	}
 
-	private void addLottoEmptyReward(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
+	protected Map<LottoReward, List<Lotto>> addLottoEmptyReward(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
 		Stream.of(LottoReward.values()).forEach(lottoReward -> {
 			if (!lottoRewardListMap.keySet().contains(lottoReward)) {
 				lottoRewardListMap.put(lottoReward, new ArrayList<>());
 			}
 		});
+		return lottoRewardListMap;
 	}
 }
