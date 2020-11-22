@@ -9,17 +9,22 @@ import java.util.Map;
 import java.util.SortedSet;
 
 public class WinningLotto extends Lotto {
+    private int bonus;
 
-    public WinningLotto(DrawingStrategy drawingStrategy) {
+    public WinningLotto(int bonus, DrawingStrategy drawingStrategy) {
         super(drawingStrategy);
+        this.bonus = bonus;
     }
 
-    public Map<Hit, Integer> getResult(List<SortedSet<Integer>> numbers) {
+
+    public Map<Hit, Integer> getResult(List<SortedSet<Integer>> lottoes) {
         Map<Hit, Integer> hits = Hit.getHits();
-        numbers.stream()
-                .map(this::getMatchingNumberCount)
-                .map(Hit::findByHitCount)
+
+        lottoes.stream()
+                .map(lotto -> getMatchingNumberCount(lotto, bonus))
+                .map(matchedNumber -> Hit.findByNumbers(matchedNumber, bonus))
                 .forEach(hit -> hits.computeIfPresent(hit, (Hit key, Integer value) -> ++value));
+
         return hits;
     }
 

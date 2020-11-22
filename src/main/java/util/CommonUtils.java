@@ -12,7 +12,7 @@ public class CommonUtils {
                 .toArray(String[]::new);
     }
 
-    public static SortedSet<Integer> arrayTosotedSet(int[] array){
+    public static SortedSet<Integer> arrayToSortedSet(int[] array){
         return Arrays.stream(array)
                 .boxed()
                 .collect(Collectors.toCollection(TreeSet::new));

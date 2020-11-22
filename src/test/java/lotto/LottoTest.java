@@ -33,7 +33,7 @@ public class LottoTest {
         int threshold = getThreshold();
 
         SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
-        
+
         assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
     }
 
@@ -58,7 +58,7 @@ public class LottoTest {
 
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
-        assertThat(testCandidateLotto.getMatchingNumberCount(manualNumbers)).isEqualTo(numberCount);
+        assertThat(testCandidateLotto.getMatchingNumberCount(manualNumbers, 0).size()).isEqualTo(numberCount);
 
     }
 
@@ -76,7 +76,7 @@ public class LottoTest {
 
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
-        assertThat(testCandidateLotto.getMatchingNumberCount(winnerNumbers)).isEqualTo(numberCount - 1);
+        assertThat(testCandidateLotto.getMatchingNumberCount(winnerNumbers, 0).size()).isEqualTo(numberCount - 1);
 
     }
 
