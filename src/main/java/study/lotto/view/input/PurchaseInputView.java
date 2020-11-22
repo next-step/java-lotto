@@ -26,7 +26,6 @@ public class PurchaseInputView extends AbstractView {
     }
 
     private static int purchaseAmountView() {
-
         stringBuilder.append(PURCHASE_AMOUNT_MESSAGE);
         printAndClear();
 

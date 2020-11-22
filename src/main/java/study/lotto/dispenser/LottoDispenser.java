@@ -10,15 +10,10 @@ public class LottoDispenser {
 
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    private  LottoDispenser() {
-        for (int lottoNumber = LottoNumber.MIN_LOTTO_NUMBER
-                 ; lottoNumber < LottoNumber.MAX_LOTTO_NUMBER
-                 ; lottoNumber++) {
-            this.lottoNumbers.add(LottoNumber.of(lottoNumber));
-        }
-    }
-
     public static Lottos auto(int numberOfPurchases) {
+
+        initLottoNumbers();
+
         List<Lotto> lottos = new ArrayList<>();
         for (int count = 0; count < numberOfPurchases; count++) {
             lottos.add(new Lotto(getLottoNumbers()));
@@ -26,10 +21,23 @@ public class LottoDispenser {
         return new Lottos(lottos);
     }
 
+    private static void initLottoNumbers() {
+        if (lottoNumbers.isEmpty()) {
+            createLottoNumbers();
+        }
+    }
+
+    private static void createLottoNumbers() {
+        for (int lottoNumber = LottoNumber.MIN_LOTTO_NUMBER
+                ; lottoNumber <= LottoNumber.MAX_LOTTO_NUMBER
+                ; lottoNumber++) {
+            lottoNumbers.add(LottoNumber.of(lottoNumber));
+        }
+    }
+
     private static Set<LottoNumber> getLottoNumbers() {
         // 섞기
         Collections.shuffle(lottoNumbers);
-
         return new HashSet<>(lottoNumbers.subList(0, Lotto.LOTTO_NUMBER_COUNT));
     }
 
