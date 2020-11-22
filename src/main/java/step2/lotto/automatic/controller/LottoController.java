@@ -22,7 +22,9 @@ public class LottoController {
 
         String inputLottoWinnerNumber = InputStep2View.inputWinningLottoNumbers();
         Map<Integer, LottoStatusEnum> resunlt = lottoMatch.getLottoResult(inputLottoWinnerNumber);
-
         OuterStep2View.printLottoResult(resunlt);
+
+        double returnValue = lottoMatch.getLottoProfitAmount(resunlt);
+        OuterStep2View.printLottoProfitAmount(returnValue);
     }
 }

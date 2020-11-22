@@ -15,10 +15,13 @@ public class LottoMatch {
 
     private static LottoWinningNumber lottoWinningNumber;
     private static LottoShop lottoShop = new LottoShop();
+    private static LottoProfitAmount LottoProfitAmount;
     private static Map<Integer, LottoStatusEnum> lottoResult = new HashMap<>();
     private static List<List<Integer>> buyLottoList = new ArrayList<>();
     private static int LottoPurchaseAmount = 0;
     private static int LottoPurchaseCount = 0;
+
+    private static
 
     LottoStatusEnum lottoStatusEnum;
 
@@ -35,6 +38,14 @@ public class LottoMatch {
         }
 
         return lottoResult;
+    }
+
+    public double getLottoProfitAmount(Map<Integer, LottoStatusEnum> paramValue){
+        double returnValue = 0;
+        int totalPrice = LottoProfitAmount.runLottoProfitAmount(paramValue);
+
+        returnValue = totalPrice / LottoPurchaseAmount;
+        return returnValue;
     }
 
     private void addWinningCount(List<Integer> lotto) {
