@@ -1,11 +1,14 @@
 package lotto_auto.model;
 
+import lotto_auto.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 
 public class LottoTicket {
 
@@ -69,14 +72,17 @@ public class LottoTicket {
     }
 
     public LottoResult draw(LottoTicket winningLottoTicket) {
+        if (winningLottoTicket == null) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_NULL_WINNING_LOTTO_TICKET);
+        }
         int matchNumberCount = getMatchNumberCount(winningLottoTicket);
         return LottoResult.valueOfMatchNum(matchNumberCount);
     }
 
-    private int getMatchNumberCount(LottoTicket lottoTicket) {
+    private int getMatchNumberCount(LottoTicket winningLottoTicket) {
         List<Integer> all = new ArrayList<>();
         all.addAll(this.export());
-        all.addAll(lottoTicket.export());
+        all.addAll(winningLottoTicket.export());
         HashSet<Integer> removeDup = new HashSet<>(all);
         return all.size() - removeDup.size();
     }
