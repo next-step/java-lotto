@@ -3,13 +3,12 @@ import java.util.regex.Pattern;
 
 public class StringSeparator {
 
-    private final static String DELIMITER = ",|:";
     private final static String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
 
     public String[] split(String input) {
 
         if (containsDelimiter(input)) {
-            return input.split(DELIMITER);
+            return Delimiter.split(input);
         }
 
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
@@ -22,7 +21,7 @@ public class StringSeparator {
     }
 
     private boolean containsDelimiter(String input) {
-        return input.contains(Delimiter.COMMA.getDelimiter()) || input.contains(Delimiter.COLON.getDelimiter());
+        return Delimiter.COMMA.hasDelimiter(input) || Delimiter.COLON.hasDelimiter(input);
     }
 
 }

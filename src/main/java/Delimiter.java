@@ -11,6 +11,8 @@ public enum Delimiter {
         this.desc = desc;
     }
 
+    private final static String DELIMITERS = ",|:";
+
     private final String delimiter;
     private final String desc;
 
@@ -23,4 +25,13 @@ public enum Delimiter {
     public boolean hasBasicDelimiter() {
         return BASIC_DELIMITER.contains(this);
     }
+
+    public static String[] split(String input) {
+        return input.split(DELIMITERS);
+    }
+
+    public boolean hasDelimiter(String input) {
+        return input.contains(this.getDelimiter());
+    }
+
 }
