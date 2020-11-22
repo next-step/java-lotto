@@ -99,13 +99,9 @@ public class StringAddCalculator {
 
     public int selector(int num1, int num2, int result, int count){
         if(count == 0){
-            result = add(num1, num2);
+            return add(num1, num2);
         }
-        if(count > 0){
-            num1 = result;
-            result = add(num1, num2);
-        }
-        return result;
+        return add(result, num2);
     }
 
     public int add(int num1, int num2){
