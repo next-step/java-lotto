@@ -1,6 +1,6 @@
 package step02.domain;
 
-import exception.LottoPriceException;
+import exception.InValidLottoPriceException;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class LottoPrice {
     }
 
     private static void validate(int price) {
-        if (price < MIN_PRICE) throw new LottoPriceException();
+        if (price < MIN_PRICE) throw new InValidLottoPriceException();
     }
 
     public int calculateLottoCount(int payment) {

@@ -1,7 +1,7 @@
 package step02.domain;
 
-import exception.LottoNumberDuplicatedException;
-import exception.LottoSizeException;
+import exception.DuplicatedLottoNumberException;
+import exception.InValidSizeOfLottoException;
 
 import java.util.*;
 
@@ -22,13 +22,13 @@ public class Lotto {
 
     private void validateUniqueNumber(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new LottoNumberDuplicatedException();
+            throw new DuplicatedLottoNumberException();
         };
     }
 
     private static void validateLottoSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new LottoSizeException();
+            throw new InValidSizeOfLottoException();
         }
     }
 

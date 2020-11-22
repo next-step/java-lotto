@@ -8,9 +8,9 @@ public class LottoNumberOutOfRangeExceptionTest {
 
     @Test
     public void test() {
-        assertThatExceptionOfType(LottoNumberException.class)
+        assertThatExceptionOfType(OutOfLottoNumberRangeException.class)
                 .isThrownBy(() -> {
-                            throw new LottoNumberException();
+                            throw new OutOfLottoNumberRangeException();
                         }
                 );
     }

@@ -8,9 +8,9 @@ public class LottoSizeExceptionTest {
 
     @Test
     public void test() {
-        assertThatExceptionOfType(LottoSizeException.class)
+        assertThatExceptionOfType(InValidSizeOfLottoException.class)
                 .isThrownBy(() -> {
-                    throw new LottoSizeException();
+                    throw new InValidSizeOfLottoException();
                 });
     }
 }
