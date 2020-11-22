@@ -1,13 +1,13 @@
 package study.lotto.core;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import study.lotto.dispenser.Lottos;
-import study.lotto.lottery.Lottery;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoRankTest {
 
@@ -18,10 +18,10 @@ class LottoRankTest {
         // Given
         Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(lottoNumbers, bonusLottoNumber);
 
         // When
-        WinningLotto winningLotto = lotto.lottery(winLottoNumbers);
+        WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
 
         // Then
         assertEquals(winningLotto.getLottoRank(), LottoRank.FIRST);
@@ -45,7 +45,7 @@ class LottoRankTest {
         Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
         Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
         WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
@@ -60,7 +60,7 @@ class LottoRankTest {
         Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
         WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
@@ -75,5 +75,11 @@ class LottoRankTest {
             toLottoNumbers.add(LottoNumber.of(value));
         }
         return new HashSet<>(toLottoNumbers);
+    }
+
+    private WinLottoNumbers toWinLottoNumbers(Set<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new WinLottoNumbers.WinLottoNumbersBuilder(winLottoNumbers)
+                .bonusLottoNumber(bonusLottoNumber)
+                .build();
     }
 }

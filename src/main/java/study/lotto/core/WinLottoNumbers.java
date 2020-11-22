@@ -9,22 +9,11 @@ import java.util.*;
  */
 public class WinLottoNumbers {
 
-    private final List<LottoNumber> winLottoNumbers;
+    private final Set<LottoNumber> winLottoNumbers;
     private final LottoNumber bonusLottoNumber;
-
-    public WinLottoNumbers(Set<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
-        this.winLottoNumbers = Optional.ofNullable(winLottoNumbers)
-                .map(ArrayList::new)
-                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
-        this.bonusLottoNumber = Optional.ofNullable(bonusLottoNumber)
-                .orElse(LottoNumber.zero());
-
-        throwIfNumberCountNotMatch();
-    }
 
     public WinLottoNumbers(WinLottoNumbersBuilder winLottoNumbersBuilder) {
         this.winLottoNumbers = Optional.ofNullable(winLottoNumbersBuilder.winLottoNumbers)
-                .map(ArrayList::new)
                 .orElseThrow(() -> new LottoNumberCountNotMatchingException());
         this.bonusLottoNumber = Optional.ofNullable(winLottoNumbersBuilder.bonusLottoNumber)
                 .orElse(LottoNumber.zero());
@@ -53,11 +42,11 @@ public class WinLottoNumbers {
 
     public static class WinLottoNumbersBuilder {
         // Required
-        private final List<LottoNumber> winLottoNumbers;
+        private final Set<LottoNumber> winLottoNumbers;
         // Optional
         private LottoNumber bonusLottoNumber;
 
-        public WinLottoNumbersBuilder(List<LottoNumber> winLottoNumbers) {
+        public WinLottoNumbersBuilder(Set<LottoNumber> winLottoNumbers) {
             this.winLottoNumbers = winLottoNumbers;
         }
 

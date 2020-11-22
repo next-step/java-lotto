@@ -35,7 +35,9 @@ class LotteryResultTest {
     void test_LotteryResult() {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
+        WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
+        builder.bonusLottoNumber(bonusLottoNumber);
+        WinLottoNumbers winLottoNumbers = builder.build();
         Lottos lottos = new Lottos(Arrays.asList(lotto));
         Lottery lottery = new Lottery(winLottoNumbers, lottos);
 

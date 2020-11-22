@@ -32,7 +32,9 @@ class LotteryTest {
     void test_lottery_first() {
         // Given
         Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
+        WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
+        builder.bonusLottoNumber(bonusLottoNumber);
+        WinLottoNumbers winLottoNumbers = builder.build();
 
         // When
         WinningLotto lottery = lotto.lottery(winLottoNumbers);
