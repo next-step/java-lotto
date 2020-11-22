@@ -32,12 +32,7 @@
 * LottoAutoNumbers - 로또번호 자동생성 객체
     * getAutoNumbers() : 로또번호 자동생성
 * LottoMatch - 로또번호 맞추기
-    * lottoStatusList : 
-        * index 1 : 1등
-        * index 2 : 2등
-        * index 3 : 3등
-        * index 4 : 4등
-* LottoStatus - 로또상태 객체
+* LottoStatusEnum - 로또상태 객체
 * LottoWinningNumber - 로또 당첨번호 관리객체
     * getRank(List<integer> list) - 당첨등수 확인
         * return값
@@ -45,6 +40,7 @@
             * 2 = 2등
             * 3 = 3등
             * 4 = 4등
+* LottoShop - 로또 사는 객체
 
 
 
