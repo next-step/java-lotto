@@ -8,7 +8,7 @@ public class CalculatorOperand {
     public CalculatorOperand(String operand) {
         int operandParsedInteger = Integer.parseInt(operand);
         if (this.isNegativeInteger(operandParsedInteger)) {
-            throw new RuntimeException("음수는 입력 할 수 없습니다.");
+            throw new IllegalArgumentException("음수는 입력 할 수 없습니다.");
         }
         this.operand = operandParsedInteger;
     }

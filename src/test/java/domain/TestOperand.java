@@ -16,7 +16,7 @@ public class TestOperand {
     void createWithInvalidOperandAndOccurredRuntimeException() {
         assertThatThrownBy(() -> {
             CalculatorOperand calculatorOperand = new CalculatorOperand("-1");
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
