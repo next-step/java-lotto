@@ -23,12 +23,16 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public LottoPrize checkWhetherToWin(Lotto winningLotto) {
+    public LottoPrize checkWhetherToWin(Lotto winningLotto, int bonusNumber) {
         int count = (int) winningLotto.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
 
-        return LottoPrize.of(count);
+        return LottoPrize.of(count, hasBonus(bonusNumber));
+    }
+
+    public boolean hasBonus(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override

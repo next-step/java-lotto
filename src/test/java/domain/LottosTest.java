@@ -21,7 +21,7 @@ public class LottosTest {
 
     @Test
     void calculateTest() throws Exception {
-        LottoResult lottoResult = lottos.calculate(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
+        LottoResult lottoResult = lottos.calculate(Lotto.of(Arrays.asList(1,2,3,4,5,6)),7);
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
         assertThat(lottoPrizeCount.getPrizeCount(LottoPrize.FIRST_PRIZE).equals(1L));

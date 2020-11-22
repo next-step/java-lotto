@@ -13,7 +13,9 @@ public class LottoApplication {
         ResultView.printBuyingLottos(lottos);
 
         Lotto winningLotto = Lotto.of(InputView.askWinningNumbers());
-        LottoResult lottoResult = lottos.calculate(winningLotto);
+        int bonusNumber = InputView.askBonusNumber();
+
+        LottoResult lottoResult = lottos.calculate(winningLotto, bonusNumber);
         ResultView.printLottoResult(lottoResult);
     }
 }
