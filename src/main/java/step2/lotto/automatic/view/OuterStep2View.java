@@ -1,16 +1,24 @@
 package step2.lotto.automatic.view;
 
-import step2.lotto.automatic.domain.LottoStatus;
+import step2.lotto.automatic.domain.LottoStatusEnum;
 
 import java.util.List;
+import java.util.Map;
 
 public class OuterStep2View {
 
-    public void printBuyLotto(int buyLottoCount) {
+    private static final int MATCH_LOTTE_MAX_COUNT = 4;
+    private static final int MATCH_LOTTE_MIN_COUNT = 1;
+
+    private OuterStep2View() {
+
+    }
+
+    public static void printBuyLotto(int buyLottoCount) {
         System.out.println(buyLottoCount + "개를 구매했습니다.");
     }
 
-    public void printAutoLottoNumbers(List<List<Integer>> paramList) {
+    public static void printAutoLottoNumbers(List<List<Integer>> paramList) {
         printDetailAutoNumbers(paramList.get(0));
         System.out.print(System.lineSeparator());
 
@@ -20,9 +28,10 @@ public class OuterStep2View {
         }
     }
 
-    private void printDetailAutoNumbers(List<Integer> paramList) {
+    private static void printDetailAutoNumbers(List<Integer> paramList) {
         System.out.print("[");
         System.out.print(paramList.get(0));
+
         for (int i = 1; i < paramList.size(); i++) {
             System.out.print(", " + paramList.get(i));
         }
@@ -30,13 +39,16 @@ public class OuterStep2View {
         System.out.print("]");
     }
 
-    public void printLottoResult(LottoStatus lottoStatus) {
-        System.out.println(
-                        lottoStatus.getSameCount() + "개 일치 " + "(" + lottoStatus.getPlusPrice()
-                        + ")- " + lottoStatus.getWinningCount() + " 개");
+    public static void printLottoResult(Map<Integer, LottoStatusEnum> paramValue) {
+        for (int i = MATCH_LOTTE_MAX_COUNT; i >= MATCH_LOTTE_MIN_COUNT; i--) {
+            System.out.println(paramValue.get(i).getMessage()
+                            + "("
+                            + paramValue.get(i).getPrice()
+                            + ") - "
+                            + paramValue.get(i).getWinningCount());
+        }
+
     }
 
-    public void printeEarningRate(double earningRate, String printType){
-        System.out.println("총 수익률은 " +  earningRate + printType);
-    }
+
 }
