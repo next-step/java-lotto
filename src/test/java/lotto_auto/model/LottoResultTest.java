@@ -22,7 +22,22 @@ class LottoResultTest {
                     LottoResult lottoResult = LottoResult.valueOfMatchNum(matchNum);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @DisplayName("랭크가 잘못된 범위일때 예외 발생테스트")
+    @ParameterizedTest
+    @ValueSource(
+            ints = {
+                    0,
+                    8
+            }
+    )
+    public void invalidRankExceptionTest(int rank) {
+        assertThatThrownBy(
+                () -> {
+                    LottoResult lottoResult = LottoResult.valueOfRank(rank);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
