@@ -1,6 +1,9 @@
 package nextstep.step2.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,7 +19,7 @@ public class LottoStaticstic {
 	}
 
 	public Map<LottoReward, List<WinningLotto>> getLottoRewardMap(List<Lotto> lottoList) {
-		Lotto lastWeekLotto = new LastWeekLotto().getLastWeekLotto(winnerNumbers);
+		Lotto lastWeekLotto = new Lotto().getLastWeekLotto(winnerNumbers);
 		bonusNumber.validateBonusNumber(lastWeekLotto);
 		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList, lastWeekLotto);
 		addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.

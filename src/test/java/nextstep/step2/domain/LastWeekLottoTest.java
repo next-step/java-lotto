@@ -16,7 +16,7 @@ public class LastWeekLottoTest {
 	@DisplayName("지난주 로또 당첨번호는 숫자여야 한다")
 	public void inputWrongLastLottoNumberTest() {
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> new LastWeekLotto().validateLastWinnerNumbers("1,2,3,a,b,c".split(",")))
+				.isThrownBy(() -> new Lotto().validateLastWinnerNumbers("1,2,3,a,b,c".split(",")))
 				.withMessage("지난주 로또 당첨번호는 모두 숫자여야 합니다.");
 	}
 
@@ -30,8 +30,8 @@ public class LastWeekLottoTest {
 
 	private static Stream<Arguments> provideLastWeekLotto() {
 		return Stream.of(
-				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4, 5,  6"), new LottoNumber(5)),
-				Arguments.of(new LastWeekLotto().getLastWeekLotto("1,2,3,4,  40,  45"), new LottoNumber(45))
+				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4, 5,  6"), new LottoNumber(5)),
+				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4,  40,  45"), new LottoNumber(45))
 		);
 	}
 }
