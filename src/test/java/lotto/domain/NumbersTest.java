@@ -33,14 +33,6 @@ class NumbersTest {
         assertThat(sameNumberCount).isEqualTo(sameNumberCountExpected);
     }
 
-    @Test
-    @DisplayName("Numbers에 개수가 6개가 아닐 때")
-    void createNumbers_sizeIsNot6() {
-        assertThatThrownBy(() ->
-                Numbers.builder().range(1, 8).build())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Numbers size wrong");
-    }
 
     @Test
     @DisplayName("Numbers에 중복된 수가 들어갔을 때")

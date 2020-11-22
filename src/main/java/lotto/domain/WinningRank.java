@@ -1,39 +1,32 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 
 public enum WinningRank {
-    FAIL(asList(0, 1, 2), 0),
-    FOURTH(singletonList(3), 5_000),
-    THIRD(singletonList(4), 50_000),
-    SECOND(singletonList(5), 1_500_000),
-    FIRST(singletonList(6), 2_000_000_000);
+    FAIL(new RankMatcher(0, false), 0),
+    FIFTH(new RankMatcher(3, false), 5_000),
+    FOURTH(new RankMatcher(4, false), 50_000),
+    THIRD(new RankMatcher(5, false), 1_500_000),
+    SECOND(new RankMatcher(5, true), 30_000_000),
+    FIRST(new RankMatcher(6, false), 2_000_000_000);
 
-    private final List<Integer> sameNumberNums;
     private final int price;
+    private RankMatcher rankMatcher;
 
-    WinningRank(List<Integer> sameNumberNums, int price) {
-        this.sameNumberNums = sameNumberNums;
+    WinningRank(RankMatcher rankMatcher, int price) {
+        this.rankMatcher = rankMatcher;
         this.price = price;
     }
 
-    public static WinningRank getWinningRank(int sameNumberNum) {
+    public static WinningRank getWinningRank(RankMatcher rankMatcher) {
         return Arrays.stream(WinningRank.values())
-                .filter(winningRank -> winningRank.sameNumberNums.contains(sameNumberNum))
+                .filter(winningRank -> winningRank.getRankMatcher().equals(rankMatcher))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Wrong Same Number Count:" + sameNumberNum));
+                .orElse(WinningRank.FAIL);
     }
 
     public int getPrice() {
         return price;
-    }
-
-    public List<Integer> getSameNumberNums() {
-        return sameNumberNums;
     }
 
     public boolean isFail() {
@@ -42,5 +35,17 @@ public enum WinningRank {
 
     public int getTotalPrice(int num) {
         return price * num;
+    }
+
+    public RankMatcher getRankMatcher() {
+        return rankMatcher;
+    }
+
+    public int getSameNumberNum() {
+        return rankMatcher.getSameNumberCount();
+    }
+
+    public boolean haveBonus() {
+        return rankMatcher.haveBonus();
     }
 }

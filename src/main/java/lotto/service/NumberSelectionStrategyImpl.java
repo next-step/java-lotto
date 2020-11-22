@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Lotto;
 import lotto.domain.Numbers;
 
 public class NumberSelectionStrategyImpl implements NumberSelectionStrategy {
@@ -9,7 +10,7 @@ public class NumberSelectionStrategyImpl implements NumberSelectionStrategy {
         return Numbers.builder()
                 .range(Numbers.START_NUM, Numbers.END_NUM)
                 .shuffle()
-                .limit(Numbers.SIZE)
+                .limit(Lotto.SIZE)
                 .sort()
                 .build();
     }

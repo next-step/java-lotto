@@ -1,9 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.domain.Numbers;
-import lotto.domain.WinningRanks;
-import lotto.service.LotteryMachine;
 import lotto.service.NumberSelectionStrategyImpl;
 import lotto.service.WinningRankStatistics;
 import lotto.util.MoneyLottoMapper;
@@ -22,12 +21,6 @@ public class LottoController {
         return lottoNum;
     }
 
-    public WinningRankStatistics analyze(Lottos lottos, Numbers winningNumbers) {
-        LotteryMachine lotteryMachine = new LotteryMachine(lottos, winningNumbers);
-        WinningRanks winningRanks = lotteryMachine.getWinningRanks();
-        return new WinningRankStatistics(winningRanks);
-    }
-
     public Lottos createLottos(int lottoNum) {
         Lottos lottos = new Lottos(lottoNum, new NumberSelectionStrategyImpl());
         OutputView.showLottos(lottos);
@@ -44,5 +37,9 @@ public class LottoController {
 
         InputView.getWinningNumbers().forEach(builder::add);
         return builder.build();
+    }
+
+    public Number getBonusNumber() {
+        return new Number(InputView.getBonusNumber());
     }
 }

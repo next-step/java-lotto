@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    public static final int SIZE = 6;
     public static final int START_NUM = 1;
     public static final int END_NUM = 46;
     private Set<Number> numbers;
@@ -14,18 +13,12 @@ public class Numbers {
         this.numbers = new HashSet<>(builder.numbers);
 
         checkDuplication(builder.numbers);
-        checkSize(builder.numbers);
 
         builder.numbers.clear();
     }
 
     public static Builder builder() {
         return new Builder();
-    }
-
-    private void checkSize(List<Number> numbers) {
-        if (numbers.size() != SIZE)
-            throw new IllegalArgumentException("Numbers size wrong: " + SIZE);
     }
 
     private void checkDuplication(List<Number> numbers) {
@@ -58,6 +51,10 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public int getSize() {
+        return this.numbers.size();
     }
 
 
