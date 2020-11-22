@@ -34,7 +34,7 @@ public class LottoNumber {
 
     private void ThrowIfInValidLottoNumberCount(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER_COUNT);
         }
     }
 
