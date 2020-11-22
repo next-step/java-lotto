@@ -42,10 +42,6 @@ public class StatisticResultView {
         return String.format(STATISTIC_MESSAGE, lottoResult.getMatchNum(), lottoResult.getMoney(), collect.size());
     }
 
-    private static String buildYieldMessage(double yield) {
-        return String.format(TOTAL_YIELD_MESSAGE, yield);
-    }
-
     private static double computeYield(List<LottoResult> statistic, double money) {
         long sum = statistic.stream()
                 .filter(LottoResult::isWinning)
@@ -63,10 +59,4 @@ public class StatisticResultView {
 
     }
 
-    private static long totalMoney(Map<Integer, Integer> statistic) {
-        return (statistic.getOrDefault(3, 0) * 5000) +
-                (statistic.getOrDefault(4, 0) * 50000) +
-                (statistic.getOrDefault(5, 0) * 1500000) +
-                (statistic.getOrDefault(6, 0) * 2000000000);
-    }
 }
