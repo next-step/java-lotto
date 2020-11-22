@@ -10,7 +10,6 @@ public enum LottoWinningPrizes {
     THIRD_MATCHES(3, "3개 일치", 5_000),
     NONE_MATCHES(0, "", 0);
 
-    private static final int BONUS_COMPARE_NUMBER = 5;
     private int match;
     private String value;
     private long amount;
@@ -19,10 +18,6 @@ public enum LottoWinningPrizes {
         this.match = match;
         this.value = value;
         this.amount = amount;
-    }
-
-    public int getMatch() {
-        return this.match;
     }
 
     public long getAmount() {
@@ -34,13 +29,15 @@ public enum LottoWinningPrizes {
     }
 
     public static LottoWinningPrizes findLottoMatch(int rightNumberCount, boolean matchBonus) {
-        if (rightNumberCount == BONUS_COMPARE_NUMBER && matchBonus) {
+        if (matchBonus && rightNumberCount == FIVE_BONUS_MATCHES.match) {
             return FIVE_BONUS_MATCHES;
         }
 
         return Arrays.stream(values())
-                .filter(lottoWinning -> lottoWinning.getMatch() == rightNumberCount && !matchBonus)
+                .filter(lottoWinning -> lottoWinning != FIVE_BONUS_MATCHES)
+                .filter(lottoWinning -> lottoWinning.match == rightNumberCount)
                 .findAny()
                 .orElse(NONE_MATCHES);
+
     }
 }
