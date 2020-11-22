@@ -7,3 +7,17 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 요구 사항
+StringUtils
+1. 빈 문자열 또는 null을 입력하면, true을 반환한다.
+2. 문자열을 구분자에 맞게 나눈다(, or : or //''\n)
+
+IntegerUtils
+3. 나뉜 문자를 숫자로 바꾼다.
+    - 숫자가 음수이면 Excption을 throw한다.
+
+AddCalculator
+4. 빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.
+5. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다
+6. 나누어진 문자를 더한 결과를 출력한다.
