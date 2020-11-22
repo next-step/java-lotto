@@ -30,8 +30,8 @@ public class StringAddCalculaterTest {
     void removeSeparatorTest(){
         Separator separator = new Separator();
         String value = "1,2,3";
-        String result = stringaddcalculater.removeSeparator(value, separator);
-        assertThat(result).isEqualTo("123");
+        String result[] = stringaddcalculater.removeSeparator(value, separator);
+        assertThat(result[1]).isEqualTo("2");
     }
 
     @Test

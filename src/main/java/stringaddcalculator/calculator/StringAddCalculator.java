@@ -33,34 +33,26 @@ public class StringAddCalculator {
     }
 
     public String[] sortValue(String value, Separator separator){
-        String[] result = null;
         if(!value.contains("//")){
-            String temp = removeSeparator(value, separator);
-            result = temp.split("");
-            return result;
+            return removeSeparator(value, separator);
         }
-        result = findCumstomSeparator(value, separator);
-
-        return result;
+        return findCumstomSeparator(value, separator);
     }
 
-    public String removeSeparator(String value, Separator separator){
-        String result = value;
+    public String[] removeSeparator(String value, Separator separator){
+        String reg = "";
         for(String str : separator.getSeparator()){
-            result = result.replace(str, "");
+            reg = reg.concat(str+"|");
         }
-        return result;
+        return value.split(reg.replaceFirst(".$",""));
     }
 
     public String[] findCumstomSeparator(String value, Separator separator){
         String custom = addSeparator(value, separator);
 
-        String temp = value.replace("//"+custom+"\\n", custom);
-        temp = removeSeparator(temp, separator);
+        String temp = value.replace("//"+custom+"\\n", "");
 
-        String[] result = temp.split("");
-
-        return result;
+        return removeSeparator(temp, separator);
     }
 
     public String addSeparator(String value, Separator separator){
