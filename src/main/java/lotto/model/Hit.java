@@ -29,7 +29,7 @@ public enum Hit {
                 .findFirst()
                 .orElse(HIT_NONE);
 
-        if(hit.equals(HIT_6) && numbers.contains(bonus)){
+        if(bonusCondition(hit, numbers, bonus)){
             return HIT_6_BONUS;
         }
 
@@ -57,6 +57,10 @@ public enum Hit {
         Hit[] hits = Hit.values();
         Arrays.sort(hits, (x,y) -> y.reward - x.reward);
         return hits;
+    }
+
+    private static boolean bonusCondition(Hit hit, SortedSet<Integer> numbers, int bonus){
+        return hit.equals(HIT_6) && numbers.contains(bonus);
     }
 
     @Override
