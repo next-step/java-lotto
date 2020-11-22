@@ -9,10 +9,14 @@ import java.util.Map;
 import java.util.SortedSet;
 
 public class WinningLotto extends Lotto {
+    private final static String CONTAIN_BONUS_ERROR_MESSAGE = "당첨 번호에는 보너스 볼 번호가 들어갈 수 없습니다.";
     private int bonus;
 
     public WinningLotto(int bonus, DrawingStrategy drawingStrategy) {
         super(drawingStrategy);
+        if(numbers.contains(bonus)){
+            throw new IllegalArgumentException(CONTAIN_BONUS_ERROR_MESSAGE);
+        }
         this.bonus = bonus;
     }
 
