@@ -1,5 +1,7 @@
 package lotto_auto.model;
 
+import lotto_auto.ErrorMessage;
+
 public enum LottoResult {
 
     FIRST(true, 2000000000L, 1, 6),
@@ -44,15 +46,15 @@ public enum LottoResult {
                 return value;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
     }
 
     public static LottoResult valueOfRank(int rank) {
         for (LottoResult lottoResult : LottoResult.values()) {
-            if (lottoResult.matchNum == rank) {
+            if (lottoResult.rank == rank) {
                 return lottoResult;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
     }
 }
