@@ -34,13 +34,12 @@ public class LottoBundle {
         return lottoTicketList;
     }
 
-    public List<LottoResult> draw(LottoTicket winningLottoTicket) {
+    public LottoStatistic draw(LottoTicket winningLottoTicket) {
         List<LottoResult> ret = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTicketList) {
             LottoResult result = lottoTicket.draw(winningLottoTicket);
             ret.add(result);
         }
-        return ret;
+        return new LottoStatistic(ret);
     }
-
 }

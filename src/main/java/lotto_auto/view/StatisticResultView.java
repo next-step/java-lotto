@@ -1,10 +1,7 @@
 package lotto_auto.view;
 
 import lotto_auto.model.LottoResult;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import lotto_auto.model.LottoStatistic;
 
 public class StatisticResultView {
 
@@ -15,48 +12,36 @@ public class StatisticResultView {
     private static final String BENEFIT_MESSAGE = "기준이 1이기 때문에 결과적으로 이득이라는 의미임";
     private static final String LOSE_MESSAGE = "기준이 1이기 때문에 결과적으로 손해이라는 의미임";
 
-    public static void printStatistic(List<LottoResult> statistic, int money) {
+    public static void printStatistic(LottoStatistic lottoStatistic) {
         StringBuilder sb = new StringBuilder();
         sb.append(WINNING_STATISTIC_MESSAGE);
         sb.append(System.lineSeparator());
         sb.append(STRING_DIVIDER);
         sb.append(System.lineSeparator());
-        sb.append(buildStatisticMessage(statistic, 3));
+        sb.append(buildStatisticMessage(lottoStatistic, 4));
         sb.append(System.lineSeparator());
-        sb.append(buildStatisticMessage(statistic, 4));
+        sb.append(buildStatisticMessage(lottoStatistic, 3));
         sb.append(System.lineSeparator());
-        sb.append(buildStatisticMessage(statistic, 5));
+        sb.append(buildStatisticMessage(lottoStatistic, 2));
         sb.append(System.lineSeparator());
-        sb.append(buildStatisticMessage(statistic, 6));
+        sb.append(buildStatisticMessage(lottoStatistic, 1));
         sb.append(System.lineSeparator());
-        sb.append(buildYieldDetailMessage(statistic, money));
+        sb.append(buildYieldDetailMessage(lottoStatistic));
         sb.append(System.lineSeparator());
         System.out.println(sb);
     }
 
-    private static String buildStatisticMessage(List<LottoResult> statistic, int rank) {
-        List<LottoResult> collect = statistic.stream()
-                .filter(item -> item.getRank() == rank)
-                .collect(Collectors.toList());
+    private static String buildStatisticMessage(LottoStatistic lottoStatistic, int rank) {
         LottoResult lottoResult = LottoResult.valueOfRank(rank);
-        return String.format(STATISTIC_MESSAGE, lottoResult.getMatchNum(), lottoResult.getMoney(), collect.size());
+        return String.format(STATISTIC_MESSAGE, lottoResult.getMatchNum(), lottoResult.getMoney(), lottoStatistic.getRankLottoCount(rank));
     }
 
-    private static double computeYield(List<LottoResult> statistic, double money) {
-        long sum = statistic.stream()
-                .filter(LottoResult::isWinning)
-                .mapToLong(LottoResult::getMoney)
-                .sum();
-        return (double) sum / money;
-    }
-
-    private static String buildYieldDetailMessage(List<LottoResult> statistic, double money) {
-        double yield = computeYield(statistic, money);
+    private static String buildYieldDetailMessage(LottoStatistic lottoStatistic) {
+        double yield = lottoStatistic.getYield();
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(TOTAL_YIELD_MESSAGE, yield));
-        sb.append(yield < 1 ? BENEFIT_MESSAGE : LOSE_MESSAGE);
+        sb.append(yield < 1 ? LOSE_MESSAGE : BENEFIT_MESSAGE);
         return sb.toString();
-
     }
 
 }
