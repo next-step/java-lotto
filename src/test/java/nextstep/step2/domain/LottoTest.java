@@ -35,9 +35,8 @@ public class LottoTest {
 	@Test
 	@DisplayName("지난주 로또당첨 번호는 6개여야 한다.")
 	public void lastLottoWrongTest() {
-		Lotto lastWeekLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5));
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> lastWeekLotto.validate())
+				.isThrownBy(() -> MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5)))
 				.withMessage("로또 번호는 6개여야 합니다.");
 	}
 

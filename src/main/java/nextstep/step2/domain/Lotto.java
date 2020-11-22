@@ -15,6 +15,7 @@ public class Lotto {
 	}
 	public Lotto(Set<LottoNumber> numbers) {
 		this.numbers = numbers;
+		validate();
 	}
 
 	public Set<LottoNumber> getNumbers() {
