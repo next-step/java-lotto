@@ -19,6 +19,4 @@ public class Separator {
     public void addCustumSeparator(String value){
         this.separator.add(value);
     }
-    
-
 }
