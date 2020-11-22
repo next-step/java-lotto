@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 public class Lotto {
 	private static final String WRONG_LOTTO_NUMBERS = "로또 번호는 6개여야 합니다.";
-	private static final String WRONG_WINNER_NUMBERS = "지난주 로또 당첨번호는 모두 숫자여야 합니다.";
 	protected static final int LOTTO_SIZE = 6;
 	private Set<LottoNumber> numbers;
 
