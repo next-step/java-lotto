@@ -47,7 +47,7 @@ public class LottoWinningStatisticsTest {
         //when
         List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
-        Set<LottoWinningResult> winningResultList = winningResults.getLottoWinningResults();
+        List<LottoWinningResult> winningResultList = winningResults.getLottoWinningResults();
 
         int first = winningResultList.stream()
                 .filter(e -> e.getLottoResult() == LottoResult.FIRST)

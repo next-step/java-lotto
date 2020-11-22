@@ -13,7 +13,7 @@ public class LottoWinningStatistics {
         lottoResults.stream()
                 .filter(e -> e != LottoResult.NONE)
                 .forEach(e -> lottoWinningResults.get(e).incrementOfCount());
-        return new LottoWinningResults(new HashSet<>(lottoWinningResults.values()));
+        return new LottoWinningResults(new LinkedList<>(lottoWinningResults.values()));
     }
 
     public static BigInteger getProfit(LottoWinningResults winningResults) {

@@ -4,13 +4,13 @@ import java.util.*;
 
 public class LottoWinningResults {
 
-    private final Set<LottoWinningResult> lottoWinningResults;
+    private final List<LottoWinningResult> lottoWinningResults;
 
-    public LottoWinningResults(Set<LottoWinningResult> lottoWinningResults) {
+    public LottoWinningResults(List<LottoWinningResult> lottoWinningResults) {
         this.lottoWinningResults = lottoWinningResults;
     }
 
-    public Set<LottoWinningResult> getLottoWinningResults() {
+    public List<LottoWinningResult> getLottoWinningResults() {
         return lottoWinningResults;
     }
 }
