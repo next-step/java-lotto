@@ -11,8 +11,8 @@ public class LottoAutoGenerator {
 		Collections.shuffle(rangeLottoNumbers);
 		Set<LottoNumber> autoLottoNumbers = rangeLottoNumbers.stream()
 				.limit(Lotto.LOTTO_SIZE)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toSet());
-		return Collections.unmodifiableNavigableSet(new TreeSet<>(autoLottoNumbers));
+		return Collections.unmodifiableSet(new TreeSet<>(autoLottoNumbers));
 	}
 }

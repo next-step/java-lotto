@@ -52,29 +52,29 @@ public class LottoTest {
 	@DisplayName("로또 보너스 번호를 가지고 있는지 테스트")
 	public void hasBonusNumberTest() {
 		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertTrue(getWinningLotto().hasBonusNumber(lotto, new LottoNumber(6)));
-		assertFalse(getWinningLotto().hasBonusNumber(lotto, new LottoNumber(7)));
+		assertTrue(getWinningLotto().hasBonusNumber(lotto, LottoNumber.of(6)));
+		assertFalse(getWinningLotto().hasBonusNumber(lotto, LottoNumber.of(7)));
 	}
 
 	private Lotto getWinningLotto() {
 		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 		Lotto lastWinningLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
-		WinningLotto winningLotto = new WinningLotto(lastWinningLotto, new LottoNumber(7));
+		WinningLotto winningLotto = new WinningLotto(lastWinningLotto, LottoNumber.of(7));
 		lotto.setLottoReward(winningLotto);
 		return lotto;
 	}
 
 	private static Stream<Arguments> provideLottos() {
 		return Stream.of(
-				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(7)),
-				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,7)), new LottoNumber(8))
+				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),
+				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(8))
 		);
 	}
 
 	private static Stream<Arguments> provideLastWeekLotto() {
 		return Stream.of(
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4, 5,  6"), new LottoNumber(5)),
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4,  40,  45"), new LottoNumber(45))
+				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4, 5,  6"), LottoNumber.of(5)),
+				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4,  40,  45"), LottoNumber.of(45))
 		);
 	}
 }

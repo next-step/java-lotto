@@ -19,7 +19,7 @@ public class LottoResultViewTest {
 	public void printLottoStaticsicTest() {
 		Lotto lastWeekLotto = MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6));
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = new HashMap<>();
-		WinningLotto winningLotto = new WinningLotto(lastWeekLotto, new LottoNumber(7));
+		WinningLotto winningLotto = new WinningLotto(lastWeekLotto, LottoNumber.of(7));
 		List<Lotto> lottos = Arrays.asList(MockLotto.mockLotto(Arrays.asList(1,2,3,14,15,16)),
 				MockLotto.mockLotto(Arrays.asList(1,2,3,4,15,16)),
 				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,16)),

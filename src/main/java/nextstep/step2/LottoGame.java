@@ -22,7 +22,7 @@ public class LottoGame {
 		final String winningNumber = inputWinningNumbers.getInputLottoWinningNumbers();
 
 		InputView inputBonusNumber = new InputView(new Scanner(System.in));
-		final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber.getInputLottoBonusNumber());
+		final LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber.getInputLottoBonusNumber());
 		controller.printLottoStaticsic(winningNumber, bonusNumber, purchase, autoLottos, resultView);
 	}
 }

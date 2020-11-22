@@ -12,17 +12,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public LottoNumber(int number) {
 		this.number = number;
-		validateLottoNumberRange();
 	}
 
-	private void validateLottoNumberRange() {
+	public static LottoNumber of(int number) {
+		validateLottoNumberRange(number);
+		return new LottoNumber(number);
+	}
+
+	private static void validateLottoNumberRange(int number) {
 		if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
 			throw new IllegalArgumentException(WRONG_LOTTO_RANGE);
 		}
 	}
 
 	public void validateBonusNumber(Lotto lastWinningLotto) {
-		if (lastWinningLotto.getNumbers().contains(number)) {
+		if (lastWinningLotto.getNumbers().contains(this)) {
 			throw new IllegalArgumentException(DUPLICATE_NUMBER);
 		}
 	}

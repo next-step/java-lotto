@@ -18,7 +18,7 @@ public class LottoControllerTest {
 	public void startLottoGameTest() {
 		LottoPurchase lottoPurchase = new LottoPurchase(1_000);
 		LottoResultView resultView = new LottoResultView();
-		LottoNumber bonusNumber = new LottoNumber(7);
+		LottoNumber bonusNumber = LottoNumber.of(7);
 		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoPurchase, resultView);
 		underTest.printLottoStaticsic("1,2,3,4,5,6", bonusNumber, lottoPurchase, autoLottos, resultView);
 	}

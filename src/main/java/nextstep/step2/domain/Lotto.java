@@ -30,7 +30,7 @@ public class Lotto {
 	public Lotto getLastWeekLotto(String winnerNumbers) {
 		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
 		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
-				.map(number -> new LottoNumber(LottoNumber.getValidateNumber(number)))
+				.map(number -> LottoNumber.of(LottoNumber.getValidateNumber(number)))
 				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
 		return new Lotto(winningNumbers);
 	}

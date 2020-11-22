@@ -20,7 +20,7 @@ public class LottoStaticsticTest {
 	public void before() {
 		lottoPurchase = new LottoPurchase(10_000);
 		winnerNumbers = "1,2,3,4,5,6";
-		bonusNumber = new LottoNumber(7);
+		bonusNumber = LottoNumber.of(7);
 		lottoStaticstic = new LottoStaticstic(winnerNumbers, lottoPurchase, bonusNumber);
 	}
 
