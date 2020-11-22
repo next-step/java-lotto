@@ -11,21 +11,31 @@ public class OutputView {
     private static final String LOTTO_STATICS = "구매 통계";
     private static final String LOTTO_BLANKET = "[ %s ]";
     private static final String HYPHEN = "----------";
-    private static final String PURCHASE_AMOUNT = "개를 구매했습니다.";
+    private static final String PURCHASE_AMOUNT = "수동으로 %d장 자동으로 %d개를 구매했습니다.";
     private static final String INVEST_RATE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s 라는 의미임)";
     public static final String POSITIVE = "이득";
     public static final String NEGATIVE = "손해";
     public static final int RATE_PERCENT_STANDARD = 1;
 
-    private OutputView() {}
+    private OutputView() {
+    }
 
     public static void purchaseLotto(int lottoTicketCount) {
         println(printPurchaseLotto(lottoTicketCount));
     }
 
+    public static void purchaseLotto2(int autoLottoTicketCount, int manualLottoTicketCount) {
+        println(printPurchaseLotto2(autoLottoTicketCount, manualLottoTicketCount));
+    }
+
     private static String printPurchaseLotto(int lottoTicketCount) {
         return String.format(
                 String.valueOf(lottoTicketCount), PURCHASE_AMOUNT);
+    }
+
+    private static String printPurchaseLotto2(int autoLottoTicketCount, int manualLottoTicketCount) {
+        return String.format(
+                PURCHASE_AMOUNT, manualLottoTicketCount, autoLottoTicketCount);
     }
 
     private static void println(String input) {
