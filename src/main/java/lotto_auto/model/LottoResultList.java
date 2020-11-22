@@ -10,10 +10,6 @@ public class LottoResultList {
         this.lottoResultList = lottoResultList;
     }
 
-    public int size() {
-        return lottoResultList.size();
-    }
-
     public int getRankLottoCount(int rank) {
         return (int) this.lottoResultList.stream()
                 .filter(item -> item.isRank(rank))
