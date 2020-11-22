@@ -12,7 +12,7 @@ import lotto_auto.view.WinningLottoInputView;
 public class Main {
     public static void main(String[] args) {
         int money = BuyInputView.enter();
-        LottoBundle lottoBundle = LottoStore.buy(money);
+        LottoBundle lottoBundle = LottoStore.sell(money);
         LottoBundleStatusView.statusPrint(lottoBundle);
         LottoTicket winningLottoTicket = WinningLottoInputView.enter();
         LottoStatistic lottoStatistic = lottoBundle.draw(winningLottoTicket);

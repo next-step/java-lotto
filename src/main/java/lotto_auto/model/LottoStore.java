@@ -5,7 +5,7 @@ import lotto_auto.ErrorMessage;
 
 public class LottoStore {
 
-    public static LottoBundle buy(int money) {
+    public static LottoBundle sell(int money) {
         throwIfNegativeMoney(money);
         return new LottoBundle(money / Constant.LOTTO_TICKET_PRICE);
     }

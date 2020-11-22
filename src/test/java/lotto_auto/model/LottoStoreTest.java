@@ -21,14 +21,14 @@ class LottoStoreTest {
     @Test
     public void enterNegativeValueExceptionTest() {
         assertThatThrownBy(
-                () -> lottoStore.buy(-1)
+                () -> lottoStore.sell(-1)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("LottoBundle 생성 테스트")
     @Test
     public void returnLottoBundleTest() {
-        LottoBundle lottoBundle = lottoStore.buy(1000);
+        LottoBundle lottoBundle = lottoStore.sell(1000);
         assertThat(lottoBundle).isNotNull();
     }
 
