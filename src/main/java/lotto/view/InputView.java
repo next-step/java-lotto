@@ -1,7 +1,13 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.domain.LottoRuleConfig.*;
 import static lotto.view.InputViewConfig.*;
@@ -25,7 +31,7 @@ public class InputView {
         String result;
         do {
             System.out.print(INPUT_LOTTO_NUMBER_MESSAGE);
-            result = scanner.nextLine();
+            result = scanner.next();
         } while(stringValidationCheck(result));
         return result;
     }
@@ -37,6 +43,48 @@ public class InputView {
         } while((result = bonusNumberCheck(scanner.nextInt())) == 0);
         scanner.nextLine();
         return result;
+    }
+
+    public static List<Lotto> inputManualLottoNumber() {
+        int lottoCount = inputManualLottoCount();
+        System.out.print(INPUT_LOTTO_MANUAL_NUMBER_MESSAGE);
+        return IntStream.range(0,lottoCount)
+                .mapToObj(e -> manualLottoNumber())
+                .map(InputView::manualLotto)
+                .collect(Collectors.toList());
+    }
+
+    private static Lotto manualLotto(String lottoNumber) {
+        String[] splitLottoNumber = lottoNumber.split(LOTTO_NUMBER_SEPARATOR);
+        List<LottoNumber> lottoNumbers = Arrays.stream(splitLottoNumber)
+                .map(e -> LottoNumber.of(Integer.parseInt(e)))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers,false);
+    }
+
+    private static String manualLottoNumber() {
+        String result;
+        do {
+            result = scanner.next();
+        } while(stringValidationCheck(result));
+        return result;
+    }
+
+    private static int inputManualLottoCount() {
+        int result;
+        do {
+            System.out.print(INPUT_LOTTO_MANUAL_COUNT_MESSAGE);
+            result = scanner.nextInt();
+        } while(integerValidationCheck(result));
+        return result;
+    }
+
+    private static boolean integerValidationCheck(int result) {
+        if(result < 0) {
+            System.out.print(LOTTO_COUNT_CHECK_ERROR_MESSAGE);
+            return true;
+        }
+        return false;
     }
 
     private static int priceCheck(int price) {
