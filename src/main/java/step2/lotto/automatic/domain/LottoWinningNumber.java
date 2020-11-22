@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
  * 당첨번호 관리
  */
 public class LottoWinningNumber {
+    private static final Integer DEFAULT_LOTTO_RANK = 7; // 로또 등수구할때 기본으로 세팅되어있는 값
+
     private List<Integer> winningNumbers = new ArrayList<>();
     private CommonLottoCheck commonLottoCheck = new CommonLottoCheck();
-    private static final Integer DEFAULTLOTTORANK = 7; // 로또 등수구할때 기본으로 세팅되어있는 값
 
     public LottoWinningNumber(String WinningNumbers) {
         isNullOrEmptyCheck(WinningNumbers);
@@ -24,11 +25,13 @@ public class LottoWinningNumber {
         Arrays.sort(arr);
         commonLottoCheck.CheckNumber(Arrays.asList(arr));
 
-        this.winningNumbers = Arrays.asList(arr).stream().map(Integer::parseInt).collect(Collectors.toList());
+        this.winningNumbers = Arrays.asList(arr).stream()
+                            .map(Integer::parseInt)
+                            .collect(Collectors.toList());
     }
 
     public Integer getRank(List<Integer> paramValue) {
-        Integer returnValue = DEFAULTLOTTORANK;
+        Integer returnValue = DEFAULT_LOTTO_RANK;
 
         for (Integer number : paramValue) {
             returnValue = checkSameValue(number, returnValue);
