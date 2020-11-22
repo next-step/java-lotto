@@ -45,5 +45,4 @@ public enum LottoResult {
                 .findFirst()
                 .orElse(NONE);
     }
-
 }

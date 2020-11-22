@@ -75,4 +75,20 @@ public class LottoTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또번호가 6개미만");
     }
+
+    @Test
+    @DisplayName("Lotto 자동생성 == 수동생성 불일치 확인")
+    void lotto_manualLotto_isNotEqualTo() {
+        Lotto manualLotto = new Lotto(Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))
+                ,false
+        );
+
+        assertThat(lotto).isNotEqualTo(manualLotto);
+    }
 }
