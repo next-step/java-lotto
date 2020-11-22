@@ -13,25 +13,31 @@ public class CommonLottoCheck {
 
     public void CheckNumber(List<String> lottoNumbers) {
         isNumberCount(lottoNumbers);
+        isSameValueCheck(lottoNumbers);
 
         for (String str : lottoNumbers) {
-            CheckStandardNumber(str);
+            checkStandardNumber(str);
         }
     }
 
-    private void isNumberCount(List<String> lottoNumbers){
-        if(lottoNumbers.size() != LOTTO_NUBMER_COUNT){
+    private void isNumberCount(List<String> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUBMER_COUNT) {
             throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2IncorrectCount());
         }
     }
 
+    private void isSameValueCheck(List<String> lottoNumbers) {
+        for (int i = 0; i < lottoNumbers.size()-1; i++) {
+            if(lottoNumbers.get(i).equals(lottoNumbers.get(i+1))){
+                throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2OverlapCheck());
+            }
+        }
+    }
 
-
-    private void CheckStandardNumber(String paramValue) {
+    private void checkStandardNumber(String paramValue) {
         int checkParamValue = isLottoNumber(paramValue);
 
-        CheckLowStandardNumber(checkParamValue);
-
+        checkLowStandardNumber(checkParamValue);
     }
 
     private static Integer isLottoNumber(String paramValue) {
@@ -44,8 +50,8 @@ public class CommonLottoCheck {
         return Integer.parseInt(paramValue);
     }
 
-    private void CheckLowStandardNumber(Integer paramValue) {
-        if (paramValue >= HIGH_STANDARD_NUMBER && paramValue <= LOW_STANDARD_NUMBER) {
+    private void checkLowStandardNumber(Integer paramValue) {
+        if (paramValue > HIGH_STANDARD_NUMBER || paramValue < LOW_STANDARD_NUMBER) {
             throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2Runtimeexception());
         }
     }
