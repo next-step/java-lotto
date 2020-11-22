@@ -26,6 +26,10 @@ public enum Rank {
         return description;
     }
 
+    public int getMatchingNumberCount() {
+        return matchingNumberCount;
+    }
+
     public static Rank value(int matchingCount) {
         if (matchingCount < 3) return FIFTH;
         for (Rank value : values()) {
