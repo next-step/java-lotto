@@ -7,12 +7,12 @@ import step4.exception.ValidNullException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class LastWeekLottoGenerator {
+public class LottoGenerator {
 
 
     private static final String DELIMITER_LOTTO = ",";
 
-    private LastWeekLottoGenerator() {}
+    private LottoGenerator() {}
 
     public static Lotto separateLottoToList(String input) {
         validNull(input);
