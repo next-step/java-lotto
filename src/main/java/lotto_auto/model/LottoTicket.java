@@ -68,12 +68,12 @@ public class LottoTicket {
         return this.lottoNumberList;
     }
 
-    public LottoResult getResult(LottoTicket lottoTicket) {
-        int matchNumberCount = getMatchNumberCount(lottoTicket);
+    public LottoResult draw(LottoTicket winningLottoTicket) {
+        int matchNumberCount = getMatchNumberCount(winningLottoTicket);
         return LottoResult.valueOfMatchNum(matchNumberCount);
     }
 
-    public int getMatchNumberCount(LottoTicket lottoTicket) {
+    private int getMatchNumberCount(LottoTicket lottoTicket) {
         List<Integer> all = new ArrayList<>();
         all.addAll(this.export());
         all.addAll(lottoTicket.export());

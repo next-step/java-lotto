@@ -68,4 +68,6 @@ class LottoBundleTest {
         LottoBundle lottoBundle = new LottoBundle(ticketCount);
         assertThat(lottoBundle.export()).isNotNull();
     }
+
+
 }

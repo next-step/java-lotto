@@ -17,7 +17,7 @@ public class Main {
         LottoBundle lottoBundle = LottoStore.buy(money);
         LottoBundleStatusView.statusPrint(lottoBundle);
         LottoTicket winningLottoTicket = WinningLottoInputView.enter();
-        List<LottoResult> statistic = lottoBundle.statistic(winningLottoTicket);
-        StatisticResultView.printStatistic(statistic, money);
+        List<LottoResult> result = lottoBundle.draw(winningLottoTicket);
+        StatisticResultView.printStatistic(result, money);
     }
 }
