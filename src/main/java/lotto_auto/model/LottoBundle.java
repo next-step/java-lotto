@@ -1,6 +1,7 @@
 package lotto_auto.model;
 
-import java.util.ArrayList;
+import lotto_auto.ErrorMessage;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class LottoBundle {
 
     private void throwIfNegativeTicketCount(int ticketCount) {
         if (ticketCount <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TICKET_COUNT);
         }
     }
 
@@ -35,11 +36,8 @@ public class LottoBundle {
     }
 
     public LottoStatistic draw(LottoTicket winningLottoTicket) {
-        List<LottoResult> ret = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTicketList) {
-            LottoResult result = lottoTicket.draw(winningLottoTicket);
-            ret.add(result);
-        }
-        return new LottoStatistic(ret);
+        return new LottoStatistic(lottoTicketList.stream()
+                .map(item -> item.draw(winningLottoTicket))
+                .collect(Collectors.toList()));
     }
 }
