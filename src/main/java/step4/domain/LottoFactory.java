@@ -8,37 +8,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    private static final int LOTTO_PRICE = 1000;
     private final Lottos lottos;
 
-    public LottoFactory(final int money, final LottoGeneratorStrategy lottoMakeStrategy) {
-        validMoney(money);
 
-        lottos = new Lottos(IntStream.range(0 , getLottoTicketCount(money))
-                        .mapToObj(i -> new Lotto(lottoMakeStrategy.generateLottoNumbers()))
-                        .collect(Collectors.toList()));
-    }
     public LottoFactory(final AutoLottoFactory autoLottoFactory, final ManualLottoFactory manualLottoFactory) {
+
+        lottos = new Lottos(addLottoList(autoLottoFactory, manualLottoFactory));
+    }
+
+    private List<Lotto> addLottoList(AutoLottoFactory autoLottoFactory, ManualLottoFactory manualLottoFactory) {
         List<Lotto> lottoList = new ArrayList<>();
         manualLottoFactory.addList(lottoList);
         autoLottoFactory.addList(lottoList);
-
-        lottos = new Lottos(lottoList);
-
+        return lottoList;
     }
+
     public LottoMatcher matchNumbers(Lotto lastWeekLottoNums, LottoNumber bonusCount) {
         return LottoMatcher.ofMatch(lottos, LastWeekLotto.of(lastWeekLottoNums, bonusCount));
     }
 
-    private int getLottoTicketCount(int money) {
-        return money / LOTTO_PRICE;
-    }
-
-    private void validMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new LottoMoneyException();
-        }
-    }
 
     public int getLottoCount() {
         return lottos.getLottoCount();
