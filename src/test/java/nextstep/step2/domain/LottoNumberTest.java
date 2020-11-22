@@ -13,4 +13,12 @@ public class LottoNumberTest {
 				.isThrownBy(() -> LottoNumber.getValidateNumber("abc"))
 				.withMessage("로또번호는 모두 숫자여야 합니다.");
 	}
+
+	@Test
+	@DisplayName("로또번호는 1~45 사이의 숫자여야 한다.")
+	public void lastLottoWrongNumberTest() {
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> new LottoNumber(100))
+				.withMessage("로또는 1~45의 숫자여야 합니다.");
+	}
 }

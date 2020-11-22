@@ -1,6 +1,8 @@
 package nextstep.step2.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,6 +30,38 @@ public class LottoTest {
 	public void inpuLastLottoNumberTest(Lotto lotto, LottoNumber expected) {
 		assertTrue(lotto.getNumbers().contains(expected));
 		assertTrue(lotto.getNumbers().contains(expected));
+	}
+
+	@Test
+	@DisplayName("지난주 로또당첨 번호는 6개여야 한다.")
+	public void lastLottoWrongTest() {
+		Lotto lastWeekLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5));
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> lastWeekLotto.validate())
+				.withMessage("로또 번호는 6개여야 합니다.");
+	}
+
+	@Test
+	@DisplayName("로또 리워드를 갖는 로또를 생성한다.")
+	public void winningLottoTest() {
+		Lotto winningLotto = getWinningLotto();
+		assertThat(winningLotto.getLottoReward()).isEqualTo(LottoReward.FIFTH);
+	}
+
+	@Test
+	@DisplayName("로또 보너스 번호를 가지고 있는지 테스트")
+	public void hasBonusNumberTest() {
+		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		assertTrue(getWinningLotto().hasBonusNumber(lotto, new LottoNumber(6)));
+		assertFalse(getWinningLotto().hasBonusNumber(lotto, new LottoNumber(7)));
+	}
+
+	private Lotto getWinningLotto() {
+		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lastWinningLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
+		WinningLotto winningLotto = new WinningLotto(lastWinningLotto, new LottoNumber(7));
+		lotto.setLottoReward(winningLotto);
+		return lotto;
 	}
 
 	private static Stream<Arguments> provideLottos() {

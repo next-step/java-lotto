@@ -1,7 +1,7 @@
 package nextstep.step2.view;
 
+import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoReward;
-import nextstep.step2.domain.WinningLotto;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +18,7 @@ public class LottoResultView {
 		System.out.println(String.format(LOTTO_PURCHASE_MESSAGE, lottoCount));
 	}
 
-	public void printLottoStaticsic(Map<LottoReward, List<WinningLotto>> lottoRewardListMap) {
+	public void printLottoStaticsic(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
 		System.out.println(LOTTO_STATISTICTS);
 		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())

@@ -9,6 +9,7 @@ public class Lotto {
 	private static final String WRONG_LOTTO_NUMBERS = "로또 번호는 6개여야 합니다.";
 	protected static final int LOTTO_SIZE = 6;
 	private Set<LottoNumber> numbers;
+	private LottoReward lottoReward;
 
 	public Lotto() {
 	}
@@ -32,5 +33,25 @@ public class Lotto {
 				.map(number -> new LottoNumber(LottoNumber.getValidateNumber(number)))
 				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
 		return new Lotto(winningNumbers);
+	}
+
+	public void setLottoReward(WinningLotto lotto) {
+		long matchCount = getMatchCount(this, lotto.getLastWeekLotto());
+		boolean hasBonusNumber = hasBonusNumber(this, lotto.getBonusNumber());
+		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount), hasBonusNumber);
+	}
+
+	protected boolean hasBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+		return lotto.getNumbers().contains(bonusNumber);
+	}
+
+	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
+		return lotto.getNumbers().stream()
+				.filter(number -> lastWeekLotto.getNumbers().contains(number))
+				.count();
+	}
+
+	public LottoReward getLottoReward() {
+		return lottoReward;
 	}
 }

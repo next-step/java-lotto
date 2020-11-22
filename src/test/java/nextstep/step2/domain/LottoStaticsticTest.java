@@ -28,7 +28,7 @@ public class LottoStaticsticTest {
 	@DisplayName("구매한 로또들의 리워드와 로또를 그룹핑한다.")
 	public void getLottoRewardMapTest() {
 		List<Lotto> mockLottos = mockLottoList(lottoPurchase.getLottoCount(), MockLotto.mockLotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(mockLottos);
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(mockLottos);
 		assertTrue(lottoRewardListMap.containsKey(LottoReward.FOURTH));
 	}
 
@@ -36,7 +36,7 @@ public class LottoStaticsticTest {
 	@DisplayName("구매금액과 로또당첨금액으로 확률을 구한다.")
 	public void calculateWinningProbabilityTest() {
 		List<Lotto> mockLottos = mockLottoList(lottoPurchase.getLottoCount(), MockLotto.mockLotto(Arrays.asList(1,2,7,8,9,10)));
-		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(mockLottos);
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(mockLottos);
 		float stat = lottoStaticstic.calculateWinningProbability(lottoRewardListMap);
 		assertThat(stat).isEqualTo(0.0f);
 	}

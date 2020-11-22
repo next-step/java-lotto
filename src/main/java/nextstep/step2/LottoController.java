@@ -17,7 +17,7 @@ public class LottoController {
 
 	public void printLottoStaticsic(String winnerNumbers, LottoNumber bonusNumber, LottoPurchase purchase, List<Lotto> lottoList, LottoResultView resultView) {
 		LottoStaticstic lottoStaticstic = new LottoStaticstic(winnerNumbers, purchase, bonusNumber);
-		Map<LottoReward, List<WinningLotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
 		resultView.printLottoStaticsic(lottoRewardListMap);
 		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
 	}
