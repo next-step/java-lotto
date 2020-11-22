@@ -16,9 +16,7 @@ public class LottoNumberGeneratorTest {
         //Given & When
         List<LottoNumbers> numbers = LottoNumberGenerator.create(14);
 
-        for (LottoNumbers number : numbers) {
-            System.out.println(number.getValue().toString());
-        }
+
 
         //Then
         assertThat(numbers.size()).isEqualTo(14);
