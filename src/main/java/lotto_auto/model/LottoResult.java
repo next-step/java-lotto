@@ -55,6 +55,6 @@ public enum LottoResult {
                 return lottoResult;
             }
         }
-        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
+        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK);
     }
 }
