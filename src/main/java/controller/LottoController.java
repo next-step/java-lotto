@@ -52,6 +52,8 @@ public class LottoController {
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(inputWinningNumber);
 
+        int bonusNumber = inputView.inputBonusNumber();
+
         resultView.displayResultMention();
 
         Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers);
