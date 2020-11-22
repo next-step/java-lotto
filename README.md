@@ -175,5 +175,15 @@ public class StringAddCalculatorTest {
     }
 }
 ```
-## TODO list
-* test
+## Reviewer Feedback (2020-11-22)
+- [ ] 메소드 순서대로 parseOperands , sumOperands 위치 변경
+- [ ] Pattern 객체 캐싱 처리
+`private static final Matcher customMatcher = Pattern.compile(customRegex).matcher(userInput);`
+- [ ] 상수로 처리
+`private static final String customRegex = "//(.)\n(.*)";`
+`private static final String customRegex = "//(.)\n(.*)";`
+- [ ] Object 클래스를 활용한 null 검사
+`return Object.isNull(userInput) || userInput.isEmpty();`
+- [ ] `RuntimeException` --> `IllegalArgumentExceptinon으로 핸들링`
+- [ ] testcase에대해서도 리팩토링(반복제거) 수행하기 (ParameterizedTest 도입)
+- [ ] `@DisplayName`을 활용해서 test의도 나타내기
