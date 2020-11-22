@@ -8,9 +8,17 @@ import static lotto.domain.LottoRuleConfig.*;
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
+    private final boolean isAutoGeneration;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        this.isAutoGeneration = true;
+        lottoSizeException();
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers,boolean isAutoGeneration) {
+        this.lottoNumbers = lottoNumbers;
+        this.isAutoGeneration = isAutoGeneration;
         lottoSizeException();
     }
 
@@ -33,6 +41,10 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean isAutoGeneration() {
+        return isAutoGeneration;
     }
 
     @Override
