@@ -14,7 +14,7 @@ public class Lotto {
         lottoSort();
     }
 
-    public void lottoSort() {
+    private void lottoSort() {
         Collections.sort(this.lottos);
     }
 
