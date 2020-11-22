@@ -12,7 +12,7 @@ public class Client {
     Budget budget = Budget.of(InputView.askBudget());
     ResultView.printNumLotto(budget.getNumPossibleLotto());
 
-    LottoTickets purchasedTickets = budget.purchaseLotto(budget.getNumPossibleLotto());
+    LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
     ResultView.printLottoInfo(purchasedTickets.toString());
 
     WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());

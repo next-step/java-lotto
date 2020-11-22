@@ -90,5 +90,5 @@
 * [ ] WinningNumber 에 보너스 볼 입력 기능 추가
 
 ### 피드백 반영을 위해 진행해야 하는 부분
-* [ ] TicketPublisher Budget 을 받도록 변경
+* [X] TicketPublisher 에서 Budget 을 받아서 티켓을 발급하도록 변경
 * [ ] 내가 생각한 식대로 Domain <-> Model 결합도 완화하고 리뷰 받기

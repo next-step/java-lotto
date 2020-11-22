@@ -18,9 +18,12 @@ public class TicketPublisher {
     return LottoTicket.of(NumberPool.generateNumberBundle(publishStrategy));
   }
 
-  static public LottoTickets publishTickets(int numTicket) {
+  static public LottoTickets publishTickets(Budget budget) {
+    int numPossibleTicket = budget.getNumPossibleLotto();
+    budget.reduceRemains(numPossibleTicket);
+
     return IntStream
-        .range(0, numTicket)
+        .range(0, numPossibleTicket)
         .mapToObj(x -> publishTicket())
         .collect(collectingAndThen(toList(), LottoTickets::of));
   }

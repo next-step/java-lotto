@@ -29,13 +29,14 @@ public class Budget {
     return this.remains / PRICE_PER_TICKET;
   }
 
-  public LottoTickets purchaseLotto(int numTicket) {
-    if (this.remains < PRICE_PER_TICKET) {
+  public void reduceRemains(int numTicket) {
+    int expectedFutureBudget = this.remains - numTicket * PRICE_PER_TICKET;
+
+    if (expectedFutureBudget < 0) {
       throw new RemainBudgetException();
     }
 
-    this.remains -= numTicket * PRICE_PER_TICKET;
-    return TicketPublisher.publishTickets(numTicket);
+    this.remains = expectedFutureBudget;
   }
 
   public double calculateRatio(int incomes) {
