@@ -2,88 +2,24 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 
 public class LottoTicket {
 
-    private static final Integer LOTTO_NUMBER_COUNT = 6;
-    private static final Integer LOTTO_NUMBER_MIN_RANGE = 0;
-    private static final Integer LOTTO_NUMBER_MAX_RANGE = 45;
-    private List<Integer> lottoNumberList;
+    private LottoNumber lottoNumber;
 
     public LottoTicket() {
-        List<Integer> ret =
-                IntStream.range(1, 45)
-                        .boxed()
-                        .collect(Collectors.toList());
-        Collections.shuffle(ret);
-        this.lottoNumberList = ret.subList(0, 6);
+        this.lottoNumber = LottoNumberManager.generate();
     }
 
-    public LottoTicket(List<Integer> numbers) {
-        ThrowIfNull(numbers);
-        ThrowIfInValidLottoNumberCount(numbers);
-        ThrowIfInvalidLottoNumberRange(numbers);
-        ThrowIfDuplicate(numbers);
-        this.lottoNumberList = numbers;
+    public LottoNumber getLottoNumber() {
+        return this.lottoNumber;
     }
 
-    private void ThrowIfNull(List<Integer> numbers) {
-        if (numbers == null) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void ThrowIfInValidLottoNumberCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void ThrowIfInvalidLottoNumberRange(List<Integer> numbers) {
-        List<Integer> filteredList = numbers.stream()
-                .filter(item -> item <= LOTTO_NUMBER_MIN_RANGE || item >= LOTTO_NUMBER_MAX_RANGE)
-                .collect(Collectors.toList());
-        if (filteredList.size() != 0) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void ThrowIfDuplicate(List<Integer> numbers) {
-        HashSet<Integer> list = new HashSet<>(numbers);
-        if (list.size() != numbers.size()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public int getNumberCount() {
-        return this.lottoNumberList.size();
-    }
-
-    public List<Integer> export() {
-        Collections.sort(this.lottoNumberList);
-        return this.lottoNumberList;
-    }
-
-    public LottoResult draw(LottoTicket winningLottoTicket) {
-        if (winningLottoTicket == null) {
+    public LottoResult draw(LottoNumber winningLottoNumber) {
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NULL_WINNING_LOTTO_TICKET);
         }
-        int matchNumberCount = getMatchNumberCount(winningLottoTicket);
+        int matchNumberCount = this.lottoNumber.computeMatchCount(winningLottoNumber);
         return LottoResult.valueOfMatchNum(matchNumberCount);
-    }
-
-    private int getMatchNumberCount(LottoTicket winningLottoTicket) {
-        List<Integer> all = new ArrayList<>();
-        all.addAll(this.export());
-        all.addAll(winningLottoTicket.export());
-        HashSet<Integer> removeDup = new HashSet<>(all);
-        return all.size() - removeDup.size();
     }
 }

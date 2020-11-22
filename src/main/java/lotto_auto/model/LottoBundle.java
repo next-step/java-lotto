@@ -35,9 +35,9 @@ public class LottoBundle {
         return lottoTicketList;
     }
 
-    public LottoStatistic draw(LottoTicket winningLottoTicket) {
+    public LottoStatistic draw(LottoNumber lottoNumber) {
         return new LottoStatistic(lottoTicketList.stream()
-                .map(item -> item.draw(winningLottoTicket))
+                .map(item -> item.draw(lottoNumber))
                 .collect(Collectors.toList()));
     }
 }
