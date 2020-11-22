@@ -10,7 +10,6 @@ public class InputView {
     private static final String BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String PURCHASE_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
 
     private InputView() { }
 
@@ -22,8 +21,7 @@ public class InputView {
         System.out.println(PURCHASE_MANUAL_LOTTO_COUNT);
         return scanner.nextInt();
     }
-    public static String purchaseManualLott(){
-        System.out.println(PURCHASE_MANUAL_LOTTO);
+    public static String purchaseManualLotto(){
         return scanner.next();
     }
 

@@ -17,23 +17,20 @@ public class OutputView {
     public static final String NEGATIVE = "손해";
     public static final int RATE_PERCENT_STANDARD = 1;
 
-    private OutputView() {
+    public static final String PURCHASE_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
+
+    private OutputView() {}
+
+
+    public static void purchaseManualLotto(){
+        println(PURCHASE_MANUAL_LOTTO);
+    }
+    public static void purchaseLotto(int autoLottoTicketCount, int manualLottoTicketCount) {
+        println(printPurchaseLotto(autoLottoTicketCount, manualLottoTicketCount));
     }
 
-    public static void purchaseLotto(int lottoTicketCount) {
-        println(printPurchaseLotto(lottoTicketCount));
-    }
 
-    public static void purchaseLotto2(int autoLottoTicketCount, int manualLottoTicketCount) {
-        println(printPurchaseLotto2(autoLottoTicketCount, manualLottoTicketCount));
-    }
-
-    private static String printPurchaseLotto(int lottoTicketCount) {
-        return String.format(
-                String.valueOf(lottoTicketCount), PURCHASE_AMOUNT);
-    }
-
-    private static String printPurchaseLotto2(int autoLottoTicketCount, int manualLottoTicketCount) {
+    private static String printPurchaseLotto(int autoLottoTicketCount, int manualLottoTicketCount) {
         return String.format(
                 PURCHASE_AMOUNT, manualLottoTicketCount, autoLottoTicketCount);
     }
