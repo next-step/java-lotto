@@ -1,5 +1,6 @@
 package nextstep.step2;
 
+import nextstep.step2.domain.LottoNumber;
 import nextstep.step2.domain.Lotto;
 import nextstep.step2.domain.LottoPurchase;
 import nextstep.step2.view.InputView;
@@ -18,6 +19,10 @@ public class LottoGame {
 		List<Lotto> autoLottos = controller.startLottoGameGetLottos(purchase, resultView);
 
 		InputView inputWinningNumbers = new InputView(new Scanner(System.in));
-		controller.printLottoStaticsic(inputWinningNumbers.getInputLottoWinningNumbers(), purchase, autoLottos, resultView);
+		final String winningNumber = inputWinningNumbers.getInputLottoWinningNumbers();
+
+		InputView inputBonusNumber = new InputView(new Scanner(System.in));
+		final LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber.getInputLottoBonusNumber());
+		controller.printLottoStaticsic(winningNumber, bonusNumber, purchase, autoLottos, resultView);
 	}
 }

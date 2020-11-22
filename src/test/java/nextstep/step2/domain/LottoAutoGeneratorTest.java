@@ -14,18 +14,17 @@ public class LottoAutoGeneratorTest {
 	@Test
 	@DisplayName("로또 자동번호는 1~45 사이의 수이다.")
 	public void getLottoRandomNumberTest() {
-		Set<Integer> autoNumbers = underTest.getAutoNumbers();
+		Set<LottoNumber> autoNumbers = underTest.getAutoNumbers();
 		autoNumbers.forEach(number -> {
-			assertAll(() -> assertTrue(number <= 45),
-					() -> assertTrue(number > 0));
+			assertAll(() -> assertTrue(number.compareTo(LottoNumber.of(LottoNumber.LOTTO_MIN_NUMBER)) > 0),
+					() -> assertTrue(number.compareTo(LottoNumber.of(LottoNumber.LOTTO_MAX_NUMBER)) <= 0));
 		});
 	}
 
 	@Test
 	@DisplayName("로또 자동번호는 불변객체이다.")
 	public void getLottoNumberImmutableTest() {
-		Set<Integer> autoNumbers = new LottoAutoGenerator().getAutoNumbers();
 		Assertions.assertThatExceptionOfType(UnsupportedOperationException.class)
-				.isThrownBy(() -> autoNumbers.add(1));
+				.isThrownBy(() -> new LottoAutoGenerator().getAutoNumbers().add(LottoNumber.of(1)));
 	}
 }

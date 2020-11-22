@@ -1,20 +1,18 @@
 package nextstep.step2.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoAutoGenerator {
-	private static final int RANDOM_COUNT = 6;
-	private static final List<Integer>  rangeLottoNumbers = IntStream.range(1, 45).boxed().collect(Collectors.toList());
+	private static final List<Integer>  rangeLottoNumbers = IntStream.range(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
 
-	public Set<Integer> getAutoNumbers() {
+	public Set<LottoNumber> getAutoNumbers() {
 		Collections.shuffle(rangeLottoNumbers);
-		return rangeLottoNumbers.stream()
-				.limit(RANDOM_COUNT)
-				.sorted()
-				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
+		Set<LottoNumber> autoLottoNumbers = rangeLottoNumbers.stream()
+				.limit(Lotto.LOTTO_SIZE)
+				.map(LottoNumber::of)
+				.collect(Collectors.toSet());
+		return Collections.unmodifiableSet(new TreeSet<>(autoLottoNumbers));
 	}
 }

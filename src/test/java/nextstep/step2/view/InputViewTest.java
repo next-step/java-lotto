@@ -42,4 +42,20 @@ public class InputViewTest {
 				.isThrownBy(() -> underTest.getInputLottoNumbers())
 				.withMessage("지난주 로또 당첨 번호는 필수입니다.");
 	}
+
+	@Test
+	@DisplayName("보너스 번호 입력메시지 테스트")
+	public void inputLottoBonusTest() {
+		InputView underTest = new InputView(new Scanner("7"));
+		assertThat(underTest.getInputLottoBonusNumber()).isEqualTo(7);
+	}
+
+	@Test
+	@DisplayName("잘못된 보너스 번호 입력 테스트")
+	public void inputWrongLottoBonusTest() {
+		InputView underTest = new InputView(new Scanner(""));
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> underTest.getInputLottoBonusNumber())
+				.withMessage("보너스 번호는 필수입니다.");
+	}
 }
