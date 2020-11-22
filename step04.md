@@ -1,6 +1,90 @@
 # 🚀 4단계 - 로또(수동)
 
+## 저번 단계에서 개선할 것
+- 2등 출력 
+- 3단계 바탕으로 기능 추가해 보기
+
+## 피드백 정리
+### static 멤버들만 있는 클래스 생성자 방어로직
+
+###
+```
+return of(
+        lottoBalls.stream()
+                .map(LottoBall::valueOf)
+                .collect(Collectors.toList())
+);
+return lottoBalls.stream()
+                .map(LottoBall::valueOf)
+                .collect(collectionAndThen(toList(), Lotto::of));
+```
+
+### enum set, enum map 
+
 ## 기능 정리
+- `LottoBall` 1 -45 LottoBall 의 숫자를 가지고 있는 클래스
+    - public static LottoBall[] lottoNumbers
+    - private LottoBall(int number)
+    - public static LottoBall valueOf(int number)
+    - private static void validate(int number) 
+        - 1 ~ 45 사이 범위를 초과하면 에러를 던지는 기능
+- `Lotto` 
+    - public static Lotto of(List<Integer> lotto)
+    - public int matchCount(Lotto targetLotto)
+    - public boolean isContaining(LottoBall lottoBall)
+    - SortedSet
+    - private static void validateUnique(List<LottoBall> lottoBalls)
+    - private static void validateSize(List<LottoBall> lottoBalls)
+    
+- `LottoGenerator` lotto 번호들을 생성하는 기능
+    - public static Lotto generate()
+    
+- `WinningComposer`
+    - private WinningComposer(Lotto winningLotto, LottoBall bonusBall)
+    - public static WinningComposer of(Lotto winningLotto, LottoBall bonusBall)
+    - private static void validateBonusBall(Lotto winningLotto, LottoBall bonusBall)
+    - public Map<Rank, Integer> calculateMatchOfCount(Lottos lottos)
+    
+- `Lottos`
+    - public static Lottos of(List<Lotto> lottos)
+    - public Integer size()
+
+- `LottoSeller` 로또 판매기 
+    - static final int priceOfLotto;
+    - public static Lottos generateLottos(int payment)
+    - private static int calculateCountOfLotto(int payment)
+    - private static void validatePayment(int payment);
+
+- `RankCounter`
+    - EnumMap<Rank, Integer> rankCounter = new EnumMap<>(Rank.class);
+    - private RankCounter()
+    - public static RankCounter of()
+    - public Integer getCount(Rank key)
+    - public void put(Rank key, Integer value)
+    - public void increase(Rank key)
+    - public Integer calculateRewardAll() 
+    - public Integer getTotalCount() 
+    - public double calculateGainRate() 
+
+- `LottoNumberTokenizer`
+    - public static Lotto execute(String winningNumbers)
+
+- `InputView`
+    - public static int payLotto() 로또 구입 금액을 지불하는 기능
+    - 수동으로 구매할 로또 수를 입력해 주세요.
+        - 구매할 수 있는 로또 수보다 많으면 에러
+        - 음수일 때 에러처리
+    - 수동으로 구매할 번호를 입력해 주세요.
+    - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
+    - public static String pickBonusBall() 보너스 볼을 입력하는 기능
+    
+- `ResultView`
+    - 수동으로 3장, 자동으로 11개를 구매했습니다.
+    - public static void showLottoCount(int lottoCount) 사용자가 lotto 를 몇개 구매하였는지 보여주는 기능
+    - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
+    - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능
+    - public static void showYield(double yield) 수익률을 보여주는 기능
+    
 
 
 ## 기능 요구사항
