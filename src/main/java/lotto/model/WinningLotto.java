@@ -2,6 +2,8 @@ package lotto.model;
 
 import lotto.strategy.DrawingStrategy;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
@@ -27,12 +29,16 @@ public class WinningLotto extends Lotto {
                 .mapToInt(this::calculateReword)
                 .sum();
 
-        return Math.floor(((double) totalReword / amount) * 100) / 100;
+        BigDecimal safeReword = BigDecimal.valueOf((double) totalReword);
+        BigDecimal safeAmount = BigDecimal.valueOf(amount);
+
+        return safeReword.divide(safeAmount,2, RoundingMode.FLOOR)
+                .doubleValue();
     }
 
 
-    private int calculateReword(Map.Entry<Hit, Integer> e) {
-        return e.getKey().calculateReword(e.getValue());
+    private int calculateReword(Map.Entry<Hit, Integer> hits) {
+        return hits.getKey().calculateReword(hits.getValue());
     }
 
     @Override

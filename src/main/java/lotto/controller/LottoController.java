@@ -9,20 +9,18 @@ import java.util.*;
 
 public class LottoController {
 
-    private InputView inputView = new InputView();
-    private ResultView resultView = new ResultView();
     private Amount amount;
     private Lottoes lottoes;
     private Lotto winningLotto;
 
     public void run() {
 
-        String inputAmount = inputView.printInputMessageNGetAmount();
+        String inputAmount = InputView.printInputMessageNGetAmount();
         amount = new Amount(inputAmount);
 
         buyLottoes();
 
-        String inputWinnerNumber = inputView.printInputMessageNGetWinnerNumbers();
+        String inputWinnerNumber = InputView.printInputMessageNGetWinnerNumbers();
         winningLotto = new WinningLotto(new ManualStrategy(inputWinnerNumber));
 
         lottery();
@@ -31,8 +29,8 @@ public class LottoController {
     private void buyLottoes() {
         lottoes = new Lottoes(amount.getPrePurchaseAmount(0, Lotto.PRICE));
         amount.pay(lottoes.getLottoCount() * Lotto.PRICE);
-        resultView.printBuyMessage(lottoes.getLottoCount());
-        resultView.printLottoes(lottoes.getLottoes());
+        ResultView.printBuyMessage(lottoes.getLottoCount());
+        ResultView.printLottoes(lottoes.getLottoes());
     }
 
     private void lottery() {
@@ -43,8 +41,8 @@ public class LottoController {
         Map<Hit, Integer> winnerNumbers = ((WinningLotto) winningLotto).getResult(lottoesNumbers);
         double earningRate = ((WinningLotto) winningLotto).getEarningRate(prePurchaseAmount, lottoesNumbers);
 
-        resultView.printResult(winnerNumbers);
-        resultView.printEarningRate(earningRate);
+        ResultView.printResult(winnerNumbers);
+        ResultView.printEarningRate(earningRate);
     }
 
 }

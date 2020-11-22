@@ -33,8 +33,8 @@ public class LottoTest {
         int threshold = getThreshold();
 
         SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
-
-        assertThat(new ManualStrategy(testNumbers)).isNotNull();
+        
+        assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
     }
 
     @Test

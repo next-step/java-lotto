@@ -5,6 +5,7 @@ import lotto.model.Hit;
 import lotto.model.Lottoes;
 import lotto.model.WinningLotto;
 import lotto.strategy.ManualStrategy;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.CommonUtils;
 
@@ -14,9 +15,16 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
+    private int[] winningNumbes;
+
+    @BeforeEach
+    void init() {
+        winningNumbes = new int[]{1,2,3,4,5,6};
+    }
+
     @Test
     public void 추첨_결과_테스트() {
-        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,6})));
+        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(winningNumbes)));
 
         CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
         CandidateLotto testHit32 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
@@ -36,7 +44,7 @@ public class WinningLottoTest {
 
     @Test
     public void 수익률_테스트() {
-        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,4,5,6})));
+        WinningLotto winnerNumbers = new WinningLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(winningNumbes)));
 
         CandidateLotto testHit3 = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{1,2,3,45,35,36})));
         CandidateLotto testHitNone = new CandidateLotto(new ManualStrategy(CommonUtils.arrayTosotedSet(new int[]{21,22,23,24,35,36})));

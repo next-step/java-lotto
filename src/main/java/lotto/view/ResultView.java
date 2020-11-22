@@ -5,7 +5,6 @@ import util.CommonUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 
 public class ResultView {
@@ -18,34 +17,36 @@ public class ResultView {
 
     private final static String LINE_SEPARATOR = "---------";
 
-    public void printBuyMessage(int count) {
+    private ResultView(){}
+
+    public static void printBuyMessage(int count) {
         System.out.println(count + BUY_MESSAGE);
     }
 
-    public void printLottoes(List<SortedSet<Integer>> lottos) {
+    public static void printLottoes(List<SortedSet<Integer>> lottos) {
         lottos.stream()
                 .map(CommonUtils::sortedSetToArray)
-                .map(this::convertNumbersFormat)
+                .map(ResultView::convertNumbersFormat)
                 .forEach(System.out::println);
     }
 
-    public void printResult(Map<Hit, Integer> result) {
+    public static void printResult(Map<Hit, Integer> result) {
         System.out.println(RESULT_MESSAGE);
         System.out.println(LINE_SEPARATOR);
         result.entrySet().stream()
-                .map(this::convertResultFormat)
+                .map(ResultView::convertResultFormat)
                 .forEach(System.out::println);
     }
 
-    public void printEarningRate(double earningRate) {
+    public static void printEarningRate(double earningRate) {
         System.out.println(String.format(EARNING_RATE_FORMAT, earningRate));
     }
 
-    private String convertResultFormat(Map.Entry<Hit, Integer> e){
+    private static String convertResultFormat(Map.Entry<Hit, Integer> e){
         return String.format(RESULT_FORMAT, e.getKey().toString(), e.getValue());
     }
 
-    private String convertNumbersFormat(String[] strings) {
+    private static String convertNumbersFormat(String[] strings) {
         return String.format(NUMBERS_FORMAT, String.join(NUMBERS_DELIMITER, strings));
     }
 
