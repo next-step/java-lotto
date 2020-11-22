@@ -3,6 +3,8 @@ package step03.view;
 import java.util.Scanner;
 
 public class InputView {
+
+    private InputView() {}
     private static final String  LOTTO_BUY_PAYING_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String  LOTTO_CREATE_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String  PICK_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";

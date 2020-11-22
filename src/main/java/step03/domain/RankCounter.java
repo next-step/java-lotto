@@ -3,6 +3,7 @@ package step03.domain;
 import step03.Rank;
 import utils.DoubleParser;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +12,7 @@ public class RankCounter {
     Map<Rank, Integer> rankCounter;
 
     private RankCounter() {
-        Map<Rank, Integer> temp = new HashMap<>();
+        EnumMap<Rank, Integer> temp = new EnumMap<>(Rank.class);
         Rank.stream().forEach(rank -> temp.put(rank, 0));
         rankCounter = temp;
     }

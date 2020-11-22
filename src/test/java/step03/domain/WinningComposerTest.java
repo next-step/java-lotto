@@ -21,23 +21,23 @@ public class WinningComposerTest {
 
     @BeforeEach
     void setup() {
-        winningLotto = Lotto.intOf(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         bonusBall = LottoBall.valueOf(7);
         lottos = Lottos.of(Arrays.asList(
-                Lotto.intOf(Arrays.asList(8, 21, 23, 41, 42, 43)),
-                Lotto.intOf(Arrays.asList(3, 5, 11, 16, 32, 38)),
-                Lotto.intOf(Arrays.asList(7, 11, 16, 35, 36, 44)),
-                Lotto.intOf(Arrays.asList(1, 8, 11, 31, 41, 42)),
-                Lotto.intOf(Arrays.asList(13, 14, 16, 38, 42, 45)),
-                Lotto.intOf(Arrays.asList(7, 11, 30, 40, 42, 43)),
-                Lotto.intOf(Arrays.asList(2, 13, 22, 32, 38, 45)),
-                Lotto.intOf(Arrays.asList(23, 25, 33, 36, 39, 41)),
-                Lotto.intOf(Arrays.asList(1, 3, 5, 14, 22, 45)),
-                Lotto.intOf(Arrays.asList(5, 9, 38, 41, 43, 44)),
-                Lotto.intOf(Arrays.asList(2, 8, 9, 18, 19, 21)),
-                Lotto.intOf(Arrays.asList(13, 14, 18, 21, 23, 35)),
-                Lotto.intOf(Arrays.asList(17, 21, 29, 37, 42, 45)),
-                Lotto.intOf(Arrays.asList(3, 8, 27, 30, 35, 44))
+                Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 43)),
+                Lotto.of(Arrays.asList(3, 5, 11, 16, 32, 38)),
+                Lotto.of(Arrays.asList(7, 11, 16, 35, 36, 44)),
+                Lotto.of(Arrays.asList(1, 8, 11, 31, 41, 42)),
+                Lotto.of(Arrays.asList(13, 14, 16, 38, 42, 45)),
+                Lotto.of(Arrays.asList(7, 11, 30, 40, 42, 43)),
+                Lotto.of(Arrays.asList(2, 13, 22, 32, 38, 45)),
+                Lotto.of(Arrays.asList(23, 25, 33, 36, 39, 41)),
+                Lotto.of(Arrays.asList(1, 3, 5, 14, 22, 45)),
+                Lotto.of(Arrays.asList(5, 9, 38, 41, 43, 44)),
+                Lotto.of(Arrays.asList(2, 8, 9, 18, 19, 21)),
+                Lotto.of(Arrays.asList(13, 14, 18, 21, 23, 35)),
+                Lotto.of(Arrays.asList(17, 21, 29, 37, 42, 45)),
+                Lotto.of(Arrays.asList(3, 8, 27, 30, 35, 44))
         ));
     }
 

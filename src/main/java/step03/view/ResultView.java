@@ -7,6 +7,8 @@ import step03.domain.RankCounter;
 import java.util.List;
 
 public class ResultView {
+
+    private ResultView() {}
     private static final String LOTTO_BUY_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String HORIZON = "---------";

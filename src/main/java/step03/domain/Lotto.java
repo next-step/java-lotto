@@ -6,6 +6,9 @@ import exception.InValidSizeOfLottoException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
@@ -16,22 +19,16 @@ public class Lotto {
         this.lotto = new TreeSet(lottoBalls);
     }
 
-    public static Lotto of(List<LottoBall> lottoBalls) {
-        return new Lotto(lottoBalls);
-    }
-
-    public static Lotto intOf(List<Integer> lottoBalls) {
-        return of(
-                lottoBalls.stream()
-                        .map(LottoBall::valueOf)
-                        .collect(Collectors.toList())
-        );
+    public static Lotto of(List<Integer> lottoBalls) {
+        return lottoBalls.stream()
+                .map(LottoBall::valueOf)
+                .collect(collectingAndThen(toList(), Lotto::new));
     }
 
     public int matchCount(Lotto targetLotto) {
-        SortedSet<LottoBall> temp = new TreeSet<>(targetLotto.lotto);
-        temp.retainAll(lotto);
-        return temp.size();
+        return (int)lotto.stream()
+                .filter(targetLotto::isContaining)
+                .count();
     }
 
     private static void validate(List<LottoBall> lottoBalls) {

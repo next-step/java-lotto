@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoSeller {
     public static final int PRICE_OF_LOTTO = 1000;
 
@@ -13,12 +16,10 @@ public class LottoSeller {
         validatePayment(payment);
         int countOfLottos = calculateCountOfLottos(payment);
 
-        List<Lotto> lottos = Stream.iterate(0, n -> n + 1)
+        return Stream.iterate(0, n -> n + 1)
                 .limit(countOfLottos)
                 .map(key -> LottoGenerator.generate())
-                .collect(Collectors.toList());
-
-        return Lottos.of(lottos);
+                .collect(collectingAndThen(toList(), Lottos::of));
     }
 
     private static int calculateCountOfLottos(int payment) {

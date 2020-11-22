@@ -20,7 +20,6 @@ public class LottoGenerator {
         return Lotto.of(
                 RANGE.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .map(LottoBall::valueOf)
                 .collect(Collectors.toList())
         );
     }

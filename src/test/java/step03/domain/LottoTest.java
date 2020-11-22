@@ -19,18 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
-    List<LottoBall> lottoBalls;
+    List<Integer> lottoBalls;
 
     @BeforeEach
     void setup() {
-        lottoBalls = Arrays.asList(
-                LottoBall.valueOf(8),
-                LottoBall.valueOf(21),
-                LottoBall.valueOf(23),
-                LottoBall.valueOf(41),
-                LottoBall.valueOf(42),
-                LottoBall.valueOf(43)
-        );
+        lottoBalls = Arrays.asList(8, 21, 23, 41, 42, 43);
     }
 
     @DisplayName("생성자")
@@ -41,12 +34,12 @@ public class LottoTest {
 
     private static Stream<Arguments> provideTargetLottoResult() {
         return Stream.of(
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 1, 2, 3, 4, 5)), 1),
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 21, 2, 3, 4, 5)), 2),
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 21, 23, 3, 4, 5)), 3),
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 21, 23, 41, 4, 5)), 4),
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 21, 23, 41, 42, 5)), 5),
-                Arguments.of(Lotto.intOf(Arrays.asList(8, 21, 23, 41, 42, 43)), 6)
+                Arguments.of(Lotto.of(Arrays.asList(8, 1, 2, 3, 4, 5)), 1),
+                Arguments.of(Lotto.of(Arrays.asList(8, 21, 2, 3, 4, 5)), 2),
+                Arguments.of(Lotto.of(Arrays.asList(8, 21, 23, 3, 4, 5)), 3),
+                Arguments.of(Lotto.of(Arrays.asList(8, 21, 23, 41, 4, 5)), 4),
+                Arguments.of(Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 5)), 5),
+                Arguments.of(Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 43)), 6)
         );
     }
 
@@ -77,55 +70,28 @@ public class LottoTest {
     @DisplayName("로또 번호의 정렬")
     @Test
     void test_arrange() {
-        assertThat(Lotto.of(Arrays.asList(
-                LottoBall.valueOf(21),
-                LottoBall.valueOf(8),
-                LottoBall.valueOf(43),
-                LottoBall.valueOf(23),
-                LottoBall.valueOf(42),
-                LottoBall.valueOf(41)
-        ))).isEqualTo(Lotto.of(lottoBalls));
+        assertThat(Lotto.of(Arrays.asList(21, 8, 43, 23, 42, 41)))
+                .isEqualTo(Lotto.of(lottoBalls));
     }
 
     @DisplayName("중복값 예외 처리")
     @Test
     void test_validateUnique() {
         assertThatExceptionOfType(DuplicatedLottoNumberException.class)
-                .isThrownBy(() -> Lotto.of(Arrays.asList(
-                        LottoBall.valueOf(8),
-                        LottoBall.valueOf(8),
-                        LottoBall.valueOf(43),
-                        LottoBall.valueOf(23),
-                        LottoBall.valueOf(42),
-                        LottoBall.valueOf(41)
-                )));
+                .isThrownBy(() -> Lotto.of(Arrays.asList(8, 8, 42, 23, 42, 41)));
     }
 
-    private static Stream<List<LottoBall>> provideInvalidSizeOfLottoResult() {
+    private static Stream<List<Integer>> provideInvalidSizeOfLottoResult() {
         return Stream.of(
-                Arrays.asList(
-                        LottoBall.valueOf(8),
-                        LottoBall.valueOf(43),
-                        LottoBall.valueOf(23),
-                        LottoBall.valueOf(42),
-                        LottoBall.valueOf(41)
-                ),
-                Arrays.asList(
-                        LottoBall.valueOf(8),
-                        LottoBall.valueOf(43),
-                        LottoBall.valueOf(23),
-                        LottoBall.valueOf(42),
-                        LottoBall.valueOf(41),
-                        LottoBall.valueOf(45),
-                        LottoBall.valueOf(1)
-                )
+                Arrays.asList(8, 42, 23, 40, 41),
+                Arrays.asList(8, 42, 23, 40, 41, 45, 1)
         );
     }
 
     @DisplayName("lotto size가 6이 아니면 예외 처리")
     @ParameterizedTest
     @MethodSource("provideInvalidSizeOfLottoResult")
-    void test_validateSize(List<LottoBall> lotto) {
+    void test_validateSize(List<Integer> lotto) {
         assertThatExceptionOfType(InValidSizeOfLottoException.class)
                 .isThrownBy(() -> Lotto.of(lotto));
     }
