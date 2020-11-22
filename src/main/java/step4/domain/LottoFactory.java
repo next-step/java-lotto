@@ -2,6 +2,7 @@ package step4.domain;
 
 import step4.exception.LottoMoneyException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,7 +18,14 @@ public class LottoFactory {
                         .mapToObj(i -> new Lotto(lottoMakeStrategy.generateLottoNumbers()))
                         .collect(Collectors.toList()));
     }
+    public LottoFactory(final AutoLottoFactory autoLottoFactory, final ManualLottoFactory manualLottoFactory) {
+        List<Lotto> lottoList = new ArrayList<>();
+        manualLottoFactory.addList(lottoList);
+        autoLottoFactory.addList(lottoList);
 
+        lottos = new Lottos(lottoList);
+
+    }
     public LottoMatcher matchNumbers(Lotto lastWeekLottoNums, LottoNumber bonusCount) {
         return LottoMatcher.ofMatch(lottos, LastWeekLotto.of(lastWeekLottoNums, bonusCount));
     }
