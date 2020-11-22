@@ -6,53 +6,48 @@ import step4.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoController {
 
-    private LottoController() {
-    }
+    private LottoController() { }
 
     public static void runLotto() {
         int lottoPurchaseMoney = InputView.purchaseLotto();
 
-        LottoFactory lottoFactory = new LottoFactory(lottoPurchaseMoney, RandomLottoGenerator.of());
+        int manualCount = InputView.purchaseManualCount();
 
-        OutputView.purchaseLotto(lottoFactory.getLottoCount());
+        OutputView.purchaseManualLotto();
+
+        int autoPayed = getAutoLottoPayed(lottoPurchaseMoney, manualCount);
+
+        LottoFactory lottoFactory = new LottoFactory(
+                new AutoLottoFactory(autoPayed, RandomLottoGenerator.of()), new ManualLottoFactory(getManualLottoList(manualCount)));
+
+        OutputView.purchaseLotto(getAutoCount(autoPayed), manualCount);
         OutputView.printLottoTickets(lottoFactory.getLottoNumbersListToString());
 
         String lastWeekLotto = InputView.lastWeekLotto();
-        int bonusBall = InputView.initBonusBall();
-        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
+        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(
+                LottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(InputView.initBonusBall()));
 
         OutputView.printStatics(lottoMatcher.getResult());
 
         OutputView.printInvestRate(lottoFactory.getLottoRatio(lottoMatcher, lottoPurchaseMoney));
     }
 
-    public static void runLotto2() {
-        int lottoPurchaseMoney = InputView.purchaseLotto();
+    private static int getAutoCount(int autoPayed) {
+        return autoPayed / 1000;
+    }
 
-        int manualCount = InputView.purchaseManualCount();
-        List<String> strLottoList = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            strLottoList.add(InputView.purchaseManualLott());
-        }
-        ManualLottoFactory manualLottoFactory = new ManualLottoFactory(strLottoList);
+    private static int getAutoLottoPayed(int lottoPurchaseMoney, int manualCount) {
+        return lottoPurchaseMoney - manualCount * 1000;
+    }
 
-        int autoPay = lottoPurchaseMoney - manualCount * 1000;
-        AutoLottoFactory autoLottoFactory = new AutoLottoFactory(autoPay, RandomLottoGenerator.of());
-
-        LottoFactory lottoFactory = new LottoFactory(autoLottoFactory, manualLottoFactory);
-
-        OutputView.purchaseLotto2(autoPay/1000 , manualCount);
-        OutputView.printLottoTickets(lottoFactory.getLottoNumbersListToString());
-
-        String lastWeekLotto = InputView.lastWeekLotto();
-        int bonusBall = InputView.initBonusBall();
-        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
-
-        OutputView.printStatics(lottoMatcher.getResult());
-
-        OutputView.printInvestRate(lottoFactory.getLottoRatio(lottoMatcher, lottoPurchaseMoney));
+    private static List<String> getManualLottoList(int manualCount) {
+        List<String> lottoList = new ArrayList<>();
+        IntStream.range(0, manualCount)
+                .forEach(i -> lottoList.add(InputView.purchaseManualLotto()));
+        return lottoList;
     }
 }
