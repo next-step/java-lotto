@@ -1,10 +1,14 @@
 package view;
 
 import domain.LottoPrize;
+import domain.LottoStandard;
 import domain.Lottos;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
+
+import static domain.LottoStandard.*;
 
 public class ResultView {
     private final String DISPLAY_QUANTITY = "%s개를 구매했습니다.";
@@ -13,10 +17,6 @@ public class ResultView {
     private final String STATISTIC_MENTION = "%d개 일치 (%d원)- %d개";
     private final String PROFIT_MENTION = "총 수익률은 %.2f입니다.";
     private final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-
-    private final int PRIZE_BEGINNING = 3;
-    private final int PRIZE_ENDING = 7;
-    private final int PROFIT_STANDARD = 1;
 
     public void displayLottoQuantity(int quantity) {
         System.out.println(String.format(DISPLAY_QUANTITY, quantity));
@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     public void displayStatistic(Map<Integer, Integer> lottoStatistics) {
-        IntStream.range(PRIZE_BEGINNING, PRIZE_ENDING)
+        IntStream.range(PRIZE_BEGINNING.getStandardNumber(), PRIZE_ENDING.getStandardNumber())
                 .forEach(key -> System.out.println(
                         String.format(STATISTIC_MENTION,
                                 key,
@@ -46,7 +46,7 @@ public class ResultView {
 
     public void displayProfit(double profit) {
         System.out.print(String.format(PROFIT_MENTION, profit));
-        if(profit < PROFIT_STANDARD) {
+        if(profit < PROFIT_STANDARD.getStandardNumber()) {
             System.out.println(LOSS);
         }
     }

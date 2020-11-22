@@ -3,7 +3,6 @@ package domain;
 import java.util.Map;
 
 public class LottoProfit {
-
     private double profit;
 
     public LottoProfit(double profit) {
