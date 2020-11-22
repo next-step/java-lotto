@@ -26,9 +26,10 @@ public enum LottoResult {
         return prize;
     }
 
-    public static LottoResult check(Lotto lotto, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
-        int winningCount = lottoWinningNumber.sameNumberOfCount(lotto.getLottoNumbers());
-        if(lottoWinningNumber.isMatchUpToBonusNumber(lotto.getLottoNumbers(),bonusNumber)) {
+    public static LottoResult check(Lotto lotto, String winningNumber, int bonusNumber) {
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lotto.getLottoNumbers());
+        int winningCount = lottoWinningNumber.sameNumberOfCount(winningNumber);
+        if(lottoWinningNumber.isMatchUpToBonusNumber(bonusNumber)) {
             return LottoResult.valueOf(winningCount,true);
         }
         return LottoResult.valueOf(winningCount,false);

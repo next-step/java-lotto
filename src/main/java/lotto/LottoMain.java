@@ -20,7 +20,7 @@ public class LottoMain {
         int bonusNumber = InputView.inputBonusLottoNumber();
 
         List<LottoResult> lottoResults
-                = LottoVendingMachine.lottoWinningResults(lottos,new LottoWinningNumber(lottoNumber),bonusNumber);
+                = LottoVendingMachine.lottoWinningResults(lottos,lottoNumber,bonusNumber);
 
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
         BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);

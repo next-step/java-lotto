@@ -22,13 +22,13 @@ public class LottoVendingMachine {
         return new Lottos(getLottoList(price));
     }
 
-    public static List<LottoResult> lottoWinningResults(Lottos lottos, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
-        return getLottoResultList(lottos,lottoWinningNumber,bonusNumber);
+    public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumber, int bonusNumber) {
+        return getLottoResultList(lottos,winningNumber,bonusNumber);
     }
 
-    private static List<LottoResult> getLottoResultList(Lottos lottos, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
+    private static List<LottoResult> getLottoResultList(Lottos lottos, String winningNumber, int bonusNumber) {
         return lottos.getLottos().stream()
-                .map(e -> LottoResult.check(e,lottoWinningNumber,bonusNumber))
+                .map(e -> LottoResult.check(e,winningNumber,bonusNumber))
                 .collect(Collectors.toList());
     }
 
