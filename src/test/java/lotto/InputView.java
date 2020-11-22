@@ -6,7 +6,12 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public int enterLottoAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(Message.ENTER_PURCHASE_AMOUNT);
         return scanner.nextInt();
+    }
+
+    public String enterWinningNumbers() {
+        System.out.println(Message.ENTER_WINNING_NUMBERS);
+        return scanner.nextLine();
     }
 }
