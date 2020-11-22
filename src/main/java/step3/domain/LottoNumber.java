@@ -2,6 +2,10 @@ package step3.domain;
 
 import step3.util.StringUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -19,6 +23,7 @@ public class LottoNumber {
         isEmpty();
         lottoNumberValidate();
         lottoNumberSizeValidate();
+        bonusNumberValidate();
     }
 
     public static LottoNumber of(String lastWeekNumber, String bonusNumber) {
@@ -52,6 +57,15 @@ public class LottoNumber {
         String[] lottoNumbers = this.lastWeekNumber.split(LOTTO_SPLIT_COMMA);
         if (lottoNumbers.length != LOTTO_LIMIT_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 6보다 작거나 클 수 없습니다.");
+        }
+    }
+
+    private void bonusNumberValidate() {
+        Pattern pattern = Pattern.compile("([0-9])");
+        Matcher matcher = pattern.matcher(this.bonusNumber);
+
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("숫자만 입력 가능합니다.");
         }
     }
 }
