@@ -25,10 +25,6 @@ public enum LottoResult {
         return money;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
     public int getMatchNum() {
         return matchNum;
     }
@@ -38,6 +34,10 @@ public enum LottoResult {
         this.money = money;
         this.rank = rank;
         this.matchNum = matchNum;
+    }
+
+    public boolean isRank(int rank) {
+        return this.rank == rank;
     }
 
     public static LottoResult valueOfMatchNum(int matchNum) {

@@ -1,7 +1,6 @@
 package lotto_auto.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResultList {
 
@@ -16,9 +15,8 @@ public class LottoResultList {
     }
 
     public int getRankLottoCount(int rank) {
-        List<LottoResult> collect = this.lottoResultList.stream()
-                .filter(item -> item.getRank() == rank)
-                .collect(Collectors.toList());
-        return collect.size();
+        return (int) this.lottoResultList.stream()
+                .filter(item -> item.isRank(rank))
+                .count();
     }
 }
