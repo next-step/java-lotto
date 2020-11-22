@@ -33,4 +33,25 @@ public class WinningNumber {
     public List<Integer> getValue() {
         return value;
     }
+
+    public Rank getRank(List<Integer> numbers) {
+        return Rank.value(getMatchingNumberCount(numbers));
+    }
+
+    private int getMatchingNumberCount(List<Integer> numbers) {
+        int matchingNumberCount = 0;
+        for (Integer integer : value) {
+            matchingNumberCount += isExists(numbers, integer);
+        }
+        return matchingNumberCount;
+    }
+
+    private int isExists(List<Integer> numbers, int winningNumber) {
+        if (numbers.contains(winningNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+
 }
