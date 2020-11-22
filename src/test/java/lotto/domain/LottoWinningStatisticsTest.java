@@ -7,11 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -46,17 +42,28 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 6개일치 3개일치 건수 검증")
     void lotto_winningStatistics_matchCount(String winningNumber) {
         //given
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
 
         //when
-        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
-        int first = resultMap.get(LottoResult.FIRST).get();
-        int fourth = resultMap.get(LottoResult.FOURTH).get();
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
+        LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
+        Set<LottoWinningResult> winningResultList = winningResults.getLottoWinningResults();
+
+        int first = winningResultList.stream()
+                .filter(e -> e.getLottoResult() == LottoResult.FIRST)
+                .findFirst()
+                .get()
+                .getCount();
+        int fifth = winningResultList.stream()
+                .filter(e -> e.getLottoResult() == LottoResult.FIFTH)
+                .findFirst()
+                .get()
+                .getCount();
 
         //then
         assertAll(
                 () -> assertThat(first).isEqualTo(1),
-                () -> assertThat(fourth).isEqualTo(1)
+                () -> assertThat(fifth).isEqualTo(1)
         );
     }
 
@@ -65,11 +72,12 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 상금금액 일치 확인")
     void lotto_winningStatistics_profit(String winningNumber) {
         //given
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
 
         //when
-        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(lottoResults);
-        BigInteger profit =  LottoWinningStatistics.getProfit(resultMap);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
+        LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
+        BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);
 
         //then
         assertThat(profit.intValue()).isEqualTo(2000005000);
@@ -80,12 +88,13 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 2등 당첨금 확인")
     void lotto_secondResult_profit(String winningNumber) {
         //given
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,6);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
 
         //when
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,6);
         List<LottoResult> secondResult = Collections.singletonList(lottoResults.get(0));
-        Map<LottoResult, AtomicInteger> resultMap = LottoWinningStatistics.getStatistics(secondResult);
-        BigInteger profit =  LottoWinningStatistics.getProfit(resultMap);
+        LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(secondResult);
+        BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);
 
         //then
         assertThat(profit.intValue()).isEqualTo(30000000);

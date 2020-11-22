@@ -2,41 +2,38 @@ package lotto.domain;
 
 import java.math.BigInteger;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
-import static lotto.domain.LottoRuleConfig.*;
 
 public class LottoWinningStatistics {
 
     private LottoWinningStatistics() {}
 
-    public static Map<LottoResult, AtomicInteger> getStatistics(List<LottoResult> lottoResults) {
-        Map<LottoResult, AtomicInteger> map = initResultMap();
+    public static LottoWinningResults getStatistics(List<LottoResult> lottoResults) {
+        Map<LottoResult,LottoWinningResult> lottoWinningResults = initWinningResults();
         lottoResults.stream()
-                .filter(e -> e.getWinningCount() != IGNORE_LOTTO_RESULT_ZERO_RANK)
-                .forEach(result -> map.get(result).incrementAndGet());
-        return map;
+                .filter(e -> e != LottoResult.NONE)
+                .forEach(e -> lottoWinningResults.get(e).incrementOfCount());
+        return new LottoWinningResults(new HashSet<>(lottoWinningResults.values()));
     }
 
-    public static BigInteger getProfit(Map<LottoResult, AtomicInteger> statistics) {
-        List<BigInteger> numbers = statistics.entrySet().stream()
-                .filter(e -> e.getValue().intValue() > 0)
-                .map(k -> getSumPrize(k.getKey(),k.getValue()))
+    public static BigInteger getProfit(LottoWinningResults winningResults) {
+        List<BigInteger> numbers = winningResults.getLottoWinningResults().stream()
+                .filter(e -> e.getCount() > 0)
+                .map(e -> getSumPrize(e.getLottoResult(),e.getCount()))
                 .collect(Collectors.toList());
         return numbers.stream().reduce(BigInteger.ZERO, BigInteger::add);
     }
 
-    private static BigInteger getSumPrize(LottoResult lottoResult, AtomicInteger integer) {
-        return BigInteger.valueOf(lottoResult.getPrize() * integer.intValue());
+    private static Map<LottoResult,LottoWinningResult> initWinningResults() {
+        Map<LottoResult,LottoWinningResult> lottoWinningResults = new LinkedHashMap<>();
+        reverseLottoResultValues().stream()
+            .filter(e -> e != LottoResult.NONE)
+            .forEach(e -> lottoWinningResults.put(e,new LottoWinningResult(e)));
+        return lottoWinningResults;
     }
 
-    private static Map<LottoResult, AtomicInteger> initResultMap() {
-        Map<LottoResult, AtomicInteger> map = new LinkedHashMap<>();
-        reverseLottoResultValues().stream()
-                .filter(e -> e.getWinningCount() != IGNORE_LOTTO_RESULT_ZERO_RANK)
-                .forEach(result -> map.put(result,new AtomicInteger()));
-        return map;
+    private static BigInteger getSumPrize(LottoResult lottoResult, int count) {
+        return BigInteger.valueOf(lottoResult.getPrize() * count);
     }
 
     private static List<LottoResult> reverseLottoResultValues() {

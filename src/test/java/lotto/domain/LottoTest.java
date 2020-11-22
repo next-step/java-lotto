@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -82,18 +81,21 @@ public class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6,10:FIRST",
-            "1,2,3,4,5,9,5:SECOND",
-            "1,2,3,4,5,9,10:THIRD",
-            "1,2,3,4,8,9,10:FOURTH",
-            "1,2,3,7,8,9,10:FIFTH"
+            "1,2,3,4,5,6:10:FIRST",
+            "1,2,3,4,5,9:5:SECOND",
+            "1,2,3,4,5,9:10:THIRD",
+            "1,2,3,4,8,9:10:FOURTH",
+            "1,2,3,7,8,9:10:FIFTH"
     }, delimiter = ':')
     @DisplayName("Lotto 당첨번호+보너스번호 등수 확인")
-    void lotto_winningNumber_matchOfCount(String lottoNumber, String rank) {
-        List<Integer> numbers = Arrays.stream(lottoNumber.split(","))
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
+    void lotto_winningNumber_matchOfCount(String lottoNumber,String winningNumber, String rank) {
+        //given
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumber);
 
-        assertThat(lotto.lottoResult(numbers)).isEqualTo(LottoResult.valueOf(rank));
+        //when
+        LottoResult lottoResult = LottoResult.check(lotto,lottoWinningNumber,Integer.parseInt(winningNumber));
+
+        //then
+        assertThat(lottoResult).isEqualTo(LottoResult.valueOf(rank));
     }
 }
