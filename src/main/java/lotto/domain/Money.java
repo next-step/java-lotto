@@ -8,18 +8,18 @@ public class Money {
     public static final String MONEY_MUST_NOT_BE_NEGATIVE = "money must not be negative";
     public static final String MONEY_MUST_BE_DIVIDED = "money must be divided";
     public static final Money ZERO = of(0);
-    private final int value;
+    private final long value;
 
-    private Money(final int money) {
+    private Money(final long money) {
         this.value = money;
     }
 
-    public static Money of(int money) {
+    public static Money of(long money) {
         checkArgument(money >= 0, MONEY_MUST_NOT_BE_NEGATIVE);
         return new Money(money);
     }
 
-    public int divideWithoutRemainder(final Money money) {
+    public long divideWithoutRemainder(final Money money) {
         checkArgument(isDivided(money), MONEY_MUST_BE_DIVIDED);
         return value / money.value;
     }
@@ -51,7 +51,7 @@ public class Money {
         return value == 0;
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 

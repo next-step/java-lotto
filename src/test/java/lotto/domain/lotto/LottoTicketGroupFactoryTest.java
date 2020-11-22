@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static lotto.domain.lotto.LottoTicketsFactory.COUNT_MUST_NOT_BE_NEGATIVE;
+import static lotto.domain.lotto.LottoTicketGroupFactory.COUNT_MUST_NOT_BE_NEGATIVE;
 
 
-class LottoTicketsFactoryTest {
+class LottoTicketGroupFactoryTest {
     @DisplayName("Lottos 생성")
     @Nested
     class Create {
@@ -21,11 +21,11 @@ class LottoTicketsFactoryTest {
             final int count = 0;
 
             // when
-            final LottoTickets lottoTickets = LottoTicketsFactory.create(count);
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroupFactory.create(count);
 
             // then
-            assertThat(lottoTickets).isEqualTo(LottoTickets.EMPTY);
-            assertThat(lottoTickets.size()).isZero();
+            assertThat(lottoTicketGroup).isEqualTo(LottoTicketGroup.EMPTY);
+            assertThat(lottoTicketGroup.size()).isZero();
         }
 
         @DisplayName("1 개 생성")
@@ -35,11 +35,11 @@ class LottoTicketsFactoryTest {
             final int count = 1;
 
             // when
-            final LottoTickets lottoTickets = LottoTicketsFactory.create(count);
+            final LottoTicketGroup lottoTicketGroup = LottoTicketGroupFactory.create(count);
 
             // then
-            assertThat(lottoTickets).isNotNull();
-            assertThat(lottoTickets.size()).isOne();
+            assertThat(lottoTicketGroup).isNotNull();
+            assertThat(lottoTicketGroup.size()).isOne();
         }
 
         @DisplayName("음수의 경우 예외 throw")
@@ -50,7 +50,7 @@ class LottoTicketsFactoryTest {
 
             // when
             final Throwable thrown = catchThrowable(() -> {
-                LottoTicketsFactory.create(count);
+                LottoTicketGroupFactory.create(count);
             });
 
             // then

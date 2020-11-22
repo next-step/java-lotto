@@ -1,22 +1,26 @@
 package lotto;
 
-import lotto.domain.LottoBuyer;
+import lotto.domain.LottoGame;
 import lotto.dto.LottoStatisticsResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoMain {
     public static void main(String[] args) {
         final int money = InputView.plzEnterMoney();
-        final LottoBuyer lottoBuyer = LottoBuyer.of(money);
-        lottoBuyer.buy();
-        
-        OutputView.printLottoCount(lottoBuyer.getLottoTickets());
-        OutputView.printAllLotto(lottoBuyer.getLottoTickets());
-        
+        final List<String> lottoNoList = InputView.plzEnterManuallyBuyLottoNo();
+
+        final LottoGame lottoGame = LottoGame.of(money);
+        lottoGame.buyLotto(lottoNoList);
+
+        OutputView.printLottoCount(lottoNoList.size(), lottoGame.getLottoTicketGroup());
+        OutputView.printAllLotto(lottoGame.getLottoTicketGroup());
+
         final String winningNumberExpression = InputView.plzEnterLastWeekWinningNumber();
         final int bonusNumber = InputView.plzEnterBonusNumber();
-        final LottoStatisticsResult statisticsResult = lottoBuyer.getWinLotteryStatistics(winningNumberExpression, bonusNumber);
+        final LottoStatisticsResult statisticsResult = lottoGame.getWinLotteryStatistics(winningNumberExpression, bonusNumber);
         OutputView.printStatistics(statisticsResult);
     }
 }

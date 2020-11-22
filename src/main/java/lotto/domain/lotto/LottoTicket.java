@@ -72,6 +72,12 @@ public class LottoTicket {
                 .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
+    public boolean isContain(final LottoNumber bonusNo) {
+        return lottoNumbers
+                .stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNo));
+    }
+
     public static Money getPrice() {
         return PRICE;
     }

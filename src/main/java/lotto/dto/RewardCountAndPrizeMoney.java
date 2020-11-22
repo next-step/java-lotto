@@ -5,7 +5,7 @@ import lotto.domain.Money;
 public class RewardCountAndPrizeMoney {
     private final int hitTimes;
     private final int count;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
     public RewardCountAndPrizeMoney(final int hitTimes, final int count, final Money prizeMoney) {
         this.hitTimes = hitTimes;
@@ -21,7 +21,7 @@ public class RewardCountAndPrizeMoney {
         return count;
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 }

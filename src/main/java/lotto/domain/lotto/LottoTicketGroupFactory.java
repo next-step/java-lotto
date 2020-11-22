@@ -5,14 +5,14 @@ import java.util.List;
 
 import static util.Preconditions.checkArgument;
 
-public class LottoTicketsFactory {
+public class LottoTicketGroupFactory {
     public static final String COUNT_MUST_NOT_BE_NEGATIVE = "count must not be negative";
     
-    public static LottoTickets create(final int count) {
+    public static LottoTicketGroup create(final long count) {
         checkArgument(count >= 0, COUNT_MUST_NOT_BE_NEGATIVE);
         
         if (count == 0) {
-            return LottoTickets.EMPTY;
+            return LottoTicketGroup.EMPTY;
         }
 
         final List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -20,6 +20,6 @@ public class LottoTicketsFactory {
             final LottoTicket lottoTicket = LottoTicket.of();
             lottoTickets.add(lottoTicket);
         }
-        return LottoTickets.of(lottoTickets);
+        return LottoTicketGroup.of(lottoTickets);
     }
 }
