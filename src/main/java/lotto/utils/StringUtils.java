@@ -1,4 +1,6 @@
-package lotto;
+package lotto.utils;
+
+import lotto.common.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,10 @@
-package lotto;
+package lotto.domain;
+
+import lotto.common.ErrorMessage;
 
 public class LottoAmount {
 
-    private final static int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private final int amount;
 
     public LottoAmount(int amount) {

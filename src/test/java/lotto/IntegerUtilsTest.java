@@ -1,6 +1,8 @@
 package lotto;
 
 
+import lotto.common.ErrorMessage;
+import lotto.utils.IntegerUtils;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

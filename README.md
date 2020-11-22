@@ -53,7 +53,7 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-11. MainSimulator 개발
+11. MainSimulator 버그 수정
 12. MVC 형태로 정리한다.
 
 ##DONE
@@ -70,3 +70,4 @@ utils.Calculator
 8. 생성된 로또 번호를 당첨 번호와 비교하여 Rank를 구한다.
 9. 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 10. 당첨 통계 및 수익률을 출력한다.
+11. MainSimulator 개발

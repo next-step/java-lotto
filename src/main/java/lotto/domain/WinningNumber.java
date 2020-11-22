@@ -1,4 +1,9 @@
-package lotto;
+package lotto.domain;
+
+import lotto.common.ErrorMessage;
+import lotto.domain.Rank;
+import lotto.utils.IntegerUtils;
+import lotto.utils.StringUtils;
 
 import java.util.List;
 

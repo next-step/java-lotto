@@ -1,4 +1,4 @@
-package lotto;
+package lotto.utils;
 
 import javafx.scene.effect.Bloom;
 
