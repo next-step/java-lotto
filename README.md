@@ -53,7 +53,6 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-4. 1~45까지 6개의 번호를 생성한다.
 5. 생성된 로또번호를 출력한다.
 6. 지난 주 당첨 번호(WinningNumber)를 입력 받는다.
 7. 입력한 당첨 번호에 따른 Exception을 throw한다.
@@ -69,3 +68,4 @@ utils.Calculator
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
 3. 입력한 금액에 따른 Exception을 throw 한다.
     - 1000원 이하의 금액
+4. 1~45까지 6개의 번호(LottoNumbers)를 로또 구입 갯수만큼 생성한다.
