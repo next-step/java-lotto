@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import study.lotto.dispenser.Lottos;
 import study.lotto.lottery.Lottery;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +16,7 @@ class LottoRankTest {
     @Test
     void test_of_first() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
 
@@ -44,8 +42,8 @@ class LottoRankTest {
     @Test
     void test_of_second() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
-        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
+        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
+        Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
@@ -59,8 +57,8 @@ class LottoRankTest {
     @Test
     void test_of_third() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
+        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
         Lotto lotto = new Lotto(lottoNumbers);
         WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
@@ -71,11 +69,11 @@ class LottoRankTest {
         assertEquals(winningLotto.getLottoRank(), LottoRank.THIRD);
     }
 
-    private List<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
+    private Set<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
         List<LottoNumber> toLottoNumbers = new ArrayList<>();
         for (int value : lottoNumbers) {
             toLottoNumbers.add(LottoNumber.of(value));
         }
-        return toLottoNumbers;
+        return new HashSet<>(toLottoNumbers);
     }
 }

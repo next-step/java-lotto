@@ -22,6 +22,15 @@ public class WinLottoNumbers {
         throwIfNumberCountNotMatch();
     }
 
+    public WinLottoNumbers(WinLottoNumbersBuilder winLottoNumbersBuilder) {
+        this.winLottoNumbers = Optional.ofNullable(winLottoNumbersBuilder.winLottoNumbers)
+                .map(ArrayList::new)
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
+        this.bonusLottoNumber = Optional.ofNullable(winLottoNumbersBuilder.bonusLottoNumber)
+                .orElse(LottoNumber.zero());
+        throwIfNumberCountNotMatch();
+    }
+
     private void throwIfNumberCountNotMatch() {
         if (winLottoNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
             throw new LottoNumberCountNotMatchingException();
@@ -42,4 +51,23 @@ public class WinLottoNumbers {
         return lotto.contains(bonusLottoNumber);
     }
 
+    public static class WinLottoNumbersBuilder {
+        // Required
+        private final List<LottoNumber> winLottoNumbers;
+        // Optional
+        private LottoNumber bonusLottoNumber;
+
+        public WinLottoNumbersBuilder(List<LottoNumber> winLottoNumbers) {
+            this.winLottoNumbers = winLottoNumbers;
+        }
+
+        public WinLottoNumbersBuilder bonusLottoNumber(LottoNumber bonusLottoNumber) {
+            this.bonusLottoNumber = bonusLottoNumber;
+            return this;
+        }
+
+        public WinLottoNumbers build() {
+            return new WinLottoNumbers(this);
+        }
+    }
 }

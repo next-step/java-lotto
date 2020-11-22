@@ -11,23 +11,24 @@ import study.lotto.dispenser.Lottos;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryResultTest {
 
     private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     @BeforeEach
     public void createLottoNumbers() {
-        this.lottoNumbers = Arrays.asList(LottoNumber.of(1)
+        this.lottoNumbers = new HashSet<>(Arrays.asList(LottoNumber.of(1)
                 , LottoNumber.of(2)
                 , LottoNumber.of(3)
                 , LottoNumber.of(4)
                 , LottoNumber.of(5)
-                , LottoNumber.of(6));
+                , LottoNumber.of(6)));
     }
 
     @Test

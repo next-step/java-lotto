@@ -15,11 +15,8 @@ class LottoDispenserTest {
     @Test
     @DisplayName("로또(자동) 판매 테스트")
     void test_auto() {
-        // Given
-        LottoDispenser lottoDispenser = LottoDispenser.getInstance();
-
         // When
-        Lottos lottos = lottoDispenser.auto(10);
+        Lottos lottos = LottoDispenser.auto(10);
 
         // Then
         assertEquals(lottos.getTotalCount(), 10);
