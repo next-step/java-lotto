@@ -14,8 +14,8 @@ public class Lotto {
     private LottoStatus lottoStatus;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-
         this.lottoNumbers = Optional.ofNullable(lottoNumbers)
+                .filter(set -> set.size() == LOTTO_NUMBER_COUNT)
                 .map(ArrayList::new)
                 .orElseThrow(() -> new LottoNumberCountNotMatchingException());
 
