@@ -72,7 +72,7 @@ public class StringAddCalculator {
         int result = 0;
 
         for(int i = 0 ; i < nums.length; i++){
-            validateValue(nums[i]);
+            validateDigitAndNegative(nums[i]);
             int num1 = Integer.parseInt(nums[i]);
             int num2 = Integer.parseInt(nums[i+1]);
             result = selector(num1, num2, result, count);
@@ -85,10 +85,9 @@ public class StringAddCalculator {
         return result;
     }
 
-    public void validateValue(String str){
-        if(!Character.isDigit(str.charAt(0)) || str.equals("-")){
+    public void validateDigitAndNegative(String str){
+        if(!Character.isDigit(str.charAt(0)) || Integer.valueOf(str) < 0){
             throw new RuntimeException("This value is not correct, Please check your input values");
-
         };
     }
 
