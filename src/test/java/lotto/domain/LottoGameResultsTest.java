@@ -49,9 +49,9 @@ public class LottoGameResultsTest {
     @Test
     void getProfitTest(){
 
-        Map<Integer, Integer> winningResults = new HashMap<>();
-        winningResults.put(3, 1);
-        winningResults.put(4, 1);
+        Map<WinResult, Integer> winningResults = new HashMap<>();
+        winningResults.put(new WinResult(3, false), 1);
+        winningResults.put(new WinResult(4, false), 1);
 
         double profitResult = lottoGameResults.getProfit(winningResults);
 

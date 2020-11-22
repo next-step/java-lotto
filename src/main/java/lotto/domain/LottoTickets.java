@@ -15,8 +15,7 @@ public class LottoTickets {
     private int gameMoney;
 
     public LottoTickets(int gameMoney) {
-
-        this.gameMoney = gameMoney;
+        this.gameMoney = (gameMoney/LOTTO_GAME_MONEY_UNIT) * LOTTO_GAME_MONEY_UNIT;
         this.lottoTickets = IntStream.range(0, gameMoney/LOTTO_GAME_MONEY_UNIT)
                 .mapToObj(ticket -> new LottoTicket(makeLottoNumber()))
                 .collect(Collectors.toList());

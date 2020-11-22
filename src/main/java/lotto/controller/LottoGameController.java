@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
+import lotto.domain.WinResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,11 +27,15 @@ public class LottoGameController {
         return  InputView.getInputWinningNumbers();
     }
 
-    public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers) {
+    public static String getLastBonusNumber() {
+        return  InputView.getInputBonusNumber();
+    }
 
-        lottoGameResults.checkWinningResult(lastWinningNumbers);
+    public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers, String bonusNumber) {
 
-        Map<Integer, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
+        lottoGameResults.checkWinningResult(lastWinningNumbers, bonusNumber);
+
+        Map<WinResult, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
         getPrizeResult(resultsMap);
 
@@ -44,7 +49,7 @@ public class LottoGameController {
         ResultView.getProfitResult(profit);
     }
 
-    private static void getPrizeResult(Map<Integer, Integer> resultsMap) {
+    private static void getPrizeResult(Map<WinResult, Integer> resultsMap) {
         ResultView.getPrizeResult(resultsMap);
     }
 

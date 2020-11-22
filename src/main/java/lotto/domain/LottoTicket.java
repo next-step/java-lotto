@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,15 +20,21 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
-    public int countWinningNumbers(List<Integer> lastWinningNumbers) {
+    public WinResult countWinningNumbers(List<Integer> lastWinningNumbers, int bonusNumber) {
         List<Integer> winningsNumber = lottoNumbers
                 .stream().filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
 
-        if(winningsNumber.size() >= MIN_COUNT_TO_PRIZE){
-            return winningsNumber.size();
+        boolean isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
+
+        if(winningsNumber.size() == PrizeUnit.SECOND_GRADE.prizeUnitCount && isMatchBonusNumber){
+            return new WinResult(winningsNumber.size(), true);
         }
 
-        return 0;
+        if(winningsNumber.size() >= MIN_COUNT_TO_PRIZE){
+            return new WinResult(winningsNumber.size(), false);
+        }
+
+        return new WinResult(0, false);
     }
 
 }

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoGameResults;
 import lotto.domain.PrizeUnit;
+import lotto.domain.WinResult;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -18,12 +19,14 @@ public class ResultView {
 
     }
 
-    public static void getPrizeResult(Map<Integer, Integer> resultsMap) {
+    public static void getPrizeResult(Map<WinResult, Integer> resultsMap) {
         System.out.println(WINNING_RESULT_MESSAGE);
 
         resultsMap.entrySet()
-                .stream().forEach(set -> { PrizeUnit unit = PrizeUnit.findPrizeFieldByUnitCount(set.getKey());
-                                System.out.println(set.getKey()+"개 일치 ("+ unit.prizeUnitMoney+"원)- "+ set.getValue()+"개");}
+                .stream().forEach(set -> { PrizeUnit unit = PrizeUnit.findPrizeFieldByUnitCount(set.getKey().prizeUnit, set.getKey().isMatchBonusNumber);
+                                System.out.println(set.getKey().prizeUnit+"개 일치"
+                                        +(set.getKey().isMatchBonusNumber ? ", 보너스 볼 일치":" ")
+                                        + "("+ unit.prizeUnitMoney+"원)- "+ set.getValue()+"개");}
                                 );
     }
 

@@ -8,8 +8,9 @@ public class LottoGameResults {
 
     private static final String WINNING_NUMBER_DELIMITER = ",";
     private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
+    private static final String BONUS_NUMBER_PATTERN = "([\\d])+";
 
-    private Map<Integer, Integer> prizeUnitCountMap = new HashMap<>();
+    private LinkedHashMap<WinResult, Integer> prizeUnitCountMap = new LinkedHashMap<>();
 
     private List<Long> prizeMoney = new ArrayList<>();
 
@@ -22,7 +23,7 @@ public class LottoGameResults {
 
     private void initializePrizeUnit() {
         Arrays.stream(PrizeUnit.values())
-                .forEach(prizeUnit -> prizeUnitCountMap.put(prizeUnit.prizeUnitCount, 0));
+                .forEach(prizeUnit -> prizeUnitCountMap.put(new WinResult(prizeUnit.prizeUnitCount, prizeUnit == PrizeUnit.SECOND_GRADE ? true:false), 0));
     }
 
     public LottoTickets getLottoIssueResult() {
@@ -30,19 +31,20 @@ public class LottoGameResults {
     }
 
 
-    public void checkWinningResult(String lastWinningNumbersInput) {
+    public void checkWinningResult(String lastWinningNumbersInput, String bonusNumberValue) {
 
         List<Integer> lastWinningNumbers = addLastWinningNumber(lastWinningNumbersInput);
+        int bonusNumber = validateBonusNumber(bonusNumberValue);
 
         lottoTickets.getLottoTickets().stream()
-                .forEach(lottoTicket -> recordWinningResult(lottoTicket.countWinningNumbers(lastWinningNumbers)));
+                .forEach(lottoTicket -> recordWinningResult(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));
     }
 
-    public void recordWinningResult(int winningNumberCount) {
-        if (winningNumberCount != 0) {
-            int previousUnitCount = prizeUnitCountMap.get(winningNumberCount);
+    public void recordWinningResult(WinResult winResult) {
+        if (winResult.prizeUnit != 0) {
+            int previousUnitCount = prizeUnitCountMap.get(winResult);
             previousUnitCount = previousUnitCount + 1;
-            prizeUnitCountMap.put(winningNumberCount, previousUnitCount);
+            prizeUnitCountMap.put(winResult, previousUnitCount);
         }
     }
 
@@ -69,16 +71,29 @@ public class LottoGameResults {
         return lastWinningNumbers;
     }
 
+    public int validateBonusNumber(String bonusNumberValue) {
+        if (!bonusNumberValue.matches(BONUS_NUMBER_PATTERN)) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
+        }
+        int bonusNumber = Integer.parseInt(bonusNumberValue);
+        if(bonusNumber> MAX_LOTTO_NUMBER){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
+        }
+
+        return bonusNumber;
+    }
+
     private String[] splitWinningNumber(String lastWinningNumbersInput) {
         return lastWinningNumbersInput.split(WINNING_NUMBER_DELIMITER);
     }
 
-    public Map<Integer, Integer> getWinningResultRecord() {
+    public Map<WinResult, Integer> getWinningResultRecord() {
         return prizeUnitCountMap;
     }
 
-    public double getProfit(Map<Integer, Integer> winningResults) {
-        winningResults.entrySet().stream().forEach(set -> prizeMoney.add(PrizeUnit.calculate(set.getKey(), set.getValue())));
+    public double getProfit(Map<WinResult, Integer> winningResults) {
+        winningResults.entrySet().stream()
+                .forEach(set -> prizeMoney.add(PrizeUnit.calculate(set.getKey().prizeUnit, set.getKey().isMatchBonusNumber, set.getValue())));
 
         Long sum = prizeMoney.stream().collect(Collectors.summingLong(Long::longValue));
 
