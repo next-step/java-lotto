@@ -1,6 +1,5 @@
 package study.lotto;
 
-import study.lotto.core.Lotto;
 import study.lotto.core.WinLottoNumbers;
 import study.lotto.dispenser.LottoDispenser;
 import study.lotto.dispenser.Lottos;
@@ -11,8 +10,6 @@ import study.lotto.view.input.PurchaseInputView;
 import study.lotto.view.input.WinNumbersInputView;
 import study.lotto.view.result.LotteryResultView;
 import study.lotto.view.result.LottoPurchaseResultView;
-
-import java.util.List;
 
 public class LottoController {
 

@@ -1,6 +1,7 @@
 package study.lotto.lottery;
 
 import study.lotto.core.*;
+import study.lotto.core.exception.LottoNumberCountNotMatchingException;
 import study.lotto.dispenser.Lottos;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class Lottery {
 
     public Lottery(WinLottoNumbers winLottoNumbers, Lottos lottos) {
         this.winLottoNumbers = Optional.ofNullable(winLottoNumbers)
-                .orElse(WinLottoNumbers.empty());
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
         this.lottos = Optional.ofNullable(lottos)
                 .orElse(new Lottos(new ArrayList<>()));
     }

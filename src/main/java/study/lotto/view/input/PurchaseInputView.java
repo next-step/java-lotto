@@ -1,11 +1,14 @@
 package study.lotto.view.input;
 
 import study.lotto.PurchaseAmount;
+import study.lotto.utils.Utils;
 import study.lotto.view.AbstractView;
 
 import java.util.Scanner;
 
 public class PurchaseInputView extends AbstractView {
+
+    private static Scanner scanner = Utils.newScanner();
 
     private PurchaseInputView() {}
 
@@ -14,6 +17,7 @@ public class PurchaseInputView extends AbstractView {
     }
 
     private static int purchaseAmountView() {
+
         stringBuilder.append("구매 금액을 입력해주세요.");
         printAndClear();
 

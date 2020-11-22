@@ -2,34 +2,24 @@ package study.lotto.core;
 
 import study.lotto.core.exception.LottoNumberCountNotMatchingException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * 로또 당첨 번호
  */
 public class WinLottoNumbers {
 
-    private static final List<LottoNumber> emptyWinLottoNumbers = Arrays.asList(
-            LottoNumber.zero(), LottoNumber.zero(), LottoNumber.zero()
-            , LottoNumber.zero(), LottoNumber.zero(), LottoNumber.zero());
-
     private final List<LottoNumber> winLottoNumbers;
     private final LottoNumber bonusLottoNumber;
 
-    public WinLottoNumbers(List<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
+    public WinLottoNumbers(Set<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
         this.winLottoNumbers = Optional.ofNullable(winLottoNumbers)
+                .map(ArrayList::new)
                 .orElseThrow(() -> new LottoNumberCountNotMatchingException());
         this.bonusLottoNumber = Optional.ofNullable(bonusLottoNumber)
                 .orElse(LottoNumber.zero());
 
         throwIfNumberCountNotMatch();
-    }
-
-    public static WinLottoNumbers empty() {
-        return new WinLottoNumbers(emptyWinLottoNumbers, LottoNumber.zero());
     }
 
     private void throwIfNumberCountNotMatch() {

@@ -1,24 +1,19 @@
 package study.lotto.view.input;
 
 import study.lotto.core.Lotto;
+import study.lotto.core.LottoNumber;
 import study.lotto.dispenser.LottoDispenser;
 import study.lotto.dispenser.Lottos;
+import study.lotto.utils.Utils;
 import study.lotto.view.AbstractView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class ManualLottoInputView extends AbstractView {
 
-    private static final ManualLottoInputView instance = new ManualLottoInputView();
+    private static Scanner scanner = Utils.newScanner();
 
     private ManualLottoInputView() {}
-
-    public static ManualLottoInputView getInstance() {
-        return instance;
-    }
 
     public static Lottos display(int numberOfManualLotto) {
 

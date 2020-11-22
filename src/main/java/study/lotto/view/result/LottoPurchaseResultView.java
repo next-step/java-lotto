@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class LottoPurchaseResultView extends AbstractView {
 
-
     private LottoPurchaseResultView() {}
 
     public static void display(Lottos lottos) {

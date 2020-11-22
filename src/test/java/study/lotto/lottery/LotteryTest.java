@@ -1,29 +1,30 @@
 package study.lotto.lottery;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.*;
-import study.lotto.dispenser.Lottos;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LotteryTest {
 
     private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     @BeforeEach
     public void init() {
-        this.lottoNumbers = Arrays.asList(LottoNumber.of(1)
-                , LottoNumber.of(2)
-                , LottoNumber.of(3)
-                , LottoNumber.of(4)
-                , LottoNumber.of(5)
-                , LottoNumber.of(6));
+        this.lottoNumbers.add(LottoNumber.of(1));
+        this.lottoNumbers.add(LottoNumber.of(2));
+        this.lottoNumbers.add(LottoNumber.of(3));
+        this.lottoNumbers.add(LottoNumber.of(4));
+        this.lottoNumbers.add(LottoNumber.of(5));
+        this.lottoNumbers.add(LottoNumber.of(6));
     }
 
     @Test

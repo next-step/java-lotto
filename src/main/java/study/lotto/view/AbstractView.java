@@ -11,7 +11,6 @@ public abstract class AbstractView {
 
     protected static final String DELIMITER = ",";
 
-    protected static final Scanner scanner = new Scanner(System.in);
     protected static final StringBuilder stringBuilder = new StringBuilder();
 
     protected static void clearStringBuilder() {
@@ -31,6 +30,15 @@ public abstract class AbstractView {
         return Arrays.asList(lottoNumbersDelimitedByComma.split(DELIMITER))
                 .stream()
                 .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
+    protected static List<LottoNumber> createLottoNumber(String lottoNumbersDelimitedByComma) {
+        return Arrays.asList(lottoNumbersDelimitedByComma.split(DELIMITER))
+                .stream()
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

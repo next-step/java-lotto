@@ -13,21 +13,15 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
     private LottoStatus lottoStatus;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
 
         this.lottoNumbers = Optional.ofNullable(lottoNumbers)
-                .orElse(new ArrayList<>());
-        throwIfNumberCountNotMatch();
+                .map(ArrayList::new)
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
 
         this.lottoStatus = LottoStatus.BEFORE_LOTTERY;
 
         sortLottoNumbers();
-    }
-
-    private void throwIfNumberCountNotMatch() {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new LottoNumberCountNotMatchingException();
-        }
     }
 
     private void sortLottoNumbers() {
@@ -47,11 +41,11 @@ public class Lotto {
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
 
         List<LottoNumber> lottoNumbers = Optional.ofNullable(winLottoNumbers)
-                .map(w -> w.matchWithWinLottoNumbers(this))
+                .map(winningNumbers -> winningNumbers.matchWithWinLottoNumbers(this))
                 .orElse(new ArrayList<>());
 
         boolean matchWithBonusLottoNumber = Optional.ofNullable(winLottoNumbers)
-                .map(w -> w.matchWithBonusLottoNumber(this))
+                .map(winningNumbers -> winningNumbers.matchWithBonusLottoNumber(this))
                 .orElse(false);
 
         return new WinningLotto(lottoNumbers, matchWithBonusLottoNumber);
