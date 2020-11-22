@@ -1,5 +1,7 @@
 package lotto_auto.model;
 
+import lotto_auto.Constant;
+
 import java.util.List;
 
 public class LottoStatistic {
@@ -16,7 +18,7 @@ public class LottoStatistic {
                 .filter(LottoResult::isWinning)
                 .mapToLong(LottoResult::getMoney)
                 .sum();
-        return (double) sum / (this.lottoResultList.size() * 1000);
+        return (double) sum / (this.lottoResultList.size() * Constant.LOTTO_TICKET_PRICE);
     }
 
     public int getRankLottoCount(int rank) {
