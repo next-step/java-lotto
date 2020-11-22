@@ -1,5 +1,7 @@
 package lotto_auto.model;
 
+import lotto_auto.ErrorMessage;
+
 public class LottoStore {
 
     private final static int LOTTO_TICKET_PRICE = 1000;
@@ -11,8 +13,7 @@ public class LottoStore {
 
     private static void throwIfNegativeMoney(int money) {
         if (money <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MONEY);
         }
     }
-
 }
