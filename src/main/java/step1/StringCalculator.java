@@ -1,19 +1,24 @@
-import util.CalculatorException;
+package step1;
+
+import util.CalculatorValidator;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    private final String COMMA_COLON_DELIMITER = ",|:";
+    private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private final String NUMBER_REGULAR = "^[0-9]+$";
+    private final String CHECK_CUSTOM_DELIMITER = "//";
+
     public int calculate(String text) {
         if(checkNullString(text) || checkEmptyString(text)) {
             return 0;
         }
 
-        CalculatorException.validateMinus(text);
-
         if(checkOnlyOneText(text)) {
-            CalculatorException.validateNumbers(text);
+            CalculatorValidator.validate(text);
             return Integer.parseInt(text);
         }
 
@@ -21,11 +26,11 @@ public class StringCalculator {
             return sumCustomDelimiter(text);
         }
 
-        return sum(text.split(",|:"));
+        return sum(text.split(COMMA_COLON_DELIMITER));
     }
 
     private int sumCustomDelimiter(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
         String[] tokens = {""};
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -35,13 +40,13 @@ public class StringCalculator {
     }
 
     private boolean checkCustomDelimiter(String text) {
-        return text.startsWith("//");
+        return text.startsWith(CHECK_CUSTOM_DELIMITER);
     }
 
     private int sum(String[] texts) {
         return Arrays.stream(texts)
                 .mapToInt(text -> {
-                    CalculatorException.validateNumbers(text);
+                    CalculatorValidator.validate(text);
                     return Integer.parseInt(text);
                 })
                 .sum();
@@ -49,7 +54,7 @@ public class StringCalculator {
     }
 
     private boolean checkOnlyOneText(String text) {
-        Matcher m = Pattern.compile("^[0-9]+$").matcher(text);
+        Matcher m = Pattern.compile(NUMBER_REGULAR).matcher(text);
         return m.find();
     }
 
