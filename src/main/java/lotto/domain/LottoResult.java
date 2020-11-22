@@ -26,7 +26,15 @@ public enum LottoResult {
         return prize;
     }
 
-    public static LottoResult valueOf(int winningCount, boolean matchBonus) {
+    public static LottoResult check(Lotto lotto, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
+        int winningCount = lottoWinningNumber.sameNumberOfCount(lotto.getLottoNumbers());
+        if(lottoWinningNumber.isMatchUpToBonusNumber(lotto.getLottoNumbers(),bonusNumber)) {
+            return LottoResult.valueOf(winningCount,true);
+        }
+        return LottoResult.valueOf(winningCount,false);
+    }
+
+    private static LottoResult valueOf(int winningCount, boolean matchBonus) {
         if(winningCount == SECOND.winningCount && matchBonus) {
             return SECOND;
         }
@@ -36,4 +44,5 @@ public enum LottoResult {
                 .findFirst()
                 .orElse(NONE);
     }
+
 }
