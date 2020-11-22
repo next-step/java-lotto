@@ -4,6 +4,9 @@ import step4.domain.*;
 import step4.view.InputView;
 import step4.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
 
     private LottoController() {
@@ -25,18 +28,23 @@ public class LottoController {
 
         OutputView.printInvestRate(lottoFactory.getLottoRatio(lottoMatcher, lottoPurchaseMoney));
     }
+
     public static void runLotto2() {
         int lottoPurchaseMoney = InputView.purchaseLotto();
 
         int manualCount = InputView.purchaseManualCount();
-
-        for(int i = 0 ; i < manualCount ; i++){
-
+        List<String> strLottoList = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            strLottoList.add(InputView.purchaseManualLott());
         }
+        ManualLottoFactory manualLottoFactory = new ManualLottoFactory(strLottoList);
 
-        LottoFactory lottoFactory = new LottoFactory(lottoPurchaseMoney, RandomLottoGenerator.of());
+        int autoPay = lottoPurchaseMoney - manualCount * 1000;
+        AutoLottoFactory autoLottoFactory = new AutoLottoFactory(autoPay, RandomLottoGenerator.of());
 
-        OutputView.purchaseLotto(lottoFactory.getLottoCount());
+        LottoFactory lottoFactory = new LottoFactory(autoLottoFactory, manualLottoFactory);
+
+        OutputView.purchaseLotto2(autoPay/1000 , manualCount);
         OutputView.printLottoTickets(lottoFactory.getLottoNumbersListToString());
 
         String lastWeekLotto = InputView.lastWeekLotto();
