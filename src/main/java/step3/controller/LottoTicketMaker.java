@@ -32,14 +32,13 @@ public class LottoTicketMaker {
     }
 
     private void lottoCreateStart() {
-        List<Lotto> lottos;
-        lottos = IntStream.range(0, this.qty)
+        List<Lotto> lotto = IntStream.range(0, this.qty)
                 .mapToObj(i -> lottoTicketCreate())
                 .collect(Collectors.toList());
-        this.lottoTicket = new Lottos(lottos);
+        this.lottoTicket = new Lottos(lotto);
     }
 
-    public Lotto lottoTicketCreate() {
+    private Lotto lottoTicketCreate() {
         Lotto lotto = null;
         for (int j = 0; j < LOTTO_TOTAL_COUNT; j++) {
             lotto = new Lotto();
