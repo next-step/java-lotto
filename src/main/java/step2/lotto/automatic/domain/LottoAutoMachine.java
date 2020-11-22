@@ -9,18 +9,16 @@ import java.util.List;
 /**
  * 로또 자동생성
  */
-public class LottoAutoNumbers {
+public class LottoAutoMachine {
 
-    private List<Integer> basicLottoNumbers = new ArrayList<>();
+    private static List<Integer> basicLottoNumbers = new ArrayList<>();
     private static final int MAKE_LOTTO_NUMBERS_COUNT = 45;  // 로또 생성 갯수
+    private static LottoAutoMachine lottoAutoNumbers;  // auto 번호 생성
 
-    public LottoAutoNumbers(int makeLottoNumberCount) {
+    public LottoAutoMachine(int makeLottoNumberCount) {
         isNumberNegative(makeLottoNumberCount);
         isMakeCount(makeLottoNumberCount);
-
-        for (int i = 0; i < makeLottoNumberCount; i++) {
-            basicLottoNumbers.add(i);
-        }
+        initLottoNubmers(makeLottoNumberCount);
     }
 
     public List<Integer> getAutoNumbers(int getLottoAutoNumberCount) {
@@ -34,6 +32,12 @@ public class LottoAutoNumbers {
         }
 
         return returnList;
+    }
+
+    private void initLottoNubmers(int initLottoNubmers) {
+        for (int i = 1; i <= initLottoNubmers; i++) {
+            basicLottoNumbers.add(i);
+        }
     }
 
     private void isNumberNegative(int paramValue) {
