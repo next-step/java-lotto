@@ -29,18 +29,9 @@ public class Lotto {
 
 	public Lotto getLastWeekLotto(String winnerNumbers) {
 		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
-		validateLastWinnerNumbers(winningNumberSplit);
 		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
-				.map(Integer::parseInt)
-				.map(LottoNumber::new)
+				.map(number -> new LottoNumber(LottoNumber.getValidateNumber(number)))
 				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
 		return new Lotto(winningNumbers);
-	}
-
-	protected void validateLastWinnerNumbers(String[] numbers) {
-		boolean isDigit = Stream.of(numbers).allMatch(oddNum -> oddNum.chars().allMatch(Character::isDigit));
-		if (!isDigit) {
-			throw new IllegalArgumentException(WRONG_WINNER_NUMBERS);
-		}
 	}
 }
