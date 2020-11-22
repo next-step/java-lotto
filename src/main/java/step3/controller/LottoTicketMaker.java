@@ -2,9 +2,10 @@ package step3.controller;
 
 import step3.domain.Amount;
 import step3.domain.Lotto;
+import step3.domain.Lottos;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketMaker {
@@ -14,10 +15,11 @@ public class LottoTicketMaker {
 
     private Amount amount;
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private Lottos lottoTicket;
 
     public LottoTicketMaker(int lottoAmount) {
         amount = new Amount(lottoAmount);
+        this.qty = lottoPurchaseQty();
         lottoCreateStart();
     }
 
@@ -30,21 +32,22 @@ public class LottoTicketMaker {
     }
 
     private void lottoCreateStart() {
-        this.qty = lottoPurchaseQty();
-        int bound = this.qty;
-        IntStream.range(0, bound)
+        List<Lotto> lottos;
+        lottos = IntStream.range(0, this.qty)
                 .mapToObj(i -> lottoTicketCreate())
-                .forEach(this.lottos::add);
+                .collect(Collectors.toList());
+        this.lottoTicket = new Lottos(lottos);
     }
 
     public Lotto lottoTicketCreate() {
-        Lotto lotto = new Lotto();
-        IntStream.range(0, LOTTO_TOTAL_COUNT)
-                .forEach(j -> lotto.lottoSort());
+        Lotto lotto = null;
+        for (int j = 0; j < LOTTO_TOTAL_COUNT; j++) {
+            lotto = new Lotto();
+        }
         return lotto;
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottos;
+    public Lottos getLottoTicket() {
+        return this.lottoTicket;
     }
 }

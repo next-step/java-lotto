@@ -8,16 +8,15 @@ import step3.view.LottoOuputUi;
 
 public class LottoApplicationMain {
     public static void main(String[] args) {
-
         int purchaseAmount = LottoInputUi.inputPurchaseAmount();
         LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(purchaseAmount);
 
         LottoOuputUi.printLottoCount(lottoTicketMaker.lottoPurchaseQty());
-        LottoOuputUi.printLottos(lottoTicketMaker.getLottos());
+        LottoOuputUi.printLottos(lottoTicketMaker.getLottoTicket().getLottos());
 
         LottoNumber lottoNumber = LottoNumber.of(LottoInputUi.inputLastWeekNumber(), LottoInputUi.inputBonusNumber());
 
-        LottoWinning lottoWinning = LottoWinning.of(lottoNumber, lottoTicketMaker.getLottos());
+        LottoWinning lottoWinning = LottoWinning.of(lottoNumber, lottoTicketMaker.getLottoTicket().getLottos());
 
         LottoOuputUi.printStatistics(lottoWinning.getLottoWinningMap());
         LottoOuputUi.printTotalReturn(lottoWinning.getTotalYield(purchaseAmount));
