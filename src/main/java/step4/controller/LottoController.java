@@ -19,7 +19,29 @@ public class LottoController {
 
         String lastWeekLotto = InputView.lastWeekLotto();
         int bonusBall = InputView.initBonusBall();
-        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LastWeekLottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
+        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
+
+        OutputView.printStatics(lottoMatcher.getResult());
+
+        OutputView.printInvestRate(lottoFactory.getLottoRatio(lottoMatcher, lottoPurchaseMoney));
+    }
+    public static void runLotto2() {
+        int lottoPurchaseMoney = InputView.purchaseLotto();
+
+        int manualCount = InputView.purchaseManualCount();
+
+        for(int i = 0 ; i < manualCount ; i++){
+
+        }
+
+        LottoFactory lottoFactory = new LottoFactory(lottoPurchaseMoney, RandomLottoGenerator.of());
+
+        OutputView.purchaseLotto(lottoFactory.getLottoCount());
+        OutputView.printLottoTickets(lottoFactory.getLottoNumbersListToString());
+
+        String lastWeekLotto = InputView.lastWeekLotto();
+        int bonusBall = InputView.initBonusBall();
+        LottoMatcher lottoMatcher = lottoFactory.matchNumbers(LottoGenerator.separateLottoToList(lastWeekLotto), new LottoNumber(bonusBall));
 
         OutputView.printStatics(lottoMatcher.getResult());
 

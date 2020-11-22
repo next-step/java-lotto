@@ -15,13 +15,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LastWeekLottoGeneratorTest {
+class LottoGeneratorTest {
 
     @DisplayName("지난주 로또 번호가 잘 생성되는지 확인합니다.")
     @ParameterizedTest
     @MethodSource("createStringLotto")
     void createLastWeekLotto(String input, Lotto expected) {
-        assertThat(LastWeekLottoGenerator.separateLottoToList(input)).isEqualTo(expected);
+        assertThat(LottoGenerator.separateLottoToList(input)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createStringLotto() {
@@ -35,27 +35,27 @@ class LastWeekLottoGeneratorTest {
     @Test
     @DisplayName("로또 번호가 5개 이하일 경우 익셉션이 발생합니다.")
     void throwLottoCount5() {
-        assertThatThrownBy(() -> LastWeekLottoGenerator.separateLottoToList("1,2,3,4,5"))
+        assertThatThrownBy(() -> LottoGenerator.separateLottoToList("1,2,3,4,5"))
                 .isInstanceOf(LottoCountBoundException.class);
     }
 
     @Test
     @DisplayName("로또 번호가 5개 이하일 경우 익셉션이 발생합니다.")
     void throwLottoCount7() {
-        assertThatThrownBy(() -> LastWeekLottoGenerator.separateLottoToList("1,2,3,4,5,6,7"))
+        assertThatThrownBy(() -> LottoGenerator.separateLottoToList("1,2,3,4,5,6,7"))
                 .isInstanceOf(LottoCountBoundException.class);
     }
 
     @Test
     @DisplayName("로또 번호가 널일경우 익셉션이 발생합니다.")
     void throwLottoNull() {
-        assertThatThrownBy(() -> LastWeekLottoGenerator.separateLottoToList(null))
+        assertThatThrownBy(() -> LottoGenerator.separateLottoToList(null))
                 .isInstanceOf(ValidNullException.class);
     }
     @Test
     @DisplayName("로또 번호가 5개 이하일 경우 익셉션이 발생합니다.")
     void throwLottoEmpty() {
-        assertThatThrownBy(() -> LastWeekLottoGenerator.separateLottoToList(" "))
+        assertThatThrownBy(() -> LottoGenerator.separateLottoToList(" "))
                 .isInstanceOf(ValidEmptyException.class);
     }
 
