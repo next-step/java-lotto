@@ -16,6 +16,9 @@ public class Client {
     ResultView.printLottoInfo(purchasedTickets.toString());
 
     WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
+    LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
+    winningNumber.validateBonusNumberDuplication(bonusNumber);
+
     LottoResult lottoResult = purchasedTickets.settle(winningNumber);
 
     ResultView.printStatisticsOpening();
