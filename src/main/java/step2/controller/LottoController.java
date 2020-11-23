@@ -23,5 +23,8 @@ public class LottoController {
             person.addLotto(lotto);
             ResultView.printLottoNumbers(lotto.getNumbers());
         }
+
+        ResultView.printWinNumber();
+        int[] winNumber = InputView.inputWinNumber();
     }
 }

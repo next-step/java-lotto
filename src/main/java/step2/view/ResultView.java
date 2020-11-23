@@ -18,4 +18,9 @@ public class ResultView {
     public static void printLottoNumbers(Integer[] lottoNumbers) {
         printMessage(Arrays.toString(lottoNumbers));
     }
+
+    public static void printWinNumber() {
+        printMessage("");
+        printMessage("지난 주 당첨 번호를 입력해 주세요.");
+    }
 }
