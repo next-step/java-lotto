@@ -29,5 +29,4 @@ public class Lotto {
     public List<Integer> getLottos() {
         return this.lottos;
     }
-
 }
