@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.common.ErrorMessage;
+import lotto.constant.ErrorMessage;
 import lotto.domain.LottoNumbers;
-import lotto.domain.Rank;
+import lotto.constant.Rank;
 import lotto.domain.WinningNumber;
 import lotto.utils.IntegerUtils;
 import lotto.utils.StringUtils;

@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.domain.Rank;
+import lotto.constant.Rank;
 
 import java.util.Objects;
 

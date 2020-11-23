@@ -1,12 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.Rank;
 import lotto.dto.LottoGameResultDto;
 
 import java.util.List;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 public class ResultView {
 

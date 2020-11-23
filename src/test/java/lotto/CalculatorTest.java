@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoAmount;
-import lotto.domain.Rank;
+import lotto.constant.Rank;
 import lotto.utils.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

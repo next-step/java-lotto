@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.common.ErrorMessage;
-import lotto.domain.Rank;
+import lotto.constant.ErrorMessage;
+import lotto.constant.Rank;
 import lotto.utils.IntegerUtils;
 import lotto.utils.StringUtils;
 

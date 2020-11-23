@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.utils;
 
-import lotto.common.Lotto;
+import lotto.constant.Lotto;
+import lotto.domain.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
+
     public static List<LottoNumbers> create(int lottoCount) {
 
         List<Integer> range = IntStream.range(Lotto.NUMBER_MIN_RANGE, Lotto.NUMBER_MAX_RANGE)

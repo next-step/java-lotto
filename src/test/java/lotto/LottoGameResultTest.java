@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGameResult;
 import lotto.domain.LottoNumbers;
-import lotto.domain.Rank;
+import lotto.constant.Rank;
 import lotto.domain.WinningNumber;
 import lotto.dto.LottoGameResultDto;
 import org.junit.jupiter.api.DisplayName;

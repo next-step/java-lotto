@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.common.Message;
+import lotto.constant.Message;
 
 import java.util.Scanner;
 

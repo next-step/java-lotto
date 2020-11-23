@@ -1,7 +1,5 @@
 package lotto.utils;
 
-import javafx.scene.effect.Bloom;
-
 public class Calculator {
 
     public static double calculateRateOfReturn(int amount, int prizeMoney) {

@@ -1,4 +1,4 @@
-package lotto.common;
+package lotto.constant;
 
 public class Message {
 

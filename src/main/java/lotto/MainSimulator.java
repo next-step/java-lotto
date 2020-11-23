@@ -1,24 +1,26 @@
 package lotto;
 
+import lotto.constant.Rank;
 import lotto.domain.*;
 import lotto.dto.LottoGameResultDto;
 import lotto.utils.Calculator;
+import lotto.utils.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 public class MainSimulator {
+
     public static void main(String[] args) {
 
         LottoAmount lottoAmount = new LottoAmount(InputView.enterLottoAmount());
-
         List<LottoNumbers> lottoNumbers = LottoNumberGenerator.create(lottoAmount.getLottoCount());
+
         ResultView.printLottoNumbers(lottoNumbers);
+
 
         String winningNumbers = InputView.enterWinningNumbers();
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
