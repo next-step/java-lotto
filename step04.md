@@ -65,8 +65,7 @@ return lottoBalls.stream()
     - public static Lottos of(Integer countOfLotto)
     - private static List<Lotto> generateLottos(Integer countOfLotto) 
     - public Integer size()
-
-    - Lotto 추가 기능
+    - public Lottos addLottos(Lottos addedLottos)
 
 - `RankCounter`
     - EnumMap<Rank, Integer> rankCounter = new EnumMap<>(Rank.class);

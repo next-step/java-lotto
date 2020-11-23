@@ -22,7 +22,6 @@ public class InputView {
 
     public static String createWinningNumber() {
         System.out.println(LOTTO_CREATE_WINNING_NUMBERS_MESSAGE);
-        scanner.nextLine();
         return scanner.nextLine();
     }
 
