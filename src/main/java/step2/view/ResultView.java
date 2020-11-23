@@ -5,7 +5,7 @@ public class ResultView {
         System.out.println(message);
     }
 
-    public static void printBuyCost() {
+    public static void printPurchasePrice() {
         printMessage("구입금액을 입력해 주세요.");
     }
 }

@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class InputView {
     static Scanner sc = new Scanner(System.in);
 
-    public static int inputBuyCost() {
-        ResultView.printBuyCost();
+    public static int inputPurchasePrice() {
+        ResultView.printPurchasePrice();
         return sc.nextInt();
     }
 }
