@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumber {
 
-    private final int bonusNumber;
+    private BonusNumber bonusNumber;
     private List<Integer> numbers;
 
     private WinningNumberParser parser = new WinningNumberParser();
@@ -20,10 +19,9 @@ public class WinningNumber {
         this.bonusNumber = getBonusNumberIfValid(bonusNumber);
     }
 
-    private int getBonusNumberIfValid(int bonusNumber) {
+    private BonusNumber getBonusNumberIfValid(int bonusNumber) {
         if (numbers.contains(bonusNumber)) throw new InvalidBonusNumberException(bonusNumber);
-        if (bonusNumber < 1 || bonusNumber > 45) throw new InvalidBonusNumberException(bonusNumber);
-        return bonusNumber;
+        return new BonusNumber(bonusNumber);
     }
 
     private void parse(String numberString) {
@@ -47,7 +45,7 @@ public class WinningNumber {
     }
 
     private NumberMatcher bonusNumberMatcher() {
-        return new ListNumberMatcher(Arrays.asList(bonusNumber));
+        return bonusNumber.bonusNumberMatcher();
     }
 }
 
