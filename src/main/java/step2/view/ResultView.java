@@ -1,6 +1,6 @@
 package step2.view;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class ResultView {
     private static void printMessage(String message) {
@@ -15,8 +15,8 @@ public class ResultView {
         printMessage(purchaseCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(Integer[] lottoNumbers) {
-        printMessage(Arrays.toString(lottoNumbers));
+    public static void printLottoNumbers(List<Integer> lottoNumbers) {
+        printMessage(lottoNumbers.toString());
     }
 
     public static void printWinNumber() {
