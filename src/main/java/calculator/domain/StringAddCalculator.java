@@ -2,6 +2,10 @@ package calculator.domain;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {
+        throw new AssertionError();
+    }
+
     public static int splitAndSum(String text) {
 
         if (StringPreConditionChecker.isRightString(text)) {
