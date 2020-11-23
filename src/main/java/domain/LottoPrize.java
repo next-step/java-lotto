@@ -30,8 +30,8 @@ public enum LottoPrize {
         }
     }
 
-    public static List<Integer> valueOf(int matchNumber) {
-        return (List<Integer>) map.get(matchNumber);
+    public static List<Integer> valueOf(int prize) {
+        return (List<Integer>) map.get(prize);
     }
 
     public int getMatchNumber() {

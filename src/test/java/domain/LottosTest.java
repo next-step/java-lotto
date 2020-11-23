@@ -18,7 +18,7 @@ class LottosTest {
     void createLottos() {
         lottos = initTestLottos();
 
-        assertThat(lottos.getLottos().size()).isEqualTo(4);
+        assertThat(lottos.getLottos().size()).isEqualTo(6);
     }
 
     @Test
@@ -29,7 +29,7 @@ class LottosTest {
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
 
-        Lottos lottos = initTestLottos();
+        lottos = initTestLottos();
 
         Map<Integer, Integer> result = new HashMap<>();
         result.put(1, 1);
