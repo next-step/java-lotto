@@ -13,13 +13,33 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int matchLottoNumbers(LottoNumbers winningLotto) {
+    public LottoPrize matchLottoNumbers(LottoNumbers winningLotto, int bonusNumber) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
 
-        return (int) lottoNumbers.getNumbers()
+        int matchNumber =  (int) lottoNumbers.getNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
+
+        switch (matchNumber) {
+            case 6:
+                return  LottoPrize.FIRST;
+            case 5:
+                return checkSecondPrize(bonusNumber);
+            case 4:
+                return LottoPrize.FOURTH;
+            case 3:
+                return LottoPrize.FIFTH;
+            default:
+                return null;
+        }
+    }
+
+    private LottoPrize checkSecondPrize(int bonusNumber) {
+        if(lottoNumbers.getNumbers().contains(bonusNumber)) {
+            return LottoPrize.SECOND;
+        }
+        return LottoPrize.THIRD;
     }
 
     public LottoNumbers getLottoNumbers() {

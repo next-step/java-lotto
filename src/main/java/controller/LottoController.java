@@ -56,7 +56,7 @@ public class LottoController {
 
         resultView.displayResultMention();
 
-        Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers);
+        Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers, bonusNumber);
         resultView.displayStatistic(lottoStatistics);
 
         double profit = LottoProfit.calculateProfit(lottoStatistics, priceTotal).getProfit();

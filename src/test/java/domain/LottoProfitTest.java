@@ -24,6 +24,7 @@ class LottoProfitTest {
     @Test
     @DisplayName("수익률 계산 기능")
     void calculateProfitTest() {
+        int bonusNumber = 7;
         LottoInfo lottoInfo = LottoInfo.of(4000, 4);
 
         String winning = "1, 2, 3, 4, 5, 6";
@@ -31,7 +32,7 @@ class LottoProfitTest {
                 .createWinningNumbers(winning);
 
         Lottos lottos = initTestLottos();
-        Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers);
+        Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers, bonusNumber);
 
         assertThat(LottoProfit.calculateProfit(lottoStatistics, lottoInfo.getPrice()).getProfit())
                 .isEqualTo(

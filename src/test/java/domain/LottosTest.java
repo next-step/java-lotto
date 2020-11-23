@@ -25,18 +25,20 @@ class LottosTest {
     @DisplayName("당첨 통계 계산 기능")
     void lottoStatistic() {
         String winning = "1, 2, 3, 4, 5, 6";
+        int bonusNumber = 7;
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
 
         Lottos lottos = initTestLottos();
 
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(3, 2);
+        result.put(1, 1);
+        result.put(2, 1);
+        result.put(3, 1);
         result.put(4, 0);
-        result.put(5, 0);
-        result.put(6, 1);
+        result.put(5, 2);
 
-        assertThat(lottos.compileLottoStatistics(winningNumbers)).isEqualTo(result);
+        assertThat(lottos.compileLottoStatistics(winningNumbers, bonusNumber)).isEqualTo(result);
     }
 
     private Lottos initTestLottos() {
@@ -60,8 +62,18 @@ class LottosTest {
                 .createWinningNumbers(test4);
         Lotto testLotto4 = new Lotto(testNumber4);
 
+        String test5 = "1, 2, 3, 4, 5, 7";
+        LottoNumbers testNumber5 = new LottoNumbers()
+                .createWinningNumbers(test5);
+        Lotto testLotto5 = new Lotto(testNumber5);
 
-        return Lottos.from(Arrays.asList(testLotto1, testLotto2, testLotto3, testLotto4));
+        String test6 = "1, 2, 3, 4, 5, 8";
+        LottoNumbers testNumber6 = new LottoNumbers()
+                .createWinningNumbers(test6);
+        Lotto testLotto6 = new Lotto(testNumber6);
+
+
+        return Lottos.from(Arrays.asList(testLotto1, testLotto2, testLotto3, testLotto4, testLotto5, testLotto6));
     }
 
 }
