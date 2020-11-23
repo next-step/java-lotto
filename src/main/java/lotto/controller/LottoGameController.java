@@ -6,6 +6,7 @@ import lotto.domain.WinResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoGameController {
@@ -33,7 +34,7 @@ public class LottoGameController {
 
     public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers, String bonusNumber) {
 
-        lottoGameResults.checkWinningResult(lastWinningNumbers, bonusNumber);
+        lottoGameResults.checkWinningResult(splitLastWinningNumbers(lastWinningNumbers), validateBonusNumber(bonusNumber));
 
         Map<WinResult, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
@@ -43,6 +44,14 @@ public class LottoGameController {
 
         getProfitResult(profit);
 
+    }
+
+    public static int validateBonusNumber(String bonusNumber) {
+        return InputView.validateBonusNumber(bonusNumber);
+    }
+
+    public static List<Integer> splitLastWinningNumbers(String lastWinningNumbers) {
+        return InputView.splitLastWinningNumbers(lastWinningNumbers);
     }
 
     private static void getProfitResult(double profit) {

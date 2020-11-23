@@ -3,6 +3,9 @@ package lotto.view;
 import static lotto.domain.LottoGameConfig.*;
 import lotto.domain.LottoErrorMessage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,6 +14,9 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBER= "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "\n보너스 볼을 입력해 주세요.";
     private static final String INPUT_MONEY_PATTERN = "(\\d+)";
+    private static final String WINNING_NUMBER_DELIMITER = ",";
+    private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
+    private static final String BONUS_NUMBER_PATTERN = "([\\d])+";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -58,4 +64,44 @@ public class InputView {
 
         return bonusNumber;
     }
+
+    public static List<Integer> splitLastWinningNumbers(String lastWinningNumbers) {
+        List<Integer> lastWinningNumberList = new ArrayList<>();
+        Arrays.stream(validateLastWinningNumbers(lastWinningNumbers)).forEach(i -> lastWinningNumberList.add(Integer.parseInt(i.trim())));
+        return lastWinningNumberList;
+    }
+
+    private static String[] splitWinningNumber(String lastWinningNumbersInput) {
+        return lastWinningNumbersInput.split(WINNING_NUMBER_DELIMITER);
+    }
+
+    public static String[] validateLastWinningNumbers(String lastWinningNumbersInput) {
+        if (!lastWinningNumbersInput.matches(WINNING_NUMBER_PATTERN)) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
+        String[] lastWinningNumbers = splitWinningNumber(lastWinningNumbersInput);
+
+        if (lastWinningNumbers.length != LOTTO_TICKET_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
+
+        if(Arrays.stream(lastWinningNumbers).anyMatch(number -> Integer.parseInt(number) > MAX_LOTTO_NUMBER)){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
+
+        return lastWinningNumbers;
+    }
+
+    public static int validateBonusNumber(String bonusNumberValue) {
+        if (!bonusNumberValue.matches(BONUS_NUMBER_PATTERN)) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
+        }
+        int bonusNumber = Integer.parseInt(bonusNumberValue);
+        if(bonusNumber> MAX_LOTTO_NUMBER){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
+        }
+
+        return bonusNumber;
+    }
+
 }
