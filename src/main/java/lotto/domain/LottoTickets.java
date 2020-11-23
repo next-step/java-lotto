@@ -41,8 +41,8 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<WinResult> scoreWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
-        List<WinResult> winResults = new ArrayList<>();
+    public List<PrizeUnit> scoreWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
+        List<PrizeUnit> winResults = new ArrayList<>();
         lottoTickets.stream()
                 .forEach(lottoTicket -> winResults.add(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));
 

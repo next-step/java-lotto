@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,17 +22,15 @@ public class LottoGameResultsTest {
 
         this.lottoGameResults = new LottoGameResults(lottoTickets);
 
-        int[] numbers = {1,2,3,4,5,6};
-
     }
 
     @DisplayName("LottoGameResults 수익률 계산 테스트")
     @Test
     void getProfitTest(){
 
-        Map<WinResult, Integer> winningResults = new HashMap<>();
-        winningResults.put(new WinResult(3, false), 1);
-        winningResults.put(new WinResult(4, false), 1);
+        Map<PrizeUnit, Integer> winningResults = new HashMap<>();
+        winningResults.put(PrizeUnit.findPrizeFieldByUnitCount(3, false), 1);
+        winningResults.put(PrizeUnit.findPrizeFieldByUnitCount(4, false), 1);
 
         double profitResult = lottoGameResults.getProfit(winningResults);
 

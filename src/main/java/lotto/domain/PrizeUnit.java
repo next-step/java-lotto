@@ -9,7 +9,8 @@ public enum PrizeUnit {
     SECOND_GRADE(5, 30000000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
     THIRD_GRADE(5, 1500000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
     FOURTH_GRADE(4, 50000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
-    FIFTH_GRADE(3,  5000, (value, unitMoney) -> Long.valueOf(value * unitMoney));
+    FIFTH_GRADE(3,  5000, (value, unitMoney) -> Long.valueOf(value * unitMoney)),
+    FAIL_GRADE(0,  0, (value, unitMoney) -> Long.valueOf(value * unitMoney));
 
 
     public int prizeUnitCount;
