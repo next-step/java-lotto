@@ -1,9 +1,8 @@
-package step2;
+package step2.view;
 
 import java.util.Scanner;
 
 public class InputView {
-    // 구입금액입력
     static Scanner sc = new Scanner(System.in);
 
     public static int inputBuyCost() {
