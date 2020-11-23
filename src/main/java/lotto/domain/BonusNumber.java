@@ -11,7 +11,7 @@ public class BonusNumber {
         this.number = number;
     }
 
-    public NumberMatcher bonusNumberMatcher() {
+    public NumberMatcher getNumberMatcher() {
         return new ListNumberMatcher(Arrays.asList(number));
     }
 }

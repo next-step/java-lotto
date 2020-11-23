@@ -45,7 +45,7 @@ public class WinningNumber {
     }
 
     private NumberMatcher bonusNumberMatcher() {
-        return bonusNumber.bonusNumberMatcher();
+        return bonusNumber.getNumberMatcher();
     }
 }
 
