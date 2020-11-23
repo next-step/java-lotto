@@ -53,6 +53,7 @@ public class LottoController {
                 .createWinningNumbers(inputWinningNumber);
 
         int bonusNumber = inputView.inputBonusNumber();
+        LottoValidator.checkLottoRange(bonusNumber);
 
         resultView.displayResultMention();
 

@@ -37,7 +37,7 @@ public class LottoValidator {
         }
     }
 
-    private static void checkLottoRange(int number) {
+    public static void checkLottoRange(int number) {
         if(number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 범위는 1 ~ 45 입니다.");
         }
