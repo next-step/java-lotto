@@ -19,6 +19,8 @@ public class LottoStore {
 
     public Lotto getLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new Lotto(LOTTO_NUMBERS.subList(0, 6));
+        List<Integer> extractionLottoNumbers = LOTTO_NUMBERS.subList(0, 6);
+        Collections.sort(extractionLottoNumbers);
+        return new Lotto(extractionLottoNumbers);
     }
 }
