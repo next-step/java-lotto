@@ -38,6 +38,7 @@ public class InputView {
 
     public static List<String> readManualLottos(int count) {
         System.out.println(LOTTO_MANUAL_MESSAGE);
+        scanner.nextLine();
         List<String> manualLottos = new ArrayList<>();
 
         for(int i = 0 ; i < count; i++)

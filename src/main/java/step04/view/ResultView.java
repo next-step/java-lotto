@@ -18,6 +18,7 @@ public class ResultView {
     private static final String GAIN = "이득";
     private static final String BONUS_BALL_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final Integer BONUS_BALL_REWARD = 30_000_000;
+    private static final String COUNT_OF_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
 
     public static void showLottoCount(int lottoCount) {
@@ -49,5 +50,11 @@ public class ResultView {
         String result = yield < 1 ? LOSS : GAIN;
         System.out.printf(YIELD_MESSAGE, yield, result);
     }
+
+    public static void showCountOfLotto(Integer countOfManualLottos, Integer countOfAutoLottos) {
+        System.out.printf(COUNT_OF_LOTTO, countOfManualLottos, countOfAutoLottos);
+    }
+
+
 
 }
