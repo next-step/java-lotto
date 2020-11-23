@@ -2,29 +2,26 @@ package step2.lotto.automatic.controller;
 
 
 import step2.lotto.automatic.domain.LottoMatch;
-import step2.lotto.automatic.domain.LottoStatusEnum;
-import step2.lotto.automatic.view.InputStep2View;
-import step2.lotto.automatic.view.OuterStep2View;
-
-import java.util.Map;
+import step2.lotto.automatic.view.InputLottoView;
+import step2.lotto.automatic.view.OuterLottoView;
 
 public class LottoController {
 
     private static LottoMatch lottoMatch;
 
-    public static void main(String[] args) {
-        int purchaseAmount = InputStep2View.inputValue();
+    public void gameStart() {
+        int purchaseAmount = InputLottoView.inputValue();
         lottoMatch = new LottoMatch(purchaseAmount);
-        lottoMatch.buyLottoNumber();
+        lottoMatch.buyLotto();
 
-        OuterStep2View.printBuyLotto(lottoMatch.getLottoPurchaseCount());
-        OuterStep2View.printAutoLottoNumbers(lottoMatch.getBuyLottoList());
+        OuterLottoView.printBuyLotto(lottoMatch.getLottoPurchaseCount());
+        OuterLottoView.printAutoLottoNumbers(lottoMatch.getBuyLottoHashSet(), lottoMatch.getLottoPurchaseCount());
 
-        String inputLottoWinnerNumber = InputStep2View.inputWinningLottoNumbers();
-        Map<Integer, LottoStatusEnum> resunlt = lottoMatch.getLottoResult(inputLottoWinnerNumber);
-        OuterStep2View.printLottoResult(resunlt);
+        String inputLottoWinnerNumber = InputLottoView.inputWinningLottoNumbers();
+        lottoMatch.getLottoResult(inputLottoWinnerNumber);
 
-        double returnValue = lottoMatch.getLottoProfitAmount(resunlt);
-        OuterStep2View.printLottoProfitAmount(returnValue);
+        OuterLottoView.printLottoResult();
+        OuterLottoView.printLottoProfitAmount(lottoMatch.getlottoProfitAmount());
     }
+
 }
