@@ -28,9 +28,8 @@ public class LottoTicketMaker {
     }
 
     public int lottoPurchaseQty() {
-        return amount.getLottoAmount() / 1000;
+        return amount.lottoPurchaseQty();
     }
-
     private void lottoCreateStart() {
         List<Lotto> lotto = IntStream.range(0, this.qty)
                 .mapToObj(i -> lottoTicketCreate())

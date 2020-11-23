@@ -12,8 +12,8 @@ public class Amount {
         purchaseAmountValidate();
     }
 
-    public int getLottoAmount() {
-        return lottoAmount;
+    public int lottoPurchaseQty() {
+        return this.lottoAmount / 1000;
     }
 
     private void purchaseAmountValidate() {
