@@ -8,7 +8,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
 
-        LottoPrice lottoPrice = new LottoPrice(InputView.inputPurchasePrice());
+        LottoPrice lottoPrice = LottoPrice.from(InputView.inputPurchasePrice());
 
         LottoShop lottoShop = new LottoShop();
         Lottos lottos = lottoShop.purchase(lottoPrice, new LottoAutoMachine());

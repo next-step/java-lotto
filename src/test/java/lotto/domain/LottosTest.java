@@ -55,7 +55,7 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(new LottoPrice(10000), (capacity -> new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
+        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), (capacity -> new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
 
         //When
         Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9)))));

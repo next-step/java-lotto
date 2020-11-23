@@ -20,7 +20,7 @@ public class LottoShopTest {
 
         //Given & When
         LottoShop shop = new LottoShop();
-        Lottos lottos = shop.purchase(new LottoPrice(purchasePrice), new LottoAutoMachine());
+        Lottos lottos = shop.purchase(LottoPrice.from(purchasePrice), new LottoAutoMachine());
 
         //Then
         assertThat(lottos.quantity()).isEqualTo(expected);

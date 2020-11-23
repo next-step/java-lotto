@@ -15,7 +15,7 @@ public class LottoPriceTest {
     @Test
     public void createLottoPriceInstanceTest() {
         //Given & When
-        LottoPrice lottoPrice = new LottoPrice(1000);
+        LottoPrice lottoPrice = LottoPrice.from(1000);
 
         //Then
         assertThat(lottoPrice).isNotNull();
@@ -26,9 +26,8 @@ public class LottoPriceTest {
     @CsvSource(value = {"800:200", "500:500", "150:850"}, delimiter = ':')
     public void notValidLottoPriceTest(int purchasePrice, int insufficientAmount) {
         assertThatThrownBy(() -> {
-
             LottoShop shop = new LottoShop();
-            shop.purchase(new LottoPrice(purchasePrice), new LottoAutoMachine());
+            shop.purchase(LottoPrice.from(purchasePrice), new LottoAutoMachine());
         }).isInstanceOf(NotValidLottoPriceException.class)
           .hasMessage(insufficientAmount + ErrorMessage.NOT_VALID_PRICE.getMessage());
     }
