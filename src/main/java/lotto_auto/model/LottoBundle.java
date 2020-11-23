@@ -37,9 +37,9 @@ public class LottoBundle {
         return Collections.unmodifiableList(lottoTicketList);
     }
 
-    public LottoStatistic draw(LottoNumber lottoNumber) {
+    public LottoStatistic draw(LottoNumbers lottoNumbers) {
         return new LottoStatistic(lottoTicketList.stream()
-                .map(item -> item.draw(lottoNumber))
+                .map(item -> item.draw(lottoNumbers))
                 .collect(Collectors.toList()),
                 this.payment);
     }

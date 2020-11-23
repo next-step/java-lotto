@@ -14,11 +14,11 @@ public class LottoNumberManager {
                     .boxed()
                     .collect(Collectors.toList());
 
-    public static LottoNumber generate() {
+    public static LottoNumbers generate() {
         Collections.shuffle(lottoNumberList);
         List<Integer> list = new ArrayList<>();
         list.addAll(lottoNumberList.subList(0, 6));
         Collections.sort(list);
-        return new LottoNumber(list);
+        return new LottoNumbers(list);
     }
 }

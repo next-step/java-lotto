@@ -8,19 +8,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoNumberManagerTest {
+class LottoNumbersManagerTest {
 
 
     @DisplayName("로또 번호 생성 테스트")
     @Test
     public void createLottoNumberTest() {
-        LottoNumber lottoNumber = LottoNumberManager.generate();
+        LottoNumbers lottoNumbers = LottoNumberManager.generate();
 
 
-        List<Integer> lottoNumberList = lottoNumber.export();
+        List<Integer> lottoNumberList = lottoNumbers.export();
 
         assertAll(
-                () -> assertThat(lottoNumber).isNotNull(),
+                () -> assertThat(lottoNumbers).isNotNull(),
                 () -> assertThat(lottoNumberList).isNotNull(),
                 () -> assertThat(lottoNumberList.size()).isEqualTo(6)
         );

@@ -1,7 +1,7 @@
 package lotto_auto;
 
 import lotto_auto.model.LottoBundle;
-import lotto_auto.model.LottoNumber;
+import lotto_auto.model.LottoNumbers;
 import lotto_auto.model.LottoStatistic;
 import lotto_auto.model.LottoStore;
 import lotto_auto.view.BuyInputView;
@@ -14,8 +14,8 @@ public class Main {
         int money = BuyInputView.enter();
         LottoBundle lottoBundle = LottoStore.sell(money);
         LottoBundleStatusView.statusPrint(lottoBundle);
-        LottoNumber winningLottoNumber = WinningLottoInputView.enter();
-        LottoStatistic lottoStatistic = lottoBundle.draw(winningLottoNumber);
+        LottoNumbers winningLottoNumbers = WinningLottoInputView.enter();
+        LottoStatistic lottoStatistic = lottoBundle.draw(winningLottoNumbers);
         StatisticResultView.printStatistic(lottoStatistic);
     }
 }

@@ -5,14 +5,14 @@ import lotto_auto.ErrorMessage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumbers {
 
     private static final Integer LOTTO_NUMBER_COUNT = 6;
     private static final Integer LOTTO_NUMBER_MIN_RANGE = 0;
     private static final Integer LOTTO_NUMBER_MAX_RANGE = 45;
     private List<Integer> lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
+    public LottoNumbers(List<Integer> lottoNumber) {
         ThrowIfNull(lottoNumber);
         ThrowIfInValidLottoNumberCount(lottoNumber);
         ThrowIfInvalidLottoNumberRange(lottoNumber);
@@ -52,10 +52,10 @@ public class LottoNumber {
         }
     }
 
-    public int computeMatchCount(LottoNumber lottoNumber) {
+    public int computeMatchCount(LottoNumbers lottoNumbers) {
         List<Integer> all = new ArrayList<>();
         all.addAll(this.export());
-        all.addAll(lottoNumber.export());
+        all.addAll(lottoNumbers.export());
         Set<Integer> removeDup = new HashSet<>(all);
         return all.size() - removeDup.size();
     }

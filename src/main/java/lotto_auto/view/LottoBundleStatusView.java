@@ -24,7 +24,7 @@ public class LottoBundleStatusView {
     private static String printLottoTicket(LottoTicket lottoTicket) {
 
         String collect = lottoTicket
-                .getLottoNumber()
+                .getLottoNumbers()
                 .export()
                 .stream()
                 .map(String::valueOf)
