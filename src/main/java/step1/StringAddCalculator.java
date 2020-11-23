@@ -9,13 +9,15 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String NUMBER = "^[0-9]*$";
+    private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    private static final int ZERO = 0;
 
     public StringAddCalculator() {
     }
 
     public int splitAndSum(final String input) {
         if (isBlank(input)) {
-            return 0;
+            return ZERO;
         }
 
         return sum(parseToInt(split(input)));
@@ -26,7 +28,7 @@ public class StringAddCalculator {
     }
 
     public String[] split(String input) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = validPattern(input);
         if (matcher.find()) {
             String customSeparator = matcher.group(1);
             return matcher.group(2).split(customSeparator);
@@ -55,5 +57,9 @@ public class StringAddCalculator {
             result += value;
         }
         return result;
+    }
+
+    public Matcher validPattern(String input) {
+        return pattern.matcher(input);
     }
 }
