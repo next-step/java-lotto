@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.LottoGameController;
-import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
 
 /**

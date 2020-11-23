@@ -1,6 +1,5 @@
 package lotto.domain.winning;
 
-import lotto.domain.Lottos;
 import lotto.domain.game.LottoNumber;
 
 import java.util.*;

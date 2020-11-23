@@ -3,8 +3,6 @@ package lotto.domain;
 import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

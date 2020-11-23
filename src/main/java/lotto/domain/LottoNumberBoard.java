@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created By mand2 on 2020-11-19.

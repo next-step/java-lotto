@@ -1,9 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.game.Lotto;
-import lotto.domain.winning.WinningChecker;
-import lotto.domain.winning.WinningNumber;
-import lotto.domain.winning.WinningStatistics;
 
 import java.util.List;
 import java.util.Objects;
