@@ -189,7 +189,6 @@ public class StringAddCalculatorTest {
 - [x] `@DisplayName`을 활용해서 test의도 나타내기
 
 ----
-
 # [2단계 - 2단계 - 로또(자동)](https://edu.nextstep.camp/s/MNii0Puk/ls/uYOLrcvU)
 
 ## 기능 요구사항
@@ -254,4 +253,22 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 * git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
 
 ## 구현할 기능 목록 정리
-* ...
+* LotteryNumber class를 구현한다.
+  * 1~ 45 이내의 숫자만 허용한다.
+* LotteryTicket class를 구현한다.
+  * 6개 숫자는 종복이 없다.
+  * 오름 차순으로 정렬한다.  
+* LotteryPerson class를 구현한다.
+  * 로또 구매하는 금액을 입력 받는다.
+  * 금액 만큼 로또를 구입한다.
+* LotteryGame class를 구현한다.
+  * 당첨 번호를 입력 받는다.
+  * 로또 1장을 구입한다.
+  * 로또 당첨을 확인한다.
+* LotteryGameManager class를 구현한다.
+* InputView class를 구현한다.
+  * 금액을 입력 받는다.
+  * 6개의 당첨 번호를 입력 받는다.
+* ResultView class를 구현한다.
+  * 구매한 복권 개수를 출력한다.
+  * 당첨 통계를 출력한다.
