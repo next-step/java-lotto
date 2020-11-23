@@ -1,4 +1,4 @@
-package step2.lotto.automatic.domain;
+package step2.lotto.automatic.domain.numbers;
 
 import step2.lotto.automatic.util.CommonLottoCheck;
 import step2.lotto.automatic.util.LottoStep2ErrorMessage;
