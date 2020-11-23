@@ -2,8 +2,6 @@ package step3.domain;
 
 import step3.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -24,6 +22,7 @@ public class LottoNumber {
         lottoNumberValidate();
         lottoNumberSizeValidate();
         bonusNumberValidate();
+        bonusNumberMaxValidate();
     }
 
     public static LottoNumber of(String lastWeekNumber, String bonusNumber) {
@@ -66,6 +65,12 @@ public class LottoNumber {
 
         if (!matcher.find()) {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+        }
+    }
+
+    private void bonusNumberMaxValidate() {
+        if(Integer.parseInt(this.bonusNumber) > 45) {
+            throw new IllegalArgumentException("보너스 볼 최대 숫자는 45입니다.");
         }
     }
 }
