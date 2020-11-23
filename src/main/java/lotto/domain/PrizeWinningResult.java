@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class PrizeWinningResult {
@@ -9,7 +11,7 @@ public class PrizeWinningResult {
     private final int paidMoney;
     private Map<LottoRanking, Integer> rankedLottoCounts;
 
-    public PrizeWinningResult(int paidMoney, List<RankedLotto> rankedLottos) {
+    private PrizeWinningResult(int paidMoney, List<RankedLotto> rankedLottos) {
         this.paidMoney = paidMoney;
         this.rankedLottoCounts = rankedLottos.stream()
                 .collect(Collectors.toMap(
@@ -23,11 +25,10 @@ public class PrizeWinningResult {
     }
 
     public double getRateOfReturn() {
-        long total = ((getRankedLottoCount(LottoRanking.FIRST) * LottoRanking.FIRST.getWinningMoney())
-                + (getRankedLottoCount(LottoRanking.SECOND) * LottoRanking.SECOND.getWinningMoney())
-                + (getRankedLottoCount(LottoRanking.THIRD) * LottoRanking.THIRD.getWinningMoney())
-                + (getRankedLottoCount(LottoRanking.FOURTH) * LottoRanking.FOURTH.getWinningMoney())
-                + (getRankedLottoCount(LottoRanking.FIFTH) * LottoRanking.FIFTH.getWinningMoney()));
+
+        long total = Arrays.stream(LottoRanking.values())
+                .map(it -> getRankedLottoCount(it) * it.getWinningMoney())
+                .reduce(Integer::sum).get();
 
         if (total == 0) return 0;
         return (double) total / this.paidMoney;
