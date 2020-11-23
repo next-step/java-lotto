@@ -22,15 +22,15 @@ public class SeedMoney {
     }
 
     public static SeedMoney from(String money) {
-        isNull(money);
-        int amount = isNumber(money);
+        checkNull(money);
+        int amount = getNumber(money);
 
         return from(amount);
     }
 
     public static SeedMoney from(int money) {
-        isPositive(money);
-        isDivided(money);
+        checkPositive(money);
+        checkDivided(money);
 
         return new SeedMoney(money);
     }
@@ -43,13 +43,13 @@ public class SeedMoney {
         return this.money / MONEY_PER_ROUND;
     }
 
-    private static void isNull(String money) {
+    private static void checkNull(String money) {
         if (Objects.isNull(money) || money.isEmpty()) {
             throw new NullPointerException(MESSAGE_NON_NULL);
         }
     }
 
-    private static int isNumber(String money) {
+    private static int getNumber(String money) {
         try {
             return Integer.valueOf(money);
         } catch (NumberFormatException e) {
@@ -57,13 +57,13 @@ public class SeedMoney {
         }
     }
 
-    private static void isPositive(int amount) {
+    private static void checkPositive(int amount) {
         if (ZERO >= amount) {
             throw new IllegalArgumentException(MESSAGE_ROUND_TIMES);
         }
     }
 
-    private static void isDivided(int amount) {
+    private static void checkDivided(int amount) {
         if (amount % MONEY_PER_ROUND != ZERO) {
             throw new IllegalArgumentException(MESSAGE_MONEY_TIMES);
         }
