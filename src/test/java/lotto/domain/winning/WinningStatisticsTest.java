@@ -1,11 +1,9 @@
 package lotto.domain.winning;
 
-import lotto.domain.LottoNumberBoard;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
 import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoNumber;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created By mand2 on 2020-11-20.
@@ -33,7 +30,7 @@ class WinningStatisticsTest {
         Lotto lotto4 = Lotto.of(LottoNumber.of(Arrays.asList(1, 2, 3, 34, 35, 36)));
 
         lottos = Lottos.of(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
-        seedMoney = SeedMoney.of(lottos.list().size() * MONEY);
+        seedMoney = SeedMoney.from(lottos.list().size() * MONEY);
     }
 
     @Test

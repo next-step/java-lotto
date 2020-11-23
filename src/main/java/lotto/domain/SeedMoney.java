@@ -21,14 +21,14 @@ public class SeedMoney {
         this.money = money;
     }
 
-    public static SeedMoney of(String money) {
+    public static SeedMoney from(String money) {
         isNull(money);
         int amount = isNumber(money);
 
-        return of(amount);
+        return from(amount);
     }
 
-    public static SeedMoney of(int money) {
+    public static SeedMoney from(int money) {
         isPositive(money);
         isDivided(money);
 

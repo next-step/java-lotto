@@ -26,7 +26,7 @@ public class InputView {
 
     private static SeedMoney askSeedMoney() {
         System.out.println(QUESTION_GAME_MONEY);
-        return SeedMoney.of(LottoGameController.SCANNER.nextLine());
+        return SeedMoney.from(LottoGameController.SCANNER.nextLine());
     }
 
     private static void showGameRound(int amount) {
