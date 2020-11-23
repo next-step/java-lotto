@@ -28,11 +28,9 @@
     *  else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
     
 ##메소드 설명
-* LottoController - main 메소드
-* LottoAutoNumbers - 로또번호 자동생성 객체
-    * getAutoNumbers() : 로또번호 자동생성
-* LottoMatch - 로또번호 맞추기
-* LottoStatusEnum - 로또상태 객체
+* LottoController - gameStart()
+* LottoMachine - 로또번호 생성관리객체
+* LottoAUtoNumbers - 자동번호 가져오는 객체
 * LottoWinningNumber - 로또 당첨번호 관리객체
     * getRank(List<integer> list) - 당첨등수 확인
         * return값
@@ -40,7 +38,12 @@
             * 2 = 2등
             * 3 = 3등
             * 4 = 4등
+* LottoMatch - 로또번호 맞추기
+* LottoStatusEnum - 로또상태 객체
 * LottoShop - 로또 사는 객체
+* LottoProfitAmount - 1등부터 4등까지의 상금의 합 관리객체
+
+
 
 
 
