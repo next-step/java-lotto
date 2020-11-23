@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.views.InputView;
 import lotto.views.ResultView;
+import lotto.views.StatisticsExporter;
+import lotto.views.TicketsExporter;
 
 public class Client {
 
@@ -10,7 +12,8 @@ public class Client {
     ResultView.printNumLotto(budget.getNumPossibleLotto());
 
     LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
-    ResultView.printLottoInfo(purchasedTickets.toString());
+    TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
+    ResultView.printLottoInfo(ticketsExporter);
 
     WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
 
@@ -20,11 +23,8 @@ public class Client {
     LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
 
     ResultView.printStatisticsOpening();
-    // for (int hit = MINIMUM_REWARD_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
-    //   ResultView
-    //       .printRewards(hit, Rank.getRewardFromNumHit(hit).getWinningReward(),
-    //           lottoResult.getRecordedNumberOfHit(hit));
-    // }
+    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult);
+    ResultView.printRewards(statisticsExporter);
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));

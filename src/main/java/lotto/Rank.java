@@ -19,6 +19,10 @@ public enum Rank {
     this.winningReward = winningReward;
   }
 
+  public int getNumHit() {
+    return this.numHit;
+  }
+
   public int getWinningReward() {
     return this.winningReward;
   }
