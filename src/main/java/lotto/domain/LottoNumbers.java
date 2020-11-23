@@ -16,6 +16,11 @@ public class LottoNumbers {
         lottoNumbers = createdLottoNumbers;
     }
 
+    public LottoNumbers(Set<Integer> lottoNumbers){
+        validateLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private void validateLottoNumbers(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_CAPACITY) {
             throw new NotValidLottoNumberException(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
@@ -27,7 +32,6 @@ public class LottoNumbers {
     }
 
     public int countPrizeMatchLottoNumber(PrizeLotto prizeLotto) {
-        validateLottoNumbers(prizeLotto.getPrizeNumbers());
         return (int) lottoNumbers.stream()
                                  .filter(prizeLotto::findByIndexNumber)
                                  .count();

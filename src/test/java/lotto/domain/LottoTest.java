@@ -34,7 +34,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(new LottoNumbers((capacity) -> new LinkedHashSet<>(expected)));
 
         //When
-        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(expected));
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(new LottoNumbers(expected)));
 
         //That
         assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(prizeInformation.getMatchNumberCount()));

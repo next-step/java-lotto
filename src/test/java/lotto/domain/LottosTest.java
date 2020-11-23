@@ -58,7 +58,7 @@ public class LottosTest {
         Lottos lottos = lottoShop.purchase(new LottoPrice(10000), (capacity -> new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
 
         //When
-        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9))));
+        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9)))));
 
         //Then
         assertThat(reward).isNotNull();

@@ -63,7 +63,7 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(numbers));
 
         //When
-        int result = lottoNumbers.countPrizeMatchLottoNumber(new PrizeLotto(numbers));
+        int result = lottoNumbers.countPrizeMatchLottoNumber(new PrizeLotto(new LottoNumbers(numbers)));
 
         //Then
         assertThat(result).isEqualTo(6);

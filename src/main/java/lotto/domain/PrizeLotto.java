@@ -4,21 +4,18 @@ import java.util.Set;
 
 public class PrizeLotto  {
 
-    private Set<Integer> prizeNumbers;
+    private LottoNumbers prizeNumbers;
 
-    public PrizeLotto(Set<Integer> prizeNumbers) {
+    public PrizeLotto(LottoNumbers prizeNumbers) {
         this.prizeNumbers = prizeNumbers;
     }
 
-    public int size(){
-        return prizeNumbers.size();
-    }
-
     public boolean findByIndexNumber(int lottoNumber) {
-        return prizeNumbers.contains(lottoNumber);
+        return prizeNumbers.getLottoNumbers()
+                            .contains(lottoNumber);
     }
 
     public Set<Integer> getPrizeNumbers() {
-        return prizeNumbers;
+        return prizeNumbers.getLottoNumbers();
     }
 }

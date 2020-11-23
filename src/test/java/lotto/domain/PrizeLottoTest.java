@@ -21,11 +21,10 @@ public class PrizeLottoTest {
     @MethodSource("createTreeSet")
     public void createInstanceTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(new TreeSet<>(prizeNumbers));
+        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumbers(prizeNumbers));
 
         //Then
         assertThat(prizeLotto).isNotNull();
-        assertThat(prizeLotto.size()).isEqualTo(prizeNumbers.size());
     }
 
     static Stream<Arguments> createTreeSet() {
@@ -38,15 +37,15 @@ public class PrizeLottoTest {
     @ParameterizedTest
     @MethodSource("notValidCreateNumber")
     public void notValidPrizeNumberTest(Set<Integer> prizeNumbers) {
-        assertThatThrownBy(() -> {
-            PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers);
-        }).isInstanceOf(NotValidLottoNumberException.class)
+        assertThatThrownBy(() ->
+            new PrizeLotto(new LottoNumbers(prizeNumbers))
+        ).isInstanceOf(NotValidLottoNumberException.class)
                 .hasMessage(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
     }
 
     static Stream<Arguments> notValidCreateNumber() {
         return Stream.of(
-                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 10, 13))),
+                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 10))),
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6))),
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 10, 20, 30, 35, 40))),
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 10, 20, 30, 46)))
@@ -58,7 +57,7 @@ public class PrizeLottoTest {
     @MethodSource("createTreeSet")
     public void findByIndexTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(new TreeSet<>(prizeNumbers));
+        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumbers(prizeNumbers));
 
         //Then
         for (int number : prizeNumbers) {
