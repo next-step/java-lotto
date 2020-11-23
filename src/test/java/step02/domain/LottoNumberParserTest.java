@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class LottoNumberTokenizerTest {
+public class LottoNumberParserTest {
     @DisplayName("입력받은 WinningNumbers 를 토큰화")
     @Test
     public void test_execute() {
