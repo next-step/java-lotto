@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -12,9 +12,9 @@ public class Lottos {
     }
 
     public Reward matchPrizeNumber(PrizeLotto prizeLotto) {
-        List<PrizeInformation> prizeInformations = new ArrayList<>();
-        lottos.forEach(lotto ->  prizeInformations.add(lotto.matchPrizeNumber(prizeLotto)));
-
+        List<PrizeInformation> prizeInformations = lottos.stream()
+                .map(lotto -> lotto.matchPrizeNumber(prizeLotto))
+                .collect(Collectors.toList());
         return new Reward(prizeInformations);
     }
 

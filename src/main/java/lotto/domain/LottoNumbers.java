@@ -29,7 +29,7 @@ public class LottoNumbers {
     public int countPrizeMatchLottoNumber(PrizeLotto prizeLotto) {
         validateLottoNumbers(prizeLotto.getPrizeNumbers());
         return (int) lottoNumbers.stream()
-                                 .filter(lottoNumber -> prizeLotto.findByIndexNumber(lottoNumber))
+                                 .filter(prizeLotto::findByIndexNumber)
                                  .count();
     }
 }
