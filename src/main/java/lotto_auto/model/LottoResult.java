@@ -2,6 +2,10 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum LottoResult {
 
     FIRST(true, 2000000000L, 1, 6),
@@ -40,20 +44,28 @@ public enum LottoResult {
         return this.rank == rank;
     }
 
+    public boolean isMatchNum(int matchNum) {
+        return this.matchNum == matchNum;
+    }
+
     public static LottoResult valueOfMatchNum(int matchNum) {
-        for (LottoResult value : LottoResult.values()) {
-            if (value.matchNum == matchNum) {
-                return value;
-            }
+        List<LottoResult> lottoResults =
+                Arrays.stream(LottoResult.values())
+                        .filter(item -> item.isMatchNum(matchNum))
+                        .collect(Collectors.toList());
+        if (lottoResults.size() == 1) {
+            return lottoResults.get(0);
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
     }
 
     public static LottoResult valueOfRank(int rank) {
-        for (LottoResult lottoResult : LottoResult.values()) {
-            if (lottoResult.rank == rank) {
-                return lottoResult;
-            }
+        List<LottoResult> lottoResults =
+                Arrays.stream(LottoResult.values())
+                        .filter(item -> item.isRank(rank))
+                        .collect(Collectors.toList());
+        if (lottoResults.size() == 1) {
+            return lottoResults.get(0);
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK);
     }
