@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class ResultView {
     private static final String MSG_NUMBER_OF_PURCHASED = "%d개를 구매했습니다.\n";
     private static final String MSG_STATISTICS_TITLE = "당첨 통계\n--------------";
-    private static final String MSG_STATISTICS_FOR_EACH_PRIZE = "%d개 일치 (%d원) - %d개%n";
+    private static final String MSG_STATISTICS_FOR_EACH_PRIZE = "%d개 일치%s (%d원) - %d개%n";
     private static final String MSG_STATISTICS_FOOTER = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String MSG_STATISTICS_FOOTER_PROFIT = "이익이";
     private static final String MSG_STATISTICS_FOOTER_LOSS = "손해";
@@ -38,7 +38,7 @@ public class ResultView {
 
     public static void printStatistics(AccountManager accountManager) {
         System.out.println(MSG_STATISTICS_TITLE);
-        Stream.of(LottoPrize.FOURTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST)
+        Stream.of(LottoPrize.FIFTH, LottoPrize.FOURTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST)
                 .forEachOrdered(prize -> printResultMessageForEachPrize(prize, accountManager.getResultMap()));
 
         String profitOrLossMessage = getMessageProfitOrLoss(accountManager.getProfitRate());
@@ -51,8 +51,16 @@ public class ResultView {
     private static void printResultMessageForEachPrize(LottoPrize prize, Map<LottoPrize, List<LottoNumberSet>> result) {
         System.out.printf(MSG_STATISTICS_FOR_EACH_PRIZE,
                 prize.getMatchedCount(),
+                getMessageBonusCheck(prize.isCheckBonus()),
                 prize.getPrize(),
                 result.getOrDefault(prize, Collections.EMPTY_LIST).size());
+    }
+
+    private static String getMessageBonusCheck(boolean checkBonus) {
+        if (checkBonus) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     private static String getMessageProfitOrLoss(double profitRate) {

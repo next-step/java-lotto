@@ -28,6 +28,10 @@ public enum LottoPrize {
         return matchedCount;
     }
 
+    public boolean isCheckBonus() {
+        return checkBonus;
+    }
+
     public static LottoPrize of(int matchedCount, boolean bonusMatched) {
         return Stream.of(LottoPrize.values())
                 .filter(prize -> prize.getMatchedCount() == matchedCount && (!prize.checkBonus || bonusMatched))
