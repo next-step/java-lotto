@@ -58,6 +58,6 @@ public class RankCounterTest {
         rankCounter.put(Rank.valueOf(3, false), 1);
         rankCounter.put(Rank.valueOf(0, false), 13);
 
-        assertThat(rankCounter.calculateGainRate()).isEqualTo(0.35);
+        assertThat(rankCounter.calculateGainRate()).isEqualTo(0.35714285714285715);
     }
 }

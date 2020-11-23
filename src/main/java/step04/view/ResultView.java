@@ -3,6 +3,7 @@ package step04.view;
 import step04.Rank;
 import step04.domain.Lotto;
 import step04.domain.RankCounter;
+import utils.DoubleParser;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ResultView {
 
     public static void showYield(double yield) {
         String result = yield < 1 ? LOSS : GAIN;
-        System.out.printf(YIELD_MESSAGE, yield, result);
+        System.out.printf(YIELD_MESSAGE, DoubleParser.getTwoDecimalPoint(yield), result);
     }
 
     public static void showCountOfLotto(Integer countOfManualLottos, Integer countOfAutoLottos) {

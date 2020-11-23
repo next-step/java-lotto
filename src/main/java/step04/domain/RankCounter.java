@@ -51,7 +51,7 @@ public class RankCounter {
     public double calculateGainRate() {
         double spent = LottoCounter.PRICE_OF_LOTTO * getTotalCount();
         double reward = calculateRewardAll();
-        return DoubleParser.getTwoDecimalPoint(reward / spent);
+        return reward / spent;
     }
 
     @Override
