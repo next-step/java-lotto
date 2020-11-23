@@ -4,6 +4,9 @@
 - 2등 출력 
 - 3단계 바탕으로 기능 추가해 보기
 
+## 다음단계에서 해볼 것
+- 테스트를 private 이 아닌 protected 로 해보기
+
 ## 피드백 정리
 ### static 멤버들만 있는 클래스 생성자 방어로직
 
@@ -22,12 +25,23 @@ return lottoBalls.stream()
 ### enum set, enum map 
 
 ## 기능 정리
+- `LottoCounter`
+    - private final Integer countOfLottos;
+    - private final Integer countOfAutoLotto;
+    - private final Integer countOfManualLotto;
+    - private LottoCounter(Integer countOfLottos, Integer countOfManualLotto)
+    - public static LottoCounter of(Integer payment, Integer countOfManualLotto) 
+    - private static void validateCountOfManualLotto(Integer countOfLottos, Integer countOfManualLotto) 
+    - private static void validatePayment(Integer payment) 
+    - private static int calculateCountOfLottos(int payment)
+
 - `LottoBall` 1 -45 LottoBall 의 숫자를 가지고 있는 클래스
     - public static LottoBall[] lottoNumbers
     - private LottoBall(int number)
     - public static LottoBall valueOf(int number)
     - private static void validate(int number) 
         - 1 ~ 45 사이 범위를 초과하면 에러를 던지는 기능
+        
 - `Lotto` 
     - public static Lotto of(List<Integer> lotto)
     - public int matchCount(Lotto targetLotto)
@@ -47,14 +61,14 @@ return lottoBalls.stream()
     
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
+    - public static Lottos of(Integer countOfLotto)
+    - private static List<Lotto> generateLottos(Integer countOfLotto) 
     - public Integer size()
+
     - Lotto 추가 기능
 
 - `LottoSeller` 로또 판매기 
-    - static final int priceOfLotto;
     - public static Lottos generateLottos(int payment)
-    - private static int calculateCountOfLotto(int payment)
-    - private static void validatePayment(int payment);
 
 - `RankCounter`
     - EnumMap<Rank, Integer> rankCounter = new EnumMap<>(Rank.class);
@@ -71,11 +85,6 @@ return lottoBalls.stream()
     - public static Lotto execute(String winningNumbers)
     - public static Lottos executeByMultiple(List<String> lottos)
     
-- `LottoCounter`
-    - 총 로또 수
-    - 수동 로또 수
-    - 수동 로또 수가 구매할 수 있는 로또 수보다 많으면 에러
-    - 수동 로또 수가 음수일 때 에러처리
 
 - `InputView`
     - public static int payLotto() 로또 구입 금액을 지불하는 기능

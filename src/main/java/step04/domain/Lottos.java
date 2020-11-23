@@ -5,6 +5,8 @@ import step04.Rank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -16,6 +18,16 @@ public class Lottos {
 
     public static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
+    }
+
+    public static Lottos of(Integer countOfLotto) {
+        return of(generateLottos(countOfLotto));
+    }
+
+    private static List<Lotto> generateLottos(Integer countOfLotto) {
+        return IntStream.rangeClosed(1, countOfLotto)
+                .mapToObj((idx) -> LottoGenerator.generate())
+                .collect(Collectors.toList());
     }
 
     public Integer size() {

@@ -43,6 +43,12 @@ public class LottosTest {
         assertThat(Lottos.of(lottos)).isEqualTo(Lottos.of(lottos));
     }
 
+    @DisplayName("생성자 매개 변수가 lottos 의 count")
+    @Test
+    void test_constructor_coutOfLottos() {
+        assertThat(Lottos.of(3).size()).isEqualTo(Lottos.of(3).size());
+    }
+
     @DisplayName("사이즈 리턴")
     @Test
     void test_size() {
