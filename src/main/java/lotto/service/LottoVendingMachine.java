@@ -18,14 +18,27 @@ public class LottoVendingMachine {
 
     private LottoVendingMachine() {}
 
-    public static Lottos buyLottery(List<Lotto> manualLotto,int lottoPurchaseCost) {
+    public static Lottos buyLottery(List<String> manualLotto,int lottoPurchaseCost) {
         List<Lotto> lottoList = getLottoList(lottoPurchaseCost);
-        lottoList.addAll(manualLotto);
+        lottoList.addAll(manualLottoList(manualLotto));
         return new Lottos(lottoList);
     }
 
     public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumber, int bonusNumber) {
         return getLottoResultList(lottos,winningNumber,bonusNumber);
+    }
+
+    private static List<Lotto> manualLottoList(List<String> manualLotto) {
+        return manualLotto.stream()
+                .map(LottoVendingMachine::manualLotto)
+                .collect(Collectors.toList());
+    }
+
+    private static Lotto manualLotto(String lottoNumber) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR))
+                .map(e -> LottoNumber.of(Integer.parseInt(e)))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers,false);
     }
 
     private static List<LottoResult> getLottoResultList(Lottos lottos, String winningNumber, int bonusNumber) {

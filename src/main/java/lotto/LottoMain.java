@@ -12,7 +12,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int lottoPurchaseCost = InputView.inputPrice();
-        List<Lotto> manualLotto = InputView.inputManualLottoNumber();
+        List<String> manualLotto = InputView.inputManualLottoNumber();
 
         Lottos lottos = LottoVendingMachine.buyLottery(manualLotto,lottoPurchaseCost);
 
