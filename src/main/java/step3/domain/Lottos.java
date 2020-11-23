@@ -1,9 +1,9 @@
 package step3.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -11,6 +11,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 }
