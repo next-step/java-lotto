@@ -80,11 +80,11 @@ public class LottoNumbersTest {
     @DisplayName("당첨번호 숫자 크기가 로또 숫자 크기와 다를 경우 예외처리")
     @Test
     public void notValidPrizeNumber() {
-        assertThatThrownBy(() -> {
+        assertThatThrownBy(() ->
 
-            LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(1, 3, 5)));
+            new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(1, 3, 5)))
 
-        }).isInstanceOf(NotValidLottoNumberException.class);
+        ).isInstanceOf(NotValidLottoNumberException.class);
 
     }
 
