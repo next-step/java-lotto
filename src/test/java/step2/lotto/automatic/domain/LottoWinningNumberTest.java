@@ -1,6 +1,7 @@
 package step2.lotto.automatic.domain;
 
 import org.junit.jupiter.api.Test;
+import step2.lotto.automatic.domain.numbers.LottoWinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
