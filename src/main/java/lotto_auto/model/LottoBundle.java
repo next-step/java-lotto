@@ -11,9 +11,11 @@ import java.util.stream.IntStream;
 public class LottoBundle {
 
     private List<LottoTicket> lottoTicketList;
+    private final int payment;
 
-    public LottoBundle(int ticketCount) {
+    public LottoBundle(int ticketCount, int payment) {
         throwIfNegativeTicketCount(ticketCount);
+        this.payment = payment;
         this.lottoTicketList = Collections.unmodifiableList(
                 IntStream.range(0, ticketCount)
                         .mapToObj(item -> new LottoTicket())
@@ -38,6 +40,7 @@ public class LottoBundle {
     public LottoStatistic draw(LottoNumber lottoNumber) {
         return new LottoStatistic(lottoTicketList.stream()
                 .map(item -> item.draw(lottoNumber))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()),
+                this.payment);
     }
 }

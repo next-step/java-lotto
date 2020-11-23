@@ -20,7 +20,7 @@ class LottoBundleTest {
             20
     })
     public void createLottoTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE);
         assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount);
     }
 
@@ -34,7 +34,7 @@ class LottoBundleTest {
             20
     })
     public void equalTickCountExportCountTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE);
         assertAll(
                 () -> assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount),
                 () -> assertThat(lottoBundle.export().size()).isEqualTo(ticketCount),
@@ -51,7 +51,7 @@ class LottoBundleTest {
     })
     public void enterNegativeValueExceptionTest(int ticketCount) {
         assertThatThrownBy(
-                () -> new LottoBundle(ticketCount)
+                () -> new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -65,7 +65,7 @@ class LottoBundleTest {
             20
     })
     public void exportTicketIsNotNullTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount,ticketCount * LottoStore.LOTTO_TICKET_PRICE);
         assertThat(lottoBundle.export()).isNotNull();
     }
 

@@ -5,8 +5,6 @@ import lotto_auto.ErrorMessage;
 
 public class LottoTicket {
 
-    public final static int PRICE = 1000;
-
     private LottoNumber lottoNumber;
 
     public LottoTicket() {
