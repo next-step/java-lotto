@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.exception.ErrorMessage;
-import lotto.domain.exception.NotValidLottoNumberException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,7 +10,6 @@ import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PrizeLottoTest {
 
@@ -34,23 +31,6 @@ public class PrizeLottoTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("notValidCreateNumber")
-    public void notValidPrizeNumberTest(Set<Integer> prizeNumbers) {
-        assertThatThrownBy(() ->
-            new PrizeLotto(new LottoNumbers(prizeNumbers))
-        ).isInstanceOf(NotValidLottoNumberException.class)
-                .hasMessage(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
-    }
-
-    static Stream<Arguments> notValidCreateNumber() {
-        return Stream.of(
-                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 10))),
-                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6))),
-                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 10, 20, 30, 35, 40))),
-                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 10, 20, 30, 46)))
-        );
-    }
 
 
     @ParameterizedTest

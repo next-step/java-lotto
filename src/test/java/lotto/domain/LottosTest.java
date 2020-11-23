@@ -38,7 +38,12 @@ public class LottosTest {
         List<Lotto> expected = new ArrayList<>();
         expected.add(0, new Lotto(new LottoAutoMachine()));
         expected.add(1, new Lotto(new LottoAutoMachine()));
-        expected.add(2, new Lotto(() -> new LottoNumbers(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20)))));
+        expected.add(2, new Lotto(new LottoMachine() {
+            @Override
+            LottoNumbers createLottoNumber() {
+                return new LottoNumbers(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20)));
+            }
+        }));
 
         Lottos lottos = new Lottos(expected);
 
@@ -58,7 +63,12 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), () -> new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
+        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), new LottoMachine() {
+            @Override
+            LottoNumbers createLottoNumber() {
+                return new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9)));
+            }
+        });
 
         //When
         Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9)))));

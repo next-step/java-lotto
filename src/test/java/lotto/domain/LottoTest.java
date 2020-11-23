@@ -32,7 +32,12 @@ public class LottoTest {
     @MethodSource("createLottoNumber")
     public void matchPrizeNumberTest(TreeSet<Integer> expected) {
         //Given
-        Lotto lotto = new Lotto(() -> new LottoNumbers(expected));
+        Lotto lotto = new Lotto(new LottoMachine() {
+            @Override
+            LottoNumbers createLottoNumber() {
+                return new LottoNumbers(expected);
+            }
+        });
 
         //When
         PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(new LottoNumbers(expected)));
@@ -44,10 +49,10 @@ public class LottoTest {
 
     static Stream<Arguments> createLottoNumber() {
         return Stream.of(
-                Arguments.of(new LinkedHashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))),
-                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6, 15, 20))),
-                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6, 8, 30))),
-                Arguments.of(new LinkedHashSet<>(Arrays.asList(2, 3, 5, 6, 8, 12)))
+                Arguments.of(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))),
+                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 15, 20))),
+                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 8, 30))),
+                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 8, 12)))
         );
     }
 }
