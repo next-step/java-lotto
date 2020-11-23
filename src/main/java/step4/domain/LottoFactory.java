@@ -34,7 +34,7 @@ public class LottoFactory {
     }
 
     public double getLottoRatio(LottoMatcher lottoMatcher, int lottoInvestMoney) {
-        return lottoMatcher.getGamePrize()
-                .splitRate(new GameMoney(lottoInvestMoney));
+        return lottoMatcher.getLottoRatio(new GameMoney(lottoInvestMoney));
+
     }
 }

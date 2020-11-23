@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Stream;
@@ -38,38 +39,36 @@ class LottoMatcherTest {
         );
     }
 
-    @DisplayName("로또 매칭할때 맞는 갯수만큼 돈이 잘 합산되는지 확인을 한다.")
+    @DisplayName("로또 매칭할때 맞는 갯수만큼 비율이 나오는지 확인을 한다.")
     @ParameterizedTest
     @MethodSource("createLottoMatcherRank")
-    void sumLottoMatchPrize(Lottos lottos, LastWeekLotto lastWeekLotto, GameMoney gameMoney) {
+    void sumLottoMatchPrize(Lottos lottos, LastWeekLotto lastWeekLotto, double expectedRatio) {
         //given
         LottoMatcher lottoMatcher = LottoMatcher.ofMatch(lottos, lastWeekLotto);
         //when
-        GameMoney gamePrize = lottoMatcher.getGamePrize();
+        double lottoRatio = lottoMatcher.getLottoRatio(new GameMoney(1000));
         //then
-        assertThat(gamePrize).isEqualTo(gameMoney);
+        System.out.println("lottoRatio = " + lottoRatio);
+        assertThat(lottoRatio).isEqualTo(expectedRatio);
     }
 
     private static Stream<Arguments> createLottoMatcherRank() {
         return Stream.of(
                 Arguments.of(new Lottos(Collections.singletonList(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45)), new GameMoney(LottoRank.FIRST.getPrice())),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45)), 2000000.0),
                 Arguments.of(new Lottos(Collections.singletonList(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), new LottoNumber(6)), new GameMoney(LottoRank.SECOND.getPrice())),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), new LottoNumber(6)), 30000.0),
                 Arguments.of(new Lottos(Collections.singletonList(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)), new LottoNumber(45)), new GameMoney(LottoRank.THIRD.getPrice())),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)), new LottoNumber(45)), 1500.0),
                 Arguments.of(new Lottos(Collections.singletonList(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9)), new LottoNumber(45)), new GameMoney(LottoRank.FORTH.getPrice())),
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9)), new LottoNumber(45)), 50.0),
                 Arguments.of(new Lottos(Collections.singletonList(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), new LottoNumber(45)), new GameMoney(LottoRank.FIFTH.getPrice())),
-                Arguments.of(new Lottos(Collections.singletonList(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))),
-                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)), new LottoNumber(45)), new GameMoney(LottoRank.MISS.getPrice())));
+                        LastWeekLotto.of(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), new LottoNumber(45)), 5.0));
     }
 
 

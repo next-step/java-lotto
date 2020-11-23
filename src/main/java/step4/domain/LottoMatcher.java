@@ -20,10 +20,21 @@ public class LottoMatcher {
         EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
         initDefaultMap(result);
 
-        matchLottoRank(getLottoRanks(lottos , lastWeekLotto), result);
+        matchLottoRank(getLottoRanks(lottos, lastWeekLotto), result);
         return new LottoMatcher(result);
     }
 
+    public double getLottoRatio(GameMoney investPrice) {
+        return getGamePrize().splitRate(investPrice);
+    }
+
+    private GameMoney getGamePrize() {
+        GameMoney gameMoney = new GameMoney(0);
+        for (LottoRank lottoRank : result.keySet()) {
+            gameMoney = gameMoney.sum(lottoRank.prize(result.get(lottoRank)));
+        }
+        return gameMoney;
+    }
     private static void matchLottoRank(List<LottoRank> lottoRanks, EnumMap<LottoRank, Integer> result) {
         lottoRanks.forEach(
                 lottoRank -> result.put(lottoRank, getLottoCount(result, lottoRank) + INCREASE_COUNT));
@@ -50,13 +61,6 @@ public class LottoMatcher {
                 .collect(Collectors.toList());
     }
 
-    public GameMoney getGamePrize() {
-        GameMoney gameMoney = new GameMoney(0);
-        for (LottoRank lottoRank : result.keySet()) {
-            gameMoney = gameMoney.sum(lottoRank.prize(result.get(lottoRank)));
-        }
-        return gameMoney;
-    }
 
     @Override
     public boolean equals(Object o) {
