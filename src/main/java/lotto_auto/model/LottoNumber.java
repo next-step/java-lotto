@@ -2,10 +2,7 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumber {
@@ -24,7 +21,7 @@ public class LottoNumber {
     }
 
     public List<Integer> export() {
-        return this.lottoNumber;
+        return Collections.unmodifiableList(this.lottoNumber);
     }
 
     private void ThrowIfNull(List<Integer> numbers) {

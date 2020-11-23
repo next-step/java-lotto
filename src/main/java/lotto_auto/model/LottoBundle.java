@@ -32,7 +32,7 @@ public class LottoBundle {
     }
 
     public List<LottoTicket> export() {
-        return lottoTicketList;
+        return Collections.unmodifiableList(lottoTicketList);
     }
 
     public LottoStatistic draw(LottoNumber lottoNumber) {
