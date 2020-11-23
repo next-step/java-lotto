@@ -10,7 +10,7 @@ public class LottoStore {
 
     public LottoStore() {}
 
-    public static List<LottoTicket> buyAutoTickets(long budget) {
+    public static List<LottoNumberSet> buyAutoTickets(long budget) {
         long howMany = howManyCanIBuy(budget);
 
         return LongStream.range(0, howMany)

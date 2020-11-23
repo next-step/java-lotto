@@ -11,7 +11,7 @@ public class LottoStoreTest {
     @Test
     public void buyAutoTickets() {
         long budget = 14_023;
-        List<LottoTicket> lottoTicketList = LottoStore.buyAutoTickets(budget);
+        List<LottoNumberSet> lottoTicketList = LottoStore.buyAutoTickets(budget);
 
         assertThat(lottoTicketList).hasSize(14);
     }

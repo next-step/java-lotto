@@ -29,7 +29,7 @@ public class LottoApplication {
     }
 
     private static void buyAutoTicketAndPrintNumbers(long budget) {
-        List<LottoTicket> tickets = LottoStore.buyAutoTickets(budget);
+        List<LottoNumberSet> tickets = LottoStore.buyAutoTickets(budget);
         accountManager.addTickets(tickets);
         ResultView.printLottoNumber(accountManager.getTickets());
     }

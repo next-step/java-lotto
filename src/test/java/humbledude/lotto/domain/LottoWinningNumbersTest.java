@@ -20,15 +20,15 @@ public class LottoWinningNumbersTest {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(TestHelper.setOf(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket = new LottoTicket(testcaseNumbers);
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(new LottoNumberSet(TestHelper.setOf(1, 2, 3, 4, 5, 6)));
+        LottoNumberSet ticket = new LottoNumberSet(testcaseNumbers);
 
         assertThat(winningNumbers.getMatchedCountWith(ticket)).isEqualTo(count);
     }
 
     @Test
     public void validWinningNumbers() {
-       assertThat(new LottoWinningNumbers(TestHelper.setOf(1, 2, 3, 4, 5, 6)))
+       assertThat(new LottoWinningNumbers(new LottoNumberSet(TestHelper.setOf(1, 2, 3, 4, 5, 6))))
                .isInstanceOf(LottoWinningNumbers.class);
     }
 }

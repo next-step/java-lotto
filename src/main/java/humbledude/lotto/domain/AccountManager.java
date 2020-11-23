@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class AccountManager {
 
-    private final List<LottoTicket> tickets = new ArrayList<>();
+    private final List<LottoNumberSet> tickets = new ArrayList<>();
     private LottoWinningNumbers winningNumbers;
 
-    public void addTickets(List<LottoTicket> tickets) {
+    public void addTickets(List<LottoNumberSet> tickets) {
         this.tickets.addAll(tickets);
     }
 
@@ -30,11 +30,11 @@ public class AccountManager {
         return totalPrize / totalSpent;
     }
 
-    public List<LottoTicket> getTickets() {
+    public List<LottoNumberSet> getTickets() {
         return tickets;
     }
 
-    public Map<LottoPrize, List<LottoTicket>> getResultMap() {
+    public Map<LottoPrize, List<LottoNumberSet>> getResultMap() {
         return tickets.stream()
                 .collect(Collectors.groupingBy(ticket -> {
                     int matchedCount = winningNumbers.getMatchedCountWith(ticket);
