@@ -12,21 +12,22 @@ public class Lottos {
         this(Arrays.asList(lottos));
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos){
         this.lottos = lottos;
-    }
-
-    public List<Lotto> findMatched(WinningNumber winningNumber, int matchedCount) {
-        return findPrize(lottos, winningNumber, matchedCount);
-    }
-
-    private List<Lotto> findPrize(List<Lotto> lottos, WinningNumber winningNumber, int matchedCount) {
-        return lottos.stream()
-                .filter(it -> winningNumber.getMatchedNumberCount(it) == matchedCount)
-                .collect(Collectors.toList());
     }
 
     public int getPaidMoney() {
         return lottos.size() * Lotto.PRICE;
+    }
+
+    public List<RankedLotto> checkRanking(WinningNumber winningNumber) {
+        return lottos.stream()
+                .map(it -> {
+                    long matchedCount = winningNumber.getMatchedWinningNumberCount(it);
+                    boolean matchedBonus = winningNumber.matchBonusNumber(it);
+
+                    return new RankedLotto(LottoRanking.valueOf(matchedCount, matchedBonus), it);
+                })
+                .collect(Collectors.toList());
     }
 }

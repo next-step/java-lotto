@@ -21,6 +21,10 @@ public class InputView {
         return getStringFromStdin(WINNING_NUMBER_INPUT_MSG);
     }
 
+    public int readBonusNumber() {
+        return getNumberFromStdin("보너스 볼을 입력해 주세요.");
+    }
+
     private String getStringFromStdin(String displayText) {
         return getFromStdin(displayText);
     }

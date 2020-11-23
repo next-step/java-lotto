@@ -3,6 +3,7 @@ package lotto.domain;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
 
@@ -34,7 +35,9 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(this.numbers.stream().sorted(), that.numbers.stream().sorted());
+        return Objects.equals(
+                this.numbers.stream().sorted().collect(Collectors.toList()),
+                that.numbers.stream().sorted().collect(Collectors.toList()));
     }
 
     @Override

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -18,7 +19,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,50", "1,2,3,4,5,-1"})
     void invalidNumber(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
+        assertThatThrownBy(() -> new WinningNumber(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
 
@@ -26,7 +27,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @NullAndEmptySource
     void invalidNumber2(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
+        assertThatThrownBy(() -> new WinningNumber(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
 
@@ -34,7 +35,34 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,a,4,5,6", "@,3,4,5,2,6"})
     void invalidNumber3(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression))
+        assertThatThrownBy(() -> new WinningNumber(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
+
+    @DisplayName("이미 당첨번호에 사용된 번호를 보너스 번호로 입력하면 exception 발생한다")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    void invalidBonusNumber(int bonusNumber){
+        assertThatThrownBy(() -> new WinningNumber("1,2,3,4,5,6", bonusNumber ))
+                .isInstanceOf(InvalidBonusNumberException.class);
+    }
+
+    @DisplayName("1~45 이외의 숫자를 보너스 번호로 입력하면 exception 발생한다")
+    @ParameterizedTest
+    @ValueSource(ints = {-1,46})
+    void invalidBonusNumber2(int bonusNumber){
+        assertThatThrownBy(() -> new WinningNumber("1,2,3,4,5,6", bonusNumber ))
+                .isInstanceOf(InvalidBonusNumberException.class);
+    }
+
+    @DisplayName("구입한 로또에 보너스번호와 일치하는 번호가 있는지 확인 할 수 있다")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,7:true", "1,2,3,4,5,6:false"})
+    void matchBonus(String lottoNumber, boolean expected){
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", 7);
+        Lotto lotto = LottoUtils.lotto(lottoNumber);
+
+        assertThat(winningNumber.matchBonusNumber(lotto)).isEqualTo(expected);
+    }
+
 }
