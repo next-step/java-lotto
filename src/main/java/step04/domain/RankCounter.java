@@ -1,10 +1,9 @@
-package step03.domain;
+package step04.domain;
 
-import step03.Rank;
+import step04.Rank;
 import utils.DoubleParser;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -50,9 +49,9 @@ public class RankCounter {
     }
 
     public double calculateGainRate() {
-        double spent = LottoSeller.PRICE_OF_LOTTO * getTotalCount();
+        double spent = LottoCounter.PRICE_OF_LOTTO * getTotalCount();
         double reward = calculateRewardAll();
-        return DoubleParser.getTwoDecimalPoint(reward / spent);
+        return reward / spent;
     }
 
     @Override

@@ -1,23 +1,29 @@
-package step03.domain;
+package step04.domain;
 
+import exception.ExistedInWinningLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step03.Rank;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import step04.Rank;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class LottosTest {
-    List<Lotto> lottos;
-    LottoBall bonusBall;
+public class WinningComposerTest {
     Lotto winningLotto;
+    LottoBall bonusBall;
+    Lottos lottos;
 
     @BeforeEach
     void setup() {
-        lottos = Arrays.asList(
+        winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        bonusBall = LottoBall.valueOf(7);
+        lottos = Lottos.of(Arrays.asList(
                 Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 Lotto.of(Arrays.asList(3, 5, 11, 16, 32, 38)),
                 Lotto.of(Arrays.asList(7, 11, 16, 35, 36, 44)),
@@ -32,32 +38,44 @@ public class LottosTest {
                 Lotto.of(Arrays.asList(13, 14, 18, 21, 23, 35)),
                 Lotto.of(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 Lotto.of(Arrays.asList(3, 8, 27, 30, 35, 44))
-        );
-        winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        bonusBall = LottoBall.valueOf(7);
+        ));
     }
 
     @DisplayName("생성자")
     @Test
     void test_constructor() {
-        assertThat(Lottos.of(lottos)).isEqualTo(Lottos.of(lottos));
+        assertThat(WinningComposer.of(winningLotto, bonusBall))
+                .isEqualTo(WinningComposer.of(winningLotto, bonusBall));
     }
 
-    @DisplayName("사이즈 리턴")
-    @Test
-    void test_size() {
-        assertThat(Lottos.of(lottos).size()).isEqualTo(14);
+    private static Stream<LottoBall> provideInvalidBonusBallResult() {
+        return Stream.of(
+                LottoBall.valueOf(1),
+                LottoBall.valueOf(2),
+                LottoBall.valueOf(3),
+                LottoBall.valueOf(4),
+                LottoBall.valueOf(5),
+                LottoBall.valueOf(6)
+        );
+    }
+
+    @DisplayName("보너스 볼이 당첨로또에 포함되면 예외 던짐")
+    @ParameterizedTest
+    @MethodSource("provideInvalidBonusBallResult")
+    void test_validateBonusBall() {
+        assertThatExceptionOfType(ExistedInWinningLottoException.class)
+                .isThrownBy(() -> WinningComposer.of(winningLotto, LottoBall.valueOf(1)));
     }
 
     @DisplayName("matching Count 계산")
     @Test
     void test_calculateCountOfMatch() {
         RankCounter expect = RankCounter.of();
-
         expect.put(Rank.valueOf(3, false), 1);
         expect.put(Rank.valueOf(0, false), 13);
 
-        assertThat(Lottos.of(lottos).calculateCountOfMatch(winningLotto, bonusBall))
+        assertThat(WinningComposer.of(winningLotto, bonusBall).calculateMatchOfCount(lottos))
                 .isEqualTo(expect);
     }
+
 }

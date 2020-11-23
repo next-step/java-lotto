@@ -54,7 +54,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - private static void validate(int number) 
         - 1 ~ 45 사이 범위를 초과하면 에러를 던지는 기능
 - `Lotto` 
-    - public static Lotto of(List<LottoBall> lotto)
+    - public static Lotto of(List<Integer> lotto)
     - public int matchCount(Lotto targetLotto)
     - public boolean isContaining(LottoBall lottoBall)
     - SortedSet
@@ -81,7 +81,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - private static void validatePayment(int payment);
 
 - `RankCounter`
-    - Map<Rank, Integer> rankCounter = new HashMap<>();
+    - EnumMap<Rank, Integer> rankCounter = new EnumMap<>(Rank.class);
     - private RankCounter()
     - public static RankCounter of()
     - public Integer getCount(Rank key)
@@ -99,7 +99,7 @@ Mock 은 test 에서 쓰는 이름에 더 적합하다고 하였다.
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
     - public static String pickBonusBall() 보너스 볼을 입력하는 기능
     
-- ResultView
+- `ResultView`
     - public static void showLottoCount(int lottoCount) 사용자가 lotto 를 몇개 구매하였는지 보여주는 기능
     - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
     - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능

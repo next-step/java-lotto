@@ -13,7 +13,7 @@ public class Main {
         ResultView.showLottoCount(userLottos.size());
         ResultView.showLottos(userLottos.getLottos());
 
-        Lotto winningLotto = WinningNumberTokenizer.execute(InputView.createWinningNumber());
+        Lotto winningLotto = LottoNumberTokenizer.execute(InputView.createWinningNumber());
         LottoBall bonusBall = LottoBall.valueOf(InputView.pickBonusBall());
         WinningComposer winningComposer = WinningComposer.of(winningLotto, bonusBall);
 

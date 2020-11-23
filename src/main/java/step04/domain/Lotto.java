@@ -1,4 +1,4 @@
-package step03.domain;
+package step04.domain;
 
 import exception.DuplicatedLottoNumberException;
 import exception.InValidSizeOfLottoException;
@@ -39,8 +39,7 @@ public class Lotto {
     private static void validateUnique(List<LottoBall> lottoBalls) {
         if (lottoBalls.size() != new HashSet<>(lottoBalls).size()) {
             throw new DuplicatedLottoNumberException();
-        }
-        ;
+        };
     }
 
     private static void validateSize(List<LottoBall> lottoBalls) {

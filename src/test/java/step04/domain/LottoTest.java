@@ -1,4 +1,4 @@
-package step03.domain;
+package step04.domain;
 
 import exception.DuplicatedLottoNumberException;
 import exception.InValidSizeOfLottoException;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step01.Int;
-import step02.domain.WinningCounter;
 
 import java.util.Arrays;
 import java.util.List;

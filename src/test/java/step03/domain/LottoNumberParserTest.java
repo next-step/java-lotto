@@ -12,13 +12,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class WinningNumberTokenizerTest {
+public class LottoNumberParserTest {
     @DisplayName("입력받은 WinningNumbers 를 토큰화")
     @Test
     public void test_execute() {
         assertThat(
-                WinningNumberTokenizer.execute("1, 2, 3, 4, 5, 6")
-        ).isEqualTo(Lotto.intOf(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                LottoNumberTokenizer.execute("1, 2, 3, 4, 5, 6")
+        ).isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     private static Stream<String> provideInvalidInputResult() {
@@ -31,7 +31,7 @@ public class WinningNumberTokenizerTest {
     public void test_validateNumber_ThrowException(String inValidInput) {
         assertThatExceptionOfType(OutOfLottoNumberRangeException.class)
                 .isThrownBy(() -> {
-                   WinningNumberTokenizer.execute(inValidInput);
+                   LottoNumberTokenizer.execute(inValidInput);
                 });
     }
 
