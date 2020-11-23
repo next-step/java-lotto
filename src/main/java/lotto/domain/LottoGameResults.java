@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoGameConfig.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,7 @@ public class LottoGameResults {
 
     private void initializePrizeUnit() {
         Arrays.stream(PrizeUnit.values())
-                .forEach(prizeUnit -> prizeUnitCountMap.put(new WinResult(prizeUnit.prizeUnitCount, prizeUnit == PrizeUnit.SECOND_GRADE ? true:false), 0));
+                .forEach(prizeUnit -> prizeUnitCountMap.put(new WinResult(prizeUnit.prizeUnitCount, prizeUnit == PrizeUnit.SECOND_GRADE), 0));
     }
 
     public LottoTickets getLottoIssueResult() {
@@ -27,20 +26,14 @@ public class LottoGameResults {
     }
 
     public void checkWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
-        lottoTickets.getLottoTickets().stream()
-                .forEach(lottoTicket -> recordWinningResult(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));
+        List<WinResult> winResults = lottoTickets.scoreWinningResult(lastWinningNumbers, bonusNumber);
+        recordWinningResult(winResults);
     }
 
-    public void recordWinningResult(WinResult winResult) {
-        if (winResult.prizeUnit != 0) {
-            int previousUnitCount = prizeUnitCountMap.get(winResult);
-            previousUnitCount = previousUnitCount + 1;
-            prizeUnitCountMap.put(winResult, previousUnitCount);
-        }
+    public void recordWinningResult(List<WinResult> winResults) {
+        winResults.stream().filter(winResult -> winResult.prizeUnit != 0)
+                .forEach(winResult -> prizeUnitCountMap.put(winResult, prizeUnitCountMap.get(winResult)+1));
     }
-
-
-
 
     public Map<WinResult, Integer> getWinningResultRecord() {
         return prizeUnitCountMap;

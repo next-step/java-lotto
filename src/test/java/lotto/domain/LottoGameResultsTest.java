@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameResultsTest {
     private LottoGameResults lottoGameResults;
-    private List<Integer> winningNumbers;
     private LottoTickets lottoTickets;
 
     @BeforeEach
@@ -26,8 +25,6 @@ public class LottoGameResultsTest {
         this.lottoGameResults = new LottoGameResults(lottoTickets);
 
         int[] numbers = {1,2,3,4,5,6};
-
-        this.winningNumbers = IntStream.of(numbers).boxed().collect(Collectors.toList());
 
     }
 

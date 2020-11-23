@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static lotto.domain.LottoGameConfig.*;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,4 +41,11 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
+    public List<WinResult> scoreWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
+        List<WinResult> winResults = new ArrayList<>();
+        lottoTickets.stream()
+                .forEach(lottoTicket -> winResults.add(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));
+
+        return winResults;
+    }
 }
