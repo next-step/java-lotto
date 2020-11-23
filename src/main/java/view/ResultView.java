@@ -1,10 +1,8 @@
 package view;
 
 import domain.LottoPrize;
-import domain.LottoStandard;
 import domain.Lottos;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -15,6 +13,7 @@ public class ResultView {
     private final String RESULT_STATISTIC = "당첨 통계";
     private final String HORIZONTAL = "---------";
     private final String STATISTIC_MENTION = "%d개 일치 (%d원)- %d개";
+    private final String STATISTIC_MENTION_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private final String PROFIT_MENTION = "총 수익률은 %.2f입니다.";
     private final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -35,13 +34,28 @@ public class ResultView {
     }
 
     public void displayStatistic(Map<Integer, Integer> lottoStatistics) {
-        IntStream.range(PRIZE_BEGINNING.getStandardNumber(), PRIZE_ENDING.getStandardNumber())
-                .forEach(key -> System.out.println(
-                        String.format(STATISTIC_MENTION,
-                                key,
-                                LottoPrize.valueOf(key),
-                                lottoStatistics.get(key)
-                        )));
+        int matchBeginning = MATCH_BEGINNING.getStandardNumber();
+        int matchEnding = MATCH_ENDING.getStandardNumber();
+
+        IntStream.range(matchBeginning, matchEnding)
+                .map(i -> matchEnding - i + matchBeginning - 1)
+                .forEach(key -> {
+                    if (key == LottoPrize.SECOND.getPrize()) {
+                        System.out.println(
+                                String.format(STATISTIC_MENTION_SECOND,
+                                        LottoPrize.valueOf(key).get(0),
+                                        LottoPrize.valueOf(key).get(1),
+                                        lottoStatistics.get(key)
+                                ));
+                    } else {
+                        System.out.println(
+                                String.format(STATISTIC_MENTION,
+                                        LottoPrize.valueOf(key).get(0),
+                                        LottoPrize.valueOf(key).get(1),
+                                        lottoStatistics.get(key)
+                                ));
+                    }
+                });
     }
 
     public void displayProfit(double profit) {

@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum LottoPrize {
@@ -23,12 +25,13 @@ public enum LottoPrize {
 
     static {
         for(LottoPrize lottoPrize : LottoPrize.values()) {
-            map.put(lottoPrize.prize, lottoPrize.prizeMoney);
+            map.put(lottoPrize.prize,
+                    Arrays.asList(lottoPrize.matchNumber, lottoPrize.prizeMoney));
         }
     }
 
-    public static int valueOf(int matchNumber) {
-        return (int) map.get(matchNumber);
+    public static List<Integer> valueOf(int matchNumber) {
+        return (List<Integer>) map.get(matchNumber);
     }
 
     public int getMatchNumber() {

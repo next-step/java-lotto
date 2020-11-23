@@ -26,13 +26,13 @@ public class Lottos {
         List<LottoPrize> lottoPrizes = lottos.stream()
                 .map(lotto -> lotto.matchLottoNumbers(winningLotto, bonusNumber))
                 .filter(lottoPrize -> lottoPrize != null &&
-                        lottoPrize.getMatchNumber() >= PRIZE_BEGINNING.getStandardNumber())
+                        lottoPrize.getMatchNumber() >= MATCH_BEGINNING.getStandardNumber())
                 .collect(Collectors.toList());
 
         Map<Integer, Integer> matchMap = new HashMap<>();
         lottoPrizes.forEach(lottoPrize -> matchMap.merge(lottoPrize.getPrize(), FIRST_COUNT, Integer::sum));
 
-        IntStream.range(PRIZE_BEGINNING.getStandardNumber(), PRIZE_ENDING.getStandardNumber())
+        IntStream.range(MATCH_BEGINNING.getStandardNumber(), MATCH_ENDING.getStandardNumber())
                 .filter(key -> !matchMap.containsKey(key))
                 .forEach(key -> matchMap.put(key, ZERO));
 

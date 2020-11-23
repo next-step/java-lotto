@@ -13,7 +13,7 @@ public class LottoProfit {
         int prizeSum = lottoStatistics.keySet()
                 .stream()
                 .mapToInt(key -> key)
-                .map(key -> lottoStatistics.get(key) * LottoPrize.valueOf(key))
+                .map(key -> lottoStatistics.get(key) * LottoPrize.valueOf(key).get(1))
                 .sum();
 
         return new LottoProfit((double) prizeSum / (double) price);
