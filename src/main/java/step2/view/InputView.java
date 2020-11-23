@@ -6,7 +6,6 @@ public class InputView {
     static Scanner sc = new Scanner(System.in);
 
     public static int inputPurchasePrice() {
-        ResultView.printPurchasePrice();
         return sc.nextInt();
     }
 }
