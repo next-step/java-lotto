@@ -62,7 +62,7 @@ class LottoTicketsTest {
 
     LottoResult result = tickets.settle(winningNumber, bonusNumber);
 
-    assertThat(result.getRecordedNumberOfHit(6))
-        .isEqualTo(2);
+    assertThat(result.calculateIncome())
+        .isEqualTo(Rank.FIRST.getWinningReward() * 2);
   }
 }

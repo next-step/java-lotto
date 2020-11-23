@@ -1,8 +1,5 @@
 package lotto;
 
-import static lotto.LottoGameConstant.MAXIMUM_REWARD_HIT;
-import static lotto.LottoGameConstant.MINIMUM_REWARD_HIT;
-
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
@@ -23,11 +20,11 @@ public class Client {
     LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
 
     ResultView.printStatisticsOpening();
-    for (int hit = MINIMUM_REWARD_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
-      ResultView
-          .printRewards(hit, Rank.getRewardFromNumHit(hit).getWinningReward(),
-              lottoResult.getRecordedNumberOfHit(hit));
-    }
+    // for (int hit = MINIMUM_REWARD_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
+    //   ResultView
+    //       .printRewards(hit, Rank.getRewardFromNumHit(hit).getWinningReward(),
+    //           lottoResult.getRecordedNumberOfHit(hit));
+    // }
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));

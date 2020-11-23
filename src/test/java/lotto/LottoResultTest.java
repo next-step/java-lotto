@@ -13,9 +13,9 @@ class LottoResultTest {
   @BeforeEach
   void setUp() {
     sampleLottoResult = new LottoResult();
-    this.sampleLottoResult.recordHit(3);
-    this.sampleLottoResult.recordHit(0);
-    this.sampleLottoResult.recordHit(5);
+    this.sampleLottoResult.recordHit(Rank.FIFTH);
+    this.sampleLottoResult.recordHit(Rank.MISS);
+    this.sampleLottoResult.recordHit(Rank.SECOND);
 
   }
 
@@ -29,7 +29,7 @@ class LottoResultTest {
   @Test
   @DisplayName("기록 확인")
   void testRecorded() {
-    assertThat(this.sampleLottoResult.getRecordedNumberOfHit(3))
-        .isEqualTo(1);
+    assertThat(this.sampleLottoResult.calculateIncome())
+        .isEqualTo(Rank.FIFTH.getWinningReward() + Rank.SECOND.getWinningReward());
   }
 }
