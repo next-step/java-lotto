@@ -4,14 +4,11 @@ import step3.constant.LottoWinningPrizes;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
 
 import static step3.constant.LottoWinningPrizes.values;
 
 public class LottoWinning {
 
-    private static final int LOTTO_NUMBER_CONTAINS_TRUE = 1;
-    private static final int LOTTO_NUMBER_CONTAINS_FALSE = 0;
     private static final EnumMap<LottoWinningPrizes, Integer> lottoWinningMap;
 
     private long winningAmount = 0;
@@ -23,41 +20,31 @@ public class LottoWinning {
         lottoWinningMap = map;
     }
 
-    public LottoWinning(LottoNumber lottoNumber, List<Lotto> lottos) {
+    public LottoWinning(LottoNumber lottoNumber, Lottos lottos) {
         lottoWinningPrizes(lottoNumber, lottos);
     }
 
-    public static LottoWinning of(LottoNumber lottoNumber, List<Lotto> lottos) {
+    public static LottoWinning of(LottoNumber lottoNumber, Lottos lottos) {
         return new LottoWinning(lottoNumber, lottos);
     }
 
-    private void lottoWinningPrizes(LottoNumber lastLottoWinningNumbers, List<Lotto> lottos) {
-        lottos.forEach(lotto -> lottoWinningPrizes(lastLottoWinningNumbers, lotto));
+    private void lottoWinningPrizes(LottoNumber lastLottoWinningNumbers, Lottos lottos) {
+        lottos.getLottos().forEach(lotto -> {
+            int rightNumberCount = lottos.lottoWinningPrizes(lastLottoWinningNumbers, lotto);
+            boolean isMatchBonus = isMatchBonus(lastLottoWinningNumbers.getBonusNumber(), lotto);
+            lottoWinningPrizes(rightNumberCount, isMatchBonus);
+        });
     }
 
-    private void lottoWinningPrizes(LottoNumber lottoNumber, Lotto lotto) {
-        int rightNumberCount = lotto.getLottos()
-                .stream()
-                .mapToInt(number -> numberContain(number, lottoNumber.getLastWeekNumber()))
-                .sum();
-
-        boolean isMatchBonus = isMatchBonus(lottoNumber.getBonusNumber(), lotto);
+    private void lottoWinningPrizes(int rightNumberCount, boolean isMatchBonus) {
         this.winningAmount += LottoWinningPrizes.findLottoMatch(rightNumberCount, isMatchBonus).getAmount();
         setLottoWinning(LottoWinningPrizes.findLottoMatch(rightNumberCount, isMatchBonus));
-
     }
 
     private boolean isMatchBonus(String bonusNumber, Lotto lotto) {
         return lotto.getLottos()
                 .stream()
                 .anyMatch(bonus -> bonusNumber.contains(String.valueOf(bonus)));
-    }
-
-    private int numberContain(int number, String lastLottoWinningNumbers) {
-        if (lastLottoWinningNumbers.contains(String.valueOf(number))) {
-            return LOTTO_NUMBER_CONTAINS_TRUE;
-        }
-        return LOTTO_NUMBER_CONTAINS_FALSE;
     }
 
     public EnumMap<LottoWinningPrizes, Integer> getLottoWinningMap() {

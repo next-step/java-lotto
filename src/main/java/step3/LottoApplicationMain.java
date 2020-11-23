@@ -16,7 +16,7 @@ public class LottoApplicationMain {
 
         LottoNumber lottoNumber = LottoNumber.of(LottoInputUi.inputLastWeekNumber(), LottoInputUi.inputBonusNumber());
 
-        LottoWinning lottoWinning = LottoWinning.of(lottoNumber, lottoTicketMaker.getLottoTicket().getLottos());
+        LottoWinning lottoWinning = LottoWinning.of(lottoNumber, lottoTicketMaker.getLottoTicket());
 
         LottoOuputUi.printStatistics(lottoWinning.getLottoWinningMap());
         LottoOuputUi.printTotalReturn(lottoWinning.getTotalYield(purchaseAmount));
