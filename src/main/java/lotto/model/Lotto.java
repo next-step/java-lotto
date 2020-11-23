@@ -3,6 +3,8 @@ package lotto.model;
 import lotto.strategy.DrawingStrategy;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public abstract class Lotto {
     public final static int PRICE = 1000;
@@ -12,11 +14,16 @@ public abstract class Lotto {
         numbers = drawingStrategy.drawNumbers();
     }
 
-    public int getMatchingNumberCount(SortedSet<Integer> inputNumbers) {
-        return numbers.stream()
+    public SortedSet<Integer> getMatchingNumberCount(SortedSet<Integer> inputNumbers, int bonus) {
+        SortedSet<Integer> matchNumbers = numbers.stream()
                 .filter(inputNumbers::contains)
-                .toArray()
-                .length;
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        if(inputNumbers.contains(bonus)){
+            matchNumbers.add(bonus);
+        }
+
+        return matchNumbers;
     }
 
     public SortedSet<Integer> getNumbers() {
