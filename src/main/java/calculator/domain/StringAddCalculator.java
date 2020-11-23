@@ -2,6 +2,8 @@ package calculator.domain;
 
 public class StringAddCalculator {
 
+    private static final int DEFAULT_NUMBER_ZERO = 0;
+
     private StringAddCalculator() {
         throw new AssertionError();
     }
@@ -11,7 +13,7 @@ public class StringAddCalculator {
         if (StringPreConditionChecker.isRightString(text)) {
             return calculateTokenString(StringDelimiterParser.parseText(text));
         }
-        return 0;
+        return DEFAULT_NUMBER_ZERO;
     }
 
     private static int calculateTokenString(String[] splitStrings) {
