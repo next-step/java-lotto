@@ -11,7 +11,7 @@ public class StringDelimiterParser {
     private static final String CUSTOM_DELIMITER_HEAD = "//";
     private static final String CUSTOM_DELIMITER_TAIL = "\n";
 
-    private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static String[] parseText(String text) {
 
@@ -19,7 +19,7 @@ public class StringDelimiterParser {
             return new String[]{text};
         }
 
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = PATTERN.matcher(text);
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
