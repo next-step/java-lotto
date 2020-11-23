@@ -4,22 +4,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Expression {
-    private final DelimiterList delimiterList;
     private final OperandList operandList;
 
     public Expression(String expression) {
-        this.delimiterList = new DelimiterList();
         RawExpression rawExpression = new RawExpression(expression);
-        this.delimiterList.addCustomDelimiter(
-                rawExpression.refineCustomDelimiter()
-        );
+        DelimiterList delimiterList = exportDelimiterList(rawExpression);
+        this.operandList = exportOperandList(rawExpression, delimiterList);
+    }
+
+    private DelimiterList exportDelimiterList(RawExpression rawExpression) {
+        DelimiterList delimiterList = new DelimiterList();
+        delimiterList.addCustomDelimiter(rawExpression.refineCustomDelimiter());
+        return delimiterList;
+    }
+
+    private OperandList exportOperandList(RawExpression rawExpression, DelimiterList delimiterList) {
         List<String> splitResult = Arrays.asList(
                 rawExpression
                         .refineRawExpression()
                         .split(delimiterList.toSplitRegex()
                         )
         );
-        this.operandList = new OperandList(splitResult);
+        return new OperandList(splitResult);
     }
 
     public Integer sum() {
