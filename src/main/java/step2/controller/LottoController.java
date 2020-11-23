@@ -1,6 +1,7 @@
 package step2.controller;
 
 import step2.domain.Lotto;
+import step2.domain.LottoStore;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -9,8 +10,12 @@ public class LottoController {
         ResultView.printPurchasePrice();
         int purchasePrice = InputView.inputPurchasePrice();
 
-        Lotto lotto = new Lotto(purchasePrice);
+        LottoStore lottoStore = new LottoStore();
+        int purchaseLottoCount = lottoStore.getPurchaseLottoCount(purchasePrice);
 
-        ResultView.printPurchaseCount(lotto.getCount());
+        ResultView.printPurchaseCount(purchaseLottoCount);
+
+        Lotto lotto = new Lotto();
+        System.out.println(lotto.getLottoNumbers().toString());
     }
 }
