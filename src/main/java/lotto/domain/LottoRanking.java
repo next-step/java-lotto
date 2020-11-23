@@ -32,9 +32,7 @@ public enum LottoRanking {
         return winningMoney;
     }
 
-    public static LottoRanking valueOf(Lotto lotto, WinningNumber winningNumber){
-        long matchedCount = winningNumber.getMatchedWinningNumberCount(lotto);
-        boolean matchedBonus = winningNumber.matchBonusNumber(lotto);
+    public static LottoRanking valueOf(long matchedCount, boolean matchedBonus){
 
         return Arrays.stream(LottoRanking.values())
                 .filter(it -> it.matchedCount == matchedCount && it.matchedBonus == matchedBonus)

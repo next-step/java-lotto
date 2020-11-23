@@ -22,7 +22,12 @@ public class Lottos {
 
     public List<RankedLotto> checkRanking(WinningNumber winningNumber) {
         return lottos.stream()
-                .map(it -> new RankedLotto(LottoRanking.valueOf(it, winningNumber), it))
+                .map(it -> {
+                    long matchedCount = winningNumber.getMatchedWinningNumberCount(it);
+                    boolean matchedBonus = winningNumber.matchBonusNumber(it);
+
+                    return new RankedLotto(LottoRanking.valueOf(matchedCount, matchedBonus), it);
+                })
                 .collect(Collectors.toList());
     }
 }
