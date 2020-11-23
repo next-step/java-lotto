@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ResultView {
+    private static final String EMPTY_STR = "";
     private static final String MSG_NUMBER_OF_PURCHASED = "%d개를 구매했습니다.\n";
     private static final String MSG_STATISTICS_TITLE = "당첨 통계\n--------------";
     private static final String MSG_STATISTICS_FOR_EACH_PRIZE = "%d개 일치%s (%d원) - %d개%n";
+    private static final String MSG_STATISTICS_FOR_EACH_PRIZE_BONUS = ", 보너스 볼 일치";
     private static final String MSG_STATISTICS_FOOTER = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String MSG_STATISTICS_FOOTER_PROFIT = "이익이";
     private static final String MSG_STATISTICS_FOOTER_LOSS = "손해";
@@ -58,9 +60,9 @@ public class ResultView {
 
     private static String getMessageBonusCheck(boolean checkBonus) {
         if (checkBonus) {
-            return ", 보너스 볼 일치";
+            return MSG_STATISTICS_FOR_EACH_PRIZE_BONUS;
         }
-        return "";
+        return EMPTY_STR;
     }
 
     private static String getMessageProfitOrLoss(double profitRate) {

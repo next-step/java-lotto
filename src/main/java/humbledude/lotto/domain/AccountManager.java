@@ -36,11 +36,7 @@ public class AccountManager {
 
     public Map<LottoPrize, List<LottoNumberSet>> getResultMap() {
         return tickets.stream()
-                .collect(Collectors.groupingBy(ticket -> {
-                    int matchedCount = winningNumbers.getMatchedCountWith(ticket);
-                    boolean bonusMatched = winningNumbers.isBonusMatched(ticket);
-                    return LottoPrize.of(matchedCount, bonusMatched);
-                }));
+                .collect(Collectors.groupingBy(winningNumbers::claimPrize));
     }
 
     private long getTotalPrize() {

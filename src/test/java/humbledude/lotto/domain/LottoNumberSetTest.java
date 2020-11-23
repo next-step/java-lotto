@@ -37,8 +37,5 @@ public class LottoNumberSetTest {
 
         assertThat(lottoNumberSet.contains(LottoNumber.of(1)))
                 .isTrue();
-
-
-
     }
 }

@@ -13,13 +13,20 @@ public class LottoWinningNumbers {
         this.bonus = bonus;
     }
 
-    public int getMatchedCountWith(LottoNumberSet numbers) {
+    public LottoPrize claimPrize(LottoNumberSet ticket) {
+        int matchedCount = getMatchedCountWith(ticket);
+        boolean bonusMatched = isBonusMatched(ticket);
+
+        return LottoPrize.of(matchedCount, bonusMatched);
+    }
+
+    private int getMatchedCountWith(LottoNumberSet numbers) {
         Set<LottoNumber> intersection = winningNumbers.intersection(numbers);
 
         return intersection.size();
     }
 
-    public boolean isBonusMatched(LottoNumberSet numbers) {
+    private boolean isBonusMatched(LottoNumberSet numbers) {
         return numbers.contains(bonus);
     }
 
