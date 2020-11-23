@@ -8,10 +8,8 @@ public class ManualLottoFactory {
 
     private final List<Lotto> lottos;
 
-    public ManualLottoFactory(List<String> lottoList) {
-        lottos = lottoList.stream()
-                .map(LottoGenerator::separateLottoToList)
-                .collect(Collectors.toList());
+    public ManualLottoFactory(List<Lotto> lottoList) {
+        lottos = lottoList;
     }
 
     public void addList(List<Lotto> lottoList) {

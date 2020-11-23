@@ -10,7 +10,8 @@ import java.util.stream.IntStream;
 
 public class LottoController {
 
-    private LottoController() { }
+    private LottoController() {
+    }
 
     public static void runLotto() {
         int lottoPurchaseMoney = InputView.purchaseLotto();
@@ -20,7 +21,6 @@ public class LottoController {
         OutputView.purchaseManualLotto();
 
         int autoPayed = getAutoLottoPayed(lottoPurchaseMoney, manualCount);
-
         LottoFactory lottoFactory = new LottoFactory(
                 new AutoLottoFactory(autoPayed, RandomLottoGenerator.of()), new ManualLottoFactory(getManualLottoList(manualCount)));
 
@@ -44,10 +44,10 @@ public class LottoController {
         return lottoPurchaseMoney - manualCount * 1000;
     }
 
-    private static List<String> getManualLottoList(int manualCount) {
-        List<String> lottoList = new ArrayList<>();
+    private static List<Lotto> getManualLottoList(int manualCount) {
+        List<Lotto> lottoList = new ArrayList<>();
         IntStream.range(0, manualCount)
-                .forEach(i -> lottoList.add(InputView.purchaseManualLotto()));
+                .forEach(i -> lottoList.add(LottoGenerator.separateLottoToList(InputView.purchaseManualLotto())));
         return lottoList;
     }
 }
