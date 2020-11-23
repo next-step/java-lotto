@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumberSetTest {
@@ -27,5 +28,17 @@ public class LottoNumberSetTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumberSet(lottoNumberSet));
+    }
+
+    @Test
+    public void contains() {
+        int[] rawNumbers = {1, 2, 3, 4, 5, 6};
+        LottoNumberSet lottoNumberSet = new LottoNumberSet(TestHelper.setOf(rawNumbers));
+
+        assertThat(lottoNumberSet.contains(LottoNumber.of(1)))
+                .isTrue();
+
+
+
     }
 }

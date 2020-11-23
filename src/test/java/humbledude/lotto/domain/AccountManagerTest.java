@@ -17,7 +17,8 @@ public class AccountManagerTest {
     @BeforeEach
     public void setUp() {
         winningNumbers = new LottoWinningNumbers(
-                new LottoNumberSet(TestHelper.setOf(1, 2, 3, 4, 5, 6)));
+                new LottoNumberSet(TestHelper.setOf(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7));
 
         // 미리 당첨 안되는거 9개 넣어놓기
         tickets = new ArrayList<>();

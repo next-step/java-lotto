@@ -13,6 +13,7 @@ public class InputView {
 
     private static final String MSG_INPUT_BUDGET = "구입금액을 입력해 주세요.";
     private static final String MSG_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요";
+    private static final String MSG_INPUT_WINNING_BONUS_NUMBER = "보너스 볼을 입력해 주세요";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -29,7 +30,10 @@ public class InputView {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
-        return new LottoWinningNumbers(new LottoNumberSet(numbers));
+        System.out.println(MSG_INPUT_WINNING_BONUS_NUMBER);
+        LottoNumber bonus = LottoNumber.of(Integer.parseInt(scanner.nextLine()));
+
+        return new LottoWinningNumbers(new LottoNumberSet(numbers), bonus);
 
     }
 

@@ -38,7 +38,8 @@ public class AccountManager {
         return tickets.stream()
                 .collect(Collectors.groupingBy(ticket -> {
                     int matchedCount = winningNumbers.getMatchedCountWith(ticket);
-                    return LottoPrize.of(matchedCount);
+                    boolean bonusMatched = winningNumbers.isBonusMatched(ticket);
+                    return LottoPrize.of(matchedCount, bonusMatched);
                 }));
     }
 

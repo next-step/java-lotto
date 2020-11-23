@@ -2,6 +2,7 @@ package humbledude.lotto.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumberSet {
     public static final int LOTTO_SIZE_OF_NUMBERS = 6;
@@ -17,11 +18,14 @@ public class LottoNumberSet {
         return lottoNumberSet;
     }
 
-    public Set<LottoNumber> intersection(LottoNumberSet other) {
-        Set<LottoNumber> copy = new HashSet<>(this.getNumbers());
-        copy.retainAll(other.getNumbers());
+    public boolean contains(LottoNumber number) {
+        return lottoNumberSet.contains(number);
+    }
 
-        return copy;
+    public Set<LottoNumber> intersection(LottoNumberSet other) {
+        return lottoNumberSet.stream()
+                .filter(other::contains)
+                .collect(Collectors.toSet());
     }
 
     private void validateSet(Set<LottoNumber> numbers) {
