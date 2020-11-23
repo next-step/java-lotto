@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoResultTest {
+class DrawResultTest {
 
     @DisplayName("일치하는 수 범위가 이상할때 예외 발생 테스트")
     @ParameterizedTest
@@ -20,7 +20,7 @@ class LottoResultTest {
     public void invalidMatchNumExceptionTest(int matchNum) {
         assertThatThrownBy(
                 () -> {
-                    LottoResult lottoResult = LottoResult.valueOfMatchNum(matchNum);
+                    DrawResult drawResult = DrawResult.valueOfMatchNum(matchNum);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }
@@ -39,8 +39,8 @@ class LottoResultTest {
             }
     )
     public void getMatchNumLottoResultTest(int matchNum) {
-        LottoResult lottoResult = LottoResult.valueOfMatchNum(matchNum);
-        assertThat(lottoResult).isNotNull();
+        DrawResult drawResult = DrawResult.valueOfMatchNum(matchNum);
+        assertThat(drawResult).isNotNull();
     }
 
     @DisplayName("랭크가 잘못된 범위일때 예외 발생테스트")
@@ -54,7 +54,7 @@ class LottoResultTest {
     public void invalidRankExceptionTest(int rank) {
         assertThatThrownBy(
                 () -> {
-                    LottoResult lottoResult = LottoResult.valueOfRank(rank);
+                    DrawResult drawResult = DrawResult.valueOfRank(rank);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }
@@ -73,8 +73,8 @@ class LottoResultTest {
             }
     )
     public void getMatchRankLottoResultTest(int rank) {
-        LottoResult lottoResult = LottoResult.valueOfRank(rank);
-        assertThat(lottoResult).isNotNull();
+        DrawResult drawResult = DrawResult.valueOfRank(rank);
+        assertThat(drawResult).isNotNull();
     }
 
 }

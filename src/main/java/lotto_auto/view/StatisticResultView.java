@@ -1,6 +1,6 @@
 package lotto_auto.view;
 
-import lotto_auto.model.LottoResult;
+import lotto_auto.model.DrawResult;
 import lotto_auto.model.LottoStatistic;
 
 public class StatisticResultView {
@@ -32,8 +32,8 @@ public class StatisticResultView {
     }
 
     private static String buildStatisticMessage(LottoStatistic lottoStatistic, int rank) {
-        LottoResult lottoResult = LottoResult.valueOfRank(rank);
-        return String.format(STATISTIC_MESSAGE, lottoResult.getMatchNum(), lottoResult.getMoney(), lottoStatistic.getRankLottoCount(rank));
+        DrawResult drawResult = DrawResult.valueOfRank(rank);
+        return String.format(STATISTIC_MESSAGE, drawResult.getMatchNum(), drawResult.getMoney(), lottoStatistic.getRankLottoCount(rank));
     }
 
     private static String buildYieldDetailMessage(LottoStatistic lottoStatistic) {

@@ -3,26 +3,26 @@ package lotto_auto.model;
 import java.util.List;
 
 public class LottoStatistic {
-    private LottoResultList lottoResultList;
+    private BundleDrawResult bundleDrawResult;
     private final double yield;
     private final int payment;
 
-    public LottoStatistic(List<LottoResult> lottoResultList, int payment) {
-        this.lottoResultList = new LottoResultList(lottoResultList);
-        this.yield = computeYield(lottoResultList);
+    public LottoStatistic(List<DrawResult> drawResultList, int payment) {
+        this.bundleDrawResult = new BundleDrawResult(drawResultList);
+        this.yield = computeYield(drawResultList);
         this.payment = payment;
     }
 
-    private double computeYield(List<LottoResult> lottoResultList) {
-        long sum = lottoResultList.stream()
-                .filter(LottoResult::isWinning)
-                .mapToLong(LottoResult::getMoney)
+    private double computeYield(List<DrawResult> drawResultList) {
+        long sum = drawResultList.stream()
+                .filter(DrawResult::isWinning)
+                .mapToLong(DrawResult::getMoney)
                 .sum();
         return (double) sum / payment;
     }
 
     public int getRankLottoCount(int rank) {
-        return lottoResultList.getRankLottoCount(rank);
+        return bundleDrawResult.getRankLottoCount(rank);
     }
 
     public double getYield() {

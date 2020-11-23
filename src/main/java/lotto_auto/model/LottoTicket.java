@@ -15,11 +15,11 @@ public class LottoTicket {
         return this.lottoNumber;
     }
 
-    public LottoResult draw(LottoNumber winningLottoNumber) {
+    public DrawResult draw(LottoNumber winningLottoNumber) {
         if (lottoNumber == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NULL_WINNING_LOTTO_TICKET);
         }
         int matchNumberCount = this.lottoNumber.computeMatchCount(winningLottoNumber);
-        return LottoResult.valueOfMatchNum(matchNumberCount);
+        return DrawResult.valueOfMatchNum(matchNumberCount);
     }
 }

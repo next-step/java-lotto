@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LottoResult {
+public enum DrawResult {
 
     FIRST(true, 2000000000L, 1, 6),
     SECOND(true, 1500000L, 2, 5),
@@ -33,7 +33,7 @@ public enum LottoResult {
         return matchNum;
     }
 
-    LottoResult(boolean winning, long money, int rank, int matchNum) {
+    DrawResult(boolean winning, long money, int rank, int matchNum) {
         this.winning = winning;
         this.money = money;
         this.rank = rank;
@@ -48,24 +48,24 @@ public enum LottoResult {
         return this.matchNum == matchNum;
     }
 
-    public static LottoResult valueOfMatchNum(int matchNum) {
-        List<LottoResult> lottoResults =
-                Arrays.stream(LottoResult.values())
+    public static DrawResult valueOfMatchNum(int matchNum) {
+        List<DrawResult> drawResults =
+                Arrays.stream(DrawResult.values())
                         .filter(item -> item.isMatchNum(matchNum))
                         .collect(Collectors.toList());
-        if (lottoResults.size() == 1) {
-            return lottoResults.get(0);
+        if (drawResults.size() == 1) {
+            return drawResults.get(0);
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
     }
 
-    public static LottoResult valueOfRank(int rank) {
-        List<LottoResult> lottoResults =
-                Arrays.stream(LottoResult.values())
+    public static DrawResult valueOfRank(int rank) {
+        List<DrawResult> drawResults =
+                Arrays.stream(DrawResult.values())
                         .filter(item -> item.isRank(rank))
                         .collect(Collectors.toList());
-        if (lottoResults.size() == 1) {
-            return lottoResults.get(0);
+        if (drawResults.size() == 1) {
+            return drawResults.get(0);
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK);
     }
