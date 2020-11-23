@@ -21,6 +21,10 @@ public class Lotto {
                 .filter(winningNumbers::contains)
                 .count();
 
+        return matchLottoPrize(bonusNumber, matchNumber);
+    }
+
+    private LottoPrize matchLottoPrize(int bonusNumber, int matchNumber) {
         switch (matchNumber) {
             case 6:
                 return  LottoPrize.FIRST;
