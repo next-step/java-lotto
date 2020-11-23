@@ -5,6 +5,7 @@ import exception.OutOfLottoManualCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -13,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoCounterTest {
-
-
 
     @DisplayName("생성자")
     @Test
@@ -58,6 +57,24 @@ public class LottoCounterTest {
 
         assertThatExceptionOfType(OutOfLottoManualCountException.class)
                 .isThrownBy(() -> LottoCounter.of(PAYMENT, countOfManualLotto));
+    }
+
+    private static Stream<Arguments> provideCountOfManualLottoResult() {
+        return Stream.of(
+                Arguments.of(1, 2),
+                Arguments.of(0, 3),
+                Arguments.of(3, 0)
+        );
+    }
+
+    @DisplayName("자동 로또수 get")
+    @ParameterizedTest
+    @MethodSource("provideCountOfManualLottoResult")
+    void test_getCountOfAutoLottos(Integer countOfManualLotto, Integer expect) {
+        Integer PAYMENT = 3000;
+
+        assertThat(LottoCounter.of(PAYMENT, countOfManualLotto).getCountOfAutoLotto())
+                .isEqualTo(expect);
     }
 
 }

@@ -34,6 +34,7 @@ return lottoBalls.stream()
     - private static void validateCountOfManualLotto(Integer countOfLottos, Integer countOfManualLotto) 
     - private static void validatePayment(Integer payment) 
     - private static int calculateCountOfLottos(int payment)
+    - public Integer getCountOfAutoLotto() 
 
 - `LottoBall` 1 -45 LottoBall 의 숫자를 가지고 있는 클래스
     - public static LottoBall[] lottoNumbers
@@ -66,9 +67,6 @@ return lottoBalls.stream()
     - public Integer size()
 
     - Lotto 추가 기능
-
-- `LottoSeller` 로또 판매기 
-    - public static Lottos generateLottos(int payment)
 
 - `RankCounter`
     - EnumMap<Rank, Integer> rankCounter = new EnumMap<>(Rank.class);
