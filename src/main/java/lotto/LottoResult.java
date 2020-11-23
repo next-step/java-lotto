@@ -25,7 +25,7 @@ public class LottoResult {
   }
 
   public int calculateIncome() {
-    return Rank.calculateTotalReward(hitHistory);
+    return Rank.calculateTotalReward(hithit);
   }
 
   public void recordHit(Rank rank) {

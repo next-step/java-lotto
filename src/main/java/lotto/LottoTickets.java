@@ -33,7 +33,7 @@ public class LottoTickets {
   public LottoResult settle(WinningNumber winningNumber) {
     LottoResult lottoResult = new LottoResult();
     this.tickets.stream()
-        .map(lottoTicket -> lottoTicket.getNumHit(winningNumber))
+        .map(lottoTicket -> lottoTicket.guessNumHit(winningNumber))
         .forEach(lottoResult::recordHit);
 
     return lottoResult;
