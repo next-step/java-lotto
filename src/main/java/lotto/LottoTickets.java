@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets){
         this.lottoTickets = lottoTickets;
