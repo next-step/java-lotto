@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ResultView {
     public void showLottos(List<Object[]> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.forEach(lotto -> show(lotto));
     }
 
