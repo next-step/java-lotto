@@ -14,9 +14,9 @@ import java.util.stream.Stream;
  * Created By mand2 on 2020-11-19.
  * 로또 번호 6개 자동 생성하는 객체
  */
-public class LottoNumberMaker {
+public class LottoGenerator {
 
-    private LottoNumberMaker() {}
+    private LottoGenerator() {}
 
     private static LottoNumber shuffle() {
         List<Integer> board = new LottoNumberBoard().lottoNumberBoard();

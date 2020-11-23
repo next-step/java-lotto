@@ -1,9 +1,7 @@
 package lotto.domain.game;
 
-import lotto.domain.LottoNumberMaker;
+import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
-import lotto.domain.game.Lotto;
-import lotto.domain.game.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,7 +41,7 @@ class LottosTest {
     void generate_lotto_randomly(int inputRound) {
 
         // given
-        Lottos lottos = LottoNumberMaker.generate(inputRound);
+        Lottos lottos = LottoGenerator.generate(inputRound);
 
         // when
         int size = lottos.list().size();
@@ -57,8 +55,8 @@ class LottosTest {
     @DisplayName("자동으로 생성된 로또 게임 두개의 로또번호는 같지않다")
     void is_automated_lotto_number_same() {
         // given
-        Lottos automatedLotto1 = LottoNumberMaker.generate(1);;
-        Lottos automatedLotto2 = LottoNumberMaker.generate(1);;
+        Lottos automatedLotto1 = LottoGenerator.generate(1);;
+        Lottos automatedLotto2 = LottoGenerator.generate(1);;
 
         // when
         List<Lotto> lottos1 = automatedLotto1.list();

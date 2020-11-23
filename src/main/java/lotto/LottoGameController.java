@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumberMaker;
+import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
 import lotto.domain.winning.WinningNumber;
@@ -21,7 +21,7 @@ public class LottoGameController {
 
         SeedMoney seedMoney = InputView.askAndShowLottoGameMoney();
 
-        Lottos lottos = LottoNumberMaker.generate(seedMoney.round());
+        Lottos lottos = LottoGenerator.generate(seedMoney.round());
 
         InputView.showBoughtLottos(lottos);
 
