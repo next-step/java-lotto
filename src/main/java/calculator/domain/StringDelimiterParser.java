@@ -7,6 +7,7 @@ public class StringDelimiterParser {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_COLON = ":";
+    private static final String DELIMITER_REGEX = "[,:]";
 
     private static final String CUSTOM_DELIMITER_HEAD = "//";
     private static final String CUSTOM_DELIMITER_TAIL = "\n";
@@ -26,7 +27,7 @@ public class StringDelimiterParser {
             return matcher.group(2).split(customDelimiter);
         }
 
-        return text.split("[,:]");
+        return text.split(DELIMITER_REGEX);
     }
 
     private static boolean doesHaveDelimiter(String text) {
