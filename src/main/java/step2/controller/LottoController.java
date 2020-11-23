@@ -2,6 +2,7 @@ package step2.controller;
 
 import step2.domain.Lotto;
 import step2.domain.LottoStore;
+import step2.domain.Person;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -15,7 +16,12 @@ public class LottoController {
 
         ResultView.printPurchaseCount(purchaseLottoCount);
 
-        Lotto lotto = new Lotto();
-        System.out.println(lotto.getLottoNumbers().toString());
+        Person person = new Person();
+
+        for (int i = 0; i < purchaseLottoCount; i++) {
+            Lotto lotto = lottoStore.getLottoNumbers();
+            person.addLotto(lotto);
+            ResultView.printLottoNumbers(lotto.getNumbers());
+        }
     }
 }

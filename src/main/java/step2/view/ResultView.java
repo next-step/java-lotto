@@ -1,5 +1,7 @@
 package step2.view;
 
+import java.util.Arrays;
+
 public class ResultView {
     private static void printMessage(String message) {
         System.out.println(message);
@@ -11,5 +13,9 @@ public class ResultView {
 
     public static void printPurchaseCount(int purchaseCount) {
         printMessage(purchaseCount + "개를 구매했습니다.");
+    }
+
+    public static void printLottoNumbers(Integer[] lottoNumbers) {
+        printMessage(Arrays.toString(lottoNumbers));
     }
 }
