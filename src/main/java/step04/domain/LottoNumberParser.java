@@ -19,7 +19,7 @@ public class LottoNumberParser {
 
     public static Lottos executeByMultiple(List<String> lottos) {
         return lottos.stream()
-                .map(lotto -> execute(lotto))
+                .map(LottoNumberParser::execute)
                 .collect(Collectors.collectingAndThen(toList(), Lottos::of));
     }
 
