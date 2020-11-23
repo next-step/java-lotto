@@ -20,7 +20,11 @@ public class StringAddCalculator {
 
         int sum = 0;
         for (String num : splitStrings) {
-            sum += Integer.parseInt(num);
+            int i = Integer.parseInt(num);
+            if (i < 0 ) {
+                throw new RuntimeException();
+            }
+            sum += i;
         }
 
         return sum;

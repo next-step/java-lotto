@@ -52,4 +52,11 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("구분자가 - 인경우")
+    public void splitAndSum_custom_구분자_dash() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//-\n1-2-3");
+        assertThat(result).isEqualTo(6);
+    }
 }

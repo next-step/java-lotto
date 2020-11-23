@@ -12,10 +12,6 @@ public class StringPreConditionChecker {
             return false;
         }
 
-        if (text.contains("-")) {
-            throw new RuntimeException();
-        }
-
         return true;
     }
 }
