@@ -29,18 +29,18 @@ public enum Rank {
         .reduce(0, Integer::sum);
   }
 
-  public static int getRewardFromNumHitWithBonusBall(int numHit, boolean matchedBonusNumber) {
+  public static Rank getRewardWithBonusBall(int numHit, boolean matchedBonusNumber) {
     if (numHit == 5) {
-      return matchedBonusNumber ? Rank.SECOND.winningReward : Rank.THIRD.winningReward;
+      return matchedBonusNumber ? Rank.SECOND : Rank.THIRD;
     }
 
     return getRewardFromNumHit(numHit);
   }
 
-  public static int getRewardFromNumHit(int numHit) {
+  public static Rank getRewardFromNumHit(int numHit) {
     return Arrays.stream(Rank.values())
         .filter(rank -> rank.numHit == numHit)
         .findAny()
-        .orElse(MISS).winningReward;
+        .orElse(MISS);
   }
 }

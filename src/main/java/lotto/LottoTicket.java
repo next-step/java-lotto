@@ -48,9 +48,9 @@ public class LottoTicket {
     return result;
   }
 
-  public int decideRewardWithBonusBall(WinningNumber winningNumber, LottoNumber bonusNumber) {
+  public Rank decideRewardWithBonusBall(WinningNumber winningNumber, LottoNumber bonusNumber) {
     int numHit = guessNumHit(winningNumber);
     boolean matchedWithBonusBall = this.lottoNumbers.contains(bonusNumber);
-    return Rank.getRewardFromNumHitWithBonusBall(numHit, matchedWithBonusBall);
+    return Rank.getRewardWithBonusBall(numHit, matchedWithBonusBall);
   }
 }

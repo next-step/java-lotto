@@ -33,14 +33,14 @@ class RankTest {
   @Test
   @DisplayName("티켓에 보너스 번호를 같이 보냈을 때 정상적으로 2등을 체크 하는지 테스트")
   void testScoringSecond() {
-    assertThat(Rank.getRewardFromNumHitWithBonusBall(5, true))
-        .isEqualTo(Rank.SECOND.getWinningReward());
+    assertThat(Rank.getRewardWithBonusBall(5, true))
+        .isEqualTo(Rank.SECOND);
   }
 
   @Test
   @DisplayName("티켓에 보너스 번호를 같이 보냈을 때 정상적으로 3등을 체크 하는지 테스트")
   void testScoringWithBonusNumber() {
-    assertThat(Rank.getRewardFromNumHitWithBonusBall(5, false))
-        .isEqualTo(Rank.THIRD.getWinningReward());
+    assertThat(Rank.getRewardWithBonusBall(5, false))
+        .isEqualTo(Rank.THIRD);
   }
 }
