@@ -39,7 +39,7 @@ public enum LottoStatusEnum {
         this.winningCount++;
     }
 
-    public static LottoStatusEnum findByPrice(int winningCount){
+    public static LottoStatusEnum findByCount(int winningCount){
         if(!matchByCountMap.containsKey(winningCount)){
             throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2RankException());
         }
