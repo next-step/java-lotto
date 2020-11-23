@@ -14,9 +14,4 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public int countPrizeMatchLottoNumber(PrizeLotto prizeLotto) {
-        return (int) lottoNumbers.stream()
-                                 .filter(prizeLotto::findByIndexNumber)
-                                 .count();
-    }
 }
