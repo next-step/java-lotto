@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.domain.Lottos;
 import lotto.domain.game.Lotto;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class WinningChecker {
 
     private final List<Integer> winningNumbers;
+    private static final WinningStatistics winningStatistics = new WinningStatistics();
 
     private WinningChecker(WinningNumber winningNumber) {
         this.winningNumbers = winningNumber.value();
@@ -20,7 +22,19 @@ public class WinningChecker {
         return new WinningChecker(winningNumber);
     }
 
-    public long compare(Lotto lotto) {
+    public WinningStatistics winningStatistics(Lottos lottos) {
+        for (Lotto lotto : lottos.list()) {
+            winningStatistics.add(getWinningResult(lotto));
+        }
+        return winningStatistics;
+    }
+
+    private WinningRank getWinningResult(Lotto lotto) {
+        long matchedNumber = compare(lotto);
+        return WinningRank.getWinningRank((int) matchedNumber);
+    }
+
+    private long compare(Lotto lotto) {
         return lotto.number().stream()
                 .filter(num -> this.winningNumbers.contains(num))
                 .count();

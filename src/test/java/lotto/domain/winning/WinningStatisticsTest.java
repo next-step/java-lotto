@@ -45,7 +45,7 @@ class WinningStatisticsTest {
         double expectedStats = expectedPrize / (double) seedMoney.amount();
 
         // when
-        WinningStatistics winningStatistics = lottos.winningStatistics(winningNumber);
+        WinningStatistics winningStatistics = WinningChecker.of(winningNumber).winningStatistics(lottos);
 
         // then
         assertThat(winningStatistics.earningRatio(seedMoney.amount()))

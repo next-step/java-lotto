@@ -23,26 +23,6 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public WinningStatistics winningStatistics(WinningNumber winningNumber) {
-        checkWinningResult(winningNumber);
-        return accumulateStatistics();
-    }
-
-    private void checkWinningResult(WinningNumber winningNumber) {
-        WinningChecker winningChecker = WinningChecker.of(winningNumber);
-        for (Lotto lotto : this.lottos) {
-            lotto.lottoResult(winningChecker);
-        }
-    }
-
-    private WinningStatistics accumulateStatistics() {
-        WinningStatistics winningStatistics = new WinningStatistics();
-        this.lottos.forEach(lotto -> {
-                    winningStatistics.add(lotto.winningResult());
-                });
-        return winningStatistics;
-    }
-
     public List<Lotto> list() {
         return this.lottos;
     }

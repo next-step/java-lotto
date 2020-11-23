@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
+import lotto.domain.winning.WinningChecker;
 import lotto.domain.winning.WinningNumber;
 import lotto.domain.winning.WinningStatistics;
 import lotto.view.InputView;
@@ -27,7 +28,8 @@ public class LottoGameController {
 
         WinningNumber winningNumber = ResultView.askWinningNumber();
 
-        WinningStatistics statistics = lottos.winningStatistics(winningNumber);
+        WinningStatistics statistics =
+                WinningChecker.of(winningNumber).winningStatistics(lottos);
 
         ResultView.showResults(statistics, seedMoney.amount());
 

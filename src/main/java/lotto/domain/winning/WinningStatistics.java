@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import lotto.domain.Lottos;
+
 import java.util.*;
 
 /**

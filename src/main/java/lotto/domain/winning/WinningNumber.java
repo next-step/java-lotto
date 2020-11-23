@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.domain.Lottos;
 import lotto.domain.game.LottoNumber;
 
 import java.util.*;
@@ -29,7 +30,6 @@ public class WinningNumber {
     public List<Integer> value() {
         return Collections.unmodifiableList(this.winningNumber.value());
     }
-
 
     @Override
     public boolean equals(Object o) {

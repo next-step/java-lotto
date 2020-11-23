@@ -14,7 +14,6 @@ import java.util.Objects;
 public class Lotto {
 
     private final LottoNumber lottoNumber;
-    private long result;
 
     private Lotto(LottoNumber lottoNumber) {
         this.lottoNumber = lottoNumber;
@@ -22,14 +21,6 @@ public class Lotto {
 
     public static Lotto of(LottoNumber lottoNumber) {
         return new Lotto(lottoNumber);
-    }
-
-    public void lottoResult(WinningChecker winningChecker) {
-        this.result = winningChecker.compare(this);
-    }
-
-    public WinningRank winningResult() {
-        return WinningRank.getWinningRank((int) this.result);
     }
 
     // 로또번호 가져오기
