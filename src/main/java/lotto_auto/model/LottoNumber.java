@@ -8,7 +8,6 @@ public class LottoNumber {
     private static final Integer LOTTO_NUMBER_MAX_RANGE = 45;
     private final int number;
 
-
     public LottoNumber(int number) {
         ThrowIfInvalidLottoNumberRange(number);
         this.number = number;
@@ -22,5 +21,9 @@ public class LottoNumber {
 
     public boolean equals(LottoNumber obj) {
         return this.number == obj.number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

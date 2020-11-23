@@ -9,8 +9,8 @@ public class LottoStatistic {
 
     public LottoStatistic(List<DrawResult> drawResultList, int payment) {
         this.bundleDrawResult = new BundleDrawResult(drawResultList);
-        this.yield = computeYield(drawResultList);
         this.payment = payment;
+        this.yield = computeYield(drawResultList);
     }
 
     private double computeYield(List<DrawResult> drawResultList) {

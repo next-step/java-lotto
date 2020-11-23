@@ -27,7 +27,7 @@ public class LottoBundleStatusView {
                 .getLottoNumbers()
                 .export()
                 .stream()
-                .map(String::valueOf)
+                .map(item -> String.valueOf(item.getNumber()))
                 .collect(Collectors.joining(", "));
         return String.format("[ %s ]", collect);
     }
