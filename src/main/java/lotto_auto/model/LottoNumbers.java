@@ -2,26 +2,27 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final Integer LOTTO_NUMBER_COUNT = 6;
-    private static final Integer LOTTO_NUMBER_MIN_RANGE = 0;
-    private static final Integer LOTTO_NUMBER_MAX_RANGE = 45;
-    private List<Integer> lottoNumber;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumber) {
-        ThrowIfNull(lottoNumber);
-        ThrowIfInValidLottoNumberCount(lottoNumber);
-        ThrowIfInvalidLottoNumberRange(lottoNumber);
-        ThrowIfDuplicate(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        ThrowIfNull(lottoNumbers);
+        ThrowIfInValidLottoNumberCount(lottoNumbers);
+        ThrowIfDuplicate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> export() {
-        return Collections.unmodifiableList(this.lottoNumber);
+    public List<LottoNumber> export() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     private void ThrowIfNull(List<Integer> numbers) {
@@ -36,15 +37,6 @@ public class LottoNumbers {
         }
     }
 
-    private void ThrowIfInvalidLottoNumberRange(List<Integer> numbers) {
-        List<Integer> filteredList = numbers.stream()
-                .filter(item -> item <= LOTTO_NUMBER_MIN_RANGE || item >= LOTTO_NUMBER_MAX_RANGE)
-                .collect(Collectors.toList());
-        if (filteredList.size() != 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
-        }
-    }
-
     private void ThrowIfDuplicate(List<Integer> numbers) {
         HashSet<Integer> list = new HashSet<>(numbers);
         if (list.size() != numbers.size()) {
@@ -52,11 +44,20 @@ public class LottoNumbers {
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        List<LottoNumber> collect = this.lottoNumbers.stream()
+                .filter(item -> item.equals(lottoNumber))
+                .collect(Collectors.toList());
+        if (collect.size() != 0) {
+            return true;
+        }
+        return false;
+    }
+
     public int computeMatchCount(LottoNumbers lottoNumbers) {
-        List<Integer> all = new ArrayList<>();
-        all.addAll(this.export());
-        all.addAll(lottoNumbers.export());
-        Set<Integer> removeDup = new HashSet<>(all);
-        return all.size() - removeDup.size();
+        return (int) lottoNumbers.export()
+                .stream()
+                .filter(item -> contains(item))
+                .count();
     }
 }

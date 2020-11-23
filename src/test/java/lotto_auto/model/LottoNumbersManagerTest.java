@@ -17,12 +17,12 @@ class LottoNumbersManagerTest {
         LottoNumbers lottoNumbers = LottoNumberManager.generate();
 
 
-        List<Integer> lottoNumberList = lottoNumbers.export();
+        List<LottoNumber> export = lottoNumbers.export();
 
         assertAll(
                 () -> assertThat(lottoNumbers).isNotNull(),
-                () -> assertThat(lottoNumberList).isNotNull(),
-                () -> assertThat(lottoNumberList.size()).isEqualTo(6)
+                () -> assertThat(export).isNotNull(),
+                () -> assertThat(export.size()).isEqualTo(6)
         );
     }
 }
