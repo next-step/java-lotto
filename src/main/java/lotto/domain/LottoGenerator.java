@@ -19,7 +19,7 @@ public class LottoGenerator {
     private LottoGenerator() {}
 
     private static LottoNumber shuffle() {
-        List<Integer> board = new LottoNumberBoard().lottoNumberBoard();
+        List<Integer> board = LottoNumberBoard.lottoNumberBoard();
         Collections.shuffle(board);
 
         return LottoNumber.of(board.subList(0, LottoNumber.VALID_LOTTO_SIZE));

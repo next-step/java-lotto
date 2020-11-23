@@ -11,19 +11,21 @@ import java.util.stream.Stream;
  */
 public class LottoNumberBoard {
 
-    private static List<Integer> lottoNumbers;
+    private static final List<Integer> lottoNumbers = new ArrayList<>();;
     public static final int VALID_MIN_NUMBER = 1;
     public static final int VALID_MAX_NUMBER = 45;
 
-
-    public LottoNumberBoard() {
-        this.lottoNumbers = new ArrayList<>();
+    static {
         for (int i = VALID_MIN_NUMBER; i <= VALID_MAX_NUMBER; i++) {
             lottoNumbers.add(i);
         }
     }
 
-    public List<Integer> lottoNumberBoard() {
-        return this.lottoNumbers;
+
+    private LottoNumberBoard() {
+    }
+
+    public static List<Integer> lottoNumberBoard() {
+        return lottoNumbers;
     }
 }
