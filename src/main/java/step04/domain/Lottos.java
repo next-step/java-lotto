@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -62,4 +63,10 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
+    public Lottos addLottos(Lottos addedLottos) {
+        return Lottos.of(
+                Stream.concat(lottos.stream(), addedLottos.lottos.stream())
+                        .collect(Collectors.toList())
+        );
+    }
 }
