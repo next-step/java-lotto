@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ public class LottoTest {
     public void createLottoInstanceTest() {
 
         //Given & When
-        Lotto lotto = new Lotto(new LottoNumbers(new LottoAutoMachine()));
+        Lotto lotto = new Lotto(new LottoAutoMachine());
 
         //Then
         assertThat(lotto.getLottoPickNumber()).isNotNull();
@@ -29,9 +30,9 @@ public class LottoTest {
     @DisplayName("matchPrizeNumber 메서드 테스트")
     @ParameterizedTest
     @MethodSource("createLottoNumber")
-    public void matchPrizeNumberTest(LinkedHashSet<Integer> expected) {
+    public void matchPrizeNumberTest(TreeSet<Integer> expected) {
         //Given
-        Lotto lotto = new Lotto(new LottoNumbers((capacity) -> new LinkedHashSet<>(expected)));
+        Lotto lotto = new Lotto(() -> new LottoNumbers(expected));
 
         //When
         PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(new LottoNumbers(expected)));

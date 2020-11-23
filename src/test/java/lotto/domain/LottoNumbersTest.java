@@ -21,7 +21,7 @@ public class LottoNumbersTest {
     @Test
     public void createLottoNumberInstance() {
         //Given & When
-        LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
+        LottoNumbers lottoNumbers = new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
 
         //Then
         assertThat(lottoNumbers).isNotNull();
@@ -32,7 +32,7 @@ public class LottoNumbersTest {
     @MethodSource("createNotValidLottoNumber")
     public void notValidLottoNumbersException(Set<Integer> lottoSet) {
         assertThatThrownBy(() -> {
-            LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(lottoSet));
+            LottoNumbers lottoNumbers = new LottoNumbers(new TreeSet<>(lottoSet));
         }).isInstanceOf(NotValidLottoNumberException.class);
     }
 
@@ -50,7 +50,7 @@ public class LottoNumbersTest {
     public void notValidLottoNumbersException() {
         assertThatThrownBy(() -> {
 
-            LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 51, 11)));
+            LottoNumbers lottoNumbers = new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 51, 11)));
 
         }).isInstanceOf(NotValidLottoNumberException.class);
     }
@@ -60,7 +60,7 @@ public class LottoNumbersTest {
     @MethodSource("createLottoNumber")
     public void countPrizeMatchLottoNumberTest(Set<Integer> numbers) {
         //Given
-        LottoNumbers lottoNumbers = new LottoNumbers((capacity) -> new TreeSet<>(numbers));
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
         //When
         int result = lottoNumbers.countPrizeMatchLottoNumber(new PrizeLotto(new LottoNumbers(numbers)));
@@ -82,7 +82,7 @@ public class LottoNumbersTest {
     public void notValidPrizeNumber() {
         assertThatThrownBy(() ->
 
-            new LottoNumbers((capacity) -> new TreeSet<>(Arrays.asList(1, 3, 5)))
+            new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5)))
 
         ).isInstanceOf(NotValidLottoNumberException.class);
 

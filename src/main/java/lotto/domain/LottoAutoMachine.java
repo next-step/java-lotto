@@ -6,7 +6,9 @@ import java.util.stream.IntStream;
 
 public class LottoAutoMachine implements LottoMachine {
 
-    protected static final List<Integer> numbers = new ArrayList<>();
+    private static final int LOTTO_NUMBER_CAPACITY = 6;
+
+    private static final List<Integer> numbers = new ArrayList<>();
     private static final int MAX_LOTTO_NUMBER_RANGE = 45;
 
     static {
@@ -14,13 +16,12 @@ public class LottoAutoMachine implements LottoMachine {
     }
 
     @Override
-    public Set<Integer> createLottoNumber(int capacity) {
+    public LottoNumbers createLottoNumber() {
         Collections.shuffle(numbers);
 
-        Set<Integer> lottoPickNumber = new TreeSet<>();
-        IntStream.range(0, capacity)
-                .forEach(i -> lottoPickNumber.add(numbers.get(i)));
-
-        return lottoPickNumber;
+        return new LottoNumbers(numbers.stream()
+                                .limit(LOTTO_NUMBER_CAPACITY)
+                                .sorted()
+                                .collect(Collectors.toCollection(TreeSet::new)));
     }
 }

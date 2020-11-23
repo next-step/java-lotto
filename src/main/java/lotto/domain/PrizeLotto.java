@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Set;
-
 public class PrizeLotto  {
 
     private LottoNumbers prizeNumbers;
@@ -15,7 +13,4 @@ public class PrizeLotto  {
                             .contains(lottoNumber);
     }
 
-    public Set<Integer> getPrizeNumbers() {
-        return prizeNumbers.getLottoNumbers();
-    }
 }

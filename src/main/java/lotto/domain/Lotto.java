@@ -4,8 +4,8 @@ public class Lotto {
 
     private LottoNumbers lottoPickNumber;
 
-    public Lotto(LottoNumbers lottoPickNumber) {
-        this.lottoPickNumber = lottoPickNumber;
+    public Lotto(LottoMachine lottoMachine) {
+        this.lottoPickNumber = lottoMachine.createLottoNumber();
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
