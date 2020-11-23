@@ -38,8 +38,8 @@ public class WinningNumber {
         return value;
     }
 
-    public Rank getRank(List<Integer> numbers) {
-        return Rank.value(getMatchingNumberCount(numbers));
+    public Rank getRank(LottoNumbers lottoNumbers) {
+        return Rank.value(getMatchingNumberCount(lottoNumbers.getValue()));
     }
 
     private int getMatchingNumberCount(List<Integer> numbers) {

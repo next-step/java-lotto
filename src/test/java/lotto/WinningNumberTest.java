@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.common.ErrorMessage;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 import lotto.utils.IntegerUtils;
@@ -32,13 +33,14 @@ class WinningNumberTest {
     }, delimiter = ':')
     void should_return_rank(String inputNumbers, int expectedCount) {
         //Given
-        List<String> lottoNumbers = StringUtils.splitString(inputNumbers);
-        List<Integer> numbers = IntegerUtils.parsePositiveInt(lottoNumbers);
+        List<String> numbers = StringUtils.splitString(inputNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(IntegerUtils.parsePositiveInt(numbers));
 
+        //When
         Rank expectedRank = Rank.value(expectedCount);
 
-        //When & Then
-        assertThat(winningNumber.getRank(numbers)).isEqualTo(expectedRank);
+        //Then
+        assertThat(winningNumber.getRank(lottoNumbers)).isEqualTo(expectedRank);
 
     }
 
