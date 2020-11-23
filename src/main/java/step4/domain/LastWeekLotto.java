@@ -10,21 +10,20 @@ public class LastWeekLotto {
     private final LottoNumber bonusNumber;
 
     private LastWeekLotto(Lotto lastWeekLotto, LottoNumber bonusNumber) {
-
-        validBonusNumber(lastWeekLotto , bonusNumber);
-
         this.lastWeekLotto = lastWeekLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validBonusNumber(Lotto lastWeekLotto , LottoNumber bonusNumber) {
-        if(lastWeekLotto.has(bonusNumber)){
-            throw new BonusNumberDuplicateNumber();
-        }
-    }
 
     public static LastWeekLotto of(Lotto lotto, LottoNumber bonusNumber) {
+        validBonusNumber(lotto , bonusNumber);
+
         return new LastWeekLotto(lotto, bonusNumber);
+    }
+    private static void validBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+        if(lotto.has(bonusNumber)){
+            throw new BonusNumberDuplicateNumber();
+        }
     }
 
 
