@@ -48,6 +48,7 @@ return lottoBalls.stream()
 - `Lottos`
     - public static Lottos of(List<Lotto> lottos)
     - public Integer size()
+    - Lotto 추가 기능
 
 - `LottoSeller` 로또 판매기 
     - static final int priceOfLotto;
@@ -68,13 +69,18 @@ return lottoBalls.stream()
 
 - `LottoNumberTokenizer`
     - public static Lotto execute(String winningNumbers)
+    - public static Lottos executeByMultiple(List<String> lottos)
+    
+- `LottoCounter`
+    - 총 로또 수
+    - 수동 로또 수
+    - 수동 로또 수가 구매할 수 있는 로또 수보다 많으면 에러
+    - 수동 로또 수가 음수일 때 에러처리
 
 - `InputView`
     - public static int payLotto() 로또 구입 금액을 지불하는 기능
-    - 수동으로 구매할 로또 수를 입력해 주세요.
-        - 구매할 수 있는 로또 수보다 많으면 에러
-        - 음수일 때 에러처리
-    - 수동으로 구매할 번호를 입력해 주세요.
+    - public static int readManualCount() 수동 로또 수를 읽음
+    - public static Stream<String> readManualLottos(int count) 수동 로또 번호를 읽음
     - public static String createWinningBalls() 금주의 당첨 번호를 입력하는 기능
     - public static String pickBonusBall() 보너스 볼을 입력하는 기능
     
@@ -84,8 +90,6 @@ return lottoBalls.stream()
     - public static void showLottos(List<Lotto> lottos) 사용자가 구매한 로또번호들을 보여주는 기능 
     - public static void showWinningStatistics(List<LottoReward> winningStatistics) 당첨 통계를 보여주는 기능
     - public static void showYield(double yield) 수익률을 보여주는 기능
-    
-
 
 ## 기능 요구사항
 ### 추가사항

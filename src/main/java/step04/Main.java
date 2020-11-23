@@ -8,12 +8,16 @@ import step04.view.ResultView;
 public class Main {
     public static void main(String[] args) {
         int payment = InputView.payLotto();
+        int manualCount = InputView.readManualCount();
+        LottoNumberParser.executeByMultiple(InputView.readManualLottos(manualCount));
+
+
         Lottos userLottos = LottoSeller.generateLottos(payment);
 
         ResultView.showLottoCount(userLottos.size());
         ResultView.showLottos(userLottos.getLottos());
 
-        Lotto winningLotto = LottoNumberTokenizer.execute(InputView.createWinningNumber());
+        Lotto winningLotto = LottoNumberParser.execute(InputView.createWinningNumber());
         LottoBall bonusBall = LottoBall.valueOf(InputView.pickBonusBall());
         WinningComposer winningComposer = WinningComposer.of(winningLotto, bonusBall);
 
