@@ -256,7 +256,7 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 * LotteryNumber class를 구현한다.
   * 1~ 45 이내의 숫자만 허용한다.
 * LotteryTicket class를 구현한다.
-  * 6개 숫자는 종복이 없다.
+  * 6개 숫자는 중복이 없다.
   * 오름 차순으로 정렬한다.  
 * LotteryPerson class를 구현한다.
   * 로또 구매하는 금액을 입력 받는다.
