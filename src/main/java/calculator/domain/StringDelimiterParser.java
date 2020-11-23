@@ -31,11 +31,7 @@ public class StringDelimiterParser {
 
     private static boolean doesHaveDelimiter(String text) {
 
-        if (text.contains(DELIMITER_COMMA)) {
-            return true;
-        }
-
-        if (text.contains(DELIMITER_COLON)) {
+        if (text.contains(DELIMITER_COMMA) || (text.contains(DELIMITER_COLON))) {
             return true;
         }
 
