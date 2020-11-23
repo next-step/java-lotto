@@ -23,7 +23,7 @@ public class LottoGameController {
 
         Lottos lottos = LottoGenerator.generate(seedMoney.round());
 
-        InputView.showBoughtLottos(lottos);
+        ResultView.showBoughtLottos(lottos);
 
         WinningNumber winningNumber = ResultView.askWinningNumber();
 

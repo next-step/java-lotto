@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.LottoGameController;
+import lotto.domain.Lottos;
 import lotto.domain.winning.WinningNumber;
 import lotto.domain.winning.WinningRank;
 import lotto.domain.winning.WinningStatistics;
@@ -15,8 +16,13 @@ public class ResultView {
     private static final String QUESTION_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_STATISTICS = "당첨 통계";
     private static final String RESULT_STATISTICS = "%d개 일치 (%d원)- %d개";
-    private static final String EARNING_RATIO = "총 수익률은 %f입니다.";
+    private static final String EARNING_RATIO = "총 수익률은 %.2f입니다.";
     private static final String DASH = "----------";
+
+    public static void showBoughtLottos(Lottos lottos) {
+        lottos.list().forEach(lotto -> System.out.println(lotto.number()));
+        System.out.println();
+    }
 
     public static WinningNumber askWinningNumber() {
         System.out.println(QUESTION_WINNING_NUMBER);

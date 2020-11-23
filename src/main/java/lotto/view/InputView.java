@@ -19,11 +19,6 @@ public class InputView {
         return seedMoney;
     }
 
-    public static void showBoughtLottos(Lottos lottos) {
-        lottos.list().forEach(lotto -> System.out.println(lotto.number()));
-        System.out.println();
-    }
-
     private static SeedMoney askSeedMoney() {
         System.out.println(QUESTION_GAME_MONEY);
         return SeedMoney.from(LottoGameController.SCANNER.nextLine());
