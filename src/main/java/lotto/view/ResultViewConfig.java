@@ -2,7 +2,7 @@ package lotto.view;
 
 public class ResultViewConfig {
 
-    public static final String OUTPUT_BUY_LOTTO_COUNT = "%d개를 구매했습니다.\n";
+    public static final String OUTPUT_BUY_LOTTO_COUNT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     public static final String WINNING_STATISTICS = "당첨 통계\n---------\n";
     public static final String WINNING_STATISTICS_GRID = "%s개 일치%s (%s원)- %s개\n";
     public static final String WINNING_STATISTICS_BONUS_GRID = ", 보너스 볼 일치";

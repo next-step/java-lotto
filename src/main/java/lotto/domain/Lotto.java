@@ -8,9 +8,17 @@ import static lotto.domain.LottoRuleConfig.*;
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
+    private final boolean isAutoGeneration;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        this.isAutoGeneration = true;
+        lottoSizeException();
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers,boolean isAutoGeneration) {
+        this.lottoNumbers = lottoNumbers;
+        this.isAutoGeneration = isAutoGeneration;
         lottoSizeException();
     }
 
@@ -35,16 +43,21 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean isAutoGeneration() {
+        return isAutoGeneration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return isAutoGeneration == lotto.isAutoGeneration &&
+                Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoNumbers, isAutoGeneration);
     }
 }

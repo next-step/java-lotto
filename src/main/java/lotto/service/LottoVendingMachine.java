@@ -18,17 +18,32 @@ public class LottoVendingMachine {
 
     private LottoVendingMachine() {}
 
-    public static Lottos buyAutoLottery(int price) {
-        return new Lottos(getLottoList(price));
+    public static Lottos buyLottery(List<String> manualLotto,int lottoPurchaseCost) {
+        List<Lotto> lottoList = getLottoList(lottoPurchaseCost);
+        lottoList.addAll(manualLottoList(manualLotto));
+        return new Lottos(lottoList);
     }
 
-    public static List<LottoResult> lottoWinningResults(Lottos lottos, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
-        return getLottoResultList(lottos,lottoWinningNumber,bonusNumber);
+    public static List<LottoResult> lottoWinningResults(Lottos lottos, String winningNumber, int bonusNumber) {
+        return getLottoResultList(lottos,winningNumber,bonusNumber);
     }
 
-    private static List<LottoResult> getLottoResultList(Lottos lottos, LottoWinningNumber lottoWinningNumber, int bonusNumber) {
+    private static List<Lotto> manualLottoList(List<String> manualLotto) {
+        return manualLotto.stream()
+                .map(LottoVendingMachine::manualLotto)
+                .collect(Collectors.toList());
+    }
+
+    private static Lotto manualLotto(String lottoNumber) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR))
+                .map(e -> LottoNumber.of(Integer.parseInt(e)))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers,false);
+    }
+
+    private static List<LottoResult> getLottoResultList(Lottos lottos, String winningNumber, int bonusNumber) {
         return lottos.getLottos().stream()
-                .map(e -> LottoResult.check(e,lottoWinningNumber,bonusNumber))
+                .map(e -> LottoResult.check(e,winningNumber,bonusNumber))
                 .collect(Collectors.toList());
     }
 

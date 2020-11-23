@@ -43,7 +43,14 @@ public class ResultView {
     }
 
     private static void printBuyLottoCount(Lottos lottos) {
-        System.out.printf(OUTPUT_BUY_LOTTO_COUNT,lottos.getLottos().size());
+        int auto = (int)lottos.getLottos().stream()
+                .filter(Lotto::isAutoGeneration)
+                .count();
+        int manual = (int)lottos.getLottos().stream()
+                .filter(e -> !e.isAutoGeneration())
+                .count();
+
+        System.out.printf(OUTPUT_BUY_LOTTO_COUNT,manual,auto);
     }
 
     private static void lottoResult(List<Lotto> lottoList) {

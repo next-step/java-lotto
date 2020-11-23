@@ -34,10 +34,9 @@ public class LottoVendingMachineTest {
     @DisplayName("로또번호 6개 일치할시에 결과가 1등인지 테스트")
     void lotto_winning_number (String winningNumber) {
         //given
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
+        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
         //when
-        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
         LottoResult lottoResult = results.get(0);
 
         //then
@@ -49,10 +48,9 @@ public class LottoVendingMachineTest {
     @DisplayName("로또번호 5개 + 보너스 번호 일치할시에 결과가 2등인지 테스트")
     void lotto_secondWinning_number (String winningNumber) {
         //given
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
+        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,6);
 
         //when
-        List<LottoResult> results = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,6);
         LottoResult lottoResult = results.get(0);
 
         //then

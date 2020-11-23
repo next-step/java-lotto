@@ -33,7 +33,8 @@ public class LottoWinningStatistics {
     }
 
     private static BigInteger getSumPrize(LottoResult lottoResult, int count) {
-        return BigInteger.valueOf(lottoResult.getPrize() * count);
+        BigInteger bigPrice = new BigInteger(String.valueOf(lottoResult.getPrize()));
+        return BigInteger.valueOf(bigPrice.longValue() * count);
     }
 
     private static List<LottoResult> reverseLottoResultValues() {

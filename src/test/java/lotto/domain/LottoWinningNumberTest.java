@@ -33,7 +33,7 @@ public class LottoWinningNumberTest {
     @DisplayName("로또 당첨번호 6개 이상 입력시 IllegalArgumentException 발생")
     void sameNumberOfCount_overSizeLottoNumber_throwException(String winningNumber) {
         assertThatThrownBy(() ->
-                new LottoWinningNumber(winningNumber)
+                new LottoWinningNumber(lotto.getLottoNumbers()).sameNumberOfCount(winningNumber)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("당첨 번호는 숫자 6개를 입력해야 합니다");
     }
@@ -46,8 +46,8 @@ public class LottoWinningNumberTest {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         //when
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
-        int sameNumberOfCount = lottoWinningNumber.sameNumberOfCount(lottoNumbers);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers);
+        int sameNumberOfCount = lottoWinningNumber.sameNumberOfCount(winningNumber);
 
         //then
         assertThat(sameNumberOfCount).isEqualTo(4);
@@ -65,8 +65,8 @@ public class LottoWinningNumberTest {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         //when
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
-        boolean isFoundBonusNumber = lottoWinningNumber.isMatchUpToBonusNumber(lottoNumbers,bonusNumber);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers);
+        boolean isFoundBonusNumber = lottoWinningNumber.isMatchUpToBonusNumber(bonusNumber);
 
         //then
         assertThat(isFoundBonusNumber).isEqualTo(result);

@@ -7,24 +7,24 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoRuleConfig.*;
 
-public class LottoWinningNumber {
+public class LottoWinningNumber extends Lotto{
 
     private static final String STRING_SPACE_REGEX = "\\s";
-    private final List<Integer> winningNumberList;
 
-    public LottoWinningNumber(String winningNumbers) {
-        this.winningNumberList = parseIntNumbers(noneSpaceStrings(winningNumbers));
+    public LottoWinningNumber(List<LottoNumber> lottoNumbers) {
+        super(lottoNumbers);
     }
 
-    public int sameNumberOfCount(List<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers.stream()
+    public int sameNumberOfCount(String winningNumbers) {
+        List<Integer> winningNumberList = parseIntNumbers(noneSpaceStrings(winningNumbers));
+        return (int) super.getLottoNumbers().stream()
                 .mapToInt(i -> numberMatchResult(winningNumberList,i.getLottoNumber()))
                 .filter(i -> i == 1)
                 .count();
     }
 
-    public boolean isMatchUpToBonusNumber(List<LottoNumber> lottoNumbers, int bonusNumber) {
-        return lottoNumbers.stream()
+    public boolean isMatchUpToBonusNumber(int bonusNumber) {
+        return super.getLottoNumbers().stream()
                 .anyMatch(e -> e.getLottoNumber() == bonusNumber);
     }
 

@@ -42,10 +42,9 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 6개일치 3개일치 건수 검증")
     void lotto_winningStatistics_matchCount(String winningNumber) {
         //given
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
         //when
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
         List<LottoWinningResult> winningResultList = winningResults.getLottoWinningResults();
 
@@ -72,10 +71,9 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 상금금액 일치 확인")
     void lotto_winningStatistics_profit(String winningNumber) {
         //given
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,7);
 
         //when
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,7);
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(lottoResults);
         BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);
 
@@ -88,10 +86,9 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 2등 당첨금 확인")
     void lotto_secondResult_profit(String winningNumber) {
         //given
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumber);
+        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,winningNumber,6);
 
         //when
-        List<LottoResult> lottoResults = LottoVendingMachine.lottoWinningResults(lottos,lottoWinningNumber,6);
         List<LottoResult> secondResult = Collections.singletonList(lottoResults.get(0));
         LottoWinningResults winningResults = LottoWinningStatistics.getStatistics(secondResult);
         BigInteger profit =  LottoWinningStatistics.getProfit(winningResults);
