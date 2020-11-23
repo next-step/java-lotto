@@ -9,12 +9,12 @@ import java.util.*;
  */
 public class LottoNumber {
 
-    private final TreeSet<Integer> lottoNumbers;
+    private final Set<Integer> lottoNumbers;
     public static final int VALID_LOTTO_SIZE = 6;
     public static final String MESSAGE_VALID_SIZE = "한 게임당 로또 번호를 중복없이 %d개 입력해 주세요.";
     public static final String MESSAGE_VALID_NUMBER = "로또 번호는 %d ~ %d 사이의 수로만 입력합니다.";
 
-    private LottoNumber(TreeSet<Integer> lottoNumbers) {
+    private LottoNumber(Set<Integer> lottoNumbers) {
         isValidSize(lottoNumbers.size());
         this.lottoNumbers = lottoNumbers;
     }
