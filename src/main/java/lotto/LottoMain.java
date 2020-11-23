@@ -15,8 +15,9 @@ public class LottoMain {
         LottoGameController.showLottoTickets(lottoGameResults);
 
         String lastWinningNumbers = LottoGameController.getLastWinningNumbers();
+        String bonusNumber = LottoGameController.getLastBonusNumber();
 
-        LottoGameController.getPrizeResult(lottoGameResults, lastWinningNumbers);
+        LottoGameController.getPrizeResult(lottoGameResults, lastWinningNumbers, bonusNumber);
 
     }
 }

@@ -18,6 +18,8 @@ public class LottoTicketTest {
 
     private LottoTicket lottoTicket;
 
+    private static final int BONUS_NUMBER = 11;
+
     @BeforeEach
     void setUp(){
         int[] numbers = {1,2,3,4,5,6};
@@ -53,24 +55,37 @@ public class LottoTicketTest {
     @DisplayName("일치하는 당첨번호 갯수 계산 테스트")
     @Test
     void countWinningNumbersTest(){
-        int[] numbers = {1,2,3,7,8,9};
-        List<Integer> gameResult = IntStream.of(numbers).boxed().collect(Collectors.toList());
+        int[] lastWinningNumbers = {1,2,3,7,8,9};
+        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
 
-        int winningNumberCount = this.lottoTicket.countWinningNumbers(gameResult);
+        PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
 
-        assertThat(winningNumberCount).isEqualTo(3);
+        assertThat(prizeUnit).isEqualTo(PrizeUnit.FIFTH_GRADE);
 
     }
 
     @DisplayName("최소 당첨번호 갯수 미만인 경우 0리턴 테스트")
     @Test
     void countWinningNumbersUnderMinToPrizeTest(){
-        int[] numbers = {1,2,44,55,66,77};
-        List<Integer> gameResult = IntStream.of(numbers).boxed().collect(Collectors.toList());
+        int[] lastWinningNumbers = {1,2,44,55,66,77};
+        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
 
-        int winningNumberCount = this.lottoTicket.countWinningNumbers(gameResult);
+        PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
 
-        assertThat(winningNumberCount).isEqualTo(0);
+        assertThat(prizeUnit).isEqualTo(PrizeUnit.FAIL_GRADE);
+
+    }
+
+    @DisplayName("보너스 번호 당첨 테스트")
+    @Test
+    void countWinningNumbersAndBonusTest(){
+        int[] lastWinningNumbers = {1,2,3,4,5,11};
+        int bonusNumber = 6;
+        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
+
+        PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, bonusNumber);
+
+        assertThat(prizeUnit).isEqualTo(PrizeUnit.SECOND_GRADE);
 
     }
 }

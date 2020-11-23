@@ -18,13 +18,15 @@ public class ResultView {
 
     }
 
-    public static void getPrizeResult(Map<Integer, Integer> resultsMap) {
+    public static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
         System.out.println(WINNING_RESULT_MESSAGE);
 
         resultsMap.entrySet()
-                .stream().forEach(set -> { PrizeUnit unit = PrizeUnit.findPrizeFieldByUnitCount(set.getKey());
-                                System.out.println(set.getKey()+"개 일치 ("+ unit.prizeUnitMoney+"원)- "+ set.getValue()+"개");}
-                                );
+                .stream().filter(prizeUnitSet -> prizeUnitSet.getKey() != PrizeUnit.FAIL_GRADE)
+                    .forEach(prizeUnitSet -> { System.out.println(prizeUnitSet.getKey().prizeUnitCount+"개 일치"
+                    +(prizeUnitSet.getKey() == PrizeUnit.SECOND_GRADE ? ", 보너스 볼 일치":" ")
+                    + "("+ prizeUnitSet.getKey().prizeUnitMoney+"원)- "+ prizeUnitSet.getValue()+"개");}
+        );
     }
 
     public static void getProfitResult(double profit) {

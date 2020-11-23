@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static lotto.domain.LottoGameConfig.*;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,14 +14,11 @@ public class LottoTickets {
 
     private List<LottoTicket> lottoTickets;
 
-    private int ticketCount;
     private int gameMoney;
 
     public LottoTickets(int gameMoney) {
-
-        this.gameMoney = gameMoney;
-        this.ticketCount = gameMoney/LOTTO_GAME_MONEY_UNIT;
-        this.lottoTickets = IntStream.range(0, ticketCount)
+        this.gameMoney = (gameMoney/LOTTO_GAME_MONEY_UNIT) * LOTTO_GAME_MONEY_UNIT;
+        this.lottoTickets = IntStream.range(0, gameMoney/LOTTO_GAME_MONEY_UNIT)
                 .mapToObj(ticket -> new LottoTicket(makeLottoNumber()))
                 .collect(Collectors.toList());
     }
@@ -29,7 +28,7 @@ public class LottoTickets {
     }
 
     public int getTicketCount() {
-        return this.ticketCount;
+        return lottoTickets.size();
     }
 
     private List<Integer> makeLottoNumber() {
@@ -39,7 +38,14 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 
+    public List<PrizeUnit> scoreWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
+        List<PrizeUnit> winResults = new ArrayList<>();
+        lottoTickets.stream()
+                .forEach(lottoTicket -> winResults.add(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));
+
+        return winResults;
+    }
 }

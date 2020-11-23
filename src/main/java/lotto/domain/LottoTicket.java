@@ -19,15 +19,23 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
-    public int countWinningNumbers(List<Integer> lastWinningNumbers) {
+    public PrizeUnit countWinningNumbers(List<Integer> lastWinningNumbers, int bonusNumber) {
         List<Integer> winningsNumber = lottoNumbers
                 .stream().filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
 
-        if(winningsNumber.size() >= MIN_COUNT_TO_PRIZE){
-            return winningsNumber.size();
+        boolean isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
+
+        int winningNumberSize = winningsNumber.size();
+
+        if(winningNumberSize == PrizeUnit.SECOND_GRADE.prizeUnitCount && isMatchBonusNumber){
+            return PrizeUnit.SECOND_GRADE;
         }
 
-        return 0;
+        if(winningNumberSize < MIN_COUNT_TO_PRIZE){
+            winningNumberSize = 0;
+        }
+
+        return PrizeUnit.findPrizeFieldByUnitCount(winningNumberSize, false);
     }
 
 }

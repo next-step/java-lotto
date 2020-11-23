@@ -2,9 +2,11 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
+import lotto.domain.PrizeUnit;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoGameController {
@@ -26,11 +28,15 @@ public class LottoGameController {
         return  InputView.getInputWinningNumbers();
     }
 
-    public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers) {
+    public static String getLastBonusNumber() {
+        return  InputView.getInputBonusNumber();
+    }
 
-        lottoGameResults.checkWinningResult(lastWinningNumbers);
+    public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers, String bonusNumber) {
 
-        Map<Integer, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
+        lottoGameResults.checkWinningResult(splitLastWinningNumbers(lastWinningNumbers), validateBonusNumber(bonusNumber));
+
+        Map<PrizeUnit, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
         getPrizeResult(resultsMap);
 
@@ -40,11 +46,19 @@ public class LottoGameController {
 
     }
 
+    public static int validateBonusNumber(String bonusNumber) {
+        return InputView.validateBonusNumber(bonusNumber);
+    }
+
+    public static List<Integer> splitLastWinningNumbers(String lastWinningNumbers) {
+        return InputView.splitLastWinningNumbers(lastWinningNumbers);
+    }
+
     private static void getProfitResult(double profit) {
         ResultView.getProfitResult(profit);
     }
 
-    private static void getPrizeResult(Map<Integer, Integer> resultsMap) {
+    private static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
         ResultView.getPrizeResult(resultsMap);
     }
 
