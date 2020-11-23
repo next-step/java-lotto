@@ -15,7 +15,8 @@ public class ResultView {
 
     private static final String QUESTION_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_STATISTICS = "당첨 통계";
-    private static final String RESULT_STATISTICS = "%d개 일치 (%d원)- %d개";
+    private static final String RESULT_STATISTICS = "%d개 일치 (%d원)";
+    private static final String RESULT_NUMBER = "- %d개";
     private static final String EARNING_RATIO = "총 수익률은 %.2f입니다.";
     private static final String DASH = "----------";
 
@@ -46,11 +47,19 @@ public class ResultView {
         Map<WinningRank, Integer> resultStats = winningStatistics.stats();
         resultStats.keySet().stream().filter(stats -> stats!=WinningRank.NONE)
                 .forEach(winningRank -> {
-                    System.out.println(String.format(RESULT_STATISTICS,
-                            winningRank.getWinningResult(),
-                            winningRank.getPrize(),
-                            resultStats.get(winningRank)));
+                    printEachRank(winningRank);
+                    printEachNumber(resultStats.get(winningRank));
                 });
+    }
+
+    private static void printEachRank(WinningRank winningRank) {
+        System.out.print(String.format(RESULT_STATISTICS
+                , winningRank.getWinningResult()
+                , winningRank.getPrize()));
+    }
+
+    private static void printEachNumber(int resultNumber) {
+        System.out.println(String.format(RESULT_NUMBER, resultNumber));
     }
 
     private static void showEarningRatio(WinningStatistics winningStatistics, int amount) {

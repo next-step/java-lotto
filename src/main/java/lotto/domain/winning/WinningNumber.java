@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import lotto.domain.game.LottoNumber;
+
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -10,22 +12,22 @@ import static java.util.stream.Collectors.*;
  */
 public class WinningNumber {
 
-    private final TreeSet<Integer> winningNumber;
+    private final LottoNumber winningNumber;
 
-    private WinningNumber(TreeSet<Integer> winningNumber) {
+    private WinningNumber(LottoNumber winningNumber) {
         this.winningNumber = winningNumber;
     }
 
     public static WinningNumber of(String inputWinningNumber) {
         String[] inputs = inputWinningNumber.split(", ");
-        TreeSet<Integer> winningNumber = Stream.of(inputs)
-                .map(Integer::valueOf).collect(toCollection(TreeSet::new));
+        LottoNumber lottoNumber = LottoNumber.of(Stream.of(inputs)
+                .map(Integer::valueOf).collect(toList()));
 
-        return new WinningNumber(new TreeSet<>(winningNumber));
+        return new WinningNumber(lottoNumber);
     }
 
     public List<Integer> value() {
-        return Collections.unmodifiableList(new ArrayList<>(this.winningNumber));
+        return Collections.unmodifiableList(this.winningNumber.value());
     }
 
 
