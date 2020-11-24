@@ -1,17 +1,12 @@
 package lotto;
 
-import lotto.model.CandidateLotto;
-import lotto.model.Hit;
-import lotto.model.Lottoes;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import util.CommonUtils;
+import utils.TestUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -43,8 +38,10 @@ public class WinningLottoTest {
         CandidateLotto testHit6Bonus = makeCandidateLotto(new int[]{1,2,3,4,5,7});
         CandidateLotto testHit6 = makeCandidateLotto(new int[]{1,2,3,4,5,6});
 
-        List<CandidateLotto> testCase = Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6Bonus, testHit6);
-        Lottoes lottoes = new Lottoes(CandidateLotto.PRICE * 6, testCase);
+        CandidateLotto testBonus = makeCandidateLotto(new int[]{11,12,13,14,15,7});
+
+        List<CandidateLotto> testCase = Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6Bonus, testHit6, testBonus);
+        Lottoes lottoes = new Lottoes(CandidateLotto.PRICE * testCase.size(), testCase);
 
         Map<Hit, Integer> result = winnerNumbers.getResult(lottoes.getLottoes());
 
@@ -57,7 +54,7 @@ public class WinningLottoTest {
 
     @Test
     public void 수익률_테스트() {
-        WinningLotto winnerNumbers = makeWinningLotto(0);
+        WinningLotto winnerNumbers = makeWinningLotto(13);
 
         CandidateLotto testHit3 = makeCandidateLotto(new int[]{1,2,3,45,35,36});
         CandidateLotto testHitNone = makeCandidateLotto(new int[]{21,22,23,24,35,36});
@@ -69,11 +66,11 @@ public class WinningLottoTest {
         assertThat(result).isEqualTo(0.35);
     }
 
-    private CandidateLotto makeCandidateLotto(int[] numbers) {
-        return new CandidateLotto(new ManualStrategy(CommonUtils.arrayToSortedSet(numbers)));
+    private CandidateLotto makeCandidateLotto(int[] inputNumbers) {
+        return new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(inputNumbers)));
     }
 
     private WinningLotto makeWinningLotto(int bonus) {
-        return new WinningLotto(bonus, new ManualStrategy(CommonUtils.arrayToSortedSet(winningNumbers)));
+        return new WinningLotto(new LottoNumber(bonus), new ManualStrategy(TestUtils.arrayToSortedSet(winningNumbers)));
     }
 }

@@ -23,7 +23,7 @@ public enum Hit {
         this.rewardMessage = rewardMessage;
     }
 
-    public static Hit findByNumbers(SortedSet<Integer> numbers, int bonus) {
+    public static Hit findByNumbers(SortedSet<LottoNumber> numbers, LottoNumber bonus) {
         Hit hit = Arrays.stream(sortedValues())
                 .filter(value -> value.hitCount == numbers.size())
                 .findFirst()
@@ -59,7 +59,7 @@ public enum Hit {
         return hits;
     }
 
-    private static boolean bonusCondition(Hit hit, SortedSet<Integer> numbers, int bonus){
+    private static boolean bonusCondition(Hit hit, SortedSet<LottoNumber> numbers, LottoNumber bonus){
         return hit.equals(HIT_6) && numbers.contains(bonus);
     }
 

@@ -6,7 +6,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class CommonUtils {
-    public static String[] sortedSetToArray(SortedSet<Integer> strings){
+    public static String[] sortedSetToArray(SortedSet<?> strings){
         return strings.stream()
                 .map(String::valueOf)
                 .toArray(String[]::new);

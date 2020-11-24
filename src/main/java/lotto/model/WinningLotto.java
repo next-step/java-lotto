@@ -10,18 +10,18 @@ import java.util.SortedSet;
 
 public class WinningLotto extends Lotto {
     private final static String CONTAIN_BONUS_ERROR_MESSAGE = "당첨 번호에는 보너스 볼 번호가 들어갈 수 없습니다.";
-    private int bonus;
+    private LottoNumber bonus;
 
-    public WinningLotto(int bonus, DrawingStrategy drawingStrategy) {
+    public WinningLotto(LottoNumber bonus, DrawingStrategy drawingStrategy) {
         super(drawingStrategy);
-        if(numbers.contains(bonus)){
+        if (numbers.contains(bonus)) {
             throw new IllegalArgumentException(CONTAIN_BONUS_ERROR_MESSAGE);
         }
         this.bonus = bonus;
     }
 
 
-    public Map<Hit, Integer> getResult(List<SortedSet<Integer>> lottoes) {
+    public Map<Hit, Integer> getResult(List<SortedSet<LottoNumber>> lottoes) {
         Map<Hit, Integer> hits = Hit.getHits();
 
         lottoes.stream()
@@ -33,7 +33,7 @@ public class WinningLotto extends Lotto {
     }
 
 
-    public double getEarningRate(int amount, List<SortedSet<Integer>> numbers) {
+    public double getEarningRate(int amount, List<SortedSet<LottoNumber>> numbers) {
         int totalReword = getResult(numbers).entrySet().stream()
                 .mapToInt(this::calculateReword)
                 .sum();
@@ -41,7 +41,7 @@ public class WinningLotto extends Lotto {
         BigDecimal safeReword = BigDecimal.valueOf((double) totalReword);
         BigDecimal safeAmount = BigDecimal.valueOf(amount);
 
-        return safeReword.divide(safeAmount,2, RoundingMode.FLOOR)
+        return safeReword.divide(safeAmount, 2, RoundingMode.FLOOR)
                 .doubleValue();
     }
 
@@ -51,7 +51,7 @@ public class WinningLotto extends Lotto {
     }
 
     @Override
-    public SortedSet<Integer> getNumbers() {
+    public SortedSet<LottoNumber> getNumbers() {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Hit;
+import lotto.model.LottoNumber;
 import util.CommonUtils;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ResultView {
         System.out.println(count + BUY_MESSAGE);
     }
 
-    public static void printLottoes(List<SortedSet<Integer>> lottos) {
+    public static void printLottoes(List<SortedSet<LottoNumber>> lottos) {
         lottos.stream()
                 .map(CommonUtils::sortedSetToArray)
                 .map(ResultView::convertNumbersFormat)

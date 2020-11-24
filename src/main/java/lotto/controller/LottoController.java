@@ -24,7 +24,7 @@ public class LottoController {
         String inputBonusNumber = InputView.printInputMessageNGetBonusNumbers();
 
         winningLotto = new WinningLotto(
-                StringUtils.stringToInt(inputBonusNumber),
+                new LottoNumber(StringUtils.stringToInt(inputBonusNumber)),
                 new ManualStrategy(inputWinnerNumber)
         );
 
@@ -42,7 +42,7 @@ public class LottoController {
         int lottoCount = lottoes.getLottoCount();
         int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount, Lotto.PRICE);
 
-        List<SortedSet<Integer>> lottoesNumbers = lottoes.getLottoes();
+        List<SortedSet<LottoNumber>> lottoesNumbers = lottoes.getLottoes();
         Map<Hit, Integer> winnerNumbers = winningLotto.getResult(lottoesNumbers);
         double earningRate = winningLotto.getEarningRate(prePurchaseAmount, lottoesNumbers);
 
