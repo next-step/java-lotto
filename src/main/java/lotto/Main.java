@@ -13,7 +13,9 @@ public class Main {
         int money = lottoController.getMoney();
         int manualLottoNumber = lottoController.getManualLottoNumber();
 
-        Lottos lottos = lottoController.createLottos(lottoNum);
+        Purchase purchase = new Purchase(money, manualLottoNumber);
+
+        Lottos lottos = purchase.drawLottosByMeans(LottoController::getManualLottosNumbers, LottoController::createLottos);
 
         Numbers winningNumbers = lottoController.getWinningNumbers();
 
