@@ -23,11 +23,7 @@ public class Lottos {
     }
 
     public Map<Integer, Integer> compileLottoStatistics(LottoNumbers winningLotto, int bonusNumber) {
-        List<LottoPrize> lottoPrizes = lottos.stream()
-                .map(lotto -> lotto.matchLottoNumbers(winningLotto, bonusNumber))
-                .filter(lottoPrize -> lottoPrize != null &&
-                        lottoPrize.getMatchNumber() >= MATCH_BEGINNING.getStandardNumber())
-                .collect(Collectors.toList());
+        List<LottoPrize> lottoPrizes = matchLottoPrize(winningLotto, bonusNumber);
 
         Map<Integer, Integer> matchMap = new HashMap<>();
         lottoPrizes.forEach(lottoPrize -> matchMap.merge(lottoPrize.getPrize(), FIRST_COUNT, Integer::sum));
@@ -37,6 +33,14 @@ public class Lottos {
                 .forEach(key -> matchMap.put(key, ZERO));
 
         return matchMap;
+    }
+
+    private List<LottoPrize> matchLottoPrize(LottoNumbers winningLotto, int bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.matchLottoNumbers(winningLotto, bonusNumber))
+                .filter(lottoPrize -> lottoPrize != null &&
+                        lottoPrize.getMatchNumber() >= MATCH_BEGINNING.getStandardNumber())
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
