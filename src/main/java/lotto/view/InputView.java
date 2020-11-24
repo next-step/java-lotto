@@ -28,7 +28,7 @@ public class InputView {
     public static List<Integer> getWinningNumbers() {
         out.println(GET_WINNING_NUMBERS_MESSAGE);
 
-        String[] numStrings = scanner.nextLine().split(SPLITTER);
+        String[] numStrings = scanner.nextLine().replace(BLANK, "").split(SPLITTER);
         return Arrays.stream(numStrings)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
