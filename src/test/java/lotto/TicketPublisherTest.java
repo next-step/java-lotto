@@ -3,9 +3,11 @@ package lotto;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.lottoexception.RemainBudgetException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +28,14 @@ class TicketPublisherTest {
 
     assertThat(TicketPublisher.publishTicket(sampleStrategy).toString())
         .isEqualTo(expected.toString());
+  }
+
+  @Test
+  @DisplayName("부족한 Budget 을 가졌을 때 에러 처리 확인")
+  void testWhenNotEnoughBudget() {
+    Budget budget = Budget.of(500);
+
+    assertThatExceptionOfType(RemainBudgetException.class)
+        .isThrownBy(() -> TicketPublisher.publishTickets(budget));
   }
 }
