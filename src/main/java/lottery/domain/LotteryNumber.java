@@ -6,15 +6,15 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     private final int number;
 
-    public LotteryNumber(int number) {
-        sanitizeNumber(number);
-        this.number = number;
-    }
-
     private static void sanitizeNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public LotteryNumber(int number) {
+        sanitizeNumber(number);
+        this.number = number;
     }
 
     @Override
