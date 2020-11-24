@@ -14,30 +14,30 @@ import java.util.stream.IntStream;
 
 public class GameManagement {
     private static final int MONEY_PER_LOTTERY = 1000;
-    private final List<Lottery> lotteries;
 
-    public GameManagement(int numberGames) {
+    public List<Lottery> purchaseLottery(int numberGames) {
         final Picker picker = new ShufflePicker();
-        this.lotteries = IntStream.range(0, numberGames)
+        return IntStream.range(0, numberGames)
                 .mapToObj(i -> new Lottery(picker))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Map<Integer, Long> getMatches(Lottery winningNumber) {
+    public Map<Integer, Long> getMatches(List<Lottery> lotteries, Lottery winningNumber) {
         return lotteries.stream()
                 .map(winningNumber::countMatched)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public static void main(String[] args) {
+        GameManagement game = new GameManagement();
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
         int nGames = inputView.getMoneyToBuy() / MONEY_PER_LOTTERY;
-        GameManagement game = new GameManagement(nGames);
-        outputView.showLotteries(game.lotteries);
+        List<Lottery> lotteries = game.purchaseLottery(nGames);
+        outputView.showLotteries(lotteries);
 
-        Map<Integer, Long> winnings = game.getMatches(inputView.getWinningNumber());
+        Map<Integer, Long> winnings = game.getMatches(lotteries, inputView.getWinningNumber());
         outputView.showWinnings(nGames * MONEY_PER_LOTTERY, winnings);
     }
 }
