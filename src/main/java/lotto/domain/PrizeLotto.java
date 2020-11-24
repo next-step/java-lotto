@@ -8,7 +8,7 @@ public class PrizeLotto  {
         this.prizeNumbers = prizeNumbers;
     }
 
-    public boolean findByIndexNumber(int lottoNumber) {
+    public boolean existByIndexNumber(int lottoNumber) {
         return prizeNumbers.getLottoNumbers()
                             .contains(lottoNumber);
     }

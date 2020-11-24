@@ -10,7 +10,7 @@ public class Lotto {
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
         int prizeCount = (int) lottoPickNumber.getLottoNumbers().stream()
-                                    .filter(prizeLotto::findByIndexNumber)
+                                    .filter(prizeLotto::existByIndexNumber)
                                     .count();
         return PrizeInformation.findByPrizePrice(prizeCount);
     }
