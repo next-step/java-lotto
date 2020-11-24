@@ -97,9 +97,9 @@
 * [X] 축약 금지 ㅠ.. 깜빡쓰...
 * [X] Budget 의 검증 로직 재검토, Budget 잔액 기능 제거
 * [ ] View 용 DTO 
-* [ ] 총 Reward 계산 로직(lambda)
+* [X] 총 Reward 계산 로직(lambda)
 * [ ] 개수에 따른 상금 계산 책임 검토
 
 ### 피드백 액션 플랜
 * [X] Budget 관련 테스트 코드에서 error case 왜 못막았는지 복기해보고, TDD 쪽 다시 정리해서 연습
-* [ ] Junit5 추가적으로 사용법 익히기
+* [X] Junit5 추가적으로 사용법 익히기
