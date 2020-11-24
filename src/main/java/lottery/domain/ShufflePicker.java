@@ -1,19 +1,21 @@
 package lottery.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ShufflePicker implements Picker {
-    private final List<Integer> basis;
+    private final List<LotteryNumber> basis;
 
-    public ShufflePicker(int min, int max) {
-        basis = IntStream.rangeClosed(min, max).collect(ArrayList::new, List::add, List::addAll);
+    public ShufflePicker() {
+        basis = IntStream.rangeClosed(LotteryNumber.MIN, LotteryNumber.MAX)
+                .mapToObj(LotteryNumber::new)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Integer> pick() {
+    public List<LotteryNumber> pick() {
         Collections.shuffle(basis);
         return basis.subList(0, 6);
     }

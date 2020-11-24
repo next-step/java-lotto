@@ -1,5 +1,6 @@
 package lottery.view;
 
+import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryNumbers;
 import lottery.domain.WinningType;
 
@@ -27,7 +28,7 @@ public class OutputView {
 
     private void showLotteryNumbers(LotteryNumbers lotteryNumbers) {
         out.print("[");
-        out.print(lotteryNumbers.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+        out.print(lotteryNumbers.getNumbers().stream().map(LotteryNumber::toString).collect(Collectors.joining(", ")));
         out.println("]");
     }
 

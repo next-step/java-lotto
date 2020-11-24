@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 
 public class LotteryNumbers {
     private static final int COUNT_LOTTERY_NUMBER = 6;
-    private final SortedSet<Integer> numbers;
+    private final SortedSet<LotteryNumber> numbers;
 
     public LotteryNumbers(Picker picker) {
         this(picker.pick());
     }
 
-    private LotteryNumbers(Collection<Integer> numbers) {
+    private LotteryNumbers(Collection<LotteryNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != COUNT_LOTTERY_NUMBER) {
             throw new IllegalArgumentException();
         }
@@ -30,7 +30,7 @@ public class LotteryNumbers {
                 .count();
     }
 
-    public List<Integer> getNumbers() {
+    public List<LotteryNumber> getNumbers() {
         return numbers.stream().collect(Collectors.toUnmodifiableList());
     }
 }

@@ -16,7 +16,7 @@ public class GameManagement {
     private final List<LotteryNumbers> lotteries;
 
     public GameManagement(int numberGames) {
-        final Picker picker = new ShufflePicker(1, 45);
+        final Picker picker = new ShufflePicker();
         this.lotteries = IntStream.range(0, numberGames)
                 .mapToObj(i -> new LotteryNumbers(picker))
                 .collect(Collectors.toUnmodifiableList());

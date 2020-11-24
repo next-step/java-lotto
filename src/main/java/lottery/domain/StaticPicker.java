@@ -12,9 +12,10 @@ public class StaticPicker implements Picker {
     }
 
     @Override
-    public List<Integer> pick() {
+    public List<LotteryNumber> pick() {
         return Arrays.stream(numbers)
                 .map(Integer::parseInt)
+                .map(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
 }
