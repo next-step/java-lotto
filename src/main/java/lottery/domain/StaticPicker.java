@@ -13,6 +13,8 @@ public class StaticPicker implements Picker {
 
     @Override
     public List<Integer> pick() {
-        return Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
