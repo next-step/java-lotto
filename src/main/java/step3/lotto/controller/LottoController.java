@@ -9,6 +9,7 @@ public class LottoController {
 
     private static LottoGame lottoGame;
 
+
     public void gameStart() {
         int purchaseAmount = InputLottoView.inputValue();
         lottoGame = new LottoGame(purchaseAmount);
