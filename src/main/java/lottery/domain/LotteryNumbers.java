@@ -4,7 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LotteryNumbers {
-    private static final int COUNT_LOTTERY_NUMBER = 6;
+    public static final int COUNT_LOTTERY_NUMBER = 6;
+
     private final SortedSet<LotteryNumber> numbers;
 
     public LotteryNumbers(Picker picker) {
