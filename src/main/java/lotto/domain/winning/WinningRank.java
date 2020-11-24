@@ -7,10 +7,10 @@ import java.util.Arrays;
  */
 public enum WinningRank {
 
-    FIRST(6, 2000000000, 1),
-    THIRD(5, 1500000, 3),
-    FOURTH(4, 50000, 4),
-    FIFTH(3, 5000, 5),
+    FIRST(6, 2_000_000_000, 1),
+    THIRD(5, 1_500_000, 3),
+    FOURTH(4, 50_000, 4),
+    FIFTH(3, 5_000, 5),
     NONE(0, 0, 6);
 
     private int winningResult;
