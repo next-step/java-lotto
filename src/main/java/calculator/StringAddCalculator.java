@@ -1,15 +1,18 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 public class StringAddCalculator {
 
-    public static final String DEFAULT_DELIMITER_REGEX = ",|:";
-
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+
+    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
+
+    private static final int DELIMITER_GROUP = 1;
+
+    private static final int DELIMITED_NUMBERS_GROUP = 2;
 
     public static int add(final String input) {
         if (input == null || input.isEmpty()) {
@@ -18,24 +21,20 @@ public class StringAddCalculator {
 
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            splitAndSum(matcher.group(2), customDelimiter);
+            return sum(split(matcher.group(DELIMITED_NUMBERS_GROUP),
+                    matcher.group(DELIMITER_GROUP)));
         }
-        return splitAndSum(input, DEFAULT_DELIMITER_REGEX);
+
+        return sum(split(input, DEFAULT_DELIMITER_REGEX));
     }
 
-    private static int splitAndSum(final String expression, final String delimiter) {
-        int sum = 0;
-        String[] tokens = expression.split(delimiter);
-        for (String token : tokens) {
-            int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new RuntimeException();
-            }
+    private static int sum(String[] tokens) {
+        return Arrays.stream(tokens)
+                .map(Number::valueOf)
+                .reduce(0, Integer::sum);
+    }
 
-            sum += number;
-        }
-
-        return sum;
+    private static String[] split(final String delimitedNumbers, final String delimiter) {
+        return delimitedNumbers.split(delimiter);
     }
 }
