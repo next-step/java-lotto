@@ -7,6 +7,13 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return 1;
+        int sum = 0;
+
+        String[] tokens = input.split(",|:");
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 }
