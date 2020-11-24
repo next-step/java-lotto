@@ -50,11 +50,14 @@ public class OutputView {
     }
 
     private static String getWinningRankString(WinningRank winningRank) {
-        String winningRankString = String.format(SAME_NUMBER_COUNT_MESSAGE, winningRank.getSameNumberNum());
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format(SAME_NUMBER_COUNT_MESSAGE, winningRank.getSameNumberNum()));
         if (winningRank.haveBonus()) {
-            winningRankString += MATCH_BONUS_MESSAGE;
+            stringBuilder.append(MATCH_BONUS_MESSAGE);
         }
-        return winningRankString + String.format(PRICE_MESSAGE, winningRank.getPrice());
+        stringBuilder.append(String.format(PRICE_MESSAGE, winningRank.getPrice()));
+        return stringBuilder.toString();
     }
 
 
