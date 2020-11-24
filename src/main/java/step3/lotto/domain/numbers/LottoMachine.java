@@ -9,11 +9,8 @@ import java.util.List;
  * 로또 자동생성
  */
 public class LottoMachine {
-
     private static final int MAKE_LOTTO_NUMBERS_COUNT = 45;  // 로또 생성 갯수
-
     private static List<Integer> basicLottoNumbers = new ArrayList<>();
-
     private static LottoAutoNumbers lottoAutoNumbers;
 
     public LottoMachine(int makeLottoNumberCount) {
