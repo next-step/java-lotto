@@ -6,6 +6,10 @@ public class WinningLotto extends Lotto {
     public WinningLotto(Numbers numbers, Number bonus) {
         super(numbers);
         this.bonus = bonus;
+
+        if (checkBonus(numbers)) {
+            throw new IllegalArgumentException("bonus number already in winning numbers");
+        }
     }
 
     public boolean checkBonus(Numbers numbers) {
