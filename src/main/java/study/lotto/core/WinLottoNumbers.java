@@ -3,6 +3,7 @@ package study.lotto.core;
 import study.lotto.core.exception.LottoNumberCountNotMatchingException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 로또 당첨 번호
@@ -46,12 +47,16 @@ public class WinLottoNumbers {
         // Optional
         private LottoNumber bonusLottoNumber;
 
-        public WinLottoNumbersBuilder(Set<LottoNumber> winLottoNumbers) {
+        public WinLottoNumbersBuilder(List<String> winLottoNumbersInput) {
+            Set<LottoNumber> winLottoNumbers = winLottoNumbersInput.stream()
+                    .map(String::trim)
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toSet());
             this.winLottoNumbers = winLottoNumbers;
         }
 
-        public WinLottoNumbersBuilder bonusLottoNumber(LottoNumber bonusLottoNumber) {
-            this.bonusLottoNumber = bonusLottoNumber;
+        public WinLottoNumbersBuilder bonusLottoNumber(String bonusLottoNumberInput) {
+            this.bonusLottoNumber = LottoNumber.of(bonusLottoNumberInput);
             return this;
         }
 

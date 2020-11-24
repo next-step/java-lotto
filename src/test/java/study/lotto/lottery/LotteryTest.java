@@ -6,32 +6,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LotteryTest {
 
-    private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
-    private Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-    @BeforeEach
-    public void init() {
-        this.lottoNumbers.add(LottoNumber.of(1));
-        this.lottoNumbers.add(LottoNumber.of(2));
-        this.lottoNumbers.add(LottoNumber.of(3));
-        this.lottoNumbers.add(LottoNumber.of(4));
-        this.lottoNumbers.add(LottoNumber.of(5));
-        this.lottoNumbers.add(LottoNumber.of(6));
-    }
+    private List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+    private static final String bonusLottoNumber = "7";
 
     @Test
     @DisplayName("1등 당첨")
     void test_lottery_first() {
         // Given
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(toLottoNumbers(lottoNumbers));
         WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
         builder.bonusLottoNumber(bonusLottoNumber);
         WinLottoNumbers winLottoNumbers = builder.build();
@@ -44,6 +33,12 @@ class LotteryTest {
 
         assertEquals(matchingNumberCount, 6);
         assertEquals(lottery.getLottoRank(), LottoRank.FIRST);
+    }
+
+    private Set<LottoNumber> toLottoNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
 }

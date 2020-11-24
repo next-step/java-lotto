@@ -2,10 +2,8 @@ package study.lotto.core;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,8 +14,10 @@ class LottoRankTest {
     @Test
     void test_of_first() {
         // Given
-        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
         WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(lottoNumbers, bonusLottoNumber);
 
         // When
@@ -42,9 +42,11 @@ class LottoRankTest {
     @Test
     void test_of_second() {
         // Given
-        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
-        Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "7");
+        List<String> winLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "10");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
         WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
@@ -57,9 +59,11 @@ class LottoRankTest {
     @Test
     void test_of_third() {
         // Given
-        Set<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        Set<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<String> winLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "10");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
         WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
@@ -69,15 +73,13 @@ class LottoRankTest {
         assertEquals(winningLotto.getLottoRank(), LottoRank.THIRD);
     }
 
-    private Set<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
-        List<LottoNumber> toLottoNumbers = new ArrayList<>();
-        for (int value : lottoNumbers) {
-            toLottoNumbers.add(LottoNumber.of(value));
-        }
-        return new HashSet<>(toLottoNumbers);
+    private Set<LottoNumber> toLottoNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
-    private WinLottoNumbers toWinLottoNumbers(Set<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
+    private WinLottoNumbers toWinLottoNumbers(List<String> winLottoNumbers, String bonusLottoNumber) {
         return new WinLottoNumbers.WinLottoNumbersBuilder(winLottoNumbers)
                 .bonusLottoNumber(bonusLottoNumber)
                 .build();

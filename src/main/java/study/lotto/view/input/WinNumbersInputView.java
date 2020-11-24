@@ -6,6 +6,7 @@ import study.lotto.dispenser.LottoDispenser;
 import study.lotto.utils.Utils;
 import study.lotto.view.AbstractView;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
@@ -18,32 +19,25 @@ public class WinNumbersInputView extends AbstractView {
 
     private WinNumbersInputView() {}
 
-    public static WinLottoNumbers display() {
-        Set<LottoNumber> lottoNumbers = winningLottoNumbersView();
-
-        WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
-
-        Optional.ofNullable(bonusLottoNumberView())
-                .ifPresent(builder::bonusLottoNumber);
-
-        return builder.build();
-    }
-
-    private static Set<LottoNumber> winningLottoNumbersView() {
+    private static void displayWinLottoNumbersMessage() {
         stringBuilder.append(WIN_LOTTO_NUMBERS_MESSAGE);
         printAndClear();
-
-        String winLottoNumbers = scanner.nextLine();
-
-        return LottoDispenser.toLottoNumbers(parseForLottoNumber(winLottoNumbers));
     }
 
-    private static LottoNumber bonusLottoNumberView() {
+    public static List<String> getWinLottoNumbersInput() {
+        displayWinLottoNumbersMessage();
+
+        return parseForLottoNumber(scanner.nextLine());
+    }
+
+    private static void displayBonusLottoNumberMessage() {
         stringBuilder.append(BONUS_NUMBER_MESSAGE);
         printAndClear();
+    }
 
-        String bonusLottoNumber = scanner.nextLine();
-        return LottoNumber.of(bonusLottoNumber);
+    public static String getBonusLottoNumberInput() {
+        displayBonusLottoNumberMessage();
+        return scanner.nextLine();
     }
 
 }

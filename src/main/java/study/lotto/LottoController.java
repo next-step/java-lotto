@@ -25,7 +25,7 @@ public class LottoController {
         Lottos lottos = purchase();
 
         // 당첨 번호 및 추첨
-        WinLottoNumbers winLottoNumbers = WinNumbersInputView.display();
+        WinLottoNumbers winLottoNumbers = winLottoNumbers();
         Lottery lottery = new Lottery(winLottoNumbers, lottos);
         LotteryResult lotteryResult = lottery.checkLotto();
         
@@ -62,6 +62,14 @@ public class LottoController {
         }
 
         return new Lottos(lottos);
+    }
+
+    private WinLottoNumbers winLottoNumbers() {
+        List<String> winLottoNumbersInput = WinNumbersInputView.getWinLottoNumbersInput();
+        String bonusLottoNumberInput = WinNumbersInputView.getBonusLottoNumberInput();
+        return new WinLottoNumbers.WinLottoNumbersBuilder(winLottoNumbersInput)
+                .bonusLottoNumber(bonusLottoNumberInput)
+                .build();
     }
 
 }

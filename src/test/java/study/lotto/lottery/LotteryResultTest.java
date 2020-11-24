@@ -12,29 +12,21 @@ import study.lotto.dispenser.Lottos;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryResultTest {
 
-    private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
-    private Set<LottoNumber> lottoNumbers;
-
-    @BeforeEach
-    public void createLottoNumbers() {
-        this.lottoNumbers = new HashSet<>(Arrays.asList(LottoNumber.of(1)
-                , LottoNumber.of(2)
-                , LottoNumber.of(3)
-                , LottoNumber.of(4)
-                , LottoNumber.of(5)
-                , LottoNumber.of(6)));
-    }
+    private List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+    private static final String bonusLottoNumber = "7";
 
     @Test
     void test_LotteryResult() {
         // Given
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(toLottoNumbers(lottoNumbers));
         WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
         builder.bonusLottoNumber(bonusLottoNumber);
         WinLottoNumbers winLottoNumbers = builder.build();
@@ -46,9 +38,9 @@ class LotteryResultTest {
 
         // Then
         Long numberOfLottoRank = lotteryResult.getNumberOfLottoRank(LottoRank.FIRST);
-        double totalReturnRatio = new Double(lotteryResult.getTotalReturnRatio());
+        String totalReturnRatio = lotteryResult.getTotalReturnRatio();
         assertThat(numberOfLottoRank).isEqualTo(1L);
-        assertThat(totalReturnRatio > 1.0).isTrue();
+        assertThat(totalReturnRatio).isEqualTo("");
     }
 
     @Test
@@ -62,6 +54,12 @@ class LotteryResultTest {
         // When & Then
         System.out.println(decimalFormat.format(pi));
         System.out.println(decimalFormat.format(e));
+    }
+
+    private Set<LottoNumber> toLottoNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
 }
