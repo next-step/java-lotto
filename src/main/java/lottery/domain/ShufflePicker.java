@@ -14,8 +14,7 @@ public class ShufflePicker implements Picker {
 
     @Override
     public List<Integer> pick() {
-        List<Integer> candidate = new ArrayList<>(basis);
-        Collections.shuffle(candidate);
-        return candidate.subList(0, 6);
+        Collections.shuffle(basis);
+        return basis.subList(0, 6);
     }
 }
