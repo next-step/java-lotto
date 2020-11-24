@@ -19,12 +19,17 @@ public class LottoController {
         Person person = new Person();
 
         for (int i = 0; i < purchaseLottoCount; i++) {
-            Lotto lotto = lottoStore.getLottoNumbers();
+            Lotto lotto = new Lotto(lottoStore.getLottoNumbers());
             person.addLotto(lotto);
             ResultView.printLottoNumbers(lotto.getNumbers());
         }
 
         ResultView.printWinNumber();
         int[] winNumber = InputView.inputWinNumber();
+        int[][] winCounts = person.getWin(winNumber);
+        ResultView.printWinCounts(winCounts);
+
+        double totalRevenue = person.getTotalRevenue(purchasePrice);
+        ResultView.printTotalRevenue(totalRevenue);
     }
 }

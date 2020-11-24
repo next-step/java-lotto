@@ -23,4 +23,17 @@ public class ResultView {
         printMessage("");
         printMessage("지난 주 당첨 번호를 입력해 주세요.");
     }
+
+    public static void printWinCounts(int[][] winCounts) {
+        printMessage("");
+        printMessage("당첨 통계");
+        printMessage("--------");
+        for (int i = 0; i < winCounts.length; i++) {
+            printMessage((i + 3) + "개 일치 (" + winCounts[i][1] + ")원- " + winCounts[i][0] + "개");
+        }
+    }
+
+    public static void printTotalRevenue(double totalRevenue) {
+        printMessage("총 수익률은 " + totalRevenue + "입니다.");
+    }
 }
