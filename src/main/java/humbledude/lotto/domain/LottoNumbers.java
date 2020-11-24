@@ -1,27 +1,28 @@
 package humbledude.lotto.domain;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumberSet {
+public class LottoNumbers {
     public static final int LOTTO_SIZE_OF_NUMBERS = 6;
 
     private final Set<LottoNumber> lottoNumberSet;
 
-    public LottoNumberSet(Set<LottoNumber> lottoNumberSet) {
+    public LottoNumbers(Set<LottoNumber> lottoNumberSet) {
         validateSet(lottoNumberSet);
         this.lottoNumberSet = lottoNumberSet;
     }
 
     public Set<LottoNumber> getNumbers() {
-        return lottoNumberSet;
+        return Collections.unmodifiableSet(lottoNumberSet);
     }
 
     public boolean contains(LottoNumber number) {
         return lottoNumberSet.contains(number);
     }
 
-    public Set<LottoNumber> intersection(LottoNumberSet other) {
+    public Set<LottoNumber> intersection(LottoNumbers other) {
         return lottoNumberSet.stream()
                 .filter(other::contains)
                 .collect(Collectors.toSet());

@@ -19,15 +19,15 @@ public class AutoLotto {
     private AutoLotto() {}
 
 
-    public static LottoNumberSet buildTicket() {
+    public static LottoNumbers buildTicket() {
         Set<LottoNumber> numbers = pickRandomNumbers();
-        return new LottoNumberSet(numbers);
+        return new LottoNumbers(numbers);
     }
 
     private static Set<LottoNumber> pickRandomNumbers() {
         Collections.shuffle(totalLottoNumbers);
         return totalLottoNumbers.stream()
-                .limit(LottoNumberSet.LOTTO_SIZE_OF_NUMBERS)
+                .limit(LottoNumbers.LOTTO_SIZE_OF_NUMBERS)
                 .collect(Collectors.toSet());
     }
 }

@@ -23,13 +23,13 @@ public class ResultView {
         System.out.printf(MSG_NUMBER_OF_PURCHASED, howMany);
     }
 
-    public static void printLottoNumber(List<LottoNumberSet> tickets) {
-        for (LottoNumberSet ticket : tickets) {
+    public static void printLottoNumber(List<LottoNumbers> tickets) {
+        for (LottoNumbers ticket : tickets) {
             ResultView.printLottoNumber(ticket);
         }
     }
 
-    public static void printLottoNumber(LottoNumberSet ticket) {
+    public static void printLottoNumber(LottoNumbers ticket) {
         String stringNumbers = ticket.getNumbers().stream()
                 .sorted()
                 .map(String::valueOf)
@@ -50,7 +50,7 @@ public class ResultView {
         System.out.println(msg);
     }
 
-    private static void printResultMessageForEachPrize(LottoPrize prize, Map<LottoPrize, List<LottoNumberSet>> result) {
+    private static void printResultMessageForEachPrize(LottoPrize prize, Map<LottoPrize, List<LottoNumbers>> result) {
         System.out.printf(MSG_STATISTICS_FOR_EACH_PRIZE,
                 prize.getMatchedCount(),
                 getMessageBonusCheck(prize.isCheckBonus()),

@@ -1,7 +1,7 @@
 package humbledude.lotto.view;
 
 import humbledude.lotto.domain.LottoNumber;
-import humbledude.lotto.domain.LottoNumberSet;
+import humbledude.lotto.domain.LottoNumbers;
 import humbledude.lotto.domain.LottoWinningNumbers;
 
 import java.util.Scanner;
@@ -33,7 +33,7 @@ public class InputView {
         System.out.println(MSG_INPUT_WINNING_BONUS_NUMBER);
         LottoNumber bonus = LottoNumber.of(Integer.parseInt(scanner.nextLine()));
 
-        return new LottoWinningNumbers(new LottoNumberSet(numbers), bonus);
+        return new LottoWinningNumbers(new LottoNumbers(numbers), bonus);
 
     }
 
