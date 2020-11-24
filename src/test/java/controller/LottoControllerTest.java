@@ -111,4 +111,12 @@ class LottoControllerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkWinningNumberValidate(wrongValue));
     }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호의 범위가 1 ~ 45가 아닌 경우 체크 기능")
+    @CsvSource(value = {"0", "46"})
+    void checkBonusRange(int bonusNumber) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkLottoRange(bonusNumber));
+    }
 }
