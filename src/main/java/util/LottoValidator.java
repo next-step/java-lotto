@@ -48,4 +48,10 @@ public class LottoValidator {
             throw new IllegalArgumentException("로또 금액 단위로 구매 가능합니다.");
         }
     }
+
+    public static void checkBonusDuplicate(String winningNumbers, int bonusNumber) {
+        if(winningNumbers.contains(String.valueOf(bonusNumber))) {
+            throw new IllegalArgumentException("보너스 번호가 정답로또와 중복됩니다.");
+        }
+    }
 }

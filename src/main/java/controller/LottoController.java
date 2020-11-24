@@ -54,6 +54,7 @@ public class LottoController {
 
         int bonusNumber = inputView.inputBonusNumber();
         LottoValidator.checkLottoRange(bonusNumber);
+        LottoValidator.checkBonusDuplicate(inputWinningNumber, bonusNumber);
 
         resultView.displayResultMention();
 

@@ -119,4 +119,13 @@ class LottoControllerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkLottoRange(bonusNumber));
     }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호가 정답로또번호와 중복되는지 체크 기능")
+    @CsvSource(value = "1, 2, 3, 4, 5, 6: 6", delimiter = ':')
+    void checkBonusDuplicate(String lottoNumbers, int bonusNumber) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkBonusDuplicate(lottoNumbers, bonusNumber));
+
+    }
 }
