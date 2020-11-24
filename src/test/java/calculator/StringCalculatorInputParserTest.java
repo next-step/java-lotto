@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputParserTest {
+public class StringCalculatorInputParserTest {
     @Test
     void testParse(){
 
-        StringSumCalculatorInput stringSumCalculatorInput = InputParser.parse("1,2");
+        StringSumCalculatorInput stringSumCalculatorInput = StringCalculatorInputParser.parse("1,2");
         assertThat(stringSumCalculatorInput).isNotNull();
         assertThat(stringSumCalculatorInput.getDelimiter()).isNullOrEmpty();
         assertThat(stringSumCalculatorInput.getParameters()).isEqualTo("1,2");
@@ -17,7 +17,7 @@ public class InputParserTest {
 
     @Test
     void testParseWithEmptyString(){
-        StringSumCalculatorInput stringSumCalculatorInput = InputParser.parse("");
+        StringSumCalculatorInput stringSumCalculatorInput = StringCalculatorInputParser.parse("");
         assertThat(stringSumCalculatorInput).isNotNull();
         assertThat(stringSumCalculatorInput.getDelimiter()).isNullOrEmpty();
         assertThat(stringSumCalculatorInput.getParameters()).isNullOrEmpty();
@@ -25,7 +25,7 @@ public class InputParserTest {
 
     @Test
     void testParseWithDelimiter(){
-        StringSumCalculatorInput stringSumCalculatorInput = InputParser.parse("//-\n1-2");
+        StringSumCalculatorInput stringSumCalculatorInput = StringCalculatorInputParser.parse("//-\n1-2");
         assertThat(stringSumCalculatorInput).isNotNull();
         assertThat(stringSumCalculatorInput.getDelimiter()).isEqualTo("-");
         assertThat(stringSumCalculatorInput.getParameters()).isEqualTo("1-2");
