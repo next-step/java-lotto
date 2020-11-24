@@ -15,7 +15,7 @@ public class LottoGame {
 		InputView inputMoney = new InputView(new Scanner(System.in));
 		LottoResultView resultView = new LottoResultView();
 
-		LottoPurchase purchase = new LottoPurchase(inputMoney.getInputMessage());
+		LottoPurchase purchase = new LottoPurchase(inputMoney.getInputMoney());
 		List<Lotto> autoLottos = controller.startLottoGameGetLottos(purchase, resultView);
 
 		InputView inputWinningNumbers = new InputView(new Scanner(System.in));
