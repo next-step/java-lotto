@@ -11,8 +11,7 @@ public class Main {
         LottoController lottoController = new LottoController();
 
         int money = lottoController.getMoney();
-        int autoLottoNumber = lottoController.getAutoLottoNumber();
-        int lottoNum = lottoController.getLottoNum(money);
+        int manualLottoNumber = lottoController.getManualLottoNumber();
 
         Lottos lottos = lottoController.createLottos(lottoNum);
 

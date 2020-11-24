@@ -49,14 +49,14 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lottos getAutoLottos(int autoLottoCount) {
+    public static Lottos getManualLottos(int autoLottoCount) {
         out.println(GET_MANUAL_LOTTO_NUMBERS_MESSAGE);
         return new Lottos(IntStream.range(0, autoLottoCount)
-                .mapToObj(idx -> getAutoLotto())
+                .mapToObj(idx -> getManualLotto())
                 .collect(Collectors.toList()));
     }
 
-    private static Lotto getAutoLotto() {
+    private static Lotto getManualLotto() {
         String[] split = scanner.nextLine().replace(BLANK, "").split(SPLITTER);
 
         Numbers.Builder builder = Numbers.builder();

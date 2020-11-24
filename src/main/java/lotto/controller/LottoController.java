@@ -11,7 +11,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public static Lottos getManualLottosNumbers(int autoLottoCount) {
-        return InputView.getAutoLottos(autoLottoCount);
+        return InputView.getManualLottos(autoLottoCount);
     }
 
     public static Lottos createLottos(int lottoNum) {
