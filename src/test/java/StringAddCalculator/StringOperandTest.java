@@ -15,13 +15,13 @@ class StringOperandTest {
     @Test
     void 숫자_하나() {
         // given
-        String values = "1";
+        String value = "1";
 
         // when
-        List<String> tokens = StringOperand.findStringOperands(values);
+        List<String> tokens = StringOperand.findStringOperands(value);
 
         // then
-        List<String> expected = Arrays.asList("1");
+        List<String> expected = Arrays.asList(value);
         Assertions.assertThat(tokens).isEqualTo(expected);
     }
 
@@ -67,12 +67,16 @@ class StringOperandTest {
         Assertions.assertThat(tokens).isEqualTo(expected);
     }
 
-    @DisplayName(value = "null 또는 빈 문자열이면 예외")
+    @DisplayName(value = "null 예외")
     @Test
-    void null_or_empty() {
+    void null_예외() {
         assertThatThrownBy(() -> StringOperand.findStringOperands(null))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @DisplayName(value = "문자열이면 예외")
+    @Test
+    void empty_예외() {
         assertThatThrownBy(() -> StringOperand.findStringOperands(""))
                 .isInstanceOf(IllegalArgumentException.class);
     }
