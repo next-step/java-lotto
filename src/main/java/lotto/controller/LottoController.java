@@ -5,26 +5,23 @@ import lotto.domain.Number;
 import lotto.domain.Numbers;
 import lotto.service.NumberSelectionStrategyImpl;
 import lotto.service.WinningRankStatistics;
-import lotto.util.MoneyLottoMapper;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    public int getMoney() {
-        return InputView.getMoney();
+    public static Lottos getManualLottosNumbers(int autoLottoCount) {
+        return InputView.getAutoLottos(autoLottoCount);
     }
 
-    public int getLottoNum(int money) {
-        int lottoNum = MoneyLottoMapper.calculateLottoNum(money);
-        OutputView.showLottoNum(lottoNum);
-        return lottoNum;
-    }
-
-    public Lottos createLottos(int lottoNum) {
+    public static Lottos createLottos(int lottoNum) {
         Lottos lottos = new Lottos(lottoNum, new NumberSelectionStrategyImpl());
         OutputView.showLottos(lottos);
         return lottos;
+    }
+
+    public int getMoney() {
+        return InputView.getMoney();
     }
 
     public void showResult(WinningRankStatistics winningRankStatistics) {
@@ -43,7 +40,7 @@ public class LottoController {
         return new Number(InputView.getBonusNumber());
     }
 
-    public int getAutoLottoNumber() {
+    public int getManualLottoNumber() {
         return InputView.getAutoLottoCount();
     }
 }
