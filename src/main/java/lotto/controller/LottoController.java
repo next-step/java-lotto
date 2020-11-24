@@ -42,4 +42,8 @@ public class LottoController {
     public Number getBonusNumber() {
         return new Number(InputView.getBonusNumber());
     }
+
+    public int getAutoLottoNumber() {
+        return InputView.getAutoLottoCount();
+    }
 }
