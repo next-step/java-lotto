@@ -34,7 +34,7 @@ public class LottoController {
 		LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
 		List<Lotto> lottos = new ArrayList<>(lottoCount);
 		for(int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto(lottoAutoGenerator.getAutoNumbers()));
+			lottos.add(lottoAutoGenerator.getAutoNumbers());
 		}
 		return lottos;
 	}
