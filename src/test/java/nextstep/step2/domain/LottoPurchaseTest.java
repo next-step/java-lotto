@@ -10,7 +10,7 @@ public class LottoPurchaseTest {
 	@Test
 	@DisplayName("로또 구입 금액에 따라 구입매수 출력 테스트")
 	public void getPurchaseMessageTest() {
-		LottoPurchase underTest = new LottoPurchase(14000);
+		LottoPurchase underTest = new LottoPurchase(14_000);
 		assertThat(underTest.getLottoCount()).isEqualTo(14);
 	}
 }
