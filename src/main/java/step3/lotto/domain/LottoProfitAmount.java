@@ -1,4 +1,4 @@
-package step3.lotto.automatic.domain;
+package step3.lotto.domain;
 
 public class LottoProfitAmount {
     private static final int MATCH_LOTTE_MAX_COUNT = 4;

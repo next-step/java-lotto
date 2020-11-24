@@ -1,6 +1,6 @@
-package step3.lotto.automatic.view;
+package step3.lotto.view;
 
-import step3.lotto.automatic.domain.LottoStatusEnum;
+import step3.lotto.domain.LottoStatusEnum;
 
 import java.util.*;
 

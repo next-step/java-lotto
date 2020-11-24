@@ -1,4 +1,4 @@
-package step3.lotto.automatic.util;
+package step3.lotto.util;
 
 import java.util.List;
 

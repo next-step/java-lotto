@@ -1,7 +1,7 @@
-package step3.lotto.automatic.domain.numbers;
+package step3.lotto.domain.numbers;
 
-import step3.lotto.automatic.util.CommonLottoCheck;
-import step3.lotto.automatic.util.LottoErrorMessage;
+import step3.lotto.util.CommonLottoCheck;
+import step3.lotto.util.LottoErrorMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
-package step3.lotto.automatic.domain;
+package step3.lotto.domain;
 
-import step3.lotto.automatic.domain.numbers.LottoMachine;
+import step3.lotto.domain.numbers.LottoMachine;
 
 import java.util.*;
 

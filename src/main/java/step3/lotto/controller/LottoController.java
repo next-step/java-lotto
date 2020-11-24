@@ -1,9 +1,9 @@
-package step3.lotto.automatic.controller;
+package step3.lotto.controller;
 
 
-import step3.lotto.automatic.domain.LottoGame;
-import step3.lotto.automatic.view.InputLottoView;
-import step3.lotto.automatic.view.OuterLottoView;
+import step3.lotto.domain.LottoGame;
+import step3.lotto.view.InputLottoView;
+import step3.lotto.view.OuterLottoView;
 
 public class LottoController {
 

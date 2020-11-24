@@ -1,4 +1,4 @@
-package step3.lotto.automatic.domain.numbers;
+package step3.lotto.domain.numbers;
 
 import java.util.ArrayList;
 import java.util.Collections;

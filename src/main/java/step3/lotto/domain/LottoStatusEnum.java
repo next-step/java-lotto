@@ -1,6 +1,6 @@
-package step3.lotto.automatic.domain;
+package step3.lotto.domain;
 
-import step3.lotto.automatic.util.LottoErrorMessage;
+import step3.lotto.util.LottoErrorMessage;
 
 import java.util.HashMap;
 import java.util.Map;
