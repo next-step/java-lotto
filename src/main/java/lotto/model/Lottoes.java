@@ -8,25 +8,13 @@ import java.util.stream.IntStream;
 
 public class Lottoes {
 
-    private List<CandidateLotto> lottoes;
-    private int lottoCount;
+    private List<CandidateLotto> lottoes = new LinkedList<>();
+    private int autoLottoCount;
 
-
-    public Lottoes(int amount) {
-        this.lottoCount = getLottoCount(amount);
-        this.lottoes = buyLottoes();
-    }
-
-    public Lottoes(int amount, List<CandidateLotto> lottoes){
-        this.lottoCount = getLottoCount(amount);
-        if(isInvalid(lottoes)){
-            throw new IllegalArgumentException("가지고 있는 액수보다 구입한 로또가 많습니다.");
-        }
-        this.lottoes = lottoes;
-    }
-
-    public int getLottoCount() {
-        return lottoCount;
+    public Lottoes(int autoLottoCount, Optional<List<CandidateLotto>> lottoes){
+        this.lottoes.addAll(lottoes.orElse(Collections.emptyList()));
+        this.autoLottoCount = autoLottoCount;
+        this.lottoes.addAll(buyLottoes());
     }
 
 
@@ -37,17 +25,8 @@ public class Lottoes {
     }
 
     private List<CandidateLotto> buyLottoes() {
-        return IntStream.range(0, lottoCount)
+        return IntStream.range(0, autoLottoCount)
                 .mapToObj(e -> new CandidateLotto(new AutoStrategy()))
                 .collect(Collectors.toList());
-    }
-
-
-    private int getLottoCount(int amount) {
-        return amount / CandidateLotto.PRICE;
-    }
-
-    private boolean isInvalid(List<CandidateLotto> lottoes){
-        return this.lottoCount < lottoes.size();
     }
 }

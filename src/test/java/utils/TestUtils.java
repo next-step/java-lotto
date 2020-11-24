@@ -32,4 +32,6 @@ public class TestUtils {
 
         return drawingField.getInt(DrawingStrategy.class);
     }
+
+
 }

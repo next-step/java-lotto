@@ -41,7 +41,7 @@ public class WinningLottoTest {
         CandidateLotto testBonus = makeCandidateLotto(new int[]{11,12,13,14,15,7});
 
         List<CandidateLotto> testCase = Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6Bonus, testHit6, testBonus);
-        Lottoes lottoes = new Lottoes(CandidateLotto.PRICE * testCase.size(), testCase);
+        Lottoes lottoes = new Lottoes(0, Optional.of(testCase));
 
         Map<Hit, Integer> result = winnerNumbers.getResult(lottoes.getLottoes());
 
@@ -59,7 +59,7 @@ public class WinningLottoTest {
         CandidateLotto testHit3 = makeCandidateLotto(new int[]{1,2,3,45,35,36});
         CandidateLotto testHitNone = makeCandidateLotto(new int[]{21,22,23,24,35,36});
 
-        Lottoes lottoes = new Lottoes(14000, Arrays.asList(testHit3, testHitNone));
+        Lottoes lottoes = new Lottoes(0, Optional.of(Arrays.asList(testHit3, testHitNone)));
 
         double result = winnerNumbers.getEarningRate(14000, lottoes.getLottoes());
 

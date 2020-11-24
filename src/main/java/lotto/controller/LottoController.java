@@ -11,12 +11,16 @@ import java.util.*;
 public class LottoController {
 
     private Amount amount;
+    private LottoCount lottoCount;
     private Lottoes lottoes;
     private WinningLotto winningLotto;
 
     public void run() {
         String inputAmount = InputView.printInputMessageNGetAmount();
         amount = new Amount(inputAmount);
+
+        String manualCount = InputView.printInputManualLottoCountMessageNGetCount();
+        lottoCount = new LottoCount(amount.getPrePurchaseAmount(0, Lotto.PRICE),manualCount);
 
         buyLottoes();
 
@@ -32,15 +36,17 @@ public class LottoController {
     }
 
     private void buyLottoes() {
-        lottoes = new Lottoes(amount.getPrePurchaseAmount(0, Lotto.PRICE));
-        amount.pay(lottoes.getLottoCount() * Lotto.PRICE);
-        ResultView.printBuyMessage(lottoes.getLottoCount());
+        List<CandidateLotto> manualLottos = InputView.printInputManualLottoesMessageNGetManualLotoes(lottoCount.getManualCount());
+        amount.pay(lottoCount.getManualCount());
+        lottoes = new Lottoes(lottoCount.getAutoCount(), Optional.of(manualLottos));
+        amount.pay(lottoCount.getAutoCount());
+
+        ResultView.printBuyMessage(lottoCount.getManualCount(), lottoCount.getAutoCount());
         ResultView.printLottoes(lottoes.getLottoes());
     }
 
     private void lottery() {
-        int lottoCount = lottoes.getLottoCount();
-        int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount, Lotto.PRICE);
+        int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount.getTotalCount(), Lotto.PRICE);
 
         List<SortedSet<LottoNumber>> lottoesNumbers = lottoes.getLottoes();
         Map<Hit, Integer> winnerNumbers = winningLotto.getResult(lottoesNumbers);

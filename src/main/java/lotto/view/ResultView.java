@@ -11,7 +11,7 @@ import java.util.SortedSet;
 public class ResultView {
     private final static String NUMBERS_DELIMITER = ", ";
     private final static String NUMBERS_FORMAT = "[ %s ]";
-    private final static String BUY_MESSAGE = "개를 구매했습니다.";
+    private final static String BUY_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
     private final static String RESULT_MESSAGE = "당첨 통계";
     private final static String RESULT_FORMAT = "%s- %d개";
     private final static String EARNING_RATE_FORMAT = "총 수익률은 %.2f입니다.";
@@ -20,8 +20,9 @@ public class ResultView {
 
     private ResultView(){}
 
-    public static void printBuyMessage(int count) {
-        System.out.println(count + BUY_MESSAGE);
+    public static void printBuyMessage(int manualCount, int autoCount) {
+        String buyMessage = String.format(BUY_MESSAGE, manualCount, autoCount);
+        System.out.println(buyMessage);
     }
 
     public static void printLottoes(List<SortedSet<LottoNumber>> lottos) {

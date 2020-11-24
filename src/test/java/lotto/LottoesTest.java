@@ -1,34 +1,57 @@
 package lotto;
 
 import lotto.model.CandidateLotto;
+import lotto.model.LottoCount;
+import lotto.model.LottoNumber;
 import lotto.model.Lottoes;
-
 import lotto.strategy.ManualStrategy;
-
 import org.junit.jupiter.api.Test;
-
 import utils.TestUtils;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoesTest {
     @Test
-    public void 가진_금액_보다_구입_개수가_많은_경우() {
+    public void 수동_정상_구입() {
+        CandidateLotto test = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1, 2, 3, 4, 5, 6})));
+        List<CandidateLotto> testCase = Collections.singletonList(test);
 
-        CandidateLotto test1 = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1,2,3,4,5,6})));
-        CandidateLotto test2 = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1,2,3,4,5,6})));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lottoes(100, Arrays.asList(test1, test2)));
+        Lottoes lottoes = new Lottoes(0, Optional.of(testCase));
+        assertThat(lottoes.getLottoes().size()).isEqualTo(1);
+        assertThat(lottoes.getLottoes().get(0)).containsExactly(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
     }
 
     @Test
-    public void 정상_수동_구입() {
-        CandidateLotto test1 = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1,2,3,4,5,6})));
-        CandidateLotto test2 = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1,2,3,4,5,6})));
-        Lottoes lottoes = new Lottoes(CandidateLotto.PRICE * 2, Arrays.asList(test1, test2));
-        assertThat(lottoes.getLottoCount()).isEqualTo(2);
+    public void 자동_정상_구입() {
+        Lottoes lottoes = new Lottoes(5, Optional.empty());
+        assertThat(lottoes.getLottoes().size()).isEqualTo(5);
     }
 
+    @Test
+    public void 수동_자동_정상_구입() {
+        CandidateLotto test = new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(new int[]{1, 2, 3, 4, 5, 6})));
+        List<CandidateLotto> testCase = Collections.singletonList(test);
+
+        Lottoes lottoes = new Lottoes(5, Optional.of(testCase));
+        assertThat(lottoes.getLottoes().size()).isEqualTo(6);
+        assertThat(lottoes.getLottoes().get(0)).containsExactly(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+    }
 }
