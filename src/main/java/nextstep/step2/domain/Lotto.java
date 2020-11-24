@@ -1,6 +1,5 @@
 package nextstep.step2.domain;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,10 +29,9 @@ public class Lotto {
 
 	public Lotto makeLottoWithNumbers(String numbers) {
 		String[] winningNumberSplit = numbers.replaceAll(" ", "").split(",");
-		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
+		return Stream.of(winningNumberSplit)
 				.map(number -> LottoNumber.of(LottoNumber.getValidateNumber(number)))
-				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
-		return new Lotto(winningNumbers);
+				.collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
 	}
 
 	public void setLottoReward(LottoReward lottoReward) {
