@@ -3,6 +3,7 @@ package lottery;
 import lottery.domain.Picker;
 import lottery.domain.ShufflePicker;
 import lottery.domain.Lottery;
+import lottery.domain.StaticPicker;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
@@ -37,7 +38,8 @@ public class GameManagement {
         List<Lottery> lotteries = game.purchaseLottery(nGames);
         outputView.showLotteries(lotteries);
 
-        Map<Integer, Long> winnings = game.getMatches(lotteries, inputView.getWinningNumber());
+        Lottery winningNumber = new Lottery(new StaticPicker(inputView.getWinningNumber()));
+        Map<Integer, Long> winnings = game.getMatches(lotteries, winningNumber);
         outputView.showWinnings(nGames * MONEY_PER_LOTTERY, winnings);
     }
 }

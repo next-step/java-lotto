@@ -1,13 +1,8 @@
 package lottery.view;
 
-import lottery.domain.Picker;
-import lottery.domain.StaticPicker;
-import lottery.domain.Lottery;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
-
 
 public class InputView {
     private final PrintStream out;
@@ -29,9 +24,8 @@ public class InputView {
         return spend;
     }
 
-    public Lottery getWinningNumber() {
+    public String getWinningNumber() {
         out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Picker picker = new StaticPicker(scanner.nextLine());
-        return new Lottery(picker);
+        return scanner.nextLine();
     }
 }
