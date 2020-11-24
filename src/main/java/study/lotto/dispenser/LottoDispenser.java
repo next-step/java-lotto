@@ -8,9 +8,18 @@ import java.util.stream.Collectors;
 
 public class LottoDispenser {
 
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final LottoDispenser instance = new LottoDispenser();
 
-    public static Lottos auto(int numberOfPurchases) {
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    private LottoDispenser() {
+    }
+
+    public static LottoDispenser getInstance() {
+        return instance;
+    }
+
+    public Lottos auto(int numberOfPurchases) {
 
         initLottoNumbers();
 
@@ -21,13 +30,13 @@ public class LottoDispenser {
         return new Lottos(lottos);
     }
 
-    private static void initLottoNumbers() {
+    private void initLottoNumbers() {
         if (lottoNumbers.isEmpty()) {
             createLottoNumbers();
         }
     }
 
-    private static void createLottoNumbers() {
+    private void createLottoNumbers() {
         for (int lottoNumber = LottoNumber.MIN_LOTTO_NUMBER
                 ; lottoNumber <= LottoNumber.MAX_LOTTO_NUMBER
                 ; lottoNumber++) {
@@ -35,17 +44,17 @@ public class LottoDispenser {
         }
     }
 
-    private static Set<LottoNumber> getLottoNumbers() {
+    private Set<LottoNumber> getLottoNumbers() {
         // 섞기
         Collections.shuffle(lottoNumbers);
         return new HashSet<>(lottoNumbers.subList(0, Lotto.LOTTO_NUMBER_COUNT));
     }
 
-    public static Lotto manual(List<String> parsedLottoNumbers) {
+    public Lotto manual(List<String> parsedLottoNumbers) {
         return new Lotto(toLottoNumbers(parsedLottoNumbers));
     }
 
-    public static Set<LottoNumber> toLottoNumbers(List<String> parsedLottoNumbers) {
+    public Set<LottoNumber> toLottoNumbers(List<String> parsedLottoNumbers) {
         return parsedLottoNumbers.stream()
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)

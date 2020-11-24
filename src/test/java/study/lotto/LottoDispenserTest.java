@@ -12,11 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoDispenserTest {
 
+    private LottoDispenser lottoDispenser = LottoDispenser.getInstance();
+
     @Test
     @DisplayName("로또(자동) 판매 테스트")
     void test_auto() {
         // When
-        Lottos lottos = LottoDispenser.auto(10);
+        Lottos lottos = lottoDispenser.auto(10);
 
         // Then
         assertEquals(lottos.getTotalCount(), 10);

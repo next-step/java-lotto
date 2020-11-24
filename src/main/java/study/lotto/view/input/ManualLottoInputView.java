@@ -1,13 +1,14 @@
 package study.lotto.view.input;
 
 import study.lotto.core.Lotto;
-import study.lotto.core.LottoNumber;
 import study.lotto.dispenser.LottoDispenser;
 import study.lotto.dispenser.Lottos;
 import study.lotto.utils.Utils;
 import study.lotto.view.AbstractView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ManualLottoInputView extends AbstractView {
 
@@ -16,20 +17,13 @@ public class ManualLottoInputView extends AbstractView {
 
     private ManualLottoInputView() {}
 
-    public static Lottos display(int numberOfManualLotto) {
-
+    public static void displayMessage() {
         stringBuilder.append(MANUAL_LOTTO_NUMBERS_MESSAGE);
         printAndClear();
+    }
 
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int count = 0; count < numberOfManualLotto; count++) {
-            List<String> parsedLottoNumbers = parseForLottoNumber(scanner.nextLine());
-            Lotto manualLotto = LottoDispenser.manual(parsedLottoNumbers);
-            lottos.add(manualLotto);
-        }
-
-        return new Lottos(lottos);
+    public static List<String> getInput() {
+        return parseForLottoNumber(scanner.nextLine());
     }
 
 }
