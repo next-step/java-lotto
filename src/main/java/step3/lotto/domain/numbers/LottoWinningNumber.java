@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * 당첨번호 관리
  */
 public class LottoWinningNumber {
+
     private List<Integer> winningNumbers = new ArrayList<>();
     private CommonLottoCheck commonLottoCheck = new CommonLottoCheck();
     private LottoRank lottoRank;
