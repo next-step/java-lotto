@@ -8,7 +8,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     private static void sanitizeNumber(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException();
+            throw new InvalidLotteryNumberException();
         }
     }
 

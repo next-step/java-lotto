@@ -8,20 +8,20 @@ public class Lottery {
 
     private final SortedSet<LotteryNumber> numbers;
 
+    private static void sanitizeLottery(Collection<LotteryNumber> numbers) {
+        if (Objects.isNull(numbers) || numbers.size() != COUNT_LOTTERY_NUMBER) {
+            throw new InconsistentLotteryException();
+        }
+    }
+
     public Lottery(Picker picker) {
         this(picker.pick());
     }
 
     private Lottery(Collection<LotteryNumber> numbers) {
-        if (Objects.isNull(numbers) || numbers.size() != COUNT_LOTTERY_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-
+        sanitizeLottery(numbers);
         this.numbers = new TreeSet<>(numbers);
-
-        if (this.numbers.size() != COUNT_LOTTERY_NUMBER) {
-            throw new IllegalArgumentException();
-        }
+        sanitizeLottery(this.numbers);
     }
 
     public int countMatched(Lottery another) {
