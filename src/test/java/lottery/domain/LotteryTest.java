@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 
 
-public class LotteryNumbersTest {
+public class LotteryTest {
     Lottery winning = new Lottery(new StaticPicker("11,12,13,14,15,16"));
 
     @ParameterizedTest
