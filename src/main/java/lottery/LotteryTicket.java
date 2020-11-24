@@ -1,6 +1,7 @@
 package lottery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public class LotteryTicket {
 
     public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
         this.lotteryNumbers = lotteryNumbers;
+        Collections.sort(this.lotteryNumbers);
     }
 
     public LotteryTicket(int[] numbers) {
@@ -18,6 +20,7 @@ public class LotteryTicket {
             lotteryNumber = new LotteryNumber(number);
             lotteryNumbers.add(lotteryNumber);
         }
+        Collections.sort(this.lotteryNumbers);
     }
 
     @Override
@@ -31,5 +34,9 @@ public class LotteryTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lotteryNumbers);
+    }
+
+    public List<LotteryNumber> getLotteryNumbers() {
+        return this.lotteryNumbers;
     }
 }

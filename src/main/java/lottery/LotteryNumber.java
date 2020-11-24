@@ -2,7 +2,7 @@ package lottery;
 
 import java.util.Objects;
 
-public class LotteryNumber {
+public class LotteryNumber implements Comparable{
     private final int number;
 
     public LotteryNumber(int number) {
@@ -26,5 +26,11 @@ public class LotteryNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(Object other) {
+        LotteryNumber anotherLotteryNumber = (LotteryNumber) other;
+        return this.number - anotherLotteryNumber.number;
     }
 }
