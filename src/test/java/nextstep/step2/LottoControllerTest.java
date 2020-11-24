@@ -51,7 +51,7 @@ public class LottoControllerTest {
 		List<Lotto> autoLottoList = underTest.purchaseAutoLottos(3);
 		List<Lotto> lottos = underTest.mergeLottos(manualLottoList, autoLottoList);
 		assertThat(lottos).hasSize(6);
-		assertThat(lottos.get(0).getNumbers()).isEqualTo(MockLotto.mockLotto(Arrays.asList(1,2,3,13,14,15)).getNumbers());
+		assertThat(lottos.get(0).getNumbers()).isEqualTo(Lotto.of("1,2,3,13,14,15").getNumbers());
 
 	}
 }

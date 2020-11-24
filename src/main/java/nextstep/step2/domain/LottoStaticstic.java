@@ -18,7 +18,7 @@ public class LottoStaticstic {
 	}
 
 	public Map<LottoReward, List<Lotto>> getLottoRewardMap(List<Lotto> lottoList) {
-		Lotto lastWeekLotto = new Lotto().makeLottoWithNumbers(winnerNumbers);
+		Lotto lastWeekLotto = Lotto.of(winnerNumbers);
 		bonusNumber.validateBonusNumber(lastWeekLotto);
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList, lastWeekLotto);
 		return addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.

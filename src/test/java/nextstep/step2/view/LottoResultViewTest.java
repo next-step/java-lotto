@@ -17,14 +17,14 @@ public class LottoResultViewTest {
 	@Test
 	@DisplayName("4등 이상을 그룹핑하여 로또개수를 출력한다.")
 	public void printLottoStaticsicTest() {
-		Lotto lastWeekLotto = MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6));
+		Lotto lastWeekLotto = Lotto.of("1,2,3,4,5,6");
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = new HashMap<>();
 		WinningLotto winningLotto = new WinningLotto(lastWeekLotto, LottoNumber.of(7));
-		List<Lotto> lottos = Arrays.asList(MockLotto.mockLotto(Arrays.asList(1,2,3,14,15,16)),
-				MockLotto.mockLotto(Arrays.asList(1,2,3,4,15,16)),
-				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,16)),
-				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,7)),
-				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)));
+		List<Lotto> lottos = Arrays.asList(Lotto.of("1,2,3,14,15,16"),
+				Lotto.of("1,2,3,4,15,16"),
+				Lotto.of("1,2,3,4,5,16"),
+				Lotto.of("1,2,3,4,5,7"),
+				Lotto.of("1,2,3,4,5,6"));
 		lottos.forEach(lotto -> lotto.setLottoReward(winningLotto.getLottoReward(lotto)));
 		lottoRewardListMap.put(LottoReward.FIFTH, Arrays.asList(lottos.get(0)));
 		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(lottos.get(1)));

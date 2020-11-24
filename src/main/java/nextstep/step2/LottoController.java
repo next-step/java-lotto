@@ -37,7 +37,7 @@ public class LottoController {
 		String[] lottoNumbers = manualLottos.split(":");
 		List<Lotto> lottos = new ArrayList<>(lottoNumbers.length);
 		for(String numbers : lottoNumbers) {
-			lottos.add(new Lotto().makeLottoWithNumbers(numbers));
+			lottos.add(Lotto.of(numbers));
 		}
 		return lottos;
 	}

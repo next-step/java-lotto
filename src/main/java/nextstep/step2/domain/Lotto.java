@@ -27,7 +27,7 @@ public class Lotto {
 		}
 	}
 
-	public Lotto makeLottoWithNumbers(String numbers) {
+	public static Lotto of(String numbers) {
 		String[] winningNumberSplit = numbers.replaceAll(" ", "").split(",");
 		return Stream.of(winningNumberSplit)
 				.map(number -> LottoNumber.of(LottoNumber.getValidateNumber(number)))
