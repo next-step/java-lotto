@@ -10,15 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private final PrintStream out;
-
-    public OutputView() {
-        this(System.out);
-    }
-
-    public OutputView(PrintStream out) {
-        this.out = out;
-    }
+    private final PrintStream out = System.out;
 
     public void showLotteries(List<Lottery> lotteries) {
         out.format("%1$d개를 구매했습니다.", lotteries.size());
