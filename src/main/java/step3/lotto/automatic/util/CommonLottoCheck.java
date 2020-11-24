@@ -1,4 +1,4 @@
-package step2.lotto.automatic.util;
+package step3.lotto.automatic.util;
 
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class CommonLottoCheck {
 
     private void isNumberCount(List<String> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUBMER_COUNT) {
-            throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2IncorrectCount());
+            throw new RuntimeException(LottoErrorMessage.getLottoIncorrectCount());
         }
     }
 
     private void isSameValueCheck(List<String> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size()-1; i++) {
             if(lottoNumbers.get(i).equals(lottoNumbers.get(i+1))){
-                throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2OverlapCheck());
+                throw new RuntimeException(LottoErrorMessage.getLottoOverlapCheck());
             }
         }
     }
@@ -44,15 +44,15 @@ public class CommonLottoCheck {
         try {
             return Integer.parseInt(paramValue);
         } catch (NumberFormatException e) {
-            System.out.println(e.toString() + " : " + LottoStep2ErrorMessage.getLottoStep2Numberformatexception());
+            System.out.println(e.toString() + " : " + LottoErrorMessage.getLottoNumberformatexception());
         }
 
         return Integer.parseInt(paramValue);
     }
 
-    private void checkLowStandardNumber(Integer paramValue) {
+    public void checkLowStandardNumber(Integer paramValue) {
         if (paramValue > HIGH_STANDARD_NUMBER || paramValue < LOW_STANDARD_NUMBER) {
-            throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2Runtimeexception());
+            throw new RuntimeException(LottoErrorMessage.getLottoRuntimeexception());
         }
     }
 }

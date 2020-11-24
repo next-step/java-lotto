@@ -1,25 +1,22 @@
-package step2.lotto.automatic.domain;
+package step3.lotto.automatic.domain;
 
-import step2.lotto.automatic.util.LottoStep2ErrorMessage;
+import step3.lotto.automatic.util.LottoErrorMessage;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoStatusEnum {
 
-    PRICE_4ST(4, 5000, "3개 일치", 0),
-
-    PRICE_3ST(3, 50000, "4개 일치", 0),
-
-    PRICE_2ST(2, 1500000, "5개 일치", 0),
-
-    PRICE_1ST(1, 2000000000, "6개 일치", 0);
+    PRICE_1ST(1, 2000000000, "6개 일치", 0),
+    PRICE_2ST(2, 30000000, "5개 일치, 보너스 볼 일치", 0),
+    PRICE_3ST(3, 1500000, "5개 일치", 0),
+    PRICE_4ST(4, 50000, "4개 일치", 0),
+    PRICE_5ST(5, 5000, "3개 일치", 0);
 
     private int lottoRank = 0;
     private int winningCount = 0;
     private int price = 0;
     private String message = "";
-
 
     LottoStatusEnum(int lottoRank, int price, String message, int winningCount) {
         this.lottoRank = lottoRank;
@@ -29,19 +26,20 @@ public enum LottoStatusEnum {
     }
 
     private static final Map<Integer, LottoStatusEnum> matchByCountMap = new HashMap<>();
-    static{
-        for(LottoStatusEnum prize : LottoStatusEnum.values()){
+
+    static {
+        for (LottoStatusEnum prize : LottoStatusEnum.values()) {
             matchByCountMap.put(prize.getLottoRank(), prize);
         }
     }
 
-    public void addWinningCount(){
+    public void addWinningCount() {
         this.winningCount++;
     }
 
-    public static LottoStatusEnum findByCount(int winningCount){
-        if(!matchByCountMap.containsKey(winningCount)){
-            throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2RankException());
+    public static LottoStatusEnum findByCount(int winningCount) {
+        if (!matchByCountMap.containsKey(winningCount)) {
+            throw new RuntimeException(LottoErrorMessage.getLottoRankException());
         }
 
         return matchByCountMap.get(winningCount);

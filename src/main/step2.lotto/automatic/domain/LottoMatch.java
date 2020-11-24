@@ -37,10 +37,11 @@ public class LottoMatch {
     }
 
     public double getlottoProfitAmount() {
-        double returnValue = 0;
-        int totalPrice = LottoProfitAmount.runLottoProfitAmount();
+        double returnValue = 0.0;
+        double totalPrice = LottoProfitAmount.runLottoProfitAmount();
 
         returnValue = totalPrice / lottoPurchaseAmount;
+
         return returnValue;
     }
 

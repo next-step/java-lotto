@@ -1,7 +1,6 @@
-package step2.lotto.automatic.domain.numbers;
+package step3.lotto.automatic.domain.numbers;
 
-import step2.lotto.automatic.domain.numbers.LottoAutoNumbers;
-import step2.lotto.automatic.util.LottoStep2ErrorMessage;
+import step3.lotto.automatic.util.LottoErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +30,13 @@ public class LottoMachine {
 
     private void isNumberNegative(int paramValue) {
         if (paramValue <= 0) {
-            throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2Negativeexception());
+            throw new RuntimeException(LottoErrorMessage.getLottoNegativeexception());
         }
     }
 
     private void isMakeCount(int paramValue) {
         if (MAKE_LOTTO_NUMBERS_COUNT != paramValue) {
-            throw new RuntimeException(LottoStep2ErrorMessage.getLottoStep2MakeCountCheck());
+            throw new RuntimeException(LottoErrorMessage.getLottoMakeCountCheck());
         }
     }
 }
