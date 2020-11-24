@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import java.util.stream.IntStream;
+import lotto.lottoexception.RemainBudgetException;
 
 public class TicketPublisher {
 
@@ -20,7 +21,10 @@ public class TicketPublisher {
 
   static public LottoTickets publishTickets(Budget budget) {
     int numPossibleTicket = budget.getNumPossibleLotto();
-    budget.reduceRemains(numPossibleTicket);
+
+    if (numPossibleTicket < 1) {
+      throw new RemainBudgetException();
+    }
 
     return IntStream
         .range(0, numPossibleTicket)

@@ -2,19 +2,15 @@ package lotto;
 
 import static lotto.LottoGameConstant.PRICE_PER_TICKET;
 
-import lotto.lottoexception.RemainBudgetException;
-
 public class Budget {
 
   private final String WINNING_MESSAGE = "(축하합니다.)";
   private final String LOOSING_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-  private final int initialBudget;
-  private int remains;
+  private final int budget;
 
   private Budget(int initialBudget) {
-    this.initialBudget = initialBudget;
-    this.remains = this.initialBudget;
+    this.budget = initialBudget;
   }
 
   public static Budget of(int amounts) {
@@ -26,21 +22,11 @@ public class Budget {
   }
 
   public int getNumPossibleLotto() {
-    return this.remains / PRICE_PER_TICKET;
-  }
-
-  public void reduceRemains(int numTicket) {
-    int expectedFutureBudget = this.remains - numTicket * PRICE_PER_TICKET;
-
-    if (expectedFutureBudget < 0) {
-      throw new RemainBudgetException();
-    }
-
-    this.remains = expectedFutureBudget;
+    return this.budget / PRICE_PER_TICKET;
   }
 
   public double calculateRatio(int incomes) {
-    return (double) incomes / this.initialBudget;
+    return (double) incomes / this.budget;
   }
 
   public String getDescriptiveStatus(int incomes) {
