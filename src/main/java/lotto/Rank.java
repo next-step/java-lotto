@@ -5,7 +5,6 @@ import static lotto.LottoGameConstant.mustWithBonus;
 import static lotto.LottoGameConstant.mustWithoutBonus;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.function.Function;
 
 public enum Rank {
@@ -33,12 +32,6 @@ public enum Rank {
 
   public int getWinningReward() {
     return this.winningReward;
-  }
-
-  public static int calculateTotalReward(Map<Rank, Integer> hitHistory) {
-    return Arrays.stream(Rank.values())
-        .map(rank -> hitHistory.get(rank) * rank.winningReward)
-        .reduce(0, Integer::sum);
   }
 
   public static Rank getRewardWithBonusBall(int numHit, boolean matchedBonusNumber) {

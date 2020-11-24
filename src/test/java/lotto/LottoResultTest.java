@@ -23,7 +23,7 @@ class LottoResultTest {
   @DisplayName("상금 저장 및 확인")
   void testLottoResult() {
     assertThat(sampleLottoResult.calculateIncome())
-        .isEqualTo(30_050_000);
+        .isEqualTo(Rank.FIFTH.getWinningReward() + Rank.SECOND.getWinningReward());
   }
 
   @Test

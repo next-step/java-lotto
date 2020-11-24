@@ -17,7 +17,9 @@ public class LottoResult implements ReadOnlyLottoResult {
   }
 
   public int calculateIncome() {
-    return Rank.calculateTotalReward(hitHistory);
+    return Arrays.stream(Rank.values())
+        .map(rank -> this.hitHistory.get(rank) * rank.getWinningReward())
+        .reduce(0, Integer::sum);
   }
 
   public void recordHit(Rank rank) {
