@@ -5,7 +5,8 @@ import domain.*;
 import static domain.LottoPrize.*;
 
 public class ResultView {
-    private static final String BUYING_AMOUNT_IS = "개를 구매했습니다.";
+    private static final String MANUAL_LOTTO_AMOUNT_IS = "수동으로 %d장, ";
+    private static final String AUTO_LOTTO_AMOUNT_IS = "자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_STATISTICS_IS = "당첨 통계\n---------";
     private static final String FIFTH_PRIZE_IS = "3개 일치 (%d원)- ";
     private static final String FOURTH_PRIZE_IS = "4개 일치 (%d원)- ";
@@ -14,9 +15,9 @@ public class ResultView {
     private static final String FIRST_PRIZE_IS = "6개 일치 (%d원)- ";
     private static final String TOTAL_MARGIN_RATES_ARE = "총 수익률은 %.2f입니다.";
 
-    public static void printBuyingLottos(Lottos lottos) {
-        System.out.print(lottos.size());
-        System.out.println(BUYING_AMOUNT_IS);
+    public static void printBuyingLottos(Lottos lottos, int numberOfManualLottos) {
+        System.out.printf(MANUAL_LOTTO_AMOUNT_IS, numberOfManualLottos);
+        System.out.printf(AUTO_LOTTO_AMOUNT_IS, lottos.size() - numberOfManualLottos);
 
         lottos.stream().forEach(System.out::println);
     }

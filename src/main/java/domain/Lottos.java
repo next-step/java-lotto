@@ -2,6 +2,7 @@ package domain;
 
 import exception.InvalidBonusNumberException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -32,5 +33,14 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public Lottos addAll(List<Lotto> lottos) {
+        List<Lotto> addedLottos = new ArrayList<>();
+
+        this.lottos.stream().forEach(addedLottos::add);
+        lottos.stream().forEach(addedLottos::add);
+
+        return new Lottos(addedLottos);
     }
 }

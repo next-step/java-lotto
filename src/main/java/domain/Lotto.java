@@ -8,7 +8,7 @@ public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_PRICE = 1_000;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
         Objects.requireNonNull(numbers);

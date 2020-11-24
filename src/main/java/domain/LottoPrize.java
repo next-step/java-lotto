@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum LottoPrize {
     FIRST_PRIZE( 6, 2_000_000_000 ),
     SECOND_PRIZE(5, 30_000_000 ),
@@ -27,10 +30,12 @@ public enum LottoPrize {
             return containsBonus ? SECOND_PRIZE : THIRD_PRIZE;
         }
 
-        for(LottoPrize lottoPrize : LottoPrize.values()) {
-            if(lottoPrize.getMatchingNumber() == matchingNumber) {
-                return lottoPrize;
-            }
+        Optional<LottoPrize> optionalLottoPrize = Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.getMatchingNumber() == matchingNumber)
+                .findFirst();
+
+        if(optionalLottoPrize.isPresent()) {
+            return optionalLottoPrize.get();
         }
 
         return NOTHING;
