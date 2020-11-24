@@ -1,16 +1,18 @@
 import calculator.InputValidator;
 import calculator.StringAddCalculator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    @Test
-    public void validationInputString() {
-        assertThat(InputValidator.validationInputString(null)).isFalse();
-        assertThat(InputValidator.validationInputString("")).isFalse();
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void validationInputString(String input) {
+        assertThat(InputValidator.validationInputString(input)).isFalse();
     }
 
     @Test
@@ -39,16 +41,13 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitInputToIntegerArr_음수() {
-        assertThatThrownBy(() -> InputValidator.validationNumbersNegative(-1)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> InputValidator.validationNumbersNegative(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    public void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void splitAndSum_null_또는_빈문자(String input) {
+        assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(0);
     }
 
     @Test
