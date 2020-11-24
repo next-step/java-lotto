@@ -1,22 +1,24 @@
 package step4;
 
 import step4.controller.LottoTicketMaker;
+import step4.domain.Lotto;
 import step4.domain.LottoNumber;
 import step4.domain.LottoWinning;
 import step4.view.LottoInputUi;
 import step4.view.LottoOuputUi;
+
+import java.util.List;
 
 public class LottoApplicationMain {
     public static void main(String[] args) {
         int purchaseAmount = LottoInputUi.inputPurchaseAmount();
         int manualLottoQty = LottoInputUi.inputManualLottoCount();
 
-        String aaa = LottoInputUi.inputManualLottoNumbers();
-        // 입력받은 List 저장 lottos
+        List<Lotto> manualLottoNumbers = LottoInputUi.askManualLottoNumbers(manualLottoQty);
 
-        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(purchaseAmount);
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(purchaseAmount, manualLottoQty, manualLottoNumbers);
 
-        LottoOuputUi.printLottoCount(lottoTicketMaker.lottoPurchaseQty(), manualLottoQty);
+        LottoOuputUi.printLottoCount(lottoTicketMaker.lottoAutoPurchaseQty(), manualLottoQty);
 
         LottoOuputUi.printLottos(lottoTicketMaker.getLottoTicket().getLottos());
 

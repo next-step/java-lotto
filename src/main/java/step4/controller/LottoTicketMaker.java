@@ -4,6 +4,7 @@ import step4.domain.Amount;
 import step4.domain.Lotto;
 import step4.domain.Lottos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,31 +12,39 @@ import java.util.stream.IntStream;
 public class LottoTicketMaker {
     private static final int LOTTO_TOTAL_COUNT = 6;
 
-    private int qty;
+    private final int autoQty;
 
-    private Amount amount;
+    private final Amount amount;
 
     private Lottos lottoTicket;
 
-    public LottoTicketMaker(int lottoAmount) {
+    private final int manualLottoQty;
+
+    public LottoTicketMaker(int lottoAmount, int manualLottoQty, List<Lotto> manualLottoNumbers) {
         amount = Amount.of(lottoAmount);
-        this.qty = lottoPurchaseQty();
-        lottoCreateStart();
+        this.autoQty = lottoAutoPurchaseQty();
+        this.manualLottoQty = manualLottoQty;
+        lottoCreateStart(manualLottoNumbers);
     }
 
-    public static LottoTicketMaker of(int lottoAmount) {
-        return new LottoTicketMaker(lottoAmount);
+    public static LottoTicketMaker of(int lottoAmount, int manualLottoQty, List<Lotto> manualLottoNumbers) {
+        return new LottoTicketMaker(lottoAmount, manualLottoQty, manualLottoNumbers);
     }
 
-    public int lottoPurchaseQty() {
-        return amount.lottoPurchaseQty();
+    public int lottoAutoPurchaseQty() {
+        return amount.lottoPurchaseQty() - this.manualLottoQty;
     }
 
-    private void lottoCreateStart() {
-        List<Lotto> lotto = IntStream.range(0, this.qty)
+    private void lottoCreateStart(List<Lotto> lottos) {
+        List<Lotto> lotto = IntStream.range(0, lottoAutoPurchaseQty())
                 .mapToObj(i -> lottoTicketCreate())
                 .collect(Collectors.toList());
-        this.lottoTicket = new Lottos(lotto);
+
+        List<Lotto> result = new ArrayList<>();
+        result.addAll(lottos);
+        result.addAll(lotto);
+
+        this.lottoTicket = new Lottos(result);
     }
 
     private Lotto lottoTicketCreate() {
