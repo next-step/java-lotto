@@ -1,25 +1,23 @@
 package lottery.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LotteryNumbers {
     private static final int COUNT_LOTTERY_NUMBER = 6;
-    private final List<Integer> numbers;
+    private final SortedSet<Integer> numbers;
 
     public LotteryNumbers(Picker picker) {
         this(picker.pick());
     }
 
-    private LotteryNumbers(List<Integer> numbers) {
+    private LotteryNumbers(Collection<Integer> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != COUNT_LOTTERY_NUMBER) {
             throw new IllegalArgumentException();
         }
-        this.numbers = numbers.stream()
-                .distinct()
-                .sorted()
-                .collect(Collectors.toUnmodifiableList());
+
+        this.numbers = new TreeSet<>(numbers);
+
         if (this.numbers.size() != COUNT_LOTTERY_NUMBER) {
             throw new IllegalArgumentException();
         }
@@ -33,6 +31,6 @@ public class LotteryNumbers {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return numbers.stream().collect(Collectors.toUnmodifiableList());
     }
 }
