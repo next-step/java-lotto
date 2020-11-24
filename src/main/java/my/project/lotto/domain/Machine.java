@@ -11,7 +11,7 @@ import java.util.Stack;
  * Developer : Seo
  */
 public class Machine {
-    private Stack<Integer> numbers;
+    private final Stack<Integer> numbers;
 
     public Machine() {
         numbers = new Stack<>();

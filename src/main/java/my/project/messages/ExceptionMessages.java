@@ -6,6 +6,8 @@ package my.project.messages;
  */
 public class ExceptionMessages {
     public static final String INPUT_HAS_NEGATIVE = "음수가 포함되어 있습니다.";
+    public static final String COLLECTION_IS_NULL = "데이터가 없습니다.";
+    public static final String STRING_IS_NULL = "문자열이 없습니다.";
 
     private ExceptionMessages() {
     }

@@ -19,4 +19,9 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public String getWinningNumber() {
+        this.scanner = Scan.getInstance();
+        System.out.println(Comments.LAST_WINNIG_NUMBERS);
+        return scanner.next();
+    }
 }
