@@ -28,8 +28,8 @@ public class Lotto {
 		}
 	}
 
-	public Lotto getLastWeekLotto(String winnerNumbers) {
-		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
+	public Lotto makeLottoWithNumbers(String numbers) {
+		String[] winningNumberSplit = numbers.replaceAll(" ", "").split(",");
 		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
 				.map(number -> LottoNumber.of(LottoNumber.getValidateNumber(number)))
 				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));

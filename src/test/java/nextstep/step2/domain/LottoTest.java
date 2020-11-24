@@ -72,8 +72,8 @@ public class LottoTest {
 
 	private static Stream<Arguments> provideLastWeekLotto() {
 		return Stream.of(
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4, 5,  6"), LottoNumber.of(5)),
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4,  40,  45"), LottoNumber.of(45))
+				Arguments.of(new Lotto().makeLottoWithNumbers("1,2,3,4, 5,  6"), LottoNumber.of(5)),
+				Arguments.of(new Lotto().makeLottoWithNumbers("1,2,3,4,  40,  45"), LottoNumber.of(45))
 		);
 	}
 }
