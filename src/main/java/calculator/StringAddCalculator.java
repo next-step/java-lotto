@@ -14,6 +14,8 @@ public class StringAddCalculator {
 
     private static final int DELIMITED_NUMBERS_GROUP = 2;
 
+    private StringAddCalculator() {}
+
     public static int add(final String input) {
         if (input == null || input.isEmpty()) {
             return 0;
