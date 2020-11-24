@@ -5,7 +5,7 @@ import java.util.List;
 public class StringAddCalculator {
 
     public static int sum(String values) {
-        List<String> tokens = Token.findTokens(values);
+        List<String> tokens = StringOperand.findStringOperands(values);
         return sum(tokens);
     }
 
