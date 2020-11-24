@@ -50,7 +50,13 @@ public class LottoValidator {
     }
 
     public static void checkBonusDuplicate(String winningNumbers, int bonusNumber) {
-        if(winningNumbers.contains(String.valueOf(bonusNumber))) {
+        for(String number : winningNumbers.split(NUMBER_DELIMITER)) {
+            matchBonus(number, bonusNumber);
+        }
+    }
+
+    private static void matchBonus(String number, int bonusNumber) {
+        if(Integer.parseInt(number) == bonusNumber) {
             throw new IllegalArgumentException("보너스 번호가 정답로또와 중복됩니다.");
         }
     }

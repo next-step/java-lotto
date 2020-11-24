@@ -1,12 +1,8 @@
 package view;
 
-import domain.LottoPrize;
 import domain.Lottos;
 
-import java.util.Map;
-import java.util.stream.IntStream;
-
-import static domain.LottoStandard.*;
+import static domain.LottoStandard.PROFIT_STANDARD;
 
 public class ResultView {
     private final String DISPLAY_QUANTITY = "%s개를 구매했습니다.";
@@ -33,34 +29,23 @@ public class ResultView {
         System.out.println(HORIZONTAL);
     }
 
-    public void displayStatistic(Map<Integer, Integer> lottoStatistics) {
-        int matchBeginning = MATCH_BEGINNING.getStandardNumber();
-        int matchEnding = MATCH_ENDING.getStandardNumber();
+    public void displaySecondPrize(int matchNumber, int money, int matchCount) {
+        System.out.println(String.format(STATISTIC_MENTION_SECOND,
+                matchNumber,
+                money,
+                matchCount));
+    }
 
-        IntStream.range(matchBeginning, matchEnding)
-                .map(i -> matchEnding - i + matchBeginning - 1)
-                .forEach(key -> {
-                    if (key == LottoPrize.SECOND.getPrize()) {
-                        System.out.println(
-                                String.format(STATISTIC_MENTION_SECOND,
-                                        LottoPrize.valueOf(key).get(0),
-                                        LottoPrize.valueOf(key).get(1),
-                                        lottoStatistics.get(key)
-                                ));
-                    } else {
-                        System.out.println(
-                                String.format(STATISTIC_MENTION,
-                                        LottoPrize.valueOf(key).get(0),
-                                        LottoPrize.valueOf(key).get(1),
-                                        lottoStatistics.get(key)
-                                ));
-                    }
-                });
+    public void displayPrizeExceptSecond(int matchNumber, int money, int matchCount) {
+        System.out.println(String.format(STATISTIC_MENTION,
+                matchNumber,
+                money,
+                matchCount));
     }
 
     public void displayProfit(double profit) {
         System.out.print(String.format(PROFIT_MENTION, profit));
-        if(profit < PROFIT_STANDARD.getStandardNumber()) {
+        if (profit < PROFIT_STANDARD.getStandardNumber()) {
             System.out.println(LOSS);
         }
     }

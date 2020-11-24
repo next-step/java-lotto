@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoStandard.MATCH_BEGINNING;
+import static domain.LottoStandard.MATCH_ENDING;
+
 public class LottoController {
     private final int ZERO = 0;
     private final int LOTTO_UNIT_PRICE = 1000;
@@ -59,10 +62,36 @@ public class LottoController {
         resultView.displayResultMention();
 
         Map<Integer, Integer> lottoStatistics = lottos.compileLottoStatistics(winningNumbers, bonusNumber);
-        resultView.displayStatistic(lottoStatistics);
+
+        displayResult(resultView, lottoStatistics);
 
         double profit = LottoProfit.calculateProfit(lottoStatistics, priceTotal).getProfit();
         resultView.displayProfit(profit);
+    }
+
+    private void displayResult(ResultView resultView, Map<Integer, Integer> lottoStatistics) {
+        int matchBeginning = MATCH_BEGINNING.getStandardNumber();
+        int matchEnding = MATCH_ENDING.getStandardNumber();
+        for(int key = matchEnding - 1; key >= matchBeginning; key--) {
+            checkPrizeSecond(key, resultView, lottoStatistics);
+            checkPrizeExceptSecond(key, resultView, lottoStatistics);
+        }
+    }
+
+    private void checkPrizeExceptSecond(int key, ResultView resultView, Map<Integer, Integer> lottoStatistics) {
+        if(key != LottoPrize.SECOND.getPrize()) {
+            resultView.displayPrizeExceptSecond(LottoPrize.valueOf(key).get(0),
+                    LottoPrize.valueOf(key).get(1),
+                    lottoStatistics.get(key));
+        }
+    }
+
+    private void checkPrizeSecond(int key, ResultView resultView, Map<Integer, Integer> lottoStatistics) {
+        if(key == LottoPrize.SECOND.getPrize()) {
+            resultView.displaySecondPrize(LottoPrize.valueOf(key).get(0),
+                                LottoPrize.valueOf(key).get(1),
+                                lottoStatistics.get(key));
+        }
     }
 
     public Lottos initLottos(int lottoQuantity, List<Integer> basicLottoNumbers) {
