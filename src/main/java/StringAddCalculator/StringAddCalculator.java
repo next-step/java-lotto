@@ -12,7 +12,7 @@ public class StringAddCalculator {
     private static int sum(List<String> tokens) {
         Operand operand = new Operand(0);
         for (String token : tokens) {
-            operand = operand.findOperand(token);
+            operand = operand.plus(token);
         }
         return operand.getNumber();
     }
