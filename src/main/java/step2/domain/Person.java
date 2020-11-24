@@ -5,23 +5,24 @@ import java.util.List;
 
 public class Person {
     private List<Lotto> lottos = new ArrayList<>();
-    private int[][] winCounts = new int[][]{{0, 5000}, {0, 50000}, {0, 1500000}, {0, 2000000000}};
 
     public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
     }
 
     public int[][] getWin(int[] winNumbers) {
+        int[][] winCounts = new int[][]{{0, 5000}, {0, 50000}, {0, 1500000}, {0, 2000000000}};
+
         for (int i = 0; i < this.lottos.size(); i++) {
-            checkWin(winNumbers, i);
+            checkWin(winNumbers, winCounts, this.lottos.get(i).getNumbers());
         }
         return winCounts;
     }
 
-    private void checkWin(int[] winNumbers, int i) {
+    private void checkWin(int[] winNumbers, int[][] winCounts, List<Integer> lottoNumber) {
         int equalCount = 0;
         for (int winNumber : winNumbers) {
-            if (this.lottos.get(i).getNumbers().contains(winNumber)) {
+            if (lottoNumber.contains(winNumber)) {
                 equalCount++;
             }
         }
@@ -30,7 +31,7 @@ public class Person {
         }
     }
 
-    public double getTotalRevenue(int purchasePrice) {
+    public double getTotalRevenue(int purchasePrice, int[][] winCounts) {
         int total = 0;
         for (int i = 0; i < winCounts.length; i++) {
             total = total + winCounts[i][0] * winCounts[i][1];

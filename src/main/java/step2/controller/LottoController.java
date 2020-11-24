@@ -29,7 +29,7 @@ public class LottoController {
         int[][] winCounts = person.getWin(winNumber);
         ResultView.printWinCounts(winCounts);
 
-        double totalRevenue = person.getTotalRevenue(purchasePrice);
+        double totalRevenue = person.getTotalRevenue(purchasePrice, winCounts);
         ResultView.printTotalRevenue(totalRevenue);
     }
 }
