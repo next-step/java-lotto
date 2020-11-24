@@ -43,7 +43,7 @@ public class LottoTest {
 	@Test
 	@DisplayName("로또 리워드를 갖는 로또를 생성한다.")
 	public void winningLottoTest() {
-		Lotto winningLotto = getWinningLotto();
+		Lotto winningLotto = getLottoReward();
 		assertThat(winningLotto.getLottoReward()).isEqualTo(LottoReward.FIFTH);
 	}
 
@@ -55,14 +55,16 @@ public class LottoTest {
 		assertFalse(getWinningLotto().hasBonusNumber(lotto, LottoNumber.of(7)));
 	}
 
-	private Lotto getWinningLotto() {
+	private Lotto getLottoReward() {
 		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto lastWinningLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
-		WinningLotto winningLotto = new WinningLotto(lastWinningLotto, LottoNumber.of(7));
-		lotto.setLottoReward(winningLotto);
+		lotto.setLottoReward(getWinningLotto().getLottoReward(lotto));
 		return lotto;
 	}
 
+	private WinningLotto getWinningLotto() {
+		Lotto lastWinningLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
+		return new WinningLotto(lastWinningLotto, LottoNumber.of(7));
+	}
 	private static Stream<Arguments> provideLottos() {
 		return Stream.of(
 				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),

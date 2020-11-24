@@ -25,7 +25,7 @@ public class LottoResultViewTest {
 				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,16)),
 				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,7)),
 				MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)));
-		lottos.forEach(lotto -> lotto.setLottoReward(winningLotto));
+		lottos.forEach(lotto -> lotto.setLottoReward(winningLotto.getLottoReward(lotto)));
 		lottoRewardListMap.put(LottoReward.FIFTH, Arrays.asList(lottos.get(0)));
 		lottoRewardListMap.put(LottoReward.FOURTH, Arrays.asList(lottos.get(1)));
 		lottoRewardListMap.put(LottoReward.THIRD, Arrays.asList(lottos.get(2)));

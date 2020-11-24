@@ -26,7 +26,7 @@ public class LottoStaticstic {
 
 	private Map<LottoReward, List<Lotto>> getLottoRewardGroupingMap(List<Lotto> lottoList, Lotto lastWeekLotto) {
 		WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusNumber);
-		lottoList.forEach(lotto -> lotto.setLottoReward(winningLotto));
+		lottoList.forEach(lotto -> lotto.setLottoReward(winningLotto.getLottoReward(lotto)));
 		return lottoList.stream()
 				.collect(Collectors.groupingBy(Lotto::getLottoReward));
 	}

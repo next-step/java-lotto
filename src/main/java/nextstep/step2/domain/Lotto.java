@@ -36,20 +36,8 @@ public class Lotto {
 		return new Lotto(winningNumbers);
 	}
 
-	public void setLottoReward(WinningLotto lotto) {
-		long matchCount = getMatchCount(this, lotto.getLastWeekLotto());
-		boolean hasBonusNumber = hasBonusNumber(this, lotto.getBonusNumber());
-		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount), hasBonusNumber);
-	}
-
-	protected boolean hasBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
-		return lotto.getNumbers().contains(bonusNumber);
-	}
-
-	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
-		return lotto.getNumbers().stream()
-				.filter(number -> lastWeekLotto.getNumbers().contains(number))
-				.count();
+	public void setLottoReward(LottoReward lottoReward) {
+		this.lottoReward = lottoReward;
 	}
 
 	public LottoReward getLottoReward() {
