@@ -1,15 +1,16 @@
 package lottery.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 public class LotteryTest {
     Lottery winning = new Lottery(new StaticPicker("11,12,13,14,15,16"));
 
+    @DisplayName("정상 케이스")
     @ParameterizedTest
     @ValueSource(strings = {
             "1,2,3,4,5,6",
@@ -22,6 +23,7 @@ public class LotteryTest {
                 .doesNotThrowAnyException();
     }
 
+    @DisplayName("갯수가 맞지 않는 케이스")
     @ParameterizedTest
     @ValueSource(strings = {
             "1,2,3,4,5",
@@ -35,6 +37,7 @@ public class LotteryTest {
                 .isThrownBy(() -> new Lottery(picker));
     }
 
+    @DisplayName("매칭 결과")
     @ParameterizedTest
     @CsvSource(delimiter = '|', value = {
             "1 | 11,22,23,24,25,26",
