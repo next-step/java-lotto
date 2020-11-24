@@ -1,9 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import lotto.constant.ErrorMessage;
-import lotto.domain.LottoNumbers;
 import lotto.constant.Rank;
-import lotto.domain.WinningNumber;
 import lotto.utils.IntegerUtils;
 import lotto.utils.StringUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +13,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningNumberTest {
 
@@ -66,5 +65,14 @@ class WinningNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new WinningNumber(numbers))
                 .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
+    }
+
+    @ParameterizedTest
+    @DisplayName("중복된 숫자를 입력할 떄, Exception을 throw 한다.")
+    @ValueSource(strings = {"1, 1, 1, 1, 12, 1"})
+    void should_throw_illegal_argument_exception_when_duplicate_number(String numbers) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningNumber(numbers))
+                .withMessage(ErrorMessage.NOT_ALLOW_DUPLICATED);
     }
 }

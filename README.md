@@ -53,7 +53,6 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-13. MVC 형태로 정리한다.
 
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
@@ -71,3 +70,4 @@ utils.Calculator
 10. 당첨 통계 및 수익률을 출력한다.
 11. MainSimulator 개발
 12. MainSimulator 버그 수정
+13. MVC 형태로 정리한다.

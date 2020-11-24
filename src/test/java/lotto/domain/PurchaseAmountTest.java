@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoAmountTest {
+class PurchaseAmountTest {
 
     public static final int LOTTO_PRICE = 1000;
 
@@ -20,10 +19,10 @@ public class LottoAmountTest {
         int amount = 14000;
 
         //When
-        LottoAmount lottoAmount = new LottoAmount(amount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
 
         //Then
-        assertThat(lottoAmount.getLottoCount()).isEqualTo(14);
+        assertThat(purchaseAmount.getLottoCount()).isEqualTo(14);
     }
 
 
@@ -33,7 +32,7 @@ public class LottoAmountTest {
     void should_throw_illegal_argument_exception(int amount){
 
         assertThatIllegalArgumentException()
-                .isThrownBy(()-> new LottoAmount(amount))
+                .isThrownBy(()-> new PurchaseAmount(amount))
                 .withMessage("lotto amount is wrong.");
     }
 

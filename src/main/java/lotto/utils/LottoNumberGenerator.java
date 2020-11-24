@@ -2,6 +2,8 @@ package lotto.utils;
 
 import lotto.constant.Lotto;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Lottoes;
+import lotto.domain.PurchaseAmount;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,13 +13,13 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    public static List<LottoNumbers> create(int lottoCount) {
+    public static Lottoes create(PurchaseAmount purchaseAmount) {
 
         List<Integer> range = IntStream.range(Lotto.NUMBER_MIN_RANGE, Lotto.NUMBER_MAX_RANGE)
                 .boxed()
                 .collect(Collectors.toList());
 
-        return getLottoNumbers(lottoCount, range);
+        return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount(), range));
 
     }
 

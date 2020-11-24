@@ -1,25 +1,21 @@
-package lotto;
+package lotto.utils;
 
-import lotto.utils.LottoNumberGenerator;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lottoes;
+import lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumberGeneratorTest {
+class LottoNumberGeneratorTest {
 
     @Test
     @DisplayName("1~45까지 6개의 번호를 14개 생성한다.")
     void should_return_lotto_numbers() {
         //Given & When
-        List<LottoNumbers> numbers = LottoNumberGenerator.create(14);
-
-
+        Lottoes lottoes = LottoNumberGenerator.create(new PurchaseAmount(14000));
 
         //Then
-        assertThat(numbers.size()).isEqualTo(14);
+        assertThat(lottoes.getValue().size()).isEqualTo(14);
     }
 }

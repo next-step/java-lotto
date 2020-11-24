@@ -7,6 +7,8 @@ import java.util.List;
 
 public class StringUtils {
     private static final String DEFAULT_SEPARATOR = ",";
+    private static final String BLANK = " ";
+    private static final String DELETE_BLANK = "";
 
     private StringUtils() {
     }
@@ -18,11 +20,11 @@ public class StringUtils {
 
     private static void valid(String value) {
         if (value == null || value.isEmpty() || value.equals(" ")) {
-            throw new IllegalAccessError(ErrorMessage.WINNING_NUMBER_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
         }
     }
 
     private static String deleteBlank(String value) {
-        return value.replaceAll(" ", "");
+        return value.replaceAll(BLANK, DELETE_BLANK);
     }
 }

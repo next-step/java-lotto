@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
+import lotto.constant.Lotto;
 import lotto.constant.Rank;
 import lotto.utils.IntegerUtils;
 import lotto.utils.StringUtils;
@@ -12,10 +13,15 @@ public class WinningNumber {
     private final List<Integer> value;
 
     public WinningNumber(String winningNumbers) {
-        List<String> strings = StringUtils.splitString(winningNumbers);
-        List<Integer> numbers = IntegerUtils.parsePositiveInt(strings);
+        List<Integer> numbers = convertStringToInteger(winningNumbers);
         valid(numbers);
+        validDuplicate(numbers);
         value = numbers;
+    }
+
+    private List<Integer> convertStringToInteger(String winningNumbers) {
+        List<String> strings = StringUtils.splitString(winningNumbers);
+        return IntegerUtils.parsePositiveInt(strings);
     }
 
     private void valid(List<Integer> numbers) {
@@ -33,6 +39,13 @@ public class WinningNumber {
             throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
         }
     }
+
+    private void validDuplicate(List<Integer> numbers) {
+        if (numbers.stream().distinct().count() != Lotto.NUMBER_RANGE) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_DUPLICATED);
+        }
+    }
+
 
     public List<Integer> getValue() {
         return value;

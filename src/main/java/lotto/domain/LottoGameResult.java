@@ -1,25 +1,29 @@
 package lotto.domain;
 
 import lotto.constant.Rank;
-import lotto.dto.LottoGameResultDto;
 
-import java.util.List;
+import java.util.Map;
 
 public class LottoGameResult {
 
-    private final List<Rank> value;
+    private static final double TWO_DECIMAL_PLACES = 100.0;
+    private final Map<Rank, Integer> value;
 
-    public LottoGameResult(List<Rank> value) {
+    public LottoGameResult(Map<Rank, Integer> value) {
         this.value = value;
     }
 
-    public LottoGameResultDto getRankCount(Rank rank) {
-        long matchingCount = value.stream()
-                .filter(ranks -> ranks.equals(rank))
-                .count();
+    public double getRateOfReturn(PurchaseAmount purchaseAmount) {
+        double rate = value.entrySet()
+                .stream()
+                .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum()
+                / purchaseAmount.getAmount();
 
-        return new LottoGameResultDto(rank, matchingCount);
+        return Math.floor(rate * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES;
+    }
 
-
+    public Map<Rank, Integer> getValue() {
+        return value;
     }
 }

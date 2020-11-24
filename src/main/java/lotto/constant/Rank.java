@@ -1,12 +1,11 @@
 package lotto.constant;
 
 public enum Rank {
-    FIRST(1, 6, 2000000000, "6개 일치 (2,000,000,000원) - "),
-    SECOND(2, 5, 1500000, "5개 일치 (1,500,000원) - "),
-    THIRD(3, 4, 50000, "4개 일치 (50,000원) - "),
-    FOURTH(4, 3, 5000, "3개 일치 (5,000원) - "),
     FIFTH(5, 2, 0, "꽝"),
-    ;
+    FOURTH(4, 3, 5000, "3개 일치 (5,000원) - "),
+    THIRD(3, 4, 50000, "4개 일치 (50,000원) - "),
+    SECOND(2, 5, 1500000, "5개 일치 (1,500,000원) - "),
+    FIRST(1, 6, 2000000000, "6개 일치 (2,000,000,000원) - ");
 
     private final int number;
     private final int matchingNumberCount;

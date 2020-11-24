@@ -1,25 +1,25 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
+import lotto.constant.Lotto;
 
-public class LottoAmount {
+public class PurchaseAmount {
 
-    private static final int LOTTO_PRICE = 1000;
     private final int amount;
 
-    public LottoAmount(int amount) {
+    public PurchaseAmount(int amount) {
         valid(amount);
         this.amount = amount;
     }
 
     private void valid(int amount) {
-        if (amount < LOTTO_PRICE) {
+        if (amount < Lotto.PRICE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_AMOUNT_ERROR);
         }
     }
 
     public int getLottoCount() {
-        return amount / LOTTO_PRICE;
+        return amount / Lotto.PRICE;
     }
 
     public int getAmount() {
