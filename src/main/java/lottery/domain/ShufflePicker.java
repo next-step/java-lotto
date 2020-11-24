@@ -17,6 +17,6 @@ public class ShufflePicker implements Picker {
     @Override
     public List<LotteryNumber> pick() {
         Collections.shuffle(basis);
-        return basis.subList(0, LotteryNumbers.COUNT_LOTTERY_NUMBER);
+        return basis.subList(0, Lottery.COUNT_LOTTERY_NUMBER);
     }
 }

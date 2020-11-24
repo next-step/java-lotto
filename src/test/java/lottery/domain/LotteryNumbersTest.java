@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 public class LotteryNumbersTest {
-    LotteryNumbers winning = new LotteryNumbers(new StaticPicker("11,12,13,14,15,16"));
+    Lottery winning = new Lottery(new StaticPicker("11,12,13,14,15,16"));
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -18,7 +18,7 @@ public class LotteryNumbersTest {
     })
     void validNumbers(String input) {
         final Picker picker = new StaticPicker(input);
-        assertThatThrownBy(() -> new LotteryNumbers(picker))
+        assertThatThrownBy(() -> new Lottery(picker))
                 .doesNotThrowAnyException();
     }
 
@@ -32,7 +32,7 @@ public class LotteryNumbersTest {
     void invalidNumbers(String input) {
         final Picker picker = new StaticPicker(input);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LotteryNumbers(picker));
+                .isThrownBy(() -> new Lottery(picker));
     }
 
     @ParameterizedTest
@@ -46,7 +46,7 @@ public class LotteryNumbersTest {
     })
     void countMatched(int count, String input) {
         final Picker picker = new StaticPicker(input);
-        final LotteryNumbers lotteryNumbers = new LotteryNumbers(picker);
-        assertThat(lotteryNumbers.countMatched(winning)).isEqualTo(count);
+        final Lottery lottery = new Lottery(picker);
+        assertThat(lottery.countMatched(winning)).isEqualTo(count);
     }
 }

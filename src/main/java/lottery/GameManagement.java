@@ -2,7 +2,7 @@ package lottery;
 
 import lottery.domain.Picker;
 import lottery.domain.ShufflePicker;
-import lottery.domain.LotteryNumbers;
+import lottery.domain.Lottery;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GameManagement {
-    private final List<LotteryNumbers> lotteries;
+    private final List<Lottery> lotteries;
 
     public GameManagement(int numberGames) {
         final Picker picker = new ShufflePicker();
         this.lotteries = IntStream.range(0, numberGames)
-                .mapToObj(i -> new LotteryNumbers(picker))
+                .mapToObj(i -> new Lottery(picker))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Map<Integer, Long> getMatches(LotteryNumbers winningNumber) {
+    public Map<Integer, Long> getMatches(Lottery winningNumber) {
         return lotteries.stream()
                 .map(winningNumber::countMatched)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

@@ -1,7 +1,7 @@
 package lottery.view;
 
 import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryNumbers;
+import lottery.domain.Lottery;
 import lottery.domain.WinningType;
 
 import java.io.PrintStream;
@@ -20,15 +20,15 @@ public class OutputView {
         this.out = out;
     }
 
-    public void showLotteries(List<LotteryNumbers> lotteries) {
+    public void showLotteries(List<Lottery> lotteries) {
         out.format("%1$d개를 구매했습니다.", lotteries.size());
         out.println();
         lotteries.forEach(this::showLotteryNumbers);
     }
 
-    private void showLotteryNumbers(LotteryNumbers lotteryNumbers) {
+    private void showLotteryNumbers(Lottery lottery) {
         out.print("[");
-        out.print(lotteryNumbers.getNumbers().stream().map(LotteryNumber::toString).collect(Collectors.joining(", ")));
+        out.print(lottery.getNumbers().stream().map(LotteryNumber::toString).collect(Collectors.joining(", ")));
         out.println("]");
     }
 
