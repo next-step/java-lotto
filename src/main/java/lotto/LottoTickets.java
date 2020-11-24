@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.views.ROLottoTickets;
+import lotto.views.ReadOnlyLottoTickets;
 
-public class LottoTickets implements ROLottoTickets {
+public class LottoTickets implements ReadOnlyLottoTickets {
 
   private final List<LottoTicket> tickets;
 

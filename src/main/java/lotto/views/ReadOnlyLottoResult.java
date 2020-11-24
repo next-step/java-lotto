@@ -2,7 +2,7 @@ package lotto.views;
 
 import lotto.Rank;
 
-public interface ROLottoResult {
+public interface ReadOnlyLottoResult {
 
   int getNumRanks();
 

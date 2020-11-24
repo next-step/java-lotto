@@ -2,9 +2,9 @@ package lotto.views;
 
 public class TicketsExporter {
 
-  ROLottoTickets lottoTickets;
+  ReadOnlyLottoTickets lottoTickets;
 
-  public TicketsExporter(ROLottoTickets lottoTickets) {
+  public TicketsExporter(ReadOnlyLottoTickets lottoTickets) {
     this.lottoTickets = lottoTickets;
   }
 

@@ -1,6 +1,6 @@
 package lotto.views;
 
-public interface ROLottoTickets {
+public interface ReadOnlyLottoTickets {
 
   int getNumTicket();
 

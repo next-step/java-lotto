@@ -3,9 +3,9 @@ package lotto;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import lotto.views.ROLottoResult;
+import lotto.views.ReadOnlyLottoResult;
 
-public class LottoResult implements ROLottoResult {
+public class LottoResult implements ReadOnlyLottoResult {
 
   private final Map<Rank, Integer> hitHistory;
 

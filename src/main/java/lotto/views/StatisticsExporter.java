@@ -8,9 +8,9 @@ public class StatisticsExporter {
   private static final String BONUS_REWARD_PER_MATCH_MESSAGE = "개 일치, 보너스 볼 일치 (";
   private static final String NUM_HIT_MESSAGE = "개";
 
-  private final ROLottoResult result;
+  private final ReadOnlyLottoResult result;
 
-  public StatisticsExporter(ROLottoResult lottoResult) {
+  public StatisticsExporter(ReadOnlyLottoResult lottoResult) {
     this.result = lottoResult;
   }
 
