@@ -24,6 +24,42 @@ class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
         assertThat(lottoStore.buy(1000).size()).isEqualTo(1);
         assertThat(lottoStore.buy(3000).size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("공백이나 6자리가 안되는 숫자를 입력하면 IllegalArgumentException 발생함.")
+    void initWinNumbers_isBlankAndisNotMatchNumberCount_IllegalArgumentException() {
+        LottoStore lottoStore = new LottoStore();
+
+        assertThatThrownBy(() -> lottoStore.initWinNumbers(""))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> lottoStore.initWinNumbers("1,2,3,4,5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 값이나 로또 범위를 초과하는 값을 입력할 경우 Exception이 발생한다.")
+    void initWinNumbes_isNotNumberAndisNotLottoNumber_Exception() {
+        LottoStore lottoStore = new LottoStore();
+
+        assertThatThrownBy(() -> lottoStore.initWinNumbers("a,b,1,2,3,4"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> lottoStore.initWinNumbers("1,2,3,4,5,46"))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> lottoStore.initWinNumbers("0,2,3,4,5,45"))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+    @Test
+    @DisplayName("우승 숫자를 입력하면 Integer 리스트로 저장한다.")
+    void initWinNumbers() {
+        LottoStore lottoStore = new LottoStore();
+        lottoStore.initWinNumbers("1,2,3,4,5,6");
+        assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
 
     }
 }
