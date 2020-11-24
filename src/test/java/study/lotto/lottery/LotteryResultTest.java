@@ -1,6 +1,5 @@
 package study.lotto.lottery;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.Lotto;
@@ -11,7 +10,6 @@ import study.lotto.dispenser.Lottos;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,7 +38,7 @@ class LotteryResultTest {
         Long numberOfLottoRank = lotteryResult.getNumberOfLottoRank(LottoRank.FIRST);
         String totalReturnRatio = lotteryResult.getTotalReturnRatio();
         assertThat(numberOfLottoRank).isEqualTo(1L);
-        assertThat(totalReturnRatio).isEqualTo("");
+        assertThat(totalReturnRatio).isEqualTo("2000000.00");
     }
 
     @Test
