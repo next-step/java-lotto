@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto (LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -21,22 +23,18 @@ public class Lotto {
                 .filter(winningNumbers::contains)
                 .count();
 
-        return matchLottoPrize(bonusNumber, matchNumber);
-    }
-
-    private LottoPrize matchLottoPrize(int bonusNumber, int matchNumber) {
-        switch (matchNumber) {
-            case 6:
-                return  LottoPrize.FIRST;
-            case 5:
-                return checkSecondPrize(bonusNumber);
-            case 4:
-                return LottoPrize.FOURTH;
-            case 3:
-                return LottoPrize.FIFTH;
-            default:
-                return null;
+        if(matchNumber < LottoPrize.FIFTH.getMatchNumber()) {
+            return null;
         }
+
+        if(matchNumber == LottoPrize.SECOND.getMatchNumber()) {
+            return checkSecondPrize(bonusNumber);
+        }
+
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.getMatchNumber() == matchNumber)
+                .collect(Collectors.toList())
+                .get(0);
     }
 
     private LottoPrize checkSecondPrize(int bonusNumber) {
