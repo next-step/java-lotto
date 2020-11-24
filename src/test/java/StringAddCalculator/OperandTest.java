@@ -8,14 +8,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OperandTest {
 
-    @DisplayName(value = "음수를 전달할 경우 RuntimeException")
     @Test
     void 음수일_경우_예외() {
         assertThatThrownBy(() -> new Operand(0).plus("-1"))
                 .isInstanceOf(RuntimeException.class);
     }
 
-    @DisplayName(value = "숫자가 아닐경우 경우 NumberFormatException")
     @Test
     void 숫자가_아닐_경우_예외() {
         assertThatThrownBy(() -> new Operand(0).plus("d"))
