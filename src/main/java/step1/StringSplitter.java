@@ -15,15 +15,7 @@ public class StringSplitter {
     private static final Pattern BASIC_PATTERN = Pattern.compile("(,|:)");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    public StringSplitter() {}
-
-    public static boolean hasBasicSplitter(String input) {
-        return BASIC_PATTERN.matcher(input).find();
-    }
-
-    public static boolean hasCustomSplitter(String input) {
-        return CUSTOM_PATTERN.matcher(input).find();
-    }
+    private StringSplitter() {}
 
     public static String[] split(String input) {
 

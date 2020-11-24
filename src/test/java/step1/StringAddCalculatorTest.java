@@ -1,17 +1,16 @@
 package step1;
 
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step1.calculator.Inputs;
+import step1.calculator.PositiveNumber;
 
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -20,59 +19,18 @@ import static org.assertj.core.api.Assertions.*;
  */
 public class StringAddCalculatorTest {
 
-    @Test
-    @DisplayName("입력한 값이 null이면 0을 입력한다.")
-    void is_inputString_null() {
+    @ParameterizedTest
+    @DisplayName("입력한 값이 null이거나 빈 문자열이면 0을 입력한다.")
+    @NullAndEmptySource
+    void is_inputString_empty(String input) {
         // given
-        String inputStr = null;
+        String inputStr = input;
 
         // when
         InputValue inputValue = InputValue.of(inputStr);
 
         // then
         assertThat(inputValue.getInput()).isEqualTo("0");
-
-    }
-
-    @Test
-    @DisplayName("입력한 값이 빈 문자열이면 0을 입력한다.")
-    void is_inputString_empty() {
-        // given
-        String inputStr = "";
-
-        // when
-        InputValue inputValue = InputValue.of(inputStr);
-
-        // then
-        assertThat(inputValue.getInput()).isEqualTo("0");
-    }
-
-    @ParameterizedTest
-    @DisplayName("기본 구분자가 입력값에 존재하지 않을 때 false")
-    @ValueSource(strings = {"123", "13", "107243"})
-    void is_splitter_not_exist(String input) {
-        // given
-        String inputStr = input;
-
-        // when
-        boolean result = StringSplitter.hasBasicSplitter(inputStr);
-
-        // then
-        assertThat(result).isFalse();
-    }
-
-    @ParameterizedTest
-    @DisplayName("기본 구분자가 입력값에 존재할 때 true")
-    @ValueSource(strings = {"12:3", "1,2,3", "10,72:3"})
-    void is_splitter_exist(String input) {
-        // given
-        String inputStr = input;
-
-        // when
-        boolean result = StringSplitter.hasBasicSplitter(inputStr);
-
-        // then
-        assertThat(result).isTrue();
     }
 
     @ParameterizedTest
@@ -97,7 +55,10 @@ public class StringAddCalculatorTest {
         Inputs inputs = Inputs.of(inputValue);
 
         // then
-        assertThat(inputs.value()).isEqualTo(Arrays.asList(NumberUtils.toInt(input)));
+        for (PositiveNumber positiveNumber : inputs.value()) {
+            assertThat(positiveNumber).isEqualTo(PositiveNumber.of(input));
+        }
+
     }
 
     @ParameterizedTest
@@ -111,7 +72,10 @@ public class StringAddCalculatorTest {
         Inputs inputs = Inputs.of(inputValue);
 
         // then
-        assertThat(inputs.value().toString()).isEqualTo(expected);
+        assertThat(inputs.value().stream()
+                        .map(PositiveNumber::toString)
+                        .collect(Collectors.joining(", ", "[", "]"))
+            ).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -137,33 +101,7 @@ public class StringAddCalculatorTest {
         Calculator calculator = Calculator.of(inputValue);
 
         // then
-        assertThat(calculator.sumAll()).isEqualTo(NumberUtils.toInt(expected));
-    }
-
-    @Test
-    @DisplayName("커스텀 구분자가 존재한다")
-    void is_custom_splitter_exist() {
-        // given
-        InputValue inputValue = InputValue.of("//;\n1;2;3");
-
-        // when
-        boolean result = StringSplitter.hasCustomSplitter(inputValue.getInput());
-
-        // then
-        assertThat(result).isTrue();
-    }
-
-    @Test
-    @DisplayName("커스텀 구분자가 없다")
-    void is_custom_splitter_not_exist() {
-        // given
-        InputValue inputValue = InputValue.of("1:2,3");
-
-        // when
-        boolean result = StringSplitter.hasCustomSplitter(inputValue.getInput());
-
-        // then
-        assertThat(result).isFalse();
+        assertThat(calculator.sumAll()).isEqualTo(Integer.valueOf(expected));
     }
 
     @ParameterizedTest

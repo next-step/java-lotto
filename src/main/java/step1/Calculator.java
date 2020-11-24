@@ -1,6 +1,7 @@
 package step1;
 
 import step1.calculator.Inputs;
+import step1.calculator.PositiveNumber;
 
 import java.util.Objects;
 
@@ -12,10 +13,6 @@ public class Calculator {
 
     private final Inputs inputs;
 
-    private Calculator(String input) {
-        this.inputs = Inputs.of(input);
-    }
-
     private Calculator(InputValue inputValue) {
         this.inputs = Inputs.of(inputValue);
     }
@@ -24,13 +21,9 @@ public class Calculator {
         return new Calculator(inputValue);
     }
 
-    public static Calculator of(String input) {
-        return new Calculator(input);
-    }
-
     public int sumAll() {
         return this.inputs.value().stream()
-                .mapToInt(Integer::valueOf)
+                .mapToInt(PositiveNumber::value)
                 .sum();
     }
 
