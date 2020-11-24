@@ -258,17 +258,21 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 * LotteryTicket class를 구현한다.
   * 6개 숫자는 중복이 없다.
   * 오름 차순으로 정렬한다.  
-* LotteryPerson class를 구현한다.
-  * 로또 구매하는 금액을 입력 받는다.
-  * 금액 만큼 로또를 구입한다.
 * LotteryGame class를 구현한다.
+  * 입력한 금액 만큼 로또 티켓을 발행한다.
   * 당첨 번호를 입력 받는다.
   * 로또 1장을 구입한다.
   * 로또 당첨을 확인한다.
-* LotteryGameManager class를 구현한다.
+* LotteryRevenue class를 구현한다.
+  * 3,4,5,6개 맞춘 결과를 저장한다.
+  * 수익성을 계사한다.
+* LotteryWinNumbers class를 구현한다.
+  * 당첨번호를 입력한다.
+  * 로또 티켓이 당첨되었는 확인한다.
 * InputView class를 구현한다.
   * 금액을 입력 받는다.
   * 6개의 당첨 번호를 입력 받는다.
 * ResultView class를 구현한다.
   * 구매한 복권 개수를 출력한다.
   * 당첨 통계를 출력한다.
+* LotteryGameManager class를 구현한다.
