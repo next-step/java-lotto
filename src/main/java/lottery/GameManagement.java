@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GameManagement {
+    private static final int MONEY_PER_LOTTERY = 1000;
     private final List<Lottery> lotteries;
 
     public GameManagement(int numberGames) {
@@ -32,11 +33,11 @@ public class GameManagement {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int nGames = inputView.getMoneyToBuy() / 1000;
+        int nGames = inputView.getMoneyToBuy() / MONEY_PER_LOTTERY;
         GameManagement game = new GameManagement(nGames);
         outputView.showLotteries(game.lotteries);
 
         Map<Integer, Long> winnings = game.getMatches(inputView.getWinningNumber());
-        outputView.showWinnings(nGames * 1000, winnings);
+        outputView.showWinnings(nGames * MONEY_PER_LOTTERY, winnings);
     }
 }
