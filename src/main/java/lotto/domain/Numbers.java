@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    public static final int START_NUM = 1;
-    public static final int END_NUM = 46;
     private Set<Number> numbers;
 
     public Numbers(Builder builder) {
@@ -63,7 +61,7 @@ public class Numbers {
         private List<Number> numbers = new ArrayList<>();
 
         private static List<Number> getLottoNumbers() {
-            return IntStream.range(START_NUM, END_NUM)
+            return IntStream.range(Number.START_NUM, Number.END_NUM)
                     .mapToObj(Number::new)
                     .collect(Collectors.toList());
         }
