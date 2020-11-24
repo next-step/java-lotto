@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.LottoConstraint;
+import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
 import lotto.domain.enums.PickType;
@@ -74,5 +75,15 @@ public class RoundServiceTest {
         assertThat(round.getMyPicks()).allSatisfy(pick -> {
             assertThat(pick.getRank()).isEqualTo(Rank.LOSE);
         });
+    }
+
+    @Test
+    void testGenerateReport(){
+        Round round = roundService.autoBuy(14);
+        Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
+        roundService.checkWinning(winningBallPick.getBalls());
+        LottoReport lottoReport = roundService.generateReport();
+        assertThat(lottoReport).isNotNull();
+        assertThat(lottoReport.getRankMap()).extractingByKey(Rank.LOSE).isEqualTo(14);
     }
 }

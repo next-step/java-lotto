@@ -28,9 +28,4 @@ public class PrizeInfo {
         prizeMap.putIfAbsent(rank, new Prize(rank, cash, currency, ruleDescription));
     }
 
-    public Prize getPrize(Rank rank) {
-        return prizeMap.get(rank);
-    }
-
-
 }

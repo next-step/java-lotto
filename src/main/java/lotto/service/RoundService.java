@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.LottoConstraint;
+import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
 import lotto.domain.enums.Rank;
@@ -48,7 +49,7 @@ public class RoundService {
         });
     }
 
-    public Round get() {
-        return round;
+    public LottoReport generateReport() {
+        return round.generateReport(lottoService.getPrice(), lottoService.getPrizeMap());
     }
 }

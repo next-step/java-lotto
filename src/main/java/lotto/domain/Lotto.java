@@ -6,33 +6,22 @@ import java.util.Collection;
 import java.util.Map;
 
 public class Lotto {
-    private Integer price;
-    private LottoConstraint constraint;
-    private PrizeInfo prizeInfo;
+    private final Integer price;
+    private final LottoConstraint constraint;
+    private final PrizeInfo prizeInfo;
 
-    public void setPrice(Integer price) {
+    public Lotto(Integer price, LottoConstraint constraint, PrizeInfo prizeInfo) {
         this.price = price;
+        this.constraint = constraint;
+        this.prizeInfo = prizeInfo;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-
-    public void setConstraint(LottoConstraint constraint) {
-        this.constraint = constraint;
-    }
-
     public LottoConstraint getConstraint() {
         return constraint;
-    }
-
-    public void setPrizeInfo(PrizeInfo prizeInfo) {
-        this.prizeInfo = prizeInfo;
-    }
-
-    public Prize getPrize(Rank rank) {
-        return this.prizeInfo.getPrize(rank);
     }
 
     public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {

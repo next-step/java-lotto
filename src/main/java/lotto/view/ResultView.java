@@ -32,7 +32,7 @@ public class ResultView {
         prizeMap.keySet().stream()
                 .sorted(Comparator.comparingInt(Enum::ordinal))
                 .forEach((rank) -> printPrizeInfo(prizeMap, rankMap, rank));
-        System.out.printf(EARNING_RATE_INFO, report.getEarningRate(), report.getEarningRateDescription());
+        System.out.printf(EARNING_RATE_INFO, report.getEarningRate(), report.getEarningRateType().getDescription());
     }
 
     private static void printPrizeInfo(Map<Rank, Prize> prizeMap, Map<Rank, Integer> rankMap, Rank rank) {

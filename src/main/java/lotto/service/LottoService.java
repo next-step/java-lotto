@@ -13,10 +13,7 @@ public class LottoService {
     private final Lotto lotto;
 
     public LottoService(int price, LottoConstraint lottoConstraint, AbstractPrizePackager prizePackager) {
-        lotto = new Lotto();
-        lotto.setPrice(price);
-        lotto.setConstraint(lottoConstraint);
-        lotto.setPrizeInfo(prizePackager.pack());
+        lotto = new Lotto(price, lottoConstraint, prizePackager.pack());
     }
 
     public Integer getPrice() {
@@ -29,10 +26,6 @@ public class LottoService {
 
     public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {
         return this.lotto.checkRank(pick, winningBalls);
-    }
-
-    public Prize getPrize(Rank rank) {
-        return lotto.getPrize(rank);
     }
 
     public Map<Rank, Prize> getPrizeMap() {

@@ -17,20 +17,12 @@ public class Pick {
     }
 
     public Pick(PickType pickType, Collection<Integer> balls) {
-        setType(pickType);
-        setBalls(balls);
-    }
-
-    public void setBalls(Collection<Integer> balls) {
+        this.type = pickType;
         this.balls.addAll(balls);
     }
 
     public Set<Integer> getBalls() {
         return balls;
-    }
-
-    public void setType(PickType type) {
-        this.type = type;
     }
 
     public PickType getType() {

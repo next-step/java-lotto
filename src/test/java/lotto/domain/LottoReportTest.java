@@ -14,26 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoReportTest {
 
     @Test
-    void testGetCost(){
-        LottoReport lottoReport = new LottoReport();
-        lottoReport.setCost(2000L);
-
-        assertThat(lottoReport.getCost()).isEqualTo(2000L);
-    }
-
-    @Test
-    void testGetTotalEarnings(){
-        LottoReport lottoReport = new LottoReport();
-        lottoReport.addEarnings(1000L);
-        lottoReport.addEarnings(5000L);
-        Long totalEarnings = lottoReport.getTotalEarnings();
-
-        assertThat(totalEarnings).isEqualTo(6000L);
-    }
-
-    @Test
     void testGetRankMap(){
-        LottoReport lottoReport = new LottoReport();
+        LottoReport lottoReport = new LottoReport(10000L);
         lottoReport.addRanks(Rank.FIRST);
         Map<Rank, Integer> rankMap = lottoReport.getRankMap();
         assertThat(rankMap).extractingByKey(Rank.FIRST).isEqualTo(1);
@@ -41,8 +23,7 @@ public class LottoReportTest {
 
     @Test
     void testGetEarningRate(){
-        LottoReport lottoReport = new LottoReport();
-        lottoReport.setCost(2000L);
+        LottoReport lottoReport = new LottoReport(2000L);
         lottoReport.addEarnings(1000L);
         lottoReport.addEarnings(5000L);
 
@@ -52,12 +33,11 @@ public class LottoReportTest {
 
     @ParameterizedTest
     @CsvSource(value = {"2000,이득","6000,본전","8000,손해"})
-    void testGetEarningDescription(Long cost, String result){
-        LottoReport lottoReport = new LottoReport();
-        lottoReport.setCost(cost);
+    void testGetEarningType(Long cost, String result){
+        LottoReport lottoReport = new LottoReport(cost);
         lottoReport.addEarnings(1000L);
         lottoReport.addEarnings(5000L);
 
-        assertThat(lottoReport.getEarningRateDescription()).isEqualTo(result);
+        assertThat(lottoReport.getEarningRateType().getDescription()).isEqualTo(result);
     }
 }

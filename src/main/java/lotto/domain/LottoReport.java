@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.EarningRateType;
 import lotto.domain.enums.Rank;
 
 import java.math.BigDecimal;
@@ -8,15 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoReport {
-    private static final String BREAK_EVEN = "본전";
-    private static final String GAIN = "이득";
-    private static final String LOSS = "손해";
-    private Long cost = 0L;
+    private final Long cost;
     private Long totalEarnings = 0L;
     private final Map<Rank, Integer> rankMap = new HashMap<>();
 
-    public Long getTotalEarnings() {
-        return totalEarnings;
+    public LottoReport(Long cost) {
+        this.cost = cost;
     }
 
     public void addEarnings(Long earning) {
@@ -31,14 +29,6 @@ public class LottoReport {
         rankMap.compute(rank, (key, count) -> count == null ? 1 : ++count);
     }
 
-    public void setCost(Long cost) {
-        this.cost = cost;
-    }
-
-    public Long getCost() {
-        return cost;
-    }
-
     public BigDecimal getEarningRate() {
         return BigDecimal.valueOf(totalEarnings).divide(BigDecimal.valueOf(cost), 2, RoundingMode.HALF_UP);
     }
@@ -48,10 +38,10 @@ public class LottoReport {
         addEarnings(prize.getCash());
     }
 
-    public String getEarningRateDescription() {
+    public EarningRateType getEarningRateType() {
         if(totalEarnings.equals(cost)){
-            return BREAK_EVEN;
+            return EarningRateType.BREAK_EVEN;
         }
-        return totalEarnings.compareTo(cost) > 0  ? GAIN : LOSS;
+        return totalEarnings.compareTo(cost) > 0  ? EarningRateType.GAIN : EarningRateType.LOSS;
     }
 }

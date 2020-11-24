@@ -10,25 +10,23 @@ public class LottoTest {
     @Test
     void testGetPrice(){
         Integer testPrice = 1000;
-        Lotto lotto = new Lotto();
-        lotto.setPrice(testPrice);
+        Lotto lotto = new Lotto(testPrice, new LottoConstraint(6,45), new PrizeInfo());
         assertThat(lotto.getPrice()).isEqualTo(testPrice);
     }
 
     @Test
     void testGetPrizeInfo(){
-        Lotto lotto = new Lotto();
+
         Long first_prize = 2000000000L;
         PrizeInfo prizeInfo = new PrizeInfo();
         prizeInfo.add(Rank.FIRST, first_prize, Currency.WON, "test");
-        lotto.setPrizeInfo(prizeInfo);
-        assertThat(lotto.getPrize(Rank.FIRST)).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON, "test"));
+        Lotto lotto = new Lotto(1000, new LottoConstraint(6, 45), prizeInfo);
+        assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON, "test"));
     }
 
     @Test
     void testGetConstraint(){
-        Lotto lotto = new Lotto();
-        lotto.setConstraint(new LottoConstraint(6, 45));
+        Lotto lotto = new Lotto(1000, new LottoConstraint(6, 45), new PrizeInfo());
         LottoConstraint lottoConstraint = lotto.getConstraint();
         assertThat(lottoConstraint).isNotNull();
         assertThat(lottoConstraint.getCountOfNumber()).isEqualTo(6);
@@ -36,11 +34,10 @@ public class LottoTest {
     }
     @Test
     void testGetPrizeMap(){
-        Lotto lotto = new Lotto();
         Long first_prize = 2000000000L;
         PrizeInfo prizeInfo = new PrizeInfo();
         prizeInfo.add(Rank.FIRST, first_prize, Currency.WON, "test");
-        lotto.setPrizeInfo(prizeInfo);
+        Lotto lotto = new Lotto(1000, new LottoConstraint(6,45), prizeInfo);
         assertThat(lotto.getPrizeMap()).extractingByKey(Rank.FIRST).isEqualTo(new Prize(Rank.FIRST, first_prize, Currency.WON, "test"));
     }
 }
