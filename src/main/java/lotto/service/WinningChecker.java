@@ -15,7 +15,7 @@ public class WinningChecker {
         this.winningLotto = winningLotto;
     }
 
-    public WinningRanks checkRanks(Lottos lottos) {
+    public WinningRanks getWinningRanks(Lottos lottos) {
         return new WinningRanks(lottos.getRankMatchers(winningLotto).stream()
                 .map(WinningRank::getWinningRank)
                 .collect(Collectors.toList()));

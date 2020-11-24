@@ -23,7 +23,7 @@ public class Main {
 
         WinningChecker winningChecker = new WinningChecker(winningLotto);
 
-        WinningRanks winningRanks = winningChecker.checkRanks(lottos);
+        WinningRanks winningRanks = winningChecker.getWinningRanks(lottos);
 
         WinningRankStatistics winningRankStatistics = new WinningRankStatistics(winningRanks);
 
