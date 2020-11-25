@@ -48,6 +48,10 @@ public class LottoController {
         int manualQuantity = inputView.inputManualLottoQuantity();
         int autoQuantity = calculateAutoQuantity(lottoQuantity, manualQuantity);
 
+        inputView.inputManualMention();
+        System.out.println("manualQuantity = " + manualQuantity);
+        List<String> manualNumbers = inputManualNumbers(inputView, manualQuantity);
+
         resultView.displayLottoQuantity(lottoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();
@@ -71,6 +75,12 @@ public class LottoController {
 
         double profit = LottoProfit.calculateProfit(lottoStatistics, priceTotal).getProfit();
         resultView.displayProfit(profit);
+    }
+
+    public List<String> inputManualNumbers(InputView inputView, int manualQuantity) {
+        return IntStream.rangeClosed(0, manualQuantity)
+                .mapToObj(i -> inputView.inputManualNumber())
+                .collect(Collectors.toList());
     }
 
     public int calculateAutoQuantity(int lottoQuantity, int manualQuantity) {

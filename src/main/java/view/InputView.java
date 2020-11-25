@@ -9,6 +9,7 @@ public class InputView {
     private final String LAST_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private final String LOTTO_BONUS_MENTION = "보너스 볼을 입력해 주세요.";
     private final String LOTTO_MANUAL_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private final String LOTTO_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
     public int inputPrice() {
         System.out.println(LOTTO_PRICE_TOTAL);
@@ -29,4 +30,13 @@ public class InputView {
         System.out.println(LOTTO_MANUAL_QUANTITY);
         return scanner.nextInt();
     }
+
+    public void inputManualMention() {
+        System.out.println(LOTTO_MANUAL_NUMBER);
+    }
+
+    public String inputManualNumber() {
+        return scanner.nextLine();
+    }
+
 }
