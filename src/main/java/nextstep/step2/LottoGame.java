@@ -1,9 +1,6 @@
 package nextstep.step2;
 
-import nextstep.step2.domain.LottoCount;
-import nextstep.step2.domain.LottoNumber;
-import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoPurchase;
+import nextstep.step2.domain.*;
 import nextstep.step2.view.InputView;
 import nextstep.step2.view.LottoResultView;
 
@@ -23,7 +20,8 @@ public class LottoGame {
 		final String winningNumber = getLastWeekLotto(); //지난주 로또번호 입력
 		final LottoNumber bonusNumber = getBonusNumber();  //보너스 번호 입력
 		//당첨통계 출력
-		controller.printLottoStaticsic(winningNumber, bonusNumber, purchase, autoLottos, resultView);
+		LottoStaticstic lottoStaticstic = new LottoStaticstic(winningNumber, purchase, bonusNumber);
+		controller.printLottoStaticsic(lottoStaticstic, autoLottos, resultView);
 	}
 
 	private static LottoNumber getBonusNumber() {

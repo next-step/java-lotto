@@ -23,7 +23,8 @@ public class LottoControllerTest {
 		LottoCount lottoCount = new LottoCount(1, lottoPurchase.getLottoCount());
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25";
 		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoCount, manualLottos, resultView);
-		underTest.printLottoStaticsic("1,2,3,4,5,6", bonusNumber, lottoPurchase, autoLottos, resultView);
+		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4,5,6", lottoPurchase, bonusNumber);
+		underTest.printLottoStaticsic(lottoStaticstic, autoLottos, resultView);
 	}
 
 	@Test

@@ -18,8 +18,7 @@ public class LottoController {
 		return printLottoListAndReturnLottos(lottoCount, manaulLottos);
 	}
 
-	public void printLottoStaticsic(String winnerNumbers, LottoNumber bonusNumber, LottoPurchase purchase, List<Lotto> lottoList, LottoResultView resultView) {
-		LottoStaticstic lottoStaticstic = new LottoStaticstic(winnerNumbers, purchase, bonusNumber);
+	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, List<Lotto> lottoList, LottoResultView resultView) {
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
 		resultView.printLottoStaticsic(lottoRewardListMap);
 		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
