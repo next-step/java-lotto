@@ -1,6 +1,7 @@
 package lotto.strategy;
 
-import lotto.model.LottoNumber;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,13 +13,15 @@ public class AutoStrategy implements DrawingStrategy {
             .collect(Collectors.toList());
 
     @Override
-    public SortedSet<LottoNumber> drawNumbers() {
+    public LottoTicket drawNumbers() {
         Collections.shuffle(candidates);
 
-        return candidates.subList(0, NUMBER_COUNT)
+        SortedSet<LottoNumber> numbers = candidates.subList(0, NUMBER_COUNT)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
+
+        return new LottoTicket(numbers);
     }
 
 }

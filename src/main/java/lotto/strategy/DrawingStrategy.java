@@ -1,13 +1,11 @@
 package lotto.strategy;
 
-import lotto.model.LottoNumber;
-
-import java.util.SortedSet;
+import lotto.model.lotto.LottoTicket;
 
 public interface DrawingStrategy {
     int NUMBER_COUNT = 6;
     int THRESHOLD = 45;
 
-    SortedSet<LottoNumber> drawNumbers();
+    LottoTicket drawNumbers();
 
 }

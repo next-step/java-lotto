@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.lotto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final static String RANGE_ERROR_MESSAGE = "유효한 로또 번호가 아닙니다.";

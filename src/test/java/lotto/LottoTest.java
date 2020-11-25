@@ -1,7 +1,8 @@
 package lotto;
 
 import lotto.model.CandidateLotto;
-import lotto.model.LottoNumber;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.Test;
 import utils.TestUtils;
@@ -22,7 +23,7 @@ public class LottoTest {
 
         int numberCount = TestUtils.getNumberCount();
 
-        SortedSet<LottoNumber> testNumbers = testNumbers(numberCount, e -> new LottoNumber(1));
+        LottoTicket testNumbers = testNumbers(numberCount, e -> new LottoNumber(1));
         assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
 
     }
@@ -34,7 +35,7 @@ public class LottoTest {
         int numberCount = TestUtils.getNumberCount();
         int threshold = TestUtils.getThreshold();
 
-        SortedSet<LottoNumber> testNumbers = testNumbers(numberCount, e -> new LottoNumber(threshold - e));
+        LottoTicket testNumbers = testNumbers(numberCount, e -> new LottoNumber(threshold - e));
 
         assertThat(new CandidateLotto(new ManualStrategy(testNumbers))).isNotNull();
     }
@@ -45,7 +46,7 @@ public class LottoTest {
         int numberCount = TestUtils.getNumberCount();
         int threshold = TestUtils.getThreshold();
 
-        SortedSet<LottoNumber> manualNumbers = testNumbers(numberCount, e -> new LottoNumber(threshold - e));
+        LottoTicket manualNumbers = testNumbers(numberCount, e -> new LottoNumber(threshold - e));
 
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
@@ -59,8 +60,8 @@ public class LottoTest {
         int numberCount = TestUtils.getNumberCount();
         int threshold = TestUtils.getThreshold();
 
-        SortedSet<LottoNumber> manualNumbers = testNumbers(numberCount, e -> new LottoNumber(e+1));
-        SortedSet<LottoNumber> winnerNumbers = testNumbers(numberCount, e ->  new LottoNumber(e+1));
+        LottoTicket manualNumbers = testNumbers(numberCount, e -> new LottoNumber(e+1));
+        LottoTicket winnerNumbers = testNumbers(numberCount, e ->  new LottoNumber(e+1));
 
         winnerNumbers.remove(new LottoNumber(1));
         winnerNumbers.add(new LottoNumber(threshold));
@@ -72,10 +73,12 @@ public class LottoTest {
     }
 
 
-    private SortedSet<LottoNumber> testNumbers(int numberCount, IntFunction<LottoNumber> mapper) {
-        return IntStream.range(0, numberCount)
+    private LottoTicket testNumbers(int numberCount, IntFunction<LottoNumber> mapper) {
+        SortedSet<LottoNumber> numbers = IntStream.range(0, numberCount)
                 .mapToObj(mapper)
                 .collect(Collectors.toCollection(TreeSet::new));
+
+        return new LottoTicket(numbers);
     }
 
 }

@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.model.LottoCount;
+import lotto.model.lotto.LottoCount;
 
 import org.junit.jupiter.api.Test;
 

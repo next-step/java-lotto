@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.model.lotto.*;
 import lotto.strategy.ManualStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -20,7 +21,7 @@ public class LottoController {
         amount = new Amount(inputAmount);
 
         String manualCount = InputView.printInputManualLottoCountMessageNGetCount();
-        lottoCount = new LottoCount(amount.getPrePurchaseAmount(0, Lotto.PRICE),manualCount);
+        lottoCount = new LottoCount(amount.getPrePurchaseAmount(0, Lotto.PRICE), manualCount);
 
         buyLottoes();
 
@@ -37,9 +38,9 @@ public class LottoController {
 
     private void buyLottoes() {
         List<CandidateLotto> manualLottos = InputView.printInputManualLottoesMessageNGetManualLotoes(lottoCount.getManualCount());
-        amount.pay(lottoCount.getManualCount());
+        amount.pay(lottoCount.getManualCount() * Lotto.PRICE);
         lottoes = new Lottoes(lottoCount.getAutoCount(), Optional.of(manualLottos));
-        amount.pay(lottoCount.getAutoCount());
+        amount.pay(lottoCount.getAutoCount() * Lotto.PRICE);
 
         ResultView.printBuyMessage(lottoCount.getManualCount(), lottoCount.getAutoCount());
         ResultView.printLottoes(lottoes.getLottoes());
@@ -48,7 +49,7 @@ public class LottoController {
     private void lottery() {
         int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount.getTotalCount(), Lotto.PRICE);
 
-        List<SortedSet<LottoNumber>> lottoesNumbers = lottoes.getLottoes();
+        List<LottoTicket> lottoesNumbers = lottoes.getLottoes();
         Map<Hit, Integer> winnerNumbers = winningLotto.getResult(lottoesNumbers);
         double earningRate = winningLotto.getEarningRate(prePurchaseAmount, lottoesNumbers);
 

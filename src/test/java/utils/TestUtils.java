@@ -1,7 +1,7 @@
 package utils;
 
 import lotto.model.CandidateLotto;
-import lotto.model.LottoNumber;
+import lotto.model.lotto.LottoNumber;
 import lotto.strategy.DrawingStrategy;
 import util.CommonUtils;
 

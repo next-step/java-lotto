@@ -1,5 +1,9 @@
 package lotto.model;
 
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 public enum Hit {
@@ -14,16 +18,16 @@ public enum Hit {
     private final static String HIT_MESSAGE = "%s (%d원)";
 
     private int hitCount;
-    private int reward;
+    private long reward;
     private String rewardMessage;
 
-    Hit(int hitCount, int reward, String rewardMessage) {
+    Hit(int hitCount, long reward, String rewardMessage) {
         this.hitCount = hitCount;
         this.reward = reward;
         this.rewardMessage = rewardMessage;
     }
 
-    public static Hit findByNumbers(SortedSet<LottoNumber> numbers, LottoNumber bonus) {
+    public static Hit findByNumbers(LottoTicket numbers, LottoNumber bonus) {
         Hit hit = Arrays.stream(sortedValues())
                 .filter(value -> value.hitCount == numbers.size())
                 .findFirst()
@@ -49,18 +53,18 @@ public enum Hit {
         return hits;
     }
 
-    public int calculateReword(int count) {
+    public long calculateReword(int count) {
         return this.reward * count;
     }
 
     private static Hit[] sortedValues() {
         Hit[] hits = Hit.values();
-        Arrays.sort(hits, (x,y) -> y.reward - x.reward);
+        Arrays.sort(hits, (x,y) -> BigDecimal.valueOf(y.reward).subtract(BigDecimal.valueOf(x.reward)).intValue());
         return hits;
     }
 
-    private static boolean bonusCondition(Hit hit, SortedSet<LottoNumber> numbers, LottoNumber bonus){
-        return hit.equals(HIT_6) && numbers.contains(bonus);
+    private static boolean bonusCondition(Hit hit, LottoTicket numbers, LottoNumber bonus){
+        return hit.equals(HIT_6) && numbers.contain(bonus);
     }
 
     @Override

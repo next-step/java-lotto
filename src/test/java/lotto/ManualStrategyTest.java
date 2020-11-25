@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.model.LottoNumber;
-import lotto.model.WinningLotto;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.WinningLotto;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

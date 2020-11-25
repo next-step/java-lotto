@@ -1,12 +1,12 @@
-package lotto.model;
+package lotto.model.lotto;
 
+import lotto.model.Hit;
 import lotto.strategy.DrawingStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
 
 public class WinningLotto extends Lotto {
     private final static String CONTAIN_BONUS_ERROR_MESSAGE = "당첨 번호에는 보너스 볼 번호가 들어갈 수 없습니다.";
@@ -14,14 +14,14 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(LottoNumber bonus, DrawingStrategy drawingStrategy) {
         super(drawingStrategy);
-        if (numbers.contains(bonus)) {
+        if (numbers.contain(bonus)) {
             throw new IllegalArgumentException(CONTAIN_BONUS_ERROR_MESSAGE);
         }
         this.bonus = bonus;
     }
 
 
-    public Map<Hit, Integer> getResult(List<SortedSet<LottoNumber>> lottoes) {
+    public Map<Hit, Integer> getResult(List<LottoTicket> lottoes) {
         Map<Hit, Integer> hits = Hit.getHits();
 
         lottoes.stream()
@@ -33,9 +33,9 @@ public class WinningLotto extends Lotto {
     }
 
 
-    public double getEarningRate(int amount, List<SortedSet<LottoNumber>> numbers) {
-        int totalReword = getResult(numbers).entrySet().stream()
-                .mapToInt(this::calculateReword)
+    public double getEarningRate(int amount, List<LottoTicket> numbers) {
+        long totalReword = getResult(numbers).entrySet().stream()
+                .mapToLong(this::calculateReword)
                 .sum();
 
         BigDecimal safeReword = BigDecimal.valueOf((double) totalReword);
@@ -46,12 +46,12 @@ public class WinningLotto extends Lotto {
     }
 
 
-    private int calculateReword(Map.Entry<Hit, Integer> hits) {
+    private long calculateReword(Map.Entry<Hit, Integer> hits) {
         return hits.getKey().calculateReword(hits.getValue());
     }
 
     @Override
-    public SortedSet<LottoNumber> getNumbers() {
+    public LottoTicket getLottoTicket() {
         return null;
     }
 }

@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.Lottoes;
+import lotto.model.lotto.WinningLotto;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,10 +71,12 @@ public class WinningLottoTest {
     }
 
     private CandidateLotto makeCandidateLotto(int[] inputNumbers) {
-        return new CandidateLotto(new ManualStrategy(TestUtils.arrayToSortedSet(inputNumbers)));
+        LottoTicket lottoTicket = new LottoTicket(TestUtils.arrayToSortedSet(inputNumbers));
+        return new CandidateLotto(new ManualStrategy(lottoTicket));
     }
 
     private WinningLotto makeWinningLotto(int bonus) {
-        return new WinningLotto(new LottoNumber(bonus), new ManualStrategy(TestUtils.arrayToSortedSet(winningNumbers)));
+        LottoTicket lottoTicket = new LottoTicket(TestUtils.arrayToSortedSet(winningNumbers));
+        return new WinningLotto(new LottoNumber(bonus), new ManualStrategy(lottoTicket));
     }
 }

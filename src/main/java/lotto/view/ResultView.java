@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.model.Hit;
-import lotto.model.LottoNumber;
+import lotto.model.lotto.LottoTicket;
 import util.CommonUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
+
 
 public class ResultView {
     private final static String NUMBERS_DELIMITER = ", ";
@@ -25,8 +25,9 @@ public class ResultView {
         System.out.println(buyMessage);
     }
 
-    public static void printLottoes(List<SortedSet<LottoNumber>> lottos) {
+    public static void printLottoes(List<LottoTicket> lottos) {
         lottos.stream()
+                .map(LottoTicket::getNumbers)
                 .map(CommonUtils::sortedSetToArray)
                 .map(ResultView::convertNumbersFormat)
                 .forEach(System.out::println);

@@ -1,5 +1,6 @@
-package lotto.model;
+package lotto.model.lotto;
 
+import lotto.model.CandidateLotto;
 import lotto.strategy.AutoStrategy;
 
 import java.util.*;
@@ -18,9 +19,9 @@ public class Lottoes {
     }
 
 
-    public List<SortedSet<LottoNumber>> getLottoes() {
+    public List<LottoTicket> getLottoes() {
         return lottoes.stream()
-                .map(CandidateLotto::getNumbers)
+                .map(CandidateLotto::getLottoTicket)
                 .collect(Collectors.toList());
     }
 
