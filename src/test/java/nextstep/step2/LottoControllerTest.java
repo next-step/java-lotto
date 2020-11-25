@@ -31,26 +31,26 @@ public class LottoControllerTest {
 	@DisplayName("수동로또를 구한다")
 	public void purchaseManualLottosTest() {
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25:30,31,32,33,34,35";
-		Lottos manualLottoList = underTest.purchaseManualLottos(manualLottos);
-		assertTrue(manualLottoList.getLottos().get(0).getNumbers().contains(new LottoNumber(1)));
-		assertTrue(manualLottoList.getLottos().get(1).getNumbers().contains(new LottoNumber(20)));
-		assertTrue(manualLottoList.getLottos().get(2).getNumbers().contains(new LottoNumber(30)));
+		List<Lotto> manualLottoList = Lottos.purchaseManualLottos(manualLottos);
+		assertTrue(manualLottoList.get(0).getNumbers().contains(new LottoNumber(1)));
+		assertTrue(manualLottoList.get(1).getNumbers().contains(new LottoNumber(20)));
+		assertTrue(manualLottoList.get(2).getNumbers().contains(new LottoNumber(30)));
 	}
 
 	@Test
 	@DisplayName("자동로또를 구한다.")
 	public void purchaseAutoLottosTest() {
-		Lottos autoLottoList = underTest.purchaseAutoLottos(2);
-		assertThat(autoLottoList.getLottos()).hasSize(2);
+		List<Lotto> autoLottoList = Lottos.purchaseAutoLottos(2);
+		assertThat(autoLottoList).hasSize(2);
 	}
 
 	@Test
 	@DisplayName("수동과 자동으로 구입한 로또를 합친다.")
 	public void mergeLottosTest() {
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25:30,31,32,33,34,35";
-		Lottos manualLottoList = underTest.purchaseManualLottos(manualLottos);
-		Lottos autoLottoList = underTest.purchaseAutoLottos(3);
-		Lottos lottos = underTest.mergeLottos(manualLottoList, autoLottoList);
+//		List<Lotto> manualLottoList = Lottos.purchaseManualLottos(manualLottos);
+//		List<Lotto> autoLottoList = Lottos.purchaseAutoLottos(3);
+		Lottos lottos = Lottos.mergeLottos(manualLottos, 3);
 		assertThat(lottos.getLottos()).hasSize(6);
 		assertThat(lottos.getLottos().get(0).getNumbers()).isEqualTo(Lotto.of("1,2,3,13,14,15").getNumbers());
 
