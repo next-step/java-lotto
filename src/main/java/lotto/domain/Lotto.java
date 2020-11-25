@@ -1,21 +1,23 @@
 package lotto.domain;
 
+import java.util.Set;
+
 public class Lotto {
 
-    private LottoNumbers lottoPickNumber;
+    private final Set<Integer> lottoPickNumber;
 
-    public Lotto(LottoMachine lottoMachine) {
-        this.lottoPickNumber = lottoMachine.createLottoNumber();
+    public Lotto(Set<Integer> lottoPickNumbers) {
+        this.lottoPickNumber = lottoPickNumbers;
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoPickNumber.getLottoNumbers().stream()
-                                    .filter(prizeLotto::existByIndexNumber)
-                                    .count();
+        int prizeCount = (int) lottoPickNumber.stream()
+                .filter(prizeLotto::existByIndexNumber)
+                .count();
         return PrizeInformation.findByPrizePrice(prizeCount);
     }
 
-    public LottoNumbers getLottoPickNumber() {
+    public Set<Integer> getLottoPickNumber() {
         return lottoPickNumber;
     }
 

@@ -1,16 +1,17 @@
 package lotto.domain;
 
+import java.util.Set;
+
 public class PrizeLotto  {
 
-    private LottoNumbers prizeNumbers;
+    private Set<Integer> prizeNumbers;
 
-    public PrizeLotto(LottoNumbers prizeNumbers) {
+    public PrizeLotto(Set<Integer> prizeNumbers) {
         this.prizeNumbers = prizeNumbers;
     }
 
     public boolean existByIndexNumber(int lottoNumber) {
-        return prizeNumbers.getLottoNumbers()
-                            .contains(lottoNumber);
+        return prizeNumbers.contains(lottoNumber);
     }
 
 }

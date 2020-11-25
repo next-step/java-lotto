@@ -21,10 +21,11 @@ public class LottoTest {
     public void createLottoInstanceTest() {
 
         //Given & When
-        Lotto lotto = new Lotto(new LottoAutoMachine());
+        Lotto lotto = new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
 
         //Then
         assertThat(lotto.getLottoPickNumber()).isNotNull();
+        assertThat(lotto.getLottoPickNumber()).hasSize(6);
     }
 
     @DisplayName("matchPrizeNumber 메서드 테스트")
@@ -32,15 +33,10 @@ public class LottoTest {
     @MethodSource("createLottoNumber")
     public void matchPrizeNumberTest(TreeSet<Integer> expected) {
         //Given
-        Lotto lotto = new Lotto(new LottoMachine() {
-            @Override
-            LottoNumbers createLottoNumber() {
-                return new LottoNumbers(expected);
-            }
-        });
+        Lotto lotto = new Lotto(expected);
 
         //When
-        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(new LottoNumbers(expected)));
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(expected));
 
         //That
         assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(prizeInformation.getMatchNumberCount()));

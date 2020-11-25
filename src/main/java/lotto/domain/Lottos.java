@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -22,7 +23,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoNumbers getLotto(int index) {
+    public Set<Integer> getLotto(int index) {
         return lottos.get(index).getLottoPickNumber();
     }
 

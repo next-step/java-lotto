@@ -18,7 +18,7 @@ public class PrizeLottoTest {
     @MethodSource("createTreeSet")
     public void createInstanceTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumbers(prizeNumbers));
+        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers);
 
         //Then
         assertThat(prizeLotto).isNotNull();
@@ -37,7 +37,7 @@ public class PrizeLottoTest {
     @MethodSource("createTreeSet")
     public void findByIndexTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumbers(prizeNumbers));
+        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers);
 
         //Then
         for (int number : prizeNumbers) {

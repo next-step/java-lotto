@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +20,7 @@ public class LottosTest {
         List<Lotto> lottoNumbers = new ArrayList<>();
 
         //When
-        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(new LottoAutoMachine())));
+        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)))));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //Then
@@ -36,23 +33,19 @@ public class LottosTest {
 
         //Given
         List<Lotto> expected = new ArrayList<>();
-        expected.add(0, new Lotto(new LottoAutoMachine()));
-        expected.add(1, new Lotto(new LottoAutoMachine()));
-        expected.add(2, new Lotto(new LottoMachine() {
-            @Override
-            LottoNumbers createLottoNumber() {
-                return new LottoNumbers(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20)));
-            }
-        }));
+        expected.add(0, new Lotto(new TreeSet<>(Arrays.asList(5, 6, 7, 8, 9, 10))));
+        expected.add(1, new Lotto(new TreeSet<>(Arrays.asList(2, 3, 5, 7, 9, 11))));
+        expected.add(2, new Lotto(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
+
 
         Lottos lottos = new Lottos(expected);
 
         //When
-        LottoNumbers result = lottos.getLotto(expected.size() - 1);
+        Set<Integer> result = lottos.getLotto(expected.size() - 1);
 
         //Then
         assertThat(result).isNotNull();
-        assertThat(result.getLottoNumbers()).contains(10, 15, 16, 17, 18, 20);
+        assertThat(result).contains(10, 15, 16, 17, 18, 20);
 
     }
 
@@ -63,15 +56,11 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), new LottoMachine() {
-            @Override
-            LottoNumbers createLottoNumber() {
-                return new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9)));
-            }
-        });
+        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), () -> new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
+
 
         //When
-        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 7, 8, 9)))));
+        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
 
         //Then
         assertThat(reward).isNotNull();

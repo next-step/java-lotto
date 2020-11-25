@@ -17,8 +17,7 @@ public class ResultView {
 
     public static void outputLottos(Lottos lottos) {
         IntStream.range(0, lottos.quantity())
-                .forEach(i -> System.out.println(lottos.getLotto(i)
-                                                       .getLottoNumbers()));
+                .forEach(i -> System.out.println(lottos.getLotto(i)));
     }
 
     public static void outputPrizeStatistics(Reward reward) {
