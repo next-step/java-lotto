@@ -1,12 +1,14 @@
 package my.project.lotto.domain;
 
+import my.project.constants.Rule;
+
 import java.util.List;
 
 public class Statistics {
     private final StatRecord statRecord;
 
     public Statistics() {
-        this.statRecord = new StatRecord();
+        statRecord = new StatRecord();
     }
 
     public StatRecord analyze(StatInfo info) {
@@ -16,32 +18,20 @@ public class Statistics {
     }
 
     private void rank(StatInfo info) {
-       List<GameRecord> records = info.getRecords();
-       for (GameRecord record : records) {
-           setRank(hasWinNumber(record, info.getWinningNumber()));
-       }
-    }
-
-    private int hasWinNumber(GameRecord record, List<Integer> winningNumber) {
-        int myRecord = 0;
-        for (int num : record.get()) {
-            myRecord += count(winningNumber, num);
+        List<GameRecord> records = info.getRecords();
+        for (GameRecord record : records) {
+            Win rank = Win.findRank(record, info.getWinningNumber());
+            statRecord.setRank(rank);
         }
-        return myRecord;
-
-    }
-
-    private int count(List<Integer> winningNumber, int num) {
-        int ret = 0;
-        if (winningNumber.contains(num)) ret = 1;
-        return ret;
-    }
-
-    private void setRank(int winNumber) {
-
     }
 
     private void profit(StatInfo info) {
+        statRecord.setProfit(
+                (double) ((Rule.FIRST_PRICE * statRecord.getFirst())
+                        + (Rule.THIRD_PRICE * statRecord.getThird())
+                        + (Rule.FOURTH_PRICE * statRecord.getFourth())
+                        + (Rule.FIFTH_PRICE * statRecord.getFifth()))
+                        / info.getMoney());
     }
 
 }

@@ -54,25 +54,16 @@ class GameRecordTest {
     @Test
     void givenZero_thenThrowException() {
         assertThatThrownBy(() -> record.add(0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .withFailMessage("로또 숫자는 1~45 사이입니다.")
-                .hasMessage("로또 숫자는 1~45 사이입니다.")
-                .hasMessageStartingWith("로또")
-                .hasMessageContaining("1~45")
-                .hasMessageEndingWith("입니다.")
-                .hasStackTraceContaining("IllegalArgumentException");
+                .withFailMessage("0 혹은 음수가 포함되어 있습니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("음수를 전달할 경우 IllegalArgumentException 예외가 발생해야 한다")
     @Test
     void givenNegative_thenThrowException() {
         assertThatThrownBy(() -> record.add(-1))
-                .isInstanceOf(IllegalArgumentException.class)
-                .withFailMessage("로또 숫자는 1~45 사이입니다.")
-                .hasMessage("로또 숫자는 1~45 사이입니다.")
-                .hasMessageStartingWith("로또")
-                .hasMessageContaining("1~45")
-                .hasMessageEndingWith("입니다.")
-                .hasStackTraceContaining("IllegalArgumentException");
+                .withFailMessage("0 혹은 음수가 포함되어 있습니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
+
 }

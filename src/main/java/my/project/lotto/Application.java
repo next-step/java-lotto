@@ -19,9 +19,9 @@ public class Application {
 
         LottoController lctr = new LottoController(iv.getMoney());
         List<GameRecord> records = lctr.lotto();
-        rv.print(records);
+        rv.printGame(records);
 
         StatController sctr = new StatController(records, iv.getWinningNumber());
-        sctr.stat();
+        rv.printStat(sctr.stat());
     }
 }

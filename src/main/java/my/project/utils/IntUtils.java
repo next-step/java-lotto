@@ -1,6 +1,6 @@
 package my.project.utils;
 
-import my.project.constants.Rule;
+import my.project.constants.Comments;
 import my.project.messages.ExceptionMessages;
 
 public class IntUtils {
@@ -12,7 +12,10 @@ public class IntUtils {
 
     public static void isMoneyQualified(int money) {
         if (money < 1000) {
-            throw new IllegalArgumentException(Rule.MIN_MONEY);
+            throw new IllegalArgumentException(Comments.MIN_MONEY);
+        }
+        if (money > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(ExceptionMessages.INPUT_IS_OVER);
         }
     }
 

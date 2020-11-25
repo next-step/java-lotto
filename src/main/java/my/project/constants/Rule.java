@@ -10,8 +10,10 @@ public class Rule {
     public static final int MAX_NUMBER = 45;
     public static final int ONE_GAME_COUNT = 6;
 
-    public static final String MIN_MONEY = "구입금액은 1000원 이상입니다.";
-
+    public static final int FIRST_PRICE = 2000000000;
+    public static final int THIRD_PRICE = 1500000;
+    public static final int FOURTH_PRICE = 50000;
+    public static final int FIFTH_PRICE = 5000;
 
     private Rule() {
     }

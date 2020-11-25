@@ -1,8 +1,8 @@
 package my.project.lotto.controller;
 
 import my.project.lotto.domain.GameRecord;
-import my.project.lotto.domain.StatInfo;
 import my.project.lotto.domain.StatRecord;
+import my.project.lotto.domain.StatInfo;
 import my.project.lotto.domain.Statistics;
 import my.project.utils.CollectionUtils;
 import my.project.utils.StringUtils;
