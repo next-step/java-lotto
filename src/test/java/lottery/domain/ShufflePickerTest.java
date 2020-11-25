@@ -10,7 +10,7 @@ public class ShufflePickerTest {
     @RepeatedTest(20)
     void pick() {
         new ShufflePicker().pick().stream().forEach(l ->
-                assertThat(l).isBetween(new LotteryNumber(LotteryNumber.MIN), new LotteryNumber(LotteryNumber.MAX))
+                assertThat(l).isBetween(LotteryNumber.valueOf(LotteryNumber.MIN), LotteryNumber.valueOf(LotteryNumber.MAX))
         );
     }
 }

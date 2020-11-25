@@ -10,7 +10,7 @@ public class ShufflePicker implements Picker {
 
     public ShufflePicker() {
         basis = IntStream.rangeClosed(LotteryNumber.MIN, LotteryNumber.MAX)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
