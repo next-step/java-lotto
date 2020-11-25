@@ -36,10 +36,6 @@ public class RoundController {
 
     public void checkWinningView() {
         List<Integer> winningBalls = InputView.getCommaSeparatedInteger("지난 주 당첨 번호를 입력해 주세요.");
-        checkWinning(winningBalls);
-    }
-
-    public void checkWinning(Collection<Integer> winningBalls) {
         LottoConstraint constraint = lottoService.getConstraint();
         constraint.validate(winningBalls);
         roundService.checkWinning(winningBalls);

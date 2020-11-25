@@ -30,13 +30,4 @@ public class RoundControllerTest {
         assertThat(round).isNotNull();
         assertThat(round.getMyPicks()).hasSize(14);
     }
-
-    @Test
-    void testCheckWinning(){
-        Round round = roundController.autoBuy(2000000L);
-        roundController.checkWinning(round.getMyPicks().stream().map(Pick::getBalls).findFirst().get());
-        assertThat(round.getMyPicks()).anySatisfy(pick -> {
-           assertThat(pick.getRank()).isEqualTo(Rank.FIRST);
-        });
-    }
 }
