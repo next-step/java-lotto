@@ -1,6 +1,5 @@
 package step2.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LottoStore {
@@ -11,11 +10,7 @@ public class LottoStore {
     }
 
     public List<Integer> getLottoNumbers() {
-        Lotto lotto = new Lotto();
-        List<Integer> lottoNumbers = lotto.getTotalNumbers();
-        Collections.shuffle(lottoNumbers);
-        List<Integer> extractionLottoNumbers = lottoNumbers.subList(0, 6);
-        Collections.sort(extractionLottoNumbers);
-        return extractionLottoNumbers;
+        LottoMachine lottoMachine = new LottoMachine();
+        return lottoMachine.getLottoNumbers();
     }
 }
