@@ -15,6 +15,7 @@ public class WinningStatistics {
         this.stats = new TreeMap<>();
 
         stats.put(WinningRank.FIRST, 0);
+        stats.put(WinningRank.SECOND, 0);
         stats.put(WinningRank.THIRD, 0);
         stats.put(WinningRank.FOURTH, 0);
         stats.put(WinningRank.FIFTH, 0);

@@ -37,7 +37,7 @@ class WinningStatisticsTest {
     @DisplayName("내가 구매한 로또의 당첨통계를 구한다")
     void get_winning_statistics_of_lotto_bought() {
         // given
-        WinningNumber winningNumber = WinningNumber.of("1, 2, 3, 4, 5, 6");
+        WinningNumber winningNumber = WinningNumber.of("1, 2, 3, 4, 5, 6", "7");
         int expectedPrize = WinningRank.FIRST.getPrize() * 1
                 + WinningRank.THIRD.getPrize() * 1
                 + WinningRank.FOURTH.getPrize() * 1
