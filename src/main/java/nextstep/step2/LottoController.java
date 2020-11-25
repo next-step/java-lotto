@@ -25,35 +25,34 @@ public class LottoController {
 	}
 
 	private Lottos printLottoListAndReturnLottos(LottoCount lottoCount, String manaulLottos) {
-		List<Lotto> manualList = purchaseManualLottos(manaulLottos);
-		List<Lotto> autoList = purchaseAutoLottos(lottoCount.getAuto());
+		Lottos manualList = purchaseManualLottos(manaulLottos);
+		Lottos autoList = purchaseAutoLottos(lottoCount.getAuto());
 		Lottos purchaseLottos = mergeLottos(manualList, autoList);
 		LottoTicketView.printLottoTickets(purchaseLottos);
 		return purchaseLottos;
 	}
 
-	protected List<Lotto> purchaseManualLottos(String manualLottos) {
+	protected Lottos purchaseManualLottos(String manualLottos) {
 		String[] lottoNumbers = manualLottos.split(":");
 		List<Lotto> lottos = new ArrayList<>(lottoNumbers.length);
 		for(String numbers : lottoNumbers) {
 			lottos.add(Lotto.of(numbers));
 		}
-		return lottos;
+		return new Lottos(lottos);
 	}
 
-	protected List<Lotto> purchaseAutoLottos(int lottoCount) {
+	protected Lottos purchaseAutoLottos(int lottoCount) {
 		LottoAutoGenerator lottoGenerator = new LottoAutoGenerator();
 		List<Lotto> lottos = new ArrayList<>(lottoCount);
 		for(int i = 0; i < lottoCount; i++) {
 			lottos.add(lottoGenerator.getAutoNumbers());
 		}
-		return lottos;
+		return new Lottos(lottos);
 	}
 
-	protected Lottos mergeLottos(List<Lotto> manaual, List<Lotto> auto) {
-		List<Lotto> mergeList = Stream.of(manaual, auto)
+	protected Lottos mergeLottos(Lottos manaual, Lottos auto) {
+		return Stream.of(manaual.getLottos(), auto.getLottos())
 				.flatMap(Collection::stream)
-				.collect(Collectors.toList());
-		return new Lottos(mergeList);
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 }
