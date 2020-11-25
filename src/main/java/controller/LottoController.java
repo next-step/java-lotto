@@ -49,7 +49,7 @@ public class LottoController {
         int autoQuantity = calculateAutoQuantity(lottoQuantity, manualQuantity);
 
         inputView.inputManualMention();
-        List<String> manualNumbers = inputManualNumbers(inputView, manualQuantity);
+        Lottos manualLottos = inputManualNumbers(inputView, manualQuantity);
 
         resultView.displayLottoQuantity(manualQuantity, autoQuantity);
 
@@ -58,9 +58,9 @@ public class LottoController {
         resultView.displayLottos(lottos);
 
         String inputWinningNumber = inputView.inputLastWinningNumber();
-        LottoValidator.checkWinningNumberValidate(inputWinningNumber);
+        LottoValidator.checkLottoNumberValidate(inputWinningNumber);
         LottoNumbers winningNumbers = new LottoNumbers()
-                .createWinningNumbers(inputWinningNumber);
+                .createLottoNumbers(inputWinningNumber);
 
         int bonusNumber = inputView.inputBonusNumber();
         LottoValidator.checkLottoRange(bonusNumber);
@@ -76,14 +76,15 @@ public class LottoController {
         resultView.displayProfit(profit);
     }
 
-    public List<String> inputManualNumbers(InputView inputView, int manualQuantity) {
-        return IntStream.range(ZERO, manualQuantity)
+    public Lottos inputManualNumbers(InputView inputView, int manualQuantity) {
+        List<Lotto> lottos = IntStream.range(ZERO, manualQuantity)
                 .mapToObj(i -> {
                     String manualNumber = inputView.inputManualNumber();
-                    LottoValidator.checkManualDuplicate(manualNumber);
-                    return manualNumber;
+                    LottoValidator.checkLottoNumberValidate(manualNumber);
+                    return new Lotto(new LottoNumbers().createLottoNumbers(manualNumber));
                 })
                 .collect(Collectors.toList());
+        return Lottos.from(lottos);
     }
 
     public int calculateAutoQuantity(int lottoQuantity, int manualQuantity) {

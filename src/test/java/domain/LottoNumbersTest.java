@@ -19,7 +19,7 @@ class LottoNumbersTest {
         String winningNumbers = "1, 2, 3, 4, 5, 6";
 
         lottoNumbers = new LottoNumbers();
-        LottoNumbers winningLotto = lottoNumbers.createWinningNumbers(winningNumbers);
+        LottoNumbers winningLotto = lottoNumbers.createLottoNumbers(winningNumbers);
 
         assertThat(winningLotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }

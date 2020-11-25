@@ -17,7 +17,7 @@ public class LottoValidator {
         }
     }
 
-    public static void checkWinningNumberValidate(String winningNumbers) {
+    public static void checkLottoNumberValidate(String winningNumbers) {
         checkEmptyString(winningNumbers);
         String[] splitNumber = winningNumbers.split(NUMBER_DELIMITER);
         checkNumberLength(splitNumber);
@@ -65,15 +65,6 @@ public class LottoValidator {
     public static void checkManualQuantity(int lottoQuantity, int manualQuantity) {
         if(lottoQuantity < manualQuantity) {
             throw new IllegalArgumentException("로또 금액보다 큰 개수입니다.");
-        }
-    }
-
-    public static void checkManualDuplicate(String manualLotto) {
-        long manualCount = Arrays.stream(manualLotto.split(NUMBER_DELIMITER))
-                .distinct()
-                .count();
-        if(manualCount != LOTTO_LENGTH) {
-            throw new IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.");
         }
     }
 }

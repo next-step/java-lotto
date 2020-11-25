@@ -22,9 +22,9 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    public LottoNumbers createWinningNumbers(String winningNumbers) {
+    public LottoNumbers createLottoNumbers(String stringNumbers) {
         return new LottoNumbers().from(
-                Arrays.stream(winningNumbers.split(NUMBER_DELIMITER))
+                Arrays.stream(stringNumbers.split(NUMBER_DELIMITER))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );

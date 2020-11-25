@@ -73,7 +73,7 @@ class LottoControllerTest {
         String emptyString = "";
 
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkWinningNumberValidate(emptyString));
+                () -> LottoValidator.checkLottoNumberValidate(emptyString));
     }
 
     @Test
@@ -82,7 +82,7 @@ class LottoControllerTest {
         String wrongLength = "1, 2, 3, 4";
 
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkWinningNumberValidate(wrongLength));
+                () -> LottoValidator.checkLottoNumberValidate(wrongLength));
     }
 
     @ParameterizedTest
@@ -93,7 +93,7 @@ class LottoControllerTest {
     }, delimiter = ':')
     void checkLottoRange(String wrongValue) {
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
@@ -101,7 +101,7 @@ class LottoControllerTest {
     @CsvSource(value = {"0", "500", "999"})
     void checkLottoLowerPrice(String wrongValue) {
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
@@ -109,7 +109,7 @@ class LottoControllerTest {
     @CsvSource(value = {"1100", "1111", "11001"})
     void checkLottoWrongPrice(String wrongValue) {
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
@@ -150,12 +150,4 @@ class LottoControllerTest {
                 .isEqualTo(lottoQuantity - manualQuantity);
     }
 
-    @Test
-    @DisplayName("수동 로또 입력 시 중복 번호 입력 체크 기능")
-    void checkManualDuplicate() {
-        String manualLotto = "1, 2, 3, 4, 5, 1";
-
-        assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkManualDuplicate(manualLotto));
-    }
 }

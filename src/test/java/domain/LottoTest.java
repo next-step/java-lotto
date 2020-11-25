@@ -37,10 +37,10 @@ class LottoTest {
     void matchLottoNumbersDynamic(String winning, String test, int match) {
         int bonusNumber = 7;
         LottoNumbers winningNumbers = new LottoNumbers()
-                .createWinningNumbers(winning);
+                .createLottoNumbers(winning);
 
         LottoNumbers testNumbers = new LottoNumbers()
-                .createWinningNumbers(test);
+                .createLottoNumbers(test);
         Lotto testLotto = new Lotto(testNumbers);
         if(match >= 3) {
             assertThat(testLotto.matchLottoNumbers(winningNumbers, bonusNumber)
