@@ -28,4 +28,12 @@ public class Generator {
         List<Integer> numbers = lottoNumbers.stream().limit(6).collect(Collectors.toList());
         return new LottoTicket(numbers);
     }
+
+    public List<LottoTicket> generateLottoTickets(int input) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i <input ; i++) {
+            lottoTickets.add(generateLottoTicket());
+        }
+        return lottoTickets;
+    }
 }
