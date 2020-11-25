@@ -40,11 +40,17 @@ public class LottoTicket {
     return this.lottoNumbers.toString();
   }
 
-  public int getNumHit(WinningNumber winningNumber) {
+  public int guessNumHit(WinningNumber winningNumber) {
     int result = 0;
     for (LottoNumber lottoNumber : winningNumber) {
       result += this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
     return result;
+  }
+
+  public Rank decideRewardWithBonusBall(WinningNumber winningNumber, LottoNumber bonusNumber) {
+    int numHit = guessNumHit(winningNumber);
+    boolean matchedWithBonusBall = this.lottoNumbers.contains(bonusNumber);
+    return Rank.getRewardWithBonusBall(numHit, matchedWithBonusBall);
   }
 }

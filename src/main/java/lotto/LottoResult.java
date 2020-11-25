@@ -1,36 +1,32 @@
 package lotto;
 
-import static lotto.LottoGameConstant.MAXIMUM_REWARD_HIT;
-import static lotto.LottoGameConstant.MINIMUM_HIT;
-
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import lotto.dto.LottoResultDTO;
 
 public class LottoResult {
 
-  private final Map<Integer, Integer> hitHistory;
+  private final Map<Rank, Integer> hitHistory;
 
   public LottoResult() {
     this.hitHistory = new HashMap<>();
 
-    for (int hit = MINIMUM_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
-      this.hitHistory.put(hit, 0);
-    }
+    Arrays.stream(Rank.values())
+        .forEach(rank -> this.hitHistory.put(rank, 0));
   }
 
   public int calculateIncome() {
-    return Rank.calculateTotalReward(hitHistory);
+    return Arrays.stream(Rank.values())
+        .map(rank -> this.hitHistory.get(rank) * rank.getWinningReward())
+        .reduce(0, Integer::sum);
   }
 
-  public void recordHit(int numHit) {
-    this.hitHistory.put(numHit, this.hitHistory.get(numHit) + 1);
+  public void recordHit(Rank rank) {
+    this.hitHistory.put(rank, this.hitHistory.get(rank) + 1);
   }
 
-  public int getReward(int numHit) {
-    return Rank.getRewardFromNumHit(numHit);
-  }
-
-  public int getRecordedNumberOfHit(int numHit) {
-    return this.hitHistory.get(numHit);
+  public LottoResultDTO exportData() {
+    return new LottoResultDTO(new HashMap<>(this.hitHistory));
   }
 }

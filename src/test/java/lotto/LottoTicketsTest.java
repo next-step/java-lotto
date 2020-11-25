@@ -58,10 +58,11 @@ class LottoTicketsTest {
         .collect(collectingAndThen(toList(), LottoTickets::of));
 
     WinningNumber winningNumber = WinningNumber.of("1, 2, 3, 4, 5, 6");
+    LottoNumber bonusNumber = LottoNumber.of(7);
 
-    LottoResult result = tickets.settle(winningNumber);
+    LottoResult result = tickets.settle(winningNumber, bonusNumber);
 
-    assertThat(result.getRecordedNumberOfHit(6))
-        .isEqualTo(2);
+    assertThat(result.calculateIncome())
+        .isEqualTo(Rank.FIRST.getWinningReward() * 2);
   }
 }

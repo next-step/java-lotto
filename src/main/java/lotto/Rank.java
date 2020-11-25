@@ -1,37 +1,44 @@
 package lotto;
 
+import static lotto.LottoGameConstant.doesntCareBonus;
+import static lotto.LottoGameConstant.mustWithBonus;
+import static lotto.LottoGameConstant.mustWithoutBonus;
+
 import java.util.Arrays;
-import java.util.Map;
+import java.util.function.Function;
 
 public enum Rank {
-  HIT_SIX(6, 2_000_000_000),
-  HIT_FIVE(5, 30_000_000),
-  HIT_FOUR(4, 1_500_000),
-  HIT_THREE(3, 50_000),
-  MISS(0, 0);
+  FIRST(6, 2_000_000_000, doesntCareBonus),
+  SECOND(5, 30_000_000, mustWithBonus),
+  THIRD(5, 1_500_000, mustWithoutBonus),
+  FOURTH(4, 50_000, doesntCareBonus),
+  FIFTH(3, 5_000, doesntCareBonus),
+  MISS(0, 0, doesntCareBonus);
 
+
+  private final Function<Boolean, Boolean> isEffectedByBonus;
   private final int numHit;
   private final int winningReward;
 
-  Rank(int numHit, int winningReward) {
+  Rank(int numHit, int winningReward, Function<Boolean, Boolean> isEffectedByBonus) {
     this.numHit = numHit;
     this.winningReward = winningReward;
+    this.isEffectedByBonus = isEffectedByBonus;
   }
 
-  public static int calculateTotalReward(Map<Integer, Integer> hitHistory) {
-    int result = 0;
-    for (Rank rank : Rank.values()) {
-      result += hitHistory.get(rank.numHit) * rank.winningReward;
-    }
-
-    return result;
+  public int getNumHit() {
+    return this.numHit;
   }
 
-  public static int getRewardFromNumHit(int numHit) {
-    // !!! 된당..신기..
+  public int getWinningReward() {
+    return this.winningReward;
+  }
+
+  public static Rank getRewardWithBonusBall(int numHit, boolean matchedBonusNumber) {
     return Arrays.stream(Rank.values())
         .filter(rank -> rank.numHit == numHit)
+        .filter(rank -> rank.isEffectedByBonus.apply(matchedBonusNumber))
         .findAny()
-        .orElse(MISS).winningReward;
+        .orElse(MISS);
   }
 }

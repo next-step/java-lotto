@@ -1,10 +1,9 @@
 package lotto;
 
-import static lotto.LottoGameConstant.MAXIMUM_REWARD_HIT;
-import static lotto.LottoGameConstant.MINIMUM_REWARD_HIT;
-
 import lotto.views.InputView;
 import lotto.views.ResultView;
+import lotto.views.StatisticsExporter;
+import lotto.views.TicketsExporter;
 
 public class Client {
 
@@ -12,17 +11,20 @@ public class Client {
     Budget budget = Budget.of(InputView.askBudget());
     ResultView.printNumLotto(budget.getNumPossibleLotto());
 
-    LottoTickets purchasedTickets = budget.purchaseLotto(budget.getNumPossibleLotto());
-    ResultView.printLottoInfo(purchasedTickets.toString());
+    LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
+    TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
+    ResultView.printLottoInfo(ticketsExporter);
 
     WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
-    LottoResult lottoResult = purchasedTickets.settle(winningNumber);
+
+    LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
+    winningNumber.validateBonusNumberDuplication(bonusNumber);
+
+    LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
 
     ResultView.printStatisticsOpening();
-    for (int hit = MINIMUM_REWARD_HIT; hit <= MAXIMUM_REWARD_HIT; hit++) {
-      ResultView
-          .printRewards(hit, lottoResult.getReward(hit), lottoResult.getRecordedNumberOfHit(hit));
-    }
+    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult.exportData());
+    ResultView.printRewards(statisticsExporter);
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));

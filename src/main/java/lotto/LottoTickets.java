@@ -1,25 +1,14 @@
 package lotto;
 
 import java.util.List;
+import lotto.views.ReadOnlyLottoTickets;
 
-public class LottoTickets {
+public class LottoTickets implements ReadOnlyLottoTickets {
 
   private final List<LottoTicket> tickets;
 
   private LottoTickets(List<LottoTicket> tickets) {
     this.tickets = tickets;
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-
-    for (LottoTicket lottoTicket : tickets) {
-      builder.append(lottoTicket);
-      builder.append("\n");
-    }
-
-    return builder.toString();
   }
 
   public static LottoTickets of(List<LottoTicket> tickets) {
@@ -30,12 +19,22 @@ public class LottoTickets {
     return new LottoTickets(tickets);
   }
 
-  public LottoResult settle(WinningNumber winningNumber) {
+  public LottoResult settle(WinningNumber winningNumber, LottoNumber bonusNumber) {
     LottoResult lottoResult = new LottoResult();
     this.tickets.stream()
-        .map(lottoTicket -> lottoTicket.getNumHit(winningNumber))
+        .map(lottoTicket -> lottoTicket.decideRewardWithBonusBall(winningNumber, bonusNumber))
         .forEach(lottoResult::recordHit);
 
     return lottoResult;
+  }
+
+  @Override
+  public int getNumTicket() {
+    return this.tickets.size();
+  }
+
+  @Override
+  public String getTicket(int idx) {
+    return this.tickets.get(idx).toString();
   }
 }

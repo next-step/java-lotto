@@ -53,7 +53,7 @@ class LottoTicketTest {
   @CsvSource(value = {"1, 7, 8, 9, 10, 11:1", "1, 45, 6, 38, 9, 2:3"}, delimiter = ':')
   @DisplayName("contain 정상 출력 확인")
   void testContain(String input, int expected) {
-    assertThat(this.sampleTicket.getNumHit(WinningNumber.of(input)))
+    assertThat(this.sampleTicket.guessNumHit(WinningNumber.of(input)))
         .isEqualTo(expected);
   }
 }

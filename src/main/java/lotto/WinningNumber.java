@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import lotto.lottoexception.DuplicatedNumberException;
 import lotto.lottoexception.InvalidLottoFormatException;
 
 public class WinningNumber implements Iterable<LottoNumber> {
@@ -48,6 +49,12 @@ public class WinningNumber implements Iterable<LottoNumber> {
   private static void checkEquality(LottoNumber number1, LottoNumber number2) {
     if (number1.equals(number2)) {
       throw new InvalidLottoFormatException();
+    }
+  }
+
+  public void validateBonusNumberDuplication(LottoNumber lottoNumber) {
+    if (this.numbers.contains(lottoNumber)) {
+      throw new DuplicatedNumberException();
     }
   }
 
