@@ -19,8 +19,7 @@ public class LottoReport {
 
     public void addEarnings(Cash earning) {
         if(totalEarnings == null){
-            totalEarnings = new Cash(earning);
-            return;
+            totalEarnings = new Cash(earning.getCurrency());
         }
         totalEarnings.accumulate(earning);
     }

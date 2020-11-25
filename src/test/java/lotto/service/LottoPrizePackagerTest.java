@@ -55,4 +55,11 @@ public class LottoPrizePackagerTest {
         Rank lose = prizeInfo.checkRank(testPick, new WinningLottoBalls(new LottoBalls(1, 2, 7, 8, 9, 10), new LottoNumber(20)));
         assertThat(lose).isNull();
     }
+
+    @Test
+    void testSecondPrize() {
+        PrizeInfo prizeInfo = prizePackager.pack();
+        Rank second = prizeInfo.checkRank(testPick, new WinningLottoBalls(new LottoBalls(1, 2, 3, 4, 5, 7), new LottoNumber(6)));
+        assertThat(second).isEqualTo(Rank.SECOND);
+    }
 }

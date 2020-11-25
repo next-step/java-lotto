@@ -14,13 +14,17 @@ public class Cash implements Comparable<Cash> {
         this.currency = currency;
     }
 
-    public Cash(Cash cash) {
-        this.amount = cash.amount;
-        this.currency = cash.currency;
+    public Cash(Currency currency) {
+        this.amount = 0L;
+        this.currency = currency;
     }
 
     public Long getAmount() {
         return amount;
+    }
+
+    public Currency getCurrency() {
+        return currency;
     }
 
     @Override

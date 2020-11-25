@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.domain.Cash;
 import lotto.domain.Lotto;
-import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.Prize;
 import lotto.domain.WinningLottoBalls;
