@@ -19,9 +19,14 @@ public class OutputView {
     }
 
     private void showLotteryNumbers(Lottery lottery) {
-        out.print("[");
-        out.print(lottery.getNumbers().stream().map(LotteryNumber::toString).collect(Collectors.joining(", ")));
-        out.println("]");
+        out.format(
+                "[%s]",
+                lottery.getNumbers()
+                        .stream()
+                        .map(LotteryNumber::toString)
+                        .collect(Collectors.joining(", "))
+        );
+        out.println();
     }
 
     public void showWinnings(long spent, Map<Integer, Long> winningResult) {
