@@ -3,12 +3,15 @@ package step2.view;
 import java.util.List;
 
 public class ResultView {
+    private static final String purchasePrice = "구입금액을 입력해 주세요.";
+    private static final String winNumber = "지난 주 당첨 번호를 입력해 주세요.";
+
     private static void printMessage(String message) {
         System.out.println(message);
     }
 
     public static void printPurchasePrice() {
-        printMessage("구입금액을 입력해 주세요.");
+        printMessage(purchasePrice);
     }
 
     public static void printPurchaseCount(int purchaseCount) {
@@ -21,7 +24,7 @@ public class ResultView {
 
     public static void printWinNumber() {
         printMessage("");
-        printMessage("지난 주 당첨 번호를 입력해 주세요.");
+        printMessage(winNumber);
     }
 
     public static void printWinCounts(int[][] winCounts) {
