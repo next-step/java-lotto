@@ -35,13 +35,18 @@ class LottoTest {
             "1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 6:6",
         }, delimiter = ':')
     void matchLottoNumbersDynamic(String winning, String test, int match) {
+        int bonusNumber = 7;
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createWinningNumbers(winning);
 
         LottoNumbers testNumbers = new LottoNumbers()
                 .createWinningNumbers(test);
         Lotto testLotto = new Lotto(testNumbers);
-        assertThat(testLotto.matchLottoNumbers(winningNumbers)).isEqualTo(match);
+        if(match >= 3) {
+            assertThat(testLotto.matchLottoNumbers(winningNumbers, bonusNumber)
+                    .getMatchNumber()).isEqualTo(match);
+        } else {
+            assertThat(testLotto.matchLottoNumbers(winningNumbers, bonusNumber)).isNull();
+        }
     }
-
 }

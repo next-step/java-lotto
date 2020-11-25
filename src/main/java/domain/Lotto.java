@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto (LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -13,13 +15,33 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int matchLottoNumbers(LottoNumbers winningLotto) {
+    public LottoPrize matchLottoNumbers(LottoNumbers winningLotto, int bonusNumber) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
 
-        return (int) lottoNumbers.getNumbers()
+        int matchNumber =  (int) lottoNumbers.getNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
+
+        if(matchNumber < LottoPrize.FIFTH.getMatchNumber()) {
+            return null;
+        }
+
+        if(matchNumber == LottoPrize.SECOND.getMatchNumber()) {
+            return checkSecondPrize(bonusNumber);
+        }
+
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.getMatchNumber() == matchNumber)
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
+    private LottoPrize checkSecondPrize(int bonusNumber) {
+        if(lottoNumbers.getNumbers().contains(bonusNumber)) {
+            return LottoPrize.SECOND;
+        }
+        return LottoPrize.THIRD;
     }
 
     public LottoNumbers getLottoNumbers() {

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoControllerTest {
 
@@ -110,5 +110,22 @@ class LottoControllerTest {
     void checkLottoWrongPrice(String wrongValue) {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkWinningNumberValidate(wrongValue));
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호의 범위가 1 ~ 45가 아닌 경우 체크 기능")
+    @CsvSource(value = {"0", "46"})
+    void checkBonusRange(int bonusNumber) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkLottoRange(bonusNumber));
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호가 정답로또번호와 중복되는지 체크 기능")
+    @CsvSource(value = "1, 2, 3, 4, 5, 6: 6", delimiter = ':')
+    void checkBonusDuplicate(String lottoNumbers, int bonusNumber) {
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkBonusDuplicate(lottoNumbers, bonusNumber));
+
     }
 }

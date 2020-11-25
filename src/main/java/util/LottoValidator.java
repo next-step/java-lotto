@@ -37,7 +37,7 @@ public class LottoValidator {
         }
     }
 
-    private static void checkLottoRange(int number) {
+    public static void checkLottoRange(int number) {
         if(number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 범위는 1 ~ 45 입니다.");
         }
@@ -46,6 +46,18 @@ public class LottoValidator {
     public static void checkUnitPrice(int priceTotal, int unitPrice) {
         if(priceTotal < unitPrice || priceTotal % unitPrice != 0) {
             throw new IllegalArgumentException("로또 금액 단위로 구매 가능합니다.");
+        }
+    }
+
+    public static void checkBonusDuplicate(String winningNumbers, int bonusNumber) {
+        for(String number : winningNumbers.split(NUMBER_DELIMITER)) {
+            matchBonus(number, bonusNumber);
+        }
+    }
+
+    private static void matchBonus(String number, int bonusNumber) {
+        if(Integer.parseInt(number) == bonusNumber) {
+            throw new IllegalArgumentException("보너스 번호가 정답로또와 중복됩니다.");
         }
     }
 }

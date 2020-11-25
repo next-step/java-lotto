@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoStandard.*;
+
 public class Lottos {
     private final int ZERO = 0;
     private final int FIRST_COUNT = 1;
-    private final int PRIZE_BEGINNING = 3;
-    private final int PRIZE_ENDING = 7;
 
     private List<Lotto> lottos;
 
@@ -22,20 +22,25 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Map<Integer, Integer> compileLottoStatistics(LottoNumbers winningLotto) {
-        List<Integer> matches = lottos.stream()
-                .map(lotto -> lotto.matchLottoNumbers(winningLotto))
-                .filter(match -> match >= PRIZE_BEGINNING)
-                .collect(Collectors.toList());
+    public Map<Integer, Integer> compileLottoStatistics(LottoNumbers winningLotto, int bonusNumber) {
+        List<LottoPrize> lottoPrizes = matchLottoPrize(winningLotto, bonusNumber);
 
         Map<Integer, Integer> matchMap = new HashMap<>();
-        matches.forEach(match -> matchMap.merge(match, FIRST_COUNT, Integer::sum));
+        lottoPrizes.forEach(lottoPrize -> matchMap.merge(lottoPrize.getPrize(), FIRST_COUNT, Integer::sum));
 
-        IntStream.range(PRIZE_BEGINNING, PRIZE_ENDING)
+        IntStream.range(MATCH_BEGINNING.getStandardNumber(), MATCH_ENDING.getStandardNumber())
                 .filter(key -> !matchMap.containsKey(key))
                 .forEach(key -> matchMap.put(key, ZERO));
 
         return matchMap;
+    }
+
+    private List<LottoPrize> matchLottoPrize(LottoNumbers winningLotto, int bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.matchLottoNumbers(winningLotto, bonusNumber))
+                .filter(lottoPrize -> lottoPrize != null &&
+                        lottoPrize.getMatchNumber() >= MATCH_BEGINNING.getStandardNumber())
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
