@@ -1,8 +1,12 @@
 package lotto_auto.model;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -69,5 +73,25 @@ class LottoBundleTest {
         assertThat(lottoBundle.export()).isNotNull();
     }
 
+    @DisplayName("로또 추첨 중복 테스트")
+    @Test
+    public void test(){
 
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        lottoNumberList.add(new LottoNumber(1));
+        lottoNumberList.add(new LottoNumber(2));
+        lottoNumberList.add(new LottoNumber(3));
+        lottoNumberList.add(new LottoNumber(4));
+        lottoNumberList.add(new LottoNumber(5));
+        lottoNumberList.add(new LottoNumber(6));
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        LottoNumber lottoNumber = new LottoNumber(6);
+        assertThatThrownBy(
+                ()-> {
+                    LottoBundle lottoBundle = new LottoBundle(10,10 * LottoStore.LOTTO_TICKET_PRICE);
+                    lottoBundle.draw(lottoNumbers, lottoNumber);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
 }

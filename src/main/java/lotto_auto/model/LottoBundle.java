@@ -37,9 +37,12 @@ public class LottoBundle {
         return Collections.unmodifiableList(lottoTicketList);
     }
 
-    public LottoStatistic draw(LottoNumbers lottoNumbers) {
+    public LottoStatistic draw(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
+        }
         return new LottoStatistic(lottoTicketList.stream()
-                .map(item -> item.draw(lottoNumbers))
+                .map(item -> item.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
                 this.payment);
     }

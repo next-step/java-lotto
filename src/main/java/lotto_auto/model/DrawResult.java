@@ -6,21 +6,22 @@ import java.util.Arrays;
 
 public enum DrawResult {
 
-    FIRST(true, 2000000000L, 1, 6),
-    SECOND(true, 1500000L, 2, 5),
-    THIRD(true, 50000L, 3, 4),
-    FOURTH(true, 5000L, 4, 3),
-    FIFTH(false, 0L, 5, 2),
-    SIXTH(false, 0L, 6, 1),
-    SEVENTH(false, 0L, 7, 0);
+    FIRST(false, 2000000000L, 1, 6),
+    SECOND(true, 30000000L, 2, 5),
+    THIRD(false, 1500000L, 3, 5),
+    FOURTH(false, 50000L, 4, 4),
+    FIFTH(false, 5000L, 5, 3),
+    SIXTH(false, 0L, 6, 2),
+    SEVENTH(false, 0L, 7, 1),
+    EIGHTH(false, 0L, 8, 0);
 
-    private boolean winning;
+    private boolean bonus;
     private long money;
     private int rank;
     private int matchNum;
 
-    public boolean isWinning() {
-        return winning;
+    public boolean isBonus() {
+        return bonus;
     }
 
     public long getMoney() {
@@ -31,8 +32,8 @@ public enum DrawResult {
         return matchNum;
     }
 
-    DrawResult(boolean winning, long money, int rank, int matchNum) {
-        this.winning = winning;
+    DrawResult(boolean bonus, long money, int rank, int matchNum) {
+        this.bonus = bonus;
         this.money = money;
         this.rank = rank;
         this.matchNum = matchNum;
@@ -46,19 +47,23 @@ public enum DrawResult {
         return this.matchNum == matchNum;
     }
 
-    public static DrawResult valueOfMatchNum(int matchNum) {
+    public static DrawResult valueOf(boolean isBonus, int matchNum) {
+        if (matchNum == 5 && isBonus) {
+            return DrawResult.SECOND;
+        }
         return Arrays
                 .stream(DrawResult.values())
                 .filter(item -> item.isMatchNum(matchNum))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT));
     }
+
 
     public static DrawResult valueOfRank(int rank) {
         return Arrays
                 .stream(DrawResult.values())
                 .filter(item -> item.isRank(rank))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM));
     }
 }

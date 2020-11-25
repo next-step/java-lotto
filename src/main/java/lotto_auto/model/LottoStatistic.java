@@ -15,7 +15,6 @@ public class LottoStatistic {
 
     private double computeYield(List<DrawResult> drawResultList) {
         long sum = drawResultList.stream()
-                .filter(DrawResult::isWinning)
                 .mapToLong(DrawResult::getMoney)
                 .sum();
         return (double) sum / payment;

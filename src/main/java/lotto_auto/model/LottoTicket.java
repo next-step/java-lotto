@@ -15,11 +15,12 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
-    public DrawResult draw(LottoNumbers winningLottoNumbers) {
+    public DrawResult draw(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NULL_WINNING_LOTTO_TICKET);
         }
         int matchNumberCount = this.lottoNumbers.computeMatchCount(winningLottoNumbers);
-        return DrawResult.valueOfMatchNum(matchNumberCount);
+        boolean bonus = winningLottoNumbers.contains(bonusNumber);
+        return DrawResult.valueOf(bonus, matchNumberCount);
     }
 }

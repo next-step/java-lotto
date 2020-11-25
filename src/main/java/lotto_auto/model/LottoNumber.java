@@ -2,6 +2,8 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
+import java.util.Objects;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Integer LOTTO_NUMBER_MIN_RANGE = 0;
@@ -32,5 +34,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return this.number - o.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.number);
     }
 }
