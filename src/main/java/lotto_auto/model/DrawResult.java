@@ -3,8 +3,6 @@ package lotto_auto.model;
 import lotto_auto.ErrorMessage;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum DrawResult {
 
@@ -49,24 +47,18 @@ public enum DrawResult {
     }
 
     public static DrawResult valueOfMatchNum(int matchNum) {
-        List<DrawResult> drawResults =
-                Arrays.stream(DrawResult.values())
-                        .filter(item -> item.isMatchNum(matchNum))
-                        .collect(Collectors.toList());
-        if (drawResults.size() == 1) {
-            return drawResults.get(0);
-        }
-        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM);
+        return Arrays
+                .stream(DrawResult.values())
+                .filter(item -> item.isMatchNum(matchNum))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM));
     }
 
     public static DrawResult valueOfRank(int rank) {
-        List<DrawResult> drawResults =
-                Arrays.stream(DrawResult.values())
-                        .filter(item -> item.isRank(rank))
-                        .collect(Collectors.toList());
-        if (drawResults.size() == 1) {
-            return drawResults.get(0);
-        }
-        throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK);
+        return Arrays
+                .stream(DrawResult.values())
+                .filter(item -> item.isRank(rank))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANK));
     }
 }
