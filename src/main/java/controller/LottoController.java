@@ -44,6 +44,9 @@ public class LottoController {
         lottoInfo = LottoInfo.from(priceTotal);
 
         int lottoQuantity = getLottoQuantity();
+
+        int manualQuantity = inputView.inputManualLottoQuantity();
+
         resultView.displayLottoQuantity(lottoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();

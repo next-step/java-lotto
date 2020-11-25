@@ -49,7 +49,7 @@ class LottoControllerTest {
         controller = new LottoController();
         List<Integer> basicLottoNumbers = controller.createBasicLottoNumbers();
         List<Integer> numbers = new ArrayList<>();
-        for(int number = 1; number <= 45; number++) {
+        for (int number = 1; number <= 45; number++) {
             numbers.add(number);
         }
 
