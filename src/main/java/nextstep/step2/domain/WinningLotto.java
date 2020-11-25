@@ -10,7 +10,7 @@ public class WinningLotto {
 	}
 
 	public LottoReward getLottoReward(Lotto lotto) {
-		long matchCount = getMatchCount(lotto, lastWeekLotto);
+		long matchCount = getMatchCount(lotto);
 		boolean hasBonusNumber = hasBonusNumber(lotto, bonusNumber);
 		return LottoReward.getReword(Math.toIntExact(matchCount), hasBonusNumber);
 	}
@@ -19,7 +19,7 @@ public class WinningLotto {
 		return lotto.getNumbers().contains(bonusNumber);
 	}
 
-	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
+	private long getMatchCount(Lotto lotto) {
 		return lotto.getNumbers().stream()
 				.filter(number -> lastWeekLotto.getNumbers().contains(number))
 				.count();
