@@ -46,6 +46,7 @@ public class LottoController {
         int lottoQuantity = getLottoQuantity();
 
         int manualQuantity = inputView.inputManualLottoQuantity();
+        int autoQuantity = calculateAutoQuantity(lottoQuantity, manualQuantity);
 
         resultView.displayLottoQuantity(lottoQuantity);
 
@@ -70,6 +71,10 @@ public class LottoController {
 
         double profit = LottoProfit.calculateProfit(lottoStatistics, priceTotal).getProfit();
         resultView.displayProfit(profit);
+    }
+
+    public int calculateAutoQuantity(int lottoQuantity, int manualQuantity) {
+        return lottoQuantity - manualQuantity;
     }
 
     private void displayResult(ResultView resultView, Map<Integer, Integer> lottoStatistics) {

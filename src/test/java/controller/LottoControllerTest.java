@@ -137,4 +137,16 @@ class LottoControllerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkManualQuantity(lottoQuantity, manualQuantity));
     }
+
+    @Test
+    @DisplayName("자동 로또 개수 계산 기능")
+    void calculateAutoQuantity() {
+        int lottoQuantity = 5;
+        int manualQuantity = 3;
+
+        controller = new LottoController();
+
+        assertThat(controller.calculateAutoQuantity(lottoQuantity, manualQuantity))
+                .isEqualTo(lottoQuantity - manualQuantity);
+    }
 }
