@@ -15,4 +15,4 @@
 6. 당첨 번호를 입력 받는다 INPUT
 7. 유저의 로또 목록과 당첨번호를 비교 한다 WINNING_NUMBER
 8. 로또에 일치 갯수를 저장한다. LOTTO
-9. 유저의 수익 통계를 낸다. STATISTICS
+9. 로또목록으로 수익금을 계산한다. ProfitCalculator

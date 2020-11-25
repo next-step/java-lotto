@@ -15,4 +15,8 @@ public class Scanner {
                         .filter(n -> winningNumbers.contains(n)).count();
         lottoTicket.saveMatchingScore(matchingScore);
     }
+
+    public void scanAll(List<LottoTicket> lottoTickets) {
+        lottoTickets.forEach(this::scan);
+    }
 }
