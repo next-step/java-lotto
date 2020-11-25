@@ -2,7 +2,7 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Integer LOTTO_NUMBER_MIN_RANGE = 0;
     private static final Integer LOTTO_NUMBER_MAX_RANGE = 45;
@@ -27,5 +27,10 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 }

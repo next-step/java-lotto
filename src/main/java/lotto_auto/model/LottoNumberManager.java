@@ -8,15 +8,15 @@ import java.util.stream.IntStream;
 
 public class LottoNumberManager {
 
-    private static List<Integer> lottoNumberList =
+    private static List<LottoNumber> lottoNumberList =
             IntStream
                     .range(1, 45)
-                    .boxed()
+                    .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList());
 
     public static LottoNumbers generate() {
         Collections.shuffle(lottoNumberList);
-        List<Integer> list = new ArrayList<>();
+        List<LottoNumber> list = new ArrayList<>();
         list.addAll(lottoNumberList.subList(0, 6));
         Collections.sort(list);
         return new LottoNumbers(list);

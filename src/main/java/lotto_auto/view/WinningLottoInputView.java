@@ -1,5 +1,6 @@
 package lotto_auto.view;
 
+import lotto_auto.model.LottoNumber;
 import lotto_auto.model.LottoNumbers;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class WinningLottoInputView {
         return new LottoNumbers(
                 Arrays.stream(next.split(COMMA))
                         .mapToInt(Integer::parseInt)
-                        .boxed()
+                        .mapToObj(LottoNumber::new)
                         .collect(Collectors.toList())
         );
     }
