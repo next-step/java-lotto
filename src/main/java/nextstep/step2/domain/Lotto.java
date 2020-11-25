@@ -1,6 +1,5 @@
 package nextstep.step2.domain;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,28 +27,15 @@ public class Lotto {
 		}
 	}
 
-	public Lotto getLastWeekLotto(String winnerNumbers) {
-		String[] winningNumberSplit = winnerNumbers.replaceAll(" ", "").split(",");
-		Set<LottoNumber> winningNumbers =  Stream.of(winningNumberSplit)
+	public static Lotto of(String numbers) {
+		String[] winningNumberSplit = numbers.replaceAll(" ", "").split(",");
+		return Stream.of(winningNumberSplit)
 				.map(number -> LottoNumber.of(LottoNumber.getValidateNumber(number)))
-				.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
-		return new Lotto(winningNumbers);
+				.collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
 	}
 
-	public void setLottoReward(WinningLotto lotto) {
-		long matchCount = getMatchCount(this, lotto.getLastWeekLotto());
-		boolean hasBonusNumber = hasBonusNumber(this, lotto.getBonusNumber());
-		lottoReward = LottoReward.getReword(Math.toIntExact(matchCount), hasBonusNumber);
-	}
-
-	protected boolean hasBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
-		return lotto.getNumbers().contains(bonusNumber);
-	}
-
-	private long getMatchCount(Lotto lotto, Lotto lastWeekLotto) {
-		return lotto.getNumbers().stream()
-				.filter(number -> lastWeekLotto.getNumbers().contains(number))
-				.count();
+	public void setLottoReward(LottoReward lottoReward) {
+		this.lottoReward = lottoReward;
 	}
 
 	public LottoReward getLottoReward() {

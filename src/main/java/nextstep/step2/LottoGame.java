@@ -1,28 +1,24 @@
 package nextstep.step2;
 
-import nextstep.step2.domain.LottoNumber;
-import nextstep.step2.domain.Lotto;
-import nextstep.step2.domain.LottoPurchase;
+import nextstep.step2.domain.*;
 import nextstep.step2.view.InputView;
-import nextstep.step2.view.LottoResultView;
-
-import java.util.List;
-import java.util.Scanner;
 
 public class LottoGame {
 	public static void main(String[] args) {
 		LottoController controller = new LottoController();
-		InputView inputMoney = new InputView(new Scanner(System.in));
-		LottoResultView resultView = new LottoResultView();
 
-		LottoPurchase purchase = new LottoPurchase(inputMoney.getInputMessage());
-		List<Lotto> autoLottos = controller.startLottoGameGetLottos(purchase, resultView);
+		//수동, 자동 로또번호 출력
+		final int money = InputView.getInputMoney(); //구입금액 입력
+		final int manualCount = InputView.getInputManualCount(); //수동 구매수 입력
+		String manaulLottos = InputView.getInputManualNumbers(manualCount); //수동 로또번호 입력
+		LottoPurchase purchase = new LottoPurchase(money);
+		LottoCount lottoCount = new LottoCount(manualCount, purchase.getLottoCount());
+		Lottos purchaseLottos = controller.startLottoGameGetLottos(lottoCount, manaulLottos);
 
-		InputView inputWinningNumbers = new InputView(new Scanner(System.in));
-		final String winningNumber = inputWinningNumbers.getInputLottoWinningNumbers();
-
-		InputView inputBonusNumber = new InputView(new Scanner(System.in));
-		final LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber.getInputLottoBonusNumber());
-		controller.printLottoStaticsic(winningNumber, bonusNumber, purchase, autoLottos, resultView);
+		//당첨통계 출력
+		final String winningNumber = InputView.getInputLottoWinningNumbers(); //지난주 로또번호 입력
+		final LottoNumber bonusNumber = LottoNumber.of(InputView.getInputLottoBonusNumber());  //보너스 번호 입력
+		LottoStaticstic lottoStaticstic = new LottoStaticstic(winningNumber, purchase, bonusNumber);
+		controller.printLottoStaticsic(lottoStaticstic, purchaseLottos);
 	}
 }

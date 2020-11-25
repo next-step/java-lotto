@@ -36,44 +36,46 @@ public class LottoTest {
 	@DisplayName("지난주 로또당첨 번호는 6개여야 한다.")
 	public void lastLottoWrongTest() {
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5)))
+				.isThrownBy(() -> Lotto.of("1, 2, 3, 4, 5"))
 				.withMessage("로또 번호는 6개여야 합니다.");
 	}
 
 	@Test
 	@DisplayName("로또 리워드를 갖는 로또를 생성한다.")
 	public void winningLottoTest() {
-		Lotto winningLotto = getWinningLotto();
+		Lotto winningLotto = getLottoReward();
 		assertThat(winningLotto.getLottoReward()).isEqualTo(LottoReward.FIFTH);
 	}
 
 	@Test
 	@DisplayName("로또 보너스 번호를 가지고 있는지 테스트")
 	public void hasBonusNumberTest() {
-		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
 		assertTrue(getWinningLotto().hasBonusNumber(lotto, LottoNumber.of(6)));
 		assertFalse(getWinningLotto().hasBonusNumber(lotto, LottoNumber.of(7)));
 	}
 
-	private Lotto getWinningLotto() {
-		Lotto lotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto lastWinningLotto = MockLotto.mockLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
-		WinningLotto winningLotto = new WinningLotto(lastWinningLotto, LottoNumber.of(7));
-		lotto.setLottoReward(winningLotto);
+	private Lotto getLottoReward() {
+		Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+		lotto.setLottoReward(getWinningLotto().getLottoReward(lotto));
 		return lotto;
 	}
 
+	private WinningLotto getWinningLotto() {
+		Lotto lastWinningLotto = Lotto.of("1, 2, 3, 14, 15, 16");
+		return new WinningLotto(lastWinningLotto, LottoNumber.of(7));
+	}
 	private static Stream<Arguments> provideLottos() {
 		return Stream.of(
-				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),
-				Arguments.of(MockLotto.mockLotto(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(8))
+				Arguments.of(Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7)),
+				Arguments.of(Lotto.of("1,2,3,4,5,7"), LottoNumber.of(8))
 		);
 	}
 
 	private static Stream<Arguments> provideLastWeekLotto() {
 		return Stream.of(
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4, 5,  6"), LottoNumber.of(5)),
-				Arguments.of(new Lotto().getLastWeekLotto("1,2,3,4,  40,  45"), LottoNumber.of(45))
+				Arguments.of(Lotto.of("1,2,3,4, 5,  6"), LottoNumber.of(5)),
+				Arguments.of(Lotto.of("1,2,3,4,  40,  45"), LottoNumber.of(45))
 		);
 	}
 }

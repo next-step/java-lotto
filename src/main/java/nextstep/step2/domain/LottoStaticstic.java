@@ -17,17 +17,18 @@ public class LottoStaticstic {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public Map<LottoReward, List<Lotto>> getLottoRewardMap(List<Lotto> lottoList) {
-		Lotto lastWeekLotto = new Lotto().getLastWeekLotto(winnerNumbers);
+	public Map<LottoReward, List<Lotto>> getLottoRewardMap(Lottos lottoList) {
+		Lotto lastWeekLotto = Lotto.of(winnerNumbers);
 		bonusNumber.validateBonusNumber(lastWeekLotto);
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = getLottoRewardGroupingMap(lottoList, lastWeekLotto);
 		return addLottoEmptyReward(lottoRewardListMap);  //로또번호가 3개 이상 맞지 않아도 출력하기 위해서 추가한다.
 	}
 
-	private Map<LottoReward, List<Lotto>> getLottoRewardGroupingMap(List<Lotto> lottoList, Lotto lastWeekLotto) {
+	private Map<LottoReward, List<Lotto>> getLottoRewardGroupingMap(Lottos lottos, Lotto lastWeekLotto) {
 		WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusNumber);
-		lottoList.forEach(lotto -> lotto.setLottoReward(winningLotto));
-		return lottoList.stream()
+		lottos.getLottos().forEach(lotto -> lotto.setLottoReward(winningLotto.getLottoReward(lotto)));
+		return lottos.getLottos()
+				.stream()
 				.collect(Collectors.groupingBy(Lotto::getLottoReward));
 	}
 
