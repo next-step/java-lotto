@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created By mand2 on 2020-11-19.
@@ -14,9 +16,9 @@ public class LottoNumberBoard {
     public static final int VALID_MAX_NUMBER = 45;
 
     static {
-        for (int i = VALID_MIN_NUMBER; i <= VALID_MAX_NUMBER; i++) {
-            lottoNumbers.add(i);
-        }
+        IntStream.rangeClosed(VALID_MIN_NUMBER, VALID_MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
 

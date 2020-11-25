@@ -16,7 +16,7 @@ public class LottoGenerator {
 
     private LottoGenerator() {}
 
-    private static LottoNumber shuffle() {
+    private static LottoNumber automateLotto() {
         List<Integer> board = LottoNumberBoard.lottoNumberBoard();
         Collections.shuffle(board);
 
@@ -24,7 +24,7 @@ public class LottoGenerator {
     }
 
     public static Lottos generate(int round) {
-        List<Lotto> lottos = Stream.generate(() -> Lotto.of(shuffle()))
+        List<Lotto> lottos = Stream.generate(() -> Lotto.of(automateLotto()))
                 .limit(round)
                 .collect(Collectors.toList());
 

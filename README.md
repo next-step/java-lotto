@@ -83,4 +83,18 @@
     - [x] 당청금 합계 구하기
     - [x] 구입한 금액과 비교하여 수익률 계산
   - [x] ResultView :: 수익률 VIEW.
+
+----
+
+### step3
+- [x] 피드백 반영
+  - LottoGenerator의 `shuffle()` 명칭 변경 (행위에 맞게 변경하기)
+  - LottoNumberBoard **stream**으로 사용하기
   
+  👀 생각해 볼 부분 
+    - 자동 | 수동인 경우 행동을 따로 빼야하나? step2 와 같이 LottoGenerator에서 처리할지
+
+- 2등 구현하기
+  - [ ] 기본구현: 2등 = bonusBall 과 맞으면 + 5개 맞음.
+  - [ ] 리팩토링 및 테스트 
+
