@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Numbers;
-
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
@@ -49,18 +45,15 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lottos getManualLottos(int autoLottoCount) {
+    public static List<List<Integer>> getManualLottosNumbers(int autoLottoCount) {
         out.println(GET_MANUAL_LOTTO_NUMBERS_MESSAGE);
-        return new Lottos(IntStream.range(0, autoLottoCount)
-                .mapToObj(idx -> getManualLotto())
-                .collect(Collectors.toList()));
+        return IntStream.range(0, autoLottoCount)
+                .mapToObj(idx -> getManualLottoNumbers())
+                .collect(Collectors.toList());
     }
 
-    private static Lotto getManualLotto() {
+    private static List<Integer> getManualLottoNumbers() {
         String[] split = scanner.nextLine().replace(BLANK, "").split(SPLITTER);
-
-        Numbers.Builder builder = Numbers.builder();
-        Arrays.stream(split).map(Integer::parseInt).forEach(builder::add);
-        return new Lotto(builder.build());
+        return Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
