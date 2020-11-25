@@ -1,11 +1,10 @@
 package lotto.model.lotto;
 
+
 import lotto.model.Hit;
+import lotto.model.LottoPrice;
 import lotto.strategy.DrawingStrategy;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.List;
 import java.util.Map;
 
 public class WinningLotto extends Lotto {
@@ -14,45 +13,21 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(LottoNumber bonus, DrawingStrategy drawingStrategy) {
         super(drawingStrategy);
-        if (numbers.contain(bonus)) {
+
+        if (numbers.contains(bonus)) {
             throw new IllegalArgumentException(CONTAIN_BONUS_ERROR_MESSAGE);
         }
+
         this.bonus = bonus;
     }
 
-
-    public Map<Hit, Integer> getResult(List<LottoTicket> lottoes) {
-        Map<Hit, Integer> hits = Hit.getHits();
-
-        lottoes.stream()
-                .map(lotto -> getMatchingNumberCount(lotto, bonus))
-                .map(matchedNumber -> Hit.findByNumbers(matchedNumber, bonus))
-                .forEach(hit -> hits.computeIfPresent(hit, (Hit key, Integer value) -> ++value));
-
-        return hits;
+    public Map<Hit, Integer> matches(Lottoes lottoes) {
+        return lottoes.matches(this, bonus);
     }
 
-
-    public double getEarningRate(int amount, List<LottoTicket> numbers) {
-        long totalReword = getResult(numbers).entrySet().stream()
-                .mapToLong(this::calculateReword)
-                .sum();
-
-        BigDecimal safeReword = BigDecimal.valueOf((double) totalReword);
-        BigDecimal safeAmount = BigDecimal.valueOf(amount);
-
-        return safeReword.divide(safeAmount, 2, RoundingMode.FLOOR)
-                .doubleValue();
+    public double earningRate(Lottoes lottoes, LottoPrice lottoPrice) {
+        return lottoes.earningRate(this, bonus, lottoPrice);
     }
 
-
-    private long calculateReword(Map.Entry<Hit, Integer> hits) {
-        return hits.getKey().calculateReword(hits.getValue());
-    }
-
-    @Override
-    public LottoTicket getLottoTicket() {
-        return null;
-    }
 }
 

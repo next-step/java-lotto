@@ -1,36 +1,49 @@
 package lotto.model.lotto;
 
-import lotto.strategy.DrawingStrategy;
 
+import lotto.strategy.DrawingStrategy;
+import util.CommonUtils;
+
+import java.util.List;
 import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public abstract class Lotto {
+    private final static String NUMBERS_DELIMITER = ", ";
+    private final static String NUMBERS_FORMAT = "[ %s ]";
+
+    private final static int SECOND_CANDIDATE_COUNT = 5;
+
     public final static int PRICE = 1000;
-    protected LottoTicket numbers;
+
+    protected SortedSet<LottoNumber> numbers;
 
     public Lotto(DrawingStrategy drawingStrategy) {
         numbers = drawingStrategy.drawNumbers();
     }
 
-    public LottoTicket getMatchingNumberCount(LottoTicket inputNumbers, LottoNumber bonus) {
-        LottoTicket matchNumbers = numbers.intersect(inputNumbers);
+    public List<LottoNumber> intersect(Lotto inputLotto, LottoNumber bonus) {
+        SortedSet<LottoNumber> inputNumbers = inputLotto.numbers;
 
-        int matchCount = matchNumbers.size();
+        List<LottoNumber> matchingNumber = numbers.stream()
+                .filter(inputNumbers::contains)
+                .collect(Collectors.toList());
 
-        if(isSecond(inputNumbers, bonus, matchCount)){
-            matchNumbers.add(bonus);
+        if(isSecond(matchingNumber, inputNumbers, bonus)){
+            matchingNumber.add(bonus);
         }
 
-        return matchNumbers;
+        return matchingNumber;
     }
 
-    public LottoTicket getLottoTicket() {
-        return numbers;
+    private boolean isSecond(List<LottoNumber> matchingNumber, SortedSet<LottoNumber> inputNumber, LottoNumber bonus) {
+        return matchingNumber.size() == SECOND_CANDIDATE_COUNT &&
+                (inputNumber.contains(bonus) || numbers.contains(bonus));
     }
 
-    private boolean isSecond(LottoTicket inputNumbers, LottoNumber bonus, int matchCount) {
-        return matchCount == 5 && inputNumbers.contain(bonus);
+    @Override
+    public String toString() {
+        String stringNumbers =  String.join(NUMBERS_DELIMITER, CommonUtils.sortedSetToArray(numbers));
+        return String.format(NUMBERS_FORMAT,stringNumbers);
     }
 }

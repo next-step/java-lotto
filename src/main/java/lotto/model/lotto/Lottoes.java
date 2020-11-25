@@ -1,33 +1,76 @@
 package lotto.model.lotto;
 
-import lotto.model.CandidateLotto;
+import lotto.model.Hit;
+import lotto.model.LottoPrice;
 import lotto.strategy.AutoStrategy;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottoes {
+    private static final String LOTTOES_FORMAT = "%s\n%s";
 
     private List<CandidateLotto> lottoes = new LinkedList<>();
-    private int autoLottoCount;
 
-    public Lottoes(int autoLottoCount, Optional<List<CandidateLotto>> lottoes){
+    public Lottoes(int autoLottoPrice, Optional<List<CandidateLotto>> lottoes){
+        int autoLottoCount = autoLottoPrice/Lotto.PRICE;
+
         this.lottoes.addAll(lottoes.orElse(Collections.emptyList()));
-        this.autoLottoCount = autoLottoCount;
-        this.lottoes.addAll(buyLottoes());
+        this.lottoes.addAll(makeAutoLotto(autoLottoCount));
     }
 
+    public Map<Hit, Integer> matches(WinningLotto winningLotto, LottoNumber bonus) {
+        Map<Hit, Integer> hits = Hit.getHits();
 
-    public List<LottoTicket> getLottoes() {
-        return lottoes.stream()
-                .map(CandidateLotto::getLottoTicket)
-                .collect(Collectors.toList());
+        lottoes.stream()
+                .map(lotto -> lotto.intersect(winningLotto, bonus))
+                .map(matchingNumber -> Hit.findByNumbers(matchingNumber, bonus))
+                .forEach(hit -> hits.computeIfPresent(hit, (Hit key, Integer value) -> ++value));
+
+        return hits;
     }
 
-    private List<CandidateLotto> buyLottoes() {
+    public double earningRate(WinningLotto winningLotto, LottoNumber bonus, LottoPrice lottoPrice) {
+        long totalReword = matches(winningLotto,bonus).entrySet().stream()
+                .mapToLong(this::calculateReword)
+                .sum();
+
+        BigDecimal safeReword = BigDecimal.valueOf((double) totalReword);
+        BigDecimal safeAmount = BigDecimal.valueOf(lottoPrice.totalPrice());
+
+        return safeReword
+                .divide(safeAmount, 2, RoundingMode.FLOOR)
+                .doubleValue();
+    }
+
+    public int size(){
+        return lottoes.size();
+    }
+
+    private void merge(Lottoes inputLottoes){
+        if(inputLottoes != null){
+            lottoes.addAll(inputLottoes.lottoes);
+        }
+    }
+
+    private long calculateReword(Map.Entry<Hit, Integer> hits) {
+        return hits.getKey().calculateReword(hits.getValue());
+    }
+
+    private List<CandidateLotto> makeAutoLotto(int autoLottoCount) {
         return IntStream.range(0, autoLottoCount)
                 .mapToObj(e -> new CandidateLotto(new AutoStrategy()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return lottoes.stream()
+                .map(Lotto::toString)
+                .reduce( (x,y) -> String.format(LOTTOES_FORMAT, x,y))
+                .orElse("");
     }
 }

@@ -1,10 +1,7 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.LottoTicket;
-import lotto.model.lotto.Lottoes;
-import lotto.model.lotto.WinningLotto;
+import lotto.model.lotto.*;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,14 +42,15 @@ public class WinningLottoTest {
         CandidateLotto testBonus = makeCandidateLotto(new int[]{11,12,13,14,15,7});
 
         List<CandidateLotto> testCase = Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6Bonus, testHit6, testBonus);
+
         Lottoes lottoes = new Lottoes(0, Optional.of(testCase));
 
-        Map<Hit, Integer> result = winnerNumbers.getResult(lottoes.getLottoes());
+        Map<Hit, Integer> result = winnerNumbers.matches(lottoes);
 
         assertThat(result.get(Hit.HIT_3)).isEqualTo(2);
         assertThat(result.get(Hit.HIT_4)).isEqualTo(1);
-        assertThat(result.get(Hit.HIT_5)).isEqualTo(1);
         assertThat(result.get(Hit.HIT_6_BONUS)).isEqualTo(1);
+        assertThat(result.get(Hit.HIT_5)).isEqualTo(1);
         assertThat(result.get(Hit.HIT_6)).isEqualTo(1);
     }
 
@@ -64,19 +62,20 @@ public class WinningLottoTest {
         CandidateLotto testHitNone = makeCandidateLotto(new int[]{21,22,23,24,35,36});
 
         Lottoes lottoes = new Lottoes(0, Optional.of(Arrays.asList(testHit3, testHitNone)));
+        LottoPrice lottoPrice = new LottoPrice(14000, "0");
 
-        double result = winnerNumbers.getEarningRate(14000, lottoes.getLottoes());
+        double result = winnerNumbers.earningRate(lottoes,lottoPrice);
 
         assertThat(result).isEqualTo(0.35);
     }
 
     private CandidateLotto makeCandidateLotto(int[] inputNumbers) {
-        LottoTicket lottoTicket = new LottoTicket(TestUtils.arrayToSortedSet(inputNumbers));
+        SortedSet<LottoNumber> lottoTicket = TestUtils.arrayToSortedSet(inputNumbers);
         return new CandidateLotto(new ManualStrategy(lottoTicket));
     }
 
     private WinningLotto makeWinningLotto(int bonus) {
-        LottoTicket lottoTicket = new LottoTicket(TestUtils.arrayToSortedSet(winningNumbers));
-        return new WinningLotto(new LottoNumber(bonus), new ManualStrategy(lottoTicket));
+        SortedSet<LottoNumber> lottoTicket = TestUtils.arrayToSortedSet(winningNumbers);
+        return new WinningLotto(LottoNumber.of(bonus), new ManualStrategy(lottoTicket));
     }
 }

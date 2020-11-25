@@ -12,13 +12,13 @@ public class LottoNumberTest {
     @Test
     public void 임계치를_벗어난_로또_번호_체크() throws Exception {
         int threshold = TestUtils.getThreshold();
-        assertThatIllegalArgumentException().isThrownBy(() ->new LottoNumber(threshold + 1));
+        assertThatIllegalArgumentException().isThrownBy(() ->LottoNumber.of(threshold + 1));
     }
 
     @Test
     public void 정상_로또_번호_체크() throws Exception {
         int threshold = TestUtils.getThreshold();
-        assertThat(new LottoNumber(threshold));
+        assertThat(LottoNumber.of(threshold));
     }
 
 }

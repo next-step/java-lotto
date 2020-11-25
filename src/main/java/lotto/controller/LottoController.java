@@ -8,11 +8,12 @@ import lotto.view.ResultView;
 import util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
     private Amount amount;
-    private LottoCount lottoCount;
+    private LottoPrice lottoPrice;
     private Lottoes lottoes;
     private WinningLotto winningLotto;
 
@@ -21,37 +22,39 @@ public class LottoController {
         amount = new Amount(inputAmount);
 
         String manualCount = InputView.printInputManualLottoCountMessageNGetCount();
-        lottoCount = new LottoCount(amount.getPrePurchaseAmount(0, Lotto.PRICE), manualCount);
+        lottoPrice = new LottoPrice(amount.getPrePurchaseAmount(0, Lotto.PRICE), manualCount);
 
-        buyLottoes();
+        List<String> userInputs = InputView.printInputManualLottoesMessageNGetUserInput(Integer.valueOf(manualCount));
+        buyLottoes(userInputs);
 
         String inputWinnerNumber = InputView.printInputMessageNGetWinnerNumbers();
         String inputBonusNumber = InputView.printInputMessageNGetBonusNumbers();
 
         winningLotto = new WinningLotto(
-                new LottoNumber(StringUtils.stringToInt(inputBonusNumber)),
+                LottoNumber.of(StringUtils.stringToInt(inputBonusNumber)),
                 new ManualStrategy(inputWinnerNumber)
         );
 
         lottery();
     }
 
-    private void buyLottoes() {
-        List<CandidateLotto> manualLottos = InputView.printInputManualLottoesMessageNGetManualLotoes(lottoCount.getManualCount());
-        amount.pay(lottoCount.getManualCount() * Lotto.PRICE);
-        lottoes = new Lottoes(lottoCount.getAutoCount(), Optional.of(manualLottos));
-        amount.pay(lottoCount.getAutoCount() * Lotto.PRICE);
+    private void buyLottoes(List<String> userInputs) {
+        List<CandidateLotto> manualLottoes = userInputs.stream()
+                .map(ManualStrategy::new)
+                .map(CandidateLotto::new)
+                .collect(Collectors.toList());
+        amount.pay(lottoPrice.manulPrice());
 
-        ResultView.printBuyMessage(lottoCount.getManualCount(), lottoCount.getAutoCount());
-        ResultView.printLottoes(lottoes.getLottoes());
+        lottoes = new Lottoes(lottoPrice.autoPrice(), Optional.of(manualLottoes));
+        amount.pay(lottoPrice.autoPrice());
+
+        ResultView.printMessage(lottoPrice.toString());
+        ResultView.printMessage(lottoes.toString());
     }
 
     private void lottery() {
-        int prePurchaseAmount = amount.getPrePurchaseAmount(lottoCount.getTotalCount(), Lotto.PRICE);
-
-        List<LottoTicket> lottoesNumbers = lottoes.getLottoes();
-        Map<Hit, Integer> winnerNumbers = winningLotto.getResult(lottoesNumbers);
-        double earningRate = winningLotto.getEarningRate(prePurchaseAmount, lottoesNumbers);
+        Map<Hit, Integer> winnerNumbers = winningLotto.matches(lottoes);
+        double earningRate = winningLotto.earningRate(lottoes, lottoPrice);
 
         ResultView.printResult(winnerNumbers);
         ResultView.printEarningRate(earningRate);

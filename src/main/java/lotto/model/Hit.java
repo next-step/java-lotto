@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.LottoTicket;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -27,13 +26,13 @@ public enum Hit {
         this.rewardMessage = rewardMessage;
     }
 
-    public static Hit findByNumbers(LottoTicket numbers, LottoNumber bonus) {
+    public static Hit findByNumbers(List<LottoNumber> matchingNumbers, LottoNumber bonus) {
         Hit hit = Arrays.stream(sortedValues())
-                .filter(value -> value.hitCount == numbers.size())
+                .filter(value -> value.hitCount == matchingNumbers.size())
                 .findFirst()
                 .orElse(HIT_NONE);
 
-        if(bonusCondition(hit, numbers, bonus)){
+        if(bonusCondition(hit, matchingNumbers, bonus)){
             return HIT_6_BONUS;
         }
 
@@ -63,8 +62,8 @@ public enum Hit {
         return hits;
     }
 
-    private static boolean bonusCondition(Hit hit, LottoTicket numbers, LottoNumber bonus){
-        return hit.equals(HIT_6) && numbers.contain(bonus);
+    private static boolean bonusCondition(Hit hit, List<LottoNumber> numbers, LottoNumber bonus){
+        return hit.equals(HIT_6) && numbers.contains(bonus);
     }
 
     @Override
