@@ -5,5 +5,13 @@
 * 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
-## 온라인 코드 리뷰 과정
-* [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+## 기능
+1. 구입금액을 입력 받는다. INPUT
+2. 유저에 구입금액을 저장한다 USER
+3. 구입금액, 로또 가격으로 수량을 계산한다 CALCULATOR
+4. 수량만큼 로또를 생성한다 GENERATOR
+5. 유저에 로또를 저장한다 USER
+6. 당첨 번호를 입력 받는다 INPUT
+7. 유저의 로또 목록과 당첨번호를 비교 한다 WINNING_NUMBER
+8. 로또에 일치 갯수를 저장한다. LOTTO
+9. 유저의 수익 통계를 낸다. STATISTICS
