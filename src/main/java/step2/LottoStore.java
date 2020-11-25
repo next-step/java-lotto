@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 public class LottoStore {
 
+    private List<Lotto> soldLotto;
     private List<Integer> winNumbers;
+    private List<Long> winLottoMoney;
 
     public List<Lotto> buy(int fee) {
         if (isEnougisNotEnoughFeehFee(fee)){
@@ -14,11 +16,17 @@ public class LottoStore {
 
         int buyCount = getBuyCount(fee);
 
-        List<Lotto> boughtLotto = new ArrayList<>();
+        this.soldLotto = new ArrayList<>();
         for (int count = 0; count < buyCount; count++) {
-            boughtLotto.add(new Lotto());
+            this.soldLotto.add(new Lotto());
         }
-        return boughtLotto;
+
+        for (Lotto lotto : soldLotto) {
+            System.out.println(lotto.getNumbers());
+        }
+
+
+        return soldLotto;
     }
 
     private int getBuyCount(int fee) {
@@ -85,5 +93,28 @@ public class LottoStore {
 
     public List<Integer> getWinNumbers() {
         return this.winNumbers;
+    }
+
+    public List<Long> findWinLottoMoney() {
+        this.winLottoMoney = new ArrayList<>();
+        for (Lotto lotto : this.soldLotto) {
+            findMoney(findIsMatchNumberCount(lotto));
+        }
+        return this.winLottoMoney;
+    }
+
+    private void findMoney(long winNumberCount) {
+        Optional<LottoRank> rank = LottoRank.findRank(winNumberCount);
+        if (!rank.isPresent()) {
+            return;
+        }
+
+        this.winLottoMoney.add(rank.get().findMoney());
+    }
+
+    private long findIsMatchNumberCount(Lotto lotto) {
+        return this.winNumbers.stream()
+                .filter(winNumber -> lotto.getNumbers().contains(winNumber))
+                .count();
     }
 }

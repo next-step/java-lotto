@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -60,6 +61,21 @@ class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
         lottoStore.initWinNumbers("1,2,3,4,5,6");
         assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("당첨된 로또의 상금을 반환함.")
+    void findWinLottoMoney() {
+        LottoStore lottoStore = new LottoStore();
+        lottoStore.buy(100000);
+        lottoStore.initWinNumbers("2,5,10,15,20,25");
+
+        List<Long> winLottoMoney = lottoStore.findWinLottoMoney();
+
+        for (Long money : winLottoMoney) {
+            System.out.println(money);
+        }
+
 
     }
 }
