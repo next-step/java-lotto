@@ -34,13 +34,7 @@ public class LottoNumbers {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        List<LottoNumber> collect = this.lottoNumbers.stream()
-                .filter(item -> item.equals(lottoNumber))
-                .collect(Collectors.toList());
-        if (collect.size() != 0) {
-            return true;
-        }
-        return false;
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public int computeMatchCount(LottoNumbers lottoNumbers) {
