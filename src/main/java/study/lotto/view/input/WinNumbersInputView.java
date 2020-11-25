@@ -2,45 +2,42 @@ package study.lotto.view.input;
 
 import study.lotto.core.LottoNumber;
 import study.lotto.core.WinLottoNumbers;
+import study.lotto.dispenser.LottoDispenser;
+import study.lotto.utils.Utils;
 import study.lotto.view.AbstractView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.Set;
 
 public class WinNumbersInputView extends AbstractView {
 
-    private static final WinNumbersInputView instance = new WinNumbersInputView();
-    private static final String DELIMITER = ",";
+    private static Scanner scanner = Utils.newScanner();
+    private static final String WIN_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    public static WinNumbersInputView getInstance() {
-        return instance;
-    }
+    private WinNumbersInputView() {}
 
-    public WinLottoNumbers display() {
-        return new WinLottoNumbers(winningLottoNumbersView(), bonusLottoNumberView());
-    }
-
-    private List<LottoNumber> winningLottoNumbersView() {
-        stringBuilder.append("지난 주 당첨 번호를 입력해 주세요.");
+    private static void displayWinLottoNumbersMessage() {
+        stringBuilder.append(WIN_LOTTO_NUMBERS_MESSAGE);
         printAndClear();
-
-        String winLottoNumbers = scanner.nextLine();
-
-        return Arrays.asList(winLottoNumbers.split(DELIMITER))
-                        .stream()
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList());
     }
 
-    private LottoNumber bonusLottoNumberView() {
-        stringBuilder.append("보너스 볼을 입력해 주세요.");
-        printAndClear();
+    public static List<String> getWinLottoNumbersInput() {
+        displayWinLottoNumbersMessage();
 
-        String bonusLottoNumber = scanner.nextLine();
-        return new LottoNumber(bonusLottoNumber);
+        return parseForLottoNumber(scanner.nextLine());
+    }
+
+    private static void displayBonusLottoNumberMessage() {
+        stringBuilder.append(BONUS_NUMBER_MESSAGE);
+        printAndClear();
+    }
+
+    public static String getBonusLottoNumberInput() {
+        displayBonusLottoNumberMessage();
+        return scanner.nextLine();
     }
 
 }

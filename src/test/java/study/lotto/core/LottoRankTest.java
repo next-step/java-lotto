@@ -1,29 +1,27 @@
 package study.lotto.core;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import study.lotto.dispenser.Lottos;
-import study.lotto.lottery.Lottery;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoRankTest {
 
-    private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
+    private static final LottoNumber bonusLottoNumber = LottoNumber.of(7);
 
     @Test
     void test_of_first() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(lottoNumbers, bonusLottoNumber);
 
         // When
-        WinningLotto winningLotto = lotto.lottery(winLottoNumbers);
+        WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
 
         // Then
         assertEquals(winningLotto.getLottoRank(), LottoRank.FIRST);
@@ -44,10 +42,12 @@ class LottoRankTest {
     @Test
     void test_of_second() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
-        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "7");
+        List<String> winLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "10");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
         WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
@@ -59,10 +59,12 @@ class LottoRankTest {
     @Test
     void test_of_third() {
         // Given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        List<LottoNumber> winLottoNumbers = toLottoNumbers(new int[]{1, 2, 3, 4, 5, 10});
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers toWinLottoNumbers = new WinLottoNumbers(winLottoNumbers, bonusLottoNumber);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<String> winLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "10");
+        String bonusLottoNumber = "7";
+        Set<LottoNumber> purchaseLottoNumbers = toLottoNumbers(lottoNumbers);
+        Lotto lotto = new Lotto(purchaseLottoNumbers);
+        WinLottoNumbers toWinLottoNumbers = toWinLottoNumbers(winLottoNumbers, bonusLottoNumber);
 
         // When
         WinningLotto winningLotto = lotto.lottery(toWinLottoNumbers);
@@ -71,11 +73,15 @@ class LottoRankTest {
         assertEquals(winningLotto.getLottoRank(), LottoRank.THIRD);
     }
 
-    private List<LottoNumber> toLottoNumbers(int[] lottoNumbers) {
-        List<LottoNumber> toLottoNumbers = new ArrayList<>();
-        for (int value : lottoNumbers) {
-            toLottoNumbers.add(new LottoNumber(value));
-        }
-        return toLottoNumbers;
+    private Set<LottoNumber> toLottoNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
+
+    private WinLottoNumbers toWinLottoNumbers(List<String> winLottoNumbers, String bonusLottoNumber) {
+        return new WinLottoNumbers.WinLottoNumbersBuilder(winLottoNumbers)
+                .bonusLottoNumber(bonusLottoNumber)
+                .build();
     }
 }

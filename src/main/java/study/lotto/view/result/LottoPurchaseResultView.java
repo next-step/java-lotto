@@ -9,20 +9,16 @@ import java.util.stream.Collectors;
 
 public class LottoPurchaseResultView extends AbstractView {
 
-    private static final LottoPurchaseResultView instance = new LottoPurchaseResultView();
+    private LottoPurchaseResultView() {}
 
-    public static LottoPurchaseResultView getInstance() {
-        return instance;
-    }
-
-    public void display(Lottos lottos) {
+    public static void display(Lottos lottos) {
         for (Lotto lotto : lottos) {
             stringBuilder.append(toLottoView(lotto));
             printAndClear();
         }
     }
 
-    private String toLottoView(Lotto lotto) {
+    private static String toLottoView(Lotto lotto) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
 

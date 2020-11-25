@@ -3,16 +3,22 @@ package study.lotto.lottery;
 import study.lotto.core.LottoRank;
 import study.lotto.core.WinningLotto;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LotteryResult {
 
-    private final Map<LottoRank, Long> countByLottoRank;
-    private final double totalReturnRatio;
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
 
-    public LotteryResult(List<WinningLotto> winningLottos, double totalReturnRatio) {
-        this.countByLottoRank = countByLottoRank(winningLottos);
+    private final Map<LottoRank, Long> countByLottoRank;
+    private final BigDecimal totalReturnRatio;
+
+    public LotteryResult(List<WinningLotto> winningLottos, BigDecimal totalReturnRatio) {
+        this.countByLottoRank = Optional.ofNullable(winningLottos)
+                .map(this::countByLottoRank)
+                .orElse(new HashMap<>());
         this.totalReturnRatio = totalReturnRatio;
     }
 
@@ -21,13 +27,13 @@ public class LotteryResult {
                 .collect(Collectors.groupingBy(WinningLotto::getLottoRank, Collectors.counting()));
     }
 
-    public double getTotalReturnRatio() {
-        return totalReturnRatio;
+    public String getTotalReturnRatio() {
+        return DECIMAL_FORMAT.format(totalReturnRatio);
     }
 
     public Long getNumberOfLottoRank(LottoRank lottoRank) {
-        Long numberOfLottoRank = countByLottoRank.get(lottoRank);
-        return Objects.nonNull(numberOfLottoRank) ? numberOfLottoRank : 0L;
+        return Optional.ofNullable(countByLottoRank.get(lottoRank))
+                .orElse(0L);
     }
 
 }

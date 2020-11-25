@@ -1,7 +1,9 @@
 package study.lotto.core;
 
+import study.lotto.core.exception.AlreadyLotteryLottoException;
+import study.lotto.core.exception.LottoNumberCountNotMatchingException;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,27 +13,15 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
     private LottoStatus lottoStatus;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-
-        this.lottoNumbers = lottoNumbers;
-        sortLottoNumbers();
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Optional.ofNullable(lottoNumbers)
+                .filter(set -> set.size() == LOTTO_NUMBER_COUNT)
+                .map(ArrayList::new)
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
 
         this.lottoStatus = LottoStatus.BEFORE_LOTTERY;
 
-        throwIfNumbersNull();
-        throwIfNumberCountNotMatch();
-    }
-
-    private void throwIfNumbersNull() {
-        if (Objects.isNull(lottoNumbers)) {
-            throw new IllegalArgumentException("로또 번호를 입력해주세요.");
-        }
-    }
-
-    private void throwIfNumberCountNotMatch() {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개를 입력해주세요.");
-        }
+        sortLottoNumbers();
     }
 
     private void sortLottoNumbers() {
@@ -45,13 +35,20 @@ public class Lotto {
     public WinningLotto lottery(WinLottoNumbers winLottoNumbers) {
 
         if (this.lottoStatus == LottoStatus.HAS_BEEN_LOTTERY) {
-            throw new IllegalArgumentException("이미 추첨한 로또입니다.");
+            throw new AlreadyLotteryLottoException();
         }
 
         this.lottoStatus = LottoStatus.HAS_BEEN_LOTTERY;
-        return new WinningLotto(
-                winLottoNumbers.matchWithWinLottoNumbers(this)
-                , winLottoNumbers.matchWithBonusLottoNumber(this));
+
+        List<LottoNumber> lottoNumbers = Optional.ofNullable(winLottoNumbers)
+                .map(winningNumbers -> winningNumbers.matchWithWinLottoNumbers(this))
+                .orElse(new ArrayList<>());
+
+        boolean matchWithBonusLottoNumber = Optional.ofNullable(winLottoNumbers)
+                .map(winningNumbers -> winningNumbers.matchWithBonusLottoNumber(this))
+                .orElse(false);
+
+        return new WinningLotto(lottoNumbers, matchWithBonusLottoNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {

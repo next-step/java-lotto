@@ -2,6 +2,7 @@ package study.lotto.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 당첨된 로또
@@ -9,10 +10,11 @@ import java.util.List;
 public class WinningLotto {
 
     private final LottoRank lottoRank;
-    private List<LottoNumber> matchingNumbers = new ArrayList<>();
+    private List<LottoNumber> matchingNumbers;
 
     public WinningLotto(List<LottoNumber> matchingNumbers, boolean matchBonusLottoNumber) {
-        this.matchingNumbers = matchingNumbers;
+        this.matchingNumbers = Optional.ofNullable(matchingNumbers)
+                .orElse(new ArrayList<>());
         this.lottoRank = LottoRank.of(this, matchBonusLottoNumber);
     }
 

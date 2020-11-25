@@ -10,7 +10,11 @@ import java.util.List;
 
 public class LotteryResultView extends AbstractView {
 
-    private static final LotteryResultView instance = new LotteryResultView();
+    private LotteryResultView() {}
+
+    private static final String LOTTERY_RESULT_MESSAGE = "당첨 통계";
+    private static final String[] LOTTERY_STATISTIC_MESSAGES = { " (", ")- ", "개"};
+    private static final String[] TOTAL_RETURN_RATIO_MESSAGES = {"총 수익률은 ", "입니다."};
 
     private static final List<LottoRank> lottoRanks
             = Arrays.asList(
@@ -20,13 +24,9 @@ public class LotteryResultView extends AbstractView {
                     , LottoRank.SECOND
                     , LottoRank.FIRST);
 
-    public static LotteryResultView getInstance() {
-        return instance;
-    }
+    public static void display(LotteryResult lotteryResult) {
 
-    public void display(LotteryResult lotteryResult) {
-
-        stringBuilder.append("당첨 통계");
+        stringBuilder.append(LOTTERY_RESULT_MESSAGE);
         printAndClear();
 
         stringBuilder.append("---------");
@@ -37,24 +37,24 @@ public class LotteryResultView extends AbstractView {
         printTotalReturnRatio(lotteryResult);
     }
 
-    private void printLotteryStatistic(LotteryResult lotteryResult) {
+    private static void printLotteryStatistic(LotteryResult lotteryResult) {
         for (LottoRank lottoRank : lottoRanks) {
 
             stringBuilder.append(lottoRank.getDescription());
-            stringBuilder.append(" (");
+            stringBuilder.append(LOTTERY_STATISTIC_MESSAGES[0]);
             stringBuilder.append(lottoRank.getPrizeAmount());
-            stringBuilder.append(")- ");
+            stringBuilder.append(LOTTERY_STATISTIC_MESSAGES[1]);
             stringBuilder.append(lotteryResult.getNumberOfLottoRank(lottoRank));
-            stringBuilder.append("개");
+            stringBuilder.append(LOTTERY_STATISTIC_MESSAGES[2]);
 
             printAndClear();
         }
     }
 
-    private void printTotalReturnRatio(LotteryResult lotteryResult) {
-        stringBuilder.append("총 수익률은 ");
+    private static void printTotalReturnRatio(LotteryResult lotteryResult) {
+        stringBuilder.append(TOTAL_RETURN_RATIO_MESSAGES[0]);
         stringBuilder.append(lotteryResult.getTotalReturnRatio());
-        stringBuilder.append("입니다.");
+        stringBuilder.append(TOTAL_RETURN_RATIO_MESSAGES[1]);
 
         printAndClear();
     }

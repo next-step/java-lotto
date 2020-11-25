@@ -1,38 +1,29 @@
 package study.lotto.core;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import study.lotto.core.exception.LottoNumberCountNotMatchingException;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 로또 당첨 번호
  */
 public class WinLottoNumbers {
 
-    private final List<LottoNumber> winLottoNumbers;
+    private final Set<LottoNumber> winLottoNumbers;
     private final LottoNumber bonusLottoNumber;
 
-    public WinLottoNumbers(List<LottoNumber> winLottoNumbers, LottoNumber bonusLottoNumber) {
-        this.winLottoNumbers = winLottoNumbers;
-        this.bonusLottoNumber = bonusLottoNumber;
-
-        throwIfNumbersNull();
+    public WinLottoNumbers(WinLottoNumbersBuilder winLottoNumbersBuilder) {
+        this.winLottoNumbers = Optional.ofNullable(winLottoNumbersBuilder.winLottoNumbers)
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
+        this.bonusLottoNumber = Optional.ofNullable(winLottoNumbersBuilder.bonusLottoNumber)
+                .orElse(LottoNumber.zero());
         throwIfNumberCountNotMatch();
     }
 
     private void throwIfNumberCountNotMatch() {
         if (winLottoNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("당첨 번호는 6개를 입력해주세요.");
-        }
-
-        if (Objects.isNull(bonusLottoNumber)) {
-            throw new IllegalArgumentException("보너스 번호를 입력해주세요");
-        }
-    }
-
-    private void throwIfNumbersNull() {
-        if (Objects.isNull(winLottoNumbers)) {
-            throw new IllegalArgumentException("당첨 번호를 입력해주세요.");
+            throw new LottoNumberCountNotMatchingException();
         }
     }
 
@@ -50,4 +41,27 @@ public class WinLottoNumbers {
         return lotto.contains(bonusLottoNumber);
     }
 
+    public static class WinLottoNumbersBuilder {
+        // Required
+        private final Set<LottoNumber> winLottoNumbers;
+        // Optional
+        private LottoNumber bonusLottoNumber;
+
+        public WinLottoNumbersBuilder(List<String> winLottoNumbersInput) {
+            Set<LottoNumber> winLottoNumbers = winLottoNumbersInput.stream()
+                    .map(String::trim)
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toSet());
+            this.winLottoNumbers = winLottoNumbers;
+        }
+
+        public WinLottoNumbersBuilder bonusLottoNumber(String bonusLottoNumberInput) {
+            this.bonusLottoNumber = LottoNumber.of(bonusLottoNumberInput);
+            return this;
+        }
+
+        public WinLottoNumbers build() {
+            return new WinLottoNumbers(this);
+        }
+    }
 }

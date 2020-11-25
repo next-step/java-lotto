@@ -1,12 +1,11 @@
 package study.lotto.lottery;
 
 import study.lotto.core.*;
+import study.lotto.core.exception.LottoNumberCountNotMatchingException;
 import study.lotto.dispenser.Lottos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,8 +18,10 @@ public class Lottery {
     private List<WinningLotto> winningLottos = new ArrayList<>();
 
     public Lottery(WinLottoNumbers winLottoNumbers, Lottos lottos) {
-        this.winLottoNumbers = winLottoNumbers;
-        this.lottos = lottos;
+        this.winLottoNumbers = Optional.ofNullable(winLottoNumbers)
+                .orElseThrow(() -> new LottoNumberCountNotMatchingException());
+        this.lottos = Optional.ofNullable(lottos)
+                .orElse(new Lottos(new ArrayList<>()));
     }
 
     public LotteryResult checkLotto() {
@@ -38,10 +39,15 @@ public class Lottery {
                 .collect(Collectors.toList());
     }
 
-    private double calcTotalReturnRatio() {
-        int totalPrizeAmount = winningLottos.stream().mapToInt(WinningLotto::getPrize).sum();
-        int totalPurchaseAmount = lottos.getTotalPurchaseAmount();
-        return (double)totalPrizeAmount / totalPurchaseAmount;
+    private BigDecimal calcTotalReturnRatio() {
+        BigDecimal totalPrizeAmount = winningLottos.stream()
+                .map(WinningLotto::getPrize)
+                .map(BigDecimal::new)
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+
+        BigDecimal totalPurchaseAmount = BigDecimal.valueOf(lottos.getTotalPurchaseAmount());
+
+        return totalPrizeAmount.divide(totalPurchaseAmount);
     }
 
 }

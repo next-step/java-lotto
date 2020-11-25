@@ -1,37 +1,29 @@
 package study.lotto.lottery;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.core.*;
-import study.lotto.dispenser.Lottos;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LotteryTest {
 
-    private static final LottoNumber bonusLottoNumber = new LottoNumber(7);
-    private List<LottoNumber> lottoNumbers;
-
-    @BeforeEach
-    public void init() {
-        this.lottoNumbers = Arrays.asList(new LottoNumber(1)
-                , new LottoNumber(2)
-                , new LottoNumber(3)
-                , new LottoNumber(4)
-                , new LottoNumber(5)
-                , new LottoNumber(6));
-    }
+    private List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+    private static final String bonusLottoNumber = "7";
 
     @Test
     @DisplayName("1등 당첨")
     void test_lottery_first() {
         // Given
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers(lottoNumbers, bonusLottoNumber);
+        Lotto lotto = new Lotto(toLottoNumbers(lottoNumbers));
+        WinLottoNumbers.WinLottoNumbersBuilder builder = new WinLottoNumbers.WinLottoNumbersBuilder(lottoNumbers);
+        builder.bonusLottoNumber(bonusLottoNumber);
+        WinLottoNumbers winLottoNumbers = builder.build();
 
         // When
         WinningLotto lottery = lotto.lottery(winLottoNumbers);
@@ -41,6 +33,12 @@ class LotteryTest {
 
         assertEquals(matchingNumberCount, 6);
         assertEquals(lottery.getLottoRank(), LottoRank.FIRST);
+    }
+
+    private Set<LottoNumber> toLottoNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
 }
