@@ -79,29 +79,47 @@ class DrawResultTest {
         assertThat(drawResult).isNotNull();
     }
 
-    @DisplayName("각 등수에 대한 당첨 여부 테스트")
+    @DisplayName("1등 당첨 여부 테스트")
     @Test
-    public void drawResultValidTest(){
-        DrawResult first = DrawResult.valueOfRank(1);
-        DrawResult second = DrawResult.valueOfRank(2);
-        DrawResult third = DrawResult.valueOfRank(3);
-        DrawResult fourth = DrawResult.valueOfRank(4);
-
+    public void drawResultFirstRankTest() {
+        DrawResult drawResult = DrawResult.valueOfRank(1);
         assertAll(
-                ()->assertThat(first.getMoney()).isEqualTo(2000000000L),
-                ()->assertThat(first.isWinning()).isEqualTo(true),
-                ()->assertThat(first.getMatchNum()).isEqualTo(6),
-                ()->assertThat(second.getMoney()).isEqualTo(1500000L),
-                ()->assertThat(second.isWinning()).isEqualTo(true),
-                ()->assertThat(second.getMatchNum()).isEqualTo(5),
-                ()->assertThat(third.getMoney()).isEqualTo(50000L),
-                ()->assertThat(third.isWinning()).isEqualTo(true),
-                ()->assertThat(third.getMatchNum()).isEqualTo(4),
-                ()->assertThat(fourth.getMoney()).isEqualTo(5000L),
-                ()->assertThat(fourth.isWinning()).isEqualTo(true),
-                ()->assertThat(fourth.getMatchNum()).isEqualTo(3)
+                ()->assertThat(drawResult.getMoney()).isEqualTo(2000000000L),
+                ()->assertThat(drawResult.isWinning()).isEqualTo(true),
+                ()->assertThat(drawResult.getMatchNum()).isEqualTo(6)
         );
+    }
 
+    @DisplayName("2등 당첨 여부 테스트")
+    @Test
+    public void drawResultSecondRankTest() {
+        DrawResult drawResult = DrawResult.valueOfRank(2);
+        assertAll(
+                ()->assertThat(drawResult.getMoney()).isEqualTo(1500000L),
+                ()->assertThat(drawResult.isWinning()).isEqualTo(true),
+                ()->assertThat(drawResult.getMatchNum()).isEqualTo(5)
+        );
+    }
 
+    @DisplayName("3등 당첨 여부 테스트")
+    @Test
+    public void drawResultThirdRankTest() {
+        DrawResult drawResult = DrawResult.valueOfRank(3);
+        assertAll(
+                ()->assertThat(drawResult.getMoney()).isEqualTo(50000L),
+                ()->assertThat(drawResult.isWinning()).isEqualTo(true),
+                ()->assertThat(drawResult.getMatchNum()).isEqualTo(4)
+        );
+    }
+
+    @DisplayName("4등 당첨 여부 테스트")
+    @Test
+    public void drawResultForthRankTest() {
+        DrawResult drawResult = DrawResult.valueOfRank(4);
+        assertAll(
+                ()->assertThat(drawResult.getMoney()).isEqualTo(5000L),
+                ()->assertThat(drawResult.isWinning()).isEqualTo(true),
+                ()->assertThat(drawResult.getMatchNum()).isEqualTo(3)
+        );
     }
 }
