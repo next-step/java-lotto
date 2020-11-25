@@ -1,7 +1,6 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoConstraint;
 import lotto.domain.Pick;
 import lotto.domain.Prize;
 import lotto.domain.enums.Rank;
@@ -12,16 +11,12 @@ import java.util.Map;
 public class LottoService {
     private final Lotto lotto;
 
-    public LottoService(int price, LottoConstraint lottoConstraint, AbstractPrizePackager prizePackager) {
-        lotto = new Lotto(price, lottoConstraint, prizePackager.pack());
+    public LottoService(int price, AbstractPrizePackager prizePackager) {
+        lotto = new Lotto(price, prizePackager.pack());
     }
 
     public Integer getPrice() {
         return lotto.getPrice();
-    }
-
-    public LottoConstraint getConstraint() {
-        return lotto.getConstraint();
     }
 
     public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {

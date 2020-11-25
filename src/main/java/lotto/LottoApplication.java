@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.controller.RoundController;
-import lotto.domain.LottoConstraint;
 import lotto.service.AutoPickService;
 import lotto.service.LottoPrizePackager;
 import lotto.service.LottoService;
@@ -18,8 +17,8 @@ public class LottoApplication {
     }
 
     private static void setUpDependency() {
-        LottoService lottoService = new LottoService(1000, new LottoConstraint(6, 45), new LottoPrizePackager());
-        AutoPickService autoPickService = new AutoPickService(lottoService);
+        LottoService lottoService = new LottoService(1000, new LottoPrizePackager());
+        AutoPickService autoPickService = new AutoPickService();
         RoundService roundService = new RoundService(autoPickService, lottoService);
         roundController = new RoundController(roundService, lottoService);
     }

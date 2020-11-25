@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.domain.LottoConstraint;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
@@ -25,15 +24,7 @@ public class RoundService {
 
     public Round buy(Set<Pick> myPicks) {
         round.addPicks(myPicks);
-        validate();
         return round;
-    }
-
-    private void validate() {
-        LottoConstraint constraint = lottoService.getConstraint();
-        round.getMyPicks().stream()
-                .map(Pick::getBalls)
-                .forEach(constraint::validate);
     }
 
     public Round autoBuy(int count) {

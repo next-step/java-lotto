@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.LottoConstraint;
 import lotto.domain.Prize;
 import lotto.domain.Round;
 import lotto.domain.enums.Rank;
@@ -9,7 +8,6 @@ import lotto.service.RoundService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +34,6 @@ public class RoundController {
 
     public void checkWinningView() {
         List<Integer> winningBalls = InputView.getCommaSeparatedInteger("지난 주 당첨 번호를 입력해 주세요.");
-        LottoConstraint constraint = lottoService.getConstraint();
-        constraint.validate(winningBalls);
         roundService.checkWinning(winningBalls);
     }
 
