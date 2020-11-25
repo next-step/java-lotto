@@ -51,7 +51,7 @@ public class LottoController {
         inputView.inputManualMention();
         List<String> manualNumbers = inputManualNumbers(inputView, manualQuantity);
 
-        resultView.displayLottoQuantity(lottoQuantity);
+        resultView.displayLottoQuantity(manualQuantity, autoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();
         Lottos lottos = initLottos(lottoQuantity, basicLottoNumbers);
