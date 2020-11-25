@@ -40,7 +40,7 @@ public class LottoNumbers {
     public int computeMatchCount(LottoNumbers lottoNumbers) {
         return (int) lottoNumbers.export()
                 .stream()
-                .filter(item -> contains(item))
+                .filter(this::contains)
                 .count();
     }
 }
