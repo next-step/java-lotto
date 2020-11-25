@@ -1,55 +1,46 @@
 package lotto.domain;
 
 import lotto.service.NumberSelectionStrategyImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseTest {
-    @Test
-    @DisplayName("수동 로또 개수가 전체 금액을 넘을 때")
-    void createPurchase_manualLottoCountOverMoney() {
-        assertThatThrownBy(() ->
-                new Purchase(10000, 11))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("money and manual lotto count is wrong");
+
+    private LottoCounter lottoCounter;
+
+    @BeforeEach
+    void setUp() {
+        lottoCounter = new LottoCounter(10000, 1);
     }
 
     @Test
-    @DisplayName("구입 금액에 맞는 로또 개수 계산")
-    void getLottoNum() {
-        int money = 14000;
+    @DisplayName("입력한 구매할 수동 로또 수와 실제 입력한 수동 로또 수가 다를 때")
+    void drawLottos_notMatchingManualLottoCount() {
+        Purchase purchase = new Purchase(lottoCounter, new Lottos(2, new NumberSelectionStrategyImpl()));
 
-        int lottoNum = Purchase.getLottoCount(money);
-
-        assertThat(lottoNum).isEqualTo(14);
+        assertThatThrownBy(() -> {
+            purchase.drawLottos();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("manual lotto count is different with numbers count you input");
     }
 
     @Test
-    @DisplayName("수동 자동에 따른 방법으로 로또 뽑았을 때, 총 로또 구매 개수와 같기")
-    void drawLottosByMeans() {
-        Purchase purchase = new Purchase(10000, 9);
-        Function<Integer, Lottos> mean = (count) -> new Lottos(count, new NumberSelectionStrategyImpl());
+    @DisplayName("로또 구매")
+    void drawLottos() {
+        Lotto lotto = new Lotto(Numbers.builder().range(1, 7).build());
 
-        Lottos lottos = purchase.drawLottosByMeans(mean, mean);
+        Purchase purchase = new Purchase(lottoCounter, new Lottos(Collections.singletonList(lotto)));
 
-        assertThat(lottos.checkCount(10)).isTrue();
-    }
+        Lottos lottos = purchase.drawLottos();
 
-    @Test
-    @DisplayName("자동과 수동으로 로또 뽑은 후 합쳤을 때, 구매한 로또 개수와 다르면 에러")
-    void drawLottosByMeans_notSameCount() {
-        Purchase purchase = new Purchase(10000, 9);
-        Function<Integer, Lottos> integerLottosFunction = (count) -> new Lottos(3, new NumberSelectionStrategyImpl());
-
-        assertThatThrownBy(() ->
-                purchase.drawLottosByMeans(integerLottosFunction, integerLottosFunction))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("sum of lotto count are different with total lotto count");
-
+        assertThat(lottos.getLottoList())
+                .contains(lotto)
+                .hasSize(10);
     }
 }

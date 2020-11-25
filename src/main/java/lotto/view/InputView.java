@@ -24,7 +24,7 @@ public class InputView {
     public static List<Integer> getWinningNumbers() {
         out.println(GET_WINNING_NUMBERS_MESSAGE);
 
-        String[] numStrings = scanner.nextLine().replace(BLANK, "").split(SPLITTER);
+        String[] numStrings = scanner.nextLine().split(SPLITTER);
         return Arrays.stream(numStrings)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static int getAutoLottoCount() {
+    public static int getManualLottoCount() {
         out.println(GET_MANUAL_LOTTO_COUNT_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
@@ -53,7 +53,8 @@ public class InputView {
     }
 
     private static List<Integer> getManualLottoNumbers() {
-        String[] split = scanner.nextLine().replace(BLANK, "").split(SPLITTER);
+        String s = scanner.nextLine();
+        String[] split = s.split(SPLITTER);
         return Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
     }
 }

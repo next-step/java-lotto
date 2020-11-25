@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.Purchase.LOTTO_PRICE;
+import static lotto.domain.LottoCounter.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningRankStatisticsTest {

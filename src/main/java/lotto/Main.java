@@ -1,34 +1,26 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.Number;
-import lotto.domain.*;
-import lotto.service.WinningChecker;
+import lotto.domain.LottoCounter;
+import lotto.domain.Lottos;
+import lotto.domain.Purchase;
+import lotto.domain.WinningLotto;
 import lotto.service.WinningRankStatistics;
 
 public class Main {
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
+        LottoCounter lottoCounter = LottoController.createLottoCounter();
 
-        int money = lottoController.getMoney();
-        int manualLottoNumber = lottoController.getManualLottoNumber();
+        Lottos manualLottos = LottoController.getManualLottos(lottoCounter.getManualLottoCount());
 
-        Purchase purchase = new Purchase(money, manualLottoNumber);
+        Lottos lottos = new Purchase(lottoCounter, manualLottos).drawLottos();
 
-        Lottos lottos = purchase.drawLottosByMeans(LottoController::getManualLottosNumbers, LottoController::createLottos);
+        LottoController.showLottosWithCount(lottos, lottoCounter);
 
-        Numbers winningNumbers = lottoController.getWinningNumbers();
+        WinningLotto winningLotto = LottoController.createWinningLotto();
 
-        Number bonus = lottoController.getBonusNumber();
+        WinningRankStatistics winningRankStatistics = LottoController.getWinningRankStatistics(lottos, winningLotto);
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
-
-        WinningChecker winningChecker = new WinningChecker(winningLotto);
-
-        WinningRanks winningRanks = winningChecker.getWinningRanks(lottos);
-
-        WinningRankStatistics winningRankStatistics = new WinningRankStatistics(winningRanks);
-
-        lottoController.showResult(winningRankStatistics);
+        LottoController.showResult(winningRankStatistics);
     }
 }
