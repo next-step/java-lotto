@@ -3,21 +3,21 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.TreeSet;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
 
-    @DisplayName("LottoNumbers 인스턴스 생성 테스트")
+    @DisplayName("로또 생성 테스트")
     @Test
     public void createLottoNumberInstance() {
         //Given & When
-        LottoNumbers lottoNumbers = new LottoNumbers(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
+        List<Integer> result = LottoNumbers.getLottoNumbers();
 
         //Then
-        assertThat(lottoNumbers).isNotNull();
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(6);
     }
 
 

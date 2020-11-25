@@ -1,17 +1,25 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private Set<Integer> lottoNumbers;
+    private static final List<Integer> numbers = new ArrayList<>();
+    private static final int MAX_LOTTO_NUMBER_RANGE = 45;
+    private static final int LOTTO_NUMBER_CAPACITY = 6;
 
-    public LottoNumbers(Set<Integer> lottoNumbers){
-        this.lottoNumbers = lottoNumbers;
+    static {
+        IntStream.rangeClosed(1, MAX_LOTTO_NUMBER_RANGE).forEach(numbers::add);
     }
 
-    public Set<Integer> getLottoNumbers() {
-        return lottoNumbers;
-    }
+    private LottoNumbers() {}
 
+    public static List<Integer> getLottoNumbers() {
+        return numbers.stream()
+                .limit(LOTTO_NUMBER_CAPACITY)
+                .collect(Collectors.toList());
+    }
 }
