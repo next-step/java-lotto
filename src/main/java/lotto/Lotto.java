@@ -4,12 +4,16 @@ import java.util.*;
 
 public class Lotto {
 
-    private static final List<Integer> lottoTotalNumbers = new ArrayList<>();
+    private final List<Integer> lottoTotalNumbers = new ArrayList<>();
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
     private static final int LOTTO_SIZE = 6;
 
-    static {
+    public Lotto() {
+        createTotalNumber();
+    }
+
+    private void createTotalNumber() {
         for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
             lottoTotalNumbers.add(i);
         }
