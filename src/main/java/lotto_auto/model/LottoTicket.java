@@ -6,6 +6,7 @@ import lotto_auto.ErrorMessage;
 public class LottoTicket {
 
     private LottoNumbers lottoNumbers;
+    public static final int PRICE = 1000;
 
     public LottoTicket() {
         this.lottoNumbers = LottoNumberManager.generate();

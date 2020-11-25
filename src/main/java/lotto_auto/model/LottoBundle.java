@@ -11,11 +11,9 @@ import java.util.stream.IntStream;
 public class LottoBundle {
 
     private List<LottoTicket> lottoTicketList;
-    private final int payment;
 
-    public LottoBundle(int ticketCount, int payment) {
+    public LottoBundle(int ticketCount) {
         throwIfNegativeTicketCount(ticketCount);
-        this.payment = payment;
         this.lottoTicketList = Collections.unmodifiableList(
                 IntStream.range(0, ticketCount)
                         .mapToObj(item -> new LottoTicket())
@@ -38,7 +36,7 @@ public class LottoBundle {
         return new LottoStatistic(lottoTicketList.stream()
                 .map(item -> item.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
-                this.payment);
+                lottoTicketList.size() * LottoTicket.PRICE);
     }
 
     private void throwIfNegativeTicketCount(int ticketCount) {
