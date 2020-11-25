@@ -7,7 +7,7 @@ import step2.view.InputView;
 import step2.view.ResultView;
 
 public class LottoController {
-    public static void main(String[] args) {
+    public void start() {
         ResultView.printPurchasePrice();
         int purchasePrice = InputView.inputPurchasePrice();
 
