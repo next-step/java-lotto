@@ -53,6 +53,27 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
+1. LottoGameTest 삭제 (intellij로도 가능)
+2. Rank의 돈 단위를 2_000_000_000로 관리
+    - 코드 가독성을 위해
+3. Rank의 number, matchingNumberCount -> 사용하지 않는 메소드 삭제
+6. Rank value(...) 
+    - if문 중괄호 추가
+    - depth을 1로 줄이기
+9. LottoGame은 결과만 반환하고, 결과를 출력하기 위한 Dto 생성의 책임은 LottoGameResult에게 위임
+10. LottoNumbers의 List<Integer> Integer를 LottoNumber(Wrapper)로 변경 
+11. WinningNumber -> isExists 메서드 이름 짓기..
+12. Calculator 삭제
+13. LottoNumberGenerator에서 계속 숫자 배열 생성하지 않도록 수정
+14. LottoGame의 getResult()는 LottoGameResult에서 수행하도록 수정
+-- 
+1. MainSimulator, Controller 책임 정리 (의견)
+2. 상수가 많아지면 관리하기 힘드므로, 도메인에 정리한다?
+    - 고민 할거리
+3. Rank를 도메인으로 수정?
+4. Rank에 대한 설명을 view에서
+    - 설명을 수정하려고 서버 로직을 수정하는 건 불필요
+5. LottoGame 참조변수 타입을 왜 EnumMap으로 하였나?
 
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
