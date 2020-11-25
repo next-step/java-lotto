@@ -126,6 +126,15 @@ class LottoControllerTest {
     void checkBonusDuplicate(String lottoNumbers, int bonusNumber) {
         assertThrows(IllegalArgumentException.class,
                 () -> LottoValidator.checkBonusDuplicate(lottoNumbers, bonusNumber));
+    }
 
+    @Test
+    @DisplayName("로또 구매 금액보다 수동 로또 구매 개수가 클 경우 체크 기능")
+    void checkManualLottoQuantity() {
+        int lottoQuantity = 5;
+        int manualQuantity = 6;
+
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkManualQuantity(lottoQuantity, manualQuantity));
     }
 }

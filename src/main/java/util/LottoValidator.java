@@ -60,4 +60,10 @@ public class LottoValidator {
             throw new IllegalArgumentException("보너스 번호가 정답로또와 중복됩니다.");
         }
     }
+
+    public static void checkManualQuantity(int lottoQuantity, int manualQuantity) {
+        if(lottoQuantity < manualQuantity) {
+            throw new IllegalArgumentException("로또 금액보다 큰 개수입니다.");
+        }
+    }
 }
