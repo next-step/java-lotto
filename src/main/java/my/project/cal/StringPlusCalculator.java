@@ -1,10 +1,11 @@
 package my.project.cal;
 
+import my.project.constants.Delimiters;
+import my.project.constants.Matchers;
+import my.project.exception.CalException;
 import my.project.messages.ExceptionMessages;
 import my.project.utils.ArrayUtils;
-import my.project.constants.Delimiters;
 import my.project.utils.StringUtils;
-import my.project.exception.CalException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,14 +30,14 @@ public class StringPlusCalculator {
         return sum(input.split(Delimiters.DELIMITER));
     }
 
-    private boolean hasNegative(String input) {
-        return Integer.parseInt(input) < 0;
+    private void hasNegative(String input) {
+        if (Integer.parseInt(input) < 0) {
+            throw new CalException(ExceptionMessages.INPUT_HAS_NEGATIVE);
+        }
     }
 
     private Matcher localMatcher(String input) {
-        return Pattern.compile(
-                    Delimiters.CUSTOM_PREFIX_DELIMITER + "(.)" + Delimiters.CUSTOM_SUFFIX_DELIMITER + "(.*)")
-                .matcher(input);
+        return Pattern.compile(Delimiters.CUSTOM_PATTERN_DELIMITER).matcher(input);
     }
 
     private boolean hasCustomDelimiter(String input) {
@@ -46,7 +47,7 @@ public class StringPlusCalculator {
     private int sumCustom(String input) {
         Matcher matcher = localMatcher(input);
         if (matcher.find()) {
-            return sum(matcher.group(2).split(matcher.group(1)));
+            return sum(matcher.group(Matchers.TARGET).split(matcher.group(Matchers.DELIMITER)));
         }
         return 0;
     }
@@ -54,9 +55,7 @@ public class StringPlusCalculator {
     private int sum(String[] tokens) {
         int sum = 0;
         for (String s : tokens) {
-            if (hasNegative(s)) {
-                throw new CalException(ExceptionMessages.INPUT_HAS_NEGATIVE);
-            }
+            hasNegative(s);
             sum += Integer.parseInt(s);
         }
         return sum;

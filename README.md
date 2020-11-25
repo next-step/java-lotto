@@ -1,19 +1,29 @@
 # 로또
-## 진행 방법
-* 로또 요구사항을 파악한다.
-* 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
-* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
-* 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
-## 온라인 코드 리뷰 과정
-* [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
-
-
-## 1단계 문자열 덧셈 계산기 
-### 기능 추가
-* 빈 문자열 또는 null 값을 입력할 경우 0을 반환
-* 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환
-* 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환
-* 구분자를 컴마(,) 이외에 콜론(:)을 사용
-* “//”와 “\n” 문자 사이에 커스텀 구분자를 지정
-*  음수를 전달할 경우 RuntimeException 예외
+## 2단계 로또(자동)
+### 도메인
+* Application - 메인
+* Controller
+    * LottoController - 게임 컨트롤러
+    * StatController - 통계 컨트롤러
+* Domain
+    * GameInfo - 금액을 입력받고 게임 횟수를 리턴한다.
+    * GameRecord - 번호를 입력받고 게임 기록을 리턴한다.
+    * Lotto - 게임 정보를 입력받고 게임 기록을 리턴한다.    
+    * Machine - 번호를 생성하고 리턴한다.
+    * StatInfo - 게임 기록과 당첨 번호를 입력받고 리턴한다.
+    * Statistic - 게임 기록 정보를 입력받고 통계를 리턴한다.
+    * StatRecord - 등수와 수익률을 관리한다.
+    * Win - 기록과 당첨번호를 입력받고 등수를 리턴한다.
+* View
+    * InputView - UI
+    * ResultView - UI
+* Constants
+    * Comments
+    * Rule
+* Messages
+    * ExceptionMessages
+* Utils
+    * CollectionUtils
+    * IntUtils
+    * StringUtils
