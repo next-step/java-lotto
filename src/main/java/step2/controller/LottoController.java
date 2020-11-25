@@ -1,6 +1,6 @@
 package step2.controller;
 
-import step2.domain.LottoDTO;
+import step2.domain.dto.LottoDTO;
 import step2.service.LottoService;
 
 import java.util.List;
@@ -27,5 +27,9 @@ public class LottoController {
 
     public List<Long> findLottoResult() {
         return lottoService.findLottoResult();
+    }
+
+    public double findBenefit() {
+        return lottoService.findBenefit();
     }
 }

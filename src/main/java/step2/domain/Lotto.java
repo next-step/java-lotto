@@ -13,12 +13,12 @@ public class Lotto {
 
     private void createLottoNumber() {
         List<Integer> allNumbers = new ArrayList<>();
-        for (int number = 1; number <= 45; number++) {
+        for (int number = LottoConstant.START_NO; number <= LottoConstant.END_NO; number++) {
             allNumbers.add(number);
         }
 
         Collections.shuffle(allNumbers);
-        this.numbers = allNumbers.subList(0, 6);
+        this.numbers = allNumbers.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT);
         Collections.sort(this.numbers);
     }
 

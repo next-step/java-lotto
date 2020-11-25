@@ -1,4 +1,6 @@
-package step2.domain;
+package step2.domain.dto;
+
+import step2.domain.Lotto;
 
 import java.util.List;
 

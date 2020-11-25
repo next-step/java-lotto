@@ -74,7 +74,5 @@ class LottoStoreTest {
         for (Long money : winLottoMoney) {
             System.out.println(money);
         }
-
-
     }
 }

@@ -1,7 +1,7 @@
 package step2;
 
 import step2.controller.LottoController;
-import step2.domain.LottoDTO;
+import step2.domain.dto.LottoDTO;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -23,6 +23,7 @@ public class LottoMain {
         buyLotto();
         initWinNumber();
         findLottoResult();
+        findBenefit();
 
     }
 
@@ -41,6 +42,12 @@ public class LottoMain {
         List<Long> lottoResult = lottoController.findLottoResult();
         resultView.showLottoResult(lottoResult);
     }
+
+    private void findBenefit() {
+        double benefitPercent = lottoController.findBenefit();
+        resultView.showBenefitPercent(benefitPercent);
+    }
+
 
 
 }

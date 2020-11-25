@@ -24,4 +24,8 @@ public class LottoService {
     public List<Long> findLottoResult() {
         return this.lottoStore.findWinLottoMoney();
     }
+
+    public double findBenefit() {
+        return lottoStore.findBenefit();
+    }
 }

@@ -7,22 +7,22 @@ public enum LottoRank {
 
     FOUR(3) {
         public Long findMoney() {
-            return 5000L;
+            return LottoConstant.FOUR_MONEY;
         }
     },
     THREE(4){
         public Long findMoney() {
-            return 5000L;
+            return LottoConstant.THREE_MONEY;
         }
     },
     TWO(5){
         public Long findMoney() {
-            return 5000L;
+            return LottoConstant.TWO_MONEY;
         }
     },
     ONE(6){
         public Long findMoney() {
-            return 5000L;
+            return LottoConstant.ONE_MONEY;
         }
     };
 
@@ -34,14 +34,14 @@ public enum LottoRank {
 
     public static Optional<LottoRank> findRank(long winNumberCount) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getNumber() == winNumberCount)
+                .filter(lottoRank -> isSameNumber(lottoRank, winNumberCount))
                 .findAny();
     }
 
-    public abstract Long findMoney();
-
-    private long getNumber() {
-        return this.number;
+    private static boolean isSameNumber(LottoRank lottoRank, long winNumberCount) {
+        return lottoRank.number == winNumberCount;
     }
+
+    public abstract Long findMoney();
 
 }
