@@ -1,29 +1,38 @@
 package humbledude.lotto.domain;
 
-import java.util.HashSet;
 import java.util.Set;
-
-import static humbledude.lotto.domain.LottoTicket.LOTTO_SIZE_OF_NUMBERS;
 
 public class LottoWinningNumbers {
 
-    private final Set<LottoNumber> winningNumbers;
+    private final LottoNumbers winningNumbers;
+    private final LottoNumber bonus;
 
-    public LottoWinningNumbers(Set<LottoNumber> numbers) {
-        validateNumbers(numbers);
+    public LottoWinningNumbers(LottoNumbers numbers, LottoNumber bonus) {
         winningNumbers = numbers;
+        validateBonus(bonus);
+        this.bonus = bonus;
     }
 
-    public int getMatchedCountWith(LottoTicket ticket) {
-        HashSet<LottoNumber> intersection = new HashSet<>(winningNumbers);
-        intersection.retainAll(ticket.getNumbers());
+    public LottoPrize claimPrize(LottoNumbers ticket) {
+        int matchedCount = getMatchedCountWith(ticket);
+        boolean bonusMatched = isBonusMatched(ticket);
+
+        return LottoPrize.of(matchedCount, bonusMatched);
+    }
+
+    private int getMatchedCountWith(LottoNumbers numbers) {
+        Set<LottoNumber> intersection = winningNumbers.intersection(numbers);
 
         return intersection.size();
     }
 
-    private void validateNumbers(Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또는 겹치지 않는 6개 숫자로만 만들수 있어요");
+    private boolean isBonusMatched(LottoNumbers numbers) {
+        return numbers.contains(bonus);
+    }
+
+    private void validateBonus(LottoNumber bonus) {
+        if (this.winningNumbers.contains(bonus)) {
+            throw new IllegalStateException("보너스볼은 기존 6개와 겹칠 수 없습니다.");
         }
     }
 }
