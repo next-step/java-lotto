@@ -32,7 +32,7 @@ public class Person {
     }
 
     public double getTotalRevenue(int purchasePrice, int[][] winCounts) {
-        int total = 0;
+        double total = 0;
         for (int i = 0; i < winCounts.length; i++) {
             total = total + winCounts[i][0] * winCounts[i][1];
         }
