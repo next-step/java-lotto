@@ -23,7 +23,7 @@ public class Client {
     LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
 
     ResultView.printStatisticsOpening();
-    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult);
+    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult.exportData());
     ResultView.printRewards(statisticsExporter);
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
