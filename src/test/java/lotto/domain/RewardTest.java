@@ -14,7 +14,7 @@ public class RewardTest {
     @Test
     public void getRewardResult(){
         //Given
-        Reward reward = new Reward(Arrays.asList(PrizeInformation.FIVE_MATCH,PrizeInformation.FOUR_MATCH));
+        Reward reward = new Reward(Arrays.asList(PrizeInformation.THIRD,PrizeInformation.SECOND));
 
         //When
         Map<PrizeInformation, Integer> result = reward.getRewardResult();
@@ -27,12 +27,12 @@ public class RewardTest {
     @Test
     public void earningTest(){
         //Given
-        int totalReward = PrizeInformation.THREE_MATCH.getPrizePrice();
+        int totalReward = PrizeInformation.FIFTH.getPrizePrice();
         int purchasePrice = 14_000;
         float expectRate = (float) totalReward / purchasePrice;
 
         //When
-        Reward reward = new Reward(Arrays.asList(PrizeInformation.THREE_MATCH));
+        Reward reward = new Reward(Arrays.asList(PrizeInformation.FIFTH));
         reward.getRewardResult();
         float rate = reward.earningRate(14_000);
 

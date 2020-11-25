@@ -36,10 +36,10 @@ public class LottoTest {
         Lotto lotto = new Lotto(expected);
 
         //When
-        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(expected));
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(expected, 5 ));
 
         //That
-        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(prizeInformation.getMatchNumberCount()));
+        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(new MatchStatus(prizeInformation.countMatchNumber(), false)));
 
     }
 

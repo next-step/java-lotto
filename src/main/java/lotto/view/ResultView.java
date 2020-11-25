@@ -24,7 +24,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         reward.getRewardResult()
-                .forEach((prize, count) -> System.out.println(prize.getMatchNumberCount()+"개 일치 ("+prize.getPrizePrice()+")-"+count+"개"));
+                .forEach((prize, count) -> System.out.println(prize.countMatchNumber()+"개 일치 ("+prize.getPrizePrice()+"원)-"+count+"개"));
     }
 
     public static void outputTotalEarningRate(Reward reward, LottoPrice purchasePrice) {

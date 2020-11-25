@@ -14,7 +14,12 @@ public class Lotto {
         int prizeCount = (int) lottoPickNumber.stream()
                 .filter(prizeLotto::existByIndexNumber)
                 .count();
-        return PrizeInformation.findByPrizePrice(prizeCount);
+        boolean isBonusball = matchBonusball(prizeLotto);
+        return PrizeInformation.findByPrizePrice(new MatchStatus(prizeCount, isBonusball));
+    }
+
+    private boolean matchBonusball(PrizeLotto prizeLotto) {
+        return lottoPickNumber.stream().anyMatch(prizeLotto::matchBonusBall);
     }
 
     public Set<Integer> getLottoPickNumber() {
