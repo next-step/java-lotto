@@ -27,6 +27,6 @@ public class LottoResult {
   }
 
   public LottoResultDTO exportData() {
-    return new LottoResultDTO(this.hitHistory);
+    return new LottoResultDTO(new HashMap<>(this.hitHistory));
   }
 }
