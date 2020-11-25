@@ -3,25 +3,20 @@ package lotto.domain;
 import lotto.domain.enums.PickType;
 import lotto.domain.enums.Rank;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-
 public class Pick {
     private PickType type;
-    private final Set<Integer> balls = new TreeSet<>();
+    private LottoBalls balls;
     private Rank rank;
 
     public Pick() {
     }
 
-    public Pick(PickType pickType, Collection<Integer> balls) {
+    public Pick(PickType pickType, LottoBalls balls) {
         this.type = pickType;
-        this.balls.addAll(balls);
+        this.balls = balls;
     }
 
-    public Set<Integer> getBalls() {
+    public LottoBalls getBalls() {
         return balls;
     }
 
@@ -37,13 +32,7 @@ public class Pick {
         return this.rank;
     }
 
-    public int checkWinningBallCount(Collection<Integer> winningBalls) {
-        return (int) balls.stream().filter(winningBalls::contains).count();
-    }
-
-    public String getBallsString() {
-        return balls.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
+    public int checkWinningBallCount(LottoBalls winningBalls) {
+        return balls.containsCount(winningBalls);
     }
 }

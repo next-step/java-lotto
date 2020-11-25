@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.enums.Rank;
 
-import java.util.Collection;
 import java.util.Map;
 
 public class Lotto {
@@ -18,7 +17,8 @@ public class Lotto {
         return price;
     }
 
-    public Rank checkRank(Pick pick, Collection<Integer> winningBalls) {
+
+    public Rank checkRank(Pick pick, LottoBalls winningBalls) {
         return this.prizeInfo.checkRank(pick, winningBalls);
     }
 

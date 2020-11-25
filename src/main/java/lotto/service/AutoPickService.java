@@ -22,6 +22,6 @@ public class AutoPickService {
 
     public Pick pick() {
         Collections.shuffle(balls);
-        return new Pick(PickType.AUTO, balls.subList(0, LottoBalls.LOTTO_BALL_VALID_COUNT));
+        return new Pick(PickType.AUTO, new LottoBalls(balls.subList(0, LottoBalls.LOTTO_BALL_VALID_COUNT)));
     }
 }

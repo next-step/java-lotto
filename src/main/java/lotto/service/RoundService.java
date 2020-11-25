@@ -1,11 +1,11 @@
 package lotto.service;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
 import lotto.domain.enums.Rank;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
@@ -33,7 +33,7 @@ public class RoundService {
         return buy(picks);
     }
 
-    public void checkWinning(Collection<Integer> winningBalls) {
+    public void checkWinning(LottoBalls winningBalls) {
         round.getMyPicks().forEach(pick -> {
             Rank rank = lottoService.checkRank(pick, winningBalls);
             pick.setRank(rank);

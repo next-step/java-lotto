@@ -17,7 +17,7 @@ public class RoundTest {
     @Test
     void testGetPicks(){
         Round round = new Round();
-        Pick pick = new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6));
+        Pick pick = new Pick(PickType.AUTO, new LottoBalls(1,2,3,4,5,6));
         round.addPicks(Arrays.asList(pick));
         Set<Pick> pickSet = round.getMyPicks();
         assertThat(pickSet).isNotEmpty();
@@ -32,8 +32,8 @@ public class RoundTest {
 
     @Test
     void testGenerateReport(){
-        Pick losingPick = new Pick(PickType.AUTO, Arrays.asList(1, 2, 3, 4, 5, 6));
-        Pick winningPick = new Pick(PickType.AUTO, Arrays.asList(1, 2, 3, 4, 5, 8));
+        Pick losingPick = new Pick(PickType.AUTO, new LottoBalls(1, 2, 3, 4, 5, 6));
+        Pick winningPick = new Pick(PickType.AUTO, new LottoBalls(1, 2, 3, 4, 5, 8));
         winningPick.setRank(Rank.FIRST);
         Round round = new Round();
         round.addPicks(Arrays.asList(losingPick,

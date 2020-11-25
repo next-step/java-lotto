@@ -21,7 +21,7 @@ public class ResultView {
         int buyCount = myPicks.size();
         System.out.printf(BUY_COUNT_INFO, buyCount);
         myPicks.forEach(pick -> {
-            System.out.printf(PICK_BALLS_INFO, pick.getBallsString());
+            System.out.printf(PICK_BALLS_INFO, pick.getBalls());
         });
         System.out.println();
     }

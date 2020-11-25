@@ -1,10 +1,9 @@
 package lotto.service;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
 import lotto.domain.enums.Rank;
-
-import java.util.Collection;
 
 public abstract class AbstractPrizePackager {
     public PrizeInfo pack(){
@@ -14,6 +13,6 @@ public abstract class AbstractPrizePackager {
         return prizeInfo;
     }
 
-    protected abstract Rank makePrizeChecker(Pick pick, Collection<Integer> winningBalls);
+    protected abstract Rank makePrizeChecker(Pick pick, LottoBalls winningBalls);
     protected abstract void addPrize(PrizeInfo prizeInfo);
 }

@@ -1,12 +1,12 @@
 package lotto.service;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.Prize;
 import lotto.domain.PrizeInfo;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,9 +19,10 @@ public class LottoServiceTest {
         assertThat(lottoService.getPrice()).isEqualTo(1000);
     }
 
+
     @Test
     void testCheckRank(){
-        Rank rank = lottoService.checkRank(new Pick(), Arrays.asList(1, 2, 3, 4, 5, 6));
+        Rank rank = lottoService.checkRank(new Pick(), new LottoBalls(1, 2, 3, 4, 5, 6));
         assertThat(rank).isEqualTo(Rank.LOSE);
     }
 

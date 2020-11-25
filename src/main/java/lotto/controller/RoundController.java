@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.Prize;
 import lotto.domain.Round;
 import lotto.domain.enums.Rank;
@@ -34,7 +35,7 @@ public class RoundController {
 
     public void checkWinningView() {
         List<Integer> winningBalls = InputView.getCommaSeparatedInteger("지난 주 당첨 번호를 입력해 주세요.");
-        roundService.checkWinning(winningBalls);
+        roundService.checkWinning(new LottoBalls(winningBalls));
     }
 
     public void reportView() {

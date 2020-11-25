@@ -1,12 +1,11 @@
 package lotto.service;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
 import lotto.domain.enums.PickType;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,11 +14,11 @@ public class PrizePackagerTest {
     void testAlwaysLose(){
         AbstractPrizePackager prizePackager = new DefaultPrizePackager();
         PrizeInfo prizeInfo = prizePackager.pack();
-        Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(1,2,3,4,5,6));
+        Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, new LottoBalls(1,2,3,4,5,6)), new LottoBalls(1,2,3,4,5,6));
 
         assertThat(rank).isEqualTo(Rank.LOSE);
 
-        Rank rank2 = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(1,2,3,4,5,7));
+        Rank rank2 = prizeInfo.checkRank(new Pick(PickType.AUTO, new LottoBalls(1,2,3,4,5,6)), new LottoBalls(1,2,3,4,5,7));
 
         assertThat(rank2).isEqualTo(Rank.LOSE);
     }
@@ -28,11 +27,11 @@ public class PrizePackagerTest {
     void testAlwaysJackPot(){
         AbstractPrizePackager prizePackager = new JackPotPrizePackager();
         PrizeInfo prizeInfo = prizePackager.pack();
-        Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(1,2,3,4,5,6));
+        Rank rank = prizeInfo.checkRank(new Pick(PickType.AUTO, new LottoBalls(1,2,3,4,5,6)), new LottoBalls(1,2,3,4,5,6));
 
         assertThat(rank).isEqualTo(Rank.FIRST);
 
-        Rank rank2 = prizeInfo.checkRank(new Pick(PickType.AUTO, Arrays.asList(1,2,3,4,5,6)), Arrays.asList(10,11,13,14,15,16));
+        Rank rank2 = prizeInfo.checkRank(new Pick(PickType.AUTO, new LottoBalls(1,2,3,4,5,6)), new LottoBalls(10,11,13,14,15,16));
 
         assertThat(rank2).isEqualTo(Rank.FIRST);
     }

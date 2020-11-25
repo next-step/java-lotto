@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoBalls;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
@@ -8,7 +9,6 @@ import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,16 +20,16 @@ public class RoundServiceTest {
     private LottoService lottoService;
 
     @BeforeEach
-    void makeTestRoundService(){
+    void makeTestRoundService() {
         AbstractPrizePackager prizePackager = new DefaultPrizePackager();
         lottoService = new LottoService(1000, prizePackager);
         roundService = new RoundService(new AutoPickService(), lottoService);
     }
 
     @Test
-    void testBuy(){
+    void testBuy() {
         Set<Pick> myPicks = new HashSet<>();
-        myPicks.add(new Pick(PickType.AUTO, Arrays.asList(3,5,6,7,8,9)));
+        myPicks.add(new Pick(PickType.AUTO, new LottoBalls(3, 5, 6, 7, 8, 9)));
         Round round = roundService.buy(myPicks);
 
         assertThat(round).isNotNull();
@@ -37,7 +37,7 @@ public class RoundServiceTest {
     }
 
     @Test
-    void testAutoBuy(){
+    void testAutoBuy() {
         Round round = roundService.autoBuy(14);
 
         assertThat(round).isNotNull();
@@ -45,7 +45,7 @@ public class RoundServiceTest {
     }
 
     @Test
-    void checkWinning(){
+    void checkWinning() {
         Round round = roundService.autoBuy(14);
         Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
         roundService.checkWinning(winningBallPick.getBalls());
@@ -55,7 +55,7 @@ public class RoundServiceTest {
     }
 
     @Test
-    void testGenerateReport(){
+    void testGenerateReport() {
         Round round = roundService.autoBuy(14);
         Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
         roundService.checkWinning(winningBallPick.getBalls());

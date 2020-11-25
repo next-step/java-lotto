@@ -13,6 +13,5 @@ public class AutoPickServiceTest {
         AutoPickService autoPickService = new AutoPickService();
         Pick pick = autoPickService.pick();
         assertThat(pick.getType()).isEqualTo(PickType.AUTO);
-        assertThat(pick.getBalls()).hasSize(6);
     }
 }

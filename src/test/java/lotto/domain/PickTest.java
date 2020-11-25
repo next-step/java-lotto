@@ -3,27 +3,25 @@ package lotto.domain;
 import lotto.domain.enums.PickType;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PickTest {
 
     @Test
     void testGetBalls() {
-        Pick pick = new Pick(PickType.AUTO, Arrays.asList(40, 30, 20, 10, 1));
-        assertThat(pick.getBalls()).containsExactly(1, 10, 20, 30, 40);
+        Pick pick = new Pick(PickType.AUTO, new LottoBalls(40, 30, 20, 10, 1, 45));
+        assertThat(pick.getBalls()).isEqualTo(new LottoBalls(1, 10, 20, 30, 40, 45));
     }
 
     @Test
-    void getPickType(){
-        Pick pick = new Pick(PickType.AUTO, Arrays.asList(40, 30, 20, 10, 1));
+    void getPickType() {
+        Pick pick = new Pick(PickType.AUTO, new LottoBalls(40, 30, 20, 10, 1, 33));
         assertThat(pick.getType()).isEqualTo(PickType.AUTO);
     }
 
     @Test
-    void testGetBallString(){
-        Pick pick = new Pick(PickType.AUTO, Arrays.asList(40, 30, 20, 10, 1));
-        assertThat(pick.getBallsString()).isEqualTo("1, 10, 20, 30, 40");
+    void testGetBallString() {
+        Pick pick = new Pick(PickType.AUTO, new LottoBalls(40, 30, 20, 10, 1, 33));
+        assertThat(pick.getBalls().toString()).isEqualTo("1, 10, 20, 30, 33, 40");
     }
 }
