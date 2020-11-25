@@ -25,7 +25,7 @@ public class Generator {
 
     public LottoTicket generateLottoTicket() {
         Collections.shuffle(lottoNumbers);
-        List<Integer> numbers = lottoNumbers.stream().limit(6).collect(Collectors.toList());
+        List<Integer> numbers = lottoNumbers.stream().limit(6).sorted().collect(Collectors.toList());
         return new LottoTicket(numbers);
     }
 
