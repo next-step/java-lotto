@@ -19,8 +19,10 @@ public class LottoNumber {
         }
     }
 
-    public boolean equals(LottoNumber obj) {
-        return this.number == obj.number;
+    @Override
+    public boolean equals(Object obj) {
+        LottoNumber lottoNumber = (LottoNumber) obj;
+        return this.number == lottoNumber.number;
     }
 
     public int getNumber() {
