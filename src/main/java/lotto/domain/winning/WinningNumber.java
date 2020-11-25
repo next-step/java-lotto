@@ -4,6 +4,7 @@ import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoNumber;
 
 import java.util.*;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -37,11 +38,23 @@ public class WinningNumber {
         return Collections.unmodifiableList(this.winningNumber.value());
     }
 
-    public long matchCount(Lotto lotto) {
+    public WinningRank match(Lotto lotto) {
+        long matchCount = matchCount(lotto);
+        boolean matchBonus = matchBonus(lotto);
+        return WinningRank.getWinningRank((int) matchCount, matchBonus);
+    }
+
+    private long matchCount(Lotto lotto) {
         return lotto.number().stream()
                 .filter(num -> this.winningNumber.contains(num))
                 .count();
     }
+
+    private boolean matchBonus(Lotto lotto) {
+        return lotto.number().stream()
+                .anyMatch(num -> this.bonusBall.match(num));
+    }
+
 
     private static void checkBonusBallDuplicated(LottoNumber winningNumber, BonusBall bonusBall) {
         if (winningNumber.contains(bonusBall.value())) {

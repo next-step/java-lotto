@@ -11,11 +11,10 @@ import java.util.List;
  */
 public class WinningChecker {
 
-    private final List<Integer> winningNumbers;
-    private static final WinningStatistics winningStatistics = new WinningStatistics();
+    private final WinningNumber winningNumber;
 
     private WinningChecker(WinningNumber winningNumber) {
-        this.winningNumbers = winningNumber.value();
+        this.winningNumber = winningNumber;
     }
 
     public static WinningChecker of(WinningNumber winningNumber) {
@@ -23,6 +22,7 @@ public class WinningChecker {
     }
 
     public WinningStatistics winningStatistics(Lottos lottos) {
+        final WinningStatistics winningStatistics = new WinningStatistics();
         for (Lotto lotto : lottos.list()) {
             winningStatistics.add(getWinningResult(lotto));
         }
@@ -30,14 +30,7 @@ public class WinningChecker {
     }
 
     private WinningRank getWinningResult(Lotto lotto) {
-        long matchedNumber = compare(lotto);
-        return WinningRank.getWinningRank((int) matchedNumber);
-    }
-
-    private long compare(Lotto lotto) {
-        return lotto.number().stream()
-                .filter(num -> this.winningNumbers.contains(num))
-                .count();
+        return winningNumber.match(lotto);
     }
 
 }

@@ -3,6 +3,8 @@ package lotto.domain.winning;
 import lotto.domain.LottoNumberBoard;
 import lotto.domain.game.LottoNumber;
 
+import java.util.Objects;
+
 /**
  * Created By mand2 on 2020-11-26.
  */
@@ -27,6 +29,10 @@ public class BonusBall {
         return bonusBall;
     }
 
+    public boolean match(int number) {
+        return bonusBall == number;
+    }
+
     private static int getNumber(String before) {
         try {
             return Integer.valueOf(before);
@@ -44,5 +50,16 @@ public class BonusBall {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BonusBall bonusBall1 = (BonusBall) o;
+        return bonusBall == bonusBall1.bonusBall;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(bonusBall);
+    }
 }
