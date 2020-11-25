@@ -1,6 +1,8 @@
 package nextstep.step2.domain;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final String DUPLICATE_NUMBER = "보너스번호는 당첨 로또번호와 중복될 수 없습니다.";
@@ -8,6 +10,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private static final String WRONG_LOTTO_NUMBER = "로또번호는 모두 숫자여야 합니다.";
 	protected static final int LOTTO_MIN_NUMBER = 1;
 	protected static final int LOTTO_MAX_NUMBER = 45;
+	private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+			.mapToObj(LottoNumber::new)
+			.collect(Collectors.toUnmodifiableList());
 	private int number;
 
 	public LottoNumber(int number) {
@@ -16,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber of(int number) {
 		validateLottoNumberRange(number);
-		return new LottoNumber(number);
+		return LOTTO_NUMBERS.get(number - 1); //인덱스값은 0부터라서
 	}
 
 	private static void validateLottoNumberRange(int number) {
