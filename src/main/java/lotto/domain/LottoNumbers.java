@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
@@ -18,8 +17,6 @@ public class LottoNumbers {
     private LottoNumbers() {}
 
     public static List<Integer> getLottoNumbers() {
-        return numbers.stream()
-                .limit(LOTTO_NUMBER_CAPACITY)
-                .collect(Collectors.toList());
+        return numbers;
     }
 }
