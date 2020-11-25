@@ -7,6 +7,8 @@ public class Lotto {
     private final Numbers numbers;
 
     public Lotto(Numbers numbers) {
+        checkSize(numbers);
+
         this.numbers = numbers;
     }
 
