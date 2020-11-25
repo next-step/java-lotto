@@ -12,8 +12,9 @@ public class Purchase {
 
         this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = totalLottoCount - manualLottoCount;
-        if (this.autoLottoCount < 0)
+        if (this.autoLottoCount < 0) {
             throw new IllegalArgumentException("money and manual lotto count is wrong");
+        }
     }
 
     public static int getLottoCount(int money) {
@@ -29,8 +30,9 @@ public class Purchase {
 
     private Lottos buyLottos(Function<Integer, Lottos> getLottos, int count) {
         Lottos lottos = getLottos.apply(count);
-        if (!lottos.checkCount(count))
+        if (!lottos.checkCount(count)) {
             throw new IllegalArgumentException("sum of lotto count are different with total lotto count");
+        }
 
         return lottos;
     }
