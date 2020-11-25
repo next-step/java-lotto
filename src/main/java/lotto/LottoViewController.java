@@ -27,10 +27,12 @@ public class LottoViewController {
         lottos.clear();
         lottos.addAll(LottoFactory.createLotto(count));
         showLottoNumbers(count);
+
+        inputView.inputLastWeekWinningNumbers(this);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public void setLastWeekWinningNumbers(String input) {
+        lottos.forEach(lotto -> lotto.checkMatchingNumbers(LottoFactory.getLastWeekWinningNumbers(input)));
     }
 
     private void showLottoNumbers(int count) {

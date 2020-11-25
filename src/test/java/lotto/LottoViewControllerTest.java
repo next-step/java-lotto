@@ -1,6 +1,5 @@
-import lotto.InputView;
-import lotto.LottoViewController;
-import lotto.ResultView;
+package lotto;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +21,17 @@ public class LottoViewControllerTest {
     @Test
     void setPurcashPriceTest() {
         int purchasePrice = 14000;
+        int count = purchasePrice / 1000;
+
         lottoViewController.setPurchasePrice(purchasePrice);
-//        List<Lotto> lottos = LottoFactory.createLotto(14000 / 1000);
-        assertThat(lottoViewController.getLottos().size()).isEqualTo(14);
+
+        assertThat(LottoFactory.createLotto(count).size()).isEqualTo(14);
+    }
+
+    @Test
+    void setLastWeekWinningNumbers() {
+        String input = "1, 2, 3, 4, 5, 6";
+        lottoViewController.setLastWeekWinningNumbers(input);
+        assertThat(LottoFactory.getLastWeekWinningNumbers(input));
     }
 }

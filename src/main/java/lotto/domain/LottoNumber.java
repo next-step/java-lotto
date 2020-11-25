@@ -28,7 +28,6 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-//        System.out.println(number + " , " + that.number);
         return number == that.number;
     }
 
