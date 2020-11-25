@@ -9,6 +9,7 @@
 1. 구입금액을 입력 받는다. INPUT
 2. 유저에 구입금액을 저장한다 USER
 3. 구입금액, 로또 가격으로 수량을 계산한다 CALCULATOR
++ 로또를 생성한다 GENERATOR
 4. 수량만큼 로또를 생성한다 GENERATOR
 5. 유저에 로또를 저장한다 USER
 6. 당첨 번호를 입력 받는다 INPUT
