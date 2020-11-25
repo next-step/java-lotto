@@ -1,8 +1,8 @@
 package lottery.domain;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
-    public final static int MIN =  1;
-    public final static int MAX = 45;
+    public static final int MIN =  1;
+    public static final int MAX = 45;
 
     private final int number;
 
