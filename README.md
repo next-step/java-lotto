@@ -54,11 +54,9 @@ utils.Calculator
 
 ##TODO
 9. LottoGame은 결과만 반환하고, 결과를 출력하기 위한 Dto 생성의 책임은 LottoGameResult에게 위임
-10. LottoNumbers의 List<Integer> Integer를 LottoNumber(Wrapper)로 변경 
-11. WinningNumber -> isExists 메서드 이름 짓기..
-13. LottoNumberGenerator에서 계속 숫자 배열 생성하지 않도록 수정
 14. LottoGame의 getResult()는 LottoGameResult에서 수행하도록 수정
 -- 
+0. Uilts성 클래스 삭제
 1. MainSimulator, Controller 책임 정리 (의견)
 2. 상수가 많아지면 관리하기 힘드므로, 도메인에 정리한다?
     - 고민 할거리
@@ -89,6 +87,14 @@ utils.Calculator
 14. LottoGameTest 삭제 (intellij로도 가능)
 15. Calculator 삭제
 16. Rank의 number, matchingNumberCount -> 사용하지 않는 메소드 삭제
-6. Rank value(...) 메서드 코드 컨벤션  
+17. Rank value(...) 메서드 코드 컨벤션 적용
     - if문 중괄호 추가
     - depth을 1로 줄이기
+18. LottoNumbers의 List<Integer> Integer를 LottoNumber(Wrapper)로 변경
+19. LottoNumberGenerator에서 계속 숫자 배열 생성하지 않도록 수정
+20. WinningNumber -> isExists 메서드 이름 짓기..
+
+## 피드백 1
+https://github.com/next-step/java-lotto/pull/950
+## 피드백 2
+https://github.com/next-step/java-lotto/pull/974

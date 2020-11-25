@@ -11,8 +11,8 @@ public class LottoController {
         return LottoNumberGenerator.create(purchaseAmount);
     }
 
-    public LottoGameResultDto getLottoGameResult(Lottoes lottoes, WinningNumber winningNumber) {
-        LottoGame lottoGame = new LottoGame(lottoes, winningNumber);
+    public LottoGameResultDto getLottoGameResult(Lottoes lottoes, WinningNumbers winningNumbers) {
+        LottoGame lottoGame = new LottoGame(lottoes, winningNumbers);
         PurchaseAmount purchaseAmount = new PurchaseAmount(lottoes.getValue().size() * Lotto.PRICE);
         return new LottoGameResultDto(lottoGame.getResult(), purchaseAmount);
     }

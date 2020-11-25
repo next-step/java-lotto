@@ -12,13 +12,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class WinningNumberTest {
+class WinningNumbersTest {
 
-    public static final WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
+    public static final WinningNumbers WINNING_NUMBERS = new WinningNumbers("1, 2, 3, 4, 5, 6");
 
     @ParameterizedTest
     @DisplayName("입력받은 번호와 당첨번호의 일치하는 Rank를 반환한다.")
@@ -33,13 +34,17 @@ class WinningNumberTest {
     void should_return_rank(String inputNumbers, int expectedCount) {
         //Given
         List<String> numbers = StringUtils.splitString(inputNumbers);
-        LottoNumbers lottoNumbers = new LottoNumbers(IntegerUtils.parsePositiveInt(numbers));
+        List<LottoNumber> lottoNumbers = IntegerUtils.parsePositiveInt(numbers)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        LottoNumbers lotto = new LottoNumbers(lottoNumbers);
 
         //When
         Rank expectedRank = Rank.value(expectedCount);
 
         //Then
-        assertThat(winningNumber.getRank(lottoNumbers)).isEqualTo(expectedRank);
+        assertThat(WINNING_NUMBERS.getRank(lotto)).isEqualTo(expectedRank);
 
     }
 
@@ -50,10 +55,14 @@ class WinningNumberTest {
         String inputNumbers = "1, 2, 3, 4, 5, 6";
 
         //When
-        WinningNumber winningNumber = new WinningNumber(inputNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(inputNumbers);
 
         //Then
-        assertThat(winningNumber.getValue()).containsAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(winningNumbers.getValue().stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList())
+        )
+                .containsAll(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     }
 
@@ -63,7 +72,7 @@ class WinningNumberTest {
     void should_throw_illegal_argument_exception(String numbers) {
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumber(numbers))
+                .isThrownBy(() -> new WinningNumbers(numbers))
                 .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
     }
 
@@ -72,7 +81,7 @@ class WinningNumberTest {
     @ValueSource(strings = {"1, 1, 1, 1, 12, 1"})
     void should_throw_illegal_argument_exception_when_duplicate_number(String numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumber(numbers))
+                .isThrownBy(() -> new WinningNumbers(numbers))
                 .withMessage(ErrorMessage.NOT_ALLOW_DUPLICATED);
     }
 }

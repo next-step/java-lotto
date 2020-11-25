@@ -6,17 +6,17 @@ import java.util.EnumMap;
 
 public class LottoGame {
     private final Lottoes lottoes;
-    private final WinningNumber winningNumber;
+    private final WinningNumbers winningNumbers;
 
-    public LottoGame(Lottoes lottoes, WinningNumber winningNumber) {
+    public LottoGame(Lottoes lottoes, WinningNumbers winningNumbers) {
         this.lottoes = lottoes;
-        this.winningNumber = winningNumber;
+        this.winningNumbers = winningNumbers;
     }
 
     public LottoGameResult getResult() {
         EnumMap<Rank, Integer> result = initEnumMap();
         for (LottoNumbers lottoNumber : lottoes.getValue()) {
-            Rank rank = winningNumber.getRank(lottoNumber);
+            Rank rank = winningNumbers.getRank(lottoNumber);
             int rankCount = result.get(rank);
             result.put(rank, rankCount + 1);
         }

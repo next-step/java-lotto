@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.constant.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottoes;
 import lotto.domain.PurchaseAmount;
@@ -13,14 +14,12 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
+    private static final List<Integer> range = IntStream.range(Lotto.NUMBER_MIN_RANGE, Lotto.NUMBER_MAX_RANGE)
+            .boxed()
+            .collect(Collectors.toList());
+
     public static Lottoes create(PurchaseAmount purchaseAmount) {
-
-        List<Integer> range = IntStream.range(Lotto.NUMBER_MIN_RANGE, Lotto.NUMBER_MAX_RANGE)
-                .boxed()
-                .collect(Collectors.toList());
-
         return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount(), range));
-
     }
 
     private static List<LottoNumbers> getLottoNumbers(int lottoCount, List<Integer> range) {
@@ -29,9 +28,10 @@ public class LottoNumberGenerator {
         for (int i = 0; i < lottoCount; i++) {
             Collections.shuffle(range);
 
-            List<Integer> numbers = range.stream()
+            List<LottoNumber> numbers = range.stream()
                     .limit(Lotto.NUMBER_RANGE)
                     .sorted()
+                    .map(LottoNumber::new)
                     .collect(Collectors.toList());
 
             lottoNumbers.add(new LottoNumbers(numbers));

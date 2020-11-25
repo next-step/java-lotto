@@ -16,11 +16,18 @@ class LottoGameResultTest {
     void setUp() {
 
         //TODO 좀 더 테스트하기 쉬운 구조로 짤수 있지 않을까?
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
         Lottoes lottoes = new Lottoes(Arrays.asList(lottoNumbers));
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 7, 8, 9");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 7, 8, 9");
 
-        lottoGame = new LottoGame(lottoes, winningNumber);
+        lottoGame = new LottoGame(lottoes, winningNumbers);
     }
 
 
