@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,7 +19,7 @@ public class PrizeLottoTest {
     @MethodSource("createTreeSet")
     public void createInstanceTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers);
+        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers, 10);
 
         //Then
         assertThat(prizeLotto).isNotNull();
@@ -32,16 +33,29 @@ public class PrizeLottoTest {
     }
 
 
-
     @ParameterizedTest
     @MethodSource("createTreeSet")
     public void findByIndexTest(Set<Integer> prizeNumbers) {
         //Given & When
-        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers);
+        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers, 12);
 
         //Then
         for (int number : prizeNumbers) {
             assertThat(prizeLotto.existByIndexNumber(number)).isTrue();
         }
+    }
+
+    @ParameterizedTest
+    @MethodSource("createTreeSet")
+    public void matchBonusBall(Set<Integer> prizeNumbers) {
+        //Given
+        int bonusBall = 5;
+        PrizeLotto prizeLotto = new PrizeLotto(prizeNumbers, bonusBall);
+
+        //When
+        boolean expected = prizeLotto.matchBonusBall(bonusBall);
+
+        //Then
+        assertThat(expected).isTrue();
     }
 }
