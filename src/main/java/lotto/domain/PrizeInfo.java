@@ -8,17 +8,17 @@ import java.util.function.BiFunction;
 
 public class PrizeInfo {
     private final Map<Rank, Prize> prizeMap = new HashMap<>();
-    private BiFunction<Pick, LottoBalls, Rank> rankChecker;
+    private BiFunction<Pick, WinningLottoBalls, Rank> rankChecker;
 
     public Map<Rank, Prize> getPrizeMap() {
         return prizeMap;
     }
 
-    public void setPrizeChecker(BiFunction<Pick, LottoBalls, Rank> rankChecker) {
+    public void setPrizeChecker(BiFunction<Pick, WinningLottoBalls, Rank> rankChecker) {
         this.rankChecker = rankChecker;
     }
 
-    public Rank checkRank(Pick pick, LottoBalls winningBalls) {
+    public Rank checkRank(Pick pick, WinningLottoBalls winningBalls) {
         return this.rankChecker.apply(pick, winningBalls);
     }
 

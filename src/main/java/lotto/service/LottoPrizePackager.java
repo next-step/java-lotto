@@ -1,17 +1,17 @@
 package lotto.service;
 
 import lotto.domain.Cash;
-import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
+import lotto.domain.WinningLottoBalls;
 import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 
 public class LottoPrizePackager extends AbstractPrizePackager {
 
     @Override
-    public Rank makePrizeChecker(Pick pick, LottoBalls winningBalls) {
-        int count = pick.checkWinningBallCount(winningBalls);
+    public Rank makePrizeChecker(Pick pick, WinningLottoBalls winningBalls) {
+        int count = pick.checkWinningBallCount(winningBalls.getWinningBalls());
         if (count >= 6) {
             return Rank.FIRST;
         }

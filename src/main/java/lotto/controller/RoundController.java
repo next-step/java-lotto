@@ -2,8 +2,10 @@ package lotto.controller;
 
 import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
+import lotto.domain.LottoNumber;
 import lotto.domain.Prize;
 import lotto.domain.Round;
+import lotto.domain.WinningLottoBalls;
 import lotto.domain.enums.Rank;
 import lotto.service.LottoService;
 import lotto.service.RoundService;
@@ -36,7 +38,8 @@ public class RoundController {
 
     public void checkWinningView() {
         List<Integer> winningBalls = InputView.getCommaSeparatedInteger("지난 주 당첨 번호를 입력해 주세요.");
-        roundService.checkWinning(new LottoBalls(winningBalls));
+        Integer bonusBall = InputView.getInteger("보너스 볼을 입력해 주세요.");
+        roundService.checkWinning(new WinningLottoBalls(new LottoBalls(winningBalls), new LottoNumber(bonusBall)));
     }
 
     public void reportView() {

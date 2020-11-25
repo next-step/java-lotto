@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.Prize;
+import lotto.domain.WinningLottoBalls;
 import lotto.domain.enums.Rank;
 
 import java.util.Map;
@@ -20,7 +21,7 @@ public class LottoService {
         return lotto.getPrice();
     }
 
-    public Rank checkRank(Pick pick, LottoBalls winningBalls) {
+    public Rank checkRank(Pick pick, WinningLottoBalls winningBalls) {
         return this.lotto.checkRank(pick, winningBalls);
     }
 

@@ -28,4 +28,9 @@ public class InputView {
     private static String getInputLine() {
         return scanner.nextLine();
     }
+
+    public static Integer getInteger(String label) {
+        System.out.println(label);
+        return Integer.parseInt(getInputLine());
+    }
 }

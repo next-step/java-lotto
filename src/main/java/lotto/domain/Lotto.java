@@ -18,7 +18,7 @@ public class Lotto {
     }
 
 
-    public Rank checkRank(Pick pick, LottoBalls winningBalls) {
+    public Rank checkRank(Pick pick, WinningLottoBalls winningBalls) {
         return this.prizeInfo.checkRank(pick, winningBalls);
     }
 

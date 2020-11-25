@@ -4,6 +4,7 @@ import lotto.domain.LottoBalls;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
+import lotto.domain.WinningLottoBalls;
 import lotto.domain.enums.Rank;
 
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public class RoundService {
         return buy(picks);
     }
 
-    public void checkWinning(LottoBalls winningBalls) {
+    public void checkWinning(WinningLottoBalls winningBalls) {
         round.getMyPicks().forEach(pick -> {
             Rank rank = lottoService.checkRank(pick, winningBalls);
             pick.setRank(rank);

@@ -2,9 +2,11 @@ package lotto.service;
 
 import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
+import lotto.domain.WinningLottoBalls;
 import lotto.domain.enums.Currency;
 import lotto.domain.enums.PickType;
 import lotto.domain.enums.Rank;
@@ -49,8 +51,7 @@ public class RoundServiceTest {
     @Test
     void checkWinning() {
         Round round = roundService.autoBuy(14);
-        Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
-        roundService.checkWinning(winningBallPick.getBalls());
+        roundService.checkWinning(new WinningLottoBalls(new LottoBalls(1,2,3,4,5,6), new LottoNumber(7)));
         assertThat(round.getMyPicks()).allSatisfy(pick -> {
             assertThat(pick.getRank()).isEqualTo(Rank.LOSE);
         });
@@ -59,8 +60,7 @@ public class RoundServiceTest {
     @Test
     void testGenerateReport() {
         Round round = roundService.autoBuy(14);
-        Pick winningBallPick = round.getMyPicks().stream().findFirst().get();
-        roundService.checkWinning(winningBallPick.getBalls());
+        roundService.checkWinning(new WinningLottoBalls(new LottoBalls(1,2,3,4,5,6), new LottoNumber(7)));
         LottoReport lottoReport = roundService.generateReport();
         assertThat(lottoReport).isNotNull();
         assertThat(lottoReport.getRankMap()).extractingByKey(Rank.LOSE).isEqualTo(14);

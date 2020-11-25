@@ -24,13 +24,6 @@ public class RoundTest {
     }
 
     @Test
-    void testGetWinningNumber(){
-        Round round = new Round();
-        round.setWinningBalls(Arrays.asList(1,2,3,4,5,6));
-        assertThat(round.getWinningBalls()).containsExactly(1,2,3,4,5,6);
-    }
-
-    @Test
     void testGenerateReport(){
         Pick losingPick = new Pick(PickType.AUTO, new LottoBalls(1, 2, 3, 4, 5, 6));
         Pick winningPick = new Pick(PickType.AUTO, new LottoBalls(1, 2, 3, 4, 5, 8));

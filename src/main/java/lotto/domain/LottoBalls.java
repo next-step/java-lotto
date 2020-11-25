@@ -45,4 +45,8 @@ public class LottoBalls {
         LottoBalls that = (LottoBalls) o;
         return balls.containsAll(that.balls) && that.balls.containsAll(balls);
     }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return balls.contains(bonusBall);
+    }
 }
