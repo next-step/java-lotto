@@ -14,9 +14,10 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        List<Lotto> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
-        lottos = new Lottos(lottoNumbers);
+        List<String> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add("1,2,3,4,5,6");
+
+        lottos = Lottos.of(lottoNumbers);
     }
 
     @Test

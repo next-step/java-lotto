@@ -1,12 +1,17 @@
 package domain;
 
+import common.CommonConstants;
 import exception.InvalidLottoNumbersException;
+import exception.NumberNotInRangeException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
 
@@ -20,7 +25,17 @@ public class Lotto {
             throw new InvalidLottoNumbersException();
         }
 
+        if(numbers.stream().anyMatch(i -> i < LOTTO_MIN_NUMBER || i > LOTTO_MAX_NUMBER)) {
+            throw new NumberNotInRangeException();
+        }
+
         return new Lotto(numbers);
+    }
+
+    public static Lotto of(String numbers) throws Exception {
+        return Lotto.of(Arrays.stream(numbers.split(CommonConstants.COMMA))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public LottoPrize checkWhetherToWin(Lotto winningLotto, int bonusNumber) {

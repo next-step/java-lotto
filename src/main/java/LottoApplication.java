@@ -2,8 +2,6 @@ import domain.*;
 import ui.InputView;
 import ui.ResultView;
 
-import java.util.List;
-
 public class LottoApplication {
 
     public static void main(String[] args) throws Exception {
@@ -12,11 +10,10 @@ public class LottoApplication {
         int numberOfLottos = (int) Math.floor(buyingAmount.dividedBy(lottoPrice));
         int numberOfManualLottos = InputView.askNumberOfManualLottos();
 
-        List<Lotto> manualLottos = LottoGenerator.generate(InputView.askManualLottoNumbers(numberOfManualLottos));
-        List<Lotto> autoLottos = LottoGenerator.generate(numberOfLottos - numberOfManualLottos);
+        Lottos manualLottos = Lottos.of(InputView.askManualLottoNumbers(numberOfManualLottos));
+        Lottos autoLottos = Lottos.of(numberOfLottos - numberOfManualLottos);
 
-        Lottos lottos = new Lottos(manualLottos);
-        lottos = lottos.addAll(autoLottos);
+        Lottos lottos = manualLottos.addAll(autoLottos);
 
         ResultView.printBuyingLottos(lottos, numberOfManualLottos);
 

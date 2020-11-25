@@ -1,18 +1,61 @@
 package domain;
 
+import common.CommonConstants;
+import exception.ExceptionFunction;
 import exception.InvalidBonusNumberException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
+    private static final List<Integer> oneToFortyFive = IntStream.rangeClosed(Lotto.LOTTO_MIN_NUMBER,Lotto.LOTTO_MAX_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
-    public Lottos(List<Lotto> lottos){
+    private Lottos(List<Lotto> lottos){
         Objects.requireNonNull(lottos);
         this.lottos = lottos;
+    }
+
+    public static Lottos of(int numberOfLottos) throws Exception {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < numberOfLottos; i++) {
+            Collections.shuffle(oneToFortyFive);
+            lottos.add(Lotto.of(oneToFortyFive.stream()
+                    .limit(Lotto.LOTTO_NUMBERS_SIZE)
+                    .sorted()
+                    .collect(Collectors.toList())));
+        }
+
+        return new Lottos(lottos);
+    }
+
+    public static Lottos of(List<String> stringLottos) throws Exception{
+        List<Lotto> lottos = stringLottos.stream()
+                .map(s -> Arrays.stream(s.split(CommonConstants.COMMA))
+                        .map(String::trim)
+                        .mapToInt(Integer::parseInt)
+                        .boxed()
+                        .collect(Collectors.toList()))
+                .map(checkException(Lotto::of))
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    private static <T, R> Function<T, R> checkException(ExceptionFunction<T, R> f) {
+        return (T r) -> {
+            try {
+                return f.apply(r);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     public LottoResult calculate(Lotto winningLotto, int bonusNumber) throws InvalidBonusNumberException {
@@ -35,11 +78,11 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lottos addAll(List<Lotto> lottos) {
+    public Lottos addAll(Lottos l) {
         List<Lotto> addedLottos = new ArrayList<>();
 
-        this.lottos.stream().forEach(addedLottos::add);
-        lottos.stream().forEach(addedLottos::add);
+        addedLottos.addAll(this.lottos);
+        addedLottos.addAll(l.lottos);
 
         return new Lottos(addedLottos);
     }
