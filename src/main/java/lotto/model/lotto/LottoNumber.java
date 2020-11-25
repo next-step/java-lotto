@@ -2,6 +2,8 @@ package lotto.model.lotto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final static String RANGE_ERROR_MESSAGE = "유효한 로또 번호가 아닙니다.";
+    private final static int MIN_NUMBER = 0;
+    private final static int MAX_NUMBER = 45;
     private int number;
 
     public LottoNumber(int number) {
@@ -12,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private boolean isNotValidRange(int inputNumber) {
-        return inputNumber <= 0 || 45 < inputNumber;
+        return inputNumber <= MIN_NUMBER || MAX_NUMBER < inputNumber;
     }
 
     @Override
