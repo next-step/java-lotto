@@ -4,7 +4,6 @@ import nextstep.step2.domain.*;
 import nextstep.step2.view.InputView;
 import nextstep.step2.view.LottoResultView;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -16,7 +15,7 @@ public class LottoGame {
 		LottoPurchase purchase = new LottoPurchase(money);
 		String manaulLottos = getManualLottos(manualCount); //수동 로또번호 입력
 		//수동, 자동 로또번호 출력
-		List<Lotto> autoLottos = getPurchaseLottos(controller, resultView, manualCount, purchase, manaulLottos);
+		Lottos autoLottos = getPurchaseLottos(controller, resultView, manualCount, purchase, manaulLottos);
 		final String winningNumber = getLastWeekLotto(); //지난주 로또번호 입력
 		final LottoNumber bonusNumber = getBonusNumber();  //보너스 번호 입력
 		//당첨통계 출력
@@ -34,7 +33,7 @@ public class LottoGame {
 		return inputWinningNumbers.getInputLottoWinningNumbers();
 	}
 
-	private static List<Lotto> getPurchaseLottos(LottoController controller, LottoResultView resultView, int manualCount, LottoPurchase purchase, String manaulLottos) {
+	private static Lottos getPurchaseLottos(LottoController controller, LottoResultView resultView, int manualCount, LottoPurchase purchase, String manaulLottos) {
 		LottoCount lottoCount = new LottoCount(manualCount, purchase.getLottoCount());
 		return controller.startLottoGameGetLottos(lottoCount, manaulLottos, resultView);
 	}

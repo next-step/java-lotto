@@ -22,7 +22,7 @@ public class LottoControllerTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		LottoCount lottoCount = new LottoCount(1, lottoPurchase.getLottoCount());
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25";
-		List<Lotto> autoLottos = underTest.startLottoGameGetLottos(lottoCount, manualLottos, resultView);
+		Lottos autoLottos = underTest.startLottoGameGetLottos(lottoCount, manualLottos, resultView);
 		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4,5,6", lottoPurchase, bonusNumber);
 		underTest.printLottoStaticsic(lottoStaticstic, autoLottos, resultView);
 	}
@@ -50,9 +50,9 @@ public class LottoControllerTest {
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25:30,31,32,33,34,35";
 		List<Lotto> manualLottoList = underTest.purchaseManualLottos(manualLottos);
 		List<Lotto> autoLottoList = underTest.purchaseAutoLottos(3);
-		List<Lotto> lottos = underTest.mergeLottos(manualLottoList, autoLottoList);
-		assertThat(lottos).hasSize(6);
-		assertThat(lottos.get(0).getNumbers()).isEqualTo(Lotto.of("1,2,3,13,14,15").getNumbers());
+		Lottos lottos = underTest.mergeLottos(manualLottoList, autoLottoList);
+		assertThat(lottos.getLottos()).hasSize(6);
+		assertThat(lottos.getLottos().get(0).getNumbers()).isEqualTo(Lotto.of("1,2,3,13,14,15").getNumbers());
 
 	}
 }

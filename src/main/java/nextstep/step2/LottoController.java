@@ -13,21 +13,21 @@ import java.util.stream.Stream;
 
 public class LottoController {
 
-	public List<Lotto> startLottoGameGetLottos(LottoCount lottoCount, String manaulLottos, LottoResultView resultView) {
+	public Lottos startLottoGameGetLottos(LottoCount lottoCount, String manaulLottos, LottoResultView resultView) {
 		resultView.printLottoPurchase(lottoCount);
 		return printLottoListAndReturnLottos(lottoCount, manaulLottos);
 	}
 
-	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, List<Lotto> lottoList, LottoResultView resultView) {
-		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottoList);
+	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, Lottos lottos, LottoResultView resultView) {
+		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottos);
 		resultView.printLottoStaticsic(lottoRewardListMap);
 		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
 	}
 
-	private List<Lotto> printLottoListAndReturnLottos(LottoCount lottoCount, String manaulLottos) {
+	private Lottos printLottoListAndReturnLottos(LottoCount lottoCount, String manaulLottos) {
 		List<Lotto> manualList = purchaseManualLottos(manaulLottos);
 		List<Lotto> autoList = purchaseAutoLottos(lottoCount.getAuto());
-		List<Lotto> purchaseLottos = mergeLottos(manualList, autoList);
+		Lottos purchaseLottos = mergeLottos(manualList, autoList);
 		LottoTicketView.printLottoTickets(purchaseLottos);
 		return purchaseLottos;
 	}
@@ -50,10 +50,10 @@ public class LottoController {
 		return lottos;
 	}
 
-	protected List<Lotto> mergeLottos(List<Lotto> manaual, List<Lotto> auto) {
-		return Stream.of(manaual, auto)
+	protected Lottos mergeLottos(List<Lotto> manaual, List<Lotto> auto) {
+		List<Lotto> mergeList = Stream.of(manaual, auto)
 				.flatMap(Collection::stream)
 				.collect(Collectors.toList());
-
+		return new Lottos(mergeList);
 	}
 }
