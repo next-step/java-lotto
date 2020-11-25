@@ -1,7 +1,7 @@
 package step2.service;
 
-import step2.Lotto;
-import step2.LottoStore;
+import step2.domain.Lotto;
+import step2.domain.LottoStore;
 
 import java.util.List;
 

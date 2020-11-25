@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.LottoDTO;
+import step2.domain.LottoDTO;
 
 import java.util.List;
 

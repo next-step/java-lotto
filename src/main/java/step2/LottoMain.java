@@ -1,6 +1,7 @@
 package step2;
 
 import step2.controller.LottoController;
+import step2.domain.LottoDTO;
 import step2.view.InputView;
 import step2.view.ResultView;
 

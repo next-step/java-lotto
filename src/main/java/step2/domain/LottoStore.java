@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,11 +20,6 @@ public class LottoStore {
         for (int count = 0; count < buyCount; count++) {
             this.soldLotto.add(new Lotto());
         }
-
-        for (Lotto lotto : soldLotto) {
-            System.out.println(lotto.getNumbers());
-        }
-
 
         return soldLotto;
     }

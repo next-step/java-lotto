@@ -1,7 +1,6 @@
 package step2.controller;
 
-import step2.Lotto;
-import step2.LottoDTO;
+import step2.domain.LottoDTO;
 import step2.service.LottoService;
 
 import java.util.List;
