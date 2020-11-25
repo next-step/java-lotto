@@ -11,12 +11,12 @@ import java.util.stream.IntStream;
  */
 public class LottoNumberBoard {
 
-    private static final List<Integer> lottoNumbers = new ArrayList<>();;
+    private static List<Integer> lottoNumbers;
     public static final int VALID_MIN_NUMBER = 1;
     public static final int VALID_MAX_NUMBER = 45;
 
     static {
-        IntStream.rangeClosed(VALID_MIN_NUMBER, VALID_MAX_NUMBER)
+        lottoNumbers = IntStream.rangeClosed(VALID_MIN_NUMBER, VALID_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }
