@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 
 import java.util.Collection;
@@ -30,8 +31,9 @@ public class Round {
         return winningBalls;
     }
 
-    public LottoReport generateReport(Integer lottoPrice, Map<Rank, Prize> prizeMap) {
-        report = new LottoReport((long) (lottoPrice * myPicks.size()));
+    public LottoReport generateReport(Cash lottoPrice, Map<Rank, Prize> prizeMap) {
+        Cash cost = new Cash(lottoPrice.getAmount() * myPicks.size(), Currency.WON);
+        report = new LottoReport(cost);
         myPicks.stream()
                 .map(Pick::getRank)
                 .filter(Objects::nonNull)

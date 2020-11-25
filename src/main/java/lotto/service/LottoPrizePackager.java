@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
@@ -28,9 +29,9 @@ public class LottoPrizePackager extends AbstractPrizePackager {
 
     @Override
     protected void addPrize(PrizeInfo prizeInfo) {
-        prizeInfo.add(Rank.FIRST, 2000000000L, Currency.WON, "6개 일치");
-        prizeInfo.add(Rank.THIRD, 1500000L, Currency.WON, "5개 일치");
-        prizeInfo.add(Rank.FOURTH, 50000L, Currency.WON, "4개 일치");
-        prizeInfo.add(Rank.FIFTH, 5000L, Currency.WON, "3개 일치");
+        prizeInfo.add(Rank.FIRST, new Cash(2000000000L, Currency.WON), "6개 일치");
+        prizeInfo.add(Rank.THIRD, new Cash(1500000L, Currency.WON), "5개 일치");
+        prizeInfo.add(Rank.FOURTH, new Cash(50000L, Currency.WON), "4개 일치");
+        prizeInfo.add(Rank.FIFTH, new Cash(5000L, Currency.WON), "3개 일치");
     }
 }

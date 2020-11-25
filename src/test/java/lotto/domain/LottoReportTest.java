@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ public class LottoReportTest {
 
     @Test
     void testGetRankMap(){
-        LottoReport lottoReport = new LottoReport(10000L);
+        LottoReport lottoReport = new LottoReport(new Cash(10000L, Currency.WON));
         lottoReport.addRanks(Rank.FIRST);
         Map<Rank, Integer> rankMap = lottoReport.getRankMap();
         assertThat(rankMap).extractingByKey(Rank.FIRST).isEqualTo(1);
@@ -23,9 +24,9 @@ public class LottoReportTest {
 
     @Test
     void testGetEarningRate(){
-        LottoReport lottoReport = new LottoReport(2000L);
-        lottoReport.addEarnings(1000L);
-        lottoReport.addEarnings(5000L);
+        LottoReport lottoReport = new LottoReport(new Cash(2000L, Currency.WON));
+        lottoReport.addEarnings(new Cash(1000L, Currency.WON));
+        lottoReport.addEarnings(new Cash(5000L, Currency.WON));
 
         BigDecimal earningRate = lottoReport.getEarningRate();
         assertThat(earningRate).isCloseTo(BigDecimal.valueOf(3), Percentage.withPercentage(100));
@@ -34,9 +35,9 @@ public class LottoReportTest {
     @ParameterizedTest
     @CsvSource(value = {"2000,이득","6000,본전","8000,손해"})
     void testGetEarningType(Long cost, String result){
-        LottoReport lottoReport = new LottoReport(cost);
-        lottoReport.addEarnings(1000L);
-        lottoReport.addEarnings(5000L);
+        LottoReport lottoReport = new LottoReport(new Cash(cost,Currency.WON));
+        lottoReport.addEarnings(new Cash(1000L, Currency.WON));
+        lottoReport.addEarnings(new Cash(5000L, Currency.WON));
 
         assertThat(lottoReport.getEarningRateType().getDescription()).isEqualTo(result);
     }

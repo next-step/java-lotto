@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.PrizeInfo;
@@ -15,6 +16,6 @@ public class JackPotPrizePackager extends AbstractPrizePackager {
 
     @Override
     protected void addPrize(PrizeInfo prizeInfo) {
-        prizeInfo.add(Rank.FIRST, 20000000000L, Currency.WON, "Jack Pot!");
+        prizeInfo.add(Rank.FIRST, new Cash(20000000000L, Currency.WON), "Jack Pot!");
     }
 }

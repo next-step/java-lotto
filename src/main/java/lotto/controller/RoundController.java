@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
 import lotto.domain.Prize;
 import lotto.domain.Round;
@@ -28,8 +29,8 @@ public class RoundController {
     }
 
     public Round autoBuy(Long budget) {
-        Integer price = lottoService.getPrice();
-        int pickCount = Math.toIntExact(budget / price.longValue());
+        Cash price = lottoService.getPrice();
+        int pickCount = Math.toIntExact(budget / price.getAmount());
         return roundService.autoBuy(pickCount);
     }
 

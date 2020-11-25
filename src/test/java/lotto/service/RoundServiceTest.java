@@ -1,9 +1,11 @@
 package lotto.service;
 
+import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
 import lotto.domain.LottoReport;
 import lotto.domain.Pick;
 import lotto.domain.Round;
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.PickType;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +24,7 @@ public class RoundServiceTest {
     @BeforeEach
     void makeTestRoundService() {
         AbstractPrizePackager prizePackager = new DefaultPrizePackager();
-        lottoService = new LottoService(1000, prizePackager);
+        lottoService = new LottoService(new Cash(1000L, Currency.WON), prizePackager);
         roundService = new RoundService(new AutoPickService(), lottoService);
     }
 

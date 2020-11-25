@@ -41,8 +41,8 @@ public class RoundTest {
                 winningPick));
 
         Map<Rank,Prize> prizeMap = new HashMap<>();
-        prizeMap.put(Rank.FIRST, new Prize(Rank.FIRST, 10000000L, Currency.WON, "6개"));
-        LottoReport lottoReport = round.generateReport(1000, prizeMap);
+        prizeMap.put(Rank.FIRST, new Prize(Rank.FIRST, new Cash(10000000L, Currency.WON), "6개"));
+        LottoReport lottoReport = round.generateReport(new Cash(1000L, Currency.WON), prizeMap);
         assertThat(lottoReport).isNotNull();
         assertThat(lottoReport.getRankMap().get(Rank.FIRST)).isGreaterThanOrEqualTo(1);
 

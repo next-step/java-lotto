@@ -1,9 +1,11 @@
 package lotto.service;
 
+import lotto.domain.Cash;
 import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
 import lotto.domain.Prize;
 import lotto.domain.PrizeInfo;
+import lotto.domain.enums.Currency;
 import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoServiceTest {
     private final AbstractPrizePackager prizePackager = new DefaultPrizePackager();
-    private final LottoService lottoService = new LottoService(1000, prizePackager);
+    private final LottoService lottoService = new LottoService(new Cash(1000L, Currency.WON), prizePackager);
     @Test
     void testGetPrice(){
-        assertThat(lottoService.getPrice()).isEqualTo(1000);
+        assertThat(lottoService.getPrice()).isEqualTo(new Cash(1000L, Currency.WON));
     }
 
 

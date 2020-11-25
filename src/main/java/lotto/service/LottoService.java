@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Cash;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBalls;
 import lotto.domain.Pick;
@@ -11,11 +12,11 @@ import java.util.Map;
 public class LottoService {
     private final Lotto lotto;
 
-    public LottoService(int price, AbstractPrizePackager prizePackager) {
+    public LottoService(Cash price, AbstractPrizePackager prizePackager) {
         lotto = new Lotto(price, prizePackager.pack());
     }
 
-    public Integer getPrice() {
+    public Cash getPrice() {
         return lotto.getPrice();
     }
 

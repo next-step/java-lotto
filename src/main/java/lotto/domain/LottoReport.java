@@ -9,16 +9,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoReport {
-    private final Long cost;
-    private Long totalEarnings = 0L;
+    private final Cash cost;
+    private Cash totalEarnings;
     private final Map<Rank, Integer> rankMap = new HashMap<>();
 
-    public LottoReport(Long cost) {
+    public LottoReport(Cash cost) {
         this.cost = cost;
     }
 
-    public void addEarnings(Long earning) {
-        totalEarnings += earning;
+    public void addEarnings(Cash earning) {
+        if(totalEarnings == null){
+            totalEarnings = new Cash(earning);
+            return;
+        }
+        totalEarnings.accumulate(earning);
     }
 
     public Map<Rank, Integer> getRankMap() {
@@ -30,7 +34,7 @@ public class LottoReport {
     }
 
     public BigDecimal getEarningRate() {
-        return BigDecimal.valueOf(totalEarnings).divide(BigDecimal.valueOf(cost), 2, RoundingMode.HALF_UP);
+        return BigDecimal.valueOf(totalEarnings.getAmount()).divide(BigDecimal.valueOf(cost.getAmount()), 2, RoundingMode.HALF_UP);
     }
 
     public void addPrize(Prize prize) {

@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import lotto.domain.Cash;
 import lotto.domain.Round;
+import lotto.domain.enums.Currency;
 import lotto.service.AutoPickService;
 import lotto.service.LottoPrizePackager;
 import lotto.service.LottoService;
@@ -15,7 +17,7 @@ public class RoundControllerTest {
 
     @BeforeEach
     void setup(){
-        LottoService lottoService = new LottoService(1000, new LottoPrizePackager());
+        LottoService lottoService = new LottoService(new Cash(1000L, Currency.WON), new LottoPrizePackager());
         RoundService roundService = new RoundService(new AutoPickService(), lottoService);
         roundController = new RoundController(roundService, lottoService);
     }

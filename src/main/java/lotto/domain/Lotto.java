@@ -5,15 +5,15 @@ import lotto.domain.enums.Rank;
 import java.util.Map;
 
 public class Lotto {
-    private final Integer price;
+    private final Cash price;
     private final PrizeInfo prizeInfo;
 
-    public Lotto(Integer price, PrizeInfo prizeInfo) {
+    public Lotto(Cash price, PrizeInfo prizeInfo) {
         this.price = price;
         this.prizeInfo = prizeInfo;
     }
 
-    public Integer getPrice() {
+    public Cash getPrice() {
         return price;
     }
 

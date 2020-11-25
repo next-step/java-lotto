@@ -38,6 +38,6 @@ public class ResultView {
     private static void printPrizeInfo(Map<Rank, Prize> prizeMap, Map<Rank, Integer> rankMap, Rank rank) {
         Prize prize = prizeMap.get(rank);
         Integer rankCount = rankMap.get(rank);
-        System.out.printf(RANK_RESULT, prize.getRuleDescription(), prize.getCashString(), rankCount == null ? 0 : rankCount);
+        System.out.printf(RANK_RESULT, prize.getRuleDescription(), prize.getCash(), rankCount == null ? 0 : rankCount);
     }
 }
