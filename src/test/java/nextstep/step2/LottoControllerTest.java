@@ -22,9 +22,9 @@ public class LottoControllerTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		LottoCount lottoCount = new LottoCount(1, lottoPurchase.getLottoCount());
 		String manualLottos = "1,2,3,13,14,15:20,21,22,23,24,25";
-		Lottos autoLottos = underTest.startLottoGameGetLottos(lottoCount, manualLottos, resultView);
+		Lottos autoLottos = underTest.startLottoGameGetLottos(lottoCount, manualLottos);
 		LottoStaticstic lottoStaticstic = new LottoStaticstic("1,2,3,4,5,6", lottoPurchase, bonusNumber);
-		underTest.printLottoStaticsic(lottoStaticstic, autoLottos, resultView);
+		underTest.printLottoStaticsic(lottoStaticstic, autoLottos);
 	}
 
 	@Test

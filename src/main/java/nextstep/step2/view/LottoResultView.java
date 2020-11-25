@@ -15,11 +15,11 @@ public class LottoResultView {
 	private static final String LOTTO_STATISTICTS_BONUS_RESULT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 	private static final String LOTTO_PROBABILITY = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public void printLottoPurchase(LottoCount lottoCount) {
+	public static void printLottoPurchase(LottoCount lottoCount) {
 		System.out.println(String.format(LOTTO_PURCHASE_MESSAGE, lottoCount.getManual(), lottoCount.getAuto()));
 	}
 
-	public void printLottoStaticsic(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
+	public static void printLottoStaticsic(Map<LottoReward, List<Lotto>> lottoRewardListMap) {
 		System.out.println(LOTTO_STATISTICTS);
 		lottoRewardListMap.keySet().stream()
 				.sorted(Comparator.reverseOrder())
@@ -34,14 +34,14 @@ public class LottoResultView {
 				));
 	}
 
-	protected String getPrintLottoStatisticsMessage(LottoReward lottoReward) {
+	protected static String getPrintLottoStatisticsMessage(LottoReward lottoReward) {
 		if (lottoReward == LottoReward.SECOND) {
 			return LOTTO_STATISTICTS_BONUS_RESULT;
 		}
 		return LOTTO_STATISTICTS_RESULT;
 	}
 
-	public void printWinningProbability(float probability) {
+	public static void printWinningProbability(float probability) {
 		System.out.println(String.format(LOTTO_PROBABILITY, probability));
 	}
 }

@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class LottoController {
 
-	public Lottos startLottoGameGetLottos(LottoCount lottoCount, String manaulLottos, LottoResultView resultView) {
-		resultView.printLottoPurchase(lottoCount);
+	public Lottos startLottoGameGetLottos(LottoCount lottoCount, String manaulLottos) {
+		LottoResultView.printLottoPurchase(lottoCount);
 		return printLottoListAndReturnLottos(lottoCount, manaulLottos);
 	}
 
-	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, Lottos lottos, LottoResultView resultView) {
+	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, Lottos lottos) {
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottos);
-		resultView.printLottoStaticsic(lottoRewardListMap);
-		resultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
+		LottoResultView.printLottoStaticsic(lottoRewardListMap);
+		LottoResultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
 	}
 
 	private Lottos printLottoListAndReturnLottos(LottoCount lottoCount, String manaulLottos) {
