@@ -49,7 +49,6 @@ public class LottoController {
         int autoQuantity = calculateAutoQuantity(lottoQuantity, manualQuantity);
 
         inputView.inputManualMention();
-        System.out.println("manualQuantity = " + manualQuantity);
         List<String> manualNumbers = inputManualNumbers(inputView, manualQuantity);
 
         resultView.displayLottoQuantity(lottoQuantity);
@@ -78,8 +77,12 @@ public class LottoController {
     }
 
     public List<String> inputManualNumbers(InputView inputView, int manualQuantity) {
-        return IntStream.rangeClosed(0, manualQuantity)
-                .mapToObj(i -> inputView.inputManualNumber())
+        return IntStream.range(ZERO, manualQuantity)
+                .mapToObj(i -> {
+                    String manualNumber = inputView.inputManualNumber();
+                    LottoValidator.checkManualDuplicate(manualNumber);
+                    return manualNumber;
+                })
                 .collect(Collectors.toList());
     }
 

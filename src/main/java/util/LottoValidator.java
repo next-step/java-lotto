@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoValidator {
     private static final String NUMBER_DELIMITER = ", ";
+    private static final int LOTTO_LENGTH = 6;
 
     public static void checkDuplicateNumber(List<Integer> numbers) {
         long uniqueLength = numbers.stream()
@@ -64,6 +65,15 @@ public class LottoValidator {
     public static void checkManualQuantity(int lottoQuantity, int manualQuantity) {
         if(lottoQuantity < manualQuantity) {
             throw new IllegalArgumentException("로또 금액보다 큰 개수입니다.");
+        }
+    }
+
+    public static void checkManualDuplicate(String manualLotto) {
+        long manualCount = Arrays.stream(manualLotto.split(NUMBER_DELIMITER))
+                .distinct()
+                .count();
+        if(manualCount != LOTTO_LENGTH) {
+            throw new IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.");
         }
     }
 }

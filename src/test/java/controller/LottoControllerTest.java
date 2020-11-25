@@ -149,4 +149,13 @@ class LottoControllerTest {
         assertThat(controller.calculateAutoQuantity(lottoQuantity, manualQuantity))
                 .isEqualTo(lottoQuantity - manualQuantity);
     }
+
+    @Test
+    @DisplayName("수동 로또 입력 시 중복 번호 입력 체크 기능")
+    void checkManualDuplicate() {
+        String manualLotto = "1, 2, 3, 4, 5, 1";
+
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoValidator.checkManualDuplicate(manualLotto));
+    }
 }

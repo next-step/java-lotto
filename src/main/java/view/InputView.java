@@ -23,12 +23,12 @@ public class InputView {
 
     public int inputBonusNumber() {
         System.out.println(LOTTO_BONUS_MENTION);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public int inputManualLottoQuantity() {
         System.out.println(LOTTO_MANUAL_QUANTITY);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void inputManualMention() {
