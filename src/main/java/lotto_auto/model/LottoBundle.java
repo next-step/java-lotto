@@ -23,12 +23,6 @@ public class LottoBundle {
         );
     }
 
-    private void throwIfNegativeTicketCount(int ticketCount) {
-        if (ticketCount <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_TICKET_COUNT);
-        }
-    }
-
     public int getTicketCount() {
         return lottoTicketList.size();
     }
@@ -45,5 +39,11 @@ public class LottoBundle {
                 .map(item -> item.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
                 this.payment);
+    }
+
+    private void throwIfNegativeTicketCount(int ticketCount) {
+        if (ticketCount <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TICKET_COUNT);
+        }
     }
 }

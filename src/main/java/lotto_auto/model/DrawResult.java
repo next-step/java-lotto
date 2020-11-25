@@ -58,7 +58,6 @@ public enum DrawResult {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT));
     }
 
-
     public static DrawResult valueOfRank(int rank) {
         return Arrays
                 .stream(DrawResult.values())

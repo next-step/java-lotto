@@ -19,10 +19,6 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers() {
-
-    }
-
     public List<LottoNumber> export() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
