@@ -5,32 +5,41 @@ import java.util.Map;
 
 public enum PrizeInformation {
 
-    THREE_MATCH(3, 5_000),
-    FOUR_MATCH(4, 50_000),
-    FIVE_MATCH(5, 1_500_000),
-    ALL_MATCH(6, 2_000_000_000);
+    FIRST(new MatchStatus(6, false), 2_000_000_000),
+    SECOND(new MatchStatus(5, true), 30_000_000),
+    THIRD(new MatchStatus(5, false), 1_500_000),
+    FOURTH(new MatchStatus(4, false), 50_000),
+    FIFTH(new MatchStatus(3, false), 5_000);
 
-    private static final Map<Integer, PrizeInformation> matchByPrice = new HashMap<>();
+    private static final int BONUS_BALL_MATCH_COUNT = 5;
+    private static final Map<MatchStatus, PrizeInformation> matchByPrice = new HashMap<>();
     static{
         for(PrizeInformation prize : PrizeInformation.values()){
-            matchByPrice.put(prize.getMatchNumberCount(), prize);
+            matchByPrice.put(prize.getMatchStatus(), prize);
         }
     }
 
-    private final int matchNumberCount;
+    private final MatchStatus matchStatus;
     private final int prizePrice;
 
-    PrizeInformation(int matchNumberCount, int prizePrice){
-        this.matchNumberCount = matchNumberCount;
+    PrizeInformation(MatchStatus matchStatus, int prizePrice){
+        this.matchStatus = matchStatus;
         this.prizePrice = prizePrice;
     }
 
-    public static PrizeInformation findByPrizePrice(int matchCount){
-       return matchByPrice.get(matchCount);
+    public static PrizeInformation findByPrizePrice(MatchStatus matchStatus){
+        if(matchStatus.count() != BONUS_BALL_MATCH_COUNT){
+            matchStatus.isNotBonusballMatchRule();
+        }
+        return matchByPrice.get(matchStatus);
     }
 
-    public int getMatchNumberCount() {
-        return matchNumberCount;
+    public MatchStatus getMatchStatus() {
+        return matchStatus;
+    }
+
+    public int countMatchNumber(){
+        return matchStatus.count();
     }
 
     public int getPrizePrice(){
