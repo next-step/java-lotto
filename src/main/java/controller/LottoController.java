@@ -54,7 +54,7 @@ public class LottoController {
         resultView.displayLottoQuantity(manualQuantity, autoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();
-        Lottos lottos = initLottos(lottoQuantity, basicLottoNumbers);
+        Lottos lottos = initLottos(autoQuantity, basicLottoNumbers);
         resultView.displayLottos(lottos);
 
         String inputWinningNumber = inputView.inputLastWinningNumber();
