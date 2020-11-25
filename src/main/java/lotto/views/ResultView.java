@@ -46,10 +46,10 @@ public class ResultView {
 
   private static void distinguishWithBonusBallCondition(boolean withBonus) {
     if (withBonus) {
-      System.out.print(REWARD_PER_MATCH_MESSAGE);
+      System.out.print(BONUS_REWARD_PER_MATCH_MESSAGE);
     }
     if (!withBonus) {
-      System.out.print(BONUS_REWARD_PER_MATCH_MESSAGE);
+      System.out.print(REWARD_PER_MATCH_MESSAGE);
     }
   }
 
