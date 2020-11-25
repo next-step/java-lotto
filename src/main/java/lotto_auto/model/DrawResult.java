@@ -39,21 +39,13 @@ public enum DrawResult {
         this.matchNum = matchNum;
     }
 
-    public boolean isRank(int rank) {
-        return this.rank == rank;
-    }
-
-    public boolean isMatchNum(int matchNum) {
-        return this.matchNum == matchNum;
-    }
-
     public static DrawResult valueOf(boolean isBonus, int matchNum) {
         if (matchNum == 5 && isBonus) {
             return DrawResult.SECOND;
         }
         return Arrays
                 .stream(DrawResult.values())
-                .filter(item -> item.isMatchNum(matchNum))
+                .filter(item -> item.matchNum == matchNum)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT));
     }
@@ -61,7 +53,7 @@ public enum DrawResult {
     public static DrawResult valueOfRank(int rank) {
         return Arrays
                 .stream(DrawResult.values())
-                .filter(item -> item.isRank(rank))
+                .filter(item -> item.rank == rank)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM));
     }
