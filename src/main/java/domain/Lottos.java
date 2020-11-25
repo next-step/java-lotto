@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static domain.LottoStandard.*;
 
@@ -19,6 +20,15 @@ public class Lottos {
     }
 
     public static Lottos from(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
+    public static Lottos combineLottos(Lottos manual, Lottos auto) {
+        List<Lotto> manualLottos = manual.getLottos();
+        List<Lotto> autoLottos = auto.getLottos();
+
+        List<Lotto> lottos = Stream.concat(manualLottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
         return new Lottos(lottos);
     }
 

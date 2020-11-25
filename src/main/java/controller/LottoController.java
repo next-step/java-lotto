@@ -54,8 +54,10 @@ public class LottoController {
         resultView.displayLottoQuantity(manualQuantity, autoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();
-        Lottos lottos = initLottos(autoQuantity, basicLottoNumbers);
-        resultView.displayLottos(lottos);
+        Lottos autoLottos = initLottos(autoQuantity, basicLottoNumbers);
+        resultView.displayLottos(autoLottos);
+
+        Lottos lottos = Lottos.combineLottos(manualLottos, autoLottos);
 
         String inputWinningNumber = inputView.inputLastWinningNumber();
         LottoValidator.checkLottoNumberValidate(inputWinningNumber);
