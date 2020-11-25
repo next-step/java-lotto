@@ -19,7 +19,7 @@ public class LotteryTest {
     })
     void validNumbers(String input) {
         final Picker picker = new StaticPicker(input);
-        assertThatThrownBy(() -> new Lottery(picker))
+        assertThatCode(() -> new Lottery(picker))
                 .doesNotThrowAnyException();
     }
 
