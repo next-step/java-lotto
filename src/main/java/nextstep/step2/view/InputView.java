@@ -13,23 +13,17 @@ public class InputView {
 	private static final String WRONG_INPUT_NUMBER = "숫자로 입력해주세요.";
 	private static final String WRONG_INPUT_STRING = "문자열은 필수입니다.";
 
-	private Scanner scanner;
-
-	public InputView(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
-	public int getInputMoney() {
+	public static int getInputMoney() {
 		System.out.println(INPUT_MESSAGE_MONEY);
 		return getInputNumber();
 	}
 
-	public int getInputManualCount() {
+	public static int getInputManualCount() {
 		System.out.println(INPUT_MANUAL_LOTTO_COUNT);
 		return getInputNumber();
 	}
 
-	public String getInputManualNumbers(int count) {
+	public static String getInputManualNumbers(int count) {
 		System.out.println(INPUT_MANUAL_NUMBERS);
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < count; i++) {
@@ -39,27 +33,27 @@ public class InputView {
 		return sb.toString();
 	}
 
-	public String getInputLottoWinningNumbers() {
+	public static String getInputLottoWinningNumbers() {
 		System.out.println(INPUT_MESSAGE_LAST_LOTTO);
 		return getInputString();
 	}
 
-	public int getInputLottoBonusNumber() {
+	public static int getInputLottoBonusNumber() {
 		System.out.println(INPUT_MESSAGE_BONUS_NUMBER);
 		return getInputNumber();
 	}
 
-	protected int getInputNumber() {
+	protected static int getInputNumber() {
 		try {
-			return scanner.nextInt();
+			return new Scanner(System.in).nextInt();
 		} catch (InputMismatchException ex) {
 			throw new IllegalArgumentException(WRONG_INPUT_NUMBER);
 		}
 	}
 
-	protected String getInputString() {
+	protected static String getInputString() {
 		try {
-			return scanner.nextLine();
+			return new Scanner(System.in).nextLine();
 		} catch (NoSuchElementException ex) {
 			throw new IllegalArgumentException(WRONG_INPUT_STRING);
 		}
