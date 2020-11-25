@@ -1,17 +1,16 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoAutoMachine extends LottoMachine {
+public class LottoAutoMachine implements LottoMachine {
 
     @Override
-    public LottoNumbers createLottoNumber() {
+    public Lotto createLotto() {
+        List<Integer> numbers = LottoNumbers.getLottoNumbers();
         Collections.shuffle(numbers);
 
-        return new LottoNumbers(numbers.stream()
-                                .limit(LOTTO_NUMBER_CAPACITY)
-                                .sorted()
-                                .collect(Collectors.toCollection(TreeSet::new)));
+        return new Lotto(numbers.stream().collect(Collectors.toSet()));
     }
 }
