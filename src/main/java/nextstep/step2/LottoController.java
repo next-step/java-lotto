@@ -11,18 +11,14 @@ public class LottoController {
 
 	public Lottos startLottoGameGetLottos(LottoCount lottoCount, String manaulLottos) {
 		LottoResultView.printLottoPurchase(lottoCount);
-		return printLottoListAndReturnLottos(lottoCount, manaulLottos);
+		Lottos purchaseLottos = Lottos.mergeLottos(manaulLottos, lottoCount.getAuto());
+		LottoTicketView.printLottoTickets(purchaseLottos);
+		return purchaseLottos;
 	}
 
 	public void printLottoStaticsic(LottoStaticstic lottoStaticstic, Lottos lottos) {
 		Map<LottoReward, List<Lotto>> lottoRewardListMap = lottoStaticstic.getLottoRewardMap(lottos);
 		LottoResultView.printLottoStaticsic(lottoRewardListMap);
 		LottoResultView.printWinningProbability(lottoStaticstic.calculateWinningProbability(lottoRewardListMap));
-	}
-
-	private Lottos printLottoListAndReturnLottos(LottoCount lottoCount, String manaulLottos) {
-		Lottos purchaseLottos = Lottos.mergeLottos(manaulLottos, lottoCount.getAuto());
-		LottoTicketView.printLottoTickets(purchaseLottos);
-		return purchaseLottos;
 	}
 }
