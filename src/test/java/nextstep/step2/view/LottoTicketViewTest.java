@@ -11,8 +11,7 @@ public class LottoTicketViewTest {
 	@Test
 	@DisplayName("로또 티켓을 출력한다.")
 	public void lottoTicketPrintTest() {
-		LottoTicketView ticket = new LottoTicketView();
-		ticket.printLottoTickets(getMockLottos());
+		LottoTicketView.printLottoTickets(getMockLottos());
 	}
 
 	private List<Lotto> getMockLottos() {

@@ -28,7 +28,7 @@ public class LottoController {
 		List<Lotto> manualList = purchaseManualLottos(manaulLottos);
 		List<Lotto> autoList = purchaseAutoLottos(lottoCount.getAuto());
 		List<Lotto> purchaseLottos = mergeLottos(manualList, autoList);
-		new LottoTicketView().printLottoTickets(purchaseLottos);
+		LottoTicketView.printLottoTickets(purchaseLottos);
 		return purchaseLottos;
 	}
 
