@@ -10,6 +10,8 @@ public class ProfitCalculator {
 
     public ProfitCalculator() {
         this.profitMap = new HashMap<>();
+        profitMap.put(1L, 0);
+        profitMap.put(2L, 0);
         profitMap.put(3L, 5000);
         profitMap.put(4L, 50000);
         profitMap.put(5L, 1500000);
@@ -22,6 +24,9 @@ public class ProfitCalculator {
 
     public int calculate(LottoTicket lottoTicket) {
         long matchingScore = lottoTicket.getMatchingScore();
+        if (matchingScore == 0) {
+            return 0;
+        }
         return profitMap.get(matchingScore);
     }
 }
