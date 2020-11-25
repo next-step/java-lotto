@@ -38,7 +38,7 @@
       * [X] 티켓 발급 기능(TicketPublisher)
       * [X] 중복되지 않은 LottoNumber 6개 묶음 생성 기능(NumberPool)
 * [X] 예외처리 메시징
-* [ ] LottoResult 에서 ResultView 에 결과 전달하는 방식 변경(AS-IS: toString()) [참고 자료](https://javacan.tistory.com/entry/methods-about-exporting-domain-object-to-view)
+* [X] LottoResult 에서 ResultView 에 결과 전달하는 방식 변경(AS-IS: toString()) [참고 자료](https://javacan.tistory.com/entry/methods-about-exporting-domain-object-to-view)
 * [X] 객체지향체조 'getter/setter 금지' 부분 공부 [참고 자료](https://velog.io/@ybg7955/Clean-Code-10%EC%9E%A5-%ED%81%B4%EB%9E%98%EC%8A%A4)
 * [X] Enum 도입하여 LottoResult, Rank 로 분리 [참고 자료](https://woowabros.github.io/tools/2017/07/10/java-enum-uses.html)
 
@@ -96,10 +96,21 @@
 ### Step3 피드백
 * [X] 축약 금지 ㅠ.. 깜빡쓰...
 * [X] Budget 의 검증 로직 재검토, Budget 잔액 기능 제거
-* [ ] View 용 DTO 
+* [X] View 용 DTO 
 * [X] 총 Reward 계산 로직(lambda)
 * [X] 개수에 따른 상금 계산 책임 검토
 
 ### 피드백 액션 플랜
 * [X] Budget 관련 테스트 코드에서 error case 왜 못막았는지 복기해보고, TDD 쪽 다시 정리해서 연습
 * [X] Junit5 추가적으로 사용법 익히기
+
+## [Step4] 로또(수동)
+
+### Step3 피드백
+* [ ] Budget 의 Validation
+
+### 기능 요구사항
+* [ ] 현재 로또 생성기는 자동 생성 기능만 제공한다.사용자가 수동으로 추첨 번호를 입력할 수 있도록 한다
+* [ ] 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다
+
+### 파생 요구사항
