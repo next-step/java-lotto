@@ -11,6 +11,12 @@ public class Calculator {
     }
 
     public int calculateLottoTicket(int input) {
+        validate(input);
         return input/lottoTicketPrice;
+    }
+
+    private void validate(int input) {
+        if (Integer.compare(input, lottoTicketPrice) == -1)
+            throw new IllegalArgumentException();
     }
 }
