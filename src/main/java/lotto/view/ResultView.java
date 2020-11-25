@@ -14,6 +14,7 @@ import java.util.Map;
 public class ResultView {
 
     private static final String QUESTION_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String QUESTION_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String MESSAGE_STATISTICS = "당첨 통계";
     private static final String RESULT_STATISTICS = "%d개 일치 (%d원)";
     private static final String RESULT_NUMBER = "- %d개";
@@ -25,11 +26,23 @@ public class ResultView {
         System.out.println();
     }
 
-    public static WinningNumber askWinningNumber() {
-        System.out.println(QUESTION_WINNING_NUMBER);
-
-        return WinningNumber.of(LottoGameController.SCANNER.nextLine());
+    // TODO inputView 로 옮겨야함.
+    public static WinningNumber askWinningNumberAndBonus() {
+        return WinningNumber.of(askWinningNumber(), askBonusBall());
     }
+
+    private static String askWinningNumber() {
+        System.out.println(QUESTION_WINNING_NUMBER);
+        return LottoGameController.SCANNER.nextLine();
+    }
+
+    private static String askBonusBall() {
+        System.out.println(QUESTION_BONUS_BALL);
+        return LottoGameController.SCANNER.nextLine();
+    }
+
+
+
 
     public static void showResults(WinningStatistics winningStatistics, int amount) {
         simpleResultMessage();
@@ -54,7 +67,7 @@ public class ResultView {
 
     private static void printEachRank(WinningRank winningRank) {
         System.out.print(String.format(RESULT_STATISTICS
-                , winningRank.getWinningResult()
+                , winningRank.getMatchCount()
                 , winningRank.getPrize()));
     }
 

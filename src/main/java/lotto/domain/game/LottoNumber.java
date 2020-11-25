@@ -28,6 +28,10 @@ public class LottoNumber {
         return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
     }
 
+    public boolean contains(Integer num) {
+        return this.lottoNumbers.contains(num);
+    }
+
     private static void isValidSize(int lottoNumberSize) {
         if (lottoNumberSize != VALID_LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format(MESSAGE_VALID_SIZE, VALID_LOTTO_SIZE));
