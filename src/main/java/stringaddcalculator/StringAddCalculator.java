@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 public class StringAddCalculator {
 
     private final StringSeparator stringSeparator;
