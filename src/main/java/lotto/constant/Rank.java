@@ -1,5 +1,7 @@
 package lotto.constant;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIFTH(5, 2, "꽝"),
     FOURTH(4, 3, "3개 일치 (5,000원) - "),
@@ -26,12 +28,12 @@ public enum Rank {
     }
 
     public static Rank value(int matchingCount) {
-        if (matchingCount < 3) return FIFTH;
-        for (Rank value : values()) {
-            if (value.matchingNumberCount == matchingCount) {
-                return value;
-            }
+        if (matchingCount < 3) {
+            return FIFTH;
         }
-        throw new IllegalArgumentException("number is wrong rank.");
+        return Arrays.stream(values())
+                .filter(value -> value.matchingNumberCount == matchingCount)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("number is wrong rank."));
     }
 }

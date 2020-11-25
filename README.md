@@ -53,11 +53,6 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-2. Rank의 돈 단위를 2_000_000_000로 관리
-    - 코드 가독성을 위해
-6. Rank value(...) 
-    - if문 중괄호 추가
-    - depth을 1로 줄이기
 9. LottoGame은 결과만 반환하고, 결과를 출력하기 위한 Dto 생성의 책임은 LottoGameResult에게 위임
 10. LottoNumbers의 List<Integer> Integer를 LottoNumber(Wrapper)로 변경 
 11. WinningNumber -> isExists 메서드 이름 짓기..
@@ -71,6 +66,8 @@ utils.Calculator
 4. Rank에 대한 설명을 view에서
     - 설명을 수정하려고 서버 로직을 수정하는 건 불필요
 5. LottoGame 참조변수 타입을 왜 EnumMap으로 하였나?
+6. Rank의 돈 단위를 2_000_000_000로 관리
+    - 코드 가독성을 위해??
 
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
@@ -92,3 +89,6 @@ utils.Calculator
 14. LottoGameTest 삭제 (intellij로도 가능)
 15. Calculator 삭제
 16. Rank의 number, matchingNumberCount -> 사용하지 않는 메소드 삭제
+6. Rank value(...) 메서드 코드 컨벤션  
+    - if문 중괄호 추가
+    - depth을 1로 줄이기
