@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
-    private static final List<Integer> oneToFortyFive = IntStream.rangeClosed(Lotto.LOTTO_MIN_NUMBER,Lotto.LOTTO_MAX_NUMBER)
+    private static final List<Integer> oneToFortyFive = IntStream.rangeClosed(LottoNumbers.LOTTO_NUMBERS_MIN, LottoNumbers.LOTTO_NUMBERS_MAX)
             .boxed()
             .collect(Collectors.toList());
 
@@ -27,7 +27,7 @@ public class Lottos {
         for (int i = 0; i < numberOfLottos; i++) {
             Collections.shuffle(oneToFortyFive);
             lottos.add(Lotto.of(oneToFortyFive.stream()
-                    .limit(Lotto.LOTTO_NUMBERS_SIZE)
+                    .limit(LottoNumbers.LOTTO_NUMBERS_SIZE)
                     .sorted()
                     .collect(Collectors.toList())));
         }
@@ -35,9 +35,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos of(List<String> stringLottos) throws Exception{
+    public static Lottos of(List<String> stringLottos) {
         List<Lotto> lottos = stringLottos.stream()
-                .map(s -> Arrays.stream(s.split(CommonConstants.COMMA))
+                .map(s -> Arrays.stream(s.split(CommonConstants.SPLIT_DELIMITER_COMMA))
                         .map(String::trim)
                         .mapToInt(Integer::parseInt)
                         .boxed()
