@@ -9,7 +9,7 @@ public class Client {
 
   public static void main(String[] args) {
     Budget budget = Budget.of(InputView.askBudget());
-    ResultView.printNumLotto(budget.getNumPossibleLotto());
+    ResultView.printNumLotto(budget.getNumPossibleBuyingTicket());
 
     LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
     TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);

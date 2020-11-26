@@ -126,4 +126,5 @@
             * [X] 중간과정으로 메소드 이름에 1붙여서 Bundle 반환 기능 추가
                 * [X] 테스트를 위해 LottoBundle 에 equal 기능 추가 
         * [X] Publisher 중간 과정으로 Bundle 반환 기능 추가
+* [X] Budget 에 잔액 기능 추가
 * [ ] 이후 WinningNumber 에 BonusNumber 넣기

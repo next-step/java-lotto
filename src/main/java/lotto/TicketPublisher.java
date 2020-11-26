@@ -20,7 +20,7 @@ public class TicketPublisher {
   }
 
   static public LottoTickets publishTickets(Budget budget) {
-    int numPossibleTicket = budget.getNumPossibleLotto();
+    int numPossibleTicket = budget.getNumPossibleBuyingTicket();
 
     if (numPossibleTicket < 1) {
       throw new RemainBudgetException();
