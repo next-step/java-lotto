@@ -10,16 +10,9 @@ public class LottoStoreTest {
 
     @Test
     public void buyAutoTickets() {
-        long budget = 14_023;
+        Budget budget = new Budget(14_023);
         List<LottoNumbers> lottoTicketList = LottoStore.buyAutoTickets(budget);
 
         assertThat(lottoTicketList).hasSize(14);
-    }
-
-    @Test
-    public void howManyCanIBuy() {
-        long budget = 14_023;
-
-        assertThat(LottoStore.howManyCanIBuy(budget)).isEqualTo(14);
     }
 }

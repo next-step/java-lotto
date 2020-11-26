@@ -11,10 +11,14 @@ public class LottoApplication {
     private static final AccountManager accountManager = new AccountManager();
 
     public static void main(String[] args) {
-        long budget = InputView.getBudget();
+        Budget budget = InputView.getBudget();
+        long amountOfManualLotto = InputView.getAmountOfManualLotto();
+        budget.setAmountOfManualLottos(amountOfManualLotto);
 
-        printNumberOfPurchased(budget);
+        List<LottoNumbers> manualLottos = InputView.getNumberOfManualLottos(amountOfManualLotto);
+        accountManager.addTickets(manualLottos);
 
+        ResultView.printAmountPerKind(budget);
         buyAutoTicketAndPrintNumbers(budget);
 
         LottoWinningNumbers winningNumbers = InputView.getWinningNumbers();
@@ -23,12 +27,7 @@ public class LottoApplication {
         ResultView.printStatistics(accountManager);
     }
 
-    private static void printNumberOfPurchased(long budget) {
-        long howMany = LottoStore.howManyCanIBuy(budget);
-        ResultView.printNumberOfPurchased(howMany);
-    }
-
-    private static void buyAutoTicketAndPrintNumbers(long budget) {
+    private static void buyAutoTicketAndPrintNumbers(Budget budget) {
         List<LottoNumbers> tickets = LottoStore.buyAutoTickets(budget);
         accountManager.addTickets(tickets);
         ResultView.printLottoNumber(accountManager.getTickets());
