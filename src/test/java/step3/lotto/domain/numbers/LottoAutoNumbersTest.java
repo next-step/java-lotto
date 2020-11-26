@@ -19,6 +19,6 @@ public class LottoAutoNumbersTest {
     @Test
     public void 로또번호가제대로생성되었는지() {
         lottoAutoNumbersTest = new LottoMachine(45);
-        assertThat(lottoAutoNumbersTest.getAutoNumbers(45).size()).isEqualTo(45);
+        assertThat(lottoAutoNumbersTest.getAutoNumbers(45)).isEqualTo(45);
     }
 }
