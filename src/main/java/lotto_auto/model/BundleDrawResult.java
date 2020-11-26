@@ -16,4 +16,10 @@ public class BundleDrawResult {
                 .filter(item -> item.equals(drawResult))
                 .count();
     }
+
+    public long getTotalMoney() {
+        return bundleDrawResult.stream()
+                .mapToLong(DrawResult::getMoney)
+                .sum();
+    }
 }
