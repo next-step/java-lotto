@@ -19,13 +19,15 @@ public class LottoAutoNumbers {
         }
     }
 
-    public List<Integer> getAutoNumbers(int getLottoAutoNumberCount) {
+    public LottoTicket getAutoNumbers(int getLottoAutoNumberCount) {
         List<Integer> returnList = new ArrayList<>();
         Collections.shuffle(basicLottoNumbers);
 
         for (int i = 0; i < getLottoAutoNumberCount; i++) {
             returnList.add(basicLottoNumbers.get(i));
         }
-        return returnList;
+        LottoTicket lottoTicket = new LottoTicket(returnList);
+
+        return lottoTicket;
     }
 }
