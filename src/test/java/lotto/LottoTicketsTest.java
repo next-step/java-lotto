@@ -3,7 +3,7 @@ package lotto;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
-import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
+import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -22,7 +22,7 @@ class LottoTicketsTest {
   @BeforeEach
   void setUp() {
     sampleTicket = IntStream
-        .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_TICKET)
+        .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_BUNDLE)
         .mapToObj(LottoNumber::get)
         .collect(Collectors.collectingAndThen(toList(), LottoTicket::of));
   }
