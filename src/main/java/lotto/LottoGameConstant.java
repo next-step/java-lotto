@@ -13,4 +13,7 @@ public class LottoGameConstant {
   public static final Function<Boolean, Boolean> doesntCareBonus = x -> true;
   public static final Function<Boolean, Boolean> mustWithBonus = x -> x;
   public static final Function<Boolean, Boolean> mustWithoutBonus = x -> !x;
+
+  public static final int MANUAL = 628;
+  public static final int AUTO = 836;
 }

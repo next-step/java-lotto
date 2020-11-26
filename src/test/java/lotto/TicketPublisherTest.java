@@ -10,15 +10,22 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.lottoexception.RemainBudgetException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class TicketPublisherTest {
 
-  PublishStrategy sampleStrategy = () -> IntStream
+  private final PublishStrategy sampleStrategy = () -> IntStream
       .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_BUNDLE)
       .mapToObj(LottoNumber::get)
       .collect(collectingAndThen(toList(), LottoNumberBundle::of));
+  private TicketPublisher samplePublisher;
+
+  @BeforeEach
+  void setUp() {
+    this.samplePublisher = new TicketPublisher();
+  }
 
   @Test
   @DisplayName("발급된 티켓이 수동으로 발급한 티켓과 같은 지 확인")
@@ -28,7 +35,7 @@ class TicketPublisherTest {
         .mapToObj(LottoNumber::of)
         .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumberBundle::of));
 
-    assertThat(TicketPublisher.publishTicket(sampleStrategy).toString())
+    assertThat(this.samplePublisher.publishAutoTicket(sampleStrategy).toString())
         .isEqualTo(LottoTicket.of(expected).toString());
   }
 
@@ -36,6 +43,6 @@ class TicketPublisherTest {
   @DisplayName("부족한 Budget 을 가졌을 때 에러 처리 확인")
   void testWhenNotEnoughBudget() {
     assertThatExceptionOfType(RemainBudgetException.class)
-        .isThrownBy(() -> TicketPublisher.publishTickets(Budget.of(500)));
+        .isThrownBy(() -> this.samplePublisher.publishAutoTickets(Budget.of(500)));
   }
 }

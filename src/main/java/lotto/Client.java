@@ -8,10 +8,11 @@ import lotto.views.TicketsExporter;
 public class Client {
 
   public static void main(String[] args) {
+    TicketPublisher ticketPublisher = new TicketPublisher();
     Budget budget = Budget.of(InputView.askBudget());
     ResultView.printNumLotto(budget.getNumPossibleBuyingTicket());
 
-    LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
+    LottoTickets purchasedTickets = ticketPublisher.publishAutoTickets(budget);
     TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
     ResultView.printLottoInfo(ticketsExporter);
 
