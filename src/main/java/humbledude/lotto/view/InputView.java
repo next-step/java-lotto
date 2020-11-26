@@ -1,6 +1,5 @@
 package humbledude.lotto.view;
 
-import humbledude.lotto.domain.Budget;
 import humbledude.lotto.domain.LottoNumber;
 import humbledude.lotto.domain.LottoNumbers;
 import humbledude.lotto.domain.LottoWinningNumbers;
@@ -8,9 +7,7 @@ import humbledude.lotto.domain.LottoWinningNumbers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class InputView {
@@ -23,9 +20,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Budget getBudget() {
+    public static long getBudget() {
         System.out.println(MSG_INPUT_BUDGET);
-        return new Budget(Long.parseLong(scanner.nextLine()));
+        return Long.parseLong(scanner.nextLine());
     }
 
     public static long getAmountOfManualLotto() {

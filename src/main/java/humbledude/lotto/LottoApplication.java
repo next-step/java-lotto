@@ -8,28 +8,24 @@ import java.util.List;
 
 public class LottoApplication {
 
-    private static final AccountManager accountManager = new AccountManager();
 
     public static void main(String[] args) {
-        Budget budget = InputView.getBudget();
+        long budget = InputView.getBudget();
+        AccountManager accountManager = new AccountManager(budget);
+
         long amountOfManualLotto = InputView.getAmountOfManualLotto();
-        budget.setAmountOfManualLottos(amountOfManualLotto);
+        accountManager.setAmountOfManualLottos(amountOfManualLotto);
 
         List<LottoNumbers> manualLottos = InputView.getNumberOfManualLottos(amountOfManualLotto);
         accountManager.addTickets(manualLottos);
 
-        ResultView.printAmountPerKind(budget);
-        buyAutoTicketAndPrintNumbers(budget);
+        ResultView.printAmountPerKind(accountManager);
+        accountManager.buyAutoTicketsWithRemainingBudget();
+        ResultView.printLottoNumber(accountManager.getTickets());
 
         LottoWinningNumbers winningNumbers = InputView.getWinningNumbers();
         accountManager.setWinningNumbers(winningNumbers);
 
         ResultView.printStatistics(accountManager);
-    }
-
-    private static void buyAutoTicketAndPrintNumbers(Budget budget) {
-        List<LottoNumbers> tickets = LottoStore.buyAutoTickets(budget);
-        accountManager.addTickets(tickets);
-        ResultView.printLottoNumber(accountManager.getTickets());
     }
 }
