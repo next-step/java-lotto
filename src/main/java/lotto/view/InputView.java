@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER= "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "\n보너스 볼을 입력해 주세요.";
+    private static final String INPUT_MANUAL_TICKET = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_NUMBER = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_MONEY_PATTERN = "(\\d+)";
     private static final String WINNING_NUMBER_DELIMITER = ",";
     private static final String WINNING_NUMBER_PATTERN = "([,\\d])+";
@@ -33,6 +37,20 @@ public class InputView {
 
         return Integer.parseInt(inputMoneyAmount);
 
+    }
+
+    public static int getManualLottoTicketCount(){
+        System.out.println(INPUT_MANUAL_TICKET);
+
+        String inputManualTicketCount = scanner.next();
+
+        return Integer.parseInt(inputManualTicketCount);
+    }
+
+    public static List<String> getManualLottoNumbers(int manualTicketCount){
+        System.out.println(INPUT_MANUAL_NUMBER);
+        return  IntStream.range(0, manualTicketCount)
+                .mapToObj(i->scanner.next()).collect(Collectors.toList());
     }
 
     private static void validateInputMoneyAmount(String inputMoneyAmount) {
