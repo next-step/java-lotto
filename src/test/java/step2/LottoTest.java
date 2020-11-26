@@ -1,5 +1,6 @@
 package step2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 import step2.domain.LottoMachine;
@@ -11,6 +12,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
+    private List<Integer> lottoNumber;
+
+    @BeforeEach
+    void init() {
+        lottoNumber = new ArrayList<>();
+        lottoNumber.add(1);
+        lottoNumber.add(2);
+        lottoNumber.add(3);
+        lottoNumber.add(7);
+        lottoNumber.add(8);
+        lottoNumber.add(9);
+    }
+
     @Test
     public void 구매갯수계산() {
         LottoMachine lottoMachine = new LottoMachine();
@@ -20,13 +34,6 @@ public class LottoTest {
     @Test
     public void 당첨확인() {
         LottoResult lottoResult = new LottoResult();
-        List<Integer> lottoNumber = new ArrayList<>();
-        lottoNumber.add(1);
-        lottoNumber.add(2);
-        lottoNumber.add(3);
-        lottoNumber.add(7);
-        lottoNumber.add(8);
-        lottoNumber.add(9);
         Lotto lotto = new Lotto(lottoNumber);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
@@ -39,13 +46,6 @@ public class LottoTest {
     @Test
     public void 총수익률() {
         LottoResult lottoResult = new LottoResult();
-        List<Integer> lottoNumber = new ArrayList<>();
-        lottoNumber.add(1);
-        lottoNumber.add(2);
-        lottoNumber.add(3);
-        lottoNumber.add(7);
-        lottoNumber.add(8);
-        lottoNumber.add(9);
         Lotto lotto = new Lotto(lottoNumber);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
