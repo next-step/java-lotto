@@ -1,4 +1,6 @@
-package step3.lotto.util;
+package step3.lotto.common;
+
+import step3.lotto.util.LottoErrorMessage;
 
 import java.util.List;
 
@@ -11,7 +13,11 @@ public class CommonLottoCheck {
     private static int LOW_STANDARD_NUMBER = 1;   //로또 번호 최소
     private static int LOTTO_NUBMER_COUNT = 6;    //로또 생성 및 당천번호 갯수
 
-    public void CheckNumber(List<String> lottoNumbers) {
+    private CommonLottoCheck(){
+
+    }
+
+    public static void CheckNumber(List<String> lottoNumbers) {
         isNumberCount(lottoNumbers);
         isSameValueCheck(lottoNumbers);
 
@@ -20,13 +26,13 @@ public class CommonLottoCheck {
         }
     }
 
-    private void isNumberCount(List<String> lottoNumbers) {
+    private static void isNumberCount(List<String> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUBMER_COUNT) {
             throw new RuntimeException(LottoErrorMessage.getLottoIncorrectCount());
         }
     }
 
-    private void isSameValueCheck(List<String> lottoNumbers) {
+    private static void isSameValueCheck(List<String> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size()-1; i++) {
             if(lottoNumbers.get(i).equals(lottoNumbers.get(i+1))){
                 throw new RuntimeException(LottoErrorMessage.getLottoOverlapCheck());
@@ -34,10 +40,16 @@ public class CommonLottoCheck {
         }
     }
 
-    private void checkStandardNumber(String paramValue) {
+    private static void checkStandardNumber(String paramValue) {
         int checkParamValue = isLottoNumber(paramValue);
 
         checkLowStandardNumber(checkParamValue);
+    }
+
+    public static void checkLowStandardNumber(Integer paramValue) {
+        if (paramValue > HIGH_STANDARD_NUMBER || paramValue < LOW_STANDARD_NUMBER) {
+            throw new RuntimeException(LottoErrorMessage.getLottoRuntimeexception());
+        }
     }
 
     private static Integer isLottoNumber(String paramValue) {
@@ -48,11 +60,5 @@ public class CommonLottoCheck {
         }
 
         return Integer.parseInt(paramValue);
-    }
-
-    public void checkLowStandardNumber(Integer paramValue) {
-        if (paramValue > HIGH_STANDARD_NUMBER || paramValue < LOW_STANDARD_NUMBER) {
-            throw new RuntimeException(LottoErrorMessage.getLottoRuntimeexception());
-        }
     }
 }
