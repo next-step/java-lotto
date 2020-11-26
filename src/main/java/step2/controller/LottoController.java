@@ -2,7 +2,7 @@ package step2.controller;
 
 import step2.domain.Lotto;
 import step2.domain.LottoMachine;
-import step2.domain.Person;
+import step2.domain.LottoResult;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -19,14 +19,14 @@ public class LottoController {
         int purchaseLottoCount = buyLottoList.size();
         ResultView.printPurchaseCount(purchaseLottoCount);
 
-        Person person = new Person();
+        LottoResult lottoResult = new LottoResult();
 
         ResultView.printWinNumber();
         int[] winNumber = InputView.inputWinNumber();
-        int[][] winCounts = person.getWin(winNumber, buyLottoList);
+        int[][] winCounts = lottoResult.getWin(winNumber, buyLottoList);
         ResultView.printWinCounts(winCounts);
 
-        double totalRevenue = person.getTotalRevenue(purchasePrice, winCounts);
+        double totalRevenue = lottoResult.getTotalRevenue(purchasePrice, winCounts);
         ResultView.printTotalRevenue(totalRevenue);
     }
 }

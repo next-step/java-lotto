@@ -3,7 +3,7 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 import step2.domain.LottoMachine;
-import step2.domain.Person;
+import step2.domain.LottoResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class LottoTest {
 
     @Test
     public void 당첨확인() {
-        Person person = new Person();
+        LottoResult lottoResult = new LottoResult();
         List<Integer> lottoNumber = new ArrayList<>();
         lottoNumber.add(1);
         lottoNumber.add(2);
@@ -31,14 +31,14 @@ public class LottoTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
         int[] winNumber = new int[]{1, 2, 3, 4, 5, 6};
-        int[][] winCounts = person.getWin(winNumber, lottoList);
+        int[][] winCounts = lottoResult.getWin(winNumber, lottoList);
 
         assertThat(winCounts[0][0]).isEqualTo(1);
     }
 
     @Test
     public void 총수익률() {
-        Person person = new Person();
+        LottoResult lottoResult = new LottoResult();
         List<Integer> lottoNumber = new ArrayList<>();
         lottoNumber.add(1);
         lottoNumber.add(2);
@@ -50,8 +50,8 @@ public class LottoTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
         int[] winNumber = new int[]{1, 2, 3, 4, 5, 6};
-        int[][] winCounts = person.getWin(winNumber, lottoList);
+        int[][] winCounts = lottoResult.getWin(winNumber, lottoList);
 
-        assertThat(person.getTotalRevenue(1000, winCounts)).isEqualTo(500.0);
+        assertThat(lottoResult.getTotalRevenue(1000, winCounts)).isEqualTo(500.0);
     }
 }
