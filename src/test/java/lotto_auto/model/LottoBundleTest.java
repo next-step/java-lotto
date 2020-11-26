@@ -24,7 +24,7 @@ class LottoBundleTest {
             20
     })
     public void createLottoTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount);
         assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount);
     }
 
@@ -38,7 +38,7 @@ class LottoBundleTest {
             20
     })
     public void equalTickCountExportCountTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount);
         assertAll(
                 () -> assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount),
                 () -> assertThat(lottoBundle.export().size()).isEqualTo(ticketCount),
@@ -55,7 +55,7 @@ class LottoBundleTest {
     })
     public void enterNegativeValueExceptionTest(int ticketCount) {
         assertThatThrownBy(
-                () -> new LottoBundle(ticketCount, ticketCount * LottoStore.LOTTO_TICKET_PRICE)
+                () -> new LottoBundle(ticketCount)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -69,13 +69,13 @@ class LottoBundleTest {
             20
     })
     public void exportTicketIsNotNullTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount,ticketCount * LottoStore.LOTTO_TICKET_PRICE);
+        LottoBundle lottoBundle = new LottoBundle(ticketCount);
         assertThat(lottoBundle.export()).isNotNull();
     }
 
     @DisplayName("로또 추첨 중복 테스트")
     @Test
-    public void test(){
+    public void test() {
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
         lottoNumberList.add(new LottoNumber(1));
@@ -88,8 +88,8 @@ class LottoBundleTest {
 
         LottoNumber lottoNumber = new LottoNumber(6);
         assertThatThrownBy(
-                ()-> {
-                    LottoBundle lottoBundle = new LottoBundle(10,10 * LottoStore.LOTTO_TICKET_PRICE);
+                () -> {
+                    LottoBundle lottoBundle = new LottoBundle(10);
                     lottoBundle.draw(lottoNumbers, lottoNumber);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
