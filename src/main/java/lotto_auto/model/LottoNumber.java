@@ -23,6 +23,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || obj.getClass() != obj.getClass()) return false;
         LottoNumber lottoNumber = (LottoNumber) obj;
         return this.number == lottoNumber.number;
     }
