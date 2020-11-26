@@ -1,5 +1,6 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import lotto.lottoexception.DuplicatedNumberException;
@@ -26,5 +27,19 @@ public class LottoNumberBundleTest {
     assertThatExceptionOfType(DuplicatedNumberException.class).isThrownBy(
         () -> LottoNumberBundle.of("1, 2, 3, 3, 4, 5")
     );
+  }
+
+  @Test
+  @DisplayName("contains() 지원")
+  void testContains() {
+    assertThat(LottoNumberBundle.of("1, 2, 3, 4, 5, 6").contains(LottoNumber.of(1)))
+        .isEqualTo(true);
+  }
+
+  @Test
+  @DisplayName("toString()")
+  void testToSting() {
+    assertThat(LottoNumberBundle.of("1, 2, 3, 4, 5, 6").toString())
+        .isEqualTo("[1, 2, 3, 4, 5, 6]");
   }
 }

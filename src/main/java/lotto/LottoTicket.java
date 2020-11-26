@@ -9,9 +9,15 @@ import lotto.lottoexception.InvalidLottoFormatException;
 public class LottoTicket {
 
   private final List<LottoNumber> lottoNumbers;
+  private final LottoNumberBundle bundle;
 
-  private LottoTicket(List<LottoNumber> lottoNumbers) {
-    this.lottoNumbers = lottoNumbers;
+  private LottoTicket(List<LottoNumber> numbers, LottoNumberBundle bundle) {
+    this.lottoNumbers = numbers;
+    this.bundle = bundle;
+  }
+
+  public static LottoTicket of(LottoNumberBundle bundle) {
+    return new LottoTicket(null, bundle);
   }
 
   public static LottoTicket of(List<LottoNumber> lottoNumbers) {
@@ -26,7 +32,7 @@ public class LottoTicket {
       checkEquality(lottoNumbers.get(i), lottoNumbers.get(i + 1));
     }
 
-    return new LottoTicket(lottoNumbers);
+    return new LottoTicket(lottoNumbers, null);
   }
 
   private static void checkEquality(LottoNumber number1, LottoNumber number2) {
@@ -35,22 +41,38 @@ public class LottoTicket {
     }
   }
 
-  @Override
-  public String toString() {
-    return this.lottoNumbers.toString();
-  }
-
   public int guessNumHit(WinningNumber winningNumber) {
-    int result = 0;
-    for (LottoNumber lottoNumber : winningNumber) {
-      result += this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    if (this.lottoNumbers != null) {
+      int result = 0;
+      for (LottoNumber lottoNumber : winningNumber) {
+        result += this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+      }
+      return result;
     }
-    return result;
+
+    if (this.bundle != null) {
+      int result = 0;
+      for (LottoNumber lottoNumber : winningNumber) {
+        result += this.bundle.contains(lottoNumber) ? 1 : 0;
+      }
+      return result;
+    }
+
+    return -1;
   }
 
   public Rank decideRewardWithBonusBall(WinningNumber winningNumber, LottoNumber bonusNumber) {
     int numHit = this.guessNumHit(winningNumber);
     boolean matchedWithBonusBall = this.lottoNumbers.contains(bonusNumber);
     return Rank.getRewardWithBonusBall(numHit, matchedWithBonusBall);
+  }
+
+  @Override
+  public String toString() {
+    if (this.lottoNumbers != null) {
+      return this.lottoNumbers.toString();
+    }
+
+    return this.bundle.toString();
   }
 }

@@ -50,4 +50,12 @@ public class LottoNumberBundle {
       throw new DuplicatedNumberException();
     }
   }
+
+  public boolean contains(LottoNumber o) {
+    return this.numbers.contains(o);
+  }
+
+  public String toString() {
+    return this.numbers.toString();
+  }
 }

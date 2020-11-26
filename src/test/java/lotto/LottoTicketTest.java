@@ -2,8 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,13 +14,7 @@ class LottoTicketTest {
 
   @BeforeEach
   void setUp() {
-    int[] rawInput = {5, 6, 3, 4, 1, 2};
-    List<LottoNumber> numbers = new ArrayList<>();
-    for (int number : rawInput) {
-      numbers.add(LottoNumber.of(number));
-    }
-
-    sampleTicket = LottoTicket.of(numbers);
+    sampleTicket = LottoTicket.of(LottoNumberBundle.of("1, 2, 3, 4, 5, 6"));
   }
 
   @Test
@@ -30,7 +22,8 @@ class LottoTicketTest {
   void testToString() {
     String expected = "[1, 2, 3, 4, 5, 6]";
 
-    assertThat(this.sampleTicket.toString()).isEqualTo(expected);
+    assertThat(this.sampleTicket.toString())
+        .isEqualTo(expected);
   }
 
   @ParameterizedTest
