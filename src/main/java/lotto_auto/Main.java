@@ -5,8 +5,8 @@ import lotto_auto.view.*;
 
 public class Main {
     public static void main(String[] args) {
-        int money = BuyInputView.enter();
-        LottoBundle lottoBundle = LottoStore.sell(money);
+        Order order = OrderInputView.enterOrder();
+        LottoBundle lottoBundle = LottoStore.sell(order);
         LottoBundleStatusView.statusPrint(lottoBundle);
         LottoNumbers winningLottoNumbers = WinningLottoInputView.enter();
         LottoNumber bonusNumber = BonusNumberInputView.enter();

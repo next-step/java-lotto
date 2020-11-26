@@ -5,20 +5,18 @@ import lotto_auto.ErrorMessage;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 
 public class LottoBundle {
 
+    private final int auto;
+    private final int manual;
     private List<LottoTicket> lottoTicketList;
 
-    public LottoBundle(int ticketCount) {
-        throwIfNegativeTicketCount(ticketCount);
-        this.lottoTicketList = Collections.unmodifiableList(
-                IntStream.range(0, ticketCount)
-                        .mapToObj(item -> new LottoTicket())
-                        .collect(Collectors.toList())
-        );
+    public LottoBundle(List<LottoTicket> lottoTickets, int auto, int manual) {
+        this.auto = auto;
+        this.manual = manual;
+        this.lottoTicketList = Collections.unmodifiableList(lottoTickets);
     }
 
     public int getTicketCount() {
@@ -39,9 +37,11 @@ public class LottoBundle {
                 lottoTicketList.size() * LottoTicket.PRICE);
     }
 
-    private void throwIfNegativeTicketCount(int ticketCount) {
-        if (ticketCount <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_TICKET_COUNT);
-        }
+    public int getAuto() {
+        return this.auto;
+    }
+
+    public int getManual() {
+        return this.manual;
     }
 }

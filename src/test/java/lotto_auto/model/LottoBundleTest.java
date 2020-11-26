@@ -3,10 +3,13 @@ package lotto_auto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,60 +19,42 @@ class LottoBundleTest {
 
     @DisplayName("로또 티켓 생성 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {
-            1,
-            2,
-            10,
-            40,
-            20
-    })
-    public void createLottoTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
-        assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount);
-    }
+    @CsvSource(value = {
+            "1:2:3",
+            "3:4:7",
+            "5:2:7",
+            "4:1:5",
+    }, delimiter = ':')
+    public void createLottoTest(int manual, int auto, int expected) {
 
-    @DisplayName("로또 ticket count 와 export 한 티켓의 수가 동일한지 테스트")
-    @ParameterizedTest
-    @ValueSource(ints = {
-            1,
-            2,
-            10,
-            40,
-            20
-    })
-    public void equalTickCountExportCountTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
-        assertAll(
-                () -> assertThat(lottoBundle.getTicketCount()).isEqualTo(ticketCount),
-                () -> assertThat(lottoBundle.export().size()).isEqualTo(ticketCount),
-                () -> assertThat(lottoBundle.export().size()).isEqualTo(lottoBundle.getTicketCount())
+        List<LottoTicket> manualLottoTickets = IntStream.range(0, manual)
+                .boxed()
+                .map(item -> new LottoTicket())
+                .collect(Collectors.toList());
+
+        List<LottoTicket> autoLottoTickets = IntStream.range(0, auto)
+                .boxed()
+                .map(item -> new LottoTicket())
+                .collect(Collectors.toList());
+
+        List<LottoTicket> all = new ArrayList<>();
+        all.addAll(manualLottoTickets);
+        all.addAll(autoLottoTickets);
+
+        LottoBundle lottoBundle = new LottoBundle(all, autoLottoTickets.size(), manualLottoTickets.size());
+        assertAll(() -> assertThat(lottoBundle.getTicketCount()).isEqualTo(expected),
+                () -> assertThat(lottoBundle.getManual()).isEqualTo(manualLottoTickets.size()),
+                () -> assertThat(lottoBundle.getAuto()).isEqualTo(autoLottoTickets.size())
         );
     }
 
-    @DisplayName("로또 티켓수를 음수로 입력 받았을때 예외 발생 테스트")
-    @ParameterizedTest
-    @ValueSource(ints = {
-            -1,
-            -200,
-            -7
-    })
-    public void enterNegativeValueExceptionTest(int ticketCount) {
-        assertThatThrownBy(
-                () -> new LottoBundle(ticketCount)
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("export Ticket isNotNull")
-    @ParameterizedTest
-    @ValueSource(ints = {
-            1,
-            2,
-            10,
-            40,
-            20
-    })
-    public void exportTicketIsNotNullTest(int ticketCount) {
-        LottoBundle lottoBundle = new LottoBundle(ticketCount);
+    @Test
+    public void exportTicketIsNotNullTest() {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(new LottoTicket());
+        lottoTickets.add(new LottoTicket());
+        LottoBundle lottoBundle = new LottoBundle(lottoTickets, 1, 1);
         assertThat(lottoBundle.export()).isNotNull();
     }
 
@@ -89,7 +74,10 @@ class LottoBundleTest {
         LottoNumber lottoNumber = new LottoNumber(6);
         assertThatThrownBy(
                 () -> {
-                    LottoBundle lottoBundle = new LottoBundle(10);
+                    List<LottoTicket> lottoTickets = new ArrayList<>();
+                    lottoTickets.add(new LottoTicket());
+                    lottoTickets.add(new LottoTicket());
+                    LottoBundle lottoBundle = new LottoBundle(lottoTickets, 1, 1);
                     lottoBundle.draw(lottoNumbers, lottoNumber);
                 }
         ).isInstanceOf(IllegalArgumentException.class);

@@ -7,12 +7,16 @@ import java.util.stream.Collectors;
 
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
 
+    public static final int PRICE = 1000;
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket() {
         this.lottoNumbers = LottoNumbers.generate();
+    }
+
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoTicket(List<Integer> lottoNumbers) {
