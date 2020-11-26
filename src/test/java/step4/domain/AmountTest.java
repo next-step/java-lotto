@@ -21,7 +21,7 @@ public class AmountTest {
 
     @ParameterizedTest
     @DisplayName("로또 구매 값 1000원 이하인 경우 예외")
-    @ValueSource(ints = {900, 200, 500, 900})
+    @ValueSource(ints = {900, 200, 500})
     public void 로또_구매값_1000원이하(int value) {
         assertThatThrownBy(() ->  Amount.of(value))
                 .isInstanceOf(IllegalArgumentException.class)

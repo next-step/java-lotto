@@ -4,10 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.controller.LottoTicketMaker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.IntStream;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -17,18 +13,11 @@ public class LottoTest {
     public void 로또_갯수_대로_입력되는지() {
         int manualLottoQty = 1;
 
-        List<Lotto> manualLottoNumbers = new ArrayList<>();
+        Amount amount = Amount.of(14000);
+        Numbers numbers = Numbers.of("1,2,3,7,8,9");
 
-        Lotto lotto = new Lotto();
-        lotto.getLottos().clear();
-        IntStream.of(1, 2, 3, 7, 8, 9)
-                .forEach(i -> lotto.getLottos().add(i));
-
-        manualLottoNumbers.add(lotto);
-
-        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(14000, manualLottoQty, manualLottoNumbers);
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, numbers.getLottoNumber());
         Lottos lottos = lottoTicketMaker.getLottoTicket();
-
         assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 }
