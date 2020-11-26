@@ -5,10 +5,10 @@ import my.project.utils.CollectionUtils;
 import java.util.List;
 
 public class StatInfo {
-    private final List<GameRecord> records;
+    private final List<Lotto> records;
     private final List<Integer> winningNumbers;
 
-    public StatInfo(List<GameRecord> records, List<Integer> winningNumbers) {
+    public StatInfo(List<Lotto> records, List<Integer> winningNumbers) {
         CollectionUtils.isListQualified(records);
         CollectionUtils.isListQualified(winningNumbers);
 
@@ -16,7 +16,7 @@ public class StatInfo {
         this.winningNumbers = winningNumbers;
     }
 
-    public List<GameRecord> getRecords() {
+    public List<Lotto> getRecords() {
         return this.records;
     }
 
@@ -25,7 +25,7 @@ public class StatInfo {
     }
 
     public int getMoney() {
-        return records.size() * Ticket.PRICE;
+        return records.size() * Chance.PRICE;
     }
 
 }

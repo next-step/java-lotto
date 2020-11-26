@@ -17,10 +17,10 @@ public class Statistics {
     }
 
     private void rank(StatInfo info) {
-        List<GameRecord> records = info.getRecords();
-        for (GameRecord record : records) {
-            Win rank = Win.findRank(record, info.getWinningNumber());
-            statRecord.setRank(rank);
+        List<Lotto> records = info.getRecords();
+        for (Lotto record : records) {
+//            Win rank = Win.findRank(record, info.getWinningNumber());
+//            statRecord.setRank(rank);
         }
     }
 

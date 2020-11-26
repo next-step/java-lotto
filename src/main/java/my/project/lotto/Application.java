@@ -1,9 +1,9 @@
 package my.project.lotto;
 
 import my.project.lotto.controller.StatController;
-import my.project.lotto.domain.GameRecord;
+import my.project.lotto.domain.Chance;
+import my.project.lotto.domain.Lotto;
 import my.project.lotto.domain.Lottos;
-import my.project.lotto.domain.Ticket;
 import my.project.lotto.view.InputView;
 import my.project.lotto.view.ResultView;
 
@@ -18,8 +18,8 @@ public class Application {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        Ticket ticket = new Ticket(inputView.getMoney());
-        List<GameRecord> records = Lottos.lotto(ticket);
+        Chance chance = new Chance(inputView.getMoney());
+        List<Lotto> records = Lottos.lotto(chance);
         resultView.printGame(records);
 
         StatController statController = new StatController(records, inputView.getWinningNumber());

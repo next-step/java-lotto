@@ -6,13 +6,13 @@ import my.project.constants.Comments;
  * Created : 2020-11-23 오후 12:10
  * Developer : Seo
  */
-public class Ticket {
+public class Chance {
     public static final int PRICE = 1000;
-    private final int tickets;
+    private final int chances;
 
-    public Ticket(int money) {
+    public Chance(int money) {
         isQualified(money);
-        this.tickets = money / PRICE;
+        this.chances = money / PRICE;
     }
 
     private void isQualified(int money) {
@@ -21,8 +21,8 @@ public class Ticket {
         }
     }
 
-    public int getTickets() {
-        return tickets;
+    public int getChances() {
+        return chances;
     }
 
 }

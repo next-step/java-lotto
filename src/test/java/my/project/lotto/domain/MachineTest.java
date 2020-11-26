@@ -11,68 +11,69 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Developer : Seo
  */
 class MachineTest {
-    private Machine machine;
-
-    @BeforeEach
-    void setUp() {
-        this.machine = new Machine();
-    }
-
-    @DisplayName("인스턴스 확인")
-    @Test
-    void init() {
-        assertThat(machine.pop()).isInstanceOf(Integer.class);
-    }
-
-    @DisplayName("1~45 사이 숫자가 나와야 한다")
-    @Test
-    void whenPop_shouldBeBetween() {
-        assertThat(machine.pop()).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER);
-    }
-
-    @DisplayName("이전 숫자는 제외된다")
-    @Test
-    void whenPop_shouldNotBePrevious() {
-        int num = machine.pop();
-        assertThat(num).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER);
-        assertThat(machine.pop()).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                                .isNotEqualTo(num);
-    }
-
-    @DisplayName("6개의 숫자는 모두 다르다")
-    @Test
-    void whenPop_shouldBeAllDifferent() {
-        int num1 = machine.pop();
-        int num2 = machine.pop();
-        int num3 = machine.pop();
-        int num4 = machine.pop();
-        int num5 = machine.pop();
-        int num6 = machine.pop();
-
-        assertThat(num1).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                        .isNotEqualTo(num2)
-                        .isNotEqualTo(num3)
-                        .isNotEqualTo(num4)
-                        .isNotEqualTo(num5)
-                        .isNotEqualTo(num6);
-
-        assertThat(num2).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                        .isNotEqualTo(num3)
-                        .isNotEqualTo(num4)
-                        .isNotEqualTo(num5)
-                        .isNotEqualTo(num6);
-
-        assertThat(num3).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                        .isNotEqualTo(num4)
-                        .isNotEqualTo(num5)
-                        .isNotEqualTo(num6);
-
-        assertThat(num4).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                        .isNotEqualTo(num5)
-                        .isNotEqualTo(num6);
-
-        assertThat(num5).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
-                        .isNotEqualTo(num6);
-    }
+//
+//    private Machine machine;
+//
+//    @BeforeEach
+//    void setUp() {
+//        this.machine = new Machine();
+//    }
+//
+//    @DisplayName("인스턴스 확인")
+//    @Test
+//    void init() {
+//        assertThat(machine.pop()).isInstanceOf(Integer.class);
+//    }
+//
+//    @DisplayName("1~45 사이 숫자가 나와야 한다")
+//    @Test
+//    void whenPop_shouldBeBetween() {
+//        assertThat(machine.pop()).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER);
+//    }
+//
+//    @DisplayName("이전 숫자는 제외된다")
+//    @Test
+//    void whenPop_shouldNotBePrevious() {
+//        int num = machine.pop();
+//        assertThat(num).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER);
+//        assertThat(machine.pop()).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                                .isNotEqualTo(num);
+//    }
+//
+//    @DisplayName("6개의 숫자는 모두 다르다")
+//    @Test
+//    void whenPop_shouldBeAllDifferent() {
+//        int num1 = machine.pop();
+//        int num2 = machine.pop();
+//        int num3 = machine.pop();
+//        int num4 = machine.pop();
+//        int num5 = machine.pop();
+//        int num6 = machine.pop();
+//
+//        assertThat(num1).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                        .isNotEqualTo(num2)
+//                        .isNotEqualTo(num3)
+//                        .isNotEqualTo(num4)
+//                        .isNotEqualTo(num5)
+//                        .isNotEqualTo(num6);
+//
+//        assertThat(num2).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                        .isNotEqualTo(num3)
+//                        .isNotEqualTo(num4)
+//                        .isNotEqualTo(num5)
+//                        .isNotEqualTo(num6);
+//
+//        assertThat(num3).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                        .isNotEqualTo(num4)
+//                        .isNotEqualTo(num5)
+//                        .isNotEqualTo(num6);
+//
+//        assertThat(num4).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                        .isNotEqualTo(num5)
+//                        .isNotEqualTo(num6);
+//
+//        assertThat(num5).isBetween(Machine.MIN_NUMBER, Machine.MAX_NUMBER)
+//                        .isNotEqualTo(num6);
+//    }
 
 }

@@ -2,7 +2,7 @@ package my.project.lotto.view;
 
 
 import my.project.constants.Comments;
-import my.project.lotto.domain.GameRecord;
+import my.project.lotto.domain.Lotto;
 import my.project.lotto.domain.StatRecord;
 
 import java.util.List;
@@ -13,16 +13,16 @@ import java.util.List;
  */
 public class ResultView {
 
-    public void printGame(List<GameRecord> records) {
+    public void printGame(List<Lotto> records) {
         bought(records);
         grid(records);
     }
 
-    private void bought(List<GameRecord> records) {
+    private void bought(List<Lotto> records) {
         System.out.println(records.size() + Comments.YOU_HAVE_GOT);
     }
 
-    private void grid(List<GameRecord> records) {
+    private void grid(List<Lotto> records) {
         records.forEach(t -> System.out.println(t.toString()));
     }
 

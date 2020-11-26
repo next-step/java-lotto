@@ -1,6 +1,6 @@
 package my.project.lotto.controller;
 
-import my.project.lotto.domain.GameRecord;
+import my.project.lotto.domain.Lotto;
 import my.project.lotto.domain.StatRecord;
 import my.project.lotto.domain.StatInfo;
 import my.project.lotto.domain.Statistics;
@@ -13,7 +13,7 @@ public class StatController {
     private final StatInfo info;
     private final Statistics stat;
 
-    public StatController(List<GameRecord> records, String winningNumber) {
+    public StatController(List<Lotto> records, String winningNumber) {
         CollectionUtils.isListQualified(records);
         StringUtils.isQualified(winningNumber);
 
