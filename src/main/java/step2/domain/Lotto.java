@@ -14,4 +14,8 @@ public class Lotto {
     public Set<LottoNumber> getNumbers() {
         return this.numbers;
     }
+
+    public boolean contains(int winNumber) {
+        return numbers.contains(winNumber);
+    }
 }

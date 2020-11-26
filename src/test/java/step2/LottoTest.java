@@ -52,6 +52,6 @@ public class LottoTest {
         int[] winNumber = new int[]{1, 2, 3, 4, 5, 6};
         int[][] winCounts = lottoResult.getWin(winNumber, lottoList);
 
-        assertThat(lottoResult.getTotalRevenue(1000, winCounts)).isEqualTo(500.0);
+        assertThat(lottoResult.getTotalRevenue(1000, winCounts)).isEqualTo(5.0);
     }
 }
