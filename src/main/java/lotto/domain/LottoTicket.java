@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoGameConfig.LOTTO_TICKET_NUMBER_COUNT;
+import static lotto.domain.LottoGameConfig.MAX_LOTTO_NUMBER;
+
 public class LottoTicket {
 
     private static final int MIN_COUNT_TO_PRIZE = 3;
@@ -20,6 +23,11 @@ public class LottoTicket {
     }
 
     public PrizeUnit countWinningNumbers(List<Integer> lastWinningNumbers, int bonusNumber) {
+
+        validateLastWinningNumbers(lastWinningNumbers);
+
+        validateBonusNumber(bonusNumber);
+
         List<Integer> winningsNumber = lottoNumbers
                 .stream().filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
 
@@ -36,6 +44,23 @@ public class LottoTicket {
         }
 
         return PrizeUnit.findPrizeFieldByUnitCount(winningNumberSize, false);
+    }
+
+    private void validateBonusNumber(int bonusNumber) {
+        if(bonusNumber> MAX_LOTTO_NUMBER){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
+        }
+    }
+
+    private void validateLastWinningNumbers(List<Integer> lastWinningNumbers) {
+
+        if (lastWinningNumbers.size() != LOTTO_TICKET_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
+
+        if(lastWinningNumbers.stream().anyMatch(number -> number > MAX_LOTTO_NUMBER)){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }
     }
 
 }
