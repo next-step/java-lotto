@@ -5,6 +5,7 @@ import step4.domain.Lotto;
 import step4.domain.Lottos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,39 +13,45 @@ import java.util.stream.IntStream;
 public class LottoTicketMaker {
     private static final int LOTTO_TOTAL_COUNT = 6;
 
-    private final int autoQty;
-
     private final Amount amount;
+
+    private final int autoQty;
 
     private Lottos lottoTicket;
 
     private final int manualLottoQty;
 
-    public LottoTicketMaker(int lottoAmount, int manualLottoQty, List<Lotto> manualLottoNumbers) {
-        amount = Amount.of(lottoAmount);
-        this.autoQty = lottoAutoPurchaseQty();
+    private LottoTicketMaker(int manualLottoQty, Amount amount, String lottoNumber) {
+        this.amount = amount;
         this.manualLottoQty = manualLottoQty;
-        lottoCreateStart(manualLottoNumbers);
+        this.autoQty = lottoAutoPurchaseQty();
+
+        run(manualLottoQty, lottoNumber);
     }
 
-    public static LottoTicketMaker of(int lottoAmount, int manualLottoQty, List<Lotto> manualLottoNumbers) {
-        return new LottoTicketMaker(lottoAmount, manualLottoQty, manualLottoNumbers);
+    private void run(int manualLottoQty, String lottoNumber) {
+        List<Lotto> lottos = askManualLottoNumbers(manualLottoQty, lottoNumber);
+        this.lottoTicket = create(lottos);
+    }
+
+    public static LottoTicketMaker of(Amount amount, int manualLottoQty, String lottos) {
+        return new LottoTicketMaker(manualLottoQty, amount, lottos);
     }
 
     public int lottoAutoPurchaseQty() {
         return amount.lottoPurchaseQty() - this.manualLottoQty;
     }
 
-    private void lottoCreateStart(List<Lotto> lottos) {
+    private Lottos create(List<Lotto> lottos) {
+        List<Lotto> result = new ArrayList<>();
         List<Lotto> lotto = IntStream.range(0, lottoAutoPurchaseQty())
                 .mapToObj(i -> lottoTicketCreate())
                 .collect(Collectors.toList());
 
-        List<Lotto> result = new ArrayList<>();
         result.addAll(lottos);
         result.addAll(lotto);
 
-        this.lottoTicket = new Lottos(result);
+        return new Lottos(result);
     }
 
     private Lotto lottoTicketCreate() {
@@ -57,5 +64,20 @@ public class LottoTicketMaker {
 
     public Lottos getLottoTicket() {
         return this.lottoTicket;
+    }
+
+    private List<Lotto> askManualLottoNumbers(int numberOfManualLottos, String manualLottoNumber) {
+        return IntStream.range(0, numberOfManualLottos)
+                .mapToObj(i -> setManualLottoNumbers(manualLottoNumber))
+                .collect(Collectors.toList());
+    }
+
+    private Lotto setManualLottoNumbers(String manualLottoNumber) {
+        Lotto lotto = new Lotto();
+        lotto.getLottos().clear();
+
+        Arrays.stream(manualLottoNumber.split(","))
+                .forEach(lottoNumber -> lotto.getLottos().add(Integer.parseInt(lottoNumber)));
+        return lotto;
     }
 }
