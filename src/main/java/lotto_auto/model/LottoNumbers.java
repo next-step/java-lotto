@@ -31,6 +31,25 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    private void throwIfNull(List<LottoNumber> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_NULL_LOTTO_NUMBER);
+        }
+    }
+
+    private void throwIfInValidLottoNumberCount(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER_COUNT);
+        }
+    }
+
+    private void throwIfDuplicate(List<LottoNumber> numbers) {
+        Set<LottoNumber> set = new HashSet<>(numbers);
+        if (numbers.size() != set.size()) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
+        }
+    }
+
     public List<LottoNumber> export() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
@@ -44,25 +63,6 @@ public class LottoNumbers {
                 .stream()
                 .filter(this::contains)
                 .count();
-    }
-
-    private void throwIfDuplicate(List<LottoNumber> numbers) {
-        Set<LottoNumber> set = new HashSet<>(numbers);
-        if (numbers.size() != set.size()) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
-        }
-    }
-
-    private void throwIfNull(List<LottoNumber> numbers) {
-        if (numbers == null) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NULL_LOTTO_NUMBER);
-        }
-    }
-
-    private void throwIfInValidLottoNumberCount(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER_COUNT);
-        }
     }
 
 }
