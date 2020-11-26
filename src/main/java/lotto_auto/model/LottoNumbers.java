@@ -13,9 +13,9 @@ public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        ThrowIfNull(lottoNumbers);
-        ThrowIfInValidLottoNumberCount(lottoNumbers);
-        ThrowIfDuplicate(lottoNumbers);
+        throwIfNull(lottoNumbers);
+        throwIfInValidLottoNumberCount(lottoNumbers);
+        throwIfDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -23,20 +23,20 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    private void ThrowIfDuplicate(List<LottoNumber> numbers) {
+    private void throwIfDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> set = new HashSet<>(numbers);
         if (numbers.size() != set.size()) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
         }
     }
 
-    private void ThrowIfNull(List<LottoNumber> numbers) {
+    private void throwIfNull(List<LottoNumber> numbers) {
         if (numbers == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NULL_LOTTO_NUMBER);
         }
     }
 
-    private void ThrowIfInValidLottoNumberCount(List<LottoNumber> numbers) {
+    private void throwIfInValidLottoNumberCount(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER_COUNT);
         }

@@ -11,11 +11,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
-        ThrowIfInvalidLottoNumberRange(number);
+        throwIfInvalidLottoNumberRange(number);
         this.number = number;
     }
 
-    private void ThrowIfInvalidLottoNumberRange(int number) {
+    private void throwIfInvalidLottoNumberRange(int number) {
         if (number <= LOTTO_NUMBER_MIN_RANGE || number >= LOTTO_NUMBER_MAX_RANGE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
         }
