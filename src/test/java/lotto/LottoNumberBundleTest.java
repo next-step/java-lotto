@@ -5,12 +5,20 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import lotto.lottoexception.DuplicatedNumberException;
 import lotto.lottoexception.InvalidLottoFormatException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberBundleTest {
+
+  LottoNumberBundle sampleLottoNumberBundle;
+
+  @BeforeEach
+  void setUp() {
+    this.sampleLottoNumberBundle = LottoNumberBundle.of("1, 2, 3, 4, 5, 6");
+  }
 
   @ParameterizedTest
   @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
@@ -41,5 +49,15 @@ public class LottoNumberBundleTest {
   void testToSting() {
     assertThat(LottoNumberBundle.of("1, 2, 3, 4, 5, 6").toString())
         .isEqualTo("[1, 2, 3, 4, 5, 6]");
+  }
+
+  @Test
+  @DisplayName("Iterable 테스트")
+  void testIterable() {
+    int idx = 1;
+    for (LottoNumber number : this.sampleLottoNumberBundle) {
+      assertThat(number).isEqualTo(LottoNumber.of(idx));
+      idx += 1;
+    }
   }
 }

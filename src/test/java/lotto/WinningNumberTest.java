@@ -1,7 +1,10 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
+import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import lotto.lottoexception.DuplicatedNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,16 +16,20 @@ class WinningNumberTest {
   @BeforeEach
   void setUp() {
     String rawInput = "2, 1, 3, 6, 5, 4";
-    sampleWinningNumber = WinningNumber.of(rawInput);
+    sampleWinningNumber = WinningNumber.of(LottoNumberBundle.of(rawInput));
   }
 
   @Test
-  @DisplayName("Iterable Test")
-  void testIterable() {
-    int idx = 1;
-    for (LottoNumber number : this.sampleWinningNumber) {
-      assertThat(number).isEqualTo(LottoNumber.of(idx));
-      idx += 1;
+  @DisplayName("중복 테스트")
+  void testDuplication() {
+    for (int number = MINIMUM_LOTTO_NUMBER;
+        number < MINIMUM_LOTTO_NUMBER + NUMBERS_PER_BUNDLE;
+        number++) {
+
+      int finalNumber = number;
+      assertThatExceptionOfType(DuplicatedNumberException.class).isThrownBy(
+          () -> this.sampleWinningNumber.validateBonusNumberDuplication(LottoNumber.of(finalNumber))
+      );
     }
   }
 }

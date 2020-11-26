@@ -15,9 +15,11 @@ import lotto.lottoexception.InvalidLottoFormatException;
 public class WinningNumber implements Iterable<LottoNumber> {
 
   private final List<LottoNumber> numbers;
+  private final LottoNumberBundle bundle;
 
-  private WinningNumber(List<LottoNumber> lottoNumbers) {
+  private WinningNumber(List<LottoNumber> lottoNumbers, LottoNumberBundle bundle) {
     this.numbers = lottoNumbers;
+    this.bundle = bundle;
   }
 
   public static WinningNumber of(String rawInput) {
@@ -43,7 +45,7 @@ public class WinningNumber implements Iterable<LottoNumber> {
       checkEquality(lottoNumbers.get(i), lottoNumbers.get(i + 1));
     }
 
-    return new WinningNumber(lottoNumbers);
+    return new WinningNumber(lottoNumbers, null);
   }
 
   private static void checkEquality(LottoNumber number1, LottoNumber number2) {
@@ -52,24 +54,46 @@ public class WinningNumber implements Iterable<LottoNumber> {
     }
   }
 
+  public static WinningNumber of(LottoNumberBundle bundle) {
+    return new WinningNumber(null, bundle);
+  }
+
   public void validateBonusNumberDuplication(LottoNumber lottoNumber) {
-    if (this.numbers.contains(lottoNumber)) {
-      throw new DuplicatedNumberException();
+    if (this.numbers != null) {
+      if (this.numbers.contains(lottoNumber)) {
+        throw new DuplicatedNumberException();
+      }
+    }
+
+    if (this.bundle != null) {
+      if (this.bundle.contains(lottoNumber)) {
+        throw new DuplicatedNumberException();
+      }
     }
   }
 
   @Override
   public Iterator<LottoNumber> iterator() {
-    return this.numbers.iterator();
+    if (this.numbers != null) {
+      return this.numbers.iterator();
+    }
+
+    return this.bundle.iterator();
   }
 
   @Override
   public void forEach(Consumer<? super LottoNumber> action) {
-    this.numbers.forEach(action);
+    if (this.numbers != null) {
+      this.numbers.forEach(action);
+    }
+    this.bundle.forEach(action);
   }
 
   @Override
   public Spliterator<LottoNumber> spliterator() {
-    return this.numbers.spliterator();
+    if (this.numbers != null) {
+      return this.numbers.spliterator();
+    }
+    return this.bundle.spliterator();
   }
 }

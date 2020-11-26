@@ -5,12 +5,15 @@ import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import lotto.lottoexception.DuplicatedNumberException;
 import lotto.lottoexception.InvalidLottoFormatException;
 
-public class LottoNumberBundle {
+public class LottoNumberBundle implements Iterable<LottoNumber> {
 
   private final List<LottoNumber> numbers;
 
@@ -57,5 +60,20 @@ public class LottoNumberBundle {
 
   public String toString() {
     return this.numbers.toString();
+  }
+
+  @Override
+  public Iterator<LottoNumber> iterator() {
+    return this.numbers.iterator();
+  }
+
+  @Override
+  public void forEach(Consumer<? super LottoNumber> action) {
+    this.numbers.forEach(action);
+  }
+
+  @Override
+  public Spliterator<LottoNumber> spliterator() {
+    return this.numbers.spliterator();
   }
 }

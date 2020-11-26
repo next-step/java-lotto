@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class NumberPool {
 
   private static final List<LottoNumber> randomBox = IntStream
-      .range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
+      .rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
       .mapToObj(LottoNumber::get)
       .collect(Collectors.toList());
 
