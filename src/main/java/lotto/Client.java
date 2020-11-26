@@ -10,6 +10,7 @@ public class Client {
   public static void main(String[] args) {
     TicketPublisher ticketPublisher = new TicketPublisher();
     Budget budget = Budget.of(InputView.askBudget());
+
     ResultView.printNumLotto(budget.getNumPossibleBuyingTicket());
 
     LottoTickets purchasedTickets = ticketPublisher.publishAutoTickets(budget);

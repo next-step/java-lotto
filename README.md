@@ -127,8 +127,9 @@
                 * [X] 테스트를 위해 LottoBundle 에 equal 기능 추가 
         * [X] Publisher 중간 과정으로 Bundle 반환 기능 추가
 * [X] Budget 에 잔액 기능 추가
-* [ ] 티켓 수동 발급 기능 추가
+* [X] 티켓 수동 발급 기능 추가
     * [X] TicketPublisher 에 발급 기록 저장 기능 추가
     * [X] TicketPublisher 인스턴스화 가능토록 변경
-* [ ] Tickets 에 addAll 기능 추가
+    * [X] Tickets 에 addAll 기능 추가
+    * [ ] InputView <-> 발급까지
 * [ ] WinningNumber 에 BonusNumber 넣기

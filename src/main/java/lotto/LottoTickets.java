@@ -28,6 +28,10 @@ public class LottoTickets implements ReadOnlyLottoTickets {
     return lottoResult;
   }
 
+  public void addAll(LottoTickets that) {
+    this.tickets.addAll(that.tickets);
+  }
+
   @Override
   public int getNumTicket() {
     return this.tickets.size();

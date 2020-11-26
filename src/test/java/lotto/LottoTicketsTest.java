@@ -6,7 +6,10 @@ import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,5 +53,56 @@ class LottoTicketsTest {
 
     assertThat(result.calculateIncome())
         .isEqualTo(Rank.FIRST.getWinningReward() * 2);
+  }
+
+  @Test
+  @DisplayName("addAll 어떻게 동작하는지 확인")
+  void justPureAddAll() {
+    List<Integer> a = IntStream
+        .rangeClosed(1, 10)
+        .boxed()
+        .collect(toList());
+    List<Integer> b = IntStream
+        .rangeClosed(11, 20)
+        .boxed()
+        .collect(toList());
+
+    a.addAll(b);
+
+    assertThat(a)
+        .isEqualTo(IntStream
+            .rangeClosed(1, 20)
+            .boxed()
+            .collect(toList())
+        );
+  }
+
+  @Test
+  @DisplayName("addAll 어떻게 동작하는지 확인(만약 null 넣으면?)")
+  void addAllNull() {
+    List<Integer> a = IntStream.rangeClosed(1, 10)
+        .boxed()
+        .collect(toList()
+        );
+
+    assertThatNullPointerException().isThrownBy(
+        () -> a.addAll(null)
+    );
+  }
+
+  @Test
+  @DisplayName("빈 거(size0) 넣으면?")
+  void size0Added() {
+    List<Integer> a = IntStream.rangeClosed(1, 10)
+        .boxed()
+        .collect(toList());
+    List<Integer> b = new ArrayList<>();
+    a.addAll(b);
+    assertThat(a)
+        .isEqualTo(
+            IntStream.rangeClosed(1, 10)
+                .boxed()
+                .collect(toList())
+        );
   }
 }
