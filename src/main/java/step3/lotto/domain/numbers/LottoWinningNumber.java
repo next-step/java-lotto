@@ -1,5 +1,6 @@
 package step3.lotto.domain.numbers;
 
+
 import step3.lotto.util.CommonLottoCheck;
 import step3.lotto.util.LottoErrorMessage;
 
@@ -14,26 +15,25 @@ import java.util.stream.Collectors;
  */
 public class LottoWinningNumber {
 
-    private List<Integer> winningNumbers = new ArrayList<>();
-    private CommonLottoCheck commonLottoCheck = new CommonLottoCheck();
+    private LottoTicket winningNumbers;
     private LottoRank lottoRank;
     private int bonusNumber = 0;
 
     public LottoWinningNumber(String winningNumbers, int bonusNumber) {
         isNullOrEmptyCheck(winningNumbers);
-        commonLottoCheck.checkLowStandardNumber(bonusNumber);
+        CommonLottoCheck.checkLowStandardNumber(bonusNumber);
 
         this.bonusNumber = bonusNumber;
-        this.winningNumbers = initLottoWinningNumber(winningNumbers, bonusNumber);
-        lottoRank = new LottoRank(bonusNumber, this.winningNumbers);
+        this.winningNumbers = new LottoTicket(initLottoWinningNumber(winningNumbers, bonusNumber));
+        this.lottoRank = new LottoRank(this.bonusNumber, this.winningNumbers);
     }
 
     public List<Integer> initLottoWinningNumber(String winningNumbers, int bonusNumber) {
         List<Integer> returnValue = new ArrayList<>();
         String[] arr = winningNumbers.replaceAll(" ", "").split(",");
-        ChecklottoOverlapNumbers(arr);
+        checklottoOverlapNumbers(arr);
         Arrays.sort(arr);
-        commonLottoCheck.CheckNumber(Arrays.asList(arr));
+        CommonLottoCheck.CheckNumber(Arrays.asList(arr));
 
         returnValue = Arrays.asList(arr).stream()
                 .map(Integer::parseInt)
@@ -44,7 +44,7 @@ public class LottoWinningNumber {
         return returnValue;
     }
 
-    public Integer getRank(SortedSet<Integer> paramValue) {
+    public int getRank(SortedSet<Integer> paramValue) {
         int lottoRankValue = lottoRank.getRank(paramValue);
 
         return lottoRankValue;
@@ -62,7 +62,7 @@ public class LottoWinningNumber {
         }
     }
 
-    private void ChecklottoOverlapNumbers(String[] paramValue) {
+    private void checklottoOverlapNumbers(String[] paramValue) {
         for (int i = 0; i < paramValue.length - 1; i++) {
             isSameValueCheck(paramValue[i], paramValue[i + 1]);
         }
