@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created : 2020-11-23 오후 2:06
  * Developer : Seo
  */
-class LottoTest {
+class LottosTest {
     private Ticket info;
-    private Lotto lotto;
+    private Lottos lotto;
 
     @BeforeEach
     void setUp() {
         this.info = new Ticket(14000);
-        this.lotto = new Lotto();
+        this.lotto = new Lottos();
     }
 
     @DisplayName("인스턴스 확인")

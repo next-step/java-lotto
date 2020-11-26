@@ -1,6 +1,6 @@
 package my.project.lotto.domain;
 
-import my.project.utils.IntUtils;
+import my.project.constants.Comments;
 
 /**
  * Created : 2020-11-23 오후 12:10
@@ -8,16 +8,21 @@ import my.project.utils.IntUtils;
  */
 public class Ticket {
     public static final int PRICE = 1000;
-
-    private final int count;
+    private final int tickets;
 
     public Ticket(int money) {
-        IntUtils.isMoneyQualified(money);
-        this.count = money / PRICE;
+        isQualified(money);
+        this.tickets = money / PRICE;
     }
 
-    public int getCount() {
-        return this.count;
+    private void isQualified(int money) {
+        if (money < 1000) {
+            throw new IllegalArgumentException(Comments.MIN_MONEY);
+        }
+    }
+
+    public int getTickets() {
+        return tickets;
     }
 
 }

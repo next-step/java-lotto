@@ -1,6 +1,6 @@
 package my.project.constants;
 
-import my.project.lotto.domain.Lotto;
+import my.project.lotto.domain.Lottos;
 
 /**
  * Created : 2020-11-23 오전 10:38
@@ -13,10 +13,10 @@ public class Comments {
     public static final String MIN_MONEY = "구입금액은 1000원 이상입니다.";
     public static final String STAT_TITLE = "당첨 통계";
     public static final String STAT_DIV = "---------";
-    public static final String STAT_FIFTH = "3개 일치 (" + Lotto.FIFTH_PRICE + "원)- ";
-    public static final String STAT_FOURTH = "4개 일치 (" + Lotto.FOURTH_PRICE + "원)- ";
-    public static final String STAT_THIRD = "5개 일치 (" + Lotto.THIRD_PRICE + "원)- ";
-    public static final String STAT_FIRST = "6개 일치 (" + Lotto.FIRST_PRICE + "원)- ";
+    public static final String STAT_FIFTH = "3개 일치 (" + Lottos.FIFTH_PRICE + "원)- ";
+    public static final String STAT_FOURTH = "4개 일치 (" + Lottos.FOURTH_PRICE + "원)- ";
+    public static final String STAT_THIRD = "5개 일치 (" + Lottos.THIRD_PRICE + "원)- ";
+    public static final String STAT_FIRST = "6개 일치 (" + Lottos.FIRST_PRICE + "원)- ";
 
     private Comments() {
     }

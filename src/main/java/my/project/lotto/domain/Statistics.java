@@ -28,10 +28,10 @@ public class Statistics {
 
     private void profit(StatInfo info) {
         statRecord.setProfit(
-                (double) ((Lotto.FIRST_PRICE * statRecord.getFirst())
-                        + (Lotto.THIRD_PRICE * statRecord.getThird())
-                        + (Lotto.FOURTH_PRICE * statRecord.getFourth())
-                        + (Lotto.FIFTH_PRICE * statRecord.getFifth()))
+                (double) ((Lottos.FIRST_PRICE * statRecord.getFirst())
+                        + (Lottos.THIRD_PRICE * statRecord.getThird())
+                        + (Lottos.FOURTH_PRICE * statRecord.getFourth())
+                        + (Lottos.FIFTH_PRICE * statRecord.getFifth()))
                         / info.getMoney());
     }
 
