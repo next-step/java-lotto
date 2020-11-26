@@ -1,12 +1,6 @@
 package step4.view;
 
-import step4.domain.Lotto;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoInputUi {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -31,25 +25,15 @@ public class LottoInputUi {
         return SCANNER.nextInt();
     }
 
-    public static List<Lotto> askManualLottoNumbers(int numberOfManualLottos) {
+    public static String askManualLottoNumbers() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.skip("[\\r\\n]+");
-
-        return IntStream.range(0, numberOfManualLottos)
-                .mapToObj(i -> setManualLottoNumbers())
-                .collect(Collectors.toList());
-    }
-
-    private static Lotto setManualLottoNumbers() {
-        Lotto lotto = new Lotto();
-        lotto.getLottos().clear();
-
-        Arrays.stream(SCANNER.nextLine().split(","))
-                .forEach(lottoNumber -> lotto.getLottos().add(Integer.parseInt(lottoNumber)));
-        return lotto;
+        return SCANNER.nextLine();
     }
 
     public static void close() {
         SCANNER.close();
     }
+
+
 }
