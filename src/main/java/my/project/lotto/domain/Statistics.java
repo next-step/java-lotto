@@ -5,6 +5,7 @@ import my.project.constants.Rule;
 import java.util.List;
 
 public class Statistics {
+    public static final int FIRST_PRICE = 2000000000;
     private final StatRecord statRecord;
 
     public Statistics() {
@@ -27,10 +28,10 @@ public class Statistics {
 
     private void profit(StatInfo info) {
         statRecord.setProfit(
-                (double) ((Rule.FIRST_PRICE * statRecord.getFirst())
-                        + (Rule.THIRD_PRICE * statRecord.getThird())
-                        + (Rule.FOURTH_PRICE * statRecord.getFourth())
-                        + (Rule.FIFTH_PRICE * statRecord.getFifth()))
+                (double) ((Lotto.FIRST_PRICE * statRecord.getFirst())
+                        + (Lotto.THIRD_PRICE * statRecord.getThird())
+                        + (Lotto.FOURTH_PRICE * statRecord.getFourth())
+                        + (Lotto.FIFTH_PRICE * statRecord.getFifth()))
                         / info.getMoney());
     }
 

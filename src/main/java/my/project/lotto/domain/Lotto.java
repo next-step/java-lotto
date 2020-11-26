@@ -10,13 +10,19 @@ import java.util.List;
  * Developer : Seo
  */
 public class Lotto {
+    public static final int NUMBERS = 6;
+    public static final int FIRST_PRICE = 2000000000;
+    public static final int THIRD_PRICE = 1500000;
+    public static final int FOURTH_PRICE = 50000;
+    public static final int FIFTH_PRICE = 5000;
+
     private List<GameRecord> records;
 
     public Lotto() {
         this.records = new ArrayList<>();
     }
 
-    public List<GameRecord> games(GameInfo info) {
+    public List<GameRecord> games(Ticket info) {
         for (int i = 0; i < info.getCount(); i++) {
             game();
         }
@@ -26,7 +32,7 @@ public class Lotto {
     private void game() {
         Machine machine = new Machine();
         GameRecord record = new GameRecord();
-        for (int i = 0; i < Rule.ONE_GAME_COUNT; i++) {
+        for (int i = 0; i < NUMBERS; i++) {
             record.add(machine.pop());
         }
         records.add(record);

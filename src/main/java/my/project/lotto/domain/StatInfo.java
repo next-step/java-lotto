@@ -1,6 +1,5 @@
 package my.project.lotto.domain;
 
-import my.project.constants.Rule;
 import my.project.utils.CollectionUtils;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class StatInfo {
     }
 
     public int getMoney() {
-        return records.size() * Rule.ONE_GAME_PRICE;
+        return records.size() * Ticket.PRICE;
     }
 
 }

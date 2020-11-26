@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Developer : Seo
  */
 class LottoTest {
-    private GameInfo info;
+    private Ticket info;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        this.info = new GameInfo(14000);
+        this.info = new Ticket(14000);
         this.lotto = new Lotto();
     }
 
@@ -41,8 +41,8 @@ class LottoTest {
     @Test
     void whenHaveGame_shouldHaveBetween() {
         assertThat(lotto.games(info).get(0).get())
-                .doesNotContain(Rule.MIN_NUMBER - 1)
-                .doesNotContain(Rule.MAX_NUMBER + 1);
+                .doesNotContain(Machine.MIN_NUMBER - 1)
+                .doesNotContain(Machine.MAX_NUMBER + 1);
     }
 
     @DisplayName("1 게임은 중복되지 않는다")

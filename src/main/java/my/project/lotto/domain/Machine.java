@@ -11,11 +11,13 @@ import java.util.Stack;
  * Developer : Seo
  */
 public class Machine {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 1;
     private final Stack<Integer> numbers;
 
     public Machine() {
         numbers = new Stack<>();
-        for (int i = Rule.MIN_NUMBER; i < Rule.MAX_NUMBER + 1; i++) {
+        for (int i = MIN_NUMBER; i < MAX_NUMBER + 1; i++) {
             numbers.push(i);
         }
         Collections.shuffle(numbers);
