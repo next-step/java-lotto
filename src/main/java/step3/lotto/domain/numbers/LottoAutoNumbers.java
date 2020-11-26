@@ -26,8 +26,7 @@ public class LottoAutoNumbers {
         for (int i = 0; i < getLottoAutoNumberCount; i++) {
             returnList.add(basicLottoNumbers.get(i));
         }
-        LottoTicket lottoTicket = new LottoTicket(returnList);
 
-        return lottoTicket;
+        return new LottoTicket(returnList);
     }
 }
