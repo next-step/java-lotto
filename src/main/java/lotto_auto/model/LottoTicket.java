@@ -2,14 +2,31 @@ package lotto_auto.model;
 
 import lotto_auto.ErrorMessage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 
 public class LottoTicket {
-
-    private LottoNumbers lottoNumbers;
     public static final int PRICE = 1000;
+    private static List<LottoNumber> lottoNumberList =
+            IntStream
+                    .range(1, 45)
+                    .mapToObj(LottoNumber::new)
+                    .collect(Collectors.toList());
+    private LottoNumbers lottoNumbers;
 
     public LottoTicket() {
-        this.lottoNumbers = LottoNumberManager.generate();
+        this.lottoNumbers = generate();
+    }
+
+    private static LottoNumbers generate() {
+        Collections.shuffle(lottoNumberList);
+        List<LottoNumber> list = new ArrayList<>(lottoNumberList.subList(0, 6));
+        Collections.sort(list);
+        return new LottoNumbers(list);
     }
 
     public LottoNumbers getLottoNumbers() {

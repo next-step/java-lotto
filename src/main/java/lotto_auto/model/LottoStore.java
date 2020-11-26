@@ -4,7 +4,6 @@ import lotto_auto.ErrorMessage;
 
 public class LottoStore {
 
-
     public static LottoBundle sell(int money) {
         throwIfNegativeMoney(money);
         int ticketCount = money / LottoTicket.PRICE;
