@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step4.domain.Amount;
 import step4.domain.Lotto;
+import step4.domain.Numbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LottoTicketMakerTest {
 
     private static final List<Lotto> lottos = new ArrayList<>();
+    private static final Amount amount = Amount.of(14000);
 
     @BeforeEach
     public void setUp() {
@@ -30,8 +33,9 @@ public class LottoTicketMakerTest {
     @ValueSource(ints = {14})
     public void 입력한_로또_가격_확인(int lottoAmount) {
         int manualLottoQty = 0;
-        List<Lotto> manualLottoNumbers = new ArrayList<>();
-        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(14000, manualLottoQty, manualLottoNumbers);
+        Numbers numbers = Numbers.of("1,2,3,7,8,9");
+
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, numbers.getLottoNumber());
         assertEquals(lottoAmount, lottoTicketMaker.lottoAutoPurchaseQty() + manualLottoQty);
     }
 
@@ -40,7 +44,9 @@ public class LottoTicketMakerTest {
     @ValueSource(ints = {13})
     public void 입력한_수동_갯수_제외_자동_갯수_확인(int lottoAmount) {
         int manualLottoQty = 1;
-        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(14000, manualLottoQty, lottos);
+        Numbers numbers = Numbers.of("1,2,3,7,8,9");
+
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, numbers.getLottoNumber());
         assertEquals(lottoAmount, lottoTicketMaker.lottoAutoPurchaseQty());
     }
 }

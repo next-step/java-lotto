@@ -25,9 +25,9 @@ public class LottoWinningTest {
                 .forEach(i -> lotto.getLottos().add(i));
 
         lottos.add(lotto);
-        LottoNumber number = LottoNumber.of("1,2,3,9,12,14", "10");
-
-        LottoWinning lottoWinning = LottoWinning.of(number, new Lottos(lottos));
+        Numbers number = Numbers.of("1,2,3,9,12,14");
+        LottoNumbers lottoNumbers = LottoNumbers.of(number, "9");
+        LottoGameWinning lottoWinning = LottoGameWinning.of(lottoNumbers, new Lottos(lottos));
         assertThat(lottoWinning.getWinningAmount()).isEqualTo(50000);
     }
 
@@ -44,8 +44,10 @@ public class LottoWinningTest {
 
         lottos.add(lotto);
 
-        LottoNumber number = LottoNumber.of(lastLottoWinningNumbers, "10");
-        LottoWinning lottoWinning = LottoWinning.of(number, new Lottos(lottos));
+        Numbers number = Numbers.of(lastLottoWinningNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(number, "10");
+        LottoGameWinning lottoWinning = LottoGameWinning.of(lottoNumbers, new Lottos(lottos));
+
         assertThat(lottoWinning.getLottoWinningMap().get(LottoWinningPrizes.THIRD_MATCHES)).isEqualTo(1);
     }
 }
