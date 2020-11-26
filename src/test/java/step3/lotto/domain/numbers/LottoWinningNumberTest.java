@@ -2,10 +2,6 @@ package step3.lotto.domain.numbers;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinningNumberTest {
@@ -34,13 +30,6 @@ public class LottoWinningNumberTest {
     }
 
     @Test
-    void 로또번호갯수_테스트() {
-        assertThatThrownBy(() ->
-                winningNumbersTest = new LottoWinningNumber("1,2,3,4,5,6,7", 1)
-        ).isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
     void 범위_테스트() {
         assertThatThrownBy(() ->
                 winningNumbersTest = new LottoWinningNumber("10000,-100,3,4,5,6,7", 1)
@@ -53,7 +42,5 @@ public class LottoWinningNumberTest {
                 winningNumbersTest = new LottoWinningNumber("1,2,3,4,5,6", 1)
         ).isInstanceOf(RuntimeException.class);
     }
-
-
 }
 
