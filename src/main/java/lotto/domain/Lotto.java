@@ -7,18 +7,18 @@ public class Lotto {
 
     public static final int PRICE = 1000;
 
-    private LottoNumber number;
+    private LottoNumbers number;
 
     public Lotto(String number){
-        this.number = new LottoNumber(number);
+        this.number = new LottoNumbers(number);
     }
 
-    public Lotto(LottoNumber number) {
+    public Lotto(LottoNumbers number) {
         this.number = number;
     }
 
-    public long getMatchedNumberCount(NumberMatcher numberMatcher) {
-        return this.number.getMatchedNumberCount(numberMatcher);
+    long getMatchedNumberCount(LottoNumberMatcher lottoNumberMatcher) {
+        return this.number.getMatchedNumberCount(lottoNumberMatcher);
     }
 
     public void printNumber(PrintWriter writer) {

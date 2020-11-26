@@ -108,7 +108,7 @@ public class LottoMachineTest {
     void prizeWinning(){
         Lotto secondPrizeLotto = LottoUtils.lotto("1,2,3,4,5,7");
         Lotto thirdPrizeLotto = LottoUtils.lotto("1,2,3,4,5,8");
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6), 7);
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", 7);
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, secondPrizeLotto, thirdPrizeLotto);
 

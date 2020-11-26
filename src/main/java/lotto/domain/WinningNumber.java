@@ -4,30 +4,26 @@ import java.util.List;
 
 public class WinningNumber {
 
-    private BonusNumber bonusNumber;
-    private List<Integer> numbers;
+    private LottoNumber bonusNumber;
+    private List<LottoNumber> numbers;
 
-    private LottoNumberParser parser = new LottoNumberParser();
-
-    public WinningNumber(List<Integer> numbers, int bonusNumber) {
-        this.numbers = numbers;
-        this.bonusNumber = getBonusNumberIfValid(bonusNumber);
-    }
+    private LottoNumbersParser parser = new LottoNumbersParser();
 
     public WinningNumber(String winningNumberExp, int bonusNumber) {
         parse(winningNumberExp);
         this.bonusNumber = getBonusNumberIfValid(bonusNumber);
     }
 
-    private BonusNumber getBonusNumberIfValid(int bonusNumber) {
-        if (numbers.contains(bonusNumber)) throw new InvalidBonusNumberException(bonusNumber);
-        return new BonusNumber(bonusNumber);
+    private LottoNumber getBonusNumberIfValid(int bonusNumber) {
+        LottoNumber bonus = new LottoNumber(bonusNumber);
+        if (numbers.contains(bonus)) throw new InvalidBonusNumberException(bonusNumber);
+        return bonus;
     }
 
     private void parse(String numberString) {
         try {
             this.numbers = parser.parse(numberString);
-        } catch (LottoNumberParseException e) {
+        } catch (RuntimeException e) {
             throw new InvalidWinningNumberException(numberString, e);
         }
     }
@@ -40,25 +36,25 @@ public class WinningNumber {
         return lotto.getMatchedNumberCount(bonusNumberMatcher()) == 1;
     }
 
-    private NumberMatcher winningNumberMatcher() {
-        return new ListNumberMatcher(numbers);
+    private LottoNumberMatcher winningNumberMatcher() {
+        return new ListLottoNumberMatcher(numbers);
     }
 
-    private NumberMatcher bonusNumberMatcher() {
+    private LottoNumberMatcher bonusNumberMatcher() {
         return bonusNumber.getNumberMatcher();
     }
 }
 
-class ListNumberMatcher implements NumberMatcher {
+class ListLottoNumberMatcher implements LottoNumberMatcher {
 
-    private List<Integer> numbers;
+    private List<LottoNumber> list;
 
-    public ListNumberMatcher(List<Integer> numbers) {
-        this.numbers = numbers;
+    public ListLottoNumberMatcher(List<LottoNumber> list) {
+        this.list = list;
     }
 
     @Override
-    public boolean match(Integer number) {
-        return numbers.contains(number);
+    public boolean match(LottoNumber number) {
+        return list.contains(number);
     }
 }

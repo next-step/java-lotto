@@ -10,4 +10,7 @@ public class InvalidBonusNumberException extends InvalidWinningNumberException{
         super(MessageFormat.format(messagePattern, bonusNumber));
     }
 
+    public InvalidBonusNumberException(int bonusNumber, Throwable cause) {
+        super(MessageFormat.format(messagePattern, bonusNumber), cause);
+    }
 }

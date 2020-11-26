@@ -6,18 +6,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-abstract class LottoNumberGeneratorTest {
+abstract class LottoNumbersGeneratorTest {
 
     LottoNumberGenerator lottoNumberGenerator;
 
     @DisplayName("발급할때 마다 다른 로또번호를 발급해야 한다")
     @Test
     void generateNumber2(){
-        LottoNumber num1 = lottoNumberGenerator.generate();
-        LottoNumber num2 = lottoNumberGenerator.generate();
-        LottoNumber num3 = lottoNumberGenerator.generate();
-        LottoNumber num4 = lottoNumberGenerator.generate();
-        LottoNumber num5 = lottoNumberGenerator.generate();
+        LottoNumbers num1 = lottoNumberGenerator.generate();
+        LottoNumbers num2 = lottoNumberGenerator.generate();
+        LottoNumbers num3 = lottoNumberGenerator.generate();
+        LottoNumbers num4 = lottoNumberGenerator.generate();
+        LottoNumbers num5 = lottoNumberGenerator.generate();
 
         assertThat(num1).isNotEqualTo(num2);
         assertThat(num1).isNotEqualTo(num3);
@@ -33,7 +33,7 @@ abstract class LottoNumberGeneratorTest {
 
 }
 
-class SimpleLottoNumberGeneratorTest extends LottoNumberGeneratorTest {
+class SimpleLottoNumbersGeneratorTest extends LottoNumbersGeneratorTest {
 
     @BeforeEach
     void setUp(){

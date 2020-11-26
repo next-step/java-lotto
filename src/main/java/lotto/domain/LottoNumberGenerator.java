@@ -13,7 +13,7 @@ public interface LottoNumberGenerator {
      *
      * @return
      */
-    LottoNumber generate();
+    LottoNumbers generate();
 
     static LottoNumberGenerator simple() {
 
@@ -29,9 +29,9 @@ public interface LottoNumberGenerator {
             private Random random = new Random();
 
             @Override
-            public LottoNumber generate() {
+            public LottoNumbers generate() {
                 Collections.shuffle(lottoNumberBalls, random);
-                return new LottoNumber(Arrays.asList(
+                return new LottoNumbers(Arrays.asList(
                         lottoNumberBalls.get(0),
                         lottoNumberBalls.get(1),
                         lottoNumberBalls.get(2),

@@ -1,42 +1,33 @@
 package lotto.domain;
 
-import java.io.PrintWriter;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
+    private int number;
 
-    private List<Integer> numbers;
-    private LottoNumberParser lottoNumberParser = new LottoNumberParser();
-
-    public LottoNumber(String numberString){
-        parse(numberString);
+    public LottoNumber(int number) {
+        shouldRange(number);
+        this.number = number;
     }
 
-    private void parse(String numberString) {
-        this.numbers = lottoNumberParser.parse(numberString);
+    private void shouldRange(int number) {
+        if (number <= 0 || number > 45) {
+            throw new InvalidLottoNumberException("로또번호는 1~45 사이 숫자만 허용합니다.");
+        }
     }
 
-    public LottoNumber(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
-    public long getMatchedNumberCount(NumberMatcher numberMatcher) {
-        return numbers.stream().filter(it -> numberMatcher.match(it)).count();
-    }
-
-    public void print(PrintWriter writer) {
-        writer.print(toString());
+    public Integer getValue() {
+        return number;
     }
 
     @Override
     public String toString() {
-        return String.join(
-                ",",
-                numbers.stream()
-                        .map(String::valueOf)
-                        .toArray(CharSequence[]::new));
+        return String.valueOf(number);
+    }
+
+    public LottoNumberMatcher getNumberMatcher() {
+        return new ListLottoNumberMatcher(Arrays.asList(this));
     }
 
     @Override
@@ -44,14 +35,16 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(
-                this.numbers.stream().sorted().collect(Collectors.toList()),
-                that.numbers.stream().sorted().collect(Collectors.toList()));
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.numbers);
+        return Objects.hash(number);
     }
 
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.valueOf(this.number).compareTo(Integer.valueOf(o.number));
+    }
 }
