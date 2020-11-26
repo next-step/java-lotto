@@ -1,6 +1,6 @@
 package step2.view;
 
-import java.util.List;
+import java.util.Set;
 
 public class ResultView {
     private static final String purchasePrice = "구입금액을 입력해 주세요.";
@@ -18,7 +18,7 @@ public class ResultView {
         printMessage(purchaseCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(List<Integer> lottoNumbers) {
+    public static void printLottoNumbers(Set<Integer> lottoNumbers) {
         printMessage(lottoNumbers.toString());
     }
 

@@ -2,7 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
-import step2.domain.LottoStore;
+import step2.domain.LottoMachine;
 import step2.domain.Person;
 
 import java.util.ArrayList;
@@ -11,11 +11,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-
     @Test
     public void 구매갯수계산() {
-        LottoStore lottoStore = new LottoStore();
-        assertThat(lottoStore.getPurchaseLottoCount(14000)).isEqualTo(14);
+        LottoMachine lottoMachine = new LottoMachine();
+        assertThat(lottoMachine.buyLotto(14000).size()).isEqualTo(14);
     }
 
     @Test
@@ -29,9 +28,10 @@ public class LottoTest {
         lottoNumber.add(8);
         lottoNumber.add(9);
         Lotto lotto = new Lotto(lottoNumber);
-        person.addLotto(lotto);
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
         int[] winNumber = new int[]{1, 2, 3, 4, 5, 6};
-        int[][] winCounts = person.getWin(winNumber);
+        int[][] winCounts = person.getWin(winNumber, lottoList);
 
         assertThat(winCounts[0][0]).isEqualTo(1);
     }
@@ -47,9 +47,10 @@ public class LottoTest {
         lottoNumber.add(8);
         lottoNumber.add(9);
         Lotto lotto = new Lotto(lottoNumber);
-        person.addLotto(lotto);
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
         int[] winNumber = new int[]{1, 2, 3, 4, 5, 6};
-        int[][] winCounts = person.getWin(winNumber);
+        int[][] winCounts = person.getWin(winNumber, lottoList);
 
         assertThat(person.getTotalRevenue(1000, winCounts)).isEqualTo(500.0);
     }

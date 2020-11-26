@@ -1,32 +1,29 @@
 package step2.controller;
 
 import step2.domain.Lotto;
-import step2.domain.LottoStore;
+import step2.domain.LottoMachine;
 import step2.domain.Person;
 import step2.view.InputView;
 import step2.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
     public void start() {
         ResultView.printPurchasePrice();
         int purchasePrice = InputView.inputPurchasePrice();
 
-        LottoStore lottoStore = new LottoStore();
-        int purchaseLottoCount = lottoStore.getPurchaseLottoCount(purchasePrice);
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> buyLottoList = lottoMachine.buyLotto(purchasePrice);
 
+        int purchaseLottoCount = buyLottoList.size();
         ResultView.printPurchaseCount(purchaseLottoCount);
 
         Person person = new Person();
 
-        for (int i = 0; i < purchaseLottoCount; i++) {
-            Lotto lotto = new Lotto(lottoStore.getLottoNumbers());
-            person.addLotto(lotto);
-            ResultView.printLottoNumbers(lotto.getNumbers());
-        }
-
         ResultView.printWinNumber();
         int[] winNumber = InputView.inputWinNumber();
-        int[][] winCounts = person.getWin(winNumber);
+        int[][] winCounts = person.getWin(winNumber, buyLottoList);
         ResultView.printWinCounts(winCounts);
 
         double totalRevenue = person.getTotalRevenue(purchasePrice, winCounts);

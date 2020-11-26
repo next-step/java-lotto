@@ -1,25 +1,19 @@
 package step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Person {
-    private List<Lotto> lottos = new ArrayList<>();
-
-    public void addLotto(Lotto lotto) {
-        this.lottos.add(lotto);
-    }
-
-    public int[][] getWin(int[] winNumbers) {
+    public int[][] getWin(int[] winNumbers, List<Lotto> lottos) {
         int[][] winCounts = new int[][]{{0, 5000}, {0, 50000}, {0, 1500000}, {0, 2000000000}};
 
-        for (int i = 0; i < this.lottos.size(); i++) {
-            checkWin(winNumbers, winCounts, this.lottos.get(i).getNumbers());
+        for (int i = 0; i < lottos.size(); i++) {
+            checkWin(winNumbers, winCounts, lottos.get(i).getNumbers());
         }
         return winCounts;
     }
 
-    private void checkWin(int[] winNumbers, int[][] winCounts, List<Integer> lottoNumber) {
+    private void checkWin(int[] winNumbers, int[][] winCounts, Set<LottoNumber> lottoNumber) {
         int equalCount = 0;
         for (int winNumber : winNumbers) {
             if (lottoNumber.contains(winNumber)) {
