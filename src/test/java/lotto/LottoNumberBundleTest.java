@@ -60,4 +60,11 @@ public class LottoNumberBundleTest {
       idx += 1;
     }
   }
+
+  @Test
+  @DisplayName("동일성 테스트")
+  void testEquality() {
+    assertThat(LottoNumberBundle.of("1, 2, 3, 4, 5, 6"))
+        .isEqualTo(LottoNumberBundle.of("3, 1, 4, 5, 2, 6"));
+  }
 }

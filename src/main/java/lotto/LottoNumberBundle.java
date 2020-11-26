@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -60,6 +61,23 @@ public class LottoNumberBundle implements Iterable<LottoNumber> {
 
   public String toString() {
     return this.numbers.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoNumberBundle that = (LottoNumberBundle) o;
+    return Objects.equals(numbers, that.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(numbers);
   }
 
   @Override
