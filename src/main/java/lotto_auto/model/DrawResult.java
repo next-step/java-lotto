@@ -40,14 +40,31 @@ public enum DrawResult {
     }
 
     public static DrawResult valueOf(boolean isBonus, int matchNum) {
-        if (matchNum == 5 && isBonus) {
-            return DrawResult.SECOND;
+        switch (matchNum) {
+            case 6:
+                return FIRST;
+            case 5:
+                return getBonusResult(isBonus);
+            case 4:
+                return FOURTH;
+            case 3:
+                return FIFTH;
+            case 2:
+                return SIXTH;
+            case 1:
+                return SEVENTH;
+            case 0:
+                return EIGHTH;
+            default:
+                throw new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT);
         }
-        return Arrays
-                .stream(DrawResult.values())
-                .filter(item -> item.matchNum == matchNum)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT));
+    }
+
+    private static DrawResult getBonusResult(boolean isBonus){
+        if(isBonus){
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static DrawResult valueOfRank(int rank) {
