@@ -1,33 +1,39 @@
 package step3.lotto.domain;
 
+import step3.lotto.domain.numbers.LottoTicket;
 import step3.lotto.domain.numbers.LottoWinningNumber;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.SortedSet;
 
 public class LottoMatch {
-
-    private static LottoWinningNumber lottoWinningNumber;
 
     private static final int MATCH_LOTTE_MAX_COUNT = 5;
     private static final int MATCH_LOTTE_MIN_COUNT = 1;
 
-    private LottoMatch() {
+    private String winningNumbers;
+    private Set<LottoTicket> buyLottoHashSet;
+    private int bonusNumber;
+
+    public LottoMatch(String winningNumbers, Set<LottoTicket> buyLottoHashSet, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.buyLottoHashSet = buyLottoHashSet;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static void playLottoMatch(String WinningNumbers, Set<SortedSet<Integer>> buyLottoHashSet, int bonusNumber) {
-        lottoWinningNumber = new LottoWinningNumber(WinningNumbers, bonusNumber);
+    public void playLottoMatch() {
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
 
         Iterator it = buyLottoHashSet.iterator();
 
         while (it.hasNext()) {
-            addWinningCount((SortedSet<Integer>) it.next());
+            addWinningCount((LottoTicket) it.next(), lottoWinningNumber);
         }
     }
 
-    private static void addWinningCount(SortedSet<Integer> lotto) {
-        int rank = lottoWinningNumber.getRank(lotto);
+
+    private void addWinningCount(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber) {
+        int rank = lottoWinningNumber.getRank(lottoTicket.getLottoTicket());
 
         if (rank >= MATCH_LOTTE_MIN_COUNT && rank <= MATCH_LOTTE_MAX_COUNT) {
             LottoStatusEnum.findByCount(rank).addWinningCount();
