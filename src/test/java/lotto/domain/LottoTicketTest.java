@@ -102,7 +102,7 @@ public class LottoTicketTest {
             List<Integer> lastWinningNumberList = Arrays.stream(input.split(","))
                     .map(number -> Integer.parseInt(number)).collect(Collectors.toList());
 
-            PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
+            this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
     }
 
@@ -115,7 +115,7 @@ public class LottoTicketTest {
             int bonusNumber = 46;
             List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
 
-            PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, bonusNumber);
+            this.lottoTicket.countWinningNumbers(lastWinningNumberList, bonusNumber);
 
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
     }

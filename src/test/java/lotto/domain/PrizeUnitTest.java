@@ -23,14 +23,15 @@ public class PrizeUnitTest {
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000","6:2000000000"}, delimiter = ':')
     void calculationTest(String prizeUnitCountValue, String expectValue){
-        Long prize = PrizeUnit.calculate(Integer.parseInt(prizeUnitCountValue), false, 1);
+        PrizeUnit prizeUnit = PrizeUnit.findPrizeFieldByUnitCount(Integer.parseInt(prizeUnitCountValue), false);
+        Long prize = prizeUnit.calculate( 1);
         assertEquals(expectValue, String.valueOf(prize));
     }
 
     @DisplayName("2등 당첨 테스트(보너스 번호)")
     @Test
     void calculationBonusWinTest(){
-        Long prize = PrizeUnit.calculate(PrizeUnit.SECOND_GRADE.prizeUnitCount, true, 1);
+        Long prize = PrizeUnit.SECOND_GRADE.calculate(1);
         assertEquals(PrizeUnit.SECOND_GRADE.prizeUnitMoney, prize);
     }
 }

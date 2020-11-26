@@ -41,7 +41,7 @@ public class LottoGameResults {
 
     public double getProfit(Map<PrizeUnit, Integer> winningResults) {
         winningResults.entrySet().stream()
-                .forEach(prizeUnitSet -> prizeMoney.add(PrizeUnit.calculate(prizeUnitSet.getKey().prizeUnitCount, prizeUnitSet.getKey() == PrizeUnit.SECOND_GRADE, prizeUnitSet.getValue())));
+                .forEach(prizeUnitSet -> prizeMoney.add(prizeUnitSet.getKey().calculate(prizeUnitSet.getValue())));
 
         Long sum = prizeMoney.stream().collect(Collectors.summingLong(Long::longValue));
 
