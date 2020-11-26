@@ -1,29 +1,29 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
+import lotto.model.Rank;
 import lotto.model.WinningCheckor;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoView {
     public static void main(String[] args){
         InputView inputView = new InputView();
-        int tickets = inputView.buyLotto(1000);
+        int money = inputView.buyLotto();
 
-        Lotto lotto = new Lotto(tickets);
+        Lotto lotto = new Lotto(money);
         inputView.printLottoNumbers(lotto.getLottoTickets());
 
-        List<Integer> preNumbers = inputView.inputPreWinningNumber();
+        Set<Integer> preNumbers = inputView.inputPreWinningNumber();
         WinningCheckor winningCheckor = new WinningCheckor(preNumbers);
-        Map<Integer,Integer> winningStatics = winningCheckor.makeStatics(lotto.getLottoTickets());
-        //Map<Integer,Integer> winningStatics =  lotto.makeStatics(preNumbers);
+        EnumMap<Rank, Integer> winningStatics = winningCheckor.makeStatics(lotto.getLottoTickets());
 
-        ResultView resultView = new ResultView(tickets);
-        resultView.showWinningResult(winningStatics);
+        ResultView resultView = new ResultView();
+        EnumMap<Rank, Integer> results = resultView.showWinningResult(winningStatics);
+        double price = lotto.resultBenefit(results);
+        resultView.printBenefits(price, money);
 
     }
 
