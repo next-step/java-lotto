@@ -6,8 +6,10 @@ import static lotto.LottoGameConstant.AUTO;
 import static lotto.LottoGameConstant.MANUAL;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
+import lotto.dto.TicketPublisherDTO;
 import lotto.lottoexception.RemainBudgetException;
 
 public class TicketPublisher {
@@ -31,7 +33,7 @@ public class TicketPublisher {
   public LottoTickets publishAutoTickets(Budget budget) {
     int numPossibleTicket = budget.getNumPossibleBuyingTicket();
 
-    if (numPossibleTicket < 1) {
+    if (numPossibleTicket < 0) {
       throw new RemainBudgetException();
     }
 
@@ -41,5 +43,25 @@ public class TicketPublisher {
         .range(0, numPossibleTicket)
         .mapToObj(x -> publishAutoTicket())
         .collect(collectingAndThen(toList(), LottoTickets::of));
+  }
+
+  public LottoTickets publishManualTickets(List<LottoNumberBundle> bundles, Budget budget) {
+    int numPossibleTicket = budget.getNumPossibleBuyingTicket();
+
+    if (numPossibleTicket < bundles.size()) {
+      throw new RemainBudgetException();
+    }
+
+    budget.reduceRemain(bundles.size());
+
+    this.publishingHistory.put(MANUAL, this.publishingHistory.get(MANUAL) + bundles.size());
+
+    return bundles.stream()
+        .map(LottoTicket::of)
+        .collect(collectingAndThen(toList(), LottoTickets::of));
+  }
+
+  public TicketPublisherDTO exportData() {
+    return new TicketPublisherDTO(new HashMap<>(this.publishingHistory));
   }
 }

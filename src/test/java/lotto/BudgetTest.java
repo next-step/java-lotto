@@ -9,14 +9,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class BudgetTest {
 
-  @Test
-  @DisplayName("음수에 대한 예외 처리")
-  void testOf() {
+  @ParameterizedTest
+  @ValueSource(ints = {-1, 0, 500, 999})
+  @DisplayName("불가능 한 수의 생성 테스트")
+  void testOf(int input) {
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-        () -> Budget.of(-1)
+        () -> Budget.of(input)
     );
   }
 

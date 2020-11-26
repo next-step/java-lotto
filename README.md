@@ -107,7 +107,7 @@
 ## [Step4] 로또(수동)
 
 ### Step3 피드백
-* [ ] Budget 의 Validation
+* [X] Budget 의 Validation
 
 ### 기능 요구사항
 * [ ] 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 한다
@@ -127,7 +127,8 @@
                 * [X] 테스트를 위해 LottoBundle 에 equal 기능 추가 
         * [X] Publisher 중간 과정으로 Bundle 반환 기능 추가
 * [X] Budget 에 잔액 기능 추가
-* [ ] TicketPublisher 에 발급 기록 저장 기능 추가
-    * [X] TicketPublisher 인스턴스화 가능토록 변경
 * [ ] 티켓 수동 발급 기능 추가
-* [ ] 이후 WinningNumber 에 BonusNumber 넣기
+    * [X] TicketPublisher 에 발급 기록 저장 기능 추가
+    * [X] TicketPublisher 인스턴스화 가능토록 변경
+* [ ] Tickets 에 addAll 기능 추가
+* [ ] WinningNumber 에 BonusNumber 넣기
