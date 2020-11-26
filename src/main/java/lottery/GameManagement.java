@@ -23,9 +23,10 @@ public class GameManagement {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Map<Integer, Long> getMatches(List<Lottery> lotteries, WinningNumber winningNumber) {
+    public Map<WinningType, Long> getMatches(List<Lottery> lotteries, WinningNumber winningNumber) {
         return lotteries.stream()
                 .map(winningNumber::countMatched)
+                .filter(winningType -> winningType.getEarning() > 0)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
@@ -39,7 +40,7 @@ public class GameManagement {
         outputView.showLotteries(lotteries);
 
         WinningNumber winningNumber = WinningNumber.from(new StaticPicker(inputView.getWinningNumber()));
-        Map<Integer, Long> winnings = game.getMatches(lotteries, winningNumber);
+        Map<WinningType, Long> winnings = game.getMatches(lotteries, winningNumber);
         outputView.showWinnings(nGames * MONEY_PER_LOTTERY, winnings);
     }
 }
