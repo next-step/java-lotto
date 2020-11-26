@@ -1,7 +1,5 @@
 package domain;
 
-import util.LottoValidator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +12,7 @@ public class LottoNumbers {
     public LottoNumbers() {}
 
     private LottoNumbers(List<Integer> numbers) {
-        LottoValidator.checkDuplicateNumber(numbers);
+        checkDuplicateNumber(numbers);
         this.numbers = numbers;
     }
 
@@ -29,6 +27,16 @@ public class LottoNumbers {
                         .collect(Collectors.toList())
         );
 
+    }
+
+    public void checkDuplicateNumber(List<Integer> numbers) {
+        long uniqueLength = numbers.stream()
+                .distinct()
+                .count();
+
+        if(uniqueLength != numbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자를 가질 수 없습니다.");
+        }
     }
 
     public List<Integer> getNumbers() {

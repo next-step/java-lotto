@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import util.LottoValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,8 +71,10 @@ class LottoControllerTest {
     void checkEmptyString() {
         String emptyString = "";
 
+        controller = new LottoController();
+
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoNumberValidate(emptyString));
+                () -> controller.checkLottoNumberValidate(emptyString));
     }
 
     @Test
@@ -81,8 +82,10 @@ class LottoControllerTest {
     void checkNumberLength() {
         String wrongLength = "1, 2, 3, 4";
 
+        controller = new LottoController();
+
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoNumberValidate(wrongLength));
+                () -> controller.checkLottoNumberValidate(wrongLength));
     }
 
     @ParameterizedTest
@@ -92,40 +95,45 @@ class LottoControllerTest {
             "1, 2, 3, 4, 5, 46",
     }, delimiter = ':')
     void checkLottoRange(String wrongValue) {
+        controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
     @DisplayName("단위 금액보다 구매 금액이 작을 경우 구매 불가 체크 기능")
     @CsvSource(value = {"0", "500", "999"})
     void checkLottoLowerPrice(String wrongValue) {
+        controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
     @DisplayName("구매 금액이 단위 금액이 아닌 경우 체크 기능")
     @CsvSource(value = {"1100", "1111", "11001"})
     void checkLottoWrongPrice(String wrongValue) {
+        controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue));
     }
 
     @ParameterizedTest
     @DisplayName("보너스 번호의 범위가 1 ~ 45가 아닌 경우 체크 기능")
     @CsvSource(value = {"0", "46"})
     void checkBonusRange(int bonusNumber) {
+        controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkLottoRange(bonusNumber));
+                () -> controller.checkLottoRange(bonusNumber));
     }
 
     @ParameterizedTest
     @DisplayName("보너스 번호가 정답로또번호와 중복되는지 체크 기능")
     @CsvSource(value = "1, 2, 3, 4, 5, 6: 6", delimiter = ':')
     void checkBonusDuplicate(String lottoNumbers, int bonusNumber) {
+        controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkBonusDuplicate(lottoNumbers, bonusNumber));
+                () -> controller.checkBonusDuplicate(lottoNumbers, bonusNumber));
     }
 
     @Test
@@ -134,8 +142,10 @@ class LottoControllerTest {
         int lottoQuantity = 5;
         int manualQuantity = 6;
 
+        controller = new LottoController();
+
         assertThrows(IllegalArgumentException.class,
-                () -> LottoValidator.checkManualQuantity(lottoQuantity, manualQuantity));
+                () -> controller.checkManualQuantity(lottoQuantity, manualQuantity));
     }
 
     @Test
