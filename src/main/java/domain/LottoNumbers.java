@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final String NUMBER_DELIMITER = ", ";
-
     private List<Integer> numbers;
 
     public LottoNumbers() {}
@@ -20,9 +18,9 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    public LottoNumbers createLottoNumbers(String stringNumbers) {
+    public LottoNumbers createLottoNumbers(String[] stringNumbers) {
         return new LottoNumbers().from(
-                Arrays.stream(stringNumbers.split(NUMBER_DELIMITER))
+                Arrays.stream(stringNumbers)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );

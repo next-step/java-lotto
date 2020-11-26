@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoControllerTest {
 
+    private final String NUMBER_DELIMITER = ", ";
+
     LottoController controller;
 
     @Test
@@ -74,7 +76,7 @@ class LottoControllerTest {
         controller = new LottoController();
 
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkLottoNumberValidate(emptyString));
+                () -> controller.checkLottoNumberValidate(emptyString.split(NUMBER_DELIMITER)));
     }
 
     @Test
@@ -85,7 +87,7 @@ class LottoControllerTest {
         controller = new LottoController();
 
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkLottoNumberValidate(wrongLength));
+                () -> controller.checkLottoNumberValidate(wrongLength.split(NUMBER_DELIMITER)));
     }
 
     @ParameterizedTest
@@ -97,7 +99,7 @@ class LottoControllerTest {
     void checkLottoRange(String wrongValue) {
         controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue.split(NUMBER_DELIMITER)));
     }
 
     @ParameterizedTest
@@ -106,7 +108,7 @@ class LottoControllerTest {
     void checkLottoLowerPrice(String wrongValue) {
         controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue.split(NUMBER_DELIMITER)));
     }
 
     @ParameterizedTest
@@ -115,7 +117,7 @@ class LottoControllerTest {
     void checkLottoWrongPrice(String wrongValue) {
         controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkLottoNumberValidate(wrongValue));
+                () -> controller.checkLottoNumberValidate(wrongValue.split(NUMBER_DELIMITER)));
     }
 
     @ParameterizedTest
@@ -133,7 +135,7 @@ class LottoControllerTest {
     void checkBonusDuplicate(String lottoNumbers, int bonusNumber) {
         controller = new LottoController();
         assertThrows(IllegalArgumentException.class,
-                () -> controller.checkBonusDuplicate(lottoNumbers, bonusNumber));
+                () -> controller.checkBonusDuplicate(lottoNumbers.split(NUMBER_DELIMITER), bonusNumber));
     }
 
     @Test

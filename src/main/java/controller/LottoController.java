@@ -17,7 +17,6 @@ public class LottoController {
     private final int LOTTO_START_NUMBER = 1;
     private final int LOTTO_END_NUMBER = 45;
     private final int LOTTO_RANGE = 6;
-    private final String NUMBER_DELIMITER = ", ";
 
     private LottoInfo lottoInfo;
 
@@ -57,7 +56,7 @@ public class LottoController {
 
         Lottos lottos = Lottos.combineLottos(manualLottos, autoLottos);
 
-        String inputWinningNumber = inputView.inputLastWinningNumber();
+        String[] inputWinningNumber = inputView.inputLastWinningNumber();
         checkLottoNumberValidate(inputWinningNumber);
         LottoNumbers winningNumbers = new LottoNumbers()
                 .createLottoNumbers(inputWinningNumber);
@@ -79,7 +78,7 @@ public class LottoController {
     public Lottos inputManualNumbers(InputView inputView, int manualQuantity) {
         List<Lotto> lottos = IntStream.range(ZERO, manualQuantity)
                 .mapToObj(i -> {
-                    String manualNumber = inputView.inputManualNumber();
+                    String[] manualNumber = inputView.inputManualNumber();
                     checkLottoNumberValidate(manualNumber);
                     return new Lotto(new LottoNumbers().createLottoNumbers(manualNumber));
                 })
@@ -145,17 +144,16 @@ public class LottoController {
         return new LottoNumbers().from(newNumbers);
     }
 
-    public void checkLottoNumberValidate(String winningNumbers) {
+    public void checkLottoNumberValidate(String[] winningNumbers) {
         checkEmptyString(winningNumbers);
-        String[] splitNumber = winningNumbers.split(NUMBER_DELIMITER);
-        checkNumberLength(splitNumber);
-        Arrays.stream(splitNumber)
+        checkNumberLength(winningNumbers);
+        Arrays.stream(winningNumbers)
                 .map(Integer::new)
                 .forEach(this::checkLottoRange);
     }
 
-    private void checkEmptyString(String winningNumbers) {
-        if(winningNumbers.trim().isEmpty()) {
+    private void checkEmptyString(String[] winningNumbers) {
+        if(winningNumbers.length < 1) {
             throw new IllegalArgumentException("빈 값을 입력할 수 없습니다.");
         }
     }
@@ -178,8 +176,8 @@ public class LottoController {
         }
     }
 
-    public void checkBonusDuplicate(String winningNumbers, int bonusNumber) {
-        for(String number : winningNumbers.split(NUMBER_DELIMITER)) {
+    public void checkBonusDuplicate(String[] winningNumbers, int bonusNumber) {
+        for(String number : winningNumbers) {
             matchBonus(number, bonusNumber);
         }
     }
