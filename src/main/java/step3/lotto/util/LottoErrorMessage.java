@@ -13,7 +13,6 @@ public class LottoErrorMessage {
     private static String LOTTO_BONUS_NUMBER_OVERLAP_CHECK = "로또번호와 보너스번호가 중복되었습니다.";
 
     private LottoErrorMessage() {
-
     }
 
     public static String getLottoRuntimeexception() {
