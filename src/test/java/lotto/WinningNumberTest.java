@@ -1,15 +1,10 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import lotto.lottoexception.IllegalLottoNumberRangeException;
-import lotto.lottoexception.InvalidLottoFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class WinningNumberTest {
 
@@ -19,33 +14,6 @@ class WinningNumberTest {
   void setUp() {
     String rawInput = "2, 1, 3, 6, 5, 4";
     sampleWinningNumber = WinningNumber.of(rawInput);
-  }
-
-  @Test
-  @DisplayName("범위를 벗어난 입력")
-  void testOutOfRange() {
-    String input = "1, 2, 3, 4, 5, 46";
-    assertThatExceptionOfType(IllegalLottoNumberRangeException.class).isThrownBy(
-        () -> WinningNumber.of(input)
-    );
-  }
-
-  @Test
-  @DisplayName("중복된 번호 입력")
-  void testDuplicatedInput() {
-    String input = "1, 2, 3, 4, 5, 5";
-    assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
-        () -> WinningNumber.of(input)
-    );
-  }
-
-  @ParameterizedTest
-  @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
-  @DisplayName("길이가 맞지 않는 입력")
-  void testInvalidLength(String input) {
-    assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
-        () -> WinningNumber.of(input)
-    );
   }
 
   @Test

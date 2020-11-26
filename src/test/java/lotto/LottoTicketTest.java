@@ -1,11 +1,9 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.lottoexception.InvalidLottoFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,20 +23,6 @@ class LottoTicketTest {
     }
 
     sampleTicket = LottoTicket.of(numbers);
-  }
-
-  @Test
-  @DisplayName("중복된 숫자에 대한 예외 처리")
-  void testDuplicatedCase() {
-    int[] rawInput = {5, 6, 4, 4, 1, 2};
-    List<LottoNumber> numbers = new ArrayList<>();
-    for (int number : rawInput) {
-      numbers.add(LottoNumber.of(number));
-    }
-
-    assertThatExceptionOfType(InvalidLottoFormatException.class).isThrownBy(
-        () -> LottoTicket.of(numbers)
-    );
   }
 
   @Test
