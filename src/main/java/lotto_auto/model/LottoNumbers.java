@@ -23,6 +23,16 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public int computeMatchCount(LottoNumbers lottoNumbers) {
+        return (int) lottoNumbers.export()
+                .stream()
+                .filter(this::contains)
+                .count();
+    }
     private void throwIfDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> set = new HashSet<>(numbers);
         if (numbers.size() != set.size()) {
@@ -42,14 +52,4 @@ public class LottoNumbers {
         }
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
-    }
-
-    public int computeMatchCount(LottoNumbers lottoNumbers) {
-        return (int) lottoNumbers.export()
-                .stream()
-                .filter(this::contains)
-                .count();
-    }
 }

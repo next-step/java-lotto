@@ -15,12 +15,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private void throwIfInvalidLottoNumberRange(int number) {
-        if (number <= LOTTO_NUMBER_MIN_RANGE || number >= LOTTO_NUMBER_MAX_RANGE) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
-        }
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -41,5 +35,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hashCode(this.number);
+    }
+
+    private void throwIfInvalidLottoNumberRange(int number) {
+        if (number <= LOTTO_NUMBER_MIN_RANGE || number >= LOTTO_NUMBER_MAX_RANGE) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
+        }
     }
 }

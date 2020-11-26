@@ -15,4 +15,5 @@ public class LottoStore {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MONEY);
         }
     }
+
 }
