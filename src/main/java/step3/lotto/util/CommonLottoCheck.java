@@ -1,4 +1,4 @@
-package step3.lotto.common;
+package step3.lotto.util;
 
 import step3.lotto.util.LottoErrorMessage;
 
