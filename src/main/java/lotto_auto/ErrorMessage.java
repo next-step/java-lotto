@@ -15,4 +15,5 @@ public class ErrorMessage {
     public static final String DUPLICATE_LOTTO_NUMBER = "Duplicate Lotto Number";
     public static final String INVALID_LOTTO_ORDER = "Invalid Lotto Order";
 
+
 }
