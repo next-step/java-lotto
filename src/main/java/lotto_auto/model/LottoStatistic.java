@@ -10,15 +10,12 @@ public class LottoStatistic {
     public LottoStatistic(List<DrawResult> drawResultList, int payment) {
         this.bundleDrawResult = new BundleDrawResult(drawResultList);
         this.payment = payment;
-        this.yield = computeYield(drawResultList);
+        this.yield = computeYield();
     }
 
-    private double computeYield(List<DrawResult> drawResultList) {
-        long sum = drawResultList.stream()
-                .filter(DrawResult::isWinning)
-                .mapToLong(DrawResult::getMoney)
-                .sum();
-        return (double) sum / payment;
+    private double computeYield() {
+        long totalMoney = bundleDrawResult.getTotalMoney();
+        return (double) totalMoney / payment;
     }
 
     public int getRankLottoCount(int rank) {

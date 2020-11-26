@@ -4,12 +4,10 @@ import lotto_auto.ErrorMessage;
 
 public class LottoStore {
 
-    public final static int LOTTO_TICKET_PRICE = 1000;
-
     public static LottoBundle sell(int money) {
         throwIfNegativeMoney(money);
-        int ticketCount = money / LOTTO_TICKET_PRICE;
-        return new LottoBundle(ticketCount, ticketCount * LOTTO_TICKET_PRICE);
+        int ticketCount = money / LottoTicket.PRICE;
+        return new LottoBundle(ticketCount);
     }
 
     private static void throwIfNegativeMoney(int money) {
@@ -17,4 +15,5 @@ public class LottoStore {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MONEY);
         }
     }
+
 }
