@@ -49,7 +49,7 @@ public class LottoTicket {
   }
 
   public Rank decideRewardWithBonusBall(WinningNumber winningNumber, LottoNumber bonusNumber) {
-    int numHit = guessNumHit(winningNumber);
+    int numHit = this.guessNumHit(winningNumber);
     boolean matchedWithBonusBall = this.lottoNumbers.contains(bonusNumber);
     return Rank.getRewardWithBonusBall(numHit, matchedWithBonusBall);
   }

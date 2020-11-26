@@ -12,7 +12,7 @@ import lotto.lottoexception.IllegalLottoNumberRangeException;
 public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final List<LottoNumber> numbers
-      = IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
+      = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
       .mapToObj(LottoNumber::new)
       .collect(Collectors.toList());
 
