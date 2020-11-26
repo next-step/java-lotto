@@ -2,16 +2,22 @@ package step3.lotto.domain.numbers;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class lottoRankTest {
 
+    private LottoTicket lottoTicket;
+    private List<Integer> compareData;
+
     @Test
     void 순위_1등_테스트() {
-        LottoRank lottoRank = new LottoRank(7, getList(6));
+        lottoTicket = new LottoTicket(getList(6));
+        LottoRank lottoRank = new LottoRank(7, lottoTicket);
         SortedSet<Integer> sortedSet = new TreeSet<>(getList(6));
 
         assertThat(1).isEqualTo(lottoRank.getRank(sortedSet));
@@ -19,51 +25,51 @@ public class lottoRankTest {
 
     @Test
     void 순위_2등_테스트() {
-        List<Integer> list = getList(6);
-        LottoRank lottoRank = new LottoRank(7, list);
+        lottoTicket = new LottoTicket(getList(6));
+        LottoRank lottoRank = new LottoRank(7, lottoTicket);
 
-        list = getList(5);
-        list.add(7);
-        SortedSet<Integer> sortedSet = new TreeSet<>(list);
+        compareData = getList(5);
+        compareData.add(7);
+        SortedSet<Integer> sortedSet = new TreeSet<>(compareData);
 
         assertThat(2).isEqualTo(lottoRank.getRank(sortedSet));
     }
 
     @Test
     void 순위_3등_테스트() {
-        List<Integer> list = getList(6);
-        LottoRank lottoRank = new LottoRank(7, list);
+        lottoTicket = new LottoTicket(getList(6));
+        LottoRank lottoRank = new LottoRank(7, lottoTicket);
 
-        list = getList(5);
-        list.add(8);
-        SortedSet<Integer> sortedSet = new TreeSet<>(list);
+        compareData = getList(5);
+        compareData.add(8);
+        SortedSet<Integer> sortedSet = new TreeSet<>(compareData);
 
         assertThat(3).isEqualTo(lottoRank.getRank(sortedSet));
     }
 
     @Test
     void 순위_4등_테스트() {
-        List<Integer> list = getList(6);
-        LottoRank lottoRank = new LottoRank(7, list);
+        lottoTicket = new LottoTicket(getList(6));
+        LottoRank lottoRank = new LottoRank(7, lottoTicket);
 
-        list = getList(4);
-        list.add(8);
-        list.add(9);
-        SortedSet<Integer> sortedSet = new TreeSet<>(list);
+        compareData = getList(4);
+        compareData.add(8);
+        compareData.add(9);
+        SortedSet<Integer> sortedSet = new TreeSet<>(compareData);
 
         assertThat(4).isEqualTo(lottoRank.getRank(sortedSet));
     }
 
     @Test
     void 순위_5등_테스트() {
-        List<Integer> list = getList(6);
-        LottoRank lottoRank = new LottoRank(7, list);
+        lottoTicket = new LottoTicket(getList(6));
+        LottoRank lottoRank = new LottoRank(7, lottoTicket);
 
-        list = getList(3);
-        list.add(8);
-        list.add(9);
-        list.add(10);
-        SortedSet<Integer> sortedSet = new TreeSet<>(list);
+        compareData = getList(3);
+        compareData.add(8);
+        compareData.add(9);
+        compareData.add(10);
+        SortedSet<Integer> sortedSet = new TreeSet<>(compareData);
 
         assertThat(5).isEqualTo(lottoRank.getRank(sortedSet));
     }
