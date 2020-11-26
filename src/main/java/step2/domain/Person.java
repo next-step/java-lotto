@@ -30,6 +30,6 @@ public class Person {
         for (int i = 0; i < winCounts.length; i++) {
             total = total + winCounts[i][0] * winCounts[i][1];
         }
-        return (total / purchasePrice) * 100;
+        return (total / purchasePrice);
     }
 }
