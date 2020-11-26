@@ -15,7 +15,7 @@ public class Lottery {
     }
 
     public Lottery(Picker picker) {
-        this(picker.pick());
+        this(picker.pick(COUNT_LOTTERY_NUMBER));
     }
 
     private Lottery(Collection<LotteryNumber> numbers) {
