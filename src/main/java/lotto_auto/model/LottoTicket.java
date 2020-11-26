@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     public static final int PRICE = 1000;
 
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket() {
         this.lottoNumbers = LottoNumbers.generate();
