@@ -10,7 +10,7 @@ public class AutoLottoTest {
 
     @Test
     public void autoLotto() {
-        LottoNumbers ticket = AutoLotto.buildTicket();
+        LottoNumbers ticket = AutoLotto.buildAutoLotto();
 
         assertThat(ticket.getNumbers())
                 .isInstanceOf(Set.class)

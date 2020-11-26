@@ -19,10 +19,10 @@ public class ResultView {
     private static final String MSG_STATISTICS_FOOTER_LOSS = "손해";
     private static final String MSG_STATISTICS_FOOTER_SAME = "쌤쌤이";
 
-    public static void printAmountPerKind(AccountManager accountManager) {
+    public static void printAmountPerKind(AccountManager accountManager, long amountOfManualLotto) {
         System.out.printf(MSG_NUMBER_OF_PURCHASED,
-                accountManager.getAmountOfManualLottos(),
-                accountManager.getAmountOfAutoLottos());
+                amountOfManualLotto,
+                accountManager.getMaxAmountOfLottos() - amountOfManualLotto);
     }
 
     public static void printLottoNumber(List<LottoNumbers> tickets) {

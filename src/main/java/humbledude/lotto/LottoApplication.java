@@ -14,14 +14,12 @@ public class LottoApplication {
         AccountManager accountManager = new AccountManager(budget);
 
         long amountOfManualLotto = InputView.getAmountOfManualLotto();
-        accountManager.setAmountOfManualLottos(amountOfManualLotto);
-
         List<LottoNumbers> manualLottos = InputView.getNumberOfManualLottos(amountOfManualLotto);
-        accountManager.addTickets(manualLottos);
+        accountManager.buyManualLottos(manualLottos);
 
-        ResultView.printAmountPerKind(accountManager);
-        accountManager.buyAutoTicketsWithRemainingBudget();
-        ResultView.printLottoNumber(accountManager.getTickets());
+        ResultView.printAmountPerKind(accountManager, amountOfManualLotto);
+        accountManager.buyAutoLottosWithRemainingBudget();
+        ResultView.printLottoNumber(accountManager.getMyLottos());
 
         LottoWinningNumbers winningNumbers = InputView.getWinningNumbers();
         accountManager.setWinningNumbers(winningNumbers);

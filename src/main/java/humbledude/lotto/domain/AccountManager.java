@@ -1,6 +1,7 @@
 package humbledude.lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -11,36 +12,33 @@ public class AccountManager {
     public static final long LOTTO_TICKET_PRICE = 1000;
 
     private final long budget;
-    private long amountOfManualLottos = 0;
-    private final List<LottoNumbers> tickets = new ArrayList<>();
+    private final List<LottoNumbers> myLottos = new ArrayList<>();
     private LottoWinningNumbers winningNumbers;
 
     public AccountManager(long budget) {
         this.budget = budget;
     }
 
-    public void setAmountOfManualLottos(long amount) {
-        if (getMaxAmountOfLottos() < amount) {
-            throw new IllegalArgumentException("예산을 초과해서 수동 로또를 사려고 하네요");
-        }
-        this.amountOfManualLottos = amount;
-    }
-
     public long getMaxAmountOfLottos() {
         return budget / LOTTO_TICKET_PRICE;
     }
 
+    public void buyManualLottos(List<LottoNumbers> numbers) {
+        if (getMaxAmountOfLottos() < myLottos.size() + numbers.size()) {
+            throw new IllegalArgumentException("예산을 초과해서 수동 로또를 사려고 하네요");
+        }
 
-    public long getAmountOfManualLottos() {
-        return amountOfManualLottos;
+        myLottos.addAll(numbers);
     }
 
-    public long getAmountOfAutoLottos() {
-        return getMaxAmountOfLottos() - amountOfManualLottos;
-    }
+    public void buyAutoLottosWithRemainingBudget() {
+        long howMany = getMaxAmountOfLottos() - myLottos.size();
 
-    public void addTickets(List<LottoNumbers> tickets) {
-        this.tickets.addAll(tickets);
+        List<LottoNumbers> autoLottos = LongStream.range(0, howMany)
+                .mapToObj(i -> AutoLotto.buildAutoLotto())
+                .collect(Collectors.toList());
+
+        myLottos.addAll(autoLottos);
     }
 
     public void setWinningNumbers(LottoWinningNumbers winningNumbers) {
@@ -58,12 +56,12 @@ public class AccountManager {
         return totalPrize / totalSpent;
     }
 
-    public List<LottoNumbers> getTickets() {
-        return tickets;
+    public List<LottoNumbers> getMyLottos() {
+        return Collections.unmodifiableList(myLottos);
     }
 
     public Map<LottoPrize, List<LottoNumbers>> getResultMap() {
-        return tickets.stream()
+        return myLottos.stream()
                 .collect(Collectors.groupingBy(winningNumbers::claimPrize));
     }
 
@@ -75,17 +73,7 @@ public class AccountManager {
     }
 
     private long getTotalSpent() {
-        return tickets.size() * LOTTO_TICKET_PRICE;
-    }
-
-    public void buyAutoTicketsWithRemainingBudget() {
-        long howMany = getAmountOfAutoLottos();
-
-        List<LottoNumbers> autoLottos = LongStream.range(0, howMany)
-                .mapToObj(i -> AutoLotto.buildTicket())
-                .collect(Collectors.toList());
-
-        addTickets(autoLottos);
+        return myLottos.size() * LOTTO_TICKET_PRICE;
     }
 
 }

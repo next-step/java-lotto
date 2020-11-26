@@ -33,7 +33,7 @@ public class AccountManagerTest {
     public void profitRate() {
         // 미리 넣어놓은 당첨 안된거 9개 + 5000원 당첨 1개
         tickets.add(new LottoNumbers(TestHelper.setOf(1, 2, 3, 14, 15, 16)));
-        accountManager.addTickets(tickets);
+        accountManager.buyManualLottos(tickets);
         accountManager.setWinningNumbers(winningNumbers);
 
         assertThat(accountManager.getProfitRate()).isEqualTo(0.5);
@@ -41,14 +41,15 @@ public class AccountManagerTest {
 
     @Test
     public void buyAutoTickets() {
-        accountManager.buyAutoTicketsWithRemainingBudget();
-
-        assertThat(accountManager.getTickets()).hasSize(14);
+        accountManager.buyAutoLottosWithRemainingBudget();
+        assertThat(accountManager.getMyLottos()).hasSize(14);
     }
 
     @Test
     public void outOfRange_exception() {
+        IntStream.range(0, 9)
+                .forEach(i -> tickets.add(new LottoNumbers(TestHelper.setOf(11, 12, 13, 14, 15, 16))));
         assertThatIllegalArgumentException().isThrownBy(
-                () -> accountManager.setAmountOfManualLottos(15));
+                () -> accountManager.buyManualLottos(tickets));
     }
 }

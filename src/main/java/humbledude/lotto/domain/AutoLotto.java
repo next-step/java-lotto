@@ -19,7 +19,7 @@ public class AutoLotto {
     private AutoLotto() {}
 
 
-    public static LottoNumbers buildTicket() {
+    public static LottoNumbers buildAutoLotto() {
         Set<LottoNumber> numbers = pickRandomNumbers();
         return new LottoNumbers(numbers);
     }
