@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class Lotto {
     public static final int NUMBERS = 6;
-    public static final int FIRST_PRICE = 2000000000;
-    public static final int THIRD_PRICE = 1500000;
-    public static final int FOURTH_PRICE = 50000;
-    public static final int FIFTH_PRICE = 5000;
+    public static final int FIRST_PRICE = 2_000_000_000;
+    public static final int THIRD_PRICE = 1_500_000;
+    public static final int FOURTH_PRICE = 50_000;
+    public static final int FIFTH_PRICE = 5_000;
 
     private List<GameRecord> records;
 
