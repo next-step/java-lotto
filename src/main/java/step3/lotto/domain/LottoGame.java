@@ -1,29 +1,28 @@
 package step3.lotto.domain;
 
-import step3.lotto.domain.numbers.LottoWinningNumber;
+import step3.lotto.domain.numbers.LottoTicket;
 import step3.lotto.util.LottoErrorMessage;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
 
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoWinningNumber lottoWinningNumber;
     private LottoShop lottoShop = new LottoShop();
-    private LottoProfitAmount lottoProfitAmount;
-    private Set<SortedSet<Integer>> buyLottoHashSet = new HashSet<>();
+    private Set<LottoTicket> buyLottoHashSet = new HashSet<>();
     private int lottoPurchaseAmount = 0;
     private int lottoPurchaseCount = 0;
-    private int bonusNumber = 0;
 
     public LottoGame(int purchaseAmount) {
         initMatch(purchaseAmount);
     }
 
     public void getLottoResult(String winningNumbers, int bonusNumber) {
-        this.bonusNumber = bonusNumber;
-        LottoMatch.playLottoMatch(winningNumbers, buyLottoHashSet, bonusNumber);
+        LottoMatch lottoMatch = new LottoMatch(winningNumbers, buyLottoHashSet, bonusNumber);
+        lottoMatch.playLottoMatch();
     }
 
     public void buyLotto() {
@@ -31,12 +30,7 @@ public class LottoGame {
     }
 
     public double getlottoProfitAmount() {
-        double returnValue = 0.0;
-        double totalPrice = LottoProfitAmount.runLottoProfitAmount();
-
-        returnValue = totalPrice / lottoPurchaseAmount;
-
-        return returnValue;
+        return LottoProfitAmount.runLottoProfitAmount() / lottoPurchaseAmount;
     }
 
     private void initMatch(int purchaseAmount) {
@@ -56,23 +50,7 @@ public class LottoGame {
         }
     }
 
-    public int getLottoPurchaseAmount() {
-        return lottoPurchaseAmount;
-    }
-
-    public LottoWinningNumber getLottoWinningNumber() {
-        return lottoWinningNumber;
-    }
-
-    public LottoShop getLottoShop() {
-        return lottoShop;
-    }
-
-    public LottoProfitAmount getLottoProfitAmount() {
-        return lottoProfitAmount;
-    }
-
-    public Set<SortedSet<Integer>> getBuyLottoHashSet() {
+    public Set<LottoTicket> getBuyLottoHashSet() {
         return buyLottoHashSet;
     }
 
