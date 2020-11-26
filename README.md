@@ -263,10 +263,10 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
   * 당첨 번호를 입력 받는다.
   * 로또 1장을 구입한다.
   * 로또 당첨을 확인한다.
-* LotteryRevenue class를 구현한다.
+* LotteryResult class를 구현한다.
   * 3,4,5,6개 맞춘 결과를 저장한다.
-  * 수익성을 계사한다.
-* LotteryWinNumbers class를 구현한다.
+  * 수익성을 계산한다. (ing)
+* LotteryWinNumbers class를 구현한다.(? 구현이 필요한가)
   * 당첨번호를 입력한다.
   * 로또 티켓이 당첨되었는 확인한다.
 * InputView class를 구현한다.
