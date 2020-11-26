@@ -33,7 +33,6 @@ public class LottoGame {
         result.put(Rank.FOURTH, 0);
         result.put(Rank.FIFTH, 0);
 
-
         return result;
     }
 }

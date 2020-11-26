@@ -2,7 +2,7 @@
 ## 진행 방법
 * 로또 요구사항을 파악한다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
-* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
+* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH 한다.
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
 ## 온라인 코드 리뷰 과정
@@ -57,7 +57,7 @@ utils.Calculator
 14. LottoGame의 getResult()는 LottoGameResult에서 수행하도록 수정
 -- 
 0. Uilts성 클래스 삭제
-1. MainSimulator, Controller 책임 정리 (의견)
+
 2. 상수가 많아지면 관리하기 힘드므로, 도메인에 정리한다?
     - 고민 할거리
 3. Rank를 도메인으로 수정?
@@ -66,6 +66,7 @@ utils.Calculator
 5. LottoGame 참조변수 타입을 왜 EnumMap으로 하였나?
 6. Rank의 돈 단위를 2_000_000_000로 관리
     - 코드 가독성을 위해??
+7. CustomException 생성
 
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
@@ -93,8 +94,9 @@ utils.Calculator
 18. LottoNumbers의 List<Integer> Integer를 LottoNumber(Wrapper)로 변경
 19. LottoNumberGenerator에서 계속 숫자 배열 생성하지 않도록 수정
 20. WinningNumber -> isExists 메서드 이름 짓기..
-
+21. MainSimulator, Controller 책임 정리
 ## 피드백 1
-https://github.com/next-step/java-lotto/pull/950
+[https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
+
 ## 피드백 2
-https://github.com/next-step/java-lotto/pull/974
+[https://github.com/next-step/java-lotto/pull/974](https://github.com/next-step/java-lotto/pull/974)
