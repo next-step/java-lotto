@@ -8,6 +8,15 @@ import java.util.stream.Collectors;
 public class LottoNumber {
 
     private List<Integer> numbers;
+    private LottoNumberParser lottoNumberParser = new LottoNumberParser();
+
+    public LottoNumber(String numberString){
+        parse(numberString);
+    }
+
+    private void parse(String numberString) {
+        this.numbers = lottoNumberParser.parse(numberString);
+    }
 
     public LottoNumber(List<Integer> numbers) {
         this.numbers = numbers;
@@ -44,6 +53,5 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(this.numbers);
     }
-
 
 }

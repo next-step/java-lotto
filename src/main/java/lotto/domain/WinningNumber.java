@@ -7,7 +7,7 @@ public class WinningNumber {
     private BonusNumber bonusNumber;
     private List<Integer> numbers;
 
-    private WinningNumberParser parser = new WinningNumberParser();
+    private LottoNumberParser parser = new LottoNumberParser();
 
     public WinningNumber(List<Integer> numbers, int bonusNumber) {
         this.numbers = numbers;

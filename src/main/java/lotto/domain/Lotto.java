@@ -9,6 +9,10 @@ public class Lotto {
 
     private LottoNumber number;
 
+    public Lotto(String number){
+        this.number = new LottoNumber(number);
+    }
+
     public Lotto(LottoNumber number) {
         this.number = number;
     }
