@@ -1,6 +1,7 @@
 package step3.lotto.domain;
 
 import step3.lotto.domain.numbers.LottoMachine;
+import step3.lotto.domain.numbers.LottoTicket;
 
 import java.util.*;
 
@@ -13,15 +14,13 @@ public class LottoShop {
         lottoMachine = new LottoMachine(MAKE_LOTTONUMBER_COUNT);
     }
 
-    public static Set<SortedSet<Integer>> buyAutoLotto(int lottoBuyCount) {
-        Set<SortedSet<Integer>> returnSet = new HashSet<>();
-        List<Integer> lotto = new ArrayList<>();
-        SortedSet<Integer> lottoSort;
+    public static Set<LottoTicket> buyAutoLotto(int lottoBuyCount) {
+        Set<LottoTicket> returnSet = new HashSet<>();
+        LottoTicket lottoTicket;
 
         for (int i = lottoBuyCount; i > 0; i--) {
-            lotto = lottoMachine.getAutoNumbers(MAKE_AUTO_NUMBER);
-            lottoSort = new TreeSet<>(lotto);
-            returnSet.add(lottoSort);
+            lottoTicket = lottoMachine.getAutoNumbers(MAKE_AUTO_NUMBER);
+            returnSet.add(lottoTicket);
         }
 
         return returnSet;
