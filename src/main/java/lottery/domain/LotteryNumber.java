@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.domain.exception.InvalidLotteryNumberException;
+
 import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {

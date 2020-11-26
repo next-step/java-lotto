@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import lottery.domain.strategy.ShufflePicker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 

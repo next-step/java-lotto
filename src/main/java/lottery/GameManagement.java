@@ -1,6 +1,9 @@
 package lottery;
 
 import lottery.domain.*;
+import lottery.domain.strategy.Picker;
+import lottery.domain.strategy.ShufflePicker;
+import lottery.domain.strategy.StaticPicker;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 

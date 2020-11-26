@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.domain.strategy.Picker;
+import lottery.domain.strategy.StaticPicker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

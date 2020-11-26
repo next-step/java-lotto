@@ -1,5 +1,8 @@
 package lottery.domain;
 
+import lottery.domain.exception.InconsistentLotteryException;
+import lottery.domain.strategy.Picker;
+
 import java.util.Collection;
 import java.util.List;
 
