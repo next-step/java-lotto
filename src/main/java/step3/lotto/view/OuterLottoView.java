@@ -1,6 +1,7 @@
 package step3.lotto.view;
 
 import step3.lotto.domain.LottoStatusEnum;
+import step3.lotto.domain.numbers.LottoTicket;
 
 import java.util.*;
 
@@ -20,20 +21,21 @@ public class OuterLottoView {
         System.out.println(buyLottoCount + "개를 구매했습니다.");
     }
 
-    public static void printAutoLottoNumbers(Set<SortedSet<Integer>> paramHashSet, int count) {
+    public static void printAutoLottoNumbers(Set<LottoTicket> paramHashSet, int count) {
         Iterator iter = paramHashSet.iterator();
 
         System.out.print(System.lineSeparator());
         while(iter.hasNext()) {
-            printDetailAutoNumbers((SortedSet<Integer>) iter.next());
+            printDetailAutoNumbers((LottoTicket)iter.next());
             System.out.print(System.lineSeparator());
         }
     }
 
-    private static void printDetailAutoNumbers(SortedSet<Integer> paramList) {
+    private static void printDetailAutoNumbers(LottoTicket lottoTicket) {
+        SortedSet<Integer> lottoSortedSet = lottoTicket.getLottoTicket();
         StringBuffer sb = new StringBuffer();
         int count = 0;
-        Iterator iter = paramList.iterator();
+        Iterator iter = lottoSortedSet.iterator();
 
         sb.append("[");
         while(iter.hasNext()) {
