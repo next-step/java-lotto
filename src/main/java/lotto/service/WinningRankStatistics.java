@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static lotto.util.MoneyLottoMapper.LOTTO_PRICE;
+import static lotto.domain.LottoCounter.LOTTO_PRICE;
 
 public class WinningRankStatistics {
     public static final int SCALE = 2;

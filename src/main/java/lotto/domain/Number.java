@@ -3,9 +3,14 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
+    public static final int START_NUM = 1;
+    public static final int END_NUM = 46;
     private final int number;
 
     public Number(int number) {
+        if (number < START_NUM || number > END_NUM - 1)
+            throw new IllegalArgumentException("Number must be between 1 and 45");
+
         this.number = number;
     }
 

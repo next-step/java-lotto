@@ -24,6 +24,7 @@ public class OutputView {
     private static final String LOTTO_DELIMITER = LOTTO_SUFFIX + "\n" + LOTTO_PREFIX;
     private static final String LOTTO_NUM_MESSAGE = "%s개를 구매했습니다.";
     private static final String MATCH_BONUS_MESSAGE = ", 보너스 볼 일치";
+    private static final String LOTTO_PURCHASE_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매하였습니다.";
     private static final PrintStream out = System.out;
 
     private OutputView() {
@@ -50,20 +51,18 @@ public class OutputView {
     }
 
     private static String getWinningRankString(WinningRank winningRank) {
-        String winningRankString = String.format(SAME_NUMBER_COUNT_MESSAGE, winningRank.getSameNumberNum());
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format(SAME_NUMBER_COUNT_MESSAGE, winningRank.getSameNumberNum()));
         if (winningRank.haveBonus()) {
-            winningRankString += MATCH_BONUS_MESSAGE;
+            stringBuilder.append(MATCH_BONUS_MESSAGE);
         }
-        return winningRankString + String.format(PRICE_MESSAGE, winningRank.getPrice());
+        stringBuilder.append(String.format(PRICE_MESSAGE, winningRank.getPrice()));
+        return stringBuilder.toString();
     }
 
-
-    public static void showLottoNum(int lottoNum) {
-        out.println(getLottoNumString(lottoNum));
-    }
-
-    private static String getLottoNumString(int lottoNum) {
-        return String.format(LOTTO_NUM_MESSAGE, lottoNum);
+    public static void showLottoCount(int manualCount, int autoCount) {
+        out.println(String.format(LOTTO_PURCHASE_COUNT_MESSAGE, manualCount, autoCount));
     }
 
     public static void showLottos(Lottos lottos) {

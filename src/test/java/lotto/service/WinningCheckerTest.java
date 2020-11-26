@@ -21,7 +21,7 @@ class WinningCheckerTest {
         WinningLotto winningLotto = new WinningLotto(Numbers.builder().range(1, 7).build(), new Number(10));
 
         WinningChecker winningChecker = new WinningChecker(winningLotto);
-        WinningRanks winningRanks = winningChecker.checkRanks(lottos);
+        WinningRanks winningRanks = winningChecker.getWinningRanks(lottos);
 
         WinningRanks expectedWinningRanks = new WinningRanks(Arrays.asList(WinningRank.FIRST, WinningRank.SECOND, WinningRank.THIRD));
         assertThat(winningRanks).isEqualTo(expectedWinningRanks);
