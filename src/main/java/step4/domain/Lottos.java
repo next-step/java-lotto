@@ -19,10 +19,10 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public int lottoWinningPrizes(LottoNumber lottoNumber, Lotto lotto) {
+    public int lottoWinningPrizes(LottoNumbers lottoNumber, Lotto lotto) {
         return lotto.getLottos()
                 .stream()
-                .mapToInt(number -> numberContain(number, lottoNumber.getLastWeekNumber()))
+                .mapToInt(number -> numberContain(number, lottoNumber.getNumber().getLottoNumber()))
                 .sum();
     }
 

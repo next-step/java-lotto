@@ -21,20 +21,15 @@ public class LottoTicketMaker {
 
     private final int manualLottoQty;
 
-    private LottoTicketMaker(int manualLottoQty, Amount amount, String lottoNumber) {
+    private LottoTicketMaker(int manualLottoQty, Amount amount, List<Lotto> lottoNumber) {
         this.amount = amount;
         this.manualLottoQty = manualLottoQty;
         this.autoQty = lottoAutoPurchaseQty();
+        this.lottoTicket = create(lottoNumber);
 
-        run(manualLottoQty, lottoNumber);
     }
 
-    private void run(int manualLottoQty, String lottoNumber) {
-        List<Lotto> lottos = askManualLottoNumbers(manualLottoQty, lottoNumber);
-        this.lottoTicket = create(lottos);
-    }
-
-    public static LottoTicketMaker of(Amount amount, int manualLottoQty, String lottos) {
+    public static LottoTicketMaker of(Amount amount, int manualLottoQty, List<Lotto> lottos) {
         return new LottoTicketMaker(manualLottoQty, amount, lottos);
     }
 
@@ -66,13 +61,13 @@ public class LottoTicketMaker {
         return this.lottoTicket;
     }
 
-    private List<Lotto> askManualLottoNumbers(int numberOfManualLottos, String manualLottoNumber) {
+    public static List<Lotto> askManualLottoNumbers(int numberOfManualLottos, String manualLottoNumber) {
         return IntStream.range(0, numberOfManualLottos)
                 .mapToObj(i -> setManualLottoNumbers(manualLottoNumber))
                 .collect(Collectors.toList());
     }
 
-    private Lotto setManualLottoNumbers(String manualLottoNumber) {
+    private static Lotto setManualLottoNumbers(String manualLottoNumber) {
         Lotto lotto = new Lotto();
         lotto.getLottos().clear();
 
