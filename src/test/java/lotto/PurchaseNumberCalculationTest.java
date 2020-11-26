@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-class NumberPurchaseTest {
+class PurchaseNumberCalculationTest {
 
     @ParameterizedTest
     @ValueSource(ints = {14000, 1000})
     void 구매_개수_반환(int purchase) {
         // when
-        int numberPurchase = NumberPurchase.calculateNumberPurchase(purchase);
+        int numberPurchase = PurchaseNumberCalculation.calculateNumberPurchase(purchase);
 
         // then
         assertThat(numberPurchase).isEqualTo(purchase / 1000);
@@ -27,7 +27,7 @@ class NumberPurchaseTest {
 
         // then
         assertThatThrownBy(() -> {
-            NumberPurchase.calculateNumberPurchase(purchase);
+            PurchaseNumberCalculation.calculateNumberPurchase(purchase);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -37,7 +37,7 @@ class NumberPurchaseTest {
     void 천_단위가_아닐_때(int purchase) {
         // then
         assertThatThrownBy(() -> {
-            NumberPurchase.calculateNumberPurchase(purchase);
+            PurchaseNumberCalculation.calculateNumberPurchase(purchase);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
