@@ -1,5 +1,7 @@
 package my.project.constants;
 
+import my.project.lotto.domain.Lotto;
+
 /**
  * Created : 2020-11-23 오전 10:38
  * Developer : Seo

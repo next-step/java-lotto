@@ -1,7 +1,5 @@
 package my.project.lotto.domain;
 
-import my.project.constants.Rule;
-
 import java.util.ArrayList;
 import java.util.List;
 

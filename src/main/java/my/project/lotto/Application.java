@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class Application {
     public static void main(String[] args) {
-        InputView iv = new InputView();
-        ResultView rv = new ResultView();
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
 
-        LottoController lctr = new LottoController(iv.getMoney());
-        List<GameRecord> records = lctr.lotto();
-        rv.printGame(records);
+        LottoController lottoController = new LottoController(inputView.getMoney());
+        List<GameRecord> records = lottoController.lotto();
+        resultView.printGame(records);
 
-        StatController sctr = new StatController(records, iv.getWinningNumber());
-        rv.printStat(sctr.stat());
+        StatController statController = new StatController(records, inputView.getWinningNumber());
+        resultView.printStat(statController.stat());
     }
 }
