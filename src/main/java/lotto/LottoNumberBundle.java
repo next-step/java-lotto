@@ -1,7 +1,6 @@
 package lotto;
 
 import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
-import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,7 +36,7 @@ public class LottoNumberBundle implements Iterable<LottoNumber> {
   }
 
   private static void validateParsedInput(List<LottoNumber> parsedInput) {
-    if (parsedInput == null || parsedInput.size() != NUMBERS_PER_TICKET) {
+    if (parsedInput == null || parsedInput.size() != NUMBERS_PER_BUNDLE) {
       throw new InvalidLottoFormatException();
     }
 

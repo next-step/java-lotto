@@ -20,7 +20,7 @@ class BudgetTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"1000:1", "0:0", "1234:1", "23232:23"}, delimiter = ':')
+  @CsvSource(value = {"1000:1", "1234:1", "23232:23"}, delimiter = ':')
   @DisplayName("Lotto 구입 가능 숫자 확인")
   void testPurchaseLotto(int input, int expected) {
     assertThat(Budget.of(input).getNumPossibleLotto()).isEqualTo(expected);

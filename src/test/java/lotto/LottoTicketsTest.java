@@ -7,8 +7,6 @@ import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,10 +19,11 @@ class LottoTicketsTest {
 
   @BeforeEach
   void setUp() {
-    sampleTicket = IntStream
+    LottoNumberBundle bundle = IntStream
         .range(MINIMUM_LOTTO_NUMBER, MINIMUM_LOTTO_NUMBER + NUMBERS_PER_BUNDLE)
         .mapToObj(LottoNumber::get)
-        .collect(Collectors.collectingAndThen(toList(), LottoTicket::of));
+        .collect(Collectors.collectingAndThen(toList(), LottoNumberBundle::of));
+    this.sampleTicket = LottoTicket.of(bundle);
   }
 
   @Test
@@ -36,19 +35,6 @@ class LottoTicketsTest {
   }
 
   @Test
-  @DisplayName("티켓 리스트 출력 기능(toString())")
-  void testToString() {
-    LottoTicket sampleTicket = TicketPublisher.publishTicket();
-    List<LottoTicket> t = new ArrayList<>();
-    for (int i = 0; i < 2; i++) {
-      t.add(sampleTicket);
-    }
-    LottoTickets tickets = LottoTickets.of(t);
-    assertThat(tickets.toString())
-        .isEqualTo(sampleTicket.toString() + '\n' + sampleTicket.toString() + "\n");
-  }
-
-  @Test
   @DisplayName("로또 정산 결과가 정상으로 나오는지 테스트")
   void testResult() {
 
@@ -57,7 +43,7 @@ class LottoTicketsTest {
         .mapToObj(x -> this.sampleTicket)
         .collect(collectingAndThen(toList(), LottoTickets::of));
 
-    WinningNumber winningNumber = WinningNumber.of("1, 2, 3, 4, 5, 6");
+    WinningNumber winningNumber = WinningNumber.of(LottoNumberBundle.of("1, 2, 3, 4, 5, 6"));
     LottoNumber bonusNumber = LottoNumber.of(7);
 
     LottoResult result = tickets.settle(winningNumber, bonusNumber);

@@ -15,7 +15,8 @@ public class Client {
     TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
     ResultView.printLottoInfo(ticketsExporter);
 
-    WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
+    WinningNumber winningNumber =
+        WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
 
     LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
     winningNumber.validateBonusNumberDuplication(bonusNumber);

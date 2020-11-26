@@ -1,10 +1,6 @@
 package lotto;
 
-import java.util.List;
-
 public interface PublishStrategy {
 
-  List<LottoNumber> publish();
-
-  LottoNumberBundle publish1();
+  LottoNumberBundle publish();
 }

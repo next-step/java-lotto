@@ -117,11 +117,11 @@
 * [ ] ~~수동으로 로또 티켓 생성하는 기능을 만든다.~~
     * [ ] ~~사용자가 입력하는 6개를 List<LottoNumber> 로 반환하는 기능을 만든다.~~
 * [X] LottoBundle 이라고 하는 '1 ~ 45 중에서 중복되지 않는 6개의 숫자 묶음' 을 책임지는 클래스를 만든다.
-    * [ ] LottoTicket 을 LottoBundle 을 이용하는 버전으로 변경
+    * [X] LottoTicket 을 LottoBundle 을 이용하는 버전으로 변경
         * [X] 중간 과정으로 Bundle 지원 기능 추가
-    * [ ] WinningNumber 를 LottoBundle 을 이용하는 버전으로 변경
+    * [X] WinningNumber 를 LottoBundle 을 이용하는 버전으로 변경
         * [X] 중간 과정으로 Bundle 지원 기능 추가
-    * [ ] TicketPublisher 가 LottoNumberBundle 을 이용하도록 만들기
+    * [X] TicketPublisher 가 LottoNumberBundle 을 이용하도록 만들기
         * [X] NumberPool 이 List<LottoNumber> 에서 LottoNumberBundle 을 반환하도록 변경
             * [X] 중간과정으로 메소드 이름에 1붙여서 Bundle 반환 기능 추가
                 * [X] 테스트를 위해 LottoBundle 에 equal 기능 추가 

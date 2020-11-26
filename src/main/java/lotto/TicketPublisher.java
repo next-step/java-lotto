@@ -31,38 +31,4 @@ public class TicketPublisher {
         .mapToObj(x -> publishTicket())
         .collect(collectingAndThen(toList(), LottoTickets::of));
   }
-
-  static public LottoTickets publishTickets(Budget budget, PublishStrategy publishStrategy) {
-    int numPossibleTicket = budget.getNumPossibleLotto();
-
-    if (numPossibleTicket < 1) {
-      throw new RemainBudgetException();
-    }
-
-    return IntStream
-        .range(0, numPossibleTicket)
-        .mapToObj(x -> publishTicket(publishStrategy))
-        .collect(collectingAndThen(toList(), LottoTickets::of));
-  }
-
-  static public LottoTicket publishTicket1() {
-    return LottoTicket.of(NumberPool.generateNumberBundle1());
-  }
-
-  static public LottoTicket publishTicket1(PublishStrategy publishStrategy) {
-    return LottoTicket.of(NumberPool.generateNumberBundle1(publishStrategy));
-  }
-
-  static public LottoTickets publishTickets1(Budget budget) {
-    int numPossibleTicket = budget.getNumPossibleLotto();
-
-    if (numPossibleTicket < 1) {
-      throw new RemainBudgetException();
-    }
-
-    return IntStream
-        .range(0, numPossibleTicket)
-        .mapToObj(x -> publishTicket1())
-        .collect(collectingAndThen(toList(), LottoTickets::of));
-  }
 }
