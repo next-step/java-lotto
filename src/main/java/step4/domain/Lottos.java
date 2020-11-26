@@ -27,8 +27,11 @@ public class Lottos {
     }
 
     private static int numberContain(int number, String lastLottoWinningNumbers) {
-        if (lastLottoWinningNumbers.contains(String.valueOf(number))) {
-            return LOTTO_NUMBER_CONTAINS_TRUE;
+        String[] lastLottoWinningNumber = lastLottoWinningNumbers.split(",");
+        for (String lottoNumber : lastLottoWinningNumber) {
+            if (lottoNumber.equals(String.valueOf(number))) {
+                return LOTTO_NUMBER_CONTAINS_TRUE;
+            }
         }
         return LOTTO_NUMBER_CONTAINS_FALSE;
     }
