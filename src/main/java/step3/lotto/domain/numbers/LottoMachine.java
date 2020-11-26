@@ -19,7 +19,7 @@ public class LottoMachine {
         lottoAutoNumbers = new LottoAutoNumbers(makeLottoNumberCount);
     }
 
-    public List<Integer> getAutoNumbers(int getLottoAutoNumberCount) {
+    public LottoTicket getAutoNumbers(int getLottoAutoNumberCount) {
         isNumberNegative(getLottoAutoNumberCount);
 
         return lottoAutoNumbers.getAutoNumbers(getLottoAutoNumberCount);
