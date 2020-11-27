@@ -34,7 +34,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoNumber.from(expected));
 
         //When
-        PrizeInformation prizeInformation = lotto.matchPrizeNumber(new PrizeLotto(expected, 5 ));
+        PrizeInformation prizeInformation = lotto.matchPrizeNumber(PrizeLotto.of(expected, 5 ));
 
         //That
         assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(new MatchStatus(prizeInformation.countMatchNumber(), false)));

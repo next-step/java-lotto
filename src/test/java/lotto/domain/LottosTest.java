@@ -60,7 +60,7 @@ public class LottosTest {
 
 
         //When
-        Reward reward = lottos.matchPrizeNumber(new PrizeLotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9)), 5));
+        Reward reward = lottos.matchPrizeNumber(PrizeLotto.of(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9)), 5));
 
         //Then
         assertThat(reward).isNotNull();
