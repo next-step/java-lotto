@@ -3,20 +3,18 @@ package lotto.constant;
 import java.util.Arrays;
 
 public enum Rank {
-    FIFTH(2, 0, "꽝"),
-    FOURTH(3, 5_000, "3개 일치 (5,000원) - "),
-    THIRD(4, 50_000, "4개 일치 (50,000원) - "),
-    SECOND(5, 1_500_000, "5개 일치 (1,500,000원) - "),
-    FIRST(6, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
+    FIFTH(2, 0),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
     private final int matchingNumberCount;
     private final int prizeMoney;
-    private final String description;
 
-    Rank(int matchingNumberCount, int prizeMoney, String description) {
+    Rank(int matchingNumberCount, int prizeMoney) {
         this.matchingNumberCount = matchingNumberCount;
         this.prizeMoney = prizeMoney;
-        this.description = description;
     }
 
     public int getMatchingNumberCount() {
@@ -25,10 +23,6 @@ public enum Rank {
 
     public int getPrizeMoney() {
         return prizeMoney;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public static Rank value(int matchingCount) {
