@@ -8,10 +8,17 @@ import lotto.views.ResultView;
 
 public class Client {
 
-  public static void main(String[] args) {
-    TicketPublisher ticketPublisher = new TicketPublisher();
-    DataExporter dataExporter = new DataExporter();
-    Budget budget = Budget.of(InputView.askBudget());
+  private static TicketPublisher ticketPublisher;
+  private static DataExporter dataExporter;
+  private static Budget budget;
+  private static LottoTickets tickets;
+  private static WinningNumber winningNumber;
+  private static LottoResult lottoResult;
+
+  private static void initializePhase() {
+    ticketPublisher = new TicketPublisher();
+    dataExporter = new DataExporter();
+    budget = Budget.of(InputView.askBudget());
 
     // 수동 희망 갯수 입력 받기
     int numManual = InputView.askNumManualLotto();
@@ -21,32 +28,40 @@ public class Client {
     List<String> rawNumbers = InputView.askManualLottoNumbers(numManual);
     List<LottoNumberBundle> convertedInputs = DataImporter
         .convertStringToBundle(rawNumbers);
-    LottoTickets tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
+    tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
 
     //자동 번호 발급
     tickets.addAll(ticketPublisher.publishAutoTickets(budget));
+  }
 
+  private static void currentStatusControlPhase() {
     // 발급 번호 출력
     dataExporter.setLottoTicketsDTO(tickets.exportData());
     dataExporter.setTicketPublisherDTO(ticketPublisher.exportData());
     ResultView.printLottoInfo(dataExporter);
 
     // 당첨 번호 입력 받기
-    WinningNumber winningNumber =
-        WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
+    winningNumber = WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
 
     // 보너스 볼을 입력 받기
     LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
     winningNumber.validateBonusNumberDuplication(bonusNumber);
 
-    LottoResult lottoResult = tickets.settle(winningNumber, bonusNumber);
+    lottoResult = tickets.settle(winningNumber, bonusNumber);
+  }
 
-    //당첨 통계
+  private static void statisticsPhase() {
     ResultView.printStatisticsOpening();
     dataExporter.setLottoResultDTO(lottoResult.exportData());
     ResultView.printRewards(dataExporter);
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));
+  }
+
+  public static void main(String[] args) {
+    initializePhase();
+    currentStatusControlPhase();
+    statisticsPhase();
   }
 }

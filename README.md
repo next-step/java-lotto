@@ -134,5 +134,5 @@
     * [X] InputView <-> 발급까지
     * [X] 발급 갯수 출력 기능
 * [X] TicketDTO, TicketPublisherDTO -> DataExporter(현재 StaticExporter 랑 TicketExporter 통합)
-* [ ] Client 메소드 15줄 규칙 적용
+* [X] Client 메소드 15줄 규칙 적용
 * [ ] WinningNumber 에 BonusNumber 넣기
