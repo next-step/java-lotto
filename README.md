@@ -138,8 +138,8 @@
 * [X] WinningNumber 에 BonusNumber 넣기
 
 ### step4 피드백
-* [ ] Pascal -> Camel
-* [ ] method 순서
+* [X] Pascal -> Camel
+* [X] method 순서
 * [ ] 랜덤 상수
 * [X] Validation 중복 제거
 * [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
