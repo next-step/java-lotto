@@ -42,12 +42,9 @@ public class Client {
 
     // 당첨 번호 입력 받기
     winningNumber = WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
+    winningNumber.addBonusNumber(LottoNumber.of(InputView.askBonusNumber()));
 
-    // 보너스 볼을 입력 받기
-    LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
-    winningNumber.validateBonusNumberDuplication(bonusNumber);
-
-    lottoResult = tickets.settle(winningNumber, bonusNumber);
+    lottoResult = tickets.settle(winningNumber);
   }
 
   private static void statisticsPhase() {

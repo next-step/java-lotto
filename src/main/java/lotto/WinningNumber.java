@@ -8,6 +8,7 @@ import lotto.lottoexception.DuplicatedNumberException;
 public class WinningNumber implements Iterable<LottoNumber> {
 
   private final LottoNumberBundle bundle;
+  private LottoNumber bonusNumber;
 
   private WinningNumber(LottoNumberBundle bundle) {
     this.bundle = bundle;
@@ -17,10 +18,19 @@ public class WinningNumber implements Iterable<LottoNumber> {
     return new WinningNumber(bundle);
   }
 
-  public void validateBonusNumberDuplication(LottoNumber lottoNumber) {
+  private void validateBonusNumberDuplication(LottoNumber lottoNumber) {
     if (this.bundle.contains(lottoNumber)) {
       throw new DuplicatedNumberException();
     }
+  }
+
+  public void addBonusNumber(LottoNumber bonusNumber) {
+    validateBonusNumberDuplication(bonusNumber);
+    this.bonusNumber = bonusNumber;
+  }
+
+  public LottoNumber getBonusNumber() {
+    return this.bonusNumber;
   }
 
   @Override

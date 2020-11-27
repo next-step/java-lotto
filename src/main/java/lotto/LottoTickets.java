@@ -19,10 +19,10 @@ public class LottoTickets {
     return new LottoTickets(tickets);
   }
 
-  public LottoResult settle(WinningNumber winningNumber, LottoNumber bonusNumber) {
+  public LottoResult settle(WinningNumber winningNumber) {
     LottoResult lottoResult = new LottoResult();
     this.tickets.stream()
-        .map(lottoTicket -> lottoTicket.decideRewardWithBonusBall(winningNumber, bonusNumber))
+        .map(lottoTicket -> lottoTicket.decideRewardWithBonusBall(winningNumber))
         .forEach(lottoResult::recordHit);
 
     return lottoResult;

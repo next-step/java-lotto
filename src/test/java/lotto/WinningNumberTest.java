@@ -28,7 +28,7 @@ class WinningNumberTest {
 
       int finalNumber = number;
       assertThatExceptionOfType(DuplicatedNumberException.class).isThrownBy(
-          () -> this.sampleWinningNumber.validateBonusNumberDuplication(LottoNumber.of(finalNumber))
+          () -> this.sampleWinningNumber.addBonusNumber(LottoNumber.of(finalNumber))
       );
     }
   }

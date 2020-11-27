@@ -47,9 +47,9 @@ class LottoTicketsTest {
         .collect(collectingAndThen(toList(), LottoTickets::of));
 
     WinningNumber winningNumber = WinningNumber.of(LottoNumberBundle.of("1, 2, 3, 4, 5, 6"));
-    LottoNumber bonusNumber = LottoNumber.of(7);
+    winningNumber.addBonusNumber(LottoNumber.of(7));
 
-    LottoResult result = tickets.settle(winningNumber, bonusNumber);
+    LottoResult result = tickets.settle(winningNumber);
 
     assertThat(result.calculateIncome())
         .isEqualTo(Rank.FIRST.getWinningReward() * 2);
