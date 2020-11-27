@@ -17,10 +17,6 @@ public class OuterLottoView {
 
     }
 
-    public static void printBuyLotto(int buyLottoCount) {
-        System.out.println(buyLottoCount + "개를 구매했습니다.");
-    }
-
     public static void printAutoLottoNumbers(Set<LottoTicket> paramHashSet) {
         Iterator iter = paramHashSet.iterator();
 
@@ -77,5 +73,9 @@ public class OuterLottoView {
             return;
         }
         System.out.println(BAD_PRICE);
+    }
+
+    public static void printLottoHowToKinds(int lottoManualCount, int lottoAutoCount){
+        System.out.println("수동으로 " + lottoManualCount + "장, 자동으로 " + lottoAutoCount + "개를 구매했습니다.");
     }
 }
