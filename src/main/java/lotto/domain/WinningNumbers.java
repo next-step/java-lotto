@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.List;
 
-public class WinningNumber {
+public class WinningNumbers {
 
     private LottoNumber bonusNumber;
     private List<LottoNumber> numbers;
 
     private LottoNumbersParser parser = new LottoNumbersParser();
 
-    public WinningNumber(String winningNumberExp, int bonusNumber) {
+    public WinningNumbers(String winningNumberExp, int bonusNumber) {
         parse(winningNumberExp);
         this.bonusNumber = getBonusNumberIfValid(bonusNumber);
     }

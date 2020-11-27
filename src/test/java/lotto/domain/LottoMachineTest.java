@@ -58,9 +58,9 @@ public class LottoMachineTest {
     @Test
     void rateOfReturn() {
         Lotto secondPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 10");
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, secondPrizeLotto);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, secondPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(1500);
     }
@@ -72,9 +72,9 @@ public class LottoMachineTest {
         Lotto firstPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 6");
         Lotto fouthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
 
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6",7);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, firstPrizeLotto, fouthPrizeLotto);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, firstPrizeLotto, fouthPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(1000002.5);
     }
@@ -83,9 +83,9 @@ public class LottoMachineTest {
     @Test
     void rateOfReturn3() {
         Lotto noPrizeLotto = LottoUtils.lotto("30, 31, 32, 33, 34, 35");
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, noPrizeLotto);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, noPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(0);
     }
@@ -96,9 +96,9 @@ public class LottoMachineTest {
         Lotto fourthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
         Lotto noPrizeLotto = LottoUtils.lotto("11, 12, 13, 10, 20, 30");
 
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6",7);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, fourthPrizeLotto, noPrizeLotto);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, fourthPrizeLotto, noPrizeLotto);
 
         assertThat(result.getRateOfReturn()).isEqualTo(2.5);
     }
@@ -108,9 +108,9 @@ public class LottoMachineTest {
     void prizeWinning(){
         Lotto secondPrizeLotto = LottoUtils.lotto("1,2,3,4,5,7");
         Lotto thirdPrizeLotto = LottoUtils.lotto("1,2,3,4,5,8");
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", 7);
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
 
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumber, secondPrizeLotto, thirdPrizeLotto);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, secondPrizeLotto, thirdPrizeLotto);
 
         assertThat(result.getRankedLottoCount(LottoRanking.SECOND)).isEqualTo(1);
         assertThat(result.getRankedLottoCount(LottoRanking.THIRD)).isEqualTo(1);

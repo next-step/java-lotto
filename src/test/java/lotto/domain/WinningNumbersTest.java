@@ -1,25 +1,21 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class WinningNumberTest {
+class WinningNumbersTest {
 
     @DisplayName("당첨번호에 1~45 에 포함되지 않는 값을 넣으면 exception 이 발생한다")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,50", "1,2,3,4,5,-1"})
     void invalidNumber(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression, 45))
+        assertThatThrownBy(() -> new WinningNumbers(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
 
@@ -27,7 +23,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @NullAndEmptySource
     void invalidNumber2(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression, 45))
+        assertThatThrownBy(() -> new WinningNumbers(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
 
@@ -35,7 +31,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,a,4,5,6", "@,3,4,5,2,6"})
     void invalidNumber3(String expression){
-        assertThatThrownBy(() -> new WinningNumber(expression, 45))
+        assertThatThrownBy(() -> new WinningNumbers(expression, 45))
                 .isInstanceOf(InvalidWinningNumberException.class);
     }
 
@@ -43,7 +39,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5,6})
     void invalidBonusNumber(int bonusNumber){
-        assertThatThrownBy(() -> new WinningNumber("1,2,3,4,5,6", bonusNumber ))
+        assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", bonusNumber ))
                 .isInstanceOf(InvalidBonusNumberException.class);
     }
 
@@ -51,7 +47,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1,46})
     void invalidBonusNumber2(int bonusNumber){
-        assertThatThrownBy(() -> new WinningNumber("1,2,3,4,5,6", bonusNumber ))
+        assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", bonusNumber ))
                 .isInstanceOf(InvalidLottoNumberException.class);
     }
 
@@ -59,10 +55,10 @@ class WinningNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,7:true", "1,2,3,4,5,6:false"})
     void matchBonus(String lottoNumber, boolean expected){
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", 7);
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
         Lotto lotto = LottoUtils.lotto(lottoNumber);
 
-        assertThat(winningNumber.matchBonusNumber(lotto)).isEqualTo(expected);
+        assertThat(winningNumbers.matchBonusNumber(lotto)).isEqualTo(expected);
     }
 
 }

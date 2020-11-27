@@ -21,7 +21,7 @@ public class LottoSimulation {
 
         String winningNumber = inputView.readWinningNumber();
         int bonusNumber = inputView.readBonusNumber();
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new WinningNumber(winningNumber, bonusNumber), myLottos);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new WinningNumbers(winningNumber, bonusNumber), myLottos);
 
         outputView.showResult(result);
     }

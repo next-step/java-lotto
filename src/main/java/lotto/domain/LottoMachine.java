@@ -17,10 +17,6 @@ public class LottoMachine {
         return generateAutoNumberLotto(countOfAutoNumberLotto);
     }
 
-    private void shouldBuyLotto(int purchaseAmount) {
-        if( purchaseAmount < Lotto.PRICE ) throw new NotPurchaseLottoException("최소구입금액은 " + Lotto.PRICE + " 웝 입니다");
-    }
-
     public List<Lotto> issue(int purchaseAmount, List<String> manualLottoNumbers) {
         shouldBuyLotto(purchaseAmount, manualLottoNumbers.size());
         int countOfAutoNumberLotto = countOfAutoNumberLotto(purchaseAmount, manualLottoNumbers.size());
@@ -29,6 +25,11 @@ public class LottoMachine {
         lottos.addAll(generateAutoNumberLotto(countOfAutoNumberLotto, lottos));
         return lottos;
     }
+
+    private void shouldBuyLotto(int purchaseAmount) {
+        if( purchaseAmount < Lotto.PRICE ) throw new NotPurchaseLottoException("최소구입금액은 " + Lotto.PRICE + " 웝 입니다");
+    }
+
 
     private void shouldBuyLotto(int purchaseAmount, int countOfPurchasedManualLotto) {
         int minPrice = Lotto.PRICE;
@@ -56,19 +57,19 @@ public class LottoMachine {
         return (purchaseAmount / Lotto.PRICE) - countOfManualNumberLotto;
     }
 
-    public PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, List<Lotto> lottos) {
-        return checkPrizeWinning(winningNumber, new Lottos(lottos));
+    public PrizeWinningResult checkPrizeWinning(WinningNumbers winningNumbers, List<Lotto> lottos) {
+        return checkPrizeWinning(winningNumbers, new Lottos(lottos));
     }
 
-    public PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, Lotto... lottos) {
-        return checkPrizeWinning(winningNumber, new Lottos(lottos));
+    public PrizeWinningResult checkPrizeWinning(WinningNumbers winningNumbers, Lotto... lottos) {
+        return checkPrizeWinning(winningNumbers, new Lottos(lottos));
     }
 
-    private PrizeWinningResult checkPrizeWinning(WinningNumber winningNumber, Lottos lottos) {
+    private PrizeWinningResult checkPrizeWinning(WinningNumbers winningNumbers, Lottos lottos) {
         return PrizeWinningResult
                 .builder()
                 .paidMoney(lottos.getPaidMoney())
-                .rankedLottos(lottos.checkRanking(winningNumber))
+                .rankedLottos(lottos.checkRanking(winningNumbers))
                 .build();
     }
 
