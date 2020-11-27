@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import lotto.dto.TicketPublisherDTO;
-import lotto.lottoexception.RemainBudgetException;
 
 public class TicketPublisher {
 
@@ -33,10 +32,6 @@ public class TicketPublisher {
   public LottoTickets publishAutoTickets(Budget budget) {
     int numPossibleTicket = budget.getNumPossibleBuyingTicket();
 
-    if (numPossibleTicket < 0) {
-      throw new RemainBudgetException();
-    }
-
     this.publishingHistory.put(AUTO, this.publishingHistory.get(AUTO) + numPossibleTicket);
 
     return IntStream
@@ -46,12 +41,6 @@ public class TicketPublisher {
   }
 
   public LottoTickets publishManualTickets(List<LottoNumberBundle> bundles, Budget budget) {
-    int numPossibleTicket = budget.getNumPossibleBuyingTicket();
-
-    if (numPossibleTicket < bundles.size()) {
-      throw new RemainBudgetException();
-    }
-
     budget.reduceRemain(bundles.size());
 
     this.publishingHistory.put(MANUAL, this.publishingHistory.get(MANUAL) + bundles.size());
