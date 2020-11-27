@@ -29,18 +29,18 @@ public class WinningNumbers {
     }
 
     public long getMatchedWinningNumberCount(Lotto lotto) {
-        return lotto.getMatchedNumberCount(winningNumberMatcher());
+        return lotto.getMatchedNumberCount(getWinningNumberMatcher());
     }
 
     public boolean matchBonusNumber(Lotto lotto) {
-        return lotto.getMatchedNumberCount(bonusNumberMatcher()) == 1;
+        return lotto.getMatchedNumberCount(getBonusNumberMatcher()) == 1;
     }
 
-    private LottoNumberMatcher winningNumberMatcher() {
+    private LottoNumberMatcher getWinningNumberMatcher() {
         return new ListLottoNumberMatcher(numbers);
     }
 
-    private LottoNumberMatcher bonusNumberMatcher() {
+    private LottoNumberMatcher getBonusNumberMatcher() {
         return bonusNumber.getNumberMatcher();
     }
 }
