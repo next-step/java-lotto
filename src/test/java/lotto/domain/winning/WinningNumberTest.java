@@ -24,7 +24,7 @@ class WinningNumberTest {
         WinningNumber winningNumber = WinningNumber.of(inputNumber, "7");
 
         // then
-        assertThat(winningNumber.value()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(winningNumber.value().toString()).isEqualTo("[" + inputNumber+"]");
     }
 
     @ParameterizedTest
