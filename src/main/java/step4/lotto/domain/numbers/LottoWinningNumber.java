@@ -85,7 +85,7 @@ public class LottoWinningNumber {
             }
 
         } catch (NumberFormatException e) {
-            System.out.println(e.toString() + " : " + LottoErrorMessage.getLottoNumberformatexception());
+            System.out.println(LottoErrorMessage.getLottoNumberformatexception());
         }
 
     }
