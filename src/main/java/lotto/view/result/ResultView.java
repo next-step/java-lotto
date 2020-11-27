@@ -1,11 +1,9 @@
 package lotto.view.result;
 
 import lotto.constant.Rank;
-import lotto.domain.LottoGameResult;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottoes;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {

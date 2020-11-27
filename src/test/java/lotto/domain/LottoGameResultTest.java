@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import lotto.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -19,15 +21,15 @@ class LottoGameResultTest {
                 Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         ));
         Lottoes lottoes = new Lottoes(Arrays.asList(lottoNumbers));
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 7, 8, 9");
+        LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 7, 8, 9");
 
         lottoGame = new LottoGame(lottoes, winningNumbers);
     }
 
 
     @Test
-    @DisplayName("1개의 lotto를 구매하고 3등이 일 때, 수익률을 계산한다.")
-    void should_return_winning_lotto() {
+    @DisplayName("1개의 lotto를 구매하고 4등이 일 때, 수익률을 계산한다.")
+    void should_return_rate_of_return() {
         //Given
         LottoGameResult result = lottoGame.getResult();
 
@@ -36,5 +38,18 @@ class LottoGameResultTest {
 
         //Then
         assertThat(rateOfReturn).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("1개의 lotto를 구매하고 4등이 일 때")
+    void should_return_() {
+        //Given
+        LottoGameResult result = lottoGame.getResult();
+
+        //When
+        Map<Rank, Integer> ranks = result.getRanks();
+
+        //Then
+        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(1);
     }
 }

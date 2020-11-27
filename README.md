@@ -53,11 +53,7 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-
-0. Uilts성 클래스 삭제
 3. Rank를 도메인으로 수정?
-5. LottoGame 참조변수 타입을 왜 EnumMap으로 하였나?
-7. CustomException 생성
 
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
@@ -90,7 +86,7 @@ utils.Calculator
 23. LottoGame은 LottoGameResult를 반환하고, LottoGameResult는 lotto game의 결과를 정리하는 책임 부여
 24. Rank의 돈 단위를 2_000_000_000로 관리
 25. Rank에 대한 설명을 view 표시하도록 개선
-
+26. Uilts성 클래스 삭제
 
 
 ## 피드백 1

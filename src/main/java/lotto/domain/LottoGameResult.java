@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoGameResult {
 
-    private static final int FIFTH_MATCHING_COUNT = 3;
+    private static final int FIFTH_MATCHING_COUNT = 2;
     private static final double TWO_DECIMAL_PLACES = 100.0;
     private final List<Rank> ranks;
     private final PurchaseAmount purchaseAmount;
@@ -24,7 +24,8 @@ public class LottoGameResult {
                 .filter(rank -> rank.getMatchingNumberCount() > FIFTH_MATCHING_COUNT)
                 .collect(Collectors.groupingBy(Rank::getMatchingNumberCount));
         Map<Rank, Integer> result = init();
-        collect.forEach((key, value) -> result.put(Rank.value(key), value.size()));
+        collect.forEach((key, value) -> result.put(Rank.value(key), result.get(Rank.value(key)) + 1));
+
         return result;
     }
 

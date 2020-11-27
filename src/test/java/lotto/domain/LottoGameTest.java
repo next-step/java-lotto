@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoGameTest {
 
-    private static final WinningNumbers WINNING_NUMBERS = new WinningNumbers("1,2,3,4,5,6");
+    private static final LottoNumbers WINNING_NUMBERS = new LottoNumbers("1,2,3,4,5,6");
 
     @Test
     @DisplayName("Lotto game의 결과를 출력한다.")

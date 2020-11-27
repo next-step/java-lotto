@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 import lotto.constant.Rank;
-import lotto.utils.IntegerUtils;
-import lotto.utils.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,15 +9,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class WinningNumbersTest {
+class LottoNumbersTest {
 
-    public static final WinningNumbers WINNING_NUMBERS = new WinningNumbers("1, 2, 3, 4, 5, 6");
+    public static final LottoNumbers WINNING_NUMBERS = new LottoNumbers("1, 2, 3, 4, 5, 6");
 
     @ParameterizedTest
     @DisplayName("입력받은 번호와 당첨번호의 일치하는 Rank를 반환한다.")
@@ -33,12 +30,7 @@ class WinningNumbersTest {
     }, delimiter = ':')
     void should_return_rank(String inputNumbers, int expectedCount) {
         //Given
-        List<String> numbers = StringUtils.splitString(inputNumbers);
-        List<LottoNumber> lottoNumbers = IntegerUtils.parsePositiveInt(numbers)
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        LottoNumbers lotto = new LottoNumbers(lottoNumbers);
+        LottoNumbers lotto = new LottoNumbers(inputNumbers);
 
         //When
         Rank expectedRank = Rank.value(expectedCount);
@@ -49,16 +41,16 @@ class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("입력한 당첨번호에 따른 WinningNumber를 반환한다.")
+    @DisplayName("입력한 번호에 따른 LottoNumber를 반환한다.")
     void should_return_winning_number() {
         //Given
         String inputNumbers = "1, 2, 3, 4, 5, 6";
 
         //When
-        WinningNumbers winningNumbers = new WinningNumbers(inputNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(inputNumbers);
 
         //Then
-        assertThat(winningNumbers.getValue().stream()
+        assertThat(lottoNumbers.getValue().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList())
         )
@@ -72,7 +64,7 @@ class WinningNumbersTest {
     void should_throw_illegal_argument_exception(String numbers) {
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(numbers))
+                .isThrownBy(() -> new LottoNumbers(numbers))
                 .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
     }
 
@@ -81,7 +73,28 @@ class WinningNumbersTest {
     @ValueSource(strings = {"1, 1, 1, 1, 12, 1"})
     void should_throw_illegal_argument_exception_when_duplicate_number(String numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(numbers))
+                .isThrownBy(() -> new LottoNumbers(numbers))
                 .withMessage(ErrorMessage.NOT_ALLOW_DUPLICATED);
+    }
+
+    @ParameterizedTest
+    @DisplayName("빈 문자열 입력하면, Exception을 반환한다")
+    @ValueSource(strings = {"", " "})
+    void should_return_zero_when_is_blank(String value) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumbers(value))
+                .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
+    }
+
+    @Test
+    @DisplayName("입력한 문자가 음수 이면, Exception을 반환한다.")
+    void should_throw_illegal_argument_exception_when_is_negative_quantity() {
+        //Given
+        String values = "-1, -2, 3";
+
+        //When & Then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumbers(values))
+                .withMessage(ErrorMessage.NOT_ALLOW_NEGATIVE_QUANTITY);
     }
 }

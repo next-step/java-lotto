@@ -1,8 +1,7 @@
 package lotto.controller;
 
-import lotto.constant.Lotto;
 import lotto.domain.*;
-import lotto.utils.LottoNumberGenerator;
+import lotto.domain.LottoNumberGenerator;
 import lotto.view.LottoGameView;
 import lotto.view.input.InputView;
 
@@ -16,7 +15,7 @@ public class LottoController {
     }
 
     public void getLottoGameResult(Lottoes lottoes) {
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.enterWinningNumbers());
+        LottoNumbers winningNumbers = new LottoNumbers(InputView.enterWinningNumbers());
         LottoGame lottoGame = new LottoGame(lottoes, winningNumbers);
         LottoGameView.printResult(lottoGame.getResult());
     }

@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
     private final Lottoes lottoes;
-    private final WinningNumbers winningNumbers;
+    private final LottoNumbers winningNumbers;
 
-    public LottoGame(Lottoes lottoes, WinningNumbers winningNumbers) {
+    public LottoGame(Lottoes lottoes, LottoNumbers winningNumbers) {
         this.lottoes = lottoes;
         this.winningNumbers = winningNumbers;
     }

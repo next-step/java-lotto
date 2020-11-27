@@ -1,11 +1,6 @@
-package lotto.utils;
+package lotto.domain;
 
 import lotto.constant.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottoes;
-import lotto.domain.PurchaseAmount;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
