@@ -1,38 +1,38 @@
 package lotto;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static lotto.LottoGameConstant.MAXIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
-import static lotto.LottoGameConstant.NUMBERS_PER_TICKET;
+import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class NumberPool {
 
   private static final List<LottoNumber> randomBox = IntStream
-      .range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
+      .rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
       .mapToObj(LottoNumber::get)
-      .collect(Collectors.toList());
+      .collect(toList());
 
   private NumberPool() {
   }
 
-  public static List<LottoNumber> generateNumberBundle(PublishStrategy publishStrategy) {
+  public static LottoNumberBundle generateNumberBundle(PublishStrategy publishStrategy) {
     return publishStrategy.publish();
   }
 
-  public static List<LottoNumber> generateNumberBundle() {
+  public static LottoNumberBundle generateNumberBundle() {
     PublishStrategy strategy = () -> {
       Collections.shuffle(randomBox);
 
       return randomBox.stream()
-          .limit(NUMBERS_PER_TICKET)
+          .limit(NUMBERS_PER_BUNDLE)
           .sorted()
-          .collect(Collectors.toList());
+          .collect(collectingAndThen(toList(), LottoNumberBundle::of));
     };
-
     return generateNumberBundle(strategy);
   }
 }

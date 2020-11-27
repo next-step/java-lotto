@@ -1,31 +1,66 @@
 package lotto;
 
+import java.util.List;
+import lotto.views.DataExporter;
+import lotto.views.DataImporter;
 import lotto.views.InputView;
 import lotto.views.ResultView;
-import lotto.views.StatisticsExporter;
-import lotto.views.TicketsExporter;
 
 public class Client {
 
+  private static TicketPublisher ticketPublisher;
+  private static DataExporter dataExporter;
+  private static Budget budget;
+  private static LottoTickets tickets;
+  private static WinningNumber winningNumber;
+  private static LottoResult lottoResult;
+
   public static void main(String[] args) {
-    Budget budget = Budget.of(InputView.askBudget());
-    ResultView.printNumLotto(budget.getNumPossibleLotto());
+    initializationPhase();
+    LottoTicketSetUpPhase();
+    WinningNumberSetUpPhase();
+    tearDownPhase();
+  }
 
-    LottoTickets purchasedTickets = TicketPublisher.publishTickets(budget);
-    TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
-    ResultView.printLottoInfo(ticketsExporter);
+  private static void initializationPhase() {
+    ticketPublisher = new TicketPublisher();
+    dataExporter = new DataExporter();
+    budget = Budget.of(InputView.askBudget());
+  }
 
-    WinningNumber winningNumber = WinningNumber.of(InputView.askWinningNumber());
+  private static void LottoTicketSetUpPhase() {
+    // 수동 희망 갯수 입력 받기
+    int numManual = InputView.askNumManualLotto();
+    budget.validateRequest(numManual);
 
-    LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
-    winningNumber.validateBonusNumberDuplication(bonusNumber);
+    // 수동 번호 입력 받기
+    List<String> rawNumbers = InputView.askManualLottoNumbers(numManual);
+    List<LottoNumberBundle> convertedInputs = DataImporter
+        .convertStringToBundle(rawNumbers);
 
-    LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
+    //수동, 자동 로또 발급
+    tickets = ticketPublisher.publishTickets(convertedInputs, budget);
+
+    ResultView.printNumPublishedManualTicket(budget.getNumManualTicket());
+    ResultView.printNumPublishedAutoTicket(budget.getNumAutoTicket());
+
+    // 발급 번호 출력
+    dataExporter.setLottoTicketsDTO(tickets.exportData());
+    ResultView.printLottoInfo(dataExporter);
+  }
+
+  private static void WinningNumberSetUpPhase() {
+    winningNumber = WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
+    winningNumber.addBonusNumber(LottoNumber.of(InputView.askBonusNumber()));
+
+    lottoResult = tickets.settle(winningNumber);
+  }
+
+  private static void tearDownPhase() {
+    dataExporter.setLottoResultDTO(lottoResult.exportData());
 
     ResultView.printStatisticsOpening();
-    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult.exportData());
-    ResultView.printRewards(statisticsExporter);
-
+    ResultView.printRewards(dataExporter);
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));
   }

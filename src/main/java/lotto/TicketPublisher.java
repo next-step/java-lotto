@@ -1,34 +1,37 @@
 package lotto;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
+import java.util.List;
 import java.util.stream.IntStream;
-import lotto.lottoexception.RemainBudgetException;
 
 public class TicketPublisher {
 
-  private TicketPublisher() {
+  public TicketPublisher() {
   }
 
-  static public LottoTicket publishTicket() {
+  public LottoTicket publishAutoTicket() {
     return LottoTicket.of(NumberPool.generateNumberBundle());
   }
 
-  static public LottoTicket publishTicket(PublishStrategy publishStrategy) {
+  public LottoTicket publishAutoTicket(PublishStrategy publishStrategy) {
     return LottoTicket.of(NumberPool.generateNumberBundle(publishStrategy));
   }
 
-  static public LottoTickets publishTickets(Budget budget) {
-    int numPossibleTicket = budget.getNumPossibleLotto();
+  public LottoTickets publishTickets(List<LottoNumberBundle> bundles, Budget budget) {
+    budget.buyManualTickets(bundles.size());
 
-    if (numPossibleTicket < 1) {
-      throw new RemainBudgetException();
-    }
+    List<LottoTicket> manualTickets = bundles.stream()
+        .map(LottoTicket::of)
+        .collect(toList());
 
-    return IntStream
-        .range(0, numPossibleTicket)
-        .mapToObj(x -> publishTicket())
-        .collect(collectingAndThen(toList(), LottoTickets::of));
+    List<LottoTicket> autoTickets = IntStream.
+        range(0, budget.getNumPossibleAutoTickets())
+        .mapToObj(x -> publishAutoTicket())
+        .collect(toList());
+
+    manualTickets.addAll(autoTickets);
+
+    return LottoTickets.of(manualTickets);
   }
 }

@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.views.ReadOnlyLottoTickets;
+import lotto.dto.LottoTicketsDTO;
 
-public class LottoTickets implements ReadOnlyLottoTickets {
+public class LottoTickets {
 
   private final List<LottoTicket> tickets;
 
@@ -19,22 +19,16 @@ public class LottoTickets implements ReadOnlyLottoTickets {
     return new LottoTickets(tickets);
   }
 
-  public LottoResult settle(WinningNumber winningNumber, LottoNumber bonusNumber) {
+  public LottoResult settle(WinningNumber winningNumber) {
     LottoResult lottoResult = new LottoResult();
     this.tickets.stream()
-        .map(lottoTicket -> lottoTicket.decideRewardWithBonusBall(winningNumber, bonusNumber))
+        .map(lottoTicket -> lottoTicket.rewardsWithBonusBall(winningNumber))
         .forEach(lottoResult::recordHit);
 
     return lottoResult;
   }
 
-  @Override
-  public int getNumTicket() {
-    return this.tickets.size();
-  }
-
-  @Override
-  public String getTicket(int idx) {
-    return this.tickets.get(idx).toString();
+  public LottoTicketsDTO exportData() {
+    return new LottoTicketsDTO(this.tickets);
   }
 }
