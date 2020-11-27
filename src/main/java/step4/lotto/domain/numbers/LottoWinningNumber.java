@@ -49,9 +49,7 @@ public class LottoWinningNumber {
     }
 
     public int getRank(SortedSet<Integer> paramValue) {
-        int lottoRankValue = lottoRank.getRank(paramValue);
-
-        return lottoRankValue;
+        return lottoRank.getRank(paramValue);
     }
 
     private void checkOverlap(int bounsNUmber, List<Integer> winningNumbers) {
