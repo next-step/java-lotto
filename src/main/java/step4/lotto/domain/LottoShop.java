@@ -24,4 +24,8 @@ public class LottoShop {
 
         return returnSet;
     }
+
+    public static Set<LottoTicket> buyManualLotto(List<String> lottoNumber, int buyCount) {
+        return lottoMachine.getManualNumbers(lottoNumber, buyCount);
+    }
 }
