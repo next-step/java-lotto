@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoAutoNumbers {
+public class LottoAutoNumber {
 
     private static final int MAKE_LOTTO_NUMBERS_COUNT = 45;  // 로또 생성 갯수
     private List<Integer> basicLottoNumbers = new ArrayList<>();
 
-    LottoAutoNumbers() {
+    LottoAutoNumber() {
         initLottoNubmers();
     }
 
