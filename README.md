@@ -142,6 +142,6 @@
 * [X] method 순서
 * [X] 랜덤 상수 -> enum
 * [X] Validation 중복 제거
-* [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
+* [X] 발급 갯수 관리 책임 LottoPublisher -> Budget
 * [X] 엣지 케이스
 * [ ] LottoNumberBundle iterable 에서 람다 적용 검토
