@@ -17,7 +17,8 @@ public class LottoApplication {
         List<LottoNumbers> manualLottos = InputView.getNumberOfManualLottos(amountOfManualLotto);
         accountManager.buyManualLottos(manualLottos);
 
-        ResultView.printAmountPerKind(accountManager, amountOfManualLotto);
+        long amountOfAutoLotto = accountManager.getMaxAmountOfLottos() - amountOfManualLotto;
+        ResultView.printAmountPerKind(amountOfAutoLotto, amountOfManualLotto);
         accountManager.buyAutoLottosWithRemainingBudget();
         ResultView.printLottoNumber(accountManager.getMyLottos());
 
