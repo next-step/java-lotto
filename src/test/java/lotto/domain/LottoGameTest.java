@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -30,10 +31,10 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(lottoes, WINNING_NUMBERS);
 
         //When
-        LottoGameResult lottoGameResult = lottoGame.getResult();
+        List<Rank> result = lottoGame.getResult();
 
         //Then
-        assertThat(lottoGameResult.getValue().get(Rank.FIRST)).isOne();
+        assertThat(result).contains(Rank.FIRST);
 
     }
 

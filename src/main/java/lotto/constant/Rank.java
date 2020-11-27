@@ -19,6 +19,10 @@ public enum Rank {
         this.description = description;
     }
 
+    public int getMatchingNumberCount() {
+        return matchingNumberCount;
+    }
+
     public int getPrizeMoney() {
         return prizeMoney;
     }

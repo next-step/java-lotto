@@ -57,9 +57,6 @@ utils.Calculator
 14. LottoGame의 getResult()는 LottoGameResult에서 수행하도록 수정
 -- 
 0. Uilts성 클래스 삭제
-
-2. 상수가 많아지면 관리하기 힘드므로, 도메인에 정리한다?
-    - 고민 할거리
 3. Rank를 도메인으로 수정?
 4. Rank에 대한 설명을 view에서
     - 설명을 수정하려고 서버 로직을 수정하는 건 불필요
@@ -95,6 +92,10 @@ utils.Calculator
 19. LottoNumberGenerator에서 계속 숫자 배열 생성하지 않도록 수정
 20. WinningNumber -> isExists 메서드 이름 짓기..
 21. MainSimulator, Controller 책임 정리
+22. 단발성 상수 도메인에 정리
+
+
+
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
 
