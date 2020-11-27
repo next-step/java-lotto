@@ -26,7 +26,7 @@ public class MatchStatus {
         return Objects.hash(matchCount, isBonusball);
     }
 
-    public int count() {
+    public int getMatchCount() {
         return matchCount;
     }
 
