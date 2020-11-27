@@ -32,12 +32,12 @@ public interface LottoNumberGenerator {
             public LottoNumbers generate() {
                 Collections.shuffle(lottoNumberBalls, random);
                 return new LottoNumbers(Arrays.asList(
-                        lottoNumberBalls.get(0),
-                        lottoNumberBalls.get(1),
-                        lottoNumberBalls.get(2),
-                        lottoNumberBalls.get(3),
-                        lottoNumberBalls.get(4),
-                        lottoNumberBalls.get(5)
+                        new LottoNumber(lottoNumberBalls.get(0)),
+                        new LottoNumber(lottoNumberBalls.get(1)),
+                        new LottoNumber(lottoNumberBalls.get(2)),
+                        new LottoNumber(lottoNumberBalls.get(3)),
+                        new LottoNumber(lottoNumberBalls.get(4)),
+                        new LottoNumber(lottoNumberBalls.get(5))
                 ));
             }
         };

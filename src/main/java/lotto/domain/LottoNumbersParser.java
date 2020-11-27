@@ -14,7 +14,6 @@ public class LottoNumbersParser {
                 .collect(Collectors.toList());
 
         shouldNumber(parts);
-//        shouldRangeOfLottoNumber(parts);
 
         return parts.stream()
                 .map(it -> new LottoNumber(Integer.valueOf(it)))

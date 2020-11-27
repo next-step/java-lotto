@@ -10,16 +10,29 @@ public class LottoNumbers {
     private List<LottoNumber> numbers;
     private LottoNumbersParser lottoNumbersParser = new LottoNumbersParser();
 
-    public LottoNumbers(List<Integer> numbers) {
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+    public LottoNumbers(List<LottoNumber> numbers) {
+        shouldNotDuplicate(numbers);
+        this.numbers = numbers;
     }
 
     public LottoNumbers(String numberString){
-        parse(numberString);
+        List<LottoNumber> numbers = parse(numberString);
+        shouldNotDuplicate(numbers);
+        this.numbers = numbers;
     }
 
-    private void parse(String numberString) {
-        this.numbers = lottoNumbersParser.parse(numberString);
+    private void shouldNotDuplicate(List<LottoNumber> numbers) {
+        if( numbers.stream()
+                .collect(Collectors.toMap(
+                        it -> it.getValue(),
+                        it -> 1,
+                        (current, plus) -> current + plus)).keySet().size() < numbers.size() ){
+            throw new LottoNumbersException("로또번호에 중복된 번호가 포함되어 있습니다");
+        }
+    }
+
+    private List<LottoNumber> parse(String numberString) {
+        return lottoNumbersParser.parse(numberString);
     }
 
 

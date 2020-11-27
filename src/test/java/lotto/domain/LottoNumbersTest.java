@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
 
@@ -51,5 +52,11 @@ class LottoNumbersTest {
         assertThat(numbers.toString()).isEqualTo("1,2,3,4,5,6");
     }
 
+    @DisplayName("로또번호에 중복된 번호가 있으면 exception 이 발생한다")
+    @Test
+    void dupNumber(){
+        assertThatThrownBy(() -> new LottoNumbers("1,1,2,3,4,5"))
+                .isInstanceOf(LottoNumbersException.class);
+    }
 
 }
