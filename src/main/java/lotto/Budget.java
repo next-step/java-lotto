@@ -7,8 +7,8 @@ import lotto.lottoexception.RemainBudgetException;
 
 public class Budget {
 
-  private final String WINNING_MESSAGE = "(축하합니다.)";
-  private final String LOOSING_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+  private static final String WINNING_MESSAGE = "(축하합니다.)";
+  private static final String LOOSING_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
   private final int initialBudget;
   private int remainBudget;
