@@ -38,10 +38,18 @@ public class Budget {
   }
 
   public void reduceRemain(int numBuyingTicket) {
-    int expectedRemain = this.remainBudget - numBuyingTicket * PRICE_PER_TICKET;
-    if (expectedRemain < 0) {
+    int remainsAfterBuyingLotto = calculateFutureRemains(numBuyingTicket);
+    validateRequestByNumTicket(numBuyingTicket);
+    this.remainBudget = remainsAfterBuyingLotto;
+  }
+
+  public void validateRequestByNumTicket(int numBuyingTicket) {
+    if (calculateFutureRemains(numBuyingTicket) < 0) {
       throw new RemainBudgetException();
     }
-    this.remainBudget = expectedRemain;
+  }
+
+  private int calculateFutureRemains(int numTickets) {
+    return this.remainBudget - numTickets * PRICE_PER_TICKET;
   }
 }

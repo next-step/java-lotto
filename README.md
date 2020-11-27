@@ -110,8 +110,8 @@
 * [X] Budget 의 Validation
 
 ### 기능 요구사항
-* [ ] 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 한다
-* [ ] 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다
+* [X] 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 한다
+* [X] 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다
 
 ### 파생 구현 목록
 * [ ] ~~수동으로 로또 티켓 생성하는 기능을 만든다.~~
@@ -131,5 +131,8 @@
     * [X] TicketPublisher 에 발급 기록 저장 기능 추가
     * [X] TicketPublisher 인스턴스화 가능토록 변경
     * [X] Tickets 에 addAll 기능 추가
-    * [ ] InputView <-> 발급까지
+    * [X] InputView <-> 발급까지
+    * [ ] 발급 갯수 출력 기능
+* [ ] TicketDTO, TicketPublisherDTO -> DataExporter(현재 StaticExporter 랑 TicketExporter 통합)
+* [ ] Client 메소드 15줄 규칙 적용
 * [ ] WinningNumber 에 BonusNumber 넣기

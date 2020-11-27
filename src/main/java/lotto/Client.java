@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+import lotto.views.DataImporter;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 import lotto.views.StatisticsExporter;
@@ -11,20 +13,35 @@ public class Client {
     TicketPublisher ticketPublisher = new TicketPublisher();
     Budget budget = Budget.of(InputView.askBudget());
 
-    ResultView.printNumLotto(budget.getNumPossibleBuyingTicket());
+    // 수동 희망 갯수 입력 받기
+    int numManual = InputView.askNumManualLotto();
+    budget.validateRequestByNumTicket(numManual);
 
-    LottoTickets purchasedTickets = ticketPublisher.publishAutoTickets(budget);
-    TicketsExporter ticketsExporter = new TicketsExporter(purchasedTickets);
+    // 수동 번호 입력 받기
+    List<String> rawNumbers = InputView.askManualLottoNumbers(numManual);
+    List<LottoNumberBundle> convertedInputs = DataImporter
+        .convertStringToBundle(rawNumbers);
+    LottoTickets tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
+
+    //자동 번호 발급
+    tickets.addAll(ticketPublisher.publishAutoTickets(budget));
+    TicketsExporter ticketsExporter = new TicketsExporter(tickets);
+
+    // 발급된 번호 출력
+    // TODO 몇 개 발급되었는지 확인
     ResultView.printLottoInfo(ticketsExporter);
 
+    // 당첨 번호 입력 받기
     WinningNumber winningNumber =
         WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
 
+    // 보너스 볼을 입력 받기
     LottoNumber bonusNumber = LottoNumber.of(InputView.askBonusNumber());
     winningNumber.validateBonusNumberDuplication(bonusNumber);
 
-    LottoResult lottoResult = purchasedTickets.settle(winningNumber, bonusNumber);
+    LottoResult lottoResult = tickets.settle(winningNumber, bonusNumber);
 
+    //당첨 통계
     ResultView.printStatisticsOpening();
     StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult.exportData());
     ResultView.printRewards(statisticsExporter);
