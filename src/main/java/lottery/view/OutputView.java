@@ -37,15 +37,22 @@ public class OutputView {
         for(WinningType winningType : WinningType.values()) {
             long countMatched = winningResult.getOrDefault(winningType, 0L);
             earned += winningType.getEarning() * countMatched;
-            out.format("%1$d개 일치%4$s(%2$d)원- %3$d개"
-                    , winningType.getMatches()
-                    , winningType.getEarning()
-                    , countMatched
-                    , winningType.hasBonus() ? ", 보너스 볼 일치" : " "
-            );
-            out.println();
+            showProfitFor(winningType, countMatched);
         }
         out.format("총 수익률은 %1$.2f입니다.", (double)earned / spent);
+        out.println();
+    }
+
+    private void showProfitFor(WinningType winningType, long countMatched) {
+        if (winningType == WinningType.LOSE) {
+            return;
+        }
+        out.format("%1$d개 일치%4$s(%2$d)원- %3$d개"
+                , winningType.getMatches()
+                , winningType.getEarning()
+                , countMatched
+                , winningType.hasBonus() ? ", 보너스 볼 일치" : " "
+        );
         out.println();
     }
 }
