@@ -1,4 +1,4 @@
-package step3.lotto.domain.numbers;
+package step4.lotto.domain.numbers;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class lottoRankTest {
 
-    private LottoTicket lottoTicket;
-    private List<Integer> compareData;
+    private static LottoTicket lottoTicket;
+    private static List<Integer> compareData;
 
     @Test
     void 순위_1등_테스트() {

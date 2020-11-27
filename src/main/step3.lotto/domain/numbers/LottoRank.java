@@ -23,12 +23,12 @@ public class LottoRank {
             lottoRank = checkSameValue(number, lottoRank);
         }
 
-        lottoRank = findRnak(lottoRank, paramValue);
+        lottoRank = findRank(lottoRank, paramValue);
 
         return lottoRank;
     }
 
-    private int findRnak(int lottoRank, SortedSet<Integer> paramValue) {
+    private int findRank(int lottoRank, SortedSet<Integer> paramValue) {
         //1등이 아닐시 등급 1 추가
         if (lottoRank == 1) {
             return 1;
