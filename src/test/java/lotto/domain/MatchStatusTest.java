@@ -64,4 +64,19 @@ public class MatchStatusTest {
         //Then
         assertThat(map).hasSize(3);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3:true", "4:true", "5:false", "5:true", "6:false"}, delimiter = ':')
+    public void changeBonusballStatus(int matchCount, boolean isBonusball){
+        //Given
+        int availableNumber = 5;
+        MatchStatus matchStatus = new MatchStatus(3, isBonusball);
+
+        //When
+        matchStatus.notAllowedBallOtherNumber(availableNumber);
+        PrizeInformation prizeInformation = PrizeInformation.findByPrizePrice(matchStatus);
+
+        //Then
+        assertThat(prizeInformation.getMatchStatus()).isEqualTo(matchStatus);
+    }
 }

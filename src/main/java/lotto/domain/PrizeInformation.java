@@ -28,9 +28,8 @@ public enum PrizeInformation {
     }
 
     public static PrizeInformation findByPrizePrice(MatchStatus matchStatus){
-        if(matchStatus.getMatchCount() != BONUS_BALL_MATCH_COUNT){
-            matchStatus.isNotBonusballMatchRule();
-        }
+        matchStatus.notAllowedBallOtherNumber(BONUS_BALL_MATCH_COUNT);
+
         return matchByPrice.get(matchStatus);
     }
 

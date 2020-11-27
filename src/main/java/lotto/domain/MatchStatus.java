@@ -30,7 +30,9 @@ public class MatchStatus {
         return matchCount;
     }
 
-    public void isNotBonusballMatchRule() {
-        this.isBonusball = false;
+    public void notAllowedBallOtherNumber(int availableNumber) {
+        if(matchCount != availableNumber){
+            this.isBonusball = false;
+        }
     }
 }
