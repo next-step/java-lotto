@@ -4,6 +4,11 @@ import java.util.List;
 
 public class ResultView {
 
+  private static final String PURCHASE_MANUAL_PREFIX = "수동으로 ";
+  private static final String PURCHASE_MANUAL_SUFFIX = "장, ";
+  private static final String PURCHASE_AUTO_PREFIX = "자동으로 ";
+  private static final String PURCHASE_AUTO_SUFFIX = "장을 구매했습니다.";
+
   private static final String SCORING_OPENING_MESSAGE = "당첨 통계";
   private static final String SPLIT_LINE_MESSAGE = "----------------";
 
@@ -30,7 +35,7 @@ public class ResultView {
   }
 
   public static void printRewards(DataExporter exporter) {
-    List<ReportForm> reports = exporter.publishStatisticReport();
+    List<ReportForm> reports = exporter.exportStatisticReport();
     for (ReportForm report : reports) {
       System.out.print(report.getNumHit());
       distinguishWithBonusBallCondition(report.containsBonus());
@@ -54,5 +59,10 @@ public class ResultView {
 
   public static void printDescription(String message) {
     System.out.println(message);
+  }
+
+  public static void printPublishStatus(int manual, int auto) {
+    System.out.print(PURCHASE_MANUAL_PREFIX + manual + PURCHASE_MANUAL_SUFFIX);
+    System.out.println(PURCHASE_AUTO_PREFIX + auto + PURCHASE_AUTO_SUFFIX);
   }
 }

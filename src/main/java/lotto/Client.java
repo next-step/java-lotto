@@ -25,10 +25,10 @@ public class Client {
 
     //자동 번호 발급
     tickets.addAll(ticketPublisher.publishAutoTickets(budget));
-    dataExporter.setLottoTicketsDTO(tickets.exportData());
 
-    // 발급된 번호 출력
-    // TODO 몇 개 발급되었는지 확인
+    // 발급 번호 출력
+    dataExporter.setLottoTicketsDTO(tickets.exportData());
+    dataExporter.setTicketPublisherDTO(ticketPublisher.exportData());
     ResultView.printLottoInfo(dataExporter);
 
     // 당첨 번호 입력 받기
