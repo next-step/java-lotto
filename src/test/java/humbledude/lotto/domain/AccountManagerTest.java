@@ -40,9 +40,8 @@ public class AccountManagerTest {
     }
 
     @Test
-    public void buyAutoTickets() {
-        accountManager.buyAutoLottosWithRemainingBudget();
-        assertThat(accountManager.getMyLottos()).hasSize(14);
+    public void getMaxAmountOfLottosWithinBudget() {
+        assertThat(accountManager.getMaxAmountOfLottosWithinBudget()).isEqualTo(14);
     }
 
     @Test

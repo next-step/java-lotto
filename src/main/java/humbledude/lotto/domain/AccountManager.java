@@ -11,34 +11,33 @@ import java.util.stream.LongStream;
 public class AccountManager {
     public static final long LOTTO_TICKET_PRICE = 1000;
 
-    private final long budget;
+    private final Budget budget;
     private final List<LottoNumbers> myLottos = new ArrayList<>();
     private LottoWinningNumbers winningNumbers;
 
     public AccountManager(long budget) {
-        this.budget = budget;
-    }
-
-    public long getMaxAmountOfLottos() {
-        return budget / LOTTO_TICKET_PRICE;
+        this.budget = new Budget(budget);
     }
 
     public void buyManualLottos(List<LottoNumbers> numbers) {
-        if (getMaxAmountOfLottos() < myLottos.size() + numbers.size()) {
-            throw new IllegalArgumentException("예산을 초과해서 수동 로또를 사려고 하네요");
-        }
-
+        long lottoCost = numbers.size() * LOTTO_TICKET_PRICE;
+        budget.addSpending(lottoCost);
         myLottos.addAll(numbers);
     }
 
-    public void buyAutoLottosWithRemainingBudget() {
-        long howMany = getMaxAmountOfLottos() - myLottos.size();
-
-        List<LottoNumbers> autoLottos = LongStream.range(0, howMany)
+    public void buyAutoLottos(long amount) {
+        long lottoCost = amount * LOTTO_TICKET_PRICE;
+        budget.addSpending(lottoCost);
+        List<LottoNumbers> autoLottos = LongStream.range(0, amount)
                 .mapToObj(i -> AutoLotto.buildAutoLotto())
                 .collect(Collectors.toList());
 
         myLottos.addAll(autoLottos);
+    }
+
+    public long getMaxAmountOfLottosWithinBudget() {
+        long remain = budget.getRemain();
+        return remain / LOTTO_TICKET_PRICE;
     }
 
     public void setWinningNumbers(LottoWinningNumbers winningNumbers) {
@@ -46,14 +45,14 @@ public class AccountManager {
     }
 
     public double getProfitRate() {
-        double totalSpent = getTotalSpent();
+        double totalSpending = budget.getTotalSpending();
         double totalPrize = getTotalPrize();
 
-        if (totalSpent == 0) {
+        if (totalSpending == 0) {
             throw new IllegalStateException("돈을 하나도 안썼어요. 돈을 쓰고 수익률을 계산합시다");
         }
 
-        return totalPrize / totalSpent;
+        return totalPrize / totalSpending;
     }
 
     public List<LottoNumbers> getMyLottos() {
@@ -71,9 +70,4 @@ public class AccountManager {
 
         return totalPrize.get();
     }
-
-    private long getTotalSpent() {
-        return myLottos.size() * LOTTO_TICKET_PRICE;
-    }
-
 }
