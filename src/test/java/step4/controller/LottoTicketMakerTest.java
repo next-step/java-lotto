@@ -35,9 +35,9 @@ public class LottoTicketMakerTest {
     @ValueSource(ints = {13})
     public void 입력한_수동_갯수_제외_자동_갯수_확인(int lottoAmount) {
         int manualLottoQty = 1;
-        Numbers numbers = Numbers.of("1,2,3,7,8,9");
-
-//        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, numbers.getLottoNumber());
-//        assertEquals(lottoAmount, lottoTicketMaker.lottoAutoPurchaseQty());
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        IntStream.of(1, 2, 3, 7, 8, 9).forEach(i -> lottoNumbers.add(new LottoNumber(i)));
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, lottoNumbers);
+        assertEquals(lottoAmount, lottoTicketMaker.lottoAutoPurchaseQty());
     }
 }
