@@ -5,12 +5,10 @@ import step4.util.StringUtil;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class Numbers {
 
     private static final int LOTTO_LIMIT_NUMBER = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
     private static final String LOTTO_SPLIT_COMMA = ",";
 
     private String lottoNumber;
@@ -32,15 +30,6 @@ public class Numbers {
         if (StringUtil.isEmpty(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호를 입력해 주세요.");
         }
-    }
-
-    private static void lottoNumberValidate(String lottoNumber) {
-        String[] lottoNumbers = lottoNumber.split(LOTTO_SPLIT_COMMA);
-        IntStream.range(0, lottoNumbers.length)
-                .filter(i -> Integer.parseInt(lottoNumbers[i]) > LOTTO_MAX_NUMBER)
-                .forEach(i -> {
-                    throw new IllegalArgumentException("로또 번호는 1 ~ 45사이의 숫자여야 합니다.");
-                });
     }
 
     private static void lottoNumberSizeValidate(String lottoNumber) {
@@ -73,7 +62,6 @@ public class Numbers {
 
     private static void validate(String lottoNumber) {
         isEmpty(lottoNumber);
-        lottoNumberValidate(lottoNumber);
         lottoNumberSizeValidate(lottoNumber);
         numberValidate(lottoNumber);
         duplicate(lottoNumber);

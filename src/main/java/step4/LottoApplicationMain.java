@@ -17,7 +17,7 @@ public class LottoApplicationMain {
         String manualLottoNumbers = LottoInputUi.askManualLottoNumbers();
         Numbers numbers = Numbers.of(manualLottoNumbers);
 
-        List<Lotto> lottos = LottoTicketMaker.askManualLottoNumbers(manualLottoQty, numbers.getLottoNumber());
+        List<LottoNumber> lottos = LottoTicketMaker.askManualLottoNumbers(manualLottoQty, numbers.getLottoNumber());
         LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, lottos);
 
         LottoOuputUi.printLottoCount(lottoTicketMaker.lottoAutoPurchaseQty(), manualLottoQty);
