@@ -4,7 +4,6 @@ import java.util.List;
 
 public class ResultView {
 
-  private static final String NUM_LOTTO_MESSAGE = "개를 구매했습니다.";
   private static final String SCORING_OPENING_MESSAGE = "당첨 통계";
   private static final String SPLIT_LINE_MESSAGE = "----------------";
 
@@ -18,14 +17,10 @@ public class ResultView {
   private ResultView() {
   }
 
-  public static void printNumLotto(int numLotto) {
-    System.out.print(numLotto);
-    System.out.println(NUM_LOTTO_MESSAGE);
-  }
-
-  public static void printLottoInfo(TicketsExporter exporter) {
-    for (int i = 0; i < exporter.getNumTicket(); i++) {
-      System.out.println(exporter.getTicket(i));
+  public static void printLottoInfo(DataExporter exporter) {
+    List<String> stringTickets = exporter.exportTickets();
+    for (String ticket : stringTickets) {
+      System.out.println(ticket);
     }
   }
 
@@ -34,8 +29,8 @@ public class ResultView {
     System.out.println(SPLIT_LINE_MESSAGE);
   }
 
-  public static void printRewards(StatisticsExporter exporter) {
-    List<ReportForm> reports = exporter.publishReport();
+  public static void printRewards(DataExporter exporter) {
+    List<ReportForm> reports = exporter.publishStatisticReport();
     for (ReportForm report : reports) {
       System.out.print(report.getNumHit());
       distinguishWithBonusBallCondition(report.containsBonus());

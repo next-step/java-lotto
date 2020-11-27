@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.views.ReadOnlyLottoTickets;
+import lotto.dto.LottoTicketsDTO;
 
-public class LottoTickets implements ReadOnlyLottoTickets {
+public class LottoTickets {
 
   private final List<LottoTicket> tickets;
 
@@ -32,13 +32,7 @@ public class LottoTickets implements ReadOnlyLottoTickets {
     this.tickets.addAll(that.tickets);
   }
 
-  @Override
-  public int getNumTicket() {
-    return this.tickets.size();
-  }
-
-  @Override
-  public String getTicket(int idx) {
-    return this.tickets.get(idx).toString();
+  public LottoTicketsDTO exportData() {
+    return new LottoTicketsDTO(this.tickets);
   }
 }

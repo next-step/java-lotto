@@ -1,16 +1,16 @@
 package lotto;
 
 import java.util.List;
+import lotto.views.DataExporter;
 import lotto.views.DataImporter;
 import lotto.views.InputView;
 import lotto.views.ResultView;
-import lotto.views.StatisticsExporter;
-import lotto.views.TicketsExporter;
 
 public class Client {
 
   public static void main(String[] args) {
     TicketPublisher ticketPublisher = new TicketPublisher();
+    DataExporter dataExporter = new DataExporter();
     Budget budget = Budget.of(InputView.askBudget());
 
     // 수동 희망 갯수 입력 받기
@@ -25,11 +25,11 @@ public class Client {
 
     //자동 번호 발급
     tickets.addAll(ticketPublisher.publishAutoTickets(budget));
-    TicketsExporter ticketsExporter = new TicketsExporter(tickets);
+    dataExporter.setLottoTicketsDTO(tickets.exportData());
 
     // 발급된 번호 출력
     // TODO 몇 개 발급되었는지 확인
-    ResultView.printLottoInfo(ticketsExporter);
+    ResultView.printLottoInfo(dataExporter);
 
     // 당첨 번호 입력 받기
     WinningNumber winningNumber =
@@ -43,8 +43,8 @@ public class Client {
 
     //당첨 통계
     ResultView.printStatisticsOpening();
-    StatisticsExporter statisticsExporter = new StatisticsExporter(lottoResult.exportData());
-    ResultView.printRewards(statisticsExporter);
+    dataExporter.setLottoResultDTO(lottoResult.exportData());
+    ResultView.printRewards(dataExporter);
 
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));
