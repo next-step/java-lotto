@@ -43,6 +43,15 @@ public class LottoTest {
                 );
     }
 
+    @Test
+    @DisplayName("매치 카운트 테스트")
+    public void matchCountTest() {
+
+        Lotto lotto = new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1));
+        int matchCount = lotto.matchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(matchCount).isEqualTo(6);
+
+    }
 
 
 }
