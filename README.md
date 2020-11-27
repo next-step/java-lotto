@@ -41,6 +41,8 @@
 * LottoMatch - 로또번호 맞추기
 * LottoStatusEnum - 로또상태 객체
 * LottoShop - 로또 사는 객체
+* LottoTicket - 로또 티켓 객체
+* LottoRank - 로또 순위 구하기
 * LottoProfitAmount - 1등부터 4등까지의 상금의 합 관리객체
 
 

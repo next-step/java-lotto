@@ -1,4 +1,4 @@
-package step2.lotto.automatic.controller;
+package step3.lotto.conatroller;
 
 
 import step2.lotto.automatic.domain.LottoMatch;

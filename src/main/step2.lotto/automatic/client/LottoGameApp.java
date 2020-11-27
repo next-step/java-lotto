@@ -1,4 +1,4 @@
-package step2.lotto.automatic.client;
+package step3.lotto.client;
 
 import step2.lotto.automatic.controller.LottoController;
 
