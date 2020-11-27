@@ -141,7 +141,7 @@
 * [ ] Pascal -> Camel
 * [ ] method 순서
 * [ ] 랜덤 상수
-* [ ] Validation 중복
+* [X] Validation 중복
 * [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
-* [ ] 엣지 케이스
+* [X] 엣지 케이스
 * [ ] LottoNumberBundle iterable 에서 람다 적용 검토

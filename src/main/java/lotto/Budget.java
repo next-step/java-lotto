@@ -2,6 +2,7 @@ package lotto;
 
 import static lotto.LottoGameConstant.PRICE_PER_TICKET;
 
+import lotto.lottoexception.IllegalRequestRangeException;
 import lotto.lottoexception.RemainBudgetException;
 
 public class Budget {
@@ -21,7 +22,6 @@ public class Budget {
     if (amounts < PRICE_PER_TICKET) {
       throw new RemainBudgetException();
     }
-
     return new Budget(amounts);
   }
 
@@ -38,18 +38,22 @@ public class Budget {
   }
 
   public void reduceRemain(int numBuyingTicket) {
-    int remainsAfterBuyingLotto = calculateFutureRemains(numBuyingTicket);
+    int remainsAfterBuyingLotto = calculateAfterBuyingTicketRemains(numBuyingTicket);
     validateRequestByNumTicket(numBuyingTicket);
     this.remainBudget = remainsAfterBuyingLotto;
   }
 
   public void validateRequestByNumTicket(int numBuyingTicket) {
-    if (calculateFutureRemains(numBuyingTicket) < 0) {
+    if (calculateAfterBuyingTicketRemains(numBuyingTicket) < 0) {
       throw new RemainBudgetException();
+    }
+
+    if (numBuyingTicket < 0) {
+      throw new IllegalRequestRangeException();
     }
   }
 
-  private int calculateFutureRemains(int numTickets) {
+  private int calculateAfterBuyingTicketRemains(int numTickets) {
     return this.remainBudget - numTickets * PRICE_PER_TICKET;
   }
 }
