@@ -2,5 +2,5 @@ package lotto.domain;
 
 @FunctionalInterface
 public interface LottoMachine {
-    Lotto createLotto();
+    Lotto createLotto(int capacity);
 }

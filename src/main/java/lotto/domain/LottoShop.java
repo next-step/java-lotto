@@ -15,7 +15,7 @@ public class LottoShop {
     private Lottos createLotto(int quantity, LottoMachine machine) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(machine.createLotto());
+            lottos.add(LottoNumbers.getLottoNumbers(machine));
         }
 
         return new Lottos(lottos);

@@ -7,15 +7,13 @@ import java.util.stream.Collectors;
 
 public class LottoAutoMachine implements LottoMachine {
 
-    private static final int CAPACITY = 6;
-
     @Override
-    public Lotto createLotto() {
-        List<Integer> numbers = LottoNumbers.getLottoNumbers();
+    public Lotto createLotto(int capacity) {
+        List<Integer> numbers = LottoNumbers.findAllLottoNumbers();
         Collections.shuffle(numbers);
 
         return new Lotto(numbers.stream()
-                    .limit(CAPACITY)
+                    .limit(capacity)
                     .collect(Collectors.toCollection(TreeSet::new)));
     }
 }

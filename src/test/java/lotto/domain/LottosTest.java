@@ -56,7 +56,7 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), () -> new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
+        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), (int capacity) -> new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
 
 
         //When
