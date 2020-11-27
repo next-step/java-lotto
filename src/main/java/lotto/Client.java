@@ -31,7 +31,7 @@ public class Client {
   private static void LottoTicketSetUpPhase() {
     // 수동 희망 갯수 입력 받기
     int numManual = InputView.askNumManualLotto();
-    budget.validateRequestByNumTicket(numManual);
+    budget.validateRequest(numManual);
 
     // 수동 번호 입력 받기
     List<String> rawNumbers = InputView.askManualLottoNumbers(numManual);
@@ -39,14 +39,13 @@ public class Client {
         .convertStringToBundle(rawNumbers);
 
     //수동, 자동 로또 발급
-    tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
-    tickets.addAll(ticketPublisher.publishAutoTickets(budget));
+    tickets = ticketPublisher.publishTickets(convertedInputs, budget);
+
+    ResultView.printNumPublishedManualTicket(budget.getNumManualTicket());
+    ResultView.printNumPublishedAutoTicket(budget.getNumAutoTicket());
 
     // 발급 번호 출력
     dataExporter.setLottoTicketsDTO(tickets.exportData());
-    dataExporter.setTicketPublisherDTO(ticketPublisher.exportData());
-
-    ResultView.printPublishStatus(dataExporter);
     ResultView.printLottoInfo(dataExporter);
   }
 
@@ -58,10 +57,10 @@ public class Client {
   }
 
   private static void tearDownPhase() {
-    ResultView.printStatisticsOpening();
     dataExporter.setLottoResultDTO(lottoResult.exportData());
-    ResultView.printRewards(dataExporter);
 
+    ResultView.printStatisticsOpening();
+    ResultView.printRewards(dataExporter);
     ResultView.printIncome(budget.calculateRatio(lottoResult.calculateIncome()));
     ResultView.printDescription(budget.getDescriptiveStatus(lottoResult.calculateIncome()));
   }

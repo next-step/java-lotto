@@ -22,11 +22,13 @@ public class ResultView {
   private ResultView() {
   }
 
-  public static void printPublishStatus(DataExporter exporter) {
+  public static void printNumPublishedManualTicket(int numTicket) {
     System.out.print(
-        PURCHASE_MANUAL_PREFIX + exporter.exportNumManualTicket() + PURCHASE_MANUAL_SUFFIX);
-    System.out.println(
-        PURCHASE_AUTO_PREFIX + exporter.exportNumAutoTicket() + PURCHASE_AUTO_SUFFIX);
+        PURCHASE_MANUAL_PREFIX + numTicket + PURCHASE_MANUAL_SUFFIX);
+  }
+
+  public static void printNumPublishedAutoTicket(int numTicket) {
+    System.out.println(PURCHASE_AUTO_PREFIX + numTicket + PURCHASE_AUTO_SUFFIX);
   }
 
   public static void printLottoInfo(DataExporter exporter) {

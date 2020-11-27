@@ -11,11 +11,10 @@ public class Budget {
   private static final String LOOSING_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
   private final int initialBudget;
-  private int remainBudget;
+  private int afterBuyingManualLotto;
 
   private Budget(int initialBudget) {
     this.initialBudget = initialBudget;
-    this.remainBudget = this.initialBudget;
   }
 
   public static Budget of(int amounts) {
@@ -25,26 +24,14 @@ public class Budget {
     return new Budget(amounts);
   }
 
-  public int getNumPossibleBuyingTicket() {
-    return this.remainBudget / PRICE_PER_TICKET;
+  public void buyManualTickets(int numManualTickets) {
+    // 검증하기
+    validateRequest(numManualTickets);
+    this.afterBuyingManualLotto = calculateAfterRemains(numManualTickets);
   }
 
-  public double calculateRatio(int incomes) {
-    return (double) incomes / this.initialBudget;
-  }
-
-  public String getDescriptiveStatus(int incomes) {
-    return calculateRatio(incomes) >= 1 ? WINNING_MESSAGE : LOOSING_MESSAGE;
-  }
-
-  public void reduceRemain(int numBuyingTicket) {
-    int remainsAfterBuyingLotto = calculateAfterBuyingTicketRemains(numBuyingTicket);
-    validateRequestByNumTicket(numBuyingTicket);
-    this.remainBudget = remainsAfterBuyingLotto;
-  }
-
-  public void validateRequestByNumTicket(int numBuyingTicket) {
-    if (calculateAfterBuyingTicketRemains(numBuyingTicket) < 0) {
+  public void validateRequest(int numBuyingTicket) {
+    if (calculateAfterRemains(numBuyingTicket) < 0) {
       throw new RemainBudgetException();
     }
 
@@ -53,7 +40,27 @@ public class Budget {
     }
   }
 
-  private int calculateAfterBuyingTicketRemains(int numTickets) {
-    return this.remainBudget - numTickets * PRICE_PER_TICKET;
+  private int calculateAfterRemains(int numTickets) {
+    return this.initialBudget - numTickets * PRICE_PER_TICKET;
+  }
+
+  public int getNumPossibleAutoTickets() {
+    return this.afterBuyingManualLotto / PRICE_PER_TICKET;
+  }
+
+  public int getNumManualTicket() {
+    return (this.initialBudget - this.afterBuyingManualLotto) / PRICE_PER_TICKET;
+  }
+
+  public int getNumAutoTicket() {
+    return this.afterBuyingManualLotto / PRICE_PER_TICKET;
+  }
+
+  public double calculateRatio(int incomes) {
+    return (double) incomes / this.initialBudget;
+  }
+
+  public String getDescriptiveStatus(int incomes) {
+    return calculateRatio(incomes) >= 1 ? WINNING_MESSAGE : LOOSING_MESSAGE;
   }
 }

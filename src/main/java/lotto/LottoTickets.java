@@ -28,10 +28,6 @@ public class LottoTickets {
     return lottoResult;
   }
 
-  public void addAll(LottoTickets that) {
-    this.tickets.addAll(that.tickets);
-  }
-
   public LottoTicketsDTO exportData() {
     return new LottoTicketsDTO(this.tickets);
   }
