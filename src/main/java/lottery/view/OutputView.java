@@ -19,23 +19,40 @@ public class OutputView {
     }
 
     private void showLotteryNumbers(Lottery lottery) {
-        out.print("[");
-        out.print(lottery.getNumbers().stream().map(LotteryNumber::toString).collect(Collectors.joining(", ")));
-        out.println("]");
+        out.format(
+                "[%s]",
+                lottery.getNumbers()
+                        .stream()
+                        .map(LotteryNumber::toString)
+                        .collect(Collectors.joining(", "))
+        );
+        out.println();
     }
 
-    public void showWinnings(long spent, Map<Integer, Long> winningResult) {
+    public void showWinnings(long spent, Map<WinningType, Long> winningResult) {
         long earned = 0;
 
         out.println("당첨 통계");
         out.println("---------");
         for(WinningType winningType : WinningType.values()) {
-            long countMatched = winningResult.getOrDefault(winningType.getMatches(), 0L);
+            long countMatched = winningResult.getOrDefault(winningType, 0L);
             earned += winningType.getEarning() * countMatched;
-            out.format("%1$d개 일치 (%2$d)원- %3$d개", winningType.getMatches(), winningType.getEarning(), countMatched);
-            out.println();
+            showProfitFor(winningType, countMatched);
         }
         out.format("총 수익률은 %1$.2f입니다.", (double)earned / spent);
+        out.println();
+    }
+
+    private void showProfitFor(WinningType winningType, long countMatched) {
+        if (winningType == WinningType.LOSE) {
+            return;
+        }
+        out.format("%1$d개 일치%4$s(%2$d)원- %3$d개"
+                , winningType.getMatches()
+                , winningType.getEarning()
+                , countMatched
+                , winningType.hasBonus() ? ", 보너스 볼 일치" : " "
+        );
         out.println();
     }
 }

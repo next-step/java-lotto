@@ -1,5 +1,8 @@
 package lottery.domain;
 
+import lottery.domain.exception.InconsistentLotteryException;
+import lottery.domain.strategy.Picker;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,27 +11,20 @@ public class Lottery {
 
     private final SortedSet<LotteryNumber> numbers;
 
+    public static Lottery from(Picker picker) {
+        return new Lottery(picker.pick(COUNT_LOTTERY_NUMBER));
+    }
+
     private static void sanitizeLottery(Collection<LotteryNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != COUNT_LOTTERY_NUMBER) {
             throw new InconsistentLotteryException();
         }
     }
 
-    public Lottery(Picker picker) {
-        this(picker.pick());
-    }
-
-    private Lottery(Collection<LotteryNumber> numbers) {
+    protected Lottery(Collection<LotteryNumber> numbers) {
         sanitizeLottery(numbers);
         this.numbers = new TreeSet<>(numbers);
         sanitizeLottery(this.numbers);
-    }
-
-    public int countMatched(Lottery another) {
-        return (int) another.numbers
-                .stream()
-                .filter(numbers::contains)
-                .count();
     }
 
     public List<LotteryNumber> getNumbers() {

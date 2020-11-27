@@ -1,4 +1,6 @@
-package lottery.domain;
+package lottery.domain.strategy;
+
+import lottery.domain.LotteryNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,10 +14,9 @@ public class StaticPicker implements Picker {
     }
 
     @Override
-    public List<LotteryNumber> pick() {
+    public List<LotteryNumber> pick(int count) {
         return Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .map(LotteryNumber::new)
+                .map(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }
