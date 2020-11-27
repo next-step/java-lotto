@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,7 @@ class LottoGameResultTest {
 
     @Test
     @DisplayName("1개의 lotto를 구매하고 4등이 일 때")
-    void should_return_() {
+    void should_return_rank() {
         //Given
         LottoGameResult result = lottoGame.getResult();
 

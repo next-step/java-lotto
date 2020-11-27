@@ -1,6 +1,6 @@
 package lotto.view.result;
 
-import lotto.constant.Rank;
+import lotto.domain.Rank;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottoes;
 

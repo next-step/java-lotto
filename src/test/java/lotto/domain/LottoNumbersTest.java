@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
-import lotto.constant.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

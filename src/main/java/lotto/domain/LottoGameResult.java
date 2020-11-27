@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.Rank;
-
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
