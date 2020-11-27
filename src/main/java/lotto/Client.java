@@ -16,18 +16,19 @@ public class Client {
   private static LottoResult lottoResult;
 
   public static void main(String[] args) {
-    initializePhase();
-    makingLottoTicketPhase();
-    finalizingPhase();
+    initializationPhase();
+    LottoTicketSetUpPhase();
+    WinningNumberSetUpPhase();
+    tearDownPhase();
   }
 
-  private static void initializePhase() {
+  private static void initializationPhase() {
     ticketPublisher = new TicketPublisher();
     dataExporter = new DataExporter();
     budget = Budget.of(InputView.askBudget());
   }
 
-  private static void makingLottoTicketPhase() {
+  private static void LottoTicketSetUpPhase() {
     // 수동 희망 갯수 입력 받기
     int numManual = InputView.askNumManualLotto();
     budget.validateRequestByNumTicket(numManual);
@@ -49,13 +50,14 @@ public class Client {
     ResultView.printLottoInfo(dataExporter);
   }
 
-  private static void finalizingPhase() {
-    // 당첨 번호 입력 받기
+  private static void WinningNumberSetUpPhase() {
     winningNumber = WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
     winningNumber.addBonusNumber(LottoNumber.of(InputView.askBonusNumber()));
 
     lottoResult = tickets.settle(winningNumber);
+  }
 
+  private static void tearDownPhase() {
     ResultView.printStatisticsOpening();
     dataExporter.setLottoResultDTO(lottoResult.exportData());
     ResultView.printRewards(dataExporter);
