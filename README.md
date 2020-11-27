@@ -144,4 +144,4 @@
 * [ ] Validation 중복
 * [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
 * [ ] 엣지 케이스
-* LottoNumberBundle iterable 에서 람다 적용 검토
+* [ ] LottoNumberBundle iterable 에서 람다 적용 검토
