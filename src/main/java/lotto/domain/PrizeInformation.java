@@ -5,11 +5,11 @@ import java.util.Map;
 
 public enum PrizeInformation {
 
-    FIRST(new MatchStatus(6, false), 2_000_000_000),
-    SECOND(new MatchStatus(5, true), 30_000_000),
-    THIRD(new MatchStatus(5, false), 1_500_000),
+    FIFTH(new MatchStatus(3, false), 5_000),
     FOURTH(new MatchStatus(4, false), 50_000),
-    FIFTH(new MatchStatus(3, false), 5_000);
+    THIRD(new MatchStatus(5, false), 1_500_000),
+    SECOND(new MatchStatus(5, true), 30_000_000),
+    FIRST(new MatchStatus(6, false), 2_000_000_000);
 
     private static final int BONUS_BALL_MATCH_COUNT = 5;
     private static final Map<MatchStatus, PrizeInformation> matchByPrice = new HashMap<>();
@@ -43,5 +43,9 @@ public enum PrizeInformation {
 
     public int getPrizePrice(){
         return prizePrice;
+    }
+
+    public boolean containsBonusball(){
+        return matchStatus.isBonusball();
     }
 }

@@ -35,4 +35,8 @@ public class MatchStatus {
             this.isBonusball = false;
         }
     }
+
+    public boolean isBonusball() {
+        return isBonusball;
+    }
 }
