@@ -15,6 +15,7 @@ public class Budget {
 
   private Budget(int initialBudget) {
     this.initialBudget = initialBudget;
+    this.remains = this.initialBudget;
   }
 
   public static Budget of(int amounts) {
