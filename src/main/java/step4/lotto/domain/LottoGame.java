@@ -4,6 +4,7 @@ import step4.lotto.domain.numbers.LottoTicket;
 import step4.lotto.util.LottoErrorMessage;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoGame {
@@ -13,35 +14,46 @@ public class LottoGame {
     private LottoShop lottoShop = new LottoShop();
     private Set<LottoTicket> buyLottoHashSet = new HashSet<>();
     private int lottoPurchaseAmount = 0;
-    private int lottoPurchaseCount = 0;
+    private int lottoAutoBuyCount = 0;
+    private int lottoManualBuyCount = 0;
 
-    public LottoGame(int purchaseAmount) {
-        initMatch(purchaseAmount);
+    public LottoGame(int purchaseAmount, int lottoManualBuyCount) {
+        initLotto(purchaseAmount, lottoManualBuyCount);
     }
+
+    private void initLotto(int purchaseAmount, int lottoManualBuyCount) {
+        checkPurchase(purchaseAmount);
+        checkLottoManualBuyCount(lottoManualBuyCount, purchaseAmount);
+
+        this.lottoPurchaseAmount = purchaseAmount;
+        this.lottoAutoBuyCount = (purchaseAmount / LOTTO_PRICE) - lottoManualBuyCount;
+        this.lottoManualBuyCount = lottoManualBuyCount;
+    }
+
 
     public void getLottoResult(String winningNumbers, int bonusNumber) {
         LottoMatch lottoMatch = new LottoMatch(winningNumbers, buyLottoHashSet, bonusNumber);
         lottoMatch.playLottoMatch();
     }
 
-    public void buyLotto() {
-        buyLottoHashSet = lottoShop.buyAutoLotto(lottoPurchaseCount);
+    public void buyManualLotto(List<String> manualLottoList) {
+        if (lottoManualBuyCount > 0) {
+            Set<LottoTicket> buyManualLotto = lottoShop.buyManualLotto(manualLottoList, lottoManualBuyCount);
+            buyLottoHashSet.addAll(buyManualLotto);
+        }
+    }
+
+    public void buyAutoLotto() {
+        if ((lottoPurchaseAmount / 1000) - lottoManualBuyCount > 0) {
+            Set<LottoTicket> buyAutoLotto = lottoShop.buyAutoLotto(lottoAutoBuyCount);
+            buyLottoHashSet.addAll(buyAutoLotto);
+        }
     }
 
     public double getLottoProfitAmount() {
         return LottoProfitAmount.runLottoProfitAmount() / lottoPurchaseAmount;
     }
 
-    private void initMatch(int purchaseAmount) {
-        initLottoPurchase(purchaseAmount);
-    }
-
-    private void initLottoPurchase(int purchaseAmount) {
-        checkPurchase(purchaseAmount);
-
-        this.lottoPurchaseAmount = purchaseAmount;
-        this.lottoPurchaseCount = purchaseAmount / LOTTO_PRICE;
-    }
 
     private void checkPurchase(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
@@ -49,11 +61,21 @@ public class LottoGame {
         }
     }
 
+    private void checkLottoManualBuyCount(int lottoManualBuyCount, int purchaseAmount) {
+        if ((lottoManualBuyCount * LOTTO_PRICE) > purchaseAmount) {
+            throw new RuntimeException(LottoErrorMessage.getLottoManualBuyCountCheck());
+        }
+    }
+
     public Set<LottoTicket> getBuyLottoHashSet() {
         return buyLottoHashSet;
     }
 
-    public int getLottoPurchaseCount() {
-        return lottoPurchaseCount;
+    public int getLottoAutoBuyCount() {
+        return lottoAutoBuyCount;
+    }
+
+    public int getLottoManualBuyCount() {
+        return lottoManualBuyCount;
     }
 }
