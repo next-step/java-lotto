@@ -59,4 +59,11 @@ public class LottoMoneyTest {
         assertThat(countOfLotto).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("수익률 확인")
+    public void calculate_earning_rate() {
+        LottoMoney money = new LottoMoney(2000);
+        float earningRate = money.calculateEarningRate(2000);
+        assertThat(earningRate).isEqualTo(1.0f);
+    }
 }
