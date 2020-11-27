@@ -22,6 +22,13 @@ public class ResultView {
   private ResultView() {
   }
 
+  public static void printPublishStatus(DataExporter exporter) {
+    System.out.print(
+        PURCHASE_MANUAL_PREFIX + exporter.exportNumManualTicket() + PURCHASE_MANUAL_SUFFIX);
+    System.out.println(
+        PURCHASE_AUTO_PREFIX + exporter.exportNumAutoTicket() + PURCHASE_AUTO_SUFFIX);
+  }
+
   public static void printLottoInfo(DataExporter exporter) {
     List<String> stringTickets = exporter.exportTickets();
     for (String ticket : stringTickets) {
@@ -59,10 +66,5 @@ public class ResultView {
 
   public static void printDescription(String message) {
     System.out.println(message);
-  }
-
-  public static void printPublishStatus(int manual, int auto) {
-    System.out.print(PURCHASE_MANUAL_PREFIX + manual + PURCHASE_MANUAL_SUFFIX);
-    System.out.println(PURCHASE_AUTO_PREFIX + auto + PURCHASE_AUTO_SUFFIX);
   }
 }

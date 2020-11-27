@@ -37,16 +37,16 @@ public class Client {
     List<String> rawNumbers = InputView.askManualLottoNumbers(numManual);
     List<LottoNumberBundle> convertedInputs = DataImporter
         .convertStringToBundle(rawNumbers);
-    tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
 
-    //자동 번호 발급
+    //수동, 자동 로또 발급
+    tickets = ticketPublisher.publishManualTickets(convertedInputs, budget);
     tickets.addAll(ticketPublisher.publishAutoTickets(budget));
 
     // 발급 번호 출력
     dataExporter.setLottoTicketsDTO(tickets.exportData());
     dataExporter.setTicketPublisherDTO(ticketPublisher.exportData());
-    ResultView.printPublishStatus(dataExporter.exportNumManualTicket(),
-        dataExporter.exportNumAutoTicket());
+
+    ResultView.printPublishStatus(dataExporter);
     ResultView.printLottoInfo(dataExporter);
   }
 
