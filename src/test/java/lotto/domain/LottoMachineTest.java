@@ -14,13 +14,12 @@ public class LottoMachineTest {
     @Test
     public void lottoRandomCreateNumberTest() {
         //Given
-        LottoMachine machine = (int capacity) -> new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
+        LottoMachine machine = (int capacity) -> new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))));
 
         //When
         Lotto lotto = machine.createLotto(6);
 
         //Then
-        assertThat(lotto.getLottoPickNumber()).hasSize(6);
-        assertThat(lotto.getLottoPickNumber()).contains(1, 3, 5, 6, 7, 8);
+        assertThat(lotto.sizeLottoNumber()).isEqualTo(6);
     }
 }

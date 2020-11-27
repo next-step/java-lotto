@@ -6,12 +6,14 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER= 45;
+
     private static final List<Integer> numbers = new ArrayList<>();
-    private static final int MAX_LOTTO_NUMBER_RANGE = 45;
     private static final int CAPACITY = 6;
 
     static {
-        IntStream.rangeClosed(1, MAX_LOTTO_NUMBER_RANGE).forEach(numbers::add);
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).forEach(numbers::add);
     }
 
     private LottoNumbers() {}

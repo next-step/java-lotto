@@ -4,14 +4,14 @@ import java.util.Set;
 
 public class Lotto {
 
-    private final Set<Integer> lottoPickNumber;
+    private LottoNumber lottoNumbers;
 
-    public Lotto(Set<Integer> lottoPickNumbers) {
-        this.lottoPickNumber = lottoPickNumbers;
+    public Lotto(LottoNumber lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoPickNumber.stream()
+        int prizeCount = (int) lottoNumbers.getLottoNumber().stream()
                 .filter(prizeLotto::existByIndexNumber)
                 .count();
         boolean isBonusball = matchBonusball(prizeLotto);
@@ -19,11 +19,14 @@ public class Lotto {
     }
 
     private boolean matchBonusball(PrizeLotto prizeLotto) {
-        return lottoPickNumber.stream().anyMatch(prizeLotto::matchBonusBall);
+        return lottoNumbers.getLottoNumber().stream().anyMatch(prizeLotto::matchBonusBall);
     }
 
-    public Set<Integer> getLottoPickNumber() {
-        return lottoPickNumber;
+    public Set<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumber();
     }
 
+    public int sizeLottoNumber() {
+        return lottoNumbers.getLottoNumber().size();
+    }
 }

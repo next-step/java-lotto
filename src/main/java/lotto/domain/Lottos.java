@@ -24,7 +24,7 @@ public class Lottos {
     }
 
     public Set<Integer> getLotto(int index) {
-        return lottos.get(index).getLottoPickNumber();
+        return lottos.get(index).getLottoNumbers();
     }
 
 }

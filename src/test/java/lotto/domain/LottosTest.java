@@ -20,7 +20,7 @@ public class LottosTest {
         List<Lotto> lottoNumbers = new ArrayList<>();
 
         //When
-        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)))));
+        IntStream.range(0, size).forEach(i -> lottoNumbers.add(new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))))));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //Then
@@ -33,9 +33,9 @@ public class LottosTest {
 
         //Given
         List<Lotto> expected = new ArrayList<>();
-        expected.add(0, new Lotto(new TreeSet<>(Arrays.asList(5, 6, 7, 8, 9, 10))));
-        expected.add(1, new Lotto(new TreeSet<>(Arrays.asList(2, 3, 5, 7, 9, 11))));
-        expected.add(2, new Lotto(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
+        expected.add(0, new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(5, 6, 7, 8, 9, 10)))));
+        expected.add(1, new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(2, 3, 5, 7, 9, 11)))));
+        expected.add(2, new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(10, 15, 16, 17, 18, 20)))));
 
 
         Lottos lottos = new Lottos(expected);
@@ -56,7 +56,7 @@ public class LottosTest {
 
         //Given
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), (int capacity) -> new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
+        Lottos lottos = lottoShop.purchase(LottoPrice.from(10000), (int capacity) -> new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 9)))));
 
 
         //When

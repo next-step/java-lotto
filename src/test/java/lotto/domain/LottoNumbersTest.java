@@ -12,6 +12,6 @@ public class LottoNumbersTest {
         Lotto lotto = LottoNumbers.getLottoNumbers(new LottoAutoMachine());
 
         //Then
-        assertThat(lotto.getLottoPickNumber()).hasSize(6);
+        assertThat(lotto.sizeLottoNumber()).isEqualTo(6);
     }
 }
