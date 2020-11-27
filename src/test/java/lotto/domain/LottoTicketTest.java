@@ -6,19 +6,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.LottoGameConfig.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoGameConfig.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketTest {
 
-    private List<Integer> lottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private LottoTicket lottoTicket;
 
@@ -26,11 +25,16 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setUp(){
-        int[] numbers = {1,2,3,4,5,6};
-        this.lottoTicket = new LottoTicket(IntStream.of(numbers).boxed().collect(Collectors.toList()));
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1).forEach(number -> lottoNumbers.add(new LottoNumber(number)));
 
         Collections.shuffle(lottoNumbers);
         this.lottoNumbers  = lottoNumbers.stream().limit(6).collect(Collectors.toList());
+
+        int[] numbers = {1,2,3,4,5,6};
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        IntStream.of(numbers).forEach(num -> lottoNumbers.add(new LottoNumber(num)));
+        this.lottoTicket = new LottoTicket(lottoNumbers);
     }
 
     @DisplayName("LottoTicket 랜덤 번호 생성 테스트")
@@ -49,18 +53,19 @@ public class LottoTicketTest {
         //when
         int min = lottoTicket.getSortedLottoNumbers()
                 .stream()
-                .mapToInt(v -> v)
+                .mapToInt(v -> v.getNumber())
                 .min().orElseThrow(NoSuchElementException::new);
 
         // then
-        assertThat(min).isEqualTo(lottoTicket.getSortedLottoNumbers().get(0));
+        assertThat(new LottoNumber(min)).isEqualTo(lottoTicket.getSortedLottoNumbers().get(0));
     }
 
     @DisplayName("일치하는 당첨번호 갯수 계산 테스트")
     @Test
     void countWinningNumbersTest(){
         int[] lastWinningNumbers = {1,2,3,7,8,9};
-        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
+        List<LottoNumber> lastWinningNumberList = new ArrayList<>();
+        IntStream.of(lastWinningNumbers).forEach(number -> lastWinningNumberList.add(new LottoNumber(number)));
 
         PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
 
@@ -72,7 +77,8 @@ public class LottoTicketTest {
     @Test
     void countWinningNumbersUnderMinToPrizeTest(){
         int[] lastWinningNumbers = {1,2,41,31,21,15};
-        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
+        List<LottoNumber> lastWinningNumberList = new ArrayList<>();
+        IntStream.of(lastWinningNumbers).forEach(number -> lastWinningNumberList.add(new LottoNumber(number)));
 
         PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
 
@@ -85,7 +91,8 @@ public class LottoTicketTest {
     void countWinningNumbersAndBonusTest(){
         int[] lastWinningNumbers = {1,2,3,4,5,11};
         int bonusNumber = 6;
-        List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
+        List<LottoNumber> lastWinningNumberList = new ArrayList<>();
+        IntStream.of(lastWinningNumbers).forEach(number -> lastWinningNumberList.add(new LottoNumber(number)));
 
         PrizeUnit prizeUnit = this.lottoTicket.countWinningNumbers(lastWinningNumberList, bonusNumber);
 
@@ -99,8 +106,8 @@ public class LottoTicketTest {
     void illegalLastWinningNumberExceptionTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
 
-            List<Integer> lastWinningNumberList = Arrays.stream(input.split(","))
-                    .map(number -> Integer.parseInt(number)).collect(Collectors.toList());
+            List<LottoNumber> lastWinningNumberList = Arrays.stream(input.split(","))
+                    .map(number -> new LottoNumber(Integer.parseInt(number))).collect(Collectors.toList());
 
             this.lottoTicket.countWinningNumbers(lastWinningNumberList, BONUS_NUMBER);
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
@@ -113,7 +120,8 @@ public class LottoTicketTest {
 
             int[] lastWinningNumbers = {1,2,3,4,5,11};
             int bonusNumber = 46;
-            List<Integer> lastWinningNumberList = IntStream.of(lastWinningNumbers).boxed().collect(Collectors.toList());
+            List<LottoNumber> lastWinningNumberList = new ArrayList<>();
+            IntStream.of(lastWinningNumbers).forEach(number -> lastWinningNumberList.add(new LottoNumber(number)));
 
             this.lottoTicket.countWinningNumbers(lastWinningNumberList, bonusNumber);
 

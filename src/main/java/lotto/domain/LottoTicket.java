@@ -11,27 +11,26 @@ public class LottoTicket {
 
     private static final int MIN_COUNT_TO_PRIZE = 3;
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers){
+    public LottoTicket(List<LottoNumber> lottoNumbers){
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getSortedLottoNumbers(){
+    public List<LottoNumber> getSortedLottoNumbers(){
         Collections.sort(this.lottoNumbers);
         return this.lottoNumbers;
     }
 
-    public PrizeUnit countWinningNumbers(List<Integer> lastWinningNumbers, int bonusNumber) {
+    public PrizeUnit countWinningNumbers(List<LottoNumber> lastWinningNumbers, int bonusNumber) {
 
         validateLastWinningNumbers(lastWinningNumbers);
-
         validateBonusNumber(bonusNumber);
 
-        List<Integer> winningsNumber = lottoNumbers
-                .stream().filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
+        List<LottoNumber> winningsNumber = lottoNumbers.stream()
+                .filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
 
-        boolean isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
+        boolean isMatchBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
 
         int winningNumberSize = winningsNumber.size();
 
@@ -52,15 +51,16 @@ public class LottoTicket {
         }
     }
 
-    private void validateLastWinningNumbers(List<Integer> lastWinningNumbers) {
+    private void validateLastWinningNumbers(List<LottoNumber> lastWinningNumbers) {
 
         if (lastWinningNumbers.size() != LOTTO_TICKET_NUMBER_COUNT) {
             throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
         }
 
-        if(lastWinningNumbers.stream().anyMatch(number -> number > MAX_LOTTO_NUMBER)){
+        if(lastWinningNumbers.stream().anyMatch(number -> number.getNumber() > MAX_LOTTO_NUMBER)){
             throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
         }
     }
+
 
 }

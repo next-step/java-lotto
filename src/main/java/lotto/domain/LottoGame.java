@@ -6,9 +6,9 @@ public class LottoGame {
 
     private static int gameMoney;
 
-    private static List<String> manualTickets;
+    private static List<List<LottoNumber>> manualTickets;
 
-    public LottoGame(int gameMoney, List<String> manualTickets){
+    public LottoGame(int gameMoney, List<List<LottoNumber>> manualTickets){
         this.gameMoney = gameMoney;
         this.manualTickets = manualTickets;
     }

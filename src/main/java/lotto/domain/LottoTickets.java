@@ -2,62 +2,69 @@ package lotto.domain;
 
 import static lotto.domain.LottoGameConfig.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
 
-    private static List<Integer> lottoNumbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1).boxed().collect(Collectors.toList());
+    private static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private List<LottoTicket> lottoTickets;
 
     private int gameMoney;
 
-    private List<String> manualTicket;
+    private List<List<LottoNumber>> manualTickets;
 
-    public LottoTickets(int gameMoney, List<String> manualTicket) {
+    public LottoTickets(int gameMoney, List<List<LottoNumber>> manualTickets) {
+
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1).forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+
         this.gameMoney = (gameMoney/LOTTO_GAME_MONEY_UNIT) * LOTTO_GAME_MONEY_UNIT;
 
-        int gameTryCount = (gameMoney/LOTTO_GAME_MONEY_UNIT) - manualTicket.size();
+        int gameTryCount = (gameMoney/LOTTO_GAME_MONEY_UNIT) - manualTickets.size();
 
         this.lottoTickets = IntStream.range(0, gameTryCount)
                 .mapToObj(ticket -> new LottoTicket(makeLottoNumber()))
                 .collect(Collectors.toList());
 
-        this.manualTicket = manualTicket;
+        this.manualTickets = manualTickets;
 
         issueManualTicket();
     }
 
     private void issueManualTicket() {
-        manualTicket.stream()
-                .forEach(numbers -> lottoTickets.add(new LottoTicket(parseManualTicket(numbers))));
+        manualTickets.stream()
+                .forEach(lottoNumbers -> lottoTickets.add(new LottoTicket(validateManualTicket(lottoNumbers))));
     }
 
-    private List<Integer> parseManualTicket(String manualTicketValue){
-        return Arrays.stream(manualTicketValue.split(",")).sorted()
-                .map(i -> Integer.parseInt(i)).collect(Collectors.toList());
+    private List<LottoNumber> validateManualTicket(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_TICKET_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_MANUAL_TICKET_NUMBER.getErrorMessage());
+        }
+
+        if(lottoNumbers.stream().anyMatch(number -> number.getNumber() > MAX_LOTTO_NUMBER)){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_MANUAL_TICKET_NUMBER.getErrorMessage());
+        }
+
+        return lottoNumbers;
     }
 
     public int getGameMoney() {
         return this.gameMoney;
     }
 
-    public List<String> getManualTicket(){
-        return this.manualTicket;
+    public List<List<LottoNumber>> getManualTicket(){
+        return this.manualTickets;
     }
 
     public int getTicketCount() {
         return lottoTickets.size();
     }
 
-    private List<Integer> makeLottoNumber() {
+    private List<LottoNumber> makeLottoNumber() {
         Collections.shuffle(lottoNumbers);
-        List<Integer> randomLottoNumber  = lottoNumbers.stream().limit(LOTTO_TICKET_NUMBER_COUNT).collect(Collectors.toList());
+        List<LottoNumber> randomLottoNumber  = lottoNumbers.stream().limit(LOTTO_TICKET_NUMBER_COUNT).collect(Collectors.toList());
         return randomLottoNumber;
     }
 
@@ -65,7 +72,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<PrizeUnit> scoreWinningResult(List<Integer> lastWinningNumbers, int bonusNumber) {
+    public List<PrizeUnit> scoreWinningResult(List<LottoNumber> lastWinningNumbers, int bonusNumber) {
         List<PrizeUnit> winResults = new ArrayList<>();
         lottoTickets.stream()
                 .forEach(lottoTicket -> winResults.add(lottoTicket.countWinningNumbers(lastWinningNumbers, bonusNumber)));

@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoGameResults;
+import lotto.domain.LottoNumber;
 import lotto.domain.PrizeUnit;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -18,9 +20,14 @@ public class ResultView {
         System.out.println("\n수동으로 "+manualTicketCount+"장, 자동으로 "+(totalTicketCount-manualTicketCount)+"개를 구매했습니다.");
 
         lottoGameResults.getLottoIssueResult().getLottoTickets()
-                .stream().forEach(lottoTicket -> System.out.println(Arrays.toString(lottoTicket.getSortedLottoNumbers().toArray())));
+                .stream().forEach(lottoTicket -> System.out.println(Arrays.toString(makeArray(lottoTicket.getSortedLottoNumbers()))));
 
     }
+
+    private static int[] makeArray(List<LottoNumber> sortedLottoNumbers) {
+        return sortedLottoNumbers.stream().mapToInt(LottoNumber::getNumber).toArray();
+    }
+
 
     public static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
         System.out.println(WINNING_RESULT_MESSAGE);

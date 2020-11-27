@@ -2,10 +2,12 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
+import lotto.domain.LottoNumber;
 import lotto.domain.PrizeUnit;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public class LottoGameController {
         ResultView.getLottoTickets(lottoGameResults);
     }
 
-    public static LottoGameResults execute(int gameMoney, List<String> manualTicket) {
+    public static LottoGameResults execute(int gameMoney, List<List<LottoNumber>> manualTicket) {
         LottoGame lottoGame = new LottoGame(gameMoney, manualTicket);
         return lottoGame.issueLottoTicket();
     }
@@ -50,7 +52,7 @@ public class LottoGameController {
         return InputView.validateBonusNumber(bonusNumber);
     }
 
-    public static List<Integer> splitLastWinningNumbers(String lastWinningNumbers) {
+    public static List<LottoNumber> splitLastWinningNumbers(String lastWinningNumbers) {
         return InputView.splitLastWinningNumbers(lastWinningNumbers);
     }
 
@@ -62,11 +64,14 @@ public class LottoGameController {
         ResultView.getPrizeResult(resultsMap);
     }
 
-    public static int inputManualTicketCount() {
-        return InputView.getManualLottoTicketCount();
+    public static int inputManualTicketCount(int gameMoney) {
+        return InputView.getManualLottoTicketCount(gameMoney);
     }
 
-    public static List<String> inputManualTicket(int manualTicketCount) {
+    public static List<List<LottoNumber>> inputManualTicket(int manualTicketCount) {
+        if(manualTicketCount == 0){
+            return new ArrayList<>();
+        }
         return InputView.getManualLottoNumbers(manualTicketCount);
     }
 

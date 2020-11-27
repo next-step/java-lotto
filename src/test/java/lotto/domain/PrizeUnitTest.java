@@ -31,7 +31,8 @@ public class PrizeUnitTest {
     @DisplayName("2등 당첨 테스트(보너스 번호)")
     @Test
     void calculationBonusWinTest(){
-        Long prize = PrizeUnit.SECOND_GRADE.calculate(1);
+        PrizeUnit prizeUnit = PrizeUnit.findPrizeFieldByUnitCount(PrizeUnit.SECOND_GRADE.prizeUnitCount, true);
+        Long prize = prizeUnit.calculate(1);
         assertEquals(PrizeUnit.SECOND_GRADE.prizeUnitMoney, prize);
     }
 }
