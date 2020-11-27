@@ -18,7 +18,7 @@ public class StatRecord {
         this.fifth = 0;
     }
 
-    public void setRank(Win rank) {
+    public void setRank(LottoGame_ rank) {
         if (rank.getTitle() == 1) first++;
         else if (rank.getTitle() == 3) third++;
         else if (rank.getTitle() == 4) fourth++;

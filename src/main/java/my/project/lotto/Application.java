@@ -1,13 +1,9 @@
 package my.project.lotto;
 
-import my.project.lotto.controller.StatController;
-import my.project.lotto.domain.Chance;
-import my.project.lotto.domain.Lotto;
-import my.project.lotto.domain.Lottos;
+import my.project.lotto.domain.*;
 import my.project.lotto.view.InputView;
 import my.project.lotto.view.ResultView;
-
-import java.util.List;
+import my.project.utils.StringUtils;
 
 /**
  * Created : 2020-11-23 오전 10:52
@@ -15,14 +11,13 @@ import java.util.List;
  */
 public class Application {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
+        Money money = new Money(InputView.getMoney());
+        Lottos lottos = LottoGame.lotto(money);
+        ResultView.printLottos(lottos);
 
-        Chance chance = new Chance(inputView.getMoney());
-        List<Lotto> records = Lottos.lotto(chance);
-        resultView.printGame(records);
-
-        StatController statController = new StatController(records, inputView.getWinningNumber());
-        resultView.printStat(statController.stat());
+        Lotto lastWinningLotto = new Lotto(StringUtils.parseToIntList(InputView.getWinningNumber()));
+        lottos.match(lastWinningLotto);
+//        StatController statController = new StatController(records, inputView.getWinningNumber());
+//        resultView.printStat(statController.stat());
     }
 }

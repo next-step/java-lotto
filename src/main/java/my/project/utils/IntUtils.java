@@ -10,14 +10,7 @@ public class IntUtils {
         }
     }
 
-    public static void isMoneyQualified(int money) {
-        if (money < 1000) {
-            throw new IllegalArgumentException(Comments.MIN_MONEY);
-        }
-        if (money > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(ExceptionMessages.INPUT_IS_OVER);
-        }
-    }
+
 
     private IntUtils() {
     }

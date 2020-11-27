@@ -1,10 +1,5 @@
 package my.project.lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Developer : Seo
  */
 class WinTest {
-    private Lotto record;
+    private Lotto_ record;
     private List<Integer> winningNumbers;
 //
 //    @BeforeEach

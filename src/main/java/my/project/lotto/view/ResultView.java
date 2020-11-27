@@ -2,28 +2,27 @@ package my.project.lotto.view;
 
 
 import my.project.constants.Comments;
-import my.project.lotto.domain.Lotto;
+import my.project.lotto.domain.Lottos;
 import my.project.lotto.domain.StatRecord;
-
-import java.util.List;
 
 /**
  * Created : 2020-11-02 오전 8:25.
  * Developer : Seo.
  */
 public class ResultView {
+    public static final String PURCHASED = "개를 구매했습니다.";
 
-    public void printGame(List<Lotto> records) {
-        bought(records);
-        grid(records);
+    public static void printLottos(Lottos lottos) {
+        bought(lottos);
+        grid(lottos);
     }
 
-    private void bought(List<Lotto> records) {
-        System.out.println(records.size() + Comments.YOU_HAVE_GOT);
+    private static void bought(Lottos lottos) {
+        System.out.println(lottos.size() + PURCHASED);
     }
 
-    private void grid(List<Lotto> records) {
-        records.forEach(t -> System.out.println(t.toString()));
+    private static void grid(Lottos lottos) {
+        lottos.grid();
     }
 
     public void printStat(StatRecord pf) {

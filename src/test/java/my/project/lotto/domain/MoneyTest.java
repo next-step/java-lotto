@@ -7,31 +7,31 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ChanceTest {
+class MoneyTest {
 
     @DisplayName("생성")
     @ParameterizedTest
     @ValueSource(ints = {1000})
-    void testConstruct(int param) {
-        assertThat(new Chance(param))
+    void createMoney(int money) {
+        assertThat(new Money(money))
                 .isNotNull()
-                .isInstanceOf(Chance.class);
+                .isInstanceOf(Money.class);
     }
 
     @DisplayName("금액 미만 시 생성 실패")
     @ParameterizedTest
     @ValueSource(ints = {999})
-    void testFailConstruct(int param) {
-        assertThatThrownBy(() -> new Chance(param))
-                .hasMessage("구입금액은 1000원 이상입니다.")
+    void givenInsufficientValue_thenThrowException(int money) {
+        assertThatThrownBy(() -> new Money(money))
+                .hasMessage("구입금액은 " + Money.PRICE + "원 이상입니다.")
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("티켓 구하기")
+    @DisplayName("횟수 구하기")
     @ParameterizedTest
     @ValueSource(ints = {1000})
-    void testGetTicket(int param) {
-        assertThat(new Chance(param).getChances()).isEqualTo(1);
+    void givenMoney_thenGetChances(int money) {
+        assertThat(new Money(money).getChances()).isEqualTo(1);
     }
 
 }

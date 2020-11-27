@@ -1,6 +1,5 @@
 package my.project.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,23 +7,30 @@ import java.util.List;
  * Developer : Seo
  */
 public class Lottos {
-    public static final int FIRST_PRICE = 2_000_000_000;
-    public static final int THIRD_PRICE = 1_500_000;
-    public static final int FOURTH_PRICE = 50_000;
-    public static final int FIFTH_PRICE = 5_000;
+    private List<Lotto> lottos;
 
-    private Lottos() {
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public static List<Lotto> lotto(Chance chance) {
-        if (chance == null) {
-            throw new IllegalArgumentException("참여할 기회가 없습니다.");
-        }
-
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < chance.getChances(); i++) {
-            lottoList.add(new Lotto());
-        }
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
+
+    public int size() {
+        return this.lottos.size();
+    }
+
+    public void grid() {
+         lottos.forEach(t -> System.out.println(t.toString()));
+    }
+
+    public int match(Lotto lastWinningLotto) {
+        int count = 0;
+        for (Lotto lotto : lottos) {
+            count += lotto.match(lastWinningLotto);
+        }
+        return count;
+    }
+
 }
