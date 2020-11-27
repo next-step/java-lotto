@@ -6,8 +6,8 @@ public class Lotto {
 
     private LottoNumber lottoNumbers;
 
-    public Lotto(LottoNumber lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(Set<Integer> lottoNumber) {
+       this.lottoNumbers = LottoNumber.from(lottoNumber);
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {

@@ -10,12 +10,10 @@ public class LottoAutoMachine implements LottoMachine {
         List<Integer> numbers = LottoNumbers.findAllLottoNumbers();
         Collections.shuffle(numbers);
 
-        return new Lotto(createLottoNumber(numbers, capacity));
+        return new Lotto(numbers.stream()
+                .limit(capacity)
+                .collect(Collectors.toCollection(TreeSet::new)));
     }
 
-    private LottoNumber createLottoNumber(List<Integer> numbers, int capacity) {
-        return LottoNumber.from(numbers.stream()
-                        .limit(capacity)
-                        .collect(Collectors.toCollection(TreeSet::new)));
-    }
+
 }

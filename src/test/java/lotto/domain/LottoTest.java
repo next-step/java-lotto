@@ -20,7 +20,7 @@ public class LottoTest {
     public void createLottoInstanceTest() {
 
         //Given & When
-        Lotto lotto = new Lotto(LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8))));
+        Lotto lotto = new Lotto(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
 
         //Then
         assertThat(lotto.sizeLottoNumber()).isEqualTo(6);
@@ -31,7 +31,7 @@ public class LottoTest {
     @MethodSource("createLottoNumber")
     public void matchPrizeNumberTest(TreeSet<Integer> expected) {
         //Given
-        Lotto lotto = new Lotto(LottoNumber.from(expected));
+        Lotto lotto = new Lotto(expected);
 
         //When
         PrizeInformation prizeInformation = lotto.matchPrizeNumber(PrizeLotto.of(expected, 5 ));
