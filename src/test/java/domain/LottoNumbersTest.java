@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumbersTest {
+    private final String NUMBER_DELIMITER = ", ";
 
     LottoNumbers lottoNumbers;
 
@@ -19,7 +20,7 @@ class LottoNumbersTest {
         String winningNumbers = "1, 2, 3, 4, 5, 6";
 
         lottoNumbers = new LottoNumbers();
-        LottoNumbers winningLotto = lottoNumbers.createWinningNumbers(winningNumbers);
+        LottoNumbers winningLotto = lottoNumbers.createLottoNumbers(winningNumbers.split(NUMBER_DELIMITER));
 
         assertThat(winningLotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }

@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
@@ -31,10 +29,7 @@ public class Lotto {
             return checkSecondPrize(bonusNumber);
         }
 
-        return Arrays.stream(LottoPrize.values())
-                .filter(lottoPrize -> lottoPrize.getMatchNumber() == matchNumber)
-                .collect(Collectors.toList())
-                .get(0);
+        return LottoPrize.matchPrize(matchNumber);
     }
 
     private LottoPrize checkSecondPrize(int bonusNumber) {

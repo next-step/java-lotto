@@ -1,20 +1,16 @@
 package domain;
 
-import util.LottoValidator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final String NUMBER_DELIMITER = ", ";
-
     private List<Integer> numbers;
 
     public LottoNumbers() {}
 
     private LottoNumbers(List<Integer> numbers) {
-        LottoValidator.checkDuplicateNumber(numbers);
+        checkDuplicateNumber(numbers);
         this.numbers = numbers;
     }
 
@@ -22,13 +18,23 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    public LottoNumbers createWinningNumbers(String winningNumbers) {
+    public LottoNumbers createLottoNumbers(String[] stringNumbers) {
         return new LottoNumbers().from(
-                Arrays.stream(winningNumbers.split(NUMBER_DELIMITER))
+                Arrays.stream(stringNumbers)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );
 
+    }
+
+    public void checkDuplicateNumber(List<Integer> numbers) {
+        long uniqueLength = numbers.stream()
+                .distinct()
+                .count();
+
+        if(uniqueLength != numbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자를 가질 수 없습니다.");
+        }
     }
 
     public List<Integer> getNumbers() {

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
+    private final String NUMBER_DELIMITER = ", ";
 
     Lotto lotto;
 
@@ -37,10 +38,10 @@ class LottoTest {
     void matchLottoNumbersDynamic(String winning, String test, int match) {
         int bonusNumber = 7;
         LottoNumbers winningNumbers = new LottoNumbers()
-                .createWinningNumbers(winning);
+                .createLottoNumbers(winning.split(NUMBER_DELIMITER));
 
         LottoNumbers testNumbers = new LottoNumbers()
-                .createWinningNumbers(test);
+                .createLottoNumbers(test.split(NUMBER_DELIMITER));
         Lotto testLotto = new Lotto(testNumbers);
         if(match >= 3) {
             assertThat(testLotto.matchLottoNumbers(winningNumbers, bonusNumber)

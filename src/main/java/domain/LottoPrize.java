@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum LottoPrize {
     FIFTH(5, 3, 5_000),
@@ -32,6 +33,13 @@ public enum LottoPrize {
 
     public static List<Integer> valueOf(int prize) {
         return (List<Integer>) map.get(prize);
+    }
+
+    public static LottoPrize matchPrize(int matchNumber) {
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.getMatchNumber() == matchNumber)
+                .collect(Collectors.toList())
+                .get(0);
     }
 
     public int getMatchNumber() {

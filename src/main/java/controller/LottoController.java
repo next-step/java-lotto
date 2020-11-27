@@ -1,14 +1,10 @@
 package controller;
 
 import domain.*;
-import util.LottoValidator;
 import view.InputView;
 import view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,6 +13,7 @@ import static domain.LottoStandard.MATCH_ENDING;
 
 public class LottoController {
     private final int ZERO = 0;
+    private final int ONE = 1;
     private final int LOTTO_UNIT_PRICE = 1000;
     private final int LOTTO_START_NUMBER = 1;
     private final int LOTTO_END_NUMBER = 45;
@@ -40,24 +37,34 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         int priceTotal = inputView.inputPrice();
-        LottoValidator.checkUnitPrice(priceTotal, LOTTO_UNIT_PRICE);
+        checkUnitPrice(priceTotal, LOTTO_UNIT_PRICE);
         lottoInfo = LottoInfo.from(priceTotal);
 
         int lottoQuantity = getLottoQuantity();
-        resultView.displayLottoQuantity(lottoQuantity);
+
+        int manualQuantity = inputView.inputManualLottoQuantity();
+        int autoQuantity = calculateAutoQuantity(lottoQuantity, manualQuantity);
+
+        inputView.inputManualMention();
+        checkManualQuantity(lottoQuantity, manualQuantity);
+
+        Lottos manualLottos = inputManualNumbers(inputView, manualQuantity);
+        resultView.displayLottoQuantity(manualQuantity, autoQuantity);
 
         List<Integer> basicLottoNumbers = createBasicLottoNumbers();
-        Lottos lottos = initLottos(lottoQuantity, basicLottoNumbers);
-        resultView.displayLottos(lottos);
+        Lottos autoLottos = initLottos(autoQuantity, basicLottoNumbers);
+        resultView.displayLottos(autoLottos);
 
-        String inputWinningNumber = inputView.inputLastWinningNumber();
-        LottoValidator.checkWinningNumberValidate(inputWinningNumber);
+        Lottos lottos = Lottos.combineLottos(manualLottos, autoLottos);
+
+        String[] inputWinningNumber = inputView.inputLastWinningNumber();
+        checkLottoNumberValidate(inputWinningNumber);
         LottoNumbers winningNumbers = new LottoNumbers()
-                .createWinningNumbers(inputWinningNumber);
+                .createLottoNumbers(inputWinningNumber);
 
         int bonusNumber = inputView.inputBonusNumber();
-        LottoValidator.checkLottoRange(bonusNumber);
-        LottoValidator.checkBonusDuplicate(inputWinningNumber, bonusNumber);
+        checkLottoRange(bonusNumber);
+        checkBonusDuplicate(inputWinningNumber, bonusNumber);
 
         resultView.displayResultMention();
 
@@ -69,10 +76,25 @@ public class LottoController {
         resultView.displayProfit(profit);
     }
 
+    public Lottos inputManualNumbers(InputView inputView, int manualQuantity) {
+        List<Lotto> lottos = IntStream.range(ZERO, manualQuantity)
+                .mapToObj(i -> {
+                    String[] manualNumber = inputView.inputManualNumber();
+                    checkLottoNumberValidate(manualNumber);
+                    return new Lotto(new LottoNumbers().createLottoNumbers(manualNumber));
+                })
+                .collect(Collectors.toList());
+        return Lottos.from(lottos);
+    }
+
+    public int calculateAutoQuantity(int lottoQuantity, int manualQuantity) {
+        return lottoQuantity - manualQuantity;
+    }
+
     private void displayResult(ResultView resultView, Map<Integer, Integer> lottoStatistics) {
         int matchBeginning = MATCH_BEGINNING.getStandardNumber();
         int matchEnding = MATCH_ENDING.getStandardNumber();
-        for(int key = matchEnding - 1; key >= matchBeginning; key--) {
+        for(int key = matchEnding - ONE; key >= matchBeginning; key--) {
             checkPrizeSecond(key, resultView, lottoStatistics);
             checkPrizeExceptSecond(key, resultView, lottoStatistics);
         }
@@ -80,16 +102,16 @@ public class LottoController {
 
     private void checkPrizeExceptSecond(int key, ResultView resultView, Map<Integer, Integer> lottoStatistics) {
         if(key != LottoPrize.SECOND.getPrize()) {
-            resultView.displayPrizeExceptSecond(LottoPrize.valueOf(key).get(0),
-                    LottoPrize.valueOf(key).get(1),
+            resultView.displayPrizeExceptSecond(LottoPrize.valueOf(key).get(ZERO),
+                    LottoPrize.valueOf(key).get(ONE),
                     lottoStatistics.get(key));
         }
     }
 
     private void checkPrizeSecond(int key, ResultView resultView, Map<Integer, Integer> lottoStatistics) {
         if(key == LottoPrize.SECOND.getPrize()) {
-            resultView.displaySecondPrize(LottoPrize.valueOf(key).get(0),
-                                LottoPrize.valueOf(key).get(1),
+            resultView.displaySecondPrize(LottoPrize.valueOf(key).get(ZERO),
+                                LottoPrize.valueOf(key).get(ONE),
                                 lottoStatistics.get(key));
         }
     }
@@ -107,11 +129,10 @@ public class LottoController {
     }
 
     public List<Integer> createBasicLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for(int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
-            numbers.add(number);
-        }
-        return numbers;
+        return IntStream
+                .rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public LottoNumbers shuffleNumbers(List<Integer> basicLottoNumbers) {
@@ -121,5 +142,55 @@ public class LottoController {
                 .mapToObj(basicLottoNumbers::get)
                 .collect(Collectors.toList());
         return new LottoNumbers().from(newNumbers);
+    }
+
+    public void checkLottoNumberValidate(String[] winningNumbers) {
+        checkEmptyString(winningNumbers);
+        checkNumberLength(winningNumbers);
+        Arrays.stream(winningNumbers)
+                .map(Integer::new)
+                .forEach(this::checkLottoRange);
+    }
+
+    private void checkEmptyString(String[] winningNumbers) {
+        if(winningNumbers.length < LOTTO_START_NUMBER) {
+            throw new IllegalArgumentException("빈 값을 입력할 수 없습니다.");
+        }
+    }
+
+    private void checkNumberLength(String[] splitNumber) {
+        if(splitNumber.length != LOTTO_RANGE) {
+            throw new IllegalArgumentException("로또 숫자는 6개입니다.");
+        }
+    }
+
+    public void checkLottoRange(int number) {
+        if(number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
+            throw new IllegalArgumentException("로또 범위는 1 ~ 45 입니다.");
+        }
+    }
+
+    public void checkUnitPrice(int priceTotal, int unitPrice) {
+        if(priceTotal < unitPrice || priceTotal % unitPrice != ZERO) {
+            throw new IllegalArgumentException("로또 금액 단위로 구매 가능합니다.");
+        }
+    }
+
+    public void checkBonusDuplicate(String[] winningNumbers, int bonusNumber) {
+        for(String number : winningNumbers) {
+            matchBonus(number, bonusNumber);
+        }
+    }
+
+    private void matchBonus(String number, int bonusNumber) {
+        if(Integer.parseInt(number) == bonusNumber) {
+            throw new IllegalArgumentException("보너스 번호가 정답로또와 중복됩니다.");
+        }
+    }
+
+    public void checkManualQuantity(int lottoQuantity, int manualQuantity) {
+        if(lottoQuantity < manualQuantity) {
+            throw new IllegalArgumentException("로또 금액보다 큰 개수입니다.");
+        }
     }
 }
