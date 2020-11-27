@@ -19,7 +19,9 @@ public class Client {
     ticketPublisher = new TicketPublisher();
     dataExporter = new DataExporter();
     budget = Budget.of(InputView.askBudget());
+  }
 
+  private static void MakingLottoTicketPhase() {
     // 수동 희망 갯수 입력 받기
     int numManual = InputView.askNumManualLotto();
     budget.validateRequestByNumTicket(numManual);
@@ -32,22 +34,22 @@ public class Client {
 
     //자동 번호 발급
     tickets.addAll(ticketPublisher.publishAutoTickets(budget));
-  }
 
-  private static void currentStatusControlPhase() {
     // 발급 번호 출력
     dataExporter.setLottoTicketsDTO(tickets.exportData());
     dataExporter.setTicketPublisherDTO(ticketPublisher.exportData());
+    ResultView.printPublishStatus(dataExporter.exportNumManualTicket(),
+        dataExporter.exportNumAutoTicket());
     ResultView.printLottoInfo(dataExporter);
+  }
 
+  private static void FinalizingPhase() {
     // 당첨 번호 입력 받기
     winningNumber = WinningNumber.of(LottoNumberBundle.of(InputView.askWinningNumber()));
     winningNumber.addBonusNumber(LottoNumber.of(InputView.askBonusNumber()));
 
     lottoResult = tickets.settle(winningNumber);
-  }
 
-  private static void statisticsPhase() {
     ResultView.printStatisticsOpening();
     dataExporter.setLottoResultDTO(lottoResult.exportData());
     ResultView.printRewards(dataExporter);
@@ -58,7 +60,7 @@ public class Client {
 
   public static void main(String[] args) {
     initializePhase();
-    currentStatusControlPhase();
-    statisticsPhase();
+    MakingLottoTicketPhase();
+    FinalizingPhase();
   }
 }
