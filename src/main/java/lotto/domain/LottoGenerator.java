@@ -26,17 +26,17 @@ public class LottoGenerator {
 
     private LottoGenerator() {}
 
-    public static Lottos generate(int round) {
-        List<Lotto> lottos = Stream.generate(() -> Lotto.of(automateLotto()))
-                .limit(round)
-                .collect(Collectors.toList());
+    public static Lottos generate(int totalRound) {
+        return automateLotto(totalRound);
+    }
 
+    private static Lottos automateLotto(int autoRound) {
+        List<Lotto> lottos = Stream.generate(() -> Lotto.of(LottoNumberSet.of(convert())))
+                .limit(autoRound)
+                .collect(Collectors.toList());
         return Lottos.of(lottos);
     }
 
-    private static LottoNumberSet automateLotto() {
-        return LottoNumberSet.of(convert());
-    }
 
     private static List<LottoNumber> convert() {
         shuffle();
