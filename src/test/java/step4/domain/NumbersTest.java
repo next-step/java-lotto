@@ -25,15 +25,6 @@ public class NumbersTest {
                 .hasMessage("로또 번호는 6보다 작거나 클 수 없습니다.");
     }
 
-    @ParameterizedTest
-    @DisplayName("로또 번호는 1 ~ 45사이 아닌 숫자 예외")
-    @ValueSource(strings = {"46", "47", "99"})
-    public void 로또_번호_45이상_숫자(String lottoNumbers) {
-        assertThatThrownBy(() -> Numbers.of(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1 ~ 45사이의 숫자여야 합니다.");
-    }
-
     @ValueSource(strings = {"-1,-2,3,4,5,6"})
     public void 로또_번호_음수_확인(String lottoNumbers) {
         assertThatThrownBy(() -> Numbers.of(lottoNumbers))

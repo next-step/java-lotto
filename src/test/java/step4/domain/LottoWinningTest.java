@@ -22,7 +22,7 @@ public class LottoWinningTest {
         Lotto lotto = new Lotto();
         lotto.getLottos().clear();
         IntStream.of(1, 2, 3, 7, 8, 9)
-                .forEach(i -> lotto.getLottos().add(i));
+                .forEach(i -> lotto.getLottos().add(new LottoNumber(i)));
 
         lottos.add(lotto);
         Numbers number = Numbers.of("1,2,3,9,12,14");
@@ -40,7 +40,7 @@ public class LottoWinningTest {
         Lotto lotto = new Lotto();
         lotto.getLottos().clear();
         IntStream.of(1, 2, 3, 7, 8, 9)
-                .forEach(i -> lotto.getLottos().add(i));
+                .forEach(i -> lotto.getLottos().add(new LottoNumber(i)));
 
         lottos.add(lotto);
 
