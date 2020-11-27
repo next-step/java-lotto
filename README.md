@@ -53,9 +53,6 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-9. LottoGame은 결과만 반환하고, 결과를 출력하기 위한 Dto 생성의 책임은 LottoGameResult에게 위임
-14. LottoGame의 getResult()는 LottoGameResult에서 수행하도록 수정
--- 
 0. Uilts성 클래스 삭제
 3. Rank를 도메인으로 수정?
 4. Rank에 대한 설명을 view에서
@@ -93,6 +90,7 @@ utils.Calculator
 20. WinningNumber -> isExists 메서드 이름 짓기..
 21. MainSimulator, Controller 책임 정리
 22. 단발성 상수 도메인에 정리
+23. LottoGame은 LottoGameResult를 반환하고, LottoGameResult는 lotto game의 결과를 정리하는 책임 부여
 
 
 

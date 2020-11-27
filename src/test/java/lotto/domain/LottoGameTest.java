@@ -27,14 +27,14 @@ class LottoGameTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         ));
-        Lottoes lottoes = new Lottoes(Collections.singletonList(lottoNumbers));
+        Lottoes lottoes = new Lottoes(Arrays.asList(lottoNumbers));
         LottoGame lottoGame = new LottoGame(lottoes, WINNING_NUMBERS);
 
         //When
-        List<Rank> result = lottoGame.getResult();
+        LottoGameResult result = lottoGame.getResult();
 
         //Then
-        assertThat(result).contains(Rank.FIRST);
+        assertThat(result.getRanks().containsKey(Rank.FIRST)).isTrue();
 
     }
 

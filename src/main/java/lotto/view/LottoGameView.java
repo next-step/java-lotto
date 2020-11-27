@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoGameResult;
 import lotto.domain.Lottoes;
-import lotto.dto.LottoGameResultDto;
 import lotto.view.input.InputView;
 import lotto.view.result.ResultView;
 
@@ -16,9 +15,8 @@ public class LottoGameView {
         ResultView.printLottoNumbers(lottoes);
     }
 
-    public static void printResult(LottoGameResultDto lottoGameResultDto) {
-        LottoGameResult result = lottoGameResultDto.getResult();
-        ResultView.printLottoGameResult(result);
-        ResultView.printWinningStatistics(result.getRateOfReturn(lottoGameResultDto.getPurchaseAmount()));
+    public static void printResult(LottoGameResult lottoGameResult) {
+        ResultView.printLottoGameResult(lottoGameResult.getRanks());
+        ResultView.printWinningStatistics(lottoGameResult.getRateOfReturn());
     }
 }

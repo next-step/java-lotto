@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.Lottoes;
-import lotto.dto.LottoGameResultDto;
 
 public class MainSimulator {
 
