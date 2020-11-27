@@ -11,7 +11,11 @@ public class ResultView {
     private static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
 
     public static void getLottoTickets(LottoGameResults lottoGameResults) {
-        System.out.println(lottoGameResults.getLottoIssueResult().getTicketCount() +"개를 구매했습니다.");
+
+        int totalTicketCount = lottoGameResults.getLottoIssueResult().getTicketCount();
+        int manualTicketCount = lottoGameResults.getLottoIssueResult().getManualTicket().size();
+
+        System.out.println("\n수동으로 "+manualTicketCount+"장, 자동으로 "+(totalTicketCount-manualTicketCount)+"개를 구매했습니다.");
 
         lottoGameResults.getLottoIssueResult().getLottoTickets()
                 .stream().forEach(lottoTicket -> System.out.println(Arrays.toString(lottoTicket.getSortedLottoNumbers().toArray())));

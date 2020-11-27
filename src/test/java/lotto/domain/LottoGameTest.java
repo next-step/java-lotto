@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 
 public class LottoGameTest {
 
@@ -14,7 +16,7 @@ public class LottoGameTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoGame lottoGame = new LottoGame(inputMoneyAmount);
+        LottoGame lottoGame = new LottoGame(inputMoneyAmount, new ArrayList<>());
 
         // then
         assertThat(lottoGame.getGameMoney()).isEqualTo(inputMoneyAmount);
@@ -27,7 +29,7 @@ public class LottoGameTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoGame lottoGame = new LottoGame(inputMoneyAmount);
+        LottoGame lottoGame = new LottoGame(inputMoneyAmount, new ArrayList<>());
         LottoGameResults lottoGameResults = lottoGame.issueLottoTicket();
 
         // then

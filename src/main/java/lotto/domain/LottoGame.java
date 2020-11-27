@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoGame {
 
     private static int gameMoney;
 
-    public LottoGame(int gameMoney){
+    private static List<String> manualTickets;
+
+    public LottoGame(int gameMoney, List<String> manualTickets){
         this.gameMoney = gameMoney;
+        this.manualTickets = manualTickets;
     }
 
     public int getGameMoney(){
@@ -14,7 +19,7 @@ public class LottoGame {
 
     public LottoGameResults issueLottoTicket() {
 
-        LottoTickets lottoTickets = new LottoTickets(gameMoney);
+        LottoTickets lottoTickets = new LottoTickets(gameMoney, manualTickets);
 
         LottoGameResults lottoGameResults = new LottoGameResults(lottoTickets);
 

@@ -19,8 +19,8 @@ public class LottoGameController {
         ResultView.getLottoTickets(lottoGameResults);
     }
 
-    public static LottoGameResults execute(int gameMoney) {
-        LottoGame lottoGame = new LottoGame(gameMoney);
+    public static LottoGameResults execute(int gameMoney, List<String> manualTicket) {
+        LottoGame lottoGame = new LottoGame(gameMoney, manualTicket);
         return lottoGame.issueLottoTicket();
     }
 
@@ -61,5 +61,14 @@ public class LottoGameController {
     private static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
         ResultView.getPrizeResult(resultsMap);
     }
+
+    public static int inputManualTicketCount() {
+        return InputView.getManualLottoTicketCount();
+    }
+
+    public static List<String> inputManualTicket(int manualTicketCount) {
+        return InputView.getManualLottoNumbers(manualTicketCount);
+    }
+
 
 }

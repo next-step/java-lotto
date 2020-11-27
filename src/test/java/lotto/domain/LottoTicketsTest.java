@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
@@ -15,7 +17,7 @@ public class LottoTicketsTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(inputMoneyAmount);
+        LottoTickets lottoTickets = new LottoTickets(inputMoneyAmount, new ArrayList<>());
 
         // then
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
