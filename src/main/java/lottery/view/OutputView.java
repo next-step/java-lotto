@@ -1,18 +1,18 @@
 package lottery.view;
 
+import lottery.domain.Lotteries;
 import lottery.domain.LotteryNumber;
 import lottery.domain.Lottery;
 import lottery.domain.WinningType;
 
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
     private final PrintStream out = System.out;
 
-    public void showLotteries(List<Lottery> lotteries) {
+    public void showLotteries(Lotteries lotteries) {
         out.format("%1$d개를 구매했습니다.", lotteries.size());
         out.println();
         lotteries.forEach(this::showLotteryNumbers);
