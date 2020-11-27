@@ -56,7 +56,7 @@ class WinningNumbersTest {
     @CsvSource(value = {"1,2,3,4,5,7:true", "1,2,3,4,5,6:false"})
     void matchBonus(String lottoNumber, boolean expected){
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
-        Lotto lotto = LottoUtils.lotto(lottoNumber);
+        Lotto lotto = new Lotto(lottoNumber);
 
         assertThat(winningNumbers.matchBonusNumber(lotto)).isEqualTo(expected);
     }

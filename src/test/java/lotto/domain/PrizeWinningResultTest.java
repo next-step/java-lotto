@@ -25,9 +25,9 @@ class PrizeWinningResultTest {
     @Test
     void prizeCount(){
         List<RankedLotto> rankedLottoList = Arrays.asList(
-                new RankedLotto(LottoRanking.SECOND, LottoUtils.lotto("1,2,3,4,5,6") ),
-                new RankedLotto(LottoRanking.SECOND, LottoUtils.lotto("1,2,3,4,6,10") ),
-                new RankedLotto(LottoRanking.MISS, LottoUtils.lotto("10,11,12,13,14,15"))
+                new RankedLotto(LottoRanking.SECOND, new Lotto("1,2,3,4,5,6") ),
+                new RankedLotto(LottoRanking.SECOND, new Lotto("1,2,3,4,6,10") ),
+                new RankedLotto(LottoRanking.MISS, new Lotto("10,11,12,13,14,15"))
         );
 
         PrizeWinningResult result = PrizeWinningResult.builder()

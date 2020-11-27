@@ -57,7 +57,7 @@ public class LottoMachineTest {
     @DisplayName("당첨된 로또의 수익율을 알 수 있다")
     @Test
     void rateOfReturn() {
-        Lotto secondPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 10");
+        Lotto secondPrizeLotto = new Lotto("1, 2, 3, 4, 5, 10");
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, secondPrizeLotto);
@@ -69,8 +69,8 @@ public class LottoMachineTest {
     @DisplayName("2장이상 당첨된 로또의 수익율을 알 수 있다")
     @Test
     void rateOfReturn2() {
-        Lotto firstPrizeLotto = LottoUtils.lotto("1, 2, 3, 4, 5, 6");
-        Lotto fouthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
+        Lotto firstPrizeLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto fouthPrizeLotto = new Lotto("1, 2, 3, 10, 20, 30");
 
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
 
@@ -82,7 +82,7 @@ public class LottoMachineTest {
     @DisplayName("당첨이 되지 않으면 수익률은 0 이다")
     @Test
     void rateOfReturn3() {
-        Lotto noPrizeLotto = LottoUtils.lotto("30, 31, 32, 33, 34, 35");
+        Lotto noPrizeLotto = new Lotto("30, 31, 32, 33, 34, 35");
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, noPrizeLotto);
@@ -93,8 +93,8 @@ public class LottoMachineTest {
     @DisplayName("당첨금과 로또구입금액이 같으면 수익률은 1 이다")
     @Test
     void rateOfReturn4() {
-        Lotto fourthPrizeLotto = LottoUtils.lotto("1, 2, 3, 10, 20, 30");
-        Lotto noPrizeLotto = LottoUtils.lotto("11, 12, 13, 10, 20, 30");
+        Lotto fourthPrizeLotto = new Lotto("1, 2, 3, 10, 20, 30");
+        Lotto noPrizeLotto = new Lotto("11, 12, 13, 10, 20, 30");
 
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
 
@@ -106,8 +106,8 @@ public class LottoMachineTest {
     @DisplayName("2등 당첨된 로또는 3등에서 제외된다")
     @Test
     void prizeWinning(){
-        Lotto secondPrizeLotto = LottoUtils.lotto("1,2,3,4,5,7");
-        Lotto thirdPrizeLotto = LottoUtils.lotto("1,2,3,4,5,8");
+        Lotto secondPrizeLotto = new Lotto("1,2,3,4,5,7");
+        Lotto thirdPrizeLotto = new Lotto("1,2,3,4,5,8");
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
 
         PrizeWinningResult result = lottoMachine.checkPrizeWinning(winningNumbers, secondPrizeLotto, thirdPrizeLotto);
