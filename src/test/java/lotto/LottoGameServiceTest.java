@@ -1,7 +1,5 @@
 package lotto;
 
-import calculator.StringAddCalculator;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +15,7 @@ public class LottoGameServiceTest {
     @BeforeEach
     void setUp(){
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoGameService.setWinnerLottoNumbers(winnerLottoNumbers);
+        LottoWinner.setWinnerLottoNumbers(winnerLottoNumbers);
     }
 
     @ParameterizedTest
@@ -36,24 +34,25 @@ public class LottoGameServiceTest {
         lottoNumbers.add(6);
         lottoNumbers.add(7);
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(LottoGameService.getMatchLottoCnt(lotto)).isEqualTo(5);
+        assertThat(LottoWinner.getMatchLottoCnt(lotto)).isEqualTo(5);
     }
 
     @Test
     public void getLottoMatchStatisticsTest() {
         List<Integer> lottoNumbers = new ArrayList<>();
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.setWinnerMatchCnt(5);
-        List<Lotto> buyLotto = new ArrayList<>();
-        buyLotto.add(lotto);
-        LottoGameService.setBuyLotto(buyLotto);
+        lotto.addWinnerMatchCnt(5);
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
+        LottoTicket lottoTicket = new LottoTicket(lottoList);
+        LottoGameService.setBuyLotto(lottoTicket);
         assertThat(LottoGameService.getLottoMatchStatistics(5)).isEqualTo(1);
     }
 
     @Test
     public void getResultRankTest() {
         Lotto lotto = new Lotto(true);
-        lotto.setWinnerMatchCnt(5);
+        lotto.addWinnerMatchCnt(5);
         assertThat(LottoGameService.getResultRank(lotto)).isEqualTo(Rank.SECOND);
     }
 }

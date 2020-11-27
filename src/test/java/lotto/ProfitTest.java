@@ -25,9 +25,10 @@ public class ProfitTest {
         Lotto lotto = new Lotto(lottoNumbers);
         lotto.setRank(Rank.FOURTH);
         lottoList.add(lotto);
-        LottoGameService.setBuyLotto(lottoList);
+        LottoTicket lottoTicket = new LottoTicket(lottoList);
+        LottoGameService.setBuyLotto(lottoTicket);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoGameService.setWinnerLottoNumbers(winnerLottoNumbers);
+        LottoWinner.setWinnerLottoNumbers(winnerLottoNumbers);
         LottoGameService.setLottoBuyAmt(14000);
     }
 
@@ -41,7 +42,7 @@ public class ProfitTest {
     @ParameterizedTest
     @CsvSource(value = {"3:이득이", "0.35:손해"}, delimiter = ':')
     public void profitToStringTest(double profitRate, String resultString) {
-        assertThat(Profit.profitToString(profitRate)).isEqualTo(resultString);
+        assertThat(PrintView.profitToString(profitRate)).isEqualTo(resultString);
 
     }
 

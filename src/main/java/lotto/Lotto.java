@@ -1,19 +1,25 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private final List<Integer> initlottoNumber = IntStream.range(1, 45).boxed().collect(Collectors.toList());
+    private final List<Integer> lottoNumbers;
     private int winnerMatchCnt;
     private Rank rank;
 
     public Lotto(boolean auto) {
         if(auto){
-            autoGenerateLottoNumber();
+            lottoNumbers = autoGenerateLottoNumber();
+        }else{
+        // 수동입력 추후 구현
+            lottoNumbers = new ArrayList<>();
         }
+
     }
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -28,10 +34,9 @@ public class Lotto {
         return rank;
     }
 
-    public void autoGenerateLottoNumber() {
-        List<Integer> lottoNumber = IntStream.range(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(lottoNumber);
-        lottoNumbers = lottoNumber.stream()
+    public List<Integer> autoGenerateLottoNumber() {
+        Collections.shuffle(initlottoNumber);
+        return initlottoNumber.stream()
                 .limit(6)
                 .sorted()
                 .collect(Collectors.toList());
@@ -41,7 +46,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public void setWinnerMatchCnt(int winnerMatchCnt) {
+    public void addWinnerMatchCnt(int winnerMatchCnt) {
         this.winnerMatchCnt = winnerMatchCnt;
     }
 

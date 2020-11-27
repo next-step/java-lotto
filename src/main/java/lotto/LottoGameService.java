@@ -8,67 +8,43 @@ public class LottoGameService {
     private static final int lottoPrice = 1000;
     private static int lottoBuyAmt = 0;
     private static int lottoBuyCnt = 0;
-    private static int[] winnerLottoNumbers;
-    private static List<Lotto> buyLotto = new ArrayList<>();
+    private static LottoTicket buyLotto;
 
+    public static void setBuyLotto(LottoTicket buyLotto) {
+        LottoGameService.buyLotto = buyLotto;
+    }
+
+    public static LottoTicket getBuyLotto() {
+        return buyLotto;
+    }
     public static void setLottoBuyAmt(int lottoBuyAmt) {
         LottoGameService.lottoBuyAmt = lottoBuyAmt;
     }
 
-    public static void setWinnerLottoNumbers(int[] winnerLottoNumbers) {
-        LottoGameService.winnerLottoNumbers = winnerLottoNumbers;
-    }
-
-    public static List<Lotto> getBuyLotto() {
-        return buyLotto;
-    }
-
-    public static void setBuyLotto(List<Lotto> buyLotto) {
-        LottoGameService.buyLotto = buyLotto;
-    }
 
     public static int getLottoBuyAmt() {
         return lottoBuyAmt;
     }
 
     public static int buyLotto(int lottoBuyAmt){
+        setLottoBuyAmt(lottoBuyAmt);
         int lottoQty = 0;
         lottoQty = lottoBuyAmt/lottoPrice;
-        System.out.println(lottoQty+"개를 구매했습니다.");
+        PrintView.printBuyLottoQty(lottoQty);
         lottoBuyCnt = lottoQty;
+        List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i< lottoBuyCnt; i++){
             Lotto lotto = new Lotto(true);
-            buyLotto.add(lotto);
+            lottoList.add(lotto);
             PrintView.printLottoNumber(lotto);
         }
+        buyLotto = new LottoTicket(lottoList);
         return lottoQty;
-    }
-
-
-    public static void matchingWinnerNumber(){
-        for(Lotto lotto : buyLotto){
-            int matchCnt = getMatchLottoCnt(lotto);
-            lotto.setWinnerMatchCnt(matchCnt);
-            lotto.setRank(Rank.getRankByMatchCnt(matchCnt));
-        }
-    }
-
-    public static int getMatchLottoCnt(Lotto lotto) {
-        return Arrays.stream(winnerLottoNumbers).map(i -> {
-            return judgeWinnerNumber(lotto, i);
-        }).sum();
-    }
-
-    public static Integer judgeWinnerNumber(Lotto lotto, int i) {
-        if(lotto.getLottoNumbers().contains(i)){
-            return 1;
-        }
-        return 0;
     }
 
     public static int getLottoMatchStatistics(int matchCnt){
         int matchLottoCnt = 0;
-        for(Lotto lotto : buyLotto){
+        for(Lotto lotto : buyLotto.getLottoList()){
             matchLottoCnt = getMatchRankLottoCnt(matchCnt, matchLottoCnt, lotto);
         }
         return matchLottoCnt;

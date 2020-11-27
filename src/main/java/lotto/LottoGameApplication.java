@@ -6,7 +6,7 @@ public class LottoGameApplication {
         int buyPrice = InputView.inputBuyLottoPrice();
         LottoGameService.buyLotto(buyPrice);
         InputView.inputWinnerLottoNumber();
-        LottoGameService.matchingWinnerNumber();
+        LottoWinner.matchingWinnerNumber();
         PrintView.printLottoStatistics();
         PrintView.printWinnerLate();
 
