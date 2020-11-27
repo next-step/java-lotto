@@ -16,7 +16,7 @@ public class LottoSimulation {
         int purchaseAmount = inputView.readPurchaseAmount();
         List<String> lottoNumbers = inputView.readLottoNumbers();
 
-        List<Lotto> myLottos = lottoMachine.issue(purchaseAmount, lottoNumbers);
+        List<Lotto> myLottos = lottoMachine.issueLottos(purchaseAmount, lottoNumbers);
         outputView.showPurchasedLottos(myLottos);
 
         String winningNumber = inputView.readWinningNumber();

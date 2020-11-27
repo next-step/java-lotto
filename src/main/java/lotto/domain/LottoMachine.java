@@ -11,13 +11,11 @@ public class LottoMachine {
 
     public LottoMachine() {}
 
-    public List<Lotto> issue(int purchaseAmount) {
-        shouldBuyLotto(purchaseAmount);
-        int countOfAutoNumberLotto = countOfAutoNumberLotto(purchaseAmount,0);
-        return generateAutoNumberLotto(countOfAutoNumberLotto);
+    public List<Lotto> issueLottos(int purchaseAmount) {
+        return issueLottos(purchaseAmount, new ArrayList());
     }
 
-    public List<Lotto> issue(int purchaseAmount, List<String> manualLottoNumbers) {
+    public List<Lotto> issueLottos(int purchaseAmount, List<String> manualLottoNumbers) {
         shouldBuyLotto(purchaseAmount, manualLottoNumbers.size());
         int countOfAutoNumberLotto = countOfAutoNumberLotto(purchaseAmount, manualLottoNumbers.size());
 

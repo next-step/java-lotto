@@ -24,7 +24,7 @@ public class LottoMachineTest {
     @DisplayName("최소구입금액보다 구입금액이 작으면 exception 이 발생한다")
     @Test
     void lessThenLottoPrice(){
-        assertThatThrownBy( () -> lottoMachine.issue(Lotto.PRICE - 1) )
+        assertThatThrownBy( () -> lottoMachine.issueLottos(Lotto.PRICE - 1) )
                 .isInstanceOf(NotPurchaseLottoException.class);
     }
 
@@ -32,7 +32,7 @@ public class LottoMachineTest {
     @Test
     void lessThenLottoPrice2(){
         List<String> twoLottoNumber = Arrays.asList("1,2,3,4,5,6", "10,11,12,13,14,15");
-        assertThatThrownBy( () -> lottoMachine.issue(1000, twoLottoNumber ) )
+        assertThatThrownBy( () -> lottoMachine.issueLottos(1000, twoLottoNumber ) )
                 .isInstanceOf(NotPurchaseLottoException.class);
     }
 
@@ -40,13 +40,13 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"2000:2", "3000:3", "4000:4"}, delimiterString = ":")
     void buyLotto(int money, int expected) {
-        assertThat(lottoMachine.issue(money)).hasSize(expected);
+        assertThat(lottoMachine.issueLottos(money)).hasSize(expected);
     }
 
     @DisplayName("로또 구입금액과 수동번호 로또를 입력하면 수동번호 만큼을 제외한 나머지 금액만큼은 자동으로 로또를 발급해준다")
     @Test
     void buyLottoWithManualNumber(){
-        List<Lotto> generated = lottoMachine.issue(4000, Arrays.asList("1,2,3,4,5,6", "10,11,12,13,14,15"));
+        List<Lotto> generated = lottoMachine.issueLottos(4000, Arrays.asList("1,2,3,4,5,6", "10,11,12,13,14,15"));
 
         assertThat(generated)
                 .hasSize(4)
