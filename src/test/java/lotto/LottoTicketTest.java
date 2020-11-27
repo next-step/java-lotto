@@ -63,6 +63,6 @@ class LottoTicketTest {
   @MethodSource("expectedResult")
   @DisplayName("티켓 결과 확인")
   void checkMakingCorrectResult(WinningNumber input, Rank expected) {
-    assertThat(this.sampleTicket.decideRewardWithBonusBall(input)).isEqualTo(expected);
+    assertThat(this.sampleTicket.rewardsWithBonusBall(input)).isEqualTo(expected);
   }
 }

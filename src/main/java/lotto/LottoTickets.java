@@ -22,7 +22,7 @@ public class LottoTickets {
   public LottoResult settle(WinningNumber winningNumber) {
     LottoResult lottoResult = new LottoResult();
     this.tickets.stream()
-        .map(lottoTicket -> lottoTicket.decideRewardWithBonusBall(winningNumber))
+        .map(lottoTicket -> lottoTicket.rewardsWithBonusBall(winningNumber))
         .forEach(lottoResult::recordHit);
 
     return lottoResult;

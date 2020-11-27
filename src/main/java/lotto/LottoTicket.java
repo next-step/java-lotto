@@ -20,7 +20,7 @@ public class LottoTicket {
     return result;
   }
 
-  public Rank decideRewardWithBonusBall(WinningNumber winningNumber) {
+  public Rank rewardsWithBonusBall(WinningNumber winningNumber) {
     int numHit = this.guessNumHit(winningNumber);
     boolean matchedWithBonusBall = this.bundle.contains(winningNumber.getBonusNumber());
     return Rank.getRewardWithBonusBall(numHit, matchedWithBonusBall);
