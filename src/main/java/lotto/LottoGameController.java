@@ -26,7 +26,7 @@ public class LottoGameController {
 
         ResultView.showBoughtLottos(lottos);
 
-        WinningNumber winningNumber = ResultView.askWinningNumber();
+        WinningNumber winningNumber = InputView.askWinningNumberAndBonus();
 
         WinningStatistics statistics =
                 WinningChecker.of(winningNumber).winningStatistics(lottos);

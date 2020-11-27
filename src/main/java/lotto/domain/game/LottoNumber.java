@@ -1,51 +1,52 @@
 package lotto.domain.game;
 
-import lotto.domain.LottoNumberBoard;
-
-import java.util.*;
+import java.util.Objects;
 
 /**
- * Created By mand2 on 2020-11-19.
+ * Created By mand2 on 2020-11-26.
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final Set<Integer> lottoNumbers;
-    public static final int VALID_LOTTO_SIZE = 6;
-    public static final String MESSAGE_VALID_SIZE = "한 게임당 로또 번호를 중복없이 %d개 입력해 주세요.";
+    private final int lottoNumber;
+
+    public static final int VALID_MIN_NUMBER = 1;
+    public static final int VALID_MAX_NUMBER = 45;
+
+    public static final String MESSAGE_LOTTO_NUMBER_TYPE = "로또번호는 숫자형입니다.";
     public static final String MESSAGE_VALID_NUMBER = "로또 번호는 %d ~ %d 사이의 수로만 입력합니다.";
 
-    private LottoNumber(Set<Integer> lottoNumbers) {
-        isValidSize(lottoNumbers.size());
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(List<Integer> lottoNumbers) {
-        isValidNumber(lottoNumbers);
-        return new LottoNumber(new TreeSet<>(lottoNumbers));
+    public static LottoNumber from(String before) {
+        int lottoNumber = getNumber(before);
+
+        return from(lottoNumber);
     }
 
-    public List<Integer> value() {
-        return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
+    public static LottoNumber from(int lottoNumber) {
+        checkRange(lottoNumber);
+
+        return new LottoNumber(lottoNumber);
     }
 
-    private static void isValidSize(int lottoNumberSize) {
-        if (lottoNumberSize != VALID_LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format(MESSAGE_VALID_SIZE, VALID_LOTTO_SIZE));
+    public int value() {
+        return lottoNumber;
+    }
+
+    private static int getNumber(String before) {
+        try {
+            return Integer.valueOf(before);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(MESSAGE_LOTTO_NUMBER_TYPE);
         }
     }
 
-    private static void isValidNumber(List<Integer> lottoNumbers) {
-        for (int lottoNumber : lottoNumbers) {
-            checkNumber(lottoNumber);
-        }
-    }
-
-    private static void checkNumber(int lottoNumber) {
-        final int min = LottoNumberBoard.VALID_MIN_NUMBER;
-        final int max = LottoNumberBoard.VALID_MAX_NUMBER;
-
-        if ( lottoNumber < min || lottoNumber > max) {
-            throw new IllegalArgumentException(String.format(MESSAGE_VALID_NUMBER, min, max));
+    private static void checkRange(int bonusBall) {
+        if ( bonusBall < VALID_MIN_NUMBER || bonusBall > VALID_MAX_NUMBER) {
+            throw new IllegalArgumentException(
+                    String.format(MESSAGE_VALID_NUMBER, VALID_MIN_NUMBER, VALID_MAX_NUMBER));
         }
     }
 
@@ -54,12 +55,27 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoNumber);
     }
 
+    @Override
+    public int compareTo(LottoNumber o) {
+        if (this.lottoNumber < o.lottoNumber) {
+            return -1;
+        }
+        if (this.lottoNumber > o.lottoNumber) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.lottoNumber);
+    }
 }

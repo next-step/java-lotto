@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Created By mand2 on 2020-11-19.
  */
-class SeedMoneyTest {
+class SeedMoneyLottoNumberSet {
 
     @ParameterizedTest
     @DisplayName("구입금액이 null 이거나 빈문자열일 때 예외를 던진다")

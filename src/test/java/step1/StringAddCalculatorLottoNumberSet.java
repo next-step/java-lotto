@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Created By mand2 on 2020-11-16.
  */
-public class StringAddCalculatorTest {
+public class StringAddCalculatorLottoNumberSet {
 
     @ParameterizedTest
     @DisplayName("입력한 값이 null이거나 빈 문자열이면 0을 입력한다.")

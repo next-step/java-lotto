@@ -9,19 +9,19 @@ import java.util.Objects;
  */
 public class Lotto {
 
-    private final LottoNumber lottoNumber;
+    private final LottoNumberSet lottoNumberSet;
 
-    private Lotto(LottoNumber lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    private Lotto(LottoNumberSet lottoNumberSet) {
+        this.lottoNumberSet = lottoNumberSet;
     }
 
-    public static Lotto of(LottoNumber lottoNumber) {
-        return new Lotto(lottoNumber);
+    public static Lotto of(LottoNumberSet lottoNumberSet) {
+        return new Lotto(lottoNumberSet);
     }
 
     // 로또번호 가져오기
-    public List<Integer> number() {
-        return this.lottoNumber.value();
+    public List<LottoNumber> number() {
+        return this.lottoNumberSet.value();
     }
 
     @Override
@@ -29,11 +29,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumber, lotto.lottoNumber);
+        return Objects.equals(lottoNumberSet, lotto.lottoNumberSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lottoNumberSet);
     }
 }

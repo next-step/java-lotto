@@ -3,7 +3,9 @@ package lotto.domain.winning;
 import lotto.domain.Lottos;
 import lotto.domain.game.Lotto;
 
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created By mand2 on 2020-11-19.
@@ -11,11 +13,10 @@ import java.util.List;
  */
 public class WinningChecker {
 
-    private final List<Integer> winningNumbers;
-    private static final WinningStatistics winningStatistics = new WinningStatistics();
+    private final WinningNumber winningNumber;
 
     private WinningChecker(WinningNumber winningNumber) {
-        this.winningNumbers = winningNumber.value();
+        this.winningNumber = winningNumber;
     }
 
     public static WinningChecker of(WinningNumber winningNumber) {
@@ -23,21 +24,18 @@ public class WinningChecker {
     }
 
     public WinningStatistics winningStatistics(Lottos lottos) {
-        for (Lotto lotto : lottos.list()) {
-            winningStatistics.add(getWinningResult(lotto));
-        }
-        return winningStatistics;
+        Map <WinningRank, Long> countPerRank = lottos.list()
+                .stream()
+                .map(this::getWinningResult)
+                .collect(Collectors.groupingBy(Function.identity(),
+                                            Collectors.counting()))
+                ;
+
+        return WinningStatistics.from(countPerRank);
     }
 
     private WinningRank getWinningResult(Lotto lotto) {
-        long matchedNumber = compare(lotto);
-        return WinningRank.getWinningRank((int) matchedNumber);
-    }
-
-    private long compare(Lotto lotto) {
-        return lotto.number().stream()
-                .filter(num -> this.winningNumbers.contains(num))
-                .count();
+        return winningNumber.match(lotto);
     }
 
 }

@@ -1,13 +1,12 @@
 package lotto.domain.game;
 
-import lotto.domain.LottoNumberBoard;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,19 +14,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Created By mand2 on 2020-11-19.
  */
-class LottoNumberTest {
+class LottoNumberSetTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     @DisplayName("로또번호는 오름차순으로 정렬이 된다.")
     void is_lotto_number_ascending() {
         // given
-        List<Integer> numbers = Arrays.asList(41, 22, 3, 4, 5, 6);
+        List<LottoNumber> numbers = Arrays.asList(41, 22, 3, 4, 5, 6).stream()
+                .map(LottoNumber::from).collect(Collectors.toList());
 
         // when
-        LottoNumber lottoNumber = LottoNumber.of(numbers);
+        LottoNumberSet lottoNumberSet = LottoNumberSet.of(numbers);
 
         // then
-        assertThat(lottoNumber.value()).isEqualTo(Arrays.asList(3, 4, 5, 6, 22, 41));
+        assertThat(lottoNumberSet.value())
+                .isEqualTo(Arrays.asList(3, 4, 5, 6, 22, 41)
+                        .stream()
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList()));
     }
 
     @ParameterizedTest
@@ -36,12 +40,13 @@ class LottoNumberTest {
     void is_lotto_number_valid_size(int inputLottoNumber) {
 
         // given
-        List<Integer> numbers = Arrays.asList(41, 22, 3, 4, inputLottoNumber);
+        List<LottoNumber> numbers = Arrays.asList(41, 22, 3, 4, inputLottoNumber).stream()
+                .map(LottoNumber::from).collect(Collectors.toList());;
 
-        assertThatThrownBy(() -> LottoNumber.of(numbers))
+        assertThatThrownBy(() -> LottoNumberSet.of(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format(LottoNumber.MESSAGE_VALID_SIZE,
-                        LottoNumber.VALID_LOTTO_SIZE));
+                .hasMessage(String.format(LottoNumberSet.MESSAGE_VALID_SIZE,
+                        LottoNumberSet.VALID_LOTTO_SIZE));
     }
 
     @ParameterizedTest
@@ -52,10 +57,11 @@ class LottoNumberTest {
         // given
         List<Integer> numbers = Arrays.asList(41, 22, 3, 4, 5, inputLottoNumber);
 
-        assertThatThrownBy(() -> LottoNumber.of(numbers))
+
+        assertThatThrownBy(() -> numbers.stream().map(LottoNumber::from).collect(Collectors.toList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format(LottoNumber.MESSAGE_VALID_NUMBER,
-                        LottoNumberBoard.VALID_MIN_NUMBER, LottoNumberBoard.VALID_MAX_NUMBER));
+                        LottoNumber.VALID_MIN_NUMBER, LottoNumber.VALID_MAX_NUMBER));
     }
 
     @ParameterizedTest
@@ -66,25 +72,27 @@ class LottoNumberTest {
         // given
         List<Integer> numbers = Arrays.asList(41, 22, 3, 4, 5, inputLottoNumber);
 
-        assertThatThrownBy(() -> LottoNumber.of(numbers))
+        // when
+        List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::from).collect(Collectors.toList());
+
+        assertThatThrownBy(() -> LottoNumberSet.of(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format(LottoNumber.MESSAGE_VALID_SIZE,
-                        LottoNumber.VALID_LOTTO_SIZE));
+                .hasMessage(String.format(LottoNumberSet.MESSAGE_VALID_SIZE, LottoNumberSet.VALID_LOTTO_SIZE));
     }
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     @DisplayName("로또번호를 출력하면 리스트 형태로 나온다")
     void print_lotto_number_of_list_type() {
         // given
-        List<Integer> numbers = Arrays.asList(41, 22, 3, 4, 5, 6);
+        List<LottoNumber> numbers = Arrays.asList(41, 22, 3, 4, 5, 6).stream()
+                .map(LottoNumber::from).collect(Collectors.toList());;
 
         // when
-        LottoNumber lottoNumber = LottoNumber.of(numbers);
+        LottoNumberSet lottoNumberSet = LottoNumberSet.of(numbers);
 
         // then
-        assertThat(lottoNumber.value()).containsExactlyInAnyOrder(41, 22, 3, 4, 5, 6);
-        assertThat(lottoNumber.value().toString()).isEqualTo("[3, 4, 5, 6, 22, 41]");
+        assertThat(lottoNumberSet.toString()).isEqualTo("[3, 4, 5, 6, 22, 41]");
     }
 
 
