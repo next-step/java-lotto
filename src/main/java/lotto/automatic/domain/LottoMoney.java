@@ -23,4 +23,10 @@ public class LottoMoney {
         return (money / LOTTO_PRICE);
     }
 
+    public float calculateEarningRate(long earningMoney) {
+
+        return (float) earningMoney / money;
+
+    }
+
 }
