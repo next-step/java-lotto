@@ -136,3 +136,12 @@
 * [X] TicketDTO, TicketPublisherDTO -> DataExporter(현재 StaticExporter 랑 TicketExporter 통합)
 * [X] Client 메소드 15줄 규칙 적용
 * [X] WinningNumber 에 BonusNumber 넣기
+
+### step4 피드백
+* [ ] Pascal -> Camel
+* [ ] method 순서
+* [ ] 랜덤 상수
+* [ ] Validation 중복
+* [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
+* [ ] 엣지 케이스
+* LottoNumberBundle iterable 에서 람다 적용 검토
