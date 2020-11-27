@@ -140,7 +140,7 @@
 ### step4 피드백
 * [X] Pascal -> Camel
 * [X] method 순서
-* [ ] 랜덤 상수
+* [X] 랜덤 상수 -> enum
 * [X] Validation 중복 제거
 * [ ] 발급 갯수 관리 책임 LottoPublisher -> Budget
 * [X] 엣지 케이스

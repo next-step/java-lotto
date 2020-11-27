@@ -2,8 +2,6 @@ package lotto;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.LottoGameConstant.AUTO;
-import static lotto.LottoGameConstant.MANUAL;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +11,12 @@ import lotto.dto.TicketPublisherDTO;
 
 public class TicketPublisher {
 
-  Map<Integer, Integer> publishingHistory;
+  Map<TicketPublishType, Integer> publishingHistory;
 
   public TicketPublisher() {
     this.publishingHistory = new HashMap<>();
-    this.publishingHistory.put(MANUAL, 0);
-    this.publishingHistory.put(AUTO, 0);
+    this.publishingHistory.put(TicketPublishType.MANUAL, 0);
+    this.publishingHistory.put(TicketPublishType.AUTO, 0);
   }
 
   public LottoTicket publishAutoTicket() {
@@ -32,7 +30,8 @@ public class TicketPublisher {
   public LottoTickets publishAutoTickets(Budget budget) {
     int numPossibleTicket = budget.getNumPossibleBuyingTicket();
 
-    this.publishingHistory.put(AUTO, this.publishingHistory.get(AUTO) + numPossibleTicket);
+    this.publishingHistory.put(TicketPublishType.AUTO,
+        this.publishingHistory.get(TicketPublishType.AUTO) + numPossibleTicket);
 
     return IntStream
         .range(0, numPossibleTicket)
@@ -43,7 +42,8 @@ public class TicketPublisher {
   public LottoTickets publishManualTickets(List<LottoNumberBundle> bundles, Budget budget) {
     budget.reduceRemain(bundles.size());
 
-    this.publishingHistory.put(MANUAL, this.publishingHistory.get(MANUAL) + bundles.size());
+    this.publishingHistory.put(TicketPublishType.MANUAL,
+        this.publishingHistory.get(TicketPublishType.MANUAL) + bundles.size());
 
     return bundles.stream()
         .map(LottoTicket::of)

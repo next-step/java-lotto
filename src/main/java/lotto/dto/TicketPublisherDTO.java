@@ -1,16 +1,17 @@
 package lotto.dto;
 
 import java.util.Map;
+import lotto.TicketPublishType;
 
 public class TicketPublisherDTO {
 
-  public final Map<Integer, Integer> publishingHistory;
+  public final Map<TicketPublishType, Integer> publishingHistory;
 
-  public TicketPublisherDTO(Map<Integer, Integer> publishingHistory) {
+  public TicketPublisherDTO(Map<TicketPublishType, Integer> publishingHistory) {
     this.publishingHistory = publishingHistory;
   }
 
-  public Map<Integer, Integer> getPublishingHistory() {
+  public Map<TicketPublishType, Integer> getPublishingHistory() {
     return publishingHistory;
   }
 }

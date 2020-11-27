@@ -2,8 +2,6 @@ package lotto;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.LottoGameConstant.AUTO;
-import static lotto.LottoGameConstant.MANUAL;
 import static lotto.LottoGameConstant.MINIMUM_LOTTO_NUMBER;
 import static lotto.LottoGameConstant.NUMBERS_PER_BUNDLE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,10 +81,10 @@ class TicketPublisherTest {
 
     TicketPublisherDTO dto = this.samplePublisher.exportData();
 
-    assertThat(dto.getPublishingHistory().get(MANUAL))
+    assertThat(dto.getPublishingHistory().get(TicketPublishType.MANUAL))
         .isEqualTo(2);
 
-    assertThat(dto.getPublishingHistory().get(AUTO))
+    assertThat(dto.getPublishingHistory().get(TicketPublishType.AUTO))
         .isEqualTo(8);
   }
 }

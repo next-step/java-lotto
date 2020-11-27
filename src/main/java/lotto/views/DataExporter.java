@@ -1,11 +1,9 @@
 package lotto.views;
 
-import static lotto.LottoGameConstant.AUTO;
-import static lotto.LottoGameConstant.MANUAL;
-
 import java.util.ArrayList;
 import java.util.List;
 import lotto.Rank;
+import lotto.TicketPublishType;
 import lotto.dto.LottoResultDTO;
 import lotto.dto.LottoTicketsDTO;
 import lotto.dto.TicketPublisherDTO;
@@ -49,10 +47,10 @@ public class DataExporter {
   }
 
   public int exportNumManualTicket() {
-    return this.ticketPublisherDTO.publishingHistory.get(MANUAL);
+    return this.ticketPublisherDTO.publishingHistory.get(TicketPublishType.MANUAL);
   }
 
   public int exportNumAutoTicket() {
-    return this.ticketPublisherDTO.publishingHistory.get(AUTO);
+    return this.ticketPublisherDTO.publishingHistory.get(TicketPublishType.AUTO);
   }
 }
