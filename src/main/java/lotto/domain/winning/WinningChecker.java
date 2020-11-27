@@ -3,7 +3,9 @@ package lotto.domain.winning;
 import lotto.domain.Lottos;
 import lotto.domain.game.Lotto;
 
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created By mand2 on 2020-11-19.
@@ -22,11 +24,14 @@ public class WinningChecker {
     }
 
     public WinningStatistics winningStatistics(Lottos lottos) {
-        final WinningStatistics winningStatistics = new WinningStatistics();
-        for (Lotto lotto : lottos.list()) {
-            winningStatistics.add(getWinningResult(lotto));
-        }
-        return winningStatistics;
+        Map <WinningRank, Long> countPerRank = lottos.list()
+                .stream()
+                .map(this::getWinningResult)
+                .collect(Collectors.groupingBy(Function.identity(),
+                                            Collectors.counting()))
+                ;
+
+        return WinningStatistics.from(countPerRank);
     }
 
     private WinningRank getWinningResult(Lotto lotto) {

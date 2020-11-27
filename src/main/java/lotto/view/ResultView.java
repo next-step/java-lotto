@@ -15,6 +15,7 @@ public class ResultView {
 
     private static final String MESSAGE_STATISTICS = "당첨 통계";
     private static final String RESULT_STATISTICS = "%d개 일치 (%d원)";
+    private static final String RESULT_STATISTICS_SECOND = "%d개 일치, 보너스볼 일치 (%d원)";
     private static final String RESULT_NUMBER = "- %d개";
     private static final String EARNING_RATIO = "총 수익률은 %.2f입니다.";
     private static final String DASH = "----------";
@@ -47,9 +48,16 @@ public class ResultView {
     }
 
     private static void printEachRank(WinningRank winningRank) {
-        System.out.print(String.format(RESULT_STATISTICS
-                , winningRank.getMatchCount()
-                , winningRank.getPrize()));
+        if (winningRank != WinningRank.SECOND) {
+            System.out.print(String.format(RESULT_STATISTICS
+                    , winningRank.getMatchCount()
+                    , winningRank.getPrize()));
+        }
+        if (winningRank == WinningRank.SECOND) {
+            System.out.print(String.format(RESULT_STATISTICS_SECOND
+                    , winningRank.getMatchCount()
+                    , winningRank.getPrize()));
+        }
     }
 
     private static void printEachNumber(int resultNumber) {
