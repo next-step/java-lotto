@@ -17,16 +17,17 @@ public class Lotto {
         if (this.lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 한 장은 6개 번호입니다.");
         }
+        if (this.lotto.first() < 1) {
+            throw new IllegalArgumentException("로또 번호는 1과 45 사이입니다.");
+        }
+        if (this.lotto.last() > 45) {
+            throw new IllegalArgumentException("로또 번호는 1과 45 사이입니다.");
+        }
     }
 
-    public int match(Lotto winningLotto) {
-        int count = 0;
-        for (Integer number : lotto) {
-            if (winningLotto.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+    public Rank match(Lotto winningLotto) {
+        int matchCount = (int) lotto.stream().filter(i -> winningLotto.contains(i)).count();
+        return Rank.rank(matchCount, false);
     }
 
     public boolean contains(Integer number) {

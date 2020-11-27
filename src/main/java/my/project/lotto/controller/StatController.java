@@ -8,22 +8,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StatController {
-    private final StatInfo info;
-    private final Statistics stat;
+//    private final StatInfo info;
+//    private final Statistics stat;
 
-    public StatController(List<Lotto_> records, String winningNumber) {
-        CollectionUtils.isListQualified(records);
-        StringUtils.isQualified(winningNumber);
+//    public StatController(List<Lotto_> records, String winningNumber) {
+//        CollectionUtils.isListQualified(records);
+//        StringUtils.isQualified(winningNumber);
+//
+//        List<Integer> winningNumbers = StringUtils.parseToIntList(winningNumber);
+//        Lotto lotto = new Lotto(Arrays.asList(winningNumber.split(",")));
+//
+//        this.info = new StatInfo(records, winningNumbers);
+//        this.stat = new Statistics();
+//    }
 
-        List<Integer> winningNumbers = StringUtils.parseToIntList(winningNumber);
-        Lotto lotto = new Lotto(Arrays.asList(winningNumber.split(",")));
-
-        this.info = new StatInfo(records, winningNumbers);
-        this.stat = new Statistics();
-    }
-
-    public StatRecord stat() {
-        return stat.analyze(info);
-    }
+//    public StatRecord stat() {
+//        return stat.analyze(info);
+//    }
 
 }

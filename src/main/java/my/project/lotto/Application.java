@@ -16,8 +16,7 @@ public class Application {
         ResultView.printLottos(lottos);
 
         Lotto lastWinningLotto = new Lotto(StringUtils.parseToIntList(InputView.getWinningNumber()));
-        lottos.match(lastWinningLotto);
-//        StatController statController = new StatController(records, inputView.getWinningNumber());
-//        resultView.printStat(statController.stat());
+        Ranks ranks = lottos.matches(lastWinningLotto);
+//        ResultView.printRank(statController.stat());
     }
 }

@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StatInfoTest {
-    private List<Lotto_> records;
-    private List<Integer> winningNumbers;
+//    private List<Lotto_> records;
+//    private List<Integer> winningNumbers;
 /*
     @BeforeEach
     void setUp() {

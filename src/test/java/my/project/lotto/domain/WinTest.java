@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Developer : Seo
  */
 class WinTest {
-    private Lotto_ record;
-    private List<Integer> winningNumbers;
+//    private Lotto_ record;
+//    private List<Integer> winningNumbers;
 //
 //    @BeforeEach
 //    void setUp() {

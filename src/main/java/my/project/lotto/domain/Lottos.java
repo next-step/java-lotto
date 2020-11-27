@@ -1,5 +1,6 @@
 package my.project.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,14 +8,10 @@ import java.util.List;
  * Developer : Seo
  */
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 
     public int size() {
@@ -22,15 +19,15 @@ public class Lottos {
     }
 
     public void grid() {
-         lottos.forEach(t -> System.out.println(t.toString()));
+        lottos.forEach(t -> System.out.println(t.toString()));
     }
 
-    public int match(Lotto lastWinningLotto) {
-        int count = 0;
+    public Ranks matches(Lotto lastWinningLotto) {
+        Ranks ranks = new Ranks(new ArrayList<>());
         for (Lotto lotto : lottos) {
-            count += lotto.match(lastWinningLotto);
+            ranks.add(lotto.match(lastWinningLotto));
         }
-        return count;
+        return ranks;
     }
 
 }

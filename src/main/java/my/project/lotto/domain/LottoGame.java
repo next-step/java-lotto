@@ -17,4 +17,6 @@ public class LottoGame {
         return new Lottos(lottos);
     }
 
+    private LottoGame() {
+    }
 }

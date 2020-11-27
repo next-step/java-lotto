@@ -1,26 +1,49 @@
 package my.project.lotto.domain;
 
+import java.util.Arrays;
+
 /**
  * Created : 2020-11-27 오후 4:34
  * Developer : Seo
  */
 public enum Rank {
-    FIRST(1, 6, 0),
-    THIRD(3, 5, 0),
-    FOURTH(4, 4, 0),
-    FIFTH(5, 3, 0),
-    EMPTY(0, 0, 0);
+    //TODO 금액 부분
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(5, 50_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 0),
+    NO_RANK(0, 0);
 
-    public static int rank(int bonusNo, Lotto lotto, int matchCount) {
-        if (matchCount == 6) {
-            return 1;
+    private final int matchCount;
+    private final int money;
+
+    Rank(int matchCount, int money) {
+        this.matchCount = matchCount;
+        this.money = money;
+    }
+
+    public static Rank rank(int matchCount, boolean matchBonus) {
+        if (matchCount > FIRST.matchCount) {
+            throw new IllegalArgumentException("");
         }
-        boolean matchBonus = lotto.contains(bonusNo);
-        if (matchCount == 5 && matchBonus) {
-            return 2;
+        if (SECOND.matchCount(matchCount) && matchBonus) {
+            return SECOND;
         }
-        if (matchCount > 2) {
-            return 6 - matchCount + 2;
+        if (THIRD.matchCount(matchCount) && !matchBonus) {
+            return THIRD;
         }
+        if (matchCount < FIFTH.matchCount) {
+            return NO_RANK;
+        }
+
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchCount(matchCount))
+                .findFirst()
+                .orElse(NO_RANK);
+    }
+
+    private boolean matchCount(int matchCount) {
+        return this.matchCount == matchCount;
     }
 }

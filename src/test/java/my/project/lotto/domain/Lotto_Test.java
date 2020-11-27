@@ -14,25 +14,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * Developer : Seo
  */
 class Lotto_Test {
-    private Lotto_ lotto;
-    private SortedSet<Integer> selected;
-
-    @BeforeEach
-    void setUp() {
-        lotto = new Lotto_();
-        selected = lotto.generate();
-    }
-
-    @DisplayName("선택된 번호가 6개인가")
-    @Test
-    void testNumberSize() {
-        assertThat(selected).hasSize(6);
-    }
-
-    @DisplayName("선택된 번호가 1과 45 사이인가")
-    @Test
-    void testNumberBetween() {
-
-    }
+//    private Lotto_ lotto;
+//    private SortedSet<Integer> selected;
+//
+//    @BeforeEach
+//    void setUp() {
+//        lotto = new Lotto_();
+//        selected = lotto.generate();
+//    }
+//
+//    @DisplayName("선택된 번호가 6개인가")
+//    @Test
+//    void testNumberSize() {
+//        assertThat(selected).hasSize(6);
+//    }
+//
+//    @DisplayName("선택된 번호가 1과 45 사이인가")
+//    @Test
+//    void testNumberBetween() {
+//
+//    }
 
 }
