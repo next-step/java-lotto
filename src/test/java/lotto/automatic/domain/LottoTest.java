@@ -53,5 +53,12 @@ public class LottoTest {
 
     }
 
+    @Test
+    @DisplayName("가지고 있는 숫자 확인")
+    public void contain_number() {
+        Lotto lotto = new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1));
+
+        assertThat(lotto.contain(6)).isTrue();
+    }
 
 }
