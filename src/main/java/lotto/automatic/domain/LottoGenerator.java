@@ -3,19 +3,18 @@ package lotto.automatic.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private final List<Integer> lottoNum;
+    private static final List<Integer> lottoNum = IntStream.range(1, 45)
+            .boxed()
+            .collect(Collectors.toList());
+
     private final ShuffleStrategy strategy;
 
     public LottoGenerator(ShuffleStrategy strategy) {
         this.strategy = strategy;
-        this.lottoNum = new ArrayList<>();
-
-        for (int i = 1; i <= 45; i++) {
-            lottoNum.add(i);
-        }
     }
 
     public List<Lotto> generateLotto(int countOfLotto) {
