@@ -2,6 +2,8 @@ package lotto_auto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,17 @@ class LottoNumbersTest {
     public void lottoNumberNullExceptionTest() {
         assertThatThrownBy(
                 () -> {
-                    LottoNumbers lottoNumbers = new LottoNumbers(null);
+                    LottoNumbers lottoNumbers = new LottoNumbers((List<LottoNumber>) null);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호 문자열이 null or em일때 예외 발생 테스트")
+    @Test
+    public void lottoNumberNullOrEmptyExceptionTest() {
+        assertThatThrownBy(
+                () -> {
+                    LottoNumbers lottoNumbers = new LottoNumbers((String) null);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }
@@ -79,6 +91,21 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers2 = new LottoNumbers(numberList2);
 
         assertThat(lottoNumbers.computeMatchCount(lottoNumbers2)).isEqualTo(6);
+    }
+
+    @DisplayName("로또 번호 문자열로 생성할때 예외 발생 테스트")
+    @ParameterizedTest
+    @ValueSource(
+            strings = {
+                    "1,2,3,4,5,49",
+                    "123,4,5,6",
+                    "-1,2,3,4,5,6",
+            }
+    )
+    public void lottoNumberCreateTest(String lottoNumberString) {
+        assertThatThrownBy(() -> {
+            LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberString);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
