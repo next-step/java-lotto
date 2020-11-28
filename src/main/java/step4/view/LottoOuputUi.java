@@ -2,7 +2,7 @@ package step4.view;
 
 import step4.constant.LottoWinningPrizes;
 import step4.domain.Lotto;
-import step4.domain.LottoNumber;
+import step4.domain.Numbers;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -22,7 +22,7 @@ public class LottoOuputUi {
     private static String getLottosToString(Lotto lotto) {
         String lottoList = lotto.getLottos()
                 .stream()
-                .map(LottoNumber::getNumber)
+                .map(Numbers::getLottoNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
         return String.format("%s%s%s", LOTTO_PREFIX, lottoList, LOTTO_SUFFIX);

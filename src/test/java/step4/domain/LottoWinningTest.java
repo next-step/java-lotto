@@ -8,7 +8,7 @@ import step4.constant.LottoWinningPrizes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +21,8 @@ public class LottoWinningTest {
 
         Lotto lotto = new Lotto();
         lotto.getLottos().clear();
-        IntStream.of(1, 2, 3, 7, 8, 9)
-                .forEach(i -> lotto.getLottos().add(new LottoNumber(i)));
+        Stream.of("1,2,3,7,8,9")
+                .forEach(i -> lotto.getLottos().add(Numbers.of(i)));
 
         lottos.add(lotto);
         Numbers number = Numbers.of("1,2,3,9,12,14");
@@ -39,8 +39,8 @@ public class LottoWinningTest {
 
         Lotto lotto = new Lotto();
         lotto.getLottos().clear();
-        IntStream.of(1, 2, 3, 7, 8, 9)
-                .forEach(i -> lotto.getLottos().add(new LottoNumber(i)));
+        Stream.of("1,2,3,7,8,9")
+                .forEach(i -> lotto.getLottos().add(Numbers.of(i)));
 
         lottos.add(lotto);
 

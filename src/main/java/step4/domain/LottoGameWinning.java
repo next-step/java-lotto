@@ -28,7 +28,7 @@ public class LottoGameWinning {
 
     private void lottoWinningPrizes(LottoNumbers lastLottoWinningNumbers, Lottos lottos) {
         lottos.getLottos().forEach(lotto -> {
-            int rightNumberCount = lottos.lottoWinningPrizes(lastLottoWinningNumbers, lotto);
+            int rightNumberCount = lottos.lottoWinningPrizes(lastLottoWinningNumbers.getNumber(), lotto);
             boolean isMatchBonus = isMatchBonus(lastLottoWinningNumbers.getBonusNumber(), lotto);
             lottoWinningPrizes(rightNumberCount, isMatchBonus);
         });
@@ -42,7 +42,7 @@ public class LottoGameWinning {
     private boolean isMatchBonus(String bonusNumber, Lotto lotto) {
         return lotto.getLottos()
                 .stream()
-                .anyMatch(bonus -> bonusNumber.contains(String.valueOf(bonus)));
+                .anyMatch(bonus -> bonusNumber.contains(bonus.getLottoNumber()));
     }
 
     public EnumMap<LottoWinningPrizes, Integer> getLottoWinningMap() {

@@ -21,15 +21,15 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public int lottoWinningPrizes(LottoNumbers lottoNumber, Lotto lotto) {
+    public int lottoWinningPrizes(Numbers lottoNumber, Lotto lotto) {
         return lotto.getLottos()
                 .stream()
-                .mapToInt(number -> numberContain(number, lottoNumber.getNumber().getLottoNumber()))
+                .mapToInt(number -> numberContain(number, lottoNumber.getLottoNumber()))
                 .sum();
     }
 
-    private static int numberContain(LottoNumber number, String lastLottoWinningNumbers) {
-        for (LottoNumber lottoNumber : setWinningLottoNumber(lastLottoWinningNumbers)) {
+    private static int numberContain(Numbers number, String lastLottoWinningNumbers) {
+        for (Numbers lottoNumber : setWinningLottoNumber(lastLottoWinningNumbers)) {
             if (lottoNumber.equals(number)) {
                 return LOTTO_NUMBER_CONTAINS_TRUE;
             }
@@ -37,10 +37,10 @@ public class Lottos {
         return LOTTO_NUMBER_CONTAINS_FALSE;
     }
 
-    private static List<LottoNumber> setWinningLottoNumber(String lastLottoWinningNumbers) {
+    private static List<Numbers> setWinningLottoNumber(String lastLottoWinningNumbers) {
         String[] lastLottoWinningNumber = lastLottoWinningNumbers.split(",");
         return Arrays.stream(lastLottoWinningNumber)
-                .map(winningNumber -> new LottoNumber(Integer.parseInt(winningNumber)))
+                .map(Numbers::of)
                 .collect(Collectors.toList());
     }
 }

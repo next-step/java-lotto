@@ -2,6 +2,8 @@ package step4;
 
 import step4.controller.LottoTicketMaker;
 import step4.domain.*;
+import step4.util.LottoNumberQtyValidate;
+import step4.util.NumbersValidate;
 import step4.view.LottoInputUi;
 import step4.view.LottoOuputUi;
 
@@ -13,22 +15,22 @@ public class LottoApplicationMain {
         Amount amount = Amount.of(purchaseAmount);
 
         int manualLottoQty = LottoInputUi.inputManualLottoCount();
+        LottoNumberQtyValidate.validate(manualLottoQty);
 
-        String manualLottoNumbers = LottoInputUi.askManualLottoNumbers();
-        Numbers numbers = Numbers.of(manualLottoNumbers);
+        List<Numbers> numbers = LottoInputUi.askManualLottoNumbers(manualLottoQty);
+        List<Lotto> manualLottoNumbers = LottoTicketMaker.askManualLottoNumbers(numbers);
 
-        List<LottoNumber> lottos = LottoTicketMaker.askManualLottoNumbers(manualLottoQty, numbers.getLottoNumber());
-        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, lottos);
+        LottoTicketMaker lottoTicketMaker = LottoTicketMaker.of(amount, manualLottoQty, manualLottoNumbers);
 
         LottoOuputUi.printLottoCount(lottoTicketMaker.lottoAutoPurchaseQty(), manualLottoQty);
         LottoOuputUi.printLottos(lottoTicketMaker.getLottoTicket().getLottos());
 
-        String lastWeekNumber = LottoInputUi.inputLastWeekNumber();
-        numbers = Numbers.of(lastWeekNumber);
+        Numbers lastWeekNumber = LottoInputUi.inputLastWeekNumber();
+        NumbersValidate.validate(lastWeekNumber.getLottoNumber());
 
-        String bonusNumber = LottoInputUi.inputBonusNumber();
+        Numbers bonusNumber = LottoInputUi.inputBonusNumber();
 
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers, bonusNumber);
+        LottoNumbers lottoNumbers = LottoNumbers.of(lastWeekNumber, bonusNumber.getLottoNumber());
         LottoGameWinning lottoWinning = LottoGameWinning.of(lottoNumbers, lottoTicketMaker.getLottoTicket());
 
         LottoOuputUi.printStatistics(lottoWinning.getLottoWinningMap());
