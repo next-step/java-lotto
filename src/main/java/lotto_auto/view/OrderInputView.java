@@ -5,9 +5,10 @@ import lotto_auto.model.LottoNumbers;
 import lotto_auto.model.LottoTicket;
 import lotto_auto.model.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OrderInputView {
 
@@ -15,7 +16,6 @@ public class OrderInputView {
     private static final String ENTER_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ENTER_BUY_LOTTO_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final Scanner scanner = new Scanner(System.in);
-
 
     public static Order enterOrder() {
         int money = enterMoney();
@@ -45,13 +45,13 @@ public class OrderInputView {
 
     private static List<LottoNumbers> enterLottoNumbers(int count) {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBERS_MESSAGE);
-        List<LottoNumbers> ret = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            String lottoNumberString = scanner.next();
-            LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberString);
-            ret.add(lottoNumbers);
-        }
-        return ret;
+        return IntStream.range(0, count)
+                .boxed()
+                .map(item -> {
+                    String lottoNumberString = scanner.next();
+                    LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberString);
+                    return lottoNumbers;
+                })
+                .collect(Collectors.toList());
     }
-
 }
