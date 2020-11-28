@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_BOUND = 45;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private static final List<Integer> lottoNumbers;
 
@@ -20,6 +21,6 @@ public class LottoNumbers {
 
     public List<Integer> makeNewNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream().limit(6).sorted().collect(Collectors.toList());
+        return lottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).sorted().collect(Collectors.toList());
     }
 }
