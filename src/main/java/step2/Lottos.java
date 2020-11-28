@@ -6,9 +6,9 @@ import java.util.List;
 public class Lottos {
     public List<Lotto> lottoList = new ArrayList<>();
 
-    public Lottos(int money, Machine numberMachine) {
+    public Lottos(int money, Generator lottoGenerator) {
         for(int i = 1; i <= getLottoCnt(money); i++) {
-            lottoList.add(new Lotto(numberMachine));
+            lottoList.add(new Lotto(lottoGenerator));
         }
     }
 

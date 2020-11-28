@@ -11,18 +11,18 @@ public class LottoTest {
 
     @Test
     void createTest() {
-        Machine numberMachine = new NumberMachine();
-        numberMachine.setNumber("");
-        Lotto lotto = new Lotto(numberMachine);
+        Generator lottoGenerator = new LottoGenerator();
+        lottoGenerator.setNumber("");
+        Lotto lotto = new Lotto(lottoGenerator);
         assertThat(lotto.numberList.size()).isEqualTo(6);
     }
 
     @Test
     void checkRewardTest() {
-        Machine fixedMachine = new FixedMachine();
-        fixedMachine.setNumber("1,3,5,7,9,11");
+        Generator fixedGenerator = new FixedGenerator();
+        fixedGenerator.setNumber("1,3,5,7,9,11");
 
-        Lotto lotto = new Lotto(fixedMachine);
+        Lotto lotto = new Lotto(fixedGenerator);
         String resultInput = "1, 3, 5, 6, 8, 10";
 
         List<Integer> result = new ArrayList<>();

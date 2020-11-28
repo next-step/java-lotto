@@ -11,8 +11,8 @@ public class StaticticTest {
 
     @Test
     void statisticTest() {
-        Machine fourWinningsMachine = new FixedMachine();
-        fourWinningsMachine.setNumber("1,3,5,7,10,12");
+        Generator fourWinningsGenerator = new FixedGenerator();
+        fourWinningsGenerator.setNumber("1,3,5,7,10,12");
 
         String resultInput = "1, 3, 5, 7, 9, 11";
 
@@ -23,7 +23,7 @@ public class StaticticTest {
         }
 
         int money = 6500;
-        Lottos lottos = new Lottos(money, fourWinningsMachine);
+        Lottos lottos = new Lottos(money, fourWinningsGenerator);
 
         for(Lotto lotto: lottos.lottoList) {
             Statistic.recordResult(lotto.checkReward(result));

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FixedMachine implements Machine {
+public class FixedGenerator implements Generator {
     private static final List<Integer> numbers = new ArrayList<>();
 
     public void setNumber(String inputNumber) {

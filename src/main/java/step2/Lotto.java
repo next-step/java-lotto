@@ -5,8 +5,8 @@ import java.util.List;
 public class Lotto {
     public static List<Integer> numberList;
 
-    public Lotto(Machine numberMachine) {
-        numberList = numberMachine.getLottoNumbers();
+    public Lotto(Generator lottoGenerator) {
+        numberList = lottoGenerator.getLottoNumbers();
     }
 
     public int checkReward(List<Integer> result) {
