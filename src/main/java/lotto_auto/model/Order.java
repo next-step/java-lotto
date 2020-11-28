@@ -25,7 +25,11 @@ public class Order {
         return this.manualLottoNumbers;
     }
 
-    public int getAuto() {
+    public int getAutoCount() {
         return this.auto;
+    }
+
+    public int getManualCount() {
+        return this.manualLottoNumbers.size();
     }
 }

@@ -2,6 +2,7 @@ package lotto_auto.view;
 
 import lotto_auto.model.LottoBundle;
 import lotto_auto.model.LottoTicket;
+import lotto_auto.model.Order;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,8 @@ public class LottoBundleStatusView {
 
     public static void statusPrint(LottoBundle lottoBundle) {
         List<LottoTicket> lottoTicketList = lottoBundle.export();
-        System.out.println(String.format(LOTTO_TICKET_BUY_MESSAGE, lottoBundle.getManual(), lottoBundle.getAuto()));
+        Order order = lottoBundle.getOrder();
+        System.out.println(String.format(LOTTO_TICKET_BUY_MESSAGE, order.getManualCount(), order.getAutoCount()));
         StringBuilder sb = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTicketList) {
             sb.append(printLottoTicket(lottoTicket));

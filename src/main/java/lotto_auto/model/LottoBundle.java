@@ -9,13 +9,11 @@ import java.util.stream.Collectors;
 
 public class LottoBundle {
 
-    private final int auto;
-    private final int manual;
+    private final Order order;
     private List<LottoTicket> lottoTicketList;
 
-    public LottoBundle(List<LottoTicket> lottoTickets, int auto, int manual) {
-        this.auto = auto;
-        this.manual = manual;
+    public LottoBundle(List<LottoTicket> lottoTickets, Order order) {
+        this.order = order;
         this.lottoTicketList = Collections.unmodifiableList(lottoTickets);
     }
 
@@ -37,11 +35,8 @@ public class LottoBundle {
                 lottoTicketList.size() * LottoTicket.PRICE);
     }
 
-    public int getAuto() {
-        return this.auto;
+    public Order getOrder(){
+        return this.order;
     }
 
-    public int getManual() {
-        return this.manual;
-    }
 }

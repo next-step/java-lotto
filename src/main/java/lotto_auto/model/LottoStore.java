@@ -14,7 +14,7 @@ public class LottoStore {
         List<LottoTicket> allTicket = new ArrayList<>();
         allTicket.addAll(manualLottoTicket);
         allTicket.addAll(autoLottoTicket);
-        return new LottoBundle(allTicket, autoLottoTicket.size(), manualLottoTicket.size());
+        return new LottoBundle(allTicket, order);
     }
 
     private static List<LottoTicket> prepareManualLotto(Order order) {
@@ -25,7 +25,7 @@ public class LottoStore {
     }
 
     private static List<LottoTicket> prepareAutoLotto(Order order) {
-        return IntStream.range(0, order.getAuto())
+        return IntStream.range(0, order.getAutoCount())
                 .boxed()
                 .map(item -> new LottoTicket())
                 .collect(Collectors.toList());

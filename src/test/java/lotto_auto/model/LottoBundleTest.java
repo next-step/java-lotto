@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,35 +26,21 @@ class LottoBundleTest {
     }, delimiter = ':')
     public void createLottoTest(int manual, int auto, int expected) {
 
-        List<LottoTicket> manualLottoTickets = IntStream.range(0, manual)
+        List<LottoNumbers> lottoNumbersList = IntStream.range(0, manual)
                 .boxed()
-                .map(item -> new LottoTicket())
+                .map(item -> new LottoNumbers("1,2,3,4,5,6"))
                 .collect(Collectors.toList());
 
-        List<LottoTicket> autoLottoTickets = IntStream.range(0, auto)
-                .boxed()
-                .map(item -> new LottoTicket())
-                .collect(Collectors.toList());
 
-        List<LottoTicket> all = new ArrayList<>();
-        all.addAll(manualLottoTickets);
-        all.addAll(autoLottoTickets);
+        Order order = new Order(lottoNumbersList, auto);
 
-        LottoBundle lottoBundle = new LottoBundle(all, autoLottoTickets.size(), manualLottoTickets.size());
+        LottoBundle lottoBundle = LottoStore.sell(order);
+        Order lottoOrder = lottoBundle.getOrder();
+
         assertAll(() -> assertThat(lottoBundle.getTicketCount()).isEqualTo(expected),
-                () -> assertThat(lottoBundle.getManual()).isEqualTo(manualLottoTickets.size()),
-                () -> assertThat(lottoBundle.getAuto()).isEqualTo(autoLottoTickets.size())
+                () -> assertThat(lottoOrder.getManualCount()).isEqualTo(manual),
+                () -> assertThat(lottoOrder.getAutoCount()).isEqualTo(auto)
         );
-    }
-
-    @DisplayName("export Ticket isNotNull")
-    @Test
-    public void exportTicketIsNotNullTest() {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket());
-        lottoTickets.add(new LottoTicket());
-        LottoBundle lottoBundle = new LottoBundle(lottoTickets, 1, 1);
-        assertThat(lottoBundle.export()).isNotNull();
     }
 
     @DisplayName("로또 추첨 중복 테스트")
@@ -77,7 +62,7 @@ class LottoBundleTest {
                     List<LottoTicket> lottoTickets = new ArrayList<>();
                     lottoTickets.add(new LottoTicket());
                     lottoTickets.add(new LottoTicket());
-                    LottoBundle lottoBundle = new LottoBundle(lottoTickets, 1, 1);
+                    LottoBundle lottoBundle = new LottoBundle(lottoTickets, new Order(new ArrayList<>(), 10));
                     lottoBundle.draw(lottoNumbers, lottoNumber);
                 }
         ).isInstanceOf(IllegalArgumentException.class);
