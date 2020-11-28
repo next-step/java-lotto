@@ -18,39 +18,38 @@ public class LottoTicketMaker {
 
     private final Amount amount;
 
-    private Lottos lottoTicket;
+    private final Lottos lottoTicket;
 
     private final int manualLottoQty;
 
+    private Lotto lotto;
 
-    private LottoTicketMaker(int manualLottoQty, Amount amount, List<Lotto> lottoNumber) {
+    private LottoTicketMaker(int manualLottoQty, Amount amount, List<Lotto> manualLottoNumbers) {
         this.amount = amount;
         this.manualLottoQty = manualLottoQty;
-        this.lottoTicket = create(lottoNumber);
+        this.lottoTicket = create(manualLottoNumbers);
     }
 
-    public static LottoTicketMaker of(Amount amount, int manualLottoQty, List<Lotto> lottos) {
-        return new LottoTicketMaker(manualLottoQty, amount, lottos);
+    public static LottoTicketMaker of(Amount amount, int manualLottoQty, List<Lotto> manualLottoNumbers) {
+        return new LottoTicketMaker(manualLottoQty, amount, manualLottoNumbers);
     }
 
     public int lottoAutoPurchaseQty() {
         return amount.lottoPurchaseQty() - this.manualLottoQty;
     }
 
-    private Lottos create(List<Lotto> lottos) {
-        IntStream.range(0, lottoAutoPurchaseQty())
-                .mapToObj(i -> lottoTicketCreate())
-                .forEach(lottos::add);
+    private Lottos create(List<Lotto> lottoNumbers) {
+        IntStream.range(0, lottoAutoPurchaseQty()).forEach(i -> {
+            lottoTicketCreate();
+            lottoNumbers.add(this.lotto);
+        });
 
-        return new Lottos(lottos);
+        return new Lottos(lottoNumbers);
     }
 
-    private Lotto lottoTicketCreate() {
-        Lotto lotto = null;
-        for (int j = 0; j < LOTTO_TOTAL_COUNT; j++) {
-            lotto = new Lotto();
-        }
-        return lotto;
+    private void lottoTicketCreate() {
+        IntStream.range(0, LOTTO_TOTAL_COUNT)
+                .forEach(j -> lotto = new Lotto());
     }
 
     public Lottos getLottoTicket() {
@@ -63,6 +62,7 @@ public class LottoTicketMaker {
             NumbersValidate.validate(lottoNumbers.getLottoNumber());
             lotto.add(Lotto.of(setManualNumbers(lottoNumbers)));
         });
+        
         return lotto;
     }
 
