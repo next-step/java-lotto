@@ -12,20 +12,6 @@ public class MatchStatus {
         this.isBonusball = isBonusball;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MatchStatus that = (MatchStatus) o;
-        return matchCount == that.matchCount &&
-                isBonusball == that.isBonusball;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(matchCount, isBonusball);
-    }
-
     public int getMatchCount() {
         return matchCount;
     }
@@ -38,5 +24,19 @@ public class MatchStatus {
 
     public boolean isBonusball() {
         return isBonusball;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchStatus that = (MatchStatus) o;
+        return matchCount == that.matchCount &&
+                isBonusball == that.isBonusball;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCount, isBonusball);
     }
 }
