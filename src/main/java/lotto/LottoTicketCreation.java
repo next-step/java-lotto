@@ -22,10 +22,11 @@ public class LottoTicketCreation implements LottoTicketCreatable {
     }
 
     private List<Integer> addTicket() {
+        List<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+
         List<Integer> ticket = new ArrayList<>();
-        LottoTotalNumberUtils.shuffle();
         for (int i = 0; i < LottoTicket.LOTTO_TICKET_SIZE; i++) {
-            ticket.add(LottoTotalNumberUtils.getLottoTotalNumbers().get(i));
+            ticket.add(lottoTotalNumbers.get(i));
         }
 
         return ticket;

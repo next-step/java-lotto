@@ -17,10 +17,9 @@ public class LottoTotalNumberUtils {
     }
 
     public static List<Integer> getLottoTotalNumbers() {
-        return Collections.unmodifiableList(lottoTotalNumbers);
-    }
+        List<Integer> newLottoTotalNumbers = new ArrayList<>(lottoTotalNumbers);
+        Collections.shuffle(newLottoTotalNumbers);
 
-    public static void shuffle() {
-        Collections.shuffle(lottoTotalNumbers);
+        return newLottoTotalNumbers;
     }
 }
