@@ -22,7 +22,7 @@ public class LottoNumber {
     }
 
     private static boolean isValidLottoNumber(Set<Integer> lottoNumbers) {
-        return lottoNumbers.size() == LOTTO_FIX_SIZE ? !isValidRange(lottoNumbers) : false;
+        return lottoNumbers.size() == LOTTO_FIX_SIZE && !isValidRange(lottoNumbers);
     }
 
     private static boolean isValidRange(Set<Integer> lottoNumbers) {
