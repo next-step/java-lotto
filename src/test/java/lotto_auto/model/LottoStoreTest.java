@@ -28,7 +28,7 @@ class LottoStoreTest {
         lottoNumbersList.add(LottoNumbers.generate());
         lottoNumbersList.add(LottoNumbers.generate());
         lottoNumbersList.add(LottoNumbers.generate());
-        Order order = new Order(10, 5, lottoNumbersList, 5);
+        Order order = new Order( lottoNumbersList, 5);
         LottoBundle lottoBundle = lottoStore.sell(order);
         assertThat(lottoBundle).isNotNull();
     }

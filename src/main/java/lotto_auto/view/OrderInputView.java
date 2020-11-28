@@ -24,7 +24,7 @@ public class OrderInputView {
         int ticketCount = money / LottoTicket.PRICE;
         int count = enterManualLottoCount();
         List<LottoNumbers> lottoNumbers = enterLottoNumbers(count);
-        return new Order(ticketCount, lottoNumbers.size(), lottoNumbers, ticketCount - lottoNumbers.size());
+        return new Order(lottoNumbers, ticketCount - lottoNumbers.size());
     }
 
     public static int enterMoney() {
