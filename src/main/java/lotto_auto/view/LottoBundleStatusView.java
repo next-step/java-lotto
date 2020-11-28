@@ -22,7 +22,6 @@ public class LottoBundleStatusView {
     }
 
     private static String printLottoTicket(LottoTicket lottoTicket) {
-
         String collect = lottoTicket
                 .getLottoNumbers()
                 .export()

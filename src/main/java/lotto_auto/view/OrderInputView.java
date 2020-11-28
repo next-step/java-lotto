@@ -18,6 +18,8 @@ public class OrderInputView {
     private static final String ENTER_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ENTER_BUY_LOTTO_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String COMMA = ",";
+    private static final Scanner scanner = new Scanner(System.in);
+
 
     public static Order enterOrder() {
         int money = enterMoney();
@@ -29,7 +31,6 @@ public class OrderInputView {
 
     public static int enterMoney() {
         System.out.println(ENTER_BUY_LOTTO_MONEY_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
         int money = scanner.nextInt();
         throwIfNegativeMoney(money);
         return money;
@@ -43,7 +44,6 @@ public class OrderInputView {
 
     private static int enterManualLottoCount() {
         System.out.println(ENTER_MANUAL_LOTTO_COUNT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
@@ -51,8 +51,7 @@ public class OrderInputView {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBERS_MESSAGE);
         List<LottoNumbers> ret = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Scanner scan = new Scanner(System.in);
-            String next = scan.next();
+            String next = scanner.next();
             LottoNumbers lottoNumbers = new LottoNumbers(
                     Arrays.stream(next.split(COMMA))
                             .mapToInt(Integer::parseInt)
