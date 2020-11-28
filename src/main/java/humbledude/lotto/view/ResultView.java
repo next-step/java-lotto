@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class ResultView {
     private static final String EMPTY_STR = "";
-    private static final String MSG_NUMBER_OF_PURCHASED = "%d개를 구매했습니다.\n";
+    private static final String MSG_NUMBER_OF_PURCHASED = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String MSG_STATISTICS_TITLE = "당첨 통계\n--------------";
     private static final String MSG_STATISTICS_FOR_EACH_PRIZE = "%d개 일치%s (%d원) - %d개%n";
     private static final String MSG_STATISTICS_FOR_EACH_PRIZE_BONUS = ", 보너스 볼 일치";
@@ -19,8 +19,10 @@ public class ResultView {
     private static final String MSG_STATISTICS_FOOTER_LOSS = "손해";
     private static final String MSG_STATISTICS_FOOTER_SAME = "쌤쌤이";
 
-    public static void printNumberOfPurchased(long howMany) {
-        System.out.printf(MSG_NUMBER_OF_PURCHASED, howMany);
+    public static void printAmountPerKind(long amountOfManualLotto, long amountOfAutoLotto) {
+        System.out.printf(MSG_NUMBER_OF_PURCHASED,
+                amountOfAutoLotto,
+                amountOfManualLotto);
     }
 
     public static void printLottoNumber(List<LottoNumbers> tickets) {
