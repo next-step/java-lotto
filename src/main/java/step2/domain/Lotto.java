@@ -5,20 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> numbers;
 
+    private final List<Integer> numbers;
     public Lotto() {
+        this.numbers = new ArrayList<>();
         createLottoNumber();
     }
 
     private void createLottoNumber() {
-        List<Integer> allNumbers = new ArrayList<>();
-        for (int number = LottoConstant.START_NO; number <= LottoConstant.END_NO; number++) {
-            allNumbers.add(number);
-        }
-
-        Collections.shuffle(allNumbers);
-        this.numbers = allNumbers.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT);
+        List<Integer> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
+        Collections.shuffle(allLottoNumber);
+        this.numbers.addAll(allLottoNumber.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT));
         Collections.sort(this.numbers);
     }
 
