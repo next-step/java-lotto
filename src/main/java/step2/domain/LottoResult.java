@@ -1,31 +1,39 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResult {
-    public int[][] getWin(int[] winNumbers, List<Lotto> lottoList) {
-        int[][] winCounts = new int[][]{{0, 5000}, {0, 50000}, {0, 1500000}, {0, 2000000000}};
+    private static List<Rank> ranks = new ArrayList<>();
 
-        for (int i = 0; i < lottoList.size(); i++) {
-            checkWin(winNumbers, winCounts, lottoList.get(i));
+    public LottoResult(int[] winNumber, List<Lotto> buyLottoList) {
+        for (Lotto lotto : buyLottoList) {
+            addRank(match(winNumber, lotto));
         }
-        return winCounts;
     }
 
-    private void checkWin(int[] winNumbers, int[][] winCounts, Lotto lotto) {
-        int equalCount = 0;
+    public List<Rank> getRanks() {
+        return this.ranks;
+    }
+
+    public static void addRank(int matchCount) {
+        if (matchCount >= 3) {
+            ranks.add(Rank.rank(matchCount));
+        }
+    }
+
+    private static int match(int[] winNumbers, Lotto lotto) {
+        int matchCount = 0;
         for (int winNumber : winNumbers) {
-            equalCount += lotto.contains(winNumber) ? 1 : 0;
+            matchCount += lotto.contains(winNumber) ? 1 : 0;
         }
-        if (equalCount >= 3) {
-            winCounts[equalCount - 3][0]++;
-        }
+        return matchCount;
     }
 
-    public double getTotalRevenue(int purchasePrice, int[][] winCounts) {
+    public double getTotalRevenue(int purchasePrice) {
         double total = 0;
-        for (int i = 0; i < winCounts.length; i++) {
-            total = total + (winCounts[i][0] * winCounts[i][1]);
+        for (Rank rank : ranks) {
+            total += rank.getWinPrice();
         }
         return (total / purchasePrice);
     }

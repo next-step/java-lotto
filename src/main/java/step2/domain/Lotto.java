@@ -1,14 +1,14 @@
 package step2.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new HashSet(numbers);
+        this.numbers = new TreeSet(numbers);
     }
 
     public Set<LottoNumber> getNumbers() {

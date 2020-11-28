@@ -18,15 +18,13 @@ public class LottoController {
 
         int purchaseLottoCount = buyLottoList.size();
         ResultView.printPurchaseCount(purchaseLottoCount);
-
-        LottoResult lottoResult = new LottoResult();
+        ResultView.printLottoNumbers(buyLottoList);
 
         ResultView.printWinNumber();
         int[] winNumber = InputView.inputWinNumber();
-        int[][] winCounts = lottoResult.getWin(winNumber, buyLottoList);
-        ResultView.printWinCounts(winCounts);
 
-        double totalRevenue = lottoResult.getTotalRevenue(purchasePrice, winCounts);
-        ResultView.printTotalRevenue(totalRevenue);
+        LottoResult lottoResult = new LottoResult(winNumber, buyLottoList);
+        ResultView.printWinCounts(lottoResult);
+        ResultView.printTotalRevenue(lottoResult.getTotalRevenue(purchasePrice));
     }
 }

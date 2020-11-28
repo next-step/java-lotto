@@ -1,38 +1,51 @@
 package step2.view;
 
-import java.util.Set;
+import step2.domain.Lotto;
+import step2.domain.LottoResult;
+import step2.domain.Rank;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String purchasePrice = "구입금액을 입력해 주세요.";
-    private static final String winNumber = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String PURCHASE_PRICE = "구입금액을 입력해 주세요.";
+    private static final String WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 
     private static void printMessage(String message) {
         System.out.println(message);
     }
 
     public static void printPurchasePrice() {
-        printMessage(purchasePrice);
+        printMessage(PURCHASE_PRICE);
     }
 
     public static void printPurchaseCount(int purchaseCount) {
         printMessage(purchaseCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(Set<Integer> lottoNumbers) {
-        printMessage(lottoNumbers.toString());
+    public static void printLottoNumbers(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            printMessage(lotto.getNumbers().toString());
+        }
     }
 
     public static void printWinNumber() {
         printMessage("");
-        printMessage(winNumber);
+        printMessage(WIN_NUMBER);
     }
 
-    public static void printWinCounts(int[][] winCounts) {
+    public static void printWinCounts(LottoResult lottoResult) {
         printMessage("");
         printMessage("당첨 통계");
         printMessage("--------");
-        for (int i = 0; i < winCounts.length; i++) {
-            printMessage((i + 3) + "개 일치 (" + winCounts[i][1] + ")원- " + winCounts[i][0] + "개");
+
+        for (Rank rank : Rank.values()) {
+            int rankMatchCount = rank.getMatchCount();
+            List<Rank> filterRanks = lottoResult.getRanks().stream()
+                    .filter(r -> r.getMatchCount() == rankMatchCount)
+                    .collect(Collectors.toList());
+
+            printMessage(rankMatchCount + "개 일치 (" + rank.getWinPrice() + ")원- " + filterRanks.size() + "개");
         }
     }
 

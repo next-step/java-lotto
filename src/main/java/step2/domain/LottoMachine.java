@@ -19,8 +19,8 @@ public class LottoMachine {
         return new Lotto(extractionLottoNumbers);
     }
 
-    public List<Lotto> buyLotto(int purchasPrice) {
-        int buyCount = purchasPrice / this.PRICE;
+    public List<Lotto> buyLotto(int purchasePrice) {
+        int buyCount = purchasePrice / this.PRICE;
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < buyCount; i++) {
             lottoList.add(createLottoNumbers());
