@@ -7,7 +7,7 @@ public class Lottos {
     public List<Lotto> lottoList = new ArrayList<>();
 
     public Lottos(int money, Generator lottoGenerator) {
-        for(int i = 1; i <= getLottoCnt(money); i++) {
+        for (int i = 1; i <= getLottoCnt(money); i++) {
             lottoList.add(new Lotto(lottoGenerator));
         }
     }

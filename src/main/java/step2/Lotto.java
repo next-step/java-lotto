@@ -11,8 +11,8 @@ public class Lotto {
 
     public int checkReward(List<Integer> result) {
         int winningNumber = 0;
-        for(int i: result) {
-            if(numberList.contains(i)) {
+        for (int i : result) {
+            if (numberList.contains(i)) {
                 winningNumber ++;
             }
         }

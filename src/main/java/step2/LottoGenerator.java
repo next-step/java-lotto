@@ -8,7 +8,7 @@ public class LottoGenerator implements Generator {
     private static final List<Integer> numbers = new ArrayList<>();
 
     public void setNumber(String inputNumber) {
-        for(int i = 1; i <= 45; i++) {
+        for (int i = 1; i <= 45; i++) {
             numbers.add(i);
         }
     }

@@ -13,7 +13,7 @@ public class Statistic {
 
     public static float getMargin(int money) {
         float totalReward = 0;
-        for(int i = 0; i < rewardList.length; i++) {
+        for (int i = 0; i < rewardList.length; i++) {
             totalReward += rewardList[i] * results[i];
         }
 
@@ -21,7 +21,7 @@ public class Statistic {
     }
 
     public static void recordResult(int winningNumber) {
-        if(winningNumber > 2) {
+        if (winningNumber > 2) {
             results[winningNumber-3] += 1;
         }
     }
