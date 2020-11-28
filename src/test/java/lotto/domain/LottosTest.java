@@ -16,15 +16,15 @@ public class LottosTest {
     @BeforeEach
     void setUp(){
         lottos = new Lottos(
-                LottoUtils.lotto("1,2,3,4,5,6"),
-                LottoUtils.lotto("1,2,3,4,5,45"),
-                LottoUtils.lotto("1,2,3,4,5,44"),
-                LottoUtils.lotto("1,2,3,4,30,45"),
-                LottoUtils.lotto("1,2,3,4,30,44"),
-                LottoUtils.lotto("1,2,3,20,30,45"),
-                LottoUtils.lotto("1,2,3,20,30,44"),
-                LottoUtils.lotto("1,2,3,20,30,43"),
-                LottoUtils.lotto("1,2,3,4,5,7")
+                new Lotto("1,2,3,4,5,6"),
+                new Lotto("1,2,3,4,5,45"),
+                new Lotto("1,2,3,4,5,44"),
+                new Lotto("1,2,3,4,30,45"),
+                new Lotto("1,2,3,4,30,44"),
+                new Lotto("1,2,3,20,30,45"),
+                new Lotto("1,2,3,20,30,44"),
+                new Lotto("1,2,3,20,30,43"),
+                new Lotto("1,2,3,4,5,7")
         );
     }
 

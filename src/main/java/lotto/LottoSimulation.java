@@ -14,13 +14,14 @@ public class LottoSimulation {
         LottoMachine lottoMachine = new LottoMachine();
 
         int purchaseAmount = inputView.readPurchaseAmount();
-        List<Lotto> myLottos = lottoMachine.issue(purchaseAmount);
+        List<String> lottoNumbers = inputView.readLottoNumbers();
 
+        List<Lotto> myLottos = lottoMachine.issueLottos(purchaseAmount, lottoNumbers);
         outputView.showPurchasedLottos(myLottos);
 
         String winningNumber = inputView.readWinningNumber();
         int bonusNumber = inputView.readBonusNumber();
-        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new WinningNumber(winningNumber, bonusNumber), myLottos);
+        PrizeWinningResult result = lottoMachine.checkPrizeWinning(new WinningNumbers(winningNumber, bonusNumber), myLottos);
 
         outputView.showResult(result);
     }

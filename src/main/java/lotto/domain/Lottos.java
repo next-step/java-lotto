@@ -20,11 +20,11 @@ public class Lottos {
         return lottos.size() * Lotto.PRICE;
     }
 
-    public List<RankedLotto> checkRanking(WinningNumber winningNumber) {
+    public List<RankedLotto> checkRanking(WinningNumbers winningNumbers) {
         return lottos.stream()
                 .map(it -> {
-                    long matchedCount = winningNumber.getMatchedWinningNumberCount(it);
-                    boolean matchedBonus = winningNumber.matchBonusNumber(it);
+                    long matchedCount = winningNumbers.getMatchedWinningNumberCount(it);
+                    boolean matchedBonus = winningNumbers.matchBonusNumber(it);
 
                     return new RankedLotto(LottoRanking.valueOf(matchedCount, matchedBonus), it);
                 })
