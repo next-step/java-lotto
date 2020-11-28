@@ -11,7 +11,7 @@ public class StaticticTest {
 
     @Test
     void statisticTest() {
-        Generator fourWinningsGenerator = new FixedGenerator();
+        Generator fourWinningsGenerator = new FixedNumberGenerator();
         fourWinningsGenerator.setNumber("1,3,5,7,10,12");
 
         String resultInput = "1, 3, 5, 7, 9, 11";

@@ -7,8 +7,8 @@ public class Statistic {
     public static final Integer[] results = {0, 0, 0, 0};
 
     public static String getRewardResult(String winningNumber) {
-        int index = Integer.parseInt(winningNumber)-3;
-        return winningNumber + "개 일치 ("+rewardList[index].toString()+"원)- "+results[index].toString()+"개";
+        int index = Integer.parseInt(winningNumber) - 3;
+        return winningNumber + "개 일치 (" + rewardList[index].toString() + "원)- " + results[index].toString() + "개";
     }
 
     public static float getMargin(int money) {
@@ -22,7 +22,7 @@ public class Statistic {
 
     public static void recordResult(int winningNumber) {
         if (winningNumber > 2) {
-            results[winningNumber-3] += 1;
+            results[winningNumber - 3] += 1;
         }
     }
 }

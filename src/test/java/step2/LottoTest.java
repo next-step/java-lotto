@@ -19,10 +19,10 @@ public class LottoTest {
 
     @Test
     void checkRewardTest() {
-        Generator fixedGenerator = new FixedGenerator();
-        fixedGenerator.setNumber("1,3,5,7,9,11");
+        Generator fixedNumberGenerator = new FixedNumberGenerator();
+        fixedNumberGenerator.setNumber("1,3,5,7,9,11");
 
-        Lotto lotto = new Lotto(fixedGenerator);
+        Lotto lotto = new Lotto(fixedNumberGenerator);
         String resultInput = "1, 3, 5, 6, 8, 10";
 
         List<Integer> result = new ArrayList<>();
