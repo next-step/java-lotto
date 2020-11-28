@@ -1,5 +1,6 @@
 package step2;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class LottoTest {
 
     @Test
+    @DisplayName("로또 생성 테스트")
     void createTest() {
         Generator lottoGenerator = new LottoGenerator();
         lottoGenerator.setNumber("");
@@ -18,6 +20,7 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 당첨 여부 테스트")
     void checkRewardTest() {
         Generator fixedNumberGenerator = new FixedNumberGenerator();
         fixedNumberGenerator.setNumber("1,3,5,7,9,11");

@@ -1,5 +1,6 @@
 package step2;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class StaticticTest {
 
     @Test
+    @DisplayName("로또 결과 통계 테스트")
     void statisticTest() {
         Generator fourWinningsGenerator = new FixedNumberGenerator();
         fourWinningsGenerator.setNumber("1,3,5,7,10,12");
