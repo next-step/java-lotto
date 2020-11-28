@@ -4,22 +4,25 @@ import java.util.Objects;
 
 public class MatchStatus {
 
+    private static final int BONUS_BALL_MATCH_COUNT = 5;
+
     private int matchCount;
     private boolean isBonusball;
 
-    public MatchStatus(int matchCount, boolean isBonusball) {
+    private MatchStatus(int matchCount, boolean isBonusball) {
         this.matchCount = matchCount;
         this.isBonusball = isBonusball;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public static MatchStatus of(int matchCount, boolean isBonusball) {
+        if(matchCount != BONUS_BALL_MATCH_COUNT){
+            return new MatchStatus(matchCount, false);
+        }
+        return new MatchStatus(matchCount, isBonusball);
     }
 
-    public void notAllowedBallOtherNumber(int availableNumber) {
-        if(matchCount != availableNumber){
-            this.isBonusball = false;
-        }
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public boolean isBonusball() {

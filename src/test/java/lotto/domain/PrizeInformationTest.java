@@ -13,7 +13,7 @@ public class PrizeInformationTest {
                         "5:true:30000000", "6:false:2000000000"}, delimiter = ':')
     public void prizeInformationTest(int count, boolean isBousball, int expectWinningMoney) {
         //Given & When
-        PrizeInformation information = PrizeInformation.findByPrizePrice(new MatchStatus(count, isBousball));
+        PrizeInformation information = PrizeInformation.findByPrizePrice(MatchStatus.of(count, isBousball));
 
         //Then
         assertThat(information).isNotNull();
@@ -27,7 +27,7 @@ public class PrizeInformationTest {
     public void notAllowedBonusball(int count, boolean isBousball, int expectWinningMoney){
 
         //Given & When
-        PrizeInformation information = PrizeInformation.findByPrizePrice(new MatchStatus(count, isBousball));
+        PrizeInformation information = PrizeInformation.findByPrizePrice(MatchStatus.of(count, isBousball));
 
         //Then
         assertThat(information.getPrizePrice()).isEqualTo(expectWinningMoney);

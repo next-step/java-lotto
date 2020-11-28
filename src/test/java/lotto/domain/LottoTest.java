@@ -37,7 +37,7 @@ public class LottoTest {
         PrizeInformation prizeInformation = lotto.matchPrizeNumber(PrizeLotto.of(expected, 5 ));
 
         //That
-        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(new MatchStatus(prizeInformation.countMatchNumber(), false)));
+        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(MatchStatus.of(prizeInformation.countMatchNumber(), false)));
 
     }
 

@@ -16,7 +16,7 @@ public class MatchStatusTest {
             "5:false", "5:true", "6:false"}, delimiter = ':')
     public void createInstanceTest(int matchCount, boolean isBonusball) {
         //Given & When
-        MatchStatus matchStatus = new MatchStatus(matchCount, isBonusball);
+        MatchStatus matchStatus = MatchStatus.of(matchCount, isBonusball);
 
         //Then
         assertThat(matchStatus).isNotNull();
@@ -27,9 +27,9 @@ public class MatchStatusTest {
             "5:false", "5:true", "6:false"}, delimiter = ':')
     public void equalsTest(int matchCount, boolean isBonusball) {
         //Given
-        MatchStatus matchStatus = new MatchStatus(matchCount, isBonusball);
-        MatchStatus matchStatus2 = new MatchStatus(matchCount, isBonusball);
-        MatchStatus matchStatus3 = new MatchStatus(matchCount, isBonusball);
+        MatchStatus matchStatus = MatchStatus.of(matchCount, isBonusball);
+        MatchStatus matchStatus2 = MatchStatus.of(matchCount, isBonusball);
+        MatchStatus matchStatus3 = MatchStatus.of(matchCount, isBonusball);
 
         //Then
         assertThat(matchStatus).isEqualTo(matchStatus2).isEqualTo(matchStatus3);
@@ -40,9 +40,9 @@ public class MatchStatusTest {
             "5:false", "5:true", "6:false"}, delimiter = ':')
     public void equalsFalse(int matchCount, boolean isBonusball) {
         //Given
-        MatchStatus matchStatus = new MatchStatus(matchCount, isBonusball);
-        MatchStatus matchStatus2 = new MatchStatus(matchCount + 1, !isBonusball);
-        MatchStatus matchStatus3 = new MatchStatus(matchCount + 2, isBonusball);
+        MatchStatus matchStatus = MatchStatus.of(matchCount, isBonusball);
+        MatchStatus matchStatus2 = MatchStatus.of(matchCount + 1, !isBonusball);
+        MatchStatus matchStatus3 = MatchStatus.of(matchCount + 2, isBonusball);
 
         //Then
         assertThat(matchStatus).isNotEqualTo(matchStatus2).isNotEqualTo(matchStatus3);
@@ -56,24 +56,22 @@ public class MatchStatusTest {
         Map<MatchStatus, Integer> map = new HashMap<>();
 
         //When
-        map.put(new MatchStatus(matchCount, isBonusball), 0);
-        map.put(new MatchStatus(matchCount, !isBonusball), 0);
-        map.put(new MatchStatus(matchCount + 2, isBonusball),0);
+        map.put(MatchStatus.of(matchCount, isBonusball), 0);
+        map.put(MatchStatus.of(matchCount, isBonusball), 0);
+        map.put(MatchStatus.of(matchCount + 2, isBonusball),0);
 
 
         //Then
-        assertThat(map).hasSize(3);
+        assertThat(map).hasSize(2);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"3:true", "4:true", "5:false", "5:true", "6:false"}, delimiter = ':')
     public void changeBonusballStatus(int matchCount, boolean isBonusball){
         //Given
-        int availableNumber = 5;
-        MatchStatus matchStatus = new MatchStatus(3, isBonusball);
+        MatchStatus matchStatus = MatchStatus.of(matchCount, isBonusball);
 
         //When
-        matchStatus.notAllowedBallOtherNumber(availableNumber);
         PrizeInformation prizeInformation = PrizeInformation.findByPrizePrice(matchStatus);
 
         //Then

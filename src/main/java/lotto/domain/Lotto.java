@@ -15,7 +15,7 @@ public class Lotto {
                 .filter(prizeLotto::existByIndexNumber)
                 .count();
         boolean isBonusball = matchBonusball(prizeLotto);
-        return PrizeInformation.findByPrizePrice(new MatchStatus(prizeCount, isBonusball));
+        return PrizeInformation.findByPrizePrice(MatchStatus.of(prizeCount, isBonusball));
     }
 
     private boolean matchBonusball(PrizeLotto prizeLotto) {
