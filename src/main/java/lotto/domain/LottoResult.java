@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,7 +9,7 @@ public class LottoResult {
     private Map<ProfitRule, Integer> result;
     private int profit;
     private int payment;
-    private BigDecimal profitRatio;
+    private double profitRatio;
 
     public LottoResult(int lottoTickets) {
         this.payment = lottoTickets * PRICE;
@@ -32,6 +31,10 @@ public class LottoResult {
         return payment;
     }
 
+    public double getProfitRatio() {
+        return profitRatio;
+    }
+
     public void saveLottoResult(long matchingScore) {
         if (matchingScore > 2) {
             ProfitRule profitRule = ProfitRule.getProfitByMatchingScore(matchingScore);
@@ -40,8 +43,7 @@ public class LottoResult {
         }
     }
 
-    public void getProfitRatio() {
-
-        BigDecimal.valueOf(getProfit()/getPayment());
+    public void calculateProfitRatio() {
+        profitRatio = (double) getProfit() / getPayment();
     }
 }

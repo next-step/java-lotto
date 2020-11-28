@@ -21,6 +21,6 @@ public class ResultView {
         for (ProfitRule p :lottoResult.getResult().keySet()) {
             System.out.println(p.getDesc() + "(" + p.getProfit() + ")" + ": " + lottoResult.getResult().get(p));
         }
-        System.out.println("총 수익률은 " + lottoResult.getProfit()/lottoResult.getPayment() + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다.");
     }
 }
