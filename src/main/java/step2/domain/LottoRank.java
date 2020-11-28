@@ -5,31 +5,17 @@ import java.util.Optional;
 
 public enum LottoRank {
 
-    FOUR(3) {
-        public Long findMoney() {
-            return LottoConstant.FOUR_MONEY;
-        }
-    },
-    THREE(4){
-        public Long findMoney() {
-            return LottoConstant.THREE_MONEY;
-        }
-    },
-    TWO(5){
-        public Long findMoney() {
-            return LottoConstant.TWO_MONEY;
-        }
-    },
-    ONE(6){
-        public Long findMoney() {
-            return LottoConstant.ONE_MONEY;
-        }
-    };
+    FOUR(3, LottoConstant.FOUR_MONEY),
+    THREE(4, LottoConstant.THREE_MONEY),
+    TWO(5, LottoConstant.TWO_MONEY),
+    ONE(6, LottoConstant.ONE_MONEY);
 
     private final long number;
+    private final long money;
 
-    LottoRank(long number) {
+    LottoRank(long number, long money) {
         this.number = number;
+        this.money = money;
     }
 
     public static Optional<LottoRank> findRank(long winNumberCount) {
@@ -42,6 +28,7 @@ public enum LottoRank {
         return lottoRank.number == winNumberCount;
     }
 
-    public abstract Long findMoney();
-
+    public long getMoney() {
+        return money;
+    }
 }
