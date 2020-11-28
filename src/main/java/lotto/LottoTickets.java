@@ -12,12 +12,12 @@ public class LottoTickets {
     }
 
     private LottoTickets(int purchaseNumber) {
-        addTicket(purchaseNumber);
+        addTickets(purchaseNumber);
     }
 
-    private void addTicket(int purchaseNumber) {
+    private void addTickets(int purchaseNumber) {
         for (int i = 0; i < purchaseNumber; i++) {
-            ticketList.add(new LottoTicket().newTicket());
+            ticketList.add(new LottoTicket().newTicket(new LottoTicketCreation()));
         }
     }
 

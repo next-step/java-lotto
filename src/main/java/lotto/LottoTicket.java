@@ -17,16 +17,8 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
-    public LottoTicket newTicket() {
-        LottoTotalNumberUtils.shuffle();
-
-        for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {
-            ticket.add(LottoTotalNumberUtils.getLottoTotalNumbers().get(i));
-        }
-
-        Collections.sort(ticket);
-
-        return new LottoTicket(ticket);
+    public LottoTicket newTicket(LottoTicketCreatable lottoTicketCreatable) {
+        return new LottoTicket(lottoTicketCreatable.createTicket());
     }
 
     public List<Integer> getTicket() {

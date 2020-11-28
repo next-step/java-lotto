@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,7 +29,7 @@ class LottoTotalNumberUtilsTest {
 //    @Test
 //    void 로또_전체_번호_체크() {
 //        // given
-//        Collection<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+//        List<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
 //
 //        // when
 //        Collection<Integer> expected = new ArrayList<>();
