@@ -7,13 +7,17 @@ public class LottoTickets {
 
     private final List<LottoTicket> ticketList = new ArrayList<>();
 
-    public LottoTickets() {
-        this(1);
+    public static LottoTickets newTickets(int purchaseNumber) {
+        return new LottoTickets(purchaseNumber);
     }
 
-    public LottoTickets(int purchaseNumber) {
+    private LottoTickets(int purchaseNumber) {
+        addTicket(purchaseNumber);
+    }
+
+    private void addTicket(int purchaseNumber) {
         for (int i = 0; i < purchaseNumber; i++) {
-            ticketList.add(new LottoTicket().createAuto());
+            ticketList.add(new LottoTicket().newTicket());
         }
     }
 

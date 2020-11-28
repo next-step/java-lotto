@@ -3,8 +3,6 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
@@ -16,7 +14,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket();
 
         // when
-        LottoTicket autoTicket = lottoTicket.createAuto();
+        LottoTicket autoTicket = lottoTicket.newTicket();
 
         // then
         assertThat(autoTicket.size()).isEqualTo(6);

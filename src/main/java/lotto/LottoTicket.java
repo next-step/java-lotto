@@ -6,8 +6,8 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final List<Integer> ticket;
     private static final int LOTTO_TICKET_SIZE = 6;
+    private final List<Integer> ticket;
 
     public LottoTicket() {
         this(new ArrayList<>());
@@ -17,7 +17,7 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
-    public LottoTicket createAuto() {
+    public LottoTicket newTicket() {
         LottoTotalNumberUtils.shuffle();
 
         for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {

@@ -11,7 +11,7 @@ public class Controller {
         int purchaseAmount = InputView.input();
         int purchaseNumber = PurchaseNumberCalculation.calculateNumberPurchase(purchaseAmount);
 
-        LottoTickets lottoTickets = new LottoTickets(purchaseNumber);
+        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber);
 
         ResultView.output(lottoTickets);
     }

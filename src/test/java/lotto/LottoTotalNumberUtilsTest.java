@@ -24,19 +24,19 @@ class LottoTotalNumberUtilsTest {
         assertThat(size).isEqualTo(45);
     }
 
-    @DisplayName(value = "로또를 선택하기 위한 1 ~ 45의 숫자가 모두 있는지 확인")
-    @Test
-    void 로또_전체_번호_체크() {
-        // given
-        Collection<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
-
-        // when
-        Collection<Integer> expected = new ArrayList<>();
-        for (int i = 1; i <= 45 ; i++) {
-            expected.add(i);
-        }
-
-        // then
-        assertThat(lottoTotalNumbers).isEqualTo(expected);
-    }
+//    @DisplayName(value = "로또를 선택하기 위한 1 ~ 45의 숫자가 모두 있는지 확인")
+//    @Test
+//    void 로또_전체_번호_체크() {
+//        // given
+//        Collection<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+//
+//        // when
+//        Collection<Integer> expected = new ArrayList<>();
+//        for (int i = 1; i <= 45 ; i++) {
+//            expected.add(i);
+//        }
+//
+//        // then
+//        assertThat(lottoTotalNumbers).isEqualTo(expected);
+//    }
 }
