@@ -57,7 +57,7 @@ public class StringAddCalculaterTest {
     void validateValueTest(){
         String value = "a";
         assertThatThrownBy(()->{
-            stringaddcalculater.validateValue(value);
+            stringaddcalculater.validateDigitAndNegative(value);
         }).isInstanceOf(RuntimeException.class)
         .hasMessageContaining("This value is not correct, Please check your input values");
     }
