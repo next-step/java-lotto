@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-    FIRST(6, 200000000L),
-    SECOND(5, 1500000L),
-    THIRD(4, 50000L),
-    FORTH(3, 5000L),
-    NONE(0, 0L);
+    FIRST(6, 200_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FORTH(3, 5_000),
+    NONE(0, 0);
 
     public final int matchCount;
-    public final long earningMoney;
+    public final int earningMoney;
 
-    LottoRank(int matchCount, long earningMoney) {
+    LottoRank(int matchCount, int earningMoney) {
         this.matchCount = matchCount;
         this.earningMoney = earningMoney;
     }

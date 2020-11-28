@@ -11,28 +11,28 @@ class LottoRankTest {
     @DisplayName("1등 테스트")
     public void FIRST_RANK_TEST() {
         LottoRank one = LottoRank.matchCount(6);
-        assertThat(one.earningMoney).isEqualTo(200000000L);
+        assertThat(one.earningMoney).isEqualTo(200000000);
     }
 
     @Test
     @DisplayName("2등 테스트")
     public void SECOND_RANK_TEST() {
         LottoRank two = LottoRank.matchCount(5);
-        assertThat(two.earningMoney).isEqualTo(1500000L);
+        assertThat(two.earningMoney).isEqualTo(1500000);
     }
 
     @Test
     @DisplayName("3등 테스트")
     public void THIRD_RANK_TEST() {
         LottoRank three = LottoRank.matchCount(4);
-        assertThat(three.earningMoney).isEqualTo(50000L);
+        assertThat(three.earningMoney).isEqualTo(50000);
     }
 
     @Test
     @DisplayName("4등 테스트")
     public void FORTH_RANK_TEST() {
         LottoRank four = LottoRank.matchCount(3);
-        assertThat(four.earningMoney).isEqualTo(5000L);
+        assertThat(four.earningMoney).isEqualTo(5000);
     }
 
     @Test
