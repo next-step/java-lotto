@@ -2,21 +2,15 @@ package lotto.domain;
 
 public class Calculator {
 
-    final static int PRICE = 1000;
-
-    private final int lottoTicketPrice;
-
-    public Calculator() {
-        this.lottoTicketPrice = PRICE;
-    }
+    final static int LOTTO_TICKET_PRICE = 1000;
 
     public int calculateLottoTicket(int input) {
         validate(input);
-        return input/lottoTicketPrice;
+        return input/ LOTTO_TICKET_PRICE;
     }
 
     private void validate(int input) {
-        if (Integer.compare(input, lottoTicketPrice) == -1)
+        if (Integer.compare(input, LOTTO_TICKET_PRICE) == -1)
             throw new IllegalArgumentException();
     }
 }

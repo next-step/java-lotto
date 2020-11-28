@@ -18,7 +18,7 @@ public class InputView {
         return split(scanner.nextLine());
     }
 
-    public List<Integer> split(String input) {
+    private List<Integer> split(String input) {
         List<String> strings = Arrays.asList(input.replaceAll(" ", "").split(","));
         return strings.stream().map(Integer::parseInt).collect(Collectors.toList());
     }

@@ -11,10 +11,9 @@ public class Scanner {
         this.winningNumbers = winningNumbers;
     }
 
-    public void scan(LottoTicket lottoTicket) {
+    private void scan(LottoTicket lottoTicket) {
         long matchingScore = lottoTicket.getNumbers().stream()
                         .filter(n -> winningNumbers.contains(n)).count();
-        lottoTicket.saveMatchingScore(matchingScore);
         lottoResult.saveLottoResult(matchingScore);
     }
 

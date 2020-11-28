@@ -6,9 +6,9 @@ import java.util.Map;
 public class LottoResult {
     final static int PRICE = 1000;
 
-    private Map<ProfitRule, Integer> result;
+    private final Map<ProfitRule, Integer> result;
     private int profit;
-    private int payment;
+    private final int payment;
     private double profitRatio;
 
     public LottoResult(int lottoTickets) {
@@ -21,14 +21,6 @@ public class LottoResult {
 
     public Map<ProfitRule, Integer> getResult() {
         return result;
-    }
-
-    public int getProfit() {
-        return profit;
-    }
-
-    public int getPayment() {
-        return payment;
     }
 
     public double getProfitRatio() {
@@ -44,6 +36,6 @@ public class LottoResult {
     }
 
     public void calculateProfitRatio() {
-        profitRatio = (double) getProfit() / getPayment();
+        profitRatio = (double) profit / payment;
     }
 }

@@ -4,7 +4,6 @@ import lotto.domain.Calculator;
 import lotto.domain.Generator;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.ProfitCalculator;
 import lotto.domain.Scanner;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,16 +17,15 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
 
         Calculator calculator = new Calculator();
-        Generator generator = Generator.newGenerator();
+        Generator generator = new Generator();
 
-        int tickets = calculator.calculateLottoTicket(inputView.inputPayment());
-        resultView.printTickets(tickets);
-        List<LottoTicket> lottoTickets = generator.generateLottoTickets(tickets);
+        int ticketCount = calculator.calculateLottoTicket(inputView.inputPayment());
+        resultView.printTickets(ticketCount);
+        List<LottoTicket> lottoTickets = generator.generateLottoTickets(ticketCount);
         resultView.printLottoTickets(lottoTickets);
+
         Scanner scanner = new Scanner(inputView.inputWinningNumbers());
         LottoResult lottoResult = scanner.scanAll(lottoTickets);
-
         resultView.printLottoResult(lottoResult);
-
     }
 }
