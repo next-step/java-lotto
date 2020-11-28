@@ -25,5 +25,4 @@ public class NumbersValidate {
             throw new IllegalArgumentException("로또 번호는 중복 될 수 없습니다.");
         }
     }
-
 }

@@ -63,5 +63,4 @@ public class Numbers implements Comparable<Numbers> {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
-
 }
