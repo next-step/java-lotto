@@ -1,22 +1,22 @@
 package lotto.automatic.domain;
 
 import java.util.List;
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
 
     private static final int NUMS_SIZE = 6;
-    private final SortedSet<Integer> nums;
+    private final Set<Integer> nums;
 
     public Lotto(List<Integer> nums) {
-        this.nums = new TreeSet<>(nums);
+        validate(nums);
 
-        validate(this.nums);
+        this.nums = new TreeSet<>(nums);
 
     }
 
-    private void validate(SortedSet<Integer> nums) {
+    private void validate(List<Integer> nums) {
 
         if (nums.stream()
                 .filter((Integer num) -> (num > 0 && num < 46))
