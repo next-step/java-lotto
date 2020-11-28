@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class LottoTest {
 
     @Test
-    void createTest(){
+    void createTest() {
         Machine numberMachine = new NumberMachine();
         numberMachine.setNumber("");
         Lotto lotto = new Lotto(numberMachine);
@@ -18,7 +18,7 @@ public class LottoTest {
     }
 
     @Test
-    void checkRewardTest(){
+    void checkRewardTest() {
         Machine fixedMachine = new FixedMachine();
         fixedMachine.setNumber("1,3,5,7,9,11");
 
@@ -27,7 +27,7 @@ public class LottoTest {
 
         List<Integer> result = new ArrayList<>();
 
-        for (String i : resultInput.split(", ")){
+        for (String i : resultInput.split(", ")) {
             result.add(Integer.parseInt(i));
         }
 

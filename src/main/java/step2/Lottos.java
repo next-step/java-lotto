@@ -12,8 +12,7 @@ public class Lottos {
         }
     }
 
-    public int getLottoCnt(int money){
-//        return (int) Math.floor(money/1000);
+    public int getLottoCnt(int money) {
         return money/1000;
     }
 }

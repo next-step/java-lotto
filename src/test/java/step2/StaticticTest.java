@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class StaticticTest {
 
     @Test
-    void statisticTest(){
+    void statisticTest() {
         Machine fourWinningsMachine = new FixedMachine();
         fourWinningsMachine.setNumber("1,3,5,7,10,12");
 
@@ -18,14 +18,14 @@ public class StaticticTest {
 
         List<Integer> result = new ArrayList<>();
 
-        for (String i : resultInput.split(", ")){
+        for (String i : resultInput.split(", ")) {
             result.add(Integer.parseInt(i));
         }
 
         int money = 6500;
         Lottos lottos = new Lottos(money, fourWinningsMachine);
 
-        for(Lotto lotto: lottos.lottoList){
+        for(Lotto lotto: lottos.lottoList) {
             Statistic.recordResult(lotto.checkReward(result));
         }
 

@@ -5,14 +5,14 @@ import java.util.List;
 public class Lotto {
     public static List<Integer> numberList;
 
-    public Lotto(Machine numberMachine){
+    public Lotto(Machine numberMachine) {
         numberList = numberMachine.getLottoNumbers();
     }
 
-    public int checkReward(List<Integer> result){
+    public int checkReward(List<Integer> result) {
         int winningNumber = 0;
-        for(int i: result){
-            if(numberList.contains(i)){
+        for(int i: result) {
+            if(numberList.contains(i)) {
                 winningNumber ++;
             }
         }

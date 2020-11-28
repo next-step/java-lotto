@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottosTest {
     @Test
-    void lottosCreateTest(){
+    void lottosCreateTest() {
         Machine numberMachine = new NumberMachine();
         numberMachine.setNumber("");
         int money = 6500;
