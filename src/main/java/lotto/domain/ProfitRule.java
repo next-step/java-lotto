@@ -25,6 +25,10 @@ public enum ProfitRule {
         return profit;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
     public static ProfitRule getProfitByMatchingScore(Long matchingScore) {
        for (ProfitRule p :ProfitRule.values()) {
            if (p.getMatchingScore().compareTo(matchingScore) == 0) {
@@ -33,5 +37,4 @@ public enum ProfitRule {
        }
         throw new IllegalArgumentException(matchingScore + "개 일치한 경우는 profit이 없습니다.");
     }
-
 }

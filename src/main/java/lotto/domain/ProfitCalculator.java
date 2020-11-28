@@ -10,7 +10,7 @@ public class ProfitCalculator {
 
     public int calculate(LottoTicket lottoTicket) {
         long matchingScore = lottoTicket.getMatchingScore();
-        if (matchingScore == 0) {
+        if (matchingScore <= 2L) {
             return 0;
         }
         return ProfitRule.getProfitByMatchingScore(matchingScore).getProfit();

@@ -5,6 +5,7 @@ import java.util.List;
 public class Scanner {
 
     private List<Integer> winningNumbers;
+    private LottoResult lottoResult;
 
     public Scanner(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
@@ -14,9 +15,12 @@ public class Scanner {
         long matchingScore = lottoTicket.getNumbers().stream()
                         .filter(n -> winningNumbers.contains(n)).count();
         lottoTicket.saveMatchingScore(matchingScore);
+        lottoResult.saveLottoResult(matchingScore);
     }
 
-    public void scanAll(List<LottoTicket> lottoTickets) {
+    public LottoResult scanAll(List<LottoTicket> lottoTickets) {
+        lottoResult = new LottoResult(lottoTickets.size());
         lottoTickets.forEach(this::scan);
+        return lottoResult;
     }
 }
