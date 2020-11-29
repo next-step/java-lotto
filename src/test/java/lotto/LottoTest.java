@@ -1,14 +1,15 @@
 package lotto;
 
-import lotto.model.CandidateLotto;
-import lotto.strategy.DrawingStrategy;
+import lotto.model.lotto.CandidateLotto;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.WinningLotto;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.Test;
+import utils.TestUtils;
 
-import java.lang.reflect.Field;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.function.IntUnaryOperator;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,33 +18,25 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 
 public class LottoTest {
+
     @Test
     public void 중복된_로또_번호_체크() throws Exception {
 
-        int numberCount = getNumberCount();
+        int numberCount = TestUtils.getNumberCount();
 
-        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> 1);
+        SortedSet<LottoNumber> testNumbers = testNumbers(numberCount, e -> LottoNumber.of(1));
         assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
 
     }
 
-    @Test
-    public void 임계치를_벗어난_로또_체크() throws Exception {
-        int numberCount = getNumberCount();
-        int threshold = getThreshold();
-
-        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold + e);
-
-        assertThatIllegalArgumentException().isThrownBy(() ->new CandidateLotto(new ManualStrategy(testNumbers)));
-    }
 
     @Test
     public void 정상_로또_체크() throws Exception {
 
-        int numberCount = getNumberCount();
-        int threshold = getThreshold();
+        int numberCount = TestUtils.getNumberCount();
+        int threshold = TestUtils.getThreshold();
 
-        SortedSet<Integer> testNumbers = testNumbers(numberCount, e -> threshold - e);
+        SortedSet<LottoNumber>  testNumbers = testNumbers(numberCount, e -> LottoNumber.of(threshold - e));
 
         assertThat(new CandidateLotto(new ManualStrategy(testNumbers))).isNotNull();
     }
@@ -51,56 +44,39 @@ public class LottoTest {
     @Test
     public void 일등_로또_매칭_결과() throws Exception {
 
-        int numberCount = getNumberCount();
-        int threshold = getThreshold();
+        int numberCount = TestUtils.getNumberCount();
+        int threshold = TestUtils.getThreshold();
 
-        SortedSet<Integer> manualNumbers = testNumbers(numberCount, e -> threshold - e);
-
+        SortedSet<LottoNumber>  manualNumbers = testNumbers(numberCount, e -> LottoNumber.of(threshold - e));
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
-
-        assertThat(testCandidateLotto.getMatchingNumberCount(manualNumbers, 0).size()).isEqualTo(numberCount);
+        assertThat(testCandidateLotto.intersect(testCandidateLotto, LottoNumber.of(7)).size()).isEqualTo(6);
 
     }
 
     @Test
     public void 부분_로또_매칭_결과() throws Exception {
 
-        int numberCount = getNumberCount();
-        int threshold = getThreshold();
+        int numberCount = TestUtils.getNumberCount();
+        int threshold = TestUtils.getThreshold();
 
-        SortedSet<Integer> manualNumbers = testNumbers(numberCount, e -> e + 1);
-        SortedSet<Integer> winnerNumbers = testNumbers(numberCount, e -> e + 1);
+        SortedSet<LottoNumber>  manualNumbers = testNumbers(numberCount, e ->LottoNumber.of(e+1));
+        SortedSet<LottoNumber>  winnerNumbers = testNumbers(numberCount, e ->LottoNumber.of(e+1));
 
-        winnerNumbers.remove(1);
-        winnerNumbers.add(threshold);
+        winnerNumbers.remove(LottoNumber.of(1));
+        winnerNumbers.add(LottoNumber.of(threshold));
 
+        WinningLotto winningLotto = new WinningLotto(LottoNumber.of(13), new ManualStrategy(winnerNumbers));
         CandidateLotto testCandidateLotto = new CandidateLotto(new ManualStrategy(manualNumbers));
 
-        assertThat(testCandidateLotto.getMatchingNumberCount(winnerNumbers, 0).size()).isEqualTo(numberCount - 1);
+        assertThat(testCandidateLotto.intersect(winningLotto, LottoNumber.of(13)).size()).isEqualTo(5);
 
     }
 
 
-    private SortedSet<Integer> testNumbers(int numberCount, IntUnaryOperator mapper) {
-        return IntStream.range(0, numberCount)
-                .map(mapper)
-                .boxed()
+    private SortedSet<LottoNumber> testNumbers(int numberCount, IntFunction<LottoNumber> mapper) {
+        return  IntStream.range(0, numberCount)
+                .mapToObj(mapper)
                 .collect(Collectors.toCollection(TreeSet::new));
-    }
-
-
-    private int getNumberCount() throws Exception {
-        Field lottoField =  DrawingStrategy.class.getDeclaredField("NUMBER_COUNT");
-        lottoField.setAccessible(true);
-
-        return lottoField.getInt(CandidateLotto.class);
-    }
-
-    private int getThreshold() throws Exception {
-        Field drawingField = DrawingStrategy.class.getDeclaredField("THRESHOLD");
-        drawingField.setAccessible(true);
-
-        return drawingField.getInt(DrawingStrategy.class);
     }
 
 }
