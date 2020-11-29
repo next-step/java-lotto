@@ -12,6 +12,7 @@ public enum PrizeUnit {
     FIFTH_GRADE(3,  5000, (value) -> Long.valueOf(value * 5000)),
     FAIL_GRADE(0,  0, (value) -> Long.valueOf(value * 0));
 
+    private static final int MIN_COUNT_TO_PRIZE = 3;
 
     public int prizeUnitCount;
 
@@ -32,7 +33,7 @@ public enum PrizeUnit {
 
         return Arrays.stream(PrizeUnit.values())
                 .filter(prize -> prize != SECOND_GRADE)
-                .filter(prize -> prize.prizeUnitCount == unitCount)
+                .filter(prize -> prize.prizeUnitCount == (unitCount < MIN_COUNT_TO_PRIZE ? 0 : unitCount))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(LottoErrorMessage.NOT_PRIZE_UNIT.getErrorMessage()));
     }

@@ -11,11 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PrizeUnitTest {
 
+    @DisplayName("최소 당첨 기준를 넘지 못하는 경우 당첨 실패 리턴 테스트")
+    @Test
+    void minPrizeUnitToFailGradeTest(){
+        PrizeUnit prizeUnit = PrizeUnit.findPrizeFieldByUnitCount(2, false);
+        assertEquals(PrizeUnit.FAIL_GRADE, prizeUnit);
+    }
+
     @DisplayName("당첨 기준 유닛이 아닌 경우 Exception 테스트")
     @Test
     void notPrizeUnitExceptionTest(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            PrizeUnit.findPrizeFieldByUnitCount(2, false);
+            PrizeUnit.findPrizeFieldByUnitCount(7, false);
         }).withMessageContaining(LottoErrorMessage.NOT_PRIZE_UNIT.getErrorMessage());
     }
 

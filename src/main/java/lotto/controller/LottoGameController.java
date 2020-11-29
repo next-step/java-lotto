@@ -18,12 +18,12 @@ public class LottoGameController {
     }
 
     public static void showLottoTickets(LottoGameResults lottoGameResults) {
-        ResultView.getLottoTickets(lottoGameResults);
+        ResultView.showLottoTickets(lottoGameResults);
     }
 
     public static LottoGameResults execute(int gameMoney, List<List<LottoNumber>> manualTicket) {
-        LottoGame lottoGame = new LottoGame(gameMoney, manualTicket);
-        return lottoGame.issueLottoTicket();
+        LottoGame lottoGame = new LottoGame(gameMoney);
+        return lottoGame.issueLottoTicket(manualTicket);
     }
 
     public static String getLastWinningNumbers() {
@@ -36,7 +36,7 @@ public class LottoGameController {
 
     public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers, String bonusNumber) {
 
-        lottoGameResults.checkWinningResult(splitLastWinningNumbers(lastWinningNumbers), validateBonusNumber(bonusNumber));
+        lottoGameResults.checkWinningResult(splitLastWinningNumbers(lastWinningNumbers), parseBonusNumber(bonusNumber));
 
         Map<PrizeUnit, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
@@ -48,8 +48,8 @@ public class LottoGameController {
 
     }
 
-    public static int validateBonusNumber(String bonusNumber) {
-        return InputView.validateBonusNumber(bonusNumber);
+    public static LottoNumber parseBonusNumber(String bonusNumber) {
+        return InputView.parseBonusNumber(bonusNumber);
     }
 
     public static List<LottoNumber> splitLastWinningNumbers(String lastWinningNumbers) {
@@ -57,11 +57,11 @@ public class LottoGameController {
     }
 
     private static void getProfitResult(double profit) {
-        ResultView.getProfitResult(profit);
+        ResultView.showProfitResult(profit);
     }
 
     private static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
-        ResultView.getPrizeResult(resultsMap);
+        ResultView.showPrizeResult(resultsMap);
     }
 
     public static int inputManualTicketCount(int gameMoney) {

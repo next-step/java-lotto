@@ -58,7 +58,7 @@ public class InputView {
 
     private static List<LottoNumber> validateManualLottoTicket(String manualTicketValue) {
         if (!manualTicketValue.matches(LOTTO_NUMBER_PATTERN)) {
-            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
         }
 
         return parseLottoNumber(splitLottoNumber(manualTicketValue));
@@ -126,18 +126,21 @@ public class InputView {
 
     public static String[] validateLottoNumbers(String lastWinningNumbersInput) {
         if (!lastWinningNumbersInput.matches(LOTTO_NUMBER_PATTERN)) {
-            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
         }
 
         return splitLottoNumber(lastWinningNumbersInput);
     }
 
-    public static int validateBonusNumber(String bonusNumberValue) {
+    public static void validateBonusNumber(String bonusNumberValue) {
         if (!bonusNumberValue.matches(NUMBER_PATTERN)) {
             throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
         }
-
-        return Integer.parseInt(bonusNumberValue);
     }
 
+    public static LottoNumber parseBonusNumber(String bonusNumber) {
+        validateBonusNumber(bonusNumber);
+
+        return new LottoNumber(Integer.parseInt(bonusNumber));
+    }
 }
