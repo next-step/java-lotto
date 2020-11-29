@@ -4,38 +4,44 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoGameConfig.LOTTO_TICKET_NUMBER_COUNT;
+
 public class LottoTicket {
 
-    private static final int MIN_COUNT_TO_PRIZE = 3;
+    private final List<LottoNumber> lottoNumbers;
 
-    private List<Integer> lottoNumbers;
+    private final boolean isAutoGenerate;
 
-    public LottoTicket(List<Integer> lottoNumbers){
+    public LottoTicket(List<LottoNumber> lottoNumbers, boolean isAutoGenerate){
+        validateLottoNumberCount(lottoNumbers);
+
         this.lottoNumbers = lottoNumbers;
+        this.isAutoGenerate = isAutoGenerate;
     }
 
-    public List<Integer> getSortedLottoNumbers(){
+    public List<LottoNumber> getSortedLottoNumbers(){
         Collections.sort(this.lottoNumbers);
         return this.lottoNumbers;
     }
 
-    public PrizeUnit countWinningNumbers(List<Integer> lastWinningNumbers, int bonusNumber) {
-        List<Integer> winningsNumber = lottoNumbers
-                .stream().filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
+    public boolean isAutoGenerate(){
+        return isAutoGenerate;
+    }
 
-        boolean isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
+    public PrizeUnit countWinningNumbers(List<LottoNumber> lastWinningNumbers, LottoNumber bonusNumber) {
 
-        int winningNumberSize = winningsNumber.size();
+        validateLottoNumberCount(lastWinningNumbers);
 
-        if(winningNumberSize == PrizeUnit.SECOND_GRADE.prizeUnitCount && isMatchBonusNumber){
-            return PrizeUnit.SECOND_GRADE;
+        List<LottoNumber> winningsNumber = lottoNumbers.stream()
+                .filter(element -> lastWinningNumbers.contains(element)).collect(Collectors.toList());
+
+        return PrizeUnit.findPrizeFieldByUnitCount(winningsNumber.size(), lottoNumbers.contains(bonusNumber));
+    }
+
+    private void validateLottoNumberCount(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_TICKET_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER_COUNT.getErrorMessage());
         }
-
-        if(winningNumberSize < MIN_COUNT_TO_PRIZE){
-            winningNumberSize = 0;
-        }
-
-        return PrizeUnit.findPrizeFieldByUnitCount(winningNumberSize, false);
     }
 
 }

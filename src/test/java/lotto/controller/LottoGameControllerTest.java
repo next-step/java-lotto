@@ -16,21 +16,21 @@ public class LottoGameControllerTest {
         this.lottoGameController = new LottoGameController();
     }
 
-    @DisplayName("지난 당첨 번호 유효성 검증")
+    @DisplayName("지난 당첨 번호 view 유효성 검증")
     @ParameterizedTest
-    @ValueSource(strings = {"3%4%6%7%8%9", "q,w,e,r,t,y", "1,2,3", "1,2,3,4,5,66"})
+    @ValueSource(strings = {"3%4%6%7%8%9", "q,w,e,r,t,y"})
     void illegalLastWinningNumberExceptionTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             lottoGameController.splitLastWinningNumbers(input);
-        }).withMessageContaining(LottoErrorMessage.ILLEGAL_WINNING_NUMBER.getErrorMessage());
+        }).withMessageContaining(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
     }
 
-    @DisplayName("보너스 번호 유효성 검증")
+    @DisplayName("보너스 번호 view 유효성 검증")
     @ParameterizedTest
-    @ValueSource(strings = {"46", "test", "1,2,3"})
+    @ValueSource(strings = {"test", "1,2,3"})
     void illegalBonusNumberExceptionTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottoGameController.validateBonusNumber(input);
+            lottoGameController.parseBonusNumber(input);
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_BONUS_NUMBER.getErrorMessage());
     }
 

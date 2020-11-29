@@ -15,10 +15,10 @@ public class LottoGameResultsTest {
 
     @BeforeEach
     void setUp(){
-        // given
         int inputMoneyAmount = 14000;
 
         this.lottoTickets = new LottoTickets(inputMoneyAmount);
+        lottoTickets.issueLottoTicket(new ArrayList<>());
 
         this.lottoGameResults = new LottoGameResults(lottoTickets);
 
