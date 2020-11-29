@@ -14,7 +14,7 @@ public class Main {
 
         WinningLotto winningLotto = WinningLottoInputView.enter();
 
-        LottoStatistic lottoStatistic = lottoBundle.draw(winningLotto);
+        LottoStatistic lottoStatistic = winningLotto.draw(lottoBundle);
         StatisticResultView.printStatistic(lottoStatistic);
     }
 }
