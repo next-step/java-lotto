@@ -30,8 +30,8 @@ public class LottoTicketsTest {
         int[] numberFailPrize = {11,12,13,14,15,16};
 
         List<List<LottoNumber>> manualTickets = new ArrayList<>();
-        manualTickets.add(Arrays.stream(numberHasPrize).mapToObj(lottoNumber-> new LottoNumber(lottoNumber)).collect(Collectors.toList()));
-        manualTickets.add(Arrays.stream(numberFailPrize).mapToObj(lottoNumber-> new LottoNumber(lottoNumber)).collect(Collectors.toList()));
+        manualTickets.add(Arrays.stream(numberHasPrize).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+        manualTickets.add(Arrays.stream(numberFailPrize).mapToObj(LottoNumber::new).collect(Collectors.toList()));
 
         lottoTickets.issueLottoTicket(manualTickets);
 

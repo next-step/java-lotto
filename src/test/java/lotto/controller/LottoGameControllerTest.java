@@ -21,7 +21,7 @@ public class LottoGameControllerTest {
     @ValueSource(strings = {"3%4%6%7%8%9", "q,w,e,r,t,y"})
     void illegalLastWinningNumberExceptionTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottoGameController.splitLastWinningNumbers(input);
+            lottoGameController.parseLastWinningNumber(input);
         }).withMessageContaining(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
     }
 
