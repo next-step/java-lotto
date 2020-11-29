@@ -1,6 +1,7 @@
 package my.project.lotto.view;
 
 
+import my.project.lotto.domain.LottoNumber;
 import my.project.lotto.domain.Lottos;
 import my.project.lotto.domain.Rank;
 import my.project.lotto.domain.Ranks;
@@ -24,7 +25,15 @@ public class ResultView {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.size() + PURCHASED);
         lottos.getLottos()
-                .forEach(t -> System.out.println(t.toString()));
+                .forEach(lotto -> {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("[");
+                    for (LottoNumber i : lotto.getLotto()) {
+                        sb.append(", ").append(i.getNumber());
+                    }
+                    sb.append(" ]");
+                    System.out.println(sb.toString().replaceFirst(",", ""));
+                });
     }
 
     public static void printRanks(Ranks ranks) {
@@ -38,4 +47,6 @@ public class ResultView {
         System.out.println(String.format(PROFIT, ranks.getProfit()));
     }
 
+    private ResultView() {
+    }
 }

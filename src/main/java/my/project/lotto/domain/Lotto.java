@@ -32,14 +32,8 @@ public class Lotto {
         return lotto.contains(number);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LottoNumber i : lotto) {
-            sb.append(", ").append(i);
-        }
-        sb.append(" ]");
-        return sb.toString().replaceFirst(",", "");
+    public SortedSet<LottoNumber> getLotto() {
+        return lotto;
     }
+
 }
