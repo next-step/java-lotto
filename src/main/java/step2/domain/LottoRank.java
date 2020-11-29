@@ -5,10 +5,10 @@ import java.util.Optional;
 
 public enum LottoRank {
 
-    FOUR(3, LottoConstant.FOUR_MONEY),
-    THREE(4, LottoConstant.THREE_MONEY),
-    TWO(5, LottoConstant.TWO_MONEY),
-    ONE(6, LottoConstant.ONE_MONEY);
+    FOUR(3, 5000L),
+    THREE(4, 50000L),
+    TWO(5, 150_000L),
+    ONE(6, 2_000_000_000L);
 
     private final long number;
     private final long money;
