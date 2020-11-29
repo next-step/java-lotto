@@ -12,11 +12,11 @@ public class PurchaseNumberCalculation {
 
     private static void validatePrice(int purchasePrice) {
         if (purchasePrice < PRICE_PER_TICKET) {
-            throw new IllegalArgumentException(Message.VALIDATION_PRICE_LIMIT_MESSAGE);
+            throw new IllegalArgumentException(PRICE_PER_TICKET + Message.VALIDATION_PRICE_LIMIT_MESSAGE);
         }
 
         if (purchasePrice % PRICE_PER_TICKET != 0) {
-            throw new IllegalArgumentException(Message.VALIDATION_PRICE_UNIT_MESSAGE);
+            throw new IllegalArgumentException(PRICE_PER_TICKET + Message.VALIDATION_PRICE_UNIT_MESSAGE);
         }
     }
 }
