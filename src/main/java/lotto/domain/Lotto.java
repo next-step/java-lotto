@@ -7,19 +7,11 @@ public class Lotto {
     private LottoNumber lottoNumbers;
 
     public Lotto(Set<Integer> lottoNumber) {
-       this.lottoNumbers = LottoNumber.from(lottoNumber);
+        this.lottoNumbers = LottoNumber.from(lottoNumber);
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoNumbers.getLottoNumber().stream()
-                .filter(prizeLotto::existByIndexNumber)
-                .count();
-        boolean isBonusball = matchBonusball(prizeLotto);
-        return PrizeInformation.findByPrizePrice(MatchStatus.of(prizeCount, isBonusball));
-    }
-
-    private boolean matchBonusball(PrizeLotto prizeLotto) {
-        return lottoNumbers.getLottoNumber().stream().anyMatch(prizeLotto::matchBonusBall);
+        return lottoNumbers.matchPrizeNumber(prizeLotto);
     }
 
     public Set<Integer> getLottoNumbers() {
@@ -27,6 +19,6 @@ public class Lotto {
     }
 
     public int sizeLottoNumber() {
-        return lottoNumbers.getLottoNumber().size();
+        return lottoNumbers.size();
     }
 }

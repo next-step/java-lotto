@@ -20,7 +20,7 @@ public class PrizeLotto {
         return lottoNumber == bonusBall;
     }
 
-    public boolean existByIndexNumber(int lottoNumber) {
+    public boolean existByLottoNumber(int lottoNumber) {
         return lottoNumbers.getLottoNumber().contains(lottoNumber);
     }
 

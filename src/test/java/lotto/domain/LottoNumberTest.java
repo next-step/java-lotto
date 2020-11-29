@@ -20,7 +20,7 @@ public class LottoNumberTest {
     @Test
     public void createLottoNumber() {
         //Given & When
-        LottoNumber lottoNumber =LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 10)));
+        LottoNumber lottoNumber = LottoNumber.from(new TreeSet<>(Arrays.asList(1, 3, 5, 6, 7, 10)));
 
         //Then
         assertThat(lottoNumber.getLottoNumber()).contains(1, 3, 5, 6, 7, 10);
@@ -28,19 +28,41 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @MethodSource("notValidLottoNumber")
-    public void notValidLottoNumberTest(Set<Integer> numbers){
+    public void notValidLottoNumberTest(Set<Integer> numbers) {
         assertThatThrownBy(() ->
-               LottoNumber.from(numbers)
+                LottoNumber.from(numbers)
         ).isInstanceOf(NotValidLottoNumberException.class)
-        .hasMessage(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
+                .hasMessage(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
 
     }
 
-    private static Stream<Arguments> notValidLottoNumber(){
+    private static Stream<Arguments> notValidLottoNumber() {
         return Stream.of(
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 6, 13))),
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6))),
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 55, 60)))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("providedNumber")
+    public void matchPrzieLottoTest(Set<Integer> numbers) {
+
+        //Given
+        LottoNumber lottoNumber = LottoNumber.from(new TreeSet<>(numbers));
+
+        //When
+        PrizeInformation prizeInformation = lottoNumber.matchPrizeNumber(PrizeLotto.of(numbers, 40));
+
+        //Then
+        assertThat(prizeInformation).isEqualTo(PrizeInformation.findByPrizePrice(MatchStatus.of(prizeInformation.countMatchNumber(), false)));
+    }
+
+
+    private static Stream<Arguments> providedNumber() {
+        return Stream.of(
+                Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 8, 13))),
+                Arguments.of(new TreeSet<>(Arrays.asList(20, 31, 35, 36, 39, 45)))
         );
     }
 }

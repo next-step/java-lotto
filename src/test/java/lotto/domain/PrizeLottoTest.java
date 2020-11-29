@@ -40,7 +40,7 @@ public class PrizeLottoTest {
 
         //Then
         for (int number : prizeNumbers) {
-            assertThat(prizeLotto.existByIndexNumber(number)).isTrue();
+            assertThat(prizeLotto.existByLottoNumber(number)).isTrue();
         }
     }
 
