@@ -1,4 +1,4 @@
-package step4.lotto.domain.numbers;
+package step4.lotto.domain;
 
 import step4.lotto.util.LottoErrorMessage;
 
