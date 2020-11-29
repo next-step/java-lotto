@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -20,5 +21,13 @@ public class LottoTest {
         assertThat(numbers.get(0)).isGreaterThan(0);
         assertThat(numbers.get(5)).isLessThan(46);
         assertThat(numbers.stream().distinct().count()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName(value = "지정한 값으로 로또를 생성함.")
+    void create_ListConstructor() {
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6);
+        Lotto lotto = new Lotto(list);
+        assertThat(lotto.getNumbers()).containsAll(list);
     }
 }

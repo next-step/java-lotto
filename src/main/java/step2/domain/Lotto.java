@@ -13,6 +13,10 @@ public class Lotto {
         createLottoNumber();
     }
 
+    public Lotto(List<Integer> lottoNumbers) {
+        numbers = new ArrayList<>(lottoNumbers);
+    }
+
     private void createLottoNumber() {
         List<Integer> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
         Collections.shuffle(allLottoNumber);
