@@ -7,12 +7,12 @@ public class LottoTickets {
 
     private final List<LottoTicket> ticketList = new ArrayList<>();
 
-    public static LottoTickets newTickets(int purchaseNumber) {
-        return new LottoTickets(purchaseNumber);
-    }
-
     private LottoTickets(int purchaseNumber) {
         addTickets(purchaseNumber);
+    }
+
+    public static LottoTickets newTickets(int purchaseNumber) {
+        return new LottoTickets(purchaseNumber);
     }
 
     private void addTickets(int purchaseNumber) {
