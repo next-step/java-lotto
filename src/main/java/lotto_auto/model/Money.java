@@ -7,6 +7,7 @@ public class Money {
     private final int money;
 
     public Money(int money) {
+        throwIfNegativeMoney(money);
         this.money = money;
     }
 
