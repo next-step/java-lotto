@@ -9,10 +9,12 @@ public class Order {
     private final List<LottoNumbers> manualLottoNumbers;
     private final int auto;
 
-    public Order(List<LottoNumbers> manualLottoNumbers, int auto) {
+    public Order(List<LottoNumbers> manualLottoNumbers, Money money) {
         throwIfManualLottoNumberIsNull(manualLottoNumbers);
+        int ticketCount = money.getMoney() / LottoTicket.PRICE;
         this.manualLottoNumbers = manualLottoNumbers;
-        this.auto = auto;
+        this.auto = ticketCount - manualLottoNumbers.size();
+
     }
 
     private void throwIfManualLottoNumberIsNull(List<LottoNumbers> manualLottoNumbers) {

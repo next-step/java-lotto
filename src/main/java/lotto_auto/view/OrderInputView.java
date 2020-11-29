@@ -1,8 +1,7 @@
 package lotto_auto.view;
 
-import lotto_auto.ErrorMessage;
 import lotto_auto.model.LottoNumbers;
-import lotto_auto.model.LottoTicket;
+import lotto_auto.model.Money;
 import lotto_auto.model.Order;
 
 import java.util.List;
@@ -18,24 +17,15 @@ public class OrderInputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Order enterOrder() {
-        int money = enterMoney();
-        int ticketCount = money / LottoTicket.PRICE;
-        int count = enterManualLottoCount();
-        List<LottoNumbers> lottoNumbers = enterLottoNumbers(count);
-        return new Order(lottoNumbers, ticketCount - lottoNumbers.size());
+        Money money = enterMoney();
+        List<LottoNumbers> manualLottoNumbers = enterLottoNumbers();
+        return new Order(manualLottoNumbers, money);
     }
 
-    public static int enterMoney() {
+    public static Money enterMoney() {
         System.out.println(ENTER_BUY_LOTTO_MONEY_MESSAGE);
         int money = scanner.nextInt();
-        throwIfNegativeMoney(money);
-        return money;
-    }
-
-    private static void throwIfNegativeMoney(int money) {
-        if (money <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MONEY);
-        }
+        return new Money(money);
     }
 
     private static int enterManualLottoCount() {
@@ -43,7 +33,8 @@ public class OrderInputView {
         return scanner.nextInt();
     }
 
-    private static List<LottoNumbers> enterLottoNumbers(int count) {
+    private static List<LottoNumbers> enterLottoNumbers() {
+        int count = enterManualLottoCount();
         System.out.println(ENTER_MANUAL_LOTTO_NUMBERS_MESSAGE);
         return IntStream.range(0, count)
                 .boxed()
