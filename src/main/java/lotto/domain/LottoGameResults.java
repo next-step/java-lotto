@@ -1,13 +1,10 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoGameResults {
 
     private LinkedHashMap<PrizeUnit, Integer> prizeUnitCountMap = new LinkedHashMap<>();
-
-    private List<Long> prizeMoney = new ArrayList<>();
 
     private LottoTickets lottoTickets;
 
@@ -40,10 +37,9 @@ public class LottoGameResults {
     }
 
     public double getProfit(Map<PrizeUnit, Integer> winningResults) {
-        winningResults.entrySet().stream()
-                .forEach(prizeUnitSet -> prizeMoney.add(prizeUnitSet.getKey().calculate(prizeUnitSet.getValue())));
-
-        Long sum = prizeMoney.stream().collect(Collectors.summingLong(Long::longValue));
+        long sum = winningResults.entrySet()
+                .stream().mapToLong(entry -> entry.getKey().calculate(entry.getValue()))
+                .sum();
 
         double profit = sum / (double) lottoTickets.getGameMoney();
 
