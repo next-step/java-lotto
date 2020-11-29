@@ -32,9 +32,6 @@ public class LottoTicket {
     }
 
     public DrawResult draw(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        if (this.lottoNumbers == null) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NULL_WINNING_LOTTO_TICKET);
-        }
         int matchNumberCount = this.lottoNumbers.computeMatchCount(winningLottoNumbers);
         boolean bonus = this.lottoNumbers.contains(bonusNumber);
         if (bonus) {
