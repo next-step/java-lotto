@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoNumberTest {
     @Test
     void generate() {
-        assertThat(LottoNumber.generate()).isInstanceOf(Lotto.class);
+        assertThat(LottoGenerator.generate()).isInstanceOf(Lotto.class);
     }
 
 }

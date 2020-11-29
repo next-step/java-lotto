@@ -8,7 +8,7 @@ import java.util.List;
  * Created : 2020-11-27 오후 2:16
  * Developer : Seo
  */
-public class LottoNumber {
+public class LottoGenerator {
     private static final List<Integer> numbers = new ArrayList<>();
 
     public static final int MIN_NUMBER = 1;
@@ -29,6 +29,6 @@ public class LottoNumber {
         return new Lotto(lotto);
     }
 
-    private LottoNumber() {
+    private LottoGenerator() {
     }
 }

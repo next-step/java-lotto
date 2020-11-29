@@ -19,7 +19,7 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new ArrayList<>();
-        lottos.add(LottoNumber.generate());
+        lottos.add(LottoGenerator.generate());
     }
 
     @Test
