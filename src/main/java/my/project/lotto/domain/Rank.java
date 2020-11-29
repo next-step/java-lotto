@@ -1,7 +1,5 @@
 package my.project.lotto.domain;
 
-import com.sun.javafx.css.Rule;
-
 import java.util.Arrays;
 
 /**
@@ -10,8 +8,8 @@ import java.util.Arrays;
  */
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(5, 50_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5000),
     NO_RANK(0, 0);
@@ -26,7 +24,7 @@ public enum Rank {
 
     public static Rank rank(int matchCount, boolean matchBonus) {
         if (matchCount > FIRST.matchCount) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException(Lotto.LOTTO_NUMBERS_HAVE_SIX);
         }
         if (SECOND.matchCount(matchCount) && matchBonus) {
             return SECOND;

@@ -2,6 +2,8 @@ package my.project.lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created : 2020-11-27 오후 2:38
  * Developer : Seo
@@ -9,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class LottoNumberTest {
     @Test
     void generate() {
-        Lotto lotto = LottoNumber.generate();
-        System.out.println(lotto.toString());
+        assertThat(LottoNumber.generate()).isInstanceOf(Lotto.class);
     }
+
 }

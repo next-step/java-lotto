@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  * Developer : Seo
  */
 public class StringPlusCalculator {
+    public static final String INPUT_HAS_NEGATIVE = "0 혹은 음수가 포함되어 있습니다.";
 
     public int sumStringByDelimiter(String input) {
         if (StringUtils.isBlank(input)) {
@@ -32,7 +33,7 @@ public class StringPlusCalculator {
 
     private void hasNegative(String input) {
         if (Integer.parseInt(input) < 0) {
-            throw new CalException(ExceptionMessages.INPUT_HAS_NEGATIVE);
+            throw new CalException(INPUT_HAS_NEGATIVE);
         }
     }
 

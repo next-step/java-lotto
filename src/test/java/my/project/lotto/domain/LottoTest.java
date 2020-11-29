@@ -61,7 +61,14 @@ class LottoTest {
     void testMatch() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIRST);
+        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    void testMatch_2nd() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -74,6 +81,6 @@ class LottoTest {
     void testToString() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto.toString())
-                .isEqualTo("[ 1, 2, 3, 4, 5, 6 ]");
+                .hasToString("[ 1, 2, 3, 4, 5, 6 ]");
     }
 }

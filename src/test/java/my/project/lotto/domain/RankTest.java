@@ -47,7 +47,6 @@ class RankTest {
     @Test
     void invalid() {
         assertThatThrownBy(() -> Rank.rank(7, false))
-                .hasMessage("")
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

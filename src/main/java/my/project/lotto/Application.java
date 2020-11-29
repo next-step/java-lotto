@@ -5,6 +5,8 @@ import my.project.lotto.view.InputView;
 import my.project.lotto.view.ResultView;
 import my.project.utils.StringUtils;
 
+import java.util.List;
+
 /**
  * Created : 2020-11-23 오전 10:52
  * Developer : Seo
@@ -15,8 +17,10 @@ public class Application {
         Lottos lottos = LottoGame.lotto(money);
         ResultView.printLottos(lottos);
 
-        Lotto lastWinningLotto = new Lotto(StringUtils.parseToIntList(InputView.getWinningNumbers()));
-        Ranks ranks = lottos.ranks(lastWinningLotto);
+        List<Integer> winningNumbers = StringUtils.parseToIntList(InputView.getWinningNumbers());
+        int bonusNumber = InputView.getBonusNumber();
+        Lotto lastWinningLotto = new Lotto(winningNumbers);
+        Ranks ranks = lottos.ranks(lastWinningLotto, bonusNumber);
         ResultView.printRanks(ranks);
     }
 }

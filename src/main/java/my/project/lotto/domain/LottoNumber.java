@@ -23,10 +23,12 @@ public class LottoNumber {
     public static Lotto generate() {
         Collections.shuffle(numbers);
         List<Integer> lotto = new ArrayList<>();
-        for (int i = 0; i < Lotto.LOTTO_SIZE; i ++) {
+        for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
             lotto.add(numbers.get(i));
         }
         return new Lotto(lotto);
     }
 
+    private LottoNumber() {
+    }
 }
