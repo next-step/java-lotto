@@ -2,6 +2,7 @@ package step4.lotto.domain;
 
 
 import org.junit.jupiter.api.Test;
+import step4.lotto.util.LottoErrorMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,6 +22,7 @@ public class LottoStatusEnumTest {
     void 제대로_RANK를_입력했는지() {
         assertThatThrownBy(() ->
                 enumTest = LottoStatusEnum.findByCount(1000)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(RuntimeException.class)
+                .withFailMessage(LottoErrorMessage.getLottoRankException());
     }
 }

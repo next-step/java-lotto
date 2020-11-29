@@ -7,9 +7,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoTicketTest {
 
-    private LottoNumber LottoNumberTest;
+    private LottoTicket LottoTicketTest;
 
     @Test
     void 중복체크() {
@@ -17,7 +17,7 @@ public class LottoNumberTest {
         list.add(1);
 
         assertThatThrownBy(() ->
-                LottoNumberTest = new LottoNumber(list)
+                LottoTicketTest = new LottoTicket(list)
         ).isInstanceOf(RuntimeException.class);
     }
 
@@ -26,11 +26,9 @@ public class LottoNumberTest {
         List<Integer> list = testList(5);
 
         assertThatThrownBy(() ->
-                LottoNumberTest = new LottoNumber(list)
+                LottoTicketTest = new LottoTicket(list)
         ).isInstanceOf(RuntimeException.class);
     }
-
-
 
     private List<Integer> testList(int listSize) {
         List<Integer> returnList = new ArrayList<>();
@@ -42,5 +40,3 @@ public class LottoNumberTest {
         return returnList;
     }
 }
-
-

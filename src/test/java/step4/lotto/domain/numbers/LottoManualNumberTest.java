@@ -2,6 +2,7 @@ package step4.lotto.domain.numbers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step4.lotto.util.LottoErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ public class LottoManualNumberTest {
     void 구매갯수와_입력한_로또_갯수_테스트() {
         assertThatThrownBy(() ->
                 lottoManualNumberTest = new LottoManualNumber(testList, 7)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(RuntimeException.class)
+                .withFailMessage(LottoErrorMessage.getLottoCompareManualCountWithInputLottoNumber());
     }
 
     @Test
@@ -25,7 +27,8 @@ public class LottoManualNumberTest {
         testList.add("test");
         assertThatThrownBy(() ->
                 lottoManualNumberTest = new LottoManualNumber(testList, 6)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(RuntimeException.class)
+                .withFailMessage(LottoErrorMessage.getLottoNumberformatexception());
     }
 
     @Test
@@ -33,7 +36,8 @@ public class LottoManualNumberTest {
         testList.add("1,2,3,4,5");
         assertThatThrownBy(() ->
                 lottoManualNumberTest = new LottoManualNumber(testList, 6)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(RuntimeException.class)
+                .withFailMessage(LottoErrorMessage.getLottoIncorrectCount());
     }
 
     @BeforeEach
