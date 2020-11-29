@@ -31,7 +31,6 @@ public class LottoMatch {
         }
     }
 
-
     private void addWinningCount(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber) {
         int rank = lottoWinningNumber.getRank(lottoTicket.getLottoTicket());
 
