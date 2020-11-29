@@ -45,7 +45,7 @@ public enum DrawResult {
         }
         return
                 Arrays.stream(values())
-                        .filter(item -> item.matchNum == matchNum)
+                        .filter(drawResult -> drawResult.matchNum == matchNum)
                         .findFirst()
                         .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DRAW_RESULT));
     }
@@ -53,7 +53,7 @@ public enum DrawResult {
     public static DrawResult valueOfRank(int rank) {
         return Arrays
                 .stream(DrawResult.values())
-                .filter(item -> item.rank == rank)
+                .filter(drawResult -> drawResult.rank == rank)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_MATCH_NUM));
     }
