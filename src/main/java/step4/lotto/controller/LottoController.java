@@ -3,14 +3,13 @@ package step4.lotto.controller;
 
 import step4.lotto.domain.LottoGame;
 import step4.lotto.view.InputLottoView;
-import step4.lotto.view.OuterLottoView;
+import step4.lotto.view.PrintResultLottoView;
 
 import java.util.List;
 
 public class LottoController {
 
     public void gameStart() {
-        LottoGame lottoGame;
         List<String> manualLottoNumber = null;
 
         int purchaseAmount = InputLottoView.inputPrice();
@@ -20,7 +19,7 @@ public class LottoController {
             manualLottoNumber = InputLottoView.InputManualNumber(manualLottoBuyCount);
         }
 
-        lottoGame = new LottoGame(purchaseAmount, manualLottoBuyCount);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualLottoBuyCount);
         buyLotto(lottoGame, manualLottoNumber);
         outterLottoNumber(lottoGame);
 
@@ -37,12 +36,12 @@ public class LottoController {
     }
 
     private void outterLottoNumber(LottoGame lottoGame) {
-        OuterLottoView.printLottoHowToKinds(lottoGame.getLottoManualBuyCount(), lottoGame.getLottoAutoBuyCount());
-        OuterLottoView.printAutoLottoNumbers(lottoGame.getBuyLottoHashSet());
+        PrintResultLottoView.printLottoHowToKinds( lottoGame.getLottoTicketCount().getLottoManualBuyCount(), lottoGame.getLottoTicketCount().getLottoAutoBuyCount());
+        PrintResultLottoView.printAutoLottoNumbers(lottoGame.getBuyLottoHashSet());
     }
 
     private void printLottoResultView(LottoGame lottoGame) {
-        OuterLottoView.printLottoResult();
-        OuterLottoView.printLottoProfitAmount(lottoGame.getLottoProfitAmount());
+        PrintResultLottoView.printLottoResult();
+        PrintResultLottoView.printLottoProfitAmount(lottoGame.getLottoTicketCount().getLottoPurchaseAmount());
     }
 }
