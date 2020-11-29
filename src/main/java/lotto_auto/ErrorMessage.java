@@ -4,8 +4,6 @@ public class ErrorMessage {
 
     private ErrorMessage() {
     }
-
-    public static final String NOT_NULL_WINNING_LOTTO_TICKET = "Not Null Winning Lotto Ticket";
     public static final String INVALID_LOTTO_MATCH_NUM = "Invalid Lotto Match Num";
     public static final String INVALID_LOTTO_MONEY = "Invalid Lotto Money";
     public static final String NOT_NULL_LOTTO_NUMBER = "Not Null Lotto Number";
