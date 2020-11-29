@@ -7,9 +7,11 @@ import lotto.view.input.InputView;
 
 public class LottoController {
 
+    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+
     public Lottoes purchaseLottoes() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(LottoGameView.enterLottoAmount());
-        Lottoes lottoes = LottoNumberGenerator.create(purchaseAmount);
+        Lottoes lottoes = lottoNumberGenerator.create(purchaseAmount);
         LottoGameView.printLottoNumbers(lottoes);
         return lottoes;
     }

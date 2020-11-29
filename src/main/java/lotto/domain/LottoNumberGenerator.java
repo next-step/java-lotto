@@ -1,36 +1,74 @@
 package lotto.domain;
 
-import lotto.constant.Lotto;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import lotto.constant.ErrorMessage;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.LottoNumbers.NUMBER_RANGE;
+
 public class LottoNumberGenerator {
 
-    private static final List<Integer> range = IntStream.range(Lotto.NUMBER_MIN_RANGE, Lotto.NUMBER_MAX_RANGE)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final String DEFAULT_SEPARATOR = ",";
+    private static final String BLANK = " ";
+    private static final String DELETE_BLANK = "";
+    public static final int NUMBER_MIN_RANGE = 1;
+    public static final int NUMBER_MAX_RANGE = 45;
 
-    public static Lottoes create(PurchaseAmount purchaseAmount) {
-        return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount(), range));
+    private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.range(NUMBER_MIN_RANGE, NUMBER_MAX_RANGE)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toMap(LottoNumber::getValue, lottoNumber -> lottoNumber));
+
+    public Lottoes create(PurchaseAmount purchaseAmount) {
+        return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount()));
     }
 
-    private static List<LottoNumbers> getLottoNumbers(int lottoCount, List<Integer> range) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private List<LottoNumbers> getLottoNumbers(int lottoCount) {
+
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers.values());
+        List<LottoNumbers> lottoes = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            Collections.shuffle(range);
+            Collections.shuffle(numbers);
 
-            List<LottoNumber> numbers = range.stream()
-                    .limit(Lotto.NUMBER_RANGE)
+            List<Integer> lotto = numbers.stream()
+                    .map(LottoNumber::getValue)
+                    .limit(NUMBER_RANGE)
                     .sorted()
-                    .map(LottoNumber::new)
                     .collect(Collectors.toList());
 
-            lottoNumbers.add(new LottoNumbers(numbers));
+            lottoes.add(new LottoNumbers(getCachedLottoNumbers(lotto)));
         }
-        return lottoNumbers;
+
+        return lottoes;
     }
+
+    private List<LottoNumber> getCachedLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(lottoNumbers::get)
+                .collect(Collectors.toList());
+    }
+
+    public List<LottoNumber> create(String numbers) {
+        validEmpty(numbers);
+        return splitString(numbers).stream()
+                .map(Integer::parseInt)
+                .map(lottoNumbers::get)
+                .collect(Collectors.toList());
+    }
+
+    private void validEmpty(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
+        }
+    }
+
+
+    private List<String> splitString(String value) {
+        return Arrays.asList(value.replace(BLANK, DELETE_BLANK).split(DEFAULT_SEPARATOR));
+    }
+
+
 }

@@ -58,8 +58,8 @@ class LottoNumbersTest {
     }
 
     @ParameterizedTest
-    @DisplayName("입력한 당첨번호가 1~45 범위 밖의 수, 숫자가 6개가 아닐 때 IllegalArgumentException을 throw 한다.")
-    @ValueSource(strings = {"1, 2, 4, 244, 12, 1", "1, 2, 3"})
+    @DisplayName("숫자가 6개가 아닐 때 IllegalArgumentException을 throw 한다.")
+    @ValueSource(strings = {"1", "1, 2, 3"})
     void should_throw_illegal_argument_exception(String numbers) {
 
         assertThatIllegalArgumentException()
@@ -74,26 +74,5 @@ class LottoNumbersTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumbers(numbers))
                 .withMessage(ErrorMessage.NOT_ALLOW_DUPLICATED);
-    }
-
-    @ParameterizedTest
-    @DisplayName("빈 문자열 입력하면, Exception을 반환한다")
-    @ValueSource(strings = {"", " "})
-    void should_return_zero_when_is_blank(String value) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumbers(value))
-                .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
-    }
-
-    @Test
-    @DisplayName("입력한 문자가 음수 이면, Exception을 반환한다.")
-    void should_throw_illegal_argument_exception_when_is_negative_quantity() {
-        //Given
-        String values = "-1, -2, 3";
-
-        //When & Then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumbers(values))
-                .withMessage(ErrorMessage.NOT_ALLOW_NEGATIVE_QUANTITY);
     }
 }

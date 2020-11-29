@@ -22,5 +22,6 @@ public class LottoGame {
         int purchaseAmount = lottoes.getValue().size() * Lotto.PRICE;
 
         return new LottoGameResult(collect, new PurchaseAmount(purchaseAmount));
+
     }
 }
