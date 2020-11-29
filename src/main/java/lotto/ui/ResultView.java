@@ -1,10 +1,9 @@
 package lotto.ui;
 
 import lotto.LottoTickets;
+import lotto.Message;
 
 public class ResultView {
-
-    private static final String MESSAGE = "개를 구매했습니다.";
 
     public static void output(LottoTickets lottoTickets) {
         printPurchaseNumber(lottoTickets);
@@ -12,7 +11,7 @@ public class ResultView {
     }
 
     private static void printPurchaseNumber(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.size() + MESSAGE);
+        System.out.println(lottoTickets.size() + Message.OUTPUT_PURCHASE_COUNT_MESSAGE);
     }
 
     private static void printLottoTicket(LottoTickets lottoTickets) {

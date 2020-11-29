@@ -5,14 +5,18 @@ public class PurchaseNumberCalculation {
     private static final int PRICE_PER_TICKET = 1000;
 
     public static int calculateNumberPurchase(int purchasePrice) {
+        validatePrice(purchasePrice);
+
+        return purchasePrice / PRICE_PER_TICKET;
+    }
+
+    private static void validatePrice(int purchasePrice) {
         if (purchasePrice < PRICE_PER_TICKET) {
-            throw new IllegalArgumentException("1000원 이상을 투입 해주세요");
+            throw new IllegalArgumentException(Message.VALIDATION_PRICE_LIMIT_MESSAGE);
         }
 
         if (purchasePrice % PRICE_PER_TICKET != 0) {
-            throw new IllegalArgumentException("1000원 단위로 투입 해주세요");
+            throw new IllegalArgumentException(Message.VALIDATION_PRICE_UNIT_MESSAGE);
         }
-
-        return purchasePrice / PRICE_PER_TICKET;
     }
 }
