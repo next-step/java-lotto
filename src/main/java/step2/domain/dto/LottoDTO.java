@@ -16,7 +16,7 @@ public class LottoDTO {
         this.numbers = lotto.getNumbers();
     }
 
-    public static LottoDTO createLottoDTO(Lotto lotto) {
+    public static LottoDTO from(Lotto lotto) {
         return new LottoDTO(lotto);
     }
 

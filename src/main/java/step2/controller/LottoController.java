@@ -1,35 +1,39 @@
 package step2.controller;
 
+import step2.domain.LottoRank;
+import step2.domain.LottoStore;
 import step2.domain.dto.LottoDTO;
-import step2.service.LottoService;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private LottoService lottoService;
+    private LottoStore lottoStore;
 
     public LottoController() {
-        this.lottoService = new LottoService();
+        this.lottoStore = new LottoStore();
     }
 
     public List<LottoDTO> buyLotto(int fee) {
-        return lottoService.buyLotto(fee)
+
+        return lottoStore.buy(fee)
                 .stream()
-                .map(lotto -> LottoDTO.createLottoDTO(lotto))
+                .map(lotto -> LottoDTO.from(lotto))
                 .collect(Collectors.toList());
     }
 
-    public void initWinNumbers(String winNumberString) {
-        lottoService.initWinNumbers(winNumberString);
+    public void initWinNumbers(List<Integer> winningNumbers) {
+        lottoStore.initWinNumbers(winningNumbers);
     }
 
-    public List<Long> findLottoResult() {
-        return lottoService.findLottoResult();
+    public Map<LottoRank, Integer> findLottoResult() {
+        return lottoStore.findWinLottoMoney();
     }
 
-    public double findBenefit() {
-        return lottoService.findBenefit();
+    public BigDecimal findBenefit() {
+        return lottoStore.findBenefit();
     }
 }
