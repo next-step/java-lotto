@@ -16,4 +16,13 @@ public class LottoTicket {
     public LottoNumbers getLottoNumbers() {
         return this.lottoNumbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public int computeMatchCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.computeMatchCount(lottoNumbers);
+    }
+
 }

@@ -21,20 +21,11 @@ public class WinningLotto {
         return new LottoStatistic(lottoBundle.export()
                 .stream()
                 .map(lottoTicket -> {
-                    LottoNumbers lottoNumbers = lottoTicket.getLottoNumbers();
-                    boolean bonus = lottoNumbers.contains(bonusLottoNumber);
-                    int matchNumberCount = lottoNumbers.computeMatchCount(winningLottoNumbers);
+                    boolean bonus = lottoTicket.contains(bonusLottoNumber);
+                    int matchNumberCount = lottoTicket.computeMatchCount(winningLottoNumbers);
                     return DrawResult.valueOf(bonus, matchNumberCount);
                 })
                 .collect(Collectors.toList()),
                 lottoBundle.getTicketCount() * LottoTicket.PRICE);
-    }
-
-    public LottoNumbers getWinningLottoNumbers() {
-        return winningLottoNumbers;
-    }
-
-    public LottoNumber getBonusLottoNumber() {
-        return bonusLottoNumber;
     }
 }
