@@ -29,7 +29,9 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
-    public DrawResult draw(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+    public DrawResult draw(WinningLotto winningLotto) {
+        LottoNumbers winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        LottoNumber bonusNumber = winningLotto.getBonusLottoNumber();
         boolean bonus = this.lottoNumbers.contains(bonusNumber);
         int matchNumberCount = this.lottoNumbers.computeMatchCount(winningLottoNumbers);
         return DrawResult.valueOf(bonus, matchNumberCount);
