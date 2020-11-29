@@ -11,7 +11,7 @@ class OrderTest {
     @Test
     public void lottoManualNumberIsNullExceptionTest() {
         assertThatThrownBy(() -> {
-            Order order = new Order(null, 5);
+            Order order = new Order(null, new Money(5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
