@@ -5,7 +5,7 @@ import step4.lotto.domain.numbers.LottoTicket;
 
 import java.util.*;
 
-public class OuterLottoView {
+public class PrintResultLottoView {
 
     private static final int MATCH_LOTTE_MAX_COUNT = 5;
     private static final int MATCH_LOTTE_MIN_COUNT = 1;
@@ -13,7 +13,7 @@ public class OuterLottoView {
     private static final String GOOD_PRICE = "(기준이 1이기 때문에 결과적으로 이득라는 의미임)";
     private static final String BAD_PRICE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    private OuterLottoView() {
+    private PrintResultLottoView() {
 
     }
 
