@@ -18,8 +18,8 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public void grid() {
-        lottos.forEach(t -> System.out.println(t.toString()));
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 
     public Ranks ranks(Lotto lastWinningLotto, LottoNumber bonusNumber) {

@@ -23,7 +23,8 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.size() + PURCHASED);
-        lottos.grid();
+        lottos.getLottos()
+                .forEach(t -> System.out.println(t.toString()));
     }
 
     public static void printRanks(Ranks ranks) {
