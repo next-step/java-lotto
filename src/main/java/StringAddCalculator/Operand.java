@@ -10,7 +10,7 @@ public class Operand {
         this.number = number;
     }
 
-    public Operand plus(String token) {
+    public Operand findOperand(String token) {
         int number = Integer.parseInt(token);
 
         if (number < 0) {

@@ -5,17 +5,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringOperand {
+public class Token {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
-    private static final int CUSTOM_DELIMITER_INDEX = 1;
-    private static final int CUSTOM_DELIMITER_TOKEN_INDEX = 2;
-    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+    private final static String DEFAULT_DELIMITER = ",|:";
+    private final static int CUSTOM_DELIMITER_INDEX = 1;
+    private final static int CUSTOM_DELIMITER_TOKEN_INDEX = 2;
 
-    public static List<String> findStringOperands(String values) {
+    public static List<String> findTokens(String values) {
         validateBlank(values);
 
-        Matcher matcher = PATTERN.matcher(values);
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(values);
         if (matcher.find()) {
             String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
             return Arrays.asList(matcher.group(CUSTOM_DELIMITER_TOKEN_INDEX).split(customDelimiter));
