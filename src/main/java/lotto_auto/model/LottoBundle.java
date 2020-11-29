@@ -30,7 +30,7 @@ public class LottoBundle {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
         }
         return new LottoStatistic(lottoTickets.stream()
-                .map(item -> item.draw(lottoNumbers, bonusNumber))
+                .map(lottoTicket -> lottoTicket.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
                 lottoTickets.size() * LottoTicket.PRICE);
     }
