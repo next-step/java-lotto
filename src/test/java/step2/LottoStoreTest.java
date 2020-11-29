@@ -6,6 +6,7 @@ import step2.domain.Lotto;
 import step2.domain.LottoStore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -33,12 +34,7 @@ class LottoStoreTest {
     void initWinNumbers_isBlankAndisNotMatchNumberCount_IllegalArgumentException() {
         LottoStore lottoStore = new LottoStore();
 
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(5);
-        list.add(6);
+        List<Integer> list = Arrays.asList(1,2,3,5,6);
 
         assertThatThrownBy(() -> lottoStore.initWinNumbers(list))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -48,14 +44,7 @@ class LottoStoreTest {
     @DisplayName("숫자가 아닌 값이나 로또 범위를 초과하는 값을 입력할 경우 Exception이 발생한다.")
     void initWinNumbes_isNotNumberAndisNotLottoNumber_Exception() {
         LottoStore lottoStore = new LottoStore();
-
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(5);
-        list.add(0);
-        list.add(46);
+        List<Integer> list = Arrays.asList(0,1,2,3,5,46);
 
         assertThatThrownBy(() -> lottoStore.initWinNumbers(list))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -66,14 +55,8 @@ class LottoStoreTest {
     @DisplayName("우승 숫자를 입력하면 Integer 리스트로 저장한다.")
     void initWinNumbers() {
         LottoStore lottoStore = new LottoStore();
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(5);
-        list.add(44);
-        list.add(45);
-
+        List<Integer> list = Arrays.asList(1,2,3,4,5,45);
+        
         lottoStore.initWinNumbers(list);
         assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
     }
