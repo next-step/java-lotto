@@ -31,5 +31,4 @@ public class LottoTicketCreation implements LottoTicketCreatable {
             throw new IllegalArgumentException(Message.VALIDATION_LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }
-
 }
