@@ -24,7 +24,7 @@ public class Lotto {
 
     public Rank match(Lotto lastWinningLotto, LottoNumber bonusNumber) {
         int matchCount = (int) lotto.stream().filter(lastWinningLotto::contains).count();
-        boolean matchBonus = lotto.stream().anyMatch(integer -> bonusNumber == integer);
+        boolean matchBonus = lotto.contains(bonusNumber);
         return Rank.rank(matchCount, matchBonus);
     }
 
