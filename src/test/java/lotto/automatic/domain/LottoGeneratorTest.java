@@ -16,7 +16,7 @@ class LottoGeneratorTest {
     void setUp() {
         this.generator = new LottoGenerator(new ShuffleStrategy() {
             @Override
-            public void shuffle(List<Integer> nums) {
+            public void shuffle(List<LottoNumber> nums) {
                 // none
             }
         });

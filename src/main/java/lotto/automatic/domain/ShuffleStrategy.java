@@ -5,5 +5,5 @@ import java.util.List;
 @FunctionalInterface
 public interface ShuffleStrategy {
 
-    void shuffle(List<Integer> nums);
+    void shuffle(List<LottoNumber> nums);
 }

@@ -13,19 +13,20 @@ public class LottoAutomaticGame {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        LottoMoney lottoMoney = inputView.getLottoMoney();
+        LottoBuyingMoney lottoBuyingMoney = inputView.getLottoMoney();
         LottoGenerator generator = new LottoGenerator(new RandomShuffle());
-        List<Lotto> lottoList = generator.generateLotto(lottoMoney.getCountOfLotto());
+        List<Lotto> lottoList = generator.generateLotto(lottoBuyingMoney.getCountOfLotto());
 
-        outputView.printLottos(lottoList);
+        outputView.printLottoList(lottoList);
 
         LottoWinningNums winningLottoNums = inputView.getWinningLottoNums();
 
-        Lotto winningLotto = winningLottoNums.getWinningLotto();
+        Lotto winningLotto = new Lotto(winningLottoNums.getLottoNumbers());
 
-        LottoResult result = new LottoResult(lottoList, winningLotto);
+        LottoRankCollector collector = new LottoRankCollector(lottoList, winningLotto);
+        LottoResult result = new LottoResult(lottoBuyingMoney.getInvestMoney(), collector.getRankList());
 
-        outputView.printLottoResult(lottoMoney, result);
+        outputView.printLottoResult(result);
 
 
     }

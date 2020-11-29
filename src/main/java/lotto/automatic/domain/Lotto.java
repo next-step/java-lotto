@@ -6,35 +6,33 @@ import java.util.TreeSet;
 
 public class Lotto {
 
-    private static final int NUMS_SIZE = 6;
-    private final Set<Integer> nums;
+    private static final int NUMBER_SIZE = 6;
 
-    public Lotto(List<Integer> nums) {
-        validate(nums);
+    private final Set<LottoNumber> lottoNumbers;
 
-        this.nums = new TreeSet<>(nums);
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
 
     }
 
-    private void validate(List<Integer> nums) {
+    private void validate(List<LottoNumber> numbers) {
 
-        if (nums.stream()
-                .filter((Integer num) -> (num > 0 && num < 46))
-                .count() != NUMS_SIZE
-        ) {
-            throw new IllegalArgumentException("로또 번호는 1과 45 사이의 숫자 6개로 구성되어 있어야 합니다.");
+        if(numbers.stream().distinct().count() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개로 구성되어 있어야 합니다.");
         }
     }
 
-    public boolean contain(int i) {
+    public boolean contain(LottoNumber number) {
 
-        return nums.contains(i);
+        return lottoNumbers.contains(number);
     }
 
-    public int matchCount(Lotto winnerLotto) {
+    public int matchCount(Lotto lotto) {
         int count = 0;
-        for (int num : nums) {
-            count += winnerLotto.contain(num) ? 1 : 0;
+        for (LottoNumber num : lottoNumbers) {
+            count += lotto.contain(num) ? 1 : 0;
         }
         return count;
     }
@@ -46,16 +44,16 @@ public class Lotto {
 
         Lotto lotto = (Lotto) o;
 
-        return nums != null ? nums.equals(lotto.nums) : lotto.nums == null;
+        return lottoNumbers != null ? lottoNumbers.equals(lotto.lottoNumbers) : lotto.lottoNumbers == null;
     }
 
     @Override
     public int hashCode() {
-        return nums != null ? nums.hashCode() : 0;
+        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return nums.toString();
+        return lottoNumbers.toString();
     }
 }

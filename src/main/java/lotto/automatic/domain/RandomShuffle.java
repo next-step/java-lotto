@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RandomShuffle implements ShuffleStrategy {
     @Override
-    public void shuffle(List<Integer> nums) {
+    public void shuffle(List<LottoNumber> nums) {
         Collections.shuffle(nums);
     }
 }

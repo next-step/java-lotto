@@ -1,39 +1,35 @@
 package lotto.automatic.domain;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class LottoResult {
 
-    private final Map<LottoRank, Integer> rankResult;
+    private final int investMoney;
+    private final List<LottoRank> rankList;
 
-    public LottoResult(List<Lotto> lottoList, Lotto winnerLotto) {
-        rankResult = new HashMap<>();
-
-        for (LottoRank rank : LottoRank.values()) {
-            rankResult.put(rank, 0);
-        }
-
-        for (Lotto lotto : lottoList) {
-            LottoRank lottoRank = LottoRank.matchCount(lotto.matchCount(winnerLotto));
-
-            rankResult.replace(lottoRank, rankResult.get(lottoRank) + 1);
-        }
+    public LottoResult(int investMoney, List<LottoRank> rankList) {
+        this.investMoney = investMoney;
+        this.rankList = rankList;
     }
 
-    public int getRankCount(LottoRank rank) {
-        return rankResult.get(rank);
+    public long getRankCount(LottoRank rank) {
+
+        return rankList.stream()
+                .filter(r -> r.matchCount == rank.matchCount)
+                .count();
     }
 
-    public long getEarningMoney() {
+    public BigDecimal calculateEarningRate() {
 
-        long sum = 0;
+        BigDecimal earningMoney = BigDecimal.ZERO;
 
-        for (Map.Entry<LottoRank, Integer> set : rankResult.entrySet()) {
-            sum += set.getKey().earningMoney * set.getValue();
+        for (LottoRank rank : rankList) {
+            earningMoney = earningMoney.add(BigDecimal.valueOf(rank.earningMoney));
         }
 
-        return sum;
+        System.out.println(earningMoney.intValue());
+
+        return earningMoney.divide(BigDecimal.valueOf(investMoney), 2, BigDecimal.ROUND_CEILING);
     }
 }

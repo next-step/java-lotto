@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoMoneyTest {
+public class LottoBuyingMoneyTest {
 
     @Test
     @DisplayName("로또 구매 금액 인스턴스 생성")
     public void create_LottoMoney() {
 
-        LottoMoney money = new LottoMoney(14000);
+        LottoBuyingMoney money = new LottoBuyingMoney(14000);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class LottoMoneyTest {
     public void 음수의_금액은_허용되지_않음() {
 
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoMoney(-1000)
+                () -> new LottoBuyingMoney(-1000)
 
         );
     }
@@ -30,7 +30,7 @@ public class LottoMoneyTest {
     public void 천원_미만_금액은_허용되지_않음() {
 
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoMoney(500)
+                () -> new LottoBuyingMoney(500)
 
         );
     }
@@ -38,7 +38,7 @@ public class LottoMoneyTest {
     @Test
     @DisplayName("1000원 으로 살 수 있는 로또 수 확인")
     public void 천원으로_살_수_있는_로또_수_확인() {
-        LottoMoney money = new LottoMoney(1000);
+        LottoBuyingMoney money = new LottoBuyingMoney(1000);
         int countOfLotto = money.getCountOfLotto();
         assertThat(countOfLotto).isEqualTo(1);
     }
@@ -46,7 +46,7 @@ public class LottoMoneyTest {
     @Test
     @DisplayName("1500원 으로 살 수 있는 로또 수 확인")
     public void 천오백원으로_살_수_있는_로또_수_확인() {
-        LottoMoney money = new LottoMoney(1500);
+        LottoBuyingMoney money = new LottoBuyingMoney(1500);
         int countOfLotto = money.getCountOfLotto();
         assertThat(countOfLotto).isEqualTo(1);
     }
@@ -54,16 +54,25 @@ public class LottoMoneyTest {
     @Test
     @DisplayName("2000원 으로 살 수 있는 로또 수 확인")
     public void 이천원으로_살_수_있는_로또_수_확인() {
-        LottoMoney money = new LottoMoney(2000);
+        LottoBuyingMoney money = new LottoBuyingMoney(2000);
         int countOfLotto = money.getCountOfLotto();
         assertThat(countOfLotto).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("수익률 확인")
-    public void calculate_earning_rate() {
-        LottoMoney money = new LottoMoney(2000);
-        float earningRate = money.calculateEarningRate(2000);
-        assertThat(earningRate).isEqualTo(1.0f);
+    @DisplayName("1500원 으로 투자하는 로또 금액 확인")
+    public void 천오백원으로_투자하는_로또_금액_확인() {
+        LottoBuyingMoney money = new LottoBuyingMoney(1500);
+        int investMoney = money.getInvestMoney();
+        assertThat(investMoney).isEqualTo(1000);
     }
+
+    @Test
+    @DisplayName("1500원 지급시 거스름돈 확인")
+    public void 천오백원_입력시_거스름돈_확인() {
+        LottoBuyingMoney money = new LottoBuyingMoney(1500);
+        int changeMoney = money.getChangeMoney();
+        assertThat(changeMoney).isEqualTo(500);
+    }
+
 }
