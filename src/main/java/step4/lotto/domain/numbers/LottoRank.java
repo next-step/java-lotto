@@ -1,12 +1,14 @@
 package step4.lotto.domain.numbers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedSet;
 
 public class LottoRank {
-
-    private static final int DEFAULT_LOTTO_RANK = 7; // 로또 등수구할때 기본으로 세팅되어있는 값
-    private static final int MIN_LOTTO_WINNING_RANK = 6;
+    private static final int MAX_LOTTO_MATCH_COUNT = 6;
+    private static final int MIN_LOTTO_MATCH_COUNT = 3;
     private static final int HIGH_RANK_DIVISION = 5;
+
     private LottoTicket winningNumbers;
     private int bonusNumber = 0;
 
@@ -16,39 +18,32 @@ public class LottoRank {
     }
 
     public int getRank(SortedSet<Integer> paramSet) {
-        int lottoMatchCount = 0;
         LottoRankEnum lottoRankEnum = null;
 
-        for (Integer number : paramSet) {
-            lottoMatchCount = checkSameValue(number, lottoMatchCount);
-        }
+        int lottoMatchCount = (int) winningNumbers.getLottoTicket().stream()
+                        .filter(oc -> paramSet.contains(oc))
+                        .count();
 
-        if (lottoMatchCount == 6) {
+        if (lottoMatchCount == MAX_LOTTO_MATCH_COUNT) {
             return 1;
         }
 
-        if (lottoMatchCount >= HIGH_RANK_DIVISION) {
-            lottoMatchCount = checkBounusNumber(bonusNumber, lottoMatchCount, paramSet);
-            lottoRankEnum = LottoRankEnum.findByRank(lottoMatchCount);
+        if (lottoMatchCount < MIN_LOTTO_MATCH_COUNT) {
+            return 0;
         }
+
+        if (lottoMatchCount >= HIGH_RANK_DIVISION) {
+            lottoMatchCount = checkBounusNumber(lottoMatchCount, paramSet);
+        }
+        lottoRankEnum = LottoRankEnum.findByRank(lottoMatchCount);
 
         return lottoRankEnum.getLottoRank();
     }
 
-    private int checkSameValue(int paramValue, int lottoMatchCount) {
+    private int checkBounusNumber(int lottoMatchCount, SortedSet<Integer> paramSet) {
         int returnValue = lottoMatchCount;
 
-        if (winningNumbers.getLottoTicket().contains(paramValue)) {
-            returnValue++;
-        }
-
-        return returnValue;
-    }
-
-    private int checkBounusNumber(int paramNumber, int lottoMatchCount, SortedSet<Integer> paramSet) {
-        int returnValue = lottoMatchCount;
-
-        if (paramSet.contains(paramNumber)) {
+        if (paramSet.contains(bonusNumber)) {
             returnValue++;
         }
 
