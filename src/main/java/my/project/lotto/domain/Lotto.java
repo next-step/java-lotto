@@ -14,6 +14,7 @@ public class Lotto {
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final String LOTTO_NUMBERS_HAVE_SIX = "로또 한 장은 6개 번호입니다.";
     public static final String LOTTO_NUMBER_IS_BETWEEN = "로또 번호는 1과 45 사이입니다.";
+
     private final SortedSet<Integer> lotto;
 
     public Lotto(List<Integer> numbers) {
