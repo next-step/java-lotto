@@ -1,7 +1,5 @@
 package lotto_auto.model;
 
-import lotto_auto.ErrorMessage;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
