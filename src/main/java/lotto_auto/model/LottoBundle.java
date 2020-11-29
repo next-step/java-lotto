@@ -10,29 +10,29 @@ import java.util.stream.Collectors;
 public class LottoBundle {
 
     private final Order order;
-    private List<LottoTicket> lottoTicketList;
+    private List<LottoTicket> lottoTickets;
 
     public LottoBundle(List<LottoTicket> lottoTickets, Order order) {
         this.order = order;
-        this.lottoTicketList = Collections.unmodifiableList(lottoTickets);
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
     public int getTicketCount() {
-        return lottoTicketList.size();
+        return lottoTickets.size();
     }
 
     public List<LottoTicket> export() {
-        return Collections.unmodifiableList(lottoTicketList);
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public LottoStatistic draw(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
         }
-        return new LottoStatistic(lottoTicketList.stream()
+        return new LottoStatistic(lottoTickets.stream()
                 .map(item -> item.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
-                lottoTicketList.size() * LottoTicket.PRICE);
+                lottoTickets.size() * LottoTicket.PRICE);
     }
 
     public Order getOrder(){
