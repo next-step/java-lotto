@@ -2,18 +2,31 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+import static lotto.domain.LottoGameConfig.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoGameConfig.MIN_LOTTO_NUMBER;
 
-    private int number;
+public final class LottoNumber implements Comparable<LottoNumber> {
+
+    private final int number;
 
     public LottoNumber(int number){
+        validateLottoNumber(number);
         this.number = number;
+    }
+
+    private void validateLottoNumber(int number) {
+        if(number < MIN_LOTTO_NUMBER){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
+        }
+
+        if(number > MAX_LOTTO_NUMBER){
+            throw new IllegalArgumentException(LottoErrorMessage.ILLEGAL_LOTTO_NUMBER.getErrorMessage());
+        }
     }
 
     public int getNumber() {
         return number;
     }
-
 
     @Override
     public int compareTo(LottoNumber o) {
