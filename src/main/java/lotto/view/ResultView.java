@@ -32,6 +32,6 @@ public class ResultView {
     }
 
     private static String convertResultFormat(Map.Entry<Hit, Integer> e) {
-        return String.format(RESULT_FORMAT, e.getKey().toString(), e.getValue());
+        return String.format(RESULT_FORMAT, e.getKey(), e.getValue());
     }
 }

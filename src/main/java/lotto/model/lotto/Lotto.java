@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public abstract class Lotto {
     private final static String NUMBERS_DELIMITER = ", ";
-    private final static String NUMBERS_FORMAT = "[ %s ]";
 
     private final static int SECOND_CANDIDATE_COUNT = 5;
 
@@ -43,7 +42,6 @@ public abstract class Lotto {
 
     @Override
     public String toString() {
-        String stringNumbers =  String.join(NUMBERS_DELIMITER, CommonUtils.sortedSetToArray(numbers));
-        return String.format(NUMBERS_FORMAT,stringNumbers);
+        return String.join(NUMBERS_DELIMITER, CommonUtils.sortedSetToArray(numbers));
     }
 }

@@ -39,13 +39,8 @@ public class LottoController {
     }
 
     private void buyLottoes(List<String> userInputs) {
-        List<CandidateLotto> manualLottoes = userInputs.stream()
-                .map(ManualStrategy::new)
-                .map(CandidateLotto::new)
-                .collect(Collectors.toList());
-        amount.pay(lottoPrice.manulPrice());
-
-        lottoes = new Lottoes(lottoPrice.autoPrice(), Optional.of(manualLottoes));
+        lottoes = new Lottoes(lottoPrice.autoPrice(), userInputs);
+        amount.pay(lottoPrice.manualPrice());
         amount.pay(lottoPrice.autoPrice());
 
         ResultView.printMessage(lottoPrice.toString());

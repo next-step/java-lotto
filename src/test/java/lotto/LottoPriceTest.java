@@ -17,7 +17,7 @@ public class LottoPriceTest {
     @Test
     public void 정상_구입() {
         LottoPrice lottoPrice = new LottoPrice(14000,"3");
-        assertThat(lottoPrice.manulPrice()).isEqualTo(3 * Lotto.PRICE);
+        assertThat(lottoPrice.manualPrice()).isEqualTo(3 * Lotto.PRICE);
         assertThat(lottoPrice.autoPrice()).isEqualTo(11 * Lotto.PRICE);
     }
 

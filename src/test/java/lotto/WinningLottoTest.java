@@ -8,16 +8,23 @@ import org.junit.jupiter.api.Test;
 import utils.TestUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningLottoTest {
     private int[] winningNumbers;
+    String hit3, hit4, hit5, hit6, noHit;
 
     @BeforeEach
     void init() {
         winningNumbers = new int[]{1,2,3,4,5,6};
+        hit3 = "1,2,3,45,35,36";
+        hit4 = "1,2,3,4,35,36";
+        hit5 = "1,2,3,4,5,36";
+        hit6 = "1,2,3,4,5,6";
+        noHit = "21,22,23,24,35,36";
     }
 
     @Test
@@ -32,18 +39,14 @@ public class WinningLottoTest {
 
         WinningLotto winnerNumbers = makeWinningLotto(7);
 
-        CandidateLotto testHit3 = makeCandidateLotto(new int[]{1,2,3,45,35,36});
-        CandidateLotto testHit32 = makeCandidateLotto(new int[]{1,2,3,45,35,36});
-        CandidateLotto testHit4 = makeCandidateLotto(new int[]{1,2,3,4,35,36});
-        CandidateLotto testHit5 = makeCandidateLotto(new int[]{1,2,3,4,5,36});
-        CandidateLotto testHit6Bonus = makeCandidateLotto(new int[]{1,2,3,4,5,7});
-        CandidateLotto testHit6 = makeCandidateLotto(new int[]{1,2,3,4,5,6});
 
-        CandidateLotto testBonus = makeCandidateLotto(new int[]{11,12,13,14,15,7});
+        String hit32="1,2,3,24,25,27";
+        String hit6Bonus = "1,2,3,4,5,7";
+        String noCountBonus = "11,12,13,14,15,7";
 
-        List<CandidateLotto> testCase = Arrays.asList(testHit3, testHit32, testHit4, testHit5, testHit6Bonus, testHit6, testBonus);
+        List<String> testCase = Arrays.asList(hit3, hit32, hit4, hit5, hit6, hit6Bonus, noCountBonus);
 
-        Lottoes lottoes = new Lottoes(0, Optional.of(testCase));
+        Lottoes lottoes = new Lottoes(0, testCase);
 
         Map<Hit, Integer> result = winnerNumbers.matches(lottoes);
 
@@ -58,20 +61,12 @@ public class WinningLottoTest {
     public void 수익률_테스트() {
         WinningLotto winnerNumbers = makeWinningLotto(13);
 
-        CandidateLotto testHit3 = makeCandidateLotto(new int[]{1,2,3,45,35,36});
-        CandidateLotto testHitNone = makeCandidateLotto(new int[]{21,22,23,24,35,36});
-
-        Lottoes lottoes = new Lottoes(0, Optional.of(Arrays.asList(testHit3, testHitNone)));
+        Lottoes lottoes = new Lottoes(0,Arrays.asList(hit3, noHit));
         LottoPrice lottoPrice = new LottoPrice(14000, "0");
 
         double result = winnerNumbers.earningRate(lottoes,lottoPrice);
 
         assertThat(result).isEqualTo(0.35);
-    }
-
-    private CandidateLotto makeCandidateLotto(int[] inputNumbers) {
-        SortedSet<LottoNumber> lottoTicket = TestUtils.arrayToSortedSet(inputNumbers);
-        return new CandidateLotto(new ManualStrategy(lottoTicket));
     }
 
     private WinningLotto makeWinningLotto(int bonus) {

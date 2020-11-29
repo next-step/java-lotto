@@ -32,7 +32,7 @@ public class LottoPrice {
         return calculatePrice(totalCount);
     }
 
-    public int manulPrice() {
+    public int manualPrice() {
         return calculatePrice(manualCount);
     }
 

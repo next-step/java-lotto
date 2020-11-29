@@ -3,6 +3,7 @@ package lotto.model.lotto;
 import lotto.model.Hit;
 import lotto.model.LottoPrice;
 import lotto.strategy.AutoStrategy;
+import lotto.strategy.ManualStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,10 +16,10 @@ public class Lottoes {
 
     private List<CandidateLotto> lottoes = new LinkedList<>();
 
-    public Lottoes(int autoLottoPrice, Optional<List<CandidateLotto>> lottoes){
+    public Lottoes(int autoLottoPrice, List<String> userInputs){
         int autoLottoCount = autoLottoPrice/Lotto.PRICE;
 
-        this.lottoes.addAll(lottoes.orElse(Collections.emptyList()));
+        this.lottoes.addAll(makeManualLotto(userInputs));
         this.lottoes.addAll(makeAutoLotto(autoLottoCount));
     }
 
@@ -50,12 +51,6 @@ public class Lottoes {
         return lottoes.size();
     }
 
-    private void merge(Lottoes inputLottoes){
-        if(inputLottoes != null){
-            lottoes.addAll(inputLottoes.lottoes);
-        }
-    }
-
     private long calculateReword(Map.Entry<Hit, Integer> hits) {
         return hits.getKey().calculateReword(hits.getValue());
     }
@@ -63,6 +58,13 @@ public class Lottoes {
     private List<CandidateLotto> makeAutoLotto(int autoLottoCount) {
         return IntStream.range(0, autoLottoCount)
                 .mapToObj(e -> new CandidateLotto(new AutoStrategy()))
+                .collect(Collectors.toList());
+    }
+
+    private List<CandidateLotto> makeManualLotto(List<String> userInputs){
+        return userInputs.stream()
+                .map(ManualStrategy::new)
+                .map(CandidateLotto::new)
                 .collect(Collectors.toList());
     }
 
