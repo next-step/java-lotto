@@ -1,29 +1,37 @@
 # 로또
 
 ## 2단계 로또(자동)
-### 도메인
-* Application - 메인
-* Controller
-    * LottoController - 게임 컨트롤러
-    * StatController - 통계 컨트롤러
-* Domain
-    * GameInfo - 금액을 입력받고 게임 횟수를 리턴한다.
-    * GameRecord - 번호를 입력받고 게임 기록을 리턴한다.
-    * Lotto - 게임 정보를 입력받고 게임 기록을 리턴한다.    
-    * Machine - 번호를 생성하고 리턴한다.
-    * StatInfo - 게임 기록과 당첨 번호를 입력받고 리턴한다.
-    * Statistic - 게임 기록 정보를 입력받고 통계를 리턴한다.
-    * StatRecord - 등수와 수익률을 관리한다.
-    * Win - 기록과 당첨번호를 입력받고 등수를 리턴한다.
-* View
-    * InputView - UI
-    * ResultView - UI
-* Constants
-    * Comments
-    * Rule
-* Messages
-    * ExceptionMessages
-* Utils
-    * CollectionUtils
-    * IntUtils
-    * StringUtils
+### Main
+* Application
+    1. 금액을 입력받고
+    2. 로또를 구매한다
+    3. 구매한 로또번호를 출력하고
+    4. 당첨번호를 입력받아
+    5. 당첨개수, 수익률을 출력한다
+---
+### UI
+* InputView
+    1. 구매금액을 입력받는다
+    2. 당첨번호를 입력받는다
+* ResultView
+    1. 구매한 로또번호를 출력한다
+    2. 당첨개수, 수익률을 출력한다
+---
+### Domain
+* Money
+    1. 금액을 입력받아 
+    2. 검증하고 
+    3. 가능횟수를 리턴한다
+* LottoGame
+    1. 금액을 입력받아
+    2. 게임을 실행하고
+    3. 결과을 리턴한다
+* LottoNumber
+    1. 로또를 만들고
+    2. 로또 한 게임을 리턴한다
+* Lotto(Lottos)
+    1. 생성번호를 검증한다
+    2. 번호가 일치하는 개수를 확인한다
+* Rank(Ranks)
+    1. 일치하는 개수를 입력받아
+    2. 등수를 리턴한다

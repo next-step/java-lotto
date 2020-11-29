@@ -1,7 +1,6 @@
 package my.project.lotto.view;
 
 
-import my.project.constants.Comments;
 import my.project.utils.Scan;
 
 import java.util.Scanner;
@@ -11,17 +10,28 @@ import java.util.Scanner;
  * Developer : Seo.
  */
 public class InputView {
-    Scanner scanner;
+    public static final String ENTER_AMOUNT = "구입금액을 입력해 주세요.";
+    public static final String ENTER_LAST_WINNIG_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    public int getMoney() {
-        this.scanner = Scan.getInstance();
-        System.out.println(Comments.HOW_MUCH);
+    public static int getMoney() {
+        Scanner scanner = Scan.getInstance();
+        System.out.println(ENTER_AMOUNT);
         return scanner.nextInt();
     }
 
-    public String getWinningNumber() {
-        this.scanner = Scan.getInstance();
-        System.out.println(Comments.LAST_WINNIG_NUMBERS);
+    public static String getWinningNumbers() {
+        Scanner scanner = Scan.getInstance();
+        System.out.println(ENTER_LAST_WINNIG_NUMBERS);
         return scanner.next();
+    }
+
+    public static int getBonusNumber() {
+        Scanner scanner = Scan.getInstance();
+        System.out.println(ENTER_BONUS_NUMBER);
+        return scanner.nextInt();
+    }
+
+    private InputView() {
     }
 }

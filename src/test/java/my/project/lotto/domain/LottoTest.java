@@ -1,60 +1,86 @@
 package my.project.lotto.domain;
 
-import my.project.constants.Rule;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Created : 2020-11-23 오후 2:06
+ * Created : 2020-11-27 오전 9:55
  * Developer : Seo
  */
 class LottoTest {
-    private GameInfo info;
-    private Lotto lotto;
 
-    @BeforeEach
-    void setUp() {
-        this.info = new GameInfo(14000);
-        this.lotto = new Lotto();
-    }
-
-    @DisplayName("인스턴스 확인")
+    @DisplayName("6개의 번호여야 한다.")
     @Test
-    void init() {
-        assertThat(lotto.games(info))
-                .isNotNull()
-                .isInstanceOf(ArrayList.class);
+    void shouldHaveParamSixDigit_OtherwiseThrowException() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5);
+        assertThatThrownBy(() -> new Lotto(lotto))
+                .hasMessage("로또 한 장은 6개 번호입니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("1 게임은 6개의 숫자를 가진다")
+    @DisplayName("중복된 번호가 있어선 안된다.")
     @Test
-    void whenHaveGame_shouldSixNumbers() {
-        assertThat(lotto.games(info).get(0).get()).hasSize(6);
+    void shouldNotBeDuplicated() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 5);
+        assertThatThrownBy(() -> new Lotto(lotto))
+                .hasMessage("로또 한 장은 6개 번호입니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("1 게임은 1과 45사이의 숫자를 가진다")
+    @DisplayName("번호는 0보다 크고")
     @Test
-    void whenHaveGame_shouldHaveBetween() {
-        assertThat(lotto.games(info).get(0).get())
-                .doesNotContain(Rule.MIN_NUMBER - 1)
-                .doesNotContain(Rule.MAX_NUMBER + 1);
+    void shouldBeGreaterThanZero() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 0);
+        assertThatThrownBy(() -> new Lotto(lotto))
+                .hasMessage("로또 번호는 1과 45 사이입니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("1 게임은 중복되지 않는다")
+    @DisplayName("번호는 46보다 작다")
     @Test
-    void whenHaveGame_shouldNotHaveDuplicate() {
-        assertThat(lotto.games(info).get(0).get()).doesNotHaveDuplicates();
+    void shouldBeLessThan46() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 47);
+        assertThatThrownBy(() -> new Lotto(lotto))
+                .hasMessage("로또 번호는 1과 45 사이입니다.")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("전체 회수를 구한다")
     @Test
-    void whenMoney_thenToalCount() {
-        assertThat(lotto.games(info)).hasSize(info.getCount());
+    void testConstructor() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isNotNull();
     }
 
+    @Test
+    void testMatch() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    void testMatch_2nd() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    void testContains() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.contains(1)).isTrue();
+    }
+
+    @Test
+    void testToString() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.toString())
+                .hasToString("[ 1, 2, 3, 4, 5, 6 ]");
+    }
 }

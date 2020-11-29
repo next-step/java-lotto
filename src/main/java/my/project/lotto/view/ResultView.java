@@ -1,67 +1,40 @@
 package my.project.lotto.view;
 
 
-import my.project.constants.Comments;
-import my.project.lotto.domain.GameRecord;
-import my.project.lotto.domain.StatRecord;
-
-import java.util.List;
+import my.project.lotto.domain.Lottos;
+import my.project.lotto.domain.Rank;
+import my.project.lotto.domain.Ranks;
 
 /**
  * Created : 2020-11-02 오전 8:25.
  * Developer : Seo.
  */
 public class ResultView {
+    public static final String PURCHASED = "개를 구매했습니다.";
+    public static final String WINNING_STATISTICS = "당첨 통계";
+    public static final String DIVIDE = "---------";
+    public static final String FIFTH_PRIZE = "3개 일치 (" + Rank.FIFTH.getPrize() + "원)- ";
+    public static final String FOURTH_PRIZE = "4개 일치 (" + Rank.FOURTH.getPrize() + "원)- ";
+    public static final String THIRD_PRIZE = "5개 일치 (" + Rank.THIRD.getPrize() + "원)- ";
+    public static final String SECOND_PRIZE = "5개 일치, 보너스 볼 일치 (" + Rank.SECOND.getPrize() + "원)- ";
+    public static final String FIRST_PRIZE = "6개 일치 (" + Rank.FIRST.getPrize() + "원)- ";
+    public static final String UNIT = "개";
+    public static final String PROFIT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printGame(List<GameRecord> records) {
-        bought(records);
-        grid(records);
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos.size() + PURCHASED);
+        lottos.grid();
     }
 
-    private void bought(List<GameRecord> records) {
-        System.out.println(records.size() + Comments.YOU_HAVE_GOT);
-    }
-
-    private void grid(List<GameRecord> records) {
-        records.forEach(t -> System.out.println(t.toString()));
-    }
-
-    public void printStat(StatRecord pf) {
-        title();
-        div();
-        fifth(pf);
-        fouth(pf);
-        third(pf);
-        first(pf);
-        profit(pf);
-    }
-
-    private void title() {
-        System.out.println(Comments.STAT_TITLE);
-    }
-
-    private void div() {
-        System.out.println(Comments.STAT_DIV);
-    }
-
-    private void fifth(StatRecord pf) {
-        System.out.println(Comments.STAT_FIFTH + pf.getFifth() + "개");
-    }
-
-    private void fouth(StatRecord pf) {
-        System.out.println(Comments.STAT_FOURTH + pf.getFourth() + "개");
-    }
-
-    private void third(StatRecord pf) {
-        System.out.println(Comments.STAT_THIRD + pf.getThird() + "개");
-    }
-
-    private void first(StatRecord pf) {
-        System.out.println(Comments.STAT_FIRST + pf.getFirst() + "개");
-    }
-
-    private void profit(StatRecord pf) {
-        System.out.println(pf.toString());
+    public static void printRanks(Ranks ranks) {
+        System.out.println("\n" + WINNING_STATISTICS);
+        System.out.println(DIVIDE);
+        System.out.println(FIFTH_PRIZE + ranks.getFifthRanks() + UNIT);
+        System.out.println(FOURTH_PRIZE + ranks.getFourthRanks() + UNIT);
+        System.out.println(THIRD_PRIZE + ranks.getThirdRanks() + UNIT);
+        System.out.println(SECOND_PRIZE + ranks.getSecondRanks() + UNIT);
+        System.out.println(FIRST_PRIZE + ranks.getFirstRanks() + UNIT);
+        System.out.println(String.format(PROFIT, ranks.getProfit()));
     }
 
 }

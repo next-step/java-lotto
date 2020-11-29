@@ -1,7 +1,5 @@
 package my.project.utils;
 
-import my.project.messages.ExceptionMessages;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +16,6 @@ public class StringUtils {
         return param == null || param.trim().isEmpty();
     }
 
-    public static void isQualified(String param) {
-        if (param == null || param.isEmpty()) {
-            throw new IllegalArgumentException(ExceptionMessages.STRING_IS_NULL);
-        }
-    }
 
     public static List<Integer> parseToIntList(String param) {
         List<Integer> list = new ArrayList<>();
