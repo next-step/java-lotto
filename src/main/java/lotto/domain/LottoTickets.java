@@ -12,15 +12,16 @@ public class LottoTickets {
 
     private final int gameMoney;
 
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
+
+    static {
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1)
+                .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+    }
 
     public LottoTickets(int gameMoney) {
-
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1).forEach(number -> lottoNumbers.add(new LottoNumber(number)));
-
         this.gameMoney = (gameMoney/LOTTO_GAME_MONEY_UNIT) * LOTTO_GAME_MONEY_UNIT;
         this.lottoTickets = new ArrayList<>();
-
     }
 
     public int getGameMoney() {

@@ -36,7 +36,7 @@ public class LottoGameController {
 
     public static void getPrizeResult(LottoGameResults lottoGameResults, String lastWinningNumbers, String bonusNumber) {
 
-        lottoGameResults.checkWinningResult(splitLastWinningNumbers(lastWinningNumbers), parseBonusNumber(bonusNumber));
+        lottoGameResults.checkWinningResult(parseLastWinningNumber(lastWinningNumbers), parseBonusNumber(bonusNumber));
 
         Map<PrizeUnit, Integer> resultsMap = lottoGameResults.getWinningResultRecord();
 
@@ -52,7 +52,7 @@ public class LottoGameController {
         return InputView.parseBonusNumber(bonusNumber);
     }
 
-    public static List<LottoNumber> splitLastWinningNumbers(String lastWinningNumbers) {
+    public static List<LottoNumber> parseLastWinningNumber(String lastWinningNumbers) {
         return InputView.splitLastWinningNumbers(lastWinningNumbers);
     }
 
