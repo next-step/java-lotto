@@ -12,10 +12,10 @@ public class ResultView {
 
     private static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
 
-    public static void getLottoTickets(LottoGameResults lottoGameResults) {
+    public static void showLottoTickets(LottoGameResults lottoGameResults) {
 
-        int totalTicketCount = lottoGameResults.getLottoIssueResult().getTicketCount();
-        int manualTicketCount = lottoGameResults.getLottoIssueResult().getManualTicket().size();
+        int totalTicketCount = lottoGameResults.getLottoIssueResult().countLottoTickets();
+        int manualTicketCount = lottoGameResults.getLottoIssueResult().countManualTickets();
 
         System.out.println("\n수동으로 "+manualTicketCount+"장, 자동으로 "+(totalTicketCount-manualTicketCount)+"개를 구매했습니다.");
 
@@ -28,8 +28,7 @@ public class ResultView {
         return sortedLottoNumbers.stream().mapToInt(LottoNumber::getNumber).toArray();
     }
 
-
-    public static void getPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
+    public static void showPrizeResult(Map<PrizeUnit, Integer> resultsMap) {
         System.out.println(WINNING_RESULT_MESSAGE);
 
         resultsMap.entrySet()
@@ -40,7 +39,7 @@ public class ResultView {
         );
     }
 
-    public static void getProfitResult(double profit) {
+    public static void showProfitResult(double profit) {
         System.out.println("총 수익률은 "+profit+"입니다.(기준이 1이기 때문에 결과적으로 "+(profit > 1.0 ? "이득":"손해") +"라는 의미임)");
     }
 }

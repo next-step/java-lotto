@@ -18,8 +18,8 @@ public class LottoGameResultsTest {
         // given
         int inputMoneyAmount = 14000;
 
-        this.lottoTickets = new LottoTickets(inputMoneyAmount, new ArrayList<>());
-
+        this.lottoTickets = new LottoTickets(inputMoneyAmount);
+        lottoTickets.issueLottoTicket(new ArrayList<>());
         this.lottoGameResults = new LottoGameResults(lottoTickets);
 
     }

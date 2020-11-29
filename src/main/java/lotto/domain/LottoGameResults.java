@@ -22,7 +22,7 @@ public class LottoGameResults {
         return this.lottoTickets;
     }
 
-    public void checkWinningResult(List<LottoNumber> lastWinningNumbers, int bonusNumber) {
+    public void checkWinningResult(List<LottoNumber> lastWinningNumbers, LottoNumber bonusNumber) {
         List<PrizeUnit> prizeUnitList = lottoTickets.scoreWinningResult(lastWinningNumbers, bonusNumber);
         recordWinningResult(prizeUnitList);
     }
