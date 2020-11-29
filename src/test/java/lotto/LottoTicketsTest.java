@@ -1,12 +1,8 @@
 package lotto;
 
-import lotto.ui.InputView;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +13,7 @@ class LottoTicketsTest {
     @ValueSource(ints = {3, 5, 10})
     void 여러장의_티켓_구매(int purchaseNumber) {
         // given
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber);
+        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber, new LottoTicketCreation());
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(purchaseNumber);
