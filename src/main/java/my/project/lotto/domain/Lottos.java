@@ -14,6 +14,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos lotto(Money money) {
+        List<Lotto> list = new ArrayList<>();
+        for (int i = 0; i < money.getChances(); i++) {
+            list.add(LottoGenerator.generate());
+        }
+        return new Lottos(list);
+    }
+
     public int size() {
         return this.lottos.size();
     }
