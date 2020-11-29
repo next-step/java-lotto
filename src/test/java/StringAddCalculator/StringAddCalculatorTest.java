@@ -7,12 +7,16 @@ import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
 
-    @DisplayName(value = "null 또는 빈 문자열이면 예외")
+    @DisplayName(value = "null 예외")
     @Test
-    void null_or_empty() {
+    void null_예외() {
         assertThatThrownBy(() -> StringAddCalculator.sum(null))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @DisplayName(value = "빈 문자열이면 예외")
+    @Test
+    void empty_예외() {
         assertThatThrownBy(() -> StringAddCalculator.sum(""))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -45,14 +49,12 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName(value = "음수를 전달할 경우 RuntimeException")
     @Test
     void 음수일_경우_예외() {
         assertThatThrownBy(() -> StringAddCalculator.sum("1,-2:3"))
                 .isInstanceOf(RuntimeException.class);
     }
 
-    @DisplayName(value = "숫자가 아닐경우 경우 NumberFormatException")
     @Test
     void 숫자가_아닐_경우_예외() {
         assertThatThrownBy(() -> StringAddCalculator.sum("1,d:3"))

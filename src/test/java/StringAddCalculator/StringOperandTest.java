@@ -9,19 +9,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class TokenTest {
+class StringOperandTest {
 
     @DisplayName(value = "숫자 하나일 경우 그대로 반환")
     @Test
     void 숫자_하나() {
         // given
-        String values = "1";
+        String value = "1";
 
         // when
-        List<String> tokens = Token.findTokens(values);
+        List<String> tokens = StringOperand.findStringOperands(value);
 
         // then
-        List<String> expected = Arrays.asList("1");
+        List<String> expected = Arrays.asList(value);
         Assertions.assertThat(tokens).isEqualTo(expected);
     }
 
@@ -32,7 +32,7 @@ class TokenTest {
         String values = "1,2";
 
         // when
-        List<String> tokens = Token.findTokens(values);
+        List<String> tokens = StringOperand.findStringOperands(values);
 
         // then
         List<String> expected = Arrays.asList("1", "2");
@@ -46,7 +46,7 @@ class TokenTest {
         String values = "1,2:3";
 
         // when
-        List<String> tokens = Token.findTokens(values);
+        List<String> tokens = StringOperand.findStringOperands(values);
 
         // then
         List<String> expected = Arrays.asList("1", "2", "3");
@@ -60,20 +60,24 @@ class TokenTest {
         String values = "//;\n1;2;3";
 
         // when
-        List<String> tokens = Token.findTokens(values);
+        List<String> tokens = StringOperand.findStringOperands(values);
 
         // then
         List<String> expected = Arrays.asList("1", "2", "3");
         Assertions.assertThat(tokens).isEqualTo(expected);
     }
 
-    @DisplayName(value = "null 또는 빈 문자열이면 예외")
+    @DisplayName(value = "null 예외")
     @Test
-    void null_or_empty() {
-        assertThatThrownBy(() -> Token.findTokens(null))
+    void null_예외() {
+        assertThatThrownBy(() -> StringOperand.findStringOperands(null))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThatThrownBy(() -> Token.findTokens(""))
+    @DisplayName(value = "문자열이면 예외")
+    @Test
+    void empty_예외() {
+        assertThatThrownBy(() -> StringOperand.findStringOperands(""))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
