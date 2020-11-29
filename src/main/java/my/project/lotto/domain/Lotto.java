@@ -10,6 +10,8 @@ import java.util.TreeSet;
  */
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
     public static final String LOTTO_NUMBERS_HAVE_SIX = "로또 한 장은 6개 번호입니다.";
     public static final String LOTTO_NUMBER_IS_BETWEEN = "로또 번호는 1과 45 사이입니다.";
     private final SortedSet<Integer> lotto;
@@ -19,19 +21,19 @@ public class Lotto {
         if (this.lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_HAVE_SIX);
         }
-        if (this.lotto.first() < 1) {
+        if (this.lotto.first() < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
-        if (this.lotto.last() > 45) {
+        if (this.lotto.last() > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
     }
 
     public Rank match(Lotto lastWinningLotto, int bonusNumber) {
-        if (bonusNumber < 1) {
+        if (bonusNumber < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
-        if (bonusNumber > 45) {
+        if (bonusNumber > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
 
