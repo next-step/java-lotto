@@ -28,7 +28,6 @@ public class LottoTickets {
     }
 
     public void issueLottoTicket(List<List<LottoNumber>> manualTickets) {
-        System.out.println(manualTickets.size());
         issueManualTicket(manualTickets);
         issueAutoTicket(manualTickets.size());
     }
