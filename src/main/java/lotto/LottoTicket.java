@@ -18,7 +18,7 @@ public class LottoTicket {
     }
 
     public LottoTicket newTicket(LottoTicketCreatable lottoTicketCreatable) {
-        return new LottoTicket(lottoTicketCreatable.createTicket());
+        return lottoTicketCreatable.createTicket();
     }
 
     public List<Integer> getTicket() {

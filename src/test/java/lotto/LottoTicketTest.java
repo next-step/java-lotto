@@ -32,7 +32,7 @@ class LottoTicketTest {
         
         // when
         LottoTicket ticket = new LottoTicket().newTicket(
-                () -> testTicket
+                () -> new LottoTicket(testTicket)
         );
         
         // then
