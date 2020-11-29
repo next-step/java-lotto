@@ -16,7 +16,7 @@ public class LottoGameTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoGame lottoGame = new LottoGame(inputMoneyAmount, new ArrayList<>());
+        LottoGame lottoGame = new LottoGame(inputMoneyAmount);
 
         // then
         assertThat(lottoGame.getGameMoney()).isEqualTo(inputMoneyAmount);
@@ -29,11 +29,11 @@ public class LottoGameTest {
         int inputMoneyAmount = 14000;
 
         // when
-        LottoGame lottoGame = new LottoGame(inputMoneyAmount, new ArrayList<>());
-        LottoGameResults lottoGameResults = lottoGame.issueLottoTicket();
+        LottoGame lottoGame = new LottoGame(inputMoneyAmount);
+        LottoGameResults lottoGameResults = lottoGame.issueLottoTicket(new ArrayList<>());
 
         // then
-        assertThat(lottoGameResults.getLottoIssueResult().getTicketCount()).isEqualTo(inputMoneyAmount/1000);
+        assertThat(lottoGameResults.getLottoIssueResult().countLottoTickets()).isEqualTo(inputMoneyAmount/1000);
     }
 
 }

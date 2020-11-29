@@ -4,22 +4,20 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static int gameMoney;
+    private final int gameMoney;
 
-    private static List<List<LottoNumber>> manualTickets;
-
-    public LottoGame(int gameMoney, List<List<LottoNumber>> manualTickets){
+    public LottoGame(int gameMoney){
         this.gameMoney = gameMoney;
-        this.manualTickets = manualTickets;
     }
 
     public int getGameMoney(){
         return this.gameMoney;
     }
 
-    public LottoGameResults issueLottoTicket() {
+    public LottoGameResults issueLottoTicket(List<List<LottoNumber>> manualTickets) {
 
-        LottoTickets lottoTickets = new LottoTickets(gameMoney, manualTickets);
+        LottoTickets lottoTickets = new LottoTickets(gameMoney);
+        lottoTickets.issueLottoTicket(manualTickets);
 
         LottoGameResults lottoGameResults = new LottoGameResults(lottoTickets);
 
