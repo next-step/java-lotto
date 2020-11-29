@@ -1,6 +1,5 @@
 package my.project.utils;
 
-import my.project.constants.Comments;
 import my.project.messages.ExceptionMessages;
 
 public class IntUtils {

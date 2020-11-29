@@ -19,7 +19,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String getWinningNumber() {
+    public static String getWinningNumbers() {
         Scanner scanner = Scan.getInstance();
         System.out.println(ENTER_LAST_WINNIG_NUMBERS);
         return scanner.next();

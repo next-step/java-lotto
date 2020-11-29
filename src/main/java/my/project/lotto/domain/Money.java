@@ -6,10 +6,6 @@ package my.project.lotto.domain;
  */
 public class Money {
     public static final int PRICE = 1000;
-    public static final int FIRST_PRICE = 2_000_000_000;
-    public static final int THIRD_PRICE = 1_500_000;
-    public static final int FOURTH_PRICE = 50_000;
-    public static final int FIFTH_PRICE = 5_000;
     private final int money;
 
     public Money(int money) {

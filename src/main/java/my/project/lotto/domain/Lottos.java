@@ -22,7 +22,7 @@ public class Lottos {
         lottos.forEach(t -> System.out.println(t.toString()));
     }
 
-    public Ranks matches(Lotto lastWinningLotto) {
+    public Ranks ranks(Lotto lastWinningLotto) {
         Ranks ranks = new Ranks(new ArrayList<>());
         for (Lotto lotto : lottos) {
             ranks.add(lotto.match(lastWinningLotto));
