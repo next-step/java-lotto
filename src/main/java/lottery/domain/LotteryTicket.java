@@ -71,4 +71,14 @@ public class LotteryTicket {
     public int hashCode() {
         return Objects.hash(lotteryNumbers);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder lotteryTicket = new StringBuilder();
+        for (LotteryNumber number : this.lotteryNumbers) {
+            lotteryTicket.append(number.getNumber());
+            lotteryTicket.append(", ");
+        }
+        return "[" + lotteryTicket.subSequence(0, lotteryTicket.length()).toString() + "]";
+    }
 }

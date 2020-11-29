@@ -25,6 +25,10 @@ public class LotteryNumber implements Comparable{
         return 0;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
