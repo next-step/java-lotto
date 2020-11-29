@@ -1,5 +1,7 @@
 package my.project.utils;
 
+import my.project.lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,10 @@ public class StringUtils {
     }
 
 
-    public static List<Integer> parseToIntList(String param) {
-        List<Integer> list = new ArrayList<>();
+    public static List<LottoNumber> parseToIntList(String param) {
+        List<LottoNumber> list = new ArrayList<>();
         for (String s : param.split(",")) {
-            list.add(Integer.valueOf(s));
+            list.add(new LottoNumber(Integer.valueOf(s)));
         }
         return list;
     }

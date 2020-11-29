@@ -3,7 +3,7 @@ package my.project.lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +18,12 @@ class LottoTest {
     @DisplayName("6개의 번호여야 한다.")
     @Test
     void shouldHaveParamSixDigit_OtherwiseThrowException() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5);
+        List<LottoNumber> lotto = new ArrayList<>();
+        lotto.add(new LottoNumber(1));
+        lotto.add(new LottoNumber(2));
+        lotto.add(new LottoNumber(3));
+        lotto.add(new LottoNumber(4));
+        lotto.add(new LottoNumber(5));
         assertThatThrownBy(() -> new Lotto(lotto))
                 .hasMessage("로또 한 장은 6개 번호입니다.")
                 .isInstanceOf(IllegalArgumentException.class);
@@ -27,60 +32,85 @@ class LottoTest {
     @DisplayName("중복된 번호가 있어선 안된다.")
     @Test
     void shouldNotBeDuplicated() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 5);
+        List<LottoNumber> lotto = new ArrayList<>();
+        lotto.add(new LottoNumber(1));
+        lotto.add(new LottoNumber(2));
+        lotto.add(new LottoNumber(3));
+        lotto.add(new LottoNumber(4));
+        lotto.add(new LottoNumber(5));
+        lotto.add(new LottoNumber(5));
         assertThatThrownBy(() -> new Lotto(lotto))
                 .hasMessage("로또 한 장은 6개 번호입니다.")
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("번호는 0보다 크고")
-    @Test
-    void shouldBeGreaterThanZero() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 0);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 번호는 1과 45 사이입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("번호는 46보다 작다")
-    @Test
-    void shouldBeLessThan46() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 47);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 번호는 1과 45 사이입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     void testConstructor() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> lotto = new ArrayList<>();
+        lotto.add(new LottoNumber(1));
+        lotto.add(new LottoNumber(2));
+        lotto.add(new LottoNumber(3));
+        lotto.add(new LottoNumber(4));
+        lotto.add(new LottoNumber(5));
+        lotto.add(new LottoNumber(6));
         assertThat(lotto).isNotNull();
     }
 
     @Test
     void testMatch() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.FIRST);
+        List<LottoNumber> list = new ArrayList<>();
+        list.add(new LottoNumber(1));
+        list.add(new LottoNumber(2));
+        list.add(new LottoNumber(3));
+        list.add(new LottoNumber(4));
+        list.add(new LottoNumber(5));
+        list.add(new LottoNumber(6));
+        Lotto lotto = new Lotto(list);
+
+        List<LottoNumber> winning = new ArrayList<>();
+        winning.add(new LottoNumber(1));
+        winning.add(new LottoNumber(2));
+        winning.add(new LottoNumber(3));
+        winning.add(new LottoNumber(4));
+        winning.add(new LottoNumber(5));
+        winning.add(new LottoNumber(6));
+        Lotto winningLotto = new Lotto(winning);
+        assertThat(lotto.match(winningLotto, new LottoNumber(7))).isEqualTo(Rank.FIRST);
     }
 
     @Test
     void testMatch_2nd() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.SECOND);
+        List<LottoNumber> list = new ArrayList<>();
+        list.add(new LottoNumber(1));
+        list.add(new LottoNumber(2));
+        list.add(new LottoNumber(3));
+        list.add(new LottoNumber(4));
+        list.add(new LottoNumber(5));
+        list.add(new LottoNumber(7));
+        Lotto lotto = new Lotto(list);
+
+        List<LottoNumber> winning = new ArrayList<>();
+        winning.add(new LottoNumber(1));
+        winning.add(new LottoNumber(2));
+        winning.add(new LottoNumber(3));
+        winning.add(new LottoNumber(4));
+        winning.add(new LottoNumber(5));
+        winning.add(new LottoNumber(6));
+        Lotto winningLotto = new Lotto(winning);
+        assertThat(lotto.match(winningLotto, new LottoNumber(7))).isEqualTo(Rank.SECOND);
     }
 
     @Test
     void testContains() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(1)).isTrue();
+        List<LottoNumber> list = new ArrayList<>();
+        list.add(new LottoNumber(1));
+        list.add(new LottoNumber(2));
+        list.add(new LottoNumber(3));
+        list.add(new LottoNumber(4));
+        list.add(new LottoNumber(5));
+        list.add(new LottoNumber(7));
+        Lotto lotto = new Lotto(list);
+        assertThat(lotto.contains(new LottoNumber(1))).isTrue();
     }
 
-    @Test
-    void testToString() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.toString())
-                .hasToString("[ 1, 2, 3, 4, 5, 6 ]");
-    }
 }

@@ -22,9 +22,9 @@ public class LottoGenerator {
 
     public static Lotto generate() {
         Collections.shuffle(numbers);
-        List<Integer> lotto = new ArrayList<>();
+        List<LottoNumber> lotto = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
-            lotto.add(numbers.get(i));
+            lotto.add(new LottoNumber(numbers.get(i)));
         }
         return new Lotto(lotto);
     }

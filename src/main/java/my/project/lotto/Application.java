@@ -17,8 +17,8 @@ public class Application {
         Lottos lottos = LottoGame.lotto(money);
         ResultView.printLottos(lottos);
 
-        List<Integer> winningNumbers = StringUtils.parseToIntList(InputView.getWinningNumbers());
-        int bonusNumber = InputView.getBonusNumber();
+        List<LottoNumber> winningNumbers = StringUtils.parseToIntList(InputView.getWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
         Lotto lastWinningLotto = new Lotto(winningNumbers);
         Ranks ranks = lottos.ranks(lastWinningLotto, bonusNumber);
         ResultView.printRanks(ranks);
