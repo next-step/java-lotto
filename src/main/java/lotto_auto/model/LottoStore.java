@@ -14,7 +14,7 @@ public class LottoStore {
         List<LottoTicket> allTicket = new ArrayList<>();
         allTicket.addAll(manualLottoTicket);
         allTicket.addAll(autoLottoTicket);
-        return new LottoBundle(allTicket, order);
+        return new LottoBundle(allTicket);
     }
 
     private static List<LottoTicket> prepareManualLotto(Order order) {

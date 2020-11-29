@@ -11,9 +11,8 @@ public class LottoBundleStatusView {
 
     private static final String LOTTO_TICKET_BUY_MESSAGE = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
 
-    public static void statusPrint(LottoBundle lottoBundle) {
+    public static void statusPrint(LottoBundle lottoBundle, Order order) {
         List<LottoTicket> lottoTicketList = lottoBundle.export();
-        Order order = lottoBundle.getOrder();
         System.out.println(String.format(LOTTO_TICKET_BUY_MESSAGE, order.getManualCount(), order.getAutoCount()));
         StringBuilder sb = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTicketList) {

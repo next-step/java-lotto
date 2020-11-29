@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 
 public class LottoBundle {
 
-    private final Order order;
     private List<LottoTicket> lottoTickets;
 
-    public LottoBundle(List<LottoTicket> lottoTickets, Order order) {
-        this.order = order;
+    public LottoBundle(List<LottoTicket> lottoTickets) {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
@@ -33,10 +31,6 @@ public class LottoBundle {
                 .map(lottoTicket -> lottoTicket.draw(lottoNumbers, bonusNumber))
                 .collect(Collectors.toList()),
                 lottoTickets.size() * LottoTicket.PRICE);
-    }
-
-    public Order getOrder(){
-        return this.order;
     }
 
 }
