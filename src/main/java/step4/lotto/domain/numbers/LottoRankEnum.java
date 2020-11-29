@@ -44,4 +44,5 @@ public enum LottoRankEnum {
     public int getLottoRank() {
         return lottoRank;
     }
+
 }
