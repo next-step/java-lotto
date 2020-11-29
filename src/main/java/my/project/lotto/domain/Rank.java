@@ -31,9 +31,6 @@ public enum Rank {
         if (THIRD.matchCount(matchCount) && !matchBonus) {
             return THIRD;
         }
-        if (matchCount < FIFTH.matchCount) {
-            return NO_RANK;
-        }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount(matchCount))
