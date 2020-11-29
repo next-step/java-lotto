@@ -30,11 +30,8 @@ public class LottoTicket {
     }
 
     public DrawResult draw(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        int matchNumberCount = this.lottoNumbers.computeMatchCount(winningLottoNumbers);
         boolean bonus = this.lottoNumbers.contains(bonusNumber);
-        if (bonus) {
-            matchNumberCount++;
-        }
+        int matchNumberCount = this.lottoNumbers.computeMatchCount(winningLottoNumbers);
         return DrawResult.valueOf(bonus, matchNumberCount);
     }
 }

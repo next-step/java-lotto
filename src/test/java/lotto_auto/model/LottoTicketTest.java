@@ -75,7 +75,7 @@ class LottoTicketTest {
         lottoNumbers.add(new LottoNumber(2));
         lottoNumbers.add(new LottoNumber(3));
         lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(17));
+        lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(27));
         LottoNumbers winningLottoNumber = new LottoNumbers(lottoNumbers);
 
