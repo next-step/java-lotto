@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoGameService {
@@ -10,54 +9,40 @@ public class LottoGameService {
     private static int lottoBuyCnt = 0;
     private static LottoTicket buyLotto;
 
-    public static void setBuyLotto(LottoTicket buyLotto) {
-        LottoGameService.buyLotto = buyLotto;
-    }
-
-    public static LottoTicket getBuyLotto() {
-        return buyLotto;
-    }
     public static void setLottoBuyAmt(int lottoBuyAmt) {
         LottoGameService.lottoBuyAmt = lottoBuyAmt;
     }
-
 
     public static int getLottoBuyAmt() {
         return lottoBuyAmt;
     }
 
-    public static int buyLotto(int lottoBuyAmt){
+    public static LottoTicket buyLotto(int lottoBuyAmt){
         setLottoBuyAmt(lottoBuyAmt);
         int lottoQty = 0;
         lottoQty = lottoBuyAmt/lottoPrice;
-        PrintView.printBuyLottoQty(lottoQty);
         lottoBuyCnt = lottoQty;
         List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i< lottoBuyCnt; i++){
             Lotto lotto = new Lotto(true);
             lottoList.add(lotto);
-            PrintView.printLottoNumber(lotto);
         }
         buyLotto = new LottoTicket(lottoList);
-        return lottoQty;
+        return buyLotto;
     }
 
-    public static int getLottoMatchStatistics(int matchCnt){
+    public static int getLottoMatchStatistics(List<Rank> rankList, int matchCnt){
         int matchLottoCnt = 0;
-        for(Lotto lotto : buyLotto.getLottoList()){
-            matchLottoCnt = getMatchRankLottoCnt(matchCnt, matchLottoCnt, lotto);
+        for(Rank rank : rankList){
+            matchLottoCnt = getMatchRankLottoCnt(rank.getMatchCnt(), matchCnt);
         }
         return matchLottoCnt;
     }
 
-    public static int getMatchRankLottoCnt(int matchCnt, int matchLottoCnt, Lotto lotto) {
-        if(getResultRank(lotto).getMatchCnt() == matchCnt){
-            matchLottoCnt++;
+    public static int getMatchRankLottoCnt(int matchCnt, int matchLottoCnt) {
+        if(matchCnt == matchLottoCnt){
+            return 1;
         }
-        return matchLottoCnt;
-    }
-
-    public static Rank getResultRank(Lotto lotto){
-        return Rank.getRankByMatchCnt(lotto.getWinnerMatchCnt());
+        return 0;
     }
 }

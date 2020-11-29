@@ -10,7 +10,6 @@ public class Lotto {
     private final List<Integer> initlottoNumber = IntStream.range(1, 45).boxed().collect(Collectors.toList());
     private final List<Integer> lottoNumbers;
     private int winnerMatchCnt;
-    private Rank rank;
 
     public Lotto(boolean auto) {
         if(auto){
@@ -24,14 +23,6 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public void setRank(Rank rank) {
-        this.rank = rank;
-    }
-
-    public Rank getRank() {
-        return rank;
     }
 
     public List<Integer> autoGenerateLottoNumber() {
@@ -50,7 +41,4 @@ public class Lotto {
         this.winnerMatchCnt = winnerMatchCnt;
     }
 
-    public int getWinnerMatchCnt() {
-        return winnerMatchCnt;
-    }
 }

@@ -1,24 +1,29 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class LottoWinner {
-    private static int[] winnerLottoNumbers;
+public final class LottoWinner {
+    private final int[] winnerLottoNumbers;
 
-    public static void setWinnerLottoNumbers(int[] winnerLottoNumbers) {
-        LottoWinner.winnerLottoNumbers = winnerLottoNumbers;
+    public LottoWinner(int[] winnerLottoNumbers) {
+        this.winnerLottoNumbers = winnerLottoNumbers;
     }
 
-    public static void matchingWinnerNumber(){
-        for(Lotto lotto : LottoGameService.getBuyLotto().getLottoList()){
+    public LottoTicket matchingWinnerNumber(LottoTicket lottoTicket){
+        List<Rank> lottoRankList = new ArrayList<>();
+        for(Lotto lotto : lottoTicket.getLottoList()){
             int matchCnt = getMatchLottoCnt(lotto);
             lotto.addWinnerMatchCnt(matchCnt);
-            lotto.setRank(Rank.getRankByMatchCnt(matchCnt));
+            lottoRankList.add(Rank.getRankByMatchCnt(matchCnt));
         }
+        lottoTicket.setLottoRankList(lottoRankList);
+        return lottoTicket;
     }
 
-    public static int getMatchLottoCnt(Lotto lotto) {
-        return Arrays.stream(winnerLottoNumbers).map(i -> {
+    public int getMatchLottoCnt(Lotto lotto) {
+        return Arrays.stream(this.winnerLottoNumbers).map(i -> {
             return judgeWinnerNumber(lotto, i);
         }).sum();
     }

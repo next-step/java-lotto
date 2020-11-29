@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 public class Profit {
 
 
-    public static double getLottoGameProfit(){
+    public static double getLottoGameProfit(LottoTicket lottoTicket){
         double totalWinnerPriceAmt = 0;
-        for(Lotto lotto : LottoGameService.getBuyLotto().getLottoList()){
-            totalWinnerPriceAmt += lotto.getRank().getWinnnerPrice();
+        for(Rank rank : lottoTicket.getLottoRankList()){
+            totalWinnerPriceAmt += rank.getWinnnerPrice();
         }
         double lottoBuyAmt = LottoGameService.getLottoBuyAmt();
         BigDecimal profitRate = new BigDecimal(totalWinnerPriceAmt / lottoBuyAmt).setScale(2, BigDecimal.ROUND_FLOOR);

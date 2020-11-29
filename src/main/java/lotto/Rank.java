@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
-
 public enum Rank {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
@@ -13,10 +11,6 @@ public enum Rank {
 
     private int matchCnt;
     private int winnnerPrice;
-
-    Rank(int matchCnt) {
-        this.matchCnt = matchCnt;
-    }
 
     Rank(int matchCnt, int winnnerPrice) {
         this.matchCnt = matchCnt;

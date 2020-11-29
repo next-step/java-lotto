@@ -15,9 +15,9 @@ public class InputView {
         return buyPrice;
     }
 
-    public static void inputWinnerLottoNumber() {
+    public static LottoWinner inputWinnerLottoNumber() {
         System.out.println(LOTTO_WINNER_NUMBER_INPUT_MESSAGE);
         String[] inputNumbers = scanner.next().replaceAll(" ", "").split(",");
-        LottoWinner.setWinnerLottoNumbers(Arrays.stream(inputNumbers).mapToInt(Integer::parseInt).toArray());
+        return new LottoWinner(Arrays.stream(inputNumbers).mapToInt(Integer::parseInt).toArray());
     }
 }

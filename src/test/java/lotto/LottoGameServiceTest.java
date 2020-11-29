@@ -12,16 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameServiceTest {
 
-    @BeforeEach
-    void setUp(){
-        int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoWinner.setWinnerLottoNumbers(winnerLottoNumbers);
-    }
 
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "0:0", "1000:1"}, delimiter = ':')
     public void buyLottoTest(int buyAmt, int buyQty) {
-        assertThat(LottoGameService.buyLotto(buyAmt)).isEqualTo(buyQty);
+        assertThat(LottoGameService.buyLotto(buyAmt).getLottoList().size()).isEqualTo(buyQty);
     }
 
     @Test
@@ -34,25 +29,27 @@ public class LottoGameServiceTest {
         lottoNumbers.add(6);
         lottoNumbers.add(7);
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(LottoWinner.getMatchLottoCnt(lotto)).isEqualTo(5);
+        int[] winnerLottoNumbers = {1,2,3,4,5,6};
+        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
+        assertThat(lottoWinner.getMatchLottoCnt(lotto)).isEqualTo(5);
     }
 
     @Test
     public void getLottoMatchStatisticsTest() {
         List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(2);
+        lottoNumbers.add(3);
+        lottoNumbers.add(5);
+        lottoNumbers.add(6);
+        lottoNumbers.add(7);
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.addWinnerMatchCnt(5);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
         LottoTicket lottoTicket = new LottoTicket(lottoList);
-        LottoGameService.setBuyLotto(lottoTicket);
-        assertThat(LottoGameService.getLottoMatchStatistics(5)).isEqualTo(1);
-    }
-
-    @Test
-    public void getResultRankTest() {
-        Lotto lotto = new Lotto(true);
-        lotto.addWinnerMatchCnt(5);
-        assertThat(LottoGameService.getResultRank(lotto)).isEqualTo(Rank.SECOND);
+        int[] winnerLottoNumbers = {1,2,3,4,5,6};
+        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
+        lottoTicket = lottoWinner.matchingWinnerNumber(lottoTicket);
+        assertThat(LottoGameService.getLottoMatchStatistics(lottoTicket.getLottoRankList(), 5)).isEqualTo(1);
     }
 }

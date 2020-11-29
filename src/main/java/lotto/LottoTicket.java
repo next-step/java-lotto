@@ -1,18 +1,21 @@
 package lotto;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoTicket {
     private final List<Lotto> lottoList;
+    private List<Rank> lottoRankList;
 
     public LottoTicket(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public void addLottoTicket(Lotto lotto){
-        lottoList.add(lotto);
+    public List<Rank> getLottoRankList() {
+        return lottoRankList;
+    }
+
+    public void setLottoRankList(List<Rank> lottoRankList) {
+        this.lottoRankList = lottoRankList;
     }
 
     public List<Lotto> getLottoList() {

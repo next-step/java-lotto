@@ -23,20 +23,10 @@ public class ProfitTest {
         lottoNumbers.add(10);
         lottoNumbers.add(11);
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.setRank(Rank.FOURTH);
         lottoList.add(lotto);
-        LottoTicket lottoTicket = new LottoTicket(lottoList);
-        LottoGameService.setBuyLotto(lottoTicket);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoWinner.setWinnerLottoNumbers(winnerLottoNumbers);
+        new LottoWinner(winnerLottoNumbers);
         LottoGameService.setLottoBuyAmt(14000);
-    }
-
-    @Test
-    public void autoGenerateLottoNumberTest() {
-
-        assertThat(Profit.getLottoGameProfit()).isEqualTo(0.35);
-
     }
 
     @ParameterizedTest
