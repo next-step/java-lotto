@@ -41,11 +41,9 @@ public class LottoWinningNumber {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        LottoNumber lottoNumber = new LottoNumber(winningNumberList);
+        checkOverlap(bonusNumber, winningNumberList);
 
-        checkOverlap(bonusNumber, lottoNumber.getLottoNumber());
-
-        return lottoNumber.getLottoNumber();
+        return winningNumberList;
     }
 
     public int getRank(SortedSet<Integer> paramValue) {
@@ -78,7 +76,7 @@ public class LottoWinningNumber {
 
     private static void isLottoNumber(String[] winningNumber) {
         try {
-            for(String number : winningNumber){
+            for (String number : winningNumber) {
                 Integer.parseInt(number);
             }
 
