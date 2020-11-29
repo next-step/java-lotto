@@ -81,7 +81,7 @@ public class LottoNumbers {
     }
 
     public int computeMatchCount(LottoNumbers lottoNumbers) {
-        return (int) lottoNumbers.export()
+        return (int) lottoNumbers.lottoNumbers
                 .stream()
                 .filter(this::contains)
                 .count();
