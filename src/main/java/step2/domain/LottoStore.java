@@ -1,14 +1,14 @@
 package step2.domain;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class LottoStore {
-    private static final int ZERO = 0;
 
     private WinningLottoNumber winningLottoNumber;
     private Fee fee;
-    private List<Lotto> soldLotto;
-    private List<Long> winLottoMoney;
+    private SoldLotto soldLotto;
+    private WinningLottoMoney winningLottoMoney;
 
     public List<Lotto> buy(int fee) {
         this.fee = new Fee(fee);
@@ -18,49 +18,21 @@ public class LottoStore {
     }
 
     private List<Lotto> buyLotto(int buyCount) {
-        this.soldLotto = new ArrayList<>();
-        for (int count = 0; count < buyCount; count++) {
-            this.soldLotto.add(new Lotto());
-        }
-        return soldLotto;
+        this.soldLotto = new SoldLotto(buyCount);
+        return this.soldLotto.getSoldLotto();
     }
 
-    public void initWinNumbers(String winNumbertring) {
-        this.winningLottoNumber = new WinningLottoNumber(winNumbertring);
+    public void initWinNumbers(List<Integer> winningNumbers) {
+        this.winningLottoNumber = new WinningLottoNumber(winningNumbers);
     }
 
-    public List<Long> findWinLottoMoney() {
-        this.winLottoMoney = new ArrayList<>();
-        for (Lotto lotto : this.soldLotto) {
-            findMoney(findIsMatchNumberCount(lotto));
-        }
-        return this.winLottoMoney;
+    public Map<LottoRank, Integer> findWinLottoMoney() {
+        this.winningLottoMoney = new WinningLottoMoney(this.soldLotto, this.winningLottoNumber);
+        return this.winningLottoMoney.getWinningLottoMoney();
     }
 
-    private void findMoney(long winNumberCount) {
-        Optional<LottoRank> rank = LottoRank.findRank(winNumberCount);
-        if (!rank.isPresent()) {
-            return;
-        }
-
-        this.winLottoMoney.add(rank.get().findMoney());
-    }
-
-    private long findIsMatchNumberCount(Lotto lotto) {
-        return this.winningLottoNumber.findIsMatchNumberCount(lotto);
-    }
-
-    public double findBenefit() {
-        long benefitMoney = 0;
-        for (Long money : winLottoMoney) {
-            benefitMoney += money;
-        }
-
-        if (benefitMoney == 0) {
-            return ZERO;
-        }
-
-        return (double) benefitMoney/fee.getFee();
+    public BigDecimal findBenefit() {
+        return this.winningLottoMoney.findBenefitByFee(this.fee);
     }
 
     public List<Integer> getWinNumbers() {

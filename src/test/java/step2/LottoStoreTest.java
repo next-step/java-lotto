@@ -2,8 +2,10 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.Lotto;
 import step2.domain.LottoStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -31,10 +33,14 @@ class LottoStoreTest {
     void initWinNumbers_isBlankAndisNotMatchNumberCount_IllegalArgumentException() {
         LottoStore lottoStore = new LottoStore();
 
-        assertThatThrownBy(() -> lottoStore.initWinNumbers(""))
-                .isInstanceOf(IllegalArgumentException.class);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(5);
+        list.add(6);
 
-        assertThatThrownBy(() -> lottoStore.initWinNumbers("1,2,3,4,5"))
+        assertThatThrownBy(() -> lottoStore.initWinNumbers(list))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,13 +49,15 @@ class LottoStoreTest {
     void initWinNumbes_isNotNumberAndisNotLottoNumber_Exception() {
         LottoStore lottoStore = new LottoStore();
 
-        assertThatThrownBy(() -> lottoStore.initWinNumbers("a,b,1,2,3,4"))
-                .isInstanceOf(RuntimeException.class);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(5);
+        list.add(0);
+        list.add(46);
 
-        assertThatThrownBy(() -> lottoStore.initWinNumbers("1,2,3,4,5,46"))
-                .isInstanceOf(IllegalArgumentException.class);
-
-        assertThatThrownBy(() -> lottoStore.initWinNumbers("0,2,3,4,5,45"))
+        assertThatThrownBy(() -> lottoStore.initWinNumbers(list))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -58,21 +66,15 @@ class LottoStoreTest {
     @DisplayName("우승 숫자를 입력하면 Integer 리스트로 저장한다.")
     void initWinNumbers() {
         LottoStore lottoStore = new LottoStore();
-        lottoStore.initWinNumbers("1,2,3,4,5,6");
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(5);
+        list.add(44);
+        list.add(45);
+
+        lottoStore.initWinNumbers(list);
         assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("당첨된 로또의 상금을 반환함.")
-    void findWinLottoMoney() {
-        LottoStore lottoStore = new LottoStore();
-        lottoStore.buy(100000);
-        lottoStore.initWinNumbers("2,5,10,15,20,25");
-
-        List<Long> winLottoMoney = lottoStore.findWinLottoMoney();
-
-        for (Long money : winLottoMoney) {
-            System.out.println(money);
-        }
     }
 }

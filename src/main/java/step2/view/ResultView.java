@@ -1,8 +1,11 @@
 package step2.view;
 
+import step2.domain.LottoRank;
 import step2.domain.dto.LottoDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -15,23 +18,13 @@ public class ResultView {
         System.out.println();
     }
 
-    public void showLottoResult(List<Long> lottoResult) {
-
-        long fourCount = lottoResult.stream().filter(money -> money.equals(5000L)).count();
-        System.out.println("3개 일치 (5000원)- " + fourCount+"개");
-
-        long threeCount = lottoResult.stream().filter(money -> money.equals(50000L)).count();
-        System.out.println("4개 일치 (50000원)- " + threeCount+"개");
-
-        long twoCount = lottoResult.stream().filter(money -> money.equals(1500000L)).count();
-        System.out.println("5개 일치 (1500000)- " + twoCount+"개");
-
-        long oneCount = lottoResult.stream().filter(money -> money.equals(2000000000L)).count();
-        System.out.println("6개 일치 (2000000000)- " + oneCount+"개");
-
+    public void showLottoResult(Map<LottoRank, Integer> lottoResult) {
+        for (LottoRank rank : LottoRank.values()) {
+            System.out.println(rank.getNumber() +"개 일치 ("+rank.getMoney()+")-" + lottoResult.get(rank) + "개");
+        }
     }
 
-    public void showBenefitPercent(double benefitPercent) {
-        System.out.println("총 수익률은 " + String.format("%.2f", benefitPercent) + "입니다.");
+    public void showBenefitPercent(BigDecimal benefitPercent) {
+        System.out.println("총 수익률은 " + benefitPercent + "입니다.");
     }
 }

@@ -1,11 +1,14 @@
 package step2;
 
 import step2.controller.LottoController;
+import step2.domain.LottoRank;
 import step2.domain.dto.LottoDTO;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMain {
 
@@ -24,7 +27,6 @@ public class LottoMain {
         initWinNumber();
         findLottoResult();
         findBenefit();
-
     }
 
     private void buyLotto() {
@@ -34,20 +36,17 @@ public class LottoMain {
     }
 
     private void initWinNumber() {
-        String winNumberString = inputView.getWinNumbers();
-        lottoController.initWinNumbers(winNumberString);
+        List<Integer> winningNumbersValue = inputView.getWinNumbers();
+        lottoController.initWinNumbers(winningNumbersValue);
     }
 
     private void findLottoResult() {
-        List<Long> lottoResult = lottoController.findLottoResult();
+        Map<LottoRank, Integer> lottoResult = lottoController.findLottoResult();
         resultView.showLottoResult(lottoResult);
     }
 
     private void findBenefit() {
-        double benefitPercent = lottoController.findBenefit();
+        BigDecimal benefitPercent = lottoController.findBenefit();
         resultView.showBenefitPercent(benefitPercent);
     }
-
-
-
 }

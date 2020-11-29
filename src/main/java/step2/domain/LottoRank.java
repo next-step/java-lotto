@@ -31,4 +31,8 @@ public enum LottoRank {
     public long getMoney() {
         return money;
     }
+
+    public long getNumber() {
+        return number;
+    }
 }
