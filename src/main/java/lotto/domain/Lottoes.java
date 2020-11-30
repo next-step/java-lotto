@@ -12,6 +12,10 @@ public class Lottoes {
         purchaseLottoes(count);
     }
 
+    public Lottoes(List<Lotto> lottoes) {
+        this.lottoes = lottoes;
+    }
+
     public List<Lotto> getLottoes() {
         return lottoes;
     }
