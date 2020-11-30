@@ -26,6 +26,15 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 생성 테스트 ")
+    public void creation_자동_로또_인스턴스() {
+
+        Lotto lotto1 = Lotto.auto();
+
+//        assertThat(lotto1.equals(lotto2)).isTrue();
+    }
+
+    @Test
     @DisplayName("로또 번호가 6개를 넘는 경우")
     public void 로또번호가_6개를_넘는_경우() {
         assertThatIllegalArgumentException()

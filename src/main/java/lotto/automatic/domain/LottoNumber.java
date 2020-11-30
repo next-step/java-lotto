@@ -1,14 +1,30 @@
 package lotto.automatic.domain;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
+
 public class LottoNumber implements Comparable {
 
     private static final int MAX_LOTTO_NUM = 45;
     private static final int MIN_LOTTO_NUM = 1;
+    private static final List<LottoNumber> lottoNums = IntStream.rangeClosed(1, 45)
+            .mapToObj(LottoNumber::new)
+            .collect(toList());
+
     private final int number;
 
     public LottoNumber(int number) {
         validate(number);
         this.number = number;
+    }
+
+    public static List<LottoNumber> random(int amount) {
+
+        Collections.shuffle(lottoNums);
+        return lottoNums.subList(0, amount);
     }
 
     private void validate(int number) {
