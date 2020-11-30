@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+import lotto.LottoMachine;
 
-    public static final int LOTTO_SIZE = 6;
+public class Lotto {
 
     private final List<Integer> numbers;
 
@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     public Lotto() {
-        this.numbers = Arrays.asList(new Integer[LOTTO_SIZE]);
+        this.numbers = Arrays.asList(new Integer[LottoMachine.LOTTO_SIZE]);
         generateRandomNumbers();
     }
 
