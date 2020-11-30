@@ -27,7 +27,7 @@ public class StaticticTest {
         int money = 6500;
         Lottos lottos = new Lottos(money, fourWinningsGenerator);
 
-        for (Lotto lotto : lottos.lottoList) {
+        for (Lotto lotto : lottos.getLottoList()) {
             Statistic.recordResult(lotto.checkReward(result));
         }
 

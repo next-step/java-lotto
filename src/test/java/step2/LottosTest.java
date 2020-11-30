@@ -14,6 +14,6 @@ public class LottosTest {
         int money = 6500;
         Lottos lottos = new Lottos(money, lottoGenerator);
 
-        assertThat(lottos.lottoList.size()).isEqualTo(money/1000);
+        assertThat(lottos.getLottoList().size()).isEqualTo(money/1000);
     }
 }
