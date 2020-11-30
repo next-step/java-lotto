@@ -16,6 +16,12 @@ public class AmountValidatorTest {
     }
 
     @Test
+    @DisplayName("유효한 값 입력 시 유효성 검사 성공 확인")
+    public void validValueTest() {
+        ValidatorUtils.assertDoesNotThrow(validator, "14000");
+    }
+
+    @Test
     @DisplayName("숫자가 아닌 문자열을 입력시 IllegalArgumentException 발생 테스트")
     public void inputNotNumericStringTest() {
         ValidatorUtils.assertValidation(validator, "숫자가 아닙니다", AmountValidator.NOT_NUMERIC_MESSAGE);

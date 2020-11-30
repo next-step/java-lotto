@@ -16,9 +16,9 @@ public class ValidatorTest {
     }
 
     @Test
-    @DisplayName("정상 값 테스트")
+    @DisplayName("유효한 값 입력 시 유효성 검사 성공 확인")
     public void validValueTest() {
-
+        ValidatorUtils.assertDoesNotThrow(validator, "유효한 값");
     }
 
     @Test
