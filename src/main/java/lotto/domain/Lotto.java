@@ -1,10 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+
+    public static final int LOTTO_SIZE = 6;
 
     private final List<Integer> numbers;
 
@@ -13,7 +15,7 @@ public class Lotto {
     }
 
     public Lotto() {
-        this.numbers = new ArrayList<>();
+        this.numbers = Arrays.asList(new Integer[LOTTO_SIZE]);
         generateRandomNumbers();
     }
 
