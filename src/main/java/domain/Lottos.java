@@ -1,11 +1,9 @@
 package domain;
 
 import common.CommonConstants;
-import exception.ExceptionFunction;
 import exception.InvalidBonusNumberException;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -21,7 +19,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int numberOfLottos) throws Exception {
+    public static Lottos of(int numberOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottos; i++) {
@@ -42,23 +40,13 @@ public class Lottos {
                         .mapToInt(Integer::parseInt)
                         .boxed()
                         .collect(Collectors.toList()))
-                .map(checkException(Lotto::of))
+                .map(Lotto::of)
                 .collect(Collectors.toList());
 
         return new Lottos(lottos);
     }
 
-    private static <T, R> Function<T, R> checkException(ExceptionFunction<T, R> f) {
-        return (T r) -> {
-            try {
-                return f.apply(r);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        };
-    }
-
-    public LottoResult calculate(Lotto winningLotto, int bonusNumber) throws InvalidBonusNumberException {
+    public LottoResult calculate(Lotto winningLotto, int bonusNumber) {
         if(winningLotto.hasBonus(bonusNumber)) {
             throw new InvalidBonusNumberException();
         }

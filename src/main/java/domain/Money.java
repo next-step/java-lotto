@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Money {
     private long value;
 
-    public static Money of(long value) throws Exception {
+    public static Money of(long value){
         if(value < 0) {
             throw new NegativeMoneyNotAllowedException();
         }
@@ -24,7 +24,7 @@ public class Money {
         return new Money(value * number);
     }
 
-    public double dividedBy(Money money) throws Exception {
+    public double dividedBy(Money money){
         if(money.isLessThanOrEqualsZero()) {
             throw new DevidedByInvalidMoneyException();
         }

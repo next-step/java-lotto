@@ -27,7 +27,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int askBonusNumber() throws InvalidBonusNumberException {
+    public static int askBonusNumber() {
         System.out.println(INSERT_BONUS_NUMBER);
         int bonusNumber =  scanner.nextInt();
 

@@ -22,7 +22,7 @@ public class ResultView {
         lottos.stream().forEach(System.out::println);
     }
 
-    public static void printLottoResult(LottoResult lottoResult) throws Exception {
+    public static void printLottoResult(LottoResult lottoResult) {
         LottoPrizeCount lottoPrizeCount = lottoResult.getLottoPrizeCount();
 
         System.out.println(LOTTO_STATISTICS_IS);

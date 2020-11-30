@@ -15,7 +15,7 @@ public class LottoResult {
         return lottoPrizeCount;
     }
 
-    public double calculateProfitRates() throws Exception {
+    public double calculateProfitRates() {
         Money lottoPrice = Money.of(Lotto.LOTTO_PRICE);
 
         int totalPrizeMoney = lottoPrizeCount.entryStream()

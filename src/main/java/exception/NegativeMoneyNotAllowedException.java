@@ -1,6 +1,6 @@
 package exception;
 
-public class NegativeMoneyNotAllowedException extends Exception {
+public class NegativeMoneyNotAllowedException extends RuntimeException {
     public NegativeMoneyNotAllowedException() {
     }
 

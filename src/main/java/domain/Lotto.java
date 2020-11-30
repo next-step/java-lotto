@@ -19,11 +19,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> numbers) throws Exception {
+    public static Lotto of(List<Integer> numbers) {
         return new Lotto(new LottoNumbers(numbers));
     }
 
-    public static Lotto of(String numbers) throws Exception {
+    public static Lotto of(String numbers) {
         return Lotto.of(Arrays.stream(numbers.split(CommonConstants.SPLIT_DELIMITER_COMMA))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));

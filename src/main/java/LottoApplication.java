@@ -4,7 +4,7 @@ import ui.ResultView;
 
 public class LottoApplication {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Money buyingAmount = Money.of(InputView.askMoneyAmount());
         Money lottoPrice = Money.of(Lotto.LOTTO_PRICE);
         int numberOfLottos = (int) Math.floor(buyingAmount.dividedBy(lottoPrice));

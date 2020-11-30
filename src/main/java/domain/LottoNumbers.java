@@ -13,7 +13,7 @@ public class LottoNumbers {
     public static final int LOTTO_NUMBERS_MAX = 45;
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
-    public LottoNumbers(List<Integer> lottoNumbers) throws Exception {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         if(lottoNumbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
             throw new InvalidLottoNumbersException();
         }

@@ -1,6 +1,6 @@
 package exception;
 
-public class NumberNotInRangeException extends Exception {
+public class NumberNotInRangeException extends RuntimeException {
     public NumberNotInRangeException() {
     }
 
