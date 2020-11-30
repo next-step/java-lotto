@@ -1,6 +1,6 @@
 package exception;
 
-public class InvalidBonusNumberException extends Exception {
+public class InvalidBonusNumberException extends RuntimeException {
     public InvalidBonusNumberException() {
     }
 

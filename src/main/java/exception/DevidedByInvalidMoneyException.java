@@ -1,6 +1,6 @@
 package exception;
 
-public class DevidedByInvalidMoneyException extends Exception {
+public class DevidedByInvalidMoneyException extends RuntimeException {
     public DevidedByInvalidMoneyException() {
     }
 

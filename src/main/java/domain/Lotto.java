@@ -1,26 +1,32 @@
 package domain;
 
+import common.CommonConstants;
 import exception.InvalidLottoNumbersException;
+import exception.NumberNotInRangeException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_NUMBERS_SIZE = 6;
+
     public static final int LOTTO_PRICE = 1_000;
 
-    private List<Integer> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    private final LottoNumbers numbers;
+
+    private Lotto(LottoNumbers numbers) {
         Objects.requireNonNull(numbers);
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> numbers) throws Exception {
-        if(numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
-            throw new InvalidLottoNumbersException();
-        }
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(new LottoNumbers(numbers));
+    }
 
-        return new Lotto(numbers);
+    public static Lotto of(String numbers) {
+        return Lotto.of(Arrays.stream(numbers.split(CommonConstants.SPLIT_DELIMITER_COMMA))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public LottoPrize checkWhetherToWin(Lotto winningLotto, int bonusNumber) {

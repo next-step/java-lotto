@@ -1,6 +1,6 @@
 package exception;
 
-public class InvalidLottoNumbersException extends Exception {
+public class InvalidLottoNumbersException extends RuntimeException {
     public InvalidLottoNumbersException(){
     }
 

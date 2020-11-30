@@ -1,20 +1,52 @@
 package domain;
 
+import common.CommonConstants;
 import exception.InvalidBonusNumberException;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
+    private static final List<Integer> oneToFortyFive = IntStream.rangeClosed(LottoNumbers.LOTTO_NUMBERS_MIN, LottoNumbers.LOTTO_NUMBERS_MAX)
+            .boxed()
+            .collect(Collectors.toList());
 
-    public Lottos(List<Lotto> lottos){
+    private Lottos(List<Lotto> lottos){
         Objects.requireNonNull(lottos);
         this.lottos = lottos;
     }
 
-    public LottoResult calculate(Lotto winningLotto, int bonusNumber) throws InvalidBonusNumberException {
+    public static Lottos of(int numberOfLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < numberOfLottos; i++) {
+            Collections.shuffle(oneToFortyFive);
+            lottos.add(Lotto.of(oneToFortyFive.stream()
+                    .limit(LottoNumbers.LOTTO_NUMBERS_SIZE)
+                    .sorted()
+                    .collect(Collectors.toList())));
+        }
+
+        return new Lottos(lottos);
+    }
+
+    public static Lottos of(List<String> stringLottos) {
+        List<Lotto> lottos = stringLottos.stream()
+                .map(s -> Arrays.stream(s.split(CommonConstants.SPLIT_DELIMITER_COMMA))
+                        .map(String::trim)
+                        .mapToInt(Integer::parseInt)
+                        .boxed()
+                        .collect(Collectors.toList()))
+                .map(Lotto::of)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    public LottoResult calculate(Lotto winningLotto, int bonusNumber) {
         if(winningLotto.hasBonus(bonusNumber)) {
             throw new InvalidBonusNumberException();
         }
@@ -32,5 +64,14 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public Lottos addAll(Lottos l) {
+        List<Lotto> addedLottos = new ArrayList<>();
+
+        addedLottos.addAll(this.lottos);
+        addedLottos.addAll(l.lottos);
+
+        return new Lottos(addedLottos);
     }
 }
