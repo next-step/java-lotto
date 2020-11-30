@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
