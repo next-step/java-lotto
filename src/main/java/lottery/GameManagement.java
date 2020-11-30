@@ -8,6 +8,7 @@ import lottery.domain.strategy.StaticPicker;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
+import java.util.List;
 import java.util.Map;
 
 public class GameManagement {
@@ -18,11 +19,15 @@ public class GameManagement {
         OutputView outputView = new OutputView();
 
         int nGames = inputView.getMoneyToBuy() / MONEY_PER_LOTTERY;
-        Lotteries lotteries = Lotteries.repeat(nGames, new ShufflePicker());
-        outputView.showLotteries(lotteries);
+        List<String> prePickedNumbers = inputView.getManualPurchases();
+
+        Lotteries manualPicked = Lotteries.repeat(prePickedNumbers.size(), new StaticPicker(prePickedNumbers));
+        Lotteries autoPicked = Lotteries.repeat(nGames - prePickedNumbers.size(), new ShufflePicker());
+        outputView.showLotteries(manualPicked, autoPicked);
 
         WinningNumber winningNumber = WinningNumber.from(new StaticPicker(inputView.getWinningNumber()));
-        Map<WinningType, Long> winnings = lotteries.getMatches(winningNumber);
+        Map<WinningType, Long> winnings = manualPicked.getMatches(winningNumber);
+        autoPicked.getMatches(winningNumber).forEach((k, v) -> winnings.merge(k, v, Long::sum));
         outputView.showWinnings(nGames * MONEY_PER_LOTTERY, winnings);
     }
 }
