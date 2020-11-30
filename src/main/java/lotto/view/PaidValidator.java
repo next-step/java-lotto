@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import lotto.LottoMachine;
 
-public class AmountValidator extends Validator {
+public class PaidValidator extends Validator {
 
     public static final Pattern NUMERIC_PATTERN = Pattern.compile("[1-9][0-9]*");
 
