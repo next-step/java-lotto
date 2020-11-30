@@ -26,6 +26,8 @@ public class PrizeTest {
         );
 
         lottoes = new Lottoes(lottoList);
+
+        Prize.clear();
     }
 
     @Test

@@ -60,4 +60,10 @@ public enum Prize {
 
         return earn / purchaseAmount;
     }
+
+    public static void clear() {
+        for (Prize prize : Prize.values()) {
+            prize.prizeCount = 0;
+        }
+    }
 }
