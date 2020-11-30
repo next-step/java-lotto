@@ -32,7 +32,7 @@ public enum Prize {
         prizeCount++;
     }
 
-    public static void calculate(Lotto winningLotto, Lottoes lottoes) {
+    public static void increaseWinningCount(Lotto winningLotto, Lottoes lottoes) {
         for (Lotto lotto : lottoes.getLottoes()) {
             int matchCount = (int) lotto.getNumbers()
                     .stream()

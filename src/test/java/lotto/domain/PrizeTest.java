@@ -26,7 +26,7 @@ public class PrizeTest {
         Lottoes lottoes = new Lottoes(lottoList);
 
         // when
-        Prize.calculate(winningLotto, lottoes);
+        Prize.increaseWinningCount(winningLotto, lottoes);
 
         // then
         assertThat(Prize.FIRST.getPrizeCount()).isEqualTo(1);
