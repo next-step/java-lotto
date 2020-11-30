@@ -27,8 +27,8 @@ public class LottoNumber {
 
     private static boolean isValidRange(Set<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                    .anyMatch(number ->  number < LottoNumbers.MIN_LOTTO_NUMBER
-                                        || number > LottoNumbers.MAX_LOTTO_NUMBER );
+                    .anyMatch(number ->  number < ProviderLottoNumbers.MIN_LOTTO_NUMBER
+                                        || number > ProviderLottoNumbers.MAX_LOTTO_NUMBER );
     }
 
     public Set<Integer> getLottoNumber() {

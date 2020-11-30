@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LottoNumbers {
+public class ProviderLottoNumbers {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER= 45;
@@ -16,7 +16,7 @@ public class LottoNumbers {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).forEach(numbers::add);
     }
 
-    private LottoNumbers() {}
+    private ProviderLottoNumbers() {}
 
     public static List<Integer> findAllLottoNumbers() {
         return numbers;

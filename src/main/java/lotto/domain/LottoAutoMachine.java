@@ -7,7 +7,7 @@ public class LottoAutoMachine implements LottoMachine {
 
     @Override
     public Lotto createLotto(int capacity) {
-        List<Integer> numbers = LottoNumbers.findAllLottoNumbers();
+        List<Integer> numbers = ProviderLottoNumbers.findAllLottoNumbers();
         Collections.shuffle(numbers);
 
         return new Lotto(numbers.stream()
