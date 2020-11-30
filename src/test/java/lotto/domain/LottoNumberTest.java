@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -64,5 +65,23 @@ public class LottoNumberTest {
                 Arguments.of(new TreeSet<>(Arrays.asList(2, 3, 5, 6, 8, 13))),
                 Arguments.of(new TreeSet<>(Arrays.asList(20, 31, 35, 36, 39, 45)))
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 15, 30})
+    public void createBonusballInstanceTest(int number) {
+        //Given & When
+        LottoNumber.Bonusball bonusball = LottoNumber.createBonusball(number);
+
+        //Then
+        assertThat(bonusball).isEqualTo(LottoNumber.createBonusball(number));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-10, 0, 46})
+    public void notValidBonusballNumber(int number) {
+        assertThatThrownBy(() ->
+                LottoNumber.createBonusball(number)
+        ).isInstanceOf(NotValidLottoNumberException.class);
     }
 }

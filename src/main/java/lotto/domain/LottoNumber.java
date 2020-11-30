@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoNumber {
@@ -36,4 +37,32 @@ public class LottoNumber {
     public int size() {
         return lottoNumbers.size();
     }
+
+    public static Bonusball createBonusball(int bonusBallNumber) {
+        return new Bonusball(bonusBallNumber);
+    }
+
+    public static class Bonusball  {
+
+        private int bonusBall;
+
+        private Bonusball(int bonusBall) {
+            ProviderLottoNumbers.isValidRange(bonusBall);
+            this.bonusBall = bonusBall;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Bonusball bonusball = (Bonusball) o;
+            return bonusBall == bonusball.bonusBall;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(bonusBall);
+        }
+    }
+
 }

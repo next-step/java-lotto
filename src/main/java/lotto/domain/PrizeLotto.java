@@ -5,11 +5,11 @@ import java.util.Set;
 public class PrizeLotto {
 
     private LottoNumber lottoNumbers;
-    private int bonusBall;
+    private LottoNumber.Bonusball bonusBall;
 
     private PrizeLotto(Set<Integer> lottoNumbers, int bonusBall) {
         this.lottoNumbers = LottoNumber.from(lottoNumbers);
-        this.bonusBall = bonusBall;
+        this.bonusBall = LottoNumber.createBonusball(bonusBall);
     }
 
     public static PrizeLotto of(Set<Integer> lottoNumber, int bonusBall) {
@@ -17,7 +17,7 @@ public class PrizeLotto {
     }
 
     public boolean matchBonusBall(int lottoNumber) {
-        return lottoNumber == bonusBall;
+        return bonusBall.equals(LottoNumber.createBonusball(lottoNumber));
     }
 
     public boolean existByLottoNumber(int lottoNumber) {
