@@ -40,6 +40,10 @@ public class LotteryTicket {
         Collections.sort(this.lotteryNumbers);
     }
 
+    public LotteryTicket(String winningNumbers) {
+        this(winningNumbers.replace(" ", "").split(","));
+    }
+
     public List<LotteryNumber> getLotteryNumbers() {
         return this.lotteryNumbers;
     }
@@ -47,7 +51,7 @@ public class LotteryTicket {
     public int getCountsMatched(LotteryTicket winningLotteryTicket) {
         int matchCount = 0;
         for(LotteryNumber number : this.getLotteryNumbers()) {
-            matchCount += number.isContainNumber(winningLotteryTicket);
+            matchCount += winningLotteryTicket.getLotteryNumbers().contains(number) ? 1 : 0;
         }
         return matchCount;
     }

@@ -17,11 +17,12 @@ public class TestLotteryGame {
     List<LotteryTicket> dummyLotteryTickets;
     List<LotteryTicket> dummyOneLotteryTicket;
     LotteryTicket dummyLotteryTicket;
+    AutoBuyBehavior autoBuyBehavior;
     @BeforeEach
     void setUp() {
-        dummyLotteryGame = new LotteryGame(1000, 6) {
+        autoBuyBehavior = new AutoBuyBehavior() {
             @Override
-            public List<LotteryTicket> buyLotteryTickets(int numberOfTickets) {
+            public List<LotteryTicket> buyLotteryTickets(int pickCounts, int numberOfTickets) {
                 List<LotteryTicket> lotteryTickets = new ArrayList<>();
                 LotteryTicket lotteryTicket;
                 for(int i = 0; i < numberOfTickets; i++) {
@@ -29,6 +30,13 @@ public class TestLotteryGame {
                     lotteryTickets.add(lotteryTicket);
                 }
                 return lotteryTickets;
+            }
+        };
+
+        dummyLotteryGame = new LotteryGame(1000, 6) {
+            @Override
+            public List<LotteryTicket> buyLotteryTickets(int numberOfTickets) {
+                return autoBuyBehavior.buyLotteryTickets(6, 1);
             }
         };
 
@@ -88,20 +96,20 @@ public class TestLotteryGame {
     @DisplayName("로또 게임 결과 로또 당첨번호와 맞지 않는 경우")
     void matchNoNumbersWithOneLotteryTickets() {
         assertThat(dummyLotteryGame.matchLotteryTickets("7,8,9,10,11,12", dummyOneLotteryTicket))
-                .isEqualTo(new LotteryResult(0,1));
+                .isEqualTo(new LotteryResult("7,8,9,10,11,12"));
     }
 
     @Test
     @DisplayName("로또 게임 결과 로또 당첨번호와 3개 일치하는 경우")
     void matchThreeNumbersWithOneLotteryTickets() {
         assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,10,11,12", dummyOneLotteryTicket))
-                .isEqualTo(new LotteryResult(3,1));
+                .isEqualTo(new LotteryResult("1,2,3,10,11,12", 3,1));
     }
 
     @Test
     @DisplayName("로또 게임 결과 로또 당첨번호화 6개가 2개의 티켓에서 일치하는 경우")
     void matchSixNumbersWithMultiLotteryTickets() {
         assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,4,5,6", dummyLotteryTickets))
-                .isEqualTo(new LotteryResult(6,2));
+                .isEqualTo(new LotteryResult("1,2,3,4,5,6", 6,2));
     }
 }

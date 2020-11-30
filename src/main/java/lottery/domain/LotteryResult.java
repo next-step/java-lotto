@@ -1,45 +1,65 @@
 package lottery.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class LotteryResult {
     public static final int LIMIT_MATCHED_NUMBER = 3;
+    //TODO : enum 클래스 사용으로 개선 필요
     Map<Integer, Integer> lotteryResultMap;
     private final Map<Integer, Integer> lotteryValueMap;
+    private final LotteryTicket winnerTicket;
 
-    public LotteryResult() {
+    public LotteryResult(String winnerNumbers) {
         lotteryResultMap = new HashMap<>();
         lotteryValueMap = new HashMap<Integer, Integer>() {
             {
-                put(3, 5000);
-                put(4, 50000);
-                put(5, 1500000);
-                put(6, 2000000000);
+                put(3, 5_000);
+                put(4, 50_000);
+                put(5, 1_500_000);
+                put(6, 2_000_000_000);
             }
         };
+        winnerTicket = new LotteryTicket(winnerNumbers);
     }
 
-    public LotteryResult(int key, int value) {
-        this();
+    public LotteryResult(String winnerNumbers, int key, int value) {
+        this(winnerNumbers);
         this.lotteryResultMap.put(key, value);
     }
 
-    public void update(int key, int value) {
-        if (key < LIMIT_MATCHED_NUMBER) return;
+    public void addLotteryResult(int key, int value) {
+        if (key < LIMIT_MATCHED_NUMBER) {
+            return;
+        }
         if (this.lotteryResultMap.containsKey(key)) {
             this.lotteryResultMap.replace(key, lotteryResultMap.get(key) + value);
         }
-        if (!this.lotteryResultMap.containsKey(key)) {
-            this.lotteryResultMap.put(key, value);
-        }
+        this.lotteryResultMap.put(key, value);
     }
 
-    public double getProfit(int purchaseAmount) {
+    public BigDecimal getProfit(int purchaseAmount) {
         int profit = 0;
         for (Integer key : lotteryResultMap.keySet()) {
             profit += (lotteryResultMap.get(key) * lotteryValueMap.get(key));
         }
-        return profit / (double) purchaseAmount;
+        return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount), 3, RoundingMode.HALF_EVEN);
+    }
+
+    public LotteryResult match(List<LotteryTicket> lotteryTickets) {
+        for (LotteryTicket lotteryTicket : lotteryTickets) {
+            this.addLotteryResult(lotteryTicket.getCountsMatched(this.winnerTicket), 1);
+        }
+        return this;
+    }
+
+    public Map<Integer, Integer> getLotteryResultMap() {
+        return this.lotteryResultMap;
+    }
+
+    public Map<Integer, Integer> getLotteryValueMap() {
+        return this.lotteryValueMap;
     }
 
     @Override
@@ -53,24 +73,5 @@ public class LotteryResult {
     @Override
     public int hashCode() {
         return Objects.hash(lotteryResultMap);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계");
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("---------");
-        stringBuilder.append(System.getProperty( "line.separator"));
-
-        for (Integer key : lotteryResultMap.keySet()) {
-            stringBuilder.append(key);
-            stringBuilder.append("개 일치 (");
-            stringBuilder.append(")- ");
-            stringBuilder.append(lotteryResultMap.get(key));
-            stringBuilder.append("개");
-            stringBuilder.append(System.getProperty("line.separator"));
-        }
-        return stringBuilder.toString();
     }
 }

@@ -18,12 +18,6 @@ public class LotteryNumber implements Comparable{
         this.number = number;
     }
 
-    public int isContainNumber(LotteryTicket winningLotteryTicket) {
-        if (winningLotteryTicket.getLotteryNumbers().contains(this)) {
-            return 1;
-        }
-        return 0;
-    }
 
     public int getNumber() {
         return this.number;
