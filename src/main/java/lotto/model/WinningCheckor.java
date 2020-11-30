@@ -5,15 +5,12 @@ import java.util.*;
 public class WinningCheckor {
     Set<Integer> preNumbers;
     EnumMap<Rank, Integer> winningStatics;
+    int bonusNumber;
 
-    public WinningCheckor(Set<Integer> preNumbers) {
+    public WinningCheckor(Set<Integer> preNumbers, int bonusNumber) {
         this.preNumbers = preNumbers;
-        winningStatics = new EnumMap<>(Rank.class);
-        winningStatics.put(Rank.FIRST,0);
-        winningStatics.put(Rank.SECOND,0);
-        winningStatics.put(Rank.THIRD,0);
-        winningStatics.put(Rank.FOURTH,0);
-        winningStatics.put(Rank.NO_MATCH,0);
+        winningStatics = new EnumMap<>(Rank.getInitWinningStatics());
+        this.bonusNumber = bonusNumber;
     }
 
     //당첨금 통계내기
@@ -21,7 +18,8 @@ public class WinningCheckor {
 
         for (int i = 0; i < lottoTickets.getTicketCount(); i++) {
             int winningCount = checkWinning(lottoTickets.oneOf(i).getTicketNumbers());
-            Rank winningRank = Rank.rank(winningCount);
+            boolean matchBonus = lottoTickets.oneOf(i).getTicketNumbers().contains(bonusNumber);
+            Rank winningRank = Rank.rank(winningCount,matchBonus);
             winningStatics.put(winningRank, winningStatics.get(winningRank) + winningRank.getMoney());
         }
         return winningStatics;

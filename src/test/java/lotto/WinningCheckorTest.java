@@ -15,7 +15,7 @@ public class WinningCheckorTest {
     @DisplayName("당첨 번호 테스트")
     public void winningTest() {
 
-        WinningCheckor winningCheckor = new WinningCheckor(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
+        WinningCheckor winningCheckor = new WinningCheckor(new HashSet<>(Arrays.asList(1,2,3,4,5,6)),7);
         int winningCount = winningCheckor.checkWinning(Arrays.asList(1,2,3,4,10,11));
 
         assertThat(winningCount).isEqualTo(4);

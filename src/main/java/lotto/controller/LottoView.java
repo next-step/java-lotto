@@ -14,10 +14,12 @@ public class LottoView {
         int money = inputView.buyLotto();
 
         Lotto lotto = new Lotto(money);
+        System.out.println(lotto.getLottoTickets().getTicketCount()+"개를 구매했습니다.");
         inputView.printLottoNumbers(lotto.getLottoTickets());
 
         Set<Integer> preNumbers = inputView.inputPreWinningNumber();
-        WinningCheckor winningCheckor = new WinningCheckor(preNumbers);
+        int bonusNumber = inputView.inputBonus();
+        WinningCheckor winningCheckor = new WinningCheckor(preNumbers, bonusNumber);
         EnumMap<Rank, Integer> winningStatics = winningCheckor.makeStatics(lotto.getLottoTickets());
 
         ResultView resultView = new ResultView();

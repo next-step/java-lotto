@@ -10,7 +10,6 @@ public class Lotto {
 
     public Lotto(int money){
         this.ticketCount = money / ticketPrice;
-        System.out.println(ticketCount +"개를 구매했습니다.");
         this.lottoTickets = LottoTickets.of(ticketCount);
     }
 

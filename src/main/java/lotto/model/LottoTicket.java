@@ -18,7 +18,6 @@ public class LottoTicket {
     }
 
     public List<Integer> getTicketNumbers(){
-        //return Collections.unmodifiableSet(ticketNumbers);
         return Collections.unmodifiableList(ticketNumbers);
     }
 }
