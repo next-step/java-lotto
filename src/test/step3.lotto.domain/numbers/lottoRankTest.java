@@ -1,4 +1,4 @@
-package step3.lotto.domain.numbers;
+package step4.lotto.domain.numbers;
 
 import org.junit.jupiter.api.Test;
 

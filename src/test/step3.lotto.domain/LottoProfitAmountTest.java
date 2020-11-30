@@ -1,4 +1,4 @@
-package step3.lotto.domain;
+package step4.lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
