@@ -16,13 +16,13 @@ public class AmountValidatorTest {
     }
 
     @Test
-    @DisplayName("입력한 값이 숫자인지 유효성 검사 테스트")
+    @DisplayName("숫자가 아닌 문자열을 입력시 IllegalArgumentException 발생 테스트")
     public void inputNotNumericStringTest() {
         ValidatorUtils.assertValidation(validator, "숫자가 아닙니다", AmountValidator.NOT_NUMERIC_MESSAGE);
     }
 
     @Test
-    @DisplayName("입력한 값이" + AmountValidator.MULTIPLE + "의 배수인지 테스트")
+    @DisplayName("정해진 배수가 아닌 다른 값의 문자열을 입력시 IllegalArgumentException 발생 테스트")
     public void inputNotMultipleNumberTest() {
         ValidatorUtils.assertValidation(validator, "1001", AmountValidator.NOT_MULTIPLE_MESSAGE);
     }

@@ -16,6 +16,12 @@ public class ValidatorTest {
     }
 
     @Test
+    @DisplayName("정상 값 테스트")
+    public void validValueTest() {
+
+    }
+
+    @Test
     @DisplayName("null 값 테스트")
     public void inputNullTest() {
         ValidatorUtils.assertValidation(validator, null, Validator.INPUT_NULL_MESSAGE);
