@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import lotto.LottoMachine;
+import lotto.RandomUtils;
 
 public class Lotto {
 
@@ -15,15 +16,26 @@ public class Lotto {
     }
 
     public Lotto() {
-        this.numbers = Arrays.asList(new Integer[LottoMachine.LOTTO_SIZE]);
-        generateRandomNumbers();
+        this.numbers = generateRandomNumbers();
+        shuffle();
+        sort();
     }
 
     public List<Integer> getNumbers() {
         return numbers;
     }
 
-    public void generateRandomNumbers() {
+    public List<Integer> generateRandomNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < LottoMachine.LOTTO_SIZE; i++) {
+            numbers.add(RandomUtils.nextInt());
+        }
+
+        return numbers;
+    }
+
+    public void shuffle() {
         Collections.shuffle(numbers);
     }
 
