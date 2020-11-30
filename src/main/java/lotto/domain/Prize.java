@@ -20,6 +20,10 @@ public enum Prize {
         this.prizeCount = prizeCount;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getPrize() {
         return prize;
     }
