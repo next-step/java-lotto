@@ -25,13 +25,10 @@ public class WinningNumber extends Lottery {
     }
 
     public WinningType countMatched(Lottery another) {
-        int matches = (int) another.getNumbers()
-                .stream()
-                .filter(getNumbers()::contains)
+        int matches = (int) getNumbers().stream()
+                .filter(another::hasNumber)
                 .count();
-        boolean hasBonus = another.getNumbers()
-                .stream()
-                .anyMatch(i -> i == bonusNumber);
+        boolean hasBonus = another.hasNumber(bonusNumber);
         return WinningType.valueOf(matches, hasBonus);
     }
 }

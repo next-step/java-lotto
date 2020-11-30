@@ -8,7 +8,7 @@ public enum WinningType {
     FIFTH (3,  null,         5_000),
     FOURTH(4,  null,        50_000),
     THIRD (5, false,     1_500_000),
-    SECOND(5,  true,     1_500_000),
+    SECOND(5,  true,    30_000_000),
     FIRST (6,  null, 2_000_000_000);
 
     private final int matches;

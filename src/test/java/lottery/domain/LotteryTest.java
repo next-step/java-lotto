@@ -4,10 +4,10 @@ import lottery.domain.strategy.Picker;
 import lottery.domain.strategy.StaticPicker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class LotteryTest {
     @DisplayName("정상 케이스")
@@ -35,5 +35,17 @@ public class LotteryTest {
         final Picker picker = new StaticPicker(input);
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lottery.from(picker));
+    }
+
+    @DisplayName("복권에 번호가 있는지 비교")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1,2,3,4,5,6 | 5 | true",
+            "1,2,3,4,5,6 | 7 | false",
+    })
+    void hasNumber(String input, int number, boolean expected) {
+        assertThat(
+                Lottery.from(new StaticPicker(input)).hasNumber(LotteryNumber.valueOf(number))
+        ).isEqualTo(expected);
     }
 }

@@ -1,21 +1,22 @@
 package lottery.view;
 
+import lottery.domain.Lotteries;
 import lottery.domain.LotteryNumber;
 import lottery.domain.Lottery;
 import lottery.domain.WinningType;
 
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
     private final PrintStream out = System.out;
 
-    public void showLotteries(List<Lottery> lotteries) {
-        out.format("%1$d개를 구매했습니다.", lotteries.size());
+    public void showLotteries(Lotteries manualPicked, Lotteries autoPicked) {
+        out.format("수동으로 %1$d장, 자동으로 %2$d개를 구매했습니다.", manualPicked.size(), autoPicked.size());
         out.println();
-        lotteries.forEach(this::showLotteryNumbers);
+        manualPicked.forEach(this::showLotteryNumbers);
+        autoPicked.forEach(this::showLotteryNumbers);
     }
 
     private void showLotteryNumbers(Lottery lottery) {

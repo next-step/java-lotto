@@ -30,4 +30,8 @@ public class Lottery {
     public List<LotteryNumber> getNumbers() {
         return numbers.stream().collect(Collectors.toUnmodifiableList());
     }
+
+    public boolean hasNumber(LotteryNumber number) {
+        return numbers.contains(number);
+    }
 }
