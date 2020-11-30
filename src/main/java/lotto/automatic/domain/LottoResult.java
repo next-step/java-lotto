@@ -28,8 +28,6 @@ public class LottoResult {
             earningMoney = earningMoney.add(BigDecimal.valueOf(rank.earningMoney));
         }
 
-        System.out.println(earningMoney.intValue());
-
         return earningMoney.divide(BigDecimal.valueOf(investMoney), 2, BigDecimal.ROUND_CEILING);
     }
 }
