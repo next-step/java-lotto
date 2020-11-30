@@ -7,9 +7,12 @@ public class StringDelimiterParser {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_COLON = ":";
+    private static final String DELIMITER_REGEX = "[,:]";
 
     private static final String CUSTOM_DELIMITER_HEAD = "//";
     private static final String CUSTOM_DELIMITER_TAIL = "\n";
+
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static String[] parseText(String text) {
 
@@ -17,22 +20,19 @@ public class StringDelimiterParser {
             return new String[]{text};
         }
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+        Matcher matcher = PATTERN.matcher(text);
+
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
         }
 
-        return text.split("[,:]");
+        return text.split(DELIMITER_REGEX);
     }
 
     private static boolean doesHaveDelimiter(String text) {
 
-        if (text.contains(DELIMITER_COMMA)) {
-            return true;
-        }
-
-        if (text.contains(DELIMITER_COLON)) {
+        if (text.contains(DELIMITER_COMMA) || (text.contains(DELIMITER_COLON))) {
             return true;
         }
 
