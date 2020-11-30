@@ -1,4 +1,4 @@
-package my.project.lotto.domain;
+package my.project.lotto.dto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -8,13 +8,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
+        validate(number);
+        this.number = number;
+    }
+
+    private void validate(int number) {
         if (number < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
         if (number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
-        this.number = number;
     }
 
     public int getNumber() {

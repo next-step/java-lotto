@@ -1,6 +1,6 @@
 package my.project.utils;
 
-import my.project.lotto.domain.LottoNumber;
+import my.project.lotto.dto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;

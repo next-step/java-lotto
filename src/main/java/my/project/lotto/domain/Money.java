@@ -18,8 +18,8 @@ public class Money {
             throw new IllegalArgumentException("구입금액은 " + PRICE + "원 이상입니다.");
         }
     }
-
     public int getChances() {
         return this.money / PRICE;
     }
+
 }
