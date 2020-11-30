@@ -9,4 +9,6 @@ public interface Message {
     String INPUT_PURCHASE_PRICE_MESSAGE = "구입 금액을 입력 해주세요.";
     String OUTPUT_PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
     String INPUT_LAST_WEEKS_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+
+    String VALIDATION_WINNING_COUNT = "0 보다 작을 수 없습니다.";
 }

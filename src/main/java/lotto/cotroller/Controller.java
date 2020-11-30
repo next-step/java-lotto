@@ -16,9 +16,12 @@ public class Controller {
         ResultView.outputPrintPurchaseLottoTicket(lottoTickets);
 
         List<Integer> lastWeeksWinningNumbers = InputView.inputLastWeeksWinningNumbers();
-        List<Integer> winningCounts = WiningStatistic.winningCounts(lottoTickets, lastWeeksWinningNumbers);
-        double rateOfReturn = RateOfReturn.calculateRateOfReturn(winningCounts, purchaseAmount);
+        WinningCounts winningCounts = new WinningCounts()
+                .calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
 
-        ResultView.outputWinningStatistic(winningCounts, rateOfReturn);
+        WinningStatistic winningStatistic = new WinningStatistic(winningCounts);
+        double rateOfReturn = RateOfReturn.calculateRateOfReturn(winningStatistic, purchaseAmount);
+
+        ResultView.outputWinningStatistic(winningStatistic, rateOfReturn);
     }
 }

@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.LottoTickets;
 import lotto.Message;
+import lotto.WinningStatistic;
 
 import java.util.List;
 
@@ -27,9 +28,9 @@ public class ResultView {
         }
     }
 
-    public static void outputWinningStatistic(List<Integer> lastWeeksWinningNumbers, double rateOfReturn) {
+    public static void outputWinningStatistic(WinningStatistic winningStatistic, double rateOfReturn) {
         printWinningsStatisticsMessage();
-        printWinningsCount(lastWeeksWinningNumbers);
+        printWinningsCount(winningStatistic);
         printRateOfReturn(rateOfReturn);
     }
 
@@ -40,11 +41,11 @@ public class ResultView {
         System.out.println("=======");
     }
 
-    private static void printWinningsCount(List<Integer> lastWeeksWinningNumbers) {
-        System.out.println(THREE_MATCHING_WINNINGS_AMOUNT_MESSAGE + lastWeeksWinningNumbers.get(0));
-        System.out.println(FOUR_MATCHING_WINNINGS_AMOUNT_MESSAGE + lastWeeksWinningNumbers.get(1));
-        System.out.println(FIVE_WINNINGS_AMOUNT_MESSAGE + lastWeeksWinningNumbers.get(2));
-        System.out.println(SIX_WINNINGS_AMOUNT_MESSAGE + lastWeeksWinningNumbers.get(3));
+    private static void printWinningsCount(WinningStatistic winningStatistic) {
+        System.out.println(THREE_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(0));
+        System.out.println(FOUR_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(1));
+        System.out.println(FIVE_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(2));
+        System.out.println(SIX_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(3));
     }
 
     private static void printRateOfReturn(double rateOfReturn) {

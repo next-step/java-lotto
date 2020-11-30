@@ -7,24 +7,30 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 class WiningStatisticTest {
 
-    @DisplayName(value = "통계를 구하기 위한 3개, 4개, 5개, 6개 당첨 개수를 확인")
+    @DisplayName(value = "당첨 갯수별로 반환한다.")
     @Test
-    void 통계_개수_테스트() {
+    void 당첨_갯수별_통계() {
         // given
-        int purchaseNumber = 3;
-        List<Integer> testTicket = Arrays.asList(1, 2, 3, 4, 5, 45);
-        LottoTicket testLottoTicket = new LottoTicket(testTicket);
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber, () -> testLottoTicket);
-
-        List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 2, 3, 4, 5, 45);
+        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(ticket);
+        List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
 
         // when
-        List<Integer> winningCounts = WiningStatistic.winningCounts(lottoTickets, lastWeeksWinningNumbers);
-        List<Integer> expect = Arrays.asList(0, 0, 0, 6);
+        int purchaseNumber = 2;
+        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber, () -> lottoTicket);
+        WinningCounts winningCounts = new WinningCounts().calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
+
+        // when
+        WinningStatistic winningStatistic = new WinningStatistic(winningCounts);
 
         // then
-        Assertions.assertThat(winningCounts).isEqualTo(expect);
+        assertThat(winningStatistic.getStatistics(0)).isEqualTo(2);
+        assertThat(winningStatistic.getStatistics(1)).isEqualTo(0);
+        assertThat(winningStatistic.getStatistics(2)).isEqualTo(0);
+        assertThat(winningStatistic.getStatistics(3)).isEqualTo(0);
     }
 }
