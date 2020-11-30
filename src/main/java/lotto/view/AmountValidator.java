@@ -3,15 +3,15 @@ package lotto.view;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lotto.LottoMachine;
+
 public class AmountValidator extends Validator {
 
     public static final Pattern NUMERIC_PATTERN = Pattern.compile("[1-9][0-9]*");
 
     public static final String NOT_NUMERIC_MESSAGE = "숫자만 입력해주세요!";
 
-    public static final int MULTIPLE = 1000;
-
-    public static final String NOT_MULTIPLE_MESSAGE = MULTIPLE + "의 배수가 아닙니다!";
+    public static final String NOT_MULTIPLE_MESSAGE = LottoMachine.PAY + "의 배수가 아닙니다!";
 
     @Override
     public void validate(String amount) {
@@ -28,7 +28,7 @@ public class AmountValidator extends Validator {
     }
 
     protected void checkMultiple(String input) {
-        if (Integer.parseInt(input) % MULTIPLE != 0) {
+        if (Integer.parseInt(input) % LottoMachine.PAY != 0) {
             throw new IllegalArgumentException(NOT_MULTIPLE_MESSAGE);
         }
     }
