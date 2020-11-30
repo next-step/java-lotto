@@ -18,6 +18,16 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 자동 생성 사이즈 테스트")
+    public void autoCreateTest() {
+
+        lotto = new Lotto();
+
+        // then
+        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
     @DisplayName("로또 정렬 테스트")
     public void sortTest() {
 
