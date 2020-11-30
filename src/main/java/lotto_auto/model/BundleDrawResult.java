@@ -11,9 +11,9 @@ public class BundleDrawResult {
     }
 
     public int getRankLottoCount(int rank) {
-        DrawResult drawResult = DrawResult.valueOfRank(rank);
+        DrawResult drawResultOfRank = DrawResult.valueOfRank(rank);
         return (int) this.bundleDrawResult.stream()
-                .filter(item -> item.equals(drawResult))
+                .filter(drawResult -> drawResult.equals(drawResultOfRank))
                 .count();
     }
 

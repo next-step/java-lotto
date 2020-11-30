@@ -5,8 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoStoreTest {
 
@@ -17,18 +19,17 @@ class LottoStoreTest {
         lottoStore = new LottoStore();
     }
 
-    @DisplayName("음수를 입력 받으면 예외 발생 테스트")
-    @Test
-    public void enterNegativeValueExceptionTest() {
-        assertThatThrownBy(
-                () -> lottoStore.sell(-1)
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("LottoBundle 생성 테스트")
     @Test
     public void returnLottoBundleTest() {
-        LottoBundle lottoBundle = lottoStore.sell(1000);
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(LottoNumbers.generate());
+        lottoNumbersList.add(LottoNumbers.generate());
+        lottoNumbersList.add(LottoNumbers.generate());
+        lottoNumbersList.add(LottoNumbers.generate());
+        lottoNumbersList.add(LottoNumbers.generate());
+        Order order = new Order( lottoNumbersList, new Money(5));
+        LottoBundle lottoBundle = lottoStore.sell(order);
         assertThat(lottoBundle).isNotNull();
     }
 
