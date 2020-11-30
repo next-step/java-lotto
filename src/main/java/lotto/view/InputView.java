@@ -24,7 +24,7 @@ public class InputView {
         numbersValidator = new WinningNumbersValidator();
     }
 
-    private int purchaseAmount() {
+    public int inputPurchaseCount() {
         String amount = scanner.nextLine();
         amountValidator.validate(amount);
         return Integer.parseInt(amount);

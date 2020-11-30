@@ -23,10 +23,10 @@ public class OutputView {
         }
     }
 
-    public void showStatistics(int purchaseAmount) {
+    public void showStatistics(int purchaseCount) {
         System.out.println(STATISTICS_MESSAGE);
         showMatchingCount();
-        showEarningRate(purchaseAmount);
+        showEarningRate(purchaseCount);
     }
 
     protected void showMatchingCount() {
