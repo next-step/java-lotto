@@ -18,8 +18,8 @@ public class InputView {
 
     private final WinningNumbersValidator numbersValidator;
 
-    public InputView(final Scanner scanner) {
-        this.scanner = scanner;
+    public InputView() {
+        this.scanner = new Scanner(System.in);
         this.amountValidator = new AmountValidator();
         numbersValidator = new WinningNumbersValidator();
     }
