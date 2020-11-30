@@ -48,4 +48,12 @@ public enum Prize {
                     .ifPresent(Prize::increaseCount);
         }
     }
+
+    public static double calculateEarningRate(int purchaseAmount) {
+        double earn = Arrays.stream(Prize.values())
+                .mapToInt(prize1 -> prize1.prize * prize1.prizeCount)
+                .sum();
+
+        return earn / purchaseAmount;
+    }
 }
