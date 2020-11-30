@@ -9,7 +9,9 @@ public class StringAddCalculator {
     private static final Pattern CUSTOM_INPUT_DELIMITOR = Pattern.compile("//(.)\\n(.*)");
 
     public static int splitAndSum(String input){
-        if(!InputValidator.validationInputString(input)) return 0;
+        if(!InputValidator.validationInputString(input)){
+            return 0;
+        }
         return calculate(splitInputToNumberArr(input));
     }
 

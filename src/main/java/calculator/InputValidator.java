@@ -12,7 +12,7 @@ public class InputValidator {
 
     public static int validationNumbersNegative(int number){
         if(number < 0){
-            throw new RuntimeException("음수 입력");
+            throw new IllegalArgumentException("음수 입력");
         }
         return number;
     }
