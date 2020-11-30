@@ -14,10 +14,15 @@ public class Lotto {
 
     public Lotto() {
         this.numbers = new ArrayList<>();
+        generateRandomNumbers();
     }
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public void generateRandomNumbers() {
+        Collections.shuffle(numbers);
     }
 
     public void sort() {
