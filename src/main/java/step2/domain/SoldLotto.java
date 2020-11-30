@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SoldLotto {
@@ -13,7 +14,11 @@ public class SoldLotto {
         }
     }
 
+    public SoldLotto(Lotto lotto) {
+        this.soldLotto.add(lotto);
+    }
+
     public List<Lotto> getSoldLotto() {
-        return soldLotto;
+        return Collections.unmodifiableList(soldLotto);
     }
 }

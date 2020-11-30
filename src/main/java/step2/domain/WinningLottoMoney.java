@@ -6,6 +6,8 @@ import java.util.*;
 
 public class WinningLottoMoney {
     private static final int ZERO = 0;
+    private static final int TWO = 2;
+
     private final Map<LottoRank, Integer> winningLottoResult = new HashMap<>();
 
     public WinningLottoMoney(SoldLotto soldLotto, WinningLottoNumber winningLottoNumber) {
@@ -46,7 +48,7 @@ public class WinningLottoMoney {
             return BigDecimal.ZERO;
         }
 
-        return new BigDecimal(benefitMoney/fee.getFee()).setScale(2, RoundingMode.FLOOR);
+        return new BigDecimal(benefitMoney/fee.getFee()).setScale(TWO, RoundingMode.FLOOR);
     }
 
     private long findWinningMoney(LottoRank rank) {
