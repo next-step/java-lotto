@@ -11,4 +11,9 @@ public interface Message {
     String INPUT_LAST_WEEKS_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     String VALIDATION_WINNING_COUNT = "0 보다 작을 수 없습니다.";
+
+    int THREE_WINNING = 3;
+    int FOUR_WINNING = 4;
+    int FIVE_WINNING = 5;
+    int SIX_WINNING = 6;
 }

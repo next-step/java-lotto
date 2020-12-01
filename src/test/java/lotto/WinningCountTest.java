@@ -39,6 +39,6 @@ class WinningCountTest {
         WinningCount expect = new WinningCount(3);
 
         // then
-        assertThat(winningCount).isEqualTo(expect);
+        assertThat(winningCount).isEqualToComparingFieldByField(expect);
     }
 }

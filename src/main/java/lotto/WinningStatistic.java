@@ -2,29 +2,23 @@ package lotto;
 
 public class WinningStatistic {
 
-    private final int[] statistics = {0, 0, 0, 0};
-    private final static int THREE_WINNING = 3;
-    private final static int FOUR_WINNING = 4;
-    private final static int FIVE_WINNING = 5;
-    private final static int SIX_WINNING = 6;
+    private Statistics statistics;
 
     public WinningStatistic (WinningCounts winningCounts) {
-        for (int i = 0; i < winningCounts.size(); i++) {
-            WinningCount winningCount = winningCounts.getWinningCount(i);
+        calculateStatistics(winningCounts);
+    }
 
-            if (winningCount.getCount() == THREE_WINNING) {
-                statistics[0]++;
-            } else if (winningCount.getCount() == FOUR_WINNING) {
-                statistics[1]++;
-            } else if (winningCount.getCount() == FIVE_WINNING) {
-                statistics[2]++;
-            } else if (winningCount.getCount() == SIX_WINNING) {
-                statistics[3]++;
-            }
+    private void calculateStatistics(WinningCounts winningCounts) {
+        Statistics initStatistics = new Statistics(new int[4]);
+        for (int i = 0; i < winningCounts.size(); i++) {
+            int winningCount = winningCounts.getWinningCount(i)
+                    .getCount();
+
+            statistics = initStatistics.calculateStatistics(winningCount);
         }
     }
 
-    public int getStatistics(int index) {
-        return statistics[index];
+    public int getStatisticsCount(int index) {
+        return statistics.getStatisticsCount(index);
     }
 }

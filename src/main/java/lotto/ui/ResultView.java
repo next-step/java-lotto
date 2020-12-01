@@ -42,10 +42,10 @@ public class ResultView {
     }
 
     private static void printWinningsCount(WinningStatistic winningStatistic) {
-        System.out.println(THREE_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(0));
-        System.out.println(FOUR_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(1));
-        System.out.println(FIVE_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(2));
-        System.out.println(SIX_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatistics(3));
+        System.out.println(THREE_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatisticsCount(0));
+        System.out.println(FOUR_MATCHING_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatisticsCount(1));
+        System.out.println(FIVE_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatisticsCount(2));
+        System.out.println(SIX_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatisticsCount(3));
     }
 
     private static void printRateOfReturn(double rateOfReturn) {

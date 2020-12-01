@@ -28,9 +28,9 @@ class WiningStatisticTest {
         WinningStatistic winningStatistic = new WinningStatistic(winningCounts);
 
         // then
-        assertThat(winningStatistic.getStatistics(0)).isEqualTo(2);
-        assertThat(winningStatistic.getStatistics(1)).isEqualTo(0);
-        assertThat(winningStatistic.getStatistics(2)).isEqualTo(0);
-        assertThat(winningStatistic.getStatistics(3)).isEqualTo(0);
+        assertThat(winningStatistic.getStatisticsCount(0)).isEqualTo(2);
+        assertThat(winningStatistic.getStatisticsCount(1)).isEqualTo(0);
+        assertThat(winningStatistic.getStatisticsCount(2)).isEqualTo(0);
+        assertThat(winningStatistic.getStatisticsCount(3)).isEqualTo(0);
     }
 }
