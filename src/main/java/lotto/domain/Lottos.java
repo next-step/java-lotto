@@ -14,7 +14,7 @@ public class Lottos {
 
     public Reward matchPrizeNumber(PrizeLotto prizeLotto) {
         List<PrizeInformation> prizeInformations = lottos.stream()
-                .map(lotto -> lotto.matchPrizeNumber(prizeLotto))
+                .map(lotto -> lotto.getPrize(prizeLotto))
                 .collect(Collectors.toList());
         return new Reward(prizeInformations);
     }

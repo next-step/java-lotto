@@ -26,7 +26,7 @@ public class LottoTest {
         assertThat(lotto.equals(Lotto.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
     }
 
-    @DisplayName("matchPrizeNumber 메서드 테스트")
+    @DisplayName("getLottoPrize 메서드 테스트")
     @ParameterizedTest
     @MethodSource("createLottoNumber")
     public void matchPrizeNumberTest(HashSet<Integer> expected) {
@@ -34,7 +34,7 @@ public class LottoTest {
         Lotto lotto = Lotto.of(expected);
 
         //When
-        PrizeInformation prize = lotto.matchPrizeNumber(new PrizeLotto(Lotto.of(expected), 10));
+        PrizeInformation prize = lotto.getPrize(new PrizeLotto(Lotto.of(expected), 10));
 
         //Then
         assertThat(prize).isEqualTo(PrizeInformation.FIRST);

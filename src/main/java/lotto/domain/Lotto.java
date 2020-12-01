@@ -29,7 +29,7 @@ public class Lotto {
        return machine.createLotto(CAPACITY);
     }
 
-    public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
+    public PrizeInformation getPrize(PrizeLotto prizeLotto) {
         int matchCount = (int) lottoNumbers.stream()
                 .filter(prizeLotto::matchLottoNumber)
                 .count();
