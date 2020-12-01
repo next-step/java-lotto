@@ -8,7 +8,7 @@
  ---
  ### 기능 요구사항 정리
  v. LottoMachine & LottoAutoMachine
- - 로또 생성 클래스 
+ - 로또 생성방식을 결정하는 클래스 
 
  v. LottoShop
  - 로또를 구매할 수 있다. 
@@ -16,12 +16,10 @@
  
  v.Lotto 
  - LottoNumber를 가진 일급컬렉션 
- 
- v. LottoNumbers
- - 로또번호 규칙을 나타내는 클래스 
+ - 발급받은 총 6개의 숫자로 이루어진 LottoNumber클래스를 가지고 있다.
  
  v. LottoNumber
- - 발급받은 로또번호(총 6개의 숫자)를 가진 값 객체
+ - 로또번호 규칙을 나타내는 클래스 
  
  v.Lottos
  - 발급 받은 모든 로또를 가지고있는 일급컬렉션 
