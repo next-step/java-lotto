@@ -26,7 +26,7 @@ public class LottoController {
         outputView.printLottoList(lottoList);
 
         LottoWinningNums winningLottoNums = getWinningNumbers();
-        List<LottoRank> lottoRankList = getMatchedLottoRanks(lottoList, winningLottoNums);
+        List<LottoRank> lottoRankList = getMatchedLottoRanks(lottoList, winningLottoNums.getWinningLotto());
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
@@ -37,8 +37,8 @@ public class LottoController {
         return lottoGame.getLottoResult(lottoBuyingMoney.getInvestMoney(), lottoRankList);
     }
 
-    private List<LottoRank> getMatchedLottoRanks(List<Lotto> lottoList, LottoWinningNums winningLottoNums) {
-        return lottoGame.getLottoRank(lottoList, new Lotto(winningLottoNums.getLottoNumbers()), winningLottoNums.getBonusNumber());
+    private List<LottoRank> getMatchedLottoRanks(List<Lotto> lottoList, WinningLotto winningLottoNums) {
+        return lottoGame.getLottoRank(lottoList, winningLottoNums);
     }
 
     private LottoWinningNums getWinningNumbers() {

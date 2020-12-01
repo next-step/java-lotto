@@ -25,14 +25,20 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Stream.of(LottoRank.FORTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
+        Stream.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD)
                 .forEach(r -> printRankCount(r, result.getRankCount(r)));
+        printBonusRank(result.getRankCount(LottoRank.SECOND));
+        printRankCount(LottoRank.FIRST, result.getRankCount(LottoRank.FIRST));
 
         System.out.printf("총 수익률은 %.2f입니다.\n", result.calculateEarningRate());
     }
 
+    private void printBonusRank(long rankCount) {
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d)원 - %d개\n", LottoRank.SECOND.getEarningMoney(), rankCount);
+    }
+
     private void printRankCount(LottoRank rank, long count) {
 
-        System.out.printf("%d개 일치 (%d)원 - %d개\n", rank.matchCount, rank.earningMoney, count);
+        System.out.printf("%d개 일치 (%d)원 - %d개\n", rank.getMatchCount(), rank.getEarningMoney(), count);
     }
 }

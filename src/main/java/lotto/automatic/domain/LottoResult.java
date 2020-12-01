@@ -16,7 +16,7 @@ public class LottoResult {
     public long getRankCount(LottoRank rank) {
 
         return rankList.stream()
-                .filter(r -> r.matchCount == rank.matchCount)
+                .filter(r -> r.getEarningMoney() == rank.getEarningMoney())
                 .count();
     }
 
@@ -25,7 +25,7 @@ public class LottoResult {
         BigDecimal earningMoney = BigDecimal.ZERO;
 
         for (LottoRank rank : rankList) {
-            earningMoney = earningMoney.add(BigDecimal.valueOf(rank.earningMoney));
+            earningMoney = earningMoney.add(BigDecimal.valueOf(rank.getEarningMoney()));
         }
 
         return earningMoney.divide(BigDecimal.valueOf(investMoney), 2, BigDecimal.ROUND_CEILING);

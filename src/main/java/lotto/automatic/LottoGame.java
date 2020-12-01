@@ -23,9 +23,8 @@ public class LottoGame {
         return new LottoResult(investMoney, rankList);
     }
 
-    public List<LottoRank> getLottoRank(List<Lotto> lottoList, Lotto winningLotto, LottoNumber bonusNumber) {
-
-        LottoRankCollector collector = new LottoRankCollector(lottoList, winningLotto, bonusNumber);
+    public List<LottoRank> getLottoRank(List<Lotto> lottoList, WinningLotto winningLottoNums) {
+        LottoRankCollector collector = new LottoRankCollector(lottoList, winningLottoNums);
 
         return collector.getRankList();
     }

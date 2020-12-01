@@ -26,12 +26,18 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 생성 테스트 ")
+    @DisplayName("자동 로또 생성 테스트 ")
     public void creation_자동_로또_인스턴스() {
 
         Lotto lotto1 = Lotto.auto();
 
-//        assertThat(lotto1.equals(lotto2)).isTrue();
+        int matchCount = lotto1.matchCount(
+                new Lotto(IntStream.rangeClosed(1, 6)
+                        .mapToObj(LottoNumber::new)
+                        .collect(toList())));
+
+        assertThat(matchCount).isLessThanOrEqualTo(6);
+
     }
 
     @Test
