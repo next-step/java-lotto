@@ -23,7 +23,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Set<Integer> getLotto(int index) {
+    public Set<LottoNumber> getLotto(int index) {
         return lottos.get(index).getLottoNumbers();
     }
 
