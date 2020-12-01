@@ -31,7 +31,7 @@ class LottoNumberSetTest {
                 .isEqualTo(Arrays.asList(3, 4, 5, 6, 22, 41)
                         .stream()
                         .map(LottoNumber::from)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toSet()));
     }
 
     @ParameterizedTest

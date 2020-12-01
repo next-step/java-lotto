@@ -21,8 +21,8 @@ public class LottoNumberSet {
         return new LottoNumberSet(new TreeSet<>(lottoNumbers));
     }
 
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
+    public Set<LottoNumber> value() {
+        return Collections.unmodifiableSet(this.lottoNumbers);
     }
 
     public boolean contains(LottoNumber num) {

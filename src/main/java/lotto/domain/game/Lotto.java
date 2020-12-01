@@ -2,6 +2,7 @@ package lotto.domain.game;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created By mand2 on 2020-11-18.
@@ -20,9 +21,10 @@ public class Lotto {
     }
 
     // 로또번호 가져오기
-    public List<LottoNumber> number() {
+    public Set<LottoNumber> number() {
         return this.lottoNumberSet.value();
     }
+
 
     @Override
     public boolean equals(Object o) {

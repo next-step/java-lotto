@@ -119,5 +119,5 @@
     - [x] `Round`로 포장
   - [x] 구매번호 입력
   - [x] 자동+수동 generate 확인 
-  - LottoNumberSet 자체를 set으로만 써보기..?
+  - [x] LottoNumberSet 자체를 set으로만 써보기..?
   - `Application` 추가

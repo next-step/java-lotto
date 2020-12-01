@@ -34,7 +34,7 @@ public class WinningNumber {
         return new WinningNumber(lottoNumberSet, bonusBall);
     }
 
-    public List<LottoNumber> value() {
+    public Set<LottoNumber> value() {
         return this.winningNumber.value();
     }
 
