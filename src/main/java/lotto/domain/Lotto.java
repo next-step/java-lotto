@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lotto.LottoMachine;
 import lotto.RandomUtils;
@@ -26,13 +28,13 @@ public class Lotto {
     }
 
     public List<Integer> generateRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> numbers = new HashSet<>();
 
-        for (int i = 0; i < LottoMachine.LOTTO_SIZE; i++) {
+        while (numbers.size() < LottoMachine.LOTTO_SIZE) {
             numbers.add(RandomUtils.nextInt());
         }
 
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     public void shuffle() {
