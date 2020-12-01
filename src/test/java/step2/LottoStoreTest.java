@@ -60,4 +60,14 @@ class LottoStoreTest {
         lottoStore.initWinNumbers(list);
         assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("보너스 숫자를 추가로 입력받는다.")
+    void addBonusNumber() {
+        LottoStore lottoStore = new LottoStore();
+        lottoStore.addBonusNumber(1);
+
+        assertThat(lottoStore.getBonusNumber()).isEqualTo(1);
+
+    }
 }

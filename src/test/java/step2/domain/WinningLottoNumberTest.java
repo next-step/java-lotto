@@ -35,4 +35,15 @@ class WinningLottoNumberTest {
         assertThatThrownBy(() -> new WinningLottoNumber(countLessList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("당첨번호와 겹치는 보너스 숫자를 입력하면 Exception을 발생시킴.")
+    void addBonusNumber_isNotContainsWinningNumber_ShouldException() {
+        List<Integer> list = Arrays.asList(1,2,3,4,5,10);
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
+
+        assertThatThrownBy(() -> winningLottoNumber.addBonusNumber(10))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
 }

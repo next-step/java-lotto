@@ -38,4 +38,12 @@ public class LottoStore {
     public List<Integer> getWinNumbers() {
         return this.winningLottoNumber.getNumbers();
     }
+
+    public void addBonusNumber(int bonusNumber) {
+        this.winningLottoNumber.addBonusNumber(bonusNumber);
+    }
+
+    public boolean getBonusNumber() {
+        return false;
+    }
 }

@@ -4,6 +4,7 @@ import java.util.*;
 
 public class WinningLottoNumber {
     private final List<Integer> winningNumbers = new ArrayList<>();
+    private BonusNumber bonusNumber;
 
     public WinningLottoNumber(List<Integer> winNumberString) {
         this.winningNumbers.addAll(winNumberString);
@@ -49,5 +50,17 @@ public class WinningLottoNumber {
 
     private boolean isContains(Integer winNumber, Lotto lotto) {
         return lotto.isContains(winNumber);
+    }
+
+    public void addBonusNumber(int bonusNumber) {
+        if (isContainsWinningNumber(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호와 겹치지 않는 숫자를 입력하세요.");
+        }
+
+        this.bonusNumber = new BonusNumber(bonusNumber);
+    }
+
+    private boolean isContainsWinningNumber(int bonusNumber) {
+        return this.winningNumbers.contains(bonusNumber);
     }
 }
