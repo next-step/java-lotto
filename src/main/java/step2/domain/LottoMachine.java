@@ -10,14 +10,20 @@ public class LottoMachine {
     private static final List<Integer> lottoNumbers;
 
     static {
+        final int LOTTO_NUMBERS_START_NUMBER = 1;
+        final int LOTOO_NUMBERS_END_NUMBER = 45;
+
         lottoNumbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 45)
+        IntStream.rangeClosed(LOTTO_NUMBERS_START_NUMBER, LOTOO_NUMBERS_END_NUMBER)
                 .boxed().distinct().forEach(lottoNumbers::add);
     }
 
     private Lotto createLottoNumbers() {
+        final int FROM_INDEX = 0;
+        final int TO_INDEX = 6;
+
         Collections.shuffle(lottoNumbers);
-        List<Integer> extractionLottoNumbers = lottoNumbers.subList(0, 6);
+        List<Integer> extractionLottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
         Collections.sort(extractionLottoNumbers);
         return new Lotto(extractionLottoNumbers);
     }
