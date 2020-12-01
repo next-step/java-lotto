@@ -8,7 +8,9 @@ public class Calculator {
 
     public static int calculate(String inputString){
 
-        if( inputString.isEmpty() ) inputString = "0";
+        if( inputString.isEmpty() ) {
+            inputString = "0";
+        }
 
         final String PATTERN = "(//.*\\\\n)(.*)";
         Matcher matcher = Pattern.compile(PATTERN).matcher(inputString);
