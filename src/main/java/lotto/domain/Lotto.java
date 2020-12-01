@@ -30,11 +30,11 @@ public class Lotto {
     }
 
     public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoNumbers.stream()
+        int matchCount = (int) lottoNumbers.stream()
                 .filter(prizeLotto::matchLottoNumber)
                 .count();
         boolean isBonusball = matchBonusball(prizeLotto);
-        return PrizeInformation.findByPrizePrice(MatchStatus.of(prizeCount, isBonusball));
+        return PrizeInformation.findByPrizePrice(MatchStatus.of(matchCount, isBonusball));
     }
 
     private boolean matchBonusball(PrizeLotto prizeLotto) {
