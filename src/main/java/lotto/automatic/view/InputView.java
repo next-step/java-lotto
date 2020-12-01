@@ -7,22 +7,29 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private final Scanner scanner = new Scanner(System.in);
-
     public LottoBuyingMoney getLottoMoney() {
 
-        System.out.println("구입 금앱을 입력해주세요");
-        int money = scanner.nextInt();
+        int money = getInt("구입 금앱을 입력해주세요");
         return new LottoBuyingMoney(money);
     }
 
     public LottoWinningNums getWinningLottoNums() {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String rawNumberString = scanner.nextLine();
-        scanner.close();
+        String rawNumberString = getString("지난 주 당첨 번호를 입력해 주세요.");
+        int bonusNumber = getInt("보너스 볼을 입력해주세요.");
 
-        return new LottoWinningNums(rawNumberString);
+        return new LottoWinningNums(rawNumberString, bonusNumber);
+    }
+
+    private int getInt(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        return scanner.nextInt();
+    }
+
+    private String getString(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        return scanner.nextLine();
     }
 }

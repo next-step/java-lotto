@@ -6,9 +6,9 @@ import java.util.List;
 public class LottoWinningNums {
 
     private final List<LottoNumber> nums;
+    private final LottoNumber bonusNumber;
 
-    public LottoWinningNums(String rawNumberString) {
-
+    public LottoWinningNums(String rawNumberString, int bonusNumber) {
         String[] numberStrings = rawNumberString.split(",");
 
         List<LottoNumber> nums = new ArrayList<>();
@@ -18,9 +18,14 @@ public class LottoWinningNums {
         }
 
         this.nums = nums;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return nums;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

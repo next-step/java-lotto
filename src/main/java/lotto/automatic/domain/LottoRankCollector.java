@@ -7,7 +7,7 @@ public class LottoRankCollector {
 
     private final List<LottoRank> rankList;
 
-    public LottoRankCollector(List<Lotto> lottoList, Lotto winnerLotto) {
+    public LottoRankCollector(List<Lotto> lottoList, Lotto winnerLotto, LottoNumber bonusNumber) {
 
         rankList = new ArrayList<>();
 

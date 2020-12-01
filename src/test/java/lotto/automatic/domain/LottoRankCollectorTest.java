@@ -29,8 +29,8 @@ class LottoRankCollectorTest {
                 // 당첨번호
                 new Lotto(IntStream.rangeClosed(1, 6)
                         .mapToObj(LottoNumber::new)
-                        .collect(toList()))
-        );
+                        .collect(toList())),
+                new LottoNumber(45));
 
         List<LottoRank> rankList = collector.getRankList();
 

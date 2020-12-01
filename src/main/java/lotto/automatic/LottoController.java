@@ -38,7 +38,7 @@ public class LottoController {
     }
 
     private List<LottoRank> getMatchedLottoRanks(List<Lotto> lottoList, LottoWinningNums winningLottoNums) {
-        return lottoGame.getLottoRank(lottoList, winningLottoNums.getLottoNumbers());
+        return lottoGame.getLottoRank(lottoList, new Lotto(winningLottoNums.getLottoNumbers()), winningLottoNums.getBonusNumber());
     }
 
     private LottoWinningNums getWinningNumbers() {
