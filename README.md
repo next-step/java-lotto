@@ -53,12 +53,6 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
-1. LottoNumber, LottoNumbers, LottoNumberGenerator 역할 재분배
-    - LottoGenerator: LottoNumber을 caching하여, LottoNumber 생성시 제공
-    - LottoNumber: LottoNumber 생성에 책임(validation check)
-    - LottoNumbers: LottoNumbers 생성 및 당첨결과를 출력하는 책
-2. Lottoes의 getter로 인한 정보 노출 수정
-3. Lottoes, Rank, LottoNumber 테스트 코드 작성
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
@@ -92,7 +86,12 @@ utils.Calculator
 25. Rank에 대한 설명을 view 표시하도록 개선
 26. Uilts성 클래스 삭제
 27. Rank를 domain package로 이동
-
+28. LottoNumber, LottoNumbers, LottoNumberGenerator 역할 재분배
+      - LottoGenerator: LottoNumber을 caching하여, LottoNumber 생성시 제공
+      - LottoNumber: LottoNumber 생성에 책임(validation check)
+      - LottoNumbers: LottoNumbers 생성 및 당첨결과를 출력하는 책
+29. Lottoes의 getter로 인한 정보 노출 수정
+30. Lottoes, Rank, LottoNumber 테스트 코드 작성
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)

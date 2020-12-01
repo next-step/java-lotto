@@ -18,11 +18,11 @@ public class LottoGameResult {
     }
 
     public Map<Rank, Integer> getRanks() {
-        Map<Integer, List<Rank>> collect = ranks.stream()
-                .filter(rank -> rank.getMatchingNumberCount() > FIFTH_MATCHING_COUNT)
-                .collect(Collectors.groupingBy(Rank::getMatchingNumberCount));
         Map<Rank, Integer> result = init();
-        collect.forEach((key, value) -> result.put(Rank.value(key), result.get(Rank.value(key)) + 1));
+
+        ranks.stream()
+                .filter(rank -> rank.getMatchingNumberCount() > FIFTH_MATCHING_COUNT)
+                .forEach(rank -> result.put(rank, result.getOrDefault(rank, 0) + 1));
 
         return result;
     }

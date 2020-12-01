@@ -18,7 +18,6 @@ public class LottoController {
 
     public void getLottoGameResult(Lottoes lottoes) {
         LottoNumbers winningNumbers = new LottoNumbers(InputView.enterWinningNumbers());
-        LottoGame lottoGame = new LottoGame(lottoes, winningNumbers);
-        LottoGameView.printResult(lottoGame.getResult());
+        LottoGameView.printResult(lottoes.getResult(winningNumbers));
     }
 }
