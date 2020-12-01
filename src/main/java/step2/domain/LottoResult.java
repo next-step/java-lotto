@@ -25,6 +25,7 @@ public class LottoResult {
 
     private static int match(WinningLotto winningLotto, Lotto lotto) {
         int matchCount = 0;
+        // 질문. 29번 for 문 라인에서 cannot be cast 에러가 발생하는데 원인을 모르겠습니다.
         for (LottoNumber winNumber : winningLotto.getWinningNumber()) {
             matchCount += lotto.contains(winNumber) ? 1 : 0;
         }
