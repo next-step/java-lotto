@@ -2,11 +2,11 @@ package lotto.view;
 
 public class Validator {
 
-    public static final String INPUT_NULL_MESSAGE = "null 값을 입력하였습니다!";
+    protected static final String INPUT_NULL_MESSAGE = "null 값을 입력하였습니다!";
 
-    public static final String INPUT_EMPTY_MESSAGE = "빈 값을 입력하셨습니다!";
+    protected static final String INPUT_EMPTY_MESSAGE = "빈 값을 입력하셨습니다!";
 
-    public static final String EMPTY = "";
+    protected static final String EMPTY = "";
 
     protected void validate(String input) {
         checkNull(input);

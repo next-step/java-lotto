@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class RandomUtils {
 
-    public static final int LOWER_BOUND = 1;
+    protected static final int LOWER_BOUND = 1;
 
-    public static final int HIGHER_BOUND = 45;
+    protected static final int HIGHER_BOUND = 45;
 
     private static final Random random = new Random();
 

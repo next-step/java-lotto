@@ -9,17 +9,17 @@ import lotto.domain.Lotto;
 
 public class InputView {
 
-    public static final String ASK_PAID = "구입금액을 입력해 주세요.";
+    protected static final String ASK_PAID = "구입금액을 입력해 주세요.";
 
-    public static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    protected static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
-    public static final String INPUT_VALUE_IS = "\n입력한 값은 ";
+    protected static final String INPUT_VALUE_IS = "\n입력한 값은 ";
 
-    public static final String INPUT_VALUE_SUFFIX = " 입니다";
+    protected static final String INPUT_VALUE_SUFFIX = " 입니다";
 
-    public static final String BLANK = " ";
+    protected static final String BLANK = " ";
 
-    public static final String EMPTY = "";
+    protected static final String EMPTY = "";
 
     protected static final String COMMA = ",";
 

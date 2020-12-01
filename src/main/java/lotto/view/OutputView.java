@@ -7,11 +7,11 @@ import lotto.domain.Prize;
 
 public class OutputView {
 
-    public static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    protected static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
 
-    public static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
+    protected static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
 
-    public static final String EARN_RATE_MESSAGE = "총 수익률은 %.2f입니다.(%s)";
+    protected static final String EARN_RATE_MESSAGE = "총 수익률은 %.2f입니다.(%s)";
 
     public void showPurchaseCount(int count) {
         System.out.println(count + PURCHASE_MESSAGE);
