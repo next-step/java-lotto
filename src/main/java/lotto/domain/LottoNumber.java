@@ -1,68 +1,64 @@
 package lotto.domain;
 
-import java.util.Objects;
-import java.util.Set;
+import lotto.domain.exception.ErrorMessage;
+import lotto.domain.exception.NotValidLottoNumberException;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private Set<Integer> lottoNumbers;
+    private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
-    private LottoNumber(Set<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    static {
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .forEach(i -> numbers.put(i, new LottoNumber(i)));
     }
 
-    public static LottoNumber from(Set<Integer> lottoNumbers) {
-        ProviderLottoNumbers.isValidLottoNumber(lottoNumbers);
-        return new LottoNumber(lottoNumbers);
+    private int number;
+
+    private LottoNumber(int number) {
+        this.number = number;
     }
 
-    public Set<Integer> getLottoNumber() {
-        return lottoNumbers;
-    }
-
-    public PrizeInformation matchPrizeNumber(PrizeLotto prizeLotto) {
-        int prizeCount = (int) lottoNumbers.stream()
-                .filter(prizeLotto::existByLottoNumber)
-                .count();
-        boolean isBonusball = matchBonusball(prizeLotto);
-        return PrizeInformation.findByPrizePrice(MatchStatus.of(prizeCount, isBonusball));
-    }
-
-    private boolean matchBonusball(PrizeLotto prizeLotto) {
-        return lottoNumbers
-                .stream()
-                .anyMatch(prizeLotto::matchBonusBall);
-    }
-
-    public int size() {
-        return lottoNumbers.size();
-    }
-
-    public static Bonusball createBonusball(int bonusBallNumber) {
-        return new Bonusball(bonusBallNumber);
-    }
-
-    public static class Bonusball  {
-
-        private int bonusBall;
-
-        private Bonusball(int bonusBall) {
-            ProviderLottoNumbers.isValidRange(bonusBall);
-            this.bonusBall = bonusBall;
+    public static LottoNumber from(int number) {
+        if (numbers.get(number) == null) {
+            throw new NotValidLottoNumberException(ErrorMessage.NOT_VALID_LOTTO_NUMBER.getMessage());
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Bonusball bonusball = (Bonusball) o;
-            return bonusBall == bonusball.bonusBall;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(bonusBall);
-        }
+        return numbers.get(number);
     }
 
+    public static List<Integer> findAllLottoNumbers() {
+        return numbers.entrySet()
+                        .stream()
+                        .map(i -> i.getValue().number)
+                        .collect(Collectors.toList());
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
+    }
 }
