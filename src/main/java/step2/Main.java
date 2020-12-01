@@ -13,11 +13,9 @@ public class Main {
 
         Lottos lottos = new Lottos(money, lottoGenerator);
 
-        ResultView.printLottoCnt(lottos.getLottoList().size());
+        ResultView.printLottoCnt(lottos.getLottosCnt());
 
-        for (Lotto lotto : lottos.getLottoList()) {
-            ResultView.printLottoNumber(lotto);
-        }
+        ResultView.printLottoList(lottos);
 
         String resultString = InputView.getResultNumber();
         List<Integer> ResultNumberList = getResultNumberList(resultString);
