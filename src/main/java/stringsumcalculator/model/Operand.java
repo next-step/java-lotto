@@ -1,4 +1,4 @@
-package lotto.stringsumcalculator.model;
+package stringsumcalculator.model;
 
 public class Operand {
 

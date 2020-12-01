@@ -1,11 +1,10 @@
-package lotto.stringsumcalculator;
+package stringsumcalculator;
 
-import lotto.stringsumcalculator.model.Calculator;
-import lotto.stringsumcalculator.model.Operands;
-import lotto.stringsumcalculator.model.Separators;
+import stringsumcalculator.model.Calculator;
+import stringsumcalculator.model.Operands;
+import stringsumcalculator.model.Separators;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import sun.jvm.hotspot.asm.Operand;
 
 import static org.junit.Assert.assertEquals;
 

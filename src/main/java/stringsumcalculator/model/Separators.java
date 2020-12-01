@@ -1,4 +1,4 @@
-package lotto.stringsumcalculator.model;
+package stringsumcalculator.model;
 
 import java.util.ArrayList;
 import java.util.List;

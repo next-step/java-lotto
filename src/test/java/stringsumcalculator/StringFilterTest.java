@@ -1,6 +1,6 @@
-package lotto.stringsumcalculator;
+package stringsumcalculator;
 
-import lotto.stringsumcalculator.model.StringFilter;
+import stringsumcalculator.model.StringFilter;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 

@@ -1,6 +1,8 @@
-package lotto.stringsumcalculator.model;
+package stringsumcalculator.model;
 
-import racingcarrefectoring.exception.NegativeNumberException;
+
+
+import stringsumcalculator.exception.NegativeNumberException;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,5 @@
-package lotto.stringsumcalculator.model;
+package stringsumcalculator.model;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +12,7 @@ public class Calculator {
 
         String pattern = "(//.*\\\\n)(.*)";
         Matcher matcher = Pattern.compile(pattern).matcher(inputString);
-        Separators separators = new Separators();;
+        Separators separators = new Separators();
         String stringOprands = inputString;
 
         if( matcher.find() ) {

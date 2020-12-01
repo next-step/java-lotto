@@ -1,8 +1,8 @@
-package lotto.stringsumcalculator;
+package stringsumcalculator;
 
-import lotto.stringsumcalculator.model.Operand;
-import lotto.stringsumcalculator.model.Operands;
-import lotto.stringsumcalculator.model.Separators;
+import stringsumcalculator.model.Operand;
+import stringsumcalculator.model.Operands;
+import stringsumcalculator.model.Separators;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 

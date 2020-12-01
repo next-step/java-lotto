@@ -1,6 +1,6 @@
-package lotto.stringsumcalculator.controller;
+package stringsumcalculator.controller;
 
-import lotto.stringsumcalculator.model.Calculator;
+import stringsumcalculator.model.Calculator;
 import lotto.stringsumcalculator.view.InputView;
 import lotto.stringsumcalculator.view.ResultView;
 
