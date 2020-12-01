@@ -3,9 +3,15 @@ package lotto.domain;
 import lotto.constant.ErrorMessage;
 import lotto.constant.Lotto;
 
+import java.util.List;
+
 public class PurchaseAmount {
 
     private final int amount;
+
+    public PurchaseAmount(List<Rank> ranks) {
+        this(ranks.size() * Lotto.PRICE);
+    }
 
     public PurchaseAmount(int amount) {
         valid(amount);

@@ -22,9 +22,7 @@ public class Lottoes {
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
-        int purchaseAmount = value.size() * Lotto.PRICE;
-
-        return new LottoGameResult(ranks, new PurchaseAmount(purchaseAmount));
+        return new LottoGameResult(ranks, new PurchaseAmount(ranks));
 
     }
 }

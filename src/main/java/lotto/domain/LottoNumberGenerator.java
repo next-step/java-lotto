@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.LottoNumber.NUMBER_MAX_RANGE;
+import static lotto.domain.LottoNumber.NUMBER_MIN_RANGE;
 import static lotto.domain.LottoNumbers.NUMBER_RANGE;
 
 public class LottoNumberGenerator {
@@ -13,15 +15,14 @@ public class LottoNumberGenerator {
     private static final String DEFAULT_SEPARATOR = ",";
     private static final String BLANK = " ";
     private static final String DELETE_BLANK = "";
-    public static final int NUMBER_MIN_RANGE = 1;
-    public static final int NUMBER_MAX_RANGE = 45;
 
     private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.range(NUMBER_MIN_RANGE, NUMBER_MAX_RANGE)
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toMap(LottoNumber::getValue, lottoNumber -> lottoNumber));
 
-    public Lottoes create(PurchaseAmount purchaseAmount) {
+    public Lottoes create(int amount) {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
         return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount()));
     }
 
@@ -51,13 +52,12 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> create(String numbers) {
+    public LottoNumbers create(String numbers) {
         List<LottoNumber> lotto = splitString(numbers).stream()
                 .map(Integer::parseInt)
                 .map(lottoNumbers::get)
                 .collect(Collectors.toList());
-        valid(lotto);
-        return lotto;
+        return new LottoNumbers(lotto);
     }
 
     private List<String> splitString(String value) {
@@ -70,23 +70,6 @@ public class LottoNumberGenerator {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
         }
-    }
-
-    private void valid(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
-        }
-
-        if (isExistsDuplicateNumber(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_DUPLICATED);
-        }
-    }
-
-    private boolean isExistsDuplicateNumber(List<LottoNumber> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getValue)
-                .distinct()
-                .count() != NUMBER_RANGE;
     }
 
 
