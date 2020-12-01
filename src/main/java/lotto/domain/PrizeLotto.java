@@ -1,27 +1,39 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.Objects;
 
 public class PrizeLotto {
 
-    private LottoNumber lottoNumbers;
-    private LottoNumber.Bonusball bonusBall;
+    private Lotto prizeLotto;
+    private LottoNumber bonusBall;
 
-    private PrizeLotto(Set<Integer> lottoNumbers, int bonusBall) {
-        this.lottoNumbers = LottoNumber.from(lottoNumbers);
-        this.bonusBall = LottoNumber.createBonusball(bonusBall);
+    public PrizeLotto(Lotto prizeLotto, int bonusBall) {
+        this.prizeLotto = prizeLotto;
+        this.bonusBall = LottoNumber.from(bonusBall);
     }
 
-    public static PrizeLotto of(Set<Integer> lottoNumber, int bonusBall) {
-        return new PrizeLotto(lottoNumber, bonusBall);
+    public boolean matchBonusBall(LottoNumber lottoNumber) {
+        return bonusBall.equals(lottoNumber);
     }
 
-    public boolean matchBonusBall(int lottoNumber) {
-        return bonusBall.equals(LottoNumber.createBonusball(lottoNumber));
+    public boolean matchLottoNumber(LottoNumber lottoNumber) {
+        return prizeLotto.getLottoNumbers()
+                                .stream()
+                                .anyMatch(number -> number.equals(lottoNumber));
     }
 
-    public boolean existByLottoNumber(int lottoNumber) {
-        return lottoNumbers.getLottoNumber().contains(lottoNumber);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PrizeLotto that = (PrizeLotto) o;
+        return Objects.equals(prizeLotto, that.prizeLotto) &&
+                Objects.equals(bonusBall, that.bonusBall);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(prizeLotto, bonusBall);
+    }
 }
