@@ -17,7 +17,7 @@ public class LottoGame {
 
         ResultView.outputLottos(lottos);
 
-        PrizeLotto prizeLotto = PrizeLotto.of(InputView.lastWeekLottoPrizeNumber(), InputView.inputBonusball());
+        PrizeLotto prizeLotto = new PrizeLotto(Lotto.of(InputView.lastWeekLottoPrizeNumber()), InputView.inputBonusball());
         Reward reward = lottos.matchPrizeNumber(prizeLotto);
 
         ResultView.outputPrizeStatistics(reward);
