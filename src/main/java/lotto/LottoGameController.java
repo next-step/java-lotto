@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
+import lotto.domain.game.Round;
 import lotto.domain.winning.WinningChecker;
 import lotto.domain.winning.WinningNumber;
 import lotto.domain.winning.WinningStatistics;
@@ -21,6 +22,8 @@ public class LottoGameController {
     public static void main(String[] args) {
 
         SeedMoney seedMoney = InputView.askAndShowLottoGameMoney();
+
+        Round manualRound = InputView.askManualRounds();
 
         Lottos lottos = LottoGenerator.generate(seedMoney.round());
 

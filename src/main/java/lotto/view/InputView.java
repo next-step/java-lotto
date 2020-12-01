@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.LottoGameController;
 import lotto.domain.SeedMoney;
+import lotto.domain.game.Round;
 import lotto.domain.winning.WinningNumber;
 
 /**
@@ -13,6 +14,7 @@ public class InputView {
     private static final String QUESTION_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String QUESTION_GAME_MONEY = "구입금액을 입력해 주세요.";
     private static final String SHOW_GAME_MONEY = "%d개를 구매했습니다.";
+    private static final String QUESTION_MANUAL_ROUNDS = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static SeedMoney askAndShowLottoGameMoney() {
         SeedMoney seedMoney = askSeedMoney();
@@ -28,6 +30,11 @@ public class InputView {
 
     private static void showGameRound(int amount) {
         System.out.println(String.format(SHOW_GAME_MONEY, amount));
+    }
+
+    public static Round askManualRounds() {
+        System.out.println(QUESTION_MANUAL_ROUNDS);
+        return Round.from(LottoGameController.SCANNER.nextLine());
     }
 
 
