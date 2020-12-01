@@ -92,7 +92,7 @@ utils.Calculator
       - LottoNumbers: LottoNumbers 생성 및 당첨결과를 출력하는 책
 29. Lottoes의 getter로 인한 정보 노출 수정
 30. Lottoes, Rank, LottoNumber 테스트 코드 작성
-
+31. 코드 정리
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
 

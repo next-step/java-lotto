@@ -24,10 +24,10 @@ class LottoNumberGeneratorTest {
     }
 
     @Test
-    @DisplayName("1~45까지 6개의 번호를 14개 생성한다.")
+    @DisplayName("14,000원의 lotto를 구매하면, 1~45까지 6개의 번호를 14개 생성한다.")
     void should_return_lotto_numbers() {
         //Given & When
-        Lottoes lottoes = lottoNumberGenerator.create(new PurchaseAmount(14000));
+        Lottoes lottoes = lottoNumberGenerator.create(14_000);
 
         //Then
         assertThat(lottoes.getValue().size()).isEqualTo(14);
@@ -40,7 +40,8 @@ class LottoNumberGeneratorTest {
         String numbers = "1, 2, 3, 4, 5, 6";
 
         //When
-        List<Integer> lottoNumbers = lottoNumberGenerator.create(numbers).stream()
+        List<Integer> lottoNumbers = lottoNumberGenerator.create(numbers).getValue()
+                .stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 
