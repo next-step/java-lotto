@@ -1,5 +1,7 @@
 package step2.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -9,13 +11,15 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static int[] inputWinNumber() {
+    public static List<Integer> inputWinNumber() {
+        List<Integer> numbers = new ArrayList<>();
+
         sc.nextLine();
         String[] winNumbers = sc.nextLine().split(", ");
-        int[] parseWinNumbers = new int[winNumbers.length];
+
         for (int i = 0; i < winNumbers.length; i++) {
-            parseWinNumbers[i] = Integer.parseInt(winNumbers[i]);
+            numbers.add(Integer.parseInt(winNumbers[i]));
         }
-        return parseWinNumbers;
+        return numbers;
     }
 }

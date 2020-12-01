@@ -7,9 +7,9 @@ import java.util.List;
 public class LottoResult {
     private static List<Rank> ranks = new ArrayList<>();
 
-    public LottoResult(int[] winNumber, List<Lotto> buyLottoList) {
+    public LottoResult(WinningLotto winningLotto, List<Lotto> buyLottoList) {
         for (Lotto lotto : buyLottoList) {
-            addRank(match(winNumber, lotto));
+            addRank(match(winningLotto, lotto));
         }
     }
 
@@ -23,9 +23,9 @@ public class LottoResult {
         }
     }
 
-    private static int match(int[] winNumbers, Lotto lotto) {
+    private static int match(WinningLotto winningLotto, Lotto lotto) {
         int matchCount = 0;
-        for (int winNumber : winNumbers) {
+        for (LottoNumber winNumber : winningLotto.getWinningNumber()) {
             matchCount += lotto.contains(winNumber) ? 1 : 0;
         }
         return matchCount;

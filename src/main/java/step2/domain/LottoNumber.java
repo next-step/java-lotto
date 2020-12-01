@@ -6,4 +6,8 @@ public class LottoNumber {
     public LottoNumber(int number) {
         this.number = number;
     }
+
+    public int getNumber() {
+        return this.number;
+    }
 }
