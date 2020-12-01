@@ -4,6 +4,7 @@ import step2.domain.Lotto;
 import step2.domain.LottoResult;
 import step2.domain.Rank;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class ResultView {
         }
     }
 
-    public static void printTotalRevenue(double totalRevenue) {
+    public static void printTotalRevenue(BigDecimal totalRevenue) {
         printMessage("총 수익률은 " + totalRevenue + "입니다.");
     }
 }

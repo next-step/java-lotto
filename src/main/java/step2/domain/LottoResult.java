@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,11 @@ public class LottoResult {
         return matchCount;
     }
 
-    public double getTotalRevenue(int purchasePrice) {
+    public BigDecimal getTotalRevenue(int purchasePrice) {
         double total = 0;
         for (Rank rank : ranks) {
             total += rank.getWinPrice();
         }
-        return (total / purchasePrice);
+        return new BigDecimal(total / purchasePrice).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 }
