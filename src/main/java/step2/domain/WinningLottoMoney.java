@@ -22,7 +22,7 @@ public class WinningLottoMoney {
         boolean isContainsBonusNumber = lotto.isContainsBonusNumber(winningLottoNumber.getBonusNumber());
 
         LottoRank lottoRank = LottoRank.valueOf(matchNumberCount, isContainsBonusNumber);
-        if (lottoRank != null) {
+        if (lottoRank == null) {
             return;
         }
         Integer winningCount = this.winningLottoResult.get(lottoRank);

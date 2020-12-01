@@ -42,7 +42,7 @@ class LottoStoreTest {
 
     @Test
     @DisplayName("숫자가 아닌 값이나 로또 범위를 초과하는 값을 입력할 경우 Exception이 발생한다.")
-    void initWinNumbes_isNotNumberAndisNotLottoNumber_Exception() {
+    void initWinningNumber_isNotNumberAndIsNotLottoNumber_Exception() {
         LottoStore lottoStore = new LottoStore();
         List<Integer> list = Arrays.asList(0,1,2,3,5,46);
 
@@ -59,15 +59,5 @@ class LottoStoreTest {
         
         lottoStore.initWinNumbers(list);
         assertThat(lottoStore.getWinNumbers().size()).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("보너스 숫자를 추가로 입력받는다.")
-    void addBonusNumber() {
-        LottoStore lottoStore = new LottoStore();
-        lottoStore.addBonusNumber(1);
-
-        assertThat(lottoStore.getBonusNumber()).isEqualTo(1);
-
     }
 }

@@ -10,7 +10,7 @@ class LottoRankTest {
     @Test
     @DisplayName("LottoRank valueOf 테스트")
     void LottoRank_valueOf_TEST() {
-        LottoRank one = LottoRank.valueOf(6, true);
+        LottoRank one = LottoRank.valueOf(6, false);
         assertThat(one).isEqualTo(LottoRank.ONE);
 
         LottoRank two = LottoRank.valueOf(5, true);

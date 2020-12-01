@@ -19,6 +19,7 @@ class WinningLottoMoneyTest {
         Lotto lotto = new Lotto(list);
         SoldLotto soldLotto = new SoldLotto(lotto);
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
+        winningLottoNumber.addBonusNumber(10);
         WinningLottoMoney winningLottoMoney = new WinningLottoMoney(soldLotto, winningLottoNumber);
 
         assertThat(winningLottoMoney).isNotNull();
@@ -32,6 +33,7 @@ class WinningLottoMoneyTest {
         Lotto lotto = new Lotto(list);
         SoldLotto soldLotto = new SoldLotto(lotto);
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
+        winningLottoNumber.addBonusNumber(10);
         WinningLottoMoney winningLottoMoney = new WinningLottoMoney(soldLotto, winningLottoNumber);
 
         Fee fee = new Fee(1000);

@@ -43,7 +43,4 @@ public class LottoStore {
         this.winningLottoNumber.addBonusNumber(bonusNumber);
     }
 
-    public boolean getBonusNumber() {
-        return false;
-    }
 }
