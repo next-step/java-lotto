@@ -31,4 +31,8 @@ public class Lotto {
     public boolean isContains(Integer winNumber) {
         return this.numbers.contains(winNumber);
     }
+
+    public boolean isContainsBonusNumber(int bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
 }

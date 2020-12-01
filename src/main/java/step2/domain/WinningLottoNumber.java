@@ -63,4 +63,8 @@ public class WinningLottoNumber {
     private boolean isContainsWinningNumber(int bonusNumber) {
         return this.winningNumbers.contains(bonusNumber);
     }
+
+    public int getBonusNumber() {
+        return this.bonusNumber.getNumber();
+    }
 }
