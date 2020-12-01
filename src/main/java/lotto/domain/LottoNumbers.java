@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import lotto.constant.ErrorMessage;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     public static final int NUMBER_RANGE = 6;
+    public static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     private final List<LottoNumber> value;
 
@@ -16,27 +15,8 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(String winningNumbers) {
-        value = new LottoNumberGenerator().create(winningNumbers);
-        valid(value);
+        value = lottoNumberGenerator.create(winningNumbers);
     }
-
-    private void valid(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
-        }
-
-        if (isExistsDuplicateNumber(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_DUPLICATED);
-        }
-    }
-
-    private boolean isExistsDuplicateNumber(List<LottoNumber> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getValue)
-                .distinct()
-                .count() != NUMBER_RANGE;
-    }
-
 
     public Rank getRank(LottoNumbers lottoNumbers) {
 

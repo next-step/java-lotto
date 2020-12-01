@@ -52,12 +52,19 @@ public class LottoNumberGenerator {
     }
 
     public List<LottoNumber> create(String numbers) {
-        validEmpty(numbers);
-        return splitString(numbers).stream()
+        List<LottoNumber> lotto = splitString(numbers).stream()
                 .map(Integer::parseInt)
                 .map(lottoNumbers::get)
                 .collect(Collectors.toList());
+        valid(lotto);
+        return lotto;
     }
+
+    private List<String> splitString(String value) {
+        validEmpty(value);
+        return Arrays.asList(value.replace(BLANK, DELETE_BLANK).split(DEFAULT_SEPARATOR));
+    }
+
 
     private void validEmpty(String value) {
         if (value == null || value.trim().isEmpty()) {
@@ -65,9 +72,21 @@ public class LottoNumberGenerator {
         }
     }
 
+    private void valid(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.WINNING_NUMBER_ERROR);
+        }
 
-    private List<String> splitString(String value) {
-        return Arrays.asList(value.replace(BLANK, DELETE_BLANK).split(DEFAULT_SEPARATOR));
+        if (isExistsDuplicateNumber(numbers)) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_DUPLICATED);
+        }
+    }
+
+    private boolean isExistsDuplicateNumber(List<LottoNumber> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .distinct()
+                .count() != NUMBER_RANGE;
     }
 
 

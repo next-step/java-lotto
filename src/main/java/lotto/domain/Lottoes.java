@@ -18,13 +18,13 @@ public class Lottoes {
     }
 
     public LottoGameResult getResult(LottoNumbers winningNumbers) {
-        List<Rank> collect = value.stream()
+        List<Rank> ranks = value.stream()
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
         int purchaseAmount = value.size() * Lotto.PRICE;
 
-        return new LottoGameResult(collect, new PurchaseAmount(purchaseAmount));
+        return new LottoGameResult(ranks, new PurchaseAmount(purchaseAmount));
 
     }
 }
