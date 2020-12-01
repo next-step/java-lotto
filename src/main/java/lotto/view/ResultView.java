@@ -7,6 +7,7 @@ import lotto.domain.Reward;
 
 import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ResultView {
@@ -19,7 +20,10 @@ public class ResultView {
 
     public static void outputLottos(Lottos lottos) {
         IntStream.range(0, lottos.quantity())
-                .forEach(i -> System.out.println(lottos.getLotto(i)));
+                .forEach(i -> System.out.println(lottos.getLotto(i).stream()
+                                                            .map(lottonumber -> lottonumber.getNumber())
+                                                            .sorted()
+                                                            .collect(Collectors.toList())));
     }
 
     public static void outputPrizeStatistics(Reward reward) {
