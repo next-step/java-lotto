@@ -7,12 +7,12 @@ public class LottoRankCollector {
 
     private final List<LottoRank> rankList;
 
-    public LottoRankCollector(List<Lotto> lottoList, Lotto winnerLotto, LottoNumber bonusNumber) {
+    public LottoRankCollector(List<Lotto> lottoList, WinningLotto winningLotto) {
 
         rankList = new ArrayList<>();
 
         for (Lotto lotto : lottoList) {
-            rankList.add(LottoRank.matchCount(lotto.matchCount(winnerLotto)));
+            rankList.add(winningLotto.getRank(lotto));
         }
     }
 

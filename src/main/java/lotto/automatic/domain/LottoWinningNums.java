@@ -21,11 +21,7 @@ public class LottoWinningNums {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return nums;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public WinningLotto getWinningLotto() {
+        return new WinningLotto(new Lotto(nums), bonusNumber);
     }
 }
