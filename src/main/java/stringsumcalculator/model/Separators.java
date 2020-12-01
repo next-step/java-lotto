@@ -15,8 +15,8 @@ public class Separators {
     }
 
     public Separators(String string){
-        String pattern = "//(.*?)\\\\n";
-        Matcher matcher = Pattern.compile(pattern).matcher(string);
+        final String PATTERN = "//(.*?)\\\\n";
+        Matcher matcher = Pattern.compile(PATTERN).matcher(string);
 
         separators.add(new Separator(","));
         separators.add(new Separator(":"));

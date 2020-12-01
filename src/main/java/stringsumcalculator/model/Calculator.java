@@ -10,8 +10,8 @@ public class Calculator {
 
         if( inputString.isEmpty() ) inputString = "0";
 
-        String pattern = "(//.*\\\\n)(.*)";
-        Matcher matcher = Pattern.compile(pattern).matcher(inputString);
+        final String PATTERN = "(//.*\\\\n)(.*)";
+        Matcher matcher = Pattern.compile(PATTERN).matcher(inputString);
         Separators separators = new Separators();
         String stringOprands = inputString;
 
