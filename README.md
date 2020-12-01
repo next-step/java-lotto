@@ -116,6 +116,9 @@
   
 - 수동 구현  
   - [x] 수동구매 개수 입력
+    - [x] `Round`로 포장 (SeedMoney 에서 round() 반환값도 `Round`로)
   - 구매번호 입력
   - 자동+수동 generate 확인 
   - LottoNumberSet 자체를 set으로만 써보기..?
+  - `Application` 추가
+  - `controller` try-catch, 로거 추가
