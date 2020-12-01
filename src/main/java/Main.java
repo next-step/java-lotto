@@ -1,9 +1,9 @@
-import step1.StringAddCalculatorMain;
+import step2.LottoMain;
 
 public class Main {
 
     public static void main(String[] args) {
-        StringAddCalculatorMain stringAddCalculatorMain = new StringAddCalculatorMain();
-        stringAddCalculatorMain.run();
+        LottoMain lottoMain = new LottoMain();
+        lottoMain.run();
     }
 }
