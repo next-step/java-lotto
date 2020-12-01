@@ -19,7 +19,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         for (ProfitRule p :lottoResult.getResult().keySet()) {
-            System.out.println(p.getDesc() + "(" + p.getProfit() + ")" + ": " + lottoResult.getResult().get(p));
+            System.out.println(p.getMatchingScore() + "개 일치 (" + p.getProfit() + ")" + ": " + lottoResult.getResult().get(p));
         }
         System.out.println("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다.");
     }

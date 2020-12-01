@@ -9,7 +9,6 @@ public class LottoResult {
     private final Map<ProfitRule, Integer> result;
     private int profit;
     private final int payment;
-    private double profitRatio;
 
     public LottoResult(int lottoTickets) {
         this.payment = lottoTickets * PRICE;
@@ -24,7 +23,7 @@ public class LottoResult {
     }
 
     public double getProfitRatio() {
-        return profitRatio;
+        return (double) profit / payment;
     }
 
     public void saveLottoResult(long matchingScore) {
@@ -33,9 +32,5 @@ public class LottoResult {
             result.put(profitRule, result.get(profitRule) + 1);
             profit += profitRule.getProfit();
         }
-    }
-
-    public void calculateProfitRatio() {
-        profitRatio = (double) profit / payment;
     }
 }

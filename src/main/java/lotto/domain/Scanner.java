@@ -20,7 +20,6 @@ public class Scanner {
     public LottoResult scanAll(List<LottoTicket> lottoTickets) {
         lottoResult = new LottoResult(lottoTickets.size());
         lottoTickets.forEach(this::scan);
-        lottoResult.calculateProfitRatio();
         return lottoResult;
     }
 }
