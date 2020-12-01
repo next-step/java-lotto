@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
     public static final int NUMBER_RANGE = 6;
-    public static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     private final List<LottoNumber> value;
 
