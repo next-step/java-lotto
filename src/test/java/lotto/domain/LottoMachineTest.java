@@ -22,7 +22,7 @@ public class LottoMachineTest {
         Lotto lotto = machine.createLotto(LOTTO_FIX_SIZE);
 
         //Then
-        assertThat(lotto.getLottoNumbers()).hasSize(6);
+        assertThat(lotto.getLottoNumbers()).hasSize(LOTTO_FIX_SIZE);
         assertThat(lotto.getLottoNumbers()).contains(LottoNumber.from(1), LottoNumber.from(3), LottoNumber.from(5),
                                                     LottoNumber.from(6), LottoNumber.from(7), LottoNumber.from(8));
     }
