@@ -118,4 +118,4 @@
   - 수동구매 개수 입력
   - 구매번호 입력
   - 자동+수동 generate 확인 
-
+  - LottoNumberSet 자체를 set으로만 써보기..?

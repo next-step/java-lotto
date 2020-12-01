@@ -12,18 +12,23 @@ public class WinningStatistics {
 
     private Map<WinningRank, Integer> stats;
 
-    private WinningStatistics(Map<WinningRank, Integer> stats) {
-        this.stats = new TreeMap<>(stats);
+    private WinningStatistics(TreeMap<WinningRank, Integer> stats) {
+        this.stats = stats;
     }
 
     public static WinningStatistics from(Map<WinningRank, Long> beforeStats) {
-        Map<WinningRank, Integer> stats = Arrays.stream(WinningRank.values())
-                .collect(toMap(Function.identity()
-                        , winningRank -> Math.toIntExact(
-                                Optional.ofNullable(beforeStats.get(winningRank))
-                                        .orElse(0L))));
+        TreeMap<WinningRank, Integer> stats = Arrays.stream(WinningRank.values())
+                .collect(toMap(Function.identity(),
+                        convertToIntFunction(beforeStats),
+                        (count1, count2) -> count1,
+                        TreeMap::new));
 
         return new WinningStatistics(stats);
+    }
+
+    private static Function<WinningRank, Integer> convertToIntFunction(Map<WinningRank, Long> beforeStats) {
+        return winningRank -> Math.toIntExact(Optional.ofNullable(beforeStats.get(winningRank))
+                                                    .orElse(0L));
     }
 
     private int sumWinningResult() {
