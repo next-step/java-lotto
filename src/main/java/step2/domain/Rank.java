@@ -1,28 +1,30 @@
 package step2.domain;
 
 public enum Rank {
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    ZERO(0, 0, "꽝"),
+    FOURTH(3, 5000, "3개 일치"),
+    THIRD(4, 50000, "4개 일치"),
+    SECOND(5, 1500000, "5개 일치"),
+    FIRST(6, 2000000000, "6개 일치");
 
     private int matchCount;
     private int winPrice;
+    private String message;
 
-    Rank(int matchCount, int winPrice) {
+    Rank(int matchCount, int winPrice, String message) {
         this.matchCount = matchCount;
         this.winPrice = winPrice;
+        this.message = message;
     }
 
     public static Rank rank(int matchCount) {
-        // stream 으로 줄일 수 있음
         Rank[] ranks = values();
         for (Rank rank : ranks) {
             if (rank.matchCount == matchCount) {
                 return rank;
             }
         }
-        return null;
+        return ZERO;
     }
 
     public int getMatchCount() {
@@ -31,5 +33,9 @@ public enum Rank {
 
     public int getWinPrice() {
         return this.winPrice;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 }
