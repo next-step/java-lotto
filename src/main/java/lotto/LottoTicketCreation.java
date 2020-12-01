@@ -9,7 +9,6 @@ public class LottoTicketCreation implements LottoTicketCreatable {
     @Override
     public LottoTicket createTicket() {
         List<Integer> ticket = createTicketNumber();
-        validateSize(ticket);
         Collections.sort(ticket);
 
         return new LottoTicket(ticket);
@@ -24,11 +23,5 @@ public class LottoTicketCreation implements LottoTicketCreatable {
         }
 
         return ticket;
-    }
-
-    private void validateSize(List<Integer> ticket) {
-        if (ticket.size() != 6) {
-            throw new IllegalArgumentException(Message.VALIDATION_LOTTO_NUMBER_SIZE_MESSAGE);
-        }
     }
 }
