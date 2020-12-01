@@ -22,11 +22,12 @@ public class Main {
         String resultString = InputView.getResultNumber();
         List<Integer> ResultNumberList = getResultNumberList(resultString);
         // 로또 결과 확인
-        for (Lotto lotto : lottos.getLottoList()){
-            Statistic.recordResult(lotto.checkReward(ResultNumberList));
-        }
+        lottos.checkResult(ResultNumberList);
+
+        // 결과 입력
+        Statistic.recordResult(lottos);
         // 결과 출력
-        ResultView.printResult(money);
+        ResultView.printResult(lottos, money);
     }
 
     public static List<Integer> getResultNumberList(String resultString) {

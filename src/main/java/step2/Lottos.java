@@ -11,12 +11,18 @@ public class Lottos {
             buyLotto(lottoGenerator);
         }
     }
+    public void checkResult(List<Integer> result) {
+        for (Lotto lotto: this.lottoList) {
+            lotto.checkReward(result);
+        }
+    }
 
     private void buyLotto(Generator lottoGenerator){
         lottoList.add(new Lotto(lottoGenerator));
     }
+
     public int getLottoCnt(int money) {
-        return money/1000;
+        return money / 1000;
     }
 
     public List<Lotto> getLottoList(){

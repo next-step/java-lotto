@@ -1,23 +1,20 @@
 package step2;
 
-import java.util.List;
-
 public class Statistic {
-    public static final Integer[] rewardList = {5000, 50000, 1500000, 2000000000};
-    public static final Integer[] results = {0, 0, 0, 0};
+    public static Integer[] results = {0, 0, 0, 0, 0, 0};
 
     public static float getMargin(int money) {
         float totalReward = 0;
-        for (int i = 0; i < rewardList.length; i++) {
-            totalReward += rewardList[i] * results[i];
+        for (int i = 3; i <= 6; i++) {
+            totalReward += RewardBoard.getReward(i).getReward() * results[i-1];
         }
-
         return totalReward/money;
     }
 
-    public static void recordResult(int winningNumber) {
-        if (winningNumber > 2) {
-            results[winningNumber - 3] += 1;
+    public static void recordResult(Lottos lottos) {
+        results = new Integer[]{0, 0, 0, 0, 0, 0};
+        for (Lotto lotto : lottos.getLottoList()) {
+            results[lotto.getWinningCnt()] += 1;
         }
     }
 }

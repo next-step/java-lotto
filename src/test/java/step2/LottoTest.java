@@ -33,7 +33,8 @@ public class LottoTest {
         for (String i : resultInput.split(", ")) {
             result.add(Integer.parseInt(i));
         }
+        lotto.checkReward(result);
 
-        assertThat(lotto.checkReward(result)).isEqualTo(3);
+        assertThat(lotto.getWinningCnt()).isEqualTo(3);
     }
 }

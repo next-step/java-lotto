@@ -26,13 +26,10 @@ public class StaticticTest {
 
         int money = 6500;
         Lottos lottos = new Lottos(money, fourWinningsGenerator);
-
-        for (Lotto lotto : lottos.getLottoList()) {
-            Statistic.recordResult(lotto.checkReward(result));
-        }
+        lottos.checkResult(result);
 
         int lottoCnt = money/1000;
-        int fourWinningReward = Statistic.rewardList[1];
+        int fourWinningReward = RewardBoard.getReward(4).getReward();
         int totalReward = lottoCnt*fourWinningReward;
         assertThat(Statistic.getMargin(money)).isEqualTo((float)totalReward/money);
     }
