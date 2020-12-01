@@ -34,7 +34,7 @@ public class Lotto {
                 .filter(prizeLotto::matchLottoNumber)
                 .count();
         boolean isBonusball = matchBonusball(prizeLotto);
-        return PrizeInformation.findByPrizePrice(MatchStatus.of(matchCount, isBonusball));
+        return PrizeInformation.findByMatchStatus(MatchStatus.of(matchCount, isBonusball));
     }
 
     private boolean matchBonusball(PrizeLotto prizeLotto) {

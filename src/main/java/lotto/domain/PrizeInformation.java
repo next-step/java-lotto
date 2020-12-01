@@ -26,7 +26,7 @@ public enum PrizeInformation {
         this.prizePrice = prizePrice;
     }
 
-    public static PrizeInformation findByPrizePrice(MatchStatus matchStatus){
+    public static PrizeInformation findByMatchStatus(MatchStatus matchStatus){
         return matchByPrice.get(matchStatus);
     }
 

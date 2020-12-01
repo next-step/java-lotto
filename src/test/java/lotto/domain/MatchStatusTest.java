@@ -72,7 +72,7 @@ public class MatchStatusTest {
         MatchStatus matchStatus = MatchStatus.of(matchCount, isBonusball);
 
         //When
-        PrizeInformation prizeInformation = PrizeInformation.findByPrizePrice(matchStatus);
+        PrizeInformation prizeInformation = PrizeInformation.findByMatchStatus(matchStatus);
 
         //Then
         assertThat(prizeInformation.getMatchStatus()).isEqualTo(matchStatus);
