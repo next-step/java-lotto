@@ -17,12 +17,12 @@ public class PrizeTest {
 
     @BeforeEach
     public void init() {
-        winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,7,8)),
-                new Lotto(Arrays.asList(1,2,3,9,10,11)),
-                new Lotto(Arrays.asList(1,2,3,12,13,14))
+                new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)),
+                new Lotto(Arrays.asList(1, 2, 3, 9, 10, 11)),
+                new Lotto(Arrays.asList(1, 2, 3, 12, 13, 14))
         );
 
         lottoes = new Lottoes(lottoList);
