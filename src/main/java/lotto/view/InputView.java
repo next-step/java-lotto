@@ -21,6 +21,8 @@ public class InputView {
 
     public static final String EMPTY = "";
 
+    protected static final String COMMA = ",";
+
     private final Scanner scanner;
 
     private final PaidValidator paidValidator;
@@ -41,7 +43,7 @@ public class InputView {
     public Lotto inputWinningNumbers() {
         String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
         return new Lotto(
-                Arrays.stream(winningNumbers.split(BLANK))
+                Arrays.stream(winningNumbers.split(COMMA))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );
