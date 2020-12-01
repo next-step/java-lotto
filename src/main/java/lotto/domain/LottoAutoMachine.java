@@ -1,18 +1,20 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class LottoAutoMachine implements LottoMachine {
 
     @Override
     public Lotto createLotto(int capacity) {
-        List<Integer> numbers = ProviderLottoNumbers.findAllLottoNumbers();
+        List<Integer> numbers = LottoNumber.findAllLottoNumbers();
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.stream()
-                .limit(capacity)
-                .collect(Collectors.toCollection(TreeSet::new)));
+        return Lotto.of(numbers.stream()
+                    .limit(capacity)
+                    .collect(Collectors.toCollection(HashSet::new)));
     }
 
 
