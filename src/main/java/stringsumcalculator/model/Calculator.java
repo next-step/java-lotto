@@ -8,7 +8,7 @@ public class Calculator {
 
     public static int calculate(String inputString){
 
-        if( inputString.isEmpty() ) {
+        if ( inputString.isEmpty() ) {
             inputString = "0";
         }
 
@@ -17,7 +17,7 @@ public class Calculator {
         Separators separators = new Separators();
         String stringOprands = inputString;
 
-        if( matcher.find() ) {
+        if ( matcher.find() ) {
             separators = new Separators(matcher.group(1));
             stringOprands = matcher.group(2);
         }

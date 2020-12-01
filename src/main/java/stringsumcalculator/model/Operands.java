@@ -13,11 +13,11 @@ public class Operands {
 
     public Operands(String stringOperands, Separators separators){
 
-        if(stringOperands.contains("-")){
+        if (stringOperands.contains("-")){
             throw new NegativeNumberException("음수는 피연산자로 사용할 수 없습니다");
         }
 
-        for(String stringOperand : stringOperands.split(makeStringSeparator(separators))){
+        for (String stringOperand : stringOperands.split(makeStringSeparator(separators))){
             operands.add(new Operand(Integer.parseInt(stringOperand)));
         }
 
