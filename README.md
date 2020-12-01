@@ -105,3 +105,17 @@
    
   - [x] 당첨번호+보너스볼 질문은 InputView로
 
+----
+
+### step4
+- [ ] 피드백 반영
+  - WinningStatistics `from` 수정
+  - LottoNumber `compare` 간결하게
+  - WinningRank 사용하지 않은 변수 삭제
+  - WinningNumber unmodifiable 컬렉션 이중으로 호출 X
+  
+- 수동 구현  
+  - 수동구매 개수 입력
+  - 구매번호 입력
+  - 자동+수동 generate 확인 
+
