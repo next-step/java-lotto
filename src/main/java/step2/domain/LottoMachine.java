@@ -1,18 +1,21 @@
 package step2.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
     private final int PRICE = 1000;
-    private static final List<Integer> TOTAL_NUMBERS = Arrays.asList(
-            1,2,3,4,5,6,7,8,9,10,
-            11,12,13,14,15,16,17,18,19,20,
-            21,22,23,24,25,26,27,28,29,30,
-            31,32,33,34,35,36,37,38,39,40,
-            41,42,43,44,45);
+    private static final List<Integer> lottoNumbers;
+
+    static {
+        lottoNumbers = new ArrayList<>();
+        IntStream.rangeClosed(1, 45)
+                .boxed().distinct().forEach(lottoNumbers::add);
+    }
 
     private Lotto createLottoNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>(this.TOTAL_NUMBERS);
         Collections.shuffle(lottoNumbers);
         List<Integer> extractionLottoNumbers = lottoNumbers.subList(0, 6);
         Collections.sort(extractionLottoNumbers);
