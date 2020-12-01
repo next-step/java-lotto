@@ -24,9 +24,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos of(Lottos auto, Lottos manual) {
+    public static Lottos of(Lottos manual, Lottos auto) {
         return new Lottos(Stream
-                .concat(auto.list().stream(), manual.list().stream())
+                .concat(manual.list().stream(), auto.list().stream())
                 .collect(toList()));
     }
 
