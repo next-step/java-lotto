@@ -17,10 +17,10 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return new StringAddCalculator().calc(text);
+        return calc(text);
     }
 
-    private int calc(String text) {
+    private static int calc(String text) {
         String delim = DEFAULT_NUMBER_DELIM;
         String expr = text;
 
@@ -33,13 +33,13 @@ public class StringAddCalculator {
         return new StringAddCalculator().sum(parseIntoIntegerList(delim, expr));
     }
 
-    private List<Integer> parseIntoIntegerList(String delim, String expr) {
+    private static List<Integer> parseIntoIntegerList(String delim, String expr) {
         return Arrays.stream(expr.split(delim))
                 .map(token -> Integer.parseInt(token))
                 .collect(Collectors.toList());
     }
 
-    public int sum(List<Integer> numbers) {
+    private static int sum(List<Integer> numbers) {
         if (numbers.stream().anyMatch(number -> number < 0)) {
             throw new ArithmeticException("number should not be negative");
         }
