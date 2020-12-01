@@ -1,6 +1,8 @@
 package lotto.automatic;
 
 import lotto.automatic.domain.*;
+import lotto.automatic.dto.LottoBuyingMoney;
+import lotto.automatic.dto.LottoWinningNums;
 import lotto.automatic.view.InputView;
 import lotto.automatic.view.OutputView;
 

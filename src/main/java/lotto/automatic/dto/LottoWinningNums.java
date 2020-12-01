@@ -1,4 +1,8 @@
-package lotto.automatic.domain;
+package lotto.automatic.dto;
+
+import lotto.automatic.domain.Lotto;
+import lotto.automatic.domain.LottoNumber;
+import lotto.automatic.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;

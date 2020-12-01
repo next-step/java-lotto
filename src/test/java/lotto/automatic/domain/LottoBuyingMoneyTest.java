@@ -1,5 +1,6 @@
 package lotto.automatic.domain;
 
+import lotto.automatic.dto.LottoBuyingMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

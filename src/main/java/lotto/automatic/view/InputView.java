@@ -1,7 +1,7 @@
 package lotto.automatic.view;
 
-import lotto.automatic.domain.LottoBuyingMoney;
-import lotto.automatic.domain.LottoWinningNums;
+import lotto.automatic.dto.LottoBuyingMoney;
+import lotto.automatic.dto.LottoWinningNums;
 
 import java.util.Scanner;
 
