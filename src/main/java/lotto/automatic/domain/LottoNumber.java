@@ -1,18 +1,21 @@
 package lotto.automatic.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class LottoNumber implements Comparable {
 
     private static final int MAX_LOTTO_NUM = 45;
     private static final int MIN_LOTTO_NUM = 1;
-    private static final List<LottoNumber> lottoNums = IntStream.rangeClosed(1, 45)
-            .mapToObj(LottoNumber::new)
-            .collect(toList());
+    private static final Map<Integer,LottoNumber> lottoNums = IntStream.rangeClosed(MIN_LOTTO_NUM, MAX_LOTTO_NUM)
+            .boxed()
+            .collect(toMap(Function.identity(),LottoNumber::new));
 
     private final int number;
 
@@ -23,13 +26,14 @@ public class LottoNumber implements Comparable {
 
     public static LottoNumber of(int number) {
         validate(number);
-        return lottoNums.get(number - 1);
+        return lottoNums.get(number);
     }
 
     public static List<LottoNumber> random(int amount) {
 
-        Collections.shuffle(lottoNums);
-        return lottoNums.subList(0, amount);
+        List<LottoNumber> nums = new ArrayList(lottoNums.values());
+        Collections.shuffle(nums);
+        return nums.subList(0, amount);
     }
 
     private static void validate(int number) {

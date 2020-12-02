@@ -30,7 +30,7 @@ public class LottoController {
         outputView.printLottoList(lottoList);
 
         WinningLotto winningLotto = getWinningLotto();
-        List<LottoRank> lottoRankList = getMatchedLottoRanks(lottoList, winningLotto);
+        List<LottoRank> lottoRankList = winningLotto.getRankList(lottoList);
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
@@ -39,10 +39,6 @@ public class LottoController {
 
     private LottoResult getResult(LottoBuyingMoney lottoBuyingMoney, List<LottoRank> lottoRankList) {
         return lottoGame.getLottoResult(lottoBuyingMoney.getInvestMoney(), lottoRankList);
-    }
-
-    private List<LottoRank> getMatchedLottoRanks(List<Lotto> lottoList, WinningLotto winningLottoNums) {
-        return lottoGame.getLottoRank(lottoList, winningLottoNums);
     }
 
     private WinningLotto getWinningLotto() {

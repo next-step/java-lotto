@@ -23,9 +23,4 @@ public class LottoGame {
         return new LottoResult(investMoney, rankList);
     }
 
-    public List<LottoRank> getLottoRank(List<Lotto> lottoList, WinningLotto winningLotto) {
-        LottoRankCollector collector = new LottoRankCollector(lottoList, winningLotto);
-
-        return collector.getRankList();
-    }
 }

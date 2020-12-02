@@ -22,7 +22,6 @@ public class WinningLotto {
 
     private List<LottoNumber> parseString(String rawNumberString) {
         String[] numberStrings = rawNumberString.split(",");
-
         List<LottoNumber> nums = new ArrayList<>();
 
         for (String numString : numberStrings) {
@@ -51,4 +50,14 @@ public class WinningLotto {
         return LottoRank.match(lotto.matchCount(winningLotto), lotto.contain(bonusNumber));
     }
 
+    public List<LottoRank> getRankList(List<Lotto> lottoList) {
+
+        List<LottoRank> rankList = new ArrayList<>();
+
+        for (Lotto lotto : lottoList) {
+            rankList.add(getRank(lotto));
+        }
+
+        return rankList;
+    }
 }
