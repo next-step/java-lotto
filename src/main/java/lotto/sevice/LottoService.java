@@ -1,16 +1,18 @@
 package lotto.sevice;
 
+import lotto.domain.LottoList;
+
 public class LottoService {
 
-    public void lottoGame(){
+    public LottoList lottoGame(LottoList lottoList, int[] winningNumbers){
+        
+    }
+
+    public LottoList issueLotto(int money){
 
     }
 
-    public void IssueLotto(){
-
-    }
-
-    public void checkLotto(){
+    public LottoList checkLotto(){
 
     }
 }
