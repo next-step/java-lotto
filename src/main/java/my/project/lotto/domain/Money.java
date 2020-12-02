@@ -9,13 +9,17 @@ public class Money {
     private final int money;
 
     public Money(int money) {
-        if (money < PRICE) {
-            throw new IllegalArgumentException("구입금액은 " + PRICE + "원 이상입니다.");
-        }
+        validate(money);
         this.money = money;
     }
 
+    private void validate(int money) {
+        if (money < PRICE) {
+            throw new IllegalArgumentException("구입금액은 " + PRICE + "원 이상입니다.");
+        }
+    }
     public int getChances() {
         return this.money / PRICE;
     }
+
 }

@@ -1,9 +1,10 @@
 package my.project.lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,73 +15,69 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * Developer : Seo
  */
 class LottoTest {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    @DisplayName("6개의 번호여야 한다.")
-    @Test
-    void shouldHaveParamSixDigit_OtherwiseThrowException() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 한 장은 6개 번호입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
+    @BeforeEach
+    void setUp() {
+        lottoNumbers.add(LottoNumber.valueOf(1));
+        lottoNumbers.add(LottoNumber.valueOf(2));
+        lottoNumbers.add(LottoNumber.valueOf(3));
+        lottoNumbers.add(LottoNumber.valueOf(4));
+        lottoNumbers.add(LottoNumber.valueOf(5));
     }
 
-    @DisplayName("중복된 번호가 있어선 안된다.")
-    @Test
-    void shouldNotBeDuplicated() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 5);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 한 장은 6개 번호입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("번호는 0보다 크고")
-    @Test
-    void shouldBeGreaterThanZero() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 0);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 번호는 1과 45 사이입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("번호는 46보다 작다")
-    @Test
-    void shouldBeLessThan46() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 47);
-        assertThatThrownBy(() -> new Lotto(lotto))
-                .hasMessage("로또 번호는 1과 45 사이입니다.")
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
+    @DisplayName("정상")
     @Test
     void testConstructor() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto).isNotNull();
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        assertThat(new Lotto(lottoNumbers)).isNotNull();
     }
 
+    @DisplayName("6개 번호")
     @Test
-    void testMatch() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.FIRST);
+    void shouldHaveParamSixDigit_OtherwiseThrowException() {
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("중복 방지")
     @Test
-    void testMatch_2nd() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(winningLotto, 7)).isEqualTo(Rank.SECOND);
+    void shouldNotBeDuplicated() {
+        lottoNumbers.add(LottoNumber.valueOf(5));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void testContains() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(1)).isTrue();
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.contains(LottoNumber.valueOf(7))).isFalse();
     }
 
     @Test
-    void testToString() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.toString())
-                .hasToString("[ 1, 2, 3, 4, 5, 6 ]");
+    void testContainsCount() {
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        List<LottoNumber> lastWinningNumber = new ArrayList<>();
+        lastWinningNumber.add(LottoNumber.valueOf(1));
+        lastWinningNumber.add(LottoNumber.valueOf(2));
+        lastWinningNumber.add(LottoNumber.valueOf(3));
+        lastWinningNumber.add(LottoNumber.valueOf(4));
+        lastWinningNumber.add(LottoNumber.valueOf(5));
+        lastWinningNumber.add(LottoNumber.valueOf(6));
+        Lotto winningLotto = new Lotto(lastWinningNumber);
+
+        assertThat(lotto.count(winningLotto)).isEqualTo(6);
     }
+
+    @Test
+    void testToNumbers() {
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto.toNumbers()).isEqualTo("[ 1, 2, 3, 4, 5, 6 ]");
+    }
+
 }

@@ -1,34 +1,37 @@
 package my.project.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final String LOTTO_NUMBER_IS_BETWEEN = "로또 번호는 1과 45 사이입니다.";
 
-/**
- * Created : 2020-11-27 오후 2:16
- * Developer : Seo
- */
-public class LottoNumber {
-    private static final List<Integer> numbers = new ArrayList<>();
+    private final int number;
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private LottoNumber(int number) {
+        this.number = number;
+    }
 
-    static {
-        for (int i = MIN_NUMBER; i < MAX_NUMBER + 1; i++) {
-            numbers.add(i);
+    public static LottoNumber valueOf(int number) {
+        validate(number);
+        return new LottoNumber(number);
+    }
+
+    private static void validate(int number) {
+        if (number < LOTTO_MIN_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
+        }
+        if (number > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_IS_BETWEEN);
         }
     }
 
-    public static Lotto generate() {
-        Collections.shuffle(numbers);
-        List<Integer> lotto = new ArrayList<>();
-        for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
-            lotto.add(numbers.get(i));
-        }
-        return new Lotto(lotto);
+    public int getNumber() {
+        return this.number;
     }
 
-    private LottoNumber() {
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
+
 }

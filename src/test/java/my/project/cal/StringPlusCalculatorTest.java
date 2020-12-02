@@ -70,10 +70,7 @@ class StringPlusCalculatorTest {
     void givenNegative_thenThrowException() {
         assertThatThrownBy(() -> spc.sumStringByDelimiter("-1,2:3"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("음수가 포함되어 있습니다.")
-                .hasMessageStartingWith("음수")
-                .hasMessageContaining("포함되어")
-                .hasMessageEndingWith("있습니다.")
+                .hasMessage("0 혹은 음수가 포함되어 있습니다.")
                 .hasStackTraceContaining("CalException");
     }
 

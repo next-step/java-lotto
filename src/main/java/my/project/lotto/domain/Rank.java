@@ -23,23 +23,25 @@ public enum Rank {
     }
 
     public static Rank rank(int matchCount, boolean matchBonus) {
-        if (matchCount > FIRST.matchCount) {
-            throw new IllegalArgumentException(Lotto.LOTTO_NUMBERS_HAVE_SIX);
-        }
+        validate(matchCount);
+
         if (SECOND.matchCount(matchCount) && matchBonus) {
             return SECOND;
         }
         if (THIRD.matchCount(matchCount) && !matchBonus) {
             return THIRD;
         }
-        if (matchCount < FIFTH.matchCount) {
-            return NO_RANK;
-        }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount(matchCount))
                 .findFirst()
                 .orElse(NO_RANK);
+    }
+
+    private static void validate(int matchCount) {
+        if (matchCount > FIRST.matchCount) {
+            throw new IllegalArgumentException(Lotto.LOTTO_NUMBERS_HAVE_SIX);
+        }
     }
 
     private boolean matchCount(int matchCount) {
