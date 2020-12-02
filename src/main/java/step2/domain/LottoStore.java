@@ -11,7 +11,7 @@ public class LottoStore {
     private WinningLottoMoney winningLottoMoney;
 
     public List<Lotto> buy(int fee) {
-        this.fee = new Fee(fee);
+        this.fee = Fee.getInstance(fee);
         int buyCount = this.fee.getBuyCount();
 
         return buyLotto(buyCount);
@@ -38,4 +38,9 @@ public class LottoStore {
     public List<Integer> getWinNumbers() {
         return this.winningLottoNumber.getNumbers();
     }
+
+    public void addBonusNumber(int bonusNumber) {
+        this.winningLottoNumber.addBonusNumber(bonusNumber);
+    }
+
 }

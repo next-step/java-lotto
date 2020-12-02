@@ -36,4 +36,8 @@ public class LottoController {
     public BigDecimal findBenefit() {
         return lottoStore.findBenefit();
     }
+
+    public void addBonusNumber(int bonusNumber) {
+        lottoStore.addBonusNumber(bonusNumber);
+    }
 }

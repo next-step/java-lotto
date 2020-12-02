@@ -1,7 +1,5 @@
 package step2.view;
 
-import step2.domain.LottoConstant;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,5 +47,10 @@ public class InputView {
         } catch (Exception e) {
             throw new RuntimeException("숫자가 입력되지 않았습니다.");
         }
+    }
+
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 }

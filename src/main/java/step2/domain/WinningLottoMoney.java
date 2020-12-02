@@ -13,8 +13,21 @@ public class WinningLottoMoney {
     public WinningLottoMoney(SoldLotto soldLotto, WinningLottoNumber winningLottoNumber) {
         initWinningLottoResult();
         for (Lotto lotto : soldLotto.getSoldLotto()) {
-            findMoney(winningLottoNumber.findIsMatchNumberCount(lotto));
+            findMoney(winningLottoNumber, lotto);
         }
+    }
+
+    private void findMoney(WinningLottoNumber winningLottoNumber, Lotto lotto) {
+        long matchNumberCount = winningLottoNumber.findIsMatchNumberCount(lotto);
+        boolean isContainsBonusNumber = lotto.isContainsBonusNumber(winningLottoNumber.getBonusNumber());
+
+        LottoRank lottoRank = LottoRank.valueOf(matchNumberCount, isContainsBonusNumber);
+        if (lottoRank == LottoRank.ZERO) {
+            return;
+        }
+
+        Integer winningCount = this.winningLottoResult.get(lottoRank);
+        this.winningLottoResult.put(lottoRank, ++winningCount);
     }
 
     private void initWinningLottoResult() {
@@ -22,16 +35,8 @@ public class WinningLottoMoney {
         this.winningLottoResult.put(LottoRank.TWO, ZERO);
         this.winningLottoResult.put(LottoRank.THREE, ZERO);
         this.winningLottoResult.put(LottoRank.FOUR, ZERO);
-    }
-
-    private void findMoney(long winNumberCount) {
-        Optional<LottoRank> rank = LottoRank.findRank(winNumberCount);
-        if (!rank.isPresent()) {
-            return;
-        }
-
-        Integer winningCount = this.winningLottoResult.get(rank.get());
-        this.winningLottoResult.put(rank.get(), ++winningCount);
+        this.winningLottoResult.put(LottoRank.FIVE, ZERO);
+        this.winningLottoResult.put(LottoRank.ZERO, ZERO);
     }
 
     public Map<LottoRank, Integer> getWinningLottoMoney() {
@@ -40,6 +45,7 @@ public class WinningLottoMoney {
 
     public BigDecimal findBenefitByFee(Fee fee) {
         long benefitMoney = 0;
+
         for (LottoRank rank : LottoRank.values()) {
             benefitMoney += findWinningMoney(rank);
         }

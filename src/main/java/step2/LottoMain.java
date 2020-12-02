@@ -25,6 +25,7 @@ public class LottoMain {
     public void run() {
         buyLotto();
         initWinNumber();
+        addBonusNumber();
         findLottoResult();
         findBenefit();
     }
@@ -38,6 +39,11 @@ public class LottoMain {
     private void initWinNumber() {
         List<Integer> winningNumbersValue = inputView.getWinNumbers();
         lottoController.initWinNumbers(winningNumbersValue);
+    }
+
+    private void addBonusNumber() {
+        int bonusNumber = inputView.getBonusNumber();
+        lottoController.addBonusNumber(bonusNumber);
     }
 
     private void findLottoResult() {

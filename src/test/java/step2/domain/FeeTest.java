@@ -10,14 +10,13 @@ class FeeTest {
     @Test
     @DisplayName(value = "Fee 생성 테스트")
     void create() {
-        Fee fee = new Fee(1000);
-
+        Fee fee = Fee.getInstance(1000);
         assertThat(fee).isNotNull();
     }
 
     @Test
     @DisplayName(value = "천원보다 낮은 금액을 입력하면 IllegalArgumentException 발생함.")
     void lessMoney_shouldIllegalArgumentException() {
-        assertThatThrownBy(() -> new Fee(999)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Fee.getInstance(999)).isInstanceOf(IllegalArgumentException.class);
     }
 }
