@@ -37,12 +37,13 @@ public class LottoGenerator {
     public static Lottos generate(SeedMoney seedMoney, InputManualLotto inputManualLotto) {
         int totalRounds = seedMoney.round();
         int manualRounds = inputManualLotto.getRound();
+        int autoRounds = totalRounds - manualRounds;
 
         List<Lotto> manual = manualLotto(inputManualLotto);
-        List<Lotto> auto = automateLotto(totalRounds - manualRounds);
+        List<Lotto> auto = automateLotto(autoRounds);
 
-        return Lottos.of(Stream.concat(manual.stream(), auto.stream())
-                               .collect(toList()));
+        return Lottos.of(Stream.concat(manual.stream(), auto.stream()).collect(toList())
+                    , manualRounds, autoRounds);
     }
 
     private static List<Lotto> manualLotto(InputManualLotto inputManualLotto) {
