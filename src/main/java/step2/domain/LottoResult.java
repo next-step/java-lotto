@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,10 @@ public class LottoResult {
         for (Rank rank : ranks) {
             total += rank.getWinPrice();
         }
-        return new BigDecimal(total / purchasePrice).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        BigDecimal reword = BigDecimal.valueOf(total);
+        BigDecimal amount = BigDecimal.valueOf(purchasePrice);
+
+        return reword.divide(amount, 2, RoundingMode.FLOOR);
     }
 }
