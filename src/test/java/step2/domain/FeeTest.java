@@ -11,7 +11,6 @@ class FeeTest {
     @DisplayName(value = "Fee 생성 테스트")
     void create() {
         Fee fee = Fee.getInstance(1000);
-
         assertThat(fee).isNotNull();
     }
 
