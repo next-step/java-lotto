@@ -45,7 +45,7 @@ public class InputView {
         return new Lotto(
                 Arrays.stream(winningNumbers.split(COMMA))
                         .map(Integer::parseInt)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toSet())
         );
     }
 

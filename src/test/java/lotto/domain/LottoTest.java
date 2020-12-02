@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ public class LottoTest {
 
     @BeforeEach
     public void initLotto() {
-        lotto = new Lotto(Arrays.asList(6, 4, 3, 2, 5, 1));
+        lotto = new Lotto(new HashSet<>(Arrays.asList(1, 5, 4, 3, 6, 2)));
     }
 
     @Test
@@ -30,9 +31,6 @@ public class LottoTest {
     @Test
     @DisplayName("로또 정렬 테스트")
     public void sortTest() {
-
-        // when
-        lotto.sort();
 
         // then
         assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
