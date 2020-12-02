@@ -6,33 +6,22 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    public static int calculate(String inputString){
+    public static int calculate(String inputString) {
 
-        if ( inputString.isEmpty() ) {
-            inputString = "0";
-        }
-
-        final String PATTERN = "(//.*\\\\n)(.*)";
-        Matcher matcher = Pattern.compile(PATTERN).matcher(inputString);
-        Separators separators = new Separators();
-        String stringOprands = inputString;
-
-        if ( matcher.find() ) {
-            separators = new Separators(matcher.group(1));
-            stringOprands = matcher.group(2);
-        }
-
-        return sum(new Operands(stringOprands, separators));
-    }
-
-    public static int sum(Operands operands){
         int result = 0;
+
+        if (inputString.isEmpty()) {
+            return 0;
+        }
+
+        Separators separators = new Separators(inputString);
+        String formula = separators.getFormula();
+        Operands operands = new Operands(formula, separators);
+
         for (int i = 0; i < operands.getCount(); i++) {
-            result += operands.getOperand(i).getValue();
+            result += operands.getOperand(i);
         }
 
         return result;
     }
-
-
 }
