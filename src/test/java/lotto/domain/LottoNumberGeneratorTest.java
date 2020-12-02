@@ -53,9 +53,11 @@ class LottoNumberGeneratorTest {
     @ParameterizedTest
     @DisplayName("빈 문자열을 받으면 Exception을 throw 한다.")
     @ValueSource(strings = {"", " "})
-    void should_throw_illegal_argument_exception(String numbers) {
+    void should_throw_illegal_argument_exception_when_is_blank(String numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> lottoNumberGenerator.create(numbers))
                 .withMessage(ErrorMessage.WINNING_NUMBER_ERROR);
     }
+
+
 }

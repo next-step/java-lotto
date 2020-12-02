@@ -8,6 +8,7 @@ public class LottoGameResult {
 
     private static final int FIFTH_MATCHING_COUNT = 2;
     private static final double TWO_DECIMAL_PLACES = 100.0;
+    //TODO 일급 컬렉션
     private final List<Rank> ranks;
     private final PurchaseAmount purchaseAmount;
 

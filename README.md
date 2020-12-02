@@ -93,6 +93,8 @@ utils.Calculator
 29. Lottoes의 getter로 인한 정보 노출 수정
 30. Lottoes, Rank, LottoNumber 테스트 코드 작성
 31. 코드 정리
+32. 보너스볼을 입력 받아 당첨 결과 출력
+
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
 

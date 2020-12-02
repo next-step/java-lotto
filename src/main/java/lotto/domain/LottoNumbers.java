@@ -16,22 +16,6 @@ public class LottoNumbers {
         this.value = value;
     }
 
-    public Rank getRank(LottoNumbers lottoNumbers) {
-
-        int matchingNumberCount = (int) value.stream()
-                .filter(lottoNumber -> lottoNumbers.getIntegerValues()
-                        .contains(lottoNumber.getValue()))
-                .count();
-
-        return Rank.value(matchingNumberCount);
-    }
-
-    public List<Integer> getIntegerValues() {
-        return value.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList());
-    }
-
     public List<LottoNumber> getValue() {
         return value;
     }
@@ -53,5 +37,10 @@ public class LottoNumbers {
                 .count() != NUMBER_RANGE;
     }
 
-
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return value.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList())
+                .contains(lottoNumber.getValue());
+    }
 }
