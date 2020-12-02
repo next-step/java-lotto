@@ -6,6 +6,7 @@ import lotto.domain.winning.WinningNumber;
 import lotto.domain.winning.WinningRank;
 import lotto.domain.winning.WinningStatistics;
 
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -13,18 +14,22 @@ import java.util.Map;
  */
 public class ResultView {
 
-    private static final String MESSAGE_STATISTICS = "당첨 통계";
+    private static final String MESSAGE_STATISTICS = "\n당첨 통계";
     private static final String RESULT_STATISTICS = "%d개 일치 (%d원)";
     private static final String RESULT_STATISTICS_SECOND = "%d개 일치, 보너스볼 일치 (%d원)";
     private static final String RESULT_NUMBER = "- %d개";
     private static final String EARNING_RATIO = "총 수익률은 %.2f입니다.";
     private static final String DASH = "----------";
+    private static final String SHOW_GAME_ROUNDS = "\n수동으로 %d장, 자동으로 %d장을 구매했습니다.";
 
     public static void showBoughtLottos(Lottos lottos) {
+        showGameRounds(lottos.getManualRound(), lottos.getAutomatedRound());
         lottos.list().forEach(lotto -> System.out.println(lotto.number()));
-        System.out.println();
     }
 
+    private static void showGameRounds(int manualRound, int autoRound) {
+        System.out.println(String.format(SHOW_GAME_ROUNDS, manualRound, autoRound));
+    }
 
     public static void showResults(WinningStatistics winningStatistics, int amount) {
         simpleResultMessage();
@@ -33,14 +38,15 @@ public class ResultView {
     }
 
     private static void simpleResultMessage() {
-        System.out.println();
         System.out.println(MESSAGE_STATISTICS);
         System.out.println(DASH);
     }
 
     private static void showStatistics(WinningStatistics winningStatistics) {
         Map<WinningRank, Integer> resultStats = winningStatistics.stats();
-        resultStats.keySet().stream().filter(stats -> stats!=WinningRank.NONE)
+        resultStats.keySet().stream()
+                .sorted(Comparator.comparing(WinningRank::getRank).reversed())
+                .filter(stats -> stats!=WinningRank.NONE)
                 .forEach(winningRank -> {
                     printEachRank(winningRank);
                     printEachNumber(resultStats.get(winningRank));

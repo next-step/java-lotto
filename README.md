@@ -128,3 +128,5 @@
   - [x] LottoGenerator Lottos로 인스턴스 두번 생성하지 말고 리스트 합쳐서 넘기기
   - [x] WinningStatistics 프린트 시 정렬방법 변경 
   
+- 추가 구현
+  - [x] 수동구매/자동구매 개수 보여주는 ResultView 작성

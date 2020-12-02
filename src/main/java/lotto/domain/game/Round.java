@@ -24,6 +24,11 @@ public class Round {
         return new Round(round);
     }
 
+    public static Round from(int inputRound) {
+        checkPositive(inputRound);
+        return new Round(inputRound);
+    }
+
     public int getRound() {
         return this.round;
     }

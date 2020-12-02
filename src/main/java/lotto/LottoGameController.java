@@ -21,7 +21,7 @@ public class LottoGameController {
 
     public static void main(String[] args) {
 
-        SeedMoney seedMoney = InputView.askAndShowLottoGameMoney();
+        SeedMoney seedMoney = InputView.askSeedMoney();
 
         InputManualLotto inputManualLotto = InputView.askManualRoundsAndLottos();
 
