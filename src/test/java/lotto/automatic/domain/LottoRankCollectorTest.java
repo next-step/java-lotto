@@ -95,8 +95,6 @@ class LottoRankCollectorTest {
 
         List<LottoRank> rankList = collector.getRankList();
 
-        System.out.println(rankList.toString());
-
         assertThat(rankList.contains(LottoRank.SECOND)).isTrue();
 
     }
