@@ -2,8 +2,12 @@ package lotto;
 
 public class Statistics {
 
+//    private final int[] statisticsCount;
     private final int[] statisticsCount;
 
+//    public Statistics(int[] statisticsCount) {
+//        this.statisticsCount = statisticsCount;
+//    }
     public Statistics(int[] statisticsCount) {
         this.statisticsCount = statisticsCount;
     }
@@ -18,7 +22,7 @@ public class Statistics {
         } else if (winningCount == Message.SIX_WINNING) {
             statisticsCount[3]++;
         }
-        
+
         return new Statistics(statisticsCount);
     }
 

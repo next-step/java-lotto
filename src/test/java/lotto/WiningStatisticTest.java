@@ -18,6 +18,7 @@ class WiningStatisticTest {
         List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicket lottoTicket = LottoTicket.newTicket(ticket);
         List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
+        int purchaseAmount = 10000;
 
         // when
         int purchaseNumber = 2;
@@ -41,7 +42,7 @@ class WiningStatisticTest {
         WinningCounts winningCounts = new WinningCounts().calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
 
         // when
-        WinningStatistic winningStatistic = new WinningStatistic(winningCounts);
+        WinningStatistic winningStatistic = new WinningStatistic(winningCounts, purchaseAmount);
 
         // then
         assertThat(winningStatistic.getStatisticsCount(0)).isEqualTo(2);

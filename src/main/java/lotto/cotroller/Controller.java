@@ -19,9 +19,8 @@ public class Controller {
         WinningCounts winningCounts = new WinningCounts()
                 .calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
 
-        WinningStatistic winningStatistic = new WinningStatistic(winningCounts);
-        double rateOfReturn = RateOfReturn.calculateRateOfReturn(winningStatistic, purchaseAmount);
+        WinningStatistic winningStatistic = new WinningStatistic(winningCounts, purchaseAmount);
 
-        ResultView.outputWinningStatistic(winningStatistic, rateOfReturn);
+        ResultView.outputWinningStatistic(winningStatistic);
     }
 }

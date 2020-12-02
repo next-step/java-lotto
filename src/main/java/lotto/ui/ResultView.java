@@ -28,10 +28,10 @@ public class ResultView {
         }
     }
 
-    public static void outputWinningStatistic(WinningStatistic winningStatistic, double rateOfReturn) {
+    public static void outputWinningStatistic(WinningStatistic winningStatistic) {
         printWinningsStatisticsMessage();
         printWinningsCount(winningStatistic);
-        printRateOfReturn(rateOfReturn);
+        printRateOfReturn(winningStatistic);
     }
 
 
@@ -48,7 +48,7 @@ public class ResultView {
         System.out.println(SIX_WINNINGS_AMOUNT_MESSAGE + winningStatistic.getStatisticsCount(3));
     }
 
-    private static void printRateOfReturn(double rateOfReturn) {
-        System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
+    private static void printRateOfReturn(WinningStatistic winningStatistic) {
+        System.out.println("총 수익률은 " + winningStatistic.getRateOfReturn() + "입니다.");
     }
 }
