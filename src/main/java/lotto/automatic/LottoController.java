@@ -1,8 +1,10 @@
 package lotto.automatic;
 
-import lotto.automatic.domain.*;
+import lotto.automatic.domain.Lotto;
+import lotto.automatic.domain.LottoRank;
+import lotto.automatic.domain.LottoResult;
+import lotto.automatic.domain.WinningLotto;
 import lotto.automatic.dto.LottoBuyingMoney;
-import lotto.automatic.dto.LottoWinningNums;
 import lotto.automatic.view.InputView;
 import lotto.automatic.view.OutputView;
 
@@ -27,8 +29,8 @@ public class LottoController {
 
         outputView.printLottoList(lottoList);
 
-        LottoWinningNums winningLottoNums = getWinningNumbers();
-        List<LottoRank> lottoRankList = getMatchedLottoRanks(lottoList, winningLottoNums.getWinningLotto());
+        WinningLotto winningLotto = getWinningLotto();
+        List<LottoRank> lottoRankList = getMatchedLottoRanks(lottoList, winningLotto);
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
@@ -43,7 +45,7 @@ public class LottoController {
         return lottoGame.getLottoRank(lottoList, winningLottoNums);
     }
 
-    private LottoWinningNums getWinningNumbers() {
+    private WinningLotto getWinningLotto() {
         return inputView.getWinningLottoNums();
     }
 

@@ -1,7 +1,7 @@
 package lotto.automatic.view;
 
+import lotto.automatic.domain.WinningLotto;
 import lotto.automatic.dto.LottoBuyingMoney;
-import lotto.automatic.dto.LottoWinningNums;
 
 import java.util.Scanner;
 
@@ -13,12 +13,12 @@ public class InputView {
         return new LottoBuyingMoney(money);
     }
 
-    public LottoWinningNums getWinningLottoNums() {
+    public WinningLotto getWinningLottoNums() {
 
         String rawNumberString = getString("지난 주 당첨 번호를 입력해 주세요.");
         int bonusNumber = getInt("보너스 볼을 입력해주세요.");
 
-        return new LottoWinningNums(rawNumberString, bonusNumber);
+        return new WinningLotto(rawNumberString, bonusNumber);
     }
 
     private int getInt(String message) {
