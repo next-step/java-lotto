@@ -6,22 +6,25 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank{
-    FIRST(6,2_000_000_000),
-    SECOND(5,3_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4,50_000),
-    FIFTH(3,5_000),
-    NO_MATCH(0,0);
+    FIRST(6,false, 2_000_000_000),
+    SECOND(5,true,3_000_000),
+    THIRD(5, false,1_500_000),
+    FOURTH(4,false,50_000),
+    FIFTH(3,false,5_000),
+    NO_MATCH(0,false,0);
 
 
     private final int winningCount;
+    private final boolean matchBonus;
     private final int money;
 
 
-    Rank(int winningCount, int money){
+    Rank(int winningCount, boolean matchBonus, int money){
 
         this.winningCount = winningCount;
+        this.matchBonus = matchBonus;
         this.money = money;
+
     }
 
     public static Map<Rank,Integer> getInitWinningStatics(){
@@ -38,18 +41,19 @@ public enum Rank{
             return NO_MATCH;
         }
 
-        if(winningCount == 6 && matchBonus){
+        /*if(winningCount == 6 && matchBonus){
             return SECOND;
-        }
+        }*/
 
         return Arrays.stream(values())
-                .filter(rank -> rank.isWinningCount(winningCount))
+                .filter(rank -> rank.isWinningCount(winningCount, matchBonus))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    private boolean isWinningCount(int winningCount){
-        return this.winningCount == winningCount;
+    private boolean isWinningCount(int winningCount, boolean matchBonus){
+        return (this.winningCount == winningCount && this.matchBonus == matchBonus);
+
     }
 
     public int getWinningCount(){
