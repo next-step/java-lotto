@@ -32,4 +32,16 @@ public class PaidValidatorTest {
     public void inputNotMultipleNumberTest() {
         ValidatorUtils.assertValidation(validator, "1001", PaidValidator.NOT_MULTIPLE_MESSAGE);
     }
+
+    @Test
+    @DisplayName("null 값 테스트")
+    public void inputNullTest() {
+        ValidatorUtils.assertValidation(validator, null, Validator.INPUT_NULL_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("빈 문자열 테스트")
+    public void inputEmptyTest() {
+        ValidatorUtils.assertValidation(validator, Validator.EMPTY, Validator.INPUT_EMPTY_MESSAGE);
+    }
 }
