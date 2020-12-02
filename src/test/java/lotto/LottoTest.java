@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoStatics;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -40,5 +41,20 @@ public class LottoTest {
     @Test
     void createLottoNumberTest() {
         assertThat(LottoGenerator.generateLottoNumber().size()).isEqualTo(6);
+    }
+
+    /**
+     * LottoStatics class Test
+     */
+    @Test
+    void setLottoStaticsTest() {
+        LottoStatics.setLottoStatics(3L);
+        assertThat(LottoStatics.THREE.getCount()).isEqualTo(1);
+    }
+
+    @Test
+    void getWinningPrizeTest() {
+        LottoStatics.setLottoStatics(4L);
+        assertThat(LottoStatics.getWinningPrize()).isEqualTo(50000);
     }
 }

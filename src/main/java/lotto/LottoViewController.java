@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,12 @@ import java.util.List;
 public class LottoViewController {
 
     private final static int LOTTO_PRICE = 1000;
+    private final static int MIN_WINNING_COUNT = 3;
 
     private final InputView inputView;
     private final ResultView resultView;
     private final List<Lotto> lottos = new ArrayList<>();
+    private int purchasePrice = 0;
 
     public LottoViewController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
@@ -28,11 +31,21 @@ public class LottoViewController {
         lottos.addAll(LottoFactory.createLotto(count));
         showLottoNumbers(count);
 
+        this.purchasePrice = purchasePrice;
+
         inputView.inputLastWeekWinningNumbers(this);
     }
 
     public void setLastWeekWinningNumbers(String input) {
         lottos.forEach(lotto -> lotto.checkMatchingNumbers(LottoFactory.getLastWeekWinningNumbers(input)));
+        lottos.stream()
+                .map(Lotto::getMatchCnt)
+                .filter(count -> count >= MIN_WINNING_COUNT)
+                .forEach(LottoStatics::setLottoStatics);
+
+        resultView.showWinStatics(
+                LottoStatics.values(),
+                (double) LottoStatics.getWinningPrize() / purchasePrice);
     }
 
     private void showLottoNumbers(int count) {
