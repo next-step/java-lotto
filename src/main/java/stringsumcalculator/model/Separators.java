@@ -7,9 +7,10 @@ import java.util.regex.Pattern;
 
 public class Separators {
 
+    private static final String REGEX = "//(.)\\\\n(.*)";
+    private static final Pattern pattern = Pattern.compile(REGEX);
+
     private final List<Separator> separators = new ArrayList<>();
-    private final String REGEX = "//(.)\\\\n(.*)";
-    private final Pattern pattern = Pattern.compile(REGEX);
     private String formula;
 
     public Separators(String string){
