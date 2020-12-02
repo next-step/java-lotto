@@ -1,15 +1,18 @@
 package step2.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
-    FIVE(3, 5000L),
-    FOUR(4, 50000L),
+    FIVE(3, 5_000L),
+    FOUR(4, 50_000L),
     THREE(5, 150_000L),
     TWO(5, 30_000_000L),
-    ONE(6, 2_000_000_000L);
+    ONE(6, 2_000_000_000L),
+    ZERO(0, 0L);
 
     private final long number;
     private final long money;
@@ -20,30 +23,21 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(long countOfMatch, boolean matchBonus) {
-        Optional<LottoRank> rank = findRank(countOfMatch);
-        if (!rank.isPresent()) {
-            return null;
-        }
-
-        LottoRank lottoRank = rank.get();
-        if (isWinningTwo(lottoRank, matchBonus)) {
+        if (isTwo(countOfMatch, matchBonus)) {
             return LottoRank.TWO;
         }
-        return lottoRank;
+
+        return findRank(countOfMatch);
     }
 
-    private static boolean isWinningTwo(LottoRank lottoRank, boolean matchBonus) {
-        return lottoRank.isTwo(matchBonus);
+    private static boolean isTwo(long countOfMatch, boolean matchBonus) {
+        return countOfMatch == LottoRank.TWO.getNumber() && matchBonus;
     }
 
-    private boolean isTwo(boolean matchBonus) {
-        return this == LottoRank.THREE && matchBonus;
-    }
-
-    public static Optional<LottoRank> findRank(long winNumberCount) {
+    public static LottoRank findRank(long winNumberCount) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> isSameNumber(lottoRank, winNumberCount))
-                .findAny();
+                .findFirst().orElse(ZERO);
     }
 
     private static boolean isSameNumber(LottoRank lottoRank, long winNumberCount) {

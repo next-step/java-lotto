@@ -22,9 +22,10 @@ public class WinningLottoMoney {
         boolean isContainsBonusNumber = lotto.isContainsBonusNumber(winningLottoNumber.getBonusNumber());
 
         LottoRank lottoRank = LottoRank.valueOf(matchNumberCount, isContainsBonusNumber);
-        if (lottoRank == null) {
+        if (lottoRank == LottoRank.ZERO) {
             return;
         }
+
         Integer winningCount = this.winningLottoResult.get(lottoRank);
         this.winningLottoResult.put(lottoRank, ++winningCount);
     }
@@ -35,6 +36,7 @@ public class WinningLottoMoney {
         this.winningLottoResult.put(LottoRank.THREE, ZERO);
         this.winningLottoResult.put(LottoRank.FOUR, ZERO);
         this.winningLottoResult.put(LottoRank.FIVE, ZERO);
+        this.winningLottoResult.put(LottoRank.ZERO, ZERO);
     }
 
     public Map<LottoRank, Integer> getWinningLottoMoney() {
@@ -43,6 +45,7 @@ public class WinningLottoMoney {
 
     public BigDecimal findBenefitByFee(Fee fee) {
         long benefitMoney = 0;
+
         for (LottoRank rank : LottoRank.values()) {
             benefitMoney += findWinningMoney(rank);
         }

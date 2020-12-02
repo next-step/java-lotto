@@ -57,7 +57,7 @@ public class WinningLottoNumber {
             throw new IllegalArgumentException("당첨번호와 겹치지 않는 숫자를 입력하세요.");
         }
 
-        this.bonusNumber = new BonusNumber(bonusNumber);
+        this.bonusNumber = BonusNumber.getInstance(bonusNumber);
     }
 
     private boolean isContainsWinningNumber(int bonusNumber) {

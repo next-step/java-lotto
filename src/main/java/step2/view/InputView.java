@@ -1,7 +1,5 @@
 package step2.view;
 
-import step2.domain.LottoConstant;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
