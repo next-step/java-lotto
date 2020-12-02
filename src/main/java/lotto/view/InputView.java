@@ -1,5 +1,5 @@
 package lotto.view;
 
-public class ResultView {
+public class InputView {
     
 }
