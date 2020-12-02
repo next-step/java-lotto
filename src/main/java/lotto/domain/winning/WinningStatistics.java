@@ -2,6 +2,8 @@ package lotto.domain.winning;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -12,17 +14,16 @@ public class WinningStatistics {
 
     private Map<WinningRank, Integer> stats;
 
-    private WinningStatistics(TreeMap<WinningRank, Integer> stats) {
+    private WinningStatistics(Map<WinningRank, Integer> stats) {
         this.stats = stats;
     }
 
     public static WinningStatistics from(Map<WinningRank, Long> beforeStats) {
-        TreeMap<WinningRank, Integer> stats = Arrays.stream(WinningRank.values())
-                .collect(toMap(Function.identity(),
-                        convertToIntFunction(beforeStats),
-                        (count1, count2) -> count1,
-                        TreeMap::new));
-
+        Map<WinningRank, Integer> stats = Arrays.stream(WinningRank.values())
+                .collect(toMap(
+                        Function.identity(),
+                        convertToIntFunction(beforeStats)
+                ));
         return new WinningStatistics(stats);
     }
 

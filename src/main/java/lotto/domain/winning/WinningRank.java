@@ -7,20 +7,22 @@ import java.util.Arrays;
  */
 public enum WinningRank {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0)
+    FIRST(6, 2_000_000_000, 1),
+    SECOND(5, 30_000_000, 2),
+    THIRD(5, 1_500_000, 3),
+    FOURTH(4, 50_000, 4),
+    FIFTH(3, 5_000, 5),
+    NONE(0, 0, 6)
     ;
 
     private int matchCount;
     private int prize;
+    private int rank;
 
-    WinningRank(int matchCount, int prize) {
+    WinningRank(int matchCount, int prize, int rank) {
         this.matchCount = matchCount;
         this.prize = prize;
+        this.rank = rank;
     }
 
     public static WinningRank getWinningRank(int matchCount, boolean bonusBall) {
@@ -47,6 +49,10 @@ public enum WinningRank {
 
     public int getPrize() {
         return prize;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
 }
