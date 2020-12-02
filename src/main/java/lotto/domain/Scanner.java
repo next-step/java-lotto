@@ -12,8 +12,8 @@ public class Scanner {
     }
 
     private void scan(LottoTicket lottoTicket) {
-        long matchingScore = lottoTicket.getNumbers().stream()
-                        .filter(n -> winningNumbers.contains(n)).count();
+        long matchingScore = lottoTicket.getLottoNumbers().stream()
+                        .filter(n -> winningNumbers.contains(n.toInt())).count();
         lottoResult.saveLottoResult(matchingScore);
     }
 

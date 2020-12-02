@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public void printLottoTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.getNumbers().toString()));
+        lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers().toString()));
     }
 
     public void printLottoResult(LottoResult lottoResult) {

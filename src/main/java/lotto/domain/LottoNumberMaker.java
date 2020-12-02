@@ -7,21 +7,20 @@ import java.util.stream.Collectors;
 
 public class LottoNumberMaker {
 
-    private static final int LOTTO_NUMBER_BOUND = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private static final List<Integer> lottoNumbers;
+    private static final List<Integer> lottoNumberSource;
 
     static {
-        lottoNumbers = new ArrayList();
-        for (int i = 1; i <= LOTTO_NUMBER_BOUND ; i++) {
-            lottoNumbers.add(i);
+        lottoNumberSource = new ArrayList();
+        for (int i = LottoNumber.LOTTO_MIN; i <= LottoNumber.LOTTO_MAX ; i++) {
+            lottoNumberSource.add(i);
         }
     }
 
     public static List<Integer> makeNewNumbers() {
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream()
+        Collections.shuffle(lottoNumberSource);
+        return lottoNumberSource.stream()
                 .limit(LOTTO_NUMBER_SIZE)
                 .sorted()
                 .collect(Collectors.toList());

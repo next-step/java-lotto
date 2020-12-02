@@ -1,16 +1,27 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(","))
+                +"]";
     }
 }
