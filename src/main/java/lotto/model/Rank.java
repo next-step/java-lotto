@@ -41,10 +41,6 @@ public enum Rank{
             return NO_MATCH;
         }
 
-        /*if(winningCount == 6 && matchBonus){
-            return SECOND;
-        }*/
-
         return Arrays.stream(values())
                 .filter(rank -> rank.isWinningCount(winningCount, matchBonus))
                 .findFirst()
