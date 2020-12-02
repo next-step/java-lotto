@@ -1,3 +1,5 @@
+package string.calculator;
+
 public class PositiveNumber {
 
     private final int positiveNum;

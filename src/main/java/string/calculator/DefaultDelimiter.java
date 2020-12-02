@@ -1,3 +1,5 @@
+package string.calculator;
+
 public final class DefaultDelimiter {
 
     private static final String DEFAULT_DELIMITER = "[,:]";

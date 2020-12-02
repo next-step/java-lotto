@@ -1,3 +1,5 @@
+package string.calculator;
+
 public class StringAddCalculator {
 
     public static int calculate(String input) {

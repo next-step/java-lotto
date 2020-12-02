@@ -1,4 +1,9 @@
+package string.calculator;
+
 import org.junit.jupiter.api.Test;
+import string.calculator.CalculatorUtils;
+import string.calculator.CustomDelimiter;
+import string.calculator.DefaultDelimiter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
