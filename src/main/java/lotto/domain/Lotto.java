@@ -1,31 +1,21 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import lotto.LottoMachine;
-import lotto.RandomUtils;
+import lotto.NumberPool;
 
 public class Lotto {
 
     private final Set<Integer> numbers;
 
-    public Lotto(Set<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<Integer> numbers) {
+        this.numbers = new TreeSet<>(numbers);
     }
 
     public Lotto() {
-        this.numbers = generateRandomNumbers();
-    }
-
-    public Set<Integer> generateRandomNumbers() {
-        Set<Integer> numbers = new TreeSet<>();
-
-        while (numbers.size() < LottoMachine.LOTTO_SIZE) {
-            numbers.add(RandomUtils.nextInt());
-        }
-
-        return numbers;
+        this.numbers = NumberPool.getLottoNumbers();
     }
 
     public Set<Integer> getNumbers() {

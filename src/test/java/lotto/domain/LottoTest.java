@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,7 @@ public class LottoTest {
 
     @BeforeEach
     public void initLotto() {
-        lotto = new Lotto(new HashSet<>(Arrays.asList(1, 5, 4, 3, 6, 2)));
+        lotto = new Lotto(Arrays.asList(1, 5, 4, 3, 6, 2));
     }
 
     @Test
