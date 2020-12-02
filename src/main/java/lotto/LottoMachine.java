@@ -31,6 +31,7 @@ public class LottoMachine {
         Lotto winningLotto = inputView.inputWinningNumbers();
         WinningRecord record = new WinningRecord(winningLotto);
         record.record(lottoes);
+
         outputView.showStatistics(record, purchaseCount * PAY);
     }
 }

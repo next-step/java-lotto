@@ -3,7 +3,8 @@ package lotto.view;
 import lotto.domain.EarnRate;
 import lotto.domain.Lotto;
 import lotto.domain.Lottoes;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
+import lotto.domain.WinningRecord;
 
 public class OutputView {
 
@@ -23,22 +24,22 @@ public class OutputView {
         }
     }
 
-    public void showStatistics(int purchaseCount) {
+    public void showStatistics(WinningRecord record, int paid) {
         System.out.println(STATISTICS_MESSAGE);
-        showMatchingCount();
-        showEarningRate(purchaseCount);
+        showMatchingCount(record);
+        showEarnRate(record, paid);
     }
 
-    protected void showMatchingCount() {
-        for (Prize prize : Prize.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", prize.getMatchCount()
-                    , prize.getPrize()
-                    , prize.getPrizeCount());
+    protected void showMatchingCount(WinningRecord winningRecord) {
+        for (Rank rank : Rank.values()) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount()
+                    , rank.getPrize()
+                    , winningRecord.getMatchCount(rank.getMatchCount()));
         }
     }
 
-    protected void showEarningRate(int purchaseAmount) {
-        double earnRate = Prize.calculateEarningRate(purchaseAmount);
-        System.out.printf(EARN_RATE_MESSAGE, earnRate, EarnRate.getExplanationMessage(earnRate));
+    private void showEarnRate(WinningRecord record, int paid) {
+        double earn = record.calculateEarnRate(paid);
+        System.out.printf(EARN_RATE_MESSAGE, earn, EarnRate.getExplanationMessage(earn));
     }
 }
