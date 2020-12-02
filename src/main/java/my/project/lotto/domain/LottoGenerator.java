@@ -1,7 +1,5 @@
 package my.project.lotto.domain;
 
-import my.project.lotto.dto.LottoNumber;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,14 +9,11 @@ import java.util.List;
  * Developer : Seo
  */
 public class LottoGenerator {
-    private static final List<Integer> numbers = new ArrayList<>();
-
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final List<LottoNumber> numbers = new ArrayList<>();
 
     static {
-        for (int i = MIN_NUMBER; i < MAX_NUMBER + 1; i++) {
-            numbers.add(i);
+        for (int i = LottoNumber.LOTTO_MIN_NUMBER; i < LottoNumber.LOTTO_MAX_NUMBER + 1; i++) {
+            numbers.add(LottoNumber.valueOf(i));
         }
     }
 
@@ -26,7 +21,7 @@ public class LottoGenerator {
         Collections.shuffle(numbers);
         List<LottoNumber> lotto = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
-            lotto.add(new LottoNumber(numbers.get(i)));
+            lotto.add(numbers.get(i));
         }
         return new Lotto(lotto);
     }

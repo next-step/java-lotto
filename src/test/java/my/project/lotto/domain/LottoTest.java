@@ -1,6 +1,5 @@
 package my.project.lotto.domain;
 
-import my.project.lotto.dto.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,17 +19,17 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(LottoNumber.valueOf(1));
+        lottoNumbers.add(LottoNumber.valueOf(2));
+        lottoNumbers.add(LottoNumber.valueOf(3));
+        lottoNumbers.add(LottoNumber.valueOf(4));
+        lottoNumbers.add(LottoNumber.valueOf(5));
     }
 
     @DisplayName("정상")
     @Test
     void testConstructor() {
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.valueOf(6));
         assertThat(new Lotto(lottoNumbers)).isNotNull();
     }
 
@@ -44,30 +43,30 @@ class LottoTest {
     @DisplayName("중복 방지")
     @Test
     void shouldNotBeDuplicated() {
-        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(LottoNumber.valueOf(5));
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void testContains() {
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.valueOf(6));
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.contains(new LottoNumber(7))).isFalse();
+        assertThat(lotto.contains(LottoNumber.valueOf(7))).isFalse();
     }
 
     @Test
     void testContainsCount() {
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.valueOf(6));
         Lotto lotto = new Lotto(lottoNumbers);
 
         List<LottoNumber> lastWinningNumber = new ArrayList<>();
-        lastWinningNumber.add(new LottoNumber(1));
-        lastWinningNumber.add(new LottoNumber(2));
-        lastWinningNumber.add(new LottoNumber(3));
-        lastWinningNumber.add(new LottoNumber(4));
-        lastWinningNumber.add(new LottoNumber(5));
-        lastWinningNumber.add(new LottoNumber(6));
+        lastWinningNumber.add(LottoNumber.valueOf(1));
+        lastWinningNumber.add(LottoNumber.valueOf(2));
+        lastWinningNumber.add(LottoNumber.valueOf(3));
+        lastWinningNumber.add(LottoNumber.valueOf(4));
+        lastWinningNumber.add(LottoNumber.valueOf(5));
+        lastWinningNumber.add(LottoNumber.valueOf(6));
         Lotto winningLotto = new Lotto(lastWinningNumber);
 
         assertThat(lotto.count(winningLotto)).isEqualTo(6);
@@ -75,7 +74,7 @@ class LottoTest {
 
     @Test
     void testToNumbers() {
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.valueOf(6));
         Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.toNumbers()).isEqualTo("[ 1, 2, 3, 4, 5, 6 ]");

@@ -1,6 +1,6 @@
 package my.project.utils;
 
-import my.project.lotto.dto.LottoNumber;
+import my.project.lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class StringUtils {
     public static List<LottoNumber> parseToIntList(String param) {
         List<LottoNumber> list = new ArrayList<>();
         for (String s : param.split(",")) {
-            list.add(new LottoNumber(Integer.valueOf(s)));
+            list.add(LottoNumber.valueOf(Integer.valueOf(s)));
         }
         return list;
     }

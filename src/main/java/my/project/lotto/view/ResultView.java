@@ -1,10 +1,14 @@
 package my.project.lotto.view;
 
 
+import my.project.lotto.domain.LottoNumber;
+import my.project.lotto.domain.Money;
 import my.project.lotto.domain.Rank;
-import my.project.lotto.domain.WinningLotto;
 import my.project.lotto.dto.Lottos;
 import my.project.lotto.dto.ManualCount;
+import my.project.lotto.dto.Ranks;
+
+import java.text.DecimalFormat;
 
 /**
  * Created : 2020-11-02 오전 8:25.
@@ -25,6 +29,9 @@ public class ResultView {
     public static final String PROFIT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String COMMA = ", ";
 
+    private ResultView() {
+    }
+
     public static void printLottos(Lottos lottos, ManualCount manualCount) {
         printPurchagedLotto(lottos, manualCount);
         printLotto(lottos);
@@ -36,20 +43,61 @@ public class ResultView {
     }
 
     private static void printLotto(Lottos lottos) {
-        lottos.getLottos().forEach(lotto -> System.out.println(lotto.toNumbers()));
+        lottos.getLottos().forEach(lotto -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            for (LottoNumber i : lotto.getLotto()) {
+                sb.append(", ").append(i.getNumber());
+            }
+            sb.append(" ]");
+            System.out.println(sb.toString().replaceFirst(",", ""));
+        });
     }
 
-    public static void printRanks(WinningLotto winningLotto) {
+    public static void printRanks(Ranks ranks) {
         System.out.println("\n" + WINNING_STATISTICS);
         System.out.println(DIVIDE);
-        System.out.println(FIFTH_PRIZE + winningLotto.countFifthRanks() + UNIT);
-        System.out.println(FOURTH_PRIZE + winningLotto.countFourthRanks() + UNIT);
-        System.out.println(THIRD_PRIZE + winningLotto.countThirdRanks() + UNIT);
-        System.out.println(SECOND_PRIZE + winningLotto.countSecondRanks() + UNIT);
-        System.out.println(FIRST_PRIZE + winningLotto.countFirstRanks() + UNIT);
-        System.out.println(String.format(PROFIT, winningLotto.profit()));
+        System.out.println(FIFTH_PRIZE + countFifthRanks(ranks) + UNIT);
+        System.out.println(FOURTH_PRIZE + countFourthRanks(ranks) + UNIT);
+        System.out.println(THIRD_PRIZE + countThirdRanks(ranks) + UNIT);
+        System.out.println(SECOND_PRIZE + countSecondRanks(ranks) + UNIT);
+        System.out.println(FIRST_PRIZE + countFirstRanks(ranks) + UNIT);
+        System.out.println(String.format(PROFIT, profit(ranks)));
     }
 
-    private ResultView() {
+    public static int countFifthRanks(Ranks ranks) {
+        return (int) ranks.getRanks().stream()
+                .filter(rank -> rank.equals(Rank.FIFTH)).count();
     }
+
+    public static int countFourthRanks(Ranks ranks) {
+        return (int) ranks.getRanks().stream()
+                .filter(rank -> rank.equals(Rank.FOURTH)).count();
+    }
+
+    public static int countThirdRanks(Ranks ranks) {
+        return (int) ranks.getRanks().stream()
+                .filter(rank -> rank.equals(Rank.THIRD)).count();
+    }
+
+    public static int countSecondRanks(Ranks ranks) {
+        return (int) ranks.getRanks().stream()
+                .filter(rank -> rank.equals(Rank.SECOND)).count();
+    }
+
+    public static int countFirstRanks(Ranks ranks) {
+        return (int) ranks.getRanks().stream()
+                .filter(rank -> rank.equals(Rank.FIRST)).count();
+    }
+
+    public static String profit(Ranks ranks) {
+        DecimalFormat format = new DecimalFormat("#.##");
+        return format.format((double) ((Rank.FIRST.getPrize() * countFirstRanks(ranks))
+                + (Rank.SECOND.getPrize() * countSecondRanks(ranks))
+                + (Rank.THIRD.getPrize() * countThirdRanks(ranks))
+                + (Rank.FOURTH.getPrize() * countFourthRanks(ranks))
+                + (Rank.FIFTH.getPrize() * countFifthRanks(ranks)))
+                / (ranks.size() * Money.PRICE));
+    }
+
 }

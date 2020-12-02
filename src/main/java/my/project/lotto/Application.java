@@ -21,8 +21,9 @@ public class Application {
         ResultView.printLottos(lottos, manualCount);
 
         List<LottoNumber> winningNumbers = StringUtils.parseToIntList(InputView.getWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-        Lotto lastWinningLotto = new Lotto(winningNumbers);
-        ResultView.printRanks(new WinningLotto(lottos, lastWinningLotto, bonusNumber));
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.getBonusNumber());
+        Lotto winnningLotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winnningLotto, bonusNumber);
+        ResultView.printRanks(winningLotto.getRanks(lottos));
     }
 }

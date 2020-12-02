@@ -1,7 +1,5 @@
 package my.project.lotto.domain;
 
-import my.project.lotto.dto.LottoNumber;
-
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -45,4 +43,8 @@ public class Lotto {
         return sb.toString().replaceFirst(",", "");
     }
 
+    public SortedSet<LottoNumber> getLotto() {
+        return this.lotto;
+
+    }
 }
