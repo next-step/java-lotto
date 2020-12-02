@@ -121,3 +121,10 @@
   - [x] 자동+수동 generate 확인 
   - [x] LottoNumberSet 자체를 set으로만 써보기..?
   - `Application` 추가
+
+- 추가 피드백
+  - [x] LottoNumberSet 생성할 때부터 변경 불가능하도록 변경하기.
+  - [ ] LottoGenerator `lottoNumbers`의 타입 변경
+  - [ ] LottoGenerator Lottos로 인스턴스 두번 생성하지 말고 리스트 합쳐서 넘기기
+  - [ ] WinningStatistics 프린트 시 정렬방법 변경 
+  
