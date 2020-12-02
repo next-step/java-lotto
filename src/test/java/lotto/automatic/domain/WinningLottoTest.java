@@ -15,14 +15,14 @@ class WinningLottoTest {
     public void creation_당첨_로또_인스턴스() {
 
         Lotto lotto1 = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList()));
 
         Lotto lotto2 = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         WinningLotto winningLotto = new WinningLotto(lotto1, bonusNumber);
 
@@ -37,10 +37,10 @@ class WinningLottoTest {
 
                     WinningLotto winningLotto = new WinningLotto(
                             new Lotto(IntStream.rangeClosed(1, 6)
-                                    .mapToObj(LottoNumber::new)
+                                    .mapToObj(LottoNumber::of)
                                     .collect(toList())
                             ),
-                            new LottoNumber(6)
+                            LottoNumber.of(6)
                     );
 
                 }

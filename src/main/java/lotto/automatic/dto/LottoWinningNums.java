@@ -18,11 +18,11 @@ public class LottoWinningNums {
         List<LottoNumber> nums = new ArrayList<>();
 
         for (String numString : numberStrings) {
-            nums.add(new LottoNumber(Integer.parseInt(numString.trim())));
+            nums.add(LottoNumber.of(Integer.parseInt(numString.trim())));
         }
 
         this.nums = nums;
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public WinningLotto getWinningLotto() {

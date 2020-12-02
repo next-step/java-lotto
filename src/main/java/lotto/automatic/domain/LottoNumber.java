@@ -16,9 +16,14 @@ public class LottoNumber implements Comparable {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        validate(number);
+        return lottoNums.get(number - 1);
     }
 
     public static List<LottoNumber> random(int amount) {
@@ -27,7 +32,7 @@ public class LottoNumber implements Comparable {
         return lottoNums.subList(0, amount);
     }
 
-    private void validate(int number) {
+    private static void validate(int number) {
 
         if (number < MIN_LOTTO_NUM || number > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException("로또 번호는 1과 45 사이의 숫자로 구성되어 있어야 합니다.");

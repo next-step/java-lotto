@@ -16,10 +16,10 @@ public class LottoTest {
     public void creation_로또_인스턴스() {
 
         Lotto lotto1 = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList()));
         Lotto lotto2 = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList()));
 
         assertThat(lotto1.equals(lotto2)).isTrue();
@@ -33,7 +33,7 @@ public class LottoTest {
 
         int matchCount = lotto1.matchCount(
                 new Lotto(IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::of)
                         .collect(toList())));
 
         assertThat(matchCount).isLessThanOrEqualTo(6);
@@ -45,7 +45,7 @@ public class LottoTest {
     public void 로또번호가_6개를_넘는_경우() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(IntStream.rangeClosed(1, 7)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::of)
                         .collect(toList()))
                 );
     }
@@ -55,7 +55,7 @@ public class LottoTest {
     public void 로또번호가_5개인_경우() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(IntStream.rangeClosed(1, 5)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::of)
                         .collect(toList()))
                 );
     }
@@ -65,10 +65,10 @@ public class LottoTest {
     public void contain_number() {
         Lotto lotto = new Lotto(
                 IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::of)
                         .collect(toList()));
 
-        assertThat(lotto.contain(new LottoNumber(6))).isTrue();
+        assertThat(lotto.contain(LottoNumber.of(6))).isTrue();
     }
 
     @Test
@@ -76,10 +76,10 @@ public class LottoTest {
     public void matchCountTest() {
 
         Lotto lotto = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList()));
         int matchCount = lotto.matchCount(new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(toList())));
         assertThat(matchCount).isEqualTo(6);
 
