@@ -16,6 +16,8 @@ public class NumberPool {
 
     private static final List<LottoNumber> numberPool = makePool();
 
+    private NumberPool() {}
+
     private static List<LottoNumber> makePool() {
         return IntStream.range(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
                 .mapToObj(LottoNumber::new)
