@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottoes {
 
@@ -12,8 +13,8 @@ public class Lottoes {
         purchaseLottoes(count);
     }
 
-    public Lottoes(List<Lotto> lottoes) {
-        this.lottoes = lottoes;
+    public Lottoes(List<List<Integer>> lottoes) {
+        this.lottoes = lottoes.stream().map(Lotto::new).collect(Collectors.toList());
     }
 
     public List<Lotto> getLottoes() {
