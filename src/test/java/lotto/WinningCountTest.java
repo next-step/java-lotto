@@ -19,7 +19,7 @@ class WinningCountTest {
 
         // when
         assertThatThrownBy(() -> {
-            new WinningCount(-1);
+            new WinningCount(count);
         // then
         }).isInstanceOf(IllegalArgumentException.class);
     }

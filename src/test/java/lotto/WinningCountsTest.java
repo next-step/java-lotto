@@ -39,7 +39,6 @@ class WinningCountsTest {
             }
         };
         LottoTickets lottoTickets = lottoTicketCreatable.createTickets(purchaseNumber);
-//        LottoTickets lottoTickets = LottoTickets.newTicketss(purchaseNumber, () -> lottoTicket);
         WinningCounts winningCounts = new WinningCounts().calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
 
         List<Integer> expectTicket = Arrays.asList(1, 2, 3, 4, 5, 6);
