@@ -24,11 +24,11 @@ public class Operands {
     }
 
     private String makeStringSeparator(Separators separators) {
-        StringBuilder stringSeparators = new StringBuilder(separators.getSeparator(0).getString());
+        StringBuilder stringSeparators = new StringBuilder(separators.getSeparator(0));
 
         for (int i = 1; i < separators.getCount(); i++) {
             stringSeparators.append("|").
-                    append(StringFilter.filtering(separators.getSeparator(i).getString()));
+                    append(StringFilter.filtering(separators.getSeparator(i)));
         }
 
         return stringSeparators.toString();
