@@ -32,7 +32,7 @@ class LottoResultTest {
         ));
 
         BigDecimal earningRate = result.calculateEarningRate();
-        assertThat(earningRate.floatValue()).isEqualTo((float)LottoRank.FIRST.getEarningMoney() / 10000 );
+        assertThat(earningRate.floatValue()).isEqualTo((float)LottoRank.SECOND.getEarningMoney() / 10000 );
 
     }
 
