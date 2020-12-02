@@ -1,28 +1,35 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.LottoNumber;
+
 public class NumberPool {
-
-    protected static final int LOWER_BOUND = 1;
-
-    protected static final int UPPER_BOUND = 45;
 
     protected static final int START_INCLUSIVE = 0;
 
-    private static final List<Integer> numberPool = makePool();
+    private static final List<LottoNumber> numberPool = makePool();
 
-    private static List<Integer> makePool() {
-        return IntStream.range(LOWER_BOUND, UPPER_BOUND).boxed().collect(Collectors.toList());
+    private static List<LottoNumber> makePool() {
+        return IntStream.range(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public static Set<Integer> getLottoNumbers() {
+    public static Set<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numberPool);
-        return IntStream.range(START_INCLUSIVE, LottoMachine.LOTTO_SIZE).boxed()
-                .collect(Collectors.toSet());
+
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int i = START_INCLUSIVE; i < LottoMachine.LOTTO_SIZE; i++) {
+            numbers.add(numberPool.get(i));
+        }
+
+        return new HashSet<>(numbers);
     }
 }

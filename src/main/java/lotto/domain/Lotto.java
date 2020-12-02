@@ -1,24 +1,31 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import lotto.NumberPool;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new TreeSet<>(numbers);
+        this.lottoNumbers = new HashSet<>(intToLottoNumber(numbers));
     }
 
     public Lotto() {
-        this.numbers = NumberPool.getLottoNumbers();
+        this.lottoNumbers = NumberPool.getLottoNumbers();
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers;
+    private List<LottoNumber> intToLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    public Set<LottoNumber> getNumbers() {
+        return lottoNumbers;
     }
 }
