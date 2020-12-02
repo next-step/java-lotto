@@ -17,13 +17,21 @@ public class WinningCounts {
     }
 
     public WinningCounts calculateWinningCount(LottoTickets lottoTickets, List<Integer> lastWeeksWinningNumbers) {
+        validateLastWeeksWinningNumbersSize(lastWeeksWinningNumbers);
+
         for (int i = 0; i < lottoTickets.size(); i++) {
             WinningCount winningCount = new WinningCount(0)
-                    .increaseCountManager(lottoTickets.getLottoTicket(i), lastWeeksWinningNumbers);;
+                    .increaseCountManager(lottoTickets.getLottoTicket(i), lastWeeksWinningNumbers);
             winningCountList.add(winningCount);
         }
 
         return new WinningCounts(winningCountList);
+    }
+
+    private static void validateLastWeeksWinningNumbersSize(List<Integer> lastWeeksWinningNumbers) {
+        if (lastWeeksWinningNumbers.size() != 6) {
+            throw new IllegalArgumentException("지난 주 당첨 번호는 6자리 입니다.");
+        }
     }
 
     public WinningCount getWinningCount(int index) {

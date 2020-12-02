@@ -15,7 +15,8 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_1개_생성() {
         // when
-        LottoTicket autoTicket = new LottoTicketCreation().createTicket();
+        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket autoTicket = LottoTicket.newTicket(ticket);
 
         // then
         assertThat(autoTicket.size()).isEqualTo(LottoTicket.LOTTO_TICKET_SIZE);
@@ -45,7 +46,6 @@ class LottoTicketTest {
                 return LottoTickets.newTickets(ticketList);
             }
         };
-//        LottoTicketCreatable lottoTicketCreatable = () -> testLottoTicket;
 
         // then
         assertThat(lottoTicketCreatable.createTicket()).isEqualTo(testLottoTicket);

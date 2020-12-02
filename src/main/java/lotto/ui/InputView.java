@@ -19,15 +19,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String[] split = scanner.nextLine().split(",");
 
-        validateLastWeeksWinningNumbersSize(split);
-
         return parseInts(split);
-    }
-
-    private static void validateLastWeeksWinningNumbersSize(String[] values) {
-        if (values.length != 6) {
-            throw new IllegalArgumentException("지난 주 당첨 번호는 6자리 입니다.");
-        }
     }
 
     private static void printLastWeeksWinningNumbersMessage() {
