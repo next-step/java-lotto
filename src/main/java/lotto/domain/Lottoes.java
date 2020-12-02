@@ -20,7 +20,7 @@ public class Lottoes {
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
-        return new LottoGameResult(ranks, new PurchaseAmount(ranks));
+        return new LottoGameResult(new Ranks(ranks), new PurchaseAmount(ranks));
 
     }
 }

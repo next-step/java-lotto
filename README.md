@@ -94,6 +94,7 @@ utils.Calculator
 30. Lottoes, Rank, LottoNumber 테스트 코드 작성
 31. 코드 정리
 32. 보너스볼을 입력 받아 당첨 결과 출력
+33. List<Rank> 일급 컬렉션으로 변경
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)

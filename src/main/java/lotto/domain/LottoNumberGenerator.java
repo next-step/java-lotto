@@ -45,7 +45,6 @@ public class LottoNumberGenerator {
 
         return lottoes;
     }
-
     private List<LottoNumber> getCachedLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .map(lottoNumbers::get)

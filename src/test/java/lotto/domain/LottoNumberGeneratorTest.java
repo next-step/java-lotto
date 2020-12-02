@@ -24,7 +24,7 @@ class LottoNumberGeneratorTest {
     }
 
     @Test
-    @DisplayName("14,000원의 lotto를 구매하면, 1~45까지 6개의 번호를 14개 생성한다.")
+    @DisplayName("14,000원을 입력하면, 1~45까지 6개의 번호를 14개 생성한다.")
     void should_return_lotto_numbers() {
         //Given & When
         Lottoes lottoes = lottoNumberGenerator.create(14_000);
