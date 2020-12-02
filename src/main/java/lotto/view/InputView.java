@@ -13,6 +13,7 @@ public class InputView {
 
     private static final String PURCHASE_PRICE_COMMENT = "구입금액을 입력해 주세요.";
     private static final String LASTWEEK_LOTTO_PRIZE_NUMBER_COMMENT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_BALL_COMMENT = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
     }
@@ -39,5 +40,10 @@ public class InputView {
                         .map(Integer::parseInt)
                         .collect(Collectors.toCollection(LinkedHashSet::new));
 
+    }
+
+    public static int inputBonusball() {
+        System.out.println(BONUS_BALL_COMMENT);
+        return scanner.nextInt();
     }
 }

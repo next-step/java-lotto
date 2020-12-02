@@ -25,10 +25,9 @@ public class LottoPriceTest {
     @ParameterizedTest
     @CsvSource(value = {"800:200", "500:500", "150:850"}, delimiter = ':')
     public void notValidLottoPriceTest(int purchasePrice, int insufficientAmount) {
-        assertThatThrownBy(() -> {
-            LottoShop shop = new LottoShop();
-            shop.purchase(LottoPrice.from(purchasePrice), new LottoAutoMachine());
-        }).isInstanceOf(NotValidLottoPriceException.class)
+        assertThatThrownBy(() ->
+            LottoPrice.from(purchasePrice)
+        ).isInstanceOf(NotValidLottoPriceException.class)
           .hasMessage(insufficientAmount + ErrorMessage.NOT_VALID_PRICE.getMessage());
     }
 }
