@@ -7,11 +7,21 @@ import java.util.List;
 public class LottoTicketCreation implements LottoTicketCreatable {
 
     @Override
+    public LottoTickets createTickets(int purchaseNumber) {
+        List<LottoTicket> ticketList = new ArrayList<>();
+        for (int i = 0; i < purchaseNumber; i++) {
+            ticketList.add(createTicket());
+        }
+
+        return LottoTickets.newTickets(ticketList);
+    }
+
+    @Override
     public LottoTicket createTicket() {
         List<Integer> ticket = createTicketNumber();
         Collections.sort(ticket);
 
-        return new LottoTicket(ticket);
+        return LottoTicket.newTicket(ticket);
     }
 
     private List<Integer> createTicketNumber() {

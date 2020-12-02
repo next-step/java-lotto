@@ -29,7 +29,7 @@ class WinningCountTest {
     void 당첨_갯수() {
         // given
         List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket lottoTicket = new LottoTicket(ticket);
+        LottoTicket lottoTicket = LottoTicket.newTicket(ticket);
         List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
 
         // when

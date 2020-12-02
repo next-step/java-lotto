@@ -8,8 +8,12 @@ public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
     private final List<Integer> ticket;
 
-    public LottoTicket(List<Integer> ticket) {
+    private LottoTicket(List<Integer> ticket) {
         this.ticket = ticket;
+    }
+
+    public static LottoTicket newTicket(List<Integer> ticket) {
+        return new LottoTicket(ticket);
     }
 
     public List<Integer> getTicket() {

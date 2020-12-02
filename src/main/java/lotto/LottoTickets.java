@@ -1,20 +1,17 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
 
-    private final List<LottoTicket> ticketList = new ArrayList<>();
+    private final List<LottoTicket> ticketList;
 
-    private LottoTickets(int purchaseNumber, LottoTicketCreatable lottoTicketCreatable) {
-        for (int i = 0; i < purchaseNumber; i++) {
-            ticketList.add(lottoTicketCreatable.createTicket());
-        }
+    private LottoTickets(List<LottoTicket> ticketList) {
+        this.ticketList = ticketList;
     }
 
-    public static LottoTickets newTickets(int purchaseNumber, LottoTicketCreatable lottoTicketCreatable) {
-        return new LottoTickets(purchaseNumber, lottoTicketCreatable);
+    public static LottoTickets newTickets(List<LottoTicket> ticketList) {
+        return new LottoTickets(ticketList);
     }
 
     public LottoTicket getLottoTicket(int index) {

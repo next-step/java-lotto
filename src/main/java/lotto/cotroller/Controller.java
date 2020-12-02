@@ -12,7 +12,7 @@ public class Controller {
         int purchaseAmount = InputView.inputPrice();
         int purchaseNumber = PurchaseNumberCalculation.calculateNumberPurchase(purchaseAmount);
 
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber, new LottoTicketCreation());
+        LottoTickets lottoTickets = new LottoTicketCreation().createTickets(purchaseNumber);
         ResultView.outputPrintPurchaseLottoTicket(lottoTickets);
 
         List<Integer> lastWeeksWinningNumbers = InputView.inputLastWeeksWinningNumbers();

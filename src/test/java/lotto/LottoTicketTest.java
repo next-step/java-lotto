@@ -26,10 +26,26 @@ class LottoTicketTest {
     void 티켓_데이터_정확성() {
         // given
         List<Integer> testTicket = Arrays.asList(31, 45, 30, 22, 21, 1);
-        LottoTicket testLottoTicket = new LottoTicket(testTicket);
+        LottoTicket testLottoTicket = LottoTicket.newTicket(testTicket);
 
         // when
-        LottoTicketCreatable lottoTicketCreatable = () -> testLottoTicket;
+        LottoTicketCreatable lottoTicketCreatable = new LottoTicketCreatable() {
+            @Override
+            public LottoTicket createTicket() {
+                return testLottoTicket;
+            }
+
+            @Override
+            public LottoTickets createTickets(int purchaseNumber) {
+                List<LottoTicket> ticketList = new ArrayList<>();
+                for (int i = 0; i < purchaseNumber; i++) {
+                    ticketList.add(createTicket());
+                }
+
+                return LottoTickets.newTickets(ticketList);
+            }
+        };
+//        LottoTicketCreatable lottoTicketCreatable = () -> testLottoTicket;
 
         // then
         assertThat(lottoTicketCreatable.createTicket()).isEqualTo(testLottoTicket);

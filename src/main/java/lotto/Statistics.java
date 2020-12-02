@@ -18,7 +18,7 @@ public class Statistics {
         } else if (winningCount == Message.SIX_WINNING) {
             statisticsCount[3]++;
         }
-
+        
         return new Statistics(statisticsCount);
     }
 

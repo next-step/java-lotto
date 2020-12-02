@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,12 +17,28 @@ class WiningStatisticTest {
     void 당첨_갯수별_통계() {
         // given
         List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket lottoTicket = new LottoTicket(ticket);
+        LottoTicket lottoTicket = LottoTicket.newTicket(ticket);
         List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
 
         // when
         int purchaseNumber = 2;
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseNumber, () -> lottoTicket);
+        LottoTicketCreatable lottoTicketCreatable = new LottoTicketCreatable() {
+            @Override
+            public LottoTicket createTicket() {
+                return lottoTicket;
+            }
+
+            @Override
+            public LottoTickets createTickets(int purchaseNumber) {
+                List<LottoTicket> ticketList = new ArrayList<>();
+                for (int i = 0; i < purchaseNumber; i++) {
+                    ticketList.add(createTicket());
+                }
+
+                return LottoTickets.newTickets(ticketList);
+            }
+        };
+        LottoTickets lottoTickets = lottoTicketCreatable.createTickets(purchaseNumber);
         WinningCounts winningCounts = new WinningCounts().calculateWinningCount(lottoTickets, lastWeeksWinningNumbers);
 
         // when
