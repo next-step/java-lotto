@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottoes;
-import lotto.domain.Prize;
+import lotto.domain.WinningRecord;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -29,7 +29,8 @@ public class LottoMachine {
         outputView.showPurchasedLottoes(lottoes);
 
         Lotto winningLotto = inputView.inputWinningNumbers();
-        Prize.increaseWinningCount(winningLotto, lottoes);
-        outputView.showStatistics(purchaseCount * PAY);
+        WinningRecord record = new WinningRecord(winningLotto);
+        record.record(lottoes);
+        outputView.showStatistics(record, purchaseCount * PAY);
     }
 }
