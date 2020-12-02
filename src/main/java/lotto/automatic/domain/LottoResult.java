@@ -16,7 +16,7 @@ public class LottoResult {
     public long getRankCount(LottoRank rank) {
 
         return rankList.stream()
-                .filter(r -> r.getEarningMoney() == rank.getEarningMoney())
+                .filter(r -> r == rank)
                 .count();
     }
 
