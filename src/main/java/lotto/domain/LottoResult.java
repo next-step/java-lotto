@@ -7,7 +7,6 @@ public class LottoResult {
     final static int PRICE = 1000;
 
     private final Map<ProfitRule, Integer> result;
-    private int profit;
     private final int payment;
 
     public LottoResult(int lottoTickets) {
@@ -23,14 +22,20 @@ public class LottoResult {
     }
 
     public double getProfitRatio() {
-        return (double) profit / payment;
+        return getProfit() / payment;
     }
 
     public void saveLottoResult(long matchingScore) {
         if (matchingScore > 2) {
             ProfitRule profitRule = ProfitRule.getProfitByMatchingScore(matchingScore);
             result.put(profitRule, result.get(profitRule) + 1);
-            profit += profitRule.getProfit();
         }
+    }
+
+    private double getProfit() {
+        return result.keySet()
+                .stream()
+                .mapToDouble(p -> p.getProfit() * result.get(p))
+                .reduce(0L, Double::sum);
     }
 }

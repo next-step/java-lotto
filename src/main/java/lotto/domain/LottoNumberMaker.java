@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoNumberMaker {
 
     private static final int LOTTO_NUMBER_BOUND = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
@@ -19,8 +19,11 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> makeNewNumbers() {
+    public static List<Integer> makeNewNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).sorted().collect(Collectors.toList());
+        return lottoNumbers.stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
