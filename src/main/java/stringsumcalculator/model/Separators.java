@@ -8,22 +8,21 @@ import java.util.regex.Pattern;
 public class Separators {
 
     private final List<Separator> separators = new ArrayList<>();
-
-    public Separators(){
-        separators.add(new Separator(","));
-        separators.add(new Separator(":"));
-    }
+    private final String REGEX = "//(.)\\\\n(.*)";
+    private final Pattern pattern = Pattern.compile(REGEX);
+    private String formula;
 
     public Separators(String string){
-        final String PATTERN = "//(.*?)\\\\n";
-        Matcher matcher = Pattern.compile(PATTERN).matcher(string);
+
+        Matcher matcher = pattern.matcher(string);
+
+        while (matcher.find()) {
+            separators.add(new Separator(matcher.group(1)));
+            formula = matcher.group(2);
+        }
 
         separators.add(new Separator(","));
         separators.add(new Separator(":"));
-
-        while(matcher.find()){
-            separators.add(new Separator(matcher.group(1)));
-        }
     }
 
     public int getCount(){
@@ -32,6 +31,10 @@ public class Separators {
 
     public Separator getSeparator(int index){
         return separators.get(index);
+    }
+
+    public String getFormula(){
+        return formula;
     }
 
 
