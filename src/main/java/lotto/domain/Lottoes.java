@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.view.LottoGameView;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ public class Lottoes {
     }
 
     public List<LottoNumbers> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     public LottoGameResult getResult(WinningNumbers winningNumbers) {

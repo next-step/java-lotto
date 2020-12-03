@@ -52,10 +52,9 @@ LottoGame
 utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
+
 ##TODO
-1. step3 피드백 사항 정리
-
-
+1. refactoring으로 인해 깨진 Test 수정
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
@@ -103,6 +102,7 @@ utils.Calculator
 36. Rank 반환 방법 리팩터링
 37. CachedLottoNumbers 객체를 생성하여, LottoNumbersGenerator 객체에서 저장된 lotto 번호를 불러오는 기능을 분리
 38. LottoGameResult 반환시, PurchaseAmount의 객체가 Ranks를 의존하지 않기 위해, Lottoes에서 PurchaseAmount객체를 가지고 있도록 수정
+39. step3 피드백 사항 정리
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)

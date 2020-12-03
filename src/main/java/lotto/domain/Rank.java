@@ -29,11 +29,7 @@ public enum Rank {
     }
 
     public static Rank value(int matchingCount, boolean matchBonus) {
-        if (matchingCount == 5 && matchBonus) {
-            return SECOND;
-        }
-
-        if (matchingCount == 5) {
+        if (matchingCount == 5 && !matchBonus) {
             return THIRD;
         }
 
