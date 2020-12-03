@@ -8,8 +8,7 @@ public class Main {
     public static void main(String[] args) {
         int money = InputView.getMoney();
 
-        Generator lottoGenerator = new LottoGenerator();
-        lottoGenerator.setNumber("");
+        LottoGenerator lottoGenerator = new LottoGenerator();
 
         Lottos lottos = new Lottos(money, lottoGenerator);
 

@@ -7,7 +7,7 @@ public class Lotto {
     public final List<Integer> numberList;
     private int winningCnt = 0;
 
-    public Lotto(Generator lottoGenerator) {
+    public Lotto(LottoGenerator lottoGenerator) {
         this.numberList = lottoGenerator.getLottoNumbers();
     }
 

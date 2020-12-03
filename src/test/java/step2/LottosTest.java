@@ -9,8 +9,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 갯수 테스트")
     void lottosCreateTest() {
-        Generator lottoGenerator = new LottoGenerator();
-        lottoGenerator.setNumber("");
+        LottoGenerator lottoGenerator = new LottoGenerator();
         int money = 6500;
         Lottos lottos = new Lottos(money, lottoGenerator);
 

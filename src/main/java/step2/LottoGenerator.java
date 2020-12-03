@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator implements Generator {
-    private final List<Integer> numbers = new ArrayList<>();
+public class LottoGenerator {
+    public final List<Integer> numbers;
 
-    public void setNumber(String inputNumber) {
+    public LottoGenerator(){
+        numbers = new ArrayList<>();
+
         for (int i = 1; i <= 45; i++) {
             numbers.add(i);
         }

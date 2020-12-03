@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FixedNumberGenerator implements Generator {
-    private static final List<Integer> numbers = new ArrayList<>();
+public class FixedNumberGenerator extends LottoGenerator {
+    public static final List<Integer> numbers = new ArrayList<>();
 
     public void setNumber(String inputNumber) {
         for (String i : inputNumber.split(",")) {

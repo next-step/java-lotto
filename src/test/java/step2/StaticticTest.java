@@ -13,7 +13,7 @@ public class StaticticTest {
     @Test
     @DisplayName("로또 결과 통계 테스트")
     void statisticTest() {
-        Generator fourWinningsGenerator = new FixedNumberGenerator();
+        FixedNumberGenerator fourWinningsGenerator = new FixedNumberGenerator();
         fourWinningsGenerator.setNumber("1,3,5,7,10,12");
 
         String resultInput = "1, 3, 5, 7, 9, 11";
@@ -29,9 +29,9 @@ public class StaticticTest {
         lottos.checkResult(result);
         // 결과 입력
         Statistic.recordResult(lottos);
-        int lottoCnt = money/1000;
+        int lottoCnt = money / 1000;
         int fourWinningReward = RewardBoard.getReward(4).getReward();
-        int totalReward = lottoCnt*fourWinningReward;
+        int totalReward = lottoCnt * fourWinningReward;
         assertThat(Statistic.getMargin(money)).isEqualTo((float)totalReward/money);
     }
 }

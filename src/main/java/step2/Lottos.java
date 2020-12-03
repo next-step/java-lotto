@@ -6,7 +6,7 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public Lottos(int money, Generator lottoGenerator) {
+    public Lottos(int money, LottoGenerator lottoGenerator) {
         for (int i = 1; i <= getLottoCnt(money); i++) {
             buyLotto(lottoGenerator);
         }
@@ -17,7 +17,7 @@ public class Lottos {
         }
     }
 
-    private void buyLotto(Generator lottoGenerator){
+    private void buyLotto(LottoGenerator lottoGenerator){
         lottoList.add(new Lotto(lottoGenerator));
     }
 

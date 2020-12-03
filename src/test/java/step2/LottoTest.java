@@ -13,8 +13,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void createTest() {
-        Generator lottoGenerator = new LottoGenerator();
-        lottoGenerator.setNumber("");
+        LottoGenerator lottoGenerator = new LottoGenerator();
         Lotto lotto = new Lotto(lottoGenerator);
         assertThat(lotto.numberList.size()).isEqualTo(6);
     }
@@ -22,7 +21,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 당첨 여부 테스트")
     void checkRewardTest() {
-        Generator fixedNumberGenerator = new FixedNumberGenerator();
+        FixedNumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
         fixedNumberGenerator.setNumber("1,3,5,7,9,11");
 
         Lotto lotto = new Lotto(fixedNumberGenerator);
