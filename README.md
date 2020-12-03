@@ -53,6 +53,8 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
+1. step3 피드백 사항 정리
+2. CachedLottoNumbers 객체를 생성하여, LottoNumbersGenerator 객체에서 저장된 lotto 번호를 불러오는 기능을 분리
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.

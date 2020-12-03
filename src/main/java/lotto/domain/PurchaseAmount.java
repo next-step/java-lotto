@@ -1,16 +1,16 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
-import lotto.constant.Lotto;
 
 import java.util.List;
 
 public class PurchaseAmount {
 
+    public static final int PRICE = 1000;
     private final int amount;
 
     public PurchaseAmount(List<Rank> ranks) {
-        this(ranks.size() * Lotto.PRICE);
+        this(ranks.size() * PRICE);
     }
 
     public PurchaseAmount(int amount) {
@@ -19,13 +19,13 @@ public class PurchaseAmount {
     }
 
     private void valid(int amount) {
-        if (amount < Lotto.PRICE) {
+        if (amount < PRICE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_AMOUNT_ERROR);
         }
     }
 
     public int getLottoCount() {
-        return amount / Lotto.PRICE;
+        return amount / PRICE;
     }
 
     public double getRate(double allPrizeMoney) {

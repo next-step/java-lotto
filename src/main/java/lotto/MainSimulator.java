@@ -8,7 +8,7 @@ public class MainSimulator {
     private static final LottoController lottoController = new LottoController();
 
     public static void main(String[] args) {
-        Lottoes lottoes = lottoController.purchaseLottoes();
+        Lottoes lottoes = lottoController.purchaseLotto();
         lottoController.getLottoGameResult(lottoes);
     }
 }

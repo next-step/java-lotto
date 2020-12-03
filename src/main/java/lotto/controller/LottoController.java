@@ -9,7 +9,7 @@ public class LottoController {
 
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-    public Lottoes purchaseLottoes() {
+    public Lottoes purchaseLotto() {
         Lottoes lottoes = lottoNumberGenerator.create(LottoGameView.enterLottoAmount());
         LottoGameView.printLottoNumbers(lottoes);
         return lottoes;
