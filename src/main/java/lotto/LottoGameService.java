@@ -9,6 +9,10 @@ public class LottoGameService {
     private static int lottoBuyCnt = 0;
     private static LottoTicket buyLotto;
 
+    public LottoGameService(LottoTicket lottoTicket) {
+        buyLotto = lottoTicket;
+    }
+
     public static void setLottoBuyAmt(int lottoBuyAmt) {
         LottoGameService.lottoBuyAmt = lottoBuyAmt;
     }

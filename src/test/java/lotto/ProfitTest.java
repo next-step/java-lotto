@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +16,7 @@ public class ProfitTest {
     @BeforeEach
     void setUp(){
         List<Lotto> lottoList = new ArrayList<>();
-        List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(1);
-        lottoNumbers.add(2);
-        lottoNumbers.add(3);
-        lottoNumbers.add(9);
-        lottoNumbers.add(10);
-        lottoNumbers.add(11);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 9, 10, 11);
         Lotto lotto = new Lotto(lottoNumbers);
         lottoList.add(lotto);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};

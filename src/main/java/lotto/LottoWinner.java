@@ -11,15 +11,14 @@ public final class LottoWinner {
         this.winnerLottoNumbers = winnerLottoNumbers;
     }
 
-    public LottoTicket matchingWinnerNumber(LottoTicket lottoTicket){
+    public List<Rank> matchingWinnerNumber(LottoTicket lottoTicket){
         List<Rank> lottoRankList = new ArrayList<>();
         for(Lotto lotto : lottoTicket.getLottoList()){
             int matchCnt = getMatchLottoCnt(lotto);
             lotto.addWinnerMatchCnt(matchCnt);
             lottoRankList.add(Rank.getRankByMatchCnt(matchCnt));
         }
-        lottoTicket.setLottoRankList(lottoRankList);
-        return lottoTicket;
+        return lottoRankList;
     }
 
     public int getMatchLottoCnt(Lotto lotto) {

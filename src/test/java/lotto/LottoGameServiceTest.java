@@ -49,7 +49,7 @@ public class LottoGameServiceTest {
         LottoTicket lottoTicket = new LottoTicket(lottoList);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
         LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
-        lottoTicket = lottoWinner.matchingWinnerNumber(lottoTicket);
-        assertThat(LottoGameService.getLottoMatchStatistics(lottoTicket.getLottoRankList(), 5)).isEqualTo(1);
+        List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);
+        assertThat(LottoGameService.getLottoMatchStatistics(lottoRank, 5)).isEqualTo(1);
     }
 }
