@@ -2,6 +2,7 @@ package lottery.view;
 
 import lottery.domain.LotteryResult;
 import lottery.domain.LotteryTicket;
+import lottery.domain.LotteryValue;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -34,8 +35,8 @@ public final class ResultViewLotteryGame {
         for (Integer key : lotteryResult.getLotteryResultMap().keySet()) {
             stringBuilder.append(key);
             stringBuilder.append("개 일치 (");
-            stringBuilder.append(lotteryResult.getLotteryValueMap().get(key));
-            stringBuilder.append(")- ");
+            stringBuilder.append(LotteryValue.findByAmount(key).getAmount());
+            stringBuilder.append(") - ");
             stringBuilder.append(lotteryResult.getLotteryResultMap().get(key));
             stringBuilder.append("개");
             stringBuilder.append(System.getProperty("line.separator"));

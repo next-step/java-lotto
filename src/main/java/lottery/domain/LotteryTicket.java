@@ -83,6 +83,6 @@ public class LotteryTicket {
             lotteryTicket.append(number.getNumber());
             lotteryTicket.append(", ");
         }
-        return "[" + lotteryTicket.subSequence(0, lotteryTicket.length()).toString() + "]";
+        return "[" + lotteryTicket.subSequence(0, lotteryTicket.length() - 2).toString() + "]";
     }
 }
