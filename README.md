@@ -92,6 +92,12 @@ utils.Calculator
       - LottoNumbers: LottoNumbers 생성 및 당첨결과를 출력하는 책
 29. Lottoes의 getter로 인한 정보 노출 수정
 30. Lottoes, Rank, LottoNumber 테스트 코드 작성
+31. 코드 정리
+32. 보너스볼을 입력 받아 당첨 결과 출력
+33. List<Rank> 일급 컬렉션으로 변경
+34. Lotto 당첨 순위 5등 추가
+35. 일치하는 숫자를 LottoNumbers에게 메시지를 전달하여 반환받는 형식으로 변경
+36. Rank 반환 방법 리팩터링
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
