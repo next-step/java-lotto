@@ -12,36 +12,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    @DisplayName("Lottos 인스턴스 생성 테스트")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 3, 5, 6})
-    public void createLottosInstance(int size) {
-        //Given
-        List<Lotto> lottoNumbers = new ArrayList<>();
-
-        //When
-        IntStream.range(0, size).forEach(i -> lottoNumbers.add(Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)))));
-        Lottos lottos = new Lottos(lottoNumbers);
-
-        //Then
-        assertThat(lottos.quantity()).isEqualTo(size);
-    }
 
     @DisplayName("특정 index에 해당하는 Lotto 숫자를 반환하는 테스트")
     @Test
     public void indexGetLotto() {
 
         //Given
-        List<Lotto> expected = new ArrayList<>();
-        expected.add(0, Lotto.of(new HashSet<>(Arrays.asList(5, 6, 7, 8, 9, 10))));
-        expected.add(1, Lotto.of(new HashSet<>(Arrays.asList(2, 3, 5, 7, 9, 11))));
-        expected.add(2, Lotto.of(new HashSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
+        Lottos lottos = new Lottos();
+        lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(5, 6, 7, 8, 9, 10))));
+        lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(2, 3, 5, 7, 9, 11))));
+        lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(10, 15, 16, 17, 18, 20))));
 
-
-        Lottos lottos = new Lottos(expected);
 
         //When
-        Set<LottoNumber> result = lottos.getLotto(expected.size() - 1);
+        Set<LottoNumber> result = lottos.getLotto(2);
 
         //Then
         assertThat(result).isNotNull();
@@ -55,15 +39,30 @@ public class LottosTest {
     public void matchPrizeNumberTest() {
 
         //Given
-        LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(Money.from(10000), (int capacity) -> Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
-
+        Lottos lottos = new Lottos();
+        lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
 
         //When
         Reward reward = lottos.matchPrizeNumber(new PrizeLotto(Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))), 5));
 
         //Then
         assertThat(reward).isNotNull();
+        assertThat(reward.getRewardResult().get(PrizeInformation.FIRST)).isNotNull();
 
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 5, 6, 7, 8})
+    public void addLottos(int quantity) {
+        //Given
+        Lottos lottos = new Lottos();
+
+        //When
+        IntStream.range(0, quantity)
+                .forEach(i -> lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
+
+
+        //Then
+        assertThat(lottos.quantity()).isEqualTo(quantity);
     }
 }
