@@ -24,12 +24,11 @@ public class LottoTest {
     @Test
     @DisplayName("수익금 테스트")
     public void benefitTest(){
-        int money = 2000;
 
-        EnumMap<Rank, Integer> benefits = new EnumMap<Rank, Integer>(Rank.class);
+        EnumMap<Rank, Integer> benefits = new EnumMap<>(Rank.getInitWinningStatics());
         benefits.put(Rank.FIRST,Rank.FIRST.getMoney());
 
-        Lotto lotto = new Lotto(2000);
+        Lotto lotto = new Lotto(1000);
         lotto.resultBenefit(benefits);
 
     }

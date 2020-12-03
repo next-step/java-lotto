@@ -8,6 +8,7 @@ public class InputView {
     Scanner input;
     private final String inputMoney = "구입금액을 입력해 주세요.";
     private final String inputPreNumber = "지난 주 당첨 번호를 입력해 주세요.";
+    private final String inputBonusNumber = "보너스 볼을 입력해주세요.";
 
     public InputView() {
         input = new Scanner(System.in);
@@ -37,5 +38,10 @@ public class InputView {
             preNumbers.add(Integer.parseInt(number.trim()));
         }
         return preNumbers;
+    }
+    public int inputBonus(){
+        System.out.println(inputBonusNumber);
+
+        return input.nextInt();
     }
 }

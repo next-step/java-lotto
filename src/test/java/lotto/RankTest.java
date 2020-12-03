@@ -11,7 +11,13 @@ public class RankTest {
     @Test
     @DisplayName("enum Test")
     public void enumTest(){
-      assertThat(Rank.rank(6)).isEqualByComparingTo(Rank.FIRST);
+      assertThat(Rank.rank(6,false)).isEqualByComparingTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("second enum Test")
+    public void secondEnumTest(){
+        assertThat(Rank.rank(5,true)).isEqualByComparingTo(Rank.SECOND);
     }
 
 }
