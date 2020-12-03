@@ -24,6 +24,7 @@ public class Lotto {
     public int getWinningCnt(){
         return this.winningCnt;
     }
+
     public List<Integer> getNumberList(){
         return numberList;
     }
