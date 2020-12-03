@@ -24,7 +24,7 @@ public class LottoApplication {
         List<LottoTicket> lottoTickets = generator.generateLottoTickets(ticketCount);
         resultView.printLottoTickets(lottoTickets);
 
-        Scanner scanner = new Scanner(inputView.inputWinningNumbers());
+        Scanner scanner = new Scanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
         LottoResult lottoResult = scanner.scanAll(lottoTickets);
         resultView.printLottoResult(lottoResult);
     }

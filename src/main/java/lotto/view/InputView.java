@@ -18,6 +18,11 @@ public class InputView {
         return split(scanner.nextLine());
     }
 
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요 :)");
+        return scanner.nextInt();
+    }
+
     private List<Integer> split(String input) {
         List<String> strings = Arrays.asList(input.replaceAll(" ", "").split(","));
         return strings.stream().map(Integer::parseInt).collect(Collectors.toList());
