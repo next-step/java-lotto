@@ -2,8 +2,10 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.ProfitRule;
+import lotto.domain.Rank;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -18,9 +20,13 @@ public class ResultView {
     public void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (ProfitRule p :lottoResult.getResult().keySet()) {
-            System.out.println(p.getMatchingScore() + "개 일치 (" + p.getProfit() + ")" + ": " + lottoResult.getResult().get(p));
-        }
+
+        Arrays.stream(Rank.values())
+                .filter(r -> r.getMatchingScore() >= 3)
+                .sorted(Comparator.comparing(Rank::getProfit))
+                .forEach(r -> System.out.println(r.getMatchingScore() +
+                        "개 일치 (" + r.getProfit() + "원)" + ": " + lottoResult.getResult().get(r) +"개"));
+
         System.out.println("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다.");
     }
 }
