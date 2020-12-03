@@ -25,7 +25,8 @@ public class LottoGameServiceTest {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7);
         Lotto lotto = new Lotto(lottoNumbers);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
+        int bonusLottoNumber = 7;
+        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers, bonusLottoNumber);
         assertThat(lottoWinner.getMatchLottoCnt(lotto)).isEqualTo(5);
     }
 
@@ -37,8 +38,10 @@ public class LottoGameServiceTest {
         lottoList.add(lotto);
         LottoTicket lottoTicket = new LottoTicket(lottoList);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
+        int bonusLottoNumber = 7;
+        LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers, bonusLottoNumber);
         List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);
-        assertThat(LottoGameService.getLottoMatchStatistics(lottoRank, 5)).isEqualTo(1);
+        Rank rank = Rank.SECOND;
+        assertThat(LottoGameService.getLottoMatchStatistics(lottoRank, rank)).isEqualTo(1);
     }
 }

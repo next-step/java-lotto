@@ -14,10 +14,16 @@ public class RankTest {
 
 
     @ParameterizedTest
-    @CsvSource(value = {"6:FIRST","5:SECOND","4:THIRD","3:FOURTH","2:FIFTH","1:LOSEONE","0:LOSEZERO"}, delimiter = ':')
+    @CsvSource(value = {"6:FIRST","5:THIRD","4:FOURTH","3:FIFTH"}, delimiter = ':')
     public void getRankByMatchCnt(int matchCnt, String rankName) {
-        assertThat(Rank.getRankByMatchCnt(matchCnt).name()).isEqualTo(rankName);
+        assertThat(Rank.valueOf(matchCnt, false).name()).isEqualTo(rankName);
 
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"5:SECOND"}, delimiter = ':')
+    public void getRankByMatchBonus(int matchCnt, String rankName) {
+        assertThat(Rank.valueOf(matchCnt, true).name()).isEqualTo(rankName);
+
+    }
 }

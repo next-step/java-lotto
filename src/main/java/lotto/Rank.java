@@ -1,13 +1,14 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
-    FIFTH(2, 0),
-    LOSEONE(1, 0),
-    LOSEZERO(0, 0);
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     private int matchCnt;
     private int winnnerPrice;
@@ -25,12 +26,19 @@ public enum Rank {
         return winnnerPrice;
     }
 
-    public static Rank getRankByMatchCnt(int matchCnt){
-        for(Rank r : Rank.values()){
-            if(r.matchCnt == matchCnt){
-                return r;
-            }
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        // 일치하는 수를 로또 등수로 변경한다.
+        Rank rank = Arrays.stream(Rank.values())
+                .filter(r -> r.getMatchCnt() == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
+        if (isSecondPriceMatch(rank) && !matchBonus) {
+            return Rank.THIRD;
         }
-        return LOSEZERO;
+        return rank;
+    }
+
+    private static boolean isSecondPriceMatch(Rank rank){
+        return rank.equals(Rank.SECOND);
     }
 }

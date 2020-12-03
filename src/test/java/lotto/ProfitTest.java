@@ -20,7 +20,8 @@ public class ProfitTest {
         Lotto lotto = new Lotto(lottoNumbers);
         lottoList.add(lotto);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
-        new LottoWinner(winnerLottoNumbers);
+        int bonusLottoNumber = 7;
+        new LottoWinner(winnerLottoNumbers, bonusLottoNumber);
         LottoGameService.setLottoBuyAmt(14000);
     }
 

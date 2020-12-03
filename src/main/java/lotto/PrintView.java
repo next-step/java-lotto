@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class PrintView {
@@ -19,9 +21,22 @@ public class PrintView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for(int i = MATCH_MIN_CNT; i<= MATCH_MAX_CNT; i++){
-            System.out.println(Rank.getRankByMatchCnt(i).getMatchCnt()+"개 일치 ("+Rank.getRankByMatchCnt(i).getWinnnerPrice()+"원)- "+LottoGameService.getLottoMatchStatistics(rankList, i)+"개");
+        Arrays.stream(Rank.values())
+        .sorted(Comparator.comparing(Rank::getWinnnerPrice))
+        .filter(r -> r.getMatchCnt() != 0)
+        .forEach(r -> {
+            System.out.println(printBallMatchCnt(r)+r.getWinnnerPrice()+"원)- "+LottoGameService.getLottoMatchStatistics(rankList, r)+"개");
+        });
+//        for(int i = MATCH_MIN_CNT; i<= MATCH_MAX_CNT; i++){
+//            System.out.println(Rank.valueOf(i, false).getMatchCnt()+"개 일치 ("+Rank.valueOf(i, false).getWinnnerPrice()+"원)- "+LottoGameService.getLottoMatchStatistics(rankList, i)+"개");
+//        }
+    }
+
+    public static String printBallMatchCnt(Rank rank) {
+        if(rank.equals(Rank.SECOND)){
+            return rank.getMatchCnt()+"개 일치, 보너스 볼 일치(";
         }
+        return rank.getMatchCnt()+"개 일치 (";
     }
 
     public static void printWinnerLate(List<Rank> lottoRankList) {

@@ -6,9 +6,11 @@ import java.util.List;
 
 public final class LottoWinner {
     private final int[] winnerLottoNumbers;
+    private final int bonusLottoNumber;
 
-    public LottoWinner(int[] winnerLottoNumbers) {
+    public LottoWinner(int[] winnerLottoNumbers, int bonusLottoNumber) {
         this.winnerLottoNumbers = winnerLottoNumbers;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public List<Rank> matchingWinnerNumber(LottoTicket lottoTicket){
@@ -16,7 +18,7 @@ public final class LottoWinner {
         for(Lotto lotto : lottoTicket.getLottoList()){
             int matchCnt = getMatchLottoCnt(lotto);
             lotto.addWinnerMatchCnt(matchCnt);
-            lottoRankList.add(Rank.getRankByMatchCnt(matchCnt));
+            lottoRankList.add(Rank.valueOf(matchCnt, isContainBonusNumber(lotto, bonusLottoNumber)));
         }
         return lottoRankList;
     }
@@ -32,5 +34,9 @@ public final class LottoWinner {
             return 1;
         }
         return 0;
+    }
+
+    public static boolean isContainBonusNumber(Lotto lotto, int bonusLottoNumber){
+        return lotto.getLottoNumbers().contains(bonusLottoNumber);
     }
 }
