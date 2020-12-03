@@ -7,7 +7,6 @@ import lotto.view.input.InputView;
 
 public class LottoController {
 
-
     public Lottoes purchaseLotto() {
         Lottoes lottoes = new Lottoes(LottoGameView.enterLottoAmount());
         LottoGameView.printLottoNumbers(lottoes);

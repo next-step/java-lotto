@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.LottoGameView;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +9,14 @@ public class Lottoes {
     private final List<LottoNumbers> value;
     private final PurchaseAmount purchaseAmount;
 
+    //TODO Test를 위한 생성자를 만들었는데, 이래도 되는지 의문...
+    public Lottoes(List<LottoNumbers> value, PurchaseAmount purchaseAmount) {
+        this.value = value;
+        this.purchaseAmount = purchaseAmount;
+    }
+
     public Lottoes(int lottoAmount) {
-        this.value = new LottoNumberGenerator().create(LottoGameView.enterLottoAmount());
+        this.value = new LottoNumberGenerator().create(lottoAmount);
         this.purchaseAmount = new PurchaseAmount(lottoAmount);
     }
 

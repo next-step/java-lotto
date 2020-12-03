@@ -26,7 +26,7 @@ class LottoGameResultTest {
                 new LottoNumber(6)
         );
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        lottoes = new Lottoes(Arrays.asList(lottoNumbers));
+        lottoes = new Lottoes(Arrays.asList(lottoNumbers), new PurchaseAmount(1000));
     }
 
 
