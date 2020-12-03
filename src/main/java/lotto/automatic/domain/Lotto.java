@@ -14,7 +14,15 @@ public class Lotto {
         validate(lottoNumbers);
 
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
+    }
 
+    public static Lotto auto() {
+        return new Lotto(generateAutoNumbers());
+    }
+
+    private static List<LottoNumber> generateAutoNumbers() {
+
+        return LottoNumber.random(NUMBER_SIZE);
     }
 
     private void validate(List<LottoNumber> numbers) {

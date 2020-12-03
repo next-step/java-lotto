@@ -11,7 +11,6 @@ public class LottoMainApp {
 
         controller.request();
 
-
     }
 
 }

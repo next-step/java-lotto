@@ -1,4 +1,4 @@
-package lotto.automatic.domain;
+package lotto.automatic.dto;
 
 public class LottoBuyingMoney {
 
