@@ -4,7 +4,7 @@ import lotto.automatic.domain.Lotto;
 import lotto.automatic.domain.LottoRank;
 import lotto.automatic.domain.LottoResult;
 import lotto.automatic.domain.WinningLotto;
-import lotto.automatic.dto.LottoBuyingMoney;
+import lotto.automatic.dto.LottoBuyingMoneyAndAmount;
 import lotto.automatic.view.InputView;
 import lotto.automatic.view.OutputView;
 
@@ -24,33 +24,33 @@ public class LottoController {
 
     public void request(){
 
-        LottoBuyingMoney lottoBuyingMoney = getLottoMoney();
-        List<Lotto> lottoList = getLottoList(lottoBuyingMoney);
+        LottoBuyingMoneyAndAmount lottoBuyingMoneyAndAmount = getLottoMoney();
+        List<Lotto> lottoList = getLottoList(lottoBuyingMoneyAndAmount);
 
         outputView.printLottoList(lottoList);
 
         WinningLotto winningLotto = getWinningLotto();
         List<LottoRank> lottoRankList = winningLotto.getRankList(lottoList);
-        LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
+        LottoResult result = getResult(lottoBuyingMoneyAndAmount, lottoRankList);
 
         outputView.printLottoResult(result);
 
     }
 
-    private LottoResult getResult(LottoBuyingMoney lottoBuyingMoney, List<LottoRank> lottoRankList) {
-        return lottoGame.getLottoResult(lottoBuyingMoney.getInvestMoney(), lottoRankList);
+    private LottoResult getResult(LottoBuyingMoneyAndAmount lottoBuyingMoneyAndAmount, List<LottoRank> lottoRankList) {
+        return lottoGame.getLottoResult(lottoBuyingMoneyAndAmount.getInvestMoney(), lottoRankList);
     }
 
     private WinningLotto getWinningLotto() {
         return inputView.getWinningLottoNums();
     }
 
-    private List<Lotto> getLottoList(LottoBuyingMoney lottoBuyingMoney) {
-        return lottoGame.generateLotto(lottoBuyingMoney.getCountOfLotto());
+    private List<Lotto> getLottoList(LottoBuyingMoneyAndAmount lottoBuyingMoneyAndAmount) {
+        return lottoGame.generateLotto(lottoBuyingMoneyAndAmount.getCountOfLotto());
     }
 
-    private LottoBuyingMoney getLottoMoney() {
-        return inputView.getLottoMoney();
+    private LottoBuyingMoneyAndAmount getLottoMoney() {
+        return inputView.getLottoMoneyAndAmount();
     }
 
 }
