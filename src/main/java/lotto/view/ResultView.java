@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Money;
-import lotto.domain.Lottos;
-import lotto.domain.PrizeInformation;
-import lotto.domain.Reward;
+import lotto.domain.*;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -14,16 +11,16 @@ public class ResultView {
 
     private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
-    public static void outputPurchaseQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public static void outputPurchaseQuantity(LottoTicket ticket) {
+        System.out.println("수동으로 " + ticket.getManualCount() + "장, 자동으로 " + ticket.getAutoCount() + "개를 구매했습니다.");
     }
 
     public static void outputLottos(Lottos lottos) {
         IntStream.range(0, lottos.quantity())
                 .forEach(i -> System.out.println(lottos.getLotto(i).stream()
-                                                            .map(lottonumber -> lottonumber.getNumber())
-                                                            .sorted()
-                                                            .collect(Collectors.toList())));
+                        .map(lottonumber -> lottonumber.getNumber())
+                        .sorted()
+                        .collect(Collectors.toList())));
     }
 
     public static void outputPrizeStatistics(Reward reward) {

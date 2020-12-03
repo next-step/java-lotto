@@ -11,10 +11,18 @@ public class LottoGame {
         Money money = Money.from(InputView.inputPurchasePrice());
 
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(money, new LottoAutoMachine());
 
-        ResultView.outputPurchaseQuantity(lottos.quantity());
+        lottoShop.purchaseLottoTicket(money);
+        int manualCount = InputView.inputManualLottoCount();
 
+        InputView.inputManualLottoNumbers();
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < manualCount; i++) {
+            lottos = lottoShop.exchangeManualLottos(InputView.inputLottoNumbers());
+        }
+        lottos = lottoShop.exchangeAutoLottos(new LottoAutoMachine());
+
+        ResultView.outputPurchaseQuantity(lottoShop.getLottoTicket());
         ResultView.outputLottos(lottos);
 
         PrizeLotto prizeLotto = new PrizeLotto(Lotto.of(InputView.lastWeekLottoPrizeNumber()), InputView.inputBonusball());
