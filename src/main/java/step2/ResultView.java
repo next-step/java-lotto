@@ -21,7 +21,7 @@ public class ResultView {
         System.out.println("------------------");
 
         for (int i = 3; i <= 6; i ++) {
-            System.out.println((i) + "개 일치 (" + RewardBoard.getReward(i).getReward() + "원)- " + Statistic.results[i-1].toString() + "개");
+            System.out.println((i) + "개 일치 (" + RewardBoard.getReward(i).getReward() + "원)- " + Statistic.results[i].toString() + "개");
         }
 
         System.out.println("총 수익률은 " + Statistic.getMargin(money) + "입니다.");
