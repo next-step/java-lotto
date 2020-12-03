@@ -46,7 +46,7 @@ public class LottoController {
     }
 
     private List<Lotto> getLottoList(LottoBuyingMoneyAndAmount lottoBuyingMoneyAndAmount) {
-        return lottoGame.generateLotto(lottoBuyingMoneyAndAmount.getCountOfLotto());
+        return lottoGame.generateAutoLotto(lottoBuyingMoneyAndAmount.getCountOfLotto());
     }
 
     private LottoBuyingMoneyAndAmount getLottoMoney() {

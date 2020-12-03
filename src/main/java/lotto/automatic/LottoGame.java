@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    public List<Lotto> generateLotto(int lottoAmount) {
+    public List<Lotto> generateAutoLotto(int lottoAmount) {
 
         List<Lotto> list = new ArrayList<>();
 
