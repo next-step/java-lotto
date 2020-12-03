@@ -15,20 +15,16 @@ public class StaticticTest {
     void statisticTest() {
         FixedNumberGenerator fourWinningsGenerator = new FixedNumberGenerator();
         fourWinningsGenerator.setNumber("1,3,5,7,10,12");
-
+        int money = 6500;
         String resultInput = "1, 3, 5, 7, 9, 11";
 
-        List<Integer> result = new ArrayList<>();
+        Lottos lottos = Main.settingLottos(money, fourWinningsGenerator);
 
-        for (String i : resultInput.split(", ")) {
-            result.add(Integer.parseInt(i));
-        }
+        Main.checkResult(lottos, resultInput);
 
-        int money = 6500;
-        Lottos lottos = new Lottos(money, fourWinningsGenerator);
-        lottos.checkResult(result);
-        // 결과 입력
         Statistic.recordResult(lottos);
+
+        // 예상 결과값 계산
         int lottoCnt = money / 1000;
         int fourWinningReward = RewardBoard.getReward(4).getReward();
         int totalReward = lottoCnt * fourWinningReward;

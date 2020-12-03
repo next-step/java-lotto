@@ -10,23 +10,31 @@ public class Main {
 
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        Lottos lottos = new Lottos(money, lottoGenerator);
-
-        ResultView.printLottoCnt(lottos.getLottosCnt());
-
-        ResultView.printLottoList(lottos);
+        Lottos lottos = settingLottos(money, lottoGenerator);
 
         String resultString = InputView.getResultNumber();
-        List<Integer> ResultNumberList = getResultNumberList(resultString);
-        // 로또 결과 확인
-        lottos.checkResult(ResultNumberList);
 
+        checkResult(lottos, resultString);
         // 결과 입력
         Statistic.recordResult(lottos);
         // 결과 출력
         ResultView.printResult(lottos, money);
     }
 
+    public static void checkResult(Lottos lottos, String resultString){
+        List<Integer> ResultNumberList = getResultNumberList(resultString);
+        // 로또 결과 확인
+        lottos.checkResult(ResultNumberList);
+    }
+    public static Lottos settingLottos(int money, LottoGenerator lottoGenerator) {
+        Lottos lottos = new Lottos(money, lottoGenerator);
+
+        ResultView.printLottoCnt(lottos.getLottosCnt());
+
+        ResultView.printLottoList(lottos);
+
+        return lottos;
+    }
     public static List<Integer> getResultNumberList(String resultString) {
         List<Integer> numberList = new ArrayList<>();
 
