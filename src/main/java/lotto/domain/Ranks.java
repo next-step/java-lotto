@@ -27,6 +27,7 @@ public class Ranks {
         result.put(Rank.SECOND, 0);
         result.put(Rank.THIRD, 0);
         result.put(Rank.FOURTH, 0);
+        result.put(Rank.FIFTH, 0);
 
         return result;
     }

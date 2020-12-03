@@ -25,9 +25,9 @@ public class ResultView {
     public static void printLottoGameResult(Map<Rank, Integer> ranks) {
         String first = "6개 일치 (2,000,000,000원) - " + ranks.get(Rank.FIRST);
         String second = "5개 일치, 보너스 볼 일치(30,000,000원) - " + ranks.get(Rank.SECOND);
-        String third = "5개 일치 (1,500,000원) - " + ranks.get(Rank.SECOND);
-        String fourth = "4개 일치 (50,000원) - " + ranks.get(Rank.THIRD);
-        String fifth = "3개 일치 (5,000원) - " + ranks.get(Rank.FOURTH);
+        String third = "5개 일치 (1,500,000원) - " + ranks.get(Rank.THIRD);
+        String fourth = "4개 일치 (50,000원) - " + ranks.get(Rank.FOURTH);
+        String fifth = "3개 일치 (5,000원) - " + ranks.get(Rank.FIFTH);
 
         System.out.println();
         System.out.println("당첨 통계");
