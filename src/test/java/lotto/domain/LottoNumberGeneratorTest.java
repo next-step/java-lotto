@@ -27,10 +27,10 @@ class LottoNumberGeneratorTest {
     @DisplayName("14,000원을 입력하면, 1~45까지 6개의 번호를 14개 생성한다.")
     void should_return_lotto_numbers() {
         //Given & When
-        Lottoes lottoes = lottoNumberGenerator.create(14_000);
+        List<LottoNumbers> lottoNumbers = lottoNumberGenerator.create(14_000);
 
         //Then
-        assertThat(lottoes.getValue().size()).isEqualTo(14);
+        assertThat(lottoNumbers.size()).isEqualTo(14);
     }
 
     @Test

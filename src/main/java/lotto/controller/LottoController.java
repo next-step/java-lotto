@@ -1,16 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.*;
-import lotto.domain.LottoNumberGenerator;
+import lotto.domain.Lottoes;
+import lotto.domain.WinningNumbers;
 import lotto.view.LottoGameView;
 import lotto.view.input.InputView;
 
 public class LottoController {
 
-    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     public Lottoes purchaseLotto() {
-        Lottoes lottoes = lottoNumberGenerator.create(LottoGameView.enterLottoAmount());
+        Lottoes lottoes = new Lottoes(LottoGameView.enterLottoAmount());
         LottoGameView.printLottoNumbers(lottoes);
         return lottoes;
     }

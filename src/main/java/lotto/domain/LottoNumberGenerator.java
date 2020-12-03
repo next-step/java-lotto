@@ -13,9 +13,9 @@ public class LottoNumberGenerator {
     private static final String DELETE_BLANK = "";
     private static final CachedLottoNumbers cachedLottoNumbers = new CachedLottoNumbers();
 
-    public Lottoes create(int amount) {
+    public List<LottoNumbers> create(int amount) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-        return new Lottoes(getLottoNumbers(purchaseAmount.getLottoCount()));
+        return getLottoNumbers(purchaseAmount.getLottoCount());
     }
 
     private List<LottoNumbers> getLottoNumbers(int lottoCount) {

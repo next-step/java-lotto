@@ -1,14 +1,18 @@
 package lotto.domain;
 
+import lotto.view.LottoGameView;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottoes {
 
     private final List<LottoNumbers> value;
+    private final PurchaseAmount purchaseAmount;
 
-    public Lottoes(List<LottoNumbers> value) {
-        this.value = value;
+    public Lottoes(int lottoAmount) {
+        this.value = new LottoNumberGenerator().create(LottoGameView.enterLottoAmount());
+        this.purchaseAmount = new PurchaseAmount(lottoAmount);
     }
 
     public List<LottoNumbers> getValue() {
@@ -20,7 +24,6 @@ public class Lottoes {
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
-        return new LottoGameResult(new Ranks(ranks), new PurchaseAmount(ranks));
-
+        return new LottoGameResult(new Ranks(ranks), this.purchaseAmount);
     }
 }

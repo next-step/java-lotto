@@ -7,7 +7,7 @@ public class WinningNumbers {
 
     public WinningNumbers(String winningNumbers, int bonusNumber) {
         this.value = new LottoNumberGenerator().create(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = new CachedLottoNumbers().getLottoNumber(bonusNumber);
     }
 
     public Rank getRank(LottoNumbers lottoNumbers) {

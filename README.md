@@ -54,7 +54,8 @@ utils.Calculator
 
 ##TODO
 1. step3 피드백 사항 정리
-2. CachedLottoNumbers 객체를 생성하여, LottoNumbersGenerator 객체에서 저장된 lotto 번호를 불러오는 기능을 분리
+
+
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
@@ -100,6 +101,8 @@ utils.Calculator
 34. Lotto 당첨 순위 5등 추가
 35. 일치하는 숫자를 LottoNumbers에게 메시지를 전달하여 반환받는 형식으로 변경
 36. Rank 반환 방법 리팩터링
+37. CachedLottoNumbers 객체를 생성하여, LottoNumbersGenerator 객체에서 저장된 lotto 번호를 불러오는 기능을 분리
+38. LottoGameResult 반환시, PurchaseAmount의 객체가 Ranks를 의존하지 않기 위해, Lottoes에서 PurchaseAmount객체를 가지고 있도록 수정
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
