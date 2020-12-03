@@ -6,14 +6,13 @@ public class Scanner {
 
     private List<Integer> winningNumbers;
     private int bonusNumber;
-    private LottoResult lottoResult;
 
     public Scanner(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void scan(LottoTicket lottoTicket) {
+    private void scan(LottoTicket lottoTicket, LottoResult lottoResult) {
         long matchingScore = lottoTicket.getLottoNumbers().stream()
                         .filter(n -> winningNumbers.contains(n.toInt())).count();
         final boolean matchBonus = lottoTicket.getLottoNumbers().stream()
@@ -23,8 +22,8 @@ public class Scanner {
     }
 
     public LottoResult scanAll(List<LottoTicket> lottoTickets) {
-        lottoResult = new LottoResult(lottoTickets.size());
-        lottoTickets.forEach(this::scan);
+        LottoResult lottoResult = new LottoResult(lottoTickets.size());
+        lottoTickets.forEach(lottoTicket -> scan(lottoTicket, lottoResult));
         return lottoResult;
     }
 }
