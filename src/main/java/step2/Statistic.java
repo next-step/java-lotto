@@ -14,7 +14,7 @@ public class Statistic {
     public static void recordResult(Lottos lottos) {
         results = new Integer[]{0, 0, 0, 0, 0, 0};
         for (Lotto lotto : lottos.getLottoList()) {
-            results[lotto.getWinningCnt()] += 1;
+            results[lotto.getWinningCnt()-1] += 1;
         }
     }
 }

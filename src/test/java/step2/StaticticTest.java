@@ -27,7 +27,8 @@ public class StaticticTest {
         int money = 6500;
         Lottos lottos = new Lottos(money, fourWinningsGenerator);
         lottos.checkResult(result);
-
+        // 결과 입력
+        Statistic.recordResult(lottos);
         int lottoCnt = money/1000;
         int fourWinningReward = RewardBoard.getReward(4).getReward();
         int totalReward = lottoCnt*fourWinningReward;
