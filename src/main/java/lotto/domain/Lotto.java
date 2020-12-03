@@ -5,7 +5,7 @@ import lotto.util.LottoGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
     private static final int LOTTO_COMPOSITION_NUMBER = 6;
@@ -38,6 +38,15 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isBonus(LottoNumber lottoNumber) {
+        return getLottoNumberByMatch(lottoNumber)
+                .count() > 0;
+    }
+
+    private Stream<LottoNumber> getLottoNumberByMatch(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber::equals);
+    }
 
     @Override
     public String toString() {

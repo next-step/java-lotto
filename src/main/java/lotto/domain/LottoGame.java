@@ -12,7 +12,7 @@ public class LottoGame {
         System.out.println(money.getAvailableLottoSize() + "개를 구매했습니다.");
         List<Lotto> myLottoList = LottoUtil.createAutoLottoList(money);
         ResultView.printLotto(myLottoList);
-        WinningResult winningResult = new WinningResult(InputView.inputWinningNumber());
+        WinningResult winningResult = new WinningResult(InputView.inputWinningNumber(), InputView.inputBonusBall());
         ResultView.printWinningStatistics(money, myLottoList, winningResult);
     }
 

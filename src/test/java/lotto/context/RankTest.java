@@ -19,14 +19,13 @@ class RankTest {
 
     @Test
     void getRank() {
-        Assertions.assertThat(Rank.getRank(6))
+        Assertions.assertThat(Rank.getRank(6, false))
                 .isEqualTo(Rank.FIRST);
     }
 
     @Test
-    void ThrowGetRank() {
-        Assertions.assertThatThrownBy(() -> {
-            Rank.getRank(1);
-        }).isInstanceOf(IllegalArgumentException.class);
+    void getRank_NotMatch() {
+        Assertions.assertThat(Rank.getRank(1, false))
+                .isEqualTo(Rank.MISS);
     }
 }
