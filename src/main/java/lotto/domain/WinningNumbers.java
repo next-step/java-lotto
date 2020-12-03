@@ -12,15 +12,9 @@ public class WinningNumbers {
 
     public Rank getRank(LottoNumbers lottoNumbers) {
 
-        int matchingNumberCount = getMatchingCount(lottoNumbers);
+        int matchingNumberCount = lottoNumbers.getMatchingCount(value);
         boolean matchBonus = lottoNumbers.hasLottoNumber(bonusNumber);
 
         return Rank.value(matchingNumberCount, matchBonus);
-    }
-
-    private int getMatchingCount(LottoNumbers lottoNumbers) {
-        return (int) value.getValue().stream()
-                .filter(lottoNumbers::hasLottoNumber)
-                .count();
     }
 }
