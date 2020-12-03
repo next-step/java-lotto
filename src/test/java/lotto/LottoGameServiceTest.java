@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,13 +22,7 @@ public class LottoGameServiceTest {
 
     @Test
     public void getMatchLottoCntTest() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(1);
-        lottoNumbers.add(2);
-        lottoNumbers.add(3);
-        lottoNumbers.add(5);
-        lottoNumbers.add(6);
-        lottoNumbers.add(7);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7);
         Lotto lotto = new Lotto(lottoNumbers);
         int[] winnerLottoNumbers = {1,2,3,4,5,6};
         LottoWinner lottoWinner = new LottoWinner(winnerLottoNumbers);
@@ -36,13 +31,7 @@ public class LottoGameServiceTest {
 
     @Test
     public void getLottoMatchStatisticsTest() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(1);
-        lottoNumbers.add(2);
-        lottoNumbers.add(3);
-        lottoNumbers.add(5);
-        lottoNumbers.add(6);
-        lottoNumbers.add(7);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7);
         Lotto lotto = new Lotto(lottoNumbers);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
