@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @Test
-    public void 로또_번호_범위() {
+    public void invalid_로또_번호_범위() {
         assertThat(LottoNumber.of(1).getNumber()).isEqualTo(1);
 
         assertThatThrownBy(() -> {
