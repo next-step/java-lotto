@@ -3,8 +3,6 @@ package lotto.domain;
 import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,5 +49,19 @@ class LottoNumbersTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumbers(numbers))
                 .withMessage(ErrorMessage.NOT_ALLOW_DUPLICATED);
+    }
+
+    @Test
+    @DisplayName("일치하는 숫자의 개수를 반환한다.")
+    void should_return_matching_count() {
+        //Given
+        LottoNumbers lottoNumbers = lottoNumberGenerator.create("1, 2, 3, 4, 5, 6");
+        LottoNumbers winning = lottoNumberGenerator.create("1, 2, 3, 7, 8, 9");
+
+        //When
+        int matchingCount = lottoNumbers.getMatchingCount(winning);
+
+        //Then
+        assertThat(matchingCount).isEqualTo(3);
     }
 }

@@ -43,4 +43,10 @@ public class LottoNumbers {
                 .collect(Collectors.toList())
                 .contains(lottoNumber.getValue());
     }
+
+    public int getMatchingCount(LottoNumbers lottoNumbers){
+        return (int) value.stream()
+                .filter(lottoNumbers::hasLottoNumber)
+                .count();
+    }
 }
