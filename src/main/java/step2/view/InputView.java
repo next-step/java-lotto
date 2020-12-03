@@ -1,5 +1,7 @@
 package step2.view;
 
+import step2.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,14 +13,14 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static List<Integer> inputWinNumber() {
-        List<Integer> numbers = new ArrayList<>();
+    public static List<LottoNumber> inputWinNumber() {
+        List<LottoNumber> numbers = new ArrayList<>();
 
         sc.nextLine();
         String[] winNumbers = sc.nextLine().split(", ");
 
         for (int i = 0; i < winNumbers.length; i++) {
-            numbers.add(Integer.parseInt(winNumbers[i]));
+            numbers.add(LottoNumber.of(Integer.parseInt(winNumbers[i])));
         }
         return numbers;
     }
