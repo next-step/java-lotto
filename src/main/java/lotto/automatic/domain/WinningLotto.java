@@ -1,5 +1,7 @@
 package lotto.automatic.domain;
 
+import lotto.automatic.util.NumberStringParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String rawNumberString, int bonusNumber) {
-        List<LottoNumber> nums = parseString(rawNumberString);
+        List<LottoNumber> nums = NumberStringParser.parseString(rawNumberString);
 
         Lotto winningLotto = new Lotto(nums);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
@@ -18,16 +20,6 @@ public class WinningLotto {
 
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusLottoNumber;
-    }
-
-    private List<LottoNumber> parseString(String rawNumberString) {
-        String[] numberStrings = rawNumberString.split(",");
-        List<LottoNumber> nums = new ArrayList<>();
-
-        for (String numString : numberStrings) {
-            nums.add(LottoNumber.of(Integer.parseInt(numString.trim())));
-        }
-        return nums;
     }
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
