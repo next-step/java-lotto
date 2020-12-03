@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.InputManualLotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.SeedMoney;
@@ -20,9 +21,11 @@ public class LottoGameController {
 
     public static void main(String[] args) {
 
-        SeedMoney seedMoney = InputView.askAndShowLottoGameMoney();
+        SeedMoney seedMoney = InputView.askSeedMoney();
 
-        Lottos lottos = LottoGenerator.generate(seedMoney.round());
+        InputManualLotto inputManualLotto = InputView.askManualRoundsAndLottos();
+
+        Lottos lottos = LottoGenerator.generate(seedMoney, inputManualLotto);
 
         ResultView.showBoughtLottos(lottos);
 
@@ -35,6 +38,5 @@ public class LottoGameController {
 
         SCANNER.close();
     }
-
 
 }

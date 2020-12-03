@@ -105,3 +105,28 @@
    
   - [x] 당첨번호+보너스볼 질문은 InputView로
 
+----
+
+### step4
+-  피드백 반영
+  - [x] WinningStatistics `from` 수정
+  - [x] LottoNumber `compare` 간결하게
+  - [x] WinningRank 사용하지 않은 변수 삭제
+  - [x] WinningNumber unmodifiable 컬렉션 이중으로 호출 X
+  
+- 수동 구현  
+  - [x] 수동구매 개수 입력
+    - [x] `Round`로 포장
+  - [x] 구매번호 입력
+  - [x] 자동+수동 generate 확인 
+  - [x] LottoNumberSet 자체를 set으로만 써보기..?
+  - `Application` 추가
+
+- 추가 피드백
+  - [x] LottoNumberSet 생성할 때부터 변경 불가능하도록 변경하기.
+  - [x] LottoGenerator `lottoNumbers`의 타입 변경
+  - [x] LottoGenerator Lottos로 인스턴스 두번 생성하지 말고 리스트 합쳐서 넘기기
+  - [x] WinningStatistics 프린트 시 정렬방법 변경 
+  
+- 추가 구현
+  - [x] 수동구매/자동구매 개수 보여주는 ResultView 작성

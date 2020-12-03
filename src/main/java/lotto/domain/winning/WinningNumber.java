@@ -34,8 +34,8 @@ public class WinningNumber {
         return new WinningNumber(lottoNumberSet, bonusBall);
     }
 
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(this.winningNumber.value());
+    public Set<LottoNumber> value() {
+        return this.winningNumber.value();
     }
 
     public WinningRank match(Lotto lotto) {

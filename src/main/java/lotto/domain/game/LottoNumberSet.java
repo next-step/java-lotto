@@ -18,11 +18,11 @@ public class LottoNumberSet {
     }
 
     public static LottoNumberSet of(List<LottoNumber> lottoNumbers) {
-        return new LottoNumberSet(new TreeSet<>(lottoNumbers));
+        return new LottoNumberSet(Collections.unmodifiableSet(new TreeSet<>(lottoNumbers)));
     }
 
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
+    public Set<LottoNumber> value() {
+        return this.lottoNumbers;
     }
 
     public boolean contains(LottoNumber num) {
