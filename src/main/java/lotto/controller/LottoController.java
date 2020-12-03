@@ -10,14 +10,13 @@ public class LottoController {
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     public Lottoes purchaseLottoes() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(LottoGameView.enterLottoAmount());
-        Lottoes lottoes = lottoNumberGenerator.create(purchaseAmount);
+        Lottoes lottoes = lottoNumberGenerator.create(LottoGameView.enterLottoAmount());
         LottoGameView.printLottoNumbers(lottoes);
         return lottoes;
     }
 
     public void getLottoGameResult(Lottoes lottoes) {
-        LottoNumbers winningNumbers = new LottoNumbers(InputView.enterWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.enterWinningNumbers(), InputView.enterBonusNumber());
         LottoGameView.printResult(lottoes.getResult(winningNumbers));
     }
 }

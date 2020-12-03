@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.Lotto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,14 +15,12 @@ public class Lottoes {
         return value;
     }
 
-    public LottoGameResult getResult(LottoNumbers winningNumbers) {
+    public LottoGameResult getResult(WinningNumbers winningNumbers) {
         List<Rank> ranks = value.stream()
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
-        int purchaseAmount = value.size() * Lotto.PRICE;
-
-        return new LottoGameResult(ranks, new PurchaseAmount(purchaseAmount));
+        return new LottoGameResult(new Ranks(ranks), new PurchaseAmount(ranks));
 
     }
 }

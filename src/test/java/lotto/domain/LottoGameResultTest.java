@@ -5,20 +5,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoGameResultTest {
 
-    private static final LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 7, 8, 9");
+    private static final WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 8, 9", 7);
     private Lottoes lottoes;
 
     @BeforeEach
     void setUp() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-                ));
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         lottoes = new Lottoes(Arrays.asList(lottoNumbers));
     }
 
@@ -33,7 +40,7 @@ class LottoGameResultTest {
         double rateOfReturn = result.getRateOfReturn();
 
         //Then
-        assertThat(rateOfReturn).isEqualTo(5);
+        assertThat(rateOfReturn).isEqualTo(50);
     }
 
     @Test
@@ -46,6 +53,6 @@ class LottoGameResultTest {
         Map<Rank, Integer> ranks = result.getRanks();
 
         //Then
-        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FOURTH)).isOne();
     }
 }
