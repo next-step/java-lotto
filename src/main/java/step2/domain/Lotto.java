@@ -1,23 +1,20 @@
 package step2.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Lotto {
-    private final Set<LottoNumber> numbers;
+    public static final int LOTTO_SIZE = 6;
+    private final Set<LottoNumber> lotto = new HashSet<>();
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = new TreeSet(numbers);
-    }
+    public Lotto(List<LottoNumber> numbers) {
+        for (LottoNumber number : numbers) {
+            lotto.add(LottoNumber.of(number));
+        }
 
-    public Set<LottoNumber> getNumbers() {
-        return this.numbers;
-    }
-
-
-
-    public boolean contains(LottoNumber winNumber) {
-        return numbers.contains(winNumber);
+        if (this.lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또는 6개의 값이어야 합니다.");
+        }
     }
 }
