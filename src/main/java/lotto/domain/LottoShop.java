@@ -7,8 +7,8 @@ public class LottoShop {
 
     private static final int LOTTO_PRICE = 1_000;
 
-    public Lottos purchase(LottoPrice lottoPrice, LottoMachine machine) {
-        int quantity = lottoPrice.getPurchasePrice() / LOTTO_PRICE;
+    public Lottos purchase(Money money, LottoMachine machine) {
+        int quantity = money.getPurchasePrice() / LOTTO_PRICE;
         return createLotto(quantity, machine);
     }
 

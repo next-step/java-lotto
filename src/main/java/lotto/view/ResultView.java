@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoPrice;
+import lotto.domain.Money;
 import lotto.domain.Lottos;
 import lotto.domain.PrizeInformation;
 import lotto.domain.Reward;
@@ -41,7 +41,7 @@ public class ResultView {
     }
 
 
-    public static void outputTotalEarningRate(Reward reward, LottoPrice purchasePrice) {
+    public static void outputTotalEarningRate(Reward reward, Money purchasePrice) {
         System.out.println("총 수익률은 " + FORMAT.format(reward.earningRate(purchasePrice.getPurchasePrice())) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
