@@ -53,6 +53,8 @@ utils.Calculator
 - 구입금액과 당첨금액을 바탕으로 수익률을 계산한다.
 
 ##TODO
+1. 일치하는 숫자를 LottoNumbers에게 메시지를 전달하여 반환받는 형식으로 변경
+2. Rank 반환 방법 리팩터링
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
@@ -96,6 +98,8 @@ utils.Calculator
 32. 보너스볼을 입력 받아 당첨 결과 출력
 33. List<Rank> 일급 컬렉션으로 변경
 34. Lotto 당첨 순위 5등 추가
+35. 일치하는 숫자를 LottoNumbers에게 메시지를 전달하여 반환받는 형식으로 변경
+36. Rank 반환 방법 리팩터링
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)
