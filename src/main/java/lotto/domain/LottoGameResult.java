@@ -18,7 +18,7 @@ public class LottoGameResult {
     }
 
     public double getRateOfReturn() {
-        double rate = ranks.getAllPrizeMoney() / purchaseAmount.getAmount();
+        double rate = purchaseAmount.getRate(ranks.getAllPrizeMoney());
         return Math.floor(rate * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES;
     }
 

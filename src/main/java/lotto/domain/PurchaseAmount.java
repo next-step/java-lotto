@@ -28,7 +28,7 @@ public class PurchaseAmount {
         return amount / Lotto.PRICE;
     }
 
-    public int getAmount() {
-        return amount;
+    public double getRate(double allPrizeMoney) {
+        return allPrizeMoney / amount;
     }
 }
