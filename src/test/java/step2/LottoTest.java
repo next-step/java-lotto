@@ -27,13 +27,14 @@ public class LottoTest {
         Lotto lotto = new Lotto(fixedNumberGenerator);
         String resultInput = "1, 3, 5, 6, 8, 10";
 
-        List<Integer> result = new ArrayList<>();
+        List<LottoNumber> result = new ArrayList<>();
 
         for (String i : resultInput.split(", ")) {
-            result.add(Integer.parseInt(i));
+            result.add(new LottoNumber(Integer.parseInt(i)));
         }
         lotto.checkReward(result);
 
+        // Statistic.results[3] = lotto 중 3개가 맞는 로또 갯수
         assertThat(Statistic.results[3]).isEqualTo(1);
     }
 }

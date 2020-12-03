@@ -10,8 +10,8 @@ public class ResultView {
 
     public static void printLottoNumber(Lotto lotto) {
         StringJoiner numberString = new StringJoiner(", ");
-        for (int number: lotto.getNumberList()) {
-            numberString.add(Integer.toString(number));
+        for (LottoNumber number: lotto.getNumberList()) {
+            numberString.add(number.toString());
         }
         System.out.println("[" + numberString.toString() + "]");
     }

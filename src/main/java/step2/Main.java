@@ -20,7 +20,7 @@ public class Main {
     }
 
     public static void checkResult(Lottos lottos, String resultString){
-        List<Integer> ResultNumberList = getResultNumberList(resultString);
+        List<LottoNumber> ResultNumberList = getResultNumberList(resultString);
         // 로또 결과 확인
         lottos.checkResult(ResultNumberList);
     }
@@ -33,11 +33,11 @@ public class Main {
 
         return lottos;
     }
-    public static List<Integer> getResultNumberList(String resultString) {
-        List<Integer> numberList = new ArrayList<>();
+    public static List<LottoNumber> getResultNumberList(String resultString) {
+        List<LottoNumber> numberList = new ArrayList<>();
 
         for (String number : resultString.split(", ")) {
-            numberList.add(Integer.parseInt(number));
+            numberList.add(new LottoNumber(Integer.parseInt(number)));
         }
 
         return numberList;

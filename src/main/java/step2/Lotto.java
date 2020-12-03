@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    public final List<Integer> numberList;
+    public final List<LottoNumber> numberList;
 
     public Lotto(LottoGenerator lottoGenerator) {
         this.numberList = lottoGenerator.getLottoNumbers();
     }
 
-    public void checkReward(List<Integer> result) {
+    public void checkReward(List<LottoNumber> result) {
         int winningNumber = 0;
-        for (int i : result) {
+        for (LottoNumber i : result) {
             if (this.numberList.contains(i)) {
                 winningNumber ++;
             }
@@ -20,7 +20,7 @@ public class Lotto {
         Statistic.recordLottoResult(winningNumber);
     }
 
-    public List<Integer> getNumberList(){
+    public List<LottoNumber> getNumberList(){
         return numberList;
     }
 
