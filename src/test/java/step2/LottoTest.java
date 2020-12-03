@@ -34,6 +34,6 @@ public class LottoTest {
         }
         lotto.checkReward(result);
 
-        assertThat(lotto.getWinningCnt()).isEqualTo(3);
+        assertThat(Statistic.results[3]).isEqualTo(1);
     }
 }

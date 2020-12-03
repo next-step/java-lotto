@@ -11,10 +11,7 @@ public class Statistic {
         return totalReward/money;
     }
 
-    public static void recordResult(Lottos lottos) {
-        results = new Integer[]{0, 0, 0, 0, 0, 0, 0};
-        for (Lotto lotto : lottos.getLottoList()) {
-            results[lotto.getWinningCnt()] += 1;
-        }
+    public static void recordLottoResult(int winningCnt) {
+        results[winningCnt] += 1;
     }
 }

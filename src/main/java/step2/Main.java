@@ -15,8 +15,6 @@ public class Main {
         String resultString = InputView.getResultNumber();
 
         checkResult(lottos, resultString);
-        // 결과 입력
-        Statistic.recordResult(lottos);
         // 결과 출력
         ResultView.printResult(lottos, money);
     }

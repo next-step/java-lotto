@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Lotto {
     public final List<Integer> numberList;
-    private int winningCnt = 0;
 
     public Lotto(LottoGenerator lottoGenerator) {
         this.numberList = lottoGenerator.getLottoNumbers();
@@ -18,11 +17,7 @@ public class Lotto {
                 winningNumber ++;
             }
         }
-        this.winningCnt = winningNumber;
-    }
-
-    public int getWinningCnt(){
-        return this.winningCnt;
+        Statistic.recordLottoResult(winningNumber);
     }
 
     public List<Integer> getNumberList(){

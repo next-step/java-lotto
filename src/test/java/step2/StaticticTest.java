@@ -22,8 +22,6 @@ public class StaticticTest {
 
         Main.checkResult(lottos, resultInput);
 
-        Statistic.recordResult(lottos);
-
         // 예상 결과값 계산
         int lottoCnt = money / 1000;
         int fourWinningReward = RewardBoard.getReward(4).getReward();

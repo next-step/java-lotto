@@ -16,8 +16,6 @@ public class DomainTest {
         String resultString = "1, 3, 5, 7, 9, 11";
 
         Main.checkResult(lottos, resultString);
-        // 결과 입력
-        Statistic.recordResult(lottos);
         // 결과 출력
         ResultView.printResult(lottos, money);
     }
