@@ -20,15 +20,15 @@ public class Lotto {
     private void initLotto(LottoGenerator generator) {
         while (lottoNumbers.size() < LOTTO_COMPOSITION_NUMBER) {
             initSingleLottoNumber(generator);
-            lottoNumbers = lottoNumbers.stream()
-                    .distinct()
-                    .collect(Collectors.toList());
         }
         Collections.sort(lottoNumbers);
     }
 
     private void initSingleLottoNumber(LottoGenerator generator) {
         LottoNumber lottoNumber = new LottoNumber(generator.generatorNumber());
+        if (lottoNumbers.contains(lottoNumber)) {
+            return;
+        }
         lottoNumbers.add(lottoNumber);
     }
 
