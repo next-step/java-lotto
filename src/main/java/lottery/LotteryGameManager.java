@@ -10,10 +10,10 @@ import java.util.List;
 
 public class LotteryGameManager {
     public static void main(String[] args) {
-        int purchaseAmount = InputViewLotteryGame.getUserInvestAmount();
+        String purchaseAmount = InputViewLotteryGame.getUserInvestAmount();
 
         LotteryGame lotteryGame = new LotteryGame(1000,6);
-        int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(purchaseAmount);
+        int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(Integer.parseInt(purchaseAmount));
         ResultViewLotteryGame.displayNumberOfTickets(numberOfTicketsToBuy);
 
         List<LotteryTicket> purchasedTickets = lotteryGame.buyLotteryTickets(numberOfTicketsToBuy);
@@ -22,6 +22,6 @@ public class LotteryGameManager {
         String lotteryWinningNumbers = InputViewLotteryGame.getWinningNumbers();
         LotteryResult lotteryResult = lotteryGame.matchLotteryTickets(lotteryWinningNumbers, purchasedTickets);
 
-        ResultViewLotteryGame.displayLotteryResult(lotteryResult, purchaseAmount);
+        ResultViewLotteryGame.displayLotteryResult(lotteryResult, Integer.parseInt(purchaseAmount));
     }
 }
