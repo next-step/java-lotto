@@ -54,7 +54,7 @@ utils.Calculator
 
 
 ##TODO
-
+1. step4 구현해야 할 기능 설계
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
