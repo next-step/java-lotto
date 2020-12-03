@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
+    private static final int MAX_LOTTO_NUMBER = 45;
+
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 10})
     public void createLottoNumber(int number) {
@@ -38,7 +40,7 @@ public class LottoNumberTest {
 
         //Then
         assertThat(result).isNotNull();
-        assertThat(result).hasSize(45);
+        assertThat(result).hasSize(MAX_LOTTO_NUMBER);
     }
 
     @ParameterizedTest
