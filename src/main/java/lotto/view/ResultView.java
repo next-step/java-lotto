@@ -1,4 +1,4 @@
-package lotto.view.result;
+package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void printLottoNumbers(Lottoes lottoes) {
-        System.out.println(lottoes.getValue().size() + "개를 구매했습니다.");
-        for (LottoNumbers lottoNumbers : lottoes.getValue()) {
+    protected static void printLottoNumbers(Lottoes lottoes) {
+        System.out.println("수동으로 " + lottoes.getManualLotto().size() + "장, 자동으로 " + lottoes.getAutoLotto().size() + "장을 구매했습니다.");
+
+        for (LottoNumbers lottoNumbers : lottoes.getTotalLotto()) {
             List<Integer> numbers = lottoNumbers.getValue().stream()
                     .map(LottoNumber::getValue)
                     .collect(Collectors.toList());
@@ -22,7 +23,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoGameResult(Map<Rank, Integer> ranks) {
+    protected static void printLottoGameResult(Map<Rank, Integer> ranks) {
         String first = "6개 일치 (2,000,000,000원) - " + ranks.get(Rank.FIRST);
         String second = "5개 일치, 보너스 볼 일치(30,000,000원) - " + ranks.get(Rank.SECOND);
         String third = "5개 일치 (1,500,000원) - " + ranks.get(Rank.THIRD);
@@ -40,7 +41,7 @@ public class ResultView {
 
     }
 
-    public static void printWinningStatistics(double rate) {
+    protected static void printWinningStatistics(double rate) {
         System.out.println("총 수익률은 " + rate + "입니다.");
     }
 }

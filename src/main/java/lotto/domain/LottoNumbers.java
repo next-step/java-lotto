@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     private void valid(List<LottoNumber> numbers) {
@@ -44,7 +45,7 @@ public class LottoNumbers {
                 .contains(lottoNumber.getValue());
     }
 
-    public int getMatchingCount(LottoNumbers lottoNumbers){
+    public int getMatchingCount(LottoNumbers lottoNumbers) {
         return (int) value.stream()
                 .filter(lottoNumbers::hasLottoNumber)
                 .count();

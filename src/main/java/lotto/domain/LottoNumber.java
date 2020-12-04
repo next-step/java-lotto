@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     public static final int NUMBER_MIN_RANGE = 1;
@@ -23,4 +25,16 @@ public class LottoNumber {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }

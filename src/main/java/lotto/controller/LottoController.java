@@ -1,22 +1,32 @@
 package lotto.controller;
 
-import lotto.domain.*;
-import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoCount;
+import lotto.domain.Lottoes;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningNumbers;
 import lotto.view.LottoGameView;
-import lotto.view.input.InputView;
+
+import java.util.List;
 
 public class LottoController {
 
-    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    public Lottoes purchaseLotto() {
 
-    public Lottoes purchaseLottoes() {
-        Lottoes lottoes = lottoNumberGenerator.create(LottoGameView.enterLottoAmount());
+        PurchaseAmount purchaseAmount = new PurchaseAmount(LottoGameView.enterLottoAmount());
+        LottoCount lottoCount = new LottoCount(LottoGameView.enterManualLottoCount(), purchaseAmount);
+        List<String> manualLotto = LottoGameView.enterManualLottoNumber(lottoCount);
+
+        Lottoes lottoes = new Lottoes(purchaseAmount, manualLotto);
+
         LottoGameView.printLottoNumbers(lottoes);
+
         return lottoes;
     }
 
     public void getLottoGameResult(Lottoes lottoes) {
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.enterWinningNumbers(), InputView.enterBonusNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(LottoGameView.enterWinningNumbers(), LottoGameView.enterBonusNumber());
         LottoGameView.printResult(lottoes.getResult(winningNumbers));
     }
+
+
 }

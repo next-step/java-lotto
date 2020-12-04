@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoesTest {
@@ -17,8 +20,7 @@ class LottoesTest {
     void should_return_lotto_game_result() {
 
         //Given
-        LottoNumbers lottoNumbers = lottoNumberGenerator.create("1, 2, 3, 4, 5, 6");
-        Lottoes lottoes = new Lottoes(Arrays.asList(lottoNumbers));
+        Lottoes lottoes = new Lottoes(new PurchaseAmount(1000), Arrays.asList("1, 2, 3, 4, 5, 6"));
 
         //When
         LottoGameResult result = lottoes.getResult(winningNumbers);
@@ -27,5 +29,7 @@ class LottoesTest {
         assertThat(result.getRanks().containsKey(Rank.FIRST)).isTrue();
 
     }
+
+
 
 }
