@@ -54,7 +54,6 @@ utils.Calculator
 
 
 ##TODO
-1. step4 구현해야 할 기능 설계
 ##DONE
 1. 구입금액(LottoAmount)을 입력 받는다.
 2. 로또 금액에 따른 로또 구입 갯수를 반환한다.
@@ -104,6 +103,9 @@ utils.Calculator
 38. LottoGameResult 반환시, PurchaseAmount의 객체가 Ranks를 의존하지 않기 위해, Lottoes에서 PurchaseAmount객체를 가지고 있도록 수정
 39. step3 피드백 사항 정리
 40. refactoring으로 인해 깨진 Test 수정
+41. step4 구현해야 할 기능 설계
+42. 수동으로 숫자를 입력 받고, 그 결과를 출력하도록 기능 구현
+
 
 ## 피드백 1
 [https://github.com/next-step/java-lotto/pull/950](https://github.com/next-step/java-lotto/pull/950)

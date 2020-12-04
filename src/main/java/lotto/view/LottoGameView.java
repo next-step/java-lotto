@@ -6,6 +6,7 @@ import lotto.domain.Lottoes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static lotto.view.InputView.ENTER_MANUAL_LOTTO_NUMBER;
 
@@ -20,12 +21,7 @@ public class LottoGameView {
     }
 
     public static List<String> enterManualLottoNumber(LottoCount lottoCount) {
-        List<String> result = new ArrayList<>();
-        System.out.println(ENTER_MANUAL_LOTTO_NUMBER);
-        for (int i = 0; i < lottoCount.getValue(); i++) {
-            result.add(InputView.enterManualLottoNumber());
-        }
-        return result;
+        return InputView.enterManualLottoNumber(lottoCount);
     }
 
     public static void printLottoNumbers(Lottoes lottoes) {

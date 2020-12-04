@@ -15,6 +15,9 @@ public class LottoNumberGenerator {
     private static final CachedLottoNumbers cachedLottoNumbers = new CachedLottoNumbers();
 
     public List<LottoNumbers> create(int amount) {
+        if (amount == 0) {
+            return new ArrayList<>();
+        }
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
         return getLottoNumbers(purchaseAmount.getLottoCount());
     }

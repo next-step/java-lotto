@@ -5,9 +5,7 @@ import lotto.domain.Lottoes;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.view.LottoGameView;
-import lotto.view.InputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -21,6 +19,7 @@ public class LottoController {
         Lottoes lottoes = new Lottoes(purchaseAmount, manualLotto);
 
         LottoGameView.printLottoNumbers(lottoes);
+
         return lottoes;
     }
 

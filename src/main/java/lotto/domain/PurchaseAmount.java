@@ -35,4 +35,8 @@ public class PurchaseAmount {
     public int minus(int amount) {
         return this.amount - amount;
     }
+
+    public boolean canBuy(int size) {
+        return amount - (size * PRICE) >= 0;
+    }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,9 +15,16 @@ public class Lottoes {
     private final List<LottoNumbers> autoLotto;
 
     public Lottoes(PurchaseAmount purchaseAmount, List<String> manualLotto) {
+        valid(purchaseAmount, manualLotto);
         this.totalAmount = purchaseAmount;
         this.manualLotto = new LottoNumberGenerator().create(manualLotto);
         this.autoLotto = new LottoNumberGenerator().create(getAutoLottoAmount());
+    }
+
+    private void valid(PurchaseAmount purchaseAmount, List<String> manualLotto) {
+        if (!purchaseAmount.canBuy(manualLotto.size())) {
+            throw new IllegalArgumentException(ErrorMessage.CAN_NOT_BUY_LOTTO);
+        }
     }
 
     private int getAutoLottoAmount() {
