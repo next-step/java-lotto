@@ -2,16 +2,10 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
-import java.util.List;
-
 public class PurchaseAmount {
 
     public static final int PRICE = 1000;
     private final int amount;
-
-    public PurchaseAmount(List<Rank> ranks) {
-        this(ranks.size() * PRICE);
-    }
 
     public PurchaseAmount(int amount) {
         valid(amount);

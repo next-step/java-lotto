@@ -10,8 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class PurchaseAmountTest {
 
-    public static final int LOTTO_PRICE = 1000;
-
     @Test
     @DisplayName("로또 금액에 따른 로또 구입 갯수를 반환한다.")
     void should_return_lotto_amount(){

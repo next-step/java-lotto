@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import calculator.utils.IntegerUtils;
 import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

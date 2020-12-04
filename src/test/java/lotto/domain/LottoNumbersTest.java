@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoNumbersTest {
 
-    private static final WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     @Test

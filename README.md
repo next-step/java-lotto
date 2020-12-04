@@ -105,6 +105,7 @@ utils.Calculator
 40. refactoring으로 인해 깨진 Test 수정
 41. step4 구현해야 할 기능 설계
 42. 수동으로 숫자를 입력 받고, 그 결과를 출력하도록 기능 구현
+43. 사용하지 않는 code 제거
 
 
 ## 피드백 1

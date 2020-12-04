@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
