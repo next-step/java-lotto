@@ -2,15 +2,20 @@ package lotto.util;
 
 import lotto.domain.InputMoney;
 import lotto.domain.Lotto;
+import lotto.domain.Ticket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoUtil {
-    public static List<Lotto> createAutoLottoList(InputMoney money) {
+    private static final String SPLIT_REGEX = ",";
+
+    public static List<Lotto> createAutoLottoList(Ticket ticket) {
         List<Lotto> lottoList = new ArrayList<>();
         LottoGenerator generator = new RandomLottoGenerator();
-        for (int i = 0; i < money.getAvailableLottoSize(); i++) {
+        for (int i = 0; i < ticket.getAutoCount(); i++) {
             lottoList.add(new Lotto(generator));
         }
         return lottoList;
@@ -26,5 +31,13 @@ public class LottoUtil {
         LottoGenerator generator = new ManualLottoGenerator(numbers);
         lottoList.add(new Lotto(generator));
         return lottoList;
+    }
+
+    public static Lotto initTextToLotto(String lottoNumberText) {
+        List<Integer> numberList = Arrays.stream(lottoNumberText.split(SPLIT_REGEX))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        return LottoUtil.createMenualLotto(numberList);
     }
 }
