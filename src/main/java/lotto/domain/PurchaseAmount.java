@@ -31,4 +31,8 @@ public class PurchaseAmount {
     public double getRate(double allPrizeMoney) {
         return allPrizeMoney / amount;
     }
+
+    public int minus(int amount) {
+        return this.amount - amount;
+    }
 }

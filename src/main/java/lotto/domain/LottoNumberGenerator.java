@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,5 +42,11 @@ public class LottoNumberGenerator {
         }
     }
 
-
+    public List<LottoNumbers> create(List<String> manualLotto) {
+        List<LottoNumbers> result = new ArrayList<>();
+        for (String lotto : manualLotto) {
+            result.add(create(lotto));
+        }
+        return result;
+    }
 }

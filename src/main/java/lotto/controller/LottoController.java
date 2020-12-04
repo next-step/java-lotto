@@ -1,26 +1,33 @@
 package lotto.controller;
 
+import lotto.domain.LottoCount;
 import lotto.domain.Lottoes;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.view.LottoGameView;
-import lotto.view.input.InputView;
+import lotto.view.InputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoController {
 
     public Lottoes purchaseLotto() {
-        //구입금액 입력
-        //수동으로 구매할 로또 수(LottoCount)(view)
-        //번호 입력 x 로또 수
-        //return List<String>
-        //new Lottoes(List<String>, Amount());
-        Lottoes lottoes = new Lottoes(LottoGameView.enterLottoAmount());
+
+        PurchaseAmount purchaseAmount = new PurchaseAmount(LottoGameView.enterLottoAmount());
+        LottoCount lottoCount = new LottoCount(LottoGameView.enterManualLottoCount());
+        List<String> manualLotto = LottoGameView.enterManualLottoNumber(lottoCount);
+
+        Lottoes lottoes = new Lottoes(purchaseAmount, manualLotto);
 
         LottoGameView.printLottoNumbers(lottoes);
         return lottoes;
     }
 
     public void getLottoGameResult(Lottoes lottoes) {
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.enterWinningNumbers(), InputView.enterBonusNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(LottoGameView.enterWinningNumbers(), LottoGameView.enterBonusNumber());
         LottoGameView.printResult(lottoes.getResult(winningNumbers));
     }
+
+
 }

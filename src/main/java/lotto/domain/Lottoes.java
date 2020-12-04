@@ -1,34 +1,47 @@
 package lotto.domain;
 
+import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottoes {
 
-    private final List<LottoNumbers> value;
-    private final PurchaseAmount purchaseAmount;
+    private final PurchaseAmount totalAmount;
+    private final List<LottoNumbers> manualLotto;
+    private final List<LottoNumbers> autoLotto;
 
-    //TODO Test를 위한 생성자를 만들었는데, 이래도 되는지 의문...
-    public Lottoes(List<LottoNumbers> value, PurchaseAmount purchaseAmount) {
-        this.value = value;
-        this.purchaseAmount = purchaseAmount;
+    public Lottoes(PurchaseAmount purchaseAmount, List<String> manualLotto) {
+        this.totalAmount = purchaseAmount;
+        this.manualLotto = new LottoNumberGenerator().create(manualLotto);
+        this.autoLotto = new LottoNumberGenerator().create(getAutoLottoAmount());
     }
 
-    public Lottoes(int lottoAmount) {
-        this.value = new LottoNumberGenerator().create(lottoAmount);
-        this.purchaseAmount = new PurchaseAmount(lottoAmount);
+    private int getAutoLottoAmount() {
+        return totalAmount.minus(this.manualLotto.size() * PurchaseAmount.PRICE);
     }
 
-    public List<LottoNumbers> getValue() {
-        return Collections.unmodifiableList(value);
+    public List<LottoNumbers> getManualLotto() {
+        return Collections.unmodifiableList(manualLotto);
+    }
+
+    public List<LottoNumbers> getAutoLotto() {
+        return Collections.unmodifiableList(autoLotto);
+    }
+
+    public List<LottoNumbers> getTotalLotto() {
+        List<LottoNumbers> totalLotto = new ArrayList<>();
+        totalLotto.addAll(manualLotto);
+        totalLotto.addAll(autoLotto);
+        return totalLotto;
     }
 
     public LottoGameResult getResult(WinningNumbers winningNumbers) {
-        List<Rank> ranks = value.stream()
+        List<Rank> ranks = getTotalLotto().stream()
                 .map(winningNumbers::getRank)
                 .collect(Collectors.toList());
 
-        return new LottoGameResult(new Ranks(ranks), this.purchaseAmount);
+        return new LottoGameResult(new Ranks(ranks), this.totalAmount);
     }
 }
