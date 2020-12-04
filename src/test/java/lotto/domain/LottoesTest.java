@@ -30,18 +30,6 @@ class LottoesTest {
 
     }
 
-    @Test
-    @DisplayName("lotto의 수가 금액보다 많으면 Exception을 throw한다.")
-    void should_throw_exception() {
 
-        //Given
-        List<String> lottoNumbers = Arrays.asList("1, 2, 3, 4, 5, 6", "2, 3, 4, 5, 6, 7");
-
-        //When & Then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lottoes(new PurchaseAmount(1000), lottoNumbers))
-                .withMessage(ErrorMessage.CAN_NOT_BUY_LOTTO);
-
-    }
 
 }
