@@ -75,24 +75,4 @@ public class LottoBuyingMoneyTest {
         assertThat(changeMoney).isEqualTo(500);
     }
 
-    @Test
-    @DisplayName("수동수량 입력 테스트")
-    public void 수동_구매_수량_입력_테스트() {
-        LottoBuyingMoney money = new LottoBuyingMoney(1500);
-        int manualAmount = 1 ;
-        int autoAmount = money.getAutoAmount(manualAmount);
-        assertThat(manualAmount).isEqualTo(1);
-        assertThat(autoAmount).isEqualTo(0);
-    }
-
-//    @Test
-//    @DisplayName("수동수량 음수 입력 테스트")
-//    public void 수동_구매_수량_음수_입력_테스트() {
-//
-//        assertThatIllegalArgumentException().isThrownBy(
-//                () -> new LottoBuyingMoney(1500, -1)
-//
-//        );
-//    }
-
 }
