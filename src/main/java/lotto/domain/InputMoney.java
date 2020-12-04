@@ -11,7 +11,7 @@ public class InputMoney {
     }
 
     private void validMoney(int money) {
-        if (money < 1000) {
+        if (money < LOTTO_COST) {
             throw new IllegalArgumentException("최소 구입금액은 1000원 이상이어야 합니다.");
         }
     }

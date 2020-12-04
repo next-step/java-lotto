@@ -18,8 +18,7 @@ public class LottoUtil {
 
     public static Lotto createMenualLotto(List<Integer> numbers) {
         LottoGenerator generator = new ManualLottoGenerator(numbers);
-        Lotto lotto = new Lotto(generator);
-        return lotto;
+        return new Lotto(generator);
     }
 
     public static List<Lotto> createMenualLottoList(List<Integer> numbers) {

@@ -12,10 +12,12 @@ public class WinningResult {
     private static final String SPLIT_REGEX = ",";
 
     private final Lotto winningNumbers;
+    private final LottoNumber bonusBall;
 
-    public WinningResult(String lottoNumberText) {
+    public WinningResult(String lottoNumberText, int bonusBall) {
         validLottoNumberText(lottoNumberText);
         this.winningNumbers = initWinningLotto(lottoNumberText);
+        this.bonusBall = new LottoNumber(bonusBall);
     }
 //
     private void validLottoNumberText(String lottoNumberText) {
@@ -34,8 +36,9 @@ public class WinningResult {
 
     public int getCountByRank(List<Lotto> lottoNumbers, Rank rank) {
         return (int) lottoNumbers.stream()
-                .map(winningNumbers::getCountByMatch)
-                .filter(count -> count == rank.getCountOfMatch())
+                .map(lotto -> Rank.getRank(winningNumbers.getCountByMatch(lotto),
+                        lotto.isBonus(bonusBall)))
+                .filter(loopRank -> loopRank.equals(rank))
                 .count();
     }
 }

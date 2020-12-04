@@ -16,7 +16,7 @@ public class ManualLottoGenerator implements LottoGenerator {
         try {
             return numbers.get(index++);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("수동번호 생성 에러");
+            throw new IllegalArgumentException("로또번호 생성 에러");
         }
 
     }
