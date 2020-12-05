@@ -36,6 +36,6 @@ public class LottoShopTest {
         shop.exchangeManualLottos(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //Then
-        assertThat(ticket.getQuantity()).isEqualTo(quantity - 1);
+        assertThat(ticket.getRemainCount()).isEqualTo(quantity - 1);
     }
 }

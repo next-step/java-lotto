@@ -12,7 +12,7 @@ public class ResultView {
     private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
     public static void outputPurchaseQuantity(LottoTicket ticket) {
-        System.out.println("수동으로 " + ticket.getManualCount() + "장, 자동으로 " + ticket.getAutoCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + ticket.getManualCount() + "장, 자동으로 " + ticket.getRemainCount() + "개를 구매했습니다.");
     }
 
     public static void outputLottos(Lottos lottos) {

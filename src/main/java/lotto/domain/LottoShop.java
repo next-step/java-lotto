@@ -20,21 +20,20 @@ public class LottoShop {
 
     public Lottos exchangeManualLottos(Set<Integer> lottoNumbers) {
         lottos.addLotto(Lotto.of(lottoNumbers));
-        ticket.manualSpend();
+        ticket.spend();
         return lottos;
     }
 
     public Lottos exchangeAutoLottos(LottoMachine lottoMachine) {
-        int remainCount = ticket.getQuantity();
+        int remainCount = ticket.getRemainCount();
         for (int i = 0; i < remainCount; i++) {
             lottos.addLotto(Lotto.createLottoNumber(lottoMachine));
-            ticket.autoSpend();
         }
         return lottos;
     }
 
     public int remainTicketCount() {
-        return ticket.getQuantity();
+        return ticket.getRemainCount();
     }
 
     public LottoTicket getLottoTicket(){
