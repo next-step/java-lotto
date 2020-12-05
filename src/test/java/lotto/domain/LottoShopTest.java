@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,33 +17,39 @@ public class LottoShopTest {
     private static final int LOTTO_PRICE = 1_000;
 
     @ParameterizedTest
-    @CsvSource(value = {"3000:2", "4000:2", "5000:1", "6000:5", "7000:5"}, delimiter = ':')
-    public void exchangeAutoLottosTest(int purchasePrice, int manualLottoCount) {
+    @CsvSource(value = {"5000:3", "3000:1", "12000:6"}, delimiter = ':')
+    public void purchaseTicketTest(int purchasePrice, int manualLottoQuantity) {
         //Given
-        int expectedAutoLottoCount = (purchasePrice / LOTTO_PRICE) - manualLottoCount;
-        LottoShop shop = new LottoShop();
+        LottoShop shop = new LottoShop(new LottoAutoMachine());
 
         //When
-        Lottos autoLottos = shop.exchangeAutoLottos(new LottoTicket(expectedAutoLottoCount), new LottoAutoMachine());
+        LottoTicket ticket = shop.purchaseTicket(Money.from(purchasePrice), manualLottoQuantity);
 
         //Then
-        assertThat(autoLottos).isNotNull();
-        assertThat(autoLottos.quantity()).isEqualTo(expectedAutoLottoCount);
+        assertThat(ticket).isEqualTo(LottoTicket.of(purchasePrice / LOTTO_PRICE, manualLottoQuantity));
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {20, 25, 3, 8, 10})
-    public void exchangeManualLottosTest(int manualQuantity) {
-        ///Given
-        LottoShop shop = new LottoShop();
+    @MethodSource("createMenualLottos")
+    public void purchaseLottosTest(List<Lotto> manualLottos) {
+        //Given
+        int totalQuantity = 10;
+        LottoShop shop = new LottoShop(new LottoAutoMachine());
 
         //When
-        Lottos manualLottos = new Lottos();
-        for (int i = 0; i < manualQuantity; i++) {
-            manualLottos = shop.exchangeManualLottos(new LottoTicket(manualQuantity), new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        }
+        Lottos lottos = shop.purchaseLottos(LottoTicket.of(totalQuantity, manualLottos.size()), manualLottos);
 
         //Then
-        assertThat(manualLottos.quantity()).isEqualTo(manualQuantity);
+        assertThat(lottos.quantity()).isEqualTo(totalQuantity);
+    }
+
+    private static Stream<Arguments> createMenualLottos() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))),
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 30, 23, 6))),
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 30, 15, 40)))
+                )
+        );
     }
 }

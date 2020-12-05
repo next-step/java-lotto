@@ -1,30 +1,24 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.List;
 
 public class LottoShop {
 
     private static final int LOTTO_PRICE = 1_000;
+    private LottoMachine lottoMachine;
 
-    private Lottos lottos;
-
-    public LottoShop() {
-        this.lottos = new Lottos();
+    public LottoShop(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
-    public LottoTicket purchaseLottoTicket(Money money) {
-        return new LottoTicket(money.getPurchasePrice() / LOTTO_PRICE);
+    public LottoTicket purchaseTicket(Money money, int manualLottoQuantity) {
+        return LottoTicket.of(money.getPurchasePrice() / LOTTO_PRICE, manualLottoQuantity);
     }
 
-    public Lottos exchangeManualLottos(LottoTicket ticket, Set<Integer> lottoNumbers) {
-        lottos.addLotto(Lotto.of(lottoNumbers));
-        ticket.spend();
-        return lottos;
-    }
-
-    public Lottos exchangeAutoLottos(LottoTicket ticket, LottoMachine lottoMachine) {
-        int remainCount = ticket.getRemainCount();
-        for (int i = 0; i < remainCount; i++) {
+    public Lottos purchaseLottos(LottoTicket ticket, List<Lotto> manualLottos) {
+        Lottos lottos = new Lottos();
+        lottos.addManualLottos(manualLottos);
+        for (int i = 0; i < ticket.getAutoQuantity(); i++) {
             lottos.addLotto(Lotto.createLottoNumber(lottoMachine));
         }
         return lottos;
