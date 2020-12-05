@@ -16,3 +16,10 @@
 7. 유저의 로또 목록과 당첨번호를 비교 한다 WINNING_NUMBER
 8. 로또에 일치 갯수를 저장한다. LOTTO
 9. 로또목록으로 수익금을 계산한다. ProfitCalculator
+
+### step4
+1. Calculator - 금액, 수동 로또 수량 입력 받아서 자동 로또 수량 리턴
+2. InputView - 수동 로또 수량만큼 입력 받아서 List<Integer> 리턴
+3. Generator - 수동 로또 List<Integer> 로 List<LottoTicket> 생성, 리턴
+4. ResultView - 수동 로또 수량, 자동 로또 수량 출력
+5. Generator - 자동으로 생성한 List<LottoTicket>에 수동으로 생성한 List<LottoTicket> 추가 
