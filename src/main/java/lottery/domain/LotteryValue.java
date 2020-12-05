@@ -3,7 +3,7 @@ package lottery.domain;
 import java.util.Arrays;
 
 public enum LotteryValue {
-    FIRST_PLACE(6, 200_000_000),
+    FIRST_PLACE(6, 2_000_000_000),
     SECOND_PLACE(5, 1_500_000),
     THIRD_PLACE(4, 50_000),
     FORTH_PLACE(3, 5_000);

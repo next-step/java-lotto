@@ -36,7 +36,7 @@ public final class ResultViewLotteryGame {
             stringBuilder.append(key);
             stringBuilder.append("개 일치 (");
             stringBuilder.append(LotteryValue.findByAmount(key).getAmount());
-            stringBuilder.append(") - ");
+            stringBuilder.append("원)- ");
             stringBuilder.append(lotteryResult.getLotteryResultMap().get(key));
             stringBuilder.append("개");
             stringBuilder.append(System.getProperty("line.separator"));

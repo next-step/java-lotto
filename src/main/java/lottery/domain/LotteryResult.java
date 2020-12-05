@@ -10,7 +10,12 @@ public class LotteryResult {
     private final LotteryTicket winnerTicket;
 
     public LotteryResult(String winnerNumbers) {
-        lotteryResultMap = new HashMap<>();
+        lotteryResultMap = new HashMap<Integer, Integer>(){{
+            put(6,0);
+            put(5,0);
+            put(4,0);
+            put(3,0);
+        }};
         winnerTicket = new LotteryTicket(winnerNumbers);
     }
 
