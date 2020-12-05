@@ -27,6 +27,10 @@ public final class Lotto {
         return numbers;
     }
 
+    public int countContainNumbers(Lotto lotto) {
+        return (int) lottoNumbers.stream().filter(lotto::contains).count();
+    }
+
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
