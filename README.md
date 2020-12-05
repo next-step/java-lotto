@@ -7,3 +7,35 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 목록
+
+### Model
+
+- Operand
+  - 자동차 리스트 만들기
+
+- Calculator
+  - 구분자 있는지 판단
+  - 피연산자 합 구하기
+  
+- Separator  
+  - 구분자 생성
+  - 구분자 추가 
+  
+- Splitter
+  - 문자열 분리
+
+- Operand
+  - 피연산자 추가
+
+### View
+- InputView
+  - 문자열 입력
+
+- ResultView
+  - 결과 출력하기
+
+### Controller
+- CalculatorController 객체 생성
+
