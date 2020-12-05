@@ -16,16 +16,20 @@ public class LotteryTicket {
             throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
         }
 
-        this.lotteryNumbers = lotteryNumbers;
+        this.lotteryNumbers = new ArrayList<>();
+        for (LotteryNumber number : lotteryNumbers) {
+            this.lotteryNumbers.add(new LotteryNumber(number.getNumber()));
+        }
+
         Collections.sort(this.lotteryNumbers);
     }
 
     public LotteryTicket(int[] numbers) {
-        lotteryNumbers = new ArrayList<>();
+        this.lotteryNumbers = new ArrayList<>();
         LotteryNumber lotteryNumber;
         for(int number : numbers) {
             lotteryNumber = new LotteryNumber(number);
-            lotteryNumbers.add(lotteryNumber);
+            this.lotteryNumbers.add(lotteryNumber);
         }
         Collections.sort(this.lotteryNumbers);
     }
@@ -74,15 +78,5 @@ public class LotteryTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lotteryNumbers);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder lotteryTicket = new StringBuilder();
-        for (LotteryNumber number : this.lotteryNumbers) {
-            lotteryTicket.append(number.getNumber());
-            lotteryTicket.append(", ");
-        }
-        return "[" + lotteryTicket.subSequence(0, lotteryTicket.length() - 2).toString() + "]";
     }
 }

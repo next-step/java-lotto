@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,12 +31,7 @@ public class TestLotteryGame {
             }
         };
 
-        dummyLotteryGame = new LotteryGame(1000, 6) {
-            @Override
-            public List<LotteryTicket> buyLotteryTickets(int numberOfTickets) {
-                return autoBuyBehavior.buyLotteryTickets(6, 1);
-            }
-        };
+        dummyLotteryGame = new LotteryGame(1000, 6);
 
         dummyLotteryTicket = new LotteryTicket(Arrays.asList(
                 new LotteryNumber(1),
@@ -79,14 +72,14 @@ public class TestLotteryGame {
     @DisplayName("로또 티켓을 구매하지 못한 경우 테스트")
     void buyNoLotteryTicket() {
         LotteryGame lotteryGame = new LotteryGame(1000, 6);
-        assertThat(lotteryGame.buyLotteryTickets(0))
+        assertThat(lotteryGame.buyLotteryTickets(0, autoBuyBehavior))
                 .isEqualTo(new ArrayList<LotteryTicket>());
     }
 
     @Test
     @DisplayName("로또 티켓을 한장 구매 테스트")
     void buyOneLotteryTicket() {
-        assertThat(dummyLotteryGame.buyLotteryTickets(1))
+        assertThat(dummyLotteryGame.buyLotteryTickets(1, autoBuyBehavior))
                 .isEqualTo(new ArrayList<>(
                         Arrays.asList(new LotteryTicket(new int[]{5, 1, 4, 3, 2, 6}))
                 ));
@@ -102,14 +95,16 @@ public class TestLotteryGame {
     @Test
     @DisplayName("로또 게임 결과 로또 당첨번호와 3개 일치하는 경우")
     void matchThreeNumbersWithOneLotteryTickets() {
-        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,10,11,12", dummyOneLotteryTicket))
-                .isEqualTo(new LotteryResult("1,2,3,10,11,12", 3,1));
+        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,10,11,12", dummyOneLotteryTicket)
+                .getLotteryResultMap().get(3))
+                .isEqualTo(1);
     }
 
     @Test
-    @DisplayName("로또 게임 결과 로또 당첨번호화 6개가 2개의 티켓에서 일치하는 경우")
+    @DisplayName("로또 게임 결과 로또 당첨번호와 6개가 2개의 티켓에서 일치하는 경우")
     void matchSixNumbersWithMultiLotteryTickets() {
-        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,4,5,6", dummyLotteryTickets))
-                .isEqualTo(new LotteryResult("1,2,3,4,5,6", 6,2));
+        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,4,5,6", dummyLotteryTickets)
+                .getLotteryResultMap().get(6))
+                .isEqualTo(2);
     }
 }

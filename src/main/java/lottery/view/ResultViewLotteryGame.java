@@ -1,5 +1,6 @@
 package lottery.view;
 
+import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryResult;
 import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryValue;
@@ -18,11 +19,18 @@ public final class ResultViewLotteryGame {
     }
 
     public static void displayPurchasedTickets(List<LotteryTicket> purchasedTickets) {
-        StringBuilder stringBuilder;
         for (LotteryTicket lotteryTicket : purchasedTickets) {
-            stringBuilder = new StringBuilder();
-            System.out.println(stringBuilder.append(lotteryTicket.toString()));
+            System.out.println("[" + displayTicket(lotteryTicket) + "]");
         }
+    }
+
+    public static String displayTicket(LotteryTicket lotteryTicket) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LotteryNumber number : lotteryTicket.getLotteryNumbers()) {
+            stringBuilder.append(number.getNumber());
+            stringBuilder.append(", ");
+        }
+        return stringBuilder.subSequence(0, stringBuilder.length() - 2).toString();
     }
 
     public static void displayLotteryResult(LotteryResult lotteryResult, int purchaseAmount) {
@@ -32,10 +40,10 @@ public final class ResultViewLotteryGame {
         stringBuilder.append("---------");
         stringBuilder.append(System.getProperty( "line.separator"));
 
-        for (Integer key : lotteryResult.getLotteryResultMap().keySet()) {
-            stringBuilder.append(key);
+        for (LotteryValue key : lotteryResult.getLotteryResultMap().keySet()) {
+            stringBuilder.append(key.getPlace());
             stringBuilder.append("개 일치 (");
-            stringBuilder.append(LotteryValue.findByAmount(key).getAmount());
+            stringBuilder.append(key.getAmount());
             stringBuilder.append("원)- ");
             stringBuilder.append(lotteryResult.getLotteryResultMap().get(key));
             stringBuilder.append("개");

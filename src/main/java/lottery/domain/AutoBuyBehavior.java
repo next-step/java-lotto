@@ -18,10 +18,8 @@ public class AutoBuyBehavior implements BuyBehavior {
     @Override
     public List<LotteryTicket> buyLotteryTickets(int pickCounts, int numberOfTickets) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        LotteryTicket lotteryTicket;
         for(int i = 0; i < numberOfTickets; i++) {
-            lotteryTicket = new LotteryTicket(getLotteryNumbersByAutomation(pickCounts));
-            lotteryTickets.add(lotteryTicket);
+            lotteryTickets.add(new LotteryTicket(this.getLotteryNumbersByAutomation(pickCounts)));
         }
         return lotteryTickets;
     }

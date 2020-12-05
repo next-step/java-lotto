@@ -5,51 +5,43 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class LotteryResult {
-    public static final int LIMIT_MATCHED_NUMBER = 3;
-    Map<Integer, Integer> lotteryResultMap;
+    Map<LotteryValue, Integer> lotteryResultMap;
     private final LotteryTicket winnerTicket;
 
     public LotteryResult(String winnerNumbers) {
-        lotteryResultMap = new HashMap<Integer, Integer>(){{
-            put(6,0);
-            put(5,0);
-            put(4,0);
-            put(3,0);
+        lotteryResultMap = new LinkedHashMap<LotteryValue, Integer>(){{
+            put(LotteryValue.FORTH_PLACE, 0);
+            put(LotteryValue.THIRD_PLACE, 0);
+            put(LotteryValue.SECOND_PLACE, 0);
+            put(LotteryValue.FIRST_PLACE, 0);
         }};
         winnerTicket = new LotteryTicket(winnerNumbers);
     }
 
-    public LotteryResult(String winnerNumbers, int key, int value) {
-        this(winnerNumbers);
-        this.lotteryResultMap.put(key, value);
-    }
-
-    public void addLotteryResult(int key, int value) {
-        if (key < LIMIT_MATCHED_NUMBER) {
-            return;
-        }
-        if (this.lotteryResultMap.containsKey(key)) {
-            this.lotteryResultMap.replace(key, lotteryResultMap.get(key) + value);
-        }
-        this.lotteryResultMap.put(key, value);
-    }
-
     public BigDecimal getProfit(int purchaseAmount) {
         int profit = 0;
-        for (Integer key : lotteryResultMap.keySet()) {
-            profit += (lotteryResultMap.get(key) * LotteryValue.findByAmount(key).getAmount());
+        for (LotteryValue key : lotteryResultMap.keySet()) {
+            profit += (lotteryResultMap.get(key) * key.getAmount());
         }
         return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount), 3, RoundingMode.HALF_EVEN);
     }
 
     public LotteryResult match(List<LotteryTicket> lotteryTickets) {
         for (LotteryTicket lotteryTicket : lotteryTickets) {
-            this.addLotteryResult(lotteryTicket.getCountsMatched(this.winnerTicket), 1);
+            this.addLotteryResult(lotteryTicket.getCountsMatched(this.winnerTicket));
         }
         return this;
     }
 
-    public Map<Integer, Integer> getLotteryResultMap() {
+    public void addLotteryResult(int key) {
+        LotteryValue resultKey = LotteryValue.findByAmount(key);
+        if (resultKey.equals(LotteryValue.MISS)) {
+            return;
+        }
+        this.lotteryResultMap.replace(resultKey, lotteryResultMap.get(resultKey) + 1);
+    }
+
+    public Map<LotteryValue, Integer> getLotteryResultMap() {
         return this.lotteryResultMap;
     }
 

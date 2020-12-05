@@ -16,9 +16,8 @@ public class LotteryGame {
         return cost / this.price;
     }
 
-    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets) {
-        AutoBuyBehavior autoBuyBehavior = new AutoBuyBehavior();
-        return autoBuyBehavior.buyLotteryTickets(this.pickCounts, numberOfTickets);
+    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, AutoBuyBehavior behavior) {
+        return behavior.buyLotteryTickets(this.pickCounts, numberOfTickets);
     }
 
     public LotteryResult matchLotteryTickets(String winningNumbers, List<LotteryTicket> lotteryTickets) {

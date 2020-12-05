@@ -1,5 +1,6 @@
 package lottery;
 
+import lottery.domain.AutoBuyBehavior;
 import lottery.domain.LotteryGame;
 import lottery.domain.LotteryResult;
 import lottery.domain.LotteryTicket;
@@ -16,7 +17,9 @@ public class LotteryGameManager {
         int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(Integer.parseInt(purchaseAmount));
         ResultViewLotteryGame.displayNumberOfTickets(numberOfTicketsToBuy);
 
-        List<LotteryTicket> purchasedTickets = lotteryGame.buyLotteryTickets(numberOfTicketsToBuy);
+        List<LotteryTicket> purchasedTickets = lotteryGame.buyLotteryTickets(
+                numberOfTicketsToBuy,
+                new AutoBuyBehavior());
         ResultViewLotteryGame.displayPurchasedTickets(purchasedTickets);
 
         String lotteryWinningNumbers = InputViewLotteryGame.getWinningNumbers();
