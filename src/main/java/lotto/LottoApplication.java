@@ -19,9 +19,14 @@ public class LottoApplication {
         Calculator calculator = new Calculator();
         Generator generator = new Generator();
 
-        int ticketCount = calculator.calculateLottoTicket(inputView.inputPayment());
-        resultView.printTickets(ticketCount);
-        List<LottoTicket> lottoTickets = generator.generateLottoTickets(ticketCount);
+        int lottoTicketCount = calculator.calculateLottoTicketCount(inputView.inputPayment());
+        int manualLottoCount = inputView.inputManualLottoCount();
+        int autoLottoTicketCount = calculator.getAutoLottoCount(lottoTicketCount, manualLottoCount);
+
+        inputView.inputManualLottoNumbers(manualLottoCount);
+
+        resultView.printTickets(lottoTicketCount);
+        List<LottoTicket> lottoTickets = generator.generateLottoTickets(lottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
         Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
