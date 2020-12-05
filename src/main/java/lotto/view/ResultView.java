@@ -28,6 +28,11 @@ public class ResultView {
 
         System.out.print("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다. ");
 
-        if (lottoResult.getProfitRatio() < 1) System.out.println("(기준이 1이기 떄문에 결과적으로 손해라는 의미)");
+        System.out.println(printDescription(lottoResult.getProfitRatio()));
+    }
+
+    private String printDescription(double profitRatio) {
+        if (profitRatio < 1) return "(기준이 1이기 떄문에 결과적으로 손해라는 의미)";
+        return "(기준이 1이기 때문에 결과적으로 이익이라는 의미)";
     }
 }
