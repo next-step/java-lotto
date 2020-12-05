@@ -22,7 +22,6 @@ public class Lottos {
     }
 
     public int size() {
-
         return lottoList.size();
     }
 
