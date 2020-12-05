@@ -9,8 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
-    public void printTickets(int tickets) {
-        System.out.println(tickets + "개를 구매했습니다 :)");
+    public void printTickets(int manualLottoCount, int autoLottoTicketCount) {
+        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoTicketCount + "을 구매했습니다 :)");
     }
 
     public void printLottoTickets(List<LottoTicket> lottoTickets) {
@@ -18,7 +18,7 @@ public class ResultView {
     }
 
     public void printLottoResult(LottoResult lottoResult) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("----------");
 
         Arrays.stream(Rank.values())
