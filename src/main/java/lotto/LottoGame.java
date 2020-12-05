@@ -16,11 +16,10 @@ public class LottoGame {
         int manualCount = InputView.inputManualLottoCount();
 
         InputView.inputManualLottoNumbers();
-        Lottos lottos = new Lottos();
         for (int i = 0; i < manualCount; i++) {
-            lottos = lottoShop.exchangeManualLottos(InputView.inputLottoNumbers());
+            lottoShop.exchangeManualLottos(InputView.inputLottoNumbers());
         }
-        lottos = lottoShop.exchangeAutoLottos(new LottoAutoMachine());
+        Lottos lottos = lottoShop.exchangeAutoLottos(new LottoAutoMachine());
 
         ResultView.outputPurchaseQuantity(lottoShop.getLottoTicket());
         ResultView.outputLottos(lottos);
