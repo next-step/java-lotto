@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottoes;
+import lotto.domain.WinningCount;
 import lotto.domain.WinningRecord;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -30,8 +31,8 @@ public class LottoMachine {
 
         Lotto winningLotto = inputView.inputWinningNumbers();
         WinningRecord record = new WinningRecord(winningLotto);
-        record.record(lottoes);
+        WinningCount winningCount = record.record(lottoes);
 
-        outputView.showStatistics(record, purchaseCount * PAY);
+        outputView.showStatistics(winningCount, purchaseCount * PAY);
     }
 }

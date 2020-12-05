@@ -4,6 +4,7 @@ import lotto.domain.EarnRate;
 import lotto.domain.Lotto;
 import lotto.domain.Lottoes;
 import lotto.domain.Rank;
+import lotto.domain.WinningCount;
 import lotto.domain.WinningRecord;
 
 public class OutputView {
@@ -24,22 +25,22 @@ public class OutputView {
         }
     }
 
-    public void showStatistics(WinningRecord record, int paid) {
+    public void showStatistics(WinningCount winningCount, int paid) {
         System.out.println(STATISTICS_MESSAGE);
-        showMatchingCount(record);
-        showEarnRate(record, paid);
+        showMatchingCount(winningCount);
+        showEarnRate(winningCount, paid);
     }
 
-    protected void showMatchingCount(WinningRecord winningRecord) {
+    protected void showMatchingCount(WinningCount winningCount) {
         for (Rank rank : Rank.values()) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount()
                     , rank.getPrize()
-                    , winningRecord.getMatchCount(rank.getMatchCount()));
+                    , winningCount.getMatchCount(rank.getMatchCount()));
         }
     }
 
-    private void showEarnRate(WinningRecord record, int paid) {
-        double earn = record.calculateEarnRate(paid);
+    private void showEarnRate(WinningCount winningCount, int paid) {
+        double earn = winningCount.calculateEarnRate(paid);
         System.out.printf(EARN_RATE_MESSAGE, earn, EarnRate.getExplanationMessage(earn));
     }
 }

@@ -28,9 +28,9 @@ public class WinningRecordTest {
         WinningRecord winningRecord = new WinningRecord(winningLotto);
 
         // when
-        winningRecord.record(lottoes);
+        WinningCount winningCount = winningRecord.record(lottoes);
 
         // then
-        assertThat(winningRecord.calculateEarnRate(4000)).isEqualTo(26.25);
+        assertThat(winningCount.calculateEarnRate(4000)).isEqualTo(26.25);
     }
 }

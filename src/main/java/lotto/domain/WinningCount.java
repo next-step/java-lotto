@@ -34,4 +34,9 @@ public class WinningCount {
 
         return totalPrize;
     }
+
+    public double calculateEarnRate(int paid) {
+        int totalPrize = calculatePrize();
+        return (double) totalPrize / paid;
+    }
 }
