@@ -10,7 +10,7 @@ public class Calculator {
 
         int result = 0;
 
-        if (inputString.isEmpty()) {
+        if ( inputString == null || inputString.isEmpty() ) {
             return 0;
         }
 
