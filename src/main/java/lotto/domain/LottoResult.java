@@ -1,23 +1,24 @@
 package lotto.domain;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     final static int PRICE = 1000;
 
-    private final Map<ProfitRule, Integer> result;
+    private final Map<Rank, Integer> result;
     private final int payment;
 
     public LottoResult(int lottoTickets) {
         this.payment = lottoTickets * PRICE;
         result = new LinkedHashMap<>();
-        for (ProfitRule p : ProfitRule.values()) {
-            result.put(p, 0);
+        for (Rank r : Rank.values()) {
+            result.put(r, 0);
         }
     }
 
-    public Map<ProfitRule, Integer> getResult() {
+    public Map<Rank, Integer> getResult() {
         return result;
     }
 
@@ -25,10 +26,10 @@ public class LottoResult {
         return getProfit() / payment;
     }
 
-    public void saveLottoResult(long matchingScore) {
+    public void saveLottoResult(int matchingScore, boolean matchBonus) {
         if (matchingScore > 2) {
-            ProfitRule profitRule = ProfitRule.getProfitByMatchingScore(matchingScore);
-            result.put(profitRule, result.get(profitRule) + 1);
+            Rank rank = Rank.getProfitByMatchingScore(matchingScore, matchBonus);
+            result.put(rank, result.get(rank) + 1);
         }
     }
 
@@ -37,5 +38,11 @@ public class LottoResult {
                 .stream()
                 .mapToDouble(p -> p.getProfit() * result.get(p))
                 .reduce(0L, Double::sum);
+    }
+
+    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets) {
+        LottoResult lottoResult = new LottoResult(lottoTickets.size());
+        lottoTickets.forEach(lottoTicket -> Scanner.scan(lottoTicket, lottoResult));
+        return lottoResult;
     }
 }
