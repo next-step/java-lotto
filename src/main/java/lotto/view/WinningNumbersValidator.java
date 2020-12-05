@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import lotto.LottoMachine;
 
-public class WinningNumbersValidator extends Validator {
+public final class WinningNumbersValidator extends Validator {
 
     protected static final Pattern NUMBER_AND_COMMA_PATTERN = Pattern.compile("([0-9]?,?)+");
 
@@ -15,21 +15,21 @@ public class WinningNumbersValidator extends Validator {
 
 
     @Override
-    protected void validate(String input) {
+    protected void validate(final String input) {
         super.validate(input);
         checkNumberAndComma(input);
         checkSize(input);
     }
 
-    protected void checkNumberAndComma(String input) {
+    protected void checkNumberAndComma(final String input) {
         Matcher matcher = NUMBER_AND_COMMA_PATTERN.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(NOT_NUMBER_OR_COMMA_MESSAGE);
         }
     }
 
-    protected void checkSize(String input) {
-        if (input.split(InputView.COMMA).length != LottoMachine.LOTTO_SIZE) {
+    protected void checkSize(final String input) {
+        if (input.split(InputView.DELIMITER).length != LottoMachine.LOTTO_SIZE) {
             throw new IllegalArgumentException(SIZE_NOT_MATCH);
         }
     }

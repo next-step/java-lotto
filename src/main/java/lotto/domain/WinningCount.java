@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinningCount {
+public final class WinningCount {
 
     private final Map<Integer, Integer> counts;
 
@@ -11,11 +11,11 @@ public class WinningCount {
         this.counts = new HashMap<>();
     }
 
-    public void increaseCount(int matchCount) {
+    public void increaseCount(final int matchCount) {
         counts.merge(matchCount, 1, Integer::sum);
     }
 
-    public int getMatchCount(int matchCount) {
+    public int getMatchCount(final int matchCount) {
         return counts.getOrDefault(matchCount, 0);
     }
 

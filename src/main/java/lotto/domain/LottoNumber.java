@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public final class LottoNumber {
 
     public static final String OUT_BOUND_MESSAGE = "숫자는 1 ~ 45 사이의 값을 가져야 합니다!";
 
@@ -12,7 +12,7 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException(OUT_BOUND_MESSAGE);
         }

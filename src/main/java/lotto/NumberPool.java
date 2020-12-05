@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 import lotto.domain.LottoNumber;
 
-public class NumberPool {
+public final class NumberPool {
 
     protected static final int START_INCLUSIVE = 0;
 

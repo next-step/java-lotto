@@ -7,7 +7,7 @@ public enum EarnRate {
 
     private final String explanation;
 
-    EarnRate(String explanation) {
+    EarnRate(final String explanation) {
         this.explanation = explanation;
     }
 
@@ -15,7 +15,7 @@ public enum EarnRate {
         return explanation;
     }
 
-    public static String getExplanationMessage(double earn) {
+    public static String getExplanationMessage(final double earn) {
         if (earn < 1) {
             return LOSS.getExplanation();
         } else if (earn == 1) {

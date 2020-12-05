@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.LottoMachine;
 import lotto.domain.Lotto;
 
-public class InputView {
+public final class InputView {
 
     protected static final String ASK_PAID = "구입금액을 입력해 주세요.";
 
@@ -34,13 +34,13 @@ public class InputView {
     }
 
     public int inputPurchaseCount() {
-        String amount = input(ASK_PAID, paidValidator);
+        final String amount = input(ASK_PAID, paidValidator);
 
         return Integer.parseInt(amount) / LottoMachine.PAY;
     }
 
     public Lotto inputWinningNumbers() {
-        String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
+        final String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
 
         return new Lotto(
                 Arrays.stream(winningNumbers.split(DELIMITER))
@@ -49,7 +49,7 @@ public class InputView {
         );
     }
 
-    protected String input(String message, Validator validator) {
+    protected String input(final String message, final Validator validator) {
         System.out.println(message);
 
         String input = scanner.nextLine().replace(BLANK, EMPTY);
@@ -60,7 +60,7 @@ public class InputView {
         return input;
     }
 
-    protected boolean isValid(Validator validator, String input) {
+    protected boolean isValid(final Validator validator, final String input) {
         try {
             validator.validate(input);
         } catch (IllegalArgumentException e) {

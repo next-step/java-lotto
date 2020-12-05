@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 
 import lotto.NumberPool;
 
-public class Lotto {
+public final class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         this.lottoNumbers = new HashSet<>(intToLottoNumber(numbers));
     }
 
@@ -21,19 +21,19 @@ public class Lotto {
         this.lottoNumbers = NumberPool.getLottoNumbers();
     }
 
-    private List<LottoNumber> intToLottoNumber(List<Integer> numbers) {
+    private List<LottoNumber> intToLottoNumber(final List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public List<LottoNumber> getNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
+        final List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return numbers;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 }

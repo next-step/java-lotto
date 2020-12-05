@@ -8,18 +8,18 @@ public abstract class Validator {
 
     protected static final String EMPTY = "";
 
-    protected void validate(String input) {
+    protected void validate(final String input) {
         checkNull(input);
         checkBlank(input);
     }
 
-    protected void checkNull(String input) {
+    protected void checkNull(final String input) {
         if (input == null) {
             throw new IllegalArgumentException(INPUT_NULL_MESSAGE);
         }
     }
 
-    protected void checkBlank(String input) {
+    protected void checkBlank(final String input) {
         if (input.trim().equals(EMPTY)) {
             throw new IllegalArgumentException(INPUT_EMPTY_MESSAGE);
         }

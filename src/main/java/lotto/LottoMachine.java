@@ -7,7 +7,7 @@ import lotto.domain.WinningRecord;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+public final class LottoMachine {
 
     public static final int LOTTO_SIZE = 6;
 
