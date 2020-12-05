@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -37,5 +38,11 @@ public class LottoResult {
                 .stream()
                 .mapToDouble(p -> p.getProfit() * result.get(p))
                 .reduce(0L, Double::sum);
+    }
+
+    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets) {
+        LottoResult lottoResult = new LottoResult(lottoTickets.size());
+        lottoTickets.forEach(lottoTicket -> Scanner.scan(lottoTicket, lottoResult));
+        return lottoResult;
     }
 }

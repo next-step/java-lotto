@@ -25,7 +25,7 @@ public class LottoApplication {
         resultView.printLottoTickets(lottoTickets);
 
         Scanner scanner = new Scanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
-        LottoResult lottoResult = scanner.scanAll(lottoTickets);
+        LottoResult lottoResult = LottoResult.getLottoResult(lottoTickets);
         resultView.printLottoResult(lottoResult);
     }
 }

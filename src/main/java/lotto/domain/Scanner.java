@@ -7,8 +7,8 @@ public class Scanner {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private List<LottoNumber> winningNumbers;
-    private LottoNumber bonusNumber;
+    private static List<LottoNumber> winningNumbers;
+    private static LottoNumber bonusNumber;
 
     public Scanner(List<Integer> winningNumbers, int bonusNumber) {
         validate(winningNumbers);
@@ -25,7 +25,7 @@ public class Scanner {
         }
     }
 
-    private void scan(LottoTicket lottoTicket, LottoResult lottoResult) {
+    public static void scan(LottoTicket lottoTicket, LottoResult lottoResult) {
         long matchingScore = lottoTicket.getLottoNumbers()
                 .stream()
                 .filter(n -> toIntegerList(winningNumbers)
@@ -40,13 +40,7 @@ public class Scanner {
         lottoResult.saveLottoResult(Long.valueOf(matchingScore).intValue(), matchBonus);
     }
 
-    public LottoResult scanAll(List<LottoTicket> lottoTickets) {
-        LottoResult lottoResult = new LottoResult(lottoTickets.size());
-        lottoTickets.forEach(lottoTicket -> scan(lottoTicket, lottoResult));
-        return lottoResult;
-    }
-
-    private List<Integer> toIntegerList(List<LottoNumber> lottoNumbers) {
+    private static List<Integer> toIntegerList(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(n -> n.toInt())
                 .collect(Collectors.toList());

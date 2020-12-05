@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,9 +32,8 @@ public class ScannerTest {
     @DisplayName("4개가 일치하는 경우")
     public void scan_all_lotto_tickets() {
         LottoTicket lottoTicket = new LottoTicket(MATCHED_4);
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(lottoTicket);
-        LottoResult lottoResult = scanner.scanAll(lottoTickets);
+        LottoResult lottoResult = new LottoResult(1);
+        Scanner.scan(lottoTicket, lottoResult);
         assertThat(lottoResult.getProfitRatio()).isEqualTo(Rank.FOURTH.getProfit()/PAYMENT);
     }
 
@@ -44,9 +42,8 @@ public class ScannerTest {
     public void scan_all_second() {
 
         LottoTicket lottoTicket = new LottoTicket(MATCHED_5_AND_BONUS);
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(lottoTicket);
-        LottoResult lottoResult = scanner.scanAll(lottoTickets);
+        LottoResult lottoResult = new LottoResult(1);
+        Scanner.scan(lottoTicket, lottoResult);
         assertThat(lottoResult.getProfitRatio()).isEqualTo(Rank.SECOND.getProfit()/PAYMENT);
     }
 }
