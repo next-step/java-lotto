@@ -24,9 +24,7 @@ public class WinningRecordTest {
         );
 
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        WinningRecord winningRecord = new WinningRecord(winningLotto);
-
+        WinningRecord winningRecord = new WinningRecord(winningLotto, 7);
         WinningCount winningCount = winningRecord.record(lottoes);
 
         // when

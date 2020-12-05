@@ -34,7 +34,7 @@ public final class OutputView {
         for (Rank rank : Rank.values()) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount()
                     , rank.getPrize()
-                    , winningCount.getMatchCount(rank.getMatchCount()));
+                    , winningCount.getMatchCount(rank));
         }
     }
 

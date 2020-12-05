@@ -27,14 +27,6 @@ public enum Rank {
         return prize;
     }
 
-    public static int getRankingPrize(final int matchCount) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount)
-                .findAny()
-                .map(Rank::getPrize)
-                .orElse(MISS.getPrize());
-    }
-
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)

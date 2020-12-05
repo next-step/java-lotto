@@ -16,9 +16,9 @@ public class WinningCountTest {
         winningCount = new WinningCount();
 
         // when
-        winningCount.increaseCount(3);
-        winningCount.increaseCount(3);
-        winningCount.increaseCount(4);
+        winningCount.increaseCount(Rank.FOURTH);
+        winningCount.increaseCount(Rank.FIFTH);
+        winningCount.increaseCount(Rank.FIFTH);
     }
 
     @Test
@@ -26,12 +26,12 @@ public class WinningCountTest {
     public void increaseCountTest() {
 
         // when
-        int matchCountOfThree = winningCount.getMatchCount(3);
-        int matchCountOfFour = winningCount.getMatchCount(4);
+        int matchCountOfThree = winningCount.getMatchCount(Rank.FOURTH);
+        int matchCountOfFour = winningCount.getMatchCount(Rank.FIFTH);
 
         // then
-        assertThat(matchCountOfThree).isEqualTo(2);
-        assertThat(matchCountOfFour).isEqualTo(1);
+        assertThat(matchCountOfThree).isEqualTo(1);
+        assertThat(matchCountOfFour).isEqualTo(2);
     }
 
     @Test
