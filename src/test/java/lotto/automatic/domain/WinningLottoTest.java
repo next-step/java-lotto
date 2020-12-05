@@ -79,7 +79,7 @@ class WinningLottoTest {
                 LottoNumber.of(7)
         );
 
-        List<LottoRank> rankList1 = winningLotto.getRankList(new LottoCollection(Lotto.manual("1, 2, 3, 4, 5, 6")));
+        List<LottoRank> rankList1 = winningLotto.getRankList(new Lottos(Lotto.manual("1, 2, 3, 4, 5, 6")));
 
 
         assertThat(rankList1.contains(LottoRank.FIRST)).isTrue();

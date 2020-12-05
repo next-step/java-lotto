@@ -24,12 +24,12 @@ public class LottoController {
 
         LottoBuyingMoney lottoBuyingMoney = getLottoMoney();
         ManualLottos manualLottos = getManualLottos(lottoBuyingMoney.getTotalCountOfLotto());
-        LottoCollection collection = getLottoList(lottoBuyingMoney, manualLottos);
+        Lottos lottos = getLottoList(lottoBuyingMoney, manualLottos);
 
-        outputView.printLottoList(collection);
+        outputView.printLottoList(lottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        List<LottoRank> lottoRankList = winningLotto.getRankList(collection);
+        List<LottoRank> lottoRankList = winningLotto.getRankList(lottos);
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
@@ -48,11 +48,11 @@ public class LottoController {
         return inputView.getWinningLottoNums();
     }
 
-    private LottoCollection getLottoList(LottoBuyingMoney lottoBuyingMoney, ManualLottos manualLottos) {
-        LottoCollection collection = lottoGame.generateAutoLotto(lottoBuyingMoney.getAutoAmount(manualLottos.getManualAmount()));
-        collection.append(manualLottos.getCollection());
+    private Lottos getLottoList(LottoBuyingMoney lottoBuyingMoney, ManualLottos manualLottos) {
+        Lottos lottos = lottoGame.generateAutoLotto(lottoBuyingMoney.getAutoAmount(manualLottos.getManualAmount()));
+        lottos.append(manualLottos.getLottos());
 
-        return collection;
+        return lottos;
     }
 
     private LottoBuyingMoney getLottoMoney() {

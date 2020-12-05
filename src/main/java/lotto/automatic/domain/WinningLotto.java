@@ -38,11 +38,11 @@ public class WinningLotto {
         return LottoRank.match(lotto.matchCount(winningLotto), lotto.contain(bonusNumber));
     }
 
-    public List<LottoRank> getRankList(LottoCollection collection) {
+    public List<LottoRank> getRankList(Lottos lottos) {
 
         List<LottoRank> rankList = new ArrayList<>();
 
-        for (Lotto lotto : collection.getLottoList()) {
+        for (Lotto lotto : lottos.getLottoList()) {
             rankList.add(getRank(lotto));
         }
 

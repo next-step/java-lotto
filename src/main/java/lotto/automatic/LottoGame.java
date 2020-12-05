@@ -1,7 +1,7 @@
 package lotto.automatic;
 
 import lotto.automatic.domain.Lotto;
-import lotto.automatic.domain.LottoCollection;
+import lotto.automatic.domain.Lottos;
 import lotto.automatic.domain.LottoRank;
 import lotto.automatic.domain.LottoResult;
 
@@ -9,15 +9,15 @@ import java.util.List;
 
 public class LottoGame {
 
-    public LottoCollection generateAutoLotto(int lottoAmount) {
+    public Lottos generateAutoLotto(int lottoAmount) {
 
-        LottoCollection collection = new LottoCollection();
+        Lottos lottos = new Lottos();
 
         for(int i = 0; i < lottoAmount; i ++ ) {
-            collection.append(Lotto.auto());
+            lottos.append(Lotto.auto());
         }
 
-        return collection;
+        return lottos;
     }
 
     public LottoResult getLottoResult(int investMoney, List<LottoRank> rankList) {

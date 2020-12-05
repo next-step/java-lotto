@@ -3,20 +3,20 @@ package lotto.automatic.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoCollection {
+public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public LottoCollection() {
+    public Lottos() {
         this.lottoList = new ArrayList<>();
     }
 
-    public LottoCollection(Lotto lotto) {
+    public Lottos(Lotto lotto) {
         this();
         this.lottoList.add(lotto);
     }
 
-    public LottoCollection(List<Lotto> lottoList) {
+    public Lottos(List<Lotto> lottoList) {
         this();
         this.lottoList.addAll(lottoList);
     }
@@ -34,8 +34,8 @@ public class LottoCollection {
         this.lottoList.addAll(lottoList);
     }
 
-    public void append(LottoCollection collection) {
-        this.lottoList.addAll(collection.lottoList);
+    public void append(Lottos lottos) {
+        this.lottoList.addAll(lottos.lottoList);
     }
 
     public List<Lotto> getLottoList() {
