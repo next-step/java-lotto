@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public final class LottoNumber {
 
-    public static final String OUT_BOUND_MESSAGE = "숫자는 1 ~ 45 사이의 값을 가져야 합니다!";
+    protected static final String OUT_BOUND_MESSAGE = "숫자는 1 ~ 45 사이의 값을 가져야 합니다!";
 
     public static final int LOWER_BOUND = 1;
 

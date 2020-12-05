@@ -10,17 +10,17 @@ import lotto.domain.LottoNumber;
 
 public final class InputView {
 
-    protected static final String ASK_PAID = "구입금액을 입력해 주세요.";
+    private static final String ASK_PAID = "구입금액을 입력해 주세요.";
 
-    protected static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
-    public static final String ASK_BONUS_BALL = "보너스 볼을 입력해주세요.";
+    private static final String ASK_BONUS_BALL = "보너스 볼을 입력해주세요.";
 
-    protected static final String INPUT_VALUE_MESSAGE = "\n입력한 값은 %s 입니다";
+    private static final String INPUT_VALUE_MESSAGE = "\n입력한 값은 %s 입니다";
 
-    protected static final String BLANK = " ";
+    private static final String BLANK = " ";
 
-    protected static final String EMPTY = "";
+    private static final String EMPTY = "";
 
     protected static final String DELIMITER = ",";
 
@@ -56,7 +56,7 @@ public final class InputView {
         return new LottoNumber(input(ASK_BONUS_BALL, new Validator()));
     }
 
-    protected String input(final String message, final Validator validator) {
+    private String input(final String message, final Validator validator) {
         System.out.println(message);
 
         String input = scanner.nextLine().replace(BLANK, EMPTY);
@@ -67,7 +67,7 @@ public final class InputView {
         return input;
     }
 
-    protected boolean isValid(final Validator validator, final String input) {
+    private boolean isValid(final Validator validator, final String input) {
         try {
             validator.validate(input);
         } catch (IllegalArgumentException e) {

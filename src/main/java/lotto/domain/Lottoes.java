@@ -20,7 +20,7 @@ public final class Lottoes {
         return lottoes;
     }
 
-    protected List<Lotto> purchaseLottoes(final int count) {
+    private List<Lotto> purchaseLottoes(final int count) {
         final List<Lotto> newLottoes = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {

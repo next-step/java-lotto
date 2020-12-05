@@ -8,11 +8,11 @@ import lotto.domain.WinningCount;
 
 public final class OutputView {
 
-    protected static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
 
-    protected static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
+    private static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
 
-    protected static final String EARN_RATE_MESSAGE = "총 수익률은 %.2f입니다.(%s)";
+    private static final String EARN_RATE_MESSAGE = "총 수익률은 %.2f입니다.(%s)";
 
     public void showPurchaseCount(final int count) {
         System.out.println(count + PURCHASE_MESSAGE);
@@ -30,7 +30,7 @@ public final class OutputView {
         showEarnRate(winningCount, paid);
     }
 
-    protected void showMatchingCount(final WinningCount winningCount) {
+    private void showMatchingCount(final WinningCount winningCount) {
         for (Rank rank : Rank.values()) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount()
                     , rank.getPrize()

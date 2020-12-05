@@ -12,7 +12,7 @@ import lotto.domain.LottoNumber;
 
 public final class NumberPool {
 
-    protected static final int START_INCLUSIVE = 0;
+    private static final int START_INCLUSIVE = 0;
 
     private static final List<LottoNumber> numberPool = makePool();
 

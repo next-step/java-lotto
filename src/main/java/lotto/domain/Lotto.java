@@ -21,12 +21,6 @@ public final class Lotto {
         this.lottoNumbers = NumberPool.getLottoNumbers();
     }
 
-    private List<LottoNumber> intToLottoNumber(final List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
     public List<LottoNumber> getNumbers() {
         final List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
@@ -35,5 +29,11 @@ public final class Lotto {
 
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    private List<LottoNumber> intToLottoNumber(final List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
