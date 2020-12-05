@@ -12,6 +12,10 @@ public final class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(final String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(final int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException(OUT_BOUND_MESSAGE);

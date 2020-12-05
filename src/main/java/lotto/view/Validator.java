@@ -1,6 +1,6 @@
 package lotto.view;
 
-public abstract class Validator {
+public class Validator {
 
     protected static final String INPUT_NULL_MESSAGE = "null 값을 입력하였습니다!";
 
