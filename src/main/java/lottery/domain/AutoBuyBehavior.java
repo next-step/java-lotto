@@ -10,6 +10,10 @@ public class AutoBuyBehavior implements BuyBehavior {
     public static final int END_INCLUSIVE = 45;
     public static final int START_INCLUSIVE = 1;
     public static final int FROM_INDEX = 0;
+    public static final List<LotteryNumber> lotteryAllNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
+            .boxed()
+            .map(LotteryNumber::new)
+            .collect(Collectors.toList());
 
     @Override
     public List<LotteryTicket> buyLotteryTickets(int pickCounts, int numberOfTickets) {
@@ -23,20 +27,7 @@ public class AutoBuyBehavior implements BuyBehavior {
     }
 
     private List<LotteryNumber> getLotteryNumbersByAutomation(int pickCounts) {
-        List<Integer> lotteryAllNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
-                .boxed()
-                .collect(Collectors.toList());
         Collections.shuffle(lotteryAllNumbers);
-        return createLotteryNumbersByNumbers(lotteryAllNumbers.subList(FROM_INDEX, pickCounts));
-    }
-
-    private List<LotteryNumber> createLotteryNumbersByNumbers(List<Integer> numbers) {
-        List<LotteryNumber> lotteryNumbers = new ArrayList<>();
-        LotteryNumber lotteryNumber;
-        for(Integer integer : numbers) {
-            lotteryNumber = new LotteryNumber(integer.intValue());
-            lotteryNumbers.add(lotteryNumber);
-        }
-        return lotteryNumbers;
+        return lotteryAllNumbers.subList(FROM_INDEX, pickCounts);
     }
 }
