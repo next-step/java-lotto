@@ -40,4 +40,15 @@ public enum Rank {
     private static boolean getBonusRank(int countOfMatch, boolean matchBonus) {
         return countOfMatch == 5 && matchBonus;
     }
+
+
+    @Override
+    public String toString() {
+        if (this == SECOND) {
+            return getMatchingScore() +
+                    "개 일치, 보너스 볼 일치 (" + getProfit() + "원)" + ": ";
+        }
+       return getMatchingScore() +
+                "개 일치 (" + getProfit() + "원)" + ": ";
+    }
 }

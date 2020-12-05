@@ -24,9 +24,10 @@ public class ResultView {
         Arrays.stream(Rank.values())
                 .filter(r -> r.getMatchingScore() >= 3)
                 .sorted(Comparator.comparing(Rank::getProfit))
-                .forEach(r -> System.out.println(r.getMatchingScore() +
-                        "개 일치 (" + r.getProfit() + "원)" + ": " + lottoResult.getResult().get(r) +"개"));
+                .forEach(r -> System.out.println(r.toString() + lottoResult.getResult().get(r) +"개"));
 
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다.");
+        System.out.print("총 수익률은 " + String.format("%.2f", lottoResult.getProfitRatio()) + "입니다. ");
+
+        if (lottoResult.getProfitRatio() < 1) System.out.println("(기준이 1이기 떄문에 결과적으로 손해라는 의미)");
     }
 }
