@@ -27,11 +27,12 @@ public class LottoApplication {
         List<LottoTicket> manualLottoTickets = generator.generateManualLottoTicket(manualLottoNumbers);
 
         resultView.printTickets(manualLottoCount, autoLottoTicketCount);
-        List<LottoTicket> lottoTickets = generator.generateLottoTickets(autoLottoTicketCount);
-        resultView.printLottoTickets(lottoTickets);
+        List<LottoTicket> autoLottoTickets = generator.generateLottoTickets(autoLottoTicketCount);
+        resultView.printLottoTickets(autoLottoTickets);
+        autoLottoTickets.addAll(manualLottoTickets);
 
         Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
-        LottoResult lottoResult = LottoResult.getLottoResult(lottoTickets);
+        LottoResult lottoResult = LottoResult.getLottoResult(autoLottoTickets);
         resultView.printLottoResult(lottoResult);
     }
 }
