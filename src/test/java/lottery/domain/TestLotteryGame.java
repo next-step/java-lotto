@@ -96,7 +96,7 @@ public class TestLotteryGame {
     @DisplayName("로또 게임 결과 로또 당첨번호와 3개 일치하는 경우")
     void matchThreeNumbersWithOneLotteryTickets() {
         assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,10,11,12", dummyOneLotteryTicket)
-                .getLotteryResultMap().get(3))
+                .getLotteryResultMap().get(LotteryValue.FORTH_PLACE))
                 .isEqualTo(1);
     }
 
@@ -104,7 +104,7 @@ public class TestLotteryGame {
     @DisplayName("로또 게임 결과 로또 당첨번호와 6개가 2개의 티켓에서 일치하는 경우")
     void matchSixNumbersWithMultiLotteryTickets() {
         assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,4,5,6", dummyLotteryTickets)
-                .getLotteryResultMap().get(6))
+                .getLotteryResultMap().get(LotteryValue.FIRST_PLACE))
                 .isEqualTo(2);
     }
 }
