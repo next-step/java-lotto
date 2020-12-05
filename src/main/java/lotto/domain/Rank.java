@@ -11,8 +11,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    int matchingScore;
-    int profit;
+    private final int matchingScore;
+    private final int profit;
 
     Rank(int matchingScore, int profit) {
         this.matchingScore = matchingScore;
