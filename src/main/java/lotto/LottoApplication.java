@@ -23,10 +23,11 @@ public class LottoApplication {
         int manualLottoCount = inputView.inputManualLottoCount();
         int autoLottoTicketCount = calculator.getAutoLottoCount(lottoTicketCount, manualLottoCount);
 
-        inputView.inputManualLottoNumbers(manualLottoCount);
+        List<List<Integer>> manualLottoNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
+        List<LottoTicket> manualLottoTickets = generator.generateManualLottoTicket(manualLottoNumbers);
 
-        resultView.printTickets(lottoTicketCount);
-        List<LottoTicket> lottoTickets = generator.generateLottoTickets(lottoTicketCount);
+        resultView.printTickets(manualLottoCount, autoLottoTicketCount);
+        List<LottoTicket> lottoTickets = generator.generateLottoTickets(autoLottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
         Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());

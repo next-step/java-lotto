@@ -17,4 +17,10 @@ public class Generator {
         }
         return lottoTickets;
     }
+
+    public List<LottoTicket> generateManualLottoTicket(List<List<Integer>> manualLottoNumbers) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        manualLottoNumbers.forEach(n -> lottoTickets.add(new LottoTicket(n)));
+        return lottoTickets;
+    }
 }
