@@ -7,7 +7,7 @@ public class LottoTicket {
     private int autoQuantity;
     private int manualQuantity;
 
-    public LottoTicket(int autoQuantity, int manualQuantity) {
+    private LottoTicket(int autoQuantity, int manualQuantity) {
         this.autoQuantity = autoQuantity;
         this.manualQuantity = manualQuantity;
     }
