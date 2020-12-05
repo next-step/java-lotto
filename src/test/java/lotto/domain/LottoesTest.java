@@ -11,7 +11,7 @@ public class LottoesTest {
     @DisplayName("주어진 숫자만큼 로또가 생성되는지 테스트")
     public void purchaseCountTest() {
 
-        // given, when
+        // when
         Lottoes lottoes = new Lottoes(3);
 
         // then

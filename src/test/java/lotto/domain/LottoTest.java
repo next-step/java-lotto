@@ -21,6 +21,7 @@ public class LottoTest {
     @DisplayName("로또 자동 생성 사이즈 테스트")
     public void autoCreateTest() {
 
+        // when
         lotto = new Lotto();
 
         // then

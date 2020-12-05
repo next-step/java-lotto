@@ -13,7 +13,7 @@ public class WinningCountTest {
     @BeforeEach
     public void init() {
         // given
-         winningCount = new WinningCount();
+        winningCount = new WinningCount();
 
         // when
         winningCount.increaseCount(3);
@@ -25,16 +25,23 @@ public class WinningCountTest {
     @DisplayName("당첨 결과 증가 테스트")
     public void increaseCountTest() {
 
+        // when
+        int matchCountOfThree = winningCount.getMatchCount(3);
+        int matchCountOfFour = winningCount.getMatchCount(4);
+
         // then
-        assertThat(winningCount.getMatchCount(3)).isEqualTo(2);
-        assertThat(winningCount.getMatchCount(4)).isEqualTo(1);
+        assertThat(matchCountOfThree).isEqualTo(2);
+        assertThat(matchCountOfFour).isEqualTo(1);
     }
 
     @Test
     @DisplayName("총 당첨 상금 계산 테스트")
     public void calculatePrizeTest() {
 
+        // when
+        int prize = winningCount.calculatePrize();
+
         // then
-        assertThat(winningCount.calculatePrize()).isEqualTo(60_000);
+        assertThat(prize).isEqualTo(60_000);
     }
 }
