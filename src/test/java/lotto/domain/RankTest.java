@@ -13,10 +13,9 @@ public class RankTest {
 
         // given
         int matchCount = 6;
-        boolean matchBonus = true;
 
         // when
-        Rank rank = Rank.valueOf(matchCount, matchBonus);
+        Rank rank = Rank.valueOf(matchCount, false);
 
         //then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -28,10 +27,9 @@ public class RankTest {
 
         // given
         int matchCount = 5;
-        boolean matchBonus = true;
 
         // when
-        Rank rank = Rank.valueOf(matchCount, matchBonus);
+        Rank rank = Rank.valueOf(matchCount, true);
 
         //then
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -43,10 +41,9 @@ public class RankTest {
 
         // given
         int matchCount = 5;
-        boolean matchBonus = false;
 
         // when
-        Rank rank = Rank.valueOf(matchCount, matchBonus);
+        Rank rank = Rank.valueOf(matchCount, false);
 
         //then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -58,10 +55,9 @@ public class RankTest {
 
         // given
         int matchCount = 1;
-        boolean matchBonus = true;
 
         // when
-        Rank rank = Rank.valueOf(matchCount, matchBonus);
+        Rank rank = Rank.valueOf(matchCount, false);
 
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
