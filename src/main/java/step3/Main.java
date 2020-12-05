@@ -12,18 +12,15 @@ public class Main {
 
         Lottos lottos = settingLottos(money, lottoGenerator);
 
-        String resultString = InputView.getResultNumber();
+        ResultNumber.settingLottoResultNumber(InputView.getResultNumber());
+        ResultNumber.settingLottoBonusNumber(InputView.getBonusNumber());
 
-        checkResult(lottos, resultString);
+        lottos.checkResult();
+
         // 결과 출력
         ResultView.printResult(money);
     }
 
-    public static void checkResult(Lottos lottos, String resultString){
-        List<LottoNumber> ResultNumberList = getResultNumberList(resultString);
-        // 로또 결과 확인
-        lottos.checkResult(ResultNumberList);
-    }
     public static Lottos settingLottos(int money, LottoGenerator lottoGenerator) {
         Lottos lottos = new Lottos(money, lottoGenerator);
 

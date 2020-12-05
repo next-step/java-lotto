@@ -11,9 +11,9 @@ public class Lottos {
             buyLotto(lottoGenerator);
         }
     }
-    public void checkResult(List<LottoNumber> result) {
+    public void checkResult() {
         for (Lotto lotto: this.lottoList) {
-            lotto.checkReward(result);
+            lotto.checkReward();
         }
     }
 

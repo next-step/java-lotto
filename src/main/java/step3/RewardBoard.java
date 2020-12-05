@@ -47,6 +47,26 @@ public enum RewardBoard {
         if (winningCnt == 5) {
             return 2;
         }
-        return 1;
+
+        if (winningCnt == 6) {
+            return 1;
+        }
+        return 6;
+    }
+
+    public static int getWinningCntByRank(int rank) {
+        if (rank == 1) {
+            return 6;
+        }
+
+        if (rank == 3) {
+            return 5;
+        }
+
+        if (rank == 4) {
+            return 4;
+        }
+
+        return 3;
     }
 }

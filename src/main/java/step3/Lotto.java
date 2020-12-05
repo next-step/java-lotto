@@ -10,14 +10,11 @@ public class Lotto {
         this.numberList = lottoGenerator.getLottoNumbers();
     }
 
-    public void checkReward(List<LottoNumber> result) {
-        int winningNumber = 0;
-        for (LottoNumber i : result) {
-            if (this.numberList.contains(i)) {
-                winningNumber ++;
-            }
-        }
-        Statistic.recordLottoResult(winningNumber);
+    public void checkReward() {
+        int winningCnt = ResultNumber.checkLottoResult(this.numberList);
+        boolean bonusResult = ResultNumber.checkBonusResult(this.numberList);
+
+        Statistic.recordLottoResult(winningCnt, bonusResult);
     }
 
     public List<LottoNumber> getNumberList(){

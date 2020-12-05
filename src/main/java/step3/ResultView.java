@@ -20,7 +20,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("------------------");
 
-        for (int i = 1; i < Statistic.results.length; i ++) {
+        for (int i = Statistic.results.length - 2; i >= 0; i --) {
             printWinningCntResult(i);
         }
 
@@ -29,13 +29,16 @@ public class ResultView {
 
     public static void printWinningCntResult(int index) {
         //
-        int winningCnt = index + 2;
-        if (index == 4) {
-            System.out.println("5개 일치, 보너스 볼 일치 (" + RewardBoard.getReward(2).getReward() + "원)- " + Statistic.results[index].toString() + "개");
+        int winningCnt = RewardBoard.getWinningCntByRank(index+1);
 
+        if (index != 1) {
+            int rank = RewardBoard.getRankByWinningCnt(winningCnt, false);
+            System.out.println((winningCnt) + "개 일치 (" + RewardBoard.getReward(rank).getReward() + "원)- " + Statistic.results[index].toString() + "개");
         }
-        int rank = RewardBoard.getRankByWinningCnt(winningCnt, false);
-        System.out.println((winningCnt) + "개 일치 (" + RewardBoard.getReward(rank).getReward() + "원)- " + Statistic.results[index].toString() + "개");
+
+        if (index == 1) {
+            System.out.println("5개 일치, 보너스 볼 일치 (" + RewardBoard.getReward(2).getReward() + "원)- " + Statistic.results[index].toString() + "개");
+        }
     }
 
     public static void printLottoList(Lottos lottos) {
