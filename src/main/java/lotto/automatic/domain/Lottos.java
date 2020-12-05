@@ -2,6 +2,8 @@ package lotto.automatic.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -37,7 +39,7 @@ public class Lottos {
         this.lottoList.addAll(lottos.lottoList);
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public <T> List<T> apply(Function<Lotto, T> function){
+        return lottoList.stream().map(function).collect(Collectors.toList());
     }
 }

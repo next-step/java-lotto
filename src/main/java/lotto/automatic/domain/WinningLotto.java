@@ -1,6 +1,5 @@
 package lotto.automatic.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
@@ -39,13 +38,6 @@ public class WinningLotto {
     }
 
     public List<LottoRank> getRankList(Lottos lottos) {
-
-        List<LottoRank> rankList = new ArrayList<>();
-
-        for (Lotto lotto : lottos.getLottoList()) {
-            rankList.add(getRank(lotto));
-        }
-
-        return rankList;
+        return lottos.apply(this::getRank);
     }
 }

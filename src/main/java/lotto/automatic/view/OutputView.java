@@ -1,9 +1,9 @@
 package lotto.automatic.view;
 
 import lotto.automatic.domain.Lotto;
-import lotto.automatic.domain.Lottos;
 import lotto.automatic.domain.LottoRank;
 import lotto.automatic.domain.LottoResult;
+import lotto.automatic.domain.Lottos;
 
 import java.util.stream.Stream;
 
@@ -13,9 +13,8 @@ public class OutputView {
 
         System.out.printf("%d개를 구매했습니다.\n", lottos.size());
 
-        for(Lotto lotto: lottos.getLottoList()) {
-            System.out.println(lotto);
-        }
+        lottos.apply(Lotto::toString)
+                .forEach(System.out::println);
 
         System.out.println();
     }
