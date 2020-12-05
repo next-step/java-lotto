@@ -13,15 +13,13 @@ public class InputView {
 
     protected static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
-    protected static final String INPUT_VALUE_IS = "\n입력한 값은 ";
-
-    protected static final String INPUT_VALUE_SUFFIX = " 입니다";
+    protected static final String INPUT_VALUE_MESSAGE = "\n입력한 값은 %s 입니다";
 
     protected static final String BLANK = " ";
 
     protected static final String EMPTY = "";
 
-    protected static final String COMMA = ",";
+    protected static final String DELIMITER = ",";
 
     private final Scanner scanner;
 
@@ -37,13 +35,15 @@ public class InputView {
 
     public int inputPurchaseCount() {
         String amount = input(ASK_PAID, paidValidator);
+
         return Integer.parseInt(amount) / LottoMachine.PAY;
     }
 
     public Lotto inputWinningNumbers() {
         String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
+
         return new Lotto(
-                Arrays.stream(winningNumbers.split(COMMA))
+                Arrays.stream(winningNumbers.split(DELIMITER))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );
@@ -64,10 +64,9 @@ public class InputView {
         try {
             validator.validate(input);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage() + INPUT_VALUE_IS + input + INPUT_VALUE_SUFFIX);
+            System.out.println(e.getMessage() + String.format(INPUT_VALUE_MESSAGE, input));
             return false;
         }
-
         return true;
     }
 }
