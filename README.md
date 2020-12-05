@@ -12,30 +12,37 @@
 
 ### Model
 
-- Operand
-  - 자동차 리스트 만들기
+- Buyer
+  - 로또 구매
 
-- Calculator
-  - 구분자 있는지 판단
-  - 피연산자 합 구하기
+- Lottos
+  - 로또 생성
   
-- Separator  
-  - 구분자 생성
-  - 구분자 추가 
+- Lotto
+  - 번호 생성 
   
-- Splitter
-  - 문자열 분리
+- WinningNumber
+  - 당첨번호 생성
 
-- Operand
-  - 피연산자 추가
+- LottoComparer
+  - 로또 번호 비교
+  
+- ProfitCalculator
+  - 수익 계산
 
 ### View
 - InputView
-  - 문자열 입력
+  - 금액 입력
+  
+- LottoVeiw
+  - 로또 번호 출력
+  
+- InputWinngNumberView
+- 당첨 번호 입력
 
 - ResultView
-  - 결과 출력하기
+  - 당첨 통계 출력
 
 ### Controller
-- CalculatorController 객체 생성
+- LottoController 객체 생성
 
