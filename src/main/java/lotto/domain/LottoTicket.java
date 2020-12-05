@@ -4,27 +4,24 @@ import java.util.Objects;
 
 public class LottoTicket {
 
-    private int quantity;
-    private int manualCount;
+    private int autoQuantity;
+    private int manualQuantity;
 
-    public LottoTicket(int quantity) {
-        this.quantity = quantity;
+    public LottoTicket(int autoQuantity, int manualQuantity) {
+        this.autoQuantity = autoQuantity;
+        this.manualQuantity = manualQuantity;
     }
 
-    public void spend() {
-        if(quantity == 0 ){
-            throw new IllegalArgumentException();
-        }
-        quantity--;
-        manualCount++;
+    public static LottoTicket of(int totalQuantity, int manualQuantity) {
+        return new LottoTicket(totalQuantity - manualQuantity, manualQuantity);
     }
 
-    public int getRemainCount() {
-        return quantity;
+    public int getAutoQuantity() {
+        return autoQuantity;
     }
 
-    public int getManualCount() {
-        return manualCount;
+    public int getManualQuantity() {
+        return manualQuantity;
     }
 
     @Override
@@ -32,12 +29,12 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket ticket = (LottoTicket) o;
-        return quantity == ticket.quantity &&
-                manualCount == ticket.manualCount;
+        return autoQuantity == ticket.autoQuantity &&
+                manualQuantity == ticket.manualQuantity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(quantity, manualCount);
+        return Objects.hash(autoQuantity, manualQuantity);
     }
 }
