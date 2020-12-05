@@ -17,10 +17,14 @@ public class ResultView {
 
     public static void outputLottos(Lottos lottos) {
         IntStream.range(0, lottos.quantity())
-                .forEach(i -> System.out.println(lottos.getLotto(i).stream()
-                        .map(lottonumber -> lottonumber.getNumber())
-                        .sorted()
-                        .collect(Collectors.toList())));
+                .forEach(i -> System.out.println(
+                                    lottos.getLotto(i)
+                                            .stream()
+                                            .map(LottoNumber::getNumber)
+                                            .sorted()
+                                            .collect(Collectors.toList())
+                                )
+                        );
     }
 
     public static void outputPrizeStatistics(Reward reward) {
