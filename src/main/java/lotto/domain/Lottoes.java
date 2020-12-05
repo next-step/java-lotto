@@ -9,8 +9,7 @@ public class Lottoes {
     private final List<Lotto> lottoes;
 
     public Lottoes(int count) {
-        this.lottoes = new ArrayList<>();
-        purchaseLottoes(count);
+        this.lottoes = purchaseLottoes(count);
     }
 
     public Lottoes(List<List<Integer>> lottoes) {
@@ -21,9 +20,13 @@ public class Lottoes {
         return lottoes;
     }
 
-    protected void purchaseLottoes(int count) {
+    protected List<Lotto> purchaseLottoes(int count) {
+        List<Lotto> newLottoes = new ArrayList<>();
+
         for (int i = 0; i < count; i++) {
             lottoes.add(new Lotto());
         }
+
+        return newLottoes;
     }
 }
