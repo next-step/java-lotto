@@ -34,7 +34,7 @@ public enum RewardBoard {
                 .orElse(RewardBoard.MISS);
     }
 
-    public int getRankByWinningCnt(int winningCnt, boolean bonusNumberFlag) {
+    public static int getRankByWinningCnt(int winningCnt, boolean bonusNumberFlag) {
         if (winningCnt == 3) {
             return 5;
         }

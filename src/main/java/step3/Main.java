@@ -16,7 +16,7 @@ public class Main {
 
         checkResult(lottos, resultString);
         // 결과 출력
-        ResultView.printResult(lottos, money);
+        ResultView.printResult(money);
     }
 
     public static void checkResult(Lottos lottos, String resultString){

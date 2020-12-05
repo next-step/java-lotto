@@ -1,7 +1,10 @@
 package step3;
 
 public class Statistic {
-    public static Integer[] results = {0, 0, 0, 0, 0, 0, 0};
+    // results results[0] : 당첨X, results[1] : 5등 ~~ results[5] : 1등
+    public static Integer[] results = {0, 0, 0, 0, 0, 0};
+    // 2등 통계 index
+    public static int secondRankIndex = 4;
 
     public static float getMargin(int money) {
         float totalReward = 0;
@@ -12,6 +15,6 @@ public class Statistic {
     }
 
     public static void recordLottoResult(int winningCnt) {
-        results[winningCnt] += 1;
+        results[RewardBoard.getRankByWinningCnt(winningCnt, false)] += 1;
     }
 }
