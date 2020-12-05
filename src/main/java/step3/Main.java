@@ -30,6 +30,7 @@ public class Main {
 
         return lottos;
     }
+
     public static List<LottoNumber> getResultNumberList(String resultString) {
         List<LottoNumber> numberList = new ArrayList<>();
 
