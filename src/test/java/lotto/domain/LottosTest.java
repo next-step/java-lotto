@@ -3,10 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,4 +68,28 @@ public class LottosTest {
         //Then
         assertThat(lottos.quantity()).isEqualTo(quantity);
     }
+
+    @ParameterizedTest
+    @MethodSource("createManualLottos")
+    public void addManualLottosTest(List<Lotto> manualLottos) {
+        //Given
+        Lottos lottos = new Lottos();
+
+        //When
+        lottos.addManualLottos(manualLottos);
+
+        //Then
+        assertThat(lottos.quantity()).isEqualTo(manualLottos.size());
+    }
+
+    private static Stream<Arguments> createManualLottos() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))),
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 30, 23, 6))),
+                        Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 30, 15, 40)))
+                )
+        );
+    }
+
 }

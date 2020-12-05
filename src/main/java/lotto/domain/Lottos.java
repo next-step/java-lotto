@@ -30,4 +30,8 @@ public class Lottos {
         }
         lottos.add(lotto);
     }
+
+    public void addManualLottos(List<Lotto> manualLottos) {
+        lottos.addAll(manualLottos);
+    }
 }
