@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.Assert.assertEquals;
 
-public class CalculratorTest {
+public class CalculatorTest {
 
     @Test
     @DisplayName("쉼표로 합계를 잘 구하는가")
