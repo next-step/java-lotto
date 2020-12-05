@@ -14,7 +14,7 @@ public final class OutputView {
 
     private static final String EARN_RATE_MESSAGE = "총 수익률은 %.2f입니다.(%s)";
 
-    private static final String DEFAULT_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String DEFAULT_STATISTICS_MESSAGE = "%d개 일치 (%d원) - %d개\n";
 
     private static final String SECOND_STATISTICS_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
 
