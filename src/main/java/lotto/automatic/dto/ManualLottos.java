@@ -1,26 +1,17 @@
 package lotto.automatic.dto;
 
-import lotto.automatic.domain.Lotto;
-import lotto.automatic.domain.Lottos;
-
 import java.util.List;
 
 public class ManualLottos {
 
-    private final Lottos lottos;
     private final int manualAmount;
+    private List<String> rawStrings;
 
-    public ManualLottos(int manualAmount, List<String> stringInputs) {
+    public ManualLottos(int manualAmount, List<String> rawStrings) {
         validateManualAmount(manualAmount);
 
-        Lottos lottos = new Lottos();
-
-        for(String rawInput : stringInputs) {
-            lottos.append(Lotto.manual(rawInput));
-        }
-
         this.manualAmount = manualAmount;
-        this.lottos = lottos;
+        this.rawStrings = rawStrings;
     }
 
     public static void validateManualLottoCountWithTotalCount(int totalAmount, int manualAmount) {
@@ -30,8 +21,8 @@ public class ManualLottos {
         }
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public List<String> getRawStrings() {
+        return rawStrings;
     }
 
     private void validateManualAmount(int manualAmount) {

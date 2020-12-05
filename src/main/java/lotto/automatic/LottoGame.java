@@ -20,6 +20,17 @@ public class LottoGame {
         return lottos;
     }
 
+    public Lottos generateManualLotto(List<String> stringInputs) {
+
+        Lottos lottos = new Lottos();
+
+        for(String rawString: stringInputs) {
+            lottos.append(Lotto.manual(rawString));
+        }
+
+        return lottos;
+    }
+
     public LottoResult getLottoResult(int investMoney, List<LottoRank> rankList) {
 
         return new LottoResult(investMoney, rankList);

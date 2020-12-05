@@ -33,7 +33,6 @@ public class LottoController {
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
-
     }
 
     private ManualLottos getManualLottos(int totalCountOfLotto) {
@@ -49,10 +48,11 @@ public class LottoController {
     }
 
     private Lottos getLottoList(LottoBuyingMoney lottoBuyingMoney, ManualLottos manualLottos) {
-        Lottos lottos = lottoGame.generateAutoLotto(lottoBuyingMoney.getAutoAmount(manualLottos.getManualAmount()));
-        lottos.append(manualLottos.getLottos());
+        Lottos autoLotto = lottoGame.generateAutoLotto(lottoBuyingMoney.getAutoAmount(manualLottos.getManualAmount()));
+        Lottos manualLotto = lottoGame.generateManualLotto(manualLottos.getRawStrings());
+        autoLotto.append(manualLotto);
 
-        return lottos;
+        return autoLotto;
     }
 
     private LottoBuyingMoney getLottoMoney() {
