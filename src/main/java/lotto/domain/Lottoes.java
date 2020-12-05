@@ -24,7 +24,7 @@ public class Lottoes {
         List<Lotto> newLottoes = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoes.add(new Lotto());
+            newLottoes.add(new Lotto());
         }
 
         return newLottoes;

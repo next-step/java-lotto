@@ -12,11 +12,7 @@ public class WinningCount {
     }
 
     public void increaseCount(int matchCount) {
-        counts.putIfAbsent(matchCount, 0);
-
-        int value = counts.get(matchCount);
-
-        counts.put(matchCount, value + 1);
+        counts.merge(matchCount, 1, Integer::sum);
     }
 
     public int getMatchCount(int matchCount) {
