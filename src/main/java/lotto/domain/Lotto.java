@@ -32,4 +32,8 @@ public class Lotto {
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return numbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

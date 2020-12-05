@@ -21,7 +21,7 @@ public class WinningRecord {
     private int countMatchingNumbers(Lotto lotto) {
         return (int) lotto.getNumbers()
                 .stream()
-                .filter(number -> winningLotto.getNumbers().contains(number))
+                .filter(winningLotto::contains)
                 .count();
     }
 
