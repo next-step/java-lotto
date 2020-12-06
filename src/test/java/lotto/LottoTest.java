@@ -15,7 +15,11 @@ public class LottoTest {
     @Test
     @DisplayName("로또 객체 생성에 따른 로또 티켓생성 테스트")
     public void initTest(){
-        Lotto lotto = new Lotto(3000);
+
+        String[] manualList = new String[2];
+        manualList[0] = "1,2,3,4,5,6";
+        manualList[1] = "10,20,30,40,42,45";
+        Lotto lotto = new Lotto(3000,manualList);
 
         assertThat(lotto.getLottoTickets().getTicketCount()).isEqualTo(3);
 
@@ -27,8 +31,11 @@ public class LottoTest {
 
         EnumMap<Rank, Integer> benefits = new EnumMap<>(Rank.getInitWinningStatics());
         benefits.put(Rank.FIRST,Rank.FIRST.getMoney());
+        String[] manualList = new String[2];
+        manualList[0] = "1,2,3,4,5,6";
+        manualList[1] = "10,20,30,40,42,45";
 
-        Lotto lotto = new Lotto(1000);
+        Lotto lotto = new Lotto(3000,manualList);
         lotto.resultBenefit(benefits);
 
     }

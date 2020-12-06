@@ -1,7 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -16,6 +18,24 @@ public class LottoTickets {
             LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
             tickets.add(new LottoTicket(lottoNumberMaker.makeNumber()));
         }
+        return new LottoTickets(tickets);
+    }
+    public static LottoTickets of(int ticketCount, String[] manualNumbers) {
+        List<LottoTicket> tickets = new ArrayList<>();
+
+        //수동번호
+        for (int i = 0; i < manualNumbers.length; i++) {
+            tickets.add(LottoTicket.of(manualNumbers[i]));
+        }
+
+        //자동번호
+        for (int i = 0; i < ticketCount; i++) {
+            LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
+            tickets.add(new LottoTicket(lottoNumberMaker.makeNumber()));
+        }
+
+
+
         return new LottoTickets(tickets);
     }
 

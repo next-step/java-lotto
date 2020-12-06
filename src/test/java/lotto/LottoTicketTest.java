@@ -33,4 +33,14 @@ public class LottoTicketTest {
                     LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1,3,5,7,3,9));
                 }).withMessage("로또의 번호는 6개 이어야 합니다.");
     }
+
+    @Test
+    @DisplayName("잘못된 번호 입력 테스트")
+    public void manualNumberTest(){
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(()->{
+                    LottoTicket.of("1, 23, 37, 40 ,41 ,50");
+                }).withMessage("로또 번호는 1~45 사이 입니다.");
+
+    }
 }
