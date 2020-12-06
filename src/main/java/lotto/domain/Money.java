@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_AMOUNT = 0;
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final int amount;
 
@@ -13,6 +14,10 @@ public class Money {
         validate(amount);
 
         this.amount = amount;
+    }
+
+    public int howManyLottoTickets() {
+        return this.amount / LOTTO_TICKET_PRICE;
     }
 
     private void validate(final int amount) {
