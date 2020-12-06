@@ -36,6 +36,10 @@
 - LottoTicketsFactory(class)
     - LottoTickets를 생성하는 객체
     - [X] Moeny를 인수로 받아 구매가능한 최대 수의 LottoTicket 컬렉션을 반환한다.
+    - [ ] LottoTikcets 일급 컬렉션을 반환하도록 리팩토링
+- LottoTickets(class)
+    - LottoTicket 일급 컬렉션
+    - [ ] 속한 LottoTicket 컬렉션을 기반으로 LottoPrize를 계산할 수 있다.
 - Money(class)
     - LottoTicket을 구매하기 위한 자원 오브젝트
     - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
@@ -44,3 +48,7 @@
 - Rank(enum)
     - Lotto 당첨 결과를 보여주기 위한 오브젝트
     - [X] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.
+- LottoPrize(class)
+    - 로또 당첨 결과를 통합적으로 관리하는 오브젝트
+    - [ ] Rank 컬렉션을 인자로 받아 Rank 별로 몇개가 있는지 관리한다.
+    - [ ] 수익률을 계산할 수 있다.
