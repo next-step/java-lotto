@@ -28,8 +28,8 @@ public class LottoApplication {
 
         resultView.printTickets(manualLottoCount, autoLottoTicketCount);
         List<LottoTicket> autoLottoTickets = generator.generateLottoTickets(autoLottoTicketCount);
-        resultView.printLottoTickets(autoLottoTickets);
         autoLottoTickets.addAll(manualLottoTickets);
+        resultView.printLottoTickets(autoLottoTickets);
 
         Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
         LottoResult lottoResult = LottoResult.getLottoResult(autoLottoTickets);
