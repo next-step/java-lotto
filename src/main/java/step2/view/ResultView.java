@@ -28,16 +28,23 @@ public class ResultView {
 
     public static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            Iterator<LottoNumber> iterator = lotto.getLotto().iterator();
             System.out.print("[");
-            while (iterator.hasNext()) {
-                LottoNumber lottoNumber = iterator.next();
-                System.out.print("" + lottoNumber.getNumber());
-                if (iterator.hasNext()) {
-                    System.out.print(", ");
-                }
-            }
+            printLoopLottoNumbers(lotto);
             printMessage("]");
+        }
+    }
+    private static void printLoopLottoNumbers(Lotto lotto) {
+        Iterator<LottoNumber> iterator = lotto.getLotto().iterator();
+
+        while (iterator.hasNext()) {
+            LottoNumber lottoNumber = iterator.next();
+            System.out.print("" + lottoNumber.getNumber());
+            checklottoNumbersLastIterator(iterator);
+        }
+    }
+    private static void checklottoNumbersLastIterator(Iterator iterator) {
+        if (iterator.hasNext()) {
+            System.out.print(", ");
         }
     }
 
