@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Lotto {
     private int[] lotto;
@@ -10,11 +13,15 @@ public class Lotto {
     }
 
     public Lotto(){
-        int[] temp = new int[6];
+        Set<Integer> tempSet = new HashSet<>();
         Random random = new Random();
-        for(int i = 0; i < 6; i++){
-            temp[i] = random.nextInt(45); 
+        while(tempSet.size() < 6){
+            tempSet.add(random.nextInt(44)+1);
         }
+        int[] temp = Arrays.stream(tempSet.toArray(Integer[]::new))
+                    .mapToInt(Integer::intValue)
+                    .toArray(); 
+
         this.lotto = temp;
     }
 

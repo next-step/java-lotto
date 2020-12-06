@@ -10,8 +10,8 @@ public class LottoList {
         return lottoList;
     }
 
-    public LottoList(List<Lotto> list){
-        this.lottoList = list;
+    public LottoList(List<Lotto> winningList){
+        this.lottoList = winningList;
     }
     
 }
