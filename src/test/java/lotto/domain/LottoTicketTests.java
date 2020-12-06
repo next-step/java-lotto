@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static lotto.domain.LottoTicketFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,7 +31,7 @@ class LottoTicketTests {
     @DisplayName("LottoNumber 컬렉션을 인자로 받아 객체를 생성할 수 있다.")
     @Test
     void createTest() {
-        assertThat(new LottoTicket(normalLottoNumbers)).isEqualTo(new LottoTicket(normalLottoNumbers));
+        assertThat(new LottoTicket(normalLottoNumbers)).isEqualTo(LOTTO_TICKET_123456);
     }
 
     @DisplayName("LottoNumber 컬렉션의 크기가 중복 없이 6이어야만 한다.")
@@ -54,6 +55,22 @@ class LottoTicketTests {
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6),
                         new LottoNumber(7)
                 ))
+        );
+    }
+
+    @DisplayName("LottoTicket끼리 일치하는 LottoNumber의 수를 계산할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("howManyMatchTestResource")
+    void howManyMatchTest(LottoTicket thatLottoTicket, int expectedMatchNumber) {
+        LottoTicket lottoTicket = new LottoTicket(normalLottoNumbers);
+
+        assertThat(lottoTicket.howManyMatch(thatLottoTicket)).isEqualTo(expectedMatchNumber);
+    }
+    public static Stream<Arguments> howManyMatchTestResource() {
+        return Stream.of(
+                Arguments.of(LOTTO_TICKET_123456, 6),
+                Arguments.of(LOTTO_TICKET_234567, 5),
+                Arguments.of(LOTTO_TICKET_345678, 4)
         );
     }
 }

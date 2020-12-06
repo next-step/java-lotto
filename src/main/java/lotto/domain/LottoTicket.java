@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exceptions.InvalidLottoTicketException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_SIZE = 6;
@@ -13,6 +14,13 @@ public class LottoTicket {
         validate(lottoNumbers);
 
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    public int howManyMatch(LottoTicket thatTicket) {
+        List<LottoNumber> matchedNumbers = lottoNumbers.stream()
+                .filter(thatTicket.lottoNumbers::contains)
+                .collect(Collectors.toList());
+        return matchedNumbers.size();
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
