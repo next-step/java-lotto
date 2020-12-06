@@ -7,11 +7,11 @@ import lotto.LottoMachine;
 
 public final class PaidValidator extends Validator {
 
+    static final String NOT_NUMERIC_MESSAGE = "숫자만 입력해주세요!";
+
+    static final String NOT_MULTIPLE_MESSAGE = LottoMachine.PAY + "의 배수가 아닙니다!";
+
     private static final Pattern NUMERIC_PATTERN = Pattern.compile("[1-9][0-9]*");
-
-    protected static final String NOT_NUMERIC_MESSAGE = "숫자만 입력해주세요!";
-
-    protected static final String NOT_MULTIPLE_MESSAGE = LottoMachine.PAY + "의 배수가 아닙니다!";
 
     @Override
     public void validate(final String amount) {

@@ -10,6 +10,8 @@ import lotto.domain.LottoNumber;
 
 public final class InputView {
 
+    static final String DELIMITER = ",";
+
     private static final String ASK_PAID = "구입금액을 입력해 주세요.";
 
     private static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
@@ -21,8 +23,6 @@ public final class InputView {
     private static final String BLANK = " ";
 
     private static final String EMPTY = "";
-
-    protected static final String DELIMITER = ",";
 
     private final Scanner scanner;
 
