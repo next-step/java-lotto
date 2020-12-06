@@ -8,8 +8,8 @@ public class StringAddCalculator {
         this.patternReader = patternReader;
     }
 
-    public int sum(final String pattern) {
-        Numbers numbers = patternReader.read(pattern);
+    public int sum(final String value) {
+        Numbers numbers = patternReader.read(value);
         return numbers.sum()
                 .value();
     }

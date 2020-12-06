@@ -10,8 +10,8 @@ public class NextStepPatternReader implements PatternReader {
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     @Override
-    public Numbers read(final String pattern) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(pattern);
+    public Numbers read(final String value) {
+        Matcher matcher = CUSTOM_PATTERN.matcher(value);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             String[] numbers = matcher.group(2)
@@ -19,6 +19,6 @@ public class NextStepPatternReader implements PatternReader {
             return Numbers.of(numbers);
         }
 
-        return Numbers.of(pattern.split(BASIC_DELIMITER));
+        return Numbers.of(value.split(BASIC_DELIMITER));
     }
 }
