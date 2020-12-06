@@ -18,9 +18,13 @@ public class LottoTicket {
 
     public int howManyMatch(LottoTicket thatTicket) {
         List<LottoNumber> matchedNumbers = lottoNumbers.stream()
-                .filter(thatTicket.lottoNumbers::contains)
+                .filter(thatTicket::isContains)
                 .collect(Collectors.toList());
         return matchedNumbers.size();
+    }
+
+    private boolean isContains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
