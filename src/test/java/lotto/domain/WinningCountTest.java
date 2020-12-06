@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,17 +9,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningCountTest {
 
-    private WinningCount winningCount;
+    private final WinningCount winningCount;
 
-    @BeforeEach
-    public void init() {
+    public WinningCountTest() {
+
         // given
-        winningCount = new WinningCount();
+        Lottoes lottoes = new Lottoes(
+                Arrays.asList(
+                        Arrays.asList(6, 7, 8, 9, 10, 11),
+                        Arrays.asList(1, 2, 6, 7, 8, 9),
+                        Arrays.asList(1, 2, 4, 7, 8, 9),
+                        Arrays.asList(1, 2, 5, 6, 7, 8)
+                )
+        );
 
-        // when
-        winningCount.increaseCount(Rank.FOURTH);
-        winningCount.increaseCount(Rank.FIFTH);
-        winningCount.increaseCount(Rank.FIFTH);
+        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        LottoNumber bonusBall = new LottoNumber(7);
+
+        winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
     }
 
     @Test
@@ -26,12 +34,12 @@ public class WinningCountTest {
     public void increaseCountTest() {
 
         // when
-        int matchCountOfThree = winningCount.getMatchCount(Rank.FOURTH);
-        int matchCountOfFour = winningCount.getMatchCount(Rank.FIFTH);
+        long matchCountOfFifth = winningCount.getMatchCount(Rank.FIFTH);
+        long matchCountOfFourth = winningCount.getMatchCount(Rank.FOURTH);
 
         // then
-        assertThat(matchCountOfThree).isEqualTo(1);
-        assertThat(matchCountOfFour).isEqualTo(2);
+        assertThat(matchCountOfFifth).isEqualTo(2);
+        assertThat(matchCountOfFourth).isEqualTo(1);
     }
 
     @Test
@@ -39,7 +47,7 @@ public class WinningCountTest {
     public void calculatePrizeTest() {
 
         // when
-        int prize = winningCount.calculatePrize();
+        long prize = winningCount.calculatePrize();
 
         // then
         assertThat(prize).isEqualTo(60_000);

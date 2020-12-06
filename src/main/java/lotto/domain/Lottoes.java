@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class Lottoes {
@@ -19,6 +20,13 @@ public final class Lottoes {
 
     public List<Lotto> getLottoes() {
         return lottoes;
+    }
+
+    public WinningCount countWinLotto(Lotto winningLotto, LottoNumber bonusBall) {
+        return new WinningCount(lottoes.stream()
+                .map(lotto -> Rank.valueOf(winningLotto.countContainNumbers(lotto),
+                        lotto.contains(bonusBall)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 
     private List<Lotto> purchaseLottoes(final int count) {
