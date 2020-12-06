@@ -12,19 +12,19 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoPrizeTest {
+class RankTest {
     @DisplayName("맞춘 LottoNumber 수에 맞는 LottoPrize를 받을 수 있다.")
     @ParameterizedTest
     @MethodSource("findTestResource")
-    void findTest(int numberOfMatchedNumber, LottoPrize expected) {
-        assertThat(LottoPrize.find(numberOfMatchedNumber)).isEqualTo(expected);
+    void findTest(int numberOfMatchedNumber, Rank expected) {
+        assertThat(Rank.find(numberOfMatchedNumber)).isEqualTo(expected);
     }
     public static Stream<Arguments> findTestResource() {
         return Stream.of(
-                Arguments.of(6, LottoPrize.FIRST),
-                Arguments.of(5, LottoPrize.SECOND),
-                Arguments.of(4, LottoPrize.THIRD),
-                Arguments.of(3, LottoPrize.FOURTH)
+                Arguments.of(6, Rank.FIRST),
+                Arguments.of(5, Rank.SECOND),
+                Arguments.of(4, Rank.THIRD),
+                Arguments.of(3, Rank.FOURTH)
         );
     }
 
@@ -32,6 +32,6 @@ class LottoPrizeTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 2, 7})
     void findFailTest(int invalidValue) {
-        assertThatThrownBy(() -> LottoPrize.find(invalidValue)).isInstanceOf(NotExistLottoPrizeException.class);
+        assertThatThrownBy(() -> Rank.find(invalidValue)).isInstanceOf(NotExistLottoPrizeException.class);
     }
 }

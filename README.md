@@ -30,6 +30,9 @@
 - AutoCreatePolicy(class)
     - LottoTicketCreatePolicy의 구현체
     - [X] 자동으로 정합성을 지킨 LottoTicket을 만들고 반환한다.
+- StaticCreatePolicy(class)
+    - LottoTicketCreatePolicy의 구현체
+    - [ ] 6자리의 숫자 컬렉션을 인자로 받아서 LottoTicket을 생성한다.
 - LottoTicketsFactory(class)
     - LottoTickets를 생성하는 객체
     - [X] Moeny를 인수로 받아 구매가능한 최대 수의 LottoTicket 컬렉션을 반환한다.
@@ -38,6 +41,6 @@
     - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
     - [X] 인수로 받은 숫자가 1000 이상인지 정합성을 검증한다.
     - [X] 구매할 수 있는 최대의 LottoTicket 수를 계산할 수 있다.
-- LottoPrize(enum)
+- Rank(enum)
     - Lotto 당첨 결과를 보여주기 위한 오브젝트
-    - [ ] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.
+    - [X] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.
