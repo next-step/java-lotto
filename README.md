@@ -28,8 +28,8 @@
   - LottoTicket을 생성하는 방법을 정의하는 인터페이스
 - AutoCreatePolicy(class)
   - LottoTicketCreatePolicy의 구현체
-  - [ ] Money를 인자로 받아 오브젝트를 생성할 수 있다.
-  - [ ] 자동으로 LottoTicket 컬렉션을 반환한다.
+  - [X] Money를 인자로 받아 오브젝트를 생성할 수 있다.
+  - [X] 자동으로 LottoTicket 컬렉션을 반환한다.
 - Money(class)
   - LottoTicket을 구매하기 위한 자원 오브젝트
   - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
