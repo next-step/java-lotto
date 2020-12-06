@@ -5,6 +5,8 @@ import lotto.domain.exceptions.InvalidLottoTicketException;
 import java.util.*;
 
 public class LottoTicket {
+    private static final int LOTTO_TICKET_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -16,7 +18,7 @@ public class LottoTicket {
     private void validate(List<LottoNumber> lottoNumbers) {
         HashSet<LottoNumber> dupRemovedLottoNumbers = new HashSet<>(lottoNumbers);
 
-        if (dupRemovedLottoNumbers.size() != 6) {
+        if (dupRemovedLottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new InvalidLottoTicketException("LottoTicket은 중복 없이 6개의 LottoNumber로만 이루어져야 합니다.");
         }
     }

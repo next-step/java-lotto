@@ -5,6 +5,9 @@ import lotto.domain.exceptions.InvalidLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final int MIN_SIZE = 0;
+    private static final int MAX_SIZE = 45;
+
     private final int value;
 
     LottoNumber(final int value) {
@@ -14,7 +17,7 @@ public class LottoNumber {
     }
 
     private void validate(final int value) {
-        if (value <= 0 || value > 45) {
+        if (value <= MIN_SIZE || value > MAX_SIZE) {
             throw new InvalidLottoNumberException("유효하지 않은 LottoNumber 입니다.");
         }
     }
