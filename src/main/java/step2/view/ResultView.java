@@ -1,10 +1,12 @@
 package step2.view;
 
 import step2.domain.Lotto;
+import step2.domain.LottoNumber;
 import step2.domain.LottoResult;
 import step2.domain.Rank;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +28,16 @@ public class ResultView {
 
     public static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            printMessage(lotto.getNumbers().toString());
+            Iterator<LottoNumber> iterator = lotto.getLotto().iterator();
+            System.out.print("[");
+            while (iterator.hasNext()) {
+                LottoNumber lottoNumber = iterator.next();
+                System.out.print("" + lottoNumber.getNumber());
+                if (iterator.hasNext()) {
+                    System.out.print(", ");
+                }
+            }
+            printMessage("]");
         }
     }
 

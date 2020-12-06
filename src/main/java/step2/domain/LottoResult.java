@@ -8,9 +8,9 @@ import java.util.List;
 public class LottoResult {
     private static List<Rank> ranks = new ArrayList<>();
 
-    public LottoResult(WinningLotto winningLotto, List<Lotto> buyLottoList) {
+    public LottoResult(Lotto winningLotto, List<Lotto> buyLottoList) {
         for (Lotto lotto : buyLottoList) {
-            addRank(match(winningLotto, lotto));
+            addRank(lotto.match(winningLotto));
         }
     }
 
@@ -22,15 +22,6 @@ public class LottoResult {
         if (matchCount >= 3) {
             ranks.add(Rank.rank(matchCount));
         }
-    }
-
-    private static int match(WinningLotto winningLotto, Lotto lotto) {
-        int matchCount = 0;
-        // 질문. 29번 for 문 라인에서 cannot be cast 에러가 발생하는데 원인을 모르겠습니다.
-        for (LottoNumber winNumber : winningLotto.getWinningNumber()) {
-            matchCount += lotto.contains(winNumber) ? 1 : 0;
-        }
-        return matchCount;
     }
 
     public BigDecimal getTotalRevenue(int purchasePrice) {
