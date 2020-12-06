@@ -4,7 +4,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottoes;
 import lotto.domain.WinningCount;
-import lotto.domain.WinningRecord;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -33,8 +32,7 @@ public final class LottoMachine {
         Lotto winningLotto = inputView.inputWinningNumbers();
         LottoNumber bonusBall = inputView.inputBonusBall();
 
-        WinningRecord record = new WinningRecord(winningLotto, bonusBall);
-        WinningCount winningCount = record.record(lottoes);
+        WinningCount winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
         outputView.showStatistics(winningCount, purchaseCount * PAY);
     }
 }

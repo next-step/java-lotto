@@ -23,7 +23,7 @@ public class WinningCountTest {
                 )
         );
 
-        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = new LottoNumber(7);
 
         winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
@@ -51,5 +51,16 @@ public class WinningCountTest {
 
         // then
         assertThat(prize).isEqualTo(60_000);
+    }
+
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    public void calculateEarnTest() {
+
+        // when
+        double earnRate = winningCount.calculateEarnRate(4000);
+
+        // then
+        assertThat(earnRate).isEqualTo(15.0);
     }
 }
