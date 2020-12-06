@@ -25,6 +25,14 @@ public class Number {
         return CACHE.computeIfAbsent(value, Number::new);
     }
 
+    public Number sum(final Number other) {
+        return other.sum(value);
+    }
+
+    private Number sum(final int value) {
+        return Number.valueOf(this.value + value);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
