@@ -1,10 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,11 +27,11 @@ public final class NumberPool {
     public static Set<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numberPool);
 
-        List<LottoNumber> numbers = new ArrayList<>();
+        Set<LottoNumber> numbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
         for (int i = START_INCLUSIVE; i < LottoMachine.LOTTO_SIZE; i++) {
             numbers.add(numberPool.get(i));
         }
 
-        return new HashSet<>(numbers);
+        return Collections.unmodifiableSet(numbers);
     }
 }

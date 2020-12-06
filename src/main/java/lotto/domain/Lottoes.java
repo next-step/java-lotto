@@ -13,7 +13,9 @@ public final class Lottoes {
     }
 
     public Lottoes(final List<List<Integer>> lottoes) {
-        this.lottoes = lottoes.stream().map(Lotto::new).collect(Collectors.toList());
+        this.lottoes = lottoes.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottoes() {
