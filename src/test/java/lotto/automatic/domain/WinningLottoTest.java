@@ -3,7 +3,6 @@ package lotto.automatic.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -80,16 +79,7 @@ class WinningLottoTest {
                 LottoNumber.of(7)
         );
 
-        List<LottoRank> rankList1 = winningLotto.getRankList(Arrays.asList(
-                new Lotto(IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::of)
-                        .collect(toList())
-                ),
-                new Lotto(IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::of)
-                        .collect(toList())
-                ))
-        );
+        List<LottoRank> rankList1 = winningLotto.getRankList(new Lottos(Lotto.manual("1, 2, 3, 4, 5, 6")));
 
 
         assertThat(rankList1.contains(LottoRank.FIRST)).isTrue();

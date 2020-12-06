@@ -1,21 +1,34 @@
 package lotto.automatic;
 
-import lotto.automatic.domain.*;
+import lotto.automatic.domain.Lotto;
+import lotto.automatic.domain.Lottos;
+import lotto.automatic.domain.LottoRank;
+import lotto.automatic.domain.LottoResult;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
 
-    public List<Lotto> generateLotto(int lottoAmount) {
+    public Lottos generateAutoLotto(int lottoAmount) {
 
-        List<Lotto> list = new ArrayList<>();
+        Lottos lottos = new Lottos();
 
         for(int i = 0; i < lottoAmount; i ++ ) {
-            list.add(Lotto.auto());
+            lottos.append(Lotto.auto());
         }
 
-        return list;
+        return lottos;
+    }
+
+    public Lottos generateManualLotto(List<String> stringInputs) {
+
+        Lottos lottos = new Lottos();
+
+        for(String rawString: stringInputs) {
+            lottos.append(Lotto.manual(rawString));
+        }
+
+        return lottos;
     }
 
     public LottoResult getLottoResult(int investMoney, List<LottoRank> rankList) {

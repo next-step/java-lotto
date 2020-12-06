@@ -9,20 +9,21 @@ public class LottoBuyingMoney {
 
     public LottoBuyingMoney(int money) {
 
-        validate(money);
+        validateMoney(money);
 
         this.lottoAmount = money / LOTTO_PRICE;
         this.investMoney = lottoAmount * LOTTO_PRICE;
         this.changeMoney = money - investMoney;
+
     }
 
-    private void validate(int money) {
+    private void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("금액이 모자랍니다.");
         }
     }
 
-    public int getCountOfLotto() {
+    public int getTotalCountOfLotto() {
         return lottoAmount;
     }
 
@@ -32,5 +33,9 @@ public class LottoBuyingMoney {
 
     public int getChangeMoney() {
         return changeMoney;
+    }
+
+    public int getAutoAmount(int manualAmount) {
+        return lottoAmount - manualAmount;
     }
 }

@@ -1,6 +1,5 @@
-package lotto.automatic.domain;
+package lotto.automatic.dto;
 
-import lotto.automatic.dto.LottoBuyingMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +39,7 @@ public class LottoBuyingMoneyTest {
     @DisplayName("1000원 으로 살 수 있는 로또 수 확인")
     public void 천원으로_살_수_있는_로또_수_확인() {
         LottoBuyingMoney money = new LottoBuyingMoney(1000);
-        int countOfLotto = money.getCountOfLotto();
+        int countOfLotto = money.getTotalCountOfLotto();
         assertThat(countOfLotto).isEqualTo(1);
     }
 
@@ -48,7 +47,7 @@ public class LottoBuyingMoneyTest {
     @DisplayName("1500원 으로 살 수 있는 로또 수 확인")
     public void 천오백원으로_살_수_있는_로또_수_확인() {
         LottoBuyingMoney money = new LottoBuyingMoney(1500);
-        int countOfLotto = money.getCountOfLotto();
+        int countOfLotto = money.getTotalCountOfLotto();
         assertThat(countOfLotto).isEqualTo(1);
     }
 
@@ -56,7 +55,7 @@ public class LottoBuyingMoneyTest {
     @DisplayName("2000원 으로 살 수 있는 로또 수 확인")
     public void 이천원으로_살_수_있는_로또_수_확인() {
         LottoBuyingMoney money = new LottoBuyingMoney(2000);
-        int countOfLotto = money.getCountOfLotto();
+        int countOfLotto = money.getTotalCountOfLotto();
         assertThat(countOfLotto).isEqualTo(2);
     }
 

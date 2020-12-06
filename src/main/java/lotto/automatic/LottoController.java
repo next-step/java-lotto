@@ -1,10 +1,8 @@
 package lotto.automatic;
 
-import lotto.automatic.domain.Lotto;
-import lotto.automatic.domain.LottoRank;
-import lotto.automatic.domain.LottoResult;
-import lotto.automatic.domain.WinningLotto;
+import lotto.automatic.domain.*;
 import lotto.automatic.dto.LottoBuyingMoney;
+import lotto.automatic.dto.ManualLottos;
 import lotto.automatic.view.InputView;
 import lotto.automatic.view.OutputView;
 
@@ -25,28 +23,36 @@ public class LottoController {
     public void request(){
 
         LottoBuyingMoney lottoBuyingMoney = getLottoMoney();
-        List<Lotto> lottoList = getLottoList(lottoBuyingMoney);
+        ManualLottos manualLottos = getManualLottos(lottoBuyingMoney.getTotalCountOfLotto());
+        Lottos lottos = getLottoList(lottoBuyingMoney, manualLottos);
 
-        outputView.printLottoList(lottoList);
+        outputView.printLottoList(lottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        List<LottoRank> lottoRankList = winningLotto.getRankList(lottoList);
+        List<LottoRank> lottoRankList = winningLotto.getRankList(lottos);
         LottoResult result = getResult(lottoBuyingMoney, lottoRankList);
 
         outputView.printLottoResult(result);
-
     }
 
-    private LottoResult getResult(LottoBuyingMoney lottoBuyingMoney, List<LottoRank> lottoRankList) {
-        return lottoGame.getLottoResult(lottoBuyingMoney.getInvestMoney(), lottoRankList);
+    private ManualLottos getManualLottos(int totalCountOfLotto) {
+        return inputView.getManualLottos(totalCountOfLotto);
+    }
+
+    private LottoResult getResult(LottoBuyingMoney lottoBuyingMoneyAndAmount, List<LottoRank> lottoRankList) {
+        return lottoGame.getLottoResult(lottoBuyingMoneyAndAmount.getInvestMoney(), lottoRankList);
     }
 
     private WinningLotto getWinningLotto() {
         return inputView.getWinningLottoNums();
     }
 
-    private List<Lotto> getLottoList(LottoBuyingMoney lottoBuyingMoney) {
-        return lottoGame.generateLotto(lottoBuyingMoney.getCountOfLotto());
+    private Lottos getLottoList(LottoBuyingMoney lottoBuyingMoney, ManualLottos manualLottos) {
+        Lottos autoLotto = lottoGame.generateAutoLotto(lottoBuyingMoney.getAutoAmount(manualLottos.getManualAmount()));
+        Lottos manualLotto = lottoGame.generateManualLotto(manualLottos.getRawStrings());
+        autoLotto.append(manualLotto);
+
+        return autoLotto;
     }
 
     private LottoBuyingMoney getLottoMoney() {

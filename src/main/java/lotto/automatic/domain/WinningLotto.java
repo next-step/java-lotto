@@ -1,6 +1,5 @@
 package lotto.automatic.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
@@ -9,25 +8,13 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String rawNumberString, int bonusNumber) {
-        List<LottoNumber> nums = parseString(rawNumberString);
-
-        Lotto winningLotto = new Lotto(nums);
+        Lotto winningLotto = Lotto.manual(rawNumberString);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
 
         validate(winningLotto, bonusLottoNumber);
 
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusLottoNumber;
-    }
-
-    private List<LottoNumber> parseString(String rawNumberString) {
-        String[] numberStrings = rawNumberString.split(",");
-        List<LottoNumber> nums = new ArrayList<>();
-
-        for (String numString : numberStrings) {
-            nums.add(LottoNumber.of(Integer.parseInt(numString.trim())));
-        }
-        return nums;
     }
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
@@ -50,14 +37,7 @@ public class WinningLotto {
         return LottoRank.match(lotto.matchCount(winningLotto), lotto.contain(bonusNumber));
     }
 
-    public List<LottoRank> getRankList(List<Lotto> lottoList) {
-
-        List<LottoRank> rankList = new ArrayList<>();
-
-        for (Lotto lotto : lottoList) {
-            rankList.add(getRank(lotto));
-        }
-
-        return rankList;
+    public List<LottoRank> getRankList(Lottos lottos) {
+        return lottos.apply(this::getRank);
     }
 }

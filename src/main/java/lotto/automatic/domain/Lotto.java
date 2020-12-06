@@ -1,5 +1,6 @@
 package lotto.automatic.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,6 +24,18 @@ public class Lotto {
     private static List<LottoNumber> generateAutoNumbers() {
 
         return LottoNumber.random(NUMBER_SIZE);
+    }
+
+    public static Lotto manual(String rawNumberString) {
+
+        String[] numberStrings = rawNumberString.split(",");
+        List<LottoNumber> nums = new ArrayList<>();
+
+        for (String numString : numberStrings) {
+            nums.add(LottoNumber.of(Integer.parseInt(numString.trim())));
+        }
+
+        return new Lotto(nums);
     }
 
     private void validate(List<LottoNumber> numbers) {
