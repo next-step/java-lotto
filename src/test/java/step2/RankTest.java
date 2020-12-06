@@ -25,4 +25,9 @@ public class RankTest {
     void rank_4등() {
         assertThat(Rank.rank(3)).isEqualTo(Rank.FOURTH);
     }
+
+    @Test
+    void rank_꽝() {
+        assertThat(Rank.rank(0)).isEqualTo(Rank.ZERO);
+    }
 }
