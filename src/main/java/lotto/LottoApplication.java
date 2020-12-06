@@ -4,7 +4,7 @@ import lotto.domain.Calculator;
 import lotto.domain.Generator;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.Scanner;
+import lotto.domain.WinningCondition;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -31,8 +31,8 @@ public class LottoApplication {
         autoLottoTickets.addAll(manualLottoTickets);
         resultView.printLottoTickets(autoLottoTickets);
 
-        Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
-        LottoResult lottoResult = LottoResult.getLottoResult(autoLottoTickets);
+        WinningCondition winningCondition = WinningCondition.of(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
+        LottoResult lottoResult = LottoResult.getLottoResult(autoLottoTickets, winningCondition);
         resultView.printLottoResult(lottoResult);
     }
 }
