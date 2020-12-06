@@ -2,7 +2,9 @@ package calculator;
 
 import calculator.exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +31,22 @@ class NumberTest {
         // when / then
         assertThrows(NumberOutOfRangeException.class, () -> Number.valueOf(value),
                 String.format("숫자는 " + Number.MIN_VALUE + "이상이어야 합니다 (입력 값: %d)", value));
+    }
+
+    @DisplayName("숫자끼리 더 할 수 있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1,3,4",
+            "4,15,19"
+    })
+    void sum(int first, int second, int expected) {
+        // when
+        Number number = Number.valueOf(first);
+        Number other = Number.valueOf(second);
+        Number sum = number.sum(other);
+
+        // then
+        assertThat(sum).isEqualTo(Number.valueOf(expected));
     }
 
     @DisplayName("같은 숫자일 경우 동등성을 보장한다.")
