@@ -5,7 +5,6 @@ import lotto.domain.exceptions.InvalidMoneyException;
 import java.util.Objects;
 
 public class Money {
-    private static final int MIN_AMOUNT = 0;
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final int amount;
@@ -21,7 +20,7 @@ public class Money {
     }
 
     private void validate(final int amount) {
-        if (amount <= MIN_AMOUNT) {
+        if (amount < LOTTO_TICKET_PRICE) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
         }
     }
