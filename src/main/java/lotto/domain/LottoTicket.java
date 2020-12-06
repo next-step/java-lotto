@@ -16,6 +16,10 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
+    public static LottoTicket of(LottoTicketCreatePolicy createPolicy) {
+        return createPolicy.create();
+    }
+
     public int howManyMatch(LottoTicket thatTicket) {
         List<LottoNumber> matchedNumbers = lottoNumbers.stream()
                 .filter(thatTicket::isContains)

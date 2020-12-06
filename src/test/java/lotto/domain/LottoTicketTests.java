@@ -34,6 +34,14 @@ class LottoTicketTests {
         assertThat(new LottoTicket(normalLottoNumbers)).isEqualTo(LOTTO_TICKET_123456);
     }
 
+    @DisplayName("생성 정책에 맞는 객체를 생성할 수 있다.")
+    @Test
+    void createByPolicyTest() {
+        LottoTicketCreatePolicy autoCreatePolicy = new AutoCreatePolicy();
+
+        assertThat(LottoTicket.of(autoCreatePolicy)).isInstanceOf(LottoTicket.class);
+    }
+
     @DisplayName("LottoNumber 컬렉션의 크기가 중복 없이 6이어야만 한다.")
     @ParameterizedTest
     @MethodSource("createFailTestResource")
