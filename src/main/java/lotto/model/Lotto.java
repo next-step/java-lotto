@@ -8,10 +8,6 @@ public class Lotto {
     private final int ticketPrice = 1000;
     private final int ticketCount;
 
-    /*public Lotto(int money){
-        this.ticketCount = money / ticketPrice;
-        this.lottoTickets = LottoTickets.of(ticketCount);
-    }*/
     public Lotto(int money, String[] manualNumbers){
         this.ticketCount = money / ticketPrice;
 
