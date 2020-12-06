@@ -17,7 +17,7 @@ class LottoTotalNumberUtilsTest {
     void 로또_전체_번호_크기() {
         // given
         Collection<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
-        
+
         // when
         int size = lottoTotalNumbers.size();
 
@@ -25,14 +25,12 @@ class LottoTotalNumberUtilsTest {
         assertThat(size).isEqualTo(45);
     }
 
-    // 1 ~ 45가 전부 유효한지만 체크하는 메서드 없나? Assertj 문서를 못보겠다. ㅜ.ㅜ
     @DisplayName(value = "로또를 선택하기 위한 1 ~ 45의 숫자가 모두 있는지 확인")
     @Test
     void 로또_전체_번호_체크() {
         // given
         List<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
         Collections.sort(lottoTotalNumbers);
-        System.out.println("lottoTotalNumbers = " + lottoTotalNumbers);
 
         // when
         List<Integer> expected = new ArrayList<>();

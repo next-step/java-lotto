@@ -7,9 +7,9 @@ import java.util.List;
 public class LottoTicketCreation implements LottoTicketCreatable {
 
     @Override
-    public LottoTickets createTickets(int purchaseNumber) {
+    public LottoTickets createTickets(int purchaseCount) {
         List<LottoTicket> ticketList = new ArrayList<>();
-        for (int i = 0; i < purchaseNumber; i++) {
+        for (int i = 0; i < purchaseCount; i++) {
             ticketList.add(createTicket());
         }
 
