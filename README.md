@@ -16,25 +16,27 @@
 
 ### Todo-list
 - LottoNumber(class)
-  - 로또에서 사용될 로또 번호를 안전하게 래핑하는 오브젝트
-  - [X] 숫자를 인수로 받아서 오브젝트를 생성할 수 있다.
-  - [X] 숫자의 범위는 1 ~ 45를 벗어날 수 없다.
+    - 로또에서 사용될 로또 번호를 안전하게 래핑하는 오브젝트
+    - [X] 숫자를 인수로 받아서 오브젝트를 생성할 수 있다.
+    - [X] 숫자의 범위는 1 ~ 45를 벗어날 수 없다.
 - LottoTicket(class)
-  - 로또 번호 일급 컬렉션
-  - [X] LottoNumber 컬렉션을 인자로 받아서 오브젝트를 생성할 수 있다.
-  - [X] 컬렉션 크기가 중복 없이 6이어야만 한다.
-  - [X] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
+    - 로또 번호 일급 컬렉션
+    - [X] LottoNumber 컬렉션을 인자로 받아서 오브젝트를 생성할 수 있다.
+    - [X] 컬렉션 크기가 중복 없이 6이어야만 한다.
+    - [X] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
 - LottoTicketCreatePolicy(interface)
-  - LottoTicket을 생성하는 방법을 정의하는 인터페이스
+    - LottoTicket을 생성하는 방법을 정의하는 인터페이스
 - AutoCreatePolicy(class)
-  - LottoTicketCreatePolicy의 구현체
-  - [X] Money를 인자로 받아 오브젝트를 생성할 수 있다.
-  - [X] 자동으로 LottoTicket 컬렉션을 반환한다.
+    - LottoTicketCreatePolicy의 구현체
+    - [ ] 자동으로 정합성을 지킨 LottoTicket을 만들고 반환한다.
+- LottoTicketsFactory(class)
+    - LottoTickets를 생성하는 객체
+    - [ ] 자동으로 생성된 LottoTicket 컬렉션을 반환한다.
 - Money(class)
-  - LottoTicket을 구매하기 위한 자원 오브젝트
-  - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
-  - [X] 인수로 받은 숫자가 1000 이상인지 정합성을 검증한다.
-  - [X] 구매할 수 있는 최대의 LottoTicket 수를 계산할 수 있다.
+    - LottoTicket을 구매하기 위한 자원 오브젝트
+    - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
+    - [X] 인수로 받은 숫자가 1000 이상인지 정합성을 검증한다.
+    - [X] 구매할 수 있는 최대의 LottoTicket 수를 계산할 수 있다.
 - Rank(enum)
-  - Lotto 당첨 결과를 보여주기 위한 오브젝트
-  - [ ] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.
+    - Lotto 당첨 결과를 보여주기 위한 오브젝트
+    - [ ] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.

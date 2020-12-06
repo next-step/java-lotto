@@ -10,19 +10,7 @@ public class AutoCreatePolicy {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private final Money money;
-
-    public AutoCreatePolicy(final Money money) {
-        this.money = money;
-    }
-
-    public List<LottoTicket> create() {
-        return IntStream.range(0, money.howManyLottoTickets())
-                .mapToObj(number -> createLottoTicket())
-                .collect(Collectors.toList());
-    }
-
-    private LottoTicket createLottoTicket() {
+    public LottoTicket create() {
         Collections.shuffle(lottoNumbers);
 
         List<LottoNumber> newTicketNumbers = AutoCreatePolicy.lottoNumbers.subList(0, 6);

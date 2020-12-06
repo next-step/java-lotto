@@ -23,6 +23,10 @@ public class LottoTicket {
         return matchedNumbers.size();
     }
 
+    int size() {
+        return this.lottoNumbers.size();
+    }
+
     private boolean isContains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
