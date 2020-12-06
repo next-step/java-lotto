@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class TestLotteryGame {
     LotteryGame dummyLotteryGame;
@@ -60,8 +61,17 @@ public class TestLotteryGame {
                 .isEqualTo(new LotteryGame(1000, 6));
     }
 
+    @Test
+    @DisplayName("구입금액이 0원이면 에러 발생")
+    void buyNoLotteryTickets() {
+        LotteryGame lotteryGame = new LotteryGame(1000, 6);
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lotteryGame.buyNumberOfLotteryTickets(0);
+        });
+    }
+
     @ParameterizedTest
-    @CsvSource({"0,0","1000,1","10000,10"})
+    @CsvSource({"1000,1","10000,10"})
     void buyNumberOfLotteryTickets(int cost, int expected) {
         LotteryGame lotteryGame = new LotteryGame(1000, 6);
         assertThat(lotteryGame.buyNumberOfLotteryTickets(cost))

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class LotteryResult {
     Map<LotteryValue, Integer> lotteryResultMap;
-    private final LotteryTicket winnerTicket;
+    private final LotteryWinning winningTicket;
 
     public LotteryResult(String winnerNumbers) {
         lotteryResultMap = new LinkedHashMap<LotteryValue, Integer>(){{
@@ -15,7 +15,11 @@ public class LotteryResult {
             put(LotteryValue.SECOND_PLACE, 0);
             put(LotteryValue.FIRST_PLACE, 0);
         }};
-        winnerTicket = new LotteryTicket(winnerNumbers);
+        winningTicket = new LotteryWinning(winnerNumbers);
+    }
+
+    public Map<LotteryValue, Integer> getLotteryResultMap() {
+        return this.lotteryResultMap;
     }
 
     public BigDecimal getProfit(int purchaseAmount) {
@@ -28,21 +32,17 @@ public class LotteryResult {
 
     public LotteryResult match(List<LotteryTicket> lotteryTickets) {
         for (LotteryTicket lotteryTicket : lotteryTickets) {
-            this.addLotteryResult(lotteryTicket.getCountsMatched(this.winnerTicket));
+            this.addLotteryResult(this.winningTicket.getCountsMatched(lotteryTicket));
         }
         return this;
     }
 
-    public void addLotteryResult(int key) {
+    protected void addLotteryResult(int key) {
         LotteryValue resultKey = LotteryValue.findByAmount(key);
         if (resultKey.equals(LotteryValue.MISS)) {
             return;
         }
         this.lotteryResultMap.replace(resultKey, lotteryResultMap.get(resultKey) + 1);
-    }
-
-    public Map<LotteryValue, Integer> getLotteryResultMap() {
-        return this.lotteryResultMap;
     }
 
     @Override

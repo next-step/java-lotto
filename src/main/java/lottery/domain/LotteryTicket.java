@@ -4,7 +4,8 @@ import java.util.*;
 
 public class LotteryTicket {
     public static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
-    private final List<LotteryNumber> lotteryNumbers;
+//    private final List<LotteryNumber> lotteryNumbers;
+    private final SortedSet<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
@@ -16,55 +17,53 @@ public class LotteryTicket {
             throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
         }
 
-        this.lotteryNumbers = new ArrayList<>();
+        this.lotteryNumbers = new TreeSet<>();
+//        this.lotteryNumbers = new ArrayList<>();
         for (LotteryNumber number : lotteryNumbers) {
             this.lotteryNumbers.add(new LotteryNumber(number.getNumber()));
         }
 
-        Collections.sort(this.lotteryNumbers);
+//        Collections.sort(this.lotteryNumbers);
     }
 
     public LotteryTicket(int[] numbers) {
-        this.lotteryNumbers = new ArrayList<>();
+//        this.lotteryNumbers = new ArrayList<>();
+        this.lotteryNumbers = new TreeSet<>();
         LotteryNumber lotteryNumber;
         for(int number : numbers) {
             lotteryNumber = new LotteryNumber(number);
             this.lotteryNumbers.add(lotteryNumber);
         }
-        Collections.sort(this.lotteryNumbers);
+        if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
+            throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
+        }
+//        Collections.sort(this.lotteryNumbers);
     }
 
     public LotteryTicket(String[] numbers) {
-        lotteryNumbers = new ArrayList<>();
+//        lotteryNumbers = new ArrayList<>();
+        this.lotteryNumbers = new TreeSet<>();
         LotteryNumber lotteryNumber;
         for(String number : numbers) {
             lotteryNumber = new LotteryNumber(Integer.parseInt(number.trim()));
             lotteryNumbers.add(lotteryNumber);
         }
-        Collections.sort(this.lotteryNumbers);
+
+        if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
+            throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
+        }
+//        Collections.sort(this.lotteryNumbers);
     }
 
     public LotteryTicket(String winningNumbers) {
         this(winningNumbers.replace(" ", "").split(","));
     }
 
-    public List<LotteryNumber> getLotteryNumbers() {
+//    public List<LotteryNumber> getLotteryNumbers() {
+//        return this.lotteryNumbers;
+//    }
+    public SortedSet<LotteryNumber> getLotteryNumbers() {
         return this.lotteryNumbers;
-    }
-
-    public int getCountsMatched(LotteryTicket winningLotteryTicket) {
-        int matchCount = 0;
-        for(LotteryNumber number : this.getLotteryNumbers()) {
-            matchCount += winningLotteryTicket.getLotteryNumbers().contains(number) ? 1 : 0;
-        }
-        return matchCount;
-    }
-
-    public int matchLotteryTicket(String winningNumbers) {
-        String[] numbers = winningNumbers.replace(" ", "").split(",");
-        LotteryTicket winningLotteryTicket = new LotteryTicket(numbers);
-
-        return this.getCountsMatched(winningLotteryTicket);
     }
 
     @Override

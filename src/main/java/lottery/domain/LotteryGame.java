@@ -13,6 +13,9 @@ public class LotteryGame {
     }
 
     public int buyNumberOfLotteryTickets(int cost) {
+        if (cost < price) {
+            throw new IllegalArgumentException("로또 1장의 가격은 " + this.price + "입니다.");
+        }
         return cost / this.price;
     }
 
