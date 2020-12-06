@@ -34,4 +34,18 @@ public class StringAddCalculatorTest {
         // then
         assertThat(sum).isEqualTo(3);
     }
+
+    @DisplayName("넥스트스탭 패턴 판독기를 가진 문자열계산기 테스트")
+    @Test
+    void nextStepStringAddCalculator() {
+        // given
+        String example = "//;\n1;2;3";
+        StringAddCalculator nextStepCalculator = new StringAddCalculator(new NextStepPatternReader());
+
+        // when
+        int sum = nextStepCalculator.sum(example);
+
+        // then
+        assertThat(sum).isEqualTo(6);
+    }
 }
