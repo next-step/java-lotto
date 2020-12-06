@@ -23,7 +23,7 @@
   - 로또 번호 일급 컬렉션
   - [X] LottoNumber 컬렉션을 인자로 받아서 오브젝트를 생성할 수 있다.
   - [X] 컬렉션 크기가 중복 없이 6이어야만 한다.
-  - [ ] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
+  - [X] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
 - LottoFactory(class)
   - LottoTicket을 생성할 수 있는 팩토리 오브젝트
   - [ ] Money 오브젝트를 인수로 받아서 LottoTicket 컬렉션을 반환한다.
