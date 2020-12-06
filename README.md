@@ -24,15 +24,15 @@
     - [X] LottoNumber 컬렉션을 인자로 받아서 오브젝트를 생성할 수 있다.
     - [X] 컬렉션 크기가 중복 없이 6이어야만 한다.
     - [X] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
-    - [ ] 생성 정책에 따라 알맞는 LottoTicket을 생성할 수 있다.
+    - [X] 생성 정책에 따라 알맞는 LottoTicket을 생성할 수 있다.
 - LottoTicketCreatePolicy(interface)
     - LottoTicket을 생성하는 방법을 정의하는 인터페이스
 - AutoCreatePolicy(class)
     - LottoTicketCreatePolicy의 구현체
-    - [ ] 자동으로 정합성을 지킨 LottoTicket을 만들고 반환한다.
+    - [X] 자동으로 정합성을 지킨 LottoTicket을 만들고 반환한다.
 - LottoTicketsFactory(class)
     - LottoTickets를 생성하는 객체
-    - [X] 자동으로 생성된 LottoTicket 컬렉션을 반환한다.
+    - [X] Moeny를 인수로 받아 구매가능한 최대 수의 LottoTicket 컬렉션을 반환한다.
 - Money(class)
     - LottoTicket을 구매하기 위한 자원 오브젝트
     - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
