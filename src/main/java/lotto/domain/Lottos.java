@@ -25,13 +25,11 @@ public class Lottos {
     }
 
     public void addLotto(Lotto lotto) {
-        if(lottos == null){
-            lottos = new ArrayList<>();
-        }
         lottos.add(lotto);
     }
 
-    public void addManualLottos(List<Lotto> manualLottos) {
-        lottos.addAll(manualLottos);
+    public void addAllLottos(List<Lotto> lottos){
+        this.lottos.addAll(lottos);
     }
+
 }

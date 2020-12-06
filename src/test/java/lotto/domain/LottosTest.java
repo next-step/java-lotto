@@ -33,14 +33,11 @@ public class LottosTest {
         //Then
         assertThat(result).isNotNull();
         assertThat(result).contains(LottoNumber.from(10), LottoNumber.from(15), LottoNumber.from(16));
-
     }
-
 
     @DisplayName("당첨번호 확인 후 Reward 인스턴스 생성 여부 테스트")
     @Test
     public void matchPrizeNumberTest() {
-
         //Given
         Lottos lottos = new Lottos();
         lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 9))));
@@ -51,7 +48,6 @@ public class LottosTest {
         //Then
         assertThat(reward).isNotNull();
         assertThat(reward.getRewardResult().get(PrizeInformation.FIRST)).isNotNull();
-
     }
 
     @ParameterizedTest
@@ -64,7 +60,6 @@ public class LottosTest {
         IntStream.range(0, quantity)
                 .forEach(i -> lottos.addLotto(Lotto.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
 
-
         //Then
         assertThat(lottos.quantity()).isEqualTo(quantity);
     }
@@ -76,7 +71,7 @@ public class LottosTest {
         Lottos lottos = new Lottos();
 
         //When
-        lottos.addManualLottos(manualLottos);
+        lottos.addAllLottos(manualLottos);
 
         //Then
         assertThat(lottos.quantity()).isEqualTo(manualLottos.size());
@@ -91,5 +86,4 @@ public class LottosTest {
                 )
         );
     }
-
 }

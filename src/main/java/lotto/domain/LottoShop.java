@@ -17,7 +17,7 @@ public class LottoShop {
 
     public Lottos purchaseLottos(LottoTicket ticket, List<Lotto> manualLottos) {
         Lottos lottos = new Lottos();
-        lottos.addManualLottos(manualLottos);
+        lottos.addAllLottos(manualLottos);
         for (int i = 0; i < ticket.getAutoQuantity(); i++) {
             lottos.addLotto(Lotto.createLottoNumber(lottoMachine));
         }
