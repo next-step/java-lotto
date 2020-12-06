@@ -17,7 +17,7 @@ public class LottoGame {
 
         LottoTicket ticket = lottoShop.purchaseTicket(money, InputView.inputManualLottoCount());
 
-        InputView.inputManualLottoNumbers();
+        InputView.inputManualLottoComment();
         List<Lotto> manualLotto = new ArrayList<>();
         for (int i = 0; i < ticket.getManualQuantity(); i++) {
             manualLotto.add(Lotto.of(InputView.inputLottoNumbers()));

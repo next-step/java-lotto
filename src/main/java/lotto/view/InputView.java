@@ -42,7 +42,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static void inputManualLottoNumbers() {
+    public static void inputManualLottoComment() {
         System.out.println();
         System.out.println(MANUAL_LOTTO_NUMBER_COMMENT);
     }
