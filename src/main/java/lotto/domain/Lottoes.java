@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,9 +14,7 @@ public final class Lottoes {
     }
 
     public Lottoes(final List<List<Integer>> lottoes) {
-        this.lottoes = lottoes.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+        this.lottoes = Collections.unmodifiableList(lottoNumbersListToLottoes(lottoes));
     }
 
     public List<Lotto> getLottoes() {
@@ -29,6 +28,12 @@ public final class Lottoes {
             newLottoes.add(new Lotto());
         }
 
-        return newLottoes;
+        return Collections.unmodifiableList(newLottoes);
+    }
+
+    private List<Lotto> lottoNumbersListToLottoes(final List<List<Integer>> lottoes) {
+        return lottoes.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 }
