@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.NumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,7 +27,8 @@ class NumberTest {
     @ValueSource(ints = {-1, -10})
     void createLess(final int value) {
         // when / then
-        assertThrows(RuntimeException.class, () -> Number.valueOf(value));
+        assertThrows(NumberOutOfRangeException.class, () -> Number.valueOf(value),
+                String.format("숫자는 " + Number.MIN_VALUE + "이상이어야 합니다 (입력 값: %d)", value));
     }
 
     @DisplayName("같은 숫자일 경우 동등성을 보장한다.")

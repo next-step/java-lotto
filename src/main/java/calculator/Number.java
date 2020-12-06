@@ -1,12 +1,14 @@
 package calculator;
 
+import calculator.exception.NumberOutOfRangeException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class Number {
 
-    private static final int MIN_VALUE = 0;
+    public static final int MIN_VALUE = 0;
 
     private static final Map<Integer, Number> CACHE = new HashMap<>();
 
@@ -18,7 +20,7 @@ public class Number {
 
     public static Number valueOf(final int value) {
         if (value < MIN_VALUE) {
-            throw new RuntimeException();
+            throw new NumberOutOfRangeException(value);
         }
         return CACHE.computeIfAbsent(value, Number::new);
     }
