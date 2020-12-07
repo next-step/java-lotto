@@ -1,24 +1,33 @@
 package autolotto;
 
+import autolotto.model.Lotto;
+import autolotto.model.Lottos;
+import autolotto.model.LottosComparer;
+import autolotto.model.WinningNumbers;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+
+import static org.junit.Assert.assertEquals;
 
 public class LottosComparerTest {
 
     @Test
     @DisplayName("로또번호가 일치됬을 때 제대로 체크하는가")
     public void compareLottos(){
-        Lotto lotto = new Lotto();
-        StringBuilder lottoNumbers = lotto.getNumber(0);
+        Lottos lottos = new Lottos(1000);
+        StringBuilder lottoNumbers = new StringBuilder();
+        Lotto lotto = lottos.getLotto(0);
+
+        lottoNumbers.append(lotto.getNumbers(0));
 
         for (int i = 1; i < 6; i++) {
-            lottoNumbers.append(", " + lotto.getNumber(i));
+            lottoNumbers.append(", " + lotto.getNumbers(i));
         }
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers.toString());
 
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
+        LottosComparer lottosComparer = new LottosComparer(lottos, winningNumbers.getNumbers());
 
-        LottosComparer lottosComparer = new LottosComparer(lotto, winningNumbers);
-        assertEquals(lottosComparer.getMatchingCount(6) == 1);
+        assertEquals(lottosComparer.getMatchingCount(6),1);
 
     }
 }
