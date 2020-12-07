@@ -4,17 +4,20 @@ import lotto.domain.Money;
 import lotto.domain.exceptions.InvalidMoneyException;
 
 public class MoneyInputView {
-    private final String userMoney;
+    private final Long userMoney;
 
     public MoneyInputView(final String userMoney) {
-        this.userMoney = userMoney;
+        Long parsedUserMoney = parseToLongSafely(userMoney);
+        this.userMoney = parsedUserMoney;
     }
 
     public Money parseMoney() {
-        try {
-            long moneyValue = Long.parseLong(userMoney);
+        return new Money(userMoney);
+    }
 
-            return new Money(moneyValue);
+    private Long parseToLongSafely(final String userMoney) {
+        try {
+            return Long.parseLong(userMoney);
         } catch (NumberFormatException e) {
             throw new InvalidMoneyException("금액으로 사용할 수 없는 입력값입니다.");
         }

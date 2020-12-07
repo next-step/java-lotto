@@ -26,9 +26,7 @@ class MoneyInputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"  ", "", " 12", "aslcnlkal"})
     void invalidInputTest(String invalidValue) {
-        MoneyInputView moneyInputView = new MoneyInputView(invalidValue);
-
-        assertThatThrownBy(moneyInputView::parseMoney)
+        assertThatThrownBy(() -> new MoneyInputView(invalidValue))
                 .isInstanceOf(InvalidMoneyException.class);
     }
 }
